@@ -1,6 +1,6 @@
 ﻿namespace KnowledgeSystem.Views._00_Generals
 {
-    partial class fFrame
+    partial class f00_Frame
     {
         /// <summary>
         /// Required designer variable.

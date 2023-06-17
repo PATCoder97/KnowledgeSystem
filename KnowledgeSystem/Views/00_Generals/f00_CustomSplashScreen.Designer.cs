@@ -1,6 +1,6 @@
 ﻿namespace KnowledgeSystem.Views._00_Generals
 {
-    partial class CustomSplashScreen
+    partial class f00_CustomSplashScreen
     {
         /// <summary>
         /// Required designer variable.

@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace KnowledgeSystem.Views._00_Generals
 {
-    public partial class CustomSplashScreen : SplashScreen
+    public partial class f00_CustomSplashScreen : SplashScreen
     {
         const string startDate = "2023.06.08";
 
-        public CustomSplashScreen()
+        public f00_CustomSplashScreen()
         {
             InitializeComponent();
             labelCopyright.Text = "Copyright ©  2023 - " + DateTime.Now.Year.ToString();

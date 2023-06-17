@@ -12,9 +12,9 @@ using System.Windows.Forms;
 
 namespace KnowledgeSystem.Views._00_Generals
 {
-    public partial class fMain : DevExpress.XtraEditors.XtraForm
+    public partial class f00_Main : DevExpress.XtraEditors.XtraForm
     {
-        public fMain()
+        public f00_Main()
         {
             InitializeComponent();
         }
@@ -34,7 +34,7 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void btnKnowHow_ItemClick(object sender, TileItemEventArgs e)
         {
-            fFrame formShow = new fFrame(207);
+            f00_Frame formShow = new f00_Frame(207);
             formShow.Text = e.Item.Text + AppCopyRight.CopyRightString();
             Hide();
             formShow.ShowDialog();
@@ -43,7 +43,7 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void btnISODocuments_ItemClick(object sender, TileItemEventArgs e)
         {
-            fFrame formShow = new fFrame(201);
+            f00_Frame formShow = new f00_Frame(201);
             formShow.Text = e.Item.Text + AppCopyRight.CopyRightString();
             Hide();
             formShow.ShowDialog();
@@ -54,7 +54,7 @@ namespace KnowledgeSystem.Views._00_Generals
         {
             Size = new Size(100, 100);
             WindowState = FormWindowState.Normal;
-            fLogin frm = new fLogin();
+            f00_Login frm = new f00_Login();
             frm.ShowDialog();
 
             if (!TempDatas.LoginSuccessful)

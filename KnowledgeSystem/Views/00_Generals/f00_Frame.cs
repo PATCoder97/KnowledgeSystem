@@ -14,14 +14,14 @@ using System.Windows.Forms;
 
 namespace KnowledgeSystem.Views._00_Generals
 {
-    public partial class fFrame : DevExpress.XtraEditors.XtraForm
+    public partial class f00_Frame : DevExpress.XtraEditors.XtraForm
     {
-        public fFrame()
+        public f00_Frame()
         {
             InitializeComponent();
         }
 
-        public fFrame(int groupId_)
+        public f00_Frame(int groupId_)
         {
             InitializeComponent();
             gruopId = groupId_;

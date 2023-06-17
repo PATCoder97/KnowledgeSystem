@@ -103,29 +103,29 @@
       <DependentUpon>SQLModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs" />
-    <Compile Include="Views\00_Generals\CustomSplashScreen.cs">
+    <Compile Include="Views\00_Generals\f00_CustomSplashScreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\00_Generals\CustomSplashScreen.Designer.cs">
-      <DependentUpon>CustomSplashScreen.cs</DependentUpon>
+    <Compile Include="Views\00_Generals\f00_CustomSplashScreen.Designer.cs">
+      <DependentUpon>f00_CustomSplashScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\00_Generals\fFrame.cs">
+    <Compile Include="Views\00_Generals\f00_Frame.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\00_Generals\fFrame.Designer.cs">
-      <DependentUpon>fFrame.cs</DependentUpon>
+    <Compile Include="Views\00_Generals\f00_Frame.Designer.cs">
+      <DependentUpon>f00_Frame.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\00_Generals\fLogin.cs">
+    <Compile Include="Views\00_Generals\f00_Login.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\00_Generals\fLogin.Designer.cs">
-      <DependentUpon>fLogin.cs</DependentUpon>
+    <Compile Include="Views\00_Generals\f00_Login.Designer.cs">
+      <DependentUpon>f00_Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\00_Generals\fMain.cs">
+    <Compile Include="Views\00_Generals\f00_Main.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\00_Generals\fMain.Designer.cs">
-      <DependentUpon>fMain.cs</DependentUpon>
+    <Compile Include="Views\00_Generals\f00_Main.Designer.cs">
+      <DependentUpon>f00_Main.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_DocumentInfo.cs">
       <SubType>Form</SubType>
@@ -145,6 +145,12 @@
     <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_Main.Designer.cs">
       <DependentUpon>f207_Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\04_SystemAdministrator\f04_UserManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\04_SystemAdministrator\f04_UserManager.Designer.cs">
+      <DependentUpon>f04_UserManager.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -156,14 +162,14 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Views\00_Generals\CustomSplashScreen.resx">
-      <DependentUpon>CustomSplashScreen.cs</DependentUpon>
+    <EmbeddedResource Include="Views\00_Generals\f00_CustomSplashScreen.resx">
+      <DependentUpon>f00_CustomSplashScreen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\00_Generals\fLogin.resx">
-      <DependentUpon>fLogin.cs</DependentUpon>
+    <EmbeddedResource Include="Views\00_Generals\f00_Login.resx">
+      <DependentUpon>f00_Login.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\00_Generals\fMain.resx">
-      <DependentUpon>fMain.cs</DependentUpon>
+    <EmbeddedResource Include="Views\00_Generals\f00_Main.resx">
+      <DependentUpon>f00_Main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_DocumentInfo.resx">
       <DependentUpon>f207_DocumentInfo.cs</DependentUpon>
@@ -173,6 +179,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_Main.resx">
       <DependentUpon>f207_Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\04_SystemAdministrator\f04_UserManager.resx">
+      <DependentUpon>f04_UserManager.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
     <None Include="packages.config" />

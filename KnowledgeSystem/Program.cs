@@ -26,7 +26,7 @@ namespace KnowledgeSystem
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new fMain());
+            Application.Run(new f00_Main());
         }
     }
 }
