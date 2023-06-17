@@ -67,6 +67,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SQLModel.Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="SQLModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SQLModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="SQLModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -141,6 +146,12 @@
     <Content Include="SQLModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SQLModel.Context.cs</LastGenOutput>
+      <DependentUpon>SQLModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="SQLModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SQLModel.edmx</DependentUpon>
+      <LastGenOutput>SQLModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>
