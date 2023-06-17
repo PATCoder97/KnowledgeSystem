@@ -9,22 +9,23 @@
 
 namespace KnowledgeSystem
 {
+    using KnowledgeSystem.Configs;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+
     public partial class DBDocumentManagementSystemEntities : DbContext
     {
         public DBDocumentManagementSystemEntities()
-            : base("name=DBDocumentManagementSystemEntities")
+            : base(SingleConnection.ConString)
         {
         }
-    
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+
         public virtual DbSet<AppForm> AppForms { get; set; }
         public virtual DbSet<FunctionRole> FunctionRoles { get; set; }
         public virtual DbSet<Function> Functions { get; set; }

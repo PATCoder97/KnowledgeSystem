@@ -1,6 +1,7 @@
 ﻿using DevExpress.LookAndFeel;
 using DevExpress.Skins;
 using DevExpress.UserSkins;
+using KnowledgeSystem.Configs;
 using KnowledgeSystem.Views._00_Generals;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,12 @@ namespace KnowledgeSystem
         [STAThread]
         static void Main()
         {
+            new AppCopyRight()
+            {
+                Version = "0.0.2",
+                DateDeploy = "2023.06.16"
+            };
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new fMain());
