@@ -127,6 +127,24 @@
     <Compile Include="Views\00_Generals\fMain.Designer.cs">
       <DependentUpon>fMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_DocumentInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_DocumentInfo.Designer.cs">
+      <DependentUpon>f207_DocumentInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_fAdvancedSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_fAdvancedSearch.Designer.cs">
+      <DependentUpon>f207_fAdvancedSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_Main.Designer.cs">
+      <DependentUpon>f207_Main.cs</DependentUpon>
+    </Compile>
     <Compile Include="XtraForm1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -177,7 +195,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\01_ProductionAndSales\" />
-    <Folder Include="Views\02_StandardsAndTechs\" />
+    <Folder Include="Views\02_StandardsAndTechs\01_ISODocuments\" />
     <Folder Include="Views\03_DepartmentManage\" />
   </ItemGroup>
   <ItemGroup>
