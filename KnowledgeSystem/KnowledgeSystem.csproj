@@ -168,6 +168,9 @@
     <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_DocumentInfo.resx">
       <DependentUpon>f207_DocumentInfo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_fAdvancedSearch.resx">
+      <DependentUpon>f207_fAdvancedSearch.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_Main.resx">
       <DependentUpon>f207_Main.cs</DependentUpon>
     </EmbeddedResource>

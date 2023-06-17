@@ -77,9 +77,9 @@
             this.btnReload.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReload.Appearance.Options.UseFont = true;
             this.btnReload.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnReload.ImageOptions.SvgImage")));
-            this.btnReload.Location = new System.Drawing.Point(132, 12);
+            this.btnReload.Location = new System.Drawing.Point(137, 12);
             this.btnReload.Name = "btnReload";
-            this.btnReload.Size = new System.Drawing.Size(116, 36);
+            this.btnReload.Size = new System.Drawing.Size(121, 36);
             this.btnReload.StyleController = this.layoutControl1;
             this.btnReload.TabIndex = 6;
             this.btnReload.Text = "重新整理";
@@ -92,7 +92,7 @@
             this.btnAdd.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnAdd.ImageOptions.SvgImage")));
             this.btnAdd.Location = new System.Drawing.Point(12, 12);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(116, 36);
+            this.btnAdd.Size = new System.Drawing.Size(121, 36);
             this.btnAdd.StyleController = this.layoutControl1;
             this.btnAdd.TabIndex = 5;
             this.btnAdd.Text = "新增";
@@ -244,10 +244,10 @@
             // 
             this.layoutControlItem2.Control = this.btnAdd;
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem2.MaxSize = new System.Drawing.Size(120, 40);
-            this.layoutControlItem2.MinSize = new System.Drawing.Size(120, 40);
+            this.layoutControlItem2.MaxSize = new System.Drawing.Size(125, 40);
+            this.layoutControlItem2.MinSize = new System.Drawing.Size(125, 40);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(120, 40);
+            this.layoutControlItem2.Size = new System.Drawing.Size(125, 40);
             this.layoutControlItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
@@ -255,19 +255,19 @@
             // emptySpaceItem1
             // 
             this.emptySpaceItem1.AllowHotTrack = false;
-            this.emptySpaceItem1.Location = new System.Drawing.Point(240, 0);
+            this.emptySpaceItem1.Location = new System.Drawing.Point(250, 0);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(706, 40);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(696, 40);
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
             // layoutControlItem3
             // 
             this.layoutControlItem3.Control = this.btnReload;
-            this.layoutControlItem3.Location = new System.Drawing.Point(120, 0);
-            this.layoutControlItem3.MaxSize = new System.Drawing.Size(120, 40);
-            this.layoutControlItem3.MinSize = new System.Drawing.Size(120, 40);
+            this.layoutControlItem3.Location = new System.Drawing.Point(125, 0);
+            this.layoutControlItem3.MaxSize = new System.Drawing.Size(125, 40);
+            this.layoutControlItem3.MinSize = new System.Drawing.Size(125, 40);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(120, 40);
+            this.layoutControlItem3.Size = new System.Drawing.Size(125, 40);
             this.layoutControlItem3.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextVisible = false;
