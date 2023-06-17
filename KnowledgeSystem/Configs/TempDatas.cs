@@ -12,5 +12,7 @@ namespace KnowledgeSystem.Configs
         public static string SoftNameTW = "冶金文件管理系統";
 
         public static string LoginId { get; set; }
+        public static string DomainComputer { get; set; }
+        public static bool LoginSuccessful { get; set; }
     }
 }

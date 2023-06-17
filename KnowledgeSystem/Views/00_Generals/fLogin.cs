@@ -28,8 +28,8 @@ namespace KnowledgeSystem.Views._00_Generals
             var loginId = RegistryHelper.GetSetting(RegistryHelper.LoginId, "");
             txbUserID.Text = loginId != null ? loginId.ToString() : "";
 
-            //PATConfig.domain = System.Net.NetworkInformation.IPGlobalProperties.GetIPGlobalProperties().DomainName;
-            //PATConfig.IsLogin = false;
+            TempDatas.DomainComputer = System.Net.NetworkInformation.IPGlobalProperties.GetIPGlobalProperties().DomainName;
+            TempDatas.LoginSuccessful = false;
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -51,6 +51,7 @@ namespace KnowledgeSystem.Views._00_Generals
                 TempDatas.LoginId = userID;
                 RegistryHelper.SaveSetting(RegistryHelper.LoginId, userID);
                 SplashScreenManager.CloseDefaultWaitForm();
+                TempDatas.LoginSuccessful = true;
                 Close();
             }
             else

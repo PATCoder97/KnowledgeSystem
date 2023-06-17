@@ -35,7 +35,7 @@ namespace KnowledgeSystem.Views._00_Generals
         private void btnKnowHow_ItemClick(object sender, TileItemEventArgs e)
         {
             fFrame formShow = new fFrame(207);
-            formShow.Text = e.Item.Text;
+            formShow.Text = e.Item.Text + AppCopyRight.CopyRightString();
             Hide();
             formShow.ShowDialog();
             Show();
@@ -44,7 +44,7 @@ namespace KnowledgeSystem.Views._00_Generals
         private void btnISODocuments_ItemClick(object sender, TileItemEventArgs e)
         {
             fFrame formShow = new fFrame(201);
-            formShow.Text = e.Item.Text;
+            formShow.Text = e.Item.Text + AppCopyRight.CopyRightString();
             Hide();
             formShow.ShowDialog();
             Show();
@@ -57,22 +57,16 @@ namespace KnowledgeSystem.Views._00_Generals
             fLogin frm = new fLogin();
             frm.ShowDialog();
 
+            if (!TempDatas.LoginSuccessful)
+            {
+                Close();
+                return;
+            }
+
             WindowState = FormWindowState.Maximized;
             Size = new Size(1000, 600);
             Location = new Point((Screen.PrimaryScreen.WorkingArea.Width - this.Width) / 2,
                            (Screen.PrimaryScreen.WorkingArea.Height - this.Height) / 2);
-
-
-
-
-            //if (!PATConfig.IsLogin)
-            //{
-            //    Close();
-            //    return;
-            //}
-
-            //ChooseDepartment();
-
 
         }
     }
