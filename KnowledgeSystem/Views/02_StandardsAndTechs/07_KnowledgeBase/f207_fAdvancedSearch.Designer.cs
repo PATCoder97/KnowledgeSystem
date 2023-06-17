@@ -47,6 +47,7 @@
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.txbKeywords = new DevExpress.XtraEditors.ButtonEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
@@ -56,11 +57,11 @@
             this.emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.txbKeywords = new DevExpress.XtraEditors.ButtonEdit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbKeywords.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
@@ -70,7 +71,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbKeywords.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -96,10 +96,11 @@
             this.btnSearch.Appearance.ForeColor = System.Drawing.Color.Black;
             this.btnSearch.Appearance.Options.UseFont = true;
             this.btnSearch.Appearance.Options.UseForeColor = true;
-            this.btnSearch.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButton1.ImageOptions.SvgImage")));
-            this.btnSearch.Location = new System.Drawing.Point(951, 100);
+            this.btnSearch.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnSearch.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnSearch.ImageOptions.SvgImage")));
+            this.btnSearch.Location = new System.Drawing.Point(940, 100);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(86, 36);
+            this.btnSearch.Size = new System.Drawing.Size(97, 36);
             this.btnSearch.StyleController = this.layoutControl1;
             this.btnSearch.TabIndex = 10;
             this.btnSearch.Text = "查詢";
@@ -119,6 +120,7 @@
             // 
             this.btnReload.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReload.Appearance.Options.UseFont = true;
+            this.btnReload.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnReload.ImageOptions.SvgImage")));
             this.btnReload.Location = new System.Drawing.Point(12, 12);
             this.btnReload.Name = "btnReload";
             this.btnReload.Size = new System.Drawing.Size(121, 36);
@@ -142,6 +144,7 @@
             this.gcData.UseEmbeddedNavigator = true;
             this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvData});
+            this.gcData.DoubleClick += new System.EventHandler(this.gcData_DoubleClick);
             // 
             // gvData
             // 
@@ -251,6 +254,19 @@
             this.gridColumn7.VisibleIndex = 6;
             this.gridColumn7.Width = 130;
             // 
+            // txbKeywords
+            // 
+            this.txbKeywords.Location = new System.Drawing.Point(262, 100);
+            this.txbKeywords.Name = "txbKeywords";
+            this.txbKeywords.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbKeywords.Properties.Appearance.Options.UseFont = true;
+            this.txbKeywords.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Close, "", -1, true, true, true, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            this.txbKeywords.Size = new System.Drawing.Size(674, 36);
+            this.txbKeywords.StyleController = this.layoutControl1;
+            this.txbKeywords.TabIndex = 8;
+            this.txbKeywords.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txbKeywords_ButtonClick);
+            // 
             // Root
             // 
             this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
@@ -307,7 +323,7 @@
             this.layoutControlItem5.Control = this.txbKeywords;
             this.layoutControlItem5.Location = new System.Drawing.Point(250, 88);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(689, 40);
+            this.layoutControlItem5.Size = new System.Drawing.Size(678, 40);
             this.layoutControlItem5.Text = "請輸入關鍵字";
             this.layoutControlItem5.TextLocation = DevExpress.Utils.Locations.Top;
             this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
@@ -347,24 +363,14 @@
             // layoutControlItem4
             // 
             this.layoutControlItem4.Control = this.btnSearch;
-            this.layoutControlItem4.Location = new System.Drawing.Point(939, 88);
+            this.layoutControlItem4.Location = new System.Drawing.Point(928, 88);
+            this.layoutControlItem4.MaxSize = new System.Drawing.Size(101, 40);
+            this.layoutControlItem4.MinSize = new System.Drawing.Size(101, 40);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(90, 40);
+            this.layoutControlItem4.Size = new System.Drawing.Size(101, 40);
+            this.layoutControlItem4.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem4.TextVisible = false;
-            // 
-            // txbKeywords
-            // 
-            this.txbKeywords.Location = new System.Drawing.Point(262, 100);
-            this.txbKeywords.Name = "txbKeywords";
-            this.txbKeywords.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txbKeywords.Properties.Appearance.Options.UseFont = true;
-            this.txbKeywords.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Close, "", -1, true, true, true, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
-            this.txbKeywords.Size = new System.Drawing.Size(685, 36);
-            this.txbKeywords.StyleController = this.layoutControl1;
-            this.txbKeywords.TabIndex = 8;
-            this.txbKeywords.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txbKeywords_ButtonClick);
             // 
             // f207_fAdvancedSearch
             // 
@@ -380,6 +386,7 @@
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbKeywords.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
@@ -389,7 +396,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbKeywords.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }

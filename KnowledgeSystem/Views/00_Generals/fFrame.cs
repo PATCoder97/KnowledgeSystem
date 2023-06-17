@@ -75,6 +75,12 @@ namespace KnowledgeSystem.Views._00_Generals
             treeAppForm.DataSource = lsAppForms;
             treeAppForm.ParentFieldName = "ParentId";
             treeAppForm.KeyFieldName = "Id";
+
+            if (gruopId == 207)
+            {
+                AppForm formShow = treeAppForm.GetRow(0) as AppForm;
+                OpenForm(formShow.NameForm, formShow.DisplayName);
+            }
         }
 
         private void btnShowForm_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)

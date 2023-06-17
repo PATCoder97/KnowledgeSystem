@@ -1,4 +1,5 @@
 ﻿using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraPrinting.Native;
 using KnowledgeSystem.Configs;
 using System;
@@ -22,6 +23,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             helper = new RefreshHelper(gvData, "Id");
         }
 
+        #region parameters
+
         List<User> lsUsers = new List<User>();
         List<KnowledgeBase> lsKnowledgeBase = new List<KnowledgeBase>();
         List<KnowledgeType> lsKnowledgeTypes = new List<KnowledgeType>();
@@ -41,6 +44,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             public string UserUploadName { get; set; }
             public DateTime? UploadDate { get; set; }
         }
+
+        #endregion
+
+        #region methods
 
         private void LoadData()
         {
@@ -85,6 +92,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             helper.LoadViewInfo();
         }
 
+        #endregion
+
         private void btnReload_Click(object sender, EventArgs e)
         {
             LoadData();
@@ -94,6 +103,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         private void f207_fAdvancedSearch_Load(object sender, EventArgs e)
         {
             gcData.DataSource = source;
+
+            gvData.OptionsEditForm.ShowOnDoubleClick = DevExpress.Utils.DefaultBoolean.False;
+            gvData.OptionsEditForm.ShowOnEnterKey = DevExpress.Utils.DefaultBoolean.False;
+            gvData.OptionsEditForm.ShowOnF2Key = DevExpress.Utils.DefaultBoolean.False;
+            gvData.OptionsBehavior.EditingMode = GridEditingMode.EditFormInplace;
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -105,6 +119,21 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             txbKeywords.Text = string.Empty;
             gvData.FindFilterText = txbKeywords.Text.Trim();
+        }
+
+        private void gcData_DoubleClick(object sender, EventArgs e)
+        {
+            int forcusRow = gvData.FocusedRowHandle;
+            if (forcusRow < 0) return;
+
+            DataDisplay dataRow = gvData.GetRow(forcusRow) as DataDisplay;
+            string idDocuments = dataRow.Id;
+
+            f207_DocumentInfo fDocumentInfo = new f207_DocumentInfo(idDocuments);
+            fDocumentInfo.ShowDialog();
+
+            LoadData();
+            gcData.RefreshDataSource();
         }
     }
 }
