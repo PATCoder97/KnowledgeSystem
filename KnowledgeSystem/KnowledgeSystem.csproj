@@ -145,6 +145,12 @@
     <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_Main.Designer.cs">
       <DependentUpon>f207_Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\04_SystemAdministrator\01_ModeratorStaff\f401_AppFormManage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\04_SystemAdministrator\01_ModeratorStaff\f401_AppFormManage.Designer.cs">
+      <DependentUpon>f401_AppFormManage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\04_SystemAdministrator\01_ModeratorStaff\f401_UserManager.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -179,6 +185,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_Main.resx">
       <DependentUpon>f207_Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\04_SystemAdministrator\01_ModeratorStaff\f401_AppFormManage.resx">
+      <DependentUpon>f401_AppFormManage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\01_ModeratorStaff\f401_UserManager.resx">
       <DependentUpon>f401_UserManager.cs</DependentUpon>

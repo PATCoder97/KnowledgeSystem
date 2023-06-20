@@ -69,7 +69,7 @@ namespace KnowledgeSystem.Views._00_Generals
             txbPassword.Focus();
             txbPassword.Text = "1";
 
-            // btnLogin_Click(sender, e);
+            btnLogin_Click(sender, e);
         }
     }
 }
