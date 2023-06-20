@@ -145,11 +145,11 @@
     <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_Main.Designer.cs">
       <DependentUpon>f207_Main.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\04_SystemAdministrator\f04_UserManager.cs">
+    <Compile Include="Views\04_SystemAdministrator\01_ModeratorStaff\f401_UserManager.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\04_SystemAdministrator\f04_UserManager.Designer.cs">
-      <DependentUpon>f04_UserManager.cs</DependentUpon>
+    <Compile Include="Views\04_SystemAdministrator\01_ModeratorStaff\f401_UserManager.Designer.cs">
+      <DependentUpon>f401_UserManager.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -180,8 +180,8 @@
     <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_Main.resx">
       <DependentUpon>f207_Main.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\04_SystemAdministrator\f04_UserManager.resx">
-      <DependentUpon>f04_UserManager.cs</DependentUpon>
+    <EmbeddedResource Include="Views\04_SystemAdministrator\01_ModeratorStaff\f401_UserManager.resx">
+      <DependentUpon>f401_UserManager.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
     <None Include="packages.config" />
@@ -206,6 +206,7 @@
     <Folder Include="Views\01_ProductionAndSales\" />
     <Folder Include="Views\02_StandardsAndTechs\01_ISODocuments\" />
     <Folder Include="Views\03_DepartmentManage\" />
+    <Folder Include="Views\04_SystemAdministrator\02_PermissionManager\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\bgsplash.jpg" />

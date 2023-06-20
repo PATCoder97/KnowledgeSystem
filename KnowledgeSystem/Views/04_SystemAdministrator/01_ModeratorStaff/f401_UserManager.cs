@@ -9,11 +9,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace KnowledgeSystem.Views._04_SystemAdministrator
+namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManager
 {
-    public partial class f04_UserManager : DevExpress.XtraEditors.XtraForm
+    public partial class f401_UserManager : DevExpress.XtraEditors.XtraForm
     {
-        public f04_UserManager()
+        public f401_UserManager()
         {
             InitializeComponent();
         }

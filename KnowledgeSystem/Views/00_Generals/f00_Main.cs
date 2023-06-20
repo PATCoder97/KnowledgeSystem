@@ -28,26 +28,6 @@ namespace KnowledgeSystem.Views._00_Generals
             Location = new Point((Screen.PrimaryScreen.WorkingArea.Width - this.Width) / 2,
                           (Screen.PrimaryScreen.WorkingArea.Height - this.Height) / 2);
             StartPosition = FormStartPosition.CenterScreen;
-
-            System.Threading.Thread.Sleep(5000);
-        }
-
-        private void btnKnowHow_ItemClick(object sender, TileItemEventArgs e)
-        {
-            f00_Frame formShow = new f00_Frame(207);
-            formShow.Text = e.Item.Text + AppCopyRight.CopyRightString();
-            Hide();
-            formShow.ShowDialog();
-            Show();
-        }
-
-        private void btnISODocuments_ItemClick(object sender, TileItemEventArgs e)
-        {
-            f00_Frame formShow = new f00_Frame(201);
-            formShow.Text = e.Item.Text + AppCopyRight.CopyRightString();
-            Hide();
-            formShow.ShowDialog();
-            Show();
         }
 
         private void fMain_Shown(object sender, EventArgs e)
@@ -68,6 +48,33 @@ namespace KnowledgeSystem.Views._00_Generals
             Location = new Point((Screen.PrimaryScreen.WorkingArea.Width - this.Width) / 2,
                            (Screen.PrimaryScreen.WorkingArea.Height - this.Height) / 2);
 
+        }
+
+        private void btnKnowHow_ItemClick(object sender, TileItemEventArgs e)
+        {
+            f00_Frame formShow = new f00_Frame(207);
+            formShow.Text = e.Item.Text + AppCopyRight.CopyRightString();
+            Hide();
+            formShow.ShowDialog();
+            Show();
+        }
+
+        private void btnISODocuments_ItemClick(object sender, TileItemEventArgs e)
+        {
+            f00_Frame formShow = new f00_Frame(201);
+            formShow.Text = e.Item.Text + AppCopyRight.CopyRightString();
+            Hide();
+            formShow.ShowDialog();
+            Show();
+        }
+
+        private void btnModeratorStaff_ItemClick(object sender, TileItemEventArgs e)
+        {
+            f00_Frame formShow = new f00_Frame(401);
+            formShow.Text = e.Item.Text + AppCopyRight.CopyRightString();
+            Hide();
+            formShow.ShowDialog();
+            Show();
         }
     }
 }
