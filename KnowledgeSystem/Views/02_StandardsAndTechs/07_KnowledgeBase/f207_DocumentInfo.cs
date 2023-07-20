@@ -100,8 +100,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void f207_DocumentInfo_Load(object sender, EventArgs e)
         {
-            Text += AppCopyRight.CopyRightString();
-
             using (var db = new DBDocumentManagementSystemEntities())
             {
                 lsKnowledgeTypes = db.KnowledgeTypes.ToList();

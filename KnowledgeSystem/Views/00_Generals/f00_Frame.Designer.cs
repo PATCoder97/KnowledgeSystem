@@ -75,7 +75,7 @@
             this.treeAppForm.OptionsView.ShowIndicator = false;
             this.treeAppForm.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.btnShowForm});
-            this.treeAppForm.Size = new System.Drawing.Size(215, 571);
+            this.treeAppForm.Size = new System.Drawing.Size(172, 571);
             this.treeAppForm.TabIndex = 3;
             // 
             // treeListColumn1
@@ -108,22 +108,24 @@
             this.btnShowForm.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             this.btnShowForm.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnShowForm_ButtonClick);
             // 
-            // fFrame
+            // f00_Frame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1331, 571);
             this.Controls.Add(this.treeAppForm);
             this.IsMdiContainer = true;
-            this.Name = "fFrame";
+            this.Name = "f00_Frame";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "fFrame";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.fFrame_Load);
+            this.Shown += new System.EventHandler(this.f00_Frame_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.MdiManager)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.treeAppForm)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnShowForm)).EndInit();
             this.ResumeLayout(false);
+
         }
 
         #endregion

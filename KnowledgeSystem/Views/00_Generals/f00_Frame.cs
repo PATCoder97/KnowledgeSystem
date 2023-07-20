@@ -24,13 +24,14 @@ namespace KnowledgeSystem.Views._00_Generals
         public f00_Frame(int groupId_)
         {
             InitializeComponent();
-            gruopId = groupId_;
+            groupId = groupId_;
         }
 
         #region parameters
 
-        int gruopId = 0;
+        int groupId = 0;
         List<AppForm> lsAppForms = new List<AppForm>();
+        List<Function> lsFunctions = new List<Function>();
 
         #endregion
 
@@ -74,27 +75,32 @@ namespace KnowledgeSystem.Views._00_Generals
             using (var db = new DBDocumentManagementSystemEntities())
             {
                 // Lấy danh sách các AppForm có GroupId bằng gruopId, sắp xếp theo IndexRow
-                lsAppForms = db.AppForms.Select(r => r).Where(r => r.GroupId == gruopId).OrderBy(r => r.IndexRow).ToList();
+                lsAppForms = db.AppForms.Select(r => r).Where(r => r.GroupId == groupId).OrderBy(r => r.IndexRow).ToList();
+
+                lsFunctions = db.Functions.Where(r => r.IdParent == groupId).OrderBy(r => r.Prioritize).ToList();
             }
 
             // Thiết lập các thuộc tính cho TreeView control
-            treeAppForm.DataSource = lsAppForms;
-            treeAppForm.ParentFieldName = "ParentId";
+            treeAppForm.DataSource = lsFunctions;
+            treeAppForm.ParentFieldName = "IdParent";
             treeAppForm.KeyFieldName = "Id";
-
-            // Nếu GroupId là 207, chọn AppForm đầu tiên trong TreeView và mở form tương ứng
-            if (gruopId == 207)
-            {
-                // Lấy AppForm đầu tiên trong TreeView và mở form tương ứng
-                var formShow = treeAppForm.GetRow(0) as AppForm;
-                OpenForm(formShow.NameForm, formShow.DisplayName);
-            }
         }
 
         private void btnShowForm_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            AppForm formShow = treeAppForm.GetRow(treeAppForm.FocusedNode.Id) as AppForm;
-            OpenForm(formShow.NameForm, formShow.DisplayName);
+            Function formShow = treeAppForm.GetRow(treeAppForm.FocusedNode.Id) as Function;
+            OpenForm(formShow.ControlName, formShow.DisplayName);
+        }
+
+        private void f00_Frame_Shown(object sender, EventArgs e)
+        {
+            // Nếu GroupId là 1, chọn AppForm đầu tiên trong TreeView và mở form tương ứng
+            if (groupId == 1)
+            {
+                // Lấy AppForm đầu tiên trong TreeView và mở form tương ứng
+                var formShow = treeAppForm.GetRow(0) as Function;
+                OpenForm(formShow.ControlName, formShow.DisplayName);
+            }
         }
     }
 }

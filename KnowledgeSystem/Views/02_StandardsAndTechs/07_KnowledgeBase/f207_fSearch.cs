@@ -14,10 +14,10 @@ using System.Windows.Forms;
 
 namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 {
-    public partial class f207_fAdvancedSearch : DevExpress.XtraEditors.XtraForm
+    public partial class f207_fSearch : DevExpress.XtraEditors.XtraForm
     {
         RefreshHelper helper;
-        public f207_fAdvancedSearch()
+        public f207_fSearch()
         {
             InitializeComponent();
             helper = new RefreshHelper(gvData, "Id");
@@ -108,7 +108,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             gvData.RefreshData();
         }
 
-        private void f207_fAdvancedSearch_Load(object sender, EventArgs e)
+        private void f207_fSearch_Load(object sender, EventArgs e)
         {
             cbbMode.Properties.Items.AddRange(new string[] { SIMPLE_MODE, ADVANCED_MODE });
             cbbMode.SelectedIndex = 0;

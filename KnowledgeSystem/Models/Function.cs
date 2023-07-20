@@ -7,6 +7,8 @@ namespace KnowledgeSystem
         public int Id { get; set; }
         public Nullable<int> IdParent { get; set; }
         public string DisplayName { get; set; }
+        public string ControlName { get; set; }
+        public Nullable<int> Prioritize { get; set; }
         public Nullable<bool> Status { get; set; }
     }
 }

@@ -9,26 +9,24 @@
 
 namespace KnowledgeSystem
 {
-    using KnowledgeSystem.Configs;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-
+    
     public partial class DBDocumentManagementSystemEntities : DbContext
     {
         public DBDocumentManagementSystemEntities()
-            : base(SingleConnection.ConString)
+            : base("name=DBDocumentManagementSystemEntities")
         {
         }
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-
+    
         public virtual DbSet<AppForm> AppForms { get; set; }
         public virtual DbSet<FunctionRole> FunctionRoles { get; set; }
-        public virtual DbSet<Function> Functions { get; set; }
         public virtual DbSet<Group> Groups { get; set; }
         public virtual DbSet<GroupUser> GroupUsers { get; set; }
         public virtual DbSet<KnowledgeAttachment> KnowledgeAttachments { get; set; }
@@ -37,5 +35,6 @@ namespace KnowledgeSystem
         public virtual DbSet<KnowledgeType> KnowledgeTypes { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Function> Functions { get; set; }
     }
 }

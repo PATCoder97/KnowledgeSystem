@@ -67,7 +67,7 @@ namespace KnowledgeSystem.Views._00_Generals
             this.tileItem12 = new DevExpress.XtraEditors.TileItem();
             this.tileItem13 = new DevExpress.XtraEditors.TileItem();
             this.tileGroup5 = new DevExpress.XtraEditors.TileGroup();
-            this.btnModeratorStaff = new DevExpress.XtraEditors.TileItem();
+            this.btnUserManage = new DevExpress.XtraEditors.TileItem();
             this.btnRoleManage = new DevExpress.XtraEditors.TileItem();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -130,7 +130,7 @@ namespace KnowledgeSystem.Views._00_Generals
             this.tileMain.MaxId = 20;
             this.tileMain.Name = "tileMain";
             this.tileMain.Padding = new System.Windows.Forms.Padding(24, 22, 24, 22);
-            this.tileMain.Position = 239;
+            this.tileMain.Position = 540;
             this.tileMain.ShowGroupText = true;
             this.tileMain.Size = new System.Drawing.Size(1180, 498);
             this.tileMain.TabIndex = 4;
@@ -304,27 +304,29 @@ namespace KnowledgeSystem.Views._00_Generals
             // 
             // tileGroup5
             // 
-            this.tileGroup5.Items.Add(this.btnModeratorStaff);
+            this.tileGroup5.Items.Add(this.btnUserManage);
             this.tileGroup5.Items.Add(this.btnRoleManage);
             this.tileGroup5.Name = "tileGroup5";
-            this.tileGroup5.Text = "系統管理員";
+            this.tileGroup5.Text = "系統管理";
             // 
-            // btnModeratorStaff
+            // btnUserManage
             // 
-            this.btnModeratorStaff.AppearanceItem.Hovered.Font = new System.Drawing.Font("DFKai-SB", 26F);
-            this.btnModeratorStaff.AppearanceItem.Hovered.Options.UseFont = true;
-            this.btnModeratorStaff.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
-            this.btnModeratorStaff.AppearanceItem.Normal.Options.UseFont = true;
-            this.btnModeratorStaff.AppearanceItem.Pressed.Font = new System.Drawing.Font("DFKai-SB", 26F);
-            this.btnModeratorStaff.AppearanceItem.Pressed.Options.UseFont = true;
-            this.btnModeratorStaff.AppearanceItem.Selected.Font = new System.Drawing.Font("DFKai-SB", 26F);
-            this.btnModeratorStaff.AppearanceItem.Selected.Options.UseFont = true;
-            tileItemElement14.Text = "版主人員";
-            this.btnModeratorStaff.Elements.Add(tileItemElement14);
-            this.btnModeratorStaff.Id = 19;
-            this.btnModeratorStaff.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
-            this.btnModeratorStaff.Name = "btnModeratorStaff";
-            this.btnModeratorStaff.ItemClick += new DevExpress.XtraEditors.TileItemClickEventHandler(this.btnModeratorStaff_ItemClick);
+            this.btnUserManage.AppearanceItem.Hovered.Font = new System.Drawing.Font("DFKai-SB", 26F);
+            this.btnUserManage.AppearanceItem.Hovered.Options.UseFont = true;
+            this.btnUserManage.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
+            this.btnUserManage.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
+            this.btnUserManage.AppearanceItem.Normal.Options.UseBackColor = true;
+            this.btnUserManage.AppearanceItem.Normal.Options.UseFont = true;
+            this.btnUserManage.AppearanceItem.Pressed.Font = new System.Drawing.Font("DFKai-SB", 26F);
+            this.btnUserManage.AppearanceItem.Pressed.Options.UseFont = true;
+            this.btnUserManage.AppearanceItem.Selected.Font = new System.Drawing.Font("DFKai-SB", 26F);
+            this.btnUserManage.AppearanceItem.Selected.Options.UseFont = true;
+            tileItemElement14.Text = "用戶管理";
+            this.btnUserManage.Elements.Add(tileItemElement14);
+            this.btnUserManage.Id = 19;
+            this.btnUserManage.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
+            this.btnUserManage.Name = "btnUserManage";
+            this.btnUserManage.ItemClick += new DevExpress.XtraEditors.TileItemClickEventHandler(this.btnUserManage_ItemClick);
             // 
             // btnRoleManage
             // 
@@ -423,6 +425,6 @@ namespace KnowledgeSystem.Views._00_Generals
         private DevExpress.XtraEditors.TileItem tileItem13;
         private TileGroup tileGroup5;
         private TileItem btnRoleManage;
-        private TileItem btnModeratorStaff;
+        private TileItem btnUserManage;
     }
 }

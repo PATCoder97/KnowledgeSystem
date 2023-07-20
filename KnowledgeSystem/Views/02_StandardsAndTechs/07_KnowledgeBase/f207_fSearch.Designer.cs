@@ -1,6 +1,6 @@
 ﻿namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 {
-    partial class f207_fAdvancedSearch
+    partial class f207_fSearch
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f207_fAdvancedSearch));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f207_fSearch));
             DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
@@ -227,6 +227,7 @@
             this.gridColumn3.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn3.Caption = "提案人";
             this.gridColumn3.FieldName = "UserRequestName";
+            this.gridColumn3.MaxWidth = 130;
             this.gridColumn3.MinWidth = 130;
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
@@ -259,6 +260,7 @@
             this.gridColumn6.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn6.Caption = "上傳人";
             this.gridColumn6.FieldName = "UserUploadName";
+            this.gridColumn6.MaxWidth = 130;
             this.gridColumn6.MinWidth = 130;
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
@@ -271,6 +273,7 @@
             this.gridColumn7.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn7.Caption = "上傳時間";
             this.gridColumn7.FieldName = "UploadDate";
+            this.gridColumn7.MaxWidth = 130;
             this.gridColumn7.MinWidth = 130;
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
@@ -413,16 +416,16 @@
             this.layoutControlItem6.TextLocation = DevExpress.Utils.Locations.Left;
             this.layoutControlItem6.TextSize = new System.Drawing.Size(40, 19);
             // 
-            // f207_fAdvancedSearch
+            // f207_fSearch
             // 
             this.AcceptButton = this.btnSearch;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1299, 576);
             this.Controls.Add(this.layoutControl1);
-            this.Name = "f207_fAdvancedSearch";
+            this.Name = "f207_fSearch";
             this.Text = "f207_fAdvancedSearch";
-            this.Load += new System.EventHandler(this.f207_fAdvancedSearch_Load);
+            this.Load += new System.EventHandler(this.f207_fSearch_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.cbbMode.Properties)).EndInit();

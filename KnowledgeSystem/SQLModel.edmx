@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DBDocumentManagementSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DBDocumentManagementSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AppForms">
           <Key>
             <PropertyRef Name="Id" />
@@ -28,9 +28,11 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="IdParent" Type="int" />
           <Property Name="DisplayName" Type="nvarchar" MaxLength="32" />
+          <Property Name="ControlName" Type="varchar" MaxLength="32" />
+          <Property Name="Prioritize" Type="int" />
           <Property Name="Status" Type="bit" />
         </EntityType>
         <EntityType Name="Groups">
@@ -126,8 +128,7 @@
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DBDocumentManagementSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -149,15 +150,6 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdFunction" Type="Int32" />
           <Property Name="IdRole" Type="Int32" />
-        </EntityType>
-        <EntityType Name="Function">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdParent" Type="Int32" />
-          <Property Name="DisplayName" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Boolean" />
         </EntityType>
         <EntityType Name="Group">
           <Key>
@@ -242,7 +234,6 @@
         <EntityContainer Name="DBDocumentManagementSystemEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AppForms" EntityType="Self.AppForm" />
           <EntitySet Name="FunctionRoles" EntityType="Self.FunctionRole" />
-          <EntitySet Name="Functions" EntityType="Self.Function" />
           <EntitySet Name="Groups" EntityType="Self.Group" />
           <EntitySet Name="GroupUsers" EntityType="Self.GroupUser" />
           <EntitySet Name="KnowledgeAttachments" EntityType="Self.KnowledgeAttachment" />
@@ -251,7 +242,19 @@
           <EntitySet Name="KnowledgeTypes" EntityType="Self.KnowledgeType" />
           <EntitySet Name="Roles" EntityType="Self.Role" />
           <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Functions" EntityType="DBDocumentManagementSystemModel.Function" />
         </EntityContainer>
+        <EntityType Name="Function">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="IdParent" Type="Int32" />
+          <Property Name="DisplayName" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="ControlName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="Prioritize" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -276,16 +279,6 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="IdFunction" ColumnName="IdFunction" />
                 <ScalarProperty Name="IdRole" ColumnName="IdRole" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Functions">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.Function">
-              <MappingFragment StoreEntitySet="Functions">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IdParent" ColumnName="IdParent" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -374,6 +367,18 @@
                 <ScalarProperty Name="IdRole" ColumnName="IdRole" />
                 <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
                 <ScalarProperty Name="IdDepartment" ColumnName="IdDepartment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Functions">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.Function">
+              <MappingFragment StoreEntitySet="Functions">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Prioritize" ColumnName="Prioritize" />
+                <ScalarProperty Name="ControlName" ColumnName="ControlName" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="IdParent" ColumnName="IdParent" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

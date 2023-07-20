@@ -15,4 +15,8 @@ namespace KnowledgeSystem.Configs
         public static string DomainComputer { get; set; }
         public static bool LoginSuccessful { get; set; }
     }
+    //public DBDocumentManagementSystemEntities()
+    //        : base(SingleConnection.ConString)
+    //{
+    //}
 }
