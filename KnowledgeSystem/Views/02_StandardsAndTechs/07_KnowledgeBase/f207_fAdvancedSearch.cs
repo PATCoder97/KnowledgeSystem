@@ -25,13 +25,16 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         #region parameters
 
+        const string SIMPLE_MODE = "基本";
+        const string ADVANCED_MODE = "全部";
+
         List<User> lsUsers = new List<User>();
         List<KnowledgeBase> lsKnowledgeBase = new List<KnowledgeBase>();
         List<KnowledgeType> lsKnowledgeTypes = new List<KnowledgeType>();
 
         int idType = 0;
 
-        BindingSource source = new BindingSource();
+        BindingSource sourceKnowledge = new BindingSource();
 
         private class DataDisplay
         {
@@ -51,6 +54,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void LoadData()
         {
+            bool IsSimple = cbbMode.Text == SIMPLE_MODE;
+
             helper.SaveViewInfo();
             using (var db = new DBDocumentManagementSystemEntities())
             {
@@ -83,12 +88,15 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                                       UserRequest = data.UserRequest,
                                       UserRequestName = userRequest_.DisplayName,
                                       TypeName = type_.DisplayName,
-                                      Keyword = data.Keyword,
+                                      Keyword = IsSimple ? null : data.Keyword,
                                       UserUploadName = userUpload_.DisplayName,
                                       UploadDate = data.UploadDate
                                   }).ToList();
 
-            source.DataSource = lsDataDisplays;
+            sourceKnowledge.DataSource = lsDataDisplays;
+            gvColKeyword.Visible = !IsSimple;
+
+            gvData.BestFitColumns();
             helper.LoadViewInfo();
         }
 
@@ -102,12 +110,17 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void f207_fAdvancedSearch_Load(object sender, EventArgs e)
         {
-            gcData.DataSource = source;
+            cbbMode.Properties.Items.AddRange(new string[] { SIMPLE_MODE, ADVANCED_MODE });
+            cbbMode.SelectedIndex = 0;
+
+            gcData.DataSource = sourceKnowledge;
 
             gvData.OptionsEditForm.ShowOnDoubleClick = DevExpress.Utils.DefaultBoolean.False;
             gvData.OptionsEditForm.ShowOnEnterKey = DevExpress.Utils.DefaultBoolean.False;
             gvData.OptionsEditForm.ShowOnF2Key = DevExpress.Utils.DefaultBoolean.False;
             gvData.OptionsBehavior.EditingMode = GridEditingMode.EditFormInplace;
+
+            LoadData();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)

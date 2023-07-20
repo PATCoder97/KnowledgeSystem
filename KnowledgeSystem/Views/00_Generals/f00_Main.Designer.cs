@@ -130,7 +130,7 @@ namespace KnowledgeSystem.Views._00_Generals
             this.tileMain.MaxId = 20;
             this.tileMain.Name = "tileMain";
             this.tileMain.Padding = new System.Windows.Forms.Padding(24, 22, 24, 22);
-            this.tileMain.Position = 540;
+            this.tileMain.Position = 239;
             this.tileMain.ShowGroupText = true;
             this.tileMain.Size = new System.Drawing.Size(1180, 498);
             this.tileMain.TabIndex = 4;
@@ -251,7 +251,9 @@ namespace KnowledgeSystem.Views._00_Generals
             // 
             // btnKnowHow
             // 
+            this.btnKnowHow.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
             this.btnKnowHow.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
+            this.btnKnowHow.AppearanceItem.Normal.Options.UseBackColor = true;
             this.btnKnowHow.AppearanceItem.Normal.Options.UseFont = true;
             tileItemElement10.Appearance.Normal.Font = new System.Drawing.Font("DFKai-SB", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             tileItemElement10.Appearance.Normal.Options.UseFont = true;

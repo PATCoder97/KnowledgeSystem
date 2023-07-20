@@ -35,6 +35,7 @@
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.cbbMode = new DevExpress.XtraEditors.ComboBoxEdit();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.label1 = new System.Windows.Forms.Label();
             this.btnReload = new DevExpress.XtraEditors.SimpleButton();
@@ -44,7 +45,7 @@
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gvColKeyword = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.txbKeywords = new DevExpress.XtraEditors.ButtonEdit();
@@ -57,8 +58,10 @@
             this.emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbMode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbKeywords.Properties)).BeginInit();
@@ -71,11 +74,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
             // 
             this.layoutControl1.AllowCustomization = false;
+            this.layoutControl1.Controls.Add(this.cbbMode);
             this.layoutControl1.Controls.Add(this.btnSearch);
             this.layoutControl1.Controls.Add(this.label1);
             this.layoutControl1.Controls.Add(this.btnReload);
@@ -90,6 +95,23 @@
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
+            // cbbMode
+            // 
+            this.cbbMode.Location = new System.Drawing.Point(64, 12);
+            this.cbbMode.Name = "cbbMode";
+            this.cbbMode.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.cbbMode.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.cbbMode.Properties.Appearance.Options.UseFont = true;
+            this.cbbMode.Properties.Appearance.Options.UseForeColor = true;
+            this.cbbMode.Properties.AppearanceDropDown.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.cbbMode.Properties.AppearanceDropDown.Options.UseFont = true;
+            this.cbbMode.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbbMode.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.cbbMode.Size = new System.Drawing.Size(111, 28);
+            this.cbbMode.StyleController = this.layoutControl1;
+            this.cbbMode.TabIndex = 11;
+            // 
             // btnSearch
             // 
             this.btnSearch.Appearance.Font = new System.Drawing.Font("DFKai-SB", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -98,7 +120,7 @@
             this.btnSearch.Appearance.Options.UseForeColor = true;
             this.btnSearch.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
             this.btnSearch.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnSearch.ImageOptions.SvgImage")));
-            this.btnSearch.Location = new System.Drawing.Point(940, 100);
+            this.btnSearch.Location = new System.Drawing.Point(940, 92);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(97, 36);
             this.btnSearch.StyleController = this.layoutControl1;
@@ -109,11 +131,11 @@
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("DFKai-SB", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(262, 52);
+            this.label1.Location = new System.Drawing.Point(262, 44);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(775, 44);
             this.label1.TabIndex = 9;
-            this.label1.Text = "請輸入關鍵字";
+            this.label1.Text = "請輸入您要查找的信息";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // btnReload
@@ -121,9 +143,10 @@
             this.btnReload.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReload.Appearance.Options.UseFont = true;
             this.btnReload.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnReload.ImageOptions.SvgImage")));
-            this.btnReload.Location = new System.Drawing.Point(12, 12);
+            this.btnReload.ImageOptions.SvgImageSize = new System.Drawing.Size(24, 24);
+            this.btnReload.Location = new System.Drawing.Point(179, 12);
             this.btnReload.Name = "btnReload";
-            this.btnReload.Size = new System.Drawing.Size(121, 36);
+            this.btnReload.Size = new System.Drawing.Size(122, 28);
             this.btnReload.StyleController = this.layoutControl1;
             this.btnReload.TabIndex = 6;
             this.btnReload.Text = "重新整理";
@@ -136,10 +159,10 @@
             this.gcData.EmbeddedNavigator.Buttons.Edit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.EndEdit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.Remove.Visible = false;
-            this.gcData.Location = new System.Drawing.Point(12, 148);
+            this.gcData.Location = new System.Drawing.Point(12, 140);
             this.gcData.MainView = this.gvData;
             this.gcData.Name = "gcData";
-            this.gcData.Size = new System.Drawing.Size(1275, 416);
+            this.gcData.Size = new System.Drawing.Size(1275, 424);
             this.gcData.TabIndex = 4;
             this.gcData.UseEmbeddedNavigator = true;
             this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -163,7 +186,7 @@
             this.gridColumn2,
             this.gridColumn3,
             this.gridColumn4,
-            this.gridColumn5,
+            this.gvColKeyword,
             this.gridColumn6,
             this.gridColumn7});
             this.gvData.GridControl = this.gcData;
@@ -220,15 +243,15 @@
             this.gridColumn4.VisibleIndex = 1;
             this.gridColumn4.Width = 133;
             // 
-            // gridColumn5
+            // gvColKeyword
             // 
-            this.gridColumn5.Caption = "關鍵字";
-            this.gridColumn5.FieldName = "Keyword";
-            this.gridColumn5.MinWidth = 100;
-            this.gridColumn5.Name = "gridColumn5";
-            this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 3;
-            this.gridColumn5.Width = 200;
+            this.gvColKeyword.Caption = "關鍵字";
+            this.gvColKeyword.FieldName = "Keyword";
+            this.gvColKeyword.MinWidth = 100;
+            this.gvColKeyword.Name = "gvColKeyword";
+            this.gvColKeyword.Visible = true;
+            this.gvColKeyword.VisibleIndex = 3;
+            this.gvColKeyword.Width = 200;
             // 
             // gridColumn6
             // 
@@ -256,7 +279,7 @@
             // 
             // txbKeywords
             // 
-            this.txbKeywords.Location = new System.Drawing.Point(262, 100);
+            this.txbKeywords.Location = new System.Drawing.Point(262, 92);
             this.txbKeywords.Name = "txbKeywords";
             this.txbKeywords.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txbKeywords.Properties.Appearance.Options.UseFont = true;
@@ -279,7 +302,8 @@
             this.emptySpaceItem2,
             this.emptySpaceItem3,
             this.layoutControlItem2,
-            this.layoutControlItem4});
+            this.layoutControlItem4,
+            this.layoutControlItem6});
             this.Root.Name = "Root";
             this.Root.Size = new System.Drawing.Size(1299, 576);
             this.Root.TextVisible = false;
@@ -287,29 +311,29 @@
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.gcData;
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 128);
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 120);
             this.layoutControlItem1.Name = "layoutControlItem1";
             this.layoutControlItem1.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 10, 2);
-            this.layoutControlItem1.Size = new System.Drawing.Size(1279, 428);
+            this.layoutControlItem1.Size = new System.Drawing.Size(1279, 436);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
             // emptySpaceItem1
             // 
             this.emptySpaceItem1.AllowHotTrack = false;
-            this.emptySpaceItem1.Location = new System.Drawing.Point(125, 0);
+            this.emptySpaceItem1.Location = new System.Drawing.Point(293, 0);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(1154, 40);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(986, 32);
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
             // layoutControlItem3
             // 
             this.layoutControlItem3.Control = this.btnReload;
-            this.layoutControlItem3.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem3.MaxSize = new System.Drawing.Size(125, 40);
-            this.layoutControlItem3.MinSize = new System.Drawing.Size(125, 40);
+            this.layoutControlItem3.Location = new System.Drawing.Point(167, 0);
+            this.layoutControlItem3.MaxSize = new System.Drawing.Size(126, 32);
+            this.layoutControlItem3.MinSize = new System.Drawing.Size(126, 32);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(125, 40);
+            this.layoutControlItem3.Size = new System.Drawing.Size(126, 32);
             this.layoutControlItem3.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextVisible = false;
@@ -321,7 +345,7 @@
             this.layoutControlItem5.AppearanceItemCaption.Options.UseTextOptions = true;
             this.layoutControlItem5.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.layoutControlItem5.Control = this.txbKeywords;
-            this.layoutControlItem5.Location = new System.Drawing.Point(250, 88);
+            this.layoutControlItem5.Location = new System.Drawing.Point(250, 80);
             this.layoutControlItem5.Name = "layoutControlItem5";
             this.layoutControlItem5.Size = new System.Drawing.Size(678, 40);
             this.layoutControlItem5.Text = "請輸入關鍵字";
@@ -332,7 +356,7 @@
             // emptySpaceItem2
             // 
             this.emptySpaceItem2.AllowHotTrack = false;
-            this.emptySpaceItem2.Location = new System.Drawing.Point(0, 40);
+            this.emptySpaceItem2.Location = new System.Drawing.Point(0, 32);
             this.emptySpaceItem2.MaxSize = new System.Drawing.Size(250, 88);
             this.emptySpaceItem2.MinSize = new System.Drawing.Size(250, 88);
             this.emptySpaceItem2.Name = "emptySpaceItem2";
@@ -343,7 +367,7 @@
             // emptySpaceItem3
             // 
             this.emptySpaceItem3.AllowHotTrack = false;
-            this.emptySpaceItem3.Location = new System.Drawing.Point(1029, 40);
+            this.emptySpaceItem3.Location = new System.Drawing.Point(1029, 32);
             this.emptySpaceItem3.MaxSize = new System.Drawing.Size(250, 0);
             this.emptySpaceItem3.MinSize = new System.Drawing.Size(250, 10);
             this.emptySpaceItem3.Name = "emptySpaceItem3";
@@ -354,7 +378,7 @@
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.label1;
-            this.layoutControlItem2.Location = new System.Drawing.Point(250, 40);
+            this.layoutControlItem2.Location = new System.Drawing.Point(250, 32);
             this.layoutControlItem2.Name = "layoutControlItem2";
             this.layoutControlItem2.Size = new System.Drawing.Size(779, 48);
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
@@ -363,7 +387,7 @@
             // layoutControlItem4
             // 
             this.layoutControlItem4.Control = this.btnSearch;
-            this.layoutControlItem4.Location = new System.Drawing.Point(928, 88);
+            this.layoutControlItem4.Location = new System.Drawing.Point(928, 80);
             this.layoutControlItem4.MaxSize = new System.Drawing.Size(101, 40);
             this.layoutControlItem4.MinSize = new System.Drawing.Size(101, 40);
             this.layoutControlItem4.Name = "layoutControlItem4";
@@ -371,6 +395,23 @@
             this.layoutControlItem4.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem4.TextVisible = false;
+            // 
+            // layoutControlItem6
+            // 
+            this.layoutControlItem6.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.layoutControlItem6.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem6.AppearanceItemCaption.Options.UseFont = true;
+            this.layoutControlItem6.AppearanceItemCaption.Options.UseForeColor = true;
+            this.layoutControlItem6.Control = this.cbbMode;
+            this.layoutControlItem6.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem6.MaxSize = new System.Drawing.Size(167, 32);
+            this.layoutControlItem6.MinSize = new System.Drawing.Size(167, 32);
+            this.layoutControlItem6.Name = "layoutControlItem6";
+            this.layoutControlItem6.Size = new System.Drawing.Size(167, 32);
+            this.layoutControlItem6.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem6.Text = "Mode";
+            this.layoutControlItem6.TextLocation = DevExpress.Utils.Locations.Left;
+            this.layoutControlItem6.TextSize = new System.Drawing.Size(40, 19);
             // 
             // f207_fAdvancedSearch
             // 
@@ -384,6 +425,7 @@
             this.Load += new System.EventHandler(this.f207_fAdvancedSearch_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.cbbMode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbKeywords.Properties)).EndInit();
@@ -396,6 +438,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -412,7 +455,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
+        private DevExpress.XtraGrid.Columns.GridColumn gvColKeyword;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
         private DevExpress.XtraEditors.SimpleButton btnReload;
@@ -425,5 +468,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
         private DevExpress.XtraEditors.ButtonEdit txbKeywords;
+        private DevExpress.XtraEditors.ComboBoxEdit cbbMode;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
     }
 }
