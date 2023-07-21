@@ -17,6 +17,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 {
     public partial class f207_Document_Info : DevExpress.XtraEditors.XtraForm
     {
+        RefreshHelper helper;
+
         public f207_Document_Info()
         {
             InitializeComponent();
@@ -34,7 +36,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             idDocument = idDocumet_;
         }
 
+        #region parameters
+
         BindingSource sourceAttachments = new BindingSource();
+        BindingSource sourceSecuritys = new BindingSource();
 
         string idDocument = string.Empty;
         string UserId = string.Empty;
@@ -42,6 +47,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         List<KnowledgeType> lsKnowledgeTypes = new List<KnowledgeType>();
         List<User> lsUsers = new List<User>();
+        List<Group> lsGroups = new List<Group>();
+        List<KnowledgeSecurity> lsKnowledgeSecuritys = new List<KnowledgeSecurity>();
 
         List<Attachments> lsAttachments = new List<Attachments>();
 
@@ -51,6 +58,16 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             public string EncryptionName { get; set; }
             public string FullPath { get; set; }
         }
+
+        private class Securityinfo : KnowledgeSecurity
+        {
+            public string IdGrouporUser { get { return !string.IsNullOrEmpty(IdUser) ? IdUser : IdGroup.ToString(); } set { } }
+            public bool IsUser { get { return !string.IsNullOrEmpty(IdUser); } set { } }
+        }
+
+        #endregion
+
+        #region methods
 
         private string GenerateEncryptionName()
         {
@@ -98,12 +115,19 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             return regex.Replace(temp, String.Empty).Replace('\u0111', 'd').Replace('\u0110', 'D');
         }
 
+        #endregion
+
         private void f207_DocumentInfo_Load(object sender, EventArgs e)
         {
+            helper = new RefreshHelper(bgvSecurity, "Id");
+
+            gcSecurity.DataSource = sourceSecuritys;
+
             using (var db = new DBDocumentManagementSystemEntities())
             {
                 lsKnowledgeTypes = db.KnowledgeTypes.ToList();
                 lsUsers = db.Users.ToList();
+                lsGroups = db.Groups.ToList();
             }
 
             // Gán data cho các combobox
@@ -160,6 +184,31 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
                     sourceAttachments.DataSource = lsAttachments;
                     lbCountFile.Text = $"共{lsAttachments.Count}個附件";
+
+                    // KnowledgeSecurity
+                    helper.SaveViewInfo();
+                    lsKnowledgeSecuritys = db.KnowledgeSecurities.Where(r => r.IdKnowledgeBase == idDocument).ToList();
+
+                    var lsSecurityInfo = (from data in db.KnowledgeSecurities
+                                          select new Securityinfo
+                                          {
+                                              Id = data.Id,
+                                              IdKnowledgeBase = data.IdKnowledgeBase,
+                                              IdGroup = data.IdGroup,
+                                              IdUser = data.IdUser,
+                                              ChangePermision = data.ChangePermision,
+                                              ReadInfo = data.ReadInfo,
+                                              UpdateInfo = data.UpdateInfo,
+                                              DeleteInfo = data.DeleteInfo,
+                                              SearchInfo = data.SearchInfo,
+                                              ReadFile = data.ReadFile,
+                                              PrintFile = data.PrintFile,
+                                              SaveFile = data.SaveFile
+                                          }).ToList();
+
+                    sourceSecuritys.DataSource = lsSecurityInfo;
+                    bgvSecurity.BestFitColumns();
+                    helper.LoadViewInfo();
                 }
             }
         }

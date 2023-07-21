@@ -36,7 +36,19 @@
             this.btnConfirm = new DevExpress.XtraEditors.SimpleButton();
             this.btnAddFile = new DevExpress.XtraEditors.SimpleButton();
             this.gcSecurity = new DevExpress.XtraGrid.GridControl();
-            this.gvSecurity = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.bgvSecurity = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridView();
+            this.gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.bandedGridColumn1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridBand2 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.bandedGridColumn2 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn3 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn4 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn5 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn6 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridBand3 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.bandedGridColumn7 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn8 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn9 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.gcFiles = new DevExpress.XtraGrid.GridControl();
             this.gvFiles = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -52,11 +64,8 @@
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
             this.tabbedControlGroup1 = new DevExpress.XtraLayout.TabbedControlGroup();
-            this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
+            this.layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -65,13 +74,16 @@
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txbNameVN.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcSecurity)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvSecurity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bgvSecurity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcFiles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvFiles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbKeyword.Properties)).BeginInit();
@@ -85,11 +97,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroup1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
@@ -98,8 +107,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -123,7 +135,7 @@
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(911, 375, 650, 400);
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(776, 483);
+            this.layoutControl1.Size = new System.Drawing.Size(969, 483);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -135,7 +147,7 @@
             this.txbNameVN.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbNameVN.Properties.Appearance.Options.UseFont = true;
             this.txbNameVN.Properties.Appearance.Options.UseForeColor = true;
-            this.txbNameVN.Size = new System.Drawing.Size(636, 30);
+            this.txbNameVN.Size = new System.Drawing.Size(829, 30);
             this.txbNameVN.StyleController = this.layoutControl1;
             this.txbNameVN.TabIndex = 16;
             // 
@@ -145,7 +157,7 @@
             this.label1.ForeColor = System.Drawing.Color.Black;
             this.label1.Location = new System.Drawing.Point(12, 12);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(752, 41);
+            this.label1.Size = new System.Drawing.Size(945, 41);
             this.label1.TabIndex = 15;
             this.label1.Text = " 文件信息";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -156,7 +168,7 @@
             this.lbCountFile.ForeColor = System.Drawing.Color.Black;
             this.lbCountFile.Location = new System.Drawing.Point(132, 96);
             this.lbCountFile.Name = "lbCountFile";
-            this.lbCountFile.Size = new System.Drawing.Size(228, 37);
+            this.lbCountFile.Size = new System.Drawing.Size(300, 37);
             this.lbCountFile.TabIndex = 14;
             this.lbCountFile.Text = "共零附件";
             this.lbCountFile.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -169,7 +181,7 @@
             this.btnConfirm.Appearance.Options.UseForeColor = true;
             this.btnConfirm.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
             this.btnConfirm.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnConfirm.ImageOptions.SvgImage")));
-            this.btnConfirm.Location = new System.Drawing.Point(634, 435);
+            this.btnConfirm.Location = new System.Drawing.Point(827, 435);
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.Size = new System.Drawing.Size(130, 36);
             this.btnConfirm.StyleController = this.layoutControl1;
@@ -196,25 +208,164 @@
             // gcSecurity
             // 
             this.gcSecurity.Location = new System.Drawing.Point(24, 119);
-            this.gcSecurity.MainView = this.gvSecurity;
+            this.gcSecurity.MainView = this.bgvSecurity;
             this.gcSecurity.Name = "gcSecurity";
-            this.gcSecurity.Size = new System.Drawing.Size(728, 299);
+            this.gcSecurity.Size = new System.Drawing.Size(921, 299);
             this.gcSecurity.TabIndex = 10;
             this.gcSecurity.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gvSecurity});
+            this.bgvSecurity});
             // 
-            // gvSecurity
+            // bgvSecurity
             // 
-            this.gvSecurity.GridControl = this.gcSecurity;
-            this.gvSecurity.Name = "gvSecurity";
-            this.gvSecurity.OptionsView.ShowGroupPanel = false;
+            this.bgvSecurity.Appearance.BandPanel.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bgvSecurity.Appearance.BandPanel.ForeColor = System.Drawing.Color.Black;
+            this.bgvSecurity.Appearance.BandPanel.Options.UseFont = true;
+            this.bgvSecurity.Appearance.BandPanel.Options.UseForeColor = true;
+            this.bgvSecurity.Appearance.BandPanel.Options.UseTextOptions = true;
+            this.bgvSecurity.Appearance.BandPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.bgvSecurity.Appearance.HeaderPanel.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bgvSecurity.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
+            this.bgvSecurity.Appearance.HeaderPanel.Options.UseFont = true;
+            this.bgvSecurity.Appearance.HeaderPanel.Options.UseForeColor = true;
+            this.bgvSecurity.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            this.bgvSecurity.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.bgvSecurity.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bgvSecurity.Appearance.Row.ForeColor = System.Drawing.Color.Black;
+            this.bgvSecurity.Appearance.Row.Options.UseFont = true;
+            this.bgvSecurity.Appearance.Row.Options.UseForeColor = true;
+            this.bgvSecurity.Appearance.Row.Options.UseTextOptions = true;
+            this.bgvSecurity.Appearance.Row.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.bgvSecurity.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
+            this.gridBand1,
+            this.gridBand2,
+            this.gridBand3});
+            this.bgvSecurity.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] {
+            this.bandedGridColumn1,
+            this.bandedGridColumn2,
+            this.bandedGridColumn3,
+            this.bandedGridColumn4,
+            this.bandedGridColumn5,
+            this.bandedGridColumn6,
+            this.bandedGridColumn7,
+            this.bandedGridColumn8,
+            this.bandedGridColumn9});
+            this.bgvSecurity.GridControl = this.gcSecurity;
+            this.bgvSecurity.Name = "bgvSecurity";
+            this.bgvSecurity.OptionsCustomization.AllowFilter = false;
+            this.bgvSecurity.OptionsCustomization.AllowSort = false;
+            this.bgvSecurity.OptionsView.EnableAppearanceOddRow = true;
+            this.bgvSecurity.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never;
+            this.bgvSecurity.OptionsView.ShowGroupPanel = false;
+            this.bgvSecurity.OptionsView.ShowIndicator = false;
+            // 
+            // gridBand1
+            // 
+            this.gridBand1.Caption = "xx";
+            this.gridBand1.Columns.Add(this.bandedGridColumn1);
+            this.gridBand1.Name = "gridBand1";
+            this.gridBand1.VisibleIndex = 0;
+            this.gridBand1.Width = 86;
+            // 
+            // bandedGridColumn1
+            // 
+            this.bandedGridColumn1.Caption = "信息";
+            this.bandedGridColumn1.FieldName = "IdGrouporUser";
+            this.bandedGridColumn1.Name = "bandedGridColumn1";
+            this.bandedGridColumn1.Visible = true;
+            this.bandedGridColumn1.Width = 86;
+            // 
+            // gridBand2
+            // 
+            this.gridBand2.Caption = "文件權限";
+            this.gridBand2.Columns.Add(this.bandedGridColumn2);
+            this.gridBand2.Columns.Add(this.bandedGridColumn3);
+            this.gridBand2.Columns.Add(this.bandedGridColumn4);
+            this.gridBand2.Columns.Add(this.bandedGridColumn5);
+            this.gridBand2.Columns.Add(this.bandedGridColumn6);
+            this.gridBand2.Name = "gridBand2";
+            this.gridBand2.VisibleIndex = 1;
+            this.gridBand2.Width = 450;
+            // 
+            // bandedGridColumn2
+            // 
+            this.bandedGridColumn2.Caption = "變更權限";
+            this.bandedGridColumn2.FieldName = "ChangePermision";
+            this.bandedGridColumn2.Name = "bandedGridColumn2";
+            this.bandedGridColumn2.Visible = true;
+            this.bandedGridColumn2.Width = 102;
+            // 
+            // bandedGridColumn3
+            // 
+            this.bandedGridColumn3.Caption = "讀取";
+            this.bandedGridColumn3.FieldName = "ReadInfo";
+            this.bandedGridColumn3.Name = "bandedGridColumn3";
+            this.bandedGridColumn3.Visible = true;
+            this.bandedGridColumn3.Width = 86;
+            // 
+            // bandedGridColumn4
+            // 
+            this.bandedGridColumn4.Caption = "變更";
+            this.bandedGridColumn4.FieldName = "UpdateInfo";
+            this.bandedGridColumn4.Name = "bandedGridColumn4";
+            this.bandedGridColumn4.Visible = true;
+            this.bandedGridColumn4.Width = 86;
+            // 
+            // bandedGridColumn5
+            // 
+            this.bandedGridColumn5.Caption = "刪除";
+            this.bandedGridColumn5.FieldName = "DeleteInfo";
+            this.bandedGridColumn5.Name = "bandedGridColumn5";
+            this.bandedGridColumn5.Visible = true;
+            this.bandedGridColumn5.Width = 86;
+            // 
+            // bandedGridColumn6
+            // 
+            this.bandedGridColumn6.Caption = "查詢";
+            this.bandedGridColumn6.FieldName = "SearchInfo";
+            this.bandedGridColumn6.Name = "bandedGridColumn6";
+            this.bandedGridColumn6.Visible = true;
+            this.bandedGridColumn6.Width = 90;
+            // 
+            // gridBand3
+            // 
+            this.gridBand3.Caption = "附件權限";
+            this.gridBand3.Columns.Add(this.bandedGridColumn7);
+            this.gridBand3.Columns.Add(this.bandedGridColumn8);
+            this.gridBand3.Columns.Add(this.bandedGridColumn9);
+            this.gridBand3.Name = "gridBand3";
+            this.gridBand3.VisibleIndex = 2;
+            this.gridBand3.Width = 246;
+            // 
+            // bandedGridColumn7
+            // 
+            this.bandedGridColumn7.Caption = "讀取1";
+            this.bandedGridColumn7.FieldName = "ReadFile";
+            this.bandedGridColumn7.Name = "bandedGridColumn7";
+            this.bandedGridColumn7.Visible = true;
+            this.bandedGridColumn7.Width = 81;
+            // 
+            // bandedGridColumn8
+            // 
+            this.bandedGridColumn8.Caption = "列印";
+            this.bandedGridColumn8.FieldName = "PrintFile";
+            this.bandedGridColumn8.Name = "bandedGridColumn8";
+            this.bandedGridColumn8.Visible = true;
+            this.bandedGridColumn8.Width = 81;
+            // 
+            // bandedGridColumn9
+            // 
+            this.bandedGridColumn9.Caption = "下載";
+            this.bandedGridColumn9.FieldName = "SaveFile";
+            this.bandedGridColumn9.Name = "bandedGridColumn9";
+            this.bandedGridColumn9.Visible = true;
+            this.bandedGridColumn9.Width = 84;
             // 
             // gcFiles
             // 
             this.gcFiles.Location = new System.Drawing.Point(24, 137);
             this.gcFiles.MainView = this.gvFiles;
             this.gcFiles.Name = "gcFiles";
-            this.gcFiles.Size = new System.Drawing.Size(728, 281);
+            this.gcFiles.Size = new System.Drawing.Size(921, 281);
             this.gcFiles.TabIndex = 9;
             this.gcFiles.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvFiles});
@@ -263,7 +414,7 @@
             this.txbKeyword.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbKeyword.Properties.Appearance.Options.UseFont = true;
             this.txbKeyword.Properties.Appearance.Options.UseForeColor = true;
-            this.txbKeyword.Size = new System.Drawing.Size(636, 189);
+            this.txbKeyword.Size = new System.Drawing.Size(829, 189);
             this.txbKeyword.StyleController = this.layoutControl1;
             this.txbKeyword.TabIndex = 7;
             // 
@@ -275,7 +426,7 @@
             this.txbNameTW.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbNameTW.Properties.Appearance.Options.UseFont = true;
             this.txbNameTW.Properties.Appearance.Options.UseForeColor = true;
-            this.txbNameTW.Size = new System.Drawing.Size(636, 28);
+            this.txbNameTW.Size = new System.Drawing.Size(829, 28);
             this.txbNameTW.StyleController = this.layoutControl1;
             this.txbNameTW.TabIndex = 5;
             // 
@@ -288,13 +439,13 @@
             this.txbId.Properties.Appearance.Options.UseFont = true;
             this.txbId.Properties.Appearance.Options.UseForeColor = true;
             this.txbId.Properties.ReadOnly = true;
-            this.txbId.Size = new System.Drawing.Size(270, 28);
+            this.txbId.Size = new System.Drawing.Size(366, 28);
             this.txbId.StyleController = this.layoutControl1;
             this.txbId.TabIndex = 4;
             // 
             // cbbType
             // 
-            this.cbbType.Location = new System.Drawing.Point(482, 96);
+            this.cbbType.Location = new System.Drawing.Point(578, 96);
             this.cbbType.Name = "cbbType";
             this.cbbType.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbbType.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -309,13 +460,13 @@
             this.cbbType.Properties.NullText = "";
             this.cbbType.Properties.PopupSizeable = false;
             this.cbbType.Properties.ShowHeader = false;
-            this.cbbType.Size = new System.Drawing.Size(270, 28);
+            this.cbbType.Size = new System.Drawing.Size(367, 28);
             this.cbbType.StyleController = this.layoutControl1;
             this.cbbType.TabIndex = 13;
             // 
             // cbbUserUpload
             // 
-            this.cbbUserUpload.Location = new System.Drawing.Point(482, 196);
+            this.cbbUserUpload.Location = new System.Drawing.Point(578, 196);
             this.cbbUserUpload.Name = "cbbUserUpload";
             this.cbbUserUpload.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbbUserUpload.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -328,7 +479,7 @@
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("DisplayName", "Name2")});
             this.cbbUserUpload.Properties.NullText = "";
             this.cbbUserUpload.Properties.ReadOnly = true;
-            this.cbbUserUpload.Size = new System.Drawing.Size(270, 28);
+            this.cbbUserUpload.Size = new System.Drawing.Size(367, 28);
             this.cbbUserUpload.StyleController = this.layoutControl1;
             this.cbbUserUpload.TabIndex = 8;
             // 
@@ -354,7 +505,7 @@
             this.cbbUserRequest.Properties.PopupFilterMode = DevExpress.XtraEditors.PopupFilterMode.Contains;
             this.cbbUserRequest.Properties.ShowHeader = false;
             this.cbbUserRequest.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
-            this.cbbUserRequest.Size = new System.Drawing.Size(270, 28);
+            this.cbbUserRequest.Size = new System.Drawing.Size(366, 28);
             this.cbbUserRequest.StyleController = this.layoutControl1;
             this.cbbUserRequest.TabIndex = 6;
             // 
@@ -368,7 +519,7 @@
             this.layoutControlItem12,
             this.tabbedControlGroup1});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(776, 483);
+            this.Root.Size = new System.Drawing.Size(969, 483);
             this.Root.TextVisible = false;
             // 
             // emptySpaceItem1
@@ -376,15 +527,18 @@
             this.emptySpaceItem1.AllowHotTrack = false;
             this.emptySpaceItem1.Location = new System.Drawing.Point(0, 423);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(622, 40);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(815, 40);
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
             // layoutControlItem9
             // 
             this.layoutControlItem9.Control = this.btnConfirm;
-            this.layoutControlItem9.Location = new System.Drawing.Point(622, 423);
+            this.layoutControlItem9.Location = new System.Drawing.Point(815, 423);
+            this.layoutControlItem9.MaxSize = new System.Drawing.Size(134, 40);
+            this.layoutControlItem9.MinSize = new System.Drawing.Size(134, 40);
             this.layoutControlItem9.Name = "layoutControlItem9";
             this.layoutControlItem9.Size = new System.Drawing.Size(134, 40);
+            this.layoutControlItem9.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem9.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem9.TextVisible = false;
             // 
@@ -395,7 +549,7 @@
             this.layoutControlItem12.MaxSize = new System.Drawing.Size(0, 45);
             this.layoutControlItem12.MinSize = new System.Drawing.Size(24, 45);
             this.layoutControlItem12.Name = "layoutControlItem12";
-            this.layoutControlItem12.Size = new System.Drawing.Size(756, 45);
+            this.layoutControlItem12.Size = new System.Drawing.Size(949, 45);
             this.layoutControlItem12.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem12.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem12.TextVisible = false;
@@ -414,67 +568,37 @@
             this.tabbedControlGroup1.AppearanceTabPage.HeaderActive.Options.UseForeColor = true;
             this.tabbedControlGroup1.Location = new System.Drawing.Point(0, 45);
             this.tabbedControlGroup1.Name = "tabbedControlGroup1";
-            this.tabbedControlGroup1.SelectedTabPage = this.layoutControlGroup1;
-            this.tabbedControlGroup1.Size = new System.Drawing.Size(756, 378);
+            this.tabbedControlGroup1.SelectedTabPage = this.layoutControlGroup3;
+            this.tabbedControlGroup1.Size = new System.Drawing.Size(949, 378);
             this.tabbedControlGroup1.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlGroup1,
             this.layoutControlGroup2,
             this.layoutControlGroup3});
             this.tabbedControlGroup1.Text = "信息";
             // 
-            // layoutControlGroup2
+            // layoutControlGroup3
             // 
-            this.layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem6,
-            this.layoutControlItem8,
-            this.layoutControlItem11,
-            this.emptySpaceItem2});
-            this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlGroup2.Name = "layoutControlGroup2";
-            this.layoutControlGroup2.Size = new System.Drawing.Size(732, 327);
-            this.layoutControlGroup2.Text = "附件";
+            this.layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem7});
+            this.layoutControlGroup3.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlGroup3.Name = "layoutControlGroup3";
+            this.layoutControlGroup3.Size = new System.Drawing.Size(925, 327);
+            this.layoutControlGroup3.Text = "密等";
             // 
-            // layoutControlItem6
+            // layoutControlItem7
             // 
-            this.layoutControlItem6.Control = this.gcFiles;
-            this.layoutControlItem6.Location = new System.Drawing.Point(0, 41);
-            this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 3);
-            this.layoutControlItem6.Size = new System.Drawing.Size(732, 286);
-            this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem6.TextVisible = false;
-            // 
-            // layoutControlItem8
-            // 
-            this.layoutControlItem8.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.layoutControlItem8.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
-            this.layoutControlItem8.AppearanceItemCaption.Options.UseFont = true;
-            this.layoutControlItem8.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem8.Control = this.btnAddFile;
-            this.layoutControlItem8.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 3);
-            this.layoutControlItem8.Size = new System.Drawing.Size(108, 41);
-            this.layoutControlItem8.Text = "附件";
-            this.layoutControlItem8.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem8.TextVisible = false;
-            // 
-            // layoutControlItem11
-            // 
-            this.layoutControlItem11.Control = this.lbCountFile;
-            this.layoutControlItem11.Location = new System.Drawing.Point(108, 0);
-            this.layoutControlItem11.Name = "layoutControlItem11";
-            this.layoutControlItem11.Size = new System.Drawing.Size(232, 41);
-            this.layoutControlItem11.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem11.TextVisible = false;
-            // 
-            // emptySpaceItem2
-            // 
-            this.emptySpaceItem2.AllowHotTrack = false;
-            this.emptySpaceItem2.Location = new System.Drawing.Point(340, 0);
-            this.emptySpaceItem2.Name = "emptySpaceItem2";
-            this.emptySpaceItem2.Size = new System.Drawing.Size(392, 41);
-            this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem7.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.layoutControlItem7.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem7.AppearanceItemCaption.Options.UseFont = true;
+            this.layoutControlItem7.AppearanceItemCaption.Options.UseForeColor = true;
+            this.layoutControlItem7.Control = this.gcSecurity;
+            this.layoutControlItem7.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem7.Name = "layoutControlItem7";
+            this.layoutControlItem7.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 3);
+            this.layoutControlItem7.Size = new System.Drawing.Size(925, 327);
+            this.layoutControlItem7.Text = "文件密等";
+            this.layoutControlItem7.TextLocation = DevExpress.Utils.Locations.Top;
+            this.layoutControlItem7.TextSize = new System.Drawing.Size(80, 19);
             // 
             // layoutControlGroup1
             // 
@@ -488,7 +612,7 @@
             this.layoutControlItem4});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(732, 327);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(925, 327);
             this.layoutControlGroup1.Text = "信息";
             // 
             // layoutControlItem1
@@ -501,7 +625,7 @@
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
             this.layoutControlItem1.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 3);
-            this.layoutControlItem1.Size = new System.Drawing.Size(366, 33);
+            this.layoutControlItem1.Size = new System.Drawing.Size(462, 33);
             this.layoutControlItem1.Text = "文件編號";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(80, 19);
             // 
@@ -512,10 +636,10 @@
             this.layoutControlItem10.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem10.AppearanceItemCaption.Options.UseForeColor = true;
             this.layoutControlItem10.Control = this.cbbType;
-            this.layoutControlItem10.Location = new System.Drawing.Point(366, 0);
+            this.layoutControlItem10.Location = new System.Drawing.Point(462, 0);
             this.layoutControlItem10.Name = "layoutControlItem10";
             this.layoutControlItem10.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 3);
-            this.layoutControlItem10.Size = new System.Drawing.Size(366, 33);
+            this.layoutControlItem10.Size = new System.Drawing.Size(463, 33);
             this.layoutControlItem10.Text = " 類別";
             this.layoutControlItem10.TextSize = new System.Drawing.Size(80, 19);
             // 
@@ -529,7 +653,7 @@
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 33);
             this.layoutControlItem2.Name = "layoutControlItem2";
             this.layoutControlItem2.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 3);
-            this.layoutControlItem2.Size = new System.Drawing.Size(732, 33);
+            this.layoutControlItem2.Size = new System.Drawing.Size(925, 33);
             this.layoutControlItem2.Text = "中文名稱";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(80, 19);
             // 
@@ -542,7 +666,7 @@
             this.layoutControlItem13.Control = this.txbNameVN;
             this.layoutControlItem13.Location = new System.Drawing.Point(0, 66);
             this.layoutControlItem13.Name = "layoutControlItem13";
-            this.layoutControlItem13.Size = new System.Drawing.Size(732, 34);
+            this.layoutControlItem13.Size = new System.Drawing.Size(925, 34);
             this.layoutControlItem13.Text = "越文名稱";
             this.layoutControlItem13.TextSize = new System.Drawing.Size(80, 19);
             // 
@@ -556,7 +680,7 @@
             this.layoutControlItem3.Location = new System.Drawing.Point(0, 100);
             this.layoutControlItem3.Name = "layoutControlItem3";
             this.layoutControlItem3.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 3);
-            this.layoutControlItem3.Size = new System.Drawing.Size(366, 33);
+            this.layoutControlItem3.Size = new System.Drawing.Size(462, 33);
             this.layoutControlItem3.Text = "提案人";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(80, 19);
             // 
@@ -567,10 +691,10 @@
             this.layoutControlItem5.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem5.AppearanceItemCaption.Options.UseForeColor = true;
             this.layoutControlItem5.Control = this.cbbUserUpload;
-            this.layoutControlItem5.Location = new System.Drawing.Point(366, 100);
+            this.layoutControlItem5.Location = new System.Drawing.Point(462, 100);
             this.layoutControlItem5.Name = "layoutControlItem5";
             this.layoutControlItem5.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 3);
-            this.layoutControlItem5.Size = new System.Drawing.Size(366, 33);
+            this.layoutControlItem5.Size = new System.Drawing.Size(463, 33);
             this.layoutControlItem5.Text = " 上傳人";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(80, 19);
             // 
@@ -584,42 +708,75 @@
             this.layoutControlItem4.Location = new System.Drawing.Point(0, 133);
             this.layoutControlItem4.Name = "layoutControlItem4";
             this.layoutControlItem4.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 3);
-            this.layoutControlItem4.Size = new System.Drawing.Size(732, 194);
+            this.layoutControlItem4.Size = new System.Drawing.Size(925, 194);
             this.layoutControlItem4.Text = "關鍵字";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(80, 19);
             // 
-            // layoutControlGroup3
+            // layoutControlGroup2
             // 
-            this.layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem7});
-            this.layoutControlGroup3.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlGroup3.Name = "layoutControlGroup3";
-            this.layoutControlGroup3.Size = new System.Drawing.Size(732, 327);
-            this.layoutControlGroup3.Text = "密等";
+            this.layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem6,
+            this.layoutControlItem8,
+            this.layoutControlItem11,
+            this.emptySpaceItem2});
+            this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlGroup2.Name = "layoutControlGroup2";
+            this.layoutControlGroup2.Size = new System.Drawing.Size(925, 327);
+            this.layoutControlGroup2.Text = "附件";
             // 
-            // layoutControlItem7
+            // layoutControlItem6
             // 
-            this.layoutControlItem7.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.layoutControlItem7.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
-            this.layoutControlItem7.AppearanceItemCaption.Options.UseFont = true;
-            this.layoutControlItem7.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem7.Control = this.gcSecurity;
-            this.layoutControlItem7.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 3);
-            this.layoutControlItem7.Size = new System.Drawing.Size(732, 327);
-            this.layoutControlItem7.Text = "文件密等";
-            this.layoutControlItem7.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem7.TextSize = new System.Drawing.Size(80, 19);
+            this.layoutControlItem6.Control = this.gcFiles;
+            this.layoutControlItem6.Location = new System.Drawing.Point(0, 41);
+            this.layoutControlItem6.Name = "layoutControlItem6";
+            this.layoutControlItem6.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 3);
+            this.layoutControlItem6.Size = new System.Drawing.Size(925, 286);
+            this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem6.TextVisible = false;
             // 
-            // f207_DocumentInfo
+            // layoutControlItem8
+            // 
+            this.layoutControlItem8.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.layoutControlItem8.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem8.AppearanceItemCaption.Options.UseFont = true;
+            this.layoutControlItem8.AppearanceItemCaption.Options.UseForeColor = true;
+            this.layoutControlItem8.Control = this.btnAddFile;
+            this.layoutControlItem8.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem8.MaxSize = new System.Drawing.Size(108, 41);
+            this.layoutControlItem8.MinSize = new System.Drawing.Size(108, 41);
+            this.layoutControlItem8.Name = "layoutControlItem8";
+            this.layoutControlItem8.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 3);
+            this.layoutControlItem8.Size = new System.Drawing.Size(108, 41);
+            this.layoutControlItem8.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem8.Text = "附件";
+            this.layoutControlItem8.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem8.TextVisible = false;
+            // 
+            // layoutControlItem11
+            // 
+            this.layoutControlItem11.Control = this.lbCountFile;
+            this.layoutControlItem11.Location = new System.Drawing.Point(108, 0);
+            this.layoutControlItem11.Name = "layoutControlItem11";
+            this.layoutControlItem11.Size = new System.Drawing.Size(304, 41);
+            this.layoutControlItem11.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem11.TextVisible = false;
+            // 
+            // emptySpaceItem2
+            // 
+            this.emptySpaceItem2.AllowHotTrack = false;
+            this.emptySpaceItem2.Location = new System.Drawing.Point(412, 0);
+            this.emptySpaceItem2.Name = "emptySpaceItem2";
+            this.emptySpaceItem2.Size = new System.Drawing.Size(513, 41);
+            this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
+            // 
+            // f207_Document_Info
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(776, 483);
+            this.ClientSize = new System.Drawing.Size(969, 483);
             this.Controls.Add(this.layoutControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "f207_DocumentInfo";
+            this.Name = "f207_Document_Info";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "文件信息";
             this.Load += new System.EventHandler(this.f207_DocumentInfo_Load);
@@ -628,7 +785,7 @@
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.txbNameVN.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcSecurity)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvSecurity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bgvSecurity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcFiles)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvFiles)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbKeyword.Properties)).EndInit();
@@ -642,11 +799,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroup1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
@@ -655,8 +809,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -671,7 +828,6 @@
         private DevExpress.XtraEditors.SimpleButton btnConfirm;
         private DevExpress.XtraEditors.SimpleButton btnAddFile;
         private DevExpress.XtraGrid.GridControl gcSecurity;
-        private DevExpress.XtraGrid.Views.Grid.GridView gvSecurity;
         private DevExpress.XtraGrid.GridControl gcFiles;
         private DevExpress.XtraGrid.Views.Grid.GridView gvFiles;
         private DevExpress.XtraEditors.MemoEdit txbKeyword;
@@ -701,5 +857,18 @@
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup3;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridView bgvSecurity;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn1;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn2;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn3;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn4;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn5;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn6;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn7;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn8;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn9;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand2;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand3;
     }
 }

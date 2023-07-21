@@ -3,6 +3,7 @@ using DevExpress.Skins;
 using DevExpress.UserSkins;
 using KnowledgeSystem.Configs;
 using KnowledgeSystem.Views._00_Generals;
+using KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace KnowledgeSystem
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new f00_Main());
+            Application.Run(new f00_Frame(1));
         }
     }
 }
