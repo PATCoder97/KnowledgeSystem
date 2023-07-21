@@ -73,10 +73,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManager
             commandsEvent.Buttons.Clear();
 
             Image imgEdit = Properties.Resources.pen_16px;
-            Image imgDelete = Properties.Resources.cancel_16px;
-
             Color colorEdit = DXSkinColors.FillColors.Question;
-            Color colorDelete = DXSkinColors.FillColors.Danger;
 
             DevExpress.Utils.AppearanceObject appearanceEdit = new DevExpress.Utils.AppearanceObject();
             appearanceEdit.Font = fontDFKaiSB12;
@@ -84,15 +81,12 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManager
 
             DevExpress.Utils.AppearanceObject appearanceDelete = new DevExpress.Utils.AppearanceObject();
             appearanceDelete.Font = fontDFKaiSB12;
-            appearanceDelete.ForeColor = colorDelete;
 
             EditorButton btnEdit = new EditorButton(ButtonPredefines.Glyph, "修改", -1, true, true, false, ImageLocation.Default, imgEdit, null, appearanceEdit);
-            EditorButton btnDelete = new EditorButton(ButtonPredefines.Glyph, "刪除", -1, true, true, false, ImageLocation.Default, imgDelete, null, appearanceDelete);
 
             commandsEvent.Buttons.Add(btnEdit);
-            commandsEvent.Buttons.Add(btnDelete);
 
-            int widthCol = 150;
+            int widthCol = 70;
             GridColumn _commandsColumn = gvData.Columns.AddField("事件");
             _commandsColumn.Visible = true;
             _commandsColumn.Width = widthCol;
@@ -129,24 +123,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManager
                     gvData.CloseEditor();
                     gvData.ShowEditForm();
                     break;
-                case "刪除":
-                    int focusedRowHandle = gvData.FocusedRowHandle;
-                    User users = (User)gvData.GetRow(focusedRowHandle);
-
-                    var resultDialog = XtraMessageBox.Show($"Bạn muốn xóa thiết bị: {users.DisplayName}?", TempDatas.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (resultDialog != DialogResult.Yes) return;
-
-                    using (var db = new DBDocumentManagementSystemEntities())
-                    {
-                        var userDel = db.Users.FirstOrDefault(x => x.Id == users.Id);
-
-                        db.Users.Remove(userDel);
-                        db.SaveChanges();
-                    }
-
-                    LoadUser();
-                    XtraMessageBox.Show("Thao tác xóa thành công!", TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    break;
             }
         }
 
@@ -168,7 +144,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManager
         private void btnCreate_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             uc401_UserManage_Info ucInfo = new uc401_UserManage_Info();
-            if (XtraDialog.Show(ucInfo, "新增螺紋量規", MessageBoxButtons.OKCancel) != DialogResult.OK) return;
+            if (XtraDialog.Show(ucInfo, "新增使用者", MessageBoxButtons.OKCancel) != DialogResult.OK) return;
 
             var userNew = new User()
             {

@@ -132,11 +132,11 @@
     <Compile Include="Views\00_Generals\f00_Main.Designer.cs">
       <DependentUpon>f00_Main.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_DocumentInfo.cs">
+    <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_Document_Info.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_DocumentInfo.Designer.cs">
-      <DependentUpon>f207_DocumentInfo.cs</DependentUpon>
+    <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_Document_Info.Designer.cs">
+      <DependentUpon>f207_Document_Info.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_fSearch.cs">
       <SubType>Form</SubType>
@@ -155,6 +155,12 @@
     </Compile>
     <Compile Include="Views\04_SystemAdministrator\01_UserManage\f401_GroupManage.Designer.cs">
       <DependentUpon>f401_GroupManage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\04_SystemAdministrator\01_UserManage\f401_GroupManage_Info.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\04_SystemAdministrator\01_UserManage\f401_GroupManage_Info.Designer.cs">
+      <DependentUpon>f401_GroupManage_Info.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\04_SystemAdministrator\01_UserManage\f401_UserManage.cs">
       <SubType>Form</SubType>
@@ -191,8 +197,8 @@
     <EmbeddedResource Include="Views\00_Generals\f00_Main.resx">
       <DependentUpon>f00_Main.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_DocumentInfo.resx">
-      <DependentUpon>f207_DocumentInfo.cs</DependentUpon>
+    <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_Document_Info.resx">
+      <DependentUpon>f207_Document_Info.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_fSearch.resx">
       <DependentUpon>f207_fSearch.cs</DependentUpon>
@@ -202,6 +208,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\01_UserManage\f401_GroupManage.resx">
       <DependentUpon>f401_GroupManage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\04_SystemAdministrator\01_UserManage\f401_GroupManage_Info.resx">
+      <DependentUpon>f401_GroupManage_Info.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\01_UserManage\f401_UserManage.resx">
       <DependentUpon>f401_UserManage.cs</DependentUpon>

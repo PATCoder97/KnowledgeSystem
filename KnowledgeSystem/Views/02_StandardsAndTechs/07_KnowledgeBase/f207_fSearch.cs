@@ -142,7 +142,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             DataDisplay dataRow = gvData.GetRow(forcusRow) as DataDisplay;
             string idDocuments = dataRow.Id;
 
-            f207_DocumentInfo fDocumentInfo = new f207_DocumentInfo(idDocuments);
+            f207_Document_Info fDocumentInfo = new f207_Document_Info(idDocuments);
             fDocumentInfo.ShowDialog();
 
             LoadData();

@@ -98,7 +98,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            f207_DocumentInfo fAddDocument = new f207_DocumentInfo(idType);
+            f207_Document_Info fAddDocument = new f207_Document_Info(idType);
             fAddDocument.ShowDialog();
 
             LoadData();
@@ -119,7 +119,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             DataDisplay dataRow = gvData.GetRow(forcusRow) as DataDisplay;
             string idDocuments = dataRow.Id;
 
-            f207_DocumentInfo fDocumentInfo = new f207_DocumentInfo(idDocuments);
+            f207_Document_Info fDocumentInfo = new f207_Document_Info(idDocuments);
             fDocumentInfo.ShowDialog();
 
             LoadData();

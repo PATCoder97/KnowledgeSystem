@@ -1,6 +1,6 @@
 ﻿namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 {
-    partial class f207_DocumentInfo
+    partial class f207_Document_Info
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f207_DocumentInfo));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f207_Document_Info));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.txbNameVN = new DevExpress.XtraEditors.TextEdit();
             this.label1 = new System.Windows.Forms.Label();

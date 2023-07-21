@@ -15,20 +15,20 @@ using System.Windows.Forms;
 
 namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 {
-    public partial class f207_DocumentInfo : DevExpress.XtraEditors.XtraForm
+    public partial class f207_Document_Info : DevExpress.XtraEditors.XtraForm
     {
-        public f207_DocumentInfo()
+        public f207_Document_Info()
         {
             InitializeComponent();
         }
 
-        public f207_DocumentInfo(int idType_)
+        public f207_Document_Info(int idType_)
         {
             InitializeComponent();
             idType = idType_;
         }
 
-        public f207_DocumentInfo(string idDocumet_)
+        public f207_Document_Info(string idDocumet_)
         {
             InitializeComponent();
             idDocument = idDocumet_;

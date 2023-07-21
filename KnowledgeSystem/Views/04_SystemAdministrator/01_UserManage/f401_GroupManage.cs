@@ -57,5 +57,11 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             helper = new RefreshHelper(gvData, "Id");
             LoadGroup();
         }
+
+        private void btnCreate_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            f401_GroupManage_Info frmInfo = new f401_GroupManage_Info();
+            frmInfo.ShowDialog();
+        }
     }
 }

@@ -196,6 +196,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.btnCreate.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            this.btnCreate.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnCreate_ItemClick);
             // 
             // btnRefresh
             // 
