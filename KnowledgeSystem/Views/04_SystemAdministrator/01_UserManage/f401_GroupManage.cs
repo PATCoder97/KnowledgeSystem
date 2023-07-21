@@ -48,10 +48,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
 
         private void f401_GroupManage_Load(object sender, EventArgs e)
         {
-            gvData.OptionsEditForm.ShowOnDoubleClick = DevExpress.Utils.DefaultBoolean.False;
-            gvData.OptionsEditForm.ShowOnEnterKey = DevExpress.Utils.DefaultBoolean.False;
-            gvData.OptionsEditForm.ShowOnF2Key = DevExpress.Utils.DefaultBoolean.False;
-            gvData.OptionsBehavior.EditingMode = GridEditingMode.EditFormInplace;
+            gvData.ReadOnlyGridView();
 
             gcData.DataSource = sourceGroup;
             helper = new RefreshHelper(gvData, "Id");
@@ -62,6 +59,27 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
         {
             f401_GroupManage_Info frmInfo = new f401_GroupManage_Info();
             frmInfo.ShowDialog();
+
+            LoadGroup();
+        }
+
+        private void gcData_DoubleClick(object sender, EventArgs e)
+        {
+            int forcusRow = gvData.FocusedRowHandle;
+            if (forcusRow < 0) return;
+
+            Group dataRow = gvData.GetRow(forcusRow) as Group;
+            int IdGroup = dataRow.Id;
+
+            f401_GroupManage_Info formInfo = new f401_GroupManage_Info(IdGroup);
+            formInfo.ShowDialog();
+
+            LoadGroup();
+        }
+
+        private void btnRefresh_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            LoadGroup();
         }
     }
 }

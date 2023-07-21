@@ -34,15 +34,14 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f401_GroupManage_Info));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
-            this.gridControl1 = new DevExpress.XtraGrid.GridControl();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.btnAddUser = new DevExpress.XtraEditors.SimpleButton();
+            this.btnDelUser = new DevExpress.XtraEditors.SimpleButton();
+            this.gcChoose = new DevExpress.XtraGrid.GridControl();
+            this.gvChoose = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.txbDescrip = new DevExpress.XtraEditors.TextEdit();
+            this.txbDescribe = new DevExpress.XtraEditors.TextEdit();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnEdit = new DevExpress.XtraBars.BarButtonItem();
@@ -55,7 +54,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.txbName = new DevExpress.XtraEditors.TextEdit();
             this.gcData = new DevExpress.XtraGrid.GridControl();
             this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -70,9 +68,9 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbDescrip.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gcChoose)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvChoose)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbDescribe.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
@@ -91,10 +89,10 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             // layoutControl1
             // 
             this.layoutControl1.AllowCustomization = false;
-            this.layoutControl1.Controls.Add(this.simpleButton2);
-            this.layoutControl1.Controls.Add(this.simpleButton1);
-            this.layoutControl1.Controls.Add(this.gridControl1);
-            this.layoutControl1.Controls.Add(this.txbDescrip);
+            this.layoutControl1.Controls.Add(this.btnAddUser);
+            this.layoutControl1.Controls.Add(this.btnDelUser);
+            this.layoutControl1.Controls.Add(this.gcChoose);
+            this.layoutControl1.Controls.Add(this.txbDescribe);
             this.layoutControl1.Controls.Add(this.txbName);
             this.layoutControl1.Controls.Add(this.gcData);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -107,80 +105,72 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
-            // simpleButton2
+            // btnAddUser
             // 
-            this.simpleButton2.Appearance.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.simpleButton2.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.simpleButton2.Appearance.Options.UseFont = true;
-            this.simpleButton2.Appearance.Options.UseForeColor = true;
-            this.simpleButton2.Location = new System.Drawing.Point(362, 210);
-            this.simpleButton2.Name = "simpleButton2";
-            this.simpleButton2.Size = new System.Drawing.Size(31, 36);
-            this.simpleButton2.StyleController = this.layoutControl1;
-            this.simpleButton2.TabIndex = 9;
-            this.simpleButton2.Text = "»";
+            this.btnAddUser.Appearance.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddUser.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.btnAddUser.Appearance.Options.UseFont = true;
+            this.btnAddUser.Appearance.Options.UseForeColor = true;
+            this.btnAddUser.Location = new System.Drawing.Point(362, 210);
+            this.btnAddUser.Name = "btnAddUser";
+            this.btnAddUser.Size = new System.Drawing.Size(31, 36);
+            this.btnAddUser.StyleController = this.layoutControl1;
+            this.btnAddUser.TabIndex = 9;
+            this.btnAddUser.Text = "»";
+            this.btnAddUser.Click += new System.EventHandler(this.btnAddUser_Click);
             // 
-            // simpleButton1
+            // btnDelUser
             // 
-            this.simpleButton1.Appearance.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.simpleButton1.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.simpleButton1.Appearance.Options.UseFont = true;
-            this.simpleButton1.Appearance.Options.UseForeColor = true;
-            this.simpleButton1.Location = new System.Drawing.Point(362, 250);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(31, 36);
-            this.simpleButton1.StyleController = this.layoutControl1;
-            this.simpleButton1.TabIndex = 8;
-            this.simpleButton1.Text = "«";
+            this.btnDelUser.Appearance.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDelUser.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.btnDelUser.Appearance.Options.UseFont = true;
+            this.btnDelUser.Appearance.Options.UseForeColor = true;
+            this.btnDelUser.Location = new System.Drawing.Point(362, 250);
+            this.btnDelUser.Name = "btnDelUser";
+            this.btnDelUser.Size = new System.Drawing.Size(31, 36);
+            this.btnDelUser.StyleController = this.layoutControl1;
+            this.btnDelUser.TabIndex = 8;
+            this.btnDelUser.Text = "«";
+            this.btnDelUser.Click += new System.EventHandler(this.btnDelUser_Click);
             // 
-            // gridControl1
+            // gcChoose
             // 
-            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
-            this.gridControl1.Location = new System.Drawing.Point(397, 52);
-            this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(346, 412);
-            this.gridControl1.TabIndex = 7;
-            this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView1});
+            this.gcChoose.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            this.gcChoose.Location = new System.Drawing.Point(397, 52);
+            this.gcChoose.MainView = this.gvChoose;
+            this.gcChoose.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.gcChoose.Name = "gcChoose";
+            this.gcChoose.Size = new System.Drawing.Size(346, 412);
+            this.gcChoose.TabIndex = 7;
+            this.gcChoose.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvChoose});
             // 
-            // gridView1
+            // gvChoose
             // 
-            this.gridView1.Appearance.HeaderPanel.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridView1.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
-            this.gridView1.Appearance.HeaderPanel.Options.UseFont = true;
-            this.gridView1.Appearance.HeaderPanel.Options.UseForeColor = true;
-            this.gridView1.Appearance.HeaderPanel.Options.UseTextOptions = true;
-            this.gridView1.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridView1.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridView1.Appearance.Row.ForeColor = System.Drawing.Color.Black;
-            this.gridView1.Appearance.Row.Options.UseFont = true;
-            this.gridView1.Appearance.Row.Options.UseForeColor = true;
-            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn5,
+            this.gvChoose.Appearance.HeaderPanel.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvChoose.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
+            this.gvChoose.Appearance.HeaderPanel.Options.UseFont = true;
+            this.gvChoose.Appearance.HeaderPanel.Options.UseForeColor = true;
+            this.gvChoose.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            this.gvChoose.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gvChoose.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvChoose.Appearance.Row.ForeColor = System.Drawing.Color.Black;
+            this.gvChoose.Appearance.Row.Options.UseFont = true;
+            this.gvChoose.Appearance.Row.Options.UseForeColor = true;
+            this.gvChoose.Appearance.Row.Options.UseTextOptions = true;
+            this.gvChoose.Appearance.Row.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gvChoose.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumn6,
             this.gridColumn7,
             this.gridColumn8});
-            this.gridView1.DetailHeight = 377;
-            this.gridView1.GridControl = this.gridControl1;
-            this.gridView1.Name = "gridView1";
-            this.gridView1.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
-            this.gridView1.OptionsView.EnableAppearanceOddRow = true;
-            this.gridView1.OptionsView.ShowAutoFilterRow = true;
-            this.gridView1.OptionsView.ShowGroupPanel = false;
-            this.gridView1.OptionsView.ShowIndicator = false;
-            // 
-            // gridColumn5
-            // 
-            this.gridColumn5.Caption = " ";
-            this.gridColumn5.FieldName = "Choose";
-            this.gridColumn5.MaxWidth = 40;
-            this.gridColumn5.MinWidth = 40;
-            this.gridColumn5.Name = "gridColumn5";
-            this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 0;
-            this.gridColumn5.Width = 40;
+            this.gvChoose.DetailHeight = 377;
+            this.gvChoose.GridControl = this.gcChoose;
+            this.gvChoose.Name = "gvChoose";
+            this.gvChoose.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
+            this.gvChoose.OptionsView.EnableAppearanceOddRow = true;
+            this.gvChoose.OptionsView.ShowAutoFilterRow = true;
+            this.gvChoose.OptionsView.ShowGroupPanel = false;
+            this.gvChoose.OptionsView.ShowIndicator = false;
             // 
             // gridColumn6
             // 
@@ -194,6 +184,10 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             // 
             // gridColumn7
             // 
+            this.gridColumn7.AppearanceCell.Font = new System.Drawing.Font("DFKai-SB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridColumn7.AppearanceCell.Options.UseFont = true;
+            this.gridColumn7.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn7.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.gridColumn7.Caption = "名稱";
             this.gridColumn7.FieldName = "DisplayName";
             this.gridColumn7.MinWidth = 23;
@@ -209,21 +203,21 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.gridColumn8.MinWidth = 23;
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 3;
+            this.gridColumn8.VisibleIndex = 0;
             this.gridColumn8.Width = 186;
             // 
-            // txbDescrip
+            // txbDescribe
             // 
-            this.txbDescrip.Location = new System.Drawing.Point(449, 12);
-            this.txbDescrip.MenuManager = this.barManager1;
-            this.txbDescrip.Name = "txbDescrip";
-            this.txbDescrip.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txbDescrip.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.txbDescrip.Properties.Appearance.Options.UseFont = true;
-            this.txbDescrip.Properties.Appearance.Options.UseForeColor = true;
-            this.txbDescrip.Size = new System.Drawing.Size(294, 28);
-            this.txbDescrip.StyleController = this.layoutControl1;
-            this.txbDescrip.TabIndex = 6;
+            this.txbDescribe.Location = new System.Drawing.Point(449, 12);
+            this.txbDescribe.MenuManager = this.barManager1;
+            this.txbDescribe.Name = "txbDescribe";
+            this.txbDescribe.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbDescribe.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.txbDescribe.Properties.Appearance.Options.UseFont = true;
+            this.txbDescribe.Properties.Appearance.Options.UseForeColor = true;
+            this.txbDescribe.Size = new System.Drawing.Size(294, 28);
+            this.txbDescribe.StyleController = this.layoutControl1;
+            this.txbDescribe.TabIndex = 6;
             // 
             // barManager1
             // 
@@ -280,6 +274,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.btnEdit.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            this.btnEdit.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnEdit_ItemClick);
             // 
             // btnConfirm
             // 
@@ -299,6 +294,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.btnDel.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnDel.Name = "btnDel";
             this.btnDel.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            this.btnDel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDel_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -369,12 +365,13 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.gvData.Appearance.HeaderPanel.Options.UseForeColor = true;
             this.gvData.Appearance.HeaderPanel.Options.UseTextOptions = true;
             this.gvData.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gvData.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvData.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gvData.Appearance.Row.ForeColor = System.Drawing.Color.Black;
             this.gvData.Appearance.Row.Options.UseFont = true;
             this.gvData.Appearance.Row.Options.UseForeColor = true;
+            this.gvData.Appearance.Row.Options.UseTextOptions = true;
+            this.gvData.Appearance.Row.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gvData.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn4,
             this.gridColumn1,
             this.gridColumn2,
             this.gridColumn3});
@@ -386,17 +383,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.gvData.OptionsView.ShowAutoFilterRow = true;
             this.gvData.OptionsView.ShowGroupPanel = false;
             this.gvData.OptionsView.ShowIndicator = false;
-            // 
-            // gridColumn4
-            // 
-            this.gridColumn4.Caption = " ";
-            this.gridColumn4.FieldName = "Choose";
-            this.gridColumn4.MaxWidth = 40;
-            this.gridColumn4.MinWidth = 40;
-            this.gridColumn4.Name = "gridColumn4";
-            this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 0;
-            this.gridColumn4.Width = 40;
             // 
             // gridColumn1
             // 
@@ -410,6 +396,10 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             // 
             // gridColumn2
             // 
+            this.gridColumn2.AppearanceCell.Font = new System.Drawing.Font("DFKai-SB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridColumn2.AppearanceCell.Options.UseFont = true;
+            this.gridColumn2.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn2.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.gridColumn2.Caption = "名稱";
             this.gridColumn2.FieldName = "DisplayName";
             this.gridColumn2.MinWidth = 23;
@@ -425,7 +415,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.gridColumn3.MinWidth = 23;
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 3;
+            this.gridColumn3.VisibleIndex = 0;
             this.gridColumn3.Width = 186;
             // 
             // Root
@@ -473,7 +463,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             // 
             // layoutControlItem4
             // 
-            this.layoutControlItem4.Control = this.gridControl1;
+            this.layoutControlItem4.Control = this.gcChoose;
             this.layoutControlItem4.Location = new System.Drawing.Point(385, 32);
             this.layoutControlItem4.MaxSize = new System.Drawing.Size(350, 0);
             this.layoutControlItem4.MinSize = new System.Drawing.Size(350, 24);
@@ -486,7 +476,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             // 
             // layoutControlItem6
             // 
-            this.layoutControlItem6.Control = this.simpleButton2;
+            this.layoutControlItem6.Control = this.btnAddUser;
             this.layoutControlItem6.Location = new System.Drawing.Point(350, 198);
             this.layoutControlItem6.MaxSize = new System.Drawing.Size(35, 40);
             this.layoutControlItem6.MinSize = new System.Drawing.Size(35, 40);
@@ -498,7 +488,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             // 
             // layoutControlItem5
             // 
-            this.layoutControlItem5.Control = this.simpleButton1;
+            this.layoutControlItem5.Control = this.btnDelUser;
             this.layoutControlItem5.Location = new System.Drawing.Point(350, 238);
             this.layoutControlItem5.Name = "layoutControlItem5";
             this.layoutControlItem5.Size = new System.Drawing.Size(35, 40);
@@ -527,7 +517,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.layoutControlItem3.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem3.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem3.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem3.Control = this.txbDescrip;
+            this.layoutControlItem3.Control = this.txbDescribe;
             this.layoutControlItem3.Location = new System.Drawing.Point(385, 0);
             this.layoutControlItem3.Name = "layoutControlItem3";
             this.layoutControlItem3.Size = new System.Drawing.Size(350, 32);
@@ -552,9 +542,9 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.Load += new System.EventHandler(this.f401_GroupManage_Info_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbDescrip.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gcChoose)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvChoose)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbDescribe.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).EndInit();
@@ -594,19 +584,17 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
         private DevExpress.XtraBars.BarButtonItem btnDel;
         private DevExpress.XtraEditors.TextEdit txbName;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
-        private DevExpress.XtraEditors.TextEdit txbDescrip;
+        private DevExpress.XtraEditors.TextEdit txbDescribe;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
-        private DevExpress.XtraGrid.GridControl gridControl1;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
+        private DevExpress.XtraGrid.GridControl gcChoose;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvChoose;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
-        private DevExpress.XtraEditors.SimpleButton simpleButton1;
+        private DevExpress.XtraEditors.SimpleButton btnDelUser;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
-        private DevExpress.XtraEditors.SimpleButton simpleButton2;
+        private DevExpress.XtraEditors.SimpleButton btnAddUser;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;

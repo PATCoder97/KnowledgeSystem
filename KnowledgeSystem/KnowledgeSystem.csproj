@@ -76,6 +76,7 @@
   <ItemGroup>
     <Compile Include="Configs\AppCopyRight.cs" />
     <Compile Include="Configs\CustomOverlayPainter.cs" />
+    <Compile Include="Configs\GridControlHelper.cs" />
     <Compile Include="Configs\RefreshHelper.cs" />
     <Compile Include="Configs\RegistryHelper.cs" />
     <Compile Include="Configs\SingleConnection.cs" />

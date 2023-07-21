@@ -1,9 +1,13 @@
 ﻿using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Views.Grid;
+using KnowledgeSystem.Configs;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity.Migrations;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,28 +21,182 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
         {
             InitializeComponent();
             LockControl(false);
+
+            btnAddUser.Enabled = false;
+            btnDelUser.Enabled = false;
+        }
+
+        public f401_GroupManage_Info(int idGroup_)
+        {
+            InitializeComponent();
+            LockControl();
+
+            idGroup = idGroup_;
+        }
+
+        #region parameters
+
+        int idGroup = 0;
+
+        List<User> lsUserData = new List<User>();
+        List<User> lsUserChoose = new List<User>();
+
+        BindingSource sourceData = new BindingSource();
+        BindingSource sourceChoose = new BindingSource();
+
+        #endregion
+
+        #region methods
+
+        private void LoadData()
+        {
+            using (var db = new DBDocumentManagementSystemEntities())
+            {
+                lsUserData = db.Users.ToList();
+
+                var lsGroupUsers = db.GroupUsers.Where(r => r.IdGroup == idGroup).ToList();
+                foreach (var item in lsGroupUsers)
+                {
+                    var userHave = lsUserData.FirstOrDefault(r => r.Id == item.IdUser);
+                    if (userHave != null)
+                    {
+                        lsUserChoose.Add(userHave);
+                        lsUserData.Remove(userHave);
+                    }
+                }
+
+                sourceData.DataSource = lsUserData;
+                sourceChoose.DataSource = lsUserChoose;
+            }
         }
 
         private void LockControl(bool isFormView = true)
         {
             txbName.ReadOnly = isFormView;
-            txbDescrip.ReadOnly = isFormView;
+            txbDescribe.ReadOnly = isFormView;
+
+            btnAddUser.Enabled = !isFormView;
+            btnDelUser.Enabled = !isFormView;
 
             btnEdit.Visibility = isFormView ? DevExpress.XtraBars.BarItemVisibility.Always : DevExpress.XtraBars.BarItemVisibility.Never;
             btnDel.Visibility = isFormView ? DevExpress.XtraBars.BarItemVisibility.Always : DevExpress.XtraBars.BarItemVisibility.Never;
             btnConfirm.Visibility = isFormView ? DevExpress.XtraBars.BarItemVisibility.Never : DevExpress.XtraBars.BarItemVisibility.Always;
 
-            //   Text = isFormView ? "Thông tin ngân hàng" : "Thêm/sửa ngân hàng";
+            Text = isFormView ? "群組信息" : "新增、修改群組";
         }
+
+        #endregion
 
         private void f401_GroupManage_Info_Load(object sender, EventArgs e)
         {
+            gvData.ReadOnlyGridView();
+            gvChoose.ReadOnlyGridView();
 
+            gcData.DataSource = sourceData;
+            gcChoose.DataSource = sourceChoose;
+
+            LoadData();
+
+            if (idGroup != 0)
+            {
+                using (var db = new DBDocumentManagementSystemEntities())
+                {
+                    var groups = db.Groups.Where(r => r.Id == idGroup).FirstOrDefault();
+
+                    txbName.EditValue = groups.DisplayName;
+                    txbDescribe.EditValue = groups.Describe;
+                }
+            }
         }
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            string name = txbName.Text.Trim();
+            string moTa = txbDescribe.Text.Trim();
 
+            if (string.IsNullOrEmpty(name))
+            {
+                XtraMessageBox.Show("請填寫所有信息", TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            var groups = new Group()
+            {
+                DisplayName = name,
+                Describe = moTa
+            };
+
+            using (var db = new DBDocumentManagementSystemEntities())
+            {
+                if (idGroup == 0)
+                {
+                    db.Groups.Add(groups);
+                }
+                else
+                {
+                    groups.Id = idGroup;
+                    db.Groups.AddOrUpdate(groups);
+
+                    db.GroupUsers.RemoveRange(db.GroupUsers.Where(r => r.IdGroup == idGroup));
+                }
+
+                var newGroupUserList = lsUserChoose.Select(item => new GroupUser
+                {
+                    IdGroup = groups.Id,
+                    IdUser = item.Id
+                });
+
+                db.GroupUsers.AddRange(newGroupUserList);
+
+                db.SaveChanges();
+            }
+
+            Close();
+        }
+
+        private void btnAddUser_Click(object sender, EventArgs e)
+        {
+            int forcusRow = gvData.FocusedRowHandle;
+            if (forcusRow < 0) return;
+
+            User dataRow = gvData.GetRow(forcusRow) as User;
+
+            lsUserChoose.Add(dataRow);
+            lsUserData.Remove(dataRow);
+
+            gcData.RefreshDataSource();
+            gcChoose.RefreshDataSource();
+        }
+
+        private void btnDelUser_Click(object sender, EventArgs e)
+        {
+            int forcusRow = gvChoose.FocusedRowHandle;
+            if (forcusRow < 0) return;
+
+            User dataRow = gvChoose.GetRow(forcusRow) as User;
+
+            lsUserChoose.Remove(dataRow);
+            lsUserData.Add(dataRow);
+
+            gcData.RefreshDataSource();
+            gcChoose.RefreshDataSource();
+        }
+
+        private void btnEdit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            LockControl(false);
+        }
+
+        private void btnDel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            using (var db = new DBDocumentManagementSystemEntities())
+            {
+                db.Groups.RemoveRange(db.Groups.Where(r => r.Id == idGroup));
+                db.GroupUsers.RemoveRange(db.GroupUsers.Where(r => r.IdGroup == idGroup));
+                db.SaveChanges();
+            }
+
+            Close();
         }
     }
 }

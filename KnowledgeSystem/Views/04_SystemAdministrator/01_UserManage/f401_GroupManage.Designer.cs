@@ -80,6 +80,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.gcData.TabIndex = 4;
             this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvData});
+            this.gcData.DoubleClick += new System.EventHandler(this.gcData_DoubleClick);
             // 
             // gvData
             // 
@@ -206,6 +207,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.btnRefresh.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            this.btnRefresh.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnRefresh_ItemClick);
             // 
             // barDockControlTop
             // 
