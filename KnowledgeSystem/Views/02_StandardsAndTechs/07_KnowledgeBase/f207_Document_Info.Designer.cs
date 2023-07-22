@@ -29,6 +29,16 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f207_Document_Info));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.btnAddPermission = new DevExpress.XtraEditors.SimpleButton();
@@ -51,10 +61,14 @@
             this.bandedGridColumn7 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn8 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn9 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn10 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.btnDelPermission = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.gcFiles = new DevExpress.XtraGrid.GridControl();
             this.gvFiles = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.btnDelFile = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.txbKeyword = new DevExpress.XtraEditors.MemoEdit();
             this.txbNameTW = new DevExpress.XtraEditors.TextEdit();
             this.txbId = new DevExpress.XtraEditors.TextEdit();
@@ -79,7 +93,6 @@
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnEdit = new DevExpress.XtraBars.BarButtonItem();
@@ -89,6 +102,13 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.layoutControlGroup5 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.gcEditHistory = new DevExpress.XtraGrid.GridControl();
+            this.gvEditHistory = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txbNameVN.Properties)).BeginInit();
@@ -96,8 +116,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.bgvSecurity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rgvGruopOrUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1View)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnDelPermission)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcFiles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvFiles)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnDelFile)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbKeyword.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbNameTW.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbId.Properties)).BeginInit();
@@ -122,13 +144,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gcEditHistory)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvEditHistory)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
             // 
             this.layoutControl1.AllowCustomization = false;
+            this.layoutControl1.Controls.Add(this.gcEditHistory);
             this.layoutControl1.Controls.Add(this.btnAddPermission);
             this.layoutControl1.Controls.Add(this.txbNameVN);
             this.layoutControl1.Controls.Add(this.lbCountFile);
@@ -159,8 +185,9 @@
             this.btnAddPermission.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
             this.btnAddPermission.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnAddPermission.ImageOptions.SvgImage")));
             this.btnAddPermission.Location = new System.Drawing.Point(24, 51);
+            this.btnAddPermission.MaximumSize = new System.Drawing.Size(104, 36);
             this.btnAddPermission.Name = "btnAddPermission";
-            this.btnAddPermission.Size = new System.Drawing.Size(116, 36);
+            this.btnAddPermission.Size = new System.Drawing.Size(104, 36);
             this.btnAddPermission.StyleController = this.layoutControl1;
             this.btnAddPermission.TabIndex = 17;
             this.btnAddPermission.Text = "新增";
@@ -184,7 +211,7 @@
             this.lbCountFile.ForeColor = System.Drawing.Color.Black;
             this.lbCountFile.Location = new System.Drawing.Point(132, 51);
             this.lbCountFile.Name = "lbCountFile";
-            this.lbCountFile.Size = new System.Drawing.Size(300, 37);
+            this.lbCountFile.Size = new System.Drawing.Size(813, 37);
             this.lbCountFile.TabIndex = 14;
             this.lbCountFile.Text = "共零附件";
             this.lbCountFile.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -207,12 +234,13 @@
             // 
             // gcSecurity
             // 
-            this.gcSecurity.Location = new System.Drawing.Point(24, 91);
+            this.gcSecurity.Location = new System.Drawing.Point(24, 92);
             this.gcSecurity.MainView = this.bgvSecurity;
             this.gcSecurity.Name = "gcSecurity";
             this.gcSecurity.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.rgvGruopOrUser});
-            this.gcSecurity.Size = new System.Drawing.Size(921, 318);
+            this.rgvGruopOrUser,
+            this.btnDelPermission});
+            this.gcSecurity.Size = new System.Drawing.Size(921, 317);
             this.gcSecurity.TabIndex = 10;
             this.gcSecurity.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.bgvSecurity});
@@ -250,7 +278,8 @@
             this.bandedGridColumn6,
             this.bandedGridColumn7,
             this.bandedGridColumn8,
-            this.bandedGridColumn9});
+            this.bandedGridColumn9,
+            this.bandedGridColumn10});
             this.bgvSecurity.GridControl = this.gcSecurity;
             this.bgvSecurity.Name = "bgvSecurity";
             this.bgvSecurity.OptionsCustomization.AllowFilter = false;
@@ -266,7 +295,7 @@
             this.gridBand1.Columns.Add(this.bandedGridColumn1);
             this.gridBand1.Name = "gridBand1";
             this.gridBand1.VisibleIndex = 0;
-            this.gridBand1.Width = 86;
+            this.gridBand1.Width = 97;
             // 
             // bandedGridColumn1
             // 
@@ -279,7 +308,7 @@
             this.bandedGridColumn1.FieldName = "IdGroupOrUser";
             this.bandedGridColumn1.Name = "bandedGridColumn1";
             this.bandedGridColumn1.Visible = true;
-            this.bandedGridColumn1.Width = 86;
+            this.bandedGridColumn1.Width = 97;
             // 
             // rgvGruopOrUser
             // 
@@ -367,9 +396,10 @@
             this.gridBand3.Columns.Add(this.bandedGridColumn7);
             this.gridBand3.Columns.Add(this.bandedGridColumn8);
             this.gridBand3.Columns.Add(this.bandedGridColumn9);
+            this.gridBand3.Columns.Add(this.bandedGridColumn10);
             this.gridBand3.Name = "gridBand3";
             this.gridBand3.VisibleIndex = 2;
-            this.gridBand3.Width = 246;
+            this.gridBand3.Width = 279;
             // 
             // bandedGridColumn7
             // 
@@ -395,11 +425,34 @@
             this.bandedGridColumn9.Visible = true;
             this.bandedGridColumn9.Width = 84;
             // 
+            // bandedGridColumn10
+            // 
+            this.bandedGridColumn10.Caption = " ";
+            this.bandedGridColumn10.ColumnEdit = this.btnDelPermission;
+            this.bandedGridColumn10.MinWidth = 30;
+            this.bandedGridColumn10.Name = "bandedGridColumn10";
+            this.bandedGridColumn10.OptionsColumn.AllowSize = false;
+            this.bandedGridColumn10.Visible = true;
+            this.bandedGridColumn10.Width = 33;
+            // 
+            // btnDelPermission
+            // 
+            this.btnDelPermission.AutoHeight = false;
+            editorButtonImageOptions1.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("editorButtonImageOptions1.SvgImage")));
+            editorButtonImageOptions1.SvgImageSize = new System.Drawing.Size(24, 24);
+            this.btnDelPermission.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            this.btnDelPermission.Name = "btnDelPermission";
+            this.btnDelPermission.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            this.btnDelPermission.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnDelPermission_ButtonClick);
+            // 
             // gcFiles
             // 
             this.gcFiles.Location = new System.Drawing.Point(24, 92);
             this.gcFiles.MainView = this.gvFiles;
             this.gcFiles.Name = "gcFiles";
+            this.gcFiles.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.btnDelFile});
             this.gcFiles.Size = new System.Drawing.Size(921, 317);
             this.gcFiles.TabIndex = 9;
             this.gcFiles.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -419,7 +472,8 @@
             this.gvFiles.Appearance.Row.Options.UseForeColor = true;
             this.gvFiles.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumn1,
-            this.gridColumn2});
+            this.gridColumn2,
+            this.gridColumn3});
             this.gvFiles.GridControl = this.gcFiles;
             this.gvFiles.Name = "gvFiles";
             this.gvFiles.OptionsView.EnableAppearanceOddRow = true;
@@ -440,6 +494,28 @@
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 1;
+            // 
+            // gridColumn3
+            // 
+            this.gridColumn3.Caption = " ";
+            this.gridColumn3.ColumnEdit = this.btnDelFile;
+            this.gridColumn3.MaxWidth = 30;
+            this.gridColumn3.MinWidth = 30;
+            this.gridColumn3.Name = "gridColumn3";
+            this.gridColumn3.Visible = true;
+            this.gridColumn3.VisibleIndex = 2;
+            this.gridColumn3.Width = 30;
+            // 
+            // btnDelFile
+            // 
+            this.btnDelFile.AutoHeight = false;
+            editorButtonImageOptions2.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("editorButtonImageOptions2.SvgImage")));
+            editorButtonImageOptions2.SvgImageSize = new System.Drawing.Size(16, 16);
+            this.btnDelFile.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            this.btnDelFile.Name = "btnDelFile";
+            this.btnDelFile.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            this.btnDelFile.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnDelFile_ButtonClick);
             // 
             // txbKeyword
             // 
@@ -568,12 +644,13 @@
             this.tabbedControlGroup1.AppearanceTabPage.HeaderActive.Options.UseForeColor = true;
             this.tabbedControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.tabbedControlGroup1.Name = "tabbedControlGroup1";
-            this.tabbedControlGroup1.SelectedTabPage = this.layoutControlGroup3;
+            this.tabbedControlGroup1.SelectedTabPage = this.layoutControlGroup5;
             this.tabbedControlGroup1.Size = new System.Drawing.Size(949, 414);
             this.tabbedControlGroup1.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlGroup1,
             this.layoutControlGroup2,
-            this.layoutControlGroup3});
+            this.layoutControlGroup3,
+            this.layoutControlGroup5});
             this.tabbedControlGroup1.Text = "信息";
             // 
             // layoutControlGroup3
@@ -594,10 +671,10 @@
             this.layoutControlItem7.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem7.AppearanceItemCaption.Options.UseForeColor = true;
             this.layoutControlItem7.Control = this.gcSecurity;
-            this.layoutControlItem7.Location = new System.Drawing.Point(0, 40);
+            this.layoutControlItem7.Location = new System.Drawing.Point(0, 41);
             this.layoutControlItem7.Name = "layoutControlItem7";
             this.layoutControlItem7.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 3);
-            this.layoutControlItem7.Size = new System.Drawing.Size(925, 323);
+            this.layoutControlItem7.Size = new System.Drawing.Size(925, 322);
             this.layoutControlItem7.Text = "文件密等";
             this.layoutControlItem7.TextLocation = DevExpress.Utils.Locations.Top;
             this.layoutControlItem7.TextSize = new System.Drawing.Size(0, 0);
@@ -607,17 +684,20 @@
             // 
             this.layoutControlItem12.Control = this.btnAddPermission;
             this.layoutControlItem12.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem12.MaxSize = new System.Drawing.Size(108, 41);
+            this.layoutControlItem12.MinSize = new System.Drawing.Size(108, 41);
             this.layoutControlItem12.Name = "layoutControlItem12";
-            this.layoutControlItem12.Size = new System.Drawing.Size(120, 40);
+            this.layoutControlItem12.Size = new System.Drawing.Size(108, 41);
+            this.layoutControlItem12.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem12.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem12.TextVisible = false;
             // 
             // emptySpaceItem3
             // 
             this.emptySpaceItem3.AllowHotTrack = false;
-            this.emptySpaceItem3.Location = new System.Drawing.Point(120, 0);
+            this.emptySpaceItem3.Location = new System.Drawing.Point(108, 0);
             this.emptySpaceItem3.Name = "emptySpaceItem3";
-            this.emptySpaceItem3.Size = new System.Drawing.Size(805, 40);
+            this.emptySpaceItem3.Size = new System.Drawing.Size(817, 41);
             this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
             // 
             // layoutControlGroup1
@@ -737,8 +817,7 @@
             this.layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem6,
             this.layoutControlItem8,
-            this.layoutControlItem11,
-            this.emptySpaceItem2});
+            this.layoutControlItem11});
             this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup2.Name = "layoutControlGroup2";
             this.layoutControlGroup2.Size = new System.Drawing.Size(925, 363);
@@ -777,17 +856,9 @@
             this.layoutControlItem11.Control = this.lbCountFile;
             this.layoutControlItem11.Location = new System.Drawing.Point(108, 0);
             this.layoutControlItem11.Name = "layoutControlItem11";
-            this.layoutControlItem11.Size = new System.Drawing.Size(304, 41);
+            this.layoutControlItem11.Size = new System.Drawing.Size(817, 41);
             this.layoutControlItem11.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem11.TextVisible = false;
-            // 
-            // emptySpaceItem2
-            // 
-            this.emptySpaceItem2.AllowHotTrack = false;
-            this.emptySpaceItem2.Location = new System.Drawing.Point(412, 0);
-            this.emptySpaceItem2.Name = "emptySpaceItem2";
-            this.emptySpaceItem2.Size = new System.Drawing.Size(513, 41);
-            this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
             // 
             // barManager1
             // 
@@ -901,6 +972,78 @@
             this.barDockControlRight.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.barDockControlRight.Size = new System.Drawing.Size(0, 434);
             // 
+            // layoutControlGroup5
+            // 
+            this.layoutControlGroup5.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem9});
+            this.layoutControlGroup5.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlGroup5.Name = "layoutControlGroup5";
+            this.layoutControlGroup5.Size = new System.Drawing.Size(925, 363);
+            this.layoutControlGroup5.Text = "變更歷史";
+            // 
+            // gcEditHistory
+            // 
+            this.gcEditHistory.Location = new System.Drawing.Point(24, 51);
+            this.gcEditHistory.MainView = this.gvEditHistory;
+            this.gcEditHistory.MenuManager = this.barManager1;
+            this.gcEditHistory.Name = "gcEditHistory";
+            this.gcEditHistory.Size = new System.Drawing.Size(921, 359);
+            this.gcEditHistory.TabIndex = 18;
+            this.gcEditHistory.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvEditHistory});
+            // 
+            // gvEditHistory
+            // 
+            this.gvEditHistory.Appearance.HeaderPanel.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvEditHistory.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
+            this.gvEditHistory.Appearance.HeaderPanel.Options.UseFont = true;
+            this.gvEditHistory.Appearance.HeaderPanel.Options.UseForeColor = true;
+            this.gvEditHistory.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            this.gvEditHistory.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gvEditHistory.Appearance.Row.Font = new System.Drawing.Font("DFKai-SB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvEditHistory.Appearance.Row.ForeColor = System.Drawing.Color.Black;
+            this.gvEditHistory.Appearance.Row.Options.UseFont = true;
+            this.gvEditHistory.Appearance.Row.Options.UseForeColor = true;
+            this.gvEditHistory.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn4,
+            this.gridColumn5,
+            this.gridColumn6});
+            this.gvEditHistory.GridControl = this.gcEditHistory;
+            this.gvEditHistory.Name = "gvEditHistory";
+            this.gvEditHistory.OptionsView.EnableAppearanceOddRow = true;
+            this.gvEditHistory.OptionsView.ShowAutoFilterRow = true;
+            this.gvEditHistory.OptionsView.ShowGroupPanel = false;
+            // 
+            // layoutControlItem9
+            // 
+            this.layoutControlItem9.Control = this.gcEditHistory;
+            this.layoutControlItem9.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem9.Name = "layoutControlItem9";
+            this.layoutControlItem9.Size = new System.Drawing.Size(925, 363);
+            this.layoutControlItem9.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem9.TextVisible = false;
+            // 
+            // gridColumn4
+            // 
+            this.gridColumn4.Caption = "修改時間";
+            this.gridColumn4.Name = "gridColumn4";
+            this.gridColumn4.Visible = true;
+            this.gridColumn4.VisibleIndex = 0;
+            // 
+            // gridColumn5
+            // 
+            this.gridColumn5.Caption = "修改地方";
+            this.gridColumn5.Name = "gridColumn5";
+            this.gridColumn5.Visible = true;
+            this.gridColumn5.VisibleIndex = 1;
+            // 
+            // gridColumn6
+            // 
+            this.gridColumn6.Caption = "修改者";
+            this.gridColumn6.Name = "gridColumn6";
+            this.gridColumn6.Visible = true;
+            this.gridColumn6.VisibleIndex = 2;
+            // 
             // f207_Document_Info
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
@@ -926,8 +1069,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.bgvSecurity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rgvGruopOrUser)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1View)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnDelPermission)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcFiles)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvFiles)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnDelFile)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbKeyword.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbNameTW.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbId.Properties)).EndInit();
@@ -952,8 +1097,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gcEditHistory)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvEditHistory)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -990,7 +1138,6 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem11;
-        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup3;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridView bgvSecurity;
@@ -1003,9 +1150,6 @@
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn7;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn8;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn9;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand2;
-        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand3;
         private DevExpress.XtraBars.BarManager barManager1;
         private DevExpress.XtraBars.Bar bar2;
         private DevExpress.XtraBars.BarButtonItem btnEdit;
@@ -1020,5 +1164,19 @@
         private DevExpress.XtraEditors.SimpleButton btnAddPermission;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem12;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem3;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnDelFile;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn10;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnDelPermission;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand2;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand3;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup5;
+        private DevExpress.XtraGrid.GridControl gcEditHistory;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvEditHistory;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem9;
     }
 }

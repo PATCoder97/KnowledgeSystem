@@ -1,7 +1,9 @@
 ﻿using DevExpress.ClipboardSource.SpreadsheetML;
+using DevExpress.Utils.Win.Hook;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraPrinting.Native.WebClientUIControl;
 using KnowledgeSystem.Configs;
 using System;
 using System.Collections.Generic;
@@ -128,6 +130,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             helper = new RefreshHelper(bgvSecurity, "Id");
 
+            gvEditHistory.ReadOnlyGridView();
+            //gvFiles.ReadOnlyGridView();
+            //bgvSecurity.ReadOnlyGridView();
+
             gcFiles.DataSource = sourceAttachments;
             gcSecurity.DataSource = sourceSecuritys;
 
@@ -137,23 +143,21 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 lsUsers = db.Users.ToList();
                 lsGroups = db.Groups.ToList();
 
-                var query = lsUsers.Select(r => new Securityinfo { IdGroupOrUser = r.Id, DisplayName = r.DisplayName }).ToList();
-                var query1 = lsGroups.Select(r => new Securityinfo { IdGroupOrUser = r.Id.ToString(), DisplayName = r.DisplayName }).ToList();
+                var lsIdUsers = lsUsers.Select(r => new Securityinfo { IdGroupOrUser = r.Id, DisplayName = r.DisplayName }).ToList();
+                var lsIdGroup = lsGroups.Select(r => new Securityinfo { IdGroupOrUser = r.Id.ToString(), DisplayName = r.DisplayName }).ToList();
 
-                var query2 = new List<Securityinfo>();
-                query2.AddRange(query1);
-                query2.AddRange(query);
+                var lsIdGroupOrUser = new List<Securityinfo>();
+                lsIdGroupOrUser.AddRange(lsIdGroup);
+                lsIdGroupOrUser.AddRange(lsIdUsers);
 
-                rgvGruopOrUser.DataSource = query2;
+                rgvGruopOrUser.DataSource = lsIdGroupOrUser;
                 rgvGruopOrUser.ValueMember = "IdGroupOrUser";
                 rgvGruopOrUser.DisplayMember = "DisplayName";
 
                 // Add two columns in the dropdown:
-                // A column to display the values of the ProductID field;
                 GridColumn col1 = rgvGruopOrUser.PopupView.Columns.AddField("IdGroupOrUser");
                 col1.VisibleIndex = 0;
                 col1.Caption = "代號";
-                // A column to display the values of the ProductName field.
                 GridColumn col2 = rgvGruopOrUser.PopupView.Columns.AddField("DisplayName");
                 col2.VisibleIndex = 1;
                 col2.Caption = "名稱";
@@ -304,7 +308,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             {
                 db.KnowledgeBases.AddOrUpdate(knowledge);
 
-                foreach (Attachments item in lsAttachments)
+                db.KnowledgeAttachments.RemoveRange(db.KnowledgeAttachments.Where(r => r.IdKnowledgeBase == idDocument));
+                var lsFileOld = lsAttachments.Where(r => string.IsNullOrEmpty(r.FullPath)).ToList();
+                var lsFileNew = lsAttachments.Where(r => !string.IsNullOrEmpty(r.FullPath)).ToList();
+                foreach (Attachments item in lsFileOld)
                 {
                     KnowledgeAttachment attachment = new KnowledgeAttachment()
                     {
@@ -313,6 +320,19 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                         FileName = item.FileName
                     };
                     db.KnowledgeAttachments.AddOrUpdate(attachment);
+                }
+
+                foreach (Attachments item in lsFileNew)
+                {
+                    KnowledgeAttachment attachment = new KnowledgeAttachment()
+                    {
+                        IdKnowledgeBase = IdDocument,
+                        EncryptionName = item.EncryptionName,
+                        FileName = item.FileName
+                    };
+                    db.KnowledgeAttachments.AddOrUpdate(attachment);
+
+                    // Them file vao o chung tai day
                 }
 
                 db.KnowledgeSecurities.RemoveRange(db.KnowledgeSecurities.Where(r => r.IdKnowledgeBase == idDocument));
@@ -371,6 +391,35 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
             sourceSecuritys.DataSource = lsSecurityInfos;
             bgvSecurity.RefreshData();
+        }
+
+        private void btnDelFile_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            Attachments attachment = gvFiles.GetRow(gvFiles.FocusedRowHandle) as Attachments;
+
+            DialogResult dialog = XtraMessageBox.Show($"Bạn muốn xoá phụ kiện: {attachment.FileName}?", TempDatas.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialog == DialogResult.No) return;
+
+            lsAttachments.Remove(attachment);
+            lbCountFile.Text = $"共{lsAttachments.Count}個附件";
+
+            var index = gvFiles.FocusedRowHandle;
+            gvFiles.RefreshData();
+            gvFiles.FocusedRowHandle = index;
+        }
+
+        private void btnDelPermission_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            Securityinfo permission = bgvSecurity.GetRow(bgvSecurity.FocusedRowHandle) as Securityinfo;
+
+            DialogResult dialog = XtraMessageBox.Show($"Bạn muốn xoá phụ kiện: {permission.DisplayName}?", TempDatas.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialog == DialogResult.No) return;
+
+            lsSecurityInfos.Remove(permission);
+
+            //var index = gvFiles.FocusedRowHandle;
+            bgvSecurity.RefreshData();
+            //gvFiles.FocusedRowHandle = index;
         }
     }
 }
