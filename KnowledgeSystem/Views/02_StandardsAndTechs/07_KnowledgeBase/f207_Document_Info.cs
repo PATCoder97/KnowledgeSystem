@@ -55,10 +55,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         List<KnowledgeType> lsKnowledgeTypes = new List<KnowledgeType>();
         List<User> lsUsers = new List<User>();
         List<Group> lsGroups = new List<Group>();
-        List<KnowledgeSecurity> lsKnowledgeSecuritys = new List<KnowledgeSecurity>();
         List<Securityinfo> lsSecurityInfos = new List<Securityinfo>();
-
         List<Attachments> lsAttachments = new List<Attachments>();
+        List<Securityinfo> lsIdGroupOrUser = new List<Securityinfo>();
 
         private class Attachments
         {
@@ -71,7 +70,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             public string IdGroupOrUser { get; set; }
             public string DisplayName { get; set; }
-            public bool IsUser { get; set; }
         }
 
         #endregion
@@ -80,41 +78,45 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private string GenerateEncryptionName()
         {
-            var userLogin = lsUsers.Where(r => r.Id == UserId).FirstOrDefault();
+            var userLogin = lsUsers.FirstOrDefault(u => u.Id == UserId);
+            if (userLogin == null)
+            {
+                throw new Exception($"User with Id {UserId} not found.");
+            }
 
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             var random = new Random();
-            var randomString = new string(Enumerable.Repeat(chars, 8).Select(s => s[random.Next(s.Length)]).ToArray());
+            var randomString = new string(Enumerable.Repeat(chars, 8)
+                .Select(s => s[random.Next(s.Length)])
+                .ToArray());
 
-            return $"{userLogin.Id}-{userLogin.IdDepartment.Substring(0, 3)}-{DateTime.Now.ToString("MMddhhmmss")}-{randomString}";
+            return $"{userLogin.Id}-{userLogin.IdDepartment.Substring(0, 3)}-{DateTime.Now:MMddhhmmss}-{randomString}";
         }
 
-        private string GenerateIdDocument(int indexId = 1, string startIdstr_ = "")
+        private string GenerateIdDocument(int indexId = 1, string startIdStr = "")
         {
-            int startNum = indexId;
-            var IsExistsId = false;
-            var userLogin = lsUsers.Where(r => r.Id == UserId).FirstOrDefault();
-            string startIdStr = startIdstr_;
+            var userLogin = lsUsers.FirstOrDefault(u => u.Id == UserId);
+            if (userLogin == null)
+            {
+                throw new Exception($"User with Id {UserId} not found.");
+            }
 
-            if (startIdStr == "")
+            if (string.IsNullOrEmpty(startIdStr))
+            {
                 startIdStr = $"{userLogin.IdDepartment.Substring(0, 3)}-{DateTime.Now.ToString("yyMMddHHmm")}-";
+            }
 
-            string tempId = $"{startIdStr}{startNum:d2}";
+            string tempId = $"{startIdStr}{indexId:d2}";
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                var lsKnowledgeBases = db.KnowledgeBases.ToList();
-                IsExistsId = lsKnowledgeBases.Any(r => r.Id == tempId);
+                bool isExistsId = db.KnowledgeBases.Any(kb => kb.Id == tempId);
+                if (!isExistsId)
+                {
+                    return tempId;
+                }
             }
 
-            if (!IsExistsId)
-            {
-                return tempId;
-            }
-            else
-            {
-                startNum++;
-                return GenerateIdDocument(startNum, startIdStr);
-            }
+            return GenerateIdDocument(indexId + 1, startIdStr);
         }
 
         public static string convertToUnSign3(string s)
@@ -128,138 +130,123 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void f207_DocumentInfo_Load(object sender, EventArgs e)
         {
+            // Initialize RefreshHelper
             helper = new RefreshHelper(bgvSecurity, "Id");
 
+            // Set GridView to read-only and assign data sources to grid controls
             gvEditHistory.ReadOnlyGridView();
-            //gvFiles.ReadOnlyGridView();
-            //bgvSecurity.ReadOnlyGridView();
-
+            gvFiles.ReadOnlyGridView();
             gcFiles.DataSource = sourceAttachments;
             gcSecurity.DataSource = sourceSecuritys;
 
+            // Query the database and assign data sources to ComboBoxes and GridView
             using (var db = new DBDocumentManagementSystemEntities())
             {
+                // Initialize lists
                 lsKnowledgeTypes = db.KnowledgeTypes.ToList();
                 lsUsers = db.Users.ToList();
                 lsGroups = db.Groups.ToList();
 
+                // Create lists of Securityinfo objects from lsUsers and lsGroups
                 var lsIdUsers = lsUsers.Select(r => new Securityinfo { IdGroupOrUser = r.Id, DisplayName = r.DisplayName }).ToList();
                 var lsIdGroup = lsGroups.Select(r => new Securityinfo { IdGroupOrUser = r.Id.ToString(), DisplayName = r.DisplayName }).ToList();
+                lsIdGroupOrUser = lsIdGroup.Concat(lsIdUsers).ToList();
 
-                var lsIdGroupOrUser = new List<Securityinfo>();
-                lsIdGroupOrUser.AddRange(lsIdGroup);
-                lsIdGroupOrUser.AddRange(lsIdUsers);
-
+                // Assign data source and columns to rgvGruopOrUser
                 rgvGruopOrUser.DataSource = lsIdGroupOrUser;
                 rgvGruopOrUser.ValueMember = "IdGroupOrUser";
                 rgvGruopOrUser.DisplayMember = "DisplayName";
-
-                // Add two columns in the dropdown:
-                GridColumn col1 = rgvGruopOrUser.PopupView.Columns.AddField("IdGroupOrUser");
-                col1.VisibleIndex = 0;
-                col1.Caption = "代號";
-                GridColumn col2 = rgvGruopOrUser.PopupView.Columns.AddField("DisplayName");
-                col2.VisibleIndex = 1;
-                col2.Caption = "名稱";
-            }
-
-            // Gán data cho các combobox
-            cbbType.Properties.DataSource = lsKnowledgeTypes;
-            cbbType.Properties.ValueMember = "Id";
-            cbbType.Properties.DisplayMember = "DisplayName";
-
-            cbbUserRequest.Properties.DataSource = lsUsers;
-            cbbUserRequest.Properties.ValueMember = "Id";
-            cbbUserRequest.Properties.DisplayMember = "DisplayName";
-
-            cbbUserUpload.Properties.DataSource = lsUsers;
-            cbbUserUpload.Properties.ValueMember = "Id";
-            cbbUserUpload.Properties.DisplayMember = "DisplayName";
-
-            // Cài thông tin mặc định
-            UserId = "VNW0014732";
-
-            cbbType.EditValue = idType;
-            cbbUserRequest.EditValue = UserId;
-            cbbUserUpload.EditValue = UserId;
-
-            var userLogin = lsUsers.Where(r => r.Id == UserId).FirstOrDefault();
-            txbId.Text = "XXX-XXXXXXXXXX-XX";
-
-            lbCountFile.Text = "";
-
-            if (idDocument != string.Empty)
-            {
-                using (var db = new DBDocumentManagementSystemEntities())
+                rgvGruopOrUser.PopupView.Columns.AddRange(new[]
                 {
-                    var dataView = db.KnowledgeBases.Where(r => r.Id == idDocument).FirstOrDefault();
+                    new GridColumn { FieldName = "IdGroupOrUser", VisibleIndex = 0, Caption = "代號" },
+                    new GridColumn { FieldName = "DisplayName", VisibleIndex = 1, Caption = "名稱" }
+                });
 
+                // Assign data sources to ComboBoxes
+                cbbType.Properties.DataSource = lsKnowledgeTypes;
+                cbbType.Properties.ValueMember = "Id";
+                cbbType.Properties.DisplayMember = "DisplayName";
+                cbbUserRequest.Properties.DataSource = lsUsers;
+                cbbUserRequest.Properties.ValueMember = "Id";
+                cbbUserRequest.Properties.DisplayMember = "DisplayName";
+                cbbUserUpload.Properties.DataSource = lsUsers;
+                cbbUserUpload.Properties.ValueMember = "Id";
+                cbbUserUpload.Properties.DisplayMember = "DisplayName";
+
+                // Set default values
+                UserId = "VNW0014732";
+                cbbType.EditValue = idType;
+                cbbUserRequest.EditValue = UserId;
+                cbbUserUpload.EditValue = UserId;
+                var userLogin = lsUsers.FirstOrDefault(r => r.Id == UserId);
+                txbId.Text = "XXX-XXXXXXXXXX-XX";
+                lbCountFile.Text = "";
+
+                // If idDocument is not empty, retrieve data from the database and assign to form elements
+                if (!string.IsNullOrEmpty(idDocument))
+                {
+                    var dataView = db.KnowledgeBases.FirstOrDefault(r => r.Id == idDocument);
                     txbId.Text = dataView.Id;
                     cbbType.EditValue = dataView.IdTypes;
                     cbbUserRequest.EditValue = dataView.UserRequest;
                     cbbUserUpload.EditValue = dataView.UserUpload;
-
-                    string[] displayName = dataView.DisplayName.Split(new string[] { "\r\n" }, StringSplitOptions.None);
+                    var displayName = dataView.DisplayName.Split(new[] { "\r\n" }, StringSplitOptions.None);
                     txbNameTW.Text = displayName[0];
-                    if (displayName.Count() > 1)
+                    if (displayName.Length > 1)
                     {
                         txbNameVN.Text = displayName[1];
                     }
                     txbKeyword.Text = dataView.Keyword;
 
-                    var lsAttachmentsDB = db.KnowledgeAttachments.Where(r => r.IdKnowledgeBase == idDocument).ToList();
-                    foreach (var item in lsAttachmentsDB)
-                    {
-                        lsAttachments.Add(new Attachments() { FileName = item.FileName, EncryptionName = item.EncryptionName });
-                    }
+                    // Retrieve attachments from database and assign to sourceAttachments
+                    lsAttachments.AddRange(db.KnowledgeAttachments.Where(r => r.IdKnowledgeBase == idDocument)
+                        .Select(item => new Attachments { FileName = item.FileName, EncryptionName = item.EncryptionName }));
 
                     sourceAttachments.DataSource = lsAttachments;
                     lbCountFile.Text = $"共{lsAttachments.Count}個附件";
 
-                    // KnowledgeSecurity
+                    // Retrieve knowledge security information from database and assign to sourceSecuritys
                     helper.SaveViewInfo();
-                    lsKnowledgeSecuritys = db.KnowledgeSecurities.Where(r => r.IdKnowledgeBase == idDocument).ToList();
-
-                    lsSecurityInfos = (from data in lsKnowledgeSecuritys
-                                       select new Securityinfo
-                                       {
-                                           IdKnowledgeBase = data.IdKnowledgeBase,
-                                           IdGroup = data.IdGroup,
-                                           IdUser = data.IdUser,
-                                           ChangePermision = data.ChangePermision,
-                                           ReadInfo = data.ReadInfo,
-                                           UpdateInfo = data.UpdateInfo,
-                                           DeleteInfo = data.DeleteInfo,
-                                           SearchInfo = data.SearchInfo,
-                                           ReadFile = data.ReadFile,
-                                           PrintFile = data.PrintFile,
-                                           SaveFile = data.SaveFile,
-                                           IsUser = !string.IsNullOrEmpty(data.IdUser),
-                                           IdGroupOrUser = !string.IsNullOrEmpty(data.IdUser) ? data.IdUser : data.IdGroup.ToString(),
-                                       }).ToList();
+                    var lsKnowledgeSecuritys = db.KnowledgeSecurities.Where(r => r.IdKnowledgeBase == idDocument).ToList();
+                    lsSecurityInfos = lsKnowledgeSecuritys.Select(data => new Securityinfo
+                    {
+                        IdKnowledgeBase = data.IdKnowledgeBase,
+                        IdGroup = data.IdGroup,
+                        IdUser = data.IdUser,
+                        ChangePermision = data.ChangePermision,
+                        ReadInfo = data.ReadInfo,
+                        UpdateInfo = data.UpdateInfo,
+                        DeleteInfo = data.DeleteInfo,
+                        SearchInfo = data.SearchInfo,
+                        ReadFile = data.ReadFile,
+                        PrintFile = data.PrintFile,
+                        SaveFile = data.SaveFile,
+                        IdGroupOrUser = !string.IsNullOrEmpty(data.IdUser) ? data.IdUser : data.IdGroup.ToString()
+                    }).ToList();
+                    sourceSecuritys.DataSource = lsSecurityInfos;
+                    bgvSecurity.BestFitColumns();
+                    helper.LoadViewInfo();
                 }
             }
-
-            sourceSecuritys.DataSource = lsSecurityInfos;
-            bgvSecurity.BestFitColumns();
-            helper.LoadViewInfo();
         }
 
         private void btnAddFile_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFiles = new OpenFileDialog();
-            openFiles.Filter = "PDF|*.pdf";
-            openFiles.Multiselect = true;
-            if (openFiles.ShowDialog() != DialogResult.OK) return;
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "PDF files (*.pdf)|*.pdf";
+            openFileDialog.Multiselect = true;
+            if (openFileDialog.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
 
-            //lsAttachments = new List<Attachments>();
-            foreach (var item in openFiles.FileNames)
+            foreach (string fileName in openFileDialog.FileNames)
             {
                 string encryptionName = GenerateEncryptionName();
                 Attachments attachment = new Attachments()
                 {
-                    FullPath = item,
-                    FileName = Path.GetFileName(item),
+                    FullPath = fileName,
+                    FileName = Path.GetFileName(fileName),
                     EncryptionName = encryptionName
                 };
                 lsAttachments.Add(attachment);
@@ -283,19 +270,17 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            // Clear the selected row in the security grid view
             bgvSecurity.FocusedRowHandle = -1;
 
-            string events = "新增成功";
-            string IdDocument = GenerateIdDocument();
-            if (idDocument != string.Empty)
-            {
-                IdDocument = idDocument;
-                events = "修改成功";
-            }
+            // Determine whether to add or update the document and set the appropriate message
+            string events = idDocument == string.Empty ? "新增成功" : "修改成功";
+            string idDocumentToUpdate = string.IsNullOrEmpty(idDocument) ? GenerateIdDocument() : idDocument;
 
+            // Create a new KnowledgeBase object with the relevant data
             KnowledgeBase knowledge = new KnowledgeBase()
             {
-                Id = IdDocument,
+                Id = idDocumentToUpdate,
                 DisplayName = $"{convertToUnSign3(txbNameTW.Text)}\r\n{txbNameVN.Text}",
                 UserRequest = cbbUserRequest.EditValue.ToString(),
                 IdTypes = (int)cbbType.EditValue,
@@ -304,55 +289,45 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 UploadDate = DateTime.Now
             };
 
+            // Use a new instance of the database context to add or update the knowledge base object and its attachments and security information
             using (var db = new DBDocumentManagementSystemEntities())
             {
+                // Add or update the knowledge base object
                 db.KnowledgeBases.AddOrUpdate(knowledge);
 
-                db.KnowledgeAttachments.RemoveRange(db.KnowledgeAttachments.Where(r => r.IdKnowledgeBase == idDocument));
-                var lsFileOld = lsAttachments.Where(r => string.IsNullOrEmpty(r.FullPath)).ToList();
-                var lsFileNew = lsAttachments.Where(r => !string.IsNullOrEmpty(r.FullPath)).ToList();
-                foreach (Attachments item in lsFileOld)
+                // If updating an existing document, remove its existing attachments
+                if (!string.IsNullOrEmpty(idDocument))
                 {
-                    KnowledgeAttachment attachment = new KnowledgeAttachment()
-                    {
-                        IdKnowledgeBase = IdDocument,
-                        EncryptionName = item.EncryptionName,
-                        FileName = item.FileName
-                    };
-                    db.KnowledgeAttachments.AddOrUpdate(attachment);
+                    db.KnowledgeAttachments.RemoveRange(db.KnowledgeAttachments.Where(r => r.IdKnowledgeBase == idDocument));
                 }
 
-                foreach (Attachments item in lsFileNew)
+                // Add the new attachments
+                foreach (Attachments item in lsAttachments)
                 {
                     KnowledgeAttachment attachment = new KnowledgeAttachment()
                     {
-                        IdKnowledgeBase = IdDocument,
+                        IdKnowledgeBase = idDocumentToUpdate,
                         EncryptionName = item.EncryptionName,
                         FileName = item.FileName
                     };
                     db.KnowledgeAttachments.AddOrUpdate(attachment);
 
-                    // Them file vao o chung tai day
+                    if (!string.IsNullOrEmpty(item.FullPath))
+                    {
+                        // Them file vao 
+                    }
                 }
 
+                // Remove the existing security information and add the new information
                 db.KnowledgeSecurities.RemoveRange(db.KnowledgeSecurities.Where(r => r.IdKnowledgeBase == idDocument));
                 foreach (var item in lsSecurityInfos)
                 {
-                    if (item.IdGroupOrUser.StartsWith("VNW"))
-                    {
-                        item.IdUser = item.IdGroupOrUser;
-                    }
-                    else
-                    {
-                        item.IdGroup = Convert.ToInt16(item.IdGroupOrUser);
-                    }
-
                     KnowledgeSecurity dataAdd = new KnowledgeSecurity
                     {
                         Id = item.Id,
-                        IdKnowledgeBase = IdDocument,
-                        IdGroup = item.IdGroup,
-                        IdUser = item.IdUser,
+                        IdKnowledgeBase = idDocumentToUpdate,
+                        IdGroup = item.IdGroupOrUser.StartsWith("VNW") ? null : (short?)Convert.ToInt16(item.IdGroupOrUser),
+                        IdUser = item.IdGroupOrUser.StartsWith("VNW") ? item.IdGroupOrUser : null,
                         ChangePermision = item.ChangePermision,
                         ReadInfo = item.ReadInfo,
                         UpdateInfo = item.UpdateInfo,
@@ -362,15 +337,15 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                         PrintFile = item.PrintFile,
                         SaveFile = item.SaveFile
                     };
-
                     db.KnowledgeSecurities.Add(dataAdd);
                 }
 
-
+                // Save the changes to the database
                 db.SaveChanges();
             }
 
-            XtraMessageBox.Show($"{events}!\r\n文件編號:{IdDocument}", TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            // Show a message box with the appropriate message and close the form
+            XtraMessageBox.Show($"{events}!\r\n文件編號:{idDocumentToUpdate}", TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
             Close();
         }
 
@@ -397,7 +372,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             Attachments attachment = gvFiles.GetRow(gvFiles.FocusedRowHandle) as Attachments;
 
-            DialogResult dialog = XtraMessageBox.Show($"Bạn muốn xoá phụ kiện: {attachment.FileName}?", TempDatas.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult dialog = XtraMessageBox.Show($"您想要刪除附件：{attachment.FileName}?", TempDatas.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialog == DialogResult.No) return;
 
             lsAttachments.Remove(attachment);
@@ -412,7 +387,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             Securityinfo permission = bgvSecurity.GetRow(bgvSecurity.FocusedRowHandle) as Securityinfo;
 
-            DialogResult dialog = XtraMessageBox.Show($"Bạn muốn xoá phụ kiện: {permission.DisplayName}?", TempDatas.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            permission.DisplayName = lsIdGroupOrUser.FirstOrDefault(r => r.IdGroupOrUser == permission.IdGroupOrUser).DisplayName;
+
+            DialogResult dialog = XtraMessageBox.Show($"您想要刪除權限：{permission.DisplayName}?", TempDatas.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialog == DialogResult.No) return;
 
             lsSecurityInfos.Remove(permission);
