@@ -31,16 +31,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             InitializeComponent();
         }
 
-        public f207_Document_Info(int idType_)
+        public f207_Document_Info(string idDocument_)
         {
             InitializeComponent();
-            idType = idType_;
-        }
-
-        public f207_Document_Info(string idDocumet_)
-        {
-            InitializeComponent();
-            idDocument = idDocumet_;
+            idDocument = idDocument_;
         }
 
         #region parameters
@@ -49,8 +43,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         BindingSource sourceSecuritys = new BindingSource();
 
         string idDocument = string.Empty;
-        string UserId = string.Empty;
-        int idType = 0;
+        string userId = string.Empty;
 
         List<KnowledgeType> lsKnowledgeTypes = new List<KnowledgeType>();
         List<User> lsUsers = new List<User>();
@@ -78,10 +71,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private string GenerateEncryptionName()
         {
-            var userLogin = lsUsers.FirstOrDefault(u => u.Id == UserId);
+            var userLogin = lsUsers.FirstOrDefault(u => u.Id == userId);
             if (userLogin == null)
             {
-                throw new Exception($"User with Id {UserId} not found.");
+                throw new Exception($"User with Id {userId} not found.");
             }
 
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -95,10 +88,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private string GenerateIdDocument(int indexId = 1, string startIdStr = "")
         {
-            var userLogin = lsUsers.FirstOrDefault(u => u.Id == UserId);
+            var userLogin = lsUsers.FirstOrDefault(u => u.Id == userId);
             if (userLogin == null)
             {
-                throw new Exception($"User with Id {UserId} not found.");
+                throw new Exception($"User with Id {userId} not found.");
             }
 
             if (string.IsNullOrEmpty(startIdStr))
@@ -174,11 +167,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 cbbUserUpload.Properties.DisplayMember = "DisplayName";
 
                 // Set default values
-                UserId = "VNW0014732";
-                cbbType.EditValue = idType;
-                cbbUserRequest.EditValue = UserId;
-                cbbUserUpload.EditValue = UserId;
-                var userLogin = lsUsers.FirstOrDefault(r => r.Id == UserId);
+                userId = "VNW0014732";
+                cbbType.EditValue = 1;
+                cbbUserRequest.EditValue = userId;
+                cbbUserUpload.EditValue = userId;
+                var userLogin = lsUsers.FirstOrDefault(r => r.Id == userId);
                 txbId.Text = "XXX-XXXXXXXXXX-XX";
                 lbCountFile.Text = "";
 
@@ -371,32 +364,26 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         private void btnDelFile_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             Attachments attachment = gvFiles.GetRow(gvFiles.FocusedRowHandle) as Attachments;
-
-            DialogResult dialog = XtraMessageBox.Show($"您想要刪除附件：{attachment.FileName}?", TempDatas.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (dialog == DialogResult.No) return;
+            DialogResult dialogResult = XtraMessageBox.Show($"您想要刪除附件：{attachment.FileName}?", TempDatas.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialogResult == DialogResult.No) return;
 
             lsAttachments.Remove(attachment);
             lbCountFile.Text = $"共{lsAttachments.Count}個附件";
 
-            var index = gvFiles.FocusedRowHandle;
+            int rowIndex = gvFiles.FocusedRowHandle;
             gvFiles.RefreshData();
-            gvFiles.FocusedRowHandle = index;
+            gvFiles.FocusedRowHandle = rowIndex;
         }
 
         private void btnDelPermission_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             Securityinfo permission = bgvSecurity.GetRow(bgvSecurity.FocusedRowHandle) as Securityinfo;
+            permission.DisplayName = lsIdGroupOrUser.FirstOrDefault(r => r.IdGroupOrUser == permission.IdGroupOrUser)?.DisplayName;
 
-            permission.DisplayName = lsIdGroupOrUser.FirstOrDefault(r => r.IdGroupOrUser == permission.IdGroupOrUser).DisplayName;
-
-            DialogResult dialog = XtraMessageBox.Show($"您想要刪除權限：{permission.DisplayName}?", TempDatas.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (dialog == DialogResult.No) return;
-
+            DialogResult dialogResult = XtraMessageBox.Show($"您想要刪除權限：{permission.DisplayName}?", TempDatas.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialogResult == DialogResult.No) return;
             lsSecurityInfos.Remove(permission);
-
-            //var index = gvFiles.FocusedRowHandle;
             bgvSecurity.RefreshData();
-            //gvFiles.FocusedRowHandle = index;
         }
     }
 }

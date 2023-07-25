@@ -133,6 +133,12 @@
     <Compile Include="Views\00_Generals\f00_Main.Designer.cs">
       <DependentUpon>f00_Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\00_Generals\f00_RibbonFrame.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\00_Generals\f00_RibbonFrame.Designer.cs">
+      <DependentUpon>f00_RibbonFrame.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_Document_Info.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,12 +150,6 @@
     </Compile>
     <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_fSearch.Designer.cs">
       <DependentUpon>f207_fSearch.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_Main.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_Main.Designer.cs">
-      <DependentUpon>f207_Main.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\04_SystemAdministrator\01_UserManage\f401_GroupManage.cs">
       <SubType>Form</SubType>
@@ -198,14 +198,14 @@
     <EmbeddedResource Include="Views\00_Generals\f00_Main.resx">
       <DependentUpon>f00_Main.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\00_Generals\f00_RibbonFrame.resx">
+      <DependentUpon>f00_RibbonFrame.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_Document_Info.resx">
       <DependentUpon>f207_Document_Info.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_fSearch.resx">
       <DependentUpon>f207_fSearch.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_Main.resx">
-      <DependentUpon>f207_Main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\01_UserManage\f401_GroupManage.resx">
       <DependentUpon>f401_GroupManage.cs</DependentUpon>
@@ -249,6 +249,24 @@
     <None Include="Resources\Login3.png" />
     <None Include="Resources\cancel_16px.png" />
     <None Include="Resources\pen_16px.png" />
+    <Content Include="Images\Actions_AddCircled.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Actions_CheckCircled.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Actions_DeleteCircled.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Actions_Edit.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Actions_Refresh.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Actions_Reload.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="SQLModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SQLModel.Context.cs</LastGenOutput>
