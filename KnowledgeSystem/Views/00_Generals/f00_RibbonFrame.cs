@@ -88,7 +88,7 @@ namespace KnowledgeSystem.Views._00_Generals
 
                 barButtonItem2.Caption = item.DisplayName;
                 barButtonItem2.Id = Convert.ToInt16(item.Prioritize);
-                barButtonItem2.ImageOptions.SvgImage = DevExpress.Utils.Svg.SvgImage.FromFile(@"Images\Actions_AddCircled.svg");
+                barButtonItem2.ImageOptions.SvgImage = DevExpress.Utils.Svg.SvgImage.FromFile($@"Images\{item.Images}");
                 barButtonItem2.Name = $"name_{item.ControlName}";
                 barButtonItem2.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
                 barButtonItem2.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.ButtonItemAuto_ItemClick);

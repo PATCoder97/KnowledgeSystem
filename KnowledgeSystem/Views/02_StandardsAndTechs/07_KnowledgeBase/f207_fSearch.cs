@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 {
@@ -110,6 +111,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void f207_fSearch_Load(object sender, EventArgs e)
         {
+            txbKeywords.Properties.NullValuePrompt = "請輸入您要查找的信息";
+
             cbbMode.Properties.Items.AddRange(new string[] { SIMPLE_MODE, ADVANCED_MODE });
             cbbMode.SelectedIndex = 0;
 

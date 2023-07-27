@@ -10,5 +10,6 @@ namespace KnowledgeSystem
         public string ControlName { get; set; }
         public Nullable<int> Prioritize { get; set; }
         public Nullable<bool> Status { get; set; }
+        public string Images { get; set; }
     }
 }

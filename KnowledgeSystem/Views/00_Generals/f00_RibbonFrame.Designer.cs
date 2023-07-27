@@ -75,11 +75,11 @@
             // 
             // MdiManager
             // 
-            this.MdiManager.AppearancePage.Header.Font = new System.Drawing.Font("DFKai-SB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MdiManager.AppearancePage.Header.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MdiManager.AppearancePage.Header.ForeColor = System.Drawing.Color.Black;
             this.MdiManager.AppearancePage.Header.Options.UseFont = true;
             this.MdiManager.AppearancePage.Header.Options.UseForeColor = true;
-            this.MdiManager.AppearancePage.HeaderActive.Font = new System.Drawing.Font("DFKai-SB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MdiManager.AppearancePage.HeaderActive.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MdiManager.AppearancePage.HeaderActive.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.MdiManager.AppearancePage.HeaderActive.Options.UseFont = true;
             this.MdiManager.AppearancePage.HeaderActive.Options.UseForeColor = true;

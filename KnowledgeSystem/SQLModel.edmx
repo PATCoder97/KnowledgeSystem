@@ -34,6 +34,7 @@
           <Property Name="ControlName" Type="varchar" MaxLength="32" />
           <Property Name="Prioritize" Type="int" />
           <Property Name="Status" Type="bit" />
+          <Property Name="Images" Type="varchar" MaxLength="32" />
         </EntityType>
         <EntityType Name="Groups">
           <Key>
@@ -254,6 +255,7 @@
           <Property Name="ControlName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
           <Property Name="Prioritize" Type="Int32" />
           <Property Name="Status" Type="Boolean" />
+          <Property Name="Images" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -373,6 +375,7 @@
           <EntitySetMapping Name="Functions">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.Function">
               <MappingFragment StoreEntitySet="Functions">
+                <ScalarProperty Name="Images" ColumnName="Images" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Prioritize" ColumnName="Prioritize" />
                 <ScalarProperty Name="ControlName" ColumnName="ControlName" />
