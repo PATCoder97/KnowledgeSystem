@@ -109,6 +109,12 @@
       <DependentUpon>SQLModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs" />
+    <Compile Include="Views\00_Generals\f00_FluentFrame.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\00_Generals\f00_FluentFrame.Designer.cs">
+      <DependentUpon>f00_FluentFrame.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\00_Generals\f00_CustomSplashScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -151,6 +157,12 @@
     <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_fSearch.Designer.cs">
       <DependentUpon>f207_fSearch.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_Search.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_Search.Designer.cs">
+      <DependentUpon>uc207_Search.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\04_SystemAdministrator\01_UserManage\f401_GroupManage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -189,6 +201,9 @@
     <EmbeddedResource Include="Views\00_Generals\f00_CustomSplashScreen.resx">
       <DependentUpon>f00_CustomSplashScreen.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\00_Generals\f00_FluentFrame.resx">
+      <DependentUpon>f00_FluentFrame.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\00_Generals\f00_Frame.resx">
       <DependentUpon>f00_Frame.cs</DependentUpon>
     </EmbeddedResource>
@@ -206,6 +221,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_fSearch.resx">
       <DependentUpon>f207_fSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_Search.resx">
+      <DependentUpon>uc207_Search.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\01_UserManage\f401_GroupManage.resx">
       <DependentUpon>f401_GroupManage.cs</DependentUpon>
