@@ -36,7 +36,6 @@ namespace KnowledgeSystem.Views._00_Generals
         Font fontTW = new Font("DFKai-SB", 14.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
 
         int groupId = 0;
-        List<AppForm> lsAppForms = new List<AppForm>();
         List<Function> lsFunctions = new List<Function>();
 
         #endregion
@@ -79,9 +78,6 @@ namespace KnowledgeSystem.Views._00_Generals
             // Lấy danh sách các AppForm từ cơ sở dữ liệu và điền vào TreeView control
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                // Lấy danh sách các AppForm có GroupId bằng gruopId, sắp xếp theo IndexRow
-                lsAppForms = db.AppForms.Select(r => r).Where(r => r.GroupId == groupId).OrderBy(r => r.IndexRow).ToList();
-
                 lsFunctions = db.Functions.Where(r => r.IdParent == groupId).OrderBy(r => r.Prioritize).ToList();
             }
 
@@ -89,7 +85,7 @@ namespace KnowledgeSystem.Views._00_Generals
             {
                 AccordionControlElement accordion = new AccordionControlElement();
 
-                accordion.ImageOptions.SvgImage = DevExpress.Utils.Svg.SvgImage.FromFile($@"Images\{item.Images}");
+                accordion.ImageOptions.SvgImage = item.Images != null ? DevExpress.Utils.Svg.SvgImage.FromFile($@"Images\{item.Images}") : null;
                 accordion.Name = $"name_{item.ControlName}";
                 accordion.Style = ElementStyle.Item;
                 accordion.Text = item.DisplayName;

@@ -52,7 +52,7 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void btnKnowHow_ItemClick(object sender, TileItemEventArgs e)
         {
-            f00_Frame formShow = new f00_Frame(1);
+            f00_FluentFrame formShow = new f00_FluentFrame(1);
             formShow.Text = e.Item.Text + AppCopyRight.CopyRightString();
             Hide();
             formShow.ShowDialog();
@@ -70,7 +70,7 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void btnUserManage_ItemClick(object sender, TileItemEventArgs e)
         {
-            f00_Frame formShow = new f00_Frame(7);
+            f00_FluentFrame formShow = new f00_FluentFrame(7);
             formShow.Text = e.Item.Text + AppCopyRight.CopyRightString();
             Hide();
             formShow.ShowDialog();
