@@ -65,7 +65,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void LoadData()
         {
-            bool IsSimple = cbbMode.Text == SIMPLE_MODE;
+            bool IsSimple = checkUseKeyword.CheckState == CheckState.Unchecked;
 
             helper.SaveViewInfo();
             using (var db = new DBDocumentManagementSystemEntities())
@@ -117,9 +117,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         private void uc207_Search_Load(object sender, EventArgs e)
         {
             txbKeywords.Properties.NullValuePrompt = "請輸入您要查找的信息";
-
-            cbbMode.Properties.Items.AddRange(new string[] { SIMPLE_MODE, ADVANCED_MODE });
-            cbbMode.SelectedIndex = 0;
 
             gcData.DataSource = sourceKnowledge;
 

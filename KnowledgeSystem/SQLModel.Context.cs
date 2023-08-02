@@ -25,9 +25,7 @@ namespace KnowledgeSystem
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<AppForm> AppForms { get; set; }
         public virtual DbSet<FunctionRole> FunctionRoles { get; set; }
-        public virtual DbSet<Group> Groups { get; set; }
         public virtual DbSet<GroupUser> GroupUsers { get; set; }
         public virtual DbSet<KnowledgeAttachment> KnowledgeAttachments { get; set; }
         public virtual DbSet<KnowledgeBase> KnowledgeBases { get; set; }
@@ -36,5 +34,6 @@ namespace KnowledgeSystem
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Function> Functions { get; set; }
+        public virtual DbSet<Group> Groups { get; set; }
     }
 }

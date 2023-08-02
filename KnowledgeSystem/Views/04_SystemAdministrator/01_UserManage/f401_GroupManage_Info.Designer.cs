@@ -34,14 +34,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f401_GroupManage_Info));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.btnAddUser = new DevExpress.XtraEditors.SimpleButton();
-            this.btnDelUser = new DevExpress.XtraEditors.SimpleButton();
-            this.gcChoose = new DevExpress.XtraGrid.GridControl();
-            this.gvChoose = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.txbDescribe = new DevExpress.XtraEditors.TextEdit();
+            this.txbPrioritize = new DevExpress.XtraEditors.TextEdit();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnEdit = new DevExpress.XtraBars.BarButtonItem();
@@ -51,6 +44,14 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.btnAddUser = new DevExpress.XtraEditors.SimpleButton();
+            this.btnDelUser = new DevExpress.XtraEditors.SimpleButton();
+            this.gcChoose = new DevExpress.XtraGrid.GridControl();
+            this.gvChoose = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.txbDescribe = new DevExpress.XtraEditors.TextEdit();
             this.txbName = new DevExpress.XtraEditors.TextEdit();
             this.gcData = new DevExpress.XtraGrid.GridControl();
             this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -66,12 +67,14 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txbPrioritize.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcChoose)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvChoose)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDescribe.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
@@ -84,11 +87,13 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
             // 
             this.layoutControl1.AllowCustomization = false;
+            this.layoutControl1.Controls.Add(this.txbPrioritize);
             this.layoutControl1.Controls.Add(this.btnAddUser);
             this.layoutControl1.Controls.Add(this.btnDelUser);
             this.layoutControl1.Controls.Add(this.gcChoose);
@@ -105,119 +110,27 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
-            // btnAddUser
+            // txbPrioritize
             // 
-            this.btnAddUser.Appearance.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddUser.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.btnAddUser.Appearance.Options.UseFont = true;
-            this.btnAddUser.Appearance.Options.UseForeColor = true;
-            this.btnAddUser.Location = new System.Drawing.Point(362, 210);
-            this.btnAddUser.Name = "btnAddUser";
-            this.btnAddUser.Size = new System.Drawing.Size(31, 36);
-            this.btnAddUser.StyleController = this.layoutControl1;
-            this.btnAddUser.TabIndex = 9;
-            this.btnAddUser.Text = "»";
-            this.btnAddUser.Click += new System.EventHandler(this.btnAddUser_Click);
-            // 
-            // btnDelUser
-            // 
-            this.btnDelUser.Appearance.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelUser.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.btnDelUser.Appearance.Options.UseFont = true;
-            this.btnDelUser.Appearance.Options.UseForeColor = true;
-            this.btnDelUser.Location = new System.Drawing.Point(362, 250);
-            this.btnDelUser.Name = "btnDelUser";
-            this.btnDelUser.Size = new System.Drawing.Size(31, 36);
-            this.btnDelUser.StyleController = this.layoutControl1;
-            this.btnDelUser.TabIndex = 8;
-            this.btnDelUser.Text = "«";
-            this.btnDelUser.Click += new System.EventHandler(this.btnDelUser_Click);
-            // 
-            // gcChoose
-            // 
-            this.gcChoose.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
-            this.gcChoose.Location = new System.Drawing.Point(397, 52);
-            this.gcChoose.MainView = this.gvChoose;
-            this.gcChoose.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.gcChoose.Name = "gcChoose";
-            this.gcChoose.Size = new System.Drawing.Size(346, 412);
-            this.gcChoose.TabIndex = 7;
-            this.gcChoose.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gvChoose});
-            // 
-            // gvChoose
-            // 
-            this.gvChoose.Appearance.HeaderPanel.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gvChoose.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
-            this.gvChoose.Appearance.HeaderPanel.Options.UseFont = true;
-            this.gvChoose.Appearance.HeaderPanel.Options.UseForeColor = true;
-            this.gvChoose.Appearance.HeaderPanel.Options.UseTextOptions = true;
-            this.gvChoose.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gvChoose.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gvChoose.Appearance.Row.ForeColor = System.Drawing.Color.Black;
-            this.gvChoose.Appearance.Row.Options.UseFont = true;
-            this.gvChoose.Appearance.Row.Options.UseForeColor = true;
-            this.gvChoose.Appearance.Row.Options.UseTextOptions = true;
-            this.gvChoose.Appearance.Row.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gvChoose.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn6,
-            this.gridColumn7,
-            this.gridColumn8});
-            this.gvChoose.DetailHeight = 377;
-            this.gvChoose.GridControl = this.gcChoose;
-            this.gvChoose.Name = "gvChoose";
-            this.gvChoose.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
-            this.gvChoose.OptionsView.EnableAppearanceOddRow = true;
-            this.gvChoose.OptionsView.ShowAutoFilterRow = true;
-            this.gvChoose.OptionsView.ShowGroupPanel = false;
-            this.gvChoose.OptionsView.ShowIndicator = false;
-            // 
-            // gridColumn6
-            // 
-            this.gridColumn6.Caption = "人員代號";
-            this.gridColumn6.FieldName = "Id";
-            this.gridColumn6.MinWidth = 23;
-            this.gridColumn6.Name = "gridColumn6";
-            this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 1;
-            this.gridColumn6.Width = 182;
-            // 
-            // gridColumn7
-            // 
-            this.gridColumn7.AppearanceCell.Font = new System.Drawing.Font("DFKai-SB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridColumn7.AppearanceCell.Options.UseFont = true;
-            this.gridColumn7.AppearanceCell.Options.UseTextOptions = true;
-            this.gridColumn7.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
-            this.gridColumn7.Caption = "名稱";
-            this.gridColumn7.FieldName = "DisplayName";
-            this.gridColumn7.MinWidth = 23;
-            this.gridColumn7.Name = "gridColumn7";
-            this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 2;
-            this.gridColumn7.Width = 182;
-            // 
-            // gridColumn8
-            // 
-            this.gridColumn8.Caption = "部門代號";
-            this.gridColumn8.FieldName = "IdDepartment";
-            this.gridColumn8.MinWidth = 23;
-            this.gridColumn8.Name = "gridColumn8";
-            this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 0;
-            this.gridColumn8.Width = 186;
-            // 
-            // txbDescribe
-            // 
-            this.txbDescribe.Location = new System.Drawing.Point(449, 12);
-            this.txbDescribe.MenuManager = this.barManager1;
-            this.txbDescribe.Name = "txbDescribe";
-            this.txbDescribe.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txbDescribe.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.txbDescribe.Properties.Appearance.Options.UseFont = true;
-            this.txbDescribe.Properties.Appearance.Options.UseForeColor = true;
-            this.txbDescribe.Size = new System.Drawing.Size(294, 28);
-            this.txbDescribe.StyleController = this.layoutControl1;
-            this.txbDescribe.TabIndex = 6;
+            this.txbPrioritize.EditValue = "0";
+            this.txbPrioritize.Location = new System.Drawing.Point(308, 12);
+            this.txbPrioritize.MenuManager = this.barManager1;
+            this.txbPrioritize.Name = "txbPrioritize";
+            this.txbPrioritize.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbPrioritize.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.txbPrioritize.Properties.Appearance.Options.UseFont = true;
+            this.txbPrioritize.Properties.Appearance.Options.UseForeColor = true;
+            this.txbPrioritize.Properties.DisplayFormat.FormatString = "N0";
+            this.txbPrioritize.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.txbPrioritize.Properties.EditFormat.FormatString = "N0";
+            this.txbPrioritize.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.txbPrioritize.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
+            this.txbPrioritize.Properties.MaskSettings.Set("mask", "N0");
+            this.txbPrioritize.Properties.UseMaskAsDisplayFormat = true;
+            this.txbPrioritize.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.txbPrioritize.Size = new System.Drawing.Size(50, 28);
+            this.txbPrioritize.StyleController = this.layoutControl1;
+            this.txbPrioritize.TabIndex = 10;
             // 
             // barManager1
             // 
@@ -332,16 +245,130 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.barDockControlRight.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.barDockControlRight.Size = new System.Drawing.Size(0, 476);
             // 
+            // btnAddUser
+            // 
+            this.btnAddUser.Appearance.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddUser.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.btnAddUser.Appearance.Options.UseFont = true;
+            this.btnAddUser.Appearance.Options.UseForeColor = true;
+            this.btnAddUser.Location = new System.Drawing.Point(362, 196);
+            this.btnAddUser.Name = "btnAddUser";
+            this.btnAddUser.Size = new System.Drawing.Size(31, 36);
+            this.btnAddUser.StyleController = this.layoutControl1;
+            this.btnAddUser.TabIndex = 9;
+            this.btnAddUser.Text = "»";
+            this.btnAddUser.Click += new System.EventHandler(this.btnAddUser_Click);
+            // 
+            // btnDelUser
+            // 
+            this.btnDelUser.Appearance.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDelUser.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.btnDelUser.Appearance.Options.UseFont = true;
+            this.btnDelUser.Appearance.Options.UseForeColor = true;
+            this.btnDelUser.Location = new System.Drawing.Point(362, 236);
+            this.btnDelUser.Name = "btnDelUser";
+            this.btnDelUser.Size = new System.Drawing.Size(31, 36);
+            this.btnDelUser.StyleController = this.layoutControl1;
+            this.btnDelUser.TabIndex = 8;
+            this.btnDelUser.Text = "«";
+            this.btnDelUser.Click += new System.EventHandler(this.btnDelUser_Click);
+            // 
+            // gcChoose
+            // 
+            this.gcChoose.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            this.gcChoose.Location = new System.Drawing.Point(397, 52);
+            this.gcChoose.MainView = this.gvChoose;
+            this.gcChoose.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.gcChoose.Name = "gcChoose";
+            this.gcChoose.Size = new System.Drawing.Size(346, 412);
+            this.gcChoose.TabIndex = 7;
+            this.gcChoose.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvChoose});
+            // 
+            // gvChoose
+            // 
+            this.gvChoose.Appearance.HeaderPanel.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvChoose.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
+            this.gvChoose.Appearance.HeaderPanel.Options.UseFont = true;
+            this.gvChoose.Appearance.HeaderPanel.Options.UseForeColor = true;
+            this.gvChoose.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            this.gvChoose.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gvChoose.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvChoose.Appearance.Row.ForeColor = System.Drawing.Color.Black;
+            this.gvChoose.Appearance.Row.Options.UseFont = true;
+            this.gvChoose.Appearance.Row.Options.UseForeColor = true;
+            this.gvChoose.Appearance.Row.Options.UseTextOptions = true;
+            this.gvChoose.Appearance.Row.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gvChoose.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn6,
+            this.gridColumn7,
+            this.gridColumn8});
+            this.gvChoose.DetailHeight = 377;
+            this.gvChoose.GridControl = this.gcChoose;
+            this.gvChoose.Name = "gvChoose";
+            this.gvChoose.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
+            this.gvChoose.OptionsView.EnableAppearanceOddRow = true;
+            this.gvChoose.OptionsView.ShowAutoFilterRow = true;
+            this.gvChoose.OptionsView.ShowGroupPanel = false;
+            this.gvChoose.OptionsView.ShowIndicator = false;
+            // 
+            // gridColumn6
+            // 
+            this.gridColumn6.Caption = "人員代號";
+            this.gridColumn6.FieldName = "Id";
+            this.gridColumn6.MinWidth = 23;
+            this.gridColumn6.Name = "gridColumn6";
+            this.gridColumn6.Visible = true;
+            this.gridColumn6.VisibleIndex = 1;
+            this.gridColumn6.Width = 182;
+            // 
+            // gridColumn7
+            // 
+            this.gridColumn7.AppearanceCell.Font = new System.Drawing.Font("DFKai-SB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridColumn7.AppearanceCell.Options.UseFont = true;
+            this.gridColumn7.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn7.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            this.gridColumn7.Caption = "名稱";
+            this.gridColumn7.FieldName = "DisplayName";
+            this.gridColumn7.MinWidth = 23;
+            this.gridColumn7.Name = "gridColumn7";
+            this.gridColumn7.Visible = true;
+            this.gridColumn7.VisibleIndex = 2;
+            this.gridColumn7.Width = 182;
+            // 
+            // gridColumn8
+            // 
+            this.gridColumn8.Caption = "部門代號";
+            this.gridColumn8.FieldName = "IdDepartment";
+            this.gridColumn8.MinWidth = 23;
+            this.gridColumn8.Name = "gridColumn8";
+            this.gridColumn8.Visible = true;
+            this.gridColumn8.VisibleIndex = 0;
+            this.gridColumn8.Width = 186;
+            // 
+            // txbDescribe
+            // 
+            this.txbDescribe.Location = new System.Drawing.Point(469, 12);
+            this.txbDescribe.MenuManager = this.barManager1;
+            this.txbDescribe.Name = "txbDescribe";
+            this.txbDescribe.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbDescribe.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.txbDescribe.Properties.Appearance.Options.UseFont = true;
+            this.txbDescribe.Properties.Appearance.Options.UseForeColor = true;
+            this.txbDescribe.Size = new System.Drawing.Size(274, 28);
+            this.txbDescribe.StyleController = this.layoutControl1;
+            this.txbDescribe.TabIndex = 6;
+            // 
             // txbName
             // 
-            this.txbName.Location = new System.Drawing.Point(64, 12);
+            this.txbName.Location = new System.Drawing.Point(84, 12);
             this.txbName.MenuManager = this.barManager1;
             this.txbName.Name = "txbName";
             this.txbName.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txbName.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbName.Properties.Appearance.Options.UseFont = true;
             this.txbName.Properties.Appearance.Options.UseForeColor = true;
-            this.txbName.Size = new System.Drawing.Size(294, 28);
+            this.txbName.Size = new System.Drawing.Size(148, 28);
             this.txbName.StyleController = this.layoutControl1;
             this.txbName.TabIndex = 5;
             // 
@@ -430,7 +457,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.layoutControlItem5,
             this.emptySpaceItem1,
             this.emptySpaceItem2,
-            this.layoutControlItem3});
+            this.layoutControlItem3,
+            this.layoutControlItem7});
             this.Root.Name = "Root";
             this.Root.Size = new System.Drawing.Size(755, 476);
             this.Root.TextVisible = false;
@@ -457,9 +485,9 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.layoutControlItem2.Control = this.txbName;
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(350, 32);
+            this.layoutControlItem2.Size = new System.Drawing.Size(224, 32);
             this.layoutControlItem2.Text = "名稱";
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(40, 19);
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(60, 19);
             // 
             // layoutControlItem4
             // 
@@ -477,7 +505,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             // layoutControlItem6
             // 
             this.layoutControlItem6.Control = this.btnAddUser;
-            this.layoutControlItem6.Location = new System.Drawing.Point(350, 198);
+            this.layoutControlItem6.Location = new System.Drawing.Point(350, 184);
             this.layoutControlItem6.MaxSize = new System.Drawing.Size(35, 40);
             this.layoutControlItem6.MinSize = new System.Drawing.Size(35, 40);
             this.layoutControlItem6.Name = "layoutControlItem6";
@@ -489,7 +517,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             // layoutControlItem5
             // 
             this.layoutControlItem5.Control = this.btnDelUser;
-            this.layoutControlItem5.Location = new System.Drawing.Point(350, 238);
+            this.layoutControlItem5.Location = new System.Drawing.Point(350, 224);
             this.layoutControlItem5.Name = "layoutControlItem5";
             this.layoutControlItem5.Size = new System.Drawing.Size(35, 40);
             this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
@@ -500,15 +528,15 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.emptySpaceItem1.AllowHotTrack = false;
             this.emptySpaceItem1.Location = new System.Drawing.Point(350, 0);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(35, 198);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(35, 184);
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
             // emptySpaceItem2
             // 
             this.emptySpaceItem2.AllowHotTrack = false;
-            this.emptySpaceItem2.Location = new System.Drawing.Point(350, 278);
+            this.emptySpaceItem2.Location = new System.Drawing.Point(350, 264);
             this.emptySpaceItem2.Name = "emptySpaceItem2";
-            this.emptySpaceItem2.Size = new System.Drawing.Size(35, 178);
+            this.emptySpaceItem2.Size = new System.Drawing.Size(35, 192);
             this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
             // 
             // layoutControlItem3
@@ -522,7 +550,20 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.layoutControlItem3.Name = "layoutControlItem3";
             this.layoutControlItem3.Size = new System.Drawing.Size(350, 32);
             this.layoutControlItem3.Text = "說明";
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(40, 19);
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(60, 19);
+            // 
+            // layoutControlItem7
+            // 
+            this.layoutControlItem7.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.layoutControlItem7.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem7.AppearanceItemCaption.Options.UseFont = true;
+            this.layoutControlItem7.AppearanceItemCaption.Options.UseForeColor = true;
+            this.layoutControlItem7.Control = this.txbPrioritize;
+            this.layoutControlItem7.Location = new System.Drawing.Point(224, 0);
+            this.layoutControlItem7.Name = "layoutControlItem7";
+            this.layoutControlItem7.Size = new System.Drawing.Size(126, 32);
+            this.layoutControlItem7.Text = "優先級";
+            this.layoutControlItem7.TextSize = new System.Drawing.Size(60, 19);
             // 
             // f401_GroupManage_Info
             // 
@@ -542,10 +583,11 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.Load += new System.EventHandler(this.f401_GroupManage_Info_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txbPrioritize.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcChoose)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvChoose)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDescribe.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).EndInit();
@@ -558,6 +600,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -598,5 +641,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
+        private DevExpress.XtraEditors.TextEdit txbPrioritize;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
     }
 }

@@ -61,7 +61,7 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void btnISODocuments_ItemClick(object sender, TileItemEventArgs e)
         {
-            f00_Frame formShow = new f00_Frame(201);
+            f00_FluentFrame formShow = new f00_FluentFrame(201);
             formShow.Text = e.Item.Text + AppCopyRight.CopyRightString();
             Hide();
             formShow.ShowDialog();

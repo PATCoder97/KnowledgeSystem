@@ -5,17 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="DBDocumentManagementSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="AppForms">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="ParentId" Type="int" />
-          <Property Name="GroupId" Type="int" />
-          <Property Name="IndexRow" Type="int" />
-          <Property Name="NameForm" Type="varchar" MaxLength="32" />
-          <Property Name="DisplayName" Type="nvarchar" MaxLength="32" />
-        </EntityType>
         <EntityType Name="FunctionRole">
           <Key>
             <PropertyRef Name="Id" />
@@ -43,6 +32,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DisplayName" Type="nvarchar" MaxLength="32" />
           <Property Name="Describe" Type="nvarchar" MaxLength="128" />
+          <Property Name="Prioritize" Type="int" />
         </EntityType>
         <EntityType Name="GroupUser">
           <Key>
@@ -117,7 +107,6 @@
           <Property Name="IdDepartment" Type="varchar" MaxLength="4" />
         </EntityType>
         <EntityContainer Name="DBDocumentManagementSystemModelStoreContainer">
-          <EntitySet Name="AppForms" EntityType="Self.AppForms" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FunctionRole" EntityType="Self.FunctionRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Functions" EntityType="Self.Functions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
@@ -133,17 +122,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DBDocumentManagementSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="AppForm">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="ParentId" Type="Int32" />
-          <Property Name="GroupId" Type="Int32" />
-          <Property Name="IndexRow" Type="Int32" />
-          <Property Name="NameForm" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-          <Property Name="DisplayName" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="FunctionRole">
           <Key>
             <PropertyRef Name="Id" />
@@ -151,14 +129,6 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdFunction" Type="Int32" />
           <Property Name="IdRole" Type="Int32" />
-        </EntityType>
-        <EntityType Name="Group">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DisplayName" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-          <Property Name="Describe" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="GroupUser">
           <Key>
@@ -233,9 +203,7 @@
           <Property Name="IdDepartment" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityContainer Name="DBDocumentManagementSystemEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="AppForms" EntityType="Self.AppForm" />
           <EntitySet Name="FunctionRoles" EntityType="Self.FunctionRole" />
-          <EntitySet Name="Groups" EntityType="Self.Group" />
           <EntitySet Name="GroupUsers" EntityType="Self.GroupUser" />
           <EntitySet Name="KnowledgeAttachments" EntityType="Self.KnowledgeAttachment" />
           <EntitySet Name="KnowledgeBases" EntityType="Self.KnowledgeBase" />
@@ -244,6 +212,7 @@
           <EntitySet Name="Roles" EntityType="Self.Role" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="Functions" EntityType="DBDocumentManagementSystemModel.Function" />
+          <EntitySet Name="Groups" EntityType="DBDocumentManagementSystemModel.Group" />
         </EntityContainer>
         <EntityType Name="Function">
           <Key>
@@ -257,39 +226,27 @@
           <Property Name="Status" Type="Boolean" />
           <Property Name="Images" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="Describe" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Prioritize" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="DBDocumentManagementSystemModelStoreContainer" CdmEntityContainer="DBDocumentManagementSystemEntities">
-          <EntitySetMapping Name="AppForms">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.AppForm">
-              <MappingFragment StoreEntitySet="AppForms">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
-                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
-                <ScalarProperty Name="IndexRow" ColumnName="IndexRow" />
-                <ScalarProperty Name="NameForm" ColumnName="NameForm" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="FunctionRoles">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.FunctionRole">
               <MappingFragment StoreEntitySet="FunctionRole">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="IdFunction" ColumnName="IdFunction" />
                 <ScalarProperty Name="IdRole" ColumnName="IdRole" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Groups">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.Group">
-              <MappingFragment StoreEntitySet="Groups">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="Describe" ColumnName="Describe" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -381,6 +338,16 @@
                 <ScalarProperty Name="ControlName" ColumnName="ControlName" />
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="IdParent" ColumnName="IdParent" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.Group">
+              <MappingFragment StoreEntitySet="Groups">
+                <ScalarProperty Name="Prioritize" ColumnName="Prioritize" />
+                <ScalarProperty Name="Describe" ColumnName="Describe" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

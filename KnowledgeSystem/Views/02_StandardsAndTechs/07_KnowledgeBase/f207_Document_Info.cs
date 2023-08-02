@@ -1,4 +1,5 @@
 ﻿using DevExpress.ClipboardSource.SpreadsheetML;
+using DevExpress.Utils.Drawing.Helpers;
 using DevExpress.Utils.Win.Hook;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Columns;
@@ -15,6 +16,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Security.AccessControl;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -143,6 +145,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void f207_DocumentInfo_Load(object sender, EventArgs e)
         {
+            List<GroupUser> lsGroupUser = new List<GroupUser>();
+
             // Initialize RefreshHelper
             helper = new RefreshHelper(bgvSecurity, "Id");
 
@@ -161,6 +165,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 lsKnowledgeTypes = db.KnowledgeTypes.ToList();
                 lsUsers = db.Users.ToList();
                 lsGroups = db.Groups.ToList();
+                lsGroupUser = db.GroupUsers.ToList();
 
                 // Create lists of Securityinfo objects from lsUsers and lsGroups
                 var lsIdUsers = lsUsers.Select(r => new Securityinfo { IdGroupOrUser = r.Id, DisplayName = r.DisplayName }).ToList();
@@ -243,6 +248,32 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     helper.LoadViewInfo();
                 }
             }
+
+
+            // Get permission
+            var lsUserInGroup = (from groups in lsGroups.OrderBy(g => g.Prioritize)
+                                 join securitys in lsSecurityInfos on groups.Id equals securitys.IdGroup
+                                 join gruopUser in lsGroupUser on groups.Id equals gruopUser.IdGroup
+                                 select new
+                                 {
+                                     id = gruopUser.IdUser,
+                                     ReadFile = securitys.ReadFile,
+                                     PrintFile = securitys.PrintFile,
+                                     SaveFile = securitys.SaveFile,
+                                     groups.Prioritize
+                                 }
+                                 into dtG
+                                 group dtG by dtG.id into userGroups
+                                 select new Securityinfo
+                                 {
+                                     IdUser = userGroups.Key,
+                                     ReadFile = userGroups.Where(r => r.id == userGroups.Key).FirstOrDefault().ReadFile,
+                                     PrintFile = userGroups.Where(r => r.id == userGroups.Key).FirstOrDefault().PrintFile,
+                                     SaveFile = userGroups.Where(r => r.id == userGroups.Key).FirstOrDefault().SaveFile,
+                                 }).ToList();
+
+            List<Securityinfo> query = lsSecurityInfos.Where(r => !string.IsNullOrEmpty(r.IdUser)).ToList();
+            query.AddRange(lsUserInGroup);
         }
 
         private void btnAddFile_Click(object sender, EventArgs e)
@@ -292,7 +323,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             string events = idDocument == string.Empty ? "新增成功" : "修改成功";
             string idDocumentToUpdate = string.IsNullOrEmpty(idDocument) ? GenerateIdDocument() : idDocument;
 
-            using (var handle = SplashScreenManager.ShowOverlayForm(this, customPainter: new CustomOverlayPainter()))
+            using (var handle = SplashScreenManager.ShowOverlayForm(this))
             {
                 // Create a new KnowledgeBase object with the relevant data
                 KnowledgeBase knowledge = new KnowledgeBase()

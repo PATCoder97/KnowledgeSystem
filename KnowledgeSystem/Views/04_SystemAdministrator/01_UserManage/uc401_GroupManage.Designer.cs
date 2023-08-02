@@ -47,6 +47,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
@@ -96,7 +97,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.gvData.Appearance.Row.Options.UseForeColor = true;
             this.gvData.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumn2,
-            this.gridColumn5});
+            this.gridColumn5,
+            this.gridColumn1});
             this.gvData.DetailHeight = 377;
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
@@ -113,7 +115,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 0;
-            this.gridColumn2.Width = 87;
+            this.gridColumn2.Width = 302;
             // 
             // gridColumn5
             // 
@@ -122,8 +124,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.gridColumn5.MinWidth = 23;
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 1;
-            this.gridColumn5.Width = 87;
+            this.gridColumn5.VisibleIndex = 2;
+            this.gridColumn5.Width = 463;
             // 
             // Root
             // 
@@ -245,19 +247,28 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.barDockControlRight.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.barDockControlRight.Size = new System.Drawing.Size(0, 384);
             // 
-            // f401_GroupManage
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "優先級";
+            this.gridColumn1.FieldName = "Prioritize";
+            this.gridColumn1.MaxWidth = 100;
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 1;
+            this.gridColumn1.Width = 100;
+            // 
+            // uc401_GroupManage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(915, 433);
             this.Controls.Add(this.layoutControl1);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.Name = "f401_GroupManage";
-            this.Text = "f401_GroupManage";
+            this.Name = "uc401_GroupManage";
+            this.Size = new System.Drawing.Size(915, 433);
             this.Load += new System.EventHandler(this.f401_GroupManage_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
@@ -288,5 +299,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
     }
 }

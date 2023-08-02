@@ -32,36 +32,35 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            SplashScreenManager.ShowDefaultWaitForm();
-
-            // Lấy userID và password từ TextBox
-            string userID = txbUserID.Text.Trim().ToUpper();
-            string password = txbPassword.Text.Trim();
-
-            // Kiểm tra userID và password trong cơ sở dữ liệu
-            using (var db = new DBDocumentManagementSystemEntities())
+            using (var handle = SplashScreenManager.ShowOverlayForm(this))
             {
-                // Đếm số lượng người dùng có ID và mật khẩu tương ứng
-                int countUsers = db.Users.Count(u => u.Id == userID && u.SecondaryPassword == password);
+                // Lấy userID và password từ TextBox
+                string userID = txbUserID.Text.Trim().ToUpper();
+                string password = txbPassword.Text.Trim();
 
-                if (countUsers > 0)
+                // Kiểm tra userID và password trong cơ sở dữ liệu
+                using (var db = new DBDocumentManagementSystemEntities())
                 {
-                    // Lưu thông tin đăng nhập và đóng form
-                    TempDatas.LoginId = userID;
-                    RegistryHelper.SaveSetting(RegistryHelper.LoginId, userID);
-                    TempDatas.LoginSuccessful = true;
-                    Close();
-                }
-                else
-                {
-                    // Hiển thị thông báo lỗi nếu userID hoặc password không đúng
-                    XtraMessageBox.Show("用戶名或密碼錯誤，請重試!", "通知!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    txbPassword.Text = "";
-                    txbPassword.Focus();
+                    // Đếm số lượng người dùng có ID và mật khẩu tương ứng
+                    int countUsers = db.Users.Count(u => u.Id == userID && u.SecondaryPassword == password);
+
+                    if (countUsers > 0)
+                    {
+                        // Lưu thông tin đăng nhập và đóng form
+                        TempDatas.LoginId = userID;
+                        RegistryHelper.SaveSetting(RegistryHelper.LoginId, userID);
+                        TempDatas.LoginSuccessful = true;
+                        Close();
+                    }
+                    else
+                    {
+                        // Hiển thị thông báo lỗi nếu userID hoặc password không đúng
+                        XtraMessageBox.Show("用戶名或密碼錯誤，請重試!", "通知!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        txbPassword.Text = "";
+                        txbPassword.Focus();
+                    }
                 }
             }
-
-            SplashScreenManager.CloseDefaultWaitForm();
         }
 
         private void fLogin_Shown(object sender, EventArgs e)
@@ -69,7 +68,7 @@ namespace KnowledgeSystem.Views._00_Generals
             txbPassword.Focus();
             txbPassword.Text = "1";
 
-           //  btnLogin_Click(sender, e);
+            //  btnLogin_Click(sender, e);
         }
     }
 }

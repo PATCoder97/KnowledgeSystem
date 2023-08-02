@@ -51,7 +51,7 @@ namespace KnowledgeSystem.Views._00_Generals
             // Hiển thị màn hình chờ sử dụng SplashScreenManager
             if (typeform.BaseType == typeof(XtraUserControl))
             {
-                using (var handle = SplashScreenManager.ShowOverlayForm(this, customPainter: new CustomOverlayPainter()))
+                using (var handle = SplashScreenManager.ShowOverlayForm(this))
                 {
                     XtraUserControl userControl = (XtraUserControl)Activator.CreateInstance(typeform);
                     if (!div_container.Controls.Contains(userControl))

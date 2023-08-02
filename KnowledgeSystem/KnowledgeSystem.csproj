@@ -78,13 +78,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configs\AppCopyRight.cs" />
-    <Compile Include="Configs\CustomOverlayPainter.cs" />
     <Compile Include="Configs\GridControlHelper.cs" />
     <Compile Include="Configs\RefreshHelper.cs" />
     <Compile Include="Configs\RegistryHelper.cs" />
     <Compile Include="Configs\SingleConnection.cs" />
     <Compile Include="Configs\TempDatas.cs" />
-    <Compile Include="Models\AppForm.cs" />
     <Compile Include="Models\Function.cs" />
     <Compile Include="Models\FunctionRole.cs" />
     <Compile Include="Models\Group.cs" />
@@ -124,12 +122,6 @@
     <Compile Include="Views\00_Generals\f00_CustomSplashScreen.Designer.cs">
       <DependentUpon>f00_CustomSplashScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\00_Generals\f00_Frame.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\00_Generals\f00_Frame.Designer.cs">
-      <DependentUpon>f00_Frame.cs</DependentUpon>
-    </Compile>
     <Compile Include="Views\00_Generals\f00_Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -141,12 +133,6 @@
     </Compile>
     <Compile Include="Views\00_Generals\f00_Main.Designer.cs">
       <DependentUpon>f00_Main.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\00_Generals\f00_RibbonFrame.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\00_Generals\f00_RibbonFrame.Designer.cs">
-      <DependentUpon>f00_RibbonFrame.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_Document_Info.cs">
       <SubType>Form</SubType>
@@ -213,17 +199,11 @@
     <EmbeddedResource Include="Views\00_Generals\f00_FluentFrame.resx">
       <DependentUpon>f00_FluentFrame.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\00_Generals\f00_Frame.resx">
-      <DependentUpon>f00_Frame.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Views\00_Generals\f00_Login.resx">
       <DependentUpon>f00_Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\00_Generals\f00_Main.resx">
       <DependentUpon>f00_Main.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\00_Generals\f00_RibbonFrame.resx">
-      <DependentUpon>f00_RibbonFrame.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_Document_Info.resx">
       <DependentUpon>f207_Document_Info.cs</DependentUpon>
@@ -313,6 +293,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Business_BarChart.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\ShowPrintPreview.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SQLModel.Context.tt">

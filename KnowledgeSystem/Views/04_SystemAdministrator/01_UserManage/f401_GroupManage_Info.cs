@@ -22,8 +22,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             InitializeComponent();
             LockControl(false);
 
-            btnAddUser.Enabled = false;
-            btnDelUser.Enabled = false;
+            //btnAddUser.Enabled = false;
+            //btnDelUser.Enabled = false;
         }
 
         public f401_GroupManage_Info(int idGroup_)
@@ -74,6 +74,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
         {
             txbName.ReadOnly = isFormView;
             txbDescribe.ReadOnly = isFormView;
+            txbPrioritize.ReadOnly = isFormView;
 
             btnAddUser.Enabled = !isFormView;
             btnDelUser.Enabled = !isFormView;
@@ -105,6 +106,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
 
                     txbName.EditValue = groups.DisplayName;
                     txbDescribe.EditValue = groups.Describe;
+                    txbPrioritize.EditValue = groups.Prioritize;
                 }
             }
         }
@@ -113,6 +115,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
         {
             string name = txbName.Text.Trim();
             string moTa = txbDescribe.Text.Trim();
+            int prioritize =  Convert.ToInt16(txbPrioritize.Text);
 
             if (string.IsNullOrEmpty(name))
             {
@@ -123,7 +126,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             var groups = new Group()
             {
                 DisplayName = name,
-                Describe = moTa
+                Describe = moTa,
+                Prioritize = prioritize
             };
 
             using (var db = new DBDocumentManagementSystemEntities())
