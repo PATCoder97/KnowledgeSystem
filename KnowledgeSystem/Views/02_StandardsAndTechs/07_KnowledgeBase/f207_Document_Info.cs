@@ -4,6 +4,7 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraPrinting.Native.WebClientUIControl;
+using DevExpress.XtraSplashScreen;
 using KnowledgeSystem.Configs;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 {
@@ -29,12 +31,15 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         public f207_Document_Info()
         {
             InitializeComponent();
+            LockControl(false);
         }
 
         public f207_Document_Info(string idDocument_)
         {
             InitializeComponent();
             idDocument = idDocument_;
+
+            LockControl(true);
         }
 
         #region parameters
@@ -83,7 +88,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 .Select(s => s[random.Next(s.Length)])
                 .ToArray());
 
-            return $"{userLogin.Id}-{userLogin.IdDepartment.Substring(0, 3)}-{DateTime.Now:MMddhhmmss}-{randomString}";
+            return $"{userLogin.Id}-{userLogin.IdDepartment.Substring(0, 3)}-{DateTime.Now:MMddhhmmss}-{randomString}.pdf";
         }
 
         private string GenerateIdDocument(int indexId = 1, string startIdStr = "")
@@ -119,12 +124,29 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             return regex.Replace(temp, String.Empty).Replace('\u0111', 'd').Replace('\u0110', 'D');
         }
 
+        private void LockControl(bool isFormView = true)
+        {
+            //txbName.ReadOnly = isFormView;
+            //txbDescribe.ReadOnly = isFormView;
+
+            //btnAddUser.Enabled = !isFormView;
+            //btnDelUser.Enabled = !isFormView;
+
+            btnEdit.Visibility = isFormView ? DevExpress.XtraBars.BarItemVisibility.Always : DevExpress.XtraBars.BarItemVisibility.Never;
+            btnDel.Visibility = isFormView ? DevExpress.XtraBars.BarItemVisibility.Always : DevExpress.XtraBars.BarItemVisibility.Never;
+            btnConfirm.Visibility = isFormView ? DevExpress.XtraBars.BarItemVisibility.Never : DevExpress.XtraBars.BarItemVisibility.Always;
+
+            Text = isFormView ? "群組信息" : "新增、修改群組";
+        }
+
         #endregion
 
         private void f207_DocumentInfo_Load(object sender, EventArgs e)
         {
             // Initialize RefreshHelper
             helper = new RefreshHelper(bgvSecurity, "Id");
+
+            controlgroupDocument.SelectedTabPage = lcgInfo;
 
             // Set GridView to read-only and assign data sources to grid controls
             gvEditHistory.ReadOnlyGridView();
@@ -167,7 +189,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 cbbUserUpload.Properties.DisplayMember = "DisplayName";
 
                 // Set default values
-                userId = "VNW0014732";
+                userId = TempDatas.LoginId;
                 cbbType.EditValue = 1;
                 cbbUserRequest.EditValue = userId;
                 cbbUserUpload.EditValue = userId;
@@ -270,71 +292,77 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             string events = idDocument == string.Empty ? "新增成功" : "修改成功";
             string idDocumentToUpdate = string.IsNullOrEmpty(idDocument) ? GenerateIdDocument() : idDocument;
 
-            // Create a new KnowledgeBase object with the relevant data
-            KnowledgeBase knowledge = new KnowledgeBase()
+            using (var handle = SplashScreenManager.ShowOverlayForm(this, customPainter: new CustomOverlayPainter()))
             {
-                Id = idDocumentToUpdate,
-                DisplayName = $"{convertToUnSign3(txbNameTW.Text)}\r\n{txbNameVN.Text}",
-                UserRequest = cbbUserRequest.EditValue.ToString(),
-                IdTypes = (int)cbbType.EditValue,
-                Keyword = txbKeyword.Text.Trim(),
-                UserUpload = cbbUserUpload.EditValue.ToString(),
-                UploadDate = DateTime.Now
-            };
-
-            // Use a new instance of the database context to add or update the knowledge base object and its attachments and security information
-            using (var db = new DBDocumentManagementSystemEntities())
-            {
-                // Add or update the knowledge base object
-                db.KnowledgeBases.AddOrUpdate(knowledge);
-
-                // If updating an existing document, remove its existing attachments
-                if (!string.IsNullOrEmpty(idDocument))
+                // Create a new KnowledgeBase object with the relevant data
+                KnowledgeBase knowledge = new KnowledgeBase()
                 {
-                    db.KnowledgeAttachments.RemoveRange(db.KnowledgeAttachments.Where(r => r.IdKnowledgeBase == idDocument));
-                }
+                    Id = idDocumentToUpdate,
+                    DisplayName = $"{convertToUnSign3(txbNameTW.Text)}\r\n{txbNameVN.Text}",
+                    UserRequest = cbbUserRequest.EditValue.ToString(),
+                    IdTypes = (int)cbbType.EditValue,
+                    Keyword = txbKeyword.Text.Trim(),
+                    UserUpload = cbbUserUpload.EditValue.ToString(),
+                    UploadDate = DateTime.Now
+                };
 
-                // Add the new attachments
-                foreach (Attachments item in lsAttachments)
+                // Use a new instance of the database context to add or update the knowledge base object and its attachments and security information
+                using (var db = new DBDocumentManagementSystemEntities())
                 {
-                    KnowledgeAttachment attachment = new KnowledgeAttachment()
-                    {
-                        IdKnowledgeBase = idDocumentToUpdate,
-                        EncryptionName = item.EncryptionName,
-                        FileName = item.FileName
-                    };
-                    db.KnowledgeAttachments.AddOrUpdate(attachment);
+                    // Add or update the knowledge base object
+                    db.KnowledgeBases.AddOrUpdate(knowledge);
 
-                    if (!string.IsNullOrEmpty(item.FullPath))
+                    // If updating an existing document, remove its existing attachments
+                    if (!string.IsNullOrEmpty(idDocument))
                     {
-                        // Them file vao 
+                        db.KnowledgeAttachments.RemoveRange(db.KnowledgeAttachments.Where(r => r.IdKnowledgeBase == idDocument));
                     }
-                }
 
-                // Remove the existing security information and add the new information
-                db.KnowledgeSecurities.RemoveRange(db.KnowledgeSecurities.Where(r => r.IdKnowledgeBase == idDocument));
-                foreach (var item in lsSecurityInfos)
-                {
-                    KnowledgeSecurity dataAdd = new KnowledgeSecurity
+                    // Add the new attachments
+                    foreach (Attachments item in lsAttachments)
                     {
-                        Id = item.Id,
-                        IdKnowledgeBase = idDocumentToUpdate,
-                        IdGroup = item.IdGroupOrUser.StartsWith("VNW") ? null : (short?)Convert.ToInt16(item.IdGroupOrUser),
-                        IdUser = item.IdGroupOrUser.StartsWith("VNW") ? item.IdGroupOrUser : null,
-                        ChangePermision = item.ChangePermision,
-                        ReadInfo = item.ReadInfo,
-                        UpdateInfo = item.UpdateInfo,
-                        DeleteInfo = item.DeleteInfo,
-                        SearchInfo = item.SearchInfo,
-                        ReadFile = item.ReadFile,
-                        PrintFile = item.PrintFile,
-                        SaveFile = item.SaveFile
-                    };
-                    db.KnowledgeSecurities.Add(dataAdd);
-                }
+                        KnowledgeAttachment attachment = new KnowledgeAttachment()
+                        {
+                            IdKnowledgeBase = idDocumentToUpdate,
+                            EncryptionName = item.EncryptionName,
+                            FileName = item.FileName
+                        };
+                        db.KnowledgeAttachments.AddOrUpdate(attachment);
 
-                // Save the changes to the database
-                db.SaveChanges();
+                        if (!string.IsNullOrEmpty(item.FullPath))
+                        {
+                            string sourceFileName = item.FullPath;
+                            string destFileName = Path.Combine(TempDatas.PahtDataFile, item.EncryptionName);
+
+                            File.Copy(sourceFileName, destFileName, true);
+                        }
+                    }
+
+                    // Remove the existing security information and add the new information
+                    db.KnowledgeSecurities.RemoveRange(db.KnowledgeSecurities.Where(r => r.IdKnowledgeBase == idDocument));
+                    foreach (var item in lsSecurityInfos)
+                    {
+                        KnowledgeSecurity dataAdd = new KnowledgeSecurity
+                        {
+                            Id = item.Id,
+                            IdKnowledgeBase = idDocumentToUpdate,
+                            IdGroup = item.IdGroupOrUser.StartsWith("VNW") ? null : (short?)Convert.ToInt16(item.IdGroupOrUser),
+                            IdUser = item.IdGroupOrUser.StartsWith("VNW") ? item.IdGroupOrUser : null,
+                            ChangePermision = item.ChangePermision,
+                            ReadInfo = item.ReadInfo,
+                            UpdateInfo = item.UpdateInfo,
+                            DeleteInfo = item.DeleteInfo,
+                            SearchInfo = item.SearchInfo,
+                            ReadFile = item.ReadFile,
+                            PrintFile = item.PrintFile,
+                            SaveFile = item.SaveFile
+                        };
+                        db.KnowledgeSecurities.Add(dataAdd);
+                    }
+
+                    // Save the changes to the database
+                    db.SaveChanges();
+                }
             }
 
             // Show a message box with the appropriate message and close the form
@@ -384,6 +412,24 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             if (dialogResult == DialogResult.No) return;
             lsSecurityInfos.Remove(permission);
             bgvSecurity.RefreshData();
+        }
+
+        private void gcFiles_DoubleClick(object sender, EventArgs e)
+        {
+            int forcusRow = gvFiles.FocusedRowHandle;
+            if (forcusRow < 0) return;
+
+            Attachments dataRow = gvFiles.GetRow(forcusRow) as Attachments;
+            string documentsFile = Path.Combine(TempDatas.PahtDataFile, dataRow.EncryptionName);
+
+            f207_ViewPdf fDocumentInfo = new f207_ViewPdf(documentsFile);
+            fDocumentInfo.Text = dataRow.FileName;
+            fDocumentInfo.ShowDialog();
+        }
+
+        private void btnEdit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            LockControl(false);
         }
     }
 }

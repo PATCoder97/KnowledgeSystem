@@ -2,7 +2,7 @@
 
 namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
 {
-    partial class f401_GroupManage
+    partial class uc401_GroupManage
     {
         /// <summary>
         /// Required designer variable.
@@ -31,7 +31,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f401_GroupManage));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc401_GroupManage));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.gcData = new DevExpress.XtraGrid.GridControl();
             this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();

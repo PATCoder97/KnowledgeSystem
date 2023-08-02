@@ -40,6 +40,8 @@
     <Reference Include="DevExpress.Data.Desktop.v22.1" />
     <Reference Include="DevExpress.Data.v22.1" />
     <Reference Include="DevExpress.Drawing.v22.1, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Pdf.v22.1.Core, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Pdf.v22.1.Drawing, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Utils.v22.1" />
     <Reference Include="DevExpress.Sparkline.v22.1.Core" />
     <Reference Include="DevExpress.XtraBars.v22.1, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -47,6 +49,7 @@
     <Reference Include="DevExpress.Printing.v22.1.Core" />
     <Reference Include="DevExpress.XtraGrid.v22.1, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraLayout.v22.1, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraPdfViewer.v22.1, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraPrinting.v22.1, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraTreeList.v22.1, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -157,17 +160,23 @@
     <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_fSearch.Designer.cs">
       <DependentUpon>f207_fSearch.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_ViewPdf.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_ViewPdf.Designer.cs">
+      <DependentUpon>f207_ViewPdf.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_Search.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_Search.Designer.cs">
       <DependentUpon>uc207_Search.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\04_SystemAdministrator\01_UserManage\f401_GroupManage.cs">
-      <SubType>Form</SubType>
+    <Compile Include="Views\04_SystemAdministrator\01_UserManage\uc401_GroupManage.cs">
+      <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\04_SystemAdministrator\01_UserManage\f401_GroupManage.Designer.cs">
-      <DependentUpon>f401_GroupManage.cs</DependentUpon>
+    <Compile Include="Views\04_SystemAdministrator\01_UserManage\uc401_GroupManage.Designer.cs">
+      <DependentUpon>uc401_GroupManage.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\04_SystemAdministrator\01_UserManage\f401_GroupManage_Info.cs">
       <SubType>Form</SubType>
@@ -175,11 +184,11 @@
     <Compile Include="Views\04_SystemAdministrator\01_UserManage\f401_GroupManage_Info.Designer.cs">
       <DependentUpon>f401_GroupManage_Info.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\04_SystemAdministrator\01_UserManage\f401_UserManage.cs">
-      <SubType>Form</SubType>
+    <Compile Include="Views\04_SystemAdministrator\01_UserManage\uc401_UserManage.cs">
+      <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\04_SystemAdministrator\01_UserManage\f401_UserManage.Designer.cs">
-      <DependentUpon>f401_UserManage.cs</DependentUpon>
+    <Compile Include="Views\04_SystemAdministrator\01_UserManage\uc401_UserManage.Designer.cs">
+      <DependentUpon>uc401_UserManage.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\04_SystemAdministrator\01_UserManage\uc401_UserManage_Info.cs">
       <SubType>UserControl</SubType>
@@ -222,17 +231,20 @@
     <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_fSearch.resx">
       <DependentUpon>f207_fSearch.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_ViewPdf.resx">
+      <DependentUpon>f207_ViewPdf.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_Search.resx">
       <DependentUpon>uc207_Search.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\04_SystemAdministrator\01_UserManage\f401_GroupManage.resx">
-      <DependentUpon>f401_GroupManage.cs</DependentUpon>
+    <EmbeddedResource Include="Views\04_SystemAdministrator\01_UserManage\uc401_GroupManage.resx">
+      <DependentUpon>uc401_GroupManage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\01_UserManage\f401_GroupManage_Info.resx">
       <DependentUpon>f401_GroupManage_Info.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\04_SystemAdministrator\01_UserManage\f401_UserManage.resx">
-      <DependentUpon>f401_UserManage.cs</DependentUpon>
+    <EmbeddedResource Include="Views\04_SystemAdministrator\01_UserManage\uc401_UserManage.resx">
+      <DependentUpon>uc401_UserManage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\01_UserManage\uc401_UserManage_Info.resx">
       <DependentUpon>uc401_UserManage_Info.cs</DependentUpon>
@@ -292,6 +304,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Actions_Zoom.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\BO_Department.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\BO_Employee.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Business_BarChart.svg">

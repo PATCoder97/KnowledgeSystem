@@ -106,7 +106,7 @@ namespace KnowledgeSystem.Views._00_Generals
             // 
             // lbSoftName
             // 
-            this.lbSoftName.Font = new System.Drawing.Font("DFKai-SB", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lbSoftName.Font = new System.Drawing.Font("DFKai-SB", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.lbSoftName.Location = new System.Drawing.Point(12, 12);
             this.lbSoftName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbSoftName.Name = "lbSoftName";
@@ -130,7 +130,6 @@ namespace KnowledgeSystem.Views._00_Generals
             this.tileMain.MaxId = 20;
             this.tileMain.Name = "tileMain";
             this.tileMain.Padding = new System.Windows.Forms.Padding(24, 22, 24, 22);
-            this.tileMain.Position = 540;
             this.tileMain.ShowGroupText = true;
             this.tileMain.Size = new System.Drawing.Size(1180, 498);
             this.tileMain.TabIndex = 4;

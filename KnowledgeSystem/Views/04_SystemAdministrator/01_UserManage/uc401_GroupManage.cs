@@ -14,11 +14,11 @@ using System.Windows.Forms;
 
 namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
 {
-    public partial class f401_GroupManage : DevExpress.XtraEditors.XtraForm
+    public partial class uc401_GroupManage : DevExpress.XtraEditors.XtraUserControl
     {
         RefreshHelper helper;
 
-        public f401_GroupManage()
+        public uc401_GroupManage()
         {
             InitializeComponent();
         }

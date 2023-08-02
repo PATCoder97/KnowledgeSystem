@@ -21,10 +21,10 @@ using System.Windows.Forms;
 
 namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManager
 {
-    public partial class f401_UserManage : DevExpress.XtraEditors.XtraForm
+    public partial class uc401_UserManage : DevExpress.XtraEditors.XtraUserControl
     {
         RefreshHelper helper;
-        public f401_UserManage()
+        public uc401_UserManage()
         {
             InitializeComponent();
         }

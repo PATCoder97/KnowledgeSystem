@@ -14,6 +14,8 @@ namespace KnowledgeSystem.Configs
         public static string LoginId { get; set; }
         public static string DomainComputer { get; set; }
         public static bool LoginSuccessful { get; set; }
+
+        public static string PahtDataFile = @"E:\01. Softwares Programming\24. Knowledge System\05. Data";
     }
     //public DBDocumentManagementSystemEntities()
     //        : base(SingleConnection.ConString)
