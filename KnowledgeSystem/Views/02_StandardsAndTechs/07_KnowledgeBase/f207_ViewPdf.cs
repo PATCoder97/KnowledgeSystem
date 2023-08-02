@@ -1,10 +1,13 @@
-﻿using DevExpress.XtraEditors;
+﻿using DevExpress.Pdf;
+using DevExpress.XtraEditors;
 using KnowledgeSystem.Configs;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,18 +42,42 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void pdfViewerData_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Control && e.KeyCode == Keys.P && CanPrintFile != true) //detect key ctrl+p
+            if (e.Control && (e.KeyCode == Keys.P || e.KeyCode == Keys.S))
             {
-                e.SuppressKeyPress = true; //<= Set it to true.
-                MessageBox.Show(TempDatas.NoPermission, "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                e.SuppressKeyPress = true;
+                return;
+            }
+        }
+
+        private void btnPrint_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (CanPrintFile!=true)
+            {
+                XtraMessageBox.Show(TempDatas.NoPermission, TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 return;
             }
 
-            if (e.Control && e.KeyCode == Keys.S && CanSaveFile != true) //detect key ctrl+s
+            pdfViewerData.ShowPrintPageSetupDialog();
+        }
+
+        private void btnSave_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (CanSaveFile != true)
             {
-                e.SuppressKeyPress = true; //<= Set it to true.
-                MessageBox.Show(TempDatas.NoPermission, "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                XtraMessageBox.Show(TempDatas.NoPermission, TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 return;
+            }
+
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Title = "Xuất dữ liệu chính chủ ra file pdf";
+            saveFileDialog1.DefaultExt = "xlsx";
+            saveFileDialog1.Filter = "PDF Files|*.pdf";
+            saveFileDialog1.FilterIndex = 1;
+            saveFileDialog1.RestoreDirectory = true;
+            saveFileDialog1.FileName = $"{DateTime.Now:yyyyMMddHHmmss}-{Text}";
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                File.Copy(documentFile, saveFileDialog1.FileName,true);
             }
         }
     }
