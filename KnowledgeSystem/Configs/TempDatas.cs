@@ -16,6 +16,8 @@ namespace KnowledgeSystem.Configs
         public static bool LoginSuccessful { get; set; }
 
         public static string PahtDataFile = @"E:\01. Softwares Programming\24. Knowledge System\05. Data";
+
+        public static string NoPermission { get; set; } = "Ban khong co quyen han cho chuc nang nay";
     }
     //public DBDocumentManagementSystemEntities()
     //        : base(SingleConnection.ConString)

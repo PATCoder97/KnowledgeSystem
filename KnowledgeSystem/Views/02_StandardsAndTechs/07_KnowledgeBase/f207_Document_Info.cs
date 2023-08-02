@@ -58,6 +58,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         List<Securityinfo> lsSecurityInfos = new List<Securityinfo>();
         List<Attachments> lsAttachments = new List<Attachments>();
         List<Securityinfo> lsIdGroupOrUser = new List<Securityinfo>();
+        List<GroupUser> lsGroupUser = new List<GroupUser>();
+
+        Securityinfo permissionAttachments = new Securityinfo();
 
         private class Attachments
         {
@@ -141,12 +144,46 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             Text = isFormView ? "群組信息" : "新增、修改群組";
         }
 
+        private Securityinfo GetPermission()
+        {
+            string userIdLogin = TempDatas.LoginId;
+
+            if (cbbUserUpload.EditValue.ToString() == userIdLogin)
+            {
+                return new Securityinfo()
+                {
+                    ChangePermision = true,
+                    DeleteInfo = true,
+                    UpdateInfo = true,
+                    ReadFile = true,
+                    SaveFile = true,
+                    PrintFile = true
+                };
+            }
+
+            if (lsSecurityInfos.Any(r => r.IdUser == userIdLogin))
+            {
+                return lsSecurityInfos.FirstOrDefault(r => r.IdUser == userIdLogin);
+            }
+
+            return (from groups in lsGroups.OrderBy(g => g.Prioritize)
+                    join securitys in lsSecurityInfos on groups.Id equals securitys.IdGroup
+                    join gruopUser in lsGroupUser.Where(r => r.IdUser == userIdLogin) on groups.Id equals gruopUser.IdGroup
+                    select new Securityinfo
+                    {
+                        ChangePermision = securitys.ChangePermision,
+                        DeleteInfo = securitys.DeleteInfo,
+                        UpdateInfo = securitys.UpdateInfo,
+                        ReadFile = securitys.ReadFile,
+                        PrintFile = securitys.PrintFile,
+                        SaveFile = securitys.SaveFile,
+                    }).FirstOrDefault();
+        }
+
         #endregion
 
         private void f207_DocumentInfo_Load(object sender, EventArgs e)
         {
-            List<GroupUser> lsGroupUser = new List<GroupUser>();
-
             // Initialize RefreshHelper
             helper = new RefreshHelper(bgvSecurity, "Id");
 
@@ -249,31 +286,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 }
             }
 
-
-            // Get permission
-            var lsUserInGroup = (from groups in lsGroups.OrderBy(g => g.Prioritize)
-                                 join securitys in lsSecurityInfos on groups.Id equals securitys.IdGroup
-                                 join gruopUser in lsGroupUser on groups.Id equals gruopUser.IdGroup
-                                 select new
-                                 {
-                                     id = gruopUser.IdUser,
-                                     ReadFile = securitys.ReadFile,
-                                     PrintFile = securitys.PrintFile,
-                                     SaveFile = securitys.SaveFile,
-                                     groups.Prioritize
-                                 }
-                                 into dtG
-                                 group dtG by dtG.id into userGroups
-                                 select new Securityinfo
-                                 {
-                                     IdUser = userGroups.Key,
-                                     ReadFile = userGroups.Where(r => r.id == userGroups.Key).FirstOrDefault().ReadFile,
-                                     PrintFile = userGroups.Where(r => r.id == userGroups.Key).FirstOrDefault().PrintFile,
-                                     SaveFile = userGroups.Where(r => r.id == userGroups.Key).FirstOrDefault().SaveFile,
-                                 }).ToList();
-
-            List<Securityinfo> query = lsSecurityInfos.Where(r => !string.IsNullOrEmpty(r.IdUser)).ToList();
-            query.AddRange(lsUserInGroup);
+            permissionAttachments = GetPermission();
         }
 
         private void btnAddFile_Click(object sender, EventArgs e)
@@ -311,7 +324,13 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void btnDel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if (permissionAttachments.DeleteInfo != true)
+            {
+                MessageBox.Show(TempDatas.NoPermission);
+                return;
+            }
 
+            MessageBox.Show("co quyen");
         }
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -455,6 +474,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
             f207_ViewPdf fDocumentInfo = new f207_ViewPdf(documentsFile);
             fDocumentInfo.Text = dataRow.FileName;
+            fDocumentInfo.CanSaveFile = permissionAttachments.SaveFile;
+            fDocumentInfo.CanPrintFile = permissionAttachments.PrintFile;
             fDocumentInfo.ShowDialog();
         }
 

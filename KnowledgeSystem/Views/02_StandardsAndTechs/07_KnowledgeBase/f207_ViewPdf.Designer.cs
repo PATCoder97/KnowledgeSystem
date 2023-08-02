@@ -72,7 +72,6 @@
             this.pdfViewerData.TabIndex = 4;
             this.pdfViewerData.PopupMenuShowing += new DevExpress.XtraPdfViewer.PdfPopupMenuShowingEventHandler(this.pdfViewerData_PopupMenuShowing);
             this.pdfViewerData.KeyDown += new System.Windows.Forms.KeyEventHandler(this.pdfViewerData_KeyDown);
-            this.pdfViewerData.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.pdfViewerData_PreviewKeyDown);
             // 
             // barManager1
             // 
