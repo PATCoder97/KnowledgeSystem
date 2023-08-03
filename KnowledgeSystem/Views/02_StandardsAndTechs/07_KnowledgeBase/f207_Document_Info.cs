@@ -292,6 +292,23 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             }
 
             permissionAttachments = GetPermission();
+
+            using (var db = new DBDocumentManagementSystemEntities())
+            {
+                //var lsStepProgressDoc = db.dm_StepProgress.ToList();
+                var lsStepProgressDoc = (from data in db.dm_StepProgress.Where(r => r.IdProgress == 2).ToList()
+                                         join groups in lsGroups on data.IdGroup equals groups.Id
+                                         select new { groups.DisplayName }).ToList();
+
+                stepProgressDoc.Items.Add(new StepProgressBarItem("經辦人"));
+                foreach (var item in lsStepProgressDoc)
+                {
+                    stepProgressDoc.Items.Add(new StepProgressBarItem(item.DisplayName));
+                }
+            }
+
+            stepProgressDoc.ItemOptions.Indicator.Width = 40;
+            stepProgressDoc.SelectedItemIndex = 3;
         }
 
         private void btnAddFile_Click(object sender, EventArgs e)
