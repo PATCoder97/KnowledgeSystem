@@ -61,6 +61,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         List<GroupUser> lsGroupUser = new List<GroupUser>();
 
         Securityinfo permissionAttachments = new Securityinfo();
+        dm_Progress progressSelect = new dm_Progress();
 
         private class Attachments
         {
@@ -140,6 +141,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             btnEdit.Visibility = isFormView ? DevExpress.XtraBars.BarItemVisibility.Always : DevExpress.XtraBars.BarItemVisibility.Never;
             btnDel.Visibility = isFormView ? DevExpress.XtraBars.BarItemVisibility.Always : DevExpress.XtraBars.BarItemVisibility.Never;
             btnConfirm.Visibility = isFormView ? DevExpress.XtraBars.BarItemVisibility.Never : DevExpress.XtraBars.BarItemVisibility.Always;
+            btnChangeProgress.Visibility = isFormView ? DevExpress.XtraBars.BarItemVisibility.Never : DevExpress.XtraBars.BarItemVisibility.Always;
+            lcProgress.Visibility = isFormView ? DevExpress.XtraLayout.Utils.LayoutVisibility.Never : DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
 
             Text = isFormView ? "群組信息" : "新增、修改群組";
         }
@@ -203,6 +206,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 lsUsers = db.Users.ToList();
                 lsGroups = db.Groups.ToList();
                 lsGroupUser = db.GroupUsers.ToList();
+                progressSelect = db.dm_Progress.FirstOrDefault();
 
                 // Create lists of Securityinfo objects from lsUsers and lsGroups
                 var lsIdUsers = lsUsers.Select(r => new Securityinfo { IdGroupOrUser = r.Id, DisplayName = r.DisplayName }).ToList();
@@ -238,6 +242,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 var userLogin = lsUsers.FirstOrDefault(r => r.Id == userId);
                 txbId.Text = "XXX-XXXXXXXXXX-XX";
                 lbCountFile.Text = "";
+                lbProgress.Text = "流程：" + progressSelect.DisplayName;
 
                 // If idDocument is not empty, retrieve data from the database and assign to form elements
                 if (!string.IsNullOrEmpty(idDocument))
@@ -488,6 +493,15 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         private void btnEdit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             LockControl(false);
+        }
+
+        private void btnChangeProgress_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            uc207_SelectProgress ucInfo = new uc207_SelectProgress();
+            if (XtraDialog.Show(ucInfo, "...流程", MessageBoxButtons.OKCancel) != DialogResult.OK) return;
+
+            progressSelect = ucInfo.ProgressSelect;
+            lbProgress.Text = "流程：" + progressSelect.DisplayName;
         }
     }
 }

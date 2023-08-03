@@ -9,4 +9,9 @@ namespace KnowledgeSystem
         public string Describe { get; set; }
         public Nullable<int> Prioritize { get; set; }
     }
+
+    public class GroupProgress : Group
+    {
+        public int IndexStep { get; set; }
+    }
 }
