@@ -326,7 +326,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             if (permissionAttachments.DeleteInfo != true)
             {
-                MessageBox.Show(TempDatas.NoPermission);
+                XtraMessageBox.Show(TempDatas.NoPermission, TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
             }
 
@@ -466,6 +466,12 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void gcFiles_DoubleClick(object sender, EventArgs e)
         {
+            if (permissionAttachments.ReadFile != true)
+            {
+                XtraMessageBox.Show(TempDatas.NoPermission, TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return;
+            }
+
             int forcusRow = gvFiles.FocusedRowHandle;
             if (forcusRow < 0) return;
 
