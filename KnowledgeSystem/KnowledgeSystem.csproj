@@ -84,6 +84,10 @@
     <Compile Include="Configs\RegistryHelper.cs" />
     <Compile Include="Configs\SingleConnection.cs" />
     <Compile Include="Configs\TempDatas.cs" />
+    <Compile Include="Models\dm_Progress.cs" />
+    <Compile Include="Models\dm_StepProgress.cs" />
+    <Compile Include="Models\DocProgress.cs" />
+    <Compile Include="Models\DocProgressInfo.cs" />
     <Compile Include="Models\Function.cs" />
     <Compile Include="Models\FunctionRole.cs" />
     <Compile Include="Models\Group.cs" />
@@ -165,6 +169,12 @@
     <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_Search.Designer.cs">
       <DependentUpon>uc207_Search.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_StepProgress.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_StepProgress.Designer.cs">
+      <DependentUpon>uc207_StepProgress.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\04_SystemAdministrator\01_UserManage\uc401_GroupManage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -226,6 +236,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_Search.resx">
       <DependentUpon>uc207_Search.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_StepProgress.resx">
+      <DependentUpon>uc207_StepProgress.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\01_UserManage\uc401_GroupManage.resx">
       <DependentUpon>uc401_GroupManage.cs</DependentUpon>
@@ -306,6 +319,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\ShowPrintPreview.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\TipOverTree_Right.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SQLModel.Context.tt">

@@ -15,6 +15,10 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.User" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.Function" Width="1.5" PointX="6.75" PointY="6.75" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.Group" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_Progress" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_StepProgress" Width="1.5" PointX="2.75" PointY="8.75" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.DocProgress" Width="1.5" PointX="8.75" PointY="3.75" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.DocProgressInfo" Width="1.5" PointX="8.75" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

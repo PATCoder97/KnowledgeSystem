@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.1.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+<style type="text/css">
+	.Black{fill:#737374;}
+	.Yellow{fill:#FCB01B;}
+	.Green{fill:#129C49;}
+	.Blue{fill:#387CB7;}
+	.Red{fill:#D02127;}
+	.White{fill:#FFFFFF;}
+	.st0{opacity:0.5;}
+	.st1{opacity:0.75;}
+	.st2{opacity:0.25;}
+	.st3{display:none;fill:#737374;}
+</style>
+<polygon class="Black" points="31,3 28,0 28,2 2,2 2,4 28,4 28,6 "/>
+<path class="Blue" d="M7,6H3C2.5,6,2,6.4,2,7v4c0,0.6,0.5,1,1,1h4c0.5,0,1-0.4,1-1V7C8,6.4,7.5,6,7,6z M6,10H4V8h2V10z"/>
+<path class="Blue" d="M19,12h-4c-0.5,0-1,0.4-1,1v4c0,0.6,0.5,1,1,1h4c0.5,0,1-0.4,1-1v-4C20,12.4,19.5,12,19,12z M18,16h-2v-2h2V16
+	z M19,20h-4c-0.5,0-1,0.4-1,1v4c0,0.6,0.5,1,1,1h4c0.5,0,1-0.4,1-1v-4C20,20.4,19.5,20,19,20z M18,24h-2v-2h2V24z"/>
+<path class="Blue" d="M31,26h-4c-0.5,0-1,0.4-1,1v4c0,0.6,0.5,1,1,1h4c0.5,0,1-0.4,1-1v-4C32,26.4,31.5,26,31,26z M30,30h-2v-2h2V30
+	z"/>
+<g class="st0">
+	<path class="Black" d="M6,14h8v2H6v6h8v2H4V12h2V14z M18,28v-2h-2v4h10v-2H18z"/>
+</g>
+</svg>
