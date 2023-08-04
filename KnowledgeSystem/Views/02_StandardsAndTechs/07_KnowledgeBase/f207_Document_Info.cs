@@ -1,4 +1,5 @@
 ﻿using DevExpress.ClipboardSource.SpreadsheetML;
+using DevExpress.Utils.About;
 using DevExpress.Utils.Drawing.Helpers;
 using DevExpress.Utils.Win.Hook;
 using DevExpress.XtraEditors;
@@ -62,6 +63,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         Securityinfo permissionAttachments = new Securityinfo();
         dm_Progress progressSelect = new dm_Progress();
+
+        int finishStep = -1;
+        string events = "新增成功";
 
         private class Attachments
         {
@@ -187,14 +191,19 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void f207_DocumentInfo_Load(object sender, EventArgs e)
         {
+            btnApproved.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+            btnDisapprove.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+
+            groupProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            controlgroupDocument.SelectedTabPage = lcgInfo;
+
             // Initialize RefreshHelper
             helper = new RefreshHelper(bgvSecurity, "Id");
-
-            controlgroupDocument.SelectedTabPage = lcgInfo;
 
             // Set GridView to read-only and assign data sources to grid controls
             gvEditHistory.ReadOnlyGridView();
             gvFiles.ReadOnlyGridView();
+            gvHistoryProcess.ReadOnlyGridView();
             gcFiles.DataSource = sourceAttachments;
             gcSecurity.DataSource = sourceSecuritys;
 
@@ -288,27 +297,59 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     sourceSecuritys.DataSource = lsSecurityInfos;
                     bgvSecurity.BestFitColumns();
                     helper.LoadViewInfo();
+
+
+                    var lsDocProgresses = db.DocProgresses.Where(r => !r.IsSuccessful && r.IdKnowledgeBase == idDocument).ToList();
+
+
+                    if (lsDocProgresses.Count != 0)
+                    {
+                        groupProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                        controlgroupDocument.SelectedTabPage = groupProgress;
+
+                        int idProgressByDoc = lsDocProgresses.First().IdProgress;
+                        int idDocProgress = lsDocProgresses.First().Id;// !!!!!!!!Chuyen len lam bien toan cuc!!!!!!!! Chua lam
+                        var lsDMStepProgress = db.dm_StepProgress.Where(r => r.IdProgress == idProgressByDoc).ToList();
+                        var lsDocProgressInfos = db.DocProgressInfoes.Where(r => r.IdDocProgress == idDocProgress).ToList();
+
+                        finishStep = lsDMStepProgress.Max(r => r.IndexStep);
+
+                        var lsStepProgressDoc = (from data in lsDMStepProgress
+                                                 join groups in lsGroups on data.IdGroup equals groups.Id
+                                                 select new { groups.DisplayName }).ToList();
+
+                        stepProgressDoc.Items.Add(new StepProgressBarItem("經辦人"));
+                        foreach (var item in lsStepProgressDoc)
+                        {
+                            stepProgressDoc.Items.Add(new StepProgressBarItem(item.DisplayName));
+                        }
+
+                        var stepNow = lsDocProgressInfos.OrderByDescending(r => r.TimeStep).First().IndexStep;
+
+                        stepProgressDoc.ItemOptions.Indicator.Width = 40;
+                        stepProgressDoc.SelectedItemIndex = stepNow;
+
+                        var lsHistoryProcess = (from data in lsDocProgressInfos
+                                                join users in db.Users on data.IdUserProcess equals users.Id
+                                                select new
+                                                {
+                                                    TimeStep = data.TimeStep,
+                                                    data.Descriptions,
+                                                    UserProcess = $"{users.IdDepartment} | {data.IdUserProcess}/{users.DisplayName}",
+                                                }).ToList();
+
+                        gcHistoryProcess.DataSource = lsHistoryProcess;
+
+                        btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                        btnDel.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                        btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                        btnApproved.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                        btnDisapprove.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                    }
                 }
             }
 
             permissionAttachments = GetPermission();
-
-            using (var db = new DBDocumentManagementSystemEntities())
-            {
-                //var lsStepProgressDoc = db.dm_StepProgress.ToList();
-                var lsStepProgressDoc = (from data in db.dm_StepProgress.Where(r => r.IdProgress == 2).ToList()
-                                         join groups in lsGroups on data.IdGroup equals groups.Id
-                                         select new { groups.DisplayName }).ToList();
-
-                stepProgressDoc.Items.Add(new StepProgressBarItem("經辦人"));
-                foreach (var item in lsStepProgressDoc)
-                {
-                    stepProgressDoc.Items.Add(new StepProgressBarItem(item.DisplayName));
-                }
-            }
-
-            stepProgressDoc.ItemOptions.Indicator.Width = 40;
-            stepProgressDoc.SelectedItemIndex = 3;
         }
 
         private void btnAddFile_Click(object sender, EventArgs e)
@@ -361,7 +402,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             bgvSecurity.FocusedRowHandle = -1;
 
             // Determine whether to add or update the document and set the appropriate message
-            string events = idDocument == string.Empty ? "新增成功" : "修改成功";
+            events = idDocument == string.Empty ? "新增成功" : "修改成功";
             string idDocumentToUpdate = string.IsNullOrEmpty(idDocument) ? GenerateIdDocument() : idDocument;
 
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
@@ -442,7 +483,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                             IdKnowledgeBase = idDocumentToUpdate,
                             IsSuccessful = false,
                             IdProgress = progressSelect.Id,
-                            Descriptions = "Them moi",
+                            Descriptions = events,
                         };
 
                         db.DocProgresses.Add(docProgress);
@@ -451,17 +492,18 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     db.SaveChanges();
 
                     lsDocProgressById = db.DocProgresses.Where(r => r.IdKnowledgeBase == idDocumentToUpdate).ToList();
-                    int idDocProgress = lsDocProgressById.OrderBy(r => r.Id).FirstOrDefault().Id;
+                    int idDocProgress = lsDocProgressById.OrderByDescending(r => r.Id).FirstOrDefault().Id;
 
-                    List<DocProgressInfo> lsDocProgressInfos = db.DocProgressInfoes.Where(r => r.IdDocProgress == idDocProgress).ToList();
-                    int indexStep = lsDocProgressInfos.Count != 0 ? lsDocProgressInfos.OrderByDescending(r => r.Id).FirstOrDefault().IndexStep + 1 : 0;
+                    //List<DocProgressInfo> lsDocProgressInfos = db.DocProgressInfoes.Where(r => r.IdDocProgress == idDocProgress).ToList();
+                    //int indexStep = lsDocProgressInfos.Count != 0 ? lsDocProgressInfos.OrderByDescending(r => r.Id).FirstOrDefault().IndexStep + 1 : 0;
 
                     DocProgressInfo progressInfo = new DocProgressInfo()
                     {
                         IdDocProgress = idDocProgress,
                         TimeStep = DateTime.Now,
-                        IndexStep = indexStep,
+                        IndexStep = 0,
                         IdUserProcess = TempDatas.LoginId,
+                        Descriptions = events,
                     };
 
                     db.DocProgressInfoes.Add(progressInfo);
@@ -553,6 +595,78 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
             progressSelect = ucInfo.ProgressSelect;
             lbProgress.Text = "流程：" + progressSelect.DisplayName;
+        }
+
+        private void btnApproved_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            using (var db = new DBDocumentManagementSystemEntities())
+            {
+                var lsDocProgressById = db.DocProgresses.Where(r => r.IdKnowledgeBase == idDocument).ToList();
+                int idDocProgress = lsDocProgressById.OrderByDescending(r => r.Id).FirstOrDefault().Id;
+
+                List<DocProgressInfo> lsDocProgressInfos = db.DocProgressInfoes.Where(r => r.IdDocProgress == idDocProgress).ToList();
+                int indexStep = lsDocProgressInfos.Count != 0 ? lsDocProgressInfos.OrderByDescending(r => r.Id).FirstOrDefault().IndexStep + 1 : 0;
+
+                DocProgressInfo progressInfo = new DocProgressInfo()
+                {
+                    IdDocProgress = idDocProgress,
+                    TimeStep = DateTime.Now,
+                    IndexStep = indexStep,
+                    IdUserProcess = TempDatas.LoginId,
+                    Descriptions = "核准",
+                };
+
+                db.DocProgressInfoes.Add(progressInfo);
+
+                if (indexStep == finishStep)
+                {
+                    var docProcessUpdate = db.DocProgresses.Where(r => r.Id == idDocProgress).First();
+                    docProcessUpdate.IsSuccessful = true;
+
+                    db.DocProgresses.AddOrUpdate(docProcessUpdate);
+                }
+
+                // Save the changes to the database
+                db.SaveChanges();
+            }
+
+            Close();
+        }
+
+        private void btnDisapprove_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            XtraInputBoxArgs args = new XtraInputBoxArgs();
+            // set required Input Box options
+            args.Caption = TempDatas.SoftNameTW;
+            args.Prompt = "退回文件原因";
+            args.DefaultButtonIndex = 0;
+            MemoEdit editor = new MemoEdit();
+            args.Editor = editor;
+            // display an Input Box with the custom editor
+            var result = XtraInputBox.Show(args);
+            string descriptions = result == null ? "" : result.ToString();
+
+            using (var db = new DBDocumentManagementSystemEntities())
+            {
+                var lsDocProgressById = db.DocProgresses.Where(r => r.IdKnowledgeBase == idDocument).ToList();
+                int idDocProgress = lsDocProgressById.OrderByDescending(r => r.Id).FirstOrDefault().Id;
+
+                DocProgressInfo progressInfo = new DocProgressInfo()
+                {
+                    IdDocProgress = idDocProgress,
+                    TimeStep = DateTime.Now,
+                    IndexStep = 0,
+                    IdUserProcess = TempDatas.LoginId,
+                    Descriptions = $"退回，說明：{descriptions}",
+                };
+
+                db.DocProgressInfoes.Add(progressInfo);
+
+                // Save the changes to the database
+                db.SaveChanges();
+            }
+
+            Close();
         }
     }
 }

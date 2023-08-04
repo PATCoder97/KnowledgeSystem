@@ -74,8 +74,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 var knowledgeType = lsKnowledgeTypes.Where(r => r.DisplayName == Text).Select(r => r).FirstOrDefault();
                 if (knowledgeType != null) { idType = knowledgeType.Id; }
 
+                var lsIdBaseRemove = db.DocProgresses.Where(r => !r.IsSuccessful).Select(r => r.IdKnowledgeBase).ToList();
+                var lsBaseRemove = db.KnowledgeBases.Where(r => lsIdBaseRemove.Contains(r.Id)).ToList();
+
                 lsUsers = db.Users.ToList();
-                lsKnowledgeBase = db.KnowledgeBases.Select(r => new { r.Id, r.DisplayName, r.Keyword, r.UserRequest, r.IdTypes, r.UserUpload, r.UploadDate })
+                lsKnowledgeBase = db.KnowledgeBases.RemoveRange(lsBaseRemove).Select(r => new { r.Id, r.DisplayName, r.Keyword, r.UserRequest, r.IdTypes, r.UserUpload, r.UploadDate })
                     .ToList().Select(r => new KnowledgeBase
                     {
                         Id = r.Id,

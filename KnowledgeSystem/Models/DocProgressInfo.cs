@@ -9,5 +9,6 @@ namespace KnowledgeSystem
         public DateTime TimeStep { get; set; }
         public int IndexStep { get; set; }
         public string IdUserProcess { get; set; }
+        public string Descriptions { get; set; }
     }
 }

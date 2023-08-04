@@ -43,12 +43,17 @@
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.gcHistoryProcess = new DevExpress.XtraGrid.GridControl();
             this.gvHistoryProcess = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnEdit = new DevExpress.XtraBars.BarButtonItem();
             this.btnConfirm = new DevExpress.XtraBars.BarButtonItem();
             this.btnDel = new DevExpress.XtraBars.BarButtonItem();
             this.btnChangeProgress = new DevExpress.XtraBars.BarButtonItem();
+            this.btnApproved = new DevExpress.XtraBars.BarButtonItem();
+            this.btnDisapprove = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -96,7 +101,7 @@
             this.cbbUserRequest = new DevExpress.XtraEditors.LookUpEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.controlgroupDocument = new DevExpress.XtraLayout.TabbedControlGroup();
-            this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.groupProgress = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem14 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcgInfo = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -143,7 +148,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.cbbUserRequest.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controlgroupDocument)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupProgress)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem14)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcgInfo)).BeginInit();
@@ -208,9 +213,63 @@
             // 
             // gvHistoryProcess
             // 
+            this.gvHistoryProcess.Appearance.HeaderPanel.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvHistoryProcess.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
+            this.gvHistoryProcess.Appearance.HeaderPanel.Options.UseFont = true;
+            this.gvHistoryProcess.Appearance.HeaderPanel.Options.UseForeColor = true;
+            this.gvHistoryProcess.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            this.gvHistoryProcess.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gvHistoryProcess.Appearance.Row.Font = new System.Drawing.Font("DFKai-SB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvHistoryProcess.Appearance.Row.ForeColor = System.Drawing.Color.Black;
+            this.gvHistoryProcess.Appearance.Row.Options.UseFont = true;
+            this.gvHistoryProcess.Appearance.Row.Options.UseForeColor = true;
+            this.gvHistoryProcess.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn7,
+            this.gridColumn8,
+            this.gridColumn9});
             this.gvHistoryProcess.GridControl = this.gcHistoryProcess;
             this.gvHistoryProcess.Name = "gvHistoryProcess";
+            this.gvHistoryProcess.OptionsCustomization.AllowColumnMoving = false;
+            this.gvHistoryProcess.OptionsCustomization.AllowFilter = false;
+            this.gvHistoryProcess.OptionsCustomization.AllowGroup = false;
+            this.gvHistoryProcess.OptionsCustomization.AllowQuickHideColumns = false;
+            this.gvHistoryProcess.OptionsCustomization.AllowSort = false;
+            this.gvHistoryProcess.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
+            this.gvHistoryProcess.OptionsView.EnableAppearanceOddRow = true;
             this.gvHistoryProcess.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn7
+            // 
+            this.gridColumn7.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn7.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn7.Caption = "時期";
+            this.gridColumn7.DisplayFormat.FormatString = "yyyy/MM/dd HH:mm";
+            this.gridColumn7.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.gridColumn7.FieldName = "TimeStep";
+            this.gridColumn7.MaxWidth = 200;
+            this.gridColumn7.Name = "gridColumn7";
+            this.gridColumn7.Visible = true;
+            this.gridColumn7.VisibleIndex = 0;
+            this.gridColumn7.Width = 200;
+            // 
+            // gridColumn8
+            // 
+            this.gridColumn8.Caption = "處理人";
+            this.gridColumn8.FieldName = "UserProcess";
+            this.gridColumn8.MaxWidth = 250;
+            this.gridColumn8.Name = "gridColumn8";
+            this.gridColumn8.Visible = true;
+            this.gridColumn8.VisibleIndex = 1;
+            this.gridColumn8.Width = 250;
+            // 
+            // gridColumn9
+            // 
+            this.gridColumn9.Caption = "說明";
+            this.gridColumn9.FieldName = "Descriptions";
+            this.gridColumn9.Name = "gridColumn9";
+            this.gridColumn9.Visible = true;
+            this.gridColumn9.VisibleIndex = 2;
+            this.gridColumn9.Width = 552;
             // 
             // barManager1
             // 
@@ -227,9 +286,11 @@
             this.btnEdit,
             this.btnConfirm,
             this.btnDel,
-            this.btnChangeProgress});
+            this.btnChangeProgress,
+            this.btnApproved,
+            this.btnDisapprove});
             this.barManager1.MainMenu = this.bar2;
-            this.barManager1.MaxItemId = 4;
+            this.barManager1.MaxItemId = 6;
             // 
             // bar2
             // 
@@ -253,7 +314,9 @@
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnEdit, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnConfirm),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnDel),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnChangeProgress)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnChangeProgress),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnApproved),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnDisapprove)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawBorder = false;
             this.bar2.OptionsBar.DrawDragBorder = false;
@@ -300,6 +363,26 @@
             this.btnChangeProgress.Name = "btnChangeProgress";
             this.btnChangeProgress.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
             this.btnChangeProgress.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnChangeProgress_ItemClick);
+            // 
+            // btnApproved
+            // 
+            this.btnApproved.Caption = "核准";
+            this.btnApproved.Id = 4;
+            this.btnApproved.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnApproved.ImageOptions.SvgImage")));
+            this.btnApproved.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnApproved.Name = "btnApproved";
+            this.btnApproved.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            this.btnApproved.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnApproved_ItemClick);
+            // 
+            // btnDisapprove
+            // 
+            this.btnDisapprove.Caption = "退回";
+            this.btnDisapprove.Id = 5;
+            this.btnDisapprove.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnDisapprove.ImageOptions.SvgImage")));
+            this.btnDisapprove.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnDisapprove.Name = "btnDisapprove";
+            this.btnDisapprove.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            this.btnDisapprove.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDisapprove_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -898,25 +981,25 @@
             this.controlgroupDocument.AppearanceTabPage.HeaderActive.Options.UseForeColor = true;
             this.controlgroupDocument.Location = new System.Drawing.Point(0, 23);
             this.controlgroupDocument.Name = "controlgroupDocument";
-            this.controlgroupDocument.SelectedTabPage = this.layoutControlGroup1;
+            this.controlgroupDocument.SelectedTabPage = this.groupProgress;
             this.controlgroupDocument.Size = new System.Drawing.Size(1056, 391);
             this.controlgroupDocument.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.groupProgress,
             this.lcgInfo,
             this.layoutControlGroup2,
             this.layoutControlGroup3,
-            this.layoutControlGroup5,
-            this.layoutControlGroup1});
+            this.layoutControlGroup5});
             this.controlgroupDocument.Text = "信息";
             // 
-            // layoutControlGroup1
+            // groupProgress
             // 
-            this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.groupProgress.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem14,
             this.layoutControlItem15});
-            this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlGroup1.Name = "layoutControlGroup1";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(1032, 340);
-            this.layoutControlGroup1.Text = "審查流程";
+            this.groupProgress.Location = new System.Drawing.Point(0, 0);
+            this.groupProgress.Name = "groupProgress";
+            this.groupProgress.Size = new System.Drawing.Size(1032, 340);
+            this.groupProgress.Text = "審查流程";
             // 
             // layoutControlItem14
             // 
@@ -1213,7 +1296,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.cbbUserRequest.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.controlgroupDocument)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupProgress)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem14)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcgInfo)).EndInit();
@@ -1317,8 +1400,13 @@
         private DevExpress.XtraGrid.GridControl gcHistoryProcess;
         private DevExpress.XtraGrid.Views.Grid.GridView gvHistoryProcess;
         private DevExpress.XtraEditors.StepProgressBar stepProgressDoc;
-        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
+        private DevExpress.XtraLayout.LayoutControlGroup groupProgress;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem14;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem15;
+        private DevExpress.XtraBars.BarButtonItem btnApproved;
+        private DevExpress.XtraBars.BarButtonItem btnDisapprove;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
     }
 }

@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -41,19 +42,18 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 var lsKnowledgeBases = db.KnowledgeBases.ToList();
                 var lsUsers = db.Users.ToList();
 
-
-                var queryDocNotSuccess = (from infos in lsDocProgressInfos
-                                          group infos by infos.IdDocProgress into pg
-                                          select new
-                                          {
-                                              Id = pg.Key,
-                                              TimeStep = lsDocProgressInfos.Where(r => r.IdDocProgress == pg.Key).OrderByDescending(r => r.TimeStep).First().TimeStep,
-                                              IndexStep = lsDocProgressInfos.Where(r => r.IdDocProgress == pg.Key).OrderByDescending(r => r.TimeStep).First().IndexStep,
-                                              IdUserProcess = lsDocProgressInfos.Where(r => r.IdDocProgress == pg.Key).OrderBy(r => r.TimeStep).First().IdUserProcess,
-                                          }).ToList();
+                var lsDocNotSuccess = (from data in db.DocProgressInfoes
+                                       group data by data.IdDocProgress into g
+                                       select new
+                                       {
+                                           IdDocProgress = g.Key,
+                                           IndexStep = g.OrderByDescending(dpi => dpi.TimeStep).Select(dpi => dpi.IndexStep).FirstOrDefault(),
+                                           TimeStep = g.OrderByDescending(dpi => dpi.TimeStep).Select(dpi => dpi.TimeStep).FirstOrDefault(),
+                                           IdUserProcess = g.OrderBy(dpi => dpi.TimeStep).Select(dpi => dpi.IdUserProcess).FirstOrDefault()
+                                       }).ToList();
 
                 var lsDataApproval = (from data in lsDocProgresses
-                                      join infos in queryDocNotSuccess on data.Id equals infos.Id
+                                      join infos in lsDocNotSuccess on data.Id equals infos.IdDocProgress
                                       join bases in lsKnowledgeBases on data.IdKnowledgeBase equals bases.Id
                                       join users in lsUsers on infos.IdUserProcess equals users.Id
                                       select new
@@ -95,6 +95,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
             f207_Document_Info document_Info = new f207_Document_Info(IdKnowledgeBase);
             document_Info.ShowDialog();
+
+            LoadData();
         }
     }
 }
