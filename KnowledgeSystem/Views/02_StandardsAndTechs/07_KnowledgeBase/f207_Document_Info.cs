@@ -432,6 +432,40 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                         db.KnowledgeSecurities.Add(dataAdd);
                     }
 
+                    List<DocProgress> lsDocProgressById = db.DocProgresses.Where(r => r.IdKnowledgeBase == idDocumentToUpdate).ToList();
+
+                    bool IsNewProgress = !lsDocProgressById.Any(r => !r.IsSuccessful);
+                    if (IsNewProgress)
+                    {
+                        DocProgress docProgress = new DocProgress()
+                        {
+                            IdKnowledgeBase = idDocumentToUpdate,
+                            IsSuccessful = false,
+                            IdProgress = progressSelect.Id,
+                            Descriptions = "Them moi",
+                        };
+
+                        db.DocProgresses.Add(docProgress);
+                    }
+                    // Save the changes to the database
+                    db.SaveChanges();
+
+                    lsDocProgressById = db.DocProgresses.Where(r => r.IdKnowledgeBase == idDocumentToUpdate).ToList();
+                    int idDocProgress = lsDocProgressById.OrderBy(r => r.Id).FirstOrDefault().Id;
+
+                    List<DocProgressInfo> lsDocProgressInfos = db.DocProgressInfoes.Where(r => r.IdDocProgress == idDocProgress).ToList();
+                    int indexStep = lsDocProgressInfos.Count != 0 ? lsDocProgressInfos.OrderByDescending(r => r.Id).FirstOrDefault().IndexStep + 1 : 0;
+
+                    DocProgressInfo progressInfo = new DocProgressInfo()
+                    {
+                        IdDocProgress = idDocProgress,
+                        TimeStep = DateTime.Now,
+                        IndexStep = indexStep,
+                        IdUserProcess = TempDatas.LoginId,
+                    };
+
+                    db.DocProgressInfoes.Add(progressInfo);
+
                     // Save the changes to the database
                     db.SaveChanges();
                 }

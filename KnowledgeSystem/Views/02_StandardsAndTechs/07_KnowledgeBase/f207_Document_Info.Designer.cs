@@ -30,23 +30,19 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f207_Document_Info));
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions9 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject33 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject34 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject35 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject36 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions10 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject37 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject38 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject39 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject40 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.lbProgress = new DevExpress.XtraEditors.LabelControl();
-            this.gcEditHistory = new DevExpress.XtraGrid.GridControl();
-            this.gvEditHistory = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcHistoryProcess = new DevExpress.XtraGrid.GridControl();
+            this.gvHistoryProcess = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnEdit = new DevExpress.XtraBars.BarButtonItem();
@@ -57,6 +53,13 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.stepProgressDoc = new DevExpress.XtraEditors.StepProgressBar();
+            this.lbProgress = new DevExpress.XtraEditors.LabelControl();
+            this.gcEditHistory = new DevExpress.XtraGrid.GridControl();
+            this.gvEditHistory = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnAddPermission = new DevExpress.XtraEditors.SimpleButton();
             this.txbNameVN = new DevExpress.XtraEditors.TextEdit();
             this.lbCountFile = new System.Windows.Forms.Label();
@@ -93,10 +96,9 @@
             this.cbbUserRequest = new DevExpress.XtraEditors.LookUpEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.controlgroupDocument = new DevExpress.XtraLayout.TabbedControlGroup();
-            this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem14 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcgInfo = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -105,6 +107,10 @@
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -112,17 +118,14 @@
             this.layoutControlGroup5 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcProgress = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.stepProgressDoc = new DevExpress.XtraEditors.StepProgressBar();
-            this.layoutControlItem14 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.gcHistoryProcess = new DevExpress.XtraGrid.GridControl();
-            this.gvHistoryProcess = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gcHistoryProcess)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvHistoryProcess)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stepProgressDoc)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcEditHistory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvEditHistory)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbNameVN.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcSecurity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bgvSecurity)).BeginInit();
@@ -140,10 +143,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.cbbUserRequest.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controlgroupDocument)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem14)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcgInfo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
@@ -152,6 +154,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).BeginInit();
@@ -159,12 +165,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcProgress)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.stepProgressDoc)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem14)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gcHistoryProcess)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvHistoryProcess)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -195,72 +195,22 @@
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
-            // lbProgress
+            // gcHistoryProcess
             // 
-            this.lbProgress.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbProgress.Appearance.ForeColor = System.Drawing.Color.White;
-            this.lbProgress.Appearance.Options.UseFont = true;
-            this.lbProgress.Appearance.Options.UseForeColor = true;
-            this.lbProgress.Location = new System.Drawing.Point(12, 12);
-            this.lbProgress.Name = "lbProgress";
-            this.lbProgress.Size = new System.Drawing.Size(63, 19);
-            this.lbProgress.StyleController = this.layoutControl1;
-            this.lbProgress.TabIndex = 19;
-            this.lbProgress.Text = "流程：";
+            this.gcHistoryProcess.Location = new System.Drawing.Point(24, 168);
+            this.gcHistoryProcess.MainView = this.gvHistoryProcess;
+            this.gcHistoryProcess.MenuManager = this.barManager1;
+            this.gcHistoryProcess.Name = "gcHistoryProcess";
+            this.gcHistoryProcess.Size = new System.Drawing.Size(1028, 242);
+            this.gcHistoryProcess.TabIndex = 21;
+            this.gcHistoryProcess.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvHistoryProcess});
             // 
-            // gcEditHistory
+            // gvHistoryProcess
             // 
-            this.gcEditHistory.Location = new System.Drawing.Point(24, 74);
-            this.gcEditHistory.MainView = this.gvEditHistory;
-            this.gcEditHistory.MenuManager = this.barManager1;
-            this.gcEditHistory.Name = "gcEditHistory";
-            this.gcEditHistory.Size = new System.Drawing.Size(1028, 336);
-            this.gcEditHistory.TabIndex = 18;
-            this.gcEditHistory.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gvEditHistory});
-            // 
-            // gvEditHistory
-            // 
-            this.gvEditHistory.Appearance.HeaderPanel.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gvEditHistory.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
-            this.gvEditHistory.Appearance.HeaderPanel.Options.UseFont = true;
-            this.gvEditHistory.Appearance.HeaderPanel.Options.UseForeColor = true;
-            this.gvEditHistory.Appearance.HeaderPanel.Options.UseTextOptions = true;
-            this.gvEditHistory.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gvEditHistory.Appearance.Row.Font = new System.Drawing.Font("DFKai-SB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gvEditHistory.Appearance.Row.ForeColor = System.Drawing.Color.Black;
-            this.gvEditHistory.Appearance.Row.Options.UseFont = true;
-            this.gvEditHistory.Appearance.Row.Options.UseForeColor = true;
-            this.gvEditHistory.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn4,
-            this.gridColumn5,
-            this.gridColumn6});
-            this.gvEditHistory.GridControl = this.gcEditHistory;
-            this.gvEditHistory.Name = "gvEditHistory";
-            this.gvEditHistory.OptionsView.EnableAppearanceOddRow = true;
-            this.gvEditHistory.OptionsView.ShowAutoFilterRow = true;
-            this.gvEditHistory.OptionsView.ShowGroupPanel = false;
-            // 
-            // gridColumn4
-            // 
-            this.gridColumn4.Caption = "修改時間";
-            this.gridColumn4.Name = "gridColumn4";
-            this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 0;
-            // 
-            // gridColumn5
-            // 
-            this.gridColumn5.Caption = "修改地方";
-            this.gridColumn5.Name = "gridColumn5";
-            this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 1;
-            // 
-            // gridColumn6
-            // 
-            this.gridColumn6.Caption = "修改者";
-            this.gridColumn6.Name = "gridColumn6";
-            this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 2;
+            this.gvHistoryProcess.GridControl = this.gcHistoryProcess;
+            this.gvHistoryProcess.Name = "gvHistoryProcess";
+            this.gvHistoryProcess.OptionsView.ShowGroupPanel = false;
             // 
             // barManager1
             // 
@@ -386,6 +336,87 @@
             this.barDockControlRight.Manager = this.barManager1;
             this.barDockControlRight.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.barDockControlRight.Size = new System.Drawing.Size(0, 434);
+            // 
+            // stepProgressDoc
+            // 
+            this.stepProgressDoc.Appearances.ItemAppearance.ContentBlockAppearance.Caption.Font = new System.Drawing.Font("DFKai-SB", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stepProgressDoc.Appearances.ItemAppearance.ContentBlockAppearance.Caption.ForeColor = System.Drawing.Color.Black;
+            this.stepProgressDoc.Appearances.ItemAppearance.ContentBlockAppearance.Caption.Options.UseFont = true;
+            this.stepProgressDoc.Appearances.ItemAppearance.ContentBlockAppearance.Caption.Options.UseForeColor = true;
+            this.stepProgressDoc.ItemOptions.Indicator.ActiveStateImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("stepProgressDoc.ItemOptions.Indicator.ActiveStateImageOptions.SvgImage")));
+            this.stepProgressDoc.ItemOptions.Indicator.ActiveStateImageOptions.SvgImageSize = new System.Drawing.Size(48, 48);
+            this.stepProgressDoc.Location = new System.Drawing.Point(24, 74);
+            this.stepProgressDoc.Name = "stepProgressDoc";
+            this.stepProgressDoc.Size = new System.Drawing.Size(1028, 90);
+            this.stepProgressDoc.StyleController = this.layoutControl1;
+            this.stepProgressDoc.TabIndex = 20;
+            // 
+            // lbProgress
+            // 
+            this.lbProgress.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbProgress.Appearance.ForeColor = System.Drawing.Color.White;
+            this.lbProgress.Appearance.Options.UseFont = true;
+            this.lbProgress.Appearance.Options.UseForeColor = true;
+            this.lbProgress.Location = new System.Drawing.Point(12, 12);
+            this.lbProgress.Name = "lbProgress";
+            this.lbProgress.Size = new System.Drawing.Size(63, 19);
+            this.lbProgress.StyleController = this.layoutControl1;
+            this.lbProgress.TabIndex = 19;
+            this.lbProgress.Text = "流程：";
+            // 
+            // gcEditHistory
+            // 
+            this.gcEditHistory.Location = new System.Drawing.Point(24, 74);
+            this.gcEditHistory.MainView = this.gvEditHistory;
+            this.gcEditHistory.MenuManager = this.barManager1;
+            this.gcEditHistory.Name = "gcEditHistory";
+            this.gcEditHistory.Size = new System.Drawing.Size(1028, 336);
+            this.gcEditHistory.TabIndex = 18;
+            this.gcEditHistory.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvEditHistory});
+            // 
+            // gvEditHistory
+            // 
+            this.gvEditHistory.Appearance.HeaderPanel.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvEditHistory.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
+            this.gvEditHistory.Appearance.HeaderPanel.Options.UseFont = true;
+            this.gvEditHistory.Appearance.HeaderPanel.Options.UseForeColor = true;
+            this.gvEditHistory.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            this.gvEditHistory.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gvEditHistory.Appearance.Row.Font = new System.Drawing.Font("DFKai-SB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvEditHistory.Appearance.Row.ForeColor = System.Drawing.Color.Black;
+            this.gvEditHistory.Appearance.Row.Options.UseFont = true;
+            this.gvEditHistory.Appearance.Row.Options.UseForeColor = true;
+            this.gvEditHistory.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn4,
+            this.gridColumn5,
+            this.gridColumn6});
+            this.gvEditHistory.GridControl = this.gcEditHistory;
+            this.gvEditHistory.Name = "gvEditHistory";
+            this.gvEditHistory.OptionsView.EnableAppearanceOddRow = true;
+            this.gvEditHistory.OptionsView.ShowAutoFilterRow = true;
+            this.gvEditHistory.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn4
+            // 
+            this.gridColumn4.Caption = "修改時間";
+            this.gridColumn4.Name = "gridColumn4";
+            this.gridColumn4.Visible = true;
+            this.gridColumn4.VisibleIndex = 0;
+            // 
+            // gridColumn5
+            // 
+            this.gridColumn5.Caption = "修改地方";
+            this.gridColumn5.Name = "gridColumn5";
+            this.gridColumn5.Visible = true;
+            this.gridColumn5.VisibleIndex = 1;
+            // 
+            // gridColumn6
+            // 
+            this.gridColumn6.Caption = "修改者";
+            this.gridColumn6.Name = "gridColumn6";
+            this.gridColumn6.Visible = true;
+            this.gridColumn6.VisibleIndex = 2;
             // 
             // btnAddPermission
             // 
@@ -659,10 +690,10 @@
             // btnDelPermission
             // 
             this.btnDelPermission.AutoHeight = false;
-            editorButtonImageOptions9.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("editorButtonImageOptions9.SvgImage")));
-            editorButtonImageOptions9.SvgImageSize = new System.Drawing.Size(24, 24);
+            editorButtonImageOptions1.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("editorButtonImageOptions1.SvgImage")));
+            editorButtonImageOptions1.SvgImageSize = new System.Drawing.Size(24, 24);
             this.btnDelPermission.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions9, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject33, serializableAppearanceObject34, serializableAppearanceObject35, serializableAppearanceObject36, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.btnDelPermission.Name = "btnDelPermission";
             this.btnDelPermission.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             this.btnDelPermission.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnDelPermission_ButtonClick);
@@ -731,10 +762,10 @@
             // btnDelFile
             // 
             this.btnDelFile.AutoHeight = false;
-            editorButtonImageOptions10.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("editorButtonImageOptions10.SvgImage")));
-            editorButtonImageOptions10.SvgImageSize = new System.Drawing.Size(16, 16);
+            editorButtonImageOptions2.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("editorButtonImageOptions2.SvgImage")));
+            editorButtonImageOptions2.SvgImageSize = new System.Drawing.Size(16, 16);
             this.btnDelFile.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions10, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject37, serializableAppearanceObject38, serializableAppearanceObject39, serializableAppearanceObject40, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.btnDelFile.Name = "btnDelFile";
             this.btnDelFile.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             this.btnDelFile.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnDelFile_ButtonClick);
@@ -877,53 +908,33 @@
             this.layoutControlGroup1});
             this.controlgroupDocument.Text = "信息";
             // 
-            // layoutControlGroup2
+            // layoutControlGroup1
             // 
-            this.layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem6,
-            this.layoutControlItem8,
-            this.layoutControlItem11});
-            this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlGroup2.Name = "layoutControlGroup2";
-            this.layoutControlGroup2.Size = new System.Drawing.Size(1032, 340);
-            this.layoutControlGroup2.Text = "附件";
+            this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem14,
+            this.layoutControlItem15});
+            this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlGroup1.Name = "layoutControlGroup1";
+            this.layoutControlGroup1.Size = new System.Drawing.Size(1032, 340);
+            this.layoutControlGroup1.Text = "審查流程";
             // 
-            // layoutControlItem6
+            // layoutControlItem14
             // 
-            this.layoutControlItem6.Control = this.gcFiles;
-            this.layoutControlItem6.Location = new System.Drawing.Point(0, 41);
-            this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 3);
-            this.layoutControlItem6.Size = new System.Drawing.Size(1032, 299);
-            this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem6.TextVisible = false;
+            this.layoutControlItem14.Control = this.stepProgressDoc;
+            this.layoutControlItem14.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem14.Name = "layoutControlItem14";
+            this.layoutControlItem14.Size = new System.Drawing.Size(1032, 94);
+            this.layoutControlItem14.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem14.TextVisible = false;
             // 
-            // layoutControlItem8
+            // layoutControlItem15
             // 
-            this.layoutControlItem8.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.layoutControlItem8.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
-            this.layoutControlItem8.AppearanceItemCaption.Options.UseFont = true;
-            this.layoutControlItem8.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem8.Control = this.btnAddFile;
-            this.layoutControlItem8.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem8.MaxSize = new System.Drawing.Size(108, 41);
-            this.layoutControlItem8.MinSize = new System.Drawing.Size(108, 41);
-            this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 3);
-            this.layoutControlItem8.Size = new System.Drawing.Size(108, 41);
-            this.layoutControlItem8.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.layoutControlItem8.Text = "附件";
-            this.layoutControlItem8.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem8.TextVisible = false;
-            // 
-            // layoutControlItem11
-            // 
-            this.layoutControlItem11.Control = this.lbCountFile;
-            this.layoutControlItem11.Location = new System.Drawing.Point(108, 0);
-            this.layoutControlItem11.Name = "layoutControlItem11";
-            this.layoutControlItem11.Size = new System.Drawing.Size(924, 41);
-            this.layoutControlItem11.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem11.TextVisible = false;
+            this.layoutControlItem15.Control = this.gcHistoryProcess;
+            this.layoutControlItem15.Location = new System.Drawing.Point(0, 94);
+            this.layoutControlItem15.Name = "layoutControlItem15";
+            this.layoutControlItem15.Size = new System.Drawing.Size(1032, 246);
+            this.layoutControlItem15.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem15.TextVisible = false;
             // 
             // lcgInfo
             // 
@@ -1037,6 +1048,54 @@
             this.layoutControlItem4.Text = "關鍵字";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(80, 19);
             // 
+            // layoutControlGroup2
+            // 
+            this.layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem6,
+            this.layoutControlItem8,
+            this.layoutControlItem11});
+            this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlGroup2.Name = "layoutControlGroup2";
+            this.layoutControlGroup2.Size = new System.Drawing.Size(1032, 340);
+            this.layoutControlGroup2.Text = "附件";
+            // 
+            // layoutControlItem6
+            // 
+            this.layoutControlItem6.Control = this.gcFiles;
+            this.layoutControlItem6.Location = new System.Drawing.Point(0, 41);
+            this.layoutControlItem6.Name = "layoutControlItem6";
+            this.layoutControlItem6.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 3);
+            this.layoutControlItem6.Size = new System.Drawing.Size(1032, 299);
+            this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem6.TextVisible = false;
+            // 
+            // layoutControlItem8
+            // 
+            this.layoutControlItem8.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.layoutControlItem8.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem8.AppearanceItemCaption.Options.UseFont = true;
+            this.layoutControlItem8.AppearanceItemCaption.Options.UseForeColor = true;
+            this.layoutControlItem8.Control = this.btnAddFile;
+            this.layoutControlItem8.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem8.MaxSize = new System.Drawing.Size(108, 41);
+            this.layoutControlItem8.MinSize = new System.Drawing.Size(108, 41);
+            this.layoutControlItem8.Name = "layoutControlItem8";
+            this.layoutControlItem8.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 3);
+            this.layoutControlItem8.Size = new System.Drawing.Size(108, 41);
+            this.layoutControlItem8.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem8.Text = "附件";
+            this.layoutControlItem8.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem8.TextVisible = false;
+            // 
+            // layoutControlItem11
+            // 
+            this.layoutControlItem11.Control = this.lbCountFile;
+            this.layoutControlItem11.Location = new System.Drawing.Point(108, 0);
+            this.layoutControlItem11.Name = "layoutControlItem11";
+            this.layoutControlItem11.Size = new System.Drawing.Size(924, 41);
+            this.layoutControlItem11.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem11.TextVisible = false;
+            // 
             // layoutControlGroup3
             // 
             this.layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
@@ -1111,64 +1170,6 @@
             this.lcProgress.TextSize = new System.Drawing.Size(0, 0);
             this.lcProgress.TextVisible = false;
             // 
-            // layoutControlGroup1
-            // 
-            this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem14,
-            this.layoutControlItem15});
-            this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlGroup1.Name = "layoutControlGroup1";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(1032, 340);
-            this.layoutControlGroup1.Text = "審查流程";
-            // 
-            // stepProgressDoc
-            // 
-            this.stepProgressDoc.Appearances.ItemAppearance.ContentBlockAppearance.Caption.Font = new System.Drawing.Font("DFKai-SB", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.stepProgressDoc.Appearances.ItemAppearance.ContentBlockAppearance.Caption.ForeColor = System.Drawing.Color.Black;
-            this.stepProgressDoc.Appearances.ItemAppearance.ContentBlockAppearance.Caption.Options.UseFont = true;
-            this.stepProgressDoc.Appearances.ItemAppearance.ContentBlockAppearance.Caption.Options.UseForeColor = true;
-            this.stepProgressDoc.ItemOptions.Indicator.ActiveStateImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("stepProgressDoc.ItemOptions.Indicator.ActiveStateImageOptions.SvgImage")));
-            this.stepProgressDoc.ItemOptions.Indicator.ActiveStateImageOptions.SvgImageSize = new System.Drawing.Size(48, 48);
-            this.stepProgressDoc.Location = new System.Drawing.Point(24, 74);
-            this.stepProgressDoc.Name = "stepProgressDoc";
-            this.stepProgressDoc.Size = new System.Drawing.Size(1028, 90);
-            this.stepProgressDoc.StyleController = this.layoutControl1;
-            this.stepProgressDoc.TabIndex = 20;
-            // 
-            // layoutControlItem14
-            // 
-            this.layoutControlItem14.Control = this.stepProgressDoc;
-            this.layoutControlItem14.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem14.Name = "layoutControlItem14";
-            this.layoutControlItem14.Size = new System.Drawing.Size(1032, 94);
-            this.layoutControlItem14.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem14.TextVisible = false;
-            // 
-            // gcHistoryProcess
-            // 
-            this.gcHistoryProcess.Location = new System.Drawing.Point(24, 168);
-            this.gcHistoryProcess.MainView = this.gvHistoryProcess;
-            this.gcHistoryProcess.MenuManager = this.barManager1;
-            this.gcHistoryProcess.Name = "gcHistoryProcess";
-            this.gcHistoryProcess.Size = new System.Drawing.Size(1028, 242);
-            this.gcHistoryProcess.TabIndex = 21;
-            this.gcHistoryProcess.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gvHistoryProcess});
-            // 
-            // gvHistoryProcess
-            // 
-            this.gvHistoryProcess.GridControl = this.gcHistoryProcess;
-            this.gvHistoryProcess.Name = "gvHistoryProcess";
-            // 
-            // layoutControlItem15
-            // 
-            this.layoutControlItem15.Control = this.gcHistoryProcess;
-            this.layoutControlItem15.Location = new System.Drawing.Point(0, 94);
-            this.layoutControlItem15.Name = "layoutControlItem15";
-            this.layoutControlItem15.Size = new System.Drawing.Size(1032, 246);
-            this.layoutControlItem15.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem15.TextVisible = false;
-            // 
             // f207_Document_Info
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
@@ -1189,9 +1190,12 @@
             this.Shown += new System.EventHandler(this.f207_DocumentInfo_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gcHistoryProcess)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvHistoryProcess)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stepProgressDoc)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcEditHistory)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvEditHistory)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbNameVN.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcSecurity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bgvSecurity)).EndInit();
@@ -1209,10 +1213,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.cbbUserRequest.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.controlgroupDocument)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem14)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcgInfo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
@@ -1221,6 +1224,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).EndInit();
@@ -1228,12 +1235,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcProgress)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.stepProgressDoc)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem14)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gcHistoryProcess)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvHistoryProcess)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

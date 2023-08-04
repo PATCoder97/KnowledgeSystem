@@ -6,5 +6,6 @@
         public string IdKnowledgeBase { get; set; }
         public int IdProgress { get; set; }
         public bool IsSuccessful { get; set; }
+        public string Descriptions { get; set; }
     }
 }

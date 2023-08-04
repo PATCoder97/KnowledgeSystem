@@ -33,9 +33,8 @@
             this.gcData = new DevExpress.XtraGrid.GridControl();
             this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gvColIdKnowledgeBase = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -100,9 +99,8 @@
             this.gvData.Appearance.Row.Options.UseForeColor = true;
             this.gvData.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumn1,
-            this.gridColumn2,
+            this.gvColIdKnowledgeBase,
             this.gridColumn3,
-            this.gridColumn4,
             this.gridColumn5});
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
@@ -110,41 +108,41 @@
             this.gvData.OptionsView.EnableAppearanceOddRow = true;
             this.gvData.OptionsView.ShowAutoFilterRow = true;
             this.gvData.OptionsView.ShowGroupPanel = false;
+            this.gvData.DoubleClick += new System.EventHandler(this.gvData_DoubleClick);
             // 
             // gridColumn1
             // 
             this.gridColumn1.Caption = "時期";
+            this.gridColumn1.DisplayFormat.FormatString = "yyyy/MM/dd HH:mm";
+            this.gridColumn1.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.gridColumn1.FieldName = "TimeStep";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
             this.gridColumn1.VisibleIndex = 0;
             // 
-            // gridColumn2
+            // gvColIdKnowledgeBase
             // 
-            this.gridColumn2.Caption = "資料編號";
-            this.gridColumn2.Name = "gridColumn2";
-            this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 1;
+            this.gvColIdKnowledgeBase.Caption = "資料編號";
+            this.gvColIdKnowledgeBase.FieldName = "IdKnowledgeBase";
+            this.gvColIdKnowledgeBase.Name = "gvColIdKnowledgeBase";
+            this.gvColIdKnowledgeBase.Visible = true;
+            this.gvColIdKnowledgeBase.VisibleIndex = 1;
             // 
             // gridColumn3
             // 
             this.gridColumn3.Caption = "資料名稱";
+            this.gridColumn3.FieldName = "DisplayName";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 2;
             // 
-            // gridColumn4
-            // 
-            this.gridColumn4.Caption = "資料類別";
-            this.gridColumn4.Name = "gridColumn4";
-            this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 3;
-            // 
             // gridColumn5
             // 
             this.gridColumn5.Caption = "上傳人";
+            this.gridColumn5.FieldName = "UserProcess";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 4;
+            this.gridColumn5.VisibleIndex = 3;
             // 
             // Root
             // 
@@ -204,9 +202,8 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
+        private DevExpress.XtraGrid.Columns.GridColumn gvColIdKnowledgeBase;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
     }
 }

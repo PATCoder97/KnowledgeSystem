@@ -37,7 +37,7 @@ namespace KnowledgeSystem
         public virtual DbSet<Group> Groups { get; set; }
         public virtual DbSet<dm_Progress> dm_Progress { get; set; }
         public virtual DbSet<dm_StepProgress> dm_StepProgress { get; set; }
-        public virtual DbSet<DocProgress> DocProgresses { get; set; }
         public virtual DbSet<DocProgressInfo> DocProgressInfoes { get; set; }
+        public virtual DbSet<DocProgress> DocProgresses { get; set; }
     }
 }
