@@ -29,7 +29,7 @@ namespace KnowledgeSystem
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new f00_Main());
 
-            TempDatas.LoginId = "VNW0014732";
+            TempDatas.LoginId = "VNW0012950";
             Application.Run(new f00_FluentFrame(1));
         }
     }

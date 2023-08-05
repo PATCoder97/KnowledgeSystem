@@ -163,11 +163,11 @@
     <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_DocApproval.Designer.cs">
       <DependentUpon>uc207_DocApproval.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_Notify.cs">
+    <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_Notify_DocProgress.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_Notify.Designer.cs">
-      <DependentUpon>uc207_Notify.cs</DependentUpon>
+    <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_Notify_DocProgress.Designer.cs">
+      <DependentUpon>uc207_Notify_DocProgress.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_Search.cs">
       <SubType>UserControl</SubType>
@@ -252,8 +252,8 @@
     <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_DocApproval.resx">
       <DependentUpon>uc207_DocApproval.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_Notify.resx">
-      <DependentUpon>uc207_Notify.cs</DependentUpon>
+    <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_Notify_DocProgress.resx">
+      <DependentUpon>uc207_Notify_DocProgress.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_Search.resx">
       <DependentUpon>uc207_Search.cs</DependentUpon>

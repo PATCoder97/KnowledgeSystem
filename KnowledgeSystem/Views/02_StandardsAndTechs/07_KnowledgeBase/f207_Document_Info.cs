@@ -629,16 +629,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 List<DocProgressInfo> lsDocProgressInfos = db.DocProgressInfoes.Where(r => r.IdDocProgress == idDocProgress).ToList();
                 int indexStep = lsDocProgressInfos.Count != 0 ? lsDocProgressInfos.OrderByDescending(r => r.Id).FirstOrDefault().IndexStep + 1 : 0;
 
-                DocProgressInfo progressInfo = new DocProgressInfo()
-                {
-                    IdDocProgress = idDocProgress,
-                    TimeStep = DateTime.Now,
-                    IndexStep = indexStep,
-                    IdUserProcess = TempDatas.LoginId,
-                    Descriptions = "核准",
-                };
-
-                db.DocProgressInfoes.Add(progressInfo);
+                string descriptions = "核准";
 
                 if (indexStep == finishStep)
                 {
@@ -646,7 +637,20 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     docProcessUpdate.IsSuccessful = true;
 
                     db.DocProgresses.AddOrUpdate(docProcessUpdate);
+
+                    descriptions = "已完成";
                 }
+
+                DocProgressInfo progressInfo = new DocProgressInfo()
+                {
+                    IdDocProgress = idDocProgress,
+                    TimeStep = DateTime.Now,
+                    IndexStep = indexStep,
+                    IdUserProcess = TempDatas.LoginId,
+                    Descriptions = descriptions,
+                };
+
+                db.DocProgressInfoes.Add(progressInfo);
 
                 // Save the changes to the database
                 db.SaveChanges();
