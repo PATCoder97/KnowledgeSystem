@@ -33,7 +33,8 @@ namespace KnowledgeSystem.Views._00_Generals
 
         #region parameters
 
-        Font fontTW = new Font("DFKai-SB", 14.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+        Font fontTW14 = new Font("DFKai-SB", 14.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+        Font fontTW12 = new Font("DFKai-SB", 12F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
 
         int groupId = 0;
         List<Function> lsFunctions = new List<Function>();
@@ -79,24 +80,57 @@ namespace KnowledgeSystem.Views._00_Generals
             using (var db = new DBDocumentManagementSystemEntities())
             {
                 lsFunctions = db.Functions.Where(r => r.IdParent == groupId).OrderBy(r => r.Prioritize).ToList();
-            }
 
-            foreach (var item in lsFunctions)
-            {
-                AccordionControlElement accordion = new AccordionControlElement();
+                foreach (var item in lsFunctions)
+                {
+                    AccordionControlElement accordion = new AccordionControlElement();
 
-                accordion.ImageOptions.SvgImage = item.Images != null ? DevExpress.Utils.Svg.SvgImage.FromFile($@"Images\{item.Images}") : null;
-                accordion.Name = $"name_{item.ControlName}";
-                accordion.Style = ElementStyle.Item;
-                accordion.Text = item.DisplayName;
-                accordion.Appearance.Normal.Font = fontTW;
-                accordion.Appearance.Hovered.Font = fontTW;
-                accordion.Appearance.Pressed.Font = fontTW;
-                accordion.Appearance.Pressed.ForeColor = Color.Red;
-                accordion.Hint = item.DisplayName;
+                    accordion.ImageOptions.SvgImage = item.Images != null ? DevExpress.Utils.Svg.SvgImage.FromFile($@"Images\{item.Images}") : null;
+                    accordion.Name = $"name_{item.ControlName}";
+                    accordion.Text = item.DisplayName;
+                    accordion.Appearance.Default.Font = fontTW14;
+                    //accordion.Appearance.Hovered.Font = fontTW14;
+                    //accordion.Appearance.Pressed.Font = fontTW14;
 
-                accordion.Click += new EventHandler(accordionElement_Click);
-                fluentControl.Elements.Add(accordion);
+                    accordion.Appearance.Normal.ForeColor = Color.Black;
+                    accordion.Appearance.Hovered.ForeColor = Color.OrangeRed;
+                    accordion.Appearance.Pressed.ForeColor = Color.Red;
+
+                    accordion.Hint = item.DisplayName;
+
+                    var lsChildren = db.Functions.Where(r => r.IdParent == item.Id).OrderBy(r => r.Prioritize).ToList();
+                    if (lsChildren.Count != 0)
+                    {
+                        foreach (var child in lsChildren)
+                        {
+                            AccordionControlElement accordionChild = new AccordionControlElement();
+
+                            accordionChild.ImageOptions.SvgImage = child.Images != null ? DevExpress.Utils.Svg.SvgImage.FromFile($@"Images\{child.Images}") : null;
+                            accordionChild.Name = $"name_{child.ControlName}";
+                            accordionChild.Text = child.DisplayName;
+                            accordionChild.Style = ElementStyle.Item;
+                            accordionChild.Appearance.Default.Font = fontTW14;
+                            //accordionChild.Appearance.Hovered.Font = fontTW12;
+                            //accordionChild.Appearance.Pressed.Font = fontTW12;
+
+                            accordionChild.Appearance.Normal.ForeColor = Color.Black;
+                            accordionChild.Appearance.Hovered.ForeColor = Color.OrangeRed;
+                            accordionChild.Appearance.Pressed.ForeColor = Color.Red;
+
+                            accordionChild.Hint = child.DisplayName;
+                            accordionChild.Click += new EventHandler(accordionElement_Click);
+
+                            accordion.Elements.Add(accordionChild);
+                        }
+                    }
+                    else
+                    {
+                        accordion.Style = ElementStyle.Item;
+                        accordion.Click += new EventHandler(accordionElement_Click);
+                    }
+
+                    fluentControl.Elements.Add(accordion);
+                }
             }
         }
 

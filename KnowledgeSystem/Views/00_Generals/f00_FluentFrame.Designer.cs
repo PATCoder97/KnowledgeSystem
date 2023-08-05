@@ -39,9 +39,9 @@
             // div_container
             // 
             this.div_container.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.div_container.Location = new System.Drawing.Point(166, 29);
+            this.div_container.Location = new System.Drawing.Point(200, 29);
             this.div_container.Name = "div_container";
-            this.div_container.Size = new System.Drawing.Size(743, 574);
+            this.div_container.Size = new System.Drawing.Size(709, 574);
             this.div_container.TabIndex = 0;
             // 
             // fluentControl
@@ -50,7 +50,7 @@
             this.fluentControl.Location = new System.Drawing.Point(0, 29);
             this.fluentControl.Name = "fluentControl";
             this.fluentControl.ScrollBarMode = DevExpress.XtraBars.Navigation.ScrollBarMode.Touch;
-            this.fluentControl.Size = new System.Drawing.Size(166, 574);
+            this.fluentControl.Size = new System.Drawing.Size(200, 574);
             this.fluentControl.TabIndex = 1;
             this.fluentControl.ViewType = DevExpress.XtraBars.Navigation.AccordionControlViewType.HamburgerMenu;
             // 
