@@ -162,7 +162,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
             btnApproved.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             btnDisapprove.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-
+            btnCancel.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
         }
 
         private Securityinfo GetPermission()
@@ -353,7 +353,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
                         if (stepNow != -1)
                         {
-                            btnCancel.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                             btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                             btnApproved.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                             btnDisapprove.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
