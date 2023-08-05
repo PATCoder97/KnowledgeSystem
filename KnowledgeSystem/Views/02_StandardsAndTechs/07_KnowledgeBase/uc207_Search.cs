@@ -23,17 +23,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             helper = new RefreshHelper(gvData, "Id");
         }
 
-        //private static uc207_Search _instance;
-        //public static uc207_Search Instance
-        //{
-        //    get
-        //    {
-        //        if (_instance == null)
-        //            _instance = new uc207_Search();
-        //        return _instance;
-        //    }
-        //}
-
         #region parameters
 
         const string SIMPLE_MODE = "基本";

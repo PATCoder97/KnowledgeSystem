@@ -136,11 +136,21 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void LockControl(bool isFormView = true)
         {
-            //txbName.ReadOnly = isFormView;
-            //txbDescribe.ReadOnly = isFormView;
+            cbbType.ReadOnly = isFormView;
+            txbNameTW.ReadOnly = isFormView;
+            txbNameVN.ReadOnly = isFormView;
+            cbbUserRequest.ReadOnly = isFormView;
+            cbbUserUpload.ReadOnly = isFormView;
+            txbKeyword.ReadOnly = isFormView;
 
-            //btnAddUser.Enabled = !isFormView;
-            //btnDelUser.Enabled = !isFormView;
+            btnAddFile.Enabled = !isFormView;
+            btnAddPermission.Enabled = !isFormView;
+
+            gvFiles.OptionsBehavior.ReadOnly = isFormView;
+            bgvSecurity.OptionsBehavior.ReadOnly = isFormView;
+
+            gColDelFile.Visible = !isFormView;
+            gColDelPermission.Visible = !isFormView;
 
             btnEdit.Visibility = isFormView ? DevExpress.XtraBars.BarItemVisibility.Always : DevExpress.XtraBars.BarItemVisibility.Never;
             btnDel.Visibility = isFormView ? DevExpress.XtraBars.BarItemVisibility.Always : DevExpress.XtraBars.BarItemVisibility.Never;
@@ -149,6 +159,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             lcProgress.Visibility = isFormView ? DevExpress.XtraLayout.Utils.LayoutVisibility.Never : DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
 
             Text = isFormView ? "群組信息" : "新增、修改群組";
+
+            btnApproved.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            btnDisapprove.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+
         }
 
         private Securityinfo GetPermission()
@@ -191,9 +205,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void f207_DocumentInfo_Load(object sender, EventArgs e)
         {
-            btnApproved.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
-            btnDisapprove.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
-
             groupProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             controlgroupDocument.SelectedTabPage = lcgInfo;
 
@@ -340,11 +351,23 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
                         gcHistoryProcess.DataSource = lsHistoryProcess;
 
-                        btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                        if (stepNow != -1)
+                        {
+                            btnCancel.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                            btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                            btnApproved.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                            btnDisapprove.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                        }
+                        else
+                        {
+                            btnCancel.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                            btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                            btnApproved.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                            btnDisapprove.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                        }
+
                         btnDel.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                        btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                        btnApproved.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
-                        btnDisapprove.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                        btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                     }
                 }
             }
@@ -655,9 +678,50 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 {
                     IdDocProgress = idDocProgress,
                     TimeStep = DateTime.Now,
-                    IndexStep = 0,
+                    IndexStep = -1,
                     IdUserProcess = TempDatas.LoginId,
-                    Descriptions = $"退回，說明：{descriptions}",
+                    Descriptions = string.IsNullOrEmpty(descriptions) ? "退回" : $"退回，說明：{descriptions}",
+                };
+
+                db.DocProgressInfoes.Add(progressInfo);
+
+                // Save the changes to the database
+                db.SaveChanges();
+            }
+
+            Close();
+        }
+
+        private void btnCancel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            XtraInputBoxArgs args = new XtraInputBoxArgs();
+            // set required Input Box options
+            args.Caption = TempDatas.SoftNameTW;
+            args.Prompt = "原因";
+            args.DefaultButtonIndex = 0;
+            MemoEdit editor = new MemoEdit();
+            args.Editor = editor;
+            // display an Input Box with the custom editor
+            var result = XtraInputBox.Show(args);
+            string descriptions = result == null ? "" : result.ToString();
+
+            using (var db = new DBDocumentManagementSystemEntities())
+            {
+                var lsDocProgressById = db.DocProgresses.Where(r => r.IdKnowledgeBase == idDocument).ToList();
+                int idDocProgress = lsDocProgressById.OrderByDescending(r => r.Id).FirstOrDefault().Id;
+
+
+                var docProcessUpdate = db.DocProgresses.Where(r => r.Id == idDocProgress).First();
+                docProcessUpdate.IsSuccessful = true;
+                db.DocProgresses.AddOrUpdate(docProcessUpdate);
+
+                DocProgressInfo progressInfo = new DocProgressInfo()
+                {
+                    IdDocProgress = idDocProgress,
+                    TimeStep = DateTime.Now,
+                    IndexStep = -1,
+                    IdUserProcess = TempDatas.LoginId,
+                    Descriptions = string.IsNullOrEmpty(descriptions) ? "取消" : $"取消，說明：{descriptions}",
                 };
 
                 db.DocProgressInfoes.Add(progressInfo);
