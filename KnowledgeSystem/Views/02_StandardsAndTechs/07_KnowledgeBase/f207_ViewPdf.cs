@@ -20,18 +20,18 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         public bool? CanSaveFile { get; set; }
         public bool? CanPrintFile { get; set; }
 
-        public f207_ViewPdf(string documentFile_)
+        public f207_ViewPdf(string documentFile_, string IdKnowledgeBase_)
         {
             InitializeComponent();
             documentFile = documentFile_;
+            idKnowledgeBase = IdKnowledgeBase_;
         }
 
         string documentFile = "";
+        string idKnowledgeBase = "";
 
         private void f207_ViewPdf_Load(object sender, EventArgs e)
         {
-            //pdfViewerData.PreviewKeyDown = false;
-
             pdfViewerData.DocumentFilePath = documentFile;
         }
 
@@ -51,13 +51,29 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void btnPrint_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (CanPrintFile!=true)
+            if (CanPrintFile != true)
             {
                 XtraMessageBox.Show(TempDatas.NoPermission, TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
             }
 
             pdfViewerData.ShowPrintPageSetupDialog();
+
+            using (var db = new DBDocumentManagementSystemEntities())
+            {
+                KnowledgeHistoryGetFile historyGetFile = new KnowledgeHistoryGetFile()
+                {
+                    IdKnowledgeBase = idKnowledgeBase,
+                    KnowledgeAttachmentName = $"列印-{Text}",
+                    IdUser = TempDatas.LoginId,
+                    TimeGet = DateTime.Now
+                };
+
+                db.KnowledgeHistoryGetFiles.Add(historyGetFile);
+                db.SaveChanges();
+            }
+
+            XtraMessageBox.Show("列印文件成功！", TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnSave_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -77,7 +93,23 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             saveFileDialog1.FileName = $"{DateTime.Now:yyyyMMddHHmmss}-{Text}";
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                File.Copy(documentFile, saveFileDialog1.FileName,true);
+                File.Copy(documentFile, saveFileDialog1.FileName, true);
+
+                using (var db = new DBDocumentManagementSystemEntities())
+                {
+                    KnowledgeHistoryGetFile historyGetFile = new KnowledgeHistoryGetFile()
+                    {
+                        IdKnowledgeBase = idKnowledgeBase,
+                        KnowledgeAttachmentName = $"下載-{Text}",
+                        IdUser = TempDatas.LoginId,
+                        TimeGet = DateTime.Now
+                    };
+
+                    db.KnowledgeHistoryGetFiles.Add(historyGetFile);
+                    db.SaveChanges();
+                }
+
+                XtraMessageBox.Show("下載文件成功！", TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }

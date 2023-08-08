@@ -84,6 +84,8 @@
     <Compile Include="Configs\RegistryHelper.cs" />
     <Compile Include="Configs\SingleConnection.cs" />
     <Compile Include="Configs\TempDatas.cs" />
+    <Compile Include="Models\dm_Departments.cs" />
+    <Compile Include="Models\KnowledgeHistoryGetFile.cs" />
     <Compile Include="Models\dm_Progress.cs" />
     <Compile Include="Models\dm_StepProgress.cs" />
     <Compile Include="Models\DocProgress.cs" />

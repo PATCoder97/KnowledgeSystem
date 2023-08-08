@@ -5,6 +5,15 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="DBDocumentManagementSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="dm_Departments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="IdChild" Type="int" />
+          <Property Name="IdParent" Type="int" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="64" />
+        </EntityType>
         <EntityType Name="dm_Progress">
           <Key>
             <PropertyRef Name="Id" />
@@ -100,6 +109,16 @@
           <Property Name="UserUpload" Type="varchar" MaxLength="10" />
           <Property Name="UploadDate" Type="date" />
         </EntityType>
+        <EntityType Name="KnowledgeHistoryGetFile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TimeGet" Type="datetime" Nullable="false" />
+          <Property Name="IdKnowledgeBase" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="KnowledgeAttachmentName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="IdUser" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
         <EntityType Name="KnowledgeSecurity">
           <Key>
             <PropertyRef Name="Id" />
@@ -144,6 +163,7 @@
           <Property Name="IdDepartment" Type="varchar" MaxLength="4" />
         </EntityType>
         <EntityContainer Name="DBDocumentManagementSystemModelStoreContainer">
+          <EntitySet Name="dm_Departments" EntityType="Self.dm_Departments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dm_Progress" EntityType="Self.dm_Progress" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dm_StepProgress" EntityType="Self.dm_StepProgress" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DocProgress" EntityType="Self.DocProgress" Schema="dbo" store:Type="Tables" />
@@ -154,6 +174,7 @@
           <EntitySet Name="GroupUser" EntityType="Self.GroupUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KnowledgeAttachment" EntityType="Self.KnowledgeAttachment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KnowledgeBase" EntityType="Self.KnowledgeBase" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KnowledgeHistoryGetFile" EntityType="Self.KnowledgeHistoryGetFile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KnowledgeSecurity" EntityType="Self.KnowledgeSecurity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KnowledgeType" EntityType="Self.KnowledgeType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
@@ -258,6 +279,8 @@
           <EntitySet Name="dm_StepProgress" EntityType="DBDocumentManagementSystemModel.dm_StepProgress" />
           <EntitySet Name="DocProgresses" EntityType="DBDocumentManagementSystemModel.DocProgress" />
           <EntitySet Name="DocProgressInfoes" EntityType="DBDocumentManagementSystemModel.DocProgressInfo" />
+          <EntitySet Name="dm_Departments" EntityType="DBDocumentManagementSystemModel.dm_Departments" />
+          <EntitySet Name="KnowledgeHistoryGetFiles" EntityType="DBDocumentManagementSystemModel.KnowledgeHistoryGetFile" />
         </EntityContainer>
         <EntityType Name="Function">
           <Key>
@@ -316,6 +339,25 @@
           <Property Name="IndexStep" Type="Int32" Nullable="false" />
           <Property Name="IdUserProcess" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Descriptions" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dm_Departments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="IdChild" Type="Int32" />
+          <Property Name="IdParent" Type="Int32" />
+          <Property Name="DisplayName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="KnowledgeHistoryGetFile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TimeGet" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdKnowledgeBase" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="KnowledgeAttachmentName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="IdUser" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -471,6 +513,27 @@
                 <ScalarProperty Name="IndexStep" ColumnName="IndexStep" />
                 <ScalarProperty Name="TimeStep" ColumnName="TimeStep" />
                 <ScalarProperty Name="IdDocProgress" ColumnName="IdDocProgress" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dm_Departments">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_Departments">
+              <MappingFragment StoreEntitySet="dm_Departments">
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="IdParent" ColumnName="IdParent" />
+                <ScalarProperty Name="IdChild" ColumnName="IdChild" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KnowledgeHistoryGetFiles">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.KnowledgeHistoryGetFile">
+              <MappingFragment StoreEntitySet="KnowledgeHistoryGetFile">
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="KnowledgeAttachmentName" ColumnName="KnowledgeAttachmentName" />
+                <ScalarProperty Name="IdKnowledgeBase" ColumnName="IdKnowledgeBase" />
+                <ScalarProperty Name="TimeGet" ColumnName="TimeGet" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

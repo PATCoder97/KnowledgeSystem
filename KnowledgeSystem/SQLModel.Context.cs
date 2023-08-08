@@ -39,5 +39,7 @@ namespace KnowledgeSystem
         public virtual DbSet<dm_StepProgress> dm_StepProgress { get; set; }
         public virtual DbSet<DocProgress> DocProgresses { get; set; }
         public virtual DbSet<DocProgressInfo> DocProgressInfoes { get; set; }
+        public virtual DbSet<dm_Departments> dm_Departments { get; set; }
+        public virtual DbSet<KnowledgeHistoryGetFile> KnowledgeHistoryGetFiles { get; set; }
     }
 }
