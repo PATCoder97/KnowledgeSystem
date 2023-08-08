@@ -8,8 +8,11 @@ namespace KnowledgeSystem.Configs
 {
     public class TempDatas
     {
-        public static string SoftNameEN = "Document Management System";
-        public static string SoftNameTW = "冶金文件管理系統";
+        public const string SoftNameEN = "Document Management System";
+        public const string SoftNameTW = "冶金文件管理系統";
+        public const string EventNew = "新增文件";
+        public const string EventEdit = "更新文件";
+        public const string EventDel = "刪除文件";
 
         public static string LoginId { get; set; }
         public static string DomainComputer { get; set; }

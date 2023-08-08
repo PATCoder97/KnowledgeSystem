@@ -424,7 +424,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             bgvSecurity.FocusedRowHandle = -1;
 
             // Determine whether to add or update the document and set the appropriate message
-            events = idDocument == string.Empty ? "新增成功" : "修改成功";
+            events = idDocument == string.Empty ? TempDatas.EventNew : TempDatas.EventEdit;
             string idDocumentToUpdate = string.IsNullOrEmpty(idDocument) ? GenerateIdDocument() : idDocument;
 
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
