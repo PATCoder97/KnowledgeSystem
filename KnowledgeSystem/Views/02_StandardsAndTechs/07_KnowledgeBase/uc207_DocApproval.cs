@@ -26,7 +26,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         BindingSource source = new BindingSource();
 
-        List<DocProgress> lsDocProgresses = new List<DocProgress>();
+        List<dt207_DocProgress> lsDocProgresses = new List<dt207_DocProgress>();
         List<DocProgressInfo> lsDocProgressInfos = new List<DocProgressInfo>();
 
         #endregion
@@ -37,7 +37,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                lsDocProgresses = db.DocProgresses.Where(r => !r.IsSuccessful).ToList();
+                lsDocProgresses = db.dt207_DocProgress.Where(r => !r.IsComplete).ToList();
                 lsDocProgressInfos = db.DocProgressInfoes.ToList();
                 var lsKnowledgeBases = db.KnowledgeBases.ToList();
                 var lsUsers = db.Users.ToList();

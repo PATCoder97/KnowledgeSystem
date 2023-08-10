@@ -59,11 +59,16 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             helper.SaveViewInfo();
             using (var db = new DBDocumentManagementSystemEntities())
             {
+                var lsTypeHisGetFile = db.KnowledgeTypeHisGetFiles.ToList();
+                TempDatas.typeViewFile = lsTypeHisGetFile.FirstOrDefault(r => r.Id == 1);
+                TempDatas.typeSaveFile = lsTypeHisGetFile.FirstOrDefault(r => r.Id == 2);
+                TempDatas.typePrintFile = lsTypeHisGetFile.FirstOrDefault(r => r.Id == 3);
+
                 lsKnowledgeTypes = db.KnowledgeTypes.ToList();
                 var knowledgeType = lsKnowledgeTypes.Where(r => r.DisplayName == Text).Select(r => r).FirstOrDefault();
                 if (knowledgeType != null) { idType = knowledgeType.Id; }
-
-                var lsIdBaseRemove = db.DocProgresses.Where(r => !r.IsSuccessful).Select(r => r.IdKnowledgeBase).ToList();
+                
+                var lsIdBaseRemove = db.dt207_DocProgress.Where(r => !r.IsComplete).Select(r => r.IdKnowledgeBase).ToList();
                 var lsBaseRemove = db.KnowledgeBases.Where(r => !lsIdBaseRemove.Contains(r.Id)).ToList();
 
                 lsUsers = db.Users.ToList();

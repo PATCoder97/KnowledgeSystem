@@ -1,6 +1,6 @@
 ﻿namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 {
-    partial class uc207_Notify_DocProgress
+    partial class uc207_Notify_HisDownload
     {
         /// <summary> 
         /// Required designer variable.
@@ -32,12 +32,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.gcData = new DevExpress.XtraGrid.GridControl();
             this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gvColIdKnowledgeBase = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gvColIdKnowledgeBase = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -71,7 +70,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(765, 34);
             this.label1.TabIndex = 5;
-            this.label1.Text = "文件審核進度";
+            this.label1.Text = "讀取、下載歷史";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // gcData
@@ -83,7 +82,6 @@
             this.gcData.TabIndex = 4;
             this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvData});
-            this.gcData.DoubleClick += new System.EventHandler(this.gcData_DoubleClick);
             // 
             // gvData
             // 
@@ -98,12 +96,11 @@
             this.gvData.Appearance.Row.Options.UseFont = true;
             this.gvData.Appearance.Row.Options.UseForeColor = true;
             this.gvData.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gvColIdKnowledgeBase,
-            this.gridColumn2,
-            this.gridColumn3,
-            this.gridColumn4,
             this.gridColumn6,
-            this.gridColumn1});
+            this.gridColumn3,
+            this.gvColIdKnowledgeBase,
+            this.gridColumn1,
+            this.gridColumn2});
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
             this.gvData.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
@@ -112,40 +109,6 @@
             this.gvData.OptionsView.ShowGroupPanel = false;
             this.gvData.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gvData_CustomDrawRowIndicator);
             // 
-            // gvColIdKnowledgeBase
-            // 
-            this.gvColIdKnowledgeBase.AppearanceCell.Options.UseTextOptions = true;
-            this.gvColIdKnowledgeBase.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gvColIdKnowledgeBase.Caption = "資料編號";
-            this.gvColIdKnowledgeBase.FieldName = "IdKnowledgeBase";
-            this.gvColIdKnowledgeBase.Name = "gvColIdKnowledgeBase";
-            this.gvColIdKnowledgeBase.Visible = true;
-            this.gvColIdKnowledgeBase.VisibleIndex = 1;
-            // 
-            // gridColumn2
-            // 
-            this.gridColumn2.Caption = "資料名稱";
-            this.gridColumn2.FieldName = "DisplayName";
-            this.gridColumn2.Name = "gridColumn2";
-            this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 2;
-            // 
-            // gridColumn3
-            // 
-            this.gridColumn3.Caption = "上傳狀況";
-            this.gridColumn3.FieldName = "Descriptions";
-            this.gridColumn3.Name = "gridColumn3";
-            this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 4;
-            // 
-            // gridColumn4
-            // 
-            this.gridColumn4.Caption = "處理者";
-            this.gridColumn4.FieldName = "UserProcess";
-            this.gridColumn4.Name = "gridColumn4";
-            this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 5;
-            // 
             // gridColumn6
             // 
             this.gridColumn6.AppearanceCell.Options.UseTextOptions = true;
@@ -153,18 +116,48 @@
             this.gridColumn6.Caption = "時間";
             this.gridColumn6.DisplayFormat.FormatString = "yyyy/MM/dd HH:mm";
             this.gridColumn6.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.gridColumn6.FieldName = "TimeStep";
+            this.gridColumn6.FieldName = "TimeGet";
+            this.gridColumn6.MaxWidth = 200;
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
             this.gridColumn6.VisibleIndex = 0;
             // 
+            // gridColumn3
+            // 
+            this.gridColumn3.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn3.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn3.Caption = "事件";
+            this.gridColumn3.FieldName = "TypeGetFile";
+            this.gridColumn3.Name = "gridColumn3";
+            this.gridColumn3.Visible = true;
+            this.gridColumn3.VisibleIndex = 1;
+            // 
+            // gvColIdKnowledgeBase
+            // 
+            this.gvColIdKnowledgeBase.AppearanceCell.Options.UseTextOptions = true;
+            this.gvColIdKnowledgeBase.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gvColIdKnowledgeBase.Caption = "資料編號";
+            this.gvColIdKnowledgeBase.FieldName = "IdKnowledgeBase";
+            this.gvColIdKnowledgeBase.MaxWidth = 200;
+            this.gvColIdKnowledgeBase.Name = "gvColIdKnowledgeBase";
+            this.gvColIdKnowledgeBase.Visible = true;
+            this.gvColIdKnowledgeBase.VisibleIndex = 2;
+            // 
             // gridColumn1
             // 
-            this.gridColumn1.Caption = "內容";
-            this.gridColumn1.FieldName = "Reason";
+            this.gridColumn1.Caption = "資料名稱";
+            this.gridColumn1.FieldName = "DisplayName";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
             this.gridColumn1.VisibleIndex = 3;
+            // 
+            // gridColumn2
+            // 
+            this.gridColumn2.Caption = "附件名稱";
+            this.gridColumn2.FieldName = "KnowledgeAttachmentName";
+            this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.Visible = true;
+            this.gridColumn2.VisibleIndex = 4;
             // 
             // Root
             // 
@@ -198,14 +191,14 @@
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
-            // uc207_Notify_DocProgress
+            // uc207_Notify_HisDownload
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.layoutControl1);
-            this.Name = "uc207_Notify_DocProgress";
+            this.Name = "uc207_Notify_HisDownload";
             this.Size = new System.Drawing.Size(789, 463);
-            this.Load += new System.EventHandler(this.uc207_Notify_DocProgress_Load);
+            this.Load += new System.EventHandler(this.uc207_Notify_HisDownload_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).EndInit();
@@ -226,11 +219,10 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraGrid.Columns.GridColumn gvColIdKnowledgeBase;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private System.Windows.Forms.Label label1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
     }
 }

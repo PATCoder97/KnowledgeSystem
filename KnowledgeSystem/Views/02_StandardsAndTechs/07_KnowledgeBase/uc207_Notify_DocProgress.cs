@@ -38,7 +38,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                var lsDocProgresses = db.DocProgresses.ToList();
+                var lsDocProgresses = db.dt207_DocProgress.ToList();
                 var lsDocProgressInfos = db.DocProgressInfoes.ToList();
                 var lsKnowledgeBases = db.KnowledgeBases.ToList();
                 var lsUsers = db.Users.ToList();
@@ -61,7 +61,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                                       join users in lsUsers on infos.IdUserProcess equals users.Id
                                       select new
                                       {
-                                          data.IsSuccessful,
+                                          data.IsComplete,
                                           Reason = data.Descriptions,
                                           data.IdKnowledgeBase,
                                           data.IdProgress,

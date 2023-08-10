@@ -1,4 +1,5 @@
 ﻿using DevExpress.ClipboardSource.SpreadsheetML;
+using DevExpress.DocumentView;
 using DevExpress.Utils.About;
 using DevExpress.Utils.Drawing.Helpers;
 using DevExpress.Utils.Win.Hook;
@@ -310,7 +311,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     helper.LoadViewInfo();
 
 
-                    var lsDocProgresses = db.DocProgresses.Where(r => !r.IsSuccessful && r.IdKnowledgeBase == idDocument).ToList();
+                    var lsDocProgresses = db.dt207_DocProgress.Where(r => !r.IsComplete && r.IdKnowledgeBase == idDocument).ToList();
 
 
                     if (lsDocProgresses.Count != 0)
@@ -495,25 +496,26 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                         db.KnowledgeSecurities.Add(dataAdd);
                     }
 
-                    List<DocProgress> lsDocProgressById = db.DocProgresses.Where(r => r.IdKnowledgeBase == idDocumentToUpdate).ToList();
+                    List<dt207_DocProgress> lsDocProgressById = db.dt207_DocProgress.Where(r => r.IdKnowledgeBase == idDocumentToUpdate).ToList();
 
-                    bool IsNewProgress = !lsDocProgressById.Any(r => !r.IsSuccessful);
+                    bool IsNewProgress = !lsDocProgressById.Any(r => !r.IsComplete);
                     if (IsNewProgress)
                     {
-                        DocProgress docProgress = new DocProgress()
+                        dt207_DocProgress docProgress = new dt207_DocProgress()
                         {
                             IdKnowledgeBase = idDocumentToUpdate,
-                            IsSuccessful = false,
+                            IsComplete = false,
+                            IsSuccess = false,
                             IdProgress = progressSelect.Id,
                             Descriptions = events,
                         };
 
-                        db.DocProgresses.Add(docProgress);
+                        db.dt207_DocProgress.Add(docProgress);
                     }
                     // Save the changes to the database
                     db.SaveChanges();
 
-                    lsDocProgressById = db.DocProgresses.Where(r => r.IdKnowledgeBase == idDocumentToUpdate).ToList();
+                    lsDocProgressById = db.dt207_DocProgress.Where(r => r.IdKnowledgeBase == idDocumentToUpdate).ToList();
                     int idDocProgress = lsDocProgressById.OrderByDescending(r => r.Id).FirstOrDefault().Id;
 
                     //List<DocProgressInfo> lsDocProgressInfos = db.DocProgressInfoes.Where(r => r.IdDocProgress == idDocProgress).ToList();
@@ -598,6 +600,24 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             Attachments dataRow = gvFiles.GetRow(forcusRow) as Attachments;
             string documentsFile = Path.Combine(TempDatas.PahtDataFile, dataRow.EncryptionName);
 
+            if (!string.IsNullOrEmpty(idDocument))
+            {
+                using (var db = new DBDocumentManagementSystemEntities())
+                {
+                    KnowledgeHistoryGetFile historyGetFile = new KnowledgeHistoryGetFile()
+                    {
+                        IdKnowledgeBase = idDocument,
+                        idTypeHisGetFile = 1,
+                        KnowledgeAttachmentName = dataRow.FileName,
+                        IdUser = TempDatas.LoginId,
+                        TimeGet = DateTime.Now
+                    };
+
+                    db.KnowledgeHistoryGetFiles.Add(historyGetFile);
+                    db.SaveChanges();
+                }
+            }
+
             f207_ViewPdf fDocumentInfo = new f207_ViewPdf(documentsFile, idDocument);
             fDocumentInfo.Text = dataRow.FileName;
             fDocumentInfo.CanSaveFile = permissionAttachments.SaveFile;
@@ -623,7 +643,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                var lsDocProgressById = db.DocProgresses.Where(r => r.IdKnowledgeBase == idDocument).ToList();
+                var lsDocProgressById = db.dt207_DocProgress.Where(r => r.IdKnowledgeBase == idDocument).ToList();
                 int idDocProgress = lsDocProgressById.OrderByDescending(r => r.Id).FirstOrDefault().Id;
 
                 List<DocProgressInfo> lsDocProgressInfos = db.DocProgressInfoes.Where(r => r.IdDocProgress == idDocProgress).ToList();
@@ -633,10 +653,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
                 if (indexStep == finishStep)
                 {
-                    var docProcessUpdate = db.DocProgresses.Where(r => r.Id == idDocProgress).First();
-                    docProcessUpdate.IsSuccessful = true;
+                    var docProcessUpdate = db.dt207_DocProgress.Where(r => r.Id == idDocProgress).First();
+                    docProcessUpdate.IsSuccess = true;
+                    docProcessUpdate.IsComplete = true;
 
-                    db.DocProgresses.AddOrUpdate(docProcessUpdate);
+                    db.dt207_DocProgress.AddOrUpdate(docProcessUpdate);
 
                     descriptions = "已完成";
                 }
@@ -674,7 +695,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                var lsDocProgressById = db.DocProgresses.Where(r => r.IdKnowledgeBase == idDocument).ToList();
+                var lsDocProgressById = db.dt207_DocProgress.Where(r => r.IdKnowledgeBase == idDocument).ToList();
                 int idDocProgress = lsDocProgressById.OrderByDescending(r => r.Id).FirstOrDefault().Id;
 
                 DocProgressInfo progressInfo = new DocProgressInfo()
@@ -710,13 +731,14 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                var lsDocProgressById = db.DocProgresses.Where(r => r.IdKnowledgeBase == idDocument).ToList();
+                var lsDocProgressById = db.dt207_DocProgress.Where(r => r.IdKnowledgeBase == idDocument).ToList();
                 int idDocProgress = lsDocProgressById.OrderByDescending(r => r.Id).FirstOrDefault().Id;
 
 
-                var docProcessUpdate = db.DocProgresses.Where(r => r.Id == idDocProgress).First();
-                docProcessUpdate.IsSuccessful = true;
-                db.DocProgresses.AddOrUpdate(docProcessUpdate);
+                var docProcessUpdate = db.dt207_DocProgress.Where(r => r.Id == idDocProgress).First();
+                docProcessUpdate.IsSuccess = false;
+                docProcessUpdate.IsComplete = true;
+                db.dt207_DocProgress.AddOrUpdate(docProcessUpdate);
 
                 DocProgressInfo progressInfo = new DocProgressInfo()
                 {

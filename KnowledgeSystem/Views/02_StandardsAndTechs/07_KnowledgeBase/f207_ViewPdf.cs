@@ -1,4 +1,5 @@
 ﻿using DevExpress.Pdf;
+using DevExpress.Utils.CommonDialogs;
 using DevExpress.XtraEditors;
 using KnowledgeSystem.Configs;
 using System;
@@ -57,14 +58,18 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 return;
             }
 
-            pdfViewerData.ShowPrintPageSetupDialog();
+            var dialogResult = pdfViewerData.ShowPrintPageSetupDialog();
+            if (dialogResult == null) return;
+
+            pdfViewerData.Print(dialogResult);
 
             using (var db = new DBDocumentManagementSystemEntities())
             {
                 KnowledgeHistoryGetFile historyGetFile = new KnowledgeHistoryGetFile()
                 {
                     IdKnowledgeBase = idKnowledgeBase,
-                    KnowledgeAttachmentName = $"列印-{Text}",
+                    idTypeHisGetFile = 3,
+                    KnowledgeAttachmentName = Text,
                     IdUser = TempDatas.LoginId,
                     TimeGet = DateTime.Now
                 };
@@ -100,7 +105,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     KnowledgeHistoryGetFile historyGetFile = new KnowledgeHistoryGetFile()
                     {
                         IdKnowledgeBase = idKnowledgeBase,
-                        KnowledgeAttachmentName = $"下載-{Text}",
+                        idTypeHisGetFile = 2,
+                        KnowledgeAttachmentName = Text,
                         IdUser = TempDatas.LoginId,
                         TimeGet = DateTime.Now
                     };
