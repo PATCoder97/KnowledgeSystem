@@ -173,6 +173,12 @@
     <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_Notify_DocProgress.Designer.cs">
       <DependentUpon>uc207_Notify_DocProgress.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_Notify_DocUpdateNotify.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_Notify_DocUpdateNotify.Designer.cs">
+      <DependentUpon>uc207_Notify_DocUpdateNotify.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_Notify_HisDownload.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -264,6 +270,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_Notify_DocProgress.resx">
       <DependentUpon>uc207_Notify_DocProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_Notify_DocUpdateNotify.resx">
+      <DependentUpon>uc207_Notify_DocUpdateNotify.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_Notify_HisDownload.resx">
       <DependentUpon>uc207_Notify_HisDownload.cs</DependentUpon>
