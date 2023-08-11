@@ -1,4 +1,5 @@
 ﻿using DevExpress.XtraEditors;
+using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using KnowledgeSystem.Configs;
 using System;
@@ -49,7 +50,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                                  data.TimeNotyfiNotes,
                                  idDoc.IdKnowledgeBase,
                                  names.DisplayName
-                             }).ToList();
+                             }).OrderByDescending(r => r.TimeNotify).ToList();
 
                 gcData.DataSource = query;
             }
@@ -62,6 +63,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             gvData.ReadOnlyGridView();
 
             LoadData();
+
+            gvData.FocusedRowHandle = GridControl.AutoFilterRowHandle;
         }
 
         private void gvData_CustomDrawRowIndicator(object sender, RowIndicatorCustomDrawEventArgs e)

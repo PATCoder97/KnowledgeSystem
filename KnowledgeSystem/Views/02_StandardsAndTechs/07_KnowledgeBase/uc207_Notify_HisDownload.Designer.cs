@@ -52,6 +52,7 @@
             // layoutControl1
             // 
             this.layoutControl1.AllowCustomization = false;
+            this.layoutControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
             this.layoutControl1.Controls.Add(this.label1);
             this.layoutControl1.Controls.Add(this.gcData);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -65,7 +66,7 @@
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("DFKai-SB", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Black;
+            this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(12, 12);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(765, 34);

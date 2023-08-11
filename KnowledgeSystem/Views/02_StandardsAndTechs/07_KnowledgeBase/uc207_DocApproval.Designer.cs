@@ -65,7 +65,7 @@
             // 
             this.lbInfo.AllowHtmlString = true;
             this.lbInfo.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbInfo.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.lbInfo.Appearance.ForeColor = System.Drawing.Color.White;
             this.lbInfo.Appearance.Options.UseFont = true;
             this.lbInfo.Appearance.Options.UseForeColor = true;
             this.lbInfo.Location = new System.Drawing.Point(12, 12);
@@ -187,6 +187,8 @@
             // 
             // uc207_DocApproval
             // 
+            this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
+            this.Appearance.Options.UseBackColor = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.layoutControl1);
