@@ -96,7 +96,7 @@
     <Compile Include="Models\Group.cs" />
     <Compile Include="Models\GroupUser.cs" />
     <Compile Include="Models\KnowledgeAttachment.cs" />
-    <Compile Include="Models\KnowledgeBase.cs" />
+    <Compile Include="Models\dt207_Base.cs" />
     <Compile Include="Models\KnowledgeSecurity.cs" />
     <Compile Include="Models\KnowledgeType.cs" />
     <Compile Include="Program.cs" />

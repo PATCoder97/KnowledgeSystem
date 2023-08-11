@@ -35,6 +35,7 @@
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gvColIdKnowledgeBase = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -101,6 +102,7 @@
             this.gridColumn1,
             this.gvColIdKnowledgeBase,
             this.gridColumn3,
+            this.gridColumn2,
             this.gridColumn5});
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
@@ -143,7 +145,17 @@
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 2;
-            this.gridColumn3.Width = 275;
+            this.gridColumn3.Width = 302;
+            // 
+            // gridColumn2
+            // 
+            this.gridColumn2.Caption = "審查內容";
+            this.gridColumn2.FieldName = "Descriptions";
+            this.gridColumn2.MaxWidth = 200;
+            this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.Visible = true;
+            this.gridColumn2.VisibleIndex = 3;
+            this.gridColumn2.Width = 200;
             // 
             // gridColumn5
             // 
@@ -153,8 +165,8 @@
             this.gridColumn5.MinWidth = 10;
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 3;
-            this.gridColumn5.Width = 250;
+            this.gridColumn5.VisibleIndex = 4;
+            this.gridColumn5.Width = 199;
             // 
             // Root
             // 
@@ -219,5 +231,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gvColIdKnowledgeBase;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
     }
 }

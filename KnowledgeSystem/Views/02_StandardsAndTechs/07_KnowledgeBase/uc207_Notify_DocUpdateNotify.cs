@@ -41,7 +41,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             {
                 var query = (from data in db.tbl207_NotifyEditDoc.Where(r => r.IdUserNotify == TempDatas.LoginId)
                              join idDoc in db.dt207_DocProgress on data.IdDocProcess equals idDoc.Id
-                             join names in db.KnowledgeBases on idDoc.IdKnowledgeBase equals names.Id
+                             join names in db.dt207_Base on idDoc.IdKnowledgeBase equals names.Id
                              select new
                              {
                                  data.Id,

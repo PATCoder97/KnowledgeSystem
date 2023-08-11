@@ -30,7 +30,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         const string ADVANCED_MODE = "全部";
 
         List<User> lsUsers = new List<User>();
-        List<KnowledgeBase> lsKnowledgeBase = new List<KnowledgeBase>();
+        List<dt207_Base> lsKnowledgeBase = new List<dt207_Base>();
         List<KnowledgeType> lsKnowledgeTypes = new List<KnowledgeType>();
 
         int idType = 0;
@@ -65,8 +65,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 if (knowledgeType != null) { idType = knowledgeType.Id; }
 
                 lsUsers = db.Users.ToList();
-                lsKnowledgeBase = db.KnowledgeBases.Select(r => new { r.Id, r.DisplayName, r.Keyword, r.UserRequest, r.IdTypes, r.UserUpload, r.UploadDate })
-                    .ToList().Select(r => new KnowledgeBase
+                lsKnowledgeBase = db.dt207_Base.Select(r => new { r.Id, r.DisplayName, r.Keyword, r.UserRequest, r.IdTypes, r.UserUpload, r.UploadDate })
+                    .ToList().Select(r => new dt207_Base
                     {
                         Id = r.Id,
                         DisplayName = r.DisplayName,

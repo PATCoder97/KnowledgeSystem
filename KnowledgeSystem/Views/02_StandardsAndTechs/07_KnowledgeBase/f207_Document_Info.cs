@@ -118,7 +118,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             string tempId = $"{startIdStr}{indexId:d2}";
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                bool isExistsId = db.KnowledgeBases.Any(kb => kb.Id == tempId);
+                bool isExistsId = db.dt207_Base.Any(kb => kb.Id == tempId);
                 if (!isExistsId)
                 {
                     return tempId;
@@ -268,7 +268,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 // If idDocument is not empty, retrieve data from the database and assign to form elements
                 if (!string.IsNullOrEmpty(idDocument))
                 {
-                    var dataView = db.KnowledgeBases.FirstOrDefault(r => r.Id == idDocument);
+                    var dataView = db.dt207_Base.FirstOrDefault(r => r.Id == idDocument);
                     txbId.Text = dataView.Id;
                     cbbType.EditValue = dataView.IdTypes;
                     cbbUserRequest.EditValue = dataView.UserRequest;
@@ -416,7 +416,48 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 return;
             }
 
-            MessageBox.Show("co quyen");
+            var dialog = XtraMessageBox.Show($"您确定要删除该文件：{idDocument}", TempDatas.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (dialog == DialogResult.No) return;
+
+            uc207_SelectProgress ucInfo = new uc207_SelectProgress();
+            if (XtraDialog.Show(ucInfo, "清選流程核簽", MessageBoxButtons.OKCancel) != DialogResult.OK) return;
+
+            progressSelect = ucInfo.ProgressSelect;
+
+            using (var db = new DBDocumentManagementSystemEntities())
+            {
+                dt207_DocProgress docProgress = new dt207_DocProgress()
+                {
+                    IdKnowledgeBase = idDocument,
+                    IsComplete = false,
+                    IsSuccess = false,
+                    IdProgress = progressSelect.Id,
+                    Descriptions = TempDatas.EventDel,
+                };
+
+                db.dt207_DocProgress.Add(docProgress);
+                // Save the changes to the database
+                db.SaveChanges();
+
+                var lsDocProgressById = db.dt207_DocProgress.Where(r => r.IdKnowledgeBase == idDocument).ToList();
+                int idDocProcess = lsDocProgressById.OrderByDescending(r => r.Id).FirstOrDefault().Id;
+
+                DocProgressInfo progressInfo = new DocProgressInfo()
+                {
+                    IdDocProgress = idDocProcess,
+                    TimeStep = DateTime.Now,
+                    IndexStep = 0,
+                    IdUserProcess = TempDatas.LoginId,
+                    Descriptions = TempDatas.EventDel,
+                };
+
+                db.DocProgressInfoes.Add(progressInfo);
+
+                // Save the changes to the database
+                db.SaveChanges();
+            }
+
+            Close();
         }
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -431,7 +472,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
             {
                 // Create a new KnowledgeBase object with the relevant data
-                KnowledgeBase knowledge = new KnowledgeBase()
+                dt207_Base knowledge = new dt207_Base()
                 {
                     Id = idDocumentToUpdate,
                     DisplayName = $"{convertToUnSign3(txbNameTW.Text)}\r\n{txbNameVN.Text}",
@@ -446,7 +487,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 using (var db = new DBDocumentManagementSystemEntities())
                 {
                     // Add or update the knowledge base object
-                    db.KnowledgeBases.AddOrUpdate(knowledge);
+                    db.dt207_Base.AddOrUpdate(knowledge);
 
                     // If updating an existing document, remove its existing attachments
                     if (!string.IsNullOrEmpty(idDocument))
@@ -645,6 +686,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             {
                 var lsDocProgressById = db.dt207_DocProgress.Where(r => r.IdKnowledgeBase == idDocument).ToList();
                 int idDocProgress = lsDocProgressById.OrderByDescending(r => r.Id).FirstOrDefault().Id;
+                string eventProcess = lsDocProgressById.OrderByDescending(r => r.Id).FirstOrDefault().Descriptions;
 
                 List<DocProgressInfo> lsDocProgressInfos = db.DocProgressInfoes.Where(r => r.IdDocProgress == idDocProgress).ToList();
                 int indexStep = lsDocProgressInfos.Count != 0 ? lsDocProgressInfos.OrderByDescending(r => r.Id).FirstOrDefault().IndexStep + 1 : 0;
@@ -670,6 +712,14 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     IdUserProcess = TempDatas.LoginId,
                     Descriptions = descriptions,
                 };
+
+                if (eventProcess == TempDatas.EventDel)
+                {
+                    var docBaseDelete = db.dt207_Base.First(r => r.Id == idDocument);
+                    docBaseDelete.IsDelete = true;
+
+                    db.dt207_Base.AddOrUpdate(docBaseDelete);
+                }
 
                 db.DocProgressInfoes.Add(progressInfo);
 

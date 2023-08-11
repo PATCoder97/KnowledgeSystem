@@ -2,7 +2,7 @@
 
 namespace KnowledgeSystem
 {
-    public partial class KnowledgeBase
+    public partial class dt207_Base
     {
         public string Id { get; set; }
         public string DisplayName { get; set; }
@@ -11,5 +11,6 @@ namespace KnowledgeSystem
         public string Keyword { get; set; }
         public string UserUpload { get; set; }
         public Nullable<System.DateTime> UploadDate { get; set; }
+        public bool IsDelete { get; set; }
     }
 }

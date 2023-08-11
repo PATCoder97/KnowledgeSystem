@@ -40,7 +40,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             {
                 var lsDocProgresses = db.dt207_DocProgress.ToList();
                 var lsDocProgressInfos = db.DocProgressInfoes.ToList();
-                var lsKnowledgeBases = db.KnowledgeBases.ToList();
+                var lsKnowledgeBases = db.dt207_Base.ToList();
                 var lsUsers = db.Users.ToList();
 
                 var lsDocNotSuccess = (from data in db.DocProgressInfoes

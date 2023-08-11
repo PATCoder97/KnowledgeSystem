@@ -39,7 +39,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             {
                 lsDocProgresses = db.dt207_DocProgress.Where(r => !r.IsComplete).ToList();
                 lsDocProgressInfos = db.DocProgressInfoes.ToList();
-                var lsKnowledgeBases = db.KnowledgeBases.ToList();
+                var lsKnowledgeBases = db.dt207_Base.ToList();
                 var lsUsers = db.Users.ToList();
 
                 var lsDocNotSuccess = (from data in db.DocProgressInfoes
@@ -60,6 +60,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                                       {
                                           data.IdKnowledgeBase,
                                           data.IdProgress,
+                                          data.Descriptions,
                                           infos.TimeStep,
                                           infos.IndexStep,
                                           bases.DisplayName,

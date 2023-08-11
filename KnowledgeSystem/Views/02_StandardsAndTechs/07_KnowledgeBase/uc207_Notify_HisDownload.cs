@@ -40,7 +40,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 var lsHisDownLoad = db.KnowledgeHistoryGetFiles.ToList();
 
                 var query = (from data in db.KnowledgeHistoryGetFiles
-                             join names in db.KnowledgeBases on data.IdKnowledgeBase equals names.Id
+                             join names in db.dt207_Base on data.IdKnowledgeBase equals names.Id
                              join types in db.KnowledgeTypeHisGetFiles on data.idTypeHisGetFile equals types.Id
                              select new
                              {

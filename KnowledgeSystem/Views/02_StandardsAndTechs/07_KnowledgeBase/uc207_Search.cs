@@ -29,7 +29,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         const string ADVANCED_MODE = "全部";
 
         List<User> lsUsers = new List<User>();
-        List<KnowledgeBase> lsKnowledgeBase = new List<KnowledgeBase>();
+        List<dt207_Base> lsKnowledgeBase = new List<dt207_Base>();
         List<KnowledgeType> lsKnowledgeTypes = new List<KnowledgeType>();
 
         int idType = 0;
@@ -67,13 +67,15 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 lsKnowledgeTypes = db.KnowledgeTypes.ToList();
                 var knowledgeType = lsKnowledgeTypes.Where(r => r.DisplayName == Text).Select(r => r).FirstOrDefault();
                 if (knowledgeType != null) { idType = knowledgeType.Id; }
-                
+
                 var lsIdBaseRemove = db.dt207_DocProgress.Where(r => !r.IsComplete).Select(r => r.IdKnowledgeBase).ToList();
-                var lsBaseRemove = db.KnowledgeBases.Where(r => !lsIdBaseRemove.Contains(r.Id)).ToList();
+                var lsBaseRemove = db.dt207_Base.Where(r => !lsIdBaseRemove.Contains(r.Id)).ToList();
 
                 lsUsers = db.Users.ToList();
-                lsKnowledgeBase = db.KnowledgeBases.RemoveRange(lsBaseRemove).Select(r => new { r.Id, r.DisplayName, r.Keyword, r.UserRequest, r.IdTypes, r.UserUpload, r.UploadDate })
-                    .ToList().Select(r => new KnowledgeBase
+                lsKnowledgeBase = db.dt207_Base.RemoveRange(lsBaseRemove)
+                    .Where(r => !r.IsDelete)
+                    .Select(r => new { r.Id, r.DisplayName, r.Keyword, r.UserRequest, r.IdTypes, r.UserUpload, r.UploadDate })
+                    .ToList().Select(r => new dt207_Base
                     {
                         Id = r.Id,
                         DisplayName = r.DisplayName,

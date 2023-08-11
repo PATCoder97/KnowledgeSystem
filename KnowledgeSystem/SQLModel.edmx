@@ -41,6 +41,19 @@
           <Property Name="IdUserProcess" Type="varchar" MaxLength="10" />
           <Property Name="Descriptions" Type="nvarchar" MaxLength="64" />
         </EntityType>
+        <EntityType Name="dt207_Base">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar(max)" />
+          <Property Name="UserRequest" Type="varchar" MaxLength="10" />
+          <Property Name="IdTypes" Type="int" />
+          <Property Name="Keyword" Type="nvarchar(max)" />
+          <Property Name="UserUpload" Type="varchar" MaxLength="10" />
+          <Property Name="UploadDate" Type="date" />
+          <Property Name="IsDelete" Type="bit" />
+        </EntityType>
         <EntityType Name="dt207_DocProgress">
           <Key>
             <PropertyRef Name="Id" />
@@ -97,18 +110,6 @@
           <Property Name="IdKnowledgeBase" Type="varchar" MaxLength="32" />
           <Property Name="EncryptionName" Type="nvarchar" MaxLength="256" />
           <Property Name="FileName" Type="nvarchar" MaxLength="256" />
-        </EntityType>
-        <EntityType Name="KnowledgeBase">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="varchar" MaxLength="32" Nullable="false" />
-          <Property Name="DisplayName" Type="nvarchar(max)" />
-          <Property Name="UserRequest" Type="varchar" MaxLength="10" />
-          <Property Name="IdTypes" Type="int" />
-          <Property Name="Keyword" Type="nvarchar(max)" />
-          <Property Name="UserUpload" Type="varchar" MaxLength="10" />
-          <Property Name="UploadDate" Type="date" />
         </EntityType>
         <EntityType Name="KnowledgeHistoryGetFile">
           <Key>
@@ -187,13 +188,13 @@
           <EntitySet Name="dm_Progress" EntityType="Self.dm_Progress" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dm_StepProgress" EntityType="Self.dm_StepProgress" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DocProgressInfo" EntityType="Self.DocProgressInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt207_Base" EntityType="Self.dt207_Base" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt207_DocProgress" EntityType="Self.dt207_DocProgress" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FunctionRole" EntityType="Self.FunctionRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Functions" EntityType="Self.Functions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GroupUser" EntityType="Self.GroupUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KnowledgeAttachment" EntityType="Self.KnowledgeAttachment" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="KnowledgeBase" EntityType="Self.KnowledgeBase" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KnowledgeHistoryGetFile" EntityType="Self.KnowledgeHistoryGetFile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KnowledgeSecurity" EntityType="Self.KnowledgeSecurity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KnowledgeType" EntityType="Self.KnowledgeType" Schema="dbo" store:Type="Tables" />
@@ -288,18 +289,6 @@
           <Property Name="EncryptionName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="FileName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="KnowledgeBase">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="UserRequest" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="IdTypes" Type="Int32" />
-          <Property Name="Keyword" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="UserUpload" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="UploadDate" Type="DateTime" Precision="0" />
-        </EntityType>
         <EntityType Name="KnowledgeHistoryGetFile">
           <Key>
             <PropertyRef Name="Id" />
@@ -382,7 +371,6 @@
           <EntitySet Name="Groups" EntityType="Self.Group" />
           <EntitySet Name="GroupUsers" EntityType="Self.GroupUser" />
           <EntitySet Name="KnowledgeAttachments" EntityType="Self.KnowledgeAttachment" />
-          <EntitySet Name="KnowledgeBases" EntityType="Self.KnowledgeBase" />
           <EntitySet Name="KnowledgeHistoryGetFiles" EntityType="Self.KnowledgeHistoryGetFile" />
           <EntitySet Name="KnowledgeSecurities" EntityType="Self.KnowledgeSecurity" />
           <EntitySet Name="KnowledgeTypes" EntityType="Self.KnowledgeType" />
@@ -391,6 +379,7 @@
           <EntitySet Name="tbl207_NotifyEditDoc" EntityType="Self.tbl207_NotifyEditDoc" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="dt207_DocProgress" EntityType="DBDocumentManagementSystemModel.dt207_DocProgress" />
+          <EntitySet Name="dt207_Base" EntityType="DBDocumentManagementSystemModel.dt207_Base" />
         </EntityContainer>
         <EntityType Name="dt207_DocProgress">
           <Key>
@@ -402,6 +391,19 @@
           <Property Name="IsComplete" Type="Boolean" />
           <Property Name="IsSuccess" Type="Boolean" />
           <Property Name="Descriptions" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dt207_Base">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserRequest" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdTypes" Type="Int32" />
+          <Property Name="Keyword" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserUpload" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UploadDate" Type="DateTime" Precision="0" />
+          <Property Name="IsDelete" Type="Boolean" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -500,19 +502,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="KnowledgeBases">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.KnowledgeBase">
-              <MappingFragment StoreEntitySet="KnowledgeBase">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="UserRequest" ColumnName="UserRequest" />
-                <ScalarProperty Name="IdTypes" ColumnName="IdTypes" />
-                <ScalarProperty Name="Keyword" ColumnName="Keyword" />
-                <ScalarProperty Name="UserUpload" ColumnName="UserUpload" />
-                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="KnowledgeHistoryGetFiles">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.KnowledgeHistoryGetFile">
               <MappingFragment StoreEntitySet="KnowledgeHistoryGetFile">
@@ -600,6 +589,20 @@
                 <ScalarProperty Name="IsComplete" ColumnName="IsComplete" />
                 <ScalarProperty Name="IdProgress" ColumnName="IdProgress" />
                 <ScalarProperty Name="IdKnowledgeBase" ColumnName="IdKnowledgeBase" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt207_Base">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt207_Base">
+              <MappingFragment StoreEntitySet="dt207_Base">
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
+                <ScalarProperty Name="UserUpload" ColumnName="UserUpload" />
+                <ScalarProperty Name="Keyword" ColumnName="Keyword" />
+                <ScalarProperty Name="IdTypes" ColumnName="IdTypes" />
+                <ScalarProperty Name="UserRequest" ColumnName="UserRequest" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

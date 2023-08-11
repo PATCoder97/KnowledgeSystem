@@ -34,7 +34,6 @@ namespace KnowledgeSystem
         public virtual DbSet<Group> Groups { get; set; }
         public virtual DbSet<GroupUser> GroupUsers { get; set; }
         public virtual DbSet<KnowledgeAttachment> KnowledgeAttachments { get; set; }
-        public virtual DbSet<KnowledgeBase> KnowledgeBases { get; set; }
         public virtual DbSet<KnowledgeHistoryGetFile> KnowledgeHistoryGetFiles { get; set; }
         public virtual DbSet<KnowledgeSecurity> KnowledgeSecurities { get; set; }
         public virtual DbSet<KnowledgeType> KnowledgeTypes { get; set; }
@@ -43,5 +42,6 @@ namespace KnowledgeSystem
         public virtual DbSet<tbl207_NotifyEditDoc> tbl207_NotifyEditDoc { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<dt207_DocProgress> dt207_DocProgress { get; set; }
+        public virtual DbSet<dt207_Base> dt207_Base { get; set; }
     }
 }
