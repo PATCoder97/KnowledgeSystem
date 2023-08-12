@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using KnowledgeSystem.Configs;
 
 namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 {
@@ -279,6 +280,17 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
                 gcData.RefreshDataSource();
             }
+        }
+
+        private void btnChart_Click(object sender, EventArgs e)
+        {
+            List<ChartDataSource> sourceChart = new List<ChartDataSource>();
+
+            sourceChart.AddRange(lsDataStatistic.Select(r => new ChartDataSource() { SeriesName = "Actual", XAxis = r.DisplayName, YAxis = r.Achieve }));
+            sourceChart.AddRange(lsDataStatistic.Select(r => new ChartDataSource() { SeriesName = "Targets", XAxis = r.DisplayName, YAxis = r.Target }));
+
+            f207_ChartStatistics f207_Chart = new f207_ChartStatistics(sourceChart);
+            f207_Chart.ShowDialog();
         }
     }
 }

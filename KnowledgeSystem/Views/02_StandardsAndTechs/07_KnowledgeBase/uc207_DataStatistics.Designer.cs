@@ -115,6 +115,7 @@
             this.btnChart.StyleController = this.layoutControl1;
             this.btnChart.TabIndex = 12;
             this.btnChart.Text = "圖表";
+            this.btnChart.Click += new System.EventHandler(this.btnChart_Click);
             // 
             // btnStatistics
             // 

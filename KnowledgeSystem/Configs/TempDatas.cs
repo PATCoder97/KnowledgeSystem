@@ -25,8 +25,16 @@ namespace KnowledgeSystem.Configs
 
         public static string PahtDataFile = @"E:\01. Softwares Programming\24. Knowledge System\05. Data";
 
-        public static string NoPermission { get; set; } = "Ban khong co quyen han cho chuc nang nay";
+        public static string NoPermission { get; set; } = "您沒有該功能的權限";
     }
+
+    public class ChartDataSource
+    {
+        public string SeriesName { get; set; }
+        public string XAxis { get; set; }
+        public int YAxis { get; set; }
+    }
+
     //public DBDocumentManagementSystemEntities()
     //        : base(SingleConnection.ConString)
     //{
