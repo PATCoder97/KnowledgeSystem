@@ -1,8 +1,10 @@
-﻿using DevExpress.Utils.Menu;
+﻿using DevExpress.ClipboardSource.SpreadsheetML;
+using DevExpress.Utils.Menu;
 using DevExpress.Utils.Svg;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraTreeList;
+using DevExpress.XtraTreeList.Nodes;
 using KnowledgeSystem.Configs;
 using System;
 using System.Collections.Generic;
@@ -32,6 +34,9 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
         BindingSource sourceRole = new BindingSource();
         List<Role> lsRoles = new List<Role>();
 
+        Role roleSelect = new Role();
+
+
         #endregion
 
         #region methods
@@ -40,12 +45,36 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
         {
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                lsFunctions = db.Functions.ToList();
+                var lsFuncRole = db.FunctionRoles.Where(r => r.IdRole == roleSelect.Id).ToList();
+
+                lsFunctions = (from data in db.Functions.OrderBy(r => r.Prioritize).ToList()
+                               join funcs in lsFuncRole on data.Id equals funcs.IdFunction into dtg
+                               from p in dtg.DefaultIfEmpty()
+                               select new Function
+                               {
+                                   Id = data.Id,
+                                   IdParent = data.IdParent,
+                                   DisplayName = data.DisplayName,
+                                   ControlName = data.ControlName,
+                                   Prioritize = data.Prioritize,
+                                   Status = p != null,
+                                   Images = data.Images,
+                               }).ToList();
+                sourceFunc.DataSource = lsFunctions;
+
                 lsRoles = db.Roles.ToList();
             }
 
             treeFunctions.RefreshDataSource();
             gcRoles.RefreshDataSource();
+        }
+
+        private void ClearForm()
+        {
+            roleSelect = new Role();
+            txbNameRole.Text = "";
+
+            LoadData();
         }
 
         #endregion
@@ -64,10 +93,11 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
             gcRoles.DataSource = sourceRole;
             gvRoles.BestFitColumns();
 
-            treeFunctions.CollapseAll();
             treeFunctions.BestFitColumns();
-
             gvRoles.ReadOnlyGridView();
+
+            treeFunctions.ReadOnlyTreelist();
+            treeFunctions.OptionsEditForm.CustomEditFormLayout = new uc402_Func_Info();
         }
 
         private void treeFunctions_NodeCellStyle(object sender, DevExpress.XtraTreeList.GetCustomNodeCellStyleEventArgs e)
@@ -101,12 +131,16 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
 
         private void RoleView_Click(object sender, System.EventArgs e)
         {
-            // gvRoles.DeleteRow(gvRoles.FocusedRowHandle);
+            roleSelect = gvRoles.GetRow(gvRoles.FocusedRowHandle) as Role;
+            txbNameRole.Text = roleSelect.DisplayName;
+
+            LoadData();
         }
 
         private void FunctionEdit_Click(object sender, System.EventArgs e)
         {
-            // gvRoles.DeleteRow(gvRoles.FocusedRowHandle);
+
+            treeFunctions.ShowEditForm();
         }
 
         private void gvRoles_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
@@ -127,6 +161,36 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
             //itemEdit.ImageOptions.SvgImage = CommonSvgImages.Get(CommonSvgImages.Sorting.Ascending);
             if (e.HitInfo.InRow && e.HitInfo.Node.Id >= 0)
                 e.Menu.Items.Add(itemEdit);
+        }
+
+        private void txbNameRole_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            ClearForm();
+        }
+
+        private void btnUpdateRole_Click(object sender, EventArgs e)
+        {
+            if (roleSelect == new Role()) return;
+
+            List<Function> lsDataSourch = sourceFunc.DataSource as List<Function>;
+            var lsFunctionUpdate = lsDataSourch.Where(r => r.Status == true).ToList();
+
+            // Xóa các functionRole trước đó, sau đó thêm lại
+            using (var db = new DBDocumentManagementSystemEntities())
+            {
+                db.FunctionRoles.RemoveRange(db.FunctionRoles.Where(r => r.IdRole == roleSelect.Id));
+
+                foreach (var item in lsFunctionUpdate)
+                {
+                    db.FunctionRoles.Add(new FunctionRole() { IdRole = roleSelect.Id, IdFunction = item.Id });
+                }
+                db.SaveChanges();
+            }
+
+            XtraMessageBox.Show("Cập nhật quyền hạn thành công !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            ClearForm();
+            LoadData();
         }
     }
 }

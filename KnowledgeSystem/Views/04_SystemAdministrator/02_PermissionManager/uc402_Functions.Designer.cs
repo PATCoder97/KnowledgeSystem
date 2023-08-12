@@ -28,8 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.buttonEdit1 = new DevExpress.XtraEditors.ButtonEdit();
+            this.btnUpdateRole = new DevExpress.XtraEditors.SimpleButton();
+            this.txbNameRole = new DevExpress.XtraEditors.ButtonEdit();
             this.gcRoles = new DevExpress.XtraGrid.GridControl();
             this.gvRoles = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -45,9 +51,10 @@
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.buttonEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbNameRole.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcRoles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvRoles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.treeFunctions)).BeginInit();
@@ -55,13 +62,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
             // 
             this.layoutControl1.AllowCustomization = false;
             this.layoutControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
-            this.layoutControl1.Controls.Add(this.buttonEdit1);
+            this.layoutControl1.Controls.Add(this.btnUpdateRole);
+            this.layoutControl1.Controls.Add(this.txbNameRole);
             this.layoutControl1.Controls.Add(this.gcRoles);
             this.layoutControl1.Controls.Add(this.treeFunctions);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -72,19 +81,36 @@
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
-            // buttonEdit1
+            // btnUpdateRole
             // 
-            this.buttonEdit1.Location = new System.Drawing.Point(372, 12);
-            this.buttonEdit1.Name = "buttonEdit1";
-            this.buttonEdit1.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonEdit1.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.buttonEdit1.Properties.Appearance.Options.UseFont = true;
-            this.buttonEdit1.Properties.Appearance.Options.UseForeColor = true;
-            this.buttonEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.buttonEdit1.Size = new System.Drawing.Size(639, 28);
-            this.buttonEdit1.StyleController = this.layoutControl1;
-            this.buttonEdit1.TabIndex = 6;
+            this.btnUpdateRole.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdateRole.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.btnUpdateRole.Appearance.Options.UseFont = true;
+            this.btnUpdateRole.Appearance.Options.UseForeColor = true;
+            this.btnUpdateRole.Location = new System.Drawing.Point(898, 12);
+            this.btnUpdateRole.Name = "btnUpdateRole";
+            this.btnUpdateRole.Size = new System.Drawing.Size(113, 28);
+            this.btnUpdateRole.StyleController = this.layoutControl1;
+            this.btnUpdateRole.TabIndex = 7;
+            this.btnUpdateRole.Text = "更新權限";
+            this.btnUpdateRole.Click += new System.EventHandler(this.btnUpdateRole_Click);
+            // 
+            // txbNameRole
+            // 
+            this.txbNameRole.Location = new System.Drawing.Point(424, 12);
+            this.txbNameRole.Name = "txbNameRole";
+            this.txbNameRole.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbNameRole.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.txbNameRole.Properties.Appearance.Options.UseFont = true;
+            this.txbNameRole.Properties.Appearance.Options.UseForeColor = true;
+            editorButtonImageOptions1.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.txbNameRole.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Close, "", -1, true, true, true, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            this.txbNameRole.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.txbNameRole.Size = new System.Drawing.Size(470, 28);
+            this.txbNameRole.StyleController = this.layoutControl1;
+            this.txbNameRole.TabIndex = 6;
+            this.txbNameRole.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txbNameRole_ButtonClick);
             // 
             // gcRoles
             // 
@@ -251,7 +277,8 @@
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem1,
             this.layoutControlItem2,
-            this.layoutControlItem3});
+            this.layoutControlItem3,
+            this.layoutControlItem4});
             this.Root.Name = "Root";
             this.Root.Size = new System.Drawing.Size(1023, 473);
             this.Root.TextVisible = false;
@@ -277,12 +304,28 @@
             // 
             // layoutControlItem3
             // 
-            this.layoutControlItem3.Control = this.buttonEdit1;
+            this.layoutControlItem3.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.layoutControlItem3.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
+            this.layoutControlItem3.AppearanceItemCaption.Options.UseFont = true;
+            this.layoutControlItem3.AppearanceItemCaption.Options.UseForeColor = true;
+            this.layoutControlItem3.Control = this.txbNameRole;
             this.layoutControlItem3.Location = new System.Drawing.Point(360, 0);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(643, 32);
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem3.TextVisible = false;
+            this.layoutControlItem3.Size = new System.Drawing.Size(526, 32);
+            this.layoutControlItem3.Text = "權限";
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(40, 19);
+            // 
+            // layoutControlItem4
+            // 
+            this.layoutControlItem4.Control = this.btnUpdateRole;
+            this.layoutControlItem4.Location = new System.Drawing.Point(886, 0);
+            this.layoutControlItem4.MaxSize = new System.Drawing.Size(117, 0);
+            this.layoutControlItem4.MinSize = new System.Drawing.Size(117, 28);
+            this.layoutControlItem4.Name = "layoutControlItem4";
+            this.layoutControlItem4.Size = new System.Drawing.Size(117, 32);
+            this.layoutControlItem4.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem4.TextVisible = false;
             // 
             // uc402_Functions
             // 
@@ -294,7 +337,7 @@
             this.Load += new System.EventHandler(this.uc402_Functions_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.buttonEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbNameRole.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcRoles)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvRoles)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.treeFunctions)).EndInit();
@@ -302,6 +345,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -323,7 +367,9 @@
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
-        private DevExpress.XtraEditors.ButtonEdit buttonEdit1;
+        private DevExpress.XtraEditors.ButtonEdit txbNameRole;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
+        private DevExpress.XtraEditors.SimpleButton btnUpdateRole;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
     }
 }
