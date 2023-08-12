@@ -1,4 +1,7 @@
-﻿using System;
+﻿using DevExpress.Pdf.Native.BouncyCastle.Asn1.Ocsp;
+using DevExpress.Utils.Svg;
+using System;
+using System.Drawing;
 
 namespace KnowledgeSystem
 {
@@ -11,5 +14,15 @@ namespace KnowledgeSystem
         public Nullable<int> Prioritize { get; set; }
         public Nullable<bool> Status { get; set; }
         public string Images { get; set; }
+        public SvgImage ImageLive
+        {
+            get
+            {
+                return string.IsNullOrEmpty(Images) ?
+                    SvgImage.FromFile($@"Images\none.svg") :
+                    SvgImage.FromFile($@"Images\{Images}");
+            }
+            set { }
+        }
     }
 }

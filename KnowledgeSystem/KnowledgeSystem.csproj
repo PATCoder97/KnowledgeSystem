@@ -244,6 +244,12 @@
     <Compile Include="Views\04_SystemAdministrator\01_UserManage\uc401_UserManage_Info.Designer.cs">
       <DependentUpon>uc401_UserManage_Info.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\uc402_Functions.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\uc402_Functions.Designer.cs">
+      <DependentUpon>uc402_Functions.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -315,6 +321,9 @@
     <EmbeddedResource Include="Views\04_SystemAdministrator\01_UserManage\uc401_UserManage_Info.resx">
       <DependentUpon>uc401_UserManage_Info.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\04_SystemAdministrator\02_PermissionManager\uc402_Functions.resx">
+      <DependentUpon>uc402_Functions.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -338,9 +347,17 @@
     <Folder Include="Views\01_ProductionAndSales\" />
     <Folder Include="Views\02_StandardsAndTechs\01_ISODocuments\" />
     <Folder Include="Views\03_DepartmentManage\" />
-    <Folder Include="Views\04_SystemAdministrator\02_PermissionManager\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\Actions_Forbid.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Actions_Settings.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\none.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="SQLModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SQLModel.edmx</DependentUpon>
