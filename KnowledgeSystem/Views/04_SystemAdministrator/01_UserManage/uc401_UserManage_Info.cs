@@ -22,7 +22,20 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
 
         private void FormLoad()
         {
-            // txbRole.Properties.Items.AddRange(new string[] { fSearchThread.QUY_PHAM, fSearchThread.NSX });
+            using (var db = new DBDocumentManagementSystemEntities())
+            {
+                var lsRoles = db.Roles.ToList();
+                cbbRole.Properties.DataSource = lsRoles;
+                cbbRole.Properties.DisplayMember = "DisplayName";
+                cbbRole.Properties.ValueMember = "Id";
+
+                var lsDepts = db.dm_Departments.ToList();
+                cbbDept.Properties.DataSource = lsDepts;
+                cbbDept.Properties.DisplayMember = "DisplayName";
+                cbbDept.Properties.ValueMember = "Id";
+
+                cbbDept.EditValue = "7820";
+            }
         }
 
         public string Id
@@ -37,16 +50,16 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             set { DisplayName = value; }
         }
 
-        public int IdDept
+        public string IdDept
         {
-            get { return Convert.ToInt16(txbDept.Text.Trim()); }
+            get { return cbbDept.EditValue.ToString(); }
             set { IdDept = value; }
         }
 
-        //public int IdRole
-        //{
-        //    get { return Convert.ToInt16(txbRole.Text.Trim()); }
-        //    set { IdRole = value; }
-        //}
+        public int IdRole
+        {
+            get { return string.IsNullOrEmpty(cbbRole.EditValue.ToString()) ? 0 : Convert.ToInt16(cbbRole.EditValue); }
+            set { IdRole = value; }
+        }
     }
 }

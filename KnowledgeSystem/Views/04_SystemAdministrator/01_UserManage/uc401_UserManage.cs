@@ -34,6 +34,12 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManager
         Font fontDFKaiSB12 = new Font("DFKai-SB", 12.0f, FontStyle.Regular);
         BindingSource sourceUsers = new BindingSource();
 
+        private class UserInfos : User
+        {
+            public string RoleName { get; set; }
+            public string DeptName { get; set; }
+        }
+
         #endregion
 
         #region methods
@@ -43,7 +49,22 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManager
             helper.SaveViewInfo();
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                var lsUserManage = db.Users.ToList();
+                var lsUserManage = (from data in db.Users.ToList()
+                                    join depts in db.dm_Departments.ToList() on data.IdDepartment equals depts.Id
+                                    join roles in db.Roles.ToList() on data.IdRole equals roles.Id into dtg
+                                    from p in dtg.DefaultIfEmpty()
+                                    select new UserInfos()
+                                    {
+                                        Id = data.Id,
+                                        DisplayName = data.DisplayName,
+                                        IdRole = data.IdRole,
+                                        IdDepartment = data.IdDepartment,
+                                        DateCreate = data.DateCreate,
+                                        SecondaryPassword = data.SecondaryPassword,
+                                        RoleName = p != null ? p.DisplayName : "",
+                                        DeptName = $"{data.IdDepartment} {depts.DisplayName}"
+                                    }).ToList();
+
                 sourceUsers.DataSource = lsUserManage;
             }
 
@@ -151,6 +172,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManager
                 Id = ucInfo.Id,
                 DisplayName = ucInfo.DisplayName,
                 IdDepartment = ucInfo.IdDept.ToString(),
+                IdRole = ucInfo.IdRole,
                 DateCreate = DateTime.Now
             };
 
