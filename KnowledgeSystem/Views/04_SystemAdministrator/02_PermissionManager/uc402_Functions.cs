@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity.Migrations;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -63,6 +64,10 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
                 sourceFunc.DataSource = lsFunctions;
 
                 lsRoles = db.Roles.ToList();
+                sourceRole.DataSource = lsRoles;
+                gcRoles.DataSource = sourceRole;
+
+                gvRoles.BestFitColumns();
             }
 
             treeFunctions.RefreshDataSource();
@@ -88,16 +93,10 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
             treeFunctions.KeyFieldName = "Id";
             treeFunctions.ParentFieldName = "IdParent";
             treeFunctions.CheckBoxFieldName = "Status";
-
-            sourceRole.DataSource = lsRoles;
-            gcRoles.DataSource = sourceRole;
-            gvRoles.BestFitColumns();
-
             treeFunctions.BestFitColumns();
-            gvRoles.ReadOnlyGridView();
 
+            gvRoles.ReadOnlyGridView();
             treeFunctions.ReadOnlyTreelist();
-            treeFunctions.OptionsEditForm.CustomEditFormLayout = new uc402_Func_Info();
         }
 
         private void treeFunctions_NodeCellStyle(object sender, DevExpress.XtraTreeList.GetCustomNodeCellStyleEventArgs e)
@@ -113,20 +112,35 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
         DXMenuItem[] menuItems;
         void InitializeMenuItems()
         {
-            DXMenuItem itemEdit = new DXMenuItem("修改", RoleEdit_Click);
-            DXMenuItem itemDelete = new DXMenuItem("刪除", RoleDelete_Click);
-            DXMenuItem itemView = new DXMenuItem("看權限", RoleView_Click);
-            menuItems = new DXMenuItem[] { itemView, itemEdit, itemDelete };
+            DXMenuItem itemEdit = new DXMenuItem("Edit", RoleEdit_Click);
+            DXMenuItem itemDelete = new DXMenuItem("Delete", RoleDelete_Click);
+            DXMenuItem itemView = new DXMenuItem("View", RoleView_Click);
+            DXMenuItem itemNew = new DXMenuItem("New", RoleNew_Click);
+            menuItems = new DXMenuItem[] { itemView, itemEdit, itemDelete, itemNew };
         }
 
         private void RoleEdit_Click(object sender, System.EventArgs e)
         {
-            // gvRoles.ShowEditor();
+            gvRoles.ShowEditForm();
         }
 
         private void RoleDelete_Click(object sender, System.EventArgs e)
         {
-            // gvRoles.DeleteRow(gvRoles.FocusedRowHandle);
+            Role roleDelete = gvRoles.GetRow(gvRoles.FocusedRowHandle) as Role;
+
+            var dlg = XtraMessageBox.Show($"Bạn có chắc chắn muốn xoá quyền hạn {roleDelete.DisplayName} ?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (dlg != DialogResult.Yes) return;
+
+            using (var db = new DBDocumentManagementSystemEntities())
+            {
+                int idRoleDel = roleDelete.Id;
+
+                db.Roles.Remove(db.Roles.First(r => r.Id == idRoleDel));
+                db.FunctionRoles.RemoveRange(db.FunctionRoles.Where(r => r.IdRole == idRoleDel));
+                db.SaveChanges();
+            }
+
+            LoadData();
         }
 
         private void RoleView_Click(object sender, System.EventArgs e)
@@ -137,10 +151,29 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
             LoadData();
         }
 
-        private void FunctionEdit_Click(object sender, System.EventArgs e)
+        private void RoleNew_Click(object sender, System.EventArgs e)
         {
+            using (var db = new DBDocumentManagementSystemEntities())
+            {
+                if (db.Roles.Any(r => r.DisplayName == "NEW"))
+                {
+                    XtraMessageBox.Show($"Đã tồn tại quyền hạn NEW !", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
-            treeFunctions.ShowEditForm();
+                var dlg = XtraMessageBox.Show($"Bạn có chắc chắn muốn thêm quyền hạn mới ?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (dlg != DialogResult.Yes) return;
+
+                Role role = new Role()
+                {
+                    DisplayName = "NEW"
+                };
+
+                db.Roles.Add(role);
+                db.SaveChanges();
+            }
+
+            LoadData();
         }
 
         private void gvRoles_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
@@ -155,14 +188,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
             }
         }
 
-        private void treeFunctions_PopupMenuShowing(object sender, DevExpress.XtraTreeList.PopupMenuShowingEventArgs e)
-        {
-            DXMenuItem itemEdit = new DXMenuItem("修改", FunctionEdit_Click);
-            //itemEdit.ImageOptions.SvgImage = CommonSvgImages.Get(CommonSvgImages.Sorting.Ascending);
-            if (e.HitInfo.InRow && e.HitInfo.Node.Id >= 0)
-                e.Menu.Items.Add(itemEdit);
-        }
-
         private void txbNameRole_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             ClearForm();
@@ -170,7 +195,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
 
         private void btnUpdateRole_Click(object sender, EventArgs e)
         {
-            if (roleSelect == new Role()) return;
+            if (roleSelect.Id == 0) return;
 
             List<Function> lsDataSourch = sourceFunc.DataSource as List<Function>;
             var lsFunctionUpdate = lsDataSourch.Where(r => r.Status == true).ToList();
@@ -190,6 +215,21 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
             XtraMessageBox.Show("Cập nhật quyền hạn thành công !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             ClearForm();
+            LoadData();
+        }
+
+        private void gvRoles_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
+        {
+            Role roles = e.Row as Role;
+
+            using (var db = new DBDocumentManagementSystemEntities())
+            {
+                db.Roles.AddOrUpdate(roles);
+                db.SaveChanges();
+            }
+
+            XtraMessageBox.Show("Thao tác sửa thành công!", TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             LoadData();
         }
     }

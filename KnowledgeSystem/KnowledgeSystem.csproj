@@ -250,11 +250,11 @@
     <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\uc402_Functions.Designer.cs">
       <DependentUpon>uc402_Functions.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\uc402_Func_Info.cs">
+    <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\uc402_Role_Info.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\uc402_Func_Info.Designer.cs">
-      <DependentUpon>uc402_Func_Info.cs</DependentUpon>
+    <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\uc402_Role_Info.Designer.cs">
+      <DependentUpon>uc402_Role_Info.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -330,8 +330,8 @@
     <EmbeddedResource Include="Views\04_SystemAdministrator\02_PermissionManager\uc402_Functions.resx">
       <DependentUpon>uc402_Functions.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\04_SystemAdministrator\02_PermissionManager\uc402_Func_Info.resx">
-      <DependentUpon>uc402_Func_Info.cs</DependentUpon>
+    <EmbeddedResource Include="Views\04_SystemAdministrator\02_PermissionManager\uc402_Role_Info.resx">
+      <DependentUpon>uc402_Role_Info.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
     <None Include="packages.config" />

@@ -143,6 +143,7 @@
             this.gvRoles.OptionsView.ShowAutoFilterRow = true;
             this.gvRoles.OptionsView.ShowGroupPanel = false;
             this.gvRoles.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gvRoles_PopupMenuShowing);
+            this.gvRoles.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.gvRoles_RowUpdated);
             // 
             // gridColumn2
             // 
@@ -190,7 +191,6 @@
             this.treeFunctions.Size = new System.Drawing.Size(639, 417);
             this.treeFunctions.TabIndex = 4;
             this.treeFunctions.NodeCellStyle += new DevExpress.XtraTreeList.GetCustomNodeCellStyleEventHandler(this.treeFunctions_NodeCellStyle);
-            this.treeFunctions.PopupMenuShowing += new DevExpress.XtraTreeList.PopupMenuShowingEventHandler(this.treeFunctions_PopupMenuShowing);
             // 
             // treeListColumn1
             // 
@@ -250,8 +250,6 @@
             this.treeListColumn5.FieldName = "Id";
             this.treeListColumn5.Name = "treeListColumn5";
             this.treeListColumn5.UnboundDataType = typeof(short);
-            this.treeListColumn5.Visible = true;
-            this.treeListColumn5.VisibleIndex = 5;
             this.treeListColumn5.Width = 95;
             // 
             // treeListColumn6

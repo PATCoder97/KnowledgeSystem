@@ -30,7 +30,7 @@ namespace KnowledgeSystem
             //Application.Run(new f00_Main());
 
             TempDatas.LoginId = "VNW0012950";
-            Application.Run(new f00_FluentFrame(17));
+            Application.Run(new f00_FluentFrame(7));
         }
     }
 }
