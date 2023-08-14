@@ -85,6 +85,7 @@
             this.ClientSize = new System.Drawing.Size(998, 470);
             this.Controls.Add(this.layoutControl1);
             this.Name = "f207_ChartStatistics";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "f207_ChartStatistics";
             this.Load += new System.EventHandler(this.f207_ChartStatistics_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();

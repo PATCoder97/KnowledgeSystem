@@ -76,5 +76,14 @@ namespace KnowledgeSystem.Views._00_Generals
             formShow.ShowDialog();
             Show();
         }
+
+        private void btnRoleManage_ItemClick(object sender, TileItemEventArgs e)
+        {
+            f00_FluentFrame formShow = new f00_FluentFrame(17);
+            formShow.Text = e.Item.Text + AppCopyRight.CopyRightString();
+            Hide();
+            formShow.ShowDialog();
+            Show();
+        }
     }
 }
