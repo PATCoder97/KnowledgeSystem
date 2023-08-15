@@ -42,14 +42,16 @@ namespace KnowledgeSystem.Views._00_Generals
                 using (var db = new DBDocumentManagementSystemEntities())
                 {
                     // Đếm số lượng người dùng có ID và mật khẩu tương ứng
-                    int countUsers = db.Users.Count(u => u.Id == userID && u.SecondaryPassword == password);
+                    var users = db.Users.FirstOrDefault(u => u.Id == userID && u.SecondaryPassword == password);
 
-                    if (countUsers > 0)
+                    if (users != null)
                     {
                         // Lưu thông tin đăng nhập và đóng form
                         TempDatas.LoginId = userID;
+                        TempDatas.RoleUserLogin = users.IdRole ?? 0;
                         RegistryHelper.SaveSetting(RegistryHelper.LoginId, userID);
                         TempDatas.LoginSuccessful = true;
+
                         Close();
                     }
                     else

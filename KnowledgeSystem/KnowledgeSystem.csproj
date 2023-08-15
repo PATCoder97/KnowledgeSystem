@@ -84,6 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configs\AppCopyRight.cs" />
+    <Compile Include="Configs\AppPermission.cs" />
     <Compile Include="Configs\GridControlHelper.cs" />
     <Compile Include="Configs\RefreshHelper.cs" />
     <Compile Include="Configs\RegistryHelper.cs" />

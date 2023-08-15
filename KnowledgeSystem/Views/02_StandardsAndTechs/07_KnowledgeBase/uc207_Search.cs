@@ -70,30 +70,16 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 TempDatas.typeSaveFile = lsTypeHisGetFile.FirstOrDefault(r => r.Id == 2);
                 TempDatas.typePrintFile = lsTypeHisGetFile.FirstOrDefault(r => r.Id == 3);
 
+                // Kiểm tra xem phải sysAdmin không
+                bool IsSysAdmin = AppPermission.Instance.CheckAppPermission(AppPermission.SysAdmin);
+                if (IsSysAdmin)
+                {
+                    lsKnowledgeBase = db.dt207_Base.Where(r => !r.IsDelete).ToList();
+                    goto GET_DISPLAY_LIST;
+                }
+
                 // Lấy danh sách các giá trị IdKnowledgeBase mà IsComplete là false
                 var lsIdBaseRemove = db.dt207_DocProgress.Where(r => !r.IsComplete).Select(r => r.IdKnowledgeBase).ToList();
-
-                //// Lấy danh sách các thực thể dt207_Base từ cơ sở dữ liệu mà Id không có trong lsIdBaseRemove
-                //var lsBaseRemove = db.dt207_Base.Where(r => !lsIdBaseRemove.Contains(r.Id)).ToList();
-
-                //// Lấy danh sách các thực thể dt207_Base từ cơ sở dữ liệu, loại bỏ các thực thể có trong lsBaseRemove
-                //// Chọn các thuộc tính cụ thể và tạo ra các thực thể dt207_Base mới cho danh sách mới
-                //lsKnowledgeBase = db.dt207_Base.RemoveRange(lsBaseRemove)
-                //     .Where(r => !r.IsDelete) // Không lấy các văn kiện đã xoá
-                //     .Select(r => new dt207_Base
-                //     {
-                //         Id = r.Id,
-                //         DisplayName = r.DisplayName,
-                //         Keyword = r.Keyword,
-                //         UserRequest = r.UserRequest,
-                //         IdTypes = r.IdTypes,
-                //         UserUpload = r.UserUpload,
-                //         UploadDate = r.UploadDate
-                //     })
-                //     .ToList();
-
-                //var query = db.dt207_Base.ToList();
-                //var query1 = db.dt207_Base.RemoveRange(lsBaseRemove).ToList();
 
                 // Danh sách Doc đưa lên hoặc yêu cầu
                 var lsDocUserUpload = db.dt207_Base.Where(r => r.UserUpload == userLogin || r.UserRequest == userLogin).ToList();
@@ -146,6 +132,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 lsKnowledgeBase = db.dt207_Base.Where(r => lsIdDisplay.Contains(r.Id) && !r.IsDelete).ToList();
             }
 
+        GET_DISPLAY_LIST:
             // Tạo danh sách các đối tượng DataDisplay bằng cách kết hợp lsKnowledgeBase, lsUsers, và lsKnowledgeTypes
             // Chọn các thuộc tính cụ thể để điền vào các đối tượng DataDisplay
             var lsDataDisplays = (from data in lsKnowledgeBase

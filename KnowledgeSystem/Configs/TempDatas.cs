@@ -20,6 +20,8 @@ namespace KnowledgeSystem.Configs
         public static KnowledgeTypeHisGetFile typePrintFile = default(KnowledgeTypeHisGetFile);
 
         public static string LoginId { get; set; }
+        public static int RoleUserLogin { get; set; }
+
         public static string DomainComputer { get; set; }
         public static bool LoginSuccessful { get; set; }
 
