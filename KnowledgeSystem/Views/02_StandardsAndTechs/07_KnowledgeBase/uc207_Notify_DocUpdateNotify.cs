@@ -39,9 +39,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                var query = (from data in db.tbl207_NotifyEditDoc.Where(r => r.IdUserNotify == TempDatas.LoginId)
+                var query = (from data in db.tbl207_NotifyEditDoc
+                             where data.IdUserNotify == TempDatas.LoginId
                              join idDoc in db.dt207_DocProgress on data.IdDocProcess equals idDoc.Id
                              join names in db.dt207_Base on idDoc.IdKnowledgeBase equals names.Id
+                             orderby data.TimeNotify descending
                              select new
                              {
                                  data.Id,
@@ -50,7 +52,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                                  data.TimeNotyfiNotes,
                                  idDoc.IdKnowledgeBase,
                                  names.DisplayName
-                             }).OrderByDescending(r => r.TimeNotify).ToList();
+                             }).ToList();
 
                 gcData.DataSource = query;
             }

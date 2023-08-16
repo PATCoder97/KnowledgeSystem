@@ -106,16 +106,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             {
                 if (e.Info.IsRowIndicator)
                 {
-                    if (e.RowHandle < 0)
-                    {
-                        e.Info.ImageIndex = 0;
-                        e.Info.DisplayText = string.Empty;
-                    }
-                    else
-                    {
-                        e.Info.ImageIndex = -1;
-                        e.Info.DisplayText = (e.RowHandle + 1).ToString();
-                    }
+                    e.Info.ImageIndex = e.RowHandle < 0 ? 0 : -1;
+                    e.Info.DisplayText = e.RowHandle < 0 ? string.Empty : (e.RowHandle + 1).ToString();
 
                     IndicatorDraw(e);
 

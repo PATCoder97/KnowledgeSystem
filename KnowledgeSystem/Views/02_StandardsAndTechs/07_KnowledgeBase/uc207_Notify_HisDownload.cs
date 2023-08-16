@@ -37,9 +37,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                var lsHisDownLoad = db.KnowledgeHistoryGetFiles.ToList();
-
+                // Truy vấn và lấy danh sách các tệp tin lịch sử kiến thức dựa trên ID người dùng, kết hợp các bảng liên quan.
                 var query = (from data in db.KnowledgeHistoryGetFiles
+                             where data.IdUser == TempDatas.LoginId
                              join names in db.dt207_Base on data.IdKnowledgeBase equals names.Id
                              join types in db.KnowledgeTypeHisGetFiles on data.idTypeHisGetFile equals types.Id
                              select new
@@ -70,16 +70,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             {
                 if (e.Info.IsRowIndicator)
                 {
-                    if (e.RowHandle < 0)
-                    {
-                        e.Info.ImageIndex = 0;
-                        e.Info.DisplayText = string.Empty;
-                    }
-                    else
-                    {
-                        e.Info.ImageIndex = -1;
-                        e.Info.DisplayText = (e.RowHandle + 1).ToString();
-                    }
+                    e.Info.ImageIndex = e.RowHandle < 0 ? 0 : -1;
+                    e.Info.DisplayText = e.RowHandle < 0 ? string.Empty : (e.RowHandle + 1).ToString();
 
                     IndicatorDraw(e);
 
