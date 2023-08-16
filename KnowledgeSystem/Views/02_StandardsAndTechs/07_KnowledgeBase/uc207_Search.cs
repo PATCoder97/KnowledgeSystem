@@ -70,16 +70,16 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 TempDatas.typeSaveFile = lsTypeHisGetFile.FirstOrDefault(r => r.Id == 2);
                 TempDatas.typePrintFile = lsTypeHisGetFile.FirstOrDefault(r => r.Id == 3);
 
+                // Lấy danh sách các giá trị IdKnowledgeBase mà IsComplete là false
+                var lsIdBaseRemove = db.dt207_DocProgress.Where(r => !r.IsComplete).Select(r => r.IdKnowledgeBase).ToList();
+
                 // Kiểm tra xem phải sysAdmin không
                 bool IsSysAdmin = AppPermission.Instance.CheckAppPermission(AppPermission.SysAdmin);
                 if (IsSysAdmin)
                 {
-                    lsKnowledgeBase = db.dt207_Base.Where(r => !r.IsDelete).ToList();
+                    lsKnowledgeBase = db.dt207_Base.Where(r => !lsIdBaseRemove.Contains(r.Id) && !r.IsDelete).ToList();
                     goto GET_DISPLAY_LIST;
                 }
-
-                // Lấy danh sách các giá trị IdKnowledgeBase mà IsComplete là false
-                var lsIdBaseRemove = db.dt207_DocProgress.Where(r => !r.IsComplete).Select(r => r.IdKnowledgeBase).ToList();
 
                 // Danh sách Doc đưa lên hoặc yêu cầu
                 var lsDocUserUpload = db.dt207_Base.Where(r => r.UserUpload == userLogin || r.UserRequest == userLogin).ToList();

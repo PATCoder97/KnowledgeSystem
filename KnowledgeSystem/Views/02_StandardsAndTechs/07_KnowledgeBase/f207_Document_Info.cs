@@ -475,7 +475,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 dt207_Base knowledge = new dt207_Base()
                 {
                     Id = idDocumentToUpdate,
-                    DisplayName = $"{convertToUnSign3(txbNameTW.Text)}\r\n{txbNameVN.Text}",
+                    DisplayName = $"{convertToUnSign3(txbNameTW.Text.Trim())}\r\n{txbNameVN.Text.Trim()}",
                     UserRequest = cbbUserRequest.EditValue.ToString(),
                     IdTypes = (int)cbbType.EditValue,
                     Keyword = txbKeyword.Text.Trim(),
@@ -701,7 +701,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
                     db.dt207_DocProgress.AddOrUpdate(docProcessUpdate);
 
-                    descriptions = "已完成";
+                    descriptions = "確認完畢";
                 }
 
                 DocProgressInfo progressInfo = new DocProgressInfo()

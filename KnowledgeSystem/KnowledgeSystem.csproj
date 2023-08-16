@@ -161,6 +161,12 @@
     <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_Document_Info.Designer.cs">
       <DependentUpon>f207_Document_Info.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_Document_ViewOnly.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_Document_ViewOnly.Designer.cs">
+      <DependentUpon>f207_Document_ViewOnly.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_ViewPdf.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -279,6 +285,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_Document_Info.resx">
       <DependentUpon>f207_Document_Info.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_Document_ViewOnly.resx">
+      <DependentUpon>f207_Document_ViewOnly.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_ViewPdf.resx">
       <DependentUpon>f207_ViewPdf.cs</DependentUpon>

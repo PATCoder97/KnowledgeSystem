@@ -32,6 +32,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.gcData = new DevExpress.XtraGrid.GridControl();
             this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gColId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gvColIdKnowledgeBase = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -98,6 +99,7 @@
             this.gvData.Appearance.Row.Options.UseFont = true;
             this.gvData.Appearance.Row.Options.UseForeColor = true;
             this.gvData.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gColId,
             this.gvColIdKnowledgeBase,
             this.gridColumn2,
             this.gridColumn3,
@@ -112,6 +114,14 @@
             this.gvData.OptionsView.ShowGroupPanel = false;
             this.gvData.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gvData_CustomDrawRowIndicator);
             // 
+            // gColId
+            // 
+            this.gColId.Caption = "Id";
+            this.gColId.FieldName = "Id";
+            this.gColId.Name = "gColId";
+            this.gColId.Visible = true;
+            this.gColId.VisibleIndex = 0;
+            // 
             // gvColIdKnowledgeBase
             // 
             this.gvColIdKnowledgeBase.AppearanceCell.Options.UseTextOptions = true;
@@ -120,7 +130,7 @@
             this.gvColIdKnowledgeBase.FieldName = "IdKnowledgeBase";
             this.gvColIdKnowledgeBase.Name = "gvColIdKnowledgeBase";
             this.gvColIdKnowledgeBase.Visible = true;
-            this.gvColIdKnowledgeBase.VisibleIndex = 1;
+            this.gvColIdKnowledgeBase.VisibleIndex = 2;
             // 
             // gridColumn2
             // 
@@ -128,23 +138,23 @@
             this.gridColumn2.FieldName = "DisplayName";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 2;
+            this.gridColumn2.VisibleIndex = 3;
             // 
             // gridColumn3
             // 
-            this.gridColumn3.Caption = "上傳狀況";
+            this.gridColumn3.Caption = "核簽狀態";
             this.gridColumn3.FieldName = "Descriptions";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 4;
+            this.gridColumn3.VisibleIndex = 5;
             // 
             // gridColumn4
             // 
-            this.gridColumn4.Caption = "處理者";
+            this.gridColumn4.Caption = "核簽人員";
             this.gridColumn4.FieldName = "UserProcess";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 5;
+            this.gridColumn4.VisibleIndex = 6;
             // 
             // gridColumn6
             // 
@@ -156,7 +166,7 @@
             this.gridColumn6.FieldName = "TimeStep";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 0;
+            this.gridColumn6.VisibleIndex = 1;
             // 
             // gridColumn1
             // 
@@ -164,7 +174,7 @@
             this.gridColumn1.FieldName = "Reason";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 3;
+            this.gridColumn1.VisibleIndex = 4;
             // 
             // Root
             // 
@@ -234,5 +244,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private System.Windows.Forms.Label label1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
+        private DevExpress.XtraGrid.Columns.GridColumn gColId;
     }
 }
