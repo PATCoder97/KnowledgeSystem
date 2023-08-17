@@ -338,7 +338,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             }
 
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.Title = "Xuất dữ liệu chính chủ ra file pdf";
+            saveFileDialog1.Title = "導出資料上傳統計表";
             saveFileDialog1.DefaultExt = "xlsx";
             saveFileDialog1.Filter = "Excel Files|*.xlsx";
             saveFileDialog1.FilterIndex = 1;
@@ -353,7 +353,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
                 using (ExcelPackage pck = new ExcelPackage(newFilePath))
                 {
-                    ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Accounts");
+                    ExcelWorksheet ws = pck.Workbook.Worksheets.Add("資料上傳統計表");
                     ws.Cells.Style.Font.Name = "DFKai-SB";
                     ws.Cells.Style.Font.Size = 14;
                     ws.Cells.Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
