@@ -102,7 +102,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 $"[Remark] = \'{NAME_LOWER}\'");
         }
 
-        private bool StatisticsData()
+        private void StatisticsData()
         {
             gvData.FocusedRowHandle = GridControl.AutoFilterRowHandle;
 
@@ -115,7 +115,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             if (string.IsNullOrEmpty(txbFromDate.Text) || string.IsNullOrEmpty(txbFromDate.Text) || toDate < fromDate)
             {
                 XtraMessageBox.Show("請選擇正確的日期數據！", TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
+                return;
             }
 
             using (var db = new DBDocumentManagementSystemEntities())
@@ -191,7 +191,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 }
 
                 gcData.RefreshDataSource();
-                return true;
             }
         }
 
@@ -307,8 +306,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void btnChart_Click(object sender, EventArgs e)
         {
-            StatisticsData();
-
             List<ChartDataSource> sourceChart = new List<ChartDataSource>();
 
             sourceChart.AddRange(lsDataStatistic.Select(r => new ChartDataSource() { SeriesName = "Actual", XAxis = r.DisplayName, YAxis = r.Achieve }));
@@ -320,9 +317,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void btnExcel_Click(object sender, EventArgs e)
         {
-            bool IsHaveData = StatisticsData();
-            if (!IsHaveData) return;
-
             string nameFile = "";
             switch (gColType.Caption)
             {
@@ -374,12 +368,14 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     ws.Cells["C2"].Value = gColTarget.Caption;
 
                     // Vẽ đồ thị
+                    int sumRow = lsDataStatistic.Count();
+
                     ExcelChart chart = ws.Drawings.AddChart("FindingsChart", eChartType.ColumnClustered);
                     chart.Title.Text = nameFile;
                     chart.SetPosition(1, 0, 4, 0);
                     chart.SetSize(1000, 300);
-                    var ser1 = (ExcelBarChartSerie)(chart.Series.Add(ws.Cells["B2:B8"], ws.Cells["A2:A8"]));
-                    var ser2 = (ExcelBarChartSerie)(chart.Series.Add(ws.Cells["C2:C8"], ws.Cells["A2:A8"]));
+                    var ser1 = (ExcelBarChartSerie)(chart.Series.Add(ws.Cells[$"B2:B{sumRow + 2}"], ws.Cells[$"A2:A{sumRow + 2}"]));
+                    var ser2 = (ExcelBarChartSerie)(chart.Series.Add(ws.Cells[$"C2:C{sumRow + 2}"], ws.Cells[$"A2:A{sumRow + 2}"]));
                     ser1.Header = gColAchieve.Caption;
                     ser1.Header = gColTarget.Caption;
 
