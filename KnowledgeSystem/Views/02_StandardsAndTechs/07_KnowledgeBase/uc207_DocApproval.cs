@@ -1,4 +1,5 @@
 ﻿using DevExpress.ClipboardSource.SpreadsheetML;
+using DevExpress.Utils.About;
 using DevExpress.XtraEditors;
 using DevExpress.XtraTreeList;
 using KnowledgeSystem.Configs;
@@ -37,37 +38,57 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             using (var db = new DBDocumentManagementSystemEntities())
             {
+                // Xử lý lấy tất cả các văn kiện cần trình ký
                 lsDocProgresses = db.dt207_DocProgress.Where(r => !r.IsComplete).ToList();
                 lsDocProgressInfos = db.DocProgressInfoes.ToList();
                 var lsKnowledgeBases = db.dt207_Base.ToList();
                 var lsUsers = db.Users.ToList();
 
-                var lsDocNotSuccess = (from data in db.DocProgressInfoes
-                                       group data by data.IdDocProgress into g
-                                       select new
-                                       {
-                                           IdDocProgress = g.Key,
-                                           IndexStep = g.OrderByDescending(dpi => dpi.TimeStep).Select(dpi => dpi.IndexStep).FirstOrDefault(),
-                                           TimeStep = g.OrderByDescending(dpi => dpi.TimeStep).Select(dpi => dpi.TimeStep).FirstOrDefault(),
-                                           IdUserProcess = g.OrderBy(dpi => dpi.TimeStep).Select(dpi => dpi.IdUserProcess).FirstOrDefault()
-                                       }).ToList();
+                var lsDocNotSuccess =
+                    (from data in db.DocProgressInfoes
+                     group data by data.IdDocProgress into g
+                     select new
+                     {
+                         IdDocProgress = g.Key,
+                         IndexStep = g.OrderByDescending(dpi => dpi.TimeStep).Select(dpi => dpi.IndexStep).FirstOrDefault(),
+                         TimeStep = g.OrderByDescending(dpi => dpi.TimeStep).Select(dpi => dpi.TimeStep).FirstOrDefault(),
+                         IdUserProcess = g.OrderBy(dpi => dpi.TimeStep).Select(dpi => dpi.IdUserProcess).FirstOrDefault()
+                     }).ToList();
 
-                var lsDataApproval = (from data in lsDocProgresses
-                                      join infos in lsDocNotSuccess on data.Id equals infos.IdDocProgress
-                                      join bases in lsKnowledgeBases on data.IdKnowledgeBase equals bases.Id
-                                      join users in lsUsers on infos.IdUserProcess equals users.Id
-                                      select new
-                                      {
-                                          data.IdKnowledgeBase,
-                                          data.IdProgress,
-                                          data.Descriptions,
-                                          infos.TimeStep,
-                                          infos.IndexStep,
-                                          bases.DisplayName,
-                                          UserProcess = $"{users.IdDepartment} | {infos.IdUserProcess}/{users.DisplayName}",
-                                      }).ToList();
+                var lsDataApproval =
+                    (from data in lsDocProgresses
+                     join infos in lsDocNotSuccess on data.Id equals infos.IdDocProgress
+                     join bases in lsKnowledgeBases on data.IdKnowledgeBase equals bases.Id
+                     join users in lsUsers on infos.IdUserProcess equals users.Id
+                     select new
+                     {
+                         data.IdKnowledgeBase,
+                         data.IdProgress,
+                         data.Descriptions,
+                         infos.TimeStep,
+                         infos.IndexStep,
+                         bases.DisplayName,
+                         UserProcess = $"{users.IdDepartment} | {infos.IdUserProcess}/{users.DisplayName}",
+                         ApprovalStep = $"{data.IdProgress}-{infos.IndexStep + 1}",
+                     }).ToList();
 
-                source.DataSource = lsDataApproval;
+                // Xử lý phân quyền nhưng user nằm trong group sẽ nhìn thấy
+                var lsGroupIn = (from data in db.GroupUsers.Where(r => r.IdUser == TempDatas.LoginId).ToList()
+                                 join progresses in db.dm_StepProgress.ToList() on data.IdGroup equals progresses.IdGroup
+                                 select new
+                                 {
+                                     progresses.IdProgress,
+                                     progresses.IdGroup,
+                                     progresses.IndexStep,
+                                     ApprovalStep = $"{progresses.IdProgress}-{progresses.IndexStep}",
+                                 }).ToList();
+
+                var lsDisplays = (from data in lsDataApproval
+                                 join progresses in lsGroupIn on data.ApprovalStep equals progresses.ApprovalStep
+                                 select data).ToList();
+
+
+                source.DataSource = lsDisplays;
             }
 
             gcData.RefreshDataSource();

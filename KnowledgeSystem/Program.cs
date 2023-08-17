@@ -27,11 +27,11 @@ namespace KnowledgeSystem
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new f00_Main());
+            //Application.Run(new f00_Main());
 
-            //TempDatas.LoginId = "VNW0014732";
-            //TempDatas.RoleUserLogin = 0;
-            //Application.Run(new f00_FluentFrame(1));
+            TempDatas.LoginId = "VNW0014732";
+            TempDatas.RoleUserLogin = 0;
+            Application.Run(new f00_FluentFrame(1));
         }
     }
 }
