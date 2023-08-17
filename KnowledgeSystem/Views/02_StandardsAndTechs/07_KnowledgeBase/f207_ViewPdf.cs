@@ -34,6 +34,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         private void f207_ViewPdf_Load(object sender, EventArgs e)
         {
             pdfViewerData.DocumentFilePath = documentFile;
+
+            bar2.Visible = !string.IsNullOrEmpty(idKnowledgeBase);
         }
 
         private void pdfViewerData_PopupMenuShowing(object sender, DevExpress.XtraPdfViewer.PdfPopupMenuShowingEventArgs e)

@@ -130,7 +130,6 @@ namespace KnowledgeSystem.Views._00_Generals
             this.tileMain.MaxId = 20;
             this.tileMain.Name = "tileMain";
             this.tileMain.Padding = new System.Windows.Forms.Padding(24, 22, 24, 22);
-            this.tileMain.Position = 540;
             this.tileMain.ShowGroupText = true;
             this.tileMain.Size = new System.Drawing.Size(1180, 498);
             this.tileMain.TabIndex = 4;
@@ -168,7 +167,7 @@ namespace KnowledgeSystem.Views._00_Generals
             // 
             this.tileItem3.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
             this.tileItem3.AppearanceItem.Normal.Options.UseFont = true;
-            tileItemElement3.Text = "對外營業";
+            tileItemElement3.Text = "合同管理";
             this.tileItem3.Elements.Add(tileItemElement3);
             this.tileItem3.Id = 2;
             this.tileItem3.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;

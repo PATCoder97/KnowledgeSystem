@@ -28,6 +28,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         BindingSource sourceKnowledge = new BindingSource();
 
+        List<string> lsIdCanReads = new List<string>();
+        bool IsSysAdmin = false;
+
         private class DataDisplay
         {
             public string Id { get; set; }
@@ -74,7 +77,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 var lsIdBaseRemove = db.dt207_DocProgress.Where(r => !r.IsComplete).Select(r => r.IdKnowledgeBase).ToList();
 
                 // Kiểm tra xem phải sysAdmin không
-                bool IsSysAdmin = AppPermission.Instance.CheckAppPermission(AppPermission.SysAdmin);
+                IsSysAdmin = AppPermission.Instance.CheckAppPermission(AppPermission.SysAdmin);
                 if (IsSysAdmin)
                 {
                     lsKnowledgeBase = db.dt207_Base.Where(r => !lsIdBaseRemove.Contains(r.Id) && !r.IsDelete).ToList();
@@ -107,6 +110,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                                         ks.IdUser,
                                         UserG = subGu?.IdUser,
                                         ks.SearchInfo,
+                                        ks.ReadInfo,
                                         Prioritize = subGu?.Prioritize ?? -1
                                     } into dtData
                                     group dtData by dtData.IdKnowledgeBase into dtg
@@ -115,11 +119,13 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                                         dtg.Key,
                                         dtg.OrderBy(r => r.Prioritize).FirstOrDefault()?.Prioritize,
                                         dtg.OrderBy(r => r.Prioritize).FirstOrDefault()?.SearchInfo,
+                                        dtg.OrderBy(r => r.Prioritize).FirstOrDefault()?.ReadInfo,
                                         dtg.OrderBy(r => r.Prioritize).FirstOrDefault()?.IdUser,
                                         dtg.OrderBy(r => r.Prioritize).FirstOrDefault()?.UserG,
                                     }).ToList();
 
                 var lsIsCanSearchs = lsCanSearchs.Where(r => r.SearchInfo == true).Select(r => r.Key).ToList();
+                lsIdCanReads = lsCanSearchs.Where(r => r.SearchInfo == true && r.ReadInfo == true).Select(r => r.Key).ToList();
 
                 // Gom tất cả các Id có quyền tìm kiếm, đưa lên và yêu cầu sau đó xoá đi các Id đang trong quá trình ký
                 List<string> lsIdDisplay = new List<string>();
@@ -128,6 +134,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 lsIdDisplay.AddRange(lsIdDocUserUpload);
                 lsIdDisplay.RemoveAll(r => lsIdBaseRemove.Contains(r));
                 lsIdDisplay = lsIdDisplay.Distinct().ToList();
+
+                lsIdCanReads.AddRange(lsIdDocUserUpload);
+                lsIdCanReads.RemoveAll(r => lsIdBaseRemove.Contains(r));
 
                 lsKnowledgeBase = db.dt207_Base.Where(r => lsIdDisplay.Contains(r.Id) && !r.IsDelete).ToList();
             }
@@ -203,9 +212,15 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 return;
 
             DataDisplay dataRow = gvData.GetRow(focusedRow) as DataDisplay;
-            string idDocuments = dataRow?.Id;
+            string idDocument = dataRow?.Id;
 
-            f207_Document_Info fDocumentInfo = new f207_Document_Info(idDocuments);
+            if (!lsIdCanReads.Contains(idDocument) && !IsSysAdmin)
+            {
+                XtraMessageBox.Show(TempDatas.NoPermission, TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            f207_Document_Info fDocumentInfo = new f207_Document_Info(idDocument);
             fDocumentInfo.ShowDialog();
 
             LoadData();

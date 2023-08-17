@@ -133,6 +133,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             gcFiles.DataSource = sourceAttachments;
             gcSecurity.DataSource = sourceSecuritys;
 
+            controlgroupDocument.SelectedTabPage = groupProgress;
+
             // Query the database and assign data sources to ComboBoxes and GridView
             using (var db = new DBDocumentManagementSystemEntities())
             {
@@ -170,15 +172,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 cbbUserUpload.Properties.DataSource = lsUsers;
                 cbbUserUpload.Properties.ValueMember = "Id";
                 cbbUserUpload.Properties.DisplayMember = "DisplayName";
-
-                // Set default values
-                userId = TempDatas.LoginId;
-                cbbType.EditValue = 1;
-                cbbUserRequest.EditValue = userId;
-                cbbUserUpload.EditValue = userId;
-                var userLogin = lsUsers.FirstOrDefault(r => r.Id == userId);
-                txbId.Text = "XXX-XXXXXXXXXX-XX";
-                lbCountFile.Text = "";
 
                 // If idDocument is not empty, retrieve data from the database and assign to form elements
                 if (!string.IsNullOrEmpty(idDocument))
@@ -223,15 +216,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     sourceSecuritys.DataSource = lsSecurityInfos;
                     bgvSecurity.BestFitColumns();
 
-
-                    controlgroupDocument.SelectedTabPage = groupProgress;
-
                     int idProgressByDoc = docProcess.IdProgress;
                     int idDocProgress = docProcess.Id;
                     var lsDMStepProgress = db.dm_StepProgress.Where(r => r.IdProgress == idProgressByDoc).ToList();
                     var lsDocProgressInfos = db.DocProgressInfoes.Where(r => r.IdDocProgress == idDocProgress).ToList();
-
-                    //finishStep = lsDMStepProgress.Max(r => r.IndexStep);
 
                     var lsStepProgressDoc = (from data in lsDMStepProgress
                                              join groups in lsGroups on data.IdGroup equals groups.Id
@@ -278,25 +266,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             Attachments dataRow = gvFiles.GetRow(forcusRow) as Attachments;
             string documentsFile = Path.Combine(TempDatas.PahtDataFile, dataRow.EncryptionName);
 
-            if (!string.IsNullOrEmpty(idDocument))
-            {
-                using (var db = new DBDocumentManagementSystemEntities())
-                {
-                    KnowledgeHistoryGetFile historyGetFile = new KnowledgeHistoryGetFile()
-                    {
-                        IdKnowledgeBase = idDocument,
-                        idTypeHisGetFile = 1,
-                        KnowledgeAttachmentName = dataRow.FileName,
-                        IdUser = TempDatas.LoginId,
-                        TimeGet = DateTime.Now
-                    };
-
-                    db.KnowledgeHistoryGetFiles.Add(historyGetFile);
-                    db.SaveChanges();
-                }
-            }
-
-            f207_ViewPdf fDocumentInfo = new f207_ViewPdf(documentsFile, idDocument);
+            f207_ViewPdf fDocumentInfo = new f207_ViewPdf(documentsFile, "");
             fDocumentInfo.Text = dataRow.FileName;
             fDocumentInfo.CanSaveFile = permissionAttachments.SaveFile;
             fDocumentInfo.CanPrintFile = permissionAttachments.PrintFile;
