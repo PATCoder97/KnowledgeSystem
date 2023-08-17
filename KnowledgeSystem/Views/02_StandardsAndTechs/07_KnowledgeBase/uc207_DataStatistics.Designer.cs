@@ -149,6 +149,7 @@
             this.btnExcel.StyleController = this.layoutControl1;
             this.btnExcel.TabIndex = 10;
             this.btnExcel.Text = "Excel";
+            this.btnExcel.Click += new System.EventHandler(this.btnExcel_Click);
             // 
             // txbToDate
             // 

@@ -28,6 +28,7 @@ namespace KnowledgeSystem.Configs
         public static string PahtDataFile = @"E:\01. Softwares Programming\24. Knowledge System\05. Data";
 
         public static string NoPermission { get; set; } = "您沒有該功能的權限";
+        public static string DocIsProcessing { get; set; } = "文件處理中，暫不可顯示！";
     }
 
     public class ChartDataSource

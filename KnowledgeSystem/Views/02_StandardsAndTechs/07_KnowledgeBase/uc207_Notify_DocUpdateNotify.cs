@@ -123,6 +123,15 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
                     db.tbl207_NotifyEditDoc.AddOrUpdate(notifyDocUpdate);
                     db.SaveChanges();
+
+                    bool IsProcess = db.dt207_DocProgress.Any(r => r.IdKnowledgeBase == IdKnowledgeBase && !r.IsComplete);
+                    if (IsProcess)
+                    {
+                        XtraMessageBox.Show(TempDatas.DocIsProcessing, TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        LoadData();
+                        return;
+                    }
                 }
             }
 
