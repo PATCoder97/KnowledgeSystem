@@ -54,7 +54,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         string idDocument = string.Empty;
         string userId = string.Empty;
 
-        List<KnowledgeType> lsKnowledgeTypes = new List<KnowledgeType>();
+        List<dt207_Type> lsKnowledgeTypes = new List<dt207_Type>();
         List<User> lsUsers = new List<User>();
         List<Group> lsGroups = new List<Group>();
         List<Securityinfo> lsSecurityInfos = new List<Securityinfo>();
@@ -223,7 +223,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             using (var db = new DBDocumentManagementSystemEntities())
             {
                 // Initialize lists
-                lsKnowledgeTypes = db.KnowledgeTypes.ToList();
+                lsKnowledgeTypes = db.dt207_Type.ToList();
                 lsUsers = db.Users.ToList();
                 lsGroups = db.Groups.ToList();
                 lsGroupUser = db.GroupUsers.ToList();

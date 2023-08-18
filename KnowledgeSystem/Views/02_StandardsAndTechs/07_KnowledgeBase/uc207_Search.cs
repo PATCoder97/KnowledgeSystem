@@ -53,7 +53,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
             List<User> lsUsers = new List<User>();
             List<dt207_Base> lsKnowledgeBase = new List<dt207_Base>();
-            List<KnowledgeType> lsKnowledgeTypes = new List<KnowledgeType>();
+            List<dt207_Type> lsKnowledgeTypes = new List<dt207_Type>();
 
             // Kiểm tra xem có lấy Keyword để hiện lên view không
             bool IsSimple = checkUseKeyword.CheckState == CheckState.Unchecked;
@@ -65,7 +65,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             {
                 // Lấy danh sách Users, lsKnowledgeTypes, lsTypeHisGetFile từ cơ sở dữ liệu
                 var lsTypeHisGetFile = db.KnowledgeTypeHisGetFiles.ToList();
-                lsKnowledgeTypes = db.KnowledgeTypes.ToList();
+                lsKnowledgeTypes = db.dt207_Type.ToList();
                 lsUsers = db.Users.ToList();
 
                 // Gán các 說明 quyền vào class temp

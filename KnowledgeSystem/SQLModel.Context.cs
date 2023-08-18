@@ -32,7 +32,6 @@ namespace KnowledgeSystem
         public virtual DbSet<Function> Functions { get; set; }
         public virtual DbSet<Group> Groups { get; set; }
         public virtual DbSet<GroupUser> GroupUsers { get; set; }
-        public virtual DbSet<KnowledgeType> KnowledgeTypes { get; set; }
         public virtual DbSet<KnowledgeTypeHisGetFile> KnowledgeTypeHisGetFiles { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<tbl207_NotifyEditDoc> tbl207_NotifyEditDoc { get; set; }
@@ -43,5 +42,6 @@ namespace KnowledgeSystem
         public virtual DbSet<dt207_Attachment> dt207_Attachment { get; set; }
         public virtual DbSet<dt207_HistoryGetFile> dt207_HistoryGetFile { get; set; }
         public virtual DbSet<dt207_Security> dt207_Security { get; set; }
+        public virtual DbSet<dt207_Type> dt207_Type { get; set; }
     }
 }
