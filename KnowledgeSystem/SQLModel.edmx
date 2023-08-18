@@ -74,6 +74,17 @@
           <Property Name="IdUserProcess" Type="varchar" MaxLength="10" />
           <Property Name="Descriptions" Type="nvarchar" MaxLength="64" />
         </EntityType>
+        <EntityType Name="dt207_HistoryGetFile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TimeGet" Type="datetime" Nullable="false" />
+          <Property Name="idTypeHisGetFile" Type="int" Nullable="false" />
+          <Property Name="IdKnowledgeBase" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="KnowledgeAttachmentName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="IdUser" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
         <EntityType Name="FunctionRole">
           <Key>
             <PropertyRef Name="Id" />
@@ -110,17 +121,6 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdGroup" Type="int" />
           <Property Name="IdUser" Type="varchar" MaxLength="10" />
-        </EntityType>
-        <EntityType Name="KnowledgeHistoryGetFile">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TimeGet" Type="datetime" Nullable="false" />
-          <Property Name="idTypeHisGetFile" Type="int" Nullable="false" />
-          <Property Name="IdKnowledgeBase" Type="varchar" MaxLength="32" Nullable="false" />
-          <Property Name="KnowledgeAttachmentName" Type="nvarchar" MaxLength="256" Nullable="false" />
-          <Property Name="IdUser" Type="varchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="KnowledgeSecurity">
           <Key>
@@ -191,11 +191,11 @@
           <EntitySet Name="dt207_Base" EntityType="Self.dt207_Base" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt207_DocProgress" EntityType="Self.dt207_DocProgress" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt207_DocProgressInfo" EntityType="Self.dt207_DocProgressInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt207_HistoryGetFile" EntityType="Self.dt207_HistoryGetFile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FunctionRole" EntityType="Self.FunctionRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Functions" EntityType="Self.Functions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GroupUser" EntityType="Self.GroupUser" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="KnowledgeHistoryGetFile" EntityType="Self.KnowledgeHistoryGetFile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KnowledgeSecurity" EntityType="Self.KnowledgeSecurity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KnowledgeType" EntityType="Self.KnowledgeType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KnowledgeTypeHisGetFile" EntityType="Self.KnowledgeTypeHisGetFile" Schema="dbo" store:Type="Tables" />
@@ -269,17 +269,6 @@
           <Property Name="IdGroup" Type="Int32" />
           <Property Name="IdUser" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="KnowledgeHistoryGetFile">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TimeGet" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="idTypeHisGetFile" Type="Int32" Nullable="false" />
-          <Property Name="IdKnowledgeBase" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="KnowledgeAttachmentName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IdUser" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
         <EntityType Name="KnowledgeSecurity">
           <Key>
             <PropertyRef Name="Id" />
@@ -349,7 +338,6 @@
           <EntitySet Name="Functions" EntityType="Self.Function" />
           <EntitySet Name="Groups" EntityType="Self.Group" />
           <EntitySet Name="GroupUsers" EntityType="Self.GroupUser" />
-          <EntitySet Name="KnowledgeHistoryGetFiles" EntityType="Self.KnowledgeHistoryGetFile" />
           <EntitySet Name="KnowledgeSecurities" EntityType="Self.KnowledgeSecurity" />
           <EntitySet Name="KnowledgeTypes" EntityType="Self.KnowledgeType" />
           <EntitySet Name="KnowledgeTypeHisGetFiles" EntityType="Self.KnowledgeTypeHisGetFile" />
@@ -360,6 +348,7 @@
           <EntitySet Name="dt207_Base" EntityType="DBDocumentManagementSystemModel.dt207_Base" />
           <EntitySet Name="dt207_DocProgressInfo" EntityType="DBDocumentManagementSystemModel.dt207_DocProgressInfo" />
           <EntitySet Name="dt207_Attachment" EntityType="DBDocumentManagementSystemModel.dt207_Attachment" />
+          <EntitySet Name="dt207_HistoryGetFile" EntityType="DBDocumentManagementSystemModel.dt207_HistoryGetFile" />
         </EntityContainer>
         <EntityType Name="dt207_DocProgress">
           <Key>
@@ -404,6 +393,17 @@
           <Property Name="IdKnowledgeBase" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
           <Property Name="EncryptionName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="FileName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dt207_HistoryGetFile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TimeGet" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="idTypeHisGetFile" Type="Int32" Nullable="false" />
+          <Property Name="IdKnowledgeBase" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="KnowledgeAttachmentName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="IdUser" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -476,18 +476,6 @@
               <MappingFragment StoreEntitySet="GroupUser">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="IdGroup" ColumnName="IdGroup" />
-                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="KnowledgeHistoryGetFiles">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.KnowledgeHistoryGetFile">
-              <MappingFragment StoreEntitySet="KnowledgeHistoryGetFile">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="TimeGet" ColumnName="TimeGet" />
-                <ScalarProperty Name="idTypeHisGetFile" ColumnName="idTypeHisGetFile" />
-                <ScalarProperty Name="IdKnowledgeBase" ColumnName="IdKnowledgeBase" />
-                <ScalarProperty Name="KnowledgeAttachmentName" ColumnName="KnowledgeAttachmentName" />
                 <ScalarProperty Name="IdUser" ColumnName="IdUser" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -603,6 +591,18 @@
                 <ScalarProperty Name="FileName" ColumnName="FileName" />
                 <ScalarProperty Name="EncryptionName" ColumnName="EncryptionName" />
                 <ScalarProperty Name="IdKnowledgeBase" ColumnName="IdKnowledgeBase" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt207_HistoryGetFile">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt207_HistoryGetFile">
+              <MappingFragment StoreEntitySet="dt207_HistoryGetFile">
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="KnowledgeAttachmentName" ColumnName="KnowledgeAttachmentName" />
+                <ScalarProperty Name="IdKnowledgeBase" ColumnName="IdKnowledgeBase" />
+                <ScalarProperty Name="idTypeHisGetFile" ColumnName="idTypeHisGetFile" />
+                <ScalarProperty Name="TimeGet" ColumnName="TimeGet" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

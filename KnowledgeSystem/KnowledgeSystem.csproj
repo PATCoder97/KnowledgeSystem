@@ -107,7 +107,7 @@
     <Compile Include="Models\dt207_DocProgress.cs" />
     <Compile Include="Models\KnowledgeTypeHisGetFile.cs" />
     <Compile Include="Models\dm_Departments.cs" />
-    <Compile Include="Models\KnowledgeHistoryGetFile.cs" />
+    <Compile Include="Models\dt207_HistoryGetFile.cs" />
     <Compile Include="Models\dm_Progress.cs" />
     <Compile Include="Models\dm_StepProgress.cs" />
     <Compile Include="Models\dt207_DocProgressInfo.cs" />

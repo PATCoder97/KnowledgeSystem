@@ -20,8 +20,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 {
     public partial class f207_Document_ViewOnly : DevExpress.XtraEditors.XtraForm
     {
-        RefreshHelper helper;
-
         public f207_Document_ViewOnly()
         {
             InitializeComponent();

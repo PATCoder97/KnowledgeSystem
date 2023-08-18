@@ -2,7 +2,7 @@
 
 namespace KnowledgeSystem
 {
-    public class KnowledgeHistoryGetFile
+    public class dt207_HistoryGetFile
     {
         public int Id { get; set; }
         public DateTime TimeGet { get; set; }

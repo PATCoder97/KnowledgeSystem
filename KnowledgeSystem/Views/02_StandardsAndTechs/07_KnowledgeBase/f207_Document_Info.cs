@@ -645,7 +645,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             {
                 using (var db = new DBDocumentManagementSystemEntities())
                 {
-                    KnowledgeHistoryGetFile historyGetFile = new KnowledgeHistoryGetFile()
+                    dt207_HistoryGetFile historyGetFile = new dt207_HistoryGetFile()
                     {
                         IdKnowledgeBase = idDocument,
                         idTypeHisGetFile = 1,
@@ -654,7 +654,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                         TimeGet = DateTime.Now
                     };
 
-                    db.KnowledgeHistoryGetFiles.Add(historyGetFile);
+                    db.dt207_HistoryGetFile.Add(historyGetFile);
                     db.SaveChanges();
                 }
             }
