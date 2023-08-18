@@ -282,7 +282,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     txbKeyword.Text = dataView.Keyword;
 
                     // Retrieve attachments from database and assign to sourceAttachments
-                    lsAttachments.AddRange(db.KnowledgeAttachments.Where(r => r.IdKnowledgeBase == idDocument)
+                    lsAttachments.AddRange(db.dt207_Attachment.Where(r => r.IdKnowledgeBase == idDocument)
                         .Select(item => new Attachments { FileName = item.FileName, EncryptionName = item.EncryptionName }));
 
                     sourceAttachments.DataSource = lsAttachments;
@@ -492,19 +492,19 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     // If updating an existing document, remove its existing attachments
                     if (!string.IsNullOrEmpty(idDocument))
                     {
-                        db.KnowledgeAttachments.RemoveRange(db.KnowledgeAttachments.Where(r => r.IdKnowledgeBase == idDocument));
+                        db.dt207_Attachment.RemoveRange(db.dt207_Attachment.Where(r => r.IdKnowledgeBase == idDocument));
                     }
 
                     // Add the new attachments
                     foreach (Attachments item in lsAttachments)
                     {
-                        KnowledgeAttachment attachment = new KnowledgeAttachment()
+                        dt207_Attachment attachment = new dt207_Attachment()
                         {
                             IdKnowledgeBase = idDocumentToUpdate,
                             EncryptionName = item.EncryptionName,
                             FileName = item.FileName
                         };
-                        db.KnowledgeAttachments.AddOrUpdate(attachment);
+                        db.dt207_Attachment.AddOrUpdate(attachment);
 
                         if (!string.IsNullOrEmpty(item.FullPath))
                         {

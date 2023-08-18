@@ -190,7 +190,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     txbKeyword.Text = dataView.Keyword;
 
                     // Retrieve attachments from database and assign to sourceAttachments
-                    lsAttachments.AddRange(db.KnowledgeAttachments.Where(r => r.IdKnowledgeBase == idDocument)
+                    lsAttachments.AddRange(db.dt207_Attachment.Where(r => r.IdKnowledgeBase == idDocument)
                         .Select(item => new Attachments { FileName = item.FileName, EncryptionName = item.EncryptionName }));
 
                     sourceAttachments.DataSource = lsAttachments;

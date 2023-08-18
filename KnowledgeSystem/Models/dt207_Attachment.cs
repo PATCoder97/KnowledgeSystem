@@ -1,6 +1,6 @@
 ﻿namespace KnowledgeSystem
 {
-    public partial class KnowledgeAttachment
+    public partial class dt207_Attachment
     {
         public int Id { get; set; }
         public string IdKnowledgeBase { get; set; }
