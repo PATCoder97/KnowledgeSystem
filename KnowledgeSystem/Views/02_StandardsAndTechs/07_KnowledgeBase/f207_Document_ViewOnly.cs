@@ -232,6 +232,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     }
 
                     var stepNow = lsDocProgressInfos.OrderByDescending(r => r.TimeStep).First().IndexStep;
+                    var stepMax = lsDMStepProgress.Max(r => r.IndexStep);
 
                     stepProgressDoc.ItemOptions.Indicator.Width = 40;
                     stepProgressDoc.SelectedItemIndex = stepNow;
@@ -246,6 +247,13 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                                             }).ToList();
 
                     gcHistoryProcess.DataSource = lsHistoryProcess;
+
+                    if (stepNow == stepMax)
+                    {
+                        lcgInfo.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                        lcgFile.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                        lcgPermission.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                    }
                 }
             }
 

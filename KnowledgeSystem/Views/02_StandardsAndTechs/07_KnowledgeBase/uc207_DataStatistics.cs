@@ -60,7 +60,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         #endregion
 
-
         #region methods
 
         bool cal(Int32 _Width, GridView _View)

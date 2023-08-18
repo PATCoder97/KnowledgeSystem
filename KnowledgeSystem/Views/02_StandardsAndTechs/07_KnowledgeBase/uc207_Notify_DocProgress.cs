@@ -16,6 +16,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 {
     public partial class uc207_Notify_DocProgress : DevExpress.XtraEditors.XtraUserControl
     {
+        RefreshHelper helper;
+
         public uc207_Notify_DocProgress()
         {
             InitializeComponent();
@@ -36,6 +38,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void LoadData()
         {
+            helper.SaveViewInfo();
+
             using (var db = new DBDocumentManagementSystemEntities())
             {
                 var lsDocProgresses = db.dt207_DocProgress.ToList();
@@ -78,10 +82,13 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             }
 
             gvData.BestFitColumns();
+
+            helper.LoadViewInfo();
         }
 
         private void uc207_Notify_DocProgress_Load(object sender, EventArgs e)
         {
+            helper = new RefreshHelper(gvData, "Id");
             gvData.ReadOnlyGridView();
 
             LoadData();
