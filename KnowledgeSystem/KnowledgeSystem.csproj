@@ -104,6 +104,7 @@
     <Compile Include="Configs\RegistryHelper.cs" />
     <Compile Include="Configs\SingleConnection.cs" />
     <Compile Include="Configs\TempDatas.cs" />
+    <Compile Include="Models\dt207_Targets.cs" />
     <Compile Include="Models\dt207_DocProgress.cs" />
     <Compile Include="Models\dt207_TypeHisGetFile.cs" />
     <Compile Include="Models\dm_Departments.cs" />
@@ -180,6 +181,12 @@
     </Compile>
     <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_Document_ViewOnly.Designer.cs">
       <DependentUpon>f207_Document_ViewOnly.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_SetTarget.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_SetTarget.Designer.cs">
+      <DependentUpon>f207_SetTarget.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_ViewPdf.cs">
       <SubType>Form</SubType>
@@ -302,6 +309,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_Document_ViewOnly.resx">
       <DependentUpon>f207_Document_ViewOnly.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_SetTarget.resx">
+      <DependentUpon>f207_SetTarget.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_ViewPdf.resx">
       <DependentUpon>f207_ViewPdf.cs</DependentUpon>

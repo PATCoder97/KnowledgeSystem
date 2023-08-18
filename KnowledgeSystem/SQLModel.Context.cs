@@ -43,5 +43,6 @@ namespace KnowledgeSystem
         public virtual DbSet<GroupUser> GroupUsers { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<dt207_Targets> dt207_Targets { get; set; }
     }
 }

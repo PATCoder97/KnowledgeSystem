@@ -23,6 +23,7 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.GroupUser" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.Role" Width="1.5" PointX="2.75" PointY="10.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.User" Width="1.5" PointX="8.875" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt207_Targets" Width="1.5" PointX="17" PointY="4.125" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

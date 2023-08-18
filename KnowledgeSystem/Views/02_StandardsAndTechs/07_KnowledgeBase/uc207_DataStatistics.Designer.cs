@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc207_DataStatistics));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.btnTarget = new DevExpress.XtraEditors.SimpleButton();
             this.btnChart = new DevExpress.XtraEditors.SimpleButton();
             this.btnStatistics = new DevExpress.XtraEditors.SimpleButton();
             this.btnExcel = new DevExpress.XtraEditors.SimpleButton();
@@ -55,6 +56,7 @@
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txbToDate.Properties.CalendarTimeProperties)).BeginInit();
@@ -76,12 +78,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
             // 
             this.layoutControl1.AllowCustomization = false;
             this.layoutControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
+            this.layoutControl1.Controls.Add(this.btnTarget);
             this.layoutControl1.Controls.Add(this.btnChart);
             this.layoutControl1.Controls.Add(this.btnStatistics);
             this.layoutControl1.Controls.Add(this.btnExcel);
@@ -96,9 +100,26 @@
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(1055, 255, 650, 400);
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(1159, 547);
+            this.layoutControl1.Size = new System.Drawing.Size(1256, 547);
             this.layoutControl1.TabIndex = 2;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // btnTarget
+            // 
+            this.btnTarget.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
+            this.btnTarget.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTarget.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.btnTarget.Appearance.Options.UseFont = true;
+            this.btnTarget.Appearance.Options.UseForeColor = true;
+            this.btnTarget.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnTarget.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnTarget.ImageOptions.SvgImage")));
+            this.btnTarget.Location = new System.Drawing.Point(1008, 50);
+            this.btnTarget.Name = "btnTarget";
+            this.btnTarget.Size = new System.Drawing.Size(116, 52);
+            this.btnTarget.StyleController = this.layoutControl1;
+            this.btnTarget.TabIndex = 13;
+            this.btnTarget.Text = "目標";
+            this.btnTarget.Click += new System.EventHandler(this.btnTarget_Click);
             // 
             // btnChart
             // 
@@ -143,7 +164,7 @@
             this.btnExcel.Appearance.Options.UseForeColor = true;
             this.btnExcel.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
             this.btnExcel.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnExcel.ImageOptions.SvgImage")));
-            this.btnExcel.Location = new System.Drawing.Point(1031, 50);
+            this.btnExcel.Location = new System.Drawing.Point(1128, 50);
             this.btnExcel.Name = "btnExcel";
             this.btnExcel.Size = new System.Drawing.Size(116, 52);
             this.btnExcel.StyleController = this.layoutControl1;
@@ -185,7 +206,7 @@
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(12, 12);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(1135, 34);
+            this.label1.Size = new System.Drawing.Size(1232, 34);
             this.label1.TabIndex = 5;
             this.label1.Text = "資料上傳統計";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -195,7 +216,7 @@
             this.gcData.Location = new System.Drawing.Point(12, 106);
             this.gcData.MainView = this.gvData;
             this.gcData.Name = "gcData";
-            this.gcData.Size = new System.Drawing.Size(1135, 429);
+            this.gcData.Size = new System.Drawing.Size(1232, 429);
             this.gcData.TabIndex = 4;
             this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvData});
@@ -392,9 +413,10 @@
             this.layoutControlItem6,
             this.layoutControlItem7,
             this.layoutControlItem8,
-            this.layoutControlItem9});
+            this.layoutControlItem9,
+            this.layoutControlItem10});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(1159, 547);
+            this.Root.Size = new System.Drawing.Size(1256, 547);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem1
@@ -402,7 +424,7 @@
             this.layoutControlItem1.Control = this.gcData;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 94);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(1139, 433);
+            this.layoutControlItem1.Size = new System.Drawing.Size(1236, 433);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
@@ -413,7 +435,7 @@
             this.layoutControlItem2.MaxSize = new System.Drawing.Size(0, 38);
             this.layoutControlItem2.MinSize = new System.Drawing.Size(24, 38);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(1139, 38);
+            this.layoutControlItem2.Size = new System.Drawing.Size(1236, 38);
             this.layoutControlItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
@@ -447,7 +469,7 @@
             this.emptySpaceItem1.AllowHotTrack = false;
             this.emptySpaceItem1.Location = new System.Drawing.Point(880, 38);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(139, 56);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(116, 56);
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
             // layoutControlItem5
@@ -477,7 +499,7 @@
             // layoutControlItem7
             // 
             this.layoutControlItem7.Control = this.btnExcel;
-            this.layoutControlItem7.Location = new System.Drawing.Point(1019, 38);
+            this.layoutControlItem7.Location = new System.Drawing.Point(1116, 38);
             this.layoutControlItem7.MaxSize = new System.Drawing.Size(120, 0);
             this.layoutControlItem7.MinSize = new System.Drawing.Size(120, 26);
             this.layoutControlItem7.Name = "layoutControlItem7";
@@ -510,13 +532,25 @@
             this.layoutControlItem9.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem9.TextVisible = false;
             // 
+            // layoutControlItem10
+            // 
+            this.layoutControlItem10.Control = this.btnTarget;
+            this.layoutControlItem10.Location = new System.Drawing.Point(996, 38);
+            this.layoutControlItem10.MaxSize = new System.Drawing.Size(120, 0);
+            this.layoutControlItem10.MinSize = new System.Drawing.Size(120, 26);
+            this.layoutControlItem10.Name = "layoutControlItem10";
+            this.layoutControlItem10.Size = new System.Drawing.Size(120, 56);
+            this.layoutControlItem10.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem10.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem10.TextVisible = false;
+            // 
             // uc207_DataStatistics
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.layoutControl1);
             this.Name = "uc207_DataStatistics";
-            this.Size = new System.Drawing.Size(1159, 547);
+            this.Size = new System.Drawing.Size(1256, 547);
             this.Load += new System.EventHandler(this.uc207_DataStatistics_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
@@ -539,6 +573,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -571,5 +606,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
         private DevExpress.XtraEditors.SimpleButton btnChart;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem9;
+        private DevExpress.XtraEditors.SimpleButton btnTarget;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
     }
 }

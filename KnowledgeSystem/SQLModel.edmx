@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DBDocumentManagementSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DBDocumentManagementSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="dm_Departments">
           <Key>
             <PropertyRef Name="Id" />
@@ -113,6 +113,13 @@
           <Property Name="PrintFile" Type="bit" />
           <Property Name="SaveFile" Type="bit" />
         </EntityType>
+        <EntityType Name="dt207_Targets">
+          <Key>
+            <PropertyRef Name="IdDept" />
+          </Key>
+          <Property Name="IdDept" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="Targets" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="dt207_Type">
           <Key>
             <PropertyRef Name="Id" />
@@ -194,6 +201,7 @@
           <EntitySet Name="dt207_HistoryGetFile" EntityType="Self.dt207_HistoryGetFile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt207_NotifyEditDoc" EntityType="Self.dt207_NotifyEditDoc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt207_Security" EntityType="Self.dt207_Security" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt207_Targets" EntityType="Self.dt207_Targets" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt207_Type" EntityType="Self.dt207_Type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt207_TypeHisGetFile" EntityType="Self.dt207_TypeHisGetFile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FunctionRole" EntityType="Self.FunctionRole" Schema="dbo" store:Type="Tables" />
@@ -203,8 +211,7 @@
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DBDocumentManagementSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -405,7 +412,15 @@
           <EntitySet Name="GroupUsers" EntityType="Self.GroupUser" />
           <EntitySet Name="Roles" EntityType="Self.Role" />
           <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="dt207_Targets" EntityType="DBDocumentManagementSystemModel.dt207_Targets" />
         </EntityContainer>
+        <EntityType Name="dt207_Targets">
+          <Key>
+            <PropertyRef Name="IdDept" />
+          </Key>
+          <Property Name="IdDept" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="Targets" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -605,6 +620,14 @@
                 <ScalarProperty Name="IdRole" ColumnName="IdRole" />
                 <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
                 <ScalarProperty Name="IdDepartment" ColumnName="IdDepartment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt207_Targets">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt207_Targets">
+              <MappingFragment StoreEntitySet="dt207_Targets">
+                <ScalarProperty Name="Targets" ColumnName="Targets" />
+                <ScalarProperty Name="IdDept" ColumnName="IdDept" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

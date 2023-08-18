@@ -119,6 +119,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
             using (var db = new DBDocumentManagementSystemEntities())
             {
+                var lsTargets = db.dt207_Targets.ToList();
+
                 // Lấy danh sách văn kiện và kèm theo mã bộ phận (Lấy luôn văn kiện đang trình ký Thêm, Sửa, Xoá)
                 var lsDoc = (from data in db.dt207_Base
                            .Where(r => !r.IsDelete && r.UploadDate >= fromDate && r.UploadDate <= toDate)
@@ -147,7 +149,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                         DataStatisticsChart data = new DataStatisticsChart()
                         {
                             DisplayName = item.DisplayName,
-                            Achieve = lsDoc.Count(r => r.Grade == item.Id)
+                            Achieve = lsDoc.Count(r => r.Grade == item.Id),
+                            Target = lsTargets.FirstOrDefault(r => r.IdDept == item.Id).Targets
                         };
 
                         lsDataStatistic.Add(data);
@@ -165,7 +168,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                         DataStatisticsChart data = new DataStatisticsChart()
                         {
                             DisplayName = item.DisplayName,
-                            Achieve = lsDoc.Count(r => r.Class == item.Id)
+                            Achieve = lsDoc.Count(r => r.Class == item.Id),
+                            Target = lsTargets.FirstOrDefault(r => r.IdDept == item.Id).Targets
                         };
 
                         lsDataStatistic.Add(data);
@@ -206,6 +210,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             btnExcel.Text = "導出\r\nExcel";
             btnStatistics.Text = "資料\r\n統計";
             btnChart.Text = "繪製\r\n圖表";
+            btnTarget.Text = "設定\r\n目標";
 
             gcData.ForceInitialize();
 
@@ -398,6 +403,12 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
                 Process.Start(newFilePath);
             }
+        }
+
+        private void btnTarget_Click(object sender, EventArgs e)
+        {
+            f207_SetTarget setTarget = new f207_SetTarget();
+            setTarget.ShowDialog();
         }
     }
 }
