@@ -47,7 +47,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 var lsUsers = db.Users.ToList();
 
                 var lsDocProgressInfosByLoginId =
-                    (from data in db.DocProgressInfoes.ToList()
+                    (from data in db.dt207_DocProgressInfo.ToList()
                      group data by data.IdDocProgress into g
                      select new
                      {

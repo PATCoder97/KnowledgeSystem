@@ -28,7 +28,7 @@ namespace KnowledgeSystem
         public virtual DbSet<dm_Departments> dm_Departments { get; set; }
         public virtual DbSet<dm_Progress> dm_Progress { get; set; }
         public virtual DbSet<dm_StepProgress> dm_StepProgress { get; set; }
-        public virtual DbSet<DocProgressInfo> DocProgressInfoes { get; set; }
+        public virtual DbSet<dt207_DocProgressInfo> dt207_DocProgressInfo { get; set; }
         public virtual DbSet<FunctionRole> FunctionRoles { get; set; }
         public virtual DbSet<Function> Functions { get; set; }
         public virtual DbSet<Group> Groups { get; set; }
@@ -43,5 +43,6 @@ namespace KnowledgeSystem
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<dt207_DocProgress> dt207_DocProgress { get; set; }
         public virtual DbSet<dt207_Base> dt207_Base { get; set; }
+        //public virtual DbSet<dt207_DocProgressInfo> dt207_DocProgressInfo { get; set; }
     }
 }

@@ -219,7 +219,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     int idProgressByDoc = docProcess.IdProgress;
                     int idDocProgress = docProcess.Id;
                     var lsDMStepProgress = db.dm_StepProgress.Where(r => r.IdProgress == idProgressByDoc).ToList();
-                    var lsDocProgressInfos = db.DocProgressInfoes.Where(r => r.IdDocProgress == idDocProgress).ToList();
+                    var lsDocProgressInfos = db.dt207_DocProgressInfo.Where(r => r.IdDocProgress == idDocProgress).ToList();
 
                     var lsStepProgressDoc = (from data in lsDMStepProgress
                                              join groups in lsGroups on data.IdGroup equals groups.Id

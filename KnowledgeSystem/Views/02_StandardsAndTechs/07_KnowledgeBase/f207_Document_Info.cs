@@ -322,7 +322,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                         int idProgressByDoc = lsDocProgresses.First().IdProgress;
                         int idDocProgress = lsDocProgresses.First().Id;// !!!!!!!!Chuyen len lam bien toan cuc!!!!!!!! Chua lam
                         var lsDMStepProgress = db.dm_StepProgress.Where(r => r.IdProgress == idProgressByDoc).ToList();
-                        var lsDocProgressInfos = db.DocProgressInfoes.Where(r => r.IdDocProgress == idDocProgress).ToList();
+                        var lsDocProgressInfos = db.dt207_DocProgressInfo.Where(r => r.IdDocProgress == idDocProgress).ToList();
 
                         finishStep = lsDMStepProgress.Max(r => r.IndexStep);
 
@@ -442,7 +442,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 var lsDocProgressById = db.dt207_DocProgress.Where(r => r.IdKnowledgeBase == idDocument).ToList();
                 int idDocProcess = lsDocProgressById.OrderByDescending(r => r.Id).FirstOrDefault().Id;
 
-                DocProgressInfo progressInfo = new DocProgressInfo()
+                dt207_DocProgressInfo progressInfo = new dt207_DocProgressInfo()
                 {
                     IdDocProgress = idDocProcess,
                     TimeStep = DateTime.Now,
@@ -451,7 +451,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     Descriptions = TempDatas.EventDel,
                 };
 
-                db.DocProgressInfoes.Add(progressInfo);
+                db.dt207_DocProgressInfo.Add(progressInfo);
 
                 // Save the changes to the database
                 db.SaveChanges();
@@ -562,7 +562,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     //List<DocProgressInfo> lsDocProgressInfos = db.DocProgressInfoes.Where(r => r.IdDocProgress == idDocProgress).ToList();
                     //int indexStep = lsDocProgressInfos.Count != 0 ? lsDocProgressInfos.OrderByDescending(r => r.Id).FirstOrDefault().IndexStep + 1 : 0;
 
-                    DocProgressInfo progressInfo = new DocProgressInfo()
+                    dt207_DocProgressInfo progressInfo = new dt207_DocProgressInfo()
                     {
                         IdDocProgress = idDocProgress,
                         TimeStep = DateTime.Now,
@@ -571,7 +571,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                         Descriptions = events,
                     };
 
-                    db.DocProgressInfoes.Add(progressInfo);
+                    db.dt207_DocProgressInfo.Add(progressInfo);
 
                     // Save the changes to the database
                     db.SaveChanges();
@@ -688,7 +688,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 int idDocProgress = lsDocProgressById.OrderByDescending(r => r.Id).FirstOrDefault().Id;
                 string eventProcess = lsDocProgressById.OrderByDescending(r => r.Id).FirstOrDefault().Descriptions;
 
-                List<DocProgressInfo> lsDocProgressInfos = db.DocProgressInfoes.Where(r => r.IdDocProgress == idDocProgress).ToList();
+                List<dt207_DocProgressInfo> lsDocProgressInfos = db.dt207_DocProgressInfo.Where(r => r.IdDocProgress == idDocProgress).ToList();
                 int indexStep = lsDocProgressInfos.Count != 0 ? lsDocProgressInfos.OrderByDescending(r => r.Id).FirstOrDefault().IndexStep + 1 : 0;
 
                 string descriptions = "核准";
@@ -704,7 +704,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     descriptions = "確認完畢";
                 }
 
-                DocProgressInfo progressInfo = new DocProgressInfo()
+                dt207_DocProgressInfo progressInfo = new dt207_DocProgressInfo()
                 {
                     IdDocProgress = idDocProgress,
                     TimeStep = DateTime.Now,
@@ -721,7 +721,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     db.dt207_Base.AddOrUpdate(docBaseDelete);
                 }
 
-                db.DocProgressInfoes.Add(progressInfo);
+                db.dt207_DocProgressInfo.Add(progressInfo);
 
                 // Save the changes to the database
                 db.SaveChanges();
@@ -748,7 +748,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 var lsDocProgressById = db.dt207_DocProgress.Where(r => r.IdKnowledgeBase == idDocument).ToList();
                 int idDocProgress = lsDocProgressById.OrderByDescending(r => r.Id).FirstOrDefault().Id;
 
-                DocProgressInfo progressInfo = new DocProgressInfo()
+                dt207_DocProgressInfo progressInfo = new dt207_DocProgressInfo()
                 {
                     IdDocProgress = idDocProgress,
                     TimeStep = DateTime.Now,
@@ -757,7 +757,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     Descriptions = string.IsNullOrEmpty(descriptions) ? "退回" : $"退回，說明：{descriptions}",
                 };
 
-                db.DocProgressInfoes.Add(progressInfo);
+                db.dt207_DocProgressInfo.Add(progressInfo);
 
                 // Save the changes to the database
                 db.SaveChanges();
@@ -790,7 +790,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 docProcessUpdate.IsComplete = true;
                 db.dt207_DocProgress.AddOrUpdate(docProcessUpdate);
 
-                DocProgressInfo progressInfo = new DocProgressInfo()
+                dt207_DocProgressInfo progressInfo = new dt207_DocProgressInfo()
                 {
                     IdDocProgress = idDocProgress,
                     TimeStep = DateTime.Now,
@@ -799,7 +799,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     Descriptions = string.IsNullOrEmpty(descriptions) ? "取消" : $"取消，說明：{descriptions}",
                 };
 
-                db.DocProgressInfoes.Add(progressInfo);
+                db.dt207_DocProgressInfo.Add(progressInfo);
 
                 // Save the changes to the database
                 db.SaveChanges();

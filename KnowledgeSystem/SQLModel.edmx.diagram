@@ -23,6 +23,7 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.User" Width="1.5" PointX="10.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt207_DocProgress" Width="1.5" PointX="5.375" PointY="10.75" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt207_Base" Width="1.5" PointX="11.375" PointY="6.75" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt207_DocProgressInfo" Width="1.5" PointX="5.375" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -28,7 +28,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         BindingSource source = new BindingSource();
 
         List<dt207_DocProgress> lsDocProgresses = new List<dt207_DocProgress>();
-        List<DocProgressInfo> lsDocProgressInfos = new List<DocProgressInfo>();
+        List<dt207_DocProgressInfo> lsDocProgressInfos = new List<dt207_DocProgressInfo>();
 
         #endregion
 
@@ -40,12 +40,12 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             {
                 // Xử lý lấy tất cả các văn kiện cần trình ký
                 lsDocProgresses = db.dt207_DocProgress.Where(r => !r.IsComplete).ToList();
-                lsDocProgressInfos = db.DocProgressInfoes.ToList();
+                lsDocProgressInfos = db.dt207_DocProgressInfo.ToList();
                 var lsKnowledgeBases = db.dt207_Base.ToList();
                 var lsUsers = db.Users.ToList();
 
                 var lsDocNotSuccess =
-                    (from data in db.DocProgressInfoes
+                    (from data in db.dt207_DocProgressInfo
                      group data by data.IdDocProgress into g
                      select new
                      {

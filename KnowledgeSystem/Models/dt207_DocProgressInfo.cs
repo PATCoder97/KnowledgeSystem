@@ -2,7 +2,7 @@
 
 namespace KnowledgeSystem
 {
-    public class DocProgressInfo
+    public class dt207_DocProgressInfo
     {
         public int Id { get; set; }
         public int IdDocProgress { get; set; }

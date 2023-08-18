@@ -110,7 +110,7 @@
     <Compile Include="Models\KnowledgeHistoryGetFile.cs" />
     <Compile Include="Models\dm_Progress.cs" />
     <Compile Include="Models\dm_StepProgress.cs" />
-    <Compile Include="Models\DocProgressInfo.cs" />
+    <Compile Include="Models\dt207_DocProgressInfo.cs" />
     <Compile Include="Models\Function.cs" />
     <Compile Include="Models\FunctionRole.cs" />
     <Compile Include="Models\Group.cs" />
