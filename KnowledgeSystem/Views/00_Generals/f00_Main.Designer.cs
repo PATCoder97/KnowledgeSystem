@@ -130,6 +130,7 @@ namespace KnowledgeSystem.Views._00_Generals
             this.tileMain.MaxId = 20;
             this.tileMain.Name = "tileMain";
             this.tileMain.Padding = new System.Windows.Forms.Padding(24, 22, 24, 22);
+            this.tileMain.Position = 540;
             this.tileMain.ShowGroupText = true;
             this.tileMain.Size = new System.Drawing.Size(1180, 498);
             this.tileMain.TabIndex = 4;
@@ -339,7 +340,7 @@ namespace KnowledgeSystem.Views._00_Generals
             this.btnRoleManage.AppearanceItem.Pressed.Options.UseFont = true;
             this.btnRoleManage.AppearanceItem.Selected.Font = new System.Drawing.Font("DFKai-SB", 26F);
             this.btnRoleManage.AppearanceItem.Selected.Options.UseFont = true;
-            tileItemElement15.Text = "權限管理";
+            tileItemElement15.Text = "係統管理";
             this.btnRoleManage.Elements.Add(tileItemElement15);
             this.btnRoleManage.Id = 18;
             this.btnRoleManage.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
