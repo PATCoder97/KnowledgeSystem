@@ -4,25 +4,25 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="eb77c50f9e2343a6b9306497012f5968" Name="Diagram1">
+      <Diagram DiagramId="eb77c50f9e2343a6b9306497012f5968" Name="Diagram1" ZoomLevel="86">
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_Departments" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_Progress" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_StepProgress" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.FunctionRole" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.Function" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.Group" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.GroupUser" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.Role" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.User" Width="1.5" PointX="10.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt207_DocProgress" Width="1.5" PointX="5.375" PointY="10.75" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt207_Base" Width="1.5" PointX="11.375" PointY="6.75" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt207_DocProgressInfo" Width="1.5" PointX="5.375" PointY="7.75" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt207_Attachment" Width="1.5" PointX="7.375" PointY="11.75" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt207_HistoryGetFile" Width="1.5" PointX="9.375" PointY="11.75" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt207_Security" Width="1.5" PointX="11.375" PointY="10.75" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt207_Type" Width="1.5" PointX="13.375" PointY="0.75" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt207_TypeHisGetFile" Width="1.5" PointX="7.375" PointY="3.75" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt207_NotifyEditDoc" Width="1.5" PointX="7.375" PointY="6.75" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_StepProgress" Width="1.5" PointX="13.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.FunctionRole" Width="1.5" PointX="8.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.Function" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.Group" Width="1.5" PointX="12" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.GroupUser" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.Role" Width="1.5" PointX="15.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.User" Width="1.5" PointX="10.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt207_DocProgress" Width="1.5" PointX="4.375" PointY="4.375" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt207_Base" Width="1.5" PointX="0.75" PointY="4.375" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt207_DocProgressInfo" Width="1.5" PointX="7.75" PointY="4.375" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt207_Attachment" Width="1.5" PointX="2.5" PointY="4.375" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt207_HistoryGetFile" Width="1.5" PointX="6.125" PointY="4.375" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt207_Security" Width="1.5" PointX="11.25" PointY="4.375" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt207_Type" Width="1.5" PointX="12.875" PointY="4.375" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt207_TypeHisGetFile" Width="1.5" PointX="14.5" PointY="4.375" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt207_NotifyEditDoc" Width="1.5" PointX="9.5" PointY="4.375" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
