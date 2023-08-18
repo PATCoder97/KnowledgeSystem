@@ -93,12 +93,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             {
                 return new Securityinfo()
                 {
-                    ChangePermision = true,
                     DeleteInfo = true,
                     UpdateInfo = true,
                     ReadFile = true,
                     SaveFile = true,
-                    PrintFile = true
                 };
             }
 
@@ -112,11 +110,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     join gruopUser in lsGroupUser.Where(r => r.IdUser == userIdLogin) on groups.Id equals gruopUser.IdGroup
                     select new Securityinfo
                     {
-                        ChangePermision = securitys.ChangePermision,
                         DeleteInfo = securitys.DeleteInfo,
                         UpdateInfo = securitys.UpdateInfo,
                         ReadFile = securitys.ReadFile,
-                        PrintFile = securitys.PrintFile,
                         SaveFile = securitys.SaveFile,
                     }).FirstOrDefault();
         }
@@ -201,13 +197,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                         IdKnowledgeBase = data.IdKnowledgeBase,
                         IdGroup = data.IdGroup,
                         IdUser = data.IdUser,
-                        ChangePermision = data.ChangePermision,
                         ReadInfo = data.ReadInfo,
                         UpdateInfo = data.UpdateInfo,
                         DeleteInfo = data.DeleteInfo,
                         SearchInfo = data.SearchInfo,
                         ReadFile = data.ReadFile,
-                        PrintFile = data.PrintFile,
                         SaveFile = data.SaveFile,
                         IdGroupOrUser = !string.IsNullOrEmpty(data.IdUser) ? data.IdUser : data.IdGroup.ToString()
                     }).ToList();
@@ -275,7 +269,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             f207_ViewPdf fDocumentInfo = new f207_ViewPdf(documentsFile, "");
             fDocumentInfo.Text = dataRow.FileName;
             fDocumentInfo.CanSaveFile = permissionAttachments.SaveFile;
-            fDocumentInfo.CanPrintFile = permissionAttachments.PrintFile;
             fDocumentInfo.ShowDialog();
         }
     }

@@ -77,14 +77,12 @@
             this.rgvGruopOrUser = new DevExpress.XtraEditors.Repository.RepositoryItemGridLookUpEdit();
             this.repositoryItemGridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridBand2 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.bandedGridColumn2 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn3 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn4 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn5 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn6 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.gridBand3 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.bandedGridColumn7 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.bandedGridColumn8 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn9 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.gColDelPermission = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.btnDelPermission = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
@@ -611,13 +609,11 @@
             this.gridBand3});
             this.bgvSecurity.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] {
             this.bandedGridColumn1,
-            this.bandedGridColumn2,
             this.bandedGridColumn3,
             this.bandedGridColumn4,
             this.bandedGridColumn5,
             this.bandedGridColumn6,
             this.bandedGridColumn7,
-            this.bandedGridColumn8,
             this.bandedGridColumn9,
             this.gColDelPermission});
             this.bgvSecurity.GridControl = this.gcSecurity;
@@ -635,7 +631,7 @@
             this.gridBand1.Columns.Add(this.bandedGridColumn1);
             this.gridBand1.Name = "gridBand1";
             this.gridBand1.VisibleIndex = 0;
-            this.gridBand1.Width = 150;
+            this.gridBand1.Width = 431;
             // 
             // bandedGridColumn1
             // 
@@ -649,7 +645,7 @@
             this.bandedGridColumn1.MinWidth = 150;
             this.bandedGridColumn1.Name = "bandedGridColumn1";
             this.bandedGridColumn1.Visible = true;
-            this.bandedGridColumn1.Width = 150;
+            this.bandedGridColumn1.Width = 431;
             // 
             // rgvGruopOrUser
             // 
@@ -682,97 +678,77 @@
             // gridBand2
             // 
             this.gridBand2.Caption = "文件權限";
-            this.gridBand2.Columns.Add(this.bandedGridColumn2);
             this.gridBand2.Columns.Add(this.bandedGridColumn3);
             this.gridBand2.Columns.Add(this.bandedGridColumn4);
             this.gridBand2.Columns.Add(this.bandedGridColumn5);
             this.gridBand2.Columns.Add(this.bandedGridColumn6);
             this.gridBand2.Name = "gridBand2";
             this.gridBand2.VisibleIndex = 1;
-            this.gridBand2.Width = 557;
-            // 
-            // bandedGridColumn2
-            // 
-            this.bandedGridColumn2.Caption = "變更權限";
-            this.bandedGridColumn2.FieldName = "ChangePermision";
-            this.bandedGridColumn2.MinWidth = 100;
-            this.bandedGridColumn2.Name = "bandedGridColumn2";
-            this.bandedGridColumn2.Visible = true;
-            this.bandedGridColumn2.Width = 112;
+            this.gridBand2.Width = 382;
             // 
             // bandedGridColumn3
             // 
             this.bandedGridColumn3.Caption = "讀取";
             this.bandedGridColumn3.FieldName = "ReadInfo";
-            this.bandedGridColumn3.MinWidth = 100;
+            this.bandedGridColumn3.MinWidth = 60;
             this.bandedGridColumn3.Name = "bandedGridColumn3";
             this.bandedGridColumn3.Visible = true;
-            this.bandedGridColumn3.Width = 112;
+            this.bandedGridColumn3.Width = 93;
             // 
             // bandedGridColumn4
             // 
             this.bandedGridColumn4.Caption = "變更";
             this.bandedGridColumn4.FieldName = "UpdateInfo";
-            this.bandedGridColumn4.MinWidth = 100;
+            this.bandedGridColumn4.MinWidth = 60;
             this.bandedGridColumn4.Name = "bandedGridColumn4";
             this.bandedGridColumn4.Visible = true;
-            this.bandedGridColumn4.Width = 112;
+            this.bandedGridColumn4.Width = 93;
             // 
             // bandedGridColumn5
             // 
             this.bandedGridColumn5.Caption = "刪除";
             this.bandedGridColumn5.FieldName = "DeleteInfo";
-            this.bandedGridColumn5.MinWidth = 100;
+            this.bandedGridColumn5.MinWidth = 60;
             this.bandedGridColumn5.Name = "bandedGridColumn5";
             this.bandedGridColumn5.Visible = true;
-            this.bandedGridColumn5.Width = 112;
+            this.bandedGridColumn5.Width = 93;
             // 
             // bandedGridColumn6
             // 
             this.bandedGridColumn6.Caption = "查詢";
             this.bandedGridColumn6.FieldName = "SearchInfo";
-            this.bandedGridColumn6.MinWidth = 100;
+            this.bandedGridColumn6.MinWidth = 60;
             this.bandedGridColumn6.Name = "bandedGridColumn6";
             this.bandedGridColumn6.Visible = true;
-            this.bandedGridColumn6.Width = 109;
+            this.bandedGridColumn6.Width = 103;
             // 
             // gridBand3
             // 
             this.gridBand3.Caption = "附件權限";
             this.gridBand3.Columns.Add(this.bandedGridColumn7);
-            this.gridBand3.Columns.Add(this.bandedGridColumn8);
             this.gridBand3.Columns.Add(this.bandedGridColumn9);
             this.gridBand3.Columns.Add(this.gColDelPermission);
             this.gridBand3.Name = "gridBand3";
             this.gridBand3.VisibleIndex = 2;
-            this.gridBand3.Width = 347;
+            this.gridBand3.Width = 213;
             // 
             // bandedGridColumn7
             // 
             this.bandedGridColumn7.Caption = "讀取";
             this.bandedGridColumn7.FieldName = "ReadFile";
-            this.bandedGridColumn7.MinWidth = 100;
+            this.bandedGridColumn7.MinWidth = 60;
             this.bandedGridColumn7.Name = "bandedGridColumn7";
             this.bandedGridColumn7.Visible = true;
-            this.bandedGridColumn7.Width = 102;
-            // 
-            // bandedGridColumn8
-            // 
-            this.bandedGridColumn8.Caption = "列印";
-            this.bandedGridColumn8.FieldName = "PrintFile";
-            this.bandedGridColumn8.MinWidth = 100;
-            this.bandedGridColumn8.Name = "bandedGridColumn8";
-            this.bandedGridColumn8.Visible = true;
-            this.bandedGridColumn8.Width = 102;
+            this.bandedGridColumn7.Width = 80;
             // 
             // bandedGridColumn9
             // 
             this.bandedGridColumn9.Caption = "下載";
             this.bandedGridColumn9.FieldName = "SaveFile";
-            this.bandedGridColumn9.MinWidth = 100;
+            this.bandedGridColumn9.MinWidth = 60;
             this.bandedGridColumn9.Name = "bandedGridColumn9";
             this.bandedGridColumn9.Visible = true;
-            this.bandedGridColumn9.Width = 102;
+            this.bandedGridColumn9.Width = 80;
             // 
             // gColDelPermission
             // 
@@ -782,7 +758,7 @@
             this.gColDelPermission.Name = "gColDelPermission";
             this.gColDelPermission.OptionsColumn.AllowSize = false;
             this.gColDelPermission.Visible = true;
-            this.gColDelPermission.Width = 41;
+            this.gColDelPermission.Width = 53;
             // 
             // btnDelPermission
             // 
@@ -842,8 +818,6 @@
             this.gridColumn2.Caption = "附件編號";
             this.gridColumn2.FieldName = "EncryptionName";
             this.gridColumn2.Name = "gridColumn2";
-            this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 1;
             // 
             // gColDelFile
             // 
@@ -853,7 +827,7 @@
             this.gColDelFile.MinWidth = 30;
             this.gColDelFile.Name = "gColDelFile";
             this.gColDelFile.Visible = true;
-            this.gColDelFile.VisibleIndex = 2;
+            this.gColDelFile.VisibleIndex = 1;
             this.gColDelFile.Width = 30;
             // 
             // btnDelFile
@@ -995,7 +969,7 @@
             this.controlgroupDocument.AppearanceTabPage.HeaderActive.Options.UseForeColor = true;
             this.controlgroupDocument.Location = new System.Drawing.Point(0, 23);
             this.controlgroupDocument.Name = "controlgroupDocument";
-            this.controlgroupDocument.SelectedTabPage = this.groupProgress;
+            this.controlgroupDocument.SelectedTabPage = this.layoutControlGroup3;
             this.controlgroupDocument.Size = new System.Drawing.Size(1056, 391);
             this.controlgroupDocument.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.groupProgress,
@@ -1372,13 +1346,11 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridView bgvSecurity;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn1;
-        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn2;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn3;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn4;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn5;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn6;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn7;
-        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn8;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn9;
         private DevExpress.XtraBars.BarManager barManager1;
         private DevExpress.XtraBars.Bar bar2;

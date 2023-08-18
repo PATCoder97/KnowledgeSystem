@@ -104,13 +104,11 @@
           <Property Name="IdKnowledgeBase" Type="varchar" MaxLength="32" />
           <Property Name="IdGroup" Type="int" />
           <Property Name="IdUser" Type="varchar" MaxLength="10" />
-          <Property Name="ChangePermision" Type="bit" />
           <Property Name="ReadInfo" Type="bit" />
           <Property Name="UpdateInfo" Type="bit" />
           <Property Name="DeleteInfo" Type="bit" />
           <Property Name="SearchInfo" Type="bit" />
           <Property Name="ReadFile" Type="bit" />
-          <Property Name="PrintFile" Type="bit" />
           <Property Name="SaveFile" Type="bit" />
         </EntityType>
         <EntityType Name="dt207_Targets">
@@ -306,23 +304,6 @@
           <Property Name="IsRead" Type="Boolean" />
           <Property Name="TimeNotyfiNotes" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="dt207_Security">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdKnowledgeBase" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-          <Property Name="IdGroup" Type="Int32" />
-          <Property Name="IdUser" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="ChangePermision" Type="Boolean" />
-          <Property Name="ReadInfo" Type="Boolean" />
-          <Property Name="UpdateInfo" Type="Boolean" />
-          <Property Name="DeleteInfo" Type="Boolean" />
-          <Property Name="SearchInfo" Type="Boolean" />
-          <Property Name="ReadFile" Type="Boolean" />
-          <Property Name="PrintFile" Type="Boolean" />
-          <Property Name="SaveFile" Type="Boolean" />
-        </EntityType>
         <EntityType Name="dt207_Type">
           <Key>
             <PropertyRef Name="Id" />
@@ -403,7 +384,6 @@
           <EntitySet Name="dt207_DocProgressInfo" EntityType="Self.dt207_DocProgressInfo" />
           <EntitySet Name="dt207_HistoryGetFile" EntityType="Self.dt207_HistoryGetFile" />
           <EntitySet Name="dt207_NotifyEditDoc" EntityType="Self.dt207_NotifyEditDoc" />
-          <EntitySet Name="dt207_Security" EntityType="Self.dt207_Security" />
           <EntitySet Name="dt207_Type" EntityType="Self.dt207_Type" />
           <EntitySet Name="dt207_TypeHisGetFile" EntityType="Self.dt207_TypeHisGetFile" />
           <EntitySet Name="FunctionRoles" EntityType="Self.FunctionRole" />
@@ -413,6 +393,7 @@
           <EntitySet Name="Roles" EntityType="Self.Role" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="dt207_Targets" EntityType="DBDocumentManagementSystemModel.dt207_Targets" />
+          <EntitySet Name="dt207_Security" EntityType="DBDocumentManagementSystemModel.dt207_Security" />
         </EntityContainer>
         <EntityType Name="dt207_Targets">
           <Key>
@@ -420,6 +401,21 @@
           </Key>
           <Property Name="IdDept" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
           <Property Name="Targets" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt207_Security">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdKnowledgeBase" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="IdGroup" Type="Int32" />
+          <Property Name="IdUser" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ReadInfo" Type="Boolean" />
+          <Property Name="UpdateInfo" Type="Boolean" />
+          <Property Name="DeleteInfo" Type="Boolean" />
+          <Property Name="SearchInfo" Type="Boolean" />
+          <Property Name="ReadFile" Type="Boolean" />
+          <Property Name="SaveFile" Type="Boolean" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -527,24 +523,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dt207_Security">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt207_Security">
-              <MappingFragment StoreEntitySet="dt207_Security">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IdKnowledgeBase" ColumnName="IdKnowledgeBase" />
-                <ScalarProperty Name="IdGroup" ColumnName="IdGroup" />
-                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
-                <ScalarProperty Name="ChangePermision" ColumnName="ChangePermision" />
-                <ScalarProperty Name="ReadInfo" ColumnName="ReadInfo" />
-                <ScalarProperty Name="UpdateInfo" ColumnName="UpdateInfo" />
-                <ScalarProperty Name="DeleteInfo" ColumnName="DeleteInfo" />
-                <ScalarProperty Name="SearchInfo" ColumnName="SearchInfo" />
-                <ScalarProperty Name="ReadFile" ColumnName="ReadFile" />
-                <ScalarProperty Name="PrintFile" ColumnName="PrintFile" />
-                <ScalarProperty Name="SaveFile" ColumnName="SaveFile" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="dt207_Type">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt207_Type">
               <MappingFragment StoreEntitySet="dt207_Type">
@@ -628,6 +606,22 @@
               <MappingFragment StoreEntitySet="dt207_Targets">
                 <ScalarProperty Name="Targets" ColumnName="Targets" />
                 <ScalarProperty Name="IdDept" ColumnName="IdDept" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt207_Security">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt207_Security">
+              <MappingFragment StoreEntitySet="dt207_Security">
+                <ScalarProperty Name="SaveFile" ColumnName="SaveFile" />
+                <ScalarProperty Name="ReadFile" ColumnName="ReadFile" />
+                <ScalarProperty Name="SearchInfo" ColumnName="SearchInfo" />
+                <ScalarProperty Name="DeleteInfo" ColumnName="DeleteInfo" />
+                <ScalarProperty Name="UpdateInfo" ColumnName="UpdateInfo" />
+                <ScalarProperty Name="ReadInfo" ColumnName="ReadInfo" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="IdGroup" ColumnName="IdGroup" />
+                <ScalarProperty Name="IdKnowledgeBase" ColumnName="IdKnowledgeBase" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

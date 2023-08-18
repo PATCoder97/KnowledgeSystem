@@ -19,7 +19,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
     public partial class f207_ViewPdf : DevExpress.XtraEditors.XtraForm
     {
         public bool? CanSaveFile { get; set; }
-        public bool? CanPrintFile { get; set; }
 
         public f207_ViewPdf(string documentFile_, string IdKnowledgeBase_)
         {
@@ -54,7 +53,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void btnPrint_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (CanPrintFile != true)
+            if (CanSaveFile != true)
             {
                 XtraMessageBox.Show(TempDatas.NoPermission, TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;

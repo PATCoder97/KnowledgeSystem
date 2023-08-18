@@ -174,12 +174,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             {
                 return new Securityinfo()
                 {
-                    ChangePermision = true,
                     DeleteInfo = true,
                     UpdateInfo = true,
                     ReadFile = true,
                     SaveFile = true,
-                    PrintFile = true
                 };
             }
 
@@ -193,11 +191,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     join gruopUser in lsGroupUser.Where(r => r.IdUser == userIdLogin) on groups.Id equals gruopUser.IdGroup
                     select new Securityinfo
                     {
-                        ChangePermision = securitys.ChangePermision,
                         DeleteInfo = securitys.DeleteInfo,
                         UpdateInfo = securitys.UpdateInfo,
                         ReadFile = securitys.ReadFile,
-                        PrintFile = securitys.PrintFile,
                         SaveFile = securitys.SaveFile,
                     }).FirstOrDefault();
         }
@@ -248,9 +244,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 cbbType.Properties.DataSource = lsKnowledgeTypes;
                 cbbType.Properties.ValueMember = "Id";
                 cbbType.Properties.DisplayMember = "DisplayName";
+
                 cbbUserRequest.Properties.DataSource = lsUsers;
                 cbbUserRequest.Properties.ValueMember = "Id";
                 cbbUserRequest.Properties.DisplayMember = "DisplayName";
+
                 cbbUserUpload.Properties.DataSource = lsUsers;
                 cbbUserUpload.Properties.ValueMember = "Id";
                 cbbUserUpload.Properties.DisplayMember = "DisplayName";
@@ -296,13 +294,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                         IdKnowledgeBase = data.IdKnowledgeBase,
                         IdGroup = data.IdGroup,
                         IdUser = data.IdUser,
-                        ChangePermision = data.ChangePermision,
                         ReadInfo = data.ReadInfo,
                         UpdateInfo = data.UpdateInfo,
                         DeleteInfo = data.DeleteInfo,
                         SearchInfo = data.SearchInfo,
                         ReadFile = data.ReadFile,
-                        PrintFile = data.PrintFile,
                         SaveFile = data.SaveFile,
                         IdGroupOrUser = !string.IsNullOrEmpty(data.IdUser) ? data.IdUser : data.IdGroup.ToString()
                     }).ToList();
@@ -525,13 +521,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                             IdKnowledgeBase = idDocumentToUpdate,
                             IdGroup = item.IdGroupOrUser.StartsWith("VNW") ? null : (short?)Convert.ToInt16(item.IdGroupOrUser),
                             IdUser = item.IdGroupOrUser.StartsWith("VNW") ? item.IdGroupOrUser : null,
-                            ChangePermision = item.ChangePermision,
                             ReadInfo = item.ReadInfo,
                             UpdateInfo = item.UpdateInfo,
                             DeleteInfo = item.DeleteInfo,
                             SearchInfo = item.SearchInfo,
                             ReadFile = item.ReadFile,
-                            PrintFile = item.PrintFile,
                             SaveFile = item.SaveFile
                         };
                         db.dt207_Security.Add(dataAdd);
@@ -588,13 +582,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             lsSecurityInfos.Add(new Securityinfo()
             {
                 IdKnowledgeBase = idDocument,
-                ChangePermision = false,
                 ReadInfo = true,
                 UpdateInfo = false,
                 DeleteInfo = false,
                 SearchInfo = true,
                 ReadFile = false,
-                PrintFile = false,
                 SaveFile = false,
             });
 
@@ -662,7 +654,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             f207_ViewPdf fDocumentInfo = new f207_ViewPdf(documentsFile, idDocument);
             fDocumentInfo.Text = dataRow.FileName;
             fDocumentInfo.CanSaveFile = permissionAttachments.SaveFile;
-            fDocumentInfo.CanPrintFile = permissionAttachments.PrintFile;
             fDocumentInfo.ShowDialog();
         }
 
@@ -674,7 +665,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         private void btnChangeProgress_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             uc207_SelectProgress ucInfo = new uc207_SelectProgress();
-            if (XtraDialog.Show(ucInfo, "...流程", MessageBoxButtons.OKCancel) != DialogResult.OK) return;
+            if (XtraDialog.Show(ucInfo, "修改流程", MessageBoxButtons.OKCancel) != DialogResult.OK) return;
 
             progressSelect = ucInfo.ProgressSelect;
             lbProgress.Text = "流程：" + progressSelect.DisplayName;
