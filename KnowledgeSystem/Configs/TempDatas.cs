@@ -15,9 +15,9 @@ namespace KnowledgeSystem.Configs
         public const string EventEdit = "更新文件";
         public const string EventDel = "刪除文件";
 
-        public static KnowledgeTypeHisGetFile typeViewFile = default(KnowledgeTypeHisGetFile);
-        public static KnowledgeTypeHisGetFile typeSaveFile = default(KnowledgeTypeHisGetFile);
-        public static KnowledgeTypeHisGetFile typePrintFile = default(KnowledgeTypeHisGetFile);
+        public static dt207_TypeHisGetFile typeViewFile = default(dt207_TypeHisGetFile);
+        public static dt207_TypeHisGetFile typeSaveFile = default(dt207_TypeHisGetFile);
+        public static dt207_TypeHisGetFile typePrintFile = default(dt207_TypeHisGetFile);
 
         public static string LoginId { get; set; }
         public static int RoleUserLogin { get; set; }

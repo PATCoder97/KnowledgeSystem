@@ -64,7 +64,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             using (var db = new DBDocumentManagementSystemEntities())
             {
                 // Lấy danh sách Users, lsKnowledgeTypes, lsTypeHisGetFile từ cơ sở dữ liệu
-                var lsTypeHisGetFile = db.KnowledgeTypeHisGetFiles.ToList();
+                var lsTypeHisGetFile = db.dt207_TypeHisGetFile.ToList();
                 lsKnowledgeTypes = db.dt207_Type.ToList();
                 lsUsers = db.Users.ToList();
 

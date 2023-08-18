@@ -109,6 +109,13 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="DisplayName" Type="nvarchar" MaxLength="32" />
         </EntityType>
+        <EntityType Name="dt207_TypeHisGetFile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="8" Nullable="false" />
+        </EntityType>
         <EntityType Name="FunctionRole">
           <Key>
             <PropertyRef Name="Id" />
@@ -145,13 +152,6 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdGroup" Type="int" />
           <Property Name="IdUser" Type="varchar" MaxLength="10" />
-        </EntityType>
-        <EntityType Name="KnowledgeTypeHisGetFile">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="DisplayName" Type="nvarchar" MaxLength="8" Nullable="false" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -194,11 +194,11 @@
           <EntitySet Name="dt207_HistoryGetFile" EntityType="Self.dt207_HistoryGetFile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt207_Security" EntityType="Self.dt207_Security" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt207_Type" EntityType="Self.dt207_Type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt207_TypeHisGetFile" EntityType="Self.dt207_TypeHisGetFile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FunctionRole" EntityType="Self.FunctionRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Functions" EntityType="Self.Functions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GroupUser" EntityType="Self.GroupUser" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="KnowledgeTypeHisGetFile" EntityType="Self.KnowledgeTypeHisGetFile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl207_NotifyEditDoc" EntityType="Self.tbl207_NotifyEditDoc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
@@ -269,13 +269,6 @@
           <Property Name="IdGroup" Type="Int32" />
           <Property Name="IdUser" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="KnowledgeTypeHisGetFile">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="DisplayName" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
-        </EntityType>
         <EntityType Name="Role">
           <Key>
             <PropertyRef Name="Id" />
@@ -314,7 +307,6 @@
           <EntitySet Name="Functions" EntityType="Self.Function" />
           <EntitySet Name="Groups" EntityType="Self.Group" />
           <EntitySet Name="GroupUsers" EntityType="Self.GroupUser" />
-          <EntitySet Name="KnowledgeTypeHisGetFiles" EntityType="Self.KnowledgeTypeHisGetFile" />
           <EntitySet Name="Roles" EntityType="Self.Role" />
           <EntitySet Name="tbl207_NotifyEditDoc" EntityType="Self.tbl207_NotifyEditDoc" />
           <EntitySet Name="Users" EntityType="Self.User" />
@@ -325,6 +317,7 @@
           <EntitySet Name="dt207_HistoryGetFile" EntityType="DBDocumentManagementSystemModel.dt207_HistoryGetFile" />
           <EntitySet Name="dt207_Security" EntityType="DBDocumentManagementSystemModel.dt207_Security" />
           <EntitySet Name="dt207_Type" EntityType="DBDocumentManagementSystemModel.dt207_Type" />
+          <EntitySet Name="dt207_TypeHisGetFile" EntityType="DBDocumentManagementSystemModel.dt207_TypeHisGetFile" />
         </EntityContainer>
         <EntityType Name="dt207_DocProgress">
           <Key>
@@ -405,6 +398,13 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="DisplayName" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="dt207_TypeHisGetFile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -477,14 +477,6 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="IdGroup" ColumnName="IdGroup" />
                 <ScalarProperty Name="IdUser" ColumnName="IdUser" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="KnowledgeTypeHisGetFiles">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.KnowledgeTypeHisGetFile">
-              <MappingFragment StoreEntitySet="KnowledgeTypeHisGetFile">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -602,6 +594,14 @@
           <EntitySetMapping Name="dt207_Type">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt207_Type">
               <MappingFragment StoreEntitySet="dt207_Type">
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt207_TypeHisGetFile">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt207_TypeHisGetFile">
+              <MappingFragment StoreEntitySet="dt207_TypeHisGetFile">
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

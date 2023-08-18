@@ -41,7 +41,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 var query = (from data in db.dt207_HistoryGetFile
                              where data.IdUser == TempDatas.LoginId
                              join names in db.dt207_Base on data.IdKnowledgeBase equals names.Id
-                             join types in db.KnowledgeTypeHisGetFiles on data.idTypeHisGetFile equals types.Id
+                             join types in db.dt207_TypeHisGetFile on data.idTypeHisGetFile equals types.Id
                              select new
                              {
                                  data.TimeGet,
