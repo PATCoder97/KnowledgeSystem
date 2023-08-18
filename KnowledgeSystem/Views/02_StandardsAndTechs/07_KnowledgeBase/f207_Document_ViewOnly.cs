@@ -60,7 +60,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             public string FullPath { get; set; }
         }
 
-        private class Securityinfo : KnowledgeSecurity
+        private class Securityinfo : dt207_Security
         {
             public string IdGroupOrUser { get; set; }
             public string DisplayName { get; set; }
@@ -195,7 +195,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     lbCountFile.Text = $"共{lsAttachments.Count}個附件";
 
                     // Retrieve knowledge security information from database and assign to sourceSecuritys
-                    var lsKnowledgeSecuritys = db.KnowledgeSecurities.Where(r => r.IdKnowledgeBase == idDocument).ToList();
+                    var lsKnowledgeSecuritys = db.dt207_Security.Where(r => r.IdKnowledgeBase == idDocument).ToList();
                     lsSecurityInfos = lsKnowledgeSecuritys.Select(data => new Securityinfo
                     {
                         IdKnowledgeBase = data.IdKnowledgeBase,

@@ -117,7 +117,7 @@
     <Compile Include="Models\GroupUser.cs" />
     <Compile Include="Models\dt207_Attachment.cs" />
     <Compile Include="Models\dt207_Base.cs" />
-    <Compile Include="Models\KnowledgeSecurity.cs" />
+    <Compile Include="Models\dt207_Security.cs" />
     <Compile Include="Models\KnowledgeType.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

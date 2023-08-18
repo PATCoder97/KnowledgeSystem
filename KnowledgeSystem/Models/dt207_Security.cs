@@ -2,7 +2,7 @@
 
 namespace KnowledgeSystem
 {
-    public partial class KnowledgeSecurity
+    public partial class dt207_Security
     {
         public int Id { get; set; }
         public string IdKnowledgeBase { get; set; }

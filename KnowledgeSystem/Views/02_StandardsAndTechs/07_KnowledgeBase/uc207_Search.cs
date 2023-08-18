@@ -99,7 +99,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                                 }).ToList();
 
                 // Danh sách mà user có quyền tìm kiếm
-                var lsCanSearchs = (from ks in db.KnowledgeSecurities.ToList()
+                var lsCanSearchs = (from ks in db.dt207_Security.ToList()
                                     join gu in lsGroupP on ks.IdGroup equals gu.IdGroup into gj
                                     from subGu in gj.DefaultIfEmpty()
                                     where ks.IdUser == userLogin || (subGu != null ? subGu.IdUser == userLogin : false)

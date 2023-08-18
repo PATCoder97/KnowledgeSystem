@@ -75,7 +75,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             public string FullPath { get; set; }
         }
 
-        private class Securityinfo : KnowledgeSecurity
+        private class Securityinfo : dt207_Security
         {
             public string IdGroupOrUser { get; set; }
             public string DisplayName { get; set; }
@@ -290,7 +290,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
                     // Retrieve knowledge security information from database and assign to sourceSecuritys
                     helper.SaveViewInfo();
-                    var lsKnowledgeSecuritys = db.KnowledgeSecurities.Where(r => r.IdKnowledgeBase == idDocument).ToList();
+                    var lsKnowledgeSecuritys = db.dt207_Security.Where(r => r.IdKnowledgeBase == idDocument).ToList();
                     lsSecurityInfos = lsKnowledgeSecuritys.Select(data => new Securityinfo
                     {
                         IdKnowledgeBase = data.IdKnowledgeBase,
@@ -516,10 +516,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     }
 
                     // Remove the existing security information and add the new information
-                    db.KnowledgeSecurities.RemoveRange(db.KnowledgeSecurities.Where(r => r.IdKnowledgeBase == idDocument));
+                    db.dt207_Security.RemoveRange(db.dt207_Security.Where(r => r.IdKnowledgeBase == idDocument));
                     foreach (var item in lsSecurityInfos)
                     {
-                        KnowledgeSecurity dataAdd = new KnowledgeSecurity
+                        dt207_Security dataAdd = new dt207_Security
                         {
                             Id = item.Id,
                             IdKnowledgeBase = idDocumentToUpdate,
@@ -534,7 +534,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                             PrintFile = item.PrintFile,
                             SaveFile = item.SaveFile
                         };
-                        db.KnowledgeSecurities.Add(dataAdd);
+                        db.dt207_Security.Add(dataAdd);
                     }
 
                     List<dt207_DocProgress> lsDocProgressById = db.dt207_DocProgress.Where(r => r.IdKnowledgeBase == idDocumentToUpdate).ToList();
