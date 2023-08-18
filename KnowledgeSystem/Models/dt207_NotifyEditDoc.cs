@@ -2,7 +2,7 @@
 
 namespace KnowledgeSystem
 {
-    public class tbl207_NotifyEditDoc
+    public class dt207_NotifyEditDoc
     {
         public int Id { get; set; }
         public DateTime TimeNotify { get; set; }

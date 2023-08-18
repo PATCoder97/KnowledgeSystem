@@ -33,7 +33,6 @@ namespace KnowledgeSystem
         public virtual DbSet<Group> Groups { get; set; }
         public virtual DbSet<GroupUser> GroupUsers { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<tbl207_NotifyEditDoc> tbl207_NotifyEditDoc { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<dt207_DocProgress> dt207_DocProgress { get; set; }
         public virtual DbSet<dt207_Base> dt207_Base { get; set; }
@@ -43,5 +42,6 @@ namespace KnowledgeSystem
         public virtual DbSet<dt207_Security> dt207_Security { get; set; }
         public virtual DbSet<dt207_Type> dt207_Type { get; set; }
         public virtual DbSet<dt207_TypeHisGetFile> dt207_TypeHisGetFile { get; set; }
+        public virtual DbSet<dt207_NotifyEditDoc> dt207_NotifyEditDoc { get; set; }
     }
 }

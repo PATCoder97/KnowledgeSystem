@@ -39,7 +39,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                var query = (from data in db.tbl207_NotifyEditDoc
+                var query = (from data in db.dt207_NotifyEditDoc
                              where data.IdUserNotify == TempDatas.LoginId
                              join idDoc in db.dt207_DocProgress on data.IdDocProcess equals idDoc.Id
                              join names in db.dt207_Base on idDoc.IdKnowledgeBase equals names.Id
@@ -115,13 +115,13 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                var notifyDocUpdate = db.tbl207_NotifyEditDoc.First(r => r.Id == id);
+                var notifyDocUpdate = db.dt207_NotifyEditDoc.First(r => r.Id == id);
 
                 if (notifyDocUpdate != null)
                 {
                     notifyDocUpdate.IsRead = true;
 
-                    db.tbl207_NotifyEditDoc.AddOrUpdate(notifyDocUpdate);
+                    db.dt207_NotifyEditDoc.AddOrUpdate(notifyDocUpdate);
                     db.SaveChanges();
 
                     bool IsProcess = db.dt207_DocProgress.Any(r => r.IdKnowledgeBase == IdKnowledgeBase && !r.IsComplete);
