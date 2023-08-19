@@ -42,7 +42,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                var lsDocProgresses = db.dt207_DocProgress.ToList();
+                var lsDocProgresses = db.dt207_DocProgress.Where(r => r.IdUserProcess == TempDatas.LoginId).ToList();
                 var lsKnowledgeBases = db.dt207_Base.ToList();
                 var lsUsers = db.Users.ToList();
 
@@ -56,8 +56,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                          TimeStep = g.OrderByDescending(dpi => dpi.TimeStep).Select(dpi => dpi.TimeStep).FirstOrDefault(),
                          IdUserProcess = g.OrderByDescending(dpi => dpi.TimeStep).Select(dpi => dpi.IdUserProcess).FirstOrDefault(),
                          Descriptions = g.OrderByDescending(dpi => dpi.TimeStep).Select(dpi => dpi.Descriptions).FirstOrDefault(),
-                         IdUserRequest = g.OrderBy(dpi => dpi.TimeStep).Select(dpi => dpi.IdUserProcess).FirstOrDefault(),
-                     }).Where(r => r.IdUserRequest == TempDatas.LoginId).ToList();
+                     }).ToList();
 
                 var lsDataApproval =
                     (from data in lsDocProgresses

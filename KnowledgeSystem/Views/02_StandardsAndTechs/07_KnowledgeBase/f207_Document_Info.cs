@@ -492,7 +492,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                             }).FirstOrDefault();
                         db.dt207_Base_BAK.Add(base_BAK);
 
-                        var lsAttachments_BAK = db.dt207_Attachment.Where(r => r.IdKnowledgeBase == idDocument).ToList().
+                        var lsAttachments_BAK = db.dt207_Attachment.
+                            Where(r => r.IdKnowledgeBase == idDocument).ToList().
                             Select(r => new dt207_Attachment_BAK()
                             {
                                 IdKnowledgeBase = r.IdKnowledgeBase,
@@ -501,7 +502,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                             });
                         db.dt207_Attachment_BAK.AddRange(lsAttachments_BAK);
 
-                        var lsSecurities_BAK = db.dt207_Security.Where(r => r.IdKnowledgeBase == idDocument).ToList().
+                        var lsSecurities_BAK = db.dt207_Security.
+                            Where(r => r.IdKnowledgeBase == idDocument).ToList().
                             Select(r => new dt207_Security_BAK()
                             {
                                 IdKnowledgeBase = r.IdKnowledgeBase,
@@ -572,10 +574,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                         db.dt207_Security.Add(dataAdd);
                     }
 
-                    List<dt207_DocProgress> lsDocProgressById = db.dt207_DocProgress.Where(r => r.IdKnowledgeBase == idDocument).ToList();
-
-                    bool IsNewProgress = !lsDocProgressById.Any(r => !r.IsComplete);
-                    if (IsNewProgress)
+                    // Nếu chưa có lưu trình xử lý của văn kiện thì thêm mới (Trigger sẽ tự thêm vào ProcessInfo)
+                    bool IsNewDocProcess = !db.dt207_DocProgress.Any(r => !r.IsComplete && r.IdKnowledgeBase == idDocument);
+                    if (IsNewDocProcess)
                     {
                         dt207_DocProgress docProgress = new dt207_DocProgress()
                         {
@@ -584,31 +585,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                             IsSuccess = false,
                             IdProgress = progressSelect.Id,
                             Descriptions = events,
+                            IdUserProcess = TempDatas.LoginId,
                         };
 
                         db.dt207_DocProgress.Add(docProgress);
                     }
-                    // Save the changes to the database
-                    db.SaveChanges();
-
-
-                    // Viết triger để bỏ qua đoạn này
-                    lsDocProgressById = db.dt207_DocProgress.Where(r => r.IdKnowledgeBase == idDocument).ToList();
-                    int idDocProgress = lsDocProgressById.OrderByDescending(r => r.Id).FirstOrDefault().Id;
-
-                    //List<DocProgressInfo> lsDocProgressInfos = db.DocProgressInfoes.Where(r => r.IdDocProgress == idDocProgress).ToList();
-                    //int indexStep = lsDocProgressInfos.Count != 0 ? lsDocProgressInfos.OrderByDescending(r => r.Id).FirstOrDefault().IndexStep + 1 : 0;
-
-                    dt207_DocProgressInfo progressInfo = new dt207_DocProgressInfo()
-                    {
-                        IdDocProgress = idDocProgress,
-                        TimeStep = DateTime.Now,
-                        IndexStep = 0,
-                        IdUserProcess = TempDatas.LoginId,
-                        Descriptions = events,
-                    };
-
-                    db.dt207_DocProgressInfo.Add(progressInfo);
 
                     // Save the changes to the database
                     db.SaveChanges();
@@ -703,6 +684,12 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void btnEdit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if (permissionAttachments.UpdateInfo != true)
+            {
+                XtraMessageBox.Show(TempDatas.NoPermission, TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return;
+            }
+
             LockControl(false);
         }
 
@@ -882,6 +869,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                         SaveFile = r.SaveFile
                     });
                 db.dt207_Security.AddRange(lsSecurities);
+
+                // Xoá các dữ liệu cũ BAK
+                db.dt207_Base_BAK.RemoveRange(db.dt207_Base_BAK.Where(r => r.Id == idDocument));
+                db.dt207_Attachment_BAK.RemoveRange(db.dt207_Attachment_BAK.Where(r => r.IdKnowledgeBase == idDocument));
+                db.dt207_Security_BAK.RemoveRange(db.dt207_Security_BAK.Where(r => r.IdKnowledgeBase == idDocument));
 
                 // Save the changes to the database
                 db.SaveChanges();

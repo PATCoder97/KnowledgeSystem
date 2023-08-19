@@ -83,6 +83,7 @@
           <Property Name="IsComplete" Type="bit" />
           <Property Name="IsSuccess" Type="bit" />
           <Property Name="Descriptions" Type="nvarchar" MaxLength="64" />
+          <Property Name="IdUserProcess" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="dt207_DocProgressInfo">
           <Key>
@@ -277,17 +278,6 @@
           <Property Name="IdGroup" Type="Int32" Nullable="false" />
           <Property Name="IndexStep" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="dt207_DocProgress">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdKnowledgeBase" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="IdProgress" Type="Int32" Nullable="false" />
-          <Property Name="IsComplete" Type="Boolean" />
-          <Property Name="IsSuccess" Type="Boolean" />
-          <Property Name="Descriptions" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="dt207_DocProgressInfo">
           <Key>
             <PropertyRef Name="Id" />
@@ -395,7 +385,6 @@
           <EntitySet Name="dm_Departments" EntityType="Self.dm_Departments" />
           <EntitySet Name="dm_Progress" EntityType="Self.dm_Progress" />
           <EntitySet Name="dm_StepProgress" EntityType="Self.dm_StepProgress" />
-          <EntitySet Name="dt207_DocProgress" EntityType="Self.dt207_DocProgress" />
           <EntitySet Name="dt207_DocProgressInfo" EntityType="Self.dt207_DocProgressInfo" />
           <EntitySet Name="dt207_HistoryGetFile" EntityType="Self.dt207_HistoryGetFile" />
           <EntitySet Name="dt207_NotifyEditDoc" EntityType="Self.dt207_NotifyEditDoc" />
@@ -414,6 +403,7 @@
           <EntitySet Name="dt207_Base_BAK" EntityType="DBDocumentManagementSystemModel.dt207_Base_BAK" />
           <EntitySet Name="dt207_Security" EntityType="DBDocumentManagementSystemModel.dt207_Security" />
           <EntitySet Name="dt207_Security_BAK" EntityType="DBDocumentManagementSystemModel.dt207_Security_BAK" />
+          <EntitySet Name="dt207_DocProgress" EntityType="DBDocumentManagementSystemModel.dt207_DocProgress" />
         </EntityContainer>
         <EntityType Name="dt207_Targets">
           <Key>
@@ -495,6 +485,18 @@
           <Property Name="ReadFile" Type="Boolean" />
           <Property Name="SaveFile" Type="Boolean" />
         </EntityType>
+        <EntityType Name="dt207_DocProgress">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdKnowledgeBase" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="IdProgress" Type="Int32" Nullable="false" />
+          <Property Name="IsComplete" Type="Boolean" />
+          <Property Name="IsSuccess" Type="Boolean" />
+          <Property Name="Descriptions" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="IdUserProcess" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -526,18 +528,6 @@
                 <ScalarProperty Name="IdProgress" ColumnName="IdProgress" />
                 <ScalarProperty Name="IdGroup" ColumnName="IdGroup" />
                 <ScalarProperty Name="IndexStep" ColumnName="IndexStep" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="dt207_DocProgress">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt207_DocProgress">
-              <MappingFragment StoreEntitySet="dt207_DocProgress">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IdKnowledgeBase" ColumnName="IdKnowledgeBase" />
-                <ScalarProperty Name="IdProgress" ColumnName="IdProgress" />
-                <ScalarProperty Name="IsComplete" ColumnName="IsComplete" />
-                <ScalarProperty Name="IsSuccess" ColumnName="IsSuccess" />
-                <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -737,6 +727,19 @@
                 <ScalarProperty Name="ReadInfo" ColumnName="ReadInfo" />
                 <ScalarProperty Name="IdUser" ColumnName="IdUser" />
                 <ScalarProperty Name="IdGroup" ColumnName="IdGroup" />
+                <ScalarProperty Name="IdKnowledgeBase" ColumnName="IdKnowledgeBase" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt207_DocProgress">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt207_DocProgress">
+              <MappingFragment StoreEntitySet="dt207_DocProgress">
+                <ScalarProperty Name="IdUserProcess" ColumnName="IdUserProcess" />
+                <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
+                <ScalarProperty Name="IsSuccess" ColumnName="IsSuccess" />
+                <ScalarProperty Name="IsComplete" ColumnName="IsComplete" />
+                <ScalarProperty Name="IdProgress" ColumnName="IdProgress" />
                 <ScalarProperty Name="IdKnowledgeBase" ColumnName="IdKnowledgeBase" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
