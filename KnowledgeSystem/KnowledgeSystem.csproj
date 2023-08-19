@@ -104,6 +104,9 @@
     <Compile Include="Configs\RegistryHelper.cs" />
     <Compile Include="Configs\SingleConnection.cs" />
     <Compile Include="Configs\TempDatas.cs" />
+    <Compile Include="Models\dt207_Attachment_BAK.cs" />
+    <Compile Include="Models\dt207_Base_BAK.cs" />
+    <Compile Include="Models\dt207_Security_BAK.cs" />
     <Compile Include="Models\dt207_Targets.cs" />
     <Compile Include="Models\dt207_DocProgress.cs" />
     <Compile Include="Models\dt207_TypeHisGetFile.cs" />

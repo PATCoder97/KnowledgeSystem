@@ -1,9 +1,11 @@
 ﻿using DevExpress.ClipboardSource.SpreadsheetML;
 using DevExpress.DocumentView;
+using DevExpress.Security;
 using DevExpress.Utils.About;
 using DevExpress.Utils.Drawing.Helpers;
 using DevExpress.Utils.Win.Hook;
 using DevExpress.XtraEditors;
+using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraPrinting.Native.WebClientUIControl;
@@ -66,7 +68,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         dm_Progress progressSelect = new dm_Progress();
 
         int finishStep = -1;
-        string events = "新增成功";
+        string events = string.Empty;
 
         private class Attachments
         {
@@ -458,67 +460,106 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            // Clear the selected row in the security grid view
-            bgvSecurity.FocusedRowHandle = -1;
+            // Đưa focused ra khỏi bảng để cập nhật lên source
+            bgvSecurity.FocusedRowHandle = GridControl.AutoFilterRowHandle;
 
-            // Determine whether to add or update the document and set the appropriate message
-            events = idDocument == string.Empty ? TempDatas.EventNew : TempDatas.EventEdit;
-            string idDocumentToUpdate = string.IsNullOrEmpty(idDocument) ? GenerateIdDocument() : idDocument;
-
-            using (var handle = SplashScreenManager.ShowOverlayForm(this))
+            // Tạo ra IdDoc nếu là chức năng thêm mới
+            events = TempDatas.EventEdit;
+            if (string.IsNullOrEmpty(idDocument))
             {
-                // Create a new KnowledgeBase object with the relevant data
-                dt207_Base knowledge = new dt207_Base()
-                {
-                    Id = idDocumentToUpdate,
-                    DisplayName = $"{convertToUnSign3(txbNameTW.Text.Trim())}\r\n{txbNameVN.Text.Trim()}",
-                    UserRequest = cbbUserRequest.EditValue.ToString(),
-                    IdTypes = (int)cbbType.EditValue,
-                    Keyword = txbKeyword.Text.Trim(),
-                    UserUpload = cbbUserUpload.EditValue.ToString(),
-                    UploadDate = DateTime.Now
-                };
+                events = TempDatas.EventNew;
+                idDocument = GenerateIdDocument();
+            }
 
-                // Use a new instance of the database context to add or update the knowledge base object and its attachments and security information
-                using (var db = new DBDocumentManagementSystemEntities())
+            using (var db = new DBDocumentManagementSystemEntities())
+            {
+                using (var handle = SplashScreenManager.ShowOverlayForm(this))
                 {
-                    // Add or update the knowledge base object
-                    db.dt207_Base.AddOrUpdate(knowledge);
-
-                    // If updating an existing document, remove its existing attachments
-                    if (!string.IsNullOrEmpty(idDocument))
+                    // Nếu là Edit Doc thì lưu lại thông tin cũ để nếu bị trả về thì update lại dữ liệu cũ
+                    if (events == TempDatas.EventEdit)
                     {
-                        db.dt207_Attachment.RemoveRange(db.dt207_Attachment.Where(r => r.IdKnowledgeBase == idDocument));
+                        dt207_Base_BAK base_BAK = db.dt207_Base.
+                            Where(r => r.Id == idDocument).ToList().
+                            Select(r => new dt207_Base_BAK()
+                            {
+                                Id = r.Id,
+                                DisplayName = r.DisplayName,
+                                UserRequest = r.UserRequest,
+                                IdTypes = r.IdTypes,
+                                Keyword = r.Keyword,
+                                UserUpload = r.UserUpload,
+                                UploadDate = r.UploadDate
+                            }).FirstOrDefault();
+                        db.dt207_Base_BAK.Add(base_BAK);
+
+                        var lsAttachments_BAK = db.dt207_Attachment.Where(r => r.IdKnowledgeBase == idDocument).ToList().
+                            Select(r => new dt207_Attachment_BAK()
+                            {
+                                IdKnowledgeBase = r.IdKnowledgeBase,
+                                EncryptionName = r.EncryptionName,
+                                FileName = r.FileName
+                            });
+                        db.dt207_Attachment_BAK.AddRange(lsAttachments_BAK);
+
+                        var lsSecurities_BAK = db.dt207_Security.Where(r => r.IdKnowledgeBase == idDocument).ToList().
+                            Select(r => new dt207_Security_BAK()
+                            {
+                                IdKnowledgeBase = r.IdKnowledgeBase,
+                                IdGroup = r.IdGroup,
+                                IdUser = r.IdUser,
+                                ReadInfo = r.ReadInfo,
+                                UpdateInfo = r.UpdateInfo,
+                                DeleteInfo = r.DeleteInfo,
+                                SearchInfo = r.SearchInfo,
+                                ReadFile = r.ReadFile,
+                                SaveFile = r.SaveFile
+                            });
+                        db.dt207_Security_BAK.AddRange(lsSecurities_BAK);
                     }
 
-                    // Add the new attachments
+                    // Tạo ra DocBase từ các thông tin trên form, thêm vào DB
+                    dt207_Base knowledge = new dt207_Base()
+                    {
+                        Id = idDocument,
+                        DisplayName = $"{convertToUnSign3(txbNameTW.Text.Trim())}\r\n{txbNameVN.Text.Trim()}",
+                        UserRequest = cbbUserRequest.EditValue.ToString(),
+                        IdTypes = (int)cbbType.EditValue,
+                        Keyword = txbKeyword.Text.Trim(),
+                        UserUpload = cbbUserUpload.EditValue.ToString(),
+                        UploadDate = DateTime.Now
+                    };
+                    db.dt207_Base.AddOrUpdate(knowledge);
+
+                    // Xoá tất cả các phụ kiện trước đó để thêm lại (Không xoá file cứng, định kỳ làm sạch file cứng nếu không dùng đến)
+                    db.dt207_Attachment.RemoveRange(db.dt207_Attachment.Where(r => r.IdKnowledgeBase == idDocument));
                     foreach (Attachments item in lsAttachments)
                     {
                         dt207_Attachment attachment = new dt207_Attachment()
                         {
-                            IdKnowledgeBase = idDocumentToUpdate,
+                            IdKnowledgeBase = idDocument,
                             EncryptionName = item.EncryptionName,
                             FileName = item.FileName
                         };
                         db.dt207_Attachment.AddOrUpdate(attachment);
 
+                        // Thêm các file cứng vào Server nếu là file mới
                         if (!string.IsNullOrEmpty(item.FullPath))
                         {
                             string sourceFileName = item.FullPath;
-                            string destFileName = Path.Combine(TempDatas.PahtDataFile, item.EncryptionName);
+                            string destFileName = Path.Combine(TempDatas.PathKnowledgeFile, item.EncryptionName);
 
                             File.Copy(sourceFileName, destFileName, true);
                         }
                     }
 
-                    // Remove the existing security information and add the new information
+                    // Xoá tất cả các dữ liệu quyền hạn để thêm lại dựa vào dữ liệu trên form
                     db.dt207_Security.RemoveRange(db.dt207_Security.Where(r => r.IdKnowledgeBase == idDocument));
                     foreach (var item in lsSecurityInfos)
                     {
                         dt207_Security dataAdd = new dt207_Security
                         {
                             Id = item.Id,
-                            IdKnowledgeBase = idDocumentToUpdate,
+                            IdKnowledgeBase = idDocument,
                             IdGroup = item.IdGroupOrUser.StartsWith("VNW") ? null : (short?)Convert.ToInt16(item.IdGroupOrUser),
                             IdUser = item.IdGroupOrUser.StartsWith("VNW") ? item.IdGroupOrUser : null,
                             ReadInfo = item.ReadInfo,
@@ -531,14 +572,14 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                         db.dt207_Security.Add(dataAdd);
                     }
 
-                    List<dt207_DocProgress> lsDocProgressById = db.dt207_DocProgress.Where(r => r.IdKnowledgeBase == idDocumentToUpdate).ToList();
+                    List<dt207_DocProgress> lsDocProgressById = db.dt207_DocProgress.Where(r => r.IdKnowledgeBase == idDocument).ToList();
 
                     bool IsNewProgress = !lsDocProgressById.Any(r => !r.IsComplete);
                     if (IsNewProgress)
                     {
                         dt207_DocProgress docProgress = new dt207_DocProgress()
                         {
-                            IdKnowledgeBase = idDocumentToUpdate,
+                            IdKnowledgeBase = idDocument,
                             IsComplete = false,
                             IsSuccess = false,
                             IdProgress = progressSelect.Id,
@@ -550,7 +591,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     // Save the changes to the database
                     db.SaveChanges();
 
-                    lsDocProgressById = db.dt207_DocProgress.Where(r => r.IdKnowledgeBase == idDocumentToUpdate).ToList();
+
+                    // Viết triger để bỏ qua đoạn này
+                    lsDocProgressById = db.dt207_DocProgress.Where(r => r.IdKnowledgeBase == idDocument).ToList();
                     int idDocProgress = lsDocProgressById.OrderByDescending(r => r.Id).FirstOrDefault().Id;
 
                     //List<DocProgressInfo> lsDocProgressInfos = db.DocProgressInfoes.Where(r => r.IdDocProgress == idDocProgress).ToList();
@@ -573,7 +616,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             }
 
             // Show a message box with the appropriate message and close the form
-            XtraMessageBox.Show($"{events}!\r\n文件編號:{idDocumentToUpdate}", TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            XtraMessageBox.Show($"{events}!\r\n文件編號:{idDocument}", TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
             Close();
         }
 
@@ -631,8 +674,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             if (forcusRow < 0) return;
 
             Attachments dataRow = gvFiles.GetRow(forcusRow) as Attachments;
-            string documentsFile = Path.Combine(TempDatas.PahtDataFile, dataRow.EncryptionName);
+            string documentsFile = Path.Combine(TempDatas.PathKnowledgeFile, dataRow.EncryptionName);
 
+            // Lưu lại lịch sử xem file
             if (!string.IsNullOrEmpty(idDocument))
             {
                 using (var db = new DBDocumentManagementSystemEntities())
@@ -683,7 +727,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 int indexStep = lsDocProgressInfos.Count != 0 ? lsDocProgressInfos.OrderByDescending(r => r.Id).FirstOrDefault().IndexStep + 1 : 0;
 
                 string descriptions = "核准";
-
                 if (indexStep == finishStep)
                 {
                     var docProcessUpdate = db.dt207_DocProgress.Where(r => r.Id == idDocProgress).First();
@@ -703,16 +746,23 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     IdUserProcess = TempDatas.LoginId,
                     Descriptions = descriptions,
                 };
-
-                if (eventProcess == TempDatas.EventDel)
-                {
-                    var docBaseDelete = db.dt207_Base.First(r => r.Id == idDocument);
-                    docBaseDelete.IsDelete = true;
-
-                    db.dt207_Base.AddOrUpdate(docBaseDelete);
-                }
-
                 db.dt207_DocProgressInfo.Add(progressInfo);
+
+                // Nếu mà Xoá thì trường IsDelete = true/ Sửa thì xoá các dữ liệu cũ đi
+                switch (eventProcess)
+                {
+                    case TempDatas.EventDel:
+                        var docBaseDelete = db.dt207_Base.First(r => r.Id == idDocument);
+                        docBaseDelete.IsDelete = true;
+
+                        db.dt207_Base.AddOrUpdate(docBaseDelete);
+                        break;
+                    case TempDatas.EventEdit:
+                        db.dt207_Base_BAK.RemoveRange(db.dt207_Base_BAK.Where(r => r.Id == idDocument));
+                        db.dt207_Attachment_BAK.RemoveRange(db.dt207_Attachment_BAK.Where(r => r.IdKnowledgeBase == idDocument));
+                        db.dt207_Security_BAK.RemoveRange(db.dt207_Security_BAK.Where(r => r.IdKnowledgeBase == idDocument));
+                        break;
+                }
 
                 // Save the changes to the database
                 db.SaveChanges();
@@ -759,14 +809,13 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void btnCancel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            // Tạo textbox lấy nguyên nhân huỷ sửa văn kiện
             XtraInputBoxArgs args = new XtraInputBoxArgs();
-            // set required Input Box options
             args.Caption = TempDatas.SoftNameTW;
             args.Prompt = "原因";
             args.DefaultButtonIndex = 0;
             MemoEdit editor = new MemoEdit();
             args.Editor = editor;
-            // display an Input Box with the custom editor
             var result = XtraInputBox.Show(args);
             string descriptions = result == null ? "" : result.ToString();
 
@@ -789,8 +838,50 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     IdUserProcess = TempDatas.LoginId,
                     Descriptions = string.IsNullOrEmpty(descriptions) ? "取消" : $"取消，說明：{descriptions}",
                 };
-
                 db.dt207_DocProgressInfo.Add(progressInfo);
+
+                // Cập nhật lại các dữ liệu cũ trước khi sửa
+                dt207_Base baseDoc = db.dt207_Base_BAK.
+                            Where(r => r.Id == idDocument).ToList().
+                            Select(r => new dt207_Base()
+                            {
+                                Id = r.Id,
+                                DisplayName = r.DisplayName,
+                                UserRequest = r.UserRequest,
+                                IdTypes = r.IdTypes,
+                                Keyword = r.Keyword,
+                                UserUpload = r.UserUpload,
+                                UploadDate = r.UploadDate
+                            }).FirstOrDefault();
+                db.dt207_Base.AddOrUpdate(baseDoc);
+
+                // Xoá các tệp phụ kiện và thêm lại phụ kiện cũ
+                db.dt207_Attachment.RemoveRange(db.dt207_Attachment.Where(r => r.IdKnowledgeBase == idDocument));
+                var lsAttachments = db.dt207_Attachment.Where(r => r.IdKnowledgeBase == idDocument).ToList().
+                    Select(r => new dt207_Attachment()
+                    {
+                        IdKnowledgeBase = r.IdKnowledgeBase,
+                        EncryptionName = r.EncryptionName,
+                        FileName = r.FileName
+                    });
+                db.dt207_Attachment.AddRange(lsAttachments);
+
+                // Xoá các quyền hạn mới và thêm lại quyền hạn cũ
+                db.dt207_Security.RemoveRange(db.dt207_Security.Where(r => r.IdKnowledgeBase == idDocument));
+                var lsSecurities = db.dt207_Security.Where(r => r.IdKnowledgeBase == idDocument).ToList().
+                    Select(r => new dt207_Security()
+                    {
+                        IdKnowledgeBase = r.IdKnowledgeBase,
+                        IdGroup = r.IdGroup,
+                        IdUser = r.IdUser,
+                        ReadInfo = r.ReadInfo,
+                        UpdateInfo = r.UpdateInfo,
+                        DeleteInfo = r.DeleteInfo,
+                        SearchInfo = r.SearchInfo,
+                        ReadFile = r.ReadFile,
+                        SaveFile = r.SaveFile
+                    });
+                db.dt207_Security.AddRange(lsSecurities);
 
                 // Save the changes to the database
                 db.SaveChanges();

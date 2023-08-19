@@ -100,8 +100,18 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             using (var db = new DBDocumentManagementSystemEntities())
             {
                 var docProcess = db.dt207_DocProgress.FirstOrDefault(r => r.Id == idDocProcess);
-                f207_Document_ViewOnly document_Info = new f207_Document_ViewOnly(docProcess);
-                document_Info.ShowDialog();
+
+                int indexStep = db.dt207_DocProgressInfo.OrderByDescending(r => r.TimeStep).FirstOrDefault(r => r.IdDocProgress == idDocProcess).IndexStep;
+                if (indexStep == -1 && !docProcess.IsComplete)
+                {
+                    f207_Document_Info document_Info = new f207_Document_Info(docProcess.IdKnowledgeBase);
+                    document_Info.ShowDialog();
+                }
+                else
+                {
+                    f207_Document_ViewOnly document_Info = new f207_Document_ViewOnly(docProcess);
+                    document_Info.ShowDialog();
+                }
             }
 
             LoadData();

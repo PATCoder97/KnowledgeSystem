@@ -264,7 +264,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             if (forcusRow < 0) return;
 
             Attachments dataRow = gvFiles.GetRow(forcusRow) as Attachments;
-            string documentsFile = Path.Combine(TempDatas.PahtDataFile, dataRow.EncryptionName);
+            string documentsFile = Path.Combine(TempDatas.PathKnowledgeFile, dataRow.EncryptionName);
 
             f207_ViewPdf fDocumentInfo = new f207_ViewPdf(documentsFile, "");
             fDocumentInfo.Text = dataRow.FileName;
