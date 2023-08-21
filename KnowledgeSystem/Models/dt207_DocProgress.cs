@@ -11,5 +11,6 @@ namespace KnowledgeSystem
         public bool IsComplete { get; set; }
         public string Descriptions { get; set; }
         public string IdUserProcess { get; set; }
+        public string Change { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using DevExpress.DocumentView;
 using DevExpress.Security;
 using DevExpress.Utils.About;
 using DevExpress.Utils.Drawing.Helpers;
+using DevExpress.Utils.Extensions;
 using DevExpress.Utils.Win.Hook;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
@@ -11,6 +12,7 @@ using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraPrinting.Native.WebClientUIControl;
 using DevExpress.XtraSplashScreen;
 using KnowledgeSystem.Configs;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -308,6 +310,31 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     bgvSecurity.BestFitColumns();
                     helper.LoadViewInfo();
 
+                    // Lịch sửa cập nhật
+                    var lsHisUpdate = db.dt207_DocProgress.Where(r => r.IdKnowledgeBase == idDocument && r.Descriptions == TempDatas.EventEdit).ToList();
+                    var DocProgressInfos =
+                        (from data in db.dt207_DocProgressInfo
+                         group data by data.IdDocProgress into g
+                         select new
+                         {
+                             IdDocProgress = g.Key,
+                             IndexStep = g.OrderByDescending(dpi => dpi.TimeStep).Select(dpi => dpi.IndexStep).FirstOrDefault(),
+                             TimeStep = g.OrderByDescending(dpi => dpi.TimeStep).Select(dpi => dpi.TimeStep).FirstOrDefault(),
+                             IdUserProcess = g.OrderBy(dpi => dpi.TimeStep).Select(dpi => dpi.IdUserProcess).FirstOrDefault()
+                         }).ToList();
+
+                    var lsHisUpdates = (from data in lsHisUpdate
+                                        join infos in DocProgressInfos on data.Id equals infos.IdDocProgress
+                                        join users in lsUsers on data.IdUserProcess equals users.Id
+                                        select new
+                                        {
+                                            data.IdKnowledgeBase,
+                                            data.Change,
+                                            infos.TimeStep,
+                                            UserProcess = $"{users.IdDepartment} | {infos.IdUserProcess}/{users.DisplayName}",
+                                        }).OrderByDescending(r => r.TimeStep).ToList();
+
+                    gcEditHistory.DataSource = lsHisUpdates;
 
                     var lsDocProgresses = db.dt207_DocProgress.Where(r => !r.IsComplete && r.IdKnowledgeBase == idDocument).ToList();
 
@@ -706,6 +733,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             using (var db = new DBDocumentManagementSystemEntities())
             {
+                List<string> lsChangeDetails = new List<string>();
+
                 var lsDocProgressById = db.dt207_DocProgress.Where(r => r.IdKnowledgeBase == idDocument).ToList();
                 int idDocProgress = lsDocProgressById.OrderByDescending(r => r.Id).FirstOrDefault().Id;
                 string eventProcess = lsDocProgressById.OrderByDescending(r => r.Id).FirstOrDefault().Descriptions;
@@ -713,12 +742,88 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 List<dt207_DocProgressInfo> lsDocProgressInfos = db.dt207_DocProgressInfo.Where(r => r.IdDocProgress == idDocProgress).ToList();
                 int indexStep = lsDocProgressInfos.Count != 0 ? lsDocProgressInfos.OrderByDescending(r => r.Id).FirstOrDefault().IndexStep + 1 : 0;
 
+                // Nếu mà Xoá thì trường IsDelete = true/ Sửa thì xoá các dữ liệu cũ đi
+                switch (eventProcess)
+                {
+                    case TempDatas.EventDel:
+                        var docBaseDelete = db.dt207_Base.First(r => r.Id == idDocument);
+                        docBaseDelete.IsDelete = true;
+
+                        db.dt207_Base.AddOrUpdate(docBaseDelete);
+                        break;
+                    case TempDatas.EventEdit:
+                        // Kiểm tra xem văn kiện được sửa ở chỗ nào
+                        // Kiểm tra thông tin văn kiện
+                        var docBaseNew = db.dt207_Base.First(r => r.Id == idDocument);
+                        var docBaseOld = db.dt207_Base_BAK.First(r => r.Id == idDocument);
+
+                        if (docBaseNew.DisplayName != docBaseOld.DisplayName) lsChangeDetails.Add("名稱");
+                        if (docBaseNew.IdTypes != docBaseOld.IdTypes) lsChangeDetails.Add("類別");
+                        if (docBaseNew.Keyword != docBaseOld.Keyword) lsChangeDetails.Add("關鍵字");
+
+                        // Kiểm tra phụ kiện
+                        var lsAttachmentNew = db.dt207_Attachment.Where(r => r.IdKnowledgeBase == idDocument).
+                            Select(r => new
+                            {
+                                r.FileName,
+                                r.EncryptionName
+                            }).ToList();
+                        var lsAttachmentOld = db.dt207_Attachment_BAK.Where(r => r.IdKnowledgeBase == idDocument).
+                            Select(r => new
+                            {
+                                r.FileName,
+                                r.EncryptionName
+                            }).ToList();
+
+                        var jsonAttachmentNew = JsonConvert.SerializeObject(lsAttachmentNew);
+                        var jsonAttachmentOld = JsonConvert.SerializeObject(lsAttachmentOld);
+                        if (jsonAttachmentNew != jsonAttachmentOld) lsChangeDetails.Add("附件");
+
+                        // Kiểm tra quyền hạn
+                        var lsSecurityNew = db.dt207_Security.Where(r => r.IdKnowledgeBase == idDocument).
+                            Select(r => new
+                            {
+                                r.IdGroup,
+                                r.IdUser,
+                                r.ReadInfo,
+                                r.UpdateInfo,
+                                r.DeleteInfo,
+                                r.SearchInfo,
+                                r.ReadFile,
+                                r.SaveFile
+                            }).ToList();
+                        var lsSecurityOld = db.dt207_Security_BAK.Where(r => r.IdKnowledgeBase == idDocument).
+                            Select(r => new
+                            {
+                                r.IdGroup,
+                                r.IdUser,
+                                r.ReadInfo,
+                                r.UpdateInfo,
+                                r.DeleteInfo,
+                                r.SearchInfo,
+                                r.ReadFile,
+                                r.SaveFile
+                            }).ToList();
+
+                        var jsonSecurityNew = JsonConvert.SerializeObject(lsSecurityNew);
+                        var jsonSecurityOld = JsonConvert.SerializeObject(lsSecurityOld);
+                        if (jsonSecurityNew != jsonSecurityOld) lsChangeDetails.Add("權限");
+
+                        // Xoá dữ liệu cũ
+                        db.dt207_Base_BAK.RemoveRange(db.dt207_Base_BAK.Where(r => r.Id == idDocument));
+                        db.dt207_Attachment_BAK.RemoveRange(db.dt207_Attachment_BAK.Where(r => r.IdKnowledgeBase == idDocument));
+                        db.dt207_Security_BAK.RemoveRange(db.dt207_Security_BAK.Where(r => r.IdKnowledgeBase == idDocument));
+                        break;
+                }
+
+                // Cập nhật tiến trình
                 string descriptions = "核准";
                 if (indexStep == finishStep)
                 {
                     var docProcessUpdate = db.dt207_DocProgress.Where(r => r.Id == idDocProgress).First();
                     docProcessUpdate.IsSuccess = true;
                     docProcessUpdate.IsComplete = true;
+                    docProcessUpdate.Change = string.Join("，", lsChangeDetails);
 
                     db.dt207_DocProgress.AddOrUpdate(docProcessUpdate);
 
@@ -734,22 +839,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     Descriptions = descriptions,
                 };
                 db.dt207_DocProgressInfo.Add(progressInfo);
-
-                // Nếu mà Xoá thì trường IsDelete = true/ Sửa thì xoá các dữ liệu cũ đi
-                switch (eventProcess)
-                {
-                    case TempDatas.EventDel:
-                        var docBaseDelete = db.dt207_Base.First(r => r.Id == idDocument);
-                        docBaseDelete.IsDelete = true;
-
-                        db.dt207_Base.AddOrUpdate(docBaseDelete);
-                        break;
-                    case TempDatas.EventEdit:
-                        db.dt207_Base_BAK.RemoveRange(db.dt207_Base_BAK.Where(r => r.Id == idDocument));
-                        db.dt207_Attachment_BAK.RemoveRange(db.dt207_Attachment_BAK.Where(r => r.IdKnowledgeBase == idDocument));
-                        db.dt207_Security_BAK.RemoveRange(db.dt207_Security_BAK.Where(r => r.IdKnowledgeBase == idDocument));
-                        break;
-                }
 
                 // Save the changes to the database
                 db.SaveChanges();

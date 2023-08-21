@@ -84,6 +84,7 @@
           <Property Name="IsSuccess" Type="bit" />
           <Property Name="Descriptions" Type="nvarchar" MaxLength="64" />
           <Property Name="IdUserProcess" Type="varchar" MaxLength="10" />
+          <Property Name="Change" Type="nvarchar" MaxLength="256" />
         </EntityType>
         <EntityType Name="dt207_DocProgressInfo">
           <Key>
@@ -278,17 +279,6 @@
           <Property Name="IdGroup" Type="Int32" Nullable="false" />
           <Property Name="IndexStep" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="dt207_DocProgressInfo">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdDocProgress" Type="Int32" Nullable="false" />
-          <Property Name="TimeStep" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="IndexStep" Type="Int32" Nullable="false" />
-          <Property Name="IdUserProcess" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Descriptions" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="dt207_HistoryGetFile">
           <Key>
             <PropertyRef Name="Id" />
@@ -385,7 +375,6 @@
           <EntitySet Name="dm_Departments" EntityType="Self.dm_Departments" />
           <EntitySet Name="dm_Progress" EntityType="Self.dm_Progress" />
           <EntitySet Name="dm_StepProgress" EntityType="Self.dm_StepProgress" />
-          <EntitySet Name="dt207_DocProgressInfo" EntityType="Self.dt207_DocProgressInfo" />
           <EntitySet Name="dt207_HistoryGetFile" EntityType="Self.dt207_HistoryGetFile" />
           <EntitySet Name="dt207_NotifyEditDoc" EntityType="Self.dt207_NotifyEditDoc" />
           <EntitySet Name="dt207_Type" EntityType="Self.dt207_Type" />
@@ -404,6 +393,7 @@
           <EntitySet Name="dt207_Security" EntityType="DBDocumentManagementSystemModel.dt207_Security" />
           <EntitySet Name="dt207_Security_BAK" EntityType="DBDocumentManagementSystemModel.dt207_Security_BAK" />
           <EntitySet Name="dt207_DocProgress" EntityType="DBDocumentManagementSystemModel.dt207_DocProgress" />
+          <EntitySet Name="dt207_DocProgressInfo" EntityType="DBDocumentManagementSystemModel.dt207_DocProgressInfo" />
         </EntityContainer>
         <EntityType Name="dt207_Targets">
           <Key>
@@ -496,6 +486,18 @@
           <Property Name="IsSuccess" Type="Boolean" />
           <Property Name="Descriptions" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="IdUserProcess" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Change" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dt207_DocProgressInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdDocProgress" Type="Int32" Nullable="false" />
+          <Property Name="TimeStep" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IndexStep" Type="Int32" Nullable="false" />
+          <Property Name="IdUserProcess" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Descriptions" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -528,18 +530,6 @@
                 <ScalarProperty Name="IdProgress" ColumnName="IdProgress" />
                 <ScalarProperty Name="IdGroup" ColumnName="IdGroup" />
                 <ScalarProperty Name="IndexStep" ColumnName="IndexStep" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="dt207_DocProgressInfo">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt207_DocProgressInfo">
-              <MappingFragment StoreEntitySet="dt207_DocProgressInfo">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IdDocProgress" ColumnName="IdDocProgress" />
-                <ScalarProperty Name="TimeStep" ColumnName="TimeStep" />
-                <ScalarProperty Name="IndexStep" ColumnName="IndexStep" />
-                <ScalarProperty Name="IdUserProcess" ColumnName="IdUserProcess" />
-                <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -735,12 +725,25 @@
           <EntitySetMapping Name="dt207_DocProgress">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt207_DocProgress">
               <MappingFragment StoreEntitySet="dt207_DocProgress">
+                <ScalarProperty Name="Change" ColumnName="Change" />
                 <ScalarProperty Name="IdUserProcess" ColumnName="IdUserProcess" />
                 <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
                 <ScalarProperty Name="IsSuccess" ColumnName="IsSuccess" />
                 <ScalarProperty Name="IsComplete" ColumnName="IsComplete" />
                 <ScalarProperty Name="IdProgress" ColumnName="IdProgress" />
                 <ScalarProperty Name="IdKnowledgeBase" ColumnName="IdKnowledgeBase" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt207_DocProgressInfo">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt207_DocProgressInfo">
+              <MappingFragment StoreEntitySet="dt207_DocProgressInfo">
+                <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
+                <ScalarProperty Name="IdUserProcess" ColumnName="IdUserProcess" />
+                <ScalarProperty Name="IndexStep" ColumnName="IndexStep" />
+                <ScalarProperty Name="TimeStep" ColumnName="TimeStep" />
+                <ScalarProperty Name="IdDocProgress" ColumnName="IdDocProgress" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
