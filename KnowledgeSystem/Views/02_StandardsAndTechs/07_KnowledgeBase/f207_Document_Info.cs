@@ -46,7 +46,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             InitializeComponent();
             idDocument = idDocument_;
-
             LockControl(true);
         }
 
@@ -142,21 +141,24 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void LockControl(bool isFormView = true)
         {
-            cbbType.ReadOnly = isFormView;
-            txbNameTW.ReadOnly = isFormView;
-            txbNameVN.ReadOnly = isFormView;
-            cbbUserRequest.ReadOnly = isFormView;
-            cbbUserUpload.ReadOnly = isFormView;
-            txbKeyword.ReadOnly = isFormView;
+            bool readOnly = isFormView;
+            bool enabled = !isFormView;
 
-            btnAddFile.Enabled = !isFormView;
-            btnAddPermission.Enabled = !isFormView;
+            cbbType.ReadOnly = readOnly;
+            txbNameTW.ReadOnly = readOnly;
+            txbNameVN.ReadOnly = readOnly;
+            cbbUserRequest.ReadOnly = readOnly;
+            cbbUserUpload.ReadOnly = readOnly;
+            txbKeyword.ReadOnly = readOnly;
 
-            gvFiles.OptionsBehavior.ReadOnly = isFormView;
-            bgvSecurity.OptionsBehavior.ReadOnly = isFormView;
+            btnAddFile.Enabled = enabled;
+            btnAddPermission.Enabled = enabled;
 
-            gColDelFile.Visible = !isFormView;
-            gColDelPermission.Visible = !isFormView;
+            gvFiles.OptionsBehavior.ReadOnly = readOnly;
+            bgvSecurity.OptionsBehavior.ReadOnly = readOnly;
+
+            gColDelFile.Visible = !readOnly;
+            gColDelPermission.Visible = !readOnly;
 
             btnEdit.Visibility = isFormView ? DevExpress.XtraBars.BarItemVisibility.Always : DevExpress.XtraBars.BarItemVisibility.Never;
             btnDel.Visibility = isFormView ? DevExpress.XtraBars.BarItemVisibility.Always : DevExpress.XtraBars.BarItemVisibility.Never;
@@ -177,7 +179,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
             if (cbbUserUpload.EditValue.ToString() == userIdLogin)
             {
-                return new Securityinfo()
+                return new Securityinfo
                 {
                     DeleteInfo = true,
                     UpdateInfo = true,
@@ -186,9 +188,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 };
             }
 
-            if (lsSecurityInfos.Any(r => r.IdUser == userIdLogin))
+            var userSecurity = lsSecurityInfos.FirstOrDefault(r => r.IdUser == userIdLogin);
+            if (userSecurity != null)
             {
-                return lsSecurityInfos.FirstOrDefault(r => r.IdUser == userIdLogin);
+                return userSecurity;
             }
 
             return (from groups in lsGroups.OrderBy(g => g.Prioritize)
@@ -469,21 +472,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
                 db.dt207_DocProgress.Add(docProgress);
                 db.SaveChanges();
-
-                //var lsDocProgressById = db.dt207_DocProgress.Where(r => r.IdKnowledgeBase == idDocument).ToList();
-                //int idDocProcess = lsDocProgressById.OrderByDescending(r => r.Id).FirstOrDefault().Id;
-
-                //dt207_DocProgressInfo progressInfo = new dt207_DocProgressInfo()
-                //{
-                //    IdDocProgress = idDocProcess,
-                //    TimeStep = DateTime.Now,
-                //    IndexStep = 0,
-                //    IdUserProcess = TempDatas.LoginId,
-                //    Descriptions = TempDatas.EventDel,
-                //};
-
-                //db.dt207_DocProgressInfo.Add(progressInfo);
-                //db.SaveChanges();
             }
 
             Close();
@@ -915,15 +903,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
             var result = XtraInputBox.Show(args);
             string descriptions = result?.ToString() ?? "";
-
-            //XtraInputBoxArgs args = new XtraInputBoxArgs();
-            //args.Caption = TempDatas.SoftNameTW;
-            //args.Prompt = "原因";
-            //args.DefaultButtonIndex = 0;
-            //MemoEdit editor = new MemoEdit();
-            //args.Editor = editor;
-            //var result = XtraInputBox.Show(args);
-            //string descriptions = result?.ToString() ?? "";
 
             using (var db = new DBDocumentManagementSystemEntities())
             {
