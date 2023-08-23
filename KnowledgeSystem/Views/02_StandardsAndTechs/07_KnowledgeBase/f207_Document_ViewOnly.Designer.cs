@@ -45,14 +45,12 @@
             this.rgvGruopOrUser = new DevExpress.XtraEditors.Repository.RepositoryItemGridLookUpEdit();
             this.repositoryItemGridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridBand2 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.bandedGridColumn2 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn3 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn4 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn5 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn6 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.gridBand3 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.bandedGridColumn7 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.bandedGridColumn8 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn9 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.gcFiles = new DevExpress.XtraGrid.GridControl();
             this.gvFiles = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -66,6 +64,8 @@
             this.cbbUserRequest = new DevExpress.XtraEditors.LookUpEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.controlgroupDocument = new DevExpress.XtraLayout.TabbedControlGroup();
+            this.lcgPermission = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.groupProgress = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -80,8 +80,6 @@
             this.lcgFile = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.lcgPermission = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.stepProgressDoc)).BeginInit();
@@ -102,6 +100,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.cbbUserRequest.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controlgroupDocument)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcgPermission)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupProgress)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
@@ -116,8 +116,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcgFile)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcgPermission)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -194,6 +192,7 @@
             this.gvHistoryProcess.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
             this.gvHistoryProcess.OptionsView.EnableAppearanceOddRow = true;
             this.gvHistoryProcess.OptionsView.ShowGroupPanel = false;
+            this.gvHistoryProcess.OptionsView.ShowIndicator = false;
             // 
             // gridColumn7
             // 
@@ -290,13 +289,11 @@
             this.gridBand3});
             this.bgvSecurity.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] {
             this.bandedGridColumn1,
-            this.bandedGridColumn2,
             this.bandedGridColumn3,
             this.bandedGridColumn4,
             this.bandedGridColumn5,
             this.bandedGridColumn6,
             this.bandedGridColumn7,
-            this.bandedGridColumn8,
             this.bandedGridColumn9});
             this.bgvSecurity.GridControl = this.gcSecurity;
             this.bgvSecurity.Name = "bgvSecurity";
@@ -313,7 +310,7 @@
             this.gridBand1.Columns.Add(this.bandedGridColumn1);
             this.gridBand1.Name = "gridBand1";
             this.gridBand1.VisibleIndex = 0;
-            this.gridBand1.Width = 150;
+            this.gridBand1.Width = 312;
             // 
             // bandedGridColumn1
             // 
@@ -327,7 +324,7 @@
             this.bandedGridColumn1.MinWidth = 150;
             this.bandedGridColumn1.Name = "bandedGridColumn1";
             this.bandedGridColumn1.Visible = true;
-            this.bandedGridColumn1.Width = 150;
+            this.bandedGridColumn1.Width = 312;
             // 
             // rgvGruopOrUser
             // 
@@ -360,23 +357,13 @@
             // gridBand2
             // 
             this.gridBand2.Caption = "文件權限";
-            this.gridBand2.Columns.Add(this.bandedGridColumn2);
             this.gridBand2.Columns.Add(this.bandedGridColumn3);
             this.gridBand2.Columns.Add(this.bandedGridColumn4);
             this.gridBand2.Columns.Add(this.bandedGridColumn5);
             this.gridBand2.Columns.Add(this.bandedGridColumn6);
             this.gridBand2.Name = "gridBand2";
             this.gridBand2.VisibleIndex = 1;
-            this.gridBand2.Width = 557;
-            // 
-            // bandedGridColumn2
-            // 
-            this.bandedGridColumn2.Caption = "變更權限";
-            this.bandedGridColumn2.FieldName = "ChangePermision";
-            this.bandedGridColumn2.MinWidth = 100;
-            this.bandedGridColumn2.Name = "bandedGridColumn2";
-            this.bandedGridColumn2.Visible = true;
-            this.bandedGridColumn2.Width = 112;
+            this.gridBand2.Width = 489;
             // 
             // bandedGridColumn3
             // 
@@ -385,7 +372,7 @@
             this.bandedGridColumn3.MinWidth = 100;
             this.bandedGridColumn3.Name = "bandedGridColumn3";
             this.bandedGridColumn3.Visible = true;
-            this.bandedGridColumn3.Width = 112;
+            this.bandedGridColumn3.Width = 122;
             // 
             // bandedGridColumn4
             // 
@@ -394,7 +381,7 @@
             this.bandedGridColumn4.MinWidth = 100;
             this.bandedGridColumn4.Name = "bandedGridColumn4";
             this.bandedGridColumn4.Visible = true;
-            this.bandedGridColumn4.Width = 112;
+            this.bandedGridColumn4.Width = 122;
             // 
             // bandedGridColumn5
             // 
@@ -403,7 +390,7 @@
             this.bandedGridColumn5.MinWidth = 100;
             this.bandedGridColumn5.Name = "bandedGridColumn5";
             this.bandedGridColumn5.Visible = true;
-            this.bandedGridColumn5.Width = 112;
+            this.bandedGridColumn5.Width = 122;
             // 
             // bandedGridColumn6
             // 
@@ -412,17 +399,16 @@
             this.bandedGridColumn6.MinWidth = 100;
             this.bandedGridColumn6.Name = "bandedGridColumn6";
             this.bandedGridColumn6.Visible = true;
-            this.bandedGridColumn6.Width = 109;
+            this.bandedGridColumn6.Width = 123;
             // 
             // gridBand3
             // 
             this.gridBand3.Caption = "附件權限";
             this.gridBand3.Columns.Add(this.bandedGridColumn7);
-            this.gridBand3.Columns.Add(this.bandedGridColumn8);
             this.gridBand3.Columns.Add(this.bandedGridColumn9);
             this.gridBand3.Name = "gridBand3";
             this.gridBand3.VisibleIndex = 2;
-            this.gridBand3.Width = 306;
+            this.gridBand3.Width = 225;
             // 
             // bandedGridColumn7
             // 
@@ -431,16 +417,7 @@
             this.bandedGridColumn7.MinWidth = 100;
             this.bandedGridColumn7.Name = "bandedGridColumn7";
             this.bandedGridColumn7.Visible = true;
-            this.bandedGridColumn7.Width = 102;
-            // 
-            // bandedGridColumn8
-            // 
-            this.bandedGridColumn8.Caption = "列印";
-            this.bandedGridColumn8.FieldName = "PrintFile";
-            this.bandedGridColumn8.MinWidth = 100;
-            this.bandedGridColumn8.Name = "bandedGridColumn8";
-            this.bandedGridColumn8.Visible = true;
-            this.bandedGridColumn8.Width = 102;
+            this.bandedGridColumn7.Width = 112;
             // 
             // bandedGridColumn9
             // 
@@ -449,7 +426,7 @@
             this.bandedGridColumn9.MinWidth = 100;
             this.bandedGridColumn9.Name = "bandedGridColumn9";
             this.bandedGridColumn9.Visible = true;
-            this.bandedGridColumn9.Width = 102;
+            this.bandedGridColumn9.Width = 113;
             // 
             // gcFiles
             // 
@@ -479,8 +456,11 @@
             this.gridColumn2});
             this.gvFiles.GridControl = this.gcFiles;
             this.gvFiles.Name = "gvFiles";
+            this.gvFiles.OptionsCustomization.AllowFilter = false;
+            this.gvFiles.OptionsCustomization.AllowSort = false;
             this.gvFiles.OptionsView.EnableAppearanceOddRow = true;
             this.gvFiles.OptionsView.ShowGroupPanel = false;
+            this.gvFiles.OptionsView.ShowIndicator = false;
             // 
             // gridColumn1
             // 
@@ -625,7 +605,7 @@
             this.controlgroupDocument.AppearanceTabPage.HeaderActive.Options.UseForeColor = true;
             this.controlgroupDocument.Location = new System.Drawing.Point(0, 0);
             this.controlgroupDocument.Name = "controlgroupDocument";
-            this.controlgroupDocument.SelectedTabPage = this.lcgPermission;
+            this.controlgroupDocument.SelectedTabPage = this.groupProgress;
             this.controlgroupDocument.Size = new System.Drawing.Size(1056, 463);
             this.controlgroupDocument.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.groupProgress,
@@ -633,6 +613,31 @@
             this.lcgFile,
             this.lcgPermission});
             this.controlgroupDocument.Text = "信息";
+            // 
+            // lcgPermission
+            // 
+            this.lcgPermission.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem7});
+            this.lcgPermission.Location = new System.Drawing.Point(0, 0);
+            this.lcgPermission.Name = "lcgPermission";
+            this.lcgPermission.Size = new System.Drawing.Size(1032, 412);
+            this.lcgPermission.Text = "密等";
+            // 
+            // layoutControlItem7
+            // 
+            this.layoutControlItem7.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.layoutControlItem7.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem7.AppearanceItemCaption.Options.UseFont = true;
+            this.layoutControlItem7.AppearanceItemCaption.Options.UseForeColor = true;
+            this.layoutControlItem7.Control = this.gcSecurity;
+            this.layoutControlItem7.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem7.Name = "layoutControlItem7";
+            this.layoutControlItem7.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 3);
+            this.layoutControlItem7.Size = new System.Drawing.Size(1032, 412);
+            this.layoutControlItem7.Text = "文件密等";
+            this.layoutControlItem7.TextLocation = DevExpress.Utils.Locations.Top;
+            this.layoutControlItem7.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem7.TextVisible = false;
             // 
             // groupProgress
             // 
@@ -806,31 +811,6 @@
             this.layoutControlItem11.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem11.TextVisible = false;
             // 
-            // lcgPermission
-            // 
-            this.lcgPermission.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem7});
-            this.lcgPermission.Location = new System.Drawing.Point(0, 0);
-            this.lcgPermission.Name = "lcgPermission";
-            this.lcgPermission.Size = new System.Drawing.Size(1032, 412);
-            this.lcgPermission.Text = "密等";
-            // 
-            // layoutControlItem7
-            // 
-            this.layoutControlItem7.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.layoutControlItem7.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
-            this.layoutControlItem7.AppearanceItemCaption.Options.UseFont = true;
-            this.layoutControlItem7.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem7.Control = this.gcSecurity;
-            this.layoutControlItem7.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 3);
-            this.layoutControlItem7.Size = new System.Drawing.Size(1032, 412);
-            this.layoutControlItem7.Text = "文件密等";
-            this.layoutControlItem7.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem7.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem7.TextVisible = false;
-            // 
             // f207_Document_ViewOnly
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
@@ -864,6 +844,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.cbbUserRequest.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.controlgroupDocument)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcgPermission)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupProgress)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
@@ -878,8 +860,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcgFile)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcgPermission)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -917,13 +897,11 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridView bgvSecurity;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn1;
-        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn2;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn3;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn4;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn5;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn6;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn7;
-        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn8;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn9;
         private DevExpress.XtraEditors.Repository.RepositoryItemGridLookUpEdit rgvGruopOrUser;
         private DevExpress.XtraGrid.Views.Grid.GridView repositoryItemGridLookUpEdit1View;
