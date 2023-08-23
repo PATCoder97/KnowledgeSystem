@@ -921,7 +921,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 };
                 db.dt207_DocProgressInfo.Add(progressInfo);
 
-                dt207_Base baseDoc = db.dt207_Base_BAK.
+                if (events == TempDatas.EventEdit)
+                {
+                    dt207_Base baseDoc = db.dt207_Base_BAK.
                     Where(r => r.Id == idDocument).ToList().
                     Select(r => new dt207_Base
                     {
@@ -933,39 +935,44 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                         UserUpload = r.UserUpload,
                         UploadDate = r.UploadDate
                     }).FirstOrDefault();
-                db.dt207_Base.AddOrUpdate(baseDoc);
+                    db.dt207_Base.AddOrUpdate(baseDoc);
 
-                db.dt207_Attachment.RemoveRange(db.dt207_Attachment.Where(r => r.IdKnowledgeBase == idDocument));
-                var lsAttachments = db.dt207_Attachment.
-                    Where(r => r.IdKnowledgeBase == idDocument).ToList().
-                    Select(r => new dt207_Attachment
-                    {
-                        IdKnowledgeBase = r.IdKnowledgeBase,
-                        EncryptionName = r.EncryptionName,
-                        FileName = r.FileName
-                    });
-                db.dt207_Attachment.AddRange(lsAttachments);
+                    db.dt207_Attachment.RemoveRange(db.dt207_Attachment.Where(r => r.IdKnowledgeBase == idDocument));
+                    var lsAttachments = db.dt207_Attachment.
+                        Where(r => r.IdKnowledgeBase == idDocument).ToList().
+                        Select(r => new dt207_Attachment
+                        {
+                            IdKnowledgeBase = r.IdKnowledgeBase,
+                            EncryptionName = r.EncryptionName,
+                            FileName = r.FileName
+                        });
+                    db.dt207_Attachment.AddRange(lsAttachments);
 
-                db.dt207_Security.RemoveRange(db.dt207_Security.Where(r => r.IdKnowledgeBase == idDocument));
-                var lsSecurities = db.dt207_Security.
-                    Where(r => r.IdKnowledgeBase == idDocument).ToList().
-                    Select(r => new dt207_Security
-                    {
-                        IdKnowledgeBase = r.IdKnowledgeBase,
-                        IdGroup = r.IdGroup,
-                        IdUser = r.IdUser,
-                        ReadInfo = r.ReadInfo,
-                        UpdateInfo = r.UpdateInfo,
-                        DeleteInfo = r.DeleteInfo,
-                        SearchInfo = r.SearchInfo,
-                        ReadFile = r.ReadFile,
-                        SaveFile = r.SaveFile
-                    });
-                db.dt207_Security.AddRange(lsSecurities);
+                    db.dt207_Security.RemoveRange(db.dt207_Security.Where(r => r.IdKnowledgeBase == idDocument));
+                    var lsSecurities = db.dt207_Security.
+                        Where(r => r.IdKnowledgeBase == idDocument).ToList().
+                        Select(r => new dt207_Security
+                        {
+                            IdKnowledgeBase = r.IdKnowledgeBase,
+                            IdGroup = r.IdGroup,
+                            IdUser = r.IdUser,
+                            ReadInfo = r.ReadInfo,
+                            UpdateInfo = r.UpdateInfo,
+                            DeleteInfo = r.DeleteInfo,
+                            SearchInfo = r.SearchInfo,
+                            ReadFile = r.ReadFile,
+                            SaveFile = r.SaveFile
+                        });
+                    db.dt207_Security.AddRange(lsSecurities);
 
-                db.dt207_Base_BAK.RemoveRange(db.dt207_Base_BAK.Where(r => r.Id == idDocument));
-                db.dt207_Attachment_BAK.RemoveRange(db.dt207_Attachment_BAK.Where(r => r.IdKnowledgeBase == idDocument));
-                db.dt207_Security_BAK.RemoveRange(db.dt207_Security_BAK.Where(r => r.IdKnowledgeBase == idDocument));
+                    db.dt207_Base_BAK.RemoveRange(db.dt207_Base_BAK.Where(r => r.Id == idDocument));
+                    db.dt207_Attachment_BAK.RemoveRange(db.dt207_Attachment_BAK.Where(r => r.IdKnowledgeBase == idDocument));
+                    db.dt207_Security_BAK.RemoveRange(db.dt207_Security_BAK.Where(r => r.IdKnowledgeBase == idDocument));
+                }
+                if (events == TempDatas.EventNew)
+                {
+                    // Xoá các dữ liệu thêm mới đi
+                }
 
                 db.SaveChanges();
             }
