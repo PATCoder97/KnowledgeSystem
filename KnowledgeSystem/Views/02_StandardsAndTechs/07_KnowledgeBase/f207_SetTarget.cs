@@ -1,6 +1,7 @@
 ﻿using DevExpress.ClipboardSource.SpreadsheetML;
 using DevExpress.Pdf.Native.BouncyCastle.Asn1.X509;
 using DevExpress.XtraEditors;
+using DevExpress.XtraGrid;
 using KnowledgeSystem.Configs;
 using System;
 using System.Collections.Generic;
@@ -35,7 +36,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             using (var db = new DBDocumentManagementSystemEntities())
             {
                 var lsTargets = db.dt207_Targets.ToList();
-
                 var lsDepts = db.dm_Departments.ToList();
 
                 dm_Departments gradeDel = lsDepts.FirstOrDefault(r => r.Id == "7");
@@ -68,6 +68,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            gvData.FocusedRowHandle = GridControl.AutoFilterRowHandle;
+
             List<TargetKnowedge> lsSource = gcData.DataSource as List<TargetKnowedge>;
 
             List<dt207_Targets> lsTargetsUpdate = (from data in lsSource

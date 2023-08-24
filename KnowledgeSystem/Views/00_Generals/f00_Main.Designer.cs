@@ -45,9 +45,9 @@ namespace KnowledgeSystem.Views._00_Generals
             DevExpress.XtraEditors.TileItemElement tileItemElement11 = new DevExpress.XtraEditors.TileItemElement();
             DevExpress.XtraEditors.TileItemElement tileItemElement12 = new DevExpress.XtraEditors.TileItemElement();
             DevExpress.XtraEditors.TileItemElement tileItemElement13 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement14 = new DevExpress.XtraEditors.TileItemElement();
             DevExpress.XtraEditors.TileItemElement tileItemElement15 = new DevExpress.XtraEditors.TileItemElement();
             DevExpress.XtraEditors.TileItemElement tileItemElement16 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement14 = new DevExpress.XtraEditors.TileItemElement();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.lbSoftName = new System.Windows.Forms.Label();
             this.tileMain = new DevExpress.XtraEditors.TileControl();
@@ -67,13 +67,13 @@ namespace KnowledgeSystem.Views._00_Generals
             this.tileItem6 = new DevExpress.XtraEditors.TileItem();
             this.tileItem12 = new DevExpress.XtraEditors.TileItem();
             this.tileItem13 = new DevExpress.XtraEditors.TileItem();
+            this.tileItem4 = new DevExpress.XtraEditors.TileItem();
             this.tileGroup5 = new DevExpress.XtraEditors.TileGroup();
             this.btnUserManage = new DevExpress.XtraEditors.TileItem();
             this.btnRoleManage = new DevExpress.XtraEditors.TileItem();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.tileItem4 = new DevExpress.XtraEditors.TileItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
@@ -132,7 +132,6 @@ namespace KnowledgeSystem.Views._00_Generals
             this.tileMain.MaxId = 21;
             this.tileMain.Name = "tileMain";
             this.tileMain.Padding = new System.Windows.Forms.Padding(24, 22, 24, 22);
-            this.tileMain.Position = 796;
             this.tileMain.ShowGroupText = true;
             this.tileMain.Size = new System.Drawing.Size(1180, 498);
             this.tileMain.TabIndex = 4;
@@ -203,7 +202,7 @@ namespace KnowledgeSystem.Views._00_Generals
             // 
             this.tileItem5.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
             this.tileItem5.AppearanceItem.Normal.Options.UseFont = true;
-            tileItemElement5.Text = "技術專案—IE改善";
+            tileItemElement5.Text = "技術專案，IE改善";
             this.tileItem5.Elements.Add(tileItemElement5);
             this.tileItem5.Id = 9;
             this.tileItem5.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
@@ -305,6 +304,16 @@ namespace KnowledgeSystem.Views._00_Generals
             this.tileItem13.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
             this.tileItem13.Name = "tileItem13";
             // 
+            // tileItem4
+            // 
+            this.tileItem4.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
+            this.tileItem4.AppearanceItem.Normal.Options.UseFont = true;
+            tileItemElement14.Text = "工安證照管理";
+            this.tileItem4.Elements.Add(tileItemElement14);
+            this.tileItem4.Id = 20;
+            this.tileItem4.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
+            this.tileItem4.Name = "tileItem4";
+            // 
             // tileGroup5
             // 
             this.tileGroup5.Items.Add(this.btnUserManage);
@@ -381,14 +390,6 @@ namespace KnowledgeSystem.Views._00_Generals
             this.layoutControlItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
-            // 
-            // tileItem4
-            // 
-            tileItemElement14.Text = "工安證照管理";
-            this.tileItem4.Elements.Add(tileItemElement14);
-            this.tileItem4.Id = 20;
-            this.tileItem4.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
-            this.tileItem4.Name = "tileItem4";
             // 
             // f00_Main
             // 
