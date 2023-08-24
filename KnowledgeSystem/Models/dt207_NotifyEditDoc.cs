@@ -9,6 +9,6 @@ namespace KnowledgeSystem
         public int IdDocProcess { get; set; }
         public string IdUserNotify { get; set; }
         public bool IsRead { get; set; }
-        public DateTime? TimeNotyfiNotes { get; set; }
+        public DateTime? TimeNotifyNotes { get; set; }
     }
 }

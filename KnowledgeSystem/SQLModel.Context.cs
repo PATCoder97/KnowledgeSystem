@@ -29,7 +29,6 @@ namespace KnowledgeSystem
         public virtual DbSet<dm_Progress> dm_Progress { get; set; }
         public virtual DbSet<dm_StepProgress> dm_StepProgress { get; set; }
         public virtual DbSet<dt207_HistoryGetFile> dt207_HistoryGetFile { get; set; }
-        public virtual DbSet<dt207_NotifyEditDoc> dt207_NotifyEditDoc { get; set; }
         public virtual DbSet<dt207_Type> dt207_Type { get; set; }
         public virtual DbSet<dt207_TypeHisGetFile> dt207_TypeHisGetFile { get; set; }
         public virtual DbSet<FunctionRole> FunctionRoles { get; set; }
@@ -47,5 +46,6 @@ namespace KnowledgeSystem
         public virtual DbSet<dt207_Security_BAK> dt207_Security_BAK { get; set; }
         public virtual DbSet<dt207_DocProgress> dt207_DocProgress { get; set; }
         public virtual DbSet<dt207_DocProgressInfo> dt207_DocProgressInfo { get; set; }
+        public virtual DbSet<dt207_NotifyEditDoc> dt207_NotifyEditDoc { get; set; }
     }
 }

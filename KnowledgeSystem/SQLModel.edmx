@@ -96,6 +96,7 @@
           <Property Name="IndexStep" Type="int" Nullable="false" />
           <Property Name="IdUserProcess" Type="varchar" MaxLength="10" />
           <Property Name="Descriptions" Type="nvarchar" MaxLength="64" />
+          <Property Name="TimeNotifyNotes" Type="datetime" />
         </EntityType>
         <EntityType Name="dt207_HistoryGetFile">
           <Key>
@@ -117,7 +118,7 @@
           <Property Name="IdDocProcess" Type="int" Nullable="false" />
           <Property Name="IdUserNotify" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="IsRead" Type="bit" />
-          <Property Name="TimeNotyfiNotes" Type="datetime" />
+          <Property Name="TimeNotifyNotes" Type="datetime" />
         </EntityType>
         <EntityType Name="dt207_Security">
           <Key>
@@ -290,17 +291,6 @@
           <Property Name="KnowledgeAttachmentName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IdUser" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
-        <EntityType Name="dt207_NotifyEditDoc">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TimeNotify" Type="DateTime" Precision="3" />
-          <Property Name="IdDocProcess" Type="Int32" Nullable="false" />
-          <Property Name="IdUserNotify" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="IsRead" Type="Boolean" />
-          <Property Name="TimeNotyfiNotes" Type="DateTime" Precision="3" />
-        </EntityType>
         <EntityType Name="dt207_Type">
           <Key>
             <PropertyRef Name="Id" />
@@ -376,7 +366,6 @@
           <EntitySet Name="dm_Progress" EntityType="Self.dm_Progress" />
           <EntitySet Name="dm_StepProgress" EntityType="Self.dm_StepProgress" />
           <EntitySet Name="dt207_HistoryGetFile" EntityType="Self.dt207_HistoryGetFile" />
-          <EntitySet Name="dt207_NotifyEditDoc" EntityType="Self.dt207_NotifyEditDoc" />
           <EntitySet Name="dt207_Type" EntityType="Self.dt207_Type" />
           <EntitySet Name="dt207_TypeHisGetFile" EntityType="Self.dt207_TypeHisGetFile" />
           <EntitySet Name="FunctionRoles" EntityType="Self.FunctionRole" />
@@ -394,6 +383,7 @@
           <EntitySet Name="dt207_Security_BAK" EntityType="DBDocumentManagementSystemModel.dt207_Security_BAK" />
           <EntitySet Name="dt207_DocProgress" EntityType="DBDocumentManagementSystemModel.dt207_DocProgress" />
           <EntitySet Name="dt207_DocProgressInfo" EntityType="DBDocumentManagementSystemModel.dt207_DocProgressInfo" />
+          <EntitySet Name="dt207_NotifyEditDoc" EntityType="DBDocumentManagementSystemModel.dt207_NotifyEditDoc" />
         </EntityContainer>
         <EntityType Name="dt207_Targets">
           <Key>
@@ -498,6 +488,18 @@
           <Property Name="IndexStep" Type="Int32" Nullable="false" />
           <Property Name="IdUserProcess" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Descriptions" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="TimeNotifyNotes" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="dt207_NotifyEditDoc">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TimeNotify" Type="DateTime" Precision="3" />
+          <Property Name="IdDocProcess" Type="Int32" Nullable="false" />
+          <Property Name="IdUserNotify" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IsRead" Type="Boolean" />
+          <Property Name="TimeNotifyNotes" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -542,18 +544,6 @@
                 <ScalarProperty Name="IdKnowledgeBase" ColumnName="IdKnowledgeBase" />
                 <ScalarProperty Name="KnowledgeAttachmentName" ColumnName="KnowledgeAttachmentName" />
                 <ScalarProperty Name="IdUser" ColumnName="IdUser" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="dt207_NotifyEditDoc">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt207_NotifyEditDoc">
-              <MappingFragment StoreEntitySet="dt207_NotifyEditDoc">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="TimeNotify" ColumnName="TimeNotify" />
-                <ScalarProperty Name="IdDocProcess" ColumnName="IdDocProcess" />
-                <ScalarProperty Name="IdUserNotify" ColumnName="IdUserNotify" />
-                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
-                <ScalarProperty Name="TimeNotyfiNotes" ColumnName="TimeNotyfiNotes" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -739,11 +729,24 @@
           <EntitySetMapping Name="dt207_DocProgressInfo">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt207_DocProgressInfo">
               <MappingFragment StoreEntitySet="dt207_DocProgressInfo">
+                <ScalarProperty Name="TimeNotifyNotes" ColumnName="TimeNotifyNotes" />
                 <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
                 <ScalarProperty Name="IdUserProcess" ColumnName="IdUserProcess" />
                 <ScalarProperty Name="IndexStep" ColumnName="IndexStep" />
                 <ScalarProperty Name="TimeStep" ColumnName="TimeStep" />
                 <ScalarProperty Name="IdDocProgress" ColumnName="IdDocProgress" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt207_NotifyEditDoc">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt207_NotifyEditDoc">
+              <MappingFragment StoreEntitySet="dt207_NotifyEditDoc">
+                <ScalarProperty Name="TimeNotifyNotes" ColumnName="TimeNotifyNotes" />
+                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+                <ScalarProperty Name="IdUserNotify" ColumnName="IdUserNotify" />
+                <ScalarProperty Name="IdDocProcess" ColumnName="IdDocProcess" />
+                <ScalarProperty Name="TimeNotify" ColumnName="TimeNotify" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

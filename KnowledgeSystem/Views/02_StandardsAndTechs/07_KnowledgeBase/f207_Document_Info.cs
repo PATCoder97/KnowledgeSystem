@@ -494,8 +494,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             {
                 using (var handle = SplashScreenManager.ShowOverlayForm(this))
                 {
+                    // Check xem văn kiện có đang trong quá trình trình ký không
+                    bool IsProcessing = db.dt207_DocProgress.Any(r => r.IdKnowledgeBase == idDocument && !r.IsComplete);
+
                     // Nếu là Edit Doc thì lưu lại thông tin cũ để nếu bị trả về thì update lại dữ liệu cũ
-                    if (events == TempDatas.EventEdit)
+                    if (events == TempDatas.EventEdit && !IsProcessing)
                     {
                         dt207_Base_BAK base_BAK = db.dt207_Base.
                             Where(r => r.Id == idDocument).ToList().
@@ -593,9 +596,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                         db.dt207_Security.Add(dataAdd);
                     }
 
-                    // Nếu chưa có lưu trình xử lý của văn kiện thì thêm mới (Trigger sẽ tự thêm vào ProcessInfo)
-                    bool IsNewDocProcess = !db.dt207_DocProgress.Any(r => !r.IsComplete && r.IdKnowledgeBase == idDocument);
-                    if (IsNewDocProcess)
+                    //// Nếu chưa có lưu trình xử lý của văn kiện thì thêm mới (Trigger sẽ tự thêm vào ProcessInfo)
+                    //bool IsNewDocProcess = !db.dt207_DocProgress.Any(r => !r.IsComplete && r.IdKnowledgeBase == idDocument);
+                    if (!IsProcessing)
                     {
                         dt207_DocProgress docProgress = new dt207_DocProgress()
                         {
@@ -608,6 +611,18 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                         };
 
                         db.dt207_DocProgress.Add(docProgress);
+                    }
+                    else
+                    {
+                        dt207_DocProgressInfo progressInfo = new dt207_DocProgressInfo()
+                        {
+                            IdDocProgress = idDocProgress,
+                            TimeStep = DateTime.Now,
+                            IndexStep = 0,
+                            IdUserProcess = TempDatas.LoginId,
+                            Descriptions = "呈核",
+                        };
+                        db.dt207_DocProgressInfo.Add(progressInfo);
                     }
 
                     // Save the changes to the database

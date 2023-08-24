@@ -49,7 +49,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                                  data.Id,
                                  data.TimeNotify,
                                  data.IsRead,
-                                 data.TimeNotyfiNotes,
+                                 data.TimeNotifyNotes,
                                  idDoc.IdKnowledgeBase,
                                  names.DisplayName
                              }).ToList();

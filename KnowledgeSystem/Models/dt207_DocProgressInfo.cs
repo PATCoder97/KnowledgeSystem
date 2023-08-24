@@ -10,5 +10,6 @@ namespace KnowledgeSystem
         public int IndexStep { get; set; }
         public string IdUserProcess { get; set; }
         public string Descriptions { get; set; }
+        public DateTime? TimeNotifyNotes { get; set; }
     }
 }
