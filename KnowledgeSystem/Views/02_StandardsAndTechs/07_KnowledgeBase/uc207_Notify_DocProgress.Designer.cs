@@ -119,8 +119,6 @@
             this.gColId.Caption = "Id";
             this.gColId.FieldName = "Id";
             this.gColId.Name = "gColId";
-            this.gColId.Visible = true;
-            this.gColId.VisibleIndex = 0;
             // 
             // gvColIdKnowledgeBase
             // 
@@ -130,7 +128,7 @@
             this.gvColIdKnowledgeBase.FieldName = "IdKnowledgeBase";
             this.gvColIdKnowledgeBase.Name = "gvColIdKnowledgeBase";
             this.gvColIdKnowledgeBase.Visible = true;
-            this.gvColIdKnowledgeBase.VisibleIndex = 2;
+            this.gvColIdKnowledgeBase.VisibleIndex = 1;
             // 
             // gridColumn2
             // 
@@ -138,7 +136,7 @@
             this.gridColumn2.FieldName = "DisplayName";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 3;
+            this.gridColumn2.VisibleIndex = 2;
             // 
             // gridColumn3
             // 
@@ -146,7 +144,7 @@
             this.gridColumn3.FieldName = "Descriptions";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 5;
+            this.gridColumn3.VisibleIndex = 4;
             // 
             // gridColumn4
             // 
@@ -154,7 +152,7 @@
             this.gridColumn4.FieldName = "UserProcess";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 6;
+            this.gridColumn4.VisibleIndex = 5;
             // 
             // gridColumn6
             // 
@@ -166,7 +164,7 @@
             this.gridColumn6.FieldName = "TimeStep";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 1;
+            this.gridColumn6.VisibleIndex = 0;
             // 
             // gridColumn1
             // 
@@ -174,7 +172,7 @@
             this.gridColumn1.FieldName = "Reason";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 4;
+            this.gridColumn1.VisibleIndex = 3;
             // 
             // Root
             // 

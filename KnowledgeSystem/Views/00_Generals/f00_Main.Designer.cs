@@ -32,22 +32,22 @@ namespace KnowledgeSystem.Views._00_Generals
         private void InitializeComponent()
         {
             DevExpress.XtraSplashScreen.SplashScreenManager splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::KnowledgeSystem.Views._00_Generals.f00_CustomSplashScreen), true, true);
-            DevExpress.XtraEditors.TileItemElement tileItemElement1 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement2 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement3 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement4 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement5 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement6 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement7 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement8 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement9 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement10 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement11 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement12 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement13 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement14 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement15 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement16 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement35 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement36 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement37 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement38 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement39 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement40 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement41 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement42 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement43 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement44 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement45 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement46 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement47 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement48 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement33 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement34 = new DevExpress.XtraEditors.TileItemElement();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.lbSoftName = new System.Windows.Forms.Label();
             this.tileMain = new DevExpress.XtraEditors.TileControl();
@@ -74,6 +74,7 @@ namespace KnowledgeSystem.Views._00_Generals
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.tileInfoUser = new DevExpress.XtraEditors.TileItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
@@ -129,9 +130,10 @@ namespace KnowledgeSystem.Views._00_Generals
             this.tileMain.Groups.Add(this.tileGroup5);
             this.tileMain.Location = new System.Drawing.Point(12, 113);
             this.tileMain.Margin = new System.Windows.Forms.Padding(4);
-            this.tileMain.MaxId = 21;
+            this.tileMain.MaxId = 22;
             this.tileMain.Name = "tileMain";
             this.tileMain.Padding = new System.Windows.Forms.Padding(24, 22, 24, 22);
+            this.tileMain.Position = 796;
             this.tileMain.ShowGroupText = true;
             this.tileMain.Size = new System.Drawing.Size(1180, 498);
             this.tileMain.TabIndex = 4;
@@ -149,8 +151,8 @@ namespace KnowledgeSystem.Views._00_Generals
             // 
             this.tileItem1.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
             this.tileItem1.AppearanceItem.Normal.Options.UseFont = true;
-            tileItemElement1.Text = "證書";
-            this.tileItem1.Elements.Add(tileItemElement1);
+            tileItemElement35.Text = "證書";
+            this.tileItem1.Elements.Add(tileItemElement35);
             this.tileItem1.Id = 0;
             this.tileItem1.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
             this.tileItem1.Name = "tileItem1";
@@ -159,8 +161,8 @@ namespace KnowledgeSystem.Views._00_Generals
             // 
             this.tileItem2.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
             this.tileItem2.AppearanceItem.Normal.Options.UseFont = true;
-            tileItemElement2.Text = "生產與訂單";
-            this.tileItem2.Elements.Add(tileItemElement2);
+            tileItemElement36.Text = "生產與訂單";
+            this.tileItem2.Elements.Add(tileItemElement36);
             this.tileItem2.Id = 1;
             this.tileItem2.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
             this.tileItem2.Name = "tileItem2";
@@ -169,8 +171,8 @@ namespace KnowledgeSystem.Views._00_Generals
             // 
             this.tileItem3.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
             this.tileItem3.AppearanceItem.Normal.Options.UseFont = true;
-            tileItemElement3.Text = "合同管理";
-            this.tileItem3.Elements.Add(tileItemElement3);
+            tileItemElement37.Text = "合同管理";
+            this.tileItem3.Elements.Add(tileItemElement37);
             this.tileItem3.Id = 2;
             this.tileItem3.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
             this.tileItem3.Name = "tileItem3";
@@ -191,8 +193,8 @@ namespace KnowledgeSystem.Views._00_Generals
             // 
             this.btnISODocuments.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
             this.btnISODocuments.AppearanceItem.Normal.Options.UseFont = true;
-            tileItemElement4.Text = "ISO文件";
-            this.btnISODocuments.Elements.Add(tileItemElement4);
+            tileItemElement38.Text = "ISO文件";
+            this.btnISODocuments.Elements.Add(tileItemElement38);
             this.btnISODocuments.Id = 8;
             this.btnISODocuments.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
             this.btnISODocuments.Name = "btnISODocuments";
@@ -202,8 +204,8 @@ namespace KnowledgeSystem.Views._00_Generals
             // 
             this.tileItem5.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
             this.tileItem5.AppearanceItem.Normal.Options.UseFont = true;
-            tileItemElement5.Text = "技術專案，IE改善";
-            this.tileItem5.Elements.Add(tileItemElement5);
+            tileItemElement39.Text = "技術專案，IE改善";
+            this.tileItem5.Elements.Add(tileItemElement39);
             this.tileItem5.Id = 9;
             this.tileItem5.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
             this.tileItem5.Name = "tileItem5";
@@ -212,10 +214,10 @@ namespace KnowledgeSystem.Views._00_Generals
             // 
             this.tileItem7.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
             this.tileItem7.AppearanceItem.Normal.Options.UseFont = true;
-            tileItemElement6.Appearance.Normal.Font = new System.Drawing.Font("DFKai-SB", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            tileItemElement6.Appearance.Normal.Options.UseFont = true;
-            tileItemElement6.Text = "他廠，JFE與CSC技術資料";
-            this.tileItem7.Elements.Add(tileItemElement6);
+            tileItemElement40.Appearance.Normal.Font = new System.Drawing.Font("DFKai-SB", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            tileItemElement40.Appearance.Normal.Options.UseFont = true;
+            tileItemElement40.Text = "他廠，JFE與CSC技術資料";
+            this.tileItem7.Elements.Add(tileItemElement40);
             this.tileItem7.Id = 11;
             this.tileItem7.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
             this.tileItem7.Name = "tileItem7";
@@ -224,8 +226,8 @@ namespace KnowledgeSystem.Views._00_Generals
             // 
             this.tileItem8.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
             this.tileItem8.AppearanceItem.Normal.Options.UseFont = true;
-            tileItemElement7.Text = "國際標準";
-            this.tileItem8.Elements.Add(tileItemElement7);
+            tileItemElement41.Text = "國際標準";
+            this.tileItem8.Elements.Add(tileItemElement41);
             this.tileItem8.Id = 12;
             this.tileItem8.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
             this.tileItem8.Name = "tileItem8";
@@ -234,8 +236,8 @@ namespace KnowledgeSystem.Views._00_Generals
             // 
             this.tileItem9.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
             this.tileItem9.AppearanceItem.Normal.Options.UseFont = true;
-            tileItemElement8.Text = "文獻與期刊";
-            this.tileItem9.Elements.Add(tileItemElement8);
+            tileItemElement42.Text = "文獻與期刊";
+            this.tileItem9.Elements.Add(tileItemElement42);
             this.tileItem9.Id = 13;
             this.tileItem9.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
             this.tileItem9.Name = "tileItem9";
@@ -244,8 +246,8 @@ namespace KnowledgeSystem.Views._00_Generals
             // 
             this.tileItem10.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
             this.tileItem10.AppearanceItem.Normal.Options.UseFont = true;
-            tileItemElement9.Text = "文書";
-            this.tileItem10.Elements.Add(tileItemElement9);
+            tileItemElement43.Text = "文書";
+            this.tileItem10.Elements.Add(tileItemElement43);
             this.tileItem10.Id = 14;
             this.tileItem10.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
             this.tileItem10.Name = "tileItem10";
@@ -256,10 +258,10 @@ namespace KnowledgeSystem.Views._00_Generals
             this.btnKnowHow.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
             this.btnKnowHow.AppearanceItem.Normal.Options.UseBackColor = true;
             this.btnKnowHow.AppearanceItem.Normal.Options.UseFont = true;
-            tileItemElement10.Appearance.Normal.Font = new System.Drawing.Font("DFKai-SB", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            tileItemElement10.Appearance.Normal.Options.UseFont = true;
-            tileItemElement10.Text = "知識庫";
-            this.btnKnowHow.Elements.Add(tileItemElement10);
+            tileItemElement44.Appearance.Normal.Font = new System.Drawing.Font("DFKai-SB", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            tileItemElement44.Appearance.Normal.Options.UseFont = true;
+            tileItemElement44.Text = "知識庫";
+            this.btnKnowHow.Elements.Add(tileItemElement44);
             this.btnKnowHow.Id = 15;
             this.btnKnowHow.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
             this.btnKnowHow.Name = "btnKnowHow";
@@ -278,8 +280,8 @@ namespace KnowledgeSystem.Views._00_Generals
             // 
             this.tileItem6.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
             this.tileItem6.AppearanceItem.Normal.Options.UseFont = true;
-            tileItemElement11.Text = "工作管理";
-            this.tileItem6.Elements.Add(tileItemElement11);
+            tileItemElement45.Text = "工作管理";
+            this.tileItem6.Elements.Add(tileItemElement45);
             this.tileItem6.Id = 10;
             this.tileItem6.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
             this.tileItem6.Name = "tileItem6";
@@ -288,8 +290,8 @@ namespace KnowledgeSystem.Views._00_Generals
             // 
             this.tileItem12.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
             this.tileItem12.AppearanceItem.Normal.Options.UseFont = true;
-            tileItemElement12.Text = "設備管理";
-            this.tileItem12.Elements.Add(tileItemElement12);
+            tileItemElement46.Text = "設備管理";
+            this.tileItem12.Elements.Add(tileItemElement46);
             this.tileItem12.Id = 16;
             this.tileItem12.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
             this.tileItem12.Name = "tileItem12";
@@ -298,8 +300,8 @@ namespace KnowledgeSystem.Views._00_Generals
             // 
             this.tileItem13.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
             this.tileItem13.AppearanceItem.Normal.Options.UseFont = true;
-            tileItemElement13.Text = "系統管理";
-            this.tileItem13.Elements.Add(tileItemElement13);
+            tileItemElement47.Text = "系統管理";
+            this.tileItem13.Elements.Add(tileItemElement47);
             this.tileItem13.Id = 17;
             this.tileItem13.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
             this.tileItem13.Name = "tileItem13";
@@ -308,14 +310,15 @@ namespace KnowledgeSystem.Views._00_Generals
             // 
             this.tileItem4.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
             this.tileItem4.AppearanceItem.Normal.Options.UseFont = true;
-            tileItemElement14.Text = "工安證照管理";
-            this.tileItem4.Elements.Add(tileItemElement14);
+            tileItemElement48.Text = "工安證照管理";
+            this.tileItem4.Elements.Add(tileItemElement48);
             this.tileItem4.Id = 20;
             this.tileItem4.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
             this.tileItem4.Name = "tileItem4";
             // 
             // tileGroup5
             // 
+            this.tileGroup5.Items.Add(this.tileInfoUser);
             this.tileGroup5.Items.Add(this.btnUserManage);
             this.tileGroup5.Items.Add(this.btnRoleManage);
             this.tileGroup5.Name = "tileGroup5";
@@ -333,8 +336,8 @@ namespace KnowledgeSystem.Views._00_Generals
             this.btnUserManage.AppearanceItem.Pressed.Options.UseFont = true;
             this.btnUserManage.AppearanceItem.Selected.Font = new System.Drawing.Font("DFKai-SB", 26F);
             this.btnUserManage.AppearanceItem.Selected.Options.UseFont = true;
-            tileItemElement15.Text = "用戶管理";
-            this.btnUserManage.Elements.Add(tileItemElement15);
+            tileItemElement33.Text = "用戶管理";
+            this.btnUserManage.Elements.Add(tileItemElement33);
             this.btnUserManage.Id = 19;
             this.btnUserManage.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
             this.btnUserManage.Name = "btnUserManage";
@@ -352,8 +355,8 @@ namespace KnowledgeSystem.Views._00_Generals
             this.btnRoleManage.AppearanceItem.Pressed.Options.UseFont = true;
             this.btnRoleManage.AppearanceItem.Selected.Font = new System.Drawing.Font("DFKai-SB", 26F);
             this.btnRoleManage.AppearanceItem.Selected.Options.UseFont = true;
-            tileItemElement16.Text = "系統管理";
-            this.btnRoleManage.Elements.Add(tileItemElement16);
+            tileItemElement34.Text = "系統管理";
+            this.btnRoleManage.Elements.Add(tileItemElement34);
             this.btnRoleManage.Id = 18;
             this.btnRoleManage.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
             this.btnRoleManage.Name = "btnRoleManage";
@@ -390,6 +393,15 @@ namespace KnowledgeSystem.Views._00_Generals
             this.layoutControlItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
+            // 
+            // tileInfoUser
+            // 
+            this.tileInfoUser.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(57)))), ((int)(((byte)(123)))));
+            this.tileInfoUser.AppearanceItem.Normal.Options.UseBackColor = true;
+            this.tileInfoUser.Id = 21;
+            this.tileInfoUser.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
+            this.tileInfoUser.Name = "tileInfoUser";
+            this.tileInfoUser.ItemClick += new DevExpress.XtraEditors.TileItemClickEventHandler(this.tileInfoUser_ItemClick);
             // 
             // f00_Main
             // 
@@ -442,5 +454,6 @@ namespace KnowledgeSystem.Views._00_Generals
         private TileItem btnRoleManage;
         private TileItem btnUserManage;
         private TileItem tileItem4;
+        private TileItem tileInfoUser;
     }
 }

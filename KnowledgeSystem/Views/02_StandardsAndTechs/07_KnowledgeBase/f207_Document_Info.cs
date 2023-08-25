@@ -743,6 +743,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 return;
             }
 
+            controlgroupDocument.SelectedTabPage = lcgInfo;
+
             LockControl(false);
         }
 
