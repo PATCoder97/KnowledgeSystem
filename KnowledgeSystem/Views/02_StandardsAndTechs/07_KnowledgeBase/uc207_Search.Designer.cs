@@ -215,7 +215,7 @@
             this.gridColumn3.AppearanceCell.Options.UseTextOptions = true;
             this.gridColumn3.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn3.Caption = "提案人";
-            this.gridColumn3.FieldName = "UserRequestName";
+            this.gridColumn3.FieldName = "UserUploadName";
             this.gridColumn3.MinWidth = 10;
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
@@ -247,7 +247,7 @@
             this.gridColumn6.AppearanceCell.Options.UseTextOptions = true;
             this.gridColumn6.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn6.Caption = "上傳人";
-            this.gridColumn6.FieldName = "UserUploadName";
+            this.gridColumn6.FieldName = "UserProcessName";
             this.gridColumn6.MinWidth = 10;
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;

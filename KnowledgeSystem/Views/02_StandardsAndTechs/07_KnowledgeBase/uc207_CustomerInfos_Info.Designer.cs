@@ -30,33 +30,33 @@
         {
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.txbDisplayName = new DevExpress.XtraEditors.TextEdit();
-            this.txbId = new DevExpress.XtraEditors.ButtonEdit();
             this.cbbIdUser = new DevExpress.XtraEditors.LookUpEdit();
-            this.txbSummary = new DevExpress.XtraEditors.LookUpEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.txbId = new DevExpress.XtraEditors.TextEdit();
+            this.txbSummary = new DevExpress.XtraEditors.TextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txbDisplayName.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbId.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbIdUser.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbSummary.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbId.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbSummary.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
             // 
             this.layoutControl1.AllowCustomization = false;
             this.layoutControl1.Controls.Add(this.txbDisplayName);
-            this.layoutControl1.Controls.Add(this.txbId);
             this.layoutControl1.Controls.Add(this.cbbIdUser);
+            this.layoutControl1.Controls.Add(this.txbId);
             this.layoutControl1.Controls.Add(this.txbSummary);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
@@ -79,20 +79,6 @@
             this.txbDisplayName.StyleController = this.layoutControl1;
             this.txbDisplayName.TabIndex = 4;
             // 
-            // txbId
-            // 
-            this.txbId.Location = new System.Drawing.Point(80, 4);
-            this.txbId.Name = "txbId";
-            this.txbId.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txbId.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.txbId.Properties.Appearance.Options.UseFont = true;
-            this.txbId.Properties.Appearance.Options.UseForeColor = true;
-            this.txbId.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Search)});
-            this.txbId.Size = new System.Drawing.Size(143, 28);
-            this.txbId.StyleController = this.layoutControl1;
-            this.txbId.TabIndex = 4;
-            // 
             // cbbIdUser
             // 
             this.cbbIdUser.EditValue = "";
@@ -113,40 +99,13 @@
             this.cbbIdUser.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbbIdUser.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("DisplayName", "名稱"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Describe", "說明")});
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Id", "代號"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("DisplayName", "名稱")});
             this.cbbIdUser.Properties.NullText = "";
             this.cbbIdUser.Properties.PopupSizeable = false;
             this.cbbIdUser.Size = new System.Drawing.Size(144, 28);
             this.cbbIdUser.StyleController = this.layoutControl1;
             this.cbbIdUser.TabIndex = 6;
-            // 
-            // txbSummary
-            // 
-            this.txbSummary.Location = new System.Drawing.Point(527, 4);
-            this.txbSummary.Name = "txbSummary";
-            this.txbSummary.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txbSummary.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.txbSummary.Properties.Appearance.Options.UseFont = true;
-            this.txbSummary.Properties.Appearance.Options.UseForeColor = true;
-            this.txbSummary.Properties.AppearanceDropDown.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txbSummary.Properties.AppearanceDropDown.Options.UseFont = true;
-            this.txbSummary.Properties.AppearanceDropDownHeader.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txbSummary.Properties.AppearanceDropDownHeader.ForeColor = System.Drawing.Color.Black;
-            this.txbSummary.Properties.AppearanceDropDownHeader.Options.UseFont = true;
-            this.txbSummary.Properties.AppearanceDropDownHeader.Options.UseForeColor = true;
-            this.txbSummary.Properties.AppearanceDropDownHeader.Options.UseTextOptions = true;
-            this.txbSummary.Properties.AppearanceDropDownHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.txbSummary.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txbSummary.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Id", "編號", 40, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Default, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("DisplayName", "名稱", 60, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Default, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default)});
-            this.txbSummary.Properties.NullText = "";
-            this.txbSummary.Properties.PopupSizeable = false;
-            this.txbSummary.Size = new System.Drawing.Size(143, 28);
-            this.txbSummary.StyleController = this.layoutControl1;
-            this.txbSummary.TabIndex = 4;
             // 
             // Root
             // 
@@ -218,6 +177,30 @@
             this.layoutControlItem3.Text = "負責人";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(64, 16);
             // 
+            // txbId
+            // 
+            this.txbId.Location = new System.Drawing.Point(80, 4);
+            this.txbId.Name = "txbId";
+            this.txbId.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbId.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.txbId.Properties.Appearance.Options.UseFont = true;
+            this.txbId.Properties.Appearance.Options.UseForeColor = true;
+            this.txbId.Size = new System.Drawing.Size(143, 28);
+            this.txbId.StyleController = this.layoutControl1;
+            this.txbId.TabIndex = 4;
+            // 
+            // txbSummary
+            // 
+            this.txbSummary.Location = new System.Drawing.Point(527, 4);
+            this.txbSummary.Name = "txbSummary";
+            this.txbSummary.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbSummary.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.txbSummary.Properties.Appearance.Options.UseFont = true;
+            this.txbSummary.Properties.Appearance.Options.UseForeColor = true;
+            this.txbSummary.Size = new System.Drawing.Size(143, 28);
+            this.txbSummary.StyleController = this.layoutControl1;
+            this.txbSummary.TabIndex = 4;
+            // 
             // uc207_CustomerInfos_Info
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -225,17 +208,18 @@
             this.Controls.Add(this.layoutControl1);
             this.Name = "uc207_CustomerInfos_Info";
             this.Size = new System.Drawing.Size(898, 37);
+            this.Load += new System.EventHandler(this.uc207_CustomerInfos_Info_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.txbDisplayName.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbId.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbIdUser.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbSummary.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbId.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbSummary.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -244,13 +228,13 @@
 
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraEditors.TextEdit txbDisplayName;
-        private DevExpress.XtraEditors.ButtonEdit txbId;
         private DevExpress.XtraEditors.LookUpEdit cbbIdUser;
-        private DevExpress.XtraEditors.LookUpEdit txbSummary;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
+        private DevExpress.XtraEditors.TextEdit txbId;
+        private DevExpress.XtraEditors.TextEdit txbSummary;
     }
 }

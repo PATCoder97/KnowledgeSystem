@@ -159,7 +159,7 @@
             // 
             // gridColumn5
             // 
-            this.gridColumn5.Caption = "上傳人";
+            this.gridColumn5.Caption = "經辦人";
             this.gridColumn5.FieldName = "UserProcess";
             this.gridColumn5.MaxWidth = 250;
             this.gridColumn5.MinWidth = 10;

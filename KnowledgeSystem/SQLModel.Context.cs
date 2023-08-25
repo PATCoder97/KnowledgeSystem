@@ -40,12 +40,12 @@ namespace KnowledgeSystem
         public virtual DbSet<dt207_Targets> dt207_Targets { get; set; }
         public virtual DbSet<dt207_Attachment> dt207_Attachment { get; set; }
         public virtual DbSet<dt207_Attachment_BAK> dt207_Attachment_BAK { get; set; }
-        public virtual DbSet<dt207_Base> dt207_Base { get; set; }
-        public virtual DbSet<dt207_Base_BAK> dt207_Base_BAK { get; set; }
         public virtual DbSet<dt207_Security> dt207_Security { get; set; }
         public virtual DbSet<dt207_Security_BAK> dt207_Security_BAK { get; set; }
         public virtual DbSet<dt207_DocProgress> dt207_DocProgress { get; set; }
         public virtual DbSet<dt207_DocProgressInfo> dt207_DocProgressInfo { get; set; }
         public virtual DbSet<dt207_NotifyEditDoc> dt207_NotifyEditDoc { get; set; }
+        public virtual DbSet<dt207_Base> dt207_Base { get; set; }
+        public virtual DbSet<dt207_Base_BAK> dt207_Base_BAK { get; set; }
     }
 }

@@ -77,8 +77,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             cbbType.ReadOnly = isFormView;
             txbNameTW.ReadOnly = isFormView;
             txbNameVN.ReadOnly = isFormView;
-            cbbUserRequest.ReadOnly = isFormView;
             cbbUserUpload.ReadOnly = isFormView;
+            cbbUserProcess.ReadOnly = isFormView;
             txbKeyword.ReadOnly = isFormView;
 
             gvFiles.OptionsBehavior.ReadOnly = isFormView;
@@ -91,7 +91,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             string userIdLogin = TempDatas.LoginId;
 
-            if (cbbUserUpload.EditValue.ToString() == userIdLogin)
+            if (cbbUserProcess.EditValue.ToString() == userIdLogin)
             {
                 return new Securityinfo()
                 {
@@ -159,13 +159,13 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 cbbType.Properties.ValueMember = "Id";
                 cbbType.Properties.DisplayMember = "DisplayName";
 
-                cbbUserRequest.Properties.DataSource = lsUsers;
-                cbbUserRequest.Properties.ValueMember = "Id";
-                cbbUserRequest.Properties.DisplayMember = "DisplayName";
-
                 cbbUserUpload.Properties.DataSource = lsUsers;
                 cbbUserUpload.Properties.ValueMember = "Id";
                 cbbUserUpload.Properties.DisplayMember = "DisplayName";
+
+                cbbUserProcess.Properties.DataSource = lsUsers;
+                cbbUserProcess.Properties.ValueMember = "Id";
+                cbbUserProcess.Properties.DisplayMember = "DisplayName";
 
                 // Truy xuất dữ liệu từ cơ sở dữ liệu và gán cho các thành phần form
                 if (!string.IsNullOrEmpty(idDocument))
@@ -214,8 +214,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                         var dataBaseInfo = db.dt207_Base.FirstOrDefault(r => r.Id == idDocument);
                         txbId.Text = dataBaseInfo.Id;
                         cbbType.EditValue = dataBaseInfo.IdTypes;
-                        cbbUserRequest.EditValue = dataBaseInfo.UserRequest;
                         cbbUserUpload.EditValue = dataBaseInfo.UserUpload;
+                        cbbUserProcess.EditValue = dataBaseInfo.UserProcess;
                         var displayName = dataBaseInfo.DisplayName.Split(new[] { "\r\n" }, StringSplitOptions.None);
                         txbNameTW.Text = displayName[0];
                         txbNameVN.Text = displayName.Length > 1 ? displayName[1] : "";

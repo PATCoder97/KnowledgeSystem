@@ -147,9 +147,13 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             cbbType.ReadOnly = readOnly;
             txbNameTW.ReadOnly = readOnly;
             txbNameVN.ReadOnly = readOnly;
-            cbbUserRequest.ReadOnly = readOnly;
-            cbbUserUpload.ReadOnly = readOnly;
+            cbbUserProcess.ReadOnly = true;
             txbKeyword.ReadOnly = readOnly;
+            cbbUserUpload.ReadOnly = readOnly;
+            if (!string.IsNullOrEmpty(idDocument))
+            {
+                cbbUserUpload.ReadOnly = true;
+            }
 
             btnAddFile.Enabled = enabled;
             btnAddPermission.Enabled = enabled;
@@ -177,7 +181,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             string userIdLogin = TempDatas.LoginId;
 
-            if (cbbUserUpload.EditValue.ToString() == userIdLogin)
+            if (cbbUserUpload.EditValue.ToString() == userIdLogin ||
+                cbbUserProcess.EditValue.ToString() == userIdLogin)
             {
                 return new Securityinfo
                 {
@@ -252,19 +257,19 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 cbbType.Properties.ValueMember = "Id";
                 cbbType.Properties.DisplayMember = "DisplayName";
 
-                cbbUserRequest.Properties.DataSource = lsUsers;
-                cbbUserRequest.Properties.ValueMember = "Id";
-                cbbUserRequest.Properties.DisplayMember = "DisplayName";
-
                 cbbUserUpload.Properties.DataSource = lsUsers;
                 cbbUserUpload.Properties.ValueMember = "Id";
                 cbbUserUpload.Properties.DisplayMember = "DisplayName";
 
+                cbbUserProcess.Properties.DataSource = lsUsers;
+                cbbUserProcess.Properties.ValueMember = "Id";
+                cbbUserProcess.Properties.DisplayMember = "DisplayName";
+
                 // Cài các thông tin mặc định lên Form (Trường hợp new Doc)
                 userId = TempDatas.LoginId;
                 cbbType.EditValue = 1;
-                cbbUserRequest.EditValue = userId;
                 cbbUserUpload.EditValue = userId;
+                cbbUserProcess.EditValue = userId;
                 var userLogin = lsUsers.FirstOrDefault(r => r.Id == userId);
                 txbId.Text = "XXX-XXXXXXXXXX-XX";
                 lbCountFile.Text = "";
@@ -277,8 +282,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     var dataBaseInfo = db.dt207_Base.FirstOrDefault(r => r.Id == idDocument);
                     txbId.Text = dataBaseInfo.Id;
                     cbbType.EditValue = dataBaseInfo.IdTypes;
-                    cbbUserRequest.EditValue = dataBaseInfo.UserRequest;
                     cbbUserUpload.EditValue = dataBaseInfo.UserUpload;
+                    cbbUserProcess.EditValue = dataBaseInfo.UserProcess;
                     var displayName = dataBaseInfo.DisplayName.Split(new[] { "\r\n" }, StringSplitOptions.None);
                     txbNameTW.Text = displayName[0];
                     txbNameVN.Text = displayName.Length > 1 ? displayName[1] : "";
@@ -399,7 +404,13 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             }
 
             // Lấy quyền hạn của người dùng đối với văn kiện này
-            permissionAttachments = GetPermission();
+            permissionAttachments = GetPermission() ?? new Securityinfo
+            {
+                DeleteInfo = false,
+                UpdateInfo = false,
+                ReadFile = false,
+                SaveFile = false
+            };
         }
 
         private void btnAddFile_Click(object sender, EventArgs e)
@@ -506,7 +517,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                             {
                                 Id = r.Id,
                                 DisplayName = r.DisplayName,
-                                UserRequest = r.UserRequest,
+                                UserProcess = r.UserProcess,
                                 IdTypes = r.IdTypes,
                                 Keyword = r.Keyword,
                                 UserUpload = r.UserUpload,
@@ -546,7 +557,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     {
                         Id = idDocument,
                         DisplayName = $"{convertToUnSign3(txbNameTW.Text.Trim())}\r\n{txbNameVN.Text.Trim()}",
-                        UserRequest = cbbUserRequest.EditValue.ToString(),
+                        UserProcess = cbbUserProcess.EditValue.ToString(),
                         IdTypes = (int)cbbType.EditValue,
                         Keyword = txbKeyword.Text.Trim(),
                         UserUpload = cbbUserUpload.EditValue.ToString(),
@@ -946,7 +957,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                             {
                                 Id = r.Id,
                                 DisplayName = r.DisplayName,
-                                UserRequest = r.UserRequest,
+                                UserProcess = r.UserProcess,
                                 IdTypes = r.IdTypes,
                                 Keyword = r.Keyword,
                                 UserUpload = r.UserUpload,

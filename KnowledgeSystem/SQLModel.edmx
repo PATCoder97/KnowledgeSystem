@@ -54,10 +54,10 @@
           </Key>
           <Property Name="Id" Type="varchar" MaxLength="32" Nullable="false" />
           <Property Name="DisplayName" Type="nvarchar(max)" />
-          <Property Name="UserRequest" Type="varchar" MaxLength="10" />
           <Property Name="IdTypes" Type="int" />
           <Property Name="Keyword" Type="nvarchar(max)" />
           <Property Name="UserUpload" Type="varchar" MaxLength="10" />
+          <Property Name="UserProcess" Type="varchar" MaxLength="10" />
           <Property Name="UploadDate" Type="date" />
           <Property Name="IsDelete" Type="bit" />
         </EntityType>
@@ -67,10 +67,10 @@
           </Key>
           <Property Name="Id" Type="varchar" MaxLength="32" Nullable="false" />
           <Property Name="DisplayName" Type="nvarchar(max)" />
-          <Property Name="UserRequest" Type="varchar" MaxLength="10" />
           <Property Name="IdTypes" Type="int" />
           <Property Name="Keyword" Type="nvarchar(max)" />
           <Property Name="UserUpload" Type="varchar" MaxLength="10" />
+          <Property Name="UserProcess" Type="varchar" MaxLength="10" />
           <Property Name="UploadDate" Type="date" />
         </EntityType>
         <EntityType Name="dt207_DocProgress">
@@ -377,13 +377,13 @@
           <EntitySet Name="dt207_Targets" EntityType="DBDocumentManagementSystemModel.dt207_Targets" />
           <EntitySet Name="dt207_Attachment" EntityType="DBDocumentManagementSystemModel.dt207_Attachment" />
           <EntitySet Name="dt207_Attachment_BAK" EntityType="DBDocumentManagementSystemModel.dt207_Attachment_BAK" />
-          <EntitySet Name="dt207_Base" EntityType="DBDocumentManagementSystemModel.dt207_Base" />
-          <EntitySet Name="dt207_Base_BAK" EntityType="DBDocumentManagementSystemModel.dt207_Base_BAK" />
           <EntitySet Name="dt207_Security" EntityType="DBDocumentManagementSystemModel.dt207_Security" />
           <EntitySet Name="dt207_Security_BAK" EntityType="DBDocumentManagementSystemModel.dt207_Security_BAK" />
           <EntitySet Name="dt207_DocProgress" EntityType="DBDocumentManagementSystemModel.dt207_DocProgress" />
           <EntitySet Name="dt207_DocProgressInfo" EntityType="DBDocumentManagementSystemModel.dt207_DocProgressInfo" />
           <EntitySet Name="dt207_NotifyEditDoc" EntityType="DBDocumentManagementSystemModel.dt207_NotifyEditDoc" />
+          <EntitySet Name="dt207_Base" EntityType="DBDocumentManagementSystemModel.dt207_Base" />
+          <EntitySet Name="dt207_Base_BAK" EntityType="DBDocumentManagementSystemModel.dt207_Base_BAK" />
         </EntityContainer>
         <EntityType Name="dt207_Targets">
           <Key>
@@ -409,31 +409,6 @@
           <Property Name="IdKnowledgeBase" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
           <Property Name="EncryptionName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="FileName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="dt207_Base">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
-          <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="UserRequest" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="IdTypes" Type="Int32" />
-          <Property Name="Keyword" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="UserUpload" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="UploadDate" Type="DateTime" Precision="0" />
-          <Property Name="IsDelete" Type="Boolean" />
-        </EntityType>
-        <EntityType Name="dt207_Base_BAK">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
-          <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="UserRequest" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="IdTypes" Type="Int32" />
-          <Property Name="Keyword" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="UserUpload" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="UploadDate" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="dt207_Security">
           <Key>
@@ -500,6 +475,31 @@
           <Property Name="IdUserNotify" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="IsRead" Type="Boolean" />
           <Property Name="TimeNotifyNotes" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="dt207_Base">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IdTypes" Type="Int32" />
+          <Property Name="Keyword" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserUpload" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UserProcess" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UploadDate" Type="DateTime" Precision="0" />
+          <Property Name="IsDelete" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="dt207_Base_BAK">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IdTypes" Type="Int32" />
+          <Property Name="Keyword" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserUpload" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UserProcess" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UploadDate" Type="DateTime" Precision="0" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -653,33 +653,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dt207_Base">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt207_Base">
-              <MappingFragment StoreEntitySet="dt207_Base">
-                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
-                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
-                <ScalarProperty Name="UserUpload" ColumnName="UserUpload" />
-                <ScalarProperty Name="Keyword" ColumnName="Keyword" />
-                <ScalarProperty Name="IdTypes" ColumnName="IdTypes" />
-                <ScalarProperty Name="UserRequest" ColumnName="UserRequest" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="dt207_Base_BAK">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt207_Base_BAK">
-              <MappingFragment StoreEntitySet="dt207_Base_BAK">
-                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
-                <ScalarProperty Name="UserUpload" ColumnName="UserUpload" />
-                <ScalarProperty Name="Keyword" ColumnName="Keyword" />
-                <ScalarProperty Name="IdTypes" ColumnName="IdTypes" />
-                <ScalarProperty Name="UserRequest" ColumnName="UserRequest" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="dt207_Security">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt207_Security">
               <MappingFragment StoreEntitySet="dt207_Security">
@@ -747,6 +720,33 @@
                 <ScalarProperty Name="IdUserNotify" ColumnName="IdUserNotify" />
                 <ScalarProperty Name="IdDocProcess" ColumnName="IdDocProcess" />
                 <ScalarProperty Name="TimeNotify" ColumnName="TimeNotify" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt207_Base">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt207_Base">
+              <MappingFragment StoreEntitySet="dt207_Base">
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
+                <ScalarProperty Name="UserProcess" ColumnName="UserProcess" />
+                <ScalarProperty Name="UserUpload" ColumnName="UserUpload" />
+                <ScalarProperty Name="Keyword" ColumnName="Keyword" />
+                <ScalarProperty Name="IdTypes" ColumnName="IdTypes" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt207_Base_BAK">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt207_Base_BAK">
+              <MappingFragment StoreEntitySet="dt207_Base_BAK">
+                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
+                <ScalarProperty Name="UserProcess" ColumnName="UserProcess" />
+                <ScalarProperty Name="UserUpload" ColumnName="UserUpload" />
+                <ScalarProperty Name="Keyword" ColumnName="Keyword" />
+                <ScalarProperty Name="IdTypes" ColumnName="IdTypes" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -60,8 +60,8 @@
             this.txbNameTW = new DevExpress.XtraEditors.TextEdit();
             this.txbId = new DevExpress.XtraEditors.TextEdit();
             this.cbbType = new DevExpress.XtraEditors.LookUpEdit();
+            this.cbbUserProcess = new DevExpress.XtraEditors.LookUpEdit();
             this.cbbUserUpload = new DevExpress.XtraEditors.LookUpEdit();
-            this.cbbUserRequest = new DevExpress.XtraEditors.LookUpEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.controlgroupDocument = new DevExpress.XtraLayout.TabbedControlGroup();
             this.lcgPermission = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -96,8 +96,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.txbNameTW.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbId.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbType.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbUserProcess.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbUserUpload.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbbUserRequest.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controlgroupDocument)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcgPermission)).BeginInit();
@@ -131,8 +131,8 @@
             this.layoutControl1.Controls.Add(this.txbNameTW);
             this.layoutControl1.Controls.Add(this.txbId);
             this.layoutControl1.Controls.Add(this.cbbType);
+            this.layoutControl1.Controls.Add(this.cbbUserProcess);
             this.layoutControl1.Controls.Add(this.cbbUserUpload);
-            this.layoutControl1.Controls.Add(this.cbbUserRequest);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Name = "layoutControl1";
@@ -538,48 +538,48 @@
             // 
             // cbbUserUpload
             // 
-            this.cbbUserUpload.Location = new System.Drawing.Point(631, 151);
-            this.cbbUserUpload.Name = "cbbUserUpload";
+            this.cbbUserProcess.Location = new System.Drawing.Point(631, 151);
+            this.cbbUserProcess.Name = "cbbUserUpload";
+            this.cbbUserProcess.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbUserProcess.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.cbbUserProcess.Properties.Appearance.Options.UseFont = true;
+            this.cbbUserProcess.Properties.Appearance.Options.UseForeColor = true;
+            this.cbbUserProcess.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbbUserProcess.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Id", "Name1"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("DisplayName", "Name2")});
+            this.cbbUserProcess.Properties.NullText = "";
+            this.cbbUserProcess.Properties.ReadOnly = true;
+            this.cbbUserProcess.Size = new System.Drawing.Size(421, 28);
+            this.cbbUserProcess.StyleController = this.layoutControl1;
+            this.cbbUserProcess.TabIndex = 8;
+            // 
+            // cbbUserRequest
+            // 
+            this.cbbUserUpload.EditValue = "";
+            this.cbbUserUpload.Location = new System.Drawing.Point(116, 151);
+            this.cbbUserUpload.Name = "cbbUserRequest";
             this.cbbUserUpload.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbbUserUpload.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.cbbUserUpload.Properties.Appearance.Options.UseFont = true;
             this.cbbUserUpload.Properties.Appearance.Options.UseForeColor = true;
+            this.cbbUserUpload.Properties.AppearanceDropDown.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbUserUpload.Properties.AppearanceDropDown.ForeColor = System.Drawing.Color.Black;
+            this.cbbUserUpload.Properties.AppearanceDropDown.Options.UseFont = true;
+            this.cbbUserUpload.Properties.AppearanceDropDown.Options.UseForeColor = true;
             this.cbbUserUpload.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbbUserUpload.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Id", "Name1"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("DisplayName", "Name2")});
-            this.cbbUserUpload.Properties.NullText = "";
-            this.cbbUserUpload.Properties.ReadOnly = true;
-            this.cbbUserUpload.Size = new System.Drawing.Size(421, 28);
-            this.cbbUserUpload.StyleController = this.layoutControl1;
-            this.cbbUserUpload.TabIndex = 8;
-            // 
-            // cbbUserRequest
-            // 
-            this.cbbUserRequest.EditValue = "";
-            this.cbbUserRequest.Location = new System.Drawing.Point(116, 151);
-            this.cbbUserRequest.Name = "cbbUserRequest";
-            this.cbbUserRequest.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbbUserRequest.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.cbbUserRequest.Properties.Appearance.Options.UseFont = true;
-            this.cbbUserRequest.Properties.Appearance.Options.UseForeColor = true;
-            this.cbbUserRequest.Properties.AppearanceDropDown.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbbUserRequest.Properties.AppearanceDropDown.ForeColor = System.Drawing.Color.Black;
-            this.cbbUserRequest.Properties.AppearanceDropDown.Options.UseFont = true;
-            this.cbbUserRequest.Properties.AppearanceDropDown.Options.UseForeColor = true;
-            this.cbbUserRequest.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbbUserRequest.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Id", "Name5"),
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("DisplayName", "Name6")});
-            this.cbbUserRequest.Properties.NullText = "";
-            this.cbbUserRequest.Properties.PopupFilterMode = DevExpress.XtraEditors.PopupFilterMode.Contains;
-            this.cbbUserRequest.Properties.ShowHeader = false;
-            this.cbbUserRequest.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
-            this.cbbUserRequest.Size = new System.Drawing.Size(419, 28);
-            this.cbbUserRequest.StyleController = this.layoutControl1;
-            this.cbbUserRequest.TabIndex = 6;
+            this.cbbUserUpload.Properties.NullText = "";
+            this.cbbUserUpload.Properties.PopupFilterMode = DevExpress.XtraEditors.PopupFilterMode.Contains;
+            this.cbbUserUpload.Properties.ShowHeader = false;
+            this.cbbUserUpload.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
+            this.cbbUserUpload.Size = new System.Drawing.Size(419, 28);
+            this.cbbUserUpload.StyleController = this.layoutControl1;
+            this.cbbUserUpload.TabIndex = 6;
             // 
             // Root
             // 
@@ -746,7 +746,7 @@
             this.layoutControlItem3.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem3.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem3.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem3.Control = this.cbbUserRequest;
+            this.layoutControlItem3.Control = this.cbbUserUpload;
             this.layoutControlItem3.Location = new System.Drawing.Point(0, 100);
             this.layoutControlItem3.Name = "layoutControlItem3";
             this.layoutControlItem3.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 3);
@@ -760,7 +760,7 @@
             this.layoutControlItem5.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem5.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem5.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem5.Control = this.cbbUserUpload;
+            this.layoutControlItem5.Control = this.cbbUserProcess;
             this.layoutControlItem5.Location = new System.Drawing.Point(515, 100);
             this.layoutControlItem5.Name = "layoutControlItem5";
             this.layoutControlItem5.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 3);
@@ -840,8 +840,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.txbNameTW.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbId.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbType.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbUserProcess.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbUserUpload.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbbUserRequest.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.controlgroupDocument)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcgPermission)).EndInit();
@@ -875,8 +875,8 @@
         private DevExpress.XtraGrid.Views.Grid.GridView gvFiles;
         private DevExpress.XtraEditors.MemoEdit txbKeyword;
         private DevExpress.XtraEditors.LookUpEdit cbbType;
+        private DevExpress.XtraEditors.LookUpEdit cbbUserProcess;
         private DevExpress.XtraEditors.LookUpEdit cbbUserUpload;
-        private DevExpress.XtraEditors.LookUpEdit cbbUserRequest;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private System.Windows.Forms.Label lbCountFile;

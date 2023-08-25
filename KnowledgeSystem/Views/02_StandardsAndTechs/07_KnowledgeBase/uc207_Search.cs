@@ -35,11 +35,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             public string Id { get; set; }
             public string DisplayName { get; set; }
-            public string UserRequest { get; set; }
-            public string UserRequestName { get; set; }
+            public string UserUpload { get; set; }
+            public string UserUploadName { get; set; }
             public string TypeName { get; set; }
             public string Keyword { get; set; }
-            public string UserUploadName { get; set; }
+            public string UserProcessName { get; set; }
             public DateTime? UploadDate { get; set; }
         }
 
@@ -85,7 +85,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 }
 
                 // Danh sách Doc đưa lên hoặc yêu cầu
-                var lsDocUserUpload = db.dt207_Base.Where(r => r.UserUpload == userLogin || r.UserRequest == userLogin).ToList();
+                var lsDocUserUpload = db.dt207_Base.Where(r => r.UserUpload == userLogin || r.UserProcess == userLogin).ToList();
                 var lsIdDocUserUpload = lsDocUserUpload.Select(r => r.Id).ToList();
 
                 // Join group với GroupUser để lấy Prioritize
@@ -146,17 +146,17 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             // Chọn các thuộc tính cụ thể để điền vào các đối tượng DataDisplay
             var lsDataDisplays = (from data in lsKnowledgeBase
                                   join userUpload_ in lsUsers on data.UserUpload equals userUpload_.Id
-                                  join userRequest_ in lsUsers on data.UserRequest equals userRequest_.Id
+                                  join userProcess_ in lsUsers on data.UserProcess equals userProcess_.Id
                                   join type_ in lsKnowledgeTypes on data.IdTypes equals type_.Id
                                   select new DataDisplay
                                   {
                                       Id = data.Id,
                                       DisplayName = data.DisplayName,
-                                      UserRequest = data.UserRequest,
-                                      UserRequestName = userRequest_.DisplayName,
+                                      UserUpload = data.UserUpload,
+                                      UserUploadName = userUpload_.DisplayName,
                                       TypeName = type_.DisplayName,
                                       Keyword = IsSimple ? null : data.Keyword,
-                                      UserUploadName = userUpload_.DisplayName,
+                                      UserProcessName = userProcess_.DisplayName,
                                       UploadDate = data.UploadDate
                                   })
                                   .ToList();
