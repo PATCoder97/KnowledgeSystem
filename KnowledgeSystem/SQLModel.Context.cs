@@ -9,6 +9,7 @@
 
 namespace KnowledgeSystem
 {
+    using KnowledgeSystem.Configs;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
@@ -16,7 +17,7 @@ namespace KnowledgeSystem
     public partial class DBDocumentManagementSystemEntities : DbContext
     {
         public DBDocumentManagementSystemEntities()
-            : base("name=DBDocumentManagementSystemEntities")
+           : base(SingleConnection.ConString)
         {
         }
     

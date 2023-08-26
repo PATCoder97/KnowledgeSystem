@@ -30,9 +30,20 @@ namespace KnowledgeSystem.Configs
 
         public static string Connect()
         {
+            //SqlConnectionStringBuilder sqlString = new SqlConnectionStringBuilder()
+            //{
+            //    DataSource = ".\\ANHTUAN", // Server name
+            //    InitialCatalog = "DBDocumentManagementSystem",  //Database
+            //    UserID = "PAT",         //Username
+            //    Password = "Anhtuan312",  //Password,
+            //    MultipleActiveResultSets = true,
+            //    ApplicationName = "EntityFramework",
+
+            //};
+
             SqlConnectionStringBuilder sqlString = new SqlConnectionStringBuilder()
             {
-                DataSource = ".\\ANHTUAN", // Server name
+                DataSource = "10.198.138.103", // Server name
                 InitialCatalog = "DBDocumentManagementSystem",  //Database
                 UserID = "PAT",         //Username
                 Password = "Anhtuan312",  //Password,
@@ -40,6 +51,7 @@ namespace KnowledgeSystem.Configs
                 ApplicationName = "EntityFramework",
 
             };
+
             //Build an Entity Framework connection string
             EntityConnectionStringBuilder entityString = new EntityConnectionStringBuilder()
             {
