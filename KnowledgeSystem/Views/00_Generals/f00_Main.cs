@@ -1,4 +1,6 @@
-﻿using DevExpress.XtraEditors;
+﻿using DevExpress.XtraBars.Docking2010.Customization;
+using DevExpress.XtraBars.Docking2010.Views.WindowsUI;
+using DevExpress.XtraEditors;
 using KnowledgeSystem.Configs;
 using System;
 using System.Drawing;
@@ -80,6 +82,34 @@ namespace KnowledgeSystem.Views._00_Generals
             }
         }
 
+        private void ChangePassword()
+        {
+            uc00_ChangePassword uc00_ChangePass = new uc00_ChangePassword();
+
+            var dlg = VBFlyoutDialog.ShowFormPopup(this, null, uc00_ChangePass);
+            if (dlg != DialogResult.OK)
+            {
+                return;
+            }
+
+            string newPassword = uc00_ChangePass.NewPassword;
+            if (string.IsNullOrEmpty(newPassword))
+            {
+                XtraMessageBox.Show("舊密碼不正確或兩個新密碼不匹配！", TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            using (var db = new DBDocumentManagementSystemEntities())
+            {
+                var userUpdate = db.Users.First(r => r.Id == TempDatas.LoginId);
+                userUpdate.SecondaryPassword = newPassword;
+
+                db.SaveChanges();
+            }
+
+            XtraMessageBox.Show("您的密碼已更新！", TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
         private void fMain_Load(object sender, EventArgs e)
         {
             Text = TempDatas.SoftNameTW;
@@ -136,7 +166,43 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void tileInfoUser_ItemClick(object sender, TileItemEventArgs e)
         {
-            GetUserLogin();
+            uc00_UserControl uc00_User = new uc00_UserControl();
+
+            var dlg = VBFlyoutDialog.ShowFormPopup(this, null, uc00_User);
+            if (dlg != DialogResult.OK)
+            {
+                return;
+            }
+
+            UserComtrolE eventControl = uc00_User.EventControl;
+            switch (eventControl)
+            {
+                case UserComtrolE.ChangePass:
+                    ChangePassword();
+                    break;
+                case UserComtrolE.LogOut:
+                    GetUserLogin();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public class VBFlyoutDialog : FlyoutDialog
+        {
+            public VBFlyoutDialog(Form form, FlyoutAction action, Control userControl) : base(form, action)
+            {
+                Properties.HeaderOffset = 0;
+                Properties.Alignment = ContentAlignment.MiddleCenter;
+                Properties.Style = FlyoutStyle.Popup;
+                FlyoutControl = userControl;
+            }
+
+            public static DialogResult ShowFormPopup(Form form, FlyoutAction action, Control userControl)
+            {
+                var vbFlyout = new VBFlyoutDialog(form, action, userControl);
+                return vbFlyout.ShowDialog();
+            }
         }
     }
 }

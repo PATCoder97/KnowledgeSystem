@@ -170,6 +170,18 @@
     <Compile Include="Views\00_Generals\f00_Main.Designer.cs">
       <DependentUpon>f00_Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\00_Generals\uc00_ChangePassword.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\00_Generals\uc00_ChangePassword.Designer.cs">
+      <DependentUpon>uc00_ChangePassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\00_Generals\uc00_UserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\00_Generals\uc00_UserControl.Designer.cs">
+      <DependentUpon>uc00_UserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_ChartStatistics.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -318,6 +330,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\00_Generals\f00_Main.resx">
       <DependentUpon>f00_Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\00_Generals\uc00_ChangePassword.resx">
+      <DependentUpon>uc00_ChangePassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\00_Generals\uc00_UserControl.resx">
+      <DependentUpon>uc00_UserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_ChartStatistics.resx">
       <DependentUpon>f207_ChartStatistics.cs</DependentUpon>
