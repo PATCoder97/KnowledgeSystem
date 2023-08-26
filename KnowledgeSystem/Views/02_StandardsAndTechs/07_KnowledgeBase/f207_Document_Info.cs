@@ -709,9 +709,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             string documentsFile = Path.Combine(TempDatas.PathKnowledgeFile, dataRow.EncryptionName);
 
             // Lưu lại lịch sử xem file
-            if (!string.IsNullOrEmpty(idDocument))
+            using (var db = new DBDocumentManagementSystemEntities())
             {
-                using (var db = new DBDocumentManagementSystemEntities())
+                var IsProcessing = db.dt207_DocProgress.Any(r => r.IdKnowledgeBase == idDocument && !r.IsComplete);
+
+                if (!string.IsNullOrEmpty(idDocument) && !IsProcessing)
                 {
                     dt207_HistoryGetFile historyGetFile = new dt207_HistoryGetFile()
                     {

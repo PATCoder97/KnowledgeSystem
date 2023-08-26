@@ -66,17 +66,21 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                dt207_HistoryGetFile historyGetFile = new dt207_HistoryGetFile()
+                var IsProcessing = db.dt207_DocProgress.Any(r => r.IdKnowledgeBase == idKnowledgeBase && !r.IsComplete);
+                if (!IsProcessing)
                 {
-                    IdKnowledgeBase = idKnowledgeBase,
-                    idTypeHisGetFile = 3,
-                    KnowledgeAttachmentName = Text,
-                    IdUser = TempDatas.LoginId,
-                    TimeGet = DateTime.Now
-                };
+                    dt207_HistoryGetFile historyGetFile = new dt207_HistoryGetFile()
+                    {
+                        IdKnowledgeBase = idKnowledgeBase,
+                        idTypeHisGetFile = 3,
+                        KnowledgeAttachmentName = Text,
+                        IdUser = TempDatas.LoginId,
+                        TimeGet = DateTime.Now
+                    };
 
-                db.dt207_HistoryGetFile.Add(historyGetFile);
-                db.SaveChanges();
+                    db.dt207_HistoryGetFile.Add(historyGetFile);
+                    db.SaveChanges();
+                }
             }
 
             XtraMessageBox.Show("列印文件成功！", TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -97,23 +101,28 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             saveFileDialog1.FilterIndex = 1;
             saveFileDialog1.RestoreDirectory = true;
             saveFileDialog1.FileName = $"{DateTime.Now:yyyyMMddHHmmss}-{Text}";
+
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 File.Copy(documentFile, saveFileDialog1.FileName, true);
 
                 using (var db = new DBDocumentManagementSystemEntities())
                 {
-                    dt207_HistoryGetFile historyGetFile = new dt207_HistoryGetFile()
+                    var IsProcessing = db.dt207_DocProgress.Any(r => r.IdKnowledgeBase == idKnowledgeBase && !r.IsComplete);
+                    if (!IsProcessing)
                     {
-                        IdKnowledgeBase = idKnowledgeBase,
-                        idTypeHisGetFile = 2,
-                        KnowledgeAttachmentName = Text,
-                        IdUser = TempDatas.LoginId,
-                        TimeGet = DateTime.Now
-                    };
+                        dt207_HistoryGetFile historyGetFile = new dt207_HistoryGetFile()
+                        {
+                            IdKnowledgeBase = idKnowledgeBase,
+                            idTypeHisGetFile = 2,
+                            KnowledgeAttachmentName = Text,
+                            IdUser = TempDatas.LoginId,
+                            TimeGet = DateTime.Now
+                        };
 
-                    db.dt207_HistoryGetFile.Add(historyGetFile);
-                    db.SaveChanges();
+                        db.dt207_HistoryGetFile.Add(historyGetFile);
+                        db.SaveChanges();
+                    }
                 }
 
                 XtraMessageBox.Show("下載文件成功！", TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
