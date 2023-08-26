@@ -1,5 +1,6 @@
 ﻿using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
+using KnowledgeSystem.Configs;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static DevExpress.XtraEditors.Mask.MaskSettings;
 
 namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
 {
@@ -60,6 +62,22 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
         {
             get { return string.IsNullOrEmpty(cbbRole.EditValue.ToString()) ? 0 : Convert.ToInt16(cbbRole.EditValue); }
             set { IdRole = value; }
+        }
+
+        private void txbId_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            if (TempDatas.DomainComputer == DomainVNFPG.domainName)
+            {
+                string userID = txbId.Text.Trim().ToUpper();
+                string userNameByDomain = DomainVNFPG.Instance.GetAccountName(userID);
+
+                string[] displayNameFHS = userNameByDomain.Split('/');
+                string idDeptFHS = displayNameFHS[0].Replace("LG", string.Empty);
+                string userNameFHS = displayNameFHS[1];
+
+                txbDisplayName.Text = userNameFHS;
+                cbbDept.EditValue = idDeptFHS;
+            }
         }
     }
 }

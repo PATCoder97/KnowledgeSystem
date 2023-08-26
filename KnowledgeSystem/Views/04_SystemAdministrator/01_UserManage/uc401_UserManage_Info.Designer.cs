@@ -31,6 +31,8 @@
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.txbDisplayName = new DevExpress.XtraEditors.TextEdit();
             this.txbId = new DevExpress.XtraEditors.ButtonEdit();
+            this.cbbRole = new DevExpress.XtraEditors.LookUpEdit();
+            this.cbbDept = new DevExpress.XtraEditors.LookUpEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -44,12 +46,12 @@
             this.txbStandard2 = new DevExpress.XtraEditors.ComboBoxEdit();
             this.Root2 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem32 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.cbbRole = new DevExpress.XtraEditors.LookUpEdit();
-            this.cbbDept = new DevExpress.XtraEditors.LookUpEdit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txbDisplayName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbId.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbRole.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbDept.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
@@ -65,8 +67,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txbStandard2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem32)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbbRole.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbbDept.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -115,6 +115,66 @@
             this.txbId.Size = new System.Drawing.Size(175, 28);
             this.txbId.StyleController = this.layoutControl1;
             this.txbId.TabIndex = 4;
+            this.txbId.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txbId_ButtonClick);
+            // 
+            // cbbRole
+            // 
+            this.SetBoundFieldName(this.cbbRole, "IdRole");
+            this.SetBoundPropertyName(this.cbbRole, "EditValue");
+            this.cbbRole.EditValue = "";
+            this.cbbRole.Location = new System.Drawing.Point(718, 4);
+            this.cbbRole.Name = "cbbRole";
+            this.cbbRole.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbRole.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.cbbRole.Properties.Appearance.Options.UseFont = true;
+            this.cbbRole.Properties.Appearance.Options.UseForeColor = true;
+            this.cbbRole.Properties.AppearanceDropDown.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.cbbRole.Properties.AppearanceDropDown.Options.UseFont = true;
+            this.cbbRole.Properties.AppearanceDropDownHeader.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbRole.Properties.AppearanceDropDownHeader.ForeColor = System.Drawing.Color.Black;
+            this.cbbRole.Properties.AppearanceDropDownHeader.Options.UseFont = true;
+            this.cbbRole.Properties.AppearanceDropDownHeader.Options.UseForeColor = true;
+            this.cbbRole.Properties.AppearanceDropDownHeader.Options.UseTextOptions = true;
+            this.cbbRole.Properties.AppearanceDropDownHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.cbbRole.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbbRole.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("DisplayName", "名稱"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Describe", "說明")});
+            this.cbbRole.Properties.NullText = "";
+            this.cbbRole.Properties.PopupSizeable = false;
+            this.cbbRole.Size = new System.Drawing.Size(176, 28);
+            this.cbbRole.StyleController = this.layoutControl1;
+            this.cbbRole.TabIndex = 6;
+            // 
+            // cbbDept
+            // 
+            this.SetBoundFieldName(this.cbbDept, "IdDepartment");
+            this.SetBoundPropertyName(this.cbbDept, "EditValue");
+            this.cbbDept.Location = new System.Drawing.Point(495, 4);
+            this.cbbDept.Name = "cbbDept";
+            this.cbbDept.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbDept.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.cbbDept.Properties.Appearance.Options.UseFont = true;
+            this.cbbDept.Properties.Appearance.Options.UseForeColor = true;
+            this.cbbDept.Properties.AppearanceDropDown.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbDept.Properties.AppearanceDropDown.Options.UseFont = true;
+            this.cbbDept.Properties.AppearanceDropDownHeader.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbDept.Properties.AppearanceDropDownHeader.ForeColor = System.Drawing.Color.Black;
+            this.cbbDept.Properties.AppearanceDropDownHeader.Options.UseFont = true;
+            this.cbbDept.Properties.AppearanceDropDownHeader.Options.UseForeColor = true;
+            this.cbbDept.Properties.AppearanceDropDownHeader.Options.UseTextOptions = true;
+            this.cbbDept.Properties.AppearanceDropDownHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.cbbDept.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbbDept.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Id", "編號", 40, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Default, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("DisplayName", "名稱", 60, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Default, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default)});
+            this.cbbDept.Properties.NullText = "";
+            this.cbbDept.Properties.PopupSizeable = false;
+            this.cbbDept.Size = new System.Drawing.Size(175, 28);
+            this.cbbDept.StyleController = this.layoutControl1;
+            this.cbbDept.TabIndex = 4;
             // 
             // Root
             // 
@@ -300,65 +360,6 @@
             this.layoutControlItem32.Text = "類別";
             this.layoutControlItem32.TextSize = new System.Drawing.Size(32, 16);
             // 
-            // cbbRole
-            // 
-            this.SetBoundFieldName(this.cbbRole, "IdRole");
-            this.SetBoundPropertyName(this.cbbRole, "EditValue");
-            this.cbbRole.EditValue = "";
-            this.cbbRole.Location = new System.Drawing.Point(718, 4);
-            this.cbbRole.Name = "cbbRole";
-            this.cbbRole.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbbRole.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.cbbRole.Properties.Appearance.Options.UseFont = true;
-            this.cbbRole.Properties.Appearance.Options.UseForeColor = true;
-            this.cbbRole.Properties.AppearanceDropDown.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
-            this.cbbRole.Properties.AppearanceDropDown.Options.UseFont = true;
-            this.cbbRole.Properties.AppearanceDropDownHeader.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbbRole.Properties.AppearanceDropDownHeader.ForeColor = System.Drawing.Color.Black;
-            this.cbbRole.Properties.AppearanceDropDownHeader.Options.UseFont = true;
-            this.cbbRole.Properties.AppearanceDropDownHeader.Options.UseForeColor = true;
-            this.cbbRole.Properties.AppearanceDropDownHeader.Options.UseTextOptions = true;
-            this.cbbRole.Properties.AppearanceDropDownHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.cbbRole.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbbRole.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("DisplayName", "名稱"),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Describe", "說明")});
-            this.cbbRole.Properties.NullText = "";
-            this.cbbRole.Properties.PopupSizeable = false;
-            this.cbbRole.Size = new System.Drawing.Size(176, 28);
-            this.cbbRole.StyleController = this.layoutControl1;
-            this.cbbRole.TabIndex = 6;
-            // 
-            // cbbDept
-            // 
-            this.SetBoundFieldName(this.cbbDept, "IdDepartment");
-            this.SetBoundPropertyName(this.cbbDept, "EditValue");
-            this.cbbDept.Location = new System.Drawing.Point(495, 4);
-            this.cbbDept.Name = "cbbDept";
-            this.cbbDept.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbbDept.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.cbbDept.Properties.Appearance.Options.UseFont = true;
-            this.cbbDept.Properties.Appearance.Options.UseForeColor = true;
-            this.cbbDept.Properties.AppearanceDropDown.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbbDept.Properties.AppearanceDropDown.Options.UseFont = true;
-            this.cbbDept.Properties.AppearanceDropDownHeader.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbbDept.Properties.AppearanceDropDownHeader.ForeColor = System.Drawing.Color.Black;
-            this.cbbDept.Properties.AppearanceDropDownHeader.Options.UseFont = true;
-            this.cbbDept.Properties.AppearanceDropDownHeader.Options.UseForeColor = true;
-            this.cbbDept.Properties.AppearanceDropDownHeader.Options.UseTextOptions = true;
-            this.cbbDept.Properties.AppearanceDropDownHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.cbbDept.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbbDept.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Id", "編號", 40, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Default, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("DisplayName", "名稱", 60, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Default, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default)});
-            this.cbbDept.Properties.NullText = "";
-            this.cbbDept.Properties.PopupSizeable = false;
-            this.cbbDept.Size = new System.Drawing.Size(175, 28);
-            this.cbbDept.StyleController = this.layoutControl1;
-            this.cbbDept.TabIndex = 4;
-            // 
             // uc401_UserManage_Info
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -370,6 +371,8 @@
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.txbDisplayName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbId.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbRole.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbDept.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
@@ -385,8 +388,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txbStandard2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem32)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbbRole.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbbDept.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
