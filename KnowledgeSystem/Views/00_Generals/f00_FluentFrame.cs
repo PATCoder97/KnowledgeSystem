@@ -15,6 +15,7 @@ using KnowledgeSystem.Configs;
 using System.Reflection;
 using DevExpress.XtraBars.Navigation;
 using KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase;
+using System.IO;
 
 namespace KnowledgeSystem.Views._00_Generals
 {
@@ -85,7 +86,8 @@ namespace KnowledgeSystem.Views._00_Generals
                 {
                     AccordionControlElement accordion = new AccordionControlElement();
 
-                    accordion.ImageOptions.SvgImage = item.Images != null ? DevExpress.Utils.Svg.SvgImage.FromFile($@"Images\{item.Images}") : null;
+                    string pathImage = Path.Combine(Application.StartupPath, $@"Images\{item.Images}");
+                    accordion.ImageOptions.SvgImage = item.Images != null ? DevExpress.Utils.Svg.SvgImage.FromFile(pathImage) : null;
                     accordion.Name = $"name_{item.ControlName}";
                     accordion.Text = item.DisplayName;
                     accordion.Appearance.Default.Font = fontTW14;

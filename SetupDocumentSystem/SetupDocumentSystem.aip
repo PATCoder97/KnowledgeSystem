@@ -133,6 +133,7 @@
     <ROW Property="ARPCOMMENTS" Value="This installer database contains the logic and data required to install [|ProductName]." ValueLocId="*"/>
     <ROW Property="ARPCONTACT" Value="VNW0014732 潘英俊"/>
     <ROW Property="ARPHELPTELEPHONE" Value="6779"/>
+    <ROW Property="ARPPRODUCTICON" Value="DocumentSystem.exe" Type="8"/>
     <ROW Property="Manufacturer" Value="FHS"/>
     <ROW Property="ProductCode" Value="1028:{4F0816B2-93AD-4336-A3FF-99120ECA63FF} 1033:{4F0816B2-93AD-4336-A3FF-99120ECA63FF} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
@@ -385,6 +386,9 @@
     <ROW Feature_="MainFeature" Component_="KnowledgeSystem_References"/>
     <ROW Feature_="MainFeature" Component_="KnowledgeSystem_ContentOutput_Images"/>
     <ROW Feature_="MainFeature" Component_="KnowledgeSystem_SymbolsOutput"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiIconsComponent">
+    <ROW Name="DocumentSystem.exe" SourcePath="..\..\..\02. Images\DocumentSystem.ico" Index="0"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiInstExSeqComponent">
     <ROW Action="AI_DOWNGRADE" Condition="AI_NEWERPRODUCTFOUND AND (UILevel &lt;&gt; 5)" Sequence="210"/>
