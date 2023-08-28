@@ -84,6 +84,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(998, 470);
             this.Controls.Add(this.layoutControl1);
+            this.IconOptions.Image = global::KnowledgeSystem.Properties.Resources.DocumentSystem;
             this.Name = "f207_ChartStatistics";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "f207_ChartStatistics";

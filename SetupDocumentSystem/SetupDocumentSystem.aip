@@ -131,6 +131,8 @@
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_none.svg" Value="none.svg"/>
     <ROW Property="ALLUSERS" Value="1"/>
     <ROW Property="ARPCOMMENTS" Value="This installer database contains the logic and data required to install [|ProductName]." ValueLocId="*"/>
+    <ROW Property="ARPCONTACT" Value="VNW0014732 潘英俊"/>
+    <ROW Property="ARPHELPTELEPHONE" Value="6779"/>
     <ROW Property="Manufacturer" Value="FHS"/>
     <ROW Property="ProductCode" Value="1028:{4F0816B2-93AD-4336-A3FF-99120ECA63FF} 1033:{4F0816B2-93AD-4336-A3FF-99120ECA63FF} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
@@ -149,9 +151,11 @@
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiDirsComponent">
     <ROW Directory="APPDIR" Directory_Parent="TARGETDIR" DefaultDir="APPDIR:." IsPseudoRoot="1"/>
+    <ROW Directory="DesktopFolder" Directory_Parent="TARGETDIR" DefaultDir="DESKTO~1|DesktopFolder" IsPseudoRoot="1"/>
     <ROW Directory="Images_Dir" Directory_Parent="KnowledgeSystem_Dir" DefaultDir="Images"/>
     <ROW Directory="KnowledgeSystem_Dir" Directory_Parent="APPDIR" DefaultDir="KNOWLE~1|KnowledgeSystem"/>
     <ROW Directory="SHORTCUTDIR" Directory_Parent="TARGETDIR" DefaultDir="SHORTC~1|SHORTCUTDIR" IsPseudoRoot="1"/>
+    <ROW Directory="StartMenuFolder" Directory_Parent="TARGETDIR" DefaultDir="STARTM~1|StartMenuFolder" IsPseudoRoot="1"/>
     <ROW Directory="TARGETDIR" DefaultDir="SourceDir"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
@@ -414,6 +418,8 @@
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiShortsComponent">
     <ROW Shortcut="KnowledgeSystem" Directory_="SHORTCUTDIR" Name="冶金文件管理系統" Component_="KnowledgeSystem_PrimaryOutput" Target="[#KnowledgeSystem.exe]" Hotkey="0" IconIndex="0" ShowCmd="1" CustomFlags="1"/>
+    <ROW Shortcut="_" Directory_="DesktopFolder" Name="冶金文件管理系統" Component_="KnowledgeSystem_PrimaryOutput" Target="[#KnowledgeSystem.exe]" Hotkey="0" IconIndex="0" ShowCmd="1" CustomFlags="1"/>
+    <ROW Shortcut="__1" Directory_="StartMenuFolder" Name="冶金文件管理系統" Component_="KnowledgeSystem_PrimaryOutput" Target="[#KnowledgeSystem.exe]" Hotkey="0" IconIndex="0" ShowCmd="1" CustomFlags="1"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiThemeComponent">
     <ATTRIBUTE name="UsedTheme" value="classic"/>

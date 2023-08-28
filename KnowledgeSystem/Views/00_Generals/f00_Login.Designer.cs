@@ -295,7 +295,7 @@
             this.lbVersion.Text = "Version: 0.0.0";
             this.lbVersion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // fLogin
+            // f00_Login
             // 
             this.AcceptButton = this.btnLogin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -309,8 +309,9 @@
             this.Controls.Add(this.layoutControl1);
             this.FormBorderEffect = DevExpress.XtraEditors.FormBorderEffect.Shadow;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.IconOptions.Image = global::KnowledgeSystem.Properties.Resources.DocumentSystem;
             this.MaximumSize = new System.Drawing.Size(750, 450);
-            this.Name = "fLogin";
+            this.Name = "f00_Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Đăng nhập";
             this.Load += new System.EventHandler(this.fLogin_Load);

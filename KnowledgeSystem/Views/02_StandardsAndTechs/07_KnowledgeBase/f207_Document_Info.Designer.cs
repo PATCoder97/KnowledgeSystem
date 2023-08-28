@@ -915,10 +915,10 @@
             this.cbbType.StyleController = this.layoutControl1;
             this.cbbType.TabIndex = 13;
             // 
-            // cbbUserUpload
+            // cbbUserProcess
             // 
             this.cbbUserProcess.Location = new System.Drawing.Point(631, 174);
-            this.cbbUserProcess.Name = "cbbUserUpload";
+            this.cbbUserProcess.Name = "cbbUserProcess";
             this.cbbUserProcess.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbbUserProcess.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.cbbUserProcess.Properties.Appearance.Options.UseFont = true;
@@ -934,11 +934,11 @@
             this.cbbUserProcess.StyleController = this.layoutControl1;
             this.cbbUserProcess.TabIndex = 8;
             // 
-            // cbbUserRequest
+            // cbbUserUpload
             // 
             this.cbbUserUpload.EditValue = "";
             this.cbbUserUpload.Location = new System.Drawing.Point(116, 174);
-            this.cbbUserUpload.Name = "cbbUserRequest";
+            this.cbbUserUpload.Name = "cbbUserUpload";
             this.cbbUserUpload.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbbUserUpload.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.cbbUserUpload.Properties.Appearance.Options.UseFont = true;
@@ -1270,6 +1270,7 @@
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.IconOptions.Image = global::KnowledgeSystem.Properties.Resources.DocumentSystem;
             this.Name = "f207_Document_Info";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "文件信息";
