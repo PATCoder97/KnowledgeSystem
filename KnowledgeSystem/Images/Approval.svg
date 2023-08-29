@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="32" height="32">
+  <path fill="#546e7a" d="M35.637,16.507l11.42,4.329l-4.086,13.861L10.668,22.542l5.91-13.187l11.566,4.383" />
+  <path fill="#37474f" d="M11.144,26.864l28.656,10.807l3.172-2.974L10.668,22.542L11.144,26.864z" />
+  <path fill="#f4511e" d="M28.823,23.2c-1.876-0.693-3.405-2.325-3.059-3.263l2.427-6.566c0.693-1.876-0.15-5.365,0.551-7.259c1.337-3.617,4.234-4.833,7.708-3.548" />
+  <path fill="#f4511e" d="M28.823,23.2c1.876,0.693,4.099,0.449,4.445-0.489l2.427-6.566c0.693-1.876,3.602-3.978,4.303-5.873c1.337-3.617-0.074-6.424-3.548-7.708" />
+  <rect width="2" height="2" x="5" y="30" fill="#7e57c2" />
+  <rect width="2" height="2" x="5" y="34" fill="#7e57c2" />
+  <rect width="2" height="2" x="5" y="38" fill="#7e57c2" />
+  <rect width="2" height="2" x="5" y="42" fill="#7e57c2" />
+  <rect width="2" height="2" x="9" y="42" fill="#7e57c2" />
+  <rect width="2" height="2" x="13" y="42" fill="#7e57c2" />
+  <rect width="2" height="2" x="17" y="42" fill="#7e57c2" />
+  <rect width="2" height="2" x="21" y="42" fill="#7e57c2" />
+  <rect width="2" height="2" x="25" y="42" fill="#7e57c2" />
+  <rect width="2" height="2" x="29" y="42" fill="#7e57c2" />
+  <rect width="2" height="2" x="33" y="42" fill="#7e57c2" />
+  <rect width="2" height="2" x="33" y="38" fill="#7e57c2" />
+  <rect width="2" height="2" x="9" y="30" fill="#7e57c2" />
+  <rect width="2" height="2" x="13" y="30" fill="#7e57c2" />
+</svg>
