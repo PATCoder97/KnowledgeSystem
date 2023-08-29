@@ -108,18 +108,18 @@
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.groupProgress = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.lcgProgress = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem14 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.lcgFiles = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.lcgSercurity = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
-            this.layoutControlGroup5 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.lcgHistoryEdit = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcProgress = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
@@ -155,18 +155,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupProgress)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcgProgress)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem14)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcgFiles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcgSercurity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcgHistoryEdit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcProgress)).BeginInit();
             this.SuspendLayout();
@@ -985,14 +985,14 @@
             this.controlgroupDocument.AppearanceTabPage.HeaderActive.Options.UseForeColor = true;
             this.controlgroupDocument.Location = new System.Drawing.Point(0, 23);
             this.controlgroupDocument.Name = "controlgroupDocument";
-            this.controlgroupDocument.SelectedTabPage = this.lcgInfo;
+            this.controlgroupDocument.SelectedTabPage = this.lcgProgress;
             this.controlgroupDocument.Size = new System.Drawing.Size(1056, 391);
             this.controlgroupDocument.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.groupProgress,
+            this.lcgProgress,
             this.lcgInfo,
-            this.layoutControlGroup2,
-            this.layoutControlGroup3,
-            this.layoutControlGroup5});
+            this.lcgFiles,
+            this.lcgSercurity,
+            this.lcgHistoryEdit});
             this.controlgroupDocument.Text = "信息";
             // 
             // lcgInfo
@@ -1107,15 +1107,15 @@
             this.layoutControlItem4.Text = "關鍵字";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(80, 19);
             // 
-            // groupProgress
+            // lcgProgress
             // 
-            this.groupProgress.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.lcgProgress.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem14,
             this.layoutControlItem15});
-            this.groupProgress.Location = new System.Drawing.Point(0, 0);
-            this.groupProgress.Name = "groupProgress";
-            this.groupProgress.Size = new System.Drawing.Size(1032, 340);
-            this.groupProgress.Text = "核簽流程";
+            this.lcgProgress.Location = new System.Drawing.Point(0, 0);
+            this.lcgProgress.Name = "lcgProgress";
+            this.lcgProgress.Size = new System.Drawing.Size(1032, 340);
+            this.lcgProgress.Text = "核簽流程";
             // 
             // layoutControlItem14
             // 
@@ -1135,16 +1135,16 @@
             this.layoutControlItem15.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem15.TextVisible = false;
             // 
-            // layoutControlGroup2
+            // lcgFiles
             // 
-            this.layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.lcgFiles.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem6,
             this.layoutControlItem8,
             this.layoutControlItem11});
-            this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlGroup2.Name = "layoutControlGroup2";
-            this.layoutControlGroup2.Size = new System.Drawing.Size(1032, 340);
-            this.layoutControlGroup2.Text = "附件";
+            this.lcgFiles.Location = new System.Drawing.Point(0, 0);
+            this.lcgFiles.Name = "lcgFiles";
+            this.lcgFiles.Size = new System.Drawing.Size(1032, 340);
+            this.lcgFiles.Text = "附件";
             // 
             // layoutControlItem6
             // 
@@ -1183,16 +1183,16 @@
             this.layoutControlItem11.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem11.TextVisible = false;
             // 
-            // layoutControlGroup3
+            // lcgSercurity
             // 
-            this.layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.lcgSercurity.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem7,
             this.layoutControlItem12,
             this.emptySpaceItem3});
-            this.layoutControlGroup3.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlGroup3.Name = "layoutControlGroup3";
-            this.layoutControlGroup3.Size = new System.Drawing.Size(1032, 340);
-            this.layoutControlGroup3.Text = "密等";
+            this.lcgSercurity.Location = new System.Drawing.Point(0, 0);
+            this.lcgSercurity.Name = "lcgSercurity";
+            this.lcgSercurity.Size = new System.Drawing.Size(1032, 340);
+            this.lcgSercurity.Text = "密等";
             // 
             // layoutControlItem7
             // 
@@ -1230,14 +1230,14 @@
             this.emptySpaceItem3.Size = new System.Drawing.Size(924, 41);
             this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
             // 
-            // layoutControlGroup5
+            // lcgHistoryEdit
             // 
-            this.layoutControlGroup5.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.lcgHistoryEdit.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem9});
-            this.layoutControlGroup5.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlGroup5.Name = "layoutControlGroup5";
-            this.layoutControlGroup5.Size = new System.Drawing.Size(1032, 340);
-            this.layoutControlGroup5.Text = "變更歷史";
+            this.lcgHistoryEdit.Location = new System.Drawing.Point(0, 0);
+            this.lcgHistoryEdit.Name = "lcgHistoryEdit";
+            this.lcgHistoryEdit.Size = new System.Drawing.Size(1032, 340);
+            this.lcgHistoryEdit.Text = "變更歷史";
             // 
             // layoutControlItem9
             // 
@@ -1309,18 +1309,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupProgress)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcgProgress)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem14)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcgFiles)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcgSercurity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcgHistoryEdit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcProgress)).EndInit();
             this.ResumeLayout(false);
@@ -1355,11 +1355,11 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
-        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup2;
+        private DevExpress.XtraLayout.LayoutControlGroup lcgFiles;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem11;
-        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup3;
+        private DevExpress.XtraLayout.LayoutControlGroup lcgSercurity;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridView bgvSecurity;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn1;
@@ -1387,7 +1387,7 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnDelFile;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gColDelPermission;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnDelPermission;
-        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup5;
+        private DevExpress.XtraLayout.LayoutControlGroup lcgHistoryEdit;
         private DevExpress.XtraGrid.GridControl gcEditHistory;
         private DevExpress.XtraGrid.Views.Grid.GridView gvEditHistory;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
@@ -1403,7 +1403,7 @@
         private DevExpress.XtraGrid.GridControl gcHistoryProcess;
         private DevExpress.XtraGrid.Views.Grid.GridView gvHistoryProcess;
         private DevExpress.XtraEditors.StepProgressBar stepProgressDoc;
-        private DevExpress.XtraLayout.LayoutControlGroup groupProgress;
+        private DevExpress.XtraLayout.LayoutControlGroup lcgProgress;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem14;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem15;
         private DevExpress.XtraBars.BarButtonItem btnApproved;

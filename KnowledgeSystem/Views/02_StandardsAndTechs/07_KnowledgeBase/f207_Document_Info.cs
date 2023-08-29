@@ -81,6 +81,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private class Securityinfo : dt207_Security
         {
+            public string IdDept { get; set; }
             public string IdGroupOrUser { get; set; }
             public string DisplayName { get; set; }
         }
@@ -215,7 +216,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void f207_DocumentInfo_Load(object sender, EventArgs e)
         {
-            groupProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            lcgProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            lcgHistoryEdit.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             controlgroupDocument.SelectedTabPage = lcgInfo;
 
             // Initialize RefreshHelper
@@ -238,7 +240,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 progressSelect = db.dm_Progress.FirstOrDefault();
 
                 // Create lists of Securityinfo objects from lsUsers and lsGroups
-                var lsIdUsers = lsUsers.Select(r => new Securityinfo { IdGroupOrUser = r.Id, DisplayName = r.DisplayName }).ToList();
+                var lsIdUsers = lsUsers.Select(r => new Securityinfo { IdDept = r.IdDepartment, IdGroupOrUser = r.Id, DisplayName = r.DisplayName }).ToList();
                 var lsIdGroup = lsGroups.Select(r => new Securityinfo { IdGroupOrUser = r.Id.ToString(), DisplayName = r.DisplayName }).ToList();
                 lsIdGroupOrUser = lsIdGroup.Concat(lsIdUsers).ToList();
 
@@ -248,8 +250,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 rgvGruopOrUser.DisplayMember = "DisplayName";
                 rgvGruopOrUser.PopupView.Columns.AddRange(new[]
                 {
-                    new GridColumn { FieldName = "IdGroupOrUser", VisibleIndex = 0, Caption = "代號" },
-                    new GridColumn { FieldName = "DisplayName", VisibleIndex = 1, Caption = "名稱" }
+                    new GridColumn { FieldName = "IdDept", VisibleIndex = 0, Caption = "部門" },
+                    new GridColumn { FieldName = "IdGroupOrUser", VisibleIndex = 1, Caption = "代號" },
+                    new GridColumn { FieldName = "DisplayName", VisibleIndex = 2, Caption = "名稱" }
                 });
 
                 // Load các datasource vào ComboBoxes
@@ -278,6 +281,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 // Nếu có idDocument, truy xuất dữ liệu từ cơ sở dữ liệu và gán cho các thành phần form
                 if (!string.IsNullOrEmpty(idDocument))
                 {
+                    lcgHistoryEdit.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+
                     // Thông tin cơ bản
                     var dataBaseInfo = db.dt207_Base.FirstOrDefault(r => r.Id == idDocument);
                     txbId.Text = dataBaseInfo.Id;
@@ -346,8 +351,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     var lsDocProcessing = db.dt207_DocProgress.Where(r => !r.IsComplete && r.IdKnowledgeBase == idDocument).ToList();
                     if (lsDocProcessing.Count != 0)
                     {
-                        groupProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
-                        controlgroupDocument.SelectedTabPage = groupProgress;
+                        lcgProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                        controlgroupDocument.SelectedTabPage = lcgProgress;
 
                         int idProgressByDoc = lsDocProcessing.First().IdProgress;
                         idDocProgress = lsDocProcessing.First().Id;

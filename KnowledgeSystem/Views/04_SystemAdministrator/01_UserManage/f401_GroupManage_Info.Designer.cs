@@ -106,14 +106,14 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(1204, 222, 650, 365);
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(755, 476);
+            this.layoutControl1.Size = new System.Drawing.Size(855, 476);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // txbPrioritize
             // 
             this.txbPrioritize.EditValue = "0";
-            this.txbPrioritize.Location = new System.Drawing.Point(308, 12);
+            this.txbPrioritize.Location = new System.Drawing.Point(340, 12);
             this.txbPrioritize.MenuManager = this.barManager1;
             this.txbPrioritize.Name = "txbPrioritize";
             this.txbPrioritize.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -128,7 +128,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.txbPrioritize.Properties.MaskSettings.Set("mask", "N0");
             this.txbPrioritize.Properties.UseMaskAsDisplayFormat = true;
             this.txbPrioritize.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.txbPrioritize.Size = new System.Drawing.Size(50, 28);
+            this.txbPrioritize.Size = new System.Drawing.Size(68, 28);
             this.txbPrioritize.StyleController = this.layoutControl1;
             this.txbPrioritize.TabIndex = 10;
             // 
@@ -216,7 +216,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManager1;
             this.barDockControlTop.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.barDockControlTop.Size = new System.Drawing.Size(755, 49);
+            this.barDockControlTop.Size = new System.Drawing.Size(855, 49);
             // 
             // barDockControlBottom
             // 
@@ -225,7 +225,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.barDockControlBottom.Location = new System.Drawing.Point(0, 525);
             this.barDockControlBottom.Manager = this.barManager1;
             this.barDockControlBottom.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.barDockControlBottom.Size = new System.Drawing.Size(755, 0);
+            this.barDockControlBottom.Size = new System.Drawing.Size(855, 0);
             // 
             // barDockControlLeft
             // 
@@ -240,7 +240,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(755, 49);
+            this.barDockControlRight.Location = new System.Drawing.Point(855, 49);
             this.barDockControlRight.Manager = this.barManager1;
             this.barDockControlRight.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.barDockControlRight.Size = new System.Drawing.Size(0, 476);
@@ -251,7 +251,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.btnAddUser.Appearance.ForeColor = System.Drawing.Color.Black;
             this.btnAddUser.Appearance.Options.UseFont = true;
             this.btnAddUser.Appearance.Options.UseForeColor = true;
-            this.btnAddUser.Location = new System.Drawing.Point(362, 196);
+            this.btnAddUser.Location = new System.Drawing.Point(412, 196);
             this.btnAddUser.Name = "btnAddUser";
             this.btnAddUser.Size = new System.Drawing.Size(31, 36);
             this.btnAddUser.StyleController = this.layoutControl1;
@@ -265,7 +265,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.btnDelUser.Appearance.ForeColor = System.Drawing.Color.Black;
             this.btnDelUser.Appearance.Options.UseFont = true;
             this.btnDelUser.Appearance.Options.UseForeColor = true;
-            this.btnDelUser.Location = new System.Drawing.Point(362, 236);
+            this.btnDelUser.Location = new System.Drawing.Point(412, 236);
             this.btnDelUser.Name = "btnDelUser";
             this.btnDelUser.Size = new System.Drawing.Size(31, 36);
             this.btnDelUser.StyleController = this.layoutControl1;
@@ -276,11 +276,11 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             // gcChoose
             // 
             this.gcChoose.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
-            this.gcChoose.Location = new System.Drawing.Point(397, 52);
+            this.gcChoose.Location = new System.Drawing.Point(447, 52);
             this.gcChoose.MainView = this.gvChoose;
             this.gcChoose.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.gcChoose.Name = "gcChoose";
-            this.gcChoose.Size = new System.Drawing.Size(346, 412);
+            this.gcChoose.Size = new System.Drawing.Size(396, 412);
             this.gcChoose.TabIndex = 7;
             this.gcChoose.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvChoose});
@@ -348,14 +348,14 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             // 
             // txbDescribe
             // 
-            this.txbDescribe.Location = new System.Drawing.Point(469, 12);
+            this.txbDescribe.Location = new System.Drawing.Point(519, 12);
             this.txbDescribe.MenuManager = this.barManager1;
             this.txbDescribe.Name = "txbDescribe";
             this.txbDescribe.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txbDescribe.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbDescribe.Properties.Appearance.Options.UseFont = true;
             this.txbDescribe.Properties.Appearance.Options.UseForeColor = true;
-            this.txbDescribe.Size = new System.Drawing.Size(274, 28);
+            this.txbDescribe.Size = new System.Drawing.Size(324, 28);
             this.txbDescribe.StyleController = this.layoutControl1;
             this.txbDescribe.TabIndex = 6;
             // 
@@ -368,7 +368,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.txbName.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbName.Properties.Appearance.Options.UseFont = true;
             this.txbName.Properties.Appearance.Options.UseForeColor = true;
-            this.txbName.Size = new System.Drawing.Size(148, 28);
+            this.txbName.Size = new System.Drawing.Size(180, 28);
             this.txbName.StyleController = this.layoutControl1;
             this.txbName.TabIndex = 5;
             // 
@@ -379,7 +379,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.gcData.MainView = this.gvData;
             this.gcData.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.gcData.Name = "gcData";
-            this.gcData.Size = new System.Drawing.Size(346, 412);
+            this.gcData.Size = new System.Drawing.Size(396, 412);
             this.gcData.TabIndex = 4;
             this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvData});
@@ -460,18 +460,18 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.layoutControlItem3,
             this.layoutControlItem7});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(755, 476);
+            this.Root.Size = new System.Drawing.Size(855, 476);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.gcData;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 32);
-            this.layoutControlItem1.MaxSize = new System.Drawing.Size(350, 0);
-            this.layoutControlItem1.MinSize = new System.Drawing.Size(350, 24);
+            this.layoutControlItem1.MaxSize = new System.Drawing.Size(400, 0);
+            this.layoutControlItem1.MinSize = new System.Drawing.Size(400, 24);
             this.layoutControlItem1.Name = "layoutControlItem1";
             this.layoutControlItem1.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 10, 2);
-            this.layoutControlItem1.Size = new System.Drawing.Size(350, 424);
+            this.layoutControlItem1.Size = new System.Drawing.Size(400, 424);
             this.layoutControlItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
@@ -485,19 +485,19 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.layoutControlItem2.Control = this.txbName;
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(224, 32);
+            this.layoutControlItem2.Size = new System.Drawing.Size(256, 32);
             this.layoutControlItem2.Text = "名稱";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(60, 19);
             // 
             // layoutControlItem4
             // 
             this.layoutControlItem4.Control = this.gcChoose;
-            this.layoutControlItem4.Location = new System.Drawing.Point(385, 32);
-            this.layoutControlItem4.MaxSize = new System.Drawing.Size(350, 0);
-            this.layoutControlItem4.MinSize = new System.Drawing.Size(350, 24);
+            this.layoutControlItem4.Location = new System.Drawing.Point(435, 32);
+            this.layoutControlItem4.MaxSize = new System.Drawing.Size(400, 0);
+            this.layoutControlItem4.MinSize = new System.Drawing.Size(400, 24);
             this.layoutControlItem4.Name = "layoutControlItem4";
             this.layoutControlItem4.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 10, 2);
-            this.layoutControlItem4.Size = new System.Drawing.Size(350, 424);
+            this.layoutControlItem4.Size = new System.Drawing.Size(400, 424);
             this.layoutControlItem4.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem4.TextVisible = false;
@@ -505,7 +505,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             // layoutControlItem6
             // 
             this.layoutControlItem6.Control = this.btnAddUser;
-            this.layoutControlItem6.Location = new System.Drawing.Point(350, 184);
+            this.layoutControlItem6.Location = new System.Drawing.Point(400, 184);
             this.layoutControlItem6.MaxSize = new System.Drawing.Size(35, 40);
             this.layoutControlItem6.MinSize = new System.Drawing.Size(35, 40);
             this.layoutControlItem6.Name = "layoutControlItem6";
@@ -517,7 +517,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             // layoutControlItem5
             // 
             this.layoutControlItem5.Control = this.btnDelUser;
-            this.layoutControlItem5.Location = new System.Drawing.Point(350, 224);
+            this.layoutControlItem5.Location = new System.Drawing.Point(400, 224);
             this.layoutControlItem5.Name = "layoutControlItem5";
             this.layoutControlItem5.Size = new System.Drawing.Size(35, 40);
             this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
@@ -526,7 +526,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             // emptySpaceItem1
             // 
             this.emptySpaceItem1.AllowHotTrack = false;
-            this.emptySpaceItem1.Location = new System.Drawing.Point(350, 0);
+            this.emptySpaceItem1.Location = new System.Drawing.Point(400, 0);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
             this.emptySpaceItem1.Size = new System.Drawing.Size(35, 184);
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
@@ -534,7 +534,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             // emptySpaceItem2
             // 
             this.emptySpaceItem2.AllowHotTrack = false;
-            this.emptySpaceItem2.Location = new System.Drawing.Point(350, 264);
+            this.emptySpaceItem2.Location = new System.Drawing.Point(400, 264);
             this.emptySpaceItem2.Name = "emptySpaceItem2";
             this.emptySpaceItem2.Size = new System.Drawing.Size(35, 192);
             this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
@@ -546,9 +546,9 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.layoutControlItem3.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem3.AppearanceItemCaption.Options.UseForeColor = true;
             this.layoutControlItem3.Control = this.txbDescribe;
-            this.layoutControlItem3.Location = new System.Drawing.Point(385, 0);
+            this.layoutControlItem3.Location = new System.Drawing.Point(435, 0);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(350, 32);
+            this.layoutControlItem3.Size = new System.Drawing.Size(400, 32);
             this.layoutControlItem3.Text = "說明";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(60, 19);
             // 
@@ -559,9 +559,9 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.layoutControlItem7.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem7.AppearanceItemCaption.Options.UseForeColor = true;
             this.layoutControlItem7.Control = this.txbPrioritize;
-            this.layoutControlItem7.Location = new System.Drawing.Point(224, 0);
+            this.layoutControlItem7.Location = new System.Drawing.Point(256, 0);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(126, 32);
+            this.layoutControlItem7.Size = new System.Drawing.Size(144, 32);
             this.layoutControlItem7.Text = "優先級";
             this.layoutControlItem7.TextSize = new System.Drawing.Size(60, 19);
             // 
@@ -569,7 +569,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(755, 525);
+            this.ClientSize = new System.Drawing.Size(855, 525);
             this.Controls.Add(this.layoutControl1);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
