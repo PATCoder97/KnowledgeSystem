@@ -31,7 +31,7 @@ namespace KnowledgeSystem.Views._00_Generals
         string urlSetupFile = "";
         string pathSetup = "";
 
-        private async void f00_UpdateSoftware_Load(object sender, EventArgs e)
+        private void f00_UpdateSoftware_Load(object sender, EventArgs e)
         {
             string pathDocuments = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             string pathFolderSoft = Path.Combine(pathDocuments, TempDatas.SoftNameEN);
