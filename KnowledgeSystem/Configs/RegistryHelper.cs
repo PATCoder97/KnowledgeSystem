@@ -9,7 +9,8 @@ namespace KnowledgeSystem.Configs
 {
     class RegistryHelper
     {
-        public static string LoginId = "LoginId";
+        public const string LoginId = "LoginId";
+        public const string DefaulLoginId = "VNW0014732";
 
         public static void ClearSettings()
         {

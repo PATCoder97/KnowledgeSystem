@@ -25,7 +25,7 @@ namespace KnowledgeSystem.Views._00_Generals
         {
             lbNameSoft.Text = TempDatas.SoftNameTW;
             lbVersion.Text = $"Version: {AppCopyRight.version}";
-            txbUserID.Text = RegistryHelper.GetSetting(RegistryHelper.LoginId, "VNW0014732").ToString() ?? "";
+            txbUserID.Text = RegistryHelper.GetSetting(RegistryHelper.LoginId, RegistryHelper.DefaulLoginId).ToString() ?? "";
 
             TempDatas.DomainComputer = System.Net.NetworkInformation.IPGlobalProperties.GetIPGlobalProperties().DomainName;
             TempDatas.LoginSuccessful = false;
