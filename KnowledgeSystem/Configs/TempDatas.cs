@@ -10,6 +10,7 @@ namespace KnowledgeSystem.Configs
     {
         public const string SoftNameEN = "Document Management System";
         public const string SoftNameTW = "冶金文件管理系統";
+        public const string UrlUpdate = "http://10.198.138.153/DocumentSystem/update.json";
 
         public const string EventNew = "新增文件";
         public const string EventEdit = "更新文件";
@@ -36,6 +37,12 @@ namespace KnowledgeSystem.Configs
         public string SeriesName { get; set; }
         public string XAxis { get; set; }
         public int YAxis { get; set; }
+    }
+
+    public class UpdateInfo
+    {
+        public string version { get; set; }
+        public string url { get; set; }
     }
 
     //public DBDocumentManagementSystemEntities()
