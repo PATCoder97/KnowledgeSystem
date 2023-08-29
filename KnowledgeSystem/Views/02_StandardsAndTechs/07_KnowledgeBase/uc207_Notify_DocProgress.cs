@@ -1,5 +1,6 @@
 ﻿using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.DXErrorProvider;
+using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using KnowledgeSystem.Configs;
 using System;
@@ -34,6 +35,19 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             e.Info.Appearance.Font = fontIndicator;
             e.Info.Appearance.ForeColor = Color.FromArgb(16, 110, 190);
+        }
+
+        private void CreateRuleGV()
+        {
+            gvData.FormatRules.AddExpressionRule(gcolDescription,
+                new DevExpress.Utils.AppearanceDefault() { ForeColor = Color.Red },
+                "StartsWith([Descriptions], \'退回\')");
+            gvData.FormatRules.AddExpressionRule(gcolDescription,
+              new DevExpress.Utils.AppearanceDefault() { ForeColor = Color.Violet },
+              "StartsWith([Descriptions], \'取消\')");
+            gvData.FormatRules.AddExpressionRule(gcolDescription,
+              new DevExpress.Utils.AppearanceDefault() { ForeColor = Color.Green },
+              "StartsWith([Descriptions], \'確認完畢\')");
         }
 
         private void LoadData()
@@ -91,6 +105,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             gvData.ReadOnlyGridView();
 
             LoadData();
+
+            CreateRuleGV();
+            gvData.FocusedRowHandle = GridControl.AutoFilterRowHandle;
         }
 
         private void gcData_DoubleClick(object sender, EventArgs e)

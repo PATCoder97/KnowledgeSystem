@@ -149,7 +149,7 @@ namespace KnowledgeSystem.Views._00_Generals
             }
 #endif
 
-            Text = TempDatas.SoftNameTW;
+            Text = TempDatas.SoftNameTW + AppCopyRight.CopyRightString();
             lbSoftName.Text = TempDatas.SoftNameTW;
 
             Size = new Size(100, 100);
@@ -168,7 +168,7 @@ namespace KnowledgeSystem.Views._00_Generals
         private void btnKnowHow_ItemClick(object sender, TileItemEventArgs e)
         {
             f00_FluentFrame formShow = new f00_FluentFrame(1);
-            formShow.Text = e.Item.Text + AppCopyRight.CopyRightString();
+            formShow.Text = e.Item.Text;
             Hide();
             formShow.ShowDialog();
             Show();
@@ -177,7 +177,7 @@ namespace KnowledgeSystem.Views._00_Generals
         private void btnISODocuments_ItemClick(object sender, TileItemEventArgs e)
         {
             f00_FluentFrame formShow = new f00_FluentFrame(201);
-            formShow.Text = e.Item.Text + AppCopyRight.CopyRightString();
+            formShow.Text = e.Item.Text;
             Hide();
             formShow.ShowDialog();
             Show();
@@ -186,7 +186,7 @@ namespace KnowledgeSystem.Views._00_Generals
         private void btnUserManage_ItemClick(object sender, TileItemEventArgs e)
         {
             f00_FluentFrame formShow = new f00_FluentFrame(7);
-            formShow.Text = e.Item.Text + AppCopyRight.CopyRightString();
+            formShow.Text = e.Item.Text;
             Hide();
             formShow.ShowDialog();
             Show();
@@ -195,7 +195,7 @@ namespace KnowledgeSystem.Views._00_Generals
         private void btnRoleManage_ItemClick(object sender, TileItemEventArgs e)
         {
             f00_FluentFrame formShow = new f00_FluentFrame(17);
-            formShow.Text = e.Item.Text + AppCopyRight.CopyRightString();
+            formShow.Text = e.Item.Text;
             Hide();
             formShow.ShowDialog();
             Show();

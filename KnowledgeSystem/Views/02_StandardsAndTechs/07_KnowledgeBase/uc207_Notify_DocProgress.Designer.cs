@@ -28,14 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.gvColIdKnowledgeBase = new DevExpress.XtraGrid.Columns.GridColumn();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.label1 = new System.Windows.Forms.Label();
             this.gcData = new DevExpress.XtraGrid.GridControl();
             this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gColId = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gvColIdKnowledgeBase = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcolDescription = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -50,6 +50,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             this.SuspendLayout();
+            // 
+            // gvColIdKnowledgeBase
+            // 
+            this.gvColIdKnowledgeBase.AppearanceCell.Options.UseTextOptions = true;
+            this.gvColIdKnowledgeBase.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gvColIdKnowledgeBase.Caption = "資料編號";
+            this.gvColIdKnowledgeBase.FieldName = "IdKnowledgeBase";
+            this.gvColIdKnowledgeBase.Name = "gvColIdKnowledgeBase";
+            this.gvColIdKnowledgeBase.Visible = true;
+            this.gvColIdKnowledgeBase.VisibleIndex = 1;
             // 
             // layoutControl1
             // 
@@ -102,7 +112,7 @@
             this.gColId,
             this.gvColIdKnowledgeBase,
             this.gridColumn2,
-            this.gridColumn3,
+            this.gcolDescription,
             this.gridColumn4,
             this.gridColumn6,
             this.gridColumn1});
@@ -120,16 +130,6 @@
             this.gColId.FieldName = "Id";
             this.gColId.Name = "gColId";
             // 
-            // gvColIdKnowledgeBase
-            // 
-            this.gvColIdKnowledgeBase.AppearanceCell.Options.UseTextOptions = true;
-            this.gvColIdKnowledgeBase.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gvColIdKnowledgeBase.Caption = "資料編號";
-            this.gvColIdKnowledgeBase.FieldName = "IdKnowledgeBase";
-            this.gvColIdKnowledgeBase.Name = "gvColIdKnowledgeBase";
-            this.gvColIdKnowledgeBase.Visible = true;
-            this.gvColIdKnowledgeBase.VisibleIndex = 1;
-            // 
             // gridColumn2
             // 
             this.gridColumn2.Caption = "資料名稱";
@@ -138,13 +138,13 @@
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 2;
             // 
-            // gridColumn3
+            // gcolDescription
             // 
-            this.gridColumn3.Caption = "核簽狀態";
-            this.gridColumn3.FieldName = "Descriptions";
-            this.gridColumn3.Name = "gridColumn3";
-            this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 4;
+            this.gcolDescription.Caption = "核簽狀態";
+            this.gcolDescription.FieldName = "Descriptions";
+            this.gcolDescription.Name = "gcolDescription";
+            this.gcolDescription.Visible = true;
+            this.gcolDescription.VisibleIndex = 4;
             // 
             // gridColumn4
             // 
@@ -236,7 +236,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraGrid.Columns.GridColumn gvColIdKnowledgeBase;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
+        private DevExpress.XtraGrid.Columns.GridColumn gcolDescription;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
