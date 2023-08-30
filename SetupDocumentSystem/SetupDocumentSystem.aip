@@ -17,10 +17,9 @@
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Refresh.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Reload.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Settings.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Zoom.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Approval.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_BO_Department.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_BO_Employee.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Business_BarChart.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Customers.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_DevExpress.BonusSkins.v22.1.dll" Value="C:\Program Files\DevExpress 22.1\Components\Bin\Framework"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_DevExpress.Charts.v22.1.Core.dll" Value="C:\Program Files\DevExpress 22.1\Components\Bin\Framework"/>
@@ -65,8 +64,10 @@
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_KnowledgeSystem.pdb" Value="..\KnowledgeSystem\bin\Debug"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.IO.RecyclableMemoryStream.dll" Value="..\packages\Microsoft.IO.RecyclableMemoryStream.1.4.1\lib\net46"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Newtonsoft.Json.dll" Value="..\packages\Newtonsoft.Json.13.0.3\lib\net45"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Search_more.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_ShowPrintPreview.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_TipOverTree_Right.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Statistics.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_StepProcess.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_none.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Actions_AddCircled.svg" Value="Actions_AddCircled.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Actions_Bell.svg" Value="Actions_Bell.svg"/>
@@ -78,10 +79,9 @@
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Actions_Refresh.svg" Value="Actions_Refresh.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Actions_Reload.svg" Value="Actions_Reload.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Actions_Settings.svg" Value="Actions_Settings.svg"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Actions_Zoom.svg" Value="Actions_Zoom.svg"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Approval.svg" Value="Approval.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_BO_Department.svg" Value="BO_Department.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_BO_Employee.svg" Value="BO_Employee.svg"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Business_BarChart.svg" Value="Business_BarChart.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Customers.svg" Value="Customers.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_DevExpress.BonusSkins.v22.1.dll" Value="DevExpress.BonusSkins.v22.1.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Charts.v22.1.Core.dll" Value="DevExpress.Charts.v22.1.Core.dll"/>
@@ -126,8 +126,10 @@
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_KnowledgeSystem.pdb" Value="KnowledgeSystem.pdb"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.IO.RecyclableMemoryStream.dll" Value="Microsoft.IO.RecyclableMemoryStream.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Newtonsoft.Json.dll" Value="Newtonsoft.Json.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Search_more.svg" Value="Search_more.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_ShowPrintPreview.svg" Value="ShowPrintPreview.svg"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_TipOverTree_Right.svg" Value="TipOverTree_Right.svg"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Statistics.svg" Value="Statistics.svg"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_StepProcess.svg" Value="StepProcess.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_none.svg" Value="none.svg"/>
     <ROW Property="ALLUSERS" Value="1"/>
     <ROW Property="ARPCOMMENTS" Value="This installer database contains the logic and data required to install [|ProductName]." ValueLocId="*"/>
@@ -227,13 +229,14 @@
     <ROW File="Actions_Find.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ACTION~9.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_Actions_Find.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Actions_Find.svg&gt;" SelfReg="false"/>
     <ROW File="Actions_Refresh.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ACTIO~10.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_Actions_Refresh.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Actions_Refresh.svg&gt;" SelfReg="false"/>
     <ROW File="Actions_Reload.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ACTIO~11.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_Actions_Reload.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Actions_Reload.svg&gt;" SelfReg="false"/>
-    <ROW File="Actions_Zoom.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ACTIO~12.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_Actions_Zoom.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Actions_Zoom.svg&gt;" SelfReg="false"/>
     <ROW File="BO_Department.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="BO_DEP~2.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_BO_Department.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_BO_Department.svg&gt;" SelfReg="false"/>
     <ROW File="BO_Employee.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="BO_EMP~2.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_BO_Employee.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_BO_Employee.svg&gt;" SelfReg="false"/>
-    <ROW File="Business_BarChart.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="BUSINE~2.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_Business_BarChart.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Business_BarChart.svg&gt;" SelfReg="false"/>
     <ROW File="ShowPrintPreview.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="SHOWPR~2.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_ShowPrintPreview.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_ShowPrintPreview.svg&gt;" SelfReg="false"/>
-    <ROW File="TipOverTree_Right.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="TIPOVE~2.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_TipOverTree_Right.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_TipOverTree_Right.svg&gt;" SelfReg="false"/>
     <ROW File="KnowledgeSystem.pdb" Component_="KnowledgeSystem_SymbolsOutput" FileName="KNOWLE~2.PDB|[|AI_PROPPATH_FILENAME_PERBUILD_KnowledgeSystem.pdb]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_KnowledgeSystem.pdb&gt;" SelfReg="false"/>
+    <ROW File="Approval.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="[|AI_PROPPATH_FILENAME_PERBUILD_Approval.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Approval.svg&gt;" SelfReg="false"/>
+    <ROW File="Search_more.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="SEARCH~2.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_Search_more.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Search_more.svg&gt;" SelfReg="false"/>
+    <ROW File="Statistics.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="STATIS~2.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_Statistics.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Statistics.svg&gt;" SelfReg="false"/>
+    <ROW File="StepProcess.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="STEPPR~2.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_StepProcess.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_StepProcess.svg&gt;" SelfReg="false"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.AppPathsComponent">
     <ROW Name="AI_APPPATH_PERBUILD_Actions_AddCircled.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_Actions_AddCircled.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_Actions_AddCircled.svg]" Type="2" Content="0"/>
@@ -246,10 +249,9 @@
     <ROW Name="AI_APPPATH_PERBUILD_Actions_Refresh.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_Actions_Refresh.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_Actions_Refresh.svg]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Actions_Reload.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_Actions_Reload.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_Actions_Reload.svg]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Actions_Settings.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_Actions_Settings.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_Actions_Settings.svg]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_Actions_Zoom.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_Actions_Zoom.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_Actions_Zoom.svg]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Approval.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_Approval.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_Approval.svg]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_BO_Department.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_BO_Department.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_BO_Department.svg]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_BO_Employee.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_BO_Employee.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_BO_Employee.svg]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_Business_BarChart.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_Business_BarChart.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_Business_BarChart.svg]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Customers.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_Customers.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_Customers.svg]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_DevExpress.BonusSkins.v22.1.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_DevExpress.BonusSkins.v22.1.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.BonusSkins.v22.1.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_DevExpress.Charts.v22.1.Core.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_DevExpress.Charts.v22.1.Core.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Charts.v22.1.Core.dll]" Type="2" Content="0"/>
@@ -294,8 +296,10 @@
     <ROW Name="AI_APPPATH_PERBUILD_KnowledgeSystem.pdb" Path="[|AI_PROPPATH_DIR_PERBUILD_KnowledgeSystem.pdb]\[|AI_PROPPATH_FILENAME_PERBUILD_KnowledgeSystem.pdb]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Microsoft.IO.RecyclableMemoryStream.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.IO.RecyclableMemoryStream.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.IO.RecyclableMemoryStream.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Newtonsoft.Json.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Newtonsoft.Json.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Newtonsoft.Json.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Search_more.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_Search_more.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_Search_more.svg]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_ShowPrintPreview.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_ShowPrintPreview.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_ShowPrintPreview.svg]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_TipOverTree_Right.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_TipOverTree_Right.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_TipOverTree_Right.svg]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Statistics.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_Statistics.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_Statistics.svg]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_StepProcess.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_StepProcess.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_StepProcess.svg]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_none.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_none.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_none.svg]" Type="2" Content="0"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.BootstrOptComponent">
@@ -487,12 +491,13 @@
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="Actions_Find.svg"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="Actions_Refresh.svg"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="Actions_Reload.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="Actions_Zoom.svg"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="BO_Department.svg"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="BO_Employee.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="Business_BarChart.svg"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="ShowPrintPreview.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="TipOverTree_Right.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="Approval.svg"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="SymbolsOutput" OutputFile="KnowledgeSystem.pdb"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="Search_more.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="Statistics.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="StepProcess.svg"/>
   </COMPONENT>
 </DOCUMENT>
