@@ -750,6 +750,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 return;
             }
 
+            // Chuyển người process sang userLogin
+            cbbUserProcess.EditValue = userId;
             controlgroupDocument.SelectedTabPage = lcgInfo;
 
             LockControl(false);

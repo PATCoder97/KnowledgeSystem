@@ -232,17 +232,22 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 int sumNotify = lsDisplays.Count;
                 if (sumNotify > 0)
                 {
-                    picApproval.BackColor = Color.WhiteSmoke;
-                    picApproval.Image = Properties.Resources.Approval;
+                    emptySpaceRight.MinSize= new Size(145, 10);
+                    emptySpaceRight.MinSize= new Size(145, 0);
+                    emptySpaceRight.Size= new Size(145, 40);
+
+                    lcSumApproval.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
                 }
                 else
                 {
-                    picApproval.BackColor = Color.FromArgb(16, 110, 190);
-                    picApproval.Image = null;
+                    emptySpaceRight.MinSize = new Size(225, 10);
+                    emptySpaceRight.MinSize = new Size(225, 0);
+                    emptySpaceRight.Size = new Size(225, 40);
+
+                    lcSumApproval.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 }
 
-                badgeApproval.Visible = sumNotify > 0;
-                badgeApproval.Properties.Text = sumNotify.ToString();
+                btnSumNotifyApproval.Text = sumNotify.ToString();
             }
         }
 
@@ -296,6 +301,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
             LoadData();
             gcData.RefreshDataSource();
+        }
+
+        private void btnSumNotifyApproval_Click(object sender, EventArgs e)
+        {
+            GetNotifyApproval();
         }
     }
 }
