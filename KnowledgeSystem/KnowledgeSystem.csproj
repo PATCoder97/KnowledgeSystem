@@ -277,17 +277,17 @@
     <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_SelectProgress.Designer.cs">
       <DependentUpon>uc207_SelectProgress.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_StepProgress.cs">
+    <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\uc402_StepProgress.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_StepProgress.Designer.cs">
-      <DependentUpon>uc207_StepProgress.cs</DependentUpon>
+    <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\uc402_StepProgress.Designer.cs">
+      <DependentUpon>uc402_StepProgress.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_StepProgress_Info.cs">
+    <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\uc402_StepProgress_Info.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_StepProgress_Info.Designer.cs">
-      <DependentUpon>uc207_StepProgress_Info.cs</DependentUpon>
+    <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\uc402_StepProgress_Info.Designer.cs">
+      <DependentUpon>uc402_StepProgress_Info.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\04_SystemAdministrator\01_UserManage\uc401_GroupManage.cs">
       <SubType>UserControl</SubType>
@@ -393,11 +393,11 @@
     <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_SelectProgress.resx">
       <DependentUpon>uc207_SelectProgress.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_StepProgress.resx">
-      <DependentUpon>uc207_StepProgress.cs</DependentUpon>
+    <EmbeddedResource Include="Views\04_SystemAdministrator\02_PermissionManager\uc402_StepProgress.resx">
+      <DependentUpon>uc402_StepProgress.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_StepProgress_Info.resx">
-      <DependentUpon>uc207_StepProgress_Info.cs</DependentUpon>
+    <EmbeddedResource Include="Views\04_SystemAdministrator\02_PermissionManager\uc402_StepProgress_Info.resx">
+      <DependentUpon>uc402_StepProgress_Info.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\01_UserManage\uc401_GroupManage.resx">
       <DependentUpon>uc401_GroupManage.cs</DependentUpon>
@@ -462,9 +462,9 @@
     <Content Include="Images\Statistics.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\StepProcess.svg">
+    <None Include="Images\StepProcess.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </None>
     <None Include="Resources\Approval.png" />
     <Content Include="SQLModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

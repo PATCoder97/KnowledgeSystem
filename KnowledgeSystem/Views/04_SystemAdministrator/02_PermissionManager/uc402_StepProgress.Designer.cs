@@ -1,6 +1,6 @@
-﻿namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
+﻿namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
 {
-    partial class uc207_StepProgress
+    partial class uc402_StepProgress
     {
         /// <summary> 
         /// Required designer variable.
@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc207_StepProgress));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc402_StepProgress));
             this.gvStepProgress = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();

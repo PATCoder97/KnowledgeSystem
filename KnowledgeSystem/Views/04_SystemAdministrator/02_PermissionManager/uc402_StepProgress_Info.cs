@@ -11,13 +11,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
+namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
 {
-    public partial class uc207_StepProgress_Info : DevExpress.XtraEditors.XtraUserControl
+    public partial class uc402_StepProgress_Info : DevExpress.XtraEditors.XtraUserControl
     {
         public List<GroupProgress> lsGroupProgress { get; set; }
 
-        public uc207_StepProgress_Info()
+        public uc402_StepProgress_Info()
         {
             InitializeComponent();
         }

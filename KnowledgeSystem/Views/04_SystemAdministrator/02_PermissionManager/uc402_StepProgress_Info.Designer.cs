@@ -1,6 +1,6 @@
-﻿namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
+﻿namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
 {
-    partial class uc207_StepProgress_Info
+    partial class uc402_StepProgress_Info
     {
         /// <summary> 
         /// Required designer variable.

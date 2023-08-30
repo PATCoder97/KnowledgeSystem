@@ -40,10 +40,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         private void CreateRuleGV()
         {
             gvData.FormatRules.AddExpressionRule(gcolDescription,
-                new DevExpress.Utils.AppearanceDefault() { ForeColor = Color.Red },
+                new DevExpress.Utils.AppearanceDefault() { BackColor = Color.Red },
                 "StartsWith([Descriptions], \'退回\')");
             gvData.FormatRules.AddExpressionRule(gcolDescription,
-              new DevExpress.Utils.AppearanceDefault() { ForeColor = Color.Violet },
+              new DevExpress.Utils.AppearanceDefault() { ForeColor = Color.BlueViolet },
               "StartsWith([Descriptions], \'取消\')");
             gvData.FormatRules.AddExpressionRule(gcolDescription,
               new DevExpress.Utils.AppearanceDefault() { ForeColor = Color.Green },

@@ -12,11 +12,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
+namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
 {
-    public partial class uc207_StepProgress : DevExpress.XtraEditors.XtraUserControl
+    public partial class uc402_StepProgress : DevExpress.XtraEditors.XtraUserControl
     {
-        public uc207_StepProgress()
+        public uc402_StepProgress()
         {
             InitializeComponent();
         }
@@ -163,7 +163,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void btnNew_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            uc207_StepProgress_Info ucInfo = new uc207_StepProgress_Info();
+            uc402_StepProgress_Info ucInfo = new uc402_StepProgress_Info();
             if (XtraDialog.Show(ucInfo, "新增審查流程", MessageBoxButtons.OKCancel) != DialogResult.OK) return;
 
             var lsStepProgressSelect = (from data in ucInfo.lsGroupProgress
