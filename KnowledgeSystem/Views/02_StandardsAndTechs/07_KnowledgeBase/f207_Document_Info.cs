@@ -944,6 +944,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 var docProcessUpdate = db.dt207_DocProgress.First(r => r.Id == idDocProgress);
                 docProcessUpdate.IsSuccess = false;
                 docProcessUpdate.IsComplete = true;
+                docProcessUpdate.Change = string.IsNullOrEmpty(descriptions) ? "取消" : $"取消，說明：{descriptions}";
+
                 db.dt207_DocProgress.AddOrUpdate(docProcessUpdate);
 
                 dt207_DocProgressInfo progressInfo = new dt207_DocProgressInfo()

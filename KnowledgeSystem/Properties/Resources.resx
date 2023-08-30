@@ -124,13 +124,16 @@
   <data name="bgsplash" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bgsplash.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="cancel_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\cancel_16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="DocumentSystem" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DocumentSystem.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Login3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Login3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="DocumentSystem" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DocumentSystem.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="cancel_16px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cancel_16px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Approval" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Approval.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

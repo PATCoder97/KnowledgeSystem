@@ -172,8 +172,79 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
             // Tải thông tin liên quan đến giao diện
             helper.LoadViewInfo();
+
+            GetNotifyApproval();
         }
 
+        private void GetNotifyApproval()
+        {
+            using (var db = new DBDocumentManagementSystemEntities())
+            {
+                // Xử lý lấy tất cả các văn kiện cần trình ký
+                var lsDocProgresses = db.dt207_DocProgress.Where(r => !r.IsComplete).ToList();
+                var lsDocProgressInfos = db.dt207_DocProgressInfo.ToList();
+                var lsKnowledgeBases = db.dt207_Base.ToList();
+                var lsUsers = db.Users.ToList();
+
+                var lsDocNotSuccess =
+                    (from data in db.dt207_DocProgressInfo
+                     group data by data.IdDocProgress into g
+                     select new
+                     {
+                         IdDocProgress = g.Key,
+                         IndexStep = g.OrderByDescending(dpi => dpi.TimeStep).Select(dpi => dpi.IndexStep).FirstOrDefault(),
+                         TimeStep = g.OrderByDescending(dpi => dpi.TimeStep).Select(dpi => dpi.TimeStep).FirstOrDefault(),
+                         IdUserProcess = g.OrderBy(dpi => dpi.TimeStep).Select(dpi => dpi.IdUserProcess).FirstOrDefault()
+                     }).ToList();
+
+                var lsDataApproval =
+                    (from data in lsDocProgresses
+                     join infos in lsDocNotSuccess on data.Id equals infos.IdDocProgress
+                     join bases in lsKnowledgeBases on data.IdKnowledgeBase equals bases.Id
+                     join users in lsUsers on infos.IdUserProcess equals users.Id
+                     select new
+                     {
+                         data.IdKnowledgeBase,
+                         data.IdProgress,
+                         data.Descriptions,
+                         infos.TimeStep,
+                         infos.IndexStep,
+                         bases.DisplayName,
+                         UserProcess = $"{users.IdDepartment} | {infos.IdUserProcess}/{users.DisplayName}",
+                         ApprovalStep = $"{data.IdProgress}-{infos.IndexStep + 1}",
+                     }).ToList();
+
+                // Xử lý phân quyền nhưng user nằm trong group sẽ nhìn thấy
+                var lsGroupIn = (from data in db.GroupUsers.Where(r => r.IdUser == TempDatas.LoginId).ToList()
+                                 join progresses in db.dm_StepProgress.ToList() on data.IdGroup equals progresses.IdGroup
+                                 select new
+                                 {
+                                     progresses.IdProgress,
+                                     progresses.IdGroup,
+                                     progresses.IndexStep,
+                                     ApprovalStep = $"{progresses.IdProgress}-{progresses.IndexStep}",
+                                 }).ToList();
+
+                var lsDisplays = (from data in lsDataApproval
+                                  join progresses in lsGroupIn on data.ApprovalStep equals progresses.ApprovalStep
+                                  select data).ToList();
+
+                int sumNotify = lsDisplays.Count;
+                if (sumNotify > 0)
+                {
+                    picApproval.BackColor = Color.WhiteSmoke;
+                    picApproval.Image = Properties.Resources.Approval;
+                }
+                else
+                {
+                    picApproval.BackColor = Color.FromArgb(16, 110, 190);
+                    picApproval.Image = null;
+                }
+
+                badgeApproval.Visible = sumNotify > 0;
+                badgeApproval.Properties.Text = sumNotify.ToString();
+            }
+        }
 
         #endregion
 

@@ -16,6 +16,7 @@ using System.Reflection;
 using DevExpress.XtraBars.Navigation;
 using KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase;
 using System.IO;
+using DevExpress.Utils.Extensions;
 
 namespace KnowledgeSystem.Views._00_Generals
 {
@@ -35,7 +36,6 @@ namespace KnowledgeSystem.Views._00_Generals
         #region parameters
 
         Font fontTW14 = new Font("DFKai-SB", 14.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
-        Font fontTW12 = new Font("DFKai-SB", 12F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
 
         int groupId = 0;
         List<Function> lsFunctions = new List<Function>();
@@ -55,15 +55,12 @@ namespace KnowledgeSystem.Views._00_Generals
             {
                 using (var handle = SplashScreenManager.ShowOverlayForm(this))
                 {
+                    div_container.Controls.Clear();
+
                     XtraUserControl userControl = (XtraUserControl)Activator.CreateInstance(typeform);
-                    if (!div_container.Controls.Contains(userControl))
-                    {
-                        div_container.Controls.Add(userControl);
-                        userControl.Dock = DockStyle.Fill;
-                        userControl.BringToFront();
-                    }
-                    else
-                        userControl.BringToFront();
+                    div_container.Controls.Add(userControl);
+                    userControl.Dock = DockStyle.Fill;
+                    userControl.BringToFront();
                 }
             }
             else if (typeform.BaseType == typeof(XtraForm))

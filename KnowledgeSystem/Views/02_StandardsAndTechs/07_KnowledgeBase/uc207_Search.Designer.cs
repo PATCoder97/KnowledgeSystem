@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc207_Search));
             DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
@@ -35,6 +36,7 @@
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.picApproval = new System.Windows.Forms.PictureBox();
             this.checkUseKeyword = new DevExpress.XtraEditors.CheckEdit();
             this.btnSearch = new DevExpress.XtraEditors.SimpleButton();
             this.btnReload = new DevExpress.XtraEditors.SimpleButton();
@@ -56,8 +58,12 @@
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.adornerUIManager1 = new DevExpress.Utils.VisualEffects.AdornerUIManager(this.components);
+            this.badgeApproval = new DevExpress.Utils.VisualEffects.Badge();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picApproval)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkUseKeyword.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
@@ -70,11 +76,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.adornerUIManager1)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
             // 
             this.layoutControl1.AllowCustomization = false;
+            this.layoutControl1.Controls.Add(this.picApproval);
             this.layoutControl1.Controls.Add(this.checkUseKeyword);
             this.layoutControl1.Controls.Add(this.btnSearch);
             this.layoutControl1.Controls.Add(this.btnReload);
@@ -88,6 +97,17 @@
             this.layoutControl1.Size = new System.Drawing.Size(1233, 651);
             this.layoutControl1.TabIndex = 1;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // picApproval
+            // 
+            this.picApproval.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.picApproval.Image = global::KnowledgeSystem.Properties.Resources.Approval;
+            this.picApproval.Location = new System.Drawing.Point(1185, 12);
+            this.picApproval.Name = "picApproval";
+            this.picApproval.Size = new System.Drawing.Size(36, 36);
+            this.picApproval.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picApproval.TabIndex = 14;
+            this.picApproval.TabStop = false;
             // 
             // checkUseKeyword
             // 
@@ -290,7 +310,8 @@
             this.layoutControlItem4,
             this.layoutControlItem3,
             this.emptySpaceItem2,
-            this.layoutControlItem7});
+            this.layoutControlItem7,
+            this.layoutControlItem2});
             this.Root.Name = "Root";
             this.Root.Size = new System.Drawing.Size(1233, 651);
             this.Root.TextVisible = false;
@@ -324,10 +345,10 @@
             // 
             this.emptySpaceItem3.AllowHotTrack = false;
             this.emptySpaceItem3.Location = new System.Drawing.Point(988, 0);
-            this.emptySpaceItem3.MaxSize = new System.Drawing.Size(225, 0);
-            this.emptySpaceItem3.MinSize = new System.Drawing.Size(225, 10);
+            this.emptySpaceItem3.MaxSize = new System.Drawing.Size(185, 0);
+            this.emptySpaceItem3.MinSize = new System.Drawing.Size(185, 10);
             this.emptySpaceItem3.Name = "emptySpaceItem3";
-            this.emptySpaceItem3.Size = new System.Drawing.Size(225, 40);
+            this.emptySpaceItem3.Size = new System.Drawing.Size(185, 40);
             this.emptySpaceItem3.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
             // 
@@ -378,6 +399,29 @@
             this.layoutControlItem7.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem7.TextVisible = false;
             // 
+            // layoutControlItem2
+            // 
+            this.layoutControlItem2.Control = this.picApproval;
+            this.layoutControlItem2.Location = new System.Drawing.Point(1173, 0);
+            this.layoutControlItem2.MaxSize = new System.Drawing.Size(40, 0);
+            this.layoutControlItem2.MinSize = new System.Drawing.Size(40, 24);
+            this.layoutControlItem2.Name = "layoutControlItem2";
+            this.layoutControlItem2.Size = new System.Drawing.Size(40, 40);
+            this.layoutControlItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem2.TextVisible = false;
+            // 
+            // adornerUIManager1
+            // 
+            this.adornerUIManager1.BadgeProperties.PaintStyle = DevExpress.Utils.VisualEffects.BadgePaintStyle.Critical;
+            this.adornerUIManager1.Elements.Add(this.badgeApproval);
+            this.adornerUIManager1.Owner = this;
+            // 
+            // badgeApproval
+            // 
+            this.badgeApproval.Properties.Location = System.Drawing.ContentAlignment.TopLeft;
+            this.badgeApproval.TargetElement = this.picApproval;
+            // 
             // uc207_Search
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
@@ -390,6 +434,7 @@
             this.Load += new System.EventHandler(this.uc207_Search_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picApproval)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkUseKeyword.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).EndInit();
@@ -402,6 +447,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.adornerUIManager1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -430,5 +477,9 @@
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
         private DevExpress.XtraEditors.CheckEdit checkUseKeyword;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
+        private System.Windows.Forms.PictureBox picApproval;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
+        private DevExpress.Utils.VisualEffects.AdornerUIManager adornerUIManager1;
+        private DevExpress.Utils.VisualEffects.Badge badgeApproval;
     }
 }
