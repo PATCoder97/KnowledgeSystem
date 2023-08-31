@@ -44,7 +44,7 @@
             // labelCopyright
             // 
             this.labelCopyright.Appearance.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelCopyright.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
+            this.labelCopyright.Appearance.ForeColor = System.Drawing.Color.White;
             this.labelCopyright.Appearance.Options.UseFont = true;
             this.labelCopyright.Appearance.Options.UseForeColor = true;
             this.labelCopyright.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
