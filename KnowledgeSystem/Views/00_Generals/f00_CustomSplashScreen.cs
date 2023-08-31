@@ -19,7 +19,6 @@ namespace KnowledgeSystem.Views._00_Generals
             InitializeComponent();
             labelCopyright.Text = "Copyright ©  2023 - " + DateTime.Now.Year.ToString();
 
-            lbNameApp.Text = TempDatas.SoftNameTW;
             lbVersion.Text = $":{AppCopyRight.version}";
             lbOwner.Text = $":{AppCopyRight.ownerSoft}";
             lbSupporter.Text = $":{AppCopyRight.supporter}";

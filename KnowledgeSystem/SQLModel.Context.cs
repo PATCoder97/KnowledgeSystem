@@ -9,7 +9,6 @@
 
 namespace KnowledgeSystem
 {
-    using KnowledgeSystem.Configs;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
@@ -17,7 +16,7 @@ namespace KnowledgeSystem
     public partial class DBDocumentManagementSystemEntities : DbContext
     {
         public DBDocumentManagementSystemEntities()
-           : base(SingleConnection.ConString)
+            : base("name=DBDocumentManagementSystemEntities")
         {
         }
     
@@ -48,5 +47,6 @@ namespace KnowledgeSystem
         public virtual DbSet<dt207_NotifyEditDoc> dt207_NotifyEditDoc { get; set; }
         public virtual DbSet<dt207_Base> dt207_Base { get; set; }
         public virtual DbSet<dt207_Base_BAK> dt207_Base_BAK { get; set; }
+        public virtual DbSet<sys_StaticValue> sys_StaticValue { get; set; }
     }
 }

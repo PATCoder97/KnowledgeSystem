@@ -139,5 +139,25 @@ namespace KnowledgeSystem.Properties {
                 return ((DevExpress.Utils.Svg.SvgImage)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TTKT {
+            get {
+                object obj = ResourceManager.GetObject("TTKT", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ttktbg {
+            get {
+                object obj = ResourceManager.GetObject("ttktbg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

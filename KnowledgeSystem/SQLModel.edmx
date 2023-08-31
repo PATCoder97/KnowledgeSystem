@@ -58,7 +58,7 @@
           <Property Name="Keyword" Type="nvarchar(max)" />
           <Property Name="UserUpload" Type="varchar" MaxLength="10" />
           <Property Name="UserProcess" Type="varchar" MaxLength="10" />
-          <Property Name="UploadDate" Type="date" />
+          <Property Name="UploadDate" Type="datetime" />
           <Property Name="IsDelete" Type="bit" />
         </EntityType>
         <EntityType Name="dt207_Base_BAK">
@@ -71,7 +71,7 @@
           <Property Name="Keyword" Type="nvarchar(max)" />
           <Property Name="UserUpload" Type="varchar" MaxLength="10" />
           <Property Name="UserProcess" Type="varchar" MaxLength="10" />
-          <Property Name="UploadDate" Type="date" />
+          <Property Name="UploadDate" Type="datetime" />
         </EntityType>
         <EntityType Name="dt207_DocProgress">
           <Key>
@@ -216,6 +216,14 @@
           <Property Name="DisplayName" Type="nvarchar" MaxLength="32" />
           <Property Name="Describe" Type="nvarchar" MaxLength="128" />
         </EntityType>
+        <EntityType Name="sys_StaticValue">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KeyT" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="ValueT" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
         <EntityType Name="Users">
           <Key>
             <PropertyRef Name="Id" />
@@ -249,6 +257,7 @@
           <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GroupUser" EntityType="Self.GroupUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sys_StaticValue" EntityType="Self.sys_StaticValue" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -384,6 +393,7 @@
           <EntitySet Name="dt207_NotifyEditDoc" EntityType="DBDocumentManagementSystemModel.dt207_NotifyEditDoc" />
           <EntitySet Name="dt207_Base" EntityType="DBDocumentManagementSystemModel.dt207_Base" />
           <EntitySet Name="dt207_Base_BAK" EntityType="DBDocumentManagementSystemModel.dt207_Base_BAK" />
+          <EntitySet Name="sys_StaticValue" EntityType="DBDocumentManagementSystemModel.sys_StaticValue" />
         </EntityContainer>
         <EntityType Name="dt207_Targets">
           <Key>
@@ -486,7 +496,7 @@
           <Property Name="Keyword" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="UserUpload" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="UserProcess" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="UploadDate" Type="DateTime" Precision="0" />
+          <Property Name="UploadDate" Type="DateTime" Precision="3" />
           <Property Name="IsDelete" Type="Boolean" />
         </EntityType>
         <EntityType Name="dt207_Base_BAK">
@@ -499,7 +509,15 @@
           <Property Name="Keyword" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="UserUpload" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="UserProcess" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="UploadDate" Type="DateTime" Precision="0" />
+          <Property Name="UploadDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="sys_StaticValue">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KeyT" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="ValueT" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -747,6 +765,15 @@
                 <ScalarProperty Name="Keyword" ColumnName="Keyword" />
                 <ScalarProperty Name="IdTypes" ColumnName="IdTypes" />
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sys_StaticValue">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.sys_StaticValue">
+              <MappingFragment StoreEntitySet="sys_StaticValue">
+                <ScalarProperty Name="ValueT" ColumnName="ValueT" />
+                <ScalarProperty Name="KeyT" ColumnName="KeyT" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

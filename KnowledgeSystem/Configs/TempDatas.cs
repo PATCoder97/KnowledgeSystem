@@ -8,9 +8,11 @@ namespace KnowledgeSystem.Configs
 {
     public class TempDatas
     {
-        public const string SoftNameEN = "Document Management System";
-        public const string SoftNameTW = "冶金文件管理系統";
-        public const string UrlUpdate = "http://10.198.138.153/DocumentSystem/update.json";
+        // Static Value SQL
+        public static string SoftNameEN { get; set; }
+        public static string SoftNameTW { get; set; }
+        public static string UrlUpdate { get; set; }
+        public static string PathKnowledgeFile { get; set; }
 
         public const string EventNew = "新增文件";
         public const string EventEdit = "更新文件";
@@ -26,10 +28,11 @@ namespace KnowledgeSystem.Configs
         public static string DomainComputer { get; set; }
         public static bool LoginSuccessful { get; set; }
 
-        public static string PathKnowledgeFile = @"\\10.198.138.103\hotroll\DocumentSystem";
 
         public static string NoPermission { get; set; } = "您沒有該功能的權限";
         public static string DocIsProcessing { get; set; } = "文件處理中，暫不可顯示！";
+
+
     }
 
     public class ChartDataSource
@@ -41,6 +44,7 @@ namespace KnowledgeSystem.Configs
 
     public class UpdateInfo
     {
+        public string app { get; set; }
         public string version { get; set; }
         public string url { get; set; }
     }

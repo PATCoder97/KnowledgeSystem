@@ -53,11 +53,6 @@ namespace KnowledgeSystem.Views._00_Generals
             tileInfoUser.Elements.Add(elementClass);
         }
 
-        private void CheckUpdateSoft()
-        {
-
-        }
-
         private void GetUserLogin()
         {
             Size = new Size(100, 100);
@@ -119,8 +114,23 @@ namespace KnowledgeSystem.Views._00_Generals
             XtraMessageBox.Show("您的密碼已更新！", TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        private void GetSysStaticValue()
+        {
+            using (var db = new DBDocumentManagementSystemEntities())
+            {
+                var lsStaticValue = db.sys_StaticValue.ToList();
+
+                TempDatas.SoftNameEN = lsStaticValue.FirstOrDefault(r => r.KeyT == "SoftNameEN").ValueT;
+                TempDatas.SoftNameTW = lsStaticValue.FirstOrDefault(r => r.KeyT == "SoftNameTW").ValueT;
+                TempDatas.UrlUpdate = lsStaticValue.FirstOrDefault(r => r.KeyT == "UrlUpdate").ValueT;
+                TempDatas.PathKnowledgeFile = lsStaticValue.FirstOrDefault(r => r.KeyT == "PathKnowledgeFile").ValueT;
+            }
+        }
+
         private void fMain_Load(object sender, EventArgs e)
         {
+            GetSysStaticValue();
+
 #if DEBUG
             // Không cần check update khi debug
 #else
@@ -128,7 +138,8 @@ namespace KnowledgeSystem.Views._00_Generals
             {
                 string result = client.DownloadString(TempDatas.UrlUpdate);
 
-                var lsUpdateInfos = JsonConvert.DeserializeObject<List<UpdateInfo>>(result);
+                var lsUpdateInfos = JsonConvert.DeserializeObject<List<UpdateInfo>>(result)
+                    .Where(r => r.app == TempDatas.SoftNameEN).ToList();
                 if (lsUpdateInfos != null && lsUpdateInfos.Count > 0)
                 {
                     UpdateInfo newUpdate = lsUpdateInfos.First();

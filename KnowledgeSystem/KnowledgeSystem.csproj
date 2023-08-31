@@ -151,6 +151,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SQLModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="sys_StaticValue.cs" />
     <Compile Include="Views\00_Generals\f00_FluentFrame.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -466,6 +467,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\Approval.png" />
+    <None Include="Resources\TTKT.jpg" />
+    <None Include="Resources\ttktbg.png" />
     <Content Include="SQLModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SQLModel.edmx</DependentUpon>
