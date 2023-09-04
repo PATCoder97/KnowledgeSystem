@@ -48,6 +48,8 @@
             this.gvColKeyword = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.txbKeywords = new DevExpress.XtraEditors.ButtonEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -195,7 +197,9 @@
             this.gridColumn4,
             this.gvColKeyword,
             this.gridColumn6,
-            this.gridColumn7});
+            this.gridColumn7,
+            this.gridColumn5,
+            this.gridColumn8});
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
             this.gvData.OptionsBehavior.ReadOnly = true;
@@ -204,6 +208,7 @@
             this.gvData.OptionsView.EnableAppearanceOddRow = true;
             this.gvData.OptionsView.ShowAutoFilterRow = true;
             this.gvData.OptionsView.ShowGroupPanel = false;
+            this.gvData.OptionsView.ShowIndicator = false;
             this.gvData.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
             new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gridColumn7, DevExpress.Data.ColumnSortOrder.Descending)});
             // 
@@ -223,8 +228,10 @@
             // 
             this.gridColumn2.Caption = "文件名稱";
             this.gridColumn2.FieldName = "DisplayName";
+            this.gridColumn2.FieldNameSortGroup = "nonUnicodeDisplayName";
             this.gridColumn2.MinWidth = 10;
             this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.OptionsFilter.FilterBySortField = DevExpress.Utils.DefaultBoolean.True;
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 2;
             this.gridColumn2.Width = 268;
@@ -255,8 +262,10 @@
             // 
             this.gvColKeyword.Caption = "關鍵字";
             this.gvColKeyword.FieldName = "Keyword";
+            this.gvColKeyword.FieldNameSortGroup = "nonUnicodeKeyword";
             this.gvColKeyword.MinWidth = 10;
             this.gvColKeyword.Name = "gvColKeyword";
+            this.gvColKeyword.OptionsFilter.FilterBySortField = DevExpress.Utils.DefaultBoolean.True;
             this.gvColKeyword.Visible = true;
             this.gvColKeyword.VisibleIndex = 3;
             this.gvColKeyword.Width = 200;
@@ -284,6 +293,18 @@
             this.gridColumn7.Visible = true;
             this.gridColumn7.VisibleIndex = 6;
             this.gridColumn7.Width = 130;
+            // 
+            // gridColumn5
+            // 
+            this.gridColumn5.Caption = "nonUnicodeDisplayName";
+            this.gridColumn5.FieldName = "nonUnicodeDisplayName";
+            this.gridColumn5.Name = "gridColumn5";
+            // 
+            // gridColumn8
+            // 
+            this.gridColumn8.Caption = "nonUnicodeKeyword";
+            this.gridColumn8.FieldName = "nonUnicodeKeyword";
+            this.gridColumn8.Name = "gridColumn8";
             // 
             // txbKeywords
             // 
@@ -465,5 +486,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
         private DevExpress.XtraEditors.SimpleButton btnSumNotifyApproval;
         private DevExpress.XtraLayout.LayoutControlItem lcSumApproval;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
     }
 }

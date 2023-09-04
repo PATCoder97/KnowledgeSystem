@@ -10,6 +10,7 @@ using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -41,6 +42,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             public string Keyword { get; set; }
             public string UserProcessName { get; set; }
             public DateTime? UploadDate { get; set; }
+            public string nonUnicodeDisplayName { get; set; }
+            public string nonUnicodeKeyword { get; set; }
         }
 
         #endregion
@@ -157,7 +160,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                                       TypeName = type_.DisplayName,
                                       Keyword = IsSimple ? null : data.Keyword,
                                       UserProcessName = userProcess_.DisplayName,
-                                      UploadDate = data.UploadDate
+                                      UploadDate = data.UploadDate,
+                                      nonUnicodeDisplayName = convertToUnSign3(data.DisplayName),
+                                      nonUnicodeKeyword = IsSimple ? null : convertToUnSign3(data.Keyword),
                                   })
                                   .ToList();
 
@@ -174,6 +179,13 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             helper.LoadViewInfo();
 
             GetNotifyApproval();
+        }
+
+        public static string convertToUnSign3(string s)
+        {
+            Regex regex = new Regex("\\p{IsCombiningDiacriticalMarks}+");
+            string temp = s.Normalize(NormalizationForm.FormD);
+            return regex.Replace(temp, String.Empty).Replace('\u0111', 'd').Replace('\u0110', 'D');
         }
 
         private void GetNotifyApproval()
@@ -232,9 +244,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 int sumNotify = lsDisplays.Count;
                 if (sumNotify > 0)
                 {
-                    emptySpaceRight.MinSize= new Size(145, 10);
-                    emptySpaceRight.MinSize= new Size(145, 0);
-                    emptySpaceRight.Size= new Size(145, 40);
+                    emptySpaceRight.MinSize = new Size(145, 10);
+                    emptySpaceRight.MinSize = new Size(145, 0);
+                    emptySpaceRight.Size = new Size(145, 40);
 
                     lcSumApproval.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
                 }
@@ -272,7 +284,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            gvData.FindFilterText = txbKeywords.Text.Trim();
+            gvData.FindFilterText = convertToUnSign3(txbKeywords.Text.Trim());
         }
 
         private void txbKeywords_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)

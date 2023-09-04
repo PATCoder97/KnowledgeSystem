@@ -90,15 +90,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void CreateRuleGV()
         {
-            gvData.FormatRules.AddExpressionRule(gColRemark,
-                new DevExpress.Utils.AppearanceDefault() { ForeColor = Color.Blue },
-                $"[Remark] = \'{NAME_UPPER}\'");
-            gvData.FormatRules.AddExpressionRule(gColRemark,
-                new DevExpress.Utils.AppearanceDefault() { ForeColor = Color.Green },
-                $"[Remark] = \'{NAME_EQUAL}\'");
-            gvData.FormatRules.AddExpressionRule(gColRemark,
-                new DevExpress.Utils.AppearanceDefault() { ForeColor = Color.Red },
-                $"[Remark] = \'{NAME_LOWER}\'");
+            gvData.FormatRules.AddExpressionRule(gColRemark, new DevExpress.Utils.AppearanceDefault() { ForeColor = Color.Blue }, $"[Remark] = \'{NAME_UPPER}\'");
+            gvData.FormatRules.AddExpressionRule(gColRemark, new DevExpress.Utils.AppearanceDefault() { ForeColor = Color.Green }, $"[Remark] = \'{NAME_EQUAL}\'");
+            gvData.FormatRules.AddExpressionRule(gColRemark, new DevExpress.Utils.AppearanceDefault() { ForeColor = Color.Red }, $"[Remark] = \'{NAME_LOWER}\'");
         }
 
         private void StatisticsData()
