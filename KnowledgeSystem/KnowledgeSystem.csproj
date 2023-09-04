@@ -104,6 +104,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configs\AutoFilterNonUnicode.cs" />
     <Compile Include="Configs\AppCopyRight.cs" />
     <Compile Include="Configs\AppPermission.cs" />
     <Compile Include="Configs\DomainVNFPG.cs" />
