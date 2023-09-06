@@ -17,6 +17,7 @@ using DevExpress.XtraBars.Navigation;
 using KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase;
 using System.IO;
 using DevExpress.Utils.Extensions;
+using DevExpress.Utils;
 
 namespace KnowledgeSystem.Views._00_Generals
 {
@@ -77,7 +78,12 @@ namespace KnowledgeSystem.Views._00_Generals
             // Lấy danh sách các AppForm từ cơ sở dữ liệu và điền vào TreeView control
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                lsFunctions = db.Functions.Where(r => r.IdParent == groupId).OrderBy(r => r.Prioritize).ToList();
+                var lsAllFunctions = db.Functions.Where(r => r.IdParent == groupId).OrderBy(r => r.Prioritize).ToList();
+                var lsPermissions = db.FunctionRoles.Where(r => r.IdRole == TempDatas.RoleUserLogin).Select(r => r.IdFunction ?? 0).ToList();
+
+                lsFunctions = (from data in lsAllFunctions
+                               join granted in lsPermissions on data.Id equals granted
+                               select data).ToList();
 
                 foreach (var item in lsFunctions)
                 {
@@ -88,8 +94,6 @@ namespace KnowledgeSystem.Views._00_Generals
                     accordion.Name = $"name_{item.ControlName}";
                     accordion.Text = item.DisplayName;
                     accordion.Appearance.Default.Font = fontTW14;
-                    //accordion.Appearance.Hovered.Font = fontTW14;
-                    //accordion.Appearance.Pressed.Font = fontTW14;
 
                     accordion.Appearance.Normal.ForeColor = Color.Black;
                     accordion.Appearance.Hovered.ForeColor = Color.OrangeRed;
@@ -109,8 +113,6 @@ namespace KnowledgeSystem.Views._00_Generals
                             accordionChild.Text = child.DisplayName;
                             accordionChild.Style = ElementStyle.Item;
                             accordionChild.Appearance.Default.Font = fontTW14;
-                            //accordionChild.Appearance.Hovered.Font = fontTW12;
-                            //accordionChild.Appearance.Pressed.Font = fontTW12;
 
                             accordionChild.Appearance.Normal.ForeColor = Color.Black;
                             accordionChild.Appearance.Hovered.ForeColor = Color.OrangeRed;

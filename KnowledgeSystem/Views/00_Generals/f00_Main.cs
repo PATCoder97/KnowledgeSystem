@@ -176,13 +176,25 @@ namespace KnowledgeSystem.Views._00_Generals
             GetUserLogin();
         }
 
-        private void btnKnowHow_ItemClick(object sender, TileItemEventArgs e)
+        private void ShowFromByFrame(int IdForm_, TileItemEventArgs e)
         {
-            f00_FluentFrame formShow = new f00_FluentFrame(1);
+            bool IsGranted = AppPermission.Instance.CheckAppPermission(IdForm_);
+            if (!IsGranted)
+            {
+                XtraMessageBox.Show(TempDatas.NoPermission, TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            f00_FluentFrame formShow = new f00_FluentFrame(IdForm_);
             formShow.Text = e.Item.Text;
             Hide();
             formShow.ShowDialog();
             Show();
+        }
+
+        private void btnKnowHow_ItemClick(object sender, TileItemEventArgs e)
+        {
+            ShowFromByFrame(AppPermission.KnowledgeMain, e);
         }
 
         private void btnISODocuments_ItemClick(object sender, TileItemEventArgs e)
@@ -196,20 +208,12 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void btnUserManage_ItemClick(object sender, TileItemEventArgs e)
         {
-            f00_FluentFrame formShow = new f00_FluentFrame(7);
-            formShow.Text = e.Item.Text;
-            Hide();
-            formShow.ShowDialog();
-            Show();
+            ShowFromByFrame(AppPermission.Mod, e);
         }
 
         private void btnRoleManage_ItemClick(object sender, TileItemEventArgs e)
         {
-            f00_FluentFrame formShow = new f00_FluentFrame(17);
-            formShow.Text = e.Item.Text;
-            Hide();
-            formShow.ShowDialog();
-            Show();
+            ShowFromByFrame(AppPermission.SysAdmin, e);
         }
 
         private void tileInfoUser_ItemClick(object sender, TileItemEventArgs e)
@@ -229,6 +233,7 @@ namespace KnowledgeSystem.Views._00_Generals
                     ChangePassword();
                     break;
                 case UserComtrolE.LogOut:
+                    AppPermission.Instance.Dispose();
                     GetUserLogin();
                     break;
                 default:
