@@ -25,6 +25,7 @@ using DevExpress.Charts.Native;
 using DevExpress.XtraCharts;
 using System.Diagnostics;
 using DevExpress.XtraSplashScreen;
+using DataEF;
 
 namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 {

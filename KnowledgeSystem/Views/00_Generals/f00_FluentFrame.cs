@@ -18,6 +18,7 @@ using KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase;
 using System.IO;
 using DevExpress.Utils.Extensions;
 using DevExpress.Utils;
+using DataEF;
 
 namespace KnowledgeSystem.Views._00_Generals
 {
@@ -101,7 +102,10 @@ namespace KnowledgeSystem.Views._00_Generals
 
                     accordion.Hint = item.DisplayName;
 
-                    var lsChildren = db.Functions.Where(r => r.IdParent == item.Id).OrderBy(r => r.Prioritize).ToList();
+                   var lsChildren = (from data in db.Functions.Where(r => r.IdParent == item.Id)
+                                     .OrderBy(r => r.Prioritize).ToList()
+                                   join granted in lsPermissions on data.Id equals granted
+                                   select data).ToList();
                     if (lsChildren.Count != 0)
                     {
                         foreach (var child in lsChildren)

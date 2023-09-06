@@ -1,4 +1,5 @@
-﻿using DevExpress.XtraEditors;
+﻿using DataEF;
+using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraPrinting.Native;
 using DevExpress.XtraSplashScreen;
@@ -18,6 +19,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static Microsoft.IO.RecyclableMemoryStreamManager;
+using Group = DataEF.Group;
 
 namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 {

@@ -1,4 +1,5 @@
-﻿using DevExpress.ClipboardSource.SpreadsheetML;
+﻿using DataEF;
+using DevExpress.ClipboardSource.SpreadsheetML;
 using DevExpress.DocumentView;
 using DevExpress.Security;
 using DevExpress.Utils.About;
@@ -29,6 +30,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using Group = DataEF.Group;
 
 namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 {

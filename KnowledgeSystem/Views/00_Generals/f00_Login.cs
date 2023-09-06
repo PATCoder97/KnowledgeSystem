@@ -1,4 +1,5 @@
-﻿using DevExpress.XtraEditors;
+﻿using DataEF;
+using DevExpress.XtraEditors;
 using DevExpress.XtraSplashScreen;
 using KnowledgeSystem.Configs;
 using System;

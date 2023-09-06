@@ -113,46 +113,8 @@
     <Compile Include="Configs\RegistryHelper.cs" />
     <Compile Include="Configs\SingleConnection.cs" />
     <Compile Include="Configs\TempDatas.cs" />
-    <Compile Include="Models\dt207_Attachment_BAK.cs" />
-    <Compile Include="Models\dt207_Base_BAK.cs" />
-    <Compile Include="Models\dt207_Security_BAK.cs" />
-    <Compile Include="Models\dt207_Targets.cs" />
-    <Compile Include="Models\dt207_DocProgress.cs" />
-    <Compile Include="Models\dt207_TypeHisGetFile.cs" />
-    <Compile Include="Models\dm_Departments.cs" />
-    <Compile Include="Models\dt207_HistoryGetFile.cs" />
-    <Compile Include="Models\dm_Progress.cs" />
-    <Compile Include="Models\dm_StepProgress.cs" />
-    <Compile Include="Models\dt207_DocProgressInfo.cs" />
-    <Compile Include="Models\Function.cs" />
-    <Compile Include="Models\FunctionRole.cs" />
-    <Compile Include="Models\Group.cs" />
-    <Compile Include="Models\GroupUser.cs" />
-    <Compile Include="Models\dt207_Attachment.cs" />
-    <Compile Include="Models\dt207_Base.cs" />
-    <Compile Include="Models\dt207_Security.cs" />
-    <Compile Include="Models\dt207_Type.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Models\Role.cs" />
-    <Compile Include="Models\User.cs" />
-    <Compile Include="Models\dt207_NotifyEditDoc.cs" />
-    <Compile Include="SQLModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SQLModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SQLModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SQLModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SQLModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SQLModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sys_StaticValue.cs" />
     <Compile Include="Views\00_Generals\f00_FluentFrame.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -427,13 +389,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EntityDeploy Include="SQLModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SQLModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="SQLModel.edmx.diagram">
-      <DependentUpon>SQLModel.edmx</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\01_ProductionAndSales\" />
@@ -471,16 +426,6 @@
     <None Include="Resources\TTKT.jpg" />
     <None Include="Resources\ttktbg.png" />
     <None Include="Resources\ttktbg1.png" />
-    <Content Include="SQLModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SQLModel.edmx</DependentUpon>
-      <LastGenOutput>SQLModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="SQLModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SQLModel.edmx</DependentUpon>
-      <LastGenOutput>SQLModel.cs</LastGenOutput>
-    </Content>
     <None Include="Resources\bgsplash.jpg" />
     <None Include="Resources\Login3.png" />
     <None Include="Resources\cancel_16px.png" />
@@ -521,6 +466,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataEF\DataEF.csproj">
+      <Project>{b0e4c247-9f92-4671-8448-c188b7120378}</Project>
+      <Name>DataEF</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
