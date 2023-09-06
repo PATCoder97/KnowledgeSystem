@@ -52,6 +52,7 @@
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.treeListColumn7 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txbNameRole.Properties)).BeginInit();
@@ -179,7 +180,8 @@
             this.treeListColumn3,
             this.treeListColumn4,
             this.treeListColumn5,
-            this.treeListColumn6});
+            this.treeListColumn6,
+            this.treeListColumn7});
             this.treeFunctions.Location = new System.Drawing.Point(372, 44);
             this.treeFunctions.Name = "treeFunctions";
             this.treeFunctions.OptionsCustomization.AllowFilter = false;
@@ -202,7 +204,7 @@
             this.treeListColumn1.OptionsColumn.AllowEdit = false;
             this.treeListColumn1.Visible = true;
             this.treeListColumn1.VisibleIndex = 0;
-            this.treeListColumn1.Width = 174;
+            this.treeListColumn1.Width = 192;
             // 
             // treeListColumn2
             // 
@@ -213,7 +215,7 @@
             this.treeListColumn2.Name = "treeListColumn2";
             this.treeListColumn2.OptionsColumn.AllowEdit = false;
             this.treeListColumn2.Visible = true;
-            this.treeListColumn2.VisibleIndex = 1;
+            this.treeListColumn2.VisibleIndex = 2;
             this.treeListColumn2.Width = 60;
             // 
             // treeListColumn3
@@ -225,8 +227,8 @@
             this.treeListColumn3.Name = "treeListColumn3";
             this.treeListColumn3.OptionsColumn.AllowEdit = false;
             this.treeListColumn3.Visible = true;
-            this.treeListColumn3.VisibleIndex = 4;
-            this.treeListColumn3.Width = 173;
+            this.treeListColumn3.VisibleIndex = 5;
+            this.treeListColumn3.Width = 190;
             // 
             // treeListColumn4
             // 
@@ -242,7 +244,7 @@
             this.treeListColumn4.OptionsColumn.AllowEdit = false;
             this.treeListColumn4.UnboundDataType = typeof(short);
             this.treeListColumn4.Visible = true;
-            this.treeListColumn4.VisibleIndex = 3;
+            this.treeListColumn4.VisibleIndex = 4;
             // 
             // treeListColumn5
             // 
@@ -265,7 +267,7 @@
             this.treeListColumn6.UnboundDataType = typeof(short);
             this.treeListColumn6.UnboundExpression = "[Id]";
             this.treeListColumn6.Visible = true;
-            this.treeListColumn6.VisibleIndex = 2;
+            this.treeListColumn6.VisibleIndex = 3;
             this.treeListColumn6.Width = 60;
             // 
             // Root
@@ -325,6 +327,17 @@
             this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem4.TextVisible = false;
             // 
+            // treeListColumn7
+            // 
+            this.treeListColumn7.Caption = "權限";
+            this.treeListColumn7.FieldName = "SetPermission";
+            this.treeListColumn7.MaxWidth = 60;
+            this.treeListColumn7.MinWidth = 60;
+            this.treeListColumn7.Name = "treeListColumn7";
+            this.treeListColumn7.Visible = true;
+            this.treeListColumn7.VisibleIndex = 1;
+            this.treeListColumn7.Width = 60;
+            // 
             // uc402_Functions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -369,5 +382,6 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
         private DevExpress.XtraEditors.SimpleButton btnUpdateRole;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn7;
     }
 }

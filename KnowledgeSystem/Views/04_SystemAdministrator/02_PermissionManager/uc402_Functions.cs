@@ -59,6 +59,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
                                    ControlName = data.ControlName,
                                    Prioritize = data.Prioritize,
                                    Status = p != null,
+                                   SetPermission = data.SetPermission,
                                    Images = data.Images,
                                }).ToList();
                 sourceFunc.DataSource = lsFunctions;
@@ -198,7 +199,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
             if (roleSelect.Id == 0) return;
 
             List<Function> lsDataSourch = sourceFunc.DataSource as List<Function>;
-            var lsFunctionUpdate = lsDataSourch.Where(r => r.Status == true).ToList();
+            var lsFunctionUpdate = lsDataSourch.Where(r => r.Status == true && r.SetPermission).ToList();
 
             // Xóa các functionRole trước đó, sau đó thêm lại
             using (var db = new DBDocumentManagementSystemEntities())

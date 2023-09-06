@@ -32,7 +32,6 @@ namespace KnowledgeSystem
         public virtual DbSet<dt207_Type> dt207_Type { get; set; }
         public virtual DbSet<dt207_TypeHisGetFile> dt207_TypeHisGetFile { get; set; }
         public virtual DbSet<FunctionRole> FunctionRoles { get; set; }
-        public virtual DbSet<Function> Functions { get; set; }
         public virtual DbSet<Group> Groups { get; set; }
         public virtual DbSet<GroupUser> GroupUsers { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
@@ -48,5 +47,6 @@ namespace KnowledgeSystem
         public virtual DbSet<dt207_Base> dt207_Base { get; set; }
         public virtual DbSet<dt207_Base_BAK> dt207_Base_BAK { get; set; }
         public virtual DbSet<sys_StaticValue> sys_StaticValue { get; set; }
+        public virtual DbSet<Function> Functions { get; set; }
     }
 }

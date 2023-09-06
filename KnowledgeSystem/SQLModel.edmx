@@ -190,6 +190,7 @@
           <Property Name="Prioritize" Type="int" />
           <Property Name="Status" Type="bit" />
           <Property Name="Images" Type="varchar" MaxLength="32" />
+          <Property Name="SetPermission" Type="bit" />
         </EntityType>
         <EntityType Name="Groups">
           <Key>
@@ -322,18 +323,6 @@
           <Property Name="IdFunction" Type="Int32" />
           <Property Name="IdRole" Type="Int32" />
         </EntityType>
-        <EntityType Name="Function">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="IdParent" Type="Int32" />
-          <Property Name="DisplayName" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-          <Property Name="ControlName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-          <Property Name="Prioritize" Type="Int32" />
-          <Property Name="Status" Type="Boolean" />
-          <Property Name="Images" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="Group">
           <Key>
             <PropertyRef Name="Id" />
@@ -378,7 +367,6 @@
           <EntitySet Name="dt207_Type" EntityType="Self.dt207_Type" />
           <EntitySet Name="dt207_TypeHisGetFile" EntityType="Self.dt207_TypeHisGetFile" />
           <EntitySet Name="FunctionRoles" EntityType="Self.FunctionRole" />
-          <EntitySet Name="Functions" EntityType="Self.Function" />
           <EntitySet Name="Groups" EntityType="Self.Group" />
           <EntitySet Name="GroupUsers" EntityType="Self.GroupUser" />
           <EntitySet Name="Roles" EntityType="Self.Role" />
@@ -394,6 +382,7 @@
           <EntitySet Name="dt207_Base" EntityType="DBDocumentManagementSystemModel.dt207_Base" />
           <EntitySet Name="dt207_Base_BAK" EntityType="DBDocumentManagementSystemModel.dt207_Base_BAK" />
           <EntitySet Name="sys_StaticValue" EntityType="DBDocumentManagementSystemModel.sys_StaticValue" />
+          <EntitySet Name="Functions" EntityType="DBDocumentManagementSystemModel.Function" />
         </EntityContainer>
         <EntityType Name="dt207_Targets">
           <Key>
@@ -519,6 +508,19 @@
           <Property Name="KeyT" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
           <Property Name="ValueT" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Function">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="IdParent" Type="Int32" />
+          <Property Name="DisplayName" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="ControlName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="Prioritize" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="Images" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="SetPermission" Type="Boolean" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -587,19 +589,6 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="IdFunction" ColumnName="IdFunction" />
                 <ScalarProperty Name="IdRole" ColumnName="IdRole" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Functions">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.Function">
-              <MappingFragment StoreEntitySet="Functions">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IdParent" ColumnName="IdParent" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="ControlName" ColumnName="ControlName" />
-                <ScalarProperty Name="Prioritize" ColumnName="Prioritize" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Images" ColumnName="Images" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -774,6 +763,20 @@
               <MappingFragment StoreEntitySet="sys_StaticValue">
                 <ScalarProperty Name="ValueT" ColumnName="ValueT" />
                 <ScalarProperty Name="KeyT" ColumnName="KeyT" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Functions">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.Function">
+              <MappingFragment StoreEntitySet="Functions">
+                <ScalarProperty Name="SetPermission" ColumnName="SetPermission" />
+                <ScalarProperty Name="Images" ColumnName="Images" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Prioritize" ColumnName="Prioritize" />
+                <ScalarProperty Name="ControlName" ColumnName="ControlName" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="IdParent" ColumnName="IdParent" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

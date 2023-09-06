@@ -14,6 +14,8 @@ namespace KnowledgeSystem
         public Nullable<int> Prioritize { get; set; }
         public Nullable<bool> Status { get; set; }
         public string Images { get; set; }
+        public bool SetPermission { get; set; }
+
         public SvgImage ImageLive
         {
             get

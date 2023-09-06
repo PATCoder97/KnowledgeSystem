@@ -12,7 +12,6 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt207_Type" Width="1.5" PointX="8.875" PointY="4.125" IsExpanded="true" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt207_TypeHisGetFile" Width="1.5" PointX="4" PointY="4.125" IsExpanded="true" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.FunctionRole" Width="1.5" PointX="7.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.Function" Width="1.5" PointX="4" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.Group" Width="1.5" PointX="5.625" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.GroupUser" Width="1.5" PointX="10.5" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.Role" Width="1.5" PointX="12.125" PointY="0.75" IsExpanded="true" />
@@ -28,6 +27,7 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt207_Base" Width="1.5" PointX="17" PointY="4.125" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt207_Base_BAK" Width="1.5" PointX="18.625" PointY="4.125" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.sys_StaticValue" Width="1.5" PointX="13.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.Function" Width="1.5" PointX="4" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

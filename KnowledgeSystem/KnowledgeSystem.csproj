@@ -152,7 +152,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SQLModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="sys_StaticValue.cs" />
+    <Compile Include="Models\sys_StaticValue.cs" />
     <Compile Include="Views\00_Generals\f00_FluentFrame.cs">
       <SubType>Form</SubType>
     </Compile>
