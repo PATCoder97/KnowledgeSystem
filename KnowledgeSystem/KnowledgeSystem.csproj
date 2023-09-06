@@ -470,6 +470,7 @@
     <None Include="Resources\Approval.png" />
     <None Include="Resources\TTKT.jpg" />
     <None Include="Resources\ttktbg.png" />
+    <None Include="Resources\ttktbg1.png" />
     <Content Include="SQLModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SQLModel.edmx</DependentUpon>
