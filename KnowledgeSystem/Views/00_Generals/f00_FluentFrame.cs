@@ -19,6 +19,7 @@ using System.IO;
 using DevExpress.Utils.Extensions;
 using DevExpress.Utils;
 using DataEF;
+using DevExpress.Pdf.Native.BouncyCastle.Asn1.Ocsp;
 
 namespace KnowledgeSystem.Views._00_Generals
 {
@@ -90,7 +91,7 @@ namespace KnowledgeSystem.Views._00_Generals
                 {
                     AccordionControlElement accordion = new AccordionControlElement();
 
-                    string pathImage = Path.Combine(Application.StartupPath, $@"Images\{item.Images}");
+                    string pathImage = Path.Combine(Application.StartupPath, "Images", item.Images ?? "");
                     accordion.ImageOptions.SvgImage = item.Images != null ? DevExpress.Utils.Svg.SvgImage.FromFile(pathImage) : null;
                     accordion.Name = $"name_{item.ControlName}";
                     accordion.Text = item.DisplayName;
@@ -102,16 +103,17 @@ namespace KnowledgeSystem.Views._00_Generals
 
                     accordion.Hint = item.DisplayName;
 
-                   var lsChildren = (from data in db.Functions.Where(r => r.IdParent == item.Id)
-                                     .OrderBy(r => r.Prioritize).ToList()
-                                   join granted in lsPermissions on data.Id equals granted
-                                   select data).ToList();
+                    var lsChildren = (from data in db.Functions.Where(r => r.IdParent == item.Id)
+                                      .OrderBy(r => r.Prioritize).ToList()
+                                      join granted in lsPermissions on data.Id equals granted
+                                      select data).ToList();
                     if (lsChildren.Count != 0)
                     {
                         foreach (var child in lsChildren)
                         {
                             AccordionControlElement accordionChild = new AccordionControlElement();
 
+                            pathImage = Path.Combine(Application.StartupPath, "Images", child.Images ?? "");
                             accordionChild.ImageOptions.SvgImage = child.Images != null ? DevExpress.Utils.Svg.SvgImage.FromFile($@"Images\{child.Images}") : null;
                             accordionChild.Name = $"name_{child.ControlName}";
                             accordionChild.Text = child.DisplayName;

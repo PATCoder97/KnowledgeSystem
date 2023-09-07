@@ -9,6 +9,8 @@
 
 using DevExpress.Utils.Svg;
 using System;
+using System.IO;
+using System.Reflection;
 
 namespace DataEF
 {
@@ -22,13 +24,14 @@ namespace DataEF
         public Nullable<bool> Status { get; set; }
         public string Images { get; set; }
 
+        string assemblyPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         public SvgImage ImageLive
         {
             get
             {
                 return string.IsNullOrEmpty(Images) ?
-                    SvgImage.FromFile($@"Images\none.svg") :
-                    SvgImage.FromFile($@"Images\{Images}");
+                 SvgImage.FromFile(Path.Combine(assemblyPath, $@"Images\none.svg")) :
+                 SvgImage.FromFile(Path.Combine(assemblyPath, $@"Images\{Images}"));
             }
             set { }
         }
