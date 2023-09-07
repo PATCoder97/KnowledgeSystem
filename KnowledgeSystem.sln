@@ -9,6 +9,8 @@ Project("{840C416C-B8F3-42BC-B0DD-F6BB14C9F8CB}") = "SetupDocumentSystem", "Setu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataEF", "DataEF\DataEF.csproj", "{B0E4C247-9F92-4671-8448-C188B7120378}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotifyUI", "NotifyUI\NotifyUI.csproj", "{9E76BCFD-3C86-4FC9-88EE-6670C8DC8940}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,8 +36,17 @@ Global
 		{B0E4C247-9F92-4671-8448-C188B7120378}.DefaultBuild|Any CPU.Build.0 = Debug|Any CPU
 		{B0E4C247-9F92-4671-8448-C188B7120378}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0E4C247-9F92-4671-8448-C188B7120378}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E76BCFD-3C86-4FC9-88EE-6670C8DC8940}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E76BCFD-3C86-4FC9-88EE-6670C8DC8940}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E76BCFD-3C86-4FC9-88EE-6670C8DC8940}.DefaultBuild|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E76BCFD-3C86-4FC9-88EE-6670C8DC8940}.DefaultBuild|Any CPU.Build.0 = Debug|Any CPU
+		{9E76BCFD-3C86-4FC9-88EE-6670C8DC8940}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E76BCFD-3C86-4FC9-88EE-6670C8DC8940}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {60173CCC-850C-43D1-A42B-6C217F8518D3}
 	EndGlobalSection
 EndGlobal
