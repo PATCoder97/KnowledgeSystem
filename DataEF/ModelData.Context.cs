@@ -16,7 +16,7 @@ namespace DataEF
     public partial class DBDocumentManagementSystemEntities : DbContext
     {
         public DBDocumentManagementSystemEntities()
-            : base(SingleConnection.ConString)
+            : base("name=DBDocumentManagementSystemEntities")
         {
         }
     
@@ -48,5 +48,6 @@ namespace DataEF
         public virtual DbSet<sys_StaticValue> sys_StaticValue { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Function> Functions { get; set; }
+        public virtual DbSet<sys_Log> sys_Log { get; set; }
     }
 }

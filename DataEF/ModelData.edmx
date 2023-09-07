@@ -216,6 +216,25 @@
           <Property Name="DisplayName" Type="nvarchar" MaxLength="32" />
           <Property Name="Describe" Type="nvarchar" MaxLength="128" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBDocumentManagementSystem.dbo.sys_Log' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="sys_Log">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="Thread" />
+            <PropertyRef Name="Level" />
+            <PropertyRef Name="Logger" />
+            <PropertyRef Name="Message" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Thread" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Level" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Logger" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Message" Type="nvarchar" MaxLength="4000" Nullable="false" />
+          <Property Name="Exception" Type="nvarchar" MaxLength="2000" />
+        </EntityType>
         <EntityType Name="sys_StaticValue">
           <Key>
             <PropertyRef Name="Id" />
@@ -259,6 +278,17 @@
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sys_StaticValue" EntityType="Self.sys_StaticValue" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sys_Log" EntityType="Self.sys_Log" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [sys_Log].[Id] AS [Id], 
+    [sys_Log].[Date] AS [Date], 
+    [sys_Log].[Thread] AS [Thread], 
+    [sys_Log].[Level] AS [Level], 
+    [sys_Log].[Logger] AS [Logger], 
+    [sys_Log].[Message] AS [Message], 
+    [sys_Log].[Exception] AS [Exception]
+    FROM [dbo].[sys_Log] AS [sys_Log]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -506,6 +536,7 @@
           <EntitySet Name="sys_StaticValue" EntityType="Self.sys_StaticValue" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="Functions" EntityType="DBDocumentModel.Function" />
+          <EntitySet Name="sys_Log" EntityType="DBDocumentModel.sys_Log" />
         </EntityContainer>
         <EntityType Name="Function">
           <Key>
@@ -518,6 +549,23 @@
           <Property Name="Prioritize" Type="Int32" />
           <Property Name="Status" Type="Boolean" />
           <Property Name="Images" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="sys_Log">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="Thread" />
+            <PropertyRef Name="Level" />
+            <PropertyRef Name="Logger" />
+            <PropertyRef Name="Message" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Thread" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Level" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Logger" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Exception" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -774,6 +822,19 @@
                 <ScalarProperty Name="ControlName" ColumnName="ControlName" />
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="IdParent" ColumnName="IdParent" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sys_Log">
+            <EntityTypeMapping TypeName="DBDocumentModel.sys_Log">
+              <MappingFragment StoreEntitySet="sys_Log">
+                <ScalarProperty Name="Exception" ColumnName="Exception" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Logger" ColumnName="Logger" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="Thread" ColumnName="Thread" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
