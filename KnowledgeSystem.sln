@@ -11,10 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataEF", "DataEF\DataEF.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotifyUI", "NotifyUI\NotifyUI.csproj", "{9E76BCFD-3C86-4FC9-88EE-6670C8DC8940}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{AD70F3E9-17F7-4C1A-BE94-720B0F443603}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotifyKnowledge", "NotifyKnowledge\NotifyKnowledge.csproj", "{C63537AD-DF96-4D98-AA07-1480F996E4EE}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,18 +42,9 @@ Global
 		{9E76BCFD-3C86-4FC9-88EE-6670C8DC8940}.DefaultBuild|Any CPU.Build.0 = Debug|Any CPU
 		{9E76BCFD-3C86-4FC9-88EE-6670C8DC8940}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E76BCFD-3C86-4FC9-88EE-6670C8DC8940}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C63537AD-DF96-4D98-AA07-1480F996E4EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C63537AD-DF96-4D98-AA07-1480F996E4EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C63537AD-DF96-4D98-AA07-1480F996E4EE}.DefaultBuild|Any CPU.ActiveCfg = Debug|Any CPU
-		{C63537AD-DF96-4D98-AA07-1480F996E4EE}.DefaultBuild|Any CPU.Build.0 = Debug|Any CPU
-		{C63537AD-DF96-4D98-AA07-1480F996E4EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C63537AD-DF96-4D98-AA07-1480F996E4EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{C63537AD-DF96-4D98-AA07-1480F996E4EE} = {AD70F3E9-17F7-4C1A-BE94-720B0F443603}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {60173CCC-850C-43D1-A42B-6C217F8518D3}
