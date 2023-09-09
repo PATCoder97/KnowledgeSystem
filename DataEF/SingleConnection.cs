@@ -30,9 +30,19 @@ namespace DataEF
 
         public static string Connect()
         {
+            //SqlConnectionStringBuilder sqlString = new SqlConnectionStringBuilder()
+            //{
+            //    DataSource = ".\\ANHTUAN",
+            //    InitialCatalog = "DBDocumentManagementSystem",
+            //    UserID = "PAT",
+            //    Password = "Anhtuan312",
+            //    MultipleActiveResultSets = true,
+            //    ApplicationName = "EntityFramework",
+            //};
+
             SqlConnectionStringBuilder sqlString = new SqlConnectionStringBuilder()
             {
-                DataSource = ".\\ANHTUAN",
+                DataSource = "10.198.138.103",
                 InitialCatalog = "DBDocumentManagementSystem",
                 UserID = "PAT",
                 Password = "Anhtuan312",
@@ -42,7 +52,7 @@ namespace DataEF
 
             //SqlConnectionStringBuilder sqlString = new SqlConnectionStringBuilder()
             //{
-            //    DataSource = "10.198.138.103",
+            //    DataSource = "10.199.232.100",
             //    InitialCatalog = "DBDocumentManagementSystem",
             //    UserID = "PAT",
             //    Password = "Anhtuan312",

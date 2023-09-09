@@ -8,6 +8,7 @@ using System.Data.Entity.Migrations;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -24,12 +25,40 @@ namespace NotifyNotesUI
 
         private Task serviceTask;
         private bool isRunning;
+        string assemblyPath = string.Empty;
+
+        #region System
 
         private void TrayMenuContext()
         {
+            assemblyPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            Image showPng = Image.FromFile(Path.Combine(assemblyPath, "Images", "showform.png"));
+            Image closePng = Image.FromFile(Path.Combine(assemblyPath, "Images", "close.png"));
+
             notifyIcon1.ContextMenuStrip = new ContextMenuStrip();
-            notifyIcon1.ContextMenuStrip.Items.Add("Show", null, this.MenuShow_Click);
-            notifyIcon1.ContextMenuStrip.Items.Add("Exit", null, this.MenuExit_Click);
+            notifyIcon1.ContextMenuStrip.Items.Add("Show", showPng, MenuShow_Click);
+            notifyIcon1.ContextMenuStrip.Items.Add("Exit", closePng, MenuExit_Click);
+
+            notifyIcon1.DoubleClick += NotifyIcon1_DoubleClick;
+        }
+
+        private void HideForm()
+        {
+            WindowState = FormWindowState.Minimized;
+            ShowInTaskbar = false;
+            Hide();
+        }
+
+        private void ShowForm()
+        {
+            ShowInTaskbar = true;
+            WindowState = FormWindowState.Normal;
+            Show();
+        }
+
+        private void NotifyIcon1_DoubleClick(object sender, EventArgs e)
+        {
+            ShowForm();
         }
 
         private void MenuExit_Click(object sender, EventArgs e)
@@ -41,21 +70,14 @@ namespace NotifyNotesUI
 
         private void MenuShow_Click(object sender, EventArgs e)
         {
-            WindowState = FormWindowState.Normal;
-            ShowInTaskbar = true;
-            Show();
+            ShowForm();
         }
 
         private void fMain_Load(object sender, EventArgs e)
         {
             //notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
-
             //notifyIcon1.BalloonTipText = "I am a NotifyIcon Balloon";
-
             //notifyIcon1.BalloonTipTitle = "Welcome Message";
-
-
-
             //notifyIcon1.ShowBalloonTip(1000);
 
             isRunning = true;
@@ -68,9 +90,7 @@ namespace NotifyNotesUI
             if (e.CloseReason == CloseReason.UserClosing)
             {
                 e.Cancel = true;
-                WindowState = FormWindowState.Minimized;
-                ShowInTaskbar = false;
-                Hide();
+                HideForm();
             }
         }
 
@@ -82,10 +102,25 @@ namespace NotifyNotesUI
             }));
         }
 
-        string pathFolderSave = "C:\\Users\\ANHTUAN\\Desktop\\New folder";
+        private void SaveFileHtml(string nameFile, string value)
+        {
+            string logFolder = Path.Combine(assemblyPath, "LogsHtml");
+            if (!Directory.Exists(logFolder))
+            {
+                Directory.CreateDirectory(logFolder);
+            }
+
+            string pathFileSave = Path.Combine(logFolder, nameFile);
+
+            File.WriteAllText(pathFileSave, value);
+        }
+
+        #endregion
 
         private async Task RunTasksAsync()
         {
+            var lsTasks = new List<Task>();
+
             Task task1 = Task.Run(async () =>
             {
                 while (isRunning)
@@ -94,34 +129,39 @@ namespace NotifyNotesUI
                     {
                         AddItemToListBox("NotifyDocUpdated recall");
                         await NotifyDocUpdated();
-                        await Task.Delay(TimeSpan.FromSeconds(10));
                     }
                     catch (Exception ex)
                     {
                         AddItemToListBox("Task NotifyDocUpdated - An error occurred: " + ex.Message);
                     }
+                    await Task.Delay(TimeSpan.FromSeconds(30));
                 }
             });
+            lsTasks.Add(task1);
 
             Task task2 = Task.Run(async () =>
             {
                 while (isRunning)
                 {
+                   // await NotifyDocProcessing();
                     try
                     {
                         AddItemToListBox("NotifyDocProcessing recall");
                         await NotifyDocProcessing();
-                        await Task.Delay(TimeSpan.FromSeconds(10));
                     }
                     catch (Exception ex)
                     {
-                        AddItemToListBox("Task Task 2 - An error occurred: " + ex.Message);
+                        AddItemToListBox("Task NotifyDocProcessing - An error occurred: " + ex.Message);
                     }
+                    await Task.Delay(TimeSpan.FromSeconds(30));
                 }
             });
+            lsTasks.Add(task2);
 
-            await Task.WhenAll(task1, task2);
+            await Task.WhenAll(lsTasks);
         }
+
+        #region 知識庫
 
         private async Task NotifyDocUpdated()
         {
@@ -179,13 +219,31 @@ namespace NotifyNotesUI
                     var pageContent = template.Render(templateData);
 
                     string nameFile = $"文件更新提示 {DateTime.Now:HHmmss} {templateData.Id}.html";
-                    File.WriteAllText(Path.Combine(pathFolderSave, nameFile), pageContent);
+                    SaveFileHtml(nameFile, pageContent);
+
+                    // Send notes
+                    Mail mailNotes = new Mail()
+                    {
+                        To = userNotify.Id,
+                        Subject = $"通知文件 : 庫通知通知您文件「 {templateData.Id}」已完成更新。",
+                        Content = pageContent
+                    };
+                    string res = await NotesMail.SendNoteAsync(mailNotes);
 
                     // Cập nhật ngày notify note len DB
                     var dataNotified = db.dt207_NotifyEditDoc.First(r => r.Id == item.dtdata.Id);
                     dataNotified.TimeNotifyNotes = DateTime.Now;
-
                     db.dt207_NotifyEditDoc.AddOrUpdate(dataNotified);
+
+                    // Cập nhật log vào DB
+                    sys_Log log = new sys_Log()
+                    {
+                        ThreadName = "207 KnowledgeSystem",
+                        Level = "Info",
+                        Logger = "Document updated",
+                        Message = $"Code: {res} ID: {templateData.Id} NAME: {templateData.Nametw}"
+                    };
+
                     await db.SaveChangesAsync();
 
                     string logs = $"{templateData.Id} {templateData.Namevn} {templateData.Nametw} {dataNotified.TimeNotifyNotes}";
@@ -196,8 +254,11 @@ namespace NotifyNotesUI
 
         private async Task NotifyDocProcessing()
         {
-            var templateContent = File.ReadAllText($@"{AppDomain.CurrentDomain.BaseDirectory}\html\f207_DocProcessing.html");
-            var template = Template.Parse(templateContent);
+            var templateContentOwner = File.ReadAllText($@"{AppDomain.CurrentDomain.BaseDirectory}\html\f207_DocProcessingOwner.html");
+            var templateOwner = Template.Parse(templateContentOwner);
+
+            var templateContentSigner = File.ReadAllText($@"{AppDomain.CurrentDomain.BaseDirectory}\html\f207_DocProcessingSigner.html");
+            var templateSigner = Template.Parse(templateContentSigner);
 
             using (var db = new DBDocumentManagementSystemEntities())
             {
@@ -261,10 +322,28 @@ namespace NotifyNotesUI
                             Detailevents = detailEvents
                         };
 
-                        var pageContent = template.Render(templateData);
+                        var pageContent = templateOwner.Render(templateData);
 
                         string nameFile = $"{detailEvents} {DateTime.Now:HHmmss} {templateData.Id}.html";
-                        File.WriteAllText(Path.Combine(pathFolderSave, nameFile), pageContent);
+                        SaveFileHtml(nameFile, pageContent);
+
+                        // Send notes
+                        Mail mailNotes = new Mail()
+                        {
+                            To = userNotify.Id,
+                            Subject = $"{subjectEvents} : 庫通知通知您文件「 {templateData.Id}」{detailEvents}。",
+                            Content = pageContent
+                        };
+                        string res = await NotesMail.SendNoteAsync(mailNotes);
+
+                        // Cập nhật log vào DB
+                        sys_Log log = new sys_Log()
+                        {
+                            ThreadName = "207 KnowledgeSystem",
+                            Level = "Info",
+                            Logger = "Document processing to owner",
+                            Message = $"Code: {res} ID: {templateData.Id} Event: {templateData.Detailevents}"
+                        };
                     }
 
                     // Thông báo cho chủ quản
@@ -275,31 +354,45 @@ namespace NotifyNotesUI
 
                         var lsUserSigns = db.GroupUsers.Where(r => r.IdGroup == idGroup).Select(r => r.IdUser).ToList();
 
-                        foreach (var userSign in lsUserSigns)
+                        var userProcess = lsUsers.First(r => r.Id == bases.UserUpload);
+                        var userUpload = lsUsers.First(r => r.Id == bases.UserProcess);
+                        var displayName = bases.DisplayName.Split(new[] { "\r\n" }, StringSplitOptions.None);
+
+                        var templateData = new
                         {
-                            var userNotify = lsUsers.First(r => r.Id == userSign);
-                            var userProcess = lsUsers.First(r => r.Id == bases.UserUpload);
-                            var userUpload = lsUsers.First(r => r.Id == bases.UserProcess);
-                            var displayName = bases.DisplayName.Split(new[] { "\r\n" }, StringSplitOptions.None);
+                            Id = idBase,
+                            Typeof = lsTypes.First(r => r.Id == bases.IdTypes).DisplayName,
+                            Namevn = displayName.Length > 1 ? displayName[1] : "",
+                            Nametw = displayName[0],
+                            Userupload = $"{userUpload.IdDepartment} {userUpload.Id} {userUpload.DisplayName}",
+                            Userprocess = $"{userProcess.IdDepartment} {userProcess.Id} {userProcess.DisplayName}",
+                        };
 
-                            var templateData = new
-                            {
-                                Usernotify = userNotify.DisplayName,
-                                Id = idBase,
-                                Typeof = lsTypes.First(r => r.Id == bases.IdTypes).DisplayName,
-                                Namevn = displayName.Length > 1 ? displayName[1] : "",
-                                Nametw = displayName[0],
-                                Userupload = $"{userUpload.IdDepartment} {userUpload.Id} {userUpload.DisplayName}",
-                                Userprocess = $"{userProcess.IdDepartment} {userProcess.Id} {userProcess.DisplayName}",
-                            };
+                        var pageContent = templateSigner.Render(templateData);
 
-                            var pageContent = template.Render(templateData);
+                        string nameFile = $"文件審查 {DateTime.Now:HHmmss} {templateData.Id}.html";
+                        SaveFileHtml(nameFile, pageContent);
 
-                            string nameFile = $"文件審查 {DateTime.Now:HHmmss} {templateData.Id}.html";
-                            File.WriteAllText(Path.Combine(pathFolderSave, nameFile), pageContent);
-                        }
+                        // Send notes
+                        Mail mailNotes = new Mail()
+                        {
+                            lsTO = lsUserSigns,
+                            Subject = $"處理文件 : 庫通知通知您文件「 {templateData.Id}」需審查。",
+                            Content = pageContent
+                        };
+                        string res = await NotesMail.SendNoteAsync(mailNotes);
+
+                        // Cập nhật log vào DB
+                        sys_Log log = new sys_Log()
+                        {
+                            ThreadName = "207 KnowledgeSystem",
+                            Level = "Info",
+                            Logger = "Document processing to signer",
+                            Message = $"Code: {res} ID: {templateData.Id} NAME: {templateData.Nametw}"
+                        };
                     }
 
+                    // Cập nhật ngày thông báo notes lên DB
                     var dataNotified = db.dt207_DocProgressInfo.First(r => r.Id == item.data.Id);
                     dataNotified.TimeNotifyNotes = DateTime.Now;
 
@@ -308,5 +401,7 @@ namespace NotifyNotesUI
                 }
             }
         }
+
+        #endregion
     }
 }
