@@ -16,7 +16,7 @@ namespace DataEF
     public partial class DBDocumentManagementSystemEntities : DbContext
     {
         public DBDocumentManagementSystemEntities()
-            : base("name=DBDocumentManagementSystemEntities")
+           : base(SingleConnection.ConString)
         {
         }
     

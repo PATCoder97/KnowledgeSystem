@@ -9,22 +9,121 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace NotifyUI
+namespace NotifyNotesUI
 {
-    public partial class fMain : DevExpress.XtraEditors.XtraForm
+    public partial class fMain : Form
     {
         public fMain()
         {
             InitializeComponent();
+            TrayMenuContext();
+        }
+
+        private Task serviceTask;
+        private bool isRunning;
+
+        private void TrayMenuContext()
+        {
+            notifyIcon1.ContextMenuStrip = new ContextMenuStrip();
+            notifyIcon1.ContextMenuStrip.Items.Add("Show", null, this.MenuShow_Click);
+            notifyIcon1.ContextMenuStrip.Items.Add("Exit", null, this.MenuExit_Click);
+        }
+
+        private void MenuExit_Click(object sender, EventArgs e)
+        {
+            isRunning = false;
+            serviceTask.Wait();
+            Application.Exit();
+        }
+
+        private void MenuShow_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Normal;
+            ShowInTaskbar = true;
+            Show();
+        }
+
+        private void fMain_Load(object sender, EventArgs e)
+        {
+            //notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
+
+            //notifyIcon1.BalloonTipText = "I am a NotifyIcon Balloon";
+
+            //notifyIcon1.BalloonTipTitle = "Welcome Message";
+
+
+
+            //notifyIcon1.ShowBalloonTip(1000);
+
+            isRunning = true;
+            AddItemToListBox("Start...");
+            serviceTask = Task.Run(RunTasksAsync);
+        }
+
+        private void fMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                WindowState = FormWindowState.Minimized;
+                ShowInTaskbar = false;
+                Hide();
+            }
+        }
+
+        private void AddItemToListBox(string item)
+        {
+            listLogs.Invoke(new Action(() =>
+            {
+                listLogs.Items.Add(item);
+            }));
         }
 
         string pathFolderSave = "C:\\Users\\ANHTUAN\\Desktop\\New folder";
 
-        #region 知識庫
+        private async Task RunTasksAsync()
+        {
+            Task task1 = Task.Run(async () =>
+            {
+                while (isRunning)
+                {
+                    try
+                    {
+                        AddItemToListBox("NotifyDocUpdated recall");
+                        await NotifyDocUpdated();
+                        await Task.Delay(TimeSpan.FromSeconds(10));
+                    }
+                    catch (Exception ex)
+                    {
+                        AddItemToListBox("Task NotifyDocUpdated - An error occurred: " + ex.Message);
+                    }
+                }
+            });
 
-        private void btnUpdateDoc_Click(object sender, EventArgs e)
+            Task task2 = Task.Run(async () =>
+            {
+                while (isRunning)
+                {
+                    try
+                    {
+                        AddItemToListBox("NotifyDocProcessing recall");
+                        await NotifyDocProcessing();
+                        await Task.Delay(TimeSpan.FromSeconds(10));
+                    }
+                    catch (Exception ex)
+                    {
+                        AddItemToListBox("Task Task 2 - An error occurred: " + ex.Message);
+                    }
+                }
+            });
+
+            await Task.WhenAll(task1, task2);
+        }
+
+        private async Task NotifyDocUpdated()
         {
             var templateContent = File.ReadAllText($@"{AppDomain.CurrentDomain.BaseDirectory}\html\f207_DocUpdated.html");
             var template = Template.Parse(templateContent);
@@ -87,12 +186,15 @@ namespace NotifyUI
                     dataNotified.TimeNotifyNotes = DateTime.Now;
 
                     db.dt207_NotifyEditDoc.AddOrUpdate(dataNotified);
-                    db.SaveChanges();
+                    await db.SaveChangesAsync();
+
+                    string logs = $"{templateData.Id} {templateData.Namevn} {templateData.Nametw} {dataNotified.TimeNotifyNotes}";
+                    AddItemToListBox(logs);
                 }
             }
         }
 
-        private void btnDocProcessing_Click(object sender, EventArgs e)
+        private async Task NotifyDocProcessing()
         {
             var templateContent = File.ReadAllText($@"{AppDomain.CurrentDomain.BaseDirectory}\html\f207_DocProcessing.html");
             var template = Template.Parse(templateContent);
@@ -202,13 +304,9 @@ namespace NotifyUI
                     dataNotified.TimeNotifyNotes = DateTime.Now;
 
                     db.dt207_DocProgressInfo.AddOrUpdate(dataNotified);
-                    db.SaveChanges();
+                    await db.SaveChangesAsync();
                 }
             }
         }
-
-        #endregion
-
-
     }
 }
