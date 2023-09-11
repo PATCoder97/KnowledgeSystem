@@ -53,27 +53,23 @@ namespace SVC207Knowledge
 
         private void AppendRowToFileAsync(string msg)
         {
-            string pathFolder = Path.Combine(assemblyPath, $"{DateTime.Today:yyyy}", $"{DateTime.Today:MM}");
-            if (!Directory.Exists(pathFolder))
-                Directory.CreateDirectory(pathFolder);
+            string folderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, DateTime.Today.ToString("yyyy"), DateTime.Today.ToString("MM"));
+            Directory.CreateDirectory(folderPath);
 
-            string filePath = Path.Combine(pathFolder, $"{DateTime.Today:dd}.txt");
-            if (!File.Exists(filePath))
-                File.Create(filePath);
+            string filePath = Path.Combine(folderPath, DateTime.Today.ToString("dd") + ".txt");
 
-            using (StreamWriter writer = new StreamWriter(filePath, true))
+            using (StreamWriter writer = File.AppendText(filePath))
+            {
                 writer.WriteLine($"{DateTime.Now:hh:mm:ss tt}: {msg}");
+            }
         }
 
         private void SaveFileHtml(string nameFile, string value)
         {
-            string logFolder = Path.Combine(assemblyPath, "LogsHtml");
-            if (!Directory.Exists(logFolder))
-            {
-                Directory.CreateDirectory(logFolder);
-            }
+            string folderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, DateTime.Today.ToString("yyyy"), DateTime.Today.ToString("MM"), DateTime.Today.ToString("dd"));
+            Directory.CreateDirectory(folderPath);
 
-            string pathFileSave = Path.Combine(logFolder, nameFile);
+            string pathFileSave = Path.Combine(folderPath, nameFile);
 
             File.WriteAllText(pathFileSave, value);
         }
@@ -199,7 +195,7 @@ namespace SVC207Knowledge
                         ThreadName = "207 KnowledgeSystem",
                         Level = "Info",
                         Logger = "Document updated",
-                        Message = $"Code: {res} ID: {templateData.Id} NAME: {templateData.Nametw}"
+                        Message = res
                     };
                     db.sys_Log.Add(log);
 
@@ -303,7 +299,7 @@ namespace SVC207Knowledge
                             ThreadName = "207 KnowledgeSystem",
                             Level = "Info",
                             Logger = "Document processing to owner",
-                            Message = $"Code: {res} ID: {templateData.Id} Event: {templateData.Detailevents}"
+                            Message = res
                         };
                         db.sys_Log.Add(log);
                     }
@@ -350,7 +346,7 @@ namespace SVC207Knowledge
                             ThreadName = "207 KnowledgeSystem",
                             Level = "Info",
                             Logger = "Document processing to signer",
-                            Message = $"Code: {res} ID: {templateData.Id} NAME: {templateData.Nametw}"
+                            Message = res
                         };
                         db.sys_Log.Add(log);
                     }

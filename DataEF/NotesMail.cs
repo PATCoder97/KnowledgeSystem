@@ -7,7 +7,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SVC207Knowledge
+namespace DataEF
 {
     public class NotesMail
     {
@@ -19,9 +19,9 @@ namespace SVC207Knowledge
 
                 var mail = new Mail()
                 {
-                    To = "VNW0014732@VNFPG",
-                    //To = string.Join(",", mailNotes.lsTO),
-                    CC = mailNotes.lsCC != null ? string.Join(",", mailNotes.lsCC) : "",
+                    //To = "VNW0014732@VNFPG",
+                    To = !string.IsNullOrEmpty(mailNotes.To) ? $"{mailNotes.To}@VNFPG" : mailNotes.lsTO != null ? string.Join(",", mailNotes.lsTO.Select(p => $"{p}@VNFPG")) : "",
+                    CC = !string.IsNullOrEmpty(mailNotes.CC) ? $"{mailNotes.CC}@VNFPG" : mailNotes.lsCC != null ? string.Join(",", mailNotes.lsCC.Select(p => $"{p}@VNFPG")) : "",
                     Subject = mailNotes.Subject,
                     SystemName = "冶金文件管理系統",
                     SystemOwner = "潘英俊(分機:6779)",
@@ -49,7 +49,8 @@ namespace SVC207Knowledge
                 var json_string = JsonConvert.SerializeObject(mail);
                 var requestContent = new StringContent(json_string, Encoding.UTF8, "application/json");
                 var response = await client.PostAsync("/api/Mail", requestContent);
-                return response.StatusCode.ToString();
+
+                return response.IsSuccessStatusCode ? $"Code:{response.StatusCode} To:{mail.To} CC:{mail.CC} Subject:{mail.Subject}" : $"Code:{response.StatusCode}";
             }
         }
     }
