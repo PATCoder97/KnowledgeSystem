@@ -54,6 +54,7 @@ namespace DataEF
             }
         }
     }
+
     public class Mail
     {
         public string To { get; set; }
