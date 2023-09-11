@@ -3,103 +3,66 @@ using Scriban;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration.Assemblies;
 using System.Data;
 using System.Data.Entity.Migrations;
-using System.Drawing;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
-namespace NotifyNotesUI
+namespace SVC207Knowledge
 {
-    public partial class fMain : Form
+    public partial class Service207 : ServiceBase
     {
-        public fMain()
+        public Service207()
         {
             InitializeComponent();
-            TrayMenuContext();
         }
 
+        int defaulDelay = 5; //minute
         private Task serviceTask;
         private bool isRunning;
         string assemblyPath = string.Empty;
 
-        #region System
-
-        private void TrayMenuContext()
+        protected override void OnStart(string[] args)
         {
-            assemblyPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            Image showPng = Image.FromFile(Path.Combine(assemblyPath, "Images", "showform.png"));
-            Image closePng = Image.FromFile(Path.Combine(assemblyPath, "Images", "close.png"));
-
-            notifyIcon1.ContextMenuStrip = new ContextMenuStrip();
-            notifyIcon1.ContextMenuStrip.Items.Add("Show", showPng, MenuShow_Click);
-            notifyIcon1.ContextMenuStrip.Items.Add("Exit", closePng, MenuExit_Click);
-
-            notifyIcon1.DoubleClick += NotifyIcon1_DoubleClick;
-        }
-
-        private void HideForm()
-        {
-            WindowState = FormWindowState.Minimized;
-            ShowInTaskbar = false;
-            Hide();
-        }
-
-        private void ShowForm()
-        {
-            ShowInTaskbar = true;
-            WindowState = FormWindowState.Normal;
-            Show();
-        }
-
-        private void NotifyIcon1_DoubleClick(object sender, EventArgs e)
-        {
-            ShowForm();
-        }
-
-        private void MenuExit_Click(object sender, EventArgs e)
-        {
-            isRunning = false;
-            serviceTask.Wait();
-            Application.Exit();
-        }
-
-        private void MenuShow_Click(object sender, EventArgs e)
-        {
-            ShowForm();
-        }
-
-        private void fMain_Load(object sender, EventArgs e)
-        {
-            //notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
-            //notifyIcon1.BalloonTipText = "I am a NotifyIcon Balloon";
-            //notifyIcon1.BalloonTipTitle = "Welcome Message";
-            //notifyIcon1.ShowBalloonTip(1000);
-
             isRunning = true;
-            AddItemToListBox("Start...");
+            assemblyPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
+            AppendRowToFileAsync("Start");
             serviceTask = Task.Run(RunTasksAsync);
         }
 
-        private void fMain_FormClosing(object sender, FormClosingEventArgs e)
+        protected override void OnStop()
         {
-            if (e.CloseReason == CloseReason.UserClosing)
+            isRunning = false;
+            AppendRowToFileAsync("Stop");
+            try
             {
-                e.Cancel = true;
-                HideForm();
+                serviceTask.Wait();
+            }
+            catch (Exception ex)
+            {
+                AppendRowToFileAsync("Task - An error occurred: " + ex.Message);
             }
         }
 
-        private void AddItemToListBox(string item)
+        private void AppendRowToFileAsync(string msg)
         {
-            listLogs.Invoke(new Action(() =>
-            {
-                listLogs.Items.Add(item);
-            }));
+            string pathFolder = Path.Combine(assemblyPath, $"{DateTime.Today:yyyy}", $"{DateTime.Today:MM}");
+            if (!Directory.Exists(pathFolder))
+                Directory.CreateDirectory(pathFolder);
+
+            string filePath = Path.Combine(pathFolder, $"{DateTime.Today:dd}.txt");
+            if (!File.Exists(filePath))
+                File.Create(filePath);
+
+            using (StreamWriter writer = new StreamWriter(filePath, true))
+                writer.WriteLine($"{DateTime.Now:hh:mm:ss tt}: {msg}");
         }
 
         private void SaveFileHtml(string nameFile, string value)
@@ -115,8 +78,6 @@ namespace NotifyNotesUI
             File.WriteAllText(pathFileSave, value);
         }
 
-        #endregion
-
         private async Task RunTasksAsync()
         {
             var lsTasks = new List<Task>();
@@ -127,14 +88,14 @@ namespace NotifyNotesUI
                 {
                     try
                     {
-                        AddItemToListBox("NotifyDocUpdated recall");
+                        AppendRowToFileAsync("Recal: NotifyDocUpdated");
                         await NotifyDocUpdated();
                     }
                     catch (Exception ex)
                     {
-                        AddItemToListBox("Task NotifyDocUpdated - An error occurred: " + ex.Message);
+                        AppendRowToFileAsync("Task NotifyDocUpdated - An error occurred: " + ex.Message);
                     }
-                    await Task.Delay(TimeSpan.FromSeconds(30));
+                    await Task.Delay(TimeSpan.FromSeconds(defaulDelay));
                 }
             });
             lsTasks.Add(task1);
@@ -143,25 +104,22 @@ namespace NotifyNotesUI
             {
                 while (isRunning)
                 {
-                   // await NotifyDocProcessing();
                     try
                     {
-                        AddItemToListBox("NotifyDocProcessing recall");
+                        AppendRowToFileAsync("Recal: NotifyDocProcessing");
                         await NotifyDocProcessing();
                     }
                     catch (Exception ex)
                     {
-                        AddItemToListBox("Task NotifyDocProcessing - An error occurred: " + ex.Message);
+                        AppendRowToFileAsync("Task NotifyDocProcessing - An error occurred: " + ex.Message);
                     }
-                    await Task.Delay(TimeSpan.FromSeconds(30));
+                    await Task.Delay(TimeSpan.FromSeconds(defaulDelay));
                 }
             });
             lsTasks.Add(task2);
 
             await Task.WhenAll(lsTasks);
         }
-
-        #region 知識庫
 
         private async Task NotifyDocUpdated()
         {
@@ -246,9 +204,6 @@ namespace NotifyNotesUI
                     db.sys_Log.Add(log);
 
                     await db.SaveChangesAsync();
-
-                    string logs = $"{templateData.Id} {templateData.Namevn} {templateData.Nametw} {dataNotified.TimeNotifyNotes}";
-                    AddItemToListBox(logs);
                 }
             }
         }
@@ -300,12 +255,17 @@ namespace NotifyNotesUI
                         if (events.StartsWith("確認"))
                         {
                             detailEvents = "已確認完畢";
-                            subjectEvents = "通知文件：";
+                            subjectEvents = "通知文件";
                         }
                         else if (events.StartsWith("退回"))
                         {
                             detailEvents = "被退回";
-                            subjectEvents = "退回文件：";
+                            subjectEvents = "退回文件";
+                        }
+                        else if (events.StartsWith("取消"))
+                        {
+                            detailEvents = "已取消";
+                            subjectEvents = "取消文件";
                         }
                         else
                         {
@@ -404,7 +364,5 @@ namespace NotifyNotesUI
                 }
             }
         }
-
-        #endregion
     }
 }

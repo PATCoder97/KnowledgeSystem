@@ -26,9 +26,9 @@
         <EntityTypeShape EntityType="DBDocumentModel.GroupUser" Width="1.5" PointX="10.5" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DBDocumentModel.Role" Width="1.5" PointX="12.125" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DBDocumentModel.sys_StaticValue" Width="1.5" PointX="8.875" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBDocumentModel.User" Width="1.5" PointX="15.375" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBDocumentModel.User" Width="1.5" PointX="13.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DBDocumentModel.Function" Width="1.5" PointX="4" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBDocumentModel.sys_Log" Width="1.5" PointX="13.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBDocumentModel.sys_Log" Width="1.5" PointX="15.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

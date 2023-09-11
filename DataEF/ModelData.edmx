@@ -216,18 +216,12 @@
           <Property Name="DisplayName" Type="nvarchar" MaxLength="32" />
           <Property Name="Describe" Type="nvarchar" MaxLength="128" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DBDocumentManagementSystem.dbo.sys_Log' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="sys_Log">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="ThreadName" />
-            <PropertyRef Name="Level" />
-            <PropertyRef Name="Logger" />
-            <PropertyRef Name="Message" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Date" Type="datetime" />
+          <Property Name="Date" Type="datetime2" Precision="7" />
           <Property Name="ThreadName" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Level" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Logger" Type="varchar" MaxLength="255" Nullable="false" />
@@ -275,19 +269,9 @@ warning 6002: The table/view 'DBDocumentManagementSystem.dbo.sys_Log' does not h
           <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GroupUser" EntityType="Self.GroupUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sys_Log" EntityType="Self.sys_Log" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sys_StaticValue" EntityType="Self.sys_StaticValue" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sys_Log" EntityType="Self.sys_Log" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [sys_Log].[Id] AS [Id], 
-    [sys_Log].[Date] AS [Date], 
-    [sys_Log].[ThreadName] AS [ThreadName], 
-    [sys_Log].[Level] AS [Level], 
-    [sys_Log].[Logger] AS [Logger], 
-    [sys_Log].[Message] AS [Message], 
-    [sys_Log].[Exception] AS [Exception]
-    FROM [dbo].[sys_Log] AS [sys_Log]</DefiningQuery>
-          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -552,13 +536,9 @@ warning 6002: The table/view 'DBDocumentManagementSystem.dbo.sys_Log' does not h
         <EntityType Name="sys_Log">
           <Key>
             <PropertyRef Name="Id" />
-            <PropertyRef Name="ThreadName" />
-            <PropertyRef Name="Level" />
-            <PropertyRef Name="Logger" />
-            <PropertyRef Name="Message" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="Date" Type="DateTime" Precision="7" />
           <Property Name="ThreadName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Level" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Logger" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />

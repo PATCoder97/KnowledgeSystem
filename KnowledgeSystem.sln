@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataEF", "DataEF\DataEF.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotifyNotesUI", "NotifyNotesUI\NotifyNotesUI.csproj", "{4D0BFCD6-EE63-4C7F-976D-D06FAC7E7662}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{BBBAE6A8-7E00-4348-A83E-6BC1D7F829F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SVC207Knowledge", "SVC207Knowledge\SVC207Knowledge.csproj", "{9435FFA3-A885-4A21-86A5-85F38D6F6908}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,9 +46,18 @@ Global
 		{4D0BFCD6-EE63-4C7F-976D-D06FAC7E7662}.DefaultBuild|Any CPU.Build.0 = Debug|Any CPU
 		{4D0BFCD6-EE63-4C7F-976D-D06FAC7E7662}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D0BFCD6-EE63-4C7F-976D-D06FAC7E7662}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9435FFA3-A885-4A21-86A5-85F38D6F6908}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9435FFA3-A885-4A21-86A5-85F38D6F6908}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9435FFA3-A885-4A21-86A5-85F38D6F6908}.DefaultBuild|Any CPU.ActiveCfg = Debug|Any CPU
+		{9435FFA3-A885-4A21-86A5-85F38D6F6908}.DefaultBuild|Any CPU.Build.0 = Debug|Any CPU
+		{9435FFA3-A885-4A21-86A5-85F38D6F6908}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9435FFA3-A885-4A21-86A5-85F38D6F6908}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9435FFA3-A885-4A21-86A5-85F38D6F6908} = {BBBAE6A8-7E00-4348-A83E-6BC1D7F829F2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {60173CCC-850C-43D1-A42B-6C217F8518D3}

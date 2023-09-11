@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DocProcessing</title>
+</head>
+<!--通知文件 : 庫通知通知您文件「 」已完成更新。-->
+
+
+<body>
+    <h2>{{usernotify}}，您好！</h2>
+
+    <p>
+        知識庫系統通知文件「<span>{{id}}</span>」{{detailevents}}。<br>
+        請您進入系統，在「<span class="control">通知</span>」⇒「<span class="control">文件查核進度</span>」檢查。感謝您的合作。
+    </p>
+
+    <p>
+        核簽人員：{{userprocess}}<br>
+        核簽結果：{{events}}<br>
+        核簽時間：<span style="color: black; font-family: Times New Roman">{{timeprocess}}</span>
+    </p>
+
+</body>
+</html>
+
+<style>
+    h2 {
+        font-family: DFKai-SB;
+        color: #000000;
+    }
+
+    p {
+        color: #000000;
+        font-size: 1.4em;
+        font-family: DFKai-SB;
+    }
+
+    span {
+        color: red;
+        font-family: "Times New Roman";
+    }
+
+    .control {
+        color: blue;
+        font-family: DFKai-SB;
+    }
+</style>
