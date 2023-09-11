@@ -91,7 +91,7 @@ namespace SVC207Knowledge
                     {
                         AppendRowToFileAsync("Task NotifyDocUpdated - An error occurred: " + ex.Message);
                     }
-                    await Task.Delay(TimeSpan.FromSeconds(defaulDelay));
+                    await Task.Delay(TimeSpan.FromMinutes(defaulDelay));
                 }
             });
             lsTasks.Add(task1);
@@ -109,7 +109,7 @@ namespace SVC207Knowledge
                     {
                         AppendRowToFileAsync("Task NotifyDocProcessing - An error occurred: " + ex.Message);
                     }
-                    await Task.Delay(TimeSpan.FromSeconds(defaulDelay));
+                    await Task.Delay(TimeSpan.FromMinutes(defaulDelay));
                 }
             });
             lsTasks.Add(task2);
