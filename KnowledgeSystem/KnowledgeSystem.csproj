@@ -409,6 +409,9 @@
     <Content Include="Images\Customers.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\loginscreen.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\none.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

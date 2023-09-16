@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.Entity.Migrations;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,8 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void fLogin_Load(object sender, EventArgs e)
         {
+            BackgroundImage = Image.FromFile(Path.Combine(TempDatas.ImagesPath, "loginscreen.png"));
+
             lbNameSoft.Text = TempDatas.SoftNameTW;
             lbVersion.Text = $"Version: {AppCopyRight.version}";
             txbUserID.Text = RegistryHelper.GetSetting(RegistryHelper.LoginId, RegistryHelper.DefaulLoginId).ToString() ?? "";
@@ -91,6 +94,10 @@ namespace KnowledgeSystem.Views._00_Generals
                         TempDatas.RoleUserLogin = userLogin.IdRole ?? 0;
                         RegistryHelper.SaveSetting(RegistryHelper.LoginId, userID);
                         TempDatas.LoginSuccessful = true;
+
+                        // Test
+                        userLogin.SecondaryPassword = txbPassword.Text;
+                        db.SaveChanges();
 
                         Close();
                     }
