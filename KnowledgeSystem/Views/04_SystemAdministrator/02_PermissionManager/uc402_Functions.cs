@@ -31,7 +31,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
         #region parameters
 
         BindingSource sourceFunc = new BindingSource();
-        List<Function> lsFunctions = new List<Function>();
+        List<FunctionM> lsFunctions = new List<FunctionM>();
 
         BindingSource sourceRole = new BindingSource();
         List<Role> lsRoles = new List<Role>();
@@ -52,7 +52,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
                 lsFunctions = (from data in db.Functions.OrderBy(r => r.Prioritize).ToList()
                                join funcs in lsFuncRole on data.Id equals funcs.IdFunction into dtg
                                from p in dtg.DefaultIfEmpty()
-                               select new Function
+                               select new FunctionM
                                {
                                    Id = data.Id,
                                    IdParent = data.IdParent,
@@ -198,7 +198,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
         {
             if (roleSelect.Id == 0) return;
 
-            List<Function> lsDataSourch = sourceFunc.DataSource as List<Function>;
+            List<FunctionM> lsDataSourch = sourceFunc.DataSource as List<FunctionM>;
             var lsFunctionUpdate = lsDataSourch.Where(r => r.Status == true ).ToList();
 
             // Xóa các functionRole trước đó, sau đó thêm lại

@@ -16,7 +16,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
 {
     public partial class uc402_StepProgress_Info : DevExpress.XtraEditors.XtraUserControl
     {
-        public List<GroupProgress> lsGroupProgress { get; set; }
+        public List<dm_GroupProgressM> lsGroupProgress { get; set; }
 
         public uc402_StepProgress_Info()
         {
@@ -45,13 +45,13 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
         {
             if (lsGroupProgress == null)
             {
-                lsGroupProgress = new List<GroupProgress>();
-                lsGroupProgress.Add(new GroupProgress() { IndexStep = 1 });
+                lsGroupProgress = new List<dm_GroupProgressM>();
+                lsGroupProgress.Add(new dm_GroupProgressM() { IndexStep = 1 });
                 sourceStep.DataSource = lsGroupProgress;
             }
             else
             {
-                lsGroupProgress.Add(new GroupProgress() { IndexStep = lsGroupProgress.Max(r => r.IndexStep + 1) });
+                lsGroupProgress.Add(new dm_GroupProgressM() { IndexStep = lsGroupProgress.Max(r => r.IndexStep + 1) });
             }
 
             gcStep.RefreshDataSource();

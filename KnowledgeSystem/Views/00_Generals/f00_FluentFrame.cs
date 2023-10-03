@@ -41,7 +41,7 @@ namespace KnowledgeSystem.Views._00_Generals
         Font fontTW14 = new Font("DFKai-SB", 14.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
 
         int groupId = 0;
-        List<Function> lsFunctions = new List<Function>();
+        List<FunctionM> lsFunctions = new List<FunctionM>();
 
         #endregion
 

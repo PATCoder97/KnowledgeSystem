@@ -14,7 +14,7 @@ using System.Reflection;
 
 namespace DataEF
 {
-    public class Function
+    public class FunctionM
     {
         public int Id { get; set; }
         public Nullable<int> IdParent { get; set; }

@@ -90,7 +90,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
 
             var lsStepProgressSelect = (from data in lsStepProgresses.Where(r => r.IdProgress == idProgressSelect)
                                         join groups in lsGroups on data.IdGroup equals groups.Id
-                                        select new GroupProgress
+                                        select new dm_GroupProgressM
                                         {
                                             IndexStep = data.IndexStep,
                                             DisplayName = groups.DisplayName
@@ -169,7 +169,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
 
             var lsStepProgressSelect = (from data in ucInfo.lsGroupProgress
                                         join groups in lsGroups on data.Id equals groups.Id
-                                        select new GroupProgress
+                                        select new dm_GroupProgressM
                                         {
                                             IndexStep = data.IndexStep,
                                             Id = data.Id,

@@ -19,7 +19,7 @@ namespace DataEF
         public Nullable<int> Prioritize { get; set; }
     }
 
-    public class GroupProgress : Group
+    public class dm_GroupProgressM : Group
     {
         public int IndexStep { get; set; }
     }
