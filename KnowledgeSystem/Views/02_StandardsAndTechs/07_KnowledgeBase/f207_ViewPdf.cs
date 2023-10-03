@@ -1,4 +1,4 @@
-﻿using DataEF;
+﻿using DataAccessLayer;
 using DevExpress.Pdf;
 using DevExpress.Utils.CommonDialogs;
 using DevExpress.XtraEditors;
@@ -67,7 +67,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                var IsProcessing = db.dt207_DocProgress.Any(r => r.IdKnowledgeBase == idKnowledgeBase && !r.IsComplete);
+                var IsProcessing = db.dt207_DocProgress.Any(r => r.IdKnowledgeBase == idKnowledgeBase && !(r.IsComplete ?? false));
                 if (!IsProcessing)
                 {
                     dt207_HistoryGetFile historyGetFile = new dt207_HistoryGetFile()
@@ -109,7 +109,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
                 using (var db = new DBDocumentManagementSystemEntities())
                 {
-                    var IsProcessing = db.dt207_DocProgress.Any(r => r.IdKnowledgeBase == idKnowledgeBase && !r.IsComplete);
+                    var IsProcessing = db.dt207_DocProgress.Any(r => r.IdKnowledgeBase == idKnowledgeBase && !(r.IsComplete ?? false));
                     if (!IsProcessing)
                     {
                         dt207_HistoryGetFile historyGetFile = new dt207_HistoryGetFile()

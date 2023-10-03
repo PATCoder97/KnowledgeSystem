@@ -1,17 +1,12 @@
-﻿using DataEF;
+﻿using DataAccessLayer;
 using DevExpress.XtraBars.Docking2010.Customization;
 using DevExpress.XtraBars.Docking2010.Views.WindowsUI;
 using DevExpress.XtraEditors;
 using KnowledgeSystem.Configs;
-using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Deployment.Application;
 using System.Drawing;
 using System.Linq;
-using System.Net;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace KnowledgeSystem.Views._00_Generals
 {

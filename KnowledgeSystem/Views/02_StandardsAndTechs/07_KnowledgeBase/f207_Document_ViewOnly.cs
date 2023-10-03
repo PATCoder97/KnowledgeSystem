@@ -1,4 +1,4 @@
-﻿using DataEF;
+﻿using DataAccessLayer;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraPrinting.Native;
@@ -19,7 +19,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static Microsoft.IO.RecyclableMemoryStreamManager;
-using Group = DataEF.Group;
+using Group = DataAccessLayer.Group;
 
 namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 {
@@ -173,7 +173,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 if (!string.IsNullOrEmpty(idDocument))
                 {
                     // Thông tin tiến trình trình ký văn kiện
-                    bool IsComplete = docProcess.IsComplete;
+                    bool IsComplete = docProcess.IsComplete ?? false;
                     int idProgressByDoc = docProcess.IdProgress;
                     int idDocProgress = docProcess.Id;
                     var lsDMStepProgress = db.dm_StepProgress.Where(r => r.IdProgress == idProgressByDoc).ToList();

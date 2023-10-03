@@ -73,7 +73,7 @@
     <Compile Include="Models\dt207_Targets.cs" />
     <Compile Include="Models\dt207_Type.cs" />
     <Compile Include="Models\dt207_TypeHisGetFile.cs" />
-    <Compile Include="Models\FunctionM.cs" />
+    <Compile Include="Models\dm_FunctionM.cs" />
     <Compile Include="Models\FunctionRole.cs" />
     <Compile Include="Models\GroupUser.cs" />
     <Compile Include="Models\dm_Departments.cs" />

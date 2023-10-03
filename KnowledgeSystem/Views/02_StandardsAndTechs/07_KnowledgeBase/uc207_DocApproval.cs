@@ -1,4 +1,4 @@
-﻿using DataEF;
+﻿using DataAccessLayer;
 using DevExpress.ClipboardSource.SpreadsheetML;
 using DevExpress.Utils.About;
 using DevExpress.XtraEditors;
@@ -40,7 +40,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             using (var db = new DBDocumentManagementSystemEntities())
             {
                 // Xử lý lấy tất cả các văn kiện cần trình ký
-                lsDocProgresses = db.dt207_DocProgress.Where(r => !r.IsComplete).ToList();
+                lsDocProgresses = db.dt207_DocProgress.Where(r => !(r.IsComplete ?? false)).ToList();
                 lsDocProgressInfos = db.dt207_DocProgressInfo.ToList();
                 var lsKnowledgeBases = db.dt207_Base.ToList();
                 var lsUsers = db.Users.ToList();

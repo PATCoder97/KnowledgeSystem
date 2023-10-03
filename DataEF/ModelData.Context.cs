@@ -47,7 +47,7 @@ namespace DataEF
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<sys_StaticValue> sys_StaticValue { get; set; }
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<FunctionM> Functions { get; set; }
+        public virtual DbSet<dm_FunctionM> Functions { get; set; }
         public virtual DbSet<sys_Log> sys_Log { get; set; }
     }
 }

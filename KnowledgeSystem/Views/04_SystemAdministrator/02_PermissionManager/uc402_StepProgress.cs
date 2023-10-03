@@ -1,4 +1,4 @@
-﻿using DataEF;
+﻿using DataAccessLayer;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using KnowledgeSystem.Configs;

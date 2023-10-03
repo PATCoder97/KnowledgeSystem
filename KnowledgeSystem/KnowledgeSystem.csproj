@@ -479,10 +479,6 @@
       <Project>{f5b2c4ce-8802-43ce-af03-2e62a687dbd6}</Project>
       <Name>DataAccessLayer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DataEF\DataEF.csproj">
-      <Project>{b0e4c247-9f92-4671-8448-c188b7120378}</Project>
-      <Name>DataEF</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

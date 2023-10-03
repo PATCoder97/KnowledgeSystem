@@ -18,8 +18,9 @@ using KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase;
 using System.IO;
 using DevExpress.Utils.Extensions;
 using DevExpress.Utils;
-using DataEF;
+using DataAccessLayer;
 using DevExpress.Pdf.Native.BouncyCastle.Asn1.Ocsp;
+using BusinessLayer;
 
 namespace KnowledgeSystem.Views._00_Generals
 {
@@ -38,10 +39,12 @@ namespace KnowledgeSystem.Views._00_Generals
 
         #region parameters
 
+        dm_FunctionBUS _dm_FunctionBUS = new dm_FunctionBUS();
+
         Font fontTW14 = new Font("DFKai-SB", 14.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
 
         int groupId = 0;
-        List<FunctionM> lsFunctions = new List<FunctionM>();
+        List<dm_FunctionM> lsFunctions = new List<dm_FunctionM>();
 
         #endregion
 
@@ -80,7 +83,8 @@ namespace KnowledgeSystem.Views._00_Generals
             // Lấy danh sách các AppForm từ cơ sở dữ liệu và điền vào TreeView control
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                var lsAllFunctions = db.Functions.Where(r => r.IdParent == groupId).OrderBy(r => r.Prioritize).ToList();
+                //var lsAllFunctions = db.Functions.Where(r => r.IdParent == groupId).OrderBy(r => r.Prioritize).ToList();
+                var lsAllFunctions = _dm_FunctionBUS.GetListByIdParent(groupId);
                 var lsPermissions = db.FunctionRoles.Where(r => r.IdRole == TempDatas.RoleUserLogin).Select(r => r.IdFunction ?? 0).ToList();
 
                 lsFunctions = (from data in lsAllFunctions
