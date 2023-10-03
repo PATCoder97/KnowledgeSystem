@@ -1,4 +1,5 @@
-﻿using DataAccessLayer;
+﻿using BusinessLayer;
+using DataAccessLayer;
 using DevExpress.XtraBars.Docking2010.Customization;
 using DevExpress.XtraBars.Docking2010.Views.WindowsUI;
 using DevExpress.XtraEditors;
@@ -16,6 +17,8 @@ namespace KnowledgeSystem.Views._00_Generals
         {
             InitializeComponent();
         }
+
+        sys_StaticValueBUS _sys_StaticValueBUS = new sys_StaticValueBUS();
 
         TileItemElement elementName = new TileItemElement();
         TileItemElement elementIdDept = new TileItemElement();
@@ -112,6 +115,10 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void GetSysStaticValue()
         {
+            dm_UserBUS _dm_UserBUS = new dm_UserBUS();
+            var aa = _dm_UserBUS.GetList();
+            var a = _sys_StaticValueBUS.GetList();
+
             using (var db = new DBDocumentManagementSystemEntities())
             {
                 var lsStaticValue = db.sys_StaticValue.ToList();

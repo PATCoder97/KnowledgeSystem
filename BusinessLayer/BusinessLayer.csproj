@@ -55,6 +55,7 @@
     <Compile Include="dm_ProgressBUS.cs" />
     <Compile Include="dm_UserBUS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="sys_StaticValueBUS.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -481,14 +481,6 @@
           <Property Name="IdGroup" Type="Int32" />
           <Property Name="IdUser" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="Role">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DisplayName" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-          <Property Name="Describe" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="sys_StaticValue">
           <Key>
             <PropertyRef Name="Id" />
@@ -529,10 +521,10 @@
           <EntitySet Name="Functions" EntityType="Self.Function" />
           <EntitySet Name="Groups" EntityType="Self.Group" />
           <EntitySet Name="GroupUsers" EntityType="Self.GroupUser" />
-          <EntitySet Name="Roles" EntityType="Self.Role" />
           <EntitySet Name="sys_StaticValue" EntityType="Self.sys_StaticValue" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="sys_Log" EntityType="DBDocumentManagementSystemModel.sys_Log" />
+          <EntitySet Name="Roles" EntityType="DBDocumentManagementSystemModel.Role" />
         </EntityContainer>
         <EntityType Name="sys_Log">
           <Key>
@@ -546,6 +538,14 @@
           <Property Name="Message" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
           <Property Name="Exception" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
           <Property Name="UserId" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="Describe" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -776,15 +776,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Roles">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.Role">
-              <MappingFragment StoreEntitySet="Roles">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="Describe" ColumnName="Describe" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="sys_StaticValue">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.sys_StaticValue">
               <MappingFragment StoreEntitySet="sys_StaticValue">
@@ -816,6 +807,15 @@
                 <ScalarProperty Name="Level" ColumnName="Level" />
                 <ScalarProperty Name="Thread" ColumnName="Thread" />
                 <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="Describe" ColumnName="Describe" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
