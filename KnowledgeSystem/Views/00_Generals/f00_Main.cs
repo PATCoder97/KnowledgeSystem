@@ -19,6 +19,8 @@ namespace KnowledgeSystem.Views._00_Generals
         }
 
         sys_StaticValueBUS _sys_StaticValueBUS = new sys_StaticValueBUS();
+        dm_UserBUS _dm_UserBUS = new dm_UserBUS();
+        dm_DeptBUS _dm_DeptBUS = new dm_DeptBUS();
 
         TileItemElement elementName = new TileItemElement();
         TileItemElement elementIdDept = new TileItemElement();
@@ -70,19 +72,15 @@ namespace KnowledgeSystem.Views._00_Generals
             Location = new Point((Screen.PrimaryScreen.WorkingArea.Width - this.Width) / 2,
                            (Screen.PrimaryScreen.WorkingArea.Height - this.Height) / 2);
 
-            using (var db = new DBDocumentManagementSystemEntities())
-            {
-                var userLogin = db.Users.First(r => r.Id == TempDatas.LoginId);
-                string userName = userLogin.DisplayName;
-                string idDept = userLogin.IdDepartment;
-                var gradeName = db.dm_Departments.First(r => r.Id == idDept.Substring(0, 2)).DisplayName;
-                var gradeClass = db.dm_Departments.First(r => r.Id == idDept).DisplayName;
-
-                elementName.Text = userName;
-                elementIdDept.Text = idDept;
-                elementGrade.Text = gradeName;
-                elementClass.Text = gradeClass;
-            }
+            var _userLogin = _dm_UserBUS.GetUserByUID(TempDatas.LoginId);
+            string userName = _userLogin.DisplayName;
+            string idDept = _userLogin.IdDepartment;
+            var gradeName = _dm_DeptBUS.GetById(idDept.Substring(0, 2)).DisplayName;
+            var gradeClass = _dm_DeptBUS.GetById(idDept).DisplayName;
+            elementName.Text = userName;
+            elementIdDept.Text = idDept;
+            elementGrade.Text = gradeName;
+            elementClass.Text = gradeClass;
         }
 
         private void ChangePassword()
@@ -115,19 +113,12 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void GetSysStaticValue()
         {
-            dm_UserBUS _dm_UserBUS = new dm_UserBUS();
-            var aa = _dm_UserBUS.GetList();
-            var a = _sys_StaticValueBUS.GetList();
+            var lsStaticValue = _sys_StaticValueBUS.GetList();
 
-            using (var db = new DBDocumentManagementSystemEntities())
-            {
-                var lsStaticValue = db.sys_StaticValue.ToList();
-
-                TempDatas.SoftNameEN = lsStaticValue.FirstOrDefault(r => r.KeyT == "SoftNameEN").ValueT;
-                TempDatas.SoftNameTW = lsStaticValue.FirstOrDefault(r => r.KeyT == "SoftNameTW").ValueT;
-                TempDatas.UrlUpdate = lsStaticValue.FirstOrDefault(r => r.KeyT == "UrlUpdate").ValueT;
-                TempDatas.PathKnowledgeFile = lsStaticValue.FirstOrDefault(r => r.KeyT == "PathKnowledgeFile").ValueT;
-            }
+            TempDatas.SoftNameEN = lsStaticValue.FirstOrDefault(r => r.KeyT == "SoftNameEN").ValueT;
+            TempDatas.SoftNameTW = lsStaticValue.FirstOrDefault(r => r.KeyT == "SoftNameTW").ValueT;
+            TempDatas.UrlUpdate = lsStaticValue.FirstOrDefault(r => r.KeyT == "UrlUpdate").ValueT;
+            TempDatas.PathKnowledgeFile = lsStaticValue.FirstOrDefault(r => r.KeyT == "PathKnowledgeFile").ValueT;
         }
 
         private void fMain_Load(object sender, EventArgs e)

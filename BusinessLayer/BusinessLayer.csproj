@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="dm_DeptBUS.cs" />
     <Compile Include="dm_FunctionBUS.cs" />
     <Compile Include="dm_ProgressBUS.cs" />
     <Compile Include="dm_UserBUS.cs" />
