@@ -46,6 +46,7 @@
             // 
             // fluentControl
             // 
+            this.fluentControl.AllowItemSelection = true;
             this.fluentControl.ContextButtonsOptions.AnimationType = DevExpress.Utils.ContextAnimationType.OpacityAnimation;
             this.fluentControl.Dock = System.Windows.Forms.DockStyle.Left;
             this.fluentControl.Location = new System.Drawing.Point(0, 29);

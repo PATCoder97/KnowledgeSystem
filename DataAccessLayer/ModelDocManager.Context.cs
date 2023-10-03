@@ -46,8 +46,8 @@ namespace DataAccessLayer
         public virtual DbSet<Group> Groups { get; set; }
         public virtual DbSet<GroupUser> GroupUsers { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<sys_Log> sys_Log { get; set; }
         public virtual DbSet<sys_StaticValue> sys_StaticValue { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<sys_Log> sys_Log { get; set; }
     }
 }

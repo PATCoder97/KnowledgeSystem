@@ -15,11 +15,12 @@ namespace DataAccessLayer
     public partial class sys_Log
     {
         public int Id { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
-        public string ThreadName { get; set; }
+        public System.DateTime DateCreate { get; set; }
+        public string Thread { get; set; }
         public string Level { get; set; }
         public string Logger { get; set; }
         public string Message { get; set; }
         public string Exception { get; set; }
+        public string UserId { get; set; }
     }
 }
