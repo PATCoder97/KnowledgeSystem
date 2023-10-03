@@ -100,12 +100,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataEF\DataEF.csproj">
-      <Project>{b0e4c247-9f92-4671-8448-c188b7120378}</Project>
-      <Name>DataEF</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="html\f207_DocProcessingOwner.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
