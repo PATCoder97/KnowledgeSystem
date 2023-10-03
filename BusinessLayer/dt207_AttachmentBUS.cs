@@ -10,17 +10,17 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer
 {
-    public class dm_ProgressBUS
+    public class dt207_AttachmentBUS
     {
         TPLogger logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName);
 
-        public List<dm_Progress> GetList()
+        public List<dt207_Attachment> GetList()
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dm_Progress.ToList();
+                    return _context.dt207_Attachment.ToList();
                 }
             }
             catch (Exception ex)
@@ -30,13 +30,13 @@ namespace BusinessLayer
             }
         }
 
-        public bool Create(dm_Progress _progress)
+        public bool Create(dt207_Attachment attachment)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    _context.dm_Progress.Add(_progress);
+                    _context.dt207_Attachment.Add(attachment);
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;
                 }
@@ -48,13 +48,13 @@ namespace BusinessLayer
             }
         }
 
-        public bool Update(dm_Progress _progress)
+        public bool Update(dt207_Attachment attachment)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    _context.dm_Progress.AddOrUpdate(_progress);
+                    _context.dt207_Attachment.AddOrUpdate(attachment);
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;
                 }
@@ -66,14 +66,14 @@ namespace BusinessLayer
             }
         }
 
-        public bool Delete(int _idProgress)
+        public bool Delete(int attachmentId)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    var _itemDel = _context.dm_Progress.FirstOrDefault(r => r.Id == _idProgress);
-                    _context.dm_Progress.Remove(_itemDel);
+                    var attachment = _context.dt207_Attachment.FirstOrDefault(r => r.Id == attachmentId);
+                    _context.dt207_Attachment.Remove(attachment);
 
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;

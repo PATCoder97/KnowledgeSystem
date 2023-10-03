@@ -10,17 +10,17 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer
 {
-    public class dm_ProgressBUS
+    public class dt207_HistoryGetFileBUS
     {
         TPLogger logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName);
 
-        public List<dm_Progress> GetList()
+        public List<dt207_HistoryGetFile> GetList()
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dm_Progress.ToList();
+                    return _context.dt207_HistoryGetFile.ToList();
                 }
             }
             catch (Exception ex)
@@ -30,13 +30,13 @@ namespace BusinessLayer
             }
         }
 
-        public bool Create(dm_Progress _progress)
+        public bool Create(dt207_HistoryGetFile historyGetFile)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    _context.dm_Progress.Add(_progress);
+                    _context.dt207_HistoryGetFile.Add(historyGetFile);
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;
                 }
@@ -48,13 +48,13 @@ namespace BusinessLayer
             }
         }
 
-        public bool Update(dm_Progress _progress)
+        public bool Update(dt207_HistoryGetFile historyGetFile)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    _context.dm_Progress.AddOrUpdate(_progress);
+                    _context.dt207_HistoryGetFile.AddOrUpdate(historyGetFile);
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;
                 }
@@ -66,14 +66,14 @@ namespace BusinessLayer
             }
         }
 
-        public bool Delete(int _idProgress)
+        public bool Delete(int historyGetFileId)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    var _itemDel = _context.dm_Progress.FirstOrDefault(r => r.Id == _idProgress);
-                    _context.dm_Progress.Remove(_itemDel);
+                    var historyGetFile = _context.dt207_HistoryGetFile.FirstOrDefault(r => r.Id == historyGetFileId);
+                    _context.dt207_HistoryGetFile.Remove(historyGetFile);
 
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;

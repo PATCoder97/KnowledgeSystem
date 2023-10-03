@@ -10,17 +10,17 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer
 {
-    public class dm_ProgressBUS
+    public class dt207_NotifyEditDocBUS
     {
         TPLogger logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName);
 
-        public List<dm_Progress> GetList()
+        public List<dt207_NotifyEditDoc> GetList()
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dm_Progress.ToList();
+                    return _context.dt207_NotifyEditDoc.ToList();
                 }
             }
             catch (Exception ex)
@@ -30,13 +30,13 @@ namespace BusinessLayer
             }
         }
 
-        public bool Create(dm_Progress _progress)
+        public bool Create(dt207_NotifyEditDoc notifyEditDoc)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    _context.dm_Progress.Add(_progress);
+                    _context.dt207_NotifyEditDoc.Add(notifyEditDoc);
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;
                 }
@@ -48,13 +48,13 @@ namespace BusinessLayer
             }
         }
 
-        public bool Update(dm_Progress _progress)
+        public bool Update(dt207_NotifyEditDoc notifyEditDoc)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    _context.dm_Progress.AddOrUpdate(_progress);
+                    _context.dt207_NotifyEditDoc.AddOrUpdate(notifyEditDoc);
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;
                 }
@@ -66,14 +66,14 @@ namespace BusinessLayer
             }
         }
 
-        public bool Delete(int _idProgress)
+        public bool Delete(int notifyEditDocId)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    var _itemDel = _context.dm_Progress.FirstOrDefault(r => r.Id == _idProgress);
-                    _context.dm_Progress.Remove(_itemDel);
+                    var notifyEditDoc = _context.dt207_NotifyEditDoc.FirstOrDefault(r => r.Id == notifyEditDocId);
+                    _context.dt207_NotifyEditDoc.Remove(notifyEditDoc);
 
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;

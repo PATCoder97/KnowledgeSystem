@@ -54,7 +54,20 @@
     <Compile Include="dm_DeptBUS.cs" />
     <Compile Include="dm_FunctionBUS.cs" />
     <Compile Include="dm_ProgressBUS.cs" />
+    <Compile Include="dm_StepProgressBUS.cs" />
     <Compile Include="dm_UserBUS.cs" />
+    <Compile Include="dt207_AttachmentBUS.cs" />
+    <Compile Include="dt207_Attachment_BAKBUS.cs" />
+    <Compile Include="dt207_BaseBUS.cs" />
+    <Compile Include="dt207_Base_BAKBUS.cs" />
+    <Compile Include="dt207_DocProgressBUS.cs" />
+    <Compile Include="dt207_DocProgressInfoBUS.cs" />
+    <Compile Include="dt207_HistoryGetFileBUS.cs" />
+    <Compile Include="dt207_NotifyEditDocBUS.cs" />
+    <Compile Include="dt207_SecurityBUS.cs" />
+    <Compile Include="dt207_Security_BAKBUS.cs" />
+    <Compile Include="dt207_TargetsBUS.cs" />
+    <Compile Include="dt207_TypeHisGetFileBUS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="sys_StaticValueBUS.cs" />
   </ItemGroup>

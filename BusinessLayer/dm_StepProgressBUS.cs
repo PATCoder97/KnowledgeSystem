@@ -10,33 +10,33 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer
 {
-    public class dm_ProgressBUS
+    public class dm_StepProgressBUS
     {
         TPLogger logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName);
 
-        public List<dm_Progress> GetList()
+        public List<dm_StepProgress> GetList()
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dm_Progress.ToList();
+                    return _context.dm_StepProgress.ToList();
                 }
             }
             catch (Exception ex)
             {
                 logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
-                throw;
+                throw ;
             }
         }
 
-        public bool Create(dm_Progress _progress)
+        public bool Create(dm_StepProgress _stepProgress)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    _context.dm_Progress.Add(_progress);
+                    _context.dm_StepProgress.Add(_stepProgress);
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;
                 }
@@ -48,13 +48,13 @@ namespace BusinessLayer
             }
         }
 
-        public bool Update(dm_Progress _progress)
+        public bool Update(dm_StepProgress _stepProgress)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    _context.dm_Progress.AddOrUpdate(_progress);
+                    _context.dm_StepProgress.AddOrUpdate(_stepProgress);
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;
                 }
@@ -66,14 +66,14 @@ namespace BusinessLayer
             }
         }
 
-        public bool Delete(int _idProgress)
+        public bool Delete(int _idStepProgress)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    var _itemDel = _context.dm_Progress.FirstOrDefault(r => r.Id == _idProgress);
-                    _context.dm_Progress.Remove(_itemDel);
+                    var _itemDel = _context.dm_StepProgress.FirstOrDefault(r => r.Id == _idStepProgress);
+                    _context.dm_StepProgress.Remove(_itemDel);
 
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;
