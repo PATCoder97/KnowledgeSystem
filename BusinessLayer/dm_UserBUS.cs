@@ -30,6 +30,39 @@ namespace BusinessLayer
             }
         }
 
+        public User GetUserByUID(string _UID)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.Users.FirstOrDefault(r => r.Id == _UID);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw new Exception(ex.ToString());
+            }
+        }
+
+        public User CheckLogin(string _UID, string _pass)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    var user = _context.Users.FirstOrDefault(p => p.Id == _UID && p.SecondaryPassword == _pass);
+                    return user;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw new Exception(ex.ToString());
+            }
+        }
+
         public bool Create(User _user)
         {
             try
