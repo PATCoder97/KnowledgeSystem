@@ -108,7 +108,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
             if (string.IsNullOrEmpty(txbFromDate.Text) || string.IsNullOrEmpty(txbFromDate.Text) || toDate < fromDate)
             {
-                XtraMessageBox.Show("請選擇正確的日期數據！", TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show("請選擇正確的日期數據！", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 

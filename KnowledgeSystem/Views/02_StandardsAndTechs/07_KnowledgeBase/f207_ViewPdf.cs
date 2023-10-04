@@ -56,7 +56,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             if (CanSaveFile != true)
             {
-                XtraMessageBox.Show(TempDatas.NoPermission, TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                XtraMessageBox.Show(TPConfigs.NoPermission, TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
             }
 
@@ -75,7 +75,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                         IdKnowledgeBase = idKnowledgeBase,
                         idTypeHisGetFile = 3,
                         KnowledgeAttachmentName = Text,
-                        IdUser = TempDatas.LoginId,
+                        IdUser = TPConfigs.LoginId,
                         TimeGet = DateTime.Now
                     };
 
@@ -84,14 +84,14 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 }
             }
 
-            XtraMessageBox.Show("列印文件成功！", TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            XtraMessageBox.Show("列印文件成功！", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnSave_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             if (CanSaveFile != true)
             {
-                XtraMessageBox.Show(TempDatas.NoPermission, TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                XtraMessageBox.Show(TPConfigs.NoPermission, TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
             }
 
@@ -117,7 +117,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                             IdKnowledgeBase = idKnowledgeBase,
                             idTypeHisGetFile = 2,
                             KnowledgeAttachmentName = Text,
-                            IdUser = TempDatas.LoginId,
+                            IdUser = TPConfigs.LoginId,
                             TimeGet = DateTime.Now
                         };
 
@@ -126,7 +126,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     }
                 }
 
-                XtraMessageBox.Show("下載文件成功！", TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                XtraMessageBox.Show("下載文件成功！", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }

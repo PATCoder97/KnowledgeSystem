@@ -40,7 +40,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             {
                 // Truy vấn và lấy danh sách các tệp tin lịch sử kiến thức dựa trên ID người dùng, kết hợp các bảng liên quan.
                 var query = (from data in db.dt207_HistoryGetFile
-                             where data.IdUser == TempDatas.LoginId
+                             where data.IdUser == TPConfigs.LoginId
                              join names in db.dt207_Base on data.IdKnowledgeBase equals names.Id
                              join types in db.dt207_TypeHisGetFile on data.idTypeHisGetFile equals types.Id
                              select new

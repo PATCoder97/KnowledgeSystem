@@ -229,7 +229,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
                 db.SaveChanges();
             }
 
-            XtraMessageBox.Show("Thao tác sửa thành công!", TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            XtraMessageBox.Show("Thao tác sửa thành công!", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             LoadData();
         }

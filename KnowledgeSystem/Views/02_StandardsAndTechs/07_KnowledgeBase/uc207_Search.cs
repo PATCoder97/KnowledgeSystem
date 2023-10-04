@@ -53,7 +53,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void LoadData()
         {
-            string userLogin = TempDatas.LoginId;
+            string userLogin = TPConfigs.LoginId;
 
             List<dm_User> lsUsers = new List<dm_User>();
             List<dt207_Base> lsKnowledgeBase = new List<dt207_Base>();
@@ -73,9 +73,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 lsUsers = db.dm_User.ToList();
 
                 // Gán các 說明 quyền vào class temp
-                TempDatas.typeViewFile = lsTypeHisGetFile.FirstOrDefault(r => r.Id == 1);
-                TempDatas.typeSaveFile = lsTypeHisGetFile.FirstOrDefault(r => r.Id == 2);
-                TempDatas.typePrintFile = lsTypeHisGetFile.FirstOrDefault(r => r.Id == 3);
+                TPConfigs.typeViewFile = lsTypeHisGetFile.FirstOrDefault(r => r.Id == 1);
+                TPConfigs.typeSaveFile = lsTypeHisGetFile.FirstOrDefault(r => r.Id == 2);
+                TPConfigs.typePrintFile = lsTypeHisGetFile.FirstOrDefault(r => r.Id == 3);
 
                 // Lấy danh sách các giá trị IdKnowledgeBase mà IsComplete là false
                 var lsIdBaseRemove = db.dt207_DocProgress.Where(r => !(r.IsComplete)).Select(r => r.IdKnowledgeBase).ToList();
@@ -228,7 +228,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                      }).ToList();
 
                 // Xử lý phân quyền nhưng user nằm trong group sẽ nhìn thấy
-                var lsGroupIn = (from data in db.dm_GroupUser.Where(r => r.IdUser == TempDatas.LoginId).ToList()
+                var lsGroupIn = (from data in db.dm_GroupUser.Where(r => r.IdUser == TPConfigs.LoginId).ToList()
                                  join progresses in db.dm_StepProgress.ToList() on data.IdGroup equals progresses.IdGroup
                                  select new
                                  {
@@ -305,7 +305,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
             if (!lsIdCanReads.Contains(idDocument) && !IsSysAdmin)
             {
-                XtraMessageBox.Show(TempDatas.NoPermission, TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                XtraMessageBox.Show(TPConfigs.NoPermission, TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 

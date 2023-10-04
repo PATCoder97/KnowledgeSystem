@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace KnowledgeSystem.Configs
 {
-    public class TempDatas
+    public class TPConfigs
     {
         public static string StartupPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         public static string ImagesPath = Path.Combine(StartupPath, "Images");

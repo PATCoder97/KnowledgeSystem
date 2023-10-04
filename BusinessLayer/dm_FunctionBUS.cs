@@ -29,7 +29,7 @@ namespace BusinessLayer
                         Prioritize = r.Prioritize,
                         Status = r.Status,
                         Images = r.Images,
-                    }).ToList();
+                    }).OrderBy(r => r.Prioritize).ToList();
                 }
             }
             catch (Exception ex)
@@ -56,7 +56,7 @@ namespace BusinessLayer
                             Prioritize = r.Prioritize,
                             Status = r.Status,
                             Images = r.Images,
-                        }).ToList();
+                        }).OrderBy(r => r.Prioritize).ToList();
                 }
             }
             catch (Exception ex)

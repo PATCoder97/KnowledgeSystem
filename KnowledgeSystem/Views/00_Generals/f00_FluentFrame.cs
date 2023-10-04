@@ -39,6 +39,7 @@ namespace KnowledgeSystem.Views._00_Generals
 
         #region parameters
 
+        // Khai báo các BUS để dùng BD
         dm_FunctionBUS _dm_FunctionBUS = new dm_FunctionBUS();
         dm_FunctionRoleBUS _dm_FunctionRoleBUS = new dm_FunctionRoleBUS();
 
@@ -82,74 +83,70 @@ namespace KnowledgeSystem.Views._00_Generals
         private void f00_FluentFrame_Load(object sender, EventArgs e)
         {
             // Lấy danh sách các AppForm từ cơ sở dữ liệu và điền vào TreeView control
-            using (var db = new DBDocumentManagementSystemEntities())
+            var lsAllFunctions = _dm_FunctionBUS.GetListByIdParent(groupId);
+            var lsPermissions = _dm_FunctionRoleBUS.GetListByRole(TPConfigs.RoleUserLogin).Select(r => r.IdFunction).ToList();
+
+            lsFunctions = (from data in lsAllFunctions
+                           join granted in lsPermissions on data.Id equals granted
+                           select data).ToList();
+
+            foreach (var item in lsFunctions)
             {
-                //var lsAllFunctions = db.Functions.Where(r => r.IdParent == groupId).OrderBy(r => r.Prioritize).ToList();
-                var lsAllFunctions = _dm_FunctionBUS.GetListByIdParent(groupId);
-                var lsPermissions = _dm_FunctionRoleBUS.GetListByRole(TempDatas.RoleUserLogin).Select(r => r.IdFunction).ToList();
+                AccordionControlElement accordion = new AccordionControlElement();
 
-                lsFunctions = (from data in lsAllFunctions
-                               join granted in lsPermissions on data.Id equals granted
-                               select data).ToList();
+                string pathImage = Path.Combine(Application.StartupPath, "Images", item.Images ?? "");
+                accordion.ImageOptions.SvgImage = item.Images != null ? DevExpress.Utils.Svg.SvgImage.FromFile(pathImage) : null;
+                accordion.Name = $"name_{item.ControlName}";
+                accordion.Text = item.DisplayName;
+                accordion.Appearance.Default.Font = fontTW14;
 
-                foreach (var item in lsFunctions)
+                accordion.Appearance.Normal.ForeColor = Color.Black;
+                accordion.Appearance.Hovered.ForeColor = Color.OrangeRed;
+                accordion.Appearance.Pressed.ForeColor = Color.OrangeRed;
+
+                accordion.Hint = item.DisplayName;
+
+                var lsFuncChild = _dm_FunctionBUS.GetListByIdParent(item.Id);
+                var lsChildren = (from data in lsFuncChild
+                                  join granted in lsPermissions on data.Id equals granted
+                                  select data).ToList();
+
+                if (lsChildren.Count != 0)
                 {
-                    AccordionControlElement accordion = new AccordionControlElement();
-
-                    string pathImage = Path.Combine(Application.StartupPath, "Images", item.Images ?? "");
-                    accordion.ImageOptions.SvgImage = item.Images != null ? DevExpress.Utils.Svg.SvgImage.FromFile(pathImage) : null;
-                    accordion.Name = $"name_{item.ControlName}";
-                    accordion.Text = item.DisplayName;
-                    accordion.Appearance.Default.Font = fontTW14;
-
-                    accordion.Appearance.Normal.ForeColor = Color.Black;
-                    accordion.Appearance.Hovered.ForeColor = Color.OrangeRed;
-                    accordion.Appearance.Pressed.ForeColor = Color.Red;
-
-                    accordion.Hint = item.DisplayName;
-
-                    var lsChildren = (from data in db.dm_Function.Where(r => r.IdParent == item.Id)
-                                      .OrderBy(r => r.Prioritize).ToList()
-                                      join granted in lsPermissions on data.Id equals granted
-                                      select data).ToList();
-                    if (lsChildren.Count != 0)
+                    foreach (var child in lsChildren)
                     {
-                        foreach (var child in lsChildren)
-                        {
-                            AccordionControlElement accordionChild = new AccordionControlElement();
+                        AccordionControlElement accordionChild = new AccordionControlElement();
 
-                            pathImage = Path.Combine(Application.StartupPath, "Images", child.Images ?? "");
-                            accordionChild.ImageOptions.SvgImage = child.Images != null ? DevExpress.Utils.Svg.SvgImage.FromFile($@"Images\{child.Images}") : null;
-                            accordionChild.Name = $"name_{child.ControlName}";
-                            accordionChild.Text = child.DisplayName;
-                            accordionChild.Style = ElementStyle.Item;
-                            accordionChild.Appearance.Default.Font = fontTW14;
+                        pathImage = Path.Combine(Application.StartupPath, "Images", child.Images ?? "");
+                        accordionChild.ImageOptions.SvgImage = child.Images != null ? DevExpress.Utils.Svg.SvgImage.FromFile($@"Images\{child.Images}") : null;
+                        accordionChild.Name = $"name_{child.ControlName}";
+                        accordionChild.Text = child.DisplayName;
+                        accordionChild.Style = ElementStyle.Item;
+                        accordionChild.Appearance.Default.Font = fontTW14;
 
-                            accordionChild.Appearance.Normal.ForeColor = Color.Black;
-                            accordionChild.Appearance.Hovered.ForeColor = Color.OrangeRed;
-                            accordionChild.Appearance.Pressed.ForeColor = Color.Red;
+                        accordionChild.Appearance.Normal.ForeColor = Color.Black;
+                        accordionChild.Appearance.Hovered.ForeColor = Color.OrangeRed;
+                        accordionChild.Appearance.Pressed.ForeColor = Color.Red;
 
-                            accordionChild.Hint = child.DisplayName;
-                            accordionChild.Click += new EventHandler(accordionElement_Click);
+                        accordionChild.Hint = child.DisplayName;
+                        accordionChild.Click += new EventHandler(accordionElement_Click);
 
-                            accordion.Elements.Add(accordionChild);
-                        }
+                        accordion.Elements.Add(accordionChild);
                     }
-                    else
-                    {
-                        accordion.Style = ElementStyle.Item;
-                        accordion.Click += new EventHandler(accordionElement_Click);
-                    }
-
-                    fluentControl.Elements.Add(accordion);
                 }
+                else
+                {
+                    accordion.Style = ElementStyle.Item;
+                    accordion.Click += new EventHandler(accordionElement_Click);
+                }
+
+                fluentControl.Elements.Add(accordion);
             }
         }
 
         private void accordionElement_Click(object sender, EventArgs e)
         {
             AccordionControlElement buttonAuto = sender as AccordionControlElement;
-
             OpenForm(buttonAuto.Name.Replace("name_", ""));
         }
 
@@ -157,7 +154,7 @@ namespace KnowledgeSystem.Views._00_Generals
         {
             List<int> lsGroupOpenFirstForm = new List<int>() { 1, 7, 17 };
 
-            // Nếu GroupId là 1, chọn AppForm đầu tiên trong TreeView và mở form tương ứng
+            // Nếu GroupId có trong list, chọn AppForm đầu tiên trong TreeView và mở form tương ứng
             if (lsGroupOpenFirstForm.Contains(groupId) && lsFunctions.Count > 0)
             {
                 // Lấy AppForm đầu tiên trong TreeView và mở form tương ứng

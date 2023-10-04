@@ -41,7 +41,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             using (var db = new DBDocumentManagementSystemEntities())
             {
                 var query = (from data in db.dt207_NotifyEditDoc
-                             where data.IdUserNotify == TempDatas.LoginId
+                             where data.IdUserNotify == TPConfigs.LoginId
                              join idDoc in db.dt207_DocProgress on data.IdDocProcess equals idDoc.Id
                              join names in db.dt207_Base on idDoc.IdKnowledgeBase equals names.Id
                              orderby data.TimeNotify descending
@@ -128,7 +128,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     bool IsProcess = db.dt207_DocProgress.Any(r => r.IdKnowledgeBase == IdKnowledgeBase && !(r.IsComplete));
                     if (IsProcess)
                     {
-                        XtraMessageBox.Show(TempDatas.DocIsProcessing, TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        XtraMessageBox.Show(TPConfigs.DocIsProcessing, TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                         LoadData();
                         return;

@@ -160,7 +160,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManager
 
             LoadUser();
 
-            XtraMessageBox.Show("Thao tác sửa thành công!", TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            XtraMessageBox.Show("Thao tác sửa thành công!", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnCreate_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -199,7 +199,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManager
             }
 
             LoadUser();
-            XtraMessageBox.Show(msg, TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            XtraMessageBox.Show(msg, TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnRefresh_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

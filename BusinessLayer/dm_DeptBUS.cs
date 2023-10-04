@@ -26,7 +26,7 @@ namespace BusinessLayer
             catch (Exception ex)
             {
                 logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
-                throw new Exception(ex.ToString());
+                throw;
             }
         }
 
@@ -42,7 +42,7 @@ namespace BusinessLayer
             catch (Exception ex)
             {
                 logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
-                throw new Exception(ex.ToString());
+                throw;
             }
         }
 

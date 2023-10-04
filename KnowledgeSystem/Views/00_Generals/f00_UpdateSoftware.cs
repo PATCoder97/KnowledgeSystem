@@ -34,7 +34,7 @@ namespace KnowledgeSystem.Views._00_Generals
         private void f00_UpdateSoftware_Load(object sender, EventArgs e)
         {
             string pathDocuments = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            string pathFolderSoft = Path.Combine(pathDocuments, TempDatas.SoftNameEN);
+            string pathFolderSoft = Path.Combine(pathDocuments, TPConfigs.SoftNameEN);
             if (!Directory.Exists(pathFolderSoft))
             {
                 Directory.CreateDirectory(pathFolderSoft);

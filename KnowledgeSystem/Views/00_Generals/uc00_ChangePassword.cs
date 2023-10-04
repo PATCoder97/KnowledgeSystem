@@ -33,7 +33,7 @@ namespace KnowledgeSystem.Views._00_Generals
 
             if (newPassword1 != newPassword2) return;
 
-            var _userCheck = _dm_UserBUS.CheckLogin(TempDatas.LoginId, oldPassword);
+            var _userCheck = _dm_UserBUS.CheckLogin(TPConfigs.LoginId, oldPassword);
             if (_userCheck != default)
             {
                 NewPassword = newPassword2;

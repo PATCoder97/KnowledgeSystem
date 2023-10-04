@@ -61,7 +61,7 @@ namespace KnowledgeSystem.Views._00_Generals
             f00_Login frm = new f00_Login();
             frm.ShowDialog();
 
-            if (!TempDatas.LoginSuccessful)
+            if (!TPConfigs.LoginSuccessful)
             {
                 Close();
                 return;
@@ -72,7 +72,7 @@ namespace KnowledgeSystem.Views._00_Generals
             Location = new Point((Screen.PrimaryScreen.WorkingArea.Width - this.Width) / 2,
                            (Screen.PrimaryScreen.WorkingArea.Height - this.Height) / 2);
 
-            var _userLogin = _dm_UserBUS.GetUserByUID(TempDatas.LoginId);
+            var _userLogin = _dm_UserBUS.GetUserByUID(TPConfigs.LoginId);
             string userName = _userLogin.DisplayName;
             string idDept = _userLogin.IdDepartment;
             var gradeName = _dm_DeptBUS.GetById(idDept.Substring(0, 2)).DisplayName;
@@ -96,22 +96,22 @@ namespace KnowledgeSystem.Views._00_Generals
             string newPassword = uc00_ChangePass.NewPassword;
             if (string.IsNullOrEmpty(newPassword))
             {
-                XtraMessageBox.Show("舊密碼不正確或兩個新密碼不匹配！", TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show("舊密碼不正確或兩個新密碼不匹配！", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            _dm_UserBUS.ChangePass(TempDatas.LoginId, newPassword);
-            XtraMessageBox.Show("您的密碼已更新！", TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            _dm_UserBUS.ChangePass(TPConfigs.LoginId, newPassword);
+            XtraMessageBox.Show("您的密碼已更新！", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void GetSysStaticValue()
         {
             var lsStaticValue = _sys_StaticValueBUS.GetList();
 
-            TempDatas.SoftNameEN = lsStaticValue.FirstOrDefault(r => r.KeyT == "SoftNameEN").ValueT;
-            TempDatas.SoftNameTW = lsStaticValue.FirstOrDefault(r => r.KeyT == "SoftNameTW").ValueT;
-            TempDatas.UrlUpdate = lsStaticValue.FirstOrDefault(r => r.KeyT == "UrlUpdate").ValueT;
-            TempDatas.PathKnowledgeFile = lsStaticValue.FirstOrDefault(r => r.KeyT == "PathKnowledgeFile").ValueT;
+            TPConfigs.SoftNameEN = lsStaticValue.FirstOrDefault(r => r.KeyT == "SoftNameEN").ValueT;
+            TPConfigs.SoftNameTW = lsStaticValue.FirstOrDefault(r => r.KeyT == "SoftNameTW").ValueT;
+            TPConfigs.UrlUpdate = lsStaticValue.FirstOrDefault(r => r.KeyT == "UrlUpdate").ValueT;
+            TPConfigs.PathKnowledgeFile = lsStaticValue.FirstOrDefault(r => r.KeyT == "PathKnowledgeFile").ValueT;
         }
 
         private void fMain_Load(object sender, EventArgs e)
@@ -147,8 +147,8 @@ namespace KnowledgeSystem.Views._00_Generals
             }
 #endif
 
-            Text = TempDatas.SoftNameTW + AppCopyRight.CopyRightString();
-            lbSoftName.Text = TempDatas.SoftNameTW;
+            Text = TPConfigs.SoftNameTW + AppCopyRight.CopyRightString();
+            lbSoftName.Text = TPConfigs.SoftNameTW;
 
             Size = new Size(100, 100);
             Location = new Point((Screen.PrimaryScreen.WorkingArea.Width - this.Width) / 2,
@@ -168,7 +168,7 @@ namespace KnowledgeSystem.Views._00_Generals
             bool IsGranted = AppPermission.Instance.CheckAppPermission(IdForm_);
             if (!IsGranted)
             {
-                XtraMessageBox.Show(TempDatas.NoPermission, TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                XtraMessageBox.Show(TPConfigs.NoPermission, TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 

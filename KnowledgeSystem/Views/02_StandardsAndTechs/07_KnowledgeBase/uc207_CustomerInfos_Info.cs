@@ -29,7 +29,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 cbbIdUser.Properties.DisplayMember = "DisplayName";
                 cbbIdUser.Properties.ValueMember = "Id";
 
-                cbbIdUser.EditValue = TempDatas.LoginId;
+                cbbIdUser.EditValue = TPConfigs.LoginId;
             }
         }
     }

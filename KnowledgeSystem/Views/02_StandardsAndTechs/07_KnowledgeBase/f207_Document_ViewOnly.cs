@@ -96,7 +96,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private Securityinfo GetPermission()
         {
-            string userIdLogin = TempDatas.LoginId;
+            string userIdLogin = TPConfigs.LoginId;
 
             if (cbbUserProcess.EditValue.ToString() == userIdLogin)
             {
@@ -263,7 +263,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             if (permissionAttachments.ReadFile != true)
             {
-                XtraMessageBox.Show(TempDatas.NoPermission, TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                XtraMessageBox.Show(TPConfigs.NoPermission, TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
             }
 
@@ -272,7 +272,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 return;
 
             Attachments dataRow = gvFiles.GetRow(focusRow) as Attachments;
-            string documentsFile = Path.Combine(TempDatas.PathKnowledgeFile, dataRow.EncryptionName);
+            string documentsFile = Path.Combine(TPConfigs.PathKnowledgeFile, dataRow.EncryptionName);
 
             f207_ViewPdf fDocumentInfo = new f207_ViewPdf(documentsFile, "");
             fDocumentInfo.Text = dataRow.FileName;

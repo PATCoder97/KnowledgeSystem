@@ -28,14 +28,14 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void fLogin_Load(object sender, EventArgs e)
         {
-            BackgroundImage = Image.FromFile(Path.Combine(TempDatas.ImagesPath, "loginscreen.png"));
+            BackgroundImage = Image.FromFile(Path.Combine(TPConfigs.ImagesPath, "loginscreen.png"));
 
-            lbNameSoft.Text = TempDatas.SoftNameTW;
+            lbNameSoft.Text = TPConfigs.SoftNameTW;
             lbVersion.Text = $"Version: {AppCopyRight.version}";
             txbUserID.Text = RegistryHelper.GetSetting(RegistryHelper.LoginId, RegistryHelper.DefaulLoginId).ToString() ?? "";
 
-            TempDatas.DomainComputer = System.Net.NetworkInformation.IPGlobalProperties.GetIPGlobalProperties().DomainName;
-            TempDatas.LoginSuccessful = false;
+            TPConfigs.DomainComputer = System.Net.NetworkInformation.IPGlobalProperties.GetIPGlobalProperties().DomainName;
+            TPConfigs.LoginSuccessful = false;
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -48,9 +48,10 @@ namespace KnowledgeSystem.Views._00_Generals
 
                 dm_User _userLogin = null;
 
-                // Kiểm tra userID và password trong cơ sở dữ liệu
-                // Kiểm tra xem có nằm trong DoMain VNFPG không, nếu có thì check tk OA
-                if (TempDatas.DomainComputer == DomainVNFPG.domainName)
+                /* Kiểm tra xem có trong Domain fpg không (Không dùng OA)
+                *  - Có thì dùng tài khoản OA để đăng nhập, nếu không có OA thì dùng mật khẩu phụ
+                *  - Không thì dùng mật khẩu phụ */
+                if (TPConfigs.DomainComputer == DomainVNFPG.domainName)
                 {
                     string userNameByDomain = DomainVNFPG.Instance.GetAccountName(_userID);
                     if (!string.IsNullOrEmpty(userNameByDomain))
@@ -90,10 +91,10 @@ namespace KnowledgeSystem.Views._00_Generals
                 if (_userLogin != null)
                 {
                     // Lưu thông tin đăng nhập và đóng form
-                    TempDatas.LoginId = _userID;
-                    TempDatas.RoleUserLogin = _userLogin.IdRole ?? 0;
+                    TPConfigs.LoginId = _userID;
+                    TPConfigs.RoleUserLogin = _userLogin.IdRole ?? 0;
                     RegistryHelper.SaveSetting(RegistryHelper.LoginId, _userID);
-                    TempDatas.LoginSuccessful = true;
+                    TPConfigs.LoginSuccessful = true;
 
                     // Test
                     _userLogin.SecondaryPassword = txbPassword.Text;

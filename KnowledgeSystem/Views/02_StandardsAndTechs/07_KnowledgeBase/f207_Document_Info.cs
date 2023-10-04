@@ -187,7 +187,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private Securityinfo GetPermission()
         {
-            string userIdLogin = TempDatas.LoginId;
+            string userIdLogin = TPConfigs.LoginId;
 
             if (cbbUserUpload.EditValue.ToString() == userIdLogin ||
                 cbbUserProcess.EditValue.ToString() == userIdLogin)
@@ -276,7 +276,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 cbbUserProcess.Properties.DisplayMember = "DisplayName";
 
                 // Cài các thông tin mặc định lên Form (Trường hợp new Doc)
-                userId = TempDatas.LoginId;
+                userId = TPConfigs.LoginId;
                 cbbType.EditValue = 1;
                 cbbUserUpload.EditValue = userId;
                 cbbUserProcess.EditValue = userId;
@@ -329,7 +329,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     helper.LoadViewInfo();
 
                     // Thông tin lịch sửa cập nhật
-                    var lsHisUpdateRaw = db.dt207_DocProgress.Where(r => r.IdKnowledgeBase == idDocument && r.Descriptions == TempDatas.EventEdit).ToList();
+                    var lsHisUpdateRaw = db.dt207_DocProgress.Where(r => r.IdKnowledgeBase == idDocument && r.Descriptions == TPConfigs.EventEdit).ToList();
                     var DocProgressInfos =
                         (from data in db.dt207_DocProgressInfo
                          group data by data.IdDocProgress into g
@@ -463,11 +463,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             if (permissionAttachments.DeleteInfo != true)
             {
-                XtraMessageBox.Show(TempDatas.NoPermission, TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                XtraMessageBox.Show(TPConfigs.NoPermission, TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
             }
 
-            var dialogResult = XtraMessageBox.Show($"您确定要删除该文件：{idDocument}", TempDatas.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            var dialogResult = XtraMessageBox.Show($"您确定要删除该文件：{idDocument}", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (dialogResult == DialogResult.No)
             {
                 return;
@@ -489,8 +489,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     IsComplete = false,
                     IsSuccess = false,
                     IdProgress = progressSelect.Id,
-                    Descriptions = TempDatas.EventDel,
-                    IdUserProcess = TempDatas.LoginId
+                    Descriptions = TPConfigs.EventDel,
+                    IdUserProcess = TPConfigs.LoginId
                 };
 
                 db.dt207_DocProgress.Add(docProgress);
@@ -506,10 +506,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             bgvSecurity.FocusedRowHandle = GridControl.AutoFilterRowHandle;
 
             // Tạo ra IdDoc nếu là chức năng thêm mới
-            events = TempDatas.EventEdit;
+            events = TPConfigs.EventEdit;
             if (string.IsNullOrEmpty(idDocument))
             {
-                events = TempDatas.EventNew;
+                events = TPConfigs.EventNew;
                 idDocument = GenerateIdDocument();
             }
 
@@ -521,7 +521,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     bool IsProcessing = db.dt207_DocProgress.Any(r => r.IdKnowledgeBase == idDocument && !(r.IsComplete));
 
                     // Nếu là Edit Doc thì lưu lại thông tin cũ để nếu bị trả về thì update lại dữ liệu cũ
-                    if (events == TempDatas.EventEdit && !IsProcessing)
+                    if (events == TPConfigs.EventEdit && !IsProcessing)
                     {
                         dt207_Base_BAK base_BAK = db.dt207_Base.
                             Where(r => r.Id == idDocument).ToList().
@@ -593,7 +593,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                         if (!string.IsNullOrEmpty(item.FullPath))
                         {
                             string sourceFileName = item.FullPath;
-                            string destFileName = Path.Combine(TempDatas.PathKnowledgeFile, item.EncryptionName);
+                            string destFileName = Path.Combine(TPConfigs.PathKnowledgeFile, item.EncryptionName);
 
                             File.Copy(sourceFileName, destFileName, true);
                         }
@@ -630,7 +630,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                             IsSuccess = false,
                             IdProgress = progressSelect.Id,
                             Descriptions = events,
-                            IdUserProcess = TempDatas.LoginId,
+                            IdUserProcess = TPConfigs.LoginId,
                         };
 
                         db.dt207_DocProgress.Add(docProgress);
@@ -642,7 +642,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                             IdDocProgress = idDocProgress,
                             TimeStep = DateTime.Now,
                             IndexStep = 0,
-                            IdUserProcess = TempDatas.LoginId,
+                            IdUserProcess = TPConfigs.LoginId,
                             Descriptions = "呈核",
                         };
                         db.dt207_DocProgressInfo.Add(progressInfo);
@@ -654,7 +654,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             }
 
             // Show a message box with the appropriate message and close the form
-            XtraMessageBox.Show($"{events}!\r\n文件編號:{idDocument}", TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            XtraMessageBox.Show($"{events}!\r\n文件編號:{idDocument}", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
             Close();
         }
 
@@ -678,7 +678,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         private void btnDelFile_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             Attachments attachment = gvFiles.GetRow(gvFiles.FocusedRowHandle) as Attachments;
-            DialogResult dialogResult = XtraMessageBox.Show($"您想要刪除附件：{attachment.FileName}?", TempDatas.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult dialogResult = XtraMessageBox.Show($"您想要刪除附件：{attachment.FileName}?", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialogResult == DialogResult.No)
             {
                 return;
@@ -697,7 +697,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             Securityinfo permission = bgvSecurity.GetRow(bgvSecurity.FocusedRowHandle) as Securityinfo;
             permission.DisplayName = lsIdGroupOrUser.FirstOrDefault(r => r.IdGroupOrUser == permission.IdGroupOrUser)?.DisplayName;
 
-            DialogResult dialogResult = XtraMessageBox.Show($"您想要刪除權限：{permission.DisplayName}?", TempDatas.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult dialogResult = XtraMessageBox.Show($"您想要刪除權限：{permission.DisplayName}?", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialogResult == DialogResult.No)
                 return;
 
@@ -709,7 +709,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             if (permissionAttachments.ReadFile != true)
             {
-                XtraMessageBox.Show(TempDatas.NoPermission, TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                XtraMessageBox.Show(TPConfigs.NoPermission, TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
             }
 
@@ -718,7 +718,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 return;
 
             Attachments dataRow = gvFiles.GetRow(focusRow) as Attachments;
-            string documentsFile = Path.Combine(TempDatas.PathKnowledgeFile, dataRow.EncryptionName);
+            string documentsFile = Path.Combine(TPConfigs.PathKnowledgeFile, dataRow.EncryptionName);
 
             // Lưu lại lịch sử xem file
             using (var db = new DBDocumentManagementSystemEntities())
@@ -732,7 +732,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                         IdKnowledgeBase = idDocument,
                         idTypeHisGetFile = 1,
                         KnowledgeAttachmentName = dataRow.FileName,
-                        IdUser = TempDatas.LoginId,
+                        IdUser = TPConfigs.LoginId,
                         TimeGet = DateTime.Now
                     };
 
@@ -753,7 +753,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             if (permissionAttachments.UpdateInfo != true)
             {
-                XtraMessageBox.Show(TempDatas.NoPermission, TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                XtraMessageBox.Show(TPConfigs.NoPermission, TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
             }
 
@@ -790,13 +790,13 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 // Nếu mà Xoá thì trường IsDelete = true/ Sửa thì xoá các dữ liệu cũ đi
                 switch (eventProcess)
                 {
-                    case TempDatas.EventDel:
+                    case TPConfigs.EventDel:
                         var docBaseDelete = db.dt207_Base.First(r => r.Id == idDocument);
                         docBaseDelete.IsDelete = true;
 
                         db.dt207_Base.AddOrUpdate(docBaseDelete);
                         break;
-                    case TempDatas.EventEdit:
+                    case TPConfigs.EventEdit:
                         // Kiểm tra xem văn kiện được sửa ở chỗ nào
                         // Kiểm tra thông tin văn kiện
                         var docBaseNew = db.dt207_Base.First(r => r.Id == idDocument);
@@ -881,7 +881,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     IdDocProgress = idDocProgress,
                     TimeStep = DateTime.Now,
                     IndexStep = indexStep,
-                    IdUserProcess = TempDatas.LoginId,
+                    IdUserProcess = TPConfigs.LoginId,
                     Descriptions = descriptions,
                 };
                 db.dt207_DocProgressInfo.Add(progressInfo);
@@ -897,7 +897,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             XtraInputBoxArgs args = new XtraInputBoxArgs
             {
-                Caption = TempDatas.SoftNameTW,
+                Caption = TPConfigs.SoftNameTW,
                 Prompt = "退回文件原因",
                 DefaultButtonIndex = 0,
                 Editor = new MemoEdit()
@@ -908,7 +908,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                if (events == TempDatas.EventDel)
+                if (events == TPConfigs.EventDel)
                 {
                     var docProcessUpdate = db.dt207_DocProgress.First(r => r.Id == idDocProgress);
                     docProcessUpdate.IsSuccess = false;
@@ -921,7 +921,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     IdDocProgress = idDocProgress,
                     TimeStep = DateTime.Now,
                     IndexStep = -1,
-                    IdUserProcess = TempDatas.LoginId,
+                    IdUserProcess = TPConfigs.LoginId,
                     Descriptions = string.IsNullOrEmpty(descriptions) ? "退回" : $"退回，說明：{descriptions}"
                 };
 
@@ -939,7 +939,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             // Tạo textbox lấy nguyên nhân
             XtraInputBoxArgs args = new XtraInputBoxArgs
             {
-                Caption = TempDatas.SoftNameTW,
+                Caption = TPConfigs.SoftNameTW,
                 Prompt = "原因",
                 DefaultButtonIndex = 0,
                 Editor = new MemoEdit()
@@ -962,7 +962,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     IdDocProgress = idDocProgress,
                     TimeStep = DateTime.Now,
                     IndexStep = -1,
-                    IdUserProcess = TempDatas.LoginId,
+                    IdUserProcess = TPConfigs.LoginId,
                     Descriptions = string.IsNullOrEmpty(descriptions) ? "取消" : $"取消，說明：{descriptions}",
                 };
                 db.dt207_DocProgressInfo.Add(progressInfo);
@@ -970,7 +970,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 switch (events)
                 {
                     // Nếu là sửa thì cập nhật lại dữ liệu cũ và xoá BAK
-                    case TempDatas.EventEdit:
+                    case TPConfigs.EventEdit:
                         dt207_Base baseDoc = db.dt207_Base_BAK
                             .Where(r => r.Id == idDocument).ToList()
                             .Select(r => new dt207_Base
@@ -1019,7 +1019,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                         break;
 
                     // Nếu là thêm mới mà huỷ thì chuyển IsDelete = true trên Base
-                    case TempDatas.EventNew:
+                    case TPConfigs.EventNew:
                         var docBaseDelete = db.dt207_Base.First(r => r.Id == idDocument);
                         docBaseDelete.IsDelete = true;
 

@@ -15,25 +15,25 @@ namespace KnowledgeSystem.Configs
         public static void ClearSettings()
         {
             RegistryKey registryKey = Registry.CurrentUser.OpenSubKey("Software", true);
-            registryKey.DeleteSubKeyTree(TempDatas.SoftNameEN);
+            registryKey.DeleteSubKeyTree(TPConfigs.SoftNameEN);
         }
 
         public static void SaveSetting(string name_, object value_)
         {
             RegistryKey registryKey = Registry.CurrentUser.OpenSubKey("Software", true);
-            RegistryKey subKey = registryKey.CreateSubKey(TempDatas.SoftNameEN);
+            RegistryKey subKey = registryKey.CreateSubKey(TPConfigs.SoftNameEN);
             subKey.SetValue(name_, value_);
         }
 
         public static object GetSetting(string name_, object defaulValue_)
         {
             RegistryKey registryFolder = Registry.CurrentUser.OpenSubKey($@"Software", true);
-            if (!registryFolder.GetSubKeyNames().Contains(TempDatas.SoftNameEN))
+            if (!registryFolder.GetSubKeyNames().Contains(TPConfigs.SoftNameEN))
             {
                 SaveSetting(name_, defaulValue_);
             }
 
-            RegistryKey registryKey = Registry.CurrentUser.OpenSubKey($@"Software\{TempDatas.SoftNameEN}", true);
+            RegistryKey registryKey = Registry.CurrentUser.OpenSubKey($@"Software\{TPConfigs.SoftNameEN}", true);
             if (!registryKey.GetValueNames().Contains(name_)) return null;
 
             return registryKey.GetValue(name_, defaulValue_);

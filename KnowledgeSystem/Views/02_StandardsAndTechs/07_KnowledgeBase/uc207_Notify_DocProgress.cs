@@ -57,7 +57,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                var lsDocProgresses = db.dt207_DocProgress.Where(r => r.IdUserProcess == TempDatas.LoginId).ToList();
+                var lsDocProgresses = db.dt207_DocProgress.Where(r => r.IdUserProcess == TPConfigs.LoginId).ToList();
                 var lsKnowledgeBases = db.dt207_Base.ToList();
                 var lsUsers = db.dm_User.ToList();
 

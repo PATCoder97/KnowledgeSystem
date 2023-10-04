@@ -120,7 +120,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
 
             if (string.IsNullOrEmpty(name))
             {
-                XtraMessageBox.Show("請填寫所有信息", TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show("請填寫所有信息", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
