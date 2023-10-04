@@ -20,16 +20,29 @@ namespace BusinessLayer
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dt207_Base.Select(r => new dt207_Base
-                    {
-                        Id = r.Id,
-                        DisplayName = r.DisplayName,
-                        IdTypes = r.IdTypes,
-                        UserUpload = r.UserUpload,
-                        UserProcess = r.UserProcess,
-                        UploadDate = r.UploadDate,
-                        IsDelete = r.IsDelete
-                    }).ToList();
+                    return _context.dt207_Base
+                        .Where(r => !r.IsDelete)
+                        .Select(r => new
+                        {
+                            r.Id,
+                            r.DisplayName,
+                            r.IdTypes,
+                            r.UserUpload,
+                            r.UserProcess,
+                            r.UploadDate,
+                            r.IsDelete
+                        }).ToList()
+                        .Select(r => new dt207_Base
+                        {
+                            Id = r.Id,
+                            DisplayName = r.DisplayName,
+                            IdTypes = r.IdTypes,
+                            Keyword = "",
+                            UserUpload = r.UserUpload,
+                            UserProcess = r.UserProcess,
+                            UploadDate = r.UploadDate,
+                            IsDelete = r.IsDelete
+                        }).ToList();
                 }
             }
             catch (Exception ex)
@@ -45,7 +58,7 @@ namespace BusinessLayer
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dt207_Base.ToList();
+                    return _context.dt207_Base.Where(r => !r.IsDelete).ToList();
                 }
             }
             catch (Exception ex)

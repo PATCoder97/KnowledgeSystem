@@ -31,10 +31,14 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         // Khai báo BUS
         dm_UserBUS _dm_UserBUS = new dm_UserBUS();
-        dt207_Base _dt207_Base = new dt207_Base();
+        dt207_BaseBUS _dt207_BaseBUS = new dt207_BaseBUS();
         dt207_TypeBUS _dt207_TypeBUS = new dt207_TypeBUS();
         dt207_TypeHisGetFileBUS _dt207_TypeHisGetFileBUS = new dt207_TypeHisGetFileBUS();
         dt207_DocProgressBUS _dt207_DocProgressBUS = new dt207_DocProgressBUS();
+        dt207_SecurityBUS _dt207_SecurityBUS = new dt207_SecurityBUS();
+        dm_GroupBUS _dm_GroupBUS = new dm_GroupBUS();
+        dm_GroupUserBUS _dm_GroupUserBUS = new dm_GroupUserBUS();
+
 
         BindingSource sourceKnowledge = new BindingSource();
 
@@ -61,99 +65,92 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void LoadData()
         {
-            string _userLogin = TPConfigs.LoginId;
+            // Lấy các thông tin liên quan
+            string _userLogin = TPConfigs.LoginUser.Id;
+            bool _haveKeyword = checkUseKeyword.CheckState == CheckState.Checked;
+            gvColKeyword.Visible = !_haveKeyword;
+            helper.SaveViewInfo();
 
+            // Khai báo các danh sách liên quan
             List<dm_User> lsUsers = _dm_UserBUS.GetList();
             List<dt207_Type> lsKnowledgeTypes = _dt207_TypeBUS.GetList();
             List<dt207_TypeHisGetFile> lsTypeHisGetFile = _dt207_TypeHisGetFileBUS.GetList();
             List<dt207_Base> lsKnowledgeBase = new List<dt207_Base>();
+            List<dt207_Base> ls207Base = _haveKeyword ? _dt207_BaseBUS.GetList() : _dt207_BaseBUS.GetListWithoutKeyword();
+            List<dt207_Security> lsSecurities = _dt207_SecurityBUS.GetList();
+            List<dm_Group> lsGroups = _dm_GroupBUS.GetList();
+            List<dm_GroupUser> lsGroupUsers = _dm_GroupUserBUS.GetList();
 
-            // Kiểm tra xem có lấy Keyword để hiện lên view không
-            bool IsSimple = checkUseKeyword.CheckState == CheckState.Unchecked;
+            // Gán các 說明 quyền vào class temp
+            TPConfigs.typeViewFile = lsTypeHisGetFile.FirstOrDefault(r => r.Id == 1);
+            TPConfigs.typeSaveFile = lsTypeHisGetFile.FirstOrDefault(r => r.Id == 2);
+            TPConfigs.typePrintFile = lsTypeHisGetFile.FirstOrDefault(r => r.Id == 3);
 
-            // Lưu thông tin liên quan đến giao diện
-            helper.SaveViewInfo();
+            // Lấy danh sách các giá trị IdKnowledgeBase mà chưa hoàn thành lưu trình trình ký
+            var lsIdBaseRemove = _dt207_DocProgressBUS.GetListNotComplete().Select(r => r.IdKnowledgeBase).ToList();
 
-            using (var db = new DBDocumentManagementSystemEntities())
+            // Kiểm tra xem phải sysAdmin không, nếu là admin thì cho xem tất cả văn kiện
+            IsSysAdmin = AppPermission.Instance.CheckAppPermission(AppPermission.SysAdmin);
+            if (IsSysAdmin)
             {
-                //// Lấy danh sách Users, lsKnowledgeTypes, lsTypeHisGetFile từ cơ sở dữ liệu
-                //var lsTypeHisGetFile = db.dt207_TypeHisGetFile.ToList();
-                //lsKnowledgeTypes = db.dt207_Type.ToList();
-                //lsUsers = db.dm_User.ToList();
+                lsKnowledgeBase = ls207Base.Where(r => !lsIdBaseRemove.Contains(r.Id)).ToList();
+                goto GET_DISPLAY_LIST;
+            }
 
-                // Gán các 說明 quyền vào class temp
-                TPConfigs.typeViewFile = lsTypeHisGetFile.FirstOrDefault(r => r.Id == 1);
-                TPConfigs.typeSaveFile = lsTypeHisGetFile.FirstOrDefault(r => r.Id == 2);
-                TPConfigs.typePrintFile = lsTypeHisGetFile.FirstOrDefault(r => r.Id == 3);
+            // Mặc định sẽ hiển thị danh sách Base mà UserLogin là người đưa lên hoặc yêu cầu
+            var lsIdBaseUserUploaded = ls207Base.Where(r => r.UserUpload == _userLogin || r.UserProcess == _userLogin).Select(r => r.Id).ToList();
 
-                // Lấy danh sách các giá trị IdKnowledgeBase mà IsComplete là false
-                //////var lsIdBaseRemove = db.dt207_DocProgress.Where(r => !(r.IsComplete)).Select(r => r.IdKnowledgeBase).ToList();
-                var lsIdBaseRemove = _dt207_DocProgressBUS.GetListNotComplete().Select(r => r.IdKnowledgeBase).ToList();
+            // Join group với GroupUser để lấy Prioritize
+            var lsGroupP = (from gUser in lsGroupUsers
+                            join g in lsGroups on gUser.IdGroup equals g.Id
+                            select new
+                            {
+                                gUser.IdGroup,
+                                gUser.IdUser,
+                                g.Prioritize
+                            }).ToList();
 
-                // Kiểm tra xem phải sysAdmin không
-                IsSysAdmin = AppPermission.Instance.CheckAppPermission(AppPermission.SysAdmin);
-                if (IsSysAdmin)
-                {
-                    lsKnowledgeBase = db.dt207_Base.Where(r => !lsIdBaseRemove.Contains(r.Id) && !(r.IsDelete)).ToList();
-                    goto GET_DISPLAY_LIST;
-                }
-
-                // Danh sách Doc đưa lên hoặc yêu cầu
-                var lsDocUserUpload = db.dt207_Base.Where(r => r.UserUpload == _userLogin || r.UserProcess == _userLogin).ToList();
-                var lsIdDocUserUpload = lsDocUserUpload.Select(r => r.Id).ToList();
-
-                // Join group với GroupUser để lấy Prioritize
-                var lsGroupP = (from data in db.dm_GroupUser.ToList()
-                                join p in db.dm_Group.ToList() on data.IdGroup equals p.Id
+            // Danh sách mà user có quyền tìm kiếm
+            var lsCanSearchs = (from ks in lsSecurities
+                                join gu in lsGroupP on ks.IdGroup equals gu.IdGroup into gj
+                                from subGu in gj.DefaultIfEmpty()
+                                where ks.IdUser == _userLogin || (subGu != null ? subGu.IdUser == _userLogin : false)
                                 select new
                                 {
-                                    data.IdGroup,
-                                    data.IdUser,
-                                    p.Prioritize
+                                    ks.IdKnowledgeBase,
+                                    ks.IdGroup,
+                                    ks.IdUser,
+                                    UserG = subGu?.IdUser,
+                                    ks.SearchInfo,
+                                    ks.ReadInfo,
+                                    Prioritize = subGu?.Prioritize ?? -1
+                                } into dtData
+                                group dtData by dtData.IdKnowledgeBase into dtg
+                                select new
+                                {
+                                    dtg.Key,
+                                    dtg.OrderBy(r => r.Prioritize).FirstOrDefault()?.Prioritize,
+                                    dtg.OrderBy(r => r.Prioritize).FirstOrDefault()?.SearchInfo,
+                                    dtg.OrderBy(r => r.Prioritize).FirstOrDefault()?.ReadInfo,
+                                    dtg.OrderBy(r => r.Prioritize).FirstOrDefault()?.IdUser,
+                                    dtg.OrderBy(r => r.Prioritize).FirstOrDefault()?.UserG,
                                 }).ToList();
 
-                // Danh sách mà user có quyền tìm kiếm
-                var lsCanSearchs = (from ks in db.dt207_Security.ToList()
-                                    join gu in lsGroupP on ks.IdGroup equals gu.IdGroup into gj
-                                    from subGu in gj.DefaultIfEmpty()
-                                    where ks.IdUser == _userLogin || (subGu != null ? subGu.IdUser == _userLogin : false)
-                                    select new
-                                    {
-                                        ks.IdKnowledgeBase,
-                                        ks.IdGroup,
-                                        ks.IdUser,
-                                        UserG = subGu?.IdUser,
-                                        ks.SearchInfo,
-                                        ks.ReadInfo,
-                                        Prioritize = subGu?.Prioritize ?? -1
-                                    } into dtData
-                                    group dtData by dtData.IdKnowledgeBase into dtg
-                                    select new
-                                    {
-                                        dtg.Key,
-                                        dtg.OrderBy(r => r.Prioritize).FirstOrDefault()?.Prioritize,
-                                        dtg.OrderBy(r => r.Prioritize).FirstOrDefault()?.SearchInfo,
-                                        dtg.OrderBy(r => r.Prioritize).FirstOrDefault()?.ReadInfo,
-                                        dtg.OrderBy(r => r.Prioritize).FirstOrDefault()?.IdUser,
-                                        dtg.OrderBy(r => r.Prioritize).FirstOrDefault()?.UserG,
-                                    }).ToList();
+            var lsIsCanSearchs = lsCanSearchs.Where(r => r.SearchInfo == true).Select(r => r.Key).ToList();
+            lsIdCanReads = lsCanSearchs.Where(r => r.SearchInfo == true && r.ReadInfo == true).Select(r => r.Key).ToList();
 
-                var lsIsCanSearchs = lsCanSearchs.Where(r => r.SearchInfo == true).Select(r => r.Key).ToList();
-                lsIdCanReads = lsCanSearchs.Where(r => r.SearchInfo == true && r.ReadInfo == true).Select(r => r.Key).ToList();
+            // Gom tất cả các Id có quyền tìm kiếm, đưa lên và yêu cầu sau đó xoá đi các Id đang trong quá trình ký
+            List<string> lsIdDisplay = new List<string>();
 
-                // Gom tất cả các Id có quyền tìm kiếm, đưa lên và yêu cầu sau đó xoá đi các Id đang trong quá trình ký
-                List<string> lsIdDisplay = new List<string>();
+            lsIdDisplay.AddRange(lsIsCanSearchs);
+            lsIdDisplay.AddRange(lsIdBaseUserUploaded);
+            lsIdDisplay.RemoveAll(r => lsIdBaseRemove.Contains(r));
+            lsIdDisplay = lsIdDisplay.Distinct().ToList();
 
-                lsIdDisplay.AddRange(lsIsCanSearchs);
-                lsIdDisplay.AddRange(lsIdDocUserUpload);
-                lsIdDisplay.RemoveAll(r => lsIdBaseRemove.Contains(r));
-                lsIdDisplay = lsIdDisplay.Distinct().ToList();
+            lsIdCanReads.AddRange(lsIdBaseUserUploaded);
+            lsIdCanReads.RemoveAll(r => lsIdBaseRemove.Contains(r));
 
-                lsIdCanReads.AddRange(lsIdDocUserUpload);
-                lsIdCanReads.RemoveAll(r => lsIdBaseRemove.Contains(r));
-
-                lsKnowledgeBase = db.dt207_Base.Where(r => lsIdDisplay.Contains(r.Id) && !(r.IsDelete)).ToList();
-            }
+            lsKnowledgeBase = ls207Base.Where(r => lsIdDisplay.Contains(r.Id)).ToList();
 
         GET_DISPLAY_LIST:
             // Tạo danh sách các đối tượng DataDisplay bằng cách kết hợp lsKnowledgeBase, lsUsers, và lsKnowledgeTypes
@@ -169,19 +166,17 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                                       UserUpload = data.UserUpload,
                                       UserUploadName = userUpload_.DisplayName,
                                       TypeName = type_.DisplayName,
-                                      Keyword = IsSimple ? null : data.Keyword,
+                                      Keyword = _haveKeyword ? null : data.Keyword,
                                       UserProcessName = userProcess_.DisplayName,
                                       UploadDate = data.UploadDate,
                                       nonUnicodeDisplayName = convertToUnSign3(data.DisplayName),
-                                      nonUnicodeKeyword = IsSimple ? null : convertToUnSign3(data.Keyword),
+                                      nonUnicodeKeyword = _haveKeyword ? null : convertToUnSign3(data.Keyword),
                                   })
                                   .ToList();
 
             // Đặt nguồn dữ liệu của sourceKnowledge là danh sách các đối tượng DataDisplay
             sourceKnowledge.DataSource = lsDataDisplays;
 
-            // Đặt tính hiển thị của cột gvColKeyword dựa trên giá trị của biến IsSimple
-            gvColKeyword.Visible = !IsSimple;
 
             // Điều chỉnh độ rộng các cột của gvData
             gvData.BestFitColumns();
