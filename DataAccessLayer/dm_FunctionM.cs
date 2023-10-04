@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
-    public class dm_FunctionM : Function
+    public class dm_FunctionM : dm_Function
     {
         public SvgImage ImageSvg
         {

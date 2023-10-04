@@ -40,6 +40,7 @@ namespace KnowledgeSystem.Views._00_Generals
         #region parameters
 
         dm_FunctionBUS _dm_FunctionBUS = new dm_FunctionBUS();
+        dm_FunctionRoleBUS _dm_FunctionRoleBUS = new dm_FunctionRoleBUS();
 
         Font fontTW14 = new Font("DFKai-SB", 14.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
 
@@ -85,7 +86,7 @@ namespace KnowledgeSystem.Views._00_Generals
             {
                 //var lsAllFunctions = db.Functions.Where(r => r.IdParent == groupId).OrderBy(r => r.Prioritize).ToList();
                 var lsAllFunctions = _dm_FunctionBUS.GetListByIdParent(groupId);
-                var lsPermissions = db.FunctionRoles.Where(r => r.IdRole == TempDatas.RoleUserLogin).Select(r => r.IdFunction ?? 0).ToList();
+                var lsPermissions = _dm_FunctionRoleBUS.GetListByRole(TempDatas.RoleUserLogin).Select(r => r.IdFunction).ToList();
 
                 lsFunctions = (from data in lsAllFunctions
                                join granted in lsPermissions on data.Id equals granted
@@ -107,7 +108,7 @@ namespace KnowledgeSystem.Views._00_Generals
 
                     accordion.Hint = item.DisplayName;
 
-                    var lsChildren = (from data in db.Functions.Where(r => r.IdParent == item.Id)
+                    var lsChildren = (from data in db.dm_Function.Where(r => r.IdParent == item.Id)
                                       .OrderBy(r => r.Prioritize).ToList()
                                       join granted in lsPermissions on data.Id equals granted
                                       select data).ToList();

@@ -34,9 +34,9 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
         List<dm_FunctionM> lsFunctions = new List<dm_FunctionM>();
 
         BindingSource sourceRole = new BindingSource();
-        List<Role> lsRoles = new List<Role>();
+        List<dm_Role> lsRoles = new List<dm_Role>();
 
-        Role roleSelect = new Role();
+        dm_Role roleSelect = new dm_Role();
 
 
         #endregion
@@ -47,9 +47,9 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
         {
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                var lsFuncRole = db.FunctionRoles.Where(r => r.IdRole == roleSelect.Id).ToList();
+                var lsFuncRole = db.dm_FunctionRole.Where(r => r.IdRole == roleSelect.Id).ToList();
 
-                lsFunctions = (from data in db.Functions.OrderBy(r => r.Prioritize).ToList()
+                lsFunctions = (from data in db.dm_Function.OrderBy(r => r.Prioritize).ToList()
                                join funcs in lsFuncRole on data.Id equals funcs.IdFunction into dtg
                                from p in dtg.DefaultIfEmpty()
                                select new dm_FunctionM
@@ -64,7 +64,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
                                }).ToList();
                 sourceFunc.DataSource = lsFunctions;
 
-                lsRoles = db.Roles.ToList();
+                lsRoles = db.dm_Role.ToList();
                 sourceRole.DataSource = lsRoles;
                 gcRoles.DataSource = sourceRole;
 
@@ -77,7 +77,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
 
         private void ClearForm()
         {
-            roleSelect = new Role();
+            roleSelect = new dm_Role();
             txbNameRole.Text = "";
 
             LoadData();
@@ -127,7 +127,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
 
         private void RoleDelete_Click(object sender, System.EventArgs e)
         {
-            Role roleDelete = gvRoles.GetRow(gvRoles.FocusedRowHandle) as Role;
+            dm_Role roleDelete = gvRoles.GetRow(gvRoles.FocusedRowHandle) as dm_Role;
 
             var dlg = XtraMessageBox.Show($"Bạn có chắc chắn muốn xoá quyền hạn {roleDelete.DisplayName} ?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (dlg != DialogResult.Yes) return;
@@ -136,8 +136,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
             {
                 int idRoleDel = roleDelete.Id;
 
-                db.Roles.Remove(db.Roles.First(r => r.Id == idRoleDel));
-                db.FunctionRoles.RemoveRange(db.FunctionRoles.Where(r => r.IdRole == idRoleDel));
+                db.dm_Role.Remove(db.dm_Role.First(r => r.Id == idRoleDel));
+                db.dm_FunctionRole.RemoveRange(db.dm_FunctionRole.Where(r => r.IdRole == idRoleDel));
                 db.SaveChanges();
             }
 
@@ -146,7 +146,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
 
         private void RoleView_Click(object sender, System.EventArgs e)
         {
-            roleSelect = gvRoles.GetRow(gvRoles.FocusedRowHandle) as Role;
+            roleSelect = gvRoles.GetRow(gvRoles.FocusedRowHandle) as dm_Role;
             txbNameRole.Text = roleSelect.DisplayName;
 
             LoadData();
@@ -156,7 +156,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
         {
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                if (db.Roles.Any(r => r.DisplayName == "NEW"))
+                if (db.dm_Role.Any(r => r.DisplayName == "NEW"))
                 {
                     XtraMessageBox.Show($"Đã tồn tại quyền hạn NEW !", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
@@ -165,12 +165,12 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
                 var dlg = XtraMessageBox.Show($"Bạn có chắc chắn muốn thêm quyền hạn mới ?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (dlg != DialogResult.Yes) return;
 
-                Role role = new Role()
+                dm_Role role = new dm_Role()
                 {
                     DisplayName = "NEW"
                 };
 
-                db.Roles.Add(role);
+                db.dm_Role.Add(role);
                 db.SaveChanges();
             }
 
@@ -204,11 +204,11 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
             // Xóa các functionRole trước đó, sau đó thêm lại
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                db.FunctionRoles.RemoveRange(db.FunctionRoles.Where(r => r.IdRole == roleSelect.Id));
+                db.dm_FunctionRole.RemoveRange(db.dm_FunctionRole.Where(r => r.IdRole == roleSelect.Id));
 
                 foreach (var item in lsFunctionUpdate)
                 {
-                    db.FunctionRoles.Add(new FunctionRole() { IdRole = roleSelect.Id, IdFunction = item.Id });
+                    db.dm_FunctionRole.Add(new dm_FunctionRole() { IdRole = roleSelect.Id, IdFunction = item.Id });
                 }
                 db.SaveChanges();
             }
@@ -221,11 +221,11 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
 
         private void gvRoles_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
         {
-            Role roles = e.Row as Role;
+            dm_Role roles = e.Row as dm_Role;
 
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                db.Roles.AddOrUpdate(roles);
+                db.dm_Role.AddOrUpdate(roles);
                 db.SaveChanges();
             }
 

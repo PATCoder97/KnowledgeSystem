@@ -46,7 +46,7 @@ namespace KnowledgeSystem.Views._00_Generals
                 string _userID = txbUserID.Text.Trim().ToUpper();
                 string _password = txbPassword.Text.Trim();
 
-                User _userLogin = null;
+                dm_User _userLogin = null;
 
                 // Kiểm tra userID và password trong cơ sở dữ liệu
                 // Kiểm tra xem có nằm trong DoMain VNFPG không, nếu có thì check tk OA
@@ -65,7 +65,7 @@ namespace KnowledgeSystem.Views._00_Generals
                                 string idDeptFHS = displayNameFHS[0].Replace("LG", string.Empty);
                                 string userNameFHS = displayNameFHS[1];
 
-                                _userLogin = new User()
+                                _userLogin = new dm_User()
                                 {
                                     Id = _userID,
                                     IdDepartment = idDeptFHS,

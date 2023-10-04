@@ -100,14 +100,7 @@ namespace KnowledgeSystem.Views._00_Generals
                 return;
             }
 
-            using (var db = new DBDocumentManagementSystemEntities())
-            {
-                var userUpdate = db.Users.First(r => r.Id == TempDatas.LoginId);
-                userUpdate.SecondaryPassword = newPassword;
-
-                db.SaveChanges();
-            }
-
+            _dm_UserBUS.ChangePass(TempDatas.LoginId, newPassword);
             XtraMessageBox.Show("您的密碼已更新！", TempDatas.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 

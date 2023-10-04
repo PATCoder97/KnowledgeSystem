@@ -39,8 +39,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
 
         int idGroup = 0;
 
-        List<User> lsUserData = new List<User>();
-        List<User> lsUserChoose = new List<User>();
+        List<dm_User> lsUserData = new List<dm_User>();
+        List<dm_User> lsUserChoose = new List<dm_User>();
 
         BindingSource sourceData = new BindingSource();
         BindingSource sourceChoose = new BindingSource();
@@ -53,9 +53,9 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
         {
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                lsUserData = db.Users.ToList();
+                lsUserData = db.dm_User.ToList();
 
-                var lsGroupUsers = db.GroupUsers.Where(r => r.IdGroup == idGroup).ToList();
+                var lsGroupUsers = db.dm_GroupUser.Where(r => r.IdGroup == idGroup).ToList();
                 foreach (var item in lsGroupUsers)
                 {
                     var userHave = lsUserData.FirstOrDefault(r => r.Id == item.IdUser);
@@ -103,7 +103,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             {
                 using (var db = new DBDocumentManagementSystemEntities())
                 {
-                    var groups = db.Groups.Where(r => r.Id == idGroup).FirstOrDefault();
+                    var groups = db.dm_Group.Where(r => r.Id == idGroup).FirstOrDefault();
 
                     txbName.EditValue = groups.DisplayName;
                     txbDescribe.EditValue = groups.Describe;
@@ -124,7 +124,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
                 return;
             }
 
-            var groups = new Group()
+            var groups = new dm_Group()
             {
                 DisplayName = name,
                 Describe = moTa,
@@ -135,23 +135,23 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             {
                 if (idGroup == 0)
                 {
-                    db.Groups.Add(groups);
+                    db.dm_Group.Add(groups);
                 }
                 else
                 {
                     groups.Id = idGroup;
-                    db.Groups.AddOrUpdate(groups);
+                    db.dm_Group.AddOrUpdate(groups);
 
-                    db.GroupUsers.RemoveRange(db.GroupUsers.Where(r => r.IdGroup == idGroup));
+                    db.dm_GroupUser.RemoveRange(db.dm_GroupUser .Where(r => r.IdGroup == idGroup));
                 }
 
-                var newGroupUserList = lsUserChoose.Select(item => new GroupUser
+                var newGroupUserList = lsUserChoose.Select(item => new dm_GroupUser
                 {
                     IdGroup = groups.Id,
                     IdUser = item.Id
                 });
 
-                db.GroupUsers.AddRange(newGroupUserList);
+                db.dm_GroupUser.AddRange(newGroupUserList);
 
                 db.SaveChanges();
             }
@@ -164,7 +164,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             int forcusRow = gvData.FocusedRowHandle;
             if (forcusRow < 0) return;
 
-            User dataRow = gvData.GetRow(forcusRow) as User;
+            dm_User dataRow = gvData.GetRow(forcusRow) as dm_User;
 
             lsUserChoose.Add(dataRow);
             lsUserData.Remove(dataRow);
@@ -178,7 +178,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             int forcusRow = gvChoose.FocusedRowHandle;
             if (forcusRow < 0) return;
 
-            User dataRow = gvChoose.GetRow(forcusRow) as User;
+            dm_User dataRow = gvChoose.GetRow(forcusRow) as dm_User;
 
             lsUserChoose.Remove(dataRow);
             lsUserData.Add(dataRow);
@@ -196,8 +196,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
         {
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                db.Groups.RemoveRange(db.Groups.Where(r => r.Id == idGroup));
-                db.GroupUsers.RemoveRange(db.GroupUsers.Where(r => r.IdGroup == idGroup));
+                db.dm_Group.RemoveRange(db.dm_Group.Where(r => r.Id == idGroup));
+                db.dm_GroupUser.RemoveRange(db.dm_GroupUser.Where(r => r.IdGroup == idGroup));
                 db.SaveChanges();
             }
 

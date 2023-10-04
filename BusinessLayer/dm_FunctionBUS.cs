@@ -20,7 +20,7 @@ namespace BusinessLayer
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.Functions.Select(r => new dm_FunctionM
+                    return _context.dm_Function.Select(r => new dm_FunctionM
                     {
                         Id = r.Id,
                         IdParent = r.IdParent,
@@ -45,7 +45,7 @@ namespace BusinessLayer
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.Functions
+                    return _context.dm_Function
                         .Where(r => r.IdParent == _idParent)
                         .Select(r => new dm_FunctionM
                         {
@@ -72,7 +72,7 @@ namespace BusinessLayer
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    _context.Functions.Add(_function);
+                    _context.dm_Function.Add(_function);
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;
                 }
@@ -90,7 +90,7 @@ namespace BusinessLayer
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    _context.Functions.AddOrUpdate(_function);
+                    _context.dm_Function.AddOrUpdate(_function);
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;
                 }
@@ -108,8 +108,8 @@ namespace BusinessLayer
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    var _itemDel = _context.Functions.FirstOrDefault(r => r.Id == _idFunction);
-                    _context.Functions.Remove(_itemDel);
+                    var _itemDel = _context.dm_Function.FirstOrDefault(r => r.Id == _idFunction);
+                    _context.dm_Function.Remove(_itemDel);
 
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;

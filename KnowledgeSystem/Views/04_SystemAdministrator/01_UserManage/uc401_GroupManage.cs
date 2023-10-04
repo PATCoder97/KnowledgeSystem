@@ -37,7 +37,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             helper.SaveViewInfo();
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                var lsGroup = db.Groups.ToList();
+                var lsGroup = db.dm_Group.ToList();
                 sourceGroup.DataSource = lsGroup;
             }
 
@@ -69,7 +69,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             int forcusRow = gvData.FocusedRowHandle;
             if (forcusRow < 0) return;
 
-            Group dataRow = gvData.GetRow(forcusRow) as Group;
+            dm_Group dataRow = gvData.GetRow(forcusRow) as dm_Group;
             int IdGroup = dataRow.Id;
 
             f401_GroupManage_Info formInfo = new f401_GroupManage_Info(IdGroup);

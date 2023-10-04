@@ -1,4 +1,5 @@
-﻿using DataAccessLayer;
+﻿using BusinessLayer;
+using DataAccessLayer;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraTreeList.Painter;
 using System;
@@ -11,6 +12,8 @@ namespace KnowledgeSystem.Configs
 {
     class AppPermission
     {
+        dm_FunctionRoleBUS _dm_FunctionRoleBUS = new dm_FunctionRoleBUS();
+
         static List<int> lsPermissions = new List<int>();
 
         private static AppPermission instance;
@@ -28,10 +31,7 @@ namespace KnowledgeSystem.Configs
 
         private AppPermission()
         {
-            using (var db = new DBDocumentManagementSystemEntities())
-            {
-                lsPermissions = db.FunctionRoles.Where(r => r.IdRole == TempDatas.RoleUserLogin).Select(r => r.IdFunction ?? 0).ToList();
-            }
+            lsPermissions = _dm_FunctionRoleBUS.GetListByRole(TempDatas.RoleUserLogin).Select(r => r.IdFunction).ToList();
         }
 
         /// <summary>

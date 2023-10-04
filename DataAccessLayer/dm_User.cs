@@ -12,10 +12,13 @@ namespace DataAccessLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class Role
+    public partial class dm_User
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string DisplayName { get; set; }
-        public string Describe { get; set; }
+        public string SecondaryPassword { get; set; }
+        public Nullable<int> IdRole { get; set; }
+        public System.DateTime DateCreate { get; set; }
+        public string IdDepartment { get; set; }
     }
 }

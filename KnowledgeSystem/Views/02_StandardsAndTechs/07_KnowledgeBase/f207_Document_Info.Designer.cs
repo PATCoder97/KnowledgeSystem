@@ -313,13 +313,13 @@
             this.bar2.DockRow = 0;
             this.bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnEdit, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnConfirm),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnDel),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnChangeProgress),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnApproved),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnDisapprove),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnCancel)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnEdit, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnConfirm, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnDel, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnChangeProgress, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnApproved, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnDisapprove, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnCancel, true)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawBorder = false;
             this.bar2.OptionsBar.DrawDragBorder = false;

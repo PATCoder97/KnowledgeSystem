@@ -35,7 +35,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManager
         Font fontDFKaiSB12 = new Font("DFKai-SB", 12.0f, FontStyle.Regular);
         BindingSource sourceUsers = new BindingSource();
 
-        private class UserInfos : User
+        private class UserInfos : dm_User
         {
             public string RoleName { get; set; }
             public string DeptName { get; set; }
@@ -50,9 +50,9 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManager
             helper.SaveViewInfo();
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                var lsUserManage = (from data in db.Users.ToList()
+                var lsUserManage = (from data in db.dm_User.ToList()
                                     join depts in db.dm_Departments.ToList() on data.IdDepartment equals depts.Id
-                                    join roles in db.Roles.ToList() on data.IdRole equals roles.Id into dtg
+                                    join roles in db.dm_Role.ToList() on data.IdRole equals roles.Id into dtg
                                     from p in dtg.DefaultIfEmpty()
                                     select new UserInfos()
                                     {
@@ -150,11 +150,11 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManager
 
         private void GridView_RowUpdated(object sender, RowObjectEventArgs e)
         {
-            User rowUser = e.Row as User;
+            dm_User rowUser = e.Row as dm_User;
 
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                db.Users.AddOrUpdate(rowUser);
+                db.dm_User.AddOrUpdate(rowUser);
                 db.SaveChanges();
             }
 
@@ -168,7 +168,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManager
             uc401_UserManage_Info ucInfo = new uc401_UserManage_Info();
             if (XtraDialog.Show(ucInfo, "新增使用者", MessageBoxButtons.OKCancel) != DialogResult.OK) return;
 
-            var userNew = new User()
+            var userNew = new dm_User()
             {
                 Id = ucInfo.Id,
                 DisplayName = ucInfo.DisplayName,
@@ -180,7 +180,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManager
             string msg = "Thao tác sửa thành công!";
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                db.Users.Add(userNew);
+                db.dm_User.Add(userNew);
                 try
                 {
                     db.SaveChanges();

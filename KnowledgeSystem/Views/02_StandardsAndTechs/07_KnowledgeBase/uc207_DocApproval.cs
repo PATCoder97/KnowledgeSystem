@@ -1,4 +1,5 @@
-﻿using DataAccessLayer;
+﻿using BusinessLayer;
+using DataAccessLayer;
 using DevExpress.ClipboardSource.SpreadsheetML;
 using DevExpress.Utils.About;
 using DevExpress.XtraEditors;
@@ -26,6 +27,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         #region parameters
 
+        dm_UserBUS _dm_UserBUS = new dm_UserBUS();
+
         BindingSource source = new BindingSource();
 
         List<dt207_DocProgress> lsDocProgresses = new List<dt207_DocProgress>();
@@ -43,7 +46,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 lsDocProgresses = db.dt207_DocProgress.Where(r => !(r.IsComplete ?? false)).ToList();
                 lsDocProgressInfos = db.dt207_DocProgressInfo.ToList();
                 var lsKnowledgeBases = db.dt207_Base.ToList();
-                var lsUsers = db.Users.ToList();
+                var lsUsers = _dm_UserBUS.GetList();
 
                 var lsDocNotSuccess =
                     (from data in db.dt207_DocProgressInfo
@@ -74,7 +77,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                      }).ToList();
 
                 // Xử lý phân quyền nhưng user nằm trong group sẽ nhìn thấy
-                var lsGroupIn = (from data in db.GroupUsers.Where(r => r.IdUser == TempDatas.LoginId).ToList()
+                var lsGroupIn = (from data in db.dm_GroupUser.Where(r => r.IdUser == TempDatas.LoginId).ToList()
                                  join progresses in db.dm_StepProgress.ToList() on data.IdGroup equals progresses.IdGroup
                                  select new
                                  {
@@ -85,8 +88,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                                  }).ToList();
 
                 var lsDisplays = (from data in lsDataApproval
-                                 join progresses in lsGroupIn on data.ApprovalStep equals progresses.ApprovalStep
-                                 select data).ToList();
+                                  join progresses in lsGroupIn on data.ApprovalStep equals progresses.ApprovalStep
+                                  select data).ToList();
 
 
                 source.DataSource = lsDisplays;

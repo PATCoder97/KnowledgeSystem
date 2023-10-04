@@ -12,14 +12,11 @@ namespace DataAccessLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class Function
+    public partial class dm_Group
     {
         public int Id { get; set; }
-        public Nullable<int> IdParent { get; set; }
         public string DisplayName { get; set; }
-        public string ControlName { get; set; }
-        public Nullable<int> Prioritize { get; set; }
-        public Nullable<bool> Status { get; set; }
-        public string Images { get; set; }
+        public string Describe { get; set; }
+        public int Prioritize { get; set; }
     }
 }

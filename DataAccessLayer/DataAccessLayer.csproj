@@ -104,16 +104,16 @@
     <Compile Include="dt207_TypeHisGetFile.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
-    <Compile Include="Function.cs">
+    <Compile Include="dm_Function.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
-    <Compile Include="FunctionRole.cs">
+    <Compile Include="dm_FunctionRole.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
-    <Compile Include="Group.cs">
+    <Compile Include="dm_Group.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
-    <Compile Include="GroupUser.cs">
+    <Compile Include="dm_GroupUser.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
     <Compile Include="ModelDocManager.Context.cs">
@@ -132,7 +132,7 @@
       <DependentUpon>ModelDocManager.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Role.cs">
+    <Compile Include="dm_Role.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
     <Compile Include="sys_Log.cs">
@@ -142,7 +142,7 @@
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
     <Compile Include="TPConfigsDAL.cs" />
-    <Compile Include="User.cs">
+    <Compile Include="dm_User.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
   </ItemGroup>

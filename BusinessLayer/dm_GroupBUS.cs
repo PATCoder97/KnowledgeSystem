@@ -10,17 +10,17 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer
 {
-    public class dt207_TargetsBUS
+    public class dm_GroupBUS
     {
         TPLogger logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName);
 
-        public List<dt207_Targets> GetList()
+        public List<dm_Group> GetList()
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dt207_Targets.ToList();
+                    return _context.dm_Group.ToList();
                 }
             }
             catch (Exception ex)
@@ -30,13 +30,13 @@ namespace BusinessLayer
             }
         }
 
-        public bool Create(dt207_Targets target)
+        public bool Create(dm_Group group)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    _context.dt207_Targets.Add(target);
+                    _context.dm_Group.Add(group);
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;
                 }
@@ -48,13 +48,13 @@ namespace BusinessLayer
             }
         }
 
-        public bool Update(dt207_Targets target)
+        public bool Update(dm_Group group)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    _context.dt207_Targets.AddOrUpdate(target);
+                    _context.dm_Group.AddOrUpdate(group);
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;
                 }
@@ -66,14 +66,14 @@ namespace BusinessLayer
             }
         }
 
-        public bool Delete(string _idDept)
+        public bool Delete(int groupId)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    var target = _context.dt207_Targets.FirstOrDefault(r => r.IdDept == _idDept);
-                    _context.dt207_Targets.Remove(target);
+                    var group = _context.dm_Group.FirstOrDefault(r => r.Id == groupId);
+                    _context.dm_Group.Remove(group);
 
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;

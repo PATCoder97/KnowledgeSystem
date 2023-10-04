@@ -26,8 +26,14 @@ namespace DataAccessLayer
         }
     
         public virtual DbSet<dm_Departments> dm_Departments { get; set; }
+        public virtual DbSet<dm_Function> dm_Function { get; set; }
+        public virtual DbSet<dm_FunctionRole> dm_FunctionRole { get; set; }
+        public virtual DbSet<dm_Group> dm_Group { get; set; }
+        public virtual DbSet<dm_GroupUser> dm_GroupUser { get; set; }
         public virtual DbSet<dm_Progress> dm_Progress { get; set; }
+        public virtual DbSet<dm_Role> dm_Role { get; set; }
         public virtual DbSet<dm_StepProgress> dm_StepProgress { get; set; }
+        public virtual DbSet<dm_User> dm_User { get; set; }
         public virtual DbSet<dt207_Attachment> dt207_Attachment { get; set; }
         public virtual DbSet<dt207_Attachment_BAK> dt207_Attachment_BAK { get; set; }
         public virtual DbSet<dt207_Base> dt207_Base { get; set; }
@@ -41,13 +47,7 @@ namespace DataAccessLayer
         public virtual DbSet<dt207_Targets> dt207_Targets { get; set; }
         public virtual DbSet<dt207_Type> dt207_Type { get; set; }
         public virtual DbSet<dt207_TypeHisGetFile> dt207_TypeHisGetFile { get; set; }
-        public virtual DbSet<FunctionRole> FunctionRoles { get; set; }
-        public virtual DbSet<Function> Functions { get; set; }
-        public virtual DbSet<Group> Groups { get; set; }
-        public virtual DbSet<GroupUser> GroupUsers { get; set; }
-        public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<sys_Log> sys_Log { get; set; }
-        public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<sys_StaticValue> sys_StaticValue { get; set; }
     }
 }

@@ -27,7 +27,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
         {
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                var lsRoles = db.Roles.ToList();
+                var lsRoles = db.dm_Role.ToList();
                 cbbRole.Properties.DataSource = lsRoles;
                 cbbRole.Properties.DisplayMember = "DisplayName";
                 cbbRole.Properties.ValueMember = "Id";

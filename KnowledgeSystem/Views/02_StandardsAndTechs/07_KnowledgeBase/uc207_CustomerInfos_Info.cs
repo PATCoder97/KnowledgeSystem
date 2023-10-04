@@ -24,7 +24,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                var lsUsers = db.Users.ToList();
+                var lsUsers = db.dm_User.ToList();
                 cbbIdUser.Properties.DataSource = lsUsers;
                 cbbIdUser.Properties.DisplayMember = "DisplayName";
                 cbbIdUser.Properties.ValueMember = "Id";

@@ -1,4 +1,5 @@
-﻿using DataAccessLayer;
+﻿using BusinessLayer;
+using DataAccessLayer;
 using DevExpress.XtraEditors;
 using KnowledgeSystem.Configs;
 using System;
@@ -20,6 +21,8 @@ namespace KnowledgeSystem.Views._00_Generals
             InitializeComponent();
         }
 
+        dm_UserBUS _dm_UserBUS = new dm_UserBUS();
+
         private void btnConfirm_Click(object sender, EventArgs e)
         {
             NewPassword = string.Empty;
@@ -30,13 +33,10 @@ namespace KnowledgeSystem.Views._00_Generals
 
             if (newPassword1 != newPassword2) return;
 
-            using (var db = new DBDocumentManagementSystemEntities())
+            var _userCheck = _dm_UserBUS.CheckLogin(TempDatas.LoginId, oldPassword);
+            if (_userCheck != default)
             {
-                bool IsExistUser = db.Users.Any(r => r.Id == TempDatas.LoginId && r.SecondaryPassword == oldPassword);
-                if (IsExistUser)
-                {
-                    NewPassword = newPassword2;
-                }
+                NewPassword = newPassword2;
             }
         }
 

@@ -14,12 +14,57 @@
           <Property Name="IdParent" Type="int" />
           <Property Name="DisplayName" Type="nvarchar" MaxLength="64" />
         </EntityType>
+        <EntityType Name="dm_Function">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="IdParent" Type="int" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="ControlName" Type="varchar" MaxLength="32" />
+          <Property Name="Prioritize" Type="int" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="Images" Type="varchar" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="dm_FunctionRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdFunction" Type="int" Nullable="false" />
+          <Property Name="IdRole" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dm_Group">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="32" />
+          <Property Name="Describe" Type="nvarchar" MaxLength="128" />
+          <Property Name="Prioritize" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dm_GroupUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdGroup" Type="int" Nullable="false" />
+          <Property Name="IdUser" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
         <EntityType Name="dm_Progress">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="DisplayName" Type="nvarchar" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="dm_Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="Describe" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="dm_StepProgress">
           <Key>
@@ -29,6 +74,17 @@
           <Property Name="IdProgress" Type="int" Nullable="false" />
           <Property Name="IdGroup" Type="int" Nullable="false" />
           <Property Name="IndexStep" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dm_User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="8" />
+          <Property Name="SecondaryPassword" Type="varchar" MaxLength="32" />
+          <Property Name="IdRole" Type="int" />
+          <Property Name="DateCreate" Type="date" Nullable="false" />
+          <Property Name="IdDepartment" Type="varchar" MaxLength="4" />
         </EntityType>
         <EntityType Name="dt207_Attachment">
           <Key>
@@ -171,51 +227,6 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="DisplayName" Type="nvarchar" MaxLength="8" Nullable="false" />
         </EntityType>
-        <EntityType Name="FunctionRole">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IdFunction" Type="int" />
-          <Property Name="IdRole" Type="int" />
-        </EntityType>
-        <EntityType Name="Functions">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="IdParent" Type="int" />
-          <Property Name="DisplayName" Type="nvarchar" MaxLength="32" />
-          <Property Name="ControlName" Type="varchar" MaxLength="32" />
-          <Property Name="Prioritize" Type="int" />
-          <Property Name="Status" Type="bit" />
-          <Property Name="Images" Type="varchar" MaxLength="32" />
-        </EntityType>
-        <EntityType Name="Groups">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="DisplayName" Type="nvarchar" MaxLength="32" />
-          <Property Name="Describe" Type="nvarchar" MaxLength="128" />
-          <Property Name="Prioritize" Type="int" />
-        </EntityType>
-        <EntityType Name="GroupUser">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IdGroup" Type="int" />
-          <Property Name="IdUser" Type="varchar" MaxLength="10" />
-        </EntityType>
-        <EntityType Name="Roles">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="DisplayName" Type="nvarchar" MaxLength="32" />
-          <Property Name="Describe" Type="nvarchar" MaxLength="128" />
-        </EntityType>
         <EntityType Name="sys_Log">
           <Key>
             <PropertyRef Name="Id" />
@@ -236,21 +247,16 @@
           <Property Name="KeyT" Type="varchar" MaxLength="32" Nullable="false" />
           <Property Name="ValueT" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
-        <EntityType Name="Users">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="DisplayName" Type="nvarchar" MaxLength="8" />
-          <Property Name="SecondaryPassword" Type="varchar" MaxLength="32" />
-          <Property Name="IdRole" Type="int" />
-          <Property Name="DateCreate" Type="date" />
-          <Property Name="IdDepartment" Type="varchar" MaxLength="4" />
-        </EntityType>
         <EntityContainer Name="DBDocumentManagementSystemModelStoreContainer">
           <EntitySet Name="dm_Departments" EntityType="Self.dm_Departments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dm_Function" EntityType="Self.dm_Function" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dm_FunctionRole" EntityType="Self.dm_FunctionRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dm_Group" EntityType="Self.dm_Group" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dm_GroupUser" EntityType="Self.dm_GroupUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dm_Progress" EntityType="Self.dm_Progress" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dm_Role" EntityType="Self.dm_Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dm_StepProgress" EntityType="Self.dm_StepProgress" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dm_User" EntityType="Self.dm_User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt207_Attachment" EntityType="Self.dt207_Attachment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt207_Attachment_BAK" EntityType="Self.dt207_Attachment_BAK" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt207_Base" EntityType="Self.dt207_Base" Schema="dbo" store:Type="Tables" />
@@ -264,27 +270,84 @@
           <EntitySet Name="dt207_Targets" EntityType="Self.dt207_Targets" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt207_Type" EntityType="Self.dt207_Type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt207_TypeHisGetFile" EntityType="Self.dt207_TypeHisGetFile" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="FunctionRole" EntityType="Self.FunctionRole" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Functions" EntityType="Self.Functions" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="GroupUser" EntityType="Self.GroupUser" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sys_Log" EntityType="Self.sys_Log" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sys_StaticValue" EntityType="Self.sys_StaticValue" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DBDocumentManagementSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DBDocumentManagementSystemEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="dm_Departments" EntityType="DBDocumentManagementSystemModel.dm_Departments" />
+          <EntitySet Name="dm_Function" EntityType="DBDocumentManagementSystemModel.dm_Function" />
+          <EntitySet Name="dm_FunctionRole" EntityType="DBDocumentManagementSystemModel.dm_FunctionRole" />
+          <EntitySet Name="dm_Group" EntityType="DBDocumentManagementSystemModel.dm_Group" />
+          <EntitySet Name="dm_GroupUser" EntityType="DBDocumentManagementSystemModel.dm_GroupUser" />
+          <EntitySet Name="dm_Progress" EntityType="DBDocumentManagementSystemModel.dm_Progress" />
+          <EntitySet Name="dm_Role" EntityType="DBDocumentManagementSystemModel.dm_Role" />
+          <EntitySet Name="dm_StepProgress" EntityType="DBDocumentManagementSystemModel.dm_StepProgress" />
+          <EntitySet Name="dm_User" EntityType="DBDocumentManagementSystemModel.dm_User" />
+          <EntitySet Name="dt207_Attachment" EntityType="DBDocumentManagementSystemModel.dt207_Attachment" />
+          <EntitySet Name="dt207_Attachment_BAK" EntityType="DBDocumentManagementSystemModel.dt207_Attachment_BAK" />
+          <EntitySet Name="dt207_Base" EntityType="DBDocumentManagementSystemModel.dt207_Base" />
+          <EntitySet Name="dt207_Base_BAK" EntityType="DBDocumentManagementSystemModel.dt207_Base_BAK" />
+          <EntitySet Name="dt207_DocProgress" EntityType="DBDocumentManagementSystemModel.dt207_DocProgress" />
+          <EntitySet Name="dt207_DocProgressInfo" EntityType="DBDocumentManagementSystemModel.dt207_DocProgressInfo" />
+          <EntitySet Name="dt207_HistoryGetFile" EntityType="DBDocumentManagementSystemModel.dt207_HistoryGetFile" />
+          <EntitySet Name="dt207_NotifyEditDoc" EntityType="DBDocumentManagementSystemModel.dt207_NotifyEditDoc" />
+          <EntitySet Name="dt207_Security" EntityType="DBDocumentManagementSystemModel.dt207_Security" />
+          <EntitySet Name="dt207_Security_BAK" EntityType="DBDocumentManagementSystemModel.dt207_Security_BAK" />
+          <EntitySet Name="dt207_Targets" EntityType="DBDocumentManagementSystemModel.dt207_Targets" />
+          <EntitySet Name="dt207_Type" EntityType="DBDocumentManagementSystemModel.dt207_Type" />
+          <EntitySet Name="dt207_TypeHisGetFile" EntityType="DBDocumentManagementSystemModel.dt207_TypeHisGetFile" />
+          <EntitySet Name="sys_Log" EntityType="DBDocumentManagementSystemModel.sys_Log" />
+          <EntitySet Name="sys_StaticValue" EntityType="DBDocumentManagementSystemModel.sys_StaticValue" />
+        </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
           <Property Name="IdChild" Type="Int32" />
           <Property Name="IdParent" Type="Int32" />
           <Property Name="DisplayName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dm_Function">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="IdParent" Type="Int32" Nullable="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="ControlName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="Prioritize" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="Images" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="dm_FunctionRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdFunction" Type="Int32" Nullable="false" />
+          <Property Name="IdRole" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dm_Group">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="Describe" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Prioritize" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dm_GroupUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdGroup" Type="Int32" Nullable="false" />
+          <Property Name="IdUser" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="dm_Progress">
           <Key>
@@ -292,6 +355,14 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="DisplayName" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dm_Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="Describe" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="dm_StepProgress">
           <Key>
@@ -301,6 +372,17 @@
           <Property Name="IdProgress" Type="Int32" Nullable="false" />
           <Property Name="IdGroup" Type="Int32" Nullable="false" />
           <Property Name="IndexStep" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dm_User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayName" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="SecondaryPassword" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="IdRole" Type="Int32" />
+          <Property Name="DateCreate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IdDepartment" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="dt207_Attachment">
           <Key>
@@ -324,7 +406,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
           <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IdTypes" Type="Int32" />
           <Property Name="Keyword" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -337,7 +419,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
           <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IdTypes" Type="Int32" />
           <Property Name="Keyword" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -350,7 +432,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdKnowledgeBase" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdKnowledgeBase" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
           <Property Name="IdProgress" Type="Int32" Nullable="false" />
           <Property Name="IsComplete" Type="Boolean" />
           <Property Name="IsSuccess" Type="Boolean" />
@@ -377,9 +459,9 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TimeGet" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="idTypeHisGetFile" Type="Int32" Nullable="false" />
-          <Property Name="IdKnowledgeBase" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="KnowledgeAttachmentName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IdUser" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdKnowledgeBase" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="KnowledgeAttachmentName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="IdUser" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="dt207_NotifyEditDoc">
           <Key>
@@ -388,7 +470,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TimeNotify" Type="DateTime" Precision="3" />
           <Property Name="IdDocProcess" Type="Int32" Nullable="false" />
-          <Property Name="IdUserNotify" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdUserNotify" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="IsRead" Type="Boolean" />
           <Property Name="TimeNotifyNotes" Type="DateTime" Precision="3" />
         </EntityType>
@@ -426,7 +508,7 @@
           <Key>
             <PropertyRef Name="IdDept" />
           </Key>
-          <Property Name="IdDept" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdDept" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
           <Property Name="Targets" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="dt207_Type">
@@ -441,82 +523,8 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="DisplayName" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="FunctionRole">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdFunction" Type="Int32" />
-          <Property Name="IdRole" Type="Int32" />
-        </EntityType>
-        <EntityType Name="Function">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="IdParent" Type="Int32" />
-          <Property Name="DisplayName" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-          <Property Name="ControlName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-          <Property Name="Prioritize" Type="Int32" />
-          <Property Name="Status" Type="Boolean" />
-          <Property Name="Images" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="Group">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DisplayName" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-          <Property Name="Describe" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Prioritize" Type="Int32" />
-        </EntityType>
-        <EntityType Name="GroupUser">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdGroup" Type="Int32" />
-          <Property Name="IdUser" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DisplayName" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
-          <Property Name="SecondaryPassword" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-          <Property Name="IdRole" Type="Int32" />
-          <Property Name="DateCreate" Type="DateTime" Precision="0" />
-          <Property Name="IdDepartment" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityContainer Name="DBDocumentManagementSystemEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="dm_Departments" EntityType="Self.dm_Departments" />
-          <EntitySet Name="dm_Progress" EntityType="Self.dm_Progress" />
-          <EntitySet Name="dm_StepProgress" EntityType="Self.dm_StepProgress" />
-          <EntitySet Name="dt207_Attachment" EntityType="Self.dt207_Attachment" />
-          <EntitySet Name="dt207_Attachment_BAK" EntityType="Self.dt207_Attachment_BAK" />
-          <EntitySet Name="dt207_Base" EntityType="Self.dt207_Base" />
-          <EntitySet Name="dt207_Base_BAK" EntityType="Self.dt207_Base_BAK" />
-          <EntitySet Name="dt207_DocProgress" EntityType="Self.dt207_DocProgress" />
-          <EntitySet Name="dt207_DocProgressInfo" EntityType="Self.dt207_DocProgressInfo" />
-          <EntitySet Name="dt207_HistoryGetFile" EntityType="Self.dt207_HistoryGetFile" />
-          <EntitySet Name="dt207_NotifyEditDoc" EntityType="Self.dt207_NotifyEditDoc" />
-          <EntitySet Name="dt207_Security" EntityType="Self.dt207_Security" />
-          <EntitySet Name="dt207_Security_BAK" EntityType="Self.dt207_Security_BAK" />
-          <EntitySet Name="dt207_Targets" EntityType="Self.dt207_Targets" />
-          <EntitySet Name="dt207_Type" EntityType="Self.dt207_Type" />
-          <EntitySet Name="dt207_TypeHisGetFile" EntityType="Self.dt207_TypeHisGetFile" />
-          <EntitySet Name="FunctionRoles" EntityType="Self.FunctionRole" />
-          <EntitySet Name="Functions" EntityType="Self.Function" />
-          <EntitySet Name="Groups" EntityType="Self.Group" />
-          <EntitySet Name="GroupUsers" EntityType="Self.GroupUser" />
-          <EntitySet Name="Users" EntityType="Self.User" />
-          <EntitySet Name="sys_Log" EntityType="DBDocumentManagementSystemModel.sys_Log" />
-          <EntitySet Name="Roles" EntityType="DBDocumentManagementSystemModel.Role" />
-          <EntitySet Name="sys_StaticValue" EntityType="DBDocumentManagementSystemModel.sys_StaticValue" />
-        </EntityContainer>
         <EntityType Name="sys_Log">
           <Key>
             <PropertyRef Name="Id" />
@@ -530,14 +538,6 @@
           <Property Name="Exception" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
           <Property Name="UserId" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
         </EntityType>
-        <EntityType Name="Role">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DisplayName" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-          <Property Name="Describe" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="sys_StaticValue">
           <Key>
             <PropertyRef Name="KeyT" />
@@ -545,7 +545,7 @@
           <Property Name="KeyT" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
           <Property Name="ValueT" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -554,235 +554,244 @@
           <EntitySetMapping Name="dm_Departments">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_Departments">
               <MappingFragment StoreEntitySet="dm_Departments">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IdChild" ColumnName="IdChild" />
-                <ScalarProperty Name="IdParent" ColumnName="IdParent" />
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="IdParent" ColumnName="IdParent" />
+                <ScalarProperty Name="IdChild" ColumnName="IdChild" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dm_Function">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_Function">
+              <MappingFragment StoreEntitySet="dm_Function">
+                <ScalarProperty Name="Images" ColumnName="Images" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Prioritize" ColumnName="Prioritize" />
+                <ScalarProperty Name="ControlName" ColumnName="ControlName" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="IdParent" ColumnName="IdParent" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dm_FunctionRole">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_FunctionRole">
+              <MappingFragment StoreEntitySet="dm_FunctionRole">
+                <ScalarProperty Name="IdRole" ColumnName="IdRole" />
+                <ScalarProperty Name="IdFunction" ColumnName="IdFunction" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dm_Group">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_Group">
+              <MappingFragment StoreEntitySet="dm_Group">
+                <ScalarProperty Name="Prioritize" ColumnName="Prioritize" />
+                <ScalarProperty Name="Describe" ColumnName="Describe" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dm_GroupUser">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_GroupUser">
+              <MappingFragment StoreEntitySet="dm_GroupUser">
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="IdGroup" ColumnName="IdGroup" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="dm_Progress">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_Progress">
               <MappingFragment StoreEntitySet="dm_Progress">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dm_Role">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_Role">
+              <MappingFragment StoreEntitySet="dm_Role">
+                <ScalarProperty Name="Describe" ColumnName="Describe" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="dm_StepProgress">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_StepProgress">
               <MappingFragment StoreEntitySet="dm_StepProgress">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IdProgress" ColumnName="IdProgress" />
-                <ScalarProperty Name="IdGroup" ColumnName="IdGroup" />
                 <ScalarProperty Name="IndexStep" ColumnName="IndexStep" />
+                <ScalarProperty Name="IdGroup" ColumnName="IdGroup" />
+                <ScalarProperty Name="IdProgress" ColumnName="IdProgress" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dm_User">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_User">
+              <MappingFragment StoreEntitySet="dm_User">
+                <ScalarProperty Name="IdDepartment" ColumnName="IdDepartment" />
+                <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
+                <ScalarProperty Name="IdRole" ColumnName="IdRole" />
+                <ScalarProperty Name="SecondaryPassword" ColumnName="SecondaryPassword" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="dt207_Attachment">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt207_Attachment">
               <MappingFragment StoreEntitySet="dt207_Attachment">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IdKnowledgeBase" ColumnName="IdKnowledgeBase" />
-                <ScalarProperty Name="EncryptionName" ColumnName="EncryptionName" />
                 <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="EncryptionName" ColumnName="EncryptionName" />
+                <ScalarProperty Name="IdKnowledgeBase" ColumnName="IdKnowledgeBase" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="dt207_Attachment_BAK">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt207_Attachment_BAK">
               <MappingFragment StoreEntitySet="dt207_Attachment_BAK">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IdKnowledgeBase" ColumnName="IdKnowledgeBase" />
-                <ScalarProperty Name="EncryptionName" ColumnName="EncryptionName" />
                 <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="EncryptionName" ColumnName="EncryptionName" />
+                <ScalarProperty Name="IdKnowledgeBase" ColumnName="IdKnowledgeBase" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="dt207_Base">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt207_Base">
               <MappingFragment StoreEntitySet="dt207_Base">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="IdTypes" ColumnName="IdTypes" />
-                <ScalarProperty Name="Keyword" ColumnName="Keyword" />
-                <ScalarProperty Name="UserUpload" ColumnName="UserUpload" />
-                <ScalarProperty Name="UserProcess" ColumnName="UserProcess" />
-                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
                 <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
+                <ScalarProperty Name="UserProcess" ColumnName="UserProcess" />
+                <ScalarProperty Name="UserUpload" ColumnName="UserUpload" />
+                <ScalarProperty Name="Keyword" ColumnName="Keyword" />
+                <ScalarProperty Name="IdTypes" ColumnName="IdTypes" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="dt207_Base_BAK">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt207_Base_BAK">
               <MappingFragment StoreEntitySet="dt207_Base_BAK">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="IdTypes" ColumnName="IdTypes" />
-                <ScalarProperty Name="Keyword" ColumnName="Keyword" />
-                <ScalarProperty Name="UserUpload" ColumnName="UserUpload" />
-                <ScalarProperty Name="UserProcess" ColumnName="UserProcess" />
                 <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
+                <ScalarProperty Name="UserProcess" ColumnName="UserProcess" />
+                <ScalarProperty Name="UserUpload" ColumnName="UserUpload" />
+                <ScalarProperty Name="Keyword" ColumnName="Keyword" />
+                <ScalarProperty Name="IdTypes" ColumnName="IdTypes" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="dt207_DocProgress">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt207_DocProgress">
               <MappingFragment StoreEntitySet="dt207_DocProgress">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IdKnowledgeBase" ColumnName="IdKnowledgeBase" />
-                <ScalarProperty Name="IdProgress" ColumnName="IdProgress" />
-                <ScalarProperty Name="IsComplete" ColumnName="IsComplete" />
-                <ScalarProperty Name="IsSuccess" ColumnName="IsSuccess" />
-                <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
-                <ScalarProperty Name="IdUserProcess" ColumnName="IdUserProcess" />
                 <ScalarProperty Name="Change" ColumnName="Change" />
+                <ScalarProperty Name="IdUserProcess" ColumnName="IdUserProcess" />
+                <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
+                <ScalarProperty Name="IsSuccess" ColumnName="IsSuccess" />
+                <ScalarProperty Name="IsComplete" ColumnName="IsComplete" />
+                <ScalarProperty Name="IdProgress" ColumnName="IdProgress" />
+                <ScalarProperty Name="IdKnowledgeBase" ColumnName="IdKnowledgeBase" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="dt207_DocProgressInfo">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt207_DocProgressInfo">
               <MappingFragment StoreEntitySet="dt207_DocProgressInfo">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IdDocProgress" ColumnName="IdDocProgress" />
-                <ScalarProperty Name="TimeStep" ColumnName="TimeStep" />
-                <ScalarProperty Name="IndexStep" ColumnName="IndexStep" />
-                <ScalarProperty Name="IdUserProcess" ColumnName="IdUserProcess" />
-                <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
                 <ScalarProperty Name="TimeNotifyNotes" ColumnName="TimeNotifyNotes" />
+                <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
+                <ScalarProperty Name="IdUserProcess" ColumnName="IdUserProcess" />
+                <ScalarProperty Name="IndexStep" ColumnName="IndexStep" />
+                <ScalarProperty Name="TimeStep" ColumnName="TimeStep" />
+                <ScalarProperty Name="IdDocProgress" ColumnName="IdDocProgress" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="dt207_HistoryGetFile">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt207_HistoryGetFile">
               <MappingFragment StoreEntitySet="dt207_HistoryGetFile">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="TimeGet" ColumnName="TimeGet" />
-                <ScalarProperty Name="idTypeHisGetFile" ColumnName="idTypeHisGetFile" />
-                <ScalarProperty Name="IdKnowledgeBase" ColumnName="IdKnowledgeBase" />
-                <ScalarProperty Name="KnowledgeAttachmentName" ColumnName="KnowledgeAttachmentName" />
                 <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="KnowledgeAttachmentName" ColumnName="KnowledgeAttachmentName" />
+                <ScalarProperty Name="IdKnowledgeBase" ColumnName="IdKnowledgeBase" />
+                <ScalarProperty Name="idTypeHisGetFile" ColumnName="idTypeHisGetFile" />
+                <ScalarProperty Name="TimeGet" ColumnName="TimeGet" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="dt207_NotifyEditDoc">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt207_NotifyEditDoc">
               <MappingFragment StoreEntitySet="dt207_NotifyEditDoc">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="TimeNotify" ColumnName="TimeNotify" />
-                <ScalarProperty Name="IdDocProcess" ColumnName="IdDocProcess" />
-                <ScalarProperty Name="IdUserNotify" ColumnName="IdUserNotify" />
-                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
                 <ScalarProperty Name="TimeNotifyNotes" ColumnName="TimeNotifyNotes" />
+                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+                <ScalarProperty Name="IdUserNotify" ColumnName="IdUserNotify" />
+                <ScalarProperty Name="IdDocProcess" ColumnName="IdDocProcess" />
+                <ScalarProperty Name="TimeNotify" ColumnName="TimeNotify" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="dt207_Security">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt207_Security">
               <MappingFragment StoreEntitySet="dt207_Security">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IdKnowledgeBase" ColumnName="IdKnowledgeBase" />
-                <ScalarProperty Name="IdGroup" ColumnName="IdGroup" />
-                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
-                <ScalarProperty Name="ReadInfo" ColumnName="ReadInfo" />
-                <ScalarProperty Name="UpdateInfo" ColumnName="UpdateInfo" />
-                <ScalarProperty Name="DeleteInfo" ColumnName="DeleteInfo" />
-                <ScalarProperty Name="SearchInfo" ColumnName="SearchInfo" />
-                <ScalarProperty Name="ReadFile" ColumnName="ReadFile" />
                 <ScalarProperty Name="SaveFile" ColumnName="SaveFile" />
+                <ScalarProperty Name="ReadFile" ColumnName="ReadFile" />
+                <ScalarProperty Name="SearchInfo" ColumnName="SearchInfo" />
+                <ScalarProperty Name="DeleteInfo" ColumnName="DeleteInfo" />
+                <ScalarProperty Name="UpdateInfo" ColumnName="UpdateInfo" />
+                <ScalarProperty Name="ReadInfo" ColumnName="ReadInfo" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="IdGroup" ColumnName="IdGroup" />
+                <ScalarProperty Name="IdKnowledgeBase" ColumnName="IdKnowledgeBase" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="dt207_Security_BAK">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt207_Security_BAK">
               <MappingFragment StoreEntitySet="dt207_Security_BAK">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IdKnowledgeBase" ColumnName="IdKnowledgeBase" />
-                <ScalarProperty Name="IdGroup" ColumnName="IdGroup" />
-                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
-                <ScalarProperty Name="ReadInfo" ColumnName="ReadInfo" />
-                <ScalarProperty Name="UpdateInfo" ColumnName="UpdateInfo" />
-                <ScalarProperty Name="DeleteInfo" ColumnName="DeleteInfo" />
-                <ScalarProperty Name="SearchInfo" ColumnName="SearchInfo" />
-                <ScalarProperty Name="ReadFile" ColumnName="ReadFile" />
                 <ScalarProperty Name="SaveFile" ColumnName="SaveFile" />
+                <ScalarProperty Name="ReadFile" ColumnName="ReadFile" />
+                <ScalarProperty Name="SearchInfo" ColumnName="SearchInfo" />
+                <ScalarProperty Name="DeleteInfo" ColumnName="DeleteInfo" />
+                <ScalarProperty Name="UpdateInfo" ColumnName="UpdateInfo" />
+                <ScalarProperty Name="ReadInfo" ColumnName="ReadInfo" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="IdGroup" ColumnName="IdGroup" />
+                <ScalarProperty Name="IdKnowledgeBase" ColumnName="IdKnowledgeBase" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="dt207_Targets">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt207_Targets">
               <MappingFragment StoreEntitySet="dt207_Targets">
-                <ScalarProperty Name="IdDept" ColumnName="IdDept" />
                 <ScalarProperty Name="Targets" ColumnName="Targets" />
+                <ScalarProperty Name="IdDept" ColumnName="IdDept" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="dt207_Type">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt207_Type">
               <MappingFragment StoreEntitySet="dt207_Type">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="dt207_TypeHisGetFile">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt207_TypeHisGetFile">
               <MappingFragment StoreEntitySet="dt207_TypeHisGetFile">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="FunctionRoles">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.FunctionRole">
-              <MappingFragment StoreEntitySet="FunctionRole">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IdFunction" ColumnName="IdFunction" />
-                <ScalarProperty Name="IdRole" ColumnName="IdRole" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Functions">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.Function">
-              <MappingFragment StoreEntitySet="Functions">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IdParent" ColumnName="IdParent" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="ControlName" ColumnName="ControlName" />
-                <ScalarProperty Name="Prioritize" ColumnName="Prioritize" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Images" ColumnName="Images" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Groups">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.Group">
-              <MappingFragment StoreEntitySet="Groups">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="Describe" ColumnName="Describe" />
-                <ScalarProperty Name="Prioritize" ColumnName="Prioritize" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="GroupUsers">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.GroupUser">
-              <MappingFragment StoreEntitySet="GroupUser">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IdGroup" ColumnName="IdGroup" />
-                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.User">
-              <MappingFragment StoreEntitySet="Users">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="SecondaryPassword" ColumnName="SecondaryPassword" />
-                <ScalarProperty Name="IdRole" ColumnName="IdRole" />
-                <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
-                <ScalarProperty Name="IdDepartment" ColumnName="IdDepartment" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -796,15 +805,6 @@
                 <ScalarProperty Name="Level" ColumnName="Level" />
                 <ScalarProperty Name="Thread" ColumnName="Thread" />
                 <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Roles">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.Role">
-              <MappingFragment StoreEntitySet="Roles">
-                <ScalarProperty Name="Describe" ColumnName="Describe" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

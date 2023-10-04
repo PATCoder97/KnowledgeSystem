@@ -31,7 +31,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
 
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                var query = db.Groups.ToList();
+                var query = db.dm_Group.ToList();
                 cbbGroup.DataSource = query;
                 cbbGroup.ValueMember = "Id";
                 cbbGroup.DisplayMember = "DisplayName";

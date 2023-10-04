@@ -59,7 +59,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             {
                 var lsDocProgresses = db.dt207_DocProgress.Where(r => r.IdUserProcess == TempDatas.LoginId).ToList();
                 var lsKnowledgeBases = db.dt207_Base.ToList();
-                var lsUsers = db.Users.ToList();
+                var lsUsers = db.dm_User.ToList();
 
                 var lsDocProgressInfosByLoginId =
                     (from data in db.dt207_DocProgressInfo.ToList()

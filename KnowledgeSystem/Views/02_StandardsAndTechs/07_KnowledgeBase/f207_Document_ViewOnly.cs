@@ -1,4 +1,5 @@
-﻿using DataAccessLayer;
+﻿using BusinessLayer;
+using DataAccessLayer;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraPrinting.Native;
@@ -19,7 +20,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static Microsoft.IO.RecyclableMemoryStreamManager;
-using Group = DataAccessLayer.Group;
+using dm_Group = DataAccessLayer.dm_Group;
 
 namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 {
@@ -41,6 +42,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         #region parameters
 
+        dm_UserBUS _dm_UserBUS = new dm_UserBUS();
+        dm_GroupBUS _dm_GroupBUS = new dm_GroupBUS();
+        dm_GroupUserBUS _dm_GroupUserBUS = new dm_GroupUserBUS();
+
         BindingSource sourceAttachments = new BindingSource();
         BindingSource sourceSecuritys = new BindingSource();
 
@@ -48,12 +53,12 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         dt207_DocProgress docProcess = new dt207_DocProgress();
 
         List<dt207_Type> lsKnowledgeTypes = new List<dt207_Type>();
-        List<User> lsUsers = new List<User>();
-        List<Group> lsGroups = new List<Group>();
+        List<dm_User> lsUsers = new List<dm_User>();
+        List<dm_Group> lsGroups = new List<dm_Group>();
         List<Securityinfo> lsSecurityInfos = new List<Securityinfo>();
         List<Attachments> lsAttachments = new List<Attachments>();
         List<Securityinfo> lsIdGroupOrUser = new List<Securityinfo>();
-        List<GroupUser> lsGroupUser = new List<GroupUser>();
+        List<dm_GroupUser> lsGroupUser = new List<dm_GroupUser>();
 
         Securityinfo permissionAttachments = new Securityinfo();
 
@@ -137,9 +142,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             {
                 // Initialize lists
                 lsKnowledgeTypes = db.dt207_Type.ToList();
-                lsUsers = db.Users.ToList();
-                lsGroups = db.Groups.ToList();
-                lsGroupUser = db.GroupUsers.ToList();
+                lsUsers = _dm_UserBUS.GetList();
+                lsGroups = _dm_GroupBUS.GetList();
+                lsGroupUser = _dm_GroupUserBUS.GetList();
 
                 // Create lists of Securityinfo objects from lsUsers and lsGroups
                 var lsIdUsers = lsUsers.Select(r => new Securityinfo { IdGroupOrUser = r.Id, DisplayName = r.DisplayName }).ToList();
@@ -194,7 +199,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
                     // Thêm lịch sử trình ký vào gridProcess
                     var lsHistoryProcess = (from data in lsDocProgressInfos
-                                            join users in db.Users on data.IdUserProcess equals users.Id
+                                            join users in db.dm_User on data.IdUserProcess equals users.Id
                                             select new
                                             {
                                                 TimeStep = data.TimeStep,

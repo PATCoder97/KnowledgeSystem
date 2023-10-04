@@ -12,10 +12,14 @@ namespace DataAccessLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class FunctionRole
+    public partial class dm_Function
     {
         public int Id { get; set; }
-        public Nullable<int> IdFunction { get; set; }
-        public Nullable<int> IdRole { get; set; }
+        public int IdParent { get; set; }
+        public string DisplayName { get; set; }
+        public string ControlName { get; set; }
+        public Nullable<int> Prioritize { get; set; }
+        public Nullable<bool> Status { get; set; }
+        public string Images { get; set; }
     }
 }

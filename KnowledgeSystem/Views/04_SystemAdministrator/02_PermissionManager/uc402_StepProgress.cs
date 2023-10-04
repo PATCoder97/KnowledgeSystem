@@ -30,7 +30,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
 
         List<dm_Progress> lsProgresses = new List<dm_Progress>();
         List<dm_StepProgress> lsStepProgresses = new List<dm_StepProgress>();
-        List<Group> lsGroups = new List<Group>();
+        List<dm_Group> lsGroups = new List<dm_Group>();
 
         #endregion
 
@@ -42,7 +42,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
             {
                 lsProgresses = db.dm_Progress.ToList();
                 lsStepProgresses = db.dm_StepProgress.ToList();
-                lsGroups = db.Groups.ToList();
+                lsGroups = db.dm_Group.ToList();
 
                 sourceProgress.DataSource = lsProgresses;
             }

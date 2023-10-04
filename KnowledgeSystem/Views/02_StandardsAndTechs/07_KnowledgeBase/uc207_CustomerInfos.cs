@@ -1,4 +1,5 @@
-﻿using DataAccessLayer;
+﻿using BusinessLayer;
+using DataAccessLayer;
 using DevExpress.LookAndFeel;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
@@ -30,6 +31,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             InitializeComponent();
         }
+
+        dm_UserBUS _dm_UserBUS = new dm_UserBUS();
 
         Font fontDFKaiSB12 = new Font("DFKai-SB", 12.0f, FontStyle.Regular);
         BindingSource sourceCustomers = new BindingSource();
@@ -114,13 +117,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void GridView_RowUpdated(object sender, RowObjectEventArgs e)
         {
-            User rowUser = e.Row as User;
+            dm_User _rowUser = e.Row as dm_User;
 
-            using (var db = new DBDocumentManagementSystemEntities())
-            {
-                db.Users.AddOrUpdate(rowUser);
-                db.SaveChanges();
-            }
+            _dm_UserBUS.Update(_rowUser);
 
             LoadCustomers();
 

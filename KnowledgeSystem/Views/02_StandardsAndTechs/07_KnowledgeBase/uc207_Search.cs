@@ -55,7 +55,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             string userLogin = TempDatas.LoginId;
 
-            List<User> lsUsers = new List<User>();
+            List<dm_User> lsUsers = new List<dm_User>();
             List<dt207_Base> lsKnowledgeBase = new List<dt207_Base>();
             List<dt207_Type> lsKnowledgeTypes = new List<dt207_Type>();
 
@@ -70,7 +70,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 // Lấy danh sách Users, lsKnowledgeTypes, lsTypeHisGetFile từ cơ sở dữ liệu
                 var lsTypeHisGetFile = db.dt207_TypeHisGetFile.ToList();
                 lsKnowledgeTypes = db.dt207_Type.ToList();
-                lsUsers = db.Users.ToList();
+                lsUsers = db.dm_User.ToList();
 
                 // Gán các 說明 quyền vào class temp
                 TempDatas.typeViewFile = lsTypeHisGetFile.FirstOrDefault(r => r.Id == 1);
@@ -93,8 +93,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 var lsIdDocUserUpload = lsDocUserUpload.Select(r => r.Id).ToList();
 
                 // Join group với GroupUser để lấy Prioritize
-                var lsGroupP = (from data in db.GroupUsers.ToList()
-                                join p in db.Groups.ToList() on data.IdGroup equals p.Id
+                var lsGroupP = (from data in db.dm_GroupUser.ToList()
+                                join p in db.dm_Group.ToList() on data.IdGroup equals p.Id
                                 select new
                                 {
                                     data.IdGroup,
@@ -197,7 +197,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 var lsDocProgresses = db.dt207_DocProgress.Where(r => !(r.IsComplete ?? false)).ToList();
                 var lsDocProgressInfos = db.dt207_DocProgressInfo.ToList();
                 var lsKnowledgeBases = db.dt207_Base.ToList();
-                var lsUsers = db.Users.ToList();
+                var lsUsers = db.dm_User.ToList();
 
                 var lsDocNotSuccess =
                     (from data in db.dt207_DocProgressInfo
@@ -228,7 +228,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                      }).ToList();
 
                 // Xử lý phân quyền nhưng user nằm trong group sẽ nhìn thấy
-                var lsGroupIn = (from data in db.GroupUsers.Where(r => r.IdUser == TempDatas.LoginId).ToList()
+                var lsGroupIn = (from data in db.dm_GroupUser.Where(r => r.IdUser == TempDatas.LoginId).ToList()
                                  join progresses in db.dm_StepProgress.ToList() on data.IdGroup equals progresses.IdGroup
                                  select new
                                  {

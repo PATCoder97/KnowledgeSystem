@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
-    public class dm_GroupProgressM : Group
+    public class dm_GroupProgressM : dm_Group
     {
         public int IndexStep { get; set; }
     }
