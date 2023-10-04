@@ -67,7 +67,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                var IsProcessing = db.dt207_DocProgress.Any(r => r.IdKnowledgeBase == idKnowledgeBase && !(r.IsComplete ?? false));
+                var IsProcessing = db.dt207_DocProgress.Any(r => r.IdKnowledgeBase == idKnowledgeBase && !(r.IsComplete ));
                 if (!IsProcessing)
                 {
                     dt207_HistoryGetFile historyGetFile = new dt207_HistoryGetFile()
@@ -109,7 +109,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
                 using (var db = new DBDocumentManagementSystemEntities())
                 {
-                    var IsProcessing = db.dt207_DocProgress.Any(r => r.IdKnowledgeBase == idKnowledgeBase && !(r.IsComplete ?? false));
+                    var IsProcessing = db.dt207_DocProgress.Any(r => r.IdKnowledgeBase == idKnowledgeBase && !( r.IsComplete));
                     if (!IsProcessing)
                     {
                         dt207_HistoryGetFile historyGetFile = new dt207_HistoryGetFile()

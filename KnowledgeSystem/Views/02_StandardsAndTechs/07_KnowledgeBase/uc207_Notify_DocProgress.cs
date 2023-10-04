@@ -119,7 +119,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 var docProcess = db.dt207_DocProgress.FirstOrDefault(r => r.Id == idDocProcess);
 
                 int indexStep = db.dt207_DocProgressInfo.OrderByDescending(r => r.TimeStep).FirstOrDefault(r => r.IdDocProgress == idDocProcess).IndexStep;
-                if (indexStep == -1 && !(docProcess.IsComplete ?? false))
+                if (indexStep == -1 && !(docProcess.IsComplete))
                 {
                     f207_Document_Info document_Info = new f207_Document_Info(docProcess.IdKnowledgeBase);
                     document_Info.ShowDialog();

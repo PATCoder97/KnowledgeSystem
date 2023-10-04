@@ -355,7 +355,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     gcEditHistory.DataSource = lsHisUpdates;
 
                     // Thông tin tiến trình trình ký văn kiện
-                    var lsDocProcessing = db.dt207_DocProgress.Where(r => !r.IsComplete ?? false && r.IdKnowledgeBase == idDocument).ToList();
+                    var lsDocProcessing = db.dt207_DocProgress.Where(r => !r.IsComplete  && r.IdKnowledgeBase == idDocument).ToList();
                     if (lsDocProcessing.Count != 0)
                     {
                         lcgProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
@@ -518,7 +518,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 using (var handle = SplashScreenManager.ShowOverlayForm(this))
                 {
                     // Check xem văn kiện có đang trong quá trình trình ký không
-                    bool IsProcessing = db.dt207_DocProgress.Any(r => r.IdKnowledgeBase == idDocument && !(r.IsComplete ?? false));
+                    bool IsProcessing = db.dt207_DocProgress.Any(r => r.IdKnowledgeBase == idDocument && !(r.IsComplete));
 
                     // Nếu là Edit Doc thì lưu lại thông tin cũ để nếu bị trả về thì update lại dữ liệu cũ
                     if (events == TempDatas.EventEdit && !IsProcessing)
@@ -723,7 +723,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             // Lưu lại lịch sử xem file
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                var IsProcessing = db.dt207_DocProgress.Any(r => r.IdKnowledgeBase == idDocument && !(r.IsComplete ?? false));
+                var IsProcessing = db.dt207_DocProgress.Any(r => r.IdKnowledgeBase == idDocument && !(r.IsComplete));
 
                 if (!string.IsNullOrEmpty(idDocument) && !IsProcessing)
                 {

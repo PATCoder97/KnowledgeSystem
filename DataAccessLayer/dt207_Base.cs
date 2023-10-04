@@ -21,6 +21,6 @@ namespace DataAccessLayer
         public string UserUpload { get; set; }
         public string UserProcess { get; set; }
         public Nullable<System.DateTime> UploadDate { get; set; }
-        public Nullable<bool> IsDelete { get; set; }
+        public bool IsDelete { get; set; }
     }
 }

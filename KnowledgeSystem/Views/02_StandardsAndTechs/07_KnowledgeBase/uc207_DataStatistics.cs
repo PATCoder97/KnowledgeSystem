@@ -118,7 +118,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
                 // Lấy danh sách văn kiện và kèm theo mã bộ phận (Lấy luôn văn kiện đang trình ký Thêm, Sửa, Xoá)
                 var lsDoc = (from data in db.dt207_Base.
-                             Where(r => !(r.IsDelete ?? false) && r.UploadDate >= fromDate && r.UploadDate <= toDate)
+                             Where(r => !(r.IsDelete) && r.UploadDate >= fromDate && r.UploadDate <= toDate)
                              join users in db.dm_User on data.UserUpload equals users.Id
                              select new
                              {
@@ -136,7 +136,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                              }).ToList();
 
                 // Xử lý các văn kiện đang trong lưu trình trình ký không tính
-                var lsDocProcessing = db.dt207_DocProgress.Where(r => !(r.IsComplete ?? false)).Select(r => r.IdKnowledgeBase).Distinct().ToList();
+                var lsDocProcessing = db.dt207_DocProgress.Where(r => !(r.IsComplete)).Select(r => r.IdKnowledgeBase).Distinct().ToList();
 
                 lsDoc = lsDoc.Where(r => !lsDocProcessing.Contains(r.Id)).ToList();
 

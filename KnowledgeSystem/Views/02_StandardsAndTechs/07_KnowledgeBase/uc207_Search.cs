@@ -78,13 +78,13 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 TempDatas.typePrintFile = lsTypeHisGetFile.FirstOrDefault(r => r.Id == 3);
 
                 // Lấy danh sách các giá trị IdKnowledgeBase mà IsComplete là false
-                var lsIdBaseRemove = db.dt207_DocProgress.Where(r => !(r.IsComplete ?? false)).Select(r => r.IdKnowledgeBase).ToList();
+                var lsIdBaseRemove = db.dt207_DocProgress.Where(r => !(r.IsComplete)).Select(r => r.IdKnowledgeBase).ToList();
 
                 // Kiểm tra xem phải sysAdmin không
                 IsSysAdmin = AppPermission.Instance.CheckAppPermission(AppPermission.SysAdmin);
                 if (IsSysAdmin)
                 {
-                    lsKnowledgeBase = db.dt207_Base.Where(r => !lsIdBaseRemove.Contains(r.Id) && !(r.IsDelete ?? false)).ToList();
+                    lsKnowledgeBase = db.dt207_Base.Where(r => !lsIdBaseRemove.Contains(r.Id) && !(r.IsDelete)).ToList();
                     goto GET_DISPLAY_LIST;
                 }
 
@@ -142,7 +142,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 lsIdCanReads.AddRange(lsIdDocUserUpload);
                 lsIdCanReads.RemoveAll(r => lsIdBaseRemove.Contains(r));
 
-                lsKnowledgeBase = db.dt207_Base.Where(r => lsIdDisplay.Contains(r.Id) && !(r.IsDelete ?? false)).ToList();
+                lsKnowledgeBase = db.dt207_Base.Where(r => lsIdDisplay.Contains(r.Id) && !(r.IsDelete)).ToList();
             }
 
         GET_DISPLAY_LIST:
@@ -194,7 +194,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             using (var db = new DBDocumentManagementSystemEntities())
             {
                 // Xử lý lấy tất cả các văn kiện cần trình ký
-                var lsDocProgresses = db.dt207_DocProgress.Where(r => !(r.IsComplete ?? false)).ToList();
+                var lsDocProgresses = db.dt207_DocProgress.Where(r => !(r.IsComplete)).ToList();
                 var lsDocProgressInfos = db.dt207_DocProgressInfo.ToList();
                 var lsKnowledgeBases = db.dt207_Base.ToList();
                 var lsUsers = db.dm_User.ToList();

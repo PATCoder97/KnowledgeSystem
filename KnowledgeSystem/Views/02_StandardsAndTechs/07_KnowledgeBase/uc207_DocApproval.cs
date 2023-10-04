@@ -43,7 +43,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             using (var db = new DBDocumentManagementSystemEntities())
             {
                 // Xử lý lấy tất cả các văn kiện cần trình ký
-                lsDocProgresses = db.dt207_DocProgress.Where(r => !(r.IsComplete ?? false)).ToList();
+                lsDocProgresses = db.dt207_DocProgress.Where(r => !(r.IsComplete)).ToList();
                 lsDocProgressInfos = db.dt207_DocProgressInfo.ToList();
                 var lsKnowledgeBases = db.dt207_Base.ToList();
                 var lsUsers = _dm_UserBUS.GetList();

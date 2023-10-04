@@ -178,7 +178,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 if (!string.IsNullOrEmpty(idDocument))
                 {
                     // Thông tin tiến trình trình ký văn kiện
-                    bool IsComplete = docProcess.IsComplete ?? false;
+                    bool IsComplete = docProcess.IsComplete ;
                     int idProgressByDoc = docProcess.IdProgress;
                     int idDocProgress = docProcess.Id;
                     var lsDMStepProgress = db.dm_StepProgress.Where(r => r.IdProgress == idProgressByDoc).ToList();

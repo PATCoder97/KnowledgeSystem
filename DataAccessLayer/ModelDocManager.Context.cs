@@ -36,9 +36,7 @@ namespace DataAccessLayer
         public virtual DbSet<dm_User> dm_User { get; set; }
         public virtual DbSet<dt207_Attachment> dt207_Attachment { get; set; }
         public virtual DbSet<dt207_Attachment_BAK> dt207_Attachment_BAK { get; set; }
-        public virtual DbSet<dt207_Base> dt207_Base { get; set; }
         public virtual DbSet<dt207_Base_BAK> dt207_Base_BAK { get; set; }
-        public virtual DbSet<dt207_DocProgress> dt207_DocProgress { get; set; }
         public virtual DbSet<dt207_DocProgressInfo> dt207_DocProgressInfo { get; set; }
         public virtual DbSet<dt207_HistoryGetFile> dt207_HistoryGetFile { get; set; }
         public virtual DbSet<dt207_NotifyEditDoc> dt207_NotifyEditDoc { get; set; }
@@ -49,5 +47,7 @@ namespace DataAccessLayer
         public virtual DbSet<dt207_TypeHisGetFile> dt207_TypeHisGetFile { get; set; }
         public virtual DbSet<sys_Log> sys_Log { get; set; }
         public virtual DbSet<sys_StaticValue> sys_StaticValue { get; set; }
+        public virtual DbSet<dt207_DocProgress> dt207_DocProgress { get; set; }
+        public virtual DbSet<dt207_Base> dt207_Base { get; set; }
     }
 }
