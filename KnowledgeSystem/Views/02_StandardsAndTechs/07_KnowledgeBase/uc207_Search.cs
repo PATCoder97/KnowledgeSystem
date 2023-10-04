@@ -101,18 +101,18 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             var lsIdBaseUserUploaded = ls207Base.Where(r => r.UserUpload == _userLogin || r.UserProcess == _userLogin).Select(r => r.Id).ToList();
 
             // Join group với GroupUser để lấy Prioritize
-            var lsGroupP = (from gUser in lsGroupUsers
-                            join g in lsGroups on gUser.IdGroup equals g.Id
-                            select new
-                            {
-                                gUser.IdGroup,
-                                gUser.IdUser,
-                                g.Prioritize
-                            }).ToList();
+            var lsGroupWithPioritze = (from gUser in lsGroupUsers
+                                       join g in lsGroups on gUser.IdGroup equals g.Id
+                                       select new
+                                       {
+                                           gUser.IdGroup,
+                                           gUser.IdUser,
+                                           g.Prioritize
+                                       }).ToList();
 
             // Danh sách mà user có quyền tìm kiếm
             var lsCanSearchs = (from ks in lsSecurities
-                                join gu in lsGroupP on ks.IdGroup equals gu.IdGroup into gj
+                                join gu in lsGroupWithPioritze on ks.IdGroup equals gu.IdGroup into gj
                                 from subGu in gj.DefaultIfEmpty()
                                 where ks.IdUser == _userLogin || (subGu != null ? subGu.IdUser == _userLogin : false)
                                 select new

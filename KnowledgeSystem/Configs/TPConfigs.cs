@@ -56,6 +56,15 @@ namespace KnowledgeSystem.Configs
         public string url { get; set; }
     }
 
+    public enum Event207DocInfo
+    {
+        Create= "新增文件", 
+        View, 
+        Update, 
+        Delete, 
+        Approval
+    }
+
     //public DBDocumentManagementSystemEntities()
     //        : base(SingleConnection.ConString)
     //{
