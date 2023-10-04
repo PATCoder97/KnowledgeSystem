@@ -391,6 +391,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Fonts\" />
     <Folder Include="Views\01_ProductionAndSales\" />
     <Folder Include="Views\02_StandardsAndTechs\01_ISODocuments\" />
     <Folder Include="Views\03_DepartmentManage\" />
