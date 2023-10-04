@@ -10,26 +10,17 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer
 {
-    public class dt207_BaseBUS
+    public class dt207_TypeBUS
     {
         TPLogger logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName);
 
-        public List<dt207_Base> GetListWithoutKeyword()
+        public List<dt207_Type> GetList()
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dt207_Base.Select(r => new dt207_Base
-                    {
-                        Id = r.Id,
-                        DisplayName = r.DisplayName,
-                        IdTypes = r.IdTypes,
-                        UserUpload = r.UserUpload,
-                        UserProcess = r.UserProcess,
-                        UploadDate = r.UploadDate,
-                        IsDelete = r.IsDelete
-                    }).ToList();
+                    return _context.dt207_Type.ToList();
                 }
             }
             catch (Exception ex)
@@ -39,29 +30,13 @@ namespace BusinessLayer
             }
         }
 
-        public List<dt207_Base> GetList()
+        public bool Create(dt207_Type type)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dt207_Base.ToList();
-                }
-            }
-            catch (Exception ex)
-            {
-                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
-                throw;
-            }
-        }
-
-        public bool Create(dt207_Base entity)
-        {
-            try
-            {
-                using (var _context = new DBDocumentManagementSystemEntities())
-                {
-                    _context.dt207_Base.Add(entity);
+                    _context.dt207_Type.Add(type);
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;
                 }
@@ -73,13 +48,13 @@ namespace BusinessLayer
             }
         }
 
-        public bool Update(dt207_Base entity)
+        public bool Update(dt207_Type type)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    _context.dt207_Base.AddOrUpdate(entity);
+                    _context.dt207_Type.AddOrUpdate(type);
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;
                 }
@@ -91,14 +66,14 @@ namespace BusinessLayer
             }
         }
 
-        public bool Delete(string entityId)
+        public bool Delete(int typeId)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    var entity = _context.dt207_Base.FirstOrDefault(r => r.Id == entityId);
-                    _context.dt207_Base.Remove(entity);
+                    var type = _context.dt207_Type.FirstOrDefault(r => r.Id == typeId);
+                    _context.dt207_Type.Remove(type);
 
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;

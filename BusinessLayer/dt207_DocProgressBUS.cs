@@ -30,6 +30,22 @@ namespace BusinessLayer
             }
         }
 
+        public List<dt207_DocProgress> GetListNotComplete()
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt207_DocProgress.Where(r => !r.IsComplete).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public bool Create(dt207_DocProgress docProgress)
         {
             try

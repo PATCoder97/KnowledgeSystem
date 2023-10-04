@@ -1,4 +1,5 @@
-﻿using DataAccessLayer;
+﻿using BusinessLayer;
+using DataAccessLayer;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraPrinting.Native;
@@ -28,6 +29,13 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         #region parameters
 
+        // Khai báo BUS
+        dm_UserBUS _dm_UserBUS = new dm_UserBUS();
+        dt207_Base _dt207_Base = new dt207_Base();
+        dt207_TypeBUS _dt207_TypeBUS = new dt207_TypeBUS();
+        dt207_TypeHisGetFileBUS _dt207_TypeHisGetFileBUS = new dt207_TypeHisGetFileBUS();
+        dt207_DocProgressBUS _dt207_DocProgressBUS = new dt207_DocProgressBUS();
+
         BindingSource sourceKnowledge = new BindingSource();
 
         List<string> lsIdCanReads = new List<string>();
@@ -53,11 +61,12 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void LoadData()
         {
-            string userLogin = TPConfigs.LoginId;
+            string _userLogin = TPConfigs.LoginId;
 
-            List<dm_User> lsUsers = new List<dm_User>();
+            List<dm_User> lsUsers = _dm_UserBUS.GetList();
+            List<dt207_Type> lsKnowledgeTypes = _dt207_TypeBUS.GetList();
+            List<dt207_TypeHisGetFile> lsTypeHisGetFile = _dt207_TypeHisGetFileBUS.GetList();
             List<dt207_Base> lsKnowledgeBase = new List<dt207_Base>();
-            List<dt207_Type> lsKnowledgeTypes = new List<dt207_Type>();
 
             // Kiểm tra xem có lấy Keyword để hiện lên view không
             bool IsSimple = checkUseKeyword.CheckState == CheckState.Unchecked;
@@ -67,10 +76,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                // Lấy danh sách Users, lsKnowledgeTypes, lsTypeHisGetFile từ cơ sở dữ liệu
-                var lsTypeHisGetFile = db.dt207_TypeHisGetFile.ToList();
-                lsKnowledgeTypes = db.dt207_Type.ToList();
-                lsUsers = db.dm_User.ToList();
+                //// Lấy danh sách Users, lsKnowledgeTypes, lsTypeHisGetFile từ cơ sở dữ liệu
+                //var lsTypeHisGetFile = db.dt207_TypeHisGetFile.ToList();
+                //lsKnowledgeTypes = db.dt207_Type.ToList();
+                //lsUsers = db.dm_User.ToList();
 
                 // Gán các 說明 quyền vào class temp
                 TPConfigs.typeViewFile = lsTypeHisGetFile.FirstOrDefault(r => r.Id == 1);
@@ -78,7 +87,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 TPConfigs.typePrintFile = lsTypeHisGetFile.FirstOrDefault(r => r.Id == 3);
 
                 // Lấy danh sách các giá trị IdKnowledgeBase mà IsComplete là false
-                var lsIdBaseRemove = db.dt207_DocProgress.Where(r => !(r.IsComplete)).Select(r => r.IdKnowledgeBase).ToList();
+                //////var lsIdBaseRemove = db.dt207_DocProgress.Where(r => !(r.IsComplete)).Select(r => r.IdKnowledgeBase).ToList();
+                var lsIdBaseRemove = _dt207_DocProgressBUS.GetListNotComplete().Select(r => r.IdKnowledgeBase).ToList();
 
                 // Kiểm tra xem phải sysAdmin không
                 IsSysAdmin = AppPermission.Instance.CheckAppPermission(AppPermission.SysAdmin);
@@ -89,7 +99,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 }
 
                 // Danh sách Doc đưa lên hoặc yêu cầu
-                var lsDocUserUpload = db.dt207_Base.Where(r => r.UserUpload == userLogin || r.UserProcess == userLogin).ToList();
+                var lsDocUserUpload = db.dt207_Base.Where(r => r.UserUpload == _userLogin || r.UserProcess == _userLogin).ToList();
                 var lsIdDocUserUpload = lsDocUserUpload.Select(r => r.Id).ToList();
 
                 // Join group với GroupUser để lấy Prioritize
@@ -106,7 +116,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 var lsCanSearchs = (from ks in db.dt207_Security.ToList()
                                     join gu in lsGroupP on ks.IdGroup equals gu.IdGroup into gj
                                     from subGu in gj.DefaultIfEmpty()
-                                    where ks.IdUser == userLogin || (subGu != null ? subGu.IdUser == userLogin : false)
+                                    where ks.IdUser == _userLogin || (subGu != null ? subGu.IdUser == _userLogin : false)
                                     select new
                                     {
                                         ks.IdKnowledgeBase,

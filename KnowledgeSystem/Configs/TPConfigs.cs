@@ -28,6 +28,7 @@ namespace KnowledgeSystem.Configs
         public static dt207_TypeHisGetFile typeSaveFile = default(dt207_TypeHisGetFile);
         public static dt207_TypeHisGetFile typePrintFile = default(dt207_TypeHisGetFile);
 
+        public static dm_User LoginUser { get; set; }
         public static string LoginId { get; set; }
         public static int RoleUserLogin { get; set; }
 
