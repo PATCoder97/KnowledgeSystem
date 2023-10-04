@@ -379,6 +379,7 @@
       <DependentUpon>uc402_Functions.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
+    <None Include="Fonts\kaiu.ttf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -391,7 +392,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Fonts\" />
     <Folder Include="Views\01_ProductionAndSales\" />
     <Folder Include="Views\02_StandardsAndTechs\01_ISODocuments\" />
     <Folder Include="Views\03_DepartmentManage\" />
