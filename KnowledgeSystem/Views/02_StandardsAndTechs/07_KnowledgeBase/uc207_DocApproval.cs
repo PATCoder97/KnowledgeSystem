@@ -120,6 +120,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             string IdKnowledgeBase = gvData.GetFocusedRowCellValue(gvColIdKnowledgeBase).ToString();
 
             f207_Document_Info document_Info = new f207_Document_Info(IdKnowledgeBase);
+            document_Info._event207 = Event207DocInfo.Approval;
             document_Info.ShowDialog();
 
             LoadData();

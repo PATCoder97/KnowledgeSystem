@@ -46,6 +46,22 @@ namespace BusinessLayer
             }
         }
 
+        public dt207_DocProgress GetItemByIdBaseNotComplete(string _idBase)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt207_DocProgress.Where(r => r.IdKnowledgeBase == _idBase && !r.IsComplete).FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public List<dt207_DocProgress> GetListNotComplete()
         {
             try

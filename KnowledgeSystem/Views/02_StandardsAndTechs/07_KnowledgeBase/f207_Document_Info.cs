@@ -38,7 +38,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
     public partial class f207_Document_Info : DevExpress.XtraEditors.XtraForm
     {
         RefreshHelper helper;
-        public Event207DocInfo _event207 = Event207DocInfo.View;
+        public Event207DocInfo _event207 = Event207DocInfo.Create;
 
         public f207_Document_Info()
         {
@@ -50,9 +50,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         public f207_Document_Info(string idDocument_)
         {
             InitializeComponent();
+            LockControl(true);
             InitializeControl();
             idDocument = idDocument_;
-            LockControl(true);
         }
 
         #region parameters
@@ -61,8 +61,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         dm_UserBUS _dm_UserBUS = new dm_UserBUS();
         dm_GroupBUS _dm_GroupBUS = new dm_GroupBUS();
         dm_GroupUserBUS _dm_GroupUserBUS = new dm_GroupUserBUS();
-        dt207_TypeBUS _dt207_TypeBUS = new dt207_TypeBUS();
         dm_ProgressBUS _dm_ProgressBUS = new dm_ProgressBUS();
+        dm_StepProgressBUS _dm_StepProgressBUS = new dm_StepProgressBUS();
+        dt207_TypeBUS _dt207_TypeBUS = new dt207_TypeBUS();
         dt207_BaseBUS _dt207_BaseBUS = new dt207_BaseBUS();
         dt207_Base_BAKBUS _dt207_Base_BAKBUS = new dt207_Base_BAKBUS();
         dt207_AttachmentBUS _dt207_AttachmentBUS = new dt207_AttachmentBUS();
@@ -90,8 +91,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         Securityinfo permissionAttachments = new Securityinfo();
         dm_Progress progressSelect = new dm_Progress();
 
-        int idDocProgress = -1;
-        int stepEnd = -1;
+        int _idDocProcessing = -1;
+        int _stepEnd = -1;
         string events = string.Empty;
 
         private class Attachments
@@ -118,6 +119,12 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             helper = new RefreshHelper(bgvSecurity, "Id");
             lcgProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             lcgHistoryEdit.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+
+            btnCancel.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            btnApproved.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            btnDisapprove.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+
             controlgroupDocument.SelectedTabPage = lcgInfo;
 
             // Gắn các thông số cho các combobox
@@ -353,7 +360,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     helper.LoadViewInfo();
 
                     // Thông tin lịch sửa cập nhật
-                    var lsDocProcess = _dt207_DocProgressBUS.GetListByIdBase(idDocument);
+                    var lsDocProcess = _dt207_DocProgressBUS.GetListByIdBase(idDocument).Where(r => r.Id != _idDocProcessing);
                     //db.dt207_DocProgress.Where(r => r.IdKnowledgeBase == idDocument && r.Descriptions == TPConfigs.EventEdit).ToList();
                     var lsDocProcessInfos =
                         (from data in _dt207_DocProgressInfoBUS.GetList()
@@ -380,17 +387,65 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     gcEditHistory.DataSource = lsHisUpdates;
 
                     break;
-                case Event207DocInfo.Update:
-                    lcgHistoryEdit.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
-                    break;
-                case Event207DocInfo.Delete:
-                    lcgHistoryEdit.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
-                    break;
                 case Event207DocInfo.Approval:
                     lcgHistoryEdit.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
                     lcgProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
                     controlgroupDocument.SelectedTabPage = lcgProgress;
 
+                    btnDel.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                    btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+
+                    var _docProcessing = _dt207_DocProgressBUS.GetItemByIdBaseNotComplete(idDocument);
+                    if (_docProcessing == default)
+                    {
+                        XtraMessageBox.Show("文件已由其他主管處理完成", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Close();
+                    }
+
+                    int _idProgress = _docProcessing.IdProgress;
+                    _idDocProcessing = _docProcessing.Id;
+                    events = _docProcessing.Descriptions;
+
+                    var lsStepProgress = _dm_StepProgressBUS.GetListByIdProgress(_idProgress);
+                    _stepEnd = lsStepProgress.Max(r => r.IndexStep);
+                    var lsDisplayNameSteps = (from data in lsStepProgress
+                                              join groups in lsGroups on data.IdGroup equals groups.Id
+                                              select new { groups.DisplayName }).ToList();
+                    // Thêm danh sách các bước vào StepProgressBar
+                    stepProgressDoc.Items.Add(new StepProgressBarItem("經辦人"));
+                    foreach (var item in lsDisplayNameSteps)
+                        stepProgressDoc.Items.Add(new StepProgressBarItem(item.DisplayName));
+                    stepProgressDoc.ItemOptions.Indicator.Width = 40;
+
+                    var lsDocProcessingInfos = _dt207_DocProgressInfoBUS.GetListByIdDocProcess(_idDocProcessing);
+                    int _stepNow = lsDocProcessingInfos.OrderByDescending(r => r.TimeStep).First().IndexStep;
+                    stepProgressDoc.SelectedItemIndex = _stepNow; // Focus đến bước hiện tại
+
+                    // Thêm lịch sử trình ký vào gridProcess
+                    var lsHistoryProcess = (from data in lsDocProcessingInfos
+                                            join users in lsUsers on data.IdUserProcess equals users.Id
+                                            select new
+                                            {
+                                                TimeStep = data.TimeStep,
+                                                data.Descriptions,
+                                                UserProcess = $"{users.IdDepartment} | {data.IdUserProcess}/{users.DisplayName}",
+                                            }).ToList();
+
+                    gcHistoryProcess.DataSource = lsHistoryProcess;
+
+                    if (_stepNow != -1)
+                    {
+                        btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                        btnApproved.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                        btnDisapprove.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                    }
+                    else
+                    {
+                        btnCancel.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                        btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                        btnApproved.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                        btnDisapprove.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                    }
 
                     goto case Event207DocInfo.View;
             }
@@ -400,90 +455,70 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
 
 
-            using (var db = new DBDocumentManagementSystemEntities())
-            {
+            //using (var db = new DBDocumentManagementSystemEntities())
+            //{
+            //    // Nếu có idDocument, truy xuất dữ liệu từ cơ sở dữ liệu và gán cho các thành phần form
+            //    if (!string.IsNullOrEmpty(idDocument))
+            //    {
+            //        // Thông tin tiến trình trình ký văn kiện
+            //        var lsDocProcessing = db.dt207_DocProgress.Where(r => !r.IsComplete && r.IdKnowledgeBase == idDocument).ToList();
+            //        if (lsDocProcessing.Count != 0)
+            //        {
 
 
-                // Cài các thông tin mặc định lên Form (Trường hợp new Doc)
+            //            int idProgressByDoc = lsDocProcessing.First().IdProgress;
+            //            idDocProgress = lsDocProcessing.First().Id;
+            //            events = lsDocProcessing.First().Descriptions;
+            //            var lsDMStepProgress = db.dm_StepProgress.Where(r => r.IdProgress == idProgressByDoc).ToList();
+            //            var lsDocProgressInfos = db.dt207_DocProgressInfo.Where(r => r.IdDocProgress == idDocProgress).ToList();
 
+            //            _stepEnd = lsDMStepProgress.Max(r => r.IndexStep);
 
+            //            var lsStepProgressDoc = (from data in lsDMStepProgress
+            //                                     join groups in lsGroups on data.IdGroup equals groups.Id
+            //                                     select new { groups.DisplayName }).ToList();
 
-                // var userLogin = lsUsers.FirstOrDefault(r => r.Id == _userId);
+            //            // Thêm danh sách các bước vào StepProgressBar
+            //            stepProgressDoc.Items.Add(new StepProgressBarItem("經辦人"));
+            //            foreach (var item in lsStepProgressDoc)
+            //                stepProgressDoc.Items.Add(new StepProgressBarItem(item.DisplayName));
 
+            //            var stepNow = lsDocProgressInfos.OrderByDescending(r => r.TimeStep).First().IndexStep;
 
+            //            stepProgressDoc.ItemOptions.Indicator.Width = 40;
+            //            stepProgressDoc.SelectedItemIndex = stepNow;
 
-                // Nếu có idDocument, truy xuất dữ liệu từ cơ sở dữ liệu và gán cho các thành phần form
-                if (!string.IsNullOrEmpty(idDocument))
-                {
+            //            // Thêm lịch sử trình ký vào gridProcess
+            //            var lsHistoryProcess = (from data in lsDocProgressInfos
+            //                                    join users in db.dm_User on data.IdUserProcess equals users.Id
+            //                                    select new
+            //                                    {
+            //                                        TimeStep = data.TimeStep,
+            //                                        data.Descriptions,
+            //                                        UserProcess = $"{users.IdDepartment} | {data.IdUserProcess}/{users.DisplayName}",
+            //                                    }).ToList();
 
+            //            gcHistoryProcess.DataSource = lsHistoryProcess;
 
+            //            if (stepNow != -1)
+            //            {
+            //                btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            //                btnApproved.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+            //                btnDisapprove.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+            //            }
+            //            else
+            //            {
+            //                btnCancel.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+            //                btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+            //                btnApproved.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            //                btnDisapprove.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            //            }
 
-
-
-
-
-
-
-
-                    // Thông tin tiến trình trình ký văn kiện
-                    var lsDocProcessing = db.dt207_DocProgress.Where(r => !r.IsComplete && r.IdKnowledgeBase == idDocument).ToList();
-                    if (lsDocProcessing.Count != 0)
-                    {
-
-
-                        int idProgressByDoc = lsDocProcessing.First().IdProgress;
-                        idDocProgress = lsDocProcessing.First().Id;
-                        events = lsDocProcessing.First().Descriptions;
-                        var lsDMStepProgress = db.dm_StepProgress.Where(r => r.IdProgress == idProgressByDoc).ToList();
-                        var lsDocProgressInfos = db.dt207_DocProgressInfo.Where(r => r.IdDocProgress == idDocProgress).ToList();
-
-                        stepEnd = lsDMStepProgress.Max(r => r.IndexStep);
-
-                        var lsStepProgressDoc = (from data in lsDMStepProgress
-                                                 join groups in lsGroups on data.IdGroup equals groups.Id
-                                                 select new { groups.DisplayName }).ToList();
-
-                        // Thêm danh sách các bước vào StepProgressBar
-                        stepProgressDoc.Items.Add(new StepProgressBarItem("經辦人"));
-                        foreach (var item in lsStepProgressDoc)
-                            stepProgressDoc.Items.Add(new StepProgressBarItem(item.DisplayName));
-
-                        var stepNow = lsDocProgressInfos.OrderByDescending(r => r.TimeStep).First().IndexStep;
-
-                        stepProgressDoc.ItemOptions.Indicator.Width = 40;
-                        stepProgressDoc.SelectedItemIndex = stepNow;
-
-                        // Thêm lịch sử trình ký vào gridProcess
-                        var lsHistoryProcess = (from data in lsDocProgressInfos
-                                                join users in db.dm_User on data.IdUserProcess equals users.Id
-                                                select new
-                                                {
-                                                    TimeStep = data.TimeStep,
-                                                    data.Descriptions,
-                                                    UserProcess = $"{users.IdDepartment} | {data.IdUserProcess}/{users.DisplayName}",
-                                                }).ToList();
-
-                        gcHistoryProcess.DataSource = lsHistoryProcess;
-
-                        if (stepNow != -1)
-                        {
-                            btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                            btnApproved.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
-                            btnDisapprove.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
-                        }
-                        else
-                        {
-                            btnCancel.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
-                            btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
-                            btnApproved.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                            btnDisapprove.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                        }
-
-                        btnDel.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                        btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                    }
-                }
-            }
+            //            btnDel.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            //            btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            //        }
+            //    }
+            //}
 
             // Lấy quyền hạn của người dùng đối với văn kiện này
             permissionAttachments = GetPermission() ?? new Securityinfo
@@ -709,7 +744,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     {
                         dt207_DocProgressInfo progressInfo = new dt207_DocProgressInfo()
                         {
-                            IdDocProgress = idDocProgress,
+                            IdDocProgress = _idDocProcessing,
                             TimeStep = DateTime.Now,
                             IndexStep = 0,
                             IdUserProcess = TPConfigs.LoginId,
@@ -934,7 +969,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 }
 
                 string descriptions = "核准";
-                if (indexStep == stepEnd)
+                if (indexStep == _stepEnd)
                 {
                     var docProcessUpdate = db.dt207_DocProgress.First(r => r.Id == idDocProgress);
                     docProcessUpdate.IsSuccess = true;
@@ -980,7 +1015,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             {
                 if (events == TPConfigs.EventDel)
                 {
-                    var docProcessUpdate = db.dt207_DocProgress.First(r => r.Id == idDocProgress);
+                    var docProcessUpdate = db.dt207_DocProgress.First(r => r.Id == _idDocProcessing);
                     docProcessUpdate.IsSuccess = false;
                     docProcessUpdate.IsComplete = true;
                     db.dt207_DocProgress.AddOrUpdate(docProcessUpdate);
@@ -988,7 +1023,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
                 dt207_DocProgressInfo progressInfo = new dt207_DocProgressInfo
                 {
-                    IdDocProgress = idDocProgress,
+                    IdDocProgress = _idDocProcessing,
                     TimeStep = DateTime.Now,
                     IndexStep = -1,
                     IdUserProcess = TPConfigs.LoginId,
@@ -1020,7 +1055,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                var docProcessUpdate = db.dt207_DocProgress.First(r => r.Id == idDocProgress);
+                var docProcessUpdate = db.dt207_DocProgress.First(r => r.Id == _idDocProcessing);
                 docProcessUpdate.IsSuccess = false;
                 docProcessUpdate.IsComplete = true;
                 docProcessUpdate.Change = string.IsNullOrEmpty(descriptions) ? "取消" : $"取消，說明：{descriptions}";
@@ -1029,7 +1064,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
                 dt207_DocProgressInfo progressInfo = new dt207_DocProgressInfo()
                 {
-                    IdDocProgress = idDocProgress,
+                    IdDocProgress = _idDocProcessing,
                     TimeStep = DateTime.Now,
                     IndexStep = -1,
                     IdUserProcess = TPConfigs.LoginId,

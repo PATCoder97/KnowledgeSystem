@@ -26,7 +26,23 @@ namespace BusinessLayer
             catch (Exception ex)
             {
                 logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
-                throw ;
+                throw;
+            }
+        }
+
+        public List<dm_StepProgress> GetListByIdProgress(int _idProgress)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dm_StepProgress.Where(r => r.IdProgress == _idProgress).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
             }
         }
 
