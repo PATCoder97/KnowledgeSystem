@@ -109,6 +109,7 @@
     <Compile Include="Configs\AppPermission.cs" />
     <Compile Include="Configs\DomainVNFPG.cs" />
     <Compile Include="Configs\GridControlHelper.cs" />
+    <Compile Include="Configs\PCInfoHelper.cs" />
     <Compile Include="Configs\RefreshHelper.cs" />
     <Compile Include="Configs\RegistryHelper.cs" />
     <Compile Include="Configs\SingleConnection.cs" />

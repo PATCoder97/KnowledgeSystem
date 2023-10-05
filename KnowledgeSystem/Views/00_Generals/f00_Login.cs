@@ -99,6 +99,8 @@ namespace KnowledgeSystem.Views._00_Generals
 
                     // Test
                     _userLogin.SecondaryPassword = txbPassword.Text;
+                    _userLogin.PCName = PCInfoHelper.Instance.GetPCName();
+                    _userLogin.IPAddress = PCInfoHelper.Instance.GetIPAddress();
                     _dm_UserBUS.Update(_userLogin);
 
                     Close();

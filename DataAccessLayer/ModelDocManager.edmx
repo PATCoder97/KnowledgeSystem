@@ -85,6 +85,13 @@
           <Property Name="IdRole" Type="int" />
           <Property Name="DateCreate" Type="date" Nullable="false" />
           <Property Name="IdDepartment" Type="varchar" MaxLength="4" />
+          <Property Name="DisplayNameVN" Type="nvarchar" MaxLength="128" />
+          <Property Name="DOB" Type="date" />
+          <Property Name="CitizenID" Type="varchar" MaxLength="16" />
+          <Property Name="Nationality" Type="nvarchar" MaxLength="16" />
+          <Property Name="JobCode" Type="varchar" MaxLength="16" />
+          <Property Name="PCName" Type="varchar" MaxLength="32" />
+          <Property Name="IPAddress" Type="varchar" MaxLength="15" />
         </EntityType>
         <EntityType Name="dt207_Attachment">
           <Key>
@@ -150,7 +157,7 @@
           <Property Name="IdDocProgress" Type="int" Nullable="false" />
           <Property Name="TimeStep" Type="datetime" Nullable="false" />
           <Property Name="IndexStep" Type="int" Nullable="false" />
-          <Property Name="IdUserProcess" Type="varchar" MaxLength="10" />
+          <Property Name="IdUserProcess" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="Descriptions" Type="nvarchar" MaxLength="64" />
           <Property Name="TimeNotifyNotes" Type="datetime" />
         </EntityType>
@@ -286,7 +293,6 @@
           <EntitySet Name="dm_Progress" EntityType="DBDocumentManagementSystemModel.dm_Progress" />
           <EntitySet Name="dm_Role" EntityType="DBDocumentManagementSystemModel.dm_Role" />
           <EntitySet Name="dm_StepProgress" EntityType="DBDocumentManagementSystemModel.dm_StepProgress" />
-          <EntitySet Name="dm_User" EntityType="DBDocumentManagementSystemModel.dm_User" />
           <EntitySet Name="dt207_Attachment" EntityType="DBDocumentManagementSystemModel.dt207_Attachment" />
           <EntitySet Name="dt207_Attachment_BAK" EntityType="DBDocumentManagementSystemModel.dt207_Attachment_BAK" />
           <EntitySet Name="dt207_Base_BAK" EntityType="DBDocumentManagementSystemModel.dt207_Base_BAK" />
@@ -302,6 +308,7 @@
           <EntitySet Name="sys_StaticValue" EntityType="DBDocumentManagementSystemModel.sys_StaticValue" />
           <EntitySet Name="dt207_DocProgress" EntityType="DBDocumentManagementSystemModel.dt207_DocProgress" />
           <EntitySet Name="dt207_Base" EntityType="DBDocumentManagementSystemModel.dt207_Base" />
+          <EntitySet Name="dm_User" EntityType="DBDocumentManagementSystemModel.dm_User" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -373,17 +380,6 @@
           <Property Name="IdGroup" Type="Int32" Nullable="false" />
           <Property Name="IndexStep" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="dm_User">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="DisplayName" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
-          <Property Name="SecondaryPassword" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-          <Property Name="IdRole" Type="Int32" />
-          <Property Name="DateCreate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="IdDepartment" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="dt207_Attachment">
           <Key>
             <PropertyRef Name="Id" />
@@ -422,7 +418,7 @@
           <Property Name="IdDocProgress" Type="Int32" Nullable="false" />
           <Property Name="TimeStep" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IndexStep" Type="Int32" Nullable="false" />
-          <Property Name="IdUserProcess" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdUserProcess" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Descriptions" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="TimeNotifyNotes" Type="DateTime" Precision="3" />
         </EntityType>
@@ -545,6 +541,24 @@
           <Property Name="UploadDate" Type="DateTime" Precision="3" />
           <Property Name="IsDelete" Type="Boolean" Nullable="false" />
         </EntityType>
+        <EntityType Name="dm_User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayName" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="SecondaryPassword" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="IdRole" Type="Int32" />
+          <Property Name="DateCreate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IdDepartment" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayNameVN" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="DOB" Type="DateTime" Precision="0" />
+          <Property Name="CitizenID" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="Nationality" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="JobCode" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="PCName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="IPAddress" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -625,18 +639,6 @@
                 <ScalarProperty Name="IndexStep" ColumnName="IndexStep" />
                 <ScalarProperty Name="IdGroup" ColumnName="IdGroup" />
                 <ScalarProperty Name="IdProgress" ColumnName="IdProgress" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="dm_User">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_User">
-              <MappingFragment StoreEntitySet="dm_User">
-                <ScalarProperty Name="IdDepartment" ColumnName="IdDepartment" />
-                <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
-                <ScalarProperty Name="IdRole" ColumnName="IdRole" />
-                <ScalarProperty Name="SecondaryPassword" ColumnName="SecondaryPassword" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -812,6 +814,25 @@
                 <ScalarProperty Name="UserUpload" ColumnName="UserUpload" />
                 <ScalarProperty Name="Keyword" ColumnName="Keyword" />
                 <ScalarProperty Name="IdTypes" ColumnName="IdTypes" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dm_User">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_User">
+              <MappingFragment StoreEntitySet="dm_User">
+                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+                <ScalarProperty Name="PCName" ColumnName="PCName" />
+                <ScalarProperty Name="JobCode" ColumnName="JobCode" />
+                <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+                <ScalarProperty Name="CitizenID" ColumnName="CitizenID" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="DisplayNameVN" ColumnName="DisplayNameVN" />
+                <ScalarProperty Name="IdDepartment" ColumnName="IdDepartment" />
+                <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
+                <ScalarProperty Name="IdRole" ColumnName="IdRole" />
+                <ScalarProperty Name="SecondaryPassword" ColumnName="SecondaryPassword" />
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

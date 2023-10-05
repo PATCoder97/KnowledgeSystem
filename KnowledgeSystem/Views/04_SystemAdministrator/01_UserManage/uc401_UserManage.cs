@@ -57,13 +57,18 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManager
                                     select new UserInfos()
                                     {
                                         Id = data.Id,
-                                        DisplayName = data.DisplayName,
+                                        DisplayName = $"{data.DisplayName}{(!string.IsNullOrEmpty(data.DisplayNameVN) ? $"\n{data.DisplayNameVN}" : "")}",
                                         IdRole = data.IdRole,
                                         IdDepartment = data.IdDepartment,
                                         DateCreate = data.DateCreate,
                                         SecondaryPassword = data.SecondaryPassword,
                                         RoleName = p != null ? p.DisplayName : "",
-                                        DeptName = $"{data.IdDepartment} {depts.DisplayName}"
+                                        DeptName = $"{data.IdDepartment}\n{depts.DisplayName}",
+                                        DOB = data.DOB,
+                                        CitizenID = data.CitizenID,
+                                        Nationality = data.Nationality,
+                                        PCName = data.PCName,
+                                        IPAddress = data.IPAddress
                                     }).ToList();
 
                 sourceUsers.DataSource = lsUserManage;

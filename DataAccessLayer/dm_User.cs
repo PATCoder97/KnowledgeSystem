@@ -20,5 +20,12 @@ namespace DataAccessLayer
         public Nullable<int> IdRole { get; set; }
         public System.DateTime DateCreate { get; set; }
         public string IdDepartment { get; set; }
+        public string DisplayNameVN { get; set; }
+        public Nullable<System.DateTime> DOB { get; set; }
+        public string CitizenID { get; set; }
+        public string Nationality { get; set; }
+        public string JobCode { get; set; }
+        public string PCName { get; set; }
+        public string IPAddress { get; set; }
     }
 }

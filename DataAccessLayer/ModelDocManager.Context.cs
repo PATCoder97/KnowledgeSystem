@@ -33,7 +33,6 @@ namespace DataAccessLayer
         public virtual DbSet<dm_Progress> dm_Progress { get; set; }
         public virtual DbSet<dm_Role> dm_Role { get; set; }
         public virtual DbSet<dm_StepProgress> dm_StepProgress { get; set; }
-        public virtual DbSet<dm_User> dm_User { get; set; }
         public virtual DbSet<dt207_Attachment> dt207_Attachment { get; set; }
         public virtual DbSet<dt207_Attachment_BAK> dt207_Attachment_BAK { get; set; }
         public virtual DbSet<dt207_Base_BAK> dt207_Base_BAK { get; set; }
@@ -49,5 +48,6 @@ namespace DataAccessLayer
         public virtual DbSet<sys_StaticValue> sys_StaticValue { get; set; }
         public virtual DbSet<dt207_DocProgress> dt207_DocProgress { get; set; }
         public virtual DbSet<dt207_Base> dt207_Base { get; set; }
+        public virtual DbSet<dm_User> dm_User { get; set; }
     }
 }
