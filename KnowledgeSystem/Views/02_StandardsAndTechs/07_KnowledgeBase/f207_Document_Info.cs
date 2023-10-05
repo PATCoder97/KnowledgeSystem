@@ -24,6 +24,7 @@ using System.Data.Entity.Migrations;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Security.AccessControl;
 using System.Security.Cryptography;
 using System.Text;
@@ -254,32 +255,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             return $"{userLogin.Id}-{userLogin.IdDepartment.Substring(0, 3)}-{DateTime.Now:MMddhhmmss}-{randomString}.pdf";
         }
 
-        private string GenerateIdDocument(int indexId = 1, string startIdStr = "")
-        {
-            var userLogin = lsUsers.FirstOrDefault(u => u.Id == _userId);
-            if (userLogin == null)
-            {
-                throw new Exception($"User with Id {_userId} not found.");
-            }
-
-            if (string.IsNullOrEmpty(startIdStr))
-            {
-                startIdStr = $"{userLogin.IdDepartment.Substring(0, 3)}-{DateTime.Now.ToString("yyMMddHHmm")}-";
-            }
-
-            string tempId = $"{startIdStr}{indexId:d2}";
-            using (var db = new DBDocumentManagementSystemEntities())
-            {
-                bool isExistsId = db.dt207_Base.Any(kb => kb.Id == tempId);
-                if (!isExistsId)
-                {
-                    return tempId;
-                }
-            }
-
-            return GenerateIdDocument(indexId + 1, startIdStr);
-        }
-
         public string convertToUnSign3(string s)
         {
             Regex regex = new Regex("\\p{IsCombiningDiacriticalMarks}+");
@@ -320,6 +295,16 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                         SaveFile = securitys.SaveFile,
                     }).FirstOrDefault();
         }
+
+        public static string GetEnumDescription(Enum value)
+        {
+            return value.GetType()
+                        .GetMember(value.ToString())
+                        .FirstOrDefault()
+                        ?.GetCustomAttribute<DescriptionAttribute>()
+                        ?.Description ?? value.ToString();
+        }
+
 
         #endregion
 
@@ -618,12 +603,56 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             // Đưa focused ra khỏi bảng để cập nhật lên source
             bgvSecurity.FocusedRowHandle = GridControl.AutoFilterRowHandle;
 
+            switch (_event207)
+            {
+                case Event207DocInfo.Create:
+                    idDocument = _dt207_BaseBUS.GetNewBaseId(TPConfigs.LoginUser.IdDepartment);
+                    break;
+                case Event207DocInfo.Update:
+                    bool IsProcessing = _dt207_DocProgressBUS.CheckItemProcessing(idDocument);
+                    if (IsProcessing)
+                    {
+                        break;
+                    }
+
+                    dt207_Base base_BAK = _dt207_BaseBUS.GetItemById(idDocument);
+                    _dt207_Base_BAKBUS.Create(base_BAK);
+
+                    var lsAttachments_BAK = db.dt207_Attachment.
+                        Where(r => r.IdKnowledgeBase == idDocument).ToList().
+                        Select(r => new dt207_Attachment_BAK()
+                        {
+                            IdKnowledgeBase = r.IdKnowledgeBase,
+                            EncryptionName = r.EncryptionName,
+                            FileName = r.FileName
+                        });
+                    db.dt207_Attachment_BAK.AddRange(lsAttachments_BAK);
+
+                    var lsSecurities_BAK = db.dt207_Security.
+                        Where(r => r.IdKnowledgeBase == idDocument).ToList().
+                        Select(r => new dt207_Security_BAK()
+                        {
+                            IdKnowledgeBase = r.IdKnowledgeBase,
+                            IdGroup = r.IdGroup,
+                            IdUser = r.IdUser,
+                            ReadInfo = r.ReadInfo,
+                            UpdateInfo = r.UpdateInfo,
+                            DeleteInfo = r.DeleteInfo,
+                            SearchInfo = r.SearchInfo,
+                            ReadFile = r.ReadFile,
+                            SaveFile = r.SaveFile
+                        });
+                    db.dt207_Security_BAK.AddRange(lsSecurities_BAK);
+
+                    break;
+            }
+
             // Tạo ra IdDoc nếu là chức năng thêm mới
             events = TPConfigs.EventEdit;
             if (string.IsNullOrEmpty(idDocument))
             {
                 events = TPConfigs.EventNew;
-                idDocument = GenerateIdDocument();
+                idDocument = _dt207_BaseBUS.GetNewBaseId(TPConfigs.LoginUser.IdDepartment);
             }
 
             using (var db = new DBDocumentManagementSystemEntities())

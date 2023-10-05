@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace BusinessLayer
 {
@@ -76,6 +77,23 @@ namespace BusinessLayer
                 logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
                 throw;
             }
+        }
+
+        public bool CheckItemProcessing(string _idBase)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt207_DocProgress.Any(r => r.IdKnowledgeBase == _idBase && !r.IsComplete);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+
         }
 
         public bool Create(dt207_DocProgress docProgress)

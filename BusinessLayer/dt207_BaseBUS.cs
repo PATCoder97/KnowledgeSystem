@@ -68,6 +68,26 @@ namespace BusinessLayer
             }
         }
 
+        public string GetNewBaseId(string _idDept, int _indexId = 1, string _startIdStr = "")
+        {
+            if (string.IsNullOrEmpty(_startIdStr))
+            {
+                _startIdStr = $"{_idDept.Substring(0, 3)}-{DateTime.Now.ToString("yyMMddHHmm")}-";
+            }
+
+            string tempId = $"{_startIdStr}{_indexId:d2}";
+            using (var db = new DBDocumentManagementSystemEntities())
+            {
+                bool isExistsId = db.dt207_Base.Any(kb => kb.Id == tempId);
+                if (!isExistsId)
+                {
+                    return tempId;
+                }
+            }
+
+            return GetNewBaseId(_idDept, _indexId + 1, _startIdStr);
+        }
+
         public dt207_Base GetItemById(string _id)
         {
             try

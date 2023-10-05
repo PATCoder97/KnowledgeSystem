@@ -14,13 +14,22 @@ namespace BusinessLayer
     {
         TPLogger logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName);
 
-        public List<dt207_Base_BAK> GetList()
+        public List<dt207_Base> GetList()
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dt207_Base_BAK.ToList();
+                    return _context.dt207_Base_BAK.ToList().Select(r => new dt207_Base
+                    {
+                        Id = r.Id,
+                        DisplayName = r.DisplayName,
+                        IdTypes = r.IdTypes,
+                        Keyword = r.Keyword,
+                        UserUpload = r.UserUpload,
+                        UserProcess = r.UserProcess,
+                        UploadDate = r.UploadDate,
+                    }).ToList();
                 }
             }
             catch (Exception ex)
@@ -30,13 +39,23 @@ namespace BusinessLayer
             }
         }
 
-        public bool Create(dt207_Base_BAK baseEntity)
+        public bool Create(dt207_Base baseEntity)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    _context.dt207_Base_BAK.Add(baseEntity);
+                    dt207_Base_BAK _newItem = new dt207_Base_BAK()
+                    {
+                        Id = baseEntity.Id,
+                        DisplayName = baseEntity.DisplayName,
+                        IdTypes = baseEntity.IdTypes,
+                        Keyword = baseEntity.Keyword,
+                        UserUpload = baseEntity.UserUpload,
+                        UserProcess = baseEntity.UserProcess,
+                        UploadDate = baseEntity.UploadDate
+                    };
+                    _context.dt207_Base_BAK.Add(_newItem);
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;
                 }
@@ -48,13 +67,23 @@ namespace BusinessLayer
             }
         }
 
-        public bool Update(dt207_Base_BAK baseEntity)
+        public bool Update(dt207_Base baseEntity)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    _context.dt207_Base_BAK.AddOrUpdate(baseEntity);
+                    dt207_Base_BAK _itemUpdate = new dt207_Base_BAK()
+                    {
+                        Id = baseEntity.Id,
+                        DisplayName = baseEntity.DisplayName,
+                        IdTypes = baseEntity.IdTypes,
+                        Keyword = baseEntity.Keyword,
+                        UserUpload = baseEntity.UserUpload,
+                        UserProcess = baseEntity.UserProcess,
+                        UploadDate = baseEntity.UploadDate
+                    };
+                    _context.dt207_Base_BAK.AddOrUpdate(_itemUpdate);
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;
                 }
