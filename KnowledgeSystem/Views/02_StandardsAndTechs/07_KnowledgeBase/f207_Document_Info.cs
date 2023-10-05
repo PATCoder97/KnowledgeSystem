@@ -460,6 +460,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             };
         }
 
+        private void f207_DocumentInfo_Shown(object sender, EventArgs e)
+        {
+            txbNameTW.Focus();
+        }
+
         private void btnAddFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
@@ -489,9 +494,51 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             gvFiles.RefreshData();
         }
 
-        private void f207_DocumentInfo_Shown(object sender, EventArgs e)
+        private void btnDelFile_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            txbNameTW.Focus();
+            Attachments attachment = gvFiles.GetRow(gvFiles.FocusedRowHandle) as Attachments;
+            DialogResult dialogResult = XtraMessageBox.Show($"您想要刪除附件：{attachment.FileName}?", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialogResult == DialogResult.No)
+            {
+                return;
+            }
+
+            lsAttachments.Remove(attachment);
+            lbCountFile.Text = $"共{lsAttachments.Count}個附件";
+
+            int rowIndex = gvFiles.FocusedRowHandle;
+            gvFiles.RefreshData();
+            gvFiles.FocusedRowHandle = rowIndex;
+        }
+
+        private void btnAddPermission_Click(object sender, EventArgs e)
+        {
+            lsSecurityInfos.Add(new Securityinfo()
+            {
+                IdKnowledgeBase = idDocument,
+                ReadInfo = true,
+                UpdateInfo = false,
+                DeleteInfo = false,
+                SearchInfo = true,
+                ReadFile = false,
+                SaveFile = false,
+            });
+
+            _BSSecuritys.DataSource = lsSecurityInfos;
+            bgvSecurity.RefreshData();
+        }
+
+        private void btnDelPermission_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            Securityinfo permission = bgvSecurity.GetRow(bgvSecurity.FocusedRowHandle) as Securityinfo;
+            permission.DisplayName = lsIdGroupOrUser.FirstOrDefault(r => r.IdGroupOrUser == permission.IdGroupOrUser)?.DisplayName;
+
+            DialogResult dialogResult = XtraMessageBox.Show($"您想要刪除權限：{permission.DisplayName}?", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialogResult == DialogResult.No)
+                return;
+
+            lsSecurityInfos.Remove(permission);
+            bgvSecurity.RefreshData();
         }
 
         private void btnDel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -691,53 +738,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             // Show a message box with the appropriate message and close the form
             XtraMessageBox.Show($"{events}!\r\n文件編號:{idDocument}", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
             Close();
-        }
-
-        private void btnAddPermission_Click(object sender, EventArgs e)
-        {
-            lsSecurityInfos.Add(new Securityinfo()
-            {
-                IdKnowledgeBase = idDocument,
-                ReadInfo = true,
-                UpdateInfo = false,
-                DeleteInfo = false,
-                SearchInfo = true,
-                ReadFile = false,
-                SaveFile = false,
-            });
-
-            _BSSecuritys.DataSource = lsSecurityInfos;
-            bgvSecurity.RefreshData();
-        }
-
-        private void btnDelFile_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
-        {
-            Attachments attachment = gvFiles.GetRow(gvFiles.FocusedRowHandle) as Attachments;
-            DialogResult dialogResult = XtraMessageBox.Show($"您想要刪除附件：{attachment.FileName}?", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (dialogResult == DialogResult.No)
-            {
-                return;
-            }
-
-            lsAttachments.Remove(attachment);
-            lbCountFile.Text = $"共{lsAttachments.Count}個附件";
-
-            int rowIndex = gvFiles.FocusedRowHandle;
-            gvFiles.RefreshData();
-            gvFiles.FocusedRowHandle = rowIndex;
-        }
-
-        private void btnDelPermission_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
-        {
-            Securityinfo permission = bgvSecurity.GetRow(bgvSecurity.FocusedRowHandle) as Securityinfo;
-            permission.DisplayName = lsIdGroupOrUser.FirstOrDefault(r => r.IdGroupOrUser == permission.IdGroupOrUser)?.DisplayName;
-
-            DialogResult dialogResult = XtraMessageBox.Show($"您想要刪除權限：{permission.DisplayName}?", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (dialogResult == DialogResult.No)
-                return;
-
-            lsSecurityInfos.Remove(permission);
-            bgvSecurity.RefreshData();
         }
 
         private void gcFiles_DoubleClick(object sender, EventArgs e)

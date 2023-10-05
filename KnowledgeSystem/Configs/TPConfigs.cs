@@ -39,8 +39,6 @@ namespace KnowledgeSystem.Configs
 
         public static string NoPermission { get; set; } = "您沒有該功能的權限";
         public static string DocIsProcessing { get; set; } = "文件處理中，暫不可顯示！";
-
-
     }
 
     public class ChartDataSource
@@ -62,7 +60,9 @@ namespace KnowledgeSystem.Configs
         [Description("新增文件")]
         Create,
         View,
+        [Description("更新文件")]
         Update,
+        [Description("刪除文件")]
         Delete,
         Approval
     }
