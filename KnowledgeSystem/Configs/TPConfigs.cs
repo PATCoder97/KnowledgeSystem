@@ -1,6 +1,7 @@
 ﻿using DataAccessLayer;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -58,10 +59,11 @@ namespace KnowledgeSystem.Configs
 
     public enum Event207DocInfo
     {
-        Create= "新增文件", 
-        View, 
-        Update, 
-        Delete, 
+        [Description("新增文件")]
+        Create,
+        View,
+        Update,
+        Delete,
         Approval
     }
 
