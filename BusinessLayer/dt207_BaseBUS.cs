@@ -68,6 +68,22 @@ namespace BusinessLayer
             }
         }
 
+        public dt207_Base GetItemById(string _id)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt207_Base.Where(r => !r.IsDelete).FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public bool Create(dt207_Base entity)
         {
             try

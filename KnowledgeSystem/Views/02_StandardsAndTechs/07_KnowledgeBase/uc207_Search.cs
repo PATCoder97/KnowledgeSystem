@@ -315,6 +315,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             }
 
             f207_Document_Info fDocumentInfo = new f207_Document_Info(idDocument);
+            fDocumentInfo._event207 = Event207DocInfo.View;
             fDocumentInfo.ShowDialog();
 
             LoadData();

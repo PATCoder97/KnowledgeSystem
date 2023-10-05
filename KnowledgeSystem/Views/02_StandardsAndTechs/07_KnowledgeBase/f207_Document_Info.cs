@@ -38,31 +38,46 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
     public partial class f207_Document_Info : DevExpress.XtraEditors.XtraForm
     {
         RefreshHelper helper;
+        public Event207DocInfo _event207 = Event207DocInfo.View;
 
         public f207_Document_Info()
         {
             InitializeComponent();
+            InitializeControl();
             LockControl(false);
         }
 
         public f207_Document_Info(string idDocument_)
         {
             InitializeComponent();
+            InitializeControl();
             idDocument = idDocument_;
             LockControl(true);
         }
 
         #region parameters
 
+        // Khai báo các BUS
         dm_UserBUS _dm_UserBUS = new dm_UserBUS();
         dm_GroupBUS _dm_GroupBUS = new dm_GroupBUS();
         dm_GroupUserBUS _dm_GroupUserBUS = new dm_GroupUserBUS();
+        dt207_TypeBUS _dt207_TypeBUS = new dt207_TypeBUS();
+        dm_ProgressBUS _dm_ProgressBUS = new dm_ProgressBUS();
+        dt207_BaseBUS _dt207_BaseBUS = new dt207_BaseBUS();
+        dt207_Base_BAKBUS _dt207_Base_BAKBUS = new dt207_Base_BAKBUS();
+        dt207_AttachmentBUS _dt207_AttachmentBUS = new dt207_AttachmentBUS();
+        dt207_Attachment_BAKBUS _dt207_Attachment_BAKBUS = new dt207_Attachment_BAKBUS();
+        dt207_SecurityBUS _dt207_SecurityBUS = new dt207_SecurityBUS();
+        dt207_Security_BAKBUS _dt207_Security_BAKBUS = new dt207_Security_BAKBUS();
+        dt207_DocProgressBUS _dt207_DocProgressBUS = new dt207_DocProgressBUS();
+        dt207_DocProgressInfoBUS _dt207_DocProgressInfoBUS = new dt207_DocProgressInfoBUS();
 
-        BindingSource sourceAttachments = new BindingSource();
-        BindingSource sourceSecuritys = new BindingSource();
+        // Khai báo các source
+        BindingSource _BSAttachments = new BindingSource();
+        BindingSource _BSSecuritys = new BindingSource();
 
         string idDocument = string.Empty;
-        string userId = string.Empty;
+        string _userId = string.Empty;
 
         List<dt207_Type> lsKnowledgeTypes = new List<dt207_Type>();
         List<dm_User> lsUsers = new List<dm_User>();
@@ -97,12 +112,63 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         #region methods
 
+        private void InitializeControl()
+        {
+            // Cài mặc định các thông số
+            helper = new RefreshHelper(bgvSecurity, "Id");
+            lcgProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            lcgHistoryEdit.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            controlgroupDocument.SelectedTabPage = lcgInfo;
+
+            // Gắn các thông số cho các combobox
+            rgvGruopOrUser.ValueMember = "IdGroupOrUser";
+            rgvGruopOrUser.DisplayMember = "DisplayName";
+            rgvGruopOrUser.PopupView.Columns.AddRange(new[]
+            {
+                    new GridColumn { FieldName = "IdDept", VisibleIndex = 0, Caption = "部門" },
+                    new GridColumn { FieldName = "IdGroupOrUser", VisibleIndex = 1, Caption = "代號" },
+                    new GridColumn { FieldName = "DisplayName", VisibleIndex = 2, Caption = "名稱" }
+            });
+
+            cbbType.Properties.ValueMember = "Id";
+            cbbType.Properties.DisplayMember = "DisplayName";
+
+            cbbUserUpload.Properties.ValueMember = "Id";
+            cbbUserUpload.Properties.DisplayMember = "DisplayName";
+
+            cbbUserProcess.Properties.ValueMember = "Id";
+            cbbUserProcess.Properties.DisplayMember = "DisplayName";
+
+            // Cài các gridview readonly
+            gvEditHistory.ReadOnlyGridView();
+            gvFiles.ReadOnlyGridView();
+            gvHistoryProcess.ReadOnlyGridView();
+
+            // Load các dữ liệu LIST ban đầu
+            lsKnowledgeTypes = _dt207_TypeBUS.GetList();
+            lsUsers = _dm_UserBUS.GetList();
+            lsGroups = _dm_GroupBUS.GetList();
+            lsGroupUser = _dm_GroupUserBUS.GetList();
+            progressSelect = _dm_ProgressBUS.GetList().FirstOrDefault();
+
+            // Create lists of Securityinfo objects from lsUsers and lsGroups
+            var lsIdUsers = lsUsers.Select(r => new Securityinfo { IdDept = r.IdDepartment, IdGroupOrUser = r.Id, DisplayName = r.DisplayName }).ToList();
+            var lsIdGroup = lsGroups.Select(r => new Securityinfo { IdGroupOrUser = r.Id.ToString(), DisplayName = r.DisplayName }).ToList();
+            lsIdGroupOrUser = lsIdGroup.Concat(lsIdUsers).ToList();
+
+            // Assign data source and columns to rgvGruopOrUser
+            rgvGruopOrUser.DataSource = lsIdGroupOrUser;
+            cbbType.Properties.DataSource = lsKnowledgeTypes;
+            cbbUserUpload.Properties.DataSource = lsUsers;
+            cbbUserProcess.Properties.DataSource = lsUsers;
+        }
+
         private string GenerateEncryptionName()
         {
-            var userLogin = lsUsers.FirstOrDefault(u => u.Id == userId);
+            var userLogin = lsUsers.FirstOrDefault(u => u.Id == _userId);
             if (userLogin == null)
             {
-                throw new Exception($"User with Id {userId} not found.");
+                throw new Exception($"User with Id {_userId} not found.");
             }
 
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -116,10 +182,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private string GenerateIdDocument(int indexId = 1, string startIdStr = "")
         {
-            var userLogin = lsUsers.FirstOrDefault(u => u.Id == userId);
+            var userLogin = lsUsers.FirstOrDefault(u => u.Id == _userId);
             if (userLogin == null)
             {
-                throw new Exception($"User with Id {userId} not found.");
+                throw new Exception($"User with Id {_userId} not found.");
             }
 
             if (string.IsNullOrEmpty(startIdStr))
@@ -140,7 +206,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             return GenerateIdDocument(indexId + 1, startIdStr);
         }
 
-        public static string convertToUnSign3(string s)
+        public string convertToUnSign3(string s)
         {
             Regex regex = new Regex("\\p{IsCombiningDiacriticalMarks}+");
             string temp = s.Normalize(NormalizationForm.FormD);
@@ -223,95 +289,52 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void f207_DocumentInfo_Load(object sender, EventArgs e)
         {
-            lcgProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-            lcgHistoryEdit.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-            controlgroupDocument.SelectedTabPage = lcgInfo;
+            // Set datasource cho gridcontrol
+            gcFiles.DataSource = _BSAttachments;
+            gcSecurity.DataSource = _BSSecuritys;
 
-            // Initialize RefreshHelper
-            helper = new RefreshHelper(bgvSecurity, "Id");
+            // Cài các giá trị mặc định
+            _userId = TPConfigs.LoginUser.Id;
+            cbbUserUpload.EditValue = _userId;
+            cbbUserProcess.EditValue = _userId;
 
-            // Cài các gridview readonly và set datasource
-            gvEditHistory.ReadOnlyGridView();
-            gvFiles.ReadOnlyGridView();
-            gvHistoryProcess.ReadOnlyGridView();
-            gcFiles.DataSource = sourceAttachments;
-            gcSecurity.DataSource = sourceSecuritys;
-
-            using (var db = new DBDocumentManagementSystemEntities())
+            // Tuỳ theo từng event để hiển thị lên form
+            switch (_event207)
             {
-                // Initialize lists
-                lsKnowledgeTypes = db.dt207_Type.ToList();
-                lsUsers = _dm_UserBUS.GetList();
-                lsGroups = _dm_GroupBUS.GetList();
-                lsGroupUser = _dm_GroupUserBUS.GetList();
-                progressSelect = db.dm_Progress.FirstOrDefault();
-
-                // Create lists of Securityinfo objects from lsUsers and lsGroups
-                var lsIdUsers = lsUsers.Select(r => new Securityinfo { IdDept = r.IdDepartment, IdGroupOrUser = r.Id, DisplayName = r.DisplayName }).ToList();
-                var lsIdGroup = lsGroups.Select(r => new Securityinfo { IdGroupOrUser = r.Id.ToString(), DisplayName = r.DisplayName }).ToList();
-                lsIdGroupOrUser = lsIdGroup.Concat(lsIdUsers).ToList();
-
-                // Assign data source and columns to rgvGruopOrUser
-                rgvGruopOrUser.DataSource = lsIdGroupOrUser;
-                rgvGruopOrUser.ValueMember = "IdGroupOrUser";
-                rgvGruopOrUser.DisplayMember = "DisplayName";
-                rgvGruopOrUser.PopupView.Columns.AddRange(new[]
-                {
-                    new GridColumn { FieldName = "IdDept", VisibleIndex = 0, Caption = "部門" },
-                    new GridColumn { FieldName = "IdGroupOrUser", VisibleIndex = 1, Caption = "代號" },
-                    new GridColumn { FieldName = "DisplayName", VisibleIndex = 2, Caption = "名稱" }
-                });
-
-                // Load các datasource vào ComboBoxes
-                cbbType.Properties.DataSource = lsKnowledgeTypes;
-                cbbType.Properties.ValueMember = "Id";
-                cbbType.Properties.DisplayMember = "DisplayName";
-
-                cbbUserUpload.Properties.DataSource = lsUsers;
-                cbbUserUpload.Properties.ValueMember = "Id";
-                cbbUserUpload.Properties.DisplayMember = "DisplayName";
-
-                cbbUserProcess.Properties.DataSource = lsUsers;
-                cbbUserProcess.Properties.ValueMember = "Id";
-                cbbUserProcess.Properties.DisplayMember = "DisplayName";
-
-                // Cài các thông tin mặc định lên Form (Trường hợp new Doc)
-                userId = TPConfigs.LoginId;
-                cbbType.EditValue = 1;
-                cbbUserUpload.EditValue = userId;
-                cbbUserProcess.EditValue = userId;
-                var userLogin = lsUsers.FirstOrDefault(r => r.Id == userId);
-                txbId.Text = "XXX-XXXXXXXXXX-XX";
-                lbCountFile.Text = "";
-                lbProgress.Text = "流程：" + progressSelect.DisplayName;
-
-                // Nếu có idDocument, truy xuất dữ liệu từ cơ sở dữ liệu và gán cho các thành phần form
-                if (!string.IsNullOrEmpty(idDocument))
-                {
+                case Event207DocInfo.Create:
+                    txbId.Text = "XXX-XXXXXXXXXX-XX";
+                    cbbType.EditValue = 1;
+                    lbProgress.Text = "流程：" + progressSelect.DisplayName;
+                    break;
+                case Event207DocInfo.View:
                     lcgHistoryEdit.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
 
                     // Thông tin cơ bản
-                    var dataBaseInfo = db.dt207_Base.FirstOrDefault(r => r.Id == idDocument);
-                    txbId.Text = dataBaseInfo.Id;
-                    cbbType.EditValue = dataBaseInfo.IdTypes;
-                    cbbUserUpload.EditValue = dataBaseInfo.UserUpload;
-                    cbbUserProcess.EditValue = dataBaseInfo.UserProcess;
-                    var displayName = dataBaseInfo.DisplayName.Split(new[] { "\r\n" }, StringSplitOptions.None);
+                    var base207Info = _dt207_BaseBUS.GetItemById(idDocument);
+                    txbId.Text = base207Info.Id;
+                    cbbType.EditValue = base207Info.IdTypes;
+                    cbbUserUpload.EditValue = base207Info.UserUpload;
+                    cbbUserProcess.EditValue = base207Info.UserProcess;
+                    var displayName = base207Info.DisplayName.Split(new[] { "\r\n" }, StringSplitOptions.None);
                     txbNameTW.Text = displayName[0];
                     txbNameVN.Text = displayName.Length > 1 ? displayName[1] : "";
-                    txbKeyword.Text = dataBaseInfo.Keyword;
+                    txbKeyword.Text = base207Info.Keyword;
 
                     // Thông tin phụ kiện
-                    lsAttachments.AddRange(db.dt207_Attachment.Where(r => r.IdKnowledgeBase == idDocument)
-                        .Select(item => new Attachments { FileName = item.FileName, EncryptionName = item.EncryptionName }));
+                    lsAttachments.AddRange(_dt207_AttachmentBUS.GetListByIdBase(idDocument)
+                        .Select(item => new Attachments
+                        {
+                            FileName = item.FileName,
+                            EncryptionName = item.EncryptionName
+                        }));
 
-                    sourceAttachments.DataSource = lsAttachments;
+                    _BSAttachments.DataSource = lsAttachments;
                     lbCountFile.Text = $"共{lsAttachments.Count}個附件";
 
                     // Thông tin quyền hạn
                     helper.SaveViewInfo();
-                    var lsKnowledgeSecuritys = db.dt207_Security.Where(r => r.IdKnowledgeBase == idDocument).ToList();
-                    lsSecurityInfos = lsKnowledgeSecuritys.Select(data => new Securityinfo
+                    var lsBaseSecuritys = _dt207_SecurityBUS.GetListByIdBase(idDocument);
+                    lsSecurityInfos = lsBaseSecuritys.Select(data => new Securityinfo
                     {
                         IdKnowledgeBase = data.IdKnowledgeBase,
                         IdGroup = data.IdGroup,
@@ -324,14 +347,16 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                         SaveFile = data.SaveFile,
                         IdGroupOrUser = data.IdUser ?? data.IdGroup.ToString()
                     }).ToList();
-                    sourceSecuritys.DataSource = lsSecurityInfos;
+
+                    _BSSecuritys.DataSource = lsSecurityInfos;
                     bgvSecurity.BestFitColumns();
                     helper.LoadViewInfo();
 
                     // Thông tin lịch sửa cập nhật
-                    var lsHisUpdateRaw = db.dt207_DocProgress.Where(r => r.IdKnowledgeBase == idDocument && r.Descriptions == TPConfigs.EventEdit).ToList();
-                    var DocProgressInfos =
-                        (from data in db.dt207_DocProgressInfo
+                    var lsDocProcess = _dt207_DocProgressBUS.GetListByIdBase(idDocument);
+                    //db.dt207_DocProgress.Where(r => r.IdKnowledgeBase == idDocument && r.Descriptions == TPConfigs.EventEdit).ToList();
+                    var lsDocProcessInfos =
+                        (from data in _dt207_DocProgressInfoBUS.GetList()
                          group data by data.IdDocProgress into g
                          select new
                          {
@@ -341,8 +366,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                              IdUserProcess = g.OrderBy(dpi => dpi.TimeStep).Select(dpi => dpi.IdUserProcess).FirstOrDefault()
                          }).ToList();
 
-                    var lsHisUpdates = (from data in lsHisUpdateRaw
-                                        join infos in DocProgressInfos on data.Id equals infos.IdDocProgress
+                    var lsHisUpdates = (from data in lsDocProcess
+                                        join infos in lsDocProcessInfos on data.Id equals infos.IdDocProgress
                                         join users in lsUsers on data.IdUserProcess equals users.Id
                                         select new
                                         {
@@ -354,12 +379,57 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
                     gcEditHistory.DataSource = lsHisUpdates;
 
+                    break;
+                case Event207DocInfo.Update:
+                    lcgHistoryEdit.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                    break;
+                case Event207DocInfo.Delete:
+                    lcgHistoryEdit.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                    break;
+                case Event207DocInfo.Approval:
+                    lcgHistoryEdit.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                    lcgProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                    controlgroupDocument.SelectedTabPage = lcgProgress;
+
+
+                    goto case Event207DocInfo.View;
+            }
+
+
+
+
+
+
+            using (var db = new DBDocumentManagementSystemEntities())
+            {
+
+
+                // Cài các thông tin mặc định lên Form (Trường hợp new Doc)
+
+
+
+                // var userLogin = lsUsers.FirstOrDefault(r => r.Id == _userId);
+
+
+
+                // Nếu có idDocument, truy xuất dữ liệu từ cơ sở dữ liệu và gán cho các thành phần form
+                if (!string.IsNullOrEmpty(idDocument))
+                {
+
+
+
+
+
+
+
+
+
+
                     // Thông tin tiến trình trình ký văn kiện
-                    var lsDocProcessing = db.dt207_DocProgress.Where(r => !r.IsComplete  && r.IdKnowledgeBase == idDocument).ToList();
+                    var lsDocProcessing = db.dt207_DocProgress.Where(r => !r.IsComplete && r.IdKnowledgeBase == idDocument).ToList();
                     if (lsDocProcessing.Count != 0)
                     {
-                        lcgProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
-                        controlgroupDocument.SelectedTabPage = lcgProgress;
+
 
                         int idProgressByDoc = lsDocProcessing.First().IdProgress;
                         idDocProgress = lsDocProcessing.First().Id;
@@ -449,7 +519,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 Thread.Sleep(5);
             }
 
-            sourceAttachments.DataSource = lsAttachments;
+            _BSAttachments.DataSource = lsAttachments;
             lbCountFile.Text = $"共{lsAttachments.Count}個附件";
             gvFiles.RefreshData();
         }
@@ -671,7 +741,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 SaveFile = false,
             });
 
-            sourceSecuritys.DataSource = lsSecurityInfos;
+            _BSSecuritys.DataSource = lsSecurityInfos;
             bgvSecurity.RefreshData();
         }
 
@@ -758,7 +828,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             }
 
             // Chuyển người process sang userLogin
-            cbbUserProcess.EditValue = userId;
+            cbbUserProcess.EditValue = _userId;
             controlgroupDocument.SelectedTabPage = lcgInfo;
 
             LockControl(false);

@@ -565,7 +565,7 @@
             this.lbCountFile.Name = "lbCountFile";
             this.lbCountFile.Size = new System.Drawing.Size(920, 37);
             this.lbCountFile.TabIndex = 14;
-            this.lbCountFile.Text = "共零附件";
+            this.lbCountFile.Text = "沒有附件";
             this.lbCountFile.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnAddFile
@@ -985,7 +985,7 @@
             this.controlgroupDocument.AppearanceTabPage.HeaderActive.Options.UseForeColor = true;
             this.controlgroupDocument.Location = new System.Drawing.Point(0, 23);
             this.controlgroupDocument.Name = "controlgroupDocument";
-            this.controlgroupDocument.SelectedTabPage = this.lcgProgress;
+            this.controlgroupDocument.SelectedTabPage = this.lcgFiles;
             this.controlgroupDocument.Size = new System.Drawing.Size(1056, 391);
             this.controlgroupDocument.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.lcgProgress,

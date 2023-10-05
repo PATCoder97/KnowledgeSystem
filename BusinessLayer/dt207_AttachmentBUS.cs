@@ -30,6 +30,22 @@ namespace BusinessLayer
             }
         }
 
+        public List<dt207_Attachment> GetListByIdBase(string _idBase)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt207_Attachment.Where(r => r.IdKnowledgeBase == _idBase).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public bool Create(dt207_Attachment attachment)
         {
             try
