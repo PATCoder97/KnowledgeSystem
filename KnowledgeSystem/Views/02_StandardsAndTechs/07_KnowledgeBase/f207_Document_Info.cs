@@ -6,6 +6,7 @@ using DevExpress.Security;
 using DevExpress.Utils.About;
 using DevExpress.Utils.Drawing.Helpers;
 using DevExpress.Utils.Extensions;
+using DevExpress.Utils.Gesture;
 using DevExpress.Utils.Win.Hook;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
@@ -44,13 +45,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             InitializeComponent();
             InitializeControl();
-            LockControl(false);
         }
 
         public f207_Document_Info(string idDocument_)
         {
             InitializeComponent();
-            LockControl(true);
             InitializeControl();
             idDocument = idDocument_;
         }
@@ -120,10 +119,16 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             lcgProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             lcgHistoryEdit.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
 
-            btnCancel.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+            btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+            btnDel.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+            btnChangeProgress.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
             btnApproved.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             btnDisapprove.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-            btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+            btnCancel.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+
+            cbbUserProcess.Enabled = false;
+            txbId.Enabled = false;
 
             controlgroupDocument.SelectedTabPage = lcgInfo;
 
@@ -170,7 +175,69 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             cbbUserProcess.Properties.DataSource = lsUsers;
         }
 
-        private string GenerateEncryptionName()
+        private void LockControl()
+        {
+            switch (_event207)
+            {
+                case Event207DocInfo.Create:
+                    EnableControls(true);
+                    ShowControls(true);
+                    break;
+                case Event207DocInfo.View:
+                    Text = "群組信息";
+                    EnableControls(false);
+                    ShowControls(false);
+                    break;
+                case Event207DocInfo.Update:
+                    goto case Event207DocInfo.Create;
+                case Event207DocInfo.Delete:
+                    break;
+                case Event207DocInfo.Approval:
+                    Text = "群組信息";
+                    EnableControls(false);
+                    ShowControls(false);
+                    HideOptions();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void EnableControls(bool enabled)
+        {
+            cbbType.Enabled = enabled;
+            txbNameTW.Enabled = enabled;
+            txbNameVN.Enabled = enabled;
+            txbNameEN.Enabled = enabled;
+            cbbUserUpload.Enabled = enabled;
+            txbKeyword.Enabled = enabled;
+            btnAddFile.Enabled = enabled;
+            btnAddPermission.Enabled = enabled;
+            gvFiles.OptionsBehavior.ReadOnly = !enabled;
+            bgvSecurity.OptionsBehavior.ReadOnly = !enabled;
+            gColDelFile.Visible = enabled;
+            gColDelPermission.Visible = enabled;
+        }
+
+        private void ShowControls(bool visible)
+        {
+            btnEdit.Visibility = visible ? DevExpress.XtraBars.BarItemVisibility.Never : DevExpress.XtraBars.BarItemVisibility.Always;
+            btnDel.Visibility = visible ? DevExpress.XtraBars.BarItemVisibility.Never : DevExpress.XtraBars.BarItemVisibility.Always;
+            btnConfirm.Visibility = visible ? DevExpress.XtraBars.BarItemVisibility.Always : DevExpress.XtraBars.BarItemVisibility.Never;
+            btnChangeProgress.Visibility = visible ? DevExpress.XtraBars.BarItemVisibility.Always : DevExpress.XtraBars.BarItemVisibility.Never;
+            lcProgress.Visibility = visible ? DevExpress.XtraLayout.Utils.LayoutVisibility.Always : DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+        }
+
+        private void HideOptions()
+        {
+            btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            btnDel.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            btnChangeProgress.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            lcProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+        }
+
+        private string GenerateHashFileName()
         {
             var userLogin = lsUsers.FirstOrDefault(u => u.Id == _userId);
             if (userLogin == null)
@@ -220,44 +287,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             return regex.Replace(temp, String.Empty).Replace('\u0111', 'd').Replace('\u0110', 'D');
         }
 
-        private void LockControl(bool isFormView = true)
-        {
-            bool readOnly = isFormView;
-            bool enabled = !isFormView;
-
-            cbbType.ReadOnly = readOnly;
-            txbNameTW.ReadOnly = readOnly;
-            txbNameVN.ReadOnly = readOnly;
-            cbbUserProcess.ReadOnly = true;
-            txbKeyword.ReadOnly = readOnly;
-            cbbUserUpload.ReadOnly = readOnly;
-            if (!string.IsNullOrEmpty(idDocument))
-            {
-                cbbUserUpload.ReadOnly = true;
-            }
-
-            btnAddFile.Enabled = enabled;
-            btnAddPermission.Enabled = enabled;
-
-            gvFiles.OptionsBehavior.ReadOnly = readOnly;
-            bgvSecurity.OptionsBehavior.ReadOnly = readOnly;
-
-            gColDelFile.Visible = !readOnly;
-            gColDelPermission.Visible = !readOnly;
-
-            btnEdit.Visibility = isFormView ? DevExpress.XtraBars.BarItemVisibility.Always : DevExpress.XtraBars.BarItemVisibility.Never;
-            btnDel.Visibility = isFormView ? DevExpress.XtraBars.BarItemVisibility.Always : DevExpress.XtraBars.BarItemVisibility.Never;
-            btnConfirm.Visibility = isFormView ? DevExpress.XtraBars.BarItemVisibility.Never : DevExpress.XtraBars.BarItemVisibility.Always;
-            btnChangeProgress.Visibility = isFormView ? DevExpress.XtraBars.BarItemVisibility.Never : DevExpress.XtraBars.BarItemVisibility.Always;
-            lcProgress.Visibility = isFormView ? DevExpress.XtraLayout.Utils.LayoutVisibility.Never : DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
-
-            Text = isFormView ? "群組信息" : "新增、修改群組";
-
-            btnApproved.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-            btnDisapprove.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-            btnCancel.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-        }
-
         private Securityinfo GetPermission()
         {
             string userIdLogin = TPConfigs.LoginId;
@@ -296,6 +325,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void f207_DocumentInfo_Load(object sender, EventArgs e)
         {
+            Text = "新增群組";
+
             // Set datasource cho gridcontrol
             gcFiles.DataSource = _BSAttachments;
             gcSecurity.DataSource = _BSSecuritys;
@@ -392,9 +423,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     lcgProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
                     controlgroupDocument.SelectedTabPage = lcgProgress;
 
-                    btnDel.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                    btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-
                     var _docProcessing = _dt207_DocProgressBUS.GetItemByIdBaseNotComplete(idDocument);
                     if (_docProcessing == default)
                     {
@@ -450,6 +478,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     goto case Event207DocInfo.View;
             }
 
+            LockControl();
+
             // Lấy quyền hạn của người dùng đối với văn kiện này
             permissionAttachments = GetPermission() ?? new Securityinfo
             {
@@ -469,7 +499,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
-                Filter = "PDF files (*.pdf)|*.pdf",
+                Filter = "Files|*.pdf;*.xlsx;*.xls;*.docx;*.doc",
                 Multiselect = true
             };
 
@@ -478,7 +508,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
             foreach (string fileName in openFileDialog.FileNames)
             {
-                string encryptionName = GenerateEncryptionName();
+                string encryptionName = GenerateHashFileName();
                 Attachments attachment = new Attachments
                 {
                     FullPath = fileName,
@@ -562,6 +592,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             }
 
             progressSelect = ucInfo.ProgressSelect;
+            _event207 = Event207DocInfo.Delete;
 
             using (var db = new DBDocumentManagementSystemEntities())
             {
@@ -796,7 +827,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             cbbUserProcess.EditValue = _userId;
             controlgroupDocument.SelectedTabPage = lcgInfo;
 
-            LockControl(false);
+            _event207 = Event207DocInfo.Update;
+            LockControl();
         }
 
         private void btnChangeProgress_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
