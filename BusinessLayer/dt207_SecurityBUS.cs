@@ -64,6 +64,24 @@ namespace BusinessLayer
             }
         }
 
+        public bool AddRange(List<dt207_Security> lsSecurities)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    _context.dt207_Security.AddRange(lsSecurities);
+                    int affectedRecords = _context.SaveChanges();
+                    return affectedRecords > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                return false;
+            }
+        }
+
         public bool Update(dt207_Security security)
         {
             try
@@ -90,6 +108,26 @@ namespace BusinessLayer
                 {
                     var security = _context.dt207_Security.FirstOrDefault(r => r.Id == securityId);
                     _context.dt207_Security.Remove(security);
+
+                    int affectedRecords = _context.SaveChanges();
+                    return affectedRecords > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                return false;
+            }
+        }
+
+        public bool RemoveRangeByIdBase(string _idBase)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    var security = _context.dt207_Security.Where(r => r.IdKnowledgeBase == _idBase);
+                    _context.dt207_Security.RemoveRange(security);
 
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;

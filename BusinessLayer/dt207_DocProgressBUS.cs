@@ -31,6 +31,22 @@ namespace BusinessLayer
             }
         }
 
+        public dt207_DocProgress GetItemById(int _id)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt207_DocProgress.First(r => r.Id == _id);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public List<dt207_DocProgress> GetListByIdBase(string _idBase)
         {
             try
@@ -114,7 +130,7 @@ namespace BusinessLayer
             }
         }
 
-        public bool Update(dt207_DocProgress docProgress)
+        public bool AddOrUpdate(dt207_DocProgress docProgress)
         {
             try
             {

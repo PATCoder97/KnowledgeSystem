@@ -1,4 +1,4 @@
-﻿using DataEF;
+﻿using DataAccessLayer;
 using Scriban;
 using System;
 using System.Collections.Generic;
@@ -125,7 +125,7 @@ namespace SVC207Knowledge
             using (var db = new DBDocumentManagementSystemEntities())
             {
                 var lsNotifyEditDocs = db.dt207_NotifyEditDoc.Where(r => string.IsNullOrEmpty(r.TimeNotifyNotes.ToString())).ToList();
-                var lsUsers = db.Users.ToList();
+                var lsUsers = db.dm_User.ToList();
                 var lsBases = db.dt207_Base.ToList();
                 var lsTypes = db.dt207_Type.ToList();
 
@@ -192,7 +192,7 @@ namespace SVC207Knowledge
                     // Cập nhật log vào DB
                     sys_Log log = new sys_Log()
                     {
-                        ThreadName = "207 KnowledgeSystem",
+                        Thread = "207 KnowledgeSystem",
                         Level = "Info",
                         Logger = "Document updated",
                         Message = res
@@ -214,7 +214,7 @@ namespace SVC207Knowledge
 
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                var lsUsers = db.Users.ToList();
+                var lsUsers = db.dm_User.ToList();
                 var lsTypes = db.dt207_Type.ToList();
 
                 var lsDocProcessNotifys =
@@ -296,7 +296,7 @@ namespace SVC207Knowledge
                         // Cập nhật log vào DB
                         sys_Log log = new sys_Log()
                         {
-                            ThreadName = "207 KnowledgeSystem",
+                            Thread = "207 KnowledgeSystem",
                             Level = "Info",
                             Logger = "Document processing to owner",
                             Message = res
@@ -310,7 +310,7 @@ namespace SVC207Knowledge
                         int nextStep = stepNow + 1;
                         int idGroup = lsSteps.FirstOrDefault(r => r.IndexStep == nextStep).IdGroup;
 
-                        var lsUserSigns = db.GroupUsers.Where(r => r.IdGroup == idGroup).Select(r => r.IdUser).ToList();
+                        var lsUserSigns = db.dm_GroupUser.Where(r => r.IdGroup == idGroup).Select(r => r.IdUser).ToList();
 
                         var userProcess = lsUsers.First(r => r.Id == bases.UserUpload);
                         var userUpload = lsUsers.First(r => r.Id == bases.UserProcess);
@@ -343,7 +343,7 @@ namespace SVC207Knowledge
                         // Cập nhật log vào DB
                         sys_Log log = new sys_Log()
                         {
-                            ThreadName = "207 KnowledgeSystem",
+                            Thread = "207 KnowledgeSystem",
                             Level = "Info",
                             Logger = "Document processing to signer",
                             Message = res

@@ -94,7 +94,7 @@ namespace BusinessLayer
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dt207_Base.Where(r => !r.IsDelete).FirstOrDefault();
+                    return _context.dt207_Base.Where(r => !r.IsDelete && r.Id == _id).FirstOrDefault();
                 }
             }
             catch (Exception ex)
@@ -122,7 +122,7 @@ namespace BusinessLayer
             }
         }
 
-        public bool Update(dt207_Base entity)
+        public bool AddOrUpdate(dt207_Base entity)
         {
             try
             {
@@ -147,7 +147,8 @@ namespace BusinessLayer
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
                     var entity = _context.dt207_Base.FirstOrDefault(r => r.Id == entityId);
-                    _context.dt207_Base.Remove(entity);
+                    entity.IsDelete = true;
+                    _context.SaveChanges();
 
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;
