@@ -19,11 +19,11 @@ using System.Windows.Forms;
 
 namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 {
-    public partial class f207_ViewPdf : DevExpress.XtraEditors.XtraForm
+    public partial class f207_ViewFile : DevExpress.XtraEditors.XtraForm
     {
         public bool? CanSaveFile { get; set; }
 
-        public f207_ViewPdf(string documentFile_, string IdKnowledgeBase_)
+        public f207_ViewFile(string documentFile_, string IdKnowledgeBase_)
         {
             InitializeComponent();
             documentFile = documentFile_;
@@ -37,7 +37,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         string idKnowledgeBase = "";
 
 
-        private void f207_ViewPdf_Load(object sender, EventArgs e)
+        private void f207_ViewFile_Load(object sender, EventArgs e)
         {
             using (var handle = SplashScreenManager.ShowOverlayForm(layoutControl1))
             {

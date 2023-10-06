@@ -747,7 +747,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
                 File.Copy(documentsFile, pathDocTemp, true);
 
-                f207_ViewPdf fDocumentInfo = new f207_ViewPdf(pathDocTemp, _idBaseDocument)
+                f207_ViewFile fDocumentInfo = new f207_ViewFile(pathDocTemp, _idBaseDocument)
                 {
                     Text = dataRow.FileName,
                     CanSaveFile = permissionAttachments.SaveFile

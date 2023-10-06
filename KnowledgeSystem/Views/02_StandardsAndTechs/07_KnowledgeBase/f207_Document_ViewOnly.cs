@@ -274,7 +274,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             Attachments dataRow = gvFiles.GetRow(focusRow) as Attachments;
             string documentsFile = Path.Combine(TPConfigs.PathKnowledgeFile, dataRow.EncryptionName);
 
-            f207_ViewPdf fDocumentInfo = new f207_ViewPdf(documentsFile, "");
+            f207_ViewFile fDocumentInfo = new f207_ViewFile(documentsFile, "");
             fDocumentInfo.Text = dataRow.FileName;
             fDocumentInfo.CanSaveFile = permissionAttachments.SaveFile;
             fDocumentInfo.ShowDialog();

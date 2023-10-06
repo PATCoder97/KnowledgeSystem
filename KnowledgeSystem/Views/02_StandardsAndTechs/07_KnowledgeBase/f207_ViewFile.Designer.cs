@@ -1,6 +1,6 @@
 ﻿namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 {
-    partial class f207_ViewPdf
+    partial class f207_ViewFile
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f207_ViewPdf));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f207_ViewFile));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.viewExcel = new DevExpress.XtraSpreadsheet.SpreadsheetControl();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
@@ -269,7 +269,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "f207_ViewPdf";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.f207_ViewPdf_Load);
+            this.Load += new System.EventHandler(this.f207_ViewFile_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
