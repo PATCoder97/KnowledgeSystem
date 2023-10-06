@@ -31,28 +31,35 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f207_ViewPdf));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.pdfViewerData = new DevExpress.XtraPdfViewer.PdfViewer();
+            this.viewExcel = new DevExpress.XtraSpreadsheet.SpreadsheetControl();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnSave = new DevExpress.XtraBars.BarButtonItem();
-            this.btnPrint = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.viewWord = new DevExpress.XtraRichEdit.RichEditControl();
+            this.viewPDF = new DevExpress.XtraPdfViewer.PdfViewer();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcPDF = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcWord = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcExcel = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcPDF)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcWord)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcExcel)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
             // 
             this.layoutControl1.AllowCustomization = false;
-            this.layoutControl1.Controls.Add(this.pdfViewerData);
+            this.layoutControl1.Controls.Add(this.viewExcel);
+            this.layoutControl1.Controls.Add(this.viewWord);
+            this.layoutControl1.Controls.Add(this.viewPDF);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
@@ -62,16 +69,16 @@
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
-            // pdfViewerData
+            // viewExcel
             // 
-            this.pdfViewerData.Location = new System.Drawing.Point(12, 12);
-            this.pdfViewerData.MenuManager = this.barManager1;
-            this.pdfViewerData.Name = "pdfViewerData";
-            this.pdfViewerData.NavigationPanePageVisibility = DevExpress.XtraPdfViewer.PdfNavigationPanePageVisibility.None;
-            this.pdfViewerData.Size = new System.Drawing.Size(871, 619);
-            this.pdfViewerData.TabIndex = 4;
-            this.pdfViewerData.PopupMenuShowing += new DevExpress.XtraPdfViewer.PdfPopupMenuShowingEventHandler(this.pdfViewerData_PopupMenuShowing);
-            this.pdfViewerData.KeyDown += new System.Windows.Forms.KeyEventHandler(this.pdfViewerData_KeyDown);
+            this.viewExcel.Location = new System.Drawing.Point(12, 438);
+            this.viewExcel.MenuManager = this.barManager1;
+            this.viewExcel.Name = "viewExcel";
+            this.viewExcel.ReadOnly = true;
+            this.viewExcel.Size = new System.Drawing.Size(871, 193);
+            this.viewExcel.TabIndex = 6;
+            this.viewExcel.Text = "spreadsheetControl1";
+            this.viewExcel.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Viewer_KeyDown);
             // 
             // barManager1
             // 
@@ -85,8 +92,7 @@
             this.barManager1.DockControls.Add(this.barDockControlRight);
             this.barManager1.Form = this;
             this.barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
-            this.btnSave,
-            this.btnPrint});
+            this.btnSave});
             this.barManager1.MainMenu = this.bar2;
             this.barManager1.MaxItemId = 3;
             // 
@@ -109,8 +115,7 @@
             this.bar2.DockRow = 0;
             this.bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnSave, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnPrint)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnSave, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawBorder = false;
             this.bar2.OptionsBar.DrawDragBorder = false;
@@ -127,16 +132,6 @@
             this.btnSave.Name = "btnSave";
             this.btnSave.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
             this.btnSave.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSave_ItemClick);
-            // 
-            // btnPrint
-            // 
-            this.btnPrint.Caption = "列印";
-            this.btnPrint.Id = 1;
-            this.btnPrint.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnPrint.ImageOptions.SvgImage")));
-            this.btnPrint.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
-            this.btnPrint.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnPrint_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -174,24 +169,66 @@
             this.barDockControlRight.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.barDockControlRight.Size = new System.Drawing.Size(0, 643);
             // 
+            // viewWord
+            // 
+            this.viewWord.Location = new System.Drawing.Point(12, 219);
+            this.viewWord.MenuManager = this.barManager1;
+            this.viewWord.Name = "viewWord";
+            this.viewWord.ReadOnly = true;
+            this.viewWord.Size = new System.Drawing.Size(871, 215);
+            this.viewWord.TabIndex = 5;
+            this.viewWord.Text = "richEditControl1";
+            this.viewWord.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Viewer_KeyDown);
+            // 
+            // viewPDF
+            // 
+            this.viewPDF.Location = new System.Drawing.Point(12, 12);
+            this.viewPDF.MenuManager = this.barManager1;
+            this.viewPDF.Name = "viewPDF";
+            this.viewPDF.NavigationPanePageVisibility = DevExpress.XtraPdfViewer.PdfNavigationPanePageVisibility.None;
+            this.viewPDF.Size = new System.Drawing.Size(871, 203);
+            this.viewPDF.TabIndex = 4;
+            this.viewPDF.PopupMenuShowing += new DevExpress.XtraPdfViewer.PdfPopupMenuShowingEventHandler(this.pdfViewerData_PopupMenuShowing);
+            this.viewPDF.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Viewer_KeyDown);
+            // 
             // Root
             // 
             this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             this.Root.GroupBordersVisible = false;
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem1});
+            this.lcPDF,
+            this.lcWord,
+            this.lcExcel});
             this.Root.Name = "Root";
             this.Root.Size = new System.Drawing.Size(895, 643);
             this.Root.TextVisible = false;
             // 
-            // layoutControlItem1
+            // lcPDF
             // 
-            this.layoutControlItem1.Control = this.pdfViewerData;
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(875, 623);
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem1.TextVisible = false;
+            this.lcPDF.Control = this.viewPDF;
+            this.lcPDF.Location = new System.Drawing.Point(0, 0);
+            this.lcPDF.Name = "lcPDF";
+            this.lcPDF.Size = new System.Drawing.Size(875, 207);
+            this.lcPDF.TextSize = new System.Drawing.Size(0, 0);
+            this.lcPDF.TextVisible = false;
+            // 
+            // lcWord
+            // 
+            this.lcWord.Control = this.viewWord;
+            this.lcWord.Location = new System.Drawing.Point(0, 207);
+            this.lcWord.Name = "lcWord";
+            this.lcWord.Size = new System.Drawing.Size(875, 219);
+            this.lcWord.TextSize = new System.Drawing.Size(0, 0);
+            this.lcWord.TextVisible = false;
+            // 
+            // lcExcel
+            // 
+            this.lcExcel.Control = this.viewExcel;
+            this.lcExcel.Location = new System.Drawing.Point(0, 426);
+            this.lcExcel.Name = "lcExcel";
+            this.lcExcel.Size = new System.Drawing.Size(875, 197);
+            this.lcExcel.TextSize = new System.Drawing.Size(0, 0);
+            this.lcExcel.TextVisible = false;
             // 
             // f207_ViewPdf
             // 
@@ -213,7 +250,9 @@
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcPDF)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcWord)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcExcel)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -223,15 +262,18 @@
 
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
-        private DevExpress.XtraPdfViewer.PdfViewer pdfViewerData;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraPdfViewer.PdfViewer viewPDF;
+        private DevExpress.XtraLayout.LayoutControlItem lcPDF;
         private DevExpress.XtraBars.BarManager barManager1;
         private DevExpress.XtraBars.Bar bar2;
         private DevExpress.XtraBars.BarButtonItem btnSave;
-        private DevExpress.XtraBars.BarButtonItem btnPrint;
         private DevExpress.XtraBars.BarDockControl barDockControlTop;
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
+        private DevExpress.XtraRichEdit.RichEditControl viewWord;
+        private DevExpress.XtraLayout.LayoutControlItem lcWord;
+        private DevExpress.XtraSpreadsheet.SpreadsheetControl viewExcel;
+        private DevExpress.XtraLayout.LayoutControlItem lcExcel;
     }
 }

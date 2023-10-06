@@ -2,6 +2,7 @@
 using DevExpress.Pdf;
 using DevExpress.Utils.CommonDialogs;
 using DevExpress.XtraEditors;
+using DevExpress.XtraSplashScreen;
 using KnowledgeSystem.Configs;
 using System;
 using System.Collections.Generic;
@@ -33,7 +34,34 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void f207_ViewPdf_Load(object sender, EventArgs e)
         {
-            pdfViewerData.DocumentFilePath = documentFile;
+            using (var handle = SplashScreenManager.ShowOverlayForm(layoutControl1))
+            {
+                lcPDF.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                lcWord.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                lcExcel.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                string fileExtension = Path.GetExtension(documentFile).ToLower();
+
+                switch (fileExtension)
+                {
+                    case ".pdf":
+                        viewPDF.DocumentFilePath = documentFile;
+                        lcPDF.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                        break;
+                    case ".xlsx":
+                    case ".xls":
+                        viewExcel.Document.LoadDocument(documentFile);
+                        lcExcel.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                        break;
+                    case ".docx":
+                    case ".doc":
+                        viewWord.Document.LoadDocument(documentFile);
+                        lcWord.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                        break;
+                    default:
+
+                        break;
+                }
+            }
 
             bar2.Visible = !string.IsNullOrEmpty(idKnowledgeBase);
         }
@@ -43,7 +71,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             e.ItemLinks.Clear();
         }
 
-        private void pdfViewerData_KeyDown(object sender, KeyEventArgs e)
+        private void Viewer_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Control && (e.KeyCode == Keys.P || e.KeyCode == Keys.S))
             {
@@ -60,14 +88,14 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 return;
             }
 
-            var dialogResult = pdfViewerData.ShowPrintPageSetupDialog();
+            var dialogResult = viewPDF.ShowPrintPageSetupDialog();
             if (dialogResult == null) return;
 
-            pdfViewerData.Print(dialogResult);
+            viewPDF.Print(dialogResult);
 
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                var IsProcessing = db.dt207_DocProgress.Any(r => r.IdKnowledgeBase == idKnowledgeBase && !(r.IsComplete ));
+                var IsProcessing = db.dt207_DocProgress.Any(r => r.IdKnowledgeBase == idKnowledgeBase && !(r.IsComplete));
                 if (!IsProcessing)
                 {
                     dt207_HistoryGetFile historyGetFile = new dt207_HistoryGetFile()
@@ -109,7 +137,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
                 using (var db = new DBDocumentManagementSystemEntities())
                 {
-                    var IsProcessing = db.dt207_DocProgress.Any(r => r.IdKnowledgeBase == idKnowledgeBase && !( r.IsComplete));
+                    var IsProcessing = db.dt207_DocProgress.Any(r => r.IdKnowledgeBase == idKnowledgeBase && !(r.IsComplete));
                     if (!IsProcessing)
                     {
                         dt207_HistoryGetFile historyGetFile = new dt207_HistoryGetFile()

@@ -14,6 +14,7 @@ namespace KnowledgeSystem.Configs
     {
         public static string StartupPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         public static string ImagesPath = Path.Combine(StartupPath, "Images");
+        public static string TempFolderData = Path.Combine(Path.GetTempPath(), "TPTempData");
 
         // Static Value SQL
         public static string SoftNameEN { get; set; }

@@ -30,6 +30,22 @@ namespace BusinessLayer
             }
         }
 
+        public dt207_Attachment GetItemByHashName(string _hashName)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt207_Attachment.FirstOrDefault(r => r.EncryptionName == _hashName);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public List<dt207_Attachment> GetListByIdBase(string _idBase)
         {
             try

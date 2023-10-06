@@ -34,7 +34,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             InitializeComponent();
             InitializeControl();
-            idDocument = idDocument_;
+            _idBaseDocument = idDocument_;
         }
 
         #region parameters
@@ -59,7 +59,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         BindingSource _BSAttachments = new BindingSource();
         BindingSource _BSSecuritys = new BindingSource();
 
-        string idDocument = string.Empty;
+        string _idBaseDocument = string.Empty;
         string _userId = string.Empty;
 
         List<dt207_Type> lsKnowledgeTypes = new List<dt207_Type>();
@@ -75,7 +75,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         int _idDocProcessing = -1;
         int _stepEnd = -1;
-        //string events = string.Empty;
         Event207DocInfo _eventApproved = Event207DocInfo.Update;
 
         private class Attachments
@@ -241,7 +240,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 .Select(s => s[random.Next(s.Length)])
                 .ToArray());
 
-            return $"{userLogin.Id}-{userLogin.IdDepartment.Substring(0, 3)}-{DateTime.Now:MMddhhmmss}-{randomString}.pdf";
+            return $"{userLogin.Id}-{userLogin.IdDepartment.Substring(0, 3)}-{DateTime.Now:MMddhhmmss}-{randomString}";
         }
 
         public string RemoveDiacriticalMarks(string s)
@@ -312,7 +311,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     lcgHistoryEdit.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
 
                     // Thông tin cơ bản
-                    var base207Info = _dt207_BaseBUS.GetItemById(idDocument);
+                    var base207Info = _dt207_BaseBUS.GetItemById(_idBaseDocument);
                     txbId.Text = base207Info.Id;
                     cbbType.EditValue = base207Info.IdTypes;
                     cbbUserUpload.EditValue = base207Info.UserUpload;
@@ -323,7 +322,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     txbKeyword.Text = base207Info.Keyword;
 
                     // Thông tin phụ kiện
-                    lsAttachments.AddRange(_dt207_AttachmentBUS.GetListByIdBase(idDocument)
+                    lsAttachments.AddRange(_dt207_AttachmentBUS.GetListByIdBase(_idBaseDocument)
                         .Select(item => new Attachments
                         {
                             FileName = item.FileName,
@@ -335,7 +334,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
                     // Thông tin quyền hạn
                     helper.SaveViewInfo();
-                    var lsBaseSecuritys = _dt207_SecurityBUS.GetListByIdBase(idDocument);
+                    var lsBaseSecuritys = _dt207_SecurityBUS.GetListByIdBase(_idBaseDocument);
                     lsSecurityInfos = lsBaseSecuritys.Select(data => new Securityinfo
                     {
                         IdKnowledgeBase = data.IdKnowledgeBase,
@@ -355,7 +354,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     helper.LoadViewInfo();
 
                     // Thông tin lịch sửa cập nhật
-                    var lsDocProcess = _dt207_DocProgressBUS.GetListByIdBase(idDocument).Where(r => r.Id != _idDocProcessing);
+                    var lsDocProcess = _dt207_DocProgressBUS.GetListByIdBase(_idBaseDocument).Where(r => r.Id != _idDocProcessing);
                     //db.dt207_DocProgress.Where(r => r.IdKnowledgeBase == idDocument && r.Descriptions == TPConfigs.EventEdit).ToList();
                     var lsDocProcessInfos =
                         (from data in _dt207_DocProgressInfoBUS.GetList()
@@ -387,7 +386,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     lcgProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
                     controlgroupDocument.SelectedTabPage = lcgProgress;
 
-                    var _docProcessing = _dt207_DocProgressBUS.GetItemByIdBaseNotComplete(idDocument);
+                    var _docProcessing = _dt207_DocProgressBUS.GetItemByIdBaseNotComplete(_idBaseDocument);
                     if (_docProcessing == default)
                     {
                         XtraMessageBox.Show("文件已由其他主管處理完成", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -511,7 +510,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             lsSecurityInfos.Add(new Securityinfo()
             {
-                IdKnowledgeBase = idDocument,
+                IdKnowledgeBase = _idBaseDocument,
                 ReadInfo = true,
                 UpdateInfo = false,
                 DeleteInfo = false,
@@ -545,7 +544,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 return;
             }
 
-            var dialogResult = XtraMessageBox.Show($"您确定要删除该文件：{idDocument}", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            var dialogResult = XtraMessageBox.Show($"您确定要删除该文件：{_idBaseDocument}", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (dialogResult == DialogResult.No)
             {
                 return;
@@ -564,7 +563,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             {
                 dt207_DocProgress docProgress = new dt207_DocProgress()
                 {
-                    IdKnowledgeBase = idDocument,
+                    IdKnowledgeBase = _idBaseDocument,
                     IsComplete = false,
                     IsSuccess = false,
                     IdProgress = progressSelect.Id,
@@ -590,23 +589,23 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 switch (_event207)
                 {
                     case Event207DocInfo.Create:
-                        idDocument = _dt207_BaseBUS.GetNewBaseId(TPConfigs.LoginUser.IdDepartment);
+                        _idBaseDocument = _dt207_BaseBUS.GetNewBaseId(TPConfigs.LoginUser.IdDepartment);
                         break;
                     case Event207DocInfo.Update:
-                        _IsProcessing = _dt207_DocProgressBUS.CheckItemProcessing(idDocument);
+                        _IsProcessing = _dt207_DocProgressBUS.CheckItemProcessing(_idBaseDocument);
                         if (_IsProcessing)
                         {
                             break;
                         }
 
                         // Lưu lại các thông tin để sau này rollback nếu huỷ
-                        dt207_Base base_BAK = _dt207_BaseBUS.GetItemById(idDocument);
+                        dt207_Base base_BAK = _dt207_BaseBUS.GetItemById(_idBaseDocument);
                         _dt207_Base_BAKBUS.Create(base_BAK);
 
-                        List<dt207_Attachment> lsAttachments_BAK = _dt207_AttachmentBUS.GetListByIdBase(idDocument);
+                        List<dt207_Attachment> lsAttachments_BAK = _dt207_AttachmentBUS.GetListByIdBase(_idBaseDocument);
                         _dt207_Attachment_BAKBUS.CreateRange(lsAttachments_BAK);
 
-                        List<dt207_Security> lsSecurities_BAK = _dt207_SecurityBUS.GetListByIdBase(idDocument);
+                        List<dt207_Security> lsSecurities_BAK = _dt207_SecurityBUS.GetListByIdBase(_idBaseDocument);
                         _dt207_Security_BAKBUS.CreateRange(lsSecurities_BAK);
 
                         break;
@@ -620,7 +619,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
                 dt207_Base knowledge = new dt207_Base()
                 {
-                    Id = idDocument,
+                    Id = _idBaseDocument,
                     DisplayName = string.Join("\n", new[] { _nameTW, _nameVN, _nameEN }.Where(s => !string.IsNullOrWhiteSpace(s))),
                     UserProcess = cbbUserProcess.EditValue.ToString(),
                     IdTypes = (int)cbbType.EditValue,
@@ -632,10 +631,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 _dt207_BaseBUS.AddOrUpdate(knowledge);
 
                 // Xoá tất cả các phụ kiện trước đó để thêm lại (Không xoá file cứng, định kỳ làm sạch file cứng nếu không dùng đến)
-                _dt207_AttachmentBUS.RemoveRangeByIdBase(idDocument);
+                _dt207_AttachmentBUS.RemoveRangeByIdBase(_idBaseDocument);
                 var lsFilesAdd = lsAttachments.Select(r => new dt207_Attachment
                 {
-                    IdKnowledgeBase = idDocument,
+                    IdKnowledgeBase = _idBaseDocument,
                     EncryptionName = r.EncryptionName,
                     FileName = r.FileName
                 }).ToList();
@@ -654,11 +653,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 }
 
                 // Xoá tất cả các dữ liệu quyền hạn để thêm lại dựa vào dữ liệu trên form
-                _dt207_SecurityBUS.RemoveRangeByIdBase(idDocument);
+                _dt207_SecurityBUS.RemoveRangeByIdBase(_idBaseDocument);
                 var lsSecuritiesAdd = lsSecurityInfos.Select(r => new dt207_Security
                 {
                     Id = r.Id,
-                    IdKnowledgeBase = idDocument,
+                    IdKnowledgeBase = _idBaseDocument,
                     IdGroup = r.IdGroupOrUser.StartsWith("VNW") ? null : (short?)Convert.ToInt16(r.IdGroupOrUser),
                     IdUser = r.IdGroupOrUser.StartsWith("VNW") ? r.IdGroupOrUser : null,
                     ReadInfo = r.ReadInfo,
@@ -675,7 +674,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 {
                     dt207_DocProgress docProgress = new dt207_DocProgress()
                     {
-                        IdKnowledgeBase = idDocument,
+                        IdKnowledgeBase = _idBaseDocument,
                         IsComplete = false,
                         IsSuccess = false,
                         IdProgress = progressSelect.Id,
@@ -699,7 +698,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             }
 
             // Show a message box with the appropriate message and close the form
-            XtraMessageBox.Show($"{EnumHelper.GetDescription(_event207)}!\r\n文件編號:{idDocument}", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            XtraMessageBox.Show($"{EnumHelper.GetDescription(_event207)}!\r\n文件編號:{_idBaseDocument}", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
             Close();
         }
 
@@ -721,13 +720,13 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             // Lưu lại lịch sử xem file
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                var IsProcessing = db.dt207_DocProgress.Any(r => r.IdKnowledgeBase == idDocument && !(r.IsComplete));
+                var IsProcessing = db.dt207_DocProgress.Any(r => r.IdKnowledgeBase == _idBaseDocument && !(r.IsComplete));
 
-                if (!string.IsNullOrEmpty(idDocument) && !IsProcessing)
+                if (!string.IsNullOrEmpty(_idBaseDocument) && !IsProcessing)
                 {
                     dt207_HistoryGetFile historyGetFile = new dt207_HistoryGetFile()
                     {
-                        IdKnowledgeBase = idDocument,
+                        IdKnowledgeBase = _idBaseDocument,
                         idTypeHisGetFile = 1,
                         KnowledgeAttachmentName = dataRow.FileName,
                         IdUser = TPConfigs.LoginId,
@@ -739,12 +738,22 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 }
             }
 
-            f207_ViewPdf fDocumentInfo = new f207_ViewPdf(documentsFile, idDocument)
+            string pathDocTemp = Path.Combine(TPConfigs.TempFolderData, $"{DateTime.Now:MMddhhmmss} {dataRow.FileName}");
+            using (var handle = SplashScreenManager.ShowOverlayForm(gcFiles))
             {
-                Text = dataRow.FileName,
-                CanSaveFile = permissionAttachments.SaveFile
-            };
-            fDocumentInfo.ShowDialog();
+                // Copy file về thư mục tạm để xem
+                if (!Directory.Exists(TPConfigs.TempFolderData))
+                    Directory.CreateDirectory(TPConfigs.TempFolderData);
+
+                File.Copy(documentsFile, pathDocTemp, true);
+
+                f207_ViewPdf fDocumentInfo = new f207_ViewPdf(pathDocTemp, _idBaseDocument)
+                {
+                    Text = dataRow.FileName,
+                    CanSaveFile = permissionAttachments.SaveFile
+                };
+                fDocumentInfo.ShowDialog();
+            }
         }
 
         private void btnEdit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -776,7 +785,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         private void btnApproved_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             List<string> lsChangeDetails = new List<string>();
-            var lsBaseProgressById = _dt207_DocProgressBUS.GetListByIdBase(idDocument);
+            var lsBaseProgressById = _dt207_DocProgressBUS.GetListByIdBase(_idBaseDocument);
             int _idBaseProgress = lsBaseProgressById.OrderByDescending(r => r.Id).FirstOrDefault().Id;
             string _eventProcess = lsBaseProgressById.OrderByDescending(r => r.Id).FirstOrDefault().Descriptions;
             _eventApproved = EnumHelper.GetEnumByDescription<Event207DocInfo>(_eventProcess);
@@ -788,18 +797,18 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             {
                 case Event207DocInfo.Update:
                     // Kiểm tra thông tin cơ bản có đổi không
-                    var docBaseNew = _dt207_BaseBUS.GetItemById(idDocument);
-                    var docBaseOld = _dt207_Base_BAKBUS.GetItemById(idDocument);
+                    var docBaseNew = _dt207_BaseBUS.GetItemById(_idBaseDocument);
+                    var docBaseOld = _dt207_Base_BAKBUS.GetItemById(_idBaseDocument);
 
                     if (docBaseNew.DisplayName != docBaseOld.DisplayName) lsChangeDetails.Add("名稱");
                     if (docBaseNew.IdTypes != docBaseOld.IdTypes) lsChangeDetails.Add("類別");
                     if (docBaseNew.Keyword != docBaseOld.Keyword) lsChangeDetails.Add("關鍵字");
 
                     // Kiểm tra phụ kiện
-                    var lsAttachmentNew = _dt207_AttachmentBUS.GetListByIdBase(idDocument)
+                    var lsAttachmentNew = _dt207_AttachmentBUS.GetListByIdBase(_idBaseDocument)
                         .Select(r => new { r.FileName, r.EncryptionName })
                         .ToList();
-                    var lsAttachmentOld = _dt207_Attachment_BAKBUS.GetListByIdBase(idDocument)
+                    var lsAttachmentOld = _dt207_Attachment_BAKBUS.GetListByIdBase(_idBaseDocument)
                         .Select(r => new { r.FileName, r.EncryptionName })
                         .ToList();
 
@@ -809,7 +818,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                         lsChangeDetails.Add("附件");
 
                     // Kiểm tra quyền hạn
-                    var lsSecurityNew = _dt207_SecurityBUS.GetListByIdBase(idDocument)
+                    var lsSecurityNew = _dt207_SecurityBUS.GetListByIdBase(_idBaseDocument)
                         .Select(r => new
                         {
                             r.IdGroup,
@@ -822,7 +831,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                             r.SaveFile
                         })
                         .ToList();
-                    var lsSecurityOld = _dt207_Security_BAKBUS.GetListByIdBase(idDocument)
+                    var lsSecurityOld = _dt207_Security_BAKBUS.GetListByIdBase(_idBaseDocument)
                         .Select(r => new
                         {
                             r.IdGroup,
@@ -842,7 +851,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                         lsChangeDetails.Add("權限");
                     break;
                 case Event207DocInfo.Delete:
-                    _dt207_BaseBUS.Delete(idDocument);
+                    _dt207_BaseBUS.Delete(_idBaseDocument);
                     break;
             }
 
@@ -858,9 +867,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
                 descriptions = "確認完畢";
                 // Xoá dữ liệu cũ
-                _dt207_Base_BAKBUS.RemoveRangeById(idDocument);
-                _dt207_Attachment_BAKBUS.RemoveRangeByIdBase(idDocument);
-                _dt207_Security_BAKBUS.RemoveRangeByIdBase(idDocument);
+                _dt207_Base_BAKBUS.RemoveRangeById(_idBaseDocument);
+                _dt207_Attachment_BAKBUS.RemoveRangeByIdBase(_idBaseDocument);
+                _dt207_Security_BAKBUS.RemoveRangeByIdBase(_idBaseDocument);
             }
 
             dt207_DocProgressInfo progressInfo = new dt207_DocProgressInfo()
@@ -946,24 +955,24 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             switch (_eventApproved)
             {
                 case Event207DocInfo.Create:
-                    var docBaseDelete = _dt207_BaseBUS.GetItemById(idDocument);
+                    var docBaseDelete = _dt207_BaseBUS.GetItemById(_idBaseDocument);
                     docBaseDelete.IsDelete = true;
                     _dt207_BaseBUS.AddOrUpdate(docBaseDelete);
                     break;
                 case Event207DocInfo.Update:
-                    dt207_Base baseDoc = _dt207_Base_BAKBUS.GetItemById(idDocument);
+                    dt207_Base baseDoc = _dt207_Base_BAKBUS.GetItemById(_idBaseDocument);
                     _dt207_BaseBUS.AddOrUpdate(baseDoc);
 
-                    List<dt207_Attachment> lsAttachments = _dt207_Attachment_BAKBUS.GetListByIdBase(idDocument);
+                    List<dt207_Attachment> lsAttachments = _dt207_Attachment_BAKBUS.GetListByIdBase(_idBaseDocument);
                     _dt207_AttachmentBUS.AddRange(lsAttachments);
 
-                    List<dt207_Security> lsSecurities = _dt207_Security_BAKBUS.GetListByIdBase(idDocument);
+                    List<dt207_Security> lsSecurities = _dt207_Security_BAKBUS.GetListByIdBase(_idBaseDocument);
                     _dt207_SecurityBUS.AddRange(lsSecurities);
 
                     // Xoá dữ liệu cũ
-                    _dt207_Base_BAKBUS.RemoveRangeById(idDocument);
-                    _dt207_Attachment_BAKBUS.RemoveRangeByIdBase(idDocument);
-                    _dt207_Security_BAKBUS.RemoveRangeByIdBase(idDocument);
+                    _dt207_Base_BAKBUS.RemoveRangeById(_idBaseDocument);
+                    _dt207_Attachment_BAKBUS.RemoveRangeByIdBase(_idBaseDocument);
+                    _dt207_Security_BAKBUS.RemoveRangeByIdBase(_idBaseDocument);
                     break;
             }
 
