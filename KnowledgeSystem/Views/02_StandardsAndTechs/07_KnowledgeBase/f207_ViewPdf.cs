@@ -1,4 +1,5 @@
-﻿using DataAccessLayer;
+﻿using BusinessLayer;
+using DataAccessLayer;
 using DevExpress.Pdf;
 using DevExpress.Utils.CommonDialogs;
 using DevExpress.XtraEditors;
@@ -29,8 +30,12 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             idKnowledgeBase = IdKnowledgeBase_;
         }
 
+        dt207_DocProgressBUS _dt207_DocProgress = new dt207_DocProgressBUS();
+        dt207_HistoryGetFileBUS _dt207_HistoryGetFileBUS = new dt207_HistoryGetFileBUS();
+
         string documentFile = "";
         string idKnowledgeBase = "";
+
 
         private void f207_ViewPdf_Load(object sender, EventArgs e)
         {
@@ -82,41 +87,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             }
         }
 
-        private void btnPrint_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            if (CanSaveFile != true)
-            {
-                XtraMessageBox.Show(TPConfigs.NoPermission, TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                return;
-            }
-
-            var dialogResult = viewPDF.ShowPrintPageSetupDialog();
-            if (dialogResult == null) return;
-
-            viewPDF.Print(dialogResult);
-
-            using (var db = new DBDocumentManagementSystemEntities())
-            {
-                var IsProcessing = db.dt207_DocProgress.Any(r => r.IdKnowledgeBase == idKnowledgeBase && !(r.IsComplete));
-                if (!IsProcessing)
-                {
-                    dt207_HistoryGetFile historyGetFile = new dt207_HistoryGetFile()
-                    {
-                        IdKnowledgeBase = idKnowledgeBase,
-                        idTypeHisGetFile = 3,
-                        KnowledgeAttachmentName = Text,
-                        IdUser = TPConfigs.LoginId,
-                        TimeGet = DateTime.Now
-                    };
-
-                    db.dt207_HistoryGetFile.Add(historyGetFile);
-                    db.SaveChanges();
-                }
-            }
-
-            XtraMessageBox.Show("列印文件成功！", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
         private void btnSave_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             if (CanSaveFile != true)
@@ -137,23 +107,18 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             {
                 File.Copy(documentFile, saveFileDialog1.FileName, true);
 
-                using (var db = new DBDocumentManagementSystemEntities())
+                var IsProcessing = _dt207_DocProgress.CheckItemProcessing(idKnowledgeBase);
+                if (!IsProcessing)
                 {
-                    var IsProcessing = db.dt207_DocProgress.Any(r => r.IdKnowledgeBase == idKnowledgeBase && !(r.IsComplete));
-                    if (!IsProcessing)
+                    dt207_HistoryGetFile historyGetFile = new dt207_HistoryGetFile()
                     {
-                        dt207_HistoryGetFile historyGetFile = new dt207_HistoryGetFile()
-                        {
-                            IdKnowledgeBase = idKnowledgeBase,
-                            idTypeHisGetFile = 2,
-                            KnowledgeAttachmentName = Text,
-                            IdUser = TPConfigs.LoginId,
-                            TimeGet = DateTime.Now
-                        };
-
-                        db.dt207_HistoryGetFile.Add(historyGetFile);
-                        db.SaveChanges();
-                    }
+                        IdKnowledgeBase = idKnowledgeBase,
+                        idTypeHisGetFile = 2,
+                        KnowledgeAttachmentName = Text,
+                        IdUser = TPConfigs.LoginId,
+                        TimeGet = DateTime.Now
+                    };
+                    _dt207_HistoryGetFileBUS.Create(historyGetFile);
                 }
 
                 XtraMessageBox.Show("下載文件成功！", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
