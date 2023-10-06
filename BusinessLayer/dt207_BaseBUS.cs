@@ -68,6 +68,42 @@ namespace BusinessLayer
             }
         }
 
+        public string GetNewBaseId(string _idDept, int _indexId = 1, string _startIdStr = "")
+        {
+            if (string.IsNullOrEmpty(_startIdStr))
+            {
+                _startIdStr = $"{_idDept.Substring(0, 3)}-{DateTime.Now.ToString("yyMMddHHmm")}-";
+            }
+
+            string tempId = $"{_startIdStr}{_indexId:d2}";
+            using (var db = new DBDocumentManagementSystemEntities())
+            {
+                bool isExistsId = db.dt207_Base.Any(kb => kb.Id == tempId);
+                if (!isExistsId)
+                {
+                    return tempId;
+                }
+            }
+
+            return GetNewBaseId(_idDept, _indexId + 1, _startIdStr);
+        }
+
+        public dt207_Base GetItemById(string _id)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt207_Base.Where(r => !r.IsDelete && r.Id == _id).FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public bool Create(dt207_Base entity)
         {
             try
@@ -86,7 +122,7 @@ namespace BusinessLayer
             }
         }
 
-        public bool Update(dt207_Base entity)
+        public bool AddOrUpdate(dt207_Base entity)
         {
             try
             {
@@ -111,7 +147,8 @@ namespace BusinessLayer
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
                     var entity = _context.dt207_Base.FirstOrDefault(r => r.Id == entityId);
-                    _context.dt207_Base.Remove(entity);
+                    entity.IsDelete = true;
+                    _context.SaveChanges();
 
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;

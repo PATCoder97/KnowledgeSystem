@@ -30,6 +30,22 @@ namespace BusinessLayer
             }
         }
 
+        public List<dt207_DocProgressInfo> GetListByIdDocProcess(int _idDocProcess)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt207_DocProgressInfo.Where(r => r.IdDocProgress == _idDocProcess).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public bool Create(dt207_DocProgressInfo docProgressInfo)
         {
             try

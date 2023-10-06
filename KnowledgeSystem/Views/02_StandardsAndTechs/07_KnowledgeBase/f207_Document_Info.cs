@@ -1,36 +1,20 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
-using DevExpress.ClipboardSource.SpreadsheetML;
-using DevExpress.DocumentView;
-using DevExpress.Security;
-using DevExpress.Utils.About;
-using DevExpress.Utils.Drawing.Helpers;
-using DevExpress.Utils.Extensions;
-using DevExpress.Utils.Win.Hook;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Columns;
-using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraPrinting.Native.WebClientUIControl;
 using DevExpress.XtraSplashScreen;
 using KnowledgeSystem.Configs;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Data.Entity.Migrations;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Security.AccessControl;
-using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
 using dm_Group = DataAccessLayer.dm_Group;
 
 namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
@@ -38,31 +22,45 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
     public partial class f207_Document_Info : DevExpress.XtraEditors.XtraForm
     {
         RefreshHelper helper;
+        public Event207DocInfo _event207 = Event207DocInfo.Create;
 
         public f207_Document_Info()
         {
             InitializeComponent();
-            LockControl(false);
+            InitializeControl();
         }
 
         public f207_Document_Info(string idDocument_)
         {
             InitializeComponent();
+            InitializeControl();
             idDocument = idDocument_;
-            LockControl(true);
         }
 
         #region parameters
 
+        // Khai báo các BUS
         dm_UserBUS _dm_UserBUS = new dm_UserBUS();
         dm_GroupBUS _dm_GroupBUS = new dm_GroupBUS();
         dm_GroupUserBUS _dm_GroupUserBUS = new dm_GroupUserBUS();
+        dm_ProgressBUS _dm_ProgressBUS = new dm_ProgressBUS();
+        dm_StepProgressBUS _dm_StepProgressBUS = new dm_StepProgressBUS();
+        dt207_TypeBUS _dt207_TypeBUS = new dt207_TypeBUS();
+        dt207_BaseBUS _dt207_BaseBUS = new dt207_BaseBUS();
+        dt207_Base_BAKBUS _dt207_Base_BAKBUS = new dt207_Base_BAKBUS();
+        dt207_AttachmentBUS _dt207_AttachmentBUS = new dt207_AttachmentBUS();
+        dt207_Attachment_BAKBUS _dt207_Attachment_BAKBUS = new dt207_Attachment_BAKBUS();
+        dt207_SecurityBUS _dt207_SecurityBUS = new dt207_SecurityBUS();
+        dt207_Security_BAKBUS _dt207_Security_BAKBUS = new dt207_Security_BAKBUS();
+        dt207_DocProgressBUS _dt207_DocProgressBUS = new dt207_DocProgressBUS();
+        dt207_DocProgressInfoBUS _dt207_DocProgressInfoBUS = new dt207_DocProgressInfoBUS();
 
-        BindingSource sourceAttachments = new BindingSource();
-        BindingSource sourceSecuritys = new BindingSource();
+        // Khai báo các source
+        BindingSource _BSAttachments = new BindingSource();
+        BindingSource _BSSecuritys = new BindingSource();
 
         string idDocument = string.Empty;
-        string userId = string.Empty;
+        string _userId = string.Empty;
 
         List<dt207_Type> lsKnowledgeTypes = new List<dt207_Type>();
         List<dm_User> lsUsers = new List<dm_User>();
@@ -75,9 +73,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         Securityinfo permissionAttachments = new Securityinfo();
         dm_Progress progressSelect = new dm_Progress();
 
-        int idDocProgress = -1;
-        int stepEnd = -1;
-        string events = string.Empty;
+        int _idDocProcessing = -1;
+        int _stepEnd = -1;
+        //string events = string.Empty;
+        Event207DocInfo _eventApproved = Event207DocInfo.Update;
 
         private class Attachments
         {
@@ -97,12 +96,143 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         #region methods
 
-        private string GenerateEncryptionName()
+        private void InitializeControl()
         {
-            var userLogin = lsUsers.FirstOrDefault(u => u.Id == userId);
+            // Cài mặc định các thông số
+            helper = new RefreshHelper(bgvSecurity, "Id");
+            lcgProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            lcgHistoryEdit.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+
+            btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+            btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+            btnDel.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+            btnChangeProgress.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+            btnApproved.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            btnDisapprove.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            btnCancel.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+
+            cbbUserProcess.Enabled = false;
+            txbId.Enabled = false;
+
+            controlgroupDocument.SelectedTabPage = lcgInfo;
+
+            // Gắn các thông số cho các combobox
+            rgvGruopOrUser.ValueMember = "IdGroupOrUser";
+            rgvGruopOrUser.DisplayMember = "DisplayName";
+            rgvGruopOrUser.PopupView.Columns.AddRange(new[]
+            {
+                    new GridColumn { FieldName = "IdDept", VisibleIndex = 0, Caption = "部門" },
+                    new GridColumn { FieldName = "IdGroupOrUser", VisibleIndex = 1, Caption = "代號" },
+                    new GridColumn { FieldName = "DisplayName", VisibleIndex = 2, Caption = "名稱" }
+            });
+
+            cbbType.Properties.ValueMember = "Id";
+            cbbType.Properties.DisplayMember = "DisplayName";
+
+            cbbUserUpload.Properties.ValueMember = "Id";
+            cbbUserUpload.Properties.DisplayMember = "DisplayName";
+
+            cbbUserProcess.Properties.ValueMember = "Id";
+            cbbUserProcess.Properties.DisplayMember = "DisplayName";
+
+            // Cài các gridview readonly
+            gvEditHistory.ReadOnlyGridView();
+            gvFiles.ReadOnlyGridView();
+            gvHistoryProcess.ReadOnlyGridView();
+
+            // Load các dữ liệu LIST ban đầu
+            lsKnowledgeTypes = _dt207_TypeBUS.GetList();
+            lsUsers = _dm_UserBUS.GetList();
+            lsGroups = _dm_GroupBUS.GetList();
+            lsGroupUser = _dm_GroupUserBUS.GetList();
+            progressSelect = _dm_ProgressBUS.GetList().FirstOrDefault();
+
+            // Create lists of Securityinfo objects from lsUsers and lsGroups
+            var lsIdUsers = lsUsers.Select(r => new Securityinfo { IdDept = r.IdDepartment, IdGroupOrUser = r.Id, DisplayName = r.DisplayName }).ToList();
+            var lsIdGroup = lsGroups.Select(r => new Securityinfo { IdGroupOrUser = r.Id.ToString(), DisplayName = r.DisplayName }).ToList();
+            lsIdGroupOrUser = lsIdGroup.Concat(lsIdUsers).ToList();
+
+            // Assign data source and columns to rgvGruopOrUser
+            rgvGruopOrUser.DataSource = lsIdGroupOrUser;
+            cbbType.Properties.DataSource = lsKnowledgeTypes;
+            cbbUserUpload.Properties.DataSource = lsUsers;
+            cbbUserProcess.Properties.DataSource = lsUsers;
+        }
+
+        private void LockControl()
+        {
+            switch (_event207)
+            {
+                case Event207DocInfo.Create:
+                    EnableControls(true);
+                    ShowControls(true);
+                    btnCancel.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                    break;
+                case Event207DocInfo.View:
+                    Text = "群組信息";
+                    EnableControls(false);
+                    ShowControls(false);
+                    break;
+                case Event207DocInfo.Update:
+                    goto case Event207DocInfo.Create;
+                case Event207DocInfo.Delete:
+                    break;
+                case Event207DocInfo.Approval:
+                    Text = "群組信息";
+                    EnableControls(false);
+                    ShowControls(false);
+                    HideOptions();
+                    break;
+                default:
+                    Text = "群組信息";
+                    EnableControls(false);
+                    ShowControls(false);
+                    HideOptions();
+                    btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                    break;
+            }
+        }
+
+        private void EnableControls(bool enabled)
+        {
+            cbbType.Enabled = enabled;
+            txbNameTW.Enabled = enabled;
+            txbNameVN.Enabled = enabled;
+            txbNameEN.Enabled = enabled;
+            cbbUserUpload.Enabled = enabled;
+            txbKeyword.Enabled = enabled;
+            btnAddFile.Enabled = enabled;
+            btnAddPermission.Enabled = enabled;
+            gvFiles.OptionsBehavior.ReadOnly = !enabled;
+            bgvSecurity.OptionsBehavior.ReadOnly = !enabled;
+            gColDelFile.Visible = enabled;
+            gColDelPermission.Visible = enabled;
+        }
+
+        private void ShowControls(bool visible)
+        {
+            btnEdit.Visibility = visible ? DevExpress.XtraBars.BarItemVisibility.Never : DevExpress.XtraBars.BarItemVisibility.Always;
+            btnDel.Visibility = visible ? DevExpress.XtraBars.BarItemVisibility.Never : DevExpress.XtraBars.BarItemVisibility.Always;
+            btnConfirm.Visibility = visible ? DevExpress.XtraBars.BarItemVisibility.Always : DevExpress.XtraBars.BarItemVisibility.Never;
+            btnChangeProgress.Visibility = visible ? DevExpress.XtraBars.BarItemVisibility.Always : DevExpress.XtraBars.BarItemVisibility.Never;
+            lcProgress.Visibility = visible ? DevExpress.XtraLayout.Utils.LayoutVisibility.Always : DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+        }
+
+        private void HideOptions()
+        {
+            btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            btnDel.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            btnChangeProgress.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            lcProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+        }
+
+        private string GenerateHashFileName()
+        {
+            var userLogin = lsUsers.FirstOrDefault(u => u.Id == _userId);
             if (userLogin == null)
             {
-                throw new Exception($"User with Id {userId} not found.");
+                throw new Exception($"User with Id {_userId} not found.");
             }
 
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -114,75 +244,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             return $"{userLogin.Id}-{userLogin.IdDepartment.Substring(0, 3)}-{DateTime.Now:MMddhhmmss}-{randomString}.pdf";
         }
 
-        private string GenerateIdDocument(int indexId = 1, string startIdStr = "")
-        {
-            var userLogin = lsUsers.FirstOrDefault(u => u.Id == userId);
-            if (userLogin == null)
-            {
-                throw new Exception($"User with Id {userId} not found.");
-            }
-
-            if (string.IsNullOrEmpty(startIdStr))
-            {
-                startIdStr = $"{userLogin.IdDepartment.Substring(0, 3)}-{DateTime.Now.ToString("yyMMddHHmm")}-";
-            }
-
-            string tempId = $"{startIdStr}{indexId:d2}";
-            using (var db = new DBDocumentManagementSystemEntities())
-            {
-                bool isExistsId = db.dt207_Base.Any(kb => kb.Id == tempId);
-                if (!isExistsId)
-                {
-                    return tempId;
-                }
-            }
-
-            return GenerateIdDocument(indexId + 1, startIdStr);
-        }
-
-        public static string convertToUnSign3(string s)
+        public string RemoveDiacriticalMarks(string s)
         {
             Regex regex = new Regex("\\p{IsCombiningDiacriticalMarks}+");
             string temp = s.Normalize(NormalizationForm.FormD);
             return regex.Replace(temp, String.Empty).Replace('\u0111', 'd').Replace('\u0110', 'D');
-        }
-
-        private void LockControl(bool isFormView = true)
-        {
-            bool readOnly = isFormView;
-            bool enabled = !isFormView;
-
-            cbbType.ReadOnly = readOnly;
-            txbNameTW.ReadOnly = readOnly;
-            txbNameVN.ReadOnly = readOnly;
-            cbbUserProcess.ReadOnly = true;
-            txbKeyword.ReadOnly = readOnly;
-            cbbUserUpload.ReadOnly = readOnly;
-            if (!string.IsNullOrEmpty(idDocument))
-            {
-                cbbUserUpload.ReadOnly = true;
-            }
-
-            btnAddFile.Enabled = enabled;
-            btnAddPermission.Enabled = enabled;
-
-            gvFiles.OptionsBehavior.ReadOnly = readOnly;
-            bgvSecurity.OptionsBehavior.ReadOnly = readOnly;
-
-            gColDelFile.Visible = !readOnly;
-            gColDelPermission.Visible = !readOnly;
-
-            btnEdit.Visibility = isFormView ? DevExpress.XtraBars.BarItemVisibility.Always : DevExpress.XtraBars.BarItemVisibility.Never;
-            btnDel.Visibility = isFormView ? DevExpress.XtraBars.BarItemVisibility.Always : DevExpress.XtraBars.BarItemVisibility.Never;
-            btnConfirm.Visibility = isFormView ? DevExpress.XtraBars.BarItemVisibility.Never : DevExpress.XtraBars.BarItemVisibility.Always;
-            btnChangeProgress.Visibility = isFormView ? DevExpress.XtraBars.BarItemVisibility.Never : DevExpress.XtraBars.BarItemVisibility.Always;
-            lcProgress.Visibility = isFormView ? DevExpress.XtraLayout.Utils.LayoutVisibility.Never : DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
-
-            Text = isFormView ? "群組信息" : "新增、修改群組";
-
-            btnApproved.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-            btnDisapprove.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-            btnCancel.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
         }
 
         private Securityinfo GetPermission()
@@ -223,95 +289,54 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void f207_DocumentInfo_Load(object sender, EventArgs e)
         {
-            lcgProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-            lcgHistoryEdit.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-            controlgroupDocument.SelectedTabPage = lcgInfo;
+            Text = "新增群組";
 
-            // Initialize RefreshHelper
-            helper = new RefreshHelper(bgvSecurity, "Id");
+            // Set datasource cho gridcontrol
+            gcFiles.DataSource = _BSAttachments;
+            gcSecurity.DataSource = _BSSecuritys;
 
-            // Cài các gridview readonly và set datasource
-            gvEditHistory.ReadOnlyGridView();
-            gvFiles.ReadOnlyGridView();
-            gvHistoryProcess.ReadOnlyGridView();
-            gcFiles.DataSource = sourceAttachments;
-            gcSecurity.DataSource = sourceSecuritys;
+            // Cài các giá trị mặc định
+            _userId = TPConfigs.LoginUser.Id;
+            cbbUserUpload.EditValue = _userId;
+            cbbUserProcess.EditValue = _userId;
 
-            using (var db = new DBDocumentManagementSystemEntities())
+            // Tuỳ theo từng event để hiển thị lên form
+            switch (_event207)
             {
-                // Initialize lists
-                lsKnowledgeTypes = db.dt207_Type.ToList();
-                lsUsers = _dm_UserBUS.GetList();
-                lsGroups = _dm_GroupBUS.GetList();
-                lsGroupUser = _dm_GroupUserBUS.GetList();
-                progressSelect = db.dm_Progress.FirstOrDefault();
-
-                // Create lists of Securityinfo objects from lsUsers and lsGroups
-                var lsIdUsers = lsUsers.Select(r => new Securityinfo { IdDept = r.IdDepartment, IdGroupOrUser = r.Id, DisplayName = r.DisplayName }).ToList();
-                var lsIdGroup = lsGroups.Select(r => new Securityinfo { IdGroupOrUser = r.Id.ToString(), DisplayName = r.DisplayName }).ToList();
-                lsIdGroupOrUser = lsIdGroup.Concat(lsIdUsers).ToList();
-
-                // Assign data source and columns to rgvGruopOrUser
-                rgvGruopOrUser.DataSource = lsIdGroupOrUser;
-                rgvGruopOrUser.ValueMember = "IdGroupOrUser";
-                rgvGruopOrUser.DisplayMember = "DisplayName";
-                rgvGruopOrUser.PopupView.Columns.AddRange(new[]
-                {
-                    new GridColumn { FieldName = "IdDept", VisibleIndex = 0, Caption = "部門" },
-                    new GridColumn { FieldName = "IdGroupOrUser", VisibleIndex = 1, Caption = "代號" },
-                    new GridColumn { FieldName = "DisplayName", VisibleIndex = 2, Caption = "名稱" }
-                });
-
-                // Load các datasource vào ComboBoxes
-                cbbType.Properties.DataSource = lsKnowledgeTypes;
-                cbbType.Properties.ValueMember = "Id";
-                cbbType.Properties.DisplayMember = "DisplayName";
-
-                cbbUserUpload.Properties.DataSource = lsUsers;
-                cbbUserUpload.Properties.ValueMember = "Id";
-                cbbUserUpload.Properties.DisplayMember = "DisplayName";
-
-                cbbUserProcess.Properties.DataSource = lsUsers;
-                cbbUserProcess.Properties.ValueMember = "Id";
-                cbbUserProcess.Properties.DisplayMember = "DisplayName";
-
-                // Cài các thông tin mặc định lên Form (Trường hợp new Doc)
-                userId = TPConfigs.LoginId;
-                cbbType.EditValue = 1;
-                cbbUserUpload.EditValue = userId;
-                cbbUserProcess.EditValue = userId;
-                var userLogin = lsUsers.FirstOrDefault(r => r.Id == userId);
-                txbId.Text = "XXX-XXXXXXXXXX-XX";
-                lbCountFile.Text = "";
-                lbProgress.Text = "流程：" + progressSelect.DisplayName;
-
-                // Nếu có idDocument, truy xuất dữ liệu từ cơ sở dữ liệu và gán cho các thành phần form
-                if (!string.IsNullOrEmpty(idDocument))
-                {
+                case Event207DocInfo.Create:
+                    txbId.Text = "XXX-XXXXXXXXXX-XX";
+                    cbbType.EditValue = 1;
+                    lbProgress.Text = "流程：" + progressSelect.DisplayName;
+                    break;
+                case Event207DocInfo.View:
                     lcgHistoryEdit.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
 
                     // Thông tin cơ bản
-                    var dataBaseInfo = db.dt207_Base.FirstOrDefault(r => r.Id == idDocument);
-                    txbId.Text = dataBaseInfo.Id;
-                    cbbType.EditValue = dataBaseInfo.IdTypes;
-                    cbbUserUpload.EditValue = dataBaseInfo.UserUpload;
-                    cbbUserProcess.EditValue = dataBaseInfo.UserProcess;
-                    var displayName = dataBaseInfo.DisplayName.Split(new[] { "\r\n" }, StringSplitOptions.None);
+                    var base207Info = _dt207_BaseBUS.GetItemById(idDocument);
+                    txbId.Text = base207Info.Id;
+                    cbbType.EditValue = base207Info.IdTypes;
+                    cbbUserUpload.EditValue = base207Info.UserUpload;
+                    cbbUserProcess.EditValue = base207Info.UserProcess;
+                    var displayName = base207Info.DisplayName.Split(new[] { "\n" }, StringSplitOptions.None);
                     txbNameTW.Text = displayName[0];
                     txbNameVN.Text = displayName.Length > 1 ? displayName[1] : "";
-                    txbKeyword.Text = dataBaseInfo.Keyword;
+                    txbKeyword.Text = base207Info.Keyword;
 
                     // Thông tin phụ kiện
-                    lsAttachments.AddRange(db.dt207_Attachment.Where(r => r.IdKnowledgeBase == idDocument)
-                        .Select(item => new Attachments { FileName = item.FileName, EncryptionName = item.EncryptionName }));
+                    lsAttachments.AddRange(_dt207_AttachmentBUS.GetListByIdBase(idDocument)
+                        .Select(item => new Attachments
+                        {
+                            FileName = item.FileName,
+                            EncryptionName = item.EncryptionName
+                        }));
 
-                    sourceAttachments.DataSource = lsAttachments;
+                    _BSAttachments.DataSource = lsAttachments;
                     lbCountFile.Text = $"共{lsAttachments.Count}個附件";
 
                     // Thông tin quyền hạn
                     helper.SaveViewInfo();
-                    var lsKnowledgeSecuritys = db.dt207_Security.Where(r => r.IdKnowledgeBase == idDocument).ToList();
-                    lsSecurityInfos = lsKnowledgeSecuritys.Select(data => new Securityinfo
+                    var lsBaseSecuritys = _dt207_SecurityBUS.GetListByIdBase(idDocument);
+                    lsSecurityInfos = lsBaseSecuritys.Select(data => new Securityinfo
                     {
                         IdKnowledgeBase = data.IdKnowledgeBase,
                         IdGroup = data.IdGroup,
@@ -324,14 +349,16 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                         SaveFile = data.SaveFile,
                         IdGroupOrUser = data.IdUser ?? data.IdGroup.ToString()
                     }).ToList();
-                    sourceSecuritys.DataSource = lsSecurityInfos;
+
+                    _BSSecuritys.DataSource = lsSecurityInfos;
                     bgvSecurity.BestFitColumns();
                     helper.LoadViewInfo();
 
                     // Thông tin lịch sửa cập nhật
-                    var lsHisUpdateRaw = db.dt207_DocProgress.Where(r => r.IdKnowledgeBase == idDocument && r.Descriptions == TPConfigs.EventEdit).ToList();
-                    var DocProgressInfos =
-                        (from data in db.dt207_DocProgressInfo
+                    var lsDocProcess = _dt207_DocProgressBUS.GetListByIdBase(idDocument).Where(r => r.Id != _idDocProcessing);
+                    //db.dt207_DocProgress.Where(r => r.IdKnowledgeBase == idDocument && r.Descriptions == TPConfigs.EventEdit).ToList();
+                    var lsDocProcessInfos =
+                        (from data in _dt207_DocProgressInfoBUS.GetList()
                          group data by data.IdDocProgress into g
                          select new
                          {
@@ -341,8 +368,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                              IdUserProcess = g.OrderBy(dpi => dpi.TimeStep).Select(dpi => dpi.IdUserProcess).FirstOrDefault()
                          }).ToList();
 
-                    var lsHisUpdates = (from data in lsHisUpdateRaw
-                                        join infos in DocProgressInfos on data.Id equals infos.IdDocProgress
+                    var lsHisUpdates = (from data in lsDocProcess
+                                        join infos in lsDocProcessInfos on data.Id equals infos.IdDocProgress
                                         join users in lsUsers on data.IdUserProcess equals users.Id
                                         select new
                                         {
@@ -354,65 +381,67 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
                     gcEditHistory.DataSource = lsHisUpdates;
 
-                    // Thông tin tiến trình trình ký văn kiện
-                    var lsDocProcessing = db.dt207_DocProgress.Where(r => !r.IsComplete  && r.IdKnowledgeBase == idDocument).ToList();
-                    if (lsDocProcessing.Count != 0)
+                    break;
+                case Event207DocInfo.Approval:
+                    lcgHistoryEdit.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                    lcgProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                    controlgroupDocument.SelectedTabPage = lcgProgress;
+
+                    var _docProcessing = _dt207_DocProgressBUS.GetItemByIdBaseNotComplete(idDocument);
+                    if (_docProcessing == default)
                     {
-                        lcgProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
-                        controlgroupDocument.SelectedTabPage = lcgProgress;
-
-                        int idProgressByDoc = lsDocProcessing.First().IdProgress;
-                        idDocProgress = lsDocProcessing.First().Id;
-                        events = lsDocProcessing.First().Descriptions;
-                        var lsDMStepProgress = db.dm_StepProgress.Where(r => r.IdProgress == idProgressByDoc).ToList();
-                        var lsDocProgressInfos = db.dt207_DocProgressInfo.Where(r => r.IdDocProgress == idDocProgress).ToList();
-
-                        stepEnd = lsDMStepProgress.Max(r => r.IndexStep);
-
-                        var lsStepProgressDoc = (from data in lsDMStepProgress
-                                                 join groups in lsGroups on data.IdGroup equals groups.Id
-                                                 select new { groups.DisplayName }).ToList();
-
-                        // Thêm danh sách các bước vào StepProgressBar
-                        stepProgressDoc.Items.Add(new StepProgressBarItem("經辦人"));
-                        foreach (var item in lsStepProgressDoc)
-                            stepProgressDoc.Items.Add(new StepProgressBarItem(item.DisplayName));
-
-                        var stepNow = lsDocProgressInfos.OrderByDescending(r => r.TimeStep).First().IndexStep;
-
-                        stepProgressDoc.ItemOptions.Indicator.Width = 40;
-                        stepProgressDoc.SelectedItemIndex = stepNow;
-
-                        // Thêm lịch sử trình ký vào gridProcess
-                        var lsHistoryProcess = (from data in lsDocProgressInfos
-                                                join users in db.dm_User on data.IdUserProcess equals users.Id
-                                                select new
-                                                {
-                                                    TimeStep = data.TimeStep,
-                                                    data.Descriptions,
-                                                    UserProcess = $"{users.IdDepartment} | {data.IdUserProcess}/{users.DisplayName}",
-                                                }).ToList();
-
-                        gcHistoryProcess.DataSource = lsHistoryProcess;
-
-                        if (stepNow != -1)
-                        {
-                            btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                            btnApproved.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
-                            btnDisapprove.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
-                        }
-                        else
-                        {
-                            btnCancel.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
-                            btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
-                            btnApproved.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                            btnDisapprove.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                        }
-
-                        btnDel.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                        btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                        XtraMessageBox.Show("文件已由其他主管處理完成", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Close();
                     }
-                }
+
+                    int _idProgress = _docProcessing.IdProgress;
+                    _idDocProcessing = _docProcessing.Id;
+                    _eventApproved = EnumHelper.GetEnumByDescription<Event207DocInfo>(_docProcessing.Descriptions);
+
+                    var lsStepProgress = _dm_StepProgressBUS.GetListByIdProgress(_idProgress);
+                    _stepEnd = lsStepProgress.Max(r => r.IndexStep);
+                    var lsDisplayNameSteps = (from data in lsStepProgress
+                                              join groups in lsGroups on data.IdGroup equals groups.Id
+                                              select new { groups.DisplayName }).ToList();
+                    // Thêm danh sách các bước vào StepProgressBar
+                    stepProgressDoc.Items.Add(new StepProgressBarItem("經辦人"));
+                    foreach (var item in lsDisplayNameSteps)
+                        stepProgressDoc.Items.Add(new StepProgressBarItem(item.DisplayName));
+                    stepProgressDoc.ItemOptions.Indicator.Width = 40;
+
+                    var lsDocProcessingInfos = _dt207_DocProgressInfoBUS.GetListByIdDocProcess(_idDocProcessing);
+                    int _stepNow = lsDocProcessingInfos.OrderByDescending(r => r.TimeStep).First().IndexStep;
+                    stepProgressDoc.SelectedItemIndex = _stepNow; // Focus đến bước hiện tại
+
+                    // Thêm lịch sử trình ký vào gridProcess
+                    var lsHistoryProcess = (from data in lsDocProcessingInfos
+                                            join users in lsUsers on data.IdUserProcess equals users.Id
+                                            select new
+                                            {
+                                                TimeStep = data.TimeStep,
+                                                data.Descriptions,
+                                                UserProcess = $"{users.IdDepartment} | {data.IdUserProcess}/{users.DisplayName}",
+                                            }).ToList();
+
+                    gcHistoryProcess.DataSource = lsHistoryProcess;
+
+                    if (_stepNow != -1)
+                    {
+                        btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                        btnApproved.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                        btnDisapprove.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                    }
+                    else
+                    {
+                        btnCancel.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                        btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                        btnApproved.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                        btnDisapprove.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                    }
+
+                    goto case Event207DocInfo.View;
+                case Event207DocInfo.Check:
+                    goto case Event207DocInfo.Approval;
             }
 
             // Lấy quyền hạn của người dùng đối với văn kiện này
@@ -423,13 +452,20 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 ReadFile = false,
                 SaveFile = false
             };
+
+            LockControl();
+        }
+
+        private void f207_DocumentInfo_Shown(object sender, EventArgs e)
+        {
+            txbNameTW.Focus();
         }
 
         private void btnAddFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
-                Filter = "PDF files (*.pdf)|*.pdf",
+                Filter = "Files|*.pdf;*.xlsx;*.xls;*.docx;*.doc",
                 Multiselect = true
             };
 
@@ -438,7 +474,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
             foreach (string fileName in openFileDialog.FileNames)
             {
-                string encryptionName = GenerateEncryptionName();
+                string encryptionName = GenerateHashFileName();
                 Attachments attachment = new Attachments
                 {
                     FullPath = fileName,
@@ -449,14 +485,56 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 Thread.Sleep(5);
             }
 
-            sourceAttachments.DataSource = lsAttachments;
+            _BSAttachments.DataSource = lsAttachments;
             lbCountFile.Text = $"共{lsAttachments.Count}個附件";
             gvFiles.RefreshData();
         }
 
-        private void f207_DocumentInfo_Shown(object sender, EventArgs e)
+        private void btnDelFile_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            txbNameTW.Focus();
+            Attachments attachment = gvFiles.GetRow(gvFiles.FocusedRowHandle) as Attachments;
+            DialogResult dialogResult = XtraMessageBox.Show($"您想要刪除附件：{attachment.FileName}?", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialogResult == DialogResult.No)
+            {
+                return;
+            }
+
+            lsAttachments.Remove(attachment);
+            lbCountFile.Text = $"共{lsAttachments.Count}個附件";
+
+            int rowIndex = gvFiles.FocusedRowHandle;
+            gvFiles.RefreshData();
+            gvFiles.FocusedRowHandle = rowIndex;
+        }
+
+        private void btnAddPermission_Click(object sender, EventArgs e)
+        {
+            lsSecurityInfos.Add(new Securityinfo()
+            {
+                IdKnowledgeBase = idDocument,
+                ReadInfo = true,
+                UpdateInfo = false,
+                DeleteInfo = false,
+                SearchInfo = true,
+                ReadFile = false,
+                SaveFile = false,
+            });
+
+            _BSSecuritys.DataSource = lsSecurityInfos;
+            bgvSecurity.RefreshData();
+        }
+
+        private void btnDelPermission_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            Securityinfo permission = bgvSecurity.GetRow(bgvSecurity.FocusedRowHandle) as Securityinfo;
+            permission.DisplayName = lsIdGroupOrUser.FirstOrDefault(r => r.IdGroupOrUser == permission.IdGroupOrUser)?.DisplayName;
+
+            DialogResult dialogResult = XtraMessageBox.Show($"您想要刪除權限：{permission.DisplayName}?", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialogResult == DialogResult.No)
+                return;
+
+            lsSecurityInfos.Remove(permission);
+            bgvSecurity.RefreshData();
         }
 
         private void btnDel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -480,6 +558,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             }
 
             progressSelect = ucInfo.ProgressSelect;
+            _event207 = Event207DocInfo.Delete;
 
             using (var db = new DBDocumentManagementSystemEntities())
             {
@@ -504,205 +583,124 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             // Đưa focused ra khỏi bảng để cập nhật lên source
             bgvSecurity.FocusedRowHandle = GridControl.AutoFilterRowHandle;
+            bool _IsProcessing = false;
 
-            // Tạo ra IdDoc nếu là chức năng thêm mới
-            events = TPConfigs.EventEdit;
-            if (string.IsNullOrEmpty(idDocument))
+            using (var handle = SplashScreenManager.ShowOverlayForm(this))
             {
-                events = TPConfigs.EventNew;
-                idDocument = GenerateIdDocument();
-            }
-
-            using (var db = new DBDocumentManagementSystemEntities())
-            {
-                using (var handle = SplashScreenManager.ShowOverlayForm(this))
+                switch (_event207)
                 {
-                    // Check xem văn kiện có đang trong quá trình trình ký không
-                    bool IsProcessing = db.dt207_DocProgress.Any(r => r.IdKnowledgeBase == idDocument && !(r.IsComplete));
-
-                    // Nếu là Edit Doc thì lưu lại thông tin cũ để nếu bị trả về thì update lại dữ liệu cũ
-                    if (events == TPConfigs.EventEdit && !IsProcessing)
-                    {
-                        dt207_Base_BAK base_BAK = db.dt207_Base.
-                            Where(r => r.Id == idDocument).ToList().
-                            Select(r => new dt207_Base_BAK()
-                            {
-                                Id = r.Id,
-                                DisplayName = r.DisplayName,
-                                UserProcess = r.UserProcess,
-                                IdTypes = r.IdTypes,
-                                Keyword = r.Keyword,
-                                UserUpload = r.UserUpload,
-                                UploadDate = r.UploadDate
-                            }).FirstOrDefault();
-                        db.dt207_Base_BAK.Add(base_BAK);
-
-                        var lsAttachments_BAK = db.dt207_Attachment.
-                            Where(r => r.IdKnowledgeBase == idDocument).ToList().
-                            Select(r => new dt207_Attachment_BAK()
-                            {
-                                IdKnowledgeBase = r.IdKnowledgeBase,
-                                EncryptionName = r.EncryptionName,
-                                FileName = r.FileName
-                            });
-                        db.dt207_Attachment_BAK.AddRange(lsAttachments_BAK);
-
-                        var lsSecurities_BAK = db.dt207_Security.
-                            Where(r => r.IdKnowledgeBase == idDocument).ToList().
-                            Select(r => new dt207_Security_BAK()
-                            {
-                                IdKnowledgeBase = r.IdKnowledgeBase,
-                                IdGroup = r.IdGroup,
-                                IdUser = r.IdUser,
-                                ReadInfo = r.ReadInfo,
-                                UpdateInfo = r.UpdateInfo,
-                                DeleteInfo = r.DeleteInfo,
-                                SearchInfo = r.SearchInfo,
-                                ReadFile = r.ReadFile,
-                                SaveFile = r.SaveFile
-                            });
-                        db.dt207_Security_BAK.AddRange(lsSecurities_BAK);
-                    }
-
-                    // Tạo ra DocBase từ các thông tin trên form, thêm vào DB
-                    dt207_Base knowledge = new dt207_Base()
-                    {
-                        Id = idDocument,
-                        DisplayName = $"{convertToUnSign3(txbNameTW.Text.Trim())}\r\n{txbNameVN.Text.Trim()}",
-                        UserProcess = cbbUserProcess.EditValue.ToString(),
-                        IdTypes = (int)cbbType.EditValue,
-                        Keyword = txbKeyword.Text.Trim(),
-                        UserUpload = cbbUserUpload.EditValue.ToString(),
-                        UploadDate = DateTime.Now
-                    };
-                    db.dt207_Base.AddOrUpdate(knowledge);
-
-                    // Xoá tất cả các phụ kiện trước đó để thêm lại (Không xoá file cứng, định kỳ làm sạch file cứng nếu không dùng đến)
-                    db.dt207_Attachment.RemoveRange(db.dt207_Attachment.Where(r => r.IdKnowledgeBase == idDocument));
-                    foreach (Attachments item in lsAttachments)
-                    {
-                        dt207_Attachment attachment = new dt207_Attachment()
+                    case Event207DocInfo.Create:
+                        idDocument = _dt207_BaseBUS.GetNewBaseId(TPConfigs.LoginUser.IdDepartment);
+                        break;
+                    case Event207DocInfo.Update:
+                        _IsProcessing = _dt207_DocProgressBUS.CheckItemProcessing(idDocument);
+                        if (_IsProcessing)
                         {
-                            IdKnowledgeBase = idDocument,
-                            EncryptionName = item.EncryptionName,
-                            FileName = item.FileName
-                        };
-                        db.dt207_Attachment.AddOrUpdate(attachment);
-
-                        // Thêm các file cứng vào Server nếu là file mới
-                        if (!string.IsNullOrEmpty(item.FullPath))
-                        {
-                            string sourceFileName = item.FullPath;
-                            string destFileName = Path.Combine(TPConfigs.PathKnowledgeFile, item.EncryptionName);
-
-                            File.Copy(sourceFileName, destFileName, true);
+                            break;
                         }
-                    }
 
-                    // Xoá tất cả các dữ liệu quyền hạn để thêm lại dựa vào dữ liệu trên form
-                    db.dt207_Security.RemoveRange(db.dt207_Security.Where(r => r.IdKnowledgeBase == idDocument));
-                    foreach (var item in lsSecurityInfos)
+                        // Lưu lại các thông tin để sau này rollback nếu huỷ
+                        dt207_Base base_BAK = _dt207_BaseBUS.GetItemById(idDocument);
+                        _dt207_Base_BAKBUS.Create(base_BAK);
+
+                        List<dt207_Attachment> lsAttachments_BAK = _dt207_AttachmentBUS.GetListByIdBase(idDocument);
+                        _dt207_Attachment_BAKBUS.CreateRange(lsAttachments_BAK);
+
+                        List<dt207_Security> lsSecurities_BAK = _dt207_SecurityBUS.GetListByIdBase(idDocument);
+                        _dt207_Security_BAKBUS.CreateRange(lsSecurities_BAK);
+
+                        break;
+                }
+
+                // Tạo ra DocBase từ các thông tin trên form, thêm vào DB
+                string _nameTW = RemoveDiacriticalMarks(txbNameTW.Text.Trim());
+                string _nameVN = txbNameVN.Text.Trim();
+                string _nameEN = RemoveDiacriticalMarks(txbNameEN.Text.Trim());
+                string _keyword = Regex.Replace(txbKeyword.Text, @"(\s{2,}|\n{2,}|[\t])", " ").Trim();
+
+                dt207_Base knowledge = new dt207_Base()
+                {
+                    Id = idDocument,
+                    DisplayName = string.Join("\n", new[] { _nameTW, _nameVN, _nameEN }.Where(s => !string.IsNullOrWhiteSpace(s))),
+                    UserProcess = cbbUserProcess.EditValue.ToString(),
+                    IdTypes = (int)cbbType.EditValue,
+                    Keyword = _keyword,
+                    UserUpload = cbbUserUpload.EditValue.ToString(),
+                    UploadDate = DateTime.Now
+                };
+
+                _dt207_BaseBUS.AddOrUpdate(knowledge);
+
+                // Xoá tất cả các phụ kiện trước đó để thêm lại (Không xoá file cứng, định kỳ làm sạch file cứng nếu không dùng đến)
+                _dt207_AttachmentBUS.RemoveRangeByIdBase(idDocument);
+                var lsFilesAdd = lsAttachments.Select(r => new dt207_Attachment
+                {
+                    IdKnowledgeBase = idDocument,
+                    EncryptionName = r.EncryptionName,
+                    FileName = r.FileName
+                }).ToList();
+                _dt207_AttachmentBUS.AddRange(lsFilesAdd);
+
+                foreach (Attachments item in lsAttachments)
+                {
+                    // Thêm các file cứng vào Server nếu là file mới
+                    if (!string.IsNullOrEmpty(item.FullPath))
                     {
-                        dt207_Security dataAdd = new dt207_Security
-                        {
-                            Id = item.Id,
-                            IdKnowledgeBase = idDocument,
-                            IdGroup = item.IdGroupOrUser.StartsWith("VNW") ? null : (short?)Convert.ToInt16(item.IdGroupOrUser),
-                            IdUser = item.IdGroupOrUser.StartsWith("VNW") ? item.IdGroupOrUser : null,
-                            ReadInfo = item.ReadInfo,
-                            UpdateInfo = item.UpdateInfo,
-                            DeleteInfo = item.DeleteInfo,
-                            SearchInfo = item.SearchInfo,
-                            ReadFile = item.ReadFile,
-                            SaveFile = item.SaveFile
-                        };
-                        db.dt207_Security.Add(dataAdd);
-                    }
+                        string sourceFileName = item.FullPath;
+                        string destFileName = Path.Combine(TPConfigs.PathKnowledgeFile, item.EncryptionName);
 
-                    //// Nếu chưa có lưu trình xử lý của văn kiện thì thêm mới (Trigger sẽ tự thêm vào ProcessInfo)
-                    //bool IsNewDocProcess = !db.dt207_DocProgress.Any(r => !r.IsComplete && r.IdKnowledgeBase == idDocument);
-                    if (!IsProcessing)
+                        File.Copy(sourceFileName, destFileName, true);
+                    }
+                }
+
+                // Xoá tất cả các dữ liệu quyền hạn để thêm lại dựa vào dữ liệu trên form
+                _dt207_SecurityBUS.RemoveRangeByIdBase(idDocument);
+                var lsSecuritiesAdd = lsSecurityInfos.Select(r => new dt207_Security
+                {
+                    Id = r.Id,
+                    IdKnowledgeBase = idDocument,
+                    IdGroup = r.IdGroupOrUser.StartsWith("VNW") ? null : (short?)Convert.ToInt16(r.IdGroupOrUser),
+                    IdUser = r.IdGroupOrUser.StartsWith("VNW") ? r.IdGroupOrUser : null,
+                    ReadInfo = r.ReadInfo,
+                    UpdateInfo = r.UpdateInfo,
+                    DeleteInfo = r.DeleteInfo,
+                    SearchInfo = r.SearchInfo,
+                    ReadFile = r.ReadFile,
+                    SaveFile = r.SaveFile
+                }).ToList();
+                _dt207_SecurityBUS.AddRange(lsSecuritiesAdd);
+
+                //// Nếu chưa có lưu trình xử lý của văn kiện thì thêm mới (Trigger sẽ tự thêm vào ProcessInfo)
+                if (!_IsProcessing)
+                {
+                    dt207_DocProgress docProgress = new dt207_DocProgress()
                     {
-                        dt207_DocProgress docProgress = new dt207_DocProgress()
-                        {
-                            IdKnowledgeBase = idDocument,
-                            IsComplete = false,
-                            IsSuccess = false,
-                            IdProgress = progressSelect.Id,
-                            Descriptions = events,
-                            IdUserProcess = TPConfigs.LoginId,
-                        };
-
-                        db.dt207_DocProgress.Add(docProgress);
-                    }
-                    else
+                        IdKnowledgeBase = idDocument,
+                        IsComplete = false,
+                        IsSuccess = false,
+                        IdProgress = progressSelect.Id,
+                        Descriptions = EnumHelper.GetDescription(_event207),
+                        IdUserProcess = TPConfigs.LoginId,
+                    };
+                    _dt207_DocProgressBUS.Create(docProgress);
+                }
+                else
+                {
+                    dt207_DocProgressInfo progressInfo = new dt207_DocProgressInfo()
                     {
-                        dt207_DocProgressInfo progressInfo = new dt207_DocProgressInfo()
-                        {
-                            IdDocProgress = idDocProgress,
-                            TimeStep = DateTime.Now,
-                            IndexStep = 0,
-                            IdUserProcess = TPConfigs.LoginId,
-                            Descriptions = "呈核",
-                        };
-                        db.dt207_DocProgressInfo.Add(progressInfo);
-                    }
-
-                    // Save the changes to the database
-                    db.SaveChanges();
+                        IdDocProgress = _idDocProcessing,
+                        TimeStep = DateTime.Now,
+                        IndexStep = 0,
+                        IdUserProcess = TPConfigs.LoginId,
+                        Descriptions = "呈核",
+                    };
+                    _dt207_DocProgressInfoBUS.Create(progressInfo);
                 }
             }
 
             // Show a message box with the appropriate message and close the form
-            XtraMessageBox.Show($"{events}!\r\n文件編號:{idDocument}", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            XtraMessageBox.Show($"{EnumHelper.GetDescription(_event207)}!\r\n文件編號:{idDocument}", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
             Close();
-        }
-
-        private void btnAddPermission_Click(object sender, EventArgs e)
-        {
-            lsSecurityInfos.Add(new Securityinfo()
-            {
-                IdKnowledgeBase = idDocument,
-                ReadInfo = true,
-                UpdateInfo = false,
-                DeleteInfo = false,
-                SearchInfo = true,
-                ReadFile = false,
-                SaveFile = false,
-            });
-
-            sourceSecuritys.DataSource = lsSecurityInfos;
-            bgvSecurity.RefreshData();
-        }
-
-        private void btnDelFile_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
-        {
-            Attachments attachment = gvFiles.GetRow(gvFiles.FocusedRowHandle) as Attachments;
-            DialogResult dialogResult = XtraMessageBox.Show($"您想要刪除附件：{attachment.FileName}?", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (dialogResult == DialogResult.No)
-            {
-                return;
-            }
-
-            lsAttachments.Remove(attachment);
-            lbCountFile.Text = $"共{lsAttachments.Count}個附件";
-
-            int rowIndex = gvFiles.FocusedRowHandle;
-            gvFiles.RefreshData();
-            gvFiles.FocusedRowHandle = rowIndex;
-        }
-
-        private void btnDelPermission_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
-        {
-            Securityinfo permission = bgvSecurity.GetRow(bgvSecurity.FocusedRowHandle) as Securityinfo;
-            permission.DisplayName = lsIdGroupOrUser.FirstOrDefault(r => r.IdGroupOrUser == permission.IdGroupOrUser)?.DisplayName;
-
-            DialogResult dialogResult = XtraMessageBox.Show($"您想要刪除權限：{permission.DisplayName}?", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (dialogResult == DialogResult.No)
-                return;
-
-            lsSecurityInfos.Remove(permission);
-            bgvSecurity.RefreshData();
         }
 
         private void gcFiles_DoubleClick(object sender, EventArgs e)
@@ -758,10 +756,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             }
 
             // Chuyển người process sang userLogin
-            cbbUserProcess.EditValue = userId;
+            cbbUserProcess.EditValue = _userId;
             controlgroupDocument.SelectedTabPage = lcgInfo;
 
-            LockControl(false);
+            _event207 = Event207DocInfo.Update;
+            LockControl();
         }
 
         private void btnChangeProgress_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -776,119 +775,103 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void btnApproved_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            using (var db = new DBDocumentManagementSystemEntities())
+            List<string> lsChangeDetails = new List<string>();
+            var lsBaseProgressById = _dt207_DocProgressBUS.GetListByIdBase(idDocument);
+            int _idBaseProgress = lsBaseProgressById.OrderByDescending(r => r.Id).FirstOrDefault().Id;
+            string _eventProcess = lsBaseProgressById.OrderByDescending(r => r.Id).FirstOrDefault().Descriptions;
+            _eventApproved = EnumHelper.GetEnumByDescription<Event207DocInfo>(_eventProcess);
+
+            var lsBaseProcessInfos = _dt207_DocProgressInfoBUS.GetListByIdDocProcess(_idBaseProgress);
+            int _indexStep = lsBaseProcessInfos.Count != 0 ? lsBaseProcessInfos.OrderByDescending(r => r.Id).FirstOrDefault().IndexStep + 1 : 0;
+
+            switch (_eventApproved)
             {
-                List<string> lsChangeDetails = new List<string>();
+                case Event207DocInfo.Update:
+                    // Kiểm tra thông tin cơ bản có đổi không
+                    var docBaseNew = _dt207_BaseBUS.GetItemById(idDocument);
+                    var docBaseOld = _dt207_Base_BAKBUS.GetItemById(idDocument);
 
-                var lsDocProgressById = db.dt207_DocProgress.Where(r => r.IdKnowledgeBase == idDocument).ToList();
-                int idDocProgress = lsDocProgressById.OrderByDescending(r => r.Id).FirstOrDefault().Id;
-                string eventProcess = lsDocProgressById.OrderByDescending(r => r.Id).FirstOrDefault().Descriptions;
+                    if (docBaseNew.DisplayName != docBaseOld.DisplayName) lsChangeDetails.Add("名稱");
+                    if (docBaseNew.IdTypes != docBaseOld.IdTypes) lsChangeDetails.Add("類別");
+                    if (docBaseNew.Keyword != docBaseOld.Keyword) lsChangeDetails.Add("關鍵字");
 
-                List<dt207_DocProgressInfo> lsDocProgressInfos = db.dt207_DocProgressInfo.Where(r => r.IdDocProgress == idDocProgress).ToList();
-                int indexStep = lsDocProgressInfos.Count != 0 ? lsDocProgressInfos.OrderByDescending(r => r.Id).FirstOrDefault().IndexStep + 1 : 0;
+                    // Kiểm tra phụ kiện
+                    var lsAttachmentNew = _dt207_AttachmentBUS.GetListByIdBase(idDocument)
+                        .Select(r => new { r.FileName, r.EncryptionName })
+                        .ToList();
+                    var lsAttachmentOld = _dt207_Attachment_BAKBUS.GetListByIdBase(idDocument)
+                        .Select(r => new { r.FileName, r.EncryptionName })
+                        .ToList();
 
-                // Nếu mà Xoá thì trường IsDelete = true/ Sửa thì xoá các dữ liệu cũ đi
-                switch (eventProcess)
-                {
-                    case TPConfigs.EventDel:
-                        var docBaseDelete = db.dt207_Base.First(r => r.Id == idDocument);
-                        docBaseDelete.IsDelete = true;
+                    var jsonAttachmentNew = JsonConvert.SerializeObject(lsAttachmentNew);
+                    var jsonAttachmentOld = JsonConvert.SerializeObject(lsAttachmentOld);
+                    if (jsonAttachmentNew != jsonAttachmentOld)
+                        lsChangeDetails.Add("附件");
 
-                        db.dt207_Base.AddOrUpdate(docBaseDelete);
-                        break;
-                    case TPConfigs.EventEdit:
-                        // Kiểm tra xem văn kiện được sửa ở chỗ nào
-                        // Kiểm tra thông tin văn kiện
-                        var docBaseNew = db.dt207_Base.First(r => r.Id == idDocument);
-                        var docBaseOld = db.dt207_Base_BAK.First(r => r.Id == idDocument);
+                    // Kiểm tra quyền hạn
+                    var lsSecurityNew = _dt207_SecurityBUS.GetListByIdBase(idDocument)
+                        .Select(r => new
+                        {
+                            r.IdGroup,
+                            r.IdUser,
+                            r.ReadInfo,
+                            r.UpdateInfo,
+                            r.DeleteInfo,
+                            r.SearchInfo,
+                            r.ReadFile,
+                            r.SaveFile
+                        })
+                        .ToList();
+                    var lsSecurityOld = _dt207_Security_BAKBUS.GetListByIdBase(idDocument)
+                        .Select(r => new
+                        {
+                            r.IdGroup,
+                            r.IdUser,
+                            r.ReadInfo,
+                            r.UpdateInfo,
+                            r.DeleteInfo,
+                            r.SearchInfo,
+                            r.ReadFile,
+                            r.SaveFile
+                        })
+                        .ToList();
 
-                        if (docBaseNew.DisplayName != docBaseOld.DisplayName) lsChangeDetails.Add("名稱");
-                        if (docBaseNew.IdTypes != docBaseOld.IdTypes) lsChangeDetails.Add("類別");
-                        if (docBaseNew.Keyword != docBaseOld.Keyword) lsChangeDetails.Add("關鍵字");
-
-                        // Kiểm tra phụ kiện
-                        var lsAttachmentNew = db.dt207_Attachment
-                            .Where(r => r.IdKnowledgeBase == idDocument)
-                            .Select(r => new { r.FileName, r.EncryptionName })
-                            .ToList();
-                        var lsAttachmentOld = db.dt207_Attachment_BAK
-                            .Where(r => r.IdKnowledgeBase == idDocument)
-                            .Select(r => new { r.FileName, r.EncryptionName })
-                            .ToList();
-
-                        var jsonAttachmentNew = JsonConvert.SerializeObject(lsAttachmentNew);
-                        var jsonAttachmentOld = JsonConvert.SerializeObject(lsAttachmentOld);
-                        if (jsonAttachmentNew != jsonAttachmentOld)
-                            lsChangeDetails.Add("附件");
-
-                        // Kiểm tra quyền hạn
-                        var lsSecurityNew = db.dt207_Security
-                            .Where(r => r.IdKnowledgeBase == idDocument)
-                            .Select(r => new
-                            {
-                                r.IdGroup,
-                                r.IdUser,
-                                r.ReadInfo,
-                                r.UpdateInfo,
-                                r.DeleteInfo,
-                                r.SearchInfo,
-                                r.ReadFile,
-                                r.SaveFile
-                            })
-                            .ToList();
-                        var lsSecurityOld = db.dt207_Security_BAK
-                            .Where(r => r.IdKnowledgeBase == idDocument)
-                            .Select(r => new
-                            {
-                                r.IdGroup,
-                                r.IdUser,
-                                r.ReadInfo,
-                                r.UpdateInfo,
-                                r.DeleteInfo,
-                                r.SearchInfo,
-                                r.ReadFile,
-                                r.SaveFile
-                            })
-                            .ToList();
-
-                        var jsonSecurityNew = JsonConvert.SerializeObject(lsSecurityNew);
-                        var jsonSecurityOld = JsonConvert.SerializeObject(lsSecurityOld);
-                        if (jsonSecurityNew != jsonSecurityOld)
-                            lsChangeDetails.Add("權限");
-
-                        // Xoá dữ liệu cũ
-                        db.dt207_Base_BAK.RemoveRange(db.dt207_Base_BAK.Where(r => r.Id == idDocument));
-                        db.dt207_Attachment_BAK.RemoveRange(db.dt207_Attachment_BAK.Where(r => r.IdKnowledgeBase == idDocument));
-                        db.dt207_Security_BAK.RemoveRange(db.dt207_Security_BAK.Where(r => r.IdKnowledgeBase == idDocument));
-                        break;
-                }
-
-                string descriptions = "核准";
-                if (indexStep == stepEnd)
-                {
-                    var docProcessUpdate = db.dt207_DocProgress.First(r => r.Id == idDocProgress);
-                    docProcessUpdate.IsSuccess = true;
-                    docProcessUpdate.IsComplete = true;
-                    docProcessUpdate.Change = string.Join("，", lsChangeDetails);
-
-                    db.dt207_DocProgress.AddOrUpdate(docProcessUpdate);
-
-                    descriptions = "確認完畢";
-                }
-
-                dt207_DocProgressInfo progressInfo = new dt207_DocProgressInfo()
-                {
-                    IdDocProgress = idDocProgress,
-                    TimeStep = DateTime.Now,
-                    IndexStep = indexStep,
-                    IdUserProcess = TPConfigs.LoginId,
-                    Descriptions = descriptions,
-                };
-                db.dt207_DocProgressInfo.Add(progressInfo);
-
-                // Save the changes to the database
-                db.SaveChanges();
+                    var jsonSecurityNew = JsonConvert.SerializeObject(lsSecurityNew);
+                    var jsonSecurityOld = JsonConvert.SerializeObject(lsSecurityOld);
+                    if (jsonSecurityNew != jsonSecurityOld)
+                        lsChangeDetails.Add("權限");
+                    break;
+                case Event207DocInfo.Delete:
+                    _dt207_BaseBUS.Delete(idDocument);
+                    break;
             }
+
+            string descriptions = "核准";
+            if (_indexStep == _stepEnd)
+            {
+                var docProcessUpdate = _dt207_DocProgressBUS.GetItemById(_idBaseProgress);// db.dt207_DocProgress.First(r => r.Id == idDocProgress);
+                docProcessUpdate.IsSuccess = true;
+                docProcessUpdate.IsComplete = true;
+                docProcessUpdate.Change = string.Join("，", lsChangeDetails);
+                _dt207_DocProgressBUS.AddOrUpdate(docProcessUpdate);
+                //db.dt207_DocProgress.AddOrUpdate(docProcessUpdate);
+
+                descriptions = "確認完畢";
+                // Xoá dữ liệu cũ
+                _dt207_Base_BAKBUS.RemoveRangeById(idDocument);
+                _dt207_Attachment_BAKBUS.RemoveRangeByIdBase(idDocument);
+                _dt207_Security_BAKBUS.RemoveRangeByIdBase(idDocument);
+            }
+
+            dt207_DocProgressInfo progressInfo = new dt207_DocProgressInfo()
+            {
+                IdDocProgress = _idBaseProgress,
+                TimeStep = DateTime.Now,
+                IndexStep = _indexStep,
+                IdUserProcess = TPConfigs.LoginId,
+                Descriptions = descriptions,
+            };
+            _dt207_DocProgressInfoBUS.Create(progressInfo);
 
             Close();
         }
@@ -906,30 +889,24 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             var result = XtraInputBox.Show(args);
             string descriptions = result?.ToString() ?? "";
 
-            using (var db = new DBDocumentManagementSystemEntities())
+            if (_eventApproved == Event207DocInfo.Delete)
             {
-                if (events == TPConfigs.EventDel)
-                {
-                    var docProcessUpdate = db.dt207_DocProgress.First(r => r.Id == idDocProgress);
-                    docProcessUpdate.IsSuccess = false;
-                    docProcessUpdate.IsComplete = true;
-                    db.dt207_DocProgress.AddOrUpdate(docProcessUpdate);
-                }
-
-                dt207_DocProgressInfo progressInfo = new dt207_DocProgressInfo
-                {
-                    IdDocProgress = idDocProgress,
-                    TimeStep = DateTime.Now,
-                    IndexStep = -1,
-                    IdUserProcess = TPConfigs.LoginId,
-                    Descriptions = string.IsNullOrEmpty(descriptions) ? "退回" : $"退回，說明：{descriptions}"
-                };
-
-                db.dt207_DocProgressInfo.Add(progressInfo);
-
-                // Save the changes to the database
-                db.SaveChanges();
+                var docProcessUpdate = _dt207_DocProgressBUS.GetItemById(_idDocProcessing);//  db.dt207_DocProgress.First(r => r.Id == _idDocProcessing);
+                docProcessUpdate.IsSuccess = false;
+                docProcessUpdate.IsComplete = true;
+                _dt207_DocProgressBUS.AddOrUpdate(docProcessUpdate);
             }
+
+            dt207_DocProgressInfo progressInfo = new dt207_DocProgressInfo
+            {
+                IdDocProgress = _idDocProcessing,
+                TimeStep = DateTime.Now,
+                IndexStep = -1,
+                IdUserProcess = TPConfigs.LoginUser.Id,
+                Descriptions = string.IsNullOrEmpty(descriptions) ? "退回" : $"退回，說明：{descriptions}"
+            };
+
+            _dt207_DocProgressInfoBUS.Create(progressInfo);
 
             Close();
         }
@@ -946,88 +923,48 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             };
 
             var result = XtraInputBox.Show(args);
-            string descriptions = result?.ToString() ?? "";
+            string descriptions = string.IsNullOrEmpty(result?.ToString()) ? "取消" : $"取消，說明：{result}";
 
-            using (var db = new DBDocumentManagementSystemEntities())
+            var docProcessUpdate = _dt207_DocProgressBUS.GetItemById(_idDocProcessing);
+            _eventApproved = EnumHelper.GetEnumByDescription<Event207DocInfo>(docProcessUpdate.Descriptions);
+
+            docProcessUpdate.IsSuccess = false;
+            docProcessUpdate.IsComplete = true;
+            docProcessUpdate.Change = descriptions;
+            _dt207_DocProgressBUS.AddOrUpdate(docProcessUpdate);
+
+            dt207_DocProgressInfo progressInfo = new dt207_DocProgressInfo()
             {
-                var docProcessUpdate = db.dt207_DocProgress.First(r => r.Id == idDocProgress);
-                docProcessUpdate.IsSuccess = false;
-                docProcessUpdate.IsComplete = true;
-                docProcessUpdate.Change = string.IsNullOrEmpty(descriptions) ? "取消" : $"取消，說明：{descriptions}";
+                IdDocProgress = _idDocProcessing,
+                TimeStep = DateTime.Now,
+                IndexStep = -1,
+                IdUserProcess = TPConfigs.LoginId,
+                Descriptions = descriptions,
+            };
+            _dt207_DocProgressInfoBUS.Create(progressInfo);
 
-                db.dt207_DocProgress.AddOrUpdate(docProcessUpdate);
+            switch (_eventApproved)
+            {
+                case Event207DocInfo.Create:
+                    var docBaseDelete = _dt207_BaseBUS.GetItemById(idDocument);
+                    docBaseDelete.IsDelete = true;
+                    _dt207_BaseBUS.AddOrUpdate(docBaseDelete);
+                    break;
+                case Event207DocInfo.Update:
+                    dt207_Base baseDoc = _dt207_Base_BAKBUS.GetItemById(idDocument);
+                    _dt207_BaseBUS.AddOrUpdate(baseDoc);
 
-                dt207_DocProgressInfo progressInfo = new dt207_DocProgressInfo()
-                {
-                    IdDocProgress = idDocProgress,
-                    TimeStep = DateTime.Now,
-                    IndexStep = -1,
-                    IdUserProcess = TPConfigs.LoginId,
-                    Descriptions = string.IsNullOrEmpty(descriptions) ? "取消" : $"取消，說明：{descriptions}",
-                };
-                db.dt207_DocProgressInfo.Add(progressInfo);
+                    List<dt207_Attachment> lsAttachments = _dt207_Attachment_BAKBUS.GetListByIdBase(idDocument);
+                    _dt207_AttachmentBUS.AddRange(lsAttachments);
 
-                switch (events)
-                {
-                    // Nếu là sửa thì cập nhật lại dữ liệu cũ và xoá BAK
-                    case TPConfigs.EventEdit:
-                        dt207_Base baseDoc = db.dt207_Base_BAK
-                            .Where(r => r.Id == idDocument).ToList()
-                            .Select(r => new dt207_Base
-                            {
-                                Id = r.Id,
-                                DisplayName = r.DisplayName,
-                                UserProcess = r.UserProcess,
-                                IdTypes = r.IdTypes,
-                                Keyword = r.Keyword,
-                                UserUpload = r.UserUpload,
-                                UploadDate = r.UploadDate
-                            }).FirstOrDefault();
-                        db.dt207_Base.AddOrUpdate(baseDoc);
+                    List<dt207_Security> lsSecurities = _dt207_Security_BAKBUS.GetListByIdBase(idDocument);
+                    _dt207_SecurityBUS.AddRange(lsSecurities);
 
-                        db.dt207_Attachment.RemoveRange(db.dt207_Attachment.Where(r => r.IdKnowledgeBase == idDocument));
-                        var lsAttachments = db.dt207_Attachment
-                            .Where(r => r.IdKnowledgeBase == idDocument).ToList()
-                            .Select(r => new dt207_Attachment
-                            {
-                                IdKnowledgeBase = r.IdKnowledgeBase,
-                                EncryptionName = r.EncryptionName,
-                                FileName = r.FileName
-                            });
-                        db.dt207_Attachment.AddRange(lsAttachments);
-
-                        db.dt207_Security.RemoveRange(db.dt207_Security.Where(r => r.IdKnowledgeBase == idDocument));
-                        var lsSecurities = db.dt207_Security
-                            .Where(r => r.IdKnowledgeBase == idDocument).ToList()
-                            .Select(r => new dt207_Security
-                            {
-                                IdKnowledgeBase = r.IdKnowledgeBase,
-                                IdGroup = r.IdGroup,
-                                IdUser = r.IdUser,
-                                ReadInfo = r.ReadInfo,
-                                UpdateInfo = r.UpdateInfo,
-                                DeleteInfo = r.DeleteInfo,
-                                SearchInfo = r.SearchInfo,
-                                ReadFile = r.ReadFile,
-                                SaveFile = r.SaveFile
-                            });
-                        db.dt207_Security.AddRange(lsSecurities);
-
-                        db.dt207_Base_BAK.RemoveRange(db.dt207_Base_BAK.Where(r => r.Id == idDocument));
-                        db.dt207_Attachment_BAK.RemoveRange(db.dt207_Attachment_BAK.Where(r => r.IdKnowledgeBase == idDocument));
-                        db.dt207_Security_BAK.RemoveRange(db.dt207_Security_BAK.Where(r => r.IdKnowledgeBase == idDocument));
-                        break;
-
-                    // Nếu là thêm mới mà huỷ thì chuyển IsDelete = true trên Base
-                    case TPConfigs.EventNew:
-                        var docBaseDelete = db.dt207_Base.First(r => r.Id == idDocument);
-                        docBaseDelete.IsDelete = true;
-
-                        db.dt207_Base.AddOrUpdate(docBaseDelete);
-                        break;
-                }
-
-                db.SaveChanges();
+                    // Xoá dữ liệu cũ
+                    _dt207_Base_BAKBUS.RemoveRangeById(idDocument);
+                    _dt207_Attachment_BAKBUS.RemoveRangeByIdBase(idDocument);
+                    _dt207_Security_BAKBUS.RemoveRangeByIdBase(idDocument);
+                    break;
             }
 
             Close();
