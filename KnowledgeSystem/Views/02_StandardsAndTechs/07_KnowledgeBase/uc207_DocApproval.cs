@@ -77,7 +77,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                      }).ToList();
 
                 // Xử lý phân quyền nhưng user nằm trong group sẽ nhìn thấy
-                var lsGroupIn = (from data in db.dm_GroupUser.Where(r => r.IdUser == TPConfigs.LoginId).ToList()
+                var lsGroupIn = (from data in db.dm_GroupUser.Where(r => r.IdUser == TPConfigs.LoginUser.Id).ToList()
                                  join progresses in db.dm_StepProgress.ToList() on data.IdGroup equals progresses.IdGroup
                                  select new
                                  {

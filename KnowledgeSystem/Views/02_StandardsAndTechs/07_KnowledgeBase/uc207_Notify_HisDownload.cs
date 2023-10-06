@@ -49,7 +49,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                          select new
                          {
                              data.TimeGet,
-                             TypeGetFile = data.idTypeHisGetFile,
+                             TypeGetFile = data.TypeGet,
                              data.IdKnowledgeBase,
                              data.KnowledgeAttachmentName,
                              names.DisplayName

@@ -82,7 +82,6 @@
           <Property Name="Id" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="DisplayName" Type="nvarchar" MaxLength="8" />
           <Property Name="SecondaryPassword" Type="varchar" MaxLength="32" />
-          <Property Name="IdRole" Type="int" />
           <Property Name="DateCreate" Type="date" Nullable="false" />
           <Property Name="IdDepartment" Type="varchar" MaxLength="4" />
           <Property Name="DisplayNameVN" Type="nvarchar" MaxLength="128" />
@@ -92,6 +91,7 @@
           <Property Name="JobCode" Type="varchar" MaxLength="16" />
           <Property Name="PCName" Type="varchar" MaxLength="32" />
           <Property Name="IPAddress" Type="varchar" MaxLength="15" />
+          <Property Name="IdRole" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="dt207_Attachment">
           <Key>
@@ -167,7 +167,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TimeGet" Type="datetime" Nullable="false" />
-          <Property Name="idTypeHisGetFile" Type="int" Nullable="false" />
+          <Property Name="TypeGet" Type="nvarchar" MaxLength="8" Nullable="false" />
           <Property Name="IdKnowledgeBase" Type="varchar" MaxLength="32" Nullable="false" />
           <Property Name="KnowledgeAttachmentName" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="IdUser" Type="varchar" MaxLength="10" Nullable="false" />
@@ -297,7 +297,6 @@
           <EntitySet Name="dt207_Attachment_BAK" EntityType="DBDocumentManagementSystemModel.dt207_Attachment_BAK" />
           <EntitySet Name="dt207_Base_BAK" EntityType="DBDocumentManagementSystemModel.dt207_Base_BAK" />
           <EntitySet Name="dt207_DocProgressInfo" EntityType="DBDocumentManagementSystemModel.dt207_DocProgressInfo" />
-          <EntitySet Name="dt207_HistoryGetFile" EntityType="DBDocumentManagementSystemModel.dt207_HistoryGetFile" />
           <EntitySet Name="dt207_NotifyEditDoc" EntityType="DBDocumentManagementSystemModel.dt207_NotifyEditDoc" />
           <EntitySet Name="dt207_Security" EntityType="DBDocumentManagementSystemModel.dt207_Security" />
           <EntitySet Name="dt207_Security_BAK" EntityType="DBDocumentManagementSystemModel.dt207_Security_BAK" />
@@ -308,6 +307,7 @@
           <EntitySet Name="sys_StaticValue" EntityType="DBDocumentManagementSystemModel.sys_StaticValue" />
           <EntitySet Name="dt207_DocProgress" EntityType="DBDocumentManagementSystemModel.dt207_DocProgress" />
           <EntitySet Name="dt207_Base" EntityType="DBDocumentManagementSystemModel.dt207_Base" />
+          <EntitySet Name="dt207_HistoryGetFile" EntityType="DBDocumentManagementSystemModel.dt207_HistoryGetFile" />
           <EntitySet Name="dm_User" EntityType="DBDocumentManagementSystemModel.dm_User" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
@@ -422,17 +422,6 @@
           <Property Name="Descriptions" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="TimeNotifyNotes" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="dt207_HistoryGetFile">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TimeGet" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="idTypeHisGetFile" Type="Int32" Nullable="false" />
-          <Property Name="IdKnowledgeBase" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
-          <Property Name="KnowledgeAttachmentName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="IdUser" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="dt207_NotifyEditDoc">
           <Key>
             <PropertyRef Name="Id" />
@@ -541,6 +530,17 @@
           <Property Name="UploadDate" Type="DateTime" Precision="3" />
           <Property Name="IsDelete" Type="Boolean" Nullable="false" />
         </EntityType>
+        <EntityType Name="dt207_HistoryGetFile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TimeGet" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TypeGet" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="IdKnowledgeBase" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="KnowledgeAttachmentName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="IdUser" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="dm_User">
           <Key>
             <PropertyRef Name="Id" />
@@ -548,7 +548,6 @@
           <Property Name="Id" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="DisplayName" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
           <Property Name="SecondaryPassword" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-          <Property Name="IdRole" Type="Int32" />
           <Property Name="DateCreate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="IdDepartment" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
           <Property Name="DisplayNameVN" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
@@ -558,6 +557,7 @@
           <Property Name="JobCode" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
           <Property Name="PCName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
           <Property Name="IPAddress" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="IdRole" Type="Int32" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -689,18 +689,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dt207_HistoryGetFile">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt207_HistoryGetFile">
-              <MappingFragment StoreEntitySet="dt207_HistoryGetFile">
-                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
-                <ScalarProperty Name="KnowledgeAttachmentName" ColumnName="KnowledgeAttachmentName" />
-                <ScalarProperty Name="IdKnowledgeBase" ColumnName="IdKnowledgeBase" />
-                <ScalarProperty Name="idTypeHisGetFile" ColumnName="idTypeHisGetFile" />
-                <ScalarProperty Name="TimeGet" ColumnName="TimeGet" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="dt207_NotifyEditDoc">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt207_NotifyEditDoc">
               <MappingFragment StoreEntitySet="dt207_NotifyEditDoc">
@@ -819,9 +807,22 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="dt207_HistoryGetFile">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt207_HistoryGetFile">
+              <MappingFragment StoreEntitySet="dt207_HistoryGetFile">
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="KnowledgeAttachmentName" ColumnName="KnowledgeAttachmentName" />
+                <ScalarProperty Name="IdKnowledgeBase" ColumnName="IdKnowledgeBase" />
+                <ScalarProperty Name="TypeGet" ColumnName="TypeGet" />
+                <ScalarProperty Name="TimeGet" ColumnName="TimeGet" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="dm_User">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_User">
               <MappingFragment StoreEntitySet="dm_User">
+                <ScalarProperty Name="IdRole" ColumnName="IdRole" />
                 <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
                 <ScalarProperty Name="PCName" ColumnName="PCName" />
                 <ScalarProperty Name="JobCode" ColumnName="JobCode" />
@@ -831,7 +832,6 @@
                 <ScalarProperty Name="DisplayNameVN" ColumnName="DisplayNameVN" />
                 <ScalarProperty Name="IdDepartment" ColumnName="IdDepartment" />
                 <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
-                <ScalarProperty Name="IdRole" ColumnName="IdRole" />
                 <ScalarProperty Name="SecondaryPassword" ColumnName="SecondaryPassword" />
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />

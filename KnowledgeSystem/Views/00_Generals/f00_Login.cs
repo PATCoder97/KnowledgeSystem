@@ -91,8 +91,6 @@ namespace KnowledgeSystem.Views._00_Generals
                 if (_userLogin != null)
                 {
                     // Lưu thông tin đăng nhập và đóng form
-                    TPConfigs.LoginId = _userID;
-                    TPConfigs.RoleUserLogin = _userLogin.IdRole ?? 0;
                     RegistryHelper.SaveSetting(RegistryHelper.LoginId, _userID);
                     TPConfigs.LoginSuccessful = true;
                     TPConfigs.LoginUser = _userLogin;

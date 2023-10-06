@@ -72,7 +72,7 @@ namespace KnowledgeSystem.Views._00_Generals
             Location = new Point((Screen.PrimaryScreen.WorkingArea.Width - this.Width) / 2,
                            (Screen.PrimaryScreen.WorkingArea.Height - this.Height) / 2);
 
-            var _userLogin = _dm_UserBUS.GetUserByUID(TPConfigs.LoginId);
+            var _userLogin = _dm_UserBUS.GetUserByUID(TPConfigs.LoginUser.Id);
             string userName = _userLogin.DisplayName;
             string idDept = _userLogin.IdDepartment;
             var gradeName = _dm_DeptBUS.GetById(idDept.Substring(0, 2)).DisplayName;
@@ -100,7 +100,7 @@ namespace KnowledgeSystem.Views._00_Generals
                 return;
             }
 
-            _dm_UserBUS.ChangePass(TPConfigs.LoginId, newPassword);
+            _dm_UserBUS.ChangePass(TPConfigs.LoginUser.Id, newPassword);
             XtraMessageBox.Show("您的密碼已更新！", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 

@@ -31,7 +31,7 @@ namespace KnowledgeSystem.Configs
 
         private AppPermission()
         {
-            lsPermissions = _dm_FunctionRoleBUS.GetListByRole(TPConfigs.RoleUserLogin).Select(r => r.IdFunction).ToList();
+            lsPermissions = _dm_FunctionRoleBUS.GetListByRole(TPConfigs.LoginUser.IdRole).Select(r => r.IdFunction).ToList();
         }
 
         /// <summary>

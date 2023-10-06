@@ -113,9 +113,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     dt207_HistoryGetFile historyGetFile = new dt207_HistoryGetFile()
                     {
                         IdKnowledgeBase = idKnowledgeBase,
-                        idTypeHisGetFile = 2,
+                        TypeGet = TPConfigs.strSaveFile,
                         KnowledgeAttachmentName = Text,
-                        IdUser = TPConfigs.LoginId,
+                        IdUser = TPConfigs.LoginUser.Id,
                         TimeGet = DateTime.Now
                     };
                     _dt207_HistoryGetFileBUS.Create(historyGetFile);

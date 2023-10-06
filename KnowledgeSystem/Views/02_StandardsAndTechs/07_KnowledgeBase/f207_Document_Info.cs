@@ -54,6 +54,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         dt207_Security_BAKBUS _dt207_Security_BAKBUS = new dt207_Security_BAKBUS();
         dt207_DocProgressBUS _dt207_DocProgressBUS = new dt207_DocProgressBUS();
         dt207_DocProgressInfoBUS _dt207_DocProgressInfoBUS = new dt207_DocProgressInfoBUS();
+        dt207_HistoryGetFileBUS _dt207_HistoryGetFileBUS = new dt207_HistoryGetFileBUS();
 
         // Khai báo các source
         BindingSource _BSAttachments = new BindingSource();
@@ -252,7 +253,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private Securityinfo GetPermission()
         {
-            string userIdLogin = TPConfigs.LoginId;
+            string userIdLogin = TPConfigs.LoginUser.Id;
 
             if (cbbUserUpload.EditValue.ToString() == userIdLogin ||
                 cbbUserProcess.EditValue.ToString() == userIdLogin)
@@ -567,8 +568,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     IsComplete = false,
                     IsSuccess = false,
                     IdProgress = progressSelect.Id,
-                    Descriptions = TPConfigs.EventDel,
-                    IdUserProcess = TPConfigs.LoginId
+                    Descriptions = EnumHelper.GetDescription(_event207),
+                    IdUserProcess = TPConfigs.LoginUser.Id
                 };
 
                 db.dt207_DocProgress.Add(docProgress);
@@ -679,7 +680,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                         IsSuccess = false,
                         IdProgress = progressSelect.Id,
                         Descriptions = EnumHelper.GetDescription(_event207),
-                        IdUserProcess = TPConfigs.LoginId,
+                        IdUserProcess = TPConfigs.LoginUser.Id,
                     };
                     _dt207_DocProgressBUS.Create(docProgress);
                 }
@@ -690,7 +691,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                         IdDocProgress = _idDocProcessing,
                         TimeStep = DateTime.Now,
                         IndexStep = 0,
-                        IdUserProcess = TPConfigs.LoginId,
+                        IdUserProcess = TPConfigs.LoginUser.Id,
                         Descriptions = "呈核",
                     };
                     _dt207_DocProgressInfoBUS.Create(progressInfo);
@@ -718,24 +719,18 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             string documentsFile = Path.Combine(TPConfigs.PathKnowledgeFile, dataRow.EncryptionName);
 
             // Lưu lại lịch sử xem file
-            using (var db = new DBDocumentManagementSystemEntities())
+            var IsProcessing = _dt207_DocProgressBUS.CheckItemProcessing(_idBaseDocument);
+            if (!string.IsNullOrEmpty(_idBaseDocument) && !IsProcessing)
             {
-                var IsProcessing = db.dt207_DocProgress.Any(r => r.IdKnowledgeBase == _idBaseDocument && !(r.IsComplete));
-
-                if (!string.IsNullOrEmpty(_idBaseDocument) && !IsProcessing)
+                dt207_HistoryGetFile historyGetFile = new dt207_HistoryGetFile()
                 {
-                    dt207_HistoryGetFile historyGetFile = new dt207_HistoryGetFile()
-                    {
-                        IdKnowledgeBase = _idBaseDocument,
-                        idTypeHisGetFile = 1,
-                        KnowledgeAttachmentName = dataRow.FileName,
-                        IdUser = TPConfigs.LoginId,
-                        TimeGet = DateTime.Now
-                    };
-
-                    db.dt207_HistoryGetFile.Add(historyGetFile);
-                    db.SaveChanges();
-                }
+                    IdKnowledgeBase = _idBaseDocument,
+                    TypeGet = TPConfigs.strReadFile,
+                    KnowledgeAttachmentName = dataRow.FileName,
+                    IdUser = TPConfigs.LoginUser.Id,
+                    TimeGet = DateTime.Now
+                };
+                _dt207_HistoryGetFileBUS.Create(historyGetFile);
             }
 
             string pathDocTemp = Path.Combine(TPConfigs.TempFolderData, $"{DateTime.Now:MMddhhmmss} {dataRow.FileName}");
@@ -877,7 +872,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 IdDocProgress = _idBaseProgress,
                 TimeStep = DateTime.Now,
                 IndexStep = _indexStep,
-                IdUserProcess = TPConfigs.LoginId,
+                IdUserProcess = TPConfigs.LoginUser.Id,
                 Descriptions = descriptions,
             };
             _dt207_DocProgressInfoBUS.Create(progressInfo);
@@ -947,7 +942,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 IdDocProgress = _idDocProcessing,
                 TimeStep = DateTime.Now,
                 IndexStep = -1,
-                IdUserProcess = TPConfigs.LoginId,
+                IdUserProcess = TPConfigs.LoginUser.Id,
                 Descriptions = descriptions,
             };
             _dt207_DocProgressInfoBUS.Create(progressInfo);
