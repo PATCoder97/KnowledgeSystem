@@ -1,38 +1,20 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
-using DevExpress.ClipboardSource.SpreadsheetML;
-using DevExpress.DocumentView;
-using DevExpress.Security;
-using DevExpress.Utils.About;
-using DevExpress.Utils.Drawing.Helpers;
-using DevExpress.Utils.Extensions;
-using DevExpress.Utils.Gesture;
-using DevExpress.Utils.Win.Hook;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Columns;
-using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraPrinting.Native.WebClientUIControl;
 using DevExpress.XtraSplashScreen;
 using KnowledgeSystem.Configs;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Data.Entity.Migrations;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Security.AccessControl;
-using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
 using dm_Group = DataAccessLayer.dm_Group;
 
 namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
@@ -184,6 +166,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 case Event207DocInfo.Create:
                     EnableControls(true);
                     ShowControls(true);
+                    btnCancel.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                     break;
                 case Event207DocInfo.View:
                     Text = "群組信息";
@@ -201,6 +184,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     HideOptions();
                     break;
                 default:
+                    Text = "群組信息";
+                    EnableControls(false);
+                    ShowControls(false);
+                    HideOptions();
+                    btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     break;
             }
         }
@@ -452,6 +440,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     }
 
                     goto case Event207DocInfo.View;
+                case Event207DocInfo.Check:
+                    goto case Event207DocInfo.Approval;
             }
 
             // Lấy quyền hạn của người dùng đối với văn kiện này
@@ -923,101 +913,61 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void btnCancel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            //// Tạo textbox lấy nguyên nhân
-            //XtraInputBoxArgs args = new XtraInputBoxArgs
-            //{
-            //    Caption = TPConfigs.SoftNameTW,
-            //    Prompt = "原因",
-            //    DefaultButtonIndex = 0,
-            //    Editor = new MemoEdit()
-            //};
+            // Tạo textbox lấy nguyên nhân
+            XtraInputBoxArgs args = new XtraInputBoxArgs
+            {
+                Caption = TPConfigs.SoftNameTW,
+                Prompt = "原因",
+                DefaultButtonIndex = 0,
+                Editor = new MemoEdit()
+            };
 
-            //var result = XtraInputBox.Show(args);
-            //string descriptions = result?.ToString() ?? "";
+            var result = XtraInputBox.Show(args);
+            string descriptions = string.IsNullOrEmpty(result?.ToString()) ? "取消" : $"取消，說明：{result}";
 
-            //using (var db = new DBDocumentManagementSystemEntities())
-            //{
-            //    var docProcessUpdate = db.dt207_DocProgress.First(r => r.Id == _idDocProcessing);
-            //    docProcessUpdate.IsSuccess = false;
-            //    docProcessUpdate.IsComplete = true;
-            //    docProcessUpdate.Change = string.IsNullOrEmpty(descriptions) ? "取消" : $"取消，說明：{descriptions}";
+            var docProcessUpdate = _dt207_DocProgressBUS.GetItemById(_idDocProcessing);
+            _eventApproved = EnumHelper.GetEnumByDescription<Event207DocInfo>(docProcessUpdate.Descriptions);
 
-            //    db.dt207_DocProgress.AddOrUpdate(docProcessUpdate);
+            docProcessUpdate.IsSuccess = false;
+            docProcessUpdate.IsComplete = true;
+            docProcessUpdate.Change = descriptions;
+            _dt207_DocProgressBUS.AddOrUpdate(docProcessUpdate);
 
-            //    dt207_DocProgressInfo progressInfo = new dt207_DocProgressInfo()
-            //    {
-            //        IdDocProgress = _idDocProcessing,
-            //        TimeStep = DateTime.Now,
-            //        IndexStep = -1,
-            //        IdUserProcess = TPConfigs.LoginId,
-            //        Descriptions = string.IsNullOrEmpty(descriptions) ? "取消" : $"取消，說明：{descriptions}",
-            //    };
-            //    db.dt207_DocProgressInfo.Add(progressInfo);
+            dt207_DocProgressInfo progressInfo = new dt207_DocProgressInfo()
+            {
+                IdDocProgress = _idDocProcessing,
+                TimeStep = DateTime.Now,
+                IndexStep = -1,
+                IdUserProcess = TPConfigs.LoginId,
+                Descriptions = descriptions,
+            };
+            _dt207_DocProgressInfoBUS.Create(progressInfo);
 
-            //    switch (events)
-            //    {
-            //        // Nếu là sửa thì cập nhật lại dữ liệu cũ và xoá BAK
-            //        case TPConfigs.EventEdit:
-            //            dt207_Base baseDoc = db.dt207_Base_BAK
-            //                .Where(r => r.Id == idDocument).ToList()
-            //                .Select(r => new dt207_Base
-            //                {
-            //                    Id = r.Id,
-            //                    DisplayName = r.DisplayName,
-            //                    UserProcess = r.UserProcess,
-            //                    IdTypes = r.IdTypes,
-            //                    Keyword = r.Keyword,
-            //                    UserUpload = r.UserUpload,
-            //                    UploadDate = r.UploadDate
-            //                }).FirstOrDefault();
-            //            db.dt207_Base.AddOrUpdate(baseDoc);
+            switch (_eventApproved)
+            {
+                case Event207DocInfo.Create:
+                    var docBaseDelete = _dt207_BaseBUS.GetItemById(idDocument);
+                    docBaseDelete.IsDelete = true;
+                    _dt207_BaseBUS.AddOrUpdate(docBaseDelete);
+                    break;
+                case Event207DocInfo.Update:
+                    dt207_Base baseDoc = _dt207_Base_BAKBUS.GetItemById(idDocument);
+                    _dt207_BaseBUS.AddOrUpdate(baseDoc);
 
-            //            db.dt207_Attachment.RemoveRange(db.dt207_Attachment.Where(r => r.IdKnowledgeBase == idDocument));
-            //            var lsAttachments = db.dt207_Attachment
-            //                .Where(r => r.IdKnowledgeBase == idDocument).ToList()
-            //                .Select(r => new dt207_Attachment
-            //                {
-            //                    IdKnowledgeBase = r.IdKnowledgeBase,
-            //                    EncryptionName = r.EncryptionName,
-            //                    FileName = r.FileName
-            //                });
-            //            db.dt207_Attachment.AddRange(lsAttachments);
+                    List<dt207_Attachment> lsAttachments = _dt207_Attachment_BAKBUS.GetListByIdBase(idDocument);
+                    _dt207_AttachmentBUS.AddRange(lsAttachments);
 
-            //            db.dt207_Security.RemoveRange(db.dt207_Security.Where(r => r.IdKnowledgeBase == idDocument));
-            //            var lsSecurities = db.dt207_Security
-            //                .Where(r => r.IdKnowledgeBase == idDocument).ToList()
-            //                .Select(r => new dt207_Security
-            //                {
-            //                    IdKnowledgeBase = r.IdKnowledgeBase,
-            //                    IdGroup = r.IdGroup,
-            //                    IdUser = r.IdUser,
-            //                    ReadInfo = r.ReadInfo,
-            //                    UpdateInfo = r.UpdateInfo,
-            //                    DeleteInfo = r.DeleteInfo,
-            //                    SearchInfo = r.SearchInfo,
-            //                    ReadFile = r.ReadFile,
-            //                    SaveFile = r.SaveFile
-            //                });
-            //            db.dt207_Security.AddRange(lsSecurities);
+                    List<dt207_Security> lsSecurities = _dt207_Security_BAKBUS.GetListByIdBase(idDocument);
+                    _dt207_SecurityBUS.AddRange(lsSecurities);
 
-            //            db.dt207_Base_BAK.RemoveRange(db.dt207_Base_BAK.Where(r => r.Id == idDocument));
-            //            db.dt207_Attachment_BAK.RemoveRange(db.dt207_Attachment_BAK.Where(r => r.IdKnowledgeBase == idDocument));
-            //            db.dt207_Security_BAK.RemoveRange(db.dt207_Security_BAK.Where(r => r.IdKnowledgeBase == idDocument));
-            //            break;
+                    // Xoá dữ liệu cũ
+                    _dt207_Base_BAKBUS.RemoveRangeById(idDocument);
+                    _dt207_Attachment_BAKBUS.RemoveRangeByIdBase(idDocument);
+                    _dt207_Security_BAKBUS.RemoveRangeByIdBase(idDocument);
+                    break;
+            }
 
-            //        // Nếu là thêm mới mà huỷ thì chuyển IsDelete = true trên Base
-            //        case TPConfigs.EventNew:
-            //            var docBaseDelete = db.dt207_Base.First(r => r.Id == idDocument);
-            //            docBaseDelete.IsDelete = true;
-
-            //            db.dt207_Base.AddOrUpdate(docBaseDelete);
-            //            break;
-            //    }
-
-            //    db.SaveChanges();
-            //}
-
-            //Close();
+            Close();
         }
     }
 }

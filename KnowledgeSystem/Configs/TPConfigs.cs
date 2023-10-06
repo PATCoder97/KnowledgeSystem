@@ -64,7 +64,8 @@ namespace KnowledgeSystem.Configs
         Update,
         [Description("刪除文件")]
         Delete,
-        Approval
+        Approval,
+        Check
     }
 
     //public DBDocumentManagementSystemEntities()

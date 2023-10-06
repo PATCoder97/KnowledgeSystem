@@ -122,6 +122,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 if (indexStep == -1 && !(docProcess.IsComplete))
                 {
                     f207_Document_Info document_Info = new f207_Document_Info(docProcess.IdKnowledgeBase);
+                    document_Info._event207 = Event207DocInfo.Check;
                     document_Info.ShowDialog();
                 }
                 else
