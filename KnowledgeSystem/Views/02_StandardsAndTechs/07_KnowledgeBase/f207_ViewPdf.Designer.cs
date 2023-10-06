@@ -45,6 +45,8 @@
             this.lcPDF = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcWord = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcExcel = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lbCanntView = new System.Windows.Forms.Label();
+            this.lcCanntView = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
@@ -52,11 +54,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcPDF)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcWord)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcExcel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcCanntView)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
             // 
             this.layoutControl1.AllowCustomization = false;
+            this.layoutControl1.Controls.Add(this.lbCanntView);
             this.layoutControl1.Controls.Add(this.viewExcel);
             this.layoutControl1.Controls.Add(this.viewWord);
             this.layoutControl1.Controls.Add(this.viewPDF);
@@ -71,11 +75,11 @@
             // 
             // viewExcel
             // 
-            this.viewExcel.Location = new System.Drawing.Point(12, 438);
+            this.viewExcel.Location = new System.Drawing.Point(12, 314);
             this.viewExcel.MenuManager = this.barManager1;
             this.viewExcel.Name = "viewExcel";
             this.viewExcel.ReadOnly = true;
-            this.viewExcel.Size = new System.Drawing.Size(871, 193);
+            this.viewExcel.Size = new System.Drawing.Size(433, 317);
             this.viewExcel.TabIndex = 6;
             this.viewExcel.Text = "spreadsheetControl1";
             this.viewExcel.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Viewer_KeyDown);
@@ -171,11 +175,11 @@
             // 
             // viewWord
             // 
-            this.viewWord.Location = new System.Drawing.Point(12, 219);
+            this.viewWord.Location = new System.Drawing.Point(449, 12);
             this.viewWord.MenuManager = this.barManager1;
             this.viewWord.Name = "viewWord";
             this.viewWord.ReadOnly = true;
-            this.viewWord.Size = new System.Drawing.Size(871, 215);
+            this.viewWord.Size = new System.Drawing.Size(434, 298);
             this.viewWord.TabIndex = 5;
             this.viewWord.Text = "richEditControl1";
             this.viewWord.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Viewer_KeyDown);
@@ -186,7 +190,7 @@
             this.viewPDF.MenuManager = this.barManager1;
             this.viewPDF.Name = "viewPDF";
             this.viewPDF.NavigationPanePageVisibility = DevExpress.XtraPdfViewer.PdfNavigationPanePageVisibility.None;
-            this.viewPDF.Size = new System.Drawing.Size(871, 203);
+            this.viewPDF.Size = new System.Drawing.Size(433, 298);
             this.viewPDF.TabIndex = 4;
             this.viewPDF.PopupMenuShowing += new DevExpress.XtraPdfViewer.PdfPopupMenuShowingEventHandler(this.pdfViewerData_PopupMenuShowing);
             this.viewPDF.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Viewer_KeyDown);
@@ -197,8 +201,9 @@
             this.Root.GroupBordersVisible = false;
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.lcPDF,
+            this.lcExcel,
             this.lcWord,
-            this.lcExcel});
+            this.lcCanntView});
             this.Root.Name = "Root";
             this.Root.Size = new System.Drawing.Size(895, 643);
             this.Root.TextVisible = false;
@@ -208,27 +213,46 @@
             this.lcPDF.Control = this.viewPDF;
             this.lcPDF.Location = new System.Drawing.Point(0, 0);
             this.lcPDF.Name = "lcPDF";
-            this.lcPDF.Size = new System.Drawing.Size(875, 207);
+            this.lcPDF.Size = new System.Drawing.Size(437, 302);
             this.lcPDF.TextSize = new System.Drawing.Size(0, 0);
             this.lcPDF.TextVisible = false;
             // 
             // lcWord
             // 
             this.lcWord.Control = this.viewWord;
-            this.lcWord.Location = new System.Drawing.Point(0, 207);
+            this.lcWord.Location = new System.Drawing.Point(437, 0);
             this.lcWord.Name = "lcWord";
-            this.lcWord.Size = new System.Drawing.Size(875, 219);
+            this.lcWord.Size = new System.Drawing.Size(438, 302);
             this.lcWord.TextSize = new System.Drawing.Size(0, 0);
             this.lcWord.TextVisible = false;
             // 
             // lcExcel
             // 
             this.lcExcel.Control = this.viewExcel;
-            this.lcExcel.Location = new System.Drawing.Point(0, 426);
+            this.lcExcel.Location = new System.Drawing.Point(0, 302);
             this.lcExcel.Name = "lcExcel";
-            this.lcExcel.Size = new System.Drawing.Size(875, 197);
+            this.lcExcel.Size = new System.Drawing.Size(437, 321);
             this.lcExcel.TextSize = new System.Drawing.Size(0, 0);
             this.lcExcel.TextVisible = false;
+            // 
+            // lbCanntView
+            // 
+            this.lbCanntView.Font = new System.Drawing.Font("DFKai-SB", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbCanntView.Location = new System.Drawing.Point(449, 314);
+            this.lbCanntView.Name = "lbCanntView";
+            this.lbCanntView.Size = new System.Drawing.Size(434, 317);
+            this.lbCanntView.TabIndex = 7;
+            this.lbCanntView.Text = "謝謝";
+            this.lbCanntView.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lcCanntView
+            // 
+            this.lcCanntView.Control = this.lbCanntView;
+            this.lcCanntView.Location = new System.Drawing.Point(437, 302);
+            this.lcCanntView.Name = "lcCanntView";
+            this.lcCanntView.Size = new System.Drawing.Size(438, 321);
+            this.lcCanntView.TextSize = new System.Drawing.Size(0, 0);
+            this.lcCanntView.TextVisible = false;
             // 
             // f207_ViewPdf
             // 
@@ -253,6 +277,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcPDF)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcWord)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcExcel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcCanntView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -275,5 +300,7 @@
         private DevExpress.XtraLayout.LayoutControlItem lcWord;
         private DevExpress.XtraSpreadsheet.SpreadsheetControl viewExcel;
         private DevExpress.XtraLayout.LayoutControlItem lcExcel;
+        private System.Windows.Forms.Label lbCanntView;
+        private DevExpress.XtraLayout.LayoutControlItem lcCanntView;
     }
 }

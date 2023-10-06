@@ -39,6 +39,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 lcPDF.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 lcWord.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 lcExcel.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                lcCanntView.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 string fileExtension = Path.GetExtension(documentFile).ToLower();
 
                 switch (fileExtension)
@@ -58,7 +59,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                         lcWord.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
                         break;
                     default:
-
+                        lcCanntView.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                        lbCanntView.Text = "目前系統無法讀取該類型文件，\n請下載已閱讀。謝謝！";
                         break;
                 }
             }
