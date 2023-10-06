@@ -200,18 +200,6 @@
     <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_ViewFile.Designer.cs">
       <DependentUpon>f207_ViewFile.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_CustomerInfos.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_CustomerInfos.Designer.cs">
-      <DependentUpon>uc207_CustomerInfos.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_CustomerInfos_Info.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_CustomerInfos_Info.Designer.cs">
-      <DependentUpon>uc207_CustomerInfos_Info.cs</DependentUpon>
-    </Compile>
     <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_DataStatistics.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -342,12 +330,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_ViewFile.resx">
       <DependentUpon>f207_ViewFile.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_CustomerInfos.resx">
-      <DependentUpon>uc207_CustomerInfos.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_CustomerInfos_Info.resx">
-      <DependentUpon>uc207_CustomerInfos_Info.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_DataStatistics.resx">
       <DependentUpon>uc207_DataStatistics.cs</DependentUpon>
