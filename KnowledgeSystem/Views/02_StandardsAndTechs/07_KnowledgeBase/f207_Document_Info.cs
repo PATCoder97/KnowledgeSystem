@@ -369,6 +369,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     var displayName = base207Info.DisplayName.Split(new[] { "\n" }, StringSplitOptions.None);
                     txbNameTW.Text = displayName[0];
                     txbNameVN.Text = displayName.Length > 1 ? displayName[1] : "";
+                    txbNameEN.Text = displayName.Length > 2 ? displayName[2] : "";
                     txbKeyword.Text = base207Info.Keyword;
 
                     // Thông tin phụ kiện
@@ -477,16 +478,12 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     if (_stepNow != -1)
                     {
                         btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                        //btnApproved.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
-                        //btnDisapprove.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                         btnViewed.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     }
                     else
                     {
                         btnCancel.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                         btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
-                        btnApproved.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                        btnDisapprove.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                     }
 
                     goto case Event207DocInfo.View;
@@ -686,7 +683,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 dt207_Base knowledge = new dt207_Base()
                 {
                     Id = _idBaseDocument,
-                    DisplayName = string.Join("\n", new[] { _nameTW, _nameVN, _nameEN }.Where(s => !string.IsNullOrWhiteSpace(s))),
+                    DisplayName = string.Join("\n", new[] { _nameTW, _nameVN, _nameEN }),
                     UserProcess = cbbUserProcess.EditValue.ToString(),
                     IdTypes = (int)cbbType.EditValue,
                     Keyword = _keyword,
