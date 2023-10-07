@@ -406,7 +406,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
                     // Thông tin lịch sửa cập nhật
                     var lsDocProcess = _dt207_DocProgressBUS.GetListByIdBase(_idBaseDocument).Where(r => r.Id != _idDocProcessing);
-                    //db.dt207_DocProgress.Where(r => r.IdKnowledgeBase == idDocument && r.Descriptions == TPConfigs.EventEdit).ToList();
                     var lsDocProcessInfos =
                         (from data in _dt207_DocProgressInfoBUS.GetList()
                          group data by data.IdDocProgress into g
@@ -502,8 +501,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                         Text = r.Text,
                         Confirm = false
                     }).ToList();
-
-                //  btnDisabtnbtnpprove.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             }
 
             // Lấy quyền hạn của người dùng đối với văn kiện này

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace KnowledgeSystem.Configs
 {
@@ -26,6 +27,17 @@ namespace KnowledgeSystem.Configs
             treeList_.OptionsBehavior.EditingMode = TreeListEditingMode.EditForm;
 
             treeList_.OptionsSelection.SelectNodesOnRightClick = true;
+        }
+
+        public static void GridViewCopyCellData_KeyDown(object sender, KeyEventArgs e)
+        {
+            GridView view = sender as GridView;
+            if (e.Control && e.KeyCode == Keys.C)
+            {
+                if (view.GetRowCellValue(view.FocusedRowHandle, view.FocusedColumn) != null && view.GetRowCellValue(view.FocusedRowHandle, view.FocusedColumn).ToString() != String.Empty)
+                    Clipboard.SetText(view.GetRowCellValue(view.FocusedRowHandle, view.FocusedColumn).ToString());
+                e.Handled = true;
+            }
         }
     }
 }

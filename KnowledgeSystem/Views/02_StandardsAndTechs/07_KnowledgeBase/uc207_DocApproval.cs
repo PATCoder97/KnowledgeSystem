@@ -109,6 +109,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             lbInfo.AutoSizeMode = LabelAutoSizeMode.Vertical;
 
             gvData.ReadOnlyGridView();
+            gvData.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
 
             gcData.DataSource = source;
 
