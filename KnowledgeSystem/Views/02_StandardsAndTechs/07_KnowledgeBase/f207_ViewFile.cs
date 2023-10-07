@@ -16,6 +16,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Spire.Presentation;
 
 namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 {
@@ -62,6 +63,23 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     case ".doc":
                         viewWord.Document.LoadDocument(documentFile);
                         lcWord.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                        break;
+                    case ".pptx":
+                    case ".ppt":
+                        Spire.License.LicenseProvider.SetLicenseKey(TPConfigs.KeySpirePPT);
+
+                        string outputPath = Path.Combine(TPConfigs.TempFolderData, $"{DateTime.Now:MMddhhmmss} PPTConvertPDF.pdf");
+                        // Load the PowerPoint presentation
+                        using (Presentation presentation = new Presentation())
+                        {
+                            presentation.LoadFromFile(documentFile);
+
+                            // Convert the presentation to PDF
+                            presentation.SaveToFile(outputPath, FileFormat.PDF);
+                        }
+
+                        viewPDF.DocumentFilePath = outputPath;
+                        lcPDF.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
                         break;
                     default:
                         lcCanntView.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
