@@ -1,5 +1,7 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
+using DevExpress.Utils;
+using DevExpress.XtraBars;
 using DevExpress.XtraBars.Docking2010.Views;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
@@ -115,6 +117,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             helper = new RefreshHelper(bgvSecurity, "Id");
             lcgProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             lcgHistoryEdit.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+
+            lcType.Text = " 類別<color=red>*</color>";
+            lcNameTW.Text = "中文名稱<color=red>*</color>";
+            lcKeyword.Text = "關鍵字<color=red>*</color>";
 
             btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
             btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
@@ -517,6 +523,17 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void f207_DocumentInfo_Shown(object sender, EventArgs e)
         {
+            if (_event207 == Event207DocInfo.Approval)
+            {
+                XtraMessageBoxArgs args = new XtraMessageBoxArgs();
+                args.AllowHtmlText = DefaultBoolean.True;
+
+                args.Caption = TPConfigs.SoftNameTW;
+                args.Text = "<font='DFKai-SB' size=18>請點選<color=red>「確認」</color>確認您已審查文件信息!</font>";
+                args.Buttons = new DialogResult[] { DialogResult.OK };
+
+                XtraMessageBox.Show(args);
+            }
             txbNameTW.Focus();
         }
 

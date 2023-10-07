@@ -30,16 +30,16 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f207_Document_Info));
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions9 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject33 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject34 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject35 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject36 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions10 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject37 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject38 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject39 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject40 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.gcHistoryProcess = new DevExpress.XtraGrid.GridControl();
             this.gvHistoryProcess = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -55,6 +55,7 @@
             this.btnApproved = new DevExpress.XtraBars.BarButtonItem();
             this.btnDisapprove = new DevExpress.XtraBars.BarButtonItem();
             this.btnCancel = new DevExpress.XtraBars.BarButtonItem();
+            this.btnViewed = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -101,18 +102,20 @@
             this.txbNameEN = new DevExpress.XtraEditors.TextEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.controlgroupDocument = new DevExpress.XtraLayout.TabbedControlGroup();
-            this.lcgInfo = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem16 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcgHistoryEdit = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcgProgress = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem14 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcgInfo = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcType = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcNameTW = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcKeyword = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem16 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcgFiles = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -121,10 +124,7 @@
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
-            this.lcgHistoryEdit = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcProgress = new DevExpress.XtraLayout.LayoutControlItem();
-            this.btnViewed = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcHistoryProcess)).BeginInit();
@@ -151,18 +151,20 @@
             ((System.ComponentModel.ISupportInitialize)(this.txbNameEN.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controlgroupDocument)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcgInfo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem13)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem16)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcgHistoryEdit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcgProgress)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem14)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcgInfo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcType)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcNameTW)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem13)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcKeyword)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem16)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcgFiles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
@@ -171,8 +173,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcgHistoryEdit)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcProgress)).BeginInit();
             this.SuspendLayout();
             // 
@@ -404,6 +404,14 @@
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
             this.btnCancel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnCancel_ItemClick);
+            // 
+            // btnViewed
+            // 
+            this.btnViewed.Caption = "確認";
+            this.btnViewed.Id = 7;
+            this.btnViewed.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnViewed.Name = "btnViewed";
+            this.btnViewed.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnViewed_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -786,10 +794,10 @@
             // btnDelPermission
             // 
             this.btnDelPermission.AutoHeight = false;
-            editorButtonImageOptions9.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("editorButtonImageOptions9.SvgImage")));
-            editorButtonImageOptions9.SvgImageSize = new System.Drawing.Size(24, 24);
+            editorButtonImageOptions1.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("editorButtonImageOptions1.SvgImage")));
+            editorButtonImageOptions1.SvgImageSize = new System.Drawing.Size(24, 24);
             this.btnDelPermission.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions9, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject33, serializableAppearanceObject34, serializableAppearanceObject35, serializableAppearanceObject36, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.btnDelPermission.Name = "btnDelPermission";
             this.btnDelPermission.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             this.btnDelPermission.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnDelPermission_ButtonClick);
@@ -858,10 +866,10 @@
             // btnDelFile
             // 
             this.btnDelFile.AutoHeight = false;
-            editorButtonImageOptions10.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("editorButtonImageOptions10.SvgImage")));
-            editorButtonImageOptions10.SvgImageSize = new System.Drawing.Size(16, 16);
+            editorButtonImageOptions2.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("editorButtonImageOptions2.SvgImage")));
+            editorButtonImageOptions2.SvgImageSize = new System.Drawing.Size(16, 16);
             this.btnDelFile.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions10, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject37, serializableAppearanceObject38, serializableAppearanceObject39, serializableAppearanceObject40, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.btnDelFile.Name = "btnDelFile";
             this.btnDelFile.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             this.btnDelFile.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnDelFile_ButtonClick);
@@ -1005,7 +1013,7 @@
             this.controlgroupDocument.AppearanceTabPage.HeaderActive.Options.UseForeColor = true;
             this.controlgroupDocument.Location = new System.Drawing.Point(0, 23);
             this.controlgroupDocument.Name = "controlgroupDocument";
-            this.controlgroupDocument.SelectedTabPage = this.lcgHistoryEdit;
+            this.controlgroupDocument.SelectedTabPage = this.lcgInfo;
             this.controlgroupDocument.Size = new System.Drawing.Size(1056, 391);
             this.controlgroupDocument.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.lcgProgress,
@@ -1016,16 +1024,62 @@
             this.controlgroupDocument.Text = "信息";
             this.controlgroupDocument.SelectedPageChanged += new DevExpress.XtraLayout.LayoutTabPageChangedEventHandler(this.controlgroupDocument_SelectedPageChanged);
             // 
+            // lcgHistoryEdit
+            // 
+            this.lcgHistoryEdit.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem9});
+            this.lcgHistoryEdit.Location = new System.Drawing.Point(0, 0);
+            this.lcgHistoryEdit.Name = "lcgHistoryEdit";
+            this.lcgHistoryEdit.Size = new System.Drawing.Size(1032, 340);
+            this.lcgHistoryEdit.Text = "變更歷史";
+            // 
+            // layoutControlItem9
+            // 
+            this.layoutControlItem9.Control = this.gcEditHistory;
+            this.layoutControlItem9.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem9.Name = "layoutControlItem9";
+            this.layoutControlItem9.Size = new System.Drawing.Size(1032, 340);
+            this.layoutControlItem9.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem9.TextVisible = false;
+            // 
+            // lcgProgress
+            // 
+            this.lcgProgress.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem14,
+            this.layoutControlItem15});
+            this.lcgProgress.Location = new System.Drawing.Point(0, 0);
+            this.lcgProgress.Name = "lcgProgress";
+            this.lcgProgress.Size = new System.Drawing.Size(1032, 340);
+            this.lcgProgress.Text = "核簽流程";
+            // 
+            // layoutControlItem14
+            // 
+            this.layoutControlItem14.Control = this.stepProgressDoc;
+            this.layoutControlItem14.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem14.Name = "layoutControlItem14";
+            this.layoutControlItem14.Size = new System.Drawing.Size(1032, 104);
+            this.layoutControlItem14.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem14.TextVisible = false;
+            // 
+            // layoutControlItem15
+            // 
+            this.layoutControlItem15.Control = this.gcHistoryProcess;
+            this.layoutControlItem15.Location = new System.Drawing.Point(0, 104);
+            this.layoutControlItem15.Name = "layoutControlItem15";
+            this.layoutControlItem15.Size = new System.Drawing.Size(1032, 236);
+            this.layoutControlItem15.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem15.TextVisible = false;
+            // 
             // lcgInfo
             // 
             this.lcgInfo.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem1,
-            this.layoutControlItem10,
-            this.layoutControlItem2,
+            this.lcType,
+            this.lcNameTW,
             this.layoutControlItem13,
             this.layoutControlItem3,
             this.layoutControlItem5,
-            this.layoutControlItem4,
+            this.lcKeyword,
             this.layoutControlItem16});
             this.lcgInfo.Location = new System.Drawing.Point(0, 0);
             this.lcgInfo.Name = "lcgInfo";
@@ -1048,37 +1102,39 @@
             this.layoutControlItem1.Text = "文件編號";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(80, 19);
             // 
-            // layoutControlItem10
+            // lcType
             // 
-            this.layoutControlItem10.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.layoutControlItem10.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
-            this.layoutControlItem10.AppearanceItemCaption.Options.UseFont = true;
-            this.layoutControlItem10.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem10.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
-            this.layoutControlItem10.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
-            this.layoutControlItem10.Control = this.cbbType;
-            this.layoutControlItem10.Location = new System.Drawing.Point(515, 0);
-            this.layoutControlItem10.Name = "layoutControlItem10";
-            this.layoutControlItem10.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 3);
-            this.layoutControlItem10.Size = new System.Drawing.Size(517, 33);
-            this.layoutControlItem10.Text = " 類別";
-            this.layoutControlItem10.TextSize = new System.Drawing.Size(80, 19);
+            this.lcType.AllowHtmlStringInCaption = true;
+            this.lcType.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lcType.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.lcType.AppearanceItemCaption.Options.UseFont = true;
+            this.lcType.AppearanceItemCaption.Options.UseForeColor = true;
+            this.lcType.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.lcType.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.lcType.Control = this.cbbType;
+            this.lcType.Location = new System.Drawing.Point(515, 0);
+            this.lcType.Name = "lcType";
+            this.lcType.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 3);
+            this.lcType.Size = new System.Drawing.Size(517, 33);
+            this.lcType.Text = " 類別";
+            this.lcType.TextSize = new System.Drawing.Size(80, 19);
             // 
-            // layoutControlItem2
+            // lcNameTW
             // 
-            this.layoutControlItem2.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.layoutControlItem2.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
-            this.layoutControlItem2.AppearanceItemCaption.Options.UseFont = true;
-            this.layoutControlItem2.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem2.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
-            this.layoutControlItem2.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
-            this.layoutControlItem2.Control = this.txbNameTW;
-            this.layoutControlItem2.Location = new System.Drawing.Point(0, 33);
-            this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 3);
-            this.layoutControlItem2.Size = new System.Drawing.Size(1032, 33);
-            this.layoutControlItem2.Text = "中文名稱";
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(80, 19);
+            this.lcNameTW.AllowHtmlStringInCaption = true;
+            this.lcNameTW.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lcNameTW.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.lcNameTW.AppearanceItemCaption.Options.UseFont = true;
+            this.lcNameTW.AppearanceItemCaption.Options.UseForeColor = true;
+            this.lcNameTW.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.lcNameTW.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.lcNameTW.Control = this.txbNameTW;
+            this.lcNameTW.Location = new System.Drawing.Point(0, 33);
+            this.lcNameTW.Name = "lcNameTW";
+            this.lcNameTW.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 3);
+            this.lcNameTW.Size = new System.Drawing.Size(1032, 33);
+            this.lcNameTW.Text = "中文名稱";
+            this.lcNameTW.TextSize = new System.Drawing.Size(80, 19);
             // 
             // layoutControlItem13
             // 
@@ -1127,21 +1183,22 @@
             this.layoutControlItem5.Text = " 上傳人";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(80, 19);
             // 
-            // layoutControlItem4
+            // lcKeyword
             // 
-            this.layoutControlItem4.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.layoutControlItem4.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
-            this.layoutControlItem4.AppearanceItemCaption.Options.UseFont = true;
-            this.layoutControlItem4.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem4.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
-            this.layoutControlItem4.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
-            this.layoutControlItem4.Control = this.txbKeyword;
-            this.layoutControlItem4.Location = new System.Drawing.Point(0, 167);
-            this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 3);
-            this.layoutControlItem4.Size = new System.Drawing.Size(1032, 173);
-            this.layoutControlItem4.Text = "關鍵字";
-            this.layoutControlItem4.TextSize = new System.Drawing.Size(80, 19);
+            this.lcKeyword.AllowHtmlStringInCaption = true;
+            this.lcKeyword.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lcKeyword.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.lcKeyword.AppearanceItemCaption.Options.UseFont = true;
+            this.lcKeyword.AppearanceItemCaption.Options.UseForeColor = true;
+            this.lcKeyword.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.lcKeyword.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.lcKeyword.Control = this.txbKeyword;
+            this.lcKeyword.Location = new System.Drawing.Point(0, 167);
+            this.lcKeyword.Name = "lcKeyword";
+            this.lcKeyword.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 3);
+            this.lcKeyword.Size = new System.Drawing.Size(1032, 173);
+            this.lcKeyword.Text = "關鍵字";
+            this.lcKeyword.TextSize = new System.Drawing.Size(80, 19);
             // 
             // layoutControlItem16
             // 
@@ -1159,34 +1216,6 @@
             this.layoutControlItem16.Size = new System.Drawing.Size(1032, 34);
             this.layoutControlItem16.Text = "英文名稱";
             this.layoutControlItem16.TextSize = new System.Drawing.Size(80, 19);
-            // 
-            // lcgProgress
-            // 
-            this.lcgProgress.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem14,
-            this.layoutControlItem15});
-            this.lcgProgress.Location = new System.Drawing.Point(0, 0);
-            this.lcgProgress.Name = "lcgProgress";
-            this.lcgProgress.Size = new System.Drawing.Size(1032, 340);
-            this.lcgProgress.Text = "核簽流程";
-            // 
-            // layoutControlItem14
-            // 
-            this.layoutControlItem14.Control = this.stepProgressDoc;
-            this.layoutControlItem14.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem14.Name = "layoutControlItem14";
-            this.layoutControlItem14.Size = new System.Drawing.Size(1032, 104);
-            this.layoutControlItem14.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem14.TextVisible = false;
-            // 
-            // layoutControlItem15
-            // 
-            this.layoutControlItem15.Control = this.gcHistoryProcess;
-            this.layoutControlItem15.Location = new System.Drawing.Point(0, 104);
-            this.layoutControlItem15.Name = "layoutControlItem15";
-            this.layoutControlItem15.Size = new System.Drawing.Size(1032, 236);
-            this.layoutControlItem15.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem15.TextVisible = false;
             // 
             // lcgFiles
             // 
@@ -1283,24 +1312,6 @@
             this.emptySpaceItem3.Size = new System.Drawing.Size(924, 41);
             this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
             // 
-            // lcgHistoryEdit
-            // 
-            this.lcgHistoryEdit.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem9});
-            this.lcgHistoryEdit.Location = new System.Drawing.Point(0, 0);
-            this.lcgHistoryEdit.Name = "lcgHistoryEdit";
-            this.lcgHistoryEdit.Size = new System.Drawing.Size(1032, 340);
-            this.lcgHistoryEdit.Text = "變更歷史";
-            // 
-            // layoutControlItem9
-            // 
-            this.layoutControlItem9.Control = this.gcEditHistory;
-            this.layoutControlItem9.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem9.Name = "layoutControlItem9";
-            this.layoutControlItem9.Size = new System.Drawing.Size(1032, 340);
-            this.layoutControlItem9.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem9.TextVisible = false;
-            // 
             // lcProgress
             // 
             this.lcProgress.Control = this.lbProgress;
@@ -1309,14 +1320,6 @@
             this.lcProgress.Size = new System.Drawing.Size(1056, 23);
             this.lcProgress.TextSize = new System.Drawing.Size(0, 0);
             this.lcProgress.TextVisible = false;
-            // 
-            // btnViewed
-            // 
-            this.btnViewed.Caption = "確認";
-            this.btnViewed.Id = 7;
-            this.btnViewed.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnViewed.Name = "btnViewed";
-            this.btnViewed.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnViewed_ItemClick);
             // 
             // f207_Document_Info
             // 
@@ -1363,18 +1366,20 @@
             ((System.ComponentModel.ISupportInitialize)(this.txbNameEN.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.controlgroupDocument)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcgInfo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem13)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem16)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcgHistoryEdit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcgProgress)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem14)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcgInfo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcType)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcNameTW)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem13)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcKeyword)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem16)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcgFiles)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
@@ -1383,8 +1388,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcgHistoryEdit)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcProgress)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -1412,12 +1415,12 @@
         private DevExpress.XtraLayout.TabbedControlGroup controlgroupDocument;
         private DevExpress.XtraLayout.LayoutControlGroup lcgInfo;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
+        private DevExpress.XtraLayout.LayoutControlItem lcType;
+        private DevExpress.XtraLayout.LayoutControlItem lcNameTW;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem13;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
+        private DevExpress.XtraLayout.LayoutControlItem lcKeyword;
         private DevExpress.XtraLayout.LayoutControlGroup lcgFiles;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
