@@ -30,6 +30,22 @@ namespace BusinessLayer
             }
         }
 
+        public List<dt207_HistoryGetFile> GetListByUserId(string _UID)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt207_HistoryGetFile.Where(r => r.IdUser == _UID).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public bool Create(dt207_HistoryGetFile historyGetFile)
         {
             try

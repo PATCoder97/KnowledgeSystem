@@ -6,6 +6,7 @@ using DevExpress.XtraEditors;
 using KnowledgeSystem.Configs;
 using System;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -72,7 +73,7 @@ namespace KnowledgeSystem.Views._00_Generals
             Location = new Point((Screen.PrimaryScreen.WorkingArea.Width - this.Width) / 2,
                            (Screen.PrimaryScreen.WorkingArea.Height - this.Height) / 2);
 
-            var _userLogin = _dm_UserBUS.GetUserByUID(TPConfigs.LoginId);
+            var _userLogin = _dm_UserBUS.GetUserByUID(TPConfigs.LoginUser.Id);
             string userName = _userLogin.DisplayName;
             string idDept = _userLogin.IdDepartment;
             var gradeName = _dm_DeptBUS.GetById(idDept.Substring(0, 2)).DisplayName;
@@ -100,7 +101,7 @@ namespace KnowledgeSystem.Views._00_Generals
                 return;
             }
 
-            _dm_UserBUS.ChangePass(TPConfigs.LoginId, newPassword);
+            _dm_UserBUS.ChangePass(TPConfigs.LoginUser.Id, newPassword);
             XtraMessageBox.Show("您的密碼已更新！", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -146,6 +147,13 @@ namespace KnowledgeSystem.Views._00_Generals
                 }
             }
 #endif
+
+            try
+            {
+                // Xoá thư mục tạm nơi lưu các file tải về để xem
+                Directory.Delete(TPConfigs.TempFolderData, true);
+            }
+            catch { }
 
             Text = TPConfigs.SoftNameTW + AppCopyRight.CopyRightString();
             lbSoftName.Text = TPConfigs.SoftNameTW;

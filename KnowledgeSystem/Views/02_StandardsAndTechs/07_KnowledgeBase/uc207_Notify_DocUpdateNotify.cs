@@ -41,7 +41,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             using (var db = new DBDocumentManagementSystemEntities())
             {
                 var query = (from data in db.dt207_NotifyEditDoc
-                             where data.IdUserNotify == TPConfigs.LoginId
+                             where data.IdUserNotify == TPConfigs.LoginUser.Id
                              join idDoc in db.dt207_DocProgress on data.IdDocProcess equals idDoc.Id
                              join names in db.dt207_Base on idDoc.IdKnowledgeBase equals names.Id
                              orderby data.TimeNotify descending
@@ -64,6 +64,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         private void uc207_Notify_DocUpdateNotify_Load(object sender, EventArgs e)
         {
             gvData.ReadOnlyGridView();
+            gvData.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
 
             LoadData();
 

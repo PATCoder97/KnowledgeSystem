@@ -81,11 +81,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             List<dm_Group> lsGroups = _dm_GroupBUS.GetList();
             List<dm_GroupUser> lsGroupUsers = _dm_GroupUserBUS.GetList();
 
-            // Gán các 說明 quyền vào class temp
-            TPConfigs.typeViewFile = lsTypeHisGetFile.FirstOrDefault(r => r.Id == 1);
-            TPConfigs.typeSaveFile = lsTypeHisGetFile.FirstOrDefault(r => r.Id == 2);
-            TPConfigs.typePrintFile = lsTypeHisGetFile.FirstOrDefault(r => r.Id == 3);
-
             // Lấy danh sách các giá trị IdKnowledgeBase mà chưa hoàn thành lưu trình trình ký
             var lsIdBaseRemove = _dt207_DocProgressBUS.GetListNotComplete().Select(r => r.IdKnowledgeBase).ToList();
 
@@ -233,7 +228,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                      }).ToList();
 
                 // Xử lý phân quyền nhưng user nằm trong group sẽ nhìn thấy
-                var lsGroupIn = (from data in db.dm_GroupUser.Where(r => r.IdUser == TPConfigs.LoginId).ToList()
+                var lsGroupIn = (from data in db.dm_GroupUser.Where(r => r.IdUser == TPConfigs.LoginUser.Id).ToList()
                                  join progresses in db.dm_StepProgress.ToList() on data.IdGroup equals progresses.IdGroup
                                  select new
                                  {
@@ -278,6 +273,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             gcData.DataSource = sourceKnowledge;
 
             gvData.ReadOnlyGridView();
+            gvData.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
 
             LoadData();
         }

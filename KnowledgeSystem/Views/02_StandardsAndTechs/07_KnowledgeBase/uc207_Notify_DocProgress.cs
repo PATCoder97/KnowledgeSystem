@@ -57,7 +57,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                var lsDocProgresses = db.dt207_DocProgress.Where(r => r.IdUserProcess == TPConfigs.LoginId).ToList();
+                var lsDocProgresses = db.dt207_DocProgress.Where(r => r.IdUserProcess == TPConfigs.LoginUser.Id).ToList();
                 var lsKnowledgeBases = db.dt207_Base.ToList();
                 var lsUsers = db.dm_User.ToList();
 
@@ -104,6 +104,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             helper = new RefreshHelper(gvData, "Id");
             gvData.ReadOnlyGridView();
+            gvData.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
 
             LoadData();
 

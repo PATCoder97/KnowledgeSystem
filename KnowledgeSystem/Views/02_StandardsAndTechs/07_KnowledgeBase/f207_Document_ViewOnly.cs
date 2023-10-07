@@ -96,7 +96,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private Securityinfo GetPermission()
         {
-            string userIdLogin = TPConfigs.LoginId;
+            string userIdLogin = TPConfigs.LoginUser.Id;
 
             if (cbbUserProcess.EditValue.ToString() == userIdLogin)
             {
@@ -178,7 +178,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 if (!string.IsNullOrEmpty(idDocument))
                 {
                     // Thông tin tiến trình trình ký văn kiện
-                    bool IsComplete = docProcess.IsComplete ;
+                    bool IsComplete = docProcess.IsComplete;
                     int idProgressByDoc = docProcess.IdProgress;
                     int idDocProgress = docProcess.Id;
                     var lsDMStepProgress = db.dm_StepProgress.Where(r => r.IdProgress == idProgressByDoc).ToList();
@@ -274,10 +274,22 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             Attachments dataRow = gvFiles.GetRow(focusRow) as Attachments;
             string documentsFile = Path.Combine(TPConfigs.PathKnowledgeFile, dataRow.EncryptionName);
 
-            f207_ViewPdf fDocumentInfo = new f207_ViewPdf(documentsFile, "");
-            fDocumentInfo.Text = dataRow.FileName;
-            fDocumentInfo.CanSaveFile = permissionAttachments.SaveFile;
-            fDocumentInfo.ShowDialog();
+            string pathDocTemp = Path.Combine(TPConfigs.TempFolderData, $"{DateTime.Now:MMddhhmmss} {dataRow.FileName}");
+            using (var handle = SplashScreenManager.ShowOverlayForm(gcFiles))
+            {
+                // Copy file về thư mục tạm để xem
+                if (!Directory.Exists(TPConfigs.TempFolderData))
+                    Directory.CreateDirectory(TPConfigs.TempFolderData);
+
+                File.Copy(documentsFile, pathDocTemp, true);
+
+                f207_ViewFile fDocumentInfo = new f207_ViewFile(pathDocTemp, "")
+                {
+                    Text = dataRow.FileName,
+                    CanSaveFile = permissionAttachments.SaveFile
+                };
+                fDocumentInfo.ShowDialog();
+            }
         }
     }
 }

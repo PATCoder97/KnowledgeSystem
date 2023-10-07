@@ -1,4 +1,5 @@
-﻿using DataAccessLayer;
+﻿using BusinessLayer;
+using DataAccessLayer;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using KnowledgeSystem.Configs;
@@ -21,6 +22,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             InitializeComponent();
         }
 
+        dt207_HistoryGetFileBUS _dt207_HistoryGetFileBUS = new dt207_HistoryGetFileBUS();
+        dt207_BaseBUS _dt207_BaseBUS = new dt207_BaseBUS();
+
         Font fontIndicator = new Font("Times New Roman", 12.0f, FontStyle.Italic);
         bool cal(Int32 _Width, GridView _View)
         {
@@ -36,31 +40,29 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void LoadData()
         {
-            using (var db = new DBDocumentManagementSystemEntities())
-            {
-                // Truy vấn và lấy danh sách các tệp tin lịch sử kiến thức dựa trên ID người dùng, kết hợp các bảng liên quan.
-                var query = (from data in db.dt207_HistoryGetFile
-                             where data.IdUser == TPConfigs.LoginId
-                             join names in db.dt207_Base on data.IdKnowledgeBase equals names.Id
-                             join types in db.dt207_TypeHisGetFile on data.idTypeHisGetFile equals types.Id
-                             select new
-                             {
-                                 data.TimeGet,
-                                 TypeGetFile = types.DisplayName,
-                                 data.IdKnowledgeBase,
-                                 data.KnowledgeAttachmentName,
-                                 names.DisplayName
-                             }).ToList();
+            var lsHisRaws = _dt207_HistoryGetFileBUS.GetListByUserId(TPConfigs.LoginUser.Id);
+            var ls207Base = _dt207_BaseBUS.GetList();
 
-                gcData.DataSource = query;
-            }
+            // Truy vấn và lấy danh sách các tệp tin lịch sử kiến thức dựa trên ID người dùng, kết hợp các bảng liên quan.
+            var query = (from data in lsHisRaws
+                         join names in ls207Base on data.IdKnowledgeBase equals names.Id
+                         select new
+                         {
+                             data.TimeGet,
+                             TypeGetFile = data.TypeGet,
+                             data.IdKnowledgeBase,
+                             data.KnowledgeAttachmentName,
+                             names.DisplayName
+                         }).ToList();
 
+            gcData.DataSource = query;
             gvData.BestFitColumns();
         }
 
         private void uc207_Notify_HisDownload_Load(object sender, EventArgs e)
         {
             gvData.ReadOnlyGridView();
+            gvData.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
 
             LoadData();
         }

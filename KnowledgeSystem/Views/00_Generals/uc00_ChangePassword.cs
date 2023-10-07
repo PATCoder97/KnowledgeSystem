@@ -1,16 +1,7 @@
 ﻿using BusinessLayer;
-using DataAccessLayer;
 using DevExpress.XtraEditors;
 using KnowledgeSystem.Configs;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace KnowledgeSystem.Views._00_Generals
 {
@@ -33,7 +24,7 @@ namespace KnowledgeSystem.Views._00_Generals
 
             if (newPassword1 != newPassword2) return;
 
-            var _userCheck = _dm_UserBUS.CheckLogin(TPConfigs.LoginId, oldPassword);
+            var _userCheck = _dm_UserBUS.CheckLogin(TPConfigs.LoginUser.Id, oldPassword);
             if (_userCheck != default)
             {
                 NewPassword = newPassword2;

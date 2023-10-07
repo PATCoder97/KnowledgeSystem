@@ -1,26 +1,17 @@
-﻿using DevExpress.XtraBars.Ribbon;
-using DevExpress.XtraBars;
+﻿using BusinessLayer;
+using DataAccessLayer;
+using DevExpress.XtraBars.Navigation;
 using DevExpress.XtraEditors;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using DevExpress.XtraSplashScreen;
 using KnowledgeSystem.Configs;
-using System.Reflection;
-using DevExpress.XtraBars.Navigation;
-using KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Drawing;
 using System.IO;
-using DevExpress.Utils.Extensions;
-using DevExpress.Utils;
-using DataAccessLayer;
-using DevExpress.Pdf.Native.BouncyCastle.Asn1.Ocsp;
-using BusinessLayer;
+using System.Linq;
+using System.Reflection;
+using System.Windows.Forms;
 
 namespace KnowledgeSystem.Views._00_Generals
 {
@@ -84,7 +75,7 @@ namespace KnowledgeSystem.Views._00_Generals
         {
             // Lấy danh sách các AppForm từ cơ sở dữ liệu và điền vào TreeView control
             var lsAllFunctions = _dm_FunctionBUS.GetListByIdParent(groupId);
-            var lsPermissions = _dm_FunctionRoleBUS.GetListByRole(TPConfigs.RoleUserLogin).Select(r => r.IdFunction).ToList();
+            var lsPermissions = _dm_FunctionRoleBUS.GetListByRole(TPConfigs.LoginUser.IdRole).Select(r => r.IdFunction).ToList();
 
             lsFunctions = (from data in lsAllFunctions
                            join granted in lsPermissions on data.Id equals granted

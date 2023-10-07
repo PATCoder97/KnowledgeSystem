@@ -1,20 +1,9 @@
-﻿using DevExpress.Internal.WinApi.Windows.UI.Notifications;
-using DevExpress.XtraEditors;
-using DevExpress.XtraLayout.Utils;
-using KnowledgeSystem.Configs;
-using Newtonsoft.Json;
+﻿using KnowledgeSystem.Configs;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace KnowledgeSystem.Views._00_Generals

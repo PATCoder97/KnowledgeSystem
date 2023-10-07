@@ -17,7 +17,6 @@ namespace DataAccessLayer
         public string Id { get; set; }
         public string DisplayName { get; set; }
         public string SecondaryPassword { get; set; }
-        public Nullable<int> IdRole { get; set; }
         public System.DateTime DateCreate { get; set; }
         public string IdDepartment { get; set; }
         public string DisplayNameVN { get; set; }
@@ -27,5 +26,6 @@ namespace DataAccessLayer
         public string JobCode { get; set; }
         public string PCName { get; set; }
         public string IPAddress { get; set; }
+        public int IdRole { get; set; }
     }
 }
