@@ -14,6 +14,7 @@ using KnowledgeSystem.Configs;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -340,6 +341,55 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             }
         }
 
+        private bool ValidateData()
+        {
+            bool IsOK = true;
+            string msg = "請提供以下補充資訊：";
+            if (string.IsNullOrEmpty(cbbType.EditValue?.ToString()))
+            {
+                msg += "</br> •類別";
+                IsOK = false;
+            }
+
+            if (string.IsNullOrEmpty(txbNameTW.EditValue?.ToString()))
+            {
+                msg += "</br> •中文名稱";
+                IsOK = false;
+            }
+
+            if (string.IsNullOrEmpty(txbKeyword.EditValue?.ToString()))
+            {
+                msg += "</br> •關鍵字";
+                IsOK = false;
+            }
+
+            if (lsAttachments.Count == 0)
+            {
+                msg += "</br> •附件";
+                IsOK = false;
+            }
+
+            if (lsSecurityInfos.Count == 0)
+            {
+                msg += "</br> •密等";
+                IsOK = false;
+            }
+
+            if (!IsOK)
+            {
+                XtraMessageBoxArgs args = new XtraMessageBoxArgs();
+                args.AllowHtmlText = DefaultBoolean.True;
+
+                args.Caption = TPConfigs.SoftNameTW;
+                args.Text = $"<font='DFKai-SB' size=14>{msg}</font>";
+                args.Buttons = new DialogResult[] { DialogResult.OK };
+
+                XtraMessageBox.Show(args);
+            }
+
+            return IsOK;
+        }
+
         #endregion
 
         private void f207_DocumentInfo_Load(object sender, EventArgs e)
@@ -360,7 +410,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             {
                 case Event207DocInfo.Create:
                     txbId.Text = "XXX-XXXXXXXXXX-XX";
-                    cbbType.EditValue = 1;
+                    //cbbType.EditValue = 1;
                     lbProgress.Text = "流程：" + progressSelect.DisplayName;
                     break;
                 case Event207DocInfo.View:
@@ -659,6 +709,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             // Đưa focused ra khỏi bảng để cập nhật lên source
             bgvSecurity.FocusedRowHandle = GridControl.AutoFilterRowHandle;
+            if (ValidateData() == false)
+            {
+                return;
+            }
+
             bool _IsProcessing = false;
 
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
