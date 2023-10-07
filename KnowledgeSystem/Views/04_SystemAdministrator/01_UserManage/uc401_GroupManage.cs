@@ -1,16 +1,7 @@
-﻿using DataAccessLayer;
-using DevExpress.XtraEditors;
-using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraPrinting.Native;
+﻿using BusinessLayer;
+using DataAccessLayer;
 using KnowledgeSystem.Configs;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
@@ -26,6 +17,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
 
         #region parameters
 
+        dm_GroupBUS _dm_GroupBUS = new dm_GroupBUS();
         BindingSource sourceGroup = new BindingSource();
 
         #endregion
@@ -35,11 +27,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
         private void LoadGroup()
         {
             helper.SaveViewInfo();
-            using (var db = new DBDocumentManagementSystemEntities())
-            {
-                var lsGroup = db.dm_Group.ToList();
-                sourceGroup.DataSource = lsGroup;
-            }
+            var lsGroup = _dm_GroupBUS.GetList();
+            sourceGroup.DataSource = lsGroup;
 
             gvData.BestFitColumns();
             helper.LoadViewInfo();

@@ -114,9 +114,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             }
 
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.Title = "Xuất dữ liệu chính chủ ra file pdf";
-            saveFileDialog1.DefaultExt = "xlsx";
-            saveFileDialog1.Filter = "PDF Files|*.pdf";
+            saveFileDialog1.Title = TPConfigs.SoftNameTW;
+            saveFileDialog1.DefaultExt = "pdf";
+            saveFileDialog1.Filter = TPConfigs.FilterFile;
             saveFileDialog1.FilterIndex = 1;
             saveFileDialog1.RestoreDirectory = true;
             saveFileDialog1.FileName = $"{DateTime.Now:yyyyMMddHHmmss}-{Text}";

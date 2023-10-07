@@ -6,6 +6,7 @@ using DevExpress.XtraEditors;
 using KnowledgeSystem.Configs;
 using System;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -146,6 +147,13 @@ namespace KnowledgeSystem.Views._00_Generals
                 }
             }
 #endif
+
+            try
+            {
+                // Xoá thư mục tạm nơi lưu các file tải về để xem
+                Directory.Delete(TPConfigs.TempFolderData, true);
+            }
+            catch { }
 
             Text = TPConfigs.SoftNameTW + AppCopyRight.CopyRightString();
             lbSoftName.Text = TPConfigs.SoftNameTW;

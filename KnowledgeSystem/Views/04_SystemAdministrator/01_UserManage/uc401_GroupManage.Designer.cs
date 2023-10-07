@@ -37,6 +37,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
@@ -47,7 +48,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
@@ -127,6 +127,16 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.gridColumn5.VisibleIndex = 2;
             this.gridColumn5.Width = 463;
             // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "優先級";
+            this.gridColumn1.FieldName = "Prioritize";
+            this.gridColumn1.MaxWidth = 100;
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 1;
+            this.gridColumn1.Width = 100;
+            // 
             // Root
             // 
             this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
@@ -183,7 +193,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnCreate, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnRefresh)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnRefresh, true)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawBorder = false;
             this.bar2.OptionsBar.DrawDragBorder = false;
@@ -246,16 +256,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.barDockControlRight.Manager = this.barManager1;
             this.barDockControlRight.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.barDockControlRight.Size = new System.Drawing.Size(0, 384);
-            // 
-            // gridColumn1
-            // 
-            this.gridColumn1.Caption = "優先級";
-            this.gridColumn1.FieldName = "Prioritize";
-            this.gridColumn1.MaxWidth = 100;
-            this.gridColumn1.Name = "gridColumn1";
-            this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 1;
-            this.gridColumn1.Width = 100;
             // 
             // uc401_GroupManage
             // 

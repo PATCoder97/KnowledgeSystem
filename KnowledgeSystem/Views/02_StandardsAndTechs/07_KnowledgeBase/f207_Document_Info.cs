@@ -465,7 +465,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
-                Filter = "Files|*.pdf;*.xlsx;*.xls;*.docx;*.doc;*.ppt;*.pptx",
+                Filter = TPConfigs.FilterFile,
                 Multiselect = true
             };
 
