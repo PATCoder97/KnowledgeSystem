@@ -23,7 +23,7 @@ namespace KnowledgeSystem.Configs
         public static string PathKnowledgeFile { get; set; }
 
         // CONST Value
-        public const string strReadFile = "讀取";
+        public const string strReadFile = "讀取 ";
         public const string strSaveFile = "下載";
         public const string NoPermission  = "您沒有該功能的權限";
         public const string DocIsProcessing = "文件處理中，暫不可顯示！";
