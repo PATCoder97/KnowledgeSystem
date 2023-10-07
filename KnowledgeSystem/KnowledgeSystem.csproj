@@ -135,6 +135,7 @@
     <Compile Include="Configs\RegistryHelper.cs" />
     <Compile Include="Configs\SingleConnection.cs" />
     <Compile Include="Configs\TPConfigs.cs" />
+    <Compile Include="Configs\TPSvgimages.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\00_Generals\f00_FluentFrame.cs">
@@ -406,6 +407,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Actions_Settings.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\checked_radio_button.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\unchecked_radio_button.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Images\Approval.svg">

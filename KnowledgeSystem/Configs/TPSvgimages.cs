@@ -1,0 +1,20 @@
+﻿using DevExpress.Utils.Svg;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace KnowledgeSystem.Configs
+{
+    public class TPSvgimages
+    {
+        public static string StartupPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        public static string ImagesPath = Path.Combine(StartupPath, "Images");
+
+        public static SvgImage CheckedRadio = SvgImage.FromFile(Path.Combine(ImagesPath, "checked_radio_button.svg"));
+        public static SvgImage UncheckedRadio = SvgImage.FromFile(Path.Combine(ImagesPath, "unchecked_radio_button.svg"));
+    }
+}

@@ -1,14 +1,19 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
+using DevExpress.XtraBars.Docking2010.Views;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraGrid.Views.Layout;
+using DevExpress.XtraLayout;
+using DevExpress.XtraLayout.Utils;
 using DevExpress.XtraSplashScreen;
 using KnowledgeSystem.Configs;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -70,6 +75,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         List<Attachments> lsAttachments = new List<Attachments>();
         List<Securityinfo> lsIdGroupOrUser = new List<Securityinfo>();
         List<dm_GroupUser> lsGroupUser = new List<dm_GroupUser>();
+        List<LayoutView> lsLayoutViewed;
 
         Securityinfo permissionAttachments = new Securityinfo();
         dm_Progress progressSelect = new dm_Progress();
@@ -92,6 +98,13 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             public string DisplayName { get; set; }
         }
 
+        private class LayoutView
+        {
+            public string Name { get; set; }
+            public string Text { get; set; }
+            public bool Confirm { get; set; }
+        }
+
         #endregion
 
         #region methods
@@ -110,6 +123,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             btnApproved.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             btnDisapprove.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             btnCancel.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            btnViewed.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            btnViewed.ImageOptions.SvgImage = TPSvgimages.UncheckedRadio;
+            btnViewed.ItemAppearance.Normal.ForeColor = Color.Red;
 
             cbbUserProcess.Enabled = false;
             txbId.Enabled = false;
@@ -285,6 +301,39 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     }).FirstOrDefault();
         }
 
+        private void CheckViewLayout()
+        {
+            var tabFocus = controlgroupDocument.SelectedTabPage;
+
+            if (lsLayoutViewed == null || _event207 != Event207DocInfo.Approval)
+            {
+                return;
+            }
+            bool IsExistView = lsLayoutViewed.Any(r => r.Name == tabFocus.Name);
+            //btnViewed.Visibility = IsExistView ? DevExpress.XtraBars.BarItemVisibility.Always : DevExpress.XtraBars.BarItemVisibility.Never;
+            if (!IsExistView)
+            {
+                btnViewed.ImageOptions.SvgImage = TPSvgimages.CheckedRadio;
+                btnViewed.Caption = "通過";
+                btnViewed.ItemAppearance.Normal.ForeColor = Color.Black;
+                return;
+            }
+
+            if (!lsLayoutViewed.Any(r => r.Confirm == false))
+            {
+                btnApproved.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                btnDisapprove.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                btnViewed.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            }
+            else
+            {
+                bool IsViewed = lsLayoutViewed.FirstOrDefault(r => r.Name == tabFocus.Name)?.Confirm ?? false;
+                btnViewed.ImageOptions.SvgImage = IsViewed ? TPSvgimages.CheckedRadio : TPSvgimages.UncheckedRadio;
+                btnViewed.Caption = IsViewed ? "通過" : "確認";
+                btnViewed.ItemAppearance.Normal.ForeColor = IsViewed ? Color.Black : Color.Red;
+            }
+        }
+
         #endregion
 
         private void f207_DocumentInfo_Load(object sender, EventArgs e)
@@ -428,8 +477,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     if (_stepNow != -1)
                     {
                         btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                        btnApproved.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
-                        btnDisapprove.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                        //btnApproved.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                        //btnDisapprove.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                        btnViewed.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     }
                     else
                     {
@@ -442,6 +492,21 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     goto case Event207DocInfo.View;
                 case Event207DocInfo.Check:
                     goto case Event207DocInfo.Approval;
+            }
+
+            // Thêm sự kiện xác nhận đã xem khi trình ký
+            if (_event207 == Event207DocInfo.Approval)
+            {
+                lsLayoutViewed = controlgroupDocument.TabPages
+                    .Where(r => r.Visibility == LayoutVisibility.Always && r.Name != "lcgHistoryEdit")
+                    .Select(r => new LayoutView
+                    {
+                        Name = r.Name,
+                        Text = r.Text,
+                        Confirm = false
+                    }).ToList();
+
+                //  btnDisabtnbtnpprove.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             }
 
             // Lấy quyền hạn của người dùng đối với văn kiện này
@@ -972,6 +1037,20 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             }
 
             Close();
+        }
+
+        private void btnViewed_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var tabFocus = controlgroupDocument.SelectedTabPage;
+
+            lsLayoutViewed.Where(lv => lv.Name == tabFocus.Name).ToList().ForEach(lv => lv.Confirm = true);
+
+            CheckViewLayout();
+        }
+
+        private void controlgroupDocument_SelectedPageChanged(object sender, LayoutTabPageChangedEventArgs e)
+        {
+            CheckViewLayout();
         }
     }
 }
