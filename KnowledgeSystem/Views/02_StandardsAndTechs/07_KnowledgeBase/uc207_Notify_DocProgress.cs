@@ -1,4 +1,5 @@
-﻿using DataAccessLayer;
+﻿using BusinessLayer;
+using DataAccessLayer;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.DXErrorProvider;
 using DevExpress.XtraGrid;
@@ -24,6 +25,15 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             InitializeComponent();
         }
+
+        dm_UserBUS _dm_UserBUS = new dm_UserBUS();
+        dm_StepProgressBUS dm_StepProgressBUS = new dm_StepProgressBUS();
+        dm_GroupUserBUS _dm_GroupUserBUS = new dm_GroupUserBUS();
+        dt207_BaseBUS _dt207_BaseBUS = new dt207_BaseBUS();
+        dt207_DocProgressBUS _dt207_DocProgressBUS = new dt207_DocProgressBUS();
+        dt207_DocProgressInfoBUS _dt207_DocProgressInfoBUS = new dt207_DocProgressInfoBUS();
+
+        List<dt207_DocProgressInfo> lsBaseProcessInfos;
 
         Font fontIndicator = new Font("Times New Roman", 12.0f, FontStyle.Italic);
         bool cal(Int32 _Width, GridView _View)
@@ -55,45 +65,43 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             helper.SaveViewInfo();
 
-            using (var db = new DBDocumentManagementSystemEntities())
-            {
-                var lsDocProgresses = db.dt207_DocProgress.Where(r => r.IdUserProcess == TPConfigs.LoginUser.Id).ToList();
-                var lsKnowledgeBases = db.dt207_Base.ToList();
-                var lsUsers = db.dm_User.ToList();
+            var lsDocProgresses = _dt207_DocProgressBUS.GetListByUIDProcess(TPConfigs.LoginUser.Id);
+            var lsKnowledgeBases = _dt207_BaseBUS.GetList();
+            var lsUsers = _dm_UserBUS.GetList();
+            lsBaseProcessInfos = _dt207_DocProgressInfoBUS.GetList();
 
-                var lsDocProgressInfosByLoginId =
-                    (from data in db.dt207_DocProgressInfo.ToList()
-                     group data by data.IdDocProgress into g
-                     select new
-                     {
-                         IdDocProgress = g.Key,
-                         IndexStep = g.OrderByDescending(dpi => dpi.TimeStep).Select(dpi => dpi.IndexStep).FirstOrDefault(),
-                         TimeStep = g.OrderByDescending(dpi => dpi.TimeStep).Select(dpi => dpi.TimeStep).FirstOrDefault(),
-                         IdUserProcess = g.OrderByDescending(dpi => dpi.TimeStep).Select(dpi => dpi.IdUserProcess).FirstOrDefault(),
-                         Descriptions = g.OrderByDescending(dpi => dpi.TimeStep).Select(dpi => dpi.Descriptions).FirstOrDefault(),
-                     }).ToList();
+            var lsDocProgressInfosByLoginId =
+                (from data in lsBaseProcessInfos
+                 group data by data.IdDocProgress into g
+                 select new
+                 {
+                     IdDocProgress = g.Key,
+                     IndexStep = g.OrderByDescending(dpi => dpi.TimeStep).Select(dpi => dpi.IndexStep).FirstOrDefault(),
+                     TimeStep = g.OrderByDescending(dpi => dpi.TimeStep).Select(dpi => dpi.TimeStep).FirstOrDefault(),
+                     IdUserProcess = g.OrderByDescending(dpi => dpi.TimeStep).Select(dpi => dpi.IdUserProcess).FirstOrDefault(),
+                     Descriptions = g.OrderByDescending(dpi => dpi.TimeStep).Select(dpi => dpi.Descriptions).FirstOrDefault(),
+                 }).ToList();
 
-                var lsDataApproval =
-                    (from data in lsDocProgresses
-                     join infos in lsDocProgressInfosByLoginId on data.Id equals infos.IdDocProgress
-                     join bases in lsKnowledgeBases on data.IdKnowledgeBase equals bases.Id
-                     join users in lsUsers on infos.IdUserProcess equals users.Id
-                     select new
-                     {
-                         data.Id,
-                         data.IsComplete,
-                         Reason = data.Descriptions,
-                         data.IdKnowledgeBase,
-                         data.IdProgress,
-                         infos.TimeStep,
-                         infos.IndexStep,
-                         infos.Descriptions,
-                         bases.DisplayName,
-                         UserProcess = $"{users.IdDepartment} | {infos.IdUserProcess}/{users.DisplayName}",
-                     }).OrderByDescending(r => r.TimeStep).ToList();
+            var lsDataApproval =
+                (from data in lsDocProgresses
+                 join infos in lsDocProgressInfosByLoginId on data.Id equals infos.IdDocProgress
+                 join bases in lsKnowledgeBases on data.IdKnowledgeBase equals bases.Id
+                 join users in lsUsers on infos.IdUserProcess equals users.Id
+                 select new
+                 {
+                     data.Id,
+                     data.IsComplete,
+                     Reason = data.Descriptions,
+                     data.IdKnowledgeBase,
+                     data.IdProgress,
+                     infos.TimeStep,
+                     infos.IndexStep,
+                     infos.Descriptions,
+                     bases.DisplayName,
+                     UserProcess = $"{users.IdDepartment} | {infos.IdUserProcess}/{users.DisplayName}",
+                 }).OrderByDescending(r => r.TimeStep).ToList();
 
-                gcData.DataSource = lsDataApproval;
-            }
+            gcData.DataSource = lsDataApproval;
 
             gvData.BestFitColumns();
 
@@ -115,22 +123,19 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         private void gcData_DoubleClick(object sender, EventArgs e)
         {
             int idDocProcess = Convert.ToInt32(gvData.GetFocusedRowCellValue(gColId));
-            using (var db = new DBDocumentManagementSystemEntities())
-            {
-                var docProcess = db.dt207_DocProgress.FirstOrDefault(r => r.Id == idDocProcess);
+            var docProcess = _dt207_DocProgressBUS.GetItemById(idDocProcess);
 
-                int indexStep = db.dt207_DocProgressInfo.OrderByDescending(r => r.TimeStep).FirstOrDefault(r => r.IdDocProgress == idDocProcess).IndexStep;
-                if (indexStep == -1 && !(docProcess.IsComplete))
-                {
-                    f207_Document_Info document_Info = new f207_Document_Info(docProcess.IdKnowledgeBase);
-                    document_Info._event207 = Event207DocInfo.Check;
-                    document_Info.ShowDialog();
-                }
-                else
-                {
-                    f207_Document_ViewOnly document_Info = new f207_Document_ViewOnly(docProcess);
-                    document_Info.ShowDialog();
-                }
+            int indexStep = lsBaseProcessInfos.OrderByDescending(r => r.TimeStep).FirstOrDefault(r => r.IdDocProgress == idDocProcess).IndexStep;
+            if (indexStep == -1 && !(docProcess.IsComplete))
+            {
+                f207_Document_Info document_Info = new f207_Document_Info(docProcess.IdKnowledgeBase);
+                document_Info._event207 = Event207DocInfo.Check;
+                document_Info.ShowDialog();
+            }
+            else
+            {
+                f207_Document_ViewOnly document_Info = new f207_Document_ViewOnly(docProcess);
+                document_Info.ShowDialog();
             }
 
             LoadData();

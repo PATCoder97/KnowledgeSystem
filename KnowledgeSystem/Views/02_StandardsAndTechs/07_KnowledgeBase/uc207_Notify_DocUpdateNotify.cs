@@ -1,4 +1,5 @@
-﻿using DataAccessLayer;
+﻿using BusinessLayer;
+using DataAccessLayer;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
@@ -23,6 +24,14 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             InitializeComponent();
         }
 
+        dm_UserBUS _dm_UserBUS = new dm_UserBUS();
+        dm_StepProgressBUS dm_StepProgressBUS = new dm_StepProgressBUS();
+        dm_GroupUserBUS _dm_GroupUserBUS = new dm_GroupUserBUS();
+        dt207_BaseBUS _dt207_BaseBUS = new dt207_BaseBUS();
+        dt207_DocProgressBUS _dt207_DocProgressBUS = new dt207_DocProgressBUS();
+        dt207_DocProgressInfoBUS _dt207_DocProgressInfoBUS = new dt207_DocProgressInfoBUS();
+        dt207_NotifyEditDocBUS _dt207_NotifyEditDocBUS = new dt207_NotifyEditDocBUS();
+
         Font fontIndicator = new Font("Times New Roman", 12.0f, FontStyle.Italic);
         bool cal(Int32 _Width, GridView _View)
         {
@@ -38,25 +47,25 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void LoadData()
         {
-            using (var db = new DBDocumentManagementSystemEntities())
-            {
-                var query = (from data in db.dt207_NotifyEditDoc
-                             where data.IdUserNotify == TPConfigs.LoginUser.Id
-                             join idDoc in db.dt207_DocProgress on data.IdDocProcess equals idDoc.Id
-                             join names in db.dt207_Base on idDoc.IdKnowledgeBase equals names.Id
-                             orderby data.TimeNotify descending
-                             select new
-                             {
-                                 data.Id,
-                                 data.TimeNotify,
-                                 data.IsRead,
-                                 data.TimeNotifyNotes,
-                                 idDoc.IdKnowledgeBase,
-                                 names.DisplayName
-                             }).ToList();
+            var lsNotifyEditBases = _dt207_NotifyEditDocBUS.GetListByUID(TPConfigs.LoginUser.Id);
+            var lsBaseProcessing = _dt207_DocProgressBUS.GetList();
+            var lsBase207 = _dt207_BaseBUS.GetList();
 
-                gcData.DataSource = query;
-            }
+            var query = (from data in lsNotifyEditBases
+                         join idDoc in lsBaseProcessing on data.IdDocProcess equals idDoc.Id
+                         join names in lsBase207 on idDoc.IdKnowledgeBase equals names.Id
+                         orderby data.TimeNotify descending
+                         select new
+                         {
+                             data.Id,
+                             data.TimeNotify,
+                             data.IsRead,
+                             data.TimeNotifyNotes,
+                             idDoc.IdKnowledgeBase,
+                             names.DisplayName
+                         }).ToList();
+
+            gcData.DataSource = query;
 
             gvData.BestFitColumns();
         }
@@ -115,25 +124,20 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             string IdKnowledgeBase = gvData.GetFocusedRowCellValue(gvColIdKnowledgeBase).ToString();
             int id = Convert.ToInt32(gvData.GetFocusedRowCellValue(gvColId));
 
-            using (var db = new DBDocumentManagementSystemEntities())
+            var notifyDocUpdate = _dt207_NotifyEditDocBUS.GetItemById(id);
+
+            if (notifyDocUpdate != null)
             {
-                var notifyDocUpdate = db.dt207_NotifyEditDoc.First(r => r.Id == id);
+                notifyDocUpdate.IsRead = true;
+                _dt207_NotifyEditDocBUS.AddOrUpdate(notifyDocUpdate);
 
-                if (notifyDocUpdate != null)
+                bool IsProcess = _dt207_DocProgressBUS.CheckItemProcessing(IdKnowledgeBase);
+                if (IsProcess)
                 {
-                    notifyDocUpdate.IsRead = true;
+                    XtraMessageBox.Show(TPConfigs.DocIsProcessing, TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                    db.dt207_NotifyEditDoc.AddOrUpdate(notifyDocUpdate);
-                    db.SaveChanges();
-
-                    bool IsProcess = db.dt207_DocProgress.Any(r => r.IdKnowledgeBase == IdKnowledgeBase && !(r.IsComplete));
-                    if (IsProcess)
-                    {
-                        XtraMessageBox.Show(TPConfigs.DocIsProcessing, TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                        LoadData();
-                        return;
-                    }
+                    LoadData();
+                    return;
                 }
             }
 

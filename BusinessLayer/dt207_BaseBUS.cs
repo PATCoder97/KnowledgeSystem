@@ -2,11 +2,13 @@
 using Logger;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Data.Entity.Infrastructure.Design.Executor;
 
 namespace BusinessLayer
 {
@@ -59,6 +61,22 @@ namespace BusinessLayer
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
                     return _context.dt207_Base.Where(r => !r.IsDelete).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
+        public List<dt207_Base> GetListByDate(DateTime _fromData, DateTime _toDate)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt207_Base.Where(r => !(r.IsDelete) && r.UploadDate >= _fromData && r.UploadDate <= _toDate).ToList();
                 }
             }
             catch (Exception ex)

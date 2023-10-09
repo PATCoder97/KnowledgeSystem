@@ -31,6 +31,22 @@ namespace BusinessLayer
             }
         }
 
+        public List<dt207_DocProgress> GetListByUIDProcess(string _UIDProcess)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt207_DocProgress.Where(r=>r.IdUserProcess== _UIDProcess).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public dt207_DocProgress GetItemById(int _id)
         {
             try

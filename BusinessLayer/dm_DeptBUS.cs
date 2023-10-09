@@ -46,6 +46,22 @@ namespace BusinessLayer
             }
         }
 
+        public dm_Departments GetByParentId(int _idParent)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dm_Departments.FirstOrDefault(r => r.IdParent == _idParent);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public bool Create(dm_Departments _dept)
         {
             try

@@ -30,6 +30,38 @@ namespace BusinessLayer
             }
         }
 
+        public List<dt207_NotifyEditDoc> GetListByUID(string _UID)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt207_NotifyEditDoc.Where(r => r.IdUserNotify == _UID).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
+        public dt207_NotifyEditDoc GetItemById(int _id)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt207_NotifyEditDoc.FirstOrDefault(r => r.Id == _id);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public bool Create(dt207_NotifyEditDoc notifyEditDoc)
         {
             try
@@ -48,7 +80,7 @@ namespace BusinessLayer
             }
         }
 
-        public bool Update(dt207_NotifyEditDoc notifyEditDoc)
+        public bool AddOrUpdate(dt207_NotifyEditDoc notifyEditDoc)
         {
             try
             {

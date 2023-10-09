@@ -1,31 +1,23 @@
-﻿using DevExpress.XtraEditors;
-using DevExpress.XtraExport.Helpers;
-using DevExpress.XtraGrid.Columns;
+﻿using BusinessLayer;
+using DataAccessLayer;
+using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using DevExpress.XtraSplashScreen;
 using KnowledgeSystem.Configs;
-using System.IO;
-using DevExpress.XtraEditors.TextEditController.InputHandler;
-using DevExpress.Utils.CommonDialogs;
 using OfficeOpenXml;
-using OfficeOpenXml.Table;
 using OfficeOpenXml.Drawing.Chart;
 using OfficeOpenXml.Drawing.Chart.Style;
-using DevExpress.Charts.Native;
-using DevExpress.XtraCharts;
+using OfficeOpenXml.Table;
+using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
-using DevExpress.XtraSplashScreen;
-using DataAccessLayer;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 {
@@ -37,6 +29,14 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         }
 
         #region parameters
+
+        dm_DeptBUS _dm_DeptBUS = new dm_DeptBUS();
+        dm_UserBUS _dm_UserBUS = new dm_UserBUS();
+        dt207_TargetsBUS _dt207_TargetsBUS = new dt207_TargetsBUS();
+        dt207_BaseBUS _dt207_BaseBUS = new dt207_BaseBUS();
+        dt207_DocProgressBUS _dt207_DocProgressBUS = new dt207_DocProgressBUS();
+
+        List<dm_Departments> lsDepts;
 
         private class DataStatisticsChart
         {
@@ -77,14 +77,12 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void LoadData()
         {
-            using (var db = new DBDocumentManagementSystemEntities())
-            {
-                var lsGrade = db.dm_Departments.Where(r => r.IdParent == -1).ToList();
+            lsDepts = _dm_DeptBUS.GetList();
+            var lsGrade = lsDepts.Where(r => r.IdParent == -1).ToList();
 
-                cbbGrade.Properties.DataSource = lsGrade;
-                cbbGrade.Properties.DisplayMember = "DisplayName"; ;
-                cbbGrade.Properties.ValueMember = "Id";
-            }
+            cbbGrade.Properties.DataSource = lsGrade;
+            cbbGrade.Properties.DisplayMember = "DisplayName"; ;
+            cbbGrade.Properties.ValueMember = "Id";
 
             cbbGrade.EditValue = "7";
         }
@@ -112,91 +110,90 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 return;
             }
 
-            using (var db = new DBDocumentManagementSystemEntities())
+            var lsTargets = _dt207_TargetsBUS.GetList();
+            var lsBase207 = _dt207_BaseBUS.GetListByDate(fromDate, toDate);
+            var lsUsers = _dm_UserBUS.GetList();
+            var lsBaseProcessing = _dt207_DocProgressBUS.GetListNotComplete();
+
+            // Lấy danh sách văn kiện và kèm theo mã bộ phận (Lấy luôn văn kiện đang trình ký Thêm, Sửa, Xoá)
+            var lsDoc = (from data in lsBase207
+                         join users in lsUsers on data.UserUpload equals users.Id
+                         select new
+                         {
+                             data.Id,
+                             data.UserUpload,
+                             users.DisplayName,
+                             Class = users.IdDepartment,
+                             Grade = users.IdDepartment.Substring(0, 2)
+                         }).ToList().Select(r => new
+                         {
+                             r.Id,
+                             UserUploadName = $"{r.UserUpload} {r.DisplayName}",
+                             r.Class,
+                             r.Grade
+                         }).ToList();
+
+            // Xử lý các văn kiện đang trong lưu trình trình ký không tính
+            var lsIdBaseProcessing = lsBaseProcessing.Select(r => r.IdKnowledgeBase).Distinct().ToList();
+
+            lsDoc = lsDoc.Where(r => !lsIdBaseProcessing.Contains(r.Id)).ToList();
+
+            lsDataStatistic.Clear();
+
+            if (nameType == NAME_GRADE)
             {
-                var lsTargets = db.dt207_Targets.ToList();
+                var lsGrade = lsDepts.Where(r => r.IdParent == -1 && r.Id != "7").ToList();
 
-                // Lấy danh sách văn kiện và kèm theo mã bộ phận (Lấy luôn văn kiện đang trình ký Thêm, Sửa, Xoá)
-                var lsDoc = (from data in db.dt207_Base.
-                             Where(r => !(r.IsDelete) && r.UploadDate >= fromDate && r.UploadDate <= toDate)
-                             join users in db.dm_User on data.UserUpload equals users.Id
-                             select new
-                             {
-                                 data.Id,
-                                 data.UserUpload,
-                                 users.DisplayName,
-                                 Class = users.IdDepartment,
-                                 Grade = users.IdDepartment.Substring(0, 2)
-                             }).ToList().Select(r => new
-                             {
-                                 r.Id,
-                                 UserUploadName = $"{r.UserUpload} {r.DisplayName}",
-                                 r.Class,
-                                 r.Grade
-                             }).ToList();
-
-                // Xử lý các văn kiện đang trong lưu trình trình ký không tính
-                var lsDocProcessing = db.dt207_DocProgress.Where(r => !(r.IsComplete)).Select(r => r.IdKnowledgeBase).Distinct().ToList();
-
-                lsDoc = lsDoc.Where(r => !lsDocProcessing.Contains(r.Id)).ToList();
-
-                lsDataStatistic.Clear();
-
-                if (nameType == NAME_GRADE)
+                foreach (var item in lsGrade)
                 {
-                    var lsGrade = db.dm_Departments.Where(r => r.IdParent == -1 && r.Id != "7").ToList();
-
-                    foreach (var item in lsGrade)
+                    DataStatisticsChart data = new DataStatisticsChart()
                     {
-                        DataStatisticsChart data = new DataStatisticsChart()
-                        {
-                            DisplayName = item.DisplayName,
-                            Achieve = lsDoc.Count(r => r.Grade == item.Id),
-                            Target = lsTargets.FirstOrDefault(r => r.IdDept == item.Id).Targets
-                        };
+                        DisplayName = item.DisplayName,
+                        Achieve = lsDoc.Count(r => r.Grade == item.Id),
+                        Target = lsTargets.FirstOrDefault(r => r.IdDept == item.Id).Targets
+                    };
 
-                        lsDataStatistic.Add(data);
-                    }
+                    lsDataStatistic.Add(data);
                 }
-
-                if (nameType == NAME_CLASS)
-                {
-                    var idChildGrade = db.dm_Departments.First(r => r.Id == IdGrade).IdChild;
-
-                    var lsGrade = db.dm_Departments.Where(r => r.IdParent == idChildGrade).ToList();
-
-                    foreach (var item in lsGrade)
-                    {
-                        DataStatisticsChart data = new DataStatisticsChart()
-                        {
-                            DisplayName = item.DisplayName,
-                            Achieve = lsDoc.Count(r => r.Class == item.Id),
-                            Target = lsTargets.FirstOrDefault(r => r.IdDept == item.Id).Targets
-                        };
-
-                        lsDataStatistic.Add(data);
-                    }
-                }
-
-                if (nameType == NAME_USER)
-                {
-                    string idClass = cbbClass.EditValue.ToString();
-                    var lsDocClass = lsDoc.Where(r => r.Class == idClass).GroupBy(r => r.UserUploadName).Select(r => new { r.Key, Count = r.Count() }).ToList();
-
-                    foreach (var item in lsDocClass)
-                    {
-                        DataStatisticsChart data = new DataStatisticsChart()
-                        {
-                            DisplayName = item.Key,
-                            Achieve = item.Count
-                        };
-
-                        lsDataStatistic.Add(data);
-                    }
-                }
-
-                gcData.RefreshDataSource();
             }
+
+            if (nameType == NAME_CLASS)
+            {
+                var idChildGrade = lsDepts.First(r => r.Id == IdGrade).IdChild;
+
+                var lsGrade = lsDepts.Where(r => r.IdParent == idChildGrade).ToList();
+
+                foreach (var item in lsGrade)
+                {
+                    DataStatisticsChart data = new DataStatisticsChart()
+                    {
+                        DisplayName = item.DisplayName,
+                        Achieve = lsDoc.Count(r => r.Class == item.Id),
+                        Target = lsTargets.FirstOrDefault(r => r.IdDept == item.Id).Targets
+                    };
+
+                    lsDataStatistic.Add(data);
+                }
+            }
+
+            if (nameType == NAME_USER)
+            {
+                string idClass = cbbClass.EditValue.ToString();
+                var lsDocClass = lsDoc.Where(r => r.Class == idClass).GroupBy(r => r.UserUploadName).Select(r => new { r.Key, Count = r.Count() }).ToList();
+
+                foreach (var item in lsDocClass)
+                {
+                    DataStatisticsChart data = new DataStatisticsChart()
+                    {
+                        DisplayName = item.Key,
+                        Achieve = item.Count
+                    };
+
+                    lsDataStatistic.Add(data);
+                }
+            }
+
+            gcData.RefreshDataSource();
         }
 
         #endregion

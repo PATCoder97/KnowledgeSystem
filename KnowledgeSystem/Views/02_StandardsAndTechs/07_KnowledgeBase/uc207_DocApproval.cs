@@ -28,6 +28,12 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         #region parameters
 
         dm_UserBUS _dm_UserBUS = new dm_UserBUS();
+        dm_StepProgressBUS dm_StepProgressBUS = new dm_StepProgressBUS();
+        dm_GroupUserBUS _dm_GroupUserBUS = new dm_GroupUserBUS();
+        dt207_BaseBUS _dt207_BaseBUS = new dt207_BaseBUS();
+        dt207_DocProgressBUS _dt207_DocProgressBUS = new dt207_DocProgressBUS();
+        dt207_DocProgressInfoBUS _dt207_DocProgressInfoBUS = new dt207_DocProgressInfoBUS();
+
 
         BindingSource source = new BindingSource();
 
@@ -40,60 +46,59 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void LoadData()
         {
-            using (var db = new DBDocumentManagementSystemEntities())
-            {
-                // Xử lý lấy tất cả các văn kiện cần trình ký
-                lsDocProgresses = db.dt207_DocProgress.Where(r => !(r.IsComplete)).ToList();
-                lsDocProgressInfos = db.dt207_DocProgressInfo.ToList();
-                var lsKnowledgeBases = db.dt207_Base.ToList();
-                var lsUsers = _dm_UserBUS.GetList();
+            // Xử lý lấy tất cả các văn kiện cần trình ký
+            lsDocProgresses = _dt207_DocProgressBUS.GetListNotComplete();
+            lsDocProgressInfos = _dt207_DocProgressInfoBUS.GetList();
+            var lsKnowledgeBases = _dt207_BaseBUS.GetList();
+            var lsUsers = _dm_UserBUS.GetList();
+            var lsGroupUserByUID = _dm_GroupUserBUS.GetListByUID(TPConfigs.LoginUser.Id);
+            var lsStepProgress = dm_StepProgressBUS.GetList();
 
-                var lsDocNotSuccess =
-                    (from data in db.dt207_DocProgressInfo
-                     group data by data.IdDocProgress into g
-                     select new
-                     {
-                         IdDocProgress = g.Key,
-                         IndexStep = g.OrderByDescending(dpi => dpi.TimeStep).Select(dpi => dpi.IndexStep).FirstOrDefault(),
-                         TimeStep = g.OrderByDescending(dpi => dpi.TimeStep).Select(dpi => dpi.TimeStep).FirstOrDefault(),
-                         IdUserProcess = g.OrderBy(dpi => dpi.TimeStep).Select(dpi => dpi.IdUserProcess).FirstOrDefault()
-                     }).ToList();
+            var lsDocNotSuccess =
+                (from data in lsDocProgressInfos
+                 group data by data.IdDocProgress into g
+                 select new
+                 {
+                     IdDocProgress = g.Key,
+                     IndexStep = g.OrderByDescending(dpi => dpi.TimeStep).Select(dpi => dpi.IndexStep).FirstOrDefault(),
+                     TimeStep = g.OrderByDescending(dpi => dpi.TimeStep).Select(dpi => dpi.TimeStep).FirstOrDefault(),
+                     IdUserProcess = g.OrderBy(dpi => dpi.TimeStep).Select(dpi => dpi.IdUserProcess).FirstOrDefault()
+                 }).ToList();
 
-                var lsDataApproval =
-                    (from data in lsDocProgresses
-                     join infos in lsDocNotSuccess on data.Id equals infos.IdDocProgress
-                     join bases in lsKnowledgeBases on data.IdKnowledgeBase equals bases.Id
-                     join users in lsUsers on infos.IdUserProcess equals users.Id
-                     select new
-                     {
-                         data.IdKnowledgeBase,
-                         data.IdProgress,
-                         data.Descriptions,
-                         infos.TimeStep,
-                         infos.IndexStep,
-                         bases.DisplayName,
-                         UserProcess = $"{users.IdDepartment} | {infos.IdUserProcess}/{users.DisplayName}",
-                         ApprovalStep = $"{data.IdProgress}-{infos.IndexStep + 1}",
-                     }).ToList();
+            var lsDataApproval =
+                (from data in lsDocProgresses
+                 join infos in lsDocNotSuccess on data.Id equals infos.IdDocProgress
+                 join bases in lsKnowledgeBases on data.IdKnowledgeBase equals bases.Id
+                 join users in lsUsers on infos.IdUserProcess equals users.Id
+                 select new
+                 {
+                     data.IdKnowledgeBase,
+                     data.IdProgress,
+                     data.Descriptions,
+                     infos.TimeStep,
+                     infos.IndexStep,
+                     bases.DisplayName,
+                     UserProcess = $"{users.IdDepartment} | {infos.IdUserProcess}/{users.DisplayName}",
+                     ApprovalStep = $"{data.IdProgress}-{infos.IndexStep + 1}",
+                 }).ToList();
 
-                // Xử lý phân quyền nhưng user nằm trong group sẽ nhìn thấy
-                var lsGroupIn = (from data in db.dm_GroupUser.Where(r => r.IdUser == TPConfigs.LoginUser.Id).ToList()
-                                 join progresses in db.dm_StepProgress.ToList() on data.IdGroup equals progresses.IdGroup
-                                 select new
-                                 {
-                                     progresses.IdProgress,
-                                     progresses.IdGroup,
-                                     progresses.IndexStep,
-                                     ApprovalStep = $"{progresses.IdProgress}-{progresses.IndexStep}",
-                                 }).ToList();
+            // Xử lý phân quyền nhưng user nằm trong group sẽ nhìn thấy
+            var lsGroupIn = (from data in lsGroupUserByUID
+                             join progresses in lsStepProgress on data.IdGroup equals progresses.IdGroup
+                             select new
+                             {
+                                 progresses.IdProgress,
+                                 progresses.IdGroup,
+                                 progresses.IndexStep,
+                                 ApprovalStep = $"{progresses.IdProgress}-{progresses.IndexStep}",
+                             }).ToList();
 
-                var lsDisplays = (from data in lsDataApproval
-                                  join progresses in lsGroupIn on data.ApprovalStep equals progresses.ApprovalStep
-                                  select data).ToList();
+            var lsDisplays = (from data in lsDataApproval
+                              join progresses in lsGroupIn on data.ApprovalStep equals progresses.ApprovalStep
+                              select data).ToList();
 
 
-                source.DataSource = lsDisplays;
-            }
+            source.DataSource = lsDisplays;
 
             gcData.RefreshDataSource();
         }

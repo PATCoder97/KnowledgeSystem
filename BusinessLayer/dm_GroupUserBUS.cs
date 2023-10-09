@@ -30,6 +30,22 @@ namespace BusinessLayer
             }
         }
 
+        public List<dm_GroupUser> GetListByUID(string _UID)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dm_GroupUser.Where(r => r.IdUser == _UID).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public bool Create(dm_GroupUser groupUser)
         {
             try
