@@ -218,7 +218,7 @@ namespace SVC207Knowledge
                 var lsTypes = db.dt207_Type.ToList();
 
                 var lsDocProcessNotifys =
-                    (from data in db.dt207_DocProgressInfo.Where(r => string.IsNullOrEmpty(r.TimeNotifyNotes.ToString()))
+                    (from data in db.dt207_DocProcessingInfo.Where(r => string.IsNullOrEmpty(r.TimeNotifyNotes.ToString()))
                      join processes in db.dt207_DocProcessing on data.IdDocProgress equals processes.Id
                      select new
                      {
@@ -352,10 +352,10 @@ namespace SVC207Knowledge
                     }
 
                     // Cập nhật ngày thông báo notes lên DB
-                    var dataNotified = db.dt207_DocProgressInfo.First(r => r.Id == item.data.Id);
+                    var dataNotified = db.dt207_DocProcessingInfo.First(r => r.Id == item.data.Id);
                     dataNotified.TimeNotifyNotes = DateTime.Now;
 
-                    db.dt207_DocProgressInfo.AddOrUpdate(dataNotified);
+                    db.dt207_DocProcessingInfo.AddOrUpdate(dataNotified);
                     await db.SaveChangesAsync();
                 }
             }
