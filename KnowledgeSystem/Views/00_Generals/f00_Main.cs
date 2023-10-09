@@ -4,10 +4,13 @@ using DevExpress.XtraBars.Docking2010.Customization;
 using DevExpress.XtraBars.Docking2010.Views.WindowsUI;
 using DevExpress.XtraEditors;
 using KnowledgeSystem.Configs;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Windows.Forms;
 
 namespace KnowledgeSystem.Views._00_Generals
@@ -124,10 +127,10 @@ namespace KnowledgeSystem.Views._00_Generals
 #else
             using (WebClient client = new WebClient())
             {
-                string result = client.DownloadString(TempDatas.UrlUpdate);
+                string result = client.DownloadString(TPConfigs.UrlUpdate);
 
                 var lsUpdateInfos = JsonConvert.DeserializeObject<List<UpdateInfo>>(result)
-                    .Where(r => r.app == TempDatas.SoftNameEN).ToList();
+                    .Where(r => r.app == TPConfigs.SoftNameEN).ToList();
                 if (lsUpdateInfos != null && lsUpdateInfos.Count > 0)
                 {
                     UpdateInfo newUpdate = lsUpdateInfos.First();
@@ -135,7 +138,7 @@ namespace KnowledgeSystem.Views._00_Generals
                     {
                         string msg = "Phần mềm có bản cập nhật mới.\r\nBấm OK để hệ thống cập nhật,\r\nVui lòng mở lại phần mềm sau khi cập nhật thành công!\r\n";
                         msg += "該系統有新的更新。\r\n按確定更新系統，\r\n更新成功後請重新打開系統！";
-                        var dialogResult = XtraMessageBox.Show(msg, TempDatas.SoftNameTW, MessageBoxButtons.OKCancel);
+                        var dialogResult = XtraMessageBox.Show(msg, TPConfigs.SoftNameTW, MessageBoxButtons.OKCancel);
                         if (dialogResult == DialogResult.OK)
                         {
                             f00_UpdateSoftware f00_Update = new f00_UpdateSoftware(newUpdate.url);

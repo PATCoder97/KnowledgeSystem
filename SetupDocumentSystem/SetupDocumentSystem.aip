@@ -7,29 +7,31 @@
     <ROW Property="AI_BITMAP_DISPLAY_MODE" Value="0"/>
     <ROW Property="AI_CURRENT_YEAR" Value="2023" ValueLocId="-"/>
     <ROW Property="AI_PACKAGING_TOOL" Value="Advanced Installer 20.0 build e4706cc2" ValueLocId="-"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_AddCircled.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Bell.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_CheckCircled.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_DeleteCircled.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Edit.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Find.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Forbid.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Refresh.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Reload.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Settings.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Approval.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_BO_Department.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_BO_Employee.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_BusinessLayer.dll" Value="..\BusinessLayer\bin\Debug"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Customers.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_DataAccessLayer.dll" Value="..\DataAccessLayer\bin\Debug"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_AddCircled.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Bell.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_CheckCircled.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_DeleteCircled.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Edit.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Find.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Forbid.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Refresh.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Reload.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Settings.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Approval.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_BO_Department.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_BO_Employee.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_BusinessLayer.dll" Value="..\BusinessLayer\bin\Release"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Customers.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_DataAccessLayer.dll" Value="..\DataAccessLayer\bin\Release"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_DevExpress.BonusSkins.v22.1.dll" Value="C:\Program Files\DevExpress 22.1\Components\Bin\Framework"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_DevExpress.Charts.v22.1.Core.dll" Value="C:\Program Files\DevExpress 22.1\Components\Bin\Framework"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_DevExpress.CodeParser.v22.1.dll" Value="C:\Program Files\DevExpress 22.1\Components\Bin\Framework"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_DevExpress.Data.Desktop.v22.1.dll" Value="C:\Program Files\DevExpress 22.1\Components\Bin\Framework"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_DevExpress.Data.v22.1.dll" Value="C:\Program Files\DevExpress 22.1\Components\Bin\Framework"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_DevExpress.DataAccess.v22.1.UI.dll" Value="C:\Program Files\DevExpress 22.1\Components\Bin\Framework"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_DevExpress.DataAccess.v22.1.dll" Value="C:\Program Files\DevExpress 22.1\Components\Bin\Framework"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_DevExpress.DataVisualization.v22.1.Core.dll" Value="C:\Program Files\DevExpress 22.1\Components\Bin\Framework"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_DevExpress.Diagram.v22.1.Core.dll" Value="C:\Program Files\DevExpress 22.1\Components\Bin\Framework"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_DevExpress.Dialogs.v22.1.Core.dll" Value="C:\Program Files\DevExpress 22.1\Components\Bin\Framework"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_DevExpress.Drawing.v22.1.dll" Value="C:\Program Files\DevExpress 22.1\Components\Bin\Framework"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_DevExpress.Images.v22.1.dll" Value="C:\Program Files\DevExpress 22.1\Components\Bin\Framework"/>
@@ -39,6 +41,8 @@
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_DevExpress.Printing.v22.1.Core.dll" Value="C:\Program Files\DevExpress 22.1\Components\Bin\Framework"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_DevExpress.RichEdit.v22.1.Core.dll" Value="C:\Program Files\DevExpress 22.1\Components\Bin\Framework"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_DevExpress.Sparkline.v22.1.Core.dll" Value="C:\Program Files\DevExpress 22.1\Components\Bin\Framework"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_DevExpress.Spreadsheet.v22.1.Core.dll" Value="C:\Program Files\DevExpress 22.1\Components\Bin\Framework"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_DevExpress.TreeMap.v22.1.Core.dll" Value="C:\Program Files\DevExpress 22.1\Components\Bin\Framework"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_DevExpress.Utils.v22.1.UI.dll" Value="C:\Program Files\DevExpress 22.1\Components\Bin\Framework"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_DevExpress.Utils.v22.1.dll" Value="C:\Program Files\DevExpress 22.1\Components\Bin\Framework"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_DevExpress.Xpo.v22.1.dll" Value="C:\Program Files\DevExpress 22.1\Components\Bin\Framework"/>
@@ -46,6 +50,7 @@
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_DevExpress.XtraCharts.v22.1.UI.dll" Value="C:\Program Files\DevExpress 22.1\Components\Bin\Framework"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_DevExpress.XtraCharts.v22.1.Wizard.dll" Value="C:\Program Files\DevExpress 22.1\Components\Bin\Framework"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_DevExpress.XtraCharts.v22.1.dll" Value="C:\Program Files\DevExpress 22.1\Components\Bin\Framework"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_DevExpress.XtraDiagram.v22.1.dll" Value="C:\Program Files\DevExpress 22.1\Components\Bin\Framework"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_DevExpress.XtraDialogs.v22.1.dll" Value="C:\Program Files\DevExpress 22.1\Components\Bin\Framework"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_DevExpress.XtraEditors.v22.1.dll" Value="C:\Program Files\DevExpress 22.1\Components\Bin\Framework"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_DevExpress.XtraGrid.v22.1.dll" Value="C:\Program Files\DevExpress 22.1\Components\Bin\Framework"/>
@@ -54,25 +59,33 @@
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_DevExpress.XtraPdfViewer.v22.1.dll" Value="C:\Program Files\DevExpress 22.1\Components\Bin\Framework"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_DevExpress.XtraPrinting.v22.1.dll" Value="C:\Program Files\DevExpress 22.1\Components\Bin\Framework"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_DevExpress.XtraRichEdit.v22.1.dll" Value="C:\Program Files\DevExpress 22.1\Components\Bin\Framework"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_DevExpress.XtraSpreadsheet.v22.1.dll" Value="C:\Program Files\DevExpress 22.1\Components\Bin\Framework"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_DevExpress.XtraTreeList.v22.1.dll" Value="C:\Program Files\DevExpress 22.1\Components\Bin\Framework"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_DevExpress.XtraTreeMap.v22.1.dll" Value="C:\Program Files\DevExpress 22.1\Components\Bin\Framework"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_DevExpress.XtraVerticalGrid.v22.1.dll" Value="C:\Program Files\DevExpress 22.1\Components\Bin\Framework"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_EPPlus.Interfaces.dll" Value="..\packages\EPPlus.Interfaces.6.1.1\lib\net462"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_EPPlus.System.Drawing.dll" Value="..\packages\EPPlus.System.Drawing.6.1.1\lib\net462"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_EPPlus.dll" Value="..\packages\EPPlus.6.2.8\lib\net462"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_EntityFramework.SqlServer.dll" Value="..\packages\EntityFramework.6.4.4\lib\net45"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_EntityFramework.dll" Value="..\packages\EntityFramework.6.4.4\lib\net45"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_KnowledgeSystem.exe" Value="..\KnowledgeSystem\bin\Debug"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_KnowledgeSystem.exe.config" Value="..\KnowledgeSystem\bin\Debug"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_KnowledgeSystem.pdb" Value="..\KnowledgeSystem\bin\Debug"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Logger.dll" Value="..\BusinessLayer\bin\Debug"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_KnowledgeSystem.exe" Value="..\KnowledgeSystem\bin\Release"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_KnowledgeSystem.exe.config" Value="..\KnowledgeSystem\bin\Release"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_KnowledgeSystem.pdb" Value="..\KnowledgeSystem\bin\Release"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Logger.dll" Value="..\BusinessLayer\bin\Release"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.IO.RecyclableMemoryStream.dll" Value="..\packages\Microsoft.IO.RecyclableMemoryStream.1.4.1\lib\net46"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.mshtml.dll" Value="C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\PublicAssemblies"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Newtonsoft.Json.dll" Value="..\packages\Newtonsoft.Json.13.0.3\lib\net45"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Search_more.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_ShowPrintPreview.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Statistics.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_StepProcess.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_loginscreen.png" Value="..\KnowledgeSystem\bin\Debug\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_none.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Search_more.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_ShowPrintPreview.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Spire.License.dll" Value="..\..\..\..\00. Tool\01. dll\presentation.6.1.4\net40"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Spire.Pdf.dll" Value="..\..\..\..\00. Tool\01. dll\presentation.6.1.4\net40"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Spire.Presentation.dll" Value="..\..\..\..\00. Tool\01. dll\presentation.6.1.4\net40"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Statistics.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_StepProcess.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_checked_radio_button.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_loginscreen.png" Value="..\KnowledgeSystem\bin\Release\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_none.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_unchecked_radio_button.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Actions_AddCircled.svg" Value="Actions_AddCircled.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Actions_Bell.svg" Value="Actions_Bell.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Actions_CheckCircled.svg" Value="Actions_CheckCircled.svg"/>
@@ -94,8 +107,10 @@
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_DevExpress.CodeParser.v22.1.dll" Value="DevExpress.CodeParser.v22.1.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Data.Desktop.v22.1.dll" Value="DevExpress.Data.Desktop.v22.1.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Data.v22.1.dll" Value="DevExpress.Data.v22.1.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_DevExpress.DataAccess.v22.1.UI.dll" Value="DevExpress.DataAccess.v22.1.UI.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_DevExpress.DataAccess.v22.1.dll" Value="DevExpress.DataAccess.v22.1.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_DevExpress.DataVisualization.v22.1.Core.dll" Value="DevExpress.DataVisualization.v22.1.Core.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Diagram.v22.1.Core.dll" Value="DevExpress.Diagram.v22.1.Core.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Dialogs.v22.1.Core.dll" Value="DevExpress.Dialogs.v22.1.Core.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Drawing.v22.1.dll" Value="DevExpress.Drawing.v22.1.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Images.v22.1.dll" Value="DevExpress.Images.v22.1.dll"/>
@@ -105,6 +120,8 @@
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Printing.v22.1.Core.dll" Value="DevExpress.Printing.v22.1.Core.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_DevExpress.RichEdit.v22.1.Core.dll" Value="DevExpress.RichEdit.v22.1.Core.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Sparkline.v22.1.Core.dll" Value="DevExpress.Sparkline.v22.1.Core.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Spreadsheet.v22.1.Core.dll" Value="DevExpress.Spreadsheet.v22.1.Core.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_DevExpress.TreeMap.v22.1.Core.dll" Value="DevExpress.TreeMap.v22.1.Core.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Utils.v22.1.UI.dll" Value="DevExpress.Utils.v22.1.UI.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Utils.v22.1.dll" Value="DevExpress.Utils.v22.1.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Xpo.v22.1.dll" Value="DevExpress.Xpo.v22.1.dll"/>
@@ -112,6 +129,7 @@
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraCharts.v22.1.UI.dll" Value="DevExpress.XtraCharts.v22.1.UI.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraCharts.v22.1.Wizard.dll" Value="DevExpress.XtraCharts.v22.1.Wizard.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraCharts.v22.1.dll" Value="DevExpress.XtraCharts.v22.1.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraDiagram.v22.1.dll" Value="DevExpress.XtraDiagram.v22.1.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraDialogs.v22.1.dll" Value="DevExpress.XtraDialogs.v22.1.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraEditors.v22.1.dll" Value="DevExpress.XtraEditors.v22.1.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraGrid.v22.1.dll" Value="DevExpress.XtraGrid.v22.1.dll"/>
@@ -120,7 +138,9 @@
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraPdfViewer.v22.1.dll" Value="DevExpress.XtraPdfViewer.v22.1.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraPrinting.v22.1.dll" Value="DevExpress.XtraPrinting.v22.1.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraRichEdit.v22.1.dll" Value="DevExpress.XtraRichEdit.v22.1.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraSpreadsheet.v22.1.dll" Value="DevExpress.XtraSpreadsheet.v22.1.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraTreeList.v22.1.dll" Value="DevExpress.XtraTreeList.v22.1.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraTreeMap.v22.1.dll" Value="DevExpress.XtraTreeMap.v22.1.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraVerticalGrid.v22.1.dll" Value="DevExpress.XtraVerticalGrid.v22.1.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_EPPlus.Interfaces.dll" Value="EPPlus.Interfaces.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_EPPlus.System.Drawing.dll" Value="EPPlus.System.Drawing.dll"/>
@@ -132,23 +152,29 @@
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_KnowledgeSystem.pdb" Value="KnowledgeSystem.pdb"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Logger.dll" Value="Logger.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.IO.RecyclableMemoryStream.dll" Value="Microsoft.IO.RecyclableMemoryStream.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.mshtml.dll" Value="Microsoft.mshtml.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Newtonsoft.Json.dll" Value="Newtonsoft.Json.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Search_more.svg" Value="Search_more.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_ShowPrintPreview.svg" Value="ShowPrintPreview.svg"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Spire.License.dll" Value="Spire.License.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Spire.Pdf.dll" Value="Spire.Pdf.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Spire.Presentation.dll" Value="Spire.Presentation.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Statistics.svg" Value="Statistics.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_StepProcess.svg" Value="StepProcess.svg"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_checked_radio_button.svg" Value="checked_radio_button.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_loginscreen.png" Value="loginscreen.png"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_none.svg" Value="none.svg"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_unchecked_radio_button.svg" Value="unchecked_radio_button.svg"/>
     <ROW Property="ALLUSERS" Value="1"/>
     <ROW Property="ARPCOMMENTS" Value="This installer database contains the logic and data required to install [|ProductName]." ValueLocId="*"/>
     <ROW Property="ARPCONTACT" Value="VNW0014732 潘英俊"/>
     <ROW Property="ARPHELPTELEPHONE" Value="6779"/>
     <ROW Property="ARPPRODUCTICON" Value="DocumentSystem.exe" Type="8"/>
     <ROW Property="Manufacturer" Value="FHS"/>
-    <ROW Property="ProductCode" Value="1028:{DC4B63A4-26E8-4FED-8320-88BA061C7C07} 1033:{DC4B63A4-26E8-4FED-8320-88BA061C7C07} " Type="16"/>
+    <ROW Property="ProductCode" Value="1028:{8E420469-4397-4B5F-BA28-EFC138A7641C} 1033:{8E420469-4397-4B5F-BA28-EFC138A7641C} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="Document System"/>
-    <ROW Property="ProductVersion" Value="0.0.1"/>
+    <ROW Property="ProductVersion" Value="1.0.0"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{3D296ADD-7B3B-4B1B-8A4D-8DA669CCAF51}"/>
     <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
@@ -247,8 +273,21 @@
     <ROW File="StepProcess.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="STEPPR~2.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_StepProcess.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_StepProcess.svg&gt;" SelfReg="false"/>
     <ROW File="BusinessLayer.dll" Component_="KnowledgeSystem_References" FileName="BUSINE~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_BusinessLayer.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_BusinessLayer.dll&gt;" SelfReg="false"/>
     <ROW File="DataAccessLayer.dll" Component_="KnowledgeSystem_References" FileName="DATAAC~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DataAccessLayer.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DataAccessLayer.dll&gt;" SelfReg="false"/>
-    <ROW File="Logger.dll" Component_="KnowledgeSystem_References" FileName="[|AI_PROPPATH_FILENAME_PERBUILD_Logger.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Logger.dll&gt;" SelfReg="false"/>
     <ROW File="loginscreen.png" Component_="KnowledgeSystem_ContentOutput_Images" FileName="LOGINS~2.PNG|[|AI_PROPPATH_FILENAME_PERBUILD_loginscreen.png]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_loginscreen.png&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.DataAccess.v22.1.UI.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~35.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.DataAccess.v22.1.UI.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.DataAccess.v22.1.UI.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.Spreadsheet.v22.1.Core.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~36.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Spreadsheet.v22.1.Core.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.Spreadsheet.v22.1.Core.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.XtraSpreadsheet.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~37.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraSpreadsheet.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraSpreadsheet.v22.1.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.XtraTreeMap.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~38.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraTreeMap.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraTreeMap.v22.1.dll&gt;" SelfReg="false"/>
+    <ROW File="Spire.License.dll" Component_="KnowledgeSystem_References" FileName="SPIREL~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Spire.License.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Spire.License.dll&gt;" SelfReg="false"/>
+    <ROW File="Spire.Pdf.dll" Component_="KnowledgeSystem_References" FileName="SPIREP~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Spire.Pdf.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Spire.Pdf.dll&gt;" SelfReg="false"/>
+    <ROW File="Spire.Presentation.dll" Component_="KnowledgeSystem_References" FileName="SPIREP~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Spire.Presentation.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Spire.Presentation.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.XtraDiagram.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~39.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraDiagram.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraDiagram.v22.1.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.Diagram.v22.1.Core.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~40.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Diagram.v22.1.Core.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.Diagram.v22.1.Core.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.TreeMap.v22.1.Core.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~41.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.TreeMap.v22.1.Core.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.TreeMap.v22.1.Core.dll&gt;" SelfReg="false"/>
+    <ROW File="Microsoft.mshtml.dll" Component_="KnowledgeSystem_References" FileName="MICROS~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.mshtml.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.mshtml.dll&gt;" SelfReg="false"/>
+    <ROW File="checked_radio_button.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="CHECKE~2.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_checked_radio_button.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_checked_radio_button.svg&gt;" SelfReg="false"/>
+    <ROW File="unchecked_radio_button.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="UNCHEC~2.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_unchecked_radio_button.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_unchecked_radio_button.svg&gt;" SelfReg="false"/>
+    <ROW File="Logger.dll" Component_="KnowledgeSystem_References" FileName="[|AI_PROPPATH_FILENAME_PERBUILD_Logger.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Logger.dll&gt;" SelfReg="false"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.AppPathsComponent">
     <ROW Name="AI_APPPATH_PERBUILD_Actions_AddCircled.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_Actions_AddCircled.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_Actions_AddCircled.svg]" Type="2" Content="0"/>
@@ -272,8 +311,10 @@
     <ROW Name="AI_APPPATH_PERBUILD_DevExpress.CodeParser.v22.1.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_DevExpress.CodeParser.v22.1.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.CodeParser.v22.1.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_DevExpress.Data.Desktop.v22.1.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_DevExpress.Data.Desktop.v22.1.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Data.Desktop.v22.1.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_DevExpress.Data.v22.1.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_DevExpress.Data.v22.1.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Data.v22.1.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_DevExpress.DataAccess.v22.1.UI.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_DevExpress.DataAccess.v22.1.UI.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.DataAccess.v22.1.UI.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_DevExpress.DataAccess.v22.1.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_DevExpress.DataAccess.v22.1.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.DataAccess.v22.1.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_DevExpress.DataVisualization.v22.1.Core.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_DevExpress.DataVisualization.v22.1.Core.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.DataVisualization.v22.1.Core.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_DevExpress.Diagram.v22.1.Core.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_DevExpress.Diagram.v22.1.Core.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Diagram.v22.1.Core.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_DevExpress.Dialogs.v22.1.Core.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_DevExpress.Dialogs.v22.1.Core.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Dialogs.v22.1.Core.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_DevExpress.Drawing.v22.1.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_DevExpress.Drawing.v22.1.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Drawing.v22.1.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_DevExpress.Images.v22.1.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_DevExpress.Images.v22.1.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Images.v22.1.dll]" Type="2" Content="0"/>
@@ -283,6 +324,8 @@
     <ROW Name="AI_APPPATH_PERBUILD_DevExpress.Printing.v22.1.Core.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_DevExpress.Printing.v22.1.Core.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Printing.v22.1.Core.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_DevExpress.RichEdit.v22.1.Core.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_DevExpress.RichEdit.v22.1.Core.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.RichEdit.v22.1.Core.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_DevExpress.Sparkline.v22.1.Core.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_DevExpress.Sparkline.v22.1.Core.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Sparkline.v22.1.Core.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_DevExpress.Spreadsheet.v22.1.Core.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_DevExpress.Spreadsheet.v22.1.Core.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Spreadsheet.v22.1.Core.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_DevExpress.TreeMap.v22.1.Core.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_DevExpress.TreeMap.v22.1.Core.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.TreeMap.v22.1.Core.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_DevExpress.Utils.v22.1.UI.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_DevExpress.Utils.v22.1.UI.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Utils.v22.1.UI.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_DevExpress.Utils.v22.1.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_DevExpress.Utils.v22.1.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Utils.v22.1.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_DevExpress.Xpo.v22.1.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_DevExpress.Xpo.v22.1.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Xpo.v22.1.dll]" Type="2" Content="0"/>
@@ -290,6 +333,7 @@
     <ROW Name="AI_APPPATH_PERBUILD_DevExpress.XtraCharts.v22.1.UI.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_DevExpress.XtraCharts.v22.1.UI.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraCharts.v22.1.UI.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_DevExpress.XtraCharts.v22.1.Wizard.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_DevExpress.XtraCharts.v22.1.Wizard.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraCharts.v22.1.Wizard.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_DevExpress.XtraCharts.v22.1.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_DevExpress.XtraCharts.v22.1.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraCharts.v22.1.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_DevExpress.XtraDiagram.v22.1.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_DevExpress.XtraDiagram.v22.1.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraDiagram.v22.1.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_DevExpress.XtraDialogs.v22.1.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_DevExpress.XtraDialogs.v22.1.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraDialogs.v22.1.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_DevExpress.XtraEditors.v22.1.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_DevExpress.XtraEditors.v22.1.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraEditors.v22.1.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_DevExpress.XtraGrid.v22.1.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_DevExpress.XtraGrid.v22.1.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraGrid.v22.1.dll]" Type="2" Content="0"/>
@@ -298,7 +342,9 @@
     <ROW Name="AI_APPPATH_PERBUILD_DevExpress.XtraPdfViewer.v22.1.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_DevExpress.XtraPdfViewer.v22.1.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraPdfViewer.v22.1.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_DevExpress.XtraPrinting.v22.1.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_DevExpress.XtraPrinting.v22.1.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraPrinting.v22.1.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_DevExpress.XtraRichEdit.v22.1.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_DevExpress.XtraRichEdit.v22.1.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraRichEdit.v22.1.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_DevExpress.XtraSpreadsheet.v22.1.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_DevExpress.XtraSpreadsheet.v22.1.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraSpreadsheet.v22.1.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_DevExpress.XtraTreeList.v22.1.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_DevExpress.XtraTreeList.v22.1.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraTreeList.v22.1.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_DevExpress.XtraTreeMap.v22.1.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_DevExpress.XtraTreeMap.v22.1.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraTreeMap.v22.1.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_DevExpress.XtraVerticalGrid.v22.1.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_DevExpress.XtraVerticalGrid.v22.1.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraVerticalGrid.v22.1.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_EPPlus.Interfaces.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_EPPlus.Interfaces.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_EPPlus.Interfaces.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_EPPlus.System.Drawing.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_EPPlus.System.Drawing.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_EPPlus.System.Drawing.dll]" Type="2" Content="0"/>
@@ -310,13 +356,19 @@
     <ROW Name="AI_APPPATH_PERBUILD_KnowledgeSystem.pdb" Path="[|AI_PROPPATH_DIR_PERBUILD_KnowledgeSystem.pdb]\[|AI_PROPPATH_FILENAME_PERBUILD_KnowledgeSystem.pdb]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Logger.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Logger.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Logger.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Microsoft.IO.RecyclableMemoryStream.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.IO.RecyclableMemoryStream.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.IO.RecyclableMemoryStream.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.mshtml.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.mshtml.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.mshtml.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Newtonsoft.Json.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Newtonsoft.Json.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Newtonsoft.Json.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Search_more.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_Search_more.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_Search_more.svg]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_ShowPrintPreview.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_ShowPrintPreview.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_ShowPrintPreview.svg]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Spire.License.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Spire.License.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Spire.License.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Spire.Pdf.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Spire.Pdf.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Spire.Pdf.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_Spire.Presentation.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Spire.Presentation.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Spire.Presentation.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Statistics.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_Statistics.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_Statistics.svg]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_StepProcess.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_StepProcess.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_StepProcess.svg]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_checked_radio_button.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_checked_radio_button.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_checked_radio_button.svg]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_loginscreen.png" Path="[|AI_PROPPATH_DIR_PERBUILD_loginscreen.png]\[|AI_PROPPATH_FILENAME_PERBUILD_loginscreen.png]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_none.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_none.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_none.svg]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_unchecked_radio_button.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_unchecked_radio_button.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_unchecked_radio_button.svg]" Type="2" Content="0"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.BootstrOptComponent">
     <ROW BootstrOptKey="GlobalOptions" DownloadFolder="[AppDataFolder][|Manufacturer]\[|ProductName]\prerequisites" Options="2"/>
@@ -517,7 +569,20 @@
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="StepProcess.svg"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="BusinessLayer.dll"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DataAccessLayer.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="Logger.dll"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="loginscreen.png"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.DataAccess.v22.1.UI.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.Spreadsheet.v22.1.Core.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.XtraSpreadsheet.v22.1.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.XtraTreeMap.v22.1.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="Spire.License.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="Spire.Pdf.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="Spire.Presentation.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.XtraDiagram.v22.1.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.Diagram.v22.1.Core.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.TreeMap.v22.1.Core.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="Microsoft.mshtml.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="checked_radio_button.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="unchecked_radio_button.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="Logger.dll"/>
   </COMPONENT>
 </DOCUMENT>

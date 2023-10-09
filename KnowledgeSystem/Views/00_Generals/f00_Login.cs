@@ -116,8 +116,10 @@ namespace KnowledgeSystem.Views._00_Generals
         private void fLogin_Shown(object sender, EventArgs e)
         {
             txbPassword.Focus();
+#if DEBUG
             txbPassword.Text = "1";
             btnLogin_Click(sender, e);
+#endif
         }
     }
 }

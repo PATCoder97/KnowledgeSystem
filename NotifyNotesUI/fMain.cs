@@ -268,7 +268,7 @@ namespace NotifyNotesUI
                 var lsTypes = db.dt207_Type.ToList();
 
                 var lsDocProcessNotifys =
-                    (from data in db.dt207_DocProgressInfo.Where(r => string.IsNullOrEmpty(r.TimeNotifyNotes.ToString()))
+                    (from data in db.dt207_DocProcessingInfo.Where(r => string.IsNullOrEmpty(r.TimeNotifyNotes.ToString()))
                      join processes in db.dt207_DocProcessing on data.IdDocProgress equals processes.Id
                      select new
                      {
