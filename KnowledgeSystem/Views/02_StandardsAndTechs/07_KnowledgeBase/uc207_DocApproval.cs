@@ -31,14 +31,14 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         dm_StepProgressBUS dm_StepProgressBUS = new dm_StepProgressBUS();
         dm_GroupUserBUS _dm_GroupUserBUS = new dm_GroupUserBUS();
         dt207_BaseBUS _dt207_BaseBUS = new dt207_BaseBUS();
-        dt207_DocProgressBUS _dt207_DocProgressBUS = new dt207_DocProgressBUS();
-        dt207_DocProgressInfoBUS _dt207_DocProgressInfoBUS = new dt207_DocProgressInfoBUS();
+        dt207_DocProcessingBUS _dt207_DocProgressBUS = new dt207_DocProcessingBUS();
+        dt207_DocProcessingInfoBUS _dt207_DocProgressInfoBUS = new dt207_DocProcessingInfoBUS();
 
 
         BindingSource source = new BindingSource();
 
-        List<dt207_DocProgress> lsDocProgresses = new List<dt207_DocProgress>();
-        List<dt207_DocProgressInfo> lsDocProgressInfos = new List<dt207_DocProgressInfo>();
+        List<dt207_DocProcessing> lsDocProgresses = new List<dt207_DocProcessing>();
+        List<dt207_DocProcessingInfo> lsDocProgressInfos = new List<dt207_DocProcessingInfo>();
 
         #endregion
 

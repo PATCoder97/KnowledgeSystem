@@ -30,10 +30,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         dm_StepProgressBUS dm_StepProgressBUS = new dm_StepProgressBUS();
         dm_GroupUserBUS _dm_GroupUserBUS = new dm_GroupUserBUS();
         dt207_BaseBUS _dt207_BaseBUS = new dt207_BaseBUS();
-        dt207_DocProgressBUS _dt207_DocProgressBUS = new dt207_DocProgressBUS();
-        dt207_DocProgressInfoBUS _dt207_DocProgressInfoBUS = new dt207_DocProgressInfoBUS();
+        dt207_DocProcessingBUS _dt207_DocProgressBUS = new dt207_DocProcessingBUS();
+        dt207_DocProcessingInfoBUS _dt207_DocProgressInfoBUS = new dt207_DocProcessingInfoBUS();
 
-        List<dt207_DocProgressInfo> lsBaseProcessInfos;
+        List<dt207_DocProcessingInfo> lsBaseProcessInfos;
 
         Font fontIndicator = new Font("Times New Roman", 12.0f, FontStyle.Italic);
         bool cal(Int32 _Width, GridView _View)

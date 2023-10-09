@@ -131,7 +131,7 @@ namespace SVC207Knowledge
 
                 var queryDocUpdated =
                     (from data in lsNotifyEditDocs
-                     join docprocess in db.dt207_DocProgress on data.IdDocProcess equals docprocess.Id
+                     join docprocess in db.dt207_DocProcessing on data.IdDocProcess equals docprocess.Id
                      select new
                      {
                          data.Id,
@@ -219,7 +219,7 @@ namespace SVC207Knowledge
 
                 var lsDocProcessNotifys =
                     (from data in db.dt207_DocProgressInfo.Where(r => string.IsNullOrEmpty(r.TimeNotifyNotes.ToString()))
-                     join processes in db.dt207_DocProgress on data.IdDocProgress equals processes.Id
+                     join processes in db.dt207_DocProcessing on data.IdDocProgress equals processes.Id
                      select new
                      {
                          data,

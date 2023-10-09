@@ -33,7 +33,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         dm_DeptBUS _dm_DeptBUS = new dm_DeptBUS();
         dm_UserBUS _dm_UserBUS = new dm_UserBUS();
         dt207_BaseBUS _dt207_BaseBUS = new dt207_BaseBUS();
-        dt207_DocProgressBUS _dt207_DocProgressBUS = new dt207_DocProgressBUS();
+        dt207_DocProcessingBUS _dt207_DocProgressBUS = new dt207_DocProcessingBUS();
 
         List<dm_Departments> lsDepts;
 

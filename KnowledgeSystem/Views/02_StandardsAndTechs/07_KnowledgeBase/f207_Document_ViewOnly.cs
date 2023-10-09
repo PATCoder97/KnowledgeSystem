@@ -32,7 +32,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             LockControl(false);
         }
 
-        public f207_Document_ViewOnly(dt207_DocProgress docProcess_)
+        public f207_Document_ViewOnly(dt207_DocProcessing docProcess_)
         {
             InitializeComponent();
             docProcess = docProcess_;
@@ -50,7 +50,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         BindingSource sourceSecuritys = new BindingSource();
 
         string idDocument = string.Empty;
-        dt207_DocProgress docProcess = new dt207_DocProgress();
+        dt207_DocProcessing docProcess = new dt207_DocProcessing();
 
         List<dt207_Type> lsKnowledgeTypes = new List<dt207_Type>();
         List<dm_User> lsUsers = new List<dm_User>();
@@ -182,7 +182,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     int idProgressByDoc = docProcess.IdProgress;
                     int idDocProgress = docProcess.Id;
                     var lsDMStepProgress = db.dm_StepProgress.Where(r => r.IdProgress == idProgressByDoc).ToList();
-                    var lsDocProgressInfos = db.dt207_DocProgressInfo.Where(r => r.IdDocProgress == idDocProgress).ToList();
+                    var lsDocProgressInfos = db.dt207_DocProcessingInfo.Where(r => r.IdDocProgress == idDocProgress).ToList();
 
                     var lsStepProgressDoc = (from data in lsDMStepProgress
                                              join groups in lsGroups on data.IdGroup equals groups.Id

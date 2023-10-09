@@ -31,7 +31,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             idKnowledgeBase = IdKnowledgeBase_;
         }
 
-        dt207_DocProgressBUS _dt207_DocProgress = new dt207_DocProgressBUS();
+        dt207_DocProcessingBUS _dt207_DocProgress = new dt207_DocProcessingBUS();
         dt207_HistoryGetFileBUS _dt207_HistoryGetFileBUS = new dt207_HistoryGetFileBUS();
 
         string documentFile = "";

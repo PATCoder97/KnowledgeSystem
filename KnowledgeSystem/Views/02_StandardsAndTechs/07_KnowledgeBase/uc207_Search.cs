@@ -34,7 +34,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         dt207_BaseBUS _dt207_BaseBUS = new dt207_BaseBUS();
         dt207_TypeBUS _dt207_TypeBUS = new dt207_TypeBUS();
         dt207_TypeHisGetFileBUS _dt207_TypeHisGetFileBUS = new dt207_TypeHisGetFileBUS();
-        dt207_DocProgressBUS _dt207_DocProgressBUS = new dt207_DocProgressBUS();
+        dt207_DocProcessingBUS _dt207_DocProgressBUS = new dt207_DocProcessingBUS();
         dt207_SecurityBUS _dt207_SecurityBUS = new dt207_SecurityBUS();
         dm_GroupBUS _dm_GroupBUS = new dm_GroupBUS();
         dm_GroupUserBUS _dm_GroupUserBUS = new dm_GroupUserBUS();
@@ -194,13 +194,13 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             using (var db = new DBDocumentManagementSystemEntities())
             {
                 // Xử lý lấy tất cả các văn kiện cần trình ký
-                var lsDocProgresses = db.dt207_DocProgress.Where(r => !(r.IsComplete)).ToList();
-                var lsDocProgressInfos = db.dt207_DocProgressInfo.ToList();
+                var lsDocProgresses = db.dt207_DocProcessing.Where(r => !(r.IsComplete)).ToList();
+                var lsDocProgressInfos = db.dt207_DocProcessingInfo.ToList();
                 var lsKnowledgeBases = db.dt207_Base.ToList();
                 var lsUsers = db.dm_User.ToList();
 
                 var lsDocNotSuccess =
-                    (from data in db.dt207_DocProgressInfo
+                    (from data in db.dt207_DocProcessingInfo
                      group data by data.IdDocProgress into g
                      select new
                      {

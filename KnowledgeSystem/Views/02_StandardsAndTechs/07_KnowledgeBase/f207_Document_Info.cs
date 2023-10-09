@@ -60,8 +60,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         dt207_Attachment_BAKBUS _dt207_Attachment_BAKBUS = new dt207_Attachment_BAKBUS();
         dt207_SecurityBUS _dt207_SecurityBUS = new dt207_SecurityBUS();
         dt207_Security_BAKBUS _dt207_Security_BAKBUS = new dt207_Security_BAKBUS();
-        dt207_DocProgressBUS _dt207_DocProgressBUS = new dt207_DocProgressBUS();
-        dt207_DocProgressInfoBUS _dt207_DocProgressInfoBUS = new dt207_DocProgressInfoBUS();
+        dt207_DocProcessingBUS _dt207_DocProgressBUS = new dt207_DocProcessingBUS();
+        dt207_DocProcessingInfoBUS _dt207_DocProgressInfoBUS = new dt207_DocProcessingInfoBUS();
         dt207_HistoryGetFileBUS _dt207_HistoryGetFileBUS = new dt207_HistoryGetFileBUS();
 
         // Khai báo các source
@@ -686,7 +686,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             progressSelect = ucInfo.ProgressSelect;
             _event207 = Event207DocInfo.Delete;
 
-            dt207_DocProgress docProgress = new dt207_DocProgress()
+            dt207_DocProcessing docProgress = new dt207_DocProcessing()
             {
                 IdKnowledgeBase = _idBaseDocument,
                 IsComplete = false,
@@ -799,7 +799,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 //// Nếu chưa có lưu trình xử lý của văn kiện thì thêm mới (Trigger sẽ tự thêm vào ProcessInfo)
                 if (!_IsProcessing)
                 {
-                    dt207_DocProgress docProgress = new dt207_DocProgress()
+                    dt207_DocProcessing docProgress = new dt207_DocProcessing()
                     {
                         IdKnowledgeBase = _idBaseDocument,
                         IsComplete = false,
@@ -812,7 +812,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 }
                 else
                 {
-                    dt207_DocProgressInfo progressInfo = new dt207_DocProgressInfo()
+                    dt207_DocProcessingInfo progressInfo = new dt207_DocProcessingInfo()
                     {
                         IdDocProgress = _idDocProcessing,
                         TimeStep = DateTime.Now,
@@ -993,7 +993,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 _dt207_Security_BAKBUS.RemoveRangeByIdBase(_idBaseDocument);
             }
 
-            dt207_DocProgressInfo progressInfo = new dt207_DocProgressInfo()
+            dt207_DocProcessingInfo progressInfo = new dt207_DocProcessingInfo()
             {
                 IdDocProgress = _idBaseProgress,
                 TimeStep = DateTime.Now,
@@ -1027,7 +1027,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 _dt207_DocProgressBUS.AddOrUpdate(docProcessUpdate);
             }
 
-            dt207_DocProgressInfo progressInfo = new dt207_DocProgressInfo
+            dt207_DocProcessingInfo progressInfo = new dt207_DocProcessingInfo
             {
                 IdDocProgress = _idDocProcessing,
                 TimeStep = DateTime.Now,
@@ -1063,7 +1063,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             docProcessUpdate.Change = descriptions;
             _dt207_DocProgressBUS.AddOrUpdate(docProcessUpdate);
 
-            dt207_DocProgressInfo progressInfo = new dt207_DocProgressInfo()
+            dt207_DocProcessingInfo progressInfo = new dt207_DocProcessingInfo()
             {
                 IdDocProgress = _idDocProcessing,
                 TimeStep = DateTime.Now,
