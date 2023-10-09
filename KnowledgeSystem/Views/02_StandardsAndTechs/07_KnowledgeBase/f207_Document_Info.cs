@@ -686,21 +686,16 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             progressSelect = ucInfo.ProgressSelect;
             _event207 = Event207DocInfo.Delete;
 
-            using (var db = new DBDocumentManagementSystemEntities())
+            dt207_DocProgress docProgress = new dt207_DocProgress()
             {
-                dt207_DocProgress docProgress = new dt207_DocProgress()
-                {
-                    IdKnowledgeBase = _idBaseDocument,
-                    IsComplete = false,
-                    IsSuccess = false,
-                    IdProgress = progressSelect.Id,
-                    Descriptions = EnumHelper.GetDescription(_event207),
-                    IdUserProcess = TPConfigs.LoginUser.Id
-                };
-
-                db.dt207_DocProgress.Add(docProgress);
-                db.SaveChanges();
-            }
+                IdKnowledgeBase = _idBaseDocument,
+                IsComplete = false,
+                IsSuccess = false,
+                IdProgress = progressSelect.Id,
+                Descriptions = EnumHelper.GetDescription(_event207),
+                IdUserProcess = TPConfigs.LoginUser.Id
+            };
+            _dt207_DocProgressBUS.Create(docProgress);
 
             Close();
         }

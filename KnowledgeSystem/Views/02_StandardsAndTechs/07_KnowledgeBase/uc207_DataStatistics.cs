@@ -32,7 +32,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         dm_DeptBUS _dm_DeptBUS = new dm_DeptBUS();
         dm_UserBUS _dm_UserBUS = new dm_UserBUS();
-        dt207_TargetsBUS _dt207_TargetsBUS = new dt207_TargetsBUS();
         dt207_BaseBUS _dt207_BaseBUS = new dt207_BaseBUS();
         dt207_DocProgressBUS _dt207_DocProgressBUS = new dt207_DocProgressBUS();
 
@@ -110,7 +109,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 return;
             }
 
-            var lsTargets = _dt207_TargetsBUS.GetList();
+            var lsTargets = dt207_TargetsBUS.Instance.GetList();
             var lsBase207 = _dt207_BaseBUS.GetListByDate(fromDate, toDate);
             var lsUsers = _dm_UserBUS.GetList();
             var lsBaseProcessing = _dt207_DocProgressBUS.GetListNotComplete();
@@ -240,16 +239,12 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             string idGrade = cbbGrade.EditValue.ToString();
 
-            using (var db = new DBDocumentManagementSystemEntities())
-            {
-                var idParent = db.dm_Departments.First(r => r.Id == idGrade).IdChild;
+            var idParent = lsDepts.First(r => r.Id == idGrade).IdChild;
+            var lsGrade = lsDepts.Where(r => r.IdParent == idParent).ToList();
 
-                var lsGrade = db.dm_Departments.Where(r => r.IdParent == idParent).ToList();
-
-                cbbClass.Properties.DataSource = lsGrade;
-                cbbClass.Properties.DisplayMember = "DisplayName"; ;
-                cbbClass.Properties.ValueMember = "Id";
-            }
+            cbbClass.Properties.DataSource = lsGrade;
+            cbbClass.Properties.DisplayMember = "DisplayName"; ;
+            cbbClass.Properties.ValueMember = "Id";
 
             gColType.Caption = idGrade == "7" ? NAME_GRADE : NAME_CLASS;
             cbbClass.EditValue = null;

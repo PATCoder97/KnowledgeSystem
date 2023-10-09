@@ -14,6 +14,16 @@ namespace BusinessLayer
     {
         TPLogger logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName);
 
+        private static dt207_TargetsBUS instance;
+
+        public static dt207_TargetsBUS Instance
+        {
+            get { if (instance == null) instance = new dt207_TargetsBUS(); return instance; }
+            private set { instance = value; }
+        }
+
+        private dt207_TargetsBUS() { }
+
         public List<dt207_Targets> GetList()
         {
             try
@@ -48,7 +58,7 @@ namespace BusinessLayer
             }
         }
 
-        public bool Update(dt207_Targets target)
+        public bool AddOrUpdate(dt207_Targets target)
         {
             try
             {

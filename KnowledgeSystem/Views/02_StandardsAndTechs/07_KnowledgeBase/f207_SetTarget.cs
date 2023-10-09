@@ -1,4 +1,5 @@
-﻿using DataAccessLayer;
+﻿using BusinessLayer;
+using DataAccessLayer;
 using DevExpress.ClipboardSource.SpreadsheetML;
 using DevExpress.Pdf.Native.BouncyCastle.Asn1.X509;
 using DevExpress.XtraEditors;
@@ -24,6 +25,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             InitializeComponent();
         }
 
+        dm_DeptBUS _dm_DeptBUS = new dm_DeptBUS();
+
         private class TargetKnowedge
         {
             public string Id { get; set; }
@@ -34,37 +37,34 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void f207_SetTarget_Load(object sender, EventArgs e)
         {
-            using (var db = new DBDocumentManagementSystemEntities())
-            {
-                var lsTargets = db.dt207_Targets.ToList();
-                var lsDepts = db.dm_Departments.ToList();
+            var lsTargets = dt207_TargetsBUS.Instance.GetList();
+            var lsDepts = _dm_DeptBUS.GetList();
 
-                dm_Departments gradeDel = lsDepts.FirstOrDefault(r => r.Id == "7");
+            dm_Departments gradeDel = lsDepts.FirstOrDefault(r => r.Id == "7");
 
-                var lsDeptTargets = (from data in lsDepts
-                                     join names in db.dm_Departments.ToList()
-                                     on data.IdParent equals names.IdChild into dgt
-                                     from d in dgt.DefaultIfEmpty()
-                                     select new TargetKnowedge
-                                     {
-                                         Id = data.Id,
-                                         Grade = d?.DisplayName ?? gradeDel.DisplayName,
-                                         Class = data.DisplayName,
-                                     }
-                                     into dtDept
-                                     join targets in lsTargets on dtDept.Id equals targets.IdDept into dgt
-                                     from g in dgt.DefaultIfEmpty()
-                                     select new TargetKnowedge
-                                     {
-                                         Id = dtDept.Id,
-                                         Grade = dtDept.Grade,
-                                         Class = dtDept.Class,
-                                         Targets = g?.Targets ?? 0
-                                     }
-                                     ).ToList();
+            var lsDeptTargets = (from data in lsDepts
+                                 join names in lsDepts
+                                 on data.IdParent equals names.IdChild into dgt
+                                 from d in dgt.DefaultIfEmpty()
+                                 select new TargetKnowedge
+                                 {
+                                     Id = data.Id,
+                                     Grade = d?.DisplayName ?? gradeDel.DisplayName,
+                                     Class = data.DisplayName,
+                                 }
+                                 into dtDept
+                                 join targets in lsTargets on dtDept.Id equals targets.IdDept into dgt
+                                 from g in dgt.DefaultIfEmpty()
+                                 select new TargetKnowedge
+                                 {
+                                     Id = dtDept.Id,
+                                     Grade = dtDept.Grade,
+                                     Class = dtDept.Class,
+                                     Targets = g?.Targets ?? 0
+                                 }
+                                 ).ToList();
 
-                gcData.DataSource = lsDeptTargets;
-            }
+            gcData.DataSource = lsDeptTargets;
         }
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -80,14 +80,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                                                        Targets = data.Targets,
                                                    }).ToList();
 
-            using (var db = new DBDocumentManagementSystemEntities())
+            foreach (var item in lsTargetsUpdate)
             {
-                foreach (var item in lsTargetsUpdate)
-                {
-                    db.dt207_Targets.AddOrUpdate(item);
-                }
-
-                db.SaveChanges();
+                dt207_TargetsBUS.Instance.AddOrUpdate(item);
             }
 
             XtraMessageBox.Show("更新成功", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
