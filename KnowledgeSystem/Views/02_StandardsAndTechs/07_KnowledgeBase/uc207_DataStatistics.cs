@@ -30,7 +30,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         #region parameters
 
-        dm_DeptBUS _dm_DeptBUS = new dm_DeptBUS();
         dm_UserBUS _dm_UserBUS = new dm_UserBUS();
         dt207_BaseBUS _dt207_BaseBUS = new dt207_BaseBUS();
         dt207_DocProcessingBUS _dt207_DocProgressBUS = new dt207_DocProcessingBUS();
@@ -76,7 +75,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void LoadData()
         {
-            lsDepts = _dm_DeptBUS.GetList();
+            lsDepts = dm_DeptBUS.Instance.GetList();
             var lsGrade = lsDepts.Where(r => r.IdParent == -1).ToList();
 
             cbbGrade.Properties.DataSource = lsGrade;

@@ -12,7 +12,17 @@ namespace BusinessLayer
 {
     public class dm_DeptBUS
     {
-        TPLogger logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName);
+        TPLogger logger;
+
+        private static dm_DeptBUS instance;
+
+        public static dm_DeptBUS Instance
+        {
+            get { if (instance == null) instance = new dm_DeptBUS(); return instance; }
+            private set { instance = value; }
+        }
+
+        private dm_DeptBUS() { logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName); }
 
         public List<dm_Departments> GetList()
         {
@@ -30,7 +40,7 @@ namespace BusinessLayer
             }
         }
 
-        public dm_Departments GetById(string _idDept)
+        public dm_Departments GetItemById(string _idDept)
         {
             try
             {
@@ -46,7 +56,7 @@ namespace BusinessLayer
             }
         }
 
-        public dm_Departments GetByParentId(int _idParent)
+        public dm_Departments GetItemByParentId(int _idParent)
         {
             try
             {
@@ -62,7 +72,7 @@ namespace BusinessLayer
             }
         }
 
-        public bool Create(dm_Departments _dept)
+        public bool Add(dm_Departments _dept)
         {
             try
             {
@@ -80,7 +90,7 @@ namespace BusinessLayer
             }
         }
 
-        public bool Update(dm_Departments _dept)
+        public bool AddOrUpdate(dm_Departments _dept)
         {
             try
             {
@@ -98,7 +108,7 @@ namespace BusinessLayer
             }
         }
 
-        public bool Delete(string _idDept)
+        public bool Remove(string _idDept)
         {
             try
             {

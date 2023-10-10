@@ -252,6 +252,12 @@
     <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_SelectProgress.Designer.cs">
       <DependentUpon>uc207_SelectProgress.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\f402_ProgressInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\f402_ProgressInfo.Designer.cs">
+      <DependentUpon>f402_ProgressInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\uc402_StepProgress.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -362,6 +368,9 @@
     <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_SelectProgress.resx">
       <DependentUpon>uc207_SelectProgress.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\04_SystemAdministrator\02_PermissionManager\f402_ProgressInfo.resx">
+      <DependentUpon>f402_ProgressInfo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\02_PermissionManager\uc402_StepProgress.resx">
       <DependentUpon>uc402_StepProgress.cs</DependentUpon>
     </EmbeddedResource>
@@ -410,6 +419,24 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\checked_radio_button.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\icons_add.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\icons_cancel.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\icons_edit.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\icons_ok.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\icons_reload.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\icons_remove.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\unchecked_radio_button.svg">

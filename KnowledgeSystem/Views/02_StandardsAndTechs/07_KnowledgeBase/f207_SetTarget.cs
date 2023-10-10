@@ -25,8 +25,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             InitializeComponent();
         }
 
-        dm_DeptBUS _dm_DeptBUS = new dm_DeptBUS();
-
         private class TargetKnowedge
         {
             public string Id { get; set; }
@@ -38,7 +36,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         private void f207_SetTarget_Load(object sender, EventArgs e)
         {
             var lsTargets = dt207_TargetsBUS.Instance.GetList();
-            var lsDepts = _dm_DeptBUS.GetList();
+            var lsDepts = dm_DeptBUS.Instance.GetList();
 
             dm_Departments gradeDel = lsDepts.FirstOrDefault(r => r.Id == "7");
 

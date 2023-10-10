@@ -24,7 +24,7 @@ namespace KnowledgeSystem.Views._00_Generals
 
         sys_StaticValueBUS _sys_StaticValueBUS = new sys_StaticValueBUS();
         dm_UserBUS _dm_UserBUS = new dm_UserBUS();
-        dm_DeptBUS _dm_DeptBUS = new dm_DeptBUS();
+        //dm_DeptBUS _dm_DeptBUS = new dm_DeptBUS();
 
         TileItemElement elementName = new TileItemElement();
         TileItemElement elementIdDept = new TileItemElement();
@@ -79,8 +79,8 @@ namespace KnowledgeSystem.Views._00_Generals
             var _userLogin = _dm_UserBUS.GetUserByUID(TPConfigs.LoginUser.Id);
             string userName = _userLogin.DisplayName;
             string idDept = _userLogin.IdDepartment;
-            var gradeName = _dm_DeptBUS.GetById(idDept.Substring(0, 2)).DisplayName;
-            var gradeClass = _dm_DeptBUS.GetById(idDept).DisplayName;
+            var gradeName = dm_DeptBUS.Instance.GetItemById(idDept.Substring(0, 2)).DisplayName;
+            var gradeClass = dm_DeptBUS.Instance.GetItemById(idDept).DisplayName;
             elementName.Text = userName;
             elementIdDept.Text = idDept;
             elementGrade.Text = gradeName;

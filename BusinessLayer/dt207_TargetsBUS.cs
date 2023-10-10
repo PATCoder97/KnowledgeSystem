@@ -12,7 +12,7 @@ namespace BusinessLayer
 {
     public class dt207_TargetsBUS
     {
-        TPLogger logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName);
+        TPLogger logger;
 
         private static dt207_TargetsBUS instance;
 
@@ -22,7 +22,7 @@ namespace BusinessLayer
             private set { instance = value; }
         }
 
-        private dt207_TargetsBUS() { }
+        private dt207_TargetsBUS() { logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName); }
 
         public List<dt207_Targets> GetList()
         {

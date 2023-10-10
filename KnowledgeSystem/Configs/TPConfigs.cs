@@ -62,6 +62,15 @@ namespace KnowledgeSystem.Configs
         Check
     }
 
+    public enum EventFormInfo
+    {
+        Create,
+        View,
+        Update,
+        Delete,
+        ViewOnly
+    }
+
     //public DBDocumentManagementSystemEntities()
     //        : base(SingleConnection.ConString)
     //{
