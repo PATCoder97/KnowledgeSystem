@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,7 +13,17 @@ namespace BusinessLayer
 {
     public class dm_ProgressBUS
     {
-        TPLogger logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName);
+        TPLogger logger;
+
+        private static dm_ProgressBUS instance;
+
+        public static dm_ProgressBUS Instance
+        {
+            get { if (instance == null) instance = new dm_ProgressBUS(); return instance; }
+            private set { instance = value; }
+        }
+
+        private dm_ProgressBUS() { logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName); }
 
         public List<dm_Progress> GetList()
         {
@@ -37,6 +48,38 @@ namespace BusinessLayer
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
                     return _context.dm_Progress.Where(r => r.IdDept == _idDept.Substring(0, 1) || r.IdDept == _idDept.Substring(0, 2)).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
+        public dm_Progress GetItemById(int _id)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dm_Progress.FirstOrDefault(r => r.Id == _id);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
+        public int GetMaxId()
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dm_Progress.Max(r => r.Id);
                 }
             }
             catch (Exception ex)

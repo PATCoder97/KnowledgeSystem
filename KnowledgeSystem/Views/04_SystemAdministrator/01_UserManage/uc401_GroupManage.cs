@@ -17,7 +17,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
 
         #region parameters
 
-        dm_GroupBUS _dm_GroupBUS = new dm_GroupBUS();
         BindingSource sourceGroup = new BindingSource();
 
         #endregion
@@ -27,7 +26,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
         private void LoadGroup()
         {
             helper.SaveViewInfo();
-            var lsGroup = _dm_GroupBUS.GetList();
+            var lsGroup = dm_GroupBUS.Instance.GetList();
             sourceGroup.DataSource = lsGroup;
 
             gvData.BestFitColumns();

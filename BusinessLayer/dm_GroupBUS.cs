@@ -12,7 +12,17 @@ namespace BusinessLayer
 {
     public class dm_GroupBUS
     {
-        TPLogger logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName);
+        TPLogger logger;
+
+        private static dm_GroupBUS instance;
+
+        public static dm_GroupBUS Instance
+        {
+            get { if (instance == null) instance = new dm_GroupBUS(); return instance; }
+            private set { instance = value; }
+        }
+
+        private dm_GroupBUS() { logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName); }
 
         public List<dm_Group> GetList()
         {

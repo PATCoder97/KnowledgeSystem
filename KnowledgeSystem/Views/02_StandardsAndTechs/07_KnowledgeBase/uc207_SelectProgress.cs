@@ -16,11 +16,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             InitializeComponent();
         }
 
-        dm_ProgressBUS _dm_ProgressBUS = new dm_ProgressBUS();
-
         private void uc207_SelectProgress_Load(object sender, EventArgs e)
         {
-            var lsProgress = _dm_ProgressBUS.GetListByDept(TPConfigs.LoginUser.IdDepartment);
+            var lsProgress = dm_ProgressBUS.Instance.GetListByDept(TPConfigs.LoginUser.IdDepartment);
 
             cbbProgress.Properties.DataSource = lsProgress;
             cbbProgress.Properties.ValueMember = "Id";

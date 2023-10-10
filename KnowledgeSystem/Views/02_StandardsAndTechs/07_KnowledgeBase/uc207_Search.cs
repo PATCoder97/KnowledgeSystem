@@ -36,7 +36,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         dt207_TypeHisGetFileBUS _dt207_TypeHisGetFileBUS = new dt207_TypeHisGetFileBUS();
         dt207_DocProcessingBUS _dt207_DocProgressBUS = new dt207_DocProcessingBUS();
         dt207_SecurityBUS _dt207_SecurityBUS = new dt207_SecurityBUS();
-        dm_GroupBUS _dm_GroupBUS = new dm_GroupBUS();
         dm_GroupUserBUS _dm_GroupUserBUS = new dm_GroupUserBUS();
 
 
@@ -78,7 +77,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             List<dt207_Base> lsKnowledgeBase = new List<dt207_Base>();
             List<dt207_Base> ls207Base = _haveKeyword ? _dt207_BaseBUS.GetList() : _dt207_BaseBUS.GetListWithoutKeyword();
             List<dt207_Security> lsSecurities = _dt207_SecurityBUS.GetList();
-            List<dm_Group> lsGroups = _dm_GroupBUS.GetList();
+            List<dm_Group> lsGroups = dm_GroupBUS.Instance.GetList();
             List<dm_GroupUser> lsGroupUsers = _dm_GroupUserBUS.GetList();
 
             // Lấy danh sách các giá trị IdKnowledgeBase mà chưa hoàn thành lưu trình trình ký

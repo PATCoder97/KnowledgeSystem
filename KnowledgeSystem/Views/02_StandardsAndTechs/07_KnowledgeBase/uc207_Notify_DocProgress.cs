@@ -27,7 +27,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         }
 
         dm_UserBUS _dm_UserBUS = new dm_UserBUS();
-        dm_StepProgressBUS dm_StepProgressBUS = new dm_StepProgressBUS();
         dm_GroupUserBUS _dm_GroupUserBUS = new dm_GroupUserBUS();
         dt207_BaseBUS _dt207_BaseBUS = new dt207_BaseBUS();
         dt207_DocProcessingBUS _dt207_DocProgressBUS = new dt207_DocProcessingBUS();

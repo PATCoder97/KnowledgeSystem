@@ -49,10 +49,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         // Khai báo các BUS
         dm_UserBUS _dm_UserBUS = new dm_UserBUS();
-        dm_GroupBUS _dm_GroupBUS = new dm_GroupBUS();
         dm_GroupUserBUS _dm_GroupUserBUS = new dm_GroupUserBUS();
-        dm_ProgressBUS _dm_ProgressBUS = new dm_ProgressBUS();
-        dm_StepProgressBUS _dm_StepProgressBUS = new dm_StepProgressBUS();
         dt207_TypeBUS _dt207_TypeBUS = new dt207_TypeBUS();
         dt207_BaseBUS _dt207_BaseBUS = new dt207_BaseBUS();
         dt207_Base_BAKBUS _dt207_Base_BAKBUS = new dt207_Base_BAKBUS();
@@ -166,9 +163,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             // Load các dữ liệu LIST ban đầu
             lsKnowledgeTypes = _dt207_TypeBUS.GetList();
             lsUsers = _dm_UserBUS.GetList();
-            lsGroups = _dm_GroupBUS.GetList();
+            lsGroups = dm_GroupBUS.Instance.GetList();
             lsGroupUser = _dm_GroupUserBUS.GetList();
-            progressSelect = _dm_ProgressBUS.GetListByDept(TPConfigs.LoginUser.IdDepartment).FirstOrDefault();
+            progressSelect = dm_ProgressBUS.Instance.GetListByDept(TPConfigs.LoginUser.IdDepartment).FirstOrDefault();
 
             // Create lists of Securityinfo objects from lsUsers and lsGroups
             var lsIdUsers = lsUsers.Select(r => new Securityinfo { IdDept = r.IdDepartment, IdGroupOrUser = r.Id, DisplayName = r.DisplayName }).ToList();
@@ -503,7 +500,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     _idDocProcessing = _docProcessing.Id;
                     _eventApproved = EnumHelper.GetEnumByDescription<Event207DocInfo>(_docProcessing.Descriptions);
 
-                    var lsStepProgress = _dm_StepProgressBUS.GetListByIdProgress(_idProgress);
+                    var lsStepProgress = dm_StepProgressBUS.Instance.GetListByIdProgress(_idProgress);
                     _stepEnd = lsStepProgress.Max(r => r.IndexStep);
                     var lsDisplayNameSteps = (from data in lsStepProgress
                                               join groups in lsGroups on data.IdGroup equals groups.Id

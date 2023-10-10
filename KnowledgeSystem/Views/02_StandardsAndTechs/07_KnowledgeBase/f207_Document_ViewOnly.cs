@@ -43,7 +43,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         #region parameters
 
         dm_UserBUS _dm_UserBUS = new dm_UserBUS();
-        dm_GroupBUS _dm_GroupBUS = new dm_GroupBUS();
         dm_GroupUserBUS _dm_GroupUserBUS = new dm_GroupUserBUS();
 
         BindingSource sourceAttachments = new BindingSource();
@@ -143,7 +142,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 // Initialize lists
                 lsKnowledgeTypes = db.dt207_Type.ToList();
                 lsUsers = _dm_UserBUS.GetList();
-                lsGroups = _dm_GroupBUS.GetList();
+                lsGroups = dm_GroupBUS.Instance.GetList();
                 lsGroupUser = _dm_GroupUserBUS.GetList();
 
                 // Create lists of Securityinfo objects from lsUsers and lsGroups

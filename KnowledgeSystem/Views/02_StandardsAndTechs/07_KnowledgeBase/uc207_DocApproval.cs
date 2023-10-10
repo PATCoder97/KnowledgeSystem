@@ -28,7 +28,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         #region parameters
 
         dm_UserBUS _dm_UserBUS = new dm_UserBUS();
-        dm_StepProgressBUS dm_StepProgressBUS = new dm_StepProgressBUS();
         dm_GroupUserBUS _dm_GroupUserBUS = new dm_GroupUserBUS();
         dt207_BaseBUS _dt207_BaseBUS = new dt207_BaseBUS();
         dt207_DocProcessingBUS _dt207_DocProgressBUS = new dt207_DocProcessingBUS();
@@ -52,7 +51,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             var lsKnowledgeBases = _dt207_BaseBUS.GetList();
             var lsUsers = _dm_UserBUS.GetList();
             var lsGroupUserByUID = _dm_GroupUserBUS.GetListByUID(TPConfigs.LoginUser.Id);
-            var lsStepProgress = dm_StepProgressBUS.GetList();
+            var lsStepProgress = dm_StepProgressBUS.Instance.GetList();
 
             var lsDocNotSuccess =
                 (from data in lsDocProgressInfos

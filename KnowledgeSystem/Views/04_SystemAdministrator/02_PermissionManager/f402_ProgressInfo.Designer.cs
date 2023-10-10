@@ -179,7 +179,9 @@
             this.cbbDept.MenuManager = this.barManager1;
             this.cbbDept.Name = "cbbDept";
             this.cbbDept.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbDept.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.cbbDept.Properties.Appearance.Options.UseFont = true;
+            this.cbbDept.Properties.Appearance.Options.UseForeColor = true;
             this.cbbDept.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbbDept.Properties.PopupView = this.gridLookUpEdit1View;
@@ -211,9 +213,11 @@
             // 
             this.gridColumn1.Caption = "標號";
             this.gridColumn1.FieldName = "Id";
+            this.gridColumn1.MinWidth = 100;
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
             this.gridColumn1.VisibleIndex = 0;
+            this.gridColumn1.Width = 100;
             // 
             // gridColumn2
             // 
@@ -222,6 +226,7 @@
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 1;
+            this.gridColumn2.Width = 276;
             // 
             // gcStep
             // 
@@ -252,12 +257,15 @@
             this.群組});
             this.gvStep.GridControl = this.gcStep;
             this.gvStep.Name = "gvStep";
+            this.gvStep.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
             this.gvStep.OptionsCustomization.AllowFilter = false;
             this.gvStep.OptionsCustomization.AllowSort = false;
             this.gvStep.OptionsView.EnableAppearanceOddRow = true;
+            this.gvStep.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
             this.gvStep.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never;
             this.gvStep.OptionsView.ShowGroupPanel = false;
             this.gvStep.OptionsView.ShowIndicator = false;
+            this.gvStep.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.gvStep_InitNewRow);
             // 
             // 步驟
             // 
@@ -276,7 +284,7 @@
             // 
             this.群組.Caption = "群組";
             this.群組.ColumnEdit = this.cbbGroup;
-            this.群組.FieldName = "Id";
+            this.群組.FieldName = "IdGroup";
             this.群組.Name = "群組";
             this.群組.Visible = true;
             this.群組.VisibleIndex = 1;
@@ -320,6 +328,8 @@
             this.layoutControlItem2.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
             this.layoutControlItem2.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem2.AppearanceItemCaption.Options.UseForeColor = true;
+            this.layoutControlItem2.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
+            this.layoutControlItem2.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem2.Control = this.cbbDept;
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";

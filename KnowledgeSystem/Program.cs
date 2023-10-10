@@ -1,9 +1,11 @@
-﻿using DevExpress.LookAndFeel;
+﻿using BusinessLayer;
+using DevExpress.LookAndFeel;
 using DevExpress.Skins;
 using DevExpress.UserSkins;
 using KnowledgeSystem.Configs;
 using KnowledgeSystem.Views._00_Generals;
 using KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase;
+using KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,11 +29,10 @@ namespace KnowledgeSystem
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new f00_Main());
+            //  Application.Run(new f00_Main());
 
-            //TempDatas.LoginId = "VNW0014732";
-            //TempDatas.RoleUserLogin = 0;
-            //Application.Run(new f00_FluentFrame(1));
+            TPConfigs.LoginUser = (new dm_UserBUS()).GetUserByUID("VNW0014732");
+            Application.Run(new f00_FluentFrame(17));
         }
     }
 }

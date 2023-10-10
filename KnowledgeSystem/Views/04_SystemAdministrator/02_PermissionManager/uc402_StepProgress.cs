@@ -1,5 +1,6 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
+using DevExpress.Charts.Native;
 using DevExpress.Utils.About;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
@@ -28,9 +29,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
 
         #region parameters
 
-        dm_ProgressBUS _dm_ProgressBUS = new dm_ProgressBUS();
-        dm_GroupBUS _dm_GroupBUS = new dm_GroupBUS();
-
+        RefreshHelper helper;
         BindingSource sourceProgress = new BindingSource();
 
         List<dm_Progress> lsProgresses;
@@ -49,8 +48,9 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
 
         private void LoadData()
         {
-            lsProgresses = _dm_ProgressBUS.GetList();
-            lsGroups = _dm_GroupBUS.GetList();
+            helper.SaveViewInfo();
+            lsProgresses = dm_ProgressBUS.Instance.GetList();
+            lsGroups = dm_GroupBUS.Instance.GetList();
             lsDepts = dm_DeptBUS.Instance.GetList();
 
             sourceProgress.DataSource = (from data in lsProgresses
@@ -63,6 +63,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
                                          }).ToList();
 
             gcData.RefreshDataSource();
+            helper.LoadViewInfo();
             gvData.BestFitColumns();
         }
 
@@ -70,6 +71,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
 
         private void uc207_StepProgress_Load(object sender, EventArgs e)
         {
+            helper = new RefreshHelper(gvData, "Id");
             gvData.ReadOnlyGridView();
             gvData.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
 
@@ -85,30 +87,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
             //uc402_StepProgress_Info ucInfo = new uc402_StepProgress_Info();
             //if (XtraDialog.Show(ucInfo, "新增審查流程", MessageBoxButtons.OKCancel) != DialogResult.OK) return;
 
-            //var lsStepProgressSelect = (from data in ucInfo.lsGroupProgress
-            //                            join groups in lsGroups on data.Id equals groups.Id
-            //                            select new dm_GroupProgressM
-            //                            {
-            //                                IndexStep = data.IndexStep,
-            //                                Id = data.Id,
-            //                                DisplayName = groups.DisplayName,
-            //                            }).ToList();
 
-            //using (var db = new DBDocumentManagementSystemEntities())
-            //{
-            //    int idProgress = lsProgresses.Count != 0 ? lsProgresses.Max(r => r.Id) + 1 : 1;
-            //    string nameProgress = "「經辦人」⇒" + string.Join("⇒", lsStepProgressSelect.Select(r => $"「{r.DisplayName}」"));
-            //    string idDept = ucInfo._idDept;
-
-            //    db.dm_Progress.Add(new dm_Progress() { Id = idProgress, DisplayName = nameProgress, IdDept = idDept });
-            //    db.SaveChanges();
-
-            //    foreach (var item in lsStepProgressSelect)
-            //    {
-            //        db.dm_StepProgress.Add(new dm_StepProgress() { IdProgress = idProgress, IndexStep = item.IndexStep, IdGroup = item.Id });
-            //    }
-            //    db.SaveChanges();
-            //}
 
             LoadData();
         }
@@ -120,9 +99,15 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
 
         private void gvData_DoubleClick(object sender, EventArgs e)
         {
+            int _focusHandle = gvData.FocusedRowHandle;
+            if (_focusHandle < 0) return;
+            var data = gvData.GetRow(gvData.FocusedRowHandle) as dm_Progress;
+
             f402_ProgressInfo fInfo = new f402_ProgressInfo();
             fInfo._eventInfo = EventFormInfo.View;
+            fInfo._idProgress = data.Id;
             fInfo.ShowDialog();
+            LoadData();
         }
     }
 }
