@@ -27,8 +27,8 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt207_Base" Width="1.5" PointX="0.5" PointY="7.375" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt207_HistoryGetFile" Width="1.5" PointX="13.5" PointY="7.375" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_User" Width="1.5" PointX="0.5" PointY="0.5" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt207_DocProcessing" Width="1.5" PointX="4.375" PointY="3.75" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt207_DocProcessingInfo" Width="1.5" PointX="6.375" PointY="3.75" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt207_DocProcessing" Width="1.5" PointX="10.25" PointY="7.375" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt207_DocProcessingInfo" Width="1.5" PointX="11.875" PointY="7.375" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
