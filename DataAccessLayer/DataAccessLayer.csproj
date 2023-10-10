@@ -77,10 +77,10 @@
     <Compile Include="dt207_Base_BAK.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
-    <Compile Include="dt207_DocProgress.cs">
+    <Compile Include="dt207_DocProcessing.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
-    <Compile Include="dt207_DocProgressInfo.cs">
+    <Compile Include="dt207_DocProcessingInfo.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
     <Compile Include="dt207_HistoryGetFile.cs">

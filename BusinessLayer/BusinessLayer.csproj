@@ -63,8 +63,8 @@
     <Compile Include="dt207_Attachment_BAKBUS.cs" />
     <Compile Include="dt207_BaseBUS.cs" />
     <Compile Include="dt207_Base_BAKBUS.cs" />
-    <Compile Include="dt207_DocProgressBUS.cs" />
-    <Compile Include="dt207_DocProgressInfoBUS.cs" />
+    <Compile Include="dt207_DocProcessingBUS.cs" />
+    <Compile Include="dt207_DocProcessingInfoBUS.cs" />
     <Compile Include="dt207_HistoryGetFileBUS.cs" />
     <Compile Include="dt207_NotifyEditDocBUS.cs" />
     <Compile Include="dt207_SecurityBUS.cs" />
