@@ -37,6 +37,7 @@
             this.gcProgress = new DevExpress.XtraGrid.GridControl();
             this.gvProgress = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -121,6 +122,10 @@
             // 
             // gvProgress
             // 
+            this.gvProgress.Appearance.GroupRow.Font = new System.Drawing.Font("DFKai-SB", 12F);
+            this.gvProgress.Appearance.GroupRow.ForeColor = System.Drawing.Color.Black;
+            this.gvProgress.Appearance.GroupRow.Options.UseFont = true;
+            this.gvProgress.Appearance.GroupRow.Options.UseForeColor = true;
             this.gvProgress.Appearance.HeaderPanel.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gvProgress.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
             this.gvProgress.Appearance.HeaderPanel.Options.UseFont = true;
@@ -131,15 +136,19 @@
             this.gvProgress.Appearance.Row.Options.UseFont = true;
             this.gvProgress.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumn1,
+            this.gridColumn3,
             this.gridColumn2});
             this.gvProgress.GridControl = this.gcProgress;
+            this.gvProgress.GroupCount = 1;
             this.gvProgress.Name = "gvProgress";
             this.gvProgress.OptionsBehavior.ReadOnly = true;
             this.gvProgress.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
+            this.gvProgress.OptionsView.ColumnAutoWidth = false;
             this.gvProgress.OptionsView.EnableAppearanceOddRow = true;
             this.gvProgress.OptionsView.ShowAutoFilterRow = true;
-            this.gvProgress.OptionsView.ShowColumnHeaders = false;
             this.gvProgress.OptionsView.ShowGroupPanel = false;
+            this.gvProgress.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gridColumn3, DevExpress.Data.ColumnSortOrder.Ascending)});
             this.gvProgress.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gvProgress_CustomDrawRowIndicator);
             this.gvProgress.MasterRowEmpty += new DevExpress.XtraGrid.Views.Grid.MasterRowEmptyEventHandler(this.gvProgress_MasterRowEmpty);
             this.gvProgress.MasterRowGetChildList += new DevExpress.XtraGrid.Views.Grid.MasterRowGetChildListEventHandler(this.gvProgress_MasterRowGetChildList);
@@ -151,6 +160,14 @@
             this.gridColumn1.Caption = "編碼";
             this.gridColumn1.FieldName = "Id";
             this.gridColumn1.Name = "gridColumn1";
+            // 
+            // gridColumn3
+            // 
+            this.gridColumn3.Caption = "單位";
+            this.gridColumn3.FieldName = "IdDept";
+            this.gridColumn3.Name = "gridColumn3";
+            this.gridColumn3.Visible = true;
+            this.gridColumn3.VisibleIndex = 0;
             // 
             // gridColumn2
             // 
@@ -303,7 +320,7 @@
             this.barDockControlRight.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.barDockControlRight.Size = new System.Drawing.Size(0, 503);
             // 
-            // uc207_StepProgress
+            // uc402_StepProgress
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
             this.Appearance.Options.UseBackColor = true;
@@ -314,7 +331,7 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.Name = "uc207_StepProgress";
+            this.Name = "uc402_StepProgress";
             this.Size = new System.Drawing.Size(1010, 552);
             this.Load += new System.EventHandler(this.uc207_StepProgress_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gvStepProgress)).EndInit();
@@ -351,5 +368,6 @@
         private DevExpress.XtraGrid.Views.Grid.GridView gvStepProgress;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
     }
 }

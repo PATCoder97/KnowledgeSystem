@@ -48,6 +48,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
             }
 
             gcProgress.RefreshDataSource();
+            gvProgress.BestFitColumns();
         }
 
         bool cal(Int32 _Width, GridView _View)
@@ -179,9 +180,10 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
             using (var db = new DBDocumentManagementSystemEntities())
             {
                 int idProgress = lsProgresses.Count != 0 ? lsProgresses.Max(r => r.Id) + 1 : 1;
-                string nameProgress = "「經辦人」⇒" + string.Join("⇒", lsStepProgressSelect.Select(r =>$"「{r.DisplayName}」" ));
+                string nameProgress = "「經辦人」⇒" + string.Join("⇒", lsStepProgressSelect.Select(r => $"「{r.DisplayName}」"));
+                string idDept = ucInfo._idDept;
 
-                db.dm_Progress.Add(new dm_Progress() { Id = idProgress, DisplayName = nameProgress });
+                db.dm_Progress.Add(new dm_Progress() { Id = idProgress, DisplayName = nameProgress, IdDept = idDept });
                 db.SaveChanges();
 
                 foreach (var item in lsStepProgressSelect)

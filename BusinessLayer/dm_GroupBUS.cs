@@ -30,7 +30,7 @@ namespace BusinessLayer
             }
         }
 
-        public bool Create(dm_Group group)
+        public bool Add(dm_Group group)
         {
             try
             {
@@ -48,7 +48,7 @@ namespace BusinessLayer
             }
         }
 
-        public bool Update(dm_Group group)
+        public bool AddOrUpdate(dm_Group group)
         {
             try
             {
@@ -66,7 +66,7 @@ namespace BusinessLayer
             }
         }
 
-        public bool Delete(int groupId)
+        public bool Remove(int groupId)
         {
             try
             {

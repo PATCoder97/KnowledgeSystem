@@ -16,5 +16,6 @@ namespace DataAccessLayer
     {
         public int Id { get; set; }
         public string DisplayName { get; set; }
+        public string IdDept { get; set; }
     }
 }

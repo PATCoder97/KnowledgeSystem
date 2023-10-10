@@ -1,6 +1,7 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
 using DevExpress.XtraEditors.Controls;
+using KnowledgeSystem.Configs;
 using System;
 using System.Linq;
 
@@ -19,7 +20,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void uc207_SelectProgress_Load(object sender, EventArgs e)
         {
-            var lsProgress = _dm_ProgressBUS.GetList();
+            var lsProgress = _dm_ProgressBUS.GetListByDept(TPConfigs.LoginUser.IdDepartment);
 
             cbbProgress.Properties.DataSource = lsProgress;
             cbbProgress.Properties.ValueMember = "Id";

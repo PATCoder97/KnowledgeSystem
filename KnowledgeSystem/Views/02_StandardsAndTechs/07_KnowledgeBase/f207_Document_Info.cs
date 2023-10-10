@@ -168,7 +168,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             lsUsers = _dm_UserBUS.GetList();
             lsGroups = _dm_GroupBUS.GetList();
             lsGroupUser = _dm_GroupUserBUS.GetList();
-            progressSelect = _dm_ProgressBUS.GetList().FirstOrDefault();
+            progressSelect = _dm_ProgressBUS.GetListByDept(TPConfigs.LoginUser.IdDepartment).FirstOrDefault();
 
             // Create lists of Securityinfo objects from lsUsers and lsGroups
             var lsIdUsers = lsUsers.Select(r => new Securityinfo { IdDept = r.IdDepartment, IdGroupOrUser = r.Id, DisplayName = r.DisplayName }).ToList();

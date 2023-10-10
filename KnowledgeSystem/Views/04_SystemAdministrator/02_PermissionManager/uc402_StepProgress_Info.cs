@@ -2,6 +2,7 @@
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Columns;
+using KnowledgeSystem.Configs;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,6 +18,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
     public partial class uc402_StepProgress_Info : DevExpress.XtraEditors.XtraUserControl
     {
         public List<dm_GroupProgressM> lsGroupProgress { get; set; }
+        public string _idDept { get; set; }
 
         public uc402_StepProgress_Info()
         {
@@ -39,6 +41,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
             }
 
             gcStep.DataSource = sourceStep;
+
+            _idDept = TPConfigs.LoginUser.IdDepartment.Substring(0, 2);
         }
 
         private void btnNewStep_Click(object sender, EventArgs e)

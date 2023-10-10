@@ -30,7 +30,23 @@ namespace BusinessLayer
             }
         }
 
-        public bool Create(dm_Progress _progress)
+        public List<dm_Progress> GetListByDept(string _idDept)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dm_Progress.Where(r => r.IdDept == _idDept.Substring(0, 1) || r.IdDept == _idDept.Substring(0, 2)).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
+        public bool Add(dm_Progress _progress)
         {
             try
             {
@@ -48,7 +64,7 @@ namespace BusinessLayer
             }
         }
 
-        public bool Update(dm_Progress _progress)
+        public bool AddOrUpdate(dm_Progress _progress)
         {
             try
             {
@@ -66,7 +82,7 @@ namespace BusinessLayer
             }
         }
 
-        public bool Delete(int _idProgress)
+        public bool Remove(int _idProgress)
         {
             try
             {
