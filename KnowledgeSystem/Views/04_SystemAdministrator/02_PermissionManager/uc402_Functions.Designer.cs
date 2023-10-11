@@ -29,15 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc402_Functions));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.btnUpdateRole = new DevExpress.XtraEditors.SimpleButton();
-            this.txbNameRole = new DevExpress.XtraEditors.ButtonEdit();
             this.gcRoles = new DevExpress.XtraGrid.GridControl();
             this.gvRoles = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -53,8 +46,6 @@
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnNewRole = new DevExpress.XtraBars.BarButtonItem();
@@ -66,15 +57,12 @@
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txbNameRole.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcRoles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvRoles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.treeFunctions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -82,8 +70,6 @@
             // 
             this.layoutControl1.AllowCustomization = false;
             this.layoutControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
-            this.layoutControl1.Controls.Add(this.btnUpdateRole);
-            this.layoutControl1.Controls.Add(this.txbNameRole);
             this.layoutControl1.Controls.Add(this.gcRoles);
             this.layoutControl1.Controls.Add(this.treeFunctions);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -94,43 +80,12 @@
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
-            // btnUpdateRole
-            // 
-            this.btnUpdateRole.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdateRole.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.btnUpdateRole.Appearance.Options.UseFont = true;
-            this.btnUpdateRole.Appearance.Options.UseForeColor = true;
-            this.btnUpdateRole.Location = new System.Drawing.Point(989, 12);
-            this.btnUpdateRole.Name = "btnUpdateRole";
-            this.btnUpdateRole.Size = new System.Drawing.Size(113, 28);
-            this.btnUpdateRole.StyleController = this.layoutControl1;
-            this.btnUpdateRole.TabIndex = 7;
-            this.btnUpdateRole.Text = "更新權限";
-            this.btnUpdateRole.Click += new System.EventHandler(this.btnUpdateRole_Click);
-            // 
-            // txbNameRole
-            // 
-            this.txbNameRole.Location = new System.Drawing.Point(457, 12);
-            this.txbNameRole.Name = "txbNameRole";
-            this.txbNameRole.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txbNameRole.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.txbNameRole.Properties.Appearance.Options.UseFont = true;
-            this.txbNameRole.Properties.Appearance.Options.UseForeColor = true;
-            editorButtonImageOptions1.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.txbNameRole.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Close, "", -1, true, true, true, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
-            this.txbNameRole.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.txbNameRole.Size = new System.Drawing.Size(528, 28);
-            this.txbNameRole.StyleController = this.layoutControl1;
-            this.txbNameRole.TabIndex = 6;
-            this.txbNameRole.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txbNameRole_ButtonClick);
-            // 
             // gcRoles
             // 
             this.gcRoles.Location = new System.Drawing.Point(12, 12);
             this.gcRoles.MainView = this.gvRoles;
             this.gcRoles.Name = "gcRoles";
-            this.gcRoles.Size = new System.Drawing.Size(381, 400);
+            this.gcRoles.Size = new System.Drawing.Size(370, 400);
             this.gcRoles.TabIndex = 5;
             this.gcRoles.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvRoles});
@@ -156,7 +111,6 @@
             this.gvRoles.OptionsView.EnableAppearanceOddRow = true;
             this.gvRoles.OptionsView.ShowAutoFilterRow = true;
             this.gvRoles.OptionsView.ShowGroupPanel = false;
-            this.gvRoles.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gvRoles_PopupMenuShowing);
             this.gvRoles.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.gvRoles_RowUpdated);
             this.gvRoles.DoubleClick += new System.EventHandler(this.gvRoles_DoubleClick);
             // 
@@ -196,7 +150,7 @@
             this.treeListColumn5,
             this.treeListColumn6,
             this.treeListColumn7});
-            this.treeFunctions.Location = new System.Drawing.Point(405, 44);
+            this.treeFunctions.Location = new System.Drawing.Point(394, 12);
             this.treeFunctions.Name = "treeFunctions";
             this.treeFunctions.OptionsCustomization.AllowFilter = false;
             this.treeFunctions.OptionsCustomization.AllowSort = false;
@@ -205,7 +159,7 @@
             this.treeFunctions.OptionsView.EnableAppearanceOddRow = true;
             this.treeFunctions.OptionsView.ShowAutoFilterRow = true;
             this.treeFunctions.OptionsView.ShowIndicator = false;
-            this.treeFunctions.Size = new System.Drawing.Size(697, 368);
+            this.treeFunctions.Size = new System.Drawing.Size(708, 400);
             this.treeFunctions.TabIndex = 4;
             this.treeFunctions.NodeCellStyle += new DevExpress.XtraTreeList.GetCustomNodeCellStyleEventHandler(this.treeFunctions_NodeCellStyle);
             // 
@@ -224,7 +178,7 @@
             // treeListColumn2
             // 
             this.treeListColumn2.Caption = "照片";
-            this.treeListColumn2.FieldName = "ImageLive";
+            this.treeListColumn2.FieldName = "ImageSvg";
             this.treeListColumn2.MaxWidth = 60;
             this.treeListColumn2.MinWidth = 60;
             this.treeListColumn2.Name = "treeListColumn2";
@@ -302,9 +256,7 @@
             this.Root.GroupBordersVisible = false;
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem1,
-            this.layoutControlItem2,
-            this.layoutControlItem3,
-            this.layoutControlItem4});
+            this.layoutControlItem2});
             this.Root.Name = "Root";
             this.Root.Size = new System.Drawing.Size(1114, 424);
             this.Root.TextVisible = false;
@@ -312,9 +264,9 @@
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.treeFunctions;
-            this.layoutControlItem1.Location = new System.Drawing.Point(393, 32);
+            this.layoutControlItem1.Location = new System.Drawing.Point(382, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(701, 372);
+            this.layoutControlItem1.Size = new System.Drawing.Size(712, 404);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
@@ -324,34 +276,9 @@
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
             this.layoutControlItem2.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 10, 2, 2);
-            this.layoutControlItem2.Size = new System.Drawing.Size(393, 404);
+            this.layoutControlItem2.Size = new System.Drawing.Size(382, 404);
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
-            // 
-            // layoutControlItem3
-            // 
-            this.layoutControlItem3.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.layoutControlItem3.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
-            this.layoutControlItem3.AppearanceItemCaption.Options.UseFont = true;
-            this.layoutControlItem3.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem3.Control = this.txbNameRole;
-            this.layoutControlItem3.Location = new System.Drawing.Point(393, 0);
-            this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(584, 32);
-            this.layoutControlItem3.Text = "權限";
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(40, 19);
-            // 
-            // layoutControlItem4
-            // 
-            this.layoutControlItem4.Control = this.btnUpdateRole;
-            this.layoutControlItem4.Location = new System.Drawing.Point(977, 0);
-            this.layoutControlItem4.MaxSize = new System.Drawing.Size(117, 0);
-            this.layoutControlItem4.MinSize = new System.Drawing.Size(117, 28);
-            this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(117, 32);
-            this.layoutControlItem4.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem4.TextVisible = false;
             // 
             // barManager1
             // 
@@ -423,6 +350,7 @@
             this.btnReload.Id = 3;
             this.btnReload.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnReload.Name = "btnReload";
+            this.btnReload.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnReload_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -474,15 +402,12 @@
             this.Load += new System.EventHandler(this.uc402_Functions_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.txbNameRole.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcRoles)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvRoles)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.treeFunctions)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -506,10 +431,6 @@
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
-        private DevExpress.XtraEditors.ButtonEdit txbNameRole;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
-        private DevExpress.XtraEditors.SimpleButton btnUpdateRole;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn7;
         private DevExpress.XtraBars.BarManager barManager1;
         private DevExpress.XtraBars.Bar bar2;
