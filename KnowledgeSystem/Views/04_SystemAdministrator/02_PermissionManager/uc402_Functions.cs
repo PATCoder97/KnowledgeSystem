@@ -14,6 +14,7 @@ using System.Data;
 using System.Data.Entity.Migrations;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -25,6 +26,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
         public uc402_Functions()
         {
             InitializeComponent();
+            InitializeIcon();
             InitializeMenuItems();
         }
 
@@ -42,6 +44,13 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
         #endregion
 
         #region methods
+
+        private void InitializeIcon()
+        {
+            btnNewRole.ImageOptions.SvgImage = TPSvgimages.Add;
+            btnNewFunc.ImageOptions.SvgImage = TPSvgimages.Add2;
+            btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
+        }
 
         private void LoadData()
         {
@@ -199,7 +208,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
             if (roleSelect.Id == 0) return;
 
             List<dm_FunctionM> lsDataSourch = sourceFunc.DataSource as List<dm_FunctionM>;
-            var lsFunctionUpdate = lsDataSourch.Where(r => r.Status == true ).ToList();
+            var lsFunctionUpdate = lsDataSourch.Where(r => r.Status == true).ToList();
 
             // Xóa các functionRole trước đó, sau đó thêm lại
             using (var db = new DBDocumentManagementSystemEntities())
@@ -230,6 +239,31 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
             }
 
             XtraMessageBox.Show("Thao tác sửa thành công!", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            LoadData();
+        }
+
+        private void btnNewRole_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            f402_RoleInfo fInfo = new f402_RoleInfo();
+            fInfo._formName = "權限";
+            fInfo._eventInfo = EventFormInfo.Create;
+            fInfo.ShowDialog();
+
+        }
+
+        private void gvRoles_DoubleClick(object sender, EventArgs e)
+        {
+            int forcusRow = gvRoles.FocusedRowHandle;
+            if (forcusRow < 0) return;
+
+            dm_Role dataRow = gvRoles.GetRow(forcusRow) as dm_Role;
+
+            f402_RoleInfo fInfo = new f402_RoleInfo();
+            fInfo._formName = "權限";
+            fInfo._eventInfo = EventFormInfo.View;
+            fInfo._role = dataRow;
+            fInfo.ShowDialog();
 
             LoadData();
         }

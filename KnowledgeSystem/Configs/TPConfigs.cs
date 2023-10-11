@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer;
+using DevExpress.XtraEditors;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace KnowledgeSystem.Configs
 {
@@ -71,6 +73,19 @@ namespace KnowledgeSystem.Configs
         ViewOnly
     }
 
+
+    public static class DefaultMsg
+    {
+        public static void MsgErrorDB()
+        {
+            XtraMessageBox.Show("Dữ liệu đầu vào không đúng\r\nHoặc có lỗi xảy ra trong quá trình truy vấn\r\nLiên hệ người quản lý để được xử lý!", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+
+        public static void MsgConfirmDel()
+        {
+            XtraMessageBox.Show("Vui lòng xác nhận lại thông tin muốn xoá!\r\nSau đó ấn xác nhận để xoá.", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+    }
     //public DBDocumentManagementSystemEntities()
     //        : base(SingleConnection.ConString)
     //{

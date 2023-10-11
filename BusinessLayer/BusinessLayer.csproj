@@ -57,6 +57,7 @@
     <Compile Include="dm_GroupBUS.cs" />
     <Compile Include="dm_GroupUserBUS.cs" />
     <Compile Include="dm_ProgressBUS.cs" />
+    <Compile Include="dm_RoleBUS.cs" />
     <Compile Include="dm_StepProgressBUS.cs" />
     <Compile Include="dm_UserBUS.cs" />
     <Compile Include="dt207_AttachmentBUS.cs" />

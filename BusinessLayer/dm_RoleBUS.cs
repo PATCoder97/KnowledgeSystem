@@ -10,17 +10,27 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer
 {
-    public class dm_FunctionRoleBUS
+    public class dm_RoleBUS
     {
-        TPLogger logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName);
+        TPLogger logger;
 
-        public List<dm_FunctionRole> GetList()
+        private static dm_RoleBUS instance;
+
+        public static dm_RoleBUS Instance
+        {
+            get { if (instance == null) instance = new dm_RoleBUS(); return instance; }
+            private set { instance = value; }
+        }
+
+        private dm_RoleBUS() { logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName); }
+
+        public List<dm_Role> GetList()
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dm_FunctionRole.ToList();
+                    return _context.dm_Role.ToList();
                 }
             }
             catch (Exception ex)
@@ -30,29 +40,13 @@ namespace BusinessLayer
             }
         }
 
-        public List<dm_FunctionRole> GetListByRole(int idRole)
+        public bool Add(dm_Role _role)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dm_FunctionRole.Where(r => r.IdRole == idRole).ToList();
-                }
-            }
-            catch (Exception ex)
-            {
-                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
-                throw;
-            }
-        }
-
-        public bool Add(dm_FunctionRole functionRole)
-        {
-            try
-            {
-                using (var _context = new DBDocumentManagementSystemEntities())
-                {
-                    _context.dm_FunctionRole.Add(functionRole);
+                    _context.dm_Role.Add(_role);
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;
                 }
@@ -64,13 +58,13 @@ namespace BusinessLayer
             }
         }
 
-        public bool Update(dm_FunctionRole functionRole)
+        public bool AddOrUpdate(dm_Role _role)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    _context.dm_FunctionRole.AddOrUpdate(functionRole);
+                    _context.dm_Role.AddOrUpdate(_role);
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;
                 }
@@ -82,34 +76,14 @@ namespace BusinessLayer
             }
         }
 
-        public bool Remove(int functionRoleId)
+        public bool Remove(int _idRole)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    var functionRole = _context.dm_FunctionRole.FirstOrDefault(r => r.Id == functionRoleId);
-                    _context.dm_FunctionRole.Remove(functionRole);
-
-                    int affectedRecords = _context.SaveChanges();
-                    return affectedRecords > 0;
-                }
-            }
-            catch (Exception ex)
-            {
-                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
-                return false;
-            }
-        }
-
-        public bool RemoveByIdRole(int _idRole)
-        {
-            try
-            {
-                using (var _context = new DBDocumentManagementSystemEntities())
-                {
-                    var functionRole = _context.dm_FunctionRole.Where(r => r.IdRole == _idRole);
-                    _context.dm_FunctionRole.RemoveRange(functionRole);
+                    var _itemDel = _context.dm_Role.FirstOrDefault(r => r.Id == _idRole);
+                    _context.dm_Role.Remove(_itemDel);
 
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;

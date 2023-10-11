@@ -258,6 +258,12 @@
     <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\f402_ProgressInfo.Designer.cs">
       <DependentUpon>f402_ProgressInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\f402_RoleInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\f402_RoleInfo.Designer.cs">
+      <DependentUpon>f402_RoleInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\uc402_Progress.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -365,6 +371,9 @@
     <EmbeddedResource Include="Views\04_SystemAdministrator\02_PermissionManager\f402_ProgressInfo.resx">
       <DependentUpon>f402_ProgressInfo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\04_SystemAdministrator\02_PermissionManager\f402_RoleInfo.resx">
+      <DependentUpon>f402_RoleInfo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\02_PermissionManager\uc402_Progress.resx">
       <DependentUpon>uc402_Progress.cs</DependentUpon>
     </EmbeddedResource>
@@ -422,6 +431,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\icons_ok.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\icons_plus.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\icons_reload.svg">

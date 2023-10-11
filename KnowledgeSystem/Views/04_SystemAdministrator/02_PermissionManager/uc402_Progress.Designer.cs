@@ -255,7 +255,7 @@
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
-            // uc402_StepProgress
+            // uc402_Progress
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
             this.Appearance.Options.UseBackColor = true;
@@ -266,7 +266,7 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.Name = "uc402_StepProgress";
+            this.Name = "uc402_Progress";
             this.Size = new System.Drawing.Size(1010, 552);
             this.Load += new System.EventHandler(this.uc207_Progress_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
