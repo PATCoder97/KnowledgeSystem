@@ -258,17 +258,11 @@
     <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\f402_ProgressInfo.Designer.cs">
       <DependentUpon>f402_ProgressInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\uc402_StepProgress.cs">
+    <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\uc402_Progress.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\uc402_StepProgress.Designer.cs">
-      <DependentUpon>uc402_StepProgress.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\uc402_StepProgress_Info.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\uc402_StepProgress_Info.Designer.cs">
-      <DependentUpon>uc402_StepProgress_Info.cs</DependentUpon>
+    <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\uc402_Progress.Designer.cs">
+      <DependentUpon>uc402_Progress.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\04_SystemAdministrator\01_UserManage\uc401_GroupManage.cs">
       <SubType>UserControl</SubType>
@@ -371,11 +365,8 @@
     <EmbeddedResource Include="Views\04_SystemAdministrator\02_PermissionManager\f402_ProgressInfo.resx">
       <DependentUpon>f402_ProgressInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\04_SystemAdministrator\02_PermissionManager\uc402_StepProgress.resx">
-      <DependentUpon>uc402_StepProgress.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\04_SystemAdministrator\02_PermissionManager\uc402_StepProgress_Info.resx">
-      <DependentUpon>uc402_StepProgress_Info.cs</DependentUpon>
+    <EmbeddedResource Include="Views\04_SystemAdministrator\02_PermissionManager\uc402_Progress.resx">
+      <DependentUpon>uc402_Progress.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\01_UserManage\uc401_GroupManage.resx">
       <DependentUpon>uc401_GroupManage.cs</DependentUpon>

@@ -19,9 +19,9 @@ using static DevExpress.XtraEditors.Mask.MaskSettings;
 
 namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
 {
-    public partial class uc402_StepProgress : DevExpress.XtraEditors.XtraUserControl
+    public partial class uc402_Progress : DevExpress.XtraEditors.XtraUserControl
     {
-        public uc402_StepProgress()
+        public uc402_Progress()
         {
             InitializeComponent();
             InitializeIcon();
@@ -69,7 +69,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
 
         #endregion
 
-        private void uc207_StepProgress_Load(object sender, EventArgs e)
+        private void uc207_Progress_Load(object sender, EventArgs e)
         {
             helper = new RefreshHelper(gvData, "Id");
             gvData.ReadOnlyGridView();
@@ -83,11 +83,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
         {
             f402_ProgressInfo fInfo = new f402_ProgressInfo();
             fInfo.ShowDialog();
-
-            //uc402_StepProgress_Info ucInfo = new uc402_StepProgress_Info();
-            //if (XtraDialog.Show(ucInfo, "新增審查流程", MessageBoxButtons.OKCancel) != DialogResult.OK) return;
-
-
 
             LoadData();
         }

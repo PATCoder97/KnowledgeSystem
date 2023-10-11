@@ -1,6 +1,6 @@
 ﻿namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
 {
-    partial class uc402_StepProgress
+    partial class uc402_Progress
     {
         /// <summary> 
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc402_StepProgress));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc402_Progress));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.gcData = new DevExpress.XtraGrid.GridControl();
             this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -268,7 +268,7 @@
             this.Controls.Add(this.barDockControlTop);
             this.Name = "uc402_StepProgress";
             this.Size = new System.Drawing.Size(1010, 552);
-            this.Load += new System.EventHandler(this.uc207_StepProgress_Load);
+            this.Load += new System.EventHandler(this.uc207_Progress_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).EndInit();
