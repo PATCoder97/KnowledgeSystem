@@ -264,6 +264,12 @@
     <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\f402_RoleInfo.Designer.cs">
       <DependentUpon>f402_RoleInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\f402_UserRole.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\f402_UserRole.Designer.cs">
+      <DependentUpon>f402_UserRole.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\uc402_Progress.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -374,6 +380,9 @@
     <EmbeddedResource Include="Views\04_SystemAdministrator\02_PermissionManager\f402_RoleInfo.resx">
       <DependentUpon>f402_RoleInfo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\04_SystemAdministrator\02_PermissionManager\f402_UserRole.resx">
+      <DependentUpon>f402_UserRole.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\02_PermissionManager\uc402_Progress.resx">
       <DependentUpon>uc402_Progress.cs</DependentUpon>
     </EmbeddedResource>
@@ -424,6 +433,9 @@
     <Content Include="Images\icons_add.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\icons_add_User_Group.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\icons_cancel.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -440,6 +452,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\icons_remove.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\icons_team.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\unchecked_radio_button.svg">
@@ -475,9 +490,6 @@
     <None Include="Resources\Login3.png" />
     <None Include="Resources\cancel_16px.png" />
     <None Include="Resources\pen_16px.png" />
-    <Content Include="Images\Actions_AddCircled.svg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Images\Actions_Bell.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f402_RoleInfo));
-            DevExpress.XtraTreeList.StyleFormatConditions.TreeListFormatRule treeListFormatRule1 = new DevExpress.XtraTreeList.StyleFormatConditions.TreeListFormatRule();
-            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression1 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
+            DevExpress.XtraTreeList.StyleFormatConditions.TreeListFormatRule treeListFormatRule2 = new DevExpress.XtraTreeList.StyleFormatConditions.TreeListFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression2 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
             this.treeListColumn4 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.treeListColumn1 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
@@ -39,6 +39,7 @@
             this.btnEdit = new DevExpress.XtraBars.BarButtonItem();
             this.btnDelete = new DevExpress.XtraBars.BarButtonItem();
             this.btnConfirm = new DevExpress.XtraBars.BarButtonItem();
+            this.btnEditRoleUser = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -53,7 +54,6 @@
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.btnEditRoleUser = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -155,6 +155,14 @@
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnConfirm_ItemClick);
             // 
+            // btnEditRoleUser
+            // 
+            this.btnEditRoleUser.Caption = "群组用戶";
+            this.btnEditRoleUser.Id = 3;
+            this.btnEditRoleUser.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnEditRoleUser.Name = "btnEditRoleUser";
+            this.btnEditRoleUser.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnEditRoleUser_ItemClick);
+            // 
             // barDockControlTop
             // 
             this.barDockControlTop.CausesValidation = false;
@@ -167,7 +175,7 @@
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 489);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 553);
             this.barDockControlBottom.Manager = this.barManagerTP;
             this.barDockControlBottom.Size = new System.Drawing.Size(479, 0);
             // 
@@ -177,7 +185,7 @@
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 49);
             this.barDockControlLeft.Manager = this.barManagerTP;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 440);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 504);
             // 
             // barDockControlRight
             // 
@@ -185,7 +193,7 @@
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
             this.barDockControlRight.Location = new System.Drawing.Point(479, 49);
             this.barDockControlRight.Manager = this.barManagerTP;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 440);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 504);
             // 
             // layoutControl1
             // 
@@ -196,7 +204,7 @@
             this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(479, 440);
+            this.layoutControl1.Size = new System.Drawing.Size(479, 504);
             this.layoutControl1.TabIndex = 4;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -245,14 +253,14 @@
             this.treeListColumn4});
             this.tlsFunction.CustomizationFormBounds = new System.Drawing.Rectangle(351, 201, 264, 370);
             this.tlsFunction.Font = new System.Drawing.Font("DFKai-SB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeListFormatRule1.Column = this.treeListColumn4;
-            treeListFormatRule1.ColumnApplyTo = this.treeListColumn1;
-            treeListFormatRule1.Name = "Format0";
-            formatConditionRuleExpression1.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            formatConditionRuleExpression1.Appearance.Options.UseForeColor = true;
-            formatConditionRuleExpression1.Expression = "[Status] = True";
-            treeListFormatRule1.Rule = formatConditionRuleExpression1;
-            this.tlsFunction.FormatRules.Add(treeListFormatRule1);
+            treeListFormatRule2.Column = this.treeListColumn4;
+            treeListFormatRule2.ColumnApplyTo = this.treeListColumn1;
+            treeListFormatRule2.Name = "Format0";
+            formatConditionRuleExpression2.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            formatConditionRuleExpression2.Appearance.Options.UseForeColor = true;
+            formatConditionRuleExpression2.Expression = "[Status] = True";
+            treeListFormatRule2.Rule = formatConditionRuleExpression2;
+            this.tlsFunction.FormatRules.Add(treeListFormatRule2);
             this.tlsFunction.Location = new System.Drawing.Point(12, 84);
             this.tlsFunction.Name = "tlsFunction";
             this.tlsFunction.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
@@ -261,7 +269,7 @@
             this.tlsFunction.OptionsView.EnableAppearanceOddRow = true;
             this.tlsFunction.OptionsView.ShowAutoFilterRow = true;
             this.tlsFunction.OptionsView.ShowIndicator = false;
-            this.tlsFunction.Size = new System.Drawing.Size(455, 344);
+            this.tlsFunction.Size = new System.Drawing.Size(455, 408);
             this.tlsFunction.TabIndex = 5;
             // 
             // treeListColumn2
@@ -291,7 +299,7 @@
             this.layoutControlItem2,
             this.layoutControlItem3});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(479, 440);
+            this.Root.Size = new System.Drawing.Size(479, 504);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem1
@@ -300,7 +308,7 @@
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 64);
             this.layoutControlItem1.Name = "layoutControlItem1";
             this.layoutControlItem1.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 10, 2);
-            this.layoutControlItem1.Size = new System.Drawing.Size(459, 356);
+            this.layoutControlItem1.Size = new System.Drawing.Size(459, 420);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
@@ -338,18 +346,11 @@
             this.layoutControlItem3.Text = "備註";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(40, 19);
             // 
-            // btnEditRoleUser
-            // 
-            this.btnEditRoleUser.Caption = "群组用戶";
-            this.btnEditRoleUser.Id = 3;
-            this.btnEditRoleUser.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnEditRoleUser.Name = "btnEditRoleUser";
-            // 
             // f402_RoleInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(479, 489);
+            this.ClientSize = new System.Drawing.Size(479, 553);
             this.Controls.Add(this.layoutControl1);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);

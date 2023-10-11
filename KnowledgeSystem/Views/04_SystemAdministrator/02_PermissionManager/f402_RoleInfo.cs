@@ -39,6 +39,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
             btnEdit.ImageOptions.SvgImage = TPSvgimages.Edit;
             btnDelete.ImageOptions.SvgImage = TPSvgimages.Remove;
             btnConfirm.ImageOptions.SvgImage = TPSvgimages.Confirm;
+            btnEditRoleUser.ImageOptions.SvgImage = TPSvgimages.AddUserGroup;
         }
 
         private void EnabledController(bool _enable = true)
@@ -59,6 +60,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
                     btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                     btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                    btnEditRoleUser.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                     EnabledController();
                     break;
                 case EventFormInfo.Update:
@@ -67,6 +69,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
                     btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                     btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                    btnEditRoleUser.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                     EnabledController();
                     break;
                 case EventFormInfo.Delete:
@@ -75,6 +78,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
                     btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                     btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                    btnEditRoleUser.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                     EnabledController(false);
                     break;
                 case EventFormInfo.View:
@@ -83,6 +87,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
                     btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                     btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                    btnEditRoleUser.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
 
                     EnabledController(false);
                     break;
@@ -243,6 +248,14 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
             {
                 DefaultMsg.MsgErrorDB();
             }
+        }
+
+        private void btnEditRoleUser_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            f402_UserRole fInfo = new f402_UserRole();
+            fInfo._eventInfo = EventFormInfo.View;
+            fInfo._idRole = _role.Id;
+            fInfo.ShowDialog();
         }
     }
 }

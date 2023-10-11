@@ -23,5 +23,6 @@ namespace KnowledgeSystem.Configs
         public static SvgImage Remove = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_remove.svg"));
         public static SvgImage Cancel = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_cancel.svg"));
         public static SvgImage Confirm = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_ok.svg"));
+        public static SvgImage AddUserGroup = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_add_User_Group.svg"));
     }
 }

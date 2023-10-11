@@ -246,7 +246,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
         private void btnNewRole_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             f402_RoleInfo fInfo = new f402_RoleInfo();
-            fInfo._formName = "權限";
+            fInfo._formName = "角色";
             fInfo._eventInfo = EventFormInfo.Create;
             fInfo.ShowDialog();
 
@@ -260,7 +260,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
             dm_Role dataRow = gvRoles.GetRow(forcusRow) as dm_Role;
 
             f402_RoleInfo fInfo = new f402_RoleInfo();
-            fInfo._formName = "權限";
+            fInfo._formName = "角色";
             fInfo._eventInfo = EventFormInfo.View;
             fInfo._role = dataRow;
             fInfo.ShowDialog();
