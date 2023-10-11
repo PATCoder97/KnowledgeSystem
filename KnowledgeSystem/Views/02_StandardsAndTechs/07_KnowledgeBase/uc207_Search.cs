@@ -268,6 +268,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         private void uc207_Search_Load(object sender, EventArgs e)
         {
             txbKeywords.Properties.NullValuePrompt = "請輸入您要查找的信息";
+            btnSumNotifyApproval.ImageOptions.SvgImage = TPSvgimages.Approval;
 
             gcData.DataSource = sourceKnowledge;
 

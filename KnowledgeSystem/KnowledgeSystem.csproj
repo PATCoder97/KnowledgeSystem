@@ -252,6 +252,12 @@
     <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_SelectProgress.Designer.cs">
       <DependentUpon>uc207_SelectProgress.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\f402_FuncInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\f402_FuncInfo.Designer.cs">
+      <DependentUpon>f402_FuncInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\f402_ProgressInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -374,6 +380,9 @@
     <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_SelectProgress.resx">
       <DependentUpon>uc207_SelectProgress.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\04_SystemAdministrator\02_PermissionManager\f402_FuncInfo.resx">
+      <DependentUpon>f402_FuncInfo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\02_PermissionManager\f402_ProgressInfo.resx">
       <DependentUpon>f402_ProgressInfo.cs</DependentUpon>
     </EmbeddedResource>
@@ -442,6 +451,9 @@
     <Content Include="Images\icons_edit.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\icons_notification.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\icons_ok.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -452,6 +464,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\icons_remove.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\icons_signature.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\icons_team.svg">

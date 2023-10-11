@@ -155,5 +155,33 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
         {
             LoadData();
         }
+
+        private void btnNewFunc_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            f402_FuncInfo fInfo = new f402_FuncInfo();
+            fInfo._formName = "功能";
+            fInfo._eventInfo = EventFormInfo.Create;
+            fInfo.ShowDialog();
+        }
+
+        private void treeFunctions_DoubleClick(object sender, EventArgs e)
+        {
+            TreeList treeList = treeFunctions;
+            TreeListNode focusedNode = treeList.FocusedNode;
+            TreeListHitInfo hitInfo = treeList.CalcHitInfo(treeList.PointToClient(MousePosition));
+
+            if (focusedNode != null && focusedNode.Nodes != null && hitInfo.HitInfoType == HitInfoType.Cell)
+            {
+                dm_FunctionM rowData = treeList.GetRow(focusedNode.Id) as dm_FunctionM;
+
+                f402_FuncInfo _info = new f402_FuncInfo();
+                _info._formName = Text.ToLower();
+                _info._eventInfo = EventFormInfo.View;
+                _info._function = rowData;
+                _info.ShowDialog();
+
+                LoadData();
+            }
+        }
     }
 }

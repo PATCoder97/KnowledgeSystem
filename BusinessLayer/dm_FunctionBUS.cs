@@ -66,12 +66,51 @@ namespace BusinessLayer
             }
         }
 
-        public bool Create(dm_FunctionM _function)
+        public int GetNewId()
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
+                    int currentId = _context.dm_Function
+                        .OrderByDescending(x => x.Id)
+                        .Select(x => x.Id)
+                        .FirstOrDefault();
+
+                    if (currentId == default(int))
+                    {
+                        return 1;
+                    }
+                    else
+                    {
+                        return currentId + 1;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw new Exception(ex.ToString());
+            }
+        }
+
+        public bool Add(dm_FunctionM _functionM)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    dm_Function _function = new dm_Function()
+                    {
+                        Id = _functionM.Id,
+                        IdParent = _functionM.IdParent,
+                        DisplayName = _functionM.DisplayName,
+                        ControlName = _functionM.ControlName,
+                        Prioritize = _functionM.Prioritize,
+                        Status = _functionM.Status,
+                        Images = _functionM.Images,
+                    };
+
                     _context.dm_Function.Add(_function);
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;
@@ -84,7 +123,7 @@ namespace BusinessLayer
             }
         }
 
-        public bool Update(dm_FunctionM _function)
+        public bool AddOrUpdate(dm_FunctionM _function)
         {
             try
             {
@@ -102,7 +141,7 @@ namespace BusinessLayer
             }
         }
 
-        public bool Delete(int _idFunction)
+        public bool Remove(int _idFunction)
         {
             try
             {

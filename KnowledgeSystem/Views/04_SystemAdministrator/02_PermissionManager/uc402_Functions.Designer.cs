@@ -155,13 +155,13 @@
             this.treeFunctions.OptionsCustomization.AllowFilter = false;
             this.treeFunctions.OptionsCustomization.AllowSort = false;
             this.treeFunctions.OptionsView.AutoWidth = false;
-            this.treeFunctions.OptionsView.CheckBoxStyle = DevExpress.XtraTreeList.DefaultNodeCheckBoxStyle.Check;
             this.treeFunctions.OptionsView.EnableAppearanceOddRow = true;
             this.treeFunctions.OptionsView.ShowAutoFilterRow = true;
             this.treeFunctions.OptionsView.ShowIndicator = false;
             this.treeFunctions.Size = new System.Drawing.Size(708, 400);
             this.treeFunctions.TabIndex = 4;
             this.treeFunctions.NodeCellStyle += new DevExpress.XtraTreeList.GetCustomNodeCellStyleEventHandler(this.treeFunctions_NodeCellStyle);
+            this.treeFunctions.DoubleClick += new System.EventHandler(this.treeFunctions_DoubleClick);
             // 
             // treeListColumn1
             // 
@@ -343,6 +343,7 @@
             this.btnNewFunc.Id = 4;
             this.btnNewFunc.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnNewFunc.Name = "btnNewFunc";
+            this.btnNewFunc.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnNewFunc_ItemClick);
             // 
             // btnReload
             // 

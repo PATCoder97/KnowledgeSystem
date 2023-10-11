@@ -29,10 +29,10 @@ namespace KnowledgeSystem
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //  Application.Run(new f00_Main());
+            Application.Run(new f00_Main());
 
-            TPConfigs.LoginUser = (new dm_UserBUS()).GetUserByUID("VNW0014732");
-            Application.Run(new f00_FluentFrame(17));
+            //TPConfigs.LoginUser = (new dm_UserBUS()).GetUserByUID("VNW0014732");
+            //Application.Run(new f00_FluentFrame(17));
         }
     }
 }
