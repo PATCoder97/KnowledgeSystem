@@ -47,7 +47,7 @@ namespace DataAccessLayer
         public virtual DbSet<dm_User> dm_User { get; set; }
         public virtual DbSet<dt207_DocProcessing> dt207_DocProcessing { get; set; }
         public virtual DbSet<dt207_DocProcessingInfo> dt207_DocProcessingInfo { get; set; }
-        public virtual DbSet<dm_Progress> dm_Progress { get; set; }
         public virtual DbSet<dm_Group> dm_Group { get; set; }
+        public virtual DbSet<dm_Progress> dm_Progress { get; set; }
     }
 }

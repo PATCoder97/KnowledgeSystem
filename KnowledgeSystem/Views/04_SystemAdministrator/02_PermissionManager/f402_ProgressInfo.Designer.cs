@@ -47,6 +47,8 @@
             this.步驟 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.群組 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.cbbGroup = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.gColRemove = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.btnRemoveStep = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -58,6 +60,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcStep)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvStep)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbGroup)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnRemoveStep)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
@@ -234,7 +237,8 @@
             this.gcStep.MainView = this.gvStep;
             this.gcStep.Name = "gcStep";
             this.gcStep.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.cbbGroup});
+            this.cbbGroup,
+            this.btnRemoveStep});
             this.gcStep.Size = new System.Drawing.Size(499, 302);
             this.gcStep.TabIndex = 4;
             this.gcStep.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -252,11 +256,17 @@
             this.gvStep.Appearance.Row.ForeColor = System.Drawing.Color.Black;
             this.gvStep.Appearance.Row.Options.UseFont = true;
             this.gvStep.Appearance.Row.Options.UseForeColor = true;
+            this.gvStep.Appearance.TopNewRow.Font = new System.Drawing.Font("DFKai-SB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvStep.Appearance.TopNewRow.ForeColor = System.Drawing.Color.DimGray;
+            this.gvStep.Appearance.TopNewRow.Options.UseFont = true;
+            this.gvStep.Appearance.TopNewRow.Options.UseForeColor = true;
             this.gvStep.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.步驟,
-            this.群組});
+            this.群組,
+            this.gColRemove});
             this.gvStep.GridControl = this.gcStep;
             this.gvStep.Name = "gvStep";
+            this.gvStep.NewItemRowText = "按一下此處新增行";
             this.gvStep.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
             this.gvStep.OptionsCustomization.AllowFilter = false;
             this.gvStep.OptionsCustomization.AllowSort = false;
@@ -288,6 +298,7 @@
             this.群組.Name = "群組";
             this.群組.Visible = true;
             this.群組.VisibleIndex = 1;
+            this.群組.Width = 401;
             // 
             // cbbGroup
             // 
@@ -301,6 +312,24 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbbGroup.Name = "cbbGroup";
             this.cbbGroup.ShowHeader = false;
+            // 
+            // gColRemove
+            // 
+            this.gColRemove.Caption = " ";
+            this.gColRemove.ColumnEdit = this.btnRemoveStep;
+            this.gColRemove.Name = "gColRemove";
+            this.gColRemove.Visible = true;
+            this.gColRemove.VisibleIndex = 2;
+            this.gColRemove.Width = 30;
+            // 
+            // btnRemoveStep
+            // 
+            this.btnRemoveStep.AutoHeight = false;
+            this.btnRemoveStep.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Delete)});
+            this.btnRemoveStep.Name = "btnRemoveStep";
+            this.btnRemoveStep.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            this.btnRemoveStep.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnRemoveStep_ButtonClick);
             // 
             // Root
             // 
@@ -362,6 +391,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcStep)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvStep)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbGroup)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnRemoveStep)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
@@ -393,5 +423,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
+        private DevExpress.XtraGrid.Columns.GridColumn gColRemove;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnRemoveStep;
     }
 }

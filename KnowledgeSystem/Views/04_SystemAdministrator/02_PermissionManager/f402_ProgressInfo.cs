@@ -1,6 +1,7 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
 using DevExpress.Charts.Native;
+using DevExpress.Utils.Extensions;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Views.Grid;
@@ -11,6 +12,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Mail;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,6 +49,9 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
             btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             cbbDept.Enabled = false;
+            gvStep.OptionsBehavior.ReadOnly = false;
+            gColRemove.Visible = true;
+            gvStep.OptionsView.NewItemRowPosition = NewItemRowPosition.Top;
 
             switch (_eventInfo)
             {
@@ -56,16 +61,12 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
                     break;
                 case EventFormInfo.View:
                     btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                    gvStep.OptionsBehavior.ReadOnly = true;
+                    gColRemove.Visible = false;
+                    gvStep.OptionsView.NewItemRowPosition = NewItemRowPosition.None;
                     break;
                 case EventFormInfo.Update:
                     btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
-                    cbbDept.Enabled = true;
-                    break;
-                case EventFormInfo.Delete:
-                    break;
-                case EventFormInfo.ViewOnly:
-                    break;
-                default:
                     break;
             }
         }
@@ -100,14 +101,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
                     lsSteps = dm_StepProgressBUS.Instance.GetListByIdProgress(_idProgress);
                     _sourceStep.DataSource = lsSteps;
                     break;
-                case EventFormInfo.Update:
-                    break;
-                case EventFormInfo.Delete:
-                    break;
-                case EventFormInfo.ViewOnly:
-                    break;
-                default:
-                    break;
             }
 
             LockControl();
@@ -116,6 +109,9 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             if (lsSteps.Count == 0) return;
+
+            int index = 0;
+            lsSteps.OrderBy(r => r.IndexStep).ForEach(item => { item.IndexStep = ++index; });
 
             var lsStepSelect = (from steps in lsSteps
                                 join groups in lsGroups on steps.IdGroup equals groups.Id
@@ -147,12 +143,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
                     dm_ProgressBUS.Instance.AddOrUpdate(_progress);
                     dm_StepProgressBUS.Instance.RemoveByIdProgress(_idProgress);
                     break;
-                case EventFormInfo.Delete:
-                    break;
-                case EventFormInfo.ViewOnly:
-                    break;
-                default:
-                    break;
             }
 
             foreach (var item in lsStepSelect)
@@ -178,6 +168,25 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
         {
             GridView view = sender as GridView;
             view.SetRowCellValue(e.RowHandle, "IndexStep", lsSteps.Count());
+        }
+
+        private void btnRemoveStep_ButtonClick(object sender, ButtonPressedEventArgs e)
+        {
+            GridView view = gvStep;
+            dm_StepProgress steps = view.GetRow(view.FocusedRowHandle) as dm_StepProgress;
+            DialogResult dialogResult = XtraMessageBox.Show($"您想要刪除步驟「{steps.IndexStep}」?", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialogResult == DialogResult.No)
+            {
+                return;
+            }
+
+            lsSteps.Remove(steps);
+            int index = 0;
+            lsSteps.ForEach(item => { item.IndexStep = ++index; });
+
+            int rowIndex = view.FocusedRowHandle;
+            view.RefreshData();
+            view.FocusedRowHandle = rowIndex;
         }
     }
 }
