@@ -67,7 +67,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
 
         private void txbId_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            if (TPConfigs.DomainComputer == DomainVNFPG.domainName)
+            if (TPConfigs.DomainComputer == DomainVNFPG.domainVNFPG)
             {
                 string userID = txbId.Text.Trim().ToUpper();
                 string userNameByDomain = DomainVNFPG.Instance.GetAccountName(userID);

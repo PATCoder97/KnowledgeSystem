@@ -11,6 +11,7 @@ using System.Data.Entity.Migrations;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -23,16 +24,25 @@ namespace KnowledgeSystem.Views._00_Generals
         {
             InitializeComponent();
         }
-                
+
         private void fLogin_Load(object sender, EventArgs e)
         {
             BackgroundImage = Image.FromFile(Path.Combine(TPConfigs.ImagesPath, "loginscreen.png"));
 
             lbNameSoft.Text = TPConfigs.SoftNameTW;
             lbVersion.Text = $"Version: {AppCopyRight.version}";
-            txbUserID.Text = RegistryHelper.GetSetting(RegistryHelper.LoginId, RegistryHelper.DefaulLoginId).ToString() ?? "";
 
             TPConfigs.DomainComputer = System.Net.NetworkInformation.IPGlobalProperties.GetIPGlobalProperties().DomainName;
+            if (TPConfigs.DomainComputer == DomainVNFPG.domainVNFPG)
+            {
+                WindowsIdentity currentUser = WindowsIdentity.GetCurrent();
+                txbUserID.Text = currentUser.Name.Split('\\')[1];
+            }
+            else
+            {
+                txbUserID.Text = RegistryHelper.GetSetting(RegistryHelper.LoginId, RegistryHelper.DefaulLoginId).ToString() ?? "";
+            }
+
             TPConfigs.LoginSuccessful = false;
         }
 
@@ -49,7 +59,7 @@ namespace KnowledgeSystem.Views._00_Generals
                 /* Kiểm tra xem có trong Domain fpg không (Không dùng OA)
                 *  - Có thì dùng tài khoản OA để đăng nhập, nếu không có OA thì dùng mật khẩu phụ
                 *  - Không thì dùng mật khẩu phụ */
-                if (TPConfigs.DomainComputer == DomainVNFPG.domainName)
+                if (TPConfigs.DomainComputer == DomainVNFPG.domainVNFPG)
                 {
                     string userNameByDomain = DomainVNFPG.Instance.GetAccountName(_userID);
                     if (!string.IsNullOrEmpty(userNameByDomain))

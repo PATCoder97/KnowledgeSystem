@@ -10,7 +10,7 @@ namespace KnowledgeSystem.Configs
     internal class DomainVNFPG
     {
         private static DomainVNFPG instance;
-        public static string domainName = "vn.fpg.com";
+        public static string domainVNFPG = "vn.fpg.com";
 
         public static DomainVNFPG Instance
         {
@@ -28,7 +28,7 @@ namespace KnowledgeSystem.Configs
 
             try
             {
-                using (PrincipalContext pc = new PrincipalContext(ContextType.Domain, domainName))
+                using (PrincipalContext pc = new PrincipalContext(ContextType.Domain, domainVNFPG))
                 {
                     isLoginSuccess = pc.ValidateCredentials(userID_, password_,
                         ContextOptions.Negotiate | ContextOptions.SecureSocketLayer |
@@ -46,7 +46,7 @@ namespace KnowledgeSystem.Configs
         {
             string userDisplayName = string.Empty;
 
-            using (PrincipalContext pc = new PrincipalContext(ContextType.Domain, domainName))
+            using (PrincipalContext pc = new PrincipalContext(ContextType.Domain, domainVNFPG))
             {
                 var usr = UserPrincipal.FindByIdentity(pc, userID_);
                 if (usr != null)
