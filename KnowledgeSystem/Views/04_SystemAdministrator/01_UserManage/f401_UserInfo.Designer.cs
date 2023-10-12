@@ -36,6 +36,8 @@
             DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression2 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
             this.treeListColumn4 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.treeListColumn1 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.treeListColumn41 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.treeListColumn11 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnEdit = new DevExpress.XtraBars.BarButtonItem();
@@ -46,51 +48,59 @@
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.txbUserName = new DevExpress.XtraEditors.TextEdit();
+            this.txbUserNameVN = new DevExpress.XtraEditors.TextEdit();
             this.txbUserId = new DevExpress.XtraEditors.TextEdit();
             this.tlsFunction = new DevExpress.XtraTreeList.TreeList();
             this.treeListColumn2 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.treeListColumn3 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.txbDept = new DevExpress.XtraEditors.TextEdit();
-            this.txbDOB = new DevExpress.XtraEditors.TextEdit();
             this.txbCCCD = new DevExpress.XtraEditors.TextEdit();
-            this.txbNationality = new DevExpress.XtraEditors.TextEdit();
+            this.tlsFunction1 = new DevExpress.XtraTreeList.TreeList();
+            this.treeListColumn21 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.treeListColumn31 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.cbbDept = new DevExpress.XtraEditors.LookUpEdit();
+            this.txbDOB = new DevExpress.XtraEditors.DateEdit();
+            this.cbbNationality = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.txbUserNameTW = new DevExpress.XtraEditors.TextEdit();
+            this.txbCreate = new DevExpress.XtraEditors.DateEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.lcAllRole = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.tlsFunction1 = new DevExpress.XtraTreeList.TreeList();
-            this.treeListColumn11 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.treeListColumn21 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.treeListColumn31 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.treeListColumn41 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.lcAllRole1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcRole = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.lcAllRole1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcAllRole = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txbUserName.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbUserNameVN.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbUserId.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tlsFunction)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbDept.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbDOB.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbCCCD.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbNationality.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tlsFunction1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbDept.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbDOB.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbDOB.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbNationality.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbUserNameTW.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbCreate.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbCreate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcAllRole)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tlsFunction1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcAllRole1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcRole)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcAllRole1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcAllRole)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             this.SuspendLayout();
             // 
             // treeListColumn4
@@ -105,8 +115,21 @@
             this.treeListColumn1.Caption = "功能";
             this.treeListColumn1.FieldName = "DisplayName";
             this.treeListColumn1.Name = "treeListColumn1";
-            this.treeListColumn1.Visible = true;
-            this.treeListColumn1.VisibleIndex = 0;
+            // 
+            // treeListColumn41
+            // 
+            this.treeListColumn41.Caption = "Status";
+            this.treeListColumn41.FieldName = "Status";
+            this.treeListColumn41.Name = "treeListColumn41";
+            // 
+            // treeListColumn11
+            // 
+            this.treeListColumn11.AppearanceCell.ForeColor = System.Drawing.Color.Transparent;
+            this.treeListColumn11.Caption = "功能";
+            this.treeListColumn11.FieldName = "DisplayName";
+            this.treeListColumn11.Name = "treeListColumn11";
+            this.treeListColumn11.Visible = true;
+            this.treeListColumn11.VisibleIndex = 0;
             // 
             // barManagerTP
             // 
@@ -162,6 +185,7 @@
             this.btnEdit.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnEdit.ImageOptions.SvgImage")));
             this.btnEdit.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnEdit.Name = "btnEdit";
+            this.btnEdit.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnEdit_ItemClick);
             // 
             // btnDelete
             // 
@@ -169,6 +193,7 @@
             this.btnDelete.Id = 1;
             this.btnDelete.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnDelete.Name = "btnDelete";
+            this.btnDelete.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDelete_ItemClick);
             // 
             // btnConfirm
             // 
@@ -176,6 +201,7 @@
             this.btnConfirm.Id = 2;
             this.btnConfirm.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnConfirm.Name = "btnConfirm";
+            this.btnConfirm.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnConfirm_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -211,14 +237,16 @@
             // 
             // layoutControl1
             // 
-            this.layoutControl1.Controls.Add(this.txbUserName);
+            this.layoutControl1.Controls.Add(this.txbUserNameVN);
             this.layoutControl1.Controls.Add(this.txbUserId);
             this.layoutControl1.Controls.Add(this.tlsFunction);
-            this.layoutControl1.Controls.Add(this.txbDept);
-            this.layoutControl1.Controls.Add(this.txbDOB);
             this.layoutControl1.Controls.Add(this.txbCCCD);
-            this.layoutControl1.Controls.Add(this.txbNationality);
             this.layoutControl1.Controls.Add(this.tlsFunction1);
+            this.layoutControl1.Controls.Add(this.cbbDept);
+            this.layoutControl1.Controls.Add(this.txbDOB);
+            this.layoutControl1.Controls.Add(this.cbbNationality);
+            this.layoutControl1.Controls.Add(this.txbUserNameTW);
+            this.layoutControl1.Controls.Add(this.txbCreate);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
@@ -227,25 +255,25 @@
             this.layoutControl1.TabIndex = 5;
             this.layoutControl1.Text = "layoutControl1";
             // 
-            // txbUserName
+            // txbUserNameVN
             // 
-            this.txbUserName.Location = new System.Drawing.Point(104, 44);
-            this.txbUserName.MenuManager = this.barManagerTP;
-            this.txbUserName.Name = "txbUserName";
-            this.txbUserName.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txbUserName.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.txbUserName.Properties.Appearance.Options.UseFont = true;
-            this.txbUserName.Properties.Appearance.Options.UseForeColor = true;
-            this.txbUserName.Size = new System.Drawing.Size(183, 28);
-            this.txbUserName.StyleController = this.layoutControl1;
-            this.txbUserName.TabIndex = 7;
+            this.txbUserNameVN.Location = new System.Drawing.Point(104, 44);
+            this.txbUserNameVN.MenuManager = this.barManagerTP;
+            this.txbUserNameVN.Name = "txbUserNameVN";
+            this.txbUserNameVN.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbUserNameVN.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.txbUserNameVN.Properties.Appearance.Options.UseFont = true;
+            this.txbUserNameVN.Properties.Appearance.Options.UseForeColor = true;
+            this.txbUserNameVN.Size = new System.Drawing.Size(183, 28);
+            this.txbUserNameVN.StyleController = this.layoutControl1;
+            this.txbUserNameVN.TabIndex = 7;
             // 
             // txbUserId
             // 
             this.txbUserId.Location = new System.Drawing.Point(104, 12);
             this.txbUserId.MenuManager = this.barManagerTP;
             this.txbUserId.Name = "txbUserId";
-            this.txbUserId.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbUserId.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txbUserId.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbUserId.Properties.Appearance.Options.UseFont = true;
             this.txbUserId.Properties.Appearance.Options.UseForeColor = true;
@@ -280,7 +308,7 @@
             formatConditionRuleExpression1.Expression = "[Status] = True";
             treeListFormatRule1.Rule = formatConditionRuleExpression1;
             this.tlsFunction.FormatRules.Add(treeListFormatRule1);
-            this.tlsFunction.Location = new System.Drawing.Point(20, 134);
+            this.tlsFunction.Location = new System.Drawing.Point(291, 166);
             this.tlsFunction.Name = "tlsFunction";
             this.tlsFunction.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
             this.tlsFunction.OptionsView.AutoWidth = false;
@@ -288,7 +316,7 @@
             this.tlsFunction.OptionsView.EnableAppearanceOddRow = true;
             this.tlsFunction.OptionsView.ShowAutoFilterRow = true;
             this.tlsFunction.OptionsView.ShowIndicator = false;
-            this.tlsFunction.Size = new System.Drawing.Size(264, 236);
+            this.tlsFunction.Size = new System.Drawing.Size(265, 204);
             this.tlsFunction.TabIndex = 5;
             // 
             // treeListColumn2
@@ -297,7 +325,7 @@
             this.treeListColumn2.FieldName = "ImageSvg";
             this.treeListColumn2.Name = "treeListColumn2";
             this.treeListColumn2.Visible = true;
-            this.treeListColumn2.VisibleIndex = 1;
+            this.treeListColumn2.VisibleIndex = 0;
             // 
             // treeListColumn3
             // 
@@ -307,191 +335,19 @@
             this.treeListColumn3.FieldName = "Prioritize";
             this.treeListColumn3.Name = "treeListColumn3";
             this.treeListColumn3.Visible = true;
-            this.treeListColumn3.VisibleIndex = 2;
-            // 
-            // txbDept
-            // 
-            this.txbDept.Location = new System.Drawing.Point(104, 76);
-            this.txbDept.Name = "txbDept";
-            this.txbDept.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txbDept.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.txbDept.Properties.Appearance.Options.UseFont = true;
-            this.txbDept.Properties.Appearance.Options.UseForeColor = true;
-            this.txbDept.Size = new System.Drawing.Size(183, 28);
-            this.txbDept.StyleController = this.layoutControl1;
-            this.txbDept.TabIndex = 7;
-            // 
-            // txbDOB
-            // 
-            this.txbDOB.Location = new System.Drawing.Point(383, 12);
-            this.txbDOB.Name = "txbDOB";
-            this.txbDOB.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txbDOB.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.txbDOB.Properties.Appearance.Options.UseFont = true;
-            this.txbDOB.Properties.Appearance.Options.UseForeColor = true;
-            this.txbDOB.Size = new System.Drawing.Size(184, 28);
-            this.txbDOB.StyleController = this.layoutControl1;
-            this.txbDOB.TabIndex = 7;
+            this.treeListColumn3.VisibleIndex = 1;
             // 
             // txbCCCD
             // 
-            this.txbCCCD.Location = new System.Drawing.Point(383, 44);
+            this.txbCCCD.Location = new System.Drawing.Point(383, 76);
             this.txbCCCD.Name = "txbCCCD";
-            this.txbCCCD.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbCCCD.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txbCCCD.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbCCCD.Properties.Appearance.Options.UseFont = true;
             this.txbCCCD.Properties.Appearance.Options.UseForeColor = true;
             this.txbCCCD.Size = new System.Drawing.Size(184, 28);
             this.txbCCCD.StyleController = this.layoutControl1;
             this.txbCCCD.TabIndex = 7;
-            // 
-            // txbNationality
-            // 
-            this.txbNationality.Location = new System.Drawing.Point(383, 76);
-            this.txbNationality.Name = "txbNationality";
-            this.txbNationality.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txbNationality.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.txbNationality.Properties.Appearance.Options.UseFont = true;
-            this.txbNationality.Properties.Appearance.Options.UseForeColor = true;
-            this.txbNationality.Size = new System.Drawing.Size(184, 28);
-            this.txbNationality.StyleController = this.layoutControl1;
-            this.txbNationality.TabIndex = 7;
-            // 
-            // Root
-            // 
-            this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
-            this.Root.GroupBordersVisible = false;
-            this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem2,
-            this.layoutControlItem3,
-            this.layoutControlItem4,
-            this.layoutControlItem5,
-            this.layoutControlItem6,
-            this.layoutControlItem7,
-            this.lcRole});
-            this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(579, 390);
-            this.Root.TextVisible = false;
-            // 
-            // lcAllRole
-            // 
-            this.lcAllRole.Control = this.tlsFunction;
-            this.lcAllRole.Location = new System.Drawing.Point(0, 0);
-            this.lcAllRole.Name = "lcAllRole";
-            this.lcAllRole.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 5, 2, 2);
-            this.lcAllRole.Size = new System.Drawing.Size(271, 240);
-            this.lcAllRole.TextSize = new System.Drawing.Size(0, 0);
-            this.lcAllRole.TextVisible = false;
-            // 
-            // layoutControlItem2
-            // 
-            this.layoutControlItem2.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.layoutControlItem2.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
-            this.layoutControlItem2.AppearanceItemCaption.Options.UseFont = true;
-            this.layoutControlItem2.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem2.AppearanceItemCaptionDisabled.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
-            this.layoutControlItem2.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
-            this.layoutControlItem2.AppearanceItemCaptionDisabled.Options.UseFont = true;
-            this.layoutControlItem2.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
-            this.layoutControlItem2.Control = this.txbUserId;
-            this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(279, 32);
-            this.layoutControlItem2.Text = "人員代號";
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(80, 19);
-            // 
-            // layoutControlItem3
-            // 
-            this.layoutControlItem3.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.layoutControlItem3.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
-            this.layoutControlItem3.AppearanceItemCaption.Options.UseFont = true;
-            this.layoutControlItem3.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem3.AppearanceItemCaptionDisabled.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
-            this.layoutControlItem3.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
-            this.layoutControlItem3.AppearanceItemCaptionDisabled.Options.UseFont = true;
-            this.layoutControlItem3.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
-            this.layoutControlItem3.Control = this.txbUserName;
-            this.layoutControlItem3.Location = new System.Drawing.Point(0, 32);
-            this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(279, 32);
-            this.layoutControlItem3.Text = "名稱";
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(80, 19);
-            // 
-            // layoutControlItem4
-            // 
-            this.layoutControlItem4.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
-            this.layoutControlItem4.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
-            this.layoutControlItem4.AppearanceItemCaption.Options.UseFont = true;
-            this.layoutControlItem4.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem4.AppearanceItemCaptionDisabled.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
-            this.layoutControlItem4.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
-            this.layoutControlItem4.AppearanceItemCaptionDisabled.Options.UseFont = true;
-            this.layoutControlItem4.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
-            this.layoutControlItem4.Control = this.txbDept;
-            this.layoutControlItem4.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
-            this.layoutControlItem4.CustomizationFormText = "備註";
-            this.layoutControlItem4.Location = new System.Drawing.Point(0, 64);
-            this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(279, 32);
-            this.layoutControlItem4.Text = "單位";
-            this.layoutControlItem4.TextSize = new System.Drawing.Size(80, 19);
-            // 
-            // layoutControlItem5
-            // 
-            this.layoutControlItem5.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
-            this.layoutControlItem5.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
-            this.layoutControlItem5.AppearanceItemCaption.Options.UseFont = true;
-            this.layoutControlItem5.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem5.AppearanceItemCaptionDisabled.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
-            this.layoutControlItem5.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
-            this.layoutControlItem5.AppearanceItemCaptionDisabled.Options.UseFont = true;
-            this.layoutControlItem5.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
-            this.layoutControlItem5.Control = this.txbDOB;
-            this.layoutControlItem5.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
-            this.layoutControlItem5.CustomizationFormText = "備註";
-            this.layoutControlItem5.Location = new System.Drawing.Point(279, 0);
-            this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(280, 32);
-            this.layoutControlItem5.Text = "出生日期";
-            this.layoutControlItem5.TextSize = new System.Drawing.Size(80, 19);
-            // 
-            // layoutControlItem6
-            // 
-            this.layoutControlItem6.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
-            this.layoutControlItem6.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
-            this.layoutControlItem6.AppearanceItemCaption.Options.UseFont = true;
-            this.layoutControlItem6.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem6.AppearanceItemCaptionDisabled.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
-            this.layoutControlItem6.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
-            this.layoutControlItem6.AppearanceItemCaptionDisabled.Options.UseFont = true;
-            this.layoutControlItem6.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
-            this.layoutControlItem6.Control = this.txbCCCD;
-            this.layoutControlItem6.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
-            this.layoutControlItem6.CustomizationFormText = "備註";
-            this.layoutControlItem6.Location = new System.Drawing.Point(279, 32);
-            this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(280, 32);
-            this.layoutControlItem6.Text = "身份證號";
-            this.layoutControlItem6.TextSize = new System.Drawing.Size(80, 19);
-            // 
-            // layoutControlItem7
-            // 
-            this.layoutControlItem7.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
-            this.layoutControlItem7.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
-            this.layoutControlItem7.AppearanceItemCaption.Options.UseFont = true;
-            this.layoutControlItem7.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem7.AppearanceItemCaptionDisabled.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
-            this.layoutControlItem7.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
-            this.layoutControlItem7.AppearanceItemCaptionDisabled.Options.UseFont = true;
-            this.layoutControlItem7.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
-            this.layoutControlItem7.Control = this.txbNationality;
-            this.layoutControlItem7.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
-            this.layoutControlItem7.CustomizationFormText = "備註";
-            this.layoutControlItem7.Location = new System.Drawing.Point(279, 64);
-            this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(280, 32);
-            this.layoutControlItem7.Text = "國籍";
-            this.layoutControlItem7.TextSize = new System.Drawing.Size(80, 19);
             // 
             // tlsFunction1
             // 
@@ -520,7 +376,7 @@
             formatConditionRuleExpression2.Expression = "[Status] = True";
             treeListFormatRule2.Rule = formatConditionRuleExpression2;
             this.tlsFunction1.FormatRules.Add(treeListFormatRule2);
-            this.tlsFunction1.Location = new System.Drawing.Point(294, 134);
+            this.tlsFunction1.Location = new System.Drawing.Point(23, 166);
             this.tlsFunction1.Name = "tlsFunction1";
             this.tlsFunction1.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
             this.tlsFunction1.OptionsView.AutoWidth = false;
@@ -528,17 +384,8 @@
             this.tlsFunction1.OptionsView.EnableAppearanceOddRow = true;
             this.tlsFunction1.OptionsView.ShowAutoFilterRow = true;
             this.tlsFunction1.OptionsView.ShowIndicator = false;
-            this.tlsFunction1.Size = new System.Drawing.Size(265, 236);
+            this.tlsFunction1.Size = new System.Drawing.Size(264, 204);
             this.tlsFunction1.TabIndex = 5;
-            // 
-            // treeListColumn11
-            // 
-            this.treeListColumn11.AppearanceCell.ForeColor = System.Drawing.Color.Transparent;
-            this.treeListColumn11.Caption = "功能";
-            this.treeListColumn11.FieldName = "DisplayName";
-            this.treeListColumn11.Name = "treeListColumn11";
-            this.treeListColumn11.Visible = true;
-            this.treeListColumn11.VisibleIndex = 0;
             // 
             // treeListColumn21
             // 
@@ -558,24 +405,205 @@
             this.treeListColumn31.Visible = true;
             this.treeListColumn31.VisibleIndex = 2;
             // 
-            // treeListColumn41
+            // cbbDept
             // 
-            this.treeListColumn41.Caption = "Status";
-            this.treeListColumn41.FieldName = "Status";
-            this.treeListColumn41.Name = "treeListColumn41";
+            this.cbbDept.Location = new System.Drawing.Point(104, 108);
+            this.cbbDept.Name = "cbbDept";
+            this.cbbDept.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbDept.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.cbbDept.Properties.Appearance.Options.UseFont = true;
+            this.cbbDept.Properties.Appearance.Options.UseForeColor = true;
+            this.cbbDept.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbbDept.Properties.NullText = "";
+            this.cbbDept.Size = new System.Drawing.Size(183, 28);
+            this.cbbDept.StyleController = this.layoutControl1;
+            this.cbbDept.TabIndex = 7;
             // 
-            // lcAllRole1
+            // txbDOB
             // 
-            this.lcAllRole1.Control = this.tlsFunction1;
-            this.lcAllRole1.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
-            this.lcAllRole1.CustomizationFormText = "lcAllRole";
-            this.lcAllRole1.Location = new System.Drawing.Point(271, 0);
-            this.lcAllRole1.Name = "lcAllRole1";
-            this.lcAllRole1.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 2, 2, 2);
-            this.lcAllRole1.Size = new System.Drawing.Size(272, 240);
-            this.lcAllRole1.Text = "lcAllRole";
-            this.lcAllRole1.TextSize = new System.Drawing.Size(0, 0);
-            this.lcAllRole1.TextVisible = false;
+            this.txbDOB.EditValue = null;
+            this.txbDOB.Location = new System.Drawing.Point(383, 44);
+            this.txbDOB.Name = "txbDOB";
+            this.txbDOB.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbDOB.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.txbDOB.Properties.Appearance.Options.UseFont = true;
+            this.txbDOB.Properties.Appearance.Options.UseForeColor = true;
+            this.txbDOB.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txbDOB.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txbDOB.Properties.DisplayFormat.FormatString = "";
+            this.txbDOB.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.txbDOB.Properties.EditFormat.FormatString = "";
+            this.txbDOB.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.txbDOB.Properties.MaskSettings.Set("mask", "d");
+            this.txbDOB.Properties.UseMaskAsDisplayFormat = true;
+            this.txbDOB.Size = new System.Drawing.Size(184, 28);
+            this.txbDOB.StyleController = this.layoutControl1;
+            this.txbDOB.TabIndex = 7;
+            // 
+            // cbbNationality
+            // 
+            this.cbbNationality.Location = new System.Drawing.Point(383, 108);
+            this.cbbNationality.Name = "cbbNationality";
+            this.cbbNationality.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbNationality.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.cbbNationality.Properties.Appearance.Options.UseFont = true;
+            this.cbbNationality.Properties.Appearance.Options.UseForeColor = true;
+            this.cbbNationality.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbbNationality.Size = new System.Drawing.Size(184, 28);
+            this.cbbNationality.StyleController = this.layoutControl1;
+            this.cbbNationality.TabIndex = 7;
+            // 
+            // txbUserNameTW
+            // 
+            this.txbUserNameTW.Location = new System.Drawing.Point(104, 76);
+            this.txbUserNameTW.Name = "txbUserNameTW";
+            this.txbUserNameTW.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbUserNameTW.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.txbUserNameTW.Properties.Appearance.Options.UseFont = true;
+            this.txbUserNameTW.Properties.Appearance.Options.UseForeColor = true;
+            this.txbUserNameTW.Size = new System.Drawing.Size(183, 28);
+            this.txbUserNameTW.StyleController = this.layoutControl1;
+            this.txbUserNameTW.TabIndex = 7;
+            // 
+            // txbCreate
+            // 
+            this.txbCreate.EditValue = null;
+            this.txbCreate.Location = new System.Drawing.Point(383, 12);
+            this.txbCreate.Name = "txbCreate";
+            this.txbCreate.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbCreate.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.txbCreate.Properties.Appearance.Options.UseFont = true;
+            this.txbCreate.Properties.Appearance.Options.UseForeColor = true;
+            this.txbCreate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txbCreate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txbCreate.Properties.DisplayFormat.FormatString = "";
+            this.txbCreate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.txbCreate.Properties.EditFormat.FormatString = "";
+            this.txbCreate.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.txbCreate.Properties.MaskSettings.Set("mask", "d");
+            this.txbCreate.Properties.UseMaskAsDisplayFormat = true;
+            this.txbCreate.Size = new System.Drawing.Size(184, 28);
+            this.txbCreate.StyleController = this.layoutControl1;
+            this.txbCreate.TabIndex = 7;
+            // 
+            // Root
+            // 
+            this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            this.Root.GroupBordersVisible = false;
+            this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem4,
+            this.layoutControlItem5,
+            this.layoutControlItem6,
+            this.layoutControlItem7,
+            this.layoutControlItem1,
+            this.lcRole,
+            this.layoutControlItem2,
+            this.layoutControlItem8,
+            this.layoutControlItem3});
+            this.Root.Name = "Root";
+            this.Root.Size = new System.Drawing.Size(579, 390);
+            this.Root.TextVisible = false;
+            // 
+            // layoutControlItem4
+            // 
+            this.layoutControlItem4.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.layoutControlItem4.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem4.AppearanceItemCaption.Options.UseFont = true;
+            this.layoutControlItem4.AppearanceItemCaption.Options.UseForeColor = true;
+            this.layoutControlItem4.AppearanceItemCaptionDisabled.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.layoutControlItem4.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem4.AppearanceItemCaptionDisabled.Options.UseFont = true;
+            this.layoutControlItem4.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.layoutControlItem4.Control = this.cbbDept;
+            this.layoutControlItem4.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.layoutControlItem4.CustomizationFormText = "備註";
+            this.layoutControlItem4.Location = new System.Drawing.Point(0, 96);
+            this.layoutControlItem4.Name = "layoutControlItem4";
+            this.layoutControlItem4.Size = new System.Drawing.Size(279, 32);
+            this.layoutControlItem4.Text = "單位";
+            this.layoutControlItem4.TextSize = new System.Drawing.Size(80, 19);
+            // 
+            // layoutControlItem5
+            // 
+            this.layoutControlItem5.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.layoutControlItem5.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem5.AppearanceItemCaption.Options.UseFont = true;
+            this.layoutControlItem5.AppearanceItemCaption.Options.UseForeColor = true;
+            this.layoutControlItem5.AppearanceItemCaptionDisabled.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.layoutControlItem5.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem5.AppearanceItemCaptionDisabled.Options.UseFont = true;
+            this.layoutControlItem5.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.layoutControlItem5.Control = this.txbDOB;
+            this.layoutControlItem5.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.layoutControlItem5.CustomizationFormText = "備註";
+            this.layoutControlItem5.Location = new System.Drawing.Point(279, 32);
+            this.layoutControlItem5.Name = "layoutControlItem5";
+            this.layoutControlItem5.Size = new System.Drawing.Size(280, 32);
+            this.layoutControlItem5.Text = "出生日期";
+            this.layoutControlItem5.TextSize = new System.Drawing.Size(80, 19);
+            // 
+            // layoutControlItem6
+            // 
+            this.layoutControlItem6.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.layoutControlItem6.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem6.AppearanceItemCaption.Options.UseFont = true;
+            this.layoutControlItem6.AppearanceItemCaption.Options.UseForeColor = true;
+            this.layoutControlItem6.AppearanceItemCaptionDisabled.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.layoutControlItem6.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem6.AppearanceItemCaptionDisabled.Options.UseFont = true;
+            this.layoutControlItem6.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.layoutControlItem6.Control = this.txbCCCD;
+            this.layoutControlItem6.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.layoutControlItem6.CustomizationFormText = "備註";
+            this.layoutControlItem6.Location = new System.Drawing.Point(279, 64);
+            this.layoutControlItem6.Name = "layoutControlItem6";
+            this.layoutControlItem6.Size = new System.Drawing.Size(280, 32);
+            this.layoutControlItem6.Text = "身份證號";
+            this.layoutControlItem6.TextSize = new System.Drawing.Size(80, 19);
+            // 
+            // layoutControlItem7
+            // 
+            this.layoutControlItem7.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.layoutControlItem7.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem7.AppearanceItemCaption.Options.UseFont = true;
+            this.layoutControlItem7.AppearanceItemCaption.Options.UseForeColor = true;
+            this.layoutControlItem7.AppearanceItemCaptionDisabled.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.layoutControlItem7.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem7.AppearanceItemCaptionDisabled.Options.UseFont = true;
+            this.layoutControlItem7.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.layoutControlItem7.Control = this.cbbNationality;
+            this.layoutControlItem7.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.layoutControlItem7.CustomizationFormText = "備註";
+            this.layoutControlItem7.Location = new System.Drawing.Point(279, 96);
+            this.layoutControlItem7.Name = "layoutControlItem7";
+            this.layoutControlItem7.Size = new System.Drawing.Size(280, 32);
+            this.layoutControlItem7.Text = "國籍";
+            this.layoutControlItem7.TextSize = new System.Drawing.Size(80, 19);
+            // 
+            // layoutControlItem1
+            // 
+            this.layoutControlItem1.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.layoutControlItem1.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem1.AppearanceItemCaption.Options.UseFont = true;
+            this.layoutControlItem1.AppearanceItemCaption.Options.UseForeColor = true;
+            this.layoutControlItem1.AppearanceItemCaptionDisabled.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.layoutControlItem1.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem1.AppearanceItemCaptionDisabled.Options.UseFont = true;
+            this.layoutControlItem1.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.layoutControlItem1.Control = this.txbUserNameTW;
+            this.layoutControlItem1.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.layoutControlItem1.CustomizationFormText = "名稱";
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 64);
+            this.layoutControlItem1.Name = "layoutControlItem1";
+            this.layoutControlItem1.Size = new System.Drawing.Size(279, 32);
+            this.layoutControlItem1.Text = "中文名稱";
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(80, 19);
             // 
             // lcRole
             // 
@@ -591,13 +619,89 @@
             this.lcRole.AppearanceTabPage.Header.Options.UseFont = true;
             this.lcRole.GroupStyle = DevExpress.Utils.GroupStyle.Light;
             this.lcRole.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.lcAllRole,
-            this.lcAllRole1});
-            this.lcRole.Location = new System.Drawing.Point(0, 96);
+            this.lcAllRole1,
+            this.lcAllRole});
+            this.lcRole.Location = new System.Drawing.Point(0, 128);
             this.lcRole.Name = "lcRole";
             this.lcRole.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 5, 5);
-            this.lcRole.Size = new System.Drawing.Size(559, 274);
+            this.lcRole.Size = new System.Drawing.Size(559, 242);
             this.lcRole.Text = "角色";
+            // 
+            // lcAllRole1
+            // 
+            this.lcAllRole1.Control = this.tlsFunction1;
+            this.lcAllRole1.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.lcAllRole1.CustomizationFormText = "lcAllRole";
+            this.lcAllRole1.Location = new System.Drawing.Point(0, 0);
+            this.lcAllRole1.Name = "lcAllRole1";
+            this.lcAllRole1.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 2, 2, 2);
+            this.lcAllRole1.Size = new System.Drawing.Size(271, 208);
+            this.lcAllRole1.Text = "lcAllRole";
+            this.lcAllRole1.TextSize = new System.Drawing.Size(0, 0);
+            this.lcAllRole1.TextVisible = false;
+            // 
+            // lcAllRole
+            // 
+            this.lcAllRole.Control = this.tlsFunction;
+            this.lcAllRole.Location = new System.Drawing.Point(271, 0);
+            this.lcAllRole.Name = "lcAllRole";
+            this.lcAllRole.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 5, 2, 2);
+            this.lcAllRole.Size = new System.Drawing.Size(272, 208);
+            this.lcAllRole.TextSize = new System.Drawing.Size(0, 0);
+            this.lcAllRole.TextVisible = false;
+            // 
+            // layoutControlItem2
+            // 
+            this.layoutControlItem2.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.layoutControlItem2.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem2.AppearanceItemCaption.Options.UseFont = true;
+            this.layoutControlItem2.AppearanceItemCaption.Options.UseForeColor = true;
+            this.layoutControlItem2.AppearanceItemCaptionDisabled.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.layoutControlItem2.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem2.AppearanceItemCaptionDisabled.Options.UseFont = true;
+            this.layoutControlItem2.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.layoutControlItem2.Control = this.txbUserId;
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem2.Name = "layoutControlItem2";
+            this.layoutControlItem2.Size = new System.Drawing.Size(279, 32);
+            this.layoutControlItem2.Text = "人員代號";
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(80, 19);
+            // 
+            // layoutControlItem8
+            // 
+            this.layoutControlItem8.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.layoutControlItem8.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem8.AppearanceItemCaption.Options.UseFont = true;
+            this.layoutControlItem8.AppearanceItemCaption.Options.UseForeColor = true;
+            this.layoutControlItem8.AppearanceItemCaptionDisabled.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.layoutControlItem8.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem8.AppearanceItemCaptionDisabled.Options.UseFont = true;
+            this.layoutControlItem8.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.layoutControlItem8.Control = this.txbCreate;
+            this.layoutControlItem8.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.layoutControlItem8.CustomizationFormText = "備註";
+            this.layoutControlItem8.Location = new System.Drawing.Point(279, 0);
+            this.layoutControlItem8.Name = "layoutControlItem8";
+            this.layoutControlItem8.Size = new System.Drawing.Size(280, 32);
+            this.layoutControlItem8.Text = "日期創建";
+            this.layoutControlItem8.TextSize = new System.Drawing.Size(80, 19);
+            // 
+            // layoutControlItem3
+            // 
+            this.layoutControlItem3.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.layoutControlItem3.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem3.AppearanceItemCaption.Options.UseFont = true;
+            this.layoutControlItem3.AppearanceItemCaption.Options.UseForeColor = true;
+            this.layoutControlItem3.AppearanceItemCaptionDisabled.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.layoutControlItem3.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem3.AppearanceItemCaptionDisabled.Options.UseFont = true;
+            this.layoutControlItem3.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.layoutControlItem3.Control = this.txbUserNameVN;
+            this.layoutControlItem3.Location = new System.Drawing.Point(0, 32);
+            this.layoutControlItem3.Name = "layoutControlItem3";
+            this.layoutControlItem3.Size = new System.Drawing.Size(279, 32);
+            this.layoutControlItem3.Text = "越文名稱";
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(80, 19);
             // 
             // f401_UserInfo
             // 
@@ -617,24 +721,30 @@
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.txbUserName.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbUserNameVN.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbUserId.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tlsFunction)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbDept.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbDOB.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbCCCD.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbNationality.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tlsFunction1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbDept.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbDOB.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbDOB.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbNationality.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbUserNameTW.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbCreate.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbCreate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcAllRole)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tlsFunction1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcAllRole1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcRole)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcAllRole1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcAllRole)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -652,7 +762,7 @@
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
-        private DevExpress.XtraEditors.TextEdit txbUserName;
+        private DevExpress.XtraEditors.TextEdit txbUserNameVN;
         private DevExpress.XtraEditors.TextEdit txbUserId;
         private DevExpress.XtraTreeList.TreeList tlsFunction;
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn1;
@@ -663,13 +773,10 @@
         private DevExpress.XtraLayout.LayoutControlItem lcAllRole;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
-        private DevExpress.XtraEditors.TextEdit txbDept;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
-        private DevExpress.XtraEditors.TextEdit txbDOB;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
         private DevExpress.XtraEditors.TextEdit txbCCCD;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
-        private DevExpress.XtraEditors.TextEdit txbNationality;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
         private DevExpress.XtraTreeList.TreeList tlsFunction1;
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn11;
@@ -678,5 +785,12 @@
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn41;
         private DevExpress.XtraLayout.LayoutControlGroup lcRole;
         private DevExpress.XtraLayout.LayoutControlItem lcAllRole1;
+        private DevExpress.XtraEditors.LookUpEdit cbbDept;
+        private DevExpress.XtraEditors.DateEdit txbDOB;
+        private DevExpress.XtraEditors.ComboBoxEdit cbbNationality;
+        private DevExpress.XtraEditors.TextEdit txbUserNameTW;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraEditors.DateEdit txbCreate;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
     }
 }

@@ -78,6 +78,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManager
                                 {
                                     Id = data.Id,
                                     DisplayName = $"{data.DisplayName}{(!string.IsNullOrEmpty(data.DisplayNameVN) ? $"\n{data.DisplayNameVN}" : "")}",
+                                    DisplayNameVN = data.DisplayNameVN,
                                     IdRole = data.IdRole,
                                     IdDepartment = data.IdDepartment,
                                     DateCreate = data.DateCreate,
@@ -133,7 +134,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManager
             dm_User _userSelect = view.GetRow(view.FocusedRowHandle) as dm_User;
 
             f401_UserInfo fInfo = new f401_UserInfo();
-            fInfo._eventInfo = EventFormInfo.Update;
+            fInfo._eventInfo = EventFormInfo.View;
             fInfo._formName = "用戶";
             fInfo._user = _userSelect;
             fInfo.ShowDialog();
