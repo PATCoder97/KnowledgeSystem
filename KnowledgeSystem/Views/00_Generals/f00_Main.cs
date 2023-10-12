@@ -74,7 +74,7 @@ namespace KnowledgeSystem.Views._00_Generals
             Location = new Point((Screen.PrimaryScreen.WorkingArea.Width - this.Width) / 2,
                            (Screen.PrimaryScreen.WorkingArea.Height - this.Height) / 2);
 
-            var _userLogin = dm_UserBUS.Instance.GeItemById(TPConfigs.LoginUser.Id);
+            var _userLogin = dm_UserBUS.Instance.GetItemById(TPConfigs.LoginUser.Id);
             string userName = _userLogin.DisplayName;
             string idDept = _userLogin.IdDepartment;
             var gradeName = dm_DeptBUS.Instance.GetItemById(idDept.Substring(0, 2)).DisplayName;

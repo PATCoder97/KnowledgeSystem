@@ -252,6 +252,12 @@
     <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_SelectProgress.Designer.cs">
       <DependentUpon>uc207_SelectProgress.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\04_SystemAdministrator\01_UserManage\f401_UserInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\04_SystemAdministrator\01_UserManage\f401_UserInfo.Designer.cs">
+      <DependentUpon>f401_UserInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\f402_FuncInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -380,6 +386,9 @@
     <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_SelectProgress.resx">
       <DependentUpon>uc207_SelectProgress.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\04_SystemAdministrator\01_UserManage\f401_UserInfo.resx">
+      <DependentUpon>f401_UserInfo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\02_PermissionManager\f402_FuncInfo.resx">
       <DependentUpon>f402_FuncInfo.cs</DependentUpon>
     </EmbeddedResource>
@@ -476,6 +485,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\icons_team.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\icons_upload_to_ftp.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\unchecked_radio_button.svg">

@@ -67,7 +67,7 @@ namespace KnowledgeSystem.Views._00_Generals
                         bool isLoginSuccessful = DomainVNFPG.Instance.CheckLoginDomain(_userID, _password);
                         if (isLoginSuccessful)
                         {
-                            _userLogin = dm_UserBUS.Instance.GeItemById(_userID);
+                            _userLogin = dm_UserBUS.Instance.GetItemById(_userID);
                             if (_userLogin == null)
                             {
                                 string[] displayNameFHS = userNameByDomain.Split('/');

@@ -55,7 +55,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
             switch (_eventInfo)
             {
                 case EventFormInfo.Create:
-                    Text = $"Thêm {_formName}";
+                    Text = $"新增{_formName}";
 
                     btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
@@ -63,7 +63,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
                     EnabledController();
                     break;
                 case EventFormInfo.Update:
-                    Text = $"Cập nhật thông tin {_formName}";
+                    Text = $"更新{_formName}";
 
                     btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
@@ -71,7 +71,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
                     EnabledController();
                     break;
                 case EventFormInfo.Delete:
-                    Text = $"Xoá {_formName}";
+                    Text = $"刪除{_formName}";
 
                     btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
@@ -79,7 +79,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
                     EnabledController(false);
                     break;
                 case EventFormInfo.View:
-                    Text = $"Thông tin {_formName}";
+                    Text = $"{_formName}信息";
 
                     btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                     btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;

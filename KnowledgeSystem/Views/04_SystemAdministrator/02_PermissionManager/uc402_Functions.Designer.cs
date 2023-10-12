@@ -328,7 +328,7 @@
             // 
             // btnNewRole
             // 
-            this.btnNewRole.Caption = "新增權限";
+            this.btnNewRole.Caption = "新增角色";
             this.btnNewRole.Id = 1;
             this.btnNewRole.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnNewRole.ImageOptions.SvgImage")));
             this.btnNewRole.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);

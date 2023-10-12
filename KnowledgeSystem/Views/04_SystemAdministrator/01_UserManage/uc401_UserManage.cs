@@ -29,6 +29,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManager
         public uc401_UserManage()
         {
             InitializeComponent();
+            InitializeIcon();
         }
 
         #region parameters
@@ -47,6 +48,13 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManager
         #endregion
 
         #region methods
+
+        private void InitializeIcon()
+        {
+            btnCreate.ImageOptions.SvgImage = TPSvgimages.Add;
+            btnRefresh.ImageOptions.SvgImage = TPSvgimages.Reload;
+            btnUploadList.ImageOptions.SvgImage = TPSvgimages.UploadFile;
+        }
 
         private void InitializeControl()
         {
@@ -104,126 +112,31 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManager
             gcData.DataSource = sourceUsers;
             helper = new RefreshHelper(gvData, "Id");
             LoadUser();
-
-            gvData.OptionsEditForm.CustomEditFormLayout = new uc401_UserManage_Info();
-
-            gvData.RowUpdated += GridView_RowUpdated;
-
-            // Thêm 2 nút Sửa, Xóa vào row để mở EditForms hoặc xóa quyền hạn
-            RepositoryItemButtonEdit commandsEvent = new RepositoryItemButtonEdit { AutoHeight = false, Name = "CommandsEdit", TextEditStyle = TextEditStyles.HideTextEditor };
-            commandsEvent.Buttons.Clear();
-
-            Image imgEdit = Properties.Resources.pen_16px;
-            Color colorEdit = DXSkinColors.FillColors.Question;
-
-            DevExpress.Utils.AppearanceObject appearanceEdit = new DevExpress.Utils.AppearanceObject();
-            appearanceEdit.Font = fontDFKaiSB12;
-            appearanceEdit.ForeColor = colorEdit;
-
-            DevExpress.Utils.AppearanceObject appearanceDelete = new DevExpress.Utils.AppearanceObject();
-            appearanceDelete.Font = fontDFKaiSB12;
-
-            EditorButton btnEdit = new EditorButton(ButtonPredefines.Glyph, "修改", -1, true, true, false, ImageLocation.Default, imgEdit, null, appearanceEdit);
-
-            commandsEvent.Buttons.Add(btnEdit);
-
-            int widthCol = 70;
-            GridColumn _commandsColumn = gvData.Columns.AddField("事件");
-            _commandsColumn.Visible = true;
-            _commandsColumn.Width = widthCol;
-            _commandsColumn.MaxWidth = widthCol;
-            _commandsColumn.MinWidth = widthCol;
-            _commandsColumn.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
-
-            gvData.CustomRowCellEdit += (s, ee) =>
-            {
-                if (ee.RowHandle == gvData.FocusedRowHandle && ee.Column == _commandsColumn)
-                    ee.RepositoryItem = commandsEvent;
-            };
-
-            gvData.CustomRowCellEditForEditing += (s, ee) =>
-            {
-                if (ee.RowHandle == gvData.FocusedRowHandle && ee.Column == _commandsColumn)
-                    ee.RepositoryItem = commandsEvent;
-            };
-
-            gvData.ShowingEditor += (s, ee) =>
-            {
-                ee.Cancel = gvData.FocusedColumn != _commandsColumn;
-            };
-
-            // Event nút nhấn Sửa, Xóa
-            commandsEvent.ButtonClick += CommandsEvent_ButtonClick;
-        }
-
-        private void CommandsEvent_ButtonClick(object sender, ButtonPressedEventArgs e)
-        {
-            switch (e.Button.Caption)
-            {
-                case "修改":
-                    gvData.CloseEditor();
-                    gvData.ShowEditForm();
-                    break;
-            }
-        }
-
-        private void GridView_RowUpdated(object sender, RowObjectEventArgs e)
-        {
-            dm_User rowUser = e.Row as dm_User;
-
-            using (var db = new DBDocumentManagementSystemEntities())
-            {
-                db.dm_User.AddOrUpdate(rowUser);
-                db.SaveChanges();
-            }
-
-            LoadUser();
-
-            XtraMessageBox.Show("Thao tác sửa thành công!", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnCreate_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            uc401_UserManage_Info ucInfo = new uc401_UserManage_Info();
-            if (XtraDialog.Show(ucInfo, "新增使用者", MessageBoxButtons.OKCancel) != DialogResult.OK) return;
-
-            var userNew = new dm_User()
-            {
-                Id = ucInfo.Id,
-                DisplayName = ucInfo.DisplayName,
-                IdDepartment = ucInfo.IdDept.ToString(),
-                IdRole = ucInfo.IdRole,
-                DateCreate = DateTime.Now
-            };
-
-            string msg = "Thao tác sửa thành công!";
-            using (var db = new DBDocumentManagementSystemEntities())
-            {
-                db.dm_User.Add(userNew);
-                try
-                {
-                    db.SaveChanges();
-                }
-                catch (DbEntityValidationException ex)
-                {
-                    msg = string.Empty;
-                    foreach (var entityValidationErrors in ex.EntityValidationErrors)
-                    {
-                        foreach (var validationError in entityValidationErrors.ValidationErrors)
-                        {
-                            msg += "Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage;
-                        }
-                    }
-                }
-            }
-
-            LoadUser();
-            XtraMessageBox.Show(msg, TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            f401_UserInfo fInfo = new f401_UserInfo();
+            fInfo._eventInfo = EventFormInfo.Create;
+            fInfo._formName = "用戶";
+            fInfo.ShowDialog();
         }
 
         private void btnRefresh_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             LoadUser();
+        }
+
+        private void gvData_DoubleClick(object sender, EventArgs e)
+        {
+            GridView view = sender as GridView;
+            dm_User _userSelect = view.GetRow(view.FocusedRowHandle) as dm_User;
+
+            f401_UserInfo fInfo = new f401_UserInfo();
+            fInfo._eventInfo = EventFormInfo.Update;
+            fInfo._formName = "用戶";
+            fInfo._user = _userSelect;
+            fInfo.ShowDialog();
         }
     }
 }

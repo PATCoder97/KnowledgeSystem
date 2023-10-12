@@ -56,7 +56,7 @@ namespace BusinessLayer
             }
         }
 
-        public dm_User GeItemById(string _UID)
+        public dm_User GetItemById(string _UID)
         {
             try
             {

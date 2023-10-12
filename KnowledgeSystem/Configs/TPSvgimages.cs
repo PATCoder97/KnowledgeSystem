@@ -29,5 +29,6 @@ namespace KnowledgeSystem.Configs
         public static SvgImage Progress = SvgImage.FromFile(Path.Combine(ImagesPath, "StepProcess.svg"));
         public static SvgImage Close = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_close.svg"));
         public static SvgImage Search = SvgImage.FromFile(Path.Combine(ImagesPath, "Search_more.svg"));
+        public static SvgImage UploadFile = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_upload_to_ftp.svg"));
     }
 }
