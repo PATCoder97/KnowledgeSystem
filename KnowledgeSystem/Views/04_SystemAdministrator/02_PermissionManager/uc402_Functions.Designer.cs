@@ -111,7 +111,6 @@
             this.gvRoles.OptionsView.EnableAppearanceOddRow = true;
             this.gvRoles.OptionsView.ShowAutoFilterRow = true;
             this.gvRoles.OptionsView.ShowGroupPanel = false;
-            this.gvRoles.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.gvRoles_RowUpdated);
             this.gvRoles.DoubleClick += new System.EventHandler(this.gvRoles_DoubleClick);
             // 
             // gridColumn2

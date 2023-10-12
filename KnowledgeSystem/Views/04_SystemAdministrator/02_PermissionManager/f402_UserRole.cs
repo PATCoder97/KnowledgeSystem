@@ -36,8 +36,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
         List<dm_User> lsAllUsers = new List<dm_User>();
         List<dm_User> lsChooseUsers = new List<dm_User>();
 
-        dm_UserBUS _userBUS = new dm_UserBUS();
-
         private void InitializeIcon()
         {
             btnConfirm.ImageOptions.SvgImage = TPSvgimages.Confirm;
@@ -68,7 +66,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
             gcAllUser.DataSource = _sourceAllUser;
             gcChooseUser.DataSource = _sourceChooseUser;
 
-            lsAllUsers = _userBUS.GetList();
+            lsAllUsers = dm_UserBUS.Instance.GetList();
             _sourceAllUser.DataSource = lsAllUsers;
             _sourceChooseUser.DataSource = lsChooseUsers;
 

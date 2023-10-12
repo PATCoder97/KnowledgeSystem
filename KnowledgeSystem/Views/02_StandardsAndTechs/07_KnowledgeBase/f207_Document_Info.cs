@@ -36,19 +36,20 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             InitializeComponent();
             InitializeControl();
+            InitializeIcon();
         }
 
         public f207_Document_Info(string idDocument_)
         {
             InitializeComponent();
             InitializeControl();
+            InitializeIcon();
             _idBaseDocument = idDocument_;
         }
 
         #region parameters
 
         // Khai báo các BUS
-        dm_UserBUS _dm_UserBUS = new dm_UserBUS();
         dm_GroupUserBUS _dm_GroupUserBUS = new dm_GroupUserBUS();
         dt207_TypeBUS _dt207_TypeBUS = new dt207_TypeBUS();
         dt207_BaseBUS _dt207_BaseBUS = new dt207_BaseBUS();
@@ -109,6 +110,20 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         #region methods
 
+        private void InitializeIcon()
+        {
+            btnEdit.ImageOptions.SvgImage = TPSvgimages.Edit;
+            btnConfirm.ImageOptions.SvgImage = TPSvgimages.EmailSend;
+            btnDel.ImageOptions.SvgImage = TPSvgimages.Remove;
+            btnChangeProgress.ImageOptions.SvgImage = TPSvgimages.Progress;
+            btnApproved.ImageOptions.SvgImage = TPSvgimages.Confirm;
+            btnDisapprove.ImageOptions.SvgImage = TPSvgimages.Cancel;
+            btnDisapprove.ImageOptions.SvgImage = TPSvgimages.Cancel;
+            btnCancel.ImageOptions.SvgImage = TPSvgimages.Close;
+            btnAddFile.ImageOptions.SvgImage = TPSvgimages.Add2;
+            btnAddPermission.ImageOptions.SvgImage = TPSvgimages.Add2;
+        }
+
         private void InitializeControl()
         {
             // Cài mặc định các thông số
@@ -162,7 +177,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
             // Load các dữ liệu LIST ban đầu
             lsKnowledgeTypes = _dt207_TypeBUS.GetList();
-            lsUsers = _dm_UserBUS.GetList();
+            lsUsers = dm_UserBUS.Instance.GetList();
             lsGroups = dm_GroupBUS.Instance.GetList();
             lsGroupUser = _dm_GroupUserBUS.GetList();
             progressSelect = dm_ProgressBUS.Instance.GetListByDept(TPConfigs.LoginUser.IdDepartment).FirstOrDefault();

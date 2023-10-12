@@ -1,4 +1,5 @@
-﻿using DataAccessLayer;
+﻿using BusinessLayer;
+using DataAccessLayer;
 using DevExpress.LookAndFeel;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
@@ -32,6 +33,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManager
 
         #region parameters
 
+        bool IsSysAdmin = false;
+
         Font fontDFKaiSB12 = new Font("DFKai-SB", 12.0f, FontStyle.Regular);
         BindingSource sourceUsers = new BindingSource();
 
@@ -45,34 +48,42 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManager
 
         #region methods
 
+        private void InitializeControl()
+        {
+            gColPCName.Visible = IsSysAdmin;
+            gColIP.Visible = IsSysAdmin;
+        }
+
         private void LoadUser()
         {
-            helper.SaveViewInfo();
-            using (var db = new DBDocumentManagementSystemEntities())
-            {
-                var lsUserManage = (from data in db.dm_User.ToList()
-                                    join depts in db.dm_Departments.ToList() on data.IdDepartment equals depts.Id
-                                    join roles in db.dm_Role.ToList() on data.IdRole equals roles.Id into dtg
-                                    from p in dtg.DefaultIfEmpty()
-                                    select new UserInfos()
-                                    {
-                                        Id = data.Id,
-                                        DisplayName = $"{data.DisplayName}{(!string.IsNullOrEmpty(data.DisplayNameVN) ? $"\n{data.DisplayNameVN}" : "")}",
-                                        IdRole = data.IdRole,
-                                        IdDepartment = data.IdDepartment,
-                                        DateCreate = data.DateCreate,
-                                        SecondaryPassword = data.SecondaryPassword,
-                                        RoleName = p != null ? p.DisplayName : "",
-                                        DeptName = $"{data.IdDepartment}\n{depts.DisplayName}",
-                                        DOB = data.DOB,
-                                        CitizenID = data.CitizenID,
-                                        Nationality = data.Nationality,
-                                        PCName = data.PCName,
-                                        IPAddress = data.IPAddress
-                                    }).ToList();
+          var lsUsers = dm_UserBUS.Instance.GetList();
+            var lsDepts = dm_DeptBUS.Instance.GetList();
+            var lsRoles = dm_RoleBUS.Instance.GetList();
 
-                sourceUsers.DataSource = lsUserManage;
-            }
+            helper.SaveViewInfo();
+
+            var lsUserManage = (from data in lsUsers
+                                join depts in lsDepts on data.IdDepartment equals depts.Id
+                                join roles in lsRoles on data.IdRole equals roles.Id into dtg
+                                from p in dtg.DefaultIfEmpty()
+                                select new UserInfos()
+                                {
+                                    Id = data.Id,
+                                    DisplayName = $"{data.DisplayName}{(!string.IsNullOrEmpty(data.DisplayNameVN) ? $"\n{data.DisplayNameVN}" : "")}",
+                                    IdRole = data.IdRole,
+                                    IdDepartment = data.IdDepartment,
+                                    DateCreate = data.DateCreate,
+                                    SecondaryPassword = data.SecondaryPassword,
+                                    RoleName = p != null ? p.DisplayName : "",
+                                    DeptName = $"{data.IdDepartment}\n{depts.DisplayName}",
+                                    DOB = data.DOB,
+                                    CitizenID = data.CitizenID,
+                                    Nationality = data.Nationality,
+                                    PCName = data.PCName,
+                                    IPAddress = data.IPAddress
+                                }).ToList();
+
+            sourceUsers.DataSource = lsUserManage;
 
             gvData.BestFitColumns();
             helper.LoadViewInfo();
@@ -82,6 +93,9 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManager
 
         private void f401_UserManager_Load(object sender, EventArgs e)
         {
+            IsSysAdmin = AppPermission.Instance.CheckAppPermission(AppPermission.SysAdmin);
+            InitializeControl();
+
             gvData.OptionsEditForm.ShowOnDoubleClick = DevExpress.Utils.DefaultBoolean.False;
             gvData.OptionsEditForm.ShowOnEnterKey = DevExpress.Utils.DefaultBoolean.False;
             gvData.OptionsEditForm.ShowOnF2Key = DevExpress.Utils.DefaultBoolean.False;

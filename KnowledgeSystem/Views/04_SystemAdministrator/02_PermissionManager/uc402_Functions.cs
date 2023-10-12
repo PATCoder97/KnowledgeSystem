@@ -111,21 +111,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
             }
         }
 
-        private void gvRoles_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
-        {
-            dm_Role roles = e.Row as dm_Role;
-
-            using (var db = new DBDocumentManagementSystemEntities())
-            {
-                db.dm_Role.AddOrUpdate(roles);
-                db.SaveChanges();
-            }
-
-            XtraMessageBox.Show("Thao tác sửa thành công!", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            LoadData();
-        }
-
         private void btnNewRole_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             f402_RoleInfo fInfo = new f402_RoleInfo();

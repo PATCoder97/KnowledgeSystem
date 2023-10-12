@@ -42,7 +42,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         #region parameters
 
-        dm_UserBUS _dm_UserBUS = new dm_UserBUS();
         dm_GroupUserBUS _dm_GroupUserBUS = new dm_GroupUserBUS();
 
         BindingSource sourceAttachments = new BindingSource();
@@ -141,7 +140,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             {
                 // Initialize lists
                 lsKnowledgeTypes = db.dt207_Type.ToList();
-                lsUsers = _dm_UserBUS.GetList();
+                lsUsers = dm_UserBUS.Instance.GetList();
                 lsGroups = dm_GroupBUS.Instance.GetList();
                 lsGroupUser = _dm_GroupUserBUS.GetList();
 

@@ -26,7 +26,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             InitializeComponent();
         }
 
-        dm_UserBUS _dm_UserBUS = new dm_UserBUS();
         dm_GroupUserBUS _dm_GroupUserBUS = new dm_GroupUserBUS();
         dt207_BaseBUS _dt207_BaseBUS = new dt207_BaseBUS();
         dt207_DocProcessingBUS _dt207_DocProgressBUS = new dt207_DocProcessingBUS();
@@ -66,7 +65,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
             var lsDocProgresses = _dt207_DocProgressBUS.GetListByUIDProcess(TPConfigs.LoginUser.Id);
             var lsKnowledgeBases = _dt207_BaseBUS.GetList();
-            var lsUsers = _dm_UserBUS.GetList();
+            var lsUsers = dm_UserBUS.Instance.GetList();
             lsBaseProcessInfos = _dt207_DocProgressInfoBUS.GetList();
 
             var lsDocProgressInfosByLoginId =

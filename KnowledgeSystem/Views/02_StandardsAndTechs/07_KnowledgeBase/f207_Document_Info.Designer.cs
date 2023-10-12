@@ -102,11 +102,6 @@
             this.txbNameEN = new DevExpress.XtraEditors.TextEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.controlgroupDocument = new DevExpress.XtraLayout.TabbedControlGroup();
-            this.lcgHistoryEdit = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.lcgProgress = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem14 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcgInfo = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcType = new DevExpress.XtraLayout.LayoutControlItem();
@@ -116,6 +111,9 @@
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcKeyword = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem16 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcgProgress = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem14 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcgFiles = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -124,6 +122,8 @@
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
+            this.lcgHistoryEdit = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcProgress = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -151,11 +151,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txbNameEN.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.controlgroupDocument)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcgHistoryEdit)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcgProgress)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem14)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcgInfo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcType)).BeginInit();
@@ -165,6 +160,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcKeyword)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem16)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcgProgress)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem14)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcgFiles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
@@ -173,6 +171,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcgHistoryEdit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcProgress)).BeginInit();
             this.SuspendLayout();
             // 
@@ -593,6 +593,7 @@
             this.btnAddFile.Appearance.Options.UseForeColor = true;
             this.btnAddFile.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
             this.btnAddFile.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnAddFile.ImageOptions.SvgImage")));
+            this.btnAddFile.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnAddFile.Location = new System.Drawing.Point(24, 74);
             this.btnAddFile.Name = "btnAddFile";
             this.btnAddFile.Size = new System.Drawing.Size(104, 36);
@@ -1013,7 +1014,7 @@
             this.controlgroupDocument.AppearanceTabPage.HeaderActive.Options.UseForeColor = true;
             this.controlgroupDocument.Location = new System.Drawing.Point(0, 23);
             this.controlgroupDocument.Name = "controlgroupDocument";
-            this.controlgroupDocument.SelectedTabPage = this.lcgInfo;
+            this.controlgroupDocument.SelectedTabPage = this.lcgFiles;
             this.controlgroupDocument.Size = new System.Drawing.Size(1056, 391);
             this.controlgroupDocument.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.lcgProgress,
@@ -1023,52 +1024,6 @@
             this.lcgHistoryEdit});
             this.controlgroupDocument.Text = "信息";
             this.controlgroupDocument.SelectedPageChanged += new DevExpress.XtraLayout.LayoutTabPageChangedEventHandler(this.controlgroupDocument_SelectedPageChanged);
-            // 
-            // lcgHistoryEdit
-            // 
-            this.lcgHistoryEdit.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem9});
-            this.lcgHistoryEdit.Location = new System.Drawing.Point(0, 0);
-            this.lcgHistoryEdit.Name = "lcgHistoryEdit";
-            this.lcgHistoryEdit.Size = new System.Drawing.Size(1032, 340);
-            this.lcgHistoryEdit.Text = "變更歷史";
-            // 
-            // layoutControlItem9
-            // 
-            this.layoutControlItem9.Control = this.gcEditHistory;
-            this.layoutControlItem9.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem9.Name = "layoutControlItem9";
-            this.layoutControlItem9.Size = new System.Drawing.Size(1032, 340);
-            this.layoutControlItem9.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem9.TextVisible = false;
-            // 
-            // lcgProgress
-            // 
-            this.lcgProgress.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem14,
-            this.layoutControlItem15});
-            this.lcgProgress.Location = new System.Drawing.Point(0, 0);
-            this.lcgProgress.Name = "lcgProgress";
-            this.lcgProgress.Size = new System.Drawing.Size(1032, 340);
-            this.lcgProgress.Text = "核簽流程";
-            // 
-            // layoutControlItem14
-            // 
-            this.layoutControlItem14.Control = this.stepProgressDoc;
-            this.layoutControlItem14.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem14.Name = "layoutControlItem14";
-            this.layoutControlItem14.Size = new System.Drawing.Size(1032, 104);
-            this.layoutControlItem14.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem14.TextVisible = false;
-            // 
-            // layoutControlItem15
-            // 
-            this.layoutControlItem15.Control = this.gcHistoryProcess;
-            this.layoutControlItem15.Location = new System.Drawing.Point(0, 104);
-            this.layoutControlItem15.Name = "layoutControlItem15";
-            this.layoutControlItem15.Size = new System.Drawing.Size(1032, 236);
-            this.layoutControlItem15.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem15.TextVisible = false;
             // 
             // lcgInfo
             // 
@@ -1217,6 +1172,34 @@
             this.layoutControlItem16.Text = "英文名稱";
             this.layoutControlItem16.TextSize = new System.Drawing.Size(80, 19);
             // 
+            // lcgProgress
+            // 
+            this.lcgProgress.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem14,
+            this.layoutControlItem15});
+            this.lcgProgress.Location = new System.Drawing.Point(0, 0);
+            this.lcgProgress.Name = "lcgProgress";
+            this.lcgProgress.Size = new System.Drawing.Size(1032, 340);
+            this.lcgProgress.Text = "核簽流程";
+            // 
+            // layoutControlItem14
+            // 
+            this.layoutControlItem14.Control = this.stepProgressDoc;
+            this.layoutControlItem14.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem14.Name = "layoutControlItem14";
+            this.layoutControlItem14.Size = new System.Drawing.Size(1032, 104);
+            this.layoutControlItem14.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem14.TextVisible = false;
+            // 
+            // layoutControlItem15
+            // 
+            this.layoutControlItem15.Control = this.gcHistoryProcess;
+            this.layoutControlItem15.Location = new System.Drawing.Point(0, 104);
+            this.layoutControlItem15.Name = "layoutControlItem15";
+            this.layoutControlItem15.Size = new System.Drawing.Size(1032, 236);
+            this.layoutControlItem15.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem15.TextVisible = false;
+            // 
             // lcgFiles
             // 
             this.lcgFiles.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
@@ -1312,6 +1295,24 @@
             this.emptySpaceItem3.Size = new System.Drawing.Size(924, 41);
             this.emptySpaceItem3.TextSize = new System.Drawing.Size(0, 0);
             // 
+            // lcgHistoryEdit
+            // 
+            this.lcgHistoryEdit.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem9});
+            this.lcgHistoryEdit.Location = new System.Drawing.Point(0, 0);
+            this.lcgHistoryEdit.Name = "lcgHistoryEdit";
+            this.lcgHistoryEdit.Size = new System.Drawing.Size(1032, 340);
+            this.lcgHistoryEdit.Text = "變更歷史";
+            // 
+            // layoutControlItem9
+            // 
+            this.layoutControlItem9.Control = this.gcEditHistory;
+            this.layoutControlItem9.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem9.Name = "layoutControlItem9";
+            this.layoutControlItem9.Size = new System.Drawing.Size(1032, 340);
+            this.layoutControlItem9.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem9.TextVisible = false;
+            // 
             // lcProgress
             // 
             this.lcProgress.Control = this.lbProgress;
@@ -1366,11 +1367,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txbNameEN.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.controlgroupDocument)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcgHistoryEdit)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcgProgress)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem14)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcgInfo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcType)).EndInit();
@@ -1380,6 +1376,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcKeyword)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem16)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcgProgress)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem14)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcgFiles)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
@@ -1388,6 +1387,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcgHistoryEdit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcProgress)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

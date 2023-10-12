@@ -23,9 +23,7 @@ namespace KnowledgeSystem.Views._00_Generals
         {
             InitializeComponent();
         }
-
-        dm_UserBUS _dm_UserBUS = new dm_UserBUS();
-
+                
         private void fLogin_Load(object sender, EventArgs e)
         {
             BackgroundImage = Image.FromFile(Path.Combine(TPConfigs.ImagesPath, "loginscreen.png"));
@@ -59,7 +57,7 @@ namespace KnowledgeSystem.Views._00_Generals
                         bool isLoginSuccessful = DomainVNFPG.Instance.CheckLoginDomain(_userID, _password);
                         if (isLoginSuccessful)
                         {
-                            _userLogin = _dm_UserBUS.GetUserByUID(_userID);
+                            _userLogin = dm_UserBUS.Instance.GeItemById(_userID);
                             if (_userLogin == null)
                             {
                                 string[] displayNameFHS = userNameByDomain.Split('/');
@@ -74,18 +72,18 @@ namespace KnowledgeSystem.Views._00_Generals
                                     DateCreate = DateTime.Now,
                                 };
 
-                                _dm_UserBUS.Create(_userLogin);
+                                dm_UserBUS.Instance.Add(_userLogin);
                             }
                         }
                     }
                     else
                     {
-                        _userLogin = _dm_UserBUS.CheckLogin(_userID, _password);
+                        _userLogin = dm_UserBUS.Instance.CheckLogin(_userID, _password);
                     }
                 }
                 else
                 {
-                    _userLogin = _dm_UserBUS.CheckLogin(_userID, _password);
+                    _userLogin = dm_UserBUS.Instance.CheckLogin(_userID, _password);
                 }
 
                 if (_userLogin != null)
@@ -99,7 +97,7 @@ namespace KnowledgeSystem.Views._00_Generals
                     _userLogin.SecondaryPassword = txbPassword.Text;
                     _userLogin.PCName = PCInfoHelper.Instance.GetPCName();
                     _userLogin.IPAddress = PCInfoHelper.Instance.GetIPAddress();
-                    _dm_UserBUS.Update(_userLogin);
+                    dm_UserBUS.Instance.AddOrUpdate(_userLogin);
 
                     Close();
                 }

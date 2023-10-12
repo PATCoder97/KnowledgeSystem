@@ -12,8 +12,6 @@ namespace KnowledgeSystem.Views._00_Generals
             InitializeComponent();
         }
 
-        dm_UserBUS _dm_UserBUS = new dm_UserBUS();
-
         private void btnConfirm_Click(object sender, EventArgs e)
         {
             NewPassword = string.Empty;
@@ -24,7 +22,7 @@ namespace KnowledgeSystem.Views._00_Generals
 
             if (newPassword1 != newPassword2) return;
 
-            var _userCheck = _dm_UserBUS.CheckLogin(TPConfigs.LoginUser.Id, oldPassword);
+            var _userCheck = dm_UserBUS.Instance.CheckLogin(TPConfigs.LoginUser.Id, oldPassword);
             if (_userCheck != default)
             {
                 NewPassword = newPassword2;

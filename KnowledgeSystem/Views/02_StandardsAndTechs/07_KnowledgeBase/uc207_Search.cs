@@ -11,6 +11,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -24,13 +25,13 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         public uc207_Search()
         {
             InitializeComponent();
+            InitializeIcon();
             helper = new RefreshHelper(gvData, "Id");
         }
 
         #region parameters
 
         // Khai báo BUS
-        dm_UserBUS _dm_UserBUS = new dm_UserBUS();
         dt207_BaseBUS _dt207_BaseBUS = new dt207_BaseBUS();
         dt207_TypeBUS _dt207_TypeBUS = new dt207_TypeBUS();
         dt207_TypeHisGetFileBUS _dt207_TypeHisGetFileBUS = new dt207_TypeHisGetFileBUS();
@@ -62,6 +63,13 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         #region methods
 
+        private void InitializeIcon()
+        {
+            btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
+            btnSearch.ImageOptions.SvgImage = TPSvgimages.Search;
+            btnSumNotifyApproval.ImageOptions.SvgImage = TPSvgimages.Approval;
+        }
+
         private void LoadData()
         {
             // Lấy các thông tin liên quan
@@ -71,7 +79,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             helper.SaveViewInfo();
 
             // Khai báo các danh sách liên quan
-            List<dm_User> lsUsers = _dm_UserBUS.GetList();
+            List<dm_User> lsUsers = dm_UserBUS.Instance.GetList();
             List<dt207_Type> lsKnowledgeTypes = _dt207_TypeBUS.GetList();
             List<dt207_TypeHisGetFile> lsTypeHisGetFile = _dt207_TypeHisGetFileBUS.GetList();
             List<dt207_Base> lsKnowledgeBase = new List<dt207_Base>();
@@ -268,7 +276,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         private void uc207_Search_Load(object sender, EventArgs e)
         {
             txbKeywords.Properties.NullValuePrompt = "請輸入您要查找的信息";
-            btnSumNotifyApproval.ImageOptions.SvgImage = TPSvgimages.Approval;
 
             gcData.DataSource = sourceKnowledge;
 

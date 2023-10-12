@@ -45,10 +45,13 @@ namespace KnowledgeSystem.Configs
 
         public const int SysAdmin = 17;
         public const int Mod = 7;
+        public const int KnowledgeMain = 1;
 
         // 207
-        public const int KnowledgeMain = 1;
         public const int DataStatistics = 6;
         public const int CustomerInfos = 19;
+
+        // 401
+        //public const int P401AllDept = 1;
     }
 }

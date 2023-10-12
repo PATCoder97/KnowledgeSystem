@@ -23,9 +23,7 @@ namespace KnowledgeSystem.Views._00_Generals
         }
 
         sys_StaticValueBUS _sys_StaticValueBUS = new sys_StaticValueBUS();
-        dm_UserBUS _dm_UserBUS = new dm_UserBUS();
-        //dm_DeptBUS _dm_DeptBUS = new dm_DeptBUS();
-
+       
         TileItemElement elementName = new TileItemElement();
         TileItemElement elementIdDept = new TileItemElement();
         TileItemElement elementGrade = new TileItemElement();
@@ -76,7 +74,7 @@ namespace KnowledgeSystem.Views._00_Generals
             Location = new Point((Screen.PrimaryScreen.WorkingArea.Width - this.Width) / 2,
                            (Screen.PrimaryScreen.WorkingArea.Height - this.Height) / 2);
 
-            var _userLogin = _dm_UserBUS.GetUserByUID(TPConfigs.LoginUser.Id);
+            var _userLogin = dm_UserBUS.Instance.GeItemById(TPConfigs.LoginUser.Id);
             string userName = _userLogin.DisplayName;
             string idDept = _userLogin.IdDepartment;
             var gradeName = dm_DeptBUS.Instance.GetItemById(idDept.Substring(0, 2)).DisplayName;
@@ -104,7 +102,7 @@ namespace KnowledgeSystem.Views._00_Generals
                 return;
             }
 
-            _dm_UserBUS.ChangePass(TPConfigs.LoginUser.Id, newPassword);
+            dm_UserBUS.Instance.ChangePass(TPConfigs.LoginUser.Id, newPassword);
             XtraMessageBox.Show("您的密碼已更新！", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 

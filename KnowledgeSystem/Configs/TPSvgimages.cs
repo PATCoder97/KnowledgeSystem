@@ -25,5 +25,9 @@ namespace KnowledgeSystem.Configs
         public static SvgImage Confirm = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_ok.svg"));
         public static SvgImage AddUserGroup = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_add_User_Group.svg"));
         public static SvgImage Approval = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_signature.svg"));
+        public static SvgImage EmailSend = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_email_send.svg"));
+        public static SvgImage Progress = SvgImage.FromFile(Path.Combine(ImagesPath, "StepProcess.svg"));
+        public static SvgImage Close = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_close.svg"));
+        public static SvgImage Search = SvgImage.FromFile(Path.Combine(ImagesPath, "Search_more.svg"));
     }
 }

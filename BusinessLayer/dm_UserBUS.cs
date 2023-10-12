@@ -12,7 +12,17 @@ namespace BusinessLayer
 {
     public class dm_UserBUS
     {
-        TPLogger logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName);
+        TPLogger logger;
+
+        private static dm_UserBUS instance;
+
+        public static dm_UserBUS Instance
+        {
+            get { if (instance == null) instance = new dm_UserBUS(); return instance; }
+            private set { instance = value; }
+        }
+
+        private dm_UserBUS() { logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName); }
 
         public List<dm_User> GetList()
         {
@@ -30,7 +40,23 @@ namespace BusinessLayer
             }
         }
 
-        public dm_User GetUserByUID(string _UID)
+        public List<dm_User> GetListByDept(string _idDept)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dm_User.Where(r => r.IdDepartment == _idDept).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw new Exception(ex.ToString());
+            }
+        }
+
+        public dm_User GeItemById(string _UID)
         {
             try
             {
@@ -63,7 +89,7 @@ namespace BusinessLayer
             }
         }
 
-        public bool Create(dm_User _user)
+        public bool Add(dm_User _user)
         {
             try
             {
@@ -81,7 +107,7 @@ namespace BusinessLayer
             }
         }
 
-        public bool Update(dm_User _user)
+        public bool AddOrUpdate(dm_User _user)
         {
             try
             {
@@ -99,7 +125,7 @@ namespace BusinessLayer
             }
         }
 
-        public bool Delete(string _idUser)
+        public bool Remove(string _idUser)
         {
             try
             {

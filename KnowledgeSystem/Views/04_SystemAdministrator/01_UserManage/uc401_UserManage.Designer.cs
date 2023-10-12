@@ -43,8 +43,8 @@
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColPCName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColIP = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
@@ -112,8 +112,8 @@
             this.gridColumn8,
             this.gridColumn9,
             this.gridColumn10,
-            this.gridColumn11,
-            this.gridColumn12});
+            this.gColPCName,
+            this.gColIP});
             this.gvData.DetailHeight = 377;
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
@@ -125,6 +125,8 @@
             // 
             // gridColumn1
             // 
+            this.gridColumn1.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn1.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn1.Caption = "人員代號";
             this.gridColumn1.FieldName = "Id";
             this.gridColumn1.MinWidth = 23;
@@ -183,6 +185,8 @@
             // 
             // gridColumn5
             // 
+            this.gridColumn5.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn5.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn5.Caption = "日期創建";
             this.gridColumn5.FieldName = "DateCreate";
             this.gridColumn5.MinWidth = 23;
@@ -193,6 +197,8 @@
             // 
             // gridColumn8
             // 
+            this.gridColumn8.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn8.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn8.Caption = "出生日期";
             this.gridColumn8.FieldName = "DOB";
             this.gridColumn8.Name = "gridColumn8";
@@ -215,21 +221,21 @@
             this.gridColumn10.Visible = true;
             this.gridColumn10.VisibleIndex = 7;
             // 
-            // gridColumn11
+            // gColPCName
             // 
-            this.gridColumn11.Caption = "電腦名稱";
-            this.gridColumn11.FieldName = "PCName";
-            this.gridColumn11.Name = "gridColumn11";
-            this.gridColumn11.Visible = true;
-            this.gridColumn11.VisibleIndex = 8;
+            this.gColPCName.Caption = "電腦名稱";
+            this.gColPCName.FieldName = "PCName";
+            this.gColPCName.Name = "gColPCName";
+            this.gColPCName.Visible = true;
+            this.gColPCName.VisibleIndex = 8;
             // 
-            // gridColumn12
+            // gColIP
             // 
-            this.gridColumn12.Caption = "IP位址";
-            this.gridColumn12.FieldName = "IPAddress";
-            this.gridColumn12.Name = "gridColumn12";
-            this.gridColumn12.Visible = true;
-            this.gridColumn12.VisibleIndex = 9;
+            this.gColIP.Caption = "IP位址";
+            this.gColIP.FieldName = "IPAddress";
+            this.gColIP.Name = "gColIP";
+            this.gColIP.Visible = true;
+            this.gColIP.VisibleIndex = 9;
             // 
             // Root
             // 
@@ -401,7 +407,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
+        private DevExpress.XtraGrid.Columns.GridColumn gColPCName;
+        private DevExpress.XtraGrid.Columns.GridColumn gColIP;
     }
 }
