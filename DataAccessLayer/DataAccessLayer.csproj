@@ -65,6 +65,9 @@
     <Compile Include="dm_StepProgress.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
+    <Compile Include="dm_UserRole.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
     <Compile Include="dt207_Attachment.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>

@@ -55,6 +55,7 @@
             this.gvChooseRole = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn21 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.txbUserId = new DevExpress.XtraEditors.ButtonEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -67,7 +68,6 @@
             this.lcRole = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.txbUserId = new DevExpress.XtraEditors.ButtonEdit();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -84,6 +84,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txbCreate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcChooseRole)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvChooseRole)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbUserId.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
@@ -96,7 +97,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcRole)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbUserId.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // barManagerTP
@@ -229,7 +229,8 @@
             this.gcAllRole.MainView = this.gvAllRole;
             this.gcAllRole.MenuManager = this.barManagerTP;
             this.gcAllRole.Name = "gcAllRole";
-            this.gcAllRole.Size = new System.Drawing.Size(293, 286);
+            this.gcAllRole.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
+            this.gcAllRole.Size = new System.Drawing.Size(290, 286);
             this.gcAllRole.TabIndex = 8;
             this.gcAllRole.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvAllRole});
@@ -319,11 +320,14 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbbDept.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("DisplayName", "Name1")});
+            this.cbbDept.Properties.HighlightedItemStyle = DevExpress.XtraEditors.HighlightStyle.Standard;
             this.cbbDept.Properties.NullText = "";
+            this.cbbDept.Properties.SearchMode = DevExpress.XtraEditors.Controls.SearchMode.AutoSearch;
             this.cbbDept.Properties.ShowHeader = false;
             this.cbbDept.Size = new System.Drawing.Size(209, 28);
             this.cbbDept.StyleController = this.layoutControl1;
             this.cbbDept.TabIndex = 7;
+            this.cbbDept.AutoSearch += new DevExpress.XtraEditors.Controls.LookUpEditAutoSearchEventHandler(this.cbbDept_AutoSearch);
             // 
             // txbDOB
             // 
@@ -399,10 +403,10 @@
             // 
             // gcChooseRole
             // 
-            this.gcChooseRole.Location = new System.Drawing.Point(317, 166);
+            this.gcChooseRole.Location = new System.Drawing.Point(320, 166);
             this.gcChooseRole.MainView = this.gvChooseRole;
             this.gcChooseRole.Name = "gcChooseRole";
-            this.gcChooseRole.Size = new System.Drawing.Size(294, 286);
+            this.gcChooseRole.Size = new System.Drawing.Size(291, 286);
             this.gcChooseRole.TabIndex = 8;
             this.gcChooseRole.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvChooseRole});
@@ -446,6 +450,25 @@
             this.gridColumn21.Name = "gridColumn21";
             this.gridColumn21.Visible = true;
             this.gridColumn21.VisibleIndex = 1;
+            // 
+            // txbUserId
+            // 
+            this.txbUserId.Location = new System.Drawing.Point(104, 12);
+            this.txbUserId.MenuManager = this.barManagerTP;
+            this.txbUserId.Name = "txbUserId";
+            this.txbUserId.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbUserId.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.txbUserId.Properties.Appearance.Options.UseFont = true;
+            this.txbUserId.Properties.Appearance.Options.UseForeColor = true;
+            this.txbUserId.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Search)});
+            this.txbUserId.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.RegularMaskManager));
+            this.txbUserId.Properties.MaskSettings.Set("MaskManagerSignature", "ignoreMaskBlank=True");
+            this.txbUserId.Properties.MaskSettings.Set("mask", "[A-Z0-9]{10}");
+            this.txbUserId.Size = new System.Drawing.Size(209, 28);
+            this.txbUserId.StyleController = this.layoutControl1;
+            this.txbUserId.TabIndex = 6;
+            this.txbUserId.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txbUserId_ButtonClick);
             // 
             // Root
             // 
@@ -640,6 +663,7 @@
             this.layoutControlItem9.Control = this.gcAllRole;
             this.layoutControlItem9.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem9.Name = "layoutControlItem9";
+            this.layoutControlItem9.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 5, 2, 2);
             this.layoutControlItem9.Size = new System.Drawing.Size(297, 290);
             this.layoutControlItem9.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem9.TextVisible = false;
@@ -651,26 +675,11 @@
             this.layoutControlItem10.CustomizationFormText = "layoutControlItem9";
             this.layoutControlItem10.Location = new System.Drawing.Point(297, 0);
             this.layoutControlItem10.Name = "layoutControlItem10";
+            this.layoutControlItem10.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 2, 2, 2);
             this.layoutControlItem10.Size = new System.Drawing.Size(298, 290);
             this.layoutControlItem10.Text = "layoutControlItem9";
             this.layoutControlItem10.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem10.TextVisible = false;
-            // 
-            // txbUserId
-            // 
-            this.txbUserId.Location = new System.Drawing.Point(104, 12);
-            this.txbUserId.MenuManager = this.barManagerTP;
-            this.txbUserId.Name = "txbUserId";
-            this.txbUserId.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txbUserId.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.txbUserId.Properties.Appearance.Options.UseFont = true;
-            this.txbUserId.Properties.Appearance.Options.UseForeColor = true;
-            this.txbUserId.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Search)});
-            this.txbUserId.Size = new System.Drawing.Size(209, 28);
-            this.txbUserId.StyleController = this.layoutControl1;
-            this.txbUserId.TabIndex = 6;
-            this.txbUserId.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txbUserId_ButtonClick);
             // 
             // f401_UserInfo
             // 
@@ -703,6 +712,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txbCreate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcChooseRole)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvChooseRole)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbUserId.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
@@ -715,7 +725,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcRole)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbUserId.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

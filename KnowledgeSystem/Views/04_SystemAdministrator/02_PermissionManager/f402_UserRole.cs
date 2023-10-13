@@ -6,6 +6,7 @@ using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraSpreadsheet.API.Native.Implementation;
 using KnowledgeSystem.Configs;
 using System;
 using System.Collections.Generic;
@@ -73,6 +74,12 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
             switch (_eventInfo)
             {
                 case EventFormInfo.View:
+                    var lsUserRoles = dm_UserRoleBUS.Instance.GetListByRole(_idRole).Select(r => r.IdUser).ToList();
+                    lsChooseUsers.AddRange(lsAllUsers.Where(a => lsUserRoles.Exists(b => b == a.Id)));
+                    lsAllUsers.RemoveAll(a => lsUserRoles.Exists(b => b == a.Id));
+
+                    gcAllUser.RefreshDataSource();
+                    gcChooseUser.RefreshDataSource();
                     break;
                 case EventFormInfo.Update:
                     break;
@@ -115,7 +122,14 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            List<dm_UserRole> lsUserRolesAdd = lsChooseUsers.Select(r => new dm_UserRole { IdRole = _idRole, IdUser = r.Id }).ToList();
+            var result1 = dm_UserRoleBUS.Instance.RemoveRangeByRole(_idRole);
+            var result2 = dm_UserRoleBUS.Instance.AddRange(lsUserRolesAdd);
 
+            if (result1 && result2)
+            {
+                Close();
+            }
         }
     }
 }

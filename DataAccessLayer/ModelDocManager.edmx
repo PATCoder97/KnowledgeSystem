@@ -94,6 +94,14 @@
           <Property Name="IPAddress" Type="varchar" MaxLength="15" />
           <Property Name="IdRole" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="dm_UserRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdUser" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="IdRole" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="dt207_Attachment">
           <Key>
             <PropertyRef Name="Id" />
@@ -265,6 +273,7 @@
           <EntitySet Name="dm_Role" EntityType="Self.dm_Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dm_StepProgress" EntityType="Self.dm_StepProgress" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dm_User" EntityType="Self.dm_User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dm_UserRole" EntityType="Self.dm_UserRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt207_Attachment" EntityType="Self.dt207_Attachment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt207_Attachment_BAK" EntityType="Self.dt207_Attachment_BAK" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt207_Base" EntityType="Self.dt207_Base" Schema="dbo" store:Type="Tables" />
@@ -310,6 +319,7 @@
           <EntitySet Name="dt207_DocProcessingInfo" EntityType="DBDocumentManagementSystemModel.dt207_DocProcessingInfo" />
           <EntitySet Name="dm_Group" EntityType="DBDocumentManagementSystemModel.dm_Group" />
           <EntitySet Name="dm_Progress" EntityType="DBDocumentManagementSystemModel.dm_Progress" />
+          <EntitySet Name="dm_UserRole" EntityType="DBDocumentManagementSystemModel.dm_UserRole" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -560,6 +570,14 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="IdDept" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="dm_UserRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdUser" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdRole" Type="Int32" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -837,6 +855,15 @@
               <MappingFragment StoreEntitySet="dm_Progress">
                 <ScalarProperty Name="IdDept" ColumnName="IdDept" />
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dm_UserRole">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_UserRole">
+              <MappingFragment StoreEntitySet="dm_UserRole">
+                <ScalarProperty Name="IdRole" ColumnName="IdRole" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

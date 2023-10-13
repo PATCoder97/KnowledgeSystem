@@ -30,6 +30,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
         public EventFormInfo _eventInfo = EventFormInfo.Create;
         public dm_User _user = null;
         string _oldUserInfo = "";
+        bool IsSysAdmin = false;
 
         List<dm_Role> lsAllRoles;
         List<dm_Role> lsChooseRoles = new List<dm_Role>();
@@ -59,6 +60,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             txbUserId.Enabled = false;
             txbCreate.Enabled = false;
             txbUserId.ReadOnly = false;
+            lcRole.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            Size = new Size(579, 230);
 
             switch (_eventInfo)
             {
@@ -70,8 +73,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
                     btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                     btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
 
-                    lcRole.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-                    Size = new Size(579, 230);
                     EnabledController();
                     break;
                 case EventFormInfo.Update:
@@ -83,6 +84,13 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
                     btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                     btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+
+                    if (IsSysAdmin)
+                    {
+                        lcRole.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                        Size = new Size(579, 530);
+                    }
+
                     EnabledController();
                     break;
                 case EventFormInfo.Delete:
@@ -105,10 +113,17 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
                 default:
                     break;
             }
+
+            Rectangle screenBounds = Screen.PrimaryScreen.Bounds;
+            int x = screenBounds.Width / 2 - Width / 2;
+            int y = screenBounds.Height / 2 - Height / 2;
+            Location = new Point(x, y);
         }
 
         private void f401_UserInfo_Load(object sender, EventArgs e)
         {
+            IsSysAdmin = AppPermission.Instance.CheckAppPermission(AppPermission.SysAdmin);
+
             LockControl();
 
             var lsDepts = dm_DeptBUS.Instance.GetList().Select(r => new dm_Departments { Id = r.Id, DisplayName = $"{r.Id,-5}{r.DisplayName}" }).ToList();
@@ -148,6 +163,14 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
                     cbbNationality.EditValue = _user.Nationality;
 
                     _oldUserInfo = JsonConvert.SerializeObject(_user);
+
+                    // Load Role
+                    var lsUserRoles = dm_UserRoleBUS.Instance.GetListByUID(_user.Id).Select(r => r.IdRole).ToList();
+                    lsChooseRoles.AddRange(lsAllRoles.Where(a => lsUserRoles.Exists(b => b == a.Id)));
+                    lsAllRoles.RemoveAll(a => lsUserRoles.Exists(b => b == a.Id));
+
+                    gcAllRole.RefreshDataSource();
+                    gcChooseRole.RefreshDataSource();
                     break;
             }
         }
@@ -198,6 +221,14 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
                         {
                             resultUpdate = dm_UserBUS.Instance.AddOrUpdate(_user);
                             result = !resultUpdate ? false : result;
+                        }
+
+                        if (IsSysAdmin)
+                        {
+                            var resultDel = dm_UserRoleBUS.Instance.RemoveRangeByUID(_user.Id);
+
+                            var lsUserRolesAdd = lsChooseRoles.Select(r => new dm_UserRole { IdUser = _user.Id, IdRole = r.Id }).ToList();
+                            var resultAdd = dm_UserRoleBUS.Instance.AddRange(lsUserRolesAdd);
                         }
                         break;
                     case EventFormInfo.Delete:
@@ -264,6 +295,11 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             string[] displayNameFHS = userNameByDomain.Split('/');
             cbbDept.EditValue = displayNameFHS[0].Replace("LG", string.Empty);
             txbUserNameTW.EditValue = displayNameFHS[1];
+        }
+
+        private void cbbDept_AutoSearch(object sender, DevExpress.XtraEditors.Controls.LookUpEditAutoSearchEventArgs e)
+        {
+            e.ClearHighlight();
         }
     }
 }

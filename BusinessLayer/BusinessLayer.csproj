@@ -60,6 +60,7 @@
     <Compile Include="dm_RoleBUS.cs" />
     <Compile Include="dm_StepProgressBUS.cs" />
     <Compile Include="dm_UserBUS.cs" />
+    <Compile Include="dm_UserRoleBUS.cs" />
     <Compile Include="dt207_AttachmentBUS.cs" />
     <Compile Include="dt207_Attachment_BAKBUS.cs" />
     <Compile Include="dt207_BaseBUS.cs" />

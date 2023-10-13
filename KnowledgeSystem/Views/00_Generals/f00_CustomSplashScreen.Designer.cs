@@ -61,7 +61,7 @@
             this.lbStartDate.BackColor = System.Drawing.Color.Transparent;
             this.lbStartDate.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbStartDate.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.lbStartDate.Location = new System.Drawing.Point(114, 236);
+            this.lbStartDate.Location = new System.Drawing.Point(131, 236);
             this.lbStartDate.Name = "lbStartDate";
             this.lbStartDate.Size = new System.Drawing.Size(20, 19);
             this.lbStartDate.TabIndex = 13;
@@ -74,7 +74,7 @@
             this.lbSupporter.BackColor = System.Drawing.Color.Transparent;
             this.lbSupporter.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbSupporter.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.lbSupporter.Location = new System.Drawing.Point(114, 212);
+            this.lbSupporter.Location = new System.Drawing.Point(131, 212);
             this.lbSupporter.Name = "lbSupporter";
             this.lbSupporter.Size = new System.Drawing.Size(20, 19);
             this.lbSupporter.TabIndex = 11;
@@ -87,7 +87,7 @@
             this.lbVersion.BackColor = System.Drawing.Color.Transparent;
             this.lbVersion.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbVersion.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.lbVersion.Location = new System.Drawing.Point(114, 164);
+            this.lbVersion.Location = new System.Drawing.Point(131, 164);
             this.lbVersion.Name = "lbVersion";
             this.lbVersion.Size = new System.Drawing.Size(20, 19);
             this.lbVersion.TabIndex = 10;
@@ -100,7 +100,7 @@
             this.lbOwner.BackColor = System.Drawing.Color.Transparent;
             this.lbOwner.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbOwner.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.lbOwner.Location = new System.Drawing.Point(114, 188);
+            this.lbOwner.Location = new System.Drawing.Point(131, 188);
             this.lbOwner.Name = "lbOwner";
             this.lbOwner.Size = new System.Drawing.Size(20, 19);
             this.lbOwner.TabIndex = 12;
@@ -128,9 +128,9 @@
             this.label3.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.label3.Location = new System.Drawing.Point(21, 212);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(72, 19);
+            this.label3.Size = new System.Drawing.Size(114, 19);
             this.label3.TabIndex = 15;
-            this.label3.Text = "支持者";
+            this.label3.Text = "軟體管理員";
             this.label3.UseWaitCursor = true;
             // 
             // label2
