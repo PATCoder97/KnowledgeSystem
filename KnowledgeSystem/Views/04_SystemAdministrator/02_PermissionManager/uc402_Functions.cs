@@ -118,6 +118,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
             fInfo._eventInfo = EventFormInfo.Create;
             fInfo.ShowDialog();
 
+            LoadData();
         }
 
         private void gvRoles_DoubleClick(object sender, EventArgs e)
@@ -147,6 +148,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
             fInfo._formName = "功能";
             fInfo._eventInfo = EventFormInfo.Create;
             fInfo.ShowDialog();
+            LoadData();
         }
 
         private void treeFunctions_DoubleClick(object sender, EventArgs e)

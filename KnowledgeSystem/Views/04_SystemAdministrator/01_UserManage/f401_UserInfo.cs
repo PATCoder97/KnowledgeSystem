@@ -1,6 +1,7 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
 using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraSplashScreen;
 using KnowledgeSystem.Configs;
 using Newtonsoft.Json;
@@ -30,6 +31,12 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
         public dm_User _user = null;
         string _oldUserInfo = "";
 
+        List<dm_Role> lsAllRoles;
+        List<dm_Role> lsChooseRoles = new List<dm_Role>();
+
+        BindingSource _sourceAllRole = new BindingSource();
+        BindingSource _sourceChooseRole = new BindingSource();
+
         private void InitializeIcon()
         {
             btnEdit.ImageOptions.SvgImage = TPSvgimages.Edit;
@@ -51,6 +58,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
         {
             txbUserId.Enabled = false;
             txbCreate.Enabled = false;
+            txbUserId.ReadOnly = false;
 
             switch (_eventInfo)
             {
@@ -63,13 +71,15 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
                     btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
 
                     lcRole.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-                    Size = new Size(579, 200);
+                    Size = new Size(579, 230);
                     EnabledController();
                     break;
                 case EventFormInfo.Update:
                     Text = $"更新{_formName}";
 
-                    _oldUserInfo = JsonConvert.SerializeObject(_user);
+                    txbUserId.Enabled = true;
+                    txbUserId.ReadOnly = true;
+
                     btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                     btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
@@ -101,12 +111,22 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
         {
             LockControl();
 
-            var lsDepts = dm_DeptBUS.Instance.GetList();
+            var lsDepts = dm_DeptBUS.Instance.GetList().Select(r => new dm_Departments { Id = r.Id, DisplayName = $"{r.Id,-5}{r.DisplayName}" }).ToList();
             cbbDept.Properties.DataSource = lsDepts;
             cbbDept.Properties.DisplayMember = "DisplayName";
             cbbDept.Properties.ValueMember = "Id";
 
             cbbNationality.Properties.Items.AddRange(new string[] { "VN", "TW", "CN" });
+
+            lsAllRoles = dm_RoleBUS.Instance.GetList();
+            _sourceAllRole.DataSource = lsAllRoles;
+            gcAllRole.DataSource = _sourceAllRole;
+
+            _sourceChooseRole.DataSource = lsChooseRoles;
+            gcChooseRole.DataSource = _sourceChooseRole;
+
+            gvAllRole.ReadOnlyGridView();
+            gvChooseRole.ReadOnlyGridView();
 
             switch (_eventInfo)
             {
@@ -115,6 +135,9 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
                     txbCreate.EditValue = DateTime.Today;
                     break;
                 case EventFormInfo.View:
+                    _user.DisplayName = _user.DisplayName.Split('\n')[0];
+                    _user.DateCreate = DateTime.Parse(_user.DateCreate.ToShortDateString());
+
                     txbUserId.EditValue = _user.Id;
                     txbUserNameVN.EditValue = _user.DisplayNameVN;
                     txbUserNameTW.EditValue = _user.DisplayName.Split('\n')[0];
@@ -123,6 +146,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
                     txbDOB.EditValue = _user.DOB;
                     txbCCCD.EditValue = _user.CitizenID;
                     cbbNationality.EditValue = _user.Nationality;
+
+                    _oldUserInfo = JsonConvert.SerializeObject(_user);
                     break;
             }
         }
@@ -143,91 +168,102 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            //var result = false;
-            //string msg = "";
-            //using (var handle = SplashScreenManager.ShowOverlayForm(this))
-            //{
-            //    var _oldDisplayName = _role.DisplayName;
-            //    var _oldDescribe = _role.Describe;
+            var result = false;
+            string msg = "";
+            using (var handle = SplashScreenManager.ShowOverlayForm(this))
+            {
+                _user.DisplayName = txbUserNameTW.EditValue?.ToString();
+                _user.DisplayNameVN = txbUserNameVN.EditValue?.ToString();
+                _user.IdDepartment = cbbDept.EditValue?.ToString();
+                _user.DateCreate = DateTime.Parse(DateTime.Today.ToShortDateString());
+                _user.DOB = txbDOB.DateTime;
+                _user.CitizenID = txbCCCD.EditValue?.ToString();
+                _user.Nationality = cbbNationality.EditValue?.ToString();
 
-            //    _role.DisplayName = txbRole.EditValue?.ToString();
-            //    _role.Describe = txbDescribe.EditValue?.ToString();
-            //    List<dm_FunctionM> lsDataSourch = _sourceFunc.DataSource as List<dm_FunctionM>;
-            //    var lsFunctionUpdates = lsDataSourch.Where(r => r.Status == true).ToList();
+                string _newUserInfo = JsonConvert.SerializeObject(_user);
 
-            //    msg = $"{_role.Id} {_role.DisplayName} {_role.Describe}";
-            //    switch (_eventInfo)
-            //    {
-            //        case EventFormInfo.Create:
-            //            result = dm_RoleBUS.Instance.Add(_role);
+                msg = $"{_user.Id} {_user.DisplayName} {_user.DisplayNameVN}";
+                switch (_eventInfo)
+                {
+                    case EventFormInfo.Create:
+                        result = dm_UserBUS.Instance.Add(_user);
+                        break;
+                    case EventFormInfo.View:
+                        break;
+                    case EventFormInfo.Update:
+                        result = true;
+                        var resultUpdate = false;
 
-            //            foreach (var m in lsFunctionUpdates)
-            //            {
-            //                dm_FunctionRole functionRole = new dm_FunctionRole()
-            //                {
-            //                    IdFunction = m.Id,
-            //                    IdRole = _role.Id
-            //                };
+                        if (_oldUserInfo != _newUserInfo)
+                        {
+                            resultUpdate = dm_UserBUS.Instance.AddOrUpdate(_user);
+                            result = !resultUpdate ? false : result;
+                        }
+                        break;
+                    case EventFormInfo.Delete:
+                        var dialogResult = XtraMessageBox.Show($"Bạn xác nhận muốn xoá quyền hạn: {_user.DisplayName}", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (dialogResult != DialogResult.Yes) return;
 
-            //                _sysFunctionRoleBUS.Add(functionRole);
-            //            }
-            //            break;
-            //        case EventFormInfo.View:
-            //            break;
-            //        case EventFormInfo.Update:
-            //            result = true;
-            //            var resultUpdate = false;
-            //            if (_oldDisplayName != _role.DisplayName || _oldDescribe != _role.Describe)
-            //            {
-            //                resultUpdate = dm_RoleBUS.Instance.AddOrUpdate(_role);
-            //                result = !resultUpdate ? false : result;
-            //            }
+                        result = dm_UserBUS.Instance.Remove(_user.Id);
+                        break;
+                    default:
+                        break;
+                }
+            }
 
-            //            // Xoá các funcRole trước đó
-            //            resultUpdate = _sysFunctionRoleBUS.RemoveByIdRole(_role.Id);
-            //            result = !resultUpdate ? false : result;
+            if (result)
+            {
+                //switch (_eventInfo)
+                //{
+                //    case EventFormInfo.Update:
+                //        logger.Info(_eventInfo.ToString(), msg);
+                //        break;
+                //    case EventFormInfo.Delete:
+                //        logger.Warning(_eventInfo.ToString(), msg);
+                //        break;
+                //}
+                Close();
+            }
+            else
+            {
+                DefaultMsg.MsgErrorDB();
+            }
+        }
 
-            //            foreach (var m in lsFunctionUpdates)
-            //            {
-            //                dm_FunctionRole functionRole = new dm_FunctionRole()
-            //                {
-            //                    IdFunction = m.Id,
-            //                    IdRole = _role.Id
-            //                };
+        private void gvAllRole_DoubleClick(object sender, EventArgs e)
+        {
+            if (_eventInfo != EventFormInfo.Update) return;
 
-            //                resultUpdate = _sysFunctionRoleBUS.Add(functionRole);
-            //                result = !resultUpdate ? false : result;
-            //            }
+            GridView view = gvAllRole;
+            dm_Role _role = view.GetRow(view.FocusedRowHandle) as dm_Role;
 
-            //            break;
-            //        case EventFormInfo.Delete:
-            //            var dialogResult = XtraMessageBox.Show($"Bạn xác nhận muốn xoá quyền hạn: {_role.DisplayName}", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            //            if (dialogResult != DialogResult.Yes) return;
+            lsAllRoles.Remove(_role);
+            view.RefreshData();
+            lsChooseRoles.Add(_role);
+            gvChooseRole.RefreshData();
+        }
 
-            //            result = dm_RoleBUS.Instance.Remove(_role.Id);
-            //            break;
-            //        default:
-            //            break;
-            //    }
-            //}
+        private void gvChooseRole_DoubleClick(object sender, EventArgs e)
+        {
+            if (_eventInfo != EventFormInfo.Update) return;
 
-            //if (result)
-            //{
-            //    //switch (_eventInfo)
-            //    //{
-            //    //    case EventFormInfo.Update:
-            //    //        logger.Info(_eventInfo.ToString(), msg);
-            //    //        break;
-            //    //    case EventFormInfo.Delete:
-            //    //        logger.Warning(_eventInfo.ToString(), msg);
-            //    //        break;
-            //    //}
-            //    Close();
-            //}
-            //else
-            //{
-            //    DefaultMsg.MsgErrorDB();
-            //}
+            GridView view = gvChooseRole;
+            dm_Role _role = view.GetRow(view.FocusedRowHandle) as dm_Role;
+
+            lsChooseRoles.Remove(_role);
+            view.RefreshData();
+            lsAllRoles.Add(_role);
+            gvAllRole.RefreshData();
+        }
+
+        private void txbUserId_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            if (TPConfigs.DomainComputer != DomainVNFPG.domainVNFPG) return;
+
+            string userNameByDomain = DomainVNFPG.Instance.GetAccountName(txbUserId.Text.ToUpper());
+            string[] displayNameFHS = userNameByDomain.Split('/');
+            cbbDept.EditValue = displayNameFHS[0].Replace("LG", string.Empty);
+            txbUserNameTW.EditValue = displayNameFHS[1];
         }
     }
 }

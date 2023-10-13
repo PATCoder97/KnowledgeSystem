@@ -138,6 +138,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManager
             fInfo._formName = "用戶";
             fInfo._user = _userSelect;
             fInfo.ShowDialog();
+
+            LoadUser();
         }
     }
 }
