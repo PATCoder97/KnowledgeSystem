@@ -117,6 +117,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManager
             fInfo._eventInfo = EventFormInfo.Create;
             fInfo._formName = "用戶";
             fInfo.ShowDialog();
+
+            LoadUser();
         }
 
         private void btnRefresh_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

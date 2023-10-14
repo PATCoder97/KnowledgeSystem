@@ -209,6 +209,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
                 switch (_eventInfo)
                 {
                     case EventFormInfo.Create:
+                        _user.Id = txbUserId.EditValue?.ToString();
                         result = dm_UserBUS.Instance.Add(_user);
                         break;
                     case EventFormInfo.View:
