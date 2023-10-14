@@ -37,7 +37,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
 
         #region parameters
 
-        int idGroup = 0;
+        int idGroup = -1;
 
         List<dm_User> lsUserData = new List<dm_User>();
         List<dm_User> lsUserChoose = new List<dm_User>();
@@ -99,7 +99,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
 
             LoadData();
 
-            if (idGroup != 0)
+            if (idGroup > 0)
             {
                 using (var db = new DBDocumentManagementSystemEntities())
                 {
@@ -116,7 +116,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
         {
             string name = txbName.Text.Trim();
             string moTa = txbDescribe.Text.Trim();
-            int prioritize =  Convert.ToInt16(txbPrioritize.Text);
+            int prioritize = Convert.ToInt16(txbPrioritize.Text);
 
             if (string.IsNullOrEmpty(name))
             {
@@ -142,7 +142,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
                     groups.Id = idGroup;
                     db.dm_Group.AddOrUpdate(groups);
 
-                    db.dm_GroupUser.RemoveRange(db.dm_GroupUser .Where(r => r.IdGroup == idGroup));
+                    db.dm_GroupUser.RemoveRange(db.dm_GroupUser.Where(r => r.IdGroup == idGroup));
                 }
 
                 var newGroupUserList = lsUserChoose.Select(item => new dm_GroupUser
