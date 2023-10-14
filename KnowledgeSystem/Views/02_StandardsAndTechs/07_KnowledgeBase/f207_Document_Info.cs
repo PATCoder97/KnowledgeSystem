@@ -837,7 +837,14 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             }
 
             // Show a message box with the appropriate message and close the form
-            XtraMessageBox.Show($"{EnumHelper.GetDescription(_event207)}!\r\n文件編號:{_idBaseDocument}", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            XtraMessageBoxArgs args = new XtraMessageBoxArgs();
+            args.AllowHtmlText = DefaultBoolean.True;
+
+            args.Caption = TPConfigs.SoftNameTW;
+            args.Text = $"<font='DFKai-SB' size=18>{EnumHelper.GetDescription(_event207)}！\r\n文件編號<color=red>「{_idBaseDocument}」</color></font>";
+            args.Buttons = new DialogResult[] { DialogResult.OK };
+
+            XtraMessageBox.Show(args);
             Close();
         }
 

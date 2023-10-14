@@ -292,6 +292,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             if (TPConfigs.DomainComputer != DomainVNFPG.domainVNFPG) return;
 
             string userNameByDomain = DomainVNFPG.Instance.GetAccountName(txbUserId.Text.ToUpper());
+            if (string.IsNullOrEmpty(userNameByDomain)) return;
+
             string[] displayNameFHS = userNameByDomain.Split('/');
             cbbDept.EditValue = displayNameFHS[0].Replace("LG", string.Empty);
             txbUserNameTW.EditValue = displayNameFHS[1];

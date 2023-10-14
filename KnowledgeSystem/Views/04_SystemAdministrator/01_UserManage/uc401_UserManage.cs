@@ -72,18 +72,14 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManager
 
             var lsUserManage = (from data in lsUsers
                                 join depts in lsDepts on data.IdDepartment equals depts.Id
-                                join roles in lsRoles on data.IdRole equals roles.Id into dtg
-                                from p in dtg.DefaultIfEmpty()
                                 select new UserInfos()
                                 {
                                     Id = data.Id,
                                     DisplayName = $"{data.DisplayName}{(!string.IsNullOrEmpty(data.DisplayNameVN) ? $"\n{data.DisplayNameVN}" : "")}",
                                     DisplayNameVN = data.DisplayNameVN,
-                                    IdRole = data.IdRole,
                                     IdDepartment = data.IdDepartment,
                                     DateCreate = data.DateCreate,
                                     SecondaryPassword = data.SecondaryPassword,
-                                    RoleName = p != null ? p.DisplayName : "",
                                     DeptName = $"{data.IdDepartment}\n{depts.DisplayName}",
                                     DOB = data.DOB,
                                     CitizenID = data.CitizenID,

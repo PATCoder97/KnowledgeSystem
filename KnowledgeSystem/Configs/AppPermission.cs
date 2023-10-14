@@ -14,7 +14,7 @@ namespace KnowledgeSystem.Configs
     {
         dm_FunctionRoleBUS _dm_FunctionRoleBUS = new dm_FunctionRoleBUS();
 
-        static List<int> lsPermissions = new List<int>();
+        public static List<int> lsPermissions = new List<int>();
 
         private static AppPermission instance;
 
@@ -31,7 +31,12 @@ namespace KnowledgeSystem.Configs
 
         private AppPermission()
         {
-            lsPermissions = _dm_FunctionRoleBUS.GetListByRole(TPConfigs.LoginUser.IdRole).Select(r => r.IdFunction).ToList();
+            var lsUserRoles = dm_UserRoleBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id);
+            var lsFuncRoles = _dm_FunctionRoleBUS.GetList();
+
+            lsPermissions = (from data in lsUserRoles
+                             join func in lsFuncRoles on data.IdRole equals func.IdRole
+                             select func.IdFunction).Distinct().ToList();
         }
 
         /// <summary>

@@ -26,6 +26,5 @@ namespace DataAccessLayer
         public string JobCode { get; set; }
         public string PCName { get; set; }
         public string IPAddress { get; set; }
-        public int IdRole { get; set; }
     }
 }

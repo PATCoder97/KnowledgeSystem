@@ -75,7 +75,7 @@ namespace KnowledgeSystem.Views._00_Generals
         {
             // Lấy danh sách các AppForm từ cơ sở dữ liệu và điền vào TreeView control
             var lsAllFunctions = _dm_FunctionBUS.GetListByIdParent(groupId);
-            var lsPermissions = _dm_FunctionRoleBUS.GetListByRole(TPConfigs.LoginUser.IdRole).Select(r => r.IdFunction).ToList();
+            var lsPermissions = AppPermission.lsPermissions;
 
             lsFunctions = (from data in lsAllFunctions
                            join granted in lsPermissions on data.Id equals granted
