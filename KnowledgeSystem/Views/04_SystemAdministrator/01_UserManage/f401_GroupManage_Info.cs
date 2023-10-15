@@ -22,7 +22,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
         {
             InitializeComponent();
             LockControl(false);
-
+            InitializeIcon();
             //btnAddUser.Enabled = false;
             //btnDelUser.Enabled = false;
         }
@@ -31,6 +31,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
         {
             InitializeComponent();
             LockControl();
+            InitializeIcon();
 
             idGroup = idGroup_;
         }
@@ -48,6 +49,13 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
         #endregion
 
         #region methods
+
+        private void InitializeIcon()
+        {
+            btnEdit.ImageOptions.SvgImage = TPSvgimages.Edit;
+            btnDel.ImageOptions.SvgImage = TPSvgimages.Remove;
+            btnConfirm.ImageOptions.SvgImage = TPSvgimages.Confirm;
+        }
 
         private void LoadData()
         {

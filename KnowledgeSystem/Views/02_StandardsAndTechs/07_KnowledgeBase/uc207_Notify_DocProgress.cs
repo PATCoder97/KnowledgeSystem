@@ -48,13 +48,13 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void CreateRuleGV()
         {
-            gvData.FormatRules.AddExpressionRule(gcolDescription,
-                new DevExpress.Utils.AppearanceDefault() { BackColor = Color.Red },
+            gvData.FormatRules.AddExpressionRule(gColStatus,
+                new DevExpress.Utils.AppearanceDefault() { BackColor = Color.Red, BackColor2 = Color.White },
                 "StartsWith([Descriptions], \'退回\')");
-            gvData.FormatRules.AddExpressionRule(gcolDescription,
+            gvData.FormatRules.AddExpressionRule(gColStatus,
               new DevExpress.Utils.AppearanceDefault() { ForeColor = Color.BlueViolet },
               "StartsWith([Descriptions], \'取消\')");
-            gvData.FormatRules.AddExpressionRule(gcolDescription,
+            gvData.FormatRules.AddExpressionRule(gColStatus,
               new DevExpress.Utils.AppearanceDefault() { ForeColor = Color.Green },
               "StartsWith([Descriptions], \'確認完畢\')");
         }
@@ -167,6 +167,19 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 int width = (int)size.Width + 20;
 
                 BeginInvoke(new MethodInvoker(() => cal(width, gvData)));
+            }
+        }
+
+        private void gvData_CustomUnboundColumnData(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDataEventArgs e)
+        {
+            GridView view = sender as GridView;
+            if (e.Column.FieldName == "Status" && e.IsGetData)
+            {
+                string _description = view.GetRowCellValue(e.ListSourceRowIndex, gcolDescription).ToString();
+                List<string> prefixes = new List<string> { "確認", "取消", "退回" };
+
+                bool IsProcessing = !prefixes.Any(prefix => _description.StartsWith(prefix));
+                e.Value = IsProcessing ? "核簽中" : _description;
             }
         }
     }

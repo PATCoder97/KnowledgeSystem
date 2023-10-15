@@ -105,6 +105,7 @@
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
             this.gvData.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
+            this.gvData.OptionsView.ColumnAutoWidth = false;
             this.gvData.OptionsView.EnableAppearanceOddRow = true;
             this.gvData.OptionsView.ShowAutoFilterRow = true;
             this.gvData.OptionsView.ShowGroupPanel = false;
@@ -118,10 +119,12 @@
             this.gridColumn6.DisplayFormat.FormatString = "yyyy/MM/dd HH:mm";
             this.gridColumn6.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.gridColumn6.FieldName = "TimeGet";
-            this.gridColumn6.MaxWidth = 200;
+            this.gridColumn6.MaxWidth = 180;
+            this.gridColumn6.MinWidth = 180;
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
             this.gridColumn6.VisibleIndex = 0;
+            this.gridColumn6.Width = 180;
             // 
             // gridColumn3
             // 

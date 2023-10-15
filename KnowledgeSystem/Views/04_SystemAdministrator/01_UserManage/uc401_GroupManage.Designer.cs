@@ -109,6 +109,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             // 
             // gridColumn2
             // 
+            this.gridColumn2.AppearanceCell.Font = new System.Drawing.Font("DFKai-SB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridColumn2.AppearanceCell.Options.UseFont = true;
             this.gridColumn2.Caption = "名稱";
             this.gridColumn2.FieldName = "DisplayName";
             this.gridColumn2.MinWidth = 23;
