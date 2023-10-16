@@ -64,9 +64,9 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             cbbDept.Properties.DisplayMember = "DisplayName";
             cbbDept.Properties.ValueMember = "Id";
 
+            lsUserData = dm_UserBUS.Instance.GetList();
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                lsUserData = db.dm_User.ToList();
 
                 var lsGroupUsers = db.dm_GroupUser.Where(r => r.IdGroup == idGroup).ToList();
                 foreach (var item in lsGroupUsers)
