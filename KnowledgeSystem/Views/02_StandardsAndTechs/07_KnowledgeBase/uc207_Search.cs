@@ -75,7 +75,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             // Lấy các thông tin liên quan
             string _userLogin = TPConfigs.LoginUser.Id;
             bool _haveKeyword = checkUseKeyword.CheckState == CheckState.Checked;
-            gvColKeyword.Visible = !_haveKeyword;
+            gvColKeyword.Visible = _haveKeyword;
             helper.SaveViewInfo();
 
             // Khai báo các danh sách liên quan
