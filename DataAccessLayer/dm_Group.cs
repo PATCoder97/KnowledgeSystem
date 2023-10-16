@@ -18,5 +18,6 @@ namespace DataAccessLayer
         public string DisplayName { get; set; }
         public string Describe { get; set; }
         public int Prioritize { get; set; }
+        public string IdDept { get; set; }
     }
 }

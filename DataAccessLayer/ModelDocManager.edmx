@@ -42,6 +42,7 @@
           <Property Name="DisplayName" Type="nvarchar" MaxLength="32" />
           <Property Name="Describe" Type="nvarchar" MaxLength="128" />
           <Property Name="Prioritize" Type="int" Nullable="false" />
+          <Property Name="IdDept" Type="varchar" MaxLength="8" />
         </EntityType>
         <EntityType Name="dm_GroupUser">
           <Key>
@@ -58,6 +59,7 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="DisplayName" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="IdDept" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="Prioritize" Type="int" />
         </EntityType>
         <EntityType Name="dm_Role">
           <Key>
@@ -315,10 +317,10 @@
           <EntitySet Name="dt207_HistoryGetFile" EntityType="DBDocumentManagementSystemModel.dt207_HistoryGetFile" />
           <EntitySet Name="dt207_DocProcessing" EntityType="DBDocumentManagementSystemModel.dt207_DocProcessing" />
           <EntitySet Name="dt207_DocProcessingInfo" EntityType="DBDocumentManagementSystemModel.dt207_DocProcessingInfo" />
-          <EntitySet Name="dm_Group" EntityType="DBDocumentManagementSystemModel.dm_Group" />
-          <EntitySet Name="dm_Progress" EntityType="DBDocumentManagementSystemModel.dm_Progress" />
           <EntitySet Name="dm_UserRole" EntityType="DBDocumentManagementSystemModel.dm_UserRole" />
           <EntitySet Name="dm_User" EntityType="DBDocumentManagementSystemModel.dm_User" />
+          <EntitySet Name="dm_Group" EntityType="DBDocumentManagementSystemModel.dm_Group" />
+          <EntitySet Name="dm_Progress" EntityType="DBDocumentManagementSystemModel.dm_Progress" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -535,23 +537,6 @@
           <Property Name="Descriptions" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="TimeNotifyNotes" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="dm_Group">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DisplayName" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-          <Property Name="Describe" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Prioritize" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="dm_Progress">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="IdDept" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="dm_UserRole">
           <Key>
             <PropertyRef Name="Id" />
@@ -576,6 +561,25 @@
           <Property Name="JobCode" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
           <Property Name="PCName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
           <Property Name="IPAddress" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="dm_Group">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="Describe" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Prioritize" Type="Int32" Nullable="false" />
+          <Property Name="IdDept" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="dm_Progress">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="IdDept" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="Prioritize" Type="Int32" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -819,25 +823,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dm_Group">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_Group">
-              <MappingFragment StoreEntitySet="dm_Group">
-                <ScalarProperty Name="Prioritize" ColumnName="Prioritize" />
-                <ScalarProperty Name="Describe" ColumnName="Describe" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="dm_Progress">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_Progress">
-              <MappingFragment StoreEntitySet="dm_Progress">
-                <ScalarProperty Name="IdDept" ColumnName="IdDept" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="dm_UserRole">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_UserRole">
               <MappingFragment StoreEntitySet="dm_UserRole">
@@ -860,6 +845,27 @@
                 <ScalarProperty Name="IdDepartment" ColumnName="IdDepartment" />
                 <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
                 <ScalarProperty Name="SecondaryPassword" ColumnName="SecondaryPassword" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dm_Group">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_Group">
+              <MappingFragment StoreEntitySet="dm_Group">
+                <ScalarProperty Name="IdDept" ColumnName="IdDept" />
+                <ScalarProperty Name="Prioritize" ColumnName="Prioritize" />
+                <ScalarProperty Name="Describe" ColumnName="Describe" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dm_Progress">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_Progress">
+              <MappingFragment StoreEntitySet="dm_Progress">
+                <ScalarProperty Name="Prioritize" ColumnName="Prioritize" />
+                <ScalarProperty Name="IdDept" ColumnName="IdDept" />
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

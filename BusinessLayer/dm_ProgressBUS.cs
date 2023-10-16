@@ -31,7 +31,7 @@ namespace BusinessLayer
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dm_Progress.ToList();
+                    return _context.dm_Progress.OrderBy(r => r.Prioritize).ToList();
                 }
             }
             catch (Exception ex)
@@ -47,7 +47,7 @@ namespace BusinessLayer
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dm_Progress.Where(r => r.IdDept == _idDept.Substring(0, 1) || r.IdDept == _idDept.Substring(0, 2)).ToList();
+                    return _context.dm_Progress.OrderBy(r => r.Prioritize).Where(r => r.IdDept == _idDept.Substring(0, 1) || r.IdDept == _idDept.Substring(0, 2)).ToList();
                 }
             }
             catch (Exception ex)

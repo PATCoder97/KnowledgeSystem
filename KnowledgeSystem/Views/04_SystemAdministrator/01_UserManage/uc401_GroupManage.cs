@@ -13,6 +13,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
         public uc401_GroupManage()
         {
             InitializeComponent();
+            InitializeIcon();
         }
 
         #region parameters
@@ -22,6 +23,12 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
         #endregion
 
         #region methods
+
+        private void InitializeIcon()
+        {
+            btnCreate.ImageOptions.SvgImage = TPSvgimages.Add;
+            btnRefresh.ImageOptions.SvgImage = TPSvgimages.Reload;
+        }
 
         private void LoadGroup()
         {

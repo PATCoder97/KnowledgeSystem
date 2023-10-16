@@ -52,12 +52,15 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
             gvStep.OptionsBehavior.ReadOnly = false;
             gColRemove.Visible = true;
             gvStep.OptionsView.NewItemRowPosition = NewItemRowPosition.Top;
+            txbPrioritize.Enabled = false;
+            txbPrioritize.EditValue = 1;
 
             switch (_eventInfo)
             {
                 case EventFormInfo.Create:
                     btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     cbbDept.Enabled = true;
+                    txbPrioritize.Enabled = true;
                     break;
                 case EventFormInfo.View:
                     btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
@@ -67,6 +70,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
                     break;
                 case EventFormInfo.Update:
                     btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                    txbPrioritize.Enabled = true;
                     break;
             }
         }
@@ -100,6 +104,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
 
                     lsSteps = dm_StepProgressBUS.Instance.GetListByIdProgress(_idProgress);
                     _sourceStep.DataSource = lsSteps;
+
+                    txbPrioritize.EditValue = _progress.Prioritize;
                     break;
             }
 
@@ -131,7 +137,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
                     {
                         Id = _idProgress,
                         DisplayName = _nameProgress,
-                        IdDept = cbbDept.EditValue?.ToString()
+                        IdDept = cbbDept.EditValue?.ToString(),
+                        Prioritize = Convert.ToInt16(txbPrioritize.EditValue)
                     };
                     dm_ProgressBUS.Instance.Add(_progress);
                     break;
@@ -139,6 +146,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
                     break;
                 case EventFormInfo.Update:
                     _progress.DisplayName = _nameProgress;
+                    _progress.Prioritize = Convert.ToInt16(txbPrioritize.EditValue);
 
                     dm_ProgressBUS.Instance.AddOrUpdate(_progress);
                     dm_StepProgressBUS.Instance.RemoveByIdProgress(_idProgress);

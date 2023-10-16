@@ -58,6 +58,8 @@
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.txbPrioritize = new DevExpress.XtraEditors.SpinEdit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -70,6 +72,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbPrioritize.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // barManager1
@@ -175,6 +179,7 @@
             // 
             this.layoutControl1.Controls.Add(this.cbbDept);
             this.layoutControl1.Controls.Add(this.gcStep);
+            this.layoutControl1.Controls.Add(this.txbPrioritize);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
@@ -185,7 +190,7 @@
             // 
             // cbbDept
             // 
-            this.cbbDept.Location = new System.Drawing.Point(64, 12);
+            this.cbbDept.Location = new System.Drawing.Point(94, 12);
             this.cbbDept.MenuManager = this.barManager1;
             this.cbbDept.Name = "cbbDept";
             this.cbbDept.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -195,7 +200,7 @@
             this.cbbDept.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbbDept.Properties.PopupView = this.gridLookUpEdit1View;
-            this.cbbDept.Size = new System.Drawing.Size(447, 28);
+            this.cbbDept.Size = new System.Drawing.Size(273, 28);
             this.cbbDept.StyleController = this.layoutControl1;
             this.cbbDept.TabIndex = 5;
             // 
@@ -346,7 +351,8 @@
             this.Root.GroupBordersVisible = false;
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem1,
-            this.layoutControlItem2});
+            this.layoutControlItem2,
+            this.layoutControlItem3});
             this.Root.Name = "Root";
             this.Root.Size = new System.Drawing.Size(523, 344);
             this.Root.TextVisible = false;
@@ -371,9 +377,54 @@
             this.layoutControlItem2.Control = this.cbbDept;
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(503, 32);
+            this.layoutControlItem2.Size = new System.Drawing.Size(359, 32);
             this.layoutControlItem2.Text = "單位";
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(40, 19);
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(70, 19);
+            // 
+            // layoutControlItem3
+            // 
+            this.layoutControlItem3.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.layoutControlItem3.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
+            this.layoutControlItem3.AppearanceItemCaption.Options.UseFont = true;
+            this.layoutControlItem3.AppearanceItemCaption.Options.UseForeColor = true;
+            this.layoutControlItem3.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
+            this.layoutControlItem3.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.layoutControlItem3.Control = this.txbPrioritize;
+            this.layoutControlItem3.Location = new System.Drawing.Point(359, 0);
+            this.layoutControlItem3.Name = "layoutControlItem3";
+            this.layoutControlItem3.Size = new System.Drawing.Size(144, 32);
+            this.layoutControlItem3.Text = " 優先級";
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(70, 19);
+            // 
+            // txbPrioritize
+            // 
+            this.txbPrioritize.EditValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txbPrioritize.Location = new System.Drawing.Point(453, 12);
+            this.txbPrioritize.MenuManager = this.barManager1;
+            this.txbPrioritize.Name = "txbPrioritize";
+            this.txbPrioritize.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.txbPrioritize.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.txbPrioritize.Properties.Appearance.Options.UseFont = true;
+            this.txbPrioritize.Properties.Appearance.Options.UseForeColor = true;
+            this.txbPrioritize.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txbPrioritize.Properties.EditValueChangedFiringMode = DevExpress.XtraEditors.Controls.EditValueChangedFiringMode.Default;
+            this.txbPrioritize.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
+            this.txbPrioritize.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False");
+            this.txbPrioritize.Properties.MaskSettings.Set("mask", "N0");
+            this.txbPrioritize.Properties.MaxValue = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.txbPrioritize.Properties.UseMaskAsDisplayFormat = true;
+            this.txbPrioritize.Size = new System.Drawing.Size(58, 28);
+            this.txbPrioritize.StyleController = this.layoutControl1;
+            this.txbPrioritize.TabIndex = 6;
             // 
             // f402_ProgressInfo
             // 
@@ -404,6 +455,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbPrioritize.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -434,5 +487,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraGrid.Columns.GridColumn gColRemove;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnRemoveStep;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
+        private DevExpress.XtraEditors.SpinEdit txbPrioritize;
     }
 }

@@ -58,6 +58,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
                                          select new dm_Progress
                                          {
                                              Id = data.Id,
+                                             Prioritize = data.Prioritize,
                                              DisplayName = data.DisplayName,
                                              IdDept = $"{dept.Id} {dept.DisplayName}",
                                          }).ToList();

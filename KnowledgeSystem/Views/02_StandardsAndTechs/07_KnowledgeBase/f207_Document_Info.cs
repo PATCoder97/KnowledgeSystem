@@ -184,7 +184,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
             // Create lists of Securityinfo objects from lsUsers and lsGroups
             var lsIdUsers = lsUsers.Select(r => new Securityinfo { IdDept = r.IdDepartment, IdGroupOrUser = r.Id, DisplayName = r.DisplayName }).ToList();
-            var lsIdGroup = lsGroups.Select(r => new Securityinfo { IdGroupOrUser = r.Id.ToString(), DisplayName = r.DisplayName }).ToList();
+            var lsIdGroup = lsGroups.Select(r => new Securityinfo { IdDept = r.IdDept, IdGroupOrUser = r.Id.ToString(), DisplayName = r.DisplayName }).ToList();
             lsIdGroupOrUser = lsIdGroup.Concat(lsIdUsers).ToList();
 
             // Assign data source and columns to rgvGruopOrUser
