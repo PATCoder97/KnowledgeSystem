@@ -53,7 +53,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
 
         private void btnCreate_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            f401_GroupManage_Info frmInfo = new f401_GroupManage_Info();
+            f401_GroupInfo frmInfo = new f401_GroupInfo();
             frmInfo.ShowDialog();
 
             LoadGroup();
@@ -67,7 +67,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             dm_Group dataRow = gvData.GetRow(forcusRow) as dm_Group;
             int IdGroup = dataRow.Id;
 
-            f401_GroupManage_Info formInfo = new f401_GroupManage_Info(IdGroup);
+            f401_GroupInfo formInfo = new f401_GroupInfo(IdGroup);
             formInfo.ShowDialog();
 
             LoadGroup();

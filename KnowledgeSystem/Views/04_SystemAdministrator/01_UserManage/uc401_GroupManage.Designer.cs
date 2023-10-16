@@ -35,6 +35,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.gcData = new DevExpress.XtraGrid.GridControl();
             this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -48,7 +49,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
@@ -73,6 +73,11 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             // 
             // gcData
             // 
+            this.gcData.EmbeddedNavigator.Buttons.Append.Visible = false;
+            this.gcData.EmbeddedNavigator.Buttons.CancelEdit.Visible = false;
+            this.gcData.EmbeddedNavigator.Buttons.Edit.Visible = false;
+            this.gcData.EmbeddedNavigator.Buttons.EndEdit.Visible = false;
+            this.gcData.EmbeddedNavigator.Buttons.Remove.Visible = false;
             this.gcData.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.gcData.Location = new System.Drawing.Point(12, 12);
             this.gcData.MainView = this.gvData;
@@ -80,6 +85,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.gcData.Name = "gcData";
             this.gcData.Size = new System.Drawing.Size(891, 360);
             this.gcData.TabIndex = 4;
+            this.gcData.UseEmbeddedNavigator = true;
             this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvData});
             this.gcData.DoubleClick += new System.EventHandler(this.gcData_DoubleClick);
@@ -109,6 +115,14 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.gvData.OptionsView.EnableAppearanceOddRow = true;
             this.gvData.OptionsView.ShowAutoFilterRow = true;
             this.gvData.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn3
+            // 
+            this.gridColumn3.Caption = "單位";
+            this.gridColumn3.FieldName = "IdDept";
+            this.gridColumn3.Name = "gridColumn3";
+            this.gridColumn3.Visible = true;
+            this.gridColumn3.VisibleIndex = 0;
             // 
             // gridColumn2
             // 
@@ -261,14 +275,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.barDockControlRight.Manager = this.barManager1;
             this.barDockControlRight.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.barDockControlRight.Size = new System.Drawing.Size(0, 384);
-            // 
-            // gridColumn3
-            // 
-            this.gridColumn3.Caption = "單位";
-            this.gridColumn3.FieldName = "IdDept";
-            this.gridColumn3.Name = "gridColumn3";
-            this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 0;
             // 
             // uc401_GroupManage
             // 

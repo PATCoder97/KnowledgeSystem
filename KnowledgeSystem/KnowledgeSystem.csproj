@@ -294,11 +294,11 @@
     <Compile Include="Views\04_SystemAdministrator\01_UserManage\uc401_GroupManage.Designer.cs">
       <DependentUpon>uc401_GroupManage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\04_SystemAdministrator\01_UserManage\f401_GroupManage_Info.cs">
+    <Compile Include="Views\04_SystemAdministrator\01_UserManage\f401_GroupInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\04_SystemAdministrator\01_UserManage\f401_GroupManage_Info.Designer.cs">
-      <DependentUpon>f401_GroupManage_Info.cs</DependentUpon>
+    <Compile Include="Views\04_SystemAdministrator\01_UserManage\f401_GroupInfo.Designer.cs">
+      <DependentUpon>f401_GroupInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\04_SystemAdministrator\01_UserManage\uc401_UserManage.cs">
       <SubType>UserControl</SubType>
@@ -407,8 +407,8 @@
     <EmbeddedResource Include="Views\04_SystemAdministrator\01_UserManage\uc401_GroupManage.resx">
       <DependentUpon>uc401_GroupManage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\04_SystemAdministrator\01_UserManage\f401_GroupManage_Info.resx">
-      <DependentUpon>f401_GroupManage_Info.cs</DependentUpon>
+    <EmbeddedResource Include="Views\04_SystemAdministrator\01_UserManage\f401_GroupInfo.resx">
+      <DependentUpon>f401_GroupInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\01_UserManage\uc401_UserManage.resx">
       <DependentUpon>uc401_UserManage.cs</DependentUpon>
