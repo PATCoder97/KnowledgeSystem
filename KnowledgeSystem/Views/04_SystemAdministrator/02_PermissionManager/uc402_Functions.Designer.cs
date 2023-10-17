@@ -42,7 +42,6 @@
             this.treeListColumn4 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.treeListColumn5 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.treeListColumn6 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.treeListColumn7 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -123,6 +122,8 @@
             // 
             // gridColumn1
             // 
+            this.gridColumn1.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridColumn1.AppearanceCell.Options.UseFont = true;
             this.gridColumn1.Caption = "說明";
             this.gridColumn1.FieldName = "Describe";
             this.gridColumn1.Name = "gridColumn1";
@@ -147,8 +148,7 @@
             this.treeListColumn3,
             this.treeListColumn4,
             this.treeListColumn5,
-            this.treeListColumn6,
-            this.treeListColumn7});
+            this.treeListColumn6});
             this.treeFunctions.Location = new System.Drawing.Point(394, 12);
             this.treeFunctions.Name = "treeFunctions";
             this.treeFunctions.OptionsCustomization.AllowFilter = false;
@@ -183,24 +183,24 @@
             this.treeListColumn2.Name = "treeListColumn2";
             this.treeListColumn2.OptionsColumn.AllowEdit = false;
             this.treeListColumn2.Visible = true;
-            this.treeListColumn2.VisibleIndex = 2;
+            this.treeListColumn2.VisibleIndex = 1;
             this.treeListColumn2.Width = 60;
             // 
             // treeListColumn3
             // 
-            this.treeListColumn3.AppearanceCell.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.treeListColumn3.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.treeListColumn3.AppearanceCell.Options.UseFont = true;
             this.treeListColumn3.Caption = "模組、頁面";
             this.treeListColumn3.FieldName = "ControlName";
             this.treeListColumn3.Name = "treeListColumn3";
             this.treeListColumn3.OptionsColumn.AllowEdit = false;
             this.treeListColumn3.Visible = true;
-            this.treeListColumn3.VisibleIndex = 5;
+            this.treeListColumn3.VisibleIndex = 4;
             this.treeListColumn3.Width = 190;
             // 
             // treeListColumn4
             // 
-            this.treeListColumn4.AppearanceCell.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.treeListColumn4.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.treeListColumn4.AppearanceCell.Options.UseFont = true;
             this.treeListColumn4.AppearanceCell.Options.UseTextOptions = true;
             this.treeListColumn4.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
@@ -212,7 +212,7 @@
             this.treeListColumn4.OptionsColumn.AllowEdit = false;
             this.treeListColumn4.UnboundDataType = typeof(short);
             this.treeListColumn4.Visible = true;
-            this.treeListColumn4.VisibleIndex = 4;
+            this.treeListColumn4.VisibleIndex = 3;
             // 
             // treeListColumn5
             // 
@@ -224,6 +224,8 @@
             // 
             // treeListColumn6
             // 
+            this.treeListColumn6.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.treeListColumn6.AppearanceCell.Options.UseFont = true;
             this.treeListColumn6.AppearanceCell.Options.UseTextOptions = true;
             this.treeListColumn6.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.treeListColumn6.Caption = "編號";
@@ -235,19 +237,8 @@
             this.treeListColumn6.UnboundDataType = typeof(short);
             this.treeListColumn6.UnboundExpression = "[Id]";
             this.treeListColumn6.Visible = true;
-            this.treeListColumn6.VisibleIndex = 3;
+            this.treeListColumn6.VisibleIndex = 2;
             this.treeListColumn6.Width = 60;
-            // 
-            // treeListColumn7
-            // 
-            this.treeListColumn7.Caption = "權限";
-            this.treeListColumn7.FieldName = "SetPermission";
-            this.treeListColumn7.MaxWidth = 60;
-            this.treeListColumn7.MinWidth = 60;
-            this.treeListColumn7.Name = "treeListColumn7";
-            this.treeListColumn7.Visible = true;
-            this.treeListColumn7.VisibleIndex = 1;
-            this.treeListColumn7.Width = 60;
             // 
             // Root
             // 
@@ -431,7 +422,6 @@
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
-        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn7;
         private DevExpress.XtraBars.BarManager barManager1;
         private DevExpress.XtraBars.Bar bar2;
         private DevExpress.XtraBars.BarButtonItem btnNewRole;

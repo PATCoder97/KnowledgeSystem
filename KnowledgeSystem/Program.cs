@@ -33,7 +33,7 @@ namespace KnowledgeSystem
 
             TPConfigs.LoginUser = dm_UserBUS.Instance.GetItemById("VNW0014732");
             AppPermission.Instance.CheckAppPermission(7);
-            Application.Run(new f00_FluentFrame(7));
+            Application.Run(new f00_FluentFrame(17));
         }
     }
 }

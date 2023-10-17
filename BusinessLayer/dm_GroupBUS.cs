@@ -30,7 +30,7 @@ namespace BusinessLayer
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dm_Group.ToList();
+                    return _context.dm_Group.OrderBy(r => r.Prioritize).ToList();
                 }
             }
             catch (Exception ex)
