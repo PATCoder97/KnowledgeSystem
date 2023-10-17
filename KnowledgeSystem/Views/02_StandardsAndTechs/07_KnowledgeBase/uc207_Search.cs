@@ -37,7 +37,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         dt207_TypeHisGetFileBUS _dt207_TypeHisGetFileBUS = new dt207_TypeHisGetFileBUS();
         dt207_DocProcessingBUS _dt207_DocProgressBUS = new dt207_DocProcessingBUS();
         dt207_SecurityBUS _dt207_SecurityBUS = new dt207_SecurityBUS();
-        dm_GroupUserBUS _dm_GroupUserBUS = new dm_GroupUserBUS();
 
 
         BindingSource sourceKnowledge = new BindingSource();
@@ -86,7 +85,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             List<dt207_Base> ls207Base = _haveKeyword ? _dt207_BaseBUS.GetList() : _dt207_BaseBUS.GetListWithoutKeyword();
             List<dt207_Security> lsSecurities = _dt207_SecurityBUS.GetList();
             List<dm_Group> lsGroups = dm_GroupBUS.Instance.GetList();
-            List<dm_GroupUser> lsGroupUsers = _dm_GroupUserBUS.GetList();
+            List<dm_GroupUser> lsGroupUsers = dm_GroupUserBUS.Instance.GetList();
 
             // Lấy danh sách các giá trị IdKnowledgeBase mà chưa hoàn thành lưu trình trình ký
             var lsIdBaseRemove = _dt207_DocProgressBUS.GetListNotComplete().Select(r => r.IdKnowledgeBase).ToList();
@@ -252,9 +251,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 int sumNotify = lsDisplays.Count;
                 if (sumNotify > 0)
                 {
-                    emptySpaceRight.MinSize = new Size(145, 10);
-                    emptySpaceRight.MinSize = new Size(145, 0);
-                    emptySpaceRight.Size = new Size(145, 40);
+                    emptySpaceRight.MinSize = new Size(85, 10);
+                    emptySpaceRight.MinSize = new Size(85, 0);
+                    emptySpaceRight.Size = new Size(85, 40);
 
                     lcSumApproval.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
                 }
@@ -267,7 +266,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     lcSumApproval.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 }
 
-                btnSumNotifyApproval.Text = sumNotify.ToString();
+                btnSumNotifyApproval.Text = $"{sumNotify}待審查";
             }
         }
 

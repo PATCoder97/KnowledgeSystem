@@ -44,7 +44,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnEdit = new DevExpress.XtraBars.BarButtonItem();
             this.btnConfirm = new DevExpress.XtraBars.BarButtonItem();
-            this.btnDel = new DevExpress.XtraBars.BarButtonItem();
+            this.btnDelete = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -64,6 +64,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcUserGroup = new DevExpress.XtraLayout.LayoutControlGroup();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcChoose)).BeginInit();
@@ -82,6 +83,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcUserGroup)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -106,11 +108,11 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             // gcChoose
             // 
             this.gcChoose.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
-            this.gcChoose.Location = new System.Drawing.Point(412, 84);
+            this.gcChoose.Location = new System.Drawing.Point(415, 106);
             this.gcChoose.MainView = this.gvChoose;
             this.gcChoose.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.gcChoose.Name = "gcChoose";
-            this.gcChoose.Size = new System.Drawing.Size(431, 380);
+            this.gcChoose.Size = new System.Drawing.Size(416, 346);
             this.gcChoose.TabIndex = 7;
             this.gcChoose.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvChoose});
@@ -204,7 +206,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.btnEdit,
             this.btnConfirm,
-            this.btnDel});
+            this.btnDelete});
             this.barManager1.MainMenu = this.bar2;
             this.barManager1.MaxItemId = 3;
             // 
@@ -229,7 +231,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnEdit, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnConfirm, true),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnDel, true)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnDelete, true)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawBorder = false;
             this.bar2.OptionsBar.DrawDragBorder = false;
@@ -256,14 +258,14 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.btnConfirm.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
             this.btnConfirm.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnConfirm_ItemClick);
             // 
-            // btnDel
+            // btnDelete
             // 
-            this.btnDel.Caption = "刪除";
-            this.btnDel.Id = 2;
-            this.btnDel.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnDel.Name = "btnDel";
-            this.btnDel.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
-            this.btnDel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDel_ItemClick);
+            this.btnDelete.Caption = "刪除";
+            this.btnDelete.Id = 2;
+            this.btnDelete.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            this.btnDelete.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDel_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -317,11 +319,11 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             // gcData
             // 
             this.gcData.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
-            this.gcData.Location = new System.Drawing.Point(12, 84);
+            this.gcData.Location = new System.Drawing.Point(24, 106);
             this.gcData.MainView = this.gvData;
             this.gcData.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.gcData.Name = "gcData";
-            this.gcData.Size = new System.Drawing.Size(396, 380);
+            this.gcData.Size = new System.Drawing.Size(381, 346);
             this.gcData.TabIndex = 4;
             this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvData});
@@ -458,12 +460,11 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             this.Root.GroupBordersVisible = false;
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem1,
             this.layoutControlItem2,
             this.layoutControlItem7,
             this.layoutControlItem3,
-            this.layoutControlItem4,
-            this.layoutControlItem5});
+            this.layoutControlItem5,
+            this.lcUserGroup});
             this.Root.Name = "Root";
             this.Root.Size = new System.Drawing.Size(855, 476);
             this.Root.TextVisible = false;
@@ -471,10 +472,10 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.gcData;
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 64);
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 10, 2);
-            this.layoutControlItem1.Size = new System.Drawing.Size(400, 392);
+            this.layoutControlItem1.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 5, 2, 2);
+            this.layoutControlItem1.Size = new System.Drawing.Size(388, 350);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
@@ -484,6 +485,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.layoutControlItem2.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem2.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem2.AppearanceItemCaption.Options.UseForeColor = true;
+            this.layoutControlItem2.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem2.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem2.Control = this.txbName;
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
@@ -497,6 +500,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.layoutControlItem7.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem7.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem7.AppearanceItemCaption.Options.UseForeColor = true;
+            this.layoutControlItem7.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem7.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem7.Control = this.txbPrioritize;
             this.layoutControlItem7.Location = new System.Drawing.Point(666, 0);
             this.layoutControlItem7.Name = "layoutControlItem7";
@@ -510,6 +515,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.layoutControlItem3.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem3.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem3.AppearanceItemCaption.Options.UseForeColor = true;
+            this.layoutControlItem3.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem3.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem3.Control = this.txbDescribe;
             this.layoutControlItem3.Location = new System.Drawing.Point(0, 32);
             this.layoutControlItem3.Name = "layoutControlItem3";
@@ -520,10 +527,10 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             // layoutControlItem4
             // 
             this.layoutControlItem4.Control = this.gcChoose;
-            this.layoutControlItem4.Location = new System.Drawing.Point(400, 64);
+            this.layoutControlItem4.Location = new System.Drawing.Point(388, 0);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 10, 2);
-            this.layoutControlItem4.Size = new System.Drawing.Size(435, 392);
+            this.layoutControlItem4.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 2, 2, 2);
+            this.layoutControlItem4.Size = new System.Drawing.Size(423, 350);
             this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem4.TextVisible = false;
             // 
@@ -533,7 +540,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.layoutControlItem5.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem5.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem5.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem5.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
+            this.layoutControlItem5.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem5.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem5.Control = this.cbbDept;
             this.layoutControlItem5.CustomizationFormText = " 單位";
@@ -542,6 +549,25 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             this.layoutControlItem5.Size = new System.Drawing.Size(266, 32);
             this.layoutControlItem5.Text = " 單位";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(70, 19);
+            // 
+            // lcUserGroup
+            // 
+            this.lcUserGroup.AppearanceGroup.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.lcUserGroup.AppearanceGroup.ForeColor = System.Drawing.Color.Black;
+            this.lcUserGroup.AppearanceGroup.Options.UseFont = true;
+            this.lcUserGroup.AppearanceGroup.Options.UseForeColor = true;
+            this.lcUserGroup.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lcUserGroup.AppearanceItemCaption.Options.UseFont = true;
+            this.lcUserGroup.AppearanceTabPage.Header.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.lcUserGroup.AppearanceTabPage.Header.Options.UseFont = true;
+            this.lcUserGroup.GroupStyle = DevExpress.Utils.GroupStyle.Light;
+            this.lcUserGroup.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem1,
+            this.layoutControlItem4});
+            this.lcUserGroup.Location = new System.Drawing.Point(0, 64);
+            this.lcUserGroup.Name = "lcUserGroup";
+            this.lcUserGroup.Size = new System.Drawing.Size(835, 392);
+            this.lcUserGroup.Text = "使用者";
             // 
             // f401_GroupInfo
             // 
@@ -578,6 +604,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcUserGroup)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -601,7 +628,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
-        private DevExpress.XtraBars.BarButtonItem btnDel;
+        private DevExpress.XtraBars.BarButtonItem btnDelete;
         private DevExpress.XtraEditors.TextEdit txbName;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private DevExpress.XtraEditors.TextEdit txbDescribe;
@@ -616,5 +643,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
         private DevExpress.XtraEditors.SpinEdit txbPrioritize;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
         private DevExpress.XtraEditors.LookUpEdit cbbDept;
+        private DevExpress.XtraLayout.LayoutControlGroup lcUserGroup;
     }
 }

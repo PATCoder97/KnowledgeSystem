@@ -67,7 +67,9 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             dm_Group dataRow = gvData.GetRow(forcusRow) as dm_Group;
             int IdGroup = dataRow.Id;
 
-            f401_GroupInfo formInfo = new f401_GroupInfo(IdGroup);
+            f401_GroupInfo formInfo = new f401_GroupInfo();
+            formInfo._eventInfo = EventFormInfo.View;
+            formInfo._group = dataRow;
             formInfo.ShowDialog();
 
             LoadGroup();

@@ -234,7 +234,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
             // 
             this.btnRefresh.Caption = "重新整理";
             this.btnRefresh.Id = 1;
-            this.btnRefresh.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnRefresh.ImageOptions.SvgImage")));
             this.btnRefresh.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;

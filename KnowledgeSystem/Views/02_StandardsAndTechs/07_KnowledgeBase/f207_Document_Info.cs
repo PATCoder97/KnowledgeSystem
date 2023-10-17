@@ -50,7 +50,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         #region parameters
 
         // Khai báo các BUS
-        dm_GroupUserBUS _dm_GroupUserBUS = new dm_GroupUserBUS();
         dt207_TypeBUS _dt207_TypeBUS = new dt207_TypeBUS();
         dt207_BaseBUS _dt207_BaseBUS = new dt207_BaseBUS();
         dt207_Base_BAKBUS _dt207_Base_BAKBUS = new dt207_Base_BAKBUS();
@@ -179,7 +178,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             lsKnowledgeTypes = _dt207_TypeBUS.GetList();
             lsUsers = dm_UserBUS.Instance.GetList();
             lsGroups = dm_GroupBUS.Instance.GetList();
-            lsGroupUser = _dm_GroupUserBUS.GetList();
+            lsGroupUser = dm_GroupUserBUS.Instance.GetList();
             progressSelect = dm_ProgressBUS.Instance.GetListByDept(TPConfigs.LoginUser.IdDepartment).FirstOrDefault();
 
             // Create lists of Securityinfo objects from lsUsers and lsGroups
@@ -591,7 +590,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 args.AllowHtmlText = DefaultBoolean.True;
 
                 args.Caption = TPConfigs.SoftNameTW;
-                args.Text = "<font='DFKai-SB' size=18>請點選<color=red>「確認」</color>確認您已審查文件信息!</font>";
+                args.Text = "<font='DFKai-SB' size=18>請您確認文件各份資料(附件、核簽流程、密等等)\r\n後按<color=red>「確認」</color>以完成審查作業！</font>";
                 args.Buttons = new DialogResult[] { DialogResult.OK };
 
                 XtraMessageBox.Show(args);

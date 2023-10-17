@@ -97,17 +97,17 @@
             // 
             // btnSumNotifyApproval
             // 
-            this.btnSumNotifyApproval.Appearance.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSumNotifyApproval.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSumNotifyApproval.Appearance.ForeColor = System.Drawing.Color.Red;
             this.btnSumNotifyApproval.Appearance.Options.UseFont = true;
             this.btnSumNotifyApproval.Appearance.Options.UseForeColor = true;
             this.btnSumNotifyApproval.ImageOptions.SvgImage = global::KnowledgeSystem.Properties.Resources.Approval1;
-            this.btnSumNotifyApproval.Location = new System.Drawing.Point(1145, 12);
+            this.btnSumNotifyApproval.Location = new System.Drawing.Point(1085, 12);
             this.btnSumNotifyApproval.Name = "btnSumNotifyApproval";
-            this.btnSumNotifyApproval.Size = new System.Drawing.Size(76, 36);
+            this.btnSumNotifyApproval.Size = new System.Drawing.Size(136, 36);
             this.btnSumNotifyApproval.StyleController = this.layoutControl1;
             this.btnSumNotifyApproval.TabIndex = 14;
-            this.btnSumNotifyApproval.Text = "99";
+            this.btnSumNotifyApproval.Text = "99待審查";
             this.btnSumNotifyApproval.Click += new System.EventHandler(this.btnSumNotifyApproval_Click);
             // 
             // checkUseKeyword
@@ -366,10 +366,10 @@
             // 
             this.emptySpaceRight.AllowHotTrack = false;
             this.emptySpaceRight.Location = new System.Drawing.Point(988, 0);
-            this.emptySpaceRight.MaxSize = new System.Drawing.Size(145, 0);
-            this.emptySpaceRight.MinSize = new System.Drawing.Size(145, 10);
+            this.emptySpaceRight.MaxSize = new System.Drawing.Size(85, 10);
+            this.emptySpaceRight.MinSize = new System.Drawing.Size(85, 10);
             this.emptySpaceRight.Name = "emptySpaceRight";
-            this.emptySpaceRight.Size = new System.Drawing.Size(145, 40);
+            this.emptySpaceRight.Size = new System.Drawing.Size(85, 40);
             this.emptySpaceRight.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.emptySpaceRight.TextSize = new System.Drawing.Size(0, 0);
             // 
@@ -423,11 +423,11 @@
             // lcSumApproval
             // 
             this.lcSumApproval.Control = this.btnSumNotifyApproval;
-            this.lcSumApproval.Location = new System.Drawing.Point(1133, 0);
-            this.lcSumApproval.MaxSize = new System.Drawing.Size(80, 40);
-            this.lcSumApproval.MinSize = new System.Drawing.Size(80, 40);
+            this.lcSumApproval.Location = new System.Drawing.Point(1073, 0);
+            this.lcSumApproval.MaxSize = new System.Drawing.Size(140, 40);
+            this.lcSumApproval.MinSize = new System.Drawing.Size(140, 40);
             this.lcSumApproval.Name = "lcSumApproval";
-            this.lcSumApproval.Size = new System.Drawing.Size(80, 40);
+            this.lcSumApproval.Size = new System.Drawing.Size(140, 40);
             this.lcSumApproval.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.lcSumApproval.TextSize = new System.Drawing.Size(0, 0);
             this.lcSumApproval.TextVisible = false;

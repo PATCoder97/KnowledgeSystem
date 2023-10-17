@@ -237,6 +237,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
                         if (dialogResult != DialogResult.Yes) return;
 
                         result = dm_UserBUS.Instance.Remove(_user.Id);
+                        dm_UserRoleBUS.Instance.RemoveRangeByUID(_user.Id);
                         break;
                     default:
                         break;
