@@ -97,7 +97,7 @@
             this.gvRoles.Appearance.HeaderPanel.Options.UseForeColor = true;
             this.gvRoles.Appearance.HeaderPanel.Options.UseTextOptions = true;
             this.gvRoles.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gvRoles.Appearance.Row.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvRoles.Appearance.Row.Font = new System.Drawing.Font("DFKai-SB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gvRoles.Appearance.Row.ForeColor = System.Drawing.Color.Black;
             this.gvRoles.Appearance.Row.Options.UseFont = true;
             this.gvRoles.Appearance.Row.Options.UseForeColor = true;
@@ -122,7 +122,7 @@
             // 
             // gridColumn1
             // 
-            this.gridColumn1.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridColumn1.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.gridColumn1.AppearanceCell.Options.UseFont = true;
             this.gridColumn1.Caption = "說明";
             this.gridColumn1.FieldName = "Describe";
@@ -138,7 +138,7 @@
             this.treeFunctions.Appearance.HeaderPanel.Options.UseForeColor = true;
             this.treeFunctions.Appearance.HeaderPanel.Options.UseTextOptions = true;
             this.treeFunctions.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.treeFunctions.Appearance.Row.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.treeFunctions.Appearance.Row.Font = new System.Drawing.Font("DFKai-SB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.treeFunctions.Appearance.Row.ForeColor = System.Drawing.Color.Black;
             this.treeFunctions.Appearance.Row.Options.UseFont = true;
             this.treeFunctions.Appearance.Row.Options.UseForeColor = true;
@@ -188,7 +188,7 @@
             // 
             // treeListColumn3
             // 
-            this.treeListColumn3.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.treeListColumn3.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.treeListColumn3.AppearanceCell.Options.UseFont = true;
             this.treeListColumn3.Caption = "模組、頁面";
             this.treeListColumn3.FieldName = "ControlName";
@@ -200,7 +200,7 @@
             // 
             // treeListColumn4
             // 
-            this.treeListColumn4.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.treeListColumn4.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.treeListColumn4.AppearanceCell.Options.UseFont = true;
             this.treeListColumn4.AppearanceCell.Options.UseTextOptions = true;
             this.treeListColumn4.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
@@ -224,7 +224,7 @@
             // 
             // treeListColumn6
             // 
-            this.treeListColumn6.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.treeListColumn6.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.treeListColumn6.AppearanceCell.Options.UseFont = true;
             this.treeListColumn6.AppearanceCell.Options.UseTextOptions = true;
             this.treeListColumn6.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;

@@ -1031,10 +1031,13 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 Caption = TPConfigs.SoftNameTW,
                 Prompt = "退回文件原因",
                 DefaultButtonIndex = 0,
-                Editor = new MemoEdit()
+                Editor = new MemoEdit(),
+                DefaultResponse = ""
             };
 
             var result = XtraInputBox.Show(args);
+            if (result == null) return;
+
             string descriptions = result?.ToString() ?? "";
 
             if (_eventApproved == Event207DocInfo.Delete)

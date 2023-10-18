@@ -88,7 +88,7 @@
             // 
             // gvData
             // 
-            this.gvData.Appearance.GroupRow.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvData.Appearance.GroupRow.Font = new System.Drawing.Font("DFKai-SB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gvData.Appearance.GroupRow.ForeColor = System.Drawing.Color.Black;
             this.gvData.Appearance.GroupRow.Options.UseFont = true;
             this.gvData.Appearance.GroupRow.Options.UseForeColor = true;
@@ -98,7 +98,7 @@
             this.gvData.Appearance.HeaderPanel.Options.UseForeColor = true;
             this.gvData.Appearance.HeaderPanel.Options.UseTextOptions = true;
             this.gvData.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gvData.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvData.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.gvData.Appearance.Row.ForeColor = System.Drawing.Color.Black;
             this.gvData.Appearance.Row.Options.UseFont = true;
             this.gvData.Appearance.Row.Options.UseForeColor = true;
@@ -121,7 +121,7 @@
             // 
             // gridColumn4
             // 
-            this.gridColumn4.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridColumn4.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.gridColumn4.AppearanceCell.Options.UseFont = true;
             this.gridColumn4.AppearanceCell.Options.UseTextOptions = true;
             this.gridColumn4.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
