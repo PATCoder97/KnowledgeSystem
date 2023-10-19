@@ -252,6 +252,18 @@
     <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_SelectProgress.Designer.cs">
       <DependentUpon>uc207_SelectProgress.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\03_DepartmentManage\01_SafetyCertificate\f301_CertInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\01_SafetyCertificate\f301_CertInfo.Designer.cs">
+      <DependentUpon>f301_CertInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\01_SafetyCertificate\uc301_SafetyCertMain.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\01_SafetyCertificate\uc301_SafetyCertMain.Designer.cs">
+      <DependentUpon>uc301_SafetyCertMain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\04_SystemAdministrator\01_UserManage\f401_UserInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -386,6 +398,12 @@
     <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\uc207_SelectProgress.resx">
       <DependentUpon>uc207_SelectProgress.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\01_SafetyCertificate\f301_CertInfo.resx">
+      <DependentUpon>f301_CertInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\01_SafetyCertificate\uc301_SafetyCertMain.resx">
+      <DependentUpon>uc301_SafetyCertMain.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\01_UserManage\f401_UserInfo.resx">
       <DependentUpon>f401_UserInfo.cs</DependentUpon>
     </EmbeddedResource>
@@ -435,7 +453,6 @@
   <ItemGroup>
     <Folder Include="Views\01_ProductionAndSales\" />
     <Folder Include="Views\02_StandardsAndTechs\01_ISODocuments\" />
-    <Folder Include="Views\03_DepartmentManage\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="DocumentSystem.ico" />
@@ -457,6 +474,9 @@
     <Content Include="Images\icons_cancel.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\icons_classroom.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\icons_close.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -466,6 +486,12 @@
     <Content Include="Images\icons_email_send.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\icons_excel.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\icons_job.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\icons_notification.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -473,6 +499,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\icons_plus.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\icons_quality.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\icons_reload.svg">

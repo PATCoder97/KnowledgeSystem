@@ -114,6 +114,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
             cbbPicture.Properties.SmallImages = svgImages;
 
             var lsFuncs = _sysFunctionBUS.GetList();
+            lsFuncs.Add(new dm_FunctionM() { Id = -1, DisplayName = "Root" });
 
             cbbIdParent.Properties.DataSource = lsFuncs;
             cbbIdParent.Properties.DisplayMember = "DisplayName";

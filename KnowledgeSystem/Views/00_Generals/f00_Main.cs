@@ -23,7 +23,7 @@ namespace KnowledgeSystem.Views._00_Generals
         }
 
         sys_StaticValueBUS _sys_StaticValueBUS = new sys_StaticValueBUS();
-       
+
         TileItemElement elementName = new TileItemElement();
         TileItemElement elementIdDept = new TileItemElement();
         TileItemElement elementGrade = new TileItemElement();
@@ -195,11 +195,6 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void btnISODocuments_ItemClick(object sender, TileItemEventArgs e)
         {
-            f00_FluentFrame formShow = new f00_FluentFrame(201);
-            formShow.Text = e.Item.Text;
-            Hide();
-            formShow.ShowDialog();
-            Show();
         }
 
         private void btnUserManage_ItemClick(object sender, TileItemEventArgs e)
@@ -210,6 +205,11 @@ namespace KnowledgeSystem.Views._00_Generals
         private void btnRoleManage_ItemClick(object sender, TileItemEventArgs e)
         {
             ShowFromByFrame(AppPermission.SysAdmin, e);
+        }
+
+        private void btnSafetyCert_ItemClick(object sender, TileItemEventArgs e)
+        {
+            ShowFromByFrame(AppPermission.SafetyCertMain, e);
         }
 
         private void tileInfoUser_ItemClick(object sender, TileItemEventArgs e)

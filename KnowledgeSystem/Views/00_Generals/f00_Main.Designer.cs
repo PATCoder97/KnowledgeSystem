@@ -36,6 +36,7 @@ namespace KnowledgeSystem.Views._00_Generals
             DevExpress.XtraEditors.TileItemElement tileItemElement2 = new DevExpress.XtraEditors.TileItemElement();
             DevExpress.XtraEditors.TileItemElement tileItemElement3 = new DevExpress.XtraEditors.TileItemElement();
             DevExpress.XtraEditors.TileItemElement tileItemElement4 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement5 = new DevExpress.XtraEditors.TileItemElement();
             DevExpress.XtraEditors.TileItemElement tileItemElement6 = new DevExpress.XtraEditors.TileItemElement();
             DevExpress.XtraEditors.TileItemElement tileItemElement7 = new DevExpress.XtraEditors.TileItemElement();
             DevExpress.XtraEditors.TileItemElement tileItemElement8 = new DevExpress.XtraEditors.TileItemElement();
@@ -48,7 +49,6 @@ namespace KnowledgeSystem.Views._00_Generals
             DevExpress.XtraEditors.TileItemElement tileItemElement15 = new DevExpress.XtraEditors.TileItemElement();
             DevExpress.XtraEditors.TileItemElement tileItemElement16 = new DevExpress.XtraEditors.TileItemElement();
             DevExpress.XtraEditors.TileItemElement tileItemElement17 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement5 = new DevExpress.XtraEditors.TileItemElement();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.tileMain = new DevExpress.XtraEditors.TileControl();
             this.tileGroup2 = new DevExpress.XtraEditors.TileGroup();
@@ -57,6 +57,7 @@ namespace KnowledgeSystem.Views._00_Generals
             this.tileItem3 = new DevExpress.XtraEditors.TileItem();
             this.tileGroup3 = new DevExpress.XtraEditors.TileGroup();
             this.btnISODocuments = new DevExpress.XtraEditors.TileItem();
+            this.tileItem11 = new DevExpress.XtraEditors.TileItem();
             this.tileItem5 = new DevExpress.XtraEditors.TileItem();
             this.tileItem7 = new DevExpress.XtraEditors.TileItem();
             this.tileItem8 = new DevExpress.XtraEditors.TileItem();
@@ -67,14 +68,13 @@ namespace KnowledgeSystem.Views._00_Generals
             this.tileItem6 = new DevExpress.XtraEditors.TileItem();
             this.tileItem12 = new DevExpress.XtraEditors.TileItem();
             this.tileItem13 = new DevExpress.XtraEditors.TileItem();
-            this.tileItem4 = new DevExpress.XtraEditors.TileItem();
+            this.btnSafetyCert = new DevExpress.XtraEditors.TileItem();
             this.tileGroup5 = new DevExpress.XtraEditors.TileGroup();
             this.tileInfoUser = new DevExpress.XtraEditors.TileItem();
             this.btnUserManage = new DevExpress.XtraEditors.TileItem();
             this.btnRoleManage = new DevExpress.XtraEditors.TileItem();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.lbSoftName = new DevExpress.XtraLayout.LayoutControlItem();
-            this.tileItem11 = new DevExpress.XtraEditors.TileItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
@@ -120,6 +120,7 @@ namespace KnowledgeSystem.Views._00_Generals
             this.tileMain.MaxId = 23;
             this.tileMain.Name = "tileMain";
             this.tileMain.Padding = new System.Windows.Forms.Padding(24, 22, 24, 22);
+            this.tileMain.Position = 796;
             this.tileMain.ShowGroupText = true;
             this.tileMain.Size = new System.Drawing.Size(1180, 499);
             this.tileMain.TabIndex = 4;
@@ -186,6 +187,16 @@ namespace KnowledgeSystem.Views._00_Generals
             this.btnISODocuments.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
             this.btnISODocuments.Name = "btnISODocuments";
             this.btnISODocuments.ItemClick += new DevExpress.XtraEditors.TileItemClickEventHandler(this.btnISODocuments_ItemClick);
+            // 
+            // tileItem11
+            // 
+            this.tileItem11.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
+            this.tileItem11.AppearanceItem.Normal.Options.UseFont = true;
+            tileItemElement5.Text = "ISO稽核文件";
+            this.tileItem11.Elements.Add(tileItemElement5);
+            this.tileItem11.Id = 22;
+            this.tileItem11.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
+            this.tileItem11.Name = "tileItem11";
             // 
             // tileItem5
             // 
@@ -259,7 +270,7 @@ namespace KnowledgeSystem.Views._00_Generals
             this.tileGroup4.Items.Add(this.tileItem6);
             this.tileGroup4.Items.Add(this.tileItem12);
             this.tileGroup4.Items.Add(this.tileItem13);
-            this.tileGroup4.Items.Add(this.tileItem4);
+            this.tileGroup4.Items.Add(this.btnSafetyCert);
             this.tileGroup4.Name = "tileGroup4";
             this.tileGroup4.Text = "部門管理";
             // 
@@ -293,15 +304,18 @@ namespace KnowledgeSystem.Views._00_Generals
             this.tileItem13.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
             this.tileItem13.Name = "tileItem13";
             // 
-            // tileItem4
+            // btnSafetyCert
             // 
-            this.tileItem4.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
-            this.tileItem4.AppearanceItem.Normal.Options.UseFont = true;
+            this.btnSafetyCert.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
+            this.btnSafetyCert.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
+            this.btnSafetyCert.AppearanceItem.Normal.Options.UseBackColor = true;
+            this.btnSafetyCert.AppearanceItem.Normal.Options.UseFont = true;
             tileItemElement15.Text = "工安證照管理";
-            this.tileItem4.Elements.Add(tileItemElement15);
-            this.tileItem4.Id = 20;
-            this.tileItem4.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
-            this.tileItem4.Name = "tileItem4";
+            this.btnSafetyCert.Elements.Add(tileItemElement15);
+            this.btnSafetyCert.Id = 20;
+            this.btnSafetyCert.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
+            this.btnSafetyCert.Name = "btnSafetyCert";
+            this.btnSafetyCert.ItemClick += new DevExpress.XtraEditors.TileItemClickEventHandler(this.btnSafetyCert_ItemClick);
             // 
             // tileGroup5
             // 
@@ -384,16 +398,6 @@ namespace KnowledgeSystem.Views._00_Generals
             this.lbSoftName.TextLocation = DevExpress.Utils.Locations.Top;
             this.lbSoftName.TextSize = new System.Drawing.Size(388, 96);
             // 
-            // tileItem11
-            // 
-            this.tileItem11.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
-            this.tileItem11.AppearanceItem.Normal.Options.UseFont = true;
-            tileItemElement5.Text = "ISO稽核文件";
-            this.tileItem11.Elements.Add(tileItemElement5);
-            this.tileItem11.Id = 22;
-            this.tileItem11.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
-            this.tileItem11.Name = "tileItem11";
-            // 
             // f00_Main
             // 
             this.Appearance.Options.UseFont = true;
@@ -442,7 +446,7 @@ namespace KnowledgeSystem.Views._00_Generals
         private TileGroup tileGroup5;
         private TileItem btnRoleManage;
         private TileItem btnUserManage;
-        private TileItem tileItem4;
+        private TileItem btnSafetyCert;
         private TileItem tileInfoUser;
         private TileItem tileItem11;
     }
