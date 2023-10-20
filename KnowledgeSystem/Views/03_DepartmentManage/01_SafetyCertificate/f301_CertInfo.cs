@@ -1,4 +1,10 @@
-﻿using DevExpress.XtraEditors;
+﻿using BusinessLayer;
+using DataAccessLayer;
+using DevExpress.Internal;
+using DevExpress.Utils.Win;
+using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraEditors.Repository;
 using KnowledgeSystem.Configs;
 using System;
 using System.Collections.Generic;
@@ -10,6 +16,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Media;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
 {
@@ -23,6 +30,14 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
 
         public EventFormInfo _eventInfo = EventFormInfo.Create;
         public string _formName = "";
+        string idDept2word = TPConfigs.LoginUser.IdDepartment.Substring(0, 2);
+
+        private enum CertStatus
+        {
+            應取證照,
+            備援證照,
+            無效證照
+        }
 
         private void InitializeIcon()
         {
@@ -33,7 +48,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
 
         private void EnabledController(bool _enable = true)
         {
-            //cbbIdParent.Enabled = _enable;
+            cbbDept.Enabled = false;
             //txbFunction.Enabled = _enable;
             //cbbControl.Enabled = _enable;
             //txbPrioritize.Enabled = _enable;
@@ -85,6 +100,65 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
         private void f301_CertInfo_Load(object sender, EventArgs e)
         {
             LockControl();
+
+            var lsDepts = dm_DeptBUS.Instance.GetList().Select(r => new dm_Departments
+            {
+                Id = r.Id,
+                DisplayName = $"{r.Id} {r.DisplayName}"
+            }).ToList();
+            cbbDept.Properties.DataSource = lsDepts;
+            cbbDept.Properties.DisplayMember = "DisplayName";
+            cbbDept.Properties.ValueMember = "Id";
+
+            var lsUsers = dm_UserBUS.Instance.GetListByDept(idDept2word).Select(r => new dm_User
+            {
+                Id = r.Id,
+                IdDepartment = r.IdDepartment,
+                DisplayName = $"{r.DisplayName} {r.DisplayNameVN}"
+            }).ToList(); ;
+            cbbUser.Properties.DataSource = lsUsers;
+            cbbUser.Properties.DisplayMember = "DisplayName";
+            cbbUser.Properties.ValueMember = "Id";
+            cbbUser.Properties.BestFitWidth = 110;
+
+            cbbCertStatus.Properties.Items.AddRange((CertStatus[])Enum.GetValues(typeof(CertStatus)));
+            cbbCertStatus.SelectedIndex = 0;
+
+            switch (_eventInfo)
+            {
+                case EventFormInfo.Create:
+                    cbbDept.EditValue = idDept2word;
+                    break;
+                case EventFormInfo.View:
+                    break;
+                case EventFormInfo.Update:
+                    break;
+                case EventFormInfo.Delete:
+                    break;
+                case EventFormInfo.ViewOnly:
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void btnEdit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            _eventInfo = EventFormInfo.Update;
+            LockControl();
+        }
+
+        private void btnDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            DefaultMsg.MsgConfirmDel();
+
+            _eventInfo = EventFormInfo.Delete;
+            LockControl();
+        }
+
+        private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var aaa = EnumHelper.GetEnumByDescription<CertStatus>(cbbCertStatus.EditValue?.ToString());
         }
     }
 }

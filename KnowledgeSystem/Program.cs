@@ -5,6 +5,7 @@ using DevExpress.UserSkins;
 using KnowledgeSystem.Configs;
 using KnowledgeSystem.Views._00_Generals;
 using KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase;
+using KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate;
 using KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager;
 using System;
 using System.Collections.Generic;
@@ -33,7 +34,7 @@ namespace KnowledgeSystem
 
             //TPConfigs.LoginUser = dm_UserBUS.Instance.GetItemById("VNW0014732");
             //AppPermission.Instance.CheckAppPermission(7);
-            //Application.Run(new f00_FluentFrame(17));
+            //Application.Run(new f00_FluentFrame(21));
         }
     }
 }

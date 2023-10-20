@@ -52,6 +52,15 @@
           <Property Name="IdGroup" Type="int" Nullable="false" />
           <Property Name="IdUser" Type="varchar" MaxLength="10" Nullable="false" />
         </EntityType>
+        <EntityType Name="dm_JobTitle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="OldId" Type="varchar" MaxLength="8" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="OldDisplayName" Type="nvarchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="dm_Progress">
           <Key>
             <PropertyRef Name="Id" />
@@ -270,6 +279,7 @@
           <EntitySet Name="dm_FunctionRole" EntityType="Self.dm_FunctionRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dm_Group" EntityType="Self.dm_Group" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dm_GroupUser" EntityType="Self.dm_GroupUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dm_JobTitle" EntityType="Self.dm_JobTitle" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dm_Progress" EntityType="Self.dm_Progress" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dm_Role" EntityType="Self.dm_Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dm_StepProgress" EntityType="Self.dm_StepProgress" Schema="dbo" store:Type="Tables" />
@@ -321,6 +331,7 @@
           <EntitySet Name="dm_User" EntityType="DBDocumentManagementSystemModel.dm_User" />
           <EntitySet Name="dm_Group" EntityType="DBDocumentManagementSystemModel.dm_Group" />
           <EntitySet Name="dm_Progress" EntityType="DBDocumentManagementSystemModel.dm_Progress" />
+          <EntitySet Name="dm_JobTitle" EntityType="DBDocumentManagementSystemModel.dm_JobTitle" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -580,6 +591,15 @@
           <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="IdDept" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
           <Property Name="Prioritize" Type="Int32" />
+        </EntityType>
+        <EntityType Name="dm_JobTitle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="OldId" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="OldDisplayName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -867,6 +887,16 @@
                 <ScalarProperty Name="Prioritize" ColumnName="Prioritize" />
                 <ScalarProperty Name="IdDept" ColumnName="IdDept" />
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dm_JobTitle">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_JobTitle">
+              <MappingFragment StoreEntitySet="dm_JobTitle">
+                <ScalarProperty Name="OldDisplayName" ColumnName="OldDisplayName" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="OldId" ColumnName="OldId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

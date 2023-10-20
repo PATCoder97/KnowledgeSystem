@@ -143,7 +143,7 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void f00_FluentFrame_Shown(object sender, EventArgs e)
         {
-            List<int> lsGroupOpenFirstForm = new List<int>() { 1, 7, 17 };
+            List<int> lsGroupOpenFirstForm = new List<int>() { 1, 7, 17, 21 };
 
             // Nếu GroupId có trong list, chọn AppForm đầu tiên trong TreeView và mở form tương ứng
             if (lsGroupOpenFirstForm.Contains(groupId) && lsFunctions.Count > 0)

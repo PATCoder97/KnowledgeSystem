@@ -59,6 +59,9 @@
     </Compile>
     <Compile Include="dm_FunctionM.cs" />
     <Compile Include="dm_GroupProgressM.cs" />
+    <Compile Include="dm_JobTitle.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
     <Compile Include="dm_Progress.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>

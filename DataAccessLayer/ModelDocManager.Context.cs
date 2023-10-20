@@ -50,5 +50,6 @@ namespace DataAccessLayer
         public virtual DbSet<dm_User> dm_User { get; set; }
         public virtual DbSet<dm_Group> dm_Group { get; set; }
         public virtual DbSet<dm_Progress> dm_Progress { get; set; }
+        public virtual DbSet<dm_JobTitle> dm_JobTitle { get; set; }
     }
 }

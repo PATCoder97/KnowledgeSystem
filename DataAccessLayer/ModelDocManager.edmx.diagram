@@ -30,6 +30,7 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_User" Width="1.5" PointX="0.5" PointY="0.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_Group" Width="1.5" PointX="8.625" PointY="0.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_Progress" Width="1.5" PointX="11.875" PointY="0.5" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_JobTitle" Width="1.5" PointX="16.75" PointY="0.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
