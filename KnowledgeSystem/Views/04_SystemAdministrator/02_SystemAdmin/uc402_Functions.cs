@@ -20,7 +20,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
+namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 {
     public partial class uc402_Functions : DevExpress.XtraEditors.XtraUserControl
     {

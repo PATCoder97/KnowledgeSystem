@@ -87,6 +87,12 @@
     <Reference Include="EPPlus.System.Drawing, Version=6.1.1.0, Culture=neutral, PublicKeyToken=2308d35469c9bac0, processorArchitecture=MSIL">
       <HintPath>..\packages\EPPlus.System.Drawing.6.1.1\lib\net462\EPPlus.System.Drawing.dll</HintPath>
     </Reference>
+    <Reference Include="ExcelDataReader, Version=3.6.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.3.6.0\lib\net45\ExcelDataReader.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelDataReader.DataSet, Version=3.6.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.DataSet.3.6.0\lib\net35\ExcelDataReader.DataSet.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.IO.RecyclableMemoryStream, Version=1.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.IO.RecyclableMemoryStream.1.4.1\lib\net46\Microsoft.IO.RecyclableMemoryStream.dll</HintPath>
     </Reference>
@@ -109,6 +115,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
     <Reference Include="System.Security" />
@@ -276,71 +283,77 @@
     <Compile Include="Views\03_DepartmentManage\01_SafetyCertificate\uc301_SafetyCertMain.Designer.cs">
       <DependentUpon>uc301_SafetyCertMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\04_SystemAdministrator\01_UserManage\f401_UserInfo.cs">
+    <Compile Include="Views\04_SystemAdministrator\01_Moderator\f401_UserInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\04_SystemAdministrator\01_UserManage\f401_UserInfo.Designer.cs">
+    <Compile Include="Views\04_SystemAdministrator\01_Moderator\f401_UserInfo.Designer.cs">
       <DependentUpon>f401_UserInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\f402_FuncInfo.cs">
+    <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_FuncInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\f402_FuncInfo.Designer.cs">
+    <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_FuncInfo.Designer.cs">
       <DependentUpon>f402_FuncInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\f402_ProgressInfo.cs">
+    <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_ProgressInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\f402_ProgressInfo.Designer.cs">
+    <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_ProgressInfo.Designer.cs">
       <DependentUpon>f402_ProgressInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\f402_RoleInfo.cs">
+    <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_RoleInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\f402_RoleInfo.Designer.cs">
+    <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_RoleInfo.Designer.cs">
       <DependentUpon>f402_RoleInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\f402_UserRole.cs">
+    <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_UserRole.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\f402_UserRole.Designer.cs">
+    <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_UserRole.Designer.cs">
       <DependentUpon>f402_UserRole.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\uc402_Progress.cs">
+    <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\uc402_Progress.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\uc402_Progress.Designer.cs">
+    <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\uc402_Progress.Designer.cs">
       <DependentUpon>uc402_Progress.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\04_SystemAdministrator\01_UserManage\uc401_GroupManage.cs">
+    <Compile Include="Views\04_SystemAdministrator\01_Moderator\uc401_GroupManage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\04_SystemAdministrator\01_UserManage\uc401_GroupManage.Designer.cs">
+    <Compile Include="Views\04_SystemAdministrator\01_Moderator\uc401_GroupManage.Designer.cs">
       <DependentUpon>uc401_GroupManage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\04_SystemAdministrator\01_UserManage\f401_GroupInfo.cs">
+    <Compile Include="Views\04_SystemAdministrator\01_Moderator\f401_GroupInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\04_SystemAdministrator\01_UserManage\f401_GroupInfo.Designer.cs">
+    <Compile Include="Views\04_SystemAdministrator\01_Moderator\f401_GroupInfo.Designer.cs">
       <DependentUpon>f401_GroupInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\04_SystemAdministrator\01_UserManage\uc401_UserManage.cs">
+    <Compile Include="Views\04_SystemAdministrator\01_Moderator\uc401_UserManage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\04_SystemAdministrator\01_UserManage\uc401_UserManage.Designer.cs">
+    <Compile Include="Views\04_SystemAdministrator\01_Moderator\uc401_UserManage.Designer.cs">
       <DependentUpon>uc401_UserManage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\04_SystemAdministrator\01_UserManage\uc401_UserManage_Info.cs">
+    <Compile Include="Views\04_SystemAdministrator\01_Moderator\uc401_UserManage_Info.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\04_SystemAdministrator\01_UserManage\uc401_UserManage_Info.Designer.cs">
+    <Compile Include="Views\04_SystemAdministrator\01_Moderator\uc401_UserManage_Info.Designer.cs">
       <DependentUpon>uc401_UserManage_Info.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\uc402_Functions.cs">
+    <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\uc402_Functions.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\04_SystemAdministrator\02_PermissionManager\uc402_Functions.Designer.cs">
+    <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\uc402_Functions.Designer.cs">
       <DependentUpon>uc402_Functions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\uc402_UploadExcelDB.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\uc402_UploadExcelDB.Designer.cs">
+      <DependentUpon>uc402_UploadExcelDB.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -422,38 +435,41 @@
     <EmbeddedResource Include="Views\03_DepartmentManage\01_SafetyCertificate\uc301_SafetyCertMain.resx">
       <DependentUpon>uc301_SafetyCertMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\04_SystemAdministrator\01_UserManage\f401_UserInfo.resx">
+    <EmbeddedResource Include="Views\04_SystemAdministrator\01_Moderator\f401_UserInfo.resx">
       <DependentUpon>f401_UserInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\04_SystemAdministrator\02_PermissionManager\f402_FuncInfo.resx">
+    <EmbeddedResource Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_FuncInfo.resx">
       <DependentUpon>f402_FuncInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\04_SystemAdministrator\02_PermissionManager\f402_ProgressInfo.resx">
+    <EmbeddedResource Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_ProgressInfo.resx">
       <DependentUpon>f402_ProgressInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\04_SystemAdministrator\02_PermissionManager\f402_RoleInfo.resx">
+    <EmbeddedResource Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_RoleInfo.resx">
       <DependentUpon>f402_RoleInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\04_SystemAdministrator\02_PermissionManager\f402_UserRole.resx">
+    <EmbeddedResource Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_UserRole.resx">
       <DependentUpon>f402_UserRole.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\04_SystemAdministrator\02_PermissionManager\uc402_Progress.resx">
+    <EmbeddedResource Include="Views\04_SystemAdministrator\02_SystemAdmin\uc402_Progress.resx">
       <DependentUpon>uc402_Progress.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\04_SystemAdministrator\01_UserManage\uc401_GroupManage.resx">
+    <EmbeddedResource Include="Views\04_SystemAdministrator\01_Moderator\uc401_GroupManage.resx">
       <DependentUpon>uc401_GroupManage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\04_SystemAdministrator\01_UserManage\f401_GroupInfo.resx">
+    <EmbeddedResource Include="Views\04_SystemAdministrator\01_Moderator\f401_GroupInfo.resx">
       <DependentUpon>f401_GroupInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\04_SystemAdministrator\01_UserManage\uc401_UserManage.resx">
+    <EmbeddedResource Include="Views\04_SystemAdministrator\01_Moderator\uc401_UserManage.resx">
       <DependentUpon>uc401_UserManage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\04_SystemAdministrator\01_UserManage\uc401_UserManage_Info.resx">
+    <EmbeddedResource Include="Views\04_SystemAdministrator\01_Moderator\uc401_UserManage_Info.resx">
       <DependentUpon>uc401_UserManage_Info.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\04_SystemAdministrator\02_PermissionManager\uc402_Functions.resx">
+    <EmbeddedResource Include="Views\04_SystemAdministrator\02_SystemAdmin\uc402_Functions.resx">
       <DependentUpon>uc402_Functions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\04_SystemAdministrator\02_SystemAdmin\uc402_UploadExcelDB.resx">
+      <DependentUpon>uc402_UploadExcelDB.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
     <None Include="Fonts\kaiu.ttf" />

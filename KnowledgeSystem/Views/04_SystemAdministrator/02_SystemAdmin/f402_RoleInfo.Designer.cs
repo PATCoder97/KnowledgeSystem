@@ -1,4 +1,4 @@
-﻿namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
+﻿namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 {
     partial class f402_RoleInfo
     {

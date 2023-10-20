@@ -251,6 +251,13 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="DisplayName" Type="nvarchar" MaxLength="8" Nullable="false" />
         </EntityType>
+        <EntityType Name="dt301_Course">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
         <EntityType Name="sys_Log">
           <Key>
             <PropertyRef Name="Id" />
@@ -296,6 +303,7 @@
           <EntitySet Name="dt207_Targets" EntityType="Self.dt207_Targets" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt207_Type" EntityType="Self.dt207_Type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt207_TypeHisGetFile" EntityType="Self.dt207_TypeHisGetFile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt301_Course" EntityType="Self.dt301_Course" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sys_Log" EntityType="Self.sys_Log" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sys_StaticValue" EntityType="Self.sys_StaticValue" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -330,6 +338,7 @@
           <EntitySet Name="dm_Group" EntityType="DBDocumentManagementSystemModel.dm_Group" />
           <EntitySet Name="dm_Progress" EntityType="DBDocumentManagementSystemModel.dm_Progress" />
           <EntitySet Name="dm_JobTitle" EntityType="DBDocumentManagementSystemModel.dm_JobTitle" />
+          <EntitySet Name="dt301_Course" EntityType="DBDocumentManagementSystemModel.dt301_Course" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -591,6 +600,13 @@
           <Property Name="Prioritize" Type="Int32" />
         </EntityType>
         <EntityType Name="dm_JobTitle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dt301_Course">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -890,6 +906,14 @@
           <EntitySetMapping Name="dm_JobTitle">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_JobTitle">
               <MappingFragment StoreEntitySet="dm_JobTitle">
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt301_Course">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt301_Course">
+              <MappingFragment StoreEntitySet="dt301_Course">
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

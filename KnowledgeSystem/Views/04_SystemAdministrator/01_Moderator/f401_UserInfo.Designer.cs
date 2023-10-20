@@ -1,4 +1,4 @@
-﻿namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
+﻿namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 {
     partial class f401_UserInfo
     {

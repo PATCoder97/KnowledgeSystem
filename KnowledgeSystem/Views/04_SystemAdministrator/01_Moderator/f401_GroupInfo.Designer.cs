@@ -1,7 +1,7 @@
 ﻿using KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase;
-using KnowledgeSystem.Views._04_SystemAdministrator._01_UserManager;
+using KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator;
 
-namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
+namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 {
     partial class f401_GroupInfo
     {

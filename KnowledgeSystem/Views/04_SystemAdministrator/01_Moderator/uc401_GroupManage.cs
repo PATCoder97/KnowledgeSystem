@@ -4,7 +4,7 @@ using KnowledgeSystem.Configs;
 using System;
 using System.Windows.Forms;
 
-namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
+namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 {
     public partial class uc401_GroupManage : DevExpress.XtraEditors.XtraUserControl
     {

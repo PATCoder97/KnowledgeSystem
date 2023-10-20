@@ -5,7 +5,7 @@ using DevExpress.Utils.About;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using KnowledgeSystem.Configs;
-using KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage;
+using KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static DevExpress.XtraEditors.Mask.MaskSettings;
 
-namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
+namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 {
     public partial class uc402_Progress : DevExpress.XtraEditors.XtraUserControl
     {

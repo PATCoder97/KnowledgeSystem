@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraSplashScreen;
 
-namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
+namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 {
     public partial class f402_FuncInfo : DevExpress.XtraEditors.XtraForm
     {

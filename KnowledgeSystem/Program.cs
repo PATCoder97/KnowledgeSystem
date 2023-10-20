@@ -6,7 +6,7 @@ using KnowledgeSystem.Configs;
 using KnowledgeSystem.Views._00_Generals;
 using KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase;
 using KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate;
-using KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager;
+using KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
