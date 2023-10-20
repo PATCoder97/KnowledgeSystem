@@ -71,8 +71,8 @@ namespace KnowledgeSystem.Views._00_Generals
             this.btnSafetyCert = new DevExpress.XtraEditors.TileItem();
             this.tileGroup5 = new DevExpress.XtraEditors.TileGroup();
             this.tileInfoUser = new DevExpress.XtraEditors.TileItem();
-            this.btnUserManage = new DevExpress.XtraEditors.TileItem();
-            this.btnRoleManage = new DevExpress.XtraEditors.TileItem();
+            this.btnMod = new DevExpress.XtraEditors.TileItem();
+            this.btnSysAdmin = new DevExpress.XtraEditors.TileItem();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.lbSoftName = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
@@ -320,8 +320,8 @@ namespace KnowledgeSystem.Views._00_Generals
             // tileGroup5
             // 
             this.tileGroup5.Items.Add(this.tileInfoUser);
-            this.tileGroup5.Items.Add(this.btnUserManage);
-            this.tileGroup5.Items.Add(this.btnRoleManage);
+            this.tileGroup5.Items.Add(this.btnMod);
+            this.tileGroup5.Items.Add(this.btnSysAdmin);
             this.tileGroup5.Name = "tileGroup5";
             this.tileGroup5.Text = "系統管理";
             // 
@@ -334,43 +334,43 @@ namespace KnowledgeSystem.Views._00_Generals
             this.tileInfoUser.Name = "tileInfoUser";
             this.tileInfoUser.ItemClick += new DevExpress.XtraEditors.TileItemClickEventHandler(this.tileInfoUser_ItemClick);
             // 
-            // btnUserManage
+            // btnMod
             // 
-            this.btnUserManage.AppearanceItem.Hovered.Font = new System.Drawing.Font("DFKai-SB", 26F);
-            this.btnUserManage.AppearanceItem.Hovered.Options.UseFont = true;
-            this.btnUserManage.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
-            this.btnUserManage.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
-            this.btnUserManage.AppearanceItem.Normal.Options.UseBackColor = true;
-            this.btnUserManage.AppearanceItem.Normal.Options.UseFont = true;
-            this.btnUserManage.AppearanceItem.Pressed.Font = new System.Drawing.Font("DFKai-SB", 26F);
-            this.btnUserManage.AppearanceItem.Pressed.Options.UseFont = true;
-            this.btnUserManage.AppearanceItem.Selected.Font = new System.Drawing.Font("DFKai-SB", 26F);
-            this.btnUserManage.AppearanceItem.Selected.Options.UseFont = true;
+            this.btnMod.AppearanceItem.Hovered.Font = new System.Drawing.Font("DFKai-SB", 26F);
+            this.btnMod.AppearanceItem.Hovered.Options.UseFont = true;
+            this.btnMod.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
+            this.btnMod.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
+            this.btnMod.AppearanceItem.Normal.Options.UseBackColor = true;
+            this.btnMod.AppearanceItem.Normal.Options.UseFont = true;
+            this.btnMod.AppearanceItem.Pressed.Font = new System.Drawing.Font("DFKai-SB", 26F);
+            this.btnMod.AppearanceItem.Pressed.Options.UseFont = true;
+            this.btnMod.AppearanceItem.Selected.Font = new System.Drawing.Font("DFKai-SB", 26F);
+            this.btnMod.AppearanceItem.Selected.Options.UseFont = true;
             tileItemElement16.Text = "用戶管理";
-            this.btnUserManage.Elements.Add(tileItemElement16);
-            this.btnUserManage.Id = 19;
-            this.btnUserManage.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
-            this.btnUserManage.Name = "btnUserManage";
-            this.btnUserManage.ItemClick += new DevExpress.XtraEditors.TileItemClickEventHandler(this.btnUserManage_ItemClick);
+            this.btnMod.Elements.Add(tileItemElement16);
+            this.btnMod.Id = 19;
+            this.btnMod.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
+            this.btnMod.Name = "btnMod";
+            this.btnMod.ItemClick += new DevExpress.XtraEditors.TileItemClickEventHandler(this.btnUserManage_ItemClick);
             // 
-            // btnRoleManage
+            // btnSysAdmin
             // 
-            this.btnRoleManage.AppearanceItem.Hovered.Font = new System.Drawing.Font("DFKai-SB", 26F);
-            this.btnRoleManage.AppearanceItem.Hovered.Options.UseFont = true;
-            this.btnRoleManage.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
-            this.btnRoleManage.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
-            this.btnRoleManage.AppearanceItem.Normal.Options.UseBackColor = true;
-            this.btnRoleManage.AppearanceItem.Normal.Options.UseFont = true;
-            this.btnRoleManage.AppearanceItem.Pressed.Font = new System.Drawing.Font("DFKai-SB", 26F);
-            this.btnRoleManage.AppearanceItem.Pressed.Options.UseFont = true;
-            this.btnRoleManage.AppearanceItem.Selected.Font = new System.Drawing.Font("DFKai-SB", 26F);
-            this.btnRoleManage.AppearanceItem.Selected.Options.UseFont = true;
+            this.btnSysAdmin.AppearanceItem.Hovered.Font = new System.Drawing.Font("DFKai-SB", 26F);
+            this.btnSysAdmin.AppearanceItem.Hovered.Options.UseFont = true;
+            this.btnSysAdmin.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
+            this.btnSysAdmin.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
+            this.btnSysAdmin.AppearanceItem.Normal.Options.UseBackColor = true;
+            this.btnSysAdmin.AppearanceItem.Normal.Options.UseFont = true;
+            this.btnSysAdmin.AppearanceItem.Pressed.Font = new System.Drawing.Font("DFKai-SB", 26F);
+            this.btnSysAdmin.AppearanceItem.Pressed.Options.UseFont = true;
+            this.btnSysAdmin.AppearanceItem.Selected.Font = new System.Drawing.Font("DFKai-SB", 26F);
+            this.btnSysAdmin.AppearanceItem.Selected.Options.UseFont = true;
             tileItemElement17.Text = "系統管理";
-            this.btnRoleManage.Elements.Add(tileItemElement17);
-            this.btnRoleManage.Id = 18;
-            this.btnRoleManage.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
-            this.btnRoleManage.Name = "btnRoleManage";
-            this.btnRoleManage.ItemClick += new DevExpress.XtraEditors.TileItemClickEventHandler(this.btnRoleManage_ItemClick);
+            this.btnSysAdmin.Elements.Add(tileItemElement17);
+            this.btnSysAdmin.Id = 18;
+            this.btnSysAdmin.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
+            this.btnSysAdmin.Name = "btnSysAdmin";
+            this.btnSysAdmin.ItemClick += new DevExpress.XtraEditors.TileItemClickEventHandler(this.btnRoleManage_ItemClick);
             // 
             // Root
             // 
@@ -444,8 +444,8 @@ namespace KnowledgeSystem.Views._00_Generals
         private DevExpress.XtraEditors.TileItem tileItem12;
         private DevExpress.XtraEditors.TileItem tileItem13;
         private TileGroup tileGroup5;
-        private TileItem btnRoleManage;
-        private TileItem btnUserManage;
+        private TileItem btnSysAdmin;
+        private TileItem btnMod;
         private TileItem btnSafetyCert;
         private TileItem tileInfoUser;
         private TileItem tileItem11;

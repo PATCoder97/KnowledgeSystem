@@ -32,8 +32,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
         public EventFormInfo _eventInfo = EventFormInfo.Create;
         public dm_FunctionM _function = null;
 
-        dm_FunctionBUS _sysFunctionBUS = new dm_FunctionBUS();
-
         private void InitializeIcon()
         {
             btnEdit.ImageOptions.SvgImage = TPSvgimages.Edit;
@@ -113,7 +111,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
             }
             cbbPicture.Properties.SmallImages = svgImages;
 
-            var lsFuncs = _sysFunctionBUS.GetList();
+            var lsFuncs = dm_FunctionBUS.Instance.GetList();
             lsFuncs.Add(new dm_FunctionM() { Id = -1, DisplayName = "Root" });
 
             cbbIdParent.Properties.DataSource = lsFuncs;
@@ -178,21 +176,21 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
                 switch (_eventInfo)
                 {
                     case EventFormInfo.Create:
-                        _function.Id = _sysFunctionBUS.GetNewId();
+                        _function.Id = dm_FunctionBUS.Instance.GetNewId();
 
-                        result = _sysFunctionBUS.Add(_function);
+                        result = dm_FunctionBUS.Instance.Add(_function);
                         break;
                     case EventFormInfo.View:
                         break;
                     case EventFormInfo.Update:
                         _function.Id = (int)txbId.EditValue;
-                        result = _sysFunctionBUS.AddOrUpdate(_function);
+                        result = dm_FunctionBUS.Instance.AddOrUpdate(_function);
                         break;
                     case EventFormInfo.Delete:
                         var dialogResult = XtraMessageBox.Show($"Bạn xác nhận muốn xoá {_formName}: {_function.DisplayName}", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                         if (dialogResult != DialogResult.Yes) return;
 
-                        result = _sysFunctionBUS.Remove(_function.Id);
+                        result = dm_FunctionBUS.Instance.Remove(_function.Id);
                         break;
                     default:
                         break;

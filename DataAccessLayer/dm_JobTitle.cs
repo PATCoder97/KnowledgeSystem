@@ -15,8 +15,6 @@ namespace DataAccessLayer
     public partial class dm_JobTitle
     {
         public string Id { get; set; }
-        public string OldId { get; set; }
         public string DisplayName { get; set; }
-        public string OldDisplayName { get; set; }
     }
 }

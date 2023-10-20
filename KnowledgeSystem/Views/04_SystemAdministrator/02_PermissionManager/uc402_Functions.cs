@@ -32,8 +32,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
 
         #region parameters
 
-        dm_FunctionBUS _dm_FunctionBUS = new dm_FunctionBUS();
-
         BindingSource sourceFunc = new BindingSource();
         List<dm_FunctionM> lsFunctions = new List<dm_FunctionM>();
 
@@ -56,7 +54,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
         {
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                var lsFuncRole = _dm_FunctionBUS.GetList().OrderBy(r => r.Prioritize).ToList();
+                var lsFuncRole = dm_FunctionBUS.Instance.GetList().OrderBy(r => r.Prioritize).ToList();
 
                 //lsFunctions = (from data in db.dm_Function.OrderBy(r => r.Prioritize).ToList()
                 //               join funcs in lsFuncRole on data.Id equals funcs.IdFunction into dtg

@@ -57,9 +57,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="varchar" MaxLength="8" Nullable="false" />
-          <Property Name="OldId" Type="varchar" MaxLength="8" />
           <Property Name="DisplayName" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="OldDisplayName" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="dm_Progress">
           <Key>
@@ -597,9 +595,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
-          <Property Name="OldId" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
           <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="OldDisplayName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -894,9 +890,7 @@
           <EntitySetMapping Name="dm_JobTitle">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_JobTitle">
               <MappingFragment StoreEntitySet="dm_JobTitle">
-                <ScalarProperty Name="OldDisplayName" ColumnName="OldDisplayName" />
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="OldId" ColumnName="OldId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -31,7 +31,6 @@ namespace KnowledgeSystem.Views._00_Generals
         #region parameters
 
         // Khai báo các BUS để dùng BD
-        dm_FunctionBUS _dm_FunctionBUS = new dm_FunctionBUS();
         dm_FunctionRoleBUS _dm_FunctionRoleBUS = new dm_FunctionRoleBUS();
 
         Font fontTW14 = new Font("DFKai-SB", 14.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
@@ -74,7 +73,7 @@ namespace KnowledgeSystem.Views._00_Generals
         private void f00_FluentFrame_Load(object sender, EventArgs e)
         {
             // Lấy danh sách các AppForm từ cơ sở dữ liệu và điền vào TreeView control
-            var lsAllFunctions = _dm_FunctionBUS.GetListByIdParent(groupId);
+            var lsAllFunctions = dm_FunctionBUS.Instance.GetListByIdParent(groupId);
             var lsPermissions = AppPermission.lsPermissions;
 
             lsFunctions = (from data in lsAllFunctions
@@ -97,7 +96,7 @@ namespace KnowledgeSystem.Views._00_Generals
 
                 accordion.Hint = item.DisplayName;
 
-                var lsFuncChild = _dm_FunctionBUS.GetListByIdParent(item.Id);
+                var lsFuncChild = dm_FunctionBUS.Instance.GetListByIdParent(item.Id);
                 var lsChildren = (from data in lsFuncChild
                                   join granted in lsPermissions on data.Id equals granted
                                   select data).ToList();
@@ -143,10 +142,10 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void f00_FluentFrame_Shown(object sender, EventArgs e)
         {
-            List<int> lsGroupOpenFirstForm = new List<int>() { 1, 7, 17, 21 };
+            List<int> lsAutoOpenForm = AppPermission.GetListAutoOpenForm();
 
             // Nếu GroupId có trong list, chọn AppForm đầu tiên trong TreeView và mở form tương ứng
-            if (lsGroupOpenFirstForm.Contains(groupId) && lsFunctions.Count > 0)
+            if (lsAutoOpenForm.Contains(groupId) && lsFunctions.Count > 0)
             {
                 // Lấy AppForm đầu tiên trong TreeView và mở form tương ứng
                 var formShow = lsFunctions[0];
