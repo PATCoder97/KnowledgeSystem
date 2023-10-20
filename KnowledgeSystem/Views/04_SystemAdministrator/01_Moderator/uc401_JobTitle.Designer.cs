@@ -1,6 +1,6 @@
-﻿namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
+﻿namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 {
-    partial class uc301_JobTitle
+    partial class uc401_JobTitle
     {
         /// <summary> 
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc301_JobTitle));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc401_JobTitle));
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnAdd = new DevExpress.XtraBars.BarButtonItem();
@@ -251,7 +251,7 @@
             this.Controls.Add(this.barDockControlTop);
             this.Name = "uc301_JobTitle";
             this.Size = new System.Drawing.Size(884, 516);
-            this.Load += new System.EventHandler(this.uc301_JobTitle_Load);
+            this.Load += new System.EventHandler(this.uc401_JobTitle_Load);
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);

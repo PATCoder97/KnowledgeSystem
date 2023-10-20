@@ -265,17 +265,17 @@
     <Compile Include="Views\03_DepartmentManage\01_SafetyCertificate\f301_CertInfo.Designer.cs">
       <DependentUpon>f301_CertInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\03_DepartmentManage\01_SafetyCertificate\f301_JobTitleInfo.cs">
+    <Compile Include="Views\04_SystemAdministrator\01_Moderator\f401_JobTitleInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\03_DepartmentManage\01_SafetyCertificate\f301_JobTitleInfo.Designer.cs">
-      <DependentUpon>f301_JobTitleInfo.cs</DependentUpon>
+    <Compile Include="Views\04_SystemAdministrator\01_Moderator\f401_JobTitleInfo.Designer.cs">
+      <DependentUpon>f401_JobTitleInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\03_DepartmentManage\01_SafetyCertificate\uc301_JobTitle.cs">
+    <Compile Include="Views\04_SystemAdministrator\01_Moderator\uc401_JobTitle.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\03_DepartmentManage\01_SafetyCertificate\uc301_JobTitle.Designer.cs">
-      <DependentUpon>uc301_JobTitle.cs</DependentUpon>
+    <Compile Include="Views\04_SystemAdministrator\01_Moderator\uc401_JobTitle.Designer.cs">
+      <DependentUpon>uc401_JobTitle.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\03_DepartmentManage\01_SafetyCertificate\uc301_SafetyCertMain.cs">
       <SubType>UserControl</SubType>
@@ -426,11 +426,11 @@
     <EmbeddedResource Include="Views\03_DepartmentManage\01_SafetyCertificate\f301_CertInfo.resx">
       <DependentUpon>f301_CertInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\03_DepartmentManage\01_SafetyCertificate\f301_JobTitleInfo.resx">
-      <DependentUpon>f301_JobTitleInfo.cs</DependentUpon>
+    <EmbeddedResource Include="Views\04_SystemAdministrator\01_Moderator\f401_JobTitleInfo.resx">
+      <DependentUpon>f401_JobTitleInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\03_DepartmentManage\01_SafetyCertificate\uc301_JobTitle.resx">
-      <DependentUpon>uc301_JobTitle.cs</DependentUpon>
+    <EmbeddedResource Include="Views\04_SystemAdministrator\01_Moderator\uc401_JobTitle.resx">
+      <DependentUpon>uc401_JobTitle.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\01_SafetyCertificate\uc301_SafetyCertMain.resx">
       <DependentUpon>uc301_SafetyCertMain.cs</DependentUpon>

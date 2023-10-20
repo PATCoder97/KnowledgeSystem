@@ -15,11 +15,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 
-namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
+namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 {
-    public partial class f301_JobTitleInfo : DevExpress.XtraEditors.XtraForm
+    public partial class f401_JobTitleInfo : DevExpress.XtraEditors.XtraForm
     {
-        public f301_JobTitleInfo()
+        public f401_JobTitleInfo()
         {
             InitializeComponent();
             InitializeIcon();
@@ -84,7 +84,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
             }
         }
 
-        private void f301_JobTitleInfo_Load(object sender, EventArgs e)
+        private void f401_JobTitleInfo_Load(object sender, EventArgs e)
         {
             LockControl();
 

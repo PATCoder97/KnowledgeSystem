@@ -19,11 +19,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
+namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 {
-    public partial class uc301_JobTitle : DevExpress.XtraEditors.XtraUserControl
+    public partial class uc401_JobTitle : DevExpress.XtraEditors.XtraUserControl
     {
-        public uc301_JobTitle()
+        public uc401_JobTitle()
         {
             InitializeComponent();
             InitializeIcon();
@@ -47,7 +47,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
             gvData.BestFitColumns();
         }
 
-        private void uc301_JobTitle_Load(object sender, EventArgs e)
+        private void uc401_JobTitle_Load(object sender, EventArgs e)
         {
             gvData.ReadOnlyGridView();
             gvData.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
@@ -60,7 +60,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
 
         private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            f301_JobTitleInfo fInfo = new f301_JobTitleInfo();
+            f401_JobTitleInfo fInfo = new f401_JobTitleInfo();
             fInfo._eventInfo = EventFormInfo.Create;
             fInfo._formName = "職務";
             fInfo.ShowDialog();
@@ -78,7 +78,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
             GridView view = sender as GridView;
             dm_JobTitle _jobSelect = view.GetRow(view.FocusedRowHandle) as dm_JobTitle;
 
-            f301_JobTitleInfo fInfo = new f301_JobTitleInfo();
+            f401_JobTitleInfo fInfo = new f401_JobTitleInfo();
             fInfo._eventInfo = EventFormInfo.View;
             fInfo._formName = "用戶";
             fInfo._jobTitle = _jobSelect;

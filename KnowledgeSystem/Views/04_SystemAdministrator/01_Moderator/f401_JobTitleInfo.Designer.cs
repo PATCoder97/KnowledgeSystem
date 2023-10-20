@@ -1,6 +1,6 @@
-﻿namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
+﻿namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 {
-    partial class f301_JobTitleInfo
+    partial class f401_JobTitleInfo
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f301_JobTitleInfo));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f401_JobTitleInfo));
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnEdit = new DevExpress.XtraBars.BarButtonItem();
@@ -248,7 +248,7 @@
             this.Name = "f301_JobTitleInfo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "f301_JobTitleInfo";
-            this.Load += new System.EventHandler(this.f301_JobTitleInfo_Load);
+            this.Load += new System.EventHandler(this.f401_JobTitleInfo_Load);
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
