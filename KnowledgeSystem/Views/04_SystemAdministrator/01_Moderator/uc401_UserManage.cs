@@ -39,10 +39,11 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
         Font fontDFKaiSB12 = new Font("DFKai-SB", 12.0f, FontStyle.Regular);
         BindingSource sourceUsers = new BindingSource();
 
-        private class UserInfos : dm_User
+        private class dmUserM : dm_User
         {
             public string RoleName { get; set; }
             public string DeptName { get; set; }
+            public string JobName { get; set; }
         }
 
         #endregion
@@ -64,15 +65,18 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
         private void LoadUser()
         {
-          var lsUsers = dm_UserBUS.Instance.GetList();
+            var lsUsers = dm_UserBUS.Instance.GetList();
             var lsDepts = dm_DeptBUS.Instance.GetList();
             var lsRoles = dm_RoleBUS.Instance.GetList();
+            var lsJobTitles = dm_JobTitleBUS.Instance.GetList();
 
             helper.SaveViewInfo();
 
             var lsUserManage = (from data in lsUsers
                                 join depts in lsDepts on data.IdDepartment equals depts.Id
-                                select new UserInfos()
+                                join job in lsJobTitles on data.JobCode equals job.Id into dtg
+                                from g in dtg.DefaultIfEmpty()
+                                select new dmUserM()
                                 {
                                     Id = data.Id,
                                     DisplayName = $"{data.DisplayName}{(!string.IsNullOrEmpty(data.DisplayNameVN) ? $"\n{data.DisplayNameVN}" : "")}",
@@ -85,13 +89,15 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                                     CitizenID = data.CitizenID,
                                     Nationality = data.Nationality,
                                     PCName = data.PCName,
-                                    IPAddress = data.IPAddress
+                                    IPAddress = data.IPAddress,
+                                    JobCode = data.JobCode,
+                                    JobName = g != null ? g.DisplayName : ""
                                 }).ToList();
 
             sourceUsers.DataSource = lsUserManage;
 
-            gvData.BestFitColumns();
             helper.LoadViewInfo();
+            gvData.BestFitColumns();
         }
 
         #endregion

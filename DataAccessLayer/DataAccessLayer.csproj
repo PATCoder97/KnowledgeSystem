@@ -122,6 +122,9 @@
     <Compile Include="dm_GroupUser.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
+    <Compile Include="dt301_CertReqSetting.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
     <Compile Include="dt301_Course.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>

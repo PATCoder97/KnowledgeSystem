@@ -134,6 +134,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
                     _sourceFunc.DataSource = lsFunctionDisplay;
                     tlsFunction.RefreshDataSource();
+                    tlsFunction.BestFitColumns();
                     break;
                 case EventFormInfo.Update:
                     break;
@@ -150,6 +151,9 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
         {
             _eventInfo = EventFormInfo.Update;
             LockControl();
+            tlsFunction.RefreshDataSource();
+            tlsFunction.BestFitColumns();
+            tlsFunction.FocusedNode = tlsFunction.Nodes.AutoFilterNode;
         }
 
         private void btnDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

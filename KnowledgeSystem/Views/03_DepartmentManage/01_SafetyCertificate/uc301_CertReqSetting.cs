@@ -16,9 +16,9 @@ using System.Windows.Forms;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
 {
-    public partial class uc301_Course : DevExpress.XtraEditors.XtraUserControl
+    public partial class uc301_CertReqSetting : DevExpress.XtraEditors.XtraUserControl
     {
-        public uc301_Course()
+        public uc301_CertReqSetting()
         {
             InitializeComponent();
             InitializeIcon();
@@ -26,8 +26,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
         }
 
         RefreshHelper helper;
-        List<dt301_Course> lsCourses = new List<dt301_Course>();
-        BindingSource sourceCourses = new BindingSource();
+        List<dt301_CertReqSetting> lsCertReqSets = new List<dt301_CertReqSetting>();
+        BindingSource sourceCertReqSet = new BindingSource();
 
         private void InitializeIcon()
         {
@@ -38,29 +38,29 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
         private void LoadData()
         {
             helper.SaveViewInfo();
-            lsCourses = dt301_CourseBUS.Instance.GetList();
-            sourceCourses.DataSource = lsCourses;
+            lsCertReqSets = dt301_CertReqSetBUS.Instance.GetList();
+            sourceCertReqSet.DataSource = lsCertReqSets;
             helper.LoadViewInfo();
 
             gvData.BestFitColumns();
         }
 
-        private void uc301_Course_Load(object sender, EventArgs e)
+        private void uc301_CertReqSetting_Load(object sender, EventArgs e)
         {
             gvData.ReadOnlyGridView();
             gvData.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
             LoadData();
 
-            gcData.DataSource = sourceCourses;
+            gcData.DataSource = sourceCertReqSet;
 
             gvData.BestFitColumns();
         }
 
         private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            f401_JobTitleInfo fInfo = new f401_JobTitleInfo();
+            f301_CertReqSetInfo fInfo = new f301_CertReqSetInfo();
             fInfo._eventInfo = EventFormInfo.Create;
-            fInfo._formName = "課程";
+            fInfo._formName = "證照要求";
             fInfo.ShowDialog();
 
             LoadData();
@@ -74,12 +74,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
         private void gvData_DoubleClick(object sender, EventArgs e)
         {
             GridView view = sender as GridView;
-            dt301_Course _course = view.GetRow(view.FocusedRowHandle) as dt301_Course;
+            dt301_CertReqSetting _certReqSet = view.GetRow(view.FocusedRowHandle) as dt301_CertReqSetting;
 
-            f301_CourseInfo fInfo = new f301_CourseInfo();
+            f301_CertReqSetInfo fInfo = new f301_CertReqSetInfo();
             fInfo._eventInfo = EventFormInfo.View;
-            fInfo._formName = "課程";
-            fInfo._course = _course;
+            fInfo._formName = "證照要求";
+            fInfo._certReq = _certReqSet;
             fInfo.ShowDialog();
 
             LoadData();

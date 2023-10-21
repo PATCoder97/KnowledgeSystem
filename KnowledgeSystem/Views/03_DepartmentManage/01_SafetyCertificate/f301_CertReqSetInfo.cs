@@ -1,10 +1,9 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
-using DevExpress.Internal;
-using DevExpress.Utils.Win;
+using DevExpress.Pdf.Native.BouncyCastle.Asn1.Ocsp;
 using DevExpress.XtraEditors;
-using DevExpress.XtraEditors.Controls;
-using DevExpress.XtraEditors.Repository;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraSplashScreen;
 using KnowledgeSystem.Configs;
 using System;
 using System.Collections.Generic;
@@ -12,17 +11,15 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Media;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
 {
-    public partial class f301_CertInfo : DevExpress.XtraEditors.XtraForm
+    public partial class f301_CertReqSetInfo : DevExpress.XtraEditors.XtraForm
     {
-        public f301_CertInfo()
+        public f301_CertReqSetInfo()
         {
             InitializeComponent();
             InitializeIcon();
@@ -30,14 +27,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
 
         public EventFormInfo _eventInfo = EventFormInfo.Create;
         public string _formName = "";
+        public dt301_CertReqSetting _certReq = null;
         string idDept2word = TPConfigs.LoginUser.IdDepartment.Substring(0, 2);
-
-        private enum CertStatus
-        {
-            應取證照,
-            備援證照,
-            無效證照
-        }
 
         private void InitializeIcon()
         {
@@ -49,9 +40,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
         private void EnabledController(bool _enable = true)
         {
             cbbDept.Enabled = false;
-            cbbUser.Enabled = _enable;
-            cbbCertStatus.Enabled = _enable;
-            cbbJobTitle.Enabled = false;
+            cbbJobTitle.Enabled = _enable;
             //cbbControl.Enabled = _enable;
             //txbPrioritize.Enabled = _enable;
             //cbbPicture.Enabled = _enable;
@@ -99,7 +88,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
             }
         }
 
-        private void f301_CertInfo_Load(object sender, EventArgs e)
+
+        private void f301_CertReqSetInfo_Load(object sender, EventArgs e)
         {
             LockControl();
 
@@ -112,32 +102,29 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
             cbbDept.Properties.DisplayMember = "DisplayName";
             cbbDept.Properties.ValueMember = "Id";
 
-            var lsUsers = dm_UserBUS.Instance.GetListByDept(idDept2word).Select(r => new dm_User
-            {
-                Id = r.Id,
-                IdDepartment = r.IdDepartment,
-                DisplayName = $"{r.DisplayName} {r.DisplayNameVN}",
-                JobCode = r.JobCode
-            }).ToList(); ;
-            cbbUser.Properties.DataSource = lsUsers;
-            cbbUser.Properties.DisplayMember = "DisplayName";
-            cbbUser.Properties.ValueMember = "Id";
-            cbbUser.Properties.BestFitWidth = 110;
-
             var lsJobTitles = dm_JobTitleBUS.Instance.GetList().Select(r => new dm_JobTitle() { Id = r.Id, DisplayName = $"{r.Id} {r.DisplayName}" });
             cbbJobTitle.Properties.DataSource = lsJobTitles;
             cbbJobTitle.Properties.DisplayMember = "DisplayName";
             cbbJobTitle.Properties.ValueMember = "Id";
 
-            cbbCertStatus.Properties.Items.AddRange((CertStatus[])Enum.GetValues(typeof(CertStatus)));
-            cbbCertStatus.SelectedIndex = 0;
+            var lsCourse = dt301_CourseBUS.Instance.GetList().Select(r => new dt301_Course() { Id = r.Id, DisplayName = $"{r.Id} {r.DisplayName}" });
+            cbbCourse.Properties.DataSource = lsCourse;
+            cbbCourse.Properties.DisplayMember = "DisplayName";
+            cbbCourse.Properties.ValueMember = "Id";
 
             switch (_eventInfo)
             {
                 case EventFormInfo.Create:
+                    _certReq = new dt301_CertReqSetting();
                     cbbDept.EditValue = idDept2word;
                     break;
                 case EventFormInfo.View:
+                    cbbDept.EditValue = _certReq.IdDept;
+                    cbbJobTitle.EditValue = _certReq.IdJobTitle;
+                    cbbCourse.EditValue = _certReq.IdCourse;
+                    txbNewHeadcount.EditValue = _certReq.NewHeadcount;
+                    txbActualHeadcount.EditValue = _certReq.ActualHeadcount;
+                    txbReqQuantity.EditValue = _certReq.ReqQuantity;
                     break;
                 case EventFormInfo.Update:
                     break;
@@ -166,15 +153,76 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            var aaa = EnumHelper.GetEnumByDescription<CertStatus>(cbbCertStatus.EditValue?.ToString());
+           // cbbJobTitle.Properties.View.RefreshData();
+            cbbJobTitle.EditValue = _certReq.IdJobTitle;
+            cbbCourse.EditValue = _certReq.IdCourse;
+
+            //string jobTitles = cbbJobTitle.EditValue?.ToString();
+            //string course = cbbCourse.EditValue?.ToString();
+
+            //if (string.IsNullOrEmpty(jobTitles) || string.IsNullOrEmpty(course))
+            //{
+            //    XtraMessageBox.Show("請填寫所有信息", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    return;
+            //}
+
+            //var result = false;
+            //string msg = "";
+            //using (var handle = SplashScreenManager.ShowOverlayForm(this))
+            //{
+            //    _certReq.IdDept = idDept2word;
+            //    _certReq.IdJobTitle = jobTitles;
+            //    _certReq.IdCourse = course;
+            //    _certReq.NewHeadcount = Convert.ToInt16(txbNewHeadcount.EditValue);
+            //    _certReq.ActualHeadcount = Convert.ToInt16(txbActualHeadcount.EditValue);
+            //    _certReq.ReqQuantity = Convert.ToInt16(txbReqQuantity.EditValue);
+
+            //    msg = $"{_certReq.IdDept} {_certReq.IdJobTitle} {_certReq.IdCourse} {_certReq.ReqQuantity}";
+            //    switch (_eventInfo)
+            //    {
+            //        case EventFormInfo.Create:
+            //            result = dt301_CertReqSetBUS.Instance.Add(_certReq);
+            //            break;
+            //        case EventFormInfo.View:
+            //            break;
+            //        case EventFormInfo.Update:
+            //            result = dt301_CertReqSetBUS.Instance.AddOrUpdate(_certReq);
+            //            break;
+            //        case EventFormInfo.Delete:
+            //            var dialogResult = XtraMessageBox.Show($"您確認要刪除{_formName}: {_certReq.IdJobTitle} {_certReq.IdCourse}", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            //            if (dialogResult != DialogResult.Yes) return;
+            //            result = dt301_CertReqSetBUS.Instance.Remove(_certReq.Id);
+            //            break;
+            //        default:
+            //            break;
+            //    }
+            //}
+
+            //if (result)
+            //{
+            //    //switch (_eventInfo)
+            //    //{
+            //    //    case EventFormInfo.Update:
+            //    //        logger.Info(_eventInfo.ToString(), msg);
+            //    //        break;
+            //    //    case EventFormInfo.Delete:
+            //    //        logger.Warning(_eventInfo.ToString(), msg);
+            //    //        break;
+            //    //}
+            //    Close();
+            //}
+            //else
+            //{
+            //    DefaultMsg.MsgErrorDB();
+            //}
         }
 
-        private void cbbUser_EditValueChanged(object sender, EventArgs e)
+        private void cbbJobTitle_EditValueChanged(object sender, EventArgs e)
         {
-            dm_User urs = cbbUser.GetSelectedDataRow() as dm_User;
-            if (urs == null) return;
-            
-            cbbJobTitle.EditValue = urs.JobCode;
+            GridView view = cbbJobTitle.Properties.View; /// identify selected row in dataTable  
+            int row = view.FocusedRowHandle;                            /// popup row number  
+
+            int index = cbbJobTitle.Properties.GetIndexByKeyValue(cbbJobTitle.EditValue);
         }
     }
 }

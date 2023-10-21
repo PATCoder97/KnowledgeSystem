@@ -32,6 +32,7 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_Progress" Width="1.5" PointX="11.875" PointY="0.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_JobTitle" Width="1.5" PointX="16.75" PointY="0.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt301_Course" Width="1.5" PointX="0.5" PointY="11.5" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt301_CertReqSetting" Width="1.5" PointX="2.125" PointY="11.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

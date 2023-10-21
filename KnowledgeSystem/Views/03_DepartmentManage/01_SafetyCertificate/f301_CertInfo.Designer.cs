@@ -45,7 +45,7 @@
             this.dateEdit1 = new DevExpress.XtraEditors.DateEdit();
             this.cbbDept = new DevExpress.XtraEditors.LookUpEdit();
             this.lookUpEdit3 = new DevExpress.XtraEditors.LookUpEdit();
-            this.lookUpEdit2 = new DevExpress.XtraEditors.LookUpEdit();
+            this.cbbJobTitle = new DevExpress.XtraEditors.LookUpEdit();
             this.cbbCertStatus = new DevExpress.XtraEditors.ComboBoxEdit();
             this.cbbUser = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -71,7 +71,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbDept.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit3.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit2.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbJobTitle.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbCertStatus.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbUser.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
@@ -198,7 +198,7 @@
             this.layoutControl1.Controls.Add(this.dateEdit1);
             this.layoutControl1.Controls.Add(this.cbbDept);
             this.layoutControl1.Controls.Add(this.lookUpEdit3);
-            this.layoutControl1.Controls.Add(this.lookUpEdit2);
+            this.layoutControl1.Controls.Add(this.cbbJobTitle);
             this.layoutControl1.Controls.Add(this.cbbCertStatus);
             this.layoutControl1.Controls.Add(this.cbbUser);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -308,22 +308,22 @@
             this.lookUpEdit3.StyleController = this.layoutControl1;
             this.lookUpEdit3.TabIndex = 6;
             // 
-            // lookUpEdit2
+            // cbbJobTitle
             // 
-            this.lookUpEdit2.Location = new System.Drawing.Point(104, 76);
-            this.lookUpEdit2.MenuManager = this.barManagerTP;
-            this.lookUpEdit2.Name = "lookUpEdit2";
-            this.lookUpEdit2.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
-            this.lookUpEdit2.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lookUpEdit2.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.lookUpEdit2.Properties.Appearance.Options.UseFont = true;
-            this.lookUpEdit2.Properties.Appearance.Options.UseForeColor = true;
-            this.lookUpEdit2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.cbbJobTitle.Location = new System.Drawing.Point(104, 76);
+            this.cbbJobTitle.MenuManager = this.barManagerTP;
+            this.cbbJobTitle.Name = "cbbJobTitle";
+            this.cbbJobTitle.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.cbbJobTitle.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbJobTitle.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.cbbJobTitle.Properties.Appearance.Options.UseFont = true;
+            this.cbbJobTitle.Properties.Appearance.Options.UseForeColor = true;
+            this.cbbJobTitle.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lookUpEdit2.Properties.NullText = "";
-            this.lookUpEdit2.Size = new System.Drawing.Size(273, 28);
-            this.lookUpEdit2.StyleController = this.layoutControl1;
-            this.lookUpEdit2.TabIndex = 5;
+            this.cbbJobTitle.Properties.NullText = "";
+            this.cbbJobTitle.Size = new System.Drawing.Size(273, 28);
+            this.cbbJobTitle.StyleController = this.layoutControl1;
+            this.cbbJobTitle.TabIndex = 5;
             // 
             // cbbCertStatus
             // 
@@ -363,6 +363,7 @@
             this.cbbUser.Size = new System.Drawing.Size(273, 28);
             this.cbbUser.StyleController = this.layoutControl1;
             this.cbbUser.TabIndex = 4;
+            this.cbbUser.EditValueChanged += new System.EventHandler(this.cbbUser_EditValueChanged);
             // 
             // searchLookUpEdit1View
             // 
@@ -469,7 +470,7 @@
             this.layoutControlItem2.AppearanceItemCaption.Options.UseForeColor = true;
             this.layoutControlItem2.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem2.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
-            this.layoutControlItem2.Control = this.lookUpEdit2;
+            this.layoutControlItem2.Control = this.cbbJobTitle;
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 64);
             this.layoutControlItem2.Name = "layoutControlItem2";
             this.layoutControlItem2.Size = new System.Drawing.Size(369, 32);
@@ -590,7 +591,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbDept.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit3.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbJobTitle.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbCertStatus.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbUser.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
@@ -624,7 +625,7 @@
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
-        private DevExpress.XtraEditors.LookUpEdit lookUpEdit2;
+        private DevExpress.XtraEditors.LookUpEdit cbbJobTitle;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private DevExpress.XtraEditors.LookUpEdit lookUpEdit3;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;

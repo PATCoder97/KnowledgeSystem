@@ -265,11 +265,23 @@
     <Compile Include="Views\03_DepartmentManage\01_SafetyCertificate\f301_CertInfo.Designer.cs">
       <DependentUpon>f301_CertInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\03_DepartmentManage\01_SafetyCertificate\f301_CertReqSetInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\01_SafetyCertificate\f301_CertReqSetInfo.Designer.cs">
+      <DependentUpon>f301_CertReqSetInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\03_DepartmentManage\01_SafetyCertificate\f301_CourseInfo.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\03_DepartmentManage\01_SafetyCertificate\f301_CourseInfo.Designer.cs">
       <DependentUpon>f301_CourseInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\01_SafetyCertificate\uc301_CertReqSetting.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\01_SafetyCertificate\uc301_CertReqSetting.Designer.cs">
+      <DependentUpon>uc301_CertReqSetting.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\03_DepartmentManage\01_SafetyCertificate\uc301_Course.cs">
       <SubType>UserControl</SubType>
@@ -438,8 +450,14 @@
     <EmbeddedResource Include="Views\03_DepartmentManage\01_SafetyCertificate\f301_CertInfo.resx">
       <DependentUpon>f301_CertInfo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\01_SafetyCertificate\f301_CertReqSetInfo.resx">
+      <DependentUpon>f301_CertReqSetInfo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\01_SafetyCertificate\f301_CourseInfo.resx">
       <DependentUpon>f301_CourseInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\01_SafetyCertificate\uc301_CertReqSetting.resx">
+      <DependentUpon>uc301_CertReqSetting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\01_SafetyCertificate\uc301_Course.resx">
       <DependentUpon>uc301_Course.cs</DependentUpon>
@@ -557,6 +575,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\icons_plus.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\icons_project_setup.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\icons_quality.svg">

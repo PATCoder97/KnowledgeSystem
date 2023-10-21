@@ -38,8 +38,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
         #region parameters
 
-        int idGroup = -1;
-
         List<dm_User> lsUserData = new List<dm_User>();
         List<dm_User> lsUserChoose = new List<dm_User>();
 

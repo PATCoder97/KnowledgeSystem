@@ -114,7 +114,7 @@ namespace KnowledgeSystem.Views._00_Generals
                         accordionChild.Style = ElementStyle.Item;
                         accordionChild.Appearance.Default.Font = fontTW14;
 
-                        accordionChild.Appearance.Normal.ForeColor = Color.Black;
+                        accordionChild.Appearance.Normal.ForeColor = Color.Blue;
                         accordionChild.Appearance.Hovered.ForeColor = Color.OrangeRed;
                         accordionChild.Appearance.Pressed.ForeColor = Color.Red;
 

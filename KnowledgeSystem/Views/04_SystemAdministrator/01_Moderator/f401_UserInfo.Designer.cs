@@ -50,12 +50,15 @@
             this.txbDOB = new DevExpress.XtraEditors.DateEdit();
             this.cbbNationality = new DevExpress.XtraEditors.ComboBoxEdit();
             this.txbUserNameTW = new DevExpress.XtraEditors.TextEdit();
-            this.txbCreate = new DevExpress.XtraEditors.DateEdit();
             this.gcChooseRole = new DevExpress.XtraGrid.GridControl();
             this.gvChooseRole = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn21 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.txbUserId = new DevExpress.XtraEditors.ButtonEdit();
+            this.cbbJobTitle = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -80,11 +83,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.txbDOB.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbNationality.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbUserNameTW.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbCreate.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbCreate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcChooseRole)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvChooseRole)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbUserId.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbJobTitle.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
@@ -212,9 +215,9 @@
             this.layoutControl1.Controls.Add(this.txbDOB);
             this.layoutControl1.Controls.Add(this.cbbNationality);
             this.layoutControl1.Controls.Add(this.txbUserNameTW);
-            this.layoutControl1.Controls.Add(this.txbCreate);
             this.layoutControl1.Controls.Add(this.gcChooseRole);
             this.layoutControl1.Controls.Add(this.txbUserId);
+            this.layoutControl1.Controls.Add(this.cbbJobTitle);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
@@ -378,29 +381,6 @@
             this.txbUserNameTW.StyleController = this.layoutControl1;
             this.txbUserNameTW.TabIndex = 7;
             // 
-            // txbCreate
-            // 
-            this.txbCreate.EditValue = null;
-            this.txbCreate.Location = new System.Drawing.Point(409, 12);
-            this.txbCreate.Name = "txbCreate";
-            this.txbCreate.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txbCreate.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.txbCreate.Properties.Appearance.Options.UseFont = true;
-            this.txbCreate.Properties.Appearance.Options.UseForeColor = true;
-            this.txbCreate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txbCreate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txbCreate.Properties.DisplayFormat.FormatString = "";
-            this.txbCreate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.txbCreate.Properties.EditFormat.FormatString = "";
-            this.txbCreate.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.txbCreate.Properties.MaskSettings.Set("mask", "d");
-            this.txbCreate.Properties.UseMaskAsDisplayFormat = true;
-            this.txbCreate.Size = new System.Drawing.Size(210, 28);
-            this.txbCreate.StyleController = this.layoutControl1;
-            this.txbCreate.TabIndex = 7;
-            // 
             // gcChooseRole
             // 
             this.gcChooseRole.Location = new System.Drawing.Point(320, 166);
@@ -469,6 +449,60 @@
             this.txbUserId.StyleController = this.layoutControl1;
             this.txbUserId.TabIndex = 6;
             this.txbUserId.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txbUserId_ButtonClick);
+            // 
+            // cbbJobTitle
+            // 
+            this.cbbJobTitle.Location = new System.Drawing.Point(409, 12);
+            this.cbbJobTitle.Name = "cbbJobTitle";
+            this.cbbJobTitle.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.cbbJobTitle.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.cbbJobTitle.Properties.Appearance.Options.UseFont = true;
+            this.cbbJobTitle.Properties.Appearance.Options.UseForeColor = true;
+            this.cbbJobTitle.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbbJobTitle.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.cbbJobTitle.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.cbbJobTitle.Properties.NullText = "";
+            this.cbbJobTitle.Properties.PopupView = this.searchLookUpEdit1View;
+            this.cbbJobTitle.Size = new System.Drawing.Size(210, 28);
+            this.cbbJobTitle.StyleController = this.layoutControl1;
+            this.cbbJobTitle.TabIndex = 7;
+            // 
+            // searchLookUpEdit1View
+            // 
+            this.searchLookUpEdit1View.Appearance.HeaderPanel.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchLookUpEdit1View.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
+            this.searchLookUpEdit1View.Appearance.HeaderPanel.Options.UseFont = true;
+            this.searchLookUpEdit1View.Appearance.HeaderPanel.Options.UseForeColor = true;
+            this.searchLookUpEdit1View.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            this.searchLookUpEdit1View.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.searchLookUpEdit1View.Appearance.Row.Font = new System.Drawing.Font("DFKai-SB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchLookUpEdit1View.Appearance.Row.ForeColor = System.Drawing.Color.Black;
+            this.searchLookUpEdit1View.Appearance.Row.Options.UseFont = true;
+            this.searchLookUpEdit1View.Appearance.Row.Options.UseForeColor = true;
+            this.searchLookUpEdit1View.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn3,
+            this.gridColumn4});
+            this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
+            this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn3
+            // 
+            this.gridColumn3.Caption = "職務代號";
+            this.gridColumn3.FieldName = "Id";
+            this.gridColumn3.Name = "gridColumn3";
+            this.gridColumn3.Visible = true;
+            this.gridColumn3.VisibleIndex = 0;
+            // 
+            // gridColumn4
+            // 
+            this.gridColumn4.Caption = "職務名稱";
+            this.gridColumn4.FieldName = "DisplayName";
+            this.gridColumn4.Name = "gridColumn4";
+            this.gridColumn4.Visible = true;
+            this.gridColumn4.VisibleIndex = 1;
             // 
             // Root
             // 
@@ -610,13 +644,13 @@
             this.layoutControlItem8.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem8.AppearanceItemCaptionDisabled.Options.UseFont = true;
             this.layoutControlItem8.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
-            this.layoutControlItem8.Control = this.txbCreate;
+            this.layoutControlItem8.Control = this.cbbJobTitle;
             this.layoutControlItem8.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
             this.layoutControlItem8.CustomizationFormText = "備註";
             this.layoutControlItem8.Location = new System.Drawing.Point(305, 0);
             this.layoutControlItem8.Name = "layoutControlItem8";
             this.layoutControlItem8.Size = new System.Drawing.Size(306, 32);
-            this.layoutControlItem8.Text = "日期創建";
+            this.layoutControlItem8.Text = "職務";
             this.layoutControlItem8.TextSize = new System.Drawing.Size(80, 19);
             // 
             // layoutControlItem3
@@ -708,11 +742,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.txbDOB.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbNationality.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbUserNameTW.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbCreate.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbCreate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcChooseRole)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvChooseRole)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbUserId.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbJobTitle.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
@@ -757,7 +791,6 @@
         private DevExpress.XtraEditors.ComboBoxEdit cbbNationality;
         private DevExpress.XtraEditors.TextEdit txbUserNameTW;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
-        private DevExpress.XtraEditors.DateEdit txbCreate;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
         private DevExpress.XtraGrid.GridControl gcAllRole;
         private DevExpress.XtraGrid.Views.Grid.GridView gvAllRole;
@@ -770,5 +803,9 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn21;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
         private DevExpress.XtraEditors.ButtonEdit txbUserId;
+        private DevExpress.XtraEditors.SearchLookUpEdit cbbJobTitle;
+        private DevExpress.XtraGrid.Views.Grid.GridView searchLookUpEdit1View;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
     }
 }

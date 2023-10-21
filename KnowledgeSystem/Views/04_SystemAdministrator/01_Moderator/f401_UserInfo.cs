@@ -53,12 +53,12 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             txbDOB.Enabled = _enable;
             txbCCCD.Enabled = _enable;
             cbbNationality.Enabled = _enable;
+            cbbJobTitle.Enabled = _enable;
         }
 
         private void LockControl()
         {
             txbUserId.Enabled = false;
-            txbCreate.Enabled = false;
             txbUserId.ReadOnly = false;
             lcRole.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             Size = new Size(579, 230);
@@ -131,6 +131,11 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             cbbDept.Properties.DisplayMember = "DisplayName";
             cbbDept.Properties.ValueMember = "Id";
 
+            var lsJobTitles = dm_JobTitleBUS.Instance.GetList();
+            cbbJobTitle.Properties.DataSource = lsJobTitles;
+            cbbJobTitle.Properties.DisplayMember = "DisplayName";
+            cbbJobTitle.Properties.ValueMember = "Id";
+
             cbbNationality.Properties.Items.AddRange(new string[] { "VN", "TW", "CN" });
 
             lsAllRoles = dm_RoleBUS.Instance.GetList();
@@ -147,7 +152,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             {
                 case EventFormInfo.Create:
                     _user = new dm_User();
-                    txbCreate.EditValue = DateTime.Today;
                     break;
                 case EventFormInfo.View:
                     _user.DisplayName = _user.DisplayName.Split('\n')[0];
@@ -157,7 +161,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                     txbUserNameVN.EditValue = _user.DisplayNameVN;
                     txbUserNameTW.EditValue = _user.DisplayName.Split('\n')[0];
                     cbbDept.EditValue = _user.IdDepartment;
-                    txbCreate.EditValue = _user.DateCreate;
+                    cbbJobTitle.EditValue = _user.JobCode;
                     txbDOB.EditValue = _user.DOB;
                     txbCCCD.EditValue = _user.CitizenID;
                     cbbNationality.EditValue = _user.Nationality;
@@ -199,6 +203,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                 _user.DisplayNameVN = txbUserNameVN.EditValue?.ToString();
                 _user.IdDepartment = cbbDept.EditValue?.ToString();
                 _user.DateCreate = DateTime.Parse(DateTime.Today.ToShortDateString());
+                _user.JobCode = cbbJobTitle.EditValue?.ToString();
                 _user.DOB = txbDOB.DateTime;
                 _user.CitizenID = txbCCCD.EditValue?.ToString();
                 _user.Nationality = cbbNationality.EditValue?.ToString();

@@ -251,6 +251,18 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="DisplayName" Type="nvarchar" MaxLength="8" Nullable="false" />
         </EntityType>
+        <EntityType Name="dt301_CertReqSetting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdDept" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="IdJobTitle" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="IdCourse" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="NewHeadcount" Type="int" />
+          <Property Name="ActualHeadcount" Type="int" />
+          <Property Name="ReqQuantity" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="dt301_Course">
           <Key>
             <PropertyRef Name="Id" />
@@ -303,6 +315,7 @@
           <EntitySet Name="dt207_Targets" EntityType="Self.dt207_Targets" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt207_Type" EntityType="Self.dt207_Type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt207_TypeHisGetFile" EntityType="Self.dt207_TypeHisGetFile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt301_CertReqSetting" EntityType="Self.dt301_CertReqSetting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt301_Course" EntityType="Self.dt301_Course" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sys_Log" EntityType="Self.sys_Log" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sys_StaticValue" EntityType="Self.sys_StaticValue" Schema="dbo" store:Type="Tables" />
@@ -339,6 +352,7 @@
           <EntitySet Name="dm_Progress" EntityType="DBDocumentManagementSystemModel.dm_Progress" />
           <EntitySet Name="dm_JobTitle" EntityType="DBDocumentManagementSystemModel.dm_JobTitle" />
           <EntitySet Name="dt301_Course" EntityType="DBDocumentManagementSystemModel.dt301_Course" />
+          <EntitySet Name="dt301_CertReqSetting" EntityType="DBDocumentManagementSystemModel.dt301_CertReqSetting" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -612,6 +626,18 @@
           </Key>
           <Property Name="Id" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
           <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dt301_CertReqSetting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdDept" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdJobTitle" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdCourse" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="NewHeadcount" Type="Int32" />
+          <Property Name="ActualHeadcount" Type="Int32" />
+          <Property Name="ReqQuantity" Type="Int32" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -915,6 +941,19 @@
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt301_Course">
               <MappingFragment StoreEntitySet="dt301_Course">
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt301_CertReqSetting">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt301_CertReqSetting">
+              <MappingFragment StoreEntitySet="dt301_CertReqSetting">
+                <ScalarProperty Name="ReqQuantity" ColumnName="ReqQuantity" />
+                <ScalarProperty Name="ActualHeadcount" ColumnName="ActualHeadcount" />
+                <ScalarProperty Name="NewHeadcount" ColumnName="NewHeadcount" />
+                <ScalarProperty Name="IdCourse" ColumnName="IdCourse" />
+                <ScalarProperty Name="IdJobTitle" ColumnName="IdJobTitle" />
+                <ScalarProperty Name="IdDept" ColumnName="IdDept" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

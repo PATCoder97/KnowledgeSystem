@@ -44,6 +44,7 @@
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColPCName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColIP = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
@@ -112,7 +113,8 @@
             this.gridColumn9,
             this.gridColumn10,
             this.gColPCName,
-            this.gColIP});
+            this.gColIP,
+            this.gridColumn4});
             this.gvData.DetailHeight = 377;
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
@@ -155,7 +157,7 @@
             this.gridColumn7.FieldName = "DeptName";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 2;
+            this.gridColumn7.VisibleIndex = 3;
             // 
             // gridColumn3
             // 
@@ -180,7 +182,7 @@
             this.gridColumn5.MinWidth = 23;
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 3;
+            this.gridColumn5.VisibleIndex = 4;
             this.gridColumn5.Width = 87;
             // 
             // gridColumn8
@@ -191,7 +193,7 @@
             this.gridColumn8.FieldName = "DOB";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 4;
+            this.gridColumn8.VisibleIndex = 5;
             // 
             // gridColumn9
             // 
@@ -199,7 +201,7 @@
             this.gridColumn9.FieldName = "CitizenID";
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 5;
+            this.gridColumn9.VisibleIndex = 6;
             // 
             // gridColumn10
             // 
@@ -207,7 +209,7 @@
             this.gridColumn10.FieldName = "Nationality";
             this.gridColumn10.Name = "gridColumn10";
             this.gridColumn10.Visible = true;
-            this.gridColumn10.VisibleIndex = 6;
+            this.gridColumn10.VisibleIndex = 7;
             // 
             // gColPCName
             // 
@@ -215,7 +217,7 @@
             this.gColPCName.FieldName = "PCName";
             this.gColPCName.Name = "gColPCName";
             this.gColPCName.Visible = true;
-            this.gColPCName.VisibleIndex = 7;
+            this.gColPCName.VisibleIndex = 8;
             // 
             // gColIP
             // 
@@ -223,7 +225,17 @@
             this.gColIP.FieldName = "IPAddress";
             this.gColIP.Name = "gColIP";
             this.gColIP.Visible = true;
-            this.gColIP.VisibleIndex = 8;
+            this.gColIP.VisibleIndex = 9;
+            // 
+            // gridColumn4
+            // 
+            this.gridColumn4.AppearanceCell.Font = new System.Drawing.Font("DFKai-SB", 12F);
+            this.gridColumn4.AppearanceCell.Options.UseFont = true;
+            this.gridColumn4.Caption = "職務";
+            this.gridColumn4.FieldName = "JobName";
+            this.gridColumn4.Name = "gridColumn4";
+            this.gridColumn4.Visible = true;
+            this.gridColumn4.VisibleIndex = 2;
             // 
             // Root
             // 
@@ -405,5 +417,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gColPCName;
         private DevExpress.XtraGrid.Columns.GridColumn gColIP;
         private DevExpress.XtraBars.BarButtonItem btnUploadList;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
     }
 }

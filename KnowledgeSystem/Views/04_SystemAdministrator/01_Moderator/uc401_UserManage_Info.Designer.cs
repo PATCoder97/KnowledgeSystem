@@ -29,43 +29,43 @@
         private void InitializeComponent()
         {
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControl11 = new DevExpress.XtraLayout.LayoutControl();
+            this.Root1 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControl12 = new DevExpress.XtraLayout.LayoutControl();
+            this.Root2 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.txbDisplayName = new DevExpress.XtraEditors.TextEdit();
             this.txbId = new DevExpress.XtraEditors.ButtonEdit();
             this.cbbRole = new DevExpress.XtraEditors.LookUpEdit();
             this.cbbDept = new DevExpress.XtraEditors.LookUpEdit();
-            this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControl11 = new DevExpress.XtraLayout.LayoutControl();
             this.txbStandard1 = new DevExpress.XtraEditors.ComboBoxEdit();
-            this.Root1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem31 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControl12 = new DevExpress.XtraLayout.LayoutControl();
             this.txbStandard2 = new DevExpress.XtraEditors.ComboBoxEdit();
-            this.Root2 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem32 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControl11)).BeginInit();
+            this.layoutControl11.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Root1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControl12)).BeginInit();
+            this.layoutControl12.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Root2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDisplayName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbId.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbRole.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbDept.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControl11)).BeginInit();
-            this.layoutControl11.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txbStandard1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Root1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem31)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControl12)).BeginInit();
-            this.layoutControl12.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txbStandard2.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Root2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem32)).BeginInit();
             this.SuspendLayout();
             // 
@@ -85,6 +85,70 @@
             this.layoutControl1.Size = new System.Drawing.Size(898, 37);
             this.layoutControl1.TabIndex = 1;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // Root
+            // 
+            this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            this.Root.GroupBordersVisible = false;
+            this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem1,
+            this.layoutControlItem4,
+            this.layoutControlItem2,
+            this.layoutControlItem3});
+            this.Root.Name = "Root";
+            this.Root.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 2);
+            this.Root.Size = new System.Drawing.Size(898, 37);
+            this.Root.TextVisible = false;
+            // 
+            // layoutControl11
+            // 
+            this.layoutControl11.AllowCustomization = false;
+            this.SetBoundPropertyName(this.layoutControl11, "");
+            this.layoutControl11.Controls.Add(this.txbStandard1);
+            this.layoutControl11.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.layoutControl11.Location = new System.Drawing.Point(0, 0);
+            this.layoutControl11.Name = "layoutControl11";
+            this.layoutControl11.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(688, 0, 650, 400);
+            this.layoutControl11.Root = this.Root1;
+            this.layoutControl11.Size = new System.Drawing.Size(599, 379);
+            this.layoutControl11.TabIndex = 1;
+            this.layoutControl11.Text = "layoutControl1";
+            // 
+            // Root1
+            // 
+            this.Root1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            this.Root1.GroupBordersVisible = false;
+            this.Root1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem31});
+            this.Root1.Name = "Root1";
+            this.Root1.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 2);
+            this.Root1.Size = new System.Drawing.Size(599, 379);
+            this.Root1.TextVisible = false;
+            // 
+            // layoutControl12
+            // 
+            this.layoutControl12.AllowCustomization = false;
+            this.SetBoundPropertyName(this.layoutControl12, "");
+            this.layoutControl12.Controls.Add(this.txbStandard2);
+            this.layoutControl12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.layoutControl12.Location = new System.Drawing.Point(0, 0);
+            this.layoutControl12.Name = "layoutControl12";
+            this.layoutControl12.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(688, 0, 650, 400);
+            this.layoutControl12.Root = this.Root2;
+            this.layoutControl12.Size = new System.Drawing.Size(599, 379);
+            this.layoutControl12.TabIndex = 1;
+            this.layoutControl12.Text = "layoutControl1";
+            // 
+            // Root2
+            // 
+            this.Root2.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            this.Root2.GroupBordersVisible = false;
+            this.Root2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem32});
+            this.Root2.Name = "Root2";
+            this.Root2.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 2);
+            this.Root2.Size = new System.Drawing.Size(599, 379);
+            this.Root2.TextVisible = false;
             // 
             // txbDisplayName
             // 
@@ -176,20 +240,6 @@
             this.cbbDept.StyleController = this.layoutControl1;
             this.cbbDept.TabIndex = 4;
             // 
-            // Root
-            // 
-            this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
-            this.Root.GroupBordersVisible = false;
-            this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem1,
-            this.layoutControlItem4,
-            this.layoutControlItem2,
-            this.layoutControlItem3});
-            this.Root.Name = "Root";
-            this.Root.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 2);
-            this.Root.Size = new System.Drawing.Size(898, 37);
-            this.Root.TextVisible = false;
-            // 
             // layoutControlItem1
             // 
             this.layoutControlItem1.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -246,20 +296,6 @@
             this.layoutControlItem3.Text = "權限";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(32, 16);
             // 
-            // layoutControl11
-            // 
-            this.layoutControl11.AllowCustomization = false;
-            this.SetBoundPropertyName(this.layoutControl11, "");
-            this.layoutControl11.Controls.Add(this.txbStandard1);
-            this.layoutControl11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.layoutControl11.Location = new System.Drawing.Point(0, 0);
-            this.layoutControl11.Name = "layoutControl11";
-            this.layoutControl11.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(688, 0, 650, 400);
-            this.layoutControl11.Root = this.Root1;
-            this.layoutControl11.Size = new System.Drawing.Size(599, 379);
-            this.layoutControl11.TabIndex = 1;
-            this.layoutControl11.Text = "layoutControl1";
-            // 
             // txbStandard1
             // 
             this.SetBoundPropertyName(this.txbStandard1, "");
@@ -279,17 +315,6 @@
             this.txbStandard1.StyleController = this.layoutControl11;
             this.txbStandard1.TabIndex = 6;
             // 
-            // Root1
-            // 
-            this.Root1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
-            this.Root1.GroupBordersVisible = false;
-            this.Root1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem31});
-            this.Root1.Name = "Root1";
-            this.Root1.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 2);
-            this.Root1.Size = new System.Drawing.Size(599, 379);
-            this.Root1.TextVisible = false;
-            // 
             // layoutControlItem31
             // 
             this.layoutControlItem31.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -302,20 +327,6 @@
             this.layoutControlItem31.Size = new System.Drawing.Size(595, 375);
             this.layoutControlItem31.Text = "類別";
             this.layoutControlItem31.TextSize = new System.Drawing.Size(32, 16);
-            // 
-            // layoutControl12
-            // 
-            this.layoutControl12.AllowCustomization = false;
-            this.SetBoundPropertyName(this.layoutControl12, "");
-            this.layoutControl12.Controls.Add(this.txbStandard2);
-            this.layoutControl12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.layoutControl12.Location = new System.Drawing.Point(0, 0);
-            this.layoutControl12.Name = "layoutControl12";
-            this.layoutControl12.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(688, 0, 650, 400);
-            this.layoutControl12.Root = this.Root2;
-            this.layoutControl12.Size = new System.Drawing.Size(599, 379);
-            this.layoutControl12.TabIndex = 1;
-            this.layoutControl12.Text = "layoutControl1";
             // 
             // txbStandard2
             // 
@@ -335,17 +346,6 @@
             this.txbStandard2.Size = new System.Drawing.Size(547, 28);
             this.txbStandard2.StyleController = this.layoutControl12;
             this.txbStandard2.TabIndex = 6;
-            // 
-            // Root2
-            // 
-            this.Root2.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
-            this.Root2.GroupBordersVisible = false;
-            this.Root2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem32});
-            this.Root2.Name = "Root2";
-            this.Root2.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 2);
-            this.Root2.Size = new System.Drawing.Size(599, 379);
-            this.Root2.TextVisible = false;
             // 
             // layoutControlItem32
             // 
@@ -369,24 +369,24 @@
             this.Size = new System.Drawing.Size(898, 37);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControl11)).EndInit();
+            this.layoutControl11.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.Root1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControl12)).EndInit();
+            this.layoutControl12.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.Root2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDisplayName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbId.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbRole.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbDept.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControl11)).EndInit();
-            this.layoutControl11.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.txbStandard1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Root1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem31)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControl12)).EndInit();
-            this.layoutControl12.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.txbStandard2.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Root2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem32)).EndInit();
             this.ResumeLayout(false);
 
