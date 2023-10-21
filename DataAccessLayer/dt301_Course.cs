@@ -12,7 +12,7 @@ namespace DataAccessLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class dm_JobTitle
+    public partial class dt301_Course
     {
         public string Id { get; set; }
         public string DisplayName { get; set; }

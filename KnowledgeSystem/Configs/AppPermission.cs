@@ -48,10 +48,15 @@ namespace KnowledgeSystem.Configs
             return lsPermissions.Contains(idFunc);
         }
 
-        public const int SysAdmin = 17;
-        public const int Mod = 7;
-        public const int KnowledgeMain = 1;
-        public const int SafetyCertMain = 21;
+        public static int SysAdmin { get; set; }
+        public static int Mod { get; set; }
+        public static int KnowledgeMain { get; set; }
+        public static int SafetyCertMain { get; set; }
+
+        public static List<int> GetListAutoOpenForm()
+        {
+            return new List<int>() { SysAdmin, Mod, KnowledgeMain, SafetyCertMain };
+        }
 
         // 207
         public const int DataStatistics = 6;

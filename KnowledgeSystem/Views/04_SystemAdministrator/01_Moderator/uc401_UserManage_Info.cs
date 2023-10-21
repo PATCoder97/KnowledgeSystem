@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static DevExpress.XtraEditors.Mask.MaskSettings;
 
-namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
+namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 {
     public partial class uc401_UserManage_Info : EditFormUserControl
     {

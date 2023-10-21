@@ -29,7 +29,7 @@ namespace KnowledgeSystem.Views._00_Generals
         TileItemElement elementGrade = new TileItemElement();
         TileItemElement elementClass = new TileItemElement();
 
-        private void IniUserInfo()
+        private void InitializeControl()
         {
             elementName.Appearance.Normal.Font = new Font("DFKai-SB", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             elementName.Appearance.Normal.Options.UseFont = true;
@@ -54,6 +54,12 @@ namespace KnowledgeSystem.Views._00_Generals
             tileInfoUser.Elements.Add(elementIdDept);
             tileInfoUser.Elements.Add(elementGrade);
             tileInfoUser.Elements.Add(elementClass);
+
+            var lsFuncs = dm_FunctionBUS.Instance.GetList();
+            btnSysAdmin.Text = lsFuncs.First(r => r.Id == AppPermission.SysAdmin).DisplayName;
+            btnMod.Text = lsFuncs.First(r => r.Id == AppPermission.Mod).DisplayName;
+            btnKnowHow.Text = lsFuncs.First(r => r.Id == AppPermission.KnowledgeMain).DisplayName;
+            btnSafetyCert.Text = lsFuncs.First(r => r.Id == AppPermission.SafetyCertMain).DisplayName;
         }
 
         private void GetUserLogin()
@@ -114,6 +120,12 @@ namespace KnowledgeSystem.Views._00_Generals
             TPConfigs.SoftNameTW = lsStaticValue.FirstOrDefault(r => r.KeyT == "SoftNameTW").ValueT;
             TPConfigs.UrlUpdate = lsStaticValue.FirstOrDefault(r => r.KeyT == "UrlUpdate").ValueT;
             TPConfigs.PathKnowledgeFile = lsStaticValue.FirstOrDefault(r => r.KeyT == "PathKnowledgeFile").ValueT;
+
+            // Lấy các role
+            AppPermission.SysAdmin = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleSysAdmin").ValueT);
+            AppPermission.Mod = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleMod").ValueT);
+            AppPermission.KnowledgeMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleKnowledgeMain").ValueT);
+            AppPermission.SafetyCertMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleSafetyCertMain").ValueT);
         }
 
         private void fMain_Load(object sender, EventArgs e)
@@ -164,7 +176,7 @@ namespace KnowledgeSystem.Views._00_Generals
                           (Screen.PrimaryScreen.WorkingArea.Height - this.Height) / 2);
             StartPosition = FormStartPosition.CenterScreen;
 
-            IniUserInfo();
+            InitializeControl();
         }
 
         private void fMain_Shown(object sender, EventArgs e)

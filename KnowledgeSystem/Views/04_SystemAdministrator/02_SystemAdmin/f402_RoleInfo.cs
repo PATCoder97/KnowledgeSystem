@@ -15,7 +15,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
+namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 {
     public partial class f402_RoleInfo : DevExpress.XtraEditors.XtraForm
     {
@@ -29,7 +29,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
         public string _formName;
         public dm_Role _role = null;
 
-        dm_FunctionBUS _sysFunctionBUS = new dm_FunctionBUS();
         dm_FunctionRoleBUS _sysFunctionRoleBUS = new dm_FunctionRoleBUS();
 
         BindingSource _sourceFunc = new BindingSource();
@@ -100,7 +99,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_PermissionManager
         {
             LockControl();
 
-            var lsFunctions = _sysFunctionBUS.GetList();
+            var lsFunctions = dm_FunctionBUS.Instance.GetList();
             _sourceFunc.DataSource = lsFunctions;
             tlsFunction.DataSource = _sourceFunc;
             tlsFunction.KeyFieldName = "Id";

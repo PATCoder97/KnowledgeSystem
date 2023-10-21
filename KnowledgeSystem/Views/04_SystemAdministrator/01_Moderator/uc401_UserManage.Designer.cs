@@ -1,4 +1,4 @@
-﻿namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManager
+﻿namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 {
     partial class uc401_UserManage
     {

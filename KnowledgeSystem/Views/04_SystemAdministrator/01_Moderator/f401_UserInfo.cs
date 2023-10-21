@@ -16,7 +16,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage
+namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 {
     public partial class f401_UserInfo : DevExpress.XtraEditors.XtraForm
     {

@@ -8,7 +8,7 @@ using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using KnowledgeSystem.Configs;
-using KnowledgeSystem.Views._04_SystemAdministrator._01_UserManage;
+using KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,7 +21,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace KnowledgeSystem.Views._04_SystemAdministrator._01_UserManager
+namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 {
     public partial class uc401_UserManage : DevExpress.XtraEditors.XtraUserControl
     {
