@@ -27,8 +27,10 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
         {
             InitializeComponent();
             InitializeIcon();
+            helper = new RefreshHelper(gvData, "Id");
         }
 
+        RefreshHelper helper;
         List<dm_JobTitle> lsJobTitles = new List<dm_JobTitle>();
         BindingSource sourceJobTitles = new BindingSource();
 
@@ -41,8 +43,10 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
         private void LoadData()
         {
+            helper.SaveViewInfo();
             lsJobTitles = dm_JobTitleBUS.Instance.GetList();
             sourceJobTitles.DataSource = lsJobTitles;
+            helper.LoadViewInfo();
 
             gvData.BestFitColumns();
         }
@@ -80,7 +84,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
             f401_JobTitleInfo fInfo = new f401_JobTitleInfo();
             fInfo._eventInfo = EventFormInfo.View;
-            fInfo._formName = "用戶";
+            fInfo._formName = "職務";
             fInfo._jobTitle = _jobSelect;
             fInfo.ShowDialog();
 
@@ -127,16 +131,16 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                 reader.Close();
             }
 
-            List<dm_JobTitle> lsJobTitles = new List<dm_JobTitle>();
+            List<dt301_Course> lsCourse = new List<dt301_Course>();
 
             foreach (DataRow row in ds.Tables[0].Rows)
             {
-                lsJobTitles.Add(new dm_JobTitle() { Id = row[0]?.ToString().Trim(), DisplayName = row[1]?.ToString().Trim() });
+                lsCourse.Add(new dt301_Course() { Id = row[0]?.ToString().Trim(), DisplayName = row[1]?.ToString().Trim() });
             }
 
-            foreach (var item in lsJobTitles)
+            foreach (var item in lsCourse)
             {
-                dm_JobTitleBUS.Instance.AddOrUpdate(item);
+                dt301_CourseBUS.Instance.AddOrUpdate(item);
             }
         }
     }

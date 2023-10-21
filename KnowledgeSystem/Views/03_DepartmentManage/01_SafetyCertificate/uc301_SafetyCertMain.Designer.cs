@@ -67,10 +67,10 @@
             // 
             this.layoutControl1.Controls.Add(this.gcData);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.layoutControl1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(979, 467);
+            this.layoutControl1.Size = new System.Drawing.Size(979, 418);
             this.layoutControl1.TabIndex = 4;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -79,7 +79,7 @@
             this.gcData.Location = new System.Drawing.Point(12, 12);
             this.gcData.MainView = this.gvData;
             this.gcData.Name = "gcData";
-            this.gcData.Size = new System.Drawing.Size(955, 443);
+            this.gcData.Size = new System.Drawing.Size(955, 394);
             this.gcData.TabIndex = 4;
             this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvData});
@@ -192,7 +192,7 @@
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem1});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(979, 467);
+            this.Root.Size = new System.Drawing.Size(979, 418);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem1
@@ -200,7 +200,7 @@
             this.layoutControlItem1.Control = this.gcData;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(959, 447);
+            this.layoutControlItem1.Size = new System.Drawing.Size(959, 398);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
@@ -258,6 +258,7 @@
             this.btnAdd.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnAdd.ImageOptions.SvgImage")));
             this.btnAdd.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnAdd.Name = "btnAdd";
+            this.btnAdd.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAdd_ItemClick);
             // 
             // btnReload
             // 
@@ -309,11 +310,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.layoutControl1);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.Controls.Add(this.layoutControl1);
             this.Name = "uc301_SafetyCertMain";
             this.Size = new System.Drawing.Size(979, 467);
             this.Load += new System.EventHandler(this.uc301_SafetyCertMain_Load);

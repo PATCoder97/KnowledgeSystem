@@ -75,6 +75,7 @@
     <Compile Include="dt207_TargetsBUS.cs" />
     <Compile Include="dt207_TypeBUS.cs" />
     <Compile Include="dt207_TypeHisGetFileBUS.cs" />
+    <Compile Include="dt301_CourseBUS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="sys_StaticValueBUS.cs" />
   </ItemGroup>

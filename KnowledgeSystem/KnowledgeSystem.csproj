@@ -265,6 +265,18 @@
     <Compile Include="Views\03_DepartmentManage\01_SafetyCertificate\f301_CertInfo.Designer.cs">
       <DependentUpon>f301_CertInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\03_DepartmentManage\01_SafetyCertificate\f301_CourseInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\01_SafetyCertificate\f301_CourseInfo.Designer.cs">
+      <DependentUpon>f301_CourseInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\01_SafetyCertificate\uc301_Course.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\01_SafetyCertificate\uc301_Course.Designer.cs">
+      <DependentUpon>uc301_Course.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\04_SystemAdministrator\01_Moderator\f401_JobTitleInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -425,6 +437,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\01_SafetyCertificate\f301_CertInfo.resx">
       <DependentUpon>f301_CertInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\01_SafetyCertificate\f301_CourseInfo.resx">
+      <DependentUpon>f301_CourseInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\01_SafetyCertificate\uc301_Course.resx">
+      <DependentUpon>uc301_Course.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\01_Moderator\f401_JobTitleInfo.resx">
       <DependentUpon>f401_JobTitleInfo.cs</DependentUpon>
