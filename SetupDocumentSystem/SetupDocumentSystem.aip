@@ -7,21 +7,21 @@
     <ROW Property="AI_BITMAP_DISPLAY_MODE" Value="0"/>
     <ROW Property="AI_CURRENT_YEAR" Value="2023" ValueLocId="-"/>
     <ROW Property="AI_PACKAGING_TOOL" Value="Advanced Installer 20.0 build e4706cc2" ValueLocId="-"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Bell.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_CheckCircled.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_DeleteCircled.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Edit.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Find.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Forbid.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Refresh.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Reload.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Settings.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Approval.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_BO_Department.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_BO_Employee.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_BusinessLayer.dll" Value="..\BusinessLayer\bin\Release"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Customers.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_DataAccessLayer.dll" Value="..\DataAccessLayer\bin\Release"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Bell.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_CheckCircled.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_DeleteCircled.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Edit.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Find.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Forbid.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Refresh.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Reload.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Settings.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Approval.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_BO_Department.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_BO_Employee.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_BusinessLayer.dll" Value="..\BusinessLayer\bin\Debug"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Customers.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_DataAccessLayer.dll" Value="..\DataAccessLayer\bin\Debug"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_DevExpress.BonusSkins.v22.1.dll" Value="C:\Program Files\DevExpress 22.1\Components\Bin\Framework"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_DevExpress.Charts.v22.1.Core.dll" Value="C:\Program Files\DevExpress 22.1\Components\Bin\Framework"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_DevExpress.CodeParser.v22.1.dll" Value="C:\Program Files\DevExpress 22.1\Components\Bin\Framework"/>
@@ -67,38 +67,47 @@
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_EPPlus.dll" Value="..\packages\EPPlus.6.2.8\lib\net462"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_EntityFramework.SqlServer.dll" Value="..\packages\EntityFramework.6.4.4\lib\net45"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_EntityFramework.dll" Value="..\packages\EntityFramework.6.4.4\lib\net45"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_KnowledgeSystem.exe" Value="..\KnowledgeSystem\bin\Release"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_KnowledgeSystem.exe.config" Value="..\KnowledgeSystem\bin\Release"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_KnowledgeSystem.pdb" Value="..\KnowledgeSystem\bin\Release"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Logger.dll" Value="..\BusinessLayer\bin\Release"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_ExcelDataReader.DataSet.dll" Value="..\packages\ExcelDataReader.DataSet.3.6.0\lib\net35"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_ExcelDataReader.dll" Value="..\packages\ExcelDataReader.3.6.0\lib\net45"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_KnowledgeSystem.exe" Value="..\KnowledgeSystem\bin\Debug"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_KnowledgeSystem.exe.config" Value="..\KnowledgeSystem\bin\Debug"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_KnowledgeSystem.pdb" Value="..\KnowledgeSystem\bin\Debug"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Logger.dll" Value="..\BusinessLayer\bin\Debug"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.IO.RecyclableMemoryStream.dll" Value="..\packages\Microsoft.IO.RecyclableMemoryStream.1.4.1\lib\net46"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.mshtml.dll" Value="C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\PublicAssemblies"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Newtonsoft.Json.dll" Value="..\packages\Newtonsoft.Json.13.0.3\lib\net45"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Search_more.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_ShowPrintPreview.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Search_more.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_ShowPrintPreview.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Spire.License.dll" Value="..\..\..\..\00. Tool\01. dll\presentation.6.1.4\net40"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Spire.Pdf.dll" Value="..\..\..\..\00. Tool\01. dll\presentation.6.1.4\net40"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Spire.Presentation.dll" Value="..\..\..\..\00. Tool\01. dll\presentation.6.1.4\net40"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Statistics.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_StepProcess.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_checked_radio_button.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_add.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_add_User_Group.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_cancel.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_close.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_edit.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_email_send.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_notification.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_ok.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_plus.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_reload.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_remove.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_signature.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_team.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_upload_to_ftp.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_loginscreen.png" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_none.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_unchecked_radio_button.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Statistics.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_StepProcess.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_checked_radio_button.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_add.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_add_User_Group.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_cancel.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_classroom.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_close.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_diploma.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_edit.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_email_send.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_excel.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_heart_with_pulse.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_job.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_notification.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_ok.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_plus.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_project_setup.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_quality.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_reload.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_remove.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_signature.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_team.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_upload_to_ftp.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_loginscreen.png" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_none.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_unchecked_radio_button.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Actions_Bell.svg" Value="Actions_Bell.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Actions_CheckCircled.svg" Value="Actions_CheckCircled.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Actions_DeleteCircled.svg" Value="Actions_DeleteCircled.svg"/>
@@ -159,6 +168,8 @@
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_EPPlus.dll" Value="EPPlus.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_EntityFramework.SqlServer.dll" Value="EntityFramework.SqlServer.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_EntityFramework.dll" Value="EntityFramework.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_ExcelDataReader.DataSet.dll" Value="ExcelDataReader.DataSet.dll"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_ExcelDataReader.dll" Value="ExcelDataReader.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_KnowledgeSystem.exe" Value="KnowledgeSystem.exe"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_KnowledgeSystem.exe.config" Value="KnowledgeSystem.exe.config"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_KnowledgeSystem.pdb" Value="KnowledgeSystem.pdb"/>
@@ -177,12 +188,19 @@
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_icons_add.svg" Value="icons_add.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_icons_add_User_Group.svg" Value="icons_add_User_Group.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_icons_cancel.svg" Value="icons_cancel.svg"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_icons_classroom.svg" Value="icons_classroom.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_icons_close.svg" Value="icons_close.svg"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_icons_diploma.svg" Value="icons_diploma.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_icons_edit.svg" Value="icons_edit.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_icons_email_send.svg" Value="icons_email_send.svg"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_icons_excel.svg" Value="icons_excel.svg"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_icons_heart_with_pulse.svg" Value="icons_heart_with_pulse.svg"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_icons_job.svg" Value="icons_job.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_icons_notification.svg" Value="icons_notification.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_icons_ok.svg" Value="icons_ok.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_icons_plus.svg" Value="icons_plus.svg"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_icons_project_setup.svg" Value="icons_project_setup.svg"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_icons_quality.svg" Value="icons_quality.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_icons_reload.svg" Value="icons_reload.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_icons_remove.svg" Value="icons_remove.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_icons_signature.svg" Value="icons_signature.svg"/>
@@ -197,10 +215,10 @@
     <ROW Property="ARPHELPTELEPHONE" Value="6779"/>
     <ROW Property="ARPPRODUCTICON" Value="DocumentSystem.exe" Type="8"/>
     <ROW Property="Manufacturer" Value="FHS"/>
-    <ROW Property="ProductCode" Value="1028:{76BCC4C7-067F-4FF7-8063-4E39A1968767} 1033:{76BCC4C7-067F-4FF7-8063-4E39A1968767} " Type="16"/>
+    <ROW Property="ProductCode" Value="1028:{B7B62D3F-A06A-4D5D-87E9-1F15B448E041} 1033:{B7B62D3F-A06A-4D5D-87E9-1F15B448E041} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="Document System"/>
-    <ROW Property="ProductVersion" Value="1.0.3"/>
+    <ROW Property="ProductVersion" Value="1.0.0"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{3D296ADD-7B3B-4B1B-8A4D-8DA669CCAF51}"/>
     <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
@@ -225,7 +243,7 @@
     <ROW Component="APPDIR" ComponentId="{851A2458-0F56-4915-994C-F0EF3FB567DB}" Directory_="APPDIR" Attributes="0"/>
     <ROW Component="KnowledgeSystem_ContentOutput_Images" ComponentId="{80799FC2-379A-4DD9-8A9A-7046098D5DEE}" Directory_="Images_Dir" Attributes="0" KeyPath="Actions_Forbid.svg" Type="0"/>
     <ROW Component="KnowledgeSystem_PrimaryOutput" ComponentId="{B63E1A0B-4F99-485B-ABEA-2F28BF59ECE9}" Directory_="KnowledgeSystem_Dir" Attributes="0" KeyPath="KnowledgeSystem.exe"/>
-    <ROW Component="KnowledgeSystem_References" ComponentId="{EB6BE83C-C928-431A-A00D-31CBBE42CFD8}" Directory_="KnowledgeSystem_Dir" Attributes="0" KeyPath="Logger.dll"/>
+    <ROW Component="KnowledgeSystem_References" ComponentId="{EB6BE83C-C928-431A-A00D-31CBBE42CFD8}" Directory_="KnowledgeSystem_Dir" Attributes="0" KeyPath="ExcelDataReader.dll"/>
     <ROW Component="KnowledgeSystem_SymbolsOutput" ComponentId="{06DF53B5-83D9-447F-AD34-6B6861AAB0CC}" Directory_="KnowledgeSystem_Dir" Attributes="0" KeyPath="KnowledgeSystem.pdb"/>
     <ROW Component="ProductInformation" ComponentId="{AF0D4D2F-448A-4F22-9D35-9380FD6A7829}" Directory_="APPDIR" Attributes="4" KeyPath="Version"/>
     <ROW Component="SHORTCUTDIR" ComponentId="{369EAFF0-57B0-4EAB-8353-32DC19B5B4B9}" Directory_="SHORTCUTDIR" Attributes="0"/>
@@ -327,6 +345,15 @@
     <ROW File="icons_signature.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~12.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_signature.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_signature.svg&gt;" SelfReg="false"/>
     <ROW File="icons_team.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~13.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_team.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_team.svg&gt;" SelfReg="false"/>
     <ROW File="icons_upload_to_ftp.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~14.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_upload_to_ftp.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_upload_to_ftp.svg&gt;" SelfReg="false"/>
+    <ROW File="ExcelDataReader.DataSet.dll" Component_="KnowledgeSystem_References" FileName="EXCELD~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_ExcelDataReader.DataSet.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_ExcelDataReader.DataSet.dll&gt;" SelfReg="false"/>
+    <ROW File="ExcelDataReader.dll" Component_="KnowledgeSystem_References" FileName="EXCELD~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_ExcelDataReader.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_ExcelDataReader.dll&gt;" SelfReg="false"/>
+    <ROW File="icons_classroom.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~15.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_classroom.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_classroom.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_diploma.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~16.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_diploma.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_diploma.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_excel.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~17.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_excel.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_excel.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_heart_with_pulse.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~18.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_heart_with_pulse.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_heart_with_pulse.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_job.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~19.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_job.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_job.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_project_setup.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~20.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_project_setup.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_project_setup.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_quality.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~21.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_quality.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_quality.svg&gt;" SelfReg="false"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.AppPathsComponent">
     <ROW Name="AI_APPPATH_PERBUILD_Actions_Bell.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_Actions_Bell.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_Actions_Bell.svg]" Type="2" Content="0"/>
@@ -389,6 +416,8 @@
     <ROW Name="AI_APPPATH_PERBUILD_EPPlus.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_EPPlus.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_EPPlus.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_EntityFramework.SqlServer.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_EntityFramework.SqlServer.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_EntityFramework.SqlServer.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_EntityFramework.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_EntityFramework.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_EntityFramework.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_ExcelDataReader.DataSet.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_ExcelDataReader.DataSet.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_ExcelDataReader.DataSet.dll]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_ExcelDataReader.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_ExcelDataReader.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_ExcelDataReader.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_KnowledgeSystem.exe" Path="[|AI_PROPPATH_DIR_PERBUILD_KnowledgeSystem.exe]\[|AI_PROPPATH_FILENAME_PERBUILD_KnowledgeSystem.exe]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_KnowledgeSystem.exe.config" Path="[|AI_PROPPATH_DIR_PERBUILD_KnowledgeSystem.exe.config]\[|AI_PROPPATH_FILENAME_PERBUILD_KnowledgeSystem.exe.config]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_KnowledgeSystem.pdb" Path="[|AI_PROPPATH_DIR_PERBUILD_KnowledgeSystem.pdb]\[|AI_PROPPATH_FILENAME_PERBUILD_KnowledgeSystem.pdb]" Type="2" Content="0"/>
@@ -407,12 +436,19 @@
     <ROW Name="AI_APPPATH_PERBUILD_icons_add.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_icons_add.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_icons_add.svg]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_icons_add_User_Group.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_icons_add_User_Group.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_icons_add_User_Group.svg]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_icons_cancel.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_icons_cancel.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_icons_cancel.svg]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_icons_classroom.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_icons_classroom.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_icons_classroom.svg]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_icons_close.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_icons_close.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_icons_close.svg]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_icons_diploma.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_icons_diploma.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_icons_diploma.svg]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_icons_edit.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_icons_edit.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_icons_edit.svg]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_icons_email_send.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_icons_email_send.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_icons_email_send.svg]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_icons_excel.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_icons_excel.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_icons_excel.svg]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_icons_heart_with_pulse.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_icons_heart_with_pulse.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_icons_heart_with_pulse.svg]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_icons_job.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_icons_job.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_icons_job.svg]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_icons_notification.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_icons_notification.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_icons_notification.svg]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_icons_ok.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_icons_ok.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_icons_ok.svg]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_icons_plus.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_icons_plus.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_icons_plus.svg]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_icons_project_setup.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_icons_project_setup.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_icons_project_setup.svg]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_icons_quality.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_icons_quality.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_icons_quality.svg]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_icons_reload.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_icons_reload.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_icons_reload.svg]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_icons_remove.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_icons_remove.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_icons_remove.svg]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_icons_signature.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_icons_signature.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_icons_signature.svg]" Type="2" Content="0"/>
@@ -649,5 +685,14 @@
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_signature.svg"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_team.svg"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_upload_to_ftp.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="ExcelDataReader.DataSet.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="ExcelDataReader.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_classroom.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_diploma.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_excel.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_heart_with_pulse.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_job.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_project_setup.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_quality.svg"/>
   </COMPONENT>
 </DOCUMENT>

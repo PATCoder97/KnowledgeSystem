@@ -33,9 +33,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         // Khai báo BUS
         dt207_BaseBUS _dt207_BaseBUS = new dt207_BaseBUS();
-        dt207_TypeBUS _dt207_TypeBUS = new dt207_TypeBUS();
         dt207_TypeHisGetFileBUS _dt207_TypeHisGetFileBUS = new dt207_TypeHisGetFileBUS();
-        dt207_DocProcessingBUS _dt207_DocProgressBUS = new dt207_DocProcessingBUS();
         dt207_SecurityBUS _dt207_SecurityBUS = new dt207_SecurityBUS();
 
 
@@ -79,7 +77,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
             // Khai báo các danh sách liên quan
             List<dm_User> lsUsers = dm_UserBUS.Instance.GetList();
-            List<dt207_Type> lsKnowledgeTypes = _dt207_TypeBUS.GetList();
+            List<dt207_Type> lsKnowledgeTypes = dt207_TypeBUS.Instance.GetList();
             List<dt207_TypeHisGetFile> lsTypeHisGetFile = _dt207_TypeHisGetFileBUS.GetList();
             List<dt207_Base> lsKnowledgeBase = new List<dt207_Base>();
             List<dt207_Base> ls207Base = _haveKeyword ? _dt207_BaseBUS.GetList() : _dt207_BaseBUS.GetListWithoutKeyword();
@@ -88,7 +86,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             List<dm_GroupUser> lsGroupUsers = dm_GroupUserBUS.Instance.GetList();
 
             // Lấy danh sách các giá trị IdKnowledgeBase mà chưa hoàn thành lưu trình trình ký
-            var lsIdBaseRemove = _dt207_DocProgressBUS.GetListNotComplete().Select(r => r.IdKnowledgeBase).ToList();
+            var lsIdBaseRemove = dt207_DocProcessingBUS.Instance.GetListNotComplete().Select(r => r.IdKnowledgeBase).ToList();
 
             // Kiểm tra xem phải sysAdmin không, nếu là admin thì cho xem tất cả văn kiện
             IsSysAdmin = AppPermission.Instance.CheckAppPermission(AppPermission.SysAdmin);

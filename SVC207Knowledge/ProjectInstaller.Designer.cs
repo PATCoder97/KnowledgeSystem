@@ -41,7 +41,7 @@
             // 
             this.serviceInstaller1.Description = "Knowledge Notify Notes Service";
             this.serviceInstaller1.DisplayName = "FHS.NotifyNote.DocumentManager.Knowledge";
-            this.serviceInstaller1.ServiceName = "KnowledgeNotifyService";
+            this.serviceInstaller1.ServiceName = "FHS207NotifyService";
             // 
             // ProjectInstaller
             // 

@@ -26,10 +26,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             InitializeComponent();
         }
 
-        //dm_GroupUserBUS _dm_GroupUserBUS = new dm_GroupUserBUS();
         dt207_BaseBUS _dt207_BaseBUS = new dt207_BaseBUS();
-        dt207_DocProcessingBUS _dt207_DocProgressBUS = new dt207_DocProcessingBUS();
-        dt207_DocProcessingInfoBUS _dt207_DocProgressInfoBUS = new dt207_DocProcessingInfoBUS();
 
         List<dt207_DocProcessingInfo> lsBaseProcessInfos;
 
@@ -63,10 +60,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             helper.SaveViewInfo();
 
-            var lsDocProgresses = _dt207_DocProgressBUS.GetListByUIDProcess(TPConfigs.LoginUser.Id);
+            var lsDocProgresses = dt207_DocProcessingBUS.Instance.GetListByUIDProcess(TPConfigs.LoginUser.Id);
             var lsKnowledgeBases = _dt207_BaseBUS.GetList();
             var lsUsers = dm_UserBUS.Instance.GetList();
-            lsBaseProcessInfos = _dt207_DocProgressInfoBUS.GetList();
+            lsBaseProcessInfos = dt207_DocProcessingInfoBUS.Instance.GetList();
 
             var lsDocProgressInfosByLoginId =
                 (from data in lsBaseProcessInfos
@@ -121,7 +118,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         private void gcData_DoubleClick(object sender, EventArgs e)
         {
             int idDocProcess = Convert.ToInt32(gvData.GetFocusedRowCellValue(gColId));
-            var docProcess = _dt207_DocProgressBUS.GetItemById(idDocProcess);
+            var docProcess = dt207_DocProcessingBUS.Instance.GetItemById(idDocProcess);
 
             int indexStep = lsBaseProcessInfos.OrderByDescending(r => r.TimeStep).FirstOrDefault(r => r.IdDocProgress == idDocProcess).IndexStep;
             if (indexStep == -1 && !(docProcess.IsComplete))

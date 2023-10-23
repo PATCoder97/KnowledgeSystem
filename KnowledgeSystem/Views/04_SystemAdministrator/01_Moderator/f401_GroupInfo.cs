@@ -279,11 +279,11 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
         {
             if (_eventInfo != EventFormInfo.Update) return;
 
-            GridView view = gvData;
+            GridView view = gvChoose;
             dm_User _role = view.GetRow(view.FocusedRowHandle) as dm_User;
             if (_role == null) return;
 
-            lsUserData.Remove(_role);
+            lsUserChoose.Remove(_role);
             view.RefreshData();
             lsUserData.Add(_role);
             gvData.RefreshData();

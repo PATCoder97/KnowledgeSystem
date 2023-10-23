@@ -8,13 +8,13 @@ REM Cài Service
 C:\Windows\Microsoft.NET\Framework\v4.0.30319\installutil.exe "%path%SVC207Knowledge.exe"
 
 REM Cấu hình service Automatic
-C:\WINDOWS\system32\sc.exe config KnowledgeNotifyService start=auto
+C:\WINDOWS\system32\sc.exe config FHS207NotifyService start=auto
 if %errorlevel% == 2 echo Could not start service.
 if %errorlevel% == 0 echo Service started successfully.
 echo Errorlevel: %errorlevel%
 
 REM Chạy Service
-C:\WINDOWS\system32\net.exe start KnowledgeNotifyService
+C:\WINDOWS\system32\net.exe start FHS207NotifyService
 if %errorlevel% == 2 echo Could not start service.
 if %errorlevel% == 0 echo Service started successfully.
 echo Errorlevel: %errorlevel%

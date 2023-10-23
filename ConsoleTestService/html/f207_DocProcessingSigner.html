@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DocProcessing</title>
+</head>
+<!--通知文件 : 庫通知通知您文件「 」已完成更新。-->
+
+<body>
+
+    <h2>主管好！</h2>
+
+    <p>
+        知識庫系統通知文件「<span>{{id}}</span>」需審查，請您處理。<br>
+        請您進入系統，在「<span class="control">文件審查</span>」檢查。感謝您的合作。
+    </p>
+
+    <p>
+        文件內容<br>
+        &emsp;類別：{{typeof}}<br>
+        &emsp;越文名稱：<span style="color: black; font-family: Times New Roman">{{namevn}}</span><br>
+        &emsp;中文名稱：{{nametw}}<br>
+        &emsp;英文名稱：<span style="color: black; font-family: Times New Roman">{{nameen}}</span><br>
+        &emsp;提案人：{{userupload}}<br>
+        &emsp;上傳人：{{userprocess}}
+    </p>
+
+</body>
+
+</html>
+
+<style>
+    h2 {
+        font-family: DFKai-SB;
+        color: #000000;
+    }
+
+    p {
+        color: #000000;
+        font-size: 1.4em;
+        font-family: DFKai-SB;
+    }
+
+    span {
+        color: red;
+        font-family: "Times New Roman";
+    }
+
+    .control {
+        color: blue;
+        font-family: DFKai-SB;
+    }
+</style>

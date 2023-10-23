@@ -24,17 +24,17 @@ namespace KnowledgeSystem
         {
             new AppCopyRight()
             {
-                Version = "1.0.3",
-                DateDeploy = "2023.10.14"
+                Version = "1.0.0",
+                DateDeploy = "2023.10.23"
             };
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //  Application.Run(new f00_Main());
+            Application.Run(new f00_Main());
 
-            TPConfigs.LoginUser = dm_UserBUS.Instance.GetItemById("VNW0014732");
-            AppPermission.Instance.CheckAppPermission(7);
-            Application.Run(new f00_FluentFrame(21));
+            //TPConfigs.LoginUser = dm_UserBUS.Instance.GetItemById("VNW0014732");
+            //AppPermission.Instance.CheckAppPermission(7);
+            //Application.Run(new f00_FluentFrame(1));
         }
     }
 }

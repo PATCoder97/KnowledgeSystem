@@ -28,8 +28,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         #region parameters
 
         dt207_BaseBUS _dt207_BaseBUS = new dt207_BaseBUS();
-        dt207_DocProcessingBUS _dt207_DocProgressBUS = new dt207_DocProcessingBUS();
-        dt207_DocProcessingInfoBUS _dt207_DocProgressInfoBUS = new dt207_DocProcessingInfoBUS();
 
 
         BindingSource source = new BindingSource();
@@ -44,8 +42,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         private void LoadData()
         {
             // Xử lý lấy tất cả các văn kiện cần trình ký
-            lsDocProgresses = _dt207_DocProgressBUS.GetListNotComplete();
-            lsDocProgressInfos = _dt207_DocProgressInfoBUS.GetList();
+            lsDocProgresses = dt207_DocProcessingBUS.Instance.GetListNotComplete();
+            lsDocProgressInfos = dt207_DocProcessingInfoBUS.Instance.GetList();
             var lsKnowledgeBases = _dt207_BaseBUS.GetList();
             var lsUsers = dm_UserBUS.Instance.GetList();
             var lsGroupUserByUID = dm_GroupUserBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id);

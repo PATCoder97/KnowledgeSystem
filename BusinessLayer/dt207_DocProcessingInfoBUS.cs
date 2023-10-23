@@ -12,7 +12,17 @@ namespace BusinessLayer
 {
     public class dt207_DocProcessingInfoBUS
     {
-        TPLogger logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName);
+        TPLogger logger;
+
+        private static dt207_DocProcessingInfoBUS instance;
+
+        public static dt207_DocProcessingInfoBUS Instance
+        {
+            get { if (instance == null) instance = new dt207_DocProcessingInfoBUS(); return instance; }
+            private set { instance = value; }
+        }
+
+        private dt207_DocProcessingInfoBUS() { logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName); }
 
         public List<dt207_DocProcessingInfo> GetList()
         {
@@ -21,6 +31,22 @@ namespace BusinessLayer
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
                     return _context.dt207_DocProcessingInfo.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
+        public List<dt207_DocProcessingInfo> GetListNotNotify()
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt207_DocProcessingInfo.Where(r => string.IsNullOrEmpty(r.TimeNotifyNotes.ToString())).ToList();
                 }
             }
             catch (Exception ex)
@@ -46,7 +72,23 @@ namespace BusinessLayer
             }
         }
 
-        public bool Create(dt207_DocProcessingInfo docProgressInfo)
+        public dt207_DocProcessingInfo GetItemById(int _id)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt207_DocProcessingInfo.FirstOrDefault(r => r.Id == _id);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
+        public bool Add(dt207_DocProcessingInfo docProgressInfo)
         {
             try
             {
@@ -64,7 +106,7 @@ namespace BusinessLayer
             }
         }
 
-        public bool Update(dt207_DocProcessingInfo docProgressInfo)
+        public bool AddOrUpdate(dt207_DocProcessingInfo docProgressInfo)
         {
             try
             {
@@ -82,7 +124,7 @@ namespace BusinessLayer
             }
         }
 
-        public bool Delete(int docProgressInfoId)
+        public bool Remove(int docProgressInfoId)
         {
             try
             {

@@ -16,7 +16,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-//using Spire.Presentation;
+using Spire.Presentation;
 
 namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 {
@@ -31,7 +31,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             idKnowledgeBase = IdKnowledgeBase_;
         }
 
-        dt207_DocProcessingBUS _dt207_DocProgress = new dt207_DocProcessingBUS();
         dt207_HistoryGetFileBUS _dt207_HistoryGetFileBUS = new dt207_HistoryGetFileBUS();
 
         string documentFile = "";
@@ -66,20 +65,20 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                         break;
                     case ".pptx":
                     case ".ppt":
-                        //Spire.License.LicenseProvider.SetLicenseKey(TPConfigs.KeySpirePPT);
+                        Spire.License.LicenseProvider.SetLicenseKey(TPConfigs.KeySpirePPT);
 
-                        //string outputPath = Path.Combine(TPConfigs.TempFolderData, $"{DateTime.Now:MMddhhmmss} PPTConvertPDF.pdf");
-                        //// Load the PowerPoint presentation
-                        //using (Presentation presentation = new Presentation())
-                        //{
-                        //    presentation.LoadFromFile(documentFile);
+                        string outputPath = Path.Combine(TPConfigs.TempFolderData, $"{DateTime.Now:MMddhhmmss} PPTConvertPDF.pdf");
+                        // Load the PowerPoint presentation
+                        using (Presentation presentation = new Presentation())
+                        {
+                            presentation.LoadFromFile(documentFile);
 
-                        //    // Convert the presentation to PDF
-                        //    presentation.SaveToFile(outputPath, FileFormat.PDF);
-                        //}
+                            // Convert the presentation to PDF
+                            presentation.SaveToFile(outputPath, FileFormat.PDF);
+                        }
 
-                        //viewPDF.DocumentFilePath = outputPath;
-                        //lcPDF.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                        viewPDF.DocumentFilePath = outputPath;
+                        lcPDF.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
                         break;
                     default:
                         lcCanntView.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
@@ -125,7 +124,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             {
                 File.Copy(documentFile, saveFileDialog1.FileName, true);
 
-                var IsProcessing = _dt207_DocProgress.CheckItemProcessing(idKnowledgeBase);
+                var IsProcessing = dt207_DocProcessingBUS.Instance.CheckItemProcessing(idKnowledgeBase);
                 if (!IsProcessing)
                 {
                     dt207_HistoryGetFile historyGetFile = new dt207_HistoryGetFile()

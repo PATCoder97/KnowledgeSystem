@@ -24,10 +24,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             InitializeComponent();
         }
 
-        //dm_GroupUserBUS _dm_GroupUserBUS = new dm_GroupUserBUS();
         dt207_BaseBUS _dt207_BaseBUS = new dt207_BaseBUS();
-        dt207_DocProcessingBUS _dt207_DocProgressBUS = new dt207_DocProcessingBUS();
-        dt207_DocProcessingInfoBUS _dt207_DocProgressInfoBUS = new dt207_DocProcessingInfoBUS();
         dt207_NotifyEditDocBUS _dt207_NotifyEditDocBUS = new dt207_NotifyEditDocBUS();
 
         Font fontIndicator = new Font("Times New Roman", 12.0f, FontStyle.Italic);
@@ -46,7 +43,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         private void LoadData()
         {
             var lsNotifyEditBases = _dt207_NotifyEditDocBUS.GetListByUID(TPConfigs.LoginUser.Id);
-            var lsBaseProcessing = _dt207_DocProgressBUS.GetList();
+            var lsBaseProcessing = dt207_DocProcessingBUS.Instance.GetList();
             var lsBase207 = _dt207_BaseBUS.GetList();
 
             var query = (from data in lsNotifyEditBases
@@ -129,7 +126,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 notifyDocUpdate.IsRead = true;
                 _dt207_NotifyEditDocBUS.AddOrUpdate(notifyDocUpdate);
 
-                bool IsProcess = _dt207_DocProgressBUS.CheckItemProcessing(IdKnowledgeBase);
+                bool IsProcess = dt207_DocProcessingBUS.Instance.CheckItemProcessing(IdKnowledgeBase);
                 if (IsProcess)
                 {
                     XtraMessageBox.Show(TPConfigs.DocIsProcessing, TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);

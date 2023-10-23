@@ -12,7 +12,17 @@ namespace BusinessLayer
 {
     public class dt207_TypeBUS
     {
-        TPLogger logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName);
+        TPLogger logger;
+
+        private static dt207_TypeBUS instance;
+
+        public static dt207_TypeBUS Instance
+        {
+            get { if (instance == null) instance = new dt207_TypeBUS(); return instance; }
+            private set { instance = value; }
+        }
+
+        private dt207_TypeBUS() { logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName); }
 
         public List<dt207_Type> GetList()
         {
@@ -30,7 +40,7 @@ namespace BusinessLayer
             }
         }
 
-        public bool Create(dt207_Type type)
+        public bool Add(dt207_Type type)
         {
             try
             {
@@ -48,7 +58,7 @@ namespace BusinessLayer
             }
         }
 
-        public bool Update(dt207_Type type)
+        public bool AddOrUpdate(dt207_Type type)
         {
             try
             {
@@ -66,7 +76,7 @@ namespace BusinessLayer
             }
         }
 
-        public bool Delete(int typeId)
+        public bool Remove(int typeId)
         {
             try
             {

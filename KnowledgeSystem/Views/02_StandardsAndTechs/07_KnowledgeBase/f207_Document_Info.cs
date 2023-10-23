@@ -50,15 +50,12 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         #region parameters
 
         // Khai báo các BUS
-        dt207_TypeBUS _dt207_TypeBUS = new dt207_TypeBUS();
         dt207_BaseBUS _dt207_BaseBUS = new dt207_BaseBUS();
         dt207_Base_BAKBUS _dt207_Base_BAKBUS = new dt207_Base_BAKBUS();
         dt207_AttachmentBUS _dt207_AttachmentBUS = new dt207_AttachmentBUS();
         dt207_Attachment_BAKBUS _dt207_Attachment_BAKBUS = new dt207_Attachment_BAKBUS();
         dt207_SecurityBUS _dt207_SecurityBUS = new dt207_SecurityBUS();
         dt207_Security_BAKBUS _dt207_Security_BAKBUS = new dt207_Security_BAKBUS();
-        dt207_DocProcessingBUS _dt207_DocProgressBUS = new dt207_DocProcessingBUS();
-        dt207_DocProcessingInfoBUS _dt207_DocProgressInfoBUS = new dt207_DocProcessingInfoBUS();
         dt207_HistoryGetFileBUS _dt207_HistoryGetFileBUS = new dt207_HistoryGetFileBUS();
 
         // Khai báo các source
@@ -175,7 +172,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             gvHistoryProcess.ReadOnlyGridView();
 
             // Load các dữ liệu LIST ban đầu
-            lsKnowledgeTypes = _dt207_TypeBUS.GetList();
+            lsKnowledgeTypes = dt207_TypeBUS.Instance.GetList();
             lsUsers = dm_UserBUS.Instance.GetList();
             lsGroups = dm_GroupBUS.Instance.GetList();
             lsGroupUser = dm_GroupUserBUS.Instance.GetList();
@@ -271,7 +268,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             var random = new Random();
-            var randomString = new string(Enumerable.Repeat(chars, 8)
+            var randomString = new string(Enumerable.Repeat(chars, 7)
                 .Select(s => s[random.Next(s.Length)])
                 .ToArray());
 
@@ -426,6 +423,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     break;
                 case Event207DocInfo.View:
                     lcgHistoryEdit.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                    lbProgress.Text = "流程：" + progressSelect.DisplayName;
 
                     // Thông tin cơ bản
                     var base207Info = _dt207_BaseBUS.GetItemById(_idBaseDocument);
@@ -472,9 +470,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     helper.LoadViewInfo();
 
                     // Thông tin lịch sửa cập nhật
-                    var lsDocProcess = _dt207_DocProgressBUS.GetListByIdBase(_idBaseDocument).Where(r => r.Id != _idDocProcessing);
+                    var lsDocProcess = dt207_DocProcessingBUS.Instance.GetListByIdBase(_idBaseDocument).Where(r => r.Id != _idDocProcessing);
                     var lsDocProcessInfos =
-                        (from data in _dt207_DocProgressInfoBUS.GetList()
+                        (from data in dt207_DocProcessingInfoBUS.Instance.GetList()
                          group data by data.IdDocProgress into g
                          select new
                          {
@@ -503,7 +501,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     lcgProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
                     controlgroupDocument.SelectedTabPage = lcgProgress;
 
-                    var _docProcessing = _dt207_DocProgressBUS.GetItemByIdBaseNotComplete(_idBaseDocument);
+                    var _docProcessing = dt207_DocProcessingBUS.Instance.GetItemByIdBaseNotComplete(_idBaseDocument);
                     if (_docProcessing == default)
                     {
                         XtraMessageBox.Show("文件已由其他主管處理完成", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -525,7 +523,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                         stepProgressDoc.Items.Add(new StepProgressBarItem(item.DisplayName));
                     stepProgressDoc.ItemOptions.Indicator.Width = 40;
 
-                    var lsDocProcessingInfos = _dt207_DocProgressInfoBUS.GetListByIdDocProcess(_idDocProcessing);
+                    var lsDocProcessingInfos = dt207_DocProcessingInfoBUS.Instance.GetListByIdDocProcess(_idDocProcessing);
                     int _stepNow = lsDocProcessingInfos.OrderByDescending(r => r.TimeStep).First().IndexStep;
                     stepProgressDoc.SelectedItemIndex = _stepNow; // Focus đến bước hiện tại
 
@@ -609,6 +607,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             if (openFileDialog.ShowDialog() != DialogResult.OK)
                 return;
 
+            int index = 0;
             foreach (string fileName in openFileDialog.FileNames)
             {
                 string encryptionName = GenerateHashFileName();
@@ -616,7 +615,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 {
                     FullPath = fileName,
                     FileName = Path.GetFileName(fileName),
-                    EncryptionName = encryptionName
+                    EncryptionName = $"{encryptionName}{index++}"
                 };
                 lsAttachments.Add(attachment);
                 Thread.Sleep(5);
@@ -706,7 +705,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 Descriptions = EnumHelper.GetDescription(_event207),
                 IdUserProcess = TPConfigs.LoginUser.Id
             };
-            _dt207_DocProgressBUS.Create(docProgress);
+            dt207_DocProcessingBUS.Instance.Add(docProgress);
 
             Close();
         }
@@ -730,7 +729,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                         _idBaseDocument = _dt207_BaseBUS.GetNewBaseId(TPConfigs.LoginUser.IdDepartment);
                         break;
                     case Event207DocInfo.Update:
-                        _IsProcessing = _dt207_DocProgressBUS.CheckItemProcessing(_idBaseDocument);
+                        _IsProcessing = dt207_DocProcessingBUS.Instance.CheckItemProcessing(_idBaseDocument);
                         if (_IsProcessing)
                         {
                             break;
@@ -819,7 +818,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                         Descriptions = EnumHelper.GetDescription(_event207),
                         IdUserProcess = TPConfigs.LoginUser.Id,
                     };
-                    _dt207_DocProgressBUS.Create(docProgress);
+                    dt207_DocProcessingBUS.Instance.Add(docProgress);
                 }
                 else
                 {
@@ -831,7 +830,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                         IdUserProcess = TPConfigs.LoginUser.Id,
                         Descriptions = "呈核",
                     };
-                    _dt207_DocProgressInfoBUS.Create(progressInfo);
+                    dt207_DocProcessingInfoBUS.Instance.Add(progressInfo);
                 }
             }
 
@@ -863,7 +862,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             string documentsFile = Path.Combine(TPConfigs.PathKnowledgeFile, dataRow.EncryptionName);
 
             // Lưu lại lịch sử xem file
-            var IsProcessing = _dt207_DocProgressBUS.CheckItemProcessing(_idBaseDocument);
+            var IsProcessing = dt207_DocProcessingBUS.Instance.CheckItemProcessing(_idBaseDocument);
             if (!string.IsNullOrEmpty(_idBaseDocument) && !IsProcessing)
             {
                 dt207_HistoryGetFile historyGetFile = new dt207_HistoryGetFile()
@@ -924,12 +923,12 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         private void btnApproved_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             List<string> lsChangeDetails = new List<string>();
-            var lsBaseProgressById = _dt207_DocProgressBUS.GetListByIdBase(_idBaseDocument);
+            var lsBaseProgressById = dt207_DocProcessingBUS.Instance.GetListByIdBase(_idBaseDocument);
             int _idBaseProgress = lsBaseProgressById.OrderByDescending(r => r.Id).FirstOrDefault().Id;
             string _eventProcess = lsBaseProgressById.OrderByDescending(r => r.Id).FirstOrDefault().Descriptions;
             _eventApproved = EnumHelper.GetEnumByDescription<Event207DocInfo>(_eventProcess);
 
-            var lsBaseProcessInfos = _dt207_DocProgressInfoBUS.GetListByIdDocProcess(_idBaseProgress);
+            var lsBaseProcessInfos = dt207_DocProcessingInfoBUS.Instance.GetListByIdDocProcess(_idBaseProgress);
             int _indexStep = lsBaseProcessInfos.Count != 0 ? lsBaseProcessInfos.OrderByDescending(r => r.Id).FirstOrDefault().IndexStep + 1 : 0;
 
             switch (_eventApproved)
@@ -997,11 +996,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             string descriptions = "核准";
             if (_indexStep == _stepEnd)
             {
-                var docProcessUpdate = _dt207_DocProgressBUS.GetItemById(_idBaseProgress);// db.dt207_DocProgress.First(r => r.Id == idDocProgress);
+                var docProcessUpdate = dt207_DocProcessingBUS.Instance.GetItemById(_idBaseProgress);// db.dt207_DocProgress.First(r => r.Id == idDocProgress);
                 docProcessUpdate.IsSuccess = true;
                 docProcessUpdate.IsComplete = true;
                 docProcessUpdate.Change = string.Join("，", lsChangeDetails);
-                _dt207_DocProgressBUS.AddOrUpdate(docProcessUpdate);
+                dt207_DocProcessingBUS.Instance.AddOrUpdate(docProcessUpdate);
                 //db.dt207_DocProgress.AddOrUpdate(docProcessUpdate);
 
                 descriptions = "確認完畢";
@@ -1019,7 +1018,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 IdUserProcess = TPConfigs.LoginUser.Id,
                 Descriptions = descriptions,
             };
-            _dt207_DocProgressInfoBUS.Create(progressInfo);
+            dt207_DocProcessingInfoBUS.Instance.Add(progressInfo);
 
             Close();
         }
@@ -1042,10 +1041,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
             if (_eventApproved == Event207DocInfo.Delete)
             {
-                var docProcessUpdate = _dt207_DocProgressBUS.GetItemById(_idDocProcessing);//  db.dt207_DocProgress.First(r => r.Id == _idDocProcessing);
+                var docProcessUpdate = dt207_DocProcessingBUS.Instance.GetItemById(_idDocProcessing);//  db.dt207_DocProgress.First(r => r.Id == _idDocProcessing);
                 docProcessUpdate.IsSuccess = false;
                 docProcessUpdate.IsComplete = true;
-                _dt207_DocProgressBUS.AddOrUpdate(docProcessUpdate);
+                dt207_DocProcessingBUS.Instance.AddOrUpdate(docProcessUpdate);
             }
 
             dt207_DocProcessingInfo progressInfo = new dt207_DocProcessingInfo
@@ -1057,7 +1056,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 Descriptions = string.IsNullOrEmpty(descriptions) ? "退回" : $"退回，說明：{descriptions}"
             };
 
-            _dt207_DocProgressInfoBUS.Create(progressInfo);
+            dt207_DocProcessingInfoBUS.Instance.Add(progressInfo);
 
             Close();
         }
@@ -1076,13 +1075,13 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             var result = XtraInputBox.Show(args);
             string descriptions = string.IsNullOrEmpty(result?.ToString()) ? "取消" : $"取消，說明：{result}";
 
-            var docProcessUpdate = _dt207_DocProgressBUS.GetItemById(_idDocProcessing);
+            var docProcessUpdate = dt207_DocProcessingBUS.Instance.GetItemById(_idDocProcessing);
             _eventApproved = EnumHelper.GetEnumByDescription<Event207DocInfo>(docProcessUpdate.Descriptions);
 
             docProcessUpdate.IsSuccess = false;
             docProcessUpdate.IsComplete = true;
             docProcessUpdate.Change = descriptions;
-            _dt207_DocProgressBUS.AddOrUpdate(docProcessUpdate);
+            dt207_DocProcessingBUS.Instance.AddOrUpdate(docProcessUpdate);
 
             dt207_DocProcessingInfo progressInfo = new dt207_DocProcessingInfo()
             {
@@ -1092,7 +1091,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 IdUserProcess = TPConfigs.LoginUser.Id,
                 Descriptions = descriptions,
             };
-            _dt207_DocProgressInfoBUS.Create(progressInfo);
+            dt207_DocProcessingInfoBUS.Instance.Add(progressInfo);
 
             switch (_eventApproved)
             {

@@ -7,7 +7,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SVC207Knowledge
+namespace NotesMail
 {
     public class NotesMail
     {

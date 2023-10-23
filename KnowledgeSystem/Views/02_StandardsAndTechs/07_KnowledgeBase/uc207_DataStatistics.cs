@@ -31,7 +31,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         #region parameters
 
         dt207_BaseBUS _dt207_BaseBUS = new dt207_BaseBUS();
-        dt207_DocProcessingBUS _dt207_DocProgressBUS = new dt207_DocProcessingBUS();
 
         List<dm_Departments> lsDepts;
 
@@ -110,7 +109,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             var lsTargets = dt207_TargetsBUS.Instance.GetList();
             var lsBase207 = _dt207_BaseBUS.GetListByDate(fromDate, toDate);
             var lsUsers = dm_UserBUS.Instance.GetList();
-            var lsBaseProcessing = _dt207_DocProgressBUS.GetListNotComplete();
+            var lsBaseProcessing = dt207_DocProcessingBUS.Instance.GetListNotComplete();
 
             // Lấy danh sách văn kiện và kèm theo mã bộ phận (Lấy luôn văn kiện đang trình ký Thêm, Sửa, Xoá)
             var lsDoc = (from data in lsBase207

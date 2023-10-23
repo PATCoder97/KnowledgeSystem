@@ -13,7 +13,17 @@ namespace BusinessLayer
 {
     public class dt207_DocProcessingBUS
     {
-        TPLogger logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName);
+        TPLogger logger;
+
+        private static dt207_DocProcessingBUS instance;
+
+        public static dt207_DocProcessingBUS Instance
+        {
+            get { if (instance == null) instance = new dt207_DocProcessingBUS(); return instance; }
+            private set { instance = value; }
+        }
+
+        private dt207_DocProcessingBUS() { logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName); }
 
         public List<dt207_DocProcessing> GetList()
         {
@@ -128,7 +138,7 @@ namespace BusinessLayer
 
         }
 
-        public bool Create(dt207_DocProcessing docProgress)
+        public bool Add(dt207_DocProcessing docProgress)
         {
             try
             {
@@ -164,7 +174,7 @@ namespace BusinessLayer
             }
         }
 
-        public bool Delete(int docProgressId)
+        public bool Remove(int docProgressId)
         {
             try
             {
