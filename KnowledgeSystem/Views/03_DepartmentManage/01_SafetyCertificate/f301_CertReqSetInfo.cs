@@ -41,9 +41,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
         {
             cbbDept.Enabled = false;
             cbbJobTitle.Enabled = _enable;
-            //cbbControl.Enabled = _enable;
-            //txbPrioritize.Enabled = _enable;
-            //cbbPicture.Enabled = _enable;
+            cbbCourse.Enabled = _enable;
+            txbNewHeadcount.Enabled = _enable;
+            txbActualHeadcount.Enabled = _enable;
+            txbReqQuantity.Enabled = _enable;
         }
 
         private void LockControl()
@@ -91,7 +92,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
 
         private void f301_CertReqSetInfo_Load(object sender, EventArgs e)
         {
-            LockControl();
+
 
             var lsDepts = dm_DeptBUS.Instance.GetList().Select(r => new dm_Departments
             {
@@ -125,6 +126,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                     txbNewHeadcount.EditValue = _certReq.NewHeadcount;
                     txbActualHeadcount.EditValue = _certReq.ActualHeadcount;
                     txbReqQuantity.EditValue = _certReq.ReqQuantity;
+
+                    Hide();
+                    cbbJobTitle.ShowPopup();
+                    cbbCourse.ShowPopup();
                     break;
                 case EventFormInfo.Update:
                     break;
@@ -135,6 +140,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                 default:
                     break;
             }
+
+            LockControl();
         }
 
         private void btnEdit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -153,76 +160,64 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-           // cbbJobTitle.Properties.View.RefreshData();
-            cbbJobTitle.EditValue = _certReq.IdJobTitle;
-            cbbCourse.EditValue = _certReq.IdCourse;
+            string jobTitles = cbbJobTitle.EditValue?.ToString();
+            string course = cbbCourse.EditValue?.ToString();
 
-            //string jobTitles = cbbJobTitle.EditValue?.ToString();
-            //string course = cbbCourse.EditValue?.ToString();
+            if (string.IsNullOrEmpty(jobTitles) || string.IsNullOrEmpty(course))
+            {
+                XtraMessageBox.Show("請填寫所有信息", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-            //if (string.IsNullOrEmpty(jobTitles) || string.IsNullOrEmpty(course))
-            //{
-            //    XtraMessageBox.Show("請填寫所有信息", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    return;
-            //}
+            var result = false;
+            string msg = "";
+            using (var handle = SplashScreenManager.ShowOverlayForm(this))
+            {
+                _certReq.IdDept = idDept2word;
+                _certReq.IdJobTitle = jobTitles;
+                _certReq.IdCourse = course;
+                _certReq.NewHeadcount = Convert.ToInt16(txbNewHeadcount.EditValue);
+                _certReq.ActualHeadcount = Convert.ToInt16(txbActualHeadcount.EditValue);
+                _certReq.ReqQuantity = Convert.ToInt16(txbReqQuantity.EditValue);
 
-            //var result = false;
-            //string msg = "";
-            //using (var handle = SplashScreenManager.ShowOverlayForm(this))
-            //{
-            //    _certReq.IdDept = idDept2word;
-            //    _certReq.IdJobTitle = jobTitles;
-            //    _certReq.IdCourse = course;
-            //    _certReq.NewHeadcount = Convert.ToInt16(txbNewHeadcount.EditValue);
-            //    _certReq.ActualHeadcount = Convert.ToInt16(txbActualHeadcount.EditValue);
-            //    _certReq.ReqQuantity = Convert.ToInt16(txbReqQuantity.EditValue);
+                msg = $"{_certReq.IdDept} {_certReq.IdJobTitle} {_certReq.IdCourse} {_certReq.ReqQuantity}";
+                switch (_eventInfo)
+                {
+                    case EventFormInfo.Create:
+                        result = dt301_CertReqSetBUS.Instance.Add(_certReq);
+                        break;
+                    case EventFormInfo.View:
+                        break;
+                    case EventFormInfo.Update:
+                        result = dt301_CertReqSetBUS.Instance.AddOrUpdate(_certReq);
+                        break;
+                    case EventFormInfo.Delete:
+                        var dialogResult = XtraMessageBox.Show($"您確認要刪除{_formName}: {_certReq.IdJobTitle} {_certReq.IdCourse}", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (dialogResult != DialogResult.Yes) return;
+                        result = dt301_CertReqSetBUS.Instance.Remove(_certReq.Id);
+                        break;
+                    default:
+                        break;
+                }
+            }
 
-            //    msg = $"{_certReq.IdDept} {_certReq.IdJobTitle} {_certReq.IdCourse} {_certReq.ReqQuantity}";
-            //    switch (_eventInfo)
-            //    {
-            //        case EventFormInfo.Create:
-            //            result = dt301_CertReqSetBUS.Instance.Add(_certReq);
-            //            break;
-            //        case EventFormInfo.View:
-            //            break;
-            //        case EventFormInfo.Update:
-            //            result = dt301_CertReqSetBUS.Instance.AddOrUpdate(_certReq);
-            //            break;
-            //        case EventFormInfo.Delete:
-            //            var dialogResult = XtraMessageBox.Show($"您確認要刪除{_formName}: {_certReq.IdJobTitle} {_certReq.IdCourse}", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            //            if (dialogResult != DialogResult.Yes) return;
-            //            result = dt301_CertReqSetBUS.Instance.Remove(_certReq.Id);
-            //            break;
-            //        default:
-            //            break;
-            //    }
-            //}
-
-            //if (result)
-            //{
-            //    //switch (_eventInfo)
-            //    //{
-            //    //    case EventFormInfo.Update:
-            //    //        logger.Info(_eventInfo.ToString(), msg);
-            //    //        break;
-            //    //    case EventFormInfo.Delete:
-            //    //        logger.Warning(_eventInfo.ToString(), msg);
-            //    //        break;
-            //    //}
-            //    Close();
-            //}
-            //else
-            //{
-            //    DefaultMsg.MsgErrorDB();
-            //}
-        }
-
-        private void cbbJobTitle_EditValueChanged(object sender, EventArgs e)
-        {
-            GridView view = cbbJobTitle.Properties.View; /// identify selected row in dataTable  
-            int row = view.FocusedRowHandle;                            /// popup row number  
-
-            int index = cbbJobTitle.Properties.GetIndexByKeyValue(cbbJobTitle.EditValue);
+            if (result)
+            {
+                //switch (_eventInfo)
+                //{
+                //    case EventFormInfo.Update:
+                //        logger.Info(_eventInfo.ToString(), msg);
+                //        break;
+                //    case EventFormInfo.Delete:
+                //        logger.Warning(_eventInfo.ToString(), msg);
+                //        break;
+                //}
+                Close();
+            }
+            else
+            {
+                DefaultMsg.MsgErrorDB();
+            }
         }
     }
 }

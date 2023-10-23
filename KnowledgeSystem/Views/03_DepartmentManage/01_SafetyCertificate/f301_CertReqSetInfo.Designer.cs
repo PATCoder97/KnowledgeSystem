@@ -44,14 +44,14 @@
             this.txbActualHeadcount = new DevExpress.XtraEditors.SpinEdit();
             this.txbNewHeadcount = new DevExpress.XtraEditors.SpinEdit();
             this.cbbDept = new DevExpress.XtraEditors.LookUpEdit();
-            this.cbbJobTitle = new DevExpress.XtraEditors.SearchLookUpEdit();
-            this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.cbbCourse = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.cbbJobTitle = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -66,10 +66,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.txbActualHeadcount.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbNewHeadcount.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbDept.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbbJobTitle.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbCourse.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbJobTitle.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
@@ -189,8 +189,8 @@
             this.layoutControl1.Controls.Add(this.txbActualHeadcount);
             this.layoutControl1.Controls.Add(this.txbNewHeadcount);
             this.layoutControl1.Controls.Add(this.cbbDept);
-            this.layoutControl1.Controls.Add(this.cbbJobTitle);
             this.layoutControl1.Controls.Add(this.cbbCourse);
+            this.layoutControl1.Controls.Add(this.cbbJobTitle);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
@@ -310,65 +310,6 @@
             this.cbbDept.StyleController = this.layoutControl1;
             this.cbbDept.TabIndex = 7;
             // 
-            // cbbJobTitle
-            // 
-            this.cbbJobTitle.Location = new System.Drawing.Point(124, 44);
-            this.cbbJobTitle.MenuManager = this.barManagerTP;
-            this.cbbJobTitle.Name = "cbbJobTitle";
-            this.cbbJobTitle.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
-            this.cbbJobTitle.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbbJobTitle.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.cbbJobTitle.Properties.Appearance.Options.UseFont = true;
-            this.cbbJobTitle.Properties.Appearance.Options.UseForeColor = true;
-            this.cbbJobTitle.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbbJobTitle.Properties.NullText = "";
-            this.cbbJobTitle.Properties.PopupView = this.searchLookUpEdit1View;
-            this.cbbJobTitle.Size = new System.Drawing.Size(286, 28);
-            this.cbbJobTitle.StyleController = this.layoutControl1;
-            this.cbbJobTitle.TabIndex = 5;
-            this.cbbJobTitle.EditValueChanged += new System.EventHandler(this.cbbJobTitle_EditValueChanged);
-            // 
-            // searchLookUpEdit1View
-            // 
-            this.searchLookUpEdit1View.Appearance.HeaderPanel.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchLookUpEdit1View.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
-            this.searchLookUpEdit1View.Appearance.HeaderPanel.Options.UseFont = true;
-            this.searchLookUpEdit1View.Appearance.HeaderPanel.Options.UseForeColor = true;
-            this.searchLookUpEdit1View.Appearance.HeaderPanel.Options.UseTextOptions = true;
-            this.searchLookUpEdit1View.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.searchLookUpEdit1View.Appearance.Row.Font = new System.Drawing.Font("DFKai-SB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchLookUpEdit1View.Appearance.Row.ForeColor = System.Drawing.Color.Black;
-            this.searchLookUpEdit1View.Appearance.Row.Options.UseFont = true;
-            this.searchLookUpEdit1View.Appearance.Row.Options.UseForeColor = true;
-            this.searchLookUpEdit1View.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn1,
-            this.gridColumn2});
-            this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
-            this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.searchLookUpEdit1View.OptionsView.EnableAppearanceOddRow = true;
-            this.searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
-            // 
-            // gridColumn1
-            // 
-            this.gridColumn1.Caption = "職務代號";
-            this.gridColumn1.FieldName = "Id";
-            this.gridColumn1.MaxWidth = 100;
-            this.gridColumn1.MinWidth = 100;
-            this.gridColumn1.Name = "gridColumn1";
-            this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 0;
-            this.gridColumn1.Width = 100;
-            // 
-            // gridColumn2
-            // 
-            this.gridColumn2.Caption = "職務名稱";
-            this.gridColumn2.FieldName = "DisplayName";
-            this.gridColumn2.Name = "gridColumn2";
-            this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 1;
-            // 
             // cbbCourse
             // 
             this.cbbCourse.Location = new System.Drawing.Point(124, 76);
@@ -426,6 +367,69 @@
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 1;
+            // 
+            // cbbJobTitle
+            // 
+            this.cbbJobTitle.Location = new System.Drawing.Point(124, 44);
+            this.cbbJobTitle.MenuManager = this.barManagerTP;
+            this.cbbJobTitle.Name = "cbbJobTitle";
+            this.cbbJobTitle.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.cbbJobTitle.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbJobTitle.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.cbbJobTitle.Properties.Appearance.Options.UseFont = true;
+            this.cbbJobTitle.Properties.Appearance.Options.UseForeColor = true;
+            this.cbbJobTitle.Properties.AppearanceDropDown.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.cbbJobTitle.Properties.AppearanceDropDown.Options.UseFont = true;
+            this.cbbJobTitle.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbbJobTitle.Properties.NullText = "";
+            this.cbbJobTitle.Properties.PopupView = this.searchLookUpEdit1View;
+            this.cbbJobTitle.Size = new System.Drawing.Size(286, 28);
+            this.cbbJobTitle.StyleController = this.layoutControl1;
+            this.cbbJobTitle.TabIndex = 5;
+            // 
+            // searchLookUpEdit1View
+            // 
+            this.searchLookUpEdit1View.Appearance.HeaderPanel.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.searchLookUpEdit1View.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
+            this.searchLookUpEdit1View.Appearance.HeaderPanel.Options.UseFont = true;
+            this.searchLookUpEdit1View.Appearance.HeaderPanel.Options.UseForeColor = true;
+            this.searchLookUpEdit1View.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            this.searchLookUpEdit1View.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.searchLookUpEdit1View.Appearance.Row.Font = new System.Drawing.Font("DFKai-SB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchLookUpEdit1View.Appearance.Row.ForeColor = System.Drawing.Color.Black;
+            this.searchLookUpEdit1View.Appearance.Row.Options.UseFont = true;
+            this.searchLookUpEdit1View.Appearance.Row.Options.UseForeColor = true;
+            this.searchLookUpEdit1View.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn1,
+            this.gridColumn2});
+            this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
+            this.searchLookUpEdit1View.OptionsImageLoad.AnimationType = DevExpress.Utils.ImageContentAnimationType.Push;
+            this.searchLookUpEdit1View.OptionsImageLoad.AsyncLoad = true;
+            this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.searchLookUpEdit1View.OptionsView.EnableAppearanceOddRow = true;
+            this.searchLookUpEdit1View.OptionsView.ShowAutoFilterRow = true;
+            this.searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "職務代號";
+            this.gridColumn1.FieldName = "Id";
+            this.gridColumn1.MaxWidth = 100;
+            this.gridColumn1.MinWidth = 100;
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 0;
+            this.gridColumn1.Width = 100;
+            // 
+            // gridColumn2
+            // 
+            this.gridColumn2.Caption = "職務名稱";
+            this.gridColumn2.FieldName = "DisplayName";
+            this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.Visible = true;
+            this.gridColumn2.VisibleIndex = 1;
             // 
             // Root
             // 
@@ -508,8 +512,8 @@
             this.layoutControlItem5.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem5.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem5.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem5.AppearanceItemCaptionDisabled.BackColor = System.Drawing.Color.Black;
-            this.layoutControlItem5.AppearanceItemCaptionDisabled.Options.UseBackColor = true;
+            this.layoutControlItem5.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem5.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem5.Control = this.txbActualHeadcount;
             this.layoutControlItem5.Location = new System.Drawing.Point(0, 128);
             this.layoutControlItem5.Name = "layoutControlItem5";
@@ -523,8 +527,8 @@
             this.layoutControlItem7.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem7.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem7.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem7.AppearanceItemCaptionDisabled.BackColor = System.Drawing.Color.Black;
-            this.layoutControlItem7.AppearanceItemCaptionDisabled.Options.UseBackColor = true;
+            this.layoutControlItem7.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem7.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem7.Control = this.txbReqQuantity;
             this.layoutControlItem7.Location = new System.Drawing.Point(0, 160);
             this.layoutControlItem7.Name = "layoutControlItem7";
@@ -554,10 +558,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.txbActualHeadcount.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbNewHeadcount.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbDept.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbbJobTitle.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbCourse.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbJobTitle.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
@@ -593,13 +597,13 @@
         private DevExpress.XtraEditors.SpinEdit txbActualHeadcount;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
-        private DevExpress.XtraEditors.SearchLookUpEdit cbbJobTitle;
-        private DevExpress.XtraGrid.Views.Grid.GridView searchLookUpEdit1View;
         private DevExpress.XtraEditors.SearchLookUpEdit cbbCourse;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
+        private DevExpress.XtraEditors.SearchLookUpEdit cbbJobTitle;
+        private DevExpress.XtraGrid.Views.Grid.GridView searchLookUpEdit1View;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
     }
 }
