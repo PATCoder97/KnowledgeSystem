@@ -24,7 +24,7 @@ namespace KnowledgeSystem
         {
             new AppCopyRight()
             {
-                Version = "1.0.1",
+                Version = "1.0.2",
                 DateDeploy = "2023.10.24"
             };
 
