@@ -92,13 +92,13 @@
             // 
             // gvData
             // 
-            this.gvData.Appearance.HeaderPanel.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvData.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.gvData.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
             this.gvData.Appearance.HeaderPanel.Options.UseFont = true;
             this.gvData.Appearance.HeaderPanel.Options.UseForeColor = true;
             this.gvData.Appearance.HeaderPanel.Options.UseTextOptions = true;
             this.gvData.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gvData.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.gvData.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gvData.Appearance.Row.ForeColor = System.Drawing.Color.Black;
             this.gvData.Appearance.Row.Options.UseFont = true;
             this.gvData.Appearance.Row.Options.UseForeColor = true;
@@ -139,8 +139,6 @@
             // 
             // gridColumn2
             // 
-            this.gridColumn2.AppearanceCell.Font = new System.Drawing.Font("DFKai-SB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridColumn2.AppearanceCell.Options.UseFont = true;
             this.gridColumn2.Caption = "名稱";
             this.gridColumn2.FieldName = "DisplayName";
             this.gridColumn2.MinWidth = 23;
@@ -151,8 +149,6 @@
             // 
             // gridColumn7
             // 
-            this.gridColumn7.AppearanceCell.Font = new System.Drawing.Font("DFKai-SB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridColumn7.AppearanceCell.Options.UseFont = true;
             this.gridColumn7.Caption = "部門";
             this.gridColumn7.FieldName = "DeptName";
             this.gridColumn7.Name = "gridColumn7";
@@ -229,8 +225,6 @@
             // 
             // gridColumn4
             // 
-            this.gridColumn4.AppearanceCell.Font = new System.Drawing.Font("DFKai-SB", 12F);
-            this.gridColumn4.AppearanceCell.Options.UseFont = true;
             this.gridColumn4.Caption = "職務";
             this.gridColumn4.FieldName = "JobName";
             this.gridColumn4.Name = "gridColumn4";
@@ -276,15 +270,15 @@
             // 
             // bar2
             // 
-            this.bar2.BarAppearance.Hovered.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bar2.BarAppearance.Hovered.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.bar2.BarAppearance.Hovered.ForeColor = System.Drawing.Color.Black;
             this.bar2.BarAppearance.Hovered.Options.UseFont = true;
             this.bar2.BarAppearance.Hovered.Options.UseForeColor = true;
-            this.bar2.BarAppearance.Normal.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.bar2.BarAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.bar2.BarAppearance.Normal.ForeColor = System.Drawing.Color.Black;
             this.bar2.BarAppearance.Normal.Options.UseFont = true;
             this.bar2.BarAppearance.Normal.Options.UseForeColor = true;
-            this.bar2.BarAppearance.Pressed.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.bar2.BarAppearance.Pressed.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.bar2.BarAppearance.Pressed.ForeColor = System.Drawing.Color.Black;
             this.bar2.BarAppearance.Pressed.Options.UseFont = true;
             this.bar2.BarAppearance.Pressed.Options.UseForeColor = true;

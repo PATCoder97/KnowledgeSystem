@@ -61,7 +61,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             txbUserId.Enabled = false;
             txbUserId.ReadOnly = false;
             lcRole.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-            Size = new Size(579, 230);
+            Size = new Size(600, 250);
 
             switch (_eventInfo)
             {
@@ -88,7 +88,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                     if (IsSysAdmin)
                     {
                         lcRole.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
-                        Size = new Size(579, 530);
+                        Size = new Size(600, 550);
                     }
 
                     EnabledController();
