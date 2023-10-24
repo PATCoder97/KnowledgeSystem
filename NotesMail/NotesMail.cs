@@ -19,9 +19,9 @@ namespace NotesMail
 
                 var mail = new Mail()
                 {
-                    To = "VNW0014732@VNFPG",
-                    //To = string.Join(",", mailNotes.lsTO),
-                    CC = mailNotes.lsCC != null ? string.Join(",", mailNotes.lsCC) : "",
+                    //To = "VNW0014732@VNFPG",
+                    To = mailNotes.lsTO != null ? string.Join(",", mailNotes.lsTO.Select(r => $"{r}@VNFPG")) : "",
+                    CC = mailNotes.lsCC != null ? string.Join(",", mailNotes.lsCC.Select(r => $"{r}@VNFPG")) : "",
                     Subject = mailNotes.Subject,
                     SystemName = "冶金文件管理系統",
                     SystemOwner = "潘英俊(分機:6779)",

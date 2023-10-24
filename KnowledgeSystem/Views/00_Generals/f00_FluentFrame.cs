@@ -84,7 +84,7 @@ namespace KnowledgeSystem.Views._00_Generals
             {
                 AccordionControlElement accordion = new AccordionControlElement();
 
-                string pathImage = Path.Combine(Application.StartupPath, "Images", item.Images ?? "");
+                string pathImage = Path.Combine(TPConfigs.StartupPath, "Images", item.Images ?? "");
                 accordion.ImageOptions.SvgImage = item.Images != null ? DevExpress.Utils.Svg.SvgImage.FromFile(pathImage) : null;
                 accordion.Name = $"name_{item.ControlName}";
                 accordion.Text = item.DisplayName;
@@ -107,8 +107,8 @@ namespace KnowledgeSystem.Views._00_Generals
                     {
                         AccordionControlElement accordionChild = new AccordionControlElement();
 
-                        pathImage = Path.Combine(Application.StartupPath, "Images", child.Images ?? "");
-                        accordionChild.ImageOptions.SvgImage = child.Images != null ? DevExpress.Utils.Svg.SvgImage.FromFile($@"Images\{child.Images}") : null;
+                        pathImage = Path.Combine(TPConfigs.StartupPath, "Images", child.Images ?? "");
+                        accordionChild.ImageOptions.SvgImage = child.Images != null ? DevExpress.Utils.Svg.SvgImage.FromFile(pathImage) : null;
                         accordionChild.Name = $"name_{child.ControlName}";
                         accordionChild.Text = child.DisplayName;
                         accordionChild.Style = ElementStyle.Item;

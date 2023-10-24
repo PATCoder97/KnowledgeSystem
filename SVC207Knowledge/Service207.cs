@@ -306,7 +306,7 @@ namespace SVC207Knowledge
                 if (stepNow >= 0 && stepNow < maxStep)
                 {
                     int nextStep = stepNow + 1;
-                    int idGroup = lsSteps.FirstOrDefault(r => r.IndexStep == nextStep).IdGroup;
+                    int idGroup = lsStepThisItem.FirstOrDefault(r => r.IndexStep == nextStep).IdGroup;
 
                     var lsUserSigns = dm_GroupUserBUS.Instance.GetListByIdGroup(idGroup).Select(r => r.IdUser).ToList();
 
