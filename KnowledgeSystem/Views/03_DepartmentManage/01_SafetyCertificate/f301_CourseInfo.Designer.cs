@@ -73,15 +73,15 @@
             // 
             // bar2
             // 
-            this.bar2.BarAppearance.Hovered.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bar2.BarAppearance.Hovered.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.bar2.BarAppearance.Hovered.ForeColor = System.Drawing.Color.Black;
             this.bar2.BarAppearance.Hovered.Options.UseFont = true;
             this.bar2.BarAppearance.Hovered.Options.UseForeColor = true;
-            this.bar2.BarAppearance.Normal.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.bar2.BarAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.bar2.BarAppearance.Normal.ForeColor = System.Drawing.Color.Black;
             this.bar2.BarAppearance.Normal.Options.UseFont = true;
             this.bar2.BarAppearance.Normal.Options.UseForeColor = true;
-            this.bar2.BarAppearance.Pressed.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.bar2.BarAppearance.Pressed.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.bar2.BarAppearance.Pressed.ForeColor = System.Drawing.Color.Black;
             this.bar2.BarAppearance.Pressed.Options.UseFont = true;
             this.bar2.BarAppearance.Pressed.Options.UseForeColor = true;
@@ -168,27 +168,27 @@
             // 
             // txbNewDisplayName
             // 
-            this.txbNewDisplayName.Location = new System.Drawing.Point(104, 44);
+            this.txbNewDisplayName.Location = new System.Drawing.Point(100, 48);
             this.txbNewDisplayName.MenuManager = this.barManagerTP;
             this.txbNewDisplayName.Name = "txbNewDisplayName";
-            this.txbNewDisplayName.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbNewDisplayName.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbNewDisplayName.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbNewDisplayName.Properties.Appearance.Options.UseFont = true;
             this.txbNewDisplayName.Properties.Appearance.Options.UseForeColor = true;
-            this.txbNewDisplayName.Size = new System.Drawing.Size(379, 28);
+            this.txbNewDisplayName.Size = new System.Drawing.Size(383, 32);
             this.txbNewDisplayName.StyleController = this.layoutControl1;
             this.txbNewDisplayName.TabIndex = 7;
             // 
             // txbNewId
             // 
-            this.txbNewId.Location = new System.Drawing.Point(104, 12);
+            this.txbNewId.Location = new System.Drawing.Point(100, 12);
             this.txbNewId.MenuManager = this.barManagerTP;
             this.txbNewId.Name = "txbNewId";
-            this.txbNewId.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbNewId.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbNewId.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbNewId.Properties.Appearance.Options.UseFont = true;
             this.txbNewId.Properties.Appearance.Options.UseForeColor = true;
-            this.txbNewId.Size = new System.Drawing.Size(379, 28);
+            this.txbNewId.Size = new System.Drawing.Size(383, 32);
             this.txbNewId.StyleController = this.layoutControl1;
             this.txbNewId.TabIndex = 6;
             // 
@@ -205,7 +205,7 @@
             // 
             // layoutControlItem3
             // 
-            this.layoutControlItem3.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.layoutControlItem3.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.layoutControlItem3.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem3.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem3.AppearanceItemCaption.Options.UseForeColor = true;
@@ -215,24 +215,24 @@
             this.layoutControlItem3.CustomizationFormText = "職務代號";
             this.layoutControlItem3.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(475, 32);
+            this.layoutControlItem3.Size = new System.Drawing.Size(475, 36);
             this.layoutControlItem3.Text = "職務代號";
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(80, 19);
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(76, 24);
             // 
             // layoutControlItem4
             // 
-            this.layoutControlItem4.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.layoutControlItem4.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.layoutControlItem4.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem4.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem4.AppearanceItemCaption.Options.UseForeColor = true;
             this.layoutControlItem4.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem4.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem4.Control = this.txbNewDisplayName;
-            this.layoutControlItem4.Location = new System.Drawing.Point(0, 32);
+            this.layoutControlItem4.Location = new System.Drawing.Point(0, 36);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(475, 40);
+            this.layoutControlItem4.Size = new System.Drawing.Size(475, 36);
             this.layoutControlItem4.Text = "職務名稱";
-            this.layoutControlItem4.TextSize = new System.Drawing.Size(80, 19);
+            this.layoutControlItem4.TextSize = new System.Drawing.Size(76, 24);
             // 
             // f301_CourseInfo
             // 

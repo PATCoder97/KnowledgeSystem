@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc207_Search));
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.btnSumNotifyApproval = new DevExpress.XtraEditors.SimpleButton();
             this.checkUseKeyword = new DevExpress.XtraEditors.CheckEdit();
@@ -97,7 +97,7 @@
             // 
             // btnSumNotifyApproval
             // 
-            this.btnSumNotifyApproval.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSumNotifyApproval.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSumNotifyApproval.Appearance.ForeColor = System.Drawing.Color.Red;
             this.btnSumNotifyApproval.Appearance.Options.UseFont = true;
             this.btnSumNotifyApproval.Appearance.Options.UseForeColor = true;
@@ -116,7 +116,7 @@
             this.checkUseKeyword.MaximumSize = new System.Drawing.Size(0, 36);
             this.checkUseKeyword.MinimumSize = new System.Drawing.Size(0, 36);
             this.checkUseKeyword.Name = "checkUseKeyword";
-            this.checkUseKeyword.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 15.75F);
+            this.checkUseKeyword.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkUseKeyword.Properties.Appearance.ForeColor = System.Drawing.Color.White;
             this.checkUseKeyword.Properties.Appearance.Options.UseFont = true;
             this.checkUseKeyword.Properties.Appearance.Options.UseForeColor = true;
@@ -130,7 +130,7 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Appearance.Font = new System.Drawing.Font("DFKai-SB", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearch.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSearch.Appearance.ForeColor = System.Drawing.Color.Black;
             this.btnSearch.Appearance.Options.UseFont = true;
             this.btnSearch.Appearance.Options.UseForeColor = true;
@@ -148,7 +148,7 @@
             // btnReload
             // 
             this.btnReload.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.False;
-            this.btnReload.Appearance.Font = new System.Drawing.Font("DFKai-SB", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReload.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReload.Appearance.ForeColor = System.Drawing.Color.Black;
             this.btnReload.Appearance.Options.UseFont = true;
             this.btnReload.Appearance.Options.UseForeColor = true;
@@ -156,7 +156,7 @@
             this.btnReload.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnReload.Location = new System.Drawing.Point(127, 12);
             this.btnReload.Name = "btnReload";
-            this.btnReload.Size = new System.Drawing.Size(136, 36);
+            this.btnReload.Size = new System.Drawing.Size(136, 38);
             this.btnReload.StyleController = this.layoutControl1;
             this.btnReload.TabIndex = 6;
             this.btnReload.Text = "重新整理";
@@ -169,10 +169,10 @@
             this.gcData.EmbeddedNavigator.Buttons.Edit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.EndEdit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.Remove.Visible = false;
-            this.gcData.Location = new System.Drawing.Point(12, 60);
+            this.gcData.Location = new System.Drawing.Point(12, 62);
             this.gcData.MainView = this.gvData;
             this.gcData.Name = "gcData";
-            this.gcData.Size = new System.Drawing.Size(1209, 579);
+            this.gcData.Size = new System.Drawing.Size(1209, 577);
             this.gcData.TabIndex = 4;
             this.gcData.UseEmbeddedNavigator = true;
             this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -181,13 +181,13 @@
             // 
             // gvData
             // 
-            this.gvData.Appearance.HeaderPanel.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvData.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gvData.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
             this.gvData.Appearance.HeaderPanel.Options.UseFont = true;
             this.gvData.Appearance.HeaderPanel.Options.UseForeColor = true;
             this.gvData.Appearance.HeaderPanel.Options.UseTextOptions = true;
             this.gvData.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gvData.Appearance.Row.Font = new System.Drawing.Font("DFKai-SB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvData.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gvData.Appearance.Row.ForeColor = System.Drawing.Color.Black;
             this.gvData.Appearance.Row.Options.UseFont = true;
             this.gvData.Appearance.Row.Options.UseForeColor = true;
@@ -311,11 +311,11 @@
             // 
             this.txbKeywords.Location = new System.Drawing.Point(287, 12);
             this.txbKeywords.Name = "txbKeywords";
-            this.txbKeywords.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbKeywords.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI Light", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.txbKeywords.Properties.Appearance.Options.UseFont = true;
             this.txbKeywords.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Close, "", -1, true, true, true, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
-            this.txbKeywords.Size = new System.Drawing.Size(609, 36);
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Close, "", -1, true, true, true, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            this.txbKeywords.Size = new System.Drawing.Size(609, 38);
             this.txbKeywords.StyleController = this.layoutControl1;
             this.txbKeywords.TabIndex = 8;
             this.txbKeywords.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txbKeywords_ButtonClick);
@@ -340,10 +340,10 @@
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.gcData;
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 40);
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 42);
             this.layoutControlItem1.Name = "layoutControlItem1";
             this.layoutControlItem1.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 10, 2);
-            this.layoutControlItem1.Size = new System.Drawing.Size(1213, 591);
+            this.layoutControlItem1.Size = new System.Drawing.Size(1213, 589);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
@@ -356,7 +356,7 @@
             this.layoutControlItem5.Control = this.txbKeywords;
             this.layoutControlItem5.Location = new System.Drawing.Point(275, 0);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(613, 40);
+            this.layoutControlItem5.Size = new System.Drawing.Size(613, 42);
             this.layoutControlItem5.Text = "請輸入關鍵字";
             this.layoutControlItem5.TextLocation = DevExpress.Utils.Locations.Top;
             this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
@@ -369,7 +369,7 @@
             this.emptySpaceRight.MaxSize = new System.Drawing.Size(85, 10);
             this.emptySpaceRight.MinSize = new System.Drawing.Size(85, 10);
             this.emptySpaceRight.Name = "emptySpaceRight";
-            this.emptySpaceRight.Size = new System.Drawing.Size(85, 40);
+            this.emptySpaceRight.Size = new System.Drawing.Size(85, 42);
             this.emptySpaceRight.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.emptySpaceRight.TextSize = new System.Drawing.Size(0, 0);
             // 
@@ -380,7 +380,7 @@
             this.layoutControlItem4.MaxSize = new System.Drawing.Size(100, 40);
             this.layoutControlItem4.MinSize = new System.Drawing.Size(100, 40);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(100, 40);
+            this.layoutControlItem4.Size = new System.Drawing.Size(100, 42);
             this.layoutControlItem4.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem4.TextVisible = false;
@@ -392,7 +392,7 @@
             this.layoutControlItem3.MaxSize = new System.Drawing.Size(140, 0);
             this.layoutControlItem3.MinSize = new System.Drawing.Size(140, 32);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(140, 40);
+            this.layoutControlItem3.Size = new System.Drawing.Size(140, 42);
             this.layoutControlItem3.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextVisible = false;
@@ -404,7 +404,7 @@
             this.emptySpaceItem2.MaxSize = new System.Drawing.Size(20, 0);
             this.emptySpaceItem2.MinSize = new System.Drawing.Size(20, 10);
             this.emptySpaceItem2.Name = "emptySpaceItem2";
-            this.emptySpaceItem2.Size = new System.Drawing.Size(20, 40);
+            this.emptySpaceItem2.Size = new System.Drawing.Size(20, 42);
             this.emptySpaceItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
             // 
@@ -415,7 +415,7 @@
             this.layoutControlItem7.MaxSize = new System.Drawing.Size(115, 0);
             this.layoutControlItem7.MinSize = new System.Drawing.Size(115, 40);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(115, 40);
+            this.layoutControlItem7.Size = new System.Drawing.Size(115, 42);
             this.layoutControlItem7.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem7.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem7.TextVisible = false;
@@ -427,7 +427,7 @@
             this.lcSumApproval.MaxSize = new System.Drawing.Size(140, 40);
             this.lcSumApproval.MinSize = new System.Drawing.Size(140, 40);
             this.lcSumApproval.Name = "lcSumApproval";
-            this.lcSumApproval.Size = new System.Drawing.Size(140, 40);
+            this.lcSumApproval.Size = new System.Drawing.Size(140, 42);
             this.lcSumApproval.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.lcSumApproval.TextSize = new System.Drawing.Size(0, 0);
             this.lcSumApproval.TextVisible = false;

@@ -65,36 +65,36 @@
             // lbInfo
             // 
             this.lbInfo.AllowHtmlString = true;
-            this.lbInfo.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbInfo.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.lbInfo.Appearance.ForeColor = System.Drawing.Color.White;
             this.lbInfo.Appearance.Options.UseFont = true;
             this.lbInfo.Appearance.Options.UseForeColor = true;
             this.lbInfo.Location = new System.Drawing.Point(12, 12);
             this.lbInfo.Name = "lbInfo";
-            this.lbInfo.Size = new System.Drawing.Size(140, 19);
+            this.lbInfo.Size = new System.Drawing.Size(133, 24);
             this.lbInfo.StyleController = this.layoutControl1;
             this.lbInfo.TabIndex = 5;
             this.lbInfo.Text = "請審查下列資料";
             // 
             // gcData
             // 
-            this.gcData.Location = new System.Drawing.Point(12, 35);
+            this.gcData.Location = new System.Drawing.Point(12, 40);
             this.gcData.MainView = this.gvData;
             this.gcData.Name = "gcData";
-            this.gcData.Size = new System.Drawing.Size(1127, 570);
+            this.gcData.Size = new System.Drawing.Size(1127, 565);
             this.gcData.TabIndex = 4;
             this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvData});
             // 
             // gvData
             // 
-            this.gvData.Appearance.HeaderPanel.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvData.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.gvData.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
             this.gvData.Appearance.HeaderPanel.Options.UseFont = true;
             this.gvData.Appearance.HeaderPanel.Options.UseForeColor = true;
             this.gvData.Appearance.HeaderPanel.Options.UseTextOptions = true;
             this.gvData.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gvData.Appearance.Row.Font = new System.Drawing.Font("DFKai-SB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvData.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gvData.Appearance.Row.ForeColor = System.Drawing.Color.Black;
             this.gvData.Appearance.Row.Options.UseFont = true;
             this.gvData.Appearance.Row.Options.UseForeColor = true;
@@ -182,9 +182,9 @@
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.gcData;
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 23);
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 28);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(1131, 574);
+            this.layoutControlItem1.Size = new System.Drawing.Size(1131, 569);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
@@ -193,7 +193,7 @@
             this.layoutControlItem2.Control = this.lbInfo;
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(1131, 23);
+            this.layoutControlItem2.Size = new System.Drawing.Size(1131, 28);
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 

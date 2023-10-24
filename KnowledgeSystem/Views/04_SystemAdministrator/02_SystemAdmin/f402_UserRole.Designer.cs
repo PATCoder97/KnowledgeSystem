@@ -83,15 +83,15 @@
             // 
             // bar2
             // 
-            this.bar2.BarAppearance.Hovered.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bar2.BarAppearance.Hovered.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.bar2.BarAppearance.Hovered.ForeColor = System.Drawing.Color.Black;
             this.bar2.BarAppearance.Hovered.Options.UseFont = true;
             this.bar2.BarAppearance.Hovered.Options.UseForeColor = true;
-            this.bar2.BarAppearance.Normal.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.bar2.BarAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.bar2.BarAppearance.Normal.ForeColor = System.Drawing.Color.Black;
             this.bar2.BarAppearance.Normal.Options.UseFont = true;
             this.bar2.BarAppearance.Normal.Options.UseForeColor = true;
-            this.bar2.BarAppearance.Pressed.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.bar2.BarAppearance.Pressed.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.bar2.BarAppearance.Pressed.ForeColor = System.Drawing.Color.Black;
             this.bar2.BarAppearance.Pressed.Options.UseFont = true;
             this.bar2.BarAppearance.Pressed.Options.UseForeColor = true;
@@ -177,24 +177,24 @@
             // 
             // gcChooseUser
             // 
-            this.gcChooseUser.Location = new System.Drawing.Point(362, 35);
+            this.gcChooseUser.Location = new System.Drawing.Point(362, 40);
             this.gcChooseUser.MainView = this.gvChooseUser;
             this.gcChooseUser.MenuManager = this.barManager1;
             this.gcChooseUser.Name = "gcChooseUser";
-            this.gcChooseUser.Size = new System.Drawing.Size(341, 384);
+            this.gcChooseUser.Size = new System.Drawing.Size(341, 379);
             this.gcChooseUser.TabIndex = 5;
             this.gcChooseUser.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvChooseUser});
             // 
             // gvChooseUser
             // 
-            this.gvChooseUser.Appearance.HeaderPanel.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvChooseUser.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.gvChooseUser.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
             this.gvChooseUser.Appearance.HeaderPanel.Options.UseFont = true;
             this.gvChooseUser.Appearance.HeaderPanel.Options.UseForeColor = true;
             this.gvChooseUser.Appearance.HeaderPanel.Options.UseTextOptions = true;
             this.gvChooseUser.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gvChooseUser.Appearance.Row.Font = new System.Drawing.Font("DFKai-SB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvChooseUser.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gvChooseUser.Appearance.Row.ForeColor = System.Drawing.Color.Black;
             this.gvChooseUser.Appearance.Row.Options.UseFont = true;
             this.gvChooseUser.Appearance.Row.Options.UseForeColor = true;
@@ -242,24 +242,24 @@
             // 
             // gcAllUser
             // 
-            this.gcAllUser.Location = new System.Drawing.Point(12, 35);
+            this.gcAllUser.Location = new System.Drawing.Point(12, 40);
             this.gcAllUser.MainView = this.gvAllUser;
             this.gcAllUser.MenuManager = this.barManager1;
             this.gcAllUser.Name = "gcAllUser";
-            this.gcAllUser.Size = new System.Drawing.Size(340, 384);
+            this.gcAllUser.Size = new System.Drawing.Size(340, 379);
             this.gcAllUser.TabIndex = 4;
             this.gcAllUser.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvAllUser});
             // 
             // gvAllUser
             // 
-            this.gvAllUser.Appearance.HeaderPanel.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvAllUser.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.gvAllUser.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
             this.gvAllUser.Appearance.HeaderPanel.Options.UseFont = true;
             this.gvAllUser.Appearance.HeaderPanel.Options.UseForeColor = true;
             this.gvAllUser.Appearance.HeaderPanel.Options.UseTextOptions = true;
             this.gvAllUser.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gvAllUser.Appearance.Row.Font = new System.Drawing.Font("DFKai-SB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvAllUser.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gvAllUser.Appearance.Row.ForeColor = System.Drawing.Color.Black;
             this.gvAllUser.Appearance.Row.Options.UseFont = true;
             this.gvAllUser.Appearance.Row.Options.UseForeColor = true;
@@ -318,7 +318,7 @@
             // 
             // layoutControlItem1
             // 
-            this.layoutControlItem1.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.layoutControlItem1.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.layoutControlItem1.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem1.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem1.AppearanceItemCaption.Options.UseForeColor = true;
@@ -331,11 +331,11 @@
             this.layoutControlItem1.Size = new System.Drawing.Size(347, 411);
             this.layoutControlItem1.Text = "可選用戶";
             this.layoutControlItem1.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(80, 19);
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(76, 24);
             // 
             // layoutControlItem2
             // 
-            this.layoutControlItem2.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.layoutControlItem2.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.layoutControlItem2.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem2.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem2.AppearanceItemCaption.Options.UseForeColor = true;
@@ -348,7 +348,7 @@
             this.layoutControlItem2.Size = new System.Drawing.Size(348, 411);
             this.layoutControlItem2.Text = "已選用戶";
             this.layoutControlItem2.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(80, 19);
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(76, 24);
             // 
             // f402_UserRole
             // 

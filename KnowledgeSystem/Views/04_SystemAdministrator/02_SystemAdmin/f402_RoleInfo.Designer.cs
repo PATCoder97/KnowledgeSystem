@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f402_RoleInfo));
-            DevExpress.XtraTreeList.StyleFormatConditions.TreeListFormatRule treeListFormatRule2 = new DevExpress.XtraTreeList.StyleFormatConditions.TreeListFormatRule();
-            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression2 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
+            DevExpress.XtraTreeList.StyleFormatConditions.TreeListFormatRule treeListFormatRule1 = new DevExpress.XtraTreeList.StyleFormatConditions.TreeListFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression1 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
             this.treeListColumn4 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.treeListColumn1 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
@@ -102,15 +102,15 @@
             // 
             this.bar2.BarAppearance.Disabled.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.bar2.BarAppearance.Disabled.Options.UseFont = true;
-            this.bar2.BarAppearance.Hovered.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.bar2.BarAppearance.Hovered.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.bar2.BarAppearance.Hovered.ForeColor = System.Drawing.Color.Black;
             this.bar2.BarAppearance.Hovered.Options.UseFont = true;
             this.bar2.BarAppearance.Hovered.Options.UseForeColor = true;
-            this.bar2.BarAppearance.Normal.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.bar2.BarAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.bar2.BarAppearance.Normal.ForeColor = System.Drawing.Color.Black;
             this.bar2.BarAppearance.Normal.Options.UseFont = true;
             this.bar2.BarAppearance.Normal.Options.UseForeColor = true;
-            this.bar2.BarAppearance.Pressed.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.bar2.BarAppearance.Pressed.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.bar2.BarAppearance.Pressed.ForeColor = System.Drawing.Color.Black;
             this.bar2.BarAppearance.Pressed.Options.UseFont = true;
             this.bar2.BarAppearance.Pressed.Options.UseForeColor = true;
@@ -210,39 +210,39 @@
             // 
             // txbDescribe
             // 
-            this.txbDescribe.Location = new System.Drawing.Point(64, 44);
+            this.txbDescribe.Location = new System.Drawing.Point(62, 48);
             this.txbDescribe.MenuManager = this.barManagerTP;
             this.txbDescribe.Name = "txbDescribe";
-            this.txbDescribe.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbDescribe.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbDescribe.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbDescribe.Properties.Appearance.Options.UseFont = true;
             this.txbDescribe.Properties.Appearance.Options.UseForeColor = true;
-            this.txbDescribe.Size = new System.Drawing.Size(403, 28);
+            this.txbDescribe.Size = new System.Drawing.Size(405, 32);
             this.txbDescribe.StyleController = this.layoutControl1;
             this.txbDescribe.TabIndex = 7;
             // 
             // txbRole
             // 
-            this.txbRole.Location = new System.Drawing.Point(64, 12);
+            this.txbRole.Location = new System.Drawing.Point(62, 12);
             this.txbRole.MenuManager = this.barManagerTP;
             this.txbRole.Name = "txbRole";
-            this.txbRole.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbRole.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbRole.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbRole.Properties.Appearance.Options.UseFont = true;
             this.txbRole.Properties.Appearance.Options.UseForeColor = true;
-            this.txbRole.Size = new System.Drawing.Size(403, 28);
+            this.txbRole.Size = new System.Drawing.Size(405, 32);
             this.txbRole.StyleController = this.layoutControl1;
             this.txbRole.TabIndex = 6;
             // 
             // tlsFunction
             // 
-            this.tlsFunction.Appearance.HeaderPanel.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tlsFunction.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.tlsFunction.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
             this.tlsFunction.Appearance.HeaderPanel.Options.UseFont = true;
             this.tlsFunction.Appearance.HeaderPanel.Options.UseForeColor = true;
             this.tlsFunction.Appearance.HeaderPanel.Options.UseTextOptions = true;
             this.tlsFunction.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.tlsFunction.Appearance.Row.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tlsFunction.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tlsFunction.Appearance.Row.ForeColor = System.Drawing.Color.Black;
             this.tlsFunction.Appearance.Row.Options.UseFont = true;
             this.tlsFunction.Appearance.Row.Options.UseForeColor = true;
@@ -253,15 +253,15 @@
             this.treeListColumn4});
             this.tlsFunction.CustomizationFormBounds = new System.Drawing.Rectangle(351, 201, 264, 370);
             this.tlsFunction.Font = new System.Drawing.Font("DFKai-SB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeListFormatRule2.Column = this.treeListColumn4;
-            treeListFormatRule2.ColumnApplyTo = this.treeListColumn1;
-            treeListFormatRule2.Name = "Format0";
-            formatConditionRuleExpression2.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            formatConditionRuleExpression2.Appearance.Options.UseForeColor = true;
-            formatConditionRuleExpression2.Expression = "[Status] = True";
-            treeListFormatRule2.Rule = formatConditionRuleExpression2;
-            this.tlsFunction.FormatRules.Add(treeListFormatRule2);
-            this.tlsFunction.Location = new System.Drawing.Point(12, 84);
+            treeListFormatRule1.Column = this.treeListColumn4;
+            treeListFormatRule1.ColumnApplyTo = this.treeListColumn1;
+            treeListFormatRule1.Name = "Format0";
+            formatConditionRuleExpression1.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            formatConditionRuleExpression1.Appearance.Options.UseForeColor = true;
+            formatConditionRuleExpression1.Expression = "[Status] = True";
+            treeListFormatRule1.Rule = formatConditionRuleExpression1;
+            this.tlsFunction.FormatRules.Add(treeListFormatRule1);
+            this.tlsFunction.Location = new System.Drawing.Point(12, 92);
             this.tlsFunction.Name = "tlsFunction";
             this.tlsFunction.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
             this.tlsFunction.OptionsView.AutoWidth = false;
@@ -269,7 +269,7 @@
             this.tlsFunction.OptionsView.EnableAppearanceOddRow = true;
             this.tlsFunction.OptionsView.ShowAutoFilterRow = true;
             this.tlsFunction.OptionsView.ShowIndicator = false;
-            this.tlsFunction.Size = new System.Drawing.Size(455, 408);
+            this.tlsFunction.Size = new System.Drawing.Size(455, 400);
             this.tlsFunction.TabIndex = 5;
             // 
             // treeListColumn2
@@ -305,16 +305,16 @@
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.tlsFunction;
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 64);
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 72);
             this.layoutControlItem1.Name = "layoutControlItem1";
             this.layoutControlItem1.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 10, 2);
-            this.layoutControlItem1.Size = new System.Drawing.Size(459, 420);
+            this.layoutControlItem1.Size = new System.Drawing.Size(459, 412);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
             // layoutControlItem2
             // 
-            this.layoutControlItem2.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.layoutControlItem2.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.layoutControlItem2.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem2.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem2.AppearanceItemCaption.Options.UseForeColor = true;
@@ -325,13 +325,13 @@
             this.layoutControlItem2.Control = this.txbRole;
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(459, 32);
+            this.layoutControlItem2.Size = new System.Drawing.Size(459, 36);
             this.layoutControlItem2.Text = "權限";
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(40, 19);
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(38, 24);
             // 
             // layoutControlItem3
             // 
-            this.layoutControlItem3.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.layoutControlItem3.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.layoutControlItem3.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem3.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem3.AppearanceItemCaption.Options.UseForeColor = true;
@@ -340,11 +340,11 @@
             this.layoutControlItem3.AppearanceItemCaptionDisabled.Options.UseFont = true;
             this.layoutControlItem3.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem3.Control = this.txbDescribe;
-            this.layoutControlItem3.Location = new System.Drawing.Point(0, 32);
+            this.layoutControlItem3.Location = new System.Drawing.Point(0, 36);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(459, 32);
+            this.layoutControlItem3.Size = new System.Drawing.Size(459, 36);
             this.layoutControlItem3.Text = "備註";
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(40, 19);
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(38, 24);
             // 
             // f402_RoleInfo
             // 

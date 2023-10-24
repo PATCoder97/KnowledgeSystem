@@ -99,15 +99,15 @@
             // 
             this.bar2.BarAppearance.Disabled.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.bar2.BarAppearance.Disabled.Options.UseFont = true;
-            this.bar2.BarAppearance.Hovered.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.bar2.BarAppearance.Hovered.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.bar2.BarAppearance.Hovered.ForeColor = System.Drawing.Color.Black;
             this.bar2.BarAppearance.Hovered.Options.UseFont = true;
             this.bar2.BarAppearance.Hovered.Options.UseForeColor = true;
-            this.bar2.BarAppearance.Normal.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.bar2.BarAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.bar2.BarAppearance.Normal.ForeColor = System.Drawing.Color.Black;
             this.bar2.BarAppearance.Normal.Options.UseFont = true;
             this.bar2.BarAppearance.Normal.Options.UseForeColor = true;
-            this.bar2.BarAppearance.Pressed.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.bar2.BarAppearance.Pressed.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.bar2.BarAppearance.Pressed.ForeColor = System.Drawing.Color.Black;
             this.bar2.BarAppearance.Pressed.Options.UseFont = true;
             this.bar2.BarAppearance.Pressed.Options.UseForeColor = true;
@@ -157,15 +157,15 @@
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManagerTP;
-            this.barDockControlTop.Size = new System.Drawing.Size(422, 49);
+            this.barDockControlTop.Size = new System.Drawing.Size(454, 49);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 269);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 289);
             this.barDockControlBottom.Manager = this.barManagerTP;
-            this.barDockControlBottom.Size = new System.Drawing.Size(422, 0);
+            this.barDockControlBottom.Size = new System.Drawing.Size(454, 0);
             // 
             // barDockControlLeft
             // 
@@ -173,15 +173,15 @@
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 49);
             this.barDockControlLeft.Manager = this.barManagerTP;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 220);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 240);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(422, 49);
+            this.barDockControlRight.Location = new System.Drawing.Point(454, 49);
             this.barDockControlRight.Manager = this.barManagerTP;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 220);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 240);
             // 
             // layoutControl1
             // 
@@ -195,7 +195,7 @@
             this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(422, 220);
+            this.layoutControl1.Size = new System.Drawing.Size(454, 240);
             this.layoutControl1.TabIndex = 5;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -206,10 +206,10 @@
             0,
             0,
             0});
-            this.txbReqQuantity.Location = new System.Drawing.Point(124, 172);
+            this.txbReqQuantity.Location = new System.Drawing.Point(119, 192);
             this.txbReqQuantity.MenuManager = this.barManagerTP;
             this.txbReqQuantity.Name = "txbReqQuantity";
-            this.txbReqQuantity.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbReqQuantity.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbReqQuantity.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbReqQuantity.Properties.Appearance.Options.UseFont = true;
             this.txbReqQuantity.Properties.Appearance.Options.UseForeColor = true;
@@ -226,7 +226,7 @@
             0,
             0,
             0});
-            this.txbReqQuantity.Size = new System.Drawing.Size(286, 28);
+            this.txbReqQuantity.Size = new System.Drawing.Size(323, 32);
             this.txbReqQuantity.StyleController = this.layoutControl1;
             this.txbReqQuantity.TabIndex = 11;
             // 
@@ -237,10 +237,10 @@
             0,
             0,
             0});
-            this.txbActualHeadcount.Location = new System.Drawing.Point(124, 140);
+            this.txbActualHeadcount.Location = new System.Drawing.Point(119, 156);
             this.txbActualHeadcount.MenuManager = this.barManagerTP;
             this.txbActualHeadcount.Name = "txbActualHeadcount";
-            this.txbActualHeadcount.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbActualHeadcount.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbActualHeadcount.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbActualHeadcount.Properties.Appearance.Options.UseFont = true;
             this.txbActualHeadcount.Properties.Appearance.Options.UseForeColor = true;
@@ -257,7 +257,7 @@
             0,
             0,
             0});
-            this.txbActualHeadcount.Size = new System.Drawing.Size(286, 28);
+            this.txbActualHeadcount.Size = new System.Drawing.Size(323, 32);
             this.txbActualHeadcount.StyleController = this.layoutControl1;
             this.txbActualHeadcount.TabIndex = 10;
             // 
@@ -268,10 +268,10 @@
             0,
             0,
             0});
-            this.txbNewHeadcount.Location = new System.Drawing.Point(124, 108);
+            this.txbNewHeadcount.Location = new System.Drawing.Point(119, 120);
             this.txbNewHeadcount.MenuManager = this.barManagerTP;
             this.txbNewHeadcount.Name = "txbNewHeadcount";
-            this.txbNewHeadcount.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbNewHeadcount.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbNewHeadcount.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbNewHeadcount.Properties.Appearance.Options.UseFont = true;
             this.txbNewHeadcount.Properties.Appearance.Options.UseForeColor = true;
@@ -288,16 +288,16 @@
             0,
             0,
             0});
-            this.txbNewHeadcount.Size = new System.Drawing.Size(286, 28);
+            this.txbNewHeadcount.Size = new System.Drawing.Size(323, 32);
             this.txbNewHeadcount.StyleController = this.layoutControl1;
             this.txbNewHeadcount.TabIndex = 9;
             // 
             // cbbDept
             // 
-            this.cbbDept.Location = new System.Drawing.Point(124, 12);
+            this.cbbDept.Location = new System.Drawing.Point(119, 12);
             this.cbbDept.MenuManager = this.barManagerTP;
             this.cbbDept.Name = "cbbDept";
-            this.cbbDept.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbDept.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.cbbDept.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.cbbDept.Properties.Appearance.Options.UseFont = true;
             this.cbbDept.Properties.Appearance.Options.UseForeColor = true;
@@ -306,17 +306,17 @@
             this.cbbDept.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("DisplayName", "Name1")});
             this.cbbDept.Properties.NullText = "";
-            this.cbbDept.Size = new System.Drawing.Size(286, 28);
+            this.cbbDept.Size = new System.Drawing.Size(323, 32);
             this.cbbDept.StyleController = this.layoutControl1;
             this.cbbDept.TabIndex = 7;
             // 
             // cbbCourse
             // 
-            this.cbbCourse.Location = new System.Drawing.Point(124, 76);
+            this.cbbCourse.Location = new System.Drawing.Point(119, 84);
             this.cbbCourse.MenuManager = this.barManagerTP;
             this.cbbCourse.Name = "cbbCourse";
             this.cbbCourse.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
-            this.cbbCourse.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbCourse.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.cbbCourse.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.cbbCourse.Properties.Appearance.Options.UseFont = true;
             this.cbbCourse.Properties.Appearance.Options.UseForeColor = true;
@@ -324,7 +324,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbbCourse.Properties.NullText = "";
             this.cbbCourse.Properties.PopupView = this.gridView1;
-            this.cbbCourse.Size = new System.Drawing.Size(286, 28);
+            this.cbbCourse.Size = new System.Drawing.Size(323, 32);
             this.cbbCourse.StyleController = this.layoutControl1;
             this.cbbCourse.TabIndex = 6;
             // 
@@ -370,11 +370,11 @@
             // 
             // cbbJobTitle
             // 
-            this.cbbJobTitle.Location = new System.Drawing.Point(124, 44);
+            this.cbbJobTitle.Location = new System.Drawing.Point(119, 48);
             this.cbbJobTitle.MenuManager = this.barManagerTP;
             this.cbbJobTitle.Name = "cbbJobTitle";
             this.cbbJobTitle.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
-            this.cbbJobTitle.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbJobTitle.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.cbbJobTitle.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.cbbJobTitle.Properties.Appearance.Options.UseFont = true;
             this.cbbJobTitle.Properties.Appearance.Options.UseForeColor = true;
@@ -384,7 +384,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbbJobTitle.Properties.NullText = "";
             this.cbbJobTitle.Properties.PopupView = this.searchLookUpEdit1View;
-            this.cbbJobTitle.Size = new System.Drawing.Size(286, 28);
+            this.cbbJobTitle.Size = new System.Drawing.Size(323, 32);
             this.cbbJobTitle.StyleController = this.layoutControl1;
             this.cbbJobTitle.TabIndex = 5;
             // 
@@ -443,104 +443,116 @@
             this.layoutControlItem5,
             this.layoutControlItem7});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(422, 220);
+            this.Root.Size = new System.Drawing.Size(454, 240);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem2
             // 
-            this.layoutControlItem2.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.layoutControlItem2.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.layoutControlItem2.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem2.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem2.AppearanceItemCaption.Options.UseForeColor = true;
+            this.layoutControlItem2.AppearanceItemCaptionDisabled.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.layoutControlItem2.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem2.AppearanceItemCaptionDisabled.Options.UseFont = true;
             this.layoutControlItem2.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem2.Control = this.cbbJobTitle;
-            this.layoutControlItem2.Location = new System.Drawing.Point(0, 32);
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 36);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(402, 32);
+            this.layoutControlItem2.Size = new System.Drawing.Size(434, 36);
             this.layoutControlItem2.Text = "職務名稱";
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(100, 19);
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(95, 24);
             // 
             // layoutControlItem3
             // 
-            this.layoutControlItem3.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.layoutControlItem3.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.layoutControlItem3.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem3.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem3.AppearanceItemCaption.Options.UseForeColor = true;
+            this.layoutControlItem3.AppearanceItemCaptionDisabled.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.layoutControlItem3.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem3.AppearanceItemCaptionDisabled.Options.UseFont = true;
             this.layoutControlItem3.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem3.Control = this.cbbCourse;
-            this.layoutControlItem3.Location = new System.Drawing.Point(0, 64);
+            this.layoutControlItem3.Location = new System.Drawing.Point(0, 72);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(402, 32);
+            this.layoutControlItem3.Size = new System.Drawing.Size(434, 36);
             this.layoutControlItem3.Text = "課程名稱";
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(100, 19);
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(95, 24);
             // 
             // layoutControlItem6
             // 
-            this.layoutControlItem6.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.layoutControlItem6.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.layoutControlItem6.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem6.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem6.AppearanceItemCaption.Options.UseForeColor = true;
+            this.layoutControlItem6.AppearanceItemCaptionDisabled.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.layoutControlItem6.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem6.AppearanceItemCaptionDisabled.Options.UseFont = true;
             this.layoutControlItem6.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem6.Control = this.txbNewHeadcount;
-            this.layoutControlItem6.Location = new System.Drawing.Point(0, 96);
+            this.layoutControlItem6.Location = new System.Drawing.Point(0, 108);
             this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(402, 32);
+            this.layoutControlItem6.Size = new System.Drawing.Size(434, 36);
             this.layoutControlItem6.Text = "新編制人數";
-            this.layoutControlItem6.TextSize = new System.Drawing.Size(100, 19);
+            this.layoutControlItem6.TextSize = new System.Drawing.Size(95, 24);
             // 
             // layoutControlItem4
             // 
-            this.layoutControlItem4.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.layoutControlItem4.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.layoutControlItem4.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem4.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem4.AppearanceItemCaption.Options.UseForeColor = true;
+            this.layoutControlItem4.AppearanceItemCaptionDisabled.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.layoutControlItem4.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem4.AppearanceItemCaptionDisabled.Options.UseFont = true;
             this.layoutControlItem4.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem4.Control = this.cbbDept;
             this.layoutControlItem4.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(402, 32);
+            this.layoutControlItem4.Size = new System.Drawing.Size(434, 36);
             this.layoutControlItem4.Text = "單位";
-            this.layoutControlItem4.TextSize = new System.Drawing.Size(100, 19);
+            this.layoutControlItem4.TextSize = new System.Drawing.Size(95, 24);
             // 
             // layoutControlItem5
             // 
-            this.layoutControlItem5.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.layoutControlItem5.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.layoutControlItem5.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem5.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem5.AppearanceItemCaption.Options.UseForeColor = true;
+            this.layoutControlItem5.AppearanceItemCaptionDisabled.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.layoutControlItem5.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem5.AppearanceItemCaptionDisabled.Options.UseFont = true;
             this.layoutControlItem5.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem5.Control = this.txbActualHeadcount;
-            this.layoutControlItem5.Location = new System.Drawing.Point(0, 128);
+            this.layoutControlItem5.Location = new System.Drawing.Point(0, 144);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(402, 32);
+            this.layoutControlItem5.Size = new System.Drawing.Size(434, 36);
             this.layoutControlItem5.Text = "新實際人數";
-            this.layoutControlItem5.TextSize = new System.Drawing.Size(100, 19);
+            this.layoutControlItem5.TextSize = new System.Drawing.Size(95, 24);
             // 
             // layoutControlItem7
             // 
-            this.layoutControlItem7.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.layoutControlItem7.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.layoutControlItem7.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem7.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem7.AppearanceItemCaption.Options.UseForeColor = true;
+            this.layoutControlItem7.AppearanceItemCaptionDisabled.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.layoutControlItem7.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem7.AppearanceItemCaptionDisabled.Options.UseFont = true;
             this.layoutControlItem7.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem7.Control = this.txbReqQuantity;
-            this.layoutControlItem7.Location = new System.Drawing.Point(0, 160);
+            this.layoutControlItem7.Location = new System.Drawing.Point(0, 180);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(402, 40);
+            this.layoutControlItem7.Size = new System.Drawing.Size(434, 40);
             this.layoutControlItem7.Text = "應取證張數";
-            this.layoutControlItem7.TextSize = new System.Drawing.Size(100, 19);
+            this.layoutControlItem7.TextSize = new System.Drawing.Size(95, 24);
             // 
             // f301_CertReqSetInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(422, 269);
+            this.ClientSize = new System.Drawing.Size(454, 289);
             this.Controls.Add(this.layoutControl1);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);

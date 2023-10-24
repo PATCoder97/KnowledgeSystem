@@ -55,11 +55,11 @@
             this.cbbGroup = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.gColRemove = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnRemoveStep = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            this.txbPrioritize = new DevExpress.XtraEditors.SpinEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.txbPrioritize = new DevExpress.XtraEditors.SpinEdit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -69,11 +69,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvStep)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbGroup)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnRemoveStep)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbPrioritize.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbPrioritize.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // barManager1
@@ -95,15 +95,15 @@
             // 
             // bar2
             // 
-            this.bar2.BarAppearance.Hovered.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bar2.BarAppearance.Hovered.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.bar2.BarAppearance.Hovered.ForeColor = System.Drawing.Color.Black;
             this.bar2.BarAppearance.Hovered.Options.UseFont = true;
             this.bar2.BarAppearance.Hovered.Options.UseForeColor = true;
-            this.bar2.BarAppearance.Normal.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.bar2.BarAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.bar2.BarAppearance.Normal.ForeColor = System.Drawing.Color.Black;
             this.bar2.BarAppearance.Normal.Options.UseFont = true;
             this.bar2.BarAppearance.Normal.Options.UseForeColor = true;
-            this.bar2.BarAppearance.Pressed.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.bar2.BarAppearance.Pressed.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.bar2.BarAppearance.Pressed.ForeColor = System.Drawing.Color.Black;
             this.bar2.BarAppearance.Pressed.Options.UseFont = true;
             this.bar2.BarAppearance.Pressed.Options.UseForeColor = true;
@@ -345,6 +345,36 @@
             this.btnRemoveStep.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             this.btnRemoveStep.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnRemoveStep_ButtonClick);
             // 
+            // txbPrioritize
+            // 
+            this.txbPrioritize.EditValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txbPrioritize.Location = new System.Drawing.Point(453, 12);
+            this.txbPrioritize.MenuManager = this.barManager1;
+            this.txbPrioritize.Name = "txbPrioritize";
+            this.txbPrioritize.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.txbPrioritize.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.txbPrioritize.Properties.Appearance.Options.UseFont = true;
+            this.txbPrioritize.Properties.Appearance.Options.UseForeColor = true;
+            this.txbPrioritize.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txbPrioritize.Properties.EditValueChangedFiringMode = DevExpress.XtraEditors.Controls.EditValueChangedFiringMode.Default;
+            this.txbPrioritize.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
+            this.txbPrioritize.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False");
+            this.txbPrioritize.Properties.MaskSettings.Set("mask", "N0");
+            this.txbPrioritize.Properties.MaxValue = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.txbPrioritize.Properties.UseMaskAsDisplayFormat = true;
+            this.txbPrioritize.Size = new System.Drawing.Size(58, 28);
+            this.txbPrioritize.StyleController = this.layoutControl1;
+            this.txbPrioritize.TabIndex = 6;
+            // 
             // Root
             // 
             this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
@@ -396,36 +426,6 @@
             this.layoutControlItem3.Text = " 優先級";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(70, 19);
             // 
-            // txbPrioritize
-            // 
-            this.txbPrioritize.EditValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.txbPrioritize.Location = new System.Drawing.Point(453, 12);
-            this.txbPrioritize.MenuManager = this.barManager1;
-            this.txbPrioritize.Name = "txbPrioritize";
-            this.txbPrioritize.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
-            this.txbPrioritize.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.txbPrioritize.Properties.Appearance.Options.UseFont = true;
-            this.txbPrioritize.Properties.Appearance.Options.UseForeColor = true;
-            this.txbPrioritize.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txbPrioritize.Properties.EditValueChangedFiringMode = DevExpress.XtraEditors.Controls.EditValueChangedFiringMode.Default;
-            this.txbPrioritize.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
-            this.txbPrioritize.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False");
-            this.txbPrioritize.Properties.MaskSettings.Set("mask", "N0");
-            this.txbPrioritize.Properties.MaxValue = new decimal(new int[] {
-            99,
-            0,
-            0,
-            0});
-            this.txbPrioritize.Properties.UseMaskAsDisplayFormat = true;
-            this.txbPrioritize.Size = new System.Drawing.Size(58, 28);
-            this.txbPrioritize.StyleController = this.layoutControl1;
-            this.txbPrioritize.TabIndex = 6;
-            // 
             // f402_ProgressInfo
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
@@ -452,11 +452,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvStep)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbGroup)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnRemoveStep)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbPrioritize.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbPrioritize.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

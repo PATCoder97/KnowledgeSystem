@@ -37,18 +37,18 @@
             this.cbbProgress.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbbProgress.Location = new System.Drawing.Point(5, 0);
             this.cbbProgress.Name = "cbbProgress";
-            this.cbbProgress.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbProgress.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbbProgress.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.cbbProgress.Properties.Appearance.Options.UseFont = true;
             this.cbbProgress.Properties.Appearance.Options.UseForeColor = true;
-            this.cbbProgress.Properties.AppearanceDropDown.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbProgress.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.cbbProgress.Properties.AppearanceDropDown.Options.UseFont = true;
             this.cbbProgress.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbbProgress.Properties.NullText = "";
             this.cbbProgress.Properties.PopupSizeable = false;
             this.cbbProgress.Properties.ShowHeader = false;
-            this.cbbProgress.Size = new System.Drawing.Size(590, 28);
+            this.cbbProgress.Size = new System.Drawing.Size(587, 32);
             this.cbbProgress.TabIndex = 0;
             this.cbbProgress.EditValueChanged += new System.EventHandler(this.cbbProgress_EditValueChanged);
             // 
@@ -59,7 +59,7 @@
             this.Controls.Add(this.cbbProgress);
             this.Name = "uc207_SelectProgress";
             this.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.Size = new System.Drawing.Size(600, 28);
+            this.Size = new System.Drawing.Size(597, 34);
             this.Load += new System.EventHandler(this.uc207_SelectProgress_Load);
             ((System.ComponentModel.ISupportInitialize)(this.cbbProgress.Properties)).EndInit();
             this.ResumeLayout(false);
