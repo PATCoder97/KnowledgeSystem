@@ -107,7 +107,7 @@
             // btnTarget
             // 
             this.btnTarget.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
-            this.btnTarget.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTarget.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.btnTarget.Appearance.ForeColor = System.Drawing.Color.Black;
             this.btnTarget.Appearance.Options.UseFont = true;
             this.btnTarget.Appearance.Options.UseForeColor = true;
@@ -115,7 +115,7 @@
             this.btnTarget.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnTarget.ImageOptions.SvgImage")));
             this.btnTarget.Location = new System.Drawing.Point(1008, 50);
             this.btnTarget.Name = "btnTarget";
-            this.btnTarget.Size = new System.Drawing.Size(116, 52);
+            this.btnTarget.Size = new System.Drawing.Size(116, 58);
             this.btnTarget.StyleController = this.layoutControl1;
             this.btnTarget.TabIndex = 13;
             this.btnTarget.Text = "目標";
@@ -124,7 +124,7 @@
             // btnChart
             // 
             this.btnChart.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
-            this.btnChart.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnChart.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.btnChart.Appearance.ForeColor = System.Drawing.Color.Black;
             this.btnChart.Appearance.Options.UseFont = true;
             this.btnChart.Appearance.Options.UseForeColor = true;
@@ -132,7 +132,7 @@
             this.btnChart.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnChart.ImageOptions.SvgImage")));
             this.btnChart.Location = new System.Drawing.Point(772, 50);
             this.btnChart.Name = "btnChart";
-            this.btnChart.Size = new System.Drawing.Size(116, 52);
+            this.btnChart.Size = new System.Drawing.Size(116, 58);
             this.btnChart.StyleController = this.layoutControl1;
             this.btnChart.TabIndex = 12;
             this.btnChart.Text = "圖表";
@@ -141,7 +141,7 @@
             // btnStatistics
             // 
             this.btnStatistics.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
-            this.btnStatistics.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStatistics.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.btnStatistics.Appearance.ForeColor = System.Drawing.Color.Black;
             this.btnStatistics.Appearance.Options.UseFont = true;
             this.btnStatistics.Appearance.Options.UseForeColor = true;
@@ -149,7 +149,7 @@
             this.btnStatistics.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnStatistics.ImageOptions.SvgImage")));
             this.btnStatistics.Location = new System.Drawing.Point(652, 50);
             this.btnStatistics.Name = "btnStatistics";
-            this.btnStatistics.Size = new System.Drawing.Size(116, 52);
+            this.btnStatistics.Size = new System.Drawing.Size(116, 58);
             this.btnStatistics.StyleController = this.layoutControl1;
             this.btnStatistics.TabIndex = 11;
             this.btnStatistics.Text = "統計";
@@ -158,7 +158,7 @@
             // btnExcel
             // 
             this.btnExcel.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
-            this.btnExcel.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExcel.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.btnExcel.Appearance.ForeColor = System.Drawing.Color.Black;
             this.btnExcel.Appearance.Options.UseFont = true;
             this.btnExcel.Appearance.Options.UseForeColor = true;
@@ -166,7 +166,7 @@
             this.btnExcel.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnExcel.ImageOptions.SvgImage")));
             this.btnExcel.Location = new System.Drawing.Point(1128, 50);
             this.btnExcel.Name = "btnExcel";
-            this.btnExcel.Size = new System.Drawing.Size(116, 52);
+            this.btnExcel.Size = new System.Drawing.Size(116, 58);
             this.btnExcel.StyleController = this.layoutControl1;
             this.btnExcel.TabIndex = 10;
             this.btnExcel.Text = "Excel";
@@ -178,11 +178,11 @@
             this.txbToDate.Location = new System.Drawing.Point(172, 50);
             this.txbToDate.Name = "txbToDate";
             this.txbToDate.Properties.AdvancedModeOptions.Label = "至時間";
-            this.txbToDate.Properties.AdvancedModeOptions.LabelAppearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbToDate.Properties.AdvancedModeOptions.LabelAppearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbToDate.Properties.AdvancedModeOptions.LabelAppearance.ForeColor = System.Drawing.Color.Black;
             this.txbToDate.Properties.AdvancedModeOptions.LabelAppearance.Options.UseFont = true;
             this.txbToDate.Properties.AdvancedModeOptions.LabelAppearance.Options.UseForeColor = true;
-            this.txbToDate.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbToDate.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txbToDate.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbToDate.Properties.Appearance.Options.UseFont = true;
             this.txbToDate.Properties.Appearance.Options.UseForeColor = true;
@@ -196,13 +196,13 @@
             this.txbToDate.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.txbToDate.Properties.MaskSettings.Set("mask", "");
             this.txbToDate.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.txbToDate.Size = new System.Drawing.Size(156, 52);
+            this.txbToDate.Size = new System.Drawing.Size(156, 58);
             this.txbToDate.StyleController = this.layoutControl1;
             this.txbToDate.TabIndex = 7;
             // 
             // label1
             // 
-            this.label1.Font = new System.Drawing.Font("DFKai-SB", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft JhengHei UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(12, 12);
             this.label1.Name = "label1";
@@ -213,23 +213,23 @@
             // 
             // gcData
             // 
-            this.gcData.Location = new System.Drawing.Point(12, 106);
+            this.gcData.Location = new System.Drawing.Point(12, 112);
             this.gcData.MainView = this.gvData;
             this.gcData.Name = "gcData";
-            this.gcData.Size = new System.Drawing.Size(1232, 429);
+            this.gcData.Size = new System.Drawing.Size(1232, 423);
             this.gcData.TabIndex = 4;
             this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvData});
             // 
             // gvData
             // 
-            this.gvData.Appearance.HeaderPanel.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvData.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.gvData.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
             this.gvData.Appearance.HeaderPanel.Options.UseFont = true;
             this.gvData.Appearance.HeaderPanel.Options.UseForeColor = true;
             this.gvData.Appearance.HeaderPanel.Options.UseTextOptions = true;
             this.gvData.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gvData.Appearance.Row.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvData.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gvData.Appearance.Row.ForeColor = System.Drawing.Color.Black;
             this.gvData.Appearance.Row.Options.UseFont = true;
             this.gvData.Appearance.Row.Options.UseForeColor = true;
@@ -262,8 +262,6 @@
             // 
             // gColAchieve
             // 
-            this.gColAchieve.AppearanceCell.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gColAchieve.AppearanceCell.Options.UseFont = true;
             this.gColAchieve.AppearanceCell.Options.UseTextOptions = true;
             this.gColAchieve.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gColAchieve.Caption = "已上傳次數";
@@ -277,8 +275,6 @@
             // 
             // gColTarget
             // 
-            this.gColTarget.AppearanceCell.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gColTarget.AppearanceCell.Options.UseFont = true;
             this.gColTarget.AppearanceCell.Options.UseTextOptions = true;
             this.gColTarget.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gColTarget.Caption = "應上傳次數";
@@ -307,11 +303,11 @@
             this.txbFromDate.Location = new System.Drawing.Point(12, 50);
             this.txbFromDate.Name = "txbFromDate";
             this.txbFromDate.Properties.AdvancedModeOptions.Label = "自時間";
-            this.txbFromDate.Properties.AdvancedModeOptions.LabelAppearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbFromDate.Properties.AdvancedModeOptions.LabelAppearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbFromDate.Properties.AdvancedModeOptions.LabelAppearance.ForeColor = System.Drawing.Color.Black;
             this.txbFromDate.Properties.AdvancedModeOptions.LabelAppearance.Options.UseFont = true;
             this.txbFromDate.Properties.AdvancedModeOptions.LabelAppearance.Options.UseForeColor = true;
-            this.txbFromDate.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbFromDate.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbFromDate.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbFromDate.Properties.Appearance.Options.UseFont = true;
             this.txbFromDate.Properties.Appearance.Options.UseForeColor = true;
@@ -325,7 +321,7 @@
             this.txbFromDate.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.txbFromDate.Properties.MaskSettings.Set("mask", "");
             this.txbFromDate.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.txbFromDate.Size = new System.Drawing.Size(156, 52);
+            this.txbFromDate.Size = new System.Drawing.Size(156, 58);
             this.txbFromDate.StyleController = this.layoutControl1;
             this.txbFromDate.TabIndex = 6;
             // 
@@ -334,15 +330,15 @@
             this.cbbGrade.Location = new System.Drawing.Point(332, 50);
             this.cbbGrade.Name = "cbbGrade";
             this.cbbGrade.Properties.AdvancedModeOptions.Label = "組/處別";
-            this.cbbGrade.Properties.AdvancedModeOptions.LabelAppearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbGrade.Properties.AdvancedModeOptions.LabelAppearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.cbbGrade.Properties.AdvancedModeOptions.LabelAppearance.ForeColor = System.Drawing.Color.Black;
             this.cbbGrade.Properties.AdvancedModeOptions.LabelAppearance.Options.UseFont = true;
             this.cbbGrade.Properties.AdvancedModeOptions.LabelAppearance.Options.UseForeColor = true;
-            this.cbbGrade.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbGrade.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbbGrade.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.cbbGrade.Properties.Appearance.Options.UseFont = true;
             this.cbbGrade.Properties.Appearance.Options.UseForeColor = true;
-            this.cbbGrade.Properties.AppearanceDropDown.Font = new System.Drawing.Font("DFKai-SB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbGrade.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.cbbGrade.Properties.AppearanceDropDown.ForeColor = System.Drawing.Color.Black;
             this.cbbGrade.Properties.AppearanceDropDown.Options.UseFont = true;
             this.cbbGrade.Properties.AppearanceDropDown.Options.UseForeColor = true;
@@ -359,7 +355,7 @@
             this.cbbGrade.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.cbbGrade.Properties.NullText = "";
             this.cbbGrade.Properties.PopupSizeable = false;
-            this.cbbGrade.Size = new System.Drawing.Size(156, 52);
+            this.cbbGrade.Size = new System.Drawing.Size(156, 58);
             this.cbbGrade.StyleController = this.layoutControl1;
             this.cbbGrade.TabIndex = 8;
             this.cbbGrade.EditValueChanged += new System.EventHandler(this.cbbGrade_EditValueChanged);
@@ -369,19 +365,19 @@
             this.cbbClass.Location = new System.Drawing.Point(492, 50);
             this.cbbClass.Name = "cbbClass";
             this.cbbClass.Properties.AdvancedModeOptions.Label = "課別";
-            this.cbbClass.Properties.AdvancedModeOptions.LabelAppearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbClass.Properties.AdvancedModeOptions.LabelAppearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.cbbClass.Properties.AdvancedModeOptions.LabelAppearance.ForeColor = System.Drawing.Color.Black;
             this.cbbClass.Properties.AdvancedModeOptions.LabelAppearance.Options.UseFont = true;
             this.cbbClass.Properties.AdvancedModeOptions.LabelAppearance.Options.UseForeColor = true;
-            this.cbbClass.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbClass.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbbClass.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.cbbClass.Properties.Appearance.Options.UseFont = true;
             this.cbbClass.Properties.Appearance.Options.UseForeColor = true;
-            this.cbbClass.Properties.AppearanceDropDown.Font = new System.Drawing.Font("DFKai-SB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbClass.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.cbbClass.Properties.AppearanceDropDown.ForeColor = System.Drawing.Color.Black;
             this.cbbClass.Properties.AppearanceDropDown.Options.UseFont = true;
             this.cbbClass.Properties.AppearanceDropDown.Options.UseForeColor = true;
-            this.cbbClass.Properties.AppearanceDropDownHeader.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbClass.Properties.AppearanceDropDownHeader.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.cbbClass.Properties.AppearanceDropDownHeader.ForeColor = System.Drawing.Color.Black;
             this.cbbClass.Properties.AppearanceDropDownHeader.Options.UseFont = true;
             this.cbbClass.Properties.AppearanceDropDownHeader.Options.UseForeColor = true;
@@ -394,7 +390,7 @@
             this.cbbClass.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.cbbClass.Properties.NullText = "";
             this.cbbClass.Properties.PopupSizeable = false;
-            this.cbbClass.Size = new System.Drawing.Size(156, 52);
+            this.cbbClass.Size = new System.Drawing.Size(156, 58);
             this.cbbClass.StyleController = this.layoutControl1;
             this.cbbClass.TabIndex = 9;
             this.cbbClass.EditValueChanged += new System.EventHandler(this.cbbClass_EditValueChanged);
@@ -422,9 +418,9 @@
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.gcData;
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 94);
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 100);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(1236, 433);
+            this.layoutControlItem1.Size = new System.Drawing.Size(1236, 427);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
@@ -444,10 +440,10 @@
             // 
             this.layoutControlItem3.Control = this.txbFromDate;
             this.layoutControlItem3.Location = new System.Drawing.Point(0, 38);
-            this.layoutControlItem3.MaxSize = new System.Drawing.Size(160, 56);
-            this.layoutControlItem3.MinSize = new System.Drawing.Size(160, 56);
+            this.layoutControlItem3.MaxSize = new System.Drawing.Size(160, 0);
+            this.layoutControlItem3.MinSize = new System.Drawing.Size(160, 62);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(160, 56);
+            this.layoutControlItem3.Size = new System.Drawing.Size(160, 62);
             this.layoutControlItem3.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextVisible = false;
@@ -459,7 +455,7 @@
             this.layoutControlItem4.MaxSize = new System.Drawing.Size(160, 56);
             this.layoutControlItem4.MinSize = new System.Drawing.Size(160, 56);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(160, 56);
+            this.layoutControlItem4.Size = new System.Drawing.Size(160, 62);
             this.layoutControlItem4.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem4.TextVisible = false;
@@ -469,7 +465,7 @@
             this.emptySpaceItem1.AllowHotTrack = false;
             this.emptySpaceItem1.Location = new System.Drawing.Point(880, 38);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(116, 56);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(116, 62);
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
             // layoutControlItem5
@@ -479,7 +475,7 @@
             this.layoutControlItem5.MaxSize = new System.Drawing.Size(160, 56);
             this.layoutControlItem5.MinSize = new System.Drawing.Size(160, 56);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(160, 56);
+            this.layoutControlItem5.Size = new System.Drawing.Size(160, 62);
             this.layoutControlItem5.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem5.TextVisible = false;
@@ -491,7 +487,7 @@
             this.layoutControlItem6.MaxSize = new System.Drawing.Size(160, 56);
             this.layoutControlItem6.MinSize = new System.Drawing.Size(160, 56);
             this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(160, 56);
+            this.layoutControlItem6.Size = new System.Drawing.Size(160, 62);
             this.layoutControlItem6.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem6.TextVisible = false;
@@ -503,7 +499,7 @@
             this.layoutControlItem7.MaxSize = new System.Drawing.Size(120, 0);
             this.layoutControlItem7.MinSize = new System.Drawing.Size(120, 26);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(120, 56);
+            this.layoutControlItem7.Size = new System.Drawing.Size(120, 62);
             this.layoutControlItem7.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem7.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem7.TextVisible = false;
@@ -515,7 +511,7 @@
             this.layoutControlItem8.MaxSize = new System.Drawing.Size(120, 0);
             this.layoutControlItem8.MinSize = new System.Drawing.Size(120, 40);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(120, 56);
+            this.layoutControlItem8.Size = new System.Drawing.Size(120, 62);
             this.layoutControlItem8.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem8.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem8.TextVisible = false;
@@ -527,7 +523,7 @@
             this.layoutControlItem9.MaxSize = new System.Drawing.Size(120, 0);
             this.layoutControlItem9.MinSize = new System.Drawing.Size(120, 40);
             this.layoutControlItem9.Name = "layoutControlItem9";
-            this.layoutControlItem9.Size = new System.Drawing.Size(120, 56);
+            this.layoutControlItem9.Size = new System.Drawing.Size(120, 62);
             this.layoutControlItem9.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem9.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem9.TextVisible = false;
@@ -539,7 +535,7 @@
             this.layoutControlItem10.MaxSize = new System.Drawing.Size(120, 0);
             this.layoutControlItem10.MinSize = new System.Drawing.Size(120, 26);
             this.layoutControlItem10.Name = "layoutControlItem10";
-            this.layoutControlItem10.Size = new System.Drawing.Size(120, 56);
+            this.layoutControlItem10.Size = new System.Drawing.Size(120, 62);
             this.layoutControlItem10.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem10.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem10.TextVisible = false;

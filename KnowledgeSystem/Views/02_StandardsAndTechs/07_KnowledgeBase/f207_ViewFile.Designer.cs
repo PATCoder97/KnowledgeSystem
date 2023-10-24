@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f207_ViewFile));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.lbCanntView = new System.Windows.Forms.Label();
             this.viewExcel = new DevExpress.XtraSpreadsheet.SpreadsheetControl();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
@@ -43,17 +44,16 @@
             this.viewPDF = new DevExpress.XtraPdfViewer.PdfViewer();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.lcPDF = new DevExpress.XtraLayout.LayoutControlItem();
-            this.lcWord = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcExcel = new DevExpress.XtraLayout.LayoutControlItem();
-            this.lbCanntView = new System.Windows.Forms.Label();
+            this.lcWord = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcCanntView = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcPDF)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcWord)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcExcel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcWord)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcCanntView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -72,6 +72,16 @@
             this.layoutControl1.Size = new System.Drawing.Size(895, 643);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // lbCanntView
+            // 
+            this.lbCanntView.Font = new System.Drawing.Font("DFKai-SB", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbCanntView.Location = new System.Drawing.Point(449, 314);
+            this.lbCanntView.Name = "lbCanntView";
+            this.lbCanntView.Size = new System.Drawing.Size(434, 317);
+            this.lbCanntView.TabIndex = 7;
+            this.lbCanntView.Text = "謝謝";
+            this.lbCanntView.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // viewExcel
             // 
@@ -102,15 +112,15 @@
             // 
             // bar2
             // 
-            this.bar2.BarAppearance.Hovered.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bar2.BarAppearance.Hovered.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.bar2.BarAppearance.Hovered.ForeColor = System.Drawing.Color.Black;
             this.bar2.BarAppearance.Hovered.Options.UseFont = true;
             this.bar2.BarAppearance.Hovered.Options.UseForeColor = true;
-            this.bar2.BarAppearance.Normal.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.bar2.BarAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.bar2.BarAppearance.Normal.ForeColor = System.Drawing.Color.Black;
             this.bar2.BarAppearance.Normal.Options.UseFont = true;
             this.bar2.BarAppearance.Normal.Options.UseForeColor = true;
-            this.bar2.BarAppearance.Pressed.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.bar2.BarAppearance.Pressed.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.bar2.BarAppearance.Pressed.ForeColor = System.Drawing.Color.Black;
             this.bar2.BarAppearance.Pressed.Options.UseFont = true;
             this.bar2.BarAppearance.Pressed.Options.UseForeColor = true;
@@ -217,15 +227,6 @@
             this.lcPDF.TextSize = new System.Drawing.Size(0, 0);
             this.lcPDF.TextVisible = false;
             // 
-            // lcWord
-            // 
-            this.lcWord.Control = this.viewWord;
-            this.lcWord.Location = new System.Drawing.Point(437, 0);
-            this.lcWord.Name = "lcWord";
-            this.lcWord.Size = new System.Drawing.Size(438, 302);
-            this.lcWord.TextSize = new System.Drawing.Size(0, 0);
-            this.lcWord.TextVisible = false;
-            // 
             // lcExcel
             // 
             this.lcExcel.Control = this.viewExcel;
@@ -235,15 +236,14 @@
             this.lcExcel.TextSize = new System.Drawing.Size(0, 0);
             this.lcExcel.TextVisible = false;
             // 
-            // lbCanntView
+            // lcWord
             // 
-            this.lbCanntView.Font = new System.Drawing.Font("DFKai-SB", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbCanntView.Location = new System.Drawing.Point(449, 314);
-            this.lbCanntView.Name = "lbCanntView";
-            this.lbCanntView.Size = new System.Drawing.Size(434, 317);
-            this.lbCanntView.TabIndex = 7;
-            this.lbCanntView.Text = "謝謝";
-            this.lbCanntView.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lcWord.Control = this.viewWord;
+            this.lcWord.Location = new System.Drawing.Point(437, 0);
+            this.lcWord.Name = "lcWord";
+            this.lcWord.Size = new System.Drawing.Size(438, 302);
+            this.lcWord.TextSize = new System.Drawing.Size(0, 0);
+            this.lcWord.TextVisible = false;
             // 
             // lcCanntView
             // 
@@ -254,7 +254,7 @@
             this.lcCanntView.TextSize = new System.Drawing.Size(0, 0);
             this.lcCanntView.TextVisible = false;
             // 
-            // f207_ViewPdf
+            // f207_ViewFile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -265,7 +265,7 @@
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
             this.IconOptions.Image = global::KnowledgeSystem.Properties.Resources.DocumentSystem;
-            this.Name = "f207_ViewPdf";
+            this.Name = "f207_ViewFile";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "f207_ViewPdf";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -275,8 +275,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcPDF)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcWord)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcExcel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcWord)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcCanntView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

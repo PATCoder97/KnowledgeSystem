@@ -59,29 +59,33 @@
             this.layoutControl1.Controls.Add(this.gcData);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControl1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(782, 499);
+            this.layoutControl1.Size = new System.Drawing.Size(912, 537);
             this.layoutControl1.TabIndex = 1;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // label1
             // 
-            this.label1.Font = new System.Drawing.Font("DFKai-SB", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft JhengHei UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(12, 12);
+            this.label1.Location = new System.Drawing.Point(14, 13);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(758, 31);
+            this.label1.Size = new System.Drawing.Size(884, 34);
             this.label1.TabIndex = 5;
             this.label1.Text = "文件更新提示";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // gcData
             // 
-            this.gcData.Location = new System.Drawing.Point(12, 47);
+            this.gcData.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            this.gcData.Location = new System.Drawing.Point(14, 51);
             this.gcData.MainView = this.gvData;
+            this.gcData.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.gcData.Name = "gcData";
-            this.gcData.Size = new System.Drawing.Size(758, 440);
+            this.gcData.Size = new System.Drawing.Size(884, 473);
             this.gcData.TabIndex = 4;
             this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvData});
@@ -89,13 +93,13 @@
             // 
             // gvData
             // 
-            this.gvData.Appearance.HeaderPanel.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvData.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.gvData.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
             this.gvData.Appearance.HeaderPanel.Options.UseFont = true;
             this.gvData.Appearance.HeaderPanel.Options.UseForeColor = true;
             this.gvData.Appearance.HeaderPanel.Options.UseTextOptions = true;
             this.gvData.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gvData.Appearance.Row.Font = new System.Drawing.Font("DFKai-SB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvData.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gvData.Appearance.Row.ForeColor = System.Drawing.Color.Black;
             this.gvData.Appearance.Row.Options.UseFont = true;
             this.gvData.Appearance.Row.Options.UseForeColor = true;
@@ -106,7 +110,6 @@
             this.gridColumn1,
             this.gridColumn2,
             this.gridColumn3});
-            this.gvData.DetailHeight = 325;
             gridFormatRule1.ApplyToRow = true;
             gridFormatRule1.Name = "Format0";
             formatConditionRuleExpression1.Appearance.ForeColor = System.Drawing.Color.Red;
@@ -126,9 +129,7 @@
             // 
             this.gvColId.Caption = "gridColumn4";
             this.gvColId.FieldName = "Id";
-            this.gvColId.MinWidth = 17;
             this.gvColId.Name = "gvColId";
-            this.gvColId.Width = 64;
             // 
             // gridColumn6
             // 
@@ -138,12 +139,10 @@
             this.gridColumn6.DisplayFormat.FormatString = "yyyy/MM/dd HH:mm";
             this.gridColumn6.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.gridColumn6.FieldName = "TimeNotify";
-            this.gridColumn6.MaxWidth = 171;
-            this.gridColumn6.MinWidth = 17;
+            this.gridColumn6.MaxWidth = 199;
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
             this.gridColumn6.VisibleIndex = 0;
-            this.gridColumn6.Width = 64;
             // 
             // gvColIdKnowledgeBase
             // 
@@ -151,22 +150,18 @@
             this.gvColIdKnowledgeBase.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gvColIdKnowledgeBase.Caption = "資料編號";
             this.gvColIdKnowledgeBase.FieldName = "IdKnowledgeBase";
-            this.gvColIdKnowledgeBase.MaxWidth = 171;
-            this.gvColIdKnowledgeBase.MinWidth = 17;
+            this.gvColIdKnowledgeBase.MaxWidth = 199;
             this.gvColIdKnowledgeBase.Name = "gvColIdKnowledgeBase";
             this.gvColIdKnowledgeBase.Visible = true;
             this.gvColIdKnowledgeBase.VisibleIndex = 1;
-            this.gvColIdKnowledgeBase.Width = 64;
             // 
             // gridColumn1
             // 
             this.gridColumn1.Caption = "資料名稱";
             this.gridColumn1.FieldName = "DisplayName";
-            this.gridColumn1.MinWidth = 17;
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
             this.gridColumn1.VisibleIndex = 2;
-            this.gridColumn1.Width = 64;
             // 
             // gridColumn2
             // 
@@ -176,20 +171,16 @@
             this.gridColumn2.DisplayFormat.FormatString = "yyyy/MM/dd HH:mm";
             this.gridColumn2.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.gridColumn2.FieldName = "TimeNotifyNotes";
-            this.gridColumn2.MaxWidth = 171;
-            this.gridColumn2.MinWidth = 17;
+            this.gridColumn2.MaxWidth = 199;
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 3;
-            this.gridColumn2.Width = 64;
             // 
             // gridColumn3
             // 
             this.gridColumn3.Caption = "IsRead";
             this.gridColumn3.FieldName = "IsRead";
-            this.gridColumn3.MinWidth = 17;
             this.gridColumn3.Name = "gridColumn3";
-            this.gridColumn3.Width = 64;
             // 
             // Root
             // 
@@ -199,15 +190,15 @@
             this.layoutControlItem1,
             this.layoutControlItem2});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(782, 499);
+            this.Root.Size = new System.Drawing.Size(912, 537);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.gcData;
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 35);
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 38);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(762, 444);
+            this.layoutControlItem1.Size = new System.Drawing.Size(888, 477);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
@@ -215,10 +206,10 @@
             // 
             this.layoutControlItem2.Control = this.label1;
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem2.MaxSize = new System.Drawing.Size(0, 35);
-            this.layoutControlItem2.MinSize = new System.Drawing.Size(21, 35);
+            this.layoutControlItem2.MaxSize = new System.Drawing.Size(0, 38);
+            this.layoutControlItem2.MinSize = new System.Drawing.Size(24, 38);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(762, 35);
+            this.layoutControlItem2.Size = new System.Drawing.Size(888, 38);
             this.layoutControlItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
@@ -227,11 +218,12 @@
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
             this.Appearance.Options.UseBackColor = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.layoutControl1);
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "uc207_Notify_DocUpdateNotify";
-            this.Size = new System.Drawing.Size(782, 499);
+            this.Size = new System.Drawing.Size(912, 537);
             this.Load += new System.EventHandler(this.uc207_Notify_DocUpdateNotify_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);

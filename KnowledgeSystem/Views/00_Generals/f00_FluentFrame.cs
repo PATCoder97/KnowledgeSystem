@@ -33,7 +33,7 @@ namespace KnowledgeSystem.Views._00_Generals
         // Khai báo các BUS để dùng BD
         dm_FunctionRoleBUS _dm_FunctionRoleBUS = new dm_FunctionRoleBUS();
 
-        Font fontTW14 = new Font("DFKai-SB", 14.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+        Font fontTW14 = new Font("Microsoft JhengHei UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
 
         int groupId = 0;
         List<dm_FunctionM> lsFunctions = new List<dm_FunctionM>();
