@@ -5,6 +5,7 @@ using DevExpress.Utils.Win;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
+using DevExpress.XtraSplashScreen;
 using KnowledgeSystem.Configs;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
 
         public EventFormInfo _eventInfo = EventFormInfo.Create;
         public string _formName = "";
+        public dt301_Base _base = null;
         string idDept2word = TPConfigs.LoginUser.IdDepartment.Substring(0, 2);
 
         private enum CertStatus
@@ -139,10 +141,28 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
             switch (_eventInfo)
             {
                 case EventFormInfo.Create:
+                    _base = new dt301_Base();
                     cbbDept.EditValue = idDept2word;
                     txbDateReceipt.EditValue = DateTime.Today;
                     break;
                 case EventFormInfo.View:
+                    cbbDept.EditValue = _base.IdDept;
+                    cbbUser.EditValue = _base.IdUser;
+                    cbbCourse.EditValue = _base.IdCourse;
+                    txbDateReceipt.EditValue = _base.DateReceipt;
+                    if (_base.ValidLicense)
+                    {
+                        cbbCertStatus.EditValue = EnumHelper.GetDescription(CertStatus.應取證照);
+                    }
+                    else if (_base.BackupLicense)
+                    {
+                        cbbCertStatus.EditValue = EnumHelper.GetDescription(CertStatus.備援證照);
+                    }
+                    else
+                    {
+                        cbbCertStatus.EditValue = EnumHelper.GetDescription(CertStatus.無效證照);
+                    }
+                    txbDescribe.EditValue = _base.Describe;
                     break;
                 case EventFormInfo.Update:
                     break;
@@ -171,7 +191,87 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            var aaa = EnumHelper.GetEnumByDescription<CertStatus>(cbbCertStatus.EditValue?.ToString());
+            string ursId = cbbUser.EditValue?.ToString();
+            string course = cbbCourse.EditValue?.ToString();
+
+            if (string.IsNullOrEmpty(ursId) || string.IsNullOrEmpty(course))
+            {
+                XtraMessageBox.Show("請填寫所有信息", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            var result = false;
+            string msg = "";
+            using (var handle = SplashScreenManager.ShowOverlayForm(this))
+            {
+                _base.IdDept = idDept2word;
+                _base.IdUser = ursId;
+                _base.IdJobTitle = cbbJobTitle.EditValue?.ToString();
+                _base.IdCourse = course;
+                _base.DateReceipt = Convert.ToDateTime(txbDateReceipt.EditValue);
+
+                int duration = Convert.ToInt16(txbDuration?.EditValue);
+                _base.ExpDate = duration == 0 ? null : (DateTime?)_base.DateReceipt.AddYears(duration);
+
+                _base.ValidLicense = false;
+                _base.BackupLicense = false;
+                _base.InvalidLicense = false;
+                var status = EnumHelper.GetEnumByDescription<CertStatus>(cbbCertStatus.EditValue?.ToString());
+                switch (status)
+                {
+                    case CertStatus.應取證照:
+                        _base.ValidLicense = true;
+                        break;
+                    case CertStatus.備援證照:
+                        _base.BackupLicense = true;
+                        break;
+                    case CertStatus.無效證照:
+                        _base.InvalidLicense = true;
+                        break;
+                }
+
+                _base.Describe = txbDescribe?.EditValue.ToString();
+
+                msg = $"{_base.IdDept} {_base.IdJobTitle} {_base.IdCourse} {_base.DateReceipt}";
+                switch (_eventInfo)
+                {
+                    case EventFormInfo.Create:
+                        result = dt301_BaseBUS.Instance.Add(_base);
+                        break;
+                    case EventFormInfo.View:
+                        break;
+                    case EventFormInfo.Update:
+                        result = dt301_BaseBUS.Instance.AddOrUpdate(_base);
+                        break;
+                    case EventFormInfo.Delete:
+                        var dialogResult = XtraMessageBox.Show($"您確認要刪除{_formName}: {_base.IdJobTitle} {_base.IdCourse} {_base.DateReceipt}", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (dialogResult != DialogResult.Yes) return;
+                        result = dt301_BaseBUS.Instance.Remove(_base.Id);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            if (result)
+            {
+                //switch (_eventInfo)
+                //{
+                //    case EventFormInfo.Update:
+                //        logger.Info(_eventInfo.ToString(), msg);
+                //        break;
+                //    case EventFormInfo.Delete:
+                //        logger.Warning(_eventInfo.ToString(), msg);
+                //        break;
+                //}
+                Close();
+            }
+            else
+            {
+                DefaultMsg.MsgErrorDB();
+            }
+
+
         }
 
         private void cbbUser_EditValueChanged(object sender, EventArgs e)
@@ -197,6 +297,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
         private void cbbCourse_EditValueChanged(object sender, EventArgs e)
         {
             var course = dt301_CourseBUS.Instance.GetItemById(cbbCourse.EditValue?.ToString());
+            if (course == null) return;
 
             txbDuration.EditValue = course.Duration;
         }

@@ -107,6 +107,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
             cbbJobTitle.Properties.DataSource = lsJobTitles;
             cbbJobTitle.Properties.DisplayMember = "DisplayName";
             cbbJobTitle.Properties.ValueMember = "Id";
+            cbbJobTitle.Properties.BestFitWidth = 110;
 
             var lsCourse = dt301_CourseBUS.Instance.GetList().Select(r => new dt301_Course() { Id = r.Id, DisplayName = $"{r.Id} {r.DisplayName}" });
             cbbCourse.Properties.DataSource = lsCourse;
@@ -127,9 +128,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                     txbActualHeadcount.EditValue = _certReq.ActualHeadcount;
                     txbReqQuantity.EditValue = _certReq.ReqQuantity;
 
-                    Hide();
-                    cbbJobTitle.ShowPopup();
-                    cbbCourse.ShowPopup();
+                    //Hide();
+                    //cbbJobTitle.ShowPopup();
+                    //cbbCourse.ShowPopup();
                     break;
                 case EventFormInfo.Update:
                     break;

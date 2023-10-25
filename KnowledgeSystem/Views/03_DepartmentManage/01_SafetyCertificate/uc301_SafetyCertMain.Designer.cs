@@ -114,10 +114,12 @@
             this.gvData.OptionsView.EnableAppearanceOddRow = true;
             this.gvData.OptionsView.ShowAutoFilterRow = true;
             this.gvData.OptionsView.ShowGroupPanel = false;
+            this.gvData.DoubleClick += new System.EventHandler(this.gvData_DoubleClick);
             // 
             // gridColumn1
             // 
             this.gridColumn1.Caption = "單位";
+            this.gridColumn1.FieldName = "IdDept";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
             this.gridColumn1.VisibleIndex = 0;
@@ -125,6 +127,7 @@
             // gridColumn2
             // 
             this.gridColumn2.Caption = "人員";
+            this.gridColumn2.FieldName = "UserName";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 1;
@@ -132,6 +135,7 @@
             // gridColumn3
             // 
             this.gridColumn3.Caption = "職務名稱";
+            this.gridColumn3.FieldName = "JobName";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 2;
@@ -139,6 +143,7 @@
             // gridColumn4
             // 
             this.gridColumn4.Caption = "課程名稱";
+            this.gridColumn4.FieldName = "CourseName";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 3;
@@ -146,6 +151,7 @@
             // gridColumn5
             // 
             this.gridColumn5.Caption = "上課日期";
+            this.gridColumn5.FieldName = "DateReceipt";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
             this.gridColumn5.VisibleIndex = 4;
@@ -153,6 +159,7 @@
             // gridColumn6
             // 
             this.gridColumn6.Caption = "有效期至";
+            this.gridColumn6.FieldName = "ExpDate";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
             this.gridColumn6.VisibleIndex = 5;
@@ -160,6 +167,7 @@
             // gridColumn7
             // 
             this.gridColumn7.Caption = "應取證照";
+            this.gridColumn7.FieldName = "ValidLicense";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
             this.gridColumn7.VisibleIndex = 6;
@@ -167,6 +175,7 @@
             // gridColumn8
             // 
             this.gridColumn8.Caption = "備援證照";
+            this.gridColumn8.FieldName = "BackupLicense";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
             this.gridColumn8.VisibleIndex = 7;
@@ -174,6 +183,7 @@
             // gridColumn9
             // 
             this.gridColumn9.Caption = "無效證照";
+            this.gridColumn9.FieldName = "InvalidLicense";
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
             this.gridColumn9.VisibleIndex = 8;
@@ -181,6 +191,7 @@
             // gridColumn10
             // 
             this.gridColumn10.Caption = "備註";
+            this.gridColumn10.FieldName = "Describe";
             this.gridColumn10.Name = "gridColumn10";
             this.gridColumn10.Visible = true;
             this.gridColumn10.VisibleIndex = 9;
@@ -266,6 +277,7 @@
             this.btnReload.Id = 1;
             this.btnReload.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnReload.Name = "btnReload";
+            this.btnReload.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnReload_ItemClick);
             // 
             // btnExportExcel
             // 
