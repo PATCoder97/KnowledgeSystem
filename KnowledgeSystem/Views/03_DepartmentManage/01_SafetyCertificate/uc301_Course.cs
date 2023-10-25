@@ -58,7 +58,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
 
         private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            f401_JobTitleInfo fInfo = new f401_JobTitleInfo();
+            f301_CourseInfo fInfo = new f301_CourseInfo();
             fInfo._eventInfo = EventFormInfo.Create;
             fInfo._formName = "課程";
             fInfo.ShowDialog();

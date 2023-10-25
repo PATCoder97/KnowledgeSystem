@@ -29,7 +29,7 @@ namespace SVC207Knowledge
         static TPLogger logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName);
         static dt207_BaseBUS _dt207_BaseBUS = new dt207_BaseBUS();
 
-        int defaulDelay = 1; //minute
+        int defaulDelay = 5; //minute
         private Task serviceTask;
         private bool isRunning;
         string assemblyPath = string.Empty;

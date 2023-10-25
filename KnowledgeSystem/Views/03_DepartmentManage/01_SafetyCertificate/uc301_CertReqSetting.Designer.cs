@@ -209,8 +209,6 @@
             this.gridColumn3.Caption = "編碼";
             this.gridColumn3.FieldName = "Id";
             this.gridColumn3.Name = "gridColumn3";
-            this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 0;
             // 
             // gridColumn4
             // 
@@ -218,7 +216,7 @@
             this.gridColumn4.FieldName = "IdDept";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 1;
+            this.gridColumn4.VisibleIndex = 0;
             // 
             // gridColumn1
             // 
@@ -226,7 +224,7 @@
             this.gridColumn1.FieldName = "IdJobTitle";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 2;
+            this.gridColumn1.VisibleIndex = 1;
             // 
             // gridColumn2
             // 
@@ -234,7 +232,7 @@
             this.gridColumn2.FieldName = "IdCourse";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 3;
+            this.gridColumn2.VisibleIndex = 2;
             // 
             // gridColumn5
             // 
@@ -242,7 +240,7 @@
             this.gridColumn5.FieldName = "NewHeadcount";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 4;
+            this.gridColumn5.VisibleIndex = 3;
             // 
             // gridColumn6
             // 
@@ -250,7 +248,7 @@
             this.gridColumn6.FieldName = "ActualHeadcount";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 5;
+            this.gridColumn6.VisibleIndex = 4;
             // 
             // gridColumn7
             // 
@@ -258,7 +256,7 @@
             this.gridColumn7.FieldName = "ReqQuantity";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 6;
+            this.gridColumn7.VisibleIndex = 5;
             // 
             // Root
             // 

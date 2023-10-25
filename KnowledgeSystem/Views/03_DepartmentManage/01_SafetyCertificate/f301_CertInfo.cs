@@ -49,12 +49,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
         private void EnabledController(bool _enable = true)
         {
             cbbDept.Enabled = false;
+            cbbJobTitle.Enabled = false;
             cbbUser.Enabled = _enable;
             cbbCertStatus.Enabled = _enable;
-            cbbJobTitle.Enabled = false;
-            //cbbControl.Enabled = _enable;
-            //txbPrioritize.Enabled = _enable;
-            //cbbPicture.Enabled = _enable;
+            cbbCourse.Enabled = _enable;
+            txbDateReceipt.Enabled = _enable;
+            txbDuration.Enabled = _enable;
+            txbDescribe.Enabled = _enable;
         }
 
         private void LockControl()
@@ -129,6 +130,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
             cbbJobTitle.Properties.DisplayMember = "DisplayName";
             cbbJobTitle.Properties.ValueMember = "Id";
 
+            cbbCourse.Properties.DisplayMember = "DisplayName";
+            cbbCourse.Properties.ValueMember = "Id";
+
             cbbCertStatus.Properties.Items.AddRange((CertStatus[])Enum.GetValues(typeof(CertStatus)));
             cbbCertStatus.SelectedIndex = 0;
 
@@ -136,6 +140,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
             {
                 case EventFormInfo.Create:
                     cbbDept.EditValue = idDept2word;
+                    txbDateReceipt.EditValue = DateTime.Today;
                     break;
                 case EventFormInfo.View:
                     break;
@@ -173,8 +178,27 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
         {
             dm_User urs = cbbUser.GetSelectedDataRow() as dm_User;
             if (urs == null) return;
-            
+
             cbbJobTitle.EditValue = urs.JobCode;
+
+            var lsCertReqSets = dt301_CertReqSetBUS.Instance.GetListByJobAndDept(urs.JobCode, idDept2word);
+            var lsCourses = from certReq in lsCertReqSets
+                            join course in dt301_CourseBUS.Instance.GetList() on certReq.IdCourse equals course.Id
+                            select new dt301_Course
+                            {
+                                Id = course.Id,
+                                DisplayName = $"{course.Id} {course.DisplayName}"
+                            };
+
+            cbbCourse.Properties.DataSource = lsCourses;
+            cbbCourse.EditValue = null;
+        }
+
+        private void cbbCourse_EditValueChanged(object sender, EventArgs e)
+        {
+            var course = dt301_CourseBUS.Instance.GetItemById(cbbCourse.EditValue?.ToString());
+
+            txbDuration.EditValue = course.Duration;
         }
     }
 }

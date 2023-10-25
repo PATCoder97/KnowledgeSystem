@@ -35,7 +35,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
 
         private void EnabledController(bool _enable = true)
         {
-            txbNewDisplayName.Enabled = _enable;
+            txbDisplayName.Enabled = _enable;
+            txbDuration.Enabled = _enable;
         }
 
         private void LockControl()
@@ -93,7 +94,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                     break;
                 case EventFormInfo.View:
                     txbNewId.EditValue = _course.Id;
-                    txbNewDisplayName.EditValue = _course.DisplayName;
+                    txbDisplayName.EditValue = _course.DisplayName;
+                    txbDuration.EditValue = _course.Duration;
                     break;
                 default:
                     break;
@@ -109,7 +111,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             string newId = txbNewId.EditValue?.ToString();
-            string newDisplayName = txbNewDisplayName.EditValue?.ToString();
+            string newDisplayName = txbDisplayName.EditValue?.ToString();
+            int duration = Convert.ToInt16(txbDuration.EditValue?.ToString());
 
             if (string.IsNullOrEmpty(newId) || string.IsNullOrEmpty(newDisplayName))
             {
@@ -123,6 +126,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
             {
                 _course.Id = newId;
                 _course.DisplayName = newDisplayName;
+                _course.Duration = duration;
 
                 msg = $"{_course.Id} {_course.DisplayName}";
                 switch (_eventInfo)

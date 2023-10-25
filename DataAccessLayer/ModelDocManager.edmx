@@ -269,6 +269,7 @@
           </Key>
           <Property Name="Id" Type="varchar" MaxLength="8" Nullable="false" />
           <Property Name="DisplayName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Duration" Type="int" />
         </EntityType>
         <EntityType Name="sys_Log">
           <Key>
@@ -351,8 +352,8 @@
           <EntitySet Name="dm_Group" EntityType="DBDocumentManagementSystemModel.dm_Group" />
           <EntitySet Name="dm_Progress" EntityType="DBDocumentManagementSystemModel.dm_Progress" />
           <EntitySet Name="dm_JobTitle" EntityType="DBDocumentManagementSystemModel.dm_JobTitle" />
-          <EntitySet Name="dt301_Course" EntityType="DBDocumentManagementSystemModel.dt301_Course" />
           <EntitySet Name="dt301_CertReqSetting" EntityType="DBDocumentManagementSystemModel.dt301_CertReqSetting" />
+          <EntitySet Name="dt301_Course" EntityType="DBDocumentManagementSystemModel.dt301_Course" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -620,13 +621,6 @@
           <Property Name="Id" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
           <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="dt301_Course">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
-          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="dt301_CertReqSetting">
           <Key>
             <PropertyRef Name="Id" />
@@ -638,6 +632,14 @@
           <Property Name="NewHeadcount" Type="Int32" />
           <Property Name="ActualHeadcount" Type="Int32" />
           <Property Name="ReqQuantity" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt301_Course">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Duration" Type="Int32" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -937,14 +939,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dt301_Course">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt301_Course">
-              <MappingFragment StoreEntitySet="dt301_Course">
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="dt301_CertReqSetting">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt301_CertReqSetting">
               <MappingFragment StoreEntitySet="dt301_CertReqSetting">
@@ -954,6 +948,15 @@
                 <ScalarProperty Name="IdCourse" ColumnName="IdCourse" />
                 <ScalarProperty Name="IdJobTitle" ColumnName="IdJobTitle" />
                 <ScalarProperty Name="IdDept" ColumnName="IdDept" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt301_Course">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt301_Course">
+              <MappingFragment StoreEntitySet="dt301_Course">
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

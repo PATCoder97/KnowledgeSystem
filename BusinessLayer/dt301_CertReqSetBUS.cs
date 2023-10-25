@@ -1,5 +1,6 @@
 ﻿using DataAccessLayer;
 using Logger;
+using Microsoft.SqlServer.Server;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
@@ -31,6 +32,22 @@ namespace BusinessLayer
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
                     return _context.dt301_CertReqSetting.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
+        public List<dt301_CertReqSetting> GetListByJobAndDept(string _idJobTitle, string _idDept)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt301_CertReqSetting.Where(r => r.IdJobTitle == _idJobTitle && r.IdDept == _idDept).OrderByDescending(r => r.Id).ToList();
                 }
             }
             catch (Exception ex)

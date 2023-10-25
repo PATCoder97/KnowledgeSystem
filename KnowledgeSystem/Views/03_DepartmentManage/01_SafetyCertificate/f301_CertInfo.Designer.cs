@@ -40,11 +40,11 @@
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
-            this.spinEdit1 = new DevExpress.XtraEditors.SpinEdit();
-            this.dateEdit1 = new DevExpress.XtraEditors.DateEdit();
+            this.txbDescribe = new DevExpress.XtraEditors.TextEdit();
+            this.txbDuration = new DevExpress.XtraEditors.SpinEdit();
+            this.txbDateReceipt = new DevExpress.XtraEditors.DateEdit();
             this.cbbDept = new DevExpress.XtraEditors.LookUpEdit();
-            this.lookUpEdit3 = new DevExpress.XtraEditors.LookUpEdit();
+            this.cbbCourse = new DevExpress.XtraEditors.LookUpEdit();
             this.cbbJobTitle = new DevExpress.XtraEditors.LookUpEdit();
             this.cbbCertStatus = new DevExpress.XtraEditors.ComboBoxEdit();
             this.cbbUser = new DevExpress.XtraEditors.SearchLookUpEdit();
@@ -54,7 +54,6 @@
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -65,19 +64,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spinEdit1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbDescribe.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbDuration.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbDateReceipt.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbDateReceipt.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbDept.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit3.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbCourse.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbJobTitle.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbCertStatus.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbUser.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
@@ -165,15 +163,15 @@
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManagerTP;
-            this.barDockControlTop.Size = new System.Drawing.Size(389, 49);
+            this.barDockControlTop.Size = new System.Drawing.Size(456, 49);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 484);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 357);
             this.barDockControlBottom.Manager = this.barManagerTP;
-            this.barDockControlBottom.Size = new System.Drawing.Size(389, 0);
+            this.barDockControlBottom.Size = new System.Drawing.Size(456, 0);
             // 
             // barDockControlLeft
             // 
@@ -181,23 +179,23 @@
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 49);
             this.barDockControlLeft.Manager = this.barManagerTP;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 435);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 308);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(389, 49);
+            this.barDockControlRight.Location = new System.Drawing.Point(456, 49);
             this.barDockControlRight.Manager = this.barManagerTP;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 435);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 308);
             // 
             // layoutControl1
             // 
-            this.layoutControl1.Controls.Add(this.textEdit1);
-            this.layoutControl1.Controls.Add(this.spinEdit1);
-            this.layoutControl1.Controls.Add(this.dateEdit1);
+            this.layoutControl1.Controls.Add(this.txbDescribe);
+            this.layoutControl1.Controls.Add(this.txbDuration);
+            this.layoutControl1.Controls.Add(this.txbDateReceipt);
             this.layoutControl1.Controls.Add(this.cbbDept);
-            this.layoutControl1.Controls.Add(this.lookUpEdit3);
+            this.layoutControl1.Controls.Add(this.cbbCourse);
             this.layoutControl1.Controls.Add(this.cbbJobTitle);
             this.layoutControl1.Controls.Add(this.cbbCertStatus);
             this.layoutControl1.Controls.Add(this.cbbUser);
@@ -205,73 +203,73 @@
             this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(389, 435);
+            this.layoutControl1.Size = new System.Drawing.Size(456, 308);
             this.layoutControl1.TabIndex = 4;
             this.layoutControl1.Text = "layoutControl1";
             // 
-            // textEdit1
+            // txbDescribe
             // 
-            this.textEdit1.Location = new System.Drawing.Point(100, 264);
-            this.textEdit1.MenuManager = this.barManagerTP;
-            this.textEdit1.Name = "textEdit1";
-            this.textEdit1.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.textEdit1.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.textEdit1.Properties.Appearance.Options.UseFont = true;
-            this.textEdit1.Properties.Appearance.Options.UseForeColor = true;
-            this.textEdit1.Size = new System.Drawing.Size(277, 32);
-            this.textEdit1.StyleController = this.layoutControl1;
-            this.textEdit1.TabIndex = 11;
+            this.txbDescribe.Location = new System.Drawing.Point(100, 264);
+            this.txbDescribe.MenuManager = this.barManagerTP;
+            this.txbDescribe.Name = "txbDescribe";
+            this.txbDescribe.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.txbDescribe.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.txbDescribe.Properties.Appearance.Options.UseFont = true;
+            this.txbDescribe.Properties.Appearance.Options.UseForeColor = true;
+            this.txbDescribe.Size = new System.Drawing.Size(344, 32);
+            this.txbDescribe.StyleController = this.layoutControl1;
+            this.txbDescribe.TabIndex = 11;
             // 
-            // spinEdit1
+            // txbDuration
             // 
-            this.spinEdit1.EditValue = new decimal(new int[] {
+            this.txbDuration.EditValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
-            this.spinEdit1.Location = new System.Drawing.Point(100, 192);
-            this.spinEdit1.MenuManager = this.barManagerTP;
-            this.spinEdit1.Name = "spinEdit1";
-            this.spinEdit1.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.spinEdit1.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.spinEdit1.Properties.Appearance.Options.UseFont = true;
-            this.spinEdit1.Properties.Appearance.Options.UseForeColor = true;
-            this.spinEdit1.Properties.Appearance.Options.UseTextOptions = true;
-            this.spinEdit1.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
-            this.spinEdit1.Properties.AppearanceDisabled.Options.UseTextOptions = true;
-            this.spinEdit1.Properties.AppearanceDisabled.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
-            this.spinEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.txbDuration.Location = new System.Drawing.Point(100, 192);
+            this.txbDuration.MenuManager = this.barManagerTP;
+            this.txbDuration.Name = "txbDuration";
+            this.txbDuration.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.txbDuration.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.txbDuration.Properties.Appearance.Options.UseFont = true;
+            this.txbDuration.Properties.Appearance.Options.UseForeColor = true;
+            this.txbDuration.Properties.Appearance.Options.UseTextOptions = true;
+            this.txbDuration.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            this.txbDuration.Properties.AppearanceDisabled.Options.UseTextOptions = true;
+            this.txbDuration.Properties.AppearanceDisabled.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            this.txbDuration.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.spinEdit1.Properties.IsFloatValue = false;
-            this.spinEdit1.Properties.MaskSettings.Set("mask", "N00");
-            this.spinEdit1.Properties.MaxValue = new decimal(new int[] {
+            this.txbDuration.Properties.IsFloatValue = false;
+            this.txbDuration.Properties.MaskSettings.Set("mask", "N00");
+            this.txbDuration.Properties.MaxValue = new decimal(new int[] {
             10,
             0,
             0,
             0});
-            this.spinEdit1.Size = new System.Drawing.Size(277, 32);
-            this.spinEdit1.StyleController = this.layoutControl1;
-            this.spinEdit1.TabIndex = 9;
+            this.txbDuration.Size = new System.Drawing.Size(344, 32);
+            this.txbDuration.StyleController = this.layoutControl1;
+            this.txbDuration.TabIndex = 9;
             // 
-            // dateEdit1
+            // txbDateReceipt
             // 
-            this.dateEdit1.EditValue = null;
-            this.dateEdit1.Location = new System.Drawing.Point(100, 156);
-            this.dateEdit1.MenuManager = this.barManagerTP;
-            this.dateEdit1.Name = "dateEdit1";
-            this.dateEdit1.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.dateEdit1.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.dateEdit1.Properties.Appearance.Options.UseFont = true;
-            this.dateEdit1.Properties.Appearance.Options.UseForeColor = true;
-            this.dateEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.txbDateReceipt.EditValue = null;
+            this.txbDateReceipt.Location = new System.Drawing.Point(100, 156);
+            this.txbDateReceipt.MenuManager = this.barManagerTP;
+            this.txbDateReceipt.Name = "txbDateReceipt";
+            this.txbDateReceipt.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.txbDateReceipt.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.txbDateReceipt.Properties.Appearance.Options.UseFont = true;
+            this.txbDateReceipt.Properties.Appearance.Options.UseForeColor = true;
+            this.txbDateReceipt.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dateEdit1.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.txbDateReceipt.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dateEdit1.Properties.MaskSettings.Set("mask", "d");
-            this.dateEdit1.Properties.UseMaskAsDisplayFormat = true;
-            this.dateEdit1.Size = new System.Drawing.Size(277, 32);
-            this.dateEdit1.StyleController = this.layoutControl1;
-            this.dateEdit1.TabIndex = 8;
+            this.txbDateReceipt.Properties.MaskSettings.Set("mask", "d");
+            this.txbDateReceipt.Properties.UseMaskAsDisplayFormat = true;
+            this.txbDateReceipt.Size = new System.Drawing.Size(344, 32);
+            this.txbDateReceipt.StyleController = this.layoutControl1;
+            this.txbDateReceipt.TabIndex = 8;
             // 
             // cbbDept
             // 
@@ -287,26 +285,32 @@
             this.cbbDept.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("DisplayName", "Name1")});
             this.cbbDept.Properties.NullText = "";
-            this.cbbDept.Size = new System.Drawing.Size(277, 32);
+            this.cbbDept.Size = new System.Drawing.Size(344, 32);
             this.cbbDept.StyleController = this.layoutControl1;
             this.cbbDept.TabIndex = 7;
             // 
-            // lookUpEdit3
+            // cbbCourse
             // 
-            this.lookUpEdit3.Location = new System.Drawing.Point(100, 120);
-            this.lookUpEdit3.MenuManager = this.barManagerTP;
-            this.lookUpEdit3.Name = "lookUpEdit3";
-            this.lookUpEdit3.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
-            this.lookUpEdit3.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.lookUpEdit3.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.lookUpEdit3.Properties.Appearance.Options.UseFont = true;
-            this.lookUpEdit3.Properties.Appearance.Options.UseForeColor = true;
-            this.lookUpEdit3.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.cbbCourse.Location = new System.Drawing.Point(100, 120);
+            this.cbbCourse.MenuManager = this.barManagerTP;
+            this.cbbCourse.Name = "cbbCourse";
+            this.cbbCourse.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.cbbCourse.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.cbbCourse.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.cbbCourse.Properties.Appearance.Options.UseFont = true;
+            this.cbbCourse.Properties.Appearance.Options.UseForeColor = true;
+            this.cbbCourse.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbCourse.Properties.AppearanceDropDown.Options.UseFont = true;
+            this.cbbCourse.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lookUpEdit3.Properties.NullText = "";
-            this.lookUpEdit3.Size = new System.Drawing.Size(277, 32);
-            this.lookUpEdit3.StyleController = this.layoutControl1;
-            this.lookUpEdit3.TabIndex = 6;
+            this.cbbCourse.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("DisplayName", "Name1")});
+            this.cbbCourse.Properties.NullText = "";
+            this.cbbCourse.Properties.ShowHeader = false;
+            this.cbbCourse.Size = new System.Drawing.Size(344, 32);
+            this.cbbCourse.StyleController = this.layoutControl1;
+            this.cbbCourse.TabIndex = 6;
+            this.cbbCourse.EditValueChanged += new System.EventHandler(this.cbbCourse_EditValueChanged);
             // 
             // cbbJobTitle
             // 
@@ -321,7 +325,7 @@
             this.cbbJobTitle.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbbJobTitle.Properties.NullText = "";
-            this.cbbJobTitle.Size = new System.Drawing.Size(277, 32);
+            this.cbbJobTitle.Size = new System.Drawing.Size(344, 32);
             this.cbbJobTitle.StyleController = this.layoutControl1;
             this.cbbJobTitle.TabIndex = 5;
             // 
@@ -334,12 +338,12 @@
             this.cbbCertStatus.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.cbbCertStatus.Properties.Appearance.Options.UseFont = true;
             this.cbbCertStatus.Properties.Appearance.Options.UseForeColor = true;
-            this.cbbCertStatus.Properties.AppearanceDropDown.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.cbbCertStatus.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.cbbCertStatus.Properties.AppearanceDropDown.Options.UseFont = true;
             this.cbbCertStatus.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbbCertStatus.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cbbCertStatus.Size = new System.Drawing.Size(277, 32);
+            this.cbbCertStatus.Size = new System.Drawing.Size(344, 32);
             this.cbbCertStatus.StyleController = this.layoutControl1;
             this.cbbCertStatus.TabIndex = 10;
             // 
@@ -360,20 +364,20 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbbUser.Properties.NullText = "";
             this.cbbUser.Properties.PopupView = this.searchLookUpEdit1View;
-            this.cbbUser.Size = new System.Drawing.Size(277, 32);
+            this.cbbUser.Size = new System.Drawing.Size(344, 32);
             this.cbbUser.StyleController = this.layoutControl1;
             this.cbbUser.TabIndex = 4;
             this.cbbUser.EditValueChanged += new System.EventHandler(this.cbbUser_EditValueChanged);
             // 
             // searchLookUpEdit1View
             // 
-            this.searchLookUpEdit1View.Appearance.HeaderPanel.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchLookUpEdit1View.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchLookUpEdit1View.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
             this.searchLookUpEdit1View.Appearance.HeaderPanel.Options.UseFont = true;
             this.searchLookUpEdit1View.Appearance.HeaderPanel.Options.UseForeColor = true;
             this.searchLookUpEdit1View.Appearance.HeaderPanel.Options.UseTextOptions = true;
             this.searchLookUpEdit1View.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.searchLookUpEdit1View.Appearance.Row.Font = new System.Drawing.Font("DFKai-SB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchLookUpEdit1View.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchLookUpEdit1View.Appearance.Row.Options.UseFont = true;
             this.searchLookUpEdit1View.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumn3,
@@ -427,7 +431,6 @@
             this.Root.GroupBordersVisible = false;
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem1,
-            this.emptySpaceItem1,
             this.layoutControlItem2,
             this.layoutControlItem3,
             this.layoutControlItem5,
@@ -436,7 +439,7 @@
             this.layoutControlItem8,
             this.layoutControlItem4});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(389, 435);
+            this.Root.Size = new System.Drawing.Size(456, 308);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem1
@@ -450,17 +453,9 @@
             this.layoutControlItem1.Control = this.cbbUser;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 36);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(369, 36);
+            this.layoutControlItem1.Size = new System.Drawing.Size(436, 36);
             this.layoutControlItem1.Text = "人員名稱";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(76, 24);
-            // 
-            // emptySpaceItem1
-            // 
-            this.emptySpaceItem1.AllowHotTrack = false;
-            this.emptySpaceItem1.Location = new System.Drawing.Point(0, 288);
-            this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(369, 127);
-            this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
             // layoutControlItem2
             // 
@@ -473,7 +468,7 @@
             this.layoutControlItem2.Control = this.cbbJobTitle;
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 72);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(369, 36);
+            this.layoutControlItem2.Size = new System.Drawing.Size(436, 36);
             this.layoutControlItem2.Text = "職務名稱";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(76, 24);
             // 
@@ -485,10 +480,10 @@
             this.layoutControlItem3.AppearanceItemCaption.Options.UseForeColor = true;
             this.layoutControlItem3.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem3.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
-            this.layoutControlItem3.Control = this.lookUpEdit3;
+            this.layoutControlItem3.Control = this.cbbCourse;
             this.layoutControlItem3.Location = new System.Drawing.Point(0, 108);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(369, 36);
+            this.layoutControlItem3.Size = new System.Drawing.Size(436, 36);
             this.layoutControlItem3.Text = "課程名稱";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(76, 24);
             // 
@@ -500,10 +495,10 @@
             this.layoutControlItem5.AppearanceItemCaption.Options.UseForeColor = true;
             this.layoutControlItem5.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem5.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
-            this.layoutControlItem5.Control = this.dateEdit1;
+            this.layoutControlItem5.Control = this.txbDateReceipt;
             this.layoutControlItem5.Location = new System.Drawing.Point(0, 144);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(369, 36);
+            this.layoutControlItem5.Size = new System.Drawing.Size(436, 36);
             this.layoutControlItem5.Text = "取證照日";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(76, 24);
             // 
@@ -515,10 +510,10 @@
             this.layoutControlItem6.AppearanceItemCaption.Options.UseForeColor = true;
             this.layoutControlItem6.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem6.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
-            this.layoutControlItem6.Control = this.spinEdit1;
+            this.layoutControlItem6.Control = this.txbDuration;
             this.layoutControlItem6.Location = new System.Drawing.Point(0, 180);
             this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(369, 36);
+            this.layoutControlItem6.Size = new System.Drawing.Size(436, 36);
             this.layoutControlItem6.Text = "證照期限";
             this.layoutControlItem6.TextSize = new System.Drawing.Size(76, 24);
             // 
@@ -533,7 +528,7 @@
             this.layoutControlItem7.Control = this.cbbCertStatus;
             this.layoutControlItem7.Location = new System.Drawing.Point(0, 216);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(369, 36);
+            this.layoutControlItem7.Size = new System.Drawing.Size(436, 36);
             this.layoutControlItem7.Text = "證照狀態";
             this.layoutControlItem7.TextSize = new System.Drawing.Size(76, 24);
             // 
@@ -545,10 +540,10 @@
             this.layoutControlItem8.AppearanceItemCaption.Options.UseForeColor = true;
             this.layoutControlItem8.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem8.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
-            this.layoutControlItem8.Control = this.textEdit1;
+            this.layoutControlItem8.Control = this.txbDescribe;
             this.layoutControlItem8.Location = new System.Drawing.Point(0, 252);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(369, 36);
+            this.layoutControlItem8.Size = new System.Drawing.Size(436, 36);
             this.layoutControlItem8.Text = "備註";
             this.layoutControlItem8.TextSize = new System.Drawing.Size(76, 24);
             // 
@@ -563,7 +558,7 @@
             this.layoutControlItem4.Control = this.cbbDept;
             this.layoutControlItem4.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(369, 36);
+            this.layoutControlItem4.Size = new System.Drawing.Size(436, 36);
             this.layoutControlItem4.Text = "單位";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(76, 24);
             // 
@@ -571,7 +566,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(389, 484);
+            this.ClientSize = new System.Drawing.Size(456, 357);
             this.Controls.Add(this.layoutControl1);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
@@ -585,19 +580,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spinEdit1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbDescribe.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbDuration.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbDateReceipt.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbDateReceipt.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbDept.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit3.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbCourse.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbJobTitle.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbCertStatus.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbUser.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
@@ -624,19 +618,18 @@
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
-        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
         private DevExpress.XtraEditors.LookUpEdit cbbJobTitle;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
-        private DevExpress.XtraEditors.LookUpEdit lookUpEdit3;
+        private DevExpress.XtraEditors.LookUpEdit cbbCourse;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
         private DevExpress.XtraEditors.LookUpEdit cbbDept;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
-        private DevExpress.XtraEditors.SpinEdit spinEdit1;
-        private DevExpress.XtraEditors.DateEdit dateEdit1;
+        private DevExpress.XtraEditors.SpinEdit txbDuration;
+        private DevExpress.XtraEditors.DateEdit txbDateReceipt;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
-        private DevExpress.XtraEditors.TextEdit textEdit1;
+        private DevExpress.XtraEditors.TextEdit txbDescribe;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
         private DevExpress.XtraEditors.ComboBoxEdit cbbCertStatus;
         private DevExpress.XtraEditors.SearchLookUpEdit cbbUser;

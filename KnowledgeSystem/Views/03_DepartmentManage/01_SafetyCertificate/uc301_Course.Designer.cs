@@ -45,6 +45,7 @@
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -184,7 +185,8 @@
             this.gvData.Appearance.Row.Options.UseForeColor = true;
             this.gvData.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumn3,
-            this.gridColumn4});
+            this.gridColumn4,
+            this.gridColumn1});
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
             this.gvData.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
@@ -229,6 +231,14 @@
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "證照期間";
+            this.gridColumn1.FieldName = "Duration";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 2;
+            // 
             // uc301_Course
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -270,5 +280,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
     }
 }

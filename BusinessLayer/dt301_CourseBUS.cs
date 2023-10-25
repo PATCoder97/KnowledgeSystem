@@ -40,6 +40,22 @@ namespace BusinessLayer
             }
         }
 
+        public dt301_Course GetItemById(string _id)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt301_Course.FirstOrDefault(r => r.Id == _id);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public bool Add(dt301_Course _course)
         {
             try
