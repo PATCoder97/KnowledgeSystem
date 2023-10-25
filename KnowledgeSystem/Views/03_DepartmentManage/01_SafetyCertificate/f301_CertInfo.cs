@@ -121,7 +121,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                 IdDepartment = r.IdDepartment,
                 DisplayName = $"{r.DisplayName} {r.DisplayNameVN}",
                 JobCode = r.JobCode
-            }).ToList(); ;
+            }).ToList();
             cbbUser.Properties.DataSource = lsUsers;
             cbbUser.Properties.DisplayMember = "DisplayName";
             cbbUser.Properties.ValueMember = "Id";
@@ -162,6 +162,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                     {
                         cbbCertStatus.EditValue = EnumHelper.GetDescription(CertStatus.無效證照);
                     }
+
+                    int duration = _base.ExpDate.HasValue ? _base.ExpDate.Value.Year - _base.DateReceipt.Year : 0;
+                    txbDuration.EditValue = duration;
                     txbDescribe.EditValue = _base.Describe;
                     break;
                 case EventFormInfo.Update:
@@ -270,8 +273,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
             {
                 DefaultMsg.MsgErrorDB();
             }
-
-
         }
 
         private void cbbUser_EditValueChanged(object sender, EventArgs e)

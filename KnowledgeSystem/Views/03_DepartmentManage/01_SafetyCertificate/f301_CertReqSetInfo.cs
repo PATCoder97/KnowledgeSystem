@@ -92,8 +92,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
 
         private void f301_CertReqSetInfo_Load(object sender, EventArgs e)
         {
-
-
             var lsDepts = dm_DeptBUS.Instance.GetList().Select(r => new dm_Departments
             {
                 Id = r.Id,
@@ -103,13 +101,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
             cbbDept.Properties.DisplayMember = "DisplayName";
             cbbDept.Properties.ValueMember = "Id";
 
-            var lsJobTitles = dm_JobTitleBUS.Instance.GetList().Select(r => new dm_JobTitle() { Id = r.Id, DisplayName = $"{r.Id} {r.DisplayName}" });
+            var lsJobTitles = dm_JobTitleBUS.Instance.GetList().Select(r => new dm_JobTitle() { Id = r.Id, DisplayName = $"{r.Id} {r.DisplayName}" }).ToList();
             cbbJobTitle.Properties.DataSource = lsJobTitles;
             cbbJobTitle.Properties.DisplayMember = "DisplayName";
             cbbJobTitle.Properties.ValueMember = "Id";
             cbbJobTitle.Properties.BestFitWidth = 110;
 
-            var lsCourse = dt301_CourseBUS.Instance.GetList().Select(r => new dt301_Course() { Id = r.Id, DisplayName = $"{r.Id} {r.DisplayName}" });
+            var lsCourse = dt301_CourseBUS.Instance.GetList().Select(r => new dt301_Course() { Id = r.Id, DisplayName = $"{r.Id} {r.DisplayName}" }).ToList();
             cbbCourse.Properties.DataSource = lsCourse;
             cbbCourse.Properties.DisplayMember = "DisplayName";
             cbbCourse.Properties.ValueMember = "Id";
@@ -127,10 +125,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                     txbNewHeadcount.EditValue = _certReq.NewHeadcount;
                     txbActualHeadcount.EditValue = _certReq.ActualHeadcount;
                     txbReqQuantity.EditValue = _certReq.ReqQuantity;
-
-                    //Hide();
-                    //cbbJobTitle.ShowPopup();
-                    //cbbCourse.ShowPopup();
                     break;
                 case EventFormInfo.Update:
                     break;

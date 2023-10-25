@@ -163,7 +163,7 @@
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 289);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 287);
             this.barDockControlBottom.Manager = this.barManagerTP;
             this.barDockControlBottom.Size = new System.Drawing.Size(454, 0);
             // 
@@ -173,7 +173,7 @@
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 49);
             this.barDockControlLeft.Manager = this.barManagerTP;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 240);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 238);
             // 
             // barDockControlRight
             // 
@@ -181,7 +181,7 @@
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
             this.barDockControlRight.Location = new System.Drawing.Point(454, 49);
             this.barDockControlRight.Manager = this.barManagerTP;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 240);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 238);
             // 
             // layoutControl1
             // 
@@ -195,7 +195,7 @@
             this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(454, 240);
+            this.layoutControl1.Size = new System.Drawing.Size(454, 238);
             this.layoutControl1.TabIndex = 5;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -330,13 +330,13 @@
             // 
             // gridView1
             // 
-            this.gridView1.Appearance.HeaderPanel.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridView1.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.gridView1.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
             this.gridView1.Appearance.HeaderPanel.Options.UseFont = true;
             this.gridView1.Appearance.HeaderPanel.Options.UseForeColor = true;
             this.gridView1.Appearance.HeaderPanel.Options.UseTextOptions = true;
             this.gridView1.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridView1.Appearance.Row.Font = new System.Drawing.Font("DFKai-SB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridView1.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridView1.Appearance.Row.ForeColor = System.Drawing.Color.Black;
             this.gridView1.Appearance.Row.Options.UseFont = true;
             this.gridView1.Appearance.Row.Options.UseForeColor = true;
@@ -390,13 +390,13 @@
             // 
             // searchLookUpEdit1View
             // 
-            this.searchLookUpEdit1View.Appearance.HeaderPanel.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.searchLookUpEdit1View.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchLookUpEdit1View.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
             this.searchLookUpEdit1View.Appearance.HeaderPanel.Options.UseFont = true;
             this.searchLookUpEdit1View.Appearance.HeaderPanel.Options.UseForeColor = true;
             this.searchLookUpEdit1View.Appearance.HeaderPanel.Options.UseTextOptions = true;
             this.searchLookUpEdit1View.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.searchLookUpEdit1View.Appearance.Row.Font = new System.Drawing.Font("DFKai-SB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchLookUpEdit1View.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchLookUpEdit1View.Appearance.Row.ForeColor = System.Drawing.Color.Black;
             this.searchLookUpEdit1View.Appearance.Row.Options.UseFont = true;
             this.searchLookUpEdit1View.Appearance.Row.Options.UseForeColor = true;
@@ -443,7 +443,7 @@
             this.layoutControlItem5,
             this.layoutControlItem7});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(454, 240);
+            this.Root.Size = new System.Drawing.Size(454, 238);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem2
@@ -544,7 +544,7 @@
             this.layoutControlItem7.Control = this.txbReqQuantity;
             this.layoutControlItem7.Location = new System.Drawing.Point(0, 180);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(434, 40);
+            this.layoutControlItem7.Size = new System.Drawing.Size(434, 38);
             this.layoutControlItem7.Text = "應取證張數";
             this.layoutControlItem7.TextSize = new System.Drawing.Size(95, 24);
             // 
@@ -552,7 +552,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(454, 289);
+            this.ClientSize = new System.Drawing.Size(454, 287);
             this.Controls.Add(this.layoutControl1);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
