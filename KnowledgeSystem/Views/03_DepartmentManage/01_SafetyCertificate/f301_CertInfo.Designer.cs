@@ -499,7 +499,7 @@
             this.layoutControlItem5.Location = new System.Drawing.Point(0, 144);
             this.layoutControlItem5.Name = "layoutControlItem5";
             this.layoutControlItem5.Size = new System.Drawing.Size(436, 36);
-            this.layoutControlItem5.Text = "取證照日";
+            this.layoutControlItem5.Text = "上課日期";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(76, 24);
             // 
             // layoutControlItem6

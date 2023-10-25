@@ -37,11 +37,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
         {
             txbDisplayName.Enabled = _enable;
             txbDuration.Enabled = _enable;
+            cbbCategory.Enabled = _enable;
         }
 
         private void LockControl()
         {
-            txbNewId.Enabled = false;
+            txbId.Enabled = false;
 
             switch (_eventInfo)
             {
@@ -50,7 +51,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
 
                     btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                    txbNewId.Enabled = true;
+                    txbId.Enabled = true;
 
                     EnabledController();
                     break;
@@ -87,15 +88,20 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
         {
             LockControl();
 
+            List<string> lsCategories = new List<string>() { "第一類", "第二類", "第三類", "第四類", "第五類", "第六類", "其他" };
+            cbbCategory.Properties.Items.AddRange(lsCategories);
+
             switch (_eventInfo)
             {
                 case EventFormInfo.Create:
                     _course = new dt301_Course();
+                    cbbCategory.SelectedIndex = 0;
                     break;
                 case EventFormInfo.View:
-                    txbNewId.EditValue = _course.Id;
+                    txbId.EditValue = _course.Id;
                     txbDisplayName.EditValue = _course.DisplayName;
                     txbDuration.EditValue = _course.Duration;
+                    cbbCategory.EditValue = _course.Category;
                     break;
                 default:
                     break;
@@ -110,9 +116,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            string newId = txbNewId.EditValue?.ToString();
+            string newId = txbId.EditValue?.ToString();
             string newDisplayName = txbDisplayName.EditValue?.ToString();
             int duration = Convert.ToInt16(txbDuration.EditValue?.ToString());
+            string category = cbbCategory.EditValue?.ToString();
 
             if (string.IsNullOrEmpty(newId) || string.IsNullOrEmpty(newDisplayName))
             {
@@ -127,6 +134,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                 _course.Id = newId;
                 _course.DisplayName = newDisplayName;
                 _course.Duration = duration;
+                _course.Category = category;
 
                 msg = $"{_course.Id} {_course.DisplayName}";
                 switch (_eventInfo)

@@ -145,7 +145,7 @@
             // 
             // gridColumn5
             // 
-            this.gridColumn5.Caption = "取證照日";
+            this.gridColumn5.Caption = "上課日期";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
             this.gridColumn5.VisibleIndex = 4;

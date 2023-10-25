@@ -17,5 +17,6 @@ namespace DataAccessLayer
         public string Id { get; set; }
         public string DisplayName { get; set; }
         public Nullable<int> Duration { get; set; }
+        public string Category { get; set; }
     }
 }
