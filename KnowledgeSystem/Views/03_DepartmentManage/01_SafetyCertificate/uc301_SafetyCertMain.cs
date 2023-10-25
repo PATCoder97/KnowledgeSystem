@@ -117,5 +117,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
 
             LoadData();
         }
+
+        private void btnExportExcel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
+        }
     }
 }

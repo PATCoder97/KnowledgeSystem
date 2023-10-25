@@ -38,7 +38,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
         {
             btnAdd.ImageOptions.SvgImage = TPSvgimages.Add;
             btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
-            btnExportExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
         }
 
         private void LoadData()
@@ -89,59 +88,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             fInfo.ShowDialog();
 
             LoadData();
-        }
-
-        private void btnExportExcel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            string dataPath = "";
-            DataSet ds;
-
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
-            {
-                openFileDialog.Filter = "Excel files (*.xls, *.xlsx)|*.xls;*.xlsx|All files (*.*)|*.*";
-                openFileDialog.RestoreDirectory = true;
-
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    dataPath = openFileDialog.FileName;
-                }
-            }
-
-            string extension = Path.GetExtension(dataPath);
-            using (var stream = File.Open(dataPath, FileMode.Open, FileAccess.Read))
-            {
-                IExcelDataReader reader;
-                if (extension == "*.xls")
-                {
-                    reader = ExcelReaderFactory.CreateBinaryReader(stream);
-                }
-                else
-                {
-                    reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
-                }
-
-                ds = reader.AsDataSet(new ExcelDataSetConfiguration()
-                {
-                    ConfigureDataTable = (_) => new ExcelDataTableConfiguration()
-                    {
-                        UseHeaderRow = true
-                    }
-                });
-
-                reader.Close();
-            }
-
-            List<dt301_Course> lsCourse = new List<dt301_Course>();
-
-            foreach (DataRow row in ds.Tables[0].Rows)
-            {
-                lsCourse.Add(new dt301_Course() { Id = row[0]?.ToString().Trim(), DisplayName = row[1]?.ToString().Trim() });
-            }
-
-            foreach (var item in lsCourse)
-            {
-                dt301_CourseBUS.Instance.AddOrUpdate(item);
-            }
         }
     }
 }
