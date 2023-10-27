@@ -26,8 +26,14 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
         }
 
         RefreshHelper helper;
-        List<dt301_CertReqSetting> lsCertReqSets = new List<dt301_CertReqSetting>();
+        List<CertReqSetM> lsCertReqSetDisplay = new List<CertReqSetM>();
         BindingSource sourceCertReqSet = new BindingSource();
+
+        private class CertReqSetM : dt301_CertReqSetting
+        {
+            public string JobName { get; set; }
+            public string CourseName { get; set; }
+        }
 
         private void InitializeIcon()
         {
@@ -38,8 +44,27 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
         private void LoadData()
         {
             helper.SaveViewInfo();
-            lsCertReqSets = dt301_CertReqSetBUS.Instance.GetList();
-            sourceCertReqSet.DataSource = lsCertReqSets;
+            var lsJobTitles = dm_JobTitleBUS.Instance.GetList();
+            var lsCourses = dt301_CourseBUS.Instance.GetList();
+            var lsCertReqs = dt301_CertReqSetBUS.Instance.GetList();
+
+            lsCertReqSetDisplay = (from data in lsCertReqs
+                                   join job in lsJobTitles on data.IdJobTitle equals job.Id
+                                   join courses in lsCourses on data.IdCourse equals courses.Id
+                                   select new CertReqSetM
+                                   {
+                                       Id = data.Id,
+                                       IdDept = data.IdDept,
+                                       IdJobTitle = data.IdJobTitle,
+                                       IdCourse = data.IdCourse,
+                                       NewHeadcount = data.NewHeadcount,
+                                       ActualHeadcount = data.ActualHeadcount,
+                                       ReqQuantity = data.ReqQuantity,
+                                       JobName = $"{data.IdJobTitle} {job.DisplayName}",
+                                       CourseName = $"{data.IdCourse} {courses.DisplayName}"
+                                   }).ToList();
+
+            sourceCertReqSet.DataSource = lsCertReqSetDisplay;
             helper.LoadViewInfo();
 
             gvData.BestFitColumns();

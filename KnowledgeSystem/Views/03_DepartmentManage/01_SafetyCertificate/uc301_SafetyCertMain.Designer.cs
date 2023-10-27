@@ -76,6 +76,11 @@
             // 
             // gcData
             // 
+            this.gcData.EmbeddedNavigator.Buttons.Append.Visible = false;
+            this.gcData.EmbeddedNavigator.Buttons.CancelEdit.Visible = false;
+            this.gcData.EmbeddedNavigator.Buttons.Edit.Visible = false;
+            this.gcData.EmbeddedNavigator.Buttons.EndEdit.Visible = false;
+            this.gcData.EmbeddedNavigator.Buttons.Remove.Visible = false;
             this.gcData.Location = new System.Drawing.Point(12, 12);
             this.gcData.MainView = this.gvData;
             this.gcData.Name = "gcData";
@@ -86,6 +91,10 @@
             // 
             // gvData
             // 
+            this.gvData.Appearance.FooterPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvData.Appearance.FooterPanel.Options.UseFont = true;
+            this.gvData.Appearance.FooterPanel.Options.UseTextOptions = true;
+            this.gvData.Appearance.FooterPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gvData.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.gvData.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
             this.gvData.Appearance.HeaderPanel.Options.UseFont = true;
@@ -113,6 +122,7 @@
             this.gvData.OptionsView.ColumnAutoWidth = false;
             this.gvData.OptionsView.EnableAppearanceOddRow = true;
             this.gvData.OptionsView.ShowAutoFilterRow = true;
+            this.gvData.OptionsView.ShowFooter = true;
             this.gvData.OptionsView.ShowGroupPanel = false;
             this.gvData.DoubleClick += new System.EventHandler(this.gvData_DoubleClick);
             // 
@@ -161,6 +171,8 @@
             this.gridColumn6.Caption = "有效期至";
             this.gridColumn6.FieldName = "ExpDate";
             this.gridColumn6.Name = "gridColumn6";
+            this.gridColumn6.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "ExpDate", "數量={0}")});
             this.gridColumn6.Visible = true;
             this.gridColumn6.VisibleIndex = 5;
             // 
@@ -169,6 +181,8 @@
             this.gridColumn7.Caption = "應取證照";
             this.gridColumn7.FieldName = "ValidLicense";
             this.gridColumn7.Name = "gridColumn7";
+            this.gridColumn7.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "ValidLicense", "應取={0}")});
             this.gridColumn7.Visible = true;
             this.gridColumn7.VisibleIndex = 6;
             // 
@@ -177,6 +191,8 @@
             this.gridColumn8.Caption = "備援證照";
             this.gridColumn8.FieldName = "BackupLicense";
             this.gridColumn8.Name = "gridColumn8";
+            this.gridColumn8.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "BackupLicense", "備援={0}")});
             this.gridColumn8.Visible = true;
             this.gridColumn8.VisibleIndex = 7;
             // 
@@ -185,6 +201,8 @@
             this.gridColumn9.Caption = "無效證照";
             this.gridColumn9.FieldName = "InvalidLicense";
             this.gridColumn9.Name = "gridColumn9";
+            this.gridColumn9.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "InvalidLicense", "無效={0}")});
             this.gridColumn9.Visible = true;
             this.gridColumn9.VisibleIndex = 8;
             // 
@@ -193,6 +211,8 @@
             this.gridColumn10.Caption = "備註";
             this.gridColumn10.FieldName = "Describe";
             this.gridColumn10.Name = "gridColumn10";
+            this.gridColumn10.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "Describe", "共計={0}")});
             this.gridColumn10.Visible = true;
             this.gridColumn10.VisibleIndex = 9;
             // 

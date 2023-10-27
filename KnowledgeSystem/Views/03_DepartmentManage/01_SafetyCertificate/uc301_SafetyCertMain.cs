@@ -1,6 +1,8 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
+using DevExpress.Data;
 using DevExpress.XtraEditors;
+using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using KnowledgeSystem.Configs;
 using System;
@@ -67,9 +69,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                                   BackupLicense = data.BackupLicense,
                                   InvalidLicense = data.InvalidLicense,
                                   Describe = data.Describe,
-                                  UserName =$"{data.IdUser} {urs.DisplayName}",
-                                  JobName =$"{data.IdJobTitle} {job.DisplayName}",
-                                  CourseName =$"{data.IdCourse} {course.DisplayName}",
+                                  UserName = $"{data.IdUser} {urs.DisplayName}",
+                                  JobName = $"{job.DisplayName}",
+                                  CourseName = $"{course.DisplayName}",
                               }).ToList();
 
             sourceBases.DataSource = lsBasesDisplay;
@@ -82,11 +84,74 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
         {
             gvData.ReadOnlyGridView();
             gvData.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
+            gvData.CustomSummaryCalculate += GvData_CustomSummaryCalculate;
 
             LoadData();
             gcData.DataSource = sourceBases;
 
             gvData.BestFitColumns();
+        }
+
+        double countValid = 0;
+        double countBackup = 0;
+        double countInvalid = 0;
+        double countTotal = 0;
+        private void GvData_CustomSummaryCalculate(object sender, DevExpress.Data.CustomSummaryEventArgs e)
+        {
+            GridView view = sender as GridView;
+            if (e.IsTotalSummary)
+            {
+                GridSummaryItem item = e.Item as GridSummaryItem;
+
+                switch (e.SummaryProcess)
+                {
+                    case CustomSummaryProcess.Start:
+                        switch (item.FieldName)
+                        {
+                            case "ValidLicense":
+                                countValid = 0;
+                                break;
+                            case "BackupLicense":
+                                countBackup = 0;
+                                break;
+                            case "InvalidLicense":
+                                countInvalid = 0;
+                                break;
+                        }
+                        break;
+                    case CustomSummaryProcess.Calculate:
+                        switch (item.FieldName)
+                        {
+                            case "ValidLicense":
+                                if ((bool)view.GetRowCellValue(e.RowHandle, "ValidLicense")) countValid++;
+                                break;
+                            case "BackupLicense":
+                                if ((bool)view.GetRowCellValue(e.RowHandle, "BackupLicense")) countBackup++;
+                                break;
+                            case "InvalidLicense":
+                                if ((bool)view.GetRowCellValue(e.RowHandle, "InvalidLicense")) countInvalid++;
+                                break;
+                        }
+                        break;
+                    case CustomSummaryProcess.Finalize:
+                        switch (item.FieldName)
+                        {
+                            case "ValidLicense":
+                                e.TotalValue = countValid;
+                                break;
+                            case "BackupLicense":
+                                e.TotalValue = countBackup;
+                                break;
+                            case "InvalidLicense":
+                                e.TotalValue = countInvalid;
+                                break;
+                            case "Describe":
+                                e.TotalValue = countValid + countBackup + countInvalid;
+                                break;
+                        }
+                        break;
+                }
+            }
         }
 
         private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -122,5 +187,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
         {
 
         }
+
+
     }
 }

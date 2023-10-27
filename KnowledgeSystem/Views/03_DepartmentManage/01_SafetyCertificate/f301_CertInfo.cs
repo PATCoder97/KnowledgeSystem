@@ -14,6 +14,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -38,7 +39,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
         {
             應取證照,
             備援證照,
-            無效證照
+            無效證照,
+            在等證照
         }
 
         private void InitializeIcon()
@@ -148,6 +150,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                 case EventFormInfo.View:
                     cbbDept.EditValue = _base.IdDept;
                     cbbUser.EditValue = _base.IdUser;
+                    cbbJobTitle.EditValue = _base.IdJobTitle;
                     cbbCourse.EditValue = _base.IdCourse;
                     txbDateReceipt.EditValue = _base.DateReceipt;
                     if (_base.ValidLicense)
@@ -158,9 +161,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                     {
                         cbbCertStatus.EditValue = EnumHelper.GetDescription(CertStatus.備援證照);
                     }
-                    else
+                    else if (_base.InvalidLicense)
                     {
                         cbbCertStatus.EditValue = EnumHelper.GetDescription(CertStatus.無效證照);
+                    }
+                    else
+                    {
+                        cbbCertStatus.EditValue = EnumHelper.GetDescription(CertStatus.在等證照);
                     }
 
                     int duration = _base.ExpDate.HasValue ? _base.ExpDate.Value.Year - _base.DateReceipt.Year : 0;
@@ -280,19 +287,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
             dm_User urs = cbbUser.GetSelectedDataRow() as dm_User;
             if (urs == null) return;
 
-            cbbJobTitle.EditValue = urs.JobCode;
+            if (_eventInfo == EventFormInfo.Create)
+            {
+                cbbJobTitle.EditValue = urs.JobCode;
+            };
 
-            var lsCertReqSets = dt301_CertReqSetBUS.Instance.GetListByJobAndDept(urs.JobCode, idDept2word);
-            var lsCourses = from certReq in lsCertReqSets
-                            join course in dt301_CourseBUS.Instance.GetList() on certReq.IdCourse equals course.Id
-                            select new dt301_Course
-                            {
-                                Id = course.Id,
-                                DisplayName = $"{course.Id} {course.DisplayName}"
-                            };
 
-            cbbCourse.Properties.DataSource = lsCourses;
-            cbbCourse.EditValue = null;
         }
 
         private void cbbCourse_EditValueChanged(object sender, EventArgs e)
@@ -301,6 +301,22 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
             if (course == null) return;
 
             txbDuration.EditValue = course.Duration;
+        }
+
+        private void cbbJobTitle_EditValueChanged(object sender, EventArgs e)
+        {
+            string idJobTitle = cbbJobTitle.EditValue?.ToString();
+            var lsCertReqSets = dt301_CertReqSetBUS.Instance.GetListByJobAndDept(idJobTitle, idDept2word);
+            var lsCourses = (from certReq in lsCertReqSets
+                             join course in dt301_CourseBUS.Instance.GetList() on certReq.IdCourse equals course.Id
+                             select new dt301_Course
+                             {
+                                 Id = course.Id,
+                                 DisplayName = $"{course.Id} {course.DisplayName}"
+                             }).ToList();
+
+            cbbCourse.Properties.DataSource = lsCourses;
+            cbbCourse.EditValue = null;
         }
     }
 }

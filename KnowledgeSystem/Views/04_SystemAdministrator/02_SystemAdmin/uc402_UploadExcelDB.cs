@@ -62,17 +62,54 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
                 reader.Close();
             }
 
-            List<dt301_Course> lsCourse = new List<dt301_Course>();
+            //List<dt301_CertReqSetting> lsCourse = new List<dt301_CertReqSetting>();
+
+            //foreach (DataRow row in ds.Tables[0].Rows)
+            //{
+            //    lsCourse.Add(new dt301_CertReqSetting()
+            //    {
+            //        IdDept = "78",
+            //        IdJobTitle = row["IdJob"].ToString().Trim(),
+            //        IdCourse = row["IdCourse"].ToString().Trim(),
+            //        NewHeadcount = Convert.ToInt16(row["New"].ToString().Trim()),
+            //        ActualHeadcount = Convert.ToInt16(row["Actual"].ToString().Trim()),
+            //        ReqQuantity = Convert.ToInt16(row["Req"].ToString().Trim()),
+            //    });
+            //}
+
+            //foreach (var item in lsCourse)
+            //{
+            //    dt301_CertReqSetBUS.Instance.AddOrUpdate(item);
+            //}
+
+
+
+            // Data
+            List<dt301_Base> lsCourse = new List<dt301_Base>();
 
             foreach (DataRow row in ds.Tables[0].Rows)
             {
-                lsCourse.Add(new dt301_Course() { Id = row[0]?.ToString().Trim(), DisplayName = row[1]?.ToString().Trim() });
+                lsCourse.Add(new dt301_Base()
+                {
+                    IdDept = "78",
+                    IdUser = row["IdUser"].ToString().Trim(),
+                    IdJobTitle = row["IdJob"].ToString().Trim(),
+                    IdCourse = row["IdCourse"].ToString().Trim(),
+                    DateReceipt = DateTime.Parse(row["DateReceipt"].ToString().Trim()),
+                    ExpDate = DateTime.Parse(row["DateReceipt"].ToString().Trim()).AddYears(Convert.ToInt16(row["DateCount"].ToString().Trim())),
+                    Describe = row["Describe"].ToString().Trim(),
+                    ValidLicense = row["Valid"].ToString().Trim() == "Y",
+                    BackupLicense = row["Backup"].ToString().Trim() == "Y",
+                    InvalidLicense = row["Invalid"].ToString().Trim() == "Y",
+                });
             }
 
             foreach (var item in lsCourse)
             {
-              //  dt301_CourseBUS.Instance.AddOrUpdate(item);
+                dt301_BaseBUS.Instance.AddOrUpdate(item);
             }
+
+            MessageBox.Show($"{lsCourse.Count}");
         }
     }
 }

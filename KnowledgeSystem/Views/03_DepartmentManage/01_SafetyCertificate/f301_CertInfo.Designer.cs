@@ -328,6 +328,7 @@
             this.cbbJobTitle.Size = new System.Drawing.Size(344, 32);
             this.cbbJobTitle.StyleController = this.layoutControl1;
             this.cbbJobTitle.TabIndex = 5;
+            this.cbbJobTitle.EditValueChanged += new System.EventHandler(this.cbbJobTitle_EditValueChanged);
             // 
             // cbbCertStatus
             // 
