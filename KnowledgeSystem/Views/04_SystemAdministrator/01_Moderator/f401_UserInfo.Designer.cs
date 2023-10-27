@@ -470,13 +470,13 @@
             // 
             // searchLookUpEdit1View
             // 
-            this.searchLookUpEdit1View.Appearance.HeaderPanel.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchLookUpEdit1View.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchLookUpEdit1View.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
             this.searchLookUpEdit1View.Appearance.HeaderPanel.Options.UseFont = true;
             this.searchLookUpEdit1View.Appearance.HeaderPanel.Options.UseForeColor = true;
             this.searchLookUpEdit1View.Appearance.HeaderPanel.Options.UseTextOptions = true;
             this.searchLookUpEdit1View.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.searchLookUpEdit1View.Appearance.Row.Font = new System.Drawing.Font("DFKai-SB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchLookUpEdit1View.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchLookUpEdit1View.Appearance.Row.ForeColor = System.Drawing.Color.Black;
             this.searchLookUpEdit1View.Appearance.Row.Options.UseFont = true;
             this.searchLookUpEdit1View.Appearance.Row.Options.UseForeColor = true;

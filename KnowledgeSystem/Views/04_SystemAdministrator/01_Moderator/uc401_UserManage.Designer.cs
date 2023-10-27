@@ -45,6 +45,7 @@
             this.gColPCName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColIP = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
@@ -52,6 +53,7 @@
             this.btnCreate = new DevExpress.XtraBars.BarButtonItem();
             this.btnRefresh = new DevExpress.XtraBars.BarButtonItem();
             this.btnUploadList = new DevExpress.XtraBars.BarButtonItem();
+            this.btnConfirmUpload = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -80,6 +82,11 @@
             // 
             // gcData
             // 
+            this.gcData.EmbeddedNavigator.Buttons.Append.Visible = false;
+            this.gcData.EmbeddedNavigator.Buttons.CancelEdit.Visible = false;
+            this.gcData.EmbeddedNavigator.Buttons.Edit.Visible = false;
+            this.gcData.EmbeddedNavigator.Buttons.EndEdit.Visible = false;
+            this.gcData.EmbeddedNavigator.Buttons.Remove.Visible = false;
             this.gcData.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.gcData.Location = new System.Drawing.Point(12, 12);
             this.gcData.MainView = this.gvData;
@@ -87,6 +94,7 @@
             this.gcData.Name = "gcData";
             this.gcData.Size = new System.Drawing.Size(891, 360);
             this.gcData.TabIndex = 4;
+            this.gcData.UseEmbeddedNavigator = true;
             this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvData});
             // 
@@ -114,7 +122,8 @@
             this.gridColumn10,
             this.gColPCName,
             this.gColIP,
-            this.gridColumn4});
+            this.gridColumn4,
+            this.gridColumn11});
             this.gvData.DetailHeight = 377;
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
@@ -231,6 +240,14 @@
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 2;
             // 
+            // gridColumn11
+            // 
+            this.gridColumn11.Caption = "狀態";
+            this.gridColumn11.FieldName = "Describe";
+            this.gridColumn11.Name = "gridColumn11";
+            this.gridColumn11.Visible = true;
+            this.gridColumn11.VisibleIndex = 10;
+            // 
             // Root
             // 
             this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
@@ -264,9 +281,10 @@
             this.barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.btnCreate,
             this.btnRefresh,
-            this.btnUploadList});
+            this.btnUploadList,
+            this.btnConfirmUpload});
             this.barManager1.MainMenu = this.bar2;
-            this.barManager1.MaxItemId = 3;
+            this.barManager1.MaxItemId = 4;
             // 
             // bar2
             // 
@@ -289,7 +307,8 @@
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnCreate, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnRefresh, true),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnUploadList, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnUploadList, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnConfirmUpload, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawBorder = false;
             this.bar2.OptionsBar.DrawDragBorder = false;
@@ -322,6 +341,14 @@
             this.btnUploadList.Id = 2;
             this.btnUploadList.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnUploadList.Name = "btnUploadList";
+            this.btnUploadList.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnUploadList_ItemClick);
+            // 
+            // btnConfirmUpload
+            // 
+            this.btnConfirmUpload.Caption = "確認上傳";
+            this.btnConfirmUpload.Id = 3;
+            this.btnConfirmUpload.Name = "btnConfirmUpload";
+            this.btnConfirmUpload.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnConfirmUpload_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -412,5 +439,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gColIP;
         private DevExpress.XtraBars.BarButtonItem btnUploadList;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
+        private DevExpress.XtraBars.BarButtonItem btnConfirmUpload;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
     }
 }

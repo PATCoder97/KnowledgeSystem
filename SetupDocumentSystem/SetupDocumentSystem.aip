@@ -7,21 +7,21 @@
     <ROW Property="AI_BITMAP_DISPLAY_MODE" Value="0"/>
     <ROW Property="AI_CURRENT_YEAR" Value="2023" ValueLocId="-"/>
     <ROW Property="AI_PACKAGING_TOOL" Value="Advanced Installer 20.0 build e4706cc2" ValueLocId="-"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Bell.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_CheckCircled.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_DeleteCircled.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Edit.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Find.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Forbid.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Refresh.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Reload.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Settings.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Approval.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_BO_Department.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_BO_Employee.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_BusinessLayer.dll" Value="..\BusinessLayer\bin\Release"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Customers.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_DataAccessLayer.dll" Value="..\DataAccessLayer\bin\Release"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Bell.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_CheckCircled.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_DeleteCircled.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Edit.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Find.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Forbid.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Refresh.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Reload.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Actions_Settings.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Approval.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_BO_Department.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_BO_Employee.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_BusinessLayer.dll" Value="..\BusinessLayer\bin\Debug"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Customers.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_DataAccessLayer.dll" Value="..\DataAccessLayer\bin\Debug"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_DevExpress.BonusSkins.v22.1.dll" Value="C:\Program Files\DevExpress 22.1\Components\Bin\Framework"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_DevExpress.Charts.v22.1.Core.dll" Value="C:\Program Files\DevExpress 22.1\Components\Bin\Framework"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_DevExpress.CodeParser.v22.1.dll" Value="C:\Program Files\DevExpress 22.1\Components\Bin\Framework"/>
@@ -69,45 +69,45 @@
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_EntityFramework.dll" Value="..\packages\EntityFramework.6.4.4\lib\net45"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_ExcelDataReader.DataSet.dll" Value="..\packages\ExcelDataReader.DataSet.3.6.0\lib\net35"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_ExcelDataReader.dll" Value="..\packages\ExcelDataReader.3.6.0\lib\net45"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_KnowledgeSystem.exe" Value="..\KnowledgeSystem\bin\Release"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_KnowledgeSystem.exe.config" Value="..\KnowledgeSystem\bin\Release"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_KnowledgeSystem.pdb" Value="..\KnowledgeSystem\bin\Release"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Logger.dll" Value="..\BusinessLayer\bin\Release"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_KnowledgeSystem.exe" Value="..\KnowledgeSystem\bin\Debug"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_KnowledgeSystem.exe.config" Value="..\KnowledgeSystem\bin\Debug"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_KnowledgeSystem.pdb" Value="..\KnowledgeSystem\bin\Debug"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Logger.dll" Value="..\BusinessLayer\bin\Debug"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.IO.RecyclableMemoryStream.dll" Value="..\packages\Microsoft.IO.RecyclableMemoryStream.1.4.1\lib\net46"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.mshtml.dll" Value="C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\PublicAssemblies"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Newtonsoft.Json.dll" Value="..\packages\Newtonsoft.Json.13.0.3\lib\net45"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Search_more.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_ShowPrintPreview.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Search_more.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_ShowPrintPreview.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Spire.License.dll" Value="..\..\..\..\00. Tool\01. dll\presentation.6.1.4\net40"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Spire.Pdf.dll" Value="..\..\..\..\00. Tool\01. dll\presentation.6.1.4\net40"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Spire.Presentation.dll" Value="..\..\..\..\00. Tool\01. dll\presentation.6.1.4\net40"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Statistics.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_StepProcess.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_checked_radio_button.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_add.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_add_User_Group.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_cancel.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_classroom.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_close.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_diploma.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_edit.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_email_send.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_excel.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_heart_with_pulse.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_job.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_notification.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_ok.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_plus.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_project_setup.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_quality.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_reload.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_remove.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_signature.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_team.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_upload_to_ftp.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_loginscreen.png" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_none.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_unchecked_radio_button.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Statistics.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_StepProcess.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_checked_radio_button.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_add.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_add_User_Group.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_cancel.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_classroom.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_close.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_diploma.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_edit.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_email_send.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_excel.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_heart_with_pulse.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_job.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_notification.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_ok.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_plus.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_project_setup.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_quality.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_reload.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_remove.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_signature.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_team.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_upload_to_ftp.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_loginscreen.png" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_none.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_unchecked_radio_button.svg" Value="..\KnowledgeSystem\bin\Debug\Images"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Actions_Bell.svg" Value="Actions_Bell.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Actions_CheckCircled.svg" Value="Actions_CheckCircled.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Actions_DeleteCircled.svg" Value="Actions_DeleteCircled.svg"/>
@@ -215,10 +215,10 @@
     <ROW Property="ARPHELPTELEPHONE" Value="6779"/>
     <ROW Property="ARPPRODUCTICON" Value="DocumentSystem.exe" Type="8"/>
     <ROW Property="Manufacturer" Value="FHS"/>
-    <ROW Property="ProductCode" Value="1028:{184513EB-B63A-448C-9F7A-0B90943174A7} 1033:{184513EB-B63A-448C-9F7A-0B90943174A7} " Type="16"/>
+    <ROW Property="ProductCode" Value="1028:{C5F12FF5-ECB5-4343-AE40-15AF10EA2192} 1033:{C5F12FF5-ECB5-4343-AE40-15AF10EA2192} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="Document System"/>
-    <ROW Property="ProductVersion" Value="1.0.2"/>
+    <ROW Property="ProductVersion" Value="1.0.8"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{3D296ADD-7B3B-4B1B-8A4D-8DA669CCAF51}"/>
     <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>

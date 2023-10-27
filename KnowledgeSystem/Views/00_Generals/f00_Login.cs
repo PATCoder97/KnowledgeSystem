@@ -79,7 +79,7 @@ namespace KnowledgeSystem.Views._00_Generals
                                     Id = _userID,
                                     IdDepartment = idDeptFHS,
                                     DisplayName = userNameFHS,
-                                    DateCreate = DateTime.Now,
+                                    DateCreate = default(DateTime),
                                 };
 
                                 dm_UserBUS.Instance.Add(_userLogin);
