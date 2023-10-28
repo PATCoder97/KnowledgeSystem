@@ -69,9 +69,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                                   BackupLicense = data.BackupLicense,
                                   InvalidLicense = data.InvalidLicense,
                                   Describe = data.Describe,
-                                  UserName = $"{data.IdUser} {urs.DisplayName}",
-                                  JobName = $"{job.DisplayName}",
-                                  CourseName = $"{course.DisplayName}",
+                                  UserName = urs.DisplayName,
+                                  JobName = job.DisplayName,
+                                  CourseName = course.DisplayName,
                               }).ToList();
 
             sourceBases.DataSource = lsBasesDisplay;

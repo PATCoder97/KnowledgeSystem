@@ -128,15 +128,15 @@
             // 
             // gridColumn1
             // 
-            this.gridColumn1.Caption = "單位";
-            this.gridColumn1.FieldName = "IdDept";
+            this.gridColumn1.Caption = "人員代號";
+            this.gridColumn1.FieldName = "IdUser";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
             this.gridColumn1.VisibleIndex = 0;
             // 
             // gridColumn2
             // 
-            this.gridColumn2.Caption = "人員";
+            this.gridColumn2.Caption = "人員名稱";
             this.gridColumn2.FieldName = "UserName";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;

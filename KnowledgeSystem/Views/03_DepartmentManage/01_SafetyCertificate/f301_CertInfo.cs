@@ -240,7 +240,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                         break;
                 }
 
-                _base.Describe = txbDescribe?.EditValue.ToString();
+                _base.Describe = txbDescribe.EditValue?.ToString();
 
                 msg = $"{_base.IdDept} {_base.IdJobTitle} {_base.IdCourse} {_base.DateReceipt}";
                 switch (_eventInfo)
