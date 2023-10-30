@@ -289,6 +289,12 @@
     <Compile Include="Views\03_DepartmentManage\01_SafetyCertificate\uc301_Course.Designer.cs">
       <DependentUpon>uc301_Course.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\03_DepartmentManage\01_SafetyCertificate\uc301_SelectOutputFile.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\01_SafetyCertificate\uc301_SelectOutputFile.Designer.cs">
+      <DependentUpon>uc301_SelectOutputFile.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\04_SystemAdministrator\01_Moderator\f401_JobTitleInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -461,6 +467,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\01_SafetyCertificate\uc301_Course.resx">
       <DependentUpon>uc301_Course.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\01_SafetyCertificate\uc301_SelectOutputFile.resx">
+      <DependentUpon>uc301_SelectOutputFile.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\01_Moderator\f401_JobTitleInfo.resx">
       <DependentUpon>f401_JobTitleInfo.cs</DependentUpon>

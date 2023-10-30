@@ -5,6 +5,7 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using KnowledgeSystem.Configs;
+using KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,6 +31,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
         List<BaseDisplay> lsBasesDisplay = new List<BaseDisplay>();
         BindingSource sourceBases = new BindingSource();
 
+        List<dm_User> lsUser = new List<dm_User>();
+
         private class BaseDisplay : dt301_Base
         {
             public string UserName { get; set; }
@@ -48,7 +51,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
         {
             helper.SaveViewInfo();
             var lsBases = dt301_BaseBUS.Instance.GetList();
-            var lsUser = dm_UserBUS.Instance.GetList();
+            lsUser = dm_UserBUS.Instance.GetList();
             var lsJobs = dm_JobTitleBUS.Instance.GetList();
             var lsCourses = dt301_CourseBUS.Instance.GetList();
 
@@ -185,9 +188,35 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
 
         private void btnExportExcel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            uc301_SelectOutputFile ucInfo = new uc301_SelectOutputFile();
+            if (XtraDialog.Show(ucInfo, "選導出表單", MessageBoxButtons.OKCancel) != DialogResult.OK)
+                return;
 
+            DateTime today = DateTime.Today;
+            int currentQuarter = (today.Month - 1) / 3 + 1;
+            int nextQuarter = 4;
+            int idCounter = 1;
+
+            DateTime startOfQuarter = new DateTime(today.Year, 3 * nextQuarter - 2, 1);
+            DateTime endOfQuarter = startOfQuarter.AddMonths(3).AddSeconds(-1);
+
+            var lsQuery = (from data in lsBasesDisplay
+                           where data.ValidLicense && (data.ExpDate.HasValue ? (data.ExpDate >= startOfQuarter && data.ExpDate <= endOfQuarter) : false)
+                           join usr in lsUser on data.IdUser equals usr.Id
+                           select new
+                           {
+                               Id = idCounter++,
+                               IdDept = usr.IdDepartment,
+                               DeptName = "",
+                               UserID = usr.Id,
+                               UserNameTW = usr.DisplayName,
+                               UserNameVN = usr.DisplayNameVN,
+                               CitizenID = usr.CitizenID,
+                               DOB = usr.DOB,
+                               CourseName = data.CourseName,
+                               JobName = data.JobName,
+                               Nationality = usr.Nationality.Replace("TW", "台灣").Replace("VN", "越南").Replace("CN", "中國")
+                           }).ToList();
         }
-
-
     }
 }
