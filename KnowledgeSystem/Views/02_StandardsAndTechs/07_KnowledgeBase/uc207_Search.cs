@@ -165,7 +165,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                                       UserUpload = data.UserUpload,
                                       UserUploadName = userUpload_.DisplayName,
                                       TypeName = type_.DisplayName,
-                                      Keyword = _haveKeyword ? null : data.Keyword,
+                                      Keyword = _haveKeyword ? data.Keyword : null,
                                       UserProcessName = userProcess_.DisplayName,
                                       UploadDate = data.UploadDate,
                                       nonUnicodeDisplayName = convertToUnSign3(data.DisplayName),
@@ -175,7 +175,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
             // Đặt nguồn dữ liệu của sourceKnowledge là danh sách các đối tượng DataDisplay
             sourceKnowledge.DataSource = lsDataDisplays;
-
 
             // Điều chỉnh độ rộng các cột của gvData
             gvData.BestFitColumns();
