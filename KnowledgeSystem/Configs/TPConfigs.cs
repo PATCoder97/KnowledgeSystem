@@ -37,6 +37,11 @@ namespace KnowledgeSystem.Configs
         public static dm_User LoginUser { get; set; }
         public static string DomainComputer { get; set; }
         public static bool LoginSuccessful { get; set; }
+
+        public static string DocumentPath()
+        {
+            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), SoftNameTW);
+        }
     }
 
     public class ChartDataSource

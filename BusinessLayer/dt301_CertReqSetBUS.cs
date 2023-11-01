@@ -41,6 +41,22 @@ namespace BusinessLayer
             }
         }
 
+        public List<dt301_CertReqSetting> GetListByDept(string _idDept)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt301_CertReqSetting.Where(r => r.IdDept == _idDept).OrderByDescending(r => r.Id).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public List<dt301_CertReqSetting> GetListByJobAndDept(string _idJobTitle, string _idDept)
         {
             try
