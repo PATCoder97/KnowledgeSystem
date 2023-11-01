@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using BusinessLayer;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace NotesMail
 {
@@ -20,8 +22,8 @@ namespace NotesMail
                 var mail = new Mail()
                 {
                     //To = "VNW0014732@VNFPG",
-                    To = mailNotes.lsTO != null ? string.Join(",", mailNotes.lsTO.Select(r => $"{r}@VNFPG")) : "",
-                    CC = mailNotes.lsCC != null ? string.Join(",", mailNotes.lsCC.Select(r => $"{r}@VNFPG")) : "",
+                    lsTO = mailNotes.lsTO,
+                    lsCC = mailNotes.lsCC,
                     Subject = mailNotes.Subject,
                     SystemName = "冶金文件管理系統",
                     SystemOwner = "潘英俊(分機:6779)",
@@ -48,16 +50,39 @@ namespace NotesMail
 
                 var json_string = JsonConvert.SerializeObject(mail);
                 var requestContent = new StringContent(json_string, Encoding.UTF8, "application/json");
+
+#if DEBUG
+                return "Debug OK";
+#else
                 var response = await client.PostAsync("/api/Mail", requestContent);
                 return response.StatusCode.ToString();
+#endif
             }
+        }
+
+        internal static void SaveFileHtml(string nameFile, string value)
+        {
+            string folderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, DateTime.Today.ToString("yyyy"), DateTime.Today.ToString("MM"), DateTime.Today.ToString("dd"));
+            Directory.CreateDirectory(folderPath);
+
+            string pathFileSave = Path.Combine(folderPath, nameFile);
+
+            File.WriteAllText(pathFileSave, value);
         }
     }
     public class Mail
     {
-        public string To { get; set; }
+        public string To
+        {
+            get { return lsTO != null ? string.Join(",", lsTO.Select(r => $"{r}@VNFPG")) : ""; }
+            set { }
+        }
         public List<string> lsTO { get; set; }
-        public string CC { get; set; }
+        public string CC
+        {
+            get { return lsCC != null ? string.Join(",", lsCC.Select(r => $"{r}@VNFPG")) : ""; }
+            set { }
+        }
         public List<string> lsCC { get; set; }
         public List<AttachmentFile> Attachments { get; set; }
         public string Subject { get; set; }

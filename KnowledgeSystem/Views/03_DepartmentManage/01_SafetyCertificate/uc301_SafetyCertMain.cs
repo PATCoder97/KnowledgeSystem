@@ -23,6 +23,7 @@ using System.IO;
 using System.Diagnostics;
 using System.Xml.XPath;
 using DevExpress.ClipboardSource.SpreadsheetML;
+using DevExpress.XtraSplashScreen;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
 {
@@ -453,20 +454,23 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
 
             if (lsFiles == null) return;
 
-            startOfQuarter = new DateTime(DateTime.Today.Year, 3 * quarter - 2, 1);
-            endOfQuarter = startOfQuarter.AddMonths(3).AddSeconds(-1);
-
-            pathDocument = Path.Combine(TPConfigs.DocumentPath(), $"工安證照 {DateTime.Now:yyyyMMddHHmm}");
-            if (!Directory.Exists(pathDocument))
-                Directory.CreateDirectory(pathDocument);
-
-            if (lsFiles.ContainsKey("File3"))
+            using (var handle = SplashScreenManager.ShowOverlayForm(this))
             {
-                File3(lsFiles["File3"]);
-            }
-            if (lsFiles.ContainsKey("File5_2"))
-            {
-                File5_2(lsFiles["File5_2"]);
+                startOfQuarter = new DateTime(DateTime.Today.Year, 3 * quarter - 2, 1);
+                endOfQuarter = startOfQuarter.AddMonths(3).AddSeconds(-1);
+
+                pathDocument = Path.Combine(TPConfigs.DocumentPath(), $"工安證照 {DateTime.Now:yyyyMMddHHmm}");
+                if (!Directory.Exists(pathDocument))
+                    Directory.CreateDirectory(pathDocument);
+
+                if (lsFiles.ContainsKey("File3"))
+                {
+                    File3(lsFiles["File3"]);
+                }
+                if (lsFiles.ContainsKey("File5_2"))
+                {
+                    File5_2(lsFiles["File5_2"]);
+                }
             }
 
             Process.Start(pathDocument);

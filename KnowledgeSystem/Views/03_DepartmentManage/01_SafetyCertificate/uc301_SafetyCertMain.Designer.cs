@@ -33,6 +33,7 @@
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.gcData = new DevExpress.XtraGrid.GridControl();
             this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -54,7 +55,6 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-            this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
@@ -128,6 +128,14 @@
             this.gvData.OptionsView.ShowGroupPanel = false;
             this.gvData.DoubleClick += new System.EventHandler(this.gvData_DoubleClick);
             // 
+            // gridColumn11
+            // 
+            this.gridColumn11.Caption = "ID";
+            this.gridColumn11.FieldName = "Id";
+            this.gridColumn11.Name = "gridColumn11";
+            this.gridColumn11.Visible = true;
+            this.gridColumn11.VisibleIndex = 0;
+            // 
             // gridColumn1
             // 
             this.gridColumn1.Caption = "人員代號";
@@ -170,7 +178,7 @@
             // 
             // gridColumn6
             // 
-            this.gridColumn6.Caption = "有效期至";
+            this.gridColumn6.Caption = "有效期限";
             this.gridColumn6.FieldName = "ExpDate";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
@@ -340,14 +348,6 @@
             this.barDockControlRight.Location = new System.Drawing.Point(979, 49);
             this.barDockControlRight.Manager = this.barManagerTP;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 418);
-            // 
-            // gridColumn11
-            // 
-            this.gridColumn11.Caption = "ID";
-            this.gridColumn11.FieldName = "Id";
-            this.gridColumn11.Name = "gridColumn11";
-            this.gridColumn11.Visible = true;
-            this.gridColumn11.VisibleIndex = 0;
             // 
             // uc301_SafetyCertMain
             // 

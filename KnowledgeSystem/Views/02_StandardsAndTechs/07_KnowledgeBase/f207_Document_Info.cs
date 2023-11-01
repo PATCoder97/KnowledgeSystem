@@ -287,7 +287,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             string userIdLogin = TPConfigs.LoginUser.Id;
 
             if (cbbUserUpload.EditValue.ToString() == userIdLogin ||
-                cbbUserProcess.EditValue.ToString() == userIdLogin)
+                cbbUserProcess.EditValue.ToString() == userIdLogin ||
+                _event207 == Event207DocInfo.Approval)
             {
                 return new Securityinfo
                 {
@@ -757,7 +758,17 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 string _nameTW = RemoveDiacriticalMarks(txbNameTW.Text.Trim());
                 string _nameVN = txbNameVN.Text.Trim();
                 string _nameEN = RemoveDiacriticalMarks(txbNameEN.Text.Trim());
-                string _keyword = Regex.Replace(txbKeyword.Text, @"(\s{2,}|\n{2,}|[\t])", " ").Trim();
+                string _keyword = Regex.Replace(txbKeyword.Text, @"[\t\n\r\s]+", match =>
+                {
+                    if (match.Value.Contains("\n"))
+                    {
+                        return "\r\n";
+                    }
+                    else
+                    {
+                        return " ";
+                    }
+                }).Trim();
 
                 dt207_Base knowledge = new dt207_Base()
                 {
@@ -866,7 +877,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             Attachments dataRow = gvFiles.GetRow(focusRow) as Attachments;
             string documentsFile = Path.Combine(TPConfigs.PathKnowledgeFile, dataRow.EncryptionName);
 
-            // Lưu lại lịch sử xem file
+            // Lưu lại lịch sử xem file, Không lưu khi đang ký
             var IsProcessing = dt207_DocProcessingBUS.Instance.CheckItemProcessing(_idBaseDocument);
             if (!string.IsNullOrEmpty(_idBaseDocument) && !IsProcessing)
             {

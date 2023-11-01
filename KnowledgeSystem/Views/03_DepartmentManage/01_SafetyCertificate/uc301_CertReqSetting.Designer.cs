@@ -166,12 +166,18 @@
             // 
             // gcData
             // 
+            this.gcData.EmbeddedNavigator.Buttons.Append.Visible = false;
+            this.gcData.EmbeddedNavigator.Buttons.CancelEdit.Visible = false;
+            this.gcData.EmbeddedNavigator.Buttons.Edit.Visible = false;
+            this.gcData.EmbeddedNavigator.Buttons.EndEdit.Visible = false;
+            this.gcData.EmbeddedNavigator.Buttons.Remove.Visible = false;
             this.gcData.Location = new System.Drawing.Point(12, 12);
             this.gcData.MainView = this.gvData;
             this.gcData.MenuManager = this.barManagerTP;
             this.gcData.Name = "gcData";
             this.gcData.Size = new System.Drawing.Size(881, 464);
             this.gcData.TabIndex = 6;
+            this.gcData.UseEmbeddedNavigator = true;
             this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvData});
             // 
@@ -236,7 +242,7 @@
             // 
             // gridColumn5
             // 
-            this.gridColumn5.Caption = "新編制人數";
+            this.gridColumn5.Caption = "編制人數";
             this.gridColumn5.FieldName = "NewHeadcount";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
@@ -244,7 +250,7 @@
             // 
             // gridColumn6
             // 
-            this.gridColumn6.Caption = "新實際人數";
+            this.gridColumn6.Caption = "實際人數";
             this.gridColumn6.FieldName = "ActualHeadcount";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;

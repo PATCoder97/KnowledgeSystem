@@ -182,7 +182,7 @@
             // 
             this.gridColumn5.AppearanceCell.Options.UseTextOptions = true;
             this.gridColumn5.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn5.Caption = "日期創建";
+            this.gridColumn5.Caption = "報到日期";
             this.gridColumn5.FieldName = "DateCreate";
             this.gridColumn5.MinWidth = 23;
             this.gridColumn5.Name = "gridColumn5";

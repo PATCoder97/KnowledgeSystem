@@ -106,6 +106,22 @@ namespace BusinessLayer
             return GetNewBaseId(_idDept, _indexId + 1, _startIdStr);
         }
 
+        public dt207_Base GetItemByOnlyId(string _id)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt207_Base.Where(r => r.Id == _id).FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public dt207_Base GetItemById(string _id)
         {
             try
