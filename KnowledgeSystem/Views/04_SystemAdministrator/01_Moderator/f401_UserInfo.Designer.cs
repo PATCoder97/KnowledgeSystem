@@ -36,9 +36,9 @@
             this.btnDelete = new DevExpress.XtraBars.BarButtonItem();
             this.btnConfirm = new DevExpress.XtraBars.BarButtonItem();
             this.btnSuspension = new DevExpress.XtraBars.BarButtonItem();
-            this.btnResign = new DevExpress.XtraBars.BarButtonItem();
-            this.btnTransfer = new DevExpress.XtraBars.BarButtonItem();
             this.btnConferred = new DevExpress.XtraBars.BarButtonItem();
+            this.btnTransfer = new DevExpress.XtraBars.BarButtonItem();
+            this.btnResign = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -219,13 +219,13 @@
             this.btnSuspension.Name = "btnSuspension";
             this.btnSuspension.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSuspension_ItemClick);
             // 
-            // btnResign
+            // btnConferred
             // 
-            this.btnResign.Caption = "離職";
-            this.btnResign.Id = 6;
-            this.btnResign.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnResign.Name = "btnResign";
-            this.btnResign.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnResign_ItemClick);
+            this.btnConferred.Caption = "回來";
+            this.btnConferred.Id = 7;
+            this.btnConferred.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnConferred.Name = "btnConferred";
+            this.btnConferred.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnConferred_ItemClick);
             // 
             // btnTransfer
             // 
@@ -235,13 +235,13 @@
             this.btnTransfer.Name = "btnTransfer";
             this.btnTransfer.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnTransfer_ItemClick);
             // 
-            // btnConferred
+            // btnResign
             // 
-            this.btnConferred.Caption = "回來";
-            this.btnConferred.Id = 7;
-            this.btnConferred.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnConferred.Name = "btnConferred";
-            this.btnConferred.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnConferred_ItemClick);
+            this.btnResign.Caption = "離職";
+            this.btnResign.Id = 6;
+            this.btnResign.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnResign.Name = "btnResign";
+            this.btnResign.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnResign_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -396,12 +396,12 @@
             // 
             // gcAllRole
             // 
-            this.gcAllRole.Location = new System.Drawing.Point(20, 295);
+            this.gcAllRole.Location = new System.Drawing.Point(20, 297);
             this.gcAllRole.MainView = this.gvAllRole;
             this.gcAllRole.MenuManager = this.barManagerTP;
             this.gcAllRole.Name = "gcAllRole";
             this.gcAllRole.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
-            this.gcAllRole.Size = new System.Drawing.Size(330, 271);
+            this.gcAllRole.Size = new System.Drawing.Size(330, 269);
             this.gcAllRole.TabIndex = 8;
             this.gcAllRole.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvAllRole});
@@ -555,10 +555,10 @@
             // 
             // gcChooseRole
             // 
-            this.gcChooseRole.Location = new System.Drawing.Point(360, 295);
+            this.gcChooseRole.Location = new System.Drawing.Point(360, 297);
             this.gcChooseRole.MainView = this.gvChooseRole;
             this.gcChooseRole.Name = "gcChooseRole";
-            this.gcChooseRole.Size = new System.Drawing.Size(330, 271);
+            this.gcChooseRole.Size = new System.Drawing.Size(330, 269);
             this.gcChooseRole.TabIndex = 8;
             this.gcChooseRole.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvChooseRole});
@@ -703,10 +703,10 @@
             // layoutControlItem5
             // 
             this.layoutControlItem5.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.layoutControlItem5.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem5.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
             this.layoutControlItem5.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem5.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem5.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem5.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
             this.layoutControlItem5.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem5.Control = this.txbDOB;
             this.layoutControlItem5.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
@@ -720,10 +720,10 @@
             // layoutControlItem6
             // 
             this.layoutControlItem6.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.layoutControlItem6.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem6.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
             this.layoutControlItem6.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem6.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem6.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem6.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
             this.layoutControlItem6.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem6.Control = this.txbCCCD;
             this.layoutControlItem6.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
@@ -737,10 +737,10 @@
             // layoutControlItem3
             // 
             this.layoutControlItem3.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.layoutControlItem3.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem3.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
             this.layoutControlItem3.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem3.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem3.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem3.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
             this.layoutControlItem3.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem3.Control = this.txbUserNameVN;
             this.layoutControlItem3.Location = new System.Drawing.Point(0, 36);
@@ -751,17 +751,10 @@
             // 
             // lcRole
             // 
-            this.lcRole.AppearanceGroup.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lcRole.AppearanceGroup.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lcRole.AppearanceGroup.ForeColor = System.Drawing.Color.Black;
             this.lcRole.AppearanceGroup.Options.UseFont = true;
             this.lcRole.AppearanceGroup.Options.UseForeColor = true;
-            this.lcRole.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.lcRole.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
-            this.lcRole.AppearanceItemCaption.Options.UseFont = true;
-            this.lcRole.AppearanceItemCaption.Options.UseForeColor = true;
-            this.lcRole.AppearanceTabPage.Header.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.lcRole.AppearanceTabPage.Header.Options.UseFont = true;
-            this.lcRole.GroupStyle = DevExpress.Utils.GroupStyle.Light;
             this.lcRole.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem9,
             this.layoutControlItem10});
@@ -777,7 +770,7 @@
             this.layoutControlItem9.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem9.Name = "layoutControlItem9";
             this.layoutControlItem9.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 5, 2, 2);
-            this.layoutControlItem9.Size = new System.Drawing.Size(337, 275);
+            this.layoutControlItem9.Size = new System.Drawing.Size(337, 273);
             this.layoutControlItem9.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem9.TextVisible = false;
             // 
@@ -789,7 +782,7 @@
             this.layoutControlItem10.Location = new System.Drawing.Point(337, 0);
             this.layoutControlItem10.Name = "layoutControlItem10";
             this.layoutControlItem10.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 2, 2, 2);
-            this.layoutControlItem10.Size = new System.Drawing.Size(337, 275);
+            this.layoutControlItem10.Size = new System.Drawing.Size(337, 273);
             this.layoutControlItem10.Text = "layoutControlItem9";
             this.layoutControlItem10.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem10.TextVisible = false;
@@ -797,10 +790,10 @@
             // layoutControlItem8
             // 
             this.layoutControlItem8.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.layoutControlItem8.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem8.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
             this.layoutControlItem8.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem8.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem8.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem8.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
             this.layoutControlItem8.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem8.Control = this.cbbJobTitle;
             this.layoutControlItem8.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
@@ -814,8 +807,10 @@
             // layoutControlItem11
             // 
             this.layoutControlItem11.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.layoutControlItem11.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
             this.layoutControlItem11.AppearanceItemCaption.Options.UseFont = true;
-            this.layoutControlItem11.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem11.AppearanceItemCaption.Options.UseForeColor = true;
+            this.layoutControlItem11.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
             this.layoutControlItem11.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem11.Control = this.txbDateStart;
             this.layoutControlItem11.Location = new System.Drawing.Point(345, 36);
@@ -827,10 +822,10 @@
             // layoutControlItem1
             // 
             this.layoutControlItem1.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.layoutControlItem1.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem1.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
             this.layoutControlItem1.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem1.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem1.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem1.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
             this.layoutControlItem1.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem1.Control = this.txbUserNameTW;
             this.layoutControlItem1.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
@@ -844,10 +839,10 @@
             // layoutControlItem4
             // 
             this.layoutControlItem4.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.layoutControlItem4.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem4.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
             this.layoutControlItem4.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem4.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem4.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem4.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
             this.layoutControlItem4.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem4.Control = this.cbbDept;
             this.layoutControlItem4.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
@@ -861,10 +856,10 @@
             // layoutControlItem7
             // 
             this.layoutControlItem7.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.layoutControlItem7.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem7.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
             this.layoutControlItem7.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem7.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem7.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem7.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
             this.layoutControlItem7.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem7.Control = this.cbbNationality;
             this.layoutControlItem7.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
@@ -878,8 +873,10 @@
             // layoutControlItem16
             // 
             this.layoutControlItem16.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.layoutControlItem16.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
             this.layoutControlItem16.AppearanceItemCaption.Options.UseFont = true;
-            this.layoutControlItem16.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem16.AppearanceItemCaption.Options.UseForeColor = true;
+            this.layoutControlItem16.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
             this.layoutControlItem16.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem16.Control = this.cbbStatus;
             this.layoutControlItem16.Location = new System.Drawing.Point(0, 216);
@@ -891,8 +888,10 @@
             // layoutControlItem13
             // 
             this.layoutControlItem13.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.layoutControlItem13.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
             this.layoutControlItem13.AppearanceItemCaption.Options.UseFont = true;
-            this.layoutControlItem13.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem13.AppearanceItemCaption.Options.UseForeColor = true;
+            this.layoutControlItem13.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
             this.layoutControlItem13.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem13.Control = this.txbPhone1;
             this.layoutControlItem13.Location = new System.Drawing.Point(345, 144);
@@ -904,8 +903,10 @@
             // layoutControlItem14
             // 
             this.layoutControlItem14.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.layoutControlItem14.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
             this.layoutControlItem14.AppearanceItemCaption.Options.UseFont = true;
-            this.layoutControlItem14.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem14.AppearanceItemCaption.Options.UseForeColor = true;
+            this.layoutControlItem14.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
             this.layoutControlItem14.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem14.Control = this.txbPhone2;
             this.layoutControlItem14.CustomizationFormText = "家人電話";
@@ -918,8 +919,10 @@
             // layoutControlItem15
             // 
             this.layoutControlItem15.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.layoutControlItem15.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
             this.layoutControlItem15.AppearanceItemCaption.Options.UseFont = true;
-            this.layoutControlItem15.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem15.AppearanceItemCaption.Options.UseForeColor = true;
+            this.layoutControlItem15.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
             this.layoutControlItem15.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem15.Control = this.txbAddr;
             this.layoutControlItem15.Location = new System.Drawing.Point(345, 216);
@@ -931,10 +934,10 @@
             // layoutControlItem2
             // 
             this.layoutControlItem2.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.layoutControlItem2.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem2.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
             this.layoutControlItem2.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem2.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem2.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem2.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
             this.layoutControlItem2.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem2.Control = this.txbUserId;
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
@@ -946,8 +949,10 @@
             // layoutControlItem12
             // 
             this.layoutControlItem12.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.layoutControlItem12.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
             this.layoutControlItem12.AppearanceItemCaption.Options.UseFont = true;
-            this.layoutControlItem12.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem12.AppearanceItemCaption.Options.UseForeColor = true;
+            this.layoutControlItem12.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
             this.layoutControlItem12.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem12.Control = this.cbbSex;
             this.layoutControlItem12.Location = new System.Drawing.Point(345, 0);
@@ -958,6 +963,8 @@
             // 
             // f401_UserInfo
             // 
+            this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
+            this.Appearance.Options.UseBackColor = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(710, 635);
