@@ -683,7 +683,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             if (permissionAttachments.DeleteInfo != true)
             {
-                XtraMessageBox.Show(TPConfigs.NoPermission, TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                DefaultMsg.MsgNoPermission();
                 return;
             }
 
@@ -866,7 +866,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             if (permissionAttachments.ReadFile != true)
             {
-                XtraMessageBox.Show(TPConfigs.NoPermission, TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                DefaultMsg.MsgNoPermission();
                 return;
             }
 
@@ -914,7 +914,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             if (permissionAttachments.UpdateInfo != true)
             {
-                XtraMessageBox.Show(TPConfigs.NoPermission, TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                DefaultMsg.MsgNoPermission();
                 return;
             }
 

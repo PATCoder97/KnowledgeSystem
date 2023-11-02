@@ -38,24 +38,35 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
         BindingSource _sourceAllRole = new BindingSource();
         BindingSource _sourceChooseRole = new BindingSource();
 
+        private enum UpdateEvent
+        {
+            Suspension,
+            Transfer,
+            Resign,
+            Conferred
+        }
+
         private void InitializeIcon()
         {
             btnEdit.ImageOptions.SvgImage = TPSvgimages.Edit;
             btnDelete.ImageOptions.SvgImage = TPSvgimages.Remove;
             btnConfirm.ImageOptions.SvgImage = TPSvgimages.Confirm;
+
+            btnSuspension.ImageOptions.SvgImage = TPSvgimages.Suspension;
+            btnTransfer.ImageOptions.SvgImage = TPSvgimages.Transfer;
+            btnResign.ImageOptions.SvgImage = TPSvgimages.Resign;
+            btnConferred.ImageOptions.SvgImage = TPSvgimages.Conferred;
         }
 
         private void EnabledController(bool _enable = true)
         {
             txbUserNameVN.Enabled = _enable;
             txbUserNameTW.Enabled = _enable;
-            cbbDept.Enabled = _enable;
             txbDOB.Enabled = _enable;
             txbCCCD.Enabled = _enable;
             cbbNationality.Enabled = _enable;
             cbbJobTitle.Enabled = _enable;
             cbbSex.Enabled = _enable;
-            cbbStatus.Enabled = _enable;
             txbAddr.Enabled = _enable;
             txbPhone1.Enabled = _enable;
             txbPhone2.Enabled = _enable;
@@ -66,6 +77,9 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
         {
             txbUserId.Enabled = false;
             txbUserId.ReadOnly = false;
+            cbbDept.Enabled = false;
+            cbbStatus.Enabled = false;
+
             lcRole.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             Size = new Size(600, 358);
 
@@ -75,9 +89,17 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                     Text = $"新增{_formName}";
 
                     txbUserId.Enabled = true;
+                    cbbDept.Enabled = true;
+                    cbbStatus.Enabled = true;
+
                     btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                     btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+
+                    btnSuspension.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                    btnTransfer.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                    btnResign.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                    btnConferred.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
 
                     EnabledController();
                     break;
@@ -90,6 +112,11 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                     btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                     btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+
+                    btnSuspension.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                    btnTransfer.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                    btnResign.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                    btnConferred.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
 
                     if (IsSysAdmin)
                     {
@@ -105,6 +132,12 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                     btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                     btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+
+                    btnTransfer.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                    btnResign.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                    btnSuspension.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                    btnConferred.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+
                     EnabledController(false);
                     break;
                 case EventFormInfo.View:
@@ -113,6 +146,29 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                     btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                     btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+
+
+                    if (_user.Status == 0)
+                    {
+                        btnSuspension.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                        btnTransfer.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                        btnResign.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                        btnConferred.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                    }
+                    else if (_user.Status == 2)
+                    {
+                        btnSuspension.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                        btnTransfer.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                        btnResign.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                        btnConferred.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                    }
+                    else
+                    {
+                        btnSuspension.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                        btnTransfer.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                        btnResign.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                        btnConferred.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                    }
 
                     EnabledController(false);
                     break;
@@ -167,8 +223,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                     _user.DateCreate = DateTime.Parse(_user.DateCreate.ToShortDateString());
 
                     txbUserId.EditValue = _user.Id;
-                    txbUserNameVN.EditValue = _user.DisplayNameVN;
-                    txbUserNameTW.EditValue = _user.DisplayName.Split('\n')[0];
+                    txbUserNameVN.EditValue = _user.DisplayNameVN?.Trim();
+                    txbUserNameTW.EditValue = _user.DisplayName.Split('\n')[0]?.Trim();
                     cbbDept.EditValue = _user.IdDepartment;
                     cbbJobTitle.EditValue = _user.JobCode;
                     txbDOB.EditValue = _user.DOB;
@@ -215,8 +271,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             string msg = "";
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
             {
-                _user.DisplayName = txbUserNameTW.EditValue?.ToString();
-                _user.DisplayNameVN = txbUserNameVN.EditValue?.ToString();
+                _user.DisplayName = txbUserNameTW.EditValue?.ToString().Trim();
+                _user.DisplayNameVN = txbUserNameVN.EditValue?.ToString().Trim();
                 _user.IdDepartment = cbbDept.EditValue?.ToString();
                 _user.JobCode = cbbJobTitle.EditValue?.ToString();
                 _user.DOB = txbDOB.DateTime;
@@ -260,7 +316,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                         }
                         break;
                     case EventFormInfo.Delete:
-                        var dialogResult = XtraMessageBox.Show($"Bạn xác nhận muốn xoá quyền hạn: {_user.DisplayName}", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        var dialogResult = XtraMessageBox.Show($"您確認刪除人員: {_user.DisplayName}", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                         if (dialogResult != DialogResult.Yes) return;
 
                         result = dm_UserBUS.Instance.Remove(_user.Id);
@@ -331,6 +387,35 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
         private void cbbDept_AutoSearch(object sender, DevExpress.XtraEditors.Controls.LookUpEditAutoSearchEventArgs e)
         {
             e.ClearHighlight();
+        }
+
+        private void btnSuspension_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            _eventInfo = EventFormInfo.Update;
+            LockControl();
+
+            cbbStatus.EditValue = TPConfigs.lsUserStatus[2];
+        }
+
+        private void btnConferred_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            _eventInfo = EventFormInfo.Update;
+            LockControl();
+
+            cbbStatus.EditValue = TPConfigs.lsUserStatus[0];
+        }
+
+        private void btnTransfer_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
+        }
+
+        private void btnResign_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            _eventInfo = EventFormInfo.Update;
+            LockControl();
+
+            cbbStatus.EditValue = TPConfigs.lsUserStatus[1];
         }
     }
 }

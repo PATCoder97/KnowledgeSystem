@@ -146,9 +146,7 @@ namespace KnowledgeSystem.Views._00_Generals
                     UpdateInfo newUpdate = lsUpdateInfos.First();
                     if (newUpdate.version != AppCopyRight.version)
                     {
-                        string msg = "Phần mềm có bản cập nhật mới.\r\nBấm OK để hệ thống cập nhật,\r\nVui lòng mở lại phần mềm sau khi cập nhật thành công!\r\n";
-                        msg += "該系統有新的更新。\r\n按確定更新系統，\r\n更新成功後請重新打開系統！";
-                        var dialogResult = XtraMessageBox.Show(msg, TPConfigs.SoftNameTW, MessageBoxButtons.OKCancel);
+                        var dialogResult = DefaultMsg.MsgUpdateSoftware();
                         if (dialogResult == DialogResult.OK)
                         {
                             f00_UpdateSoftware f00_Update = new f00_UpdateSoftware(newUpdate.url);
@@ -189,7 +187,7 @@ namespace KnowledgeSystem.Views._00_Generals
             bool IsGranted = AppPermission.Instance.CheckAppPermission(IdForm_);
             if (!IsGranted)
             {
-                XtraMessageBox.Show(TPConfigs.NoPermission, TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                DefaultMsg.MsgNoPermission();
                 return;
             }
 

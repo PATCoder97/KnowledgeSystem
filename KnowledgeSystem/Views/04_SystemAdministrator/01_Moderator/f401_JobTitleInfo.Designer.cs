@@ -206,10 +206,10 @@
             // layoutControlItem3
             // 
             this.layoutControlItem3.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.layoutControlItem3.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem3.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
             this.layoutControlItem3.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem3.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem3.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem3.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
             this.layoutControlItem3.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem3.Control = this.txbNewId;
             this.layoutControlItem3.CustomizationFormText = "職務代號";
@@ -222,10 +222,10 @@
             // layoutControlItem4
             // 
             this.layoutControlItem4.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.layoutControlItem4.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem4.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
             this.layoutControlItem4.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem4.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem4.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem4.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
             this.layoutControlItem4.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem4.Control = this.txbNewDisplayName;
             this.layoutControlItem4.Location = new System.Drawing.Point(0, 36);
@@ -236,6 +236,8 @@
             // 
             // f401_JobTitleInfo
             // 
+            this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
+            this.Appearance.Options.UseBackColor = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(384, 141);

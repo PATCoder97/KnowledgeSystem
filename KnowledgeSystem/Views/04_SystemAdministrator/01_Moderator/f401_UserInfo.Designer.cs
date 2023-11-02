@@ -35,6 +35,10 @@
             this.btnEdit = new DevExpress.XtraBars.BarButtonItem();
             this.btnDelete = new DevExpress.XtraBars.BarButtonItem();
             this.btnConfirm = new DevExpress.XtraBars.BarButtonItem();
+            this.btnSuspension = new DevExpress.XtraBars.BarButtonItem();
+            this.btnResign = new DevExpress.XtraBars.BarButtonItem();
+            this.btnTransfer = new DevExpress.XtraBars.BarButtonItem();
+            this.btnConferred = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -139,16 +143,20 @@
             this.barManagerTP.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.btnEdit,
             this.btnDelete,
-            this.btnConfirm});
+            this.btnConfirm,
+            this.btnSuspension,
+            this.btnTransfer,
+            this.btnResign,
+            this.btnConferred});
             this.barManagerTP.MainMenu = this.bar2;
-            this.barManagerTP.MaxItemId = 4;
+            this.barManagerTP.MaxItemId = 8;
             // 
             // bar2
             // 
             this.bar2.BarAppearance.Disabled.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.bar2.BarAppearance.Disabled.Options.UseFont = true;
             this.bar2.BarAppearance.Hovered.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.bar2.BarAppearance.Hovered.ForeColor = System.Drawing.Color.Black;
+            this.bar2.BarAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
             this.bar2.BarAppearance.Hovered.Options.UseFont = true;
             this.bar2.BarAppearance.Hovered.Options.UseForeColor = true;
             this.bar2.BarAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
@@ -167,7 +175,11 @@
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnEdit, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnDelete, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnConfirm, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnConfirm, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnSuspension, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnConferred, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnTransfer, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnResign, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawDragBorder = false;
             this.bar2.OptionsBar.MultiLine = true;
@@ -198,6 +210,38 @@
             this.btnConfirm.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnConfirm_ItemClick);
+            // 
+            // btnSuspension
+            // 
+            this.btnSuspension.Caption = "留職停薪";
+            this.btnSuspension.Id = 4;
+            this.btnSuspension.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnSuspension.Name = "btnSuspension";
+            this.btnSuspension.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSuspension_ItemClick);
+            // 
+            // btnResign
+            // 
+            this.btnResign.Caption = "離職";
+            this.btnResign.Id = 6;
+            this.btnResign.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnResign.Name = "btnResign";
+            this.btnResign.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnResign_ItemClick);
+            // 
+            // btnTransfer
+            // 
+            this.btnTransfer.Caption = "調任";
+            this.btnTransfer.Id = 5;
+            this.btnTransfer.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnTransfer.Name = "btnTransfer";
+            this.btnTransfer.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnTransfer_ItemClick);
+            // 
+            // btnConferred
+            // 
+            this.btnConferred.Caption = "回來";
+            this.btnConferred.Id = 7;
+            this.btnConferred.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnConferred.Name = "btnConferred";
+            this.btnConferred.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnConferred_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -435,11 +479,11 @@
             this.cbbDept.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.cbbDept.Properties.Appearance.Options.UseFont = true;
             this.cbbDept.Properties.Appearance.Options.UseForeColor = true;
-            this.cbbDept.Properties.AppearanceDropDown.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbDept.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.cbbDept.Properties.AppearanceDropDown.ForeColor = System.Drawing.Color.Black;
             this.cbbDept.Properties.AppearanceDropDown.Options.UseFont = true;
             this.cbbDept.Properties.AppearanceDropDown.Options.UseForeColor = true;
-            this.cbbDept.Properties.AppearanceDropDownHeader.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbDept.Properties.AppearanceDropDownHeader.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbbDept.Properties.AppearanceDropDownHeader.ForeColor = System.Drawing.Color.Black;
             this.cbbDept.Properties.AppearanceDropDownHeader.Options.UseFont = true;
             this.cbbDept.Properties.AppearanceDropDownHeader.Options.UseForeColor = true;
@@ -489,6 +533,8 @@
             this.cbbNationality.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.cbbNationality.Properties.Appearance.Options.UseFont = true;
             this.cbbNationality.Properties.Appearance.Options.UseForeColor = true;
+            this.cbbNationality.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbNationality.Properties.AppearanceDropDown.Options.UseFont = true;
             this.cbbNationality.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbbNationality.Size = new System.Drawing.Size(253, 32);
@@ -1027,5 +1073,9 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem15;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem16;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem12;
+        private DevExpress.XtraBars.BarButtonItem btnSuspension;
+        private DevExpress.XtraBars.BarButtonItem btnTransfer;
+        private DevExpress.XtraBars.BarButtonItem btnResign;
+        private DevExpress.XtraBars.BarButtonItem btnConferred;
     }
 }

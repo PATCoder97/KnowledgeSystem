@@ -31,5 +31,9 @@ namespace KnowledgeSystem.Configs
         public static SvgImage Search = SvgImage.FromFile(Path.Combine(ImagesPath, "Search_more.svg"));
         public static SvgImage UploadFile = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_upload_to_ftp.svg"));
         public static SvgImage Excel = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_excel.svg"));
+        public static SvgImage Suspension = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_unfriend.svg"));
+        public static SvgImage Transfer = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_exchange.svg"));
+        public static SvgImage Resign = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_denied.svg"));
+        public static SvgImage Conferred = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_change_user.svg"));
     }
 }

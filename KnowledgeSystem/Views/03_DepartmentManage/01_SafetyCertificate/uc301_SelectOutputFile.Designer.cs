@@ -81,6 +81,7 @@
             this.layoutControl1.Controls.Add(this.ckFile2);
             this.layoutControl1.Controls.Add(this.ckFile1);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.layoutControl1.ForeColor = System.Drawing.Color.White;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(425, 0, 650, 400);
@@ -110,7 +111,9 @@
             this.ckFile6.Location = new System.Drawing.Point(12, 240);
             this.ckFile6.Name = "ckFile6";
             this.ckFile6.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ckFile6.Properties.Appearance.ForeColor = System.Drawing.Color.White;
             this.ckFile6.Properties.Appearance.Options.UseFont = true;
+            this.ckFile6.Properties.Appearance.Options.UseForeColor = true;
             this.ckFile6.Properties.Caption = "附件06：派訓數量統計";
             this.ckFile6.Properties.CheckBoxOptions.Style = DevExpress.XtraEditors.Controls.CheckBoxStyle.SvgRadio2;
             this.ckFile6.Size = new System.Drawing.Size(379, 28);
@@ -123,7 +126,9 @@
             this.ckFile5_2.Location = new System.Drawing.Point(12, 208);
             this.ckFile5_2.Name = "ckFile5_2";
             this.ckFile5_2.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ckFile5_2.Properties.Appearance.ForeColor = System.Drawing.Color.White;
             this.ckFile5_2.Properties.Appearance.Options.UseFont = true;
+            this.ckFile5_2.Properties.Appearance.Options.UseForeColor = true;
             this.ckFile5_2.Properties.Caption = "附件05.2：複訓之提報需求人員名單";
             this.ckFile5_2.Properties.CheckBoxOptions.Style = DevExpress.XtraEditors.Controls.CheckBoxStyle.SvgRadio2;
             this.ckFile5_2.Size = new System.Drawing.Size(379, 28);
@@ -136,7 +141,9 @@
             this.ckFile5_1.Location = new System.Drawing.Point(12, 176);
             this.ckFile5_1.Name = "ckFile5_1";
             this.ckFile5_1.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ckFile5_1.Properties.Appearance.ForeColor = System.Drawing.Color.White;
             this.ckFile5_1.Properties.Appearance.Options.UseFont = true;
+            this.ckFile5_1.Properties.Appearance.Options.UseForeColor = true;
             this.ckFile5_1.Properties.Caption = "附件05.1：初訓之提報需求人員名單";
             this.ckFile5_1.Properties.CheckBoxOptions.Style = DevExpress.XtraEditors.Controls.CheckBoxStyle.SvgRadio2;
             this.ckFile5_1.Size = new System.Drawing.Size(379, 28);
@@ -149,7 +156,9 @@
             this.ckFile4.Location = new System.Drawing.Point(12, 144);
             this.ckFile4.Name = "ckFile4";
             this.ckFile4.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ckFile4.Properties.Appearance.ForeColor = System.Drawing.Color.White;
             this.ckFile4.Properties.Appearance.Options.UseFont = true;
+            this.ckFile4.Properties.Appearance.Options.UseForeColor = true;
             this.ckFile4.Properties.Caption = "附件04：各處提報訓練明細";
             this.ckFile4.Properties.CheckBoxOptions.Style = DevExpress.XtraEditors.Controls.CheckBoxStyle.SvgRadio2;
             this.ckFile4.Size = new System.Drawing.Size(379, 28);
@@ -162,7 +171,9 @@
             this.ckFile3.Location = new System.Drawing.Point(12, 112);
             this.ckFile3.Name = "ckFile3";
             this.ckFile3.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ckFile3.Properties.Appearance.ForeColor = System.Drawing.Color.White;
             this.ckFile3.Properties.Appearance.Options.UseFont = true;
+            this.ckFile3.Properties.Appearance.Options.UseForeColor = true;
             this.ckFile3.Properties.Caption = "附件03：各廠提報資料";
             this.ckFile3.Properties.CheckBoxOptions.Style = DevExpress.XtraEditors.Controls.CheckBoxStyle.SvgRadio2;
             this.ckFile3.Size = new System.Drawing.Size(379, 28);
@@ -175,7 +186,9 @@
             this.ckFile2.Location = new System.Drawing.Point(12, 80);
             this.ckFile2.Name = "ckFile2";
             this.ckFile2.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ckFile2.Properties.Appearance.ForeColor = System.Drawing.Color.White;
             this.ckFile2.Properties.Appearance.Options.UseFont = true;
+            this.ckFile2.Properties.Appearance.Options.UseForeColor = true;
             this.ckFile2.Properties.Caption = "附件02：工安類證照統計表";
             this.ckFile2.Properties.CheckBoxOptions.Style = DevExpress.XtraEditors.Controls.CheckBoxStyle.SvgRadio2;
             this.ckFile2.Size = new System.Drawing.Size(379, 28);
@@ -188,7 +201,9 @@
             this.ckFile1.Location = new System.Drawing.Point(12, 48);
             this.ckFile1.Name = "ckFile1";
             this.ckFile1.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ckFile1.Properties.Appearance.ForeColor = System.Drawing.Color.White;
             this.ckFile1.Properties.Appearance.Options.UseFont = true;
+            this.ckFile1.Properties.Appearance.Options.UseForeColor = true;
             this.ckFile1.Properties.Caption = "附件01：工安類證照取得情形一覽表";
             this.ckFile1.Properties.CheckBoxOptions.Style = DevExpress.XtraEditors.Controls.CheckBoxStyle.SvgRadio2;
             this.ckFile1.Size = new System.Drawing.Size(379, 28);
@@ -280,7 +295,9 @@
             // layoutControlItem8
             // 
             this.layoutControlItem8.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.layoutControlItem8.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
             this.layoutControlItem8.AppearanceItemCaption.Options.UseFont = true;
+            this.layoutControlItem8.AppearanceItemCaption.Options.UseForeColor = true;
             this.layoutControlItem8.Control = this.cbbQuarter;
             this.layoutControlItem8.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem8.Name = "layoutControlItem8";
@@ -298,6 +315,8 @@
             // 
             // uc301_SelectOutputFile
             // 
+            this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
+            this.Appearance.Options.UseBackColor = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.layoutControl1);

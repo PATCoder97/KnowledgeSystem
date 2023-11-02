@@ -309,7 +309,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
             if (!lsIdCanReads.Contains(idDocument) && !IsSysAdmin)
             {
-                XtraMessageBox.Show(TPConfigs.NoPermission, TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DefaultMsg.MsgNoPermission();
                 return;
             }
 

@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="32" height="32">
+  <linearGradient id="E0jqnRXlgpNHK3nZTFSo8a" x1="39" x2="43.771" y1="850.5" y2="850.5" gradientTransform="translate(0 -810)" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#c965eb" />
+    <stop offset="1" stop-color="#c767e5" />
+  </linearGradient>
+  <path fill="url(#E0jqnRXlgpNHK3nZTFSo8a)" d="M39,44.544c0,0.406,0.491,0.609,0.777,0.321l3.749-3.769c0.327-0.33,0.327-0.862,0-1.191 l-3.749-3.769C39.491,35.847,39,36.05,39,36.456V44.544z" />
+  <linearGradient id="E0jqnRXlgpNHK3nZTFSo8b" x1="-120" x2="-115.229" y1="2620.5" y2="2620.5" gradientTransform="rotate(180 -55.614 1330.5)" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#c965eb" />
+    <stop offset="1" stop-color="#c767e5" />
+  </linearGradient>
+  <path fill="url(#E0jqnRXlgpNHK3nZTFSo8b)" d="M8.771,36.456c0-0.406-0.491-0.609-0.777-0.321l-3.749,3.769 c-0.327,0.33-0.327,0.862,0,1.191l3.749,3.769c0.286,0.289,0.777,0.086,0.777-0.32V36.456z" />
+  <linearGradient id="E0jqnRXlgpNHK3nZTFSo8c" x1="9.608" x2="16.584" y1="-1246.498" y2="-1253.474" gradientTransform="matrix(1 0 0 -1 0 -1237.89)" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#0d61a9" />
+    <stop offset="1" stop-color="#16528c" />
+  </linearGradient>
+  <circle cx="13" cy="12" r="5" fill="url(#E0jqnRXlgpNHK3nZTFSo8c)" />
+  <linearGradient id="E0jqnRXlgpNHK3nZTFSo8d" x1="6.87" x2="19.477" y1="-1259.811" y2="-1272.417" gradientTransform="matrix(1 0 0 -1 0 -1237.89)" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#0d61a9" />
+    <stop offset="1" stop-color="#16528c" />
+  </linearGradient>
+  <path fill="url(#E0jqnRXlgpNHK3nZTFSo8d)" d="M13,19c-4.971,0-9,4.029-9,9v3c0,1.105,0.895,2,2,2h14c1.105,0,2-0.895,2-2v-3 C22,23.029,17.971,19,13,19z" />
+  <linearGradient id="E0jqnRXlgpNHK3nZTFSo8e" x1="31.608" x2="38.584" y1="-1246.498" y2="-1253.474" gradientTransform="matrix(1 0 0 -1 0 -1237.89)" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#32bdef" />
+    <stop offset="1" stop-color="#1ea2e4" />
+  </linearGradient>
+  <circle cx="35" cy="12" r="5" fill="url(#E0jqnRXlgpNHK3nZTFSo8e)" />
+  <linearGradient id="E0jqnRXlgpNHK3nZTFSo8f" x1="28.87" x2="41.477" y1="-1259.811" y2="-1272.417" gradientTransform="matrix(1 0 0 -1 0 -1237.89)" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#32bdef" />
+    <stop offset="1" stop-color="#1ea2e4" />
+  </linearGradient>
+  <path fill="url(#E0jqnRXlgpNHK3nZTFSo8f)" d="M35,19c-4.971,0-9,4.029-9,9v3c0,1.105,0.895,2,2,2h14c1.105,0,2-0.895,2-2v-3 C44,23.029,39.971,19,35,19z" />
+  <linearGradient id="E0jqnRXlgpNHK3nZTFSo8g" x1="7" x2="16" y1="40.5" y2="40.5" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#c965eb" />
+    <stop offset="1" stop-color="#c767e5" />
+  </linearGradient>
+  <path fill="url(#E0jqnRXlgpNHK3nZTFSo8g)" d="M15.5,42h-8C7.224,42,7,41.776,7,41.5v-2C7,39.224,7.224,39,7.5,39h8 c0.276,0,0.5,0.224,0.5,0.5v2C16,41.776,15.776,42,15.5,42z" />
+  <linearGradient id="E0jqnRXlgpNHK3nZTFSo8h" x1="31" x2="40" y1="40.5" y2="40.5" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#c965eb" />
+    <stop offset="1" stop-color="#c767e5" />
+  </linearGradient>
+  <path fill="url(#E0jqnRXlgpNHK3nZTFSo8h)" d="M39.5,42h-8c-0.276,0-0.5-0.224-0.5-0.5v-2c0-0.276,0.224-0.5,0.5-0.5h8 c0.276,0,0.5,0.224,0.5,0.5v2C40,41.776,39.776,42,39.5,42z" />
+  <linearGradient id="E0jqnRXlgpNHK3nZTFSo8i" x1="19" x2="22" y1="40.5" y2="40.5" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#c965eb" />
+    <stop offset="1" stop-color="#c767e5" />
+  </linearGradient>
+  <path fill="url(#E0jqnRXlgpNHK3nZTFSo8i)" d="M21.5,42h-2c-0.276,0-0.5-0.224-0.5-0.5v-2c0-0.276,0.224-0.5,0.5-0.5h2 c0.276,0,0.5,0.224,0.5,0.5v2C22,41.776,21.776,42,21.5,42z" />
+  <linearGradient id="E0jqnRXlgpNHK3nZTFSo8j" x1="25" x2="28" y1="40.5" y2="40.5" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#c965eb" />
+    <stop offset="1" stop-color="#c767e5" />
+  </linearGradient>
+  <path fill="url(#E0jqnRXlgpNHK3nZTFSo8j)" d="M27.5,42h-2c-0.276,0-0.5-0.224-0.5-0.5v-2c0-0.276,0.224-0.5,0.5-0.5h2 c0.276,0,0.5,0.224,0.5,0.5v2C28,41.776,27.776,42,27.5,42z" />
+</svg>

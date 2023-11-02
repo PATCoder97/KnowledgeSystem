@@ -331,7 +331,7 @@
             // bar2
             // 
             this.bar2.BarAppearance.Hovered.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.bar2.BarAppearance.Hovered.ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Hyperlink;
+            this.bar2.BarAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
             this.bar2.BarAppearance.Hovered.Options.UseFont = true;
             this.bar2.BarAppearance.Hovered.Options.UseForeColor = true;
             this.bar2.BarAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
