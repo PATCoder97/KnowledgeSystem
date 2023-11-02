@@ -54,6 +54,12 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             txbCCCD.Enabled = _enable;
             cbbNationality.Enabled = _enable;
             cbbJobTitle.Enabled = _enable;
+            cbbSex.Enabled = _enable;
+            cbbStatus.Enabled = _enable;
+            txbAddr.Enabled = _enable;
+            txbPhone1.Enabled = _enable;
+            txbPhone2.Enabled = _enable;
+            txbDateStart.Enabled = _enable;
         }
 
         private void LockControl()
@@ -61,7 +67,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             txbUserId.Enabled = false;
             txbUserId.ReadOnly = false;
             lcRole.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-            Size = new Size(600, 250);
+            Size = new Size(600, 358);
 
             switch (_eventInfo)
             {
@@ -88,7 +94,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                     if (IsSysAdmin)
                     {
                         lcRole.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
-                        Size = new Size(600, 550);
+                        Size = new Size(600, 658);
                     }
 
                     EnabledController();
@@ -142,6 +148,9 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             _sourceAllRole.DataSource = lsAllRoles;
             gcAllRole.DataSource = _sourceAllRole;
 
+            cbbStatus.Properties.Items.AddRange(TPConfigs.lsUserStatus.Select(r => r.Value).ToList());
+            cbbSex.Properties.Items.AddRange(new List<string>() { "男", "女" });
+
             _sourceChooseRole.DataSource = lsChooseRoles;
             gcChooseRole.DataSource = _sourceChooseRole;
 
@@ -165,6 +174,13 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                     txbDOB.EditValue = _user.DOB;
                     txbCCCD.EditValue = _user.CitizenID;
                     cbbNationality.EditValue = _user.Nationality;
+
+                    txbPhone1.EditValue = _user.PhoneNum1;
+                    txbPhone2.EditValue = _user.PhoneNum2;
+                    txbAddr.EditValue = _user.Addr;
+                    cbbSex.EditValue = _user.Sex == null ? "" : _user.Sex.Value ? "男" : "女";
+                    cbbStatus.EditValue = _user.Status == null ? "" : TPConfigs.lsUserStatus[_user.Status.Value];
+                    txbDateStart.EditValue = _user.DateCreate;
 
                     _oldUserInfo = JsonConvert.SerializeObject(_user);
 
@@ -202,11 +218,17 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                 _user.DisplayName = txbUserNameTW.EditValue?.ToString();
                 _user.DisplayNameVN = txbUserNameVN.EditValue?.ToString();
                 _user.IdDepartment = cbbDept.EditValue?.ToString();
-                _user.DateCreate = DateTime.Parse(DateTime.Today.ToShortDateString());
                 _user.JobCode = cbbJobTitle.EditValue?.ToString();
                 _user.DOB = txbDOB.DateTime;
                 _user.CitizenID = txbCCCD.EditValue?.ToString();
                 _user.Nationality = cbbNationality.EditValue?.ToString();
+
+                _user.DateCreate = txbDateStart.DateTime;
+                _user.PhoneNum1 = txbPhone1.EditValue?.ToString();
+                _user.PhoneNum2 = txbPhone2.EditValue?.ToString();
+                _user.Addr = txbAddr.EditValue?.ToString();
+                _user.Sex = cbbSex.EditValue?.ToString() == "男";
+                _user.Status = TPConfigs.lsUserStatus.FirstOrDefault(r => r.Value == cbbStatus.EditValue?.ToString()).Key;
 
                 string _newUserInfo = JsonConvert.SerializeObject(_user);
 

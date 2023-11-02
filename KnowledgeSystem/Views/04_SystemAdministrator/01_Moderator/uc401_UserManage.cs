@@ -60,6 +60,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             public string DeptName { get; set; }
             public string JobName { get; set; }
             public string Describe { get; set; }
+            public string SexName { get; set; }
+            public string StatusName { get; set; }
         }
 
         #endregion
@@ -70,7 +72,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
         {
             btnCreate.ImageOptions.SvgImage = TPSvgimages.Add;
             btnRefresh.ImageOptions.SvgImage = TPSvgimages.Reload;
-            btnUploadList.ImageOptions.SvgImage = TPSvgimages.UploadFile;
+            btnExportExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
         }
 
         private void InitializeControl()
@@ -95,19 +97,26 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                                 select new dmUserM()
                                 {
                                     Id = data.Id,
-                                    DisplayName = $"{data.DisplayName}{(!string.IsNullOrEmpty(data.DisplayNameVN) ? $"\n{data.DisplayNameVN}" : "")}",
+                                    DisplayName = $"{data.DisplayName}{(!string.IsNullOrEmpty(data.DisplayNameVN) ? $"\r\n{data.DisplayNameVN}" : "")}",
                                     DisplayNameVN = data.DisplayNameVN,
                                     IdDepartment = data.IdDepartment,
                                     DateCreate = data.DateCreate,
                                     SecondaryPassword = data.SecondaryPassword,
-                                    DeptName = $"{data.IdDepartment}\n{depts.DisplayName}",
+                                    DeptName = $"{data.IdDepartment}\r\n{depts.DisplayName}",
                                     DOB = data.DOB,
                                     CitizenID = data.CitizenID,
                                     Nationality = data.Nationality,
                                     PCName = data.PCName,
                                     IPAddress = data.IPAddress,
                                     JobCode = data.JobCode,
-                                    JobName = g != null ? g.DisplayName : ""
+                                    JobName = g != null ? g.DisplayName : "",
+                                    Addr = data.Addr,
+                                    PhoneNum1 = data.PhoneNum1,
+                                    PhoneNum2 = data.PhoneNum2,
+                                    Sex = data.Sex,
+                                    SexName = data.Sex == null ? "" : data.Sex.Value ? "男" : "女",
+                                    Status = data.Status,
+                                    StatusName = data.Status == null ? "" : TPConfigs.lsUserStatus[data.Status.Value],
                                 }).ToList();
 
             sourceUsers.DataSource = lsUserManage;
@@ -182,13 +191,11 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             IsSysAdmin = AppPermission.Instance.CheckAppPermission(AppPermission.SysAdmin);
             InitializeControl();
 
-            gvData.OptionsEditForm.ShowOnDoubleClick = DevExpress.Utils.DefaultBoolean.False;
-            gvData.OptionsEditForm.ShowOnEnterKey = DevExpress.Utils.DefaultBoolean.False;
-            gvData.OptionsEditForm.ShowOnF2Key = DevExpress.Utils.DefaultBoolean.False;
-            gvData.OptionsBehavior.EditingMode = GridEditingMode.EditFormInplace;
+            gvData.ReadOnlyGridView();
+            gvData.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
 
             gcData.DataSource = sourceUsers;
-            
+
             LoadUser();
         }
 
@@ -301,7 +308,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                 string password = TPConfigs.DefaultPassword;
                 string describe = "";
 
-                
+
 
                 if (string.IsNullOrEmpty(nameTW))
                 {
@@ -354,6 +361,18 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             {
                 dm_UserBUS.Instance.AddOrUpdate(item);
             }
+        }
+
+        private void btnExportExcel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            string documentsPath = TPConfigs.DocumentPath();
+            if (!Directory.Exists(documentsPath))
+                Directory.CreateDirectory(documentsPath);
+
+            string filePath = Path.Combine(documentsPath, $"{Text} - {DateTime.Now:yyyyMMddHHmm}.xlsx");
+
+            gcData.ExportToXlsx(filePath);
+            Process.Start(filePath);
         }
     }
 }

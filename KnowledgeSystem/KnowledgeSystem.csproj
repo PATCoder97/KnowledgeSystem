@@ -367,12 +367,6 @@
     <Compile Include="Views\04_SystemAdministrator\01_Moderator\uc401_UserManage.Designer.cs">
       <DependentUpon>uc401_UserManage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\04_SystemAdministrator\01_Moderator\uc401_UserManage_Info.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Views\04_SystemAdministrator\01_Moderator\uc401_UserManage_Info.Designer.cs">
-      <DependentUpon>uc401_UserManage_Info.cs</DependentUpon>
-    </Compile>
     <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\uc402_Functions.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -506,9 +500,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\01_Moderator\uc401_UserManage.resx">
       <DependentUpon>uc401_UserManage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\04_SystemAdministrator\01_Moderator\uc401_UserManage_Info.resx">
-      <DependentUpon>uc401_UserManage_Info.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\02_SystemAdmin\uc402_Functions.resx">
       <DependentUpon>uc402_Functions.cs</DependentUpon>

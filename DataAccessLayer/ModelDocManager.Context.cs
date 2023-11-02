@@ -47,12 +47,12 @@ namespace DataAccessLayer
         public virtual DbSet<dt207_DocProcessing> dt207_DocProcessing { get; set; }
         public virtual DbSet<dt207_DocProcessingInfo> dt207_DocProcessingInfo { get; set; }
         public virtual DbSet<dm_UserRole> dm_UserRole { get; set; }
-        public virtual DbSet<dm_User> dm_User { get; set; }
         public virtual DbSet<dm_Group> dm_Group { get; set; }
         public virtual DbSet<dm_Progress> dm_Progress { get; set; }
         public virtual DbSet<dm_JobTitle> dm_JobTitle { get; set; }
         public virtual DbSet<dt301_CertReqSetting> dt301_CertReqSetting { get; set; }
         public virtual DbSet<dt301_Course> dt301_Course { get; set; }
         public virtual DbSet<dt301_Base> dt301_Base { get; set; }
+        public virtual DbSet<dm_User> dm_User { get; set; }
     }
 }

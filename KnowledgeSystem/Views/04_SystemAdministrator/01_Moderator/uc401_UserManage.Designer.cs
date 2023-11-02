@@ -42,7 +42,11 @@
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColPCName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColIP = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -52,8 +56,7 @@
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnCreate = new DevExpress.XtraBars.BarButtonItem();
             this.btnRefresh = new DevExpress.XtraBars.BarButtonItem();
-            this.btnUploadList = new DevExpress.XtraBars.BarButtonItem();
-            this.btnConfirmUpload = new DevExpress.XtraBars.BarButtonItem();
+            this.btnExportExcel = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -76,7 +79,7 @@
             this.layoutControl1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(915, 384);
+            this.layoutControl1.Size = new System.Drawing.Size(1231, 384);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -92,7 +95,7 @@
             this.gcData.MainView = this.gvData;
             this.gcData.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.gcData.Name = "gcData";
-            this.gcData.Size = new System.Drawing.Size(891, 360);
+            this.gcData.Size = new System.Drawing.Size(1207, 360);
             this.gcData.TabIndex = 4;
             this.gcData.UseEmbeddedNavigator = true;
             this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -120,7 +123,11 @@
             this.gridColumn8,
             this.gridColumn9,
             this.gridColumn10,
+            this.gridColumn16,
             this.gColPCName,
+            this.gridColumn14,
+            this.gridColumn13,
+            this.gridColumn12,
             this.gColIP,
             this.gridColumn4,
             this.gridColumn11});
@@ -140,6 +147,7 @@
             this.gridColumn1.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn1.Caption = "人員代號";
             this.gridColumn1.FieldName = "Id";
+            this.gridColumn1.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
             this.gridColumn1.MinWidth = 23;
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
@@ -150,6 +158,7 @@
             // 
             this.gridColumn2.Caption = "名稱";
             this.gridColumn2.FieldName = "DisplayName";
+            this.gridColumn2.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
             this.gridColumn2.MinWidth = 23;
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
@@ -160,9 +169,10 @@
             // 
             this.gridColumn7.Caption = "部門";
             this.gridColumn7.FieldName = "DeptName";
+            this.gridColumn7.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 3;
+            this.gridColumn7.VisibleIndex = 2;
             // 
             // gridColumn3
             // 
@@ -216,13 +226,46 @@
             this.gridColumn10.Visible = true;
             this.gridColumn10.VisibleIndex = 7;
             // 
+            // gridColumn16
+            // 
+            this.gridColumn16.Caption = "性別";
+            this.gridColumn16.FieldName = "SexName";
+            this.gridColumn16.Name = "gridColumn16";
+            this.gridColumn16.Visible = true;
+            this.gridColumn16.VisibleIndex = 8;
+            // 
             // gColPCName
             // 
             this.gColPCName.Caption = "電腦名稱";
             this.gColPCName.FieldName = "PCName";
             this.gColPCName.Name = "gColPCName";
             this.gColPCName.Visible = true;
-            this.gColPCName.VisibleIndex = 8;
+            this.gColPCName.VisibleIndex = 13;
+            this.gColPCName.Width = 80;
+            // 
+            // gridColumn14
+            // 
+            this.gridColumn14.Caption = "電話號碼";
+            this.gridColumn14.FieldName = "PhoneNum1";
+            this.gridColumn14.Name = "gridColumn14";
+            this.gridColumn14.Visible = true;
+            this.gridColumn14.VisibleIndex = 10;
+            // 
+            // gridColumn13
+            // 
+            this.gridColumn13.Caption = "居住地點";
+            this.gridColumn13.FieldName = "Addr";
+            this.gridColumn13.Name = "gridColumn13";
+            this.gridColumn13.Visible = true;
+            this.gridColumn13.VisibleIndex = 12;
+            // 
+            // gridColumn12
+            // 
+            this.gridColumn12.Caption = "家人聯絡電話";
+            this.gridColumn12.FieldName = "PhoneNum2";
+            this.gridColumn12.Name = "gridColumn12";
+            this.gridColumn12.Visible = true;
+            this.gridColumn12.VisibleIndex = 11;
             // 
             // gColIP
             // 
@@ -230,7 +273,7 @@
             this.gColIP.FieldName = "IPAddress";
             this.gColIP.Name = "gColIP";
             this.gColIP.Visible = true;
-            this.gColIP.VisibleIndex = 9;
+            this.gColIP.VisibleIndex = 14;
             // 
             // gridColumn4
             // 
@@ -238,15 +281,15 @@
             this.gridColumn4.FieldName = "JobName";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 2;
+            this.gridColumn4.VisibleIndex = 3;
             // 
             // gridColumn11
             // 
             this.gridColumn11.Caption = "狀態";
-            this.gridColumn11.FieldName = "Describe";
+            this.gridColumn11.FieldName = "StatusName";
             this.gridColumn11.Name = "gridColumn11";
             this.gridColumn11.Visible = true;
-            this.gridColumn11.VisibleIndex = 10;
+            this.gridColumn11.VisibleIndex = 9;
             // 
             // Root
             // 
@@ -255,7 +298,7 @@
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem1});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(915, 384);
+            this.Root.Size = new System.Drawing.Size(1231, 384);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem1
@@ -263,7 +306,7 @@
             this.layoutControlItem1.Control = this.gcData;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(895, 364);
+            this.layoutControlItem1.Size = new System.Drawing.Size(1211, 364);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
@@ -281,15 +324,14 @@
             this.barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.btnCreate,
             this.btnRefresh,
-            this.btnUploadList,
-            this.btnConfirmUpload});
+            this.btnExportExcel});
             this.barManager1.MainMenu = this.bar2;
             this.barManager1.MaxItemId = 4;
             // 
             // bar2
             // 
             this.bar2.BarAppearance.Hovered.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.bar2.BarAppearance.Hovered.ForeColor = System.Drawing.Color.Black;
+            this.bar2.BarAppearance.Hovered.ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Hyperlink;
             this.bar2.BarAppearance.Hovered.Options.UseFont = true;
             this.bar2.BarAppearance.Hovered.Options.UseForeColor = true;
             this.bar2.BarAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
@@ -307,8 +349,7 @@
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnCreate, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnRefresh, true),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnUploadList, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnConfirmUpload, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnExportExcel, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawBorder = false;
             this.bar2.OptionsBar.DrawDragBorder = false;
@@ -335,20 +376,13 @@
             this.btnRefresh.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
             this.btnRefresh.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnRefresh_ItemClick);
             // 
-            // btnUploadList
+            // btnExportExcel
             // 
-            this.btnUploadList.Caption = "上傳清單";
-            this.btnUploadList.Id = 2;
-            this.btnUploadList.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnUploadList.Name = "btnUploadList";
-            this.btnUploadList.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnUploadList_ItemClick);
-            // 
-            // btnConfirmUpload
-            // 
-            this.btnConfirmUpload.Caption = "確認上傳";
-            this.btnConfirmUpload.Id = 3;
-            this.btnConfirmUpload.Name = "btnConfirmUpload";
-            this.btnConfirmUpload.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnConfirmUpload_ItemClick);
+            this.btnExportExcel.Caption = "下載清單";
+            this.btnExportExcel.Id = 2;
+            this.btnExportExcel.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnExportExcel.Name = "btnExportExcel";
+            this.btnExportExcel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExportExcel_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -357,7 +391,7 @@
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManager1;
             this.barDockControlTop.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.barDockControlTop.Size = new System.Drawing.Size(915, 49);
+            this.barDockControlTop.Size = new System.Drawing.Size(1231, 49);
             // 
             // barDockControlBottom
             // 
@@ -366,7 +400,7 @@
             this.barDockControlBottom.Location = new System.Drawing.Point(0, 433);
             this.barDockControlBottom.Manager = this.barManager1;
             this.barDockControlBottom.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.barDockControlBottom.Size = new System.Drawing.Size(915, 0);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1231, 0);
             // 
             // barDockControlLeft
             // 
@@ -381,7 +415,7 @@
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(915, 49);
+            this.barDockControlRight.Location = new System.Drawing.Point(1231, 49);
             this.barDockControlRight.Manager = this.barManager1;
             this.barDockControlRight.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.barDockControlRight.Size = new System.Drawing.Size(0, 384);
@@ -397,7 +431,7 @@
             this.Controls.Add(this.barDockControlTop);
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "uc401_UserManage";
-            this.Size = new System.Drawing.Size(915, 433);
+            this.Size = new System.Drawing.Size(1231, 433);
             this.Load += new System.EventHandler(this.f401_UserManager_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
@@ -437,9 +471,12 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;
         private DevExpress.XtraGrid.Columns.GridColumn gColPCName;
         private DevExpress.XtraGrid.Columns.GridColumn gColIP;
-        private DevExpress.XtraBars.BarButtonItem btnUploadList;
+        private DevExpress.XtraBars.BarButtonItem btnExportExcel;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
-        private DevExpress.XtraBars.BarButtonItem btnConfirmUpload;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn16;
     }
 }
