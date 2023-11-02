@@ -56,6 +56,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             btnTransfer.ImageOptions.SvgImage = TPSvgimages.Transfer;
             btnResign.ImageOptions.SvgImage = TPSvgimages.Resign;
             btnConferred.ImageOptions.SvgImage = TPSvgimages.Conferred;
+            btnPromoted.ImageOptions.SvgImage = TPSvgimages.UpLevel;
         }
 
         private void EnabledController(bool _enable = true)
@@ -80,6 +81,12 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             cbbDept.Enabled = false;
             cbbStatus.Enabled = false;
 
+            btnTransfer.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            btnResign.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            btnSuspension.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            btnConferred.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            btnPromoted.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+
             lcRole.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             Size = new Size(600, 358);
 
@@ -96,11 +103,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                     btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                     btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
 
-                    btnSuspension.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                    btnTransfer.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                    btnResign.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                    btnConferred.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-
                     EnabledController();
                     break;
                 case EventFormInfo.Update:
@@ -112,11 +114,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                     btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                     btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-
-                    btnSuspension.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                    btnTransfer.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                    btnResign.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                    btnConferred.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
 
                     if (IsSysAdmin)
                     {
@@ -133,11 +130,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                     btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                     btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
 
-                    btnTransfer.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                    btnResign.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                    btnSuspension.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                    btnConferred.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-
                     EnabledController(false);
                     break;
                 case EventFormInfo.View:
@@ -153,27 +145,26 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                         btnSuspension.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                         btnTransfer.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                         btnResign.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
-                        btnConferred.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                        btnPromoted.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     }
                     else if (_user.Status == 2)
                     {
-                        btnSuspension.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                        btnTransfer.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                        btnResign.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                         btnConferred.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
-                    }
-                    else
-                    {
-                        btnSuspension.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                        btnTransfer.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                        btnResign.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                        btnConferred.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                     }
 
                     EnabledController(false);
                     break;
                 default:
                     break;
+            }
+
+            if (!AppPermission.Instance.CheckAppPermission(AppPermission.EditUserJobAndDept))
+            {
+                btnSuspension.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                btnTransfer.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                btnResign.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                btnConferred.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                btnPromoted.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             }
 
             Rectangle screenBounds = Screen.PrimaryScreen.Bounds;

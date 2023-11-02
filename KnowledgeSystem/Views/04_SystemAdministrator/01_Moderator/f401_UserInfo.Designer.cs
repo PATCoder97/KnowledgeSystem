@@ -87,6 +87,10 @@
             this.layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.btnPromoted = new DevExpress.XtraBars.BarButtonItem();
+            this.barSubItem1 = new DevExpress.XtraBars.BarSubItem();
+            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -147,9 +151,13 @@
             this.btnSuspension,
             this.btnTransfer,
             this.btnResign,
-            this.btnConferred});
+            this.btnConferred,
+            this.btnPromoted,
+            this.barSubItem1,
+            this.barButtonItem1,
+            this.barButtonItem2});
             this.barManagerTP.MainMenu = this.bar2;
-            this.barManagerTP.MaxItemId = 8;
+            this.barManagerTP.MaxItemId = 12;
             // 
             // bar2
             // 
@@ -179,7 +187,9 @@
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnSuspension, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnConferred, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnTransfer, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnResign, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnPromoted, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnResign, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem1)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawDragBorder = false;
             this.bar2.OptionsBar.MultiLine = true;
@@ -313,6 +323,7 @@
             this.cbbStatus.Properties.AppearanceDropDown.Options.UseFont = true;
             this.cbbStatus.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbbStatus.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cbbStatus.Size = new System.Drawing.Size(253, 32);
             this.cbbStatus.StyleController = this.layoutControl1;
             this.cbbStatus.TabIndex = 14;
@@ -365,6 +376,7 @@
             this.cbbSex.Properties.AppearanceDropDown.Options.UseFont = true;
             this.cbbSex.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbbSex.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cbbSex.Size = new System.Drawing.Size(253, 32);
             this.cbbSex.StyleController = this.layoutControl1;
             this.cbbSex.TabIndex = 10;
@@ -537,6 +549,7 @@
             this.cbbNationality.Properties.AppearanceDropDown.Options.UseFont = true;
             this.cbbNationality.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbbNationality.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cbbNationality.Size = new System.Drawing.Size(253, 32);
             this.cbbNationality.StyleController = this.layoutControl1;
             this.cbbNationality.TabIndex = 7;
@@ -961,6 +974,34 @@
             this.layoutControlItem12.Text = "性別";
             this.layoutControlItem12.TextSize = new System.Drawing.Size(76, 24);
             // 
+            // btnPromoted
+            // 
+            this.btnPromoted.Caption = "晉升";
+            this.btnPromoted.Id = 8;
+            this.btnPromoted.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnPromoted.Name = "btnPromoted";
+            // 
+            // barSubItem1
+            // 
+            this.barSubItem1.Caption = "EVENT";
+            this.barSubItem1.Id = 9;
+            this.barSubItem1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem1),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem2)});
+            this.barSubItem1.Name = "barSubItem1";
+            // 
+            // barButtonItem1
+            // 
+            this.barButtonItem1.Caption = "barButtonItem1";
+            this.barButtonItem1.Id = 10;
+            this.barButtonItem1.Name = "barButtonItem1";
+            // 
+            // barButtonItem2
+            // 
+            this.barButtonItem2.Caption = "barButtonItem2";
+            this.barButtonItem2.Id = 11;
+            this.barButtonItem2.Name = "barButtonItem2";
+            // 
             // f401_UserInfo
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
@@ -1084,5 +1125,9 @@
         private DevExpress.XtraBars.BarButtonItem btnTransfer;
         private DevExpress.XtraBars.BarButtonItem btnResign;
         private DevExpress.XtraBars.BarButtonItem btnConferred;
+        private DevExpress.XtraBars.BarButtonItem btnPromoted;
+        private DevExpress.XtraBars.BarSubItem barSubItem1;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem2;
     }
 }

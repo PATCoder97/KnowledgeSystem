@@ -607,6 +607,9 @@
     <Content Include="Images\icons_unfriend.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\icons_uplevel.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\icons_upload_to_ftp.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

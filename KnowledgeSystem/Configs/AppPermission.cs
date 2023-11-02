@@ -61,5 +61,8 @@ namespace KnowledgeSystem.Configs
         // 207
         public const int DataStatistics = 6;
         public const int CustomerInfos = 19;
+
+        // 401
+        public const int EditUserJobAndDept = 33;
     }
 }

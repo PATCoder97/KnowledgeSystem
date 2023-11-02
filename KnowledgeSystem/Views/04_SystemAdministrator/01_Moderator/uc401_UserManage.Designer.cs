@@ -220,6 +220,8 @@
             // 
             // gridColumn10
             // 
+            this.gridColumn10.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn10.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn10.Caption = "國籍";
             this.gridColumn10.FieldName = "Nationality";
             this.gridColumn10.Name = "gridColumn10";
@@ -228,6 +230,8 @@
             // 
             // gridColumn16
             // 
+            this.gridColumn16.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn16.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn16.Caption = "性別";
             this.gridColumn16.FieldName = "SexName";
             this.gridColumn16.Name = "gridColumn16";
