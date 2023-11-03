@@ -36,5 +36,6 @@ namespace KnowledgeSystem.Configs
         public static SvgImage Resign = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_denied.svg"));
         public static SvgImage Conferred = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_change_user.svg"));
         public static SvgImage UpLevel = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_uplevel.svg"));
+        public static SvgImage PersonnelChanges = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_personnel_changes.svg"));
     }
 }

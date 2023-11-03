@@ -583,6 +583,9 @@
     <Content Include="Images\icons_ok.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\icons_personnel_changes.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\icons_plus.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

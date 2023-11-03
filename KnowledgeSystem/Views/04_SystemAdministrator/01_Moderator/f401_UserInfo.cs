@@ -57,6 +57,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             btnResign.ImageOptions.SvgImage = TPSvgimages.Resign;
             btnConferred.ImageOptions.SvgImage = TPSvgimages.Conferred;
             btnPromoted.ImageOptions.SvgImage = TPSvgimages.UpLevel;
+            btnPersonnelChanges.ImageOptions.SvgImage = TPSvgimages.PersonnelChanges;
         }
 
         private void EnabledController(bool _enable = true)
@@ -86,6 +87,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             btnSuspension.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             btnConferred.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             btnPromoted.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            btnPersonnelChanges.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
 
             lcRole.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             Size = new Size(600, 358);
@@ -139,7 +141,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                     btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
 
-
+                    btnPersonnelChanges.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     if (_user.Status == 0)
                     {
                         btnSuspension.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
@@ -151,6 +153,10 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                     {
                         btnConferred.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     }
+                    else
+                    {
+                        btnPersonnelChanges.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                    }
 
                     EnabledController(false);
                     break;
@@ -158,8 +164,13 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                     break;
             }
 
-            if (!AppPermission.Instance.CheckAppPermission(AppPermission.EditUserJobAndDept))
+            bool role301Main = AppPermission.Instance.CheckAppPermission(AppPermission.SafetyCertMain);
+            bool roleEditUserJobAndDept = AppPermission.Instance.CheckAppPermission(AppPermission.EditUserJobAndDept);
+
+            if (!(role301Main && roleEditUserJobAndDept))
             {
+                btnPersonnelChanges.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+
                 btnSuspension.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                 btnTransfer.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                 btnResign.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;

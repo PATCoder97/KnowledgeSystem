@@ -38,7 +38,9 @@
             this.btnSuspension = new DevExpress.XtraBars.BarButtonItem();
             this.btnConferred = new DevExpress.XtraBars.BarButtonItem();
             this.btnTransfer = new DevExpress.XtraBars.BarButtonItem();
+            this.btnPromoted = new DevExpress.XtraBars.BarButtonItem();
             this.btnResign = new DevExpress.XtraBars.BarButtonItem();
+            this.btnPersonnelChanges = new DevExpress.XtraBars.BarSubItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -87,10 +89,6 @@
             this.layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.btnPromoted = new DevExpress.XtraBars.BarButtonItem();
-            this.barSubItem1 = new DevExpress.XtraBars.BarSubItem();
-            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -153,9 +151,7 @@
             this.btnResign,
             this.btnConferred,
             this.btnPromoted,
-            this.barSubItem1,
-            this.barButtonItem1,
-            this.barButtonItem2});
+            this.btnPersonnelChanges});
             this.barManagerTP.MainMenu = this.bar2;
             this.barManagerTP.MaxItemId = 12;
             // 
@@ -184,12 +180,7 @@
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnEdit, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnDelete, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnConfirm, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnSuspension, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnConferred, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnTransfer, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnPromoted, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnResign, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItem1)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnPersonnelChanges, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawDragBorder = false;
             this.bar2.OptionsBar.MultiLine = true;
@@ -226,6 +217,10 @@
             this.btnSuspension.Caption = "留職停薪";
             this.btnSuspension.Id = 4;
             this.btnSuspension.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnSuspension.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnSuspension.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnSuspension.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSuspension.ItemAppearance.Normal.Options.UseFont = true;
             this.btnSuspension.Name = "btnSuspension";
             this.btnSuspension.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSuspension_ItemClick);
             // 
@@ -234,6 +229,10 @@
             this.btnConferred.Caption = "回來";
             this.btnConferred.Id = 7;
             this.btnConferred.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnConferred.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnConferred.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnConferred.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConferred.ItemAppearance.Normal.Options.UseFont = true;
             this.btnConferred.Name = "btnConferred";
             this.btnConferred.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnConferred_ItemClick);
             // 
@@ -242,16 +241,48 @@
             this.btnTransfer.Caption = "調任";
             this.btnTransfer.Id = 5;
             this.btnTransfer.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnTransfer.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnTransfer.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnTransfer.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTransfer.ItemAppearance.Normal.Options.UseFont = true;
             this.btnTransfer.Name = "btnTransfer";
             this.btnTransfer.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnTransfer_ItemClick);
+            // 
+            // btnPromoted
+            // 
+            this.btnPromoted.Caption = "晉升";
+            this.btnPromoted.Id = 8;
+            this.btnPromoted.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnPromoted.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnPromoted.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnPromoted.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPromoted.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnPromoted.Name = "btnPromoted";
             // 
             // btnResign
             // 
             this.btnResign.Caption = "離職";
             this.btnResign.Id = 6;
             this.btnResign.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnResign.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnResign.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnResign.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnResign.ItemAppearance.Normal.Options.UseFont = true;
             this.btnResign.Name = "btnResign";
             this.btnResign.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnResign_ItemClick);
+            // 
+            // btnPersonnelChanges
+            // 
+            this.btnPersonnelChanges.Caption = "人事變動";
+            this.btnPersonnelChanges.Id = 9;
+            this.btnPersonnelChanges.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnPersonnelChanges.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnSuspension),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnConferred),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnPromoted),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnTransfer),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnResign, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+            this.btnPersonnelChanges.Name = "btnPersonnelChanges";
             // 
             // barDockControlTop
             // 
@@ -974,34 +1005,6 @@
             this.layoutControlItem12.Text = "性別";
             this.layoutControlItem12.TextSize = new System.Drawing.Size(76, 24);
             // 
-            // btnPromoted
-            // 
-            this.btnPromoted.Caption = "晉升";
-            this.btnPromoted.Id = 8;
-            this.btnPromoted.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnPromoted.Name = "btnPromoted";
-            // 
-            // barSubItem1
-            // 
-            this.barSubItem1.Caption = "EVENT";
-            this.barSubItem1.Id = 9;
-            this.barSubItem1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem1),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem2)});
-            this.barSubItem1.Name = "barSubItem1";
-            // 
-            // barButtonItem1
-            // 
-            this.barButtonItem1.Caption = "barButtonItem1";
-            this.barButtonItem1.Id = 10;
-            this.barButtonItem1.Name = "barButtonItem1";
-            // 
-            // barButtonItem2
-            // 
-            this.barButtonItem2.Caption = "barButtonItem2";
-            this.barButtonItem2.Id = 11;
-            this.barButtonItem2.Name = "barButtonItem2";
-            // 
             // f401_UserInfo
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
@@ -1126,8 +1129,6 @@
         private DevExpress.XtraBars.BarButtonItem btnResign;
         private DevExpress.XtraBars.BarButtonItem btnConferred;
         private DevExpress.XtraBars.BarButtonItem btnPromoted;
-        private DevExpress.XtraBars.BarSubItem barSubItem1;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem2;
+        private DevExpress.XtraBars.BarSubItem btnPersonnelChanges;
     }
 }
