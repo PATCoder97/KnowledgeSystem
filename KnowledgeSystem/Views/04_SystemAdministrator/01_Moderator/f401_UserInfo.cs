@@ -1,6 +1,7 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
 using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraSplashScreen;
 using KnowledgeSystem.Configs;
@@ -67,7 +68,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             txbDOB.Enabled = _enable;
             txbCCCD.Enabled = _enable;
             cbbNationality.Enabled = _enable;
-            cbbJobTitle.Enabled = _enable;
             cbbSex.Enabled = _enable;
             txbAddr.Enabled = _enable;
             txbPhone1.Enabled = _enable;
@@ -81,6 +81,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             txbUserId.ReadOnly = false;
             cbbDept.Enabled = false;
             cbbStatus.Enabled = false;
+            cbbJobTitle.Enabled = false;
 
             btnTransfer.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             btnResign.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
@@ -100,6 +101,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                     txbUserId.Enabled = true;
                     cbbDept.Enabled = true;
                     cbbStatus.Enabled = true;
+                    cbbJobTitle.Enabled = true;
 
                     btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
@@ -376,7 +378,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
         private void txbUserId_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            if (TPConfigs.DomainComputer != DomainVNFPG.domainVNFPG) return;
+            if (TPConfigs.DomainComputer != DomainVNFPG.domainVNFPG || txbUserId.Enabled == false) return;
 
             string userNameByDomain = DomainVNFPG.Instance.GetAccountName(txbUserId.Text.ToUpper());
             if (string.IsNullOrEmpty(userNameByDomain)) return;
@@ -407,17 +409,94 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             cbbStatus.EditValue = TPConfigs.lsUserStatus[0];
         }
 
-        private void btnTransfer_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-
-        }
-
         private void btnResign_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             _eventInfo = EventFormInfo.Update;
             LockControl();
 
             cbbStatus.EditValue = TPConfigs.lsUserStatus[1];
+        }
+
+        private void btnPromoted_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            XtraInputBoxArgs args = new XtraInputBoxArgs();
+
+            args.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
+            args.Caption = "晉升";
+            args.Prompt = $"<font='Microsoft JhengHei UI' size=14>請選職務</font>";
+            args.DefaultButtonIndex = 0;
+            SearchLookUpEdit editor = new SearchLookUpEdit();
+            var lsJobTitles = dm_JobTitleBUS.Instance.GetList().Where(r => r.Id != _user.JobCode).ToList();
+            editor.Properties.DataSource = lsJobTitles;
+            editor.Properties.DisplayMember = "DisplayName";
+            editor.Properties.ValueMember = "Id";
+            args.Editor = editor;
+
+            editor.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            editor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            editor.Properties.NullText = "";
+            editor.Properties.PopupView = this.searchLookUpEdit1View;
+
+            GridView editView = new GridView();
+            GridColumn gcol1 = new GridColumn() { Caption = "職務代號", FieldName = "Id" };
+            GridColumn gcol2 = new GridColumn() { Caption = "職務名稱", FieldName = "DisplayName" };
+
+            editView.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            editView.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
+            editView.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            editView.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            editView.Appearance.Row.ForeColor = System.Drawing.Color.Black;
+            editView.Columns.AddRange(new GridColumn[] { gcol1, gcol2 });
+
+            var result = XtraInputBox.Show(args);
+            if (result == null) return;
+
+            string idJobChange = result?.ToString() ?? "";
+
+            XtraMessageBox.Show(idJobChange);
+        }
+
+        private void btnTransfer_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            XtraInputBoxArgs args = new XtraInputBoxArgs();
+
+            args.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
+            args.Caption = "晉升";
+            args.Prompt = $"<font='Microsoft JhengHei UI' size=14>請選單位</font>";
+            args.DefaultButtonIndex = 0;
+            SearchLookUpEdit editor = new SearchLookUpEdit();
+            var lsDepts = dm_DeptBUS.Instance.GetList().Select(r => new dm_Departments
+            {
+                Id = r.Id,
+                DisplayName = $"{r.Id,-5}{r.DisplayName}"
+            }).Where(r => r.Id != _user.IdDepartment).ToList();
+            editor.Properties.DataSource = lsDepts;
+            editor.Properties.DisplayMember = "DisplayName";
+            editor.Properties.ValueMember = "Id";
+            args.Editor = editor;
+
+            editor.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            editor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            editor.Properties.NullText = "";
+            editor.Properties.PopupView = this.searchLookUpEdit1View;
+
+            GridView editView = new GridView();
+            GridColumn gcol1 = new GridColumn() { Caption = "職務代號", FieldName = "Id" };
+            GridColumn gcol2 = new GridColumn() { Caption = "職務名稱", FieldName = "DisplayName" };
+
+            editView.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            editView.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
+            editView.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            editView.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            editView.Appearance.Row.ForeColor = System.Drawing.Color.Black;
+            editView.Columns.AddRange(new GridColumn[] { gcol1, gcol2 });
+
+            var result = XtraInputBox.Show(args);
+            if (result == null) return;
+
+            string idJobChange = result?.ToString() ?? "";
+
+            XtraMessageBox.Show(idJobChange);
         }
     }
 }

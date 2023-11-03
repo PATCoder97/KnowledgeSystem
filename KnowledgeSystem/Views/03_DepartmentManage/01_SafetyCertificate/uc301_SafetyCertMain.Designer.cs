@@ -138,6 +138,8 @@
             // 
             // gridColumn1
             // 
+            this.gridColumn1.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn1.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn1.Caption = "人員代號";
             this.gridColumn1.FieldName = "IdUser";
             this.gridColumn1.Name = "gridColumn1";
@@ -170,6 +172,8 @@
             // 
             // gridColumn5
             // 
+            this.gridColumn5.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn5.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn5.Caption = "上課日期";
             this.gridColumn5.FieldName = "DateReceipt";
             this.gridColumn5.Name = "gridColumn5";
@@ -178,6 +182,8 @@
             // 
             // gridColumn6
             // 
+            this.gridColumn6.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn6.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn6.Caption = "有效期限";
             this.gridColumn6.FieldName = "ExpDate";
             this.gridColumn6.Name = "gridColumn6";

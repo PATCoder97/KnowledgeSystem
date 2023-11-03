@@ -35,12 +35,12 @@
             this.btnEdit = new DevExpress.XtraBars.BarButtonItem();
             this.btnDelete = new DevExpress.XtraBars.BarButtonItem();
             this.btnConfirm = new DevExpress.XtraBars.BarButtonItem();
+            this.btnPersonnelChanges = new DevExpress.XtraBars.BarSubItem();
             this.btnSuspension = new DevExpress.XtraBars.BarButtonItem();
             this.btnConferred = new DevExpress.XtraBars.BarButtonItem();
-            this.btnTransfer = new DevExpress.XtraBars.BarButtonItem();
             this.btnPromoted = new DevExpress.XtraBars.BarButtonItem();
+            this.btnTransfer = new DevExpress.XtraBars.BarButtonItem();
             this.btnResign = new DevExpress.XtraBars.BarButtonItem();
-            this.btnPersonnelChanges = new DevExpress.XtraBars.BarSubItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -212,6 +212,19 @@
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnConfirm_ItemClick);
             // 
+            // btnPersonnelChanges
+            // 
+            this.btnPersonnelChanges.Caption = "人事變動";
+            this.btnPersonnelChanges.Id = 9;
+            this.btnPersonnelChanges.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnPersonnelChanges.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnSuspension),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnConferred),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnPromoted),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnTransfer),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnResign, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+            this.btnPersonnelChanges.Name = "btnPersonnelChanges";
+            // 
             // btnSuspension
             // 
             this.btnSuspension.Caption = "留職停薪";
@@ -236,6 +249,18 @@
             this.btnConferred.Name = "btnConferred";
             this.btnConferred.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnConferred_ItemClick);
             // 
+            // btnPromoted
+            // 
+            this.btnPromoted.Caption = "晉升";
+            this.btnPromoted.Id = 8;
+            this.btnPromoted.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnPromoted.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnPromoted.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnPromoted.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPromoted.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnPromoted.Name = "btnPromoted";
+            this.btnPromoted.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnPromoted_ItemClick);
+            // 
             // btnTransfer
             // 
             this.btnTransfer.Caption = "調任";
@@ -248,17 +273,6 @@
             this.btnTransfer.Name = "btnTransfer";
             this.btnTransfer.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnTransfer_ItemClick);
             // 
-            // btnPromoted
-            // 
-            this.btnPromoted.Caption = "晉升";
-            this.btnPromoted.Id = 8;
-            this.btnPromoted.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnPromoted.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
-            this.btnPromoted.ItemAppearance.Hovered.Options.UseForeColor = true;
-            this.btnPromoted.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPromoted.ItemAppearance.Normal.Options.UseFont = true;
-            this.btnPromoted.Name = "btnPromoted";
-            // 
             // btnResign
             // 
             this.btnResign.Caption = "離職";
@@ -270,19 +284,6 @@
             this.btnResign.ItemAppearance.Normal.Options.UseFont = true;
             this.btnResign.Name = "btnResign";
             this.btnResign.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnResign_ItemClick);
-            // 
-            // btnPersonnelChanges
-            // 
-            this.btnPersonnelChanges.Caption = "人事變動";
-            this.btnPersonnelChanges.Id = 9;
-            this.btnPersonnelChanges.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnPersonnelChanges.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnSuspension),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnConferred),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnPromoted),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnTransfer),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnResign, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
-            this.btnPersonnelChanges.Name = "btnPersonnelChanges";
             // 
             // barDockControlTop
             // 
@@ -676,8 +677,6 @@
             this.cbbJobTitle.Properties.Appearance.Options.UseForeColor = true;
             this.cbbJobTitle.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbbJobTitle.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.cbbJobTitle.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.cbbJobTitle.Properties.NullText = "";
             this.cbbJobTitle.Properties.PopupView = this.searchLookUpEdit1View;
             this.cbbJobTitle.Size = new System.Drawing.Size(253, 32);
