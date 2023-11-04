@@ -113,8 +113,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
             var lsCertReqs = dt301_CertReqSetBUS.Instance.GetListByDept(idDept2word);
 
             var lsCountDataBase = (from data in lsBasesDisplay
-                                   group data by new { data.IdJobTitle, data.IdCourse }
-                                  into g
+                                   group data by new { data.IdJobTitle, data.IdCourse } into g
                                    select new
                                    {
                                        IdJobTitle = g.Key.IdJobTitle,
@@ -143,26 +142,41 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                                          InvalidLicense = sub != null ? sub.InvalidLicense : 0,
                                      }).ToList();
 
-            var lsQuery = (from dt in lsCountByCertReqs
-                           join dept in lsDept on dt.IdDept equals dept.Id
-                           join job in lsJobs on dt.IdJobTitle equals job.Id
-                           join course in lsCourses on dt.IdCourse equals course.Id
-                           select new
-                           {
-                               Id = idCounter++,
-                               dt.IdDept,
-                               DeptName = dept.DisplayName,
-                               dt.IdCourse,
-                               CourseName = course.DisplayName,
-                               dt.IdJobTitle,
-                               JobName = job.DisplayName,
-                               dt.NewHeadcount,
-                               dt.ActualHeadcount,
-                               dt.ReqQuantity,
-                               ValidLicense = dt.ValidLicense,
-                               BackupLicense = dt.BackupLicense,
-                               InvalidLicense = dt.InvalidLicense,
-                           }).ToList();
+            var lsDataFile3 = (from dt in lsCountByCertReqs
+                               join dept in lsDept on dt.IdDept equals dept.Id
+                               join job in lsJobs on dt.IdJobTitle equals job.Id
+                               join course in lsCourses on dt.IdCourse equals course.Id
+                               select new
+                               {
+                                   Id = idCounter++,
+                                   dt.IdDept,
+                                   DeptName = dept.DisplayName,
+                                   dt.IdCourse,
+                                   CourseName = course.DisplayName,
+                                   dt.IdJobTitle,
+                                   JobName = job.DisplayName,
+                                   dt.NewHeadcount,
+                                   dt.ActualHeadcount,
+                                   dt.ReqQuantity,
+                                   ValidLicense = dt.ValidLicense,
+                                   BackupLicense = dt.BackupLicense,
+                                   InvalidLicense = dt.InvalidLicense,
+                               }).ToList();
+
+            idCounter = 1;
+            var lsDataFile2 = (from data in lsDataFile3
+                               group data by data.IdCourse into g
+                               select new
+                               {
+                                   Id = idCounter++,
+                                   JobName = g.First(r => r.IdCourse == g.Key).CourseName,
+                                   IdCourse = g.Key,
+                                   TotalReqQuantity = g.Sum(r => r.ReqQuantity),
+                                   ValidLicense = g.Sum(r => r.ValidLicense),
+                                   BackupLicense = g.Sum(r => r.BackupLicense),
+                                   InvalidLicense = g.Sum(r => r.InvalidLicense),
+                               }).ToList();
+
 
             // Xuất ra Excel
             ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
@@ -195,7 +209,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                 ws.Cells["L5"].Value = "備援證照張數";
                 ws.Cells["M5"].Value = "無效證照張數";
 
-                ws.Cells["A6"].LoadFromCollection(lsQuery, false);
+                ws.Cells["A6"].LoadFromCollection(lsDataFile3, false);
 
                 ws.Columns[01].Width = 20;
                 ws.Columns[02].Width = 20;
@@ -240,6 +254,73 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                 pck.SaveAs(excelFile);
             }
 
+            using (ExcelPackage pck = new ExcelPackage())
+            {
+                pck.Workbook.Properties.Author = "VNW0014732";
+                pck.Workbook.Properties.Company = "FHS";
+                pck.Workbook.Properties.Title = "Exported by Phan Anh Tuan";
+                ExcelWorksheet ws = pck.Workbook.Worksheets.Add("DATA");
+
+                // Định dạng toàn Sheet
+                ws.Cells.Style.Font.Name = "Times New Roman";
+                ws.Cells.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                ws.Cells.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                ws.Cells.Style.Font.Size = 14;
+                ws.Cells.Style.WrapText = false;
+
+                // Thêm dữ liệu từ Grid vào Excel
+                ws.Cells["A2"].Value = "項次";
+                ws.Cells["B2"].Value = "課程名稱";
+                ws.Cells["C2"].Value = "課程代號";
+                ws.Cells["D2"].Value = "應取得";
+                ws.Cells["E2"].Value = "實際取得";
+                ws.Cells["F2"].Value = "備援";
+                ws.Cells["G2"].Value = "初訓";
+                ws.Cells["H2"].Value = "複訓";
+                ws.Cells["I2"].Value = "人員待補";
+                ws.Cells["J2"].Value = "留職停薪";
+
+                ws.Cells["A3"].LoadFromCollection(lsDataFile2, false);
+
+                ws.Columns[01].Width = 20;
+                ws.Columns[02].Width = 60;
+                ws.Columns[03].Width = 20;
+                ws.Columns[04].Width = 20;
+                ws.Columns[05].Width = 20;
+                ws.Columns[06].Width = 20;
+                ws.Columns[07].Width = 20;
+                ws.Columns[08].Width = 20;
+                ws.Columns[09].Width = 20;
+                ws.Columns[10].Width = 20;
+
+                List<int> lsColAlignLefts = new List<int>() { 2 };
+                foreach (var indexCol in lsColAlignLefts)
+                    ws.Columns[indexCol].Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
+
+                // Tạo bảng theo dữ liệu của Excel
+                var dataRange = ws.Cells[ws.Dimension.Address];
+                ExcelTable tab = ws.Tables.Add(dataRange, "Table1");
+                tab.TableStyle = TableStyles.Medium2;
+
+                //ws.Cells["A1"].Value = "廠處代號";
+                //ws.Cells["A2"].Value = "廠處名稱";
+                //ws.Cells["A3"].Value = "編制人數";
+                //ws.Cells["A4"].Value = "實際人數";
+
+                //ws.Cells["B1"].Value = idDept2word;
+                //ws.Cells["B2"].Value = "";
+                //ws.Cells["B3"].Value = "";
+                //ws.Cells["B4"].Value = "";
+
+                //ws.Cells["B1:M1"].Merge = true;
+                //ws.Cells["B2:M2"].Merge = true;
+                //ws.Cells["B3:M3"].Merge = true;
+                //ws.Cells["B4:M4"].Merge = true;
+
+                string savePath = Path.Combine(pathDocument, $"附件02：工安類證照統計表.xlsx");
+                FileInfo excelFile = new FileInfo(savePath);
+                pck.SaveAs(excelFile);
+            }
         }
 
         private void File5_2(string nameFile)

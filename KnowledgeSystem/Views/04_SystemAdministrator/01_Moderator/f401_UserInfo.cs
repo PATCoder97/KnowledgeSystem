@@ -8,13 +8,9 @@ using KnowledgeSystem.Configs;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
@@ -33,18 +29,25 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
         string _oldUserInfo = "";
         bool IsSysAdmin = false;
 
-        List<dm_Role> lsAllRoles;
+        private UpdateEvent _eventUpdate = UpdateEvent.Normal;
+
+        List < dm_Role > lsAllRoles;
         List<dm_Role> lsChooseRoles = new List<dm_Role>();
 
         BindingSource _sourceAllRole = new BindingSource();
         BindingSource _sourceChooseRole = new BindingSource();
 
+        Font fontUI14 = new Font("Microsoft JhengHei UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+        Font fontUI12 = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+
         private enum UpdateEvent
         {
+            Normal,
             Suspension,
             Transfer,
             Resign,
-            Conferred
+            Conferred,
+            Promoted
         }
 
         private void InitializeIcon()
@@ -311,6 +314,21 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                             result = !resultUpdate ? false : result;
                         }
 
+                        // Xử lý cập nhật các thông tin đặc biệt có ảnh hưởng đến các thông tin khác như: Chứng chỉ an toàn 301
+                        switch (_eventUpdate)
+                        {
+                            case UpdateEvent.Suspension:
+                                break;
+                            case UpdateEvent.Transfer:
+                                break;
+                            case UpdateEvent.Resign:
+                                break;
+                            case UpdateEvent.Conferred:
+                                break;
+                            case UpdateEvent.Promoted:
+                                break;
+                        }
+
                         if (IsSysAdmin)
                         {
                             var resultDel = dm_UserRoleBUS.Instance.RemoveRangeByUID(_user.Id);
@@ -396,6 +414,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
         private void btnSuspension_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             _eventInfo = EventFormInfo.Update;
+            _eventUpdate = UpdateEvent.Suspension;
             LockControl();
 
             cbbStatus.EditValue = TPConfigs.lsUserStatus[2];
@@ -404,6 +423,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
         private void btnConferred_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             _eventInfo = EventFormInfo.Update;
+            _eventUpdate = UpdateEvent.Conferred;
             LockControl();
 
             cbbStatus.EditValue = TPConfigs.lsUserStatus[0];
@@ -412,6 +432,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
         private void btnResign_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             _eventInfo = EventFormInfo.Update;
+            _eventUpdate = UpdateEvent.Resign;
             LockControl();
 
             cbbStatus.EditValue = TPConfigs.lsUserStatus[1];
@@ -426,34 +447,38 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             args.Prompt = $"<font='Microsoft JhengHei UI' size=14>請選職務</font>";
             args.DefaultButtonIndex = 0;
             SearchLookUpEdit editor = new SearchLookUpEdit();
+            GridView editView = new GridView();
+            GridColumn gcol1 = new GridColumn() { Caption = "職務代號", FieldName = "Id", Visible = true, VisibleIndex = 0 };
+            GridColumn gcol2 = new GridColumn() { Caption = "職務名稱", FieldName = "DisplayName", Visible = true, VisibleIndex = 1 };
+
             var lsJobTitles = dm_JobTitleBUS.Instance.GetList().Where(r => r.Id != _user.JobCode).ToList();
             editor.Properties.DataSource = lsJobTitles;
             editor.Properties.DisplayMember = "DisplayName";
             editor.Properties.ValueMember = "Id";
             args.Editor = editor;
 
-            editor.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            editor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            editor.Properties.NullText = "";
-            editor.Properties.PopupView = this.searchLookUpEdit1View;
-
-            GridView editView = new GridView();
-            GridColumn gcol1 = new GridColumn() { Caption = "職務代號", FieldName = "Id" };
-            GridColumn gcol2 = new GridColumn() { Caption = "職務名稱", FieldName = "DisplayName" };
-
-            editView.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            editView.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
+            editView.Appearance.HeaderPanel.Font = fontUI14;
+            editView.Appearance.HeaderPanel.ForeColor = Color.Black;
             editView.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            editView.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            editView.Appearance.Row.ForeColor = System.Drawing.Color.Black;
+            editView.Appearance.Row.Font = fontUI12;
+            editView.Appearance.Row.ForeColor = Color.Black;
             editView.Columns.AddRange(new GridColumn[] { gcol1, gcol2 });
+
+            editor.Properties.Appearance.Font = fontUI14;
+            editor.Properties.Appearance.ForeColor = Color.Black;
+            editor.Properties.NullText = "";
+            editor.Properties.PopupView = editView;
 
             var result = XtraInputBox.Show(args);
             if (result == null) return;
 
             string idJobChange = result?.ToString() ?? "";
 
-            XtraMessageBox.Show(idJobChange);
+            cbbJobTitle.EditValue = idJobChange;
+
+            _eventInfo = EventFormInfo.Update;
+            _eventUpdate = UpdateEvent.Promoted;
+            LockControl();
         }
 
         private void btnTransfer_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -465,38 +490,43 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             args.Prompt = $"<font='Microsoft JhengHei UI' size=14>請選單位</font>";
             args.DefaultButtonIndex = 0;
             SearchLookUpEdit editor = new SearchLookUpEdit();
+            GridView editView = new GridView();
+            GridColumn gcol1 = new GridColumn() { Caption = "部門代號", FieldName = "Id", Visible = true, VisibleIndex = 0 };
+            GridColumn gcol2 = new GridColumn() { Caption = "部門名稱", FieldName = "DisplayName", Visible = true, VisibleIndex = 1 };
+
             var lsDepts = dm_DeptBUS.Instance.GetList().Select(r => new dm_Departments
             {
                 Id = r.Id,
                 DisplayName = $"{r.Id,-5}{r.DisplayName}"
-            }).Where(r => r.Id != _user.IdDepartment).ToList();
+            }).Where(r => r.Id != _user.IdDepartment && r.Id.Length == 4).ToList();
+
             editor.Properties.DataSource = lsDepts;
             editor.Properties.DisplayMember = "DisplayName";
             editor.Properties.ValueMember = "Id";
             args.Editor = editor;
 
-            editor.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            editor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            editor.Properties.Appearance.Font = fontUI14;
+            editor.Properties.Appearance.ForeColor = Color.Black;
             editor.Properties.NullText = "";
-            editor.Properties.PopupView = this.searchLookUpEdit1View;
+            editor.Properties.PopupView = editView;
 
-            GridView editView = new GridView();
-            GridColumn gcol1 = new GridColumn() { Caption = "職務代號", FieldName = "Id" };
-            GridColumn gcol2 = new GridColumn() { Caption = "職務名稱", FieldName = "DisplayName" };
-
-            editView.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            editView.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
+            editView.Appearance.HeaderPanel.Font = fontUI14;
+            editView.Appearance.HeaderPanel.ForeColor = Color.Black;
             editView.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            editView.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            editView.Appearance.Row.ForeColor = System.Drawing.Color.Black;
+            editView.Appearance.Row.Font = fontUI12;
+            editView.Appearance.Row.ForeColor = Color.Black;
             editView.Columns.AddRange(new GridColumn[] { gcol1, gcol2 });
 
             var result = XtraInputBox.Show(args);
             if (result == null) return;
 
-            string idJobChange = result?.ToString() ?? "";
+            string idDeptChange = result?.ToString() ?? "";
 
-            XtraMessageBox.Show(idJobChange);
+            cbbDept.EditValue = idDeptChange;
+
+            _eventInfo = EventFormInfo.Update;
+            _eventUpdate = UpdateEvent.Transfer;
+            LockControl();
         }
     }
 }
