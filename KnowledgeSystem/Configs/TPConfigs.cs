@@ -120,6 +120,32 @@ namespace KnowledgeSystem.Configs
 
             return XtraMessageBox.Show(args);
         }
+
+        public static void MsgError(string msg)
+        {
+            XtraMessageBoxArgs args = new XtraMessageBoxArgs();
+            args.AllowHtmlText = DefaultBoolean.True;
+
+            args.Caption = TPConfigs.SoftNameTW;
+            args.Text = $"<font='Microsoft JhengHei UI' size=14>{msg}</font>";
+            args.Buttons = new DialogResult[] { DialogResult.OK };
+            args.Icon = SystemIcons.Exclamation;
+
+            XtraMessageBox.Show(args);
+        }
+
+        public static DialogResult MsgYesNoQuestion(string msg)
+        {
+            XtraMessageBoxArgs args = new XtraMessageBoxArgs();
+            args.AllowHtmlText = DefaultBoolean.True;
+
+            args.Caption = TPConfigs.SoftNameTW;
+            args.Text = $"<font='Microsoft JhengHei UI' size=14>{msg}</font>";
+            args.Buttons = new DialogResult[] { DialogResult.OK, DialogResult.Cancel };
+            args.Icon = SystemIcons.Information;
+
+            return XtraMessageBox.Show(args);
+        }
     }
     //public DBDocumentManagementSystemEntities()
     //        : base(SingleConnection.ConString)

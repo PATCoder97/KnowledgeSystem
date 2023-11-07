@@ -24,6 +24,7 @@ using System.Diagnostics;
 using System.Xml.XPath;
 using DevExpress.ClipboardSource.SpreadsheetML;
 using DevExpress.XtraSplashScreen;
+using DevExpress.Security;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
 {
@@ -44,6 +45,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
         List<dm_Departments> lsDept;
         List<dm_JobTitle> lsJobs;
         List<dt301_Course> lsCourses;
+        List<dt301_Base> lsData51;
 
         string idDept2word = TPConfigs.LoginUser.IdDepartment.Substring(0, 2);
         double countValid = 0;
@@ -53,6 +55,14 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
         DateTime startOfQuarter = default(DateTime);
         DateTime endOfQuarter = default(DateTime);
         string pathDocument = "";
+
+        Dictionary<int, string> mapQuater = new Dictionary<int, string>()
+        {
+            {1, "一"},
+            {2, "二"},
+            {3, "三"},
+            {4, "四"}
+        };
 
         private class BaseDisplay : dt301_Base
         {
@@ -106,10 +116,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
         }
 
         // Xuất các phụ kiện
-        private void File3(string nameFile)
+        private void FileNormal()
         {
             int idCounter = 1;
 
+            // 附件03：各廠提報資料
             var lsCertReqs = dt301_CertReqSetBUS.Instance.GetListByDept(idDept2word);
 
             var lsCountDataBase = (from data in lsBasesDisplay
@@ -163,7 +174,72 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                                    InvalidLicense = dt.InvalidLicense,
                                }).ToList();
 
+            // 附件05.2：複訓之提報需求人員名單
             idCounter = 1;
+            var lsQueryFile52 = (from data in lsBasesDisplay
+                                 where data.ValidLicense && (data.ExpDate.HasValue ? (data.ExpDate >= startOfQuarter && data.ExpDate <= endOfQuarter) : false)
+                                 join usr in lsUser on data.IdUser equals usr.Id
+                                 join dept in lsDept on usr.IdDepartment equals dept.Id
+                                 select new
+                                 {
+                                     Id = idCounter++,
+                                     IdDept = usr.IdDepartment,
+                                     DivisionName = "冶金部",
+                                     DeptName = dept.DisplayName,
+                                     UserID = usr.Id,
+                                     UserNameTW = usr.DisplayName,
+                                     UserNameVN = usr.DisplayNameVN,
+                                     CitizenID = usr.CitizenID,
+                                     DOB = usr.DOB,
+                                     CourseName = data.CourseName,
+                                     JobName = data.JobName,
+                                     Nationality = usr.Nationality.Replace("TW", "台灣").Replace("VN", "越南").Replace("CN", "中國"),
+                                     data.IdCourse
+                                 }).ToList();
+
+            // 附件05.1：初訓之提報需求人員名單
+            idCounter = 1;
+            var lsQueryFile51 = (from data in lsData51
+                                 join usr in lsUser on data.IdUser equals usr.Id
+                                 join dept in lsDept on usr.IdDepartment equals dept.Id
+                                 join course in lsCourses on data.IdCourse equals course.Id
+                                 join job in lsJobs on usr.JobCode equals job.Id
+                                 select new
+                                 {
+                                     Id = idCounter++,
+                                     IdDept = usr.IdDepartment,
+                                     DivisionName = "冶金部",
+                                     DeptName = dept.DisplayName,
+                                     UserID = usr.Id,
+                                     UserNameTW = usr.DisplayName,
+                                     UserNameVN = usr.DisplayNameVN,
+                                     CitizenID = usr.CitizenID,
+                                     DOB = usr.DOB,
+                                     CourseName = course.DisplayName,
+                                     JobName = job.DisplayName,
+                                     Nationality = usr.Nationality.Replace("TW", "台灣").Replace("VN", "越南").Replace("CN", "中國"),
+                                     data.IdCourse
+                                 }).ToList();
+
+            // 附件02：工安類證照統計表
+            idCounter = 1;
+
+            var lsCountData51 = (from data in lsQueryFile51
+                                 group data by data.IdCourse into g
+                                 select new
+                                 {
+                                     IdCourse = g.Key,
+                                     Count = g.Count()
+                                 }).ToList();
+
+            var lsCountData52 = (from data in lsQueryFile52
+                                 group data by data.IdCourse into g
+                                 select new
+                                 {
+                                     IdCourse = g.Key,
+                                     Count = g.Count()
+                                 }).ToList();
+
             var lsDataFile2 = (from data in lsDataFile3
                                group data by data.IdCourse into g
                                select new
@@ -174,12 +250,166 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                                    TotalReqQuantity = g.Sum(r => r.ReqQuantity),
                                    ValidLicense = g.Sum(r => r.ValidLicense),
                                    BackupLicense = g.Sum(r => r.BackupLicense),
-                                   InvalidLicense = g.Sum(r => r.InvalidLicense),
+                                   NewTrain = lsCountData51.FirstOrDefault(r => r.IdCourse == g.Key)?.Count ?? 0,
+                                   ReTrain = lsCountData52.FirstOrDefault(r => r.IdCourse == g.Key)?.Count ?? 0,
+
                                }).ToList();
 
+            List<string> lsDataFile1 = new List<string>()
+            {
+                "1",
+                "冶金部",
+                "物理試驗處",
+                lsDataFile2.Sum(r => r.TotalReqQuantity).ToString(),
+                $"{lsDataFile2.Sum(r => r.ValidLicense)}",
+                $"{lsDataFile2.Sum(r => r.NewTrain) + lsDataFile2.Sum(r => r.ReTrain)}"
+            };
 
             // Xuất ra Excel
-            ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+            // 附件01：工安類證照取得情形一覽表.xlsx
+            using (ExcelPackage pck = new ExcelPackage())
+            {
+                pck.Workbook.Properties.Author = "VNW0014732";
+                pck.Workbook.Properties.Company = "FHS";
+                pck.Workbook.Properties.Title = "Exported by Phan Anh Tuan";
+                ExcelWorksheet ws = pck.Workbook.Worksheets.Add("DATA");
+
+                // Định dạng toàn Sheet
+                ws.Cells.Style.Font.Name = "DFKai-SB";
+                ws.Cells.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                ws.Cells.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                ws.Cells.Style.Font.Size = 14;
+                ws.Cells.Style.WrapText = true;
+
+                ws.Cells["A1"].Value = "工安類證照取得情形一覽表";
+                ws.Cells["A1:I1"].Merge = true;
+
+                ws.Cells["A2"].Value = "項次";
+                ws.Cells["B2"].Value = "事業部";
+                ws.Cells["C2"].Value = "單位";
+                ws.Cells["D2"].Value = $"{DateTime.Today.Year}第{mapQuater[quarter]}季\r\n應取得張數\r\nA";
+                ws.Cells["E2"].Value = "已取得張數\r\n\r\nB";
+                ws.Cells["F2"].Value = "缺額\r\n\r\nC=A-B";
+                ws.Cells["G2"].Value = "缺額張數說明原因";
+                ws.Cells["G3"].Value = "人員待補";
+                ws.Cells["H3"].Value = "尚未派訓";
+                ws.Cells["I3"].Value = "其他\r\n(留職停薪)";
+
+                ws.Cells["A5"].Value = "合計";
+                ws.Cells["A6"].Value = "備註：\r\n1.人員待補：\r\n2.尚未派訓：\r\n3.其他：\r\n4.應取證更新說明:";
+
+                ws.Cells["A2:A3"].Merge = true;
+                ws.Cells["B2:B3"].Merge = true;
+                ws.Cells["C2:C3"].Merge = true;
+                ws.Cells["D2:D3"].Merge = true;
+                ws.Cells["E2:E3"].Merge = true;
+                ws.Cells["F2:F3"].Merge = true;
+                ws.Cells["G2:I2"].Merge = true;
+                ws.Cells["A5:C5"].Merge = true;
+                ws.Cells["A6:I6"].Merge = true;
+
+                // Thêm dữ liệu từ Grid vào Excel
+                ws.Cells["A4"].Value = lsDataFile1[0];
+                ws.Cells["B4"].Value = lsDataFile1[1];
+                ws.Cells["C4"].Value = lsDataFile1[2];
+                ws.Cells["D4:D5"].Value = lsDataFile1[3];
+                ws.Cells["E4:E5"].Value = lsDataFile1[4];
+                ws.Cells["F4:F5"].Formula = "D4-E4";
+                ws.Cells["G4:G5"].Value = lsDataFile1[5];
+                ws.Cells["H4:H5"].Formula = "";
+                ws.Cells["I4:I5"].Value = lsDataFile2.Sum(r => r.TotalReqQuantity);
+
+                ws.Columns[01].Width = 20;
+                ws.Columns[02].Width = 20;
+                ws.Columns[03].Width = 20;
+                ws.Columns[04].Width = 20;
+                ws.Columns[05].Width = 20;
+                ws.Columns[06].Width = 20;
+                ws.Columns[07].Width = 20;
+                ws.Columns[08].Width = 20;
+                ws.Columns[09].Width = 20;
+
+                ws.Row(1).Height = 40;
+                ws.Row(6).Height = 120;
+
+                ws.Row(1).Style.Font.Size = 18;
+
+                ws.Row(1).Style.Font.Bold = true;
+                ws.Row(5).Style.Font.Bold = true;
+                ws.Row(6).Style.Font.Bold = true;
+                ws.Row(6).Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
+
+                ws.Cells["A1:I5"].Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                ws.Cells["A1:I5"].Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                ws.Cells["A1:I5"].Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                ws.Cells["A1:I5"].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+
+                string savePath = Path.Combine(pathDocument, $"附件01：工安類證照取得情形一覽表.xlsx");
+                FileInfo excelFile = new FileInfo(savePath);
+                pck.SaveAs(excelFile);
+            }
+
+            // 附件02：工安類證照統計表.xlsx
+            using (ExcelPackage pck = new ExcelPackage())
+            {
+                pck.Workbook.Properties.Author = "VNW0014732";
+                pck.Workbook.Properties.Company = "FHS";
+                pck.Workbook.Properties.Title = "Exported by Phan Anh Tuan";
+                ExcelWorksheet ws = pck.Workbook.Worksheets.Add("DATA");
+
+                // Định dạng toàn Sheet
+                ws.Cells.Style.Font.Name = "Times New Roman";
+                ws.Cells.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                ws.Cells.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                ws.Cells.Style.Font.Size = 14;
+                ws.Cells.Style.WrapText = false;
+
+                // Thêm dữ liệu từ Grid vào Excel
+                ws.Cells["A2"].Value = "項次";
+                ws.Cells["B2"].Value = "課程名稱";
+                ws.Cells["C2"].Value = "課程代號";
+                ws.Cells["D2"].Value = "應取得";
+                ws.Cells["E2"].Value = "實際取得";
+                ws.Cells["F2"].Value = "備援";
+                ws.Cells["G2"].Value = "初訓";
+                ws.Cells["H2"].Value = "複訓";
+                ws.Cells["I2"].Value = "人員待補";
+                ws.Cells["J2"].Value = "留職停薪";
+
+                ws.Cells["A3"].LoadFromCollection(lsDataFile2, false);
+
+                ws.Columns[01].Width = 20;
+                ws.Columns[02].Width = 60;
+                ws.Columns[03].Width = 20;
+                ws.Columns[04].Width = 20;
+                ws.Columns[05].Width = 20;
+                ws.Columns[06].Width = 20;
+                ws.Columns[07].Width = 20;
+                ws.Columns[08].Width = 20;
+                ws.Columns[09].Width = 20;
+                ws.Columns[10].Width = 20;
+
+                List<int> lsColAlignLefts = new List<int>() { 2 };
+                foreach (var indexCol in lsColAlignLefts)
+                    ws.Columns[indexCol].Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
+
+                // Tạo bảng theo dữ liệu của Excel
+                var dataRange = ws.Cells[ws.Dimension.Address];
+                ExcelTable tab = ws.Tables.Add(dataRange, "Table1");
+                tab.TableStyle = TableStyles.Medium2;
+
+                for (int i = 0; i < lsDataFile2.Count; i++)
+                {
+                    int indexRow = i + 3;
+                    ws.Cells[$"I{indexRow}"].Formula = $"D{indexRow}-SUM(E{indexRow}:H{indexRow})";
+                }
+
+                string savePath = Path.Combine(pathDocument, $"附件02：工安類證照統計表.xlsx");
+                FileInfo excelFile = new FileInfo(savePath);
+                pck.SaveAs(excelFile);
+            }
+
+            // 附件03：各廠提報資料.xlsx
             using (ExcelPackage pck = new ExcelPackage())
             {
                 pck.Workbook.Properties.Author = "VNW0014732";
@@ -249,11 +479,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                 ws.Cells["B3:M3"].Merge = true;
                 ws.Cells["B4:M4"].Merge = true;
 
-                string savePath = Path.Combine(pathDocument, $"{nameFile}.xlsx");
+                string savePath = Path.Combine(pathDocument, $"附件03：各廠提報資料.xlsx");
                 FileInfo excelFile = new FileInfo(savePath);
                 pck.SaveAs(excelFile);
             }
 
+            // 附件04：各處提報訓練明細.xlsx
             using (ExcelPackage pck = new ExcelPackage())
             {
                 pck.Workbook.Properties.Author = "VNW0014732";
@@ -269,31 +500,37 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                 ws.Cells.Style.WrapText = false;
 
                 // Thêm dữ liệu từ Grid vào Excel
-                ws.Cells["A2"].Value = "項次";
-                ws.Cells["B2"].Value = "課程名稱";
-                ws.Cells["C2"].Value = "課程代號";
-                ws.Cells["D2"].Value = "應取得";
-                ws.Cells["E2"].Value = "實際取得";
-                ws.Cells["F2"].Value = "備援";
-                ws.Cells["G2"].Value = "初訓";
-                ws.Cells["H2"].Value = "複訓";
-                ws.Cells["I2"].Value = "人員待補";
-                ws.Cells["J2"].Value = "留職停薪";
+                ws.Cells["A1"].Value = "項次";
+                ws.Cells["B1"].Value = "部門代號";
+                ws.Cells["C1"].Value = "部門名稱";
+                ws.Cells["D1"].Value = "訓練證照代號";
+                ws.Cells["E1"].Value = "訓練證照名稱";
+                ws.Cells["F1"].Value = "職務代號";
+                ws.Cells["G1"].Value = "職務名稱";
+                ws.Cells["H1"].Value = "編制人數";
+                ws.Cells["I1"].Value = "實際人數";
+                ws.Cells["J1"].Value = "應取證張數";
+                ws.Cells["K1"].Value = "實際取證張數";
+                ws.Cells["L1"].Value = "備援證照張數";
+                ws.Cells["M1"].Value = "無效證照張數";
 
-                ws.Cells["A3"].LoadFromCollection(lsDataFile2, false);
+                ws.Cells["A2"].LoadFromCollection(lsBasesDisplay, false);
 
                 ws.Columns[01].Width = 20;
-                ws.Columns[02].Width = 60;
+                ws.Columns[02].Width = 20;
                 ws.Columns[03].Width = 20;
                 ws.Columns[04].Width = 20;
-                ws.Columns[05].Width = 20;
+                ws.Columns[05].Width = 60;
                 ws.Columns[06].Width = 20;
-                ws.Columns[07].Width = 20;
+                ws.Columns[07].Width = 30;
                 ws.Columns[08].Width = 20;
                 ws.Columns[09].Width = 20;
                 ws.Columns[10].Width = 20;
+                ws.Columns[11].Width = 20;
+                ws.Columns[12].Width = 20;
+                ws.Columns[13].Width = 20;
 
-                List<int> lsColAlignLefts = new List<int>() { 2 };
+                List<int> lsColAlignLefts = new List<int>() { 5, 7 };
                 foreach (var indexCol in lsColAlignLefts)
                     ws.Columns[indexCol].Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
 
@@ -302,53 +539,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                 ExcelTable tab = ws.Tables.Add(dataRange, "Table1");
                 tab.TableStyle = TableStyles.Medium2;
 
-                //ws.Cells["A1"].Value = "廠處代號";
-                //ws.Cells["A2"].Value = "廠處名稱";
-                //ws.Cells["A3"].Value = "編制人數";
-                //ws.Cells["A4"].Value = "實際人數";
-
-                //ws.Cells["B1"].Value = idDept2word;
-                //ws.Cells["B2"].Value = "";
-                //ws.Cells["B3"].Value = "";
-                //ws.Cells["B4"].Value = "";
-
-                //ws.Cells["B1:M1"].Merge = true;
-                //ws.Cells["B2:M2"].Merge = true;
-                //ws.Cells["B3:M3"].Merge = true;
-                //ws.Cells["B4:M4"].Merge = true;
-
-                string savePath = Path.Combine(pathDocument, $"附件02：工安類證照統計表.xlsx");
+                string savePath = Path.Combine(pathDocument, $"附件04：各處提報訓練明細.xlsx");
                 FileInfo excelFile = new FileInfo(savePath);
                 pck.SaveAs(excelFile);
             }
-        }
 
-        private void File5_2(string nameFile)
-        {
-            int idCounter = 1;
-
-            var lsQueryFile52 = (from data in lsBasesDisplay
-                                 where data.ValidLicense && (data.ExpDate.HasValue ? (data.ExpDate >= startOfQuarter && data.ExpDate <= endOfQuarter) : false)
-                                 join usr in lsUser on data.IdUser equals usr.Id
-                                 join dept in lsDept on usr.IdDepartment equals dept.Id
-                                 select new
-                                 {
-                                     Id = idCounter++,
-                                     IdDept = usr.IdDepartment,
-                                     DivisionName = "冶金部",
-                                     DeptName = dept.DisplayName,
-                                     UserID = usr.Id,
-                                     UserNameTW = usr.DisplayName,
-                                     UserNameVN = usr.DisplayNameVN,
-                                     CitizenID = usr.CitizenID,
-                                     DOB = usr.DOB,
-                                     CourseName = data.CourseName,
-                                     JobName = data.JobName,
-                                     Nationality = usr.Nationality.Replace("TW", "台灣").Replace("VN", "越南").Replace("CN", "中國")
-                                 }).ToList();
-
-            // Xuất ra Excel
-            ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+            // 附件05.1：初訓之提報需求人員名單.xlsx, 附件05.2：.複訓之提報需求人員名單.xlsx
             using (ExcelPackage pck = new ExcelPackage())
             {
                 pck.Workbook.Properties.Author = "VNW0014732";
@@ -419,8 +615,14 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
 
                 ws.Row(2).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
 
-                string savePath = Path.Combine(pathDocument, $"{nameFile}.xlsx");
+                string savePath = Path.Combine(pathDocument, $"附件05.2：.複訓之提報需求人員名單.xlsx");
                 FileInfo excelFile = new FileInfo(savePath);
+                pck.SaveAs(excelFile);
+
+
+                ws.Cells["A3"].LoadFromCollection(lsQueryFile51, false);
+                savePath = Path.Combine(pathDocument, $"附件05.1：初訓之提報需求人員名單.xlsx");
+                excelFile = new FileInfo(savePath);
                 pck.SaveAs(excelFile);
             }
         }
@@ -530,10 +732,15 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
             if (XtraDialog.Show(ucInfo, "選導出表單", MessageBoxButtons.OKCancel) != DialogResult.OK)
                 return;
 
-            var lsFiles = ucInfo.fileMappings;
+            bool IsWrongData = ucInfo.IsWrongData;
             quarter = ucInfo.quarter;
+            lsData51 = ucInfo.lsData51;
 
-            if (lsFiles == null) return;
+            if (IsWrongData)
+            {
+                DefaultMsg.MsgError("資料初訓不正確！");
+                return;
+            }
 
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
             {
@@ -544,14 +751,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                 if (!Directory.Exists(pathDocument))
                     Directory.CreateDirectory(pathDocument);
 
-                if (lsFiles.ContainsKey("File3"))
-                {
-                    File3(lsFiles["File3"]);
-                }
-                if (lsFiles.ContainsKey("File5_2"))
-                {
-                    File5_2(lsFiles["File5_2"]);
-                }
+                FileNormal();
             }
 
             Process.Start(pathDocument);
