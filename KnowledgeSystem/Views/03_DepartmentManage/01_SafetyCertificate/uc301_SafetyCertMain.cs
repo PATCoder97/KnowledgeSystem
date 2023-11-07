@@ -42,6 +42,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
         BindingSource sourceBases = new BindingSource();
 
         List<dm_User> lsUser = new List<dm_User>();
+        List<dm_User> lsAllUser;
         List<dm_Departments> lsDept;
         List<dm_JobTitle> lsJobs;
         List<dt301_Course> lsCourses;
@@ -52,6 +53,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
         double countBackup = 0;
         double countInvalid = 0;
         int quarter = 1;
+        int year = 1;
         DateTime startOfQuarter = default(DateTime);
         DateTime endOfQuarter = default(DateTime);
         string pathDocument = "";
@@ -118,9 +120,35 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
         // Xuất các phụ kiện
         private void FileNormal()
         {
+            lsAllUser = dm_UserBUS.Instance.GetList();
             int idCounter = 1;
+            // 附件04：各處提報訓練明細
+            var lsDataFile4 = (from data in lsBasesDisplay
+                               join usr in lsAllUser on data.IdUser equals usr.Id
+                               //join dept in lsDept on usr.IdDepartment equals dept.Id
+                               join course in lsCourses on data.IdCourse equals course.Id
+                               select new
+                               {
+                                   部門代號 = usr.IdDepartment,
+                                   //部門名稱 = dept.DisplayName,
+                                   人員代號 = data.IdUser,
+                                   人員姓名 = data.UserName,
+                                   到職日 = $"{usr.DateCreate:yyyyMMdd}",
+                                   職務代號 = data.IdJobTitle,
+                                   職務名稱 = data.JobName.Replace(data.IdJobTitle, ""),
+                                   課程代號 = data.IdCourse,
+                                   課程名稱 = data.CourseName.Replace(data.IdCourse, ""),
+                                   課程類別 = course.Category,
+                                   上課日期 = $"{data.DateReceipt:yyyyMMdd}{(data.ExpDate.HasValue ? $"-{data.ExpDate:yyyyMMdd}" : "")}",
+                                   應取證人員 = data.ValidLicense ? "Y" : "",
+                                   備援證照 = data.BackupLicense ? "Y" : "",
+                                   無效證照 = data.InvalidLicense ? "Y" : "",
+                                   備註 = data.Describe
+                               }).ToList();
 
             // 附件03：各廠提報資料
+            idCounter = 1;
+
             var lsCertReqs = dt301_CertReqSetBUS.Instance.GetListByDept(idDept2word);
 
             var lsCountDataBase = (from data in lsBasesDisplay
@@ -176,6 +204,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
 
             // 附件05.2：複訓之提報需求人員名單
             idCounter = 1;
+
             var lsQueryFile52 = (from data in lsBasesDisplay
                                  where data.ValidLicense && (data.ExpDate.HasValue ? (data.ExpDate >= startOfQuarter && data.ExpDate <= endOfQuarter) : false)
                                  join usr in lsUser on data.IdUser equals usr.Id
@@ -199,6 +228,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
 
             // 附件05.1：初訓之提報需求人員名單
             idCounter = 1;
+
             var lsQueryFile51 = (from data in lsData51
                                  join usr in lsUser on data.IdUser equals usr.Id
                                  join dept in lsDept on usr.IdDepartment equals dept.Id
@@ -252,9 +282,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                                    BackupLicense = g.Sum(r => r.BackupLicense),
                                    NewTrain = lsCountData51.FirstOrDefault(r => r.IdCourse == g.Key)?.Count ?? 0,
                                    ReTrain = lsCountData52.FirstOrDefault(r => r.IdCourse == g.Key)?.Count ?? 0,
-
                                }).ToList();
 
+            // 附件01：工安類證照取得情形一覽表
             List<string> lsDataFile1 = new List<string>()
             {
                 "1",
@@ -358,7 +388,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                 ExcelWorksheet ws = pck.Workbook.Worksheets.Add("DATA");
 
                 // Định dạng toàn Sheet
-                ws.Cells.Style.Font.Name = "Times New Roman";
+                ws.Cells.Style.Font.Name = "DFKai-SB";
                 ws.Cells.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                 ws.Cells.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
                 ws.Cells.Style.Font.Size = 14;
@@ -404,6 +434,21 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                     ws.Cells[$"I{indexRow}"].Formula = $"D{indexRow}-SUM(E{indexRow}:H{indexRow})";
                 }
 
+                ws.Cells["A1"].Value = "課程";
+                ws.Cells["D1"].Value = idDept2word;
+                ws.Cells["G1"].Value = "情形";
+
+                ws.Cells["A1:C1"].Merge = true;
+                ws.Cells["D1:F1"].Merge = true;
+                ws.Cells["G1:J1"].Merge = true;
+
+                tab.ShowTotal = true;
+                for (int i = 3; i < 10; i++)
+                {
+                    tab.Columns[i].TotalsRowFunction = RowFunctions.Sum;
+                }
+                ws.Calculate();
+
                 string savePath = Path.Combine(pathDocument, $"附件02：工安類證照統計表.xlsx");
                 FileInfo excelFile = new FileInfo(savePath);
                 pck.SaveAs(excelFile);
@@ -418,7 +463,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                 ExcelWorksheet ws = pck.Workbook.Worksheets.Add("DATA");
 
                 // Định dạng toàn Sheet
-                ws.Cells.Style.Font.Name = "Times New Roman";
+                ws.Cells.Style.Font.Name = "DFKai-SB";
                 ws.Cells.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                 ws.Cells.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
                 ws.Cells.Style.Font.Size = 14;
@@ -493,36 +538,22 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                 ExcelWorksheet ws = pck.Workbook.Worksheets.Add("DATA");
 
                 // Định dạng toàn Sheet
-                ws.Cells.Style.Font.Name = "Times New Roman";
+                ws.Cells.Style.Font.Name = "DFKai-SB";
                 ws.Cells.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                 ws.Cells.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
                 ws.Cells.Style.Font.Size = 14;
                 ws.Cells.Style.WrapText = false;
 
                 // Thêm dữ liệu từ Grid vào Excel
-                ws.Cells["A1"].Value = "項次";
-                ws.Cells["B1"].Value = "部門代號";
-                ws.Cells["C1"].Value = "部門名稱";
-                ws.Cells["D1"].Value = "訓練證照代號";
-                ws.Cells["E1"].Value = "訓練證照名稱";
-                ws.Cells["F1"].Value = "職務代號";
-                ws.Cells["G1"].Value = "職務名稱";
-                ws.Cells["H1"].Value = "編制人數";
-                ws.Cells["I1"].Value = "實際人數";
-                ws.Cells["J1"].Value = "應取證張數";
-                ws.Cells["K1"].Value = "實際取證張數";
-                ws.Cells["L1"].Value = "備援證照張數";
-                ws.Cells["M1"].Value = "無效證照張數";
-
-                ws.Cells["A2"].LoadFromCollection(lsBasesDisplay, false);
+                ws.Cells["A1"].LoadFromCollection(lsDataFile4, true);
 
                 ws.Columns[01].Width = 20;
                 ws.Columns[02].Width = 20;
                 ws.Columns[03].Width = 20;
                 ws.Columns[04].Width = 20;
-                ws.Columns[05].Width = 60;
+                ws.Columns[05].Width = 20;
                 ws.Columns[06].Width = 20;
-                ws.Columns[07].Width = 30;
+                ws.Columns[07].Width = 20;
                 ws.Columns[08].Width = 20;
                 ws.Columns[09].Width = 20;
                 ws.Columns[10].Width = 20;
@@ -553,7 +584,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                 ExcelWorksheet ws = pck.Workbook.Worksheets.Add("DATA");
 
                 // Định dạng toàn Sheet
-                ws.Cells.Style.Font.Name = "Times New Roman";
+                ws.Cells.Style.Font.Name = "DFKai-SB";
                 ws.Cells.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                 ws.Cells.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
                 ws.Cells.Style.Font.Size = 14;
@@ -587,7 +618,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                 ws.Columns[7].Width = 30;
                 ws.Columns[8].Width = 20;
                 ws.Columns[9].Width = 20;
-                ws.Columns[10].Width = 60;
+                ws.Columns[10].Width = 80;
                 ws.Columns[11].Width = 30;
                 ws.Columns[12].Width = 20;
                 ws.Columns[13].Width = 20;
@@ -625,6 +656,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                 excelFile = new FileInfo(savePath);
                 pck.SaveAs(excelFile);
             }
+
+            // 附件06：派訓數量統計
         }
 
         private void uc301_SafetyCertMain_Load(object sender, EventArgs e)
@@ -734,6 +767,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
 
             bool IsWrongData = ucInfo.IsWrongData;
             quarter = ucInfo.quarter;
+            year = ucInfo.year;
             lsData51 = ucInfo.lsData51;
 
             if (IsWrongData)
@@ -744,7 +778,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
 
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
             {
-                startOfQuarter = new DateTime(DateTime.Today.Year, 3 * quarter - 2, 1);
+                startOfQuarter = new DateTime(year, 3 * quarter - 2, 1);
                 endOfQuarter = startOfQuarter.AddMonths(3).AddSeconds(-1);
 
                 pathDocument = Path.Combine(TPConfigs.DocumentPath(), $"工安證照 {DateTime.Now:yyyyMMddHHmm}");

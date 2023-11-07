@@ -78,6 +78,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
         {
             btnUploadFile51.ImageOptions.SvgImage = TPSvgimages.UploadFile;
 
+            List<int> lsYears = new List<int>();
+            for (int i = 0; i < 5; i++)
+                lsYears.Add(DateTime.Today.Year - i);
+            cbbYear.Properties.Items.AddRange(lsYears);
+            cbbYear.SelectedItem = DateTime.Today.Year;
+
             List<int> lsQuarters = new List<int>() { 1, 2, 3, 4 };
             cbbQuarter.Properties.Items.AddRange(lsQuarters);
 
@@ -86,8 +92,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
             cbbQuarter.SelectedItem = currentQuarter;
         }
 
+        public int year { get; set; }
         public int quarter { get; set; }
-
         public bool IsWrongData = false;
 
         internal List<dt301_Base> lsData51 = new List<dt301_Base>();
@@ -95,6 +101,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
         private void cbbQuarter_SelectedIndexChanged(object sender, EventArgs e)
         {
             quarter = Convert.ToInt16(cbbQuarter.EditValue);
+        }
+
+        private void cbbYear_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            year = Convert.ToInt16(cbbYear.EditValue);
         }
 
         private void btnUploadFile51_Click(object sender, EventArgs e)
