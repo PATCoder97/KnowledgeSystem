@@ -265,7 +265,7 @@
             // 
             // gridColumn12
             // 
-            this.gridColumn12.Caption = "家人聯絡電話";
+            this.gridColumn12.Caption = "家人電話";
             this.gridColumn12.FieldName = "PhoneNum2";
             this.gridColumn12.Name = "gridColumn12";
             this.gridColumn12.Visible = true;

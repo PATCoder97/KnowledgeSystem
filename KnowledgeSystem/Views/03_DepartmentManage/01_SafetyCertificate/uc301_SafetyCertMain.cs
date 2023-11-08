@@ -25,6 +25,8 @@ using System.Xml.XPath;
 using DevExpress.ClipboardSource.SpreadsheetML;
 using DevExpress.XtraSplashScreen;
 using DevExpress.Security;
+using DevExpress.XtraExport.Helpers;
+using DevExpress.XtraGrid.Columns;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
 {
@@ -78,6 +80,14 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
             btnAdd.ImageOptions.SvgImage = TPSvgimages.Add;
             btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
             btnExportExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
+            btnFilter.ImageOptions.SvgImage = TPSvgimages.Filter;
+
+            btnValidCert.ImageOptions.SvgImage = TPSvgimages.Num1;
+            btnBackCert.ImageOptions.SvgImage = TPSvgimages.Num2;
+            btnInvalidCert.ImageOptions.SvgImage = TPSvgimages.Num3;
+            btnWaitCert.ImageOptions.SvgImage = TPSvgimages.Num4;
+            btnExpCert.ImageOptions.SvgImage = TPSvgimages.Num5;
+            btnClearFilter.ImageOptions.SvgImage = TPSvgimages.Close;
         }
 
         private void LoadData()
@@ -749,6 +759,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
         {
             GridView view = sender as GridView;
             dt301_Base _base = view.GetRow(view.FocusedRowHandle) as dt301_Base;
+            if (_base == null) return;
 
             f301_CertInfo fInfo = new f301_CertInfo();
             fInfo._eventInfo = EventFormInfo.View;
@@ -789,6 +800,36 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
             }
 
             Process.Start(pathDocument);
+        }
+
+        private void btnValidCert_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            gvData.ActiveFilterString = "[ValidLicense] = True AND [BackupLicense] = False AND [InvalidLicense] = False";
+        }
+
+        private void SetFilter(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            string filterString = "";
+            switch (e.Item.Caption)
+            {
+                case "應取證照":
+                    filterString = "[ValidLicense] = True AND [BackupLicense] = False AND [InvalidLicense] = False";
+                    break;
+                case "備援證照":
+                    filterString = "[ValidLicense] = False AND [BackupLicense] = True AND [InvalidLicense] = False";
+                    break;
+                case "無效證照":
+                    filterString = "[ValidLicense] = False AND [BackupLicense] = False AND [InvalidLicense] = True";
+                    break;
+                case "在等證照":
+                    filterString = "[ValidLicense] = False AND [BackupLicense] = False AND [InvalidLicense] = False";
+                    break;
+                case "過期證照":
+                    filterString = $"[ValidLicense] = True  AND [ExpDate] IS NOT NULL AND [ExpDate] < '{DateTime.Today.ToShortDateString()}' ";
+                    break;
+            }
+
+            gvData.ActiveFilterString = filterString;
         }
     }
 }

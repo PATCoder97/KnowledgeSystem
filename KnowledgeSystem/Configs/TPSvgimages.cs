@@ -37,5 +37,12 @@ namespace KnowledgeSystem.Configs
         public static SvgImage Conferred = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_change_user.svg"));
         public static SvgImage UpLevel = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_uplevel.svg"));
         public static SvgImage PersonnelChanges = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_personnel_changes.svg"));
+        public static SvgImage Num1 = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_circled_1.svg"));
+        public static SvgImage Num2 = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_circled_2.svg"));
+        public static SvgImage Num3 = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_circled_3.svg"));
+        public static SvgImage Num4 = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_circled_4.svg"));
+        public static SvgImage Num5 = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_circled_5.svg"));
+        public static SvgImage Num6 = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_circled_6.svg"));
+        public static SvgImage Filter = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_filter.svg"));
     }
 }
