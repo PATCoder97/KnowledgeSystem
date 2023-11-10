@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace KnowledgeSystem.Configs
+namespace KnowledgeSystem.Helpers
 {
     public static class GridControlHelper
     {

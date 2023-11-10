@@ -1,6 +1,6 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
-using KnowledgeSystem.Configs;
+using KnowledgeSystem.Helpers;
 using System;
 using System.Windows.Forms;
 

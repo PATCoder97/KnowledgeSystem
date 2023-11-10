@@ -9,7 +9,7 @@ using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraSplashScreen;
 using DevExpress.XtraSpreadsheet.Model;
-using KnowledgeSystem.Configs;
+using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator;
 using OfficeOpenXml.Style;
 using OfficeOpenXml.Table.PivotTable;

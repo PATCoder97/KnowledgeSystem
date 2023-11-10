@@ -3,7 +3,7 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraSplashScreen;
 using DevExpress.XtraSpreadsheet.Model;
 using ExcelDataReader;
-using KnowledgeSystem.Configs;
+using KnowledgeSystem.Helpers;
 using OfficeOpenXml.Style;
 using OfficeOpenXml.Table;
 using OfficeOpenXml;

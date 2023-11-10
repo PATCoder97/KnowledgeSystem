@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KnowledgeSystem.Configs
+namespace KnowledgeSystem.Helpers
 {
     public class TPSvgimages
     {

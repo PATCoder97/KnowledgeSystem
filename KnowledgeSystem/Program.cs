@@ -2,7 +2,7 @@
 using DevExpress.LookAndFeel;
 using DevExpress.Skins;
 using DevExpress.UserSkins;
-using KnowledgeSystem.Configs;
+using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._00_Generals;
 using KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase;
 using KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate;

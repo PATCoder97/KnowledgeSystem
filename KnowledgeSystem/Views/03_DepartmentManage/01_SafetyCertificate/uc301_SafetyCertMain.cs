@@ -4,29 +4,18 @@ using DevExpress.Data;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraSpreadsheet.Model;
-using KnowledgeSystem.Configs;
-using KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase;
+using DevExpress.XtraSplashScreen;
+using KnowledgeSystem.Helpers;
+using OfficeOpenXml;
 using OfficeOpenXml.Style;
 using OfficeOpenXml.Table;
-using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.IO;
 using System.Diagnostics;
-using System.Xml.XPath;
-using DevExpress.ClipboardSource.SpreadsheetML;
-using DevExpress.XtraSplashScreen;
-using DevExpress.Security;
-using DevExpress.XtraExport.Helpers;
-using DevExpress.XtraGrid.Columns;
+using System.IO;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
 {
@@ -671,17 +660,16 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                 FileInfo excelFile = new FileInfo(savePath);
                 pck.SaveAs(excelFile);
 
-                ws.DeleteRow(3, lsQueryFile52.Count - lsQueryFile51.Count);
-                ws.Cells["A3"].LoadFromCollection(lsQueryFile51, false);
+                // Nếu có dữ liệu File5.1 thì xuất theo Format file5.2
+                if (lsQueryFile51.Count != 0)
+                {
+                    ws.DeleteRow(3, lsQueryFile52.Count - lsQueryFile51.Count);
+                    ws.Cells["A3"].LoadFromCollection(lsQueryFile51, false);
 
-                //// Define the data range on the source sheet, Ading a table to a Range
-                //rangeTab = ws.Cells[$"A2:{ws.Dimension.End.Address}"];
-                //tab = ws.Tables.Add(rangeTab, "Table1");
-                //tab.TableStyle = TableStyles.Medium2;
-
-                savePath = Path.Combine(pathDocument, $"附件05.1：初訓之提報需求人員名單.xlsx");
-                excelFile = new FileInfo(savePath);
-                pck.SaveAs(excelFile);
+                    savePath = Path.Combine(pathDocument, $"附件05.1：初訓之提報需求人員名單.xlsx");
+                    excelFile = new FileInfo(savePath);
+                    pck.SaveAs(excelFile);
+                }
             }
 
             // 附件06：派訓數量統計

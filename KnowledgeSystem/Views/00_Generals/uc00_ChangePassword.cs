@@ -1,6 +1,6 @@
 ﻿using BusinessLayer;
 using DevExpress.XtraEditors;
-using KnowledgeSystem.Configs;
+using KnowledgeSystem.Helpers;
 using System;
 
 namespace KnowledgeSystem.Views._00_Generals
