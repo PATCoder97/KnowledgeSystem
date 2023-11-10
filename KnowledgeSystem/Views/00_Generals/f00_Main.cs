@@ -64,8 +64,8 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void GetUserLogin()
         {
-            Size = new Size(100, 100);
-            WindowState = FormWindowState.Normal;
+            //Size = new Size(100, 100);
+            //WindowState = FormWindowState.Normal;
             f00_Login frm = new f00_Login();
             frm.ShowDialog();
 
@@ -131,6 +131,7 @@ namespace KnowledgeSystem.Views._00_Generals
         private void fMain_Load(object sender, EventArgs e)
         {
             GetSysStaticValue();
+            GetUserLogin();
 
 #if DEBUG
             // Không cần check update khi debug
@@ -169,17 +170,17 @@ namespace KnowledgeSystem.Views._00_Generals
             Text = TPConfigs.SoftNameTW + AppCopyRight.CopyRightString();
             lbSoftName.Text = TPConfigs.SoftNameTW;
 
-            Size = new Size(100, 100);
-            Location = new Point((Screen.PrimaryScreen.WorkingArea.Width - this.Width) / 2,
-                          (Screen.PrimaryScreen.WorkingArea.Height - this.Height) / 2);
-            StartPosition = FormStartPosition.CenterScreen;
+            //Size = new Size(100, 100);
+            //Location = new Point((Screen.PrimaryScreen.WorkingArea.Width - this.Width) / 2,
+            //              (Screen.PrimaryScreen.WorkingArea.Height - this.Height) / 2);
+            //StartPosition = FormStartPosition.CenterScreen;
 
             InitializeControl();
         }
 
         private void fMain_Shown(object sender, EventArgs e)
         {
-            GetUserLogin();
+          
         }
 
         private void ShowFromByFrame(int IdForm_, TileItemEventArgs e)
@@ -187,7 +188,7 @@ namespace KnowledgeSystem.Views._00_Generals
             bool IsGranted = AppPermission.Instance.CheckAppPermission(IdForm_);
             if (!IsGranted)
             {
-                DefaultMsg.MsgNoPermission();
+                MsgTP.MsgNoPermission();
                 return;
             }
 

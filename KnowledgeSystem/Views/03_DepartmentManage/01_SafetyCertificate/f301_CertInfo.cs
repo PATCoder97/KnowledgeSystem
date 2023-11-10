@@ -193,7 +193,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
 
         private void btnDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            DefaultMsg.MsgConfirmDel();
+            MsgTP.MsgConfirmDel();
 
             _eventInfo = EventFormInfo.Delete;
             LockControl();
@@ -278,7 +278,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
             }
             else
             {
-                DefaultMsg.MsgErrorDB();
+                MsgTP.MsgErrorDB();
             }
         }
 

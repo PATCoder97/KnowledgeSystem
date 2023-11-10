@@ -128,7 +128,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
         }
 
         // Xuất các phụ kiện
-        private void FileNormal()
+        private void ExportExcelFiles()
         {
             lsAllUser = dm_UserBUS.Instance.GetList();
             int idCounter = 1;
@@ -216,7 +216,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
             idCounter = 1;
 
             var lsQueryFile52 = (from data in lsBasesDisplay
-                                 where data.ValidLicense && (data.ExpDate.HasValue ? (data.ExpDate >= startOfQuarter && data.ExpDate <= endOfQuarter) : false)
+                                 where data.ValidLicense && (data.ExpDate.HasValue ? (data.ExpDate <= endOfQuarter) : false)
                                  join usr in lsUser on data.IdUser equals usr.Id
                                  join dept in lsDept on usr.IdDepartment equals dept.Id
                                  select new
@@ -453,7 +453,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                 ws.Cells["G1:J1"].Merge = true;
 
                 tab.ShowTotal = true;
-                for (int i = 3; i < 10; i++)
+                for (int i = 3; i <= 9; i++)
                 {
                     tab.Columns[i].TotalsRowFunction = RowFunctions.Sum;
                 }
@@ -519,6 +519,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                 ExcelTable tab = ws.Tables.Add(dataRange, "Table1");
                 tab.TableStyle = TableStyles.Medium2;
 
+                tab.ShowTotal = true;
+                for (int i = 7; i <= 12; i++)
+                {
+                    tab.Columns[i].TotalsRowFunction = RowFunctions.Sum;
+                }
+                ws.Calculate();
+
                 ws.Cells["A1"].Value = "廠處代號";
                 ws.Cells["A2"].Value = "廠處名稱";
                 ws.Cells["A3"].Value = "編制人數";
@@ -580,6 +587,15 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                 ExcelTable tab = ws.Tables.Add(dataRange, "Table1");
                 tab.TableStyle = TableStyles.Medium2;
 
+                tab.ShowTotal = true;
+                for (int i = 10; i <= 12; i++)
+                {
+                    //  tab.Columns[i].TotalsRowFunction = RowFunctions.Custom;
+                    tab.Columns[i].TotalsRowFormula = $"COUNTIF([{tab.Columns[i].Name}],\"Y\")";
+                }
+                ws.Calculate();
+                ws.Cells[ws.Dimension.Address].AutoFitColumns();
+
                 string savePath = Path.Combine(pathDocument, $"附件04：各處提報訓練明細.xlsx");
                 FileInfo excelFile = new FileInfo(savePath);
                 pck.SaveAs(excelFile);
@@ -616,52 +632,53 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                 ws.Cells["M2"].Value = "Thời gian\r\n時期";
                 ws.Cells["N2"].Value = "Địa điểm học\r\n地點";
 
-                ws.Cells["A3"].LoadFromCollection(lsQueryFile52, false);
-
                 ws.Row(1).Height = 40;
                 ws.Columns[1].Width = 20;
                 ws.Columns[2].Width = 20;
                 ws.Columns[3].Width = 20;
                 ws.Columns[4].Width = 40;
                 ws.Columns[5].Width = 20;
-                ws.Columns[6].Width = 20;
+                ws.Columns[6].Width = 30;
                 ws.Columns[7].Width = 30;
                 ws.Columns[8].Width = 20;
                 ws.Columns[9].Width = 20;
                 ws.Columns[10].Width = 80;
-                ws.Columns[11].Width = 30;
+                ws.Columns[11].Width = 35;
                 ws.Columns[12].Width = 20;
                 ws.Columns[13].Width = 20;
                 ws.Columns[14].Width = 20;
+
+                ws.Cells["A3"].LoadFromCollection(lsQueryFile52, false);
+                var rangeTab = ws.Cells[$"A2:{ws.Dimension.End.Address}"];
 
                 List<int> lsColAlignLefts = new List<int>() { 4, 6, 7, 10, 11 };
                 foreach (var indexCol in lsColAlignLefts)
                     ws.Columns[indexCol].Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
 
-                // Set the column format to DateTime
-                ws.Column(9).Style.Numberformat.Format = "yyyy/MM/dd";
-
-                // Define the data range on the source sheet
-                var dataRange = ws.Cells[ws.Dimension.Address];
-
-                //Ading a table to a Range
-                ExcelTable tab = ws.Tables.Add(dataRange, "Table1");
-
-                //Formating the table style
-                tab.TableStyle = TableStyles.Medium2;
-
                 ws.Cells["A1"].Value = "冶金部人員證照受訓需求表(初訓)";
                 ws.Cells["A1"].Style.Font.Size = 28;
                 ws.Cells["A1:N1"].Merge = true;
-
                 ws.Row(2).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+
+                // Set the column format to DateTime
+                ws.Column(9).Style.Numberformat.Format = "yyyy/MM/dd";
+
+                // Ading a table to a Range
+                ExcelTable tab = ws.Tables.Add(rangeTab, "Table1");
+                tab.TableStyle = TableStyles.Medium2;
 
                 string savePath = Path.Combine(pathDocument, $"附件05.2：.複訓之提報需求人員名單.xlsx");
                 FileInfo excelFile = new FileInfo(savePath);
                 pck.SaveAs(excelFile);
 
-
+                ws.DeleteRow(3, lsQueryFile52.Count - lsQueryFile51.Count);
                 ws.Cells["A3"].LoadFromCollection(lsQueryFile51, false);
+
+                //// Define the data range on the source sheet, Ading a table to a Range
+                //rangeTab = ws.Cells[$"A2:{ws.Dimension.End.Address}"];
+                //tab = ws.Tables.Add(rangeTab, "Table1");
+                //tab.TableStyle = TableStyles.Medium2;
+
                 savePath = Path.Combine(pathDocument, $"附件05.1：初訓之提報需求人員名單.xlsx");
                 excelFile = new FileInfo(savePath);
                 pck.SaveAs(excelFile);
@@ -783,7 +800,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
 
             if (IsWrongData)
             {
-                DefaultMsg.MsgError("資料初訓不正確！");
+                MsgTP.MsgError("資料初訓不正確！");
                 return;
             }
 
@@ -796,15 +813,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                 if (!Directory.Exists(pathDocument))
                     Directory.CreateDirectory(pathDocument);
 
-                FileNormal();
+                ExportExcelFiles();
             }
 
             Process.Start(pathDocument);
-        }
-
-        private void btnValidCert_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            gvData.ActiveFilterString = "[ValidLicense] = True AND [BackupLicense] = False AND [InvalidLicense] = False";
         }
 
         private void SetFilter(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

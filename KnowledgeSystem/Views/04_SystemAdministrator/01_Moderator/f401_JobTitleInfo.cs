@@ -162,7 +162,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             }
             else
             {
-                DefaultMsg.MsgErrorDB();
+                MsgTP.MsgErrorDB();
             }
         }
     }

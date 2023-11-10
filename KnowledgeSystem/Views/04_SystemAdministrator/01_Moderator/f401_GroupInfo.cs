@@ -243,7 +243,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             }
             else
             {
-                DefaultMsg.MsgErrorDB();
+                MsgTP.MsgErrorDB();
             }
         }
 
@@ -255,7 +255,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
         private void btnDel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            DefaultMsg.MsgConfirmDel();
+            MsgTP.MsgConfirmDel();
 
             _eventInfo = EventFormInfo.Delete;
             LockControl();

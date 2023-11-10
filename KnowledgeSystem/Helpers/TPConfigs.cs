@@ -82,7 +82,7 @@ namespace KnowledgeSystem.Configs
         ViewOnly
     }
 
-    public static class DefaultMsg
+    public static class MsgTP
     {
         public static void MsgErrorDB()
         {

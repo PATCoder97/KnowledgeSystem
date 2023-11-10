@@ -41,6 +41,8 @@
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.btnDownTemp51 = new DevExpress.XtraEditors.SimpleButton();
+            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cbbYear.Properties)).BeginInit();
@@ -53,11 +55,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
             // 
             this.layoutControl1.AllowCustomization = false;
+            this.layoutControl1.Controls.Add(this.btnDownTemp51);
             this.layoutControl1.Controls.Add(this.cbbYear);
             this.layoutControl1.Controls.Add(this.btnUploadFile51);
             this.layoutControl1.Controls.Add(this.gcData51);
@@ -164,7 +168,8 @@
             this.emptySpaceItem1,
             this.layoutControlItem2,
             this.layoutControlItem1,
-            this.layoutControlItem3});
+            this.layoutControlItem3,
+            this.layoutControlItem4});
             this.Root.Name = "Root";
             this.Root.Size = new System.Drawing.Size(796, 446);
             this.Root.TextVisible = false;
@@ -194,7 +199,7 @@
             this.emptySpaceItem1.AppearanceItemCaption.Options.UseFont = true;
             this.emptySpaceItem1.Location = new System.Drawing.Point(256, 0);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(394, 36);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(268, 36);
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
             // layoutControlItem2
@@ -243,6 +248,32 @@
             this.layoutControlItem3.TextSize = new System.Drawing.Size(19, 24);
             this.layoutControlItem3.TextToControlDistance = 5;
             // 
+            // btnDownTemp51
+            // 
+            this.btnDownTemp51.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDownTemp51.Appearance.Options.UseFont = true;
+            this.btnDownTemp51.Location = new System.Drawing.Point(536, 12);
+            this.btnDownTemp51.Name = "btnDownTemp51";
+            this.btnDownTemp51.Size = new System.Drawing.Size(122, 32);
+            this.btnDownTemp51.StyleController = this.layoutControl1;
+            this.btnDownTemp51.TabIndex = 15;
+            this.btnDownTemp51.Text = "模板5.1";
+            this.btnDownTemp51.Click += new System.EventHandler(this.btnDownTemp51_Click);
+            // 
+            // layoutControlItem4
+            // 
+            this.layoutControlItem4.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.layoutControlItem4.AppearanceItemCaption.Options.UseFont = true;
+            this.layoutControlItem4.Control = this.btnDownTemp51;
+            this.layoutControlItem4.Location = new System.Drawing.Point(524, 0);
+            this.layoutControlItem4.MaxSize = new System.Drawing.Size(126, 0);
+            this.layoutControlItem4.MinSize = new System.Drawing.Size(126, 33);
+            this.layoutControlItem4.Name = "layoutControlItem4";
+            this.layoutControlItem4.Size = new System.Drawing.Size(126, 36);
+            this.layoutControlItem4.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem4.TextVisible = false;
+            // 
             // uc301_SelectOutputFile
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
@@ -265,6 +296,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -283,5 +315,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraEditors.ComboBoxEdit cbbYear;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
+        private DevExpress.XtraEditors.SimpleButton btnDownTemp51;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
     }
 }

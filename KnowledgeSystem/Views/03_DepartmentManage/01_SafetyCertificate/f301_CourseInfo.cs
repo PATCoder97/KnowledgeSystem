@@ -172,7 +172,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
             }
             else
             {
-                DefaultMsg.MsgErrorDB();
+                MsgTP.MsgErrorDB();
             }
         }
     }

@@ -685,7 +685,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             if (permissionAttachments.DeleteInfo != true)
             {
-                DefaultMsg.MsgNoPermission();
+                MsgTP.MsgNoPermission();
                 return;
             }
 
@@ -868,7 +868,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             if (permissionAttachments.ReadFile != true)
             {
-                DefaultMsg.MsgNoPermission();
+                MsgTP.MsgNoPermission();
                 return;
             }
 
@@ -916,7 +916,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             if (permissionAttachments.UpdateInfo != true)
             {
-                DefaultMsg.MsgNoPermission();
+                MsgTP.MsgNoPermission();
                 return;
             }
 

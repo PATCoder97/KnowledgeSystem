@@ -108,7 +108,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             if (CanSaveFile != true)
             {
-                DefaultMsg.MsgNoPermission();
+                MsgTP.MsgNoPermission();
                 return;
             }
 

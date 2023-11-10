@@ -259,7 +259,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             if (permissionAttachments.ReadFile != true)
             {
-                DefaultMsg.MsgNoPermission();
+                MsgTP.MsgNoPermission();
                 return;
             }
 

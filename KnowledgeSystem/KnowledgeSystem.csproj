@@ -131,18 +131,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configs\AutoFilterNonUnicode.cs" />
-    <Compile Include="Configs\AppCopyRight.cs" />
-    <Compile Include="Configs\AppPermission.cs" />
-    <Compile Include="Configs\DomainVNFPG.cs" />
-    <Compile Include="Configs\EnumHelper.cs" />
-    <Compile Include="Configs\GridControlHelper.cs" />
-    <Compile Include="Configs\PCInfoHelper.cs" />
-    <Compile Include="Configs\RefreshHelper.cs" />
-    <Compile Include="Configs\RegistryHelper.cs" />
-    <Compile Include="Configs\SingleConnection.cs" />
-    <Compile Include="Configs\TPConfigs.cs" />
-    <Compile Include="Configs\TPSvgimages.cs" />
+    <Compile Include="Helpers\AutoFilterNonUnicode.cs" />
+    <Compile Include="Helpers\AppCopyRight.cs" />
+    <Compile Include="Helpers\AppPermission.cs" />
+    <Compile Include="Helpers\DomainVNFPG.cs" />
+    <Compile Include="Helpers\EnumHelper.cs" />
+    <Compile Include="Helpers\GridControlHelper.cs" />
+    <Compile Include="Helpers\PCInfoHelper.cs" />
+    <Compile Include="Helpers\RefreshHelper.cs" />
+    <Compile Include="Helpers\RegistryHelper.cs" />
+    <Compile Include="Helpers\SingleConnection.cs" />
+    <Compile Include="Helpers\TPConfigs.cs" />
+    <Compile Include="Helpers\TPSvgimages.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\00_Generals\f00_FluentFrame.cs">
@@ -508,7 +508,6 @@
       <DependentUpon>uc402_UploadExcelDB.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
-    <None Include="Fonts\kaiu.ttf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

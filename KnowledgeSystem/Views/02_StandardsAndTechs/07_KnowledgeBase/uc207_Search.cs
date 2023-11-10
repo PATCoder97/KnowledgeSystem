@@ -309,7 +309,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
             if (!lsIdCanReads.Contains(idDocument) && !IsSysAdmin)
             {
-                DefaultMsg.MsgNoPermission();
+                MsgTP.MsgNoPermission();
                 return;
             }
 

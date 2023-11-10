@@ -76,6 +76,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
 
         private void uc301_SelectOutputFile_Load(object sender, EventArgs e)
         {
+            btnDownTemp51.ImageOptions.SvgImage = TPSvgimages.Excel;
             btnUploadFile51.ImageOptions.SvgImage = TPSvgimages.UploadFile;
 
             List<int> lsYears = new List<int>();
@@ -108,33 +109,30 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
             year = Convert.ToInt16(cbbYear.EditValue);
         }
 
-        private void btnUploadFile51_Click(object sender, EventArgs e)
+        private void btnDownTemp51_Click(object sender, EventArgs e)
         {
-            var dialog = DefaultMsg.MsgYesNoQuestion("Bạn có muốn tải xuống tệp mẫu không?\n- Ấn \"OK\" để tải xuống\n- Ấn\"Cancel\" để bỏ qua");
-
-            string filePath = "";
-            if (dialog == DialogResult.OK)
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
             {
-                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                saveFileDialog.Filter = "Excel Files (*.xlsx)|*.xlsx";
+                saveFileDialog.DefaultExt = "xlsx";
+                saveFileDialog.AddExtension = true;
+                saveFileDialog.FileName = "ExcelTempUser " + DateTime.Now.ToString("yyyyMMddHHmmss");
+
+                DialogResult result = saveFileDialog.ShowDialog();
+
+                if (result == DialogResult.OK)
                 {
-                    saveFileDialog.Filter = "Excel Files (*.xlsx)|*.xlsx";
-                    saveFileDialog.DefaultExt = "xlsx";
-                    saveFileDialog.AddExtension = true;
-                    saveFileDialog.FileName = "ExcelTempUser " + DateTime.Now.ToString("yyyyMMddHHmmss");
+                    string filePath = saveFileDialog.FileName;
 
-                    DialogResult result = saveFileDialog.ShowDialog();
-
-                    if (result == DialogResult.OK)
-                    {
-                        filePath = saveFileDialog.FileName;
-
-                        DownloadTempExcel(filePath);
-                        Process.Start(filePath);
-                        return;
-                    }
+                    DownloadTempExcel(filePath);
+                    Process.Start(filePath);
                 }
             }
+        }
 
+        private void btnUploadFile51_Click(object sender, EventArgs e)
+        {
+            string filePath = "";
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
                 openFileDialog.Filter = "Excel Files (*.xlsx)|*.xlsx";
