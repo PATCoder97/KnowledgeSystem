@@ -150,6 +150,7 @@
     <Compile Include="dm_Role.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
+    <Compile Include="SingleConnection.cs" />
     <Compile Include="sys_Log.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>

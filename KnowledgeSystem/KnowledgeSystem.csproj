@@ -140,7 +140,6 @@
     <Compile Include="Helpers\PCInfoHelper.cs" />
     <Compile Include="Helpers\RefreshHelper.cs" />
     <Compile Include="Helpers\RegistryHelper.cs" />
-    <Compile Include="Helpers\SingleConnection.cs" />
     <Compile Include="Helpers\TPConfigs.cs" />
     <Compile Include="Helpers\TPSvgimages.cs" />
     <Compile Include="Program.cs" />

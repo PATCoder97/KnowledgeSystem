@@ -194,77 +194,74 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void GetNotifyApproval()
         {
-            using (var db = new DBDocumentManagementSystemEntities())
+            // Xử lý lấy tất cả các văn kiện cần trình ký
+            var lsDocProgresses = dt207_DocProcessingBUS.Instance.GetListNotComplete();
+            var lsDocProgressInfos = dt207_DocProcessingInfoBUS.Instance.GetList();
+            var lsKnowledgeBases = _dt207_BaseBUS.GetList();
+            var lsUsers = dm_UserBUS.Instance.GetList();
+
+            var lsDocNotSuccess =
+                (from data in lsDocProgressInfos
+                 group data by data.IdDocProgress into g
+                 select new
+                 {
+                     IdDocProgress = g.Key,
+                     IndexStep = g.OrderByDescending(dpi => dpi.TimeStep).Select(dpi => dpi.IndexStep).FirstOrDefault(),
+                     TimeStep = g.OrderByDescending(dpi => dpi.TimeStep).Select(dpi => dpi.TimeStep).FirstOrDefault(),
+                     IdUserProcess = g.OrderBy(dpi => dpi.TimeStep).Select(dpi => dpi.IdUserProcess).FirstOrDefault()
+                 }).ToList();
+
+            var lsDataApproval =
+                (from data in lsDocProgresses
+                 join infos in lsDocNotSuccess on data.Id equals infos.IdDocProgress
+                 join bases in lsKnowledgeBases on data.IdKnowledgeBase equals bases.Id
+                 join users in lsUsers on infos.IdUserProcess equals users.Id
+                 select new
+                 {
+                     data.IdKnowledgeBase,
+                     data.IdProgress,
+                     data.Descriptions,
+                     infos.TimeStep,
+                     infos.IndexStep,
+                     bases.DisplayName,
+                     UserProcess = $"{users.IdDepartment} | {infos.IdUserProcess}/{users.DisplayName}",
+                     ApprovalStep = $"{data.IdProgress}-{infos.IndexStep + 1}",
+                 }).ToList();
+
+            // Xử lý phân quyền nhưng user nằm trong group sẽ nhìn thấy
+            var lsGroupIn = (from data in dm_GroupUserBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id)
+                             join progresses in dm_StepProgressBUS.Instance.GetList() on data.IdGroup equals progresses.IdGroup
+                             select new
+                             {
+                                 progresses.IdProgress,
+                                 progresses.IdGroup,
+                                 progresses.IndexStep,
+                                 ApprovalStep = $"{progresses.IdProgress}-{progresses.IndexStep}",
+                             }).ToList();
+
+            var lsDisplays = (from data in lsDataApproval
+                              join progresses in lsGroupIn on data.ApprovalStep equals progresses.ApprovalStep
+                              select data).ToList();
+
+            int sumNotify = lsDisplays.Count;
+            if (sumNotify > 0)
             {
-                // Xử lý lấy tất cả các văn kiện cần trình ký
-                var lsDocProgresses = db.dt207_DocProcessing.Where(r => !(r.IsComplete)).ToList();
-                var lsDocProgressInfos = db.dt207_DocProcessingInfo.ToList();
-                var lsKnowledgeBases = db.dt207_Base.ToList();
-                var lsUsers = db.dm_User.ToList();
+                emptySpaceRight.MinSize = new Size(85, 10);
+                emptySpaceRight.MinSize = new Size(85, 0);
+                emptySpaceRight.Size = new Size(85, 40);
 
-                var lsDocNotSuccess =
-                    (from data in db.dt207_DocProcessingInfo
-                     group data by data.IdDocProgress into g
-                     select new
-                     {
-                         IdDocProgress = g.Key,
-                         IndexStep = g.OrderByDescending(dpi => dpi.TimeStep).Select(dpi => dpi.IndexStep).FirstOrDefault(),
-                         TimeStep = g.OrderByDescending(dpi => dpi.TimeStep).Select(dpi => dpi.TimeStep).FirstOrDefault(),
-                         IdUserProcess = g.OrderBy(dpi => dpi.TimeStep).Select(dpi => dpi.IdUserProcess).FirstOrDefault()
-                     }).ToList();
-
-                var lsDataApproval =
-                    (from data in lsDocProgresses
-                     join infos in lsDocNotSuccess on data.Id equals infos.IdDocProgress
-                     join bases in lsKnowledgeBases on data.IdKnowledgeBase equals bases.Id
-                     join users in lsUsers on infos.IdUserProcess equals users.Id
-                     select new
-                     {
-                         data.IdKnowledgeBase,
-                         data.IdProgress,
-                         data.Descriptions,
-                         infos.TimeStep,
-                         infos.IndexStep,
-                         bases.DisplayName,
-                         UserProcess = $"{users.IdDepartment} | {infos.IdUserProcess}/{users.DisplayName}",
-                         ApprovalStep = $"{data.IdProgress}-{infos.IndexStep + 1}",
-                     }).ToList();
-
-                // Xử lý phân quyền nhưng user nằm trong group sẽ nhìn thấy
-                var lsGroupIn = (from data in db.dm_GroupUser.Where(r => r.IdUser == TPConfigs.LoginUser.Id).ToList()
-                                 join progresses in db.dm_StepProgress.ToList() on data.IdGroup equals progresses.IdGroup
-                                 select new
-                                 {
-                                     progresses.IdProgress,
-                                     progresses.IdGroup,
-                                     progresses.IndexStep,
-                                     ApprovalStep = $"{progresses.IdProgress}-{progresses.IndexStep}",
-                                 }).ToList();
-
-                var lsDisplays = (from data in lsDataApproval
-                                  join progresses in lsGroupIn on data.ApprovalStep equals progresses.ApprovalStep
-                                  select data).ToList();
-
-                int sumNotify = lsDisplays.Count;
-                if (sumNotify > 0)
-                {
-                    emptySpaceRight.MinSize = new Size(85, 10);
-                    emptySpaceRight.MinSize = new Size(85, 0);
-                    emptySpaceRight.Size = new Size(85, 40);
-
-                    lcSumApproval.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
-                }
-                else
-                {
-                    emptySpaceRight.MinSize = new Size(225, 10);
-                    emptySpaceRight.MinSize = new Size(225, 0);
-                    emptySpaceRight.Size = new Size(225, 40);
-
-                    lcSumApproval.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-                }
-
-                btnSumNotifyApproval.Text = $"{sumNotify}待審查";
+                lcSumApproval.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
             }
+            else
+            {
+                emptySpaceRight.MinSize = new Size(225, 10);
+                emptySpaceRight.MinSize = new Size(225, 0);
+                emptySpaceRight.Size = new Size(225, 40);
+
+                lcSumApproval.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            }
+
+            btnSumNotifyApproval.Text = $"{sumNotify}待審查";
         }
 
         #endregion

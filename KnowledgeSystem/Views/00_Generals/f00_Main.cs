@@ -147,7 +147,7 @@ namespace KnowledgeSystem.Views._00_Generals
                     UpdateInfo newUpdate = lsUpdateInfos.First();
                     if (newUpdate.version != AppCopyRight.version)
                     {
-                        var dialogResult = DefaultMsg.MsgUpdateSoftware();
+                        var dialogResult = MsgTP.MsgUpdateSoftware();
                         if (dialogResult == DialogResult.OK)
                         {
                             f00_UpdateSoftware f00_Update = new f00_UpdateSoftware(newUpdate.url);

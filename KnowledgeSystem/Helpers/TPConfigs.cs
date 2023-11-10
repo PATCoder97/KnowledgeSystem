@@ -146,9 +146,5 @@ namespace KnowledgeSystem.Helpers
 
             return XtraMessageBox.Show(args);
         }
-    }
-    //public DBDocumentManagementSystemEntities()
-    //        : base(SingleConnection.ConString)
-    //{
-    //}
+    }    
 }

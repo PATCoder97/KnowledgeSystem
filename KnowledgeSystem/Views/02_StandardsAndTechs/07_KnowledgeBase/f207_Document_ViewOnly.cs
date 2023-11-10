@@ -58,6 +58,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         Securityinfo permissionAttachments = new Securityinfo();
 
+        dt207_AttachmentBUS _dt207_AttachmentBUS = new dt207_AttachmentBUS();
+        dt207_SecurityBUS _dt207_SecurityBUS = new dt207_SecurityBUS();
+        dt207_BaseBUS _dt207_BaseBUS = new dt207_BaseBUS();
+        dt207_HistoryGetFileBUS _dt207_HistoryGetFileBUS = new dt207_HistoryGetFileBUS();
+
         private class Attachments
         {
             public string FileName { get; set; }
@@ -134,123 +139,120 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             gcFiles.DataSource = sourceAttachments;
             gcSecurity.DataSource = sourceSecuritys;
 
-            using (var db = new DBDocumentManagementSystemEntities())
+            // Initialize lists
+            lsKnowledgeTypes = dt207_TypeBUS.Instance.GetList();
+            lsUsers = dm_UserBUS.Instance.GetList();
+            lsGroups = dm_GroupBUS.Instance.GetList();
+            lsGroupUser = dm_GroupUserBUS.Instance.GetList();
+
+            // Create lists of Securityinfo objects from lsUsers and lsGroups
+            var lsIdUsers = lsUsers.Select(r => new Securityinfo { IdGroupOrUser = r.Id, DisplayName = r.DisplayName }).ToList();
+            var lsIdGroup = lsGroups.Select(r => new Securityinfo { IdGroupOrUser = r.Id.ToString(), DisplayName = r.DisplayName }).ToList();
+            lsIdGroupOrUser = lsIdGroup.Concat(lsIdUsers).ToList();
+
+            // Assign data source and columns to rgvGruopOrUser
+            rgvGruopOrUser.DataSource = lsIdGroupOrUser;
+            rgvGruopOrUser.ValueMember = "IdGroupOrUser";
+            rgvGruopOrUser.DisplayMember = "DisplayName";
+            rgvGruopOrUser.PopupView.Columns.AddRange(new[]
             {
-                // Initialize lists
-                lsKnowledgeTypes = db.dt207_Type.ToList();
-                lsUsers = dm_UserBUS.Instance.GetList();
-                lsGroups = dm_GroupBUS.Instance.GetList();
-                lsGroupUser = dm_GroupUserBUS.Instance.GetList();
-
-                // Create lists of Securityinfo objects from lsUsers and lsGroups
-                var lsIdUsers = lsUsers.Select(r => new Securityinfo { IdGroupOrUser = r.Id, DisplayName = r.DisplayName }).ToList();
-                var lsIdGroup = lsGroups.Select(r => new Securityinfo { IdGroupOrUser = r.Id.ToString(), DisplayName = r.DisplayName }).ToList();
-                lsIdGroupOrUser = lsIdGroup.Concat(lsIdUsers).ToList();
-
-                // Assign data source and columns to rgvGruopOrUser
-                rgvGruopOrUser.DataSource = lsIdGroupOrUser;
-                rgvGruopOrUser.ValueMember = "IdGroupOrUser";
-                rgvGruopOrUser.DisplayMember = "DisplayName";
-                rgvGruopOrUser.PopupView.Columns.AddRange(new[]
-                {
                     new GridColumn { FieldName = "IdGroupOrUser", VisibleIndex = 0, Caption = "代號" },
                     new GridColumn { FieldName = "DisplayName", VisibleIndex = 1, Caption = "名稱" }
                 });
 
-                // Load các datasource vào ComboBoxes
-                cbbType.Properties.DataSource = lsKnowledgeTypes;
-                cbbType.Properties.ValueMember = "Id";
-                cbbType.Properties.DisplayMember = "DisplayName";
+            // Load các datasource vào ComboBoxes
+            cbbType.Properties.DataSource = lsKnowledgeTypes;
+            cbbType.Properties.ValueMember = "Id";
+            cbbType.Properties.DisplayMember = "DisplayName";
 
-                cbbUserUpload.Properties.DataSource = lsUsers;
-                cbbUserUpload.Properties.ValueMember = "Id";
-                cbbUserUpload.Properties.DisplayMember = "DisplayName";
+            cbbUserUpload.Properties.DataSource = lsUsers;
+            cbbUserUpload.Properties.ValueMember = "Id";
+            cbbUserUpload.Properties.DisplayMember = "DisplayName";
 
-                cbbUserProcess.Properties.DataSource = lsUsers;
-                cbbUserProcess.Properties.ValueMember = "Id";
-                cbbUserProcess.Properties.DisplayMember = "DisplayName";
+            cbbUserProcess.Properties.DataSource = lsUsers;
+            cbbUserProcess.Properties.ValueMember = "Id";
+            cbbUserProcess.Properties.DisplayMember = "DisplayName";
 
-                // Truy xuất dữ liệu từ cơ sở dữ liệu và gán cho các thành phần form
-                if (!string.IsNullOrEmpty(idDocument))
+            // Truy xuất dữ liệu từ cơ sở dữ liệu và gán cho các thành phần form
+            if (!string.IsNullOrEmpty(idDocument))
+            {
+                // Thông tin tiến trình trình ký văn kiện
+                bool IsComplete = docProcess.IsComplete;
+                int idProgressByDoc = docProcess.IdProgress;
+                int idDocProgress = docProcess.Id;
+                var lsDMStepProgress = dm_StepProgressBUS.Instance.GetListByIdProgress(idProgressByDoc);
+                var lsDocProgressInfos = dt207_DocProcessingInfoBUS.Instance.GetListByIdDocProcess(idDocProgress); 
+
+                var lsStepProgressDoc = (from data in lsDMStepProgress
+                                         join groups in lsGroups on data.IdGroup equals groups.Id
+                                         select new { groups.DisplayName }).ToList();
+
+                stepProgressDoc.Items.Add(new StepProgressBarItem("經辦人"));
+                foreach (var item in lsStepProgressDoc)
+                    stepProgressDoc.Items.Add(new StepProgressBarItem(item.DisplayName));
+
+                var stepNow = lsDocProgressInfos.OrderByDescending(r => r.TimeStep).First().IndexStep;
+
+                stepProgressDoc.ItemOptions.Indicator.Width = 40;
+                stepProgressDoc.SelectedItemIndex = stepNow;
+
+                // Thêm lịch sử trình ký vào gridProcess
+                var lsHistoryProcess = (from data in lsDocProgressInfos
+                                        join users in lsUsers on data.IdUserProcess equals users.Id
+                                        select new
+                                        {
+                                            TimeStep = data.TimeStep,
+                                            data.Descriptions,
+                                            UserProcess = $"{users.IdDepartment} | {data.IdUserProcess}/{users.DisplayName}",
+                                        }).ToList();
+
+                gcHistoryProcess.DataSource = lsHistoryProcess;
+
+                if (IsComplete)
                 {
-                    // Thông tin tiến trình trình ký văn kiện
-                    bool IsComplete = docProcess.IsComplete;
-                    int idProgressByDoc = docProcess.IdProgress;
-                    int idDocProgress = docProcess.Id;
-                    var lsDMStepProgress = db.dm_StepProgress.Where(r => r.IdProgress == idProgressByDoc).ToList();
-                    var lsDocProgressInfos = db.dt207_DocProcessingInfo.Where(r => r.IdDocProgress == idDocProgress).ToList();
+                    lcgInfo.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                    lcgFile.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                    lcgPermission.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                }
+                else
+                {
+                    // Thông tin cơ bản
+                    var dataBaseInfo = _dt207_BaseBUS.GetItemById(idDocument); 
+                    txbId.Text = dataBaseInfo.Id;
+                    cbbType.EditValue = dataBaseInfo.IdTypes;
+                    cbbUserUpload.EditValue = dataBaseInfo.UserUpload;
+                    cbbUserProcess.EditValue = dataBaseInfo.UserProcess;
+                    var displayName = dataBaseInfo.DisplayName.Split(new[] { "\r\n" }, StringSplitOptions.None);
+                    txbNameTW.Text = displayName[0];
+                    txbNameVN.Text = displayName.Length > 1 ? displayName[1] : "";
+                    txbKeyword.Text = dataBaseInfo.Keyword;
 
-                    var lsStepProgressDoc = (from data in lsDMStepProgress
-                                             join groups in lsGroups on data.IdGroup equals groups.Id
-                                             select new { groups.DisplayName }).ToList();
+                    // Thông tin phụ kiện
+                    lsAttachments.AddRange(_dt207_AttachmentBUS.GetListByIdBase(idDocument)
+                        .Select(item => new Attachments { FileName = item.FileName, EncryptionName = item.EncryptionName }));
 
-                    stepProgressDoc.Items.Add(new StepProgressBarItem("經辦人"));
-                    foreach (var item in lsStepProgressDoc)
-                        stepProgressDoc.Items.Add(new StepProgressBarItem(item.DisplayName));
+                    sourceAttachments.DataSource = lsAttachments;
+                    lbCountFile.Text = $"共{lsAttachments.Count}個附件";
 
-                    var stepNow = lsDocProgressInfos.OrderByDescending(r => r.TimeStep).First().IndexStep;
-
-                    stepProgressDoc.ItemOptions.Indicator.Width = 40;
-                    stepProgressDoc.SelectedItemIndex = stepNow;
-
-                    // Thêm lịch sử trình ký vào gridProcess
-                    var lsHistoryProcess = (from data in lsDocProgressInfos
-                                            join users in db.dm_User on data.IdUserProcess equals users.Id
-                                            select new
-                                            {
-                                                TimeStep = data.TimeStep,
-                                                data.Descriptions,
-                                                UserProcess = $"{users.IdDepartment} | {data.IdUserProcess}/{users.DisplayName}",
-                                            }).ToList();
-
-                    gcHistoryProcess.DataSource = lsHistoryProcess;
-
-                    if (IsComplete)
+                    // Thông tin quyền hạn
+                    var lsKnowledgeSecuritys = _dt207_SecurityBUS.GetListByIdBase(idDocument);
+                    lsSecurityInfos = lsKnowledgeSecuritys.Select(data => new Securityinfo
                     {
-                        lcgInfo.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-                        lcgFile.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-                        lcgPermission.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-                    }
-                    else
-                    {
-                        // Thông tin cơ bản
-                        var dataBaseInfo = db.dt207_Base.FirstOrDefault(r => r.Id == idDocument);
-                        txbId.Text = dataBaseInfo.Id;
-                        cbbType.EditValue = dataBaseInfo.IdTypes;
-                        cbbUserUpload.EditValue = dataBaseInfo.UserUpload;
-                        cbbUserProcess.EditValue = dataBaseInfo.UserProcess;
-                        var displayName = dataBaseInfo.DisplayName.Split(new[] { "\r\n" }, StringSplitOptions.None);
-                        txbNameTW.Text = displayName[0];
-                        txbNameVN.Text = displayName.Length > 1 ? displayName[1] : "";
-                        txbKeyword.Text = dataBaseInfo.Keyword;
+                        IdKnowledgeBase = data.IdKnowledgeBase,
+                        IdGroup = data.IdGroup,
+                        IdUser = data.IdUser,
+                        ReadInfo = data.ReadInfo,
+                        UpdateInfo = data.UpdateInfo,
+                        DeleteInfo = data.DeleteInfo,
+                        SearchInfo = data.SearchInfo,
+                        ReadFile = data.ReadFile,
+                        SaveFile = data.SaveFile,
+                        IdGroupOrUser = data.IdUser ?? data.IdGroup.ToString()
+                    }).ToList();
+                    sourceSecuritys.DataSource = lsSecurityInfos;
+                    bgvSecurity.BestFitColumns();
 
-                        // Thông tin phụ kiện
-                        lsAttachments.AddRange(db.dt207_Attachment.Where(r => r.IdKnowledgeBase == idDocument)
-                            .Select(item => new Attachments { FileName = item.FileName, EncryptionName = item.EncryptionName }));
-
-                        sourceAttachments.DataSource = lsAttachments;
-                        lbCountFile.Text = $"共{lsAttachments.Count}個附件";
-
-                        // Thông tin quyền hạn
-                        var lsKnowledgeSecuritys = db.dt207_Security.Where(r => r.IdKnowledgeBase == idDocument).ToList();
-                        lsSecurityInfos = lsKnowledgeSecuritys.Select(data => new Securityinfo
-                        {
-                            IdKnowledgeBase = data.IdKnowledgeBase,
-                            IdGroup = data.IdGroup,
-                            IdUser = data.IdUser,
-                            ReadInfo = data.ReadInfo,
-                            UpdateInfo = data.UpdateInfo,
-                            DeleteInfo = data.DeleteInfo,
-                            SearchInfo = data.SearchInfo,
-                            ReadFile = data.ReadFile,
-                            SaveFile = data.SaveFile,
-                            IdGroupOrUser = data.IdUser ?? data.IdGroup.ToString()
-                        }).ToList();
-                        sourceSecuritys.DataSource = lsSecurityInfos;
-                        bgvSecurity.BestFitColumns();
-
-                        permissionAttachments = GetPermission();
-                    }
+                    permissionAttachments = GetPermission();
                 }
             }
         }

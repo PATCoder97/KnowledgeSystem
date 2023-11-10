@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KnowledgeSystem.Helpers
+namespace DataAccessLayer
 {
     public class SingleConnection
     {
@@ -30,6 +30,7 @@ namespace KnowledgeSystem.Helpers
 
         public static string Connect()
         {
+#if DEBUG
             SqlConnectionStringBuilder sqlString = new SqlConnectionStringBuilder()
             {
                 DataSource = ".\\ANHTUAN",
@@ -39,16 +40,17 @@ namespace KnowledgeSystem.Helpers
                 MultipleActiveResultSets = true,
                 ApplicationName = "EntityFramework",
             };
-
-            //SqlConnectionStringBuilder sqlString = new SqlConnectionStringBuilder()
-            //{
-            //    DataSource = "10.198.138.103",
-            //    InitialCatalog = "DBDocumentManagementSystem",
-            //    UserID = "PAT",
-            //    Password = "Anhtuan312",
-            //    MultipleActiveResultSets = true,
-            //    ApplicationName = "EntityFramework",
-            //};
+#else
+            SqlConnectionStringBuilder sqlString = new SqlConnectionStringBuilder()
+            {
+                DataSource = "10.198.138.103",
+                InitialCatalog = "DBDocumentManagementSystem",
+                UserID = "PAT",
+                Password = "Anhtuan312",
+                MultipleActiveResultSets = true,
+                ApplicationName = "EntityFramework",
+            };
+#endif
 
             //Build an Entity Framework connection string
             EntityConnectionStringBuilder entityString = new EntityConnectionStringBuilder()
@@ -59,5 +61,11 @@ namespace KnowledgeSystem.Helpers
             };
             return entityString.ConnectionString;
         }
+
+        // Thêm đoạn này vào DataLayer EF để cấu hình chuỗi kết nối
+        //public DBDocumentManagementSystemEntities()
+        //        : base(SingleConnection.ConString)
+        //{
+        //}
     }
 }
