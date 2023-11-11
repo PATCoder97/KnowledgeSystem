@@ -222,9 +222,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     cbbType.EditValue = dataBaseInfo.IdTypes;
                     cbbUserUpload.EditValue = dataBaseInfo.UserUpload;
                     cbbUserProcess.EditValue = dataBaseInfo.UserProcess;
-                    var displayName = dataBaseInfo.DisplayName.Split(new[] { "\r\n" }, StringSplitOptions.None);
+                    var displayName = dataBaseInfo.DisplayName.Split(new[] { "\n" }, StringSplitOptions.None);
                     txbNameTW.Text = displayName[0];
                     txbNameVN.Text = displayName.Length > 1 ? displayName[1] : "";
+                    txbNameEN.Text = displayName.Length > 2 ? displayName[2] : "";
                     txbKeyword.Text = dataBaseInfo.Keyword;
 
                     // Thông tin phụ kiện

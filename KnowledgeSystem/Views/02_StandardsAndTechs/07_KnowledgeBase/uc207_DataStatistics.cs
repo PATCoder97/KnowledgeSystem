@@ -207,6 +207,12 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             btnChart.Text = "繪製\r\n圖表";
             btnTarget.Text = "設定\r\n目標";
 
+            DateTime firstDayOfMonth = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
+            txbFromDate.EditValue = firstDayOfMonth;
+
+            DateTime lastDayOfMonth = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month));
+            txbToDate.EditValue = lastDayOfMonth;
+
             gcData.ForceInitialize();
 
             gvData.CustomUnboundColumnData += gvData_CustomUnboundColumnData;

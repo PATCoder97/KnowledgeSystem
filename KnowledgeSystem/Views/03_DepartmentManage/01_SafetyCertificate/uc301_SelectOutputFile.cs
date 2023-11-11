@@ -52,12 +52,14 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                 // Thêm dữ liệu từ Grid vào Excel
                 ws.Cells["A1"].Value = "Mã nhân viên\n人員代號";
                 ws.Cells["B1"].Value = "Mã chứng chỉ\n課程代號";
+                ws.Cells["C1"].Value = "Loại đào tạo mới\nNếu là 異動 thì tick Y";
 
                 int sumColumn = ws.Dimension.Columns;
                 int sumRow = ws.Dimension.Rows;
 
                 ws.Columns[1].Width = 20;
                 ws.Columns[2].Width = 20;
+                ws.Columns[3].Width = 20;
 
                 // Define the data range on the source sheet
                 var dataRange = ws.Cells[ws.Dimension.Address];
@@ -116,7 +118,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                 saveFileDialog.Filter = "Excel Files (*.xlsx)|*.xlsx";
                 saveFileDialog.DefaultExt = "xlsx";
                 saveFileDialog.AddExtension = true;
-                saveFileDialog.FileName = "ExcelTempUser " + DateTime.Now.ToString("yyyyMMddHHmmss");
+                saveFileDialog.FileName = "ExcelTemp5.1 " + DateTime.Now.ToString("yyyyMMddHHmmss");
 
                 DialogResult result = saveFileDialog.ShowDialog();
 
@@ -171,8 +173,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
             {
                 string idUser = row[0].ToString().Trim();
                 string idCourse = row[1].ToString().Trim();
+                bool newTrain = row[2].ToString().Trim().ToUpper() == "Y";
 
-                dt301_Base base51 = new dt301_Base() { IdUser = idUser, IdCourse = idCourse };
+                // Dùng tạm  ValidLicense để lưu là nhân viên mới hay là thay đổi chức vụ
+                dt301_Base base51 = new dt301_Base() { IdUser = idUser, IdCourse = idCourse, ValidLicense = newTrain };
                 lsData51.Add(base51);
             }
 
@@ -189,6 +193,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                                   課程代號 = data.IdCourse,
                                   人員名稱 = dtu != null ? dtu.DisplayName : "",
                                   課程名稱 = dtc != null ? dtc.DisplayName : "",
+                                  異動 = data.ValidLicense
                               }).ToList();
 
             // Nếu có 1 hàng nào trống thì dữ liệu đó chưa đạt

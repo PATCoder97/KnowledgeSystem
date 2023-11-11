@@ -64,8 +64,6 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void GetUserLogin()
         {
-            //Size = new Size(100, 100);
-            //WindowState = FormWindowState.Normal;
             f00_Login frm = new f00_Login();
             frm.ShowDialog();
 
@@ -170,11 +168,6 @@ namespace KnowledgeSystem.Views._00_Generals
             Text = TPConfigs.SoftNameTW + AppCopyRight.CopyRightString();
             lbSoftName.Text = TPConfigs.SoftNameTW;
 
-            //Size = new Size(100, 100);
-            //Location = new Point((Screen.PrimaryScreen.WorkingArea.Width - this.Width) / 2,
-            //              (Screen.PrimaryScreen.WorkingArea.Height - this.Height) / 2);
-            //StartPosition = FormStartPosition.CenterScreen;
-
             InitializeControl();
         }
 
@@ -192,6 +185,7 @@ namespace KnowledgeSystem.Views._00_Generals
                 return;
             }
 
+            TPConfigs.IdParentControl = IdForm_;
             f00_FluentFrame formShow = new f00_FluentFrame(IdForm_);
             formShow.Text = e.Item.Text;
             Hide();

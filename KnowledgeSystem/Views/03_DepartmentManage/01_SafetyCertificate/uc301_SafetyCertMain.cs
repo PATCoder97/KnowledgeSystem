@@ -1,5 +1,6 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
+using DevExpress.ClipboardSource.SpreadsheetML;
 using DevExpress.Data;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
@@ -253,12 +254,14 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
             // 附件02：工安類證照統計表
             idCounter = 1;
 
-            var lsCountData51 = (from data in lsQueryFile51
+            var lsCountData51 = (from data in lsData51
                                  group data by data.IdCourse into g
                                  select new
                                  {
                                      IdCourse = g.Key,
-                                     Count = g.Count()
+                                     Count = g.Count(),
+                                     FTrainNewU = g.Where(r => !r.ValidLicense).Count(),
+                                     FTrainOldU = g.Where(r => r.ValidLicense).Count()
                                  }).ToList();
 
             var lsCountData52 = (from data in lsQueryFile52
@@ -279,7 +282,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                                    TotalReqQuantity = g.Sum(r => r.ReqQuantity),
                                    ValidLicense = g.Sum(r => r.ValidLicense),
                                    BackupLicense = g.Sum(r => r.BackupLicense),
-                                   NewTrain = lsCountData51.FirstOrDefault(r => r.IdCourse == g.Key)?.Count ?? 0,
+                                   FirstTrain = lsCountData51.FirstOrDefault(r => r.IdCourse == g.Key)?.Count ?? 0,
                                    ReTrain = lsCountData52.FirstOrDefault(r => r.IdCourse == g.Key)?.Count ?? 0,
                                }).ToList();
 
@@ -291,8 +294,52 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                 "物理試驗處",
                 lsDataFile2.Sum(r => r.TotalReqQuantity).ToString(),
                 $"{lsDataFile2.Sum(r => r.ValidLicense)}",
-                $"{lsDataFile2.Sum(r => r.NewTrain) + lsDataFile2.Sum(r => r.ReTrain)}"
+                $"{lsDataFile2.Sum(r => r.FirstTrain) + lsDataFile2.Sum(r => r.ReTrain)}"
             };
+
+            // 附件06：派訓數量統計.xlsx
+            var lsCountBAKCertExp = (from data in lsBasesDisplay
+                                     where data.BackupLicense && (data.ExpDate.HasValue ? (data.ExpDate <= endOfQuarter) : false)
+                                     group data by data.IdCourse into g
+                                     select new
+                                     {
+                                         IdCourse = g.Key,
+                                         Count = g.Count()
+                                     }).ToList();
+
+            var lsDataFile6 = (from data in lsDataFile2
+                               join course in lsCourses on data.IdCourse equals course.Id
+                               select new
+                               {
+                                   data.IdCourse,
+                                   course.DisplayName,
+                                   data.FirstTrain,
+                                   data.ReTrain,
+                                   data.BackupLicense,
+                                   SumUserMissing = data.TotalReqQuantity - (data.ValidLicense + data.BackupLicense + data.FirstTrain + data.ReTrain)
+                               } into dt1
+                               join f51 in lsCountData51 on dt1.IdCourse equals f51.IdCourse into dtg1
+                               from g1 in dtg1.DefaultIfEmpty()
+                               select new
+                               {
+                                   dt1.IdCourse,
+                                   dt1.DisplayName,
+                                   FTrainNewU = g1 != null ? g1.FTrainNewU : 0,
+                                   FTrainOldU = g1 != null ? g1.FTrainOldU : 0,
+                                   dt1.ReTrain,
+                                   dt1.SumUserMissing
+                               } into dt2
+                               join bak in lsCountBAKCertExp on dt2.IdCourse equals bak.IdCourse into dtg2
+                               from g2 in dtg2.DefaultIfEmpty()
+                               select new
+                               {
+                                   dt2.DisplayName,
+                                   dt2.FTrainNewU,
+                                   dt2.FTrainOldU,
+                                   dt2.ReTrain,
+                                   BackupLicense = g2 != null ? g2.Count : 0,
+                                   dt2.SumUserMissing
+                               }).ToList();
 
             // Xuất ra Excel
             // 附件01：工安類證照取得情形一覽表.xlsx
@@ -672,7 +719,81 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                 }
             }
 
-            // 附件06：派訓數量統計
+            // 附件06：派訓數量統計.xlsx
+            using (ExcelPackage pck = new ExcelPackage())
+            {
+                pck.Workbook.Properties.Author = "VNW0014732";
+                pck.Workbook.Properties.Company = "FHS";
+                pck.Workbook.Properties.Title = "Exported by Phan Anh Tuan";
+                ExcelWorksheet ws = pck.Workbook.Worksheets.Add("DATA");
+
+                // Định dạng toàn Sheet
+                ws.Cells.Style.Font.Name = "DFKai-SB";
+                ws.Cells.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                ws.Cells.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                ws.Cells.Style.Font.Size = 14;
+                ws.Cells.Style.WrapText = true;
+
+                // Thêm dữ liệu từ Grid vào Excel
+                ws.Cells["A1"].Value = "單位";
+                ws.Cells["B1"].Value = idDept2word;
+                ws.Cells["A2"].Value = "證照項目";
+                ws.Cells["B2"].Value = "應初訓";
+                ws.Cells["D2"].Value = "應複訓";
+                ws.Cells["E2"].Value = "備援證照到期";
+                ws.Cells["F2"].Value = "人力增補";
+
+                ws.Cells["B3"].Value = "新進";
+                ws.Cells["C3"].Value = "異動";
+                ws.Cells["D3"].Value = $"證照第{mapQuater[quarter]}季到期";
+
+                ws.Cells["B1:F1"].Merge = true;
+                ws.Cells["A2:A3"].Merge = true;
+                ws.Cells["B2:C2"].Merge = true;
+                ws.Cells["E2:E3"].Merge = true;
+                ws.Cells["F2:F3"].Merge = true;
+
+                ws.Columns[01].Width = 60;
+                ws.Columns[02].Width = 20;
+                ws.Columns[03].Width = 20;
+                ws.Columns[04].Width = 20;
+                ws.Columns[05].Width = 20;
+                ws.Columns[06].Width = 20;
+                ws.Columns[07].Width = 20;
+                ws.Columns[08].Width = 20;
+                ws.Columns[09].Width = 20;
+                ws.Columns[10].Width = 20;
+
+                ws.Cells["A4"].LoadFromCollection(lsDataFile6, false);
+
+                int endRow = ws.Dimension.End.Row + 1;
+                ws.Cells[$"A{endRow}"].Value = "上述證照小計";
+                ws.Cells[$"B{endRow}"].Formula = $"=SUM(B4:B{endRow - 1})";
+                ws.Cells[$"C{endRow}"].Formula = $"=SUM(C4:C{endRow - 1})";
+                ws.Cells[$"D{endRow}"].Formula = $"=SUM(D4:D{endRow - 1})";
+                ws.Cells[$"E{endRow}"].Formula = $"=SUM(E4:E{endRow - 1})";
+                ws.Cells[$"F{endRow}"].Formula = $"=SUM(F4:F{endRow - 1})";
+
+                ws.Cells[$"A{endRow + 1}"].Value = "派訓總計";
+                ws.Cells[$"B{endRow + 1}"].Formula = $"=SUM(B4:E{endRow - 1})";
+                ws.Cells[$"F{endRow + 1}"].Formula = $"=SUM(F4:F{endRow - 1})";
+
+                ws.Cells[$"B{endRow + 1}:E{endRow + 1}"].Merge = true;
+
+                var rangeData = ws.Cells[$"A1:F{endRow + 1}"];
+                rangeData.Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                rangeData.Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                rangeData.Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                rangeData.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+
+                List<int> lsRowBolds = new List<int>() { 1, 2, 3, endRow, endRow + 1 };
+                foreach (var indexRow in lsRowBolds)
+                    ws.Row(indexRow).Style.Font.Bold = true;
+
+                string savePath = Path.Combine(pathDocument, $"附件06：派訓數量統計.xlsx");
+                FileInfo excelFile = new FileInfo(savePath);
+                pck.SaveAs(excelFile);
+            }
         }
 
         private void uc301_SafetyCertMain_Load(object sender, EventArgs e)

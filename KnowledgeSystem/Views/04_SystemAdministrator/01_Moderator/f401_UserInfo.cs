@@ -31,7 +31,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
         private UpdateEvent _eventUpdate = UpdateEvent.Normal;
 
-        List < dm_Role > lsAllRoles;
+        List<dm_Role> lsAllRoles;
         List<dm_Role> lsChooseRoles = new List<dm_Role>();
 
         BindingSource _sourceAllRole = new BindingSource();
@@ -172,7 +172,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             bool role301Main = AppPermission.Instance.CheckAppPermission(AppPermission.SafetyCertMain);
             bool roleEditUserJobAndDept = AppPermission.Instance.CheckAppPermission(AppPermission.EditUserJobAndDept);
 
-            if (!(role301Main && roleEditUserJobAndDept))
+            if (!(role301Main && roleEditUserJobAndDept && TPConfigs.IdParentControl == AppPermission.SafetyCertMain))
             {
                 btnPersonnelChanges.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
 

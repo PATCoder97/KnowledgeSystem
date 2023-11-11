@@ -39,6 +39,7 @@ namespace KnowledgeSystem.Helpers
         public static dm_User LoginUser { get; set; }
         public static string DomainComputer { get; set; }
         public static bool LoginSuccessful { get; set; }
+        public static int IdParentControl { get; set; }
 
         public static string DocumentPath()
         {
