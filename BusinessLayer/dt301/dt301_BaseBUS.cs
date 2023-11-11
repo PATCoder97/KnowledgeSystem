@@ -40,6 +40,47 @@ namespace BusinessLayer
             }
         }
 
+        /// <summary>
+        /// Lấy danh sách bằng theo mã nhân viên và đang còn hạn
+        /// </summary>
+        /// <returns></returns>
+        public List<dt301_Base> GetListByUIDAndValidCert(string UID)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt301_Base.Where(r => r.IdUser == UID && r.ValidLicense).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Lấy danh sách chứng chỉ đang đình chỉ theo mã nhân viên
+        /// </summary>
+        /// <param name="UID"></param>
+        /// <returns></returns>
+        public List<dt301_Base> GetListByUIDAndCertSuspended(string UID)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt301_Base.Where(r => r.IdUser == UID && r.CertSuspended).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public bool Add(dt301_Base _base)
         {
             try

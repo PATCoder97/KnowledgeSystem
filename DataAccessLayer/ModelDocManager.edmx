@@ -271,6 +271,7 @@
           <Property Name="BackupLicense" Type="bit" Nullable="false" />
           <Property Name="InvalidLicense" Type="bit" Nullable="false" />
           <Property Name="Describe" Type="nvarchar" MaxLength="64" />
+          <Property Name="CertSuspended" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="dt301_CertReqSetting">
           <Key>
@@ -376,8 +377,8 @@
           <EntitySet Name="dm_JobTitle" EntityType="DBDocumentManagementSystemModel.dm_JobTitle" />
           <EntitySet Name="dt301_CertReqSetting" EntityType="DBDocumentManagementSystemModel.dt301_CertReqSetting" />
           <EntitySet Name="dt301_Course" EntityType="DBDocumentManagementSystemModel.dt301_Course" />
-          <EntitySet Name="dt301_Base" EntityType="DBDocumentManagementSystemModel.dt301_Base" />
           <EntitySet Name="dm_User" EntityType="DBDocumentManagementSystemModel.dm_User" />
+          <EntitySet Name="dt301_Base" EntityType="DBDocumentManagementSystemModel.dt301_Base" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -649,22 +650,6 @@
           <Property Name="Duration" Type="Int32" />
           <Property Name="Category" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="dt301_Base">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdDept" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="IdUser" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="IdJobTitle" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="IdCourse" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="DateReceipt" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="ExpDate" Type="DateTime" Precision="0" />
-          <Property Name="ValidLicense" Type="Boolean" Nullable="false" />
-          <Property Name="BackupLicense" Type="Boolean" Nullable="false" />
-          <Property Name="InvalidLicense" Type="Boolean" Nullable="false" />
-          <Property Name="Describe" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="dm_User">
           <Key>
             <PropertyRef Name="Id" />
@@ -686,6 +671,23 @@
           <Property Name="PhoneNum2" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
           <Property Name="Status" Type="Int32" />
           <Property Name="Sex" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="dt301_Base">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdDept" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdUser" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdJobTitle" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdCourse" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DateReceipt" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ExpDate" Type="DateTime" Precision="0" />
+          <Property Name="ValidLicense" Type="Boolean" Nullable="false" />
+          <Property Name="BackupLicense" Type="Boolean" Nullable="false" />
+          <Property Name="InvalidLicense" Type="Boolean" Nullable="false" />
+          <Property Name="Describe" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="CertSuspended" Type="Boolean" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -990,23 +992,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dt301_Base">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt301_Base">
-              <MappingFragment StoreEntitySet="dt301_Base">
-                <ScalarProperty Name="Describe" ColumnName="Describe" />
-                <ScalarProperty Name="InvalidLicense" ColumnName="InvalidLicense" />
-                <ScalarProperty Name="BackupLicense" ColumnName="BackupLicense" />
-                <ScalarProperty Name="ValidLicense" ColumnName="ValidLicense" />
-                <ScalarProperty Name="ExpDate" ColumnName="ExpDate" />
-                <ScalarProperty Name="DateReceipt" ColumnName="DateReceipt" />
-                <ScalarProperty Name="IdCourse" ColumnName="IdCourse" />
-                <ScalarProperty Name="IdJobTitle" ColumnName="IdJobTitle" />
-                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
-                <ScalarProperty Name="IdDept" ColumnName="IdDept" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="dm_User">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_User">
               <MappingFragment StoreEntitySet="dm_User">
@@ -1026,6 +1011,24 @@
                 <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
                 <ScalarProperty Name="SecondaryPassword" ColumnName="SecondaryPassword" />
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt301_Base">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt301_Base">
+              <MappingFragment StoreEntitySet="dt301_Base">
+                <ScalarProperty Name="CertSuspended" ColumnName="CertSuspended" />
+                <ScalarProperty Name="Describe" ColumnName="Describe" />
+                <ScalarProperty Name="InvalidLicense" ColumnName="InvalidLicense" />
+                <ScalarProperty Name="BackupLicense" ColumnName="BackupLicense" />
+                <ScalarProperty Name="ValidLicense" ColumnName="ValidLicense" />
+                <ScalarProperty Name="ExpDate" ColumnName="ExpDate" />
+                <ScalarProperty Name="DateReceipt" ColumnName="DateReceipt" />
+                <ScalarProperty Name="IdCourse" ColumnName="IdCourse" />
+                <ScalarProperty Name="IdJobTitle" ColumnName="IdJobTitle" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="IdDept" ColumnName="IdDept" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

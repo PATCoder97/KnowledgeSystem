@@ -25,5 +25,6 @@ namespace DataAccessLayer
         public bool BackupLicense { get; set; }
         public bool InvalidLicense { get; set; }
         public string Describe { get; set; }
+        public bool CertSuspended { get; set; }
     }
 }

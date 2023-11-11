@@ -309,7 +309,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
 
             var lsDataFile6 = (from data in lsDataFile2
                                join course in lsCourses on data.IdCourse equals course.Id
-                               select new
+                               select new // Lấy các thông tin học lần đầu, học lại, số người thiếu
                                {
                                    data.IdCourse,
                                    course.DisplayName,
@@ -317,10 +317,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                                    data.ReTrain,
                                    data.BackupLicense,
                                    SumUserMissing = data.TotalReqQuantity - (data.ValidLicense + data.BackupLicense + data.FirstTrain + data.ReTrain)
-                               } into dt1
+                               } into dt1 
                                join f51 in lsCountData51 on dt1.IdCourse equals f51.IdCourse into dtg1
                                from g1 in dtg1.DefaultIfEmpty()
-                               select new
+                               select new // Lấy thông tin học lần đầu là nhân viên mới hay là chuyển vị trí làm việc
                                {
                                    dt1.IdCourse,
                                    dt1.DisplayName,
@@ -328,10 +328,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                                    FTrainOldU = g1 != null ? g1.FTrainOldU : 0,
                                    dt1.ReTrain,
                                    dt1.SumUserMissing
-                               } into dt2
+                               } into dt2 
                                join bak in lsCountBAKCertExp on dt2.IdCourse equals bak.IdCourse into dtg2
                                from g2 in dtg2.DefaultIfEmpty()
-                               select new
+                               select new // Lấy thông tin các bằng dự phòng hết hạn
                                {
                                    dt2.DisplayName,
                                    dt2.FTrainNewU,

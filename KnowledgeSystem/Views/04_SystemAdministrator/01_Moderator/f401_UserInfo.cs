@@ -8,6 +8,7 @@ using KnowledgeSystem.Helpers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -43,10 +44,15 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
         private enum UpdateEvent
         {
             Normal,
+            [Description("留職停薪")]
             Suspension,
+            [Description("調至")]
             Transfer,
+            [Description("離職")]
             Resign,
+            [Description("在職")]
             Conferred,
+            [Description("晉升")]
             Promoted
         }
 
@@ -315,15 +321,41 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                         }
 
                         // Xử lý cập nhật các thông tin đặc biệt có ảnh hưởng đến các thông tin khác như: Chứng chỉ an toàn 301
+                        var lsCertToInValids = dt301_BaseBUS.Instance.GetListByUIDAndValidCert(_user.Id);
                         switch (_eventUpdate)
                         {
                             case UpdateEvent.Suspension:
-                                break;
-                            case UpdateEvent.Transfer:
-                                break;
-                            case UpdateEvent.Resign:
+                                foreach (var item in lsCertToInValids)
+                                {
+                                    item.ValidLicense = false;
+                                    item.InvalidLicense = true;
+                                    item.CertSuspended = true;
+                                    item.Describe = EnumHelper.GetDescription(_eventUpdate);
+
+                                    dt301_BaseBUS.Instance.AddOrUpdate(item);
+                                }
                                 break;
                             case UpdateEvent.Conferred:
+                                var lsCertSuspendeds = dt301_BaseBUS.Instance.GetListByUIDAndCertSuspended(_user.Id);
+                                foreach (var item in lsCertSuspendeds)
+                                {
+                                    item.ValidLicense = true;
+                                    item.InvalidLicense = false;
+                                    item.CertSuspended = false;
+                                    item.Describe = "";
+
+                                    dt301_BaseBUS.Instance.AddOrUpdate(item);
+                                }
+                                break;
+                            case UpdateEvent.Transfer:
+                            case UpdateEvent.Resign:
+                                foreach (var item in lsCertToInValids)
+                                {
+                                    item.ValidLicense = false;
+                                    item.InvalidLicense = true;
+
+                                    dt301_BaseBUS.Instance.AddOrUpdate(item);
+                                }
                                 break;
                             case UpdateEvent.Promoted:
                                 break;
