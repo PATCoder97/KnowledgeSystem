@@ -2,7 +2,7 @@
 using DataAccessLayer;
 using DevExpress.XtraEditors;
 using DevExpress.XtraSplashScreen;
-using KnowledgeSystem.Configs;
+using KnowledgeSystem.Helpers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -162,7 +162,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             }
             else
             {
-                DefaultMsg.MsgErrorDB();
+                MsgTP.MsgErrorDB();
             }
         }
     }

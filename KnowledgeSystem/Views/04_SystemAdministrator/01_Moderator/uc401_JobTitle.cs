@@ -5,7 +5,7 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraSplashScreen;
 using ExcelDataReader;
-using KnowledgeSystem.Configs;
+using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator;
 using OfficeOpenXml;
 using System;

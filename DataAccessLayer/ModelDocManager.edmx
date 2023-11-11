@@ -101,6 +101,11 @@
           <Property Name="JobCode" Type="varchar" MaxLength="16" />
           <Property Name="PCName" Type="varchar" MaxLength="32" />
           <Property Name="IPAddress" Type="varchar" MaxLength="15" />
+          <Property Name="Addr" Type="nvarchar" MaxLength="128" />
+          <Property Name="PhoneNum1" Type="varchar" MaxLength="16" />
+          <Property Name="PhoneNum2" Type="varchar" MaxLength="16" />
+          <Property Name="Status" Type="int" />
+          <Property Name="Sex" Type="bit" />
         </EntityType>
         <EntityType Name="dm_UserRole">
           <Key>
@@ -266,6 +271,7 @@
           <Property Name="BackupLicense" Type="bit" Nullable="false" />
           <Property Name="InvalidLicense" Type="bit" Nullable="false" />
           <Property Name="Describe" Type="nvarchar" MaxLength="64" />
+          <Property Name="CertSuspended" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="dt301_CertReqSetting">
           <Key>
@@ -366,12 +372,12 @@
           <EntitySet Name="dt207_DocProcessing" EntityType="DBDocumentManagementSystemModel.dt207_DocProcessing" />
           <EntitySet Name="dt207_DocProcessingInfo" EntityType="DBDocumentManagementSystemModel.dt207_DocProcessingInfo" />
           <EntitySet Name="dm_UserRole" EntityType="DBDocumentManagementSystemModel.dm_UserRole" />
-          <EntitySet Name="dm_User" EntityType="DBDocumentManagementSystemModel.dm_User" />
           <EntitySet Name="dm_Group" EntityType="DBDocumentManagementSystemModel.dm_Group" />
           <EntitySet Name="dm_Progress" EntityType="DBDocumentManagementSystemModel.dm_Progress" />
           <EntitySet Name="dm_JobTitle" EntityType="DBDocumentManagementSystemModel.dm_JobTitle" />
           <EntitySet Name="dt301_CertReqSetting" EntityType="DBDocumentManagementSystemModel.dt301_CertReqSetting" />
           <EntitySet Name="dt301_Course" EntityType="DBDocumentManagementSystemModel.dt301_Course" />
+          <EntitySet Name="dm_User" EntityType="DBDocumentManagementSystemModel.dm_User" />
           <EntitySet Name="dt301_Base" EntityType="DBDocumentManagementSystemModel.dt301_Base" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
@@ -597,23 +603,6 @@
           <Property Name="IdUser" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="IdRole" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="dm_User">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="DisplayName" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
-          <Property Name="SecondaryPassword" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-          <Property Name="DateCreate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="IdDepartment" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
-          <Property Name="DisplayNameVN" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="DOB" Type="DateTime" Precision="0" />
-          <Property Name="CitizenID" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-          <Property Name="Nationality" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Name="JobCode" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-          <Property Name="PCName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-          <Property Name="IPAddress" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="dm_Group">
           <Key>
             <PropertyRef Name="Id" />
@@ -661,6 +650,28 @@
           <Property Name="Duration" Type="Int32" />
           <Property Name="Category" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="dm_User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayName" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="SecondaryPassword" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="DateCreate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IdDepartment" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayNameVN" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="DOB" Type="DateTime" Precision="0" />
+          <Property Name="CitizenID" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="Nationality" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="JobCode" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="PCName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="IPAddress" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Addr" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNum1" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNum2" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="Sex" Type="Boolean" />
+        </EntityType>
         <EntityType Name="dt301_Base">
           <Key>
             <PropertyRef Name="Id" />
@@ -676,6 +687,7 @@
           <Property Name="BackupLicense" Type="Boolean" Nullable="false" />
           <Property Name="InvalidLicense" Type="Boolean" Nullable="false" />
           <Property Name="Describe" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="CertSuspended" Type="Boolean" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -928,24 +940,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dm_User">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_User">
-              <MappingFragment StoreEntitySet="dm_User">
-                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
-                <ScalarProperty Name="PCName" ColumnName="PCName" />
-                <ScalarProperty Name="JobCode" ColumnName="JobCode" />
-                <ScalarProperty Name="Nationality" ColumnName="Nationality" />
-                <ScalarProperty Name="CitizenID" ColumnName="CitizenID" />
-                <ScalarProperty Name="DOB" ColumnName="DOB" />
-                <ScalarProperty Name="DisplayNameVN" ColumnName="DisplayNameVN" />
-                <ScalarProperty Name="IdDepartment" ColumnName="IdDepartment" />
-                <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
-                <ScalarProperty Name="SecondaryPassword" ColumnName="SecondaryPassword" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="dm_Group">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_Group">
               <MappingFragment StoreEntitySet="dm_Group">
@@ -998,9 +992,33 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="dm_User">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_User">
+              <MappingFragment StoreEntitySet="dm_User">
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="PhoneNum2" ColumnName="PhoneNum2" />
+                <ScalarProperty Name="PhoneNum1" ColumnName="PhoneNum1" />
+                <ScalarProperty Name="Addr" ColumnName="Addr" />
+                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+                <ScalarProperty Name="PCName" ColumnName="PCName" />
+                <ScalarProperty Name="JobCode" ColumnName="JobCode" />
+                <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+                <ScalarProperty Name="CitizenID" ColumnName="CitizenID" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="DisplayNameVN" ColumnName="DisplayNameVN" />
+                <ScalarProperty Name="IdDepartment" ColumnName="IdDepartment" />
+                <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
+                <ScalarProperty Name="SecondaryPassword" ColumnName="SecondaryPassword" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="dt301_Base">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt301_Base">
               <MappingFragment StoreEntitySet="dt301_Base">
+                <ScalarProperty Name="CertSuspended" ColumnName="CertSuspended" />
                 <ScalarProperty Name="Describe" ColumnName="Describe" />
                 <ScalarProperty Name="InvalidLicense" ColumnName="InvalidLicense" />
                 <ScalarProperty Name="BackupLicense" ColumnName="BackupLicense" />

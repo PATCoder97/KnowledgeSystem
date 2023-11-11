@@ -131,18 +131,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configs\AutoFilterNonUnicode.cs" />
-    <Compile Include="Configs\AppCopyRight.cs" />
-    <Compile Include="Configs\AppPermission.cs" />
-    <Compile Include="Configs\DomainVNFPG.cs" />
-    <Compile Include="Configs\EnumHelper.cs" />
-    <Compile Include="Configs\GridControlHelper.cs" />
-    <Compile Include="Configs\PCInfoHelper.cs" />
-    <Compile Include="Configs\RefreshHelper.cs" />
-    <Compile Include="Configs\RegistryHelper.cs" />
-    <Compile Include="Configs\SingleConnection.cs" />
-    <Compile Include="Configs\TPConfigs.cs" />
-    <Compile Include="Configs\TPSvgimages.cs" />
+    <Compile Include="Helpers\AutoFilterNonUnicode.cs" />
+    <Compile Include="Helpers\AppCopyRight.cs" />
+    <Compile Include="Helpers\AppPermission.cs" />
+    <Compile Include="Helpers\DomainVNFPG.cs" />
+    <Compile Include="Helpers\EnumHelper.cs" />
+    <Compile Include="Helpers\GridControlHelper.cs" />
+    <Compile Include="Helpers\PCInfoHelper.cs" />
+    <Compile Include="Helpers\RefreshHelper.cs" />
+    <Compile Include="Helpers\RegistryHelper.cs" />
+    <Compile Include="Helpers\TPConfigs.cs" />
+    <Compile Include="Helpers\TPSvgimages.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\00_Generals\f00_FluentFrame.cs">
@@ -367,12 +366,6 @@
     <Compile Include="Views\04_SystemAdministrator\01_Moderator\uc401_UserManage.Designer.cs">
       <DependentUpon>uc401_UserManage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\04_SystemAdministrator\01_Moderator\uc401_UserManage_Info.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Views\04_SystemAdministrator\01_Moderator\uc401_UserManage_Info.Designer.cs">
-      <DependentUpon>uc401_UserManage_Info.cs</DependentUpon>
-    </Compile>
     <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\uc402_Functions.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -507,9 +500,6 @@
     <EmbeddedResource Include="Views\04_SystemAdministrator\01_Moderator\uc401_UserManage.resx">
       <DependentUpon>uc401_UserManage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\04_SystemAdministrator\01_Moderator\uc401_UserManage_Info.resx">
-      <DependentUpon>uc401_UserManage_Info.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\02_SystemAdmin\uc402_Functions.resx">
       <DependentUpon>uc402_Functions.cs</DependentUpon>
     </EmbeddedResource>
@@ -517,7 +507,6 @@
       <DependentUpon>uc402_UploadExcelDB.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
-    <None Include="Fonts\kaiu.ttf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -553,10 +542,34 @@
     <Content Include="Images\icons_cancel.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\icons_change_user.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\icons_circled_1.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\icons_circled_2.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\icons_circled_3.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\icons_circled_4.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\icons_circled_5.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\icons_circled_6.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\icons_classroom.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\icons_close.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\icons_denied.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\icons_diploma.svg">
@@ -571,6 +584,12 @@
     <Content Include="Images\icons_excel.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\icons_exchange.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\icons_filter.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\icons_heart_with_pulse.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -581,6 +600,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\icons_ok.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\icons_personnel_changes.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\icons_plus.svg">
@@ -602,6 +624,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\icons_team.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\icons_unfriend.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\icons_uplevel.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\icons_upload_to_ftp.svg">

@@ -3,7 +3,7 @@ using DataAccessLayer;
 using DevExpress.XtraBars.Navigation;
 using DevExpress.XtraEditors;
 using DevExpress.XtraSplashScreen;
-using KnowledgeSystem.Configs;
+using KnowledgeSystem.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -96,7 +96,7 @@ namespace KnowledgeSystem.Views._00_Generals
 
                 accordion.Hint = item.DisplayName;
 
-                var lsFuncChild = dm_FunctionBUS.Instance.GetListByIdParent(item.Id);
+                var lsFuncChild = dm_FunctionBUS.Instance.GetListByIdParent(item.Id).Where(r => !string.IsNullOrEmpty(r.ControlName)).ToList();
                 var lsChildren = (from data in lsFuncChild
                                   join granted in lsPermissions on data.Id equals granted
                                   select data).ToList();

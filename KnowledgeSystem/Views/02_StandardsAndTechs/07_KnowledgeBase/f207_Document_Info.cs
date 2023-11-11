@@ -10,7 +10,7 @@ using DevExpress.XtraGrid.Views.Layout;
 using DevExpress.XtraLayout;
 using DevExpress.XtraLayout.Utils;
 using DevExpress.XtraSplashScreen;
-using KnowledgeSystem.Configs;
+using KnowledgeSystem.Helpers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -64,6 +64,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         string _idBaseDocument = string.Empty;
         string _userId = string.Empty;
+        DateTime? _dateUpload = DateTime.Now;
 
         List<dt207_Type> lsKnowledgeTypes = new List<dt207_Type>();
         List<dm_User> lsUsers = new List<dm_User>();
@@ -442,6 +443,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     txbNameVN.Text = displayName.Length > 1 ? displayName[1] : "";
                     txbNameEN.Text = displayName.Length > 2 ? displayName[2] : "";
                     txbKeyword.Text = base207Info.Keyword;
+                    _dateUpload = base207Info.UploadDate;
 
                     // Thông tin phụ kiện
                     lsAttachments.AddRange(_dt207_AttachmentBUS.GetListByIdBase(_idBaseDocument)
@@ -683,7 +685,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             if (permissionAttachments.DeleteInfo != true)
             {
-                XtraMessageBox.Show(TPConfigs.NoPermission, TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MsgTP.MsgNoPermission();
                 return;
             }
 
@@ -778,7 +780,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     IdTypes = (int)cbbType.EditValue,
                     Keyword = _keyword,
                     UserUpload = cbbUserUpload.EditValue.ToString(),
-                    UploadDate = DateTime.Now
+                    UploadDate = _dateUpload
                 };
 
                 _dt207_BaseBUS.AddOrUpdate(knowledge);
@@ -866,7 +868,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             if (permissionAttachments.ReadFile != true)
             {
-                XtraMessageBox.Show(TPConfigs.NoPermission, TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MsgTP.MsgNoPermission();
                 return;
             }
 
@@ -914,7 +916,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             if (permissionAttachments.UpdateInfo != true)
             {
-                XtraMessageBox.Show(TPConfigs.NoPermission, TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MsgTP.MsgNoPermission();
                 return;
             }
 

@@ -4,7 +4,7 @@ using DevExpress.Pdf.Native.BouncyCastle.Asn1.Ocsp;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraSplashScreen;
-using KnowledgeSystem.Configs;
+using KnowledgeSystem.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -147,7 +147,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
 
         private void btnDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            DefaultMsg.MsgConfirmDel();
+            MsgTP.MsgConfirmDel();
 
             _eventInfo = EventFormInfo.Delete;
             LockControl();
@@ -211,7 +211,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
             }
             else
             {
-                DefaultMsg.MsgErrorDB();
+                MsgTP.MsgErrorDB();
             }
         }
     }

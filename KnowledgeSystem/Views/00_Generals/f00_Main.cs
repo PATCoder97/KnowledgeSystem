@@ -3,7 +3,7 @@ using DataAccessLayer;
 using DevExpress.XtraBars.Docking2010.Customization;
 using DevExpress.XtraBars.Docking2010.Views.WindowsUI;
 using DevExpress.XtraEditors;
-using KnowledgeSystem.Configs;
+using KnowledgeSystem.Helpers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -64,8 +64,6 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void GetUserLogin()
         {
-            Size = new Size(100, 100);
-            WindowState = FormWindowState.Normal;
             f00_Login frm = new f00_Login();
             frm.ShowDialog();
 
@@ -131,6 +129,7 @@ namespace KnowledgeSystem.Views._00_Generals
         private void fMain_Load(object sender, EventArgs e)
         {
             GetSysStaticValue();
+            GetUserLogin();
 
 #if DEBUG
             // Không cần check update khi debug
@@ -146,9 +145,7 @@ namespace KnowledgeSystem.Views._00_Generals
                     UpdateInfo newUpdate = lsUpdateInfos.First();
                     if (newUpdate.version != AppCopyRight.version)
                     {
-                        string msg = "Phần mềm có bản cập nhật mới.\r\nBấm OK để hệ thống cập nhật,\r\nVui lòng mở lại phần mềm sau khi cập nhật thành công!\r\n";
-                        msg += "該系統有新的更新。\r\n按確定更新系統，\r\n更新成功後請重新打開系統！";
-                        var dialogResult = XtraMessageBox.Show(msg, TPConfigs.SoftNameTW, MessageBoxButtons.OKCancel);
+                        var dialogResult = MsgTP.MsgUpdateSoftware();
                         if (dialogResult == DialogResult.OK)
                         {
                             f00_UpdateSoftware f00_Update = new f00_UpdateSoftware(newUpdate.url);
@@ -171,17 +168,12 @@ namespace KnowledgeSystem.Views._00_Generals
             Text = TPConfigs.SoftNameTW + AppCopyRight.CopyRightString();
             lbSoftName.Text = TPConfigs.SoftNameTW;
 
-            Size = new Size(100, 100);
-            Location = new Point((Screen.PrimaryScreen.WorkingArea.Width - this.Width) / 2,
-                          (Screen.PrimaryScreen.WorkingArea.Height - this.Height) / 2);
-            StartPosition = FormStartPosition.CenterScreen;
-
             InitializeControl();
         }
 
         private void fMain_Shown(object sender, EventArgs e)
         {
-            GetUserLogin();
+          
         }
 
         private void ShowFromByFrame(int IdForm_, TileItemEventArgs e)
@@ -189,10 +181,11 @@ namespace KnowledgeSystem.Views._00_Generals
             bool IsGranted = AppPermission.Instance.CheckAppPermission(IdForm_);
             if (!IsGranted)
             {
-                XtraMessageBox.Show(TPConfigs.NoPermission, TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MsgTP.MsgNoPermission();
                 return;
             }
 
+            TPConfigs.IdParentControl = IdForm_;
             f00_FluentFrame formShow = new f00_FluentFrame(IdForm_);
             formShow.Text = e.Item.Text;
             Hide();

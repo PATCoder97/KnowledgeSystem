@@ -157,8 +157,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             // 
             // gridColumn7
             // 
-            this.gridColumn7.AppearanceCell.Font = new System.Drawing.Font("DFKai-SB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridColumn7.AppearanceCell.Options.UseFont = true;
             this.gridColumn7.AppearanceCell.Options.UseTextOptions = true;
             this.gridColumn7.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.gridColumn7.Caption = "名稱";

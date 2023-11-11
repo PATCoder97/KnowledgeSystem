@@ -2,7 +2,7 @@
 using DataAccessLayer;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
-using KnowledgeSystem.Configs;
+using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator;
 using System;
 using System.Collections.Generic;

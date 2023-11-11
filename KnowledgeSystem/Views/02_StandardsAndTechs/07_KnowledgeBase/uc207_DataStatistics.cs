@@ -5,7 +5,7 @@ using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraSplashScreen;
-using KnowledgeSystem.Configs;
+using KnowledgeSystem.Helpers;
 using OfficeOpenXml;
 using OfficeOpenXml.Drawing.Chart;
 using OfficeOpenXml.Drawing.Chart.Style;
@@ -206,6 +206,12 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             btnStatistics.Text = "資料\r\n統計";
             btnChart.Text = "繪製\r\n圖表";
             btnTarget.Text = "設定\r\n目標";
+
+            DateTime firstDayOfMonth = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
+            txbFromDate.EditValue = firstDayOfMonth;
+
+            DateTime lastDayOfMonth = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month));
+            txbToDate.EditValue = lastDayOfMonth;
 
             gcData.ForceInitialize();
 

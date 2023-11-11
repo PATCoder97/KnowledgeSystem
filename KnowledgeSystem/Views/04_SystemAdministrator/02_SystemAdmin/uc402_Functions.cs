@@ -7,7 +7,7 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraTreeList;
 using DevExpress.XtraTreeList.Nodes;
-using KnowledgeSystem.Configs;
+using KnowledgeSystem.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -52,31 +52,28 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
         private void LoadData()
         {
-            using (var db = new DBDocumentManagementSystemEntities())
-            {
-                var lsFuncRole = dm_FunctionBUS.Instance.GetList().OrderBy(r => r.Prioritize).ToList();
+            var lsFuncRole = dm_FunctionBUS.Instance.GetList().OrderBy(r => r.Prioritize).ToList();
 
-                //lsFunctions = (from data in db.dm_Function.OrderBy(r => r.Prioritize).ToList()
-                //               join funcs in lsFuncRole on data.Id equals funcs.IdFunction into dtg
-                //               from p in dtg.DefaultIfEmpty()
-                //               select new dm_FunctionM
-                //               {
-                //                   Id = data.Id,
-                //                   IdParent = data.IdParent,
-                //                   DisplayName = data.DisplayName,
-                //                   ControlName = data.ControlName,
-                //                   Prioritize = data.Prioritize,
-                //                   Status = p != null,
-                //                   Images = data.Images,
-                //               }).ToList();
+            //lsFunctions = (from data in db.dm_Function.OrderBy(r => r.Prioritize).ToList()
+            //               join funcs in lsFuncRole on data.Id equals funcs.IdFunction into dtg
+            //               from p in dtg.DefaultIfEmpty()
+            //               select new dm_FunctionM
+            //               {
+            //                   Id = data.Id,
+            //                   IdParent = data.IdParent,
+            //                   DisplayName = data.DisplayName,
+            //                   ControlName = data.ControlName,
+            //                   Prioritize = data.Prioritize,
+            //                   Status = p != null,
+            //                   Images = data.Images,
+            //               }).ToList();
 
-                sourceFunc.DataSource = lsFuncRole;
+            sourceFunc.DataSource = lsFuncRole;
 
-                lsRoles = dm_RoleBUS.Instance.GetList();
-                sourceRole.DataSource = lsRoles;
-                gcRoles.DataSource = sourceRole;
-                gvRoles.BestFitColumns();
-            }
+            lsRoles = dm_RoleBUS.Instance.GetList();
+            sourceRole.DataSource = lsRoles;
+            gcRoles.DataSource = sourceRole;
+            gvRoles.BestFitColumns();
 
             treeFunctions.RefreshDataSource();
             gcRoles.RefreshDataSource();

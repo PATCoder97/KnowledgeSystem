@@ -5,7 +5,7 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraSplashScreen;
-using KnowledgeSystem.Configs;
+using KnowledgeSystem.Helpers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -243,7 +243,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             }
             else
             {
-                DefaultMsg.MsgErrorDB();
+                MsgTP.MsgErrorDB();
             }
         }
 
@@ -255,7 +255,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
         private void btnDel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            DefaultMsg.MsgConfirmDel();
+            MsgTP.MsgConfirmDel();
 
             _eventInfo = EventFormInfo.Delete;
             LockControl();

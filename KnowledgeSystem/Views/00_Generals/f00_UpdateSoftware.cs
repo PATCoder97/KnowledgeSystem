@@ -1,4 +1,4 @@
-﻿using KnowledgeSystem.Configs;
+﻿using KnowledgeSystem.Helpers;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;

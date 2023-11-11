@@ -1,7 +1,7 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
 using DevExpress.XtraEditors.Controls;
-using KnowledgeSystem.Configs;
+using KnowledgeSystem.Helpers;
 using System;
 using System.Linq;
 

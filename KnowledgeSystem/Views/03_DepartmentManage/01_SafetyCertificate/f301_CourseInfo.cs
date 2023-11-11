@@ -2,7 +2,7 @@
 using DataAccessLayer;
 using DevExpress.XtraEditors;
 using DevExpress.XtraSplashScreen;
-using KnowledgeSystem.Configs;
+using KnowledgeSystem.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -172,7 +172,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
             }
             else
             {
-                DefaultMsg.MsgErrorDB();
+                MsgTP.MsgErrorDB();
             }
         }
     }

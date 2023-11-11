@@ -4,7 +4,7 @@ using DevExpress.Utils.Svg;
 using DevExpress.Utils;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
-using KnowledgeSystem.Configs;
+using KnowledgeSystem.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -150,7 +150,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
         private void btnDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            DefaultMsg.MsgConfirmDel();
+            MsgTP.MsgConfirmDel();
 
             _eventInfo = EventFormInfo.Delete;
             LockControl();
@@ -212,7 +212,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
             }
             else
             {
-                DefaultMsg.MsgErrorDB();
+                MsgTP.MsgErrorDB();
             }
         }
     }

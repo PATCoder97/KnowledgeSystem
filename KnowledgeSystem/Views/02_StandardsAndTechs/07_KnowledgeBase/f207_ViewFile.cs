@@ -4,7 +4,7 @@ using DevExpress.Pdf;
 using DevExpress.Utils.CommonDialogs;
 using DevExpress.XtraEditors;
 using DevExpress.XtraSplashScreen;
-using KnowledgeSystem.Configs;
+using KnowledgeSystem.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -108,7 +108,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         {
             if (CanSaveFile != true)
             {
-                XtraMessageBox.Show(TPConfigs.NoPermission, TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MsgTP.MsgNoPermission();
                 return;
             }
 

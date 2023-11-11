@@ -26,5 +26,10 @@ namespace DataAccessLayer
         public string JobCode { get; set; }
         public string PCName { get; set; }
         public string IPAddress { get; set; }
+        public string Addr { get; set; }
+        public string PhoneNum1 { get; set; }
+        public string PhoneNum2 { get; set; }
+        public Nullable<int> Status { get; set; }
+        public Nullable<bool> Sex { get; set; }
     }
 }

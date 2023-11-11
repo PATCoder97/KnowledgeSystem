@@ -4,7 +4,7 @@ using DevExpress.ClipboardSource.SpreadsheetML;
 using DevExpress.Utils.About;
 using DevExpress.XtraEditors;
 using DevExpress.XtraTreeList;
-using KnowledgeSystem.Configs;
+using KnowledgeSystem.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
