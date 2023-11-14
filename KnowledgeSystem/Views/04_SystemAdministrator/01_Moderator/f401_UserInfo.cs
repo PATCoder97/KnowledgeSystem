@@ -201,6 +201,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
         private void f401_UserInfo_Load(object sender, EventArgs e)
         {
             IsSysAdmin = AppPermission.Instance.CheckAppPermission(AppPermission.SysAdmin);
+            lsCourses = dt301_CourseBUS.Instance.GetList();
 
             LockControl();
 
@@ -544,7 +545,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
             // Thông báo ra các chứng chỉ được giữ lại và chứng chỉ sẽ chuyển vào 無效 khi thay đổi chức vụ
             var lsValidCerts = dt301_BaseBUS.Instance.GetListByUIDAndValidCert(userInfo.Id);
-            lsCourses = dt301_CourseBUS.Instance.GetList();
 
             idDept2word = userInfo.IdDepartment.Substring(0, 2);
             var lsCertReqSets = dt301_CertReqSetBUS.Instance.GetListByJobAndDept(idJobChange, idDept2word);
@@ -613,6 +613,17 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             eventInfo = EventFormInfo.Update;
             _eventUpdate = UpdateEvent.DeptChange;
             LockControl();
+
+            var lsValidCertByUsers = dt301_BaseBUS.Instance.GetListByUIDAndValidCert(userInfo.Id);
+
+            // Lấy ds chứng chỉ sẽ chuyển về 無效 khi chuyển bộ phận. Lưu vào notify để thông báo cho bên bp mới có các bằng còn hạn có dùng lại không
+            var lsValidCerts = (from data in lsValidCertByUsers
+                                join course in lsCourses on data.IdCourse equals course.Id
+                                select $"{data.IdCourse} {course.DisplayName}").ToList();
+
+            string msgValidCert = $"<font='Microsoft JhengHei UI' size=14><color=blue>以下證書將返回狀態「無效」並通知新部門處務師：</color></br>{string.Join("\r\n", lsValidCerts)}</font>";
+
+            MsgTP.MsgShowInfomation(msgValidCert);
         }
     }
 }
