@@ -1,5 +1,6 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
+using DevExpress.Utils;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
@@ -24,16 +25,18 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             InitializeIcon();
         }
 
-        public string _formName = string.Empty;
-        public EventFormInfo _eventInfo = EventFormInfo.Create;
-        public dm_User _user = null;
-        string _oldUserInfo = "";
+        public string formName = string.Empty;
+        public EventFormInfo eventInfo = EventFormInfo.Create;
+        public dm_User userInfo = null;
+        private string oldUserInfoJson = "";
+        string idDept2word;
         bool IsSysAdmin = false;
 
         private UpdateEvent _eventUpdate = UpdateEvent.Normal;
 
         List<dm_Role> lsAllRoles;
         List<dm_Role> lsChooseRoles = new List<dm_Role>();
+        List<dt301_Course> lsCourses;
 
         BindingSource _sourceAllRole = new BindingSource();
         BindingSource _sourceChooseRole = new BindingSource();
@@ -47,13 +50,13 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             [Description("留職停薪")]
             Suspension,
             [Description("調至")]
-            Transfer,
+            DeptChange,
             [Description("離職")]
             Resign,
             [Description("在職")]
             Conferred,
             [Description("晉升")]
-            Promoted
+            JobChange
         }
 
         private void InitializeIcon()
@@ -63,10 +66,10 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             btnConfirm.ImageOptions.SvgImage = TPSvgimages.Confirm;
 
             btnSuspension.ImageOptions.SvgImage = TPSvgimages.Suspension;
-            btnTransfer.ImageOptions.SvgImage = TPSvgimages.Transfer;
+            btnDeptChange.ImageOptions.SvgImage = TPSvgimages.Transfer;
             btnResign.ImageOptions.SvgImage = TPSvgimages.Resign;
             btnConferred.ImageOptions.SvgImage = TPSvgimages.Conferred;
-            btnPromoted.ImageOptions.SvgImage = TPSvgimages.UpLevel;
+            btnJobChange.ImageOptions.SvgImage = TPSvgimages.UpLevel;
             btnPersonnelChanges.ImageOptions.SvgImage = TPSvgimages.PersonnelChanges;
         }
 
@@ -92,20 +95,20 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             cbbStatus.Enabled = false;
             cbbJobTitle.Enabled = false;
 
-            btnTransfer.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            btnDeptChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             btnResign.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             btnSuspension.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             btnConferred.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-            btnPromoted.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            btnJobChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             btnPersonnelChanges.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
 
             lcRole.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             Size = new Size(600, 358);
 
-            switch (_eventInfo)
+            switch (eventInfo)
             {
                 case EventFormInfo.Create:
-                    Text = $"新增{_formName}";
+                    Text = $"新增{formName}";
 
                     txbUserId.Enabled = true;
                     cbbDept.Enabled = true;
@@ -119,7 +122,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                     EnabledController();
                     break;
                 case EventFormInfo.Update:
-                    Text = $"更新{_formName}";
+                    Text = $"更新{formName}";
 
                     txbUserId.Enabled = true;
                     txbUserId.ReadOnly = true;
@@ -137,7 +140,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                     EnabledController();
                     break;
                 case EventFormInfo.Delete:
-                    Text = $"刪除{_formName}";
+                    Text = $"刪除{formName}";
 
                     btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
@@ -146,21 +149,21 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                     EnabledController(false);
                     break;
                 case EventFormInfo.View:
-                    Text = $"{_formName}信息";
+                    Text = $"{formName}信息";
 
                     btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                     btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
 
                     btnPersonnelChanges.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
-                    if (_user.Status == 0)
+                    if (userInfo.Status == 0)
                     {
                         btnSuspension.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
-                        btnTransfer.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                        btnDeptChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                         btnResign.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
-                        btnPromoted.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                        btnJobChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     }
-                    else if (_user.Status == 2)
+                    else if (userInfo.Status == 2)
                     {
                         btnConferred.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     }
@@ -178,16 +181,16 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             bool role301Main = AppPermission.Instance.CheckAppPermission(AppPermission.SafetyCertMain);
             bool roleEditUserJobAndDept = AppPermission.Instance.CheckAppPermission(AppPermission.EditUserJobAndDept);
 
-            if (!(role301Main && roleEditUserJobAndDept && TPConfigs.IdParentControl == AppPermission.SafetyCertMain))
-            {
-                btnPersonnelChanges.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            //if (!(role301Main && roleEditUserJobAndDept && TPConfigs.IdParentControl == AppPermission.SafetyCertMain))
+            //{
+            //    btnPersonnelChanges.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
 
-                btnSuspension.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                btnTransfer.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                btnResign.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                btnConferred.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                btnPromoted.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-            }
+            //    btnSuspension.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            //    btnDeptChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            //    btnResign.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            //    btnConferred.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            //    btnJobChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            //}
 
             Rectangle screenBounds = Screen.PrimaryScreen.Bounds;
             int x = screenBounds.Width / 2 - Width / 2;
@@ -226,35 +229,35 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             gvAllRole.ReadOnlyGridView();
             gvChooseRole.ReadOnlyGridView();
 
-            switch (_eventInfo)
+            switch (eventInfo)
             {
                 case EventFormInfo.Create:
-                    _user = new dm_User();
+                    userInfo = new dm_User();
                     break;
                 case EventFormInfo.View:
-                    _user.DisplayName = _user.DisplayName.Split('\n')[0];
-                    _user.DateCreate = DateTime.Parse(_user.DateCreate.ToShortDateString());
+                    userInfo.DisplayName = userInfo.DisplayName.Split('\n')[0];
+                    userInfo.DateCreate = DateTime.Parse(userInfo.DateCreate.ToShortDateString());
 
-                    txbUserId.EditValue = _user.Id;
-                    txbUserNameVN.EditValue = _user.DisplayNameVN?.Trim();
-                    txbUserNameTW.EditValue = _user.DisplayName.Split('\n')[0]?.Trim();
-                    cbbDept.EditValue = _user.IdDepartment;
-                    cbbJobTitle.EditValue = _user.JobCode;
-                    txbDOB.EditValue = _user.DOB;
-                    txbCCCD.EditValue = _user.CitizenID;
-                    cbbNationality.EditValue = _user.Nationality;
+                    txbUserId.EditValue = userInfo.Id;
+                    txbUserNameVN.EditValue = userInfo.DisplayNameVN?.Trim();
+                    txbUserNameTW.EditValue = userInfo.DisplayName.Split('\n')[0]?.Trim();
+                    cbbDept.EditValue = userInfo.IdDepartment;
+                    cbbJobTitle.EditValue = userInfo.JobCode;
+                    txbDOB.EditValue = userInfo.DOB;
+                    txbCCCD.EditValue = userInfo.CitizenID;
+                    cbbNationality.EditValue = userInfo.Nationality;
 
-                    txbPhone1.EditValue = _user.PhoneNum1;
-                    txbPhone2.EditValue = _user.PhoneNum2;
-                    txbAddr.EditValue = _user.Addr;
-                    cbbSex.EditValue = _user.Sex == null ? "" : _user.Sex.Value ? "男" : "女";
-                    cbbStatus.EditValue = _user.Status == null ? "" : TPConfigs.lsUserStatus[_user.Status.Value];
-                    txbDateStart.EditValue = _user.DateCreate;
+                    txbPhone1.EditValue = userInfo.PhoneNum1;
+                    txbPhone2.EditValue = userInfo.PhoneNum2;
+                    txbAddr.EditValue = userInfo.Addr;
+                    cbbSex.EditValue = userInfo.Sex == null ? "" : userInfo.Sex.Value ? "男" : "女";
+                    cbbStatus.EditValue = userInfo.Status == null ? "" : TPConfigs.lsUserStatus[userInfo.Status.Value];
+                    txbDateStart.EditValue = userInfo.DateCreate;
 
-                    _oldUserInfo = JsonConvert.SerializeObject(_user);
+                    oldUserInfoJson = JsonConvert.SerializeObject(userInfo);
 
                     // Load Role
-                    var lsUserRoles = dm_UserRoleBUS.Instance.GetListByUID(_user.Id).Select(r => r.IdRole).ToList();
+                    var lsUserRoles = dm_UserRoleBUS.Instance.GetListByUID(userInfo.Id).Select(r => r.IdRole).ToList();
                     lsChooseRoles.AddRange(lsAllRoles.Where(a => lsUserRoles.Exists(b => b == a.Id)));
                     lsAllRoles.RemoveAll(a => lsUserRoles.Exists(b => b == a.Id));
 
@@ -266,7 +269,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
         private void btnEdit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            _eventInfo = EventFormInfo.Update;
+            eventInfo = EventFormInfo.Update;
             LockControl();
         }
 
@@ -274,7 +277,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
         {
             MsgTP.MsgConfirmDel();
 
-            _eventInfo = EventFormInfo.Delete;
+            eventInfo = EventFormInfo.Delete;
             LockControl();
         }
 
@@ -284,29 +287,29 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             string msg = "";
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
             {
-                _user.DisplayName = txbUserNameTW.EditValue?.ToString().Trim();
-                _user.DisplayNameVN = txbUserNameVN.EditValue?.ToString().Trim();
-                _user.IdDepartment = cbbDept.EditValue?.ToString();
-                _user.JobCode = cbbJobTitle.EditValue?.ToString();
-                _user.DOB = txbDOB.DateTime;
-                _user.CitizenID = txbCCCD.EditValue?.ToString();
-                _user.Nationality = cbbNationality.EditValue?.ToString();
+                userInfo.DisplayName = txbUserNameTW.EditValue?.ToString().Trim();
+                userInfo.DisplayNameVN = txbUserNameVN.EditValue?.ToString().Trim();
+                userInfo.IdDepartment = cbbDept.EditValue?.ToString();
+                userInfo.JobCode = cbbJobTitle.EditValue?.ToString();
+                userInfo.DOB = txbDOB.DateTime;
+                userInfo.CitizenID = txbCCCD.EditValue?.ToString();
+                userInfo.Nationality = cbbNationality.EditValue?.ToString();
 
-                _user.DateCreate = txbDateStart.DateTime;
-                _user.PhoneNum1 = txbPhone1.EditValue?.ToString();
-                _user.PhoneNum2 = txbPhone2.EditValue?.ToString();
-                _user.Addr = txbAddr.EditValue?.ToString();
-                _user.Sex = cbbSex.EditValue?.ToString() == "男";
-                _user.Status = TPConfigs.lsUserStatus.FirstOrDefault(r => r.Value == cbbStatus.EditValue?.ToString()).Key;
+                userInfo.DateCreate = txbDateStart.DateTime;
+                userInfo.PhoneNum1 = txbPhone1.EditValue?.ToString();
+                userInfo.PhoneNum2 = txbPhone2.EditValue?.ToString();
+                userInfo.Addr = txbAddr.EditValue?.ToString();
+                userInfo.Sex = cbbSex.EditValue?.ToString() == "男";
+                userInfo.Status = TPConfigs.lsUserStatus.FirstOrDefault(r => r.Value == cbbStatus.EditValue?.ToString()).Key;
 
-                string _newUserInfo = JsonConvert.SerializeObject(_user);
+                string newUserInfoJson = JsonConvert.SerializeObject(userInfo);
 
-                msg = $"{_user.Id} {_user.DisplayName} {_user.DisplayNameVN}";
-                switch (_eventInfo)
+                msg = $"{userInfo.Id} {userInfo.DisplayName} {userInfo.DisplayNameVN}";
+                switch (eventInfo)
                 {
                     case EventFormInfo.Create:
-                        _user.Id = txbUserId.EditValue?.ToString();
-                        result = dm_UserBUS.Instance.Add(_user);
+                        userInfo.Id = txbUserId.EditValue?.ToString();
+                        result = dm_UserBUS.Instance.Add(userInfo);
                         break;
                     case EventFormInfo.View:
                         break;
@@ -314,14 +317,14 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                         result = true;
                         var resultUpdate = false;
 
-                        if (_oldUserInfo != _newUserInfo)
+                        if (oldUserInfoJson != newUserInfoJson)
                         {
-                            resultUpdate = dm_UserBUS.Instance.AddOrUpdate(_user);
+                            resultUpdate = dm_UserBUS.Instance.AddOrUpdate(userInfo);
                             result = !resultUpdate ? false : result;
                         }
 
                         // Xử lý cập nhật các thông tin đặc biệt có ảnh hưởng đến các thông tin khác như: Chứng chỉ an toàn 301
-                        var lsCertToInValids = dt301_BaseBUS.Instance.GetListByUIDAndValidCert(_user.Id);
+                        var lsCertToInValids = dt301_BaseBUS.Instance.GetListByUIDAndValidCert(userInfo.Id);
                         switch (_eventUpdate)
                         {
                             case UpdateEvent.Suspension:
@@ -336,7 +339,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                                 }
                                 break;
                             case UpdateEvent.Conferred:
-                                var lsCertSuspendeds = dt301_BaseBUS.Instance.GetListByUIDAndCertSuspended(_user.Id);
+                                var lsCertSuspendeds = dt301_BaseBUS.Instance.GetListByUIDAndCertSuspended(userInfo.Id);
                                 foreach (var item in lsCertSuspendeds)
                                 {
                                     item.ValidLicense = true;
@@ -347,7 +350,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                                     dt301_BaseBUS.Instance.AddOrUpdate(item);
                                 }
                                 break;
-                            case UpdateEvent.Transfer:
+                            case UpdateEvent.DeptChange:
                             case UpdateEvent.Resign:
                                 foreach (var item in lsCertToInValids)
                                 {
@@ -357,24 +360,51 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                                     dt301_BaseBUS.Instance.AddOrUpdate(item);
                                 }
                                 break;
-                            case UpdateEvent.Promoted:
+                            case UpdateEvent.JobChange:
+
+                                var lsValidCerts = dt301_BaseBUS.Instance.GetListByUIDAndValidCert(userInfo.Id);
+                                var lsCertReqSets = dt301_CertReqSetBUS.Instance.GetListByJobAndDept(userInfo.JobCode, idDept2word);
+
+                                // Chuyển các chứng chỉ còn hạn về chức vụ mới
+                                var lsNewValidCerts = (from data in lsValidCerts
+                                                       join req in lsCertReqSets on data.IdCourse equals req.IdCourse
+                                                       select data).ToList();
+
+                                foreach (var item in lsNewValidCerts)
+                                {
+                                    item.IdJobTitle = userInfo.JobCode;
+                                    dt301_BaseBUS.Instance.AddOrUpdate(item);
+                                }
+
+                                // Chuyển các chứ chỉ còn hạn của chức vụ cũ không cần ở chức vụ mới về 無效
+                                var lsNewInvalidCerts = (from data in lsValidCerts
+                                                         where !lsNewValidCerts.Contains(data)
+                                                         select data).ToList();
+
+                                foreach (dt301_Base item in lsNewInvalidCerts)
+                                {
+                                    item.ValidLicense = false;
+                                    item.InvalidLicense = true;
+                                    dt301_BaseBUS.Instance.AddOrUpdate(item);
+                                }
+
                                 break;
                         }
 
                         if (IsSysAdmin)
                         {
-                            var resultDel = dm_UserRoleBUS.Instance.RemoveRangeByUID(_user.Id);
+                            var resultDel = dm_UserRoleBUS.Instance.RemoveRangeByUID(userInfo.Id);
 
-                            var lsUserRolesAdd = lsChooseRoles.Select(r => new dm_UserRole { IdUser = _user.Id, IdRole = r.Id }).ToList();
+                            var lsUserRolesAdd = lsChooseRoles.Select(r => new dm_UserRole { IdUser = userInfo.Id, IdRole = r.Id }).ToList();
                             var resultAdd = dm_UserRoleBUS.Instance.AddRange(lsUserRolesAdd);
                         }
                         break;
                     case EventFormInfo.Delete:
-                        var dialogResult = XtraMessageBox.Show($"您確認刪除人員: {_user.DisplayName}", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        var dialogResult = XtraMessageBox.Show($"您確認刪除人員: {userInfo.DisplayName}", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                         if (dialogResult != DialogResult.Yes) return;
 
-                        result = dm_UserBUS.Instance.Remove(_user.Id);
-                        dm_UserRoleBUS.Instance.RemoveRangeByUID(_user.Id);
+                        result = dm_UserBUS.Instance.Remove(userInfo.Id);
+                        dm_UserRoleBUS.Instance.RemoveRangeByUID(userInfo.Id);
                         break;
                     default:
                         break;
@@ -402,7 +432,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
         private void gvAllRole_DoubleClick(object sender, EventArgs e)
         {
-            if (_eventInfo != EventFormInfo.Update) return;
+            if (eventInfo != EventFormInfo.Update) return;
 
             GridView view = gvAllRole;
             dm_Role _role = view.GetRow(view.FocusedRowHandle) as dm_Role;
@@ -415,7 +445,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
         private void gvChooseRole_DoubleClick(object sender, EventArgs e)
         {
-            if (_eventInfo != EventFormInfo.Update) return;
+            if (eventInfo != EventFormInfo.Update) return;
 
             GridView view = gvChooseRole;
             dm_Role _role = view.GetRow(view.FocusedRowHandle) as dm_Role;
@@ -445,7 +475,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
         private void btnSuspension_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            _eventInfo = EventFormInfo.Update;
+            eventInfo = EventFormInfo.Update;
             _eventUpdate = UpdateEvent.Suspension;
             LockControl();
 
@@ -454,7 +484,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
         private void btnConferred_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            _eventInfo = EventFormInfo.Update;
+            eventInfo = EventFormInfo.Update;
             _eventUpdate = UpdateEvent.Conferred;
             LockControl();
 
@@ -463,14 +493,14 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
         private void btnResign_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            _eventInfo = EventFormInfo.Update;
+            eventInfo = EventFormInfo.Update;
             _eventUpdate = UpdateEvent.Resign;
             LockControl();
 
             cbbStatus.EditValue = TPConfigs.lsUserStatus[1];
         }
 
-        private void btnPromoted_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private void btnJobChange_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             XtraInputBoxArgs args = new XtraInputBoxArgs();
 
@@ -483,7 +513,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             GridColumn gcol1 = new GridColumn() { Caption = "職務代號", FieldName = "Id", Visible = true, VisibleIndex = 0 };
             GridColumn gcol2 = new GridColumn() { Caption = "職務名稱", FieldName = "DisplayName", Visible = true, VisibleIndex = 1 };
 
-            var lsJobTitles = dm_JobTitleBUS.Instance.GetList().Where(r => r.Id != _user.JobCode).ToList();
+            var lsJobTitles = dm_JobTitleBUS.Instance.GetList().Where(r => r.Id != userInfo.JobCode).ToList();
             editor.Properties.DataSource = lsJobTitles;
             editor.Properties.DisplayMember = "DisplayName";
             editor.Properties.ValueMember = "Id";
@@ -508,12 +538,36 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
             cbbJobTitle.EditValue = idJobChange;
 
-            _eventInfo = EventFormInfo.Update;
-            _eventUpdate = UpdateEvent.Promoted;
+            eventInfo = EventFormInfo.Update;
+            _eventUpdate = UpdateEvent.JobChange;
             LockControl();
+
+            // Thông báo ra các chứng chỉ được giữ lại và chứng chỉ sẽ chuyển vào 無效 khi thay đổi chức vụ
+            var lsValidCerts = dt301_BaseBUS.Instance.GetListByUIDAndValidCert(userInfo.Id);
+            lsCourses = dt301_CourseBUS.Instance.GetList();
+
+            idDept2word = userInfo.IdDepartment.Substring(0, 2);
+            var lsCertReqSets = dt301_CertReqSetBUS.Instance.GetListByJobAndDept(idJobChange, idDept2word);
+
+            // Lấy ds chứng chỉ còn được dùng đến ở chức vụ mới
+            var lsNewValidCerts = (from data in lsValidCerts
+                                   join req in lsCertReqSets on data.IdCourse equals req.IdCourse
+                                   join course in lsCourses on data.IdCourse equals course.Id
+                                   select $"{data.IdCourse} {course.DisplayName}").ToList();
+
+            // Lấy ds các chứng chỉ ở chức vụ cũ còn hạn sẽ bị huỷ ở chức vụ mới
+            var lsNewInvalidCerts = (from data in lsValidCerts
+                                     join course in lsCourses on data.IdCourse equals course.Id
+                                     where !lsNewValidCerts.Contains($"{data.IdCourse} {course.DisplayName}")
+                                     select $"{data.IdCourse} {course.DisplayName}").ToList();
+
+            string msgValidCert = $"<font='Microsoft JhengHei UI' size=14><color=blue>應取證照：</color></br>{string.Join("\r\n", lsNewValidCerts)}</font>";
+            string msgInvalidCert = $"<font='Microsoft JhengHei UI' size=14><color=red>無效證照：</color></br>{string.Join("\r\n", lsNewInvalidCerts)}</font>";
+
+            MsgTP.MsgShowInfomation(msgValidCert + "\r\n" + msgInvalidCert);
         }
 
-        private void btnTransfer_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private void btnDeptChange_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             XtraInputBoxArgs args = new XtraInputBoxArgs();
 
@@ -530,7 +584,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             {
                 Id = r.Id,
                 DisplayName = $"{r.Id,-5}{r.DisplayName}"
-            }).Where(r => r.Id != _user.IdDepartment && r.Id.Length == 4).ToList();
+            }).Where(r => r.Id != userInfo.IdDepartment && r.Id.Length == 4).ToList();
 
             editor.Properties.DataSource = lsDepts;
             editor.Properties.DisplayMember = "DisplayName";
@@ -556,8 +610,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
             cbbDept.EditValue = idDeptChange;
 
-            _eventInfo = EventFormInfo.Update;
-            _eventUpdate = UpdateEvent.Transfer;
+            eventInfo = EventFormInfo.Update;
+            _eventUpdate = UpdateEvent.DeptChange;
             LockControl();
         }
     }

@@ -81,6 +81,28 @@ namespace BusinessLayer
             }
         }
 
+        /// <summary>
+        /// Lấy ra danh sách chứng chỉ còn hạn bằng UID và mã chức vụ
+        /// </summary>
+        /// <param name="UID"></param>
+        /// <param name="jobTitle"></param>
+        /// <returns></returns>
+        public List<dt301_Base> GetListValidCertByUIDAndJobTitle(string UID, string jobTitle)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt301_Base.Where(r => r.IdUser == UID && r.CertSuspended).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public bool Add(dt301_Base _base)
         {
             try

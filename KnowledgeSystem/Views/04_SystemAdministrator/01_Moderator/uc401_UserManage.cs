@@ -202,8 +202,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
         private void btnCreate_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             f401_UserInfo fInfo = new f401_UserInfo();
-            fInfo._eventInfo = EventFormInfo.Create;
-            fInfo._formName = "用戶";
+            fInfo.eventInfo = EventFormInfo.Create;
+            fInfo.formName = "用戶";
             fInfo.ShowDialog();
 
             LoadUser();
@@ -222,9 +222,9 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             dm_User _userSelect = view.GetRow(view.FocusedRowHandle) as dm_User;
 
             f401_UserInfo fInfo = new f401_UserInfo();
-            fInfo._eventInfo = EventFormInfo.View;
-            fInfo._formName = "用戶";
-            fInfo._user = _userSelect;
+            fInfo.eventInfo = EventFormInfo.View;
+            fInfo.formName = "用戶";
+            fInfo.userInfo = _userSelect;
             fInfo.ShowDialog();
 
             LoadUser();

@@ -147,5 +147,22 @@ namespace KnowledgeSystem.Helpers
 
             return XtraMessageBox.Show(args);
         }
-    }    
+
+        /// <summary>
+        /// Hiện thị msg thông báo bằng html
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <returns></returns>
+        public static DialogResult MsgShowInfomation(string msg)
+        {
+            XtraMessageBoxArgs args = new XtraMessageBoxArgs();
+            args.AllowHtmlText = DefaultBoolean.True;
+
+            args.Caption = TPConfigs.SoftNameTW;
+            args.Text = msg;
+            args.Buttons = new DialogResult[] { DialogResult.OK };
+
+            return XtraMessageBox.Show(args);
+        }
+    }
 }

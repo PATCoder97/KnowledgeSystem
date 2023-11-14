@@ -57,6 +57,12 @@ namespace BusinessLayer
             }
         }
 
+        /// <summary>
+        /// Lấy danh sách quy định các chứng chỉ phải học theo chức vụ của Bộ phận
+        /// </summary>
+        /// <param name="_idJobTitle"></param>
+        /// <param name="_idDept"></param>
+        /// <returns></returns>
         public List<dt301_CertReqSetting> GetListByJobAndDept(string _idJobTitle, string _idDept)
         {
             try
