@@ -1,6 +1,7 @@
 ﻿using DevExpress.Utils.Svg;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -13,6 +14,8 @@ namespace KnowledgeSystem.Helpers
     {
         public static string StartupPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         public static string ImagesPath = Path.Combine(StartupPath, "Images");
+
+        public static Image Background = Image.FromFile(Path.Combine(ImagesPath, "background.jpg"));
 
         public static SvgImage CheckedRadio = SvgImage.FromFile(Path.Combine(ImagesPath, "checked_radio_button.svg"));
         public static SvgImage UncheckedRadio = SvgImage.FromFile(Path.Combine(ImagesPath, "unchecked_radio_button.svg"));

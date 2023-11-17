@@ -317,7 +317,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                                    data.ReTrain,
                                    data.BackupLicense,
                                    SumUserMissing = data.TotalReqQuantity - (data.ValidLicense + data.BackupLicense + data.FirstTrain + data.ReTrain)
-                               } into dt1 
+                               } into dt1
                                join f51 in lsCountData51 on dt1.IdCourse equals f51.IdCourse into dtg1
                                from g1 in dtg1.DefaultIfEmpty()
                                select new // Lấy thông tin học lần đầu là nhân viên mới hay là chuyển vị trí làm việc
@@ -328,7 +328,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                                    FTrainOldU = g1 != null ? g1.FTrainOldU : 0,
                                    dt1.ReTrain,
                                    dt1.SumUserMissing
-                               } into dt2 
+                               } into dt2
                                join bak in lsCountBAKCertExp on dt2.IdCourse equals bak.IdCourse into dtg2
                                from g2 in dtg2.DefaultIfEmpty()
                                select new // Lấy thông tin các bằng dự phòng hết hạn
@@ -675,7 +675,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                 ws.Columns[4].Width = 40;
                 ws.Columns[5].Width = 20;
                 ws.Columns[6].Width = 30;
-                ws.Columns[7].Width = 30;
+                ws.Columns[7].Width = 40;
                 ws.Columns[8].Width = 20;
                 ws.Columns[9].Width = 20;
                 ws.Columns[10].Width = 80;
@@ -685,7 +685,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                 ws.Columns[14].Width = 20;
 
                 ws.Cells["A3"].LoadFromCollection(lsQueryFile52, false);
-                var rangeTab = ws.Cells[$"A2:{ws.Dimension.End.Address}"];
+                var rangeTab = ws.Cells[$"A2:N{ws.Dimension.End.Row}"];
 
                 List<int> lsColAlignLefts = new List<int>() { 4, 6, 7, 10, 11 };
                 foreach (var indexCol in lsColAlignLefts)
@@ -700,7 +700,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                 ws.Column(9).Style.Numberformat.Format = "yyyy/MM/dd";
 
                 // Ading a table to a Range
-                ExcelTable tab = ws.Tables.Add(rangeTab, "Table1");
+                string tableName = "Table1";
+                ExcelTable tab = ws.Tables.Add(rangeTab, tableName);
                 tab.TableStyle = TableStyles.Medium2;
 
                 string savePath = Path.Combine(pathDocument, $"附件05.2：.複訓之提報需求人員名單.xlsx");
@@ -710,8 +711,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                 // Nếu có dữ liệu File5.1 thì xuất theo Format file5.2
                 if (lsQueryFile51.Count != 0)
                 {
-                    ws.DeleteRow(3, lsQueryFile52.Count - lsQueryFile51.Count);
+                    ws.Tables.Delete(tableName);
                     ws.Cells["A3"].LoadFromCollection(lsQueryFile51, false);
+
+                    rangeTab = ws.Cells[$"A2:N{lsQueryFile51.Count + 2}"];
+                    tab = ws.Tables.Add(rangeTab, tableName);
+                    tab.TableStyle = TableStyles.Medium2;
 
                     savePath = Path.Combine(pathDocument, $"附件05.1：初訓之提報需求人員名單.xlsx");
                     excelFile = new FileInfo(savePath);

@@ -128,6 +128,8 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void fMain_Load(object sender, EventArgs e)
         {
+            BackgroundImage = TPSvgimages.Background;
+
             GetSysStaticValue();
             GetUserLogin();
 

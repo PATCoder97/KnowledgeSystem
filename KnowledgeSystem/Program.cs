@@ -24,8 +24,8 @@ namespace KnowledgeSystem
         {
             new AppCopyRight()
             {
-                Version = "1.0.4",
-                DateDeploy = "2023.11.01"
+                Version = "1.0.5",
+                DateDeploy = "2023.11.16"
             };
 
             Application.EnableVisualStyles();
