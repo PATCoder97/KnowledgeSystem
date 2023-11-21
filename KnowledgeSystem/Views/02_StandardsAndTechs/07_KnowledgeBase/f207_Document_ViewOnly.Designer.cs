@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f207_Document_ViewOnly));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.txbNameEN = new DevExpress.XtraEditors.TextEdit();
             this.stepProgressDoc = new DevExpress.XtraEditors.StepProgressBar();
             this.gcHistoryProcess = new DevExpress.XtraGrid.GridControl();
             this.gvHistoryProcess = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -75,15 +76,15 @@
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcgFile = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcgPermission = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.txbNameEN = new DevExpress.XtraEditors.TextEdit();
-            this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txbNameEN.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.stepProgressDoc)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcHistoryProcess)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvHistoryProcess)).BeginInit();
@@ -113,13 +114,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcgFile)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcgPermission)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbNameEN.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -146,6 +146,16 @@
             this.layoutControl1.Size = new System.Drawing.Size(1076, 483);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // txbNameEN
+            // 
+            this.txbNameEN.Location = new System.Drawing.Point(112, 166);
+            this.txbNameEN.Name = "txbNameEN";
+            this.txbNameEN.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.txbNameEN.Properties.Appearance.Options.UseFont = true;
+            this.txbNameEN.Size = new System.Drawing.Size(940, 32);
+            this.txbNameEN.StyleController = this.layoutControl1;
+            this.txbNameEN.TabIndex = 24;
             // 
             // stepProgressDoc
             // 
@@ -755,6 +765,17 @@
             this.layoutControlItem4.Text = "關鍵字";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(76, 24);
             // 
+            // layoutControlItem8
+            // 
+            this.layoutControlItem8.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.layoutControlItem8.AppearanceItemCaption.Options.UseFont = true;
+            this.layoutControlItem8.Control = this.txbNameEN;
+            this.layoutControlItem8.Location = new System.Drawing.Point(0, 110);
+            this.layoutControlItem8.Name = "layoutControlItem8";
+            this.layoutControlItem8.Size = new System.Drawing.Size(1032, 36);
+            this.layoutControlItem8.Text = "英文名稱";
+            this.layoutControlItem8.TextSize = new System.Drawing.Size(76, 24);
+            // 
             // lcgFile
             // 
             this.lcgFile.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
@@ -809,27 +830,6 @@
             this.layoutControlItem7.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem7.TextVisible = false;
             // 
-            // txbNameEN
-            // 
-            this.txbNameEN.Location = new System.Drawing.Point(112, 166);
-            this.txbNameEN.Name = "txbNameEN";
-            this.txbNameEN.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.txbNameEN.Properties.Appearance.Options.UseFont = true;
-            this.txbNameEN.Size = new System.Drawing.Size(940, 32);
-            this.txbNameEN.StyleController = this.layoutControl1;
-            this.txbNameEN.TabIndex = 24;
-            // 
-            // layoutControlItem8
-            // 
-            this.layoutControlItem8.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.layoutControlItem8.AppearanceItemCaption.Options.UseFont = true;
-            this.layoutControlItem8.Control = this.txbNameEN;
-            this.layoutControlItem8.Location = new System.Drawing.Point(0, 110);
-            this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(1032, 36);
-            this.layoutControlItem8.Text = "英文名稱";
-            this.layoutControlItem8.TextSize = new System.Drawing.Size(76, 24);
-            // 
             // f207_Document_ViewOnly
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
@@ -839,13 +839,14 @@
             this.ClientSize = new System.Drawing.Size(1076, 483);
             this.Controls.Add(this.layoutControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.IconOptions.Image = global::KnowledgeSystem.Properties.Resources.DocumentSystem;
+            this.IconOptions.Image = global::KnowledgeSystem.Properties.Resources.AppIcon;
             this.Name = "f207_Document_ViewOnly";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "文件信息";
             this.Load += new System.EventHandler(this.f207_Document_ViewOnly_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txbNameEN.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.stepProgressDoc)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcHistoryProcess)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvHistoryProcess)).EndInit();
@@ -875,13 +876,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcgFile)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcgPermission)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbNameEN.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
             this.ResumeLayout(false);
 
         }

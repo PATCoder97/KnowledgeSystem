@@ -150,7 +150,7 @@
             this.Controls.Add(this.txbPassword);
             this.FormBorderEffect = DevExpress.XtraEditors.FormBorderEffect.Shadow;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.IconOptions.Image = global::KnowledgeSystem.Properties.Resources.DocumentSystem;
+            this.IconOptions.Image = global::KnowledgeSystem.Properties.Resources.AppIcon;
             this.MaximumSize = new System.Drawing.Size(750, 450);
             this.Name = "f00_Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

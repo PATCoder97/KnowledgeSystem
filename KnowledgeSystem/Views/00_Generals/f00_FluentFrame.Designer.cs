@@ -75,7 +75,7 @@
             this.Controls.Add(this.fluentControl);
             this.Controls.Add(this.fluentDesignFormControl1);
             this.FluentDesignFormControl = this.fluentDesignFormControl1;
-            this.IconOptions.Image = global::KnowledgeSystem.Properties.Resources.DocumentSystem;
+            this.IconOptions.Image = global::KnowledgeSystem.Properties.Resources.AppIcon;
             this.Name = "f00_FluentFrame";
             this.NavigationControl = this.fluentControl;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

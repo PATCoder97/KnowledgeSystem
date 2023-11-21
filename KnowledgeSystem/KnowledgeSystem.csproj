@@ -35,7 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>DocumentSystem.ico</ApplicationIcon>
+    <ApplicationIcon>AppIcon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accessibility" />
@@ -523,6 +523,7 @@
     <Folder Include="Views\02_StandardsAndTechs\01_ISODocuments\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AppIcon.ico" />
     <Content Include="DocumentSystem.ico" />
     <Content Include="Images\Actions_Forbid.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -641,6 +642,7 @@
     <Content Include="Images\unchecked_radio_button.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\AppIcon.ico" />
     <None Include="Images\Approval.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

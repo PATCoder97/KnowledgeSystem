@@ -576,7 +576,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.IconOptions.Image = global::KnowledgeSystem.Properties.Resources.DocumentSystem;
+            this.IconOptions.Image = global::KnowledgeSystem.Properties.Resources.AppIcon;
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "f401_GroupInfo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

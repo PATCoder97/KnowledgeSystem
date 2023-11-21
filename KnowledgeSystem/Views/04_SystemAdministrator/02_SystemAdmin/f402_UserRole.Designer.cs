@@ -205,6 +205,7 @@
             this.gvChooseUser.GridControl = this.gcChooseUser;
             this.gvChooseUser.Name = "gvChooseUser";
             this.gvChooseUser.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
+            this.gvChooseUser.OptionsView.EnableAppearanceOddRow = true;
             this.gvChooseUser.OptionsView.ShowAutoFilterRow = true;
             this.gvChooseUser.OptionsView.ShowGroupPanel = false;
             this.gvChooseUser.OptionsView.ShowIndicator = false;
@@ -361,6 +362,7 @@
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.IconOptions.Image = global::KnowledgeSystem.Properties.Resources.AppIcon;
             this.Name = "f402_UserRole";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "f402_UserRole";
