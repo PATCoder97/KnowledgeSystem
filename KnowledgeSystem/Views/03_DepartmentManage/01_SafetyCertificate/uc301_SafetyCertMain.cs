@@ -223,7 +223,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                                      CourseName = data.CourseName,
                                      JobName = data.JobName,
                                      Nationality = usr.Nationality.Replace("TW", "台灣").Replace("VN", "越南").Replace("CN", "中國"),
-                                     data.IdCourse
+                                     data.IdCourse,
+                                     IdData = data.Id
                                  }).ToList();
 
             // 附件05.1：初訓之提報需求人員名單
@@ -272,7 +273,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                                      Count = g.Count()
                                  }).ToList();
 
-            var lsDataFile2 = (from data in lsDataFile3
+            var lsDataFile2 = (from data in lsDataFile3.Where(r => !lsQueryFile52.Select(x => x.IdData).Contains(r.Id))
                                group data by data.IdCourse into g
                                select new
                                {
@@ -568,9 +569,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                 ws.Cells["A4"].Value = "實際人數";
 
                 ws.Cells["B1"].Value = idDept2word;
-                ws.Cells["B2"].Value = "";
-                ws.Cells["B3"].Value = "";
-                ws.Cells["B4"].Value = "";
+                ws.Cells["B2"].Value = lsDataFile3.FirstOrDefault().DeptName;
+                ws.Cells["B3"].Value = lsUser.Where(r => r.Status == 0).Count(r => r.IdDepartment.StartsWith(idDept2word));
+                ws.Cells["B4"].Value = lsUser.Where(r => r.Status == 0).Count(r => r.IdDepartment.StartsWith(idDept2word));
 
                 ws.Cells["B1:M1"].Merge = true;
                 ws.Cells["B2:M2"].Merge = true;
