@@ -1,19 +1,24 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
 using DevExpress.Utils;
+using DevExpress.Utils.Gesture;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraSplashScreen;
 using KnowledgeSystem.Helpers;
 using Newtonsoft.Json;
+using Scriban;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Windows.Forms;
+using static DevExpress.Utils.Drawing.Helpers.NativeMethods;
+using static DevExpress.XtraEditors.Mask.MaskSettings;
 
 namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 {
@@ -46,6 +51,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
         private enum UpdateEvent
         {
+            [Description("在職")]
             Normal,
             [Description("留職停薪")]
             Suspension,
@@ -53,8 +59,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             DeptChange,
             [Description("離職")]
             Resign,
-            [Description("在職")]
-            Conferred,
+            [Description("復職")]
+            ResumeWork,
             [Description("晉升")]
             JobChange
         }
@@ -68,7 +74,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             btnSuspension.ImageOptions.SvgImage = TPSvgimages.Suspension;
             btnDeptChange.ImageOptions.SvgImage = TPSvgimages.Transfer;
             btnResign.ImageOptions.SvgImage = TPSvgimages.Resign;
-            btnConferred.ImageOptions.SvgImage = TPSvgimages.Conferred;
+            btnResumeWork.ImageOptions.SvgImage = TPSvgimages.Conferred;
             btnJobChange.ImageOptions.SvgImage = TPSvgimages.UpLevel;
             btnPersonnelChanges.ImageOptions.SvgImage = TPSvgimages.PersonnelChanges;
         }
@@ -98,7 +104,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             btnDeptChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             btnResign.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             btnSuspension.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-            btnConferred.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            btnResumeWork.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             btnJobChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             btnPersonnelChanges.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
 
@@ -165,7 +171,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                     }
                     else if (userInfo.Status == 2)
                     {
-                        btnConferred.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                        btnResumeWork.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     }
                     else
                     {
@@ -181,16 +187,16 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             bool role301Main = AppPermission.Instance.CheckAppPermission(AppPermission.SafetyCertMain);
             bool roleEditUserJobAndDept = AppPermission.Instance.CheckAppPermission(AppPermission.EditUserJobAndDept);
 
-            //if (!(role301Main && roleEditUserJobAndDept && TPConfigs.IdParentControl == AppPermission.SafetyCertMain))
-            //{
-            //    btnPersonnelChanges.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            if (!(role301Main && roleEditUserJobAndDept && TPConfigs.IdParentControl == AppPermission.SafetyCertMain))
+            {
+                btnPersonnelChanges.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
 
-            //    btnSuspension.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-            //    btnDeptChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-            //    btnResign.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-            //    btnConferred.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-            //    btnJobChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-            //}
+                btnSuspension.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                btnDeptChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                btnResign.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                btnResumeWork.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                btnJobChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            }
 
             Rectangle screenBounds = Screen.PrimaryScreen.Bounds;
             int x = screenBounds.Width / 2 - Width / 2;
@@ -257,7 +263,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
                     oldUserInfoJson = JsonConvert.SerializeObject(userInfo);
 
-                    // Load Role
+                    // Lấy quyền hạn và chuyển các quyền mà user có sang gcChooseRoles
                     var lsUserRoles = dm_UserRoleBUS.Instance.GetListByUID(userInfo.Id).Select(r => r.IdRole).ToList();
                     lsChooseRoles.AddRange(lsAllRoles.Where(a => lsUserRoles.Exists(b => b == a.Id)));
                     lsAllRoles.RemoveAll(a => lsUserRoles.Exists(b => b == a.Id));
@@ -288,6 +294,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             string msg = "";
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
             {
+                // Lấy các thông tin người dùng từ giao diện
                 userInfo.DisplayName = txbUserNameTW.EditValue?.ToString().Trim();
                 userInfo.DisplayNameVN = txbUserNameVN.EditValue?.ToString().Trim();
                 userInfo.IdDepartment = cbbDept.EditValue?.ToString();
@@ -325,73 +332,115 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                         }
 
                         // Xử lý cập nhật các thông tin đặc biệt có ảnh hưởng đến các thông tin khác như: Chứng chỉ an toàn 301
-                        var lsCertToInValids = dt301_BaseBUS.Instance.GetListByUIDAndValidCert(userInfo.Id);
+                        var certificatesToInvalidate = dt301_BaseBUS.Instance.GetListByUIDAndValidCert(userInfo.Id);
                         switch (_eventUpdate)
                         {
                             case UpdateEvent.Suspension:
-                                foreach (var item in lsCertToInValids)
+                                // Bảo lưu chức vụ: Đánh dấu chứng chỉ là "無效", lưu trạng thái bằng tạm lưu để phục chức sau này
+                                foreach (var cert in certificatesToInvalidate)
                                 {
-                                    item.ValidLicense = false;
-                                    item.InvalidLicense = true;
-                                    item.CertSuspended = true;
-                                    item.Describe = EnumHelper.GetDescription(_eventUpdate);
+                                    cert.ValidLicense = false;
+                                    cert.InvalidLicense = true;
+                                    cert.CertSuspended = true;
+                                    cert.Describe = EnumHelper.GetDescription(_eventUpdate);
 
-                                    dt301_BaseBUS.Instance.AddOrUpdate(item);
+                                    dt301_BaseBUS.Instance.AddOrUpdate(cert);
                                 }
+
                                 break;
-                            case UpdateEvent.Conferred:
-                                var lsCertSuspendeds = dt301_BaseBUS.Instance.GetListByUIDAndCertSuspended(userInfo.Id);
-                                foreach (var item in lsCertSuspendeds)
+                            case UpdateEvent.ResumeWork:
+                                // Phục chức: chuyển chứng chỉ đang bị tạm ngừng về trạng thái còn hạn
+                                var suspendedCerts = dt301_BaseBUS.Instance.GetListByUIDAndCertSuspended(userInfo.Id);
+                                foreach (var cert in suspendedCerts)
                                 {
-                                    item.ValidLicense = true;
-                                    item.InvalidLicense = false;
-                                    item.CertSuspended = false;
-                                    item.Describe = "";
+                                    cert.ValidLicense = true;
+                                    cert.InvalidLicense = false;
+                                    cert.CertSuspended = false;
+                                    cert.Describe = "";
 
-                                    dt301_BaseBUS.Instance.AddOrUpdate(item);
+                                    dt301_BaseBUS.Instance.AddOrUpdate(cert);
                                 }
+
                                 break;
                             case UpdateEvent.DeptChange:
-                            case UpdateEvent.Resign:
-                                foreach (var item in lsCertToInValids)
-                                {
-                                    item.ValidLicense = false;
-                                    item.InvalidLicense = true;
+                                // Thay đổi bộ phận: chuyển tất cả chứng chỉ về trạng thái hết hạn
+                                dm_User oldUserData = JsonConvert.DeserializeObject<dm_User>(oldUserInfoJson);
+                                if (userInfo.IdDepartment.StartsWith(oldUserData.IdDepartment.Substring(0, 2))) break;
 
-                                    dt301_BaseBUS.Instance.AddOrUpdate(item);
+                                foreach (var cert in certificatesToInvalidate)
+                                {
+                                    cert.ValidLicense = false;
+                                    cert.InvalidLicense = true;
+
+                                    //dt301_BaseBUS.Instance.AddOrUpdate(cert);
                                 }
+
+                                var lsDepts = dm_DeptBUS.Instance.GetList();
+                                List<dt301_Course> courses = dt301_CourseBUS.Instance.GetList();
+
+                                var templateData = new
+                                {
+                                    deptfrom = $"{oldUserData.IdDepartment}{lsDepts.FirstOrDefault(r => r.Id == oldUserData.IdDepartment).DisplayName}",
+                                    deptto = $"{userInfo.IdDepartment}{lsDepts.FirstOrDefault(r => r.Id == userInfo.IdDepartment).DisplayName}",
+                                    user = $"{userInfo.DisplayName}/{userInfo.Id}",
+                                    total = certificatesToInvalidate.Count(),
+                                    products = certificatesToInvalidate
+                                    .Join(courses, cert => cert.IdCourse, course => course.Id, (cert, course) => $"{course.Id} {course.DisplayName}").ToList()
+                                };
+
+                                var templateContentSigner = System.IO.File.ReadAllText($@"C:\Users\ANHTUAN\Desktop\New folder\f301_NotifyPersonnelTransfer.html");
+                                var templateSigner = Template.Parse(templateContentSigner);
+
+                                var pageContent = templateSigner.Render(templateData);
+                                System.IO.File.WriteAllText(@"C:\Users\ANHTUAN\Desktop\New folder\OK.html", pageContent);
+
+                                break;
+                            case UpdateEvent.Resign:
+                                // Nghi việc: chuyển tất cả chứng chỉ về trạng thái hết hạn
+                                foreach (var cert in certificatesToInvalidate)
+                                {
+                                    cert.ValidLicense = false;
+                                    cert.InvalidLicense = true;
+
+                                    dt301_BaseBUS.Instance.AddOrUpdate(cert);
+                                }
+
                                 break;
                             case UpdateEvent.JobChange:
+                                // Thay đổi chức vụ: Giữ chứng chỉ còn hạn cho chức vụ mới, hết hạn chứng chỉ không sử dụng ở chức vụ mới
+                                // Lấy danh sách chứng chỉ hợp lệ của người dùng
+                                var validCertificates = dt301_BaseBUS.Instance.GetListByUIDAndValidCert(userInfo.Id);
 
-                                var lsValidCerts = dt301_BaseBUS.Instance.GetListByUIDAndValidCert(userInfo.Id);
-                                var lsCertReqSets = dt301_CertReqSetBUS.Instance.GetListByJobAndDept(userInfo.JobCode, idDept2word);
+                                // Lấy danh sách các bộ yêu cầu chứng chỉ dựa trên công việc và bộ phận
+                                var certReqSets = dt301_CertReqSetBUS.Instance.GetListByJobAndDept(userInfo.JobCode, idDept2word);
 
-                                // Chuyển các chứng chỉ còn hạn về chức vụ mới
-                                var lsNewValidCerts = (from data in lsValidCerts
-                                                       join req in lsCertReqSets on data.IdCourse equals req.IdCourse
-                                                       select data).ToList();
+                                // Chuyển các chứng chỉ có hiệu lực về chức vụ mới
+                                var certsToNewJob = validCertificates
+                                    .Join(certReqSets, data => data.IdCourse, req => req.IdCourse, (data, req) => data)
+                                    .ToList();
 
-                                foreach (var item in lsNewValidCerts)
+                                foreach (var certificate in certsToNewJob)
                                 {
-                                    item.IdJobTitle = userInfo.JobCode;
-                                    dt301_BaseBUS.Instance.AddOrUpdate(item);
+                                    certificate.IdJobTitle = userInfo.JobCode;
+                                    dt301_BaseBUS.Instance.AddOrUpdate(certificate);
                                 }
 
-                                // Chuyển các chứ chỉ còn hạn của chức vụ cũ không cần ở chức vụ mới về 無效
-                                var lsNewInvalidCerts = (from data in lsValidCerts
-                                                         where !lsNewValidCerts.Contains(data)
-                                                         select data).ToList();
+                                // Vô hiệu hóa chứng chỉ của chức vụ cũ không cần thiết ở chức vụ mới
+                                var certsToInvalid = validCertificates
+                                    .Where(data => !certsToNewJob.Contains(data))
+                                    .ToList();
 
-                                foreach (dt301_Base item in lsNewInvalidCerts)
+                                foreach (var certificate in certsToInvalid)
                                 {
-                                    item.ValidLicense = false;
-                                    item.InvalidLicense = true;
-                                    dt301_BaseBUS.Instance.AddOrUpdate(item);
+                                    certificate.ValidLicense = false;
+                                    certificate.InvalidLicense = true;
+                                    dt301_BaseBUS.Instance.AddOrUpdate(certificate);
                                 }
 
                                 break;
                         }
 
+                        // Nếu là admin thì có thể cài quyền hạn luôn trong này
                         if (IsSysAdmin)
                         {
                             var resultDel = dm_UserRoleBUS.Instance.RemoveRangeByUID(userInfo.Id);
@@ -483,10 +532,10 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             cbbStatus.EditValue = TPConfigs.lsUserStatus[2];
         }
 
-        private void btnConferred_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private void btnResumeWork_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             eventInfo = EventFormInfo.Update;
-            _eventUpdate = UpdateEvent.Conferred;
+            _eventUpdate = UpdateEvent.ResumeWork;
             LockControl();
 
             cbbStatus.EditValue = TPConfigs.lsUserStatus[0];
@@ -611,8 +660,11 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             cbbDept.EditValue = idDeptChange;
 
             eventInfo = EventFormInfo.Update;
-            _eventUpdate = UpdateEvent.DeptChange;
             LockControl();
+
+            if (idDeptChange.StartsWith(userInfo.IdDepartment.Substring(0, 2))) return;
+
+            _eventUpdate = UpdateEvent.DeptChange;
 
             var lsValidCertByUsers = dt301_BaseBUS.Instance.GetListByUIDAndValidCert(userInfo.Id);
 
@@ -621,7 +673,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                                 join course in lsCourses on data.IdCourse equals course.Id
                                 select $"{data.IdCourse} {course.DisplayName}").ToList();
 
-            string msgValidCert = $"<font='Microsoft JhengHei UI' size=14><color=blue>以下證書將返回狀態「無效」並通知新部門處務師：</color></br>{string.Join("\r\n", lsValidCerts)}</font>";
+            string msgValidCert = $"<font='Microsoft JhengHei UI' size=14><color=blue>以下共{lsValidCertByUsers.Count()}證書將返回狀態「無效」並通知新部門處務室：</color></br>{string.Join("\r\n", lsValidCerts)}</font>";
 
             MsgTP.MsgShowInfomation(msgValidCert);
         }

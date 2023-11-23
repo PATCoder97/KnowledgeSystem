@@ -109,6 +109,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                                   UserName = urs.DisplayName,
                                   JobName = data.IdJobTitle + job.DisplayName,
                                   CourseName = data.IdCourse + course.DisplayName,
+                                  CertSuspended = data.CertSuspended
                               }).ToList();
 
             sourceBases.DataSource = lsBasesDisplay;
@@ -295,7 +296,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                 "物理試驗處",
                 lsDataFile2.Sum(r => r.TotalReqQuantity).ToString(),
                 $"{lsDataFile2.Sum(r => r.ValidLicense)}",
-                $"{lsDataFile2.Sum(r => r.FirstTrain) + lsDataFile2.Sum(r => r.ReTrain)}"
+                $"{lsDataFile2.Sum(r => r.FirstTrain) + lsDataFile2.Sum(r => r.ReTrain)}",
+                $"{lsBasesDisplay.Count(r=>r.CertSuspended)}",
             };
 
             // 附件06：派訓數量統計.xlsx
@@ -392,9 +394,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                 ws.Cells["D4:D5"].Value = lsDataFile1[3];
                 ws.Cells["E4:E5"].Value = lsDataFile1[4];
                 ws.Cells["F4:F5"].Formula = "D4-E4";
-                ws.Cells["G4:G5"].Value = lsDataFile1[5];
-                ws.Cells["H4:H5"].Formula = "";
-                ws.Cells["I4:I5"].Value = lsDataFile2.Sum(r => r.TotalReqQuantity);
+                ws.Cells["G4:G5"].Formula = "F4-H4-I4";
+                ws.Cells["H4:H5"].Value = lsDataFile1[5];
+                ws.Cells["I4:I5"].Value = lsDataFile1[6];
 
                 ws.Columns[01].Width = 20;
                 ws.Columns[02].Width = 20;
@@ -952,7 +954,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                     filterString = "[ValidLicense] = False AND [BackupLicense] = False AND [InvalidLicense] = False";
                     break;
                 case "過期證照":
-                    filterString = $"[ValidLicense] = True  AND [ExpDate] IS NOT NULL AND [ExpDate] < '{DateTime.Today.ToShortDateString()}' ";
+                    DateTime today = DateTime.Today;
+                    DateTime endOfQuarter = today.AddMonths(3 - (today.Month - 1) % 3).AddDays(-today.Day + 1).AddDays(-1);
+
+                    filterString = $"[ValidLicense] = True  AND [ExpDate] IS NOT NULL AND [ExpDate] < '{endOfQuarter}' ";
                     break;
             }
 

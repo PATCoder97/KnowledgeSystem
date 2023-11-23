@@ -37,7 +37,7 @@
             this.btnConfirm = new DevExpress.XtraBars.BarButtonItem();
             this.btnPersonnelChanges = new DevExpress.XtraBars.BarSubItem();
             this.btnSuspension = new DevExpress.XtraBars.BarButtonItem();
-            this.btnConferred = new DevExpress.XtraBars.BarButtonItem();
+            this.btnResumeWork = new DevExpress.XtraBars.BarButtonItem();
             this.btnJobChange = new DevExpress.XtraBars.BarButtonItem();
             this.btnDeptChange = new DevExpress.XtraBars.BarButtonItem();
             this.btnResign = new DevExpress.XtraBars.BarButtonItem();
@@ -149,7 +149,7 @@
             this.btnSuspension,
             this.btnDeptChange,
             this.btnResign,
-            this.btnConferred,
+            this.btnResumeWork,
             this.btnJobChange,
             this.btnPersonnelChanges});
             this.barManagerTP.MainMenu = this.bar2;
@@ -219,7 +219,7 @@
             this.btnPersonnelChanges.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnPersonnelChanges.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.btnSuspension),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnConferred),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnResumeWork),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnJobChange),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnDeptChange),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnResign, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
@@ -237,17 +237,17 @@
             this.btnSuspension.Name = "btnSuspension";
             this.btnSuspension.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSuspension_ItemClick);
             // 
-            // btnConferred
+            // btnResumeWork
             // 
-            this.btnConferred.Caption = "回來";
-            this.btnConferred.Id = 7;
-            this.btnConferred.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnConferred.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
-            this.btnConferred.ItemAppearance.Hovered.Options.UseForeColor = true;
-            this.btnConferred.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConferred.ItemAppearance.Normal.Options.UseFont = true;
-            this.btnConferred.Name = "btnConferred";
-            this.btnConferred.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnConferred_ItemClick);
+            this.btnResumeWork.Caption = "復職";
+            this.btnResumeWork.Id = 7;
+            this.btnResumeWork.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnResumeWork.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnResumeWork.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnResumeWork.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnResumeWork.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnResumeWork.Name = "btnResumeWork";
+            this.btnResumeWork.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnResumeWork_ItemClick);
             // 
             // btnJobChange
             // 
@@ -1127,7 +1127,7 @@
         private DevExpress.XtraBars.BarButtonItem btnSuspension;
         private DevExpress.XtraBars.BarButtonItem btnDeptChange;
         private DevExpress.XtraBars.BarButtonItem btnResign;
-        private DevExpress.XtraBars.BarButtonItem btnConferred;
+        private DevExpress.XtraBars.BarButtonItem btnResumeWork;
         private DevExpress.XtraBars.BarButtonItem btnJobChange;
         private DevExpress.XtraBars.BarSubItem btnPersonnelChanges;
     }
