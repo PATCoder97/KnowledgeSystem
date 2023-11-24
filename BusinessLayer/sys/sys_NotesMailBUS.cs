@@ -10,27 +10,27 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer
 {
-    public class dm_GroupBUS
+    public class sys_NotesMailBUS
     {
         TPLogger logger;
 
-        private static dm_GroupBUS instance;
+        private static sys_NotesMailBUS instance;
 
-        public static dm_GroupBUS Instance
+        public static sys_NotesMailBUS Instance
         {
-            get { if (instance == null) instance = new dm_GroupBUS(); return instance; }
+            get { if (instance == null) instance = new sys_NotesMailBUS(); return instance; }
             private set { instance = value; }
         }
 
-        private dm_GroupBUS() { logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName); }
+        private sys_NotesMailBUS() { logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName); }
 
-        public List<dm_Group> GetList()
+        public List<sys_NotesMail> GetList()
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dm_Group.OrderBy(r => r.Prioritize).ToList();
+                    return _context.sys_NotesMail.ToList();
                 }
             }
             catch (Exception ex)
@@ -41,17 +41,17 @@ namespace BusinessLayer
         }
 
         /// <summary>
-        /// Lấy nhóm người dùng bằng tên
+        /// Lấy danh sách Mail chưa thông báo theo Thread
         /// </summary>
-        /// <param name="nameGroup"></param>
+        /// <param name="thread"></param>
         /// <returns></returns>
-        public dm_Group GetItemByName(string nameGroup)
+        public List<sys_NotesMail> GetListNotNotifyByThread(string thread)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dm_Group.FirstOrDefault(r => r.DisplayName == nameGroup);
+                    return _context.sys_NotesMail.Where(r => r.TimeNotify == null && r.Thread == thread).ToList();
                 }
             }
             catch (Exception ex)
@@ -61,13 +61,13 @@ namespace BusinessLayer
             }
         }
 
-        public bool Add(dm_Group group)
+        public bool Add(sys_NotesMail mail)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    _context.dm_Group.Add(group);
+                    _context.sys_NotesMail.Add(mail);
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;
                 }
@@ -79,33 +79,13 @@ namespace BusinessLayer
             }
         }
 
-        public bool AddOrUpdate(dm_Group group)
+        public bool AddOrUpdate(sys_NotesMail mail)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    _context.dm_Group.AddOrUpdate(group);
-                    int affectedRecords = _context.SaveChanges();
-                    return affectedRecords > 0;
-                }
-            }
-            catch (Exception ex)
-            {
-                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
-                return false;
-            }
-        }
-
-        public bool Remove(int groupId)
-        {
-            try
-            {
-                using (var _context = new DBDocumentManagementSystemEntities())
-                {
-                    var group = _context.dm_Group.FirstOrDefault(r => r.Id == groupId);
-                    _context.dm_Group.Remove(group);
-
+                    _context.sys_NotesMail.AddOrUpdate(mail);
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;
                 }

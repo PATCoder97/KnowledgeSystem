@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Mail207Knowledge.cs" />
+    <Compile Include="Mail301SafetyCert.cs" />
     <Compile Include="NotesMail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

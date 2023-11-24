@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>DocUpdated</title>
+</head>
+
+<body>
+    <h2>各位主管好！</h2>
+
+    <p>
+        工安證照系統通知：<br>
+        {{deptfrom}}有<span style="color: red;">{{user}}</span>同仁調任至{{deptto}}<br>
+        目前該員有共{{total}}張工安證照有期限，詳如附件所示，請點選新任職務工安證照需求。
+    </p>
+
+    <p>
+    <ol>
+        {{ for product in products }}
+        <li>
+            {{ product }}
+        </li>
+        {{ end }}
+    </ol>
+    </p>
+</body>
+
+</html>
+
+
+<style>
+    h2 {
+        font-family: DFKai-SB;
+        color: #000000;
+    }
+
+    p,
+    li {
+        color: #000000;
+        font-size: 1.4em;
+        font-family: DFKai-SB;
+    }
+
+    ol {
+        margin-left: 15px;
+    }
+</style>

@@ -307,6 +307,19 @@
           <Property Name="Exception" Type="varchar" MaxLength="2000" />
           <Property Name="UserId" Type="char" MaxLength="10" />
         </EntityType>
+        <EntityType Name="sys_NotesMail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Thread" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="Subjects" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ToUsers" Type="varchar(max)" Nullable="false" />
+          <Property Name="CCUsers" Type="varchar(max)" />
+          <Property Name="Attachments" Type="varchar(max)" />
+          <Property Name="TimeNotify" Type="datetime" />
+        </EntityType>
         <EntityType Name="sys_StaticValue">
           <Key>
             <PropertyRef Name="KeyT" />
@@ -343,6 +356,7 @@
           <EntitySet Name="dt301_CertReqSetting" EntityType="Self.dt301_CertReqSetting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt301_Course" EntityType="Self.dt301_Course" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sys_Log" EntityType="Self.sys_Log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sys_NotesMail" EntityType="Self.sys_NotesMail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sys_StaticValue" EntityType="Self.sys_StaticValue" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -379,6 +393,7 @@
           <EntitySet Name="dt301_Course" EntityType="DBDocumentManagementSystemModel.dt301_Course" />
           <EntitySet Name="dm_User" EntityType="DBDocumentManagementSystemModel.dm_User" />
           <EntitySet Name="dt301_Base" EntityType="DBDocumentManagementSystemModel.dt301_Base" />
+          <EntitySet Name="sys_NotesMail" EntityType="DBDocumentManagementSystemModel.sys_NotesMail" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -688,6 +703,19 @@
           <Property Name="InvalidLicense" Type="Boolean" Nullable="false" />
           <Property Name="Describe" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="CertSuspended" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sys_NotesMail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Thread" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="Subjects" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ToUsers" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CCUsers" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Attachments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TimeNotify" Type="DateTime" Precision="3" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1029,6 +1057,20 @@
                 <ScalarProperty Name="IdJobTitle" ColumnName="IdJobTitle" />
                 <ScalarProperty Name="IdUser" ColumnName="IdUser" />
                 <ScalarProperty Name="IdDept" ColumnName="IdDept" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sys_NotesMail">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.sys_NotesMail">
+              <MappingFragment StoreEntitySet="sys_NotesMail">
+                <ScalarProperty Name="TimeNotify" ColumnName="TimeNotify" />
+                <ScalarProperty Name="Attachments" ColumnName="Attachments" />
+                <ScalarProperty Name="CCUsers" ColumnName="CCUsers" />
+                <ScalarProperty Name="ToUsers" ColumnName="ToUsers" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Subjects" ColumnName="Subjects" />
+                <ScalarProperty Name="Thread" ColumnName="Thread" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

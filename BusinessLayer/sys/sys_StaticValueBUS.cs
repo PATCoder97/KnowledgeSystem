@@ -11,7 +11,17 @@ namespace BusinessLayer
 {
     public class sys_StaticValueBUS
     {
-        TPLogger logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName);
+        TPLogger logger;
+
+        private static sys_StaticValueBUS instance;
+
+        public static sys_StaticValueBUS Instance
+        {
+            get { if (instance == null) instance = new sys_StaticValueBUS(); return instance; }
+            private set { instance = value; }
+        }
+
+        private sys_StaticValueBUS() { logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName); }
 
         public List<sys_StaticValue> GetList()
         {

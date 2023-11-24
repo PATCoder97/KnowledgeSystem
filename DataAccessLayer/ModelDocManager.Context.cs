@@ -54,5 +54,6 @@ namespace DataAccessLayer
         public virtual DbSet<dt301_Course> dt301_Course { get; set; }
         public virtual DbSet<dm_User> dm_User { get; set; }
         public virtual DbSet<dt301_Base> dt301_Base { get; set; }
+        public virtual DbSet<sys_NotesMail> sys_NotesMail { get; set; }
     }
 }

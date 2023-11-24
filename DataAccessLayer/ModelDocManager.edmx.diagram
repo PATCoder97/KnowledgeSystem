@@ -34,6 +34,7 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt301_Course" Width="1.5" PointX="0.5" PointY="11.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_User" Width="1.5" PointX="16.75" PointY="0.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt301_Base" Width="1.5" PointX="3.75" PointY="11.5" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.sys_NotesMail" Width="1.5" PointX="3.75" PointY="4.375" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

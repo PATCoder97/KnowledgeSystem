@@ -99,15 +99,12 @@ namespace NotesMail
                     NotesMail.SaveFileHtml(nameFile, pageContent);
 
                     // Send notes
-                    Mail mailNotes = new Mail()
-                    {
-                        lsTO = new List<string>() { userNotify.Id },
-                        Subject = $"{subjectEvents} : 知識庫系統通知您文件「 {templateData.Id}」{detailEvents}。",
-                        Content = pageContent
-                    };
-                    string res = await NotesMail.SendNoteAsync(mailNotes);
+                    var lsTO = new List<string>() { userNotify.Id };
+                    string subject = $"{subjectEvents} : 知識庫系統通知您文件「 {templateData.Id}」{detailEvents}。";
+
+                    string res = await NotesMail.SendNoteAsync(subject, pageContent, lsTO);
                     await Console.Out.WriteLineAsync(res);
-                    logger.Info(MethodBase.GetCurrentMethod().ReflectedType.Name, $"Status:{res} To:{mailNotes.To} Subject:{mailNotes.Subject}");
+                    logger.Info(MethodBase.GetCurrentMethod().ReflectedType.Name, res);
                 }
 
                 // Thông báo cho chủ quản
@@ -139,15 +136,12 @@ namespace NotesMail
                     NotesMail.SaveFileHtml(nameFile, pageContent);
 
                     // Send notes
-                    Mail mailNotes = new Mail()
-                    {
-                        lsTO = lsUserSigns,
-                        Subject = $"處理文件 : 知識庫系統通知您文件「 {templateData.Id}」需審查。",
-                        Content = pageContent
-                    };
-                    string res = await NotesMail.SendNoteAsync(mailNotes);
+                    var lsTO = lsUserSigns;
+                    string subject = $"處理文件 : 知識庫系統通知您文件「 {templateData.Id}」需審查。";
+
+                    string res = await NotesMail.SendNoteAsync(subject, pageContent, lsTO);
                     await Console.Out.WriteLineAsync(res);
-                    logger.Info(MethodBase.GetCurrentMethod().ReflectedType.Name, $"Status:{res} To:{mailNotes.To} Subject:{mailNotes.Subject}");
+                    logger.Info(MethodBase.GetCurrentMethod().ReflectedType.Name, res);
                 }
 
 #if DEBUG

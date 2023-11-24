@@ -1,24 +1,22 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
-using DevExpress.Utils;
-using DevExpress.Utils.Gesture;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraSplashScreen;
 using KnowledgeSystem.Helpers;
 using Newtonsoft.Json;
+using OfficeOpenXml;
 using Scriban;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
-using System.Runtime.ConstrainedExecution;
 using System.Windows.Forms;
-using static DevExpress.Utils.Drawing.Helpers.NativeMethods;
-using static DevExpress.XtraEditors.Mask.MaskSettings;
+using System.Xml.XPath;
 
 namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 {
@@ -262,6 +260,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                     txbDateStart.EditValue = userInfo.DateCreate;
 
                     oldUserInfoJson = JsonConvert.SerializeObject(userInfo);
+                    idDept2word = userInfo.IdDepartment.Substring(0, 2);
 
                     // Lấy quyền hạn và chuyển các quyền mà user có sang gcChooseRoles
                     var lsUserRoles = dm_UserRoleBUS.Instance.GetListByUID(userInfo.Id).Select(r => r.IdRole).ToList();
@@ -378,6 +377,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                                 var lsDepts = dm_DeptBUS.Instance.GetList();
                                 List<dt301_Course> courses = dt301_CourseBUS.Instance.GetList();
 
+                                // Xuất ra html của mail gửi Notes
                                 var templateData = new
                                 {
                                     deptfrom = $"{oldUserData.IdDepartment}{lsDepts.FirstOrDefault(r => r.Id == oldUserData.IdDepartment).DisplayName}",
@@ -385,14 +385,49 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                                     user = $"{userInfo.DisplayName}/{userInfo.Id}",
                                     total = certificatesToInvalidate.Count(),
                                     products = certificatesToInvalidate
-                                    .Join(courses, cert => cert.IdCourse, course => course.Id, (cert, course) => $"{course.Id} {course.DisplayName}").ToList()
+                                    .Join(courses, cert => cert.IdCourse, course => course.Id, (cert, course) => $"{cert.ExpDate:yyyy/MM/dd} {course.Id} {course.DisplayName}").ToList()
                                 };
 
-                                var templateContentSigner = System.IO.File.ReadAllText($@"C:\Users\ANHTUAN\Desktop\New folder\f301_NotifyPersonnelTransfer.html");
+                                var templateContentSigner = System.IO.File.ReadAllText(Path.Combine(TPConfigs.HtmlPath, $"f301_NotifyPersonnelTransfer.html"));
                                 var templateSigner = Template.Parse(templateContentSigner);
 
                                 var pageContent = templateSigner.Render(templateData);
-                                System.IO.File.WriteAllText(@"C:\Users\ANHTUAN\Desktop\New folder\OK.html", pageContent);
+                                string subject = $"{oldUserData.IdDepartment}有{userInfo.DisplayName}同仁調任至您部門，請點選新任職務工安證照需求";
+                                int idGroup = dm_GroupBUS.Instance.GetItemByName($"處務室{userInfo.IdDepartment.Substring(0, 2)}")?.Id ?? -1;
+                                var usersInGroup = dm_GroupUserBUS.Instance.GetListByIdGroup(idGroup);
+                                string toUsers = string.Join(",", usersInGroup.Select(r => $"{r.IdUser}@VNFPG"));
+
+                                //using (ExcelPackage pck = new ExcelPackage())
+                                //{
+                                //    pck.Workbook.Properties.Author = "VNW0014732";
+                                //    pck.Workbook.Properties.Company = "FHS";
+                                //    pck.Workbook.Properties.Title = "Exported by Phan Anh Tuan";
+                                //    ExcelWorksheet ws = pck.Workbook.Worksheets.Add("DATA");
+
+                                //    var exportData = from data in certificatesToInvalidate
+                                //                     join course in courses on data.IdCourse equals course.Id
+                                //                     select  new
+                                //                     {
+                                //                         課程代號= data.IdCourse,
+                                //                         課程名稱 = course.DisplayName,
+                                //                         證照期限 = data.ExpDate
+                                //                     }
+
+                                //    ws.Cells["A1"].LoadFromCollection(lsQueryFile52, false);
+                                //    string savePath = Path.Combine(pathDocument, $"附件05.2：.複訓之提報需求人員名單.xlsx");
+                                //    FileInfo excelFile = new FileInfo(savePath);
+                                //    pck.SaveAs(excelFile);
+                                //}
+
+                                // Lưu vào bảng Mail để service gửi Notes
+                                var mail = new sys_NotesMail()
+                                {
+                                    Thread = "301",
+                                    Subjects = subject,
+                                    Content = pageContent,
+                                    ToUsers = toUsers,
+                                };
+                                sys_NotesMailBUS.Instance.Add(mail);
 
                                 break;
                             case UpdateEvent.Resign:
@@ -595,7 +630,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             // Thông báo ra các chứng chỉ được giữ lại và chứng chỉ sẽ chuyển vào 無效 khi thay đổi chức vụ
             var lsValidCerts = dt301_BaseBUS.Instance.GetListByUIDAndValidCert(userInfo.Id);
 
-            idDept2word = userInfo.IdDepartment.Substring(0, 2);
             var lsCertReqSets = dt301_CertReqSetBUS.Instance.GetListByJobAndDept(idJobChange, idDept2word);
 
             // Lấy ds chứng chỉ còn được dùng đến ở chức vụ mới

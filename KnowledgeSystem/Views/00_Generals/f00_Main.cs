@@ -22,8 +22,6 @@ namespace KnowledgeSystem.Views._00_Generals
             InitializeComponent();
         }
 
-        sys_StaticValueBUS _sys_StaticValueBUS = new sys_StaticValueBUS();
-
         TileItemElement elementName = new TileItemElement();
         TileItemElement elementIdDept = new TileItemElement();
         TileItemElement elementGrade = new TileItemElement();
@@ -112,7 +110,7 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void GetSysStaticValue()
         {
-            var lsStaticValue = _sys_StaticValueBUS.GetList();
+            var lsStaticValue = sys_StaticValueBUS.Instance.GetList();
 
             TPConfigs.SoftNameEN = lsStaticValue.FirstOrDefault(r => r.KeyT == "SoftNameEN").ValueT;
             TPConfigs.SoftNameTW = lsStaticValue.FirstOrDefault(r => r.KeyT == "SoftNameTW").ValueT;
@@ -175,7 +173,7 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void fMain_Shown(object sender, EventArgs e)
         {
-          
+
         }
 
         private void ShowFromByFrame(int IdForm_, TileItemEventArgs e)

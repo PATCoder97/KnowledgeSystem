@@ -80,6 +80,7 @@
     <Compile Include="dt301\dt301_CourseBUS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="sys\sys_StaticValueBUS.cs" />
+    <Compile Include="sys\sys_NotesMailBUS.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

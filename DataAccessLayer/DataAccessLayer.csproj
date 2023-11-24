@@ -154,6 +154,9 @@
     <Compile Include="sys_Log.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
+    <Compile Include="sys_NotesMail.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
     <Compile Include="sys_StaticValue.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
