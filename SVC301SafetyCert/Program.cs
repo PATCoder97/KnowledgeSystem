@@ -17,7 +17,7 @@ namespace SVC301SafetyCert
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
             {
-                new Service1()
+                new Service301()
             };
             ServiceBase.Run(ServicesToRun);
         }

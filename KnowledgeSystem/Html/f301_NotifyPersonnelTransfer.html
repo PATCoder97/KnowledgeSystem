@@ -8,22 +8,33 @@
 </head>
 
 <body>
-    <h2>各位主管好！</h2>
+    <h1>各位主管好！</h1>
 
     <p>
         工安證照系統通知：<br>
         {{deptfrom}}有<span style="color: red;">{{user}}</span>同仁調任至{{deptto}}<br>
-        目前該員有共{{total}}張工安證照有期限，詳如附件所示，請點選新任職務工安證照需求。
+        目前該員有共<span style="color: blue;">{{total}}張</span>工安證照有期限，詳如附件所示，請點選新任職務工安證照需求。
     </p>
 
     <p>
-    <ol>
-        {{ for product in products }}
-        <li>
-            {{ product }}
-        </li>
+    <table>
+        <tr>
+            <th>項次</th>
+            <th>課程代號</th>
+            <th>課程名稱</th>
+            <th>上課日期</th>
+            <th>有效期限</th>
+        </tr>
+        {{ for cert in certs }}
+        <tr>
+            <td class="column">{{ cert.index }}</td>
+            <td class="column">{{ cert.id }}</td>
+            <td>{{ cert.name }}</td>
+            <td>{{ cert.date }}</td>
+            <td>{{ cert.exp }}</td>
+        </tr>
         {{ end }}
-    </ol>
+    </table>
     </p>
 </body>
 
@@ -31,19 +42,37 @@
 
 
 <style>
-    h2 {
+    h1 {
         font-family: DFKai-SB;
         color: #000000;
     }
 
-    p,
-    li {
+    p {
         color: #000000;
-        font-size: 1.4em;
+        font-size: 24px;
         font-family: DFKai-SB;
     }
 
-    ol {
-        margin-left: 15px;
+    table,
+    th {
+        font-size: 24px;
+        font-family: DFKai-SB;
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+
+    th {
+        background-color: #D6EEEE;
+    }
+
+    td {
+        border-bottom: 1px dashed black;
+        border-left: 1px solid black;
+        padding: 5px;
+    }
+
+    .column {
+        text-align: center;
     }
 </style>

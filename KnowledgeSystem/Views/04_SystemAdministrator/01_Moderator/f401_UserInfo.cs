@@ -15,6 +15,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Windows.Forms;
 using System.Xml.XPath;
 
@@ -378,21 +379,32 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                                 List<dt301_Course> courses = dt301_CourseBUS.Instance.GetList();
 
                                 // Xuất ra html của mail gửi Notes
+                                int indexCounter = 1;
+                                var certsTable = (from cert in certificatesToInvalidate
+                                                  join course in courses on cert.IdCourse equals course.Id
+                                                  select new
+                                                  {
+                                                      index = indexCounter++,
+                                                      id = course.Id,
+                                                      name = course.DisplayName,
+                                                      date = cert.DateReceipt.ToString("yyyy/MM/dd"),
+                                                      exp = cert.ExpDate?.ToString("yyyy/MM/dd")
+                                                  }).ToList();
+
                                 var templateData = new
                                 {
                                     deptfrom = $"{oldUserData.IdDepartment}{lsDepts.FirstOrDefault(r => r.Id == oldUserData.IdDepartment).DisplayName}",
                                     deptto = $"{userInfo.IdDepartment}{lsDepts.FirstOrDefault(r => r.Id == userInfo.IdDepartment).DisplayName}",
                                     user = $"{userInfo.DisplayName}/{userInfo.Id}",
                                     total = certificatesToInvalidate.Count(),
-                                    products = certificatesToInvalidate
-                                    .Join(courses, cert => cert.IdCourse, course => course.Id, (cert, course) => $"{cert.ExpDate:yyyy/MM/dd} {course.Id} {course.DisplayName}").ToList()
+                                    certs = certsTable
                                 };
 
                                 var templateContentSigner = System.IO.File.ReadAllText(Path.Combine(TPConfigs.HtmlPath, $"f301_NotifyPersonnelTransfer.html"));
                                 var templateSigner = Template.Parse(templateContentSigner);
 
                                 var pageContent = templateSigner.Render(templateData);
-                                string subject = $"{oldUserData.IdDepartment}有{userInfo.DisplayName}同仁調任至您部門，請點選新任職務工安證照需求";
+                                string subject = $"{lsDepts.FirstOrDefault(r => r.Id == oldUserData.IdDepartment).DisplayName}有{userInfo.DisplayName}同仁調任至您部門，請點選新任職務工安證照需求";
                                 int idGroup = dm_GroupBUS.Instance.GetItemByName($"處務室{userInfo.IdDepartment.Substring(0, 2)}")?.Id ?? -1;
                                 var usersInGroup = dm_GroupUserBUS.Instance.GetListByIdGroup(idGroup);
                                 string toUsers = string.Join(",", usersInGroup.Select(r => $"{r.IdUser}@VNFPG"));

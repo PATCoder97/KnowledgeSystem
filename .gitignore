@@ -10,11 +10,12 @@
 *.userosscache
 *.sln.docstates
 
+# Advanced Install
+*/SetupDocumentSystem-cache
+*.cab
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
-
-# Setup file by Advanced Install
-*.cab
 
 # Mono auto generated files
 mono_crash.*

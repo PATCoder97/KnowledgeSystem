@@ -1,6 +1,6 @@
 ﻿namespace SVC301SafetyCert
 {
-    partial class Service1
+    partial class Service301
     {
         /// <summary> 
         /// Required designer variable.
