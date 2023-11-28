@@ -577,6 +577,16 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             LockControl();
 
             cbbStatus.EditValue = TPConfigs.lsUserStatus[2];
+
+            // Lấy ds chứng chỉ sẽ chuyển về 無效 khi nghỉ lưu chức
+            var lsValidCertByUsers = dt301_BaseBUS.Instance.GetListByUIDAndValidCert(userInfo.Id);
+            var lsValidCerts = (from data in lsValidCertByUsers
+                                join course in lsCourses on data.IdCourse equals course.Id
+                                select $"{data.IdCourse} {course.DisplayName}").ToList();
+
+            string msgValidCert = $"<font='Microsoft JhengHei UI' size=14><color=blue>以下共{lsValidCertByUsers.Count()}證書將返回狀態「無效」，當該員復職時將返回「應取」:</color></br>{string.Join("\r\n", lsValidCerts)}</font>";
+
+            MsgTP.MsgShowInfomation(msgValidCert);
         }
 
         private void btnResumeWork_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -586,6 +596,16 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             LockControl();
 
             cbbStatus.EditValue = TPConfigs.lsUserStatus[0];
+
+            // Lấy ds chứng chỉ sẽ chuyển về 應取 khi phục chức
+            var suspendedCerts = dt301_BaseBUS.Instance.GetListByUIDAndCertSuspended(userInfo.Id);
+            var lsValidCerts = (from data in suspendedCerts
+                                join course in lsCourses on data.IdCourse equals course.Id
+                                select $"{data.IdCourse} {course.DisplayName}").ToList();
+
+            string msgValidCert = $"<font='Microsoft JhengHei UI' size=14><color=blue>以下共{suspendedCerts.Count()}證書將返回狀態「應取」:</color></br>{string.Join("\r\n", lsValidCerts)}</font>";
+
+            MsgTP.MsgShowInfomation(msgValidCert);
         }
 
         private void btnResign_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -595,6 +615,16 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             LockControl();
 
             cbbStatus.EditValue = TPConfigs.lsUserStatus[1];
+
+            // Lấy ds chứng chỉ sẽ chuyển về 無效 khi nghỉ việc
+            var lsValidCertByUsers = dt301_BaseBUS.Instance.GetListByUIDAndValidCert(userInfo.Id);
+            var lsValidCerts = (from data in lsValidCertByUsers
+                                join course in lsCourses on data.IdCourse equals course.Id
+                                select $"{data.IdCourse} {course.DisplayName}").ToList();
+
+            string msgValidCert = $"<font='Microsoft JhengHei UI' size=14><color=blue>以下共{lsValidCertByUsers.Count()}證書將返回狀態「無效」:</color></br>{string.Join("\r\n", lsValidCerts)}</font>";
+
+            MsgTP.MsgShowInfomation(msgValidCert);
         }
 
         private void btnJobChange_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
