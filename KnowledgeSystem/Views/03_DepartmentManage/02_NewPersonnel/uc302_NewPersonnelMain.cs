@@ -1,4 +1,5 @@
 ﻿using BusinessLayer;
+using DataAccessLayer;
 using DevExpress.XtraEditors;
 using DevExpress.XtraPrinting.Native;
 using KnowledgeSystem.Helpers;
@@ -29,6 +30,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
         //List<BaseDisplay> lsBasesDisplay = new List<BaseDisplay>();
         BindingSource sourceBases = new BindingSource();
 
+        List<dm_User> lsUser = new List<dm_User>();
+        List<dm_User> lsAllUser;
+        List<dm_Departments> lsDept;
+        List<dm_JobTitle> lsJobs;
+        List<dt301_Course> lsCourses;
+        List<dt301_Base> lsData51;
+
         private void InitializeIcon()
         {
             btnAdd.ImageOptions.SvgImage = TPSvgimages.Add;
@@ -47,36 +55,30 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
         private void LoadData()
         {
             helper.SaveViewInfo();
-            //var lsBases = dt301_BaseBUS.Instance.GetList();
-            //lsUser = dm_UserBUS.Instance.GetList();
-            //lsJobs = dm_JobTitleBUS.Instance.GetList();
-            //lsCourses = dt301_CourseBUS.Instance.GetList();
+
+            var lsBases = dt302_NewPersonBaseBUS.Instance.GetList();
+            lsUser = dm_UserBUS.Instance.GetList();
+            lsJobs = dm_JobTitleBUS.Instance.GetList();
             //lsDept = dm_DeptBUS.Instance.GetList();
 
-            //lsBasesDisplay = (from data in lsBases
-            //                  join urs in lsUser on data.IdUser equals urs.Id
-            //                  join job in lsJobs on data.IdJobTitle equals job.Id
-            //                  join course in lsCourses on data.IdCourse equals course.Id
-            //                  select new BaseDisplay()
-            //                  {
-            //                      Id = data.Id,
-            //                      IdDept = data.IdDept,
-            //                      IdUser = data.IdUser,
-            //                      IdJobTitle = data.IdJobTitle,
-            //                      IdCourse = data.IdCourse,
-            //                      DateReceipt = data.DateReceipt,
-            //                      ExpDate = data.ExpDate,
-            //                      ValidLicense = data.ValidLicense,
-            //                      BackupLicense = data.BackupLicense,
-            //                      InvalidLicense = data.InvalidLicense,
-            //                      Describe = data.Describe,
-            //                      UserName = urs.DisplayName,
-            //                      JobName = data.IdJobTitle + job.DisplayName,
-            //                      CourseName = data.IdCourse + course.DisplayName,
-            //                      CertSuspended = data.CertSuspended
-            //                  }).ToList();
+            var lsBasesDisplay = (from data in lsBases
+                                  join urs in lsUser on data.IdUser equals urs.Id
+                                  join supvr in lsUser on data.Supervisor equals supvr.Id
+                                  join job in lsJobs on urs.JobCode equals job.Id
+                                  select new
+                                  {
+                                      Id = data.Id,
+                                      IdDept = urs.IdDepartment,
+                                      IdUser = data.IdUser,
+                                      IdJobTitle = urs.JobCode,
+                                      EnterDate = urs.DateCreate,
+                                      Describe = data.Describe,
+                                      UserName = $"{urs.DisplayName} {urs.DisplayNameVN}",
+                                      JobName = job.Id + job.DisplayName,
+                                      Supervisor = $"{supvr.DisplayName} {supvr.DisplayNameVN}",
+                                  }).ToList();
 
-            //sourceBases.DataSource = lsBasesDisplay;
+            sourceBases.DataSource = lsBasesDisplay;
             helper.LoadViewInfo();
 
             gvData.BestFitColumns();

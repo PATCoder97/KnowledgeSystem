@@ -40,6 +40,12 @@ namespace BusinessLayer
             }
         }
 
+        /// <summary>
+        /// Lấy danh sách người dùng bằng ký tự bắt đầu của bộ phận
+        /// </summary>
+        /// <param name="_idDept"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public List<dm_User> GetListByDept(string _idDept)
         {
             try

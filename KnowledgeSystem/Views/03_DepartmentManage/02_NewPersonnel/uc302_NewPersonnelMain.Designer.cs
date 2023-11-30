@@ -130,6 +130,8 @@
             // 
             // gridColumn11
             // 
+            this.gridColumn11.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn11.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn11.Caption = "ID";
             this.gridColumn11.FieldName = "Id";
             this.gridColumn11.Name = "gridColumn11";
@@ -138,8 +140,10 @@
             // 
             // gridColumn3
             // 
+            this.gridColumn3.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn3.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn3.Caption = "部門代號";
-            this.gridColumn3.FieldName = "JobName";
+            this.gridColumn3.FieldName = "IdDept";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 1;
@@ -165,7 +169,7 @@
             // gridColumn4
             // 
             this.gridColumn4.Caption = "職務編制";
-            this.gridColumn4.FieldName = "CourseName";
+            this.gridColumn4.FieldName = "JobName";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 4;
@@ -175,17 +179,15 @@
             this.gridColumn5.AppearanceCell.Options.UseTextOptions = true;
             this.gridColumn5.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn5.Caption = "報到日期";
-            this.gridColumn5.FieldName = "DateReceipt";
+            this.gridColumn5.FieldName = "EnterDate";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
             this.gridColumn5.VisibleIndex = 5;
             // 
             // gridColumn6
             // 
-            this.gridColumn6.AppearanceCell.Options.UseTextOptions = true;
-            this.gridColumn6.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn6.Caption = "上一級主管";
-            this.gridColumn6.FieldName = "ExpDate";
+            this.gridColumn6.FieldName = "Supervisor";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "ExpDate", "數量={0}")});
