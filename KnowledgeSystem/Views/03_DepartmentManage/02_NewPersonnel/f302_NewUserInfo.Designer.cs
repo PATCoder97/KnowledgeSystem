@@ -35,6 +35,7 @@
             this.btnEdit = new DevExpress.XtraBars.BarButtonItem();
             this.btnDelete = new DevExpress.XtraBars.BarButtonItem();
             this.btnConfirm = new DevExpress.XtraBars.BarButtonItem();
+            this.btnTrainingPlan = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -85,7 +86,6 @@
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem17 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.btnTrainingPlan = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -213,6 +213,18 @@
             this.btnConfirm.ItemAppearance.Normal.Options.UseFont = true;
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnConfirm_ItemClick);
+            // 
+            // btnTrainingPlan
+            // 
+            this.btnTrainingPlan.Caption = "訓練計劃表";
+            this.btnTrainingPlan.Id = 12;
+            this.btnTrainingPlan.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnTrainingPlan.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnTrainingPlan.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnTrainingPlan.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.btnTrainingPlan.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnTrainingPlan.Name = "btnTrainingPlan";
+            this.btnTrainingPlan.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnTrainingPlan_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -950,17 +962,6 @@
             this.layoutControlItem17.Size = new System.Drawing.Size(345, 36);
             this.layoutControlItem17.Text = "導師";
             this.layoutControlItem17.TextSize = new System.Drawing.Size(76, 24);
-            // 
-            // btnTrainingPlan
-            // 
-            this.btnTrainingPlan.Caption = "訓練計劃表";
-            this.btnTrainingPlan.Id = 12;
-            this.btnTrainingPlan.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnTrainingPlan.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
-            this.btnTrainingPlan.ItemAppearance.Hovered.Options.UseForeColor = true;
-            this.btnTrainingPlan.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.btnTrainingPlan.ItemAppearance.Normal.Options.UseFont = true;
-            this.btnTrainingPlan.Name = "btnTrainingPlan";
             // 
             // f302_NewUserInfo
             // 

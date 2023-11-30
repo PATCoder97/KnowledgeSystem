@@ -1,6 +1,8 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
 using DevExpress.XtraEditors;
+using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraPrinting.Native;
 using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate;
@@ -38,6 +40,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
         List<dt301_Course> lsCourses;
         List<dt301_Base> lsData51;
 
+        List<dt302_ReportInfo> reportsInfo;
+
         private void InitializeIcon()
         {
             btnAdd.ImageOptions.SvgImage = TPSvgimages.Add;
@@ -61,6 +65,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
             lsUser = dm_UserBUS.Instance.GetList();
             lsJobs = dm_JobTitleBUS.Instance.GetList();
             //lsDept = dm_DeptBUS.Instance.GetList();
+            reportsInfo = dt302_ReportInfoBUS.Instance.GetList();
 
             var lsBasesDisplay = (from data in lsBases
                                   join urs in lsUser on data.IdUser equals urs.Id
@@ -90,6 +95,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
         {
             gvData.ReadOnlyGridView();
             gvData.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
+            gvData.OptionsDetail.AllowOnlyOneMasterRowExpanded = true;
+
+            gvReport.ReadOnlyGridView();
 
             LoadData();
             gcData.DataSource = sourceBases;
@@ -105,6 +113,74 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
             fInfo.ShowDialog();
 
             LoadData();
+        }
+
+        private void gvData_MasterRowEmpty(object sender, DevExpress.XtraGrid.Views.Grid.MasterRowEmptyEventArgs e)
+        {
+            GridView view = sender as GridView;
+            int idBase = Convert.ToInt16(view.GetRowCellValue(e.RowHandle, gColId));
+            e.IsEmpty = !reportsInfo.Any(r => r.IdBase == idBase);
+        }
+
+        private void gvData_MasterRowGetChildList(object sender, DevExpress.XtraGrid.Views.Grid.MasterRowGetChildListEventArgs e)
+        {
+            GridView view = sender as GridView;
+            int idBase = Convert.ToInt16(view.GetRowCellValue(e.RowHandle, gColId));
+
+            //var lsDeviceChild = (from data in lsDevicesSpareParts
+            //                     where data.IdSparePart == sparePart.IdSparePart
+            //                     join device in lsDevices on data.IdDevice equals device.IdDevice
+            //                     select device).ToList();
+
+            int index = 1;
+            e.ChildList = reportsInfo.Where(r => r.IdBase == idBase).Select(r => new
+            {
+                Index = index++,
+                r.Id,
+                r.Content,
+                r.ExpectedDate,
+                r.UploadDate,
+                r.Attachment
+            }).ToList();
+        }
+
+        private void gvData_MasterRowGetRelationCount(object sender, DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationCountEventArgs e)
+        {
+            e.RelationCount = 1;
+        }
+
+        private void gvData_MasterRowGetRelationName(object sender, DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationNameEventArgs e)
+        {
+            e.RelationName = "報告進度";
+        }
+
+        private void btnReload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            LoadData();
+        }
+
+        private void gvData_DoubleClick(object sender, EventArgs e)
+        {
+            GridView view = sender as GridView;
+            int idBase = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColId));
+            //if (_base == null) return;
+
+            f302_NewUserInfo fInfo = new f302_NewUserInfo();
+            fInfo.eventInfo = EventFormInfo.View;
+            fInfo.formName = "證照";
+            fInfo.idBase302 = idBase;
+            fInfo.ShowDialog();
+
+            LoadData();
+        }
+
+        private void gvData_MasterRowExpanded(object sender, CustomMasterRowEventArgs e)
+        {
+            GridView masterView = sender as GridView;
+            int visibleDetailRelationIndex = masterView.GetVisibleDetailRelationIndex(e.RowHandle);
+            GridView detailView = masterView.GetDetailView(e.RowHandle, visibleDetailRelationIndex) as GridView;
+
+            detailView.BestFitColumns();
         }
     }
 }

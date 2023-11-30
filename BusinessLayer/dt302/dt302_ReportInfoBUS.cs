@@ -40,6 +40,27 @@ namespace BusinessLayer
             }
         }
 
+        /// <summary>
+        /// Lấy danh sách báo cáo theo Id của Base 302
+        /// </summary>
+        /// <param name="idBase"></param>
+        /// <returns></returns>
+        public List<dt302_ReportInfo> GetListByIdBase(int idBase)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt302_ReportInfo.Where(r => r.IdBase == idBase).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public bool Add(dt302_ReportInfo reportInfo)
         {
             try

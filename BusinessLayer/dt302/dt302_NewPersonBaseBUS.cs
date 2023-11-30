@@ -39,6 +39,27 @@ namespace BusinessLayer
             }
         }
 
+        /// <summary>
+        /// Lấy 1 Nhân viên mới bằng Id 302
+        /// </summary>
+        /// <param name="idBase"></param>
+        /// <returns></returns>
+        public dt302_NewPersonBase GetItemById(int idBase)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt302_NewPersonBase.FirstOrDefault(r => r.Id == idBase);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public bool Add(dt302_NewPersonBase _base)
         {
             try

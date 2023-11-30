@@ -2,6 +2,7 @@
 using DataAccessLayer;
 using DevExpress.XtraEditors;
 using DevExpress.XtraSplashScreen;
+using DocumentFormat.OpenXml.Packaging;
 using KnowledgeSystem.Helpers;
 using Newtonsoft.Json;
 using Scriban;
@@ -27,10 +28,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
 
         public string formName = string.Empty;
         public EventFormInfo eventInfo = EventFormInfo.Create;
-        public dt302_NewPersonBase newPersonInfo = null;
+        public int idBase302 = -1;
         private string oldUserInfoJson = "";
         string idDept2word;
         bool IsSysAdmin = false;
+
+        dt302_NewPersonBase personBase;
 
         BindingSource _sourceAllRole = new BindingSource();
         BindingSource _sourceChooseRole = new BindingSource();
@@ -43,13 +46,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
             btnEdit.ImageOptions.SvgImage = TPSvgimages.Edit;
             btnDelete.ImageOptions.SvgImage = TPSvgimages.Remove;
             btnConfirm.ImageOptions.SvgImage = TPSvgimages.Confirm;
-
-            //btnSuspension.ImageOptions.SvgImage = TPSvgimages.Suspension;
-            //btnDeptChange.ImageOptions.SvgImage = TPSvgimages.Transfer;
-            //btnResign.ImageOptions.SvgImage = TPSvgimages.Resign;
-            //btnResumeWork.ImageOptions.SvgImage = TPSvgimages.Conferred;
-            //btnJobChange.ImageOptions.SvgImage = TPSvgimages.UpLevel;
-            //btnPersonnelChanges.ImageOptions.SvgImage = TPSvgimages.PersonnelChanges;
         }
 
         private void EnabledController(bool _enable = true)
@@ -73,13 +69,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
             cbbDept.Enabled = false;
             cbbSupervisor.Enabled = false;
             cbbJobTitle.Enabled = false;
-
-            //btnDeptChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-            //btnResign.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-            //btnSuspension.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-            //btnResumeWork.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-            //btnJobChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-            //btnPersonnelChanges.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
 
             lcRole.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             Size = new Size(600, 353);
@@ -216,38 +205,32 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
             switch (eventInfo)
             {
                 case EventFormInfo.Create:
-                    newPersonInfo = new dt302_NewPersonBase();
+                    personBase = new dt302_NewPersonBase();
                     break;
                 case EventFormInfo.View:
+                    personBase = dt302_NewPersonBaseBUS.Instance.GetItemById(idBase302);
+
+                    cbbSupervisor.EditValue = personBase.Supervisor;
+
+                    var dmUsers = dm_UserBUS.Instance.GetItemById(personBase.IdUser);
                     //userInfo.DisplayName = userInfo.DisplayName.Split('\n')[0];
                     //userInfo.DateCreate = DateTime.Parse(userInfo.DateCreate.ToShortDateString());
 
-                    //txbUserId.EditValue = userInfo.Id;
-                    //txbUserNameVN.EditValue = userInfo.DisplayNameVN?.Trim();
-                    //txbUserNameTW.EditValue = userInfo.DisplayName.Split('\n')[0]?.Trim();
-                    //cbbDept.EditValue = userInfo.IdDepartment;
-                    //cbbJobTitle.EditValue = userInfo.JobCode;
-                    //txbDOB.EditValue = userInfo.DOB;
-                    //txbCCCD.EditValue = userInfo.CitizenID;
-                    //cbbNationality.EditValue = userInfo.Nationality;
+                    txbUserId.EditValue = personBase.IdUser;
+                    txbUserNameVN.EditValue = dmUsers.DisplayNameVN?.Trim();
+                    txbUserNameTW.EditValue = dmUsers.DisplayName.Split('\n')[0]?.Trim();
+                    cbbDept.EditValue = dmUsers.IdDepartment;
+                    cbbJobTitle.EditValue = dmUsers.JobCode;
+                    txbDOB.EditValue = dmUsers.DOB;
+                    txbCCCD.EditValue = dmUsers.CitizenID;
+                    cbbNationality.EditValue = dmUsers.Nationality;
 
-                    //txbPhone1.EditValue = userInfo.PhoneNum1;
-                    //txbPhone2.EditValue = userInfo.PhoneNum2;
-                    //txbAddr.EditValue = userInfo.Addr;
-                    //cbbSex.EditValue = userInfo.Sex == null ? "" : userInfo.Sex.Value ? "男" : "女";
-                    //cbbStatus.EditValue = userInfo.Status == null ? "" : TPConfigs.lsUserStatus[userInfo.Status.Value];
-                    //txbDateStart.EditValue = userInfo.DateCreate;
+                    txbPhone1.EditValue = dmUsers.PhoneNum1;
+                    txbPhone2.EditValue = dmUsers.PhoneNum2;
+                    txbAddr.EditValue = dmUsers.Addr;
+                    cbbSex.EditValue = dmUsers.Sex == null ? "" : dmUsers.Sex.Value ? "男" : "女";
+                    txbDateStart.EditValue = dmUsers.DateCreate;
 
-                    //oldUserInfoJson = JsonConvert.SerializeObject(userInfo);
-                    //idDept2word = userInfo.IdDepartment.Substring(0, 2);
-
-                    //// Lấy quyền hạn và chuyển các quyền mà user có sang gcChooseRoles
-                    //var lsUserRoles = dm_UserRoleBUS.Instance.GetListByUID(userInfo.Id).Select(r => r.IdRole).ToList();
-                    //lsChooseRoles.AddRange(lsAllRoles.Where(a => lsUserRoles.Exists(b => b == a.Id)));
-                    //lsAllRoles.RemoveAll(a => lsUserRoles.Exists(b => b == a.Id));
-
-                    //gcAllRole.RefreshDataSource();
-                    //gcChooseRole.RefreshDataSource();
                     break;
             }
         }
@@ -276,7 +259,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
                 userInfo.Sex = cbbSex.EditValue?.ToString() == "男";
                 userInfo.Status = TPConfigs.lsUserStatus.FirstOrDefault(r => r.Value == cbbSupervisor.EditValue?.ToString()).Key;
 
-                newPersonInfo.Supervisor = cbbSupervisor.EditValue?.ToString();
+                personBase.Supervisor = cbbSupervisor.EditValue?.ToString();
                 //string newUserInfoJson = JsonConvert.SerializeObject(userInfo);
 
                 msg = $"{userInfo.Id} {userInfo.DisplayName} {userInfo.DisplayNameVN}";
@@ -284,10 +267,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
                 {
                     case EventFormInfo.Create:
                         userInfo.Id = txbUserId.EditValue?.ToString();
-                        newPersonInfo.IdUser = userInfo.Id;
+                        personBase.IdUser = userInfo.Id;
 
                         //result = dm_UserBUS.Instance.Add(userInfo);
-                        result = dt302_NewPersonBaseBUS.Instance.Add(newPersonInfo);
+                        result = dt302_NewPersonBaseBUS.Instance.Add(personBase);
                         break;
                     case EventFormInfo.View:
                         break;
@@ -495,6 +478,56 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
             {
                 MsgTP.MsgErrorDB();
             }
+        }
+
+        private void btnTrainingPlan_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            using (var dlg = new OpenFileDialog())
+            {
+                if (dlg.ShowDialog() != DialogResult.OK) return;
+
+                var fileName = dlg.FileName;
+                DataTable data = WordHelper.Instance.ReadTableFromMSWord(fileName);
+
+                var rowHeader = data.Rows[1];
+
+                var indexColumns = rowHeader.ItemArray.Select((value, index) => new { Value = value, Index = index })
+                                           .Where(x => x.Value.Equals("Nội dung công việc đào tạo訓練工作內容及目標"))
+                                           .Select(x => x.Index).ToList();
+
+                if (indexColumns.Count != 2)
+                {
+                    return;
+                }
+
+                Dictionary<DateTime, string> contents = new Dictionary<DateTime, string>();
+                DateTime expectedDate = txbDateStart.DateTime.AddDays(-1);
+                for (int i = 0; i < 3; i++)
+                {
+                    expectedDate = expectedDate.AddMonths(1);
+                    contents.Add(expectedDate, data.Rows[i + 2][indexColumns[0]].ToString());
+                }
+
+                for (int i = 0; i < 4; i++)
+                {
+                    expectedDate = expectedDate.AddMonths(3);
+                    contents.Add(expectedDate, data.Rows[i + 2][indexColumns[1]].ToString());
+                }
+
+                foreach (var item in contents)
+                {
+                    dt302_ReportInfo reportInfo = new dt302_ReportInfo()
+                    {
+                        IdBase = personBase.Id,
+                        Content = item.Value,
+                        ExpectedDate = item.Key,
+                    };
+
+                    dt302_ReportInfoBUS.Instance.Add(reportInfo);
+                }
+            }
+
+            Close();
         }
     }
 }
