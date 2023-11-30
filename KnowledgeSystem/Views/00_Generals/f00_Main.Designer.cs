@@ -65,7 +65,7 @@ namespace KnowledgeSystem.Views._00_Generals
             this.tileItem10 = new DevExpress.XtraEditors.TileItem();
             this.btnKnowHow = new DevExpress.XtraEditors.TileItem();
             this.tileGroup4 = new DevExpress.XtraEditors.TileGroup();
-            this.tileItem6 = new DevExpress.XtraEditors.TileItem();
+            this.btnWorkManagement = new DevExpress.XtraEditors.TileItem();
             this.tileItem12 = new DevExpress.XtraEditors.TileItem();
             this.tileItem13 = new DevExpress.XtraEditors.TileItem();
             this.btnSafetyCert = new DevExpress.XtraEditors.TileItem();
@@ -123,6 +123,7 @@ namespace KnowledgeSystem.Views._00_Generals
             this.tileMain.MaxId = 23;
             this.tileMain.Name = "tileMain";
             this.tileMain.Padding = new System.Windows.Forms.Padding(24, 22, 24, 22);
+            this.tileMain.Position = 480;
             this.tileMain.ShowGroupText = true;
             this.tileMain.Size = new System.Drawing.Size(1180, 499);
             this.tileMain.TabIndex = 4;
@@ -269,22 +270,25 @@ namespace KnowledgeSystem.Views._00_Generals
             // 
             // tileGroup4
             // 
-            this.tileGroup4.Items.Add(this.tileItem6);
+            this.tileGroup4.Items.Add(this.btnWorkManagement);
             this.tileGroup4.Items.Add(this.tileItem12);
             this.tileGroup4.Items.Add(this.tileItem13);
             this.tileGroup4.Items.Add(this.btnSafetyCert);
             this.tileGroup4.Name = "tileGroup4";
             this.tileGroup4.Text = "部門管理";
             // 
-            // tileItem6
+            // btnWorkManagement
             // 
-            this.tileItem6.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
-            this.tileItem6.AppearanceItem.Normal.Options.UseFont = true;
+            this.btnWorkManagement.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
+            this.btnWorkManagement.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
+            this.btnWorkManagement.AppearanceItem.Normal.Options.UseBackColor = true;
+            this.btnWorkManagement.AppearanceItem.Normal.Options.UseFont = true;
             tileItemElement12.Text = "工作管理";
-            this.tileItem6.Elements.Add(tileItemElement12);
-            this.tileItem6.Id = 10;
-            this.tileItem6.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
-            this.tileItem6.Name = "tileItem6";
+            this.btnWorkManagement.Elements.Add(tileItemElement12);
+            this.btnWorkManagement.Id = 10;
+            this.btnWorkManagement.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
+            this.btnWorkManagement.Name = "btnWorkManagement";
+            this.btnWorkManagement.ItemClick += new DevExpress.XtraEditors.TileItemClickEventHandler(this.btnWorkManagement_ItemClick);
             // 
             // tileItem12
             // 
@@ -439,7 +443,7 @@ namespace KnowledgeSystem.Views._00_Generals
         private DevExpress.XtraEditors.TileGroup tileGroup4;
         private DevExpress.XtraEditors.TileItem btnISODocuments;
         private DevExpress.XtraEditors.TileItem tileItem5;
-        private DevExpress.XtraEditors.TileItem tileItem6;
+        private DevExpress.XtraEditors.TileItem btnWorkManagement;
         private DevExpress.XtraEditors.TileItem tileItem7;
         private DevExpress.XtraEditors.TileItem tileItem8;
         private DevExpress.XtraEditors.TileItem tileItem9;

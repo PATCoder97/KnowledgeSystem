@@ -122,6 +122,7 @@ namespace KnowledgeSystem.Views._00_Generals
             AppPermission.Mod = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleMod").ValueT);
             AppPermission.KnowledgeMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleKnowledgeMain").ValueT);
             AppPermission.SafetyCertMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleSafetyCertMain").ValueT);
+            AppPermission.WorkManagementMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleWorkManagementMain").ValueT);
         }
 
         private void fMain_Load(object sender, EventArgs e)
@@ -215,6 +216,11 @@ namespace KnowledgeSystem.Views._00_Generals
         private void btnSafetyCert_ItemClick(object sender, TileItemEventArgs e)
         {
             ShowFromByFrame(AppPermission.SafetyCertMain, e);
+        }
+
+        private void btnWorkManagement_ItemClick(object sender, TileItemEventArgs e)
+        {
+            ShowFromByFrame(AppPermission.WorkManagementMain, e);
         }
 
         private void tileInfoUser_ItemClick(object sender, TileItemEventArgs e)

@@ -131,6 +131,12 @@
     <Compile Include="dt301_Course.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
+    <Compile Include="dt302_NewPersonBase.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dt302_ReportInfo.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModelDocManager.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

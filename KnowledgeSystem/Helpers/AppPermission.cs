@@ -52,10 +52,11 @@ namespace KnowledgeSystem.Helpers
         public static int Mod { get; set; }
         public static int KnowledgeMain { get; set; }
         public static int SafetyCertMain { get; set; }
+        public static int WorkManagementMain { get; set; }
 
         public static List<int> GetListAutoOpenForm()
         {
-            return new List<int>() { SysAdmin, Mod, KnowledgeMain, SafetyCertMain };
+            return new List<int>() { SysAdmin, Mod, KnowledgeMain, SafetyCertMain, WorkManagementMain };
         }
 
         // 207
