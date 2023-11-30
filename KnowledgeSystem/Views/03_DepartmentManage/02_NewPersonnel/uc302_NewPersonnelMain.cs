@@ -29,6 +29,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
         RefreshHelper helper;
         //List<BaseDisplay> lsBasesDisplay = new List<BaseDisplay>();
         BindingSource sourceBases = new BindingSource();
+        string idDept2word = TPConfigs.LoginUser.IdDepartment.Substring(0, 2);
 
         List<dm_User> lsUser = new List<dm_User>();
         List<dm_User> lsAllUser;
@@ -65,6 +66,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
                                   join urs in lsUser on data.IdUser equals urs.Id
                                   join supvr in lsUser on data.Supervisor equals supvr.Id
                                   join job in lsJobs on urs.JobCode equals job.Id
+                                  where urs.IdDepartment.StartsWith(idDept2word)
                                   select new
                                   {
                                       Id = data.Id,
@@ -74,7 +76,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
                                       EnterDate = urs.DateCreate,
                                       Describe = data.Describe,
                                       UserName = $"{urs.DisplayName} {urs.DisplayNameVN}",
-                                      JobName = job.Id + job.DisplayName,
+                                      JobName = $"{job.Id} {job.DisplayName}",
                                       Supervisor = $"{supvr.DisplayName} {supvr.DisplayNameVN}",
                                   }).ToList();
 

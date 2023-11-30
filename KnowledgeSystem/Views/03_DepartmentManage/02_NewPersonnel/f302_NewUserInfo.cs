@@ -44,12 +44,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
             btnDelete.ImageOptions.SvgImage = TPSvgimages.Remove;
             btnConfirm.ImageOptions.SvgImage = TPSvgimages.Confirm;
 
-            btnSuspension.ImageOptions.SvgImage = TPSvgimages.Suspension;
-            btnDeptChange.ImageOptions.SvgImage = TPSvgimages.Transfer;
-            btnResign.ImageOptions.SvgImage = TPSvgimages.Resign;
-            btnResumeWork.ImageOptions.SvgImage = TPSvgimages.Conferred;
-            btnJobChange.ImageOptions.SvgImage = TPSvgimages.UpLevel;
-            btnPersonnelChanges.ImageOptions.SvgImage = TPSvgimages.PersonnelChanges;
+            //btnSuspension.ImageOptions.SvgImage = TPSvgimages.Suspension;
+            //btnDeptChange.ImageOptions.SvgImage = TPSvgimages.Transfer;
+            //btnResign.ImageOptions.SvgImage = TPSvgimages.Resign;
+            //btnResumeWork.ImageOptions.SvgImage = TPSvgimages.Conferred;
+            //btnJobChange.ImageOptions.SvgImage = TPSvgimages.UpLevel;
+            //btnPersonnelChanges.ImageOptions.SvgImage = TPSvgimages.PersonnelChanges;
         }
 
         private void EnabledController(bool _enable = true)
@@ -74,15 +74,15 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
             cbbSupervisor.Enabled = false;
             cbbJobTitle.Enabled = false;
 
-            btnDeptChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-            btnResign.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-            btnSuspension.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-            btnResumeWork.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-            btnJobChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-            btnPersonnelChanges.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            //btnDeptChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            //btnResign.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            //btnSuspension.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            //btnResumeWork.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            //btnJobChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            //btnPersonnelChanges.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
 
             lcRole.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-            Size = new Size(600, 358);
+            Size = new Size(600, 353);
 
             switch (eventInfo)
             {
@@ -134,7 +134,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
                     btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
 
-                    btnPersonnelChanges.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                    //btnPersonnelChanges.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     //if (userInfo.Status == 0)
                     //{
                     //    btnSuspension.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
@@ -160,16 +160,16 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
             bool role301Main = AppPermission.Instance.CheckAppPermission(AppPermission.SafetyCertMain);
             bool roleEditUserJobAndDept = AppPermission.Instance.CheckAppPermission(AppPermission.EditUserJobAndDept);
 
-            if (!(role301Main && roleEditUserJobAndDept && TPConfigs.IdParentControl == AppPermission.SafetyCertMain))
-            {
-                btnPersonnelChanges.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            //if (!(role301Main && roleEditUserJobAndDept && TPConfigs.IdParentControl == AppPermission.SafetyCertMain))
+            //{
+            //    btnPersonnelChanges.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
 
-                btnSuspension.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                btnDeptChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                btnResign.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                btnResumeWork.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                btnJobChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-            }
+            //    btnSuspension.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            //    btnDeptChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            //    btnResign.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            //    btnResumeWork.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            //    btnJobChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            //}
 
             Rectangle screenBounds = Screen.PrimaryScreen.Bounds;
             int x = screenBounds.Width / 2 - Width / 2;
@@ -186,7 +186,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
 
             LockControl();
 
-            var lsDepts = dm_DeptBUS.Instance.GetList().Where(r => r.Id.Length == 4)
+            var lsDepts = dm_DeptBUS.Instance.GetList().Where(r => r.Id.Length == 4 && r.Id.StartsWith(idDept2word))
                 .Select(r => new dm_Departments { Id = r.Id, DisplayName = $"{r.Id,-5}{r.DisplayName}" }).ToList();
             cbbDept.Properties.DataSource = lsDepts;
             cbbDept.Properties.DisplayMember = "DisplayName";

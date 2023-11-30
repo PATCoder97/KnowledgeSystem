@@ -311,7 +311,7 @@
             // 
             // gridColumn7
             // 
-            this.gridColumn7.Caption = "職務代號";
+            this.gridColumn7.Caption = "導師代號";
             this.gridColumn7.FieldName = "Id";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
@@ -319,7 +319,7 @@
             // 
             // gridColumn8
             // 
-            this.gridColumn8.Caption = "職務名稱";
+            this.gridColumn8.Caption = "導師名稱";
             this.gridColumn8.FieldName = "DisplayName";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
