@@ -152,6 +152,7 @@
     <Compile Include="Helpers\AppCopyRight.cs" />
     <Compile Include="Helpers\AppPermission.cs" />
     <Compile Include="Helpers\DomainVNFPG.cs" />
+    <Compile Include="Helpers\EncryptionHelper.cs" />
     <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Helpers\GridControlHelper.cs" />
     <Compile Include="Helpers\PCInfoHelper.cs" />

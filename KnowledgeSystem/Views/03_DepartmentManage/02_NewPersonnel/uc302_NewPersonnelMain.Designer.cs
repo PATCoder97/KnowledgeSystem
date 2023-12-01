@@ -69,6 +69,8 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.gColActualName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColEncryptName = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gvReport)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
@@ -105,7 +107,6 @@
             this.gvReport.OptionsCustomization.AllowSort = false;
             this.gvReport.OptionsDetail.ShowDetailTabs = false;
             this.gvReport.OptionsView.ColumnAutoWidth = false;
-            this.gvReport.OptionsView.EnableAppearanceOddRow = true;
             this.gvReport.OptionsView.ShowGroupPanel = false;
             this.gvReport.OptionsView.ShowIndicator = false;
             this.gvReport.MasterRowEmpty += new DevExpress.XtraGrid.Views.Grid.MasterRowEmptyEventHandler(this.gvReport_MasterRowEmpty);
@@ -320,13 +321,16 @@
             this.gvAttachment.Appearance.Row.ForeColor = System.Drawing.Color.Black;
             this.gvAttachment.Appearance.Row.Options.UseFont = true;
             this.gvAttachment.Appearance.Row.Options.UseForeColor = true;
+            this.gvAttachment.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gColActualName,
+            this.gColEncryptName});
             this.gvAttachment.GridControl = this.gcData;
             this.gvAttachment.Name = "gvAttachment";
             this.gvAttachment.OptionsView.ColumnAutoWidth = false;
-            this.gvAttachment.OptionsView.EnableAppearanceOddRow = true;
             this.gvAttachment.OptionsView.ShowColumnHeaders = false;
             this.gvAttachment.OptionsView.ShowGroupPanel = false;
             this.gvAttachment.OptionsView.ShowIndicator = false;
+            this.gvAttachment.DoubleClick += new System.EventHandler(this.gvAttachment_DoubleClick);
             // 
             // layoutControl1
             // 
@@ -550,6 +554,22 @@
             this.barDockControlRight.Manager = this.barManagerTP;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 548);
             // 
+            // gColActualName
+            // 
+            this.gColActualName.Caption = "cColActualName";
+            this.gColActualName.FieldName = "ActualName";
+            this.gColActualName.Name = "gColActualName";
+            this.gColActualName.Visible = true;
+            this.gColActualName.VisibleIndex = 0;
+            // 
+            // gColEncryptName
+            // 
+            this.gColEncryptName.Caption = "gColEncryptName";
+            this.gColEncryptName.FieldName = "EncryptionName";
+            this.gColEncryptName.Name = "gColEncryptName";
+            this.gColEncryptName.Visible = true;
+            this.gColEncryptName.VisibleIndex = 1;
+            // 
             // uc302_NewPersonnelMain
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
@@ -617,5 +637,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
         private DevExpress.XtraGrid.Columns.GridColumn gColIdReport;
         private DevExpress.XtraGrid.Views.Grid.GridView gvAttachment;
+        private DevExpress.XtraGrid.Columns.GridColumn gColActualName;
+        private DevExpress.XtraGrid.Columns.GridColumn gColEncryptName;
     }
 }

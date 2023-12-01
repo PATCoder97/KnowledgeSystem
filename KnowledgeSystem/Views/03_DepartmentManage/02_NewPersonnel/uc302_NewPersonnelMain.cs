@@ -5,6 +5,7 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraPrinting.Native;
+using DevExpress.XtraSplashScreen;
 using DocumentFormat.OpenXml.Office2010.CustomUI;
 using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate;
@@ -94,27 +95,44 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
 
                 int idReport = Convert.ToInt16(detailGridView.GetRowCellValue(detailFocusedRowHandle, gColIdReport));
 
-                dm_Attachment att = new dm_Attachment()
+                using (OpenFileDialog openFile = new OpenFileDialog())
                 {
-                    Thread = "302",
-                    EncryptionName = "VNW0014732asdad",
-                    ActualName = "du leij.pdf"
-                };
-                var idAtt = dm_AttachmentBUS.Instance.Add(att);
+                    openFile.Filter = "pdf|*pdf";
+                    openFile.Multiselect = true;
 
-                dt302_ReportAttach reportAttach = new dt302_ReportAttach()
-                {
-                    IdReport = idReport,
-                    IdAttach = idAtt
-                };
+                    if (openFile.ShowDialog() != DialogResult.OK) return;
 
-                dt302_ReportAttachBUS.Instance.Add(reportAttach);
+                    using (var handle = SplashScreenManager.ShowOverlayForm(gcData))
+                    {
+                        foreach (var item in openFile.FileNames)
+                        {
+                            string filename = Path.GetFileName(item);
+
+                            dm_Attachment att = new dm_Attachment()
+                            {
+                                Thread = "302",
+                                EncryptionName = EncryptionHelper.EncryptionFileName(filename),
+                                ActualName = filename
+                            };
+                            var idAtt = dm_AttachmentBUS.Instance.Add(att);
+
+                            dt302_ReportAttach reportAttach = new dt302_ReportAttach()
+                            {
+                                IdReport = idReport,
+                                IdAttach = idAtt
+                            };
+
+                            dt302_ReportAttachBUS.Instance.Add(reportAttach);
+                        }
+                    }
+                }
+                LoadData();
             }
         }
 
         private void ItemViewFile_Click(object sender, EventArgs e)
         {
-            // throw new NotImplementedException();
+            MessageBox.Show(EncryptionHelper.EncryptionFileName("asdasd.pdf"));
         }
 
         private void ItemViewInfo_Click(object sender, EventArgs e)
@@ -134,36 +152,41 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
 
         private void LoadData()
         {
-            helper.SaveViewInfo();
+            using (var handle = SplashScreenManager.ShowOverlayForm(gcData))
+            {
+                helper.SaveViewInfo();
 
-            var lsBases = dt302_NewPersonBaseBUS.Instance.GetList();
-            lsUser = dm_UserBUS.Instance.GetList();
-            lsJobs = dm_JobTitleBUS.Instance.GetList();
-            reportsInfo = dt302_ReportInfoBUS.Instance.GetList();
-            attachments = dm_AttachmentBUS.Instance.GetListByThread("302");
+                var lsBases = dt302_NewPersonBaseBUS.Instance.GetList();
+                lsUser = dm_UserBUS.Instance.GetList();
+                lsJobs = dm_JobTitleBUS.Instance.GetList();
+                reportsInfo = dt302_ReportInfoBUS.Instance.GetList();
+                attachments = dm_AttachmentBUS.Instance.GetListByThread("302");
 
-            var lsBasesDisplay = (from data in lsBases
-                                  join urs in lsUser on data.IdUser equals urs.Id
-                                  join supvr in lsUser on data.Supervisor equals supvr.Id
-                                  join job in lsJobs on urs.JobCode equals job.Id
-                                  where urs.IdDepartment.StartsWith(idDept2word)
-                                  select new
-                                  {
-                                      Id = data.Id,
-                                      IdDept = urs.IdDepartment,
-                                      IdUser = data.IdUser,
-                                      IdJobTitle = urs.JobCode,
-                                      EnterDate = urs.DateCreate,
-                                      Describe = data.Describe,
-                                      UserName = $"{urs.DisplayName} {urs.DisplayNameVN}",
-                                      JobName = $"{job.Id} {job.DisplayName}",
-                                      Supervisor = $"{supvr.DisplayName} {supvr.DisplayNameVN}",
-                                  }).ToList();
+                var lsBasesDisplay = (from data in lsBases
+                                      join urs in lsUser on data.IdUser equals urs.Id
+                                      join supvr in lsUser on data.Supervisor equals supvr.Id
+                                      join job in lsJobs on urs.JobCode equals job.Id
+                                      where urs.IdDepartment.StartsWith(idDept2word)
+                                      select new
+                                      {
+                                          Id = data.Id,
+                                          IdDept = urs.IdDepartment,
+                                          IdUser = data.IdUser,
+                                          IdJobTitle = urs.JobCode,
+                                          EnterDate = urs.DateCreate,
+                                          Describe = data.Describe,
+                                          UserName = $"{urs.DisplayName} {urs.DisplayNameVN}",
+                                          JobName = $"{job.Id} {job.DisplayName}",
+                                          Supervisor = $"{supvr.DisplayName} {supvr.DisplayNameVN}",
+                                      }).ToList();
 
-            sourceBases.DataSource = lsBasesDisplay;
-            helper.LoadViewInfo();
+                sourceBases.DataSource = lsBasesDisplay;
+                helper.LoadViewInfo();
 
-            gvData.BestFitColumns();
+                gvData.BestFitColumns();
+                gvData.CollapseAllDetails();
+                gvData.ExpandMasterRow(gvData.FocusedRowHandle);
+            }
         }
 
         private void uc302_NewPersonnelMain_Load(object sender, EventArgs e)
@@ -182,8 +205,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
 
             gvData.BestFitColumns();
 
-            Font fontUI14 = new Font("Microsoft JhengHei UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Font fontUI14 = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             DevExpress.Utils.AppearanceObject.DefaultMenuFont = fontUI14;
+
+            gvData.OptionsDetail.DetailMode = DetailMode.Embedded;
         }
 
         private void btnReload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -268,6 +293,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
                            join att in attachments on data.IdAttach equals att.Id
                            select new
                            {
+                               EncryptionName = att.EncryptionName,
                                ActualName = att.ActualName
                            }).ToList();
 
@@ -323,6 +349,15 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
 
             gcData.ExportToPdf(filePath);
             Process.Start(filePath);
+        }
+
+        private void gvAttachment_DoubleClick(object sender, EventArgs e)
+        {
+            GridView view = sender as GridView;
+            string actualName = view.GetRowCellValue(view.FocusedRowHandle, gColActualName).ToString();
+            string encryptName = view.GetRowCellValue(view.FocusedRowHandle, gColEncryptName).ToString();
+
+            MessageBox.Show(actualName);
         }
     }
 }
