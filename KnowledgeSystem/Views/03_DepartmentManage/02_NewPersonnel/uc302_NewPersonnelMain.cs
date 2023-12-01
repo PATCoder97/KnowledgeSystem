@@ -175,6 +175,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
             gvReport.ReadOnlyGridView();
             gvReport.OptionsDetail.AllowOnlyOneMasterRowExpanded = true;
 
+            gvAttachment.ReadOnlyGridView();
+
             LoadData();
             gcData.DataSource = sourceBases;
 

@@ -40,7 +40,6 @@
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColIdReport = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcData = new DevExpress.XtraGrid.GridControl();
-            this.gvAttachment = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gColId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -50,6 +49,7 @@
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gvAttachment = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -69,11 +69,10 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-            this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gvReport)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvAttachment)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvAttachment)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
@@ -102,6 +101,8 @@
             this.gColIdReport});
             this.gvReport.GridControl = this.gcData;
             this.gvReport.Name = "gvReport";
+            this.gvReport.OptionsCustomization.AllowFilter = false;
+            this.gvReport.OptionsCustomization.AllowSort = false;
             this.gvReport.OptionsDetail.ShowDetailTabs = false;
             this.gvReport.OptionsView.ColumnAutoWidth = false;
             this.gvReport.OptionsView.EnableAppearanceOddRow = true;
@@ -171,18 +172,20 @@
             // 
             // gcData
             // 
+            this.gcData.Cursor = System.Windows.Forms.Cursors.Default;
             this.gcData.EmbeddedNavigator.Buttons.Append.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.CancelEdit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.Edit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.EndEdit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.Remove.Visible = false;
             gridLevelNode1.LevelTemplate = this.gvReport;
-            gridLevelNode1.RelationName = "報告進度";
             gridLevelNode2.LevelTemplate = this.gvAttachment;
             gridLevelNode2.RelationName = "附件";
-            this.gcData.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode1,
+            gridLevelNode1.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
             gridLevelNode2});
+            gridLevelNode1.RelationName = "報告進度";
+            this.gcData.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
+            gridLevelNode1});
             this.gcData.Location = new System.Drawing.Point(12, 12);
             this.gcData.MainView = this.gvData;
             this.gcData.Name = "gcData";
@@ -190,28 +193,9 @@
             this.gcData.TabIndex = 5;
             this.gcData.UseEmbeddedNavigator = true;
             this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gvAttachment,
             this.gvData,
+            this.gvAttachment,
             this.gvReport});
-            // 
-            // gvAttachment
-            // 
-            this.gvAttachment.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gvAttachment.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Maroon;
-            this.gvAttachment.Appearance.HeaderPanel.Options.UseFont = true;
-            this.gvAttachment.Appearance.HeaderPanel.Options.UseForeColor = true;
-            this.gvAttachment.Appearance.HeaderPanel.Options.UseTextOptions = true;
-            this.gvAttachment.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gvAttachment.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gvAttachment.Appearance.Row.ForeColor = System.Drawing.Color.Black;
-            this.gvAttachment.Appearance.Row.Options.UseFont = true;
-            this.gvAttachment.Appearance.Row.Options.UseForeColor = true;
-            this.gvAttachment.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn11});
-            this.gvAttachment.GridControl = this.gcData;
-            this.gvAttachment.Name = "gvAttachment";
-            this.gvAttachment.OptionsView.ShowGroupPanel = false;
-            this.gvAttachment.OptionsView.ShowIndicator = false;
             // 
             // gvData
             // 
@@ -329,6 +313,20 @@
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "Describe", "共計={0}")});
             this.gridColumn10.Visible = true;
             this.gridColumn10.VisibleIndex = 6;
+            // 
+            // gvAttachment
+            // 
+            this.gvAttachment.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvAttachment.Appearance.Row.ForeColor = System.Drawing.Color.Black;
+            this.gvAttachment.Appearance.Row.Options.UseFont = true;
+            this.gvAttachment.Appearance.Row.Options.UseForeColor = true;
+            this.gvAttachment.GridControl = this.gcData;
+            this.gvAttachment.Name = "gvAttachment";
+            this.gvAttachment.OptionsView.ColumnAutoWidth = false;
+            this.gvAttachment.OptionsView.EnableAppearanceOddRow = true;
+            this.gvAttachment.OptionsView.ShowColumnHeaders = false;
+            this.gvAttachment.OptionsView.ShowGroupPanel = false;
+            this.gvAttachment.OptionsView.ShowIndicator = false;
             // 
             // layoutControl1
             // 
@@ -552,14 +550,6 @@
             this.barDockControlRight.Manager = this.barManagerTP;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 548);
             // 
-            // gridColumn11
-            // 
-            this.gridColumn11.Caption = "報告名稱";
-            this.gridColumn11.FieldName = "ActualName";
-            this.gridColumn11.Name = "gridColumn11";
-            this.gridColumn11.Visible = true;
-            this.gridColumn11.VisibleIndex = 0;
-            // 
             // uc302_NewPersonnelMain
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
@@ -576,8 +566,8 @@
             this.Load += new System.EventHandler(this.uc302_NewPersonnelMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gvReport)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvAttachment)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvAttachment)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
@@ -625,8 +615,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
-        private DevExpress.XtraGrid.Views.Grid.GridView gvAttachment;
         private DevExpress.XtraGrid.Columns.GridColumn gColIdReport;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvAttachment;
     }
 }
