@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc302_NewPersonnelMain));
             this.gvReport = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -37,7 +38,9 @@
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColIdReport = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcData = new DevExpress.XtraGrid.GridControl();
+            this.gvAttachment = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gColId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -66,8 +69,10 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gvReport)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvAttachment)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -93,12 +98,22 @@
             this.gridColumn8,
             this.gridColumn9,
             this.gridColumn12,
-            this.gridColumn13});
+            this.gridColumn13,
+            this.gColIdReport});
             this.gvReport.GridControl = this.gcData;
             this.gvReport.Name = "gvReport";
+            this.gvReport.OptionsDetail.ShowDetailTabs = false;
             this.gvReport.OptionsView.ColumnAutoWidth = false;
             this.gvReport.OptionsView.EnableAppearanceOddRow = true;
             this.gvReport.OptionsView.ShowGroupPanel = false;
+            this.gvReport.OptionsView.ShowIndicator = false;
+            this.gvReport.MasterRowEmpty += new DevExpress.XtraGrid.Views.Grid.MasterRowEmptyEventHandler(this.gvReport_MasterRowEmpty);
+            this.gvReport.MasterRowExpanded += new DevExpress.XtraGrid.Views.Grid.CustomMasterRowEventHandler(this.gridView_MasterRowExpanded);
+            this.gvReport.MasterRowGetChildList += new DevExpress.XtraGrid.Views.Grid.MasterRowGetChildListEventHandler(this.gvReport_MasterRowGetChildList);
+            this.gvReport.MasterRowGetRelationName += new DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationNameEventHandler(this.gvReport_MasterRowGetRelationName);
+            this.gvReport.MasterRowGetRelationCount += new DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationCountEventHandler(this.gvReport_MasterRowGetRelationCount);
+            this.gvReport.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gvReport_PopupMenuShowing);
+            this.gvReport.DoubleClick += new System.EventHandler(this.gridView_ExpandMasterRow);
             // 
             // gridColumn7
             // 
@@ -146,6 +161,14 @@
             this.gridColumn13.Visible = true;
             this.gridColumn13.VisibleIndex = 4;
             // 
+            // gColIdReport
+            // 
+            this.gColIdReport.Caption = "Id";
+            this.gColIdReport.FieldName = "Id";
+            this.gColIdReport.Name = "gColIdReport";
+            this.gColIdReport.Visible = true;
+            this.gColIdReport.VisibleIndex = 5;
+            // 
             // gcData
             // 
             this.gcData.EmbeddedNavigator.Buttons.Append.Visible = false;
@@ -155,8 +178,11 @@
             this.gcData.EmbeddedNavigator.Buttons.Remove.Visible = false;
             gridLevelNode1.LevelTemplate = this.gvReport;
             gridLevelNode1.RelationName = "報告進度";
+            gridLevelNode2.LevelTemplate = this.gvAttachment;
+            gridLevelNode2.RelationName = "附件";
             this.gcData.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode1});
+            gridLevelNode1,
+            gridLevelNode2});
             this.gcData.Location = new System.Drawing.Point(12, 12);
             this.gcData.MainView = this.gvData;
             this.gcData.Name = "gcData";
@@ -164,8 +190,28 @@
             this.gcData.TabIndex = 5;
             this.gcData.UseEmbeddedNavigator = true;
             this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvAttachment,
             this.gvData,
             this.gvReport});
+            // 
+            // gvAttachment
+            // 
+            this.gvAttachment.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvAttachment.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Maroon;
+            this.gvAttachment.Appearance.HeaderPanel.Options.UseFont = true;
+            this.gvAttachment.Appearance.HeaderPanel.Options.UseForeColor = true;
+            this.gvAttachment.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            this.gvAttachment.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gvAttachment.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvAttachment.Appearance.Row.ForeColor = System.Drawing.Color.Black;
+            this.gvAttachment.Appearance.Row.Options.UseFont = true;
+            this.gvAttachment.Appearance.Row.Options.UseForeColor = true;
+            this.gvAttachment.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn11});
+            this.gvAttachment.GridControl = this.gcData;
+            this.gvAttachment.Name = "gvAttachment";
+            this.gvAttachment.OptionsView.ShowGroupPanel = false;
+            this.gvAttachment.OptionsView.ShowIndicator = false;
             // 
             // gvData
             // 
@@ -194,17 +240,19 @@
             this.gridColumn10});
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
+            this.gvData.OptionsDetail.ShowDetailTabs = false;
             this.gvData.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
             this.gvData.OptionsView.ColumnAutoWidth = false;
             this.gvData.OptionsView.EnableAppearanceOddRow = true;
             this.gvData.OptionsView.ShowAutoFilterRow = true;
             this.gvData.OptionsView.ShowGroupPanel = false;
             this.gvData.MasterRowEmpty += new DevExpress.XtraGrid.Views.Grid.MasterRowEmptyEventHandler(this.gvData_MasterRowEmpty);
-            this.gvData.MasterRowExpanded += new DevExpress.XtraGrid.Views.Grid.CustomMasterRowEventHandler(this.gvData_MasterRowExpanded);
+            this.gvData.MasterRowExpanded += new DevExpress.XtraGrid.Views.Grid.CustomMasterRowEventHandler(this.gridView_MasterRowExpanded);
             this.gvData.MasterRowGetChildList += new DevExpress.XtraGrid.Views.Grid.MasterRowGetChildListEventHandler(this.gvData_MasterRowGetChildList);
             this.gvData.MasterRowGetRelationName += new DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationNameEventHandler(this.gvData_MasterRowGetRelationName);
             this.gvData.MasterRowGetRelationCount += new DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationCountEventHandler(this.gvData_MasterRowGetRelationCount);
-            this.gvData.DoubleClick += new System.EventHandler(this.gvData_DoubleClick);
+            this.gvData.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gvData_PopupMenuShowing);
+            this.gvData.DoubleClick += new System.EventHandler(this.gridView_ExpandMasterRow);
             // 
             // gColId
             // 
@@ -214,7 +262,7 @@
             this.gColId.FieldName = "Id";
             this.gColId.Name = "gColId";
             this.gColId.Visible = true;
-            this.gColId.VisibleIndex = 0;
+            this.gColId.VisibleIndex = 7;
             // 
             // gridColumn3
             // 
@@ -224,7 +272,7 @@
             this.gridColumn3.FieldName = "IdDept";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 1;
+            this.gridColumn3.VisibleIndex = 0;
             // 
             // gridColumn1
             // 
@@ -234,7 +282,7 @@
             this.gridColumn1.FieldName = "IdUser";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 2;
+            this.gridColumn1.VisibleIndex = 1;
             // 
             // gridColumn2
             // 
@@ -242,7 +290,7 @@
             this.gridColumn2.FieldName = "UserName";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 3;
+            this.gridColumn2.VisibleIndex = 2;
             // 
             // gridColumn4
             // 
@@ -250,7 +298,7 @@
             this.gridColumn4.FieldName = "JobName";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 4;
+            this.gridColumn4.VisibleIndex = 3;
             // 
             // gridColumn5
             // 
@@ -260,7 +308,7 @@
             this.gridColumn5.FieldName = "EnterDate";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 5;
+            this.gridColumn5.VisibleIndex = 4;
             // 
             // gridColumn6
             // 
@@ -270,7 +318,7 @@
             this.gridColumn6.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "ExpDate", "數量={0}")});
             this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 6;
+            this.gridColumn6.VisibleIndex = 5;
             // 
             // gridColumn10
             // 
@@ -280,7 +328,7 @@
             this.gridColumn10.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "Describe", "共計={0}")});
             this.gridColumn10.Visible = true;
-            this.gridColumn10.VisibleIndex = 7;
+            this.gridColumn10.VisibleIndex = 6;
             // 
             // layoutControl1
             // 
@@ -470,6 +518,7 @@
             this.btnExportExcel.Id = 2;
             this.btnExportExcel.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnExportExcel.Name = "btnExportExcel";
+            this.btnExportExcel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExportExcel_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -503,6 +552,14 @@
             this.barDockControlRight.Manager = this.barManagerTP;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 548);
             // 
+            // gridColumn11
+            // 
+            this.gridColumn11.Caption = "報告名稱";
+            this.gridColumn11.FieldName = "ActualName";
+            this.gridColumn11.Name = "gridColumn11";
+            this.gridColumn11.Visible = true;
+            this.gridColumn11.VisibleIndex = 0;
+            // 
             // uc302_NewPersonnelMain
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
@@ -519,6 +576,7 @@
             this.Load += new System.EventHandler(this.uc302_NewPersonnelMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gvReport)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvAttachment)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
@@ -567,5 +625,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvAttachment;
+        private DevExpress.XtraGrid.Columns.GridColumn gColIdReport;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
     }
 }

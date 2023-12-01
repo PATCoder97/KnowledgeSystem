@@ -62,6 +62,7 @@
     <Compile Include="dm\dm_StepProgressBUS.cs" />
     <Compile Include="dm\dm_UserBUS.cs" />
     <Compile Include="dm\dm_UserRoleBUS.cs" />
+    <Compile Include="dm\dm_AttachmentBUS.cs" />
     <Compile Include="dt207\dt207_AttachmentBUS.cs" />
     <Compile Include="dt207\dt207_Attachment_BAKBUS.cs" />
     <Compile Include="dt207\dt207_BaseBUS.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="dt301\dt301_CourseBUS.cs" />
     <Compile Include="dt302\dt302_NewPersonBaseBUS.cs" />
     <Compile Include="dt302\dt302_ReportInfoBUS.cs" />
+    <Compile Include="dt302_ReportAttachBUS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="sys\sys_StaticValueBUS.cs" />
     <Compile Include="sys\sys_NotesMailBUS.cs" />

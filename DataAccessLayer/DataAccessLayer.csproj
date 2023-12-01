@@ -54,6 +54,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="dm_Attachment.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
     <Compile Include="dm_Departments.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
@@ -132,6 +135,9 @@
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
     <Compile Include="dt302_NewPersonBase.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dt302_ReportAttach.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
     <Compile Include="dt302_ReportInfo.cs">

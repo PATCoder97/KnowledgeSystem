@@ -5,6 +5,15 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="DBDocumentManagementSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="dm_Attachment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Thread" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="EncryptionName" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ActualName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
         <EntityType Name="dm_Departments">
           <Key>
             <PropertyRef Name="Id" />
@@ -304,6 +313,14 @@
           <Property Name="TrainingPlan" Type="nvarchar" MaxLength="128" />
           <Property Name="Describe" Type="nvarchar" MaxLength="128" />
         </EntityType>
+        <EntityType Name="dt302_ReportAttach">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdReport" Type="int" Nullable="false" />
+          <Property Name="IdAttach" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="dt302_ReportInfo">
           <Key>
             <PropertyRef Name="Id" />
@@ -349,6 +366,7 @@
           <Property Name="ValueT" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
         <EntityContainer Name="DBDocumentManagementSystemModelStoreContainer">
+          <EntitySet Name="dm_Attachment" EntityType="Self.dm_Attachment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dm_Departments" EntityType="Self.dm_Departments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dm_Function" EntityType="Self.dm_Function" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dm_FunctionRole" EntityType="Self.dm_FunctionRole" Schema="dbo" store:Type="Tables" />
@@ -377,6 +395,7 @@
           <EntitySet Name="dt301_CertReqSetting" EntityType="Self.dt301_CertReqSetting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt301_Course" EntityType="Self.dt301_Course" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt302_NewPersonBase" EntityType="Self.dt302_NewPersonBase" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt302_ReportAttach" EntityType="Self.dt302_ReportAttach" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt302_ReportInfo" EntityType="Self.dt302_ReportInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sys_Log" EntityType="Self.sys_Log" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sys_NotesMail" EntityType="Self.sys_NotesMail" Schema="dbo" store:Type="Tables" />
@@ -419,6 +438,8 @@
           <EntitySet Name="sys_NotesMail" EntityType="DBDocumentManagementSystemModel.sys_NotesMail" />
           <EntitySet Name="dt302_ReportInfo" EntityType="DBDocumentManagementSystemModel.dt302_ReportInfo" />
           <EntitySet Name="dt302_NewPersonBase" EntityType="DBDocumentManagementSystemModel.dt302_NewPersonBase" />
+          <EntitySet Name="dm_Attachment" EntityType="DBDocumentManagementSystemModel.dm_Attachment" />
+          <EntitySet Name="dt302_ReportAttach" EntityType="DBDocumentManagementSystemModel.dt302_ReportAttach" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -762,6 +783,23 @@
           <Property Name="Supervisor" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="TrainingPlan" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Describe" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dm_Attachment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Thread" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="EncryptionName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="ActualName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dt302_ReportAttach">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdReport" Type="Int32" Nullable="false" />
+          <Property Name="IdAttach" Type="Int32" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1140,6 +1178,25 @@
                 <ScalarProperty Name="TrainingPlan" ColumnName="TrainingPlan" />
                 <ScalarProperty Name="Supervisor" ColumnName="Supervisor" />
                 <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dm_Attachment">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_Attachment">
+              <MappingFragment StoreEntitySet="dm_Attachment">
+                <ScalarProperty Name="ActualName" ColumnName="ActualName" />
+                <ScalarProperty Name="EncryptionName" ColumnName="EncryptionName" />
+                <ScalarProperty Name="Thread" ColumnName="Thread" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt302_ReportAttach">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt302_ReportAttach">
+              <MappingFragment StoreEntitySet="dt302_ReportAttach">
+                <ScalarProperty Name="IdAttach" ColumnName="IdAttach" />
+                <ScalarProperty Name="IdReport" ColumnName="IdReport" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
