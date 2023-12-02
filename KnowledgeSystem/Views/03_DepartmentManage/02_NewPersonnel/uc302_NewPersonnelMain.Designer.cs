@@ -46,10 +46,12 @@
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColEnterDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gvAttachment = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gColActualName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColEncryptName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -69,8 +71,6 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-            this.gColActualName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gColEncryptName = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gvReport)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
@@ -220,7 +220,7 @@
             this.gridColumn1,
             this.gridColumn2,
             this.gridColumn4,
-            this.gridColumn5,
+            this.gColEnterDate,
             this.gridColumn6,
             this.gridColumn10});
             this.gvData.GridControl = this.gcData;
@@ -285,15 +285,15 @@
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 3;
             // 
-            // gridColumn5
+            // gColEnterDate
             // 
-            this.gridColumn5.AppearanceCell.Options.UseTextOptions = true;
-            this.gridColumn5.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn5.Caption = "報到日期";
-            this.gridColumn5.FieldName = "EnterDate";
-            this.gridColumn5.Name = "gridColumn5";
-            this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 4;
+            this.gColEnterDate.AppearanceCell.Options.UseTextOptions = true;
+            this.gColEnterDate.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gColEnterDate.Caption = "報到日期";
+            this.gColEnterDate.FieldName = "EnterDate";
+            this.gColEnterDate.Name = "gColEnterDate";
+            this.gColEnterDate.Visible = true;
+            this.gColEnterDate.VisibleIndex = 4;
             // 
             // gridColumn6
             // 
@@ -331,6 +331,22 @@
             this.gvAttachment.OptionsView.ShowGroupPanel = false;
             this.gvAttachment.OptionsView.ShowIndicator = false;
             this.gvAttachment.DoubleClick += new System.EventHandler(this.gvAttachment_DoubleClick);
+            // 
+            // gColActualName
+            // 
+            this.gColActualName.Caption = "cColActualName";
+            this.gColActualName.FieldName = "ActualName";
+            this.gColActualName.Name = "gColActualName";
+            this.gColActualName.Visible = true;
+            this.gColActualName.VisibleIndex = 0;
+            // 
+            // gColEncryptName
+            // 
+            this.gColEncryptName.Caption = "gColEncryptName";
+            this.gColEncryptName.FieldName = "EncryptionName";
+            this.gColEncryptName.Name = "gColEncryptName";
+            this.gColEncryptName.Visible = true;
+            this.gColEncryptName.VisibleIndex = 1;
             // 
             // layoutControl1
             // 
@@ -554,22 +570,6 @@
             this.barDockControlRight.Manager = this.barManagerTP;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 548);
             // 
-            // gColActualName
-            // 
-            this.gColActualName.Caption = "cColActualName";
-            this.gColActualName.FieldName = "ActualName";
-            this.gColActualName.Name = "gColActualName";
-            this.gColActualName.Visible = true;
-            this.gColActualName.VisibleIndex = 0;
-            // 
-            // gColEncryptName
-            // 
-            this.gColEncryptName.Caption = "gColEncryptName";
-            this.gColEncryptName.FieldName = "EncryptionName";
-            this.gColEncryptName.Name = "gColEncryptName";
-            this.gColEncryptName.Visible = true;
-            this.gColEncryptName.VisibleIndex = 1;
-            // 
             // uc302_NewPersonnelMain
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
@@ -625,7 +625,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
+        private DevExpress.XtraGrid.Columns.GridColumn gColEnterDate;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;

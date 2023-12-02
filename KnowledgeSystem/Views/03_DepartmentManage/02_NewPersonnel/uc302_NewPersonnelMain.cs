@@ -11,6 +11,7 @@ using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate;
 using KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -69,6 +70,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
         {
             DXMenuItem itemViewInfo = new DXMenuItem("顯示信息", ItemViewInfo_Click, TPSvgimages.Search, DXMenuItemPriority.Normal);
             DXMenuItem itemViewFile = new DXMenuItem("讀取檔案", ItemViewFile_Click, TPSvgimages.Progress, DXMenuItemPriority.Normal);
+            DXMenuItem itemAddPlanFile = new DXMenuItem("上傳計劃表", ItemAddPlanFile_Click, TPSvgimages.UpLevel, DXMenuItemPriority.Normal);
             DXMenuItem itemAddReport = new DXMenuItem("上傳報告", ItemAddReport_Click, TPSvgimages.UploadFile, DXMenuItemPriority.Normal);
 
             itemViewInfo.ImageOptions.SvgImageSize = new Size(24, 24);
@@ -77,12 +79,115 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
             itemViewFile.ImageOptions.SvgImageSize = new Size(24, 24);
             itemViewFile.AppearanceHovered.ForeColor = Color.Blue;
 
+            itemAddPlanFile.ImageOptions.SvgImageSize = new Size(24, 24);
+            itemAddPlanFile.AppearanceHovered.ForeColor = Color.Blue;
+
             itemAddReport.ImageOptions.SvgImageSize = new Size(24, 24);
             itemAddReport.AppearanceHovered.ForeColor = Color.Blue;
 
-            menuItemsBase = new DXMenuItem[] { itemViewInfo, itemViewFile };
-
+            menuItemsBase = new DXMenuItem[] { itemViewInfo, itemViewFile, itemAddPlanFile };
             menuItemsReport = new DXMenuItem[] { itemAddReport };
+        }
+
+        private void ItemAddPlanFile_Click(object sender, EventArgs e)
+        {
+            string msg = "<font='Microsoft JhengHei UI' size=14>請上培養訓練計劃包含兩個檔案：\r\n  <color=red>Word檔案</color>：傳大學新進人員培養訓練計劃表\r\n  <color=red>PDF檔案</color>：OA部門內便簽</font>";
+            MsgTP.MsgShowInfomation(msg);
+
+            int idBase = Convert.ToInt16(gvData.GetRowCellValue(gvData.FocusedRowHandle, gColId));
+            DateTime enterDate = Convert.ToDateTime(gvData.GetRowCellValue(gvData.FocusedRowHandle, gColEnterDate));
+            var base302 = dt302_NewPersonBaseBUS.Instance.GetItemById(idBase);
+
+            using (var dlg = new OpenFileDialog())
+            {
+                dlg.Multiselect = true;
+                dlg.Filter = "培養訓練計劃(*.docx;*.pdf)|*.docx;*.pdf";
+
+                if (dlg.ShowDialog() != DialogResult.OK) return;
+                var fileNames = dlg.FileNames;
+
+                // Kiểm tra xem đã chọn đúng 2 tệp tin hay không
+                if (fileNames.Length != 2)
+                {
+                    msg = "<font='Microsoft JhengHei UI' size=14>請選擇正確的兩個檔案\r\nVui lòng chọn đúng 2 tệp tin</font>";
+                    MsgTP.MsgShowInfomation(msg);
+                    return;
+                }
+
+                // Kiểm tra xem có đúng một tệp DOCX và một tệp PDF hay không
+                bool hasDocx = fileNames.Any(file => file.EndsWith(".docx", StringComparison.OrdinalIgnoreCase));
+                bool hasPdf = fileNames.Any(file => file.EndsWith(".pdf", StringComparison.OrdinalIgnoreCase));
+
+                if (!hasDocx || !hasPdf)
+                {
+                    MsgTP.MsgShowInfomation(msg);
+                    return;
+                }
+
+                var fileDocx = fileNames.First(file => file.EndsWith(".docx", StringComparison.OrdinalIgnoreCase));
+                var filePdf = fileNames.First(file => file.EndsWith(".pdf", StringComparison.OrdinalIgnoreCase));
+                DataTable data = WordHelper.Instance.ReadTableFromMSWord(fileDocx);
+
+                var userName = data.Columns[2].ColumnName;
+
+                var rowHeader = data.Rows[1];
+
+                var indexColumns = rowHeader.ItemArray.Select((value, index) => new { Value = value, Index = index })
+                                           .Where(x => x.Value.Equals("Nội dung công việc đào tạo訓練工作內容及目標"))
+                                           .Select(x => x.Index).ToList();
+
+                if (indexColumns.Count != 2)
+                {
+                    return;
+                }
+
+                Dictionary<DateTime, string> contents = new Dictionary<DateTime, string>();
+                DateTime expectedDate = enterDate.AddDays(-1);
+                for (int i = 0; i < 3; i++)
+                {
+                    expectedDate = expectedDate.AddMonths(1);
+                    contents.Add(expectedDate, data.Rows[i + 2][indexColumns[0]].ToString());
+                }
+
+                for (int i = 0; i < 4; i++)
+                {
+                    expectedDate = expectedDate.AddMonths(3);
+                    contents.Add(expectedDate, data.Rows[i + 2][indexColumns[1]].ToString());
+                }
+
+                List<string> mergedList = contents.Select(entry => $"    {entry.Key:yyyy/MM/dd} - {entry.Value}").ToList();
+                var msgContents = string.Join("\r\n", mergedList);
+                string msgValidCert = $"<font='Microsoft JhengHei UI' size=14>新進人員<color=blue>「{userName}」</color>有培養訓練計劃如下：</br>{msgContents}</font>";
+                var resultDlg = MsgTP.MsgHtmlOKCancelQuestion(msgValidCert);
+
+                // return;
+
+                foreach (var item in contents)
+                {
+                    dt302_ReportInfo reportInfo = new dt302_ReportInfo()
+                    {
+                        IdBase = idBase,
+                        Content = item.Value,
+                        ExpectedDate = item.Key,
+                    };
+
+                    dt302_ReportInfoBUS.Instance.Add(reportInfo);
+                }
+
+                string nameFilePdf = Path.GetFileName(filePdf);
+                dm_Attachment att = new dm_Attachment()
+                {
+                    Thread = "302",
+                    EncryptionName = EncryptionHelper.EncryptionFileName(nameFilePdf),
+                    ActualName = nameFilePdf
+                };
+                var idAtt = dm_AttachmentBUS.Instance.Add(att);
+
+                base302.TrainingPlan = idAtt.ToString();
+                dt302_NewPersonBaseBUS.Instance.AddOrUpdate(base302);
+            }
+
+            LoadData();
         }
 
         private void ItemAddReport_Click(object sender, EventArgs e)
@@ -132,7 +237,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
 
         private void ItemViewFile_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(EncryptionHelper.EncryptionFileName("asdasd.pdf"));
+            int idBase = Convert.ToInt16(gvData.GetRowCellValue(gvData.FocusedRowHandle, gColId));
+            var base302 = dt302_NewPersonBaseBUS.Instance.GetItemById(idBase);
+
+            var aaa = dm_AttachmentBUS.Instance.GetItemById(Convert.ToInt16(base302.TrainingPlan));
+
+            MessageBox.Show(aaa.ActualName);
         }
 
         private void ItemViewInfo_Click(object sender, EventArgs e)

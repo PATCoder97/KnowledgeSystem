@@ -72,5 +72,21 @@ namespace BusinessLayer
                 throw;
             }
         }
+
+        public dm_Attachment GetItemById(int id)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dm_Attachment.FirstOrDefault(r => r.Id == id);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
     }
 }
