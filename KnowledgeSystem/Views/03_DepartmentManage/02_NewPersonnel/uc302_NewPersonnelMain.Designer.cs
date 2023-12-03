@@ -36,7 +36,7 @@
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColCloseRp = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColIdReport = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcData = new DevExpress.XtraGrid.GridControl();
@@ -98,7 +98,7 @@
             this.gridColumn7,
             this.gridColumn8,
             this.gridColumn9,
-            this.gridColumn12,
+            this.gColCloseRp,
             this.gridColumn13,
             this.gColIdReport});
             this.gvReport.GridControl = this.gcData;
@@ -145,15 +145,15 @@
             this.gridColumn9.Visible = true;
             this.gridColumn9.VisibleIndex = 2;
             // 
-            // gridColumn12
+            // gColCloseRp
             // 
-            this.gridColumn12.AppearanceCell.Options.UseTextOptions = true;
-            this.gridColumn12.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn12.Caption = "上傳報告日期";
-            this.gridColumn12.FieldName = "UploadDate";
-            this.gridColumn12.Name = "gridColumn12";
-            this.gridColumn12.Visible = true;
-            this.gridColumn12.VisibleIndex = 3;
+            this.gColCloseRp.AppearanceCell.Options.UseTextOptions = true;
+            this.gColCloseRp.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gColCloseRp.Caption = "上傳報告日期";
+            this.gColCloseRp.FieldName = "UploadDate";
+            this.gColCloseRp.Name = "gColCloseRp";
+            this.gColCloseRp.Visible = true;
+            this.gColCloseRp.VisibleIndex = 3;
             // 
             // gridColumn13
             // 
@@ -300,8 +300,6 @@
             this.gridColumn6.Caption = "上一級主管";
             this.gridColumn6.FieldName = "Supervisor";
             this.gridColumn6.Name = "gridColumn6";
-            this.gridColumn6.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "ExpDate", "數量={0}")});
             this.gridColumn6.Visible = true;
             this.gridColumn6.VisibleIndex = 5;
             // 
@@ -310,8 +308,6 @@
             this.gridColumn10.Caption = "備註";
             this.gridColumn10.FieldName = "Describe";
             this.gridColumn10.Name = "gridColumn10";
-            this.gridColumn10.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "Describe", "共計={0}")});
             this.gridColumn10.Visible = true;
             this.gridColumn10.VisibleIndex = 6;
             // 
@@ -330,6 +326,7 @@
             this.gvAttachment.OptionsView.ShowColumnHeaders = false;
             this.gvAttachment.OptionsView.ShowGroupPanel = false;
             this.gvAttachment.OptionsView.ShowIndicator = false;
+            this.gvAttachment.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gvAttachment_PopupMenuShowing);
             this.gvAttachment.DoubleClick += new System.EventHandler(this.gvAttachment_DoubleClick);
             // 
             // gColActualName
@@ -633,7 +630,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
+        private DevExpress.XtraGrid.Columns.GridColumn gColCloseRp;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
         private DevExpress.XtraGrid.Columns.GridColumn gColIdReport;
         private DevExpress.XtraGrid.Views.Grid.GridView gvAttachment;

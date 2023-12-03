@@ -61,6 +61,22 @@ namespace BusinessLayer
             }
         }
 
+        public dt302_ReportInfo GetItemById(int id)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt302_ReportInfo.FirstOrDefault(r => r.Id == id);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public bool Add(dt302_ReportInfo reportInfo)
         {
             try

@@ -50,6 +50,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
 
         DXMenuItem[] menuItemsBase;
         DXMenuItem[] menuItemsReport;
+        DXMenuItem itemCloseReport;
+        DXMenuItem itemAddReport;
+        DXMenuItem itemDelAttach;
 
         private void InitializeIcon()
         {
@@ -71,7 +74,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
             DXMenuItem itemViewInfo = new DXMenuItem("顯示信息", ItemViewInfo_Click, TPSvgimages.Search, DXMenuItemPriority.Normal);
             DXMenuItem itemViewFile = new DXMenuItem("讀取檔案", ItemViewFile_Click, TPSvgimages.Progress, DXMenuItemPriority.Normal);
             DXMenuItem itemAddPlanFile = new DXMenuItem("上傳計劃表", ItemAddPlanFile_Click, TPSvgimages.UpLevel, DXMenuItemPriority.Normal);
-            DXMenuItem itemAddReport = new DXMenuItem("上傳報告", ItemAddReport_Click, TPSvgimages.UploadFile, DXMenuItemPriority.Normal);
+            itemAddReport = new DXMenuItem("上傳報告", ItemAddReport_Click, TPSvgimages.UploadFile, DXMenuItemPriority.Normal);
+            itemCloseReport = new DXMenuItem("結案", ItemCloseReport_Click, TPSvgimages.Confirm, DXMenuItemPriority.Normal);
+            itemDelAttach = new DXMenuItem("刪除附件", ItemCloseReport_Click, TPSvgimages.Remove, DXMenuItemPriority.Normal);
 
             itemViewInfo.ImageOptions.SvgImageSize = new Size(24, 24);
             itemViewInfo.AppearanceHovered.ForeColor = Color.Blue;
@@ -82,11 +87,36 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
             itemAddPlanFile.ImageOptions.SvgImageSize = new Size(24, 24);
             itemAddPlanFile.AppearanceHovered.ForeColor = Color.Blue;
 
+            itemCloseReport.ImageOptions.SvgImageSize = new Size(24, 24);
+            itemCloseReport.AppearanceHovered.ForeColor = Color.Blue;
+
             itemAddReport.ImageOptions.SvgImageSize = new Size(24, 24);
             itemAddReport.AppearanceHovered.ForeColor = Color.Blue;
 
+            itemDelAttach.ImageOptions.SvgImageSize = new Size(24, 24);
+            itemDelAttach.AppearanceHovered.ForeColor = Color.Blue;
+
             menuItemsBase = new DXMenuItem[] { itemViewInfo, itemViewFile, itemAddPlanFile };
-            menuItemsReport = new DXMenuItem[] { itemAddReport };
+            // menuItemsReport = new DXMenuItem[] { itemAddReport };
+        }
+
+        private void ItemCloseReport_Click(object sender, EventArgs e)
+        {
+            GridView detailGridView = gvData.GetDetailView(gvData.FocusedRowHandle, 0) as GridView;
+            if (detailGridView != null)
+            {
+                int detailFocusedRowHandle = detailGridView.FocusedRowHandle;
+                if (detailFocusedRowHandle < 0) return;
+
+                var idReport = Convert.ToInt16(detailGridView.GetRowCellValue(detailFocusedRowHandle, gColIdReport));
+                dt302_ReportInfo report = dt302_ReportInfoBUS.Instance.GetItemById(idReport);
+
+                report.UploadDate = DateTime.Now;
+
+                dt302_ReportInfoBUS.Instance.AddOrUpdate(report);
+
+                LoadData();
+            }
         }
 
         private void ItemAddPlanFile_Click(object sender, EventArgs e)
@@ -242,7 +272,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
 
             var aaa = dm_AttachmentBUS.Instance.GetItemById(Convert.ToInt16(base302.TrainingPlan));
 
-            MessageBox.Show(aaa.ActualName);
+            if (aaa == null)
+            {
+                return;
+
+            }
+            MessageBox.Show(aaa.ActualName?.ToString());
         }
 
         private void ItemViewInfo_Click(object sender, EventArgs e)
@@ -318,7 +353,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
             Font fontUI14 = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             DevExpress.Utils.AppearanceObject.DefaultMenuFont = fontUI14;
 
-            gvData.OptionsDetail.DetailMode = DetailMode.Embedded;
+           // gvData.OptionsDetail.DetailMode = DetailMode.Embedded;
         }
 
         private void btnReload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -421,7 +456,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
 
         private void gvData_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
         {
-            if (e.HitInfo.InRow)
+            if (e.HitInfo.InRowCell)
             {
                 GridView view = sender as GridView;
                 view.FocusedRowHandle = e.HitInfo.RowHandle;
@@ -433,13 +468,43 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
 
         private void gvReport_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
         {
-            if (e.HitInfo.InRow)
+            if (e.HitInfo.InRowCell)
             {
                 GridView view = sender as GridView;
                 view.FocusedRowHandle = e.HitInfo.RowHandle;
 
-                foreach (DXMenuItem item in menuItemsReport)
-                    e.Menu.Items.Add(item);
+                int idReport = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColIdReport));
+                var closeRpDate = view.GetRowCellValue(view.FocusedRowHandle, gColCloseRp);
+
+                var atts = dt302_ReportAttachBUS.Instance.GetListByReport(idReport);
+
+                if (closeRpDate == null)
+                {
+                    e.Menu.Items.Add(itemAddReport);
+                    if (atts.Count != 0) e.Menu.Items.Add(itemCloseReport);
+                }
+            }
+        }
+
+        private void gvAttachment_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
+        {
+            if (e.HitInfo.InRowCell)
+            {
+                GridView view = sender as GridView;
+                view.FocusedRowHandle = e.HitInfo.RowHandle;
+
+                GridView masterView = view.ParentView as GridView;
+
+                int idReport = Convert.ToInt16(masterView.GetRowCellValue(masterView.FocusedRowHandle, gColIdReport));
+                var closeRpDate = masterView.GetRowCellValue(masterView.FocusedRowHandle, gColCloseRp);
+
+                //var atts = dt302_ReportAttachBUS.Instance.GetListByReport(idReport);
+
+                if (closeRpDate == null)
+                {
+                    e.Menu.Items.Add(itemDelAttach);
+                    //    if (atts.Count != 0) e.Menu.Items.Add(itemCloseReport);
+                }
             }
         }
 
