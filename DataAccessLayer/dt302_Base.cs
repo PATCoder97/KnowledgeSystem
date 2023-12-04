@@ -12,12 +12,14 @@ namespace DataAccessLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class dt302_NewPersonBase
+    public partial class dt302_Base
     {
         public int Id { get; set; }
         public string IdUser { get; set; }
         public string Supervisor { get; set; }
-        public string TrainingPlan { get; set; }
+        public string School { get; set; }
+        public string Major { get; set; }
+        public Nullable<int> TrainingPlan { get; set; }
         public string Describe { get; set; }
     }
 }

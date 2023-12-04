@@ -71,6 +71,8 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gvReport)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
@@ -222,7 +224,9 @@
             this.gridColumn4,
             this.gColEnterDate,
             this.gridColumn6,
-            this.gridColumn10});
+            this.gridColumn10,
+            this.gridColumn5,
+            this.gridColumn11});
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
             this.gvData.OptionsDetail.ShowDetailTabs = false;
@@ -247,7 +251,7 @@
             this.gColId.FieldName = "Id";
             this.gColId.Name = "gColId";
             this.gColId.Visible = true;
-            this.gColId.VisibleIndex = 7;
+            this.gColId.VisibleIndex = 9;
             // 
             // gridColumn3
             // 
@@ -301,7 +305,7 @@
             this.gridColumn6.FieldName = "Supervisor";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 5;
+            this.gridColumn6.VisibleIndex = 7;
             // 
             // gridColumn10
             // 
@@ -309,7 +313,7 @@
             this.gridColumn10.FieldName = "Describe";
             this.gridColumn10.Name = "gridColumn10";
             this.gridColumn10.Visible = true;
-            this.gridColumn10.VisibleIndex = 6;
+            this.gridColumn10.VisibleIndex = 8;
             // 
             // gvAttachment
             // 
@@ -567,6 +571,22 @@
             this.barDockControlRight.Manager = this.barManagerTP;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 548);
             // 
+            // gridColumn5
+            // 
+            this.gridColumn5.Caption = "學校";
+            this.gridColumn5.FieldName = "School";
+            this.gridColumn5.Name = "gridColumn5";
+            this.gridColumn5.Visible = true;
+            this.gridColumn5.VisibleIndex = 5;
+            // 
+            // gridColumn11
+            // 
+            this.gridColumn11.Caption = "科(系) ";
+            this.gridColumn11.FieldName = "Major";
+            this.gridColumn11.Name = "gridColumn11";
+            this.gridColumn11.Visible = true;
+            this.gridColumn11.VisibleIndex = 6;
+            // 
             // uc302_NewPersonnelMain
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
@@ -636,5 +656,7 @@
         private DevExpress.XtraGrid.Views.Grid.GridView gvAttachment;
         private DevExpress.XtraGrid.Columns.GridColumn gColActualName;
         private DevExpress.XtraGrid.Columns.GridColumn gColEncryptName;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
     }
 }

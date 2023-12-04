@@ -10,27 +10,27 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer
 {
-    public class dt302_NewPersonBaseBUS
+    public class dt302_BaseBUS
     {
         TPLogger logger;
 
-        private static dt302_NewPersonBaseBUS instance;
+        private static dt302_BaseBUS instance;
 
-        public static dt302_NewPersonBaseBUS Instance
+        public static dt302_BaseBUS Instance
         {
-            get { if (instance == null) instance = new dt302_NewPersonBaseBUS(); return instance; }
+            get { if (instance == null) instance = new dt302_BaseBUS(); return instance; }
             private set { instance = value; }
         }
 
-        private dt302_NewPersonBaseBUS() { logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName); }
+        private dt302_BaseBUS() { logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName); }
 
-        public List<dt302_NewPersonBase> GetList()
+        public List<dt302_Base> GetList()
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dt302_NewPersonBase.ToList();
+                    return _context.dt302_Base.ToList();
                 }
             }
             catch (Exception ex)
@@ -45,13 +45,13 @@ namespace BusinessLayer
         /// </summary>
         /// <param name="idBase"></param>
         /// <returns></returns>
-        public dt302_NewPersonBase GetItemById(int idBase)
+        public dt302_Base GetItemById(int idBase)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dt302_NewPersonBase.FirstOrDefault(r => r.Id == idBase);
+                    return _context.dt302_Base.FirstOrDefault(r => r.Id == idBase);
                 }
             }
             catch (Exception ex)
@@ -61,13 +61,13 @@ namespace BusinessLayer
             }
         }
 
-        public bool Add(dt302_NewPersonBase _base)
+        public bool Add(dt302_Base _base)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    _context.dt302_NewPersonBase.Add(_base);
+                    _context.dt302_Base.Add(_base);
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;
                 }
@@ -79,13 +79,13 @@ namespace BusinessLayer
             }
         }
 
-        public bool AddOrUpdate(dt302_NewPersonBase _base)
+        public bool AddOrUpdate(dt302_Base _base)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    _context.dt302_NewPersonBase.AddOrUpdate(_base);
+                    _context.dt302_Base.AddOrUpdate(_base);
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;
                 }

@@ -36,9 +36,9 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt301_Base" Width="1.5" PointX="3.75" PointY="11.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.sys_NotesMail" Width="1.5" PointX="3.75" PointY="4.375" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt302_ReportInfo" Width="1.5" PointX="2.125" PointY="15.125" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt302_NewPersonBase" Width="1.5" PointX="0.5" PointY="15.125" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_Attachment" Width="1.5" PointX="18.375" PointY="0.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt302_ReportAttach" Width="1.5" PointX="3.75" PointY="15.125" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt302_Base" Width="1.5" PointX="0.5" PointY="15.125" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

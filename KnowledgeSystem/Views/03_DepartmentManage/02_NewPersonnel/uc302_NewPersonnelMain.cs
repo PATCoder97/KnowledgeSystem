@@ -126,7 +126,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
 
             int idBase = Convert.ToInt16(gvData.GetRowCellValue(gvData.FocusedRowHandle, gColId));
             DateTime enterDate = Convert.ToDateTime(gvData.GetRowCellValue(gvData.FocusedRowHandle, gColEnterDate));
-            var base302 = dt302_NewPersonBaseBUS.Instance.GetItemById(idBase);
+            var base302 = dt302_BaseBUS.Instance.GetItemById(idBase);
 
             using (var dlg = new OpenFileDialog())
             {
@@ -213,8 +213,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
                 };
                 var idAtt = dm_AttachmentBUS.Instance.Add(att);
 
-                base302.TrainingPlan = idAtt.ToString();
-                dt302_NewPersonBaseBUS.Instance.AddOrUpdate(base302);
+                base302.TrainingPlan = idAtt;
+                dt302_BaseBUS.Instance.AddOrUpdate(base302);
             }
 
             LoadData();
@@ -268,16 +268,15 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
         private void ItemViewFile_Click(object sender, EventArgs e)
         {
             int idBase = Convert.ToInt16(gvData.GetRowCellValue(gvData.FocusedRowHandle, gColId));
-            var base302 = dt302_NewPersonBaseBUS.Instance.GetItemById(idBase);
+            var base302 = dt302_BaseBUS.Instance.GetItemById(idBase);
 
-            var aaa = dm_AttachmentBUS.Instance.GetItemById(Convert.ToInt16(base302.TrainingPlan));
+            var attachment = dm_AttachmentBUS.Instance.GetItemById(base302.TrainingPlan ?? -1);
 
-            if (aaa == null)
+            if (attachment == null)
             {
                 return;
-
             }
-            MessageBox.Show(aaa.ActualName?.ToString());
+            MessageBox.Show(attachment.ActualName?.ToString());
         }
 
         private void ItemViewInfo_Click(object sender, EventArgs e)
@@ -301,7 +300,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
             {
                 helper.SaveViewInfo();
 
-                var lsBases = dt302_NewPersonBaseBUS.Instance.GetList();
+                var lsBases = dt302_BaseBUS.Instance.GetList();
                 lsUser = dm_UserBUS.Instance.GetList();
                 lsJobs = dm_JobTitleBUS.Instance.GetList();
                 reportsInfo = dt302_ReportInfoBUS.Instance.GetList();
@@ -323,6 +322,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
                                           UserName = $"{urs.DisplayName} {urs.DisplayNameVN}",
                                           JobName = $"{job.Id} {job.DisplayName}",
                                           Supervisor = $"{supvr.DisplayName} {supvr.DisplayNameVN}",
+                                          School = data.School,
+                                          Major = data.Major
                                       }).ToList();
 
                 sourceBases.DataSource = lsBasesDisplay;
@@ -353,7 +354,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
             Font fontUI14 = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             DevExpress.Utils.AppearanceObject.DefaultMenuFont = fontUI14;
 
-           // gvData.OptionsDetail.DetailMode = DetailMode.Embedded;
+            // gvData.OptionsDetail.DetailMode = DetailMode.Embedded;
         }
 
         private void btnReload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

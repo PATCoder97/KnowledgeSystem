@@ -79,7 +79,7 @@
     <Compile Include="dt301\dt301_BaseBUS.cs" />
     <Compile Include="dt301\dt301_CertReqSetBUS.cs" />
     <Compile Include="dt301\dt301_CourseBUS.cs" />
-    <Compile Include="dt302\dt302_NewPersonBaseBUS.cs" />
+    <Compile Include="dt302\dt302_BaseBUS.cs" />
     <Compile Include="dt302\dt302_ReportInfoBUS.cs" />
     <Compile Include="dt302_ReportAttachBUS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

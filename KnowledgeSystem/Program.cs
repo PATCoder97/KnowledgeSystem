@@ -30,7 +30,7 @@ namespace KnowledgeSystem
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new f00_Main());
+            // Application.Run(new f00_Main());
 
             TPConfigs.SoftNameTW = "冶金文管系統";
             TPConfigs.LoginUser = dm_UserBUS.Instance.GetItemById("VNW0014732");

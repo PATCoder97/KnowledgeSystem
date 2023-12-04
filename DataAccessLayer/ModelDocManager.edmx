@@ -303,14 +303,16 @@
           <Property Name="Duration" Type="int" />
           <Property Name="Category" Type="nvarchar" MaxLength="16" />
         </EntityType>
-        <EntityType Name="dt302_NewPersonBase">
+        <EntityType Name="dt302_Base">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdUser" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="Supervisor" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="TrainingPlan" Type="nvarchar" MaxLength="128" />
+          <Property Name="School" Type="nvarchar" MaxLength="64" />
+          <Property Name="Major" Type="nvarchar" MaxLength="64" />
+          <Property Name="TrainingPlan" Type="int" />
           <Property Name="Describe" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="dt302_ReportAttach">
@@ -394,7 +396,7 @@
           <EntitySet Name="dt301_Base" EntityType="Self.dt301_Base" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt301_CertReqSetting" EntityType="Self.dt301_CertReqSetting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt301_Course" EntityType="Self.dt301_Course" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="dt302_NewPersonBase" EntityType="Self.dt302_NewPersonBase" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt302_Base" EntityType="Self.dt302_Base" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt302_ReportAttach" EntityType="Self.dt302_ReportAttach" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt302_ReportInfo" EntityType="Self.dt302_ReportInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sys_Log" EntityType="Self.sys_Log" Schema="dbo" store:Type="Tables" />
@@ -437,9 +439,9 @@
           <EntitySet Name="dt301_Base" EntityType="DBDocumentManagementSystemModel.dt301_Base" />
           <EntitySet Name="sys_NotesMail" EntityType="DBDocumentManagementSystemModel.sys_NotesMail" />
           <EntitySet Name="dt302_ReportInfo" EntityType="DBDocumentManagementSystemModel.dt302_ReportInfo" />
-          <EntitySet Name="dt302_NewPersonBase" EntityType="DBDocumentManagementSystemModel.dt302_NewPersonBase" />
           <EntitySet Name="dm_Attachment" EntityType="DBDocumentManagementSystemModel.dm_Attachment" />
           <EntitySet Name="dt302_ReportAttach" EntityType="DBDocumentManagementSystemModel.dt302_ReportAttach" />
+          <EntitySet Name="dt302_Base" EntityType="DBDocumentManagementSystemModel.dt302_Base" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -774,16 +776,6 @@
           <Property Name="UploadDate" Type="DateTime" Precision="0" />
           <Property Name="Attachment" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="dt302_NewPersonBase">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdUser" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Supervisor" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="TrainingPlan" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Describe" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="dm_Attachment">
           <Key>
             <PropertyRef Name="Id" />
@@ -800,6 +792,18 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdReport" Type="Int32" Nullable="false" />
           <Property Name="IdAttach" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt302_Base">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdUser" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Supervisor" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="School" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Major" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="TrainingPlan" Type="Int32" />
+          <Property Name="Describe" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1171,17 +1175,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dt302_NewPersonBase">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt302_NewPersonBase">
-              <MappingFragment StoreEntitySet="dt302_NewPersonBase">
-                <ScalarProperty Name="Describe" ColumnName="Describe" />
-                <ScalarProperty Name="TrainingPlan" ColumnName="TrainingPlan" />
-                <ScalarProperty Name="Supervisor" ColumnName="Supervisor" />
-                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="dm_Attachment">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_Attachment">
               <MappingFragment StoreEntitySet="dm_Attachment">
@@ -1197,6 +1190,19 @@
               <MappingFragment StoreEntitySet="dt302_ReportAttach">
                 <ScalarProperty Name="IdAttach" ColumnName="IdAttach" />
                 <ScalarProperty Name="IdReport" ColumnName="IdReport" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt302_Base">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt302_Base">
+              <MappingFragment StoreEntitySet="dt302_Base">
+                <ScalarProperty Name="Describe" ColumnName="Describe" />
+                <ScalarProperty Name="TrainingPlan" ColumnName="TrainingPlan" />
+                <ScalarProperty Name="Major" ColumnName="Major" />
+                <ScalarProperty Name="School" ColumnName="School" />
+                <ScalarProperty Name="Supervisor" ColumnName="Supervisor" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

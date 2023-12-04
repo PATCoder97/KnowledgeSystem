@@ -134,7 +134,7 @@
     <Compile Include="dt301_Course.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
-    <Compile Include="dt302_NewPersonBase.cs">
+    <Compile Include="dt302_Base.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
     <Compile Include="dt302_ReportAttach.cs">
