@@ -1,27 +1,16 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
 using DevExpress.Utils.Menu;
-using DevExpress.XtraEditors;
-using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraPrinting.Native;
 using DevExpress.XtraSplashScreen;
-using DocumentFormat.OpenXml.Office2010.CustomUI;
 using KnowledgeSystem.Helpers;
-using KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate;
-using KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
@@ -48,10 +37,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
         List<dt302_ReportAttach> reportAttaches;
         List<dm_Attachment> attachments;
 
-        DXMenuItem[] menuItemsBase;
-        DXMenuItem[] menuItemsReport;
+        DXMenuItem itemViewInfo;
+        DXMenuItem itemViewFile;
+        DXMenuItem itemAddPlanFile;
         DXMenuItem itemCloseReport;
-        DXMenuItem itemAddReport;
+        DXMenuItem itemAddAttach;
         DXMenuItem itemDelAttach;
 
         private void InitializeIcon()
@@ -59,24 +49,16 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
             btnAdd.ImageOptions.SvgImage = TPSvgimages.Add;
             btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
             btnExportExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
-            btnFilter.ImageOptions.SvgImage = TPSvgimages.Filter;
-
-            btnValidCert.ImageOptions.SvgImage = TPSvgimages.Num1;
-            btnBackCert.ImageOptions.SvgImage = TPSvgimages.Num2;
-            btnInvalidCert.ImageOptions.SvgImage = TPSvgimages.Num3;
-            btnWaitCert.ImageOptions.SvgImage = TPSvgimages.Num4;
-            btnExpCert.ImageOptions.SvgImage = TPSvgimages.Num5;
-            btnClearFilter.ImageOptions.SvgImage = TPSvgimages.Close;
         }
 
-        void InitializeMenuItems()
+        private void InitializeMenuItems()
         {
-            DXMenuItem itemViewInfo = new DXMenuItem("顯示信息", ItemViewInfo_Click, TPSvgimages.Search, DXMenuItemPriority.Normal);
-            DXMenuItem itemViewFile = new DXMenuItem("讀取檔案", ItemViewFile_Click, TPSvgimages.Progress, DXMenuItemPriority.Normal);
-            DXMenuItem itemAddPlanFile = new DXMenuItem("上傳計劃表", ItemAddPlanFile_Click, TPSvgimages.UpLevel, DXMenuItemPriority.Normal);
-            itemAddReport = new DXMenuItem("上傳報告", ItemAddReport_Click, TPSvgimages.UploadFile, DXMenuItemPriority.Normal);
+            itemViewInfo = new DXMenuItem("顯示信息", ItemViewInfo_Click, TPSvgimages.Info, DXMenuItemPriority.Normal);
+            itemViewFile = new DXMenuItem("讀取檔案", ItemViewFile_Click, TPSvgimages.View, DXMenuItemPriority.Normal);
+            itemAddPlanFile = new DXMenuItem("上傳計劃表", ItemAddPlanFile_Click, TPSvgimages.UpLevel, DXMenuItemPriority.Normal);
+            itemAddAttach = new DXMenuItem("上傳報告", ItemAddAttach_Click, TPSvgimages.UploadFile, DXMenuItemPriority.Normal);
             itemCloseReport = new DXMenuItem("結案", ItemCloseReport_Click, TPSvgimages.Confirm, DXMenuItemPriority.Normal);
-            itemDelAttach = new DXMenuItem("刪除附件", ItemCloseReport_Click, TPSvgimages.Remove, DXMenuItemPriority.Normal);
+            itemDelAttach = new DXMenuItem("刪除附件", ItemDelAttach_Click, TPSvgimages.Remove, DXMenuItemPriority.Normal);
 
             itemViewInfo.ImageOptions.SvgImageSize = new Size(24, 24);
             itemViewInfo.AppearanceHovered.ForeColor = Color.Blue;
@@ -90,14 +72,32 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
             itemCloseReport.ImageOptions.SvgImageSize = new Size(24, 24);
             itemCloseReport.AppearanceHovered.ForeColor = Color.Blue;
 
-            itemAddReport.ImageOptions.SvgImageSize = new Size(24, 24);
-            itemAddReport.AppearanceHovered.ForeColor = Color.Blue;
+            itemAddAttach.ImageOptions.SvgImageSize = new Size(24, 24);
+            itemAddAttach.AppearanceHovered.ForeColor = Color.Blue;
 
             itemDelAttach.ImageOptions.SvgImageSize = new Size(24, 24);
             itemDelAttach.AppearanceHovered.ForeColor = Color.Blue;
+        }
 
-            menuItemsBase = new DXMenuItem[] { itemViewInfo, itemViewFile, itemAddPlanFile };
-            // menuItemsReport = new DXMenuItem[] { itemAddReport };
+        private void ItemDelAttach_Click(object sender, EventArgs e)
+        {
+            GridView detailGridView = gcData.FocusedView as GridView;
+            if (detailGridView != null)
+            {
+                int detailFocusedRowHandle = detailGridView.FocusedRowHandle;
+                if (detailFocusedRowHandle < 0) return;
+
+                var idAttach = Convert.ToInt16(detailGridView.GetRowCellValue(detailFocusedRowHandle, gColIdAttach));
+                var attachName = detailGridView.GetRowCellValue(detailFocusedRowHandle, gColActualName);
+
+                string msg = $"您確定要刪除附件：\r\n{attachName}";
+                if (MsgTP.MsgYesNoQuestion(msg) != DialogResult.Yes) return;
+
+                dt302_ReportAttachBUS.Instance.RemoveByIdAtt(idAttach);
+                dm_AttachmentBUS.Instance.RemoveById(idAttach);
+
+                LoadData();
+            }
         }
 
         private void ItemCloseReport_Click(object sender, EventArgs e)
@@ -220,7 +220,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
             LoadData();
         }
 
-        private void ItemAddReport_Click(object sender, EventArgs e)
+        private void ItemAddAttach_Click(object sender, EventArgs e)
         {
             GridView detailGridView = gvData.GetDetailView(gvData.FocusedRowHandle, 0) as GridView;
             if (detailGridView != null)
@@ -439,6 +439,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
                            join att in attachments on data.IdAttach equals att.Id
                            select new
                            {
+                               Index = index++,
+                               Id = att.Id,
                                EncryptionName = att.EncryptionName,
                                ActualName = att.ActualName
                            }).ToList();
@@ -462,8 +464,19 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
                 GridView view = sender as GridView;
                 view.FocusedRowHandle = e.HitInfo.RowHandle;
 
-                foreach (DXMenuItem item in menuItemsBase)
-                    e.Menu.Items.Add(item);
+                int idBase = Convert.ToInt16(view.GetRowCellValue(e.HitInfo.RowHandle, gColId));
+                bool HaveReport = reportsInfo.Any(r => r.IdBase == idBase);
+
+                e.Menu.Items.Add(itemViewInfo);
+
+                if (HaveReport)
+                {
+                    e.Menu.Items.Add(itemViewFile);
+                }
+                else
+                {
+                    e.Menu.Items.Add(itemAddPlanFile);
+                }
             }
         }
 
@@ -481,7 +494,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
 
                 if (closeRpDate == null)
                 {
-                    e.Menu.Items.Add(itemAddReport);
+                    e.Menu.Items.Add(itemAddAttach);
                     if (atts.Count != 0) e.Menu.Items.Add(itemCloseReport);
                 }
             }
@@ -523,7 +536,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
 
             string filePath = Path.Combine(documentsPath, $"{Text} - {DateTime.Now:yyyyMMddHHmm}.xlsx");
 
-            gcData.ExportToPdf(filePath);
+            gcData.ExportToXlsx(filePath);
             Process.Start(filePath);
         }
 

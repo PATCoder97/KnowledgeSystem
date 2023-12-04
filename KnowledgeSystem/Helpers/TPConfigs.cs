@@ -143,8 +143,8 @@ namespace KnowledgeSystem.Helpers
 
             args.Caption = TPConfigs.SoftNameTW;
             args.Text = $"<font='Microsoft JhengHei UI' size=14>{msg}</font>";
-            args.Buttons = new DialogResult[] { DialogResult.OK, DialogResult.Cancel };
-            args.Icon = SystemIcons.Information;
+            args.Buttons = new DialogResult[] { DialogResult.Yes, DialogResult.No };
+            args.Icon = SystemIcons.Question;
 
             return XtraMessageBox.Show(args);
         }

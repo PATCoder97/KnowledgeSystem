@@ -636,6 +636,9 @@
     <Content Include="Images\icons_heart_with_pulse.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\icons_info.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\icons_job.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -676,6 +679,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\icons_upload_to_ftp.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\icons_view.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\unchecked_radio_button.svg">

@@ -47,5 +47,7 @@ namespace KnowledgeSystem.Helpers
         public static SvgImage Num5 = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_circled_5.svg"));
         public static SvgImage Num6 = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_circled_6.svg"));
         public static SvgImage Filter = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_filter.svg"));
+        public static SvgImage View = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_view.svg"));
+        public static SvgImage Info = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_info.svg"));
     }
 }

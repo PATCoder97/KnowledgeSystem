@@ -85,7 +85,17 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
         {
             helper.SaveViewInfo();
 
-            List<dm_User> lsUsers = dm_UserBUS.Instance.GetList();
+            string idDept2Word = TPConfigs.LoginUser.IdDepartment.Substring(0, 2);
+            List<dm_User> lsUsers = new List<dm_User>();
+            if (TPConfigs.IdParentControl == AppPermission.SysAdmin || TPConfigs.IdParentControl == AppPermission.Mod)
+            {
+                lsUsers = dm_UserBUS.Instance.GetList();
+            }
+            else if (TPConfigs.IdParentControl == AppPermission.SafetyCertMain || TPConfigs.IdParentControl == AppPermission.WorkManagementMain)
+            {
+                lsUsers = dm_UserBUS.Instance.GetListByDept(idDept2Word);
+            }
+
             List<dm_Departments> lsDepts = dm_DeptBUS.Instance.GetList();
             List<dm_Role> lsRoles = dm_RoleBUS.Instance.GetList();
             List<dm_JobTitle> lsJobTitles = dm_JobTitleBUS.Instance.GetList();

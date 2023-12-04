@@ -234,6 +234,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
                     case EventFormInfo.View:
                         break;
                     case EventFormInfo.Update:
+
+                        result = dt302_BaseBUS.Instance.AddOrUpdate(personBase);
                         break;
                     case EventFormInfo.Delete:
                         var dialogResult = XtraMessageBox.Show($"您確認刪除人員: {userInfo.DisplayName}", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -275,6 +277,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
         private void txbUserId_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             var dmUsers = dm_UserBUS.Instance.GetItemById(txbUserId.EditValue?.ToString());
+            if (dmUsers == null) return;
 
             txbUserNameVN.EditValue = $"{dmUsers.DisplayName?.Trim()} {dmUsers.DisplayNameVN?.Trim()}";
             cbbDept.EditValue = dmUsers.IdDepartment;
