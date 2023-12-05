@@ -83,7 +83,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
         private void LoadData()
         {
             helper.SaveViewInfo();
-            var lsBases = dt301_BaseBUS.Instance.GetList();
+            var lsBases = dt301_BaseBUS.Instance.GetListByDept(idDept2word);
             lsUser = dm_UserBUS.Instance.GetList();
             lsJobs = dm_JobTitleBUS.Instance.GetList();
             lsCourses = dt301_CourseBUS.Instance.GetList();

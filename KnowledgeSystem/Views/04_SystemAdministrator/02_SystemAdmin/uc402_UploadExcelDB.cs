@@ -22,6 +22,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
             InitializeComponent();
         }
 
+        List<dm_User> lsUser = new List<dm_User>();
+
         private void simpleButton1_Click(object sender, EventArgs e)
         {
             string dataPath = "";
@@ -82,34 +84,75 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
             //    dt301_CertReqSetBUS.Instance.AddOrUpdate(item);
             //}
 
-
+            DataTable dt = ds.Tables[0];
 
             // Data
-            List<dt301_Base> lsCourse = new List<dt301_Base>();
+            lsUser = new List<dm_User>();
 
-            foreach (DataRow row in ds.Tables[0].Rows)
+            foreach (DataRow row in dt.Rows)
             {
-                lsCourse.Add(new dt301_Base()
+                dm_User usr = new dm_User();
+                usr.Id = row["人員代號"].ToString().Trim();
+                usr.DisplayName = row["中文姓名"].ToString().Trim();
+                usr.DisplayNameVN = row["越文姓名"].ToString().Trim();
+
+                var dateCrate = row["到職日"].ToString().Trim();
+
+                usr.DateCreate = string.IsNullOrEmpty(dateCrate) ? default : Convert.ToDateTime(dateCrate);
+                usr.Status = string.IsNullOrEmpty(dateCrate) ? 1 : 0;
+
+
+                usr.IdDepartment = row["部門代號"].ToString().Trim();
+                usr.JobCode = row["職務代號"].ToString().Trim();
+                usr.CitizenID = row["身份證/護照號碼"].ToString().Trim();
+
+                var dateOB = row["出生日期"].ToString().Trim();
+                usr.DOB = string.IsNullOrEmpty(dateOB) ? default : Convert.ToDateTime(dateOB);
+
+                usr.Nationality = row["國籍"].ToString().Trim();
+
+                lsUser.Add(usr);
+            }
+
+            gridControl1.DataSource = lsUser;
+        }
+
+        private void btnUploadDB_Click(object sender, EventArgs e)
+        {
+            List<dm_User> dm_Users = dm_UserBUS.Instance.GetList();
+
+            foreach (var item in lsUser)
+            {
+                if (item.Id == "VNW00004589")
                 {
-                    IdDept = "78",
-                    IdUser = row["IdUser"].ToString().Trim(),
-                    IdJobTitle = row["IdJob"].ToString().Trim(),
-                    IdCourse = row["IdCourse"].ToString().Trim(),
-                    DateReceipt = DateTime.Parse(row["DateReceipt"].ToString().Trim()),
-                    ExpDate = DateTime.Parse(row["DateReceipt"].ToString().Trim()).AddYears(Convert.ToInt16(row["DateCount"].ToString().Trim())),
-                    Describe = row["Describe"].ToString().Trim(),
-                    ValidLicense = row["Valid"].ToString().Trim() == "Y",
-                    BackupLicense = row["Backup"].ToString().Trim() == "Y",
-                    InvalidLicense = row["Invalid"].ToString().Trim() == "Y",
-                });
+
+                }
+
+                if (dm_Users.Any(r => r.Id == item.Id))
+                {
+                    
+
+                    dm_User dm_UserUpdate = dm_Users.First(r => r.Id == item.Id);
+
+                    dm_UserUpdate.DisplayName = item.DisplayName;
+                    dm_UserUpdate.DisplayNameVN = item.DisplayNameVN;
+                    dm_UserUpdate.DateCreate = item.DateCreate;
+                    dm_UserUpdate.Status = item.Status;
+                    dm_UserUpdate.IdDepartment = item.IdDepartment;
+                    dm_UserUpdate.JobCode = item.JobCode;
+                    dm_UserUpdate.CitizenID = item.CitizenID;
+                    dm_UserUpdate.DOB = item.DOB;
+                    dm_UserUpdate.Nationality = item.Nationality;
+
+                    dm_UserBUS.Instance.AddOrUpdate(dm_UserUpdate);
+                }
+                else
+                {
+                    dm_UserBUS.Instance.AddOrUpdate(item);
+                }
             }
 
-            foreach (var item in lsCourse)
-            {
-                dt301_BaseBUS.Instance.AddOrUpdate(item);
-            }
-
-            MessageBox.Show($"{lsCourse.Count}");
+            MessageBox.Show("ok");
         }
     }
 }

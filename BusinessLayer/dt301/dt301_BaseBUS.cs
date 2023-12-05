@@ -41,6 +41,26 @@ namespace BusinessLayer
         }
 
         /// <summary>
+        /// Lấy danh sách bằng mã bộ phận
+        /// </summary>
+        /// <returns></returns>
+        public List<dt301_Base> GetListByDept(string idDept2Word)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt301_Base.Where(r => r.IdDept == idDept2Word).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
+        /// <summary>
         /// Lấy danh sách bằng theo mã nhân viên và đang còn hạn
         /// </summary>
         /// <returns></returns>
