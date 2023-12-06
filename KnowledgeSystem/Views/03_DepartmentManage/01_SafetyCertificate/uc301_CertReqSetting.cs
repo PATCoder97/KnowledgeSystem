@@ -28,7 +28,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
         RefreshHelper helper;
         List<CertReqSetM> lsCertReqSetDisplay = new List<CertReqSetM>();
         BindingSource sourceCertReqSet = new BindingSource();
-
+        string idDept2word = TPConfigs.LoginUser.IdDepartment.Substring(0, 2);
         private class CertReqSetM : dt301_CertReqSetting
         {
             public string JobName { get; set; }
@@ -46,7 +46,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
             helper.SaveViewInfo();
             var lsJobTitles = dm_JobTitleBUS.Instance.GetList();
             var lsCourses = dt301_CourseBUS.Instance.GetList();
-            var lsCertReqs = dt301_CertReqSetBUS.Instance.GetList();
+            var lsCertReqs = dt301_CertReqSetBUS.Instance.GetListByDept(idDept2word);
 
             lsCertReqSetDisplay = (from data in lsCertReqs
                                    join job in lsJobTitles on data.IdJobTitle equals job.Id
