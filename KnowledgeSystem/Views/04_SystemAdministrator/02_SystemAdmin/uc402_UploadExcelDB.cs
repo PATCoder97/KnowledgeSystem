@@ -30,67 +30,76 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-            string dataPath = "";
-            DataSet ds;
+            //string dataPath = "";
+            //DataSet ds;
 
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            //using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            //{
+            //    openFileDialog.Filter = "Excel files (*.xls, *.xlsx)|*.xls;*.xlsx|All files (*.*)|*.*";
+            //    openFileDialog.RestoreDirectory = true;
+
+            //    if (openFileDialog.ShowDialog() == DialogResult.OK)
+            //    {
+            //        dataPath = openFileDialog.FileName;
+            //    }
+            //}
+
+            //string extension = Path.GetExtension(dataPath);
+            //using (var stream = File.Open(dataPath, FileMode.Open, FileAccess.Read))
+            //{
+            //    IExcelDataReader reader;
+            //    if (extension == "*.xls")
+            //    {
+            //        reader = ExcelReaderFactory.CreateBinaryReader(stream);
+            //    }
+            //    else
+            //    {
+            //        reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+            //    }
+
+            //    ds = reader.AsDataSet(new ExcelDataSetConfiguration()
+            //    {
+            //        ConfigureDataTable = (_) => new ExcelDataTableConfiguration()
+            //        {
+            //            UseHeaderRow = true
+            //        }
+            //    });
+
+            //    reader.Close();
+            //}
+
+
+            //     DataTable dt = ds.Tables[2];
+
+            //     dt301_CertReqs = new List<dt301_CertReqSetting>();
+
+            //     foreach (DataRow row in dt.Rows)
+            //     {
+            //         dt301_CertReqSetting req = new dt301_CertReqSetting();
+
+            //         req.IdDept = "77";
+            //         req.IdJobTitle = row["machuvu"].ToString().Trim();
+            //         req.IdCourse = row["mabaihoc"].ToString().Trim(); //new actual  req
+
+            //         req.NewHeadcount = Convert.ToInt16(row["new"].ToString().Trim());
+            //         req.ActualHeadcount = Convert.ToInt16(row["actual"].ToString().Trim());
+            //         req.ReqQuantity = Convert.ToInt16(row["req"].ToString().Trim());
+
+            //         dt301_CertReqs.Add(req);
+            //     }
+
+            dt301_Bases = dt301_BaseBUS.Instance.GetListByDept("77");
+            var dtCourse = dt301_CourseBUS.Instance.GetList();
+
+            foreach (var item in dt301_Bases)
             {
-                openFileDialog.Filter = "Excel files (*.xls, *.xlsx)|*.xls;*.xlsx|All files (*.*)|*.*";
-                openFileDialog.RestoreDirectory = true;
+                int yearAdd = dtCourse.First(r => r.Id == item.IdCourse).Duration ?? 1000;
+                item.ExpDate = yearAdd != 0 ? item.DateReceipt.AddYears(yearAdd) : (DateTime?)null;
 
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    dataPath = openFileDialog.FileName;
-                }
+                dt301_BaseBUS.Instance.AddOrUpdate(item);
             }
 
-            string extension = Path.GetExtension(dataPath);
-            using (var stream = File.Open(dataPath, FileMode.Open, FileAccess.Read))
-            {
-                IExcelDataReader reader;
-                if (extension == "*.xls")
-                {
-                    reader = ExcelReaderFactory.CreateBinaryReader(stream);
-                }
-                else
-                {
-                    reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
-                }
-
-                ds = reader.AsDataSet(new ExcelDataSetConfiguration()
-                {
-                    ConfigureDataTable = (_) => new ExcelDataTableConfiguration()
-                    {
-                        UseHeaderRow = true
-                    }
-                });
-
-                reader.Close();
-            }
-
-
-            DataTable dt = ds.Tables[2];
-
-            dt301_CertReqs = new List<dt301_CertReqSetting>();
-
-            foreach (DataRow row in dt.Rows)
-            {
-                dt301_CertReqSetting req = new dt301_CertReqSetting();
-
-                req.IdDept = "77";
-                req.IdJobTitle = row["machuvu"].ToString().Trim();
-                req.IdCourse = row["mabaihoc"].ToString().Trim(); //new actual  req
-
-                req.NewHeadcount = Convert.ToInt16(row["new"].ToString().Trim());
-                req.ActualHeadcount = Convert.ToInt16(row["actual"].ToString().Trim());
-                req.ReqQuantity = Convert.ToInt16(row["req"].ToString().Trim());
-
-                dt301_CertReqs.Add(req);
-            }
-
-
-
-
+            MessageBox.Show("OK");
 
             //dt301_Bases = new List<dt301_Base>();
             //var dtCourse = dt301_CourseBUS.Instance.GetList();
@@ -202,10 +211,10 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
             //    dt301_BaseBUS.Instance.Add(item);
             //}
 
-            foreach (var item in dt301_CertReqs)
-            {
-                dt301_CertReqSetBUS.Instance.Add(item);
-            }
+            //foreach (var item in dt301_CertReqs)
+            //{
+            //    dt301_CertReqSetBUS.Instance.Add(item);
+            //}
 
             MessageBox.Show("ok");
         }

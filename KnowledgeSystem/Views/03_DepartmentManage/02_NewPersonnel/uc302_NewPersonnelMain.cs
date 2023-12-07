@@ -4,6 +4,7 @@ using DevExpress.Utils.Menu;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraSplashScreen;
 using KnowledgeSystem.Helpers;
+using KnowledgeSystem.Views._00_Generals;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -276,7 +277,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
             {
                 return;
             }
-            MessageBox.Show(attachment.ActualName?.ToString());
+
+            //f00_VIewFile viewFile = new f00_VIewFile(@"E:\01. Softwares Programming\24. Knowledge System\03. Documents\302\pdfresizer.com-pdf-crop.pdf");
+            f00_VIewFile viewFile = new f00_VIewFile(@"E:\01. Softwares Programming\24. Knowledge System\03. Documents\302\Screenshot 2023-11-21 080423.png");
+            viewFile.ShowDialog();
+
+            //MessageBox.Show(attachment.ActualName?.ToString());
         }
 
         private void ItemViewInfo_Click(object sender, EventArgs e)

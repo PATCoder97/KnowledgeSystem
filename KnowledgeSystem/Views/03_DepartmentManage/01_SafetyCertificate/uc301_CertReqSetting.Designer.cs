@@ -177,12 +177,13 @@
             this.gcData.Name = "gcData";
             this.gcData.Size = new System.Drawing.Size(881, 464);
             this.gcData.TabIndex = 6;
-            this.gcData.UseEmbeddedNavigator = true;
             this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvData});
             // 
             // gvData
             // 
+            this.gvData.Appearance.FooterPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvData.Appearance.FooterPanel.Options.UseFont = true;
             this.gvData.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.gvData.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
             this.gvData.Appearance.HeaderPanel.Options.UseFont = true;
@@ -207,6 +208,7 @@
             this.gvData.OptionsView.ColumnAutoWidth = false;
             this.gvData.OptionsView.EnableAppearanceOddRow = true;
             this.gvData.OptionsView.ShowAutoFilterRow = true;
+            this.gvData.OptionsView.ShowFooter = true;
             this.gvData.OptionsView.ShowGroupPanel = false;
             this.gvData.DoubleClick += new System.EventHandler(this.gvData_DoubleClick);
             // 
@@ -245,6 +247,8 @@
             this.gridColumn5.Caption = "編制人數";
             this.gridColumn5.FieldName = "NewHeadcount";
             this.gridColumn5.Name = "gridColumn5";
+            this.gridColumn5.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "NewHeadcount", "共計：{0:0.##}")});
             this.gridColumn5.Visible = true;
             this.gridColumn5.VisibleIndex = 3;
             // 
@@ -253,6 +257,8 @@
             this.gridColumn6.Caption = "實際人數";
             this.gridColumn6.FieldName = "ActualHeadcount";
             this.gridColumn6.Name = "gridColumn6";
+            this.gridColumn6.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "ActualHeadcount", "共計：{0:0.##}")});
             this.gridColumn6.Visible = true;
             this.gridColumn6.VisibleIndex = 4;
             // 
@@ -261,6 +267,8 @@
             this.gridColumn7.Caption = "應取證張數";
             this.gridColumn7.FieldName = "ReqQuantity";
             this.gridColumn7.Name = "gridColumn7";
+            this.gridColumn7.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "ReqQuantity", "共計：{0:0.##}")});
             this.gridColumn7.Visible = true;
             this.gridColumn7.VisibleIndex = 5;
             // 

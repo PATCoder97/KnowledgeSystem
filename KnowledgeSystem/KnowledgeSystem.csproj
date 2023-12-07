@@ -193,6 +193,12 @@
     <Compile Include="Views\00_Generals\f00_UpdateSoftware.Designer.cs">
       <DependentUpon>f00_UpdateSoftware.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\00_Generals\f00_VIewFile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\00_Generals\f00_VIewFile.Designer.cs">
+      <DependentUpon>f00_VIewFile.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\00_Generals\uc00_ChangePassword.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -434,6 +440,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\00_Generals\f00_UpdateSoftware.resx">
       <DependentUpon>f00_UpdateSoftware.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\00_Generals\f00_VIewFile.resx">
+      <DependentUpon>f00_VIewFile.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\00_Generals\uc00_ChangePassword.resx">
       <DependentUpon>uc00_ChangePassword.cs</DependentUpon>
