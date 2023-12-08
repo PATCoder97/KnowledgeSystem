@@ -543,7 +543,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
             GridView view = sender as GridView;
             view.ExpandMasterRow(view.FocusedRowHandle);
         }
-
+        
         private void btnExportExcel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             string documentsPath = TPConfigs.DocumentPath();
