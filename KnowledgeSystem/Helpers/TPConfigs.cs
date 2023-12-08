@@ -27,6 +27,8 @@ namespace KnowledgeSystem.Helpers
         public static string SoftNameTW { get; set; }
         public static string UrlUpdate { get; set; }
         public static string PathKnowledgeFile { get; set; }
+        public static string FolderData { get; set; }
+        public static string Folder302 { get; set; }
 
         // CONST Value
         public const string strReadFile = "讀取";

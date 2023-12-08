@@ -116,6 +116,8 @@ namespace KnowledgeSystem.Views._00_Generals
             TPConfigs.SoftNameTW = lsStaticValue.FirstOrDefault(r => r.KeyT == "SoftNameTW").ValueT;
             TPConfigs.UrlUpdate = lsStaticValue.FirstOrDefault(r => r.KeyT == "UrlUpdate").ValueT;
             TPConfigs.PathKnowledgeFile = lsStaticValue.FirstOrDefault(r => r.KeyT == "PathKnowledgeFile").ValueT;
+            TPConfigs.FolderData = lsStaticValue.FirstOrDefault(r => r.KeyT == "FolderData").ValueT;
+            TPConfigs.Folder302 = Path.Combine(TPConfigs.FolderData, "302");
 
             // Lấy các role
             AppPermission.SysAdmin = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleSysAdmin").ValueT);

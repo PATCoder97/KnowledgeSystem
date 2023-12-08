@@ -12,6 +12,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net.Mail;
 using System.Windows.Forms;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
@@ -216,6 +217,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
 
                 base302.TrainingPlan = idAtt;
                 dt302_BaseBUS.Instance.AddOrUpdate(base302);
+
+                File.Copy(filePdf, Path.Combine(TPConfigs.Folder302, att.EncryptionName), true);
             }
 
             LoadData();
@@ -259,9 +262,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
                             };
 
                             dt302_ReportAttachBUS.Instance.Add(reportAttach);
+
+                            File.Copy(item, Path.Combine(TPConfigs.Folder302, att.EncryptionName), true);
                         }
                     }
                 }
+
                 LoadData();
             }
         }
@@ -278,11 +284,15 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
                 return;
             }
 
-            //f00_VIewFile viewFile = new f00_VIewFile(@"E:\01. Softwares Programming\24. Knowledge System\03. Documents\302\pdfresizer.com-pdf-crop.pdf");
-            f00_VIewFile viewFile = new f00_VIewFile(@"E:\01. Softwares Programming\24. Knowledge System\03. Documents\302\Screenshot 2023-11-21 080423.png");
-            viewFile.ShowDialog();
+            string source = Path.Combine(TPConfigs.Folder302, attachment.EncryptionName);
+            string dest = Path.Combine(TPConfigs.TempFolderData, $"{DateTime.Now:yyMMddhhmmss} {attachment.ActualName}");
+            if (!Directory.Exists(TPConfigs.TempFolderData))
+                Directory.CreateDirectory(TPConfigs.TempFolderData);
 
-            //MessageBox.Show(attachment.ActualName?.ToString());
+            File.Copy(source, dest, true);
+
+            f00_VIewFile viewFile = new f00_VIewFile(dest);
+            viewFile.ShowDialog();
         }
 
         private void ItemViewInfo_Click(object sender, EventArgs e)
@@ -552,7 +562,15 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
             string actualName = view.GetRowCellValue(view.FocusedRowHandle, gColActualName).ToString();
             string encryptName = view.GetRowCellValue(view.FocusedRowHandle, gColEncryptName).ToString();
 
-            MessageBox.Show(actualName);
+            string source = Path.Combine(TPConfigs.Folder302, encryptName);
+            string dest = Path.Combine(TPConfigs.TempFolderData, $"{DateTime.Now:yyMMddhhmmss} {actualName}");
+            if (!Directory.Exists(TPConfigs.TempFolderData))
+                Directory.CreateDirectory(TPConfigs.TempFolderData);
+
+            File.Copy(source, dest, true);
+
+            f00_VIewFile viewFile = new f00_VIewFile(dest);
+            viewFile.ShowDialog();
         }
     }
 }
