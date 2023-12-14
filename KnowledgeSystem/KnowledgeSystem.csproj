@@ -110,14 +110,17 @@
     <Reference Include="Scriban, Version=5.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Scriban.5.9.0\lib\netstandard2.0\Scriban.dll</HintPath>
     </Reference>
-    <Reference Include="Spire.License">
-      <HintPath>..\..\..\..\00. Tool\01. dll\presentation.6.1.4\net40\Spire.License.dll</HintPath>
+    <Reference Include="Spire.License, Version=1.3.8.40, Culture=neutral, PublicKeyToken=b1144360237c8b3f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\01. PhanAnhTuan\02. VMI Lab System\01. Projects\VMILabSystem\VMILabSystem\dll\Spire.License.dll</HintPath>
     </Reference>
-    <Reference Include="Spire.Pdf">
-      <HintPath>..\..\..\..\00. Tool\01. dll\presentation.6.1.4\net40\Spire.Pdf.dll</HintPath>
+    <Reference Include="Spire.Pdf, Version=7.1.10.0, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\01. PhanAnhTuan\02. VMI Lab System\01. Projects\VMILabSystem\VMILabSystem\dll\Spire.Pdf.dll</HintPath>
     </Reference>
-    <Reference Include="Spire.Presentation">
-      <HintPath>..\..\..\..\00. Tool\01. dll\presentation.6.1.4\net40\Spire.Presentation.dll</HintPath>
+    <Reference Include="Spire.Presentation, Version=6.1.4.0, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dll\Spire.Presentation.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -570,6 +573,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppIcon.ico" />
+    <Content Include="dll\Spire.License.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="dll\Spire.Pdf.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="dll\Spire.Presentation.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Html\f301_NotifyPersonnelTransfer.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

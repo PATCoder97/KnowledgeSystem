@@ -3,8 +3,12 @@ using DataAccessLayer;
 using DevExpress.Pdf;
 using DevExpress.Utils.CommonDialogs;
 using DevExpress.XtraEditors;
+using DevExpress.XtraPdfViewer;
+using DevExpress.XtraRichEdit;
 using DevExpress.XtraSplashScreen;
+using DevExpress.XtraSpreadsheet;
 using KnowledgeSystem.Helpers;
+using Spire.Presentation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -36,53 +40,117 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         string documentFile = "";
         string idKnowledgeBase = "";
 
+        enum FileType
+        {
+            Pdf,
+            Word,
+            Excel,
+            PowerPoint,
+            Image,
+            Unknown
+        }
+
+        static FileType GetFileType(string filePath)
+        {
+            string extension = Path.GetExtension(filePath).ToLower();
+
+            switch (extension)
+            {
+                case ".pdf":
+                    return FileType.Pdf;
+                case ".doc":
+                case ".docx":
+                    return FileType.Word;
+                case ".xls":
+                case ".xlsx":
+                    return FileType.Excel;
+                case ".ppt":
+                case ".pptx":
+                    return FileType.PowerPoint;
+                case ".jpg":
+                case ".jpeg":
+                case ".png":
+                    return FileType.Image;
+                default:
+                    return FileType.Unknown;
+            }
+        }
 
         private void f207_ViewFile_Load(object sender, EventArgs e)
         {
-            using (var handle = SplashScreenManager.ShowOverlayForm(layoutControl1))
+            using (var handle = SplashScreenManager.ShowOverlayForm(this))
             {
-                lcPDF.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-                lcWord.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-                lcExcel.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-                lcCanntView.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-                string fileExtension = Path.GetExtension(documentFile).ToLower();
+                string fileName = Path.GetFileName(documentFile);
+                Text = fileName;
 
-                switch (fileExtension)
+                FileType fileType = GetFileType(documentFile);
+
+                switch (fileType)
                 {
-                    case ".pdf":
+                    case FileType.Pdf:
+                        PdfViewer viewPDF = new PdfViewer();
+                        viewPDF.ReadOnly = true;
+                        viewPDF.Name = "viewPDF";
+                        viewPDF.NavigationPanePageVisibility = PdfNavigationPanePageVisibility.None;
+                        viewPDF.PopupMenuShowing += new PdfPopupMenuShowingEventHandler(viewPDF_PopupMenuShowing);
+                        viewPDF.KeyDown += new KeyEventHandler(Viewer_KeyDown);
+                        viewPDF.Dock = DockStyle.Fill;
                         viewPDF.DocumentFilePath = documentFile;
-                        lcPDF.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                        viewPDF.MenuManager = this.barManager1;
+
+                        Controls.Add(viewPDF);
                         break;
-                    case ".xlsx":
-                    case ".xls":
-                        viewExcel.Document.LoadDocument(documentFile);
-                        lcExcel.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
-                        break;
-                    case ".docx":
-                    case ".doc":
+                    case FileType.Word:
+                        RichEditControl viewWord = new RichEditControl();
+                        viewWord.Name = "viewWord";
+                        viewWord.ReadOnly = true;
+                        viewWord.Text = "viewWord";
+                        viewWord.Dock = DockStyle.Fill;
+                        viewWord.KeyDown += new KeyEventHandler(Viewer_KeyDown);
+                        viewWord.PopupMenuShowing += ViewWord_PopupMenuShowing;
                         viewWord.Document.LoadDocument(documentFile);
-                        lcWord.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+
+                        Controls.Add(viewWord);
                         break;
-                    case ".pptx":
-                    case ".ppt":
-                        //Spire.License.LicenseProvider.SetLicenseKey(TPConfigs.KeySpirePPT);
+                    case FileType.Excel:
+                        SpreadsheetControl viewExcel = new SpreadsheetControl();
+                        viewExcel.Name = "viewExcel";
+                        viewExcel.ReadOnly = true;
+                        viewExcel.Text = "viewExcel";
+                        viewExcel.Dock = DockStyle.Fill;
+                        viewExcel.PopupMenuShowing += ViewExcel_PopupMenuShowing;
+                        viewExcel.KeyDown += new KeyEventHandler(Viewer_KeyDown);
+                        viewExcel.Document.LoadDocument(documentFile);
 
-                        //string outputPath = Path.Combine(TPConfigs.TempFolderData, $"{DateTime.Now:MMddhhmmss} PPTConvertPDF.pdf");
-                        //// Load the PowerPoint presentation
-                        //using (Presentation presentation = new Presentation())
-                        //{
-                        //    presentation.LoadFromFile(documentFile);
+                        Controls.Add(viewExcel);
+                        break;
+                    case FileType.PowerPoint:
+                        Spire.License.LicenseProvider.SetLicenseKey(TPConfigs.KeySpirePPT);
 
-                        //    // Convert the presentation to PDF
-                        //    presentation.SaveToFile(outputPath, FileFormat.PDF);
-                        //}
+                        string outputPath = Path.Combine(TPConfigs.TempFolderData, $"{DateTime.Now:MMddhhmmss} PPTConvertPDF.pdf");
+                        using (Presentation presentation = new Presentation())
+                        {
+                            presentation.LoadFromFile(documentFile);
+                            presentation.SaveToFile(outputPath, FileFormat.PDF);
+                        }
 
-                        //viewPDF.DocumentFilePath = outputPath;
-                        //lcPDF.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                        documentFile = outputPath;
+                        goto case FileType.Pdf;
+                    case FileType.Image:
+                        PictureBox viewPic = new PictureBox();
+                        viewPic.Name = "viewPic";
+                        viewPic.Text = "viewPic";
+                        viewPic.Dock = DockStyle.Fill;
+                        viewPic.KeyDown += new KeyEventHandler(Viewer_KeyDown);
+                        viewPic.Image = Image.FromFile(documentFile);
+                        viewPic.SizeMode = PictureBoxSizeMode.Zoom;
+
+                        Controls.Add(viewPic);
                         break;
                     default:
-                        lcCanntView.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
-                        lbCanntView.Text = "目前系統無法讀取該類型文件，\n請下載已閱讀。謝謝！";
+                        string msg = "<font='Microsoft JhengHei UI' size=14>不支援文件預覽\r\nKhông hỗ trợ xem trước định dạng tệp tin</font>";
+                        MsgTP.MsgShowInfomation(msg);
+                        Close();
                         break;
                 }
             }
@@ -90,9 +158,14 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             bar2.Visible = !string.IsNullOrEmpty(idKnowledgeBase);
         }
 
-        private void pdfViewerData_PopupMenuShowing(object sender, DevExpress.XtraPdfViewer.PdfPopupMenuShowingEventArgs e)
+        private void ViewExcel_PopupMenuShowing(object sender, DevExpress.XtraSpreadsheet.PopupMenuShowingEventArgs e)
         {
-            e.ItemLinks.Clear();
+            e.Menu.Items.Clear();
+        }
+
+        private void ViewWord_PopupMenuShowing(object sender, DevExpress.XtraRichEdit.PopupMenuShowingEventArgs e)
+        {
+            e.Menu.Items.Clear();
         }
 
         private void Viewer_KeyDown(object sender, KeyEventArgs e)
@@ -102,6 +175,16 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 e.SuppressKeyPress = true;
                 return;
             }
+        }
+
+        private void viewPDF_PopupMenuShowing(object sender, PdfPopupMenuShowingEventArgs e)
+        {
+            e.ItemLinks.Clear();
+        }
+
+        private void pdfViewerData_PopupMenuShowing(object sender, DevExpress.XtraPdfViewer.PdfPopupMenuShowingEventArgs e)
+        {
+            e.ItemLinks.Clear();
         }
 
         private void btnSave_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

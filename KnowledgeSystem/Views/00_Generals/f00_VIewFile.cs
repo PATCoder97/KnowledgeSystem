@@ -139,7 +139,6 @@ namespace KnowledgeSystem.Views._00_Generals
                 case ".jpg":
                 case ".jpeg":
                 case ".png":
-                case ".gif":
                     return FileType.Image;
                 default:
                     return FileType.Unknown;

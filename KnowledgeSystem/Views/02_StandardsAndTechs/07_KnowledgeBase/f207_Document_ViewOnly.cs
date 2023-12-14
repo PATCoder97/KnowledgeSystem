@@ -271,7 +271,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 return;
 
             Attachments dataRow = gvFiles.GetRow(focusRow) as Attachments;
-            string documentsFile = Path.Combine(TPConfigs.PathKnowledgeFile, dataRow.EncryptionName);
+            string documentsFile = Path.Combine(TPConfigs.Folder207, dataRow.EncryptionName);
 
             string pathDocTemp = Path.Combine(TPConfigs.TempFolderData, $"{DateTime.Now:MMddhhmmss} {dataRow.FileName}");
             using (var handle = SplashScreenManager.ShowOverlayForm(gcFiles))

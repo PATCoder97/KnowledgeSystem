@@ -618,7 +618,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             int index = 0;
             foreach (string fileName in openFileDialog.FileNames)
             {
-                string encryptionName = GenerateHashFileName();
+                string encryptionName = EncryptionHelper.EncryptionFileName(fileName);
                 Attachments attachment = new Attachments
                 {
                     FullPath = fileName,
@@ -637,8 +637,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         private void btnDelFile_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             Attachments attachment = gvFiles.GetRow(gvFiles.FocusedRowHandle) as Attachments;
-            DialogResult dialogResult = XtraMessageBox.Show($"您想要刪除附件：{attachment.FileName}?", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (dialogResult == DialogResult.No)
+           
+            string msg = $"您想要刪除附件：\r\n{attachment.FileName}?";
+            if (MsgTP.MsgYesNoQuestion(msg) == DialogResult.No)
             {
                 return;
             }
@@ -801,7 +802,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                     if (!string.IsNullOrEmpty(item.FullPath))
                     {
                         string sourceFileName = item.FullPath;
-                        string destFileName = Path.Combine(TPConfigs.PathKnowledgeFile, item.EncryptionName);
+                        string destFileName = Path.Combine(TPConfigs.Folder207, item.EncryptionName);
+                        if (!Directory.Exists(TPConfigs.Folder207))
+                            Directory.CreateDirectory(TPConfigs.Folder207);
 
                         File.Copy(sourceFileName, destFileName, true);
                     }
@@ -824,7 +827,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 }).ToList();
                 _dt207_SecurityBUS.AddRange(lsSecuritiesAdd);
 
-                //// Nếu chưa có lưu trình xử lý của văn kiện thì thêm mới (Trigger sẽ tự thêm vào ProcessInfo)
+                // Nếu chưa có lưu trình xử lý của văn kiện thì thêm mới (Trigger sẽ tự thêm vào ProcessInfo)
                 if (!_IsProcessing)
                 {
                     dt207_DocProcessing docProgress = new dt207_DocProcessing()
@@ -877,7 +880,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 return;
 
             Attachments dataRow = gvFiles.GetRow(focusRow) as Attachments;
-            string documentsFile = Path.Combine(TPConfigs.PathKnowledgeFile, dataRow.EncryptionName);
+            string documentsFile = Path.Combine(TPConfigs.Folder207, dataRow.EncryptionName);
 
             // Lưu lại lịch sử xem file, Không lưu khi đang ký
             var IsProcessing = dt207_DocProcessingBUS.Instance.CheckItemProcessing(_idBaseDocument);
