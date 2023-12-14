@@ -448,14 +448,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
             GridView view = sender as GridView;
             int idReport = Convert.ToInt16(view.GetRowCellValue(e.RowHandle, gColIdReport));
 
-            int index = 1;
             var reportsAtt = dt302_ReportAttachBUS.Instance.GetListByReport(idReport);
 
             e.ChildList = (from data in reportsAtt
                            join att in attachments on data.IdAttach equals att.Id
                            select new
                            {
-                               Index = index++,
                                Id = att.Id,
                                EncryptionName = att.EncryptionName,
                                ActualName = att.ActualName

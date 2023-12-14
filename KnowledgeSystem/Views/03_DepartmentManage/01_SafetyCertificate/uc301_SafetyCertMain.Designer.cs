@@ -56,12 +56,12 @@
             this.btnInvalidCert = new DevExpress.XtraBars.BarButtonItem();
             this.btnWaitCert = new DevExpress.XtraBars.BarButtonItem();
             this.btnExpCert = new DevExpress.XtraBars.BarButtonItem();
+            this.btnClearFilter = new DevExpress.XtraBars.BarButtonItem();
             this.btnExportExcel = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-            this.btnClearFilter = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
@@ -140,8 +140,6 @@
             this.gridColumn11.Caption = "ID";
             this.gridColumn11.FieldName = "Id";
             this.gridColumn11.Name = "gridColumn11";
-            this.gridColumn11.Visible = true;
-            this.gridColumn11.VisibleIndex = 0;
             // 
             // gridColumn1
             // 
@@ -151,7 +149,7 @@
             this.gridColumn1.FieldName = "IdUser";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 1;
+            this.gridColumn1.VisibleIndex = 0;
             // 
             // gridColumn2
             // 
@@ -159,7 +157,7 @@
             this.gridColumn2.FieldName = "UserName";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 2;
+            this.gridColumn2.VisibleIndex = 1;
             // 
             // gridColumn3
             // 
@@ -167,7 +165,7 @@
             this.gridColumn3.FieldName = "JobName";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 3;
+            this.gridColumn3.VisibleIndex = 2;
             // 
             // gridColumn4
             // 
@@ -175,7 +173,7 @@
             this.gridColumn4.FieldName = "CourseName";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 4;
+            this.gridColumn4.VisibleIndex = 3;
             // 
             // gridColumn5
             // 
@@ -185,7 +183,7 @@
             this.gridColumn5.FieldName = "DateReceipt";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 5;
+            this.gridColumn5.VisibleIndex = 4;
             // 
             // gridColumn6
             // 
@@ -197,7 +195,7 @@
             this.gridColumn6.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "ExpDate", "數量={0}")});
             this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 6;
+            this.gridColumn6.VisibleIndex = 5;
             // 
             // gridColumn7
             // 
@@ -207,7 +205,7 @@
             this.gridColumn7.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "ValidLicense", "應取={0}")});
             this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 7;
+            this.gridColumn7.VisibleIndex = 6;
             // 
             // gridColumn8
             // 
@@ -217,7 +215,7 @@
             this.gridColumn8.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "BackupLicense", "備援={0}")});
             this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 8;
+            this.gridColumn8.VisibleIndex = 7;
             // 
             // gridColumn9
             // 
@@ -227,7 +225,7 @@
             this.gridColumn9.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "InvalidLicense", "無效={0}")});
             this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 9;
+            this.gridColumn9.VisibleIndex = 8;
             // 
             // gridColumn10
             // 
@@ -237,7 +235,7 @@
             this.gridColumn10.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "Describe", "共計={0}")});
             this.gridColumn10.Visible = true;
-            this.gridColumn10.VisibleIndex = 10;
+            this.gridColumn10.VisibleIndex = 9;
             // 
             // Root
             // 
@@ -404,6 +402,18 @@
             this.btnExpCert.Name = "btnExpCert";
             this.btnExpCert.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.SetFilter);
             // 
+            // btnClearFilter
+            // 
+            this.btnClearFilter.Caption = "清除篩選";
+            this.btnClearFilter.Id = 10;
+            this.btnClearFilter.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnClearFilter.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClearFilter.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
+            this.btnClearFilter.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnClearFilter.ItemAppearance.Normal.Options.UseForeColor = true;
+            this.btnClearFilter.Name = "btnClearFilter";
+            this.btnClearFilter.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.SetFilter);
+            // 
             // btnExportExcel
             // 
             this.btnExportExcel.Caption = "出表";
@@ -443,18 +453,6 @@
             this.barDockControlRight.Location = new System.Drawing.Point(979, 49);
             this.barDockControlRight.Manager = this.barManagerTP;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 418);
-            // 
-            // btnClearFilter
-            // 
-            this.btnClearFilter.Caption = "清除篩選";
-            this.btnClearFilter.Id = 10;
-            this.btnClearFilter.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnClearFilter.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClearFilter.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
-            this.btnClearFilter.ItemAppearance.Normal.Options.UseFont = true;
-            this.btnClearFilter.ItemAppearance.Normal.Options.UseForeColor = true;
-            this.btnClearFilter.Name = "btnClearFilter";
-            this.btnClearFilter.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.SetFilter);
             // 
             // uc301_SafetyCertMain
             // 

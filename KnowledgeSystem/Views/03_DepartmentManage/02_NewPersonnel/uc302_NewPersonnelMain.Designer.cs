@@ -29,15 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode3 = new DevExpress.XtraGrid.GridLevelNode();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode4 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc302_NewPersonnelMain));
             this.gvReport = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColCloseRp = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColIdReport = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcData = new DevExpress.XtraGrid.GridControl();
             this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -48,13 +47,11 @@
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColEnterDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gvAttachment = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gColActualName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColEncryptName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColIdAttach = new DevExpress.XtraGrid.Columns.GridColumn();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -96,7 +93,6 @@
             this.gridColumn8,
             this.gridColumn9,
             this.gColCloseRp,
-            this.gridColumn13,
             this.gColIdReport});
             this.gvReport.GridControl = this.gcData;
             this.gvReport.Name = "gvReport";
@@ -152,21 +148,11 @@
             this.gColCloseRp.Visible = true;
             this.gColCloseRp.VisibleIndex = 3;
             // 
-            // gridColumn13
-            // 
-            this.gridColumn13.Caption = "報告檔案";
-            this.gridColumn13.FieldName = "Attachment";
-            this.gridColumn13.Name = "gridColumn13";
-            this.gridColumn13.Visible = true;
-            this.gridColumn13.VisibleIndex = 4;
-            // 
             // gColIdReport
             // 
             this.gColIdReport.Caption = "Id";
             this.gColIdReport.FieldName = "Id";
             this.gColIdReport.Name = "gColIdReport";
-            this.gColIdReport.Visible = true;
-            this.gColIdReport.VisibleIndex = 5;
             // 
             // gcData
             // 
@@ -176,14 +162,14 @@
             this.gcData.EmbeddedNavigator.Buttons.Edit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.EndEdit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.Remove.Visible = false;
-            gridLevelNode3.LevelTemplate = this.gvReport;
-            gridLevelNode4.LevelTemplate = this.gvAttachment;
-            gridLevelNode4.RelationName = "附件";
-            gridLevelNode3.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode4});
-            gridLevelNode3.RelationName = "報告進度";
+            gridLevelNode1.LevelTemplate = this.gvReport;
+            gridLevelNode2.LevelTemplate = this.gvAttachment;
+            gridLevelNode2.RelationName = "附件";
+            gridLevelNode1.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
+            gridLevelNode2});
+            gridLevelNode1.RelationName = "報告進度";
             this.gcData.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode3});
+            gridLevelNode1});
             this.gcData.Location = new System.Drawing.Point(12, 12);
             this.gcData.MainView = this.gvData;
             this.gcData.Name = "gcData";
@@ -219,7 +205,6 @@
             this.gridColumn4,
             this.gColEnterDate,
             this.gridColumn6,
-            this.gridColumn10,
             this.gridColumn5,
             this.gridColumn11});
             this.gvData.GridControl = this.gcData;
@@ -245,8 +230,6 @@
             this.gColId.Caption = "ID";
             this.gColId.FieldName = "Id";
             this.gColId.Name = "gColId";
-            this.gColId.Visible = true;
-            this.gColId.VisibleIndex = 9;
             // 
             // gridColumn3
             // 
@@ -302,14 +285,6 @@
             this.gridColumn6.Visible = true;
             this.gridColumn6.VisibleIndex = 7;
             // 
-            // gridColumn10
-            // 
-            this.gridColumn10.Caption = "備註";
-            this.gridColumn10.FieldName = "Describe";
-            this.gridColumn10.Name = "gridColumn10";
-            this.gridColumn10.Visible = true;
-            this.gridColumn10.VisibleIndex = 8;
-            // 
             // gridColumn5
             // 
             this.gridColumn5.Caption = "學校";
@@ -335,7 +310,6 @@
             this.gvAttachment.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gColActualName,
             this.gColEncryptName,
-            this.gridColumn12,
             this.gColIdAttach});
             this.gvAttachment.GridControl = this.gcData;
             this.gvAttachment.Name = "gvAttachment";
@@ -359,16 +333,6 @@
             this.gColEncryptName.Caption = "gColEncryptName";
             this.gColEncryptName.FieldName = "EncryptionName";
             this.gColEncryptName.Name = "gColEncryptName";
-            this.gColEncryptName.Visible = true;
-            this.gColEncryptName.VisibleIndex = 1;
-            // 
-            // gridColumn12
-            // 
-            this.gridColumn12.Caption = "gridColumn12";
-            this.gridColumn12.FieldName = "Index";
-            this.gridColumn12.Name = "gridColumn12";
-            this.gridColumn12.Visible = true;
-            this.gridColumn12.VisibleIndex = 2;
             // 
             // gColIdAttach
             // 
@@ -572,21 +536,18 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
         private DevExpress.XtraGrid.Columns.GridColumn gColEnterDate;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraGrid.Views.Grid.GridView gvReport;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
         private DevExpress.XtraGrid.Columns.GridColumn gColCloseRp;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
         private DevExpress.XtraGrid.Columns.GridColumn gColIdReport;
         private DevExpress.XtraGrid.Views.Grid.GridView gvAttachment;
         private DevExpress.XtraGrid.Columns.GridColumn gColActualName;
         private DevExpress.XtraGrid.Columns.GridColumn gColEncryptName;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
         private DevExpress.XtraGrid.Columns.GridColumn gColIdAttach;
     }
 }
