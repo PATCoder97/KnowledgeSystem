@@ -32,14 +32,14 @@ namespace KnowledgeSystem
             Application.SetCompatibleTextRenderingDefault(false);
 
 #if DEBUG
-            Application.Run(new f00_Main());
+            //Application.Run(new f00_Main());
 
-            //TPConfigs.SoftNameTW = "冶金文管系統";
-            //TPConfigs.LoginUser = dm_UserBUS.Instance.GetItemById("VNW0014732");
-            //AppPermission.Instance.CheckAppPermission(7);
-            //Application.Run(new f00_FluentFrame(34));
-            ////Application.Run(new f00_FluentFrame(21));
-            //TPConfigs.IdParentControl = AppPermission.SafetyCertMain;
+            TPConfigs.SoftNameTW = "冶金文管系統";
+            TPConfigs.LoginUser = dm_UserBUS.Instance.GetItemById("VNW0014732");
+            AppPermission.Instance.CheckAppPermission(7);
+            Application.Run(new f00_FluentFrame(34));
+            //Application.Run(new f00_FluentFrame(21));
+            TPConfigs.IdParentControl = AppPermission.SafetyCertMain;
 
 #else
             Application.Run(new f00_Main());
