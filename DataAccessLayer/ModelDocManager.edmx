@@ -332,7 +332,6 @@
           <Property Name="Content" Type="nvarchar" MaxLength="254" Nullable="false" />
           <Property Name="ExpectedDate" Type="date" Nullable="false" />
           <Property Name="UploadDate" Type="date" />
-          <Property Name="Attachment" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="sys_Log">
           <Key>
@@ -438,10 +437,10 @@
           <EntitySet Name="dm_User" EntityType="DBDocumentManagementSystemModel.dm_User" />
           <EntitySet Name="dt301_Base" EntityType="DBDocumentManagementSystemModel.dt301_Base" />
           <EntitySet Name="sys_NotesMail" EntityType="DBDocumentManagementSystemModel.sys_NotesMail" />
-          <EntitySet Name="dt302_ReportInfo" EntityType="DBDocumentManagementSystemModel.dt302_ReportInfo" />
           <EntitySet Name="dm_Attachment" EntityType="DBDocumentManagementSystemModel.dm_Attachment" />
           <EntitySet Name="dt302_ReportAttach" EntityType="DBDocumentManagementSystemModel.dt302_ReportAttach" />
           <EntitySet Name="dt302_Base" EntityType="DBDocumentManagementSystemModel.dt302_Base" />
+          <EntitySet Name="dt302_ReportInfo" EntityType="DBDocumentManagementSystemModel.dt302_ReportInfo" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -765,17 +764,6 @@
           <Property Name="Attachments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="TimeNotify" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="dt302_ReportInfo">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdBase" Type="Int32" Nullable="false" />
-          <Property Name="Content" Type="String" Nullable="false" MaxLength="254" FixedLength="false" Unicode="true" />
-          <Property Name="ExpectedDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="UploadDate" Type="DateTime" Precision="0" />
-          <Property Name="Attachment" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="dm_Attachment">
           <Key>
             <PropertyRef Name="Id" />
@@ -804,6 +792,16 @@
           <Property Name="Major" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="TrainingPlan" Type="Int32" />
           <Property Name="Describe" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dt302_ReportInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdBase" Type="Int32" Nullable="false" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="ExpectedDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UploadDate" Type="DateTime" Precision="0" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1163,18 +1161,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dt302_ReportInfo">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt302_ReportInfo">
-              <MappingFragment StoreEntitySet="dt302_ReportInfo">
-                <ScalarProperty Name="Attachment" ColumnName="Attachment" />
-                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
-                <ScalarProperty Name="ExpectedDate" ColumnName="ExpectedDate" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
-                <ScalarProperty Name="IdBase" ColumnName="IdBase" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="dm_Attachment">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_Attachment">
               <MappingFragment StoreEntitySet="dm_Attachment">
@@ -1203,6 +1189,17 @@
                 <ScalarProperty Name="School" ColumnName="School" />
                 <ScalarProperty Name="Supervisor" ColumnName="Supervisor" />
                 <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt302_ReportInfo">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt302_ReportInfo">
+              <MappingFragment StoreEntitySet="dt302_ReportInfo">
+                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
+                <ScalarProperty Name="ExpectedDate" ColumnName="ExpectedDate" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="IdBase" ColumnName="IdBase" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

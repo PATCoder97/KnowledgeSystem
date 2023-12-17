@@ -30,6 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f303_ShiftScheduleMain));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.btnSave = new DevExpress.XtraEditors.SimpleButton();
+            this.btnAdd = new DevExpress.XtraEditors.SimpleButton();
+            this.btnDel = new DevExpress.XtraEditors.SimpleButton();
+            this.lbUser = new System.Windows.Forms.Label();
+            this.txbIndex = new DevExpress.XtraEditors.TextEdit();
+            this.btnNext = new DevExpress.XtraEditors.SimpleButton();
+            this.btnPrevious = new DevExpress.XtraEditors.SimpleButton();
             this.cbbSheet = new DevExpress.XtraEditors.ComboBoxEdit();
             this.btnExcel = new DevExpress.XtraEditors.SimpleButton();
             this.btnPdf = new DevExpress.XtraEditors.SimpleButton();
@@ -38,34 +45,27 @@
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.btnPrevious = new DevExpress.XtraEditors.SimpleButton();
-            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.btnNext = new DevExpress.XtraEditors.SimpleButton();
-            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.txbIndex = new DevExpress.XtraEditors.TextEdit();
-            this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.lbUser = new System.Windows.Forms.Label();
+            this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.btnDel = new DevExpress.XtraEditors.SimpleButton();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.btnAdd = new DevExpress.XtraEditors.SimpleButton();
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.btnSave = new DevExpress.XtraEditors.SimpleButton();
             this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txbIndex.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbSheet.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbIndex.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
@@ -94,14 +94,107 @@
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
+            // btnSave
+            // 
+            this.btnSave.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.Appearance.Options.UseFont = true;
+            this.btnSave.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnSave.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnSave.ImageOptions.SvgImage")));
+            this.btnSave.Location = new System.Drawing.Point(383, 108);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(81, 36);
+            this.btnSave.StyleController = this.layoutControl1;
+            this.btnSave.TabIndex = 13;
+            this.btnSave.Text = "Lưu";
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdd.Appearance.Options.UseFont = true;
+            this.btnAdd.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnAdd.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnAdd.ImageOptions.SvgImage")));
+            this.btnAdd.Location = new System.Drawing.Point(294, 108);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(79, 36);
+            this.btnAdd.StyleController = this.layoutControl1;
+            this.btnAdd.TabIndex = 12;
+            this.btnAdd.Text = "Dán";
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // btnDel
+            // 
+            this.btnDel.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDel.Appearance.Options.UseFont = true;
+            this.btnDel.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnDel.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnDel.ImageOptions.SvgImage")));
+            this.btnDel.Location = new System.Drawing.Point(206, 108);
+            this.btnDel.Name = "btnDel";
+            this.btnDel.Size = new System.Drawing.Size(78, 36);
+            this.btnDel.StyleController = this.layoutControl1;
+            this.btnDel.TabIndex = 11;
+            this.btnDel.Text = "Xoá";
+            this.btnDel.Click += new System.EventHandler(this.btnDel_Click);
+            // 
+            // lbUser
+            // 
+            this.lbUser.Font = new System.Drawing.Font("Microsoft JhengHei UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbUser.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.lbUser.Location = new System.Drawing.Point(203, 74);
+            this.lbUser.Name = "lbUser";
+            this.lbUser.Size = new System.Drawing.Size(264, 30);
+            this.lbUser.TabIndex = 10;
+            this.lbUser.Text = "VNW0014732";
+            this.lbUser.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // txbIndex
+            // 
+            this.txbIndex.Location = new System.Drawing.Point(263, 36);
+            this.txbIndex.Name = "txbIndex";
+            this.txbIndex.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbIndex.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.txbIndex.Properties.Appearance.Options.UseFont = true;
+            this.txbIndex.Properties.Appearance.Options.UseForeColor = true;
+            this.txbIndex.Properties.Appearance.Options.UseTextOptions = true;
+            this.txbIndex.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.txbIndex.Properties.ReadOnly = true;
+            this.txbIndex.Size = new System.Drawing.Size(144, 32);
+            this.txbIndex.StyleController = this.layoutControl1;
+            this.txbIndex.TabIndex = 9;
+            // 
+            // btnNext
+            // 
+            this.btnNext.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.RightCenter;
+            this.btnNext.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnNext.ImageOptions.SvgImage")));
+            this.btnNext.Location = new System.Drawing.Point(411, 34);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(56, 36);
+            this.btnNext.StyleController = this.layoutControl1;
+            this.btnNext.TabIndex = 8;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+            // 
+            // btnPrevious
+            // 
+            this.btnPrevious.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnPrevious.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnPrevious.ImageOptions.SvgImage")));
+            this.btnPrevious.Location = new System.Drawing.Point(203, 34);
+            this.btnPrevious.Name = "btnPrevious";
+            this.btnPrevious.Size = new System.Drawing.Size(56, 36);
+            this.btnPrevious.StyleController = this.layoutControl1;
+            this.btnPrevious.TabIndex = 7;
+            this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
+            // 
             // cbbSheet
             // 
-            this.cbbSheet.Location = new System.Drawing.Point(70, 114);
+            this.cbbSheet.Location = new System.Drawing.Point(70, 115);
             this.cbbSheet.Name = "cbbSheet";
             this.cbbSheet.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbbSheet.Properties.Appearance.Options.UseFont = true;
+            this.cbbSheet.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F);
+            this.cbbSheet.Properties.AppearanceDropDown.Options.UseFont = true;
             this.cbbSheet.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbbSheet.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cbbSheet.Size = new System.Drawing.Size(113, 28);
             this.cbbSheet.StyleController = this.layoutControl1;
             this.cbbSheet.TabIndex = 6;
@@ -192,82 +285,10 @@
             this.layoutControlItem3.Control = this.cbbSheet;
             this.layoutControlItem3.Location = new System.Drawing.Point(0, 80);
             this.layoutControlItem3.Name = "layoutControlItem3";
+            this.layoutControlItem3.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 3, 2);
             this.layoutControlItem3.Size = new System.Drawing.Size(172, 34);
             this.layoutControlItem3.Text = "Sheet";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(43, 20);
-            // 
-            // btnPrevious
-            // 
-            this.btnPrevious.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnPrevious.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButton1.ImageOptions.SvgImage2")));
-            this.btnPrevious.Location = new System.Drawing.Point(203, 34);
-            this.btnPrevious.Name = "btnPrevious";
-            this.btnPrevious.Size = new System.Drawing.Size(56, 36);
-            this.btnPrevious.StyleController = this.layoutControl1;
-            this.btnPrevious.TabIndex = 7;
-            this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
-            // 
-            // layoutControlItem4
-            // 
-            this.layoutControlItem4.Control = this.btnPrevious;
-            this.layoutControlItem4.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem4.MaxSize = new System.Drawing.Size(60, 40);
-            this.layoutControlItem4.MinSize = new System.Drawing.Size(60, 40);
-            this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(60, 40);
-            this.layoutControlItem4.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem4.TextVisible = false;
-            // 
-            // btnNext
-            // 
-            this.btnNext.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnNext.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButton2.ImageOptions.SvgImage1")));
-            this.btnNext.Location = new System.Drawing.Point(411, 34);
-            this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(56, 36);
-            this.btnNext.StyleController = this.layoutControl1;
-            this.btnNext.TabIndex = 8;
-            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
-            // 
-            // layoutControlItem5
-            // 
-            this.layoutControlItem5.Control = this.btnNext;
-            this.layoutControlItem5.Location = new System.Drawing.Point(208, 0);
-            this.layoutControlItem5.MaxSize = new System.Drawing.Size(60, 40);
-            this.layoutControlItem5.MinSize = new System.Drawing.Size(60, 40);
-            this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(60, 40);
-            this.layoutControlItem5.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem5.TextVisible = false;
-            // 
-            // txbIndex
-            // 
-            this.txbIndex.Location = new System.Drawing.Point(263, 36);
-            this.txbIndex.Name = "txbIndex";
-            this.txbIndex.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txbIndex.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.txbIndex.Properties.Appearance.Options.UseFont = true;
-            this.txbIndex.Properties.Appearance.Options.UseForeColor = true;
-            this.txbIndex.Properties.Appearance.Options.UseTextOptions = true;
-            this.txbIndex.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.txbIndex.Properties.ReadOnly = true;
-            this.txbIndex.Size = new System.Drawing.Size(144, 32);
-            this.txbIndex.StyleController = this.layoutControl1;
-            this.txbIndex.TabIndex = 9;
-            // 
-            // layoutControlItem6
-            // 
-            this.layoutControlItem6.Control = this.txbIndex;
-            this.layoutControlItem6.Location = new System.Drawing.Point(60, 0);
-            this.layoutControlItem6.MinSize = new System.Drawing.Size(54, 36);
-            this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 4, 2);
-            this.layoutControlItem6.Size = new System.Drawing.Size(148, 40);
-            this.layoutControlItem6.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem6.TextVisible = false;
             // 
             // layoutControlGroup2
             // 
@@ -288,18 +309,43 @@
             this.layoutControlGroup2.Name = "layoutControlGroup2";
             this.layoutControlGroup2.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 5, 5);
             this.layoutControlGroup2.Size = new System.Drawing.Size(284, 149);
-            this.layoutControlGroup2.Text = "ERP";
+            this.layoutControlGroup2.Text = "ERP - Tự động điền dữ liệu";
             // 
-            // lbUser
+            // layoutControlItem6
             // 
-            this.lbUser.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbUser.ForeColor = System.Drawing.Color.Black;
-            this.lbUser.Location = new System.Drawing.Point(203, 74);
-            this.lbUser.Name = "lbUser";
-            this.lbUser.Size = new System.Drawing.Size(264, 30);
-            this.lbUser.TabIndex = 10;
-            this.lbUser.Text = "label1";
-            this.lbUser.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.layoutControlItem6.Control = this.txbIndex;
+            this.layoutControlItem6.Location = new System.Drawing.Point(60, 0);
+            this.layoutControlItem6.MinSize = new System.Drawing.Size(54, 36);
+            this.layoutControlItem6.Name = "layoutControlItem6";
+            this.layoutControlItem6.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 4, 2);
+            this.layoutControlItem6.Size = new System.Drawing.Size(148, 40);
+            this.layoutControlItem6.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem6.TextVisible = false;
+            // 
+            // layoutControlItem4
+            // 
+            this.layoutControlItem4.Control = this.btnPrevious;
+            this.layoutControlItem4.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem4.MaxSize = new System.Drawing.Size(60, 40);
+            this.layoutControlItem4.MinSize = new System.Drawing.Size(60, 40);
+            this.layoutControlItem4.Name = "layoutControlItem4";
+            this.layoutControlItem4.Size = new System.Drawing.Size(60, 40);
+            this.layoutControlItem4.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem4.TextVisible = false;
+            // 
+            // layoutControlItem5
+            // 
+            this.layoutControlItem5.Control = this.btnNext;
+            this.layoutControlItem5.Location = new System.Drawing.Point(208, 0);
+            this.layoutControlItem5.MaxSize = new System.Drawing.Size(60, 40);
+            this.layoutControlItem5.MinSize = new System.Drawing.Size(60, 40);
+            this.layoutControlItem5.Name = "layoutControlItem5";
+            this.layoutControlItem5.Size = new System.Drawing.Size(60, 40);
+            this.layoutControlItem5.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem5.TextVisible = false;
             // 
             // layoutControlItem7
             // 
@@ -309,20 +355,6 @@
             this.layoutControlItem7.Size = new System.Drawing.Size(268, 34);
             this.layoutControlItem7.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem7.TextVisible = false;
-            // 
-            // btnDel
-            // 
-            this.btnDel.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDel.Appearance.Options.UseFont = true;
-            this.btnDel.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnDel.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButton1.ImageOptions.SvgImage1")));
-            this.btnDel.Location = new System.Drawing.Point(206, 108);
-            this.btnDel.Name = "btnDel";
-            this.btnDel.Size = new System.Drawing.Size(78, 36);
-            this.btnDel.StyleController = this.layoutControl1;
-            this.btnDel.TabIndex = 11;
-            this.btnDel.Text = "Xoá";
-            this.btnDel.Click += new System.EventHandler(this.btnDel_Click);
             // 
             // layoutControlItem8
             // 
@@ -337,20 +369,6 @@
             this.layoutControlItem8.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem8.TextVisible = false;
             // 
-            // btnAdd
-            // 
-            this.btnAdd.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Appearance.Options.UseFont = true;
-            this.btnAdd.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnAdd.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButton2.ImageOptions.SvgImage")));
-            this.btnAdd.Location = new System.Drawing.Point(294, 108);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(79, 36);
-            this.btnAdd.StyleController = this.layoutControl1;
-            this.btnAdd.TabIndex = 12;
-            this.btnAdd.Text = "Dán";
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
             // layoutControlItem9
             // 
             this.layoutControlItem9.Control = this.btnAdd;
@@ -360,20 +378,6 @@
             this.layoutControlItem9.Size = new System.Drawing.Size(89, 40);
             this.layoutControlItem9.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem9.TextVisible = false;
-            // 
-            // btnSave
-            // 
-            this.btnSave.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Appearance.Options.UseFont = true;
-            this.btnSave.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnSave.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButton1.ImageOptions.SvgImage")));
-            this.btnSave.Location = new System.Drawing.Point(383, 108);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(81, 36);
-            this.btnSave.StyleController = this.layoutControl1;
-            this.btnSave.TabIndex = 13;
-            this.btnSave.Text = "Lưu";
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // layoutControlItem10
             // 
@@ -387,6 +391,8 @@
             // 
             // f303_ShiftScheduleMain
             // 
+            this.Appearance.BackColor = System.Drawing.SystemColors.Control;
+            this.Appearance.Options.UseBackColor = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(482, 159);
@@ -397,17 +403,17 @@
             this.Load += new System.EventHandler(this.f303_ShiftScheduleMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txbIndex.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbSheet.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbIndex.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();

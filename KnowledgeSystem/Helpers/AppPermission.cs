@@ -56,7 +56,7 @@ namespace KnowledgeSystem.Helpers
 
         public static List<int> GetListAutoOpenForm()
         {
-            return new List<int>() { SysAdmin, Mod, KnowledgeMain, SafetyCertMain, WorkManagementMain };
+            return new List<int>() { SysAdmin, Mod, KnowledgeMain, SafetyCertMain };
         }
 
         // 207

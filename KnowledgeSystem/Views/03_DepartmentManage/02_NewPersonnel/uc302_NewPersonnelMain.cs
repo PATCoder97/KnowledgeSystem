@@ -411,8 +411,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
                 r.Id,
                 r.Content,
                 r.ExpectedDate,
-                r.UploadDate,
-                r.Attachment
+                r.UploadDate
             }).ToList();
         }
 

@@ -55,9 +55,9 @@ namespace DataAccessLayer
         public virtual DbSet<dm_User> dm_User { get; set; }
         public virtual DbSet<dt301_Base> dt301_Base { get; set; }
         public virtual DbSet<sys_NotesMail> sys_NotesMail { get; set; }
-        public virtual DbSet<dt302_ReportInfo> dt302_ReportInfo { get; set; }
         public virtual DbSet<dm_Attachment> dm_Attachment { get; set; }
         public virtual DbSet<dt302_ReportAttach> dt302_ReportAttach { get; set; }
         public virtual DbSet<dt302_Base> dt302_Base { get; set; }
+        public virtual DbSet<dt302_ReportInfo> dt302_ReportInfo { get; set; }
     }
 }

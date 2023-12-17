@@ -661,7 +661,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 UpdateInfo = false,
                 DeleteInfo = false,
                 SearchInfo = true,
-                ReadFile = false,
+                ReadFile = true,
                 SaveFile = false,
             });
 

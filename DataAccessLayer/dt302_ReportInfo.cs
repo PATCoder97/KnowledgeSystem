@@ -19,6 +19,5 @@ namespace DataAccessLayer
         public string Content { get; set; }
         public System.DateTime ExpectedDate { get; set; }
         public Nullable<System.DateTime> UploadDate { get; set; }
-        public string Attachment { get; set; }
     }
 }

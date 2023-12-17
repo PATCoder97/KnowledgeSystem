@@ -68,6 +68,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._03_ShiftSchedule
             cbbSheet.Enabled = false;
             btnDel.Enabled = false;
             btnAdd.Enabled = false;
+            btnPrevious.Enabled = false;
+            btnNext.Enabled = false;
+            btnSave.Enabled = false;
+
+            lbUser.Text = "";
         }
 
         private void btnPdf_Click(object sender, EventArgs e)
@@ -112,7 +117,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._03_ShiftSchedule
 
             List<string> dataUser = new List<string>();
             Dictionary<string, string> datasShift = new Dictionary<string, string>();
-            shiftDatas = new Dictionary<string, string>();
 
             FileInfo newFile = new FileInfo(pathShiftData);
             //ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
@@ -128,6 +132,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._03_ShiftSchedule
 
         private void cbbSheet_SelectedIndexChanged(object sender, EventArgs e)
         {
+            shiftDatas = new Dictionary<string, string>();
+            indexUsr = 1;
+
             FileInfo newFile = new FileInfo(pathShiftData);
             using (ExcelPackage pck = new ExcelPackage(newFile))
             {
@@ -145,15 +152,17 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._03_ShiftSchedule
 
                     Regex regex = new Regex(@"VNW\d{7}", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Multiline | RegexOptions.Singleline);
                     var matchCollection = regex.Matches(line);
-                    if (matchCollection.Count == 0)
-                    {
-                        continue;
-                    }
+                    if (matchCollection.Count == 0) continue;
+
                     string userID = matchCollection[0].ToString();
 
                     regex = new Regex(@"[休中早夜日班GOFB]{40,}", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Multiline | RegexOptions.Singleline);
                     matchCollection = regex.Matches(line);
+                    if (matchCollection.Count == 0) continue;
+
                     string match = matchCollection[0].ToString();
+
+                    if (match.Length < numDaysInMonth) continue;
                     string shift = match.Substring(match.Length - numDaysInMonth, numDaysInMonth);
 
                     string outputString = "";
@@ -176,14 +185,32 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._03_ShiftSchedule
                 }
 
                 usrs = shiftDatas.Keys.ToList();
+                if (usrs.Count == 0)
+                {
+                    txbIndex.EditValue = $"0/{shiftDatas.Count}";
+                    lbUser.Text = "";
 
-                txbIndex.EditValue = $"{indexUsr}/{shiftDatas.Count}";
-                lbUser.Text = usrs[indexUsr - 1];
+                    btnExcel.Enabled = true;
+                    btnPdf.Enabled = true;
+                    btnAdd.Enabled = false;
+                    btnDel.Enabled = false;
+                    btnPrevious.Enabled = false;
+                    btnNext.Enabled = false;
+                    btnSave.Enabled = false;
+                }
+                else
+                {
+                    txbIndex.EditValue = $"{indexUsr}/{shiftDatas.Count}";
+                    lbUser.Text = usrs[indexUsr - 1];
 
-                btnExcel.Enabled = false;
-                btnPdf.Enabled = false;
-                btnAdd.Enabled = true;
-                btnDel.Enabled = true;
+                    btnExcel.Enabled = false;
+                    btnPdf.Enabled = false;
+                    btnAdd.Enabled = true;
+                    btnDel.Enabled = true;
+                    btnPrevious.Enabled = true;
+                    btnNext.Enabled = true;
+                    btnSave.Enabled = true;
+                }
             }
         }
 

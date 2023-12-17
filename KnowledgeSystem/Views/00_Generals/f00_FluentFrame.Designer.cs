@@ -52,6 +52,7 @@
             this.fluentControl.Location = new System.Drawing.Point(0, 29);
             this.fluentControl.Name = "fluentControl";
             this.fluentControl.ScrollBarMode = DevExpress.XtraBars.Navigation.ScrollBarMode.Touch;
+            this.fluentControl.ShowFilterControl = DevExpress.XtraBars.Navigation.ShowFilterControl.Always;
             this.fluentControl.Size = new System.Drawing.Size(200, 574);
             this.fluentControl.TabIndex = 1;
             this.fluentControl.ViewType = DevExpress.XtraBars.Navigation.AccordionControlViewType.HamburgerMenu;
