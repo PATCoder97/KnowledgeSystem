@@ -84,8 +84,18 @@ namespace BusinessLayer
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    var user = _context.dm_User.FirstOrDefault(p => p.Id == _UID && p.SecondaryPassword == _pass);
-                    return user;
+                    var user = _context.dm_User.FirstOrDefault(p => p.Id == _UID);
+
+                    if (user != null)
+                    {
+                        string pass = EncryptionHelper.DecryptPass(user.SecondaryPassword);
+                        if (pass == _pass)
+                        {
+                            return user;
+                        }
+                    }
+
+                    return default(dm_User);
                 }
             }
             catch (Exception ex)

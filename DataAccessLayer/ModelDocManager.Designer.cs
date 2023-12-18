@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'E:\01. Programming\KnowledgeSystem\DataAccessLayer\ModelDocManager.edmx'. 
+﻿// T4 code generation is enabled for model 'E:\01. Softwares Programming\24. Knowledge System\01. Projects\KnowledgeSystem\DataAccessLayer\ModelDocManager.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

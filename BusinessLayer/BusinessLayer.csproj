@@ -82,6 +82,7 @@
     <Compile Include="dt302\dt302_BaseBUS.cs" />
     <Compile Include="dt302\dt302_ReportInfoBUS.cs" />
     <Compile Include="dt302_ReportAttachBUS.cs" />
+    <Compile Include="EncryptionHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="sys\sys_StaticValueBUS.cs" />
     <Compile Include="sys\sys_NotesMailBUS.cs" />

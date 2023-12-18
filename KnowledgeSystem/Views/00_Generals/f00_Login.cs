@@ -53,6 +53,7 @@ namespace KnowledgeSystem.Views._00_Generals
                 // Lấy userID và password từ TextBox
                 string _userID = txbUserID.Text.Trim().ToUpper();
                 string _password = txbPassword.Text.Trim();
+                string encryptPass = EncryptionHelper.EncryptPass(_password);
 
                 dm_User _userLogin = null;
 
@@ -104,7 +105,7 @@ namespace KnowledgeSystem.Views._00_Generals
                     TPConfigs.LoginUser = _userLogin;
 
                     // Test
-                    _userLogin.SecondaryPassword = txbPassword.Text;
+                    _userLogin.SecondaryPassword = encryptPass;
                     _userLogin.PCName = PCInfoHelper.Instance.GetPCName();
                     _userLogin.IPAddress = PCInfoHelper.Instance.GetIPAddress();
                     dm_UserBUS.Instance.AddOrUpdate(_userLogin);
