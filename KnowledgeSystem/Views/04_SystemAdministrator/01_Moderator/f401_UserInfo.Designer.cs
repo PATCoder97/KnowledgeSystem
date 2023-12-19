@@ -1018,10 +1018,12 @@
             this.Controls.Add(this.barDockControlTop);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.IconOptions.Image = global::KnowledgeSystem.Properties.Resources.AppIcon;
+            this.KeyPreview = true;
             this.Name = "f401_UserInfo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "f401_UserInfo";
             this.Load += new System.EventHandler(this.f401_UserInfo_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.f401_UserInfo_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);

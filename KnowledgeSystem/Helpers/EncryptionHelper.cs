@@ -72,6 +72,11 @@ namespace KnowledgeSystem.Helpers
             // Count non-alphanumeric characters in salt3
             int count = salt3.Count(c => !char.IsLetterOrDigit(c));
 
+            if (count==0)
+            {
+                return "";
+            }
+
             // Extract characters from reversed string to reconstruct the password
             string first = reversedString.Substring(0, count * 4);
             var result = new string(Enumerable.Range(0, first.Length / 4)
