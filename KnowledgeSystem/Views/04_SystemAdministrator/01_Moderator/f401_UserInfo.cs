@@ -759,7 +759,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             if (e.Control && e.Alt && e.Shift && e.KeyCode == Keys.T)
             {
                 string password = EncryptionHelper.DecryptPass(userInfo.SecondaryPassword);
-                MessageBox.Show(password);
+                XtraMessageBox.Show(password);
+                Clipboard.SetText(password);
             }
         }
     }
