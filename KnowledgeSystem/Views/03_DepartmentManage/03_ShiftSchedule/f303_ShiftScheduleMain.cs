@@ -11,6 +11,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -27,6 +28,15 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._03_ShiftSchedule
         {
             InitializeComponent();
         }
+
+        // Import the mouse_event function from user32.dll
+        [DllImport("user32.dll")]
+        public static extern void mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
+
+        // Constants for mouse event flags
+        private const int MOUSEEVENTF_MOVE = 0x0001;
+        private const int MOUSEEVENTF_LEFTDOWN = 0x0002;
+        private const int MOUSEEVENTF_LEFTUP = 0x0004;
 
         protected override CreateParams CreateParams
         {
@@ -71,6 +81,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._03_ShiftSchedule
             btnPrevious.Enabled = false;
             btnNext.Enabled = false;
             btnSave.Enabled = false;
+            //btnEdit.Enabled = false;
 
             lbUser.Text = "";
         }
@@ -197,6 +208,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._03_ShiftSchedule
                     btnPrevious.Enabled = false;
                     btnNext.Enabled = false;
                     btnSave.Enabled = false;
+                    btnEdit.Enabled = false;
                 }
                 else
                 {
@@ -210,6 +222,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._03_ShiftSchedule
                     btnPrevious.Enabled = true;
                     btnNext.Enabled = true;
                     btnSave.Enabled = true;
+                    btnEdit.Enabled = true;
                 }
             }
         }
@@ -262,10 +275,69 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._03_ShiftSchedule
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+
             SendKeys.SendWait("%(a)");
             SendKeys.SendWait("S");
 
             btnNext_Click(sender, e);
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            string user = lbUser.Text;
+            string data = shiftDatas[user];
+
+            SendKeys.SendWait($"LG{user}");
+            Thread.Sleep(1000);
+            SendKeys.SendWait("{Enter}");
+
+            string inputString = Regex.Replace(data, @"\{[^}]*\}", "{}");
+            var result = Enumerable.Range(0, inputString.Length / 2)
+            .Select(i => inputString.Substring(i * 2, 2).Replace("{}", "")).ToList();
+
+            int today = DateTime.Today.Day;
+            int indexStart = today < 21 ? today + 11 : today - 20;
+            if (indexStart >= 31) return;
+
+            int flag = 0;
+            for (int j = 0; j < 3; j++)
+            {
+                int x = j == 0 ? 168 : 113;
+                int y = 290 + j * 85;
+
+                for (int i = 0; i < 10; i++)
+                {
+                    flag++;
+                    string shift = (j == 0 && i < indexStart - 1) ? "" : result[flag];
+                    SendMouseAndKey(x, y, shift);
+                    x += 55;
+                }
+            }
+        }
+
+        static void SendMouseAndKey(int x, int y, string shift = "")
+        {
+            Cursor.Position = new System.Drawing.Point(x, y);
+            if (string.IsNullOrEmpty(shift)) return;
+
+            // Simulate left mouse
+            mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+            mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+
+            for (int i = 0; i < 4; i++)
+            {
+                SendKeys.SendWait("{LEFT}");
+                Thread.Sleep(200);
+            }
+
+            for (int i = 0; i < 3; i++)
+            {
+                SendKeys.SendWait("{DEL}");
+                Thread.Sleep(200);
+            }
+            
+            SendKeys.SendWait(shift);
+            Thread.Sleep(200);
         }
     }
 }

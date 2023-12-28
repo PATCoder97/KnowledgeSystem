@@ -6,6 +6,7 @@ using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._00_Generals;
 using KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase;
 using KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate;
+using KnowledgeSystem.Views._03_DepartmentManage._03_ShiftSchedule;
 using KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin;
 using System;
 using System.Collections.Generic;
@@ -32,14 +33,15 @@ namespace KnowledgeSystem
             Application.SetCompatibleTextRenderingDefault(false);
 
 #if DEBUG
-            Application.Run(new f00_Main());
+            // Application.Run(new f00_Main());
 
-            //TPConfigs.SoftNameTW = "冶金文管系統";
-            //TPConfigs.LoginUser = dm_UserBUS.Instance.GetItemById("VNW0014732");
-            //AppPermission.Instance.CheckAppPermission(7);
+            TPConfigs.SoftNameTW = "冶金文管系統";
+            TPConfigs.LoginUser = dm_UserBUS.Instance.GetItemById("VNW0014732");
+            AppPermission.Instance.CheckAppPermission(7);
+            Application.Run(new f303_ShiftScheduleMain());
             //Application.Run(new f00_FluentFrame(34));
-            ////Application.Run(new f00_FluentFrame(21));
-            //TPConfigs.IdParentControl = AppPermission.SafetyCertMain;
+            //Application.Run(new f00_FluentFrame(21));
+            TPConfigs.IdParentControl = AppPermission.SafetyCertMain;
 
 #else
             Application.Run(new f00_Main());
