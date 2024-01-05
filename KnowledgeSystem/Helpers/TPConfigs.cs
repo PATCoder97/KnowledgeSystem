@@ -29,6 +29,7 @@ namespace KnowledgeSystem.Helpers
         public static string Folder207 { get; set; }
         public static string FolderData { get; set; }
         public static string Folder302 { get; set; }
+        public static string Folder202 { get; set; }
 
         // CONST Value
         public const string strReadFile = "讀取";

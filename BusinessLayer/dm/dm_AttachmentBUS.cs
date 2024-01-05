@@ -73,6 +73,27 @@ namespace BusinessLayer
             }
         }
 
+        /// <summary>
+        /// Lấy được các phụ kiện bằng danh sách id
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public List<dm_Attachment> GetListById(List<int> ids)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dm_Attachment.Where(r => ids.Contains(r.Id)).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public dm_Attachment GetItemById(int id)
         {
             try

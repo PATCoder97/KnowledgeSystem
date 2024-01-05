@@ -39,8 +39,14 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
 
         List<LayoutControlItem> lcControls;
         List<LayoutControlItem> lcImpControls;
-        List<dm_Attachment> attachments;
+        List<Attachment> attachments;
         List<dm_User> users;
+
+        private class Attachment : dm_Attachment
+        {
+            public string PathFile { get; set; }
+        }
+
 
         private void InitializeIcon()
         {
@@ -56,6 +62,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
             cbbTypeOf.Enabled = _enable;
             txbKeyword.Enabled = _enable;
             cbbRequestUsr.Enabled = _enable;
+            txbFilePath.Enabled = _enable;
         }
 
         private void LockControl()
@@ -65,6 +72,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
             cbbTypeOf.Enabled = false;
             txbKeyword.Enabled = false;
             cbbRequestUsr.Enabled = false;
+            txbFilePath.Enabled = false;
 
             switch (eventInfo)
             {
@@ -132,8 +140,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
         {
             idDept2word = TPConfigs.LoginUser.IdDepartment.Substring(0, 2);
 
-            lcControls = new List<LayoutControlItem>() { lcTWName, lcENVNName, lcTypeOf, lcKeyword, lcRequestUsr };
-            lcImpControls = new List<LayoutControlItem>() { lcTWName, lcTypeOf, lcKeyword, lcRequestUsr };
+            lcControls = new List<LayoutControlItem>() { lcTWName, lcENVNName, lcTypeOf, lcKeyword, lcRequestUsr, lcENVNName1 };
+            lcImpControls = new List<LayoutControlItem>() { lcTWName, lcTypeOf, lcKeyword, lcRequestUsr, lcENVNName1 };
             foreach (var item in lcControls)
             {
                 item.AllowHtmlStringInCaption = true;
@@ -145,7 +153,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
             // Set datasource cho gridcontrol
             gcFiles.DataSource = sourceAtts;
 
-            attachments = new List<dm_Attachment>();
+            attachments = new List<Attachment>();
 
             var users = dm_UserBUS.Instance.GetListByDept(idDept2word).Where(r => r.Status == 0).ToList();
             cbbRequestUsr.Properties.DataSource = users;
@@ -166,9 +174,19 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
                     string[] displayName = docBase.DisplayName.Split(new[] { "\n" }, StringSplitOptions.None);
                     txbTWName.EditValue = displayName[0];
                     txbENVNName.EditValue = displayName.Count() > 1 ? displayName[1] : "";
-                    cbbTypeOf.EditValue = docBase.TypeOf;
+                    cbbTypeOf.EditValue = typeOfs.FirstOrDefault(r => r.Id == docBase.TypeOf).DisplayName;
                     txbKeyword.EditValue = docBase.Keyword;
                     cbbRequestUsr.EditValue = docBase.RequestUsr;
+
+                    var att = dt202_AttachBUS.Instance.GetListByBase(idBase202);
+                    attachments = dm_AttachmentBUS.Instance.GetListById(att.Select(r => r.IdAttach).ToList())
+                        .Select(r => new Attachment()
+                        {
+                            ActualName = r.ActualName,
+                            EncryptionName = r.EncryptionName
+                        }).ToList();
+                    sourceAtts.DataSource = attachments;
+                    lbCountFile.Text = $"共{attachments.Count}個附件";
 
                     break;
             }
@@ -188,11 +206,12 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
             foreach (string fileName in openFileDialog.FileNames)
             {
                 string encryptionName = EncryptionHelper.EncryptionFileName(fileName);
-                dm_Attachment attachment = new dm_Attachment
+                Attachment attachment = new Attachment
                 {
                     Thread = "202",
                     ActualName = Path.GetFileName(fileName),
-                    EncryptionName = $"{encryptionName}"
+                    EncryptionName = $"{encryptionName}",
+                    PathFile = fileName
                 };
                 attachments.Add(attachment);
                 Thread.Sleep(5);
@@ -232,18 +251,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
                             ActualName = Path.GetFileName(fileName),
                             EncryptionName = $"{encryptionName}"
                         };
+                        File.Copy(fileName, Path.Combine(TPConfigs.Folder302, attachment.EncryptionName), true);
+
                         int idAttach = dm_AttachmentBUS.Instance.Add(attachment);
                         docBase.IdFile = idAttach;
                         result = dt202_BaseBUS.Instance.Add(docBase);
-
-                        if (result)
-                        {
-                            foreach (var item in attachments)
-                            {
-                                idAttach = dm_AttachmentBUS.Instance.Add(item);
-                                dt202_AttachBUS.Instance.Add(new dt202_Attach() { IdBase = docBase.Id, IdAttach = idAttach });
-                            }
-                        }
 
                         break;
                     case EventFormInfo.View:
@@ -261,6 +273,19 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
                         break;
                     default:
                         break;
+                }
+
+                if (result)
+                {
+                    foreach (var item in attachments)
+                    {
+                        if (string.IsNullOrEmpty(item.PathFile)) continue;
+
+                        int idAtt = dm_AttachmentBUS.Instance.Add(item);
+                        dt202_AttachBUS.Instance.Add(new dt202_Attach() { IdBase = docBase.Id, IdAttach = idAtt });
+
+                        File.Copy(item.PathFile, Path.Combine(TPConfigs.Folder302, item.EncryptionName), true);
+                    }
                 }
             }
 
