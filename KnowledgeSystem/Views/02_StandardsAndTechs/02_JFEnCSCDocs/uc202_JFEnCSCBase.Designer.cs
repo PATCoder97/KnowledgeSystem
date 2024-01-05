@@ -32,8 +32,8 @@
             DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc202_JFEnCSCBase));
             this.gvAttachment = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColActualName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColEncryptName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColIdReport = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcData = new DevExpress.XtraGrid.GridControl();
             this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -45,6 +45,7 @@
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColIdFile = new DevExpress.XtraGrid.Columns.GridColumn();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -57,7 +58,6 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-            this.gColIdFile = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gvAttachment)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
@@ -81,8 +81,8 @@
             this.gvAttachment.Appearance.Row.Options.UseFont = true;
             this.gvAttachment.Appearance.Row.Options.UseForeColor = true;
             this.gvAttachment.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn8,
-            this.gridColumn9,
+            this.gColActualName,
+            this.gColEncryptName,
             this.gColIdReport});
             this.gvAttachment.GridControl = this.gcData;
             this.gvAttachment.Name = "gvAttachment";
@@ -93,22 +93,23 @@
             this.gvAttachment.OptionsView.ShowColumnHeaders = false;
             this.gvAttachment.OptionsView.ShowGroupPanel = false;
             this.gvAttachment.OptionsView.ShowIndicator = false;
+            this.gvAttachment.DoubleClick += new System.EventHandler(this.gvAttachment_DoubleClick);
             // 
-            // gridColumn8
+            // gColActualName
             // 
-            this.gridColumn8.Caption = "ActualName";
-            this.gridColumn8.FieldName = "ActualName";
-            this.gridColumn8.Name = "gridColumn8";
-            this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 0;
+            this.gColActualName.Caption = "ActualName";
+            this.gColActualName.FieldName = "ActualName";
+            this.gColActualName.Name = "gColActualName";
+            this.gColActualName.Visible = true;
+            this.gColActualName.VisibleIndex = 0;
             // 
-            // gridColumn9
+            // gColEncryptName
             // 
-            this.gridColumn9.AppearanceCell.Options.UseTextOptions = true;
-            this.gridColumn9.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn9.Caption = "EncryptionName";
-            this.gridColumn9.FieldName = "EncryptionName";
-            this.gridColumn9.Name = "gridColumn9";
+            this.gColEncryptName.AppearanceCell.Options.UseTextOptions = true;
+            this.gColEncryptName.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gColEncryptName.Caption = "EncryptionName";
+            this.gColEncryptName.FieldName = "EncryptionName";
+            this.gColEncryptName.Name = "gColEncryptName";
             // 
             // gColIdReport
             // 
@@ -249,6 +250,14 @@
             this.gridColumn11.Visible = true;
             this.gridColumn11.VisibleIndex = 5;
             // 
+            // gColIdFile
+            // 
+            this.gColIdFile.Caption = "gColIdFile";
+            this.gColIdFile.FieldName = "IdFile";
+            this.gColIdFile.Name = "gColIdFile";
+            this.gColIdFile.Visible = true;
+            this.gColIdFile.VisibleIndex = 7;
+            // 
             // layoutControl1
             // 
             this.layoutControl1.Controls.Add(this.gcData);
@@ -349,6 +358,7 @@
             this.btnReload.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReload.ItemAppearance.Normal.Options.UseFont = true;
             this.btnReload.Name = "btnReload";
+            this.btnReload.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnReload_ItemClick);
             // 
             // btnExportExcel
             // 
@@ -360,6 +370,7 @@
             this.btnExportExcel.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExportExcel.ItemAppearance.Normal.Options.UseFont = true;
             this.btnExportExcel.Name = "btnExportExcel";
+            this.btnExportExcel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExportExcel_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -393,14 +404,6 @@
             this.barDockControlRight.Manager = this.barManagerTP;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 483);
             // 
-            // gColIdFile
-            // 
-            this.gColIdFile.Caption = "gColIdFile";
-            this.gColIdFile.FieldName = "IdFile";
-            this.gColIdFile.Name = "gColIdFile";
-            this.gColIdFile.Visible = true;
-            this.gColIdFile.VisibleIndex = 7;
-            // 
             // uc202_JFEnCSCBase
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
@@ -433,8 +436,8 @@
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraGrid.GridControl gcData;
         private DevExpress.XtraGrid.Views.Grid.GridView gvAttachment;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
+        private DevExpress.XtraGrid.Columns.GridColumn gColActualName;
+        private DevExpress.XtraGrid.Columns.GridColumn gColEncryptName;
         private DevExpress.XtraGrid.Columns.GridColumn gColIdReport;
         private DevExpress.XtraGrid.Views.Grid.GridView gvData;
         private DevExpress.XtraGrid.Columns.GridColumn gColId;

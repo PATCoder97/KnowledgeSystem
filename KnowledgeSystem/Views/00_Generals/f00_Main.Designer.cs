@@ -202,7 +202,7 @@ namespace KnowledgeSystem.Views._00_Generals
             // 
             this.tileItem5.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
             this.tileItem5.AppearanceItem.Normal.Options.UseFont = true;
-            tileItemElement6.Text = "技術專案/IE改善";
+            tileItemElement6.Text = "技術專案、IE改善";
             this.tileItem5.Elements.Add(tileItemElement6);
             this.tileItem5.Id = 9;
             this.tileItem5.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
@@ -216,7 +216,7 @@ namespace KnowledgeSystem.Views._00_Generals
             this.btnJFEnCSC.AppearanceItem.Normal.Options.UseFont = true;
             tileItemElement7.Appearance.Normal.Font = new System.Drawing.Font("DFKai-SB", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             tileItemElement7.Appearance.Normal.Options.UseFont = true;
-            tileItemElement7.Text = "他廠/JFE與CSC技術資料";
+            tileItemElement7.Text = "他廠、JFE與CSC技術資料";
             this.btnJFEnCSC.Elements.Add(tileItemElement7);
             this.btnJFEnCSC.Id = 11;
             this.btnJFEnCSC.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;

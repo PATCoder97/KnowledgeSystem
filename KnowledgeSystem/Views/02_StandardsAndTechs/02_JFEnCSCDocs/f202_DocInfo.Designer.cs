@@ -62,7 +62,7 @@
             this.lcKeyword = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcRequestUsr = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcENVNName1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.tabAttachments = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -96,7 +96,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcKeyword)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcRequestUsr)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcENVNName1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tabAttachments)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
@@ -359,11 +359,11 @@
             this.tabbedControlGroup1.AppearanceTabPage.HeaderActive.Options.UseForeColor = true;
             this.tabbedControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.tabbedControlGroup1.Name = "tabbedControlGroup1";
-            this.tabbedControlGroup1.SelectedTabPage = this.layoutControlGroup2;
+            this.tabbedControlGroup1.SelectedTabPage = this.layoutControlGroup1;
             this.tabbedControlGroup1.Size = new System.Drawing.Size(690, 318);
             this.tabbedControlGroup1.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlGroup1,
-            this.layoutControlGroup2});
+            this.tabAttachments});
             // 
             // layoutControlGroup1
             // 
@@ -474,16 +474,16 @@
             this.lcENVNName1.Text = "主文路徑";
             this.lcENVNName1.TextSize = new System.Drawing.Size(95, 24);
             // 
-            // layoutControlGroup2
+            // tabAttachments
             // 
-            this.layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.tabAttachments.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem1,
             this.layoutControlItem2,
             this.layoutControlItem3});
-            this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlGroup2.Name = "layoutControlGroup2";
-            this.layoutControlGroup2.Size = new System.Drawing.Size(666, 262);
-            this.layoutControlGroup2.Text = "參考資料";
+            this.tabAttachments.Location = new System.Drawing.Point(0, 0);
+            this.tabAttachments.Name = "tabAttachments";
+            this.tabAttachments.Size = new System.Drawing.Size(666, 262);
+            this.tabAttachments.Text = "參考資料";
             // 
             // layoutControlItem1
             // 
@@ -640,6 +640,7 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
+            this.IconOptions.Image = global::KnowledgeSystem.Properties.Resources.AppIcon;
             this.Name = "f202_DocInfo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "f202_DocInfo";
@@ -665,7 +666,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcKeyword)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcRequestUsr)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcENVNName1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tabAttachments)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
@@ -701,7 +702,7 @@
         private DevExpress.XtraLayout.LayoutControlItem lcENVNName;
         private DevExpress.XtraLayout.LayoutControlItem lcTypeOf;
         private DevExpress.XtraLayout.LayoutControlItem lcKeyword;
-        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup2;
+        private DevExpress.XtraLayout.LayoutControlGroup tabAttachments;
         private DevExpress.XtraEditors.MemoEdit txbKeyword;
         private DevExpress.XtraEditors.SimpleButton btnAddFile;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;

@@ -63,16 +63,17 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
             txbKeyword.Enabled = _enable;
             cbbRequestUsr.Enabled = _enable;
             txbFilePath.Enabled = _enable;
+            tabAttachments.Visibility = _enable ? DevExpress.XtraLayout.Utils.LayoutVisibility.Always : DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
         }
 
         private void LockControl()
         {
-            txbTWName.Enabled = false;
-            txbENVNName.Enabled = false;
-            cbbTypeOf.Enabled = false;
-            txbKeyword.Enabled = false;
-            cbbRequestUsr.Enabled = false;
-            txbFilePath.Enabled = false;
+            //txbTWName.Enabled = false;
+            //txbENVNName.Enabled = false;
+            //cbbTypeOf.Enabled = false;
+            //txbKeyword.Enabled = false;
+            //cbbRequestUsr.Enabled = false;
+            //txbFilePath.Enabled = false;
 
             switch (eventInfo)
             {
