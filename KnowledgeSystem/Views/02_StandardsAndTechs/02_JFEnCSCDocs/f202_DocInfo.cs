@@ -155,7 +155,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
 
             attachments = new List<Attachment>();
 
-            var users = dm_UserBUS.Instance.GetListByDept(idDept2word).Where(r => r.Status == 0).ToList();
+            users = dm_UserBUS.Instance.GetListByDept(idDept2word).Where(r => r.Status == 0).ToList();
             cbbRequestUsr.Properties.DataSource = users;
             cbbRequestUsr.Properties.DisplayMember = "DisplayName";
             cbbRequestUsr.Properties.ValueMember = "Id";
@@ -228,9 +228,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
             string msg = "";
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
             {
-                // Lấy các thông tin người dùng từ giao diện
-                dt202_Base docBase = new dt202_Base();
-
                 docBase.DisplayName = $"{txbTWName.EditValue?.ToString().Trim()}\n{txbENVNName.EditValue?.ToString().Trim()}";
                 docBase.TypeOf = (int)cbbTypeOf.SelectedIndex;
                 docBase.Keyword = txbKeyword.EditValue?.ToString();
@@ -261,15 +258,29 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
                     case EventFormInfo.View:
                         break;
                     case EventFormInfo.Update:
+                        if (!string.IsNullOrEmpty(fileName))
+                        {
+                            encryptionName = EncryptionHelper.EncryptionFileName(fileName);
+                            attachment = new dm_Attachment
+                            {
+                                Thread = "202",
+                                ActualName = Path.GetFileName(fileName),
+                                EncryptionName = $"{encryptionName}"
+                            };
+                            File.Copy(fileName, Path.Combine(TPConfigs.Folder302, attachment.EncryptionName), true);
 
-                        //result = dt302_BaseBUS.Instance.AddOrUpdate(personBase);
+                            idAttach = dm_AttachmentBUS.Instance.Add(attachment);
+                            docBase.IdFile = idAttach;
+                        }
+
+                        result = dt202_BaseBUS.Instance.AddOrUpdate(docBase);
+
                         break;
                     case EventFormInfo.Delete:
-                        var dialogResult = XtraMessageBox.Show($"您確認刪除人員: {docBase.DisplayName}", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        var dialogResult = XtraMessageBox.Show($"您確認刪除文件: {docBase.DisplayName}", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                         if (dialogResult != DialogResult.Yes) return;
 
-                        //result = dm_UserBUS.Instance.Remove(userInfo.Id);
-                        //dm_UserRoleBUS.Instance.RemoveRangeByUID(userInfo.Id);
+                        // result = dt202_BaseBUS.Instance.(userInfo.Id);
                         break;
                     default:
                         break;
@@ -277,12 +288,14 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
 
                 if (result)
                 {
+                    dt202_AttachBUS.Instance.RemoveRangeByIdBase(docBase.Id);
+
                     foreach (var item in attachments)
                     {
-                        if (string.IsNullOrEmpty(item.PathFile)) continue;
-
                         int idAtt = dm_AttachmentBUS.Instance.Add(item);
                         dt202_AttachBUS.Instance.Add(new dt202_Attach() { IdBase = docBase.Id, IdAttach = idAtt });
+
+                        if (string.IsNullOrEmpty(item.PathFile)) continue;
 
                         File.Copy(item.PathFile, Path.Combine(TPConfigs.Folder302, item.EncryptionName), true);
                     }
@@ -332,6 +345,24 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
                 return;
 
             txbFilePath.EditValue = openFileDialog.FileName;
+        }
+
+        private void btnDelFile_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            Attachment attachment = gvFiles.GetRow(gvFiles.FocusedRowHandle) as Attachment;
+
+            string msg = $"您想要刪除附件：\r\n{attachment.ActualName}?";
+            if (MsgTP.MsgYesNoQuestion(msg) == DialogResult.No)
+            {
+                return;
+            }
+
+            attachments.Remove(attachment);
+            lbCountFile.Text = $"共{attachments.Count}個附件";
+
+            int rowIndex = gvFiles.FocusedRowHandle;
+            gvFiles.RefreshData();
+            gvFiles.FocusedRowHandle = rowIndex;
         }
     }
 }

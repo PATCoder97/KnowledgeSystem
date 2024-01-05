@@ -67,7 +67,21 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
 
         private void ItemViewFile_Click(object sender, EventArgs e)
         {
+            int idFile = Convert.ToInt32(gvData.GetRowCellValue(gvData.FocusedRowHandle, gColIdFile));
 
+            var fileInfo = attachmentsInfo.FirstOrDefault(r => r.Id == idFile);
+
+            if (fileInfo == null) return;
+
+            string source = Path.Combine(TPConfigs.Folder302, fileInfo.EncryptionName);
+            string dest = Path.Combine(TPConfigs.TempFolderData, $"{DateTime.Now:yyMMddhhmmss} {fileInfo.ActualName}");
+            if (!Directory.Exists(TPConfigs.TempFolderData))
+                Directory.CreateDirectory(TPConfigs.TempFolderData);
+
+            File.Copy(source, dest, true);
+
+            f00_VIewFile viewFile = new f00_VIewFile(dest);
+            viewFile.ShowDialog();
         }
 
         private void ItemViewInfo_Click(object sender, EventArgs e)
@@ -105,7 +119,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
                                           TypeDoc = typeOf.DisplayName,
                                           data.Keyword,
                                           data.UploadTime,
-                                          UsrUpload = usrUpload.DisplayName
+                                          UsrUpload = usrUpload.DisplayName,
+                                          data.IdFile
                                       }).ToList();
 
                 sourceBases.DataSource = lsBasesDisplay;

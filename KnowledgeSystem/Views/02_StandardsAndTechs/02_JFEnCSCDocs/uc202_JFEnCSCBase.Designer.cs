@@ -57,6 +57,7 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.gColIdFile = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gvAttachment)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
@@ -161,7 +162,8 @@
             this.gColEnterDate,
             this.gridColumn6,
             this.gridColumn5,
-            this.gridColumn11});
+            this.gridColumn11,
+            this.gColIdFile});
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
             this.gvData.OptionsDetail.ShowDetailTabs = false;
@@ -391,6 +393,14 @@
             this.barDockControlRight.Manager = this.barManagerTP;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 483);
             // 
+            // gColIdFile
+            // 
+            this.gColIdFile.Caption = "gColIdFile";
+            this.gColIdFile.FieldName = "IdFile";
+            this.gColIdFile.Name = "gColIdFile";
+            this.gColIdFile.Visible = true;
+            this.gColIdFile.VisibleIndex = 7;
+            // 
             // uc202_JFEnCSCBase
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
@@ -446,5 +456,6 @@
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
+        private DevExpress.XtraGrid.Columns.GridColumn gColIdFile;
     }
 }

@@ -84,7 +84,6 @@ namespace BusinessLayer
             }
         }
 
-
         public bool RemoveByIdAtt(int id)
         {
             try
@@ -102,6 +101,26 @@ namespace BusinessLayer
             {
                 logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
                 throw;
+            }
+        }
+
+        public bool RemoveRangeByIdBase(string _idBase)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    var lsAttachments = _context.dt202_Attach.Where(r => r.IdBase == _idBase);
+                    _context.dt202_Attach.RemoveRange(lsAttachments);
+
+                    int affectedRecords = _context.SaveChanges();
+                    return affectedRecords > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                return false;
             }
         }
     }
