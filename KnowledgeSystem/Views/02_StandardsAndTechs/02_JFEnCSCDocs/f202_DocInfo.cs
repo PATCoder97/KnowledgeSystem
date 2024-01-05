@@ -1,6 +1,9 @@
-﻿using DataAccessLayer;
+﻿using BusinessLayer;
+using DataAccessLayer;
 using DevExpress.XtraEditors;
 using DevExpress.XtraLayout;
+using DevExpress.XtraSplashScreen;
+using DocumentFormat.OpenXml.Drawing.Charts;
 using KnowledgeSystem.Helpers;
 using System;
 using System.Collections.Generic;
@@ -27,16 +30,17 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
 
         public string formName = string.Empty;
         public EventFormInfo eventInfo = EventFormInfo.Create;
-        public int idBase302 = -1;
+        public string idBase202 = "";
         string idDept2word;
 
-        dt302_Base personBase;
+        dt202_Base docBase;
 
         BindingSource sourceAtts = new BindingSource();
 
         List<LayoutControlItem> lcControls;
         List<LayoutControlItem> lcImpControls;
-        List<dm_Attachment> lsAttachments;
+        List<dm_Attachment> attachments;
+        List<dm_User> users;
 
         private void InitializeIcon()
         {
@@ -47,26 +51,25 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
 
         private void EnabledController(bool _enable = true)
         {
-            //cbbSupervisor.Enabled = _enable;
-            //txbSchool.Enabled = _enable;
-            //txbMajor.Enabled = _enable;
-            // txbDateStart.Enabled = _enable;
+            txbTWName.Enabled = _enable;
+            txbENVNName.Enabled = _enable;
+            cbbTypeOf.Enabled = _enable;
+            txbKeyword.Enabled = _enable;
+            cbbRequestUsr.Enabled = _enable;
         }
 
         private void LockControl()
         {
-            //txbUserId.Enabled = false;
-            //txbUserNameVN.Enabled = false;
-            //cbbDept.Enabled = false;
-            //cbbJobTitle.Enabled = false;
-            //txbDateStart.Enabled = false;
+            txbTWName.Enabled = false;
+            txbENVNName.Enabled = false;
+            cbbTypeOf.Enabled = false;
+            txbKeyword.Enabled = false;
+            cbbRequestUsr.Enabled = false;
 
             switch (eventInfo)
             {
                 case EventFormInfo.Create:
                     Text = $"新增{formName}";
-
-                   // txbUserId.Enabled = true;
 
                     btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
@@ -76,9 +79,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
                     break;
                 case EventFormInfo.Update:
                     Text = $"更新{formName}";
-
-                    //txbUserId.Enabled = true;
-                    //txbUserId.ReadOnly = true;
 
                     btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
@@ -130,7 +130,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
 
         private void f202_DocInfo_Load(object sender, EventArgs e)
         {
-            Text = "新增文件";
             idDept2word = TPConfigs.LoginUser.IdDepartment.Substring(0, 2);
 
             lcControls = new List<LayoutControlItem>() { lcTWName, lcENVNName, lcTypeOf, lcKeyword, lcRequestUsr };
@@ -146,7 +145,33 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
             // Set datasource cho gridcontrol
             gcFiles.DataSource = sourceAtts;
 
-            lsAttachments = new List<dm_Attachment>();
+            attachments = new List<dm_Attachment>();
+
+            var users = dm_UserBUS.Instance.GetListByDept(idDept2word).Where(r => r.Status == 0).ToList();
+            cbbRequestUsr.Properties.DataSource = users;
+            cbbRequestUsr.Properties.DisplayMember = "DisplayName";
+            cbbRequestUsr.Properties.ValueMember = "Id";
+
+            var typeOfs = dt202_TypeBUS.Instance.GetList();
+            cbbTypeOf.Properties.Items.AddRange(typeOfs.Select(r => r.DisplayName).ToList());
+
+            switch (eventInfo)
+            {
+                case EventFormInfo.Create:
+                    docBase = new dt202_Base();
+                    break;
+                case EventFormInfo.View:
+                    docBase = dt202_BaseBUS.Instance.GetItemById(idBase202);
+
+                    string[] displayName = docBase.DisplayName.Split(new[] { "\n" }, StringSplitOptions.None);
+                    txbTWName.EditValue = displayName[0];
+                    txbENVNName.EditValue = displayName.Count() > 1 ? displayName[1] : "";
+                    cbbTypeOf.EditValue = docBase.TypeOf;
+                    txbKeyword.EditValue = docBase.Keyword;
+                    cbbRequestUsr.EditValue = docBase.RequestUsr;
+
+                    break;
+            }
         }
 
         private void btnAddFile_Click(object sender, EventArgs e)
@@ -160,7 +185,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
             if (openFileDialog.ShowDialog() != DialogResult.OK)
                 return;
 
-            int index = 0;
             foreach (string fileName in openFileDialog.FileNames)
             {
                 string encryptionName = EncryptionHelper.EncryptionFileName(fileName);
@@ -168,15 +192,121 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
                 {
                     Thread = "202",
                     ActualName = Path.GetFileName(fileName),
-                    EncryptionName = $"{encryptionName}{index++}"
+                    EncryptionName = $"{encryptionName}"
                 };
-                lsAttachments.Add(attachment);
+                attachments.Add(attachment);
                 Thread.Sleep(5);
             }
 
-            sourceAtts.DataSource = lsAttachments;
-            lbCountFile.Text = $"共{lsAttachments.Count}個附件";
+            sourceAtts.DataSource = attachments;
+            lbCountFile.Text = $"共{attachments.Count}個附件";
             gvFiles.RefreshData();
+        }
+
+        private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var result = false;
+            string msg = "";
+            using (var handle = SplashScreenManager.ShowOverlayForm(this))
+            {
+                // Lấy các thông tin người dùng từ giao diện
+                dt202_Base docBase = new dt202_Base();
+
+                docBase.DisplayName = $"{txbTWName.EditValue?.ToString().Trim()}\n{txbENVNName.EditValue?.ToString().Trim()}";
+                docBase.TypeOf = (int)cbbTypeOf.SelectedIndex;
+                docBase.Keyword = txbKeyword.EditValue?.ToString();
+                docBase.RequestUsr = cbbRequestUsr.EditValue?.ToString();
+                docBase.UploadTime = DateTime.Now;
+                docBase.UsrUpload = TPConfigs.LoginUser.Id;
+                string fileName = txbFilePath.EditValue?.ToString();
+
+                switch (eventInfo)
+                {
+                    case EventFormInfo.Create:
+                        docBase.Id = dt202_BaseBUS.Instance.GetNewBaseId(TPConfigs.LoginUser.IdDepartment);
+
+                        string encryptionName = EncryptionHelper.EncryptionFileName(fileName);
+                        dm_Attachment attachment = new dm_Attachment
+                        {
+                            Thread = "202",
+                            ActualName = Path.GetFileName(fileName),
+                            EncryptionName = $"{encryptionName}"
+                        };
+                        int idAttach = dm_AttachmentBUS.Instance.Add(attachment);
+                        docBase.IdFile = idAttach;
+                        result = dt202_BaseBUS.Instance.Add(docBase);
+
+                        if (result)
+                        {
+                            foreach (var item in attachments)
+                            {
+                                idAttach = dm_AttachmentBUS.Instance.Add(item);
+                                dt202_AttachBUS.Instance.Add(new dt202_Attach() { IdBase = docBase.Id, IdAttach = idAttach });
+                            }
+                        }
+
+                        break;
+                    case EventFormInfo.View:
+                        break;
+                    case EventFormInfo.Update:
+
+                        //result = dt302_BaseBUS.Instance.AddOrUpdate(personBase);
+                        break;
+                    case EventFormInfo.Delete:
+                        var dialogResult = XtraMessageBox.Show($"您確認刪除人員: {docBase.DisplayName}", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (dialogResult != DialogResult.Yes) return;
+
+                        //result = dm_UserBUS.Instance.Remove(userInfo.Id);
+                        //dm_UserRoleBUS.Instance.RemoveRangeByUID(userInfo.Id);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            msg = $"{docBase.Id} {docBase.DisplayName} {docBase.RequestUsr}";
+            if (result)
+            {
+                //switch (_eventInfo)
+                //{
+                //    case EventFormInfo.Update:
+                //        logger.Info(_eventInfo.ToString(), msg);
+                //        break;
+                //    case EventFormInfo.Delete:
+                //        logger.Warning(_eventInfo.ToString(), msg);
+                //        break;
+                //}
+                Close();
+            }
+            else
+            {
+                MsgTP.MsgErrorDB();
+            }
+        }
+
+        private void btnEdit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            eventInfo = EventFormInfo.Update;
+            LockControl();
+        }
+
+        private void btnDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
+        }
+
+        private void txbFilePath_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = TPConfigs.FilterFile,
+                Multiselect = false
+            };
+
+            if (openFileDialog.ShowDialog() != DialogResult.OK)
+                return;
+
+            txbFilePath.EditValue = openFileDialog.FileName;
         }
     }
 }

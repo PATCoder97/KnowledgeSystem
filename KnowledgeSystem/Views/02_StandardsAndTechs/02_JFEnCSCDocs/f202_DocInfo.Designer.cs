@@ -54,16 +54,16 @@
             this.cbbTypeOf = new DevExpress.XtraEditors.ComboBoxEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.tabbedControlGroup1 = new DevExpress.XtraLayout.TabbedControlGroup();
-            this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.lcTWName = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcENVNName = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcTypeOf = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcKeyword = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcRequestUsr = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnEdit = new DevExpress.XtraBars.BarButtonItem();
@@ -73,6 +73,8 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.lcENVNName1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.txbFilePath = new DevExpress.XtraEditors.ButtonEdit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcFiles)).BeginInit();
@@ -86,17 +88,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.cbbTypeOf.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroup1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcTWName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcENVNName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcTypeOf)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcKeyword)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcRequestUsr)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcENVNName1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbFilePath.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -110,6 +114,7 @@
             this.layoutControl1.Controls.Add(this.txbTWName);
             this.layoutControl1.Controls.Add(this.txbKeyword);
             this.layoutControl1.Controls.Add(this.cbbTypeOf);
+            this.layoutControl1.Controls.Add(this.txbFilePath);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
@@ -230,7 +235,7 @@
             // 
             // cbbRequestUsr
             // 
-            this.cbbRequestUsr.Location = new System.Drawing.Point(131, 282);
+            this.cbbRequestUsr.Location = new System.Drawing.Point(131, 246);
             this.cbbRequestUsr.Name = "cbbRequestUsr";
             this.cbbRequestUsr.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.cbbRequestUsr.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -302,7 +307,7 @@
             this.txbKeyword.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbKeyword.Properties.Appearance.Options.UseFont = true;
             this.txbKeyword.Properties.Appearance.Options.UseForeColor = true;
-            this.txbKeyword.Size = new System.Drawing.Size(555, 114);
+            this.txbKeyword.Size = new System.Drawing.Size(555, 78);
             this.txbKeyword.StyleController = this.layoutControl1;
             this.txbKeyword.TabIndex = 18;
             // 
@@ -344,44 +349,6 @@
             this.layoutControlGroup1,
             this.layoutControlGroup2});
             // 
-            // layoutControlGroup2
-            // 
-            this.layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem1,
-            this.layoutControlItem2,
-            this.layoutControlItem3});
-            this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlGroup2.Name = "layoutControlGroup2";
-            this.layoutControlGroup2.Size = new System.Drawing.Size(666, 262);
-            this.layoutControlGroup2.Text = "參考資料";
-            // 
-            // layoutControlItem1
-            // 
-            this.layoutControlItem1.Control = this.btnAddFile;
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(110, 40);
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem1.TextVisible = false;
-            // 
-            // layoutControlItem2
-            // 
-            this.layoutControlItem2.Control = this.lbCountFile;
-            this.layoutControlItem2.Location = new System.Drawing.Point(110, 0);
-            this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(556, 40);
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem2.TextVisible = false;
-            // 
-            // layoutControlItem3
-            // 
-            this.layoutControlItem3.Control = this.gcFiles;
-            this.layoutControlItem3.Location = new System.Drawing.Point(0, 40);
-            this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(666, 222);
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem3.TextVisible = false;
-            // 
             // layoutControlGroup1
             // 
             this.layoutControlGroup1.CustomizationFormText = "文件信息";
@@ -390,7 +357,8 @@
             this.lcENVNName,
             this.lcTypeOf,
             this.lcKeyword,
-            this.lcRequestUsr});
+            this.lcRequestUsr,
+            this.lcENVNName1});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
             this.layoutControlGroup1.Size = new System.Drawing.Size(666, 262);
@@ -454,7 +422,7 @@
             this.lcKeyword.CustomizationFormText = "科(系) ";
             this.lcKeyword.Location = new System.Drawing.Point(0, 108);
             this.lcKeyword.Name = "lcKeyword";
-            this.lcKeyword.Size = new System.Drawing.Size(666, 118);
+            this.lcKeyword.Size = new System.Drawing.Size(666, 82);
             this.lcKeyword.Text = "關鍵字";
             this.lcKeyword.TextSize = new System.Drawing.Size(95, 24);
             // 
@@ -467,11 +435,49 @@
             this.lcRequestUsr.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
             this.lcRequestUsr.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.lcRequestUsr.Control = this.cbbRequestUsr;
-            this.lcRequestUsr.Location = new System.Drawing.Point(0, 226);
+            this.lcRequestUsr.Location = new System.Drawing.Point(0, 190);
             this.lcRequestUsr.Name = "lcRequestUsr";
             this.lcRequestUsr.Size = new System.Drawing.Size(666, 36);
             this.lcRequestUsr.Text = "提案人";
             this.lcRequestUsr.TextSize = new System.Drawing.Size(95, 24);
+            // 
+            // layoutControlGroup2
+            // 
+            this.layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem1,
+            this.layoutControlItem2,
+            this.layoutControlItem3});
+            this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlGroup2.Name = "layoutControlGroup2";
+            this.layoutControlGroup2.Size = new System.Drawing.Size(666, 262);
+            this.layoutControlGroup2.Text = "參考資料";
+            // 
+            // layoutControlItem1
+            // 
+            this.layoutControlItem1.Control = this.btnAddFile;
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem1.Name = "layoutControlItem1";
+            this.layoutControlItem1.Size = new System.Drawing.Size(110, 40);
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem1.TextVisible = false;
+            // 
+            // layoutControlItem2
+            // 
+            this.layoutControlItem2.Control = this.lbCountFile;
+            this.layoutControlItem2.Location = new System.Drawing.Point(110, 0);
+            this.layoutControlItem2.Name = "layoutControlItem2";
+            this.layoutControlItem2.Size = new System.Drawing.Size(556, 40);
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem2.TextVisible = false;
+            // 
+            // layoutControlItem3
+            // 
+            this.layoutControlItem3.Control = this.gcFiles;
+            this.layoutControlItem3.Location = new System.Drawing.Point(0, 40);
+            this.layoutControlItem3.Name = "layoutControlItem3";
+            this.layoutControlItem3.Size = new System.Drawing.Size(666, 222);
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem3.TextVisible = false;
             // 
             // barManagerTP
             // 
@@ -531,6 +537,7 @@
             this.btnEdit.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.btnEdit.ItemAppearance.Normal.Options.UseFont = true;
             this.btnEdit.Name = "btnEdit";
+            this.btnEdit.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnEdit_ItemClick);
             // 
             // btnDelete
             // 
@@ -542,6 +549,7 @@
             this.btnDelete.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.btnDelete.ItemAppearance.Normal.Options.UseFont = true;
             this.btnDelete.Name = "btnDelete";
+            this.btnDelete.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDelete_ItemClick);
             // 
             // btnConfirm
             // 
@@ -553,6 +561,7 @@
             this.btnConfirm.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.btnConfirm.ItemAppearance.Normal.Options.UseFont = true;
             this.btnConfirm.Name = "btnConfirm";
+            this.btnConfirm.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnConfirm_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -586,6 +595,38 @@
             this.barDockControlRight.Manager = this.barManagerTP;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 338);
             // 
+            // lcENVNName1
+            // 
+            this.lcENVNName1.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lcENVNName1.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.lcENVNName1.AppearanceItemCaption.Options.UseFont = true;
+            this.lcENVNName1.AppearanceItemCaption.Options.UseForeColor = true;
+            this.lcENVNName1.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
+            this.lcENVNName1.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.lcENVNName1.Control = this.txbFilePath;
+            this.lcENVNName1.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.lcENVNName1.CustomizationFormText = "英越文名稱";
+            this.lcENVNName1.Location = new System.Drawing.Point(0, 226);
+            this.lcENVNName1.Name = "lcENVNName1";
+            this.lcENVNName1.Size = new System.Drawing.Size(666, 36);
+            this.lcENVNName1.Text = "主文路徑";
+            this.lcENVNName1.TextSize = new System.Drawing.Size(95, 24);
+            // 
+            // txbFilePath
+            // 
+            this.txbFilePath.Location = new System.Drawing.Point(131, 282);
+            this.txbFilePath.Name = "txbFilePath";
+            this.txbFilePath.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.txbFilePath.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.txbFilePath.Properties.Appearance.Options.UseFont = true;
+            this.txbFilePath.Properties.Appearance.Options.UseForeColor = true;
+            this.txbFilePath.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Search)});
+            this.txbFilePath.Size = new System.Drawing.Size(555, 32);
+            this.txbFilePath.StyleController = this.layoutControl1;
+            this.txbFilePath.TabIndex = 17;
+            this.txbFilePath.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txbFilePath_ButtonClick);
+            // 
             // f202_DocInfo
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
@@ -615,17 +656,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.cbbTypeOf.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroup1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcTWName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcENVNName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcTypeOf)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcKeyword)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcRequestUsr)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcENVNName1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbFilePath.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -671,5 +714,7 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnDelFile;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
         private DevExpress.XtraEditors.ComboBoxEdit cbbTypeOf;
+        private DevExpress.XtraEditors.ButtonEdit txbFilePath;
+        private DevExpress.XtraLayout.LayoutControlItem lcENVNName1;
     }
 }

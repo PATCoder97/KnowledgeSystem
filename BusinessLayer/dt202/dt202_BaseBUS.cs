@@ -34,7 +34,7 @@ namespace BusinessLayer
             string tempId = $"{_startIdStr}{_indexId:d2}";
             using (var db = new DBDocumentManagementSystemEntities())
             {
-                bool isExistsId = db.dt207_Base.Any(kb => kb.Id == tempId);
+                bool isExistsId = db.dt202_Base.Any(kb => kb.Id == tempId);
                 if (!isExistsId)
                 {
                     return tempId;

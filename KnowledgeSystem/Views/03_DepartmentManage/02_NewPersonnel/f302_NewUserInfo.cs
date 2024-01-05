@@ -284,5 +284,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
             cbbJobTitle.EditValue = dmUsers.JobCode;
             txbDateStart.EditValue = dmUsers.DateCreate;
         }
+
+        private void btnDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
+        }
     }
 }

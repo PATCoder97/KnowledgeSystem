@@ -142,6 +142,8 @@
           <Property Name="Keyword" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="RequestUsr" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="IdFile" Type="int" Nullable="false" />
+          <Property Name="UploadTime" Type="datetime" Nullable="false" />
+          <Property Name="UsrUpload" Type="varchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="dt202_Type">
           <Key>
@@ -472,7 +474,7 @@
           <EntitySet Name="dt202_Type" EntityType="DBDocumentManagementSystemModel.dt202_Type" />
           <EntitySet Name="dt202_Attach" EntityType="DBDocumentManagementSystemModel.dt202_Attach" />
           <EntitySet Name="dt202_Base" EntityType="DBDocumentManagementSystemModel.dt202_Base" />
-          <EntitySet Name="dt207_Attachment1" EntityType="DBDocumentManagementSystemModel.dt207_Attachment1" />
+          <EntitySet Name="dt207_Attachment" EntityType="DBDocumentManagementSystemModel.dt207_Attachment" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -851,8 +853,10 @@
           <Property Name="Keyword" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="RequestUsr" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="IdFile" Type="Int32" Nullable="false" />
+          <Property Name="UploadTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UsrUpload" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="dt207_Attachment1">
+        <EntityType Name="dt207_Attachment">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -1272,6 +1276,8 @@
           <EntitySetMapping Name="dt202_Base">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt202_Base">
               <MappingFragment StoreEntitySet="dt202_Base">
+                <ScalarProperty Name="UsrUpload" ColumnName="UsrUpload" />
+                <ScalarProperty Name="UploadTime" ColumnName="UploadTime" />
                 <ScalarProperty Name="IdFile" ColumnName="IdFile" />
                 <ScalarProperty Name="RequestUsr" ColumnName="RequestUsr" />
                 <ScalarProperty Name="Keyword" ColumnName="Keyword" />
@@ -1281,8 +1287,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dt207_Attachment1">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt207_Attachment1">
+          <EntitySetMapping Name="dt207_Attachment">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt207_Attachment">
               <MappingFragment StoreEntitySet="dt207_Attachment">
                 <ScalarProperty Name="FileName" ColumnName="FileName" />
                 <ScalarProperty Name="EncryptionName" ColumnName="EncryptionName" />
