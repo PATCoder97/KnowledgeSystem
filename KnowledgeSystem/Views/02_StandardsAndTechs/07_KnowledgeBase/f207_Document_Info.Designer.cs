@@ -1014,7 +1014,7 @@
             this.controlgroupDocument.AppearanceTabPage.HeaderActive.Options.UseForeColor = true;
             this.controlgroupDocument.Location = new System.Drawing.Point(0, 28);
             this.controlgroupDocument.Name = "controlgroupDocument";
-            this.controlgroupDocument.SelectedTabPage = this.lcgProgress;
+            this.controlgroupDocument.SelectedTabPage = this.lcgFiles;
             this.controlgroupDocument.Size = new System.Drawing.Size(1056, 386);
             this.controlgroupDocument.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.lcgProgress,

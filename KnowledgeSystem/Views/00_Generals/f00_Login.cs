@@ -126,7 +126,7 @@ namespace KnowledgeSystem.Views._00_Generals
         {
             txbPassword.Focus();
 #if DEBUG
-            txbPassword.Text = "Anhtuan05";
+            txbPassword.Text = "Anhtuan06";
             btnLogin_Click(sender, e);
 #endif
         }

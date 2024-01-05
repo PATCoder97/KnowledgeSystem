@@ -125,6 +125,7 @@ namespace KnowledgeSystem.Views._00_Generals
             AppPermission.KnowledgeMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleKnowledgeMain").ValueT);
             AppPermission.SafetyCertMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleSafetyCertMain").ValueT);
             AppPermission.WorkManagementMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleWorkManagementMain").ValueT);
+            AppPermission.JFEnCSCMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "JFEnCSCMain").ValueT);
         }
 
         private void fMain_Load(object sender, EventArgs e)
@@ -265,6 +266,11 @@ namespace KnowledgeSystem.Views._00_Generals
                 var vbFlyout = new VBFlyoutDialog(form, action, userControl);
                 return vbFlyout.ShowDialog();
             }
+        }
+
+        private void btnJFEnCSC_ItemClick(object sender, TileItemEventArgs e)
+        {
+            ShowFromByFrame(AppPermission.JFEnCSCMain, e);
         }
     }
 }

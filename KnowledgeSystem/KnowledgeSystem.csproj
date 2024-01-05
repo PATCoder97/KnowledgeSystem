@@ -223,6 +223,18 @@
     <Compile Include="Views\00_Generals\uc00_UserControl.Designer.cs">
       <DependentUpon>uc00_UserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\02_JFEnCSCDocs\f202_DocInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\02_JFEnCSCDocs\f202_DocInfo.Designer.cs">
+      <DependentUpon>f202_DocInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\02_JFEnCSCDocs\uc202_JFEnCSCBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\02_JFEnCSCDocs\uc202_JFEnCSCBase.Designer.cs">
+      <DependentUpon>uc202_JFEnCSCBase.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_ChartStatistics.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -467,6 +479,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\00_Generals\uc00_UserControl.resx">
       <DependentUpon>uc00_UserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\02_StandardsAndTechs\02_JFEnCSCDocs\f202_DocInfo.resx">
+      <DependentUpon>f202_DocInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\02_StandardsAndTechs\02_JFEnCSCDocs\uc202_JFEnCSCBase.resx">
+      <DependentUpon>uc202_JFEnCSCBase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\07_KnowledgeBase\f207_ChartStatistics.resx">
       <DependentUpon>f207_ChartStatistics.cs</DependentUpon>

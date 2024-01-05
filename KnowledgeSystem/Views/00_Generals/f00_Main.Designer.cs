@@ -58,7 +58,7 @@ namespace KnowledgeSystem.Views._00_Generals
             this.btnISODocuments = new DevExpress.XtraEditors.TileItem();
             this.tileItem11 = new DevExpress.XtraEditors.TileItem();
             this.tileItem5 = new DevExpress.XtraEditors.TileItem();
-            this.tileItem7 = new DevExpress.XtraEditors.TileItem();
+            this.btnJFEnCSC = new DevExpress.XtraEditors.TileItem();
             this.tileItem8 = new DevExpress.XtraEditors.TileItem();
             this.tileItem9 = new DevExpress.XtraEditors.TileItem();
             this.tileItem10 = new DevExpress.XtraEditors.TileItem();
@@ -169,7 +169,7 @@ namespace KnowledgeSystem.Views._00_Generals
             this.tileGroup3.Items.Add(this.btnISODocuments);
             this.tileGroup3.Items.Add(this.tileItem11);
             this.tileGroup3.Items.Add(this.tileItem5);
-            this.tileGroup3.Items.Add(this.tileItem7);
+            this.tileGroup3.Items.Add(this.btnJFEnCSC);
             this.tileGroup3.Items.Add(this.tileItem8);
             this.tileGroup3.Items.Add(this.tileItem9);
             this.tileGroup3.Items.Add(this.tileItem10);
@@ -208,17 +208,20 @@ namespace KnowledgeSystem.Views._00_Generals
             this.tileItem5.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
             this.tileItem5.Name = "tileItem5";
             // 
-            // tileItem7
+            // btnJFEnCSC
             // 
-            this.tileItem7.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
-            this.tileItem7.AppearanceItem.Normal.Options.UseFont = true;
+            this.btnJFEnCSC.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
+            this.btnJFEnCSC.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
+            this.btnJFEnCSC.AppearanceItem.Normal.Options.UseBackColor = true;
+            this.btnJFEnCSC.AppearanceItem.Normal.Options.UseFont = true;
             tileItemElement7.Appearance.Normal.Font = new System.Drawing.Font("DFKai-SB", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             tileItemElement7.Appearance.Normal.Options.UseFont = true;
             tileItemElement7.Text = "他廠/JFE與CSC技術資料";
-            this.tileItem7.Elements.Add(tileItemElement7);
-            this.tileItem7.Id = 11;
-            this.tileItem7.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
-            this.tileItem7.Name = "tileItem7";
+            this.btnJFEnCSC.Elements.Add(tileItemElement7);
+            this.btnJFEnCSC.Id = 11;
+            this.btnJFEnCSC.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
+            this.btnJFEnCSC.Name = "btnJFEnCSC";
+            this.btnJFEnCSC.ItemClick += new DevExpress.XtraEditors.TileItemClickEventHandler(this.btnJFEnCSC_ItemClick);
             // 
             // tileItem8
             // 
@@ -430,7 +433,7 @@ namespace KnowledgeSystem.Views._00_Generals
         private DevExpress.XtraEditors.TileItem btnISODocuments;
         private DevExpress.XtraEditors.TileItem tileItem5;
         private DevExpress.XtraEditors.TileItem btnWorkManagement;
-        private DevExpress.XtraEditors.TileItem tileItem7;
+        private DevExpress.XtraEditors.TileItem btnJFEnCSC;
         private DevExpress.XtraEditors.TileItem tileItem8;
         private DevExpress.XtraEditors.TileItem tileItem9;
         private DevExpress.XtraEditors.TileItem tileItem10;
