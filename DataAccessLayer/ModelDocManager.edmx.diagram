@@ -11,7 +11,6 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_GroupUser" Width="1.5" PointX="8.625" PointY="0.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_Role" Width="1.5" PointX="2.125" PointY="0.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_StepProgress" Width="1.5" PointX="11.875" PointY="0.5" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt207_Attachment" Width="1.5" PointX="3.75" PointY="7.375" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt207_Attachment_BAK" Width="1.5" PointX="5.375" PointY="7.375" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt207_Base_BAK" Width="1.5" PointX="2.125" PointY="7.375" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt207_NotifyEditDoc" Width="1.5" PointX="15.125" PointY="7.375" />
@@ -39,6 +38,10 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt302_Base" Width="1.5" PointX="0.5" PointY="15.125" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt302_ReportInfo" Width="1.5" PointX="2.125" PointY="15.125" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_User" Width="1.5" PointX="16.75" PointY="0.5" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt202_Type" Width="1.5" PointX="3.75" PointY="17.875" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt202_Attach" Width="1.5" PointX="2.125" PointY="17.875" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt202_Base" Width="1.5" PointX="0.5" PointY="17.875" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt207_Attachment1" Width="1.5" PointX="3.75" PointY="7.375" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

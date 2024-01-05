@@ -74,6 +74,15 @@
     <Compile Include="dm_UserRole.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
+    <Compile Include="dt202_Attach.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dt202_Base.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dt202_Type.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
     <Compile Include="dt207_Attachment.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>

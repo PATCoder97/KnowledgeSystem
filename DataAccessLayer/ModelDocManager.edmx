@@ -124,6 +124,32 @@
           <Property Name="IdUser" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="IdRole" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="dt202_Attach">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdBase" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="IdAttach" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt202_Base">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="TypeOf" Type="int" />
+          <Property Name="Keyword" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RequestUsr" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="IdFile" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt202_Type">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
         <EntityType Name="dt207_Attachment">
           <Key>
             <PropertyRef Name="Id" />
@@ -379,6 +405,9 @@
           <EntitySet Name="dm_StepProgress" EntityType="Self.dm_StepProgress" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dm_User" EntityType="Self.dm_User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dm_UserRole" EntityType="Self.dm_UserRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt202_Attach" EntityType="Self.dt202_Attach" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt202_Base" EntityType="Self.dt202_Base" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt202_Type" EntityType="Self.dt202_Type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt207_Attachment" EntityType="Self.dt207_Attachment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt207_Attachment_BAK" EntityType="Self.dt207_Attachment_BAK" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt207_Base" EntityType="Self.dt207_Base" Schema="dbo" store:Type="Tables" />
@@ -413,7 +442,6 @@
           <EntitySet Name="dm_GroupUser" EntityType="DBDocumentManagementSystemModel.dm_GroupUser" />
           <EntitySet Name="dm_Role" EntityType="DBDocumentManagementSystemModel.dm_Role" />
           <EntitySet Name="dm_StepProgress" EntityType="DBDocumentManagementSystemModel.dm_StepProgress" />
-          <EntitySet Name="dt207_Attachment" EntityType="DBDocumentManagementSystemModel.dt207_Attachment" />
           <EntitySet Name="dt207_Attachment_BAK" EntityType="DBDocumentManagementSystemModel.dt207_Attachment_BAK" />
           <EntitySet Name="dt207_Base_BAK" EntityType="DBDocumentManagementSystemModel.dt207_Base_BAK" />
           <EntitySet Name="dt207_NotifyEditDoc" EntityType="DBDocumentManagementSystemModel.dt207_NotifyEditDoc" />
@@ -441,6 +469,10 @@
           <EntitySet Name="dt302_Base" EntityType="DBDocumentManagementSystemModel.dt302_Base" />
           <EntitySet Name="dt302_ReportInfo" EntityType="DBDocumentManagementSystemModel.dt302_ReportInfo" />
           <EntitySet Name="dm_User" EntityType="DBDocumentManagementSystemModel.dm_User" />
+          <EntitySet Name="dt202_Type" EntityType="DBDocumentManagementSystemModel.dt202_Type" />
+          <EntitySet Name="dt202_Attach" EntityType="DBDocumentManagementSystemModel.dt202_Attach" />
+          <EntitySet Name="dt202_Base" EntityType="DBDocumentManagementSystemModel.dt202_Base" />
+          <EntitySet Name="dt207_Attachment1" EntityType="DBDocumentManagementSystemModel.dt207_Attachment1" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -495,15 +527,6 @@
           <Property Name="IdProgress" Type="Int32" Nullable="false" />
           <Property Name="IdGroup" Type="Int32" Nullable="false" />
           <Property Name="IndexStep" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="dt207_Attachment">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdKnowledgeBase" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-          <Property Name="EncryptionName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="FileName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="dt207_Attachment_BAK">
           <Key>
@@ -803,6 +826,41 @@
           <Property Name="Status" Type="Int32" />
           <Property Name="Sex" Type="Boolean" />
         </EntityType>
+        <EntityType Name="dt202_Type">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dt202_Attach">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdBase" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="IdAttach" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt202_Base">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="TypeOf" Type="Int32" />
+          <Property Name="Keyword" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="RequestUsr" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdFile" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt207_Attachment1">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdKnowledgeBase" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="EncryptionName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="FileName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -865,16 +923,6 @@
                 <ScalarProperty Name="IndexStep" ColumnName="IndexStep" />
                 <ScalarProperty Name="IdGroup" ColumnName="IdGroup" />
                 <ScalarProperty Name="IdProgress" ColumnName="IdProgress" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="dt207_Attachment">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt207_Attachment">
-              <MappingFragment StoreEntitySet="dt207_Attachment">
-                <ScalarProperty Name="FileName" ColumnName="FileName" />
-                <ScalarProperty Name="EncryptionName" ColumnName="EncryptionName" />
-                <ScalarProperty Name="IdKnowledgeBase" ColumnName="IdKnowledgeBase" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1200,6 +1248,45 @@
                 <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
                 <ScalarProperty Name="SecondaryPassword" ColumnName="SecondaryPassword" />
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt202_Type">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt202_Type">
+              <MappingFragment StoreEntitySet="dt202_Type">
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt202_Attach">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt202_Attach">
+              <MappingFragment StoreEntitySet="dt202_Attach">
+                <ScalarProperty Name="IdAttach" ColumnName="IdAttach" />
+                <ScalarProperty Name="IdBase" ColumnName="IdBase" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt202_Base">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt202_Base">
+              <MappingFragment StoreEntitySet="dt202_Base">
+                <ScalarProperty Name="IdFile" ColumnName="IdFile" />
+                <ScalarProperty Name="RequestUsr" ColumnName="RequestUsr" />
+                <ScalarProperty Name="Keyword" ColumnName="Keyword" />
+                <ScalarProperty Name="TypeOf" ColumnName="TypeOf" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt207_Attachment1">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt207_Attachment1">
+              <MappingFragment StoreEntitySet="dt207_Attachment">
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="EncryptionName" ColumnName="EncryptionName" />
+                <ScalarProperty Name="IdKnowledgeBase" ColumnName="IdKnowledgeBase" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
