@@ -74,7 +74,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
 
             if (fileInfo == null) return;
 
-            string source = Path.Combine(TPConfigs.Folder302, fileInfo.EncryptionName);
+            string source = Path.Combine(TPConfigs.Folder202, fileInfo.EncryptionName);
             string dest = Path.Combine(TPConfigs.TempFolderData, $"{DateTime.Now:yyMMddhhmmss} {fileInfo.ActualName}");
             if (!Directory.Exists(TPConfigs.TempFolderData))
                 Directory.CreateDirectory(TPConfigs.TempFolderData);

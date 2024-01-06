@@ -14,9 +14,11 @@ using System.IO;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static DevExpress.Utils.Filtering.ExcelFilterOptions;
 
 namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
 {
@@ -45,6 +47,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
         private class Attachment : dm_Attachment
         {
             public string PathFile { get; set; }
+            public dm_Attachment BaseAttachment { get; set; } = new dm_Attachment();
         }
 
 
@@ -184,7 +187,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
                         .Select(r => new Attachment()
                         {
                             ActualName = r.ActualName,
-                            EncryptionName = r.EncryptionName
+                            EncryptionName = r.EncryptionName,
+                            Thread = r.Thread
                         }).ToList();
                     sourceAtts.DataSource = attachments;
                     lbCountFile.Text = $"共{attachments.Count}個附件";
@@ -225,17 +229,43 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            // Kiểm tra xem đã điền đầy đủ thông tin yêu cầu hay chưa
+            bool IsValidate = true;
+            if (string.IsNullOrEmpty(txbTWName.EditValue?.ToString())) IsValidate = false;
+            if (string.IsNullOrEmpty(cbbTypeOf.EditValue?.ToString())) IsValidate = false;
+            if (string.IsNullOrEmpty(txbKeyword.EditValue?.ToString())) IsValidate = false;
+            if (string.IsNullOrEmpty(cbbRequestUsr.EditValue?.ToString())) IsValidate = false;
+            if (string.IsNullOrEmpty(txbFilePath.EditValue?.ToString()) && eventInfo == EventFormInfo.Create) IsValidate = false;
+
+            if (!IsValidate)
+            {
+                MsgTP.MsgError("請填寫所有信息<color=red>(*)</color>");
+                return;
+            }
+
             var result = false;
             string msg = "";
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
             {
                 docBase.DisplayName = $"{txbTWName.EditValue?.ToString().Trim()}\n{txbENVNName.EditValue?.ToString().Trim()}";
                 docBase.TypeOf = (int)cbbTypeOf.SelectedIndex;
-                docBase.Keyword = txbKeyword.EditValue?.ToString();
                 docBase.RequestUsr = cbbRequestUsr.EditValue?.ToString();
                 docBase.UploadTime = DateTime.Now;
                 docBase.UsrUpload = TPConfigs.LoginUser.Id;
                 string fileName = txbFilePath.EditValue?.ToString();
+
+                string _keyword = Regex.Replace(txbKeyword.Text, @"[\t\n\r\s]+", match =>
+                {
+                    if (match.Value.Contains("\n"))
+                    {
+                        return "\r\n";
+                    }
+                    else
+                    {
+                        return " ";
+                    }
+                }).Trim();
+                docBase.Keyword = _keyword;
 
                 switch (eventInfo)
                 {
@@ -249,7 +279,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
                             ActualName = Path.GetFileName(fileName),
                             EncryptionName = $"{encryptionName}"
                         };
-                        File.Copy(fileName, Path.Combine(TPConfigs.Folder302, attachment.EncryptionName), true);
+                        File.Copy(fileName, Path.Combine(TPConfigs.Folder202, attachment.EncryptionName), true);
 
                         int idAttach = dm_AttachmentBUS.Instance.Add(attachment);
                         docBase.IdFile = idAttach;
@@ -268,7 +298,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
                                 ActualName = Path.GetFileName(fileName),
                                 EncryptionName = $"{encryptionName}"
                             };
-                            File.Copy(fileName, Path.Combine(TPConfigs.Folder302, attachment.EncryptionName), true);
+                            File.Copy(fileName, Path.Combine(TPConfigs.Folder202, attachment.EncryptionName), true);
 
                             idAttach = dm_AttachmentBUS.Instance.Add(attachment);
                             docBase.IdFile = idAttach;
@@ -293,12 +323,19 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
 
                     foreach (var item in attachments)
                     {
-                        int idAtt = dm_AttachmentBUS.Instance.Add(item);
+                        dm_Attachment att = new dm_Attachment()
+                        {
+                            ActualName = item.ActualName,
+                            EncryptionName = item.EncryptionName,
+                            Thread = item.Thread,
+                        };
+
+                        int idAtt = dm_AttachmentBUS.Instance.Add(att);
                         dt202_AttachBUS.Instance.Add(new dt202_Attach() { IdBase = docBase.Id, IdAttach = idAtt });
 
                         if (string.IsNullOrEmpty(item.PathFile)) continue;
 
-                        File.Copy(item.PathFile, Path.Combine(TPConfigs.Folder302, item.EncryptionName), true);
+                        File.Copy(item.PathFile, Path.Combine(TPConfigs.Folder202, item.EncryptionName), true);
                     }
                 }
             }

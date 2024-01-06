@@ -118,7 +118,7 @@ namespace KnowledgeSystem.Views._00_Generals
             TPConfigs.FolderData = lsStaticValue.FirstOrDefault(r => r.KeyT == "FolderData").ValueT;
             TPConfigs.Folder207 = Path.Combine(TPConfigs.FolderData, "207"); 
             TPConfigs.Folder302 = Path.Combine(TPConfigs.FolderData, "302");
-            TPConfigs.Folder302 = Path.Combine(TPConfigs.FolderData, "202");
+            TPConfigs.Folder202 = Path.Combine(TPConfigs.FolderData, "202");
 
             // Lấy các role
             AppPermission.SysAdmin = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleSysAdmin").ValueT);

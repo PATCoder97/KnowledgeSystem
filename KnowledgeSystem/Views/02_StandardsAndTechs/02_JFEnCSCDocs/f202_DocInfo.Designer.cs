@@ -320,8 +320,11 @@
             this.cbbTypeOf.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.cbbTypeOf.Properties.Appearance.Options.UseFont = true;
             this.cbbTypeOf.Properties.Appearance.Options.UseForeColor = true;
+            this.cbbTypeOf.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbTypeOf.Properties.AppearanceDropDown.Options.UseFont = true;
             this.cbbTypeOf.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbbTypeOf.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cbbTypeOf.Size = new System.Drawing.Size(555, 32);
             this.cbbTypeOf.StyleController = this.layoutControl1;
             this.cbbTypeOf.TabIndex = 18;

@@ -200,8 +200,6 @@
             // 
             // gridColumn1
             // 
-            this.gridColumn1.AppearanceCell.Options.UseTextOptions = true;
-            this.gridColumn1.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn1.Caption = "文件名稱";
             this.gridColumn1.FieldName = "DisplayName";
             this.gridColumn1.Name = "gridColumn1";
@@ -218,8 +216,6 @@
             // 
             // gColEnterDate
             // 
-            this.gColEnterDate.AppearanceCell.Options.UseTextOptions = true;
-            this.gColEnterDate.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gColEnterDate.Caption = "類別";
             this.gColEnterDate.FieldName = "TypeDoc";
             this.gColEnterDate.Name = "gColEnterDate";
@@ -244,6 +240,8 @@
             // 
             // gridColumn11
             // 
+            this.gridColumn11.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn11.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn11.Caption = "上傳日期";
             this.gridColumn11.FieldName = "UploadTime";
             this.gridColumn11.Name = "gridColumn11";
@@ -255,8 +253,6 @@
             this.gColIdFile.Caption = "gColIdFile";
             this.gColIdFile.FieldName = "IdFile";
             this.gColIdFile.Name = "gColIdFile";
-            this.gColIdFile.Visible = true;
-            this.gColIdFile.VisibleIndex = 7;
             // 
             // layoutControl1
             // 
