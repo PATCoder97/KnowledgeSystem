@@ -45,10 +45,6 @@
             this.lbCountFile = new System.Windows.Forms.Label();
             this.btnAddFile = new DevExpress.XtraEditors.SimpleButton();
             this.txbENVNName = new DevExpress.XtraEditors.TextEdit();
-            this.cbbRequestUsr = new DevExpress.XtraEditors.SearchLookUpEdit();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.txbTWName = new DevExpress.XtraEditors.TextEdit();
             this.txbKeyword = new DevExpress.XtraEditors.MemoEdit();
             this.cbbTypeOf = new DevExpress.XtraEditors.ComboBoxEdit();
@@ -75,14 +71,13 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.txbRequestUsr = new DevExpress.XtraEditors.TextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcFiles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvFiles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDelFile)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbENVNName.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbbRequestUsr.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbTWName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbKeyword.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbTypeOf.Properties)).BeginInit();
@@ -101,6 +96,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbRequestUsr.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -110,11 +106,11 @@
             this.layoutControl1.Controls.Add(this.lbCountFile);
             this.layoutControl1.Controls.Add(this.btnAddFile);
             this.layoutControl1.Controls.Add(this.txbENVNName);
-            this.layoutControl1.Controls.Add(this.cbbRequestUsr);
             this.layoutControl1.Controls.Add(this.txbTWName);
             this.layoutControl1.Controls.Add(this.txbKeyword);
             this.layoutControl1.Controls.Add(this.cbbTypeOf);
             this.layoutControl1.Controls.Add(this.txbFilePath);
+            this.layoutControl1.Controls.Add(this.txbRequestUsr);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
@@ -234,60 +230,6 @@
             this.txbENVNName.StyleController = this.layoutControl1;
             this.txbENVNName.TabIndex = 17;
             // 
-            // cbbRequestUsr
-            // 
-            this.cbbRequestUsr.Location = new System.Drawing.Point(131, 246);
-            this.cbbRequestUsr.Name = "cbbRequestUsr";
-            this.cbbRequestUsr.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.cbbRequestUsr.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.cbbRequestUsr.Properties.Appearance.Options.UseFont = true;
-            this.cbbRequestUsr.Properties.Appearance.Options.UseForeColor = true;
-            this.cbbRequestUsr.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbbRequestUsr.Properties.AppearanceDropDown.Options.UseFont = true;
-            this.cbbRequestUsr.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbbRequestUsr.Properties.NullText = "";
-            this.cbbRequestUsr.Properties.PopupView = this.gridView1;
-            this.cbbRequestUsr.Size = new System.Drawing.Size(555, 32);
-            this.cbbRequestUsr.StyleController = this.layoutControl1;
-            this.cbbRequestUsr.TabIndex = 16;
-            // 
-            // gridView1
-            // 
-            this.gridView1.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridView1.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
-            this.gridView1.Appearance.HeaderPanel.Options.UseFont = true;
-            this.gridView1.Appearance.HeaderPanel.Options.UseForeColor = true;
-            this.gridView1.Appearance.HeaderPanel.Options.UseTextOptions = true;
-            this.gridView1.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridView1.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridView1.Appearance.Row.ForeColor = System.Drawing.Color.Black;
-            this.gridView1.Appearance.Row.Options.UseFont = true;
-            this.gridView1.Appearance.Row.Options.UseForeColor = true;
-            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn7,
-            this.gridColumn8});
-            this.gridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.gridView1.Name = "gridView1";
-            this.gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.gridView1.OptionsView.ShowGroupPanel = false;
-            // 
-            // gridColumn7
-            // 
-            this.gridColumn7.Caption = "導師代號";
-            this.gridColumn7.FieldName = "Id";
-            this.gridColumn7.Name = "gridColumn7";
-            this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 0;
-            // 
-            // gridColumn8
-            // 
-            this.gridColumn8.Caption = "導師名稱";
-            this.gridColumn8.FieldName = "DisplayName";
-            this.gridColumn8.Name = "gridColumn8";
-            this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 1;
-            // 
             // txbTWName
             // 
             this.txbTWName.Location = new System.Drawing.Point(131, 56);
@@ -339,6 +281,7 @@
             this.txbFilePath.Properties.Appearance.Options.UseForeColor = true;
             this.txbFilePath.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Search)});
+            this.txbFilePath.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.txbFilePath.Size = new System.Drawing.Size(555, 32);
             this.txbFilePath.StyleController = this.layoutControl1;
             this.txbFilePath.TabIndex = 17;
@@ -453,7 +396,7 @@
             this.lcRequestUsr.AppearanceItemCaption.Options.UseForeColor = true;
             this.lcRequestUsr.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
             this.lcRequestUsr.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
-            this.lcRequestUsr.Control = this.cbbRequestUsr;
+            this.lcRequestUsr.Control = this.txbRequestUsr;
             this.lcRequestUsr.Location = new System.Drawing.Point(0, 190);
             this.lcRequestUsr.Name = "lcRequestUsr";
             this.lcRequestUsr.Size = new System.Drawing.Size(666, 36);
@@ -631,6 +574,18 @@
             this.barDockControlRight.Manager = this.barManagerTP;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 338);
             // 
+            // txbRequestUsr
+            // 
+            this.txbRequestUsr.Location = new System.Drawing.Point(131, 246);
+            this.txbRequestUsr.Name = "txbRequestUsr";
+            this.txbRequestUsr.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.txbRequestUsr.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.txbRequestUsr.Properties.Appearance.Options.UseFont = true;
+            this.txbRequestUsr.Properties.Appearance.Options.UseForeColor = true;
+            this.txbRequestUsr.Size = new System.Drawing.Size(555, 32);
+            this.txbRequestUsr.StyleController = this.layoutControl1;
+            this.txbRequestUsr.TabIndex = 16;
+            // 
             // f202_DocInfo
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
@@ -654,8 +609,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvFiles)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDelFile)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbENVNName.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbbRequestUsr.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbTWName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbKeyword.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbTypeOf.Properties)).EndInit();
@@ -674,6 +627,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbRequestUsr.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -683,10 +637,6 @@
 
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraEditors.TextEdit txbENVNName;
-        private DevExpress.XtraEditors.SearchLookUpEdit cbbRequestUsr;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
         private DevExpress.XtraEditors.TextEdit txbTWName;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraBars.BarManager barManagerTP;
@@ -721,5 +671,6 @@
         private DevExpress.XtraEditors.ComboBoxEdit cbbTypeOf;
         private DevExpress.XtraEditors.ButtonEdit txbFilePath;
         private DevExpress.XtraLayout.LayoutControlItem lcENVNName1;
+        private DevExpress.XtraEditors.TextEdit txbRequestUsr;
     }
 }

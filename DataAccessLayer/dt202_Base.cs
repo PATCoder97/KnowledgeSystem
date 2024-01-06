@@ -16,11 +16,12 @@ namespace DataAccessLayer
     {
         public string Id { get; set; }
         public string DisplayName { get; set; }
-        public Nullable<int> TypeOf { get; set; }
+        public int TypeOf { get; set; }
         public string Keyword { get; set; }
         public string RequestUsr { get; set; }
         public int IdFile { get; set; }
         public System.DateTime UploadTime { get; set; }
         public string UsrUpload { get; set; }
+        public bool IsDelete { get; set; }
     }
 }

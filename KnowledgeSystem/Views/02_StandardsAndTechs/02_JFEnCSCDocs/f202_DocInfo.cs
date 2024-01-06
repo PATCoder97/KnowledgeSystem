@@ -64,7 +64,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
             txbENVNName.Enabled = _enable;
             cbbTypeOf.Enabled = _enable;
             txbKeyword.Enabled = _enable;
-            cbbRequestUsr.Enabled = _enable;
+            txbRequestUsr.Enabled = _enable;
             txbFilePath.Enabled = _enable;
             tabAttachments.Visibility = _enable ? DevExpress.XtraLayout.Utils.LayoutVisibility.Always : DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
         }
@@ -159,11 +159,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
 
             attachments = new List<Attachment>();
 
-            users = dm_UserBUS.Instance.GetListByDept(idDept2word).Where(r => r.Status == 0).ToList();
-            cbbRequestUsr.Properties.DataSource = users;
-            cbbRequestUsr.Properties.DisplayMember = "DisplayName";
-            cbbRequestUsr.Properties.ValueMember = "Id";
-
             var typeOfs = dt202_TypeBUS.Instance.GetList();
             cbbTypeOf.Properties.Items.AddRange(typeOfs.Select(r => r.DisplayName).ToList());
 
@@ -180,7 +175,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
                     txbENVNName.EditValue = displayName.Count() > 1 ? displayName[1] : "";
                     cbbTypeOf.EditValue = typeOfs.FirstOrDefault(r => r.Id == docBase.TypeOf).DisplayName;
                     txbKeyword.EditValue = docBase.Keyword;
-                    cbbRequestUsr.EditValue = docBase.RequestUsr;
+                    txbRequestUsr.EditValue = docBase.RequestUsr;
 
                     var att = dt202_AttachBUS.Instance.GetListByBase(idBase202);
                     attachments = dm_AttachmentBUS.Instance.GetListById(att.Select(r => r.IdAttach).ToList())
@@ -234,7 +229,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
             if (string.IsNullOrEmpty(txbTWName.EditValue?.ToString())) IsValidate = false;
             if (string.IsNullOrEmpty(cbbTypeOf.EditValue?.ToString())) IsValidate = false;
             if (string.IsNullOrEmpty(txbKeyword.EditValue?.ToString())) IsValidate = false;
-            if (string.IsNullOrEmpty(cbbRequestUsr.EditValue?.ToString())) IsValidate = false;
+            if (string.IsNullOrEmpty(txbRequestUsr.EditValue?.ToString())) IsValidate = false;
             if (string.IsNullOrEmpty(txbFilePath.EditValue?.ToString()) && eventInfo == EventFormInfo.Create) IsValidate = false;
 
             if (!IsValidate)
@@ -247,9 +242,12 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
             string msg = "";
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
             {
-                docBase.DisplayName = $"{txbTWName.EditValue?.ToString().Trim()}\n{txbENVNName.EditValue?.ToString().Trim()}";
+                string nameTW = Regex.Replace(txbTWName.EditValue?.ToString().Trim(), @"\s+", " ");
+                string nameEVN = Regex.Replace(txbENVNName.EditValue?.ToString().Trim(), @"\s+", " ");
+                docBase.DisplayName = $"{nameTW}\n{nameEVN}";
+
                 docBase.TypeOf = (int)cbbTypeOf.SelectedIndex;
-                docBase.RequestUsr = cbbRequestUsr.EditValue?.ToString();
+                docBase.RequestUsr = txbRequestUsr.EditValue?.ToString().Replace(" ", "");
                 docBase.UploadTime = DateTime.Now;
                 docBase.UsrUpload = TPConfigs.LoginUser.Id;
                 string fileName = txbFilePath.EditValue?.ToString();
@@ -368,7 +366,15 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
 
         private void btnDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            var dialogResult = XtraMessageBox.Show($"您确定要删除该文件：\n{docBase.DisplayName}", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (dialogResult == DialogResult.No)
+            {
+                return;
+            }
 
+            dt202_BaseBUS.Instance.Remove(docBase.Id);
+
+            Close();
         }
 
         private void txbFilePath_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)

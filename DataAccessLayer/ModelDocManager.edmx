@@ -138,12 +138,13 @@
           </Key>
           <Property Name="Id" Type="varchar" MaxLength="32" Nullable="false" />
           <Property Name="DisplayName" Type="nvarchar" MaxLength="512" Nullable="false" />
-          <Property Name="TypeOf" Type="int" />
+          <Property Name="TypeOf" Type="int" Nullable="false" />
           <Property Name="Keyword" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="RequestUsr" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="RequestUsr" Type="nvarchar" MaxLength="16" Nullable="false" />
           <Property Name="IdFile" Type="int" Nullable="false" />
           <Property Name="UploadTime" Type="datetime" Nullable="false" />
           <Property Name="UsrUpload" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="dt202_Type">
           <Key>
@@ -473,8 +474,8 @@
           <EntitySet Name="dm_User" EntityType="DBDocumentManagementSystemModel.dm_User" />
           <EntitySet Name="dt202_Type" EntityType="DBDocumentManagementSystemModel.dt202_Type" />
           <EntitySet Name="dt202_Attach" EntityType="DBDocumentManagementSystemModel.dt202_Attach" />
-          <EntitySet Name="dt202_Base" EntityType="DBDocumentManagementSystemModel.dt202_Base" />
           <EntitySet Name="dt207_Attachment" EntityType="DBDocumentManagementSystemModel.dt207_Attachment" />
+          <EntitySet Name="dt202_Base" EntityType="DBDocumentManagementSystemModel.dt202_Base" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -843,19 +844,6 @@
           <Property Name="IdBase" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
           <Property Name="IdAttach" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="dt202_Base">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
-          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
-          <Property Name="TypeOf" Type="Int32" />
-          <Property Name="Keyword" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="RequestUsr" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="IdFile" Type="Int32" Nullable="false" />
-          <Property Name="UploadTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="UsrUpload" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="dt207_Attachment">
           <Key>
             <PropertyRef Name="Id" />
@@ -864,6 +852,20 @@
           <Property Name="IdKnowledgeBase" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
           <Property Name="EncryptionName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="FileName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dt202_Base">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="TypeOf" Type="Int32" Nullable="false" />
+          <Property Name="Keyword" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="RequestUsr" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="IdFile" Type="Int32" Nullable="false" />
+          <Property Name="UploadTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UsrUpload" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IsDelete" Type="Boolean" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1273,9 +1275,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="dt207_Attachment">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt207_Attachment">
+              <MappingFragment StoreEntitySet="dt207_Attachment">
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="EncryptionName" ColumnName="EncryptionName" />
+                <ScalarProperty Name="IdKnowledgeBase" ColumnName="IdKnowledgeBase" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="dt202_Base">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt202_Base">
               <MappingFragment StoreEntitySet="dt202_Base">
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
                 <ScalarProperty Name="UsrUpload" ColumnName="UsrUpload" />
                 <ScalarProperty Name="UploadTime" ColumnName="UploadTime" />
                 <ScalarProperty Name="IdFile" ColumnName="IdFile" />
@@ -1283,16 +1296,6 @@
                 <ScalarProperty Name="Keyword" ColumnName="Keyword" />
                 <ScalarProperty Name="TypeOf" ColumnName="TypeOf" />
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="dt207_Attachment">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt207_Attachment">
-              <MappingFragment StoreEntitySet="dt207_Attachment">
-                <ScalarProperty Name="FileName" ColumnName="FileName" />
-                <ScalarProperty Name="EncryptionName" ColumnName="EncryptionName" />
-                <ScalarProperty Name="IdKnowledgeBase" ColumnName="IdKnowledgeBase" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -110,13 +110,12 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
 
                 var lsBasesDisplay = (from data in lsBases
                                       join typeOf in types on data.TypeOf equals typeOf.Id
-                                      join ursRes in lsUser on data.RequestUsr equals ursRes.Id
                                       join usrUpload in lsUser on data.UsrUpload equals usrUpload.Id
                                       select new
                                       {
                                           Id = data.Id,
                                           data.DisplayName,
-                                          RequestUsr = ursRes.DisplayName,
+                                          data.RequestUsr,
                                           TypeDoc = typeOf.DisplayName,
                                           data.Keyword,
                                           data.UploadTime,
