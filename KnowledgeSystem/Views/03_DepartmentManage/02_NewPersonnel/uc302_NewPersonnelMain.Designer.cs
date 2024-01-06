@@ -279,7 +279,7 @@
             // 
             // gridColumn6
             // 
-            this.gridColumn6.Caption = "上一級主管";
+            this.gridColumn6.Caption = "督導人員";
             this.gridColumn6.FieldName = "Supervisor";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;

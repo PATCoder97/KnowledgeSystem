@@ -261,7 +261,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                     txbDateStart.EditValue = userInfo.DateCreate;
 
                     oldUserInfoJson = JsonConvert.SerializeObject(userInfo);
-                    idDept2word = userInfo.IdDepartment.Substring(0, 2);
+                    idDept2word = userInfo.IdDepartment.Count() > 2 ? userInfo.IdDepartment.Substring(0, 2) : "00";
 
                     // Lấy quyền hạn và chuyển các quyền mà user có sang gcChooseRoles
                     var lsUserRoles = dm_UserRoleBUS.Instance.GetListByUID(userInfo.Id).Select(r => r.IdRole).ToList();

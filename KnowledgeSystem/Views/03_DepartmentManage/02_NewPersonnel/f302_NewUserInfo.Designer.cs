@@ -500,7 +500,7 @@
             this.lcSupervisor.Location = new System.Drawing.Point(344, 0);
             this.lcSupervisor.Name = "lcSupervisor";
             this.lcSupervisor.Size = new System.Drawing.Size(346, 36);
-            this.lcSupervisor.Text = "導師";
+            this.lcSupervisor.Text = "督導人員";
             this.lcSupervisor.TextSize = new System.Drawing.Size(76, 24);
             // 
             // lcUserName

@@ -1,7 +1,10 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
+using DevExpress.Internal.WinApi.Windows.UI.Notifications;
 using DevExpress.XtraEditors;
+using DocumentFormat.OpenXml.Drawing.Charts;
 using ExcelDataReader;
+using KnowledgeSystem.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,6 +13,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -30,47 +34,93 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-            //string dataPath = "";
-            //DataSet ds;
+            string dataPath = "";
+            DataSet ds;
 
-            //using (OpenFileDialog openFileDialog = new OpenFileDialog())
-            //{
-            //    openFileDialog.Filter = "Excel files (*.xls, *.xlsx)|*.xls;*.xlsx|All files (*.*)|*.*";
-            //    openFileDialog.RestoreDirectory = true;
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "Excel files (*.xls, *.xlsx)|*.xls;*.xlsx|All files (*.*)|*.*";
+                openFileDialog.RestoreDirectory = true;
 
-            //    if (openFileDialog.ShowDialog() == DialogResult.OK)
-            //    {
-            //        dataPath = openFileDialog.FileName;
-            //    }
-            //}
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    dataPath = openFileDialog.FileName;
+                }
+            }
 
-            //string extension = Path.GetExtension(dataPath);
-            //using (var stream = File.Open(dataPath, FileMode.Open, FileAccess.Read))
-            //{
-            //    IExcelDataReader reader;
-            //    if (extension == "*.xls")
-            //    {
-            //        reader = ExcelReaderFactory.CreateBinaryReader(stream);
-            //    }
-            //    else
-            //    {
-            //        reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
-            //    }
+            string extension = Path.GetExtension(dataPath);
+            using (var stream = File.Open(dataPath, FileMode.Open, FileAccess.Read))
+            {
+                IExcelDataReader reader;
+                if (extension == "*.xls")
+                {
+                    reader = ExcelReaderFactory.CreateBinaryReader(stream);
+                }
+                else
+                {
+                    reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+                }
 
-            //    ds = reader.AsDataSet(new ExcelDataSetConfiguration()
-            //    {
-            //        ConfigureDataTable = (_) => new ExcelDataTableConfiguration()
-            //        {
-            //            UseHeaderRow = true
-            //        }
-            //    });
+                ds = reader.AsDataSet(new ExcelDataSetConfiguration()
+                {
+                    ConfigureDataTable = (_) => new ExcelDataTableConfiguration()
+                    {
+                        UseHeaderRow = true
+                    }
+                });
 
-            //    reader.Close();
-            //}
+                reader.Close();
+            }
 
 
-            //     DataTable dt = ds.Tables[2];
+            System.Data.DataTable dt = ds.Tables[0];
 
+            string rootPath = "\\\\10.198.138.103\\jfe文管系統\\Data file";
+
+            List<dt202_Base> bases = new List<dt202_Base>();
+            foreach (DataRow row in dt.Rows)
+            {
+                dt202_Base rowData = new dt202_Base();
+
+                string _keyword = Regex.Replace(row["Keyword"].ToString().Trim(), @"[\t\n\r\s]+", match =>
+                {
+                    if (match.Value.Contains("\n"))
+                    {
+                        return "\r\n";
+                    }
+                    else
+                    {
+                        return " ";
+                    }
+                }).Trim();
+
+                string filePath = Path.Combine(rootPath, row["Name File"].ToString().Trim());
+
+                rowData.DisplayName = row["Category"].ToString().Trim();
+                rowData.TypeOf = Convert.ToInt16(row["TypeOf"].ToString().Trim());
+                rowData.Keyword = _keyword;
+                rowData.UploadTime = DateTime.Now;
+                rowData.UsrUpload = row["UploadUser"].ToString().Trim().Replace(" ", "");
+                rowData.RequestUsr = row["ResquestUser"].ToString().Trim().Replace(" ", "");
+
+                rowData.Id = dt202_BaseBUS.Instance.GetNewBaseId(TPConfigs.LoginUser.IdDepartment);
+
+                string encryptionName = EncryptionHelper.EncryptionFileName(filePath);
+                dm_Attachment attachment = new dm_Attachment
+                {
+                    Thread = "202",
+                    ActualName = Path.GetFileName(filePath),
+                    EncryptionName = $"{encryptionName}"
+                };
+                File.Copy(filePath, Path.Combine(TPConfigs.Folder202, attachment.EncryptionName), true);
+
+                int idAttach = dm_AttachmentBUS.Instance.Add(attachment);
+                rowData.IdFile = idAttach;
+                var result = dt202_BaseBUS.Instance.Add(rowData);
+            }
+
+
+            int aaaa = 1;
             //     dt301_CertReqs = new List<dt301_CertReqSetting>();
 
             //     foreach (DataRow row in dt.Rows)
@@ -88,18 +138,18 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
             //         dt301_CertReqs.Add(req);
             //     }
 
-            dt301_Bases = dt301_BaseBUS.Instance.GetListByDept("77");
-            var dtCourse = dt301_CourseBUS.Instance.GetList();
+            //dt301_Bases = dt301_BaseBUS.Instance.GetListByDept("77");
+            //var dtCourse = dt301_CourseBUS.Instance.GetList();
 
-            foreach (var item in dt301_Bases)
-            {
-                int yearAdd = dtCourse.First(r => r.Id == item.IdCourse).Duration ?? 1000;
-                item.ExpDate = yearAdd != 0 ? item.DateReceipt.AddYears(yearAdd) : (DateTime?)null;
+            //foreach (var item in dt301_Bases)
+            //{
+            //    int yearAdd = dtCourse.First(r => r.Id == item.IdCourse).Duration ?? 1000;
+            //    item.ExpDate = yearAdd != 0 ? item.DateReceipt.AddYears(yearAdd) : (DateTime?)null;
 
-                dt301_BaseBUS.Instance.AddOrUpdate(item);
-            }
+            //    dt301_BaseBUS.Instance.AddOrUpdate(item);
+            //}
 
-            MessageBox.Show("OK");
+            //MessageBox.Show("OK");
 
             //dt301_Bases = new List<dt301_Base>();
             //var dtCourse = dt301_CourseBUS.Instance.GetList();
