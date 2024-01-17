@@ -22,10 +22,12 @@ namespace KnowledgeSystem.Views._00_Generals
 {
     public partial class f00_VIewFile : DevExpress.XtraEditors.XtraForm
     {
-        public f00_VIewFile(string _filePath)
+        public f00_VIewFile(string _filePath, bool isCanSave = true)
         {
             InitializeComponent();
             filePath = _filePath;
+            sourceFile = _filePath;
+            IsCanSave = isCanSave;
         }
 
         enum FileType
@@ -38,21 +40,34 @@ namespace KnowledgeSystem.Views._00_Generals
             Unknown
         }
 
+        FileType fileType;
+        PdfViewer viewPDF;
+        RichEditControl viewWord;
+        SpreadsheetControl viewExcel;
+        PictureBox viewPic;
+
+        bool IsCanSave = true;
         string filePath = "";
+        string sourceFile = "";
 
         private void f00_VIewFile_Load(object sender, EventArgs e)
         {
+            if (!IsCanSave)
+            {
+                bar2.Visible = false;
+            }
+
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
             {
                 string fileName = Path.GetFileName(filePath);
                 Text = fileName;
 
-                FileType fileType = GetFileType(filePath);
+                fileType = GetFileType(filePath);
 
                 switch (fileType)
                 {
                     case FileType.Pdf:
-                        PdfViewer viewPDF = new PdfViewer();
+                        viewPDF = new PdfViewer();
                         viewPDF.ReadOnly = true;
                         viewPDF.Name = "viewPDF";
                         viewPDF.NavigationPanePageVisibility = PdfNavigationPanePageVisibility.None;
@@ -64,7 +79,7 @@ namespace KnowledgeSystem.Views._00_Generals
                         Controls.Add(viewPDF);
                         break;
                     case FileType.Word:
-                        RichEditControl viewWord = new RichEditControl();
+                        viewWord = new RichEditControl();
                         viewWord.Name = "viewWord";
                         viewWord.ReadOnly = true;
                         viewWord.Text = "viewWord";
@@ -76,7 +91,7 @@ namespace KnowledgeSystem.Views._00_Generals
                         Controls.Add(viewWord);
                         break;
                     case FileType.Excel:
-                        SpreadsheetControl viewExcel = new SpreadsheetControl();
+                        viewExcel = new SpreadsheetControl();
                         viewExcel.Name = "viewExcel";
                         viewExcel.ReadOnly = true;
                         viewExcel.Text = "viewExcel";
@@ -100,7 +115,7 @@ namespace KnowledgeSystem.Views._00_Generals
                         filePath = outputPath;
                         goto case FileType.Pdf;
                     case FileType.Image:
-                        PictureBox viewPic = new PictureBox();
+                        viewPic = new PictureBox();
                         viewPic.Name = "viewPic";
                         viewPic.Text = "viewPic";
                         viewPic.Dock = DockStyle.Fill;
@@ -157,7 +172,7 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void Viewer_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Control && (e.KeyCode == Keys.P || e.KeyCode == Keys.S))
+            if ((e.Control && (e.KeyCode == Keys.P || e.KeyCode == Keys.S)) && !IsCanSave)
             {
                 e.SuppressKeyPress = true;
                 return;
@@ -167,6 +182,46 @@ namespace KnowledgeSystem.Views._00_Generals
         private void viewPDF_PopupMenuShowing(object sender, PdfPopupMenuShowingEventArgs e)
         {
             e.ItemLinks.Clear();
+        }
+
+        private void btnPrint_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (!IsCanSave) return;
+
+            switch (fileType)
+            {
+                case FileType.Pdf:
+                case FileType.PowerPoint:
+                    viewPDF.ShowPrintPageSetupDialog();
+                    break;
+                case FileType.Word:
+                    viewWord.ShowPrintDialog();
+                    break;
+                case FileType.Excel:
+                    viewExcel.ShowPrintDialog();
+                    break;
+                default:
+                    string msg = "<font='Microsoft JhengHei UI' size=14>不支援文件打印\r\nKhông hỗ trợ in định dạng tệp tin</font>";
+                    MsgTP.MsgShowInfomation(msg);
+                    Close();
+                    break;
+            }
+        }
+
+        private void btnSave_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (!IsCanSave) return;
+
+            string extension = Path.GetExtension(sourceFile).ToLower();
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = $"{extension}|*{extension}";
+            saveFileDialog.FileName = Path.GetFileName(sourceFile);
+
+            if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
+
+            string destFile = saveFileDialog.FileName;
+
+            File.Copy(sourceFile, destFile, true);
         }
     }
 }

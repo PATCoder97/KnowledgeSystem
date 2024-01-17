@@ -47,6 +47,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
         List<dt202_Attach> attachments;
         List<dm_Attachment> attachmentsInfo;
 
+        private bool IsCanEdit = false;
+
         private void InitializeIcon()
         {
             btnAdd.ImageOptions.SvgImage = TPSvgimages.Add;
@@ -102,6 +104,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
         {
             using (var handle = SplashScreenManager.ShowOverlayForm(gcData))
             {
+                // Check quyền hạn có thể sửa văn kiện
+                IsCanEdit = AppPermission.Instance.CheckAppPermission(AppPermission.EditDoc202);
+
                 helper.SaveViewInfo();
 
                 var lsBases = dt202_BaseBUS.Instance.GetList();
@@ -141,7 +146,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
                 GridView view = sender as GridView;
                 view.FocusedRowHandle = e.HitInfo.RowHandle;
 
-                e.Menu.Items.Add(itemViewInfo);
+                if (IsCanEdit) e.Menu.Items.Add(itemViewInfo);
+               
                 e.Menu.Items.Add(itemViewFile);
             }
         }

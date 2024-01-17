@@ -66,5 +66,8 @@ namespace KnowledgeSystem.Helpers
 
         // 401
         public const int EditUserJobAndDept = 33;
+
+        // 202
+        public const int EditDoc202 = 41;
     }
 }
