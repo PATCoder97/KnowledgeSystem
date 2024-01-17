@@ -223,6 +223,12 @@
     <Compile Include="Views\00_Generals\uc00_UserControl.Designer.cs">
       <DependentUpon>uc00_UserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\uc201_ISOAuditDocsMain.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\uc201_ISOAuditDocsMain.Designer.cs">
+      <DependentUpon>uc201_ISOAuditDocsMain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\02_StandardsAndTechs\02_JFEnCSCDocs\f202_DocInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -480,6 +486,9 @@
     <EmbeddedResource Include="Views\00_Generals\uc00_UserControl.resx">
       <DependentUpon>uc00_UserControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\uc201_ISOAuditDocsMain.resx">
+      <DependentUpon>uc201_ISOAuditDocsMain.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\02_JFEnCSCDocs\f202_DocInfo.resx">
       <DependentUpon>f202_DocInfo.cs</DependentUpon>
     </EmbeddedResource>
@@ -605,7 +614,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\01_ProductionAndSales\" />
-    <Folder Include="Views\02_StandardsAndTechs\01_ISODocuments\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppIcon.ico" />

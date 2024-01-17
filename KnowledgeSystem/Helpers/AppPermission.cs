@@ -54,6 +54,7 @@ namespace KnowledgeSystem.Helpers
         public static int SafetyCertMain { get; set; }
         public static int WorkManagementMain { get; set; }
         public static int JFEnCSCMain { get; set; }
+        public static int ISOAuditDocsMain { get; set; }
 
         public static List<int> GetListAutoOpenForm()
         {

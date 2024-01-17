@@ -58,7 +58,7 @@ namespace KnowledgeSystem.Views._00_Generals
             this.tileItem3 = new DevExpress.XtraEditors.TileItem();
             this.tileGroup3 = new DevExpress.XtraEditors.TileGroup();
             this.btnISODocuments = new DevExpress.XtraEditors.TileItem();
-            this.tileItem11 = new DevExpress.XtraEditors.TileItem();
+            this.btnISOAuditDocs = new DevExpress.XtraEditors.TileItem();
             this.tileItem5 = new DevExpress.XtraEditors.TileItem();
             this.btnJFEnCSC = new DevExpress.XtraEditors.TileItem();
             this.tileItem8 = new DevExpress.XtraEditors.TileItem();
@@ -123,7 +123,6 @@ namespace KnowledgeSystem.Views._00_Generals
             this.tileMain.MaxId = 23;
             this.tileMain.Name = "tileMain";
             this.tileMain.Padding = new System.Windows.Forms.Padding(24, 22, 24, 22);
-            this.tileMain.Position = 59;
             this.tileMain.ShowGroupText = true;
             this.tileMain.Size = new System.Drawing.Size(1180, 499);
             this.tileMain.TabIndex = 4;
@@ -170,7 +169,7 @@ namespace KnowledgeSystem.Views._00_Generals
             // tileGroup3
             // 
             this.tileGroup3.Items.Add(this.btnISODocuments);
-            this.tileGroup3.Items.Add(this.tileItem11);
+            this.tileGroup3.Items.Add(this.btnISOAuditDocs);
             this.tileGroup3.Items.Add(this.tileItem5);
             this.tileGroup3.Items.Add(this.btnJFEnCSC);
             this.tileGroup3.Items.Add(this.tileItem8);
@@ -198,10 +197,12 @@ namespace KnowledgeSystem.Views._00_Generals
             this.btnISODocuments.Name = "btnISODocuments";
             this.btnISODocuments.ItemClick += new DevExpress.XtraEditors.TileItemClickEventHandler(this.btnISODocuments_ItemClick);
             // 
-            // tileItem11
+            // btnISOAuditDocs
             // 
-            this.tileItem11.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
-            this.tileItem11.AppearanceItem.Normal.Options.UseFont = true;
+            this.btnISOAuditDocs.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
+            this.btnISOAuditDocs.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
+            this.btnISOAuditDocs.AppearanceItem.Normal.Options.UseBackColor = true;
+            this.btnISOAuditDocs.AppearanceItem.Normal.Options.UseFont = true;
             tileItemElement6.Text = "ISO";
             tileItemElement6.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.TopLeft;
             tileItemElement7.Appearance.Normal.Font = new System.Drawing.Font("DFKai-SB", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -209,11 +210,12 @@ namespace KnowledgeSystem.Views._00_Generals
             tileItemElement7.Text = "稽核文件";
             tileItemElement7.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.BottomLeft;
             tileItemElement7.TextLocation = new System.Drawing.Point(5, -30);
-            this.tileItem11.Elements.Add(tileItemElement6);
-            this.tileItem11.Elements.Add(tileItemElement7);
-            this.tileItem11.Id = 22;
-            this.tileItem11.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
-            this.tileItem11.Name = "tileItem11";
+            this.btnISOAuditDocs.Elements.Add(tileItemElement6);
+            this.btnISOAuditDocs.Elements.Add(tileItemElement7);
+            this.btnISOAuditDocs.Id = 22;
+            this.btnISOAuditDocs.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
+            this.btnISOAuditDocs.Name = "btnISOAuditDocs";
+            this.btnISOAuditDocs.ItemClick += new DevExpress.XtraEditors.TileItemClickEventHandler(this.btnISOAuditDocs_ItemClick);
             // 
             // tileItem5
             // 
@@ -461,6 +463,6 @@ namespace KnowledgeSystem.Views._00_Generals
         private TileItem btnMod;
         private TileItem btnSafetyCert;
         private TileItem tileInfoUser;
-        private TileItem tileItem11;
+        private TileItem btnISOAuditDocs;
     }
 }
