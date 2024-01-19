@@ -204,10 +204,6 @@ namespace KnowledgeSystem.Views._00_Generals
             ShowFromByFrame(AppPermission.KnowledgeMain, e);
         }
 
-        private void btnISODocuments_ItemClick(object sender, TileItemEventArgs e)
-        {
-        }
-
         private void btnUserManage_ItemClick(object sender, TileItemEventArgs e)
         {
             ShowFromByFrame(AppPermission.Mod, e);

@@ -384,7 +384,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 msg += "</br> •密等";
                 IsOK = false;
             }
-            else if (lsSecurityInfos.Any(r => string.IsNullOrEmpty(r.IdGroupOrUser)))
+
+            if (lsSecurityInfos.Any(r => string.IsNullOrEmpty(r.IdGroupOrUser)))
             {
                 msg += "</br> •選擇密等";
                 IsOK = false;

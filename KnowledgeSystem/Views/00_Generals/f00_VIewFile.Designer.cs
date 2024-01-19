@@ -91,7 +91,7 @@
             // 
             this.btnSave.Caption = "下載";
             this.btnSave.Id = 0;
-            this.btnSave.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnAdd.ImageOptions.SvgImage")));
+            this.btnSave.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnSave.ImageOptions.SvgImage")));
             this.btnSave.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnSave.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
             this.btnSave.ItemAppearance.Hovered.Options.UseForeColor = true;
@@ -104,6 +104,7 @@
             // 
             this.btnPrint.Caption = "打印";
             this.btnPrint.Id = 2;
+            this.btnPrint.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnPrint.ImageOptions.SvgImage")));
             this.btnPrint.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnPrint.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
             this.btnPrint.ItemAppearance.Hovered.Options.UseForeColor = true;
