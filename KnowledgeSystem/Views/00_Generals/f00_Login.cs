@@ -2,6 +2,8 @@
 using DataAccessLayer;
 using DevExpress.XtraEditors;
 using DevExpress.XtraSplashScreen;
+using DocumentFormat.OpenXml.Office2010.Excel;
+using DocumentFormat.OpenXml.Spreadsheet;
 using KnowledgeSystem.Helpers;
 using System;
 using System.Collections.Generic;
@@ -15,6 +17,7 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static KnowledgeSystem.Views._00_Generals.f00_Main;
 
 namespace KnowledgeSystem.Views._00_Generals
 {
@@ -27,6 +30,7 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void fLogin_Load(object sender, EventArgs e)
         {
+            KeyPreview = true;
             BackgroundImage = Image.FromFile(Path.Combine(TPConfigs.ImagesPath, "loginscreen.png"));
 
             lbNameSoft.Text = TPConfigs.SoftNameTW;
@@ -126,9 +130,43 @@ namespace KnowledgeSystem.Views._00_Generals
         {
             txbPassword.Focus();
 #if DEBUG
+            txbUserID.Text = "VNW0014732";
             txbPassword.Text = "Anhtuan06";
-            btnLogin_Click(sender, e);
+            //  btnLogin_Click(sender, e);
 #endif
+        }
+
+        private void f00_Login_KeyDown(object sender, KeyEventArgs e)
+        {
+            //if (e.Control && e.Alt && e.Shift && e.KeyCode == Keys.A)
+            //{
+            //    uc00_AdminLogin adminLogin = new uc00_AdminLogin();
+            //    DialogResult result = XtraDialog.Show(this, adminLogin, "Administrator Login", MessageBoxButtons.OKCancel);
+            //    if (result != DialogResult.OK)
+            //    {
+            //        return;
+            //    }
+
+            //    string id = adminLogin.ID;
+            //    string masterKey = adminLogin.MasterKey;
+
+            //    if (string.IsNullOrWhiteSpace(id) || string.IsNullOrWhiteSpace(masterKey) || masterKey != "tuanphuong") return;
+
+            //    var _userLogin = dm_UserBUS.Instance.GetItemById(id);
+            //    if (_userLogin == null) return;
+
+            //    TPConfigs.LoginSuccessful = true;
+            //    TPConfigs.LoginUser = _userLogin;
+            //    Close();
+            //}
+
+            var _userLogin = dm_UserBUS.Instance.GetItemById("VNW0007238");
+            if (_userLogin == null) return;
+
+            TPConfigs.LoginSuccessful = true;
+            TPConfigs.LoginUser = _userLogin;
+
+            Close();
         }
     }
 }

@@ -760,6 +760,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             {
                 string password = EncryptionHelper.DecryptPass(userInfo.SecondaryPassword);
                 XtraMessageBox.Show(password);
+                if (string.IsNullOrWhiteSpace(password)) return;
+                
                 Clipboard.SetText(password);
             }
         }

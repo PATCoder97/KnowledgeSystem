@@ -293,7 +293,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
             {
                 "1",
                 "冶金部",
-                "物理試驗處",
+                lsDept.FirstOrDefault(r => r.Id == idDept2word).DisplayName,
                 lsDataFile2.Sum(r => r.TotalReqQuantity).ToString(),
                 $"{lsDataFile2.Sum(r => r.ValidLicense)}",
                 $"{lsDataFile2.Sum(r => r.FirstTrain) + lsDataFile2.Sum(r => r.ReTrain)}",
@@ -319,7 +319,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                                    data.FirstTrain,
                                    data.ReTrain,
                                    data.BackupLicense,
-                                   SumUserMissing = data.TotalReqQuantity - (data.ValidLicense + data.BackupLicense + data.FirstTrain + data.ReTrain)
+                                   SumUserMissing = data.TotalReqQuantity - (data.ValidLicense + data.FirstTrain + data.ReTrain)
                                } into dt1
                                join f51 in lsCountData51 on dt1.IdCourse equals f51.IdCourse into dtg1
                                from g1 in dtg1.DefaultIfEmpty()
@@ -400,7 +400,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
 
                 ws.Columns[01].Width = 20;
                 ws.Columns[02].Width = 20;
-                ws.Columns[03].Width = 20;
+                ws.Columns[03].Width = 25;
                 ws.Columns[04].Width = 20;
                 ws.Columns[05].Width = 20;
                 ws.Columns[06].Width = 20;
@@ -452,7 +452,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                 ws.Cells["F2"].Value = "備援";
                 ws.Cells["G2"].Value = "初訓";
                 ws.Cells["H2"].Value = "複訓";
-                ws.Cells["I2"].Value = "人員待補";
+                ws.Cells["I2"].Value = "缺額張數";
                 ws.Cells["J2"].Value = "留職停薪";
 
                 ws.Cells["A3"].LoadFromCollection(lsDataFile2, false);
@@ -480,7 +480,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                 for (int i = 0; i < lsDataFile2.Count; i++)
                 {
                     int indexRow = i + 3;
-                    ws.Cells[$"I{indexRow}"].Formula = $"D{indexRow}-SUM(E{indexRow}:H{indexRow})";
+                    ws.Cells[$"I{indexRow}"].Formula = $"D{indexRow}-E{indexRow}";
                 }
 
                 ws.Cells["A1"].Value = "課程";

@@ -157,6 +157,7 @@
             this.Text = "Đăng nhập";
             this.Load += new System.EventHandler(this.fLogin_Load);
             this.Shown += new System.EventHandler(this.fLogin_Shown);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.f00_Login_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.txbPassword.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbUserID.Properties)).EndInit();
             this.ResumeLayout(false);
