@@ -138,6 +138,7 @@
           </Key>
           <Property Name="Id" Type="varchar" MaxLength="32" Nullable="false" />
           <Property Name="DisplayName" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="HalfYear" Type="nvarchar" MaxLength="16" Nullable="false" />
           <Property Name="TypeOf" Type="int" Nullable="false" />
           <Property Name="Keyword" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="RequestUsr" Type="nvarchar" MaxLength="16" Nullable="false" />
@@ -859,6 +860,7 @@
           </Key>
           <Property Name="Id" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
           <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="HalfYear" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
           <Property Name="TypeOf" Type="Int32" Nullable="false" />
           <Property Name="Keyword" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="RequestUsr" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
@@ -1295,6 +1297,7 @@
                 <ScalarProperty Name="RequestUsr" ColumnName="RequestUsr" />
                 <ScalarProperty Name="Keyword" ColumnName="Keyword" />
                 <ScalarProperty Name="TypeOf" ColumnName="TypeOf" />
+                <ScalarProperty Name="HalfYear" ColumnName="HalfYear" />
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

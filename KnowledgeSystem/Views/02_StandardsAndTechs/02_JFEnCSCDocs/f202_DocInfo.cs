@@ -63,6 +63,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
             txbTWName.Enabled = _enable;
             txbENVNName.Enabled = _enable;
             cbbTypeOf.Enabled = _enable;
+            cbbHalfYear.Enabled = _enable;
             txbKeyword.Enabled = _enable;
             txbRequestUsr.Enabled = _enable;
             txbFilePath.Enabled = _enable;
@@ -144,8 +145,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
         {
             idDept2word = TPConfigs.LoginUser.IdDepartment.Substring(0, 2);
 
-            lcControls = new List<LayoutControlItem>() { lcTWName, lcENVNName, lcTypeOf, lcKeyword, lcRequestUsr, lcENVNName1 };
-            lcImpControls = new List<LayoutControlItem>() { lcTWName, lcTypeOf, lcKeyword, lcRequestUsr, lcENVNName1 };
+            lcControls = new List<LayoutControlItem>() { lcTWName, lcENVNName, lcTypeOf, lcKeyword, lcRequestUsr, lcFilePath, lcHalfYear };
+            lcImpControls = new List<LayoutControlItem>() { lcTWName, lcTypeOf, lcKeyword, lcRequestUsr, lcFilePath, lcHalfYear };
             foreach (var item in lcControls)
             {
                 item.AllowHtmlStringInCaption = true;
@@ -162,6 +163,16 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
             var typeOfs = dt202_TypeBUS.Instance.GetList();
             cbbTypeOf.Properties.Items.AddRange(typeOfs.Select(r => r.DisplayName).ToList());
 
+            // Lấy năm hiện tại
+            int currentYear = DateTime.Now.Year;
+            int startYear = 2019;
+
+            // Sử dụng LINQ để tạo danh sách các năm với "上半年" và "下半年"
+            var yearsList = Enumerable.Range(startYear, currentYear - startYear + 1)
+                .SelectMany(year => new[] { year + "上半年", year + "下半年" }).OrderByDescending(year => year).ToList();
+            cbbHalfYear.Properties.Items.AddRange(yearsList);
+            //cbbHalfYear.SelectedIndex = 0;
+
             switch (eventInfo)
             {
                 case EventFormInfo.Create:
@@ -176,6 +187,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
                     cbbTypeOf.EditValue = typeOfs.FirstOrDefault(r => r.Id == docBase.TypeOf).DisplayName;
                     txbKeyword.EditValue = docBase.Keyword;
                     txbRequestUsr.EditValue = docBase.RequestUsr;
+                    cbbHalfYear.EditValue = docBase.HalfYear;
 
                     var att = dt202_AttachBUS.Instance.GetListByBase(idBase202);
                     attachments = dm_AttachmentBUS.Instance.GetListById(att.Select(r => r.IdAttach).ToList())
@@ -230,6 +242,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
             if (string.IsNullOrEmpty(cbbTypeOf.EditValue?.ToString())) IsValidate = false;
             if (string.IsNullOrEmpty(txbKeyword.EditValue?.ToString())) IsValidate = false;
             if (string.IsNullOrEmpty(txbRequestUsr.EditValue?.ToString())) IsValidate = false;
+            if (string.IsNullOrEmpty(cbbHalfYear.EditValue?.ToString())) IsValidate = false;
             if (string.IsNullOrEmpty(txbFilePath.EditValue?.ToString()) && eventInfo == EventFormInfo.Create) IsValidate = false;
 
             if (!IsValidate)
@@ -246,6 +259,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
                 string nameEVN = Regex.Replace(txbENVNName.EditValue?.ToString().Trim(), @"\s+", " ");
                 docBase.DisplayName = $"{nameTW}\n{nameEVN}";
 
+                docBase.HalfYear = cbbHalfYear.EditValue?.ToString();
                 docBase.TypeOf = (int)cbbTypeOf.SelectedIndex;
                 docBase.RequestUsr = txbRequestUsr.EditValue?.ToString().Replace(" ", "");
                 docBase.UploadTime = DateTime.Now;

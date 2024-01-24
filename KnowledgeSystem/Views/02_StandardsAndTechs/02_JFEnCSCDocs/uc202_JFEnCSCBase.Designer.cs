@@ -58,6 +58,7 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gvAttachment)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
@@ -159,6 +160,7 @@
             this.gColId,
             this.gridColumn3,
             this.gridColumn1,
+            this.gridColumn2,
             this.gridColumn4,
             this.gColEnterDate,
             this.gridColumn6,
@@ -212,7 +214,7 @@
             this.gridColumn4.FieldName = "RequestUsr";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 2;
+            this.gridColumn4.VisibleIndex = 3;
             // 
             // gColEnterDate
             // 
@@ -220,7 +222,7 @@
             this.gColEnterDate.FieldName = "TypeDoc";
             this.gColEnterDate.Name = "gColEnterDate";
             this.gColEnterDate.Visible = true;
-            this.gColEnterDate.VisibleIndex = 3;
+            this.gColEnterDate.VisibleIndex = 4;
             // 
             // gridColumn6
             // 
@@ -228,7 +230,7 @@
             this.gridColumn6.FieldName = "UsrUpload";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 6;
+            this.gridColumn6.VisibleIndex = 7;
             // 
             // gridColumn5
             // 
@@ -236,7 +238,7 @@
             this.gridColumn5.FieldName = "Keyword";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 4;
+            this.gridColumn5.VisibleIndex = 5;
             // 
             // gridColumn11
             // 
@@ -246,7 +248,7 @@
             this.gridColumn11.FieldName = "UploadTime";
             this.gridColumn11.Name = "gridColumn11";
             this.gridColumn11.Visible = true;
-            this.gridColumn11.VisibleIndex = 5;
+            this.gridColumn11.VisibleIndex = 6;
             // 
             // gColIdFile
             // 
@@ -400,6 +402,14 @@
             this.barDockControlRight.Manager = this.barManagerTP;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 483);
             // 
+            // gridColumn2
+            // 
+            this.gridColumn2.Caption = "年度";
+            this.gridColumn2.FieldName = "HalfYear";
+            this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.Visible = true;
+            this.gridColumn2.VisibleIndex = 2;
+            // 
             // uc202_JFEnCSCBase
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
@@ -456,5 +466,6 @@
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
         private DevExpress.XtraGrid.Columns.GridColumn gColIdFile;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
     }
 }

@@ -120,6 +120,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
                                       {
                                           Id = data.Id,
                                           data.DisplayName,
+                                          data.HalfYear,
                                           data.RequestUsr,
                                           TypeDoc = typeOf.DisplayName,
                                           data.Keyword,
