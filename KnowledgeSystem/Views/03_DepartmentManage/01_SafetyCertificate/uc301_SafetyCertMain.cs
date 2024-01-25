@@ -694,7 +694,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                 foreach (var indexCol in lsColAlignLefts)
                     ws.Columns[indexCol].Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
 
-                ws.Cells["A1"].Value = "冶金部人員證照受訓需求表(初訓)";
+                ws.Cells["A1"].Value = "冶金部人員證照受訓需求表(複訓)";
                 ws.Cells["A1"].Style.Font.Size = 28;
                 ws.Cells["A1:N1"].Merge = true;
                 ws.Row(2).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
@@ -707,6 +707,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                 ExcelTable tab = ws.Tables.Add(rangeTab, tableName);
                 tab.TableStyle = TableStyles.Medium2;
 
+                // Xoá 2 cột dư
+                ws.DeleteColumn(13, 2);
+
                 string savePath = Path.Combine(pathDocument, $"附件05.2：.複訓之提報需求人員名單.xlsx");
                 FileInfo excelFile = new FileInfo(savePath);
                 pck.SaveAs(excelFile);
@@ -714,12 +717,17 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                 // Nếu có dữ liệu File5.1 thì xuất theo Format file5.2
                 if (lsQueryFile51.Count != 0)
                 {
+                    ws.Cells["A1"].Value = "冶金部人員證照受訓需求表(初訓)";
+
                     ws.Tables.Delete(tableName);
                     ws.Cells["A3"].LoadFromCollection(lsQueryFile51, false);
 
                     rangeTab = ws.Cells[$"A2:N{lsQueryFile51.Count + 2}"];
                     tab = ws.Tables.Add(rangeTab, tableName);
                     tab.TableStyle = TableStyles.Medium2;
+
+                    // Xoá 2 cột dư
+                    ws.DeleteColumn(13, 2);
 
                     savePath = Path.Combine(pathDocument, $"附件05.1：初訓之提報需求人員名單.xlsx");
                     excelFile = new FileInfo(savePath);

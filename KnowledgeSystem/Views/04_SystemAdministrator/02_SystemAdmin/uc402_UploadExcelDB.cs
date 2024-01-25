@@ -102,8 +102,11 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
                 rowData.UploadTime = DateTime.Now;
                 rowData.UsrUpload = row["UploadUser"].ToString().Trim().Replace(" ", "");
                 rowData.RequestUsr = row["ResquestUser"].ToString().Trim().Replace(" ", "");
+                rowData.HalfYear = row["Date"].ToString().Trim();
 
                 rowData.Id = dt202_BaseBUS.Instance.GetNewBaseId(TPConfigs.LoginUser.IdDepartment);
+
+                bases.Add(rowData);
 
                 string encryptionName = EncryptionHelper.EncryptionFileName(filePath);
                 dm_Attachment attachment = new dm_Attachment
