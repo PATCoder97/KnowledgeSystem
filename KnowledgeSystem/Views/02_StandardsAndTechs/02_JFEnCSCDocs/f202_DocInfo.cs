@@ -256,7 +256,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
             {
                 string nameTW = Regex.Replace(txbTWName.EditValue?.ToString().Trim(), @"\s+", " ");
-                string nameEVN = Regex.Replace(txbENVNName.EditValue?.ToString().Trim(), @"\s+", " ");
+                string nameEVN = txbENVNName.EditValue != null ? Regex.Replace(txbENVNName.EditValue?.ToString().Trim(), @"\s+", " ") : "";
                 docBase.DisplayName = $"{nameTW}\n{nameEVN}";
 
                 docBase.HalfYear = cbbHalfYear.EditValue?.ToString();

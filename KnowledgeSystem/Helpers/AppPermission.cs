@@ -58,7 +58,7 @@ namespace KnowledgeSystem.Helpers
 
         public static List<int> GetListAutoOpenForm()
         {
-            return new List<int>() { SysAdmin, Mod, KnowledgeMain, SafetyCertMain };
+            return new List<int>() { SysAdmin, Mod, KnowledgeMain, SafetyCertMain, JFEnCSCMain };
         }
 
         // 207
@@ -69,6 +69,6 @@ namespace KnowledgeSystem.Helpers
         public const int EditUserJobAndDept = 33;
 
         // 202
-        public const int EditDoc202 = 41;
+        public const int EditDoc202 = 40;
     }
 }

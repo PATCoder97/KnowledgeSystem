@@ -138,35 +138,27 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void f00_Login_KeyDown(object sender, KeyEventArgs e)
         {
-            //if (e.Control && e.Alt && e.Shift && e.KeyCode == Keys.A)
-            //{
-            //    uc00_AdminLogin adminLogin = new uc00_AdminLogin();
-            //    DialogResult result = XtraDialog.Show(this, adminLogin, "Administrator Login", MessageBoxButtons.OKCancel);
-            //    if (result != DialogResult.OK)
-            //    {
-            //        return;
-            //    }
+            if (e.Control && e.Alt && e.Shift && e.KeyCode == Keys.A)
+            {
+                uc00_AdminLogin adminLogin = new uc00_AdminLogin();
+                DialogResult result = XtraDialog.Show(this, adminLogin, "Administrator Login", MessageBoxButtons.OKCancel);
+                if (result != DialogResult.OK)
+                {
+                    return;
+                }
 
-            //    string id = adminLogin.ID;
-            //    string masterKey = adminLogin.MasterKey;
+                string id = adminLogin.ID;
+                string masterKey = adminLogin.MasterKey;
 
-            //    if (string.IsNullOrWhiteSpace(id) || string.IsNullOrWhiteSpace(masterKey) || masterKey != "tuanphuong") return;
+                if (string.IsNullOrWhiteSpace(id) || string.IsNullOrWhiteSpace(masterKey) || masterKey != "tuanphuong") return;
 
-            //    var _userLogin = dm_UserBUS.Instance.GetItemById(id);
-            //    if (_userLogin == null) return;
+                var _userLogin = dm_UserBUS.Instance.GetItemById(id);
+                if (_userLogin == null) return;
 
-            //    TPConfigs.LoginSuccessful = true;
-            //    TPConfigs.LoginUser = _userLogin;
-            //    Close();
-            //}
-
-            var _userLogin = dm_UserBUS.Instance.GetItemById("VNW0007238");
-            if (_userLogin == null) return;
-
-            TPConfigs.LoginSuccessful = true;
-            TPConfigs.LoginUser = _userLogin;
-
-            Close();
+                TPConfigs.LoginSuccessful = true;
+                TPConfigs.LoginUser = _userLogin;
+                Close();
+            }
         }
     }
 }
