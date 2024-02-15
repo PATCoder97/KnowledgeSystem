@@ -638,7 +638,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         private void btnDelFile_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             Attachments attachment = gvFiles.GetRow(gvFiles.FocusedRowHandle) as Attachments;
-           
+
             string msg = $"您想要刪除附件：\r\n{attachment.FileName}?";
             if (MsgTP.MsgYesNoQuestion(msg) == DialogResult.No)
             {
@@ -881,7 +881,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 return;
 
             Attachments dataRow = gvFiles.GetRow(focusRow) as Attachments;
-            string documentsFile = Path.Combine(TPConfigs.Folder207, dataRow.EncryptionName);
+            string documentsFile = string.IsNullOrEmpty(dataRow.FullPath) ? Path.Combine(TPConfigs.Folder207, dataRow.EncryptionName) : dataRow.FullPath;
 
             // Lưu lại lịch sử xem file, Không lưu khi đang ký
             var IsProcessing = dt207_DocProcessingBUS.Instance.CheckItemProcessing(_idBaseDocument);
