@@ -166,7 +166,8 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void f00_PdfTools_Load(object sender, EventArgs e)
         {
-            imageSign = Image.FromFile(@"E:\01. Softwares Programming\24. Knowledge System\02. Images\sign.png");
+            //imageSign = Image.FromFile(@"E:\01. Softwares Programming\24. Knowledge System\02. Images\sign.png");
+            imageSign = Image.FromFile(@"C:\Users\TuanPhuong\Desktop\TEst\sign.png");
         }
 
         private void PdfViewer_Paint(object sender, PaintEventArgs e)
