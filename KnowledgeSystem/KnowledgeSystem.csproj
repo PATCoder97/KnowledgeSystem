@@ -50,6 +50,7 @@
     <Reference Include="DevExpress.DataAccess.v22.1, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.DataAccess.v22.1.UI, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.DataVisualization.v22.1.Core, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Docs.v22.1, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Drawing.v22.1, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Images.v22.1, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Office.v22.1.Core, Version=22.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
@@ -198,6 +199,12 @@
     </Compile>
     <Compile Include="Views\00_Generals\f00_Main.Designer.cs">
       <DependentUpon>f00_Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\00_Generals\f00_PdfTools.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\00_Generals\f00_PdfTools.Designer.cs">
+      <DependentUpon>f00_PdfTools.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\00_Generals\f00_UpdateSoftware.cs">
       <SubType>Form</SubType>
@@ -479,6 +486,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\00_Generals\f00_Main.resx">
       <DependentUpon>f00_Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\00_Generals\f00_PdfTools.resx">
+      <DependentUpon>f00_PdfTools.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\00_Generals\f00_UpdateSoftware.resx">
       <DependentUpon>f00_UpdateSoftware.cs</DependentUpon>

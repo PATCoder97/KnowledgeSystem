@@ -33,7 +33,7 @@ namespace KnowledgeSystem
             Application.SetCompatibleTextRenderingDefault(false);
 
 #if DEBUG
-            Application.Run(new f00_Main());
+            Application.Run(new f00_PdfTools());
 
             //TPConfigs.SoftNameTW = "冶金文管系統";
             //TPConfigs.LoginUser = dm_UserBUS.Instance.GetItemById("VNW0014732");
