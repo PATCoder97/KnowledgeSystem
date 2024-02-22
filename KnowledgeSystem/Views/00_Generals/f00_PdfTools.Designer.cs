@@ -32,7 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f00_PdfTools));
             this.pdfViewer = new DevExpress.XtraPdfViewer.PdfViewer();
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
-            this.pdfFileOpenBarItem1 = new DevExpress.XtraPdfViewer.Bars.PdfFileOpenBarItem();
             this.pdfFindTextBarItem1 = new DevExpress.XtraPdfViewer.Bars.PdfFindTextBarItem();
             this.pdfPreviousPageBarItem1 = new DevExpress.XtraPdfViewer.Bars.PdfPreviousPageBarItem();
             this.pdfNextPageBarItem1 = new DevExpress.XtraPdfViewer.Bars.PdfNextPageBarItem();
@@ -62,12 +61,11 @@
             this.btnClearSign = new DevExpress.XtraBars.BarButtonItem();
             this.btnAdvanced = new DevExpress.XtraBars.BarButtonItem();
             this.pdfRibbonPage1 = new DevExpress.XtraPdfViewer.Bars.PdfRibbonPage();
-            this.pdfFileRibbonPageGroup1 = new DevExpress.XtraPdfViewer.Bars.PdfFileRibbonPageGroup();
-            this.pdfFindRibbonPageGroup1 = new DevExpress.XtraPdfViewer.Bars.PdfFindRibbonPageGroup();
             this.pdfNavigationRibbonPageGroup1 = new DevExpress.XtraPdfViewer.Bars.PdfNavigationRibbonPageGroup();
             this.pdfZoomRibbonPageGroup1 = new DevExpress.XtraPdfViewer.Bars.PdfZoomRibbonPageGroup();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.pdfBarController1 = new DevExpress.XtraPdfViewer.Bars.PdfBarController(this.components);
+            this.btnStamp = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPageNumberEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pdfBarController1)).BeginInit();
@@ -79,7 +77,7 @@
             this.pdfViewer.Location = new System.Drawing.Point(0, 171);
             this.pdfViewer.MenuManager = this.ribbonControl1;
             this.pdfViewer.Name = "pdfViewer";
-            this.pdfViewer.Size = new System.Drawing.Size(957, 436);
+            this.pdfViewer.Size = new System.Drawing.Size(1170, 520);
             this.pdfViewer.TabIndex = 0;
             // 
             // ribbonControl1
@@ -88,7 +86,6 @@
             this.ribbonControl1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.ribbonControl1.ExpandCollapseItem,
             this.ribbonControl1.SearchEditItem,
-            this.pdfFileOpenBarItem1,
             this.pdfFindTextBarItem1,
             this.pdfPreviousPageBarItem1,
             this.pdfNextPageBarItem1,
@@ -115,9 +112,10 @@
             this.btnSignDefault,
             this.btnConfirm,
             this.btnClearSign,
-            this.btnAdvanced});
+            this.btnAdvanced,
+            this.btnStamp});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 35;
+            this.ribbonControl1.MaxItemId = 36;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.pdfRibbonPage1});
@@ -125,14 +123,8 @@
             this.repositoryItemPageNumberEdit1});
             this.ribbonControl1.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.False;
             this.ribbonControl1.ShowToolbarCustomizeItem = false;
-            this.ribbonControl1.Size = new System.Drawing.Size(957, 171);
+            this.ribbonControl1.Size = new System.Drawing.Size(1170, 171);
             this.ribbonControl1.Toolbar.ShowCustomizeItem = false;
-            // 
-            // pdfFileOpenBarItem1
-            // 
-            this.pdfFileOpenBarItem1.Id = 1;
-            this.pdfFileOpenBarItem1.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O));
-            this.pdfFileOpenBarItem1.Name = "pdfFileOpenBarItem1";
             // 
             // pdfFindTextBarItem1
             // 
@@ -142,11 +134,13 @@
             // 
             // pdfPreviousPageBarItem1
             // 
+            this.pdfPreviousPageBarItem1.Caption = "上一頁";
             this.pdfPreviousPageBarItem1.Id = 5;
             this.pdfPreviousPageBarItem1.Name = "pdfPreviousPageBarItem1";
             // 
             // pdfNextPageBarItem1
             // 
+            this.pdfNextPageBarItem1.Caption = "下一頁";
             this.pdfNextPageBarItem1.Id = 6;
             this.pdfNextPageBarItem1.Name = "pdfNextPageBarItem1";
             // 
@@ -164,16 +158,19 @@
             // 
             // pdfZoomOutBarItem1
             // 
+            this.pdfZoomOutBarItem1.Caption = "縮小";
             this.pdfZoomOutBarItem1.Id = 8;
             this.pdfZoomOutBarItem1.Name = "pdfZoomOutBarItem1";
             // 
             // pdfZoomInBarItem1
             // 
+            this.pdfZoomInBarItem1.Caption = "放大";
             this.pdfZoomInBarItem1.Id = 9;
             this.pdfZoomInBarItem1.Name = "pdfZoomInBarItem1";
             // 
             // pdfExactZoomListBarSubItem1
             // 
+            this.pdfExactZoomListBarSubItem1.Caption = "飛漲";
             this.pdfExactZoomListBarSubItem1.Id = 10;
             this.pdfExactZoomListBarSubItem1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.pdfZoom10CheckItem1, true),
@@ -299,7 +296,7 @@
             // 
             // btnAdvanced
             // 
-            this.btnAdvanced.Caption = "先進的";
+            this.btnAdvanced.Caption = "簽名管理";
             this.btnAdvanced.Id = 34;
             this.btnAdvanced.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnAdvanced.ImageOptions.SvgImage")));
             this.btnAdvanced.Name = "btnAdvanced";
@@ -308,33 +305,21 @@
             // pdfRibbonPage1
             // 
             this.pdfRibbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
-            this.pdfFileRibbonPageGroup1,
-            this.pdfFindRibbonPageGroup1,
             this.pdfNavigationRibbonPageGroup1,
             this.pdfZoomRibbonPageGroup1,
             this.ribbonPageGroup1});
             this.pdfRibbonPage1.Name = "pdfRibbonPage1";
-            // 
-            // pdfFileRibbonPageGroup1
-            // 
-            this.pdfFileRibbonPageGroup1.CaptionButtonVisible = DevExpress.Utils.DefaultBoolean.False;
-            this.pdfFileRibbonPageGroup1.ItemLinks.Add(this.pdfFileOpenBarItem1);
-            this.pdfFileRibbonPageGroup1.Name = "pdfFileRibbonPageGroup1";
-            // 
-            // pdfFindRibbonPageGroup1
-            // 
-            this.pdfFindRibbonPageGroup1.AllowTextClipping = false;
-            this.pdfFindRibbonPageGroup1.CaptionButtonVisible = DevExpress.Utils.DefaultBoolean.False;
-            this.pdfFindRibbonPageGroup1.ItemLinks.Add(this.pdfFindTextBarItem1);
-            this.pdfFindRibbonPageGroup1.Name = "pdfFindRibbonPageGroup1";
+            this.pdfRibbonPage1.Text = "PDF Tools";
             // 
             // pdfNavigationRibbonPageGroup1
             // 
             this.pdfNavigationRibbonPageGroup1.CaptionButtonVisible = DevExpress.Utils.DefaultBoolean.False;
+            this.pdfNavigationRibbonPageGroup1.ItemLinks.Add(this.pdfFindTextBarItem1);
             this.pdfNavigationRibbonPageGroup1.ItemLinks.Add(this.pdfPreviousPageBarItem1);
             this.pdfNavigationRibbonPageGroup1.ItemLinks.Add(this.pdfNextPageBarItem1);
             this.pdfNavigationRibbonPageGroup1.ItemLinks.Add(this.pdfSetPageNumberBarItem1);
             this.pdfNavigationRibbonPageGroup1.Name = "pdfNavigationRibbonPageGroup1";
+            this.pdfNavigationRibbonPageGroup1.Text = "導航";
             // 
             // pdfZoomRibbonPageGroup1
             // 
@@ -343,11 +328,13 @@
             this.pdfZoomRibbonPageGroup1.ItemLinks.Add(this.pdfZoomInBarItem1);
             this.pdfZoomRibbonPageGroup1.ItemLinks.Add(this.pdfExactZoomListBarSubItem1);
             this.pdfZoomRibbonPageGroup1.Name = "pdfZoomRibbonPageGroup1";
+            this.pdfZoomRibbonPageGroup1.Text = "檢視";
             // 
             // ribbonPageGroup1
             // 
             this.ribbonPageGroup1.ItemLinks.Add(this.btnSignDefault);
             this.ribbonPageGroup1.ItemLinks.Add(this.btnAdvanced);
+            this.ribbonPageGroup1.ItemLinks.Add(this.btnStamp);
             this.ribbonPageGroup1.ItemLinks.Add(this.btnConfirm);
             this.ribbonPageGroup1.ItemLinks.Add(this.btnClearSign);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
@@ -355,7 +342,6 @@
             // 
             // pdfBarController1
             // 
-            this.pdfBarController1.BarItems.Add(this.pdfFileOpenBarItem1);
             this.pdfBarController1.BarItems.Add(this.pdfFindTextBarItem1);
             this.pdfBarController1.BarItems.Add(this.pdfPreviousPageBarItem1);
             this.pdfBarController1.BarItems.Add(this.pdfNextPageBarItem1);
@@ -381,16 +367,26 @@
             this.pdfBarController1.BarItems.Add(this.pdfImportFormDataBarItem1);
             this.pdfBarController1.Control = this.pdfViewer;
             // 
+            // btnStamp
+            // 
+            this.btnStamp.Caption = "郵票";
+            this.btnStamp.Id = 35;
+            this.btnStamp.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnStamp.ImageOptions.SvgImage")));
+            this.btnStamp.Name = "btnStamp";
+            // 
             // f00_PdfTools
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(957, 607);
+            this.ClientSize = new System.Drawing.Size(1170, 691);
             this.Controls.Add(this.pdfViewer);
             this.Controls.Add(this.ribbonControl1);
+            this.IconOptions.Image = global::KnowledgeSystem.Properties.Resources.AppIcon;
             this.Name = "f00_PdfTools";
             this.Ribbon = this.ribbonControl1;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "f00_PdfTools";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.f00_PdfTools_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPageNumberEdit1)).EndInit();
@@ -404,7 +400,6 @@
 
         private DevExpress.XtraPdfViewer.PdfViewer pdfViewer;
         private DevExpress.XtraBars.Ribbon.RibbonControl ribbonControl1;
-        private DevExpress.XtraPdfViewer.Bars.PdfFileOpenBarItem pdfFileOpenBarItem1;
         private DevExpress.XtraPdfViewer.Bars.PdfFindTextBarItem pdfFindTextBarItem1;
         private DevExpress.XtraPdfViewer.Bars.PdfPreviousPageBarItem pdfPreviousPageBarItem1;
         private DevExpress.XtraPdfViewer.Bars.PdfNextPageBarItem pdfNextPageBarItem1;
@@ -430,8 +425,6 @@
         private DevExpress.XtraPdfViewer.Bars.PdfExportFormDataBarItem pdfExportFormDataBarItem1;
         private DevExpress.XtraPdfViewer.Bars.PdfImportFormDataBarItem pdfImportFormDataBarItem1;
         private DevExpress.XtraPdfViewer.Bars.PdfRibbonPage pdfRibbonPage1;
-        private DevExpress.XtraPdfViewer.Bars.PdfFileRibbonPageGroup pdfFileRibbonPageGroup1;
-        private DevExpress.XtraPdfViewer.Bars.PdfFindRibbonPageGroup pdfFindRibbonPageGroup1;
         private DevExpress.XtraPdfViewer.Bars.PdfNavigationRibbonPageGroup pdfNavigationRibbonPageGroup1;
         private DevExpress.XtraPdfViewer.Bars.PdfZoomRibbonPageGroup pdfZoomRibbonPageGroup1;
         private DevExpress.XtraPdfViewer.Bars.PdfBarController pdfBarController1;
@@ -440,5 +433,6 @@
         private DevExpress.XtraBars.BarButtonItem btnConfirm;
         private DevExpress.XtraBars.BarButtonItem btnClearSign;
         private DevExpress.XtraBars.BarButtonItem btnAdvanced;
+        private DevExpress.XtraBars.BarButtonItem btnStamp;
     }
 }

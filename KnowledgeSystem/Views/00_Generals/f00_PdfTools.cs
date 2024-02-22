@@ -1,6 +1,7 @@
 ﻿using DevExpress.Pdf;
 using DevExpress.XtraEditors;
 using DevExpress.XtraPdfViewer;
+using DevExpress.XtraSpreadsheet.Model;
 using DocumentFormat.OpenXml.Drawing.Charts;
 using System;
 using System.Collections.Generic;
@@ -16,9 +17,11 @@ namespace KnowledgeSystem.Views._00_Generals
 {
     public partial class f00_PdfTools : DevExpress.XtraBars.Ribbon.RibbonForm
     {
-        public f00_PdfTools()
+        public f00_PdfTools(string filePath_)
         {
             InitializeComponent();
+            filePath = filePath_;
+
             pdfViewer.MouseDown += PdfViewer_MouseDown;
             pdfViewer.MouseUp += PdfViewer_MouseUp;
             pdfViewer.MouseMove += PdfViewer_MouseMove;
@@ -56,9 +59,12 @@ namespace KnowledgeSystem.Views._00_Generals
         List<GraphicsCoordinates> signs = new List<GraphicsCoordinates>();
         GraphicsCoordinates currentSign;
 
+        string filePath = "";
+
         Image imageSign = null;
-        string descrip = DateTime.Now.ToString("yyyy.MM.dd");
+        string descrip = "";
         Font font = new Font("Times New Roman", 12, FontStyle.Regular);
+        SizeF sizeFont = new SizeF();
 
         // This variable indicates whether the Drawing button is activated
         bool ActivateDrawing = false;
@@ -67,11 +73,17 @@ namespace KnowledgeSystem.Views._00_Generals
 
         #region methods
 
+        private void DefaultSign()
+        {
+            descrip = DateTime.Now.ToString("yyyy.MM.dd");
+            imageSign = Image.FromFile(@"E:\01. Softwares Programming\24. Knowledge System\02. Images\sign.png");
+        }
+
         void DrawImageRectangle(Graphics graphics, GraphicsCoordinates rect)
         {
             var image = rect.ImageSign;
             string descripSign = rect.Descrip;
-            SizeF sizeFont = graphics.MeasureString(descripSign, font);
+            sizeFont = graphics.MeasureString(descripSign, font);
 
             var desHeight = (int)(sizeFont.Height);
             var desWidth = (int)(sizeFont.Width);
@@ -86,9 +98,11 @@ namespace KnowledgeSystem.Views._00_Generals
             graphics.DrawRectangle(new Pen(Color.Red), recRectangle);
 
             // Vẽ chữ ký
+            recSignImage = string.IsNullOrWhiteSpace(rect.Descrip) ? recRectangle : recSignImage;
             graphics.DrawImage(image, recSignImage);
 
             // Vẽ mô tả (Ngày tháng)
+            if (string.IsNullOrWhiteSpace(rect.Descrip)) return;
             PointF point = new PointF(Math.Max(start.X, end.X) - desWidth, Math.Max(start.Y, end.Y) - desHeight);
             SolidBrush mybrush = new SolidBrush(Color.Black);
             graphics.DrawString(descripSign, font, mybrush, point);
@@ -100,8 +114,10 @@ namespace KnowledgeSystem.Views._00_Generals
             {
                 var documentPosition = pdfViewer.GetDocumentPosition(location, true);
 
+                var desHeight = string.IsNullOrWhiteSpace(descrip) ? 0 : sizeFont.Height;
+
                 var widthImage = imageSign.Width;
-                var heightImage = imageSign.Height + 25;
+                var heightImage = imageSign.Height + desHeight;
 
                 // Tính sự thay đổi của tọa độ Y
                 var deltaY = Math.Abs(documentPosition.Point.Y - currentSign.Point1.Y);
@@ -163,12 +179,16 @@ namespace KnowledgeSystem.Views._00_Generals
                         // graph.DrawRectangle(new Pen(Color.Red), recRectangle);
 
                         // Vẽ chữ ký
+                        recSignImage = string.IsNullOrWhiteSpace(rect.Descrip) ? recRectangle : recSignImage;
                         graph.DrawImage(image, recSignImage);
 
                         // Vẽ phần mô tả chữ ký (Ngày tháng)
-                        PointF point = new PointF((float)recRectangle.Right - desWidth, (float)recRectangle.Bottom - desHeight);
-                        SolidBrush mybrush = new SolidBrush(Color.Black);
-                        graph.DrawString(desSign, font, mybrush, point);
+                        if (!string.IsNullOrWhiteSpace(rect.Descrip))
+                        {
+                            PointF point = new PointF((float)recRectangle.Right - desWidth, (float)recRectangle.Bottom - desHeight);
+                            SolidBrush mybrush = new SolidBrush(Color.Black);
+                            graph.DrawString(desSign, font, mybrush, point);
+                        }
                         graph.AddToPageForeground(page, 72, 72);
                     }
                 }
@@ -187,8 +207,8 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void f00_PdfTools_Load(object sender, EventArgs e)
         {
-            imageSign = Image.FromFile(@"E:\01. Softwares Programming\24. Knowledge System\02. Images\sign.png");
-            //imageSign = Image.FromFile(@"C:\Users\TuanPhuong\Desktop\TEst\sign.png");
+            pdfViewer.LoadDocument(filePath);
+            DefaultSign();
         }
 
         private void PdfViewer_Paint(object sender, PaintEventArgs e)
@@ -255,7 +275,7 @@ namespace KnowledgeSystem.Views._00_Generals
         private void btnSignDefault_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             // Change the activation indicator
-            ActivateDrawing = !ActivateDrawing;
+            ActivateDrawing = true;
             pdfViewer.Invalidate();
         }
 
@@ -272,12 +292,18 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void btnAdvanced_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            ActivateDrawing = true;
+            pdfViewer.Invalidate();
+
             uc00_AdvancedSign ucAdvanced = new uc00_AdvancedSign();
             if (XtraDialog.Show(ucAdvanced, "修改簽名", MessageBoxButtons.OKCancel) != DialogResult.OK)
+            {
+                DefaultSign();
                 return;
+            }
 
-            //progressSelect = ucAdvanced.ProgressSelect;
-            //lbProgress.Text = "流程：" + progressSelect.DisplayName;
+            imageSign = ucAdvanced.ImageSign;
+            descrip = ucAdvanced.DescripSign;
         }
     }
 }

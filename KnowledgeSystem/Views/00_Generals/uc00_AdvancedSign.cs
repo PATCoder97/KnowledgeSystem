@@ -22,12 +22,17 @@ namespace KnowledgeSystem.Views._00_Generals
             InitializeComponent();
         }
 
+        public Image ImageSign { get; set; }
+        public string DescripSign { get; set; }
+
         #region methods
 
         private void DrawSign(string letter, Image image)
         {
             if (string.IsNullOrWhiteSpace(letter))
             {
+                DescripSign = letter;
+                ImageSign = image;
                 picSign.Image = image;
                 return;
             }
@@ -60,6 +65,8 @@ namespace KnowledgeSystem.Views._00_Generals
             SizeF size = g.MeasureString(letter.ToString(), font);
             g.DrawString(letter, font, new SolidBrush(Color.Black), rect, sf);
 
+            DescripSign = letter;
+            ImageSign = image;
             picSign.Image = MergeTwoImages(img, bit);
         }
 
@@ -150,6 +157,8 @@ namespace KnowledgeSystem.Views._00_Generals
         {
             List<string> signs = new List<string>() { "sign.png", "sign2.png" };
             cbbSign.Properties.Items.AddRange(signs);
+            if (signs.Count != 0)
+                cbbSign.SelectedIndex = 0;
         }
     }
 }

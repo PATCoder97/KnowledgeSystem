@@ -2,6 +2,7 @@
 using DevExpress.XtraGrid.Views.Grid;
 using DocumentFormat.OpenXml.Drawing.Diagrams;
 using KnowledgeSystem.Helpers;
+using KnowledgeSystem.Views._00_Generals;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -122,8 +123,15 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void gvVersion_MasterRowGetChildList(object sender, MasterRowGetChildListEventArgs e)
         {
-            List<FileObject> fileList = new List<FileObject> { new FileObject { DisplayName = "gasdghas.pdf" }, new FileObject { DisplayName = "31asdasd.pdf" }};
+            List<FileObject> fileList = new List<FileObject> { new FileObject { DisplayName = "gasdghas.pdf" }, new FileObject { DisplayName = "31asdasd.pdf" } };
             e.ChildList = fileList;
+        }
+
+        private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            f00_PdfTools frm = new f00_PdfTools(@"C:\Users\ANHTUAN\Desktop\New folder\Blank.pdf");
+            frm.ShowDialog();
+                
         }
     }
 }
