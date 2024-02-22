@@ -64,6 +64,9 @@
             this.pdfExportFormDataBarItem1 = new DevExpress.XtraPdfViewer.Bars.PdfExportFormDataBarItem();
             this.pdfImportFormDataBarItem1 = new DevExpress.XtraPdfViewer.Bars.PdfImportFormDataBarItem();
             this.btnSignDefault = new DevExpress.XtraBars.BarButtonItem();
+            this.btnConfirm = new DevExpress.XtraBars.BarButtonItem();
+            this.btnClearSign = new DevExpress.XtraBars.BarButtonItem();
+            this.btnAdvanced = new DevExpress.XtraBars.BarButtonItem();
             this.pdfRibbonPage1 = new DevExpress.XtraPdfViewer.Bars.PdfRibbonPage();
             this.pdfFileRibbonPageGroup1 = new DevExpress.XtraPdfViewer.Bars.PdfFileRibbonPageGroup();
             this.pdfFindRibbonPageGroup1 = new DevExpress.XtraPdfViewer.Bars.PdfFindRibbonPageGroup();
@@ -74,9 +77,6 @@
             this.pdfTextCommentPageGroup1 = new DevExpress.XtraPdfViewer.Bars.PdfTextCommentPageGroup();
             this.pdfNoteCommentPageGroup1 = new DevExpress.XtraPdfViewer.Bars.PdfNoteCommentPageGroup();
             this.pdfBarController1 = new DevExpress.XtraPdfViewer.Bars.PdfBarController(this.components);
-            this.btnConfirm = new DevExpress.XtraBars.BarButtonItem();
-            this.btnClearSign = new DevExpress.XtraBars.BarButtonItem();
-            this.btnAdvanced = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPageNumberEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pdfBarController1)).BeginInit();
@@ -333,6 +333,30 @@
             this.btnSignDefault.Name = "btnSignDefault";
             this.btnSignDefault.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSignDefault_ItemClick);
             // 
+            // btnConfirm
+            // 
+            this.btnConfirm.Caption = "確認";
+            this.btnConfirm.Id = 32;
+            this.btnConfirm.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnConfirm.ImageOptions.SvgImage")));
+            this.btnConfirm.Name = "btnConfirm";
+            this.btnConfirm.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnConfirm_ItemClick);
+            // 
+            // btnClearSign
+            // 
+            this.btnClearSign.Caption = "清除";
+            this.btnClearSign.Id = 33;
+            this.btnClearSign.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnClearSign.ImageOptions.SvgImage")));
+            this.btnClearSign.Name = "btnClearSign";
+            this.btnClearSign.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnClearSign_ItemClick);
+            // 
+            // btnAdvanced
+            // 
+            this.btnAdvanced.Caption = "先進的";
+            this.btnAdvanced.Id = 34;
+            this.btnAdvanced.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnAdvanced.ImageOptions.SvgImage")));
+            this.btnAdvanced.Name = "btnAdvanced";
+            this.btnAdvanced.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAdvanced_ItemClick);
+            // 
             // pdfRibbonPage1
             // 
             this.pdfRibbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -435,29 +459,6 @@
             this.pdfBarController1.BarItems.Add(this.pdfExportFormDataBarItem1);
             this.pdfBarController1.BarItems.Add(this.pdfImportFormDataBarItem1);
             this.pdfBarController1.Control = this.pdfViewer;
-            // 
-            // btnConfirm
-            // 
-            this.btnConfirm.Caption = "確認";
-            this.btnConfirm.Id = 32;
-            this.btnConfirm.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem1.ImageOptions.SvgImage")));
-            this.btnConfirm.Name = "btnConfirm";
-            this.btnConfirm.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnConfirm_ItemClick);
-            // 
-            // btnClearSign
-            // 
-            this.btnClearSign.Caption = "清除";
-            this.btnClearSign.Id = 33;
-            this.btnClearSign.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem1.ImageOptions.SvgImage1")));
-            this.btnClearSign.Name = "btnClearSign";
-            this.btnClearSign.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnClearSign_ItemClick);
-            // 
-            // btnAdvanced
-            // 
-            this.btnAdvanced.Caption = "先進的";
-            this.btnAdvanced.Id = 34;
-            this.btnAdvanced.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnAdvanced.ImageOptions.SvgImage")));
-            this.btnAdvanced.Name = "btnAdvanced";
             // 
             // f00_PdfTools
             // 
