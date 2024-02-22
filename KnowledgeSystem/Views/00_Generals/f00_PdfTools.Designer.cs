@@ -33,8 +33,6 @@
             this.pdfViewer = new DevExpress.XtraPdfViewer.PdfViewer();
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.pdfFileOpenBarItem1 = new DevExpress.XtraPdfViewer.Bars.PdfFileOpenBarItem();
-            this.pdfFileSaveAsBarItem1 = new DevExpress.XtraPdfViewer.Bars.PdfFileSaveAsBarItem();
-            this.pdfFilePrintBarItem1 = new DevExpress.XtraPdfViewer.Bars.PdfFilePrintBarItem();
             this.pdfFindTextBarItem1 = new DevExpress.XtraPdfViewer.Bars.PdfFindTextBarItem();
             this.pdfPreviousPageBarItem1 = new DevExpress.XtraPdfViewer.Bars.PdfPreviousPageBarItem();
             this.pdfNextPageBarItem1 = new DevExpress.XtraPdfViewer.Bars.PdfNextPageBarItem();
@@ -57,26 +55,19 @@
             this.pdfSetPageLevelZoomModeCheckItem1 = new DevExpress.XtraPdfViewer.Bars.PdfSetPageLevelZoomModeCheckItem();
             this.pdfSetFitWidthZoomModeCheckItem1 = new DevExpress.XtraPdfViewer.Bars.PdfSetFitWidthZoomModeCheckItem();
             this.pdfSetFitVisibleZoomModeCheckItem1 = new DevExpress.XtraPdfViewer.Bars.PdfSetFitVisibleZoomModeCheckItem();
-            this.pdfTextHighlightBarItem1 = new DevExpress.XtraPdfViewer.Bars.PdfTextHighlightBarItem();
-            this.pdfTextStrikethroughBarItem1 = new DevExpress.XtraPdfViewer.Bars.PdfTextStrikethroughBarItem();
-            this.pdfTextUnderlineBarItem1 = new DevExpress.XtraPdfViewer.Bars.PdfTextUnderlineBarItem();
-            this.pdfStickyNoteBarItem1 = new DevExpress.XtraPdfViewer.Bars.PdfStickyNoteBarItem();
             this.pdfExportFormDataBarItem1 = new DevExpress.XtraPdfViewer.Bars.PdfExportFormDataBarItem();
             this.pdfImportFormDataBarItem1 = new DevExpress.XtraPdfViewer.Bars.PdfImportFormDataBarItem();
             this.btnSignDefault = new DevExpress.XtraBars.BarButtonItem();
+            this.btnConfirm = new DevExpress.XtraBars.BarButtonItem();
+            this.btnClearSign = new DevExpress.XtraBars.BarButtonItem();
+            this.btnAdvanced = new DevExpress.XtraBars.BarButtonItem();
             this.pdfRibbonPage1 = new DevExpress.XtraPdfViewer.Bars.PdfRibbonPage();
             this.pdfFileRibbonPageGroup1 = new DevExpress.XtraPdfViewer.Bars.PdfFileRibbonPageGroup();
             this.pdfFindRibbonPageGroup1 = new DevExpress.XtraPdfViewer.Bars.PdfFindRibbonPageGroup();
             this.pdfNavigationRibbonPageGroup1 = new DevExpress.XtraPdfViewer.Bars.PdfNavigationRibbonPageGroup();
             this.pdfZoomRibbonPageGroup1 = new DevExpress.XtraPdfViewer.Bars.PdfZoomRibbonPageGroup();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.pdfCommentRibbonPage1 = new DevExpress.XtraPdfViewer.Bars.PdfCommentRibbonPage();
-            this.pdfTextCommentPageGroup1 = new DevExpress.XtraPdfViewer.Bars.PdfTextCommentPageGroup();
-            this.pdfNoteCommentPageGroup1 = new DevExpress.XtraPdfViewer.Bars.PdfNoteCommentPageGroup();
             this.pdfBarController1 = new DevExpress.XtraPdfViewer.Bars.PdfBarController(this.components);
-            this.btnConfirm = new DevExpress.XtraBars.BarButtonItem();
-            this.btnClearSign = new DevExpress.XtraBars.BarButtonItem();
-            this.btnAdvanced = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPageNumberEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pdfBarController1)).BeginInit();
@@ -98,8 +89,6 @@
             this.ribbonControl1.ExpandCollapseItem,
             this.ribbonControl1.SearchEditItem,
             this.pdfFileOpenBarItem1,
-            this.pdfFileSaveAsBarItem1,
-            this.pdfFilePrintBarItem1,
             this.pdfFindTextBarItem1,
             this.pdfPreviousPageBarItem1,
             this.pdfNextPageBarItem1,
@@ -121,10 +110,6 @@
             this.pdfSetPageLevelZoomModeCheckItem1,
             this.pdfSetFitWidthZoomModeCheckItem1,
             this.pdfSetFitVisibleZoomModeCheckItem1,
-            this.pdfTextHighlightBarItem1,
-            this.pdfTextStrikethroughBarItem1,
-            this.pdfTextUnderlineBarItem1,
-            this.pdfStickyNoteBarItem1,
             this.pdfExportFormDataBarItem1,
             this.pdfImportFormDataBarItem1,
             this.btnSignDefault,
@@ -135,8 +120,7 @@
             this.ribbonControl1.MaxItemId = 35;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
-            this.pdfRibbonPage1,
-            this.pdfCommentRibbonPage1});
+            this.pdfRibbonPage1});
             this.ribbonControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPageNumberEdit1});
             this.ribbonControl1.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.False;
@@ -149,18 +133,6 @@
             this.pdfFileOpenBarItem1.Id = 1;
             this.pdfFileOpenBarItem1.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O));
             this.pdfFileOpenBarItem1.Name = "pdfFileOpenBarItem1";
-            // 
-            // pdfFileSaveAsBarItem1
-            // 
-            this.pdfFileSaveAsBarItem1.Id = 2;
-            this.pdfFileSaveAsBarItem1.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S));
-            this.pdfFileSaveAsBarItem1.Name = "pdfFileSaveAsBarItem1";
-            // 
-            // pdfFilePrintBarItem1
-            // 
-            this.pdfFilePrintBarItem1.Id = 3;
-            this.pdfFilePrintBarItem1.ItemShortcut = new DevExpress.XtraBars.BarShortcut((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P));
-            this.pdfFilePrintBarItem1.Name = "pdfFilePrintBarItem1";
             // 
             // pdfFindTextBarItem1
             // 
@@ -291,30 +263,6 @@
             this.pdfSetFitVisibleZoomModeCheckItem1.Id = 24;
             this.pdfSetFitVisibleZoomModeCheckItem1.Name = "pdfSetFitVisibleZoomModeCheckItem1";
             // 
-            // pdfTextHighlightBarItem1
-            // 
-            this.pdfTextHighlightBarItem1.ButtonStyle = DevExpress.XtraBars.BarButtonStyle.CheckDropDown;
-            this.pdfTextHighlightBarItem1.Id = 25;
-            this.pdfTextHighlightBarItem1.Name = "pdfTextHighlightBarItem1";
-            // 
-            // pdfTextStrikethroughBarItem1
-            // 
-            this.pdfTextStrikethroughBarItem1.ButtonStyle = DevExpress.XtraBars.BarButtonStyle.CheckDropDown;
-            this.pdfTextStrikethroughBarItem1.Id = 26;
-            this.pdfTextStrikethroughBarItem1.Name = "pdfTextStrikethroughBarItem1";
-            // 
-            // pdfTextUnderlineBarItem1
-            // 
-            this.pdfTextUnderlineBarItem1.ButtonStyle = DevExpress.XtraBars.BarButtonStyle.CheckDropDown;
-            this.pdfTextUnderlineBarItem1.Id = 27;
-            this.pdfTextUnderlineBarItem1.Name = "pdfTextUnderlineBarItem1";
-            // 
-            // pdfStickyNoteBarItem1
-            // 
-            this.pdfStickyNoteBarItem1.ButtonStyle = DevExpress.XtraBars.BarButtonStyle.CheckDropDown;
-            this.pdfStickyNoteBarItem1.Id = 28;
-            this.pdfStickyNoteBarItem1.Name = "pdfStickyNoteBarItem1";
-            // 
             // pdfExportFormDataBarItem1
             // 
             this.pdfExportFormDataBarItem1.Id = 29;
@@ -332,6 +280,30 @@
             this.btnSignDefault.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnSignDefault.ImageOptions.SvgImage")));
             this.btnSignDefault.Name = "btnSignDefault";
             this.btnSignDefault.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSignDefault_ItemClick);
+            // 
+            // btnConfirm
+            // 
+            this.btnConfirm.Caption = "確認";
+            this.btnConfirm.Id = 32;
+            this.btnConfirm.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnConfirm.ImageOptions.SvgImage")));
+            this.btnConfirm.Name = "btnConfirm";
+            this.btnConfirm.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnConfirm_ItemClick);
+            // 
+            // btnClearSign
+            // 
+            this.btnClearSign.Caption = "清除";
+            this.btnClearSign.Id = 33;
+            this.btnClearSign.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnClearSign.ImageOptions.SvgImage")));
+            this.btnClearSign.Name = "btnClearSign";
+            this.btnClearSign.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnClearSign_ItemClick);
+            // 
+            // btnAdvanced
+            // 
+            this.btnAdvanced.Caption = "先進的";
+            this.btnAdvanced.Id = 34;
+            this.btnAdvanced.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnAdvanced.ImageOptions.SvgImage")));
+            this.btnAdvanced.Name = "btnAdvanced";
+            this.btnAdvanced.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAdvanced_ItemClick);
             // 
             // pdfRibbonPage1
             // 
@@ -381,32 +353,9 @@
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             this.ribbonPageGroup1.Text = "簽名";
             // 
-            // pdfCommentRibbonPage1
-            // 
-            this.pdfCommentRibbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
-            this.pdfTextCommentPageGroup1,
-            this.pdfNoteCommentPageGroup1});
-            this.pdfCommentRibbonPage1.Name = "pdfCommentRibbonPage1";
-            // 
-            // pdfTextCommentPageGroup1
-            // 
-            this.pdfTextCommentPageGroup1.CaptionButtonVisible = DevExpress.Utils.DefaultBoolean.False;
-            this.pdfTextCommentPageGroup1.ItemLinks.Add(this.pdfTextHighlightBarItem1);
-            this.pdfTextCommentPageGroup1.ItemLinks.Add(this.pdfTextStrikethroughBarItem1);
-            this.pdfTextCommentPageGroup1.ItemLinks.Add(this.pdfTextUnderlineBarItem1);
-            this.pdfTextCommentPageGroup1.Name = "pdfTextCommentPageGroup1";
-            // 
-            // pdfNoteCommentPageGroup1
-            // 
-            this.pdfNoteCommentPageGroup1.CaptionButtonVisible = DevExpress.Utils.DefaultBoolean.False;
-            this.pdfNoteCommentPageGroup1.ItemLinks.Add(this.pdfStickyNoteBarItem1);
-            this.pdfNoteCommentPageGroup1.Name = "pdfNoteCommentPageGroup1";
-            // 
             // pdfBarController1
             // 
             this.pdfBarController1.BarItems.Add(this.pdfFileOpenBarItem1);
-            this.pdfBarController1.BarItems.Add(this.pdfFileSaveAsBarItem1);
-            this.pdfBarController1.BarItems.Add(this.pdfFilePrintBarItem1);
             this.pdfBarController1.BarItems.Add(this.pdfFindTextBarItem1);
             this.pdfBarController1.BarItems.Add(this.pdfPreviousPageBarItem1);
             this.pdfBarController1.BarItems.Add(this.pdfNextPageBarItem1);
@@ -428,36 +377,9 @@
             this.pdfBarController1.BarItems.Add(this.pdfSetFitWidthZoomModeCheckItem1);
             this.pdfBarController1.BarItems.Add(this.pdfSetFitVisibleZoomModeCheckItem1);
             this.pdfBarController1.BarItems.Add(this.pdfExactZoomListBarSubItem1);
-            this.pdfBarController1.BarItems.Add(this.pdfTextHighlightBarItem1);
-            this.pdfBarController1.BarItems.Add(this.pdfTextStrikethroughBarItem1);
-            this.pdfBarController1.BarItems.Add(this.pdfTextUnderlineBarItem1);
-            this.pdfBarController1.BarItems.Add(this.pdfStickyNoteBarItem1);
             this.pdfBarController1.BarItems.Add(this.pdfExportFormDataBarItem1);
             this.pdfBarController1.BarItems.Add(this.pdfImportFormDataBarItem1);
             this.pdfBarController1.Control = this.pdfViewer;
-            // 
-            // btnConfirm
-            // 
-            this.btnConfirm.Caption = "確認";
-            this.btnConfirm.Id = 32;
-            this.btnConfirm.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem1.ImageOptions.SvgImage")));
-            this.btnConfirm.Name = "btnConfirm";
-            this.btnConfirm.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnConfirm_ItemClick);
-            // 
-            // btnClearSign
-            // 
-            this.btnClearSign.Caption = "清除";
-            this.btnClearSign.Id = 33;
-            this.btnClearSign.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem1.ImageOptions.SvgImage1")));
-            this.btnClearSign.Name = "btnClearSign";
-            this.btnClearSign.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnClearSign_ItemClick);
-            // 
-            // btnAdvanced
-            // 
-            this.btnAdvanced.Caption = "先進的";
-            this.btnAdvanced.Id = 34;
-            this.btnAdvanced.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnAdvanced.ImageOptions.SvgImage")));
-            this.btnAdvanced.Name = "btnAdvanced";
             // 
             // f00_PdfTools
             // 
@@ -483,8 +405,6 @@
         private DevExpress.XtraPdfViewer.PdfViewer pdfViewer;
         private DevExpress.XtraBars.Ribbon.RibbonControl ribbonControl1;
         private DevExpress.XtraPdfViewer.Bars.PdfFileOpenBarItem pdfFileOpenBarItem1;
-        private DevExpress.XtraPdfViewer.Bars.PdfFileSaveAsBarItem pdfFileSaveAsBarItem1;
-        private DevExpress.XtraPdfViewer.Bars.PdfFilePrintBarItem pdfFilePrintBarItem1;
         private DevExpress.XtraPdfViewer.Bars.PdfFindTextBarItem pdfFindTextBarItem1;
         private DevExpress.XtraPdfViewer.Bars.PdfPreviousPageBarItem pdfPreviousPageBarItem1;
         private DevExpress.XtraPdfViewer.Bars.PdfNextPageBarItem pdfNextPageBarItem1;
@@ -507,10 +427,6 @@
         private DevExpress.XtraPdfViewer.Bars.PdfSetPageLevelZoomModeCheckItem pdfSetPageLevelZoomModeCheckItem1;
         private DevExpress.XtraPdfViewer.Bars.PdfSetFitWidthZoomModeCheckItem pdfSetFitWidthZoomModeCheckItem1;
         private DevExpress.XtraPdfViewer.Bars.PdfSetFitVisibleZoomModeCheckItem pdfSetFitVisibleZoomModeCheckItem1;
-        private DevExpress.XtraPdfViewer.Bars.PdfTextHighlightBarItem pdfTextHighlightBarItem1;
-        private DevExpress.XtraPdfViewer.Bars.PdfTextStrikethroughBarItem pdfTextStrikethroughBarItem1;
-        private DevExpress.XtraPdfViewer.Bars.PdfTextUnderlineBarItem pdfTextUnderlineBarItem1;
-        private DevExpress.XtraPdfViewer.Bars.PdfStickyNoteBarItem pdfStickyNoteBarItem1;
         private DevExpress.XtraPdfViewer.Bars.PdfExportFormDataBarItem pdfExportFormDataBarItem1;
         private DevExpress.XtraPdfViewer.Bars.PdfImportFormDataBarItem pdfImportFormDataBarItem1;
         private DevExpress.XtraPdfViewer.Bars.PdfRibbonPage pdfRibbonPage1;
@@ -518,9 +434,6 @@
         private DevExpress.XtraPdfViewer.Bars.PdfFindRibbonPageGroup pdfFindRibbonPageGroup1;
         private DevExpress.XtraPdfViewer.Bars.PdfNavigationRibbonPageGroup pdfNavigationRibbonPageGroup1;
         private DevExpress.XtraPdfViewer.Bars.PdfZoomRibbonPageGroup pdfZoomRibbonPageGroup1;
-        private DevExpress.XtraPdfViewer.Bars.PdfCommentRibbonPage pdfCommentRibbonPage1;
-        private DevExpress.XtraPdfViewer.Bars.PdfTextCommentPageGroup pdfTextCommentPageGroup1;
-        private DevExpress.XtraPdfViewer.Bars.PdfNoteCommentPageGroup pdfNoteCommentPageGroup1;
         private DevExpress.XtraPdfViewer.Bars.PdfBarController pdfBarController1;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
         private DevExpress.XtraBars.BarButtonItem btnSignDefault;

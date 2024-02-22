@@ -24,33 +24,41 @@ namespace KnowledgeSystem.Views._00_Generals
             pdfViewer.MouseMove += PdfViewer_MouseMove;
             pdfViewer.Paint += PdfViewer_Paint;
 
-            pdfViewer.NavigationPanePageVisibility = PdfNavigationPanePageVisibility.None;
-        }
+            pdfViewer.PopupMenuShowing += PdfViewer_PopupMenuShowing;
+            pdfViewer.KeyDown += PdfViewer_KeyDown;
+            ribbonControl1.KeyDown += PdfViewer_KeyDown;
 
+            pdfViewer.NavigationPanePageVisibility = PdfNavigationPanePageVisibility.None;
+            KeyPreview = true;
+        }
 
         #region parameters
 
         class GraphicsCoordinates
         {
-            public GraphicsCoordinates(int pageIndex, PdfPoint point1, PdfPoint point2, Image imageSign)
+            public GraphicsCoordinates(int pageIndex, PdfPoint point1, PdfPoint point2, Image imageSign, string descrip)
             {
                 PageIndex = pageIndex;
                 Point1 = point1;
                 Point2 = point2;
                 ImageSign = imageSign;
+                Descrip = descrip;
             }
 
-            public Image ImageSign { get; }
             public int PageIndex { get; }
             public PdfPoint Point1 { get; }
             public PdfPoint Point2 { get; }
             public bool IsEmpty => Point1 == Point2;
+            public Image ImageSign { get; }
+            public string Descrip { get; }
         }
 
-        List<GraphicsCoordinates> rectangleCoordinateList = new List<GraphicsCoordinates>();
-        GraphicsCoordinates currentCoordinates;
+        List<GraphicsCoordinates> signs = new List<GraphicsCoordinates>();
+        GraphicsCoordinates currentSign;
 
         Image imageSign = null;
+        string descrip = DateTime.Now.ToString("yyyy.MM.dd");
+        Font font = new Font("Times New Roman", 12, FontStyle.Regular);
 
         // This variable indicates whether the Drawing button is activated
         bool ActivateDrawing = false;
@@ -62,28 +70,33 @@ namespace KnowledgeSystem.Views._00_Generals
         void DrawImageRectangle(Graphics graphics, GraphicsCoordinates rect)
         {
             var image = rect.ImageSign;
+            string descripSign = rect.Descrip;
+            SizeF sizeFont = graphics.MeasureString(descripSign, font);
+
+            var desHeight = (int)(sizeFont.Height);
+            var desWidth = (int)(sizeFont.Width);
 
             PointF start = pdfViewer.GetClientPoint(new PdfDocumentPosition(rect.PageIndex + 1, rect.Point1));
             PointF end = pdfViewer.GetClientPoint(new PdfDocumentPosition(rect.PageIndex + 1, rect.Point2));
             // Create a rectangle where graphics should be drawn
-            var r = Rectangle.FromLTRB((int)Math.Min(start.X, end.X), (int)Math.Min(start.Y, end.Y), (int)Math.Max(start.X, end.X), (int)Math.Max(start.Y, end.Y));
-            var r1 = Rectangle.FromLTRB((int)Math.Min(start.X, end.X), (int)Math.Min(start.Y, end.Y), (int)Math.Max(start.X, end.X), (int)Math.Max(start.Y, end.Y) - 20);
+            var recRectangle = Rectangle.FromLTRB((int)Math.Min(start.X, end.X), (int)Math.Min(start.Y, end.Y), (int)Math.Max(start.X, end.X), (int)Math.Max(start.Y, end.Y));
+            var recSignImage = Rectangle.FromLTRB((int)Math.Min(start.X, end.X), (int)Math.Min(start.Y, end.Y), (int)Math.Max(start.X, end.X), (int)Math.Max(start.Y, end.Y) - desHeight);
 
             // Draw a rectangle in the created area
-            graphics.DrawRectangle(new Pen(Color.Red), r);
+            graphics.DrawRectangle(new Pen(Color.Red), recRectangle);
 
-            graphics.DrawImage(image, r1);
+            // Vẽ chữ ký
+            graphics.DrawImage(image, recSignImage);
 
-            PointF point = new PointF(Math.Max(start.X, end.X) - 95, Math.Max(start.Y, end.Y) - 20);
+            // Vẽ mô tả (Ngày tháng)
+            PointF point = new PointF(Math.Max(start.X, end.X) - desWidth, Math.Max(start.Y, end.Y) - desHeight);
             SolidBrush mybrush = new SolidBrush(Color.Black);
-            //graph.DrawString("Here my Text", myfont, mybrush, point);
-            Font font = new Font("Times New Roman", 14, FontStyle.Regular);
-            graphics.DrawString(DateTime.Now.ToString("yyyy.MM.dd"), font, mybrush, point);
+            graphics.DrawString(descripSign, font, mybrush, point);
         }
 
         void UpdateCurrentRect(Point location)
         {
-            if (rectangleCoordinateList != null && currentCoordinates != null)
+            if (signs != null && currentSign != null)
             {
                 var documentPosition = pdfViewer.GetDocumentPosition(location, true);
 
@@ -91,7 +104,7 @@ namespace KnowledgeSystem.Views._00_Generals
                 var heightImage = imageSign.Height + 25;
 
                 // Tính sự thay đổi của tọa độ Y
-                var deltaY = Math.Abs(documentPosition.Point.Y - currentCoordinates.Point1.Y);
+                var deltaY = Math.Abs(documentPosition.Point.Y - currentSign.Point1.Y);
 
                 // Tính tỷ lệ thay đổi theo chiều dọc (Y)
                 var scaleY = (float)deltaY / heightImage;
@@ -100,13 +113,13 @@ namespace KnowledgeSystem.Views._00_Generals
                 var YNew = documentPosition.Point.Y;
 
                 // Tính toạ độ Y mới dựa trên tỷ lệ thay đổi theo chiều dọc (scaleY)
-                var XNew = documentPosition.Point.X - currentCoordinates.Point1.X < 0 ? currentCoordinates.Point1.X - (int)(widthImage * scaleY) : currentCoordinates.Point1.X + (int)(widthImage * scaleY);
+                var XNew = documentPosition.Point.X - currentSign.Point1.X < 0 ? currentSign.Point1.X - (int)(widthImage * scaleY) : currentSign.Point1.X + (int)(widthImage * scaleY);
 
                 // Tạo điểm mới
                 PdfPoint newPoint = new PdfPoint(XNew, YNew);
 
-                if (currentCoordinates.PageIndex == documentPosition.PageNumber - 1)
-                    currentCoordinates = new GraphicsCoordinates(currentCoordinates.PageIndex, currentCoordinates.Point1, newPoint, imageSign);
+                if (currentSign.PageIndex == documentPosition.PageNumber - 1)
+                    currentSign = new GraphicsCoordinates(currentSign.PageIndex, currentSign.Point1, newPoint, imageSign, descrip);
             }
         }
 
@@ -119,7 +132,7 @@ namespace KnowledgeSystem.Views._00_Generals
             {
                 // Load a document to the PdfDocumentProcessor instance
                 processor.LoadDocument(fileName);
-                foreach (var rect in rectangleCoordinateList)
+                foreach (var rect in signs)
                 {
                     // Create a PdfGraphics object
                     using (PdfGraphics graph = processor.CreateGraphics())
@@ -129,25 +142,33 @@ namespace KnowledgeSystem.Views._00_Generals
                         PdfPoint p1 = new PdfPoint(rect.Point1.X, pageCropBox.Height - rect.Point1.Y);
                         PdfPoint p2 = new PdfPoint(rect.Point2.X, pageCropBox.Height - rect.Point2.Y);
 
-                        // Create a rectangle where graphics should be drawn
-                        RectangleF bounds = RectangleF.FromLTRB(
+                        var image = rect.ImageSign;
+                        string desSign = rect.Descrip;
+                        SizeF sizeFont = graph.MeasureString(desSign, font);
+
+                        var desHeight = (float)(sizeFont.Height * 0.7);
+                        var desWidth = (float)(sizeFont.Width * 0.75);
+
+                        // Tạo khung vẽ vòng đỏ
+                        RectangleF recRectangle = RectangleF.FromLTRB(
                             (float)Math.Min(p1.X, p2.X), (float)Math.Min(p1.Y, p2.Y),
                             (float)Math.Max(p1.X, p2.X), (float)Math.Max(p1.Y, p2.Y));
-                        RectangleF bounds2 = RectangleF.FromLTRB(
+
+                        // Tạo khung vẽ chữ ký
+                        RectangleF recSignImage = RectangleF.FromLTRB(
                            (float)Math.Min(p1.X, p2.X), (float)Math.Min(p1.Y, p2.Y),
-                           (float)Math.Max(p1.X, p2.X), (float)Math.Max(p1.Y, p2.Y) - 15);
+                           (float)Math.Max(p1.X, p2.X), (float)Math.Max(p1.Y, p2.Y) - desHeight);
+
                         // Draw a rectangle in the created area
-                        //  graph.DrawRectangle(new Pen(Color.Red), bounds);
-                        var image = rect.ImageSign;
-                        graph.DrawImage(image, bounds2);
+                        // graph.DrawRectangle(new Pen(Color.Red), recRectangle);
 
-                        PointF point = new PointF((float)Math.Max(p1.X, p2.X) - 65, (float)Math.Max(p1.Y, p2.Y) - 15);
+                        // Vẽ chữ ký
+                        graph.DrawImage(image, recSignImage);
+
+                        // Vẽ phần mô tả chữ ký (Ngày tháng)
+                        PointF point = new PointF((float)recRectangle.Right - desWidth, (float)recRectangle.Bottom - desHeight);
                         SolidBrush mybrush = new SolidBrush(Color.Black);
-                        //graph.DrawString("Here my Text", myfont, mybrush, point);
-                        Font font = new Font("Times New Roman", 14, FontStyle.Regular);
-                        graph.DrawString(DateTime.Now.ToString("yyyy.MM.dd"), font, mybrush, point);
-
-                        // Draw graphics content into a file
+                        graph.DrawString(desSign, font, mybrush, point);
                         graph.AddToPageForeground(page, 72, 72);
                     }
                 }
@@ -155,7 +176,7 @@ namespace KnowledgeSystem.Views._00_Generals
 
                 processor.SaveDocument(fileNameSave);
             }
-            rectangleCoordinateList.Clear();
+            signs.Clear();
             ActivateDrawing = false;
 
             // Open the document in the PDF Viewer
@@ -173,16 +194,16 @@ namespace KnowledgeSystem.Views._00_Generals
         {
             if (ActivateDrawing)
             {
-                foreach (var r in rectangleCoordinateList)
+                foreach (var r in signs)
                     DrawImageRectangle(e.Graphics, r);
-                if (currentCoordinates != null)
-                    DrawImageRectangle(e.Graphics, currentCoordinates);
+                if (currentSign != null)
+                    DrawImageRectangle(e.Graphics, currentSign);
             }
         }
 
         private void PdfViewer_MouseMove(object sender, MouseEventArgs e)
         {
-            if (currentCoordinates != null)
+            if (currentSign != null)
             {
                 UpdateCurrentRect(e.Location);
                 pdfViewer.Invalidate();
@@ -193,12 +214,12 @@ namespace KnowledgeSystem.Views._00_Generals
         {
             // Convert the retrieved coordinates to the page coordinates
             UpdateCurrentRect(e.Location);
-            if (currentCoordinates != null)
+            if (currentSign != null)
             {
-                if (!currentCoordinates.IsEmpty && ActivateDrawing)
+                if (!currentSign.IsEmpty && ActivateDrawing)
                     // Add coordinates to the list
-                    rectangleCoordinateList.Add(currentCoordinates);
-                currentCoordinates = null;
+                    signs.Add(currentSign);
+                currentSign = null;
             }
         }
 
@@ -211,7 +232,23 @@ namespace KnowledgeSystem.Views._00_Generals
             }
 
             var position = pdfViewer.GetDocumentPosition(e.Location, true);
-            currentCoordinates = new GraphicsCoordinates(position.PageNumber - 1, position.Point, position.Point, imageSign);
+            currentSign = new GraphicsCoordinates(position.PageNumber - 1, position.Point, position.Point, imageSign, descrip);
+        }
+
+        private void PdfViewer_KeyDown(object sender, KeyEventArgs e)
+        {
+            Console.WriteLine($"{e.Control} {e.KeyCode}");
+
+            if (e.Control && (e.KeyCode == Keys.P || e.KeyCode == Keys.S || e.KeyCode == Keys.O))
+            {
+                e.SuppressKeyPress = true;
+                return;
+            }
+        }
+
+        private void PdfViewer_PopupMenuShowing(object sender, PdfPopupMenuShowingEventArgs e)
+        {
+            e.ItemLinks.Clear();
         }
 
         private void btnSignDefault_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -228,8 +265,14 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void btnClearSign_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            rectangleCoordinateList.Clear();
+            signs.Clear();
             pdfViewer.Invalidate();
+        }
+
+        private void btnAdvanced_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            imageSign = Image.FromFile(@"E:\01. Softwares Programming\24. Knowledge System\02. Images\sign2.png");
+            descrip = "2024/02/01";
         }
     }
 }
