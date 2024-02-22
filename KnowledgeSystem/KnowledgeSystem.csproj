@@ -224,6 +224,12 @@
     <Compile Include="Views\00_Generals\uc00_AdminLogin.Designer.cs">
       <DependentUpon>uc00_AdminLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\00_Generals\uc00_AdvancedSign.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\00_Generals\uc00_AdvancedSign.Designer.cs">
+      <DependentUpon>uc00_AdvancedSign.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\00_Generals\uc00_ChangePassword.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -498,6 +504,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\00_Generals\uc00_AdminLogin.resx">
       <DependentUpon>uc00_AdminLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\00_Generals\uc00_AdvancedSign.resx">
+      <DependentUpon>uc00_AdvancedSign.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\00_Generals\uc00_ChangePassword.resx">
       <DependentUpon>uc00_ChangePassword.cs</DependentUpon>

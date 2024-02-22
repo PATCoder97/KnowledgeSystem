@@ -188,6 +188,7 @@ namespace KnowledgeSystem.Views._00_Generals
         private void f00_PdfTools_Load(object sender, EventArgs e)
         {
             imageSign = Image.FromFile(@"E:\01. Softwares Programming\24. Knowledge System\02. Images\sign.png");
+            //imageSign = Image.FromFile(@"C:\Users\TuanPhuong\Desktop\TEst\sign.png");
         }
 
         private void PdfViewer_Paint(object sender, PaintEventArgs e)
@@ -271,8 +272,12 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void btnAdvanced_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            imageSign = Image.FromFile(@"E:\01. Softwares Programming\24. Knowledge System\02. Images\sign2.png");
-            descrip = "2024/02/01";
+            uc00_AdvancedSign ucAdvanced = new uc00_AdvancedSign();
+            if (XtraDialog.Show(ucAdvanced, "修改簽名", MessageBoxButtons.OKCancel) != DialogResult.OK)
+                return;
+
+            //progressSelect = ucAdvanced.ProgressSelect;
+            //lbProgress.Text = "流程：" + progressSelect.DisplayName;
         }
     }
 }
