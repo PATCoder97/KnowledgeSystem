@@ -1,17 +1,23 @@
 ﻿using DevExpress.Pdf;
 using DevExpress.XtraEditors;
 using DevExpress.XtraPdfViewer;
+using DevExpress.XtraPrinting.Native;
 using DevExpress.XtraSpreadsheet.Model;
 using DocumentFormat.OpenXml.Drawing.Charts;
+using DocumentFormat.OpenXml.Wordprocessing;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Media.Media3D;
+using Color = System.Drawing.Color;
+using Font = System.Drawing.Font;
 
 namespace KnowledgeSystem.Views._00_Generals
 {
@@ -26,6 +32,7 @@ namespace KnowledgeSystem.Views._00_Generals
             pdfViewer.MouseUp += PdfViewer_MouseUp;
             pdfViewer.MouseMove += PdfViewer_MouseMove;
             pdfViewer.Paint += PdfViewer_Paint;
+            //pdfViewer.MouseClick += PdfViewer_MouseClick;
 
             pdfViewer.PopupMenuShowing += PdfViewer_PopupMenuShowing;
             pdfViewer.KeyDown += PdfViewer_KeyDown;
@@ -75,8 +82,8 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void DefaultSign()
         {
-            descrip = DateTime.Now.ToString("yyyy.MM.dd");
-            imageSign = Image.FromFile(@"E:\01. Softwares Programming\24. Knowledge System\02. Images\sign.png");
+            //descrip = DateTime.Now.ToString("yyyy.MM.dd");
+            //imageSign = Image.FromFile(@"E:\01. Softwares Programming\24. Knowledge System\02. Images\sign.png");
         }
 
         void DrawImageRectangle(Graphics graphics, GraphicsCoordinates rect)
@@ -203,6 +210,12 @@ namespace KnowledgeSystem.Views._00_Generals
             pdfViewer.LoadDocument(fileNameSave);
         }
 
+        private Cursor CreateCursor(Bitmap bitmap, System.Drawing.Size size)
+        {
+            bitmap = new Bitmap(bitmap, size);
+            return new Cursor(bitmap.GetHicon());
+        }
+
         #endregion
 
         private void f00_PdfTools_Load(object sender, EventArgs e)
@@ -222,13 +235,65 @@ namespace KnowledgeSystem.Views._00_Generals
             }
         }
 
+        private void PdfViewer_MouseClick(object sender, MouseEventArgs e)
+        {
+           // if (!ActivateStamp) { return; }
+            if (!pdfViewer.IsDocumentOpened)
+            {
+                Console.WriteLine("---------- No document loaded ----------");
+                return;
+            }
+
+            var hitPoint = pdfViewer.GetDocumentPosition(e.Location, false);
+            if (hitPoint != null)
+            {
+                var image = imageSign;
+                //var factor = GetScalingFactor();
+
+                var width = image.Width;
+                var height = image.Height;
+
+                //var width = image.Width / image.HorizontalResolution * 62f / factor;
+                //var height = image.Height / image.VerticalResolution * 62f / factor;
+
+                //var page = pdfViewer.Document.Pages[currentPageNumber];
+
+                PdfPoint p1 = new PdfPoint((float)hitPoint.Point.X - (width / 2),  (float)hitPoint.Point.Y - (height / 2));
+                PdfPoint p2 = new PdfPoint((float)hitPoint.Point.X + (width / 2),  (float)hitPoint.Point.Y + (height / 2));
+
+                currentSign = new GraphicsCoordinates(hitPoint.PageNumber - 1, hitPoint.Point, hitPoint.Point, imageSign, descrip);
+                signs.Add(currentSign);
+
+                pdfViewer.Invalidate();
+            }
+            else
+            {
+                Console.WriteLine("---------- Outside document bounds ----------");
+                return;
+            }
+        }
+
         private void PdfViewer_MouseMove(object sender, MouseEventArgs e)
         {
-            if (currentSign != null)
+            if (currentSign != null )
             {
                 UpdateCurrentRect(e.Location);
                 pdfViewer.Invalidate();
             }
+
+            //if (!ActivateStamp) { return; }
+            //var hitPoint = pdfViewer.GetDocumentPosition(e.Location, false);
+            //if (hitPoint != null)
+            //{
+            //    var bitmap = (Bitmap)imageSign;
+            //    this.Cursor = CreateCursor(bitmap, new System.Drawing.Size(bitmap.Width, bitmap.Height));
+            //    pdfViewer.CursorMode = DevExpress.XtraPdfViewer.PdfCursorMode.Custom;
+
+            //}
+            //else
+            //{
+            //    this.Cursor = Cursors.Default;
+            //}
         }
 
         private void PdfViewer_MouseUp(object sender, MouseEventArgs e)
@@ -304,6 +369,22 @@ namespace KnowledgeSystem.Views._00_Generals
 
             imageSign = ucAdvanced.ImageSign;
             descrip = ucAdvanced.DescripSign;
+        }
+
+        private void btnStamp_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            ActivateDrawing = true;
+            pdfViewer.Invalidate();
+
+            uc00_AdvancedSign ucAdvanced = new uc00_AdvancedSign();
+            if (XtraDialog.Show(ucAdvanced, "修改簽名", MessageBoxButtons.OKCancel) != DialogResult.OK)
+            {
+                DefaultSign();
+                return;
+            }
+
+            imageSign = ucAdvanced.ImageSign;
+            descrip = "";
         }
     }
 }

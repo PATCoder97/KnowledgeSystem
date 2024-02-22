@@ -60,12 +60,12 @@
             this.btnConfirm = new DevExpress.XtraBars.BarButtonItem();
             this.btnClearSign = new DevExpress.XtraBars.BarButtonItem();
             this.btnAdvanced = new DevExpress.XtraBars.BarButtonItem();
+            this.btnStamp = new DevExpress.XtraBars.BarButtonItem();
             this.pdfRibbonPage1 = new DevExpress.XtraPdfViewer.Bars.PdfRibbonPage();
             this.pdfNavigationRibbonPageGroup1 = new DevExpress.XtraPdfViewer.Bars.PdfNavigationRibbonPageGroup();
             this.pdfZoomRibbonPageGroup1 = new DevExpress.XtraPdfViewer.Bars.PdfZoomRibbonPageGroup();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.pdfBarController1 = new DevExpress.XtraPdfViewer.Bars.PdfBarController(this.components);
-            this.btnStamp = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPageNumberEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pdfBarController1)).BeginInit();
@@ -302,6 +302,14 @@
             this.btnAdvanced.Name = "btnAdvanced";
             this.btnAdvanced.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAdvanced_ItemClick);
             // 
+            // btnStamp
+            // 
+            this.btnStamp.Caption = "郵票";
+            this.btnStamp.Id = 35;
+            this.btnStamp.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnStamp.ImageOptions.SvgImage")));
+            this.btnStamp.Name = "btnStamp";
+            this.btnStamp.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnStamp_ItemClick);
+            // 
             // pdfRibbonPage1
             // 
             this.pdfRibbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -366,13 +374,6 @@
             this.pdfBarController1.BarItems.Add(this.pdfExportFormDataBarItem1);
             this.pdfBarController1.BarItems.Add(this.pdfImportFormDataBarItem1);
             this.pdfBarController1.Control = this.pdfViewer;
-            // 
-            // btnStamp
-            // 
-            this.btnStamp.Caption = "郵票";
-            this.btnStamp.Id = 35;
-            this.btnStamp.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnStamp.ImageOptions.SvgImage")));
-            this.btnStamp.Name = "btnStamp";
             // 
             // f00_PdfTools
             // 

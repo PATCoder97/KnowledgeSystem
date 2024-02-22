@@ -27,6 +27,25 @@ namespace KnowledgeSystem.Views._00_Generals
 
         #region methods
 
+        private void LoadSign()
+        {
+            string nameSign = cbbSign.EditValue?.ToString() ?? "sign.png";
+            //Image imageSign = Image.FromFile($@"E:\01. Softwares Programming\24. Knowledge System\02. Images\{nameSign}");
+            Image imageSign = Image.FromFile($@"C:\Users\TuanPhuong\Desktop\TEst\{nameSign}");
+            string letter = txbDate.EditValue == null ? string.Empty : txbDate.DateTime.ToString("yyyy/MM/dd");
+
+            switch (nameSign)
+            {
+                case "Stamp.png":
+                    DrawStamp(letter, imageSign);
+                    break;
+                default:
+                    DrawSign(letter, imageSign);
+                    break;
+            }
+
+        }
+
         private void DrawSign(string letter, Image image)
         {
             if (string.IsNullOrWhiteSpace(letter))
@@ -70,6 +89,40 @@ namespace KnowledgeSystem.Views._00_Generals
             picSign.Image = MergeTwoImages(img, bit);
         }
 
+        private void DrawStamp(string letter, Image image)
+        {
+            letter = "2024/02/01";
+            var img = (Bitmap)image;
+            Graphics g = Graphics.FromImage(img);
+
+            Font font = new Font("Times New Roman", 50, FontStyle.Bold);
+            SizeF size = g.MeasureString(letter.ToString(), font);
+
+            var bit = new Bitmap(img.Width, (int)Math.Ceiling(size.Height));
+
+            float width = ((float)bit.Width);
+            float height = ((float)bit.Height);
+
+            float emSize = height;
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            g.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+            g.InterpolationMode = InterpolationMode.High;
+
+            StringFormat sf = new StringFormat();
+            sf.LineAlignment = StringAlignment.Center;
+
+            // Top/Left.
+            sf.Alignment = StringAlignment.Center;
+
+            Rectangle rect = new Rectangle(0, (int)Math.Floor((image.Height / 2 - height / 2) - 5), bit.Width, bit.Height);
+            g.DrawString(letter, font, new SolidBrush(Color.Red), rect, sf);
+            //g.DrawRectangle(new Pen(Color.Black), rect);
+
+            var imageOut = MergeTwoImages(img, bit);
+            ImageSign = imageOut;
+            picSign.Image = imageOut;
+        }
+
         private int SizeLabelFont(string text, int wid, int hgt)
         {
             string txt = text;
@@ -111,7 +164,7 @@ namespace KnowledgeSystem.Views._00_Generals
 
             int outputImageWidth = firstImage.Width > secondImage.Width ? firstImage.Width : secondImage.Width;
 
-            int outputImageHeight = firstImage.Height + secondImage.Height + 1;
+            int outputImageHeight = firstImage.Height;// + secondImage.Height + 1;
 
             Bitmap outputImage = new Bitmap(outputImageWidth, outputImageHeight, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
 
@@ -130,32 +183,17 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void cbbSign_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-            string nameSign = cbbSign.EditValue?.ToString() ?? "sign.png";
-
-            Image imageSign = Image.FromFile($@"E:\01. Softwares Programming\24. Knowledge System\02. Images\{nameSign}");
-            string letter = txbDate.EditValue == null ? string.Empty : txbDate.DateTime.ToString("yyyy/MM/dd");
-
-
-            DrawSign(letter, imageSign);
+            LoadSign();
         }
 
         private void txbDate_EditValueChanged(object sender, EventArgs e)
         {
-            Console.WriteLine(txbDate.EditValue?.ToString());
-
-            string nameSign = cbbSign.EditValue?.ToString() ?? "sign.png";
-
-            Image imageSign = Image.FromFile($@"E:\01. Softwares Programming\24. Knowledge System\02. Images\{nameSign}");
-            string letter = txbDate.EditValue == null ? string.Empty : txbDate.DateTime.ToString("yyyy/MM/dd");
-
-
-            DrawSign(letter, imageSign);
+            LoadSign();
         }
 
         private void uc00_AdvancedSign_Load(object sender, EventArgs e)
         {
-            List<string> signs = new List<string>() { "sign.png", "sign2.png" };
+            List<string> signs = new List<string>() { "sign.png", "sign2.png", "Stamp.png" };
             cbbSign.Properties.Items.AddRange(signs);
             if (signs.Count != 0)
                 cbbSign.SelectedIndex = 0;
