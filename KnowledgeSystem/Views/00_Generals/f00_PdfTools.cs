@@ -82,8 +82,8 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void DefaultSign()
         {
-            //descrip = DateTime.Now.ToString("yyyy.MM.dd");
-            //imageSign = Image.FromFile(@"E:\01. Softwares Programming\24. Knowledge System\02. Images\sign.png");
+            descrip = DateTime.Now.ToString("yyyy.MM.dd");
+            imageSign = Image.FromFile(@"E:\01. Softwares Programming\24. Knowledge System\02. Images\sign.png");
         }
 
         void DrawImageRectangle(Graphics graphics, GraphicsCoordinates rect)
@@ -102,7 +102,7 @@ namespace KnowledgeSystem.Views._00_Generals
             var recSignImage = Rectangle.FromLTRB((int)Math.Min(start.X, end.X), (int)Math.Min(start.Y, end.Y), (int)Math.Max(start.X, end.X), (int)Math.Max(start.Y, end.Y) - desHeight);
 
             // Draw a rectangle in the created area
-            graphics.DrawRectangle(new Pen(Color.Red), recRectangle);
+            graphics.DrawRectangle(new Pen(Color.Blue), recRectangle);
 
             // Vẽ chữ ký
             recSignImage = string.IsNullOrWhiteSpace(rect.Descrip) ? recRectangle : recSignImage;
@@ -141,8 +141,26 @@ namespace KnowledgeSystem.Views._00_Generals
                 // Tạo điểm mới
                 PdfPoint newPoint = new PdfPoint(XNew, YNew);
 
+
+                // Tesst
+
+                widthImage = 148;
+                heightImage = 84;
+
+                widthImage = 314;
+                heightImage = 100;
+
+                XNew = documentPosition.Point.X - widthImage / 2;
+                YNew = documentPosition.Point.Y - heightImage / 2;
+                PdfPoint p1 = new PdfPoint(XNew, YNew);
+                XNew = documentPosition.Point.X + widthImage / 2;
+                YNew = documentPosition.Point.Y + heightImage / 2;
+                PdfPoint p2 = new PdfPoint(XNew, YNew);
+
+
                 if (currentSign.PageIndex == documentPosition.PageNumber - 1)
-                    currentSign = new GraphicsCoordinates(currentSign.PageIndex, currentSign.Point1, newPoint, imageSign, descrip);
+                    //currentSign = new GraphicsCoordinates(currentSign.PageIndex, currentSign.Point1, newPoint, imageSign, descrip);
+                    currentSign = new GraphicsCoordinates(currentSign.PageIndex, p1, p2, imageSign, descrip);
             }
         }
 
@@ -237,7 +255,7 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void PdfViewer_MouseClick(object sender, MouseEventArgs e)
         {
-           // if (!ActivateStamp) { return; }
+            // if (!ActivateStamp) { return; }
             if (!pdfViewer.IsDocumentOpened)
             {
                 Console.WriteLine("---------- No document loaded ----------");
@@ -258,8 +276,8 @@ namespace KnowledgeSystem.Views._00_Generals
 
                 //var page = pdfViewer.Document.Pages[currentPageNumber];
 
-                PdfPoint p1 = new PdfPoint((float)hitPoint.Point.X - (width / 2),  (float)hitPoint.Point.Y - (height / 2));
-                PdfPoint p2 = new PdfPoint((float)hitPoint.Point.X + (width / 2),  (float)hitPoint.Point.Y + (height / 2));
+                PdfPoint p1 = new PdfPoint((float)hitPoint.Point.X - (width / 2), (float)hitPoint.Point.Y - (height / 2));
+                PdfPoint p2 = new PdfPoint((float)hitPoint.Point.X + (width / 2), (float)hitPoint.Point.Y + (height / 2));
 
                 currentSign = new GraphicsCoordinates(hitPoint.PageNumber - 1, hitPoint.Point, hitPoint.Point, imageSign, descrip);
                 signs.Add(currentSign);
@@ -275,7 +293,7 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void PdfViewer_MouseMove(object sender, MouseEventArgs e)
         {
-            if (currentSign != null )
+            if (currentSign != null)
             {
                 UpdateCurrentRect(e.Location);
                 pdfViewer.Invalidate();

@@ -33,7 +33,7 @@ namespace KnowledgeSystem
             Application.SetCompatibleTextRenderingDefault(false);
 
 #if DEBUG
-            Application.Run(new f00_PdfTools(@"C:\Users\TuanPhuong\Desktop\TEst\TEst.pdf"));
+            Application.Run(new f00_PdfTools(@"C:\Users\ANHTUAN\Desktop\New folder\Blank.pdf"));
             //Application.Run(new f00_Main());
 
             //TPConfigs.SoftNameTW = "冶金文管系統";
