@@ -1,5 +1,6 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
+using DevExpress.DataAccess.Wizard.Presenters;
 using DevExpress.Utils.Design;
 using DevExpress.XtraEditors;
 using KnowledgeSystem.Helpers;
@@ -36,7 +37,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
         Image ImageSign = null;
 
         string letter = DateTime.Today.ToString("yyyy.MM.dd");
-        Font font = new Font("Times New Roman", 12, FontStyle.Bold);
+        Font font = new Font("Times New Roman", 12, FontStyle.Regular);
         Color dateTimeColor = Color.FromArgb(210, 14, 18);
 
         int imgWid, imgHgt, px, py = 0;
@@ -154,65 +155,44 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
                 case EventFormInfo.Create:
                     signInfo = new dm_Sign();
                     cbbType.SelectedIndex = 0;
+                    colorFont.Color = dateTimeColor;
                     break;
                 case EventFormInfo.View:
-                    ImageSign = Image.FromFile(Path.Combine(TPConfigs.FolderSign,signInfo.ImgName));
-                    //picSign.Image 
+
+                    string source = Path.Combine(TPConfigs.FolderSign, signInfo.ImgName);
+                    string dest = Path.Combine(TPConfigs.TempFolderData, $"{DateTime.Now:yyMMddhhmmss} Sign.png");
+                    if (!Directory.Exists(TPConfigs.TempFolderData))
+                        Directory.CreateDirectory(TPConfigs.TempFolderData);
+
+                    File.Copy(source, dest, true);
+
+                    ImageSign = Image.FromFile(dest);
+                    imgWid = ImageSign.Width;
+                    imgHgt = ImageSign.Height;
 
                     txbDisplayName.EditValue = signInfo.DisplayName;
-                    int indexType = signInfo.ImgType;
-
-                    cbbType.SelectedIndex = indexType;
 
                     var fontName = signInfo.FontName;
                     var fontSize = (byte)signInfo.FontSize;
                     var fontStyle = signInfo.FontType;
-
                     font = new Font(fontName, fontSize, FontStyle.Regular);
-
                     dateTimeColor = ColorTranslator.FromHtml(signInfo.FontColor);
+                    colorFont.Color = dateTimeColor;
 
                     txbX.EditValue = signInfo.X;
                     txbY.EditValue = signInfo.Y;
+
                     txbWid.EditValue = signInfo.WidImg;
                     txbHgt.EditValue = signInfo.HgtImg;
 
-                    //signInfo.DisplayName = signInfo.DisplayName.Split('\n')[0];
-                    //signInfo.DateCreate = DateTime.Parse(signInfo.DateCreate.ToShortDateString());
-
-                    //txbUserId.EditValue = signInfo.Id;
-                    //txbUserNameVN.EditValue = signInfo.DisplayNameVN?.Trim();
-                    //txbUserNameTW.EditValue = signInfo.DisplayName.Split('\n')[0]?.Trim();
-                    //cbbDept.EditValue = signInfo.IdDepartment;
-                    //cbbJobTitle.EditValue = signInfo.JobCode;
-                    //txbDOB.EditValue = signInfo.DOB;
-                    //txbCCCD.EditValue = signInfo.CitizenID;
-                    //cbbNationality.EditValue = signInfo.Nationality;
-
-                    //txbPhone1.EditValue = signInfo.PhoneNum1;
-                    //txbPhone2.EditValue = signInfo.PhoneNum2;
-                    //txbAddr.EditValue = signInfo.Addr;
-                    //cbbSex.EditValue = signInfo.Sex == null ? "" : signInfo.Sex.Value ? "男" : "女";
-                    //cbbStatus.EditValue = signInfo.Status == null ? "" : TPConfigs.lsUserStatus[signInfo.Status.Value];
-                    //txbDateStart.EditValue = signInfo.DateCreate;
-
-                    //oldUserInfoJson = JsonConvert.SerializeObject(signInfo);
-                    //idDept2word = signInfo.IdDepartment.Count() > 2 ? signInfo.IdDepartment.Substring(0, 2) : "00";
-
-                    //// Lấy quyền hạn và chuyển các quyền mà user có sang gcChooseRoles
-                    //var lsUserRoles = dm_UserRoleBUS.Instance.GetListByUID(signInfo.Id).Select(r => r.IdRole).ToList();
-                    //lsChooseRoles.AddRange(lsAllRoles.Where(a => lsUserRoles.Exists(b => b == a.Id)));
-                    //lsAllRoles.RemoveAll(a => lsUserRoles.Exists(b => b == a.Id));
-
-                    //gcAllRole.RefreshDataSource();
-                    //gcChooseRole.RefreshDataSource();
+                    // Cho xuống cuối cùng để xác định kiểu chữ ký
+                    int indexType = signInfo.ImgType;
+                    cbbType.SelectedIndex = indexType;
                     break;
             }
 
-            
-            
             txbFont.EditValue = $"{font.Name}, {font.Size}, {font.Style}";
-            colorFont.Color = dateTimeColor;
+            lbInfo.Text = $"WxH: {imgWid} x {imgHgt}";
         }
 
         private void txbX_EditValueChanged(object sender, EventArgs e)

@@ -45,8 +45,6 @@
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -55,10 +53,6 @@
             this.gColPCName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gColIP = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
@@ -149,16 +143,16 @@
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManagerTP;
             this.barDockControlTop.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.barDockControlTop.Size = new System.Drawing.Size(691, 49);
+            this.barDockControlTop.Size = new System.Drawing.Size(1021, 49);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 395);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 473);
             this.barDockControlBottom.Manager = this.barManagerTP;
             this.barDockControlBottom.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.barDockControlBottom.Size = new System.Drawing.Size(691, 0);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1021, 0);
             // 
             // barDockControlLeft
             // 
@@ -167,16 +161,16 @@
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 49);
             this.barDockControlLeft.Manager = this.barManagerTP;
             this.barDockControlLeft.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 346);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 424);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(691, 49);
+            this.barDockControlRight.Location = new System.Drawing.Point(1021, 49);
             this.barDockControlRight.Manager = this.barManagerTP;
             this.barDockControlRight.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 346);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 424);
             // 
             // layoutControl1
             // 
@@ -187,7 +181,7 @@
             this.layoutControl1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(691, 346);
+            this.layoutControl1.Size = new System.Drawing.Size(1021, 424);
             this.layoutControl1.TabIndex = 4;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -203,7 +197,7 @@
             this.gcData.MainView = this.gvData;
             this.gcData.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.gcData.Name = "gcData";
-            this.gcData.Size = new System.Drawing.Size(667, 322);
+            this.gcData.Size = new System.Drawing.Size(997, 400);
             this.gcData.TabIndex = 4;
             this.gcData.UseEmbeddedNavigator = true;
             this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -225,8 +219,6 @@
             this.gridColumn1,
             this.gridColumn2,
             this.gridColumn7,
-            this.gridColumn3,
-            this.gridColumn6,
             this.gridColumn5,
             this.gridColumn8,
             this.gridColumn9,
@@ -234,11 +226,7 @@
             this.gridColumn16,
             this.gColPCName,
             this.gridColumn14,
-            this.gridColumn13,
-            this.gridColumn12,
-            this.gColIP,
-            this.gridColumn4,
-            this.gridColumn11});
+            this.gridColumn13});
             this.gvData.DetailHeight = 377;
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
@@ -275,133 +263,87 @@
             // 
             // gridColumn7
             // 
-            this.gridColumn7.Caption = "部門";
-            this.gridColumn7.FieldName = "DeptName";
+            this.gridColumn7.Caption = "類別";
+            this.gridColumn7.FieldName = "ImgType";
             this.gridColumn7.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
             this.gridColumn7.VisibleIndex = 2;
             // 
-            // gridColumn3
-            // 
-            this.gridColumn3.Caption = "部門代號";
-            this.gridColumn3.FieldName = "IdDepartment";
-            this.gridColumn3.MinWidth = 23;
-            this.gridColumn3.Name = "gridColumn3";
-            this.gridColumn3.Width = 87;
-            // 
-            // gridColumn6
-            // 
-            this.gridColumn6.Caption = "IdRole";
-            this.gridColumn6.FieldName = "IdRole";
-            this.gridColumn6.Name = "gridColumn6";
-            // 
             // gridColumn5
             // 
             this.gridColumn5.AppearanceCell.Options.UseTextOptions = true;
             this.gridColumn5.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn5.Caption = "報到日期";
-            this.gridColumn5.FieldName = "DateCreate";
+            this.gridColumn5.Caption = "FontName";
+            this.gridColumn5.FieldName = "FontName";
             this.gridColumn5.MinWidth = 23;
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 4;
+            this.gridColumn5.VisibleIndex = 3;
             this.gridColumn5.Width = 87;
             // 
             // gridColumn8
             // 
             this.gridColumn8.AppearanceCell.Options.UseTextOptions = true;
             this.gridColumn8.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn8.Caption = "出生日期";
-            this.gridColumn8.FieldName = "DOB";
+            this.gridColumn8.Caption = "FontSize";
+            this.gridColumn8.FieldName = "FontSize";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 5;
+            this.gridColumn8.VisibleIndex = 4;
             // 
             // gridColumn9
             // 
-            this.gridColumn9.Caption = "身份證號";
-            this.gridColumn9.FieldName = "CitizenID";
+            this.gridColumn9.Caption = "FontType";
+            this.gridColumn9.FieldName = "FontType";
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 6;
+            this.gridColumn9.VisibleIndex = 5;
             // 
             // gridColumn10
             // 
             this.gridColumn10.AppearanceCell.Options.UseTextOptions = true;
             this.gridColumn10.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn10.Caption = "國籍";
-            this.gridColumn10.FieldName = "Nationality";
+            this.gridColumn10.Caption = "FontColor";
+            this.gridColumn10.FieldName = "FontColor";
             this.gridColumn10.Name = "gridColumn10";
             this.gridColumn10.Visible = true;
-            this.gridColumn10.VisibleIndex = 7;
+            this.gridColumn10.VisibleIndex = 6;
             // 
             // gridColumn16
             // 
             this.gridColumn16.AppearanceCell.Options.UseTextOptions = true;
             this.gridColumn16.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn16.Caption = "性別";
-            this.gridColumn16.FieldName = "SexName";
+            this.gridColumn16.Caption = "X";
+            this.gridColumn16.FieldName = "X";
             this.gridColumn16.Name = "gridColumn16";
             this.gridColumn16.Visible = true;
-            this.gridColumn16.VisibleIndex = 8;
+            this.gridColumn16.VisibleIndex = 7;
             // 
             // gColPCName
             // 
-            this.gColPCName.Caption = "電腦名稱";
-            this.gColPCName.FieldName = "PCName";
+            this.gColPCName.Caption = "Y";
+            this.gColPCName.FieldName = "Y";
             this.gColPCName.Name = "gColPCName";
             this.gColPCName.Visible = true;
-            this.gColPCName.VisibleIndex = 13;
+            this.gColPCName.VisibleIndex = 10;
             this.gColPCName.Width = 80;
             // 
             // gridColumn14
             // 
-            this.gridColumn14.Caption = "電話號碼";
-            this.gridColumn14.FieldName = "PhoneNum1";
+            this.gridColumn14.Caption = "WidImg";
+            this.gridColumn14.FieldName = "WidImg";
             this.gridColumn14.Name = "gridColumn14";
             this.gridColumn14.Visible = true;
-            this.gridColumn14.VisibleIndex = 10;
+            this.gridColumn14.VisibleIndex = 8;
             // 
             // gridColumn13
             // 
-            this.gridColumn13.Caption = "居住地點";
-            this.gridColumn13.FieldName = "Addr";
+            this.gridColumn13.Caption = "HgtImg";
+            this.gridColumn13.FieldName = "HgtImg";
             this.gridColumn13.Name = "gridColumn13";
             this.gridColumn13.Visible = true;
-            this.gridColumn13.VisibleIndex = 12;
-            // 
-            // gridColumn12
-            // 
-            this.gridColumn12.Caption = "家人電話";
-            this.gridColumn12.FieldName = "PhoneNum2";
-            this.gridColumn12.Name = "gridColumn12";
-            this.gridColumn12.Visible = true;
-            this.gridColumn12.VisibleIndex = 11;
-            // 
-            // gColIP
-            // 
-            this.gColIP.Caption = "IP位址";
-            this.gColIP.FieldName = "IPAddress";
-            this.gColIP.Name = "gColIP";
-            this.gColIP.Visible = true;
-            this.gColIP.VisibleIndex = 14;
-            // 
-            // gridColumn4
-            // 
-            this.gridColumn4.Caption = "職務";
-            this.gridColumn4.FieldName = "JobName";
-            this.gridColumn4.Name = "gridColumn4";
-            this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 3;
-            // 
-            // gridColumn11
-            // 
-            this.gridColumn11.Caption = "狀態";
-            this.gridColumn11.FieldName = "StatusName";
-            this.gridColumn11.Name = "gridColumn11";
-            this.gridColumn11.Visible = true;
-            this.gridColumn11.VisibleIndex = 9;
+            this.gridColumn13.VisibleIndex = 9;
             // 
             // Root
             // 
@@ -410,7 +352,7 @@
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem1});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(691, 346);
+            this.Root.Size = new System.Drawing.Size(1021, 424);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem1
@@ -418,7 +360,7 @@
             this.layoutControlItem1.Control = this.gcData;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(671, 326);
+            this.layoutControlItem1.Size = new System.Drawing.Size(1001, 404);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
@@ -434,7 +376,7 @@
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
             this.Name = "uc402_SignManage";
-            this.Size = new System.Drawing.Size(691, 395);
+            this.Size = new System.Drawing.Size(1021, 473);
             this.Load += new System.EventHandler(this.uc402_SignManage_Load);
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
@@ -465,8 +407,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
@@ -475,10 +415,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gColPCName;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
-        private DevExpress.XtraGrid.Columns.GridColumn gColIP;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
     }
