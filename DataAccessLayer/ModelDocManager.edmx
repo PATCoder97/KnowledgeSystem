@@ -90,6 +90,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="ImgName" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="ImgType" Type="tinyint" Nullable="false" />
           <Property Name="WidImg" Type="int" />
@@ -98,7 +99,7 @@
           <Property Name="Y" Type="int" />
           <Property Name="FontName" Type="varchar" MaxLength="32" />
           <Property Name="FontSize" Type="float" />
-          <Property Name="FontType" Type="tinyint" />
+          <Property Name="FontType" Type="varchar" MaxLength="32" />
           <Property Name="FontColor" Type="varchar" MaxLength="7" />
         </EntityType>
         <EntityType Name="dm_StepProgress">
@@ -892,6 +893,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="ImgName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="ImgType" Type="Byte" Nullable="false" />
           <Property Name="WidImg" Type="Int32" />
@@ -900,7 +902,7 @@
           <Property Name="Y" Type="Int32" />
           <Property Name="FontName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
           <Property Name="FontSize" Type="Double" />
-          <Property Name="FontType" Type="Byte" />
+          <Property Name="FontType" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
           <Property Name="FontColor" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
@@ -1350,6 +1352,7 @@
                 <ScalarProperty Name="WidImg" ColumnName="WidImg" />
                 <ScalarProperty Name="ImgType" ColumnName="ImgType" />
                 <ScalarProperty Name="ImgName" ColumnName="ImgName" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

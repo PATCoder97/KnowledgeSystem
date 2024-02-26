@@ -119,7 +119,8 @@ namespace KnowledgeSystem.Views._00_Generals
             TPConfigs.Folder207 = Path.Combine(TPConfigs.FolderData, "207");
             TPConfigs.Folder302 = Path.Combine(TPConfigs.FolderData, "302");
             TPConfigs.Folder202 = Path.Combine(TPConfigs.FolderData, "202");
-            TPConfigs.FolderSign = Path.Combine(TPConfigs.FolderData, "00//ImageSign");
+            TPConfigs.Folder402 = Path.Combine(TPConfigs.FolderData, "402");
+            TPConfigs.FolderSign = Path.Combine(TPConfigs.Folder402, "ImageSign");
 
             // Lấy các role
             AppPermission.SysAdmin = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleSysAdmin").ValueT);

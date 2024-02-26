@@ -15,6 +15,7 @@ namespace DataAccessLayer
     public partial class dm_Sign
     {
         public int Id { get; set; }
+        public string DisplayName { get; set; }
         public string ImgName { get; set; }
         public byte ImgType { get; set; }
         public Nullable<int> WidImg { get; set; }
@@ -23,7 +24,7 @@ namespace DataAccessLayer
         public Nullable<int> Y { get; set; }
         public string FontName { get; set; }
         public Nullable<double> FontSize { get; set; }
-        public Nullable<byte> FontType { get; set; }
+        public string FontType { get; set; }
         public string FontColor { get; set; }
     }
 }

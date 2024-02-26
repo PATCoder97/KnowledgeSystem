@@ -26,11 +26,11 @@ namespace KnowledgeSystem.Helpers
         public static string SoftNameEN { get; set; }
         public static string SoftNameTW { get; set; }
         public static string UrlUpdate { get; set; }
-        public static string Folder00 { get; set; }
         public static string Folder207 { get; set; }
         public static string FolderData { get; set; }
         public static string Folder302 { get; set; }
         public static string Folder202 { get; set; }
+        public static string Folder402 { get; set; }
         public static string FolderSign { get; set; }
 
         // CONST Value

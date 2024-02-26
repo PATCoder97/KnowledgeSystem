@@ -3,6 +3,7 @@ using DataAccessLayer;
 using DevExpress.Utils.Design;
 using DevExpress.XtraEditors;
 using KnowledgeSystem.Helpers;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,20 +11,25 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace KnowledgeSystem.Views._00_Generals
+namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 {
-    public partial class f00_CreateSign : DevExpress.XtraEditors.XtraForm
+    public partial class f402_SignInfo : DevExpress.XtraEditors.XtraForm
     {
-        public f00_CreateSign()
+        public f402_SignInfo()
         {
             InitializeComponent();
             InitializeIcon();
         }
+
+        public string formName = string.Empty;
+        public EventFormInfo eventInfo = EventFormInfo.Create;
+        public dm_Sign signInfo = null;
 
         List<string> types = new List<string> { "簽名", "密封" };
         string imgSignPath = "";
@@ -139,9 +145,72 @@ namespace KnowledgeSystem.Views._00_Generals
             DrawStamp();
         }
 
-        private void f00_CreateSign_Load(object sender, EventArgs e)
+        private void f402_SignInfo_Load(object sender, EventArgs e)
         {
             cbbType.Properties.Items.AddRange(types);
+
+            switch (eventInfo)
+            {
+                case EventFormInfo.Create:
+                    signInfo = new dm_Sign();
+                    cbbType.SelectedIndex = 0;
+                    break;
+                case EventFormInfo.View:
+                    ImageSign = Image.FromFile(Path.Combine(TPConfigs.FolderSign,signInfo.ImgName));
+                    //picSign.Image 
+
+                    txbDisplayName.EditValue = signInfo.DisplayName;
+                    int indexType = signInfo.ImgType;
+
+                    cbbType.SelectedIndex = indexType;
+
+                    var fontName = signInfo.FontName;
+                    var fontSize = (byte)signInfo.FontSize;
+                    var fontStyle = signInfo.FontType;
+
+                    font = new Font(fontName, fontSize, FontStyle.Regular);
+
+                    dateTimeColor = ColorTranslator.FromHtml(signInfo.FontColor);
+
+                    txbX.EditValue = signInfo.X;
+                    txbY.EditValue = signInfo.Y;
+                    txbWid.EditValue = signInfo.WidImg;
+                    txbHgt.EditValue = signInfo.HgtImg;
+
+                    //signInfo.DisplayName = signInfo.DisplayName.Split('\n')[0];
+                    //signInfo.DateCreate = DateTime.Parse(signInfo.DateCreate.ToShortDateString());
+
+                    //txbUserId.EditValue = signInfo.Id;
+                    //txbUserNameVN.EditValue = signInfo.DisplayNameVN?.Trim();
+                    //txbUserNameTW.EditValue = signInfo.DisplayName.Split('\n')[0]?.Trim();
+                    //cbbDept.EditValue = signInfo.IdDepartment;
+                    //cbbJobTitle.EditValue = signInfo.JobCode;
+                    //txbDOB.EditValue = signInfo.DOB;
+                    //txbCCCD.EditValue = signInfo.CitizenID;
+                    //cbbNationality.EditValue = signInfo.Nationality;
+
+                    //txbPhone1.EditValue = signInfo.PhoneNum1;
+                    //txbPhone2.EditValue = signInfo.PhoneNum2;
+                    //txbAddr.EditValue = signInfo.Addr;
+                    //cbbSex.EditValue = signInfo.Sex == null ? "" : signInfo.Sex.Value ? "男" : "女";
+                    //cbbStatus.EditValue = signInfo.Status == null ? "" : TPConfigs.lsUserStatus[signInfo.Status.Value];
+                    //txbDateStart.EditValue = signInfo.DateCreate;
+
+                    //oldUserInfoJson = JsonConvert.SerializeObject(signInfo);
+                    //idDept2word = signInfo.IdDepartment.Count() > 2 ? signInfo.IdDepartment.Substring(0, 2) : "00";
+
+                    //// Lấy quyền hạn và chuyển các quyền mà user có sang gcChooseRoles
+                    //var lsUserRoles = dm_UserRoleBUS.Instance.GetListByUID(signInfo.Id).Select(r => r.IdRole).ToList();
+                    //lsChooseRoles.AddRange(lsAllRoles.Where(a => lsUserRoles.Exists(b => b == a.Id)));
+                    //lsAllRoles.RemoveAll(a => lsUserRoles.Exists(b => b == a.Id));
+
+                    //gcAllRole.RefreshDataSource();
+                    //gcChooseRole.RefreshDataSource();
+                    break;
+            }
+
+            
+            
             txbFont.EditValue = $"{font.Name}, {font.Size}, {font.Style}";
             colorFont.Color = dateTimeColor;
         }
@@ -208,14 +277,40 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            var displayName = txbDisplayName.EditValue?.ToString();
+            int idType = cbbType.SelectedIndex;
+            var imgName = EncryptionHelper.EncryptionFileName(Path.GetFileName(imgSignPath));
+            var widImg = Convert.ToInt16(txbWid.EditValue?.ToString().Trim());
+            var hgtImg = Convert.ToInt16(txbHgt.EditValue?.ToString().Trim());
+            var pointX = Convert.ToInt16(txbX.EditValue?.ToString().Trim());
+            var pointY = Convert.ToInt16(txbY.EditValue?.ToString().Trim());
+            var fontName = font.Name;
+            var fontSize = font.Size;
+            var fontType = font.Style.ToString();
+            var fontColor = "#" + dateTimeColor.R.ToString("X2") + dateTimeColor.G.ToString("X2") + dateTimeColor.B.ToString("X2");
 
+            if (!Directory.Exists(TPConfigs.FolderSign)) Directory.CreateDirectory(TPConfigs.FolderSign);
 
-            var sign = new dm_Sign()
+            File.Copy(imgSignPath, Path.Combine(TPConfigs.FolderSign, imgName));
+
+            signInfo = new dm_Sign()
             {
-
+                ImgName = imgName,
+                DisplayName = displayName,
+                ImgType = (byte)idType,
+                WidImg = widImg,
+                HgtImg = hgtImg,
+                X = pointX,
+                Y = pointY,
+                FontName = fontName,
+                FontSize = fontSize,
+                FontType = fontType,
+                FontColor = fontColor
             };
 
-            dm_SignBUS.Instance.Add(sign);
+            dm_SignBUS.Instance.Add(signInfo);
+
+            MessageBox.Show("OK");
         }
 
         private void btnDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

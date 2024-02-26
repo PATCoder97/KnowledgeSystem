@@ -176,11 +176,11 @@
     <Compile Include="Helpers\WordHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\00_Generals\f00_CreateSign.cs">
+    <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_SignInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\00_Generals\f00_CreateSign.Designer.cs">
-      <DependentUpon>f00_CreateSign.cs</DependentUpon>
+    <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_SignInfo.Designer.cs">
+      <DependentUpon>f402_SignInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\00_Generals\f00_FluentFrame.cs">
       <SubType>Form</SubType>
@@ -470,6 +470,12 @@
     <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\uc402_Functions.Designer.cs">
       <DependentUpon>uc402_Functions.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\uc402_SignManage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\uc402_SignManage.Designer.cs">
+      <DependentUpon>uc402_SignManage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\uc402_UploadExcelDB.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -487,8 +493,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Views\00_Generals\f00_CreateSign.resx">
-      <DependentUpon>f00_CreateSign.cs</DependentUpon>
+    <EmbeddedResource Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_SignInfo.resx">
+      <DependentUpon>f402_SignInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\00_Generals\f00_CustomSplashScreen.resx">
       <DependentUpon>f00_CustomSplashScreen.cs</DependentUpon>
@@ -633,6 +639,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\02_SystemAdmin\uc402_Functions.resx">
       <DependentUpon>uc402_Functions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\04_SystemAdministrator\02_SystemAdmin\uc402_SignManage.resx">
+      <DependentUpon>uc402_SignManage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\02_SystemAdmin\uc402_UploadExcelDB.resx">
       <DependentUpon>uc402_UploadExcelDB.cs</DependentUpon>
