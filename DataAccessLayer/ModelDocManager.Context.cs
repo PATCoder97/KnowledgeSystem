@@ -62,5 +62,6 @@ namespace DataAccessLayer
         public virtual DbSet<dt202_Attach> dt202_Attach { get; set; }
         public virtual DbSet<dt207_Attachment> dt207_Attachment { get; set; }
         public virtual DbSet<dt202_Base> dt202_Base { get; set; }
+        public virtual DbSet<dm_Sign> dm_Sign { get; set; }
     }
 }

@@ -68,6 +68,9 @@
     <Compile Include="dm_Progress.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
+    <Compile Include="dm_Sign.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
     <Compile Include="dm_StepProgress.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>

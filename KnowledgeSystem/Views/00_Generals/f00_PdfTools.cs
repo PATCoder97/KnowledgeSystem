@@ -1,4 +1,6 @@
-﻿using DevExpress.Pdf;
+﻿using BusinessLayer;
+using DataAccessLayer;
+using DevExpress.Pdf;
 using DevExpress.XtraEditors;
 using DevExpress.XtraPdfViewer;
 using DevExpress.XtraPrinting.Native;
@@ -62,6 +64,8 @@ namespace KnowledgeSystem.Views._00_Generals
             public Image ImageSign { get; }
             public string Descrip { get; }
         }
+
+        List<dm_Sign> dmSigns;
 
         List<GraphicsCoordinates> signs = new List<GraphicsCoordinates>();
         GraphicsCoordinates currentSign;
@@ -239,6 +243,10 @@ namespace KnowledgeSystem.Views._00_Generals
         private void f00_PdfTools_Load(object sender, EventArgs e)
         {
             pdfViewer.LoadDocument(filePath);
+
+            // Load các chữ ký, con dấu
+            dmSigns = dm_SignBUS.Instance.GetList();
+
             DefaultSign();
         }
 

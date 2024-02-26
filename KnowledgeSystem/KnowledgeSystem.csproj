@@ -176,6 +176,12 @@
     <Compile Include="Helpers\WordHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\00_Generals\f00_CreateSign.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\00_Generals\f00_CreateSign.Designer.cs">
+      <DependentUpon>f00_CreateSign.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\00_Generals\f00_FluentFrame.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -481,6 +487,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Views\00_Generals\f00_CreateSign.resx">
+      <DependentUpon>f00_CreateSign.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\00_Generals\f00_CustomSplashScreen.resx">
       <DependentUpon>f00_CustomSplashScreen.cs</DependentUpon>
     </EmbeddedResource>

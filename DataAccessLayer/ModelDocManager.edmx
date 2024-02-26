@@ -85,6 +85,22 @@
           <Property Name="DisplayName" Type="nvarchar" MaxLength="32" Nullable="false" />
           <Property Name="Describe" Type="nvarchar" MaxLength="128" />
         </EntityType>
+        <EntityType Name="dm_Sign">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ImgName" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ImgType" Type="tinyint" Nullable="false" />
+          <Property Name="WidImg" Type="int" />
+          <Property Name="HgtImg" Type="int" />
+          <Property Name="X" Type="int" />
+          <Property Name="Y" Type="int" />
+          <Property Name="FontName" Type="varchar" MaxLength="32" />
+          <Property Name="FontSize" Type="float" />
+          <Property Name="FontType" Type="tinyint" />
+          <Property Name="FontColor" Type="varchar" MaxLength="7" />
+        </EntityType>
         <EntityType Name="dm_StepProgress">
           <Key>
             <PropertyRef Name="Id" />
@@ -406,6 +422,7 @@
           <EntitySet Name="dm_JobTitle" EntityType="Self.dm_JobTitle" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dm_Progress" EntityType="Self.dm_Progress" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dm_Role" EntityType="Self.dm_Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dm_Sign" EntityType="Self.dm_Sign" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dm_StepProgress" EntityType="Self.dm_StepProgress" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dm_User" EntityType="Self.dm_User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dm_UserRole" EntityType="Self.dm_UserRole" Schema="dbo" store:Type="Tables" />
@@ -477,6 +494,7 @@
           <EntitySet Name="dt202_Attach" EntityType="DBDocumentManagementSystemModel.dt202_Attach" />
           <EntitySet Name="dt207_Attachment" EntityType="DBDocumentManagementSystemModel.dt207_Attachment" />
           <EntitySet Name="dt202_Base" EntityType="DBDocumentManagementSystemModel.dt202_Base" />
+          <EntitySet Name="dm_Sign" EntityType="DBDocumentManagementSystemModel.dm_Sign" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -868,6 +886,22 @@
           <Property Name="UploadTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UsrUpload" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="IsDelete" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dm_Sign">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ImgName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="ImgType" Type="Byte" Nullable="false" />
+          <Property Name="WidImg" Type="Int32" />
+          <Property Name="HgtImg" Type="Int32" />
+          <Property Name="X" Type="Int32" />
+          <Property Name="Y" Type="Int32" />
+          <Property Name="FontName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="FontSize" Type="Double" />
+          <Property Name="FontType" Type="Byte" />
+          <Property Name="FontColor" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1299,6 +1333,23 @@
                 <ScalarProperty Name="TypeOf" ColumnName="TypeOf" />
                 <ScalarProperty Name="HalfYear" ColumnName="HalfYear" />
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dm_Sign">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_Sign">
+              <MappingFragment StoreEntitySet="dm_Sign">
+                <ScalarProperty Name="FontColor" ColumnName="FontColor" />
+                <ScalarProperty Name="FontType" ColumnName="FontType" />
+                <ScalarProperty Name="FontSize" ColumnName="FontSize" />
+                <ScalarProperty Name="FontName" ColumnName="FontName" />
+                <ScalarProperty Name="Y" ColumnName="Y" />
+                <ScalarProperty Name="X" ColumnName="X" />
+                <ScalarProperty Name="HgtImg" ColumnName="HgtImg" />
+                <ScalarProperty Name="WidImg" ColumnName="WidImg" />
+                <ScalarProperty Name="ImgType" ColumnName="ImgType" />
+                <ScalarProperty Name="ImgName" ColumnName="ImgName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
