@@ -40,8 +40,8 @@ namespace KnowledgeSystem.Views._00_Generals
             int indexSign = Convert.ToInt16(cbbSign.EditValue?.ToString() ?? "0");
             SignSelect = signs.FirstOrDefault(r => r.Id == indexSign);
 
-            string signPath = Path.Combine(TPConfigs.FolderSign, SignSelect.ImgName);
-            Image imageSign = new Bitmap(signPath);
+            string source = Path.Combine(TPConfigs.FolderSign, SignSelect.ImgName);
+            Image imageSign = File.Exists(source) ? new Bitmap(source) : new Bitmap(TPSvgimages.NoImage);
 
             string letter = txbDate.EditValue == null ? string.Empty : txbDate.DateTime.ToString("yyyy.MM.dd");
 
@@ -72,28 +72,17 @@ namespace KnowledgeSystem.Views._00_Generals
             var bit = new Bitmap(img.Width, 20);
             Graphics g = Graphics.FromImage(bit);
 
-            float width = ((float)bit.Width);
-            float height = ((float)bit.Height);
-
-            float emSize = height;
             g.SmoothingMode = SmoothingMode.AntiAlias;
             g.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
             g.InterpolationMode = InterpolationMode.High;
 
             StringFormat sf = new StringFormat();
             sf.LineAlignment = StringAlignment.Near;
+            sf.Alignment = StringAlignment.Far;  // Top/Left.
 
-            // Top/Left.
-            sf.Alignment = StringAlignment.Far;
-
-            Font font = new Font(FontFamily.GenericSansSerif, emSize, FontStyle.Regular);
             Rectangle rect = new Rectangle(5, 5, bit.Width - 10, bit.Height);
+            Font font = new Font("Times New Roman", 12, FontStyle.Bold);
 
-            var fontsize = SizeLabelFont(letter, bit.Width, 20);
-
-            font = new Font("Times New Roman", 12, FontStyle.Bold);
-
-            SizeF size = g.MeasureString(letter.ToString(), font);
             g.DrawString(letter, font, new SolidBrush(Color.Black), rect, sf);
 
             DescripSign = letter;
@@ -124,15 +113,9 @@ namespace KnowledgeSystem.Views._00_Generals
             }
             Font font = new Font(fontName, fontSize, fontStyle);
             SizeF size = g.MeasureString(letter.ToString(), font);
-
             Color desColor = ColorTranslator.FromHtml(SignSelect.FontColor);
 
             var bit = new Bitmap(img.Width, (int)Math.Ceiling(size.Height));
-
-            float width = ((float)bit.Width);
-            float height = ((float)bit.Height);
-
-            float emSize = height;
             g.SmoothingMode = SmoothingMode.AntiAlias;
             g.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
             g.InterpolationMode = InterpolationMode.High;
@@ -140,11 +123,10 @@ namespace KnowledgeSystem.Views._00_Generals
             StringFormat sf = new StringFormat();
             sf.LineAlignment = StringAlignment.Center;
 
-            // Top/Left.
-            sf.Alignment = StringAlignment.Center;
+            // Top/Left
             sf.Alignment = StringAlignment.Near;
 
-            Rectangle rect = new Rectangle(SignSelect.X ?? 0, SignSelect.X ?? 0, bit.Width, bit.Height);
+            Rectangle rect = new Rectangle(SignSelect.X ?? 0, SignSelect.Y ?? 0, bit.Width, bit.Height);
             g.DrawString(letter, font, new SolidBrush(desColor), rect, sf);
 
             var imageOut = MergeTwoImages(img, bit);

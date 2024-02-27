@@ -66,6 +66,7 @@
             this.pdfZoomRibbonPageGroup1 = new DevExpress.XtraPdfViewer.Bars.PdfZoomRibbonPageGroup();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.pdfBarController1 = new DevExpress.XtraPdfViewer.Bars.PdfBarController(this.components);
+            this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPageNumberEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pdfBarController1)).BeginInit();
@@ -315,7 +316,8 @@
             this.pdfRibbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.pdfNavigationRibbonPageGroup1,
             this.pdfZoomRibbonPageGroup1,
-            this.ribbonPageGroup1});
+            this.ribbonPageGroup1,
+            this.ribbonPageGroup2});
             this.pdfRibbonPage1.Name = "pdfRibbonPage1";
             this.pdfRibbonPage1.Text = "PDF Tools";
             // 
@@ -343,7 +345,6 @@
             this.ribbonPageGroup1.ItemLinks.Add(this.btnSignDefault);
             this.ribbonPageGroup1.ItemLinks.Add(this.btnAdvanced);
             this.ribbonPageGroup1.ItemLinks.Add(this.btnStamp);
-            this.ribbonPageGroup1.ItemLinks.Add(this.btnConfirm);
             this.ribbonPageGroup1.ItemLinks.Add(this.btnClearSign);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             this.ribbonPageGroup1.Text = "簽名";
@@ -374,6 +375,12 @@
             this.pdfBarController1.BarItems.Add(this.pdfExportFormDataBarItem1);
             this.pdfBarController1.BarItems.Add(this.pdfImportFormDataBarItem1);
             this.pdfBarController1.Control = this.pdfViewer;
+            // 
+            // ribbonPageGroup2
+            // 
+            this.ribbonPageGroup2.ItemLinks.Add(this.btnConfirm);
+            this.ribbonPageGroup2.Name = "ribbonPageGroup2";
+            this.ribbonPageGroup2.Text = "確認";
             // 
             // f00_PdfTools
             // 
@@ -435,5 +442,6 @@
         private DevExpress.XtraBars.BarButtonItem btnClearSign;
         private DevExpress.XtraBars.BarButtonItem btnAdvanced;
         private DevExpress.XtraBars.BarButtonItem btnStamp;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
     }
 }
