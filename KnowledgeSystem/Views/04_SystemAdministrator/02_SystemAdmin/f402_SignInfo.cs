@@ -1,8 +1,10 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
 using DevExpress.DataAccess.Wizard.Presenters;
+using DevExpress.Internal.WinApi.Windows.UI.Notifications;
 using DevExpress.Utils.Design;
 using DevExpress.XtraEditors;
+using DevExpress.XtraSplashScreen;
 using KnowledgeSystem.Helpers;
 using Newtonsoft.Json;
 using System;
@@ -32,7 +34,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
         public EventFormInfo eventInfo = EventFormInfo.Create;
         public dm_Sign signInfo = null;
 
-        List<string> types = new List<string> { "簽名", "密封" };
+        Dictionary<int, string> signTypes = TPConfigs.signTypes;
         string imgSignPath = "";
         Image ImageSign = null;
 
@@ -47,6 +49,97 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
             btnEdit.ImageOptions.SvgImage = TPSvgimages.Edit;
             btnDelete.ImageOptions.SvgImage = TPSvgimages.Remove;
             btnConfirm.ImageOptions.SvgImage = TPSvgimages.Confirm;
+        }
+
+        private void LockLetterInfo()
+        {
+            txbFont.Enabled = false;
+            colorFont.Enabled = false;
+            txbWid.Enabled = false;
+            txbHgt.Enabled = false;
+            txbX.Enabled = false;
+            txbY.Enabled = false;
+
+            switch (cbbType.EditValue)
+            {
+                case "密封":
+                    if (eventInfo == EventFormInfo.View)
+                        break;
+
+                    txbFont.Enabled = true;
+                    colorFont.Enabled = true;
+                    txbWid.Enabled = true;
+                    txbHgt.Enabled = true;
+                    txbX.Enabled = true;
+                    txbY.Enabled = true;
+
+                    DrawStamp();
+                    break;
+                default:
+                    txbWid.EditValue = 0;
+                    txbHgt.EditValue = 0;
+                    txbX.EditValue = 0;
+                    txbY.EditValue = 0;
+
+                    picSign.Image = ImageSign;
+                    break;
+            }
+        }
+
+        private void LockControl()
+        {
+            txbDisplayName.Enabled = false;
+            cbbType.Enabled = false;
+            txbFont.Enabled = false;
+            colorFont.Enabled = false;
+            txbWid.Enabled = false;
+            txbHgt.Enabled = false;
+            txbX.Enabled = false;
+            txbY.Enabled = false;
+
+            switch (eventInfo)
+            {
+                case EventFormInfo.Create:
+                    Text = $"新增{formName}";
+
+                    btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                    btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                    btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+
+                    txbDisplayName.Enabled = true;
+                    cbbType.Enabled = true;
+                    break;
+                case EventFormInfo.Update:
+                    Text = $"更新{formName}";
+
+                    btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                    btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                    btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+
+                    txbDisplayName.Enabled = true;
+                    cbbType.Enabled = true;
+
+                    LockLetterInfo();
+                    break;
+                case EventFormInfo.Delete:
+                    Text = $"刪除{formName}";
+
+                    btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                    btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                    btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                    break;
+                case EventFormInfo.View:
+                    Text = $"{formName}信息";
+
+                    btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                    btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                    btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+
+                    LockLetterInfo();
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void DrawStamp()
@@ -76,33 +169,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
             var imageOut = MergeTwoImages(img, bit);
             picSign.Image = imageOut;
-        }
-
-        private int SizeLabelFont(string text, int wid, int hgt)
-        {
-            string txt = text;
-            int best_size = 100;
-            if (txt.Length > 0)
-            {
-                using (Graphics gr = this.CreateGraphics())
-                {
-                    for (int i = 1; i <= 100; i++)
-                    {
-                        using (Font test_font = new Font(this.Font.FontFamily, i))
-                        {
-                            SizeF text_size = gr.MeasureString(txt, test_font);
-                            if ((text_size.Width > wid) ||
-                                (text_size.Height > hgt))
-                            {
-                                best_size = i - 1;
-                                return best_size;
-
-                            }
-                        }
-                    }
-                }
-            }
-            return best_size;
         }
 
         public Bitmap MergeTwoImages(Image firstImage, Image secondImage)
@@ -148,25 +214,20 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
         private void f402_SignInfo_Load(object sender, EventArgs e)
         {
-            cbbType.Properties.Items.AddRange(types);
+            LockControl();
+            cbbType.Properties.Items.AddRange(signTypes.Values);
 
             switch (eventInfo)
             {
                 case EventFormInfo.Create:
                     signInfo = new dm_Sign();
-                    cbbType.SelectedIndex = 0;
                     colorFont.Color = dateTimeColor;
+                    cbbType.SelectedIndex = 0;
                     break;
                 case EventFormInfo.View:
-
                     string source = Path.Combine(TPConfigs.FolderSign, signInfo.ImgName);
-                    string dest = Path.Combine(TPConfigs.TempFolderData, $"{DateTime.Now:yyMMddhhmmss} Sign.png");
-                    if (!Directory.Exists(TPConfigs.TempFolderData))
-                        Directory.CreateDirectory(TPConfigs.TempFolderData);
+                    ImageSign = File.Exists(source) ? new Bitmap(source) : TPSvgimages.NoImage;
 
-                    File.Copy(source, dest, true);
-
-                    ImageSign = Image.FromFile(dest);
                     imgWid = ImageSign.Width;
                     imgHgt = ImageSign.Height;
 
@@ -174,8 +235,21 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
                     var fontName = signInfo.FontName;
                     var fontSize = (byte)signInfo.FontSize;
-                    var fontStyle = signInfo.FontType;
-                    font = new Font(fontName, fontSize, FontStyle.Regular);
+
+                    var fontStyle = FontStyle.Regular;
+                    switch (signInfo.FontType)
+                    {
+                        case "Bold":
+                            fontStyle = FontStyle.Bold;
+                            break;
+                        case "Italic":
+                            fontStyle = FontStyle.Italic;
+                            break;
+                        default:
+                            fontStyle = FontStyle.Regular;
+                            break;
+                    }
+                    font = new Font(fontName, fontSize, fontStyle);
                     dateTimeColor = ColorTranslator.FromHtml(signInfo.FontColor);
                     colorFont.Color = dateTimeColor;
 
@@ -192,7 +266,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
             }
 
             txbFont.EditValue = $"{font.Name}, {font.Size}, {font.Style}";
-            lbInfo.Text = $"WxH: {imgWid} x {imgHgt}";
+            lbInfo.Text = $"寬度×高度：{imgWid}×{imgHgt}";
         }
 
         private void txbX_EditValueChanged(object sender, EventArgs e)
@@ -223,79 +297,82 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
         private void cbbType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            txbFont.Enabled = false;
-            colorFont.Enabled = false;
-            txbWid.Enabled = false;
-            txbHgt.Enabled = false;
-            txbX.Enabled = false;
-            txbY.Enabled = false;
-
-            switch (cbbType.EditValue)
-            {
-                case "密封":
-                    txbFont.Enabled = true;
-                    colorFont.Enabled = true;
-                    txbWid.Enabled = true;
-                    txbHgt.Enabled = true;
-                    txbX.Enabled = true;
-                    txbY.Enabled = true;
-
-                    DrawStamp();
-                    break;
-                default:
-
-                    picSign.Image = ImageSign;
-
-                    break;
-            }
+            LockLetterInfo();
         }
 
         private void btnEdit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-
+            eventInfo = EventFormInfo.Update;
+            LockControl();
         }
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            var displayName = txbDisplayName.EditValue?.ToString();
-            int idType = cbbType.SelectedIndex;
-            var imgName = EncryptionHelper.EncryptionFileName(Path.GetFileName(imgSignPath));
-            var widImg = Convert.ToInt16(txbWid.EditValue?.ToString().Trim());
-            var hgtImg = Convert.ToInt16(txbHgt.EditValue?.ToString().Trim());
-            var pointX = Convert.ToInt16(txbX.EditValue?.ToString().Trim());
-            var pointY = Convert.ToInt16(txbY.EditValue?.ToString().Trim());
-            var fontName = font.Name;
-            var fontSize = font.Size;
-            var fontType = font.Style.ToString();
-            var fontColor = "#" + dateTimeColor.R.ToString("X2") + dateTimeColor.G.ToString("X2") + dateTimeColor.B.ToString("X2");
+            var result = false;
+            string msg = "";
 
-            if (!Directory.Exists(TPConfigs.FolderSign)) Directory.CreateDirectory(TPConfigs.FolderSign);
-
-            File.Copy(imgSignPath, Path.Combine(TPConfigs.FolderSign, imgName));
-
-            signInfo = new dm_Sign()
+            using (var handle = SplashScreenManager.ShowOverlayForm(this))
             {
-                ImgName = imgName,
-                DisplayName = displayName,
-                ImgType = (byte)idType,
-                WidImg = widImg,
-                HgtImg = hgtImg,
-                X = pointX,
-                Y = pointY,
-                FontName = fontName,
-                FontSize = fontSize,
-                FontType = fontType,
-                FontColor = fontColor
-            };
+                signInfo.DisplayName = txbDisplayName.EditValue?.ToString();
+                signInfo.ImgType = (byte)cbbType.SelectedIndex;
+                signInfo.WidImg = Convert.ToInt16(txbWid.EditValue?.ToString().Trim());
+                signInfo.HgtImg = Convert.ToInt16(txbHgt.EditValue?.ToString().Trim());
+                signInfo.X = Convert.ToInt16(txbX.EditValue?.ToString().Trim());
+                signInfo.Y = Convert.ToInt16(txbY.EditValue?.ToString().Trim());
+                signInfo.FontName = font.Name;
+                signInfo.FontSize = font.Size;
+                signInfo.FontType = font.Style.ToString();
+                signInfo.FontColor = $"#{dateTimeColor.R.ToString("X2")}{dateTimeColor.G.ToString("X2")}{dateTimeColor.B.ToString("X2")}";
 
-            dm_SignBUS.Instance.Add(signInfo);
+                if (!string.IsNullOrEmpty(imgSignPath))
+                {
+                    signInfo.ImgName = EncryptionHelper.EncryptionFileName(Path.GetFileName(imgSignPath));
+                    if (!Directory.Exists(TPConfigs.FolderSign)) Directory.CreateDirectory(TPConfigs.FolderSign);
+                    File.Copy(imgSignPath, Path.Combine(TPConfigs.FolderSign, signInfo.ImgName));
+                }
 
-            MessageBox.Show("OK");
+                msg = $"{signInfo.Id} {signInfo.DisplayName}";
+                switch (eventInfo)
+                {
+                    case EventFormInfo.Create:
+                        result = dm_SignBUS.Instance.Add(signInfo);
+                        break;
+                    case EventFormInfo.View:
+                        break;
+                    case EventFormInfo.Update:
+                        result = dm_SignBUS.Instance.AddOrUpdate(signInfo);
+                        break;
+                    case EventFormInfo.Delete:
+                        result = dm_SignBUS.Instance.Remove(signInfo.Id);
+                        break;
+                }
+            }
+
+            if (result)
+            {
+                //switch (_eventInfo)
+                //{
+                //    case EventFormInfo.Update:
+                //        logger.Info(_eventInfo.ToString(), msg);
+                //        break;
+                //    case EventFormInfo.Delete:
+                //        logger.Warning(_eventInfo.ToString(), msg);
+                //        break;
+                //}
+                Close();
+            }
+            else
+            {
+                MsgTP.MsgErrorDB();
+            }
         }
 
         private void btnDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            MsgTP.MsgConfirmDel();
 
+            eventInfo = EventFormInfo.Delete;
+            LockControl();
         }
 
         private void picSign_DoubleClick(object sender, EventArgs e)

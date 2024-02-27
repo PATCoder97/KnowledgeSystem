@@ -4,6 +4,7 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraPrinting.Native;
 using KnowledgeSystem.Helpers;
+using KnowledgeSystem.Views._00_Generals;
 using KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,13 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
             helper = new RefreshHelper(gvData, "Id");
         }
 
+        Dictionary<int, string> signTypes = TPConfigs.signTypes;
         BindingSource sourceSigns = new BindingSource();
+
+        private class SignInfo : dm_Sign
+        {
+            public string SignType { get; set; }
+        }
 
         private void InitializeIcon()
         {
@@ -43,51 +50,26 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
             List<dm_Sign> signs = dm_SignBUS.Instance.GetList();
 
-            //string idDept2Word = TPConfigs.LoginUser.IdDepartment.Substring(0, 2);
-            //List<dm_User> lsUsers = new List<dm_User>();
-            //if (TPConfigs.IdParentControl == AppPermission.SysAdmin || TPConfigs.IdParentControl == AppPermission.Mod)
-            //{
-            //    lsUsers = dm_UserBUS.Instance.GetList();
-            //}
-            //else if (TPConfigs.IdParentControl == AppPermission.SafetyCertMain || TPConfigs.IdParentControl == AppPermission.WorkManagementMain)
-            //{
-            //    lsUsers = dm_UserBUS.Instance.GetListByDept(idDept2Word);
-            //}
+            var signInfos = (from data in signs
+                             join typeImg in signTypes on data.ImgType equals typeImg.Key
+                             select new SignInfo
+                             {
+                                 Id = data.Id,
+                                 DisplayName = data.DisplayName,
+                                 ImgName = data.ImgName,
+                                 ImgType = data.ImgType,
+                                 SignType = typeImg.Value,
+                                 WidImg = data.WidImg,
+                                 HgtImg = data.HgtImg,
+                                 X = data.X,
+                                 Y = data.Y,
+                                 FontName = data.FontName,
+                                 FontSize = data.FontSize,
+                                 FontType = data.FontType,
+                                 FontColor = data.FontColor
+                             }).ToList();
 
-            //List<dm_Departments> lsDepts = dm_DeptBUS.Instance.GetList();
-            //List<dm_Role> lsRoles = dm_RoleBUS.Instance.GetList();
-            //List<dm_JobTitle> lsJobTitles = dm_JobTitleBUS.Instance.GetList();
-
-            //var lsUserManage = (from data in lsUsers
-            //                    join depts in lsDepts on data.IdDepartment equals depts.Id
-            //                    join job in lsJobTitles on data.JobCode equals job.Id into dtg
-            //                    from g in dtg.DefaultIfEmpty()
-            //                    select new dmUserM()
-            //                    {
-            //                        Id = data.Id,
-            //                        DisplayName = $"{data.DisplayName}{(!string.IsNullOrEmpty(data.DisplayNameVN) ? $"\r\n{data.DisplayNameVN}" : "")}",
-            //                        DisplayNameVN = data.DisplayNameVN,
-            //                        IdDepartment = data.IdDepartment,
-            //                        DateCreate = data.DateCreate,
-            //                        SecondaryPassword = data.SecondaryPassword,
-            //                        DeptName = $"{data.IdDepartment}\r\n{depts.DisplayName}",
-            //                        DOB = data.DOB,
-            //                        CitizenID = data.CitizenID,
-            //                        Nationality = data.Nationality,
-            //                        PCName = data.PCName,
-            //                        IPAddress = data.IPAddress,
-            //                        JobCode = data.JobCode,
-            //                        JobName = g != null ? g.DisplayName : "",
-            //                        Addr = data.Addr,
-            //                        PhoneNum1 = data.PhoneNum1,
-            //                        PhoneNum2 = data.PhoneNum2,
-            //                        Sex = data.Sex,
-            //                        SexName = data.Sex == null ? "" : data.Sex.Value ? "男" : "女",
-            //                        Status = data.Status,
-            //                        StatusName = data.Status == null ? "" : TPConfigs.lsUserStatus[data.Status.Value],
-            //                    }).ToList();
-
-            sourceSigns.DataSource = signs;
+            sourceSigns.DataSource = signInfos;
 
             helper.LoadViewInfo();
             gvData.BestFitColumns();
@@ -108,7 +90,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
         {
             f402_SignInfo fInfo = new f402_SignInfo();
             fInfo.eventInfo = EventFormInfo.Create;
-            fInfo.formName = "用戶";
+            fInfo.formName = "簽名";
             fInfo.ShowDialog();
 
             LoadSign();
@@ -116,7 +98,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
         private void gcData_DoubleClick(object sender, EventArgs e)
         {
-            
+
         }
 
         private void gvData_DoubleClick(object sender, EventArgs e)
@@ -126,11 +108,17 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
             f402_SignInfo fInfo = new f402_SignInfo();
             fInfo.eventInfo = EventFormInfo.View;
-            fInfo.formName = "用戶";
+            fInfo.formName = "簽名";
             fInfo.signInfo = signSelect;
             fInfo.ShowDialog();
 
             LoadSign();
+        }
+
+        private void btnExportExcel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            f00_PdfTools frm = new f00_PdfTools(@"C:\Users\ANHTUAN\Desktop\New folder\Blank.pdf");
+            frm.ShowDialog();
         }
     }
 }

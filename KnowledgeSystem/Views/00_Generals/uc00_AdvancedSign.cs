@@ -1,6 +1,9 @@
-﻿using DevExpress.Utils.Design;
+﻿using BusinessLayer;
+using DataAccessLayer;
+using DevExpress.Utils.Design;
 using DevExpress.XtraEditors;
 using DevExpress.XtraSpreadsheet.Commands;
+using KnowledgeSystem.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,6 +11,7 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +26,8 @@ namespace KnowledgeSystem.Views._00_Generals
             InitializeComponent();
         }
 
+        List<dm_Sign> signs;
+
         public Image ImageSign { get; set; }
         public string DescripSign { get; set; }
 
@@ -29,8 +35,12 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void LoadSign()
         {
-            string nameSign = cbbSign.EditValue?.ToString() ?? "sign.png";
-            Image imageSign = Image.FromFile($@"E:\01. Softwares Programming\24. Knowledge System\02. Images\{nameSign}");
+            string nameSign = cbbSign.EditValue?.ToString();
+            string signPath = Path.Combine(TPConfigs.FolderSign, signs.FirstOrDefault(r => r.DisplayName == nameSign).ImgName);
+            Bitmap image = new Bitmap(signPath);
+
+
+            Image imageSign = image;
             //Image imageSign = Image.FromFile($@"C:\Users\TuanPhuong\Desktop\TEst\{nameSign}");
             string letter = txbDate.EditValue == null ? string.Empty : txbDate.DateTime.ToString("yyyy.MM.dd");
 
@@ -196,8 +206,9 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void uc00_AdvancedSign_Load(object sender, EventArgs e)
         {
-            List<string> signs = new List<string>() { "sign.png", "sign2.png", "Stamp.png", "vilas.png" };
-            cbbSign.Properties.Items.AddRange(signs);
+            signs = dm_SignBUS.Instance.GetList();
+
+            cbbSign.Properties.Items.AddRange(signs.Select(r => r.DisplayName).ToList());
             if (signs.Count != 0)
                 cbbSign.SelectedIndex = 0;
         }

@@ -2,6 +2,7 @@
 using Logger;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -47,6 +48,43 @@ namespace BusinessLayer
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
                     _context.dm_Sign.Add(_sign);
+                    int affectedRecords = _context.SaveChanges();
+                    return affectedRecords > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                return false;
+            }
+        }
+
+        public bool AddOrUpdate(dm_Sign _sign)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    _context.dm_Sign.AddOrUpdate(_sign);
+                    int affectedRecords = _context.SaveChanges();
+                    return affectedRecords > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                return false;
+            }
+        }
+        public bool Remove(int _id)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    var _itemDel = _context.dm_Sign.FirstOrDefault(r => r.Id == _id);
+                    _context.dm_Sign.Remove(_itemDel);
+
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;
                 }

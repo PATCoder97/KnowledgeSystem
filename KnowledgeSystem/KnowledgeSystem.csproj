@@ -795,6 +795,9 @@
     <Content Include="Images\icons_view.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\no-image.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\unchecked_radio_button.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

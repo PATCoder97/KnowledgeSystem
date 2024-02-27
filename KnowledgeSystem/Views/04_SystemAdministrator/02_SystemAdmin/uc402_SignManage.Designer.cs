@@ -135,6 +135,7 @@
             this.btnExportExcel.Id = 2;
             this.btnExportExcel.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnExportExcel.Name = "btnExportExcel";
+            this.btnExportExcel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExportExcel_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -243,95 +244,90 @@
             this.gridColumn1.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn1.Caption = "代號";
             this.gridColumn1.FieldName = "Id";
-            this.gridColumn1.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
             this.gridColumn1.MinWidth = 23;
             this.gridColumn1.Name = "gridColumn1";
-            this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 0;
             this.gridColumn1.Width = 87;
             // 
             // gridColumn2
             // 
             this.gridColumn2.Caption = "名稱";
             this.gridColumn2.FieldName = "DisplayName";
-            this.gridColumn2.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
             this.gridColumn2.MinWidth = 23;
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 1;
+            this.gridColumn2.VisibleIndex = 0;
             this.gridColumn2.Width = 87;
             // 
             // gridColumn7
             // 
+            this.gridColumn7.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn7.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn7.Caption = "類別";
-            this.gridColumn7.FieldName = "ImgType";
-            this.gridColumn7.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+            this.gridColumn7.FieldName = "SignType";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 2;
+            this.gridColumn7.VisibleIndex = 1;
             // 
             // gridColumn5
             // 
-            this.gridColumn5.AppearanceCell.Options.UseTextOptions = true;
-            this.gridColumn5.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn5.Caption = "FontName";
+            this.gridColumn5.Caption = "字型名稱";
             this.gridColumn5.FieldName = "FontName";
             this.gridColumn5.MinWidth = 23;
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 3;
+            this.gridColumn5.VisibleIndex = 2;
             this.gridColumn5.Width = 87;
             // 
             // gridColumn8
             // 
             this.gridColumn8.AppearanceCell.Options.UseTextOptions = true;
             this.gridColumn8.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn8.Caption = "FontSize";
+            this.gridColumn8.Caption = "字型大小";
             this.gridColumn8.FieldName = "FontSize";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 4;
+            this.gridColumn8.VisibleIndex = 3;
             // 
             // gridColumn9
             // 
-            this.gridColumn9.Caption = "FontType";
+            this.gridColumn9.Caption = "字型樣式";
             this.gridColumn9.FieldName = "FontType";
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 5;
+            this.gridColumn9.VisibleIndex = 4;
             // 
             // gridColumn10
             // 
             this.gridColumn10.AppearanceCell.Options.UseTextOptions = true;
             this.gridColumn10.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn10.Caption = "FontColor";
+            this.gridColumn10.Caption = "字型顏色";
             this.gridColumn10.FieldName = "FontColor";
             this.gridColumn10.Name = "gridColumn10";
             this.gridColumn10.Visible = true;
-            this.gridColumn10.VisibleIndex = 6;
+            this.gridColumn10.VisibleIndex = 5;
             // 
             // gridColumn16
             // 
             this.gridColumn16.AppearanceCell.Options.UseTextOptions = true;
             this.gridColumn16.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn16.Caption = "X";
+            this.gridColumn16.Caption = "X位置";
             this.gridColumn16.FieldName = "X";
             this.gridColumn16.Name = "gridColumn16";
             this.gridColumn16.Visible = true;
-            this.gridColumn16.VisibleIndex = 7;
+            this.gridColumn16.VisibleIndex = 6;
             // 
             // gColPCName
             // 
-            this.gColPCName.Caption = "Y";
+            this.gColPCName.Caption = "Y位置";
             this.gColPCName.FieldName = "Y";
             this.gColPCName.Name = "gColPCName";
             this.gColPCName.Visible = true;
-            this.gColPCName.VisibleIndex = 10;
+            this.gColPCName.VisibleIndex = 7;
             this.gColPCName.Width = 80;
             // 
             // gridColumn14
             // 
-            this.gridColumn14.Caption = "WidImg";
+            this.gridColumn14.Caption = "照片寬度";
             this.gridColumn14.FieldName = "WidImg";
             this.gridColumn14.Name = "gridColumn14";
             this.gridColumn14.Visible = true;
@@ -339,7 +335,7 @@
             // 
             // gridColumn13
             // 
-            this.gridColumn13.Caption = "HgtImg";
+            this.gridColumn13.Caption = "照片高度";
             this.gridColumn13.FieldName = "HgtImg";
             this.gridColumn13.Name = "gridColumn13";
             this.gridColumn13.Visible = true;
@@ -404,7 +400,6 @@
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraGrid.GridControl gcData;
         private DevExpress.XtraGrid.Views.Grid.GridView gvData;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
@@ -417,5 +412,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
     }
 }

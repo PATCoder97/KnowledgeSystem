@@ -16,6 +16,7 @@ namespace KnowledgeSystem.Helpers
         public static string ImagesPath = Path.Combine(StartupPath, "Images");
 
         public static Image Background = Image.FromFile(Path.Combine(ImagesPath, "background.jpg"));
+        public static Image NoImage = Image.FromFile(Path.Combine(ImagesPath, "no-image.png"));
 
         public static SvgImage CheckedRadio = SvgImage.FromFile(Path.Combine(ImagesPath, "checked_radio_button.svg"));
         public static SvgImage UncheckedRadio = SvgImage.FromFile(Path.Combine(ImagesPath, "unchecked_radio_button.svg"));
