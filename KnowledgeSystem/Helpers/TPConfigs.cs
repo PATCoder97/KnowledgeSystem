@@ -91,6 +91,14 @@ namespace KnowledgeSystem.Helpers
         ViewOnly
     }
 
+    public enum SignInfo
+    {
+        [Description("簽名")]
+        Sign,
+        [Description("密封")]
+        Stamp
+    }
+
     public static class MsgTP
     {
         public static void MsgErrorDB()

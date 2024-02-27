@@ -60,9 +60,9 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
             txbX.Enabled = false;
             txbY.Enabled = false;
 
-            switch (cbbType.EditValue)
+            switch (cbbType.SelectedIndex)
             {
-                case "密封":
+                case 1:
                     if (eventInfo == EventFormInfo.View)
                         break;
 

@@ -26,28 +26,28 @@ namespace KnowledgeSystem.Views._00_Generals
             InitializeComponent();
         }
 
+        public SignInfo signInfo = SignInfo.Sign;
         List<dm_Sign> signs;
 
+        public dm_Sign SignSelect { get; set; }
         public Image ImageSign { get; set; }
         public string DescripSign { get; set; }
 
         #region methods
 
-        private void LoadSign()
+        private void ShowSign()
         {
-            string nameSign = cbbSign.EditValue?.ToString();
-            string signPath = Path.Combine(TPConfigs.FolderSign, signs.FirstOrDefault(r => r.DisplayName == nameSign).ImgName);
-            Bitmap image = new Bitmap(signPath);
+            int indexSign = Convert.ToInt16(cbbSign.EditValue?.ToString() ?? "0");
+            SignSelect = signs.FirstOrDefault(r => r.Id == indexSign);
 
+            string signPath = Path.Combine(TPConfigs.FolderSign, SignSelect.ImgName);
+            Image imageSign = new Bitmap(signPath);
 
-            Image imageSign = image;
-            //Image imageSign = Image.FromFile($@"C:\Users\TuanPhuong\Desktop\TEst\{nameSign}");
             string letter = txbDate.EditValue == null ? string.Empty : txbDate.DateTime.ToString("yyyy.MM.dd");
 
-            switch (nameSign)
+            switch (signInfo)
             {
-                case "Stamp.png":
-                case "vilas.png":
+                case SignInfo.Stamp:
                     letter = string.IsNullOrEmpty(letter) ? DateTime.Today.ToString("yyyy.MM.dd") : letter;
 
                     DrawStamp(letter, imageSign);
@@ -106,8 +106,26 @@ namespace KnowledgeSystem.Views._00_Generals
             var img = (Bitmap)image;
             Graphics g = Graphics.FromImage(img);
 
-            Font font = new Font("Times New Roman", 40, FontStyle.Bold);
+            var fontName = SignSelect.FontName;
+            var fontSize = (byte)SignSelect.FontSize;
+
+            var fontStyle = FontStyle.Regular;
+            switch (SignSelect.FontType)
+            {
+                case "Bold":
+                    fontStyle = FontStyle.Bold;
+                    break;
+                case "Italic":
+                    fontStyle = FontStyle.Italic;
+                    break;
+                default:
+                    fontStyle = FontStyle.Regular;
+                    break;
+            }
+            Font font = new Font(fontName, fontSize, fontStyle);
             SizeF size = g.MeasureString(letter.ToString(), font);
+
+            Color desColor = ColorTranslator.FromHtml(SignSelect.FontColor);
 
             var bit = new Bitmap(img.Width, (int)Math.Ceiling(size.Height));
 
@@ -126,10 +144,8 @@ namespace KnowledgeSystem.Views._00_Generals
             sf.Alignment = StringAlignment.Center;
             sf.Alignment = StringAlignment.Near;
 
-            //Rectangle rect = new Rectangle(0, (int)Math.Floor((image.Height / 2 - height / 2) - 5), bit.Width, bit.Height);
-            Rectangle rect = new Rectangle(80, (int)Math.Floor((image.Height / 2 - height / 2) - 5), bit.Width, bit.Height);
-            g.DrawString(letter, font, new SolidBrush(Color.FromArgb(210, 14, 18)), rect, sf);
-            //g.DrawRectangle(new Pen(Color.Black), rect);
+            Rectangle rect = new Rectangle(SignSelect.X ?? 0, SignSelect.X ?? 0, bit.Width, bit.Height);
+            g.DrawString(letter, font, new SolidBrush(desColor), rect, sf);
 
             var imageOut = MergeTwoImages(img, bit);
             ImageSign = imageOut;
@@ -194,23 +210,37 @@ namespace KnowledgeSystem.Views._00_Generals
 
         #endregion
 
-        private void cbbSign_SelectedIndexChanged(object sender, EventArgs e)
+        private void cbbSign_EditValueChanged(object sender, EventArgs e)
         {
-            LoadSign();
+            ShowSign();
         }
 
         private void txbDate_EditValueChanged(object sender, EventArgs e)
         {
-            LoadSign();
+            ShowSign();
         }
 
         private void uc00_AdvancedSign_Load(object sender, EventArgs e)
         {
             signs = dm_SignBUS.Instance.GetList();
+            switch (signInfo)
+            {
+                case SignInfo.Sign:
+                    signs = signs.Where(r => r.ImgType == 0).ToList();
+                    break;
+                case SignInfo.Stamp:
+                    signs = signs.Where(r => r.ImgType == 1).ToList();
+                    break;
+                default:
+                    break;
+            }
 
-            cbbSign.Properties.Items.AddRange(signs.Select(r => r.DisplayName).ToList());
+            cbbSign.Properties.DataSource = signs;
+            cbbSign.Properties.DisplayMember = "DisplayName";
+            cbbSign.Properties.ValueMember = "Id";
+
             if (signs.Count != 0)
-                cbbSign.SelectedIndex = 0;
+                cbbSign.EditValue = signs.FirstOrDefault().Id;
         }
     }
 }

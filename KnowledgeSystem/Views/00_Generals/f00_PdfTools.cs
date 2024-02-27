@@ -7,6 +7,7 @@ using DevExpress.XtraPrinting.Native;
 using DevExpress.XtraSpreadsheet.Model;
 using DocumentFormat.OpenXml.Drawing.Charts;
 using DocumentFormat.OpenXml.Wordprocessing;
+using KnowledgeSystem.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -65,7 +66,9 @@ namespace KnowledgeSystem.Views._00_Generals
             public string Descrip { get; }
         }
 
+        SignInfo signInfo = SignInfo.Sign;
         List<dm_Sign> dmSigns;
+        dm_Sign signSelect = new dm_Sign();
 
         List<GraphicsCoordinates> signs = new List<GraphicsCoordinates>();
         GraphicsCoordinates currentSign;
@@ -130,41 +133,41 @@ namespace KnowledgeSystem.Views._00_Generals
                 var widthImage = imageSign.Width;
                 var heightImage = imageSign.Height + desHeight;
 
-                // Tính sự thay đổi của tọa độ Y
-                var deltaY = Math.Abs(documentPosition.Point.Y - currentSign.Point1.Y);
+                PdfPoint point1 = new PdfPoint();
+                PdfPoint point2 = new PdfPoint();
 
-                // Tính tỷ lệ thay đổi theo chiều dọc (Y)
-                var scaleY = (float)deltaY / heightImage;
+                // Tạo toạ độ theo Chữ ký hoặc con dấu
+                switch (signInfo)
+                {
+                    case SignInfo.Sign:
+                        // Tính sự thay đổi của tọa độ Y
+                        var deltaY = Math.Abs(documentPosition.Point.Y - currentSign.Point1.Y);
+                        // Tính tỷ lệ thay đổi theo chiều dọc (Y)
+                        var scaleY = (float)deltaY / heightImage;
+                        // Tính toạ độ X mới không thay đổi
+                        var YNew = documentPosition.Point.Y;
+                        // Tính toạ độ Y mới dựa trên tỷ lệ thay đổi theo chiều dọc (scaleY)
+                        var XNew = documentPosition.Point.X - currentSign.Point1.X < 0 ? currentSign.Point1.X - (int)(widthImage * scaleY) : currentSign.Point1.X + (int)(widthImage * scaleY);
+                        point2 = new PdfPoint(XNew, YNew);
+                        point1 = currentSign.Point1;
+                        break;
+                    case SignInfo.Stamp:
+                        widthImage = signSelect.WidImg ?? 10;
+                        heightImage = signSelect.HgtImg ?? 2;
 
-                // Tính toạ độ X mới không thay đổi
-                var YNew = documentPosition.Point.Y;
-
-                // Tính toạ độ Y mới dựa trên tỷ lệ thay đổi theo chiều dọc (scaleY)
-                var XNew = documentPosition.Point.X - currentSign.Point1.X < 0 ? currentSign.Point1.X - (int)(widthImage * scaleY) : currentSign.Point1.X + (int)(widthImage * scaleY);
-
-                // Tạo điểm mới
-                PdfPoint newPoint = new PdfPoint(XNew, YNew);
-
-
-                // Tesst
-
-                widthImage = 148;
-                heightImage = 84;
-
-                widthImage = 314;
-                heightImage = 100;
-
-                XNew = documentPosition.Point.X - widthImage / 2;
-                YNew = documentPosition.Point.Y - heightImage / 2;
-                PdfPoint p1 = new PdfPoint(XNew, YNew);
-                XNew = documentPosition.Point.X + widthImage / 2;
-                YNew = documentPosition.Point.Y + heightImage / 2;
-                PdfPoint p2 = new PdfPoint(XNew, YNew);
-
+                        XNew = documentPosition.Point.X - widthImage / 2;
+                        YNew = documentPosition.Point.Y - heightImage / 2;
+                        point1 = new PdfPoint(XNew, YNew);
+                        XNew = documentPosition.Point.X + widthImage / 2;
+                        YNew = documentPosition.Point.Y + heightImage / 2;
+                        point2 = new PdfPoint(XNew, YNew);
+                        break;
+                    default:
+                        break;
+                }
 
                 if (currentSign.PageIndex == documentPosition.PageNumber - 1)
-                    //currentSign = new GraphicsCoordinates(currentSign.PageIndex, currentSign.Point1, newPoint, imageSign, descrip);
-                    currentSign = new GraphicsCoordinates(currentSign.PageIndex, p1, p2, imageSign, descrip);
+                    currentSign = new GraphicsCoordinates(currentSign.PageIndex, point1, point2, imageSign, descrip);
             }
         }
 
@@ -230,12 +233,6 @@ namespace KnowledgeSystem.Views._00_Generals
 
             // Open the document in the PDF Viewer
             pdfViewer.LoadDocument(fileNameSave);
-        }
-
-        private Cursor CreateCursor(Bitmap bitmap, System.Drawing.Size size)
-        {
-            bitmap = new Bitmap(bitmap, size);
-            return new Cursor(bitmap.GetHicon());
         }
 
         #endregion
@@ -368,6 +365,7 @@ namespace KnowledgeSystem.Views._00_Generals
             // Change the activation indicator
             ActivateDrawing = true;
             pdfViewer.Invalidate();
+            signInfo = SignInfo.Sign;
         }
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -387,13 +385,16 @@ namespace KnowledgeSystem.Views._00_Generals
             pdfViewer.Invalidate();
 
             uc00_AdvancedSign ucAdvanced = new uc00_AdvancedSign();
+            ucAdvanced.signInfo = SignInfo.Sign;
             if (XtraDialog.Show(ucAdvanced, "修改簽名", MessageBoxButtons.OKCancel) != DialogResult.OK)
             {
                 DefaultSign();
                 return;
             }
 
+            signInfo = SignInfo.Sign;
             imageSign = ucAdvanced.ImageSign;
+            signSelect = ucAdvanced.SignSelect;
             descrip = ucAdvanced.DescripSign;
         }
 
@@ -403,13 +404,16 @@ namespace KnowledgeSystem.Views._00_Generals
             pdfViewer.Invalidate();
 
             uc00_AdvancedSign ucAdvanced = new uc00_AdvancedSign();
+            ucAdvanced.signInfo = SignInfo.Stamp;
             if (XtraDialog.Show(ucAdvanced, "修改簽名", MessageBoxButtons.OKCancel) != DialogResult.OK)
             {
                 DefaultSign();
                 return;
             }
 
+            signInfo = SignInfo.Stamp;
             imageSign = ucAdvanced.ImageSign;
+            signSelect = ucAdvanced.SignSelect;
             descrip = "";
         }
     }
