@@ -50,5 +50,6 @@ namespace KnowledgeSystem.Helpers
         public static SvgImage Filter = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_filter.svg"));
         public static SvgImage View = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_view.svg"));
         public static SvgImage Info = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_info.svg"));
+        public static SvgImage Stamp = SvgImage.FromFile(Path.Combine(ImagesPath, "Approval.svg"));
     }
 }

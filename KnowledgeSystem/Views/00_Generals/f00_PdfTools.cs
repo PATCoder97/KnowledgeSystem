@@ -30,6 +30,7 @@ namespace KnowledgeSystem.Views._00_Generals
         public f00_PdfTools(string filePath_)
         {
             InitializeComponent();
+            InitializeIcon();
             filePath = filePath_;
 
             pdfViewer.MouseDown += PdfViewer_MouseDown;
@@ -46,6 +47,12 @@ namespace KnowledgeSystem.Views._00_Generals
         }
 
         #region parameters
+
+        private void InitializeIcon()
+        {
+            btnStamp.ImageOptions.SvgImage = TPSvgimages.Stamp;
+            btnSignDefault.ImageOptions.SvgImage = TPSvgimages.Approval;
+        }
 
         class GraphicsCoordinates
         {
