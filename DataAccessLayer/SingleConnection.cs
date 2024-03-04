@@ -47,8 +47,8 @@ namespace DataAccessLayer
                 //MultipleActiveResultSets = true,
                 //ApplicationName = "EntityFramework",
 
-                //DataSource = "TUANPHUONGPC",
-                DataSource = "10.198.138.153",
+                DataSource = "TUANPHUONGPC",
+                //DataSource = "10.198.138.153",
                 InitialCatalog = "DBDocumentManagementSystem",
                 UserID = "PAT",
                 Password = "Anhtuan312",

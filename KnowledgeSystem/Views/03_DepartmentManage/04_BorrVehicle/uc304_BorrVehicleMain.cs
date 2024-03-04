@@ -59,10 +59,19 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
         private async void ItemViewInfo_Click(object sender, EventArgs e)
         {
             VehicleStatus status = gvVehicleStatus.GetRow(gvVehicleStatus.FocusedRowHandle) as VehicleStatus;
+            List<VehicleBorrInfo> dataInfos = new List<VehicleBorrInfo>();
 
-            var data = await BorrVehicleHelper.Instance.GetBorrMotorUser(status);
+            switch (cbbTypeVehicle.SelectedIndex)
+            {
+                case 0:
+                    dataInfos = await BorrVehicleHelper.Instance.GetBorrMotorUser(status);
+                    break;
+                case 1:
+                    dataInfos = await BorrVehicleHelper.Instance.GetBorrCarUser(status);
+                    break;
+            }
 
-            gcInfo.DataSource = data;
+            gcInfo.DataSource = dataInfos;
             gvInfo.BestFitColumns();
         }
 
@@ -99,6 +108,17 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
                     break;
                 case 1:
                     vehicleStatuses = await BorrVehicleHelper.Instance.GetListCar();
+                    for (int i = 0; i < vehicleStatuses.Count; i++)
+                    {
+                        if (!vehicleStatuses[i].CanBorr)
+                        {
+                            var data = await BorrVehicleHelper.Instance.GetBorrCarUser(vehicleStatuses[i]);
+
+                            vehicleStatuses[i].IdUserBorr = data.FirstOrDefault().IdUserBorr;
+                            vehicleStatuses[i].NameUserBorr = data.FirstOrDefault().NameUserBorr;
+                            vehicleStatuses[i].BorrTime = data.FirstOrDefault().BorrTime.ToString("yyyy/MM/dd HH:mm");
+                        }
+                    }
                     break;
             }
 

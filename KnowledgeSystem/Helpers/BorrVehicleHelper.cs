@@ -47,6 +47,8 @@ namespace KnowledgeSystem.Helpers
                 UseDefaultCredentials = false,
                 Credentials = new NetworkCredential(TPConfigs.LoginUser.Id, EncryptionHelper.DecryptPass(TPConfigs.LoginUser.SecondaryPassword))
             };
+
+            proxy = null;
         }
 
         public async Task<List<VehicleStatus>> GetListVehicle(string parameter)
@@ -104,8 +106,9 @@ namespace KnowledgeSystem.Helpers
                 {
                     var parts = subItem.Split('|');
 
-                    string idUserBorr = parts[9].Substring(0, 10);
-                    string nameUserBorr = parts[9].Substring(10, parts[9].Length - 10);
+                    string userBorr = parts[9];
+                    string idUserBorr = userBorr.Substring(0, 10);
+                    string nameUserBorr = userBorr.Substring(10, userBorr.Length - 10);
 
                     DateTime borrTime;
                     DateTime.TryParseExact(parts[3], "yyyyMMddHHmm", null, System.Globalization.DateTimeStyles.None, out borrTime);
@@ -140,7 +143,69 @@ namespace KnowledgeSystem.Helpers
                 return infos;
             }
         }
+
+        public async Task<List<VehicleBorrInfo>> GetBorrCarUser(VehicleStatus status)
+        {
+            using (var httpClient = new HttpClient(new HttpClientHandler { Proxy = proxy }))
+            {
+                httpClient.BaseAddress = baseUrl;
+                var response = await httpClient.GetAsync($"s45/{status.Dept}vkv{status.Name}");
+                response.EnsureSuccessStatusCode();
+
+                string content = await response.Content.ReadAsStringAsync();
+
+                var infos = new List<VehicleBorrInfo>();
+                foreach (var subItem in content.Split(new[] { "o|o" }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    var parts = subItem.Split('|');
+
+                    string userBorr = parts[3];
+                    string idUserBorr = userBorr.Substring(0, 10);
+                    string nameUserBorr = userBorr.Substring(10, userBorr.Length - 10);
+
+                    DateTime borrTime;
+                    DateTime.TryParseExact(parts[1], "yyyyMMddHHmm", null, System.Globalization.DateTimeStyles.None, out borrTime);
+                    DateTime backTime;
+                    DateTime.TryParseExact(parts[4], "yyyyMMddHHmm", null, System.Globalization.DateTimeStyles.None, out backTime);
+
+                    int startKm;
+                    int.TryParse(parts[8], out startKm);
+                    int endKm;
+                    int.TryParse(parts[9], out endKm);
+                    int totalKm;
+                    int.TryParse(parts[10], out totalKm);
+
+                    string place = $"{parts[5]}-{parts[6]}";
+                    string uses = parts[7];
+
+                    if (parts.Length >= 23)
+                    {
+                        var info = new VehicleBorrInfo
+                        {
+                            IdUserBorr = idUserBorr,
+                            NameUserBorr = nameUserBorr,
+                            BorrTime = borrTime,
+                            BackTime = backTime,
+                            Place = place,
+                            Uses = uses,
+                            StartKm = startKm,
+                            EndKm = endKm,
+                            TotalKm = totalKm
+                        };
+                        infos.Add(info);
+                    }
+                }
+
+                return infos;
+            }
+        }
     }
+
+    // https://www.fhs.com.tw/ads/api/Furnace/rest/json/ve/s36/38LD-40006vkv202403042027vkv35845vkv202403042031vkv1vkvVNW0014732%E6%BD%98%E8%8B%B1%E4%BF%8A
+    // https://www.fhs.com.tw/ads/api/Furnace/rest/json/ve/s35/78vkv35844vkvvkvvkv202403042027vkv%E6%8A%80%E8%A1%93%E4%B8%AD%E5%BF%83vkvC.%E6%96%87%E4%BB%B6_%E7%89%A9%E5%93%81%E6%94%B6%E9%80%81%20Gui%20vkvkv1vkvvkv38LD-40006vkvVNW0014732vkvYvkvYvkvYvkvVNW0010439vkv202403042027
+
+    // https://www.fhs.com.tw/ads/api/Furnace/rest/json/ve/s47/38LD-00216vkv202403042006vkvVNW0017146%E9%BB%8E%E6%B0%8F%E5%9E%82%E7%8E%B2vkv202403042015vkv107497vkv1vkvYvkv0vkvvkvvkvNvkv0
+    // https://www.fhs.com.tw/ads/api/Furnace/rest/json/ve/s46/38LD-00216vkvVNW0017146vkv78vkv107496vkvvkv202403042006vkvvkv.vkv.vkvD.%E5%B7%A1%E6%AA%A2_%E5%8B%98%E6%9F%A5_%E5%8B%A4%E5%8B%99%20vkvYvkvvkvvkv20500304vkvYvkvYvkvYvkvvkvvkvvkvvkv202403042006vkvVNW0017887
 
     public class VehicleStatus
     {
