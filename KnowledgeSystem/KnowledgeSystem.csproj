@@ -139,6 +139,7 @@
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.DirectoryServices.AccountManagement" />
     <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
@@ -164,6 +165,7 @@
     <Compile Include="Helpers\AutoFilterNonUnicode.cs" />
     <Compile Include="Helpers\AppCopyRight.cs" />
     <Compile Include="Helpers\AppPermission.cs" />
+    <Compile Include="Helpers\BorrVehicleHelper.cs" />
     <Compile Include="Helpers\DomainVNFPG.cs" />
     <Compile Include="Helpers\EncryptionHelper.cs" />
     <Compile Include="Helpers\EnumHelper.cs" />
@@ -176,6 +178,12 @@
     <Compile Include="Helpers\WordHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\03_DepartmentManage\04_BorrVehicle\uc304_BorrVehicleMain.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\04_BorrVehicle\uc304_BorrVehicleMain.Designer.cs">
+      <DependentUpon>uc304_BorrVehicleMain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_SignInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -493,6 +501,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Views\03_DepartmentManage\04_BorrVehicle\uc304_BorrVehicleMain.resx">
+      <DependentUpon>uc304_BorrVehicleMain.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_SignInfo.resx">
       <DependentUpon>f402_SignInfo.cs</DependentUpon>
     </EmbeddedResource>
@@ -693,6 +704,9 @@
     <Content Include="Images\icons_add_User_Group.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\icons_borr_vehicle.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\icons_cancel.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -874,6 +888,10 @@
     <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj">
       <Project>{f5b2c4ce-8802-43ce-af03-2e62a687dbd6}</Project>
       <Name>DataAccessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Logger\Logger.csproj">
+      <Project>{4127014a-b6d8-4010-9103-fd652759b47e}</Project>
+      <Name>Logger</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
