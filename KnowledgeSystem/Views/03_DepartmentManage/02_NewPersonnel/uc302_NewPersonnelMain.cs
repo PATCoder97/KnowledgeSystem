@@ -367,10 +367,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
 
             gvData.BestFitColumns();
 
-            Font fontUI14 = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            DevExpress.Utils.AppearanceObject.DefaultMenuFont = fontUI14;
-
-            // gvData.OptionsDetail.DetailMode = DetailMode.Embedded;
+            Font fontUI12 = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            DevExpress.Utils.AppearanceObject.DefaultMenuFont = fontUI12;
         }
 
         private void btnReload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -540,7 +538,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
             GridView view = sender as GridView;
             view.ExpandMasterRow(view.FocusedRowHandle);
         }
-        
+
         private void btnExportExcel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             string documentsPath = TPConfigs.DocumentPath();

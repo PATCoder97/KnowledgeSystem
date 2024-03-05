@@ -23,70 +23,54 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
             InitializeMenuItems();
         }
 
-        const string MOTOR = "Xe máy";
-        const string CAR = "Ô tô";
-
         DXMenuItem itemViewInfo;
+        DXMenuItem itemBorrVehicle;
+        DXMenuItem itemBackVehicle;
 
         private void InitializeMenuItems()
         {
-            itemViewInfo = new DXMenuItem("顯示信息", ItemViewInfo_Click, TPSvgimages.Info, DXMenuItemPriority.Normal);
-            //itemViewFile = new DXMenuItem("讀取檔案", ItemViewFile_Click, TPSvgimages.View, DXMenuItemPriority.Normal);
-            //itemAddPlanFile = new DXMenuItem("上傳計劃表", ItemAddPlanFile_Click, TPSvgimages.UpLevel, DXMenuItemPriority.Normal);
-            //itemAddAttach = new DXMenuItem("上傳報告", ItemAddAttach_Click, TPSvgimages.UploadFile, DXMenuItemPriority.Normal);
-            //itemCloseReport = new DXMenuItem("結案", ItemCloseReport_Click, TPSvgimages.Confirm, DXMenuItemPriority.Normal);
-            //itemDelAttach = new DXMenuItem("刪除附件", ItemDelAttach_Click, TPSvgimages.Remove, DXMenuItemPriority.Normal);
+            itemViewInfo = new DXMenuItem("Lịch sử mượn", ItemViewInfo_Click, TPSvgimages.Info, DXMenuItemPriority.Normal);
+            itemBorrVehicle = new DXMenuItem("Mượn xe", ItemBorrVehicle_Click, TPSvgimages.Add, DXMenuItemPriority.Normal);
+            itemBackVehicle = new DXMenuItem("Trả xe", ItemBackVehicle_Click, TPSvgimages.Confirm, DXMenuItemPriority.Normal);
 
             itemViewInfo.ImageOptions.SvgImageSize = new Size(24, 24);
             itemViewInfo.AppearanceHovered.ForeColor = Color.Blue;
 
-            //itemViewFile.ImageOptions.SvgImageSize = new Size(24, 24);
-            //itemViewFile.AppearanceHovered.ForeColor = Color.Blue;
+            itemBorrVehicle.ImageOptions.SvgImageSize = new Size(24, 24);
+            itemBorrVehicle.AppearanceHovered.ForeColor = Color.Blue;
 
-            //itemAddPlanFile.ImageOptions.SvgImageSize = new Size(24, 24);
-            //itemAddPlanFile.AppearanceHovered.ForeColor = Color.Blue;
-
-            //itemCloseReport.ImageOptions.SvgImageSize = new Size(24, 24);
-            //itemCloseReport.AppearanceHovered.ForeColor = Color.Blue;
-
-            //itemAddAttach.ImageOptions.SvgImageSize = new Size(24, 24);
-            //itemAddAttach.AppearanceHovered.ForeColor = Color.Blue;
-
-            //itemDelAttach.ImageOptions.SvgImageSize = new Size(24, 24);
-            //itemDelAttach.AppearanceHovered.ForeColor = Color.Blue;
+            itemBackVehicle.ImageOptions.SvgImageSize = new Size(24, 24);
+            itemBackVehicle.AppearanceHovered.ForeColor = Color.Blue;
         }
 
-        private async void ItemViewInfo_Click(object sender, EventArgs e)
+        private void ItemBackVehicle_Click(object sender, EventArgs e)
         {
-            VehicleStatus status = gvVehicleStatus.GetRow(gvVehicleStatus.FocusedRowHandle) as VehicleStatus;
-            List<VehicleBorrInfo> dataInfos = new List<VehicleBorrInfo>();
+            var status = gvVehicleStatus.GetRow(gvVehicleStatus.FocusedRowHandle) as VehicleStatus;
 
-            switch (cbbTypeVehicle.SelectedIndex)
+            if (status.IdUserBorr != TPConfigs.LoginUser.Id)
             {
-                case 0:
-                    dataInfos = await BorrVehicleHelper.Instance.GetBorrMotorUser(status);
-                    break;
-                case 1:
-                    dataInfos = await BorrVehicleHelper.Instance.GetBorrCarUser(status);
-                    break;
+                XtraMessageBox.Show("Chỉ người mượn xe mới trả xe được", TPConfigs.SoftNameTW);
+                return;
             }
 
-            gcInfo.DataSource = dataInfos;
-            gvInfo.BestFitColumns();
+            if (status.IdUserBorr != TPConfigs.LoginUser.Id)
+            {
+                XtraMessageBox.Show("Chỉ người mượn xe mới trả xe được", TPConfigs.SoftNameTW);
+                return;
+            }
         }
 
-        private void uc304_BorrVehicleMain_Load(object sender, EventArgs e)
+        private void ItemBorrVehicle_Click(object sender, EventArgs e)
         {
-            gvVehicleStatus.ReadOnlyGridView();
-            gvVehicleStatus.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
+            VehicleStatus status = gvVehicleStatus.GetRow(gvVehicleStatus.FocusedRowHandle) as VehicleStatus;
 
-            gvInfo.ReadOnlyGridView();
-            gvInfo.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
-
-            cbbTypeVehicle.Properties.Items.AddRange(new object[] { MOTOR, CAR });
+            f304_BorrVehicleInfo frm = new f304_BorrVehicleInfo();
+            frm.indexTypeVehicle = cbbTypeVehicle.SelectedIndex;
+            frm.vehicleStatus = status;
+            frm.ShowDialog();
         }
 
-        private async void cbbTypeVehicle_SelectedIndexChanged(object sender, EventArgs e)
+        private async void LoadDataVehicle()
         {
             List<VehicleStatus> vehicleStatuses = new List<VehicleStatus>();
 
@@ -122,8 +106,47 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
                     break;
             }
 
+            gcInfo.DataSource = null;
             gcVehicleStatus.DataSource = vehicleStatuses;
             gvVehicleStatus.BestFitColumns();
+        }
+
+        private async void ItemViewInfo_Click(object sender, EventArgs e)
+        {
+            VehicleStatus status = gvVehicleStatus.GetRow(gvVehicleStatus.FocusedRowHandle) as VehicleStatus;
+            List<VehicleBorrInfo> dataInfos = new List<VehicleBorrInfo>();
+
+            switch (cbbTypeVehicle.SelectedIndex)
+            {
+                case 0:
+                    dataInfos = await BorrVehicleHelper.Instance.GetBorrMotorUser(status);
+                    break;
+                case 1:
+                    dataInfos = await BorrVehicleHelper.Instance.GetBorrCarUser(status);
+                    break;
+            }
+
+            gcInfo.DataSource = dataInfos;
+            gvInfo.BestFitColumns();
+        }
+
+        private void uc304_BorrVehicleMain_Load(object sender, EventArgs e)
+        {
+            Font fontUI12 = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            DevExpress.Utils.AppearanceObject.DefaultMenuFont = fontUI12;
+
+            gvVehicleStatus.ReadOnlyGridView();
+            gvVehicleStatus.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
+
+            gvInfo.ReadOnlyGridView();
+            gvInfo.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
+
+            cbbTypeVehicle.Properties.Items.AddRange(TPConfigs.typeVehicles);
+        }
+
+        private void cbbTypeVehicle_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadDataVehicle();
         }
 
         private void gvVehicleStatus_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
@@ -133,20 +156,24 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
                 GridView view = sender as GridView;
                 view.FocusedRowHandle = e.HitInfo.RowHandle;
 
-                //     int idBase = Convert.ToInt16(view.GetRowCellValue(e.HitInfo.RowHandle, gColId));
-                //bool HaveReport = reportsInfo.Any(r => r.IdBase == idBase);
+                var status = view.GetRow(view.FocusedRowHandle) as VehicleStatus;
 
                 e.Menu.Items.Add(itemViewInfo);
 
-                //if (HaveReport)
-                //{
-                //    e.Menu.Items.Add(itemViewFile);
-                //}
-                //else
-                //{
-                //    e.Menu.Items.Add(itemAddPlanFile);
-                //}
+                if (status.IdUserBorr == TPConfigs.LoginUser.Id && !string.IsNullOrWhiteSpace(status.IdUserBorr))
+                {
+                    e.Menu.Items.Add(itemBackVehicle);
+                }
+                else if (string.IsNullOrWhiteSpace(status.IdUserBorr))
+                {
+                    e.Menu.Items.Add(itemBorrVehicle);
+                }
             }
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            LoadDataVehicle();
         }
     }
 }

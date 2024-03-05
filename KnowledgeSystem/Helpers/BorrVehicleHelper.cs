@@ -14,7 +14,9 @@ using System.Net.Http;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace KnowledgeSystem.Helpers
 {
@@ -48,7 +50,7 @@ namespace KnowledgeSystem.Helpers
                 Credentials = new NetworkCredential(TPConfigs.LoginUser.Id, EncryptionHelper.DecryptPass(TPConfigs.LoginUser.SecondaryPassword))
             };
 
-            proxy = null;
+            //proxy = null;
         }
 
         public async Task<List<VehicleStatus>> GetListVehicle(string parameter)
@@ -199,8 +201,92 @@ namespace KnowledgeSystem.Helpers
                 return infos;
             }
         }
-    }
 
+        public async Task<List<string>> GetListPurposess()
+        {
+            using (var httpClient = new HttpClient(new HttpClientHandler { Proxy = proxy }))
+            {
+                httpClient.BaseAddress = baseUrl;
+                var response = await httpClient.GetAsync($"s66/o");
+                response.EnsureSuccessStatusCode();
+
+                string content = await response.Content.ReadAsStringAsync();
+                var purposess = new List<string>();
+                foreach (var subItem in content.Split(new[] { "o|o" }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    purposess.Add(subItem.Trim());
+                }
+
+                return purposess;
+            }
+        }
+
+        public async Task<string> GetManagerVehicle(string nameVehicle)
+        {
+            using (var httpClient = new HttpClient(new HttpClientHandler { Proxy = proxy }))
+            {
+                httpClient.BaseAddress = baseUrl;
+                var response = await httpClient.GetAsync($"s62/{nameVehicle}");
+                response.EnsureSuccessStatusCode();
+
+                return await response.Content.ReadAsStringAsync();
+            }
+        }
+
+        public async Task<string> GetLastKmMotor(string nameVehicle)
+        {
+            using (var httpClient = new HttpClient(new HttpClientHandler { Proxy = proxy }))
+            {
+                httpClient.BaseAddress = baseUrl;
+                var response = await httpClient.GetAsync($"s52/{nameVehicle}");
+                response.EnsureSuccessStatusCode();
+
+                return await response.Content.ReadAsStringAsync();
+            }
+        }
+
+        public async Task<bool> BorrMotor(string nameVehicle, int startKm, string borrTime, string place, string purposes, string numUser)
+        {
+            string managerVehicle = await GetManagerVehicle(nameVehicle);
+            var purposesUrl = HttpUtility.UrlEncode(purposes).Replace("+", "%20").ToUpper();
+            var placeUrl = HttpUtility.UrlEncode(place).Replace("+", "%20").ToUpper();
+
+            using (var httpClient = new HttpClient(new HttpClientHandler { Proxy = proxy }))
+            {
+                httpClient.BaseAddress = baseUrl;
+
+                string parameter = $"s35/{idDept2word}vkv{startKm}vkvvkvvkv{borrTime}vkv{placeUrl}vkv{purposesUrl}vkv{numUser}vkvvkv{nameVehicle}vkv{TPConfigs.LoginUser.Id}vkvYvkvYvkvYvkv{managerVehicle}vkv{DateTime.Now.ToString("yyyyMMddHHmm")}";
+
+                var response = await httpClient.GetAsync(parameter);
+                response.EnsureSuccessStatusCode();
+
+                string content = await response.Content.ReadAsStringAsync();
+
+                return content == "ok";
+            }
+        }
+
+        public async Task<bool> BackMotor(string nameVehicle, int endKm, string backTime, int totalKm)
+        {
+            var userBackUrl = HttpUtility.UrlEncode($"{TPConfigs.LoginUser.Id}{TPConfigs.LoginUser.DisplayName}").Replace("+", "%20").ToUpper();
+
+            using (var httpClient = new HttpClient(new HttpClientHandler { Proxy = proxy }))
+            {
+                httpClient.BaseAddress = baseUrl;
+
+                string parameter = $"s36/{nameVehicle}vkv{backTime}vkv{endKm}vkv{DateTime.Now.ToString("yyyyMMddHHmm")}vkv{totalKm}vkv{userBackUrl}";
+
+                var response = await httpClient.GetAsync(parameter);
+                response.EnsureSuccessStatusCode();
+
+                string content = await response.Content.ReadAsStringAsync();
+
+                return content == "ok";
+            }
+        }
+    }
+    // https://www.fhs.com.tw/ads/api/Furnace/rest/json/ve/s36/38LD-40006vkv202403050156vkv35851vkv202403051356vkv2vkvVNW0014732%E6%BD%98%E8%8B%B1%E4%BF%8A
+    // https://www.fhs.com.tw/ads/api/Furnace/rest/json/ve/s36/38LD-40006vkv202403051405vkv35852vkv202403051407vkv0vkvVNW0014732%E6%BD%98%E8%8B%B1%E4%BF%8A
     // https://www.fhs.com.tw/ads/api/Furnace/rest/json/ve/s36/38LD-40006vkv202403042027vkv35845vkv202403042031vkv1vkvVNW0014732%E6%BD%98%E8%8B%B1%E4%BF%8A
     // https://www.fhs.com.tw/ads/api/Furnace/rest/json/ve/s35/78vkv35844vkvvkvvkv202403042027vkv%E6%8A%80%E8%A1%93%E4%B8%AD%E5%BF%83vkvC.%E6%96%87%E4%BB%B6_%E7%89%A9%E5%93%81%E6%94%B6%E9%80%81%20Gui%20vkvkv1vkvvkv38LD-40006vkvVNW0014732vkvYvkvYvkvYvkvVNW0010439vkv202403042027
 

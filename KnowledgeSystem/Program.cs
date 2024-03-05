@@ -10,6 +10,7 @@ using KnowledgeSystem.Views._03_DepartmentManage._03_ShiftSchedule;
 using KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
