@@ -33,7 +33,6 @@
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnBackVehicle = new DevExpress.XtraBars.BarButtonItem();
-            this.btnDelete = new DevExpress.XtraBars.BarButtonItem();
             this.btnBorrVehicle = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
@@ -112,7 +111,6 @@
             this.barManagerTP.Form = this;
             this.barManagerTP.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.btnBackVehicle,
-            this.btnDelete,
             this.btnBorrVehicle});
             this.barManagerTP.MainMenu = this.bar2;
             this.barManagerTP.MaxItemId = 13;
@@ -140,7 +138,6 @@
             this.bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnBackVehicle, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnDelete, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnBorrVehicle, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawDragBorder = false;
@@ -150,9 +147,9 @@
             // 
             // btnBackVehicle
             // 
-            this.btnBackVehicle.Caption = "編輯";
+            this.btnBackVehicle.Caption = "Trả xe";
             this.btnBackVehicle.Id = 0;
-            this.btnBackVehicle.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnEdit.ImageOptions.SvgImage")));
+            this.btnBackVehicle.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnBackVehicle.ImageOptions.SvgImage")));
             this.btnBackVehicle.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnBackVehicle.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
             this.btnBackVehicle.ItemAppearance.Hovered.Options.UseForeColor = true;
@@ -160,17 +157,6 @@
             this.btnBackVehicle.ItemAppearance.Normal.Options.UseFont = true;
             this.btnBackVehicle.Name = "btnBackVehicle";
             this.btnBackVehicle.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnBackVehicle_ItemClick);
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Caption = "刪除";
-            this.btnDelete.Id = 1;
-            this.btnDelete.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnDelete.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
-            this.btnDelete.ItemAppearance.Hovered.Options.UseForeColor = true;
-            this.btnDelete.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.btnDelete.ItemAppearance.Normal.Options.UseFont = true;
-            this.btnDelete.Name = "btnDelete";
             // 
             // btnBorrVehicle
             // 
@@ -725,7 +711,6 @@
         private DevExpress.XtraBars.BarManager barManagerTP;
         private DevExpress.XtraBars.Bar bar2;
         private DevExpress.XtraBars.BarButtonItem btnBackVehicle;
-        private DevExpress.XtraBars.BarButtonItem btnDelete;
         private DevExpress.XtraBars.BarButtonItem btnBorrVehicle;
         private DevExpress.XtraBars.BarDockControl barDockControlTop;
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;

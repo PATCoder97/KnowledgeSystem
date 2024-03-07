@@ -17,14 +17,25 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
         public f304_BorrVehicleInfo()
         {
             InitializeComponent();
+            InitializeIcon();
         }
 
+        public EventFormInfo eventInfo = EventFormInfo.Create;
         public int indexTypeVehicle = 0;
         public VehicleStatus vehicleStatus;
         int startKm = 0;
 
+        private void InitializeIcon()
+        {
+            btnBorrVehicle.ImageOptions.SvgImage = TPSvgimages.Add;
+            btnBackVehicle.ImageOptions.SvgImage = TPSvgimages.Confirm;
+        }
+
         private async void f304_BorrVehicleInfo_Load(object sender, EventArgs e)
         {
+            btnBorrVehicle.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            btnBackVehicle.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+
             VehicleBorrInfo vehicleInfo = new VehicleBorrInfo();
             var purposes = await BorrVehicleHelper.Instance.GetListPurposess();
 
@@ -34,8 +45,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
             cbbPurpose.Properties.Items.AddRange(purposes);
             cbbPurpose.SelectedIndex = indexTypeVehicle;
 
-            timeBorrTime.EditValue = DateTime.Now;
-
             switch (indexTypeVehicle)
             {
                 case 0:
@@ -44,27 +53,57 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
                     string lastKm = await BorrVehicleHelper.Instance.GetLastKmMotor(vehicleStatus.Name);
                     int.TryParse(lastKm.Split('|')[0].Trim(), out startKm);
 
-                    txbStartKm.EditValue = vehicleInfo.StartKm;
+                    txbStartKm.EditValue = startKm;
                     break;
             }
 
             txbName.EditValue = vehicleStatus.Name;
 
-            var purpose = vehicleInfo.Uses;
-            int firstSpaceIndex = purpose.IndexOf(' ');
-            cbbPurpose.EditValue = purpose.Substring(0, firstSpaceIndex);
-            txbDescript.EditValue = purpose.Substring(firstSpaceIndex + 1);
+            switch (eventInfo)
+            {
+                case EventFormInfo.Create:
+                    timeBorrTime.EditValue = DateTime.Now;
 
-            var place = vehicleInfo.Place;
-            firstSpaceIndex = place.IndexOf('-');
-            if (firstSpaceIndex < 0)
-            {
-                txbFromPlace.EditValue = place;
-            }
-            else
-            {
-                txbFromPlace.EditValue = place.Substring(0, firstSpaceIndex);
-                txbToPlace.EditValue = place.Substring(firstSpaceIndex + 1);
+                    timeBackTime.Enabled = false;
+                    txbEndKm.Enabled = false;
+
+                    btnBorrVehicle.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                    btnBackVehicle.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                    break;
+                case EventFormInfo.View:
+                    break;
+                case EventFormInfo.Update:
+                    timeBorrTime.Enabled = false;
+                    txbFromPlace.Enabled = false;
+                    txbToPlace.Enabled = false;
+                    cbbPurpose.Enabled = false;
+                    txbDescript.Enabled = false;
+                    txbNumUser.Enabled = false;
+
+                    var purpose = vehicleInfo.Uses;
+                    int firstSpaceIndex = purpose.IndexOf(' ');
+                    cbbPurpose.EditValue = purpose.Substring(0, firstSpaceIndex);
+                    txbDescript.EditValue = purpose.Substring(firstSpaceIndex + 1);
+                    timeBorrTime.EditValue = vehicleInfo.BorrTime;
+                    txbStartKm.EditValue = vehicleInfo.StartKm;
+
+                    var place = vehicleInfo.Place;
+                    firstSpaceIndex = place.IndexOf('-');
+                    if (firstSpaceIndex < 0)
+                    {
+                        txbFromPlace.EditValue = place;
+                    }
+                    else
+                    {
+                        txbFromPlace.EditValue = place.Substring(0, firstSpaceIndex);
+                        txbToPlace.EditValue = place.Substring(firstSpaceIndex + 1);
+                    }
+
+                    timeBackTime.EditValue = DateTime.Now;
+
+                    btnBorrVehicle.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                    btnBackVehicle.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                    break;
             }
         }
 
@@ -94,6 +133,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
             bool result = await BorrVehicleHelper.Instance.BorrMotor(nameVehicle, startKm, borrTime, place, purposes, numUser);
             if (result)
             {
+                XtraMessageBox.Show("Mượn xe thành công!", TPConfigs.SoftNameTW);
+
                 Close();
             }
         }
@@ -105,6 +146,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
             int startKm = Convert.ToInt32(txbStartKm.EditValue);
             int endKm = Convert.ToInt32(txbEndKm.EditValue);
             int totalKm = endKm - startKm;
+
+            if (totalKm < 0) return;
+
+            if (XtraMessageBox.Show($"Bạn chắc chắn muốn trả xe: {nameVehicle}, với {totalKm} Km ?", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo) != DialogResult.Yes)
+            {
+                return;
+            }
 
             bool result = await BorrVehicleHelper.Instance.BackMotor(nameVehicle, endKm, backTime, totalKm);
             if (result)

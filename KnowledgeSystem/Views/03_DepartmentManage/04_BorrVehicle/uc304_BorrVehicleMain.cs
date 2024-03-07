@@ -45,19 +45,15 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
 
         private void ItemBackVehicle_Click(object sender, EventArgs e)
         {
-            var status = gvVehicleStatus.GetRow(gvVehicleStatus.FocusedRowHandle) as VehicleStatus;
+            VehicleStatus status = gvVehicleStatus.GetRow(gvVehicleStatus.FocusedRowHandle) as VehicleStatus;
 
-            if (status.IdUserBorr != TPConfigs.LoginUser.Id)
-            {
-                XtraMessageBox.Show("Chỉ người mượn xe mới trả xe được", TPConfigs.SoftNameTW);
-                return;
-            }
+            f304_BorrVehicleInfo frm = new f304_BorrVehicleInfo();
+            frm.eventInfo = EventFormInfo.Update;
+            frm.indexTypeVehicle = cbbTypeVehicle.SelectedIndex;
+            frm.vehicleStatus = status;
+            frm.ShowDialog();
 
-            if (status.IdUserBorr != TPConfigs.LoginUser.Id)
-            {
-                XtraMessageBox.Show("Chỉ người mượn xe mới trả xe được", TPConfigs.SoftNameTW);
-                return;
-            }
+            LoadDataVehicle();
         }
 
         private void ItemBorrVehicle_Click(object sender, EventArgs e)
@@ -68,6 +64,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
             frm.indexTypeVehicle = cbbTypeVehicle.SelectedIndex;
             frm.vehicleStatus = status;
             frm.ShowDialog();
+
+            LoadDataVehicle();
         }
 
         private async void LoadDataVehicle()
@@ -151,7 +149,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
 
         private void gvVehicleStatus_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
         {
-            if (e.HitInfo.InRowCell)
+            if (e.HitInfo.InRowCell && e.HitInfo.RowHandle >= 0)
             {
                 GridView view = sender as GridView;
                 view.FocusedRowHandle = e.HitInfo.RowHandle;
