@@ -178,7 +178,7 @@ namespace KnowledgeSystem.Views._00_Generals
             // 
             // btnISOAuditDocs
             // 
-            this.btnISOAuditDocs.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
+            this.btnISOAuditDocs.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(183)))), ((int)(((byte)(71)))), ((int)(((byte)(42)))));
             this.btnISOAuditDocs.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
             this.btnISOAuditDocs.AppearanceItem.Normal.Options.UseBackColor = true;
             this.btnISOAuditDocs.AppearanceItem.Normal.Options.UseFont = true;
