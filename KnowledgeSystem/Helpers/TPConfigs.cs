@@ -42,7 +42,7 @@ namespace KnowledgeSystem.Helpers
         public const string DefaultPassword = "123456";
 
         public static Dictionary<int, string> lsUserStatus = new Dictionary<int, string>() { { 0, "在職" }, { 1, "離職" }, { 2, "留職停薪" } };
-        public static Dictionary<int, string> signTypes = new Dictionary<int, string>() { { 0, "簽名" }, { 1, "密封" } };
+        public static Dictionary<int, string> signTypes = new Dictionary<int, string>() { { 0, "簽名" }, { 1, "蓋章" } };
 
         public static List<string> typeVehicles = new List<string>() { "Xe máy", "Ô tô" };
 
