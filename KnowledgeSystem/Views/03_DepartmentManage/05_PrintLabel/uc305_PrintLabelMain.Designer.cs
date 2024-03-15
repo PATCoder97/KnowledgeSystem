@@ -126,6 +126,7 @@
             // 
             this.btnPrint.Caption = "打印";
             this.btnPrint.Id = 1;
+            this.btnPrint.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnPrint.ImageOptions.SvgImage")));
             this.btnPrint.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnPrint.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
             this.btnPrint.ItemAppearance.Hovered.Options.UseForeColor = true;
