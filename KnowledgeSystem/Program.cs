@@ -40,8 +40,7 @@ namespace KnowledgeSystem
             TPConfigs.SoftNameTW = "冶金文管系統";
             TPConfigs.LoginUser = dm_UserBUS.Instance.GetItemById("VNW0014732");
             AppPermission.Instance.CheckAppPermission(7);
-            Application.Run(new f00_FluentFrame(34));
-            //Application.Run(new f00_FluentFrame(21));
+            Application.Run(new f00_FluentFrame(49));
             TPConfigs.IdParentControl = AppPermission.SafetyCertMain;
 
 #else
