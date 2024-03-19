@@ -24,6 +24,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._03_TechnicalPrj
         public f203_PrjInfo()
         {
             InitializeComponent();
+            InitializeIcon();
         }
 
         public string formName = string.Empty;
@@ -38,6 +39,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._03_TechnicalPrj
 
         List<dm_User> users;
         List<dm_JobTitle> jobs;
+        List<dm_Departments> depts;
 
         private void InitializeIcon()
         {
@@ -46,8 +48,20 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._03_TechnicalPrj
             btnConfirm.ImageOptions.SvgImage = TPSvgimages.Confirm;
         }
 
+        private string[] GenerateData(string rawData, int indexRow)
+        {
+            if (rawData == null)
+            {
+                return new string[0];
+            }
+            var array = rawData.Split(new string[] { "\r\n" }, StringSplitOptions.None);
+            return array.Select((value1, index) => array.Length > 1 ? $"{indexRow}.{index + 1}. {value1}" : value1).ToArray();
+        }
+
         private void f203_PrjInfo_Load(object sender, EventArgs e)
         {
+            lbUnit.DataBindings.Add("Text", cbbUnit, "Text");
+
             tabbedControlGroup1.SelectedTabPageIndex = 0;
 
             idDept2word = TPConfigs.LoginUser.IdDepartment.Substring(0, 2);
@@ -73,6 +87,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._03_TechnicalPrj
             //cbbJobTitle.Properties.DisplayMember = "DisplayName";
             //cbbJobTitle.Properties.ValueMember = "Id";
             jobs = dm_JobTitleBUS.Instance.GetList();
+            depts = dm_DeptBUS.Instance.GetList();
 
             users = dm_UserBUS.Instance.GetListByDept(idDept2word).Where(r => r.Status == 0).ToList();
             tokenUserID.Properties.DataSource = users;
@@ -82,6 +97,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._03_TechnicalPrj
 
             var typeOf = new List<string>() { "系統流程優化", "資材成本降低", "產品品質提升", "生產製程改善", "檢驗技術開發", "客戶服務品質提升", "人事管理優化", "降低工安事故發生" };
             cbbTypeOf.Properties.Items.AddRange(typeOf);
+
+            cbbUnit.Properties.Items.AddRange(new string[] { "玩越盾", "USD", "仟元" });
+            cbbUnit.SelectedIndex = 0;
 
             //switch (eventInfo)
             //{
@@ -131,11 +149,16 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._03_TechnicalPrj
             string subject = txbSubject.EditValue?.ToString();
             string typeOf = cbbTypeOf.EditValue?.ToString();
 
-            var a1Array = txbA1.EditValue?.ToString().Split(new string[] { "\r\n" }, StringSplitOptions.None);
-            var a1 = a1Array.Select((value1, index) => a1Array.Length > 1 ? $"1.{index + 1}. {value1}" : value1).ToArray();
+            string completeDate = txbCompleteDate.DateTime.ToString("yyyy年MM月dd日");
+            string monthlyBenefit = $"{txbMonthlyBenefit.Text}{lbUnit.Text}";
+            string investmentAmount = $"{txbInvestmentAmount.Text}{lbUnit.Text}";
+            string deptName = $"{depts.FirstOrDefault(r => r.Id == idDept2word).DisplayName}{depts.FirstOrDefault(r => r.Id == TPConfigs.LoginUser.IdDepartment).DisplayName}";
 
             var value = new
             {
+                id_doc = "123-4321-01",
+                dept_name = deptName,
+                today = DateTime.Today.ToString("yyyy年MM月dd日"),
                 user_name = userName,
                 v0 = charsUserId[0],
                 v1 = charsUserId[1],
@@ -151,13 +174,16 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._03_TechnicalPrj
                 subject = subject,
                 type = typeOf,
                 dept = $"LG{TPConfigs.LoginUser.IdDepartment}",
-                a1 = a1,
-                a2 = txbA2.EditValue?.ToString(),
-                b1 = txbB2.EditValue?.ToString(),
-                b2 = txbB2.EditValue?.ToString(),
-                c1 = txbC1.EditValue?.ToString(),
-                c2 = txbC2.EditValue?.ToString(),
-                c3 = txbC3.EditValue?.ToString(),
+                complete_date = completeDate,
+                monthly_benefit = monthlyBenefit,
+                investment_amount = investmentAmount,
+                a1 = GenerateData(txbA2.EditValue?.ToString(), 1),
+                a2 = GenerateData(txbA2.EditValue?.ToString(), 2),
+                b1 = GenerateData(txbB2.EditValue?.ToString(), 1),
+                b2 = GenerateData(txbB2.EditValue?.ToString(), 2),
+                c1 = GenerateData(txbC1.EditValue?.ToString(), 1),
+                c2 = GenerateData(txbC2.EditValue?.ToString(), 2),
+                c3 = GenerateData(txbC3.EditValue?.ToString(), 3),
             };
 
             MiniWord.SaveAsByTemplate(PATH_EXPORT, PATH_TEMPLATE, value);
