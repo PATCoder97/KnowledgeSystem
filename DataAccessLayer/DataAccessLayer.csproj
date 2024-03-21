@@ -60,6 +60,9 @@
     <Compile Include="dm_Departments.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
+    <Compile Include="dm_DeptGroups.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
     <Compile Include="dm_FunctionM.cs" />
     <Compile Include="dm_GroupProgressM.cs" />
     <Compile Include="dm_JobTitle.cs">
@@ -75,6 +78,9 @@
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
     <Compile Include="dm_UserRole.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dt201_Base.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
     <Compile Include="dt202_Attach.cs">

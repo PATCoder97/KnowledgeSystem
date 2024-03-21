@@ -190,27 +190,29 @@
             // 
             // cbbDept
             // 
-            this.cbbDept.Location = new System.Drawing.Point(94, 12);
+            this.cbbDept.Location = new System.Drawing.Point(86, 12);
             this.cbbDept.MenuManager = this.barManager1;
             this.cbbDept.Name = "cbbDept";
-            this.cbbDept.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbDept.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.cbbDept.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.cbbDept.Properties.Appearance.Options.UseFont = true;
             this.cbbDept.Properties.Appearance.Options.UseForeColor = true;
+            this.cbbDept.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.cbbDept.Properties.AppearanceDropDown.Options.UseFont = true;
             this.cbbDept.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbbDept.Properties.PopupView = this.gridLookUpEdit1View;
-            this.cbbDept.Size = new System.Drawing.Size(273, 28);
+            this.cbbDept.Size = new System.Drawing.Size(281, 32);
             this.cbbDept.StyleController = this.layoutControl1;
             this.cbbDept.TabIndex = 5;
             // 
             // gridLookUpEdit1View
             // 
-            this.gridLookUpEdit1View.Appearance.HeaderPanel.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridLookUpEdit1View.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.gridLookUpEdit1View.Appearance.HeaderPanel.Options.UseFont = true;
             this.gridLookUpEdit1View.Appearance.HeaderPanel.Options.UseTextOptions = true;
             this.gridLookUpEdit1View.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridLookUpEdit1View.Appearance.Row.Font = new System.Drawing.Font("DFKai-SB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridLookUpEdit1View.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridLookUpEdit1View.Appearance.Row.ForeColor = System.Drawing.Color.Black;
             this.gridLookUpEdit1View.Appearance.Row.Options.UseFont = true;
             this.gridLookUpEdit1View.Appearance.Row.Options.UseForeColor = true;
@@ -245,30 +247,30 @@
             // 
             // gcStep
             // 
-            this.gcStep.Location = new System.Drawing.Point(12, 44);
+            this.gcStep.Location = new System.Drawing.Point(12, 48);
             this.gcStep.MainView = this.gvStep;
             this.gcStep.Name = "gcStep";
             this.gcStep.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.cbbGroup,
             this.btnRemoveStep});
-            this.gcStep.Size = new System.Drawing.Size(499, 288);
+            this.gcStep.Size = new System.Drawing.Size(499, 284);
             this.gcStep.TabIndex = 4;
             this.gcStep.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvStep});
             // 
             // gvStep
             // 
-            this.gvStep.Appearance.HeaderPanel.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvStep.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.gvStep.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
             this.gvStep.Appearance.HeaderPanel.Options.UseFont = true;
             this.gvStep.Appearance.HeaderPanel.Options.UseForeColor = true;
             this.gvStep.Appearance.HeaderPanel.Options.UseTextOptions = true;
             this.gvStep.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gvStep.Appearance.Row.Font = new System.Drawing.Font("DFKai-SB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvStep.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gvStep.Appearance.Row.ForeColor = System.Drawing.Color.Black;
             this.gvStep.Appearance.Row.Options.UseFont = true;
             this.gvStep.Appearance.Row.Options.UseForeColor = true;
-            this.gvStep.Appearance.TopNewRow.Font = new System.Drawing.Font("DFKai-SB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvStep.Appearance.TopNewRow.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gvStep.Appearance.TopNewRow.ForeColor = System.Drawing.Color.DimGray;
             this.gvStep.Appearance.TopNewRow.Options.UseFont = true;
             this.gvStep.Appearance.TopNewRow.Options.UseForeColor = true;
@@ -315,7 +317,7 @@
             // cbbGroup
             // 
             this.cbbGroup.AcceptEditorTextAsNewValue = DevExpress.Utils.DefaultBoolean.True;
-            this.cbbGroup.AppearanceDropDown.Font = new System.Drawing.Font("DFKai-SB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbGroup.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbbGroup.AppearanceDropDown.ForeColor = System.Drawing.Color.Black;
             this.cbbGroup.AppearanceDropDown.Options.UseFont = true;
             this.cbbGroup.AppearanceDropDown.Options.UseForeColor = true;
@@ -352,10 +354,10 @@
             0,
             0,
             0});
-            this.txbPrioritize.Location = new System.Drawing.Point(453, 12);
+            this.txbPrioritize.Location = new System.Drawing.Point(445, 12);
             this.txbPrioritize.MenuManager = this.barManager1;
             this.txbPrioritize.Name = "txbPrioritize";
-            this.txbPrioritize.Properties.Appearance.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.txbPrioritize.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbPrioritize.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbPrioritize.Properties.Appearance.Options.UseFont = true;
             this.txbPrioritize.Properties.Appearance.Options.UseForeColor = true;
@@ -371,7 +373,7 @@
             0,
             0});
             this.txbPrioritize.Properties.UseMaskAsDisplayFormat = true;
-            this.txbPrioritize.Size = new System.Drawing.Size(58, 28);
+            this.txbPrioritize.Size = new System.Drawing.Size(66, 32);
             this.txbPrioritize.StyleController = this.layoutControl1;
             this.txbPrioritize.TabIndex = 6;
             // 
@@ -390,15 +392,15 @@
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.gcStep;
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 32);
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 36);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(503, 292);
+            this.layoutControlItem1.Size = new System.Drawing.Size(503, 288);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
             // layoutControlItem2
             // 
-            this.layoutControlItem2.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.layoutControlItem2.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.layoutControlItem2.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
             this.layoutControlItem2.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem2.AppearanceItemCaption.Options.UseForeColor = true;
@@ -407,13 +409,13 @@
             this.layoutControlItem2.Control = this.cbbDept;
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(359, 32);
+            this.layoutControlItem2.Size = new System.Drawing.Size(359, 36);
             this.layoutControlItem2.Text = "單位";
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(70, 19);
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(62, 24);
             // 
             // layoutControlItem3
             // 
-            this.layoutControlItem3.AppearanceItemCaption.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.layoutControlItem3.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.layoutControlItem3.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
             this.layoutControlItem3.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem3.AppearanceItemCaption.Options.UseForeColor = true;
@@ -422,9 +424,9 @@
             this.layoutControlItem3.Control = this.txbPrioritize;
             this.layoutControlItem3.Location = new System.Drawing.Point(359, 0);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(144, 32);
+            this.layoutControlItem3.Size = new System.Drawing.Size(144, 36);
             this.layoutControlItem3.Text = " 優先級";
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(70, 19);
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(62, 24);
             // 
             // f402_ProgressInfo
             // 

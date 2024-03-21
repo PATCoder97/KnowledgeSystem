@@ -121,6 +121,7 @@ namespace KnowledgeSystem.Views._00_Generals
             this.tileMain.MaxId = 23;
             this.tileMain.Name = "tileMain";
             this.tileMain.Padding = new System.Windows.Forms.Padding(24, 22, 24, 22);
+            this.tileMain.Position = 540;
             this.tileMain.ShowGroupText = true;
             this.tileMain.Size = new System.Drawing.Size(1180, 499);
             this.tileMain.TabIndex = 4;
@@ -340,7 +341,7 @@ namespace KnowledgeSystem.Views._00_Generals
             // 
             this.btnMod.AppearanceItem.Hovered.Font = new System.Drawing.Font("DFKai-SB", 26F);
             this.btnMod.AppearanceItem.Hovered.Options.UseFont = true;
-            this.btnMod.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
+            this.btnMod.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(57)))), ((int)(((byte)(123)))));
             this.btnMod.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
             this.btnMod.AppearanceItem.Normal.Options.UseBackColor = true;
             this.btnMod.AppearanceItem.Normal.Options.UseFont = true;
@@ -359,7 +360,7 @@ namespace KnowledgeSystem.Views._00_Generals
             // 
             this.btnSysAdmin.AppearanceItem.Hovered.Font = new System.Drawing.Font("DFKai-SB", 26F);
             this.btnSysAdmin.AppearanceItem.Hovered.Options.UseFont = true;
-            this.btnSysAdmin.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
+            this.btnSysAdmin.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(57)))), ((int)(((byte)(123)))));
             this.btnSysAdmin.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
             this.btnSysAdmin.AppearanceItem.Normal.Options.UseBackColor = true;
             this.btnSysAdmin.AppearanceItem.Normal.Options.UseFont = true;

@@ -189,6 +189,12 @@
     <Compile Include="Helpers\WordHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\uc201_AuditDocsMain.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\uc201_AuditDocsMain.Designer.cs">
+      <DependentUpon>uc201_AuditDocsMain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\02_StandardsAndTechs\03_TechnicalPrj\f203_PrjInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -542,6 +548,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\uc201_AuditDocsMain.resx">
+      <DependentUpon>uc201_AuditDocsMain.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\03_TechnicalPrj\f203_PrjInfo.resx">
       <DependentUpon>f203_PrjInfo.cs</DependentUpon>
     </EmbeddedResource>
