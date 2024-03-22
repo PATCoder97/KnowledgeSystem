@@ -21,6 +21,10 @@ using SelectQuery = System.Management.SelectQuery;
 using DevExpress.XtraSplashScreen;
 using DevExpress.XtraReports.UI;
 using DevExpress.XtraReports;
+using static DevExpress.XtraEditors.Mask.MaskSettings;
+using ExcelDataReader;
+using System.IO;
+using DevExpress.XtraPrinting.Native;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._05_PrintLabel
 {
@@ -34,6 +38,24 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._05_PrintLabel
         System.Drawing.Font fontUI14 = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
 
         List<string> printers = new List<string>();
+
+        public static DataSet ExcelToDataSet(string filePath)
+        {
+            string text = System.IO.Path.GetExtension(filePath).ToLower();
+            using (FileStream fileStream = File.Open(filePath, FileMode.Open, FileAccess.Read))
+            {
+                IExcelDataReader excelDataReader = ((!(text.ToLower() == ".xls")) ? ExcelReaderFactory.CreateOpenXmlReader(fileStream) : ExcelReaderFactory.CreateBinaryReader(fileStream));
+                DataSet result = excelDataReader.AsDataSet(new ExcelDataSetConfiguration
+                {
+                    ConfigureDataTable = (IExcelDataReader _) => new ExcelDataTableConfiguration
+                    {
+                        UseHeaderRow = true
+                    }
+                });
+                excelDataReader.Close();
+                return result;
+            };
+        }
 
         private List<string> GetPrinters()
         {
@@ -161,6 +183,55 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._05_PrintLabel
         private void uc305_PrintLabelMain_Load(object sender, EventArgs e)
         {
             printers = GetPrinters();
+        }
+
+        private void btnDeviceManagement_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var dataDefault = new
+            {
+                NameVN = "{NameVN}",
+                NameTW = "{NameTW}",
+                Code = "{Code}",
+                Dept = "{Dept}",
+                UserVN = "{UserVN}",
+                UserTW = "{UserTW}"
+            };
+            var lsFixedAssests = new List<object>();
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Excel Files|*.xlsx";
+            dialog.Title = "Select data";
+            dialog.Multiselect = false;
+
+            if (dialog.ShowDialog() != DialogResult.OK)
+            {
+                lsFixedAssests.Add(dataDefault);
+            }
+            else
+            {
+                DataTable data = ExcelToDataSet(dialog.FileName).Tables[0];
+
+               var aaaa= data.Rows[0][columnName: "NameVN"].ToString();
+
+                foreach (DataRow row in data.Rows)
+                {
+                    var dataLine = new
+                    {
+                        NameVN = row["NameVN"] != DBNull.Value ? row["NameVN"].ToString() : null,
+                        NameTW = row["NameTW"] != DBNull.Value ? row["NameTW"].ToString() : null,
+                        Code = row["Code"] != DBNull.Value ? row["Code"].ToString() : null,
+                        Dept = row["Dept"] != DBNull.Value ? row["Dept"].ToString() : null,
+                        UserVN = row["UserVN"] != DBNull.Value ? row["UserVN"].ToString() : null,
+                        UserTW = row["UserTW"] != DBNull.Value ? row["UserTW"].ToString() : null
+                    };
+                    lsFixedAssests.Add(dataLine);
+                }
+            }
+
+            var report = new rpDeviceManagement();
+            report.DataSource = lsFixedAssests;
+            report.CreateDocument();
+            report.PrintingSystem.ShowMarginsWarning = false;
+            docViewerLabel.DocumentSource = report;
         }
     }
 }
