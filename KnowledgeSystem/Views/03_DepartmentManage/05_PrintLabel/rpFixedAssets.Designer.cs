@@ -505,10 +505,10 @@
             this.Dpi = 254F;
             this.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margins = new System.Drawing.Printing.Margins(0, 0, 0, 0);
-            this.PageHeight = 500;
-            this.PageWidth = 1001;
+            this.PageHeight = 521;
+            this.PageWidth = 991;
             this.PaperKind = System.Drawing.Printing.PaperKind.Custom;
-            this.PaperName = "100mmX50mmRateLabel";
+            this.PaperName = "990mmX52mm";
             this.ReportUnit = DevExpress.XtraReports.UI.ReportUnit.TenthsOfAMillimeter;
             this.ShowPreviewMarginLines = false;
             this.SnapGridSize = 25F;

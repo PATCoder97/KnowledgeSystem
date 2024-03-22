@@ -130,7 +130,7 @@ namespace KnowledgeSystem.Views._00_Generals
             AppPermission.WorkManagementMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleWorkManagementMain").ValueT);
             AppPermission.JFEnCSCMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "JFEnCSCMain").ValueT);
             AppPermission.ISOAuditDocsMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "ISOAuditDocsMain").ValueT);
-            AppPermission.TechnicalPrjMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "TechnicalPrjMain").ValueT);
+       //     AppPermission.TechnicalPrjMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "TechnicalPrjMain").ValueT);
         }
 
         private void fMain_Load(object sender, EventArgs e)

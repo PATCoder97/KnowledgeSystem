@@ -219,6 +219,12 @@
     <Compile Include="Views\03_DepartmentManage\04_BorrVehicle\uc304_BorrVehicleMain.Designer.cs">
       <DependentUpon>uc304_BorrVehicleMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\03_DepartmentManage\05_PrintLabel\rpDeviceManagement.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\05_PrintLabel\rpDeviceManagement.Designer.cs">
+      <DependentUpon>rpDeviceManagement.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\03_DepartmentManage\05_PrintLabel\rpFixedAssets.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -562,6 +568,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\04_BorrVehicle\uc304_BorrVehicleMain.resx">
       <DependentUpon>uc304_BorrVehicleMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\05_PrintLabel\rpDeviceManagement.resx">
+      <DependentUpon>rpDeviceManagement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\05_PrintLabel\rpFixedAssets.resx">
       <DependentUpon>rpFixedAssets.cs</DependentUpon>

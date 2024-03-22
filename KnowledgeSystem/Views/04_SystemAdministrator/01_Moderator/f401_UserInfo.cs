@@ -186,7 +186,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             bool role301Main = AppPermission.Instance.CheckAppPermission(AppPermission.SafetyCertMain);
             bool roleEditUserJobAndDept = AppPermission.Instance.CheckAppPermission(AppPermission.EditUserJobAndDept);
 
-            if (!(role301Main && roleEditUserJobAndDept && TPConfigs.IdParentControl == AppPermission.SafetyCertMain))
+            if (!(role301Main && roleEditUserJobAndDept &&
+                (TPConfigs.IdParentControl == AppPermission.SafetyCertMain || TPConfigs.IdParentControl == AppPermission.SysAdmin)))
             {
                 btnPersonnelChanges.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
 
@@ -241,7 +242,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                     userInfo = new dm_User();
                     break;
                 case EventFormInfo.View:
-                    userInfo.DisplayName = userInfo.DisplayName.Split('\n')[0];
+                    userInfo.DisplayName = userInfo.DisplayName.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries)[0];
                     userInfo.DateCreate = DateTime.Parse(userInfo.DateCreate.ToShortDateString());
 
                     txbUserId.EditValue = userInfo.Id;
@@ -761,7 +762,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                 string password = EncryptionHelper.DecryptPass(userInfo.SecondaryPassword);
                 XtraMessageBox.Show(password);
                 if (string.IsNullOrWhiteSpace(password)) return;
-                
+
                 Clipboard.SetText(password);
             }
         }
