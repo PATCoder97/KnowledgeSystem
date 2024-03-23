@@ -1,4 +1,6 @@
-﻿using DevExpress.XtraEditors;
+﻿using BusinessLayer;
+using DataAccessLayer;
+using DevExpress.XtraEditors;
 using KnowledgeSystem.Helpers;
 using System;
 using System.Collections.Generic;
@@ -23,6 +25,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
         public EventFormInfo eventInfo = EventFormInfo.Create;
         public int indexTypeVehicle = 0;
         public VehicleStatus vehicleStatus;
+        public string licExpDate = "";
+        public string borrTime = "";
+
         int startKm = 0;
 
         private void InitializeIcon()
@@ -43,7 +48,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
             cbbTypeVehicle.SelectedIndex = indexTypeVehicle;
 
             cbbPurpose.Properties.Items.AddRange(purposes);
-            cbbPurpose.SelectedIndex = indexTypeVehicle;
+            cbbPurpose.SelectedIndex = 0;
 
             switch (indexTypeVehicle)
             {
@@ -51,6 +56,14 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
                     vehicleInfo = (await BorrVehicleHelper.Instance.GetBorrMotorUser(vehicleStatus)).FirstOrDefault();
 
                     string lastKm = await BorrVehicleHelper.Instance.GetLastKmMotor(vehicleStatus.Name);
+                    int.TryParse(lastKm.Split('|')[0].Trim(), out startKm);
+
+                    txbStartKm.EditValue = startKm;
+                    break;
+                case 1:
+                    vehicleInfo = (await BorrVehicleHelper.Instance.GetBorrCarUser(vehicleStatus)).FirstOrDefault();
+
+                    lastKm = await BorrVehicleHelper.Instance.GetLastKmCar(vehicleStatus.Name);
                     int.TryParse(lastKm.Split('|')[0].Trim(), out startKm);
 
                     txbStartKm.EditValue = startKm;
@@ -112,11 +125,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
             switch (cbbTypeVehicle.SelectedIndex)
             {
                 case 0:
-
                     txbNumUser.Enabled = true;
                     break;
                 case 1:
-
                     txbNumUser.Enabled = false;
                     break;
             }
@@ -127,10 +138,24 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
             string nameVehicle = txbName.EditValue?.ToString();
             string borrTime = timeBorrTime.DateTimeOffset.ToString("yyyyMMddHHmm");
             string purposes = $"{cbbPurpose.EditValue} {txbDescript.EditValue}";
-            string place = $"{txbFromPlace.EditValue}-{txbToPlace.EditValue}";
+
+            string fromPlace = txbFromPlace.Text;
+            string toPlace = txbToPlace.Text;
+            string place = $"{fromPlace}-{toPlace}";
             string numUser = txbNumUser.EditValue?.ToString() ?? "1";
 
-            bool result = await BorrVehicleHelper.Instance.BorrMotor(nameVehicle, startKm, borrTime, place, purposes, numUser);
+            bool result = false;
+
+            switch (cbbTypeVehicle.SelectedIndex)
+            {
+                case 0:
+                    result = await BorrVehicleHelper.Instance.BorrMotor(nameVehicle, startKm, borrTime, place, purposes, numUser);
+                    break;
+                case 1:
+                    result = await BorrVehicleHelper.Instance.BorrCar(nameVehicle, startKm, borrTime, fromPlace, toPlace, purposes, licExpDate);
+                    break;
+            }
+
             if (result)
             {
                 XtraMessageBox.Show("Mượn xe thành công!", TPConfigs.SoftNameTW);
@@ -147,6 +172,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
             int endKm = Convert.ToInt32(txbEndKm.EditValue);
             int totalKm = endKm - startKm;
 
+            bool result = false;
+
             if (totalKm < 0) return;
 
             if (XtraMessageBox.Show($"Bạn chắc chắn muốn trả xe: {nameVehicle}, với {totalKm} Km ?", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo) != DialogResult.Yes)
@@ -154,7 +181,16 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
                 return;
             }
 
-            bool result = await BorrVehicleHelper.Instance.BackMotor(nameVehicle, endKm, backTime, totalKm);
+            switch (cbbTypeVehicle.SelectedIndex)
+            {
+                case 0:
+                    result = await BorrVehicleHelper.Instance.BackMotor(nameVehicle, endKm, backTime, totalKm);
+                    break;
+                case 1:
+                    result = await BorrVehicleHelper.Instance.BackCar(nameVehicle, endKm,borrTime, backTime, totalKm);
+                    break;
+            }
+
             if (result)
             {
                 Close();

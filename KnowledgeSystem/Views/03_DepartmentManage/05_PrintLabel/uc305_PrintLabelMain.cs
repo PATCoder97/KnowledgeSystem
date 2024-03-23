@@ -196,7 +196,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._05_PrintLabel
                 UserVN = "{UserVN}",
                 UserTW = "{UserTW}"
             };
-            var lsFixedAssests = new List<object>();
+
+            var devices = new List<object>();
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = "Excel Files|*.xlsx";
             dialog.Title = "Select data";
@@ -204,13 +205,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._05_PrintLabel
 
             if (dialog.ShowDialog() != DialogResult.OK)
             {
-                lsFixedAssests.Add(dataDefault);
+                devices.Add(dataDefault);
             }
             else
             {
                 DataTable data = ExcelToDataSet(dialog.FileName).Tables[0];
-
-               var aaaa= data.Rows[0][columnName: "NameVN"].ToString();
 
                 foreach (DataRow row in data.Rows)
                 {
@@ -223,12 +222,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._05_PrintLabel
                         UserVN = row["UserVN"] != DBNull.Value ? row["UserVN"].ToString() : null,
                         UserTW = row["UserTW"] != DBNull.Value ? row["UserTW"].ToString() : null
                     };
-                    lsFixedAssests.Add(dataLine);
+                    devices.Add(dataLine);
                 }
             }
 
             var report = new rpDeviceManagement();
-            report.DataSource = lsFixedAssests;
+            report.DataSource = devices;
             report.CreateDocument();
             report.PrintingSystem.ShowMarginsWarning = false;
             docViewerLabel.DocumentSource = report;

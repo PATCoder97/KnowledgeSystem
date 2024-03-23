@@ -65,5 +65,6 @@ namespace DataAccessLayer
         public virtual DbSet<dm_Sign> dm_Sign { get; set; }
         public virtual DbSet<dm_DeptGroups> dm_DeptGroups { get; set; }
         public virtual DbSet<dt201_Base> dt201_Base { get; set; }
+        public virtual DbSet<dm_DrivingLic> dm_DrivingLic { get; set; }
     }
 }

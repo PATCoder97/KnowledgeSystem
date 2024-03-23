@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="dm\dm_DeptBUS.cs" />
+    <Compile Include="dm\dm_DrivingLicBUS.cs" />
     <Compile Include="dm\dm_FunctionBUS.cs" />
     <Compile Include="dm\dm_FunctionRoleBUS.cs" />
     <Compile Include="dm\dm_GroupBUS.cs" />

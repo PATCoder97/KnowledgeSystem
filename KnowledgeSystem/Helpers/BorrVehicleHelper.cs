@@ -245,6 +245,18 @@ namespace KnowledgeSystem.Helpers
             }
         }
 
+        public async Task<string> GetLastKmCar(string nameVehicle)
+        {
+            using (var httpClient = new HttpClient(new HttpClientHandler { Proxy = proxy }))
+            {
+                httpClient.BaseAddress = baseUrl;
+                var response = await httpClient.GetAsync($"s51/{nameVehicle}");
+                response.EnsureSuccessStatusCode();
+
+                return await response.Content.ReadAsStringAsync();
+            }
+        }
+
         public async Task<bool> BorrMotor(string nameVehicle, int startKm, string borrTime, string place, string purposes, string numUser)
         {
             string managerVehicle = await GetManagerVehicle(nameVehicle);
@@ -275,6 +287,49 @@ namespace KnowledgeSystem.Helpers
                 httpClient.BaseAddress = baseUrl;
 
                 string parameter = $"s36/{nameVehicle}vkv{backTime}vkv{endKm}vkv{DateTime.Now.ToString("yyyyMMddHHmm")}vkv{totalKm}vkv{userBackUrl}";
+
+                var response = await httpClient.GetAsync(parameter);
+                response.EnsureSuccessStatusCode();
+
+                string content = await response.Content.ReadAsStringAsync();
+
+                return content == "ok";
+            }
+        }
+
+        public async Task<bool> BorrCar(string nameVehicle, int startKm, string borrTime, string fromPlace, string toPlace, string purposes, string licExpDate)
+        {
+            string managerVehicle = await GetManagerVehicle(nameVehicle);
+            var purposesUrl = HttpUtility.UrlEncode(purposes).Replace("+", "%20").ToUpper();
+            var formPlaceUrl = HttpUtility.UrlEncode(fromPlace).Replace("+", "%20").ToUpper();
+            var toPlaceUrl = HttpUtility.UrlEncode(toPlace).Replace("+", "%20").ToUpper();
+
+            using (var httpClient = new HttpClient(new HttpClientHandler { Proxy = proxy }))
+            {
+                httpClient.BaseAddress = baseUrl;
+
+                string parameter = $"s46/{nameVehicle}vkv{TPConfigs.LoginUser.Id}vkv{idDept2word}vkv{startKm}vkvvkv{borrTime}vkvvkv{formPlaceUrl}vkv{toPlaceUrl}vkv{purposesUrl}vkvYvkvvkvvkv{licExpDate}vkvYvkvYvkvYvkvvkvvkvvkvvkv{DateTime.Now.ToString("yyyyMMddHHmm")}vkv{managerVehicle}";
+
+                return true;
+
+                var response = await httpClient.GetAsync(parameter);
+                response.EnsureSuccessStatusCode();
+
+                string content = await response.Content.ReadAsStringAsync();
+
+                return content == "ok";
+            }
+        }
+
+        public async Task<bool> BackCar(string nameVehicle, int endKm, string borrTime, string backTime, int totalKm)
+        {
+            var userBackUrl = HttpUtility.UrlEncode($"{TPConfigs.LoginUser.Id}{TPConfigs.LoginUser.DisplayName}").Replace("+", "%20").ToUpper();
+
+            using (var httpClient = new HttpClient(new HttpClientHandler { Proxy = proxy }))
+            {
+                httpClient.BaseAddress = baseUrl;
+
+                string parameter = $"s47/{nameVehicle}vkv{borrTime}vkv{userBackUrl}vkv{backTime}vkv{endKm}vkv{totalKm}vkvYvkv0vkvvkvvkvNvkv0";
 
                 var response = await httpClient.GetAsync(parameter);
                 response.EnsureSuccessStatusCode();

@@ -45,6 +45,7 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_Sign" Width="1.5" PointX="20" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_DeptGroups" Width="1.5" PointX="21.625" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_Base" Width="1.5" PointX="0.5" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_DrivingLic" Width="1.5" PointX="23.25" PointY="0.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

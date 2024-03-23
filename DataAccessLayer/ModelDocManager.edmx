@@ -31,6 +31,16 @@
           <Property Name="IdDept" Type="varchar" MaxLength="4" Nullable="false" />
           <Property Name="DisplayName" Type="nvarchar" MaxLength="64" Nullable="false" />
         </EntityType>
+        <EntityType Name="dm_DrivingLic">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Class" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="No" Type="varchar" MaxLength="16" />
+          <Property Name="Exprires" Type="date" Nullable="false" />
+        </EntityType>
         <EntityType Name="dm_Function">
           <Key>
             <PropertyRef Name="Id" />
@@ -435,6 +445,7 @@
           <EntitySet Name="dm_Attachment" EntityType="Self.dm_Attachment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dm_Departments" EntityType="Self.dm_Departments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dm_DeptGroups" EntityType="Self.dm_DeptGroups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dm_DrivingLic" EntityType="Self.dm_DrivingLic" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dm_Function" EntityType="Self.dm_Function" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dm_FunctionRole" EntityType="Self.dm_FunctionRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dm_Group" EntityType="Self.dm_Group" Schema="dbo" store:Type="Tables" />
@@ -518,6 +529,7 @@
           <EntitySet Name="dm_Sign" EntityType="DBDocumentManagementSystemModel.dm_Sign" />
           <EntitySet Name="dm_DeptGroups" EntityType="DBDocumentManagementSystemModel.dm_DeptGroups" />
           <EntitySet Name="dt201_Base" EntityType="DBDocumentManagementSystemModel.dt201_Base" />
+          <EntitySet Name="dm_DrivingLic" EntityType="DBDocumentManagementSystemModel.dm_DrivingLic" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -944,6 +956,16 @@
           <Property Name="IdGroup" Type="Int32" Nullable="false" />
           <Property Name="DocCode" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
           <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dm_DrivingLic">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Class" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="No" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="Exprires" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1413,6 +1435,17 @@
                 <ScalarProperty Name="DocCode" ColumnName="DocCode" />
                 <ScalarProperty Name="IdGroup" ColumnName="IdGroup" />
                 <ScalarProperty Name="IdParent" ColumnName="IdParent" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dm_DrivingLic">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_DrivingLic">
+              <MappingFragment StoreEntitySet="dm_DrivingLic">
+                <ScalarProperty Name="Exprires" ColumnName="Exprires" />
+                <ScalarProperty Name="No" ColumnName="No" />
+                <ScalarProperty Name="Class" ColumnName="Class" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

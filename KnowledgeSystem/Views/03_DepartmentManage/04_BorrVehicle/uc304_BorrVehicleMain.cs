@@ -1,4 +1,6 @@
-﻿using DevExpress.Utils.Menu;
+﻿using BusinessLayer;
+using DataAccessLayer;
+using DevExpress.Utils.Menu;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Items.ViewInfo;
@@ -26,6 +28,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
         DXMenuItem itemViewInfo;
         DXMenuItem itemBorrVehicle;
         DXMenuItem itemBackVehicle;
+
+        List<dm_DrivingLic> drivingLics;
 
         private void InitializeMenuItems()
         {
@@ -63,6 +67,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
             f304_BorrVehicleInfo frm = new f304_BorrVehicleInfo();
             frm.indexTypeVehicle = cbbTypeVehicle.SelectedIndex;
             frm.vehicleStatus = status;
+            frm.licExpDate = drivingLics.FirstOrDefault().Exprires.ToString("yyyyMMdd");
+
             frm.ShowDialog();
 
             LoadDataVehicle();
@@ -140,6 +146,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
             gvInfo.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
 
             cbbTypeVehicle.Properties.Items.AddRange(TPConfigs.typeVehicles);
+
+            drivingLics = dm_DrivingLicBUS.Instance.GetList().Where(r => !r.Class.StartsWith("A") && r.UserID == TPConfigs.LoginUser.Id).ToList();
         }
 
         private void cbbTypeVehicle_SelectedIndexChanged(object sender, EventArgs e)
@@ -162,7 +170,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
                 {
                     e.Menu.Items.Add(itemBackVehicle);
                 }
-                else if (string.IsNullOrWhiteSpace(status.IdUserBorr))
+                else if (string.IsNullOrWhiteSpace(status.IdUserBorr) && drivingLics.Count > 0)
                 {
                     e.Menu.Items.Add(itemBorrVehicle);
                 }
