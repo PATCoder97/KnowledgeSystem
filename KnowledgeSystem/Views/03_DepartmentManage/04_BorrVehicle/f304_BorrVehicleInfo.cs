@@ -187,7 +187,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
                     result = await BorrVehicleHelper.Instance.BackMotor(nameVehicle, endKm, backTime, totalKm);
                     break;
                 case 1:
-                    result = await BorrVehicleHelper.Instance.BackCar(nameVehicle, endKm,borrTime, backTime, totalKm);
+                    DateTime dateTime = DateTime.ParseExact(borrTime, "yyyy/MM/dd HH:mm", System.Globalization.CultureInfo.InvariantCulture);
+                    string formattedBorrTime = dateTime.ToString("yyyyMMddHHmm");
+
+                    result = await BorrVehicleHelper.Instance.BackCar(nameVehicle, endKm, formattedBorrTime, backTime, totalKm);
                     break;
             }
 

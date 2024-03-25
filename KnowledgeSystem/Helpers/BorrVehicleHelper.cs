@@ -310,7 +310,7 @@ namespace KnowledgeSystem.Helpers
 
                 string parameter = $"s46/{nameVehicle}vkv{TPConfigs.LoginUser.Id}vkv{idDept2word}vkv{startKm}vkvvkv{borrTime}vkvvkv{formPlaceUrl}vkv{toPlaceUrl}vkv{purposesUrl}vkvYvkvvkvvkv{licExpDate}vkvYvkvYvkvYvkvvkvvkvvkvvkv{DateTime.Now.ToString("yyyyMMddHHmm")}vkv{managerVehicle}";
 
-                return true;
+                //return true;
 
                 var response = await httpClient.GetAsync(parameter);
                 response.EnsureSuccessStatusCode();

@@ -55,6 +55,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
             frm.eventInfo = EventFormInfo.Update;
             frm.indexTypeVehicle = cbbTypeVehicle.SelectedIndex;
             frm.vehicleStatus = status;
+            frm.borrTime = status.BorrTime;
             frm.ShowDialog();
 
             LoadDataVehicle();
