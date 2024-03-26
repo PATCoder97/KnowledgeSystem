@@ -30,6 +30,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
         DXMenuItem itemBackVehicle;
 
         List<dm_DrivingLic> drivingLics;
+        List<dm_DrivingLic> carDrivingLics;
 
         private void InitializeMenuItems()
         {
@@ -68,7 +69,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
             f304_BorrVehicleInfo frm = new f304_BorrVehicleInfo();
             frm.indexTypeVehicle = cbbTypeVehicle.SelectedIndex;
             frm.vehicleStatus = status;
-            frm.licExpDate = drivingLics.FirstOrDefault().Exprires.ToString("yyyyMMdd");
+            frm.licExpDate = carDrivingLics.FirstOrDefault()?.Exprires.ToString("yyyyMMdd") ?? "";
 
             frm.ShowDialog();
 
@@ -148,7 +149,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
 
             cbbTypeVehicle.Properties.Items.AddRange(TPConfigs.typeVehicles);
 
-            drivingLics = dm_DrivingLicBUS.Instance.GetList().Where(r => !r.Class.StartsWith("A") && r.UserID == TPConfigs.LoginUser.Id).ToList();
+            drivingLics = dm_DrivingLicBUS.Instance.GetList().Where(r => r.UserID == TPConfigs.LoginUser.Id).ToList();
+            carDrivingLics = drivingLics.Where(r => !r.Class.StartsWith("A")).ToList();
         }
 
         private void cbbTypeVehicle_SelectedIndexChanged(object sender, EventArgs e)
@@ -167,11 +169,15 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
 
                 e.Menu.Items.Add(itemViewInfo);
 
-                if (status.IdUserBorr == TPConfigs.LoginUser.Id && !string.IsNullOrWhiteSpace(status.IdUserBorr))
+                bool IsUserBorr = !string.IsNullOrWhiteSpace(status.IdUserBorr) && status.IdUserBorr == TPConfigs.LoginUser.Id;
+                bool CanBorr = string.IsNullOrWhiteSpace(status.IdUserBorr);
+                bool CheckDrivingLic = cbbTypeVehicle.SelectedIndex == 1 && carDrivingLics.Count > 0 || cbbTypeVehicle.SelectedIndex == 0;
+
+                if (IsUserBorr)
                 {
                     e.Menu.Items.Add(itemBackVehicle);
                 }
-                else if (string.IsNullOrWhiteSpace(status.IdUserBorr) && drivingLics.Count > 0)
+                else if (CanBorr && CheckDrivingLic)
                 {
                     e.Menu.Items.Add(itemBorrVehicle);
                 }

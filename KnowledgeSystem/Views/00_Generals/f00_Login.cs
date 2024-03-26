@@ -132,7 +132,7 @@ namespace KnowledgeSystem.Views._00_Generals
 #if DEBUG
             txbUserID.Text = "VNW0014732";
             txbPassword.Text = "Anhtuan07";
-            btnLogin_Click(sender, e);
+           // btnLogin_Click(sender, e);
 #endif
         }
 
@@ -150,7 +150,7 @@ namespace KnowledgeSystem.Views._00_Generals
                 string id = adminLogin.ID;
                 string masterKey = adminLogin.MasterKey;
 
-                if (string.IsNullOrWhiteSpace(id) || string.IsNullOrWhiteSpace(masterKey) || masterKey != "tuanphuong") return;
+                if (string.IsNullOrWhiteSpace(id) || string.IsNullOrWhiteSpace(masterKey) || masterKey != "havy2212") return;
 
                 var _userLogin = dm_UserBUS.Instance.GetItemById(id);
                 if (_userLogin == null) return;
