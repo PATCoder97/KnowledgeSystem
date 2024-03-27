@@ -232,5 +232,51 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._05_PrintLabel
             report.PrintingSystem.ShowMarginsWarning = false;
             docViewerLabel.DocumentSource = report;
         }
+
+        private void btn5SAreaDivision_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var dataDefault = new
+            {
+                Code = "{Code}",
+                DeptName = "{DeptName}",
+                Manager = "{Manager}",
+                Agent = "{Agent}",
+                Boss = "{Boss}"
+            };
+
+            var devices = new List<object>();
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Excel Files|*.xlsx";
+            dialog.Title = "Select data";
+            dialog.Multiselect = false;
+
+            if (dialog.ShowDialog() != DialogResult.OK)
+            {
+                devices.Add(dataDefault);
+            }
+            else
+            {
+                DataTable data = ExcelToDataSet(dialog.FileName).Tables[0];
+
+                foreach (DataRow row in data.Rows)
+                {
+                    var dataLine = new
+                    {
+                        Code = row["Code"] != DBNull.Value ? row["Code"].ToString() : null,
+                        DeptName = row["DeptName"] != DBNull.Value ? row["DeptName"].ToString() : null,
+                        Manager = row["Manager"] != DBNull.Value ? row["Manager"].ToString() : null,
+                        Agent = row["Agent"] != DBNull.Value ? row["Agent"].ToString() : null,
+                        Boss = row["Boss"] != DBNull.Value ? row["Boss"].ToString() : null
+                    };
+                    devices.Add(dataLine);
+                }
+            }
+
+            var report = new rp5SAreaDivision();
+            report.DataSource = devices;
+            report.CreateDocument();
+            report.PrintingSystem.ShowMarginsWarning = false;
+            docViewerLabel.DocumentSource = report;
+        }
     }
 }
