@@ -1,4 +1,6 @@
-﻿using DevExpress.XtraEditors;
+﻿using BusinessLayer;
+using DataAccessLayer;
+using DevExpress.XtraEditors;
 using DocumentFormat.OpenXml.Spreadsheet;
 using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.parser;
@@ -53,7 +55,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._03_ShiftSchedule
         Dictionary<string, string> shiftDatas;
         string pathShiftData = "";
         int indexUsr = 1;
+
+        string userFocus = "";
+
         List<string> usrs = new List<string>();
+        List<dm_User> usersDB;
 
         static string GenerateERPString(string original, int numTab)
         {
@@ -84,6 +90,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._03_ShiftSchedule
             //btnEdit.Enabled = false;
 
             lbUser.Text = "";
+
+            usersDB = dm_UserBUS.Instance.GetList();
         }
 
         private void btnPdf_Click(object sender, EventArgs e)
@@ -191,6 +199,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._03_ShiftSchedule
 
                     outputString = GenerateERPString(outputString, numTab);
 
+                    //// Chuyển ca 日班 thành GO khi có nhân viên đi ca về ca 日
+                    //outputString = outputString.Replace("日班", "GO");
+
                     if (!outputString.Contains("班"))
                         shiftDatas.Add(userID, outputString);
                 }
@@ -213,7 +224,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._03_ShiftSchedule
                 else
                 {
                     txbIndex.EditValue = $"{indexUsr}/{shiftDatas.Count}";
-                    lbUser.Text = usrs[indexUsr - 1];
+
+                    string userID = usrs[indexUsr - 1];
+                    string userName = usersDB.FirstOrDefault(r => r.Id == userID)?.DisplayName;
+                    lbUser.Text = $"{userID} {userName}";
+                    userFocus = userID;
 
                     btnExcel.Enabled = false;
                     btnPdf.Enabled = false;
@@ -233,7 +248,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._03_ShiftSchedule
 
             indexUsr--;
             txbIndex.EditValue = $"{indexUsr}/{shiftDatas.Count}";
-            lbUser.Text = usrs[indexUsr - 1];
+
+            string userID = usrs[indexUsr - 1];
+            string userName = usersDB.FirstOrDefault(r => r.Id == userID)?.DisplayName;
+            lbUser.Text = $"{userID} {userName}";
+            userFocus = userID;
         }
 
         private void btnNext_Click(object sender, EventArgs e)
@@ -242,12 +261,16 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._03_ShiftSchedule
 
             indexUsr++;
             txbIndex.EditValue = $"{indexUsr}/{shiftDatas.Count}";
-            lbUser.Text = usrs[indexUsr - 1];
+
+            string userID = usrs[indexUsr - 1];
+            string userName = usersDB.FirstOrDefault(r => r.Id == userID)?.DisplayName;
+            lbUser.Text = $"{userID} {userName}";
+            userFocus = userID;
         }
 
         private void btnDel_Click(object sender, EventArgs e)
         {
-            string user = lbUser.Text;
+            string user = userFocus;
             string data = string.Join("{Tab}", new string[31].Select(_ => "{DEL}"));
 
             SendKeys.SendWait($"LG{user}");
@@ -263,7 +286,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._03_ShiftSchedule
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            string user = lbUser.Text;
+            string user = userFocus;
             string data = shiftDatas[user];
 
             SendKeys.SendWait($"LG{user}");
@@ -284,7 +307,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._03_ShiftSchedule
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            string user = lbUser.Text;
+            string user = userFocus;
             string data = shiftDatas[user];
 
             SendKeys.SendWait($"LG{user}");
@@ -335,7 +358,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._03_ShiftSchedule
                 SendKeys.SendWait("{DEL}");
                 Thread.Sleep(200);
             }
-            
+
             SendKeys.SendWait(shift);
             Thread.Sleep(200);
         }
