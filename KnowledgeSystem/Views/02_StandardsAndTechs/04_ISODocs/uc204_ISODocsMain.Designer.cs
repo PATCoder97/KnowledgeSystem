@@ -1,6 +1,6 @@
-﻿namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
+﻿namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_ISODocs
 {
-    partial class uc201_ISOAuditDocsMain
+    partial class uc204_ISODocsMain
     {
         /// <summary> 
         /// Required designer variable.
@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
             DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc201_ISOAuditDocsMain));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc204_ISODocsMain));
             this.gvVersion = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -52,29 +52,29 @@
             this.gColIdFile = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gvForm = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnAdd = new DevExpress.XtraBars.BarButtonItem();
             this.btnReload = new DevExpress.XtraBars.BarButtonItem();
             this.btnExportExcel = new DevExpress.XtraBars.BarButtonItem();
+            this.barEditItem1 = new DevExpress.XtraBars.BarEditItem();
+            this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-            this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.barEditItem1 = new DevExpress.XtraBars.BarEditItem();
-            this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.gvVersion)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvForm)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -103,10 +103,6 @@
             this.gvVersion.OptionsView.ColumnAutoWidth = false;
             this.gvVersion.OptionsView.ShowGroupPanel = false;
             this.gvVersion.OptionsView.ShowIndicator = false;
-            this.gvVersion.MasterRowEmpty += new DevExpress.XtraGrid.Views.Grid.MasterRowEmptyEventHandler(this.gvVersion_MasterRowEmpty);
-            this.gvVersion.MasterRowGetChildList += new DevExpress.XtraGrid.Views.Grid.MasterRowGetChildListEventHandler(this.gvVersion_MasterRowGetChildList);
-            this.gvVersion.MasterRowGetRelationName += new DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationNameEventHandler(this.gvView_MasterRowGetRelationName);
-            this.gvVersion.MasterRowGetRelationCount += new DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationCountEventHandler(this.gvView_MasterRowGetRelationCount);
             // 
             // gridColumn8
             // 
@@ -157,7 +153,7 @@
             this.gcData.Location = new System.Drawing.Point(12, 12);
             this.gcData.MainView = this.gvData;
             this.gcData.Name = "gcData";
-            this.gcData.Size = new System.Drawing.Size(1067, 583);
+            this.gcData.Size = new System.Drawing.Size(953, 526);
             this.gcData.TabIndex = 5;
             this.gcData.UseEmbeddedNavigator = true;
             this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -201,10 +197,6 @@
             this.gvData.OptionsView.EnableAppearanceOddRow = true;
             this.gvData.OptionsView.ShowAutoFilterRow = true;
             this.gvData.OptionsView.ShowGroupPanel = false;
-            this.gvData.MasterRowEmpty += new DevExpress.XtraGrid.Views.Grid.MasterRowEmptyEventHandler(this.gvData_MasterRowEmpty);
-            this.gvData.MasterRowGetChildList += new DevExpress.XtraGrid.Views.Grid.MasterRowGetChildListEventHandler(this.gvData_MasterRowGetChildList);
-            this.gvData.MasterRowGetRelationName += new DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationNameEventHandler(this.gvView_MasterRowGetRelationName);
-            this.gvData.MasterRowGetRelationCount += new DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationCountEventHandler(this.gvView_MasterRowGetRelationCount);
             // 
             // gColId
             // 
@@ -333,6 +325,36 @@
             this.gridColumn13.Visible = true;
             this.gridColumn13.VisibleIndex = 0;
             // 
+            // layoutControl1
+            // 
+            this.layoutControl1.Controls.Add(this.gcData);
+            this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.layoutControl1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControl1.Name = "layoutControl1";
+            this.layoutControl1.Root = this.Root;
+            this.layoutControl1.Size = new System.Drawing.Size(977, 550);
+            this.layoutControl1.TabIndex = 5;
+            this.layoutControl1.Text = "layoutControl1";
+            // 
+            // Root
+            // 
+            this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            this.Root.GroupBordersVisible = false;
+            this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem1});
+            this.Root.Name = "Root";
+            this.Root.Size = new System.Drawing.Size(977, 550);
+            this.Root.TextVisible = false;
+            // 
+            // layoutControlItem1
+            // 
+            this.layoutControlItem1.Control = this.gcData;
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem1.Name = "layoutControlItem1";
+            this.layoutControlItem1.Size = new System.Drawing.Size(957, 530);
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem1.TextVisible = false;
+            // 
             // barManagerTP
             // 
             this.barManagerTP.Bars.AddRange(new DevExpress.XtraBars.Bar[] {
@@ -395,7 +417,6 @@
             this.btnAdd.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdd.ItemAppearance.Normal.Options.UseFont = true;
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAdd_ItemClick);
             // 
             // btnReload
             // 
@@ -418,68 +439,6 @@
             this.btnExportExcel.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExportExcel.ItemAppearance.Normal.Options.UseFont = true;
             this.btnExportExcel.Name = "btnExportExcel";
-            // 
-            // barDockControlTop
-            // 
-            this.barDockControlTop.CausesValidation = false;
-            this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlTop.Manager = this.barManagerTP;
-            this.barDockControlTop.Size = new System.Drawing.Size(1091, 49);
-            // 
-            // barDockControlBottom
-            // 
-            this.barDockControlBottom.CausesValidation = false;
-            this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 656);
-            this.barDockControlBottom.Manager = this.barManagerTP;
-            this.barDockControlBottom.Size = new System.Drawing.Size(1091, 0);
-            // 
-            // barDockControlLeft
-            // 
-            this.barDockControlLeft.CausesValidation = false;
-            this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.barDockControlLeft.Location = new System.Drawing.Point(0, 49);
-            this.barDockControlLeft.Manager = this.barManagerTP;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 607);
-            // 
-            // barDockControlRight
-            // 
-            this.barDockControlRight.CausesValidation = false;
-            this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1091, 49);
-            this.barDockControlRight.Manager = this.barManagerTP;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 607);
-            // 
-            // layoutControl1
-            // 
-            this.layoutControl1.Controls.Add(this.gcData);
-            this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.layoutControl1.Location = new System.Drawing.Point(0, 49);
-            this.layoutControl1.Name = "layoutControl1";
-            this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(1091, 607);
-            this.layoutControl1.TabIndex = 4;
-            this.layoutControl1.Text = "layoutControl1";
-            // 
-            // Root
-            // 
-            this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
-            this.Root.GroupBordersVisible = false;
-            this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem1});
-            this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(1091, 607);
-            this.Root.TextVisible = false;
-            // 
-            // layoutControlItem1
-            // 
-            this.layoutControlItem1.Control = this.gcData;
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(1071, 587);
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem1.TextVisible = false;
             // 
             // barEditItem1
             // 
@@ -506,29 +465,61 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.repositoryItemComboBox1.Name = "repositoryItemComboBox1";
             // 
-            // uc201_ISOAuditDocsMain
+            // barDockControlTop
+            // 
+            this.barDockControlTop.CausesValidation = false;
+            this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
+            this.barDockControlTop.Manager = this.barManagerTP;
+            this.barDockControlTop.Size = new System.Drawing.Size(977, 49);
+            // 
+            // barDockControlBottom
+            // 
+            this.barDockControlBottom.CausesValidation = false;
+            this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 550);
+            this.barDockControlBottom.Manager = this.barManagerTP;
+            this.barDockControlBottom.Size = new System.Drawing.Size(977, 0);
+            // 
+            // barDockControlLeft
+            // 
+            this.barDockControlLeft.CausesValidation = false;
+            this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 49);
+            this.barDockControlLeft.Manager = this.barManagerTP;
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 501);
+            // 
+            // barDockControlRight
+            // 
+            this.barDockControlRight.CausesValidation = false;
+            this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
+            this.barDockControlRight.Location = new System.Drawing.Point(977, 49);
+            this.barDockControlRight.Manager = this.barManagerTP;
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 501);
+            // 
+            // uc204_ISODocsMain
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
             this.Appearance.Options.UseBackColor = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.layoutControl1);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.Name = "uc201_ISOAuditDocsMain";
-            this.Size = new System.Drawing.Size(1091, 656);
-            this.Load += new System.EventHandler(this.uc201_ISOAuditDocsMain_Load);
+            this.Controls.Add(this.layoutControl1);
+            this.Name = "uc204_ISODocsMain";
+            this.Size = new System.Drawing.Size(977, 550);
+            this.Load += new System.EventHandler(this.uc204_ISODocsMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gvVersion)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvForm)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -536,19 +527,15 @@
         }
 
         #endregion
-
-        private DevExpress.XtraBars.BarManager barManagerTP;
-        private DevExpress.XtraBars.Bar bar2;
-        private DevExpress.XtraBars.BarButtonItem btnAdd;
-        private DevExpress.XtraBars.BarButtonItem btnReload;
-        private DevExpress.XtraBars.BarButtonItem btnExportExcel;
-        private DevExpress.XtraBars.BarDockControl barDockControlTop;
-        private DevExpress.XtraBars.BarDockControl barDockControlBottom;
-        private DevExpress.XtraBars.BarDockControl barDockControlLeft;
-        private DevExpress.XtraBars.BarDockControl barDockControlRight;
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraGrid.GridControl gcData;
         private DevExpress.XtraGrid.Views.Grid.GridView gvVersion;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvForm;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
         private DevExpress.XtraGrid.Views.Grid.GridView gvData;
         private DevExpress.XtraGrid.Columns.GridColumn gColId;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
@@ -557,19 +544,22 @@
         private DevExpress.XtraGrid.Columns.GridColumn gColEnterDate;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
         private DevExpress.XtraGrid.Columns.GridColumn gColIdFile;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
-        private DevExpress.XtraGrid.Views.Grid.GridView gvForm;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
+        private DevExpress.XtraBars.BarManager barManagerTP;
+        private DevExpress.XtraBars.Bar bar2;
+        private DevExpress.XtraBars.BarButtonItem btnAdd;
+        private DevExpress.XtraBars.BarButtonItem btnReload;
+        private DevExpress.XtraBars.BarButtonItem btnExportExcel;
         private DevExpress.XtraBars.BarEditItem barEditItem1;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox1;
+        private DevExpress.XtraBars.BarDockControl barDockControlTop;
+        private DevExpress.XtraBars.BarDockControl barDockControlBottom;
+        private DevExpress.XtraBars.BarDockControl barDockControlLeft;
+        private DevExpress.XtraBars.BarDockControl barDockControlRight;
     }
 }

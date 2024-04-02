@@ -98,7 +98,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._03_TechnicalPrj
             var typeOf = new List<string>() { "系統流程優化", "資材成本降低", "產品品質提升", "生產製程改善", "檢驗技術開發", "客戶服務品質提升", "人事管理優化", "降低工安事故發生" };
             cbbTypeOf.Properties.Items.AddRange(typeOf);
 
-            cbbUnit.Properties.Items.AddRange(new string[] { "玩越盾", "USD", "仟元" });
+            cbbUnit.Properties.Items.AddRange(new string[] { "VND", "USD" });
             cbbUnit.SelectedIndex = 0;
 
             //switch (eventInfo)

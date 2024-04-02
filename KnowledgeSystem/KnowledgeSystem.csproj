@@ -207,6 +207,18 @@
     <Compile Include="Views\02_StandardsAndTechs\03_TechnicalPrj\uc203_TechnicalPrjBase.Designer.cs">
       <DependentUpon>uc203_TechnicalPrjBase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\04_ISODocs\f204_DocInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\04_ISODocs\f204_DocInfo.Designer.cs">
+      <DependentUpon>f204_DocInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\04_ISODocs\uc204_ISODocsMain.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\04_ISODocs\uc204_ISODocsMain.Designer.cs">
+      <DependentUpon>uc204_ISODocsMain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\03_DepartmentManage\04_BorrVehicle\f304_BorrVehicleInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -568,6 +580,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\03_TechnicalPrj\uc203_TechnicalPrjBase.resx">
       <DependentUpon>uc203_TechnicalPrjBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\02_StandardsAndTechs\04_ISODocs\f204_DocInfo.resx">
+      <DependentUpon>f204_DocInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\02_StandardsAndTechs\04_ISODocs\uc204_ISODocsMain.resx">
+      <DependentUpon>uc204_ISODocsMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\04_BorrVehicle\f304_BorrVehicleInfo.resx">
       <DependentUpon>f304_BorrVehicleInfo.cs</DependentUpon>
