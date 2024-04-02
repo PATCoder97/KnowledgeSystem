@@ -153,7 +153,7 @@
             this.gcData.Location = new System.Drawing.Point(12, 12);
             this.gcData.MainView = this.gvData;
             this.gcData.Name = "gcData";
-            this.gcData.Size = new System.Drawing.Size(953, 526);
+            this.gcData.Size = new System.Drawing.Size(953, 477);
             this.gcData.TabIndex = 5;
             this.gcData.UseEmbeddedNavigator = true;
             this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -221,7 +221,7 @@
             // 
             // gridColumn1
             // 
-            this.gridColumn1.Caption = "三階";
+            this.gridColumn1.Caption = "階";
             this.gridColumn1.FieldName = "DisplayName";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
@@ -329,10 +329,10 @@
             // 
             this.layoutControl1.Controls.Add(this.gcData);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.layoutControl1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(977, 550);
+            this.layoutControl1.Size = new System.Drawing.Size(977, 501);
             this.layoutControl1.TabIndex = 5;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -343,7 +343,7 @@
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem1});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(977, 550);
+            this.Root.Size = new System.Drawing.Size(977, 501);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem1
@@ -351,7 +351,7 @@
             this.layoutControlItem1.Control = this.gcData;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(957, 530);
+            this.layoutControlItem1.Size = new System.Drawing.Size(957, 481);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
@@ -417,6 +417,7 @@
             this.btnAdd.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdd.ItemAppearance.Normal.Options.UseFont = true;
             this.btnAdd.Name = "btnAdd";
+            this.btnAdd.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAdd_ItemClick_1);
             // 
             // btnReload
             // 
@@ -442,7 +443,7 @@
             // 
             // barEditItem1
             // 
-            this.barEditItem1.Caption = "實驗室";
+            this.barEditItem1.Caption = "文件別";
             this.barEditItem1.Edit = this.repositoryItemComboBox1;
             this.barEditItem1.EditWidth = 150;
             this.barEditItem1.Id = 11;
@@ -503,11 +504,11 @@
             this.Appearance.Options.UseBackColor = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.layoutControl1);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.Controls.Add(this.layoutControl1);
             this.Name = "uc204_ISODocsMain";
             this.Size = new System.Drawing.Size(977, 550);
             this.Load += new System.EventHandler(this.uc204_ISODocsMain_Load);

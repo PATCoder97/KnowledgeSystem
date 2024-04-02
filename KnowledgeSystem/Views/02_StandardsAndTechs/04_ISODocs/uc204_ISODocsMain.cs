@@ -37,7 +37,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_ISODocs
 
         }
 
-        private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private void btnAdd_ItemClick_1(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             f204_DocInfo fInfo = new f204_DocInfo();
             fInfo.ShowDialog();
