@@ -249,6 +249,12 @@
     <Compile Include="Views\03_DepartmentManage\05_PrintLabel\rpFixedAssets.Designer.cs">
       <DependentUpon>rpFixedAssets.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\03_DepartmentManage\05_PrintLabel\rpWasteLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\05_PrintLabel\rpWasteLabel.Designer.cs">
+      <DependentUpon>rpWasteLabel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\03_DepartmentManage\05_PrintLabel\uc305_PrintLabelMain.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -601,6 +607,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\05_PrintLabel\rpFixedAssets.resx">
       <DependentUpon>rpFixedAssets.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\05_PrintLabel\rpWasteLabel.resx">
+      <DependentUpon>rpWasteLabel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\05_PrintLabel\uc305_PrintLabelMain.resx">
       <DependentUpon>uc305_PrintLabelMain.cs</DependentUpon>

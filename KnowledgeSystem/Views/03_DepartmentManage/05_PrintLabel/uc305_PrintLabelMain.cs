@@ -25,6 +25,7 @@ using static DevExpress.XtraEditors.Mask.MaskSettings;
 using ExcelDataReader;
 using System.IO;
 using DevExpress.XtraPrinting.Native;
+using KnowledgeSystem.Helpers;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._05_PrintLabel
 {
@@ -274,6 +275,47 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._05_PrintLabel
 
             var report = new rp5SAreaDivision();
             report.DataSource = devices;
+            report.CreateDocument();
+            report.PrintingSystem.ShowMarginsWarning = false;
+            docViewerLabel.DocumentSource = report;
+        }
+
+        private void btnWasteLabel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            XtraInputBoxArgs args = new XtraInputBoxArgs();
+
+            args.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
+            args.Caption = TPConfigs.SoftNameTW;
+            args.Prompt = $"<font='Microsoft JhengHei UI' size=14>請輸入數量</font>";
+            args.DefaultButtonIndex = 0;
+            TextEdit editor = new TextEdit();
+            editor.Properties.DisplayFormat.FormatString = "n0";
+            editor.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            editor.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
+            editor.Properties.MaskSettings.Set("mask", "n0");
+
+            args.Editor = editor;
+
+            editor.Properties.Appearance.Font = fontUI14;
+            editor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            editor.Properties.NullText = "";
+
+            var result = XtraInputBox.Show(args);
+            if (result == null) return;
+
+            int numLabel = Convert.ToInt16(result?.ToString() ?? "1");
+
+            object[] labels = Enumerable.Range(0, numLabel)
+                                     .Select(_ => new
+                                     {
+                                         NameVN = TPConfigs.LoginUser.DisplayNameVN,
+                                         NameTW = TPConfigs.LoginUser.DisplayName,
+                                         Dept = TPConfigs.LoginUser.IdDepartment,
+                                     })
+                                     .ToArray();
+
+            var report = new rpWasteLabel();
+            report.DataSource = labels;
             report.CreateDocument();
             report.PrintingSystem.ShowMarginsWarning = false;
             docViewerLabel.DocumentSource = report;

@@ -35,13 +35,14 @@
             this.btnLabelType = new DevExpress.XtraBars.BarSubItem();
             this.btnFixedAssets = new DevExpress.XtraBars.BarButtonItem();
             this.btnDeviceManagement = new DevExpress.XtraBars.BarButtonItem();
+            this.btn5SAreaDivision = new DevExpress.XtraBars.BarButtonItem();
             this.btnPrint = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.docViewerLabel = new DevExpress.XtraPrinting.Preview.DocumentViewer();
-            this.btn5SAreaDivision = new DevExpress.XtraBars.BarButtonItem();
+            this.btnWasteLabel = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,9 +62,10 @@
             this.btnPrint,
             this.btnLabelType,
             this.btnDeviceManagement,
-            this.btn5SAreaDivision});
+            this.btn5SAreaDivision,
+            this.btnWasteLabel});
             this.barManagerTP.MainMenu = this.bar2;
-            this.barManagerTP.MaxItemId = 7;
+            this.barManagerTP.MaxItemId = 8;
             // 
             // bar2
             // 
@@ -108,7 +110,8 @@
             this.btnLabelType.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.btnFixedAssets),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnDeviceManagement),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btn5SAreaDivision)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.btn5SAreaDivision),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnWasteLabel)});
             this.btnLabelType.Name = "btnLabelType";
             this.btnLabelType.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
             // 
@@ -130,7 +133,7 @@
             // 
             // btnDeviceManagement
             // 
-            this.btnDeviceManagement.Caption = "設備管理（99×52）";
+            this.btnDeviceManagement.Caption = "設備管理";
             this.btnDeviceManagement.Id = 5;
             this.btnDeviceManagement.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnDeviceManagement.ImageOptions.SvgImage")));
             this.btnDeviceManagement.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
@@ -142,6 +145,21 @@
             this.btnDeviceManagement.ItemAppearance.Normal.Options.UseForeColor = true;
             this.btnDeviceManagement.Name = "btnDeviceManagement";
             this.btnDeviceManagement.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDeviceManagement_ItemClick);
+            // 
+            // btn5SAreaDivision
+            // 
+            this.btn5SAreaDivision.Caption = "5S責任區劃分";
+            this.btn5SAreaDivision.Id = 6;
+            this.btn5SAreaDivision.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btn5SAreaDivision.ImageOptions.SvgImage")));
+            this.btn5SAreaDivision.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btn5SAreaDivision.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btn5SAreaDivision.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btn5SAreaDivision.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.btn5SAreaDivision.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
+            this.btn5SAreaDivision.ItemAppearance.Normal.Options.UseFont = true;
+            this.btn5SAreaDivision.ItemAppearance.Normal.Options.UseForeColor = true;
+            this.btn5SAreaDivision.Name = "btn5SAreaDivision";
+            this.btn5SAreaDivision.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btn5SAreaDivision_ItemClick);
             // 
             // btnPrint
             // 
@@ -204,20 +222,20 @@
             this.docViewerLabel.Size = new System.Drawing.Size(882, 486);
             this.docViewerLabel.TabIndex = 4;
             // 
-            // btn5SAreaDivision
+            // btnWasteLabel
             // 
-            this.btn5SAreaDivision.Caption = "5S責任區劃分（99×52）";
-            this.btn5SAreaDivision.Id = 6;
-            this.btn5SAreaDivision.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btn5SAreaDivision.ImageOptions.SvgImage")));
-            this.btn5SAreaDivision.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btn5SAreaDivision.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
-            this.btn5SAreaDivision.ItemAppearance.Hovered.Options.UseForeColor = true;
-            this.btn5SAreaDivision.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.btn5SAreaDivision.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
-            this.btn5SAreaDivision.ItemAppearance.Normal.Options.UseFont = true;
-            this.btn5SAreaDivision.ItemAppearance.Normal.Options.UseForeColor = true;
-            this.btn5SAreaDivision.Name = "btn5SAreaDivision";
-            this.btn5SAreaDivision.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btn5SAreaDivision_ItemClick);
+            this.btnWasteLabel.Caption = "廢棄物標籤";
+            this.btnWasteLabel.Id = 7;
+            this.btnWasteLabel.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnWasteLabel.ImageOptions.SvgImage")));
+            this.btnWasteLabel.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnWasteLabel.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnWasteLabel.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnWasteLabel.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.btnWasteLabel.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
+            this.btnWasteLabel.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnWasteLabel.ItemAppearance.Normal.Options.UseForeColor = true;
+            this.btnWasteLabel.Name = "btnWasteLabel";
+            this.btnWasteLabel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnWasteLabel_ItemClick);
             // 
             // uc305_PrintLabelMain
             // 
@@ -251,5 +269,6 @@
         private DevExpress.XtraPrinting.Preview.DocumentViewer docViewerLabel;
         private DevExpress.XtraBars.BarButtonItem btnDeviceManagement;
         private DevExpress.XtraBars.BarButtonItem btn5SAreaDivision;
+        private DevExpress.XtraBars.BarButtonItem btnWasteLabel;
     }
 }

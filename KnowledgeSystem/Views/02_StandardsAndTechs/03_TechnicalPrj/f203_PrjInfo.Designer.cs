@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f203_PrjInfo));
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.cbbUnit = new DevExpress.XtraEditors.ComboBoxEdit();
             this.tokenUserID = new DevExpress.XtraEditors.TokenEdit();
@@ -180,11 +180,11 @@
             this.layoutControl1.Controls.Add(this.txbCompleteDate);
             this.layoutControl1.Controls.Add(this.txbRportDate);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.layoutControl1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(810, 269, 650, 400);
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(787, 532);
+            this.layoutControl1.Size = new System.Drawing.Size(787, 483);
             this.layoutControl1.TabIndex = 8;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -221,21 +221,21 @@
             // 
             // txbC3
             // 
-            this.txbC3.Location = new System.Drawing.Point(24, 386);
+            this.txbC3.Location = new System.Drawing.Point(24, 354);
             this.txbC3.Name = "txbC3";
             this.txbC3.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txbC3.Properties.Appearance.Options.UseFont = true;
-            this.txbC3.Size = new System.Drawing.Size(739, 122);
+            this.txbC3.Size = new System.Drawing.Size(739, 105);
             this.txbC3.StyleController = this.layoutControl1;
             this.txbC3.TabIndex = 31;
             // 
             // txbC2
             // 
-            this.txbC2.Location = new System.Drawing.Point(24, 235);
+            this.txbC2.Location = new System.Drawing.Point(24, 219);
             this.txbC2.Name = "txbC2";
             this.txbC2.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txbC2.Properties.Appearance.Options.UseFont = true;
-            this.txbC2.Size = new System.Drawing.Size(739, 119);
+            this.txbC2.Size = new System.Drawing.Size(739, 103);
             this.txbC2.StyleController = this.layoutControl1;
             this.txbC2.TabIndex = 30;
             // 
@@ -245,17 +245,17 @@
             this.txbC1.Name = "txbC1";
             this.txbC1.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txbC1.Properties.Appearance.Options.UseFont = true;
-            this.txbC1.Size = new System.Drawing.Size(739, 119);
+            this.txbC1.Size = new System.Drawing.Size(739, 103);
             this.txbC1.StyleController = this.layoutControl1;
             this.txbC1.TabIndex = 29;
             // 
             // txbB2
             // 
-            this.txbB2.Location = new System.Drawing.Point(24, 311);
+            this.txbB2.Location = new System.Drawing.Point(24, 287);
             this.txbB2.Name = "txbB2";
             this.txbB2.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txbB2.Properties.Appearance.Options.UseFont = true;
-            this.txbB2.Size = new System.Drawing.Size(739, 197);
+            this.txbB2.Size = new System.Drawing.Size(739, 172);
             this.txbB2.StyleController = this.layoutControl1;
             this.txbB2.TabIndex = 28;
             // 
@@ -265,19 +265,19 @@
             this.txbB1.Name = "txbB1";
             this.txbB1.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txbB1.Properties.Appearance.Options.UseFont = true;
-            this.txbB1.Size = new System.Drawing.Size(739, 195);
+            this.txbB1.Size = new System.Drawing.Size(739, 171);
             this.txbB1.StyleController = this.layoutControl1;
             this.txbB1.TabIndex = 27;
             // 
             // txbA2
             // 
-            this.txbA2.Location = new System.Drawing.Point(24, 311);
+            this.txbA2.Location = new System.Drawing.Point(24, 287);
             this.txbA2.Name = "txbA2";
             this.txbA2.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txbA2.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbA2.Properties.Appearance.Options.UseFont = true;
             this.txbA2.Properties.Appearance.Options.UseForeColor = true;
-            this.txbA2.Size = new System.Drawing.Size(739, 197);
+            this.txbA2.Size = new System.Drawing.Size(739, 172);
             this.txbA2.StyleController = this.layoutControl1;
             this.txbA2.TabIndex = 26;
             // 
@@ -289,7 +289,7 @@
             this.txbA1.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbA1.Properties.Appearance.Options.UseFont = true;
             this.txbA1.Properties.Appearance.Options.UseForeColor = true;
-            this.txbA1.Size = new System.Drawing.Size(739, 195);
+            this.txbA1.Size = new System.Drawing.Size(739, 171);
             this.txbA1.StyleController = this.layoutControl1;
             this.txbA1.TabIndex = 25;
             // 
@@ -311,7 +311,7 @@
             this.gcFiles.Name = "gcFiles";
             this.gcFiles.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.btnDelFile});
-            this.gcFiles.Size = new System.Drawing.Size(739, 412);
+            this.gcFiles.Size = new System.Drawing.Size(739, 363);
             this.gcFiles.TabIndex = 21;
             this.gcFiles.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvFiles});
@@ -366,10 +366,10 @@
             // btnDelFile
             // 
             this.btnDelFile.AutoHeight = false;
-            editorButtonImageOptions2.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("editorButtonImageOptions2.SvgImage")));
-            editorButtonImageOptions2.SvgImageSize = new System.Drawing.Size(16, 16);
+            editorButtonImageOptions1.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("editorButtonImageOptions1.SvgImage")));
+            editorButtonImageOptions1.SvgImageSize = new System.Drawing.Size(16, 16);
             this.btnDelFile.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.btnDelFile.Name = "btnDelFile";
             this.btnDelFile.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             // 
@@ -532,7 +532,7 @@
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.tabbedControlGroup1});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(787, 532);
+            this.Root.Size = new System.Drawing.Size(787, 483);
             this.Root.TextVisible = false;
             // 
             // tabbedControlGroup1
@@ -544,7 +544,7 @@
             this.tabbedControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.tabbedControlGroup1.Name = "tabbedControlGroup1";
             this.tabbedControlGroup1.SelectedTabPage = this.layoutControlGroup1;
-            this.tabbedControlGroup1.Size = new System.Drawing.Size(767, 512);
+            this.tabbedControlGroup1.Size = new System.Drawing.Size(767, 463);
             this.tabbedControlGroup1.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlGroup1,
             this.layoutControlGroup2,
@@ -571,7 +571,7 @@
             this.emptySpaceItem3});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(743, 456);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(743, 407);
             this.layoutControlGroup1.Text = "基礎訊息";
             // 
             // lcTWName
@@ -621,7 +621,7 @@
             this.lcFilePath.CustomizationFormText = "英越文名稱";
             this.lcFilePath.Location = new System.Drawing.Point(0, 252);
             this.lcFilePath.Name = "lcFilePath";
-            this.lcFilePath.Size = new System.Drawing.Size(743, 204);
+            this.lcFilePath.Size = new System.Drawing.Size(743, 155);
             this.lcFilePath.Text = "主文路徑";
             this.lcFilePath.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
             this.lcFilePath.TextSize = new System.Drawing.Size(95, 24);
@@ -757,7 +757,7 @@
             this.layoutControlItem7});
             this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup2.Name = "layoutControlGroup2";
-            this.layoutControlGroup2.Size = new System.Drawing.Size(743, 456);
+            this.layoutControlGroup2.Size = new System.Drawing.Size(743, 407);
             this.layoutControlGroup2.Text = "現況分析";
             // 
             // layoutControlItem6
@@ -769,7 +769,7 @@
             this.layoutControlItem6.Control = this.txbA1;
             this.layoutControlItem6.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(743, 227);
+            this.layoutControlItem6.Size = new System.Drawing.Size(743, 203);
             this.layoutControlItem6.Text = "目前之狀況";
             this.layoutControlItem6.TextLocation = DevExpress.Utils.Locations.Top;
             this.layoutControlItem6.TextSize = new System.Drawing.Size(209, 24);
@@ -781,9 +781,9 @@
             this.layoutControlItem7.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem7.AppearanceItemCaption.Options.UseForeColor = true;
             this.layoutControlItem7.Control = this.txbA2;
-            this.layoutControlItem7.Location = new System.Drawing.Point(0, 227);
+            this.layoutControlItem7.Location = new System.Drawing.Point(0, 203);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(743, 229);
+            this.layoutControlItem7.Size = new System.Drawing.Size(743, 204);
             this.layoutControlItem7.Text = "存在的困難點或技術障礙";
             this.layoutControlItem7.TextLocation = DevExpress.Utils.Locations.Top;
             this.layoutControlItem7.TextSize = new System.Drawing.Size(209, 24);
@@ -795,7 +795,7 @@
             this.layoutControlItem9});
             this.layoutControlGroup3.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup3.Name = "layoutControlGroup3";
-            this.layoutControlGroup3.Size = new System.Drawing.Size(743, 456);
+            this.layoutControlGroup3.Size = new System.Drawing.Size(743, 407);
             this.layoutControlGroup3.Text = "方法構思";
             // 
             // layoutControlItem8
@@ -807,7 +807,7 @@
             this.layoutControlItem8.Control = this.txbB1;
             this.layoutControlItem8.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(743, 227);
+            this.layoutControlItem8.Size = new System.Drawing.Size(743, 203);
             this.layoutControlItem8.Text = "擬進行改善的方向";
             this.layoutControlItem8.TextLocation = DevExpress.Utils.Locations.Top;
             this.layoutControlItem8.TextSize = new System.Drawing.Size(209, 24);
@@ -819,9 +819,9 @@
             this.layoutControlItem9.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem9.AppearanceItemCaption.Options.UseForeColor = true;
             this.layoutControlItem9.Control = this.txbB2;
-            this.layoutControlItem9.Location = new System.Drawing.Point(0, 227);
+            this.layoutControlItem9.Location = new System.Drawing.Point(0, 203);
             this.layoutControlItem9.Name = "layoutControlItem9";
-            this.layoutControlItem9.Size = new System.Drawing.Size(743, 229);
+            this.layoutControlItem9.Size = new System.Drawing.Size(743, 204);
             this.layoutControlItem9.Text = "推展改善的構想或思路";
             this.layoutControlItem9.TextLocation = DevExpress.Utils.Locations.Top;
             this.layoutControlItem9.TextSize = new System.Drawing.Size(209, 24);
@@ -838,7 +838,7 @@
             this.layoutControlItem11});
             this.layoutControlGroup4.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup4.Name = "layoutControlGroup4";
-            this.layoutControlGroup4.Size = new System.Drawing.Size(743, 456);
+            this.layoutControlGroup4.Size = new System.Drawing.Size(743, 407);
             this.layoutControlGroup4.Text = "目標設定";
             // 
             // layoutControlItem10
@@ -846,7 +846,7 @@
             this.layoutControlItem10.Control = this.txbC1;
             this.layoutControlItem10.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem10.Name = "layoutControlItem10";
-            this.layoutControlItem10.Size = new System.Drawing.Size(743, 151);
+            this.layoutControlItem10.Size = new System.Drawing.Size(743, 135);
             this.layoutControlItem10.Text = "可預期的效果";
             this.layoutControlItem10.TextLocation = DevExpress.Utils.Locations.Top;
             this.layoutControlItem10.TextSize = new System.Drawing.Size(209, 24);
@@ -854,9 +854,9 @@
             // layoutControlItem12
             // 
             this.layoutControlItem12.Control = this.txbC3;
-            this.layoutControlItem12.Location = new System.Drawing.Point(0, 302);
+            this.layoutControlItem12.Location = new System.Drawing.Point(0, 270);
             this.layoutControlItem12.Name = "layoutControlItem12";
-            this.layoutControlItem12.Size = new System.Drawing.Size(743, 154);
+            this.layoutControlItem12.Size = new System.Drawing.Size(743, 137);
             this.layoutControlItem12.Text = "目標值的挑戰性";
             this.layoutControlItem12.TextLocation = DevExpress.Utils.Locations.Top;
             this.layoutControlItem12.TextSize = new System.Drawing.Size(209, 24);
@@ -864,9 +864,9 @@
             // layoutControlItem11
             // 
             this.layoutControlItem11.Control = this.txbC2;
-            this.layoutControlItem11.Location = new System.Drawing.Point(0, 151);
+            this.layoutControlItem11.Location = new System.Drawing.Point(0, 135);
             this.layoutControlItem11.Name = "layoutControlItem11";
-            this.layoutControlItem11.Size = new System.Drawing.Size(743, 151);
+            this.layoutControlItem11.Size = new System.Drawing.Size(743, 135);
             this.layoutControlItem11.Text = "目標值及達成期限";
             this.layoutControlItem11.TextLocation = DevExpress.Utils.Locations.Top;
             this.layoutControlItem11.TextSize = new System.Drawing.Size(209, 24);
@@ -879,7 +879,7 @@
             this.layoutControlItem3});
             this.tabAttachments.Location = new System.Drawing.Point(0, 0);
             this.tabAttachments.Name = "tabAttachments";
-            this.tabAttachments.Size = new System.Drawing.Size(743, 456);
+            this.tabAttachments.Size = new System.Drawing.Size(743, 407);
             this.tabAttachments.Text = "附件";
             // 
             // layoutControlItem1
@@ -905,7 +905,7 @@
             this.layoutControlItem3.Control = this.gcFiles;
             this.layoutControlItem3.Location = new System.Drawing.Point(0, 40);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(743, 416);
+            this.layoutControlItem3.Size = new System.Drawing.Size(743, 367);
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextVisible = false;
             // 
@@ -1030,11 +1030,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(787, 532);
+            this.Controls.Add(this.layoutControl1);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.Controls.Add(this.layoutControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "f203_PrjInfo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
