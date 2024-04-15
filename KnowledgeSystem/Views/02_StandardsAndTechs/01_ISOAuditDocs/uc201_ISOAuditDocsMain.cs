@@ -36,7 +36,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             {
                 return new List<TestData>()
                 {
-                    new TestData(){Id = "GA-700-B01",TypeDoc ="....",DisplayName = "Quy trinh ABC"},
+                    new TestData(){Id = "GA-700-B001",TypeDoc ="....",DisplayName = "實驗室資訊保密管理規定"},
                     new TestData(){Id = "GA-701-A01",TypeDoc ="....",DisplayName = "Quy trinh XYZ"},
                     new TestData(){Id = "GA-702-C01",TypeDoc ="....",DisplayName = "Quy trinh 123"},
                 };

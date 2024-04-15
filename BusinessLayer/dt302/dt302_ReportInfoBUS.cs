@@ -77,6 +77,22 @@ namespace BusinessLayer
             }
         }
 
+        public List<dt302_ReportInfo> GetListNoReport()
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt302_ReportInfo.Where(r => r.UploadDate == null).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public bool Add(dt302_ReportInfo reportInfo)
         {
             try
