@@ -58,6 +58,8 @@
             this.btnExpCert = new DevExpress.XtraBars.BarButtonItem();
             this.btnClearFilter = new DevExpress.XtraBars.BarButtonItem();
             this.btnExportExcel = new DevExpress.XtraBars.BarButtonItem();
+            this.btnSpecialFunctions = new DevExpress.XtraBars.BarSubItem();
+            this.btnInvalidateExpCert = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -275,9 +277,11 @@
             this.btnInvalidCert,
             this.btnWaitCert,
             this.btnExpCert,
-            this.btnClearFilter});
+            this.btnClearFilter,
+            this.btnSpecialFunctions,
+            this.btnInvalidateExpCert});
             this.barManagerTP.MainMenu = this.bar2;
-            this.barManagerTP.MaxItemId = 11;
+            this.barManagerTP.MaxItemId = 14;
             // 
             // bar2
             // 
@@ -304,7 +308,8 @@
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnAdd, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnReload, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnFilter, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnExportExcel, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnExportExcel, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnSpecialFunctions, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawDragBorder = false;
             this.bar2.OptionsBar.MultiLine = true;
@@ -317,6 +322,12 @@
             this.btnAdd.Id = 0;
             this.btnAdd.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnAdd.ImageOptions.SvgImage")));
             this.btnAdd.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnAdd.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnAdd.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnAdd.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.btnAdd.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
+            this.btnAdd.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnAdd.ItemAppearance.Normal.Options.UseForeColor = true;
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAdd_ItemClick);
             // 
@@ -325,6 +336,12 @@
             this.btnReload.Caption = "重新整理";
             this.btnReload.Id = 1;
             this.btnReload.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnReload.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnReload.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnReload.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.btnReload.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
+            this.btnReload.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnReload.ItemAppearance.Normal.Options.UseForeColor = true;
             this.btnReload.Name = "btnReload";
             this.btnReload.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnReload_ItemClick);
             // 
@@ -333,6 +350,12 @@
             this.btnFilter.Caption = "篩選";
             this.btnFilter.Id = 4;
             this.btnFilter.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnFilter.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnFilter.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnFilter.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.btnFilter.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
+            this.btnFilter.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnFilter.ItemAppearance.Normal.Options.UseForeColor = true;
             this.btnFilter.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.btnValidCert),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnBackCert),
@@ -347,7 +370,9 @@
             this.btnValidCert.Caption = "應取證照";
             this.btnValidCert.Id = 5;
             this.btnValidCert.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnValidCert.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnValidCert.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnValidCert.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnValidCert.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.btnValidCert.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
             this.btnValidCert.ItemAppearance.Normal.Options.UseFont = true;
             this.btnValidCert.ItemAppearance.Normal.Options.UseForeColor = true;
@@ -359,7 +384,9 @@
             this.btnBackCert.Caption = "備援證照";
             this.btnBackCert.Id = 6;
             this.btnBackCert.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnBackCert.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBackCert.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnBackCert.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnBackCert.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.btnBackCert.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
             this.btnBackCert.ItemAppearance.Normal.Options.UseFont = true;
             this.btnBackCert.ItemAppearance.Normal.Options.UseForeColor = true;
@@ -371,7 +398,9 @@
             this.btnInvalidCert.Caption = "無效證照";
             this.btnInvalidCert.Id = 7;
             this.btnInvalidCert.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnInvalidCert.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInvalidCert.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnInvalidCert.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnInvalidCert.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.btnInvalidCert.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
             this.btnInvalidCert.ItemAppearance.Normal.Options.UseFont = true;
             this.btnInvalidCert.ItemAppearance.Normal.Options.UseForeColor = true;
@@ -383,7 +412,9 @@
             this.btnWaitCert.Caption = "在等證照";
             this.btnWaitCert.Id = 8;
             this.btnWaitCert.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnWaitCert.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnWaitCert.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnWaitCert.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnWaitCert.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.btnWaitCert.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
             this.btnWaitCert.ItemAppearance.Normal.Options.UseFont = true;
             this.btnWaitCert.ItemAppearance.Normal.Options.UseForeColor = true;
@@ -395,7 +426,9 @@
             this.btnExpCert.Caption = "過期證照";
             this.btnExpCert.Id = 9;
             this.btnExpCert.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnExpCert.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExpCert.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnExpCert.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnExpCert.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.btnExpCert.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
             this.btnExpCert.ItemAppearance.Normal.Options.UseFont = true;
             this.btnExpCert.ItemAppearance.Normal.Options.UseForeColor = true;
@@ -407,7 +440,9 @@
             this.btnClearFilter.Caption = "清除篩選";
             this.btnClearFilter.Id = 10;
             this.btnClearFilter.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnClearFilter.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClearFilter.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnClearFilter.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnClearFilter.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.btnClearFilter.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
             this.btnClearFilter.ItemAppearance.Normal.Options.UseFont = true;
             this.btnClearFilter.ItemAppearance.Normal.Options.UseForeColor = true;
@@ -419,8 +454,43 @@
             this.btnExportExcel.Caption = "出表";
             this.btnExportExcel.Id = 2;
             this.btnExportExcel.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnExportExcel.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnExportExcel.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnExportExcel.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.btnExportExcel.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
+            this.btnExportExcel.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnExportExcel.ItemAppearance.Normal.Options.UseForeColor = true;
             this.btnExportExcel.Name = "btnExportExcel";
             this.btnExportExcel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExportExcel_ItemClick);
+            // 
+            // btnSpecialFunctions
+            // 
+            this.btnSpecialFunctions.Caption = "特殊功能";
+            this.btnSpecialFunctions.Id = 12;
+            this.btnSpecialFunctions.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnSpecialFunctions.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnSpecialFunctions.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnSpecialFunctions.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.btnSpecialFunctions.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
+            this.btnSpecialFunctions.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnSpecialFunctions.ItemAppearance.Normal.Options.UseForeColor = true;
+            this.btnSpecialFunctions.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnInvalidateExpCert)});
+            this.btnSpecialFunctions.Name = "btnSpecialFunctions";
+            // 
+            // btnInvalidateExpCert
+            // 
+            this.btnInvalidateExpCert.Caption = "作廢過期證照";
+            this.btnInvalidateExpCert.Id = 13;
+            this.btnInvalidateExpCert.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnInvalidateExpCert.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnInvalidateExpCert.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnInvalidateExpCert.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.btnInvalidateExpCert.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
+            this.btnInvalidateExpCert.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnInvalidateExpCert.ItemAppearance.Normal.Options.UseForeColor = true;
+            this.btnInvalidateExpCert.Name = "btnInvalidateExpCert";
+            this.btnInvalidateExpCert.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnInvalidateExpCert_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -513,5 +583,7 @@
         private DevExpress.XtraBars.BarButtonItem btnWaitCert;
         private DevExpress.XtraBars.BarButtonItem btnExpCert;
         private DevExpress.XtraBars.BarButtonItem btnClearFilter;
+        private DevExpress.XtraBars.BarSubItem btnSpecialFunctions;
+        private DevExpress.XtraBars.BarButtonItem btnInvalidateExpCert;
     }
 }

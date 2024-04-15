@@ -78,6 +78,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
             btnWaitCert.ImageOptions.SvgImage = TPSvgimages.Num4;
             btnExpCert.ImageOptions.SvgImage = TPSvgimages.Num5;
             btnClearFilter.ImageOptions.SvgImage = TPSvgimages.Close;
+
+            btnInvalidateExpCert.ImageOptions.SvgImage = TPSvgimages.Num1;
+            btnSpecialFunctions.ImageOptions.SvgImage = TPSvgimages.Progress;
         }
 
         private void LoadData()
@@ -970,6 +973,26 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
             }
 
             gvData.ActiveFilterString = filterString;
+        }
+
+        private void btnInvalidateExpCert_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            DateTime today = DateTime.Today;
+            DateTime endOfQuarter = today.AddMonths(3 - (today.Month - 1) % 3).AddDays(-today.Day + 1).AddDays(-1);
+
+            string msg = "請您確認：</br>1、已檢查過期證照清單</br>2、已導出本季附件";
+            var dialog = MsgTP.MsgYesNoQuestion(msg);
+
+
+            //var expCerts = lsBasesDisplay.Where(r => r.ValidLicense && r.ExpDate < endOfQuarter).ToList();
+
+
+
+
+
+            // msg = string.Join("\r\n", expCerts.Select(r => $"{r.UserName} {r.JobName} {r.CourseName}"));
+
+            //XtraMessageBox.Show(msg);
         }
     }
 }
