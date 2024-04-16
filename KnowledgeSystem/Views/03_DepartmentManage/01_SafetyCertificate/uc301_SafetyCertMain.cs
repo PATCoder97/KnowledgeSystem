@@ -980,19 +980,28 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
             DateTime today = DateTime.Today;
             DateTime endOfQuarter = today.AddMonths(3 - (today.Month - 1) % 3).AddDays(-today.Day + 1).AddDays(-1);
 
-            string msg = "請您確認：</br>1、已檢查過期證照清單</br>2、已導出本季附件";
+            var expCerts = lsBasesDisplay.Where(r => r.ValidLicense && r.ExpDate < endOfQuarter).ToList();
+
+            string msg = $"系統會作廢過期證照，請您確認：</br>1、已檢查過期證照清單（{expCerts.Count}張）</br>2、已導出本季附件";
             var dialog = MsgTP.MsgYesNoQuestion(msg);
+            if (dialog != DialogResult.Yes) return;
 
+            using (var handle = SplashScreenManager.ShowOverlayForm(this))
+            {
+                foreach (var cert in expCerts)
+                {
+                    var certUpdate = dt301_BaseBUS.Instance.GetItemById(cert.Id);
+                    if (certUpdate == null) continue;
 
-            //var expCerts = lsBasesDisplay.Where(r => r.ValidLicense && r.ExpDate < endOfQuarter).ToList();
+                    certUpdate.ValidLicense = false;
+                    certUpdate.InvalidLicense = true;
+                    certUpdate.Describe = $"自動作廢過期證照{DateTime.Today:yyy.MM.dd}";
 
+                    dt301_BaseBUS.Instance.AddOrUpdate(certUpdate);
+                }
+            }
 
-
-
-
-            // msg = string.Join("\r\n", expCerts.Select(r => $"{r.UserName} {r.JobName} {r.CourseName}"));
-
-            //XtraMessageBox.Show(msg);
+            LoadData();
         }
     }
 }

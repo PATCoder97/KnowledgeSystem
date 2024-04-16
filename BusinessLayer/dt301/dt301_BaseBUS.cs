@@ -123,6 +123,22 @@ namespace BusinessLayer
             }
         }
 
+        public dt301_Base GetItemById(int id)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt301_Base.FirstOrDefault(r => r.Id == id);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public bool Add(dt301_Base _base)
         {
             try

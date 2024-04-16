@@ -31,12 +31,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f00_Login));
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.btnLogin = new DevExpress.XtraEditors.SimpleButton();
-            this.txbPassword = new DevExpress.XtraEditors.TextEdit();
             this.txbUserID = new DevExpress.XtraEditors.TextEdit();
             this.lbNameSoft = new System.Windows.Forms.Label();
             this.lbVersion = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.txbPassword.Properties)).BeginInit();
+            this.txbPassword = new DevExpress.XtraEditors.ButtonEdit();
             ((System.ComponentModel.ISupportInitialize)(this.txbUserID.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbPassword.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // btnCancel
@@ -72,24 +72,6 @@
             this.btnLogin.TabIndex = 2;
             this.btnLogin.Text = "登錄";
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
-            // 
-            // txbPassword
-            // 
-            this.txbPassword.EditValue = "";
-            this.txbPassword.Location = new System.Drawing.Point(500, 278);
-            this.txbPassword.Name = "txbPassword";
-            this.txbPassword.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.txbPassword.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txbPassword.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(78)))), ((int)(((byte)(162)))));
-            this.txbPassword.Properties.Appearance.Options.UseBackColor = true;
-            this.txbPassword.Properties.Appearance.Options.UseFont = true;
-            this.txbPassword.Properties.Appearance.Options.UseForeColor = true;
-            this.txbPassword.Properties.Appearance.Options.UseTextOptions = true;
-            this.txbPassword.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
-            this.txbPassword.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.txbPassword.Properties.UseSystemPasswordChar = true;
-            this.txbPassword.Size = new System.Drawing.Size(197, 30);
-            this.txbPassword.TabIndex = 1;
             // 
             // txbUserID
             // 
@@ -133,6 +115,27 @@
             this.lbVersion.Text = "Version: 0.0.0";
             this.lbVersion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // txbPassword
+            // 
+            this.txbPassword.EditValue = "";
+            this.txbPassword.Location = new System.Drawing.Point(500, 278);
+            this.txbPassword.Name = "txbPassword";
+            this.txbPassword.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.txbPassword.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbPassword.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(78)))), ((int)(((byte)(162)))));
+            this.txbPassword.Properties.Appearance.Options.UseBackColor = true;
+            this.txbPassword.Properties.Appearance.Options.UseFont = true;
+            this.txbPassword.Properties.Appearance.Options.UseForeColor = true;
+            this.txbPassword.Properties.Appearance.Options.UseTextOptions = true;
+            this.txbPassword.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            this.txbPassword.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.txbPassword.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Search)});
+            this.txbPassword.Properties.UseSystemPasswordChar = true;
+            this.txbPassword.Properties.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txbPassword_Properties_ButtonClick);
+            this.txbPassword.Size = new System.Drawing.Size(197, 30);
+            this.txbPassword.TabIndex = 1;
+            // 
             // f00_Login
             // 
             this.AcceptButton = this.btnLogin;
@@ -158,8 +161,8 @@
             this.Load += new System.EventHandler(this.fLogin_Load);
             this.Shown += new System.EventHandler(this.fLogin_Shown);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.f00_Login_KeyDown);
-            ((System.ComponentModel.ISupportInitialize)(this.txbPassword.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbUserID.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbPassword.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -167,9 +170,9 @@
         #endregion
         private DevExpress.XtraEditors.SimpleButton btnCancel;
         private DevExpress.XtraEditors.SimpleButton btnLogin;
-        private DevExpress.XtraEditors.TextEdit txbPassword;
         private DevExpress.XtraEditors.TextEdit txbUserID;
         private System.Windows.Forms.Label lbNameSoft;
         private System.Windows.Forms.Label lbVersion;
+        private DevExpress.XtraEditors.ButtonEdit txbPassword;
     }
 }

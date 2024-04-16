@@ -131,7 +131,7 @@ namespace KnowledgeSystem.Views._00_Generals
             txbPassword.Focus();
 #if DEBUG
             txbUserID.Text = "VNW0014732";
-            txbPassword.Text = "Anhtuan07";
+            txbPassword.Text = "Anhtuan08";
             btnLogin_Click(sender, e);
 #endif
         }
@@ -159,6 +159,11 @@ namespace KnowledgeSystem.Views._00_Generals
                 TPConfigs.LoginUser = _userLogin;
                 Close();
             }
+        }
+
+        private void txbPassword_Properties_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            txbPassword.Properties.UseSystemPasswordChar = !txbPassword.Properties.UseSystemPasswordChar;
         }
     }
 }
