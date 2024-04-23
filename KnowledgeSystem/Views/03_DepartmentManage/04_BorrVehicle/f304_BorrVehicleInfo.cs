@@ -75,6 +75,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
             switch (eventInfo)
             {
                 case EventFormInfo.Create:
+                    Text = "Mượn xe";
+
                     timeBorrTime.EditValue = DateTime.Now;
 
                     timeBackTime.Enabled = false;
@@ -86,12 +88,15 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
                 case EventFormInfo.View:
                     break;
                 case EventFormInfo.Update:
+                    Text = "Trả xe";
+
                     timeBorrTime.Enabled = false;
                     txbFromPlace.Enabled = false;
                     txbToPlace.Enabled = false;
                     cbbPurpose.Enabled = false;
                     txbDescript.Enabled = false;
                     txbNumUser.Enabled = false;
+                    txbStartKm.Enabled = false;
 
                     var purpose = vehicleInfo.Uses;
                     int firstSpaceIndex = purpose.IndexOf(' ');

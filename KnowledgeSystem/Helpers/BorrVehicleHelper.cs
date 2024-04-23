@@ -49,8 +49,6 @@ namespace KnowledgeSystem.Helpers
                 UseDefaultCredentials = false,
                 Credentials = new NetworkCredential(TPConfigs.LoginUser.Id, EncryptionHelper.DecryptPass(TPConfigs.LoginUser.SecondaryPassword))
             };
-
-            //proxy = null;
         }
 
         public async Task<List<VehicleStatus>> GetListVehicle(string parameter)

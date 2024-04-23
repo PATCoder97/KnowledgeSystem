@@ -48,8 +48,8 @@
             this.txbNumUser = new DevExpress.XtraEditors.TextEdit();
             this.timeBackTime = new DevExpress.XtraEditors.DateTimeOffsetEdit();
             this.txbEndKm = new DevExpress.XtraEditors.TextEdit();
-            this.txbStartKm = new DevExpress.XtraEditors.TextEdit();
             this.cbbPurpose = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.txbStartKm = new DevExpress.XtraEditors.TextEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.lcSupervisor = new DevExpress.XtraLayout.LayoutControlItem();
@@ -81,8 +81,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.txbNumUser.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.timeBackTime.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbEndKm.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbStartKm.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbPurpose.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbStartKm.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcSupervisor)).BeginInit();
@@ -214,8 +214,8 @@
             this.layoutControl1.Controls.Add(this.txbNumUser);
             this.layoutControl1.Controls.Add(this.timeBackTime);
             this.layoutControl1.Controls.Add(this.txbEndKm);
-            this.layoutControl1.Controls.Add(this.txbStartKm);
             this.layoutControl1.Controls.Add(this.cbbPurpose);
+            this.layoutControl1.Controls.Add(this.txbStartKm);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
@@ -350,19 +350,6 @@
             this.txbEndKm.StyleController = this.layoutControl1;
             this.txbEndKm.TabIndex = 18;
             // 
-            // txbStartKm
-            // 
-            this.txbStartKm.Enabled = false;
-            this.txbStartKm.Location = new System.Drawing.Point(144, 119);
-            this.txbStartKm.Name = "txbStartKm";
-            this.txbStartKm.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.txbStartKm.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.txbStartKm.Properties.Appearance.Options.UseFont = true;
-            this.txbStartKm.Properties.Appearance.Options.UseForeColor = true;
-            this.txbStartKm.Size = new System.Drawing.Size(247, 32);
-            this.txbStartKm.StyleController = this.layoutControl1;
-            this.txbStartKm.TabIndex = 18;
-            // 
             // cbbPurpose
             // 
             this.cbbPurpose.Location = new System.Drawing.Point(144, 263);
@@ -379,6 +366,18 @@
             this.cbbPurpose.Size = new System.Drawing.Size(247, 32);
             this.cbbPurpose.StyleController = this.layoutControl1;
             this.cbbPurpose.TabIndex = 18;
+            // 
+            // txbStartKm
+            // 
+            this.txbStartKm.Location = new System.Drawing.Point(144, 119);
+            this.txbStartKm.Name = "txbStartKm";
+            this.txbStartKm.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.txbStartKm.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.txbStartKm.Properties.Appearance.Options.UseFont = true;
+            this.txbStartKm.Properties.Appearance.Options.UseForeColor = true;
+            this.txbStartKm.Size = new System.Drawing.Size(247, 32);
+            this.txbStartKm.StyleController = this.layoutControl1;
+            this.txbStartKm.TabIndex = 18;
             // 
             // Root
             // 
@@ -668,6 +667,7 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
+            this.IconOptions.Image = global::KnowledgeSystem.Properties.Resources.AppIcon;
             this.Name = "f304_BorrVehicleInfo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "f304_BorrVehicleInfo";
@@ -684,8 +684,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.txbNumUser.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.timeBackTime.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbEndKm.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbStartKm.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbPurpose.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbStartKm.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcSupervisor)).EndInit();
@@ -742,10 +742,10 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private DevExpress.XtraEditors.TextEdit txbEndKm;
         private DevExpress.XtraLayout.LayoutControlItem lcMajor5;
-        private DevExpress.XtraEditors.TextEdit txbStartKm;
         private DevExpress.XtraLayout.LayoutControlItem lcMajor6;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup2;
         private DevExpress.XtraEditors.ComboBoxEdit cbbPurpose;
+        private DevExpress.XtraEditors.TextEdit txbStartKm;
     }
 }
