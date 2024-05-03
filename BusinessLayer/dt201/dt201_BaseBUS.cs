@@ -64,6 +64,22 @@ namespace BusinessLayer
             }
         }
 
+        public List<dt201_Base> GetListByParentId(int idParent)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt201_Base.Where(r => r.IdParent == idParent).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public bool AddOrUpdate(dt201_Base item)
         {
             try

@@ -32,6 +32,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         DXMenuItem itemAddAtt;
         DXMenuItem itemCopyNode;
         DXMenuItem itemDelNode;
+        DXMenuItem itemEditNode;
 
         BindingSource sourceFunc = new BindingSource();
 
@@ -41,6 +42,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             itemAddAtt = CreateMenuItem("新增附件", ItemAddFinalNote_Click, TPSvgimages.Attach);
             itemCopyNode = CreateMenuItem("複製年版", ItemCopyNote_Click, TPSvgimages.Copy);
             itemDelNode = CreateMenuItem("刪除", ItemDeleteNote_Click, TPSvgimages.Close);
+            itemEditNode = CreateMenuItem("更新", ItemDeleteNote_Click, TPSvgimages.Edit);
         }
 
         DXMenuItem CreateMenuItem(string caption, EventHandler clickEvent, SvgImage svgImage)
@@ -146,12 +148,26 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             {
                 dt201_Base rowData = treeList.GetRow(e.HitInfo.Node.Id) as dt201_Base;
 
-                itemAddNode.BeginGroup = true;
+                if (rowData.IsFinalNode == true)
+                {
+                    dt201_Base parentData = treeList.GetRow(e.HitInfo.Node.ParentNode.Id) as dt201_Base;
+                    int newestVersion = dt201_BaseBUS.Instance.GetListByParentId(parentData.Id).Max(r => r.Id);
 
-                e.Menu.Items.Add(itemAddNode);
-                e.Menu.Items.Add(itemAddAtt);
-                e.Menu.Items.Add(itemCopyNode);
-                e.Menu.Items.Add(itemDelNode);
+                    if (newestVersion == rowData.Id)
+                    {
+                        itemAddAtt.BeginGroup = true;
+                        e.Menu.Items.Add(itemAddAtt);
+                        e.Menu.Items.Add(itemCopyNode);
+                        e.Menu.Items.Add(itemEditNode);
+                        e.Menu.Items.Add(itemDelNode);
+                    }
+                }
+                else
+                {
+                    itemAddNode.BeginGroup = true;
+                    e.Menu.Items.Add(itemAddNode);
+                    e.Menu.Items.Add(itemEditNode);
+                }
             }
         }
     }

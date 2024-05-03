@@ -12,16 +12,12 @@ namespace DataAccessLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class dt201_Base
+    public partial class dt201_ProgInfo
     {
         public int Id { get; set; }
-        public int IdParent { get; set; }
-        public int IdGroup { get; set; }
-        public string DocCode { get; set; }
-        public string DisplayName { get; set; }
-        public string Articles { get; set; }
-        public string IdDept { get; set; }
-        public Nullable<bool> IsFinalNode { get; set; }
-        public Nullable<bool> IsDel { get; set; }
+        public int IdAtt { get; set; }
+        public string IdUser { get; set; }
+        public string Note { get; set; }
+        public System.DateTime RespTime { get; set; }
     }
 }
