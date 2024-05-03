@@ -52,5 +52,7 @@ namespace KnowledgeSystem.Helpers
         public static SvgImage Info = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_info.svg"));
         public static SvgImage Stamp = SvgImage.FromFile(Path.Combine(ImagesPath, "Approval.svg"));
         public static SvgImage BorrVehicle = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_borr_vehicle.svg"));
+        public static SvgImage Attach = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_attach.svg"));
+        public static SvgImage Copy = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_transfer.svg"));
     }
 }

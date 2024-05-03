@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode3 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode4 = new DevExpress.XtraGrid.GridLevelNode();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc201_AuditDocsMain));
             this.gvVersion = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -150,18 +150,18 @@
             this.gcData.EmbeddedNavigator.Buttons.Edit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.EndEdit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.Remove.Visible = false;
-            gridLevelNode1.LevelTemplate = this.gvVersion;
-            gridLevelNode2.LevelTemplate = this.gvForm;
-            gridLevelNode2.RelationName = "表單";
-            gridLevelNode1.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode2});
-            gridLevelNode1.RelationName = "發佈历史";
+            gridLevelNode3.LevelTemplate = this.gvVersion;
+            gridLevelNode4.LevelTemplate = this.gvForm;
+            gridLevelNode4.RelationName = "表單";
+            gridLevelNode3.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
+            gridLevelNode4});
+            gridLevelNode3.RelationName = "發佈历史";
             this.gcData.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode1});
+            gridLevelNode3});
             this.gcData.Location = new System.Drawing.Point(514, 12);
             this.gcData.MainView = this.gvData;
             this.gcData.Name = "gcData";
-            this.gcData.Size = new System.Drawing.Size(670, 654);
+            this.gcData.Size = new System.Drawing.Size(670, 605);
             this.gcData.TabIndex = 5;
             this.gcData.UseEmbeddedNavigator = true;
             this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -338,10 +338,10 @@
             this.layoutControl1.Controls.Add(this.treeFolder);
             this.layoutControl1.Controls.Add(this.gcData);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.layoutControl1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(1196, 678);
+            this.layoutControl1.Size = new System.Drawing.Size(1196, 629);
             this.layoutControl1.TabIndex = 5;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -371,8 +371,9 @@
             this.treeFolder.OptionsView.ShowAutoFilterRow = true;
             this.treeFolder.OptionsView.ShowIndicator = false;
             this.treeFolder.OptionsView.ShowVertLines = false;
-            this.treeFolder.Size = new System.Drawing.Size(490, 654);
+            this.treeFolder.Size = new System.Drawing.Size(490, 605);
             this.treeFolder.TabIndex = 6;
+            this.treeFolder.PopupMenuShowing += new DevExpress.XtraTreeList.PopupMenuShowingEventHandler(this.treeFolder_PopupMenuShowing);
             // 
             // treeListColumn1
             // 
@@ -421,7 +422,7 @@
             this.layoutControlItem2,
             this.layoutControlItem1});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(1196, 678);
+            this.Root.Size = new System.Drawing.Size(1196, 629);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem2
@@ -429,7 +430,7 @@
             this.layoutControlItem2.Control = this.treeFolder;
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(494, 658);
+            this.layoutControlItem2.Size = new System.Drawing.Size(494, 609);
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
@@ -439,7 +440,7 @@
             this.layoutControlItem1.Location = new System.Drawing.Point(494, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
             this.layoutControlItem1.Padding = new DevExpress.XtraLayout.Utils.Padding(10, 2, 2, 2);
-            this.layoutControlItem1.Size = new System.Drawing.Size(682, 658);
+            this.layoutControlItem1.Size = new System.Drawing.Size(682, 609);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
@@ -591,11 +592,11 @@
             this.Appearance.Options.UseBackColor = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.layoutControl1);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.Controls.Add(this.layoutControl1);
             this.Name = "uc201_AuditDocsMain";
             this.Size = new System.Drawing.Size(1196, 678);
             this.Load += new System.EventHandler(this.uc201_AuditDocsMain_Load);

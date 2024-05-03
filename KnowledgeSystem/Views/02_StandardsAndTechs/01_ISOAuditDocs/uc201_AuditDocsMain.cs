@@ -1,6 +1,12 @@
 ﻿using BusinessLayer;
+using DataAccessLayer;
+using DevExpress.Utils.Menu;
+using DevExpress.Utils.Svg;
 using DevExpress.XtraEditors;
+using DevExpress.XtraTreeList.Nodes;
+using DevExpress.XtraTreeList;
 using KnowledgeSystem.Helpers;
+using KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,12 +25,67 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         public uc201_AuditDocsMain()
         {
             InitializeComponent();
+            InitializeMenuItems();
         }
+
+        DXMenuItem itemAddNode;
+        DXMenuItem itemAddAtt;
+        DXMenuItem itemCopyNode;
+        DXMenuItem itemDelNode;
 
         BindingSource sourceFunc = new BindingSource();
 
+        private void InitializeMenuItems()
+        {
+            itemAddNode = CreateMenuItem("新增文件", ItemAddNote_Click, TPSvgimages.Add);
+            itemAddAtt = CreateMenuItem("新增附件", ItemAddFinalNote_Click, TPSvgimages.Attach);
+            itemCopyNode = CreateMenuItem("複製年版", ItemCopyNote_Click, TPSvgimages.Copy);
+            itemDelNode = CreateMenuItem("刪除", ItemDeleteNote_Click, TPSvgimages.Close);
+        }
+
+        DXMenuItem CreateMenuItem(string caption, EventHandler clickEvent, SvgImage svgImage)
+        {
+            var menuItem = new DXMenuItem(caption, clickEvent, svgImage, DXMenuItemPriority.Normal);
+            SetMenuItemProperties(menuItem);
+            return menuItem;
+        }
+
+        void SetMenuItemProperties(DXMenuItem menuItem)
+        {
+            menuItem.ImageOptions.SvgImageSize = new Size(24, 24);
+            menuItem.AppearanceHovered.ForeColor = Color.Blue;
+        }
+
+        private void ItemDeleteNote_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ItemCopyNote_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("3");
+        }
+
+        private void ItemAddFinalNote_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("2");
+        }
+
+        private void ItemAddNote_Click(object sender, EventArgs e)
+        {
+            f201_AddNode fAdd = new f201_AddNode();
+            fAdd._eventInfo = EventFormInfo.Create;
+            fAdd._formName = "文件";
+            fAdd.ShowDialog();
+
+            LoadData();
+        }
+
         private void LoadData()
         {
+            Font fontUI12 = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            DevExpress.Utils.AppearanceObject.DefaultMenuFont = fontUI12;
+
             var bases = dt201_BaseBUS.Instance.GetList().ToList();
 
             //lsFunctions = (from data in db.dm_Function.OrderBy(r => r.Prioritize).ToList()
@@ -64,6 +125,34 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             treeFolder.BestFitColumns();
 
             treeFolder.ReadOnlyTreelist();
+        }
+
+        private void treeFolder_PopupMenuShowing(object sender, DevExpress.XtraTreeList.PopupMenuShowingEventArgs e)
+        {
+            // Sửa tên các Item về tiếng trung
+            TranslateMenuItemCaption("Full Expand", "完全展開", e.Menu.Items);
+            TranslateMenuItemCaption("Expand", "展開", e.Menu.Items);
+            TranslateMenuItemCaption("Full Collapse", "完全折疊", e.Menu.Items);
+            TranslateMenuItemCaption("Collapse", "折疊", e.Menu.Items);
+
+            void TranslateMenuItemCaption(string originalCaption, string translatedCaption, DXMenuItemCollection menuItems)
+            {
+                var menuItem = menuItems.FirstOrDefault(item => item.Caption == originalCaption);
+                if (menuItem != null) menuItem.Caption = translatedCaption;
+            }
+
+            TreeList treeList = sender as TreeList;
+            if (e.HitInfo.InRowCell && e.HitInfo.Node.Id >= 0)
+            {
+                dt201_Base rowData = treeList.GetRow(e.HitInfo.Node.Id) as dt201_Base;
+
+                itemAddNode.BeginGroup = true;
+
+                e.Menu.Items.Add(itemAddNode);
+                e.Menu.Items.Add(itemAddAtt);
+                e.Menu.Items.Add(itemCopyNode);
+                e.Menu.Items.Add(itemDelNode);
+            }
         }
     }
 }
