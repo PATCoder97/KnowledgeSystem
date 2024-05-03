@@ -276,15 +276,15 @@ namespace KnowledgeSystem.Helpers
             }
         }
 
-        public async Task<bool> BackMotor(string nameVehicle, int endKm, string backTime, int totalKm)
+        public async Task<bool> BackMotor(string nameVehicle, int endKm, string borrTime, string backTime, int totalKm)
         {
             var userBackUrl = HttpUtility.UrlEncode($"{TPConfigs.LoginUser.Id}{TPConfigs.LoginUser.DisplayName}").Replace("+", "%20").ToUpper();
 
             using (var httpClient = new HttpClient(new HttpClientHandler { Proxy = proxy }))
             {
                 httpClient.BaseAddress = baseUrl;
-
-                string parameter = $"s36/{nameVehicle}vkv{backTime}vkv{endKm}vkv{DateTime.Now.ToString("yyyyMMddHHmm")}vkv{totalKm}vkv{userBackUrl}";
+                //s36/38LD-40006vkv202404260112vkv36497vkv202404261113vkv9vkvVNW0017146%E9%BB%8E%E6%B0%8F%E5%9E%82%E7%8E%B2
+                string parameter = $"s36/{nameVehicle}vkv{borrTime}vkv{endKm}vkv{backTime}vkv{totalKm}vkv{userBackUrl}";
 
                 var response = await httpClient.GetAsync(parameter);
                 response.EnsureSuccessStatusCode();

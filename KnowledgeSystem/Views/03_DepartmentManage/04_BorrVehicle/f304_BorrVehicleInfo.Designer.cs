@@ -312,6 +312,7 @@
             // 
             // txbNumUser
             // 
+            this.txbNumUser.EditValue = "1";
             this.txbNumUser.Location = new System.Drawing.Point(144, 335);
             this.txbNumUser.Name = "txbNumUser";
             this.txbNumUser.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);

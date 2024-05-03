@@ -189,11 +189,14 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
             switch (cbbTypeVehicle.SelectedIndex)
             {
                 case 0:
-                    result = await BorrVehicleHelper.Instance.BackMotor(nameVehicle, endKm, backTime, totalKm);
-                    break;
-                case 1:
                     DateTime dateTime = DateTime.ParseExact(borrTime, "yyyy/MM/dd HH:mm", System.Globalization.CultureInfo.InvariantCulture);
                     string formattedBorrTime = dateTime.ToString("yyyyMMddHHmm");
+
+                    result = await BorrVehicleHelper.Instance.BackMotor(nameVehicle, endKm, formattedBorrTime, backTime, totalKm);
+                    break;
+                case 1:
+                    dateTime = DateTime.ParseExact(borrTime, "yyyy/MM/dd HH:mm", System.Globalization.CultureInfo.InvariantCulture);
+                    formattedBorrTime = dateTime.ToString("yyyyMMddHHmm");
 
                     result = await BorrVehicleHelper.Instance.BackCar(nameVehicle, endKm, formattedBorrTime, backTime, totalKm);
                     break;
