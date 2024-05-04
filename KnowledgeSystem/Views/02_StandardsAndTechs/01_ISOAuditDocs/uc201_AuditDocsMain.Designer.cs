@@ -29,14 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc201_AuditDocsMain));
-            this.gvVersion = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcData = new DevExpress.XtraGrid.GridControl();
             this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gColId = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -46,17 +39,17 @@
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColIdFile = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gvForm = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.treeFolder = new DevExpress.XtraTreeList.TreeList();
+            this.treeListColumn5 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.treeListColumn1 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.treeListColumn3 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.treeListColumn2 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.treeListColumn5 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.treeListColumn4 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.splitterItem1 = new DevExpress.XtraLayout.SplitterItem();
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnAdd = new DevExpress.XtraBars.BarButtonItem();
@@ -68,76 +61,18 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-            this.treeListColumn4 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.gvVersion)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvForm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.treeFolder)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitterItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // gvVersion
-            // 
-            this.gvVersion.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.gvVersion.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Blue;
-            this.gvVersion.Appearance.HeaderPanel.Options.UseFont = true;
-            this.gvVersion.Appearance.HeaderPanel.Options.UseForeColor = true;
-            this.gvVersion.Appearance.HeaderPanel.Options.UseTextOptions = true;
-            this.gvVersion.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gvVersion.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gvVersion.Appearance.Row.ForeColor = System.Drawing.Color.Black;
-            this.gvVersion.Appearance.Row.Options.UseFont = true;
-            this.gvVersion.Appearance.Row.Options.UseForeColor = true;
-            this.gvVersion.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn8,
-            this.gridColumn9,
-            this.gridColumn10,
-            this.gridColumn12});
-            this.gvVersion.GridControl = this.gcData;
-            this.gvVersion.Name = "gvVersion";
-            this.gvVersion.OptionsCustomization.AllowFilter = false;
-            this.gvVersion.OptionsCustomization.AllowSort = false;
-            this.gvVersion.OptionsDetail.ShowDetailTabs = false;
-            this.gvVersion.OptionsView.ColumnAutoWidth = false;
-            this.gvVersion.OptionsView.ShowGroupPanel = false;
-            this.gvVersion.OptionsView.ShowIndicator = false;
-            // 
-            // gridColumn8
-            // 
-            this.gridColumn8.Caption = "版本";
-            this.gridColumn8.FieldName = "Version";
-            this.gridColumn8.Name = "gridColumn8";
-            this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 0;
-            // 
-            // gridColumn9
-            // 
-            this.gridColumn9.Caption = "檔案名稱";
-            this.gridColumn9.FieldName = "FileName";
-            this.gridColumn9.Name = "gridColumn9";
-            this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 1;
-            // 
-            // gridColumn10
-            // 
-            this.gridColumn10.Caption = "上傳人員";
-            this.gridColumn10.Name = "gridColumn10";
-            this.gridColumn10.Visible = true;
-            this.gridColumn10.VisibleIndex = 2;
-            // 
-            // gridColumn12
-            // 
-            this.gridColumn12.Caption = "上傳日期";
-            this.gridColumn12.Name = "gridColumn12";
-            this.gridColumn12.Visible = true;
-            this.gridColumn12.VisibleIndex = 3;
             // 
             // gcData
             // 
@@ -147,24 +82,14 @@
             this.gcData.EmbeddedNavigator.Buttons.Edit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.EndEdit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.Remove.Visible = false;
-            gridLevelNode1.LevelTemplate = this.gvVersion;
-            gridLevelNode2.LevelTemplate = this.gvForm;
-            gridLevelNode2.RelationName = "表單";
-            gridLevelNode1.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode2});
-            gridLevelNode1.RelationName = "發佈历史";
-            this.gcData.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode1});
-            this.gcData.Location = new System.Drawing.Point(514, 12);
+            this.gcData.Location = new System.Drawing.Point(591, 12);
             this.gcData.MainView = this.gvData;
             this.gcData.Name = "gcData";
-            this.gcData.Size = new System.Drawing.Size(670, 605);
+            this.gcData.Size = new System.Drawing.Size(593, 605);
             this.gcData.TabIndex = 5;
             this.gcData.UseEmbeddedNavigator = true;
             this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gvData,
-            this.gvForm,
-            this.gvVersion});
+            this.gvData});
             // 
             // gvData
             // 
@@ -258,37 +183,6 @@
             this.gColIdFile.FieldName = "AttId";
             this.gColIdFile.Name = "gColIdFile";
             // 
-            // gvForm
-            // 
-            this.gvForm.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.gvForm.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Green;
-            this.gvForm.Appearance.HeaderPanel.Options.UseFont = true;
-            this.gvForm.Appearance.HeaderPanel.Options.UseForeColor = true;
-            this.gvForm.Appearance.HeaderPanel.Options.UseTextOptions = true;
-            this.gvForm.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gvForm.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F);
-            this.gvForm.Appearance.Row.ForeColor = System.Drawing.Color.Black;
-            this.gvForm.Appearance.Row.Options.UseFont = true;
-            this.gvForm.Appearance.Row.Options.UseForeColor = true;
-            this.gvForm.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn13});
-            this.gvForm.GridControl = this.gcData;
-            this.gvForm.Name = "gvForm";
-            this.gvForm.OptionsCustomization.AllowFilter = false;
-            this.gvForm.OptionsCustomization.AllowGroup = false;
-            this.gvForm.OptionsCustomization.AllowSort = false;
-            this.gvForm.OptionsView.ColumnAutoWidth = false;
-            this.gvForm.OptionsView.ShowGroupPanel = false;
-            this.gvForm.OptionsView.ShowIndicator = false;
-            // 
-            // gridColumn13
-            // 
-            this.gridColumn13.Caption = "gridColumn13";
-            this.gridColumn13.FieldName = "DisplayName";
-            this.gridColumn13.Name = "gridColumn13";
-            this.gridColumn13.Visible = true;
-            this.gridColumn13.VisibleIndex = 0;
-            // 
             // layoutControl1
             // 
             this.layoutControl1.Controls.Add(this.treeFolder);
@@ -296,6 +190,7 @@
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
+            this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(1218, 386, 650, 400);
             this.layoutControl1.Root = this.Root;
             this.layoutControl1.Size = new System.Drawing.Size(1196, 629);
             this.layoutControl1.TabIndex = 5;
@@ -328,15 +223,24 @@
             this.treeFolder.OptionsView.ShowAutoFilterRow = true;
             this.treeFolder.OptionsView.ShowIndicator = false;
             this.treeFolder.OptionsView.ShowVertLines = false;
-            this.treeFolder.Size = new System.Drawing.Size(490, 605);
+            this.treeFolder.Size = new System.Drawing.Size(563, 605);
             this.treeFolder.TabIndex = 6;
             this.treeFolder.PopupMenuShowing += new DevExpress.XtraTreeList.PopupMenuShowingEventHandler(this.treeFolder_PopupMenuShowing);
+            this.treeFolder.DoubleClick += new System.EventHandler(this.treeFolder_DoubleClick);
+            // 
+            // treeListColumn5
+            // 
+            this.treeListColumn5.Caption = "ID";
+            this.treeListColumn5.FieldName = "Id";
+            this.treeListColumn5.Name = "treeListColumn5";
+            this.treeListColumn5.UnboundDataType = typeof(short);
+            this.treeListColumn5.Width = 55;
             // 
             // treeListColumn1
             // 
             this.treeListColumn1.Caption = "編碼";
             this.treeListColumn1.FieldName = "DocCode";
-            this.treeListColumn1.MaxWidth = 200;
+            this.treeListColumn1.MaxWidth = 300;
             this.treeListColumn1.MinWidth = 100;
             this.treeListColumn1.Name = "treeListColumn1";
             this.treeListColumn1.OptionsColumn.AllowEdit = false;
@@ -363,13 +267,13 @@
             this.treeListColumn2.Visible = true;
             this.treeListColumn2.VisibleIndex = 3;
             // 
-            // treeListColumn5
+            // treeListColumn4
             // 
-            this.treeListColumn5.Caption = "ID";
-            this.treeListColumn5.FieldName = "Id";
-            this.treeListColumn5.Name = "treeListColumn5";
-            this.treeListColumn5.UnboundDataType = typeof(short);
-            this.treeListColumn5.Width = 55;
+            this.treeListColumn4.Caption = "條文";
+            this.treeListColumn4.FieldName = "Articles";
+            this.treeListColumn4.Name = "treeListColumn4";
+            this.treeListColumn4.Visible = true;
+            this.treeListColumn4.VisibleIndex = 2;
             // 
             // Root
             // 
@@ -377,7 +281,8 @@
             this.Root.GroupBordersVisible = false;
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem2,
-            this.layoutControlItem1});
+            this.layoutControlItem1,
+            this.splitterItem1});
             this.Root.Name = "Root";
             this.Root.Size = new System.Drawing.Size(1196, 629);
             this.Root.TextVisible = false;
@@ -387,19 +292,25 @@
             this.layoutControlItem2.Control = this.treeFolder;
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(494, 609);
+            this.layoutControlItem2.Size = new System.Drawing.Size(567, 609);
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.gcData;
-            this.layoutControlItem1.Location = new System.Drawing.Point(494, 0);
+            this.layoutControlItem1.Location = new System.Drawing.Point(579, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Padding = new DevExpress.XtraLayout.Utils.Padding(10, 2, 2, 2);
-            this.layoutControlItem1.Size = new System.Drawing.Size(682, 609);
+            this.layoutControlItem1.Size = new System.Drawing.Size(597, 609);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
+            // 
+            // splitterItem1
+            // 
+            this.splitterItem1.AllowHotTrack = true;
+            this.splitterItem1.Location = new System.Drawing.Point(567, 0);
+            this.splitterItem1.Name = "splitterItem1";
+            this.splitterItem1.Size = new System.Drawing.Size(12, 609);
             // 
             // barManagerTP
             // 
@@ -474,6 +385,7 @@
             this.btnReload.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReload.ItemAppearance.Normal.Options.UseFont = true;
             this.btnReload.Name = "btnReload";
+            this.btnReload.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnReload_ItemClick);
             // 
             // btnExportExcel
             // 
@@ -543,14 +455,6 @@
             this.barDockControlRight.Manager = this.barManagerTP;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 629);
             // 
-            // treeListColumn4
-            // 
-            this.treeListColumn4.Caption = "條文";
-            this.treeListColumn4.FieldName = "Articles";
-            this.treeListColumn4.Name = "treeListColumn4";
-            this.treeListColumn4.Visible = true;
-            this.treeListColumn4.VisibleIndex = 2;
-            // 
             // uc201_AuditDocsMain
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
@@ -565,16 +469,15 @@
             this.Name = "uc201_AuditDocsMain";
             this.Size = new System.Drawing.Size(1196, 678);
             this.Load += new System.EventHandler(this.uc201_AuditDocsMain_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.gvVersion)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvForm)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.treeFolder)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitterItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).EndInit();
             this.ResumeLayout(false);
@@ -585,13 +488,6 @@
         #endregion
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraGrid.GridControl gcData;
-        private DevExpress.XtraGrid.Views.Grid.GridView gvVersion;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
-        private DevExpress.XtraGrid.Views.Grid.GridView gvForm;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
         private DevExpress.XtraGrid.Views.Grid.GridView gvData;
         private DevExpress.XtraGrid.Columns.GridColumn gColId;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
@@ -620,5 +516,6 @@
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn4;
+        private DevExpress.XtraLayout.SplitterItem splitterItem1;
     }
 }

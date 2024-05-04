@@ -10,27 +10,27 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer
 {
-    public class dt201_BaseBUS
+    public class dt201_FormsBUS
     {
         TPLogger logger;
 
-        private static dt201_BaseBUS instance;
+        private static dt201_FormsBUS instance;
 
-        public static dt201_BaseBUS Instance
+        public static dt201_FormsBUS Instance
         {
-            get { if (instance == null) instance = new dt201_BaseBUS(); return instance; }
+            get { if (instance == null) instance = new dt201_FormsBUS(); return instance; }
             private set { instance = value; }
         }
 
-        private dt201_BaseBUS() { logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName); }
+        private dt201_FormsBUS() { logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName); }
 
-        public int Add(dt201_Base item)
+        public int Add(dt201_Forms item)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    _context.dt201_Base.Add(item);
+                    _context.dt201_Forms.Add(item);
                     int affectedRecords = _context.SaveChanges();
 
                     if (affectedRecords > 0)
@@ -48,13 +48,13 @@ namespace BusinessLayer
             }
         }
 
-        public List<dt201_Base> GetList()
+        public List<dt201_Forms> GetList()
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dt201_Base.Where(r => r.IsDel != true).ToList();
+                    return _context.dt201_Forms.ToList();
                 }
             }
             catch (Exception ex)
@@ -64,13 +64,13 @@ namespace BusinessLayer
             }
         }
 
-        public List<dt201_Base> GetListByParentId(int idParent)
+        public List<dt201_Forms> GetListByIdBase(int idBase)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dt201_Base.Where(r => r.IsDel != true && r.IdParent == idParent).ToList();
+                    return _context.dt201_Forms.Where(r =>  r.IdBase == idBase).ToList();
                 }
             }
             catch (Exception ex)
@@ -80,13 +80,13 @@ namespace BusinessLayer
             }
         }
 
-        public bool AddOrUpdate(dt201_Base item)
+        public bool AddOrUpdate(dt201_Forms item)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    _context.dt201_Base.AddOrUpdate(item);
+                    _context.dt201_Forms.AddOrUpdate(item);
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;
                 }
@@ -104,9 +104,8 @@ namespace BusinessLayer
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    var entity = _context.dt201_Base.FirstOrDefault(r => r.Id == Id);
-                    entity.IsDel = true;
-                    _context.dt201_Base.AddOrUpdate(entity);
+                    var entity = _context.dt201_Forms.FirstOrDefault(r => r.Id == Id);
+                    _context.dt201_Forms.Remove(entity);
                     _context.SaveChanges();
 
                     int affectedRecords = _context.SaveChanges();

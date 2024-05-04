@@ -32,7 +32,6 @@ namespace KnowledgeSystem
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
 #if DEBUG
 
             Application.Run(new f00_Main());

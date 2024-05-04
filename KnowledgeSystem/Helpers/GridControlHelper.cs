@@ -39,5 +39,16 @@ namespace KnowledgeSystem.Helpers
                 e.Handled = true;
             }
         }
+
+        public static void TreeViewCopyCellData_KeyDown(object sender, KeyEventArgs e)
+        {
+            TreeList view = sender as TreeList;
+            if (e.Control && e.KeyCode == Keys.C)
+            {
+                if (view.GetRowCellValue(view.FocusedNode, view.FocusedColumn) != null && view.GetRowCellValue(view.FocusedNode, view.FocusedColumn).ToString() != String.Empty)
+                    Clipboard.SetText(view.GetRowCellValue(view.FocusedNode, view.FocusedColumn).ToString());
+                e.Handled = true;
+            }
+        }
     }
 }

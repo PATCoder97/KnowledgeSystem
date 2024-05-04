@@ -66,6 +66,7 @@
     <Compile Include="dm\dm_AttachmentBUS.cs" />
     <Compile Include="dm\dm_SignBUS.cs" />
     <Compile Include="dt201\dt201_BaseBUS.cs" />
+    <Compile Include="dt201\dt201_FormsBUS.cs" />
     <Compile Include="dt202\dt202_BaseBUS.cs" />
     <Compile Include="dt202\dt202_AttachBUS.cs" />
     <Compile Include="dt202\dt202_TypeBUS.cs" />

@@ -1,6 +1,8 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
 using DevExpress.XtraEditors;
+using DevExpress.XtraSplashScreen;
+using DocumentFormat.OpenXml.Spreadsheet;
 using KnowledgeSystem.Helpers;
 using System;
 using System.Collections.Generic;
@@ -22,48 +24,43 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             InitializeIcon();
         }
 
-        public EventFormInfo _eventInfo = EventFormInfo.Create;
-        public string _formName = "";
-        public dt301_Base _base = null;
+        public EventFormInfo eventInfo = EventFormInfo.Create;
+        public string formName = "";
+        public dt201_Base baseData = null;
+        public dt201_Base baseParent = null;
         string idDept2word = TPConfigs.LoginUser.IdDepartment.Substring(0, 2);
 
         private void InitializeIcon()
         {
-            btnEdit.ImageOptions.SvgImage = TPSvgimages.Edit;
-            btnDelete.ImageOptions.SvgImage = TPSvgimages.Remove;
             btnConfirm.ImageOptions.SvgImage = TPSvgimages.Confirm;
         }
 
         private void EnabledController(bool _enable = true)
         {
-            cbbDept.Enabled = false;
-            cbbJobTitle.Enabled = false;
-            cbbUser.Enabled = _enable;
-            cbbCertStatus.Enabled = _enable;
-            cbbCourse.Enabled = _enable;
-            txbDateReceipt.Enabled = _enable;
-            txbDuration.Enabled = _enable;
-            txbDescribe.Enabled = _enable;
+            //cbbDept.Enabled = false;
+            //cbbJobTitle.Enabled = false;
+            //cbbUser.Enabled = _enable;
+            //cbbCertStatus.Enabled = _enable;
+            //cbbCourse.Enabled = _enable;
+            //txbDateReceipt.Enabled = _enable;
+            //txbDuration.Enabled = _enable;
+            //txbDescribe.Enabled = _enable;
         }
 
         private void LockControl()
         {
-            switch (_eventInfo)
+            switch (eventInfo)
             {
                 case EventFormInfo.Create:
-                    Text = $"新增{_formName}";
+                    Text = $"新增{formName}";
 
                     btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
-                    btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                    btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                     EnabledController();
                     break;
                 case EventFormInfo.Update:
-                    Text = $"更新{_formName}";
+                    Text = $"更新{formName}";
 
                     btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
-                    btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                    btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                     EnabledController();
                     break;
                 default:
@@ -75,58 +72,58 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         {
             LockControl();
 
-            //var lsDepts = dm_DeptBUS.Instance.GetList().Select(r => new dm_Departments
-            //{
-            //    Id = r.Id,
-            //    DisplayName = $"{r.Id} {r.DisplayName}"
-            //}).ToList();
-            //cbbDept.Properties.DataSource = lsDepts;
-            //cbbDept.Properties.DisplayMember = "DisplayName";
-            //cbbDept.Properties.ValueMember = "Id";
+            var articles = new List<string>() { "5.1", "6.2", "6.3", "7.4" };
+            txbArticles.Properties.DataSource = articles;
 
-            //var lsUsers = dm_UserBUS.Instance.GetListByDept(idDept2word).Select(r => new dm_User
-            //{
-            //    Id = r.Id,
-            //    IdDepartment = r.IdDepartment,
-            //    DisplayName = $"{r.DisplayName} {r.DisplayNameVN}",
-            //    JobCode = r.JobCode
-            //}).ToList();
-            //cbbUser.Properties.DataSource = lsUsers;
-            //cbbUser.Properties.DisplayMember = "DisplayName";
-            //cbbUser.Properties.ValueMember = "Id";
-            //cbbUser.Properties.BestFitWidth = 110;
-
-            //var lsJobTitles = dm_JobTitleBUS.Instance.GetList().Select(r => new dm_JobTitle() { Id = r.Id, DisplayName = $"{r.Id} {r.DisplayName}" });
-            //cbbJobTitle.Properties.DataSource = lsJobTitles;
-            //cbbJobTitle.Properties.DisplayMember = "DisplayName";
-            //cbbJobTitle.Properties.ValueMember = "Id";
-
-            //cbbCourse.Properties.DisplayMember = "DisplayName";
-            //cbbCourse.Properties.ValueMember = "Id";
-
-            //cbbCertStatus.Properties.Items.AddRange((CertStatus[])Enum.GetValues(typeof(CertStatus)));
-            //cbbCertStatus.SelectedIndex = 0;
-
-            switch (_eventInfo)
+            switch (eventInfo)
             {
                 case EventFormInfo.Create:
-                    _base = new dt301_Base();
-                    cbbDept.EditValue = idDept2word;
-                    txbDateReceipt.EditValue = DateTime.Today;
+                    baseData = new dt201_Base();
                     break;
                 case EventFormInfo.Update:
-                    cbbDept.EditValue = _base.IdDept;
-                    cbbUser.EditValue = _base.IdUser;
-                    cbbJobTitle.EditValue = _base.IdJobTitle;
-                    cbbCourse.EditValue = _base.IdCourse;
-                    txbDateReceipt.EditValue = _base.DateReceipt;
 
-                    int duration = _base.ExpDate.HasValue ? _base.ExpDate.Value.Year - _base.DateReceipt.Year : 0;
-                    txbDuration.EditValue = duration;
-                    txbDescribe.EditValue = _base.Describe;
+                    txbDocCode.EditValue = baseData.DocCode;
+                    txbDisplayName.EditValue = baseData.DisplayName;
+                    txbArticles.EditValue = baseData.Articles;
                     break;
                 default:
                     break;
+            }
+        }
+
+        private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var result = false;
+            string msg = "";
+            using (var handle = SplashScreenManager.ShowOverlayForm(this))
+            {
+                baseData.DocCode = txbDocCode.Text;
+                baseData.DisplayName = txbDisplayName.Text;
+                baseData.Articles = txbArticles.EditValue.ToString();
+
+                msg = $"{baseData.DocCode} {baseData.DisplayName}";
+                switch (eventInfo)
+                {
+                    case EventFormInfo.Create:
+                        baseData.IdParent = baseParent.Id;
+
+                        result = dt201_BaseBUS.Instance.Add(baseData) > 0;
+                        break;
+                    case EventFormInfo.Update:
+                        result = dt201_BaseBUS.Instance.AddOrUpdate(baseData);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            if (result)
+            {
+                Close();
+            }
+            else
+            {
+                MsgTP.MsgErrorDB();
             }
         }
     }
