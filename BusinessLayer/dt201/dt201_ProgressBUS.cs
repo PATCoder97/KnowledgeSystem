@@ -10,27 +10,27 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer
 {
-    public class dt201_FormsBUS
+    public class dt201_ProgressBUS
     {
         TPLogger logger;
 
-        private static dt201_FormsBUS instance;
+        private static dt201_ProgressBUS instance;
 
-        public static dt201_FormsBUS Instance
+        public static dt201_ProgressBUS Instance
         {
-            get { if (instance == null) instance = new dt201_FormsBUS(); return instance; }
+            get { if (instance == null) instance = new dt201_ProgressBUS(); return instance; }
             private set { instance = value; }
         }
 
-        private dt201_FormsBUS() { logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName); }
+        private dt201_ProgressBUS() { logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName); }
 
-        public int Add(dt201_Forms item)
+        public int Add(dt201_Progress item)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    _context.dt201_Forms.Add(item);
+                    _context.dt201_Progress.Add(item);
                     int affectedRecords = _context.SaveChanges();
 
                     if (affectedRecords > 0)
@@ -48,13 +48,37 @@ namespace BusinessLayer
             }
         }
 
-        public List<dt201_Forms> GetList()
+        public bool AddRange(List<dt201_Progress> items)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dt201_Forms.ToList();
+                    _context.dt201_Progress.AddRange(items);
+                    int affectedRecords = _context.SaveChanges();
+
+                    if (affectedRecords > 0)
+                    {
+                        return true;
+                    }
+
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                return false;
+            }
+        }
+
+        public List<dt201_Progress> GetList()
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt201_Progress.ToList();
                 }
             }
             catch (Exception ex)
@@ -64,45 +88,13 @@ namespace BusinessLayer
             }
         }
 
-        public List<dt201_Forms> GetListByIdBase(int idBase)
+        public bool AddOrUpdate(dt201_Progress item)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dt201_Forms.Where(r =>  r.IdBase == idBase).ToList();
-                }
-            }
-            catch (Exception ex)
-            {
-                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
-                throw;
-            }
-        }
-
-        public List<dt201_Forms> GetListProcessing()
-        {
-            try
-            {
-                using (var _context = new DBDocumentManagementSystemEntities())
-                {
-                    return _context.dt201_Forms.Where(r => r.IsProcessing == true).ToList();
-                }
-            }
-            catch (Exception ex)
-            {
-                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
-                throw;
-            }
-        }
-
-        public bool AddOrUpdate(dt201_Forms item)
-        {
-            try
-            {
-                using (var _context = new DBDocumentManagementSystemEntities())
-                {
-                    _context.dt201_Forms.AddOrUpdate(item);
+                    _context.dt201_Progress.AddOrUpdate(item);
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;
                 }
@@ -120,8 +112,8 @@ namespace BusinessLayer
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    var entity = _context.dt201_Forms.FirstOrDefault(r => r.Id == Id);
-                    _context.dt201_Forms.Remove(entity);
+                    var entity = _context.dt201_Progress.FirstOrDefault(r => r.Id == Id);
+                    _context.dt201_Progress.Remove(entity);
                     _context.SaveChanges();
 
                     int affectedRecords = _context.SaveChanges();

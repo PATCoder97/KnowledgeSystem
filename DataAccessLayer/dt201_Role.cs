@@ -12,16 +12,9 @@ namespace DataAccessLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class dt201_Forms
+    public partial class dt201_Role
     {
         public int Id { get; set; }
-        public int IdBase { get; set; }
-        public string Code { get; set; }
         public string DisplayName { get; set; }
-        public System.DateTime UploadTime { get; set; }
-        public string UploadUser { get; set; }
-        public Nullable<int> AttId { get; set; }
-        public Nullable<bool> IsProcessing { get; set; }
-        public Nullable<bool> DigitalSign { get; set; }
     }
 }

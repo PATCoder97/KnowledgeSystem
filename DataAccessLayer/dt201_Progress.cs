@@ -17,5 +17,7 @@ namespace DataAccessLayer
         public int Id { get; set; }
         public int IdAtt { get; set; }
         public string IdUser { get; set; }
+        public Nullable<int> IdRole { get; set; }
+        public Nullable<int> IdForm { get; set; }
     }
 }

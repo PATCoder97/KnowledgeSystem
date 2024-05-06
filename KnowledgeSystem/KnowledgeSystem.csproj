@@ -231,6 +231,12 @@
     <Compile Include="Views\02_StandardsAndTechs\04_ISODocs\uc204_ISODocsMain.Designer.cs">
       <DependentUpon>uc204_ISODocsMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\uc201_DigitalSignature.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\uc201_DigitalSignature.Designer.cs">
+      <DependentUpon>uc201_DigitalSignature.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\03_DepartmentManage\04_BorrVehicle\f304_BorrVehicleInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -592,6 +598,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\uc201_AuditDocsMain.resx">
       <DependentUpon>uc201_AuditDocsMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\uc201_DigitalSignature.resx">
+      <DependentUpon>uc201_DigitalSignature.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\03_TechnicalPrj\f203_PrjInfo.resx">
       <DependentUpon>f203_PrjInfo.cs</DependentUpon>

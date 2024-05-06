@@ -95,6 +95,9 @@
     <Compile Include="dt201_Progress.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
+    <Compile Include="dt201_Role.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
     <Compile Include="dt202_Attach.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>

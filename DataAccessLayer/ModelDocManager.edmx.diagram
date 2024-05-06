@@ -46,8 +46,9 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_DeptGroups" Width="1.5" PointX="21.625" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_DrivingLic" Width="1.5" PointX="23.25" PointY="0.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_Base" Width="1.5" PointX="0.5" PointY="21.375" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_Forms" Width="1.5" PointX="2.125" PointY="21.375" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_ProgInfo" Width="1.5" PointX="5.375" PointY="21.375" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_Role" Width="1.5" PointX="7" PointY="21.375" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_Forms" Width="1.5" PointX="2.125" PointY="21.375" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_Progress" Width="1.5" PointX="3.75" PointY="21.375" />
       </Diagram>
     </edmx:Diagrams>

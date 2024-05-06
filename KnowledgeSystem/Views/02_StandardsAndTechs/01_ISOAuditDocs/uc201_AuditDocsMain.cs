@@ -127,6 +127,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         private void ItemAddAtt_Click(object sender, EventArgs e)
         {
             f201_AddAttachment fAtt = new f201_AddAttachment();
+            fAtt.eventInfo = EventFormInfo.Create;
+            fAtt.formName = "表單";
+            fAtt.idBase = nodeFocus.Id;
             fAtt.ShowDialog();
 
             LoadData();

@@ -33,8 +33,12 @@
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.gcProgress = new DevExpress.XtraGrid.GridControl();
             this.gvProgress = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.lookupUser = new DevExpress.XtraEditors.Repository.RepositoryItemGridLookUpEdit();
+            this.repositoryItemGridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.lookupRole = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnEdit = new DevExpress.XtraBars.BarButtonItem();
@@ -58,6 +62,9 @@
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcProgress)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvProgress)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookupUser)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1View)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookupRole)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckSign.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDisplayName.Properties)).BeginInit();
@@ -93,6 +100,9 @@
             this.gcProgress.MenuManager = this.barManagerTP;
             this.gcProgress.Name = "gcProgress";
             this.gcProgress.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
+            this.gcProgress.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.lookupUser,
+            this.lookupRole});
             this.gcProgress.Size = new System.Drawing.Size(628, 249);
             this.gcProgress.TabIndex = 14;
             this.gcProgress.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -110,33 +120,101 @@
             this.gvProgress.Appearance.Row.ForeColor = System.Drawing.Color.Black;
             this.gvProgress.Appearance.Row.Options.UseFont = true;
             this.gvProgress.Appearance.Row.Options.UseForeColor = true;
+            this.gvProgress.Appearance.TopNewRow.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvProgress.Appearance.TopNewRow.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.gvProgress.Appearance.TopNewRow.Options.UseFont = true;
+            this.gvProgress.Appearance.TopNewRow.Options.UseForeColor = true;
             this.gvProgress.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn3,
             this.gridColumn1,
             this.gridColumn2});
             this.gvProgress.GridControl = this.gcProgress;
             this.gvProgress.Name = "gvProgress";
+            this.gvProgress.NewItemRowText = "按一下此處新增流程";
+            this.gvProgress.OptionsCustomization.AllowFilter = false;
+            this.gvProgress.OptionsCustomization.AllowSort = false;
             this.gvProgress.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
             this.gvProgress.OptionsView.EnableAppearanceOddRow = true;
-            this.gvProgress.OptionsView.ShowAutoFilterRow = true;
+            this.gvProgress.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
             this.gvProgress.OptionsView.ShowGroupPanel = false;
             this.gvProgress.OptionsView.ShowIndicator = false;
             this.gvProgress.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gvProgress_CellValueChanged);
             // 
+            // gridColumn3
+            // 
+            this.gridColumn3.Caption = "工號";
+            this.gridColumn3.ColumnEdit = this.lookupUser;
+            this.gridColumn3.FieldName = "IdUser";
+            this.gridColumn3.Name = "gridColumn3";
+            this.gridColumn3.Visible = true;
+            this.gridColumn3.VisibleIndex = 0;
+            // 
+            // lookupUser
+            // 
+            this.lookupUser.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lookupUser.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.lookupUser.Appearance.Options.UseFont = true;
+            this.lookupUser.Appearance.Options.UseForeColor = true;
+            this.lookupUser.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lookupUser.AppearanceDropDown.ForeColor = System.Drawing.Color.Black;
+            this.lookupUser.AppearanceDropDown.Options.UseFont = true;
+            this.lookupUser.AppearanceDropDown.Options.UseForeColor = true;
+            this.lookupUser.AutoHeight = false;
+            this.lookupUser.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookupUser.Name = "lookupUser";
+            this.lookupUser.PopupView = this.repositoryItemGridLookUpEdit1View;
+            // 
+            // repositoryItemGridLookUpEdit1View
+            // 
+            this.repositoryItemGridLookUpEdit1View.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.repositoryItemGridLookUpEdit1View.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
+            this.repositoryItemGridLookUpEdit1View.Appearance.HeaderPanel.Options.UseFont = true;
+            this.repositoryItemGridLookUpEdit1View.Appearance.HeaderPanel.Options.UseForeColor = true;
+            this.repositoryItemGridLookUpEdit1View.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            this.repositoryItemGridLookUpEdit1View.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.repositoryItemGridLookUpEdit1View.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.repositoryItemGridLookUpEdit1View.Appearance.Row.ForeColor = System.Drawing.Color.Black;
+            this.repositoryItemGridLookUpEdit1View.Appearance.Row.Options.UseFont = true;
+            this.repositoryItemGridLookUpEdit1View.Appearance.Row.Options.UseForeColor = true;
+            this.repositoryItemGridLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.repositoryItemGridLookUpEdit1View.Name = "repositoryItemGridLookUpEdit1View";
+            this.repositoryItemGridLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.repositoryItemGridLookUpEdit1View.OptionsView.EnableAppearanceOddRow = true;
+            this.repositoryItemGridLookUpEdit1View.OptionsView.ShowAutoFilterRow = true;
+            this.repositoryItemGridLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            // 
             // gridColumn1
             // 
             this.gridColumn1.Caption = "名稱";
-            this.gridColumn1.FieldName = "VNW";
+            this.gridColumn1.FieldName = "UserName";
             this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.OptionsColumn.AllowEdit = false;
             this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 0;
+            this.gridColumn1.VisibleIndex = 1;
             // 
             // gridColumn2
             // 
-            this.gridColumn2.Caption = "備註";
-            this.gridColumn2.FieldName = "DisplayName";
+            this.gridColumn2.Caption = "權限";
+            this.gridColumn2.ColumnEdit = this.lookupRole;
+            this.gridColumn2.FieldName = "IdRole";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 1;
+            this.gridColumn2.VisibleIndex = 2;
+            // 
+            // lookupRole
+            // 
+            this.lookupRole.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lookupRole.AppearanceDropDown.ForeColor = System.Drawing.Color.Black;
+            this.lookupRole.AppearanceDropDown.Options.UseFont = true;
+            this.lookupRole.AppearanceDropDown.Options.UseForeColor = true;
+            this.lookupRole.AutoHeight = false;
+            this.lookupRole.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookupRole.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("DisplayName", "Name1")});
+            this.lookupRole.Name = "lookupRole";
+            this.lookupRole.ShowHeader = false;
             // 
             // barManagerTP
             // 
@@ -206,6 +284,7 @@
             this.btnConfirm.Id = 2;
             this.btnConfirm.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnConfirm.Name = "btnConfirm";
+            this.btnConfirm.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnConfirm_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -295,6 +374,7 @@
             this.txbAtt.Size = new System.Drawing.Size(578, 32);
             this.txbAtt.StyleController = this.layoutControl1;
             this.txbAtt.TabIndex = 12;
+            this.txbAtt.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txbAtt_ButtonClick);
             // 
             // Root
             // 
@@ -400,6 +480,9 @@
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gcProgress)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvProgress)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookupUser)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1View)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookupRole)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckSign.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDisplayName.Properties)).EndInit();
@@ -442,5 +525,9 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
+        private DevExpress.XtraEditors.Repository.RepositoryItemGridLookUpEdit lookupUser;
+        private DevExpress.XtraGrid.Views.Grid.GridView repositoryItemGridLookUpEdit1View;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit lookupRole;
     }
 }

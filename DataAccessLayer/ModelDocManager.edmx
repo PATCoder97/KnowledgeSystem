@@ -165,13 +165,14 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdParent" Type="int" Nullable="false" />
-          <Property Name="IdGroup" Type="int" Nullable="false" />
+          <Property Name="IdGroup" Type="int" />
           <Property Name="DocCode" Type="nvarchar" MaxLength="32" Nullable="false" />
           <Property Name="DisplayName" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Articles" Type="varchar" MaxLength="64" />
           <Property Name="IdDept" Type="varchar" MaxLength="4" />
           <Property Name="IsFinalNode" Type="bit" />
           <Property Name="IsDel" Type="bit" />
+          <Property Name="DelTime" Type="datetime" />
         </EntityType>
         <EntityType Name="dt201_Forms">
           <Key>
@@ -185,7 +186,7 @@
           <Property Name="UploadUser" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="AttId" Type="int" />
           <Property Name="IsProcessing" Type="bit" />
-          <Property Name="IdProcess" Type="int" />
+          <Property Name="DigitalSign" Type="bit" />
         </EntityType>
         <EntityType Name="dt201_ProgInfo">
           <Key>
@@ -204,6 +205,15 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdAtt" Type="int" Nullable="false" />
           <Property Name="IdUser" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="IdRole" Type="int" />
+          <Property Name="IdForm" Type="int" />
+        </EntityType>
+        <EntityType Name="dt201_Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="64" Nullable="false" />
         </EntityType>
         <EntityType Name="dt202_Attach">
           <Key>
@@ -497,6 +507,7 @@
           <EntitySet Name="dt201_Forms" EntityType="Self.dt201_Forms" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt201_ProgInfo" EntityType="Self.dt201_ProgInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt201_Progress" EntityType="Self.dt201_Progress" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt201_Role" EntityType="Self.dt201_Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt202_Attach" EntityType="Self.dt202_Attach" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt202_Base" EntityType="Self.dt202_Base" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt202_Type" EntityType="Self.dt202_Type" Schema="dbo" store:Type="Tables" />
@@ -569,8 +580,9 @@
           <EntitySet Name="dm_DeptGroups" EntityType="DBDocumentManagementSystemModel.dm_DeptGroups" />
           <EntitySet Name="dm_DrivingLic" EntityType="DBDocumentManagementSystemModel.dm_DrivingLic" />
           <EntitySet Name="dt201_Base" EntityType="DBDocumentManagementSystemModel.dt201_Base" />
-          <EntitySet Name="dt201_Forms" EntityType="DBDocumentManagementSystemModel.dt201_Forms" />
           <EntitySet Name="dt201_ProgInfo" EntityType="DBDocumentManagementSystemModel.dt201_ProgInfo" />
+          <EntitySet Name="dt201_Role" EntityType="DBDocumentManagementSystemModel.dt201_Role" />
+          <EntitySet Name="dt201_Forms" EntityType="DBDocumentManagementSystemModel.dt201_Forms" />
           <EntitySet Name="dt201_Progress" EntityType="DBDocumentManagementSystemModel.dt201_Progress" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
@@ -1005,13 +1017,31 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdParent" Type="Int32" Nullable="false" />
-          <Property Name="IdGroup" Type="Int32" Nullable="false" />
+          <Property Name="IdGroup" Type="Int32" />
           <Property Name="DocCode" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
           <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Articles" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="IdDept" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
           <Property Name="IsFinalNode" Type="Boolean" />
           <Property Name="IsDel" Type="Boolean" />
+          <Property Name="DelTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="dt201_ProgInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdAtt" Type="Int32" Nullable="false" />
+          <Property Name="IdUser" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="RespTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="dt201_Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="dt201_Forms">
           <Key>
@@ -1025,17 +1055,7 @@
           <Property Name="UploadUser" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="AttId" Type="Int32" />
           <Property Name="IsProcessing" Type="Boolean" />
-          <Property Name="IdProcess" Type="Int32" />
-        </EntityType>
-        <EntityType Name="dt201_ProgInfo">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdAtt" Type="Int32" Nullable="false" />
-          <Property Name="IdUser" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Note" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-          <Property Name="RespTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DigitalSign" Type="Boolean" />
         </EntityType>
         <EntityType Name="dt201_Progress">
           <Key>
@@ -1044,6 +1064,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdAtt" Type="Int32" Nullable="false" />
           <Property Name="IdUser" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="IdRole" Type="Int32" />
+          <Property Name="IdForm" Type="Int32" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1520,6 +1542,7 @@
           <EntitySetMapping Name="dt201_Base">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt201_Base">
               <MappingFragment StoreEntitySet="dt201_Base">
+                <ScalarProperty Name="DelTime" ColumnName="DelTime" />
                 <ScalarProperty Name="IsDel" ColumnName="IsDel" />
                 <ScalarProperty Name="IsFinalNode" ColumnName="IsFinalNode" />
                 <ScalarProperty Name="IdDept" ColumnName="IdDept" />
@@ -1528,21 +1551,6 @@
                 <ScalarProperty Name="DocCode" ColumnName="DocCode" />
                 <ScalarProperty Name="IdGroup" ColumnName="IdGroup" />
                 <ScalarProperty Name="IdParent" ColumnName="IdParent" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="dt201_Forms">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt201_Forms">
-              <MappingFragment StoreEntitySet="dt201_Forms">
-                <ScalarProperty Name="IdProcess" ColumnName="IdProcess" />
-                <ScalarProperty Name="IsProcessing" ColumnName="IsProcessing" />
-                <ScalarProperty Name="AttId" ColumnName="AttId" />
-                <ScalarProperty Name="UploadUser" ColumnName="UploadUser" />
-                <ScalarProperty Name="UploadTime" ColumnName="UploadTime" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="IdBase" ColumnName="IdBase" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1558,9 +1566,34 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="dt201_Role">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt201_Role">
+              <MappingFragment StoreEntitySet="dt201_Role">
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt201_Forms">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt201_Forms">
+              <MappingFragment StoreEntitySet="dt201_Forms">
+                <ScalarProperty Name="DigitalSign" ColumnName="DigitalSign" />
+                <ScalarProperty Name="IsProcessing" ColumnName="IsProcessing" />
+                <ScalarProperty Name="AttId" ColumnName="AttId" />
+                <ScalarProperty Name="UploadUser" ColumnName="UploadUser" />
+                <ScalarProperty Name="UploadTime" ColumnName="UploadTime" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="IdBase" ColumnName="IdBase" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="dt201_Progress">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt201_Progress">
               <MappingFragment StoreEntitySet="dt201_Progress">
+                <ScalarProperty Name="IdForm" ColumnName="IdForm" />
+                <ScalarProperty Name="IdRole" ColumnName="IdRole" />
                 <ScalarProperty Name="IdUser" ColumnName="IdUser" />
                 <ScalarProperty Name="IdAtt" ColumnName="IdAtt" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
