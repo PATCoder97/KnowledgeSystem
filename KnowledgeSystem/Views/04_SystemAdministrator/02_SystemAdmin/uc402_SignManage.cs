@@ -96,11 +96,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
             LoadSign();
         }
 
-        private void gcData_DoubleClick(object sender, EventArgs e)
-        {
-
-        }
-
         private void gvData_DoubleClick(object sender, EventArgs e)
         {
             GridView view = sender as GridView;
@@ -117,9 +112,9 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
         private void btnExportExcel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            //f00_PdfTools frm = new f00_PdfTools(@"E:\01. DEV\02. KnowledgeSystem\Test\Blank.pdf");
-            f00_PdfTools frm = new f00_PdfTools(@"C:\Users\ANHTUAN\Desktop\New folder\Blank.pdf");
-            frm.ShowDialog();
+            ////f00_PdfTools frm = new f00_PdfTools(@"E:\01. DEV\02. KnowledgeSystem\Test\Blank.pdf");
+            //f00_PdfTools frm = new f00_PdfTools(@"C:\Users\ANHTUAN\Desktop\New folder\Blank.pdf");
+            //frm.ShowDialog();
         }
     }
 }

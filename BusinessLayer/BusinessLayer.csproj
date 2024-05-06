@@ -69,6 +69,7 @@
     <Compile Include="dt201\dt201_FormsBUS.cs" />
     <Compile Include="dt201\dt201_RoleBUS.cs" />
     <Compile Include="dt201\dt201_ProgressBUS.cs" />
+    <Compile Include="dt201\dt201_ProgInfoBUS.cs" />
     <Compile Include="dt202\dt202_BaseBUS.cs" />
     <Compile Include="dt202\dt202_AttachBUS.cs" />
     <Compile Include="dt202\dt202_TypeBUS.cs" />

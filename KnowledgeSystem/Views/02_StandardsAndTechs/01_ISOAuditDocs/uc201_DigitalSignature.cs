@@ -1,6 +1,7 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
 using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Views.Grid;
 using KnowledgeSystem.Helpers;
 using System;
 using System.Collections.Generic;
@@ -50,6 +51,18 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         {
             gcData.DataSource = sourceForm;
             LoadData();
+        }
+
+        private void gvData_DoubleClick(object sender, EventArgs e)
+        {
+            GridView view = sender as GridView;
+
+            int idForm = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColId));
+
+            f201_DocSignInfo fInfo = new f201_DocSignInfo();
+            fInfo.idBaseForm = idForm;
+
+            fInfo.ShowDialog();
         }
     }
 }

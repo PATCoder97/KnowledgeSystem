@@ -10,27 +10,27 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer
 {
-    public class dt201_ProgressBUS
+    public class dt201_ProgInfoBUS
     {
         TPLogger logger;
 
-        private static dt201_ProgressBUS instance;
+        private static dt201_ProgInfoBUS instance;
 
-        public static dt201_ProgressBUS Instance
+        public static dt201_ProgInfoBUS Instance
         {
-            get { if (instance == null) instance = new dt201_ProgressBUS(); return instance; }
+            get { if (instance == null) instance = new dt201_ProgInfoBUS(); return instance; }
             private set { instance = value; }
         }
 
-        private dt201_ProgressBUS() { logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName); }
+        private dt201_ProgInfoBUS() { logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName); }
 
-        public int Add(dt201_Progress item)
+        public int Add(dt201_ProgInfo item)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    _context.dt201_Progress.Add(item);
+                    _context.dt201_ProgInfo.Add(item);
                     int affectedRecords = _context.SaveChanges();
 
                     if (affectedRecords > 0)
@@ -48,37 +48,13 @@ namespace BusinessLayer
             }
         }
 
-        public bool AddRange(List<dt201_Progress> items)
+        public List<dt201_ProgInfo> GetList()
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    _context.dt201_Progress.AddRange(items);
-                    int affectedRecords = _context.SaveChanges();
-
-                    if (affectedRecords > 0)
-                    {
-                        return true;
-                    }
-
-                    return false;
-                }
-            }
-            catch (Exception ex)
-            {
-                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
-                return false;
-            }
-        }
-
-        public List<dt201_Progress> GetList()
-        {
-            try
-            {
-                using (var _context = new DBDocumentManagementSystemEntities())
-                {
-                    return _context.dt201_Progress.ToList();
+                    return _context.dt201_ProgInfo.ToList();
                 }
             }
             catch (Exception ex)
@@ -88,13 +64,13 @@ namespace BusinessLayer
             }
         }
 
-        public List<dt201_Progress> GetListByIdForm(int idForm)
+        public List<dt201_ProgInfo> GetListByIdForm(int idForm)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dt201_Progress.Where(r => r.IdForm == idForm).ToList();
+                    return _context.dt201_ProgInfo.Where(r => r.IdForm == idForm).ToList();
                 }
             }
             catch (Exception ex)
@@ -104,13 +80,13 @@ namespace BusinessLayer
             }
         }
 
-        public bool AddOrUpdate(dt201_Progress item)
+        public bool AddOrUpdate(dt201_ProgInfo item)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    _context.dt201_Progress.AddOrUpdate(item);
+                    _context.dt201_ProgInfo.AddOrUpdate(item);
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;
                 }
@@ -128,8 +104,8 @@ namespace BusinessLayer
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    var entity = _context.dt201_Progress.FirstOrDefault(r => r.Id == Id);
-                    _context.dt201_Progress.Remove(entity);
+                    var entity = _context.dt201_ProgInfo.FirstOrDefault(r => r.Id == Id);
+                    _context.dt201_ProgInfo.Remove(entity);
                     _context.SaveChanges();
 
                     int affectedRecords = _context.SaveChanges();

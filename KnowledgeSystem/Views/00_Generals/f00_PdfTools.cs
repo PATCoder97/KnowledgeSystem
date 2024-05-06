@@ -27,11 +27,14 @@ namespace KnowledgeSystem.Views._00_Generals
 {
     public partial class f00_PdfTools : DevExpress.XtraBars.Ribbon.RibbonForm
     {
-        public f00_PdfTools(string filePath_)
+        public string OutFileName { get; private set; }
+
+        public f00_PdfTools(string FilePath, string OutDic)
         {
             InitializeComponent();
             InitializeIcon();
-            filePath = filePath_;
+            filePath = FilePath;
+            outDic = OutDic;
 
             pdfViewer.MouseDown += PdfViewer_MouseDown;
             pdfViewer.MouseUp += PdfViewer_MouseUp;
@@ -80,7 +83,9 @@ namespace KnowledgeSystem.Views._00_Generals
         List<GraphicsCoordinates> signs = new List<GraphicsCoordinates>();
         GraphicsCoordinates currentSign;
 
+
         string filePath = "";
+        string outDic = "";
 
         Image imageSign = null;
         string descrip = "";
@@ -184,7 +189,9 @@ namespace KnowledgeSystem.Views._00_Generals
         private void SaveDrawingAndReload()
         {
             string fileName = pdfViewer.DocumentFilePath;
-            string fileNameSave = System.IO.Path.GetDirectoryName(pdfViewer.DocumentFilePath) + "\\" + DateTime.Now.ToString("mmhhss") + ".pdf";
+            OutFileName = EncryptionHelper.EncryptionFileName(fileName);
+
+            string fileNameSave = Path.Combine(outDic, OutFileName);
             pdfViewer.CloseDocument();
             using (PdfDocumentProcessor processor = new PdfDocumentProcessor())
             {
@@ -253,7 +260,7 @@ namespace KnowledgeSystem.Views._00_Generals
 
             // Load các chữ ký, con dấu
             dmSigns = dm_SignBUS.Instance.GetList();
-           
+
             DefaultSign();
         }
 

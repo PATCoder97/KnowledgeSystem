@@ -31,6 +31,7 @@ namespace KnowledgeSystem.Helpers
         public static string Folder302 { get; set; }
         public static string Folder202 { get; set; }
         public static string Folder402 { get; set; }
+        public static string Folder201 { get; set; }
         public static string FolderSign { get; set; }
 
         // CONST Value

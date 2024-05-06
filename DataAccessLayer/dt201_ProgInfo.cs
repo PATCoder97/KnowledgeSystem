@@ -19,5 +19,6 @@ namespace DataAccessLayer
         public string IdUser { get; set; }
         public string Note { get; set; }
         public System.DateTime RespTime { get; set; }
+        public Nullable<int> IdForm { get; set; }
     }
 }

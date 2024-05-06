@@ -197,6 +197,7 @@
           <Property Name="IdUser" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="Note" Type="nvarchar" MaxLength="512" />
           <Property Name="RespTime" Type="datetime" Nullable="false" />
+          <Property Name="IdForm" Type="int" />
         </EntityType>
         <EntityType Name="dt201_Progress">
           <Key>
@@ -580,10 +581,10 @@
           <EntitySet Name="dm_DeptGroups" EntityType="DBDocumentManagementSystemModel.dm_DeptGroups" />
           <EntitySet Name="dm_DrivingLic" EntityType="DBDocumentManagementSystemModel.dm_DrivingLic" />
           <EntitySet Name="dt201_Base" EntityType="DBDocumentManagementSystemModel.dt201_Base" />
-          <EntitySet Name="dt201_ProgInfo" EntityType="DBDocumentManagementSystemModel.dt201_ProgInfo" />
           <EntitySet Name="dt201_Role" EntityType="DBDocumentManagementSystemModel.dt201_Role" />
           <EntitySet Name="dt201_Forms" EntityType="DBDocumentManagementSystemModel.dt201_Forms" />
           <EntitySet Name="dt201_Progress" EntityType="DBDocumentManagementSystemModel.dt201_Progress" />
+          <EntitySet Name="dt201_ProgInfo" EntityType="DBDocumentManagementSystemModel.dt201_ProgInfo" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -1026,16 +1027,6 @@
           <Property Name="IsDel" Type="Boolean" />
           <Property Name="DelTime" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="dt201_ProgInfo">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdAtt" Type="Int32" Nullable="false" />
-          <Property Name="IdUser" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Note" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-          <Property Name="RespTime" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
         <EntityType Name="dt201_Role">
           <Key>
             <PropertyRef Name="Id" />
@@ -1065,6 +1056,17 @@
           <Property Name="IdAtt" Type="Int32" Nullable="false" />
           <Property Name="IdUser" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="IdRole" Type="Int32" />
+          <Property Name="IdForm" Type="Int32" />
+        </EntityType>
+        <EntityType Name="dt201_ProgInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdAtt" Type="Int32" Nullable="false" />
+          <Property Name="IdUser" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="RespTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IdForm" Type="Int32" />
         </EntityType>
         </Schema>
@@ -1555,17 +1557,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dt201_ProgInfo">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt201_ProgInfo">
-              <MappingFragment StoreEntitySet="dt201_ProgInfo">
-                <ScalarProperty Name="RespTime" ColumnName="RespTime" />
-                <ScalarProperty Name="Note" ColumnName="Note" />
-                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
-                <ScalarProperty Name="IdAtt" ColumnName="IdAtt" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="dt201_Role">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt201_Role">
               <MappingFragment StoreEntitySet="dt201_Role">
@@ -1594,6 +1585,18 @@
               <MappingFragment StoreEntitySet="dt201_Progress">
                 <ScalarProperty Name="IdForm" ColumnName="IdForm" />
                 <ScalarProperty Name="IdRole" ColumnName="IdRole" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="IdAtt" ColumnName="IdAtt" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt201_ProgInfo">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt201_ProgInfo">
+              <MappingFragment StoreEntitySet="dt201_ProgInfo">
+                <ScalarProperty Name="IdForm" ColumnName="IdForm" />
+                <ScalarProperty Name="RespTime" ColumnName="RespTime" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
                 <ScalarProperty Name="IdUser" ColumnName="IdUser" />
                 <ScalarProperty Name="IdAtt" ColumnName="IdAtt" />
                 <ScalarProperty Name="Id" ColumnName="Id" />

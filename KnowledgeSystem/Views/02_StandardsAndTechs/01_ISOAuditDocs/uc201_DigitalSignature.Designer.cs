@@ -39,6 +39,7 @@
             this.gColIdFile = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.gColIdForm = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
@@ -98,6 +99,7 @@
             this.gridColumn4,
             this.gColEnterDate,
             this.gridColumn6,
+            this.gColIdForm,
             this.gColIdFile});
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
@@ -107,6 +109,7 @@
             this.gvData.OptionsView.EnableAppearanceOddRow = true;
             this.gvData.OptionsView.ShowAutoFilterRow = true;
             this.gvData.OptionsView.ShowGroupPanel = false;
+            this.gvData.DoubleClick += new System.EventHandler(this.gvData_DoubleClick);
             // 
             // gColId
             // 
@@ -178,6 +181,12 @@
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
+            // gColIdForm
+            // 
+            this.gColIdForm.Caption = "IdForm";
+            this.gColIdForm.FieldName = "data.IdForm";
+            this.gColIdForm.Name = "gColIdForm";
+            // 
             // uc201_DigitalSignature
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
@@ -211,5 +220,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private DevExpress.XtraGrid.Columns.GridColumn gColIdFile;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraGrid.Columns.GridColumn gColIdForm;
     }
 }

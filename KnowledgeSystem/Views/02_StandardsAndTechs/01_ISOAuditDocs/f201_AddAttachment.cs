@@ -168,7 +168,12 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             bool isProcess = ckSign.CheckState == CheckState.Checked;
 
-
+            bool isProgressError = (progresses.Any(r => r.IdUser == TPConfigs.LoginUser.Id) || progresses.GroupBy(x => x.IdUser).Any(g => g.Count() > 1));
+            if (isProgressError)
+            {
+                XtraMessageBox.Show("流程重複或包含您", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             //if (string.IsNullOrEmpty(ursId) || string.IsNullOrEmpty(course))
             //{
@@ -199,6 +204,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                         int idForm = dt201_FormsBUS.Instance.Add(baseForm);
                         result = idForm > 0;
 
+                        progresses.Insert(0, new ProgressDetail() { IdUser = TPConfigs.LoginUser.Id });
                         baseProgresses = (from data in progresses
                                           select new dt201_Progress
                                           {
