@@ -40,6 +40,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._05_PrintLabel
 
         List<string> printers = new List<string>();
 
+        List<dm_Departments> depts;
+
         public static DataSet ExcelToDataSet(string filePath)
         {
             string text = System.IO.Path.GetExtension(filePath).ToLower();
@@ -184,6 +186,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._05_PrintLabel
         private void uc305_PrintLabelMain_Load(object sender, EventArgs e)
         {
             printers = GetPrinters();
+
+            depts = dm_DeptBUS.Instance.GetList();
         }
 
         private void btnDeviceManagement_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -311,10 +315,49 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._05_PrintLabel
                                          NameVN = TPConfigs.LoginUser.DisplayNameVN,
                                          NameTW = TPConfigs.LoginUser.DisplayName,
                                          Dept = TPConfigs.LoginUser.IdDepartment,
-                                     })
-                                     .ToArray();
+                                     }).ToArray();
 
             var report = new rpWasteLabel();
+            report.DataSource = labels;
+            report.CreateDocument();
+            report.PrintingSystem.ShowMarginsWarning = false;
+            docViewerLabel.DocumentSource = report;
+        }
+
+        private void btnCabinetManage_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            XtraInputBoxArgs args = new XtraInputBoxArgs();
+
+            args.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
+            args.Caption = TPConfigs.SoftNameTW;
+            args.Prompt = $"<font='Microsoft JhengHei UI' size=14>請輸入數量</font>";
+            args.DefaultButtonIndex = 0;
+            TextEdit editor = new TextEdit();
+            editor.Properties.DisplayFormat.FormatString = "n0";
+            editor.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            editor.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
+            editor.Properties.MaskSettings.Set("mask", "n0");
+
+            args.Editor = editor;
+
+            editor.Properties.Appearance.Font = fontUI14;
+            editor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            editor.Properties.NullText = "";
+
+            var result = XtraInputBox.Show(args);
+            if (result == null) return;
+
+            int numLabel = Convert.ToInt16(result?.ToString() ?? "1");
+
+            object[] labels = Enumerable.Range(0, numLabel)
+                                     .Select(_ => new
+                                     {
+                                         NameVN = TPConfigs.LoginUser.DisplayNameVN,
+                                         NameTW = TPConfigs.LoginUser.DisplayName,
+                                         Dept = depts.FirstOrDefault(r => r.Id == TPConfigs.LoginUser.IdDepartment)?.DisplayName,
+                                     }).ToArray();
+
+            var report = new rpCabinetManage();
             report.DataSource = labels;
             report.CreateDocument();
             report.PrintingSystem.ShowMarginsWarning = false;

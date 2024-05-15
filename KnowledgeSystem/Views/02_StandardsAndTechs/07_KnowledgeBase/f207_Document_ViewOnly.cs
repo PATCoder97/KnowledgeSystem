@@ -141,7 +141,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
             // Initialize lists
             lsKnowledgeTypes = dt207_TypeBUS.Instance.GetList();
-            lsUsers = dm_UserBUS.Instance.GetList();
+            lsUsers = dm_UserBUS.Instance.GetList().Where(r => r.Status == 0).ToList();
             lsGroups = dm_GroupBUS.Instance.GetList();
             lsGroupUser = dm_GroupUserBUS.Instance.GetList();
 
@@ -181,7 +181,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 int idProgressByDoc = docProcess.IdProgress;
                 int idDocProgress = docProcess.Id;
                 var lsDMStepProgress = dm_StepProgressBUS.Instance.GetListByIdProgress(idProgressByDoc);
-                var lsDocProgressInfos = dt207_DocProcessingInfoBUS.Instance.GetListByIdDocProcess(idDocProgress); 
+                var lsDocProgressInfos = dt207_DocProcessingInfoBUS.Instance.GetListByIdDocProcess(idDocProgress);
 
                 var lsStepProgressDoc = (from data in lsDMStepProgress
                                          join groups in lsGroups on data.IdGroup equals groups.Id
@@ -217,7 +217,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 else
                 {
                     // Thông tin cơ bản
-                    var dataBaseInfo = _dt207_BaseBUS.GetItemById(idDocument); 
+                    var dataBaseInfo = _dt207_BaseBUS.GetItemById(idDocument);
                     txbId.Text = dataBaseInfo.Id;
                     cbbType.EditValue = dataBaseInfo.IdTypes;
                     cbbUserUpload.EditValue = dataBaseInfo.UserUpload;

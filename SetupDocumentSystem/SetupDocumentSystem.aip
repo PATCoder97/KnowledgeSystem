@@ -108,6 +108,7 @@
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_f301_NotifyPersonnelTransfer.html" Value="..\KnowledgeSystem\bin\Release\Html"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_add.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_add_User_Group.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_attach.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_borr_vehicle.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_cancel.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_change_user.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
@@ -139,6 +140,7 @@
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_remove.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_signature.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_team.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_transfer.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_unfriend.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_uplevel.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons_upload_to_ftp.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
@@ -249,6 +251,7 @@
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_f301_NotifyPersonnelTransfer.html" Value="f301_NotifyPersonnelTransfer.html"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_icons_add.svg" Value="icons_add.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_icons_add_User_Group.svg" Value="icons_add_User_Group.svg"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_icons_attach.svg" Value="icons_attach.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_icons_borr_vehicle.svg" Value="icons_borr_vehicle.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_icons_cancel.svg" Value="icons_cancel.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_icons_change_user.svg" Value="icons_change_user.svg"/>
@@ -280,6 +283,7 @@
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_icons_remove.svg" Value="icons_remove.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_icons_signature.svg" Value="icons_signature.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_icons_team.svg" Value="icons_team.svg"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_icons_transfer.svg" Value="icons_transfer.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_icons_unfriend.svg" Value="icons_unfriend.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_icons_uplevel.svg" Value="icons_uplevel.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_icons_upload_to_ftp.svg" Value="icons_upload_to_ftp.svg"/>
@@ -478,6 +482,8 @@
     <ROW File="DevExpress.XtraCharts.v22.1.Extensions.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~50.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraCharts.v22.1.Extensions.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraCharts.v22.1.Extensions.dll&gt;" SelfReg="false"/>
     <ROW File="icons_borr_vehicle.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~37.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_borr_vehicle.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_borr_vehicle.svg&gt;" SelfReg="false"/>
     <ROW File="noimage.png" Component_="KnowledgeSystem_ContentOutput_Images" FileName="[|AI_PROPPATH_FILENAME_PERBUILD_noimage.png]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_noimage.png&gt;" SelfReg="false"/>
+    <ROW File="icons_attach.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~38.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_attach.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_attach.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_transfer.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~39.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_transfer.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_transfer.svg&gt;" SelfReg="false"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.AppPathsComponent">
     <ROW Name="AI_APPPATH_PERBUILD_Actions_Bell.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_Actions_Bell.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_Actions_Bell.svg]" Type="2" Content="0"/>
@@ -581,6 +587,7 @@
     <ROW Name="AI_APPPATH_PERBUILD_f301_NotifyPersonnelTransfer.html" Path="[|AI_PROPPATH_DIR_PERBUILD_f301_NotifyPersonnelTransfer.html]\[|AI_PROPPATH_FILENAME_PERBUILD_f301_NotifyPersonnelTransfer.html]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_icons_add.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_icons_add.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_icons_add.svg]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_icons_add_User_Group.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_icons_add_User_Group.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_icons_add_User_Group.svg]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_icons_attach.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_icons_attach.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_icons_attach.svg]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_icons_borr_vehicle.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_icons_borr_vehicle.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_icons_borr_vehicle.svg]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_icons_cancel.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_icons_cancel.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_icons_cancel.svg]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_icons_change_user.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_icons_change_user.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_icons_change_user.svg]" Type="2" Content="0"/>
@@ -612,6 +619,7 @@
     <ROW Name="AI_APPPATH_PERBUILD_icons_remove.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_icons_remove.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_icons_remove.svg]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_icons_signature.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_icons_signature.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_icons_signature.svg]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_icons_team.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_icons_team.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_icons_team.svg]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_icons_transfer.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_icons_transfer.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_icons_transfer.svg]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_icons_unfriend.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_icons_unfriend.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_icons_unfriend.svg]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_icons_uplevel.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_icons_uplevel.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_icons_uplevel.svg]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_icons_upload_to_ftp.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_icons_upload_to_ftp.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_icons_upload_to_ftp.svg]" Type="2" Content="0"/>
@@ -900,5 +908,7 @@
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.XtraCharts.v22.1.Extensions.dll"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_borr_vehicle.svg"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="noimage.png"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_attach.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_transfer.svg"/>
   </COMPONENT>
 </DOCUMENT>

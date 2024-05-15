@@ -174,7 +174,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
             // Load các dữ liệu LIST ban đầu
             lsKnowledgeTypes = dt207_TypeBUS.Instance.GetList();
-            lsUsers = dm_UserBUS.Instance.GetList();
+            lsUsers = dm_UserBUS.Instance.GetList().Where(r => r.Status == 0).ToList(); 
             lsGroups = dm_GroupBUS.Instance.GetList();
             lsGroupUser = dm_GroupUserBUS.Instance.GetList();
             progressSelect = dm_ProgressBUS.Instance.GetListByDept(TPConfigs.LoginUser.IdDepartment).FirstOrDefault();

@@ -36,10 +36,10 @@
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColEnterDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColIdForm = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColIdFile = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.gColIdForm = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
@@ -122,8 +122,6 @@
             // 
             // gridColumn3
             // 
-            this.gridColumn3.AppearanceCell.Options.UseTextOptions = true;
-            this.gridColumn3.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn3.Caption = "文件編號";
             this.gridColumn3.FieldName = "data.Code";
             this.gridColumn3.Name = "gridColumn3";
@@ -156,6 +154,12 @@
             this.gridColumn6.VisibleIndex = 3;
             this.gridColumn6.Width = 91;
             // 
+            // gColIdForm
+            // 
+            this.gColIdForm.Caption = "IdForm";
+            this.gColIdForm.FieldName = "data.IdForm";
+            this.gColIdForm.Name = "gColIdForm";
+            // 
             // gColIdFile
             // 
             this.gColIdFile.Caption = "gColIdFile";
@@ -180,12 +184,6 @@
             this.layoutControlItem1.Size = new System.Drawing.Size(887, 561);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
-            // 
-            // gColIdForm
-            // 
-            this.gColIdForm.Caption = "IdForm";
-            this.gColIdForm.FieldName = "data.IdForm";
-            this.gColIdForm.Name = "gColIdForm";
             // 
             // uc201_DigitalSignature
             // 

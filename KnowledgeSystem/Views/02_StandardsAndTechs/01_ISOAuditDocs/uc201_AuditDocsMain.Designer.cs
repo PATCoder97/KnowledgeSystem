@@ -135,8 +135,6 @@
             // 
             // gridColumn3
             // 
-            this.gridColumn3.AppearanceCell.Options.UseTextOptions = true;
-            this.gridColumn3.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn3.Caption = "文件編號";
             this.gridColumn3.FieldName = "Code";
             this.gridColumn3.Name = "gridColumn3";

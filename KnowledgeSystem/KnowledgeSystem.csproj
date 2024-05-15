@@ -261,6 +261,12 @@
     <Compile Include="Views\03_DepartmentManage\05_PrintLabel\rp5SAreaDivision.Designer.cs">
       <DependentUpon>rp5SAreaDivision.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\03_DepartmentManage\05_PrintLabel\rpCabinetManage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\05_PrintLabel\rpCabinetManage.Designer.cs">
+      <DependentUpon>rpCabinetManage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\03_DepartmentManage\05_PrintLabel\rpDeviceManagement.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -631,6 +637,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\05_PrintLabel\rp5SAreaDivision.resx">
       <DependentUpon>rp5SAreaDivision.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\05_PrintLabel\rpCabinetManage.resx">
+      <DependentUpon>rpCabinetManage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\05_PrintLabel\rpDeviceManagement.resx">
       <DependentUpon>rpDeviceManagement.cs</DependentUpon>

@@ -120,7 +120,7 @@ namespace KnowledgeSystem.Views._00_Generals
             TPConfigs.Folder302 = Path.Combine(TPConfigs.FolderData, "302");
             TPConfigs.Folder202 = Path.Combine(TPConfigs.FolderData, "202");
             TPConfigs.Folder402 = Path.Combine(TPConfigs.FolderData, "402");
-            TPConfigs.Folder402 = Path.Combine(TPConfigs.FolderData, "201");
+            TPConfigs.Folder201 = Path.Combine(TPConfigs.FolderData, "201");
             TPConfigs.FolderSign = Path.Combine(TPConfigs.Folder402, "ImageSign");
 
             // Lấy các role

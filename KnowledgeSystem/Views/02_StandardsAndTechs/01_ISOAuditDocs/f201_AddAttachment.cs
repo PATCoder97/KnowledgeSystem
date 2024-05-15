@@ -43,13 +43,18 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         List<dm_User> users;
         List<ProgressDetail> progresses = new List<ProgressDetail>();
         List<dt201_Role> roles;
-        dm_Attachment attachment = new dm_Attachment();
+        Attachment attachment = new Attachment();
 
         BindingSource sourceProgresses = new BindingSource();
 
         class ProgressDetail : dt201_Progress
         {
             public string UserName { get; set; }
+        }
+
+        private class Attachment : dm_Attachment
+        {
+            public string FullPath { get; set; }
         }
 
         private void InitializeIcon()
@@ -198,8 +203,16 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 {
                     case EventFormInfo.Create:
 
-                        int idAtt = dm_AttachmentBUS.Instance.Add(attachment);
+                        dm_Attachment att = new dm_Attachment()
+                        {
+                            Thread = attachment.Thread,
+                            ActualName = attachment.ActualName,
+                            EncryptionName = attachment.EncryptionName
+                        };
+                        int idAtt = dm_AttachmentBUS.Instance.Add(att);
                         baseForm.AttId = idAtt;
+
+                        File.Copy(attachment.FullPath, Path.Combine(TPConfigs.Folder201, attachment.EncryptionName), true);
 
                         int idForm = dt201_FormsBUS.Instance.Add(baseForm);
                         result = idForm > 0;
@@ -257,11 +270,12 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             string fileName = openFileDialog.FileName;
             string encryptionName = EncryptionHelper.EncryptionFileName(fileName);
-            attachment = new dm_Attachment()
+            attachment = new Attachment()
             {
                 Thread = "201",
                 EncryptionName = encryptionName,
-                ActualName = Path.GetFileName(fileName)
+                ActualName = Path.GetFileName(fileName),
+                FullPath = fileName
             };
         }
     }

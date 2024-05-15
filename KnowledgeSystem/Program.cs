@@ -35,25 +35,27 @@ namespace KnowledgeSystem
             Application.SetCompatibleTextRenderingDefault(false);
 #if DEBUG
 
-            //Application.Run(new f00_Main());
+            Application.Run(new f00_Main());
 
-            TPConfigs.SoftNameTW = "冶金文管系統";
-            TPConfigs.LoginUser = dm_UserBUS.Instance.GetItemById("VNW0014732");
-            AppPermission.Instance.CheckAppPermission(7);
+            //TPConfigs.SoftNameTW = "冶金文管系統";
+            //TPConfigs.LoginUser = dm_UserBUS.Instance.GetItemById("VNW0014732");
+            //AppPermission.Instance.CheckAppPermission(7);
 
-            TPConfigs.IdParentControl = AppPermission.SafetyCertMain;
-            var lsStaticValue = sys_StaticValueBUS.Instance.GetList();
-            TPConfigs.SoftNameEN = lsStaticValue.FirstOrDefault(r => r.KeyT == "SoftNameEN").ValueT;
-            TPConfigs.SoftNameTW = lsStaticValue.FirstOrDefault(r => r.KeyT == "SoftNameTW").ValueT;
-            TPConfigs.UrlUpdate = lsStaticValue.FirstOrDefault(r => r.KeyT == "UrlUpdate").ValueT;
-            TPConfigs.FolderData = lsStaticValue.FirstOrDefault(r => r.KeyT == "FolderData").ValueT;
-            TPConfigs.Folder207 = Path.Combine(TPConfigs.FolderData, "207");
-            TPConfigs.Folder302 = Path.Combine(TPConfigs.FolderData, "302");
-            TPConfigs.Folder202 = Path.Combine(TPConfigs.FolderData, "202");
-            TPConfigs.Folder402 = Path.Combine(TPConfigs.FolderData, "402");
-            TPConfigs.Folder201 = Path.Combine(TPConfigs.FolderData, "201");
-            TPConfigs.FolderSign = Path.Combine(TPConfigs.Folder402, "ImageSign");
-            Application.Run(new f00_FluentFrame(42));
+            //TPConfigs.IdParentControl = AppPermission.SafetyCertMain;
+            //var lsStaticValue = sys_StaticValueBUS.Instance.GetList();
+            //TPConfigs.SoftNameEN = lsStaticValue.FirstOrDefault(r => r.KeyT == "SoftNameEN").ValueT;
+            //TPConfigs.SoftNameTW = lsStaticValue.FirstOrDefault(r => r.KeyT == "SoftNameTW").ValueT;
+            //TPConfigs.UrlUpdate = lsStaticValue.FirstOrDefault(r => r.KeyT == "UrlUpdate").ValueT;
+            //TPConfigs.FolderData = lsStaticValue.FirstOrDefault(r => r.KeyT == "FolderData").ValueT;
+            //TPConfigs.Folder207 = Path.Combine(TPConfigs.FolderData, "207");
+            //TPConfigs.Folder302 = Path.Combine(TPConfigs.FolderData, "302");
+            //TPConfigs.Folder202 = Path.Combine(TPConfigs.FolderData, "202");
+            //TPConfigs.Folder402 = Path.Combine(TPConfigs.FolderData, "402");
+            //TPConfigs.Folder201 = Path.Combine(TPConfigs.FolderData, "201");
+            //TPConfigs.FolderSign = Path.Combine(TPConfigs.Folder402, "ImageSign");
+            //Application.Run(new f00_FluentFrame(42));
+
+            //Application.Run(new f303_ShiftScheduleMain());
 
 #else
             Application.Run(new f00_Main());

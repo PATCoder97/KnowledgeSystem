@@ -322,6 +322,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._03_ShiftSchedule
             int indexStart = today < 21 ? today + 11 : today - 20;
             if (indexStart >= 31) return;
 
+            result = result.Select((value, index) => index < indexStart ? "" : value).ToList();
+
             int flag = 0;
             for (int j = 0; j < 3; j++)
             {
@@ -331,7 +333,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._03_ShiftSchedule
                 for (int i = 0; i < 10; i++)
                 {
                     flag++;
-                    string shift = (j == 0 && i < indexStart - 1) ? "" : result[flag];
+                    string shift = result[flag];
                     SendMouseAndKey(x, y, shift);
                     x += 55;
                 }

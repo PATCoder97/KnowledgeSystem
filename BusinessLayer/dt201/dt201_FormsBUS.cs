@@ -96,6 +96,22 @@ namespace BusinessLayer
             }
         }
 
+        public dt201_Forms GetItemById(int id)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt201_Forms.FirstOrDefault(r => r.Id == id);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public bool AddOrUpdate(dt201_Forms item)
         {
             try

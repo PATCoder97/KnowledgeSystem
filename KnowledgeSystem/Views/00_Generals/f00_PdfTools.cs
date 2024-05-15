@@ -242,7 +242,8 @@ namespace KnowledgeSystem.Views._00_Generals
                     }
                 }
                 // Save the document
-
+                if (!Directory.Exists(outDic))
+                    Directory.CreateDirectory(outDic);
                 processor.SaveDocument(fileNameSave);
             }
             signs.Clear();
