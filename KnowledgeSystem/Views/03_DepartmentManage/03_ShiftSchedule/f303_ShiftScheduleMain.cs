@@ -50,6 +50,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._03_ShiftSchedule
             }
         }
 
+        int thisMonth = 1;
         int numDaysInMonth = 0;
         Dictionary<string, string> refTableDatas;
         Dictionary<string, string> shiftDatas;
@@ -60,6 +61,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._03_ShiftSchedule
 
         List<string> usrs = new List<string>();
         List<dm_User> usersDB;
+        List<int> indexSundays = new List<int>();
 
         static string GenerateERPString(string original, int numTab)
         {
@@ -68,6 +70,27 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._03_ShiftSchedule
             string tabString = string.Join("", new string[numTab].Select(_ => "{Tab}"));
 
             return $"{firstChars}{tabString}{last40Chars}";
+        }
+
+        private bool CheckErrorSunday(string usr)
+        {
+            bool error = false;
+            var data = shiftDatas[usr].Replace("{Tab}", "XX");
+
+            var result = Enumerable.Range(0, (data.Length + 1) / 2)
+                               .Select(i => data.Substring(i * 2, Math.Min(2, data.Length - i * 2)))
+                               .ToArray();
+
+            foreach (var item in indexSundays)
+            {
+                if (result[item] == "GO")
+                {
+                    error = true;
+                    break;
+                }
+            }
+
+            return error;
         }
 
         private void f303_ShiftScheduleMain_Load(object sender, EventArgs e)
@@ -110,6 +133,23 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._03_ShiftSchedule
                     line += Regex.Replace(PdfTextExtractor.GetTextFromPage(reader, i), @"\s", "");
                 }
             }
+
+            Match matchMonth = Regex.Match(line, @"tháng(\d+)");
+            if (matchMonth.Success) int.TryParse(matchMonth.Groups[1].Value, out thisMonth);
+
+            List<int> days = Enumerable.Range(21, 11)
+                                   .Concat(Enumerable.Range(1, 20))
+                                   .Select(day => Convert.ToInt32(day))
+                                   .ToList();
+
+            DateTime endDate = new DateTime(2024, thisMonth, 20);
+            DateTime startDate = endDate.AddMonths(-1).AddDays(1);
+
+            var sundays = Enumerable.Range(0, (endDate - startDate).Days + 1)
+                                    .Select(offset => startDate.AddDays(offset))
+                                    .Where(date => date.DayOfWeek == DayOfWeek.Sunday).Select(r => r.Day);
+
+            indexSundays = sundays.Select(item => days.IndexOf(item)).ToList();
 
             refTableDatas = new Dictionary<string, string>();
             Regex regex = new Regex(@"D[5-8][休中早夜日]+", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Multiline | RegexOptions.Singleline);
@@ -238,6 +278,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._03_ShiftSchedule
                     btnNext.Enabled = true;
                     btnSave.Enabled = true;
                     btnEdit.Enabled = true;
+
+                    bool error = CheckErrorSunday(userID);
+                    lbUser.ForeColor = error ? System.Drawing.Color.Red : SystemColors.HotTrack;
                 }
             }
         }
@@ -253,6 +296,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._03_ShiftSchedule
             string userName = usersDB.FirstOrDefault(r => r.Id == userID)?.DisplayName;
             lbUser.Text = $"{userID} {userName}";
             userFocus = userID;
+
+            bool error = CheckErrorSunday(userID);
+            lbUser.ForeColor = error ? System.Drawing.Color.Red : SystemColors.HotTrack;
         }
 
         private void btnNext_Click(object sender, EventArgs e)
@@ -266,6 +312,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._03_ShiftSchedule
             string userName = usersDB.FirstOrDefault(r => r.Id == userID)?.DisplayName;
             lbUser.Text = $"{userID} {userName}";
             userFocus = userID;
+
+            bool error = CheckErrorSunday(userID);
+            lbUser.ForeColor = error ? System.Drawing.Color.Red : SystemColors.HotTrack;
         }
 
         private void btnDel_Click(object sender, EventArgs e)
