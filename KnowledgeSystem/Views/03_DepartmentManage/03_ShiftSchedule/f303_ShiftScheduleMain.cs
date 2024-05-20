@@ -199,8 +199,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._03_ShiftSchedule
 
                     outputString = GenerateERPString(outputString, numTab);
 
-                    //// Chuyển ca 日班 thành GO khi có nhân viên đi ca về ca 日
-                    //outputString = outputString.Replace("日班", "GO");
+                    // Chuyển ca 日班 thành GO khi có nhân viên đi ca về ca 日
+                    outputString = outputString.Replace("日班", "GO");
 
                     if (!outputString.Contains("班"))
                         shiftDatas.Add(userID, outputString);
