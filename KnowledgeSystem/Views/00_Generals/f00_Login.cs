@@ -131,7 +131,7 @@ namespace KnowledgeSystem.Views._00_Generals
             txbPassword.Focus();
 #if DEBUG
             txbUserID.Text = "VNW0014732";
-            txbPassword.Text = "Anhtuan07";
+            txbPassword.Text = "Anhtuan08";
             btnLogin_Click(sender, e);
 #endif
         }
@@ -150,8 +150,10 @@ namespace KnowledgeSystem.Views._00_Generals
                 string id = adminLogin.ID;
                 string masterKey = adminLogin.MasterKey;
 
+#if DEBUG
+#else
                 if (string.IsNullOrWhiteSpace(id) || string.IsNullOrWhiteSpace(masterKey) || masterKey != "havy2212") return;
-
+#endif
                 var _userLogin = dm_UserBUS.Instance.GetItemById(id);
                 if (_userLogin == null) return;
 

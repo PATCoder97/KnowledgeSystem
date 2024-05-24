@@ -219,6 +219,8 @@
             this.gridColumn4.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn4.Caption = "單位";
             this.gridColumn4.FieldName = "IdDepartment";
+            this.gridColumn4.MaxWidth = 75;
+            this.gridColumn4.MinWidth = 75;
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 0;
@@ -229,9 +231,12 @@
             this.gridColumn5.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn5.Caption = "賬號";
             this.gridColumn5.FieldName = "Id";
+            this.gridColumn5.MaxWidth = 120;
+            this.gridColumn5.MinWidth = 120;
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
             this.gridColumn5.VisibleIndex = 1;
+            this.gridColumn5.Width = 120;
             // 
             // gridColumn6
             // 
@@ -284,6 +289,8 @@
             this.gridColumn1.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn1.Caption = "單位";
             this.gridColumn1.FieldName = "IdDepartment";
+            this.gridColumn1.MaxWidth = 75;
+            this.gridColumn1.MinWidth = 75;
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
             this.gridColumn1.VisibleIndex = 0;
@@ -294,9 +301,12 @@
             this.gridColumn2.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn2.Caption = "賬號";
             this.gridColumn2.FieldName = "Id";
+            this.gridColumn2.MaxWidth = 120;
+            this.gridColumn2.MinWidth = 120;
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 1;
+            this.gridColumn2.Width = 120;
             // 
             // gridColumn3
             // 
@@ -305,6 +315,7 @@
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 2;
+            this.gridColumn3.Width = 143;
             // 
             // Root
             // 

@@ -22,6 +22,7 @@ using DevExpress.XtraSplashScreen;
 using System.Reflection;
 using System.Runtime.InteropServices.ComTypes;
 using System.IO;
+using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 {
@@ -41,6 +42,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         string idDept2word = TPConfigs.LoginUser.IdDepartment.Substring(0, 2);
 
         List<dm_User> users;
+        List<dm_JobTitle> jobTitles;
         List<ProgressDetail> progresses = new List<ProgressDetail>();
         List<dt201_Role> roles;
         Attachment attachment = new Attachment();
@@ -50,6 +52,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         class ProgressDetail : dt201_Progress
         {
             public string UserName { get; set; }
+            public string JobName { get; set; }
         }
 
         private class Attachment : dm_Attachment
@@ -118,7 +121,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             LockControl();
 
             users = dm_UserBUS.Instance.GetListByDept(idDept2word).Where(r => r.Status == 0).ToList();
-            roles = dt201_RoleBUS.Instance.GetList();
+            jobTitles = dm_JobTitleBUS.Instance.GetList();
+            roles = dt201_RoleBUS.Instance.GetList().Where(r => r.Id != 0).ToList();
 
             // Gắn các thông số cho các combobox
             lookupUser.ValueMember = "Id";
@@ -162,8 +166,12 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             GridView view = sender as GridView;
             if (view == null) return;
             if (e.Column.FieldName != "IdUser") return;
-            string cellValue = users.FirstOrDefault(r => r.Id == e.Value?.ToString())?.DisplayName ?? "";
-            view.SetRowCellValue(e.RowHandle, view.Columns["UserName"], cellValue);
+
+            var usrInfo = users.FirstOrDefault(r => r.Id == e.Value?.ToString());
+            string nameUser = usrInfo?.DisplayName ?? "";
+            string jobName = jobTitles.FirstOrDefault(r => r.Id == usrInfo.JobCode)?.DisplayName ?? "";
+            view.SetRowCellValue(e.RowHandle, view.Columns["UserName"], nameUser);
+            view.SetRowCellValue(e.RowHandle, view.Columns["JobName"], jobName);
         }
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -217,7 +225,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                         int idForm = dt201_FormsBUS.Instance.Add(baseForm);
                         result = idForm > 0;
 
-                        progresses.Insert(0, new ProgressDetail() { IdUser = TPConfigs.LoginUser.Id });
+                        progresses.Insert(0, new ProgressDetail() { IdUser = TPConfigs.LoginUser.Id, IdRole = 0 });
                         baseProgresses = (from data in progresses
                                           select new dt201_Progress
                                           {
@@ -227,6 +235,17 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                                               IdRole = data.IdRole
                                           }).ToList();
                         dt201_ProgressBUS.Instance.AddRange(baseProgresses);
+
+                        dt201_ProgInfo info = new dt201_ProgInfo()
+                        {
+                            IdAtt = idAtt,
+                            IdForm = idForm,
+                            IdUser = TPConfigs.LoginUser.Id,
+                            RespTime = DateTime.Now,
+                            Note = "呈核"
+                        };
+
+                        dt201_ProgInfoBUS.Instance.Add(info);
 
                         break;
                     case EventFormInfo.Update:
@@ -270,11 +289,14 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             string fileName = openFileDialog.FileName;
             string encryptionName = EncryptionHelper.EncryptionFileName(fileName);
+            string actualName = Path.GetFileName(fileName);
+
+            txbAtt.Text = actualName;
             attachment = new Attachment()
             {
                 Thread = "201",
                 EncryptionName = encryptionName,
-                ActualName = Path.GetFileName(fileName),
+                ActualName = actualName,
                 FullPath = fileName
             };
         }

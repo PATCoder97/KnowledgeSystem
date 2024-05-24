@@ -35,19 +35,15 @@
             this.btnAdd = new DevExpress.XtraEditors.SimpleButton();
             this.btnDel = new DevExpress.XtraEditors.SimpleButton();
             this.lbUser = new System.Windows.Forms.Label();
-            this.txbIndex = new DevExpress.XtraEditors.TextEdit();
             this.btnNext = new DevExpress.XtraEditors.SimpleButton();
             this.btnPrevious = new DevExpress.XtraEditors.SimpleButton();
-            this.cbbSheet = new DevExpress.XtraEditors.ComboBoxEdit();
             this.btnExcel = new DevExpress.XtraEditors.SimpleButton();
             this.btnPdf = new DevExpress.XtraEditors.SimpleButton();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -55,17 +51,17 @@
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.txbIndex = new DevExpress.XtraEditors.TextEdit();
+            this.cbbSheet = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txbIndex.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbbSheet.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
@@ -73,6 +69,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbIndex.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbSheet.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -165,21 +165,6 @@
             this.lbUser.Text = "VNW0014732";
             this.lbUser.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // txbIndex
-            // 
-            this.txbIndex.Location = new System.Drawing.Point(263, 36);
-            this.txbIndex.Name = "txbIndex";
-            this.txbIndex.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txbIndex.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.txbIndex.Properties.Appearance.Options.UseFont = true;
-            this.txbIndex.Properties.Appearance.Options.UseForeColor = true;
-            this.txbIndex.Properties.Appearance.Options.UseTextOptions = true;
-            this.txbIndex.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.txbIndex.Properties.ReadOnly = true;
-            this.txbIndex.Size = new System.Drawing.Size(256, 32);
-            this.txbIndex.StyleController = this.layoutControl1;
-            this.txbIndex.TabIndex = 9;
-            // 
             // btnNext
             // 
             this.btnNext.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.RightCenter;
@@ -201,22 +186,6 @@
             this.btnPrevious.StyleController = this.layoutControl1;
             this.btnPrevious.TabIndex = 7;
             this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
-            // 
-            // cbbSheet
-            // 
-            this.cbbSheet.Location = new System.Drawing.Point(84, 115);
-            this.cbbSheet.Name = "cbbSheet";
-            this.cbbSheet.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbbSheet.Properties.Appearance.Options.UseFont = true;
-            this.cbbSheet.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F);
-            this.cbbSheet.Properties.AppearanceDropDown.Options.UseFont = true;
-            this.cbbSheet.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbbSheet.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cbbSheet.Size = new System.Drawing.Size(99, 32);
-            this.cbbSheet.StyleController = this.layoutControl1;
-            this.cbbSheet.TabIndex = 6;
-            this.cbbSheet.SelectedIndexChanged += new System.EventHandler(this.cbbSheet_SelectedIndexChanged);
             // 
             // btnExcel
             // 
@@ -296,18 +265,6 @@
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
-            // layoutControlItem3
-            // 
-            this.layoutControlItem3.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.layoutControlItem3.AppearanceItemCaption.Options.UseFont = true;
-            this.layoutControlItem3.Control = this.cbbSheet;
-            this.layoutControlItem3.Location = new System.Drawing.Point(0, 80);
-            this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 3, 2);
-            this.layoutControlItem3.Size = new System.Drawing.Size(172, 37);
-            this.layoutControlItem3.Text = "工作表";
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(57, 24);
-            // 
             // layoutControlGroup2
             // 
             this.layoutControlGroup2.AppearanceGroup.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -330,18 +287,6 @@
             this.layoutControlGroup2.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 5, 5);
             this.layoutControlGroup2.Size = new System.Drawing.Size(396, 152);
             this.layoutControlGroup2.Text = "ERP - 自動輸入資料";
-            // 
-            // layoutControlItem6
-            // 
-            this.layoutControlItem6.Control = this.txbIndex;
-            this.layoutControlItem6.Location = new System.Drawing.Point(60, 0);
-            this.layoutControlItem6.MinSize = new System.Drawing.Size(54, 36);
-            this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 4, 2);
-            this.layoutControlItem6.Size = new System.Drawing.Size(260, 40);
-            this.layoutControlItem6.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem6.TextVisible = false;
             // 
             // layoutControlItem4
             // 
@@ -417,6 +362,61 @@
             this.layoutControlItem10.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem10.TextVisible = false;
             // 
+            // txbIndex
+            // 
+            this.txbIndex.Location = new System.Drawing.Point(263, 36);
+            this.txbIndex.Name = "txbIndex";
+            this.txbIndex.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbIndex.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.txbIndex.Properties.Appearance.Options.UseFont = true;
+            this.txbIndex.Properties.Appearance.Options.UseForeColor = true;
+            this.txbIndex.Properties.Appearance.Options.UseTextOptions = true;
+            this.txbIndex.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.txbIndex.Properties.ReadOnly = true;
+            this.txbIndex.Size = new System.Drawing.Size(256, 32);
+            this.txbIndex.StyleController = this.layoutControl1;
+            this.txbIndex.TabIndex = 9;
+            // 
+            // cbbSheet
+            // 
+            this.cbbSheet.Location = new System.Drawing.Point(84, 115);
+            this.cbbSheet.Name = "cbbSheet";
+            this.cbbSheet.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbSheet.Properties.Appearance.Options.UseFont = true;
+            this.cbbSheet.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F);
+            this.cbbSheet.Properties.AppearanceDropDown.Options.UseFont = true;
+            this.cbbSheet.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbbSheet.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.cbbSheet.Size = new System.Drawing.Size(99, 32);
+            this.cbbSheet.StyleController = this.layoutControl1;
+            this.cbbSheet.TabIndex = 6;
+            this.cbbSheet.SelectedIndexChanged += new System.EventHandler(this.cbbSheet_SelectedIndexChanged);
+            // 
+            // layoutControlItem3
+            // 
+            this.layoutControlItem3.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.layoutControlItem3.AppearanceItemCaption.Options.UseFont = true;
+            this.layoutControlItem3.Control = this.cbbSheet;
+            this.layoutControlItem3.Location = new System.Drawing.Point(0, 80);
+            this.layoutControlItem3.Name = "layoutControlItem3";
+            this.layoutControlItem3.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 3, 2);
+            this.layoutControlItem3.Size = new System.Drawing.Size(172, 37);
+            this.layoutControlItem3.Text = "工作表";
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(57, 24);
+            // 
+            // layoutControlItem6
+            // 
+            this.layoutControlItem6.Control = this.txbIndex;
+            this.layoutControlItem6.Location = new System.Drawing.Point(60, 0);
+            this.layoutControlItem6.MinSize = new System.Drawing.Size(54, 36);
+            this.layoutControlItem6.Name = "layoutControlItem6";
+            this.layoutControlItem6.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 4, 2);
+            this.layoutControlItem6.Size = new System.Drawing.Size(260, 40);
+            this.layoutControlItem6.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem6.TextVisible = false;
+            // 
             // f303_ShiftScheduleMain
             // 
             this.Appearance.BackColor = System.Drawing.SystemColors.Control;
@@ -431,15 +431,11 @@
             this.Load += new System.EventHandler(this.f303_ShiftScheduleMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.txbIndex.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbbSheet.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
@@ -447,6 +443,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbIndex.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbSheet.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
             this.ResumeLayout(false);
 
         }

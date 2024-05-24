@@ -38,6 +38,8 @@
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.checkEdit1 = new DevExpress.XtraEditors.CheckEdit();
+            this.comboBoxEdit1 = new DevExpress.XtraEditors.ComboBoxEdit();
             this.txbArticles = new DevExpress.XtraEditors.TokenEdit();
             this.txbDisplayName = new DevExpress.XtraEditors.TextEdit();
             this.txbDocCode = new DevExpress.XtraEditors.TextEdit();
@@ -47,9 +49,13 @@
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbArticles.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDisplayName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDocCode.Properties)).BeginInit();
@@ -59,6 +65,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             this.SuspendLayout();
             // 
             // barManagerTP
@@ -125,7 +133,7 @@
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 215);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 214);
             this.barDockControlBottom.Manager = this.barManagerTP;
             this.barDockControlBottom.Size = new System.Drawing.Size(530, 0);
             // 
@@ -135,7 +143,7 @@
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 49);
             this.barDockControlLeft.Manager = this.barManagerTP;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 166);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 165);
             // 
             // barDockControlRight
             // 
@@ -143,10 +151,12 @@
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
             this.barDockControlRight.Location = new System.Drawing.Point(530, 49);
             this.barDockControlRight.Manager = this.barManagerTP;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 166);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 165);
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.checkEdit1);
+            this.layoutControl1.Controls.Add(this.comboBoxEdit1);
             this.layoutControl1.Controls.Add(this.txbArticles);
             this.layoutControl1.Controls.Add(this.txbDisplayName);
             this.layoutControl1.Controls.Add(this.txbDocCode);
@@ -155,13 +165,45 @@
             this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(530, 166);
+            this.layoutControl1.Size = new System.Drawing.Size(530, 165);
             this.layoutControl1.TabIndex = 5;
             this.layoutControl1.Text = "layoutControl1";
             // 
+            // checkEdit1
+            // 
+            this.checkEdit1.Location = new System.Drawing.Point(446, 121);
+            this.checkEdit1.MenuManager = this.barManagerTP;
+            this.checkEdit1.Name = "checkEdit1";
+            this.checkEdit1.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.checkEdit1.Properties.Appearance.ForeColor = System.Drawing.Color.White;
+            this.checkEdit1.Properties.Appearance.Options.UseFont = true;
+            this.checkEdit1.Properties.Appearance.Options.UseForeColor = true;
+            this.checkEdit1.Properties.Caption = "紙本";
+            this.checkEdit1.Properties.CheckBoxOptions.Style = DevExpress.XtraEditors.Controls.CheckBoxStyle.SvgFlag1;
+            this.checkEdit1.Properties.CheckBoxOptions.SvgColorChecked = System.Drawing.Color.Red;
+            this.checkEdit1.Properties.CheckBoxOptions.SvgImageSize = new System.Drawing.Size(24, 24);
+            this.checkEdit1.Size = new System.Drawing.Size(72, 28);
+            this.checkEdit1.StyleController = this.layoutControl1;
+            this.checkEdit1.TabIndex = 14;
+            // 
+            // comboBoxEdit1
+            // 
+            this.comboBoxEdit1.Location = new System.Drawing.Point(335, 120);
+            this.comboBoxEdit1.MenuManager = this.barManagerTP;
+            this.comboBoxEdit1.Name = "comboBoxEdit1";
+            this.comboBoxEdit1.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.comboBoxEdit1.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.comboBoxEdit1.Properties.Appearance.Options.UseFont = true;
+            this.comboBoxEdit1.Properties.Appearance.Options.UseForeColor = true;
+            this.comboBoxEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.comboBoxEdit1.Size = new System.Drawing.Size(104, 32);
+            this.comboBoxEdit1.StyleController = this.layoutControl1;
+            this.comboBoxEdit1.TabIndex = 13;
+            // 
             // txbArticles
             // 
-            this.txbArticles.Location = new System.Drawing.Point(62, 84);
+            this.txbArticles.Location = new System.Drawing.Point(81, 84);
             this.txbArticles.MenuManager = this.barManagerTP;
             this.txbArticles.Name = "txbArticles";
             this.txbArticles.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
@@ -173,44 +215,44 @@
             this.txbArticles.Properties.EditValueSeparatorChar = ';';
             this.txbArticles.Properties.Separators.AddRange(new string[] {
             ";"});
-            this.txbArticles.Size = new System.Drawing.Size(456, 32);
+            this.txbArticles.Size = new System.Drawing.Size(437, 32);
             this.txbArticles.StyleController = this.layoutControl1;
             this.txbArticles.TabIndex = 12;
             // 
             // txbDisplayName
             // 
-            this.txbDisplayName.Location = new System.Drawing.Point(62, 48);
+            this.txbDisplayName.Location = new System.Drawing.Point(81, 48);
             this.txbDisplayName.MenuManager = this.barManagerTP;
             this.txbDisplayName.Name = "txbDisplayName";
             this.txbDisplayName.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbDisplayName.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbDisplayName.Properties.Appearance.Options.UseFont = true;
             this.txbDisplayName.Properties.Appearance.Options.UseForeColor = true;
-            this.txbDisplayName.Size = new System.Drawing.Size(456, 32);
+            this.txbDisplayName.Size = new System.Drawing.Size(437, 32);
             this.txbDisplayName.StyleController = this.layoutControl1;
             this.txbDisplayName.TabIndex = 11;
             // 
             // txbDocCode
             // 
-            this.txbDocCode.Location = new System.Drawing.Point(62, 12);
+            this.txbDocCode.Location = new System.Drawing.Point(81, 12);
             this.txbDocCode.Name = "txbDocCode";
             this.txbDocCode.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbDocCode.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbDocCode.Properties.Appearance.Options.UseFont = true;
             this.txbDocCode.Properties.Appearance.Options.UseForeColor = true;
-            this.txbDocCode.Size = new System.Drawing.Size(456, 32);
+            this.txbDocCode.Size = new System.Drawing.Size(437, 32);
             this.txbDocCode.StyleController = this.layoutControl1;
             this.txbDocCode.TabIndex = 11;
             // 
             // txbExp
             // 
-            this.txbExp.Location = new System.Drawing.Point(62, 120);
+            this.txbExp.Location = new System.Drawing.Point(81, 120);
             this.txbExp.Name = "txbExp";
             this.txbExp.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbExp.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbExp.Properties.Appearance.Options.UseFont = true;
             this.txbExp.Properties.Appearance.Options.UseForeColor = true;
-            this.txbExp.Size = new System.Drawing.Size(456, 32);
+            this.txbExp.Size = new System.Drawing.Size(181, 32);
             this.txbExp.StyleController = this.layoutControl1;
             this.txbExp.TabIndex = 12;
             // 
@@ -222,9 +264,11 @@
             this.layoutControlItem9,
             this.layoutControlItem8,
             this.layoutControlItem10,
-            this.layoutControlItem1});
+            this.layoutControlItem1,
+            this.layoutControlItem2,
+            this.layoutControlItem3});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(530, 166);
+            this.Root.Size = new System.Drawing.Size(530, 165);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem9
@@ -242,7 +286,7 @@
             this.layoutControlItem9.Name = "layoutControlItem9";
             this.layoutControlItem9.Size = new System.Drawing.Size(510, 36);
             this.layoutControlItem9.Text = "編碼";
-            this.layoutControlItem9.TextSize = new System.Drawing.Size(38, 24);
+            this.layoutControlItem9.TextSize = new System.Drawing.Size(57, 24);
             // 
             // layoutControlItem8
             // 
@@ -257,7 +301,7 @@
             this.layoutControlItem8.Name = "layoutControlItem8";
             this.layoutControlItem8.Size = new System.Drawing.Size(510, 36);
             this.layoutControlItem8.Text = "名稱";
-            this.layoutControlItem8.TextSize = new System.Drawing.Size(38, 24);
+            this.layoutControlItem8.TextSize = new System.Drawing.Size(57, 24);
             // 
             // layoutControlItem10
             // 
@@ -272,7 +316,7 @@
             this.layoutControlItem10.Name = "layoutControlItem10";
             this.layoutControlItem10.Size = new System.Drawing.Size(510, 36);
             this.layoutControlItem10.Text = "條文";
-            this.layoutControlItem10.TextSize = new System.Drawing.Size(38, 24);
+            this.layoutControlItem10.TextSize = new System.Drawing.Size(57, 24);
             // 
             // layoutControlItem1
             // 
@@ -287,9 +331,34 @@
             this.layoutControlItem1.CustomizationFormText = "條文";
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 108);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(510, 38);
+            this.layoutControlItem1.Size = new System.Drawing.Size(254, 37);
             this.layoutControlItem1.Text = "週期";
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(38, 24);
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(57, 24);
+            // 
+            // layoutControlItem2
+            // 
+            this.layoutControlItem2.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.layoutControlItem2.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
+            this.layoutControlItem2.AppearanceItemCaption.Options.UseFont = true;
+            this.layoutControlItem2.AppearanceItemCaption.Options.UseForeColor = true;
+            this.layoutControlItem2.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
+            this.layoutControlItem2.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.layoutControlItem2.Control = this.comboBoxEdit1;
+            this.layoutControlItem2.Location = new System.Drawing.Point(254, 108);
+            this.layoutControlItem2.Name = "layoutControlItem2";
+            this.layoutControlItem2.Size = new System.Drawing.Size(177, 37);
+            this.layoutControlItem2.Text = "文件類";
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(57, 24);
+            // 
+            // layoutControlItem3
+            // 
+            this.layoutControlItem3.Control = this.checkEdit1;
+            this.layoutControlItem3.Location = new System.Drawing.Point(431, 108);
+            this.layoutControlItem3.Name = "layoutControlItem3";
+            this.layoutControlItem3.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 2, 3, 2);
+            this.layoutControlItem3.Size = new System.Drawing.Size(79, 37);
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem3.TextVisible = false;
             // 
             // f201_AddNode
             // 
@@ -297,7 +366,7 @@
             this.Appearance.Options.UseBackColor = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(530, 215);
+            this.ClientSize = new System.Drawing.Size(530, 214);
             this.Controls.Add(this.layoutControl1);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
@@ -312,6 +381,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbArticles.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDisplayName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDocCode.Properties)).EndInit();
@@ -321,6 +392,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -345,5 +418,9 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraEditors.TextEdit txbExp;
+        private DevExpress.XtraEditors.CheckEdit checkEdit1;
+        private DevExpress.XtraEditors.ComboBoxEdit comboBoxEdit1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
     }
 }

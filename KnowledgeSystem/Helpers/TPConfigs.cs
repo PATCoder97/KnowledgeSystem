@@ -26,13 +26,23 @@ namespace KnowledgeSystem.Helpers
         public static string SoftNameEN { get; set; }
         public static string SoftNameTW { get; set; }
         public static string UrlUpdate { get; set; }
-        public static string Folder207 { get; set; }
         public static string FolderData { get; set; }
+        public static string Folder207 { get; set; }
         public static string Folder302 { get; set; }
         public static string Folder202 { get; set; }
         public static string Folder402 { get; set; }
         public static string Folder201 { get; set; }
         public static string FolderSign { get; set; }
+
+        public static void SetFolderData()
+        {
+            Folder207 = Path.Combine(FolderData, "207");
+            Folder302 = Path.Combine(FolderData, "302");
+            Folder202 = Path.Combine(FolderData, "202");
+            Folder402 = Path.Combine(FolderData, "402");
+            Folder201 = Path.Combine(FolderData, "201");
+            FolderSign = Path.Combine(Folder402, "ImageSign");
+        }
 
         // CONST Value
         public const string strReadFile = "讀取";

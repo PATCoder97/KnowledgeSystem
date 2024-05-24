@@ -61,6 +61,8 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.treeListColumn6 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.treeListColumn7 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
@@ -211,7 +213,9 @@
             this.treeListColumn1,
             this.treeListColumn3,
             this.treeListColumn2,
-            this.treeListColumn4});
+            this.treeListColumn4,
+            this.treeListColumn6,
+            this.treeListColumn7});
             this.treeFolder.Location = new System.Drawing.Point(12, 12);
             this.treeFolder.Name = "treeFolder";
             this.treeFolder.OptionsCustomization.AllowFilter = false;
@@ -453,6 +457,22 @@
             this.barDockControlRight.Manager = this.barManagerTP;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 629);
             // 
+            // treeListColumn6
+            // 
+            this.treeListColumn6.Caption = "文件類";
+            this.treeListColumn6.FieldName = "文件類";
+            this.treeListColumn6.Name = "treeListColumn6";
+            this.treeListColumn6.Visible = true;
+            this.treeListColumn6.VisibleIndex = 4;
+            // 
+            // treeListColumn7
+            // 
+            this.treeListColumn7.Caption = "紙本";
+            this.treeListColumn7.FieldName = "紙本";
+            this.treeListColumn7.Name = "treeListColumn7";
+            this.treeListColumn7.Visible = true;
+            this.treeListColumn7.VisibleIndex = 5;
+            // 
             // uc201_AuditDocsMain
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
@@ -515,5 +535,7 @@
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn4;
         private DevExpress.XtraLayout.SplitterItem splitterItem1;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn6;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn7;
     }
 }

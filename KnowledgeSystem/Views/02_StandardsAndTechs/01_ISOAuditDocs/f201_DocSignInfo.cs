@@ -31,6 +31,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         public int idBaseForm = -1;
         string idDept2word = TPConfigs.LoginUser.IdDepartment.Substring(0, 2);
 
+        int idRoleConfirm = -1;
+
+        List<dm_JobTitle> jobTitles;
+        List<dt201_Role> roleConfirms;
+
         List<dt201_ProgInfo> progInfos;
         List<dt201_Progress> progress;
         dt201_Forms baseForm;
@@ -38,6 +43,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         private void f201_DocSignInfo_Load(object sender, EventArgs e)
         {
             baseForm = dt201_FormsBUS.Instance.GetItemById(idBaseForm);
+            jobTitles = dm_JobTitleBUS.Instance.GetList();
+            roleConfirms = dt201_RoleBUS.Instance.GetList();
+
             var users = dm_UserBUS.Instance.GetList();
             progress = dt201_ProgressBUS.Instance.GetListByIdForm(idBaseForm);
 
@@ -47,7 +55,13 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             // Thêm danh sách các bước vào StepProgressBar
             foreach (var item in progressInfo)
-                stepProgressDoc.Items.Add(new StepProgressBarItem(item.usr.DisplayName));
+            {
+                var barItem = new StepProgressBarItem();
+                barItem.ContentBlock1.Caption = $"{item.usr.IdDepartment} {item.usr.DisplayName}";
+                barItem.ContentBlock1.Description = $"{item.usr.Id}\r\n{jobTitles.FirstOrDefault(r => r.Id == item.usr.JobCode).DisplayName}";
+                barItem.ContentBlock2.Caption = roleConfirms.FirstOrDefault(r => r.Id == item.data.IdRole)?.DisplayName;
+                stepProgressDoc.Items.Add(barItem);
+            }
             stepProgressDoc.ItemOptions.Indicator.Width = 40;
 
             progInfos = dt201_ProgInfoBUS.Instance.GetListByIdForm(idBaseForm);
@@ -59,15 +73,36 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             // Thêm lịch sử trình ký vào gridProcess
             var lsHistoryProcess = (from data in progInfos
                                     join usr in users on data.IdUser equals usr.Id
+                                    join job in jobTitles on usr.JobCode equals job.Id
                                     select new
                                     {
                                         data,
-                                        usr
+                                        usr,
+                                        job,
+                                        DisplayName = $"{usr.Id} LG{usr.IdDepartment}/{usr.DisplayName}"
                                     }).ToList();
 
             gcHistoryProcess.DataSource = lsHistoryProcess;
 
             gvHistoryProcess.ReadOnlyGridView();
+
+            idRoleConfirm = progress.FirstOrDefault(r => r.IdUser == TPConfigs.LoginUser.Id)?.IdRole ?? -1;
+
+            btnSign.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            btnCancel.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            switch (idRoleConfirm)
+            {
+                case 1:
+                    btnSign.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                    btnCancel.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                    break;
+                case 2:
+                    btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                    btnCancel.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                    break;
+
+            }
         }
 
         private void btnSign_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -96,10 +131,32 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 IdForm = idBaseForm,
                 IdUser = TPConfigs.LoginUser.Id,
                 RespTime = DateTime.Now,
-                Note = "已簽名"
+                Note = "簽名"
             };
 
             dt201_ProgInfoBUS.Instance.Add(info);
+
+            Close();
+        }
+
+        private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            string msg = "您確定核准該文件嗎？";
+            if (MsgTP.MsgYesNoQuestion(msg) != DialogResult.Yes) return;
+
+            int idAtt = baseForm.AttId ?? -1;
+            dt201_ProgInfo info = new dt201_ProgInfo()
+            {
+                IdAtt = idAtt,
+                IdForm = idBaseForm,
+                IdUser = TPConfigs.LoginUser.Id,
+                RespTime = DateTime.Now,
+                Note = "核准"
+            };
+
+            dt201_ProgInfoBUS.Instance.Add(info);
+
+            Close();
         }
     }
 }

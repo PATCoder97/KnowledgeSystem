@@ -34,6 +34,7 @@
             this.gcHistoryProcess = new DevExpress.XtraGrid.GridControl();
             this.gvHistoryProcess = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.stepProgressDoc = new DevExpress.XtraEditors.StepProgressBar();
@@ -75,10 +76,10 @@
             // 
             // gcHistoryProcess
             // 
-            this.gcHistoryProcess.Location = new System.Drawing.Point(12, 123);
+            this.gcHistoryProcess.Location = new System.Drawing.Point(12, 184);
             this.gcHistoryProcess.MainView = this.gvHistoryProcess;
             this.gcHistoryProcess.Name = "gcHistoryProcess";
-            this.gcHistoryProcess.Size = new System.Drawing.Size(861, 317);
+            this.gcHistoryProcess.Size = new System.Drawing.Size(861, 256);
             this.gcHistoryProcess.TabIndex = 22;
             this.gcHistoryProcess.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvHistoryProcess});
@@ -97,6 +98,7 @@
             this.gvHistoryProcess.Appearance.Row.Options.UseForeColor = true;
             this.gvHistoryProcess.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumn7,
+            this.gridColumn1,
             this.gridColumn8,
             this.gridColumn9});
             this.gvHistoryProcess.GridControl = this.gcHistoryProcess;
@@ -119,20 +121,33 @@
             this.gridColumn7.DisplayFormat.FormatString = "yyyy/MM/dd HH:mm";
             this.gridColumn7.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.gridColumn7.FieldName = "data.RespTime";
-            this.gridColumn7.MaxWidth = 200;
+            this.gridColumn7.MaxWidth = 150;
+            this.gridColumn7.MinWidth = 150;
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
             this.gridColumn7.VisibleIndex = 0;
-            this.gridColumn7.Width = 200;
+            this.gridColumn7.Width = 150;
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "職務";
+            this.gridColumn1.FieldName = "job.DisplayName";
+            this.gridColumn1.MaxWidth = 200;
+            this.gridColumn1.MinWidth = 150;
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 1;
+            this.gridColumn1.Width = 150;
             // 
             // gridColumn8
             // 
             this.gridColumn8.Caption = "處理人";
-            this.gridColumn8.FieldName = "usr.DisplayName";
+            this.gridColumn8.FieldName = "DisplayName";
             this.gridColumn8.MaxWidth = 250;
+            this.gridColumn8.MinWidth = 250;
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 1;
+            this.gridColumn8.VisibleIndex = 2;
             this.gridColumn8.Width = 250;
             // 
             // gridColumn9
@@ -141,20 +156,28 @@
             this.gridColumn9.FieldName = "data.Note";
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 2;
-            this.gridColumn9.Width = 552;
+            this.gridColumn9.VisibleIndex = 3;
+            this.gridColumn9.Width = 409;
             // 
             // stepProgressDoc
             // 
-            this.stepProgressDoc.Appearances.ItemAppearance.ContentBlockAppearance.Caption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stepProgressDoc.Appearances.ItemAppearance.ContentBlockAppearance.Caption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.stepProgressDoc.Appearances.ItemAppearance.ContentBlockAppearance.Caption.ForeColor = System.Drawing.Color.Black;
             this.stepProgressDoc.Appearances.ItemAppearance.ContentBlockAppearance.Caption.Options.UseFont = true;
             this.stepProgressDoc.Appearances.ItemAppearance.ContentBlockAppearance.Caption.Options.UseForeColor = true;
+            this.stepProgressDoc.Appearances.ItemAppearance.ContentBlockAppearance.Description.Font = new System.Drawing.Font("Microsoft JhengHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stepProgressDoc.Appearances.ItemAppearance.ContentBlockAppearance.Description.ForeColor = System.Drawing.Color.Blue;
+            this.stepProgressDoc.Appearances.ItemAppearance.ContentBlockAppearance.Description.Options.UseFont = true;
+            this.stepProgressDoc.Appearances.ItemAppearance.ContentBlockAppearance.Description.Options.UseForeColor = true;
+            this.stepProgressDoc.Appearances.SecondContentBlockAppearance.Caption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stepProgressDoc.Appearances.SecondContentBlockAppearance.Caption.ForeColor = System.Drawing.Color.Red;
+            this.stepProgressDoc.Appearances.SecondContentBlockAppearance.Caption.Options.UseFont = true;
+            this.stepProgressDoc.Appearances.SecondContentBlockAppearance.Caption.Options.UseForeColor = true;
             this.stepProgressDoc.ItemOptions.Indicator.ActiveStateImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("stepProgressDoc.ItemOptions.Indicator.ActiveStateImageOptions.SvgImage")));
             this.stepProgressDoc.ItemOptions.Indicator.ActiveStateImageOptions.SvgImageSize = new System.Drawing.Size(48, 48);
             this.stepProgressDoc.Location = new System.Drawing.Point(12, 12);
             this.stepProgressDoc.Name = "stepProgressDoc";
-            this.stepProgressDoc.Size = new System.Drawing.Size(861, 107);
+            this.stepProgressDoc.Size = new System.Drawing.Size(861, 168);
             this.stepProgressDoc.StyleController = this.layoutControl1;
             this.stepProgressDoc.TabIndex = 21;
             // 
@@ -173,22 +196,26 @@
             // 
             this.layoutControlItem1.Control = this.stepProgressDoc;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem1.MaxSize = new System.Drawing.Size(0, 172);
+            this.layoutControlItem1.MinSize = new System.Drawing.Size(54, 172);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(865, 111);
+            this.layoutControlItem1.Size = new System.Drawing.Size(865, 172);
+            this.layoutControlItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.gcHistoryProcess;
-            this.layoutControlItem2.Location = new System.Drawing.Point(0, 111);
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 172);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(865, 321);
+            this.layoutControlItem2.Size = new System.Drawing.Size(865, 260);
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
             // barManagerTP
             // 
+            this.barManagerTP.AllowQuickCustomization = false;
             this.barManagerTP.Bars.AddRange(new DevExpress.XtraBars.Bar[] {
             this.bar2});
             this.barManagerTP.DockControls.Add(this.barDockControlTop);
@@ -232,7 +259,7 @@
             this.bar2.OptionsBar.DrawDragBorder = false;
             this.bar2.OptionsBar.MultiLine = true;
             this.bar2.OptionsBar.UseWholeRow = true;
-            this.bar2.Text = "Main menu";
+            this.bar2.Text = "`";
             // 
             // btnCancel
             // 
@@ -256,6 +283,7 @@
             this.btnConfirm.Id = 2;
             this.btnConfirm.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnConfirm.Name = "btnConfirm";
+            this.btnConfirm.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnConfirm_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -342,5 +370,6 @@
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
     }
 }

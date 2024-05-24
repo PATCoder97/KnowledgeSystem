@@ -58,6 +58,7 @@
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcProgress)).BeginInit();
@@ -125,6 +126,7 @@
             this.gvProgress.Appearance.TopNewRow.Options.UseFont = true;
             this.gvProgress.Appearance.TopNewRow.Options.UseForeColor = true;
             this.gvProgress.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn4,
             this.gridColumn3,
             this.gridColumn1,
             this.gridColumn2});
@@ -147,7 +149,7 @@
             this.gridColumn3.FieldName = "IdUser";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 0;
+            this.gridColumn3.VisibleIndex = 1;
             // 
             // lookupUser
             // 
@@ -191,7 +193,7 @@
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.OptionsColumn.AllowEdit = false;
             this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 1;
+            this.gridColumn1.VisibleIndex = 2;
             // 
             // gridColumn2
             // 
@@ -200,7 +202,7 @@
             this.gridColumn2.FieldName = "IdRole";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 2;
+            this.gridColumn2.VisibleIndex = 3;
             // 
             // lookupRole
             // 
@@ -458,6 +460,15 @@
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextVisible = false;
             // 
+            // gridColumn4
+            // 
+            this.gridColumn4.Caption = "職務";
+            this.gridColumn4.FieldName = "JobName";
+            this.gridColumn4.Name = "gridColumn4";
+            this.gridColumn4.OptionsColumn.AllowEdit = false;
+            this.gridColumn4.Visible = true;
+            this.gridColumn4.VisibleIndex = 0;
+            // 
             // f201_AddAttachment
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
@@ -529,5 +540,6 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemGridLookUpEdit lookupUser;
         private DevExpress.XtraGrid.Views.Grid.GridView repositoryItemGridLookUpEdit1View;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit lookupRole;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
     }
 }
