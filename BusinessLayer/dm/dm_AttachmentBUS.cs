@@ -2,6 +2,7 @@
 using Logger;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -35,6 +36,30 @@ namespace BusinessLayer
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
                     _context.dm_Attachment.Add(attachment);
+                    int affectedRecords = _context.SaveChanges();
+
+                    if (affectedRecords > 0)
+                    {
+                        return attachment.Id;
+                    }
+
+                    return -1;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                return -1;
+            }
+        }
+
+        public int AddOrUpdate(dm_Attachment attachment)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    _context.dm_Attachment.AddOrUpdate(attachment);
                     int affectedRecords = _context.SaveChanges();
 
                     if (affectedRecords > 0)

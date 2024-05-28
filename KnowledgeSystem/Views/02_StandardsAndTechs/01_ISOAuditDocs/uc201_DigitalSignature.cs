@@ -61,8 +61,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             f201_DocSignInfo fInfo = new f201_DocSignInfo();
             fInfo.idBaseForm = idForm;
-
             fInfo.ShowDialog();
+
+            LoadData();
         }
     }
 }

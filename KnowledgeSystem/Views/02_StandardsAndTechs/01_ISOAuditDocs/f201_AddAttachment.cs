@@ -23,6 +23,8 @@ using System.Reflection;
 using System.Runtime.InteropServices.ComTypes;
 using System.IO;
 using DocumentFormat.OpenXml.Spreadsheet;
+using DevExpress.XtraPivotGrid.Data;
+using DevExpress.XtraGrid;
 
 namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 {
@@ -176,6 +178,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            // Đưa focused ra khỏi bảng để cập nhật lên source
+            gvProgress.FocusedRowHandle = GridControl.AutoFilterRowHandle;
+
             string code = txbDocCode.Text.Trim();
             string displayName = txbDisplayName.Text.Trim();
 
@@ -220,7 +225,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                         int idAtt = dm_AttachmentBUS.Instance.Add(att);
                         baseForm.AttId = idAtt;
 
-                        File.Copy(attachment.FullPath, Path.Combine(TPConfigs.Folder201, attachment.EncryptionName), true);
+                        string folderDest = Path.Combine(TPConfigs.Folder201, idAtt.ToString());
+                        if (!Directory.Exists(folderDest)) Directory.CreateDirectory(folderDest);
+                        
+                        File.Copy(attachment.FullPath, Path.Combine(folderDest, attachment.EncryptionName), true);
 
                         int idForm = dt201_FormsBUS.Instance.Add(baseForm);
                         result = idForm > 0;

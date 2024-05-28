@@ -46,6 +46,8 @@
             this.treeListColumn3 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.treeListColumn2 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.treeListColumn4 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.treeListColumn6 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.treeListColumn7 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -61,8 +63,6 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-            this.treeListColumn6 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.treeListColumn7 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
@@ -125,6 +125,7 @@
             this.gvData.OptionsView.EnableAppearanceOddRow = true;
             this.gvData.OptionsView.ShowAutoFilterRow = true;
             this.gvData.OptionsView.ShowGroupPanel = false;
+            this.gvData.DoubleClick += new System.EventHandler(this.gvData_DoubleClick);
             // 
             // gColId
             // 
@@ -276,6 +277,22 @@
             this.treeListColumn4.Name = "treeListColumn4";
             this.treeListColumn4.Visible = true;
             this.treeListColumn4.VisibleIndex = 2;
+            // 
+            // treeListColumn6
+            // 
+            this.treeListColumn6.Caption = "文件類";
+            this.treeListColumn6.FieldName = "文件類";
+            this.treeListColumn6.Name = "treeListColumn6";
+            this.treeListColumn6.Visible = true;
+            this.treeListColumn6.VisibleIndex = 4;
+            // 
+            // treeListColumn7
+            // 
+            this.treeListColumn7.Caption = "紙本";
+            this.treeListColumn7.FieldName = "紙本";
+            this.treeListColumn7.Name = "treeListColumn7";
+            this.treeListColumn7.Visible = true;
+            this.treeListColumn7.VisibleIndex = 5;
             // 
             // Root
             // 
@@ -456,22 +473,6 @@
             this.barDockControlRight.Location = new System.Drawing.Point(1196, 49);
             this.barDockControlRight.Manager = this.barManagerTP;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 629);
-            // 
-            // treeListColumn6
-            // 
-            this.treeListColumn6.Caption = "文件類";
-            this.treeListColumn6.FieldName = "文件類";
-            this.treeListColumn6.Name = "treeListColumn6";
-            this.treeListColumn6.Visible = true;
-            this.treeListColumn6.VisibleIndex = 4;
-            // 
-            // treeListColumn7
-            // 
-            this.treeListColumn7.Caption = "紙本";
-            this.treeListColumn7.FieldName = "紙本";
-            this.treeListColumn7.Name = "treeListColumn7";
-            this.treeListColumn7.Visible = true;
-            this.treeListColumn7.VisibleIndex = 5;
             // 
             // uc201_AuditDocsMain
             // 

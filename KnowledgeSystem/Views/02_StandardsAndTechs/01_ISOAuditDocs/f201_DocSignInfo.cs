@@ -40,6 +40,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         List<dt201_Progress> progress;
         dt201_Forms baseForm;
 
+        bool IsLastStep = false;
+
         private void f201_DocSignInfo_Load(object sender, EventArgs e)
         {
             baseForm = dt201_FormsBUS.Instance.GetItemById(idBaseForm);
@@ -69,6 +71,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             int stepNow = progNow != null ? progress.IndexOf(progress.First(r => r.IdUser == progNow.IdUser)) : -1;
             stepProgressDoc.SelectedItemIndex = stepNow; // Focus đến bước hiện tại
+
+            IsLastStep = stepNow == progress.Count() - 2;
 
             // Thêm lịch sử trình ký vào gridProcess
             var lsHistoryProcess = (from data in progInfos
@@ -108,9 +112,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         private void btnSign_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             int idAtt = baseForm.AttId ?? -1;
-            string fileName = dm_AttachmentBUS.Instance.GetItemById(idAtt)?.EncryptionName ?? "";
 
-            string sourcePath = Path.Combine(TPConfigs.Folder201, fileName);
+            var attProgress = dm_AttachmentBUS.Instance.GetItemById(idAtt);
+            string fileName = attProgress?.EncryptionName ?? "";
+
+            string sourcePath = Path.Combine(TPConfigs.Folder201, idAtt.ToString(), fileName);
             string destPath = Path.Combine(TPConfigs.TempFolderData, $"sign_{DateTime.Now:yyyyMMddHHmmss}");
 
             if (!Directory.Exists(TPConfigs.TempFolderData))
@@ -136,6 +142,20 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             dt201_ProgInfoBUS.Instance.Add(info);
 
+            attProgress.EncryptionName = encrytFileName;
+            dm_AttachmentBUS.Instance.AddOrUpdate(attProgress);
+
+            if (IsLastStep)
+            {
+                baseForm.IsProcessing = false;
+                dt201_FormsBUS.Instance.AddOrUpdate(baseForm);
+
+                string sourceFile = Path.Combine(TPConfigs.Folder201, idAtt.ToString(), encrytFileName);
+                string destFile = Path.Combine(TPConfigs.Folder201, encrytFileName);
+
+                File.Copy(sourceFile, destFile, true);
+            }
+
             Close();
         }
 
@@ -155,6 +175,17 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             };
 
             dt201_ProgInfoBUS.Instance.Add(info);
+
+            //if (IsLastStep)
+            //{
+            //    baseForm.IsProcessing = false;
+            //    dt201_FormsBUS.Instance.AddOrUpdate(baseForm);
+
+            //    string sourceFile = Path.Combine(TPConfigs.Folder201, idAtt.ToString(), encrytFileName);
+            //    string destFile = Path.Combine(TPConfigs.Folder201, encrytFileName);
+
+            //    File.Copy(sourceFile, destFile, true);
+            //}
 
             Close();
         }
