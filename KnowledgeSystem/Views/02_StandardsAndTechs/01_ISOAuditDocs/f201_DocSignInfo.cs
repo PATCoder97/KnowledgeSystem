@@ -182,16 +182,19 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             dt201_ProgInfoBUS.Instance.Add(info);
 
-            //if (IsLastStep)
-            //{
-            //    baseForm.IsProcessing = false;
-            //    dt201_FormsBUS.Instance.AddOrUpdate(baseForm);
+            if (IsLastStep)
+            {
+                var attProgress = dm_AttachmentBUS.Instance.GetItemById(idAtt);
+                string encrytFileName = attProgress.EncryptionName;
 
-            //    string sourceFile = Path.Combine(TPConfigs.Folder201, idAtt.ToString(), encrytFileName);
-            //    string destFile = Path.Combine(TPConfigs.Folder201, encrytFileName);
+                baseForm.IsProcessing = false;
+                dt201_FormsBUS.Instance.AddOrUpdate(baseForm);
 
-            //    File.Copy(sourceFile, destFile, true);
-            //}
+                string sourceFile = Path.Combine(TPConfigs.Folder201, idAtt.ToString(), encrytFileName);
+                string destFile = Path.Combine(TPConfigs.Folder201, encrytFileName);
+
+                File.Copy(sourceFile, destFile, true);
+            }
 
             Close();
         }
