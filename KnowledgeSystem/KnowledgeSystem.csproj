@@ -549,6 +549,12 @@
     <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_RoleInfo.Designer.cs">
       <DependentUpon>f402_RoleInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_SignUsers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_SignUsers.Designer.cs">
+      <DependentUpon>f402_SignUsers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_UserRole.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -787,6 +793,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_RoleInfo.resx">
       <DependentUpon>f402_RoleInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_SignUsers.resx">
+      <DependentUpon>f402_SignUsers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_UserRole.resx">
       <DependentUpon>f402_UserRole.cs</DependentUpon>

@@ -42,7 +42,7 @@
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.gcData = new DevExpress.XtraGrid.GridControl();
             this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -217,7 +217,7 @@
             this.gvData.Appearance.Row.Options.UseFont = true;
             this.gvData.Appearance.Row.Options.UseForeColor = true;
             this.gvData.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn1,
+            this.gColId,
             this.gridColumn2,
             this.gridColumn7,
             this.gridColumn5,
@@ -236,17 +236,17 @@
             this.gvData.OptionsView.EnableAppearanceOddRow = true;
             this.gvData.OptionsView.ShowAutoFilterRow = true;
             this.gvData.OptionsView.ShowGroupPanel = false;
-            this.gvData.DoubleClick += new System.EventHandler(this.gvData_DoubleClick);
+            this.gvData.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gvData_PopupMenuShowing);
             // 
-            // gridColumn1
+            // gColId
             // 
-            this.gridColumn1.AppearanceCell.Options.UseTextOptions = true;
-            this.gridColumn1.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn1.Caption = "代號";
-            this.gridColumn1.FieldName = "Id";
-            this.gridColumn1.MinWidth = 23;
-            this.gridColumn1.Name = "gridColumn1";
-            this.gridColumn1.Width = 87;
+            this.gColId.AppearanceCell.Options.UseTextOptions = true;
+            this.gColId.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gColId.Caption = "代號";
+            this.gColId.FieldName = "Id";
+            this.gColId.MinWidth = 23;
+            this.gColId.Name = "gColId";
+            this.gColId.Width = 87;
             // 
             // gridColumn2
             // 
@@ -412,6 +412,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
+        private DevExpress.XtraGrid.Columns.GridColumn gColId;
     }
 }

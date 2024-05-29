@@ -101,6 +101,8 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void DefaultSign()
         {
+            if (!dmSigns.Any(r => r.ImgType == 0)) return;
+
             signSelect = dmSigns.FirstOrDefault(r => r.ImgType == 0);
             string signPath = Path.Combine(TPConfigs.FolderSign, signSelect.ImgName);
             imageSign = File.Exists(signPath) ? new Bitmap(signPath) : TPSvgimages.NoImage;
@@ -139,7 +141,7 @@ namespace KnowledgeSystem.Views._00_Generals
 
         void UpdateCurrentRect(Point location)
         {
-            if (signs != null && currentSign != null)
+            if (signs != null && currentSign != null && imageSign != null)
             {
                 var documentPosition = pdfViewer.GetDocumentPosition(location, true);
 
@@ -260,7 +262,10 @@ namespace KnowledgeSystem.Views._00_Generals
             pdfViewer.LoadDocument(filePath);
 
             // Load các chữ ký, con dấu
-            dmSigns = dm_SignBUS.Instance.GetList();
+            var signUsrs = dm_SignUsersBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id).ToList();
+            var idSigns = signUsrs.Select(r => r.IdSign).ToList();
+
+            dmSigns = dm_SignBUS.Instance.GetListByIdSigns(idSigns);
 
             DefaultSign();
         }
@@ -328,6 +333,12 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void btnSignDefault_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if (!dmSigns.Any(r => r.ImgType == 0))
+            {
+                MsgTP.MsgError("你沒有簽名！");
+                return;
+            }
+
             DefaultSign();
 
             // Change the activation indicator
@@ -338,6 +349,12 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if (signs.Count() == 0)
+            {
+                MsgTP.MsgError("你還沒簽名！");
+                return;
+            }
+
             SaveDrawingAndReload();
         }
 
@@ -349,6 +366,12 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void btnAdvanced_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if (!dmSigns.Any(r => r.ImgType == 0))
+            {
+                MsgTP.MsgError("你沒有簽名！");
+                return;
+            }
+
             ActivateDrawing = true;
             pdfViewer.Invalidate();
 
@@ -368,6 +391,12 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void btnStamp_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if (!dmSigns.Any(r => r.ImgType == 1))
+            {
+                MsgTP.MsgError("你沒有蓋章！");
+                return;
+            }
+
             ActivateDrawing = true;
             pdfViewer.Invalidate();
 

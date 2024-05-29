@@ -12,13 +12,10 @@ namespace DataAccessLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class dt201_ProgInfo
+    public partial class dm_SignUsers
     {
         public int Id { get; set; }
-        public Nullable<int> IdAtt { get; set; }
         public string IdUser { get; set; }
-        public string Note { get; set; }
-        public System.DateTime RespTime { get; set; }
-        public Nullable<int> IdForm { get; set; }
+        public int IdSign { get; set; }
     }
 }

@@ -72,6 +72,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             int stepNow = progNow != null ? progress.IndexOf(progress.First(r => r.IdUser == progNow.IdUser)) : -1;
             stepProgressDoc.SelectedItemIndex = stepNow; // Focus đến bước hiện tại
 
+            var nextStepUsr = progress[stepNow + 1].IdUser;
+
             IsLastStep = stepNow == progress.Count() - 2;
 
             // Thêm lịch sử trình ký vào gridProcess
@@ -95,17 +97,21 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             btnSign.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             btnCancel.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-            switch (idRoleConfirm)
-            {
-                case 1:
-                    btnSign.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
-                    btnCancel.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
-                    break;
-                case 2:
-                    btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
-                    btnCancel.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
-                    break;
 
+            if (nextStepUsr == TPConfigs.LoginUser.Id)
+            {
+                switch (idRoleConfirm)
+                {
+                    case 1:
+                        btnSign.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                        btnCancel.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                        break;
+                    case 2:
+                        btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                        btnCancel.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                        break;
+
+                }
             }
         }
 

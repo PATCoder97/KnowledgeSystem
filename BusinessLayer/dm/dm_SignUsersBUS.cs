@@ -2,7 +2,6 @@
 using Logger;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -10,76 +9,75 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer
 {
-    public class dm_SignBUS
+    public class dm_SignUsersBUS
     {
         TPLogger logger;
 
-        private static dm_SignBUS instance;
+        private static dm_SignUsersBUS instance;
 
-        public static dm_SignBUS Instance
+        public static dm_SignUsersBUS Instance
         {
-            get { if (instance == null) instance = new dm_SignBUS(); return instance; }
+            get { if (instance == null) instance = new dm_SignUsersBUS(); return instance; }
             private set { instance = value; }
         }
 
-        private dm_SignBUS() { logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName); }
+        private dm_SignUsersBUS() { logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName); }
 
-        public List<dm_Sign> GetList()
+        public List<dm_SignUsers> GetList()
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dm_Sign.ToList();
+                    return _context.dm_SignUsers.ToList();
                 }
             }
             catch (Exception ex)
             {
                 logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
-                throw;
+                throw new Exception(ex.ToString());
             }
         }
 
-        public List<dm_Sign> GetListByIdSigns(List<int> idSigns)
+        public List<dm_SignUsers> GetListByUID(string _idUser)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dm_Sign.Where(r => idSigns.Contains(r.Id)).ToList();
+                    return _context.dm_SignUsers.Where(r => r.IdUser == _idUser).ToList();
                 }
             }
             catch (Exception ex)
             {
                 logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
-                throw;
+                throw new Exception(ex.ToString());
             }
         }
 
-        public dm_Sign GetItemById(int id)
+        public List<dm_SignUsers> GetListBySign(int idSign)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dm_Sign.FirstOrDefault(r => r.Id == id);
+                    return _context.dm_SignUsers.Where(r => r.IdSign == idSign).ToList();
                 }
             }
             catch (Exception ex)
             {
                 logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
-                throw;
+                throw new Exception(ex.ToString());
             }
         }
 
-        public bool Add(dm_Sign _sign)
+        public bool AddRange(List<dm_SignUsers> signUsers)
         {
             try
             {
-                //_base.IsDelete = false;
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    _context.dm_Sign.Add(_sign);
+                    _context.dm_SignUsers.AddRange(signUsers);
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;
                 }
@@ -91,15 +89,17 @@ namespace BusinessLayer
             }
         }
 
-        public bool AddOrUpdate(dm_Sign _sign)
+        public bool RemoveRangeByUID(string idUsr)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    _context.dm_Sign.AddOrUpdate(_sign);
+                    var _lsItemDel = _context.dm_SignUsers.Where(r => r.IdUser == idUsr).ToList();
+                    _context.dm_SignUsers.RemoveRange(_lsItemDel);
+
                     int affectedRecords = _context.SaveChanges();
-                    return affectedRecords > 0;
+                    return affectedRecords >= 0;
                 }
             }
             catch (Exception ex)
@@ -108,17 +108,18 @@ namespace BusinessLayer
                 return false;
             }
         }
-        public bool Remove(int _id)
+
+        public bool RemoveRangeBySign(int idSign)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    var _itemDel = _context.dm_Sign.FirstOrDefault(r => r.Id == _id);
-                    _context.dm_Sign.Remove(_itemDel);
+                    var _lsItemDel = _context.dm_SignUsers.Where(r => r.IdSign == idSign).ToList();
+                    _context.dm_SignUsers.RemoveRange(_lsItemDel);
 
                     int affectedRecords = _context.SaveChanges();
-                    return affectedRecords > 0;
+                    return affectedRecords >= 0;
                 }
             }
             catch (Exception ex)

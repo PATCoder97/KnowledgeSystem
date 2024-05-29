@@ -1,5 +1,7 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
+using DevExpress.Utils.Menu;
+using DevExpress.Utils.Svg;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraPrinting.Native;
@@ -25,11 +27,17 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
         {
             InitializeComponent();
             InitializeIcon();
+            InitializeMenuItems();
+
             helper = new RefreshHelper(gvData, "Id");
+            DevExpress.Utils.AppearanceObject.DefaultMenuFont = new System.Drawing.Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
         }
 
         Dictionary<int, string> signTypes = TPConfigs.signTypes;
         BindingSource sourceSigns = new BindingSource();
+
+        DXMenuItem itemViewInfo;
+        DXMenuItem itemModifyUsr;
 
         private class SignInfo : dm_Sign
         {
@@ -43,6 +51,48 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
             btnExportExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
         }
 
+        private void InitializeMenuItems()
+        {
+            itemViewInfo = CreateMenuItem("更新簽名", ItemViewInfo_Click, TPSvgimages.View);
+            itemModifyUsr = CreateMenuItem("設定權限", ItemModifyUsr_Click, TPSvgimages.Edit);
+        }
+
+        private void ItemModifyUsr_Click(object sender, EventArgs e)
+        {
+            int idSign = Convert.ToInt32(gvData.GetRowCellValue(gvData.FocusedRowHandle, gColId));
+
+            f402_SignUsers FSignUsr = new f402_SignUsers();
+            FSignUsr._eventInfo = EventFormInfo.View;
+            FSignUsr.idSign = idSign;
+            FSignUsr.ShowDialog();
+        }
+
+        private void ItemViewInfo_Click(object sender, EventArgs e)
+        {
+            int idSign = Convert.ToInt32(gvData.GetRowCellValue(gvData.FocusedRowHandle, gColId));
+            dm_Sign signSelect = dm_SignBUS.Instance.GetItemById(idSign);
+
+            f402_SignInfo fInfo = new f402_SignInfo();
+            fInfo.eventInfo = EventFormInfo.View;
+            fInfo.formName = "簽名";
+            fInfo.signInfo = signSelect;
+            fInfo.ShowDialog();
+
+            LoadSign();
+        }
+
+        DXMenuItem CreateMenuItem(string caption, EventHandler clickEvent, SvgImage svgImage)
+        {
+            var menuItem = new DXMenuItem(caption, clickEvent, svgImage, DXMenuItemPriority.Normal);
+            SetMenuItemProperties(menuItem);
+            return menuItem;
+        }
+
+        void SetMenuItemProperties(DXMenuItem menuItem)
+        {
+            menuItem.ImageOptions.SvgImageSize = new Size(24, 24);
+            menuItem.AppearanceHovered.ForeColor = Color.Blue;
+        }
 
         private void LoadSign()
         {
@@ -96,25 +146,23 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
             LoadSign();
         }
 
-        private void gvData_DoubleClick(object sender, EventArgs e)
-        {
-            GridView view = sender as GridView;
-            dm_Sign signSelect = view.GetRow(view.FocusedRowHandle) as dm_Sign;
-
-            f402_SignInfo fInfo = new f402_SignInfo();
-            fInfo.eventInfo = EventFormInfo.View;
-            fInfo.formName = "簽名";
-            fInfo.signInfo = signSelect;
-            fInfo.ShowDialog();
-
-            LoadSign();
-        }
-
         private void btnExportExcel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             ////f00_PdfTools frm = new f00_PdfTools(@"E:\01. DEV\02. KnowledgeSystem\Test\Blank.pdf");
             //f00_PdfTools frm = new f00_PdfTools(@"C:\Users\ANHTUAN\Desktop\New folder\Blank.pdf");
             //frm.ShowDialog();
+        }
+
+        private void gvData_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
+        {
+            if (e.HitInfo.InRowCell)
+            {
+                GridView view = sender as GridView;
+                view.FocusedRowHandle = e.HitInfo.RowHandle;
+
+                e.Menu.Items.Add(itemViewInfo);
+                e.Menu.Items.Add(itemModifyUsr);
+            }
         }
     }
 }

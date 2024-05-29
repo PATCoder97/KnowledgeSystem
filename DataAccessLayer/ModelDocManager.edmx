@@ -120,6 +120,14 @@
           <Property Name="FontType" Type="varchar" MaxLength="32" />
           <Property Name="FontColor" Type="varchar" MaxLength="7" />
         </EntityType>
+        <EntityType Name="dm_SignUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdUser" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="IdSign" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="dm_StepProgress">
           <Key>
             <PropertyRef Name="Id" />
@@ -193,7 +201,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IdAtt" Type="int" Nullable="false" />
+          <Property Name="IdAtt" Type="int" />
           <Property Name="IdUser" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="Note" Type="nvarchar" MaxLength="512" />
           <Property Name="RespTime" Type="datetime" Nullable="false" />
@@ -501,6 +509,7 @@
           <EntitySet Name="dm_Progress" EntityType="Self.dm_Progress" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dm_Role" EntityType="Self.dm_Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dm_Sign" EntityType="Self.dm_Sign" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dm_SignUsers" EntityType="Self.dm_SignUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dm_StepProgress" EntityType="Self.dm_StepProgress" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dm_User" EntityType="Self.dm_User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dm_UserRole" EntityType="Self.dm_UserRole" Schema="dbo" store:Type="Tables" />
@@ -585,6 +594,7 @@
           <EntitySet Name="dt201_Forms" EntityType="DBDocumentManagementSystemModel.dt201_Forms" />
           <EntitySet Name="dt201_Progress" EntityType="DBDocumentManagementSystemModel.dt201_Progress" />
           <EntitySet Name="dt201_ProgInfo" EntityType="DBDocumentManagementSystemModel.dt201_ProgInfo" />
+          <EntitySet Name="dm_SignUsers" EntityType="DBDocumentManagementSystemModel.dm_SignUsers" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -1063,11 +1073,19 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdAtt" Type="Int32" Nullable="false" />
+          <Property Name="IdAtt" Type="Int32" />
           <Property Name="IdUser" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Note" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="RespTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IdForm" Type="Int32" />
+        </EntityType>
+        <EntityType Name="dm_SignUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdUser" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdSign" Type="Int32" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1599,6 +1617,15 @@
                 <ScalarProperty Name="Note" ColumnName="Note" />
                 <ScalarProperty Name="IdUser" ColumnName="IdUser" />
                 <ScalarProperty Name="IdAtt" ColumnName="IdAtt" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dm_SignUsers">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_SignUsers">
+              <MappingFragment StoreEntitySet="dm_SignUsers">
+                <ScalarProperty Name="IdSign" ColumnName="IdSign" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

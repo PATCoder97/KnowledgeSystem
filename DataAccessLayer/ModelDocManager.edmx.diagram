@@ -50,6 +50,7 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_Forms" Width="1.5" PointX="2.125" PointY="21.375" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_Progress" Width="1.5" PointX="3.75" PointY="21.375" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_ProgInfo" Width="1.5" PointX="5.375" PointY="21.375" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_SignUsers" Width="1.5" PointX="7" PointY="2.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

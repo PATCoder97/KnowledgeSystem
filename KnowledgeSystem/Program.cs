@@ -35,20 +35,20 @@ namespace KnowledgeSystem
             Application.SetCompatibleTextRenderingDefault(false);
 #if DEBUG
 
-            //Application.Run(new f00_Main());
+            Application.Run(new f00_Main());
 
-            TPConfigs.SoftNameTW = "冶金文管系統";
-            TPConfigs.LoginUser = dm_UserBUS.Instance.GetItemById("VNW0014732");
-            AppPermission.Instance.CheckAppPermission(7);
+            //TPConfigs.SoftNameTW = "冶金文管系統";
+            //TPConfigs.LoginUser = dm_UserBUS.Instance.GetItemById("VNW0014732");
+            //AppPermission.Instance.CheckAppPermission(7);
 
-            TPConfigs.IdParentControl = AppPermission.SafetyCertMain;
-            var lsStaticValue = sys_StaticValueBUS.Instance.GetList();
-            TPConfigs.SoftNameEN = lsStaticValue.FirstOrDefault(r => r.KeyT == "SoftNameEN").ValueT;
-            TPConfigs.SoftNameTW = lsStaticValue.FirstOrDefault(r => r.KeyT == "SoftNameTW").ValueT;
-            TPConfigs.UrlUpdate = lsStaticValue.FirstOrDefault(r => r.KeyT == "UrlUpdate").ValueT;
-            TPConfigs.FolderData = lsStaticValue.FirstOrDefault(r => r.KeyT == "FolderData").ValueT;
-            TPConfigs.SetFolderData();
-            Application.Run(new f00_FluentFrame(42));
+            //TPConfigs.IdParentControl = AppPermission.SafetyCertMain;
+            //var lsStaticValue = sys_StaticValueBUS.Instance.GetList();
+            //TPConfigs.SoftNameEN = lsStaticValue.FirstOrDefault(r => r.KeyT == "SoftNameEN").ValueT;
+            //TPConfigs.SoftNameTW = lsStaticValue.FirstOrDefault(r => r.KeyT == "SoftNameTW").ValueT;
+            //TPConfigs.UrlUpdate = lsStaticValue.FirstOrDefault(r => r.KeyT == "UrlUpdate").ValueT;
+            //TPConfigs.FolderData = lsStaticValue.FirstOrDefault(r => r.KeyT == "FolderData").ValueT;
+            //TPConfigs.SetFolderData();
+            //Application.Run(new f00_FluentFrame(42));
 
             //Application.Run(new f00_AdminChangeUser());
 

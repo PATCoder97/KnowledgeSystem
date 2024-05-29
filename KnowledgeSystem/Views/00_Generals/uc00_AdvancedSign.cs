@@ -40,6 +40,8 @@ namespace KnowledgeSystem.Views._00_Generals
             int indexSign = Convert.ToInt16(cbbSign.EditValue?.ToString() ?? "0");
             SignSelect = signs.FirstOrDefault(r => r.Id == indexSign);
 
+            if (SignSelect == null) return;
+
             string source = Path.Combine(TPConfigs.FolderSign, SignSelect.ImgName);
             Image imageSign = File.Exists(source) ? new Bitmap(source) : new Bitmap(TPSvgimages.NoImage);
 
@@ -204,7 +206,10 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void uc00_AdvancedSign_Load(object sender, EventArgs e)
         {
-            signs = dm_SignBUS.Instance.GetList();
+            var signUsrs = dm_SignUsersBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id).ToList();
+            var idSigns = signUsrs.Select(r => r.IdSign).ToList();
+
+            signs = dm_SignBUS.Instance.GetListByIdSigns(idSigns);
             switch (signInfo)
             {
                 case SignInfo.Sign:
