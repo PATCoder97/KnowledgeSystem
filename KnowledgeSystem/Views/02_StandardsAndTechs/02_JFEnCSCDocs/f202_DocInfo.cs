@@ -155,6 +155,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
 
             LockControl();
 
+            tabbedControlGroup1.SelectedTabPageIndex = 0;
+
             // Set datasource cho gridcontrol
             gcFiles.DataSource = sourceAtts;
 

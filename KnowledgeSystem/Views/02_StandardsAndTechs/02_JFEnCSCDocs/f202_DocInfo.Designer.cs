@@ -36,6 +36,7 @@
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.cbbHalfYear = new DevExpress.XtraEditors.ComboBoxEdit();
             this.gcFiles = new DevExpress.XtraGrid.GridControl();
             this.gvFiles = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -59,6 +60,7 @@
             this.lcKeyword = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcRequestUsr = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcFilePath = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcHalfYear = new DevExpress.XtraLayout.LayoutControlItem();
             this.tabAttachments = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -72,10 +74,9 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-            this.cbbHalfYear = new DevExpress.XtraEditors.ComboBoxEdit();
-            this.lcHalfYear = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbHalfYear.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcFiles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvFiles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDelFile)).BeginInit();
@@ -94,13 +95,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcKeyword)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcRequestUsr)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcFilePath)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcHalfYear)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabAttachments)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbbHalfYear.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcHalfYear)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -123,6 +123,23 @@
             this.layoutControl1.Size = new System.Drawing.Size(710, 374);
             this.layoutControl1.TabIndex = 7;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // cbbHalfYear
+            // 
+            this.cbbHalfYear.Location = new System.Drawing.Point(131, 128);
+            this.cbbHalfYear.Name = "cbbHalfYear";
+            this.cbbHalfYear.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.cbbHalfYear.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.cbbHalfYear.Properties.Appearance.Options.UseFont = true;
+            this.cbbHalfYear.Properties.Appearance.Options.UseForeColor = true;
+            this.cbbHalfYear.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbHalfYear.Properties.AppearanceDropDown.Options.UseFont = true;
+            this.cbbHalfYear.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbbHalfYear.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.cbbHalfYear.Size = new System.Drawing.Size(555, 32);
+            this.cbbHalfYear.StyleController = this.layoutControl1;
+            this.cbbHalfYear.TabIndex = 22;
             // 
             // gcFiles
             // 
@@ -438,6 +455,17 @@
             this.lcFilePath.Text = "主文路徑";
             this.lcFilePath.TextSize = new System.Drawing.Size(95, 24);
             // 
+            // lcHalfYear
+            // 
+            this.lcHalfYear.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lcHalfYear.AppearanceItemCaption.Options.UseFont = true;
+            this.lcHalfYear.Control = this.cbbHalfYear;
+            this.lcHalfYear.Location = new System.Drawing.Point(0, 72);
+            this.lcHalfYear.Name = "lcHalfYear";
+            this.lcHalfYear.Size = new System.Drawing.Size(666, 36);
+            this.lcHalfYear.Text = "年度";
+            this.lcHalfYear.TextSize = new System.Drawing.Size(95, 24);
+            // 
             // tabAttachments
             // 
             this.tabAttachments.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
@@ -592,34 +620,6 @@
             this.barDockControlRight.Manager = this.barManagerTP;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 374);
             // 
-            // cbbHalfYear
-            // 
-            this.cbbHalfYear.Location = new System.Drawing.Point(131, 128);
-            this.cbbHalfYear.Name = "cbbHalfYear";
-            this.cbbHalfYear.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.cbbHalfYear.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.cbbHalfYear.Properties.Appearance.Options.UseFont = true;
-            this.cbbHalfYear.Properties.Appearance.Options.UseForeColor = true;
-            this.cbbHalfYear.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbbHalfYear.Properties.AppearanceDropDown.Options.UseFont = true;
-            this.cbbHalfYear.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbbHalfYear.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cbbHalfYear.Size = new System.Drawing.Size(555, 32);
-            this.cbbHalfYear.StyleController = this.layoutControl1;
-            this.cbbHalfYear.TabIndex = 22;
-            // 
-            // lcHalfYear
-            // 
-            this.lcHalfYear.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.lcHalfYear.AppearanceItemCaption.Options.UseFont = true;
-            this.lcHalfYear.Control = this.cbbHalfYear;
-            this.lcHalfYear.Location = new System.Drawing.Point(0, 72);
-            this.lcHalfYear.Name = "lcHalfYear";
-            this.lcHalfYear.Size = new System.Drawing.Size(666, 36);
-            this.lcHalfYear.Text = "年度";
-            this.lcHalfYear.TextSize = new System.Drawing.Size(95, 24);
-            // 
             // f202_DocInfo
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
@@ -639,6 +639,7 @@
             this.Load += new System.EventHandler(this.f202_DocInfo_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.cbbHalfYear.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcFiles)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvFiles)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDelFile)).EndInit();
@@ -657,13 +658,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcKeyword)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcRequestUsr)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcFilePath)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcHalfYear)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabAttachments)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbbHalfYear.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcHalfYear)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
