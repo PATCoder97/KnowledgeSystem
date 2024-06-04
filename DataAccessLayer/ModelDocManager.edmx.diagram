@@ -51,6 +51,11 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_Progress" Width="1.5" PointX="3.75" PointY="21.375" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_ProgInfo" Width="1.5" PointX="5.375" PointY="21.375" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_SignUsers" Width="1.5" PointX="7" PointY="2.75" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt306_Base" Width="1.5" PointX="0.5" PointY="24.75" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt306_BaseAtts" Width="1.5" PointX="7" PointY="24.75" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt306_ProgInfo" Width="1.5" PointX="3.75" PointY="24.75" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt306_Progress" Width="1.5" PointX="2.125" PointY="24.75" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt306_Role" Width="1.5" PointX="5.375" PointY="24.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

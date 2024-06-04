@@ -463,6 +463,56 @@
           <Property Name="ExpectedDate" Type="date" Nullable="false" />
           <Property Name="UploadDate" Type="date" />
         </EntityType>
+        <EntityType Name="dt306_Base">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="UploadUsr" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="UploadDate" Type="date" Nullable="false" />
+          <Property Name="IsProcess" Type="bit" Nullable="false" />
+          <Property Name="IsCancel" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt306_BaseAtts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdBase" Type="int" Nullable="false" />
+          <Property Name="IdAtt" Type="int" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="IsCancel" Type="bit" Nullable="false" />
+          <Property Name="UsrCancel" Type="nvarchar" MaxLength="10" />
+          <Property Name="Desc" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="dt306_ProgInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdBase" Type="int" Nullable="false" />
+          <Property Name="IdUsr" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Desc" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="RespTime" Type="datetime" Nullable="false" />
+          <Property Name="SendNoteTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="dt306_Progress">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdBase" Type="int" Nullable="false" />
+          <Property Name="IdUsr" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="IdRole" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt306_Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
         <EntityType Name="sys_Log">
           <Key>
             <PropertyRef Name="Id" />
@@ -540,6 +590,11 @@
           <EntitySet Name="dt302_Base" EntityType="Self.dt302_Base" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt302_ReportAttach" EntityType="Self.dt302_ReportAttach" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt302_ReportInfo" EntityType="Self.dt302_ReportInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt306_Base" EntityType="Self.dt306_Base" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt306_BaseAtts" EntityType="Self.dt306_BaseAtts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt306_ProgInfo" EntityType="Self.dt306_ProgInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt306_Progress" EntityType="Self.dt306_Progress" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt306_Role" EntityType="Self.dt306_Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sys_Log" EntityType="Self.sys_Log" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sys_NotesMail" EntityType="Self.sys_NotesMail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sys_StaticValue" EntityType="Self.sys_StaticValue" Schema="dbo" store:Type="Tables" />
@@ -595,6 +650,11 @@
           <EntitySet Name="dt201_Progress" EntityType="DBDocumentManagementSystemModel.dt201_Progress" />
           <EntitySet Name="dt201_ProgInfo" EntityType="DBDocumentManagementSystemModel.dt201_ProgInfo" />
           <EntitySet Name="dm_SignUsers" EntityType="DBDocumentManagementSystemModel.dm_SignUsers" />
+          <EntitySet Name="dt306_Base" EntityType="DBDocumentManagementSystemModel.dt306_Base" />
+          <EntitySet Name="dt306_BaseAtts" EntityType="DBDocumentManagementSystemModel.dt306_BaseAtts" />
+          <EntitySet Name="dt306_ProgInfo" EntityType="DBDocumentManagementSystemModel.dt306_ProgInfo" />
+          <EntitySet Name="dt306_Progress" EntityType="DBDocumentManagementSystemModel.dt306_Progress" />
+          <EntitySet Name="dt306_Role" EntityType="DBDocumentManagementSystemModel.dt306_Role" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -1086,6 +1146,56 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdUser" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="IdSign" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt306_Base">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="UploadUsr" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="UploadDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IsProcess" Type="Boolean" Nullable="false" />
+          <Property Name="IsCancel" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt306_BaseAtts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdBase" Type="Int32" Nullable="false" />
+          <Property Name="IdAtt" Type="Int32" Nullable="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IsCancel" Type="Boolean" Nullable="false" />
+          <Property Name="UsrCancel" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Desc" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dt306_ProgInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdBase" Type="Int32" Nullable="false" />
+          <Property Name="IdUsr" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Desc" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="RespTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SendNoteTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="dt306_Progress">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdBase" Type="Int32" Nullable="false" />
+          <Property Name="IdUsr" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="IdRole" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt306_Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1626,6 +1736,61 @@
               <MappingFragment StoreEntitySet="dm_SignUsers">
                 <ScalarProperty Name="IdSign" ColumnName="IdSign" />
                 <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt306_Base">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt306_Base">
+              <MappingFragment StoreEntitySet="dt306_Base">
+                <ScalarProperty Name="IsCancel" ColumnName="IsCancel" />
+                <ScalarProperty Name="IsProcess" ColumnName="IsProcess" />
+                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
+                <ScalarProperty Name="UploadUsr" ColumnName="UploadUsr" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt306_BaseAtts">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt306_BaseAtts">
+              <MappingFragment StoreEntitySet="dt306_BaseAtts">
+                <ScalarProperty Name="Desc" ColumnName="Desc" />
+                <ScalarProperty Name="UsrCancel" ColumnName="UsrCancel" />
+                <ScalarProperty Name="IsCancel" ColumnName="IsCancel" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="IdAtt" ColumnName="IdAtt" />
+                <ScalarProperty Name="IdBase" ColumnName="IdBase" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt306_ProgInfo">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt306_ProgInfo">
+              <MappingFragment StoreEntitySet="dt306_ProgInfo">
+                <ScalarProperty Name="SendNoteTime" ColumnName="SendNoteTime" />
+                <ScalarProperty Name="RespTime" ColumnName="RespTime" />
+                <ScalarProperty Name="Desc" ColumnName="Desc" />
+                <ScalarProperty Name="IdUsr" ColumnName="IdUsr" />
+                <ScalarProperty Name="IdBase" ColumnName="IdBase" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt306_Progress">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt306_Progress">
+              <MappingFragment StoreEntitySet="dt306_Progress">
+                <ScalarProperty Name="IdRole" ColumnName="IdRole" />
+                <ScalarProperty Name="IdUsr" ColumnName="IdUsr" />
+                <ScalarProperty Name="IdBase" ColumnName="IdBase" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt306_Role">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt306_Role">
+              <MappingFragment StoreEntitySet="dt306_Role">
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
