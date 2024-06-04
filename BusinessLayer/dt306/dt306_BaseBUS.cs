@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
+using System.Net.Mail;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,7 +57,7 @@ namespace BusinessLayer
             }
         }
 
-        public bool Add(dt306_Base item)
+        public int Add(dt306_Base item)
         {
             try
             {
@@ -64,13 +65,19 @@ namespace BusinessLayer
                 {
                     _context.dt306_Base.Add(item);
                     int affectedRecords = _context.SaveChanges();
-                    return affectedRecords > 0;
+
+                    if (affectedRecords > 0)
+                    {
+                        return item.Id;
+                    }
+
+                    return -1;
                 }
             }
             catch (Exception ex)
             {
                 logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
-                return false;
+                return -1;
             }
         }
 

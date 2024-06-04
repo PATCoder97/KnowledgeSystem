@@ -42,13 +42,15 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
         List<dm_JobTitle> jobTitles;
         List<dt201_Role> roles;
 
+        dt306_Base baseData = new dt306_Base();
+
         private class Attachment : dm_Attachment
         {
             public string PathFile { get; set; }
-            public dm_Attachment BaseAttachment { get; set; } = new dm_Attachment();
+            //public dm_Attachment BaseAttachment { get; set; } = new dm_Attachment();
         }
 
-        class ProgressDetail : dt201_Progress
+        class ProgressDetail : dt306_Progress
         {
             public string UserName { get; set; }
             public string JobName { get; set; }
@@ -145,13 +147,57 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
         {
             GridView view = sender as GridView;
             if (view == null) return;
-            if (e.Column.FieldName != "IdUser") return;
+            if (e.Column.FieldName != "IdUsr") return;
 
             var usrInfo = users.FirstOrDefault(r => r.Id == e.Value?.ToString());
             string nameUser = usrInfo?.DisplayName ?? "";
             string jobName = jobTitles.FirstOrDefault(r => r.Id == usrInfo.JobCode)?.DisplayName ?? "";
             view.SetRowCellValue(e.RowHandle, view.Columns["UserName"], nameUser);
             view.SetRowCellValue(e.RowHandle, view.Columns["JobName"], jobName);
+        }
+
+        private void btnEdit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
+
+        }
+
+        private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            baseData.DisplayName = txbTitle.Text.Trim();
+            baseData.UploadUsr = TPConfigs.LoginUser.Id;
+            baseData.UploadDate = DateTime.Today;
+            baseData.IsProcess = true;
+            baseData.IsCancel = false;
+
+            int idBase = dt306_BaseBUS.Instance.Add(baseData);
+
+            var atts = attachments.Select(r => new dm_Attachment()
+            {
+                Thread = r.Thread,
+                ActualName = r.ActualName,
+                EncryptionName = r.EncryptionName
+            }).ToList();
+
+            foreach (var item in atts)
+            {
+                var idAtt = dm_AttachmentBUS.Instance.Add(item);
+
+                var baseAtt = new dt306_BaseAtts()
+                {
+                    IdBase = idBase,
+                    IdAtt = idAtt,
+                    DisplayName = item.ActualName,
+                    IsCancel = false
+                };
+
+                dt306_BaseAttsBUS.Instance.Add(baseAtt);
+            }
+
+            var progs = progresses.Select(r => new dt306_Progress() { IdBase = idBase, IdUsr = r.IdUsr, IdRole = r.IdRole }).ToList();
+            dt306_ProgressBUS.Instance.AddRange(progs);
+
+            Close();
         }
     }
 }

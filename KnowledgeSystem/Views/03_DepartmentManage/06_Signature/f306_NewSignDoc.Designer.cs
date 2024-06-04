@@ -30,11 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f306_NewSignDoc));
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions3 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject9 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject10 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject11 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject12 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnEdit = new DevExpress.XtraBars.BarButtonItem();
@@ -55,7 +55,7 @@
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.lookupRole = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
-            this.txbDocCode = new DevExpress.XtraEditors.TextEdit();
+            this.txbTitle = new DevExpress.XtraEditors.TextEdit();
             this.btnAddFile = new DevExpress.XtraEditors.SimpleButton();
             this.lbCountFile = new System.Windows.Forms.Label();
             this.gcFiles = new DevExpress.XtraGrid.GridControl();
@@ -67,14 +67,14 @@
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
             this.tabbedControlGroup1 = new DevExpress.XtraLayout.TabbedControlGroup();
-            this.tabAttachments = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
+            this.tabAttachments = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -83,21 +83,21 @@
             ((System.ComponentModel.ISupportInitialize)(this.lookupUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookupRole)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbDocCode.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbTitle.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcFiles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvFiles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDelFile)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroup1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tabAttachments)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tabAttachments)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             this.SuspendLayout();
             // 
             // barManagerTP
@@ -154,6 +154,7 @@
             this.btnEdit.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnEdit.ImageOptions.SvgImage")));
             this.btnEdit.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnEdit.Name = "btnEdit";
+            this.btnEdit.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnEdit_ItemClick);
             // 
             // btnDelete
             // 
@@ -168,6 +169,7 @@
             this.btnConfirm.Id = 2;
             this.btnConfirm.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnConfirm.Name = "btnConfirm";
+            this.btnConfirm.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnConfirm_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -205,7 +207,7 @@
             // 
             this.layoutControl1.Controls.Add(this.btnDefaulProgress);
             this.layoutControl1.Controls.Add(this.gcProgress);
-            this.layoutControl1.Controls.Add(this.txbDocCode);
+            this.layoutControl1.Controls.Add(this.txbTitle);
             this.layoutControl1.Controls.Add(this.btnAddFile);
             this.layoutControl1.Controls.Add(this.lbCountFile);
             this.layoutControl1.Controls.Add(this.gcFiles);
@@ -295,7 +297,7 @@
             // 
             this.gridColumn3.Caption = "工號";
             this.gridColumn3.ColumnEdit = this.lookupUser;
-            this.gridColumn3.FieldName = "IdUser";
+            this.gridColumn3.FieldName = "IdUsr";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 1;
@@ -367,17 +369,17 @@
             this.lookupRole.Name = "lookupRole";
             this.lookupRole.ShowHeader = false;
             // 
-            // txbDocCode
+            // txbTitle
             // 
-            this.txbDocCode.Location = new System.Drawing.Point(62, 12);
-            this.txbDocCode.Name = "txbDocCode";
-            this.txbDocCode.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.txbDocCode.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.txbDocCode.Properties.Appearance.Options.UseFont = true;
-            this.txbDocCode.Properties.Appearance.Options.UseForeColor = true;
-            this.txbDocCode.Size = new System.Drawing.Size(594, 32);
-            this.txbDocCode.StyleController = this.layoutControl1;
-            this.txbDocCode.TabIndex = 11;
+            this.txbTitle.Location = new System.Drawing.Point(62, 12);
+            this.txbTitle.Name = "txbTitle";
+            this.txbTitle.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.txbTitle.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.txbTitle.Properties.Appearance.Options.UseFont = true;
+            this.txbTitle.Properties.Appearance.Options.UseForeColor = true;
+            this.txbTitle.Size = new System.Drawing.Size(594, 32);
+            this.txbTitle.StyleController = this.layoutControl1;
+            this.txbTitle.TabIndex = 11;
             // 
             // btnAddFile
             // 
@@ -471,10 +473,10 @@
             // btnDelFile
             // 
             this.btnDelFile.AutoHeight = false;
-            editorButtonImageOptions3.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("editorButtonImageOptions3.SvgImage")));
-            editorButtonImageOptions3.SvgImageSize = new System.Drawing.Size(16, 16);
+            editorButtonImageOptions1.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("editorButtonImageOptions1.SvgImage")));
+            editorButtonImageOptions1.SvgImageSize = new System.Drawing.Size(16, 16);
             this.btnDelFile.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions3, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject9, serializableAppearanceObject10, serializableAppearanceObject11, serializableAppearanceObject12, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.btnDelFile.Name = "btnDelFile";
             this.btnDelFile.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             this.btnDelFile.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnDelFile_ButtonClick);
@@ -498,7 +500,7 @@
             this.layoutControlItem9.AppearanceItemCaption.Options.UseForeColor = true;
             this.layoutControlItem9.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
             this.layoutControlItem9.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
-            this.layoutControlItem9.Control = this.txbDocCode;
+            this.layoutControlItem9.Control = this.txbTitle;
             this.layoutControlItem9.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
             this.layoutControlItem9.CustomizationFormText = "編碼";
             this.layoutControlItem9.Location = new System.Drawing.Point(0, 0);
@@ -524,6 +526,43 @@
             this.tabbedControlGroup1.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlGroup1,
             this.tabAttachments});
+            // 
+            // layoutControlGroup1
+            // 
+            this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem3,
+            this.layoutControlItem1,
+            this.emptySpaceItem1});
+            this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlGroup1.Name = "layoutControlGroup1";
+            this.layoutControlGroup1.Size = new System.Drawing.Size(632, 323);
+            this.layoutControlGroup1.Text = "路程";
+            // 
+            // layoutControlItem3
+            // 
+            this.layoutControlItem3.Control = this.gcProgress;
+            this.layoutControlItem3.Location = new System.Drawing.Point(0, 40);
+            this.layoutControlItem3.Name = "layoutControlItem3";
+            this.layoutControlItem3.Size = new System.Drawing.Size(632, 283);
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem3.TextVisible = false;
+            // 
+            // layoutControlItem1
+            // 
+            this.layoutControlItem1.Control = this.btnDefaulProgress;
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem1.Name = "layoutControlItem1";
+            this.layoutControlItem1.Size = new System.Drawing.Size(143, 40);
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem1.TextVisible = false;
+            // 
+            // emptySpaceItem1
+            // 
+            this.emptySpaceItem1.AllowHotTrack = false;
+            this.emptySpaceItem1.Location = new System.Drawing.Point(143, 0);
+            this.emptySpaceItem1.Name = "emptySpaceItem1";
+            this.emptySpaceItem1.Size = new System.Drawing.Size(489, 40);
+            this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
             // tabAttachments
             // 
@@ -574,43 +613,6 @@
             this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem5.TextVisible = false;
             // 
-            // layoutControlGroup1
-            // 
-            this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem3,
-            this.layoutControlItem1,
-            this.emptySpaceItem1});
-            this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlGroup1.Name = "layoutControlGroup1";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(632, 323);
-            this.layoutControlGroup1.Text = "路程";
-            // 
-            // layoutControlItem3
-            // 
-            this.layoutControlItem3.Control = this.gcProgress;
-            this.layoutControlItem3.Location = new System.Drawing.Point(0, 40);
-            this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(632, 283);
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem3.TextVisible = false;
-            // 
-            // layoutControlItem1
-            // 
-            this.layoutControlItem1.Control = this.btnDefaulProgress;
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(143, 40);
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem1.TextVisible = false;
-            // 
-            // emptySpaceItem1
-            // 
-            this.emptySpaceItem1.AllowHotTrack = false;
-            this.emptySpaceItem1.Location = new System.Drawing.Point(143, 0);
-            this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(489, 40);
-            this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
-            // 
             // f306_NewSignDoc
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
@@ -636,21 +638,21 @@
             ((System.ComponentModel.ISupportInitialize)(this.lookupUser)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookupRole)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbDocCode.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbTitle.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcFiles)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvFiles)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDelFile)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroup1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tabAttachments)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tabAttachments)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -677,7 +679,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit lookupRole;
-        private DevExpress.XtraEditors.TextEdit txbDocCode;
+        private DevExpress.XtraEditors.TextEdit txbTitle;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem9;
         private DevExpress.XtraLayout.TabbedControlGroup tabbedControlGroup1;

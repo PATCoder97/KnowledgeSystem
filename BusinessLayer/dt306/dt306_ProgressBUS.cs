@@ -74,6 +74,30 @@ namespace BusinessLayer
             }
         }
 
+        public bool AddRange(List<dt306_Progress> items)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    _context.dt306_Progress.AddRange(items);
+                    int affectedRecords = _context.SaveChanges();
+
+                    if (affectedRecords > 0)
+                    {
+                        return true;
+                    }
+
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                return false;
+            }
+        }
+
         public bool AddOrUpdate(dt306_Progress item)
         {
             try
