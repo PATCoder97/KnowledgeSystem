@@ -20,5 +20,6 @@ namespace DataAccessLayer
         public System.DateTime UploadDate { get; set; }
         public bool IsProcess { get; set; }
         public bool IsCancel { get; set; }
+        public string NextStepProg { get; set; }
     }
 }

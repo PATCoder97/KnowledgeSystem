@@ -40,6 +40,38 @@ namespace BusinessLayer
             }
         }
 
+        public List<dt306_Progress> GetListByIdBase(int idBase)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt306_Progress.Where(r => r.IdBase == idBase).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
+        public List<dt306_Progress> GetListByIdUser(string idUser)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt306_Progress.Where(r => r.IdUsr == idUser).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public dt306_Progress GetItemById(int id)
         {
             try

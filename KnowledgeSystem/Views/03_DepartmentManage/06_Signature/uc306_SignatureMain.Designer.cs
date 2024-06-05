@@ -41,8 +41,11 @@
             this.gColId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gColIsProgess = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColEnterDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColIsProgess = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColIsCancel = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColRemark = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnAdd = new DevExpress.XtraBars.BarButtonItem();
@@ -55,7 +58,6 @@
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.gColIsCancel = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gvDocs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
@@ -163,9 +165,11 @@
             this.gColId,
             this.gridColumn3,
             this.gridColumn2,
-            this.gColIsProgess,
             this.gColEnterDate,
-            this.gColIsCancel});
+            this.gColIsProgess,
+            this.gColIsCancel,
+            this.gColRemark,
+            this.gridColumn4});
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
             this.gvData.OptionsDetail.ShowDetailTabs = false;
@@ -174,11 +178,14 @@
             this.gvData.OptionsView.EnableAppearanceOddRow = true;
             this.gvData.OptionsView.ShowAutoFilterRow = true;
             this.gvData.OptionsView.ShowGroupPanel = false;
+            this.gvData.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gColEnterDate, DevExpress.Data.ColumnSortOrder.Descending)});
             this.gvData.MasterRowEmpty += new DevExpress.XtraGrid.Views.Grid.MasterRowEmptyEventHandler(this.gvData_MasterRowEmpty);
             this.gvData.MasterRowExpanded += new DevExpress.XtraGrid.Views.Grid.CustomMasterRowEventHandler(this.gvData_MasterRowExpanded);
             this.gvData.MasterRowGetChildList += new DevExpress.XtraGrid.Views.Grid.MasterRowGetChildListEventHandler(this.gvData_MasterRowGetChildList);
             this.gvData.MasterRowGetRelationName += new DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationNameEventHandler(this.gvData_MasterRowGetRelationName);
             this.gvData.MasterRowGetRelationCount += new DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationCountEventHandler(this.gvData_MasterRowGetRelationCount);
+            this.gvData.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gvData_PopupMenuShowing);
             // 
             // gColId
             // 
@@ -206,14 +213,6 @@
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 1;
             // 
-            // gColIsProgess
-            // 
-            this.gColIsProgess.Caption = "簽名中";
-            this.gColIsProgess.FieldName = "data.IsProcess";
-            this.gColIsProgess.Name = "gColIsProgess";
-            this.gColIsProgess.Visible = true;
-            this.gColIsProgess.VisibleIndex = 3;
-            // 
             // gColEnterDate
             // 
             this.gColEnterDate.AppearanceCell.Options.UseTextOptions = true;
@@ -223,6 +222,36 @@
             this.gColEnterDate.Name = "gColEnterDate";
             this.gColEnterDate.Visible = true;
             this.gColEnterDate.VisibleIndex = 2;
+            // 
+            // gColIsProgess
+            // 
+            this.gColIsProgess.Caption = "簽名中";
+            this.gColIsProgess.FieldName = "data.IsProcess";
+            this.gColIsProgess.Name = "gColIsProgess";
+            // 
+            // gColIsCancel
+            // 
+            this.gColIsCancel.Caption = "被退回";
+            this.gColIsCancel.FieldName = "data.IsCancel";
+            this.gColIsCancel.Name = "gColIsCancel";
+            // 
+            // gColRemark
+            // 
+            this.gColRemark.Caption = "狀態";
+            this.gColRemark.FieldName = "Remark";
+            this.gColRemark.Name = "gColRemark";
+            this.gColRemark.ShowUnboundExpressionMenu = true;
+            this.gColRemark.UnboundDataType = typeof(string);
+            this.gColRemark.Visible = true;
+            this.gColRemark.VisibleIndex = 3;
+            // 
+            // gridColumn4
+            // 
+            this.gridColumn4.Caption = "說明";
+            this.gridColumn4.FieldName = "data.Desc";
+            this.gridColumn4.Name = "gridColumn4";
+            this.gridColumn4.Visible = true;
+            this.gridColumn4.VisibleIndex = 4;
             // 
             // barManagerTP
             // 
@@ -369,14 +398,6 @@
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
-            // gColIsCancel
-            // 
-            this.gColIsCancel.Caption = "gridColumn4";
-            this.gColIsCancel.FieldName = "data.IsCancel";
-            this.gColIsCancel.Name = "gColIsCancel";
-            this.gColIsCancel.Visible = true;
-            this.gColIsCancel.VisibleIndex = 4;
-            // 
             // uc306_SignatureMain
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
@@ -431,5 +452,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
         private DevExpress.XtraGrid.Columns.GridColumn gColIsCancel;
+        private DevExpress.XtraGrid.Columns.GridColumn gColRemark;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
     }
 }

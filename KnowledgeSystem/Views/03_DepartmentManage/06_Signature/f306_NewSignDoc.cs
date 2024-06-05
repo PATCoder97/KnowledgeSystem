@@ -169,6 +169,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             baseData.UploadDate = DateTime.Today;
             baseData.IsProcess = true;
             baseData.IsCancel = false;
+            baseData.NextStepProg = progresses.FirstOrDefault().IdUsr;
 
             int idBase = dt306_BaseBUS.Instance.Add(baseData);
 

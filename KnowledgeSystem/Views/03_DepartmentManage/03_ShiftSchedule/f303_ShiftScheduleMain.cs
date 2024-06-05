@@ -232,15 +232,16 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._03_ShiftSchedule
                     for (int j = 0; j < numChar; j++)
                     {
                         string currentString = $"{shift[j * 2]}{shift[j * 2 + 1]}";
+
+                        // Chuyển ca 日班 thành GO khi có nhân viên đi ca về ca 日
+                        currentString = currentString.Replace("日班", "GO");
+
                         string result = refTableDatas.FirstOrDefault(kvp => currentString == $"{kvp.Value[j * 2]}{kvp.Value[j * 2 + 1]}").Key ?? "";
 
                         outputString += string.IsNullOrEmpty(result) ? currentString : result;
                     }
 
                     outputString = GenerateERPString(outputString, numTab);
-
-                    // Chuyển ca 日班 thành GO khi có nhân viên đi ca về ca 日
-                    outputString = outputString.Replace("日班", "GO");
 
                     if (!outputString.Contains("班"))
                         shiftDatas.Add(userID, outputString);

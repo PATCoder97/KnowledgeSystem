@@ -65,8 +65,9 @@
             this.pdfNavigationRibbonPageGroup1 = new DevExpress.XtraPdfViewer.Bars.PdfNavigationRibbonPageGroup();
             this.pdfZoomRibbonPageGroup1 = new DevExpress.XtraPdfViewer.Bars.PdfZoomRibbonPageGroup();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.pdfBarController1 = new DevExpress.XtraPdfViewer.Bars.PdfBarController(this.components);
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.pdfBarController1 = new DevExpress.XtraPdfViewer.Bars.PdfBarController(this.components);
+            this.btnCancel = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPageNumberEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pdfBarController1)).BeginInit();
@@ -114,9 +115,10 @@
             this.btnConfirm,
             this.btnClearSign,
             this.btnAdvanced,
-            this.btnStamp});
+            this.btnStamp,
+            this.btnCancel});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 36;
+            this.ribbonControl1.MaxItemId = 37;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.pdfRibbonPage1});
@@ -349,6 +351,13 @@
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             this.ribbonPageGroup1.Text = "簽名";
             // 
+            // ribbonPageGroup2
+            // 
+            this.ribbonPageGroup2.ItemLinks.Add(this.btnConfirm);
+            this.ribbonPageGroup2.ItemLinks.Add(this.btnCancel);
+            this.ribbonPageGroup2.Name = "ribbonPageGroup2";
+            this.ribbonPageGroup2.Text = "確認";
+            // 
             // pdfBarController1
             // 
             this.pdfBarController1.BarItems.Add(this.pdfFindTextBarItem1);
@@ -376,11 +385,13 @@
             this.pdfBarController1.BarItems.Add(this.pdfImportFormDataBarItem1);
             this.pdfBarController1.Control = this.pdfViewer;
             // 
-            // ribbonPageGroup2
+            // btnCancel
             // 
-            this.ribbonPageGroup2.ItemLinks.Add(this.btnConfirm);
-            this.ribbonPageGroup2.Name = "ribbonPageGroup2";
-            this.ribbonPageGroup2.Text = "確認";
+            this.btnCancel.Caption = "退回";
+            this.btnCancel.Id = 36;
+            this.btnCancel.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnCancel.ImageOptions.SvgImage")));
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnCancel_ItemClick);
             // 
             // f00_PdfTools
             // 
@@ -443,5 +454,6 @@
         private DevExpress.XtraBars.BarButtonItem btnAdvanced;
         private DevExpress.XtraBars.BarButtonItem btnStamp;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
+        private DevExpress.XtraBars.BarButtonItem btnCancel;
     }
 }

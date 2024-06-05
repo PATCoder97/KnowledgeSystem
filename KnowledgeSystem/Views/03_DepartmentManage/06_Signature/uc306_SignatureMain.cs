@@ -1,12 +1,15 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
 using DevExpress.Utils.Menu;
+using DevExpress.Utils.Svg;
 using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraReports;
 using DevExpress.XtraReports.Wizards;
 using DevExpress.XtraSplashScreen;
 using KnowledgeSystem.Helpers;
+using KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -42,7 +45,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
         List<dm_JobTitle> jobs;
 
         List<dt306_Base> bases;
-        //List<dt302_ReportAttach> reportAttaches;
         List<dm_Attachment> attachments;
 
         DXMenuItem itemViewInfo;
@@ -52,32 +54,44 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
         DXMenuItem itemAddAttach;
         DXMenuItem itemDelAttach;
 
+        const string NAME_ISPROGRESS = "核簽中";
+        const string NAME_ISCANCEL = "被退回";
+        const string NAME_ISCOMPLETE = "核簽完畢";
+
         private void InitializeMenuItems()
         {
-            //itemViewInfo = new DXMenuItem("顯示信息", ItemViewInfo_Click, TPSvgimages.Info, DXMenuItemPriority.Normal);
-            //itemViewFile = new DXMenuItem("讀取檔案", ItemViewFile_Click, TPSvgimages.View, DXMenuItemPriority.Normal);
-            //itemAddPlanFile = new DXMenuItem("上傳計劃表", ItemAddPlanFile_Click, TPSvgimages.UpLevel, DXMenuItemPriority.Normal);
-            //itemAddAttach = new DXMenuItem("上傳報告", ItemAddAttach_Click, TPSvgimages.UploadFile, DXMenuItemPriority.Normal);
-            //itemCloseReport = new DXMenuItem("結案", ItemCloseReport_Click, TPSvgimages.Confirm, DXMenuItemPriority.Normal);
-            //itemDelAttach = new DXMenuItem("刪除附件", ItemDelAttach_Click, TPSvgimages.Remove, DXMenuItemPriority.Normal);
+            itemViewInfo = CreateMenuItem("看信息", ItemViewInfo_Click, TPSvgimages.View);
+            //itemAddAtt = CreateMenuItem("新增檔案", ItemAddAtt_Click, TPSvgimages.Attach);
+            //itemCopyNode = CreateMenuItem("複製年版", ItemCopyNote_Click, TPSvgimages.Copy);
+            //itemDelNode = CreateMenuItem("刪除", ItemDeleteNote_Click, TPSvgimages.Close);
+            //itemEditNode = CreateMenuItem("更新", ItemEditNode_Click, TPSvgimages.Edit);
+            //itemAddVer = CreateMenuItem("新增年版", ItemAddVer_Click, TPSvgimages.Add2);
+        }
 
-            //itemViewInfo.ImageOptions.SvgImageSize = new Size(24, 24);
-            //itemViewInfo.AppearanceHovered.ForeColor = Color.Blue;
+        private void ItemViewInfo_Click(object sender, EventArgs e)
+        {
+            GridView view = gvData;
 
-            //itemViewFile.ImageOptions.SvgImageSize = new Size(24, 24);
-            //itemViewFile.AppearanceHovered.ForeColor = Color.Blue;
+            int idBase = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColId));
 
-            //itemAddPlanFile.ImageOptions.SvgImageSize = new Size(24, 24);
-            //itemAddPlanFile.AppearanceHovered.ForeColor = Color.Blue;
+            f306_SignDocInfo fInfo = new f306_SignDocInfo();
+            fInfo.idBase = idBase;
+            fInfo.ShowDialog();
 
-            //itemCloseReport.ImageOptions.SvgImageSize = new Size(24, 24);
-            //itemCloseReport.AppearanceHovered.ForeColor = Color.Blue;
+            LoadData();
+        }
 
-            //itemAddAttach.ImageOptions.SvgImageSize = new Size(24, 24);
-            //itemAddAttach.AppearanceHovered.ForeColor = Color.Blue;
+        DXMenuItem CreateMenuItem(string caption, EventHandler clickEvent, SvgImage svgImage)
+        {
+            var menuItem = new DXMenuItem(caption, clickEvent, svgImage, DXMenuItemPriority.Normal);
+            SetMenuItemProperties(menuItem);
+            return menuItem;
+        }
 
-            //itemDelAttach.ImageOptions.SvgImageSize = new Size(24, 24);
-            //itemDelAttach.AppearanceHovered.ForeColor = Color.Blue;
+        void SetMenuItemProperties(DXMenuItem menuItem)
+        {
+            menuItem.ImageOptions.SvgImageSize = new Size(24, 24);
+            menuItem.AppearanceHovered.ForeColor = Color.Blue;
         }
 
         private void InitializeIcon()
@@ -85,6 +99,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             btnAdd.ImageOptions.SvgImage = TPSvgimages.Add;
             btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
             btnExportExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
+        }
+
+        private void CreateRuleGV()
+        {
+            gvData.FormatRules.AddExpressionRule(gColRemark, new DevExpress.Utils.AppearanceDefault() { ForeColor = Color.Blue }, $"[Remark] = \'{NAME_ISPROGRESS}\'");
+            //gvData.FormatRules.AddExpressionRule(gColRemark, new DevExpress.Utils.AppearanceDefault() { ForeColor = Color.Green }, $"[Remark] = \'{NAME_EQUAL}\'");
+            gvData.FormatRules.AddExpressionRule(gColRemark, new DevExpress.Utils.AppearanceDefault() { ForeColor = Color.Red }, $"[Remark] = \'{NAME_ISCANCEL}\'");
         }
 
         private void LoadData()
@@ -113,7 +134,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
 
                 gvData.BestFitColumns();
                 gvData.CollapseAllDetails();
-                gvData.ExpandMasterRow(gvData.FocusedRowHandle);
             }
         }
 
@@ -125,9 +145,37 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             gvDocs.ReadOnlyGridView();
 
             LoadData();
+            CreateRuleGV();
             gcData.DataSource = sourceBases;
 
             gvData.BestFitColumns();
+
+            gcData.ForceInitialize();
+            gvData.CustomUnboundColumnData += gvData_CustomUnboundColumnData;
+        }
+
+        private void gvData_CustomUnboundColumnData(object sender, CustomColumnDataEventArgs e)
+        {
+            GridView view = sender as GridView;
+
+            if (e.Column.FieldName == "Remark" && e.IsGetData)
+            {
+                bool isProcess = Convert.ToBoolean(view.GetListSourceRowCellValue(e.ListSourceRowIndex, "data.IsProcess"));
+                bool isCacel = Convert.ToBoolean(view.GetListSourceRowCellValue(e.ListSourceRowIndex, "data.IsCancel"));
+
+                if (isCacel)
+                {
+                    e.Value = NAME_ISCANCEL;
+                }
+                else if(isProcess)
+                {
+                    e.Value = NAME_ISPROGRESS;
+                }
+                else
+                {
+                    e.Value = NAME_ISCOMPLETE;
+                }
+            }
         }
 
         private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -182,6 +230,28 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             GridView detailView = masterView.GetDetailView(e.RowHandle, visibleDetailRelationIndex) as GridView;
 
             detailView.BestFitColumns();
+        }
+
+        private void gvData_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
+        {
+            if (e.HitInfo.InRowCell)
+            {
+                GridView view = sender as GridView;
+                view.FocusedRowHandle = e.HitInfo.RowHandle;
+
+                e.Menu.Items.Add(itemViewInfo);
+
+                //int idReport = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColIdReport));
+                //var closeRpDate = view.GetRowCellValue(view.FocusedRowHandle, gColCloseRp);
+
+                //var atts = dt302_ReportAttachBUS.Instance.GetListByReport(idReport);
+
+                //if (closeRpDate == null)
+                //{
+                //    e.Menu.Items.Add(itemAddAttach);
+                //    if (atts.Count != 0) e.Menu.Items.Add(itemCloseReport);
+                //}
+            }
         }
     }
 }

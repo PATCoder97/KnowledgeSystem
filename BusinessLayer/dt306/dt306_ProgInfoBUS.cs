@@ -40,6 +40,22 @@ namespace BusinessLayer
             }
         }
 
+        public List<dt306_ProgInfo> GetListByIdBase(int idBase)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt306_ProgInfo.Where(r => r.IdBase == idBase).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public dt306_ProgInfo GetItemById(int id)
         {
             try

@@ -28,6 +28,7 @@ namespace KnowledgeSystem.Views._00_Generals
     public partial class f00_PdfTools : DevExpress.XtraBars.Ribbon.RibbonForm
     {
         public string OutFileName { get; private set; }
+        public string Describe { get; private set; }
 
         public f00_PdfTools(string FilePath, string OutDic)
         {
@@ -347,17 +348,6 @@ namespace KnowledgeSystem.Views._00_Generals
             signInfo = SignInfo.Sign;
         }
 
-        private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            if (signs.Count() == 0)
-            {
-                MsgTP.MsgError("你還沒簽名！");
-                return;
-            }
-
-            SaveDrawingAndReload();
-        }
-
         private void btnClearSign_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             signs.Clear();
@@ -412,6 +402,37 @@ namespace KnowledgeSystem.Views._00_Generals
             imageSign = ucAdvanced.ImageSign;
             signSelect = ucAdvanced.SignSelect;
             descrip = "";
+        }
+
+        private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (signs.Count() == 0)
+            {
+                MsgTP.MsgError("你還沒簽名！");
+                return;
+            }
+
+            SaveDrawingAndReload();
+
+            Close();
+        }
+
+        private void btnCancel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            XtraInputBoxArgs args = new XtraInputBoxArgs
+            {
+                Caption = TPConfigs.SoftNameTW,
+                Prompt = "退回文件原因",
+                DefaultButtonIndex = 0,
+                Editor = new MemoEdit(),
+                DefaultResponse = ""
+            };
+
+            var result = XtraInputBox.Show(args);
+            if (result == null) return;
+            Describe = result?.ToString() ?? "";
+
+            Close();
         }
     }
 }
