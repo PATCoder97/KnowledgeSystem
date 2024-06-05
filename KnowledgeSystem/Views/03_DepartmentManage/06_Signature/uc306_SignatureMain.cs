@@ -3,18 +3,23 @@ using DataAccessLayer;
 using DevExpress.Utils.Menu;
 using DevExpress.Utils.Svg;
 using DevExpress.XtraEditors;
+using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraReports;
 using DevExpress.XtraReports.Wizards;
+using DevExpress.XtraRichEdit.Layout;
 using DevExpress.XtraSplashScreen;
+using iTextSharp.text.pdf;
 using KnowledgeSystem.Helpers;
+using KnowledgeSystem.Views._00_Generals;
 using KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
@@ -49,10 +54,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
 
         DXMenuItem itemViewInfo;
         DXMenuItem itemViewFile;
-        DXMenuItem itemAddPlanFile;
-        DXMenuItem itemCloseReport;
-        DXMenuItem itemAddAttach;
-        DXMenuItem itemDelAttach;
+        DXMenuItem itemSaveFile;
 
         const string NAME_ISPROGRESS = "核簽中";
         const string NAME_ISCANCEL = "被退回";
@@ -60,12 +62,55 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
 
         private void InitializeMenuItems()
         {
-            itemViewInfo = CreateMenuItem("看信息", ItemViewInfo_Click, TPSvgimages.View);
-            //itemAddAtt = CreateMenuItem("新增檔案", ItemAddAtt_Click, TPSvgimages.Attach);
-            //itemCopyNode = CreateMenuItem("複製年版", ItemCopyNote_Click, TPSvgimages.Copy);
-            //itemDelNode = CreateMenuItem("刪除", ItemDeleteNote_Click, TPSvgimages.Close);
-            //itemEditNode = CreateMenuItem("更新", ItemEditNode_Click, TPSvgimages.Edit);
-            //itemAddVer = CreateMenuItem("新增年版", ItemAddVer_Click, TPSvgimages.Add2);
+            itemViewInfo = CreateMenuItem("查看信息", ItemViewInfo_Click, TPSvgimages.View);
+            itemViewFile = CreateMenuItem("查看文件", ItemViewFile_Click, TPSvgimages.View);
+            itemSaveFile = CreateMenuItem("保存檔案", ItemSaveFile_Click, TPSvgimages.Attach);
+        }
+
+        private void ItemSaveFile_Click(object sender, EventArgs e)
+        {
+            GridView view = gvData.GetDetailView(gvData.FocusedRowHandle, 0) as GridView;
+            int idAtt = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColIdAtt));
+
+            var att = dm_AttachmentBUS.Instance.GetItemById(idAtt);
+            string filePath = att.EncryptionName;
+            string actualName = att.ActualName;
+
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.FileName = att.ActualName;
+            dialog.Filter = "Pdf Files|*.pdf";
+            if (dialog.ShowDialog() != DialogResult.OK) return;
+
+            string sourcePath = Path.Combine(TPConfigs.Folder306, filePath);
+            string destPath = dialog.FileName;
+
+            if (!Directory.Exists(TPConfigs.TempFolderData))
+                Directory.CreateDirectory(TPConfigs.TempFolderData);
+
+            File.Copy(sourcePath, destPath, true);
+
+            MsgTP.MsgShowInfomation("<font='Microsoft JhengHei UI' size=18>已儲存！</font>");
+        }
+
+        private void ItemViewFile_Click(object sender, EventArgs e)
+        {
+            GridView view = gvData.GetDetailView(gvData.FocusedRowHandle, 0) as GridView;
+            int idAtt = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColIdAtt));
+
+            var att = dm_AttachmentBUS.Instance.GetItemById(idAtt);
+            string filePath = att.EncryptionName;
+            string actualName = att.ActualName;
+
+            string sourcePath = Path.Combine(TPConfigs.Folder306, filePath);
+            string destPath = Path.Combine(TPConfigs.TempFolderData, $"{actualName}_{DateTime.Now:yyyyMMddHHmmss}.pdf");
+
+            if (!Directory.Exists(TPConfigs.TempFolderData))
+                Directory.CreateDirectory(TPConfigs.TempFolderData);
+
+            File.Copy(sourcePath, destPath, true);
+
+            f00_VIewFile fView = new f00_VIewFile(destPath);
+            fView.ShowDialog();
         }
 
         private void ItemViewInfo_Click(object sender, EventArgs e)
@@ -161,9 +206,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             if (e.Column.FieldName == "Remark" && e.IsGetData)
             {
                 bool isProcess = Convert.ToBoolean(view.GetListSourceRowCellValue(e.ListSourceRowIndex, "data.IsProcess"));
-                bool isCacel = Convert.ToBoolean(view.GetListSourceRowCellValue(e.ListSourceRowIndex, "data.IsCancel"));
+                bool isCancel = Convert.ToBoolean(view.GetListSourceRowCellValue(e.ListSourceRowIndex, "data.IsCancel"));
 
-                if (isCacel)
+                if (isCancel)
                 {
                     e.Value = NAME_ISCANCEL;
                 }
@@ -240,17 +285,30 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
                 view.FocusedRowHandle = e.HitInfo.RowHandle;
 
                 e.Menu.Items.Add(itemViewInfo);
+            }
+        }
 
-                //int idReport = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColIdReport));
-                //var closeRpDate = view.GetRowCellValue(view.FocusedRowHandle, gColCloseRp);
+        private void gvDocs_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
+        {
+            if (e.HitInfo.InRowCell)
+            {
+                GridView view = sender as GridView;
+                int rowHandle = e.HitInfo.RowHandle;
+                view.FocusedRowHandle = rowHandle;
 
-                //var atts = dt302_ReportAttachBUS.Instance.GetListByReport(idReport);
+                GridView parent = view.ParentView as GridView;
+                int rowHandleParent = parent.FocusedRowHandle;
 
-                //if (closeRpDate == null)
-                //{
-                //    e.Menu.Items.Add(itemAddAttach);
-                //    if (atts.Count != 0) e.Menu.Items.Add(itemCloseReport);
-                //}
+                bool isProcess = Convert.ToBoolean(parent.GetRowCellValue(rowHandleParent, "data.IsProcess"));
+                bool isCancel = Convert.ToBoolean(parent.GetRowCellValue(rowHandleParent, "data.IsCancel"));
+
+                bool isCancel2 = Convert.ToBoolean(view.GetRowCellValue(rowHandle, "data.IsCancel"));
+
+                if (isProcess == false && isCancel == false && isCancel2 == false)
+                {
+                    e.Menu.Items.Add(itemViewFile);
+                    e.Menu.Items.Add(itemSaveFile);
+                }
             }
         }
     }

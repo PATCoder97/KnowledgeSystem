@@ -58,6 +58,8 @@
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColIdAtt = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gvDocs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
@@ -84,12 +86,15 @@
             this.gridColumn1,
             this.gColRemark2,
             this.gridColumn6,
-            this.gridColumn7});
+            this.gridColumn7,
+            this.gridColumn5,
+            this.gColIdAtt});
             this.gvDocs.GridControl = this.gcData;
             this.gvDocs.Name = "gvDocs";
             this.gvDocs.OptionsView.ColumnAutoWidth = false;
             this.gvDocs.OptionsView.EnableAppearanceOddRow = true;
             this.gvDocs.OptionsView.ShowGroupPanel = false;
+            this.gvDocs.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gvDocs_PopupMenuShowing);
             // 
             // gridColumn1
             // 
@@ -396,6 +401,22 @@
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
+            // gridColumn5
+            // 
+            this.gridColumn5.Caption = "gridColumn5";
+            this.gridColumn5.FieldName = "data.IsCancel";
+            this.gridColumn5.Name = "gridColumn5";
+            this.gridColumn5.Visible = true;
+            this.gridColumn5.VisibleIndex = 4;
+            // 
+            // gColIdAtt
+            // 
+            this.gColIdAtt.Caption = "gridColumn8";
+            this.gColIdAtt.FieldName = "data.IdAtt";
+            this.gColIdAtt.Name = "gColIdAtt";
+            this.gColIdAtt.Visible = true;
+            this.gColIdAtt.VisibleIndex = 5;
+            // 
             // uc306_SignatureMain
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
@@ -452,5 +473,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gColIsCancel;
         private DevExpress.XtraGrid.Columns.GridColumn gColRemark;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
+        private DevExpress.XtraGrid.Columns.GridColumn gColIdAtt;
     }
 }
