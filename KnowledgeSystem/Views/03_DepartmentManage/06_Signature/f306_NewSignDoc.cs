@@ -173,16 +173,16 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
 
             int idBase = dt306_BaseBUS.Instance.Add(baseData);
 
-            var atts = attachments.Select(r => new dm_Attachment()
+            foreach (var item in attachments)
             {
-                Thread = r.Thread,
-                ActualName = r.ActualName,
-                EncryptionName = r.EncryptionName
-            }).ToList();
+                var att = new dm_Attachment()
+                {
+                    Thread = item.Thread,
+                    ActualName = item.ActualName,
+                    EncryptionName = item.EncryptionName
+                };
 
-            foreach (var item in atts)
-            {
-                var idAtt = dm_AttachmentBUS.Instance.Add(item);
+                var idAtt = dm_AttachmentBUS.Instance.Add(att);
 
                 var baseAtt = new dt306_BaseAtts()
                 {
@@ -191,6 +191,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
                     DisplayName = item.ActualName,
                     IsCancel = false
                 };
+
+                string folderDest = Path.Combine(TPConfigs.Folder306, idBase.ToString());
+                if (!Directory.Exists(folderDest)) Directory.CreateDirectory(folderDest);
+
+                File.Copy(item.PathFile, Path.Combine(folderDest, item.EncryptionName), true);
 
                 dt306_BaseAttsBUS.Instance.Add(baseAtt);
             }

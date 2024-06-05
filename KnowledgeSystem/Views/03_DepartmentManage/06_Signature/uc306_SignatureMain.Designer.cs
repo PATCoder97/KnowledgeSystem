@@ -33,7 +33,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc306_SignatureMain));
             this.gvDocs = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColRemark2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcData = new DevExpress.XtraGrid.GridControl();
@@ -82,7 +82,7 @@
             this.gvDocs.Appearance.Row.Options.UseForeColor = true;
             this.gvDocs.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumn1,
-            this.gridColumn5,
+            this.gColRemark2,
             this.gridColumn6,
             this.gridColumn7});
             this.gvDocs.GridControl = this.gcData;
@@ -99,13 +99,13 @@
             this.gridColumn1.Visible = true;
             this.gridColumn1.VisibleIndex = 0;
             // 
-            // gridColumn5
+            // gColRemark2
             // 
-            this.gridColumn5.Caption = "狀態";
-            this.gridColumn5.FieldName = "Status";
-            this.gridColumn5.Name = "gridColumn5";
-            this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 1;
+            this.gColRemark2.Caption = "狀態";
+            this.gColRemark2.FieldName = "Status";
+            this.gColRemark2.Name = "gColRemark2";
+            this.gColRemark2.Visible = true;
+            this.gColRemark2.VisibleIndex = 1;
             // 
             // gridColumn6
             // 
@@ -210,8 +210,6 @@
             this.gridColumn2.Caption = "呈核人員";
             this.gridColumn2.FieldName = "DisplayName";
             this.gridColumn2.Name = "gridColumn2";
-            this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 1;
             // 
             // gColEnterDate
             // 
@@ -221,7 +219,7 @@
             this.gColEnterDate.FieldName = "data.UploadDate";
             this.gColEnterDate.Name = "gColEnterDate";
             this.gColEnterDate.Visible = true;
-            this.gColEnterDate.VisibleIndex = 2;
+            this.gColEnterDate.VisibleIndex = 1;
             // 
             // gColIsProgess
             // 
@@ -243,7 +241,7 @@
             this.gColRemark.ShowUnboundExpressionMenu = true;
             this.gColRemark.UnboundDataType = typeof(string);
             this.gColRemark.Visible = true;
-            this.gColRemark.VisibleIndex = 3;
+            this.gColRemark.VisibleIndex = 2;
             // 
             // gridColumn4
             // 
@@ -251,7 +249,7 @@
             this.gridColumn4.FieldName = "data.Desc";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 4;
+            this.gridColumn4.VisibleIndex = 3;
             // 
             // barManagerTP
             // 
@@ -448,7 +446,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraGrid.Views.Grid.GridView gvDocs;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
+        private DevExpress.XtraGrid.Columns.GridColumn gColRemark2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
         private DevExpress.XtraGrid.Columns.GridColumn gColIsCancel;

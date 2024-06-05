@@ -32,6 +32,7 @@ namespace KnowledgeSystem.Helpers
         public static string Folder202 { get; set; }
         public static string Folder402 { get; set; }
         public static string Folder201 { get; set; }
+        public static string Folder306 { get; set; }
         public static string FolderSign { get; set; }
 
         public static void SetFolderData()
@@ -41,6 +42,7 @@ namespace KnowledgeSystem.Helpers
             Folder202 = Path.Combine(FolderData, "202");
             Folder402 = Path.Combine(FolderData, "402");
             Folder201 = Path.Combine(FolderData, "201");
+            Folder306 = Path.Combine(FolderData, "306");
             FolderSign = Path.Combine(Folder402, "ImageSign");
         }
 

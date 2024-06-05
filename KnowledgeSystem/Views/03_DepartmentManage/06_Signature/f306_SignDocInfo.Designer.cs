@@ -33,7 +33,7 @@
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnCancel = new DevExpress.XtraBars.BarButtonItem();
-            this.btnSign = new DevExpress.XtraBars.BarButtonItem();
+            this.btnApproval = new DevExpress.XtraBars.BarButtonItem();
             this.btnConfirm = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
@@ -43,6 +43,7 @@
             this.gcDocs = new DevExpress.XtraGrid.GridControl();
             this.gvDocs = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gColId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColIdAtt = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcHistoryProcess = new DevExpress.XtraGrid.GridControl();
@@ -54,12 +55,11 @@
             this.stepProgressDoc = new DevExpress.XtraEditors.StepProgressBar();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.tabbedControlGroup1 = new DevExpress.XtraLayout.TabbedControlGroup();
-            this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.gColIdAtt = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -70,11 +70,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.stepProgressDoc)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroup1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             this.SuspendLayout();
             // 
             // barManagerTP
@@ -89,7 +89,7 @@
             this.barManagerTP.Form = this;
             this.barManagerTP.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.btnCancel,
-            this.btnSign,
+            this.btnApproval,
             this.btnConfirm});
             this.barManagerTP.MainMenu = this.bar2;
             this.barManagerTP.MaxItemId = 4;
@@ -117,7 +117,7 @@
             this.bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnCancel, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnSign, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnApproval, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnConfirm, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawDragBorder = false;
@@ -132,13 +132,15 @@
             this.btnCancel.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnCancel.ImageOptions.SvgImage")));
             this.btnCancel.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnCancel.Name = "btnCancel";
+            this.btnCancel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnCancel_ItemClick);
             // 
-            // btnSign
+            // btnApproval
             // 
-            this.btnSign.Caption = "簽名";
-            this.btnSign.Id = 1;
-            this.btnSign.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnSign.Name = "btnSign";
+            this.btnApproval.Caption = "核准";
+            this.btnApproval.Id = 1;
+            this.btnApproval.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnApproval.Name = "btnApproval";
+            this.btnApproval.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnApproval_ItemClick);
             // 
             // btnConfirm
             // 
@@ -237,13 +239,19 @@
             // gColId
             // 
             this.gColId.Caption = "gridColumn2";
-            this.gColId.FieldName = "Id";
+            this.gColId.FieldName = "BaseAtt.Id";
             this.gColId.Name = "gColId";
+            // 
+            // gColIdAtt
+            // 
+            this.gColIdAtt.Caption = "gridColumn2";
+            this.gColIdAtt.FieldName = "BaseAtt.IdAtt";
+            this.gColIdAtt.Name = "gColIdAtt";
             // 
             // gridColumn3
             // 
             this.gridColumn3.Caption = "文件名稱";
-            this.gridColumn3.FieldName = "DisplayName";
+            this.gridColumn3.FieldName = "BaseAtt.DisplayName";
             this.gridColumn3.MaxWidth = 600;
             this.gridColumn3.MinWidth = 400;
             this.gridColumn3.Name = "gridColumn3";
@@ -254,10 +262,10 @@
             // gridColumn5
             // 
             this.gridColumn5.Caption = "說明";
-            this.gridColumn5.FieldName = "Desc";
+            this.gridColumn5.FieldName = "BaseAtt.Desc";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 2;
+            this.gridColumn5.VisibleIndex = 1;
             this.gridColumn5.Width = 635;
             // 
             // gcHistoryProcess
@@ -339,7 +347,7 @@
             // gridColumn9
             // 
             this.gridColumn9.Caption = "說明";
-            this.gridColumn9.FieldName = "data.Note";
+            this.gridColumn9.FieldName = "data.Desc";
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
             this.gridColumn9.VisibleIndex = 3;
@@ -385,30 +393,12 @@
             this.tabbedControlGroup1.AppearanceTabPage.HeaderActive.Options.UseForeColor = true;
             this.tabbedControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.tabbedControlGroup1.Name = "tabbedControlGroup1";
-            this.tabbedControlGroup1.SelectedTabPage = this.layoutControlGroup2;
+            this.tabbedControlGroup1.SelectedTabPage = this.layoutControlGroup1;
             this.tabbedControlGroup1.Size = new System.Drawing.Size(865, 432);
             this.tabbedControlGroup1.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlGroup1,
             this.layoutControlGroup2});
             this.tabbedControlGroup1.Text = "流程";
-            // 
-            // layoutControlGroup2
-            // 
-            this.layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem3});
-            this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlGroup2.Name = "layoutControlGroup2";
-            this.layoutControlGroup2.Size = new System.Drawing.Size(841, 376);
-            this.layoutControlGroup2.Text = "核簽文件";
-            // 
-            // layoutControlItem3
-            // 
-            this.layoutControlItem3.Control = this.gcDocs;
-            this.layoutControlItem3.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(841, 376);
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem3.TextVisible = false;
             // 
             // layoutControlGroup1
             // 
@@ -442,13 +432,23 @@
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
-            // gColIdAtt
+            // layoutControlGroup2
             // 
-            this.gColIdAtt.Caption = "gridColumn2";
-            this.gColIdAtt.FieldName = "IdAtt";
-            this.gColIdAtt.Name = "gColIdAtt";
-            this.gColIdAtt.Visible = true;
-            this.gColIdAtt.VisibleIndex = 1;
+            this.layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem3});
+            this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlGroup2.Name = "layoutControlGroup2";
+            this.layoutControlGroup2.Size = new System.Drawing.Size(841, 376);
+            this.layoutControlGroup2.Text = "核簽文件";
+            // 
+            // layoutControlItem3
+            // 
+            this.layoutControlItem3.Control = this.gcDocs;
+            this.layoutControlItem3.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem3.Name = "layoutControlItem3";
+            this.layoutControlItem3.Size = new System.Drawing.Size(841, 376);
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem3.TextVisible = false;
             // 
             // f306_SignDocInfo
             // 
@@ -477,11 +477,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.stepProgressDoc)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroup1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -492,7 +492,7 @@
         private DevExpress.XtraBars.BarManager barManagerTP;
         private DevExpress.XtraBars.Bar bar2;
         private DevExpress.XtraBars.BarButtonItem btnCancel;
-        private DevExpress.XtraBars.BarButtonItem btnSign;
+        private DevExpress.XtraBars.BarButtonItem btnApproval;
         private DevExpress.XtraBars.BarButtonItem btnConfirm;
         private DevExpress.XtraBars.BarDockControl barDockControlTop;
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;

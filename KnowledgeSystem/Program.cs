@@ -48,7 +48,7 @@ namespace KnowledgeSystem
             TPConfigs.UrlUpdate = lsStaticValue.FirstOrDefault(r => r.KeyT == "UrlUpdate").ValueT;
             TPConfigs.FolderData = lsStaticValue.FirstOrDefault(r => r.KeyT == "FolderData").ValueT;
             TPConfigs.SetFolderData();
-            Application.Run(new f00_FluentFrame(55)); 
+            Application.Run(new f00_FluentFrame(55));
 
             //Application.Run(new f00_AdminChangeUser());
 

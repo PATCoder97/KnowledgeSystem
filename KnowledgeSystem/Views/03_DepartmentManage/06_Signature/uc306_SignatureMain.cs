@@ -104,8 +104,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
         private void CreateRuleGV()
         {
             gvData.FormatRules.AddExpressionRule(gColRemark, new DevExpress.Utils.AppearanceDefault() { ForeColor = Color.Blue }, $"[Remark] = \'{NAME_ISPROGRESS}\'");
-            //gvData.FormatRules.AddExpressionRule(gColRemark, new DevExpress.Utils.AppearanceDefault() { ForeColor = Color.Green }, $"[Remark] = \'{NAME_EQUAL}\'");
             gvData.FormatRules.AddExpressionRule(gColRemark, new DevExpress.Utils.AppearanceDefault() { ForeColor = Color.Red }, $"[Remark] = \'{NAME_ISCANCEL}\'");
+            gvDocs.FormatRules.AddExpressionRule(gColRemark2, new DevExpress.Utils.AppearanceDefault() { ForeColor = Color.Red }, $"[Status] = \'{NAME_ISCANCEL}\'");
         }
 
         private void LoadData()
@@ -114,7 +114,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             {
                 helper.SaveViewInfo();
 
-                bases = dt306_BaseBUS.Instance.GetList();
+                bases = dt306_BaseBUS.Instance.GetListByUploadUsr(TPConfigs.LoginUser.Id);
                 users = dm_UserBUS.Instance.GetList();
                 jobs = dm_JobTitleBUS.Instance.GetList();
 
@@ -167,7 +167,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
                 {
                     e.Value = NAME_ISCANCEL;
                 }
-                else if(isProcess)
+                else if (isProcess)
                 {
                     e.Value = NAME_ISPROGRESS;
                 }
