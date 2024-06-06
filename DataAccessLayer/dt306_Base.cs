@@ -21,5 +21,6 @@ namespace DataAccessLayer
         public bool IsProcess { get; set; }
         public bool IsCancel { get; set; }
         public string NextStepProg { get; set; }
+        public string Desc { get; set; }
     }
 }

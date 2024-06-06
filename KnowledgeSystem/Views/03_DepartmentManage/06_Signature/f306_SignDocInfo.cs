@@ -85,7 +85,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             }
             stepProgressDoc.ItemOptions.Indicator.Width = 40;
 
-            progInfos = dt306_ProgInfoBUS.Instance.GetListByIdBase(idBase);
+            progInfos = dt306_ProgInfoBUS.Instance.GetListByIdBase(idBase).Where(r => r.IdUsr != "VNW0000000").ToList();
             var progNow = progInfos.OrderByDescending(r => r.RespTime).FirstOrDefault();
 
             int stepNow = progNow != null ? progress.IndexOf(progress.First(r => r.IdUsr == progNow.IdUsr)) : -1;
@@ -199,7 +199,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             var baseData = dt306_BaseBUS.Instance.GetItemById(idBase);
             baseData.NextStepProg = nextStepProg;
 
-
             foreach (var item in baseAtts)
             {
                 if (!string.IsNullOrEmpty(item.EncryptName))
@@ -230,7 +229,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
                 }
             }
 
-            var aa = dt306_BaseBUS.Instance.AddOrUpdate(baseData);
+            dt306_BaseBUS.Instance.AddOrUpdate(baseData);
 
             Close();
         }
@@ -254,9 +253,19 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             baseData.NextStepProg = "";
             baseData.IsProcess = false;
             baseData.IsCancel = true;
-            // them describe trong db
+            baseData.Desc = describe;
 
             dt306_BaseBUS.Instance.AddOrUpdate(baseData);
+
+            dt306_ProgInfo info = new dt306_ProgInfo()
+            {
+                IdBase = idBase,
+                IdUsr = TPConfigs.LoginUser.Id,
+                RespTime = DateTime.Now,
+                Desc = "退回"
+            };
+
+            dt306_ProgInfoBUS.Instance.Add(info);
 
             Close();
         }

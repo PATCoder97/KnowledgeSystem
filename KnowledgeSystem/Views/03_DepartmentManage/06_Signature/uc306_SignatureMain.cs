@@ -164,15 +164,17 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
                 jobs = dm_JobTitleBUS.Instance.GetList();
 
                 var basesDisplay = (from data in bases
-                                    join urs in users on data.UploadUsr equals urs.Id
-                                    //join job in jobs on urs.JobCode equals job.Id
-                                    //where urs.IdDepartment.StartsWith(idDept2word)
+                                    join urs in users on data.NextStepProg equals urs.Id into userGroup
+                                    from urs in userGroup.DefaultIfEmpty()
                                     select new
                                     {
                                         data,
                                         urs,
-                                        DisplayName = $"{urs.Id} {urs.IdDepartment}/{urs.DisplayName}"
+                                        DisplayName = urs != null
+                                            ? $"{urs.Id} {urs.IdDepartment}/{urs.DisplayName}"
+                                            : ""
                                     }).ToList();
+
 
                 sourceBases.DataSource = basesDisplay;
                 helper.LoadViewInfo();

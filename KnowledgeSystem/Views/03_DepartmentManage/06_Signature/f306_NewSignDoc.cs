@@ -1,6 +1,7 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
 using DevExpress.XtraEditors;
+using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
 using DocumentFormat.OpenXml.Drawing.Charts;
@@ -164,6 +165,16 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            // Đưa focused ra khỏi bảng để cập nhật lên source
+            gvProgress.FocusedRowHandle = GridControl.AutoFilterRowHandle;
+
+            bool isProgressError = ( progresses.GroupBy(x => x.IdUsr).Any(g => g.Count() > 1));
+            if (isProgressError)
+            {
+                XtraMessageBox.Show("流程重複！", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             baseData.DisplayName = txbTitle.Text.Trim();
             baseData.UploadUsr = TPConfigs.LoginUser.Id;
             baseData.UploadDate = DateTime.Today;
@@ -202,6 +213,17 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
 
             var progs = progresses.Select(r => new dt306_Progress() { IdBase = idBase, IdUsr = r.IdUsr, IdRole = r.IdRole }).ToList();
             dt306_ProgressBUS.Instance.AddRange(progs);
+
+            // Tạo 1 progStep là văn kiện đã đưa lên
+            dt306_ProgInfo info = new dt306_ProgInfo()
+            {
+                IdBase = idBase,
+                IdUsr = "VNW0000000",
+                RespTime = DateTime.Now,
+                Desc = "呈核"
+            };
+
+            dt306_ProgInfoBUS.Instance.Add(info);
 
             Close();
         }

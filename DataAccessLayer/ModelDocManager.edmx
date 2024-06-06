@@ -474,6 +474,7 @@
           <Property Name="IsProcess" Type="bit" Nullable="false" />
           <Property Name="IsCancel" Type="bit" Nullable="false" />
           <Property Name="NextStepProg" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Desc" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="dt306_BaseAtts">
           <Key>
@@ -1198,6 +1199,7 @@
           <Property Name="IsProcess" Type="Boolean" Nullable="false" />
           <Property Name="IsCancel" Type="Boolean" Nullable="false" />
           <Property Name="NextStepProg" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Desc" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1788,6 +1790,7 @@
           <EntitySetMapping Name="dt306_Base">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt306_Base">
               <MappingFragment StoreEntitySet="dt306_Base">
+                <ScalarProperty Name="Desc" ColumnName="Desc" />
                 <ScalarProperty Name="NextStepProg" ColumnName="NextStepProg" />
                 <ScalarProperty Name="IsCancel" ColumnName="IsCancel" />
                 <ScalarProperty Name="IsProcess" ColumnName="IsProcess" />
