@@ -61,13 +61,13 @@
             this.btnClearSign = new DevExpress.XtraBars.BarButtonItem();
             this.btnAdvanced = new DevExpress.XtraBars.BarButtonItem();
             this.btnStamp = new DevExpress.XtraBars.BarButtonItem();
+            this.btnCancel = new DevExpress.XtraBars.BarButtonItem();
             this.pdfRibbonPage1 = new DevExpress.XtraPdfViewer.Bars.PdfRibbonPage();
             this.pdfNavigationRibbonPageGroup1 = new DevExpress.XtraPdfViewer.Bars.PdfNavigationRibbonPageGroup();
             this.pdfZoomRibbonPageGroup1 = new DevExpress.XtraPdfViewer.Bars.PdfZoomRibbonPageGroup();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.pdfBarController1 = new DevExpress.XtraPdfViewer.Bars.PdfBarController(this.components);
-            this.btnCancel = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPageNumberEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pdfBarController1)).BeginInit();
@@ -307,11 +307,19 @@
             // 
             // btnStamp
             // 
-            this.btnStamp.Caption = "郵票";
+            this.btnStamp.Caption = "蓋章";
             this.btnStamp.Id = 35;
             this.btnStamp.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnStamp.ImageOptions.SvgImage")));
             this.btnStamp.Name = "btnStamp";
             this.btnStamp.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnStamp_ItemClick);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Caption = "退回";
+            this.btnCancel.Id = 36;
+            this.btnCancel.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnCancel.ImageOptions.SvgImage")));
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnCancel_ItemClick);
             // 
             // pdfRibbonPage1
             // 
@@ -384,14 +392,6 @@
             this.pdfBarController1.BarItems.Add(this.pdfExportFormDataBarItem1);
             this.pdfBarController1.BarItems.Add(this.pdfImportFormDataBarItem1);
             this.pdfBarController1.Control = this.pdfViewer;
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.Caption = "退回";
-            this.btnCancel.Id = 36;
-            this.btnCancel.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnCancel.ImageOptions.SvgImage")));
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnCancel_ItemClick);
             // 
             // f00_PdfTools
             // 

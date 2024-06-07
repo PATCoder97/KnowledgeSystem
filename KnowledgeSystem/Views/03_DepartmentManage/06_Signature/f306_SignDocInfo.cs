@@ -186,6 +186,18 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
 
         private void btnApproval_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            // Các bước trước nếu chưa gửi note thì khỏi gửi luôn
+            if (IsLastStep)
+            {
+                var progInfoSendNote = dt306_ProgInfoBUS.Instance.GetListByIdBase(idBase)
+                    .Where(r => string.IsNullOrEmpty(r.SendNoteTime.ToString())).ToList();
+                foreach (var item in progInfoSendNote)
+                {
+                    item.SendNoteTime = DateTime.Now;
+                    dt306_ProgInfoBUS.Instance.AddOrUpdate(item);
+                }
+            }
+
             dt306_ProgInfo info = new dt306_ProgInfo()
             {
                 IdBase = idBase,
@@ -257,6 +269,16 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
 
             dt306_BaseBUS.Instance.AddOrUpdate(baseData);
 
+            // Các bước trước nếu chưa gửi note thì khỏi gửi luôn
+            var progInfoSendNote = dt306_ProgInfoBUS.Instance.GetListByIdBase(idBase)
+                .Where(r => string.IsNullOrEmpty(r.SendNoteTime.ToString())).ToList();
+            foreach (var item in progInfoSendNote)
+            {
+                item.SendNoteTime = DateTime.Now;
+                dt306_ProgInfoBUS.Instance.AddOrUpdate(item);
+            }
+
+            // Gửi bước cuối cùng
             dt306_ProgInfo info = new dt306_ProgInfo()
             {
                 IdBase = idBase,
@@ -268,6 +290,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             dt306_ProgInfoBUS.Instance.Add(info);
 
             Close();
+        }
+
+        private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
         }
     }
 }
