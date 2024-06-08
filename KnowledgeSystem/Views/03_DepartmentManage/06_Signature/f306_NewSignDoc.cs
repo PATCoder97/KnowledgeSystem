@@ -97,6 +97,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
 
         private void f306_NewSignDoc_Load(object sender, EventArgs e)
         {
+            btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+
+            Text = "上傳文件";
             tabbedControlGroup1.SelectedTabPageIndex = 0;
 
             // Set datasource cho gridcontrol

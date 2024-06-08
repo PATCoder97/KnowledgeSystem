@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -62,7 +63,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
 
         private void InitializeMenuItems()
         {
-            itemViewInfo = CreateMenuItem("查看信息", ItemViewInfo_Click, TPSvgimages.View);
+            itemViewInfo = CreateMenuItem("核簽進度", ItemViewInfo_Click, TPSvgimages.View);
             itemViewFile = CreateMenuItem("查看文件", ItemViewFile_Click, TPSvgimages.View);
             itemSaveFile = CreateMenuItem("保存檔案", ItemSaveFile_Click, TPSvgimages.Attach);
         }
@@ -119,7 +120,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
 
             int idBase = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColId));
 
-            f306_SignDocInfo fInfo = new f306_SignDocInfo();
+            f306_SignProgDetail fInfo = new f306_SignProgDetail();
             fInfo.idBase = idBase;
             fInfo.ShowDialog();
 
@@ -231,6 +232,23 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             fAdd.ShowDialog();
 
             LoadData();
+        }
+
+        private void btnReload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            LoadData();
+        }
+
+        private void btnExportExcel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            string documentsPath = TPConfigs.DocumentPath();
+            if (!Directory.Exists(documentsPath))
+                Directory.CreateDirectory(documentsPath);
+
+            string filePath = Path.Combine(documentsPath, $"電子核簽 - {DateTime.Now:yyyyMMddHHmm}.xlsx");
+
+            gcData.ExportToXlsx(filePath);
+            Process.Start(filePath);
         }
 
         // Master-Detail : gvData

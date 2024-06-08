@@ -39,6 +39,8 @@
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.bar1 = new DevExpress.XtraBars.Bar();
+            this.btnConfirm = new DevExpress.XtraBars.BarButtonItem();
+            this.btnCancel = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,9 +55,11 @@
             this.barManagerTP.Form = this;
             this.barManagerTP.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.btnSave,
-            this.btnPrint});
+            this.btnPrint,
+            this.btnConfirm,
+            this.btnCancel});
             this.barManagerTP.MainMenu = this.bar2;
-            this.barManagerTP.MaxItemId = 11;
+            this.barManagerTP.MaxItemId = 13;
             // 
             // bar2
             // 
@@ -80,7 +84,9 @@
             this.bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnSave, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnPrint, true)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnPrint, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnConfirm, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnCancel)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawDragBorder = false;
             this.bar2.OptionsBar.MultiLine = true;
@@ -111,6 +117,7 @@
             this.btnPrint.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPrint.ItemAppearance.Normal.Options.UseFont = true;
             this.btnPrint.Name = "btnPrint";
+            this.btnPrint.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
             this.btnPrint.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnPrint_ItemClick);
             // 
             // barDockControlTop
@@ -153,6 +160,26 @@
             this.bar1.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar1.Text = "Custom 3";
             // 
+            // btnConfirm
+            // 
+            this.btnConfirm.Caption = "確認";
+            this.btnConfirm.Id = 11;
+            this.btnConfirm.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem1.ImageOptions.SvgImage")));
+            this.btnConfirm.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnConfirm.Name = "btnConfirm";
+            this.btnConfirm.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            this.btnConfirm.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnConfirm_ItemClick);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Caption = "退回";
+            this.btnCancel.Id = 12;
+            this.btnCancel.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem2.ImageOptions.SvgImage")));
+            this.btnCancel.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            this.btnCancel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnCancel_ItemClick);
+            // 
             // f00_VIewFile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -184,5 +211,7 @@
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
         private DevExpress.XtraBars.Bar bar1;
+        private DevExpress.XtraBars.BarButtonItem btnConfirm;
+        private DevExpress.XtraBars.BarButtonItem btnCancel;
     }
 }

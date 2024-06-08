@@ -22,13 +22,17 @@ namespace KnowledgeSystem.Views._00_Generals
 {
     public partial class f00_VIewFile : DevExpress.XtraEditors.XtraForm
     {
-        public f00_VIewFile(string _filePath, bool isCanSave = true)
+        public f00_VIewFile(string _filePath, bool isCanSave = true, bool isCanConfirm = false)
         {
             InitializeComponent();
             filePath = _filePath;
             sourceFile = _filePath;
             IsCanSave = isCanSave;
+            IsCanConfirm = isCanConfirm;
         }
+
+        public bool IsConfirm { get; set; }
+        public string Describe { get; set; }
 
         enum FileType
         {
@@ -47,6 +51,7 @@ namespace KnowledgeSystem.Views._00_Generals
         PictureBox viewPic;
 
         bool IsCanSave = true;
+        bool IsCanConfirm = false;
         string filePath = "";
         string sourceFile = "";
 
@@ -54,7 +59,14 @@ namespace KnowledgeSystem.Views._00_Generals
         {
             if (!IsCanSave)
             {
-                bar2.Visible = false;
+                btnSave.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                btnPrint.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            }
+
+            if (!IsCanConfirm)
+            {
+                btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                btnCancel.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             }
 
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
@@ -222,6 +234,31 @@ namespace KnowledgeSystem.Views._00_Generals
             string destFile = saveFileDialog.FileName;
 
             File.Copy(sourceFile, destFile, true);
+        }
+
+        private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            IsConfirm = true;
+            Close();
+        }
+
+        private void btnCancel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            XtraInputBoxArgs args = new XtraInputBoxArgs
+            {
+                Caption = TPConfigs.SoftNameTW,
+                Prompt = "退回文件原因",
+                DefaultButtonIndex = 0,
+                Editor = new MemoEdit(),
+                DefaultResponse = ""
+            };
+
+            var result = XtraInputBox.Show(args);
+            if (result == null) return;
+            Describe = result?.ToString() ?? "";
+            IsConfirm = true;
+
+            Close();
         }
     }
 }

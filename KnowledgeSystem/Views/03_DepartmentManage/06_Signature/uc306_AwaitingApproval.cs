@@ -10,7 +10,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -125,7 +127,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             gvData.ReadOnlyGridView();
             gvData.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
             gvData.OptionsDetail.AllowOnlyOneMasterRowExpanded = true;
-            gvDocs.ReadOnlyGridView();
 
             LoadData();
             gcData.DataSource = sourceBases;
@@ -144,6 +145,23 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             fInfo.ShowDialog();
 
             LoadData();
+        }
+
+        private void btnReload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            LoadData();
+        }
+
+        private void btnExportExcel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            string documentsPath = TPConfigs.DocumentPath();
+            if (!Directory.Exists(documentsPath))
+                Directory.CreateDirectory(documentsPath);
+
+            string filePath = Path.Combine(documentsPath, $"電子核簽進度 - {DateTime.Now:yyyyMMddHHmm}.xlsx");
+
+            gcData.ExportToXlsx(filePath);
+            Process.Start(filePath);
         }
     }
 }
