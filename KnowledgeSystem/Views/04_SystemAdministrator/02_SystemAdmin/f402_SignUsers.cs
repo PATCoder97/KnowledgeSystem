@@ -1,7 +1,9 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
+using DevExpress.Utils;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using KnowledgeSystem.Helpers;
 using System;
 using System.Collections.Generic;
@@ -85,9 +87,11 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
         private void gvAllUser_DoubleClick(object sender, EventArgs e)
         {
-            if (_eventInfo != EventFormInfo.Update) return;
+            DXMouseEventArgs ea = e as DXMouseEventArgs;
+            GridView view = sender as GridView;
+            GridHitInfo info = view.CalcHitInfo(ea.Location);
+            if (!(info.InRow || info.InRowCell) || _eventInfo != EventFormInfo.Update) return;
 
-            GridView view = gvAllUser;
             dm_User _user = view.GetRow(view.FocusedRowHandle) as dm_User;
 
             lsAllUsers.Remove(_user);
@@ -98,9 +102,11 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
         private void gvChooseUser_DoubleClick(object sender, EventArgs e)
         {
-            if (_eventInfo != EventFormInfo.Update) return;
+            DXMouseEventArgs ea = e as DXMouseEventArgs;
+            GridView view = sender as GridView;
+            GridHitInfo info = view.CalcHitInfo(ea.Location);
+            if (!(info.InRow || info.InRowCell) || _eventInfo != EventFormInfo.Update) return;
 
-            GridView view = gvChooseUser;
             dm_User _user = view.GetRow(view.FocusedRowHandle) as dm_User;
 
             lsChooseUsers.Remove(_user);
