@@ -304,6 +304,7 @@
             // 
             // lookupUser
             // 
+            this.lookupUser.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.lookupUser.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lookupUser.Appearance.ForeColor = System.Drawing.Color.Black;
             this.lookupUser.Appearance.Options.UseFont = true;
@@ -357,6 +358,7 @@
             // 
             // lookupRole
             // 
+            this.lookupRole.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.lookupRole.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lookupRole.AppearanceDropDown.ForeColor = System.Drawing.Color.Black;
             this.lookupRole.AppearanceDropDown.Options.UseFont = true;

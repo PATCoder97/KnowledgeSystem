@@ -4,22 +4,13 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
-using DocumentFormat.OpenXml.Drawing.Charts;
-using DocumentFormat.OpenXml.Presentation;
-using DocumentFormat.OpenXml.Spreadsheet;
 using KnowledgeSystem.Helpers;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Net.Mail;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Web.Security;
 using System.Windows.Forms;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
@@ -63,6 +54,37 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             btnDelete.ImageOptions.SvgImage = TPSvgimages.Remove;
             btnConfirm.ImageOptions.SvgImage = TPSvgimages.Confirm;
             btnDefaulProgress.ImageOptions.SvgImage = TPSvgimages.Progress;
+        }
+
+        private bool ValidateData()
+        {
+            bool IsOK = true;
+            string msg = "請提供以下補充資訊：";
+            if (string.IsNullOrEmpty(txbTitle.EditValue?.ToString()))
+            {
+                msg += "</br> •題目";
+                IsOK = false;
+            }
+
+            if (progresses.Any(r => r.IdRole == 0 || string.IsNullOrEmpty(r.IdUsr)))
+            {
+                msg += "</br> •核簽路程";
+                IsOK = false;
+            }
+
+            if (attachments.Count == 0)
+            {
+                msg += "</br> •文件";
+                IsOK = false;
+            }
+
+            if (!IsOK)
+            {
+                msg = $"<font='Microsoft JhengHei UI' size=14>{msg}</font>";
+                MsgTP.MsgShowInfomation(msg);
+            }
+
+            return IsOK;
         }
 
         private void btnAddFile_Click(object sender, EventArgs e)
@@ -116,9 +138,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             lookupUser.DisplayMember = "Id";
             lookupUser.PopupView.Columns.AddRange(new[]
             {
-                new GridColumn { FieldName = "IdDepartment", VisibleIndex = 0, Caption = "單位", MinWidth=50, Width=50 },
-                new GridColumn { FieldName = "Id", VisibleIndex = 0, Caption = "工號", MinWidth=120, Width=120 },
-                new GridColumn { FieldName = "DisplayName", VisibleIndex = 2, Caption = "名稱", MinWidth=100, Width=150 },
+                new GridColumn { FieldName = "IdDepartment", VisibleIndex = 0, Caption = "單位", MinWidth = 50, Width = 50 },
+                new GridColumn { FieldName = "Id", VisibleIndex = 0, Caption = "工號", MinWidth = 120, Width = 120 },
+                new GridColumn { FieldName = "DisplayName", VisibleIndex = 2, Caption = "名稱", MinWidth = 100, Width = 150 },
             });
             lookupUser.DataSource = users;
 
@@ -172,10 +194,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             // Đưa focused ra khỏi bảng để cập nhật lên source
             gvProgress.FocusedRowHandle = GridControl.AutoFilterRowHandle;
 
-            bool isProgressError = ( progresses.GroupBy(x => x.IdUsr).Any(g => g.Count() > 1));
+            bool IsValidate = ValidateData();
+            if (!IsValidate) return;
+
+            bool isProgressError = (progresses.GroupBy(x => x.IdUsr).Any(g => g.Count() > 1));
             if (isProgressError)
             {
-                XtraMessageBox.Show("流程重複！", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MsgTP.MsgError("流程重複！");
                 return;
             }
 

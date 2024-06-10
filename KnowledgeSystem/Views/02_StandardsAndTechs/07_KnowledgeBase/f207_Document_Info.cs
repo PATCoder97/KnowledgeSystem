@@ -397,7 +397,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                 args.AllowHtmlText = DefaultBoolean.True;
 
                 args.Caption = TPConfigs.SoftNameTW;
-                args.Text = $"<font='DFKai-SB' size=14>{msg}</font>";
+                args.Text = $"<font='Microsoft JhengHei UI' size=14>{msg}</font>";
                 args.Buttons = new DialogResult[] { DialogResult.OK };
 
                 XtraMessageBox.Show(args);
