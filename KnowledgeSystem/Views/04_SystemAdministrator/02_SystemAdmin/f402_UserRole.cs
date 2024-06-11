@@ -69,7 +69,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
             gcAllUser.DataSource = _sourceAllUser;
             gcChooseUser.DataSource = _sourceChooseUser;
 
-            lsAllUsers = dm_UserBUS.Instance.GetList();
+            lsAllUsers = dm_UserBUS.Instance.GetList().Where(r => r.Status == 0).ToList();
             _sourceAllUser.DataSource = lsAllUsers;
             _sourceChooseUser.DataSource = lsChooseUsers;
 

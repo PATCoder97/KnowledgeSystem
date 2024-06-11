@@ -1,13 +1,16 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
 using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
+using DocumentFormat.OpenXml.Spreadsheet;
 using KnowledgeSystem.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -68,7 +71,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
 
             if (progresses.Any(r => r.IdRole == 0 || string.IsNullOrEmpty(r.IdUsr)))
             {
-                msg += "</br> •核簽路程";
+                msg += "</br> •核簽流程";
                 IsOK = false;
             }
 
@@ -255,6 +258,69 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             dt306_ProgInfoBUS.Instance.Add(info);
 
             Close();
+        }
+
+        private void btnDefaulProgress_Click(object sender, EventArgs e)
+        {
+            System.Drawing.Font fontUI14 = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            System.Drawing.Font fontUI12 = new System.Drawing.Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+
+            LookUpEdit lookUpEdit = new LookUpEdit();
+            var fixedProgress = dm_FixedProgressBUS.Instance.GetListByOwner(TPConfigs.LoginUser.Id);
+
+            lookUpEdit.Properties.DataSource = fixedProgress;
+            lookUpEdit.Properties.DisplayMember = "DisplayName";
+            lookUpEdit.Properties.ValueMember = "Id";
+
+            LookUpColumnInfo gcol1 = new LookUpColumnInfo() { Caption = "名稱", FieldName = "DisplayName", Visible = true, MaxWidth = 150 };
+            LookUpColumnInfo gcol2 = new LookUpColumnInfo() { Caption = "流程", FieldName = "Progress", Visible = true };
+
+            lookUpEdit.Properties.Appearance.Font = fontUI14;
+            lookUpEdit.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            lookUpEdit.Properties.NullText = "";
+            lookUpEdit.Properties.Columns.Add(gcol1);
+            lookUpEdit.Properties.Columns.Add(gcol2);
+
+            lookUpEdit.Properties.AppearanceDropDown.Font = fontUI12;
+            lookUpEdit.Properties.AppearanceDropDown.ForeColor = System.Drawing.Color.Black;
+            lookUpEdit.Properties.AppearanceDropDown.Options.UseFont = true;
+            lookUpEdit.Properties.AppearanceDropDown.Options.UseForeColor = true;
+            lookUpEdit.Properties.AppearanceDropDownHeader.Font = fontUI14;
+            lookUpEdit.Properties.AppearanceDropDownHeader.ForeColor = System.Drawing.Color.Black;
+            lookUpEdit.Properties.AppearanceDropDownHeader.Options.UseFont = true;
+            lookUpEdit.Properties.AppearanceDropDownHeader.Options.UseForeColor = true;
+            lookUpEdit.Properties.AppearanceDropDownHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+
+            XtraInputBoxArgs args = new XtraInputBoxArgs
+            {
+                Caption = TPConfigs.SoftNameTW,
+                Prompt = "請選固定流程",
+                DefaultButtonIndex = 0,
+                Editor = lookUpEdit,
+                DefaultResponse = "",
+            };
+
+            var result = XtraInputBox.Show(args);
+            if (result == null) return;
+            string describe = result?.ToString() ?? "";
+            int idFixedProg = -1;
+            int.TryParse(describe, out idFixedProg);
+
+            progresses.Clear();
+            string defaulProg = dm_FixedProgressBUS.Instance.GetItemById(idFixedProg)?.Progress;
+            if (string.IsNullOrEmpty(defaulProg)) return;
+            
+            string[] defaulProgs = defaulProg.Split(';');
+
+            foreach (var item in defaulProgs)
+            {
+                var usrInfo = users.FirstOrDefault(r => r.Id == item?.ToString());
+                string nameUser = usrInfo?.DisplayName ?? "";
+                string jobName = jobTitles.FirstOrDefault(r => r.Id == usrInfo.JobCode)?.DisplayName ?? "";
+                progresses.Add(new ProgressDetail() { IdUsr = item, JobName = jobName, UserName = nameUser });
+            }
+
+            gcProgress.RefreshDataSource();
         }
     }
 }

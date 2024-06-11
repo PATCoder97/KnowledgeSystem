@@ -66,6 +66,7 @@
     <Compile Include="dm\dm_AttachmentBUS.cs" />
     <Compile Include="dm\dm_SignBUS.cs" />
     <Compile Include="dm\dm_SignUsersBUS.cs" />
+    <Compile Include="dm_FixedProgressBUS.cs" />
     <Compile Include="dt201\dt201_BaseBUS.cs" />
     <Compile Include="dt201\dt201_FormsBUS.cs" />
     <Compile Include="dt201\dt201_RoleBUS.cs" />

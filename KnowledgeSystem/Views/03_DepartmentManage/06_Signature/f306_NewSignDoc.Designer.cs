@@ -234,7 +234,8 @@
             this.btnDefaulProgress.Size = new System.Drawing.Size(139, 36);
             this.btnDefaulProgress.StyleController = this.layoutControl1;
             this.btnDefaulProgress.TabIndex = 22;
-            this.btnDefaulProgress.Text = "固定路程";
+            this.btnDefaulProgress.Text = "固定流程";
+            this.btnDefaulProgress.Click += new System.EventHandler(this.btnDefaulProgress_Click);
             // 
             // gcProgress
             // 

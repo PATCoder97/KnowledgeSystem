@@ -41,6 +41,15 @@
           <Property Name="No" Type="varchar" MaxLength="16" />
           <Property Name="Exprires" Type="date" Nullable="false" />
         </EntityType>
+        <EntityType Name="dm_FixedProgress">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Progress" Type="varchar" MaxLength="512" Nullable="false" />
+          <Property Name="Owner" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
         <EntityType Name="dm_Function">
           <Key>
             <PropertyRef Name="Id" />
@@ -553,6 +562,7 @@
           <EntitySet Name="dm_Departments" EntityType="Self.dm_Departments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dm_DeptGroups" EntityType="Self.dm_DeptGroups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dm_DrivingLic" EntityType="Self.dm_DrivingLic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dm_FixedProgress" EntityType="Self.dm_FixedProgress" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dm_Function" EntityType="Self.dm_Function" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dm_FunctionRole" EntityType="Self.dm_FunctionRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dm_Group" EntityType="Self.dm_Group" Schema="dbo" store:Type="Tables" />
@@ -657,6 +667,7 @@
           <EntitySet Name="dt306_Progress" EntityType="DBDocumentManagementSystemModel.dt306_Progress" />
           <EntitySet Name="dt306_Role" EntityType="DBDocumentManagementSystemModel.dt306_Role" />
           <EntitySet Name="dt306_Base" EntityType="DBDocumentManagementSystemModel.dt306_Base" />
+          <EntitySet Name="dm_FixedProgress" EntityType="DBDocumentManagementSystemModel.dm_FixedProgress" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -1200,6 +1211,15 @@
           <Property Name="IsCancel" Type="Boolean" Nullable="false" />
           <Property Name="NextStepProg" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Desc" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dm_FixedProgress">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Progress" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="Owner" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1796,6 +1816,16 @@
                 <ScalarProperty Name="IsProcess" ColumnName="IsProcess" />
                 <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
                 <ScalarProperty Name="UploadUsr" ColumnName="UploadUsr" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dm_FixedProgress">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_FixedProgress">
+              <MappingFragment StoreEntitySet="dm_FixedProgress">
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="Progress" ColumnName="Progress" />
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
