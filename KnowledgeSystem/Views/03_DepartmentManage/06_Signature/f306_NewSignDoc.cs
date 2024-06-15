@@ -65,11 +65,17 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             string msg = "請提供以下補充資訊：";
             if (string.IsNullOrEmpty(txbTitle.EditValue?.ToString()))
             {
-                msg += "</br> •題目";
+                msg += "</br> •文件名稱";
                 IsOK = false;
             }
 
-            if (progresses.Any(r => r.IdRole == 0 || string.IsNullOrEmpty(r.IdUsr)))
+            if (string.IsNullOrEmpty(txbType.EditValue?.ToString()))
+            {
+                msg += "</br> •類別";
+                IsOK = false;
+            }
+
+            if (progresses.Any(r => r.IdRole == 0 || string.IsNullOrEmpty(r.IdUsr)) || progresses.Count() == 0)
             {
                 msg += "</br> •核簽流程";
                 IsOK = false;
@@ -136,6 +142,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             jobTitles = dm_JobTitleBUS.Instance.GetList();
             roles = dt201_RoleBUS.Instance.GetList().Where(r => r.Id != 0).ToList();
 
+            var dmType = dt306_TypeBUS.Instance.GetList();
+
             // Gắn các thông số cho các combobox
             lookupUser.ValueMember = "Id";
             lookupUser.DisplayMember = "Id";
@@ -150,6 +158,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             lookupRole.DataSource = roles;
             lookupRole.DisplayMember = "DisplayName";
             lookupRole.ValueMember = "Id";
+
+            txbType.Properties.DataSource = dmType;
+            txbType.Properties.DisplayMember = "DisplayName";
+            txbType.Properties.ValueMember = "Id";
 
             sourceProgresses.DataSource = progresses;
             gcProgress.DataSource = sourceProgresses;
@@ -208,6 +220,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             }
 
             baseData.DisplayName = txbTitle.Text.Trim();
+            baseData.IdType = (int)txbType.EditValue;
             baseData.UploadUsr = TPConfigs.LoginUser.Id;
             baseData.UploadDate = DateTime.Today;
             baseData.IsProcess = true;
@@ -309,7 +322,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             progresses.Clear();
             string defaulProg = dm_FixedProgressBUS.Instance.GetItemById(idFixedProg)?.Progress;
             if (string.IsNullOrEmpty(defaulProg)) return;
-            
+
             string[] defaulProgs = defaulProg.Split(';');
 
             foreach (var item in defaulProgs)

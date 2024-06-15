@@ -47,6 +47,7 @@
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
@@ -91,6 +92,7 @@
             this.gvData.Appearance.Row.Options.UseForeColor = true;
             this.gvData.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gColId,
+            this.gridColumn1,
             this.gridColumn3,
             this.gridColumn2,
             this.gColEnterDate});
@@ -116,12 +118,12 @@
             // 
             // gridColumn3
             // 
-            this.gridColumn3.Caption = "題目";
+            this.gridColumn3.Caption = "文件名稱";
             this.gridColumn3.FieldName = "data.DisplayName";
             this.gridColumn3.MinWidth = 250;
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 0;
+            this.gridColumn3.VisibleIndex = 1;
             this.gridColumn3.Width = 250;
             // 
             // gridColumn2
@@ -130,7 +132,7 @@
             this.gridColumn2.FieldName = "DisplayName";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 1;
+            this.gridColumn2.VisibleIndex = 2;
             // 
             // gColEnterDate
             // 
@@ -140,7 +142,7 @@
             this.gColEnterDate.FieldName = "data.UploadDate";
             this.gColEnterDate.Name = "gColEnterDate";
             this.gColEnterDate.Visible = true;
-            this.gColEnterDate.VisibleIndex = 2;
+            this.gColEnterDate.VisibleIndex = 3;
             // 
             // barManagerTP
             // 
@@ -275,6 +277,17 @@
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "類別";
+            this.gridColumn1.FieldName = "types.DisplayName";
+            this.gridColumn1.MaxWidth = 200;
+            this.gridColumn1.MinWidth = 100;
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 0;
+            this.gridColumn1.Width = 100;
+            // 
             // uc306_AwaitingApproval
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
@@ -320,5 +333,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gColEnterDate;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
     }
 }

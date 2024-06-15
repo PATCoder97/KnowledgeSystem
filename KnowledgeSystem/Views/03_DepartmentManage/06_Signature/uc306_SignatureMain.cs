@@ -163,13 +163,16 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
                 bases = dt306_BaseBUS.Instance.GetListByUploadUsr(TPConfigs.LoginUser.Id);
                 users = dm_UserBUS.Instance.GetList();
                 jobs = dm_JobTitleBUS.Instance.GetList();
+                var dmTypes = dt306_TypeBUS.Instance.GetList();
 
                 var basesDisplay = (from data in bases
+                                    join types in dmTypes on data.IdType equals types.Id
                                     join urs in users on data.NextStepProg equals urs.Id into userGroup
                                     from urs in userGroup.DefaultIfEmpty()
                                     select new
                                     {
                                         data,
+                                        types,
                                         urs,
                                         DisplayName = urs != null
                                             ? $"{urs.Id} {urs.IdDepartment}/{urs.DisplayName}"

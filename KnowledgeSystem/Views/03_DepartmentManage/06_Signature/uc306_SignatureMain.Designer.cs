@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc306_SignatureMain));
             this.gvDocs = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -41,6 +41,8 @@
             this.gcData = new DevExpress.XtraGrid.GridControl();
             this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gColId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColEnterDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -148,10 +150,10 @@
             this.gcData.EmbeddedNavigator.Buttons.Edit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.EndEdit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.Remove.Visible = false;
-            gridLevelNode2.LevelTemplate = this.gvDocs;
-            gridLevelNode2.RelationName = "核簽文件";
+            gridLevelNode1.LevelTemplate = this.gvDocs;
+            gridLevelNode1.RelationName = "核簽文件";
             this.gcData.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode2});
+            gridLevelNode1});
             this.gcData.Location = new System.Drawing.Point(12, 12);
             this.gcData.MainView = this.gvData;
             this.gcData.Name = "gcData";
@@ -180,6 +182,8 @@
             this.gvData.Appearance.Row.Options.UseForeColor = true;
             this.gvData.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gColId,
+            this.gridColumn9,
+            this.gridColumn2,
             this.gridColumn3,
             this.gColEnterDate,
             this.gridColumn8,
@@ -212,14 +216,30 @@
             this.gColId.FieldName = "data.Id";
             this.gColId.Name = "gColId";
             // 
+            // gridColumn9
+            // 
+            this.gridColumn9.Caption = "單位";
+            this.gridColumn9.FieldName = "urs.IdDepartment";
+            this.gridColumn9.Name = "gridColumn9";
+            this.gridColumn9.Visible = true;
+            this.gridColumn9.VisibleIndex = 0;
+            // 
+            // gridColumn2
+            // 
+            this.gridColumn2.Caption = "類別";
+            this.gridColumn2.FieldName = "types.DisplayName";
+            this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.Visible = true;
+            this.gridColumn2.VisibleIndex = 1;
+            // 
             // gridColumn3
             // 
-            this.gridColumn3.Caption = "題目";
+            this.gridColumn3.Caption = "文件名稱";
             this.gridColumn3.FieldName = "data.DisplayName";
             this.gridColumn3.MinWidth = 250;
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 0;
+            this.gridColumn3.VisibleIndex = 2;
             this.gridColumn3.Width = 250;
             // 
             // gColEnterDate
@@ -230,7 +250,7 @@
             this.gColEnterDate.FieldName = "data.UploadDate";
             this.gColEnterDate.Name = "gColEnterDate";
             this.gColEnterDate.Visible = true;
-            this.gColEnterDate.VisibleIndex = 1;
+            this.gColEnterDate.VisibleIndex = 3;
             // 
             // gridColumn8
             // 
@@ -238,7 +258,7 @@
             this.gridColumn8.FieldName = "DisplayName";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 3;
+            this.gridColumn8.VisibleIndex = 5;
             // 
             // gColIsProgess
             // 
@@ -260,7 +280,7 @@
             this.gColRemark.ShowUnboundExpressionMenu = true;
             this.gColRemark.UnboundDataType = typeof(string);
             this.gColRemark.Visible = true;
-            this.gColRemark.VisibleIndex = 2;
+            this.gColRemark.VisibleIndex = 4;
             // 
             // gridColumn4
             // 
@@ -268,7 +288,7 @@
             this.gridColumn4.FieldName = "data.Desc";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 4;
+            this.gridColumn4.VisibleIndex = 6;
             // 
             // barManagerTP
             // 
@@ -475,5 +495,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
         private DevExpress.XtraGrid.Columns.GridColumn gColIdAtt;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
     }
 }
