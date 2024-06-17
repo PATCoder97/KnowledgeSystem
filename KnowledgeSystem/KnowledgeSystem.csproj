@@ -195,6 +195,24 @@
     <Compile Include="Views\00_Generals\f00_AdminChangeUser.Designer.cs">
       <DependentUpon>f00_AdminChangeUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\00_Generals\f00_FixedProgInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\00_Generals\f00_FixedProgInfo.Designer.cs">
+      <DependentUpon>f00_FixedProgInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\00_Generals\f00_SelectFixedProg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\00_Generals\f00_SelectFixedProg.Designer.cs">
+      <DependentUpon>f00_SelectFixedProg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\00_Generals\f00_FixedProgMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\00_Generals\f00_FixedProgMain.Designer.cs">
+      <DependentUpon>f00_FixedProgMain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\f201_AddAttachment.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -646,6 +664,15 @@
     </Compile>
     <EmbeddedResource Include="Views\00_Generals\f00_AdminChangeUser.resx">
       <DependentUpon>f00_AdminChangeUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\00_Generals\f00_FixedProgInfo.resx">
+      <DependentUpon>f00_FixedProgInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\00_Generals\f00_SelectFixedProg.resx">
+      <DependentUpon>f00_SelectFixedProg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\00_Generals\f00_FixedProgMain.resx">
+      <DependentUpon>f00_FixedProgMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\f201_AddAttachment.resx">
       <DependentUpon>f201_AddAttachment.cs</DependentUpon>

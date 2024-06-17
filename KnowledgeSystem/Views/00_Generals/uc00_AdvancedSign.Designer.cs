@@ -29,23 +29,23 @@
         private void InitializeComponent()
         {
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.picSign = new System.Windows.Forms.PictureBox();
             this.txbDate = new DevExpress.XtraEditors.DateEdit();
-            this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.cbbSign = new DevExpress.XtraEditors.LookUpEdit();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.cbbSign = new DevExpress.XtraEditors.LookUpEdit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSign)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDate.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDate.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbSign.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbbSign.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -60,6 +60,18 @@
             this.layoutControl1.Size = new System.Drawing.Size(348, 262);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // Root
+            // 
+            this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            this.Root.GroupBordersVisible = false;
+            this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem1,
+            this.layoutControlItem2,
+            this.layoutControlItem3});
+            this.Root.Name = "Root";
+            this.Root.Size = new System.Drawing.Size(348, 262);
+            this.Root.TextVisible = false;
             // 
             // picSign
             // 
@@ -90,17 +102,27 @@
             this.txbDate.TabIndex = 5;
             this.txbDate.EditValueChanged += new System.EventHandler(this.txbDate_EditValueChanged);
             // 
-            // Root
+            // cbbSign
             // 
-            this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
-            this.Root.GroupBordersVisible = false;
-            this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem1,
-            this.layoutControlItem2,
-            this.layoutControlItem3});
-            this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(348, 262);
-            this.Root.TextVisible = false;
+            this.cbbSign.Location = new System.Drawing.Point(62, 12);
+            this.cbbSign.Name = "cbbSign";
+            this.cbbSign.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbSign.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.cbbSign.Properties.Appearance.Options.UseFont = true;
+            this.cbbSign.Properties.Appearance.Options.UseForeColor = true;
+            this.cbbSign.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbSign.Properties.AppearanceDropDown.Options.UseFont = true;
+            this.cbbSign.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbbSign.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("DisplayName", "DisplayName", 20, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Default, DevExpress.Data.ColumnSortOrder.Ascending, DevExpress.Utils.DefaultBoolean.Default)});
+            this.cbbSign.Properties.NullText = "";
+            this.cbbSign.Properties.PopupSizeable = false;
+            this.cbbSign.Properties.ShowHeader = false;
+            this.cbbSign.Size = new System.Drawing.Size(274, 32);
+            this.cbbSign.StyleController = this.layoutControl1;
+            this.cbbSign.TabIndex = 4;
+            this.cbbSign.EditValueChanged += new System.EventHandler(this.cbbSign_EditValueChanged);
             // 
             // layoutControlItem1
             // 
@@ -141,29 +163,6 @@
             this.layoutControlItem3.Text = "照片";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(38, 24);
             // 
-            // cbbSign
-            // 
-            this.cbbSign.Location = new System.Drawing.Point(62, 12);
-            this.cbbSign.Name = "cbbSign";
-            this.cbbSign.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbbSign.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.cbbSign.Properties.Appearance.Options.UseFont = true;
-            this.cbbSign.Properties.Appearance.Options.UseForeColor = true;
-            this.cbbSign.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbbSign.Properties.AppearanceDropDown.Options.UseFont = true;
-            this.cbbSign.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbbSign.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("DisplayName", "DisplayName", 20, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Default, DevExpress.Data.ColumnSortOrder.Ascending, DevExpress.Utils.DefaultBoolean.Default)});
-            this.cbbSign.Properties.NullText = "";
-            this.cbbSign.Properties.PopupSizeable = false;
-            this.cbbSign.Properties.ShowHeader = false;
-            this.cbbSign.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cbbSign.Size = new System.Drawing.Size(274, 32);
-            this.cbbSign.StyleController = this.layoutControl1;
-            this.cbbSign.TabIndex = 4;
-            this.cbbSign.EditValueChanged += new System.EventHandler(this.cbbSign_EditValueChanged);
-            // 
             // uc00_AdvancedSign
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -174,14 +173,14 @@
             this.Load += new System.EventHandler(this.uc00_AdvancedSign_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSign)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDate.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDate.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbSign.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbbSign.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }

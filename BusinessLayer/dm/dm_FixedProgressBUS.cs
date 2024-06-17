@@ -115,7 +115,17 @@ namespace BusinessLayer
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
                     var itemRemove = _context.dm_FixedProgress.FirstOrDefault(r => r.Id == id);
-                    return _context.dm_FixedProgress.Remove(itemRemove);
+                    _context.dm_FixedProgress.Remove(itemRemove);
+
+                    int affectedRecords = _context.SaveChanges();
+                    if (affectedRecords > 0)
+                    {
+                        return itemRemove;
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
             }
             catch (Exception ex)

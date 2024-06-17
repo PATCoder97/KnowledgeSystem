@@ -75,8 +75,8 @@ namespace DataAccessLayer
         public virtual DbSet<dt306_ProgInfo> dt306_ProgInfo { get; set; }
         public virtual DbSet<dt306_Progress> dt306_Progress { get; set; }
         public virtual DbSet<dt306_Role> dt306_Role { get; set; }
-        public virtual DbSet<dm_FixedProgress> dm_FixedProgress { get; set; }
         public virtual DbSet<dt306_Base> dt306_Base { get; set; }
+        public virtual DbSet<dm_FixedProgress> dm_FixedProgress { get; set; }
         public virtual DbSet<dt306_Type> dt306_Type { get; set; }
     }
 }

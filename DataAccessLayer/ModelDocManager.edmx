@@ -529,7 +529,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="DisplayName" Type="nvarchar" MaxLength="32" />
         </EntityType>
         <EntityType Name="sys_Log">
@@ -675,8 +675,8 @@
           <EntitySet Name="dt306_ProgInfo" EntityType="DBDocumentManagementSystemModel.dt306_ProgInfo" />
           <EntitySet Name="dt306_Progress" EntityType="DBDocumentManagementSystemModel.dt306_Progress" />
           <EntitySet Name="dt306_Role" EntityType="DBDocumentManagementSystemModel.dt306_Role" />
-          <EntitySet Name="dm_FixedProgress" EntityType="DBDocumentManagementSystemModel.dm_FixedProgress" />
           <EntitySet Name="dt306_Base" EntityType="DBDocumentManagementSystemModel.dt306_Base" />
+          <EntitySet Name="dm_FixedProgress" EntityType="DBDocumentManagementSystemModel.dm_FixedProgress" />
           <EntitySet Name="dt306_Type" EntityType="DBDocumentManagementSystemModel.dt306_Type" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
@@ -1209,15 +1209,6 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="dm_FixedProgress">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="Progress" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="false" />
-          <Property Name="Owner" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="dt306_Base">
           <Key>
             <PropertyRef Name="Id" />
@@ -1232,11 +1223,20 @@
           <Property Name="Desc" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="IdType" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="dt306_Type">
+        <EntityType Name="dm_FixedProgress">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Progress" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="Owner" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="dt306_Type">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="DisplayName" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
@@ -1825,16 +1825,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dm_FixedProgress">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_FixedProgress">
-              <MappingFragment StoreEntitySet="dm_FixedProgress">
-                <ScalarProperty Name="Owner" ColumnName="Owner" />
-                <ScalarProperty Name="Progress" ColumnName="Progress" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="dt306_Base">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt306_Base">
               <MappingFragment StoreEntitySet="dt306_Base">
@@ -1845,6 +1835,16 @@
                 <ScalarProperty Name="IsProcess" ColumnName="IsProcess" />
                 <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
                 <ScalarProperty Name="UploadUsr" ColumnName="UploadUsr" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dm_FixedProgress">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_FixedProgress">
+              <MappingFragment StoreEntitySet="dm_FixedProgress">
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="Progress" ColumnName="Progress" />
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
