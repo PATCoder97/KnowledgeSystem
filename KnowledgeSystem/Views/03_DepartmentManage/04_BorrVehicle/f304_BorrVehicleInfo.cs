@@ -179,7 +179,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
 
             bool result = false;
 
-            if (totalKm < 0) return;
+            if (totalKm <= 0) return;
+
+            if (totalKm > 15)
+            {
+                XtraMessageBox.Show($"Mỗi chuyến chỉ được đi dưới 15km", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             if (XtraMessageBox.Show($"Bạn chắc chắn muốn trả xe: {nameVehicle}, với {totalKm} Km ?", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo) != DialogResult.Yes)
             {

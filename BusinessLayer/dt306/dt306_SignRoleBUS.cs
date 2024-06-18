@@ -10,27 +10,27 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer
 {
-    public class dt306_RoleBUS
+    public class dt306_SignRoleBUS
     {
         TPLogger logger;
 
-        private static dt306_RoleBUS instance;
+        private static dt306_SignRoleBUS instance;
 
-        public static dt306_RoleBUS Instance
+        public static dt306_SignRoleBUS Instance
         {
-            get { if (instance == null) instance = new dt306_RoleBUS(); return instance; }
+            get { if (instance == null) instance = new dt306_SignRoleBUS(); return instance; }
             private set { instance = value; }
         }
 
-        private dt306_RoleBUS() { logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName); }
+        private dt306_SignRoleBUS() { logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName); }
 
-        public List<dt306_Role> GetList()
+        public List<dt306_SignRole> GetList()
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dt306_Role.ToList();
+                    return _context.dt306_SignRole.ToList();
                 }
             }
             catch (Exception ex)
@@ -40,13 +40,13 @@ namespace BusinessLayer
             }
         }
 
-        public dt306_Role GetItemById(int id)
+        public dt306_SignRole GetItemById(int id)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dt306_Role.FirstOrDefault(r => r.Id == id);
+                    return _context.dt306_SignRole.FirstOrDefault(r => r.Id == id);
                 }
             }
             catch (Exception ex)
@@ -56,13 +56,13 @@ namespace BusinessLayer
             }
         }
 
-        public bool Add(dt306_Role item)
+        public bool Add(dt306_SignRole item)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    _context.dt306_Role.Add(item);
+                    _context.dt306_SignRole.Add(item);
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;
                 }
@@ -74,13 +74,13 @@ namespace BusinessLayer
             }
         }
 
-        public bool AddOrUpdate(dt306_Role item)
+        public bool AddOrUpdate(dt306_SignRole item)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    _context.dt306_Role.AddOrUpdate(item);
+                    _context.dt306_SignRole.AddOrUpdate(item);
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;
                 }
@@ -89,23 +89,6 @@ namespace BusinessLayer
             {
                 logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
                 return false;
-            }
-        }
-
-        public dt306_Role RemoveById(int id)
-        {
-            try
-            {
-                using (var _context = new DBDocumentManagementSystemEntities())
-                {
-                    var itemRemove = _context.dt306_Role.FirstOrDefault(r => r.Id == id);
-                    return _context.dt306_Role.Remove(itemRemove);
-                }
-            }
-            catch (Exception ex)
-            {
-                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
-                throw;
             }
         }
     }

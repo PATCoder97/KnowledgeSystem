@@ -92,14 +92,17 @@ namespace BusinessLayer
             }
         }
 
-        public dt306_Type RemoveById(int id)
+        public bool RemoveById(int id)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
                     var itemRemove = _context.dt306_Type.FirstOrDefault(r => r.Id == id);
-                    return _context.dt306_Type.Remove(itemRemove);
+                    _context.dt306_Type.Remove(itemRemove);
+
+                    int affectedRecords = _context.SaveChanges();
+                    return affectedRecords > 0;
                 }
             }
             catch (Exception ex)

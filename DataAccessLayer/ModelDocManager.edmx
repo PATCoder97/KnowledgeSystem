@@ -518,12 +518,12 @@
           <Property Name="IdUsr" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="IdRole" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="dt306_Role">
+        <EntityType Name="dt306_SignRole">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="DisplayName" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="64" Nullable="false" />
         </EntityType>
         <EntityType Name="dt306_Type">
           <Key>
@@ -614,7 +614,7 @@
           <EntitySet Name="dt306_BaseAtts" EntityType="Self.dt306_BaseAtts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt306_ProgInfo" EntityType="Self.dt306_ProgInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt306_Progress" EntityType="Self.dt306_Progress" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="dt306_Role" EntityType="Self.dt306_Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt306_SignRole" EntityType="Self.dt306_SignRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt306_Type" EntityType="Self.dt306_Type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sys_Log" EntityType="Self.sys_Log" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sys_NotesMail" EntityType="Self.sys_NotesMail" Schema="dbo" store:Type="Tables" />
@@ -674,10 +674,10 @@
           <EntitySet Name="dt306_BaseAtts" EntityType="DBDocumentManagementSystemModel.dt306_BaseAtts" />
           <EntitySet Name="dt306_ProgInfo" EntityType="DBDocumentManagementSystemModel.dt306_ProgInfo" />
           <EntitySet Name="dt306_Progress" EntityType="DBDocumentManagementSystemModel.dt306_Progress" />
-          <EntitySet Name="dt306_Role" EntityType="DBDocumentManagementSystemModel.dt306_Role" />
           <EntitySet Name="dt306_Base" EntityType="DBDocumentManagementSystemModel.dt306_Base" />
           <EntitySet Name="dm_FixedProgress" EntityType="DBDocumentManagementSystemModel.dm_FixedProgress" />
           <EntitySet Name="dt306_Type" EntityType="DBDocumentManagementSystemModel.dt306_Type" />
+          <EntitySet Name="dt306_SignRole" EntityType="DBDocumentManagementSystemModel.dt306_SignRole" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -1202,13 +1202,6 @@
           <Property Name="IdUsr" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="IdRole" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="dt306_Role">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="dt306_Base">
           <Key>
             <PropertyRef Name="Id" />
@@ -1238,6 +1231,13 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="DisplayName" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dt306_SignRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1817,14 +1817,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dt306_Role">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt306_Role">
-              <MappingFragment StoreEntitySet="dt306_Role">
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="dt306_Base">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt306_Base">
               <MappingFragment StoreEntitySet="dt306_Base">
@@ -1853,6 +1845,14 @@
           <EntitySetMapping Name="dt306_Type">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt306_Type">
               <MappingFragment StoreEntitySet="dt306_Type">
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt306_SignRole">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt306_SignRole">
+              <MappingFragment StoreEntitySet="dt306_SignRole">
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

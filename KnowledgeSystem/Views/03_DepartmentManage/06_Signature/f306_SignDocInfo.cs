@@ -36,7 +36,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
         string nextStepProg = "";
 
         List<dm_JobTitle> jobTitles;
-        List<dt306_Role> roleConfirms;
+        List<dt306_SignRole> roleConfirms;
 
         List<dt306_ProgInfo> progInfos;
         List<dt306_Progress> progress;
@@ -66,7 +66,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             tabbedControlGroup1.SelectedTabPageIndex = 0;
 
             jobTitles = dm_JobTitleBUS.Instance.GetList();
-            roleConfirms = dt306_RoleBUS.Instance.GetList();
+            roleConfirms = dt306_SignRoleBUS.Instance.GetList();
 
             var users = dm_UserBUS.Instance.GetList();
             progress = dt306_ProgressBUS.Instance.GetListByIdBase(idBase);

@@ -55,6 +55,8 @@
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.lookupRole = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.btnDelProg = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.txbTitle = new DevExpress.XtraEditors.TextEdit();
             this.btnAddFile = new DevExpress.XtraEditors.SimpleButton();
             this.lbCountFile = new System.Windows.Forms.Label();
@@ -87,6 +89,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.lookupUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookupRole)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnDelProg)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbTitle.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcFiles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvFiles)).BeginInit();
@@ -254,7 +257,8 @@
             this.gcProgress.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
             this.gcProgress.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.lookupUser,
-            this.lookupRole});
+            this.lookupRole,
+            this.btnDelProg});
             this.gcProgress.Size = new System.Drawing.Size(628, 243);
             this.gcProgress.TabIndex = 14;
             this.gcProgress.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -280,7 +284,8 @@
             this.gridColumn4,
             this.gridColumn3,
             this.gridColumn1,
-            this.gridColumn2});
+            this.gridColumn2,
+            this.gridColumn6});
             this.gvProgress.GridControl = this.gcProgress;
             this.gvProgress.Name = "gvProgress";
             this.gvProgress.NewItemRowText = "按一下此處新增流程";
@@ -379,6 +384,25 @@
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("DisplayName", "Name1")});
             this.lookupRole.Name = "lookupRole";
             this.lookupRole.ShowHeader = false;
+            // 
+            // gridColumn6
+            // 
+            this.gridColumn6.ColumnEdit = this.btnDelProg;
+            this.gridColumn6.MaxWidth = 30;
+            this.gridColumn6.MinWidth = 30;
+            this.gridColumn6.Name = "gridColumn6";
+            this.gridColumn6.Visible = true;
+            this.gridColumn6.VisibleIndex = 4;
+            this.gridColumn6.Width = 30;
+            // 
+            // btnDelProg
+            // 
+            this.btnDelProg.AutoHeight = false;
+            this.btnDelProg.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Close)});
+            this.btnDelProg.Name = "btnDelProg";
+            this.btnDelProg.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            this.btnDelProg.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnDelProg_ButtonClick);
             // 
             // txbTitle
             // 
@@ -706,6 +730,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.lookupUser)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookupRole)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnDelProg)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbTitle.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcFiles)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvFiles)).EndInit();
@@ -775,5 +800,7 @@
         private DevExpress.XtraEditors.GridLookUpEdit txbType;
         private DevExpress.XtraGrid.Views.Grid.GridView gridLookUpEdit1View;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnDelProg;
     }
 }

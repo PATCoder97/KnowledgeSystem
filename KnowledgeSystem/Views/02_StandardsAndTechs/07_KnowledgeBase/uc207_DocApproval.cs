@@ -1,8 +1,11 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
 using DevExpress.ClipboardSource.SpreadsheetML;
+using DevExpress.Utils;
 using DevExpress.Utils.About;
 using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using DevExpress.XtraTreeList;
 using KnowledgeSystem.Helpers;
 using System;
@@ -11,6 +14,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
@@ -118,6 +122,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
         private void gvData_DoubleClick(object sender, EventArgs e)
         {
+            DXMouseEventArgs ea = e as DXMouseEventArgs;
+            GridView view = sender as GridView;
+            GridHitInfo info = view.CalcHitInfo(ea.Location);
+            if (!(info.InRow || info.InRowCell)) return;
+
             string IdKnowledgeBase = gvData.GetFocusedRowCellValue(gvColIdKnowledgeBase).ToString();
 
             f207_Document_Info document_Info = new f207_Document_Info(IdKnowledgeBase);

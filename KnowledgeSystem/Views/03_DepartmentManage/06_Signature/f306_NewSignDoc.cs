@@ -36,7 +36,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
 
         List<dm_User> users;
         List<dm_JobTitle> jobTitles;
-        List<dt201_Role> roles;
+        List<dt306_SignRole> roles;
 
         dt306_Base baseData = new dt306_Base();
 
@@ -141,7 +141,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
 
             users = dm_UserBUS.Instance.GetListByDept(idDept2word).Where(r => r.Status == 0).ToList();
             jobTitles = dm_JobTitleBUS.Instance.GetList();
-            roles = dt201_RoleBUS.Instance.GetList().Where(r => r.Id != 0).ToList();
+            roles = dt306_SignRoleBUS.Instance.GetList().Where(r => r.Id != 0).ToList();
 
             var dmType = dt306_TypeBUS.Instance.GetList();
 
@@ -170,7 +170,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
 
         private void btnDelFile_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            Attachment attachment = gvFiles.GetRow(gvFiles.FocusedRowHandle) as Attachment;
+            GridView view = gvFiles;
+            Attachment attachment = view.GetRow(view.FocusedRowHandle) as Attachment;
 
             string msg = $"您想要刪除附件：\r\n{attachment.ActualName}?";
             if (MsgTP.MsgYesNoQuestion(msg) == DialogResult.No)
@@ -182,8 +183,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             lbCountFile.Text = $"共{attachments.Count}份文件";
 
             int rowIndex = gvFiles.FocusedRowHandle;
-            gvFiles.RefreshData();
-            gvFiles.FocusedRowHandle = rowIndex;
+            view.RefreshData();
+            view.FocusedRowHandle = rowIndex;
         }
 
         private void gvProgress_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
@@ -296,6 +297,17 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             }
 
             gcProgress.RefreshDataSource();
+        }
+
+        private void btnDelProg_ButtonClick(object sender, ButtonPressedEventArgs e)
+        {
+            GridView view = gvProgress;
+            ProgressDetail prog = view.GetRow(view.FocusedRowHandle) as ProgressDetail;
+            progresses.Remove(prog);
+
+            int rowIndex = view.FocusedRowHandle;
+            view.RefreshData();
+            view.FocusedRowHandle = rowIndex;
         }
     }
 }

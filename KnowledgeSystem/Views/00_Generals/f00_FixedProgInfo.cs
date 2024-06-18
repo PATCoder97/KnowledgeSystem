@@ -280,5 +280,16 @@ namespace KnowledgeSystem.Views._00_Generals
             eventInfo = EventFormInfo.Delete;
             LockControl();
         }
+
+        private void btnDelProg_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            GridView view = gvProgress;
+            ProgressDetail prog = view.GetRow(view.FocusedRowHandle) as ProgressDetail;
+            progresses.Remove(prog);
+
+            int rowIndex = view.FocusedRowHandle;
+            view.RefreshData();
+            view.FocusedRowHandle = rowIndex;
+        }
     }
 }

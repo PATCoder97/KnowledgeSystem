@@ -56,11 +56,11 @@ namespace KnowledgeSystem.Helpers
         public static int JFEnCSCMain { get; set; }
         public static int ISOAuditDocsMain { get; set; }
         public static int TechnicalPrjMain { get; set; }
-        public static int ElectronicSignature { get; set; }
+        public static int SignatureDigital { get; set; }
 
         public static List<int> GetListAutoOpenForm()
         {
-            return new List<int>() { SysAdmin, Mod, KnowledgeMain, SafetyCertMain, JFEnCSCMain, TechnicalPrjMain };
+            return new List<int>() { SysAdmin, Mod, KnowledgeMain, SafetyCertMain, JFEnCSCMain, TechnicalPrjMain, SignatureDigital };
         }
 
         // 207

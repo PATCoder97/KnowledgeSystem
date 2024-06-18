@@ -127,7 +127,7 @@ namespace KnowledgeSystem.Views._00_Generals
             AppPermission.JFEnCSCMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleJFEnCSCMain")?.ValueT ?? "-1");
             AppPermission.ISOAuditDocsMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleISOAuditDocsMain")?.ValueT ?? "-1");
             AppPermission.TechnicalPrjMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleTechnicalPrjMain")?.ValueT ?? "-1");
-            AppPermission.ElectronicSignature = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "ElectronicSignature")?.ValueT ?? "-1");
+            AppPermission.SignatureDigital = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleSignatureDigitalMain")?.ValueT ?? "-1");
         }
 
         private void fMain_Load(object sender, EventArgs e)
@@ -283,7 +283,7 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void btnSignature_ItemClick(object sender, TileItemEventArgs e)
         {
-            ShowFromByFrame(AppPermission.ElectronicSignature, e);
+            ShowFromByFrame(AppPermission.SignatureDigital, e);
         }
     }
 }

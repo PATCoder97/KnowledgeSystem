@@ -194,7 +194,7 @@
     <Compile Include="dt306_Progress.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
-    <Compile Include="dt306_Role.cs">
+    <Compile Include="dt306_SignRole.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
     <Compile Include="dt306_Type.cs">

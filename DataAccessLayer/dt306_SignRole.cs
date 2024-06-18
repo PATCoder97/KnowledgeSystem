@@ -12,7 +12,7 @@ namespace DataAccessLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class dt306_Role
+    public partial class dt306_SignRole
     {
         public int Id { get; set; }
         public string DisplayName { get; set; }

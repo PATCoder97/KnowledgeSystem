@@ -56,6 +56,8 @@
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.btnDelProg = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -70,6 +72,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnDelProg)).BeginInit();
             this.SuspendLayout();
             // 
             // barManagerTP
@@ -198,7 +201,8 @@
             this.gcProgress.Name = "gcProgress";
             this.gcProgress.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
             this.gcProgress.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.lookupUser});
+            this.lookupUser,
+            this.btnDelProg});
             this.gcProgress.Size = new System.Drawing.Size(398, 299);
             this.gcProgress.TabIndex = 15;
             this.gcProgress.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -223,7 +227,8 @@
             this.gvProgress.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumn4,
             this.gridColumn3,
-            this.gridColumn1});
+            this.gridColumn1,
+            this.gridColumn6});
             this.gvProgress.GridControl = this.gcProgress;
             this.gvProgress.Name = "gvProgress";
             this.gvProgress.NewItemRowText = "按一下此處新增流程";
@@ -244,6 +249,7 @@
             this.gridColumn4.OptionsColumn.AllowEdit = false;
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 0;
+            this.gridColumn4.Width = 116;
             // 
             // gridColumn3
             // 
@@ -253,6 +259,7 @@
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 1;
+            this.gridColumn3.Width = 116;
             // 
             // lookupUser
             // 
@@ -298,6 +305,7 @@
             this.gridColumn1.OptionsColumn.AllowEdit = false;
             this.gridColumn1.Visible = true;
             this.gridColumn1.VisibleIndex = 2;
+            this.gridColumn1.Width = 134;
             // 
             // txbDisplayName
             // 
@@ -417,6 +425,25 @@
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
+            // gridColumn6
+            // 
+            this.gridColumn6.ColumnEdit = this.btnDelProg;
+            this.gridColumn6.MaxWidth = 20;
+            this.gridColumn6.MinWidth = 30;
+            this.gridColumn6.Name = "gridColumn6";
+            this.gridColumn6.Visible = true;
+            this.gridColumn6.VisibleIndex = 3;
+            this.gridColumn6.Width = 30;
+            // 
+            // btnDelProg
+            // 
+            this.btnDelProg.AutoHeight = false;
+            this.btnDelProg.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Close)});
+            this.btnDelProg.Name = "btnDelProg";
+            this.btnDelProg.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            this.btnDelProg.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnDelProg_ButtonClick);
+            // 
             // f00_FixedProgInfo
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
@@ -449,6 +476,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnDelProg)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -482,5 +510,7 @@
         private DevExpress.XtraGrid.Views.Grid.GridView gridLookUpEdit1View;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnDelProg;
     }
 }

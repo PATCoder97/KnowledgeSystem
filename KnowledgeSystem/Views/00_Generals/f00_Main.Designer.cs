@@ -47,9 +47,9 @@ namespace KnowledgeSystem.Views._00_Generals
             DevExpress.XtraEditors.TileItemElement tileItemElement13 = new DevExpress.XtraEditors.TileItemElement();
             DevExpress.XtraEditors.TileItemElement tileItemElement14 = new DevExpress.XtraEditors.TileItemElement();
             DevExpress.XtraEditors.TileItemElement tileItemElement15 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement16 = new DevExpress.XtraEditors.TileItemElement();
             DevExpress.XtraEditors.TileItemElement tileItemElement17 = new DevExpress.XtraEditors.TileItemElement();
             DevExpress.XtraEditors.TileItemElement tileItemElement18 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement16 = new DevExpress.XtraEditors.TileItemElement();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.tileMain = new DevExpress.XtraEditors.TileControl();
             this.tileGroup2 = new DevExpress.XtraEditors.TileGroup();
@@ -68,13 +68,13 @@ namespace KnowledgeSystem.Views._00_Generals
             this.btnWorkManagement = new DevExpress.XtraEditors.TileItem();
             this.tileItem12 = new DevExpress.XtraEditors.TileItem();
             this.btnSafetyCert = new DevExpress.XtraEditors.TileItem();
+            this.btnSignature = new DevExpress.XtraEditors.TileItem();
             this.tileGroup5 = new DevExpress.XtraEditors.TileGroup();
             this.tileInfoUser = new DevExpress.XtraEditors.TileItem();
             this.btnMod = new DevExpress.XtraEditors.TileItem();
             this.btnSysAdmin = new DevExpress.XtraEditors.TileItem();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.lbSoftName = new DevExpress.XtraLayout.LayoutControlItem();
-            this.btnSignature = new DevExpress.XtraEditors.TileItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
@@ -123,7 +123,7 @@ namespace KnowledgeSystem.Views._00_Generals
             this.tileMain.MaxId = 24;
             this.tileMain.Name = "tileMain";
             this.tileMain.Padding = new System.Windows.Forms.Padding(24, 22, 24, 22);
-            this.tileMain.Position = 480;
+            this.tileMain.Position = 469;
             this.tileMain.ShowGroupText = true;
             this.tileMain.Size = new System.Drawing.Size(1180, 499);
             this.tileMain.TabIndex = 4;
@@ -323,6 +323,19 @@ namespace KnowledgeSystem.Views._00_Generals
             this.btnSafetyCert.Name = "btnSafetyCert";
             this.btnSafetyCert.ItemClick += new DevExpress.XtraEditors.TileItemClickEventHandler(this.btnSafetyCert_ItemClick);
             // 
+            // btnSignature
+            // 
+            this.btnSignature.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
+            this.btnSignature.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
+            this.btnSignature.AppearanceItem.Normal.Options.UseBackColor = true;
+            this.btnSignature.AppearanceItem.Normal.Options.UseFont = true;
+            tileItemElement16.Text = "電子核簽";
+            this.btnSignature.Elements.Add(tileItemElement16);
+            this.btnSignature.Id = 23;
+            this.btnSignature.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
+            this.btnSignature.Name = "btnSignature";
+            this.btnSignature.ItemClick += new DevExpress.XtraEditors.TileItemClickEventHandler(this.btnSignature_ItemClick);
+            // 
             // tileGroup5
             // 
             this.tileGroup5.Items.Add(this.tileInfoUser);
@@ -403,19 +416,6 @@ namespace KnowledgeSystem.Views._00_Generals
             this.lbSoftName.Text = "軟體名稱";
             this.lbSoftName.TextLocation = DevExpress.Utils.Locations.Top;
             this.lbSoftName.TextSize = new System.Drawing.Size(388, 96);
-            // 
-            // btnSignature
-            // 
-            this.btnSignature.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(183)))), ((int)(((byte)(71)))), ((int)(((byte)(42)))));
-            this.btnSignature.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
-            this.btnSignature.AppearanceItem.Normal.Options.UseBackColor = true;
-            this.btnSignature.AppearanceItem.Normal.Options.UseFont = true;
-            tileItemElement16.Text = "電子核簽";
-            this.btnSignature.Elements.Add(tileItemElement16);
-            this.btnSignature.Id = 23;
-            this.btnSignature.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
-            this.btnSignature.Name = "btnSignature";
-            this.btnSignature.ItemClick += new DevExpress.XtraEditors.TileItemClickEventHandler(this.btnSignature_ItemClick);
             // 
             // f00_Main
             // 
