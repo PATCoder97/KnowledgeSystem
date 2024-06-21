@@ -35,6 +35,7 @@
             this.btnCreate = new DevExpress.XtraBars.BarButtonItem();
             this.btnRefresh = new DevExpress.XtraBars.BarButtonItem();
             this.btnExportExcel = new DevExpress.XtraBars.BarButtonItem();
+            this.btnTestSign = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -78,9 +79,10 @@
             this.barManagerTP.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.btnCreate,
             this.btnRefresh,
-            this.btnExportExcel});
+            this.btnExportExcel,
+            this.btnTestSign});
             this.barManagerTP.MainMenu = this.bar2;
-            this.barManagerTP.MaxItemId = 4;
+            this.barManagerTP.MaxItemId = 5;
             // 
             // bar2
             // 
@@ -103,7 +105,8 @@
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnCreate, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnRefresh, true),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnExportExcel, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnExportExcel, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnTestSign, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawBorder = false;
             this.bar2.OptionsBar.DrawDragBorder = false;
@@ -136,6 +139,14 @@
             this.btnExportExcel.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnExportExcel.Name = "btnExportExcel";
             this.btnExportExcel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExportExcel_ItemClick);
+            // 
+            // btnTestSign
+            // 
+            this.btnTestSign.Caption = "測試簽名";
+            this.btnTestSign.Id = 4;
+            this.btnTestSign.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnTestSign.Name = "btnTestSign";
+            this.btnTestSign.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnTestSign_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -413,5 +424,6 @@
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraGrid.Columns.GridColumn gColId;
+        private DevExpress.XtraBars.BarButtonItem btnTestSign;
     }
 }

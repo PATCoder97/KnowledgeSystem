@@ -181,12 +181,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
 
             if (totalKm <= 0) return;
 
-            if (totalKm > 15)
-            {
-                XtraMessageBox.Show($"Mỗi chuyến chỉ được đi dưới 15km", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
             if (XtraMessageBox.Show($"Bạn chắc chắn muốn trả xe: {nameVehicle}, với {totalKm} Km ?", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo) != DialogResult.Yes)
             {
                 return;
@@ -195,6 +189,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
             switch (cbbTypeVehicle.SelectedIndex)
             {
                 case 0:
+                    if (totalKm > 15)
+                    {
+                        XtraMessageBox.Show($"Xe máy mỗi chuyến chỉ được đi dưới 15km", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
                     DateTime dateTime = DateTime.ParseExact(borrTime, "yyyy/MM/dd HH:mm", System.Globalization.CultureInfo.InvariantCulture);
                     string formattedBorrTime = dateTime.ToString("yyyyMMddHHmm");
 

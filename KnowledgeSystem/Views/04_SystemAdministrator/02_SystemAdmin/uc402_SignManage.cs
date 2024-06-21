@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -49,6 +50,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
             btnCreate.ImageOptions.SvgImage = TPSvgimages.Add;
             btnRefresh.ImageOptions.SvgImage = TPSvgimages.Reload;
             btnExportExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
+            btnTestSign.ImageOptions.SvgImage = TPSvgimages.Approval;
         }
 
         private void InitializeMenuItems()
@@ -163,6 +165,25 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
                 e.Menu.Items.Add(itemViewInfo);
                 e.Menu.Items.Add(itemModifyUsr);
             }
+        }
+
+        private void btnTestSign_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "PDF (*.pdf)|*.pdf";
+            if (ofd.ShowDialog() != DialogResult.OK) return;
+
+            string sourcePath = ofd.FileName;
+            string sourceFolder = Path.GetDirectoryName(sourcePath);
+            string destPath = Path.Combine(TPConfigs.TempFolderData, $"TestSign_{DateTime.Now:yyyyMMddHHmmss}.pdf");
+
+            if (!Directory.Exists(TPConfigs.TempFolderData))
+                Directory.CreateDirectory(TPConfigs.TempFolderData);
+
+            File.Copy(sourcePath, destPath, true);
+
+            f00_PdfTools pdfTools = new f00_PdfTools(destPath, sourceFolder);
+            pdfTools.ShowDialog();
         }
     }
 }
