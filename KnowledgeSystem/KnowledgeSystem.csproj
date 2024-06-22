@@ -345,6 +345,18 @@
     <Compile Include="Views\03_DepartmentManage\06_Signature\uc306_SignatureMain.Designer.cs">
       <DependentUpon>uc306_SignatureMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\03_DepartmentManage\07_Quiz\uc307_JobTitleSetting.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\07_Quiz\uc307_JobTitleSetting.Designer.cs">
+      <DependentUpon>uc307_JobTitleSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\07_Quiz\uc307_QuesManage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\07_Quiz\uc307_QuesManage.Designer.cs">
+      <DependentUpon>uc307_QuesManage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\03_DepartmentManage\07_Quiz\uc307_QuizMain.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -745,6 +757,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\06_Signature\uc306_SignatureMain.resx">
       <DependentUpon>uc306_SignatureMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\07_Quiz\uc307_JobTitleSetting.resx">
+      <DependentUpon>uc307_JobTitleSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\07_Quiz\uc307_QuesManage.resx">
+      <DependentUpon>uc307_QuesManage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\07_Quiz\uc307_QuizMain.resx">
       <DependentUpon>uc307_QuizMain.cs</DependentUpon>

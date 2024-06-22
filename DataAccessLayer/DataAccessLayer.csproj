@@ -200,6 +200,15 @@
     <Compile Include="dt306_Type.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
+    <Compile Include="dt307_Answers.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dt307_JobQuesManage.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dt307_Questions.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModelDocManager.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

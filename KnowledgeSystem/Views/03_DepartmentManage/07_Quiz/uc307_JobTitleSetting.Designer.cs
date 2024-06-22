@@ -1,6 +1,6 @@
 ﻿namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
 {
-    partial class uc307_QuizMain
+    partial class uc307_JobTitleSetting
     {
         /// <summary> 
         /// Required designer variable.
@@ -29,24 +29,17 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc307_QuizMain));
-            this.gvAttachment = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gColActualName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gColEncryptName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gColIdReport = new DevExpress.XtraGrid.Columns.GridColumn();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc307_JobTitleSetting));
             this.gcData = new DevExpress.XtraGrid.GridControl();
             this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gColId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColEnterDate = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gColIdFile = new DevExpress.XtraGrid.Columns.GridColumn();
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnAdd = new DevExpress.XtraBars.BarButtonItem();
@@ -59,7 +52,6 @@
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            ((System.ComponentModel.ISupportInitialize)(this.gvAttachment)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
@@ -69,54 +61,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             this.SuspendLayout();
             // 
-            // gvAttachment
-            // 
-            this.gvAttachment.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.gvAttachment.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Blue;
-            this.gvAttachment.Appearance.HeaderPanel.Options.UseFont = true;
-            this.gvAttachment.Appearance.HeaderPanel.Options.UseForeColor = true;
-            this.gvAttachment.Appearance.HeaderPanel.Options.UseTextOptions = true;
-            this.gvAttachment.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gvAttachment.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gvAttachment.Appearance.Row.ForeColor = System.Drawing.Color.Black;
-            this.gvAttachment.Appearance.Row.Options.UseFont = true;
-            this.gvAttachment.Appearance.Row.Options.UseForeColor = true;
-            this.gvAttachment.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gColActualName,
-            this.gColEncryptName,
-            this.gColIdReport});
-            this.gvAttachment.GridControl = this.gcData;
-            this.gvAttachment.Name = "gvAttachment";
-            this.gvAttachment.OptionsCustomization.AllowFilter = false;
-            this.gvAttachment.OptionsCustomization.AllowSort = false;
-            this.gvAttachment.OptionsDetail.ShowDetailTabs = false;
-            this.gvAttachment.OptionsView.ColumnAutoWidth = false;
-            this.gvAttachment.OptionsView.ShowColumnHeaders = false;
-            this.gvAttachment.OptionsView.ShowGroupPanel = false;
-            this.gvAttachment.OptionsView.ShowIndicator = false;
-            // 
-            // gColActualName
-            // 
-            this.gColActualName.Caption = "ActualName";
-            this.gColActualName.FieldName = "ActualName";
-            this.gColActualName.Name = "gColActualName";
-            this.gColActualName.Visible = true;
-            this.gColActualName.VisibleIndex = 0;
-            // 
-            // gColEncryptName
-            // 
-            this.gColEncryptName.AppearanceCell.Options.UseTextOptions = true;
-            this.gColEncryptName.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gColEncryptName.Caption = "EncryptionName";
-            this.gColEncryptName.FieldName = "EncryptionName";
-            this.gColEncryptName.Name = "gColEncryptName";
-            // 
-            // gColIdReport
-            // 
-            this.gColIdReport.Caption = "Id";
-            this.gColIdReport.FieldName = "Id";
-            this.gColIdReport.Name = "gColIdReport";
-            // 
             // gcData
             // 
             this.gcData.Cursor = System.Windows.Forms.Cursors.Default;
@@ -125,19 +69,14 @@
             this.gcData.EmbeddedNavigator.Buttons.Edit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.EndEdit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.Remove.Visible = false;
-            gridLevelNode1.LevelTemplate = this.gvAttachment;
-            gridLevelNode1.RelationName = "表單";
-            this.gcData.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode1});
             this.gcData.Location = new System.Drawing.Point(12, 12);
             this.gcData.MainView = this.gvData;
             this.gcData.Name = "gcData";
-            this.gcData.Size = new System.Drawing.Size(878, 451);
+            this.gcData.Size = new System.Drawing.Size(849, 492);
             this.gcData.TabIndex = 5;
             this.gcData.UseEmbeddedNavigator = true;
             this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gvData,
-            this.gvAttachment});
+            this.gvData});
             // 
             // gvData
             // 
@@ -157,15 +96,13 @@
             this.gvData.Appearance.Row.Options.UseForeColor = true;
             this.gvData.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gColId,
+            this.gridColumn5,
+            this.gridColumn6,
             this.gridColumn3,
             this.gridColumn1,
             this.gridColumn2,
             this.gridColumn4,
-            this.gColEnterDate,
-            this.gridColumn6,
-            this.gridColumn5,
-            this.gridColumn11,
-            this.gColIdFile});
+            this.gColEnterDate});
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
             this.gvData.OptionsDetail.ShowDetailTabs = false;
@@ -174,6 +111,8 @@
             this.gvData.OptionsView.EnableAppearanceOddRow = true;
             this.gvData.OptionsView.ShowAutoFilterRow = true;
             this.gvData.OptionsView.ShowGroupPanel = false;
+            this.gvData.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gridColumn5, DevExpress.Data.ColumnSortOrder.Ascending)});
             // 
             // gColId
             // 
@@ -183,79 +122,66 @@
             this.gColId.FieldName = "Id";
             this.gColId.Name = "gColId";
             // 
+            // gridColumn5
+            // 
+            this.gridColumn5.Caption = "單位";
+            this.gridColumn5.FieldName = "Dept";
+            this.gridColumn5.Name = "gridColumn5";
+            this.gridColumn5.Visible = true;
+            this.gridColumn5.VisibleIndex = 0;
+            // 
+            // gridColumn6
+            // 
+            this.gridColumn6.Caption = "職務編號";
+            this.gridColumn6.FieldName = "job.Id";
+            this.gridColumn6.Name = "gridColumn6";
+            this.gridColumn6.Visible = true;
+            this.gridColumn6.VisibleIndex = 1;
+            this.gridColumn6.Width = 93;
+            // 
             // gridColumn3
             // 
-            this.gridColumn3.AppearanceCell.Options.UseTextOptions = true;
-            this.gridColumn3.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn3.Caption = "職務名稱";
-            this.gridColumn3.FieldName = " job.DisplayName";
+            this.gridColumn3.FieldName = "job.DisplayName";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 0;
+            this.gridColumn3.VisibleIndex = 2;
+            this.gridColumn3.Width = 104;
             // 
             // gridColumn1
             // 
             this.gridColumn1.Caption = "時期限制";
-            this.gridColumn1.FieldName = "DisplayName";
+            this.gridColumn1.FieldName = "data.TestDuration";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 1;
+            this.gridColumn1.VisibleIndex = 3;
+            this.gridColumn1.Width = 107;
             // 
             // gridColumn2
             // 
             this.gridColumn2.Caption = "及格分數";
-            this.gridColumn2.FieldName = "HalfYear";
+            this.gridColumn2.FieldName = "data.PassingScore";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 2;
+            this.gridColumn2.VisibleIndex = 4;
+            this.gridColumn2.Width = 97;
             // 
             // gridColumn4
             // 
             this.gridColumn4.Caption = "題目庫";
-            this.gridColumn4.FieldName = "RequestUsr";
+            this.gridColumn4.FieldName = "Count";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 3;
+            this.gridColumn4.VisibleIndex = 6;
             // 
             // gColEnterDate
             // 
             this.gColEnterDate.Caption = "題目數量";
-            this.gColEnterDate.FieldName = "TypeDoc";
+            this.gColEnterDate.FieldName = "data.QuesCount";
             this.gColEnterDate.Name = "gColEnterDate";
             this.gColEnterDate.Visible = true;
-            this.gColEnterDate.VisibleIndex = 4;
-            // 
-            // gridColumn6
-            // 
-            this.gridColumn6.Caption = "上傳人";
-            this.gridColumn6.FieldName = "UsrUpload";
-            this.gridColumn6.Name = "gridColumn6";
-            this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 7;
-            // 
-            // gridColumn5
-            // 
-            this.gridColumn5.Caption = "關鍵字";
-            this.gridColumn5.FieldName = "Keyword";
-            this.gridColumn5.Name = "gridColumn5";
-            this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 5;
-            // 
-            // gridColumn11
-            // 
-            this.gridColumn11.AppearanceCell.Options.UseTextOptions = true;
-            this.gridColumn11.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn11.Caption = "上傳日期";
-            this.gridColumn11.FieldName = "UploadTime";
-            this.gridColumn11.Name = "gridColumn11";
-            this.gridColumn11.Visible = true;
-            this.gridColumn11.VisibleIndex = 6;
-            // 
-            // gColIdFile
-            // 
-            this.gColIdFile.Caption = "gColIdFile";
-            this.gColIdFile.FieldName = "IdFile";
-            this.gColIdFile.Name = "gColIdFile";
+            this.gColEnterDate.VisibleIndex = 5;
+            this.gColEnterDate.Width = 113;
             // 
             // barManagerTP
             // 
@@ -326,6 +252,7 @@
             this.btnReload.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReload.ItemAppearance.Normal.Options.UseFont = true;
             this.btnReload.Name = "btnReload";
+            this.btnReload.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnReload_ItemClick);
             // 
             // btnExportExcel
             // 
@@ -337,6 +264,7 @@
             this.btnExportExcel.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExportExcel.ItemAppearance.Normal.Options.UseFont = true;
             this.btnExportExcel.Name = "btnExportExcel";
+            this.btnExportExcel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExportExcel_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -344,15 +272,15 @@
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManagerTP;
-            this.barDockControlTop.Size = new System.Drawing.Size(902, 49);
+            this.barDockControlTop.Size = new System.Drawing.Size(873, 49);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 524);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 565);
             this.barDockControlBottom.Manager = this.barManagerTP;
-            this.barDockControlBottom.Size = new System.Drawing.Size(902, 0);
+            this.barDockControlBottom.Size = new System.Drawing.Size(873, 0);
             // 
             // barDockControlLeft
             // 
@@ -360,15 +288,15 @@
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 49);
             this.barDockControlLeft.Manager = this.barManagerTP;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 475);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 516);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(902, 49);
+            this.barDockControlRight.Location = new System.Drawing.Point(873, 49);
             this.barDockControlRight.Manager = this.barManagerTP;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 475);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 516);
             // 
             // layoutControl1
             // 
@@ -377,8 +305,8 @@
             this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(902, 475);
-            this.layoutControl1.TabIndex = 4;
+            this.layoutControl1.Size = new System.Drawing.Size(873, 516);
+            this.layoutControl1.TabIndex = 5;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // Root
@@ -388,7 +316,7 @@
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem1});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(902, 475);
+            this.Root.Size = new System.Drawing.Size(873, 516);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem1
@@ -396,11 +324,11 @@
             this.layoutControlItem1.Control = this.gcData;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(882, 455);
+            this.layoutControlItem1.Size = new System.Drawing.Size(853, 496);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
-            // uc307_QuizMain
+            // uc307_JobTitleSetting
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
             this.Appearance.Options.UseBackColor = true;
@@ -411,10 +339,9 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.Name = "uc307_QuizMain";
-            this.Size = new System.Drawing.Size(902, 524);
-            this.Load += new System.EventHandler(this.uc307_QuizMain_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.gvAttachment)).EndInit();
+            this.Name = "uc307_JobTitleSetting";
+            this.Size = new System.Drawing.Size(873, 565);
+            this.Load += new System.EventHandler(this.uc307_JobTitleSetting_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
@@ -440,10 +367,6 @@
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraGrid.GridControl gcData;
-        private DevExpress.XtraGrid.Views.Grid.GridView gvAttachment;
-        private DevExpress.XtraGrid.Columns.GridColumn gColActualName;
-        private DevExpress.XtraGrid.Columns.GridColumn gColEncryptName;
-        private DevExpress.XtraGrid.Columns.GridColumn gColIdReport;
         private DevExpress.XtraGrid.Views.Grid.GridView gvData;
         private DevExpress.XtraGrid.Columns.GridColumn gColId;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
@@ -451,11 +374,9 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
         private DevExpress.XtraGrid.Columns.GridColumn gColEnterDate;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
-        private DevExpress.XtraGrid.Columns.GridColumn gColIdFile;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
     }
 }
