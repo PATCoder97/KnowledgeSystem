@@ -57,6 +57,7 @@ namespace KnowledgeSystem.Helpers
         public static int ISOAuditDocsMain { get; set; }
         public static int TechnicalPrjMain { get; set; }
         public static int SignatureDigital { get; set; }
+        public static int QuizMain { get; set; }
 
         public static List<int> GetListAutoOpenForm()
         {

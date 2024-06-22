@@ -45,6 +45,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         private class DataDisplay
         {
             public string Id { get; set; }
+            public string Dept { get; set; }
             public string DisplayName { get; set; }
             public string UserUpload { get; set; }
             public string UserUploadName { get; set; }
@@ -84,6 +85,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             List<dt207_Security> lsSecurities = _dt207_SecurityBUS.GetList();
             List<dm_Group> lsGroups = dm_GroupBUS.Instance.GetList();
             List<dm_GroupUser> lsGroupUsers = dm_GroupUserBUS.Instance.GetList();
+            var depts = dm_DeptBUS.Instance.GetList();
 
             // Lấy danh sách các giá trị IdKnowledgeBase mà chưa hoàn thành lưu trình trình ký
             var lsIdBaseRemove = dt207_DocProcessingBUS.Instance.GetListNotComplete().Select(r => r.IdKnowledgeBase).ToList();
@@ -158,9 +160,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
                                   join userUpload_ in lsUsers on data.UserUpload equals userUpload_.Id
                                   join userProcess_ in lsUsers on data.UserProcess equals userProcess_.Id
                                   join type_ in lsKnowledgeTypes on data.IdTypes equals type_.Id
+                                  join dept in depts on userUpload_.IdDepartment equals dept.Id
                                   select new DataDisplay
                                   {
                                       Id = data.Id,
+                                      Dept = $"{dept.Id}\n{dept.DisplayName}",
                                       DisplayName = data.DisplayName,
                                       UserUpload = data.UserUpload,
                                       UserUploadName = userUpload_.DisplayName,

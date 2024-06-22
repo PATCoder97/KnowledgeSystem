@@ -128,6 +128,7 @@ namespace KnowledgeSystem.Views._00_Generals
             AppPermission.ISOAuditDocsMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleISOAuditDocsMain")?.ValueT ?? "-1");
             AppPermission.TechnicalPrjMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleTechnicalPrjMain")?.ValueT ?? "-1");
             AppPermission.SignatureDigital = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleSignatureDigitalMain")?.ValueT ?? "-1");
+            AppPermission.QuizMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "QuizMain")?.ValueT ?? "-1");
         }
 
         private void fMain_Load(object sender, EventArgs e)
@@ -284,6 +285,11 @@ namespace KnowledgeSystem.Views._00_Generals
         private void btnSignature_ItemClick(object sender, TileItemEventArgs e)
         {
             ShowFromByFrame(AppPermission.SignatureDigital, e);
+        }
+
+        private void btnQuiz_ItemClick(object sender, TileItemEventArgs e)
+        {
+            ShowFromByFrame(AppPermission.QuizMain, e);
         }
     }
 }

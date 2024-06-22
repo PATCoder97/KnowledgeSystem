@@ -50,6 +50,7 @@ namespace KnowledgeSystem.Views._00_Generals
             DevExpress.XtraEditors.TileItemElement tileItemElement16 = new DevExpress.XtraEditors.TileItemElement();
             DevExpress.XtraEditors.TileItemElement tileItemElement17 = new DevExpress.XtraEditors.TileItemElement();
             DevExpress.XtraEditors.TileItemElement tileItemElement18 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement19 = new DevExpress.XtraEditors.TileItemElement();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.tileMain = new DevExpress.XtraEditors.TileControl();
             this.tileGroup2 = new DevExpress.XtraEditors.TileGroup();
@@ -69,6 +70,7 @@ namespace KnowledgeSystem.Views._00_Generals
             this.tileItem12 = new DevExpress.XtraEditors.TileItem();
             this.btnSafetyCert = new DevExpress.XtraEditors.TileItem();
             this.btnSignature = new DevExpress.XtraEditors.TileItem();
+            this.btnQuiz = new DevExpress.XtraEditors.TileItem();
             this.tileGroup5 = new DevExpress.XtraEditors.TileGroup();
             this.tileInfoUser = new DevExpress.XtraEditors.TileItem();
             this.btnMod = new DevExpress.XtraEditors.TileItem();
@@ -120,10 +122,10 @@ namespace KnowledgeSystem.Views._00_Generals
             this.tileMain.Groups.Add(this.tileGroup5);
             this.tileMain.Location = new System.Drawing.Point(12, 112);
             this.tileMain.Margin = new System.Windows.Forms.Padding(4);
-            this.tileMain.MaxId = 24;
+            this.tileMain.MaxId = 25;
             this.tileMain.Name = "tileMain";
             this.tileMain.Padding = new System.Windows.Forms.Padding(24, 22, 24, 22);
-            this.tileMain.Position = 469;
+            this.tileMain.Position = 794;
             this.tileMain.ShowGroupText = true;
             this.tileMain.Size = new System.Drawing.Size(1180, 499);
             this.tileMain.TabIndex = 4;
@@ -284,6 +286,7 @@ namespace KnowledgeSystem.Views._00_Generals
             this.tileGroup4.Items.Add(this.tileItem12);
             this.tileGroup4.Items.Add(this.btnSafetyCert);
             this.tileGroup4.Items.Add(this.btnSignature);
+            this.tileGroup4.Items.Add(this.btnQuiz);
             this.tileGroup4.Name = "tileGroup4";
             this.tileGroup4.Text = "部門管理";
             // 
@@ -336,6 +339,19 @@ namespace KnowledgeSystem.Views._00_Generals
             this.btnSignature.Name = "btnSignature";
             this.btnSignature.ItemClick += new DevExpress.XtraEditors.TileItemClickEventHandler(this.btnSignature_ItemClick);
             // 
+            // btnQuiz
+            // 
+            this.btnQuiz.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(183)))), ((int)(((byte)(71)))), ((int)(((byte)(42)))));
+            this.btnQuiz.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
+            this.btnQuiz.AppearanceItem.Normal.Options.UseBackColor = true;
+            this.btnQuiz.AppearanceItem.Normal.Options.UseFont = true;
+            tileItemElement17.Text = "評鑑系統";
+            this.btnQuiz.Elements.Add(tileItemElement17);
+            this.btnQuiz.Id = 24;
+            this.btnQuiz.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
+            this.btnQuiz.Name = "btnQuiz";
+            this.btnQuiz.ItemClick += new DevExpress.XtraEditors.TileItemClickEventHandler(this.btnQuiz_ItemClick);
+            // 
             // tileGroup5
             // 
             this.tileGroup5.Items.Add(this.tileInfoUser);
@@ -365,8 +381,8 @@ namespace KnowledgeSystem.Views._00_Generals
             this.btnMod.AppearanceItem.Pressed.Options.UseFont = true;
             this.btnMod.AppearanceItem.Selected.Font = new System.Drawing.Font("DFKai-SB", 26F);
             this.btnMod.AppearanceItem.Selected.Options.UseFont = true;
-            tileItemElement17.Text = "用戶管理";
-            this.btnMod.Elements.Add(tileItemElement17);
+            tileItemElement18.Text = "用戶管理";
+            this.btnMod.Elements.Add(tileItemElement18);
             this.btnMod.Id = 19;
             this.btnMod.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
             this.btnMod.Name = "btnMod";
@@ -384,8 +400,8 @@ namespace KnowledgeSystem.Views._00_Generals
             this.btnSysAdmin.AppearanceItem.Pressed.Options.UseFont = true;
             this.btnSysAdmin.AppearanceItem.Selected.Font = new System.Drawing.Font("DFKai-SB", 26F);
             this.btnSysAdmin.AppearanceItem.Selected.Options.UseFont = true;
-            tileItemElement18.Text = "系統管理";
-            this.btnSysAdmin.Elements.Add(tileItemElement18);
+            tileItemElement19.Text = "系統管理";
+            this.btnSysAdmin.Elements.Add(tileItemElement19);
             this.btnSysAdmin.Id = 18;
             this.btnSysAdmin.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
             this.btnSysAdmin.Name = "btnSysAdmin";
@@ -469,5 +485,6 @@ namespace KnowledgeSystem.Views._00_Generals
         private TileItem tileInfoUser;
         private TileItem btnISOAuditDocs;
         private TileItem btnSignature;
+        private TileItem btnQuiz;
     }
 }

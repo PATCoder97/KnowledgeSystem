@@ -108,7 +108,7 @@ namespace KnowledgeSystem.Views._00_Generals
                         AccordionControlElement accordionChild = new AccordionControlElement();
 
                         pathImage = Path.Combine(TPConfigs.StartupPath, "Images", child.Images ?? "");
-                        accordionChild.ImageOptions.SvgImage = child.Images != null ? DevExpress.Utils.Svg.SvgImage.FromFile(pathImage) : null;
+                        accordionChild.ImageOptions.SvgImage = !string.IsNullOrEmpty(child.Images) ? DevExpress.Utils.Svg.SvgImage.FromFile(pathImage) : null;
                         accordionChild.Name = $"name_{child.ControlName}";
                         accordionChild.Text = child.DisplayName;
                         accordionChild.Style = ElementStyle.Item;
