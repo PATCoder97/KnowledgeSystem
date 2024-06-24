@@ -39,7 +39,8 @@
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gColEnterDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColQuesCount = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnAdd = new DevExpress.XtraBars.BarButtonItem();
@@ -102,7 +103,8 @@
             this.gridColumn1,
             this.gridColumn2,
             this.gridColumn4,
-            this.gColEnterDate});
+            this.gColQuesCount,
+            this.gridColumn7});
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
             this.gvData.OptionsDetail.ShowDetailTabs = false;
@@ -174,14 +176,23 @@
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 6;
             // 
-            // gColEnterDate
+            // gColQuesCount
             // 
-            this.gColEnterDate.Caption = "題目數量";
-            this.gColEnterDate.FieldName = "data.QuesCount";
-            this.gColEnterDate.Name = "gColEnterDate";
-            this.gColEnterDate.Visible = true;
-            this.gColEnterDate.VisibleIndex = 5;
-            this.gColEnterDate.Width = 113;
+            this.gColQuesCount.Caption = "題目數量";
+            this.gColQuesCount.FieldName = "data.QuesCount";
+            this.gColQuesCount.Name = "gColQuesCount";
+            this.gColQuesCount.Visible = true;
+            this.gColQuesCount.VisibleIndex = 5;
+            this.gColQuesCount.Width = 113;
+            // 
+            // gridColumn7
+            // 
+            this.gridColumn7.Caption = "複選擇題";
+            this.gridColumn7.FieldName = "MultiQuesCount";
+            this.gridColumn7.Name = "gridColumn7";
+            this.gridColumn7.Visible = true;
+            this.gridColumn7.VisibleIndex = 7;
+            this.gridColumn7.Width = 89;
             // 
             // barManagerTP
             // 
@@ -373,10 +384,11 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
-        private DevExpress.XtraGrid.Columns.GridColumn gColEnterDate;
+        private DevExpress.XtraGrid.Columns.GridColumn gColQuesCount;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
     }
 }

@@ -1,7 +1,14 @@
 ﻿using BusinessLayer;
+using DevExpress.Utils.Menu;
+using DevExpress.Utils.Svg;
 using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Repository;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Views.Items.ViewInfo;
 using DevExpress.XtraPrinting.Native;
 using DevExpress.XtraSplashScreen;
+using DocumentFormat.OpenXml.Spreadsheet;
+using KnowledgeSystem.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,6 +18,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Color = System.Drawing.Color;
+using Font = System.Drawing.Font;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
 {
@@ -19,6 +28,59 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
         public uc307_QuesManage()
         {
             InitializeComponent();
+            InitializeMenuItems();
+            InitializeIcon();
+
+            helper = new RefreshHelper(gvQues, "Id");
+
+            DevExpress.Utils.AppearanceObject.DefaultMenuFont = fontUI14;
+        }
+
+        Font fontUI14 = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+        RefreshHelper helper;
+        BindingSource sourceQues = new BindingSource();
+
+
+        bool cal(Int32 _Width, GridView _View)
+        {
+            _View.IndicatorWidth = _View.IndicatorWidth < _Width ? _Width : _View.IndicatorWidth;
+            return true;
+        }
+
+        void IndicatorDraw(RowIndicatorCustomDrawEventArgs e, Color color)
+        {
+            e.Info.Appearance.Font = fontUI14;
+            e.Info.Appearance.ForeColor = color;
+        }
+
+        private void InitializeIcon()
+        {
+            btnAdd.ImageOptions.SvgImage = TPSvgimages.Add;
+            btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
+            btnExportExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
+        }
+
+        private void InitializeMenuItems()
+        {
+            //itemAddNode = CreateMenuItem("新增表單", ItemAddNote_Click, TPSvgimages.Add);
+            //itemAddAtt = CreateMenuItem("新增檔案", ItemAddAtt_Click, TPSvgimages.Attach);
+            //itemCopyNode = CreateMenuItem("複製年版", ItemCopyNote_Click, TPSvgimages.Copy);
+            //itemDelNode = CreateMenuItem("刪除", ItemDeleteNote_Click, TPSvgimages.Close);
+            //itemEditNode = CreateMenuItem("更新", ItemEditNode_Click, TPSvgimages.Edit);
+            //itemAddVer = CreateMenuItem("新增年版", ItemAddVer_Click, TPSvgimages.Add2);
+        }
+
+        DXMenuItem CreateMenuItem(string caption, EventHandler clickEvent, SvgImage svgImage)
+        {
+            var menuItem = new DXMenuItem(caption, clickEvent, svgImage, DXMenuItemPriority.Normal);
+            SetMenuItemProperties(menuItem);
+            return menuItem;
+        }
+
+        void SetMenuItemProperties(DXMenuItem menuItem)
+        {
+            menuItem.ImageOptions.SvgImageSize = new Size(24, 24);
+            menuItem.AppearanceHovered.ForeColor = Color.Blue;
         }
 
         private void LoadData()
@@ -43,14 +105,130 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
                 txbJob.DisplayMember = "DisplayName";
                 txbJob.ValueMember = "Id";
 
-                gvData.BestFitColumns();
-                gvData.CollapseAllDetails();
+                gcData.DataSource = sourceQues;
+                gvQues.BestFitColumns();
+                gvQues.CollapseAllDetails();
+            }
+        }
+
+        private void LoadQues(string idJob)
+        {
+            using (var handle = SplashScreenManager.ShowOverlayForm(gcData))
+            {
+                helper.SaveViewInfo();
+
+                var ques = dt307_QuestionsBUS.Instance.GetListByJob(idJob);
+
+                sourceQues.DataSource = ques;
+                helper.LoadViewInfo();
+
+                gvQues.BestFitColumns();
+                gvQues.CollapseAllDetails();
             }
         }
 
         private void uc307_QuesManage_Load(object sender, EventArgs e)
         {
+            gvQues.ReadOnlyGridView();
+            gvQues.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
+            gvQues.OptionsDetail.AllowOnlyOneMasterRowExpanded = true;
+            gvQues.OptionsDetail.AllowZoomDetail = false;
+
+            gvAns.ReadOnlyGridView();
+            gvAns.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
+            gvAns.OptionsDetail.AllowZoomDetail = false;
+
             LoadData();
+        }
+
+        private void txbJob_EditValueChanged(object sender, EventArgs e)
+        {
+            SearchLookUpEdit editor = (SearchLookUpEdit)sender;
+            string idJob = editor.EditValue.ToString();
+
+            LoadQues(idJob);
+        }
+
+        private void gvQues_MasterRowEmpty(object sender, DevExpress.XtraGrid.Views.Grid.MasterRowEmptyEventArgs e)
+        {
+            e.IsEmpty = false;
+        }
+
+        private void gvQues_MasterRowGetChildList(object sender, DevExpress.XtraGrid.Views.Grid.MasterRowGetChildListEventArgs e)
+        {
+            GridView view = sender as GridView;
+            int idQues = (int)view.GetRowCellValue(e.RowHandle, gColId);
+
+            var answers = dt307_AnswersBUS.Instance.GetListByQues(idQues);
+
+            //var baseAtts = dt306_BaseAttsBUS.Instance.GetListByIdBase(idBase);
+            //var childList = (from data in baseAtts
+            //                 join urs in users on data.UsrCancel equals urs.Id into userGroup
+            //                 from urs in userGroup.DefaultIfEmpty()
+            //                 select new
+            //                 {
+            //                     data,
+            //                     DisplayName = urs != null ? $"{urs.Id} {urs.IdDepartment}/{urs.DisplayName}" : null,
+            //                     Status = data.IsCancel || isCancel ? "被退回" : isProgess ? "核簽中" : "核簽完畢"
+            //                 }).ToList();
+
+            e.ChildList = answers;
+        }
+
+        private void gvQues_MasterRowGetRelationCount(object sender, DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationCountEventArgs e)
+        {
+            e.RelationCount = 1;
+        }
+
+        private void gvQues_MasterRowGetRelationName(object sender, DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationNameEventArgs e)
+        {
+            e.RelationName = "答案";
+        }
+
+        private void gvQues_MasterRowExpanded(object sender, CustomMasterRowEventArgs e)
+        {
+            GridView masterView = sender as GridView;
+            int visibleDetailRelationIndex = masterView.GetVisibleDetailRelationIndex(e.RowHandle);
+            GridView detailView = masterView.GetDetailView(e.RowHandle, visibleDetailRelationIndex) as GridView;
+
+            detailView.BestFitColumns();
+        }
+
+        private void gridView_CustomDrawRowIndicator(object sender, RowIndicatorCustomDrawEventArgs e)
+        {
+            GridView view = sender as GridView;
+
+            Color color = view.Appearance.HeaderPanel.ForeColor;
+
+            if (!view.IsGroupRow(e.RowHandle))
+            {
+                if (e.Info.IsRowIndicator)
+                {
+                    if (e.RowHandle < 0)
+                    {
+                        e.Info.ImageIndex = 0;
+                        e.Info.DisplayText = string.Empty;
+                    }
+                    else
+                    {
+                        e.Info.ImageIndex = -1;
+                        e.Info.DisplayText = (e.RowHandle + 1).ToString();
+                    }
+                    IndicatorDraw(e, color);
+                    SizeF _Size = e.Graphics.MeasureString(e.Info.DisplayText, fontUI14);
+                    Int32 _Width = Convert.ToInt32(_Size.Width) + 20;
+                    BeginInvoke(new MethodInvoker(delegate { cal(_Width, view); }));
+                }
+            }
+            else
+            {
+                e.Info.ImageIndex = -1;
+                e.Info.DisplayText = string.Format("[{0}]", (e.RowHandle * -1));
+                IndicatorDraw(e, color);
+                SizeF _Size = e.Graphics.MeasureString(e.Info.DisplayText, fontUI14);
+                Int32 _Width = Convert.ToInt32(_Size.Width) + 20;
+                BeginInvoke(new MethodInvoker(delegate { cal(_Width, view); }));
+            }
         }
     }
 }

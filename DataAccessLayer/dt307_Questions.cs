@@ -18,5 +18,6 @@ namespace DataAccessLayer
         public string IdJob { get; set; }
         public string DisplayText { get; set; }
         public string ImageName { get; set; }
+        public Nullable<bool> IsMultiAns { get; set; }
     }
 }

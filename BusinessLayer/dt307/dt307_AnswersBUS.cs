@@ -40,6 +40,22 @@ namespace BusinessLayer
             }
         }
 
+        public List<dt307_Answers> GetListByQues(int idQues)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt307_Answers.Where(r => r.QuesId == idQues).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public dt307_Answers GetItemById(int id)
         {
             try

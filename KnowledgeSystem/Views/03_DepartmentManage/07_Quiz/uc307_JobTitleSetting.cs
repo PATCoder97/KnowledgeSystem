@@ -27,6 +27,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             InitializeComponent();
             InitializeMenuItems();
             InitializeIcon();
+            CreateRuleGV();
 
             helper = new RefreshHelper(gvData, "Id");
 
@@ -48,6 +49,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             btnAdd.ImageOptions.SvgImage = TPSvgimages.Add;
             btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
             btnExportExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
+        }
+
+        private void CreateRuleGV()
+        {
+            gvData.FormatRules.AddExpressionRule(gColQuesCount, new DevExpress.Utils.AppearanceDefault() { ForeColor = Color.Red }, "[Count] < [data.QuesCount]");
         }
 
         private void InitializeMenuItems()
@@ -110,7 +116,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
                                 select new
                                 {
                                     IdJob = dtg.Key,
-                                    QuestionCount = dtg.Count()
+                                    QuestionCount = dtg.Count(),
+                                    MultiQuesCount = dtg.Count(r => r.IsMultiAns == true),
                                 };
 
                 var dataDisplays = (from data in baseData
@@ -123,7 +130,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
                                         data,
                                         job,
                                         Dept = $"{dept.Id}\n{dept.DisplayName}",
-                                        Count = g?.QuestionCount ?? 0
+                                        Count = g?.QuestionCount ?? 0,
+                                        MultiQuesCount = g?.MultiQuesCount ?? 0,
                                     }).ToList();
 
                 sourceBases.DataSource = dataDisplays;

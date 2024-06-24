@@ -560,6 +560,7 @@
           <Property Name="IdJob" Type="varchar" MaxLength="8" Nullable="false" />
           <Property Name="DisplayText" Type="nvarchar(max)" Nullable="false" />
           <Property Name="ImageName" Type="nvarchar" MaxLength="255" />
+          <Property Name="IsMultiAns" Type="bit" />
         </EntityType>
         <EntityType Name="sys_Log">
           <Key>
@@ -1302,6 +1303,7 @@
           <Property Name="IdJob" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
           <Property Name="DisplayText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ImageName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IsMultiAns" Type="Boolean" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1947,6 +1949,7 @@
           <EntitySetMapping Name="dt307_Questions">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt307_Questions">
               <MappingFragment StoreEntitySet="dt307_Questions">
+                <ScalarProperty Name="IsMultiAns" ColumnName="IsMultiAns" />
                 <ScalarProperty Name="ImageName" ColumnName="ImageName" />
                 <ScalarProperty Name="DisplayText" ColumnName="DisplayText" />
                 <ScalarProperty Name="IdJob" ColumnName="IdJob" />
