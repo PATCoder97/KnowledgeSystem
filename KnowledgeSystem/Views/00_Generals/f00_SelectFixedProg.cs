@@ -47,7 +47,7 @@ namespace KnowledgeSystem.Views._00_Generals
             Close();
         }
 
-        private void btnManage_Click(object sender, EventArgs e)
+        private void txbProgManager_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             f00_FixedProgMain fixedProgMain = new f00_FixedProgMain();
             fixedProgMain.ShowDialog();

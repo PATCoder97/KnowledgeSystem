@@ -23,5 +23,6 @@ namespace DataAccessLayer
         public string NextStepProg { get; set; }
         public string Desc { get; set; }
         public int IdType { get; set; }
+        public bool Confidential { get; set; }
     }
 }

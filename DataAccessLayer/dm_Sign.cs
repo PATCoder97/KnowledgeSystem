@@ -26,5 +26,6 @@ namespace DataAccessLayer
         public Nullable<double> FontSize { get; set; }
         public string FontType { get; set; }
         public string FontColor { get; set; }
+        public int Prioritize { get; set; }
     }
 }

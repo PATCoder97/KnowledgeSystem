@@ -295,7 +295,7 @@
             this.gvProgress.OptionsView.EnableAppearanceOddRow = true;
             this.gvProgress.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
             this.gvProgress.OptionsView.ShowGroupPanel = false;
-            this.gvProgress.OptionsView.ShowIndicator = false;
+            this.gvProgress.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gridView_CustomDrawRowIndicator);
             this.gvProgress.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gvProgress_CellValueChanged);
             // 
             // gridColumn4
@@ -479,6 +479,7 @@
             this.gvFiles.OptionsView.EnableAppearanceOddRow = true;
             this.gvFiles.OptionsView.ShowColumnHeaders = false;
             this.gvFiles.OptionsView.ShowGroupPanel = false;
+            this.gvFiles.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gridView_CustomDrawRowIndicator);
             // 
             // gridColumn11
             // 

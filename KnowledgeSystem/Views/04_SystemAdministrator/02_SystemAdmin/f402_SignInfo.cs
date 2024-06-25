@@ -89,6 +89,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
         private void LockControl()
         {
             txbDisplayName.Enabled = false;
+            txbPrioritize.Enabled = false;
             cbbType.Enabled = false;
             txbFont.Enabled = false;
             colorFont.Enabled = false;
@@ -232,6 +233,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
                     imgHgt = ImageSign.Height;
 
                     txbDisplayName.EditValue = signInfo.DisplayName;
+                    txbPrioritize.EditValue = signInfo.Prioritize;
 
                     var fontName = signInfo.FontName;
                     var fontSize = (byte)signInfo.FontSize;
@@ -323,6 +325,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
                 signInfo.FontSize = font.Size;
                 signInfo.FontType = font.Style.ToString();
                 signInfo.FontColor = $"#{dateTimeColor.R.ToString("X2")}{dateTimeColor.G.ToString("X2")}{dateTimeColor.B.ToString("X2")}";
+                signInfo.Prioritize = Convert.ToInt16(txbPrioritize.EditValue?.ToString().Trim());
 
                 if (!string.IsNullOrEmpty(imgSignPath))
                 {

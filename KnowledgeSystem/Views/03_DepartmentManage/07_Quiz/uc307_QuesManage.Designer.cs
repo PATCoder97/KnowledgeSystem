@@ -34,17 +34,19 @@
             this.gvAns = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcData = new DevExpress.XtraGrid.GridControl();
             this.gvQues = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gColId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnAdd = new DevExpress.XtraBars.BarButtonItem();
-            this.btnReload = new DevExpress.XtraBars.BarButtonItem();
             this.btnExportExcel = new DevExpress.XtraBars.BarButtonItem();
             this.barEditItem1 = new DevExpress.XtraBars.BarEditItem();
             this.txbJob = new DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit();
@@ -52,6 +54,7 @@
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.btnReload = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -84,7 +87,9 @@
             this.gvAns.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumn5,
             this.gridColumn10,
-            this.gridColumn11});
+            this.gridColumn2,
+            this.gridColumn11,
+            this.gridColumn12});
             this.gvAns.GridControl = this.gcData;
             this.gvAns.Name = "gvAns";
             this.gvAns.OptionsCustomization.AllowSort = false;
@@ -92,6 +97,7 @@
             this.gvAns.OptionsView.EnableAppearanceOddRow = true;
             this.gvAns.OptionsView.ShowGroupPanel = false;
             this.gvAns.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gridView_CustomDrawRowIndicator);
+            this.gvAns.CustomUnboundColumnData += new DevExpress.XtraGrid.Views.Base.CustomColumnDataEventHandler(this.gridView_CustomUnboundColumnData);
             // 
             // gridColumn5
             // 
@@ -107,13 +113,28 @@
             this.gridColumn10.Visible = true;
             this.gridColumn10.VisibleIndex = 0;
             // 
+            // gridColumn2
+            // 
+            this.gridColumn2.Caption = "有圖片";
+            this.gridColumn2.FieldName = "HaveImg";
+            this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.UnboundDataType = typeof(bool);
+            this.gridColumn2.Visible = true;
+            this.gridColumn2.VisibleIndex = 1;
+            // 
             // gridColumn11
             // 
             this.gridColumn11.Caption = "正確答案";
             this.gridColumn11.FieldName = "TrueAns";
             this.gridColumn11.Name = "gridColumn11";
             this.gridColumn11.Visible = true;
-            this.gridColumn11.VisibleIndex = 1;
+            this.gridColumn11.VisibleIndex = 2;
+            // 
+            // gridColumn12
+            // 
+            this.gridColumn12.Caption = "ImageName";
+            this.gridColumn12.FieldName = "ImageName";
+            this.gridColumn12.Name = "gridColumn12";
             // 
             // gcData
             // 
@@ -157,7 +178,8 @@
             this.gColId,
             this.gridColumn6,
             this.gridColumn3,
-            this.gridColumn1});
+            this.gridColumn1,
+            this.gridColumn4});
             this.gvQues.GridControl = this.gcData;
             this.gvQues.Name = "gvQues";
             this.gvQues.OptionsDetail.ShowDetailTabs = false;
@@ -172,6 +194,7 @@
             this.gvQues.MasterRowGetChildList += new DevExpress.XtraGrid.Views.Grid.MasterRowGetChildListEventHandler(this.gvQues_MasterRowGetChildList);
             this.gvQues.MasterRowGetRelationName += new DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationNameEventHandler(this.gvQues_MasterRowGetRelationName);
             this.gvQues.MasterRowGetRelationCount += new DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationCountEventHandler(this.gvQues_MasterRowGetRelationCount);
+            this.gvQues.CustomUnboundColumnData += new DevExpress.XtraGrid.Views.Base.CustomColumnDataEventHandler(this.gridView_CustomUnboundColumnData);
             // 
             // gColId
             // 
@@ -195,6 +218,7 @@
             this.gridColumn3.Caption = "有圖片";
             this.gridColumn3.FieldName = "HaveImg";
             this.gridColumn3.Name = "gridColumn3";
+            this.gridColumn3.UnboundDataType = typeof(bool);
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 1;
             this.gridColumn3.Width = 104;
@@ -207,6 +231,12 @@
             this.gridColumn1.Visible = true;
             this.gridColumn1.VisibleIndex = 2;
             this.gridColumn1.Width = 107;
+            // 
+            // gridColumn4
+            // 
+            this.gridColumn4.Caption = "ImageName";
+            this.gridColumn4.FieldName = "ImageName";
+            this.gridColumn4.Name = "gridColumn4";
             // 
             // barManagerTP
             // 
@@ -250,9 +280,9 @@
             this.bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnAdd, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnReload, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnExportExcel, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.Width, this.barEditItem1, "", true, true, true, 209)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.Width, this.barEditItem1, "", true, true, true, 209),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnReload, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawDragBorder = false;
             this.bar2.OptionsBar.MultiLine = true;
@@ -270,17 +300,6 @@
             this.btnAdd.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdd.ItemAppearance.Normal.Options.UseFont = true;
             this.btnAdd.Name = "btnAdd";
-            // 
-            // btnReload
-            // 
-            this.btnReload.Caption = "重新整理";
-            this.btnReload.Id = 1;
-            this.btnReload.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnReload.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
-            this.btnReload.ItemAppearance.Hovered.Options.UseForeColor = true;
-            this.btnReload.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReload.ItemAppearance.Normal.Options.UseFont = true;
-            this.btnReload.Name = "btnReload";
             // 
             // btnExportExcel
             // 
@@ -357,6 +376,18 @@
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
             this.gridColumn9.VisibleIndex = 2;
+            // 
+            // btnReload
+            // 
+            this.btnReload.Caption = "重新整理";
+            this.btnReload.Id = 1;
+            this.btnReload.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnReload.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnReload.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnReload.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReload.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnReload.Name = "btnReload";
+            this.btnReload.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnReload_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -479,5 +510,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
     }
 }

@@ -16,6 +16,8 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using Color = System.Drawing.Color;
+using Font = System.Drawing.Font;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
 {
@@ -26,6 +28,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             InitializeComponent();
             InitializeIcon();
         }
+
+        Font fontUI14 = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
 
         string idDept2word = TPConfigs.LoginUser.IdDepartment.Substring(0, 2);
 
@@ -97,6 +101,18 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             return IsOK;
         }
 
+        bool cal(Int32 _Width, GridView _View)
+        {
+            _View.IndicatorWidth = _View.IndicatorWidth < _Width ? _Width : _View.IndicatorWidth;
+            return true;
+        }
+
+        void IndicatorDraw(RowIndicatorCustomDrawEventArgs e, Color color)
+        {
+            e.Info.Appearance.Font = fontUI14;
+            e.Info.Appearance.ForeColor = color;
+        }
+
         private void btnAddFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
@@ -125,6 +141,43 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             sourceAtts.DataSource = attachments;
             lbCountFile.Text = $"共{attachments.Count}份文件";
             gvFiles.RefreshData();
+        }
+
+        private void gridView_CustomDrawRowIndicator(object sender, RowIndicatorCustomDrawEventArgs e)
+        {
+            GridView view = sender as GridView;
+
+            Color color = view.Appearance.HeaderPanel.ForeColor;
+
+            if (!view.IsGroupRow(e.RowHandle))
+            {
+                if (e.Info.IsRowIndicator)
+                {
+                    if (e.RowHandle < 0)
+                    {
+                        e.Info.ImageIndex = 0;
+                        e.Info.DisplayText = string.Empty;
+                    }
+                    else
+                    {
+                        e.Info.ImageIndex = -1;
+                        e.Info.DisplayText = (e.RowHandle + 1).ToString();
+                    }
+                    IndicatorDraw(e, color);
+                    SizeF _Size = e.Graphics.MeasureString(e.Info.DisplayText, fontUI14);
+                    Int32 _Width = Convert.ToInt32(_Size.Width) + 20;
+                    BeginInvoke(new MethodInvoker(delegate { cal(_Width, view); }));
+                }
+            }
+            else
+            {
+                e.Info.ImageIndex = -1;
+                e.Info.DisplayText = string.Format("[{0}]", (e.RowHandle * -1));
+                IndicatorDraw(e, color);
+                SizeF _Size = e.Graphics.MeasureString(e.Info.DisplayText, fontUI14);
+                Int32 _Width = Convert.ToInt32(_Size.Width) + 20;
+                BeginInvoke(new MethodInvoker(delegate { cal(_Width, view); }));
+            }
         }
 
         private void f306_NewSignDoc_Load(object sender, EventArgs e)

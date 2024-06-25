@@ -63,6 +63,8 @@
             this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.txbPrioritize = new DevExpress.XtraEditors.TextEdit();
+            this.layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -88,6 +90,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbPrioritize.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).BeginInit();
             this.SuspendLayout();
             // 
             // barManagerTP
@@ -186,7 +190,7 @@
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 371);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 407);
             this.barDockControlBottom.Manager = this.barManagerTP;
             this.barDockControlBottom.Size = new System.Drawing.Size(795, 0);
             // 
@@ -196,7 +200,7 @@
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 49);
             this.barDockControlLeft.Manager = this.barManagerTP;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 322);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 358);
             // 
             // barDockControlRight
             // 
@@ -204,7 +208,7 @@
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
             this.barDockControlRight.Location = new System.Drawing.Point(795, 49);
             this.barDockControlRight.Manager = this.barManagerTP;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 322);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 358);
             // 
             // layoutControl1
             // 
@@ -218,30 +222,31 @@
             this.layoutControl1.Controls.Add(this.txbX);
             this.layoutControl1.Controls.Add(this.txbY);
             this.layoutControl1.Controls.Add(this.txbWid);
+            this.layoutControl1.Controls.Add(this.txbPrioritize);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(424, 268, 650, 400);
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(795, 322);
+            this.layoutControl1.Size = new System.Drawing.Size(795, 358);
             this.layoutControl1.TabIndex = 4;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // txbDisplayName
             // 
-            this.txbDisplayName.Location = new System.Drawing.Point(79, 12);
+            this.txbDisplayName.Location = new System.Drawing.Point(86, 12);
             this.txbDisplayName.MenuManager = this.barManagerTP;
             this.txbDisplayName.Name = "txbDisplayName";
             this.txbDisplayName.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txbDisplayName.Properties.Appearance.Options.UseFont = true;
-            this.txbDisplayName.Size = new System.Drawing.Size(225, 32);
+            this.txbDisplayName.Size = new System.Drawing.Size(183, 32);
             this.txbDisplayName.StyleController = this.layoutControl1;
             this.txbDisplayName.TabIndex = 10;
             // 
             // colorFont
             // 
             this.colorFont.EditValue = System.Drawing.Color.Empty;
-            this.colorFont.Location = new System.Drawing.Point(82, 151);
+            this.colorFont.Location = new System.Drawing.Point(89, 187);
             this.colorFont.MenuManager = this.barManagerTP;
             this.colorFont.Name = "colorFont";
             this.colorFont.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -249,14 +254,14 @@
             this.colorFont.Properties.AutomaticColor = System.Drawing.Color.Black;
             this.colorFont.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.colorFont.Size = new System.Drawing.Size(219, 32);
+            this.colorFont.Size = new System.Drawing.Size(177, 32);
             this.colorFont.StyleController = this.layoutControl1;
             this.colorFont.TabIndex = 9;
             this.colorFont.EditValueChanged += new System.EventHandler(this.colorFont_EditValueChanged);
             // 
             // txbHgt
             // 
-            this.txbHgt.Location = new System.Drawing.Point(222, 266);
+            this.txbHgt.Location = new System.Drawing.Point(212, 302);
             this.txbHgt.MenuManager = this.barManagerTP;
             this.txbHgt.Name = "txbHgt";
             this.txbHgt.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -266,13 +271,13 @@
             this.txbHgt.Properties.MaskSettings.Set("placeholder", '\0');
             this.txbHgt.Properties.MaskSettings.Set("mask", "\\d+");
             this.txbHgt.Properties.UseMaskAsDisplayFormat = true;
-            this.txbHgt.Size = new System.Drawing.Size(75, 32);
+            this.txbHgt.Size = new System.Drawing.Size(50, 32);
             this.txbHgt.StyleController = this.layoutControl1;
             this.txbHgt.TabIndex = 8;
             // 
             // txbFont
             // 
-            this.txbFont.Location = new System.Drawing.Point(82, 115);
+            this.txbFont.Location = new System.Drawing.Point(89, 151);
             this.txbFont.MenuManager = this.barManagerTP;
             this.txbFont.Name = "txbFont";
             this.txbFont.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -280,7 +285,7 @@
             this.txbFont.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
             this.txbFont.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.txbFont.Size = new System.Drawing.Size(219, 32);
+            this.txbFont.Size = new System.Drawing.Size(177, 32);
             this.txbFont.StyleController = this.layoutControl1;
             this.txbFont.TabIndex = 7;
             this.txbFont.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txbFont_ButtonClick);
@@ -288,16 +293,16 @@
             // lbInfo
             // 
             this.lbInfo.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbInfo.Location = new System.Drawing.Point(313, 12);
+            this.lbInfo.Location = new System.Drawing.Point(278, 12);
             this.lbInfo.Name = "lbInfo";
-            this.lbInfo.Size = new System.Drawing.Size(470, 32);
+            this.lbInfo.Size = new System.Drawing.Size(505, 32);
             this.lbInfo.TabIndex = 6;
             this.lbInfo.Text = "Image Wid x Hgt";
             this.lbInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // cbbType
             // 
-            this.cbbType.Location = new System.Drawing.Point(79, 48);
+            this.cbbType.Location = new System.Drawing.Point(86, 48);
             this.cbbType.MenuManager = this.barManagerTP;
             this.cbbType.Name = "cbbType";
             this.cbbType.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -307,7 +312,7 @@
             this.cbbType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbbType.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cbbType.Size = new System.Drawing.Size(225, 32);
+            this.cbbType.Size = new System.Drawing.Size(183, 32);
             this.cbbType.StyleController = this.layoutControl1;
             this.cbbType.TabIndex = 5;
             this.cbbType.SelectedIndexChanged += new System.EventHandler(this.cbbType_SelectedIndexChanged);
@@ -315,9 +320,9 @@
             // picSign
             // 
             this.picSign.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picSign.Location = new System.Drawing.Point(313, 48);
+            this.picSign.Location = new System.Drawing.Point(278, 48);
             this.picSign.Name = "picSign";
-            this.picSign.Size = new System.Drawing.Size(470, 262);
+            this.picSign.Size = new System.Drawing.Size(505, 298);
             this.picSign.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picSign.TabIndex = 4;
             this.picSign.TabStop = false;
@@ -325,7 +330,7 @@
             // 
             // txbX
             // 
-            this.txbX.Location = new System.Drawing.Point(82, 187);
+            this.txbX.Location = new System.Drawing.Point(89, 223);
             this.txbX.Name = "txbX";
             this.txbX.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txbX.Properties.Appearance.Options.UseFont = true;
@@ -334,14 +339,14 @@
             this.txbX.Properties.MaskSettings.Set("placeholder", '\0');
             this.txbX.Properties.MaskSettings.Set("mask", "\\d+");
             this.txbX.Properties.UseMaskAsDisplayFormat = true;
-            this.txbX.Size = new System.Drawing.Size(76, 32);
+            this.txbX.Size = new System.Drawing.Size(52, 32);
             this.txbX.StyleController = this.layoutControl1;
             this.txbX.TabIndex = 8;
             this.txbX.EditValueChanged += new System.EventHandler(this.txbX_EditValueChanged);
             // 
             // txbY
             // 
-            this.txbY.Location = new System.Drawing.Point(224, 187);
+            this.txbY.Location = new System.Drawing.Point(214, 223);
             this.txbY.Name = "txbY";
             this.txbY.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txbY.Properties.Appearance.Options.UseFont = true;
@@ -350,14 +355,14 @@
             this.txbY.Properties.MaskSettings.Set("placeholder", '\0');
             this.txbY.Properties.MaskSettings.Set("mask", "\\d+");
             this.txbY.Properties.UseMaskAsDisplayFormat = true;
-            this.txbY.Size = new System.Drawing.Size(77, 32);
+            this.txbY.Size = new System.Drawing.Size(52, 32);
             this.txbY.StyleController = this.layoutControl1;
             this.txbY.TabIndex = 8;
             this.txbY.EditValueChanged += new System.EventHandler(this.txbY_EditValueChanged);
             // 
             // txbWid
             // 
-            this.txbWid.Location = new System.Drawing.Point(82, 266);
+            this.txbWid.Location = new System.Drawing.Point(89, 302);
             this.txbWid.Name = "txbWid";
             this.txbWid.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txbWid.Properties.Appearance.Options.UseFont = true;
@@ -366,7 +371,7 @@
             this.txbWid.Properties.MaskSettings.Set("placeholder", '\0');
             this.txbWid.Properties.MaskSettings.Set("mask", "\\d+");
             this.txbWid.Properties.UseMaskAsDisplayFormat = true;
-            this.txbWid.Size = new System.Drawing.Size(74, 32);
+            this.txbWid.Size = new System.Drawing.Size(50, 32);
             this.txbWid.StyleController = this.layoutControl1;
             this.txbWid.TabIndex = 8;
             this.txbWid.EditValueChanged += new System.EventHandler(this.txbWid_EditValueChanged);
@@ -381,9 +386,10 @@
             this.layoutControlGroup2,
             this.layoutControlItem10,
             this.layoutControlItem1,
-            this.layoutControlItem3});
+            this.layoutControlItem3,
+            this.layoutControlItem11});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(795, 322);
+            this.Root.Size = new System.Drawing.Size(795, 358);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem2
@@ -394,9 +400,9 @@
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 36);
             this.layoutControlItem2.Name = "layoutControlItem2";
             this.layoutControlItem2.Padding = new DevExpress.XtraLayout.Utils.Padding(7, 7, 2, 2);
-            this.layoutControlItem2.Size = new System.Drawing.Size(301, 36);
+            this.layoutControlItem2.Size = new System.Drawing.Size(266, 36);
             this.layoutControlItem2.Text = "類別";
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(50, 24);
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(57, 24);
             // 
             // layoutControlGroup1
             // 
@@ -408,10 +414,10 @@
             this.layoutControlItem6,
             this.layoutControlItem9,
             this.layoutControlItem7});
-            this.layoutControlGroup1.Location = new System.Drawing.Point(0, 72);
+            this.layoutControlGroup1.Location = new System.Drawing.Point(0, 108);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
             this.layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 5, 5);
-            this.layoutControlGroup1.Size = new System.Drawing.Size(301, 147);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(266, 147);
             this.layoutControlGroup1.Text = "日期字體";
             // 
             // layoutControlItem4
@@ -421,9 +427,9 @@
             this.layoutControlItem4.Control = this.txbFont;
             this.layoutControlItem4.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(285, 36);
+            this.layoutControlItem4.Size = new System.Drawing.Size(250, 36);
             this.layoutControlItem4.Text = "字體";
-            this.layoutControlItem4.TextSize = new System.Drawing.Size(50, 24);
+            this.layoutControlItem4.TextSize = new System.Drawing.Size(57, 24);
             // 
             // layoutControlItem6
             // 
@@ -434,9 +440,9 @@
             this.layoutControlItem6.CustomizationFormText = "X位置";
             this.layoutControlItem6.Location = new System.Drawing.Point(0, 72);
             this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(142, 36);
+            this.layoutControlItem6.Size = new System.Drawing.Size(125, 36);
             this.layoutControlItem6.Text = "X位置";
-            this.layoutControlItem6.TextSize = new System.Drawing.Size(50, 24);
+            this.layoutControlItem6.TextSize = new System.Drawing.Size(57, 24);
             // 
             // layoutControlItem9
             // 
@@ -445,9 +451,9 @@
             this.layoutControlItem9.Control = this.colorFont;
             this.layoutControlItem9.Location = new System.Drawing.Point(0, 36);
             this.layoutControlItem9.Name = "layoutControlItem9";
-            this.layoutControlItem9.Size = new System.Drawing.Size(285, 36);
+            this.layoutControlItem9.Size = new System.Drawing.Size(250, 36);
             this.layoutControlItem9.Text = "顏色";
-            this.layoutControlItem9.TextSize = new System.Drawing.Size(50, 24);
+            this.layoutControlItem9.TextSize = new System.Drawing.Size(57, 24);
             // 
             // layoutControlItem7
             // 
@@ -456,11 +462,11 @@
             this.layoutControlItem7.Control = this.txbY;
             this.layoutControlItem7.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
             this.layoutControlItem7.CustomizationFormText = "高度";
-            this.layoutControlItem7.Location = new System.Drawing.Point(142, 72);
+            this.layoutControlItem7.Location = new System.Drawing.Point(125, 72);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(143, 36);
+            this.layoutControlItem7.Size = new System.Drawing.Size(125, 36);
             this.layoutControlItem7.Text = "Y位置";
-            this.layoutControlItem7.TextSize = new System.Drawing.Size(50, 24);
+            this.layoutControlItem7.TextSize = new System.Drawing.Size(57, 24);
             // 
             // layoutControlGroup2
             // 
@@ -470,10 +476,10 @@
             this.layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem8,
             this.layoutControlItem5});
-            this.layoutControlGroup2.Location = new System.Drawing.Point(0, 219);
+            this.layoutControlGroup2.Location = new System.Drawing.Point(0, 255);
             this.layoutControlGroup2.Name = "layoutControlGroup2";
             this.layoutControlGroup2.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 9, 9, 9);
-            this.layoutControlGroup2.Size = new System.Drawing.Size(301, 83);
+            this.layoutControlGroup2.Size = new System.Drawing.Size(266, 83);
             this.layoutControlGroup2.Text = "密封尺寸";
             // 
             // layoutControlItem8
@@ -485,20 +491,20 @@
             this.layoutControlItem8.CustomizationFormText = "高度";
             this.layoutControlItem8.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(140, 36);
+            this.layoutControlItem8.Size = new System.Drawing.Size(123, 36);
             this.layoutControlItem8.Text = "寬度";
-            this.layoutControlItem8.TextSize = new System.Drawing.Size(50, 24);
+            this.layoutControlItem8.TextSize = new System.Drawing.Size(57, 24);
             // 
             // layoutControlItem5
             // 
             this.layoutControlItem5.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.layoutControlItem5.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem5.Control = this.txbHgt;
-            this.layoutControlItem5.Location = new System.Drawing.Point(140, 0);
+            this.layoutControlItem5.Location = new System.Drawing.Point(123, 0);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(141, 36);
+            this.layoutControlItem5.Size = new System.Drawing.Size(123, 36);
             this.layoutControlItem5.Text = "高度";
-            this.layoutControlItem5.TextSize = new System.Drawing.Size(50, 24);
+            this.layoutControlItem5.TextSize = new System.Drawing.Size(57, 24);
             // 
             // layoutControlItem10
             // 
@@ -508,33 +514,63 @@
             this.layoutControlItem10.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem10.Name = "layoutControlItem10";
             this.layoutControlItem10.Padding = new DevExpress.XtraLayout.Utils.Padding(7, 7, 2, 2);
-            this.layoutControlItem10.Size = new System.Drawing.Size(301, 36);
+            this.layoutControlItem10.Size = new System.Drawing.Size(266, 36);
             this.layoutControlItem10.Text = "名稱";
-            this.layoutControlItem10.TextSize = new System.Drawing.Size(50, 24);
+            this.layoutControlItem10.TextSize = new System.Drawing.Size(57, 24);
             // 
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.picSign;
-            this.layoutControlItem1.Location = new System.Drawing.Point(301, 36);
+            this.layoutControlItem1.Location = new System.Drawing.Point(266, 36);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(474, 266);
+            this.layoutControlItem1.Size = new System.Drawing.Size(509, 302);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
             // layoutControlItem3
             // 
             this.layoutControlItem3.Control = this.lbInfo;
-            this.layoutControlItem3.Location = new System.Drawing.Point(301, 0);
+            this.layoutControlItem3.Location = new System.Drawing.Point(266, 0);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(474, 36);
+            this.layoutControlItem3.Size = new System.Drawing.Size(509, 36);
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextVisible = false;
+            // 
+            // txbPrioritize
+            // 
+            this.txbPrioritize.EditValue = "9";
+            this.txbPrioritize.Location = new System.Drawing.Point(86, 84);
+            this.txbPrioritize.Name = "txbPrioritize";
+            this.txbPrioritize.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbPrioritize.Properties.Appearance.Options.UseFont = true;
+            this.txbPrioritize.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.RegularMaskManager));
+            this.txbPrioritize.Properties.MaskSettings.Set("MaskManagerSignature", "ignoreMaskBlank=True");
+            this.txbPrioritize.Properties.MaskSettings.Set("placeholder", '\0');
+            this.txbPrioritize.Properties.MaskSettings.Set("mask", "\\d+");
+            this.txbPrioritize.Properties.UseMaskAsDisplayFormat = true;
+            this.txbPrioritize.Size = new System.Drawing.Size(183, 32);
+            this.txbPrioritize.StyleController = this.layoutControl1;
+            this.txbPrioritize.TabIndex = 8;
+            // 
+            // layoutControlItem11
+            // 
+            this.layoutControlItem11.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.layoutControlItem11.AppearanceItemCaption.Options.UseFont = true;
+            this.layoutControlItem11.Control = this.txbPrioritize;
+            this.layoutControlItem11.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.layoutControlItem11.CustomizationFormText = "高度";
+            this.layoutControlItem11.Location = new System.Drawing.Point(0, 72);
+            this.layoutControlItem11.Name = "layoutControlItem11";
+            this.layoutControlItem11.Padding = new DevExpress.XtraLayout.Utils.Padding(7, 7, 2, 2);
+            this.layoutControlItem11.Size = new System.Drawing.Size(266, 36);
+            this.layoutControlItem11.Text = "優先級";
+            this.layoutControlItem11.TextSize = new System.Drawing.Size(57, 24);
             // 
             // f402_SignInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(795, 371);
+            this.ClientSize = new System.Drawing.Size(795, 407);
             this.Controls.Add(this.layoutControl1);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
@@ -571,6 +607,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbPrioritize.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem11)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -611,5 +649,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem9;
         private DevExpress.XtraEditors.TextEdit txbDisplayName;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
+        private DevExpress.XtraEditors.TextEdit txbPrioritize;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem11;
     }
 }

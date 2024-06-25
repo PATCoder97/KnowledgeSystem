@@ -118,7 +118,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
                                  FontName = data.FontName,
                                  FontSize = data.FontSize,
                                  FontType = data.FontType,
-                                 FontColor = data.FontColor
+                                 FontColor = data.FontColor,
+                                 Prioritize = data.Prioritize
                              }).ToList();
 
             sourceSigns.DataSource = signInfos;

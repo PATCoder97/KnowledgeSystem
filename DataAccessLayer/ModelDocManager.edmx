@@ -128,6 +128,7 @@
           <Property Name="FontSize" Type="float" />
           <Property Name="FontType" Type="varchar" MaxLength="32" />
           <Property Name="FontColor" Type="varchar" MaxLength="7" />
+          <Property Name="Prioritize" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="dm_SignUsers">
           <Key>
@@ -485,6 +486,7 @@
           <Property Name="NextStepProg" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="Desc" Type="nvarchar" MaxLength="255" />
           <Property Name="IdType" Type="int" Nullable="false" />
+          <Property Name="Confidential" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="dt306_BaseAtts">
           <Key>
@@ -695,7 +697,6 @@
           <EntitySet Name="dt202_Attach" EntityType="DBDocumentManagementSystemModel.dt202_Attach" />
           <EntitySet Name="dt207_Attachment" EntityType="DBDocumentManagementSystemModel.dt207_Attachment" />
           <EntitySet Name="dt202_Base" EntityType="DBDocumentManagementSystemModel.dt202_Base" />
-          <EntitySet Name="dm_Sign" EntityType="DBDocumentManagementSystemModel.dm_Sign" />
           <EntitySet Name="dm_DeptGroups" EntityType="DBDocumentManagementSystemModel.dm_DeptGroups" />
           <EntitySet Name="dm_DrivingLic" EntityType="DBDocumentManagementSystemModel.dm_DrivingLic" />
           <EntitySet Name="dt201_Base" EntityType="DBDocumentManagementSystemModel.dt201_Base" />
@@ -707,13 +708,14 @@
           <EntitySet Name="dt306_BaseAtts" EntityType="DBDocumentManagementSystemModel.dt306_BaseAtts" />
           <EntitySet Name="dt306_ProgInfo" EntityType="DBDocumentManagementSystemModel.dt306_ProgInfo" />
           <EntitySet Name="dt306_Progress" EntityType="DBDocumentManagementSystemModel.dt306_Progress" />
-          <EntitySet Name="dt306_Base" EntityType="DBDocumentManagementSystemModel.dt306_Base" />
           <EntitySet Name="dm_FixedProgress" EntityType="DBDocumentManagementSystemModel.dm_FixedProgress" />
           <EntitySet Name="dt306_Type" EntityType="DBDocumentManagementSystemModel.dt306_Type" />
           <EntitySet Name="dt306_SignRole" EntityType="DBDocumentManagementSystemModel.dt306_SignRole" />
           <EntitySet Name="dt307_Answers" EntityType="DBDocumentManagementSystemModel.dt307_Answers" />
           <EntitySet Name="dt307_JobQuesManage" EntityType="DBDocumentManagementSystemModel.dt307_JobQuesManage" />
           <EntitySet Name="dt307_Questions" EntityType="DBDocumentManagementSystemModel.dt307_Questions" />
+          <EntitySet Name="dm_Sign" EntityType="DBDocumentManagementSystemModel.dm_Sign" />
+          <EntitySet Name="dt306_Base" EntityType="DBDocumentManagementSystemModel.dt306_Base" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -1106,23 +1108,6 @@
           <Property Name="UsrUpload" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="IsDelete" Type="Boolean" Nullable="false" />
         </EntityType>
-        <EntityType Name="dm_Sign">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="ImgName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="ImgType" Type="Byte" Nullable="false" />
-          <Property Name="WidImg" Type="Int32" />
-          <Property Name="HgtImg" Type="Int32" />
-          <Property Name="X" Type="Int32" />
-          <Property Name="Y" Type="Int32" />
-          <Property Name="FontName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-          <Property Name="FontSize" Type="Double" />
-          <Property Name="FontType" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-          <Property Name="FontColor" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="dm_DeptGroups">
           <Key>
             <PropertyRef Name="Id" />
@@ -1238,20 +1223,6 @@
           <Property Name="IdUsr" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="IdRole" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="dt306_Base">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="UploadUsr" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="UploadDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="IsProcess" Type="Boolean" Nullable="false" />
-          <Property Name="IsCancel" Type="Boolean" Nullable="false" />
-          <Property Name="NextStepProg" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Desc" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="IdType" Type="Int32" Nullable="false" />
-        </EntityType>
         <EntityType Name="dm_FixedProgress">
           <Key>
             <PropertyRef Name="Id" />
@@ -1304,6 +1275,39 @@
           <Property Name="DisplayText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ImageName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="IsMultiAns" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="dm_Sign">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ImgName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="ImgType" Type="Byte" Nullable="false" />
+          <Property Name="WidImg" Type="Int32" />
+          <Property Name="HgtImg" Type="Int32" />
+          <Property Name="X" Type="Int32" />
+          <Property Name="Y" Type="Int32" />
+          <Property Name="FontName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="FontSize" Type="Double" />
+          <Property Name="FontType" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="FontColor" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="Prioritize" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt306_Base">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="UploadUsr" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="UploadDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IsProcess" Type="Boolean" Nullable="false" />
+          <Property Name="IsCancel" Type="Boolean" Nullable="false" />
+          <Property Name="NextStepProg" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Desc" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IdType" Type="Int32" Nullable="false" />
+          <Property Name="Confidential" Type="Boolean" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1739,24 +1743,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dm_Sign">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_Sign">
-              <MappingFragment StoreEntitySet="dm_Sign">
-                <ScalarProperty Name="FontColor" ColumnName="FontColor" />
-                <ScalarProperty Name="FontType" ColumnName="FontType" />
-                <ScalarProperty Name="FontSize" ColumnName="FontSize" />
-                <ScalarProperty Name="FontName" ColumnName="FontName" />
-                <ScalarProperty Name="Y" ColumnName="Y" />
-                <ScalarProperty Name="X" ColumnName="X" />
-                <ScalarProperty Name="HgtImg" ColumnName="HgtImg" />
-                <ScalarProperty Name="WidImg" ColumnName="WidImg" />
-                <ScalarProperty Name="ImgType" ColumnName="ImgType" />
-                <ScalarProperty Name="ImgName" ColumnName="ImgName" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="dm_DeptGroups">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_DeptGroups">
               <MappingFragment StoreEntitySet="dm_DeptGroups">
@@ -1883,21 +1869,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dt306_Base">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt306_Base">
-              <MappingFragment StoreEntitySet="dt306_Base">
-                <ScalarProperty Name="IdType" ColumnName="IdType" />
-                <ScalarProperty Name="Desc" ColumnName="Desc" />
-                <ScalarProperty Name="NextStepProg" ColumnName="NextStepProg" />
-                <ScalarProperty Name="IsCancel" ColumnName="IsCancel" />
-                <ScalarProperty Name="IsProcess" ColumnName="IsProcess" />
-                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
-                <ScalarProperty Name="UploadUsr" ColumnName="UploadUsr" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="dm_FixedProgress">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_FixedProgress">
               <MappingFragment StoreEntitySet="dm_FixedProgress">
@@ -1953,6 +1924,41 @@
                 <ScalarProperty Name="ImageName" ColumnName="ImageName" />
                 <ScalarProperty Name="DisplayText" ColumnName="DisplayText" />
                 <ScalarProperty Name="IdJob" ColumnName="IdJob" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dm_Sign">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_Sign">
+              <MappingFragment StoreEntitySet="dm_Sign">
+                <ScalarProperty Name="Prioritize" ColumnName="Prioritize" />
+                <ScalarProperty Name="FontColor" ColumnName="FontColor" />
+                <ScalarProperty Name="FontType" ColumnName="FontType" />
+                <ScalarProperty Name="FontSize" ColumnName="FontSize" />
+                <ScalarProperty Name="FontName" ColumnName="FontName" />
+                <ScalarProperty Name="Y" ColumnName="Y" />
+                <ScalarProperty Name="X" ColumnName="X" />
+                <ScalarProperty Name="HgtImg" ColumnName="HgtImg" />
+                <ScalarProperty Name="WidImg" ColumnName="WidImg" />
+                <ScalarProperty Name="ImgType" ColumnName="ImgType" />
+                <ScalarProperty Name="ImgName" ColumnName="ImgName" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt306_Base">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt306_Base">
+              <MappingFragment StoreEntitySet="dt306_Base">
+                <ScalarProperty Name="Confidential" ColumnName="Confidential" />
+                <ScalarProperty Name="IdType" ColumnName="IdType" />
+                <ScalarProperty Name="Desc" ColumnName="Desc" />
+                <ScalarProperty Name="NextStepProg" ColumnName="NextStepProg" />
+                <ScalarProperty Name="IsCancel" ColumnName="IsCancel" />
+                <ScalarProperty Name="IsProcess" ColumnName="IsProcess" />
+                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
+                <ScalarProperty Name="UploadUsr" ColumnName="UploadUsr" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

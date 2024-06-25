@@ -40,6 +40,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
         RefreshHelper helper;
         BindingSource sourceQues = new BindingSource();
 
+        string idJobSelect = "";
 
         bool cal(Int32 _Width, GridView _View)
         {
@@ -144,9 +145,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
         private void txbJob_EditValueChanged(object sender, EventArgs e)
         {
             SearchLookUpEdit editor = (SearchLookUpEdit)sender;
-            string idJob = editor.EditValue.ToString();
+            idJobSelect = editor.EditValue.ToString();
 
-            LoadQues(idJob);
+            LoadQues(idJobSelect);
         }
 
         private void gvQues_MasterRowEmpty(object sender, DevExpress.XtraGrid.Views.Grid.MasterRowEmptyEventArgs e)
@@ -228,6 +229,23 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
                 SizeF _Size = e.Graphics.MeasureString(e.Info.DisplayText, fontUI14);
                 Int32 _Width = Convert.ToInt32(_Size.Width) + 20;
                 BeginInvoke(new MethodInvoker(delegate { cal(_Width, view); }));
+            }
+        }
+
+        private void btnReload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            LoadQues(idJobSelect);
+        }
+
+        private void gridView_CustomUnboundColumnData(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDataEventArgs e)
+        {
+            GridView view = sender as GridView;
+
+            if (e.Column.FieldName == "HaveImg" && e.IsGetData)
+            {
+                string imgName = view.GetListSourceRowCellValue(e.ListSourceRowIndex, "ImageName")?.ToString();
+
+                e.Value = !string.IsNullOrWhiteSpace(imgName);
             }
         }
     }

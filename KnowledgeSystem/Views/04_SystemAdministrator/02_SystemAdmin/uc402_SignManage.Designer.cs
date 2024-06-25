@@ -56,6 +56,7 @@
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -230,6 +231,7 @@
             this.gvData.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gColId,
             this.gridColumn2,
+            this.gridColumn1,
             this.gridColumn7,
             this.gridColumn5,
             this.gridColumn8,
@@ -277,7 +279,7 @@
             this.gridColumn7.FieldName = "SignType";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 1;
+            this.gridColumn7.VisibleIndex = 2;
             // 
             // gridColumn5
             // 
@@ -286,7 +288,7 @@
             this.gridColumn5.MinWidth = 23;
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 2;
+            this.gridColumn5.VisibleIndex = 3;
             this.gridColumn5.Width = 87;
             // 
             // gridColumn8
@@ -297,7 +299,7 @@
             this.gridColumn8.FieldName = "FontSize";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 3;
+            this.gridColumn8.VisibleIndex = 4;
             // 
             // gridColumn9
             // 
@@ -305,7 +307,7 @@
             this.gridColumn9.FieldName = "FontType";
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 4;
+            this.gridColumn9.VisibleIndex = 5;
             // 
             // gridColumn10
             // 
@@ -315,7 +317,7 @@
             this.gridColumn10.FieldName = "FontColor";
             this.gridColumn10.Name = "gridColumn10";
             this.gridColumn10.Visible = true;
-            this.gridColumn10.VisibleIndex = 5;
+            this.gridColumn10.VisibleIndex = 6;
             // 
             // gridColumn16
             // 
@@ -325,7 +327,7 @@
             this.gridColumn16.FieldName = "X";
             this.gridColumn16.Name = "gridColumn16";
             this.gridColumn16.Visible = true;
-            this.gridColumn16.VisibleIndex = 6;
+            this.gridColumn16.VisibleIndex = 7;
             // 
             // gColPCName
             // 
@@ -333,7 +335,7 @@
             this.gColPCName.FieldName = "Y";
             this.gColPCName.Name = "gColPCName";
             this.gColPCName.Visible = true;
-            this.gColPCName.VisibleIndex = 7;
+            this.gColPCName.VisibleIndex = 8;
             this.gColPCName.Width = 80;
             // 
             // gridColumn14
@@ -342,7 +344,7 @@
             this.gridColumn14.FieldName = "WidImg";
             this.gridColumn14.Name = "gridColumn14";
             this.gridColumn14.Visible = true;
-            this.gridColumn14.VisibleIndex = 8;
+            this.gridColumn14.VisibleIndex = 9;
             // 
             // gridColumn13
             // 
@@ -350,7 +352,7 @@
             this.gridColumn13.FieldName = "HgtImg";
             this.gridColumn13.Name = "gridColumn13";
             this.gridColumn13.Visible = true;
-            this.gridColumn13.VisibleIndex = 9;
+            this.gridColumn13.VisibleIndex = 10;
             // 
             // Root
             // 
@@ -370,6 +372,14 @@
             this.layoutControlItem1.Size = new System.Drawing.Size(1001, 404);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "優先級";
+            this.gridColumn1.FieldName = "Prioritize";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 1;
             // 
             // uc402_SignManage
             // 
@@ -425,5 +435,6 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraGrid.Columns.GridColumn gColId;
         private DevExpress.XtraBars.BarButtonItem btnTestSign;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
     }
 }

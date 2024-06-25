@@ -266,7 +266,7 @@ namespace KnowledgeSystem.Views._00_Generals
             var signUsrs = dm_SignUsersBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id).ToList();
             var idSigns = signUsrs.Select(r => r.IdSign).ToList();
 
-            dmSigns = dm_SignBUS.Instance.GetListByIdSigns(idSigns);
+            dmSigns = dm_SignBUS.Instance.GetListByIdSigns(idSigns).OrderBy(r => r.Prioritize).ToList();
 
             DefaultSign();
         }

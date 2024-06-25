@@ -62,7 +62,6 @@ namespace DataAccessLayer
         public virtual DbSet<dt202_Attach> dt202_Attach { get; set; }
         public virtual DbSet<dt207_Attachment> dt207_Attachment { get; set; }
         public virtual DbSet<dt202_Base> dt202_Base { get; set; }
-        public virtual DbSet<dm_Sign> dm_Sign { get; set; }
         public virtual DbSet<dm_DeptGroups> dm_DeptGroups { get; set; }
         public virtual DbSet<dm_DrivingLic> dm_DrivingLic { get; set; }
         public virtual DbSet<dt201_Base> dt201_Base { get; set; }
@@ -74,12 +73,13 @@ namespace DataAccessLayer
         public virtual DbSet<dt306_BaseAtts> dt306_BaseAtts { get; set; }
         public virtual DbSet<dt306_ProgInfo> dt306_ProgInfo { get; set; }
         public virtual DbSet<dt306_Progress> dt306_Progress { get; set; }
-        public virtual DbSet<dt306_Base> dt306_Base { get; set; }
         public virtual DbSet<dm_FixedProgress> dm_FixedProgress { get; set; }
         public virtual DbSet<dt306_Type> dt306_Type { get; set; }
         public virtual DbSet<dt306_SignRole> dt306_SignRole { get; set; }
         public virtual DbSet<dt307_Answers> dt307_Answers { get; set; }
         public virtual DbSet<dt307_JobQuesManage> dt307_JobQuesManage { get; set; }
         public virtual DbSet<dt307_Questions> dt307_Questions { get; set; }
+        public virtual DbSet<dm_Sign> dm_Sign { get; set; }
+        public virtual DbSet<dt306_Base> dt306_Base { get; set; }
     }
 }
