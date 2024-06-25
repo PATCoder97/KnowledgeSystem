@@ -109,6 +109,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
                     txbDisplayName.Enabled = true;
                     cbbType.Enabled = true;
+                    txbPrioritize.Enabled = true;
                     break;
                 case EventFormInfo.Update:
                     Text = $"更新{formName}";
@@ -119,6 +120,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
                     txbDisplayName.Enabled = true;
                     cbbType.Enabled = true;
+                    txbPrioritize.Enabled = true;
 
                     LockLetterInfo();
                     break;

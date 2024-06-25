@@ -45,6 +45,7 @@
             this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gColId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -56,7 +57,6 @@
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -271,6 +271,16 @@
             this.gridColumn2.VisibleIndex = 0;
             this.gridColumn2.Width = 87;
             // 
+            // gridColumn1
+            // 
+            this.gridColumn1.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn1.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn1.Caption = "優先級";
+            this.gridColumn1.FieldName = "Prioritize";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 1;
+            // 
             // gridColumn7
             // 
             this.gridColumn7.AppearanceCell.Options.UseTextOptions = true;
@@ -321,8 +331,6 @@
             // 
             // gridColumn16
             // 
-            this.gridColumn16.AppearanceCell.Options.UseTextOptions = true;
-            this.gridColumn16.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn16.Caption = "X位置";
             this.gridColumn16.FieldName = "X";
             this.gridColumn16.Name = "gridColumn16";
@@ -372,14 +380,6 @@
             this.layoutControlItem1.Size = new System.Drawing.Size(1001, 404);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
-            // 
-            // gridColumn1
-            // 
-            this.gridColumn1.Caption = "優先級";
-            this.gridColumn1.FieldName = "Prioritize";
-            this.gridColumn1.Name = "gridColumn1";
-            this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 1;
             // 
             // uc402_SignManage
             // 
