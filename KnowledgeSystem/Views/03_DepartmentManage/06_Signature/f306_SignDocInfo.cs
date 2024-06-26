@@ -91,7 +91,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
 
             int stepNow = progNow != null ? progress.IndexOf(progress.First(r => r.IdUsr == progNow.IdUsr)) : -1;
             stepProgressDoc.SelectedItemIndex = stepNow; // Focus đến bước hiện tại
-
+            
             var nextStepUsr = progress[stepNow + 1].IdUsr;
             nextStepProg = stepNow + 2 >= progress.Count ? "" : progress[stepNow + 2].IdUsr;
 

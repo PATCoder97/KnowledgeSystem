@@ -51,26 +51,33 @@ namespace KnowledgeSystem
             TPConfigs.SetSystemStaticValue();
             //Application.Run(new f00_FluentFrame(55));
 
-
-
             // Kiểm tra tham số dòng lệnh
-            if (args.Length > 1)
+            if (args.Length > 0)
             {
-                string idUsr = args[0];
-                int parameter = -1; int.TryParse(args[1], out parameter);
+                f00_Login frm = new f00_Login();
+                frm.ShowDialog();
+
+                if (!TPConfigs.LoginSuccessful)
+                {
+                    return;
+                }
+
+                int parameter = -1; int.TryParse(args[0], out parameter);
+
+                //MessageBox.Show(parameter.ToString()+ TPConfigs.LoginUser.Id);
 
                 var signDoc = dt306_BaseBUS.Instance.GetItemById(parameter);
-                if (signDoc.IsProcess == false)
+                if (signDoc.IsProcess == false || signDoc.NextStepProg != TPConfigs.LoginUser.Id)
                 {
                     string msg = "文件已處理完！";
                     MsgTP.MsgShowInfomation($"<font='Microsoft JhengHei UI' size=14>{msg}</font>");
                     return;
                 }
 
-                TPConfigs.LoginUser = dm_UserBUS.Instance.GetItemById(idUsr);
+                // TPConfigs.LoginUser = dm_UserBUS.Instance.GetItemById(idUsr);
                 f306_SignDocInfo fInfo = new f306_SignDocInfo();
                 fInfo.StartPosition = FormStartPosition.CenterScreen;
-                fInfo.idBase = 47;
+                fInfo.idBase = signDoc.Id;
                 Application.Run(fInfo);
             }
             else
