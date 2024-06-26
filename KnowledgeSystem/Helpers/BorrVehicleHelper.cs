@@ -215,7 +215,7 @@ namespace KnowledgeSystem.Helpers
                     purposess.Add(subItem.Trim());
                 }
 
-                return purposess;
+                return purposess.OrderBy(r => r).ToList();
             }
         }
 

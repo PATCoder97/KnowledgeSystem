@@ -1,6 +1,7 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
 using DevExpress.XtraEditors;
+using DocumentFormat.OpenXml.Presentation;
 using KnowledgeSystem.Helpers;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -22,6 +24,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
             InitializeIcon();
         }
 
+        public dm_User borrUsr = TPConfigs.LoginUser;
         public EventFormInfo eventInfo = EventFormInfo.Create;
         public int indexTypeVehicle = 0;
         public VehicleStatus vehicleStatus;
@@ -36,8 +39,41 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
             btnBackVehicle.ImageOptions.SvgImage = TPSvgimages.Confirm;
         }
 
+        private bool ValidateData()
+        {
+            bool IsOK = true;
+            string msg = "Điền các thông tin:";
+            if (string.IsNullOrEmpty(txbFromPlace.EditValue?.ToString()))
+            {
+                msg += "</br> - Điểm đi";
+                IsOK = false;
+            }
+
+            if (string.IsNullOrEmpty(txbToPlace.EditValue?.ToString()))
+            {
+                msg += "</br> - Điểm đến";
+                IsOK = false;
+            }
+
+            if (string.IsNullOrEmpty(cbbPurpose.EditValue?.ToString()))
+            {
+                msg += "</br> - Mục đích";
+                IsOK = false;
+            }
+
+            if (!IsOK)
+            {
+                msg = $"<font='Microsoft JhengHei UI' size=14>{msg}</font>";
+                MsgTP.MsgShowInfomation(msg);
+            }
+
+            return IsOK;
+        }
+
         private async void f304_BorrVehicleInfo_Load(object sender, EventArgs e)
         {
+            lbUsr.Text = $"{borrUsr.Id} {borrUsr.IdDepartment}/{borrUsr.DisplayName}";
+
             btnBorrVehicle.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             btnBackVehicle.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
 
@@ -48,7 +84,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
             cbbTypeVehicle.SelectedIndex = indexTypeVehicle;
 
             cbbPurpose.Properties.Items.AddRange(purposes);
-            cbbPurpose.SelectedIndex = 0;
+            //cbbPurpose.SelectedIndex = 0;
 
             switch (indexTypeVehicle)
             {
@@ -140,6 +176,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
 
         private async void btnBorrVehicle_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            bool IsOK = ValidateData();
+            if (!IsOK) return;
+
             string nameVehicle = txbName.EditValue?.ToString();
             string borrTime = timeBorrTime.DateTimeOffset.ToString("yyyyMMddHHmm");
             string purposes = $"{cbbPurpose.EditValue} {txbDescript.EditValue}";

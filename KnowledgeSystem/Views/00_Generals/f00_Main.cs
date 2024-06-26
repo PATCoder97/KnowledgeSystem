@@ -110,25 +110,25 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void GetSysStaticValue()
         {
-            var lsStaticValue = sys_StaticValueBUS.Instance.GetList();
+            //var lsStaticValue = sys_StaticValueBUS.Instance.GetList();
 
-            TPConfigs.SoftNameEN = lsStaticValue.FirstOrDefault(r => r.KeyT == "SoftNameEN").ValueT;
-            TPConfigs.SoftNameTW = lsStaticValue.FirstOrDefault(r => r.KeyT == "SoftNameTW").ValueT;
-            TPConfigs.UrlUpdate = lsStaticValue.FirstOrDefault(r => r.KeyT == "UrlUpdate").ValueT;
-            TPConfigs.FolderData = lsStaticValue.FirstOrDefault(r => r.KeyT == "FolderData").ValueT;
-            TPConfigs.SetFolderData();
+            //TPConfigs.SoftNameEN = lsStaticValue.FirstOrDefault(r => r.KeyT == "SoftNameEN").ValueT;
+            //TPConfigs.SoftNameTW = lsStaticValue.FirstOrDefault(r => r.KeyT == "SoftNameTW").ValueT;
+            //TPConfigs.UrlUpdate = lsStaticValue.FirstOrDefault(r => r.KeyT == "UrlUpdate").ValueT;
+            //TPConfigs.FolderData = lsStaticValue.FirstOrDefault(r => r.KeyT == "FolderData").ValueT;
+            TPConfigs.SetSystemStaticValue();
 
-            // Lấy các role
-            AppPermission.SysAdmin = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleSysAdmin")?.ValueT ?? "-1");
-            AppPermission.Mod = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleMod")?.ValueT ?? "-1");
-            AppPermission.KnowledgeMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleKnowledgeMain")?.ValueT ?? "-1");
-            AppPermission.SafetyCertMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleSafetyCertMain")?.ValueT ?? "-1");
-            AppPermission.WorkManagementMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleWorkManagementMain")?.ValueT ?? "-1");
-            AppPermission.JFEnCSCMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleJFEnCSCMain")?.ValueT ?? "-1");
-            AppPermission.ISOAuditDocsMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleISOAuditDocsMain")?.ValueT ?? "-1");
-            AppPermission.TechnicalPrjMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleTechnicalPrjMain")?.ValueT ?? "-1");
-            AppPermission.SignatureDigital = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleSignatureDigitalMain")?.ValueT ?? "-1");
-            AppPermission.QuizMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "QuizMain")?.ValueT ?? "-1");
+            //// Lấy các role
+            //AppPermission.SysAdmin = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleSysAdmin")?.ValueT ?? "-1");
+            //AppPermission.Mod = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleMod")?.ValueT ?? "-1");
+            //AppPermission.KnowledgeMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleKnowledgeMain")?.ValueT ?? "-1");
+            //AppPermission.SafetyCertMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleSafetyCertMain")?.ValueT ?? "-1");
+            //AppPermission.WorkManagementMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleWorkManagementMain")?.ValueT ?? "-1");
+            //AppPermission.JFEnCSCMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleJFEnCSCMain")?.ValueT ?? "-1");
+            //AppPermission.ISOAuditDocsMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleISOAuditDocsMain")?.ValueT ?? "-1");
+            //AppPermission.TechnicalPrjMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleTechnicalPrjMain")?.ValueT ?? "-1");
+            //AppPermission.SignatureDigital = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleSignatureDigitalMain")?.ValueT ?? "-1");
+            //AppPermission.QuizMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "QuizMain")?.ValueT ?? "-1");
         }
 
         private void fMain_Load(object sender, EventArgs e)

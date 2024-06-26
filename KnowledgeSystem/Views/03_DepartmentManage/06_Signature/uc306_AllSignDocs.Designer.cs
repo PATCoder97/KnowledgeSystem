@@ -1,6 +1,6 @@
 ﻿namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
 {
-    partial class uc306_SignatureMain
+    partial class uc306_AllSignDocs
     {
         /// <summary> 
         /// Required designer variable.
@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc306_SignatureMain));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc306_AllSignDocs));
             this.gvDocs = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColRemark2 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -42,6 +42,7 @@
             this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gColId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColEnterDate = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -61,6 +62,7 @@
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gvDocs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
@@ -156,7 +158,7 @@
             this.gcData.Location = new System.Drawing.Point(12, 12);
             this.gcData.MainView = this.gvData;
             this.gcData.Name = "gcData";
-            this.gcData.Size = new System.Drawing.Size(948, 508);
+            this.gcData.Size = new System.Drawing.Size(960, 529);
             this.gcData.TabIndex = 5;
             this.gcData.UseEmbeddedNavigator = true;
             this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -182,8 +184,10 @@
             this.gvData.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gColId,
             this.gridColumn9,
+            this.gridColumn10,
             this.gridColumn2,
             this.gridColumn3,
+            this.gridColumn11,
             this.gColEnterDate,
             this.gridColumn8,
             this.gColIsProgess,
@@ -220,6 +224,16 @@
             this.gridColumn9.Caption = "單位";
             this.gridColumn9.FieldName = "urs.IdDepartment";
             this.gridColumn9.Name = "gridColumn9";
+            this.gridColumn9.Visible = true;
+            this.gridColumn9.VisibleIndex = 0;
+            // 
+            // gridColumn10
+            // 
+            this.gridColumn10.Caption = "上傳人員";
+            this.gridColumn10.FieldName = "UploadUsr";
+            this.gridColumn10.Name = "gridColumn10";
+            this.gridColumn10.Visible = true;
+            this.gridColumn10.VisibleIndex = 1;
             // 
             // gridColumn2
             // 
@@ -227,7 +241,7 @@
             this.gridColumn2.FieldName = "types.DisplayName";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 0;
+            this.gridColumn2.VisibleIndex = 2;
             // 
             // gridColumn3
             // 
@@ -236,7 +250,7 @@
             this.gridColumn3.MinWidth = 250;
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 1;
+            this.gridColumn3.VisibleIndex = 3;
             this.gridColumn3.Width = 250;
             // 
             // gColEnterDate
@@ -247,7 +261,7 @@
             this.gColEnterDate.FieldName = "data.UploadDate";
             this.gColEnterDate.Name = "gColEnterDate";
             this.gColEnterDate.Visible = true;
-            this.gColEnterDate.VisibleIndex = 2;
+            this.gColEnterDate.VisibleIndex = 5;
             // 
             // gridColumn8
             // 
@@ -255,7 +269,7 @@
             this.gridColumn8.FieldName = "DisplayName";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 4;
+            this.gridColumn8.VisibleIndex = 7;
             // 
             // gColIsProgess
             // 
@@ -277,7 +291,7 @@
             this.gColRemark.ShowUnboundExpressionMenu = true;
             this.gColRemark.UnboundDataType = typeof(string);
             this.gColRemark.Visible = true;
-            this.gColRemark.VisibleIndex = 3;
+            this.gColRemark.VisibleIndex = 6;
             // 
             // gridColumn4
             // 
@@ -285,7 +299,7 @@
             this.gridColumn4.FieldName = "data.Desc";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 5;
+            this.gridColumn4.VisibleIndex = 8;
             // 
             // barManagerTP
             // 
@@ -364,15 +378,15 @@
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManagerTP;
-            this.barDockControlTop.Size = new System.Drawing.Size(972, 49);
+            this.barDockControlTop.Size = new System.Drawing.Size(984, 49);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 581);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 602);
             this.barDockControlBottom.Manager = this.barManagerTP;
-            this.barDockControlBottom.Size = new System.Drawing.Size(972, 0);
+            this.barDockControlBottom.Size = new System.Drawing.Size(984, 0);
             // 
             // barDockControlLeft
             // 
@@ -380,15 +394,15 @@
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 49);
             this.barDockControlLeft.Manager = this.barManagerTP;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 532);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 553);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(972, 49);
+            this.barDockControlRight.Location = new System.Drawing.Point(984, 49);
             this.barDockControlRight.Manager = this.barManagerTP;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 532);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 553);
             // 
             // layoutControl1
             // 
@@ -397,8 +411,8 @@
             this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(972, 532);
-            this.layoutControl1.TabIndex = 4;
+            this.layoutControl1.Size = new System.Drawing.Size(984, 553);
+            this.layoutControl1.TabIndex = 5;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // Root
@@ -408,7 +422,7 @@
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem1});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(972, 532);
+            this.Root.Size = new System.Drawing.Size(984, 553);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem1
@@ -416,11 +430,19 @@
             this.layoutControlItem1.Control = this.gcData;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(952, 512);
+            this.layoutControlItem1.Size = new System.Drawing.Size(964, 533);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
-            // uc306_SignatureMain
+            // gridColumn11
+            // 
+            this.gridColumn11.Caption = "機密";
+            this.gridColumn11.FieldName = "data.Confidential";
+            this.gridColumn11.Name = "gridColumn11";
+            this.gridColumn11.Visible = true;
+            this.gridColumn11.VisibleIndex = 4;
+            // 
+            // uc306_AllSignDocs
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
             this.Appearance.Options.UseBackColor = true;
@@ -431,9 +453,9 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.Name = "uc306_SignatureMain";
-            this.Size = new System.Drawing.Size(972, 581);
-            this.Load += new System.EventHandler(this.uc306_SignatureMain_Load);
+            this.Name = "uc306_AllSignDocs";
+            this.Size = new System.Drawing.Size(984, 602);
+            this.Load += new System.EventHandler(this.uc306_AllSignDocs_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gvDocs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).EndInit();
@@ -459,25 +481,27 @@
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraGrid.GridControl gcData;
-        private DevExpress.XtraGrid.Views.Grid.GridView gvData;
-        private DevExpress.XtraGrid.Columns.GridColumn gColId;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
-        private DevExpress.XtraGrid.Columns.GridColumn gColIsProgess;
-        private DevExpress.XtraGrid.Columns.GridColumn gColEnterDate;
-        private DevExpress.XtraLayout.LayoutControlGroup Root;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraGrid.Views.Grid.GridView gvDocs;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn gColRemark2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
+        private DevExpress.XtraGrid.Columns.GridColumn gColIdAtt;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvData;
+        private DevExpress.XtraGrid.Columns.GridColumn gColId;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
+        private DevExpress.XtraGrid.Columns.GridColumn gColEnterDate;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
+        private DevExpress.XtraGrid.Columns.GridColumn gColIsProgess;
         private DevExpress.XtraGrid.Columns.GridColumn gColIsCancel;
         private DevExpress.XtraGrid.Columns.GridColumn gColRemark;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
-        private DevExpress.XtraGrid.Columns.GridColumn gColIdAtt;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
+        private DevExpress.XtraLayout.LayoutControlGroup Root;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
     }
 }

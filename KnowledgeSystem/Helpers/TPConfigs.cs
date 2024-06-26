@@ -1,4 +1,5 @@
-﻿using DataAccessLayer;
+﻿using BusinessLayer;
+using DataAccessLayer;
 using DevExpress.Pdf.Native;
 using DevExpress.Utils;
 using DevExpress.XtraEditors;
@@ -36,8 +37,15 @@ namespace KnowledgeSystem.Helpers
         public static string Folder306 { get; set; }
         public static string FolderSign { get; set; }
 
-        public static void SetFolderData()
+        public static void SetSystemStaticValue()
         {
+            var lsStaticValue = sys_StaticValueBUS.Instance.GetList();
+
+            SoftNameEN = lsStaticValue.FirstOrDefault(r => r.KeyT == "SoftNameEN").ValueT;
+            SoftNameTW = lsStaticValue.FirstOrDefault(r => r.KeyT == "SoftNameTW").ValueT;
+            UrlUpdate = lsStaticValue.FirstOrDefault(r => r.KeyT == "UrlUpdate").ValueT;
+            FolderData = lsStaticValue.FirstOrDefault(r => r.KeyT == "FolderData").ValueT;
+
             Folder00 = Path.Combine(FolderData, "00");
             Folder207 = Path.Combine(FolderData, "207");
             Folder302 = Path.Combine(FolderData, "302");
@@ -46,6 +54,17 @@ namespace KnowledgeSystem.Helpers
             Folder201 = Path.Combine(FolderData, "201");
             Folder306 = Path.Combine(FolderData, "306");
             FolderSign = Path.Combine(Folder00, "ImageSign");
+
+            AppPermission.SysAdmin = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleSysAdmin")?.ValueT ?? "-1");
+            AppPermission.Mod = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleMod")?.ValueT ?? "-1");
+            AppPermission.KnowledgeMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleKnowledgeMain")?.ValueT ?? "-1");
+            AppPermission.SafetyCertMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleSafetyCertMain")?.ValueT ?? "-1");
+            AppPermission.WorkManagementMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleWorkManagementMain")?.ValueT ?? "-1");
+            AppPermission.JFEnCSCMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleJFEnCSCMain")?.ValueT ?? "-1");
+            AppPermission.ISOAuditDocsMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleISOAuditDocsMain")?.ValueT ?? "-1");
+            AppPermission.TechnicalPrjMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleTechnicalPrjMain")?.ValueT ?? "-1");
+            AppPermission.SignatureDigital = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleSignatureDigitalMain")?.ValueT ?? "-1");
+            AppPermission.QuizMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "QuizMain")?.ValueT ?? "-1");
         }
 
         // CONST Value

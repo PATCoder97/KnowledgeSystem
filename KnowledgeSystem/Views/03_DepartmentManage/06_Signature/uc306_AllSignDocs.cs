@@ -29,9 +29,9 @@ using System.Windows.Forms;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
 {
-    public partial class uc306_SignatureMain : DevExpress.XtraEditors.XtraUserControl
+    public partial class uc306_AllSignDocs : DevExpress.XtraEditors.XtraUserControl
     {
-        public uc306_SignatureMain()
+        public uc306_AllSignDocs()
         {
             InitializeComponent();
             InitializeIcon();
@@ -110,7 +110,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
 
             File.Copy(sourcePath, destPath, true);
 
-            f00_VIewFile fView = new f00_VIewFile(destPath, isCanSave: false);
+            f00_VIewFile fView = new f00_VIewFile(destPath);
             fView.ShowDialog();
         }
 
@@ -159,13 +159,21 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             {
                 helper.SaveViewInfo();
 
-                bases = dt306_BaseBUS.Instance.GetListByUploadUsr(TPConfigs.LoginUser.Id);
+                var progs = dt306_ProgressBUS.Instance.GetListByIdUser(TPConfigs.LoginUser.Id);
+
+                bases = dt306_BaseBUS.Instance.GetList();
+
+                bases = (from data in bases
+                         where data.Confidential == false || progs.Select(r => r.IdBase).Contains(data.Id) || data.UploadUsr == TPConfigs.LoginUser.Id
+                         select data).ToList();
+
                 users = dm_UserBUS.Instance.GetList();
                 jobs = dm_JobTitleBUS.Instance.GetList();
                 var dmTypes = dt306_TypeBUS.Instance.GetList();
 
                 var basesDisplay = (from data in bases
                                     join types in dmTypes on data.IdType equals types.Id
+                                    join upUsr in users on data.UploadUsr equals upUsr.Id
                                     join urs in users on data.NextStepProg equals urs.Id into userGroup
                                     from urs in userGroup.DefaultIfEmpty()
                                     select new
@@ -173,9 +181,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
                                         data,
                                         types,
                                         urs,
-                                        DisplayName = urs != null
-                                            ? $"{urs.Id} {urs.IdDepartment}/{urs.DisplayName}"
-                                            : ""
+                                        DisplayName = urs != null ? $"{urs.Id} {urs.IdDepartment}/{urs.DisplayName}" : "",
+                                        UploadUsr = $"{upUsr.Id} {upUsr.DisplayName}"
                                     }).ToList();
 
 
@@ -187,7 +194,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             }
         }
 
-        private void uc306_SignatureMain_Load(object sender, EventArgs e)
+        private void uc306_AllSignDocs_Load(object sender, EventArgs e)
         {
             gvData.ReadOnlyGridView();
             gvData.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
@@ -322,10 +329,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
                 {
                     e.Menu.Items.Add(itemViewFile);
                     e.Menu.Items.Add(itemSaveFile);
-                }
-                else if (isProcess == false)
-                {
-                    e.Menu.Items.Add(itemViewFile);
                 }
             }
         }

@@ -69,6 +69,9 @@
             this.gridColumn81 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn72 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn82 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.lbUsr = new System.Windows.Forms.Label();
+            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -98,6 +101,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcMajor5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).BeginInit();
             this.SuspendLayout();
             // 
             // barManagerTP
@@ -182,7 +187,7 @@
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 559);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 631);
             this.barDockControlBottom.Manager = this.barManagerTP;
             this.barDockControlBottom.Size = new System.Drawing.Size(415, 0);
             // 
@@ -192,7 +197,7 @@
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 49);
             this.barDockControlLeft.Manager = this.barManagerTP;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 510);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 582);
             // 
             // barDockControlRight
             // 
@@ -200,11 +205,12 @@
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
             this.barDockControlRight.Location = new System.Drawing.Point(415, 49);
             this.barDockControlRight.Manager = this.barManagerTP;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 510);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 582);
             // 
             // layoutControl1
             // 
             this.layoutControl1.AllowCustomization = false;
+            this.layoutControl1.Controls.Add(this.lbUsr);
             this.layoutControl1.Controls.Add(this.timeBorrTime);
             this.layoutControl1.Controls.Add(this.txbFromPlace);
             this.layoutControl1.Controls.Add(this.txbName);
@@ -220,14 +226,14 @@
             this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(415, 510);
+            this.layoutControl1.Size = new System.Drawing.Size(415, 582);
             this.layoutControl1.TabIndex = 7;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // timeBorrTime
             // 
             this.timeBorrTime.EditValue = null;
-            this.timeBorrTime.Location = new System.Drawing.Point(144, 155);
+            this.timeBorrTime.Location = new System.Drawing.Point(144, 227);
             this.timeBorrTime.MenuManager = this.barManagerTP;
             this.timeBorrTime.Name = "timeBorrTime";
             this.timeBorrTime.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -243,7 +249,7 @@
             // 
             // txbFromPlace
             // 
-            this.txbFromPlace.Location = new System.Drawing.Point(144, 191);
+            this.txbFromPlace.Location = new System.Drawing.Point(144, 263);
             this.txbFromPlace.Name = "txbFromPlace";
             this.txbFromPlace.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbFromPlace.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -256,7 +262,7 @@
             // txbName
             // 
             this.txbName.Enabled = false;
-            this.txbName.Location = new System.Drawing.Point(144, 83);
+            this.txbName.Location = new System.Drawing.Point(144, 155);
             this.txbName.MenuManager = this.barManagerTP;
             this.txbName.Name = "txbName";
             this.txbName.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
@@ -269,7 +275,7 @@
             // 
             // txbToPlace
             // 
-            this.txbToPlace.Location = new System.Drawing.Point(144, 227);
+            this.txbToPlace.Location = new System.Drawing.Point(144, 299);
             this.txbToPlace.Name = "txbToPlace";
             this.txbToPlace.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbToPlace.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -281,7 +287,7 @@
             // 
             // txbDescript
             // 
-            this.txbDescript.Location = new System.Drawing.Point(144, 299);
+            this.txbDescript.Location = new System.Drawing.Point(144, 371);
             this.txbDescript.Name = "txbDescript";
             this.txbDescript.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbDescript.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -294,7 +300,7 @@
             // cbbTypeVehicle
             // 
             this.cbbTypeVehicle.Enabled = false;
-            this.cbbTypeVehicle.Location = new System.Drawing.Point(144, 47);
+            this.cbbTypeVehicle.Location = new System.Drawing.Point(144, 119);
             this.cbbTypeVehicle.Name = "cbbTypeVehicle";
             this.cbbTypeVehicle.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.cbbTypeVehicle.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -313,7 +319,7 @@
             // txbNumUser
             // 
             this.txbNumUser.EditValue = "1";
-            this.txbNumUser.Location = new System.Drawing.Point(144, 335);
+            this.txbNumUser.Location = new System.Drawing.Point(144, 407);
             this.txbNumUser.Name = "txbNumUser";
             this.txbNumUser.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbNumUser.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -326,7 +332,7 @@
             // timeBackTime
             // 
             this.timeBackTime.EditValue = null;
-            this.timeBackTime.Location = new System.Drawing.Point(144, 418);
+            this.timeBackTime.Location = new System.Drawing.Point(144, 490);
             this.timeBackTime.Name = "timeBackTime";
             this.timeBackTime.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.timeBackTime.Properties.Appearance.Options.UseFont = true;
@@ -341,7 +347,7 @@
             // 
             // txbEndKm
             // 
-            this.txbEndKm.Location = new System.Drawing.Point(144, 454);
+            this.txbEndKm.Location = new System.Drawing.Point(144, 526);
             this.txbEndKm.Name = "txbEndKm";
             this.txbEndKm.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbEndKm.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -353,7 +359,7 @@
             // 
             // cbbPurpose
             // 
-            this.cbbPurpose.Location = new System.Drawing.Point(144, 263);
+            this.cbbPurpose.Location = new System.Drawing.Point(144, 335);
             this.cbbPurpose.Name = "cbbPurpose";
             this.cbbPurpose.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.cbbPurpose.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -370,7 +376,7 @@
             // 
             // txbStartKm
             // 
-            this.txbStartKm.Location = new System.Drawing.Point(144, 119);
+            this.txbStartKm.Location = new System.Drawing.Point(144, 191);
             this.txbStartKm.Name = "txbStartKm";
             this.txbStartKm.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbStartKm.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -386,9 +392,10 @@
             this.Root.GroupBordersVisible = false;
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlGroup1,
-            this.layoutControlGroup2});
+            this.layoutControlGroup2,
+            this.layoutControlGroup3});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(415, 510);
+            this.Root.Size = new System.Drawing.Size(415, 582);
             this.Root.TextVisible = false;
             // 
             // layoutControlGroup1
@@ -406,7 +413,7 @@
             this.lcMajor2,
             this.lcMajor3,
             this.lcMajor4});
-            this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlGroup1.Location = new System.Drawing.Point(0, 72);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
             this.layoutControlGroup1.Size = new System.Drawing.Size(395, 371);
             this.layoutControlGroup1.Text = "Mượn xe";
@@ -564,7 +571,7 @@
             this.layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem2,
             this.lcMajor5});
-            this.layoutControlGroup2.Location = new System.Drawing.Point(0, 371);
+            this.layoutControlGroup2.Location = new System.Drawing.Point(0, 443);
             this.layoutControlGroup2.Name = "layoutControlGroup2";
             this.layoutControlGroup2.Size = new System.Drawing.Size(395, 119);
             this.layoutControlGroup2.Text = "Trả xe";
@@ -656,13 +663,47 @@
             this.gridColumn82.Visible = true;
             this.gridColumn82.VisibleIndex = 1;
             // 
+            // lbUsr
+            // 
+            this.lbUsr.BackColor = System.Drawing.Color.Transparent;
+            this.lbUsr.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lbUsr.ForeColor = System.Drawing.Color.Blue;
+            this.lbUsr.Location = new System.Drawing.Point(24, 47);
+            this.lbUsr.Name = "lbUsr";
+            this.lbUsr.Size = new System.Drawing.Size(367, 21);
+            this.lbUsr.TabIndex = 20;
+            this.lbUsr.Text = "VNW0014732 7820/潘英俊";
+            // 
+            // layoutControlItem3
+            // 
+            this.layoutControlItem3.Control = this.lbUsr;
+            this.layoutControlItem3.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem3.Name = "layoutControlItem3";
+            this.layoutControlItem3.Size = new System.Drawing.Size(371, 25);
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem3.TextVisible = false;
+            // 
+            // layoutControlGroup3
+            // 
+            this.layoutControlGroup3.AppearanceGroup.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.layoutControlGroup3.AppearanceGroup.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlGroup3.AppearanceGroup.Options.UseFont = true;
+            this.layoutControlGroup3.AppearanceGroup.Options.UseForeColor = true;
+            this.layoutControlGroup3.GroupStyle = DevExpress.Utils.GroupStyle.Light;
+            this.layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem3});
+            this.layoutControlGroup3.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlGroup3.Name = "layoutControlGroup3";
+            this.layoutControlGroup3.Size = new System.Drawing.Size(395, 72);
+            this.layoutControlGroup3.Text = "Nhân viên";
+            // 
             // f304_BorrVehicleInfo
             // 
             this.Appearance.BackColor = System.Drawing.SystemColors.Control;
             this.Appearance.Options.UseBackColor = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(415, 559);
+            this.ClientSize = new System.Drawing.Size(415, 631);
             this.Controls.Add(this.layoutControl1);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
@@ -702,6 +743,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcMajor5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -748,5 +791,8 @@
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup2;
         private DevExpress.XtraEditors.ComboBoxEdit cbbPurpose;
         private DevExpress.XtraEditors.TextEdit txbStartKm;
+        private System.Windows.Forms.Label lbUsr;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup3;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
     }
 }

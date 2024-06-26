@@ -57,7 +57,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
         {
             btnCancel.ImageOptions.SvgImage = TPSvgimages.Cancel;
             btnApproval.ImageOptions.SvgImage = TPSvgimages.EmailSend;
-            btnConfirm.ImageOptions.SvgImage = TPSvgimages.Confirm;
+            btnConfirm.ImageOptions.SvgImage = TPSvgimages.EmailSend;
         }
 
         private void f306_SignDocInfo_Load(object sender, EventArgs e)
@@ -133,7 +133,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
                         btnCancel.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                         break;
                     case 2:
-                        btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                         btnCancel.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                         break;
                 }
@@ -211,6 +210,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
                     }
 
                     gvDocs.RefreshData();
+
+                    // Kiểm tra xem có văn kiện nào được đi tiếp không, Nếu có mới hiện nút Approval
+                    CanConfirm = baseAtts.Any(r => r.BaseAtt.IsCancel != true);
+                    btnConfirm.Visibility = CanConfirm ? DevExpress.XtraBars.BarItemVisibility.Always : DevExpress.XtraBars.BarItemVisibility.Never;
                     break;
             }
         }
@@ -308,6 +311,23 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             baseData.Desc = $"被{TPConfigs.LoginUser.DisplayName}退回，說明：{describe}";
 
             dt306_BaseBUS.Instance.AddOrUpdate(baseData);
+
+            // Đưa tất cả các file ra ngoài folder để sau này xem lại vì sao bị trả về
+            foreach (var item in baseAtts)
+            {
+                item.UsrCancel = TPConfigs.LoginUser.Id;
+                dt306_BaseAttsBUS.Instance.AddOrUpdate(item.BaseAtt);
+            }
+
+            var allAtts = dt306_BaseAttsBUS.Instance.GetListByIdBase(idBase);
+            foreach (var item in allAtts)
+            {
+                var att = dm_AttachmentBUS.Instance.GetItemById(item.IdAtt);
+                string sourceFile = Path.Combine(TPConfigs.Folder306, idBase.ToString(), att.EncryptionName);
+                string destFile = Path.Combine(TPConfigs.Folder306, att.EncryptionName);
+
+                File.Copy(sourceFile, destFile, true);
+            }
 
             // Các bước trước nếu chưa gửi note thì khỏi gửi luôn
             var progInfoSendNote = dt306_ProgInfoBUS.Instance.GetListByIdBase(idBase)

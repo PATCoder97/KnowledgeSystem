@@ -333,6 +333,12 @@
     <Compile Include="Views\03_DepartmentManage\06_Signature\f306_SignProgDetail.Designer.cs">
       <DependentUpon>f306_SignProgDetail.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\03_DepartmentManage\06_Signature\uc306_AllSignDocs.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\06_Signature\uc306_AllSignDocs.Designer.cs">
+      <DependentUpon>uc306_AllSignDocs.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\03_DepartmentManage\06_Signature\uc306_AwaitingApproval.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -751,6 +757,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\06_Signature\f306_SignProgDetail.resx">
       <DependentUpon>f306_SignProgDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\06_Signature\uc306_AllSignDocs.resx">
+      <DependentUpon>uc306_AllSignDocs.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\06_Signature\uc306_AwaitingApproval.resx">
       <DependentUpon>uc306_AwaitingApproval.cs</DependentUpon>
