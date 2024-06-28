@@ -1,8 +1,11 @@
 ﻿using BusinessLayer;
+using DataAccessLayer;
 using DevExpress.LookAndFeel;
 using DevExpress.Skins;
 using DevExpress.UserSkins;
+using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraEditors;
+using DevExpress.XtraSplashScreen;
 using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._00_Generals;
 using KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase;
@@ -15,6 +18,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Security.Principal;
 using System.Windows.Forms;
 
 namespace KnowledgeSystem
@@ -35,60 +40,85 @@ namespace KnowledgeSystem
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-#if DEBUG
-
-            // Application.Run(new f00_Main());
-
-            // TPConfigs.LoginUser = dm_UserBUS.Instance.GetItemById("VNW0014732");
-            // AppPermission.Instance.CheckAppPermission(7);
-
-            //TPConfigs.IdParentControl = AppPermission.SafetyCertMain;
-            //var lsStaticValue = sys_StaticValueBUS.Instance.GetList();
-            //TPConfigs.SoftNameEN = lsStaticValue.FirstOrDefault(r => r.KeyT == "SoftNameEN").ValueT;
-            //TPConfigs.SoftNameTW = lsStaticValue.FirstOrDefault(r => r.KeyT == "SoftNameTW").ValueT;
-            //TPConfigs.UrlUpdate = lsStaticValue.FirstOrDefault(r => r.KeyT == "UrlUpdate").ValueT;
-            //TPConfigs.FolderData = lsStaticValue.FirstOrDefault(r => r.KeyT == "FolderData").ValueT;
             TPConfigs.SetSystemStaticValue();
-            //Application.Run(new f00_FluentFrame(55));
 
             // Kiểm tra tham số dòng lệnh
-            if (args.Length > 0)
+            if (args.Length > 2)
             {
-                f00_Login frm = new f00_Login();
-                frm.ShowDialog();
+                string idUsr = "";
+                string permCtrl = args[0];
+                string formTaget = args[1];
+                string paramter1 = args[2];
+                string msg = "";
 
-                if (!TPConfigs.LoginSuccessful)
+#if DEBUG
+                idUsr = "VNW0014732";
+#else
+                TPConfigs.DomainComputer = System.Net.NetworkInformation.IPGlobalProperties.GetIPGlobalProperties().DomainName;
+                if (TPConfigs.DomainComputer == DomainVNFPG.domainVNFPG)
                 {
+                    WindowsIdentity currentUser = WindowsIdentity.GetCurrent();
+                    idUsr = currentUser.Name.Split('\\')[1];
+                }
+                else
+                {
+                    msg = "請使用公司電腦！";
+                    MsgTP.MsgShowInfomation($"<font='Microsoft JhengHei UI' size=14>{msg}</font>");
                     return;
                 }
+#endif
 
-                int parameter = -1; int.TryParse(args[0], out parameter);
+                TPConfigs.LoginUser = dm_UserBUS.Instance.GetItemById(idUsr);
 
-                //MessageBox.Show(parameter.ToString()+ TPConfigs.LoginUser.Id);
+                var funcs = dm_FunctionBUS.Instance.GetItemByControl(permCtrl);
+                bool isDeny = !AppPermission.Instance.CheckAppPermission(funcs.Id);
 
-                var signDoc = dt306_BaseBUS.Instance.GetItemById(parameter);
-                if (signDoc.IsProcess == false || signDoc.NextStepProg != TPConfigs.LoginUser.Id)
+                if (isDeny)
                 {
-                    string msg = "文件已處理完！";
+                    msg = "<color=red>您沒有權限！</color>";
                     MsgTP.MsgShowInfomation($"<font='Microsoft JhengHei UI' size=14>{msg}</font>");
                     return;
                 }
 
-                // TPConfigs.LoginUser = dm_UserBUS.Instance.GetItemById(idUsr);
-                f306_SignDocInfo fInfo = new f306_SignDocInfo();
-                fInfo.StartPosition = FormStartPosition.CenterScreen;
-                fInfo.idBase = signDoc.Id;
-                Application.Run(fInfo);
+                switch (formTaget)
+                {
+                    case "f306_SignDocInfo":
+                        int parameter = -1; int.TryParse(paramter1, out parameter);
+
+                        var signDoc = dt306_BaseBUS.Instance.GetItemById(parameter);
+                        if (signDoc.IsProcess == false || signDoc.NextStepProg != TPConfigs.LoginUser.Id)
+                        {
+                            msg = "文件已處理完！";
+                            MsgTP.MsgShowInfomation($"<font='Microsoft JhengHei UI' size=14>{msg}</font>");
+                            return;
+                        }
+
+                        f306_SignDocInfo fInfo = new f306_SignDocInfo();
+                        fInfo.StartPosition = FormStartPosition.CenterScreen;
+                        fInfo.idBase = signDoc.Id;
+                        Application.Run(fInfo);
+                        break;
+
+                    default:
+                        msg = "<color=red>系统错误！</color>";
+                        MsgTP.MsgShowInfomation($"<font='Microsoft JhengHei UI' size=14>{msg}</font>");
+                        break;
+                }
             }
             else
             {
-                Application.Run(new f00_Main());
-            }
+#if DEBUG
+                // Application.Run(new f00_Main());
 
+                TPConfigs.LoginUser = dm_UserBUS.Instance.GetItemById("VNW0014732");
+                AppPermission.Instance.CheckAppPermission(7);
+                TPConfigs.IdParentControl = AppPermission.SafetyCertMain;
+
+                Application.Run(new f00_FluentFrame(55));
 #else
-            Application.Run(new f00_Main());
+                Application.Run(new f00_Main());
 #endif
-
+            }
         }
     }
 }

@@ -5,6 +5,7 @@ using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraSplashScreen;
 using DocumentFormat.OpenXml.Spreadsheet;
 using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._00_Generals;
@@ -261,72 +262,75 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            // Đưa focused ra khỏi bảng để cập nhật lên source
-            gvProgress.FocusedRowHandle = GridControl.AutoFilterRowHandle;
-
-            bool IsValidate = ValidateData();
-            if (!IsValidate) return;
-
-            bool isProgressError = (progresses.GroupBy(x => x.IdUsr).Any(g => g.Count() > 1));
-            if (isProgressError)
+            using (var handle = SplashScreenManager.ShowOverlayForm(this))
             {
-                MsgTP.MsgError("流程重複！");
-                return;
-            }
+                // Đưa focused ra khỏi bảng để cập nhật lên source
+                gvProgress.FocusedRowHandle = GridControl.AutoFilterRowHandle;
 
-            baseData.DisplayName = txbTitle.Text.Trim();
-            baseData.IdType = (int)txbType.EditValue;
-            baseData.UploadUsr = TPConfigs.LoginUser.Id;
-            baseData.UploadDate = DateTime.Today;
-            baseData.IsProcess = true;
-            baseData.IsCancel = false;
-            baseData.NextStepProg = progresses.FirstOrDefault().IdUsr;
-            baseData.Confidential = ckConfidential.Checked;
+                bool IsValidate = ValidateData();
+                if (!IsValidate) return;
 
-            int idBase = dt306_BaseBUS.Instance.Add(baseData);
-
-            foreach (var item in attachments)
-            {
-                var att = new dm_Attachment()
+                bool isProgressError = (progresses.GroupBy(x => x.IdUsr).Any(g => g.Count() > 1));
+                if (isProgressError)
                 {
-                    Thread = item.Thread,
-                    ActualName = item.ActualName,
-                    EncryptionName = item.EncryptionName
-                };
+                    MsgTP.MsgError("流程重複！");
+                    return;
+                }
 
-                var idAtt = dm_AttachmentBUS.Instance.Add(att);
+                baseData.DisplayName = txbTitle.Text.Trim();
+                baseData.IdType = (int)txbType.EditValue;
+                baseData.UploadUsr = TPConfigs.LoginUser.Id;
+                baseData.UploadDate = DateTime.Today;
+                baseData.IsProcess = true;
+                baseData.IsCancel = false;
+                baseData.NextStepProg = progresses.FirstOrDefault().IdUsr;
+                baseData.Confidential = ckConfidential.Checked;
 
-                var baseAtt = new dt306_BaseAtts()
+                int idBase = dt306_BaseBUS.Instance.Add(baseData);
+
+                foreach (var item in attachments)
+                {
+                    var att = new dm_Attachment()
+                    {
+                        Thread = item.Thread,
+                        ActualName = item.ActualName,
+                        EncryptionName = item.EncryptionName
+                    };
+
+                    var idAtt = dm_AttachmentBUS.Instance.Add(att);
+
+                    var baseAtt = new dt306_BaseAtts()
+                    {
+                        IdBase = idBase,
+                        IdAtt = idAtt,
+                        DisplayName = item.ActualName,
+                        IsCancel = false
+                    };
+
+                    string folderDest = Path.Combine(TPConfigs.Folder306, idBase.ToString());
+                    if (!Directory.Exists(folderDest)) Directory.CreateDirectory(folderDest);
+
+                    File.Copy(item.PathFile, Path.Combine(folderDest, item.EncryptionName), true);
+
+                    dt306_BaseAttsBUS.Instance.Add(baseAtt);
+                }
+
+                var progs = progresses.Select(r => new dt306_Progress() { IdBase = idBase, IdUsr = r.IdUsr, IdRole = r.IdRole }).ToList();
+                dt306_ProgressBUS.Instance.AddRange(progs);
+
+                // Tạo 1 progStep là văn kiện đã đưa lên
+                dt306_ProgInfo info = new dt306_ProgInfo()
                 {
                     IdBase = idBase,
-                    IdAtt = idAtt,
-                    DisplayName = item.ActualName,
-                    IsCancel = false
+                    IdUsr = "VNW0000000",
+                    RespTime = DateTime.Now,
+                    Desc = "呈核"
                 };
 
-                string folderDest = Path.Combine(TPConfigs.Folder306, idBase.ToString());
-                if (!Directory.Exists(folderDest)) Directory.CreateDirectory(folderDest);
+                dt306_ProgInfoBUS.Instance.Add(info);
 
-                File.Copy(item.PathFile, Path.Combine(folderDest, item.EncryptionName), true);
-
-                dt306_BaseAttsBUS.Instance.Add(baseAtt);
+                Close();
             }
-
-            var progs = progresses.Select(r => new dt306_Progress() { IdBase = idBase, IdUsr = r.IdUsr, IdRole = r.IdRole }).ToList();
-            dt306_ProgressBUS.Instance.AddRange(progs);
-
-            // Tạo 1 progStep là văn kiện đã đưa lên
-            dt306_ProgInfo info = new dt306_ProgInfo()
-            {
-                IdBase = idBase,
-                IdUsr = "VNW0000000",
-                RespTime = DateTime.Now,
-                Desc = "呈核"
-            };
-
-            dt306_ProgInfoBUS.Instance.Add(info);
-
-            Close();
         }
 
         private void btnDefaulProgress_Click(object sender, EventArgs e)

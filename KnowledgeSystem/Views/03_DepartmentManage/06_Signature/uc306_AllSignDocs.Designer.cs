@@ -45,6 +45,7 @@
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColEnterDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColIsProgess = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -62,7 +63,6 @@
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gvDocs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
@@ -222,7 +222,7 @@
             // gridColumn9
             // 
             this.gridColumn9.Caption = "單位";
-            this.gridColumn9.FieldName = "urs.IdDepartment";
+            this.gridColumn9.FieldName = "Dept";
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
             this.gridColumn9.VisibleIndex = 0;
@@ -252,6 +252,14 @@
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 3;
             this.gridColumn3.Width = 250;
+            // 
+            // gridColumn11
+            // 
+            this.gridColumn11.Caption = "機密";
+            this.gridColumn11.FieldName = "data.Confidential";
+            this.gridColumn11.Name = "gridColumn11";
+            this.gridColumn11.Visible = true;
+            this.gridColumn11.VisibleIndex = 4;
             // 
             // gColEnterDate
             // 
@@ -433,14 +441,6 @@
             this.layoutControlItem1.Size = new System.Drawing.Size(964, 533);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
-            // 
-            // gridColumn11
-            // 
-            this.gridColumn11.Caption = "機密";
-            this.gridColumn11.FieldName = "data.Confidential";
-            this.gridColumn11.Name = "gridColumn11";
-            this.gridColumn11.Visible = true;
-            this.gridColumn11.VisibleIndex = 4;
             // 
             // uc306_AllSignDocs
             // 

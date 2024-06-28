@@ -112,7 +112,6 @@ namespace KnowledgeSystem.Views._00_Generals
         {
             BackgroundImage = TPSvgimages.Background;
 
-            TPConfigs.SetSystemStaticValue();
             GetUserLogin();
 
 #if DEBUG

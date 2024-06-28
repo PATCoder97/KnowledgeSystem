@@ -76,6 +76,22 @@ namespace BusinessLayer
             }
         }
 
+        public dm_Function GetItemByControl(string controlName)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dm_Function.FirstOrDefault(r => r.ControlName == controlName);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw new Exception(ex.ToString());
+            }
+        }
+
         public int GetNewId()
         {
             try

@@ -8,6 +8,7 @@ using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using DevExpress.XtraSplashScreen;
 using DevExpress.XtraSpreadsheet.API.Native.Implementation;
 using KnowledgeSystem.Helpers;
 using System;
@@ -95,7 +96,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
             DXMouseEventArgs ea = e as DXMouseEventArgs;
             GridView view = sender as GridView;
             GridHitInfo info = view.CalcHitInfo(ea.Location);
-            if (!(info.InRow || info.InRowCell)|| _eventInfo != EventFormInfo.Update) return;
+            if (!(info.InRow || info.InRowCell) || _eventInfo != EventFormInfo.Update) return;
 
             //GridView view = gvAllUser;
             dm_User _user = view.GetRow(view.FocusedRowHandle) as dm_User;
@@ -129,13 +130,16 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            List<dm_UserRole> lsUserRolesAdd = lsChooseUsers.Select(r => new dm_UserRole { IdRole = _idRole, IdUser = r.Id }).ToList();
-            var result1 = dm_UserRoleBUS.Instance.RemoveRangeByRole(_idRole);
-            var result2 = dm_UserRoleBUS.Instance.AddRange(lsUserRolesAdd);
-
-            if (result1 && result2)
+            using (var handle = SplashScreenManager.ShowOverlayForm(this))
             {
-                Close();
+                List<dm_UserRole> lsUserRolesAdd = lsChooseUsers.Select(r => new dm_UserRole { IdRole = _idRole, IdUser = r.Id }).ToList();
+                var result1 = dm_UserRoleBUS.Instance.RemoveRangeByRole(_idRole);
+                var result2 = dm_UserRoleBUS.Instance.AddRange(lsUserRolesAdd);
+
+                if (result1 && result2)
+                {
+                    Close();
+                }
             }
         }
     }

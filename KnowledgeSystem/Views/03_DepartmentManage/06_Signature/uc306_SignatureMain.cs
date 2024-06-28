@@ -1,5 +1,6 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
+using DevExpress.Pdf;
 using DevExpress.Utils.Menu;
 using DevExpress.Utils.Svg;
 using DevExpress.XtraEditors;
@@ -10,6 +11,7 @@ using DevExpress.XtraReports;
 using DevExpress.XtraReports.Wizards;
 using DevExpress.XtraRichEdit.Layout;
 using DevExpress.XtraSplashScreen;
+using DocumentFormat.OpenXml.Drawing.Charts;
 using iTextSharp.text.pdf;
 using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._00_Generals;
@@ -56,6 +58,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
         DXMenuItem itemViewInfo;
         DXMenuItem itemViewFile;
         DXMenuItem itemSaveFile;
+        DXMenuItem itemSaveAllFile;
 
         const string NAME_ISPROGRESS = "核簽中";
         const string NAME_ISCANCEL = "被退回";
@@ -66,6 +69,54 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             itemViewInfo = CreateMenuItem("核簽進度", ItemViewInfo_Click, TPSvgimages.View);
             itemViewFile = CreateMenuItem("查看文件", ItemViewFile_Click, TPSvgimages.View);
             itemSaveFile = CreateMenuItem("保存檔案", ItemSaveFile_Click, TPSvgimages.Attach);
+            itemSaveAllFile = CreateMenuItem("保存所有檔案", ItemSaveAllFile_Click, TPSvgimages.Attach);
+        }
+
+        private bool SaveFileWithProtect(string source, string dest)
+        {
+            using (PdfDocumentProcessor pdfDocumentProcessor = new PdfDocumentProcessor())
+            {
+                // Load a PDF document.
+                pdfDocumentProcessor.LoadDocument(source);
+
+                PdfEncryptionOptions encryptionOptions = new PdfEncryptionOptions();
+                encryptionOptions.ModificationPermissions = PdfDocumentModificationPermissions.NotAllowed;
+                encryptionOptions.InteractivityPermissions = PdfDocumentInteractivityPermissions.NotAllowed;
+
+                // Specify the owner and user passwords for the document.  
+                encryptionOptions.OwnerPasswordString = "fhspdf";
+                //encryptionOptions.UserPasswordString = "UserPassword";
+
+                // Specify the 256-bit AES encryption algorithm.
+                encryptionOptions.Algorithm = PdfEncryptionAlgorithm.AES256;
+
+                // Save the protected document with encryption settings.  
+                try
+                {
+                    pdfDocumentProcessor.SaveDocument(dest, new PdfSaveOptions() { EncryptionOptions = encryptionOptions });
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
+
+        private void ItemSaveAllFile_Click(object sender, EventArgs e)
+        {
+            GridView view = gvData;
+            int idBase = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColId));
+
+            var allAtts = dt306_BaseAttsBUS.Instance.GetListByIdBase(idBase).Where(r => r.IsCancel == false).ToList();
+            foreach (var item in allAtts)
+            {
+                //var att = dm_AttachmentBUS.Instance.GetItemById(item.IdAtt);
+                //string sourceFile = Path.Combine(TPConfigs.Folder306, idBase.ToString(), att.EncryptionName);
+                //string destFile = Path.Combine(TPConfigs.Folder306, att.EncryptionName);
+
+                //File.Copy(sourceFile, destFile, true);
+            }
         }
 
         private void ItemSaveFile_Click(object sender, EventArgs e)
@@ -88,9 +139,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             if (!Directory.Exists(TPConfigs.TempFolderData))
                 Directory.CreateDirectory(TPConfigs.TempFolderData);
 
-            File.Copy(sourcePath, destPath, true);
+            bool result = SaveFileWithProtect(sourcePath, destPath);
 
-            MsgTP.MsgShowInfomation("<font='Microsoft JhengHei UI' size=18>已儲存！</font>");
+            string msg = result ? "已儲存！" : "<color=red>文件在開啟或有錯誤！</color>";
+            MsgTP.MsgShowInfomation($"<font='Microsoft JhengHei UI' size=18>{msg}</font>");
         }
 
         private void ItemViewFile_Click(object sender, EventArgs e)
@@ -136,7 +188,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
 
         void SetMenuItemProperties(DXMenuItem menuItem)
         {
-            menuItem.ImageOptions.SvgImageSize = new Size(24, 24);
+            menuItem.ImageOptions.SvgImageSize = new System.Drawing.Size(24, 24);
             menuItem.AppearanceHovered.ForeColor = Color.Blue;
         }
 
@@ -165,6 +217,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
                 var dmTypes = dt306_TypeBUS.Instance.GetList();
 
                 var basesDisplay = (from data in bases
+                                    where data.IsProcess == true
                                     join types in dmTypes on data.IdType equals types.Id
                                     join urs in users on data.NextStepProg equals urs.Id into userGroup
                                     from urs in userGroup.DefaultIfEmpty()
@@ -297,8 +350,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             {
                 GridView view = sender as GridView;
                 view.FocusedRowHandle = e.HitInfo.RowHandle;
+                bool isProcess = Convert.ToBoolean(view.GetRowCellValue(view.FocusedRowHandle, "data.IsProcess"));
 
                 e.Menu.Items.Add(itemViewInfo);
+                if (!isProcess)
+                {
+                    e.Menu.Items.Add(itemSaveAllFile);
+                }
             }
         }
 
