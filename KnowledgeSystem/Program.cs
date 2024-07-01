@@ -32,12 +32,7 @@ namespace KnowledgeSystem
         [STAThread]
         static void Main(string[] args)
         {
-            new AppCopyRight()
-            {
-                Version = "24.06.19",
-                DateDeploy = "2024.06.19"
-            };
-
+            new AppCopyRight() { Version = "24.06.28" };
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             TPConfigs.SetSystemStaticValue();

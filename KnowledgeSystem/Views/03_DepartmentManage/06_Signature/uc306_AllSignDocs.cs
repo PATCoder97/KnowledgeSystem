@@ -173,9 +173,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             string sourcePath = Path.Combine(TPConfigs.Folder306, filePath);
             string destPath = dialog.FileName;
 
-            if (!Directory.Exists(destPath))
-                Directory.CreateDirectory(destPath);
-
             bool result = SaveFileWithProtect(sourcePath, destPath);
 
             string msg = result ? "已儲存！" : "<color=red>文件在開啟或有錯誤！</color>";

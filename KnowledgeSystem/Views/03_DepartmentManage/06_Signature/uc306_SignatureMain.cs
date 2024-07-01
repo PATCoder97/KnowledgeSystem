@@ -227,10 +227,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
                                         types,
                                         urs,
                                         DisplayName = urs != null
-                                            ? $"{urs.Id} {urs.IdDepartment}/{urs.DisplayName}"
-                                            : ""
+                                            ? $"{urs.Id} {urs.IdDepartment}/{urs.DisplayName}" : ""
                                     }).ToList();
-
 
                 sourceBases.DataSource = basesDisplay;
                 helper.LoadViewInfo();
