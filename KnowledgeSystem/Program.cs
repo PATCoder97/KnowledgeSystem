@@ -40,6 +40,20 @@ namespace KnowledgeSystem
             // Kiểm tra tham số dòng lệnh
             if (args.Length > 2)
             {
+                // tuanfhs://example?perm=value1&taget=value2&param1=value3
+                string url = args[0];
+                Uri uri = new Uri(url);
+
+                // Lấy phần host (VNW0014732 debug)
+                string host = uri.Host;
+
+                // Lấy các tham số truy vấn
+                NameValueCollection queryParameters = HttpUtility.ParseQueryString(uri.Query);
+
+                string permCtrl = queryParameters["perm"];
+                string formTaget = queryParameters["taget"];
+                string paramter1 = queryParameters["param1"];
+
                 string idUsr = "";
                 string permCtrl = args[0];
                 string formTaget = args[1];
