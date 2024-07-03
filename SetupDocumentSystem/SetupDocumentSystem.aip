@@ -299,10 +299,10 @@
     <ROW Property="ARPHELPTELEPHONE" Value="6779"/>
     <ROW Property="ARPPRODUCTICON" Value="AppIcon.exe" Type="8"/>
     <ROW Property="Manufacturer" Value="FHS"/>
-    <ROW Property="ProductCode" Value="1028:{93B7CDF1-012C-4691-9552-D55B1F241DFE} 1033:{93B7CDF1-012C-4691-9552-D55B1F241DFE} " Type="16"/>
+    <ROW Property="ProductCode" Value="1028:{E9B265A8-B8A0-4265-8457-8059F31F2F7A} 1033:{E9B265A8-B8A0-4265-8457-8059F31F2F7A} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
-    <ROW Property="ProductName" Value="Document System"/>
-    <ROW Property="ProductVersion" Value="24.06.28"/>
+    <ROW Property="ProductName" Value="Document Management System"/>
+    <ROW Property="ProductVersion" Value="24.07.03"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{3D296ADD-7B3B-4B1B-8A4D-8DA669CCAF51}"/>
     <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
@@ -321,20 +321,21 @@
     <ROW Directory="Images_Dir" Directory_Parent="KnowledgeSystem_Dir" DefaultDir="Images"/>
     <ROW Directory="KnowledgeSystem_Dir" Directory_Parent="APPDIR" DefaultDir="KNOWLE~1|KnowledgeSystem"/>
     <ROW Directory="SHORTCUTDIR" Directory_Parent="TARGETDIR" DefaultDir="SHORTC~1|SHORTCUTDIR" IsPseudoRoot="1"/>
-    <ROW Directory="StartMenuFolder" Directory_Parent="TARGETDIR" DefaultDir="STARTM~1|StartMenuFolder" IsPseudoRoot="1"/>
     <ROW Directory="TARGETDIR" DefaultDir="SourceDir"/>
     <ROW Directory="dll_Dir" Directory_Parent="KnowledgeSystem_Dir" DefaultDir="dll"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
     <ROW Component="APPDIR" ComponentId="{851A2458-0F56-4915-994C-F0EF3FB567DB}" Directory_="APPDIR" Attributes="0"/>
-    <ROW Component="KnowledgeSystem_ContentOutput_Html" ComponentId="{8804F931-C0A2-4767-B001-1631CD1CA45F}" Directory_="Html_Dir" Attributes="0" KeyPath="f301_NotifyPersonnelTransfer.html" Type="0"/>
-    <ROW Component="KnowledgeSystem_ContentOutput_Images" ComponentId="{80799FC2-379A-4DD9-8A9A-7046098D5DEE}" Directory_="Images_Dir" Attributes="0" KeyPath="Actions_Forbid.svg" Type="0"/>
-    <ROW Component="KnowledgeSystem_ContentOutput_dll" ComponentId="{0E71C21E-DD06-4E36-B49A-F5A87BE05D7F}" Directory_="dll_Dir" Attributes="0" KeyPath="Spire.Presentation.dll_1"/>
-    <ROW Component="KnowledgeSystem_PrimaryOutput" ComponentId="{B63E1A0B-4F99-485B-ABEA-2F28BF59ECE9}" Directory_="KnowledgeSystem_Dir" Attributes="0" KeyPath="KnowledgeSystem.exe"/>
-    <ROW Component="KnowledgeSystem_References" ComponentId="{EB6BE83C-C928-431A-A00D-31CBBE42CFD8}" Directory_="KnowledgeSystem_Dir" Attributes="0" KeyPath="DevExpress.XtraCharts.v22.1.Extensions.dll"/>
-    <ROW Component="KnowledgeSystem_SymbolsOutput" ComponentId="{06DF53B5-83D9-447F-AD34-6B6861AAB0CC}" Directory_="KnowledgeSystem_Dir" Attributes="0" KeyPath="KnowledgeSystem.pdb"/>
+    <ROW Component="FHS" ComponentId="{9AB09562-143B-40BA-93C5-3BDECC3C14E7}" Directory_="APPDIR" Attributes="4" KeyPath="tuanfhs"/>
+    <ROW Component="KnowledgeSystem_ContentOutput_Html" ComponentId="{ADC5CAED-DA1B-4951-A642-9D39907BE732}" Directory_="Html_Dir" Attributes="0" KeyPath="f301_NotifyPersonnelTransfer.html" Type="0"/>
+    <ROW Component="KnowledgeSystem_ContentOutput_Images" ComponentId="{13439127-A2D1-4776-95E4-8FCA0A7FCAEB}" Directory_="Images_Dir" Attributes="0" KeyPath="Actions_Forbid.svg" Type="0"/>
+    <ROW Component="KnowledgeSystem_ContentOutput_dll" ComponentId="{076516C4-FFD8-4565-8B81-39340EED69CF}" Directory_="dll_Dir" Attributes="0" KeyPath="Spire.Presentation.dll_1"/>
+    <ROW Component="KnowledgeSystem_PrimaryOutput" ComponentId="{35FA9FCF-A747-4239-9087-28BBDBEF6E4C}" Directory_="KnowledgeSystem_Dir" Attributes="0" KeyPath="KnowledgeSystem.exe"/>
+    <ROW Component="KnowledgeSystem_References" ComponentId="{42C1BBF3-CAAE-4EB6-A828-3ED25ADDBB2B}" Directory_="KnowledgeSystem_Dir" Attributes="0" KeyPath="Microsoft.mshtml.dll"/>
+    <ROW Component="KnowledgeSystem_SymbolsOutput" ComponentId="{3E6C3527-36C0-4B29-9E2A-DAAB5E8A10C6}" Directory_="KnowledgeSystem_Dir" Attributes="0" KeyPath="KnowledgeSystem.pdb"/>
     <ROW Component="ProductInformation" ComponentId="{AF0D4D2F-448A-4F22-9D35-9380FD6A7829}" Directory_="APPDIR" Attributes="4" KeyPath="Version"/>
-    <ROW Component="SHORTCUTDIR" ComponentId="{369EAFF0-57B0-4EAB-8353-32DC19B5B4B9}" Directory_="SHORTCUTDIR" Attributes="0"/>
+    <ROW Component="SHORTCUTDIR" ComponentId="{AD9FB00C-C8C0-4023-B937-060872B5811E}" Directory_="SHORTCUTDIR" Attributes="0"/>
+    <ROW Component="_" ComponentId="{A61927BA-E2FA-4C59-B064-731DA086C2DE}" Directory_="APPDIR" Attributes="4" KeyPath="_"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFeatsComponent">
     <ROW Feature="MainFeature" Title="MainFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="0"/>
@@ -343,147 +344,147 @@
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFilesComponent">
     <ROW File="KnowledgeSystem.exe" Component_="KnowledgeSystem_PrimaryOutput" FileName="KNOWLE~2.EXE|[|AI_PROPPATH_FILENAME_PERBUILD_KnowledgeSystem.exe]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_KnowledgeSystem.exe&gt;" SelfReg="false" DigSign="true"/>
     <ROW File="KnowledgeSystem.exe.config" Component_="KnowledgeSystem_PrimaryOutput" FileName="KNOWLE~2.CON|[|AI_PROPPATH_FILENAME_PERBUILD_KnowledgeSystem.exe.config]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_KnowledgeSystem.exe.config&gt;" SelfReg="false"/>
+    <ROW File="BouncyCastle.Crypto.dll" Component_="KnowledgeSystem_References" FileName="BOUNCY~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_BouncyCastle.Crypto.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_BouncyCastle.Crypto.dll&gt;" SelfReg="false"/>
+    <ROW File="BusinessLayer.dll" Component_="KnowledgeSystem_References" FileName="BUSINE~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_BusinessLayer.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_BusinessLayer.dll&gt;" SelfReg="false"/>
+    <ROW File="DataAccessLayer.dll" Component_="KnowledgeSystem_References" FileName="DATAAC~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DataAccessLayer.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DataAccessLayer.dll&gt;" SelfReg="false"/>
     <ROW File="DevExpress.BonusSkins.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEXP~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.BonusSkins.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.BonusSkins.v22.1.dll&gt;" SelfReg="false"/>
     <ROW File="DevExpress.Charts.v22.1.Core.dll" Component_="KnowledgeSystem_References" FileName="DEVEXP~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Charts.v22.1.Core.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.Charts.v22.1.Core.dll&gt;" SelfReg="false"/>
     <ROW File="DevExpress.Data.Desktop.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEXP~4.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Data.Desktop.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.Data.Desktop.v22.1.dll&gt;" SelfReg="false"/>
     <ROW File="DevExpress.Data.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEXP~5.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Data.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.Data.v22.1.dll&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.Drawing.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEXP~6.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Drawing.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.Drawing.v22.1.dll&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.Pdf.v22.1.Core.dll" Component_="KnowledgeSystem_References" FileName="DEVEXP~7.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Pdf.v22.1.Core.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.Pdf.v22.1.Core.dll&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.Pdf.v22.1.Drawing.dll" Component_="KnowledgeSystem_References" FileName="DEVEXP~8.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Pdf.v22.1.Drawing.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.Pdf.v22.1.Drawing.dll&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.Printing.v22.1.Core.dll" Component_="KnowledgeSystem_References" FileName="DEVEXP~9.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Printing.v22.1.Core.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.Printing.v22.1.Core.dll&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.Sparkline.v22.1.Core.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~10.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Sparkline.v22.1.Core.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.Sparkline.v22.1.Core.dll&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.Utils.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~11.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Utils.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.Utils.v22.1.dll&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.Utils.v22.1.UI.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~12.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Utils.v22.1.UI.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.Utils.v22.1.UI.dll&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.XtraBars.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~13.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraBars.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraBars.v22.1.dll&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.XtraCharts.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~14.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraCharts.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraCharts.v22.1.dll&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.XtraCharts.v22.1.UI.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~15.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraCharts.v22.1.UI.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraCharts.v22.1.UI.dll&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.XtraCharts.v22.1.Wizard.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~16.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraCharts.v22.1.Wizard.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraCharts.v22.1.Wizard.dll&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.XtraDialogs.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~17.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraDialogs.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraDialogs.v22.1.dll&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.XtraEditors.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~18.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraEditors.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraEditors.v22.1.dll&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.XtraGrid.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~19.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraGrid.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraGrid.v22.1.dll&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.XtraLayout.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~20.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraLayout.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraLayout.v22.1.dll&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.XtraPdfViewer.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~21.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraPdfViewer.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraPdfViewer.v22.1.dll&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.XtraPrinting.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~22.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraPrinting.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraPrinting.v22.1.dll&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.XtraTreeList.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~23.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraTreeList.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraTreeList.v22.1.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.DataAccess.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEXP~6.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.DataAccess.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.DataAccess.v22.1.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.DataAccess.v22.1.UI.dll" Component_="KnowledgeSystem_References" FileName="DEVEXP~7.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.DataAccess.v22.1.UI.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.DataAccess.v22.1.UI.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.DataVisualization.v22.1.Core.dll" Component_="KnowledgeSystem_References" FileName="DEVEXP~8.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.DataVisualization.v22.1.Core.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.DataVisualization.v22.1.Core.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.Docs.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEXP~9.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Docs.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.Docs.v22.1.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.Drawing.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~10.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Drawing.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.Drawing.v22.1.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.Images.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~11.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Images.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.Images.v22.1.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.Office.v22.1.Core.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~12.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Office.v22.1.Core.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.Office.v22.1.Core.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.Pdf.v22.1.Core.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~13.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Pdf.v22.1.Core.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.Pdf.v22.1.Core.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.Pdf.v22.1.Drawing.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~14.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Pdf.v22.1.Drawing.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.Pdf.v22.1.Drawing.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.PivotGrid.v22.1.Core.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~15.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.PivotGrid.v22.1.Core.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.PivotGrid.v22.1.Core.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.Printing.v22.1.Core.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~16.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Printing.v22.1.Core.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.Printing.v22.1.Core.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.RichEdit.v22.1.Core.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~17.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.RichEdit.v22.1.Core.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.RichEdit.v22.1.Core.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.RichEdit.v22.1.Export.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~18.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.RichEdit.v22.1.Export.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.RichEdit.v22.1.Export.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.Sparkline.v22.1.Core.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~19.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Sparkline.v22.1.Core.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.Sparkline.v22.1.Core.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.Spreadsheet.v22.1.Core.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~20.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Spreadsheet.v22.1.Core.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.Spreadsheet.v22.1.Core.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.Utils.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~21.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Utils.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.Utils.v22.1.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.Utils.v22.1.UI.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~22.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Utils.v22.1.UI.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.Utils.v22.1.UI.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.Xpo.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~23.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Xpo.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.Xpo.v22.1.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.XtraBars.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~24.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraBars.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraBars.v22.1.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.XtraCharts.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~25.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraCharts.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraCharts.v22.1.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.XtraCharts.v22.1.UI.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~26.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraCharts.v22.1.UI.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraCharts.v22.1.UI.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.XtraCharts.v22.1.Wizard.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~27.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraCharts.v22.1.Wizard.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraCharts.v22.1.Wizard.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.XtraDialogs.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~28.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraDialogs.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraDialogs.v22.1.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.XtraEditors.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~29.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraEditors.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraEditors.v22.1.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.XtraGauges.v22.1.Core.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~30.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraGauges.v22.1.Core.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraGauges.v22.1.Core.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.XtraGrid.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~31.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraGrid.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraGrid.v22.1.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.XtraLayout.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~32.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraLayout.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraLayout.v22.1.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.XtraNavBar.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~33.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraNavBar.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraNavBar.v22.1.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.XtraPdfViewer.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~34.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraPdfViewer.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraPdfViewer.v22.1.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.XtraPrinting.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~35.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraPrinting.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraPrinting.v22.1.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.XtraReports.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~36.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraReports.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraReports.v22.1.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.XtraReports.v22.1.Extensions.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~37.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraReports.v22.1.Extensions.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraReports.v22.1.Extensions.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.XtraRichEdit.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~38.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraRichEdit.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraRichEdit.v22.1.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.XtraSpreadsheet.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~39.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraSpreadsheet.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraSpreadsheet.v22.1.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.XtraTreeList.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~40.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraTreeList.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraTreeList.v22.1.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.XtraTreeMap.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~41.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraTreeMap.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraTreeMap.v22.1.dll&gt;" SelfReg="false"/>
+    <ROW File="DocumentFormat.OpenXml.dll" Component_="KnowledgeSystem_References" FileName="DOCUME~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DocumentFormat.OpenXml.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DocumentFormat.OpenXml.dll&gt;" SelfReg="false"/>
+    <ROW File="DocumentFormat.OpenXml.Framework.dll" Component_="KnowledgeSystem_References" FileName="DOCUME~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DocumentFormat.OpenXml.Framework.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DocumentFormat.OpenXml.Framework.dll&gt;" SelfReg="false"/>
     <ROW File="EntityFramework.dll" Component_="KnowledgeSystem_References" FileName="ENTITY~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_EntityFramework.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_EntityFramework.dll&gt;" SelfReg="false"/>
     <ROW File="EntityFramework.SqlServer.dll" Component_="KnowledgeSystem_References" FileName="ENTITY~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_EntityFramework.SqlServer.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_EntityFramework.SqlServer.dll&gt;" SelfReg="false"/>
     <ROW File="EPPlus.dll" Component_="KnowledgeSystem_References" FileName="[|AI_PROPPATH_FILENAME_PERBUILD_EPPlus.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_EPPlus.dll&gt;" SelfReg="false"/>
     <ROW File="EPPlus.Interfaces.dll" Component_="KnowledgeSystem_References" FileName="EPPLUS~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_EPPlus.Interfaces.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_EPPlus.Interfaces.dll&gt;" SelfReg="false"/>
     <ROW File="EPPlus.System.Drawing.dll" Component_="KnowledgeSystem_References" FileName="EPPLUS~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_EPPlus.System.Drawing.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_EPPlus.System.Drawing.dll&gt;" SelfReg="false"/>
+    <ROW File="ExcelDataReader.DataSet.dll" Component_="KnowledgeSystem_References" FileName="EXCELD~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_ExcelDataReader.DataSet.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_ExcelDataReader.DataSet.dll&gt;" SelfReg="false"/>
+    <ROW File="ExcelDataReader.dll" Component_="KnowledgeSystem_References" FileName="EXCELD~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_ExcelDataReader.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_ExcelDataReader.dll&gt;" SelfReg="false"/>
+    <ROW File="itextsharp.dll" Component_="KnowledgeSystem_References" FileName="ITEXTS~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_itextsharp.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_itextsharp.dll&gt;" SelfReg="false"/>
+    <ROW File="Logger.dll" Component_="KnowledgeSystem_References" FileName="[|AI_PROPPATH_FILENAME_PERBUILD_Logger.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Logger.dll&gt;" SelfReg="false"/>
     <ROW File="Microsoft.IO.RecyclableMemoryStream.dll" Component_="KnowledgeSystem_References" FileName="MICROS~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.IO.RecyclableMemoryStream.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.IO.RecyclableMemoryStream.dll&gt;" SelfReg="false"/>
+    <ROW File="MiniWord.dll" Component_="KnowledgeSystem_References" FileName="[|AI_PROPPATH_FILENAME_PERBUILD_MiniWord.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_MiniWord.dll&gt;" SelfReg="false"/>
     <ROW File="Newtonsoft.Json.dll" Component_="KnowledgeSystem_References" FileName="NEWTON~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Newtonsoft.Json.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Newtonsoft.Json.dll&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.XtraRichEdit.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~24.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraRichEdit.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraRichEdit.v22.1.dll&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.XtraVerticalGrid.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~25.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraVerticalGrid.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraVerticalGrid.v22.1.dll&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.DataAccess.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~26.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.DataAccess.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.DataAccess.v22.1.dll&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.DataVisualization.v22.1.Core.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~27.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.DataVisualization.v22.1.Core.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.DataVisualization.v22.1.Core.dll&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.XtraNavBar.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~28.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraNavBar.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraNavBar.v22.1.dll&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.Dialogs.v22.1.Core.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~29.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Dialogs.v22.1.Core.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.Dialogs.v22.1.Core.dll&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.RichEdit.v22.1.Core.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~30.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.RichEdit.v22.1.Core.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.RichEdit.v22.1.Core.dll&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.Office.v22.1.Core.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~31.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Office.v22.1.Core.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.Office.v22.1.Core.dll&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.Images.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~32.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Images.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.Images.v22.1.dll&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.Xpo.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~33.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Xpo.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.Xpo.v22.1.dll&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.CodeParser.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~34.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.CodeParser.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.CodeParser.v22.1.dll&gt;" SelfReg="false"/>
-    <ROW File="Actions_Forbid.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ACTION~2.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_Actions_Forbid.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Actions_Forbid.svg&gt;" SelfReg="false"/>
-    <ROW File="Actions_Settings.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ACTION~3.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_Actions_Settings.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Actions_Settings.svg&gt;" SelfReg="false"/>
-    <ROW File="Customers.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="CUSTOM~2.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_Customers.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Customers.svg&gt;" SelfReg="false"/>
-    <ROW File="none.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="[|AI_PROPPATH_FILENAME_PERBUILD_none.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_none.svg&gt;" SelfReg="false"/>
-    <ROW File="Actions_Bell.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ACTION~5.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_Actions_Bell.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Actions_Bell.svg&gt;" SelfReg="false"/>
-    <ROW File="Actions_CheckCircled.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ACTION~6.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_Actions_CheckCircled.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Actions_CheckCircled.svg&gt;" SelfReg="false"/>
-    <ROW File="Actions_DeleteCircled.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ACTION~7.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_Actions_DeleteCircled.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Actions_DeleteCircled.svg&gt;" SelfReg="false"/>
-    <ROW File="Actions_Edit.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ACTION~8.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_Actions_Edit.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Actions_Edit.svg&gt;" SelfReg="false"/>
-    <ROW File="Actions_Find.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ACTION~9.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_Actions_Find.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Actions_Find.svg&gt;" SelfReg="false"/>
-    <ROW File="Actions_Refresh.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ACTIO~10.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_Actions_Refresh.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Actions_Refresh.svg&gt;" SelfReg="false"/>
-    <ROW File="Actions_Reload.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ACTIO~11.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_Actions_Reload.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Actions_Reload.svg&gt;" SelfReg="false"/>
-    <ROW File="BO_Department.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="BO_DEP~2.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_BO_Department.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_BO_Department.svg&gt;" SelfReg="false"/>
-    <ROW File="BO_Employee.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="BO_EMP~2.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_BO_Employee.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_BO_Employee.svg&gt;" SelfReg="false"/>
-    <ROW File="ShowPrintPreview.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="SHOWPR~2.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_ShowPrintPreview.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_ShowPrintPreview.svg&gt;" SelfReg="false"/>
-    <ROW File="KnowledgeSystem.pdb" Component_="KnowledgeSystem_SymbolsOutput" FileName="KNOWLE~2.PDB|[|AI_PROPPATH_FILENAME_PERBUILD_KnowledgeSystem.pdb]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_KnowledgeSystem.pdb&gt;" SelfReg="false"/>
-    <ROW File="Approval.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="[|AI_PROPPATH_FILENAME_PERBUILD_Approval.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Approval.svg&gt;" SelfReg="false"/>
-    <ROW File="Search_more.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="SEARCH~2.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_Search_more.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Search_more.svg&gt;" SelfReg="false"/>
-    <ROW File="Statistics.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="STATIS~2.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_Statistics.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Statistics.svg&gt;" SelfReg="false"/>
-    <ROW File="StepProcess.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="STEPPR~2.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_StepProcess.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_StepProcess.svg&gt;" SelfReg="false"/>
-    <ROW File="BusinessLayer.dll" Component_="KnowledgeSystem_References" FileName="BUSINE~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_BusinessLayer.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_BusinessLayer.dll&gt;" SelfReg="false"/>
-    <ROW File="DataAccessLayer.dll" Component_="KnowledgeSystem_References" FileName="DATAAC~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DataAccessLayer.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DataAccessLayer.dll&gt;" SelfReg="false"/>
-    <ROW File="loginscreen.png" Component_="KnowledgeSystem_ContentOutput_Images" FileName="LOGINS~2.PNG|[|AI_PROPPATH_FILENAME_PERBUILD_loginscreen.png]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_loginscreen.png&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.DataAccess.v22.1.UI.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~35.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.DataAccess.v22.1.UI.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.DataAccess.v22.1.UI.dll&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.Spreadsheet.v22.1.Core.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~36.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Spreadsheet.v22.1.Core.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.Spreadsheet.v22.1.Core.dll&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.XtraSpreadsheet.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~37.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraSpreadsheet.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraSpreadsheet.v22.1.dll&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.XtraTreeMap.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~38.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraTreeMap.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraTreeMap.v22.1.dll&gt;" SelfReg="false"/>
+    <ROW File="Scriban.dll" Component_="KnowledgeSystem_References" FileName="[|AI_PROPPATH_FILENAME_PERBUILD_Scriban.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Scriban.dll&gt;" SelfReg="false"/>
     <ROW File="Spire.License.dll" Component_="KnowledgeSystem_References" FileName="SPIREL~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Spire.License.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Spire.License.dll&gt;" SelfReg="false"/>
     <ROW File="Spire.Pdf.dll" Component_="KnowledgeSystem_References" FileName="SPIREP~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Spire.Pdf.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Spire.Pdf.dll&gt;" SelfReg="false"/>
     <ROW File="Spire.Presentation.dll" Component_="KnowledgeSystem_References" FileName="SPIREP~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Spire.Presentation.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Spire.Presentation.dll&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.XtraDiagram.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~39.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraDiagram.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraDiagram.v22.1.dll&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.Diagram.v22.1.Core.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~40.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Diagram.v22.1.Core.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.Diagram.v22.1.Core.dll&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.TreeMap.v22.1.Core.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~41.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.TreeMap.v22.1.Core.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.TreeMap.v22.1.Core.dll&gt;" SelfReg="false"/>
+    <ROW File="System.ComponentModel.Annotations.dll" Component_="KnowledgeSystem_References" FileName="SYSTEM~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.ComponentModel.Annotations.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.ComponentModel.Annotations.dll&gt;" SelfReg="false"/>
+    <ROW File="System.Runtime.CompilerServices.Unsafe.dll" Component_="KnowledgeSystem_References" FileName="SYSTEM~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Runtime.CompilerServices.Unsafe.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Runtime.CompilerServices.Unsafe.dll&gt;" SelfReg="false"/>
+    <ROW File="System.Threading.Tasks.Extensions.dll" Component_="KnowledgeSystem_References" FileName="SYSTEM~4.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Threading.Tasks.Extensions.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Threading.Tasks.Extensions.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.CodeParser.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~42.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.CodeParser.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.CodeParser.v22.1.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.XtraDiagram.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~43.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraDiagram.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraDiagram.v22.1.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.Diagram.v22.1.Core.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~44.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Diagram.v22.1.Core.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.Diagram.v22.1.Core.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.Snap.v22.1.Core.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~45.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Snap.v22.1.Core.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.Snap.v22.1.Core.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.XtraVerticalGrid.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~46.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraVerticalGrid.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraVerticalGrid.v22.1.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.Dialogs.v22.1.Core.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~47.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Dialogs.v22.1.Core.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.Dialogs.v22.1.Core.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.XtraPivotGrid.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~48.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraPivotGrid.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraPivotGrid.v22.1.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.XtraCharts.v22.1.Extensions.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~49.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraCharts.v22.1.Extensions.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraCharts.v22.1.Extensions.dll&gt;" SelfReg="false"/>
+    <ROW File="DevExpress.TreeMap.v22.1.Core.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~50.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.TreeMap.v22.1.Core.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.TreeMap.v22.1.Core.dll&gt;" SelfReg="false"/>
     <ROW File="Microsoft.mshtml.dll" Component_="KnowledgeSystem_References" FileName="MICROS~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.mshtml.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.mshtml.dll&gt;" SelfReg="false"/>
-    <ROW File="checked_radio_button.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="CHECKE~2.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_checked_radio_button.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_checked_radio_button.svg&gt;" SelfReg="false"/>
-    <ROW File="unchecked_radio_button.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="UNCHEC~2.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_unchecked_radio_button.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_unchecked_radio_button.svg&gt;" SelfReg="false"/>
-    <ROW File="Logger.dll" Component_="KnowledgeSystem_References" FileName="[|AI_PROPPATH_FILENAME_PERBUILD_Logger.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Logger.dll&gt;" SelfReg="false"/>
-    <ROW File="icons_add.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS_~2.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_add.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_add.svg&gt;" SelfReg="false"/>
-    <ROW File="icons_add_User_Group.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS_~3.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_add_User_Group.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_add_User_Group.svg&gt;" SelfReg="false"/>
-    <ROW File="icons_cancel.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS_~4.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_cancel.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_cancel.svg&gt;" SelfReg="false"/>
-    <ROW File="icons_close.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS_~5.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_close.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_close.svg&gt;" SelfReg="false"/>
-    <ROW File="icons_edit.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS_~6.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_edit.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_edit.svg&gt;" SelfReg="false"/>
-    <ROW File="icons_email_send.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS_~7.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_email_send.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_email_send.svg&gt;" SelfReg="false"/>
-    <ROW File="icons_notification.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS_~8.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_notification.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_notification.svg&gt;" SelfReg="false"/>
-    <ROW File="icons_ok.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="[|AI_PROPPATH_FILENAME_PERBUILD_icons_ok.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_ok.svg&gt;" SelfReg="false"/>
-    <ROW File="icons_plus.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS_~9.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_plus.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_plus.svg&gt;" SelfReg="false"/>
-    <ROW File="icons_reload.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~10.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_reload.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_reload.svg&gt;" SelfReg="false"/>
-    <ROW File="icons_remove.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~11.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_remove.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_remove.svg&gt;" SelfReg="false"/>
-    <ROW File="icons_signature.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~12.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_signature.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_signature.svg&gt;" SelfReg="false"/>
-    <ROW File="icons_team.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~13.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_team.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_team.svg&gt;" SelfReg="false"/>
-    <ROW File="icons_upload_to_ftp.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~14.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_upload_to_ftp.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_upload_to_ftp.svg&gt;" SelfReg="false"/>
-    <ROW File="ExcelDataReader.DataSet.dll" Component_="KnowledgeSystem_References" FileName="EXCELD~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_ExcelDataReader.DataSet.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_ExcelDataReader.DataSet.dll&gt;" SelfReg="false"/>
-    <ROW File="ExcelDataReader.dll" Component_="KnowledgeSystem_References" FileName="EXCELD~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_ExcelDataReader.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_ExcelDataReader.dll&gt;" SelfReg="false"/>
-    <ROW File="icons_classroom.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~15.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_classroom.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_classroom.svg&gt;" SelfReg="false"/>
-    <ROW File="icons_diploma.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~16.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_diploma.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_diploma.svg&gt;" SelfReg="false"/>
-    <ROW File="icons_excel.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~17.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_excel.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_excel.svg&gt;" SelfReg="false"/>
-    <ROW File="icons_heart_with_pulse.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~18.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_heart_with_pulse.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_heart_with_pulse.svg&gt;" SelfReg="false"/>
-    <ROW File="icons_job.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~19.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_job.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_job.svg&gt;" SelfReg="false"/>
-    <ROW File="icons_project_setup.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~20.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_project_setup.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_project_setup.svg&gt;" SelfReg="false"/>
-    <ROW File="icons_quality.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~21.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_quality.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_quality.svg&gt;" SelfReg="false"/>
-    <ROW File="background.jpg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="BACKGR~2.JPG|[|AI_PROPPATH_FILENAME_PERBUILD_background.jpg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_background.jpg&gt;" SelfReg="false"/>
-    <ROW File="icons_change_user.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~22.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_change_user.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_change_user.svg&gt;" SelfReg="false"/>
-    <ROW File="icons_circled_1.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~23.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_circled_1.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_circled_1.svg&gt;" SelfReg="false"/>
-    <ROW File="icons_circled_2.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~24.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_circled_2.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_circled_2.svg&gt;" SelfReg="false"/>
-    <ROW File="icons_circled_3.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~25.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_circled_3.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_circled_3.svg&gt;" SelfReg="false"/>
-    <ROW File="icons_circled_4.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~26.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_circled_4.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_circled_4.svg&gt;" SelfReg="false"/>
-    <ROW File="icons_circled_5.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~27.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_circled_5.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_circled_5.svg&gt;" SelfReg="false"/>
-    <ROW File="icons_circled_6.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~28.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_circled_6.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_circled_6.svg&gt;" SelfReg="false"/>
-    <ROW File="icons_denied.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~29.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_denied.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_denied.svg&gt;" SelfReg="false"/>
-    <ROW File="icons_exchange.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~30.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_exchange.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_exchange.svg&gt;" SelfReg="false"/>
-    <ROW File="icons_filter.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~31.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_filter.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_filter.svg&gt;" SelfReg="false"/>
-    <ROW File="icons_personnel_changes.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~32.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_personnel_changes.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_personnel_changes.svg&gt;" SelfReg="false"/>
-    <ROW File="icons_unfriend.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~33.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_unfriend.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_unfriend.svg&gt;" SelfReg="false"/>
-    <ROW File="icons_uplevel.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~34.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_uplevel.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_uplevel.svg&gt;" SelfReg="false"/>
-    <ROW File="Scriban.dll" Component_="KnowledgeSystem_References" FileName="[|AI_PROPPATH_FILENAME_PERBUILD_Scriban.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Scriban.dll&gt;" SelfReg="false"/>
-    <ROW File="System.Runtime.CompilerServices.Unsafe.dll" Component_="KnowledgeSystem_References" FileName="SYSTEM~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Runtime.CompilerServices.Unsafe.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Runtime.CompilerServices.Unsafe.dll&gt;" SelfReg="false"/>
-    <ROW File="System.Threading.Tasks.Extensions.dll" Component_="KnowledgeSystem_References" FileName="SYSTEM~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.Threading.Tasks.Extensions.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.Threading.Tasks.Extensions.dll&gt;" SelfReg="false"/>
-    <ROW File="f301_NotifyPersonnelTransfer.html" Component_="KnowledgeSystem_ContentOutput_Html" FileName="F301_N~2.HTM|[|AI_PROPPATH_FILENAME_PERBUILD_f301_NotifyPersonnelTransfer.html]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_f301_NotifyPersonnelTransfer.html&gt;" SelfReg="false"/>
-    <ROW File="DocumentFormat.OpenXml.dll" Component_="KnowledgeSystem_References" FileName="DOCUME~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DocumentFormat.OpenXml.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DocumentFormat.OpenXml.dll&gt;" SelfReg="false"/>
-    <ROW File="DocumentFormat.OpenXml.Framework.dll" Component_="KnowledgeSystem_References" FileName="DOCUME~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DocumentFormat.OpenXml.Framework.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DocumentFormat.OpenXml.Framework.dll&gt;" SelfReg="false"/>
-    <ROW File="icons_info.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~35.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_info.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_info.svg&gt;" SelfReg="false"/>
-    <ROW File="icons_view.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~36.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_view.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_view.svg&gt;" SelfReg="false"/>
-    <ROW File="BouncyCastle.Crypto.dll" Component_="KnowledgeSystem_References" FileName="BOUNCY~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_BouncyCastle.Crypto.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_BouncyCastle.Crypto.dll&gt;" SelfReg="false"/>
-    <ROW File="itextsharp.dll" Component_="KnowledgeSystem_References" FileName="ITEXTS~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_itextsharp.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_itextsharp.dll&gt;" SelfReg="false"/>
-    <ROW File="System.ComponentModel.Annotations.dll" Component_="KnowledgeSystem_References" FileName="SYSTEM~4.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_System.ComponentModel.Annotations.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_System.ComponentModel.Annotations.dll&gt;" SelfReg="false"/>
     <ROW File="Spire.License.dll_1" Component_="KnowledgeSystem_ContentOutput_dll" FileName="SPIREL~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Spire.License.dll_1]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Spire.License.dll_1&gt;" SelfReg="false"/>
     <ROW File="Spire.Pdf.dll_1" Component_="KnowledgeSystem_ContentOutput_dll" FileName="SPIREP~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Spire.Pdf.dll_1]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Spire.Pdf.dll_1&gt;" SelfReg="false"/>
     <ROW File="Spire.Presentation.dll_1" Component_="KnowledgeSystem_ContentOutput_dll" FileName="SPIREP~3.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Spire.Presentation.dll_1]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Spire.Presentation.dll_1&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.Docs.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~42.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Docs.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.Docs.v22.1.dll&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.PivotGrid.v22.1.Core.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~43.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.PivotGrid.v22.1.Core.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.PivotGrid.v22.1.Core.dll&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.RichEdit.v22.1.Export.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~44.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.RichEdit.v22.1.Export.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.RichEdit.v22.1.Export.dll&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.XtraGauges.v22.1.Core.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~45.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraGauges.v22.1.Core.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraGauges.v22.1.Core.dll&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.XtraReports.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~46.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraReports.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraReports.v22.1.dll&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.XtraReports.v22.1.Extensions.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~47.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraReports.v22.1.Extensions.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraReports.v22.1.Extensions.dll&gt;" SelfReg="false"/>
-    <ROW File="MiniWord.dll" Component_="KnowledgeSystem_References" FileName="[|AI_PROPPATH_FILENAME_PERBUILD_MiniWord.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_MiniWord.dll&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.Snap.v22.1.Core.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~48.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.Snap.v22.1.Core.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.Snap.v22.1.Core.dll&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.XtraPivotGrid.v22.1.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~49.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraPivotGrid.v22.1.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraPivotGrid.v22.1.dll&gt;" SelfReg="false"/>
-    <ROW File="DevExpress.XtraCharts.v22.1.Extensions.dll" Component_="KnowledgeSystem_References" FileName="DEVEX~50.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_DevExpress.XtraCharts.v22.1.Extensions.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_DevExpress.XtraCharts.v22.1.Extensions.dll&gt;" SelfReg="false"/>
-    <ROW File="icons_borr_vehicle.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~37.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_borr_vehicle.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_borr_vehicle.svg&gt;" SelfReg="false"/>
+    <ROW File="f301_NotifyPersonnelTransfer.html" Component_="KnowledgeSystem_ContentOutput_Html" FileName="F301_N~2.HTM|[|AI_PROPPATH_FILENAME_PERBUILD_f301_NotifyPersonnelTransfer.html]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_f301_NotifyPersonnelTransfer.html&gt;" SelfReg="false"/>
+    <ROW File="Actions_Forbid.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ACTION~2.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_Actions_Forbid.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Actions_Forbid.svg&gt;" SelfReg="false"/>
+    <ROW File="Actions_Settings.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ACTION~3.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_Actions_Settings.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Actions_Settings.svg&gt;" SelfReg="false"/>
+    <ROW File="background.jpg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="BACKGR~2.JPG|[|AI_PROPPATH_FILENAME_PERBUILD_background.jpg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_background.jpg&gt;" SelfReg="false"/>
+    <ROW File="checked_radio_button.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="CHECKE~2.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_checked_radio_button.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_checked_radio_button.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_add.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS_~2.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_add.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_add.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_add_User_Group.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS_~3.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_add_User_Group.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_add_User_Group.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_attach.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS_~4.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_attach.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_attach.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_borr_vehicle.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS_~5.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_borr_vehicle.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_borr_vehicle.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_cancel.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS_~6.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_cancel.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_cancel.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_change_user.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS_~7.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_change_user.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_change_user.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_circled_1.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS_~8.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_circled_1.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_circled_1.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_circled_2.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS_~9.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_circled_2.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_circled_2.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_circled_3.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~10.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_circled_3.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_circled_3.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_circled_4.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~11.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_circled_4.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_circled_4.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_circled_5.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~12.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_circled_5.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_circled_5.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_circled_6.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~13.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_circled_6.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_circled_6.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_classroom.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~14.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_classroom.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_classroom.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_close.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~15.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_close.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_close.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_denied.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~16.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_denied.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_denied.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_diploma.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~17.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_diploma.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_diploma.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_edit.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~18.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_edit.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_edit.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_email_send.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~19.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_email_send.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_email_send.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_excel.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~20.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_excel.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_excel.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_exchange.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~21.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_exchange.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_exchange.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_filter.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~22.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_filter.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_filter.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_heart_with_pulse.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~23.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_heart_with_pulse.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_heart_with_pulse.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_info.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~24.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_info.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_info.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_job.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~25.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_job.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_job.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_notification.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~26.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_notification.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_notification.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_ok.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="[|AI_PROPPATH_FILENAME_PERBUILD_icons_ok.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_ok.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_personnel_changes.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~27.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_personnel_changes.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_personnel_changes.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_plus.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~28.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_plus.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_plus.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_project_setup.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~29.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_project_setup.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_project_setup.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_quality.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~30.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_quality.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_quality.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_reload.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~31.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_reload.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_reload.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_remove.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~32.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_remove.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_remove.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_signature.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~33.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_signature.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_signature.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_team.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~34.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_team.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_team.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_transfer.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~35.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_transfer.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_transfer.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_unfriend.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~36.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_unfriend.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_unfriend.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_uplevel.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~37.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_uplevel.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_uplevel.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_upload_to_ftp.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~38.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_upload_to_ftp.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_upload_to_ftp.svg&gt;" SelfReg="false"/>
+    <ROW File="icons_view.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~39.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_view.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_view.svg&gt;" SelfReg="false"/>
     <ROW File="noimage.png" Component_="KnowledgeSystem_ContentOutput_Images" FileName="[|AI_PROPPATH_FILENAME_PERBUILD_noimage.png]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_noimage.png&gt;" SelfReg="false"/>
-    <ROW File="icons_attach.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~38.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_attach.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_attach.svg&gt;" SelfReg="false"/>
-    <ROW File="icons_transfer.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS~39.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons_transfer.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons_transfer.svg&gt;" SelfReg="false"/>
+    <ROW File="unchecked_radio_button.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="UNCHEC~2.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_unchecked_radio_button.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_unchecked_radio_button.svg&gt;" SelfReg="false"/>
+    <ROW File="Customers.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="CUSTOM~2.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_Customers.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Customers.svg&gt;" SelfReg="false"/>
+    <ROW File="loginscreen.png" Component_="KnowledgeSystem_ContentOutput_Images" FileName="LOGINS~2.PNG|[|AI_PROPPATH_FILENAME_PERBUILD_loginscreen.png]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_loginscreen.png&gt;" SelfReg="false"/>
+    <ROW File="none.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="[|AI_PROPPATH_FILENAME_PERBUILD_none.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_none.svg&gt;" SelfReg="false"/>
+    <ROW File="Search_more.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="SEARCH~2.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_Search_more.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Search_more.svg&gt;" SelfReg="false"/>
+    <ROW File="Statistics.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="STATIS~2.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_Statistics.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Statistics.svg&gt;" SelfReg="false"/>
+    <ROW File="Actions_Bell.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ACTION~4.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_Actions_Bell.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Actions_Bell.svg&gt;" SelfReg="false"/>
+    <ROW File="Actions_CheckCircled.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ACTION~5.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_Actions_CheckCircled.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Actions_CheckCircled.svg&gt;" SelfReg="false"/>
+    <ROW File="Actions_DeleteCircled.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ACTION~6.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_Actions_DeleteCircled.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Actions_DeleteCircled.svg&gt;" SelfReg="false"/>
+    <ROW File="Actions_Edit.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ACTION~7.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_Actions_Edit.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Actions_Edit.svg&gt;" SelfReg="false"/>
+    <ROW File="Actions_Find.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ACTION~8.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_Actions_Find.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Actions_Find.svg&gt;" SelfReg="false"/>
+    <ROW File="Actions_Refresh.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ACTION~9.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_Actions_Refresh.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Actions_Refresh.svg&gt;" SelfReg="false"/>
+    <ROW File="Actions_Reload.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ACTIO~10.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_Actions_Reload.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Actions_Reload.svg&gt;" SelfReg="false"/>
+    <ROW File="BO_Department.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="BO_DEP~2.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_BO_Department.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_BO_Department.svg&gt;" SelfReg="false"/>
+    <ROW File="BO_Employee.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="BO_EMP~2.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_BO_Employee.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_BO_Employee.svg&gt;" SelfReg="false"/>
+    <ROW File="ShowPrintPreview.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="SHOWPR~2.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_ShowPrintPreview.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_ShowPrintPreview.svg&gt;" SelfReg="false"/>
+    <ROW File="Approval.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="[|AI_PROPPATH_FILENAME_PERBUILD_Approval.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Approval.svg&gt;" SelfReg="false"/>
+    <ROW File="StepProcess.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="STEPPR~2.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_StepProcess.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_StepProcess.svg&gt;" SelfReg="false"/>
+    <ROW File="KnowledgeSystem.pdb" Component_="KnowledgeSystem_SymbolsOutput" FileName="KNOWLE~2.PDB|[|AI_PROPPATH_FILENAME_PERBUILD_KnowledgeSystem.pdb]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_KnowledgeSystem.pdb&gt;" SelfReg="false"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.AppPathsComponent">
     <ROW Name="AI_APPPATH_PERBUILD_Actions_Bell.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_Actions_Bell.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_Actions_Bell.svg]" Type="2" Content="0"/>
@@ -713,13 +714,15 @@
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFeatCompsComponent">
     <ROW Feature_="MainFeature" Component_="APPDIR"/>
     <ROW Feature_="MainFeature" Component_="ProductInformation"/>
+    <ROW Feature_="MainFeature" Component_="FHS"/>
     <ROW Feature_="MainFeature" Component_="KnowledgeSystem_PrimaryOutput"/>
     <ROW Feature_="MainFeature" Component_="SHORTCUTDIR"/>
     <ROW Feature_="MainFeature" Component_="KnowledgeSystem_References"/>
+    <ROW Feature_="MainFeature" Component_="KnowledgeSystem_ContentOutput_dll"/>
+    <ROW Feature_="MainFeature" Component_="KnowledgeSystem_ContentOutput_Html"/>
     <ROW Feature_="MainFeature" Component_="KnowledgeSystem_ContentOutput_Images"/>
     <ROW Feature_="MainFeature" Component_="KnowledgeSystem_SymbolsOutput"/>
-    <ROW Feature_="MainFeature" Component_="KnowledgeSystem_ContentOutput_Html"/>
-    <ROW Feature_="MainFeature" Component_="KnowledgeSystem_ContentOutput_dll"/>
+    <ROW Feature_="MainFeature" Component_="_"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiIconsComponent">
     <ROW Name="AppIcon.exe" SourcePath="..\KnowledgeSystem\AppIcon.ico" Index="0"/>
@@ -753,11 +756,13 @@
     <ROW Registry="ProductName" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="\"/>
     <ROW Registry="Software" Root="-1" Key="Software" Name="\"/>
     <ROW Registry="Version" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="Version" Value="[ProductVersion]" Component_="ProductInformation"/>
+    <ROW Registry="_" Root="0" Key="FHS\dms" Value="[#KnowledgeSystem.exe]" Component_="_"/>
+    <ROW Registry="shell" Root="0" Key="FHS\dms" Name="\"/>
+    <ROW Registry="tuanfhs" Root="0" Key="FHS" Name="+" Component_="FHS"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiShortsComponent">
     <ROW Shortcut="KnowledgeSystem" Directory_="SHORTCUTDIR" Name="冶金文管系統" Component_="KnowledgeSystem_PrimaryOutput" Target="[#KnowledgeSystem.exe]" Hotkey="0" IconIndex="0" ShowCmd="1" CustomFlags="1"/>
     <ROW Shortcut="_" Directory_="DesktopFolder" Name="冶金文管系統" Component_="KnowledgeSystem_PrimaryOutput" Target="[#KnowledgeSystem.exe]" Hotkey="0" IconIndex="0" ShowCmd="1" CustomFlags="1"/>
-    <ROW Shortcut="__1" Directory_="StartMenuFolder" Name="冶金文管系統" Component_="KnowledgeSystem_PrimaryOutput" Target="[#KnowledgeSystem.exe]" Hotkey="0" IconIndex="0" ShowCmd="1" CustomFlags="1"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiThemeComponent">
     <ATTRIBUTE name="UsedTheme" value="classic"/>
@@ -769,50 +774,134 @@
   <COMPONENT cid="caphyon.advinst.msicomp.VsProjectComponent">
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="PrimaryOutput" OutputFile="KnowledgeSystem.exe" OutputFileShortcut="KnowledgeSystem"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="PrimaryOutput" OutputFile="KnowledgeSystem.exe.config"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="BouncyCastle.Crypto.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="BusinessLayer.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DataAccessLayer.dll"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.BonusSkins.v22.1.dll"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.Charts.v22.1.Core.dll"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.Data.Desktop.v22.1.dll"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.Data.v22.1.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.DataAccess.v22.1.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.DataAccess.v22.1.UI.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.DataVisualization.v22.1.Core.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.Docs.v22.1.dll"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.Drawing.v22.1.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.Images.v22.1.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.Office.v22.1.Core.dll"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.Pdf.v22.1.Core.dll"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.Pdf.v22.1.Drawing.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.PivotGrid.v22.1.Core.dll"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.Printing.v22.1.Core.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.RichEdit.v22.1.Core.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.RichEdit.v22.1.Export.dll"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.Sparkline.v22.1.Core.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.Spreadsheet.v22.1.Core.dll"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.Utils.v22.1.dll"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.Utils.v22.1.UI.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.Xpo.v22.1.dll"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.XtraBars.v22.1.dll"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.XtraCharts.v22.1.dll"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.XtraCharts.v22.1.UI.dll"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.XtraCharts.v22.1.Wizard.dll"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.XtraDialogs.v22.1.dll"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.XtraEditors.v22.1.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.XtraGauges.v22.1.Core.dll"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.XtraGrid.v22.1.dll"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.XtraLayout.v22.1.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.XtraNavBar.v22.1.dll"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.XtraPdfViewer.v22.1.dll"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.XtraPrinting.v22.1.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.XtraReports.v22.1.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.XtraReports.v22.1.Extensions.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.XtraRichEdit.v22.1.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.XtraSpreadsheet.v22.1.dll"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.XtraTreeList.v22.1.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.XtraTreeMap.v22.1.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DocumentFormat.OpenXml.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DocumentFormat.OpenXml.Framework.dll"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="EntityFramework.dll"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="EntityFramework.SqlServer.dll"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="EPPlus.dll"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="EPPlus.Interfaces.dll"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="EPPlus.System.Drawing.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="ExcelDataReader.DataSet.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="ExcelDataReader.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="itextsharp.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="Logger.dll"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="Microsoft.IO.RecyclableMemoryStream.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="MiniWord.dll"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="Newtonsoft.Json.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.XtraRichEdit.v22.1.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.XtraVerticalGrid.v22.1.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.DataAccess.v22.1.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.DataVisualization.v22.1.Core.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.XtraNavBar.v22.1.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.Dialogs.v22.1.Core.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.RichEdit.v22.1.Core.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.Office.v22.1.Core.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.Images.v22.1.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.Xpo.v22.1.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="Scriban.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="Spire.License.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="Spire.Pdf.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="Spire.Presentation.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="System.ComponentModel.Annotations.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="System.Runtime.CompilerServices.Unsafe.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="System.Threading.Tasks.Extensions.dll"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.CodeParser.v22.1.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.XtraDiagram.v22.1.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.Diagram.v22.1.Core.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.Snap.v22.1.Core.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.XtraVerticalGrid.v22.1.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.Dialogs.v22.1.Core.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.XtraPivotGrid.v22.1.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.XtraCharts.v22.1.Extensions.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.TreeMap.v22.1.Core.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="Microsoft.mshtml.dll"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="Spire.License.dll_1"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="Spire.Pdf.dll_1"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="Spire.Presentation.dll_1"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="f301_NotifyPersonnelTransfer.html"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="Actions_Forbid.svg"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="Actions_Settings.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="background.jpg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="checked_radio_button.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_add.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_add_User_Group.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_attach.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_borr_vehicle.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_cancel.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_change_user.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_circled_1.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_circled_2.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_circled_3.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_circled_4.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_circled_5.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_circled_6.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_classroom.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_close.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_denied.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_diploma.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_edit.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_email_send.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_excel.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_exchange.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_filter.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_heart_with_pulse.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_info.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_job.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_notification.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_ok.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_personnel_changes.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_plus.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_project_setup.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_quality.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_reload.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_remove.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_signature.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_team.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_transfer.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_unfriend.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_uplevel.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_upload_to_ftp.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_view.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="noimage.png"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="unchecked_radio_button.svg"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="Customers.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="loginscreen.png"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="none.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="Search_more.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="Statistics.svg"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="Actions_Bell.svg"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="Actions_CheckCircled.svg"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="Actions_DeleteCircled.svg"/>
@@ -824,91 +913,7 @@
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="BO_Employee.svg"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="ShowPrintPreview.svg"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="Approval.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="SymbolsOutput" OutputFile="KnowledgeSystem.pdb"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="Search_more.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="Statistics.svg"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="StepProcess.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="BusinessLayer.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DataAccessLayer.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="loginscreen.png"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.DataAccess.v22.1.UI.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.Spreadsheet.v22.1.Core.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.XtraSpreadsheet.v22.1.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.XtraTreeMap.v22.1.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="Spire.License.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="Spire.Pdf.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="Spire.Presentation.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.XtraDiagram.v22.1.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.Diagram.v22.1.Core.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.TreeMap.v22.1.Core.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="Microsoft.mshtml.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="checked_radio_button.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="unchecked_radio_button.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="Logger.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_add.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_add_User_Group.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_cancel.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_close.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_edit.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_email_send.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_notification.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_ok.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_plus.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_reload.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_remove.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_signature.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_team.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_upload_to_ftp.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="ExcelDataReader.DataSet.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="ExcelDataReader.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_classroom.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_diploma.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_excel.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_heart_with_pulse.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_job.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_project_setup.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_quality.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="background.jpg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_change_user.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_circled_1.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_circled_2.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_circled_3.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_circled_4.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_circled_5.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_circled_6.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_denied.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_exchange.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_filter.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_personnel_changes.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_unfriend.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_uplevel.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="Scriban.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="System.Runtime.CompilerServices.Unsafe.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="System.Threading.Tasks.Extensions.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="f301_NotifyPersonnelTransfer.html"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DocumentFormat.OpenXml.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DocumentFormat.OpenXml.Framework.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_info.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_view.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="BouncyCastle.Crypto.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="itextsharp.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="System.ComponentModel.Annotations.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="Spire.License.dll_1"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="Spire.Pdf.dll_1"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="Spire.Presentation.dll_1"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.Docs.v22.1.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.PivotGrid.v22.1.Core.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.RichEdit.v22.1.Export.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.XtraGauges.v22.1.Core.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.XtraReports.v22.1.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.XtraReports.v22.1.Extensions.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="MiniWord.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.Snap.v22.1.Core.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.XtraPivotGrid.v22.1.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="DevExpress.XtraCharts.v22.1.Extensions.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_borr_vehicle.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="noimage.png"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_attach.svg"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons_transfer.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="SymbolsOutput" OutputFile="KnowledgeSystem.pdb"/>
   </COMPONENT>
 </DOCUMENT>

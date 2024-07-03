@@ -5,6 +5,7 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Items.ViewInfo;
 using KnowledgeSystem.Helpers;
+using KnowledgeSystem.Views._00_Generals;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -32,6 +33,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
         List<dm_DrivingLic> drivingLics;
         List<dm_DrivingLic> carDrivingLics;
 
+        public dm_User borrUsr = TPConfigs.LoginUser;
+
         private void InitializeMenuItems()
         {
             itemViewInfo = new DXMenuItem("Lịch sử mượn", ItemViewInfo_Click, TPSvgimages.Info, DXMenuItemPriority.Normal);
@@ -57,6 +60,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
             frm.indexTypeVehicle = cbbTypeVehicle.SelectedIndex;
             frm.vehicleStatus = status;
             frm.borrTime = status.BorrTime;
+            frm.borrUsr = borrUsr;
             frm.ShowDialog();
 
             LoadDataVehicle();
@@ -70,6 +74,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
             frm.indexTypeVehicle = cbbTypeVehicle.SelectedIndex;
             frm.vehicleStatus = status;
             frm.licExpDate = carDrivingLics.FirstOrDefault()?.Exprires.ToString("yyyyMMdd") ?? "";
+            frm.borrUsr = borrUsr;
 
             frm.ShowDialog();
 
@@ -138,6 +143,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
 
         private void uc304_BorrVehicleMain_Load(object sender, EventArgs e)
         {
+            lcChangeUser.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             Font fontUI12 = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             DevExpress.Utils.AppearanceObject.DefaultMenuFont = fontUI12;
 
@@ -149,8 +155,15 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
 
             cbbTypeVehicle.Properties.Items.AddRange(TPConfigs.typeVehicles);
 
-            drivingLics = dm_DrivingLicBUS.Instance.GetList().Where(r => r.UserID == TPConfigs.LoginUser.Id).ToList();
+            drivingLics = dm_DrivingLicBUS.Instance.GetList().Where(r => r.UserID == borrUsr.Id).ToList();
             carDrivingLics = drivingLics.Where(r => !r.Class.StartsWith("A")).ToList();
+
+            bool roleChangeUsr = AppPermission.Instance.CheckAppPermission(AppPermission.ChangeUser304);
+            if (roleChangeUsr)
+            {
+                lcChangeUser.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                btnChangeUsr.Text = borrUsr.DisplayName;
+            }
         }
 
         private void cbbTypeVehicle_SelectedIndexChanged(object sender, EventArgs e)
@@ -169,7 +182,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
 
                 e.Menu.Items.Add(itemViewInfo);
 
-                bool IsUserBorr = !string.IsNullOrWhiteSpace(status.IdUserBorr) && status.IdUserBorr == TPConfigs.LoginUser.Id;
+                bool IsUserBorr = !string.IsNullOrWhiteSpace(status.IdUserBorr) && status.IdUserBorr == borrUsr.Id;
                 bool CanBorr = string.IsNullOrWhiteSpace(status.IdUserBorr);
                 bool CheckDrivingLic = cbbTypeVehicle.SelectedIndex == 1 && carDrivingLics.Count > 0 || cbbTypeVehicle.SelectedIndex == 0;
 
@@ -187,6 +200,26 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             LoadDataVehicle();
+        }
+
+        private void btnChangeUsr_Click(object sender, EventArgs e)
+        {
+            uc304_ChangeUsr ucChangeUsr = new uc304_ChangeUsr();
+            if (XtraDialog.Show(ucChangeUsr, "Chọn nhân viên", MessageBoxButtons.OKCancel) != DialogResult.OK)
+            {
+                return;
+            }
+
+            if (ucChangeUsr.IdSelectUser == null)
+            {
+                return;
+            }
+
+            borrUsr = dm_UserBUS.Instance.GetItemById(ucChangeUsr.IdSelectUser);
+            btnChangeUsr.Text = borrUsr.DisplayName;
+
+            drivingLics = dm_DrivingLicBUS.Instance.GetList().Where(r => r.UserID == borrUsr.Id).ToList();
+            carDrivingLics = drivingLics.Where(r => !r.Class.StartsWith("A")).ToList();
         }
     }
 }

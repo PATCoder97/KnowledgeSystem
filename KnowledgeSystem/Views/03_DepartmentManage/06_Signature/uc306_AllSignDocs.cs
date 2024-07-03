@@ -223,7 +223,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
         void SetMenuItemProperties(DXMenuItem menuItem)
         {
             menuItem.ImageOptions.SvgImageSize = new Size(24, 24);
-            menuItem.AppearanceHovered.ForeColor = Color.Blue;
+            menuItem.AppearanceHovered.ForeColor = System.Drawing.Color.Blue;
         }
 
         private void InitializeIcon()
@@ -234,9 +234,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
 
         private void CreateRuleGV()
         {
-            gvData.FormatRules.AddExpressionRule(gColRemark, new DevExpress.Utils.AppearanceDefault() { ForeColor = Color.Blue }, $"[Remark] = \'{NAME_ISPROGRESS}\'");
-            gvData.FormatRules.AddExpressionRule(gColRemark, new DevExpress.Utils.AppearanceDefault() { ForeColor = Color.Red }, $"[Remark] = \'{NAME_ISCANCEL}\'");
-            gvDocs.FormatRules.AddExpressionRule(gColRemark2, new DevExpress.Utils.AppearanceDefault() { ForeColor = Color.Red }, $"[Status] = \'{NAME_ISCANCEL}\'");
+            gvData.FormatRules.AddExpressionRule(gColRemark, new DevExpress.Utils.AppearanceDefault() { ForeColor = System.Drawing.Color.Blue }, $"[Remark] = \'{NAME_ISPROGRESS}\'");
+            gvData.FormatRules.AddExpressionRule(gColRemark, new DevExpress.Utils.AppearanceDefault() { ForeColor = System.Drawing.Color.Red }, $"[Remark] = \'{NAME_ISCANCEL}\'");
+            gvDocs.FormatRules.AddExpressionRule(gColRemark2, new DevExpress.Utils.AppearanceDefault() { ForeColor = System.Drawing.Color.Red }, $"[Status] = \'{NAME_ISCANCEL}\'");
         }
 
         private void LoadData()
@@ -268,8 +268,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
                                         types,
                                         urs,
                                         Dept = upUsr.IdDepartment,
-                                        DisplayName = urs != null ? $"{urs.Id} {urs.IdDepartment}/{urs.DisplayName}" : "",
-                                        UploadUsr = $"{upUsr.Id} {upUsr.DisplayName}"
+                                        DisplayName = urs != null ? $"{urs.Id.Substring(urs.Id.Length - 5)} {urs.IdDepartment}/{urs.DisplayName}" : "",
+                                        UploadUsr = $"{upUsr.Id.Substring(upUsr.Id.Length - 5)} {upUsr.DisplayName}",
+                                        Code = data.Code
                                     }).ToList();
 
 

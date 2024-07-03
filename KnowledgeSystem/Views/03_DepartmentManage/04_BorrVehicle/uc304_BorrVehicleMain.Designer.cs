@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.btnChangeUsr = new DevExpress.XtraEditors.SimpleButton();
+            this.btnRefresh = new DevExpress.XtraEditors.SimpleButton();
             this.gcInfo = new DevExpress.XtraGrid.GridControl();
             this.gvInfo = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -54,8 +56,8 @@
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.btnRefresh = new DevExpress.XtraEditors.SimpleButton();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcChangeUser = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcInfo)).BeginInit();
@@ -69,10 +71,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcChangeUser)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.btnChangeUsr);
             this.layoutControl1.Controls.Add(this.btnRefresh);
             this.layoutControl1.Controls.Add(this.gcInfo);
             this.layoutControl1.Controls.Add(this.gcVehicleStatus);
@@ -85,6 +89,30 @@
             this.layoutControl1.Size = new System.Drawing.Size(812, 504);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // btnChangeUsr
+            // 
+            this.btnChangeUsr.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.btnChangeUsr.Appearance.Options.UseFont = true;
+            this.btnChangeUsr.Location = new System.Drawing.Point(439, 12);
+            this.btnChangeUsr.Name = "btnChangeUsr";
+            this.btnChangeUsr.Size = new System.Drawing.Size(158, 32);
+            this.btnChangeUsr.StyleController = this.layoutControl1;
+            this.btnChangeUsr.TabIndex = 9;
+            this.btnChangeUsr.Text = "潘英俊";
+            this.btnChangeUsr.Click += new System.EventHandler(this.btnChangeUsr_Click);
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRefresh.Appearance.Options.UseFont = true;
+            this.btnRefresh.Location = new System.Drawing.Point(328, 12);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(99, 32);
+            this.btnRefresh.StyleController = this.layoutControl1;
+            this.btnRefresh.TabIndex = 8;
+            this.btnRefresh.Text = "Làm mới";
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // gcInfo
             // 
@@ -339,7 +367,8 @@
             this.layoutControlItem3,
             this.emptySpaceItem1,
             this.layoutControlItem2,
-            this.layoutControlItem4});
+            this.layoutControlItem4,
+            this.lcChangeUser});
             this.Root.Name = "Root";
             this.Root.Size = new System.Drawing.Size(812, 504);
             this.Root.TextVisible = false;
@@ -373,9 +402,9 @@
             // emptySpaceItem1
             // 
             this.emptySpaceItem1.AllowHotTrack = false;
-            this.emptySpaceItem1.Location = new System.Drawing.Point(419, 0);
+            this.emptySpaceItem1.Location = new System.Drawing.Point(589, 0);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(373, 36);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(203, 36);
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
             // layoutControlItem2
@@ -386,18 +415,6 @@
             this.layoutControlItem2.Size = new System.Drawing.Size(792, 195);
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
-            // 
-            // btnRefresh
-            // 
-            this.btnRefresh.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefresh.Appearance.Options.UseFont = true;
-            this.btnRefresh.Location = new System.Drawing.Point(328, 12);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(99, 32);
-            this.btnRefresh.StyleController = this.layoutControl1;
-            this.btnRefresh.TabIndex = 8;
-            this.btnRefresh.Text = "Làm mới";
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // layoutControlItem4
             // 
@@ -413,6 +430,19 @@
             this.layoutControlItem4.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem4.TextVisible = false;
+            // 
+            // lcChangeUser
+            // 
+            this.lcChangeUser.Control = this.btnChangeUsr;
+            this.lcChangeUser.Location = new System.Drawing.Point(419, 0);
+            this.lcChangeUser.MaxSize = new System.Drawing.Size(170, 0);
+            this.lcChangeUser.MinSize = new System.Drawing.Size(170, 33);
+            this.lcChangeUser.Name = "lcChangeUser";
+            this.lcChangeUser.Padding = new DevExpress.XtraLayout.Utils.Padding(10, 2, 2, 2);
+            this.lcChangeUser.Size = new System.Drawing.Size(170, 36);
+            this.lcChangeUser.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.lcChangeUser.TextSize = new System.Drawing.Size(0, 0);
+            this.lcChangeUser.TextVisible = false;
             // 
             // uc304_BorrVehicleMain
             // 
@@ -435,6 +465,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcChangeUser)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -469,5 +500,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn15;
         private DevExpress.XtraEditors.SimpleButton btnRefresh;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
+        private DevExpress.XtraEditors.SimpleButton btnChangeUsr;
+        private DevExpress.XtraLayout.LayoutControlItem lcChangeUser;
     }
 }

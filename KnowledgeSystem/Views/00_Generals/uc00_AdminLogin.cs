@@ -21,7 +21,19 @@ namespace KnowledgeSystem.Views._00_Generals
             txbPass.DataBindings.Add("Text", this, "MasterKey");
         }
 
-        public string ID { get; set; }
+        private string _id;
+        public string ID
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                _id = "VNW" + value.PadLeft(7, '0');
+            }
+        }
+
         public string MasterKey { get; set; }
     }
 }

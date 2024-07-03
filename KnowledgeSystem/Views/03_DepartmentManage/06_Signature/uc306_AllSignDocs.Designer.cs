@@ -44,6 +44,7 @@
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColEnterDate = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -186,6 +187,7 @@
             this.gridColumn9,
             this.gridColumn10,
             this.gridColumn2,
+            this.gridColumn12,
             this.gridColumn3,
             this.gridColumn11,
             this.gColEnterDate,
@@ -243,6 +245,15 @@
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 2;
             // 
+            // gridColumn12
+            // 
+            this.gridColumn12.Caption = "文件編號";
+            this.gridColumn12.FieldName = "Code";
+            this.gridColumn12.Name = "gridColumn12";
+            this.gridColumn12.Visible = true;
+            this.gridColumn12.VisibleIndex = 3;
+            this.gridColumn12.Width = 131;
+            // 
             // gridColumn3
             // 
             this.gridColumn3.Caption = "文件名稱";
@@ -250,7 +261,7 @@
             this.gridColumn3.MinWidth = 250;
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 3;
+            this.gridColumn3.VisibleIndex = 4;
             this.gridColumn3.Width = 250;
             // 
             // gridColumn11
@@ -259,7 +270,7 @@
             this.gridColumn11.FieldName = "data.Confidential";
             this.gridColumn11.Name = "gridColumn11";
             this.gridColumn11.Visible = true;
-            this.gridColumn11.VisibleIndex = 4;
+            this.gridColumn11.VisibleIndex = 5;
             // 
             // gColEnterDate
             // 
@@ -269,7 +280,7 @@
             this.gColEnterDate.FieldName = "data.UploadDate";
             this.gColEnterDate.Name = "gColEnterDate";
             this.gColEnterDate.Visible = true;
-            this.gColEnterDate.VisibleIndex = 5;
+            this.gColEnterDate.VisibleIndex = 6;
             // 
             // gridColumn8
             // 
@@ -277,7 +288,7 @@
             this.gridColumn8.FieldName = "DisplayName";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 7;
+            this.gridColumn8.VisibleIndex = 8;
             // 
             // gColIsProgess
             // 
@@ -299,7 +310,7 @@
             this.gColRemark.ShowUnboundExpressionMenu = true;
             this.gColRemark.UnboundDataType = typeof(string);
             this.gColRemark.Visible = true;
-            this.gColRemark.VisibleIndex = 6;
+            this.gColRemark.VisibleIndex = 7;
             // 
             // gridColumn4
             // 
@@ -307,7 +318,7 @@
             this.gridColumn4.FieldName = "data.Desc";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 8;
+            this.gridColumn4.VisibleIndex = 9;
             // 
             // barManagerTP
             // 
@@ -503,5 +514,6 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
     }
 }

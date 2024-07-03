@@ -13,11 +13,15 @@ using KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate;
 using KnowledgeSystem.Views._03_DepartmentManage._03_ShiftSchedule;
 using KnowledgeSystem.Views._03_DepartmentManage._06_Signature;
 using KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Security.Principal;
 using System.Windows.Forms;
@@ -32,7 +36,7 @@ namespace KnowledgeSystem
         [STAThread]
         static void Main(string[] args)
         {
-            new AppCopyRight() { Version = "24.06.28" };
+            new AppCopyRight() { Version = "24.07.03" };
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             TPConfigs.SetSystemStaticValue();
@@ -40,29 +44,28 @@ namespace KnowledgeSystem
             // Kiểm tra tham số dòng lệnh
             if (args.Length > 2)
             {
-                // tuanfhs://example?perm=value1&taget=value2&param1=value3
-                string url = args[0];
-                Uri uri = new Uri(url);
-
-                // Lấy phần host (VNW0014732 debug)
-                string host = uri.Host;
-
-                // Lấy các tham số truy vấn
-                NameValueCollection queryParameters = HttpUtility.ParseQueryString(uri.Query);
-
-                string permCtrl = queryParameters["perm"];
-                string formTaget = queryParameters["taget"];
-                string paramter1 = queryParameters["param1"];
-
-                string idUsr = "";
                 string permCtrl = args[0];
                 string formTaget = args[1];
                 string paramter1 = args[2];
+
+                string idUsr = "";
                 string msg = "";
 
 #if DEBUG
                 idUsr = "VNW0014732";
 #else
+                // Kiểm tra xem ứng dụng đã chạy hay chưa
+                string appName = Process.GetCurrentProcess().ProcessName;
+                var runningProcesses = Process.GetProcessesByName(appName);
+
+                if (runningProcesses.Count() > 1)
+                {
+                    msg = "該應用程式已經在運行。結束程式！";
+                    MsgTP.MsgShowInfomation($"<font='Microsoft JhengHei UI' size=14>{msg}</font>");
+                    return;
+                }
+
+                // Kiểm tra có dùng máy công ty không
                 TPConfigs.DomainComputer = System.Net.NetworkInformation.IPGlobalProperties.GetIPGlobalProperties().DomainName;
                 if (TPConfigs.DomainComputer == DomainVNFPG.domainVNFPG)
                 {
@@ -74,6 +77,25 @@ namespace KnowledgeSystem
                     msg = "請使用公司電腦！";
                     MsgTP.MsgShowInfomation($"<font='Microsoft JhengHei UI' size=14>{msg}</font>");
                     return;
+                }
+
+                // Kiểm tra có phải bản mới không
+                using (WebClient client = new WebClient())
+                {
+                    string result = client.DownloadString(TPConfigs.UrlUpdate);
+
+                    var lsUpdateInfos = JsonConvert.DeserializeObject<List<UpdateInfo>>(result)
+                        .Where(r => r.app == TPConfigs.SoftNameEN).ToList();
+                    if (lsUpdateInfos != null && lsUpdateInfos.Count > 0)
+                    {
+                        UpdateInfo newUpdate = lsUpdateInfos.First();
+                        if (newUpdate.version != AppCopyRight.version)
+                        {
+                            msg = "請使用最新版本！";
+                            MsgTP.MsgShowInfomation($"<font='Microsoft JhengHei UI' size=14>{msg}</font>");
+                            return;
+                        }
+                    }
                 }
 #endif
 
@@ -93,8 +115,8 @@ namespace KnowledgeSystem
                 {
                     case "f306_SignDocInfo":
                         int parameter = -1; int.TryParse(paramter1, out parameter);
-
                         var signDoc = dt306_BaseBUS.Instance.GetItemById(parameter);
+
                         if (signDoc.IsProcess == false || signDoc.NextStepProg != TPConfigs.LoginUser.Id)
                         {
                             msg = "文件已處理完！";
@@ -117,13 +139,13 @@ namespace KnowledgeSystem
             else
             {
 #if DEBUG
-                // Application.Run(new f00_Main());
+                Application.Run(new f00_Main());
 
-                TPConfigs.LoginUser = dm_UserBUS.Instance.GetItemById("VNW0014732");
-                AppPermission.Instance.CheckAppPermission(7);
-                TPConfigs.IdParentControl = AppPermission.SafetyCertMain;
+                //TPConfigs.LoginUser = dm_UserBUS.Instance.GetItemById("VNW0014732");
+                //AppPermission.Instance.CheckAppPermission(7);
+                //TPConfigs.IdParentControl = AppPermission.SafetyCertMain;
 
-                Application.Run(new f00_FluentFrame(55));
+                //Application.Run(new f00_FluentFrame(55));
 #else
                 Application.Run(new f00_Main());
 #endif

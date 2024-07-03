@@ -74,5 +74,8 @@ namespace KnowledgeSystem.Helpers
 
         // 202
         public const int EditDoc202 = 40;
+
+        // 304
+        public static int ChangeUser304 { get; set; }
     }
 }

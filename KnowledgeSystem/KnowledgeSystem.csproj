@@ -279,6 +279,12 @@
     <Compile Include="Views\03_DepartmentManage\04_BorrVehicle\uc304_BorrVehicleMain.Designer.cs">
       <DependentUpon>uc304_BorrVehicleMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\03_DepartmentManage\04_BorrVehicle\uc304_ChangeUsr.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\04_BorrVehicle\uc304_ChangeUsr.Designer.cs">
+      <DependentUpon>uc304_ChangeUsr.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\03_DepartmentManage\05_PrintLabel\rp5SAreaDivision.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -730,6 +736,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\04_BorrVehicle\uc304_BorrVehicleMain.resx">
       <DependentUpon>uc304_BorrVehicleMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\04_BorrVehicle\uc304_ChangeUsr.resx">
+      <DependentUpon>uc304_ChangeUsr.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\05_PrintLabel\rp5SAreaDivision.resx">
       <DependentUpon>rp5SAreaDivision.cs</DependentUpon>
