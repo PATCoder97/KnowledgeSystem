@@ -351,6 +351,12 @@
     <Compile Include="Views\03_DepartmentManage\06_Signature\uc306_AwaitingApproval.Designer.cs">
       <DependentUpon>uc306_AwaitingApproval.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\03_DepartmentManage\06_Signature\uc306_EditSignDoc.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\06_Signature\uc306_EditSignDoc.Designer.cs">
+      <DependentUpon>uc306_EditSignDoc.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\03_DepartmentManage\06_Signature\uc306_SignatureMain.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -772,6 +778,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\06_Signature\uc306_AwaitingApproval.resx">
       <DependentUpon>uc306_AwaitingApproval.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\06_Signature\uc306_EditSignDoc.resx">
+      <DependentUpon>uc306_EditSignDoc.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\06_Signature\uc306_SignatureMain.resx">
       <DependentUpon>uc306_SignatureMain.cs</DependentUpon>

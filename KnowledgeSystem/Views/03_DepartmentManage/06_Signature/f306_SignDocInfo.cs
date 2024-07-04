@@ -40,7 +40,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
 
         List<dt306_ProgInfo> progInfos;
         List<dt306_Progress> progress;
-        dt201_Forms baseForm;
 
         BindingSource sourceAtts = new BindingSource();
         List<Attachment> baseAtts;
@@ -62,7 +61,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
 
         private void f306_SignDocInfo_Load(object sender, EventArgs e)
         {
-            Text = $"核簽文件";
+            var baseData = dt306_BaseBUS.Instance.GetItemById(idBase);
+
+            Text = $"核簽文件-{baseData.Code}-{baseData.DisplayName}";
             tabbedControlGroup1.SelectedTabPageIndex = 0;
 
             jobTitles = dm_JobTitleBUS.Instance.GetList();
@@ -91,7 +92,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
 
             int stepNow = progNow != null ? progress.IndexOf(progress.First(r => r.IdUsr == progNow.IdUsr)) : -1;
             stepProgressDoc.SelectedItemIndex = stepNow; // Focus đến bước hiện tại
-            
+
             var nextStepUsr = progress[stepNow + 1].IdUsr;
             nextStepProg = stepNow + 2 >= progress.Count ? "" : progress[stepNow + 2].IdUsr;
 

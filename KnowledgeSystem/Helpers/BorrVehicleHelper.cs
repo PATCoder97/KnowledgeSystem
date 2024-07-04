@@ -255,7 +255,7 @@ namespace KnowledgeSystem.Helpers
             }
         }
 
-        public async Task<bool> BorrMotor(string nameVehicle, int startKm, string borrTime, string place, string purposes, string numUser)
+        public async Task<bool> BorrMotor(dm_User borrUsr, string nameVehicle, int startKm, string borrTime, string place, string purposes, string numUser)
         {
             string managerVehicle = await GetManagerVehicle(nameVehicle);
             var purposesUrl = HttpUtility.UrlEncode(purposes).Replace("+", "%20").ToUpper();
@@ -265,7 +265,7 @@ namespace KnowledgeSystem.Helpers
             {
                 httpClient.BaseAddress = baseUrl;
 
-                string parameter = $"s35/{idDept2word}vkv{startKm}vkvvkvvkv{borrTime}vkv{placeUrl}vkv{purposesUrl}vkv{numUser}vkvvkv{nameVehicle}vkv{TPConfigs.LoginUser.Id}vkvYvkvYvkvYvkv{managerVehicle}vkv{DateTime.Now.ToString("yyyyMMddHHmm")}";
+                string parameter = $"s35/{idDept2word}vkv{startKm}vkvvkvvkv{borrTime}vkv{placeUrl}vkv{purposesUrl}vkv{numUser}vkvvkv{nameVehicle}vkv{borrUsr.Id}vkvYvkvYvkvYvkv{managerVehicle}vkv{DateTime.Now.ToString("yyyyMMddHHmm")}";
 
                 var response = await httpClient.GetAsync(parameter);
                 response.EnsureSuccessStatusCode();
@@ -276,9 +276,9 @@ namespace KnowledgeSystem.Helpers
             }
         }
 
-        public async Task<bool> BackMotor(string nameVehicle, int endKm, string borrTime, string backTime, int totalKm)
+        public async Task<bool> BackMotor(dm_User borrUsr, string nameVehicle, int endKm, string borrTime, string backTime, int totalKm)
         {
-            var userBackUrl = HttpUtility.UrlEncode($"{TPConfigs.LoginUser.Id}{TPConfigs.LoginUser.DisplayName}").Replace("+", "%20").ToUpper();
+            var userBackUrl = HttpUtility.UrlEncode($"{borrUsr.Id}{borrUsr.DisplayName}").Replace("+", "%20").ToUpper();
 
             using (var httpClient = new HttpClient(new HttpClientHandler { Proxy = proxy }))
             {
@@ -295,7 +295,7 @@ namespace KnowledgeSystem.Helpers
             }
         }
 
-        public async Task<bool> BorrCar(string nameVehicle, int startKm, string borrTime, string fromPlace, string toPlace, string purposes, string licExpDate)
+        public async Task<bool> BorrCar(dm_User borrUsr, string nameVehicle, int startKm, string borrTime, string fromPlace, string toPlace, string purposes, string licExpDate)
         {
             string managerVehicle = await GetManagerVehicle(nameVehicle);
             var purposesUrl = HttpUtility.UrlEncode(purposes).Replace("+", "%20").ToUpper();
@@ -306,7 +306,7 @@ namespace KnowledgeSystem.Helpers
             {
                 httpClient.BaseAddress = baseUrl;
 
-                string parameter = $"s46/{nameVehicle}vkv{TPConfigs.LoginUser.Id}vkv{idDept2word}vkv{startKm}vkvvkv{borrTime}vkvvkv{formPlaceUrl}vkv{toPlaceUrl}vkv{purposesUrl}vkvYvkvvkvvkv{licExpDate}vkvYvkvYvkvYvkvvkvvkvvkvvkv{DateTime.Now.ToString("yyyyMMddHHmm")}vkv{managerVehicle}";
+                string parameter = $"s46/{nameVehicle}vkv{borrUsr.Id}vkv{idDept2word}vkv{startKm}vkvvkv{borrTime}vkvvkv{formPlaceUrl}vkv{toPlaceUrl}vkv{purposesUrl}vkvYvkvvkvvkv{licExpDate}vkvYvkvYvkvYvkvvkvvkvvkvvkv{DateTime.Now.ToString("yyyyMMddHHmm")}vkv{managerVehicle}";
 
                 //return true;
 
@@ -319,9 +319,9 @@ namespace KnowledgeSystem.Helpers
             }
         }
 
-        public async Task<bool> BackCar(string nameVehicle, int endKm, string borrTime, string backTime, int totalKm)
+        public async Task<bool> BackCar(dm_User borrUsr, string nameVehicle, int endKm, string borrTime, string backTime, int totalKm)
         {
-            var userBackUrl = HttpUtility.UrlEncode($"{TPConfigs.LoginUser.Id}{TPConfigs.LoginUser.DisplayName}").Replace("+", "%20").ToUpper();
+            var userBackUrl = HttpUtility.UrlEncode($"{borrUsr.Id}{borrUsr.DisplayName}").Replace("+", "%20").ToUpper();
 
             using (var httpClient = new HttpClient(new HttpClientHandler { Proxy = proxy }))
             {
@@ -338,13 +338,6 @@ namespace KnowledgeSystem.Helpers
             }
         }
     }
-    // https://www.fhs.com.tw/ads/api/Furnace/rest/json/ve/s36/38LD-40006vkv202403050156vkv35851vkv202403051356vkv2vkvVNW0014732%E6%BD%98%E8%8B%B1%E4%BF%8A
-    // https://www.fhs.com.tw/ads/api/Furnace/rest/json/ve/s36/38LD-40006vkv202403051405vkv35852vkv202403051407vkv0vkvVNW0014732%E6%BD%98%E8%8B%B1%E4%BF%8A
-    // https://www.fhs.com.tw/ads/api/Furnace/rest/json/ve/s36/38LD-40006vkv202403042027vkv35845vkv202403042031vkv1vkvVNW0014732%E6%BD%98%E8%8B%B1%E4%BF%8A
-    // https://www.fhs.com.tw/ads/api/Furnace/rest/json/ve/s35/78vkv35844vkvvkvvkv202403042027vkv%E6%8A%80%E8%A1%93%E4%B8%AD%E5%BF%83vkvC.%E6%96%87%E4%BB%B6_%E7%89%A9%E5%93%81%E6%94%B6%E9%80%81%20Gui%20vkvkv1vkvvkv38LD-40006vkvVNW0014732vkvYvkvYvkvYvkvVNW0010439vkv202403042027
-
-    // https://www.fhs.com.tw/ads/api/Furnace/rest/json/ve/s47/38LD-00216vkv202403042006vkvVNW0017146%E9%BB%8E%E6%B0%8F%E5%9E%82%E7%8E%B2vkv202403042015vkv107497vkv1vkvYvkv0vkvvkvvkvNvkv0
-    // https://www.fhs.com.tw/ads/api/Furnace/rest/json/ve/s46/38LD-00216vkvVNW0017146vkv78vkv107496vkvvkv202403042006vkvvkv.vkv.vkvD.%E5%B7%A1%E6%AA%A2_%E5%8B%98%E6%9F%A5_%E5%8B%A4%E5%8B%99%20vkvYvkvvkvvkv20500304vkvYvkvYvkvYvkvvkvvkvvkvvkv202403042006vkvVNW0017887
 
     public class VehicleStatus
     {

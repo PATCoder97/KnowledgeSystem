@@ -77,5 +77,8 @@ namespace KnowledgeSystem.Helpers
 
         // 304
         public static int ChangeUser304 { get; set; }
+
+        // 306
+        public static int EditInfo306 { get; set; }
     }
 }

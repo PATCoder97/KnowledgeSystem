@@ -59,6 +59,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
         DXMenuItem itemViewFile;
         DXMenuItem itemSaveFile;
         DXMenuItem itemSaveAllFile;
+        DXMenuItem itemEditInfo;
 
         const string NAME_ISPROGRESS = "核簽中";
         const string NAME_ISCANCEL = "被退回";
@@ -70,6 +71,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             itemViewFile = CreateMenuItem("查看文件", ItemViewFile_Click, TPSvgimages.View);
             itemSaveFile = CreateMenuItem("保存檔案", ItemSaveFile_Click, TPSvgimages.Attach);
             itemSaveAllFile = CreateMenuItem("保存所有檔案", ItemSaveAllFile_Click, TPSvgimages.Attach);
+            itemEditInfo = CreateMenuItem("更新訊息", ItemEditInfo_Click, TPSvgimages.Edit);
         }
 
         private bool SaveFileWithProtect(string source, string dest)
@@ -118,6 +120,32 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             }
 
             return filePath;
+        }
+
+        private void ItemEditInfo_Click(object sender, EventArgs e)
+        {
+            GridView view = gvData;
+            int idBase = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColId));
+            var baseEdit = dt306_BaseBUS.Instance.GetItemById(idBase);
+
+            uc306_EditSignDoc ucEdit = new uc306_EditSignDoc();
+            ucEdit.baseData = baseEdit;
+            DialogResult result = XtraDialog.Show(this, ucEdit, "更新訊息", MessageBoxButtons.OKCancel);
+            if (result != DialogResult.OK)
+            {
+                return;
+            }
+
+            string displayName = ucEdit.DisplayName;
+            string code = ucEdit.Code;
+            int idType = ucEdit.IdType;
+
+            baseEdit.DisplayName = displayName;
+            baseEdit.Code = string.IsNullOrWhiteSpace(code) ? baseEdit.Code : code;
+            baseEdit.IdType = idType;
+
+            dt306_BaseBUS.Instance.AddOrUpdate(baseEdit);
+            LoadData();
         }
 
         private void ItemSaveAllFile_Click(object sender, EventArgs e)
@@ -273,7 +301,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
                                         Code = data.Code
                                     }).ToList();
 
-
                 sourceBases.DataSource = basesDisplay;
                 helper.LoadViewInfo();
 
@@ -393,11 +420,19 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
                 GridView view = sender as GridView;
                 view.FocusedRowHandle = e.HitInfo.RowHandle;
                 bool isProcess = Convert.ToBoolean(view.GetRowCellValue(view.FocusedRowHandle, "data.IsProcess"));
+                bool isOwner = view.GetRowCellValue(view.FocusedRowHandle, "data.UploadUsr").ToString() == TPConfigs.LoginUser.Id;
 
                 e.Menu.Items.Add(itemViewInfo);
                 if (!isProcess)
                 {
                     e.Menu.Items.Add(itemSaveAllFile);
+
+                    bool IsGrand = AppPermission.Instance.CheckAppPermission(AppPermission.EditInfo306);
+                    if (IsGrand || isOwner)
+                    {
+                        itemEditInfo.BeginGroup = true;
+                        e.Menu.Items.Add(itemEditInfo);
+                    }
                 }
             }
         }
@@ -424,6 +459,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
                     e.Menu.Items.Add(itemSaveFile);
                 }
             }
+        }
+
+        private void gvData_DoubleClick(object sender, EventArgs e)
+        {
+            gvData.ExpandMasterRow(gvData.FocusedRowHandle, 0);
         }
     }
 }
