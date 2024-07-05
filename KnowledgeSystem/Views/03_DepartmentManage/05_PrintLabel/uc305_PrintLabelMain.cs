@@ -26,6 +26,7 @@ using ExcelDataReader;
 using System.IO;
 using DevExpress.XtraPrinting.Native;
 using KnowledgeSystem.Helpers;
+using DevExpress.XtraBars;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._05_PrintLabel
 {
@@ -83,6 +84,117 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._05_PrintLabel
             }
 
             return printers;
+        }
+
+        private void IniButton()
+        {
+            btnLabelType.LinksPersistInfo.Add(new LinkPersistInfo(IniItem("WasteLabel", "廢棄物標籤")));
+            btnLabelType.LinksPersistInfo.Add(new LinkPersistInfo(IniItem("CabinetManage", "文件櫃管理")));
+            btnLabelType.LinksPersistInfo.Add(new LinkPersistInfo(IniItem("ISODevice", "ISO/IEC17025設備")));
+        }
+
+        private BarButtonItem IniItem(string name, string caption)
+        {
+            BarButtonItem btnLabel = new BarButtonItem();
+
+            btnLabel.Caption = caption;
+            //btnLabel.Id = 7;
+            btnLabel.ImageOptions.SvgImage = svgImageCollection1[0];
+            btnLabel.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            btnLabel.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            btnLabel.ItemAppearance.Hovered.Options.UseForeColor = true;
+            btnLabel.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            btnLabel.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
+            btnLabel.ItemAppearance.Normal.Options.UseFont = true;
+            btnLabel.ItemAppearance.Normal.Options.UseForeColor = true;
+            btnLabel.Name = $"btn{name}";
+            btnLabel.ItemClick += BtnLabel_ItemClick;
+
+            return btnLabel;
+        }
+
+        private int GetNumLabel()
+        {
+            XtraInputBoxArgs args = new XtraInputBoxArgs();
+
+            args.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
+            args.Caption = TPConfigs.SoftNameTW;
+            args.Prompt = $"<font='Microsoft JhengHei UI' size=14>請輸入數量</font>";
+            args.DefaultButtonIndex = 0;
+            TextEdit editor = new TextEdit();
+            editor.Properties.DisplayFormat.FormatString = "n0";
+            editor.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            editor.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
+            editor.Properties.MaskSettings.Set("mask", "n0");
+
+            args.Editor = editor;
+
+            editor.Properties.Appearance.Font = fontUI14;
+            editor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            editor.Properties.NullText = "";
+
+            var result = XtraInputBox.Show(args);
+            if (result == null) return 1;
+
+            return Convert.ToInt16(result?.ToString() ?? "1");
+        }
+
+        private void BtnLabel_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            BarButtonItem btn = sender as BarButtonItem;
+
+            switch (e.Item.Name)
+            {
+                case "btnWasteLabel":
+                    int numLabel = GetNumLabel();
+                    object[] labels = Enumerable.Range(0, numLabel)
+                                     .Select(_ => new
+                                     {
+                                         NameVN = TPConfigs.LoginUser.DisplayNameVN,
+                                         NameTW = TPConfigs.LoginUser.DisplayName,
+                                         Dept = TPConfigs.LoginUser.IdDepartment,
+                                     }).ToArray();
+
+                    var report0 = new rpWasteLabel();
+                    report0.DataSource = labels;
+                    report0.CreateDocument();
+                    report0.PrintingSystem.ShowMarginsWarning = false;
+                    docViewerLabel.DocumentSource = report0;
+                    break;
+
+                case "btnCabinetManage":
+                    numLabel = GetNumLabel();
+                    labels = Enumerable.Range(0, numLabel)
+                                      .Select(_ => new
+                                      {
+                                          NameVN = TPConfigs.LoginUser.DisplayNameVN,
+                                          NameTW = TPConfigs.LoginUser.DisplayName,
+                                          Dept = depts.FirstOrDefault(r => r.Id == TPConfigs.LoginUser.IdDepartment)?.DisplayName,
+                                      }).ToArray();
+
+                    var report1 = new rpCabinetManage();
+                    report1.DataSource = labels;
+                    report1.CreateDocument();
+                    report1.PrintingSystem.ShowMarginsWarning = false;
+                    docViewerLabel.DocumentSource = report1;
+                    break;
+
+                case "btnISODevice":
+                    numLabel = GetNumLabel();
+                    labels = Enumerable.Range(0, numLabel)
+                                    .Select(_ => new
+                                    {
+                                        Lb1 = "Thiết bị thuộc hệ thống quản lý ISO/IEC 17025",
+                                        Lb2 = "設備屬於ISO/IEC 17025品質管理系統"
+                                    }).ToArray();
+
+                    var report2 = new rpISODevice();
+                    report2.DataSource = labels;
+                    report2.CreateDocument();
+                    report2.PrintingSystem.ShowMarginsWarning = false;
+                    docViewerLabel.DocumentSource = report2;
+                    break;
+            }
         }
 
         private void btnFixedAssets_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -185,6 +297,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._05_PrintLabel
 
         private void uc305_PrintLabelMain_Load(object sender, EventArgs e)
         {
+            IniButton();
+
             printers = GetPrinters();
 
             depts = dm_DeptBUS.Instance.GetList();
@@ -279,86 +393,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._05_PrintLabel
 
             var report = new rp5SAreaDivision();
             report.DataSource = devices;
-            report.CreateDocument();
-            report.PrintingSystem.ShowMarginsWarning = false;
-            docViewerLabel.DocumentSource = report;
-        }
-
-        private void btnWasteLabel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            XtraInputBoxArgs args = new XtraInputBoxArgs();
-
-            args.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
-            args.Caption = TPConfigs.SoftNameTW;
-            args.Prompt = $"<font='Microsoft JhengHei UI' size=14>請輸入數量</font>";
-            args.DefaultButtonIndex = 0;
-            TextEdit editor = new TextEdit();
-            editor.Properties.DisplayFormat.FormatString = "n0";
-            editor.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            editor.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
-            editor.Properties.MaskSettings.Set("mask", "n0");
-
-            args.Editor = editor;
-
-            editor.Properties.Appearance.Font = fontUI14;
-            editor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            editor.Properties.NullText = "";
-
-            var result = XtraInputBox.Show(args);
-            if (result == null) return;
-
-            int numLabel = Convert.ToInt16(result?.ToString() ?? "1");
-
-            object[] labels = Enumerable.Range(0, numLabel)
-                                     .Select(_ => new
-                                     {
-                                         NameVN = TPConfigs.LoginUser.DisplayNameVN,
-                                         NameTW = TPConfigs.LoginUser.DisplayName,
-                                         Dept = TPConfigs.LoginUser.IdDepartment,
-                                     }).ToArray();
-
-            var report = new rpWasteLabel();
-            report.DataSource = labels;
-            report.CreateDocument();
-            report.PrintingSystem.ShowMarginsWarning = false;
-            docViewerLabel.DocumentSource = report;
-        }
-
-        private void btnCabinetManage_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            XtraInputBoxArgs args = new XtraInputBoxArgs();
-
-            args.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
-            args.Caption = TPConfigs.SoftNameTW;
-            args.Prompt = $"<font='Microsoft JhengHei UI' size=14>請輸入數量</font>";
-            args.DefaultButtonIndex = 0;
-            TextEdit editor = new TextEdit();
-            editor.Properties.DisplayFormat.FormatString = "n0";
-            editor.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            editor.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
-            editor.Properties.MaskSettings.Set("mask", "n0");
-
-            args.Editor = editor;
-
-            editor.Properties.Appearance.Font = fontUI14;
-            editor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            editor.Properties.NullText = "";
-
-            var result = XtraInputBox.Show(args);
-            if (result == null) return;
-
-            int numLabel = Convert.ToInt16(result?.ToString() ?? "1");
-
-            object[] labels = Enumerable.Range(0, numLabel)
-                                     .Select(_ => new
-                                     {
-                                         NameVN = TPConfigs.LoginUser.DisplayNameVN,
-                                         NameTW = TPConfigs.LoginUser.DisplayName,
-                                         Dept = depts.FirstOrDefault(r => r.Id == TPConfigs.LoginUser.IdDepartment)?.DisplayName,
-                                     }).ToArray();
-
-            var report = new rpCabinetManage();
-            report.DataSource = labels;
             report.CreateDocument();
             report.PrintingSystem.ShowMarginsWarning = false;
             docViewerLabel.DocumentSource = report;

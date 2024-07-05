@@ -262,6 +262,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if (!Directory.Exists(TPConfigs.Folder306))
+            {
+                MsgTP.MsgError("Lỗi khi kết nối với ổ chung\r\n連接到消耗硬盤時發生錯誤！");
+                return;
+            }
+
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
             {
                 // Đưa focused ra khỏi bảng để cập nhật lên source

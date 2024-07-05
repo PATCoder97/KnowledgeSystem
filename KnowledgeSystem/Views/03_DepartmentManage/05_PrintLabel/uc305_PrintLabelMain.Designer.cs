@@ -36,15 +36,15 @@
             this.btnFixedAssets = new DevExpress.XtraBars.BarButtonItem();
             this.btnDeviceManagement = new DevExpress.XtraBars.BarButtonItem();
             this.btn5SAreaDivision = new DevExpress.XtraBars.BarButtonItem();
-            this.btnWasteLabel = new DevExpress.XtraBars.BarButtonItem();
             this.btnPrint = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.docViewerLabel = new DevExpress.XtraPrinting.Preview.DocumentViewer();
-            this.btnCabinetManage = new DevExpress.XtraBars.BarButtonItem();
+            this.svgImageCollection1 = new DevExpress.Utils.SvgImageCollection(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.svgImageCollection1)).BeginInit();
             this.SuspendLayout();
             // 
             // barManagerTP
@@ -63,9 +63,7 @@
             this.btnPrint,
             this.btnLabelType,
             this.btnDeviceManagement,
-            this.btn5SAreaDivision,
-            this.btnWasteLabel,
-            this.btnCabinetManage});
+            this.btn5SAreaDivision});
             this.barManagerTP.MainMenu = this.bar2;
             this.barManagerTP.MaxItemId = 9;
             // 
@@ -112,9 +110,7 @@
             this.btnLabelType.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.btnFixedAssets),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnDeviceManagement),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btn5SAreaDivision),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnWasteLabel),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnCabinetManage)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.btn5SAreaDivision)});
             this.btnLabelType.Name = "btnLabelType";
             this.btnLabelType.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
             // 
@@ -163,21 +159,6 @@
             this.btn5SAreaDivision.ItemAppearance.Normal.Options.UseForeColor = true;
             this.btn5SAreaDivision.Name = "btn5SAreaDivision";
             this.btn5SAreaDivision.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btn5SAreaDivision_ItemClick);
-            // 
-            // btnWasteLabel
-            // 
-            this.btnWasteLabel.Caption = "廢棄物標籤";
-            this.btnWasteLabel.Id = 7;
-            this.btnWasteLabel.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnWasteLabel.ImageOptions.SvgImage")));
-            this.btnWasteLabel.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnWasteLabel.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
-            this.btnWasteLabel.ItemAppearance.Hovered.Options.UseForeColor = true;
-            this.btnWasteLabel.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.btnWasteLabel.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
-            this.btnWasteLabel.ItemAppearance.Normal.Options.UseFont = true;
-            this.btnWasteLabel.ItemAppearance.Normal.Options.UseForeColor = true;
-            this.btnWasteLabel.Name = "btnWasteLabel";
-            this.btnWasteLabel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnWasteLabel_ItemClick);
             // 
             // btnPrint
             // 
@@ -240,20 +221,9 @@
             this.docViewerLabel.Size = new System.Drawing.Size(882, 486);
             this.docViewerLabel.TabIndex = 4;
             // 
-            // btnCabinetManage
+            // svgImageCollection1
             // 
-            this.btnCabinetManage.Caption = "文件櫃管理";
-            this.btnCabinetManage.Id = 8;
-            this.btnCabinetManage.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem1.ImageOptions.SvgImage")));
-            this.btnCabinetManage.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnCabinetManage.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
-            this.btnCabinetManage.ItemAppearance.Hovered.Options.UseForeColor = true;
-            this.btnCabinetManage.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.btnCabinetManage.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
-            this.btnCabinetManage.ItemAppearance.Normal.Options.UseFont = true;
-            this.btnCabinetManage.ItemAppearance.Normal.Options.UseForeColor = true;
-            this.btnCabinetManage.Name = "btnCabinetManage";
-            this.btnCabinetManage.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnCabinetManage_ItemClick);
+            this.svgImageCollection1.Add("nopicture", "image://svgimages/diagramicons/nopicture.svg");
             // 
             // uc305_PrintLabelMain
             // 
@@ -268,6 +238,7 @@
             this.Size = new System.Drawing.Size(882, 535);
             this.Load += new System.EventHandler(this.uc305_PrintLabelMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.svgImageCollection1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -287,7 +258,6 @@
         private DevExpress.XtraPrinting.Preview.DocumentViewer docViewerLabel;
         private DevExpress.XtraBars.BarButtonItem btnDeviceManagement;
         private DevExpress.XtraBars.BarButtonItem btn5SAreaDivision;
-        private DevExpress.XtraBars.BarButtonItem btnWasteLabel;
-        private DevExpress.XtraBars.BarButtonItem btnCabinetManage;
+        private DevExpress.Utils.SvgImageCollection svgImageCollection1;
     }
 }
