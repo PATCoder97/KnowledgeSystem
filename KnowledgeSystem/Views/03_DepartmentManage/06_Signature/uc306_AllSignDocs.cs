@@ -224,7 +224,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
 
             File.Copy(sourcePath, destPath, true);
 
-            f00_VIewFile fView = new f00_VIewFile(destPath);
+            f00_VIewFile fView = new f00_VIewFile(destPath, isCanSave: false);
             fView.ShowDialog();
         }
 

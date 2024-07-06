@@ -63,7 +63,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
         {
             var baseData = dt306_BaseBUS.Instance.GetItemById(idBase);
 
-            Text = $"核簽文件-{baseData.Code}-{baseData.DisplayName}";
+            Text = $"核簽文件 | {baseData.Code} | {baseData.DisplayName}";
             tabbedControlGroup1.SelectedTabPageIndex = 0;
 
             jobTitles = dm_JobTitleBUS.Instance.GetList();

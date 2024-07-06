@@ -18,7 +18,8 @@ namespace KnowledgeSystem.Helpers
 
             string string1 = GenerateRandomString(16);
             string string3 = $"{new string(charArray)}{extension}tp";
-            string string4 = DateTime.Now.ToString("ssmmHHddMMyy");
+            //string string4 = DateTime.Now.ToString("ssmmHHddMMyy");
+            string string4 = Guid.NewGuid().ToString("N");
 
             string[] strings = new[] { string1, string3, string4 };
 
@@ -72,7 +73,7 @@ namespace KnowledgeSystem.Helpers
             // Count non-alphanumeric characters in salt3
             int count = salt3.Count(c => !char.IsLetterOrDigit(c));
 
-            if (count==0)
+            if (count == 0)
             {
                 return "";
             }

@@ -56,9 +56,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
         List<dm_Attachment> attachments;
 
         DXMenuItem itemViewInfo;
-        DXMenuItem itemViewFile;
-        DXMenuItem itemSaveFile;
-        DXMenuItem itemSaveAllFile;
 
         const string NAME_ISPROGRESS = "核簽中";
         const string NAME_ISCANCEL = "被退回";
@@ -67,9 +64,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
         private void InitializeMenuItems()
         {
             itemViewInfo = CreateMenuItem("核簽進度", ItemViewInfo_Click, TPSvgimages.View);
-            itemViewFile = CreateMenuItem("查看文件", ItemViewFile_Click, TPSvgimages.View);
-            itemSaveFile = CreateMenuItem("保存檔案", ItemSaveFile_Click, TPSvgimages.Attach);
-            itemSaveAllFile = CreateMenuItem("保存所有檔案", ItemSaveAllFile_Click, TPSvgimages.Attach);
         }
 
         private bool SaveFileWithProtect(string source, string dest)
@@ -101,69 +95,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
                     return false;
                 }
             }
-        }
-
-        private void ItemSaveAllFile_Click(object sender, EventArgs e)
-        {
-            GridView view = gvData;
-            int idBase = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColId));
-
-            var allAtts = dt306_BaseAttsBUS.Instance.GetListByIdBase(idBase).Where(r => r.IsCancel == false).ToList();
-            foreach (var item in allAtts)
-            {
-                //var att = dm_AttachmentBUS.Instance.GetItemById(item.IdAtt);
-                //string sourceFile = Path.Combine(TPConfigs.Folder306, idBase.ToString(), att.EncryptionName);
-                //string destFile = Path.Combine(TPConfigs.Folder306, att.EncryptionName);
-
-                //File.Copy(sourceFile, destFile, true);
-            }
-        }
-
-        private void ItemSaveFile_Click(object sender, EventArgs e)
-        {
-            GridView view = gvData.GetDetailView(gvData.FocusedRowHandle, 0) as GridView;
-            int idAtt = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColIdAtt));
-
-            var att = dm_AttachmentBUS.Instance.GetItemById(idAtt);
-            string filePath = att.EncryptionName;
-            string actualName = att.ActualName;
-
-            SaveFileDialog dialog = new SaveFileDialog();
-            dialog.FileName = att.ActualName;
-            dialog.Filter = "Pdf Files|*.pdf";
-            if (dialog.ShowDialog() != DialogResult.OK) return;
-
-            string sourcePath = Path.Combine(TPConfigs.Folder306, filePath);
-            string destPath = dialog.FileName;
-
-            if (!Directory.Exists(TPConfigs.TempFolderData))
-                Directory.CreateDirectory(TPConfigs.TempFolderData);
-
-            bool result = SaveFileWithProtect(sourcePath, destPath);
-
-            string msg = result ? "已儲存！" : "<color=red>文件在開啟或有錯誤！</color>";
-            MsgTP.MsgShowInfomation($"<font='Microsoft JhengHei UI' size=18>{msg}</font>");
-        }
-
-        private void ItemViewFile_Click(object sender, EventArgs e)
-        {
-            GridView view = gvData.GetDetailView(gvData.FocusedRowHandle, 0) as GridView;
-            int idAtt = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColIdAtt));
-
-            var att = dm_AttachmentBUS.Instance.GetItemById(idAtt);
-            string filePath = att.EncryptionName;
-            string actualName = att.ActualName;
-
-            string sourcePath = Path.Combine(TPConfigs.Folder306, filePath);
-            string destPath = Path.Combine(TPConfigs.TempFolderData, $"{actualName}_{DateTime.Now:yyyyMMddHHmmss}.pdf");
-
-            if (!Directory.Exists(TPConfigs.TempFolderData))
-                Directory.CreateDirectory(TPConfigs.TempFolderData);
-
-            File.Copy(sourcePath, destPath, true);
-
-            f00_VIewFile fView = new f00_VIewFile(destPath, isCanSave: false);
-            fView.ShowDialog();
         }
 
         private void ItemViewInfo_Click(object sender, EventArgs e)
@@ -351,38 +282,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
                 bool isProcess = Convert.ToBoolean(view.GetRowCellValue(view.FocusedRowHandle, "data.IsProcess"));
 
                 e.Menu.Items.Add(itemViewInfo);
-                if (!isProcess)
-                {
-                    e.Menu.Items.Add(itemSaveAllFile);
-                }
-            }
-        }
-
-        private void gvDocs_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
-        {
-            if (e.HitInfo.InRowCell)
-            {
-                GridView view = sender as GridView;
-                int rowHandle = e.HitInfo.RowHandle;
-                view.FocusedRowHandle = rowHandle;
-
-                GridView parent = view.ParentView as GridView;
-                int rowHandleParent = parent.FocusedRowHandle;
-
-                bool isProcess = Convert.ToBoolean(parent.GetRowCellValue(rowHandleParent, "data.IsProcess"));
-                bool isCancel = Convert.ToBoolean(parent.GetRowCellValue(rowHandleParent, "data.IsCancel"));
-
-                bool isCancel2 = Convert.ToBoolean(view.GetRowCellValue(rowHandle, "data.IsCancel"));
-
-                if (isProcess == false && isCancel == false && isCancel2 == false)
-                {
-                    e.Menu.Items.Add(itemViewFile);
-                    e.Menu.Items.Add(itemSaveFile);
-                }
-                else if (isProcess == false)
-                {
-                    e.Menu.Items.Add(itemViewFile);
-                }
             }
         }
     }

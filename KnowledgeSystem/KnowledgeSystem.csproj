@@ -116,6 +116,15 @@
     <Reference Include="Microsoft.IO.RecyclableMemoryStream, Version=1.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.IO.RecyclableMemoryStream.1.4.1\lib\net46\Microsoft.IO.RecyclableMemoryStream.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Web.WebView2.Core, Version=1.0.2592.51, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.2592.51\lib\net462\Microsoft.Web.WebView2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebView2.WinForms, Version=1.0.2592.51, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.2592.51\lib\net462\Microsoft.Web.WebView2.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebView2.Wpf, Version=1.0.2592.51, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.2592.51\lib\net462\Microsoft.Web.WebView2.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="MiniWord, Version=0.8.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MiniWord.0.8.0\lib\net45\MiniWord.dll</HintPath>
     </Reference>
@@ -368,6 +377,18 @@
     </Compile>
     <Compile Include="Views\03_DepartmentManage\06_Signature\uc306_SignatureMain.Designer.cs">
       <DependentUpon>uc306_SignatureMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\07_Quiz\f307_ConfirmQues.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\07_Quiz\f307_ConfirmQues.Designer.cs">
+      <DependentUpon>f307_ConfirmQues.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\07_Quiz\f307_UploadQues.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\07_Quiz\f307_UploadQues.Designer.cs">
+      <DependentUpon>f307_UploadQues.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\03_DepartmentManage\07_Quiz\uc307_JobTitleSetting.cs">
       <SubType>UserControl</SubType>
@@ -794,6 +815,12 @@
     <EmbeddedResource Include="Views\03_DepartmentManage\06_Signature\uc306_SignatureMain.resx">
       <DependentUpon>uc306_SignatureMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\07_Quiz\f307_ConfirmQues.resx">
+      <DependentUpon>f307_ConfirmQues.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\07_Quiz\f307_UploadQues.resx">
+      <DependentUpon>f307_UploadQues.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\07_Quiz\uc307_JobTitleSetting.resx">
       <DependentUpon>uc307_JobTitleSetting.cs</DependentUpon>
     </EmbeddedResource>
@@ -1209,9 +1236,11 @@
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
     <Error Condition="!Exists('..\packages\Scriban.5.9.0\build\Scriban.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Scriban.5.9.0\build\Scriban.props'))" />
     <Error Condition="!Exists('..\packages\Scriban.5.9.0\build\Scriban.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Scriban.5.9.0\build\Scriban.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Web.WebView2.1.0.2592.51\build\Microsoft.Web.WebView2.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Web.WebView2.1.0.2592.51\build\Microsoft.Web.WebView2.targets'))" />
   </Target>
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <Import Project="..\packages\Scriban.5.9.0\build\Scriban.targets" Condition="Exists('..\packages\Scriban.5.9.0\build\Scriban.targets')" />
+  <Import Project="..\packages\Microsoft.Web.WebView2.1.0.2592.51\build\Microsoft.Web.WebView2.targets" Condition="Exists('..\packages\Microsoft.Web.WebView2.1.0.2592.51\build\Microsoft.Web.WebView2.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -96,7 +96,6 @@
             this.gvDocs.OptionsView.ColumnAutoWidth = false;
             this.gvDocs.OptionsView.EnableAppearanceOddRow = true;
             this.gvDocs.OptionsView.ShowGroupPanel = false;
-            this.gvDocs.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gvDocs_PopupMenuShowing);
             // 
             // gridColumn1
             // 

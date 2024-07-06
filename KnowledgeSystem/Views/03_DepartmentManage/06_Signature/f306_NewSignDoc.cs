@@ -136,7 +136,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
                     PathFile = fileName
                 };
                 attachments.Add(attachment);
-                Thread.Sleep(5);
             }
 
             sourceAtts.DataSource = attachments;
@@ -291,7 +290,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
                 baseData.IsCancel = false;
                 baseData.NextStepProg = progresses.FirstOrDefault().IdUsr;
                 baseData.Confidential = ckConfidential.Checked;
-                baseData.Code = txbCode.EditValue?.ToString() ?? null;
+                baseData.Code = string.IsNullOrWhiteSpace(txbCode.Text) ? null : txbCode.Text.Trim();
 
                 int idBase = dt306_BaseBUS.Instance.Add(baseData);
 

@@ -36,7 +36,7 @@ namespace KnowledgeSystem
         [STAThread]
         static void Main(string[] args)
         {
-            new AppCopyRight() { Version = "24.07.03" };
+            new AppCopyRight() { Version = "24.07.06" };
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             TPConfigs.SetSystemStaticValue();
@@ -139,13 +139,13 @@ namespace KnowledgeSystem
             else
             {
 #if DEBUG
-                Application.Run(new f00_Main());
+                //Application.Run(new f00_Main());
 
-                //TPConfigs.LoginUser = dm_UserBUS.Instance.GetItemById("VNW0014732");
-                //AppPermission.Instance.CheckAppPermission(7);
-                //TPConfigs.IdParentControl = AppPermission.SafetyCertMain;
+                TPConfigs.LoginUser = dm_UserBUS.Instance.GetItemById("VNW0014732");
+                AppPermission.Instance.CheckAppPermission(7);
+                TPConfigs.IdParentControl = AppPermission.SafetyCertMain;
 
-                //Application.Run(new f00_FluentFrame(55));
+                Application.Run(new f00_FluentFrame(59));
 #else
                 Application.Run(new f00_Main());
 #endif

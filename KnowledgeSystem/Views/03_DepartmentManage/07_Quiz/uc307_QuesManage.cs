@@ -8,14 +8,17 @@ using DevExpress.XtraGrid.Views.Items.ViewInfo;
 using DevExpress.XtraPrinting.Native;
 using DevExpress.XtraSplashScreen;
 using DocumentFormat.OpenXml.Spreadsheet;
+using ExcelDataReader;
 using KnowledgeSystem.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Color = System.Drawing.Color;
@@ -247,6 +250,85 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
 
                 e.Value = !string.IsNullOrWhiteSpace(imgName);
             }
+        }
+
+        private void btnUpload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            string dataPath = "";
+            DataSet ds;
+
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
+                openFileDialog.RestoreDirectory = true;
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    dataPath = openFileDialog.FileName;
+                }
+            }
+
+            string extension = Path.GetExtension(dataPath);
+            using (var stream = File.Open(dataPath, FileMode.Open, FileAccess.Read))
+            {
+                IExcelDataReader reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+
+                ds = reader.AsDataSet(new ExcelDataSetConfiguration()
+                {
+                    ConfigureDataTable = (_) => new ExcelDataTableConfiguration()
+                    {
+                        UseHeaderRow = true
+                    }
+                });
+
+                reader.Close();
+            }
+
+            DataTable dt = ds.Tables["EXCEL"];
+
+            f307_UploadQues fUpload = new f307_UploadQues();
+            fUpload.dtBase = dt;
+            fUpload.ShowDialog();
+
+           // DataTable questionsTable = new DataTable();
+            //questionsTable.Columns.Add("Id", typeof(int));
+            //questionsTable.Columns.Add("IdJob", typeof(string));
+            //questionsTable.Columns.Add("DisplayText", typeof(string));
+            //questionsTable.Columns.Add("ImageName", typeof(string));
+            //questionsTable.Columns.Add("IsMultiAns", typeof(bool));
+
+            //DataTable answersTable = new DataTable();
+            //answersTable.Columns.Add("Id", typeof(int));
+            //answersTable.Columns.Add("QuesId", typeof(int));
+            //answersTable.Columns.Add("DisplayText", typeof(string));
+            //answersTable.Columns.Add("ImageName", typeof(string));
+            //answersTable.Columns.Add("TrueAns", typeof(bool));
+
+            //int currentQuesId = -1;
+
+            //for (int row = 2; row <= worksheet.Dimension.End.Row; row++)
+            //{
+            //    int quesId = worksheet.Cells[row, 1].GetValue<int>();
+            //    if (quesId != currentQuesId)
+            //    {
+            //        questionsTable.Rows.Add(
+            //            quesId,
+            //            worksheet.Cells[row, 2].GetValue<string>(),
+            //            worksheet.Cells[row, 3].GetValue<string>(),
+            //            worksheet.Cells[row, 4].GetValue<string>(),
+            //            worksheet.Cells[row, 5].GetValue<bool>()
+            //        );
+            //        currentQuesId = quesId;
+            //    }
+
+            //    answersTable.Rows.Add(
+            //        worksheet.Cells[row, 6].GetValue<int>(),
+            //        quesId,
+            //        worksheet.Cells[row, 7].GetValue<string>(),
+            //        worksheet.Cells[row, 8].GetValue<string>(),
+            //        worksheet.Cells[row, 9].GetValue<bool>()
+            //    );
+            //}
         }
     }
 }
