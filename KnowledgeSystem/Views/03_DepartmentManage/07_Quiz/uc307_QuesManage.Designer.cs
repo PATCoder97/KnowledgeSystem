@@ -55,6 +55,7 @@
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnReload = new DevExpress.XtraBars.BarButtonItem();
+            this.btnUpload = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -62,7 +63,6 @@
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.btnUpload = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.gvAns)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvQues)).BeginInit();
@@ -196,6 +196,7 @@
             this.gvQues.MasterRowGetRelationName += new DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationNameEventHandler(this.gvQues_MasterRowGetRelationName);
             this.gvQues.MasterRowGetRelationCount += new DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationCountEventHandler(this.gvQues_MasterRowGetRelationCount);
             this.gvQues.CustomUnboundColumnData += new DevExpress.XtraGrid.Views.Base.CustomColumnDataEventHandler(this.gridView_CustomUnboundColumnData);
+            this.gvQues.DoubleClick += new System.EventHandler(this.gvQues_DoubleClick);
             // 
             // gColId
             // 
@@ -392,6 +393,16 @@
             this.btnReload.Name = "btnReload";
             this.btnReload.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnReload_ItemClick);
             // 
+            // btnUpload
+            // 
+            this.btnUpload.Alignment = DevExpress.XtraBars.BarItemLinkAlignment.Right;
+            this.btnUpload.Caption = "上傳";
+            this.btnUpload.Id = 12;
+            this.btnUpload.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnUpload.ImageOptions.SvgImage")));
+            this.btnUpload.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnUpload.Name = "btnUpload";
+            this.btnUpload.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnUpload_ItemClick);
+            // 
             // barDockControlTop
             // 
             this.barDockControlTop.CausesValidation = false;
@@ -453,13 +464,6 @@
             this.layoutControlItem1.Size = new System.Drawing.Size(767, 490);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
-            // 
-            // btnUpload
-            // 
-            this.btnUpload.Caption = "上傳";
-            this.btnUpload.Id = 12;
-            this.btnUpload.Name = "btnUpload";
-            this.btnUpload.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnUpload_ItemClick);
             // 
             // uc307_QuesManage
             // 

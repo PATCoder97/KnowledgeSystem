@@ -288,9 +288,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
 
             f307_UploadQues fUpload = new f307_UploadQues();
             fUpload.dtBase = dt;
+            fUpload.pathImages = $@"{Path.GetDirectoryName(dataPath)}\Images";
             fUpload.ShowDialog();
 
-           // DataTable questionsTable = new DataTable();
+            // DataTable questionsTable = new DataTable();
             //questionsTable.Columns.Add("Id", typeof(int));
             //questionsTable.Columns.Add("IdJob", typeof(string));
             //questionsTable.Columns.Add("DisplayText", typeof(string));
@@ -329,6 +330,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             //        worksheet.Cells[row, 9].GetValue<bool>()
             //    );
             //}
+        }
+
+        private void gvQues_DoubleClick(object sender, EventArgs e)
+        {
+            GridView view = sender as GridView;
+            view.ExpandMasterRow(view.FocusedRowHandle, 0);
         }
     }
 }

@@ -38,12 +38,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
         private UpdateEvent _eventUpdate = UpdateEvent.Normal;
 
-        List<dm_Role> lsAllRoles;
-        List<dm_Role> lsChooseRoles = new List<dm_Role>();
         List<dt301_Course> lsCourses;
-
-        BindingSource _sourceAllRole = new BindingSource();
-        BindingSource _sourceChooseRole = new BindingSource();
 
         Font fontUI14 = new Font("Microsoft JhengHei UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
         Font fontUI12 = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -107,8 +102,11 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             btnJobChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             btnPersonnelChanges.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
 
-            lcRole.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-            Size = new Size(600, 358);
+            if (!IsSysAdmin)
+            {
+                lcRole.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                lcSign.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            }
 
             switch (eventInfo)
             {
@@ -135,12 +133,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                     btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                     btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-
-                    if (IsSysAdmin)
-                    {
-                        lcRole.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
-                        Size = new Size(600, 658);
-                    }
 
                     EnabledController();
                     break;
@@ -206,6 +198,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
         private void f401_UserInfo_Load(object sender, EventArgs e)
         {
+            tabbedControlGroup1.SelectedTabPageIndex = 0;
+
             IsSysAdmin = AppPermission.Instance.CheckAppPermission(AppPermission.SysAdmin);
             lsCourses = dt301_CourseBUS.Instance.GetList();
 
@@ -222,19 +216,11 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             cbbJobTitle.Properties.ValueMember = "Id";
 
             cbbNationality.Properties.Items.AddRange(new string[] { "VN", "TW", "CN" });
-
-            lsAllRoles = dm_RoleBUS.Instance.GetList();
-            _sourceAllRole.DataSource = lsAllRoles;
-            gcAllRole.DataSource = _sourceAllRole;
-
             cbbStatus.Properties.Items.AddRange(TPConfigs.lsUserStatus.Select(r => r.Value).ToList());
             cbbSex.Properties.Items.AddRange(new List<string>() { "男", "女" });
 
-            _sourceChooseRole.DataSource = lsChooseRoles;
-            gcChooseRole.DataSource = _sourceChooseRole;
-
-            gvAllRole.ReadOnlyGridView();
-            gvChooseRole.ReadOnlyGridView();
+            gvSign.ReadOnlyGridView();
+            gvRole.ReadOnlyGridView();
 
             switch (eventInfo)
             {
@@ -265,12 +251,24 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                     idDept2word = userInfo.IdDepartment.Count() > 2 ? userInfo.IdDepartment.Substring(0, 2) : "00";
 
                     // Lấy quyền hạn và chuyển các quyền mà user có sang gcChooseRoles
-                    var lsUserRoles = dm_UserRoleBUS.Instance.GetListByUID(userInfo.Id).Select(r => r.IdRole).ToList();
-                    lsChooseRoles.AddRange(lsAllRoles.Where(a => lsUserRoles.Exists(b => b == a.Id)));
-                    lsAllRoles.RemoveAll(a => lsUserRoles.Exists(b => b == a.Id));
+                    var usrRoles = dm_UserRoleBUS.Instance.GetListByUID(userInfo.Id).Select(r => r.IdRole).ToList();
+                    var roles = dm_RoleBUS.Instance.GetList().Where(a => usrRoles.Exists(b => b == a.Id));
+                    gcRole.DataSource = roles;
 
-                    gcAllRole.RefreshDataSource();
-                    gcChooseRole.RefreshDataSource();
+                    Dictionary<int, string> signTypes = TPConfigs.signTypes;
+                    var signUsrs = dm_SignUsersBUS.Instance.GetListByUID(userInfo.Id).ToList();
+                    var idSigns = signUsrs.Select(r => r.IdSign).ToList();
+                    var signs = dm_SignBUS.Instance.GetListByIdSigns(idSigns).OrderBy(r => r.Prioritize).ToList();
+                    var signInfos = (from data in signs
+                                     join typeImg in signTypes on data.ImgType equals typeImg.Key
+                                     select new 
+                                     {
+                                         Id = data.Id,
+                                         DisplayName = data.DisplayName,
+                                         SignType = typeImg.Value,
+                                     }).ToList();
+
+                    gcSign.DataSource = signInfos;
                     break;
             }
         }
@@ -488,14 +486,14 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                                 break;
                         }
 
-                        // Nếu là admin thì có thể cài quyền hạn luôn trong này
-                        if (IsSysAdmin)
-                        {
-                            var resultDel = dm_UserRoleBUS.Instance.RemoveRangeByUID(userInfo.Id);
+                        //// Nếu là admin thì có thể cài quyền hạn luôn trong này
+                        //if (IsSysAdmin)
+                        //{
+                        //    var resultDel = dm_UserRoleBUS.Instance.RemoveRangeByUID(userInfo.Id);
 
-                            var lsUserRolesAdd = lsChooseRoles.Select(r => new dm_UserRole { IdUser = userInfo.Id, IdRole = r.Id }).ToList();
-                            var resultAdd = dm_UserRoleBUS.Instance.AddRange(lsUserRolesAdd);
-                        }
+                        //    var lsUserRolesAdd = lsChooseRoles.Select(r => new dm_UserRole { IdUser = userInfo.Id, IdRole = r.Id }).ToList();
+                        //    var resultAdd = dm_UserRoleBUS.Instance.AddRange(lsUserRolesAdd);
+                        //}
                         break;
                     case EventFormInfo.Delete:
                         var dialogResult = XtraMessageBox.Show($"您確認刪除人員: {userInfo.DisplayName}", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -526,32 +524,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             {
                 MsgTP.MsgErrorDB();
             }
-        }
-
-        private void gvAllRole_DoubleClick(object sender, EventArgs e)
-        {
-            if (eventInfo != EventFormInfo.Update) return;
-
-            GridView view = gvAllRole;
-            dm_Role _role = view.GetRow(view.FocusedRowHandle) as dm_Role;
-
-            lsAllRoles.Remove(_role);
-            view.RefreshData();
-            lsChooseRoles.Add(_role);
-            gvChooseRole.RefreshData();
-        }
-
-        private void gvChooseRole_DoubleClick(object sender, EventArgs e)
-        {
-            if (eventInfo != EventFormInfo.Update) return;
-
-            GridView view = gvChooseRole;
-            dm_Role _role = view.GetRow(view.FocusedRowHandle) as dm_Role;
-
-            lsChooseRoles.Remove(_role);
-            view.RefreshData();
-            lsAllRoles.Add(_role);
-            gvAllRole.RefreshData();
         }
 
         private void txbUserId_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)

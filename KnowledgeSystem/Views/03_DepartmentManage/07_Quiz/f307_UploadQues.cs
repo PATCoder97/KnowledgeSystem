@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -21,6 +23,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
         }
 
         public DataTable dtBase;
+        public string pathImages = "";
 
         List<dt307_Questions> ques;
         List<dt307_Answers> answers;
@@ -99,7 +102,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
                     Id = answerId++, // Tăng ID mỗi khi thêm câu trả lời mới
                     QuesId = currentQuesId,
                     DisplayText = dtBase.Rows[row][4].ToString(),
-                    ImageName = dtBase.Rows[row][5].ToString(),
+                    ImageName = Path.Combine(pathImages, dtBase.Rows[row][5].ToString()),
                     TrueAns = IsTrueAns
                 });
             }
