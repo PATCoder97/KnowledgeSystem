@@ -60,6 +60,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
         DXMenuItem itemSaveFile;
         DXMenuItem itemSaveAllFile;
         DXMenuItem itemEditInfo;
+        DXMenuItem itemDelInfo;
 
         const string NAME_ISPROGRESS = "核簽中";
         const string NAME_ISCANCEL = "被退回";
@@ -72,6 +73,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             itemSaveFile = CreateMenuItem("保存檔案", ItemSaveFile_Click, TPSvgimages.Attach);
             itemSaveAllFile = CreateMenuItem("保存所有檔案", ItemSaveAllFile_Click, TPSvgimages.Attach);
             itemEditInfo = CreateMenuItem("更新訊息", ItemEditInfo_Click, TPSvgimages.Edit);
+            itemDelInfo = CreateMenuItem("刪除文件", ItemDelInfo_Click, TPSvgimages.Remove);
         }
 
         private bool SaveFileWithProtect(string source, string dest)
@@ -120,6 +122,19 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             }
 
             return filePath;
+        }
+
+        private void ItemDelInfo_Click(object sender, EventArgs e)
+        {
+            GridView view = gvData;
+            int idBase = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColId));
+
+            dt306_BaseBUS.Instance.RemoveById(idBase);
+            dt306_BaseAttsBUS.Instance.RemoveByIdBase(idBase);
+            dt306_ProgInfoBUS.Instance.RemoveByIdBase(idBase);
+            dt306_ProgressBUS.Instance.RemoveByIdBase(idBase);
+
+            LoadData();
         }
 
         private void ItemEditInfo_Click(object sender, EventArgs e)
@@ -420,18 +435,27 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
                 GridView view = sender as GridView;
                 view.FocusedRowHandle = e.HitInfo.RowHandle;
                 bool isProcess = Convert.ToBoolean(view.GetRowCellValue(view.FocusedRowHandle, "data.IsProcess"));
+                bool isCancel = Convert.ToBoolean(view.GetRowCellValue(view.FocusedRowHandle, "data.IsCancel"));
                 bool isOwner = view.GetRowCellValue(view.FocusedRowHandle, "data.UploadUsr").ToString() == TPConfigs.LoginUser.Id;
 
                 e.Menu.Items.Add(itemViewInfo);
                 if (!isProcess)
                 {
-                    e.Menu.Items.Add(itemSaveAllFile);
+                    if (!isCancel)
+                    {
+                        e.Menu.Items.Add(itemSaveAllFile);
+                    }
 
                     bool IsGrand = AppPermission.Instance.CheckAppPermission(AppPermission.EditInfo306);
                     if (IsGrand || isOwner)
                     {
                         itemEditInfo.BeginGroup = true;
                         e.Menu.Items.Add(itemEditInfo);
+                    }
+
+                    if (isOwner && isCancel)
+                    {
+                        e.Menu.Items.Add(itemDelInfo);
                     }
                 }
             }

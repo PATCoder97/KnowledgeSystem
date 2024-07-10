@@ -160,7 +160,7 @@
             this.gcData.Location = new System.Drawing.Point(12, 12);
             this.gcData.MainView = this.gvData;
             this.gcData.Name = "gcData";
-            this.gcData.Size = new System.Drawing.Size(960, 529);
+            this.gcData.Size = new System.Drawing.Size(1089, 529);
             this.gcData.TabIndex = 5;
             this.gcData.UseEmbeddedNavigator = true;
             this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -406,7 +406,7 @@
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManagerTP;
-            this.barDockControlTop.Size = new System.Drawing.Size(984, 49);
+            this.barDockControlTop.Size = new System.Drawing.Size(1113, 49);
             // 
             // barDockControlBottom
             // 
@@ -414,7 +414,7 @@
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.barDockControlBottom.Location = new System.Drawing.Point(0, 602);
             this.barDockControlBottom.Manager = this.barManagerTP;
-            this.barDockControlBottom.Size = new System.Drawing.Size(984, 0);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1113, 0);
             // 
             // barDockControlLeft
             // 
@@ -428,7 +428,7 @@
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(984, 49);
+            this.barDockControlRight.Location = new System.Drawing.Point(1113, 49);
             this.barDockControlRight.Manager = this.barManagerTP;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 553);
             // 
@@ -439,7 +439,7 @@
             this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(984, 553);
+            this.layoutControl1.Size = new System.Drawing.Size(1113, 553);
             this.layoutControl1.TabIndex = 5;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -450,7 +450,7 @@
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem1});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(984, 553);
+            this.Root.Size = new System.Drawing.Size(1113, 553);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem1
@@ -458,7 +458,7 @@
             this.layoutControlItem1.Control = this.gcData;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(964, 533);
+            this.layoutControlItem1.Size = new System.Drawing.Size(1093, 533);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
@@ -474,7 +474,7 @@
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
             this.Name = "uc306_AllSignDocs";
-            this.Size = new System.Drawing.Size(984, 602);
+            this.Size = new System.Drawing.Size(1113, 602);
             this.Load += new System.EventHandler(this.uc306_AllSignDocs_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gvDocs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).EndInit();

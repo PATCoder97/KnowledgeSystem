@@ -124,14 +124,14 @@ namespace BusinessLayer
             }
         }
 
-        public bool RemoveById(int id)
+        public bool RemoveByIdBase(int idBase)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    var itemRemove = _context.dt306_ProgInfo.FirstOrDefault(r => r.Id == id);
-                    _context.dt306_ProgInfo.Remove(itemRemove);
+                    var itemRemove = _context.dt306_ProgInfo.Where(r => r.IdBase == idBase);
+                    _context.dt306_ProgInfo.RemoveRange(itemRemove);
 
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;

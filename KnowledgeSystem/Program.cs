@@ -42,11 +42,10 @@ namespace KnowledgeSystem
             TPConfigs.SetSystemStaticValue();
 
             // Kiểm tra tham số dòng lệnh
-            if (args.Length > 2)
+            if (args.Length > 0)
             {
-                string permCtrl = args[0];
-                string formTaget = args[1];
-                string paramter1 = args[2];
+                int permCtrl = 0;
+                int.TryParse(args[0], out permCtrl);
 
                 string idUsr = "";
                 string msg = "";
@@ -101,8 +100,7 @@ namespace KnowledgeSystem
 
                 TPConfigs.LoginUser = dm_UserBUS.Instance.GetItemById(idUsr);
 
-                var funcs = dm_FunctionBUS.Instance.GetItemByControl(permCtrl);
-                bool isDeny = !AppPermission.Instance.CheckAppPermission(funcs.Id);
+                bool isDeny = !AppPermission.Instance.CheckAppPermission(permCtrl);
 
                 if (isDeny)
                 {
@@ -111,30 +109,9 @@ namespace KnowledgeSystem
                     return;
                 }
 
-                switch (formTaget)
-                {
-                    case "f306_SignDocInfo":
-                        int parameter = -1; int.TryParse(paramter1, out parameter);
-                        var signDoc = dt306_BaseBUS.Instance.GetItemById(parameter);
-
-                        if (signDoc.IsProcess == false || signDoc.NextStepProg != TPConfigs.LoginUser.Id)
-                        {
-                            msg = "文件已處理完！";
-                            MsgTP.MsgShowInfomation($"<font='Microsoft JhengHei UI' size=14>{msg}</font>");
-                            return;
-                        }
-
-                        f306_SignDocInfo fInfo = new f306_SignDocInfo();
-                        fInfo.StartPosition = FormStartPosition.CenterScreen;
-                        fInfo.idBase = signDoc.Id;
-                        Application.Run(fInfo);
-                        break;
-
-                    default:
-                        msg = "<color=red>系统错误！</color>";
-                        MsgTP.MsgShowInfomation($"<font='Microsoft JhengHei UI' size=14>{msg}</font>");
-                        break;
-                }
+                f00_FluentFrame formShow = new f00_FluentFrame(permCtrl);
+                formShow.Text = TPConfigs.SoftNameTW;
+                formShow.ShowDialog();
             }
             else
             {
