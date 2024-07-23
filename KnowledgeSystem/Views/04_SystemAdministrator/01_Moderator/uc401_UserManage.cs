@@ -59,6 +59,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             public string RoleName { get; set; }
             public string DeptName { get; set; }
             public string JobName { get; set; }
+            public string ActualJobName { get; set; }
             public string Describe { get; set; }
             public string SexName { get; set; }
             public string StatusName { get; set; }
@@ -104,15 +105,21 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                                 join depts in lsDepts on data.IdDepartment equals depts.Id
                                 join job in lsJobTitles on data.JobCode equals job.Id into dtg
                                 from g in dtg.DefaultIfEmpty()
+                                join actualJob in lsJobTitles on data.ActualJobCode equals actualJob.Id into atg
+                                from a in atg.DefaultIfEmpty()
+                                let displayName = $"{data.DisplayName}{(!string.IsNullOrEmpty(data.DisplayNameVN) ? $"\r\n{data.DisplayNameVN}" : "")}"
+                                let deptName = $"{data.IdDepartment}\r\n{depts.DisplayName}"
+                                let sexName = data.Sex == null ? "" : data.Sex.Value ? "男" : "女"
+                                let statusName = data.Status == null ? "" : TPConfigs.lsUserStatus[data.Status.Value]
                                 select new dmUserM()
                                 {
                                     Id = data.Id,
-                                    DisplayName = $"{data.DisplayName}{(!string.IsNullOrEmpty(data.DisplayNameVN) ? $"\r\n{data.DisplayNameVN}" : "")}",
+                                    DisplayName = displayName,
                                     DisplayNameVN = data.DisplayNameVN,
                                     IdDepartment = data.IdDepartment,
                                     DateCreate = data.DateCreate,
                                     SecondaryPassword = data.SecondaryPassword,
-                                    DeptName = $"{data.IdDepartment}\r\n{depts.DisplayName}",
+                                    DeptName = deptName,
                                     DOB = data.DOB,
                                     CitizenID = data.CitizenID,
                                     Nationality = data.Nationality,
@@ -120,13 +127,15 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                                     IPAddress = data.IPAddress,
                                     JobCode = data.JobCode,
                                     JobName = g != null ? g.DisplayName : "",
+                                    ActualJobCode = data.ActualJobCode,
+                                    ActualJobName = a != null ? a.DisplayName : "",
                                     Addr = data.Addr,
                                     PhoneNum1 = data.PhoneNum1,
                                     PhoneNum2 = data.PhoneNum2,
                                     Sex = data.Sex,
-                                    SexName = data.Sex == null ? "" : data.Sex.Value ? "男" : "女",
+                                    SexName = sexName,
                                     Status = data.Status,
-                                    StatusName = data.Status == null ? "" : TPConfigs.lsUserStatus[data.Status.Value],
+                                    StatusName = statusName,
                                 }).ToList();
 
             sourceUsers.DataSource = lsUserManage;

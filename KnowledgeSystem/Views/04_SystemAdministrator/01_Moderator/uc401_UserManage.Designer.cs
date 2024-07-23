@@ -61,6 +61,7 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
@@ -79,7 +80,7 @@
             this.layoutControl1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(1231, 384);
+            this.layoutControl1.Size = new System.Drawing.Size(1415, 384);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -95,7 +96,7 @@
             this.gcData.MainView = this.gvData;
             this.gcData.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.gcData.Name = "gcData";
-            this.gcData.Size = new System.Drawing.Size(1207, 360);
+            this.gcData.Size = new System.Drawing.Size(1391, 360);
             this.gcData.TabIndex = 4;
             this.gcData.UseEmbeddedNavigator = true;
             this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -129,6 +130,7 @@
             this.gridColumn13,
             this.gridColumn12,
             this.gColIP,
+            this.gridColumn15,
             this.gridColumn4,
             this.gridColumn11});
             this.gvData.DetailHeight = 377;
@@ -197,7 +199,7 @@
             this.gridColumn5.MinWidth = 23;
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 4;
+            this.gridColumn5.VisibleIndex = 5;
             this.gridColumn5.Width = 87;
             // 
             // gridColumn8
@@ -208,7 +210,7 @@
             this.gridColumn8.FieldName = "DOB";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 5;
+            this.gridColumn8.VisibleIndex = 6;
             // 
             // gridColumn9
             // 
@@ -216,7 +218,7 @@
             this.gridColumn9.FieldName = "CitizenID";
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 6;
+            this.gridColumn9.VisibleIndex = 7;
             // 
             // gridColumn10
             // 
@@ -226,7 +228,7 @@
             this.gridColumn10.FieldName = "Nationality";
             this.gridColumn10.Name = "gridColumn10";
             this.gridColumn10.Visible = true;
-            this.gridColumn10.VisibleIndex = 7;
+            this.gridColumn10.VisibleIndex = 8;
             // 
             // gridColumn16
             // 
@@ -236,7 +238,7 @@
             this.gridColumn16.FieldName = "SexName";
             this.gridColumn16.Name = "gridColumn16";
             this.gridColumn16.Visible = true;
-            this.gridColumn16.VisibleIndex = 8;
+            this.gridColumn16.VisibleIndex = 9;
             // 
             // gColPCName
             // 
@@ -244,7 +246,7 @@
             this.gColPCName.FieldName = "PCName";
             this.gColPCName.Name = "gColPCName";
             this.gColPCName.Visible = true;
-            this.gColPCName.VisibleIndex = 13;
+            this.gColPCName.VisibleIndex = 14;
             this.gColPCName.Width = 80;
             // 
             // gridColumn14
@@ -253,7 +255,7 @@
             this.gridColumn14.FieldName = "PhoneNum1";
             this.gridColumn14.Name = "gridColumn14";
             this.gridColumn14.Visible = true;
-            this.gridColumn14.VisibleIndex = 10;
+            this.gridColumn14.VisibleIndex = 11;
             // 
             // gridColumn13
             // 
@@ -261,7 +263,7 @@
             this.gridColumn13.FieldName = "Addr";
             this.gridColumn13.Name = "gridColumn13";
             this.gridColumn13.Visible = true;
-            this.gridColumn13.VisibleIndex = 12;
+            this.gridColumn13.VisibleIndex = 13;
             // 
             // gridColumn12
             // 
@@ -269,7 +271,7 @@
             this.gridColumn12.FieldName = "PhoneNum2";
             this.gridColumn12.Name = "gridColumn12";
             this.gridColumn12.Visible = true;
-            this.gridColumn12.VisibleIndex = 11;
+            this.gridColumn12.VisibleIndex = 12;
             // 
             // gColIP
             // 
@@ -277,15 +279,15 @@
             this.gColIP.FieldName = "IPAddress";
             this.gColIP.Name = "gColIP";
             this.gColIP.Visible = true;
-            this.gColIP.VisibleIndex = 14;
+            this.gColIP.VisibleIndex = 15;
             // 
             // gridColumn4
             // 
-            this.gridColumn4.Caption = "職務";
+            this.gridColumn4.Caption = "編制職務";
             this.gridColumn4.FieldName = "JobName";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 3;
+            this.gridColumn4.VisibleIndex = 4;
             // 
             // gridColumn11
             // 
@@ -293,7 +295,7 @@
             this.gridColumn11.FieldName = "StatusName";
             this.gridColumn11.Name = "gridColumn11";
             this.gridColumn11.Visible = true;
-            this.gridColumn11.VisibleIndex = 9;
+            this.gridColumn11.VisibleIndex = 10;
             // 
             // Root
             // 
@@ -302,7 +304,7 @@
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem1});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(1231, 384);
+            this.Root.Size = new System.Drawing.Size(1415, 384);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem1
@@ -310,7 +312,7 @@
             this.layoutControlItem1.Control = this.gcData;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(1211, 364);
+            this.layoutControlItem1.Size = new System.Drawing.Size(1395, 364);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
@@ -395,7 +397,7 @@
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManager1;
             this.barDockControlTop.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.barDockControlTop.Size = new System.Drawing.Size(1231, 49);
+            this.barDockControlTop.Size = new System.Drawing.Size(1415, 49);
             // 
             // barDockControlBottom
             // 
@@ -404,7 +406,7 @@
             this.barDockControlBottom.Location = new System.Drawing.Point(0, 433);
             this.barDockControlBottom.Manager = this.barManager1;
             this.barDockControlBottom.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.barDockControlBottom.Size = new System.Drawing.Size(1231, 0);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1415, 0);
             // 
             // barDockControlLeft
             // 
@@ -419,10 +421,18 @@
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1231, 49);
+            this.barDockControlRight.Location = new System.Drawing.Point(1415, 49);
             this.barDockControlRight.Manager = this.barManager1;
             this.barDockControlRight.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.barDockControlRight.Size = new System.Drawing.Size(0, 384);
+            // 
+            // gridColumn15
+            // 
+            this.gridColumn15.Caption = "實際職務";
+            this.gridColumn15.FieldName = "ActualJobName";
+            this.gridColumn15.Name = "gridColumn15";
+            this.gridColumn15.Visible = true;
+            this.gridColumn15.VisibleIndex = 3;
             // 
             // uc401_UserManage
             // 
@@ -437,7 +447,7 @@
             this.Controls.Add(this.barDockControlTop);
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "uc401_UserManage";
-            this.Size = new System.Drawing.Size(1231, 433);
+            this.Size = new System.Drawing.Size(1415, 433);
             this.Load += new System.EventHandler(this.f401_UserManager_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
@@ -484,5 +494,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn16;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn15;
     }
 }

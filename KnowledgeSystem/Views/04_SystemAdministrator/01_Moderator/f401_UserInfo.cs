@@ -55,8 +55,10 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             Resign,
             [Description("復職")]
             ResumeWork,
-            [Description("晉升")]
-            JobChange
+            [Description("更新實編制職務")]
+            JobChange,
+            [Description("更新實際職務")]
+            ActualJobChange
         }
 
         private void InitializeIcon()
@@ -70,6 +72,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             btnResign.ImageOptions.SvgImage = TPSvgimages.Resign;
             btnResumeWork.ImageOptions.SvgImage = TPSvgimages.Conferred;
             btnJobChange.ImageOptions.SvgImage = TPSvgimages.UpLevel;
+            btnActualJobChange.ImageOptions.SvgImage = TPSvgimages.Info;
             btnPersonnelChanges.ImageOptions.SvgImage = TPSvgimages.PersonnelChanges;
         }
 
@@ -94,6 +97,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             cbbDept.Enabled = false;
             cbbStatus.Enabled = false;
             cbbJobTitle.Enabled = false;
+            cbbActualJob.Enabled = false;
+            txbPCName.Enabled = false;
 
             btnDeptChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             btnResign.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
@@ -117,6 +122,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                     cbbDept.Enabled = true;
                     cbbStatus.Enabled = true;
                     cbbJobTitle.Enabled = true;
+                    cbbActualJob.Enabled = true;
 
                     btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
@@ -188,12 +194,13 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                 btnResign.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                 btnResumeWork.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                 btnJobChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                btnActualJobChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             }
 
-            Rectangle screenBounds = Screen.PrimaryScreen.Bounds;
-            int x = screenBounds.Width / 2 - Width / 2;
-            int y = screenBounds.Height / 2 - Height / 2;
-            Location = new Point(x, y);
+            //Rectangle screenBounds = Screen.PrimaryScreen.Bounds;
+            //int x = screenBounds.Width / 2 - Width / 2;
+            //int y = screenBounds.Height / 2 - Height / 2;
+            //Location = new Point(x, y);
         }
 
         private void f401_UserInfo_Load(object sender, EventArgs e)
@@ -214,6 +221,10 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             cbbJobTitle.Properties.DataSource = lsJobTitles;
             cbbJobTitle.Properties.DisplayMember = "DisplayName";
             cbbJobTitle.Properties.ValueMember = "Id";
+
+            cbbActualJob.Properties.DataSource = lsJobTitles;
+            cbbActualJob.Properties.DisplayMember = "DisplayName";
+            cbbActualJob.Properties.ValueMember = "Id";
 
             cbbNationality.Properties.Items.AddRange(new string[] { "VN", "TW", "CN" });
             cbbStatus.Properties.Items.AddRange(TPConfigs.lsUserStatus.Select(r => r.Value).ToList());
@@ -236,9 +247,11 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                     txbUserNameTW.EditValue = userInfo.DisplayName.Split('\n')[0]?.Trim();
                     cbbDept.EditValue = userInfo.IdDepartment;
                     cbbJobTitle.EditValue = userInfo.JobCode;
+                    cbbActualJob.EditValue = userInfo.ActualJobCode;
                     txbDOB.EditValue = userInfo.DOB;
                     txbCCCD.EditValue = userInfo.CitizenID;
                     cbbNationality.EditValue = userInfo.Nationality;
+                    txbPCName.EditValue = userInfo.PCName;
 
                     txbPhone1.EditValue = userInfo.PhoneNum1;
                     txbPhone2.EditValue = userInfo.PhoneNum2;
@@ -261,7 +274,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                     var signs = dm_SignBUS.Instance.GetListByIdSigns(idSigns).OrderBy(r => r.Prioritize).ToList();
                     var signInfos = (from data in signs
                                      join typeImg in signTypes on data.ImgType equals typeImg.Key
-                                     select new 
+                                     select new
                                      {
                                          Id = data.Id,
                                          DisplayName = data.DisplayName,
@@ -301,6 +314,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                 userInfo.DOB = txbDOB.DateTime;
                 userInfo.CitizenID = txbCCCD.EditValue?.ToString();
                 userInfo.Nationality = cbbNationality.EditValue?.ToString();
+                userInfo.ActualJobCode = cbbActualJob.EditValue?.ToString();
 
                 userInfo.DateCreate = txbDateStart.DateTime;
                 userInfo.PhoneNum1 = txbPhone1.EditValue?.ToString();
@@ -602,10 +616,12 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
         private void btnJobChange_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            MsgTP.MsgShowInfomation("<font='Microsoft JhengHei UI' size=14>更新編制職務會影響到證照管理，請您確認並注意！</font>");
+
             XtraInputBoxArgs args = new XtraInputBoxArgs();
 
             args.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
-            args.Caption = "晉升";
+            args.Caption = "更新編制職務";
             args.Prompt = $"<font='Microsoft JhengHei UI' size=14>請選職務</font>";
             args.DefaultButtonIndex = 0;
             SearchLookUpEdit editor = new SearchLookUpEdit();
@@ -737,6 +753,49 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
                 Clipboard.SetText(password);
             }
+        }
+
+        private void btnActualJobChange_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            XtraInputBoxArgs args = new XtraInputBoxArgs();
+
+            args.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
+            args.Caption = "更新編制職務";
+            args.Prompt = $"<font='Microsoft JhengHei UI' size=14>請選職務</font>";
+            args.DefaultButtonIndex = 0;
+            SearchLookUpEdit editor = new SearchLookUpEdit();
+            GridView editView = new GridView();
+            GridColumn gcol1 = new GridColumn() { Caption = "職務代號", FieldName = "Id", Visible = true, VisibleIndex = 0 };
+            GridColumn gcol2 = new GridColumn() { Caption = "職務名稱", FieldName = "DisplayName", Visible = true, VisibleIndex = 1 };
+
+            var lsJobTitles = dm_JobTitleBUS.Instance.GetList().Where(r => r.Id != userInfo.JobCode).ToList();
+            editor.Properties.DataSource = lsJobTitles;
+            editor.Properties.DisplayMember = "DisplayName";
+            editor.Properties.ValueMember = "Id";
+            args.Editor = editor;
+
+            editView.Appearance.HeaderPanel.Font = fontUI14;
+            editView.Appearance.HeaderPanel.ForeColor = Color.Black;
+            editView.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            editView.Appearance.Row.Font = fontUI12;
+            editView.Appearance.Row.ForeColor = Color.Black;
+            editView.Columns.AddRange(new GridColumn[] { gcol1, gcol2 });
+
+            editor.Properties.Appearance.Font = fontUI14;
+            editor.Properties.Appearance.ForeColor = Color.Black;
+            editor.Properties.NullText = "";
+            editor.Properties.PopupView = editView;
+
+            var result = XtraInputBox.Show(args);
+            if (result == null) return;
+
+            string idJobChange = result?.ToString() ?? "";
+
+            cbbActualJob.EditValue = idJobChange;
+
+            eventInfo = EventFormInfo.Update;
+            _eventUpdate = UpdateEvent.ActualJobChange;
+            LockControl();
         }
     }
 }

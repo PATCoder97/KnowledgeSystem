@@ -31,5 +31,6 @@ namespace DataAccessLayer
         public string PhoneNum2 { get; set; }
         public Nullable<int> Status { get; set; }
         public Nullable<bool> Sex { get; set; }
+        public string ActualJobCode { get; set; }
     }
 }

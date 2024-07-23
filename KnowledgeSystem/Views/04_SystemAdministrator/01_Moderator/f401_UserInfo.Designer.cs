@@ -92,6 +92,14 @@
             this.layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcRole = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.btnActualJobChange = new DevExpress.XtraBars.BarButtonItem();
+            this.cbbActualJob = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.searchLookUpEdit1View1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn31 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn41 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.layoutControlItem17 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.txbPCName = new DevExpress.XtraEditors.TextEdit();
+            this.layoutControlItem18 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -137,6 +145,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcRole)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbActualJob.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem17)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbPCName.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem18)).BeginInit();
             this.SuspendLayout();
             // 
             // barManagerTP
@@ -157,9 +170,10 @@
             this.btnResign,
             this.btnResumeWork,
             this.btnJobChange,
-            this.btnPersonnelChanges});
+            this.btnPersonnelChanges,
+            this.btnActualJobChange});
             this.barManagerTP.MainMenu = this.bar2;
-            this.barManagerTP.MaxItemId = 12;
+            this.barManagerTP.MaxItemId = 13;
             // 
             // bar2
             // 
@@ -227,6 +241,7 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.btnSuspension),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnResumeWork),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnJobChange),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnActualJobChange),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnDeptChange),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnResign, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.btnPersonnelChanges.Name = "btnPersonnelChanges";
@@ -257,7 +272,7 @@
             // 
             // btnJobChange
             // 
-            this.btnJobChange.Caption = "晉升";
+            this.btnJobChange.Caption = "更新編制職務";
             this.btnJobChange.Id = 8;
             this.btnJobChange.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnJobChange.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
@@ -303,7 +318,7 @@
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 377);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 413);
             this.barDockControlBottom.Manager = this.barManagerTP;
             this.barDockControlBottom.Size = new System.Drawing.Size(598, 0);
             // 
@@ -313,7 +328,7 @@
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 49);
             this.barDockControlLeft.Manager = this.barManagerTP;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 328);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 364);
             // 
             // barDockControlRight
             // 
@@ -321,7 +336,7 @@
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
             this.barDockControlRight.Location = new System.Drawing.Point(598, 49);
             this.barDockControlRight.Manager = this.barManagerTP;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 328);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 364);
             // 
             // layoutControl1
             // 
@@ -341,17 +356,19 @@
             this.layoutControl1.Controls.Add(this.gcRole);
             this.layoutControl1.Controls.Add(this.txbUserId);
             this.layoutControl1.Controls.Add(this.cbbJobTitle);
+            this.layoutControl1.Controls.Add(this.cbbActualJob);
+            this.layoutControl1.Controls.Add(this.txbPCName);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(598, 328);
+            this.layoutControl1.Size = new System.Drawing.Size(598, 364);
             this.layoutControl1.TabIndex = 5;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // cbbStatus
             // 
-            this.cbbStatus.Location = new System.Drawing.Point(112, 272);
+            this.cbbStatus.Location = new System.Drawing.Point(112, 308);
             this.cbbStatus.Name = "cbbStatus";
             this.cbbStatus.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.cbbStatus.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -362,49 +379,49 @@
             this.cbbStatus.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbbStatus.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cbbStatus.Size = new System.Drawing.Size(185, 32);
+            this.cbbStatus.Size = new System.Drawing.Size(184, 32);
             this.cbbStatus.StyleController = this.layoutControl1;
             this.cbbStatus.TabIndex = 14;
             // 
             // txbAddr
             // 
-            this.txbAddr.Location = new System.Drawing.Point(389, 272);
+            this.txbAddr.Location = new System.Drawing.Point(388, 272);
             this.txbAddr.Name = "txbAddr";
             this.txbAddr.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbAddr.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbAddr.Properties.Appearance.Options.UseFont = true;
             this.txbAddr.Properties.Appearance.Options.UseForeColor = true;
-            this.txbAddr.Size = new System.Drawing.Size(185, 32);
+            this.txbAddr.Size = new System.Drawing.Size(186, 32);
             this.txbAddr.StyleController = this.layoutControl1;
             this.txbAddr.TabIndex = 13;
             // 
             // txbPhone2
             // 
-            this.txbPhone2.Location = new System.Drawing.Point(389, 236);
+            this.txbPhone2.Location = new System.Drawing.Point(388, 236);
             this.txbPhone2.Name = "txbPhone2";
             this.txbPhone2.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbPhone2.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbPhone2.Properties.Appearance.Options.UseFont = true;
             this.txbPhone2.Properties.Appearance.Options.UseForeColor = true;
-            this.txbPhone2.Size = new System.Drawing.Size(185, 32);
+            this.txbPhone2.Size = new System.Drawing.Size(186, 32);
             this.txbPhone2.StyleController = this.layoutControl1;
             this.txbPhone2.TabIndex = 12;
             // 
             // txbPhone1
             // 
-            this.txbPhone1.Location = new System.Drawing.Point(389, 200);
+            this.txbPhone1.Location = new System.Drawing.Point(388, 200);
             this.txbPhone1.Name = "txbPhone1";
             this.txbPhone1.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbPhone1.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbPhone1.Properties.Appearance.Options.UseFont = true;
             this.txbPhone1.Properties.Appearance.Options.UseForeColor = true;
-            this.txbPhone1.Size = new System.Drawing.Size(185, 32);
+            this.txbPhone1.Size = new System.Drawing.Size(186, 32);
             this.txbPhone1.StyleController = this.layoutControl1;
             this.txbPhone1.TabIndex = 11;
             // 
             // cbbSex
             // 
-            this.cbbSex.Location = new System.Drawing.Point(389, 56);
+            this.cbbSex.Location = new System.Drawing.Point(388, 56);
             this.cbbSex.Name = "cbbSex";
             this.cbbSex.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.cbbSex.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -415,14 +432,14 @@
             this.cbbSex.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbbSex.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cbbSex.Size = new System.Drawing.Size(185, 32);
+            this.cbbSex.Size = new System.Drawing.Size(186, 32);
             this.cbbSex.StyleController = this.layoutControl1;
             this.cbbSex.TabIndex = 10;
             // 
             // txbDateStart
             // 
             this.txbDateStart.EditValue = null;
-            this.txbDateStart.Location = new System.Drawing.Point(389, 92);
+            this.txbDateStart.Location = new System.Drawing.Point(388, 92);
             this.txbDateStart.Name = "txbDateStart";
             this.txbDateStart.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbDateStart.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -440,7 +457,7 @@
             this.txbDateStart.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.txbDateStart.Properties.MaskSettings.Set("mask", "d");
             this.txbDateStart.Properties.UseMaskAsDisplayFormat = true;
-            this.txbDateStart.Size = new System.Drawing.Size(185, 32);
+            this.txbDateStart.Size = new System.Drawing.Size(186, 32);
             this.txbDateStart.StyleController = this.layoutControl1;
             this.txbDateStart.TabIndex = 9;
             // 
@@ -451,7 +468,7 @@
             this.gcSign.MenuManager = this.barManagerTP;
             this.gcSign.Name = "gcSign";
             this.gcSign.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
-            this.gcSign.Size = new System.Drawing.Size(547, 248);
+            this.gcSign.Size = new System.Drawing.Size(547, 284);
             this.gcSign.TabIndex = 8;
             this.gcSign.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvSign});
@@ -503,19 +520,19 @@
             this.txbUserNameVN.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbUserNameVN.Properties.Appearance.Options.UseFont = true;
             this.txbUserNameVN.Properties.Appearance.Options.UseForeColor = true;
-            this.txbUserNameVN.Size = new System.Drawing.Size(185, 32);
+            this.txbUserNameVN.Size = new System.Drawing.Size(184, 32);
             this.txbUserNameVN.StyleController = this.layoutControl1;
             this.txbUserNameVN.TabIndex = 7;
             // 
             // txbCCCD
             // 
-            this.txbCCCD.Location = new System.Drawing.Point(389, 164);
+            this.txbCCCD.Location = new System.Drawing.Point(388, 164);
             this.txbCCCD.Name = "txbCCCD";
             this.txbCCCD.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbCCCD.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbCCCD.Properties.Appearance.Options.UseFont = true;
             this.txbCCCD.Properties.Appearance.Options.UseForeColor = true;
-            this.txbCCCD.Size = new System.Drawing.Size(185, 32);
+            this.txbCCCD.Size = new System.Drawing.Size(186, 32);
             this.txbCCCD.StyleController = this.layoutControl1;
             this.txbCCCD.TabIndex = 7;
             // 
@@ -543,7 +560,7 @@
             this.cbbDept.Properties.NullText = "";
             this.cbbDept.Properties.SearchMode = DevExpress.XtraEditors.Controls.SearchMode.AutoSearch;
             this.cbbDept.Properties.ShowHeader = false;
-            this.cbbDept.Size = new System.Drawing.Size(185, 32);
+            this.cbbDept.Size = new System.Drawing.Size(184, 32);
             this.cbbDept.StyleController = this.layoutControl1;
             this.cbbDept.TabIndex = 7;
             this.cbbDept.AutoSearch += new DevExpress.XtraEditors.Controls.LookUpEditAutoSearchEventHandler(this.cbbDept_AutoSearch);
@@ -551,7 +568,7 @@
             // txbDOB
             // 
             this.txbDOB.EditValue = null;
-            this.txbDOB.Location = new System.Drawing.Point(389, 128);
+            this.txbDOB.Location = new System.Drawing.Point(388, 128);
             this.txbDOB.Name = "txbDOB";
             this.txbDOB.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbDOB.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -569,13 +586,13 @@
             this.txbDOB.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.txbDOB.Properties.MaskSettings.Set("mask", "d");
             this.txbDOB.Properties.UseMaskAsDisplayFormat = true;
-            this.txbDOB.Size = new System.Drawing.Size(185, 32);
+            this.txbDOB.Size = new System.Drawing.Size(186, 32);
             this.txbDOB.StyleController = this.layoutControl1;
             this.txbDOB.TabIndex = 7;
             // 
             // cbbNationality
             // 
-            this.cbbNationality.Location = new System.Drawing.Point(112, 236);
+            this.cbbNationality.Location = new System.Drawing.Point(112, 272);
             this.cbbNationality.Name = "cbbNationality";
             this.cbbNationality.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.cbbNationality.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -586,7 +603,7 @@
             this.cbbNationality.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbbNationality.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cbbNationality.Size = new System.Drawing.Size(185, 32);
+            this.cbbNationality.Size = new System.Drawing.Size(184, 32);
             this.cbbNationality.StyleController = this.layoutControl1;
             this.cbbNationality.TabIndex = 7;
             // 
@@ -598,7 +615,7 @@
             this.txbUserNameTW.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbUserNameTW.Properties.Appearance.Options.UseFont = true;
             this.txbUserNameTW.Properties.Appearance.Options.UseForeColor = true;
-            this.txbUserNameTW.Size = new System.Drawing.Size(185, 32);
+            this.txbUserNameTW.Size = new System.Drawing.Size(184, 32);
             this.txbUserNameTW.StyleController = this.layoutControl1;
             this.txbUserNameTW.TabIndex = 7;
             // 
@@ -607,7 +624,7 @@
             this.gcRole.Location = new System.Drawing.Point(27, 56);
             this.gcRole.MainView = this.gvRole;
             this.gcRole.Name = "gcRole";
-            this.gcRole.Size = new System.Drawing.Size(547, 248);
+            this.gcRole.Size = new System.Drawing.Size(547, 284);
             this.gcRole.TabIndex = 8;
             this.gcRole.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvRole});
@@ -664,14 +681,14 @@
             this.txbUserId.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.RegularMaskManager));
             this.txbUserId.Properties.MaskSettings.Set("MaskManagerSignature", "ignoreMaskBlank=True");
             this.txbUserId.Properties.MaskSettings.Set("mask", "[A-Z0-9]{10}");
-            this.txbUserId.Size = new System.Drawing.Size(185, 32);
+            this.txbUserId.Size = new System.Drawing.Size(184, 32);
             this.txbUserId.StyleController = this.layoutControl1;
             this.txbUserId.TabIndex = 6;
             this.txbUserId.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txbUserId_ButtonClick);
             // 
             // cbbJobTitle
             // 
-            this.cbbJobTitle.Location = new System.Drawing.Point(112, 200);
+            this.cbbJobTitle.Location = new System.Drawing.Point(112, 236);
             this.cbbJobTitle.Name = "cbbJobTitle";
             this.cbbJobTitle.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.cbbJobTitle.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -681,7 +698,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbbJobTitle.Properties.NullText = "";
             this.cbbJobTitle.Properties.PopupView = this.searchLookUpEdit1View;
-            this.cbbJobTitle.Size = new System.Drawing.Size(185, 32);
+            this.cbbJobTitle.Size = new System.Drawing.Size(184, 32);
             this.cbbJobTitle.StyleController = this.layoutControl1;
             this.cbbJobTitle.TabIndex = 7;
             // 
@@ -728,7 +745,7 @@
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.tabbedControlGroup1});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(598, 328);
+            this.Root.Size = new System.Drawing.Size(598, 364);
             this.Root.TextVisible = false;
             // 
             // tabbedControlGroup1
@@ -743,8 +760,8 @@
             this.tabbedControlGroup1.AppearanceTabPage.HeaderActive.Options.UseForeColor = true;
             this.tabbedControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.tabbedControlGroup1.Name = "tabbedControlGroup1";
-            this.tabbedControlGroup1.SelectedTabPage = this.lcSign;
-            this.tabbedControlGroup1.Size = new System.Drawing.Size(578, 308);
+            this.tabbedControlGroup1.SelectedTabPage = this.layoutControlGroup1;
+            this.tabbedControlGroup1.Size = new System.Drawing.Size(578, 344);
             this.tabbedControlGroup1.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlGroup1,
             this.lcRole,
@@ -756,7 +773,7 @@
             this.layoutControlItem9});
             this.lcSign.Location = new System.Drawing.Point(0, 0);
             this.lcSign.Name = "lcSign";
-            this.lcSign.Size = new System.Drawing.Size(554, 252);
+            this.lcSign.Size = new System.Drawing.Size(554, 288);
             this.lcSign.Text = "簽名";
             // 
             // layoutControlItem9
@@ -765,7 +782,7 @@
             this.layoutControlItem9.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem9.Name = "layoutControlItem9";
             this.layoutControlItem9.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 5, 2, 2);
-            this.layoutControlItem9.Size = new System.Drawing.Size(554, 252);
+            this.layoutControlItem9.Size = new System.Drawing.Size(554, 288);
             this.layoutControlItem9.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem9.TextVisible = false;
             // 
@@ -783,12 +800,14 @@
             this.layoutControlItem8,
             this.layoutControlItem13,
             this.layoutControlItem7,
-            this.layoutControlItem14,
+            this.layoutControlItem18,
             this.layoutControlItem16,
+            this.layoutControlItem17,
+            this.layoutControlItem14,
             this.layoutControlItem15});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(554, 252);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(554, 288);
             this.layoutControlGroup1.Text = "信息";
             // 
             // layoutControlItem2
@@ -804,7 +823,7 @@
             this.layoutControlItem2.Control = this.txbUserId;
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(277, 36);
+            this.layoutControlItem2.Size = new System.Drawing.Size(276, 36);
             this.layoutControlItem2.Text = "人員代號";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(76, 24);
             // 
@@ -819,9 +838,9 @@
             this.layoutControlItem12.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem12.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem12.Control = this.cbbSex;
-            this.layoutControlItem12.Location = new System.Drawing.Point(277, 0);
+            this.layoutControlItem12.Location = new System.Drawing.Point(276, 0);
             this.layoutControlItem12.Name = "layoutControlItem12";
-            this.layoutControlItem12.Size = new System.Drawing.Size(277, 36);
+            this.layoutControlItem12.Size = new System.Drawing.Size(278, 36);
             this.layoutControlItem12.Text = "性別";
             this.layoutControlItem12.TextSize = new System.Drawing.Size(76, 24);
             // 
@@ -838,7 +857,7 @@
             this.layoutControlItem3.Control = this.txbUserNameVN;
             this.layoutControlItem3.Location = new System.Drawing.Point(0, 36);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(277, 36);
+            this.layoutControlItem3.Size = new System.Drawing.Size(276, 36);
             this.layoutControlItem3.Text = "越文名稱";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(76, 24);
             // 
@@ -853,9 +872,9 @@
             this.layoutControlItem11.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem11.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem11.Control = this.txbDateStart;
-            this.layoutControlItem11.Location = new System.Drawing.Point(277, 36);
+            this.layoutControlItem11.Location = new System.Drawing.Point(276, 36);
             this.layoutControlItem11.Name = "layoutControlItem11";
-            this.layoutControlItem11.Size = new System.Drawing.Size(277, 36);
+            this.layoutControlItem11.Size = new System.Drawing.Size(278, 36);
             this.layoutControlItem11.Text = "報到日期";
             this.layoutControlItem11.TextSize = new System.Drawing.Size(76, 24);
             // 
@@ -874,7 +893,7 @@
             this.layoutControlItem1.CustomizationFormText = "名稱";
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 72);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(277, 36);
+            this.layoutControlItem1.Size = new System.Drawing.Size(276, 36);
             this.layoutControlItem1.Text = "中文名稱";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(76, 24);
             // 
@@ -891,9 +910,9 @@
             this.layoutControlItem5.Control = this.txbDOB;
             this.layoutControlItem5.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
             this.layoutControlItem5.CustomizationFormText = "備註";
-            this.layoutControlItem5.Location = new System.Drawing.Point(277, 72);
+            this.layoutControlItem5.Location = new System.Drawing.Point(276, 72);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(277, 36);
+            this.layoutControlItem5.Size = new System.Drawing.Size(278, 36);
             this.layoutControlItem5.Text = "出生日期";
             this.layoutControlItem5.TextSize = new System.Drawing.Size(76, 24);
             // 
@@ -912,7 +931,7 @@
             this.layoutControlItem4.CustomizationFormText = "備註";
             this.layoutControlItem4.Location = new System.Drawing.Point(0, 108);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(277, 36);
+            this.layoutControlItem4.Size = new System.Drawing.Size(276, 36);
             this.layoutControlItem4.Text = "單位";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(76, 24);
             // 
@@ -929,9 +948,9 @@
             this.layoutControlItem6.Control = this.txbCCCD;
             this.layoutControlItem6.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
             this.layoutControlItem6.CustomizationFormText = "備註";
-            this.layoutControlItem6.Location = new System.Drawing.Point(277, 108);
+            this.layoutControlItem6.Location = new System.Drawing.Point(276, 108);
             this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(277, 36);
+            this.layoutControlItem6.Size = new System.Drawing.Size(278, 36);
             this.layoutControlItem6.Text = "身份證號";
             this.layoutControlItem6.TextSize = new System.Drawing.Size(76, 24);
             // 
@@ -947,11 +966,11 @@
             this.layoutControlItem8.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem8.Control = this.cbbJobTitle;
             this.layoutControlItem8.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
-            this.layoutControlItem8.CustomizationFormText = "備註";
-            this.layoutControlItem8.Location = new System.Drawing.Point(0, 144);
+            this.layoutControlItem8.CustomizationFormText = "編制備註";
+            this.layoutControlItem8.Location = new System.Drawing.Point(0, 180);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(277, 36);
-            this.layoutControlItem8.Text = "職務";
+            this.layoutControlItem8.Size = new System.Drawing.Size(276, 36);
+            this.layoutControlItem8.Text = "編制備註";
             this.layoutControlItem8.TextSize = new System.Drawing.Size(76, 24);
             // 
             // layoutControlItem13
@@ -965,9 +984,9 @@
             this.layoutControlItem13.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem13.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem13.Control = this.txbPhone1;
-            this.layoutControlItem13.Location = new System.Drawing.Point(277, 144);
+            this.layoutControlItem13.Location = new System.Drawing.Point(276, 144);
             this.layoutControlItem13.Name = "layoutControlItem13";
-            this.layoutControlItem13.Size = new System.Drawing.Size(277, 36);
+            this.layoutControlItem13.Size = new System.Drawing.Size(278, 36);
             this.layoutControlItem13.Text = "電話號碼";
             this.layoutControlItem13.TextSize = new System.Drawing.Size(76, 24);
             // 
@@ -984,9 +1003,9 @@
             this.layoutControlItem7.Control = this.cbbNationality;
             this.layoutControlItem7.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
             this.layoutControlItem7.CustomizationFormText = "備註";
-            this.layoutControlItem7.Location = new System.Drawing.Point(0, 180);
+            this.layoutControlItem7.Location = new System.Drawing.Point(0, 216);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(277, 36);
+            this.layoutControlItem7.Size = new System.Drawing.Size(276, 36);
             this.layoutControlItem7.Text = "國籍";
             this.layoutControlItem7.TextSize = new System.Drawing.Size(76, 24);
             // 
@@ -1002,9 +1021,9 @@
             this.layoutControlItem14.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem14.Control = this.txbPhone2;
             this.layoutControlItem14.CustomizationFormText = "家人電話";
-            this.layoutControlItem14.Location = new System.Drawing.Point(277, 180);
+            this.layoutControlItem14.Location = new System.Drawing.Point(276, 180);
             this.layoutControlItem14.Name = "layoutControlItem14";
-            this.layoutControlItem14.Size = new System.Drawing.Size(277, 36);
+            this.layoutControlItem14.Size = new System.Drawing.Size(278, 36);
             this.layoutControlItem14.Text = "家人電話";
             this.layoutControlItem14.TextSize = new System.Drawing.Size(76, 24);
             // 
@@ -1019,9 +1038,9 @@
             this.layoutControlItem16.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem16.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem16.Control = this.cbbStatus;
-            this.layoutControlItem16.Location = new System.Drawing.Point(0, 216);
+            this.layoutControlItem16.Location = new System.Drawing.Point(0, 252);
             this.layoutControlItem16.Name = "layoutControlItem16";
-            this.layoutControlItem16.Size = new System.Drawing.Size(277, 36);
+            this.layoutControlItem16.Size = new System.Drawing.Size(276, 36);
             this.layoutControlItem16.Text = "狀態";
             this.layoutControlItem16.TextSize = new System.Drawing.Size(76, 24);
             // 
@@ -1036,9 +1055,9 @@
             this.layoutControlItem15.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem15.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem15.Control = this.txbAddr;
-            this.layoutControlItem15.Location = new System.Drawing.Point(277, 216);
+            this.layoutControlItem15.Location = new System.Drawing.Point(276, 216);
             this.layoutControlItem15.Name = "layoutControlItem15";
-            this.layoutControlItem15.Size = new System.Drawing.Size(277, 36);
+            this.layoutControlItem15.Size = new System.Drawing.Size(278, 36);
             this.layoutControlItem15.Text = "居住地點";
             this.layoutControlItem15.TextSize = new System.Drawing.Size(76, 24);
             // 
@@ -1048,7 +1067,7 @@
             this.layoutControlItem10});
             this.lcRole.Location = new System.Drawing.Point(0, 0);
             this.lcRole.Name = "lcRole";
-            this.lcRole.Size = new System.Drawing.Size(554, 252);
+            this.lcRole.Size = new System.Drawing.Size(554, 288);
             this.lcRole.Text = "角色";
             // 
             // layoutControlItem10
@@ -1059,10 +1078,124 @@
             this.layoutControlItem10.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem10.Name = "layoutControlItem10";
             this.layoutControlItem10.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 2, 2, 2);
-            this.layoutControlItem10.Size = new System.Drawing.Size(554, 252);
+            this.layoutControlItem10.Size = new System.Drawing.Size(554, 288);
             this.layoutControlItem10.Text = "layoutControlItem9";
             this.layoutControlItem10.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem10.TextVisible = false;
+            // 
+            // btnActualJobChange
+            // 
+            this.btnActualJobChange.Caption = "更新實際職務";
+            this.btnActualJobChange.Id = 12;
+            this.btnActualJobChange.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnActualJobChange.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnActualJobChange.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnActualJobChange.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.btnActualJobChange.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnActualJobChange.Name = "btnActualJobChange";
+            this.btnActualJobChange.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnActualJobChange_ItemClick);
+            // 
+            // cbbActualJob
+            // 
+            this.cbbActualJob.Location = new System.Drawing.Point(112, 200);
+            this.cbbActualJob.Name = "cbbActualJob";
+            this.cbbActualJob.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.cbbActualJob.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.cbbActualJob.Properties.Appearance.Options.UseFont = true;
+            this.cbbActualJob.Properties.Appearance.Options.UseForeColor = true;
+            this.cbbActualJob.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbbActualJob.Properties.NullText = "";
+            this.cbbActualJob.Properties.PopupView = this.searchLookUpEdit1View1;
+            this.cbbActualJob.Size = new System.Drawing.Size(184, 32);
+            this.cbbActualJob.StyleController = this.layoutControl1;
+            this.cbbActualJob.TabIndex = 7;
+            // 
+            // searchLookUpEdit1View1
+            // 
+            this.searchLookUpEdit1View1.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchLookUpEdit1View1.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
+            this.searchLookUpEdit1View1.Appearance.HeaderPanel.Options.UseFont = true;
+            this.searchLookUpEdit1View1.Appearance.HeaderPanel.Options.UseForeColor = true;
+            this.searchLookUpEdit1View1.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            this.searchLookUpEdit1View1.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.searchLookUpEdit1View1.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchLookUpEdit1View1.Appearance.Row.ForeColor = System.Drawing.Color.Black;
+            this.searchLookUpEdit1View1.Appearance.Row.Options.UseFont = true;
+            this.searchLookUpEdit1View1.Appearance.Row.Options.UseForeColor = true;
+            this.searchLookUpEdit1View1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn31,
+            this.gridColumn41});
+            this.searchLookUpEdit1View1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.searchLookUpEdit1View1.Name = "searchLookUpEdit1View1";
+            this.searchLookUpEdit1View1.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.searchLookUpEdit1View1.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn31
+            // 
+            this.gridColumn31.Caption = "職務代號";
+            this.gridColumn31.FieldName = "Id";
+            this.gridColumn31.Name = "gridColumn31";
+            this.gridColumn31.Visible = true;
+            this.gridColumn31.VisibleIndex = 0;
+            // 
+            // gridColumn41
+            // 
+            this.gridColumn41.Caption = "職務名稱";
+            this.gridColumn41.FieldName = "DisplayName";
+            this.gridColumn41.Name = "gridColumn41";
+            this.gridColumn41.Visible = true;
+            this.gridColumn41.VisibleIndex = 1;
+            // 
+            // layoutControlItem17
+            // 
+            this.layoutControlItem17.AppearanceItemCaption.BackColor = System.Drawing.Color.Transparent;
+            this.layoutControlItem17.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.layoutControlItem17.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem17.AppearanceItemCaption.Options.UseBackColor = true;
+            this.layoutControlItem17.AppearanceItemCaption.Options.UseFont = true;
+            this.layoutControlItem17.AppearanceItemCaption.Options.UseForeColor = true;
+            this.layoutControlItem17.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem17.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.layoutControlItem17.Control = this.cbbActualJob;
+            this.layoutControlItem17.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.layoutControlItem17.CustomizationFormText = "實際備註";
+            this.layoutControlItem17.Location = new System.Drawing.Point(0, 144);
+            this.layoutControlItem17.Name = "layoutControlItem17";
+            this.layoutControlItem17.Size = new System.Drawing.Size(276, 36);
+            this.layoutControlItem17.Text = "實際備註";
+            this.layoutControlItem17.TextSize = new System.Drawing.Size(76, 24);
+            // 
+            // txbPCName
+            // 
+            this.txbPCName.Location = new System.Drawing.Point(388, 308);
+            this.txbPCName.Name = "txbPCName";
+            this.txbPCName.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.txbPCName.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.txbPCName.Properties.Appearance.Options.UseFont = true;
+            this.txbPCName.Properties.Appearance.Options.UseForeColor = true;
+            this.txbPCName.Size = new System.Drawing.Size(186, 32);
+            this.txbPCName.StyleController = this.layoutControl1;
+            this.txbPCName.TabIndex = 13;
+            // 
+            // layoutControlItem18
+            // 
+            this.layoutControlItem18.AppearanceItemCaption.BackColor = System.Drawing.Color.Transparent;
+            this.layoutControlItem18.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.layoutControlItem18.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem18.AppearanceItemCaption.Options.UseBackColor = true;
+            this.layoutControlItem18.AppearanceItemCaption.Options.UseFont = true;
+            this.layoutControlItem18.AppearanceItemCaption.Options.UseForeColor = true;
+            this.layoutControlItem18.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem18.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.layoutControlItem18.Control = this.txbPCName;
+            this.layoutControlItem18.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.layoutControlItem18.CustomizationFormText = "電腦名稱";
+            this.layoutControlItem18.Location = new System.Drawing.Point(276, 252);
+            this.layoutControlItem18.Name = "layoutControlItem18";
+            this.layoutControlItem18.Size = new System.Drawing.Size(278, 36);
+            this.layoutControlItem18.Text = "電腦名稱";
+            this.layoutControlItem18.TextSize = new System.Drawing.Size(76, 24);
             // 
             // f401_UserInfo
             // 
@@ -1070,7 +1203,7 @@
             this.Appearance.Options.UseBackColor = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(598, 377);
+            this.ClientSize = new System.Drawing.Size(598, 413);
             this.Controls.Add(this.layoutControl1);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
@@ -1129,6 +1262,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem15)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcRole)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbActualJob.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem17)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbPCName.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem18)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1198,5 +1336,13 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem15;
         private DevExpress.XtraLayout.LayoutControlGroup lcRole;
         private DevExpress.XtraLayout.LayoutControlGroup lcSign;
+        private DevExpress.XtraBars.BarButtonItem btnActualJobChange;
+        private DevExpress.XtraEditors.SearchLookUpEdit cbbActualJob;
+        private DevExpress.XtraGrid.Views.Grid.GridView searchLookUpEdit1View1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn31;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn41;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem17;
+        private DevExpress.XtraEditors.TextEdit txbPCName;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem18;
     }
 }

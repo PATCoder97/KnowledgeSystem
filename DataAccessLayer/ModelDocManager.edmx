@@ -168,6 +168,7 @@
           <Property Name="PhoneNum2" Type="varchar" MaxLength="16" />
           <Property Name="Status" Type="int" />
           <Property Name="Sex" Type="bit" />
+          <Property Name="ActualJobCode" Type="varchar" MaxLength="16" />
         </EntityType>
         <EntityType Name="dm_UserRole">
           <Key>
@@ -227,12 +228,43 @@
           <Property Name="IdRole" Type="int" />
           <Property Name="IdForm" Type="int" />
         </EntityType>
+        <EntityType Name="dt201_ReqUpdateDocs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="TypeChange" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Category" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Content" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="DocCode" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="Descript" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="DeadLine" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="dt201_Role">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="DisplayName" Type="nvarchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt201_UpdateUsrReq">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdUsr" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="TypeChange" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt201_UpdateUsrReq_Detail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdUpdateReq" Type="int" Nullable="false" />
+          <Property Name="IdReq" Type="int" Nullable="false" />
+          <Property Name="DeadLine" Type="date" Nullable="false" />
+          <Property Name="CompleteDate" Type="date" />
+          <Property Name="UsrComplete" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="dt202_Attach">
           <Key>
@@ -620,7 +652,10 @@
           <EntitySet Name="dt201_Forms" EntityType="Self.dt201_Forms" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt201_ProgInfo" EntityType="Self.dt201_ProgInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt201_Progress" EntityType="Self.dt201_Progress" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt201_ReqUpdateDocs" EntityType="Self.dt201_ReqUpdateDocs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt201_Role" EntityType="Self.dt201_Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt201_UpdateUsrReq" EntityType="Self.dt201_UpdateUsrReq" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt201_UpdateUsrReq_Detail" EntityType="Self.dt201_UpdateUsrReq_Detail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt202_Attach" EntityType="Self.dt202_Attach" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt202_Base" EntityType="Self.dt202_Base" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt202_Type" EntityType="Self.dt202_Type" Schema="dbo" store:Type="Tables" />
@@ -693,7 +728,6 @@
           <EntitySet Name="dt302_ReportAttach" EntityType="DBDocumentManagementSystemModel.dt302_ReportAttach" />
           <EntitySet Name="dt302_Base" EntityType="DBDocumentManagementSystemModel.dt302_Base" />
           <EntitySet Name="dt302_ReportInfo" EntityType="DBDocumentManagementSystemModel.dt302_ReportInfo" />
-          <EntitySet Name="dm_User" EntityType="DBDocumentManagementSystemModel.dm_User" />
           <EntitySet Name="dt202_Type" EntityType="DBDocumentManagementSystemModel.dt202_Type" />
           <EntitySet Name="dt202_Attach" EntityType="DBDocumentManagementSystemModel.dt202_Attach" />
           <EntitySet Name="dt207_Attachment" EntityType="DBDocumentManagementSystemModel.dt207_Attachment" />
@@ -717,6 +751,10 @@
           <EntitySet Name="dt307_Questions" EntityType="DBDocumentManagementSystemModel.dt307_Questions" />
           <EntitySet Name="dt306_Base" EntityType="DBDocumentManagementSystemModel.dt306_Base" />
           <EntitySet Name="dm_Sign" EntityType="DBDocumentManagementSystemModel.dm_Sign" />
+          <EntitySet Name="dm_User" EntityType="DBDocumentManagementSystemModel.dm_User" />
+          <EntitySet Name="dt201_ReqUpdateDocs" EntityType="DBDocumentManagementSystemModel.dt201_ReqUpdateDocs" />
+          <EntitySet Name="dt201_UpdateUsrReq" EntityType="DBDocumentManagementSystemModel.dt201_UpdateUsrReq" />
+          <EntitySet Name="dt201_UpdateUsrReq_Detail" EntityType="DBDocumentManagementSystemModel.dt201_UpdateUsrReq_Detail" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -1048,28 +1086,6 @@
           <Property Name="ExpectedDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="UploadDate" Type="DateTime" Precision="0" />
         </EntityType>
-        <EntityType Name="dm_User">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="DisplayName" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
-          <Property Name="SecondaryPassword" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="DateCreate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="IdDepartment" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
-          <Property Name="DisplayNameVN" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="DOB" Type="DateTime" Precision="0" />
-          <Property Name="CitizenID" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-          <Property Name="Nationality" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Name="JobCode" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-          <Property Name="PCName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-          <Property Name="IPAddress" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="Addr" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNum1" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-          <Property Name="PhoneNum2" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-          <Property Name="Status" Type="Int32" />
-          <Property Name="Sex" Type="Boolean" />
-        </EntityType>
         <EntityType Name="dt202_Type">
           <Key>
             <PropertyRef Name="Id" />
@@ -1310,6 +1326,60 @@
           <Property Name="FontType" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
           <Property Name="FontColor" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
           <Property Name="Prioritize" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dm_User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayName" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="SecondaryPassword" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="DateCreate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IdDepartment" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayNameVN" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="DOB" Type="DateTime" Precision="0" />
+          <Property Name="CitizenID" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="Nationality" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="JobCode" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="PCName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="IPAddress" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Addr" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNum1" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNum2" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="Sex" Type="Boolean" />
+          <Property Name="ActualJobCode" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="dt201_ReqUpdateDocs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="TypeChange" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Category" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="DocCode" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="Descript" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="DeadLine" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt201_UpdateUsrReq">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdUsr" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TypeChange" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dt201_UpdateUsrReq_Detail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdUpdateReq" Type="Int32" Nullable="false" />
+          <Property Name="IdReq" Type="Int32" Nullable="false" />
+          <Property Name="DeadLine" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CompleteDate" Type="DateTime" Precision="0" />
+          <Property Name="UsrComplete" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1679,29 +1749,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dm_User">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_User">
-              <MappingFragment StoreEntitySet="dm_User">
-                <ScalarProperty Name="Sex" ColumnName="Sex" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="PhoneNum2" ColumnName="PhoneNum2" />
-                <ScalarProperty Name="PhoneNum1" ColumnName="PhoneNum1" />
-                <ScalarProperty Name="Addr" ColumnName="Addr" />
-                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
-                <ScalarProperty Name="PCName" ColumnName="PCName" />
-                <ScalarProperty Name="JobCode" ColumnName="JobCode" />
-                <ScalarProperty Name="Nationality" ColumnName="Nationality" />
-                <ScalarProperty Name="CitizenID" ColumnName="CitizenID" />
-                <ScalarProperty Name="DOB" ColumnName="DOB" />
-                <ScalarProperty Name="DisplayNameVN" ColumnName="DisplayNameVN" />
-                <ScalarProperty Name="IdDepartment" ColumnName="IdDepartment" />
-                <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
-                <ScalarProperty Name="SecondaryPassword" ColumnName="SecondaryPassword" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="dt202_Type">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt202_Type">
               <MappingFragment StoreEntitySet="dt202_Type">
@@ -1962,6 +2009,64 @@
                 <ScalarProperty Name="ImgType" ColumnName="ImgType" />
                 <ScalarProperty Name="ImgName" ColumnName="ImgName" />
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dm_User">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_User">
+              <MappingFragment StoreEntitySet="dm_User">
+                <ScalarProperty Name="ActualJobCode" ColumnName="ActualJobCode" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="PhoneNum2" ColumnName="PhoneNum2" />
+                <ScalarProperty Name="PhoneNum1" ColumnName="PhoneNum1" />
+                <ScalarProperty Name="Addr" ColumnName="Addr" />
+                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+                <ScalarProperty Name="PCName" ColumnName="PCName" />
+                <ScalarProperty Name="JobCode" ColumnName="JobCode" />
+                <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+                <ScalarProperty Name="CitizenID" ColumnName="CitizenID" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="DisplayNameVN" ColumnName="DisplayNameVN" />
+                <ScalarProperty Name="IdDepartment" ColumnName="IdDepartment" />
+                <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
+                <ScalarProperty Name="SecondaryPassword" ColumnName="SecondaryPassword" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt201_ReqUpdateDocs">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt201_ReqUpdateDocs">
+              <MappingFragment StoreEntitySet="dt201_ReqUpdateDocs">
+                <ScalarProperty Name="DeadLine" ColumnName="DeadLine" />
+                <ScalarProperty Name="Descript" ColumnName="Descript" />
+                <ScalarProperty Name="DocCode" ColumnName="DocCode" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="TypeChange" ColumnName="TypeChange" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt201_UpdateUsrReq">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt201_UpdateUsrReq">
+              <MappingFragment StoreEntitySet="dt201_UpdateUsrReq">
+                <ScalarProperty Name="TypeChange" ColumnName="TypeChange" />
+                <ScalarProperty Name="IdUsr" ColumnName="IdUsr" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt201_UpdateUsrReq_Detail">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt201_UpdateUsrReq_Detail">
+              <MappingFragment StoreEntitySet="dt201_UpdateUsrReq_Detail">
+                <ScalarProperty Name="UsrComplete" ColumnName="UsrComplete" />
+                <ScalarProperty Name="CompleteDate" ColumnName="CompleteDate" />
+                <ScalarProperty Name="DeadLine" ColumnName="DeadLine" />
+                <ScalarProperty Name="IdReq" ColumnName="IdReq" />
+                <ScalarProperty Name="IdUpdateReq" ColumnName="IdUpdateReq" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
