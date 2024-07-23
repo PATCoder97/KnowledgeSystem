@@ -15,7 +15,10 @@ namespace DataAccessLayer
     public partial class dt201_UpdateUsrReq
     {
         public int Id { get; set; }
+        public string IdDept { get; set; }
         public string IdUsr { get; set; }
         public string TypeChange { get; set; }
+        public System.DateTime DateCreate { get; set; }
+        public string Describe { get; set; }
     }
 }

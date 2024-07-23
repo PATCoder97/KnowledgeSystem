@@ -71,8 +71,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             btnDeptChange.ImageOptions.SvgImage = TPSvgimages.Transfer;
             btnResign.ImageOptions.SvgImage = TPSvgimages.Resign;
             btnResumeWork.ImageOptions.SvgImage = TPSvgimages.Conferred;
-            btnJobChange.ImageOptions.SvgImage = TPSvgimages.UpLevel;
-            btnActualJobChange.ImageOptions.SvgImage = TPSvgimages.Info;
+            btnJobChange.ImageOptions.SvgImage = TPSvgimages.Info;
+            btnActualJobChange.ImageOptions.SvgImage = TPSvgimages.UpLevel;
             btnPersonnelChanges.ImageOptions.SvgImage = TPSvgimages.PersonnelChanges;
         }
 

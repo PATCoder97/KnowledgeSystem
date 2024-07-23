@@ -252,8 +252,11 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdDept" Type="varchar" MaxLength="8" Nullable="false" />
           <Property Name="IdUsr" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="TypeChange" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="DateCreate" Type="date" Nullable="false" />
+          <Property Name="Describe" Type="nvarchar" MaxLength="256" />
         </EntityType>
         <EntityType Name="dt201_UpdateUsrReq_Detail">
           <Key>
@@ -753,8 +756,8 @@
           <EntitySet Name="dm_Sign" EntityType="DBDocumentManagementSystemModel.dm_Sign" />
           <EntitySet Name="dm_User" EntityType="DBDocumentManagementSystemModel.dm_User" />
           <EntitySet Name="dt201_ReqUpdateDocs" EntityType="DBDocumentManagementSystemModel.dt201_ReqUpdateDocs" />
-          <EntitySet Name="dt201_UpdateUsrReq" EntityType="DBDocumentManagementSystemModel.dt201_UpdateUsrReq" />
           <EntitySet Name="dt201_UpdateUsrReq_Detail" EntityType="DBDocumentManagementSystemModel.dt201_UpdateUsrReq_Detail" />
+          <EntitySet Name="dt201_UpdateUsrReq" EntityType="DBDocumentManagementSystemModel.dt201_UpdateUsrReq" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -1362,14 +1365,6 @@
           <Property Name="Descript" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="DeadLine" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="dt201_UpdateUsrReq">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdUsr" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="TypeChange" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="dt201_UpdateUsrReq_Detail">
           <Key>
             <PropertyRef Name="Id" />
@@ -1380,6 +1375,17 @@
           <Property Name="DeadLine" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="CompleteDate" Type="DateTime" Precision="0" />
           <Property Name="UsrComplete" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="dt201_UpdateUsrReq">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdDept" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsr" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TypeChange" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="DateCreate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Describe" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2050,15 +2056,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dt201_UpdateUsrReq">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt201_UpdateUsrReq">
-              <MappingFragment StoreEntitySet="dt201_UpdateUsrReq">
-                <ScalarProperty Name="TypeChange" ColumnName="TypeChange" />
-                <ScalarProperty Name="IdUsr" ColumnName="IdUsr" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="dt201_UpdateUsrReq_Detail">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt201_UpdateUsrReq_Detail">
               <MappingFragment StoreEntitySet="dt201_UpdateUsrReq_Detail">
@@ -2067,6 +2064,18 @@
                 <ScalarProperty Name="DeadLine" ColumnName="DeadLine" />
                 <ScalarProperty Name="IdReq" ColumnName="IdReq" />
                 <ScalarProperty Name="IdUpdateReq" ColumnName="IdUpdateReq" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt201_UpdateUsrReq">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt201_UpdateUsrReq">
+              <MappingFragment StoreEntitySet="dt201_UpdateUsrReq">
+                <ScalarProperty Name="Describe" ColumnName="Describe" />
+                <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
+                <ScalarProperty Name="TypeChange" ColumnName="TypeChange" />
+                <ScalarProperty Name="IdUsr" ColumnName="IdUsr" />
+                <ScalarProperty Name="IdDept" ColumnName="IdDept" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
