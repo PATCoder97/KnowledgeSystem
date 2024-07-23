@@ -7,7 +7,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +22,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         public uc201_UpdateUsrReq()
         {
             InitializeComponent();
+            InitializeIcon();
         }
 
         List<dt201_UpdateUsrReq> baseReq;
@@ -27,6 +30,12 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         List<dm_Departments> depts;
 
         BindingSource sourceForm = new BindingSource();
+
+        private void InitializeIcon()
+        {
+            btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
+            btnExportExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
+        }
 
         private void LoadData()
         {
@@ -64,6 +73,23 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             f201_UpdateUsrReq_Detail fDetail = new f201_UpdateUsrReq_Detail(idReq);
             fDetail.ShowDialog();
+        }
+
+        private void btnReload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            LoadData();
+        }
+
+        private void btnExportExcel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            string documentsPath = TPConfigs.DocumentPath();
+            if (!Directory.Exists(documentsPath))
+                Directory.CreateDirectory(documentsPath);
+
+            string filePath = Path.Combine(documentsPath, $"人員異動 - {DateTime.Now:yyyyMMddHHmm}.xlsx");
+
+            gcData.ExportToXlsx(filePath);
+            Process.Start(filePath);
         }
     }
 }
