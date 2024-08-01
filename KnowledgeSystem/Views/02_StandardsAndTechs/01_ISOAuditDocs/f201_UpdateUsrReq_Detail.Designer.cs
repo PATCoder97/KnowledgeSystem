@@ -29,7 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule1 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression1 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f201_UpdateUsrReq_Detail));
+            this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.gcData = new DevExpress.XtraGrid.GridControl();
             this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -42,7 +45,6 @@
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemMemoEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit();
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemMemoExEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemMemoExEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -50,11 +52,11 @@
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnReload = new DevExpress.XtraBars.BarButtonItem();
+            this.btnExportExcel = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-            this.btnExportExcel = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
@@ -67,6 +69,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             this.SuspendLayout();
+            // 
+            // gridColumn12
+            // 
+            this.gridColumn12.Caption = "實際完日";
+            this.gridColumn12.FieldName = "data.CompleteDate";
+            this.gridColumn12.Name = "gridColumn12";
+            this.gridColumn12.OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.False;
+            this.gridColumn12.Visible = true;
+            this.gridColumn12.VisibleIndex = 5;
             // 
             // layoutControl1
             // 
@@ -129,6 +140,15 @@
             this.gridColumn10,
             this.gridColumn12,
             this.gridColumn13});
+            gridFormatRule1.Column = this.gridColumn12;
+            gridFormatRule1.ColumnApplyTo = this.gridColumn12;
+            gridFormatRule1.Name = "NotComplete";
+            formatConditionRuleExpression1.Appearance.BackColor = System.Drawing.Color.Red;
+            formatConditionRuleExpression1.Appearance.BackColor2 = System.Drawing.Color.White;
+            formatConditionRuleExpression1.Appearance.Options.UseBackColor = true;
+            formatConditionRuleExpression1.Expression = "IsNullOrEmpty([data.CompleteDate])";
+            gridFormatRule1.Rule = formatConditionRuleExpression1;
+            this.gvData.FormatRules.Add(gridFormatRule1);
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
             this.gvData.OptionsCustomization.AllowColumnMoving = false;
@@ -215,15 +235,6 @@
             this.gridColumn10.Visible = true;
             this.gridColumn10.VisibleIndex = 4;
             // 
-            // gridColumn12
-            // 
-            this.gridColumn12.Caption = "實際完日";
-            this.gridColumn12.FieldName = "data.CompleteDate";
-            this.gridColumn12.Name = "gridColumn12";
-            this.gridColumn12.OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.False;
-            this.gridColumn12.Visible = true;
-            this.gridColumn12.VisibleIndex = 5;
-            // 
             // gridColumn13
             // 
             this.gridColumn13.Caption = "人員確認";
@@ -308,7 +319,7 @@
             // 
             this.btnReload.Caption = "重新整理";
             this.btnReload.Id = 0;
-            this.btnReload.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnEdit.ImageOptions.SvgImage")));
+            this.btnReload.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnReload.ImageOptions.SvgImage")));
             this.btnReload.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnReload.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
             this.btnReload.ItemAppearance.Hovered.Options.UseForeColor = true;
@@ -316,6 +327,18 @@
             this.btnReload.ItemAppearance.Normal.Options.UseFont = true;
             this.btnReload.Name = "btnReload";
             this.btnReload.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnRefresh_ItemClick);
+            // 
+            // btnExportExcel
+            // 
+            this.btnExportExcel.Caption = "導出";
+            this.btnExportExcel.Id = 4;
+            this.btnExportExcel.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnExportExcel.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnExportExcel.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnExportExcel.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExportExcel.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnExportExcel.Name = "btnExportExcel";
+            this.btnExportExcel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExportExcel_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -349,18 +372,6 @@
             this.barDockControlRight.Manager = this.barManagerTP;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 584);
             // 
-            // btnExportExcel
-            // 
-            this.btnExportExcel.Caption = "導出";
-            this.btnExportExcel.Id = 4;
-            this.btnExportExcel.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnExportExcel.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
-            this.btnExportExcel.ItemAppearance.Hovered.Options.UseForeColor = true;
-            this.btnExportExcel.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExportExcel.ItemAppearance.Normal.Options.UseFont = true;
-            this.btnExportExcel.Name = "btnExportExcel";
-            this.btnExportExcel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExportExcel_ItemClick);
-            // 
             // f201_UpdateUsrReq_Detail
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
@@ -376,7 +387,7 @@
             this.IconOptions.Image = global::KnowledgeSystem.Properties.Resources.AppIcon;
             this.Name = "f201_UpdateUsrReq_Detail";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "f201_UpdateUsrReq_Detail";
+            this.Text = "人員異動-文件名單";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.f201_UpdateUsrReq_Detail_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();

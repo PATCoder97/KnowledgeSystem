@@ -325,12 +325,31 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
                 string newUserInfoJson = JsonConvert.SerializeObject(userInfo);
 
+                // Tạo thông tin thay đổi nhân sự cho module ISO [201]
+                var updateReq = new dt201_UpdateUsrReq()
+                {
+                    DateCreate = DateTime.Now,
+                    IdDept = userInfo.IdDepartment,
+                    IdUsr = userInfo.Id
+                };
+
                 msg = $"{userInfo.Id} {userInfo.DisplayName} {userInfo.DisplayNameVN}";
                 switch (eventInfo)
                 {
                     case EventFormInfo.Create:
                         userInfo.Id = txbUserId.EditValue?.ToString();
                         result = dm_UserBUS.Instance.Add(userInfo);
+
+                        // [201]
+                        updateReq = new dt201_UpdateUsrReq()
+                        {
+                            DateCreate = DateTime.Now,
+                            IdDept = userInfo.IdDepartment,
+                            IdUsr = userInfo.Id,
+                            TypeChange = "新進"
+                        };
+                        dt201_UpdateUsrReqBUS.Instance.Add(updateReq);
+
                         break;
                     case EventFormInfo.View:
                         break;
@@ -385,7 +404,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                                     cert.ValidLicense = false;
                                     cert.InvalidLicense = true;
 
-                                    //dt301_BaseBUS.Instance.AddOrUpdate(cert);
+                                    dt301_BaseBUS.Instance.AddOrUpdate(cert);
                                 }
 
                                 var lsDepts = dm_DeptBUS.Instance.GetList();
@@ -454,6 +473,16 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                                 };
                                 sys_NotesMailBUS.Instance.Add(mail);
 
+                                // [201]
+                                updateReq.TypeChange = "新進";
+                                updateReq.Describe = $"調任從「{templateData.deptfrom}」到「{templateData.deptto}」";
+                                dt201_UpdateUsrReqBUS.Instance.Add(updateReq);
+
+                                updateReq.IdDept = oldUserData.IdDepartment;
+                                updateReq.TypeChange = "離職";
+                                updateReq.Describe = $"調任從「{templateData.deptfrom}」到「{templateData.deptto}」";
+                                dt201_UpdateUsrReqBUS.Instance.Add(updateReq);
+
                                 break;
                             case UpdateEvent.Resign:
                                 // Nghi việc: chuyển tất cả chứng chỉ về trạng thái hết hạn
@@ -464,6 +493,10 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
                                     dt301_BaseBUS.Instance.AddOrUpdate(cert);
                                 }
+
+                                // [201]
+                                updateReq.TypeChange = "離職";
+                                dt201_UpdateUsrReqBUS.Instance.Add(updateReq);
 
                                 break;
                             case UpdateEvent.JobChange:
@@ -496,6 +529,16 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                                     certificate.InvalidLicense = true;
                                     dt301_BaseBUS.Instance.AddOrUpdate(certificate);
                                 }
+
+                                break;
+
+                            case UpdateEvent.ActualJobChange:
+
+                                // [201]
+                                oldUserData = JsonConvert.DeserializeObject<dm_User>(oldUserInfoJson);
+                                updateReq.TypeChange = "異動";
+                                updateReq.Describe = $"調任從「{oldUserData.ActualJobCode}」到「{userInfo.ActualJobCode}」";
+                                dt201_UpdateUsrReqBUS.Instance.Add(updateReq);
 
                                 break;
                         }

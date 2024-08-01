@@ -193,10 +193,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
             switch (cbbTypeVehicle.SelectedIndex)
             {
                 case 0:
-                    result = await BorrVehicleHelper.Instance.BorrMotor(borrUsr, nameVehicle, startKm, borrTime, place, purposes, numUser);
+                    result = await BorrVehicleHelper.Instance.BorrMotor(borrUsr, nameVehicle, borrTime, place, purposes, numUser);
                     break;
                 case 1:
-                    result = await BorrVehicleHelper.Instance.BorrCar(borrUsr, nameVehicle, startKm, borrTime, fromPlace, toPlace, purposes, licExpDate);
+                    result = await BorrVehicleHelper.Instance.BorrCar(borrUsr, nameVehicle, borrTime, fromPlace, toPlace, purposes, licExpDate);
                     break;
             }
 
