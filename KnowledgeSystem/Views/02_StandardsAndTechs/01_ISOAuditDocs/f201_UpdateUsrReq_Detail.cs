@@ -67,10 +67,16 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             menuItem.ImageOptions.SvgImageSize = new Size(24, 24);
             menuItem.AppearanceHovered.ForeColor = System.Drawing.Color.Blue;
         }
+
         private void ItemCompleteDoc_Click(object sender, EventArgs e)
         {
-            if (XtraMessageBox.Show("確認此文件已更新", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
-                return;
+            XtraMessageBox.Show("請上傳文件確認完成！", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            OpenFileDialog openFile = new OpenFileDialog();
+            if (openFile.ShowDialog() != DialogResult.OK) return;
+
+            string filePath = openFile.FileName;
+            string fileName = Path.GetFileName(filePath);
 
             GridView view = gvData;
             int idDetail = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColId));
@@ -78,9 +84,15 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             var detail = dt201_UpdateUsrReq_DetailBUS.Instance.GetItemById(idDetail);
             detail.CompleteDate = DateTime.Now;
             detail.UsrComplete = TPConfigs.LoginUser.Id;
+            detail.AttActualName = fileName;
+            detail.AttEncryptName = EncryptionHelper.EncryptionFileName(fileName);
 
             dt201_UpdateUsrReq_DetailBUS.Instance.AddOrUpdate(detail);
 
+            string folderDest = TPConfigs.Folder201EmpChange;
+            if (!Directory.Exists(folderDest)) Directory.CreateDirectory(folderDest);
+
+            File.Copy(filePath, Path.Combine(folderDest, detail.AttEncryptName), true);
 
             LoadData();
         }
@@ -119,7 +131,14 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         {
             if (e.HitInfo.InRowCell)
             {
-                e.Menu.Items.Add(itemCompleteDoc);
+                GridView view = sender as GridView;
+                view.FocusedRowHandle = e.HitInfo.RowHandle;
+                bool isComplete = string.IsNullOrEmpty(view.GetRowCellValue(view.FocusedRowHandle, "data.CompleteDate")?.ToString());
+
+                if (isComplete)
+                {
+                    e.Menu.Items.Add(itemCompleteDoc);
+                }
             }
         }
 

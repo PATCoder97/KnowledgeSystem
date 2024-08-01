@@ -20,5 +20,8 @@ namespace DataAccessLayer
         public System.DateTime DeadLine { get; set; }
         public Nullable<System.DateTime> CompleteDate { get; set; }
         public string UsrComplete { get; set; }
+        public string AttActualName { get; set; }
+        public string AttEncryptName { get; set; }
+        public Nullable<System.DateTime> TimeSendNote { get; set; }
     }
 }
