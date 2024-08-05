@@ -684,6 +684,12 @@
     <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_UserRole.Designer.cs">
       <DependentUpon>f402_UserRole.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\uc402_KPIWeb.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\uc402_KPIWeb.Designer.cs">
+      <DependentUpon>uc402_KPIWeb.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\uc402_Progress.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -979,6 +985,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_UserRole.resx">
       <DependentUpon>f402_UserRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\04_SystemAdministrator\02_SystemAdmin\uc402_KPIWeb.resx">
+      <DependentUpon>uc402_KPIWeb.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\02_SystemAdmin\uc402_Progress.resx">
       <DependentUpon>uc402_Progress.cs</DependentUpon>

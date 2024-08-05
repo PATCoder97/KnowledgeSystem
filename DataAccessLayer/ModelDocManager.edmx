@@ -603,6 +603,18 @@
           <Property Name="ImageName" Type="nvarchar" MaxLength="255" />
           <Property Name="IsMultiAns" Type="bit" />
         </EntityType>
+        <EntityType Name="dt402_KPIWeb">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdUsr" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="YearMonth" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="DeptScore" Type="nvarchar" MaxLength="4" />
+          <Property Name="DeptComments" Type="nvarchar" MaxLength="255" />
+          <Property Name="MgrScore" Type="nvarchar" MaxLength="4" />
+          <Property Name="MgrComments" Type="nvarchar" MaxLength="255" />
+        </EntityType>
         <EntityType Name="sys_Log">
           <Key>
             <PropertyRef Name="Id" />
@@ -693,6 +705,7 @@
           <EntitySet Name="dt307_Answers" EntityType="Self.dt307_Answers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt307_JobQuesManage" EntityType="Self.dt307_JobQuesManage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt307_Questions" EntityType="Self.dt307_Questions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt402_KPIWeb" EntityType="Self.dt402_KPIWeb" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sys_Log" EntityType="Self.sys_Log" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sys_NotesMail" EntityType="Self.sys_NotesMail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sys_StaticValue" EntityType="Self.sys_StaticValue" Schema="dbo" store:Type="Tables" />
@@ -761,6 +774,7 @@
           <EntitySet Name="dt201_ReqUpdateDocs" EntityType="DBDocumentManagementSystemModel.dt201_ReqUpdateDocs" />
           <EntitySet Name="dt201_UpdateUsrReq" EntityType="DBDocumentManagementSystemModel.dt201_UpdateUsrReq" />
           <EntitySet Name="dt201_UpdateUsrReq_Detail" EntityType="DBDocumentManagementSystemModel.dt201_UpdateUsrReq_Detail" />
+          <EntitySet Name="dt402_KPIWeb" EntityType="DBDocumentManagementSystemModel.dt402_KPIWeb" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -1392,6 +1406,18 @@
           <Property Name="AttActualName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="AttEncryptName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="TimeSendNote" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="dt402_KPIWeb">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdUsr" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="YearMonth" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DeptScore" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="DeptComments" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MgrScore" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="MgrComments" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2085,6 +2111,19 @@
                 <ScalarProperty Name="DeadLine" ColumnName="DeadLine" />
                 <ScalarProperty Name="IdReq" ColumnName="IdReq" />
                 <ScalarProperty Name="IdUpdateReq" ColumnName="IdUpdateReq" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt402_KPIWeb">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt402_KPIWeb">
+              <MappingFragment StoreEntitySet="dt402_KPIWeb">
+                <ScalarProperty Name="MgrComments" ColumnName="MgrComments" />
+                <ScalarProperty Name="MgrScore" ColumnName="MgrScore" />
+                <ScalarProperty Name="DeptComments" ColumnName="DeptComments" />
+                <ScalarProperty Name="DeptScore" ColumnName="DeptScore" />
+                <ScalarProperty Name="YearMonth" ColumnName="YearMonth" />
+                <ScalarProperty Name="IdUsr" ColumnName="IdUsr" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -84,5 +84,6 @@ namespace DataAccessLayer
         public virtual DbSet<dt201_ReqUpdateDocs> dt201_ReqUpdateDocs { get; set; }
         public virtual DbSet<dt201_UpdateUsrReq> dt201_UpdateUsrReq { get; set; }
         public virtual DbSet<dt201_UpdateUsrReq_Detail> dt201_UpdateUsrReq_Detail { get; set; }
+        public virtual DbSet<dt402_KPIWeb> dt402_KPIWeb { get; set; }
     }
 }
