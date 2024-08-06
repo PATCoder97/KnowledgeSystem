@@ -31,6 +31,10 @@ using System.Diagnostics;
 using DevExpress.Data.Browsing;
 using ExcelDataReader;
 using System.Threading;
+using DevExpress.Utils.Menu;
+using DevExpress.Utils.Svg;
+using KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin;
+using DevExpress.XtraGrid.Views.Items.ViewInfo;
 
 namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 {
@@ -41,7 +45,11 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
         {
             InitializeComponent();
             InitializeIcon();
+            InitializeMenuItems();
+
             helper = new RefreshHelper(gvData, "Id");
+            Font fontUI12 = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            DevExpress.Utils.AppearanceObject.DefaultMenuFont = fontUI12;
         }
 
         #region parameters
@@ -53,6 +61,48 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
         BindingSource sourceUsers = new BindingSource();
         string sheetName = "DataUser";
         List<dm_User> lsUserMs;
+
+        DXMenuItem itemEditRole;
+        DXMenuItem itemEditSign;
+
+        DXMenuItem CreateMenuItem(string caption, EventHandler clickEvent, SvgImage svgImage)
+        {
+            var menuItem = new DXMenuItem(caption, clickEvent, svgImage, DXMenuItemPriority.Normal);
+            SetMenuItemProperties(menuItem);
+            return menuItem;
+        }
+
+        void SetMenuItemProperties(DXMenuItem menuItem)
+        {
+            menuItem.ImageOptions.SvgImageSize = new Size(24, 24);
+            menuItem.AppearanceHovered.ForeColor = Color.Blue;
+        }
+
+        private void InitializeMenuItems()
+        {
+            itemEditRole = CreateMenuItem("設定用色", ItemEditRole_Click, TPSvgimages.Num1);
+            itemEditSign = CreateMenuItem("設定簽名", ItemEditSign_Click, TPSvgimages.Num2);
+        }
+
+        private void ItemEditSign_Click(object sender, EventArgs e)
+        {
+            string idUser = gvData.GetRowCellValue(gvData.FocusedRowHandle, gColIdUser).ToString();
+
+            f402_UserSigns fSetting = new f402_UserSigns();
+            fSetting.eventInfo = EventFormInfo.View;
+            fSetting.idUsr = idUser;
+            fSetting.ShowDialog();
+        }
+
+        private void ItemEditRole_Click(object sender, EventArgs e)
+        {
+            string idUser = gvData.GetRowCellValue(gvData.FocusedRowHandle, gColIdUser).ToString();
+
+            f402_UserRoles fSetting = new f402_UserRoles();
+            fSetting.eventInfo = EventFormInfo.View;
+            fSetting.idUsr = idUser;
+            fSetting.ShowDialog();
+        }
 
         private class dmUserM : dm_User
         {
@@ -392,6 +442,15 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
             gcData.ExportToXlsx(filePath);
             Process.Start(filePath);
+        }
+
+        private void gvData_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
+        {
+            if (e.HitInfo.InRowCell && IsSysAdmin)
+            {
+                e.Menu.Items.Add(itemEditRole);
+                e.Menu.Items.Add(itemEditSign);
+            }
         }
     }
 }

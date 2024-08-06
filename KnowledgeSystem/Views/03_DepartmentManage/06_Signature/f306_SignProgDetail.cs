@@ -57,7 +57,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             {
                 var barItem = new StepProgressBarItem();
                 barItem.ContentBlock1.Caption = $"{item.usr.IdDepartment} {item.usr.DisplayName}";
-                barItem.ContentBlock1.Description = $"{item.usr.Id}\r\n{jobTitles.FirstOrDefault(r => r.Id == item.usr.JobCode).DisplayName}";
+                barItem.ContentBlock1.Description = $"{item.usr.Id}\r\n{jobTitles.FirstOrDefault(r => r.Id == item.usr.ActualJobCode).DisplayName}";
                 barItem.ContentBlock2.Caption = roleConfirms.FirstOrDefault(r => r.Id == item.data.IdRole)?.DisplayName;
                 stepProgressDoc.Items.Add(barItem);
             }
@@ -72,7 +72,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             // Thêm lịch sử trình ký vào gridProcess
             var lsHistoryProcess = (from data in progInfos
                                     join usr in users on data.IdUsr equals usr.Id
-                                    join job in jobTitles on usr.JobCode equals job.Id
+                                    join job in jobTitles on usr.ActualJobCode equals job.Id
                                     select new
                                     {
                                         data,

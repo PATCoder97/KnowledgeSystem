@@ -678,11 +678,23 @@
     <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_SignUsers.Designer.cs">
       <DependentUpon>f402_SignUsers.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_UserRole.cs">
+    <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_RoleUsers.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_UserRole.Designer.cs">
-      <DependentUpon>f402_UserRole.cs</DependentUpon>
+    <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_RoleUsers.Designer.cs">
+      <DependentUpon>f402_RoleUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_UserRoles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_UserRoles.Designer.cs">
+      <DependentUpon>f402_UserRoles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_UserSigns.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_UserSigns.Designer.cs">
+      <DependentUpon>f402_UserSigns.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\uc402_KPIWeb.cs">
       <SubType>UserControl</SubType>
@@ -983,8 +995,14 @@
     <EmbeddedResource Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_SignUsers.resx">
       <DependentUpon>f402_SignUsers.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_UserRole.resx">
-      <DependentUpon>f402_UserRole.cs</DependentUpon>
+    <EmbeddedResource Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_RoleUsers.resx">
+      <DependentUpon>f402_RoleUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_UserRoles.resx">
+      <DependentUpon>f402_UserRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_UserSigns.resx">
+      <DependentUpon>f402_UserSigns.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\02_SystemAdmin\uc402_KPIWeb.resx">
       <DependentUpon>uc402_KPIWeb.cs</DependentUpon>

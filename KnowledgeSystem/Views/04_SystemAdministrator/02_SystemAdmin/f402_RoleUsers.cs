@@ -23,9 +23,9 @@ using System.Windows.Forms;
 
 namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 {
-    public partial class f402_UserRole : DevExpress.XtraEditors.XtraForm
+    public partial class f402_RoleUsers : DevExpress.XtraEditors.XtraForm
     {
-        public f402_UserRole()
+        public f402_RoleUsers()
         {
             InitializeComponent();
             InitializeIcon();

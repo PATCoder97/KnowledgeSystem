@@ -255,7 +255,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
         private void btnEditRoleUser_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            f402_UserRole fInfo = new f402_UserRole();
+            f402_RoleUsers fInfo = new f402_RoleUsers();
             fInfo._eventInfo = EventFormInfo.View;
             fInfo._idRole = _role.Id;
             fInfo.ShowDialog();

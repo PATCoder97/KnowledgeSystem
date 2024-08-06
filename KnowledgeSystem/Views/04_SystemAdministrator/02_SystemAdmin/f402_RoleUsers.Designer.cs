@@ -1,6 +1,6 @@
 ﻿namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 {
-    partial class f402_UserRole
+    partial class f402_RoleUsers
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f402_UserRole));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f402_RoleUsers));
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnConfirm = new DevExpress.XtraBars.BarButtonItem();
@@ -66,6 +66,7 @@
             // 
             // barManager1
             // 
+            this.barManager1.AllowCustomization = false;
             this.barManager1.AllowMoveBarOnToolbar = false;
             this.barManager1.AllowQuickCustomization = false;
             this.barManager1.Bars.AddRange(new DevExpress.XtraBars.Bar[] {
@@ -362,7 +363,7 @@
             this.layoutControlItem2.TextLocation = DevExpress.Utils.Locations.Top;
             this.layoutControlItem2.TextSize = new System.Drawing.Size(76, 24);
             // 
-            // f402_UserRole
+            // f402_RoleUsers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -374,7 +375,7 @@
             this.Controls.Add(this.barDockControlTop);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.IconOptions.Image = global::KnowledgeSystem.Properties.Resources.AppIcon;
-            this.Name = "f402_UserRole";
+            this.Name = "f402_RoleUsers";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "f402_UserRole";
             this.Load += new System.EventHandler(this.f402_UserRole_Load);

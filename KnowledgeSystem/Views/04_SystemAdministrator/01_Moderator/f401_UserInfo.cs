@@ -196,11 +196,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                 btnJobChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                 btnActualJobChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             }
-
-            //Rectangle screenBounds = Screen.PrimaryScreen.Bounds;
-            //int x = screenBounds.Width / 2 - Width / 2;
-            //int y = screenBounds.Height / 2 - Height / 2;
-            //Location = new Point(x, y);
         }
 
         private void f401_UserInfo_Load(object sender, EventArgs e)

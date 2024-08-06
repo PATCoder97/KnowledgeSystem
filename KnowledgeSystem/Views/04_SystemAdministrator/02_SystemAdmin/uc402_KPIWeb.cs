@@ -81,12 +81,12 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
         private void uc402_KPIWeb_Load(object sender, EventArgs e)
         {
-            gvData.ReadOnlyGridView();
-            gvData.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
+            //gvData.ReadOnlyGridView();
+            //gvData.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
 
-            gcData.DataSource = sourceKPIs;
+            //gcData.DataSource = sourceKPIs;
 
-            LoadData();
+            //LoadData();
         }
 
         private void btnUpload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -132,26 +132,42 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
                 }
 
                 DataTable dt = ds.Tables[0];
-                var filteredRows = dt.AsEnumerable().Where(r => r.Field<string>("部門代碼").StartsWith("78"));
 
+                var usrs = dm_UserBUS.Instance.GetList();
 
-                List<dt402_KPIWeb> dataKPIs = new List<dt402_KPIWeb>();
-                foreach (var item in filteredRows)
+                for (int i = 0; i < usrs.Count; i++)
                 {
-                    var dateStr = ConvertToDateString(item["評核年月"].ToString());
+                    dm_User usr = usrs[i];
 
-                    dataKPIs.Add(new dt402_KPIWeb()
+                    var results = dt.AsEnumerable().Where(r => r.Field<string>("工號") == usr.Id).ToList();
+
+                    if (results.Count > 0)
                     {
-                        YearMonth = dateStr,
-                        IdUsr = item["工號"].ToString(),
-                        DeptScore = item["核定成績"].ToString(),
-                        DeptComments = item["核定評語"].ToString(),
-                        MgrScore = item["經理室核定成績"].ToString(),
-                        MgrComments = item["經理室核定評語"].ToString()
-                    });
+                        usr.ActualJobCode = results.First().Field<string>("職等六碼").ToString();
+
+                        dm_UserBUS.Instance.AddOrUpdate(usr);
+                    }
                 }
 
-                var rowIns = dt402_KPIWebBUS.Instance.AddRange(dataKPIs);
+                //var filteredRows = dt.AsEnumerable().Where(r => r.Field<string>("部門代碼").StartsWith("78"));
+
+                //List<dt402_KPIWeb> dataKPIs = new List<dt402_KPIWeb>();
+                //foreach (var item in filteredRows)
+                //{
+                //    var dateStr = ConvertToDateString(item["評核年月"].ToString());
+
+                //    dataKPIs.Add(new dt402_KPIWeb()
+                //    {
+                //        YearMonth = dateStr,
+                //        IdUsr = item["工號"].ToString(),
+                //        DeptScore = item["核定成績"].ToString(),
+                //        DeptComments = item["核定評語"].ToString(),
+                //        MgrScore = item["經理室核定成績"].ToString(),
+                //        MgrComments = item["經理室核定評語"].ToString()
+                //    });
+                //}
+
+                //var rowIns = dt402_KPIWebBUS.Instance.AddRange(dataKPIs);
             }
 
             LoadData();
