@@ -129,5 +129,25 @@ namespace BusinessLayer
                 throw;
             }
         }
+
+        public bool RemoveByYearMonth(string yearMonth)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    var itemRemove = _context.dt402_KPIWeb.Where(r => r.YearMonth == yearMonth);
+                    _context.dt402_KPIWeb.RemoveRange(itemRemove);
+
+                    int affectedRecords = _context.SaveChanges();
+                    return affectedRecords > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
     }
 }

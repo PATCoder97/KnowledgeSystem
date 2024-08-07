@@ -35,6 +35,7 @@
             this.btnUpload = new DevExpress.XtraBars.BarButtonItem();
             this.btnRefresh = new DevExpress.XtraBars.BarButtonItem();
             this.btnExportExcel = new DevExpress.XtraBars.BarButtonItem();
+            this.btnSalary = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -51,6 +52,8 @@
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColPCName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
@@ -76,9 +79,10 @@
             this.barManagerTP.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.btnUpload,
             this.btnRefresh,
-            this.btnExportExcel});
+            this.btnExportExcel,
+            this.btnSalary});
             this.barManagerTP.MainMenu = this.bar2;
-            this.barManagerTP.MaxItemId = 5;
+            this.barManagerTP.MaxItemId = 6;
             // 
             // bar2
             // 
@@ -101,7 +105,8 @@
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnUpload, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnRefresh, true),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnExportExcel, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnExportExcel, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnSalary, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawBorder = false;
             this.bar2.OptionsBar.DrawDragBorder = false;
@@ -135,6 +140,14 @@
             this.btnExportExcel.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnExportExcel.Name = "btnExportExcel";
             this.btnExportExcel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExportExcel_ItemClick);
+            // 
+            // btnSalary
+            // 
+            this.btnSalary.Caption = "負載薪水";
+            this.btnSalary.Id = 5;
+            this.btnSalary.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnSalary.Name = "btnSalary";
+            this.btnSalary.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSalary_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -228,7 +241,9 @@
             this.gridColumn9,
             this.gridColumn10,
             this.gridColumn16,
-            this.gColPCName});
+            this.gColPCName,
+            this.gridColumn3,
+            this.gridColumn4});
             this.gvData.DetailHeight = 377;
             this.gvData.GridControl = this.gcData;
             this.gvData.GroupCount = 1;
@@ -252,7 +267,7 @@
             // 
             // gridColumn2
             // 
-            this.gridColumn2.Caption = "年月";
+            this.gridColumn2.Caption = "評核年月";
             this.gridColumn2.FieldName = "data.YearMonth";
             this.gridColumn2.MinWidth = 23;
             this.gridColumn2.Name = "gridColumn2";
@@ -266,7 +281,7 @@
             this.gridColumn1.FieldName = "data.IdUsr";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 0;
+            this.gridColumn1.VisibleIndex = 1;
             // 
             // gridColumn7
             // 
@@ -274,7 +289,7 @@
             this.gridColumn7.FieldName = "usr.DisplayName";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 1;
+            this.gridColumn7.VisibleIndex = 2;
             // 
             // gridColumn5
             // 
@@ -283,7 +298,7 @@
             this.gridColumn5.MinWidth = 23;
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 2;
+            this.gridColumn5.VisibleIndex = 0;
             this.gridColumn5.Width = 87;
             // 
             // gridColumn9
@@ -292,7 +307,7 @@
             this.gridColumn9.FieldName = "data.DeptScore";
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 3;
+            this.gridColumn9.VisibleIndex = 7;
             // 
             // gridColumn10
             // 
@@ -300,7 +315,7 @@
             this.gridColumn10.FieldName = "data.DeptComments";
             this.gridColumn10.Name = "gridColumn10";
             this.gridColumn10.Visible = true;
-            this.gridColumn10.VisibleIndex = 4;
+            this.gridColumn10.VisibleIndex = 8;
             // 
             // gridColumn16
             // 
@@ -318,6 +333,22 @@
             this.gColPCName.Visible = true;
             this.gColPCName.VisibleIndex = 6;
             this.gColPCName.Width = 80;
+            // 
+            // gridColumn3
+            // 
+            this.gridColumn3.Caption = "實發金額";
+            this.gridColumn3.FieldName = "data.ActualSalary";
+            this.gridColumn3.Name = "gridColumn3";
+            this.gridColumn3.Visible = true;
+            this.gridColumn3.VisibleIndex = 3;
+            // 
+            // gridColumn4
+            // 
+            this.gridColumn4.Caption = "合計應發";
+            this.gridColumn4.FieldName = "data.TotalSalary";
+            this.gridColumn4.Name = "gridColumn4";
+            this.gridColumn4.Visible = true;
+            this.gridColumn4.VisibleIndex = 4;
             // 
             // Root
             // 
@@ -389,5 +420,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn gColPCName;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraBars.BarButtonItem btnSalary;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
     }
 }

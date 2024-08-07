@@ -614,6 +614,8 @@
           <Property Name="DeptComments" Type="nvarchar" MaxLength="255" />
           <Property Name="MgrScore" Type="nvarchar" MaxLength="4" />
           <Property Name="MgrComments" Type="nvarchar" MaxLength="255" />
+          <Property Name="TotalSalary" Type="varchar" MaxLength="32" />
+          <Property Name="ActualSalary" Type="varchar" MaxLength="32" />
         </EntityType>
         <EntityType Name="sys_Log">
           <Key>
@@ -1418,6 +1420,8 @@
           <Property Name="DeptComments" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="MgrScore" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
           <Property Name="MgrComments" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TotalSalary" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="ActualSalary" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2118,6 +2122,8 @@
           <EntitySetMapping Name="dt402_KPIWeb">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt402_KPIWeb">
               <MappingFragment StoreEntitySet="dt402_KPIWeb">
+                <ScalarProperty Name="ActualSalary" ColumnName="ActualSalary" />
+                <ScalarProperty Name="TotalSalary" ColumnName="TotalSalary" />
                 <ScalarProperty Name="MgrComments" ColumnName="MgrComments" />
                 <ScalarProperty Name="MgrScore" ColumnName="MgrScore" />
                 <ScalarProperty Name="DeptComments" ColumnName="DeptComments" />

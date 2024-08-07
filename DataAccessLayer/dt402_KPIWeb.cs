@@ -21,5 +21,7 @@ namespace DataAccessLayer
         public string DeptComments { get; set; }
         public string MgrScore { get; set; }
         public string MgrComments { get; set; }
+        public string TotalSalary { get; set; }
+        public string ActualSalary { get; set; }
     }
 }

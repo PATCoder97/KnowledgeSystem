@@ -6,6 +6,7 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraPrinting.Native;
 using DevExpress.XtraSplashScreen;
 using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Spreadsheet;
 using ExcelDataReader;
 using KnowledgeSystem.Helpers;
 using System;
@@ -16,6 +17,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -35,12 +37,15 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
         }
 
         BindingSource sourceKPIs = new BindingSource();
+        List<string> yearMonths = new List<string>();
+
 
         private void InitializeIcon()
         {
             btnUpload.ImageOptions.SvgImage = TPSvgimages.UploadFile;
             btnRefresh.ImageOptions.SvgImage = TPSvgimages.Reload;
             btnExportExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
+            btnSalary.ImageOptions.SvgImage = TPSvgimages.Money;
         }
 
         private void LoadData()
@@ -49,6 +54,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
             List<dt402_KPIWeb> dataKpis = dt402_KPIWebBUS.Instance.GetList();
             var usrs = dm_UserBUS.Instance.GetList();
+            yearMonths = dataKpis.GroupBy(r => r.YearMonth).Select(r => r.Key).ToList();
+
 
             var signInfos = (from data in dataKpis
                              join usr in usrs on data.IdUsr equals usr.Id
@@ -81,12 +88,12 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
         private void uc402_KPIWeb_Load(object sender, EventArgs e)
         {
-            //gvData.ReadOnlyGridView();
-            //gvData.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
+            gvData.ReadOnlyGridView();
+            gvData.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
 
-            //gcData.DataSource = sourceKPIs;
+            gcData.DataSource = sourceKPIs;
 
-            //LoadData();
+            LoadData();
         }
 
         private void btnUpload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -133,41 +140,30 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
                 DataTable dt = ds.Tables[0];
 
-                var usrs = dm_UserBUS.Instance.GetList();
+                var filteredRows = dt.AsEnumerable().Where(r => r.Field<string>("部門代碼").StartsWith("78"));
 
-                for (int i = 0; i < usrs.Count; i++)
+                List<dt402_KPIWeb> dataKPIs = new List<dt402_KPIWeb>();
+                foreach (var item in filteredRows)
                 {
-                    dm_User usr = usrs[i];
+                    var dateStr = ConvertToDateString(item["評核年月"].ToString());
 
-                    var results = dt.AsEnumerable().Where(r => r.Field<string>("工號") == usr.Id).ToList();
-
-                    if (results.Count > 0)
+                    dataKPIs.Add(new dt402_KPIWeb()
                     {
-                        usr.ActualJobCode = results.First().Field<string>("職等六碼").ToString();
-
-                        dm_UserBUS.Instance.AddOrUpdate(usr);
-                    }
+                        YearMonth = dateStr,
+                        IdUsr = item["工號"].ToString(),
+                        DeptScore = item["核定成績"].ToString(),
+                        DeptComments = item["核定評語"].ToString(),
+                        MgrScore = item["經理室核定成績"].ToString(),
+                        MgrComments = item["經理室核定評語"].ToString()
+                    });
                 }
 
-                //var filteredRows = dt.AsEnumerable().Where(r => r.Field<string>("部門代碼").StartsWith("78"));
+                if (dt402_KPIWebBUS.Instance.GetList().Any(r => r.YearMonth == dataKPIs.First().YearMonth))
+                {
+                    dt402_KPIWebBUS.Instance.RemoveByYearMonth(dataKPIs.First().YearMonth);
+                }
 
-                //List<dt402_KPIWeb> dataKPIs = new List<dt402_KPIWeb>();
-                //foreach (var item in filteredRows)
-                //{
-                //    var dateStr = ConvertToDateString(item["評核年月"].ToString());
-
-                //    dataKPIs.Add(new dt402_KPIWeb()
-                //    {
-                //        YearMonth = dateStr,
-                //        IdUsr = item["工號"].ToString(),
-                //        DeptScore = item["核定成績"].ToString(),
-                //        DeptComments = item["核定評語"].ToString(),
-                //        MgrScore = item["經理室核定成績"].ToString(),
-                //        MgrComments = item["經理室核定評語"].ToString()
-                //    });
-                //}
-
-                //var rowIns = dt402_KPIWebBUS.Instance.AddRange(dataKPIs);
+                var rowIns = dt402_KPIWebBUS.Instance.AddRange(dataKPIs);
             }
 
             LoadData();
@@ -188,6 +184,66 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
             gcData.ExportToXlsx(filePath);
             Process.Start(filePath);
+        }
+
+        private void btnSalary_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            XtraInputBoxArgs args = new XtraInputBoxArgs();
+
+            args.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
+            args.Caption = "薪水";
+            args.Prompt = $"<font='Microsoft JhengHei UI' size=14>請選年月</font>";
+            args.DefaultButtonIndex = 0;
+            ComboBoxEdit editor = new ComboBoxEdit();
+            editor.Properties.Items.AddRange(yearMonths);
+            editor.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            editor.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            editor.Properties.AppearanceDropDown.Font = editor.Font;
+            editor.ForeColor = System.Drawing.Color.Black;
+            args.Editor = editor;
+
+            var result = XtraInputBox.Show(args);
+            if (result == null) return;
+
+            string yearMonthSelect = result?.ToString() ?? "";
+
+            string year = yearMonthSelect.Substring(0, 4);
+            string month = yearMonthSelect.Substring(5, 2);
+
+            if (!yearMonthSelect.Contains("/"))
+                return;
+
+            using (var handle = SplashScreenManager.ShowOverlayForm(this))
+            {
+                var dataUpdates = dt402_KPIWebBUS.Instance.GetList().Where(r => r.YearMonth == yearMonthSelect).ToList();
+                foreach (var item in dataUpdates)
+                {
+                    string url = $"https://www.fhs.com.tw/ads/api/Furnace/rest/json/hr/s16/{item.IdUsr}vkokv{year}-{month}";
+                    using (WebClient client = new WebClient())
+                    {
+                        try
+                        {
+                            string response = client.DownloadString(url);
+
+                            if (!string.IsNullOrEmpty(response))
+                            {
+                                var data = response.Replace("o|o", "").Split('|');
+
+                                item.TotalSalary = data[32];
+                                item.ActualSalary = data[43];
+
+                                dt402_KPIWebBUS.Instance.AddOrUpdate(item);
+                            }
+                        }
+                        catch (WebException ex)
+                        {
+                            Console.WriteLine($"Failed to fetch data: {ex.Message}");
+                        }
+                    }
+                }
+
+                LoadData();
+            }
         }
     }
 }
