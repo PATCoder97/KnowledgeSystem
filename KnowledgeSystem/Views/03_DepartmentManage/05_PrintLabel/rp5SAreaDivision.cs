@@ -21,6 +21,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._05_PrintLabel
             lbManager.DataBindings.Add("Text", DataSource, "Manager");
             lbAgent.DataBindings.Add("Text", DataSource, "Agent");
             lbBoss.DataBindings.Add("Text", DataSource, "Boss");
+            lbPlace.DataBindings.Add("Text", DataSource, "Place");
         }
     }
 }

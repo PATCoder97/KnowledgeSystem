@@ -13,7 +13,7 @@ namespace KnowledgeSystem.Helpers
         public static string version;
         public static DateTime dateDeploy;
         public static string ownerSoft = "潘英俊";
-        public static string supporter = "阮林山、潘成台";
+        public static string supporter = "阮林山、潘成台、潘高孟雄";
 
         public string Version
         {

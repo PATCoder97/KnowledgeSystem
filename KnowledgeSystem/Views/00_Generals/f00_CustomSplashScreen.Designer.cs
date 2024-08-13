@@ -44,7 +44,7 @@
             // labelCopyright
             // 
             this.labelCopyright.Appearance.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelCopyright.Appearance.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.labelCopyright.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.labelCopyright.Appearance.Options.UseFont = true;
             this.labelCopyright.Appearance.Options.UseForeColor = true;
             this.labelCopyright.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
@@ -60,7 +60,7 @@
             this.lbStartDate.AutoSize = true;
             this.lbStartDate.BackColor = System.Drawing.Color.Transparent;
             this.lbStartDate.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbStartDate.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.lbStartDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lbStartDate.Location = new System.Drawing.Point(131, 236);
             this.lbStartDate.Name = "lbStartDate";
             this.lbStartDate.Size = new System.Drawing.Size(20, 19);
@@ -73,7 +73,7 @@
             this.lbSupporter.AutoSize = true;
             this.lbSupporter.BackColor = System.Drawing.Color.Transparent;
             this.lbSupporter.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbSupporter.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.lbSupporter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lbSupporter.Location = new System.Drawing.Point(131, 212);
             this.lbSupporter.Name = "lbSupporter";
             this.lbSupporter.Size = new System.Drawing.Size(20, 19);
@@ -86,7 +86,7 @@
             this.lbVersion.AutoSize = true;
             this.lbVersion.BackColor = System.Drawing.Color.Transparent;
             this.lbVersion.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbVersion.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.lbVersion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lbVersion.Location = new System.Drawing.Point(131, 164);
             this.lbVersion.Name = "lbVersion";
             this.lbVersion.Size = new System.Drawing.Size(20, 19);
@@ -99,7 +99,7 @@
             this.lbOwner.AutoSize = true;
             this.lbOwner.BackColor = System.Drawing.Color.Transparent;
             this.lbOwner.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbOwner.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.lbOwner.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lbOwner.Location = new System.Drawing.Point(131, 188);
             this.lbOwner.Name = "lbOwner";
             this.lbOwner.Size = new System.Drawing.Size(20, 19);
@@ -112,7 +112,7 @@
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label5.Location = new System.Drawing.Point(21, 236);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(93, 19);
@@ -125,12 +125,12 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label3.Location = new System.Drawing.Point(21, 212);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(114, 19);
             this.label3.TabIndex = 15;
-            this.label3.Text = "軟體管理員";
+            this.label3.Text = "系統管理員";
             this.label3.UseWaitCursor = true;
             // 
             // label2
@@ -138,7 +138,7 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label2.Location = new System.Drawing.Point(21, 188);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(51, 19);
@@ -151,7 +151,7 @@
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label4.Location = new System.Drawing.Point(21, 164);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(51, 19);

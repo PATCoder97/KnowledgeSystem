@@ -241,8 +241,6 @@
             // 
             // gridColumn13
             // 
-            this.gridColumn13.AppearanceCell.Font = new System.Drawing.Font("Microsoft JhengHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridColumn13.AppearanceCell.Options.UseFont = true;
             this.gridColumn13.Caption = "人員確認";
             this.gridColumn13.FieldName = "UserComplete";
             this.gridColumn13.Name = "gridColumn13";

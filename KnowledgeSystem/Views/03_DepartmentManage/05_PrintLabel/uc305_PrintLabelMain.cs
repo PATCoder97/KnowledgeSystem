@@ -360,7 +360,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._05_PrintLabel
                 DeptName = "{DeptName}",
                 Manager = "{Manager}",
                 Agent = "{Agent}",
-                Boss = "{Boss}"
+                Boss = "{Boss}",
+                Place = "{Place}",
             };
 
             var devices = new List<object>();
@@ -385,7 +386,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._05_PrintLabel
                         DeptName = row["DeptName"] != DBNull.Value ? row["DeptName"].ToString() : null,
                         Manager = row["Manager"] != DBNull.Value ? row["Manager"].ToString() : null,
                         Agent = row["Agent"] != DBNull.Value ? row["Agent"].ToString() : null,
-                        Boss = row["Boss"] != DBNull.Value ? row["Boss"].ToString() : null
+                        Boss = row["Boss"] != DBNull.Value ? row["Boss"].ToString() : null,
+                        Place = row["Place"] != DBNull.Value ? row["Place"].ToString() : null,
                     };
                     devices.Add(dataLine);
                 }
