@@ -275,7 +275,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
 
         private void gvData_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
         {
-            if (e.HitInfo.InRowCell)
+            if (e.HitInfo.InRowCell && e.HitInfo.InDataRow)
             {
                 GridView view = sender as GridView;
                 view.FocusedRowHandle = e.HitInfo.RowHandle;

@@ -396,6 +396,12 @@
     <Compile Include="Views\03_DepartmentManage\07_Quiz\f307_ConfirmQues.Designer.cs">
       <DependentUpon>f307_ConfirmQues.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\03_DepartmentManage\07_Quiz\f307_JobSet_Info.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\07_Quiz\f307_JobSet_Info.Designer.cs">
+      <DependentUpon>f307_JobSet_Info.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\03_DepartmentManage\07_Quiz\f307_UploadQues.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -853,6 +859,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\07_Quiz\f307_ConfirmQues.resx">
       <DependentUpon>f307_ConfirmQues.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\07_Quiz\f307_JobSet_Info.resx">
+      <DependentUpon>f307_JobSet_Info.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\07_Quiz\f307_UploadQues.resx">
       <DependentUpon>f307_UploadQues.cs</DependentUpon>

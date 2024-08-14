@@ -40,13 +40,13 @@ namespace BusinessLayer
             }
         }
 
-        public dt307_JobQuesManage GetItemById(string id)
+        public dt307_JobQuesManage GetItemByIdJob(string idJob)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dt307_JobQuesManage.FirstOrDefault(r => r.JobId == id);
+                    return _context.dt307_JobQuesManage.FirstOrDefault(r => r.JobId == idJob);
                 }
             }
             catch (Exception ex)

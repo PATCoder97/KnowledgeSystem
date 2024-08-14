@@ -115,13 +115,14 @@
             this.gvData.OptionsView.ShowGroupPanel = false;
             this.gvData.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
             new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gridColumn5, DevExpress.Data.ColumnSortOrder.Ascending)});
+            this.gvData.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gvData_PopupMenuShowing);
             // 
             // gColId
             // 
             this.gColId.AppearanceCell.Options.UseTextOptions = true;
             this.gColId.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gColId.Caption = "ID";
-            this.gColId.FieldName = "Id";
+            this.gColId.FieldName = "JobTitle.Id";
             this.gColId.Name = "gColId";
             // 
             // gridColumn5
@@ -135,7 +136,7 @@
             // gridColumn6
             // 
             this.gridColumn6.Caption = "職務編號";
-            this.gridColumn6.FieldName = "job.Id";
+            this.gridColumn6.FieldName = "JobTitle.Id";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
             this.gridColumn6.VisibleIndex = 1;
@@ -144,7 +145,7 @@
             // gridColumn3
             // 
             this.gridColumn3.Caption = "職務名稱";
-            this.gridColumn3.FieldName = "job.DisplayName";
+            this.gridColumn3.FieldName = "JobTitle.DisplayName";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 2;
@@ -153,7 +154,7 @@
             // gridColumn1
             // 
             this.gridColumn1.Caption = "時期限制";
-            this.gridColumn1.FieldName = "data.TestDuration";
+            this.gridColumn1.FieldName = "QuizData.TestDuration";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
             this.gridColumn1.VisibleIndex = 3;
@@ -162,7 +163,7 @@
             // gridColumn2
             // 
             this.gridColumn2.Caption = "及格分數";
-            this.gridColumn2.FieldName = "data.PassingScore";
+            this.gridColumn2.FieldName = "QuizData.PassingScore";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 4;
@@ -179,7 +180,7 @@
             // gColQuesCount
             // 
             this.gColQuesCount.Caption = "題目數量";
-            this.gColQuesCount.FieldName = "data.QuesCount";
+            this.gColQuesCount.FieldName = "QuizData.QuesCount";
             this.gColQuesCount.Name = "gColQuesCount";
             this.gColQuesCount.Visible = true;
             this.gColQuesCount.VisibleIndex = 5;

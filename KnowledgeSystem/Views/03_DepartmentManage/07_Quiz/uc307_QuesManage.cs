@@ -262,10 +262,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
                 openFileDialog.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
                 openFileDialog.RestoreDirectory = true;
 
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    dataPath = openFileDialog.FileName;
-                }
+                if (openFileDialog.ShowDialog() != DialogResult.OK) return;
+                dataPath = openFileDialog.FileName;
             }
 
             string extension = Path.GetExtension(dataPath);
