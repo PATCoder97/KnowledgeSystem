@@ -59,60 +59,61 @@ namespace KnowledgeSystem.Views._00_Generals
                 string _password = txbPassword.Text.Trim();
                 string encryptPass = EncryptionHelper.EncryptPass(_password);
 
-                dm_User _userLogin = null;
+                dm_User usrLogin = null;
 
-                /* Kiểm tra xem có trong Domain fpg không (Không dùng OA)
-                *  - Có thì dùng tài khoản OA để đăng nhập, nếu không có OA thì dùng mật khẩu phụ
-                *  - Không thì dùng mật khẩu phụ */
+                // Không dùng chung domain => Dùng tài khoản đã có trong CSDL
                 if (TPConfigs.DomainComputer == DomainVNFPG.domainVNFPG)
                 {
-                    string userNameByDomain = DomainVNFPG.Instance.GetAccountName(_userID);
-                    if (!string.IsNullOrEmpty(userNameByDomain))
-                    {
-                        bool isLoginSuccessful = DomainVNFPG.Instance.CheckLoginDomain(_userID, _password);
-                        if (isLoginSuccessful)
-                        {
-                            _userLogin = dm_UserBUS.Instance.GetItemById(_userID);
-                            if (_userLogin == null)
-                            {
-                                string[] displayNameFHS = userNameByDomain.Split('/');
-                                string idDeptFHS = displayNameFHS[0].Replace("LG", string.Empty);
-                                string userNameFHS = displayNameFHS[1];
-
-                                _userLogin = new dm_User()
-                                {
-                                    Id = _userID,
-                                    IdDepartment = idDeptFHS,
-                                    DisplayName = userNameFHS,
-                                    DateCreate = default(DateTime),
-                                };
-
-                                dm_UserBUS.Instance.Add(_userLogin);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        _userLogin = dm_UserBUS.Instance.CheckLogin(_userID, _password);
-                    }
+                    usrLogin = dm_UserBUS.Instance.CheckLogin(_userID, _password);
+                    goto ResultLogin;
                 }
-                else
+
+                // Có tài khoản OA => Check đăng nhập, Thêm mới nếu chưa có trong CSDL
+                bool isValidAcc = DomainVNFPG.Instance.CheckLoginDomain(_userID, _password);
+                string userNameByDomain = DomainVNFPG.Instance.GetAccountName(_userID);
+
+                if (isValidAcc && !string.IsNullOrEmpty(userNameByDomain))
                 {
-                    _userLogin = dm_UserBUS.Instance.CheckLogin(_userID, _password);
+                    usrLogin = dm_UserBUS.Instance.GetItemById(_userID);
+                    if (usrLogin == null)
+                    {
+                        string[] displayNameFHS = userNameByDomain.Split('/');
+                        string idDeptFHS = displayNameFHS[0].Replace("LG", string.Empty);
+                        string userNameFHS = displayNameFHS[1];
+
+                        usrLogin = new dm_User()
+                        {
+                            Id = _userID,
+                            IdDepartment = idDeptFHS,
+                            DisplayName = userNameFHS,
+                            DateCreate = default(DateTime),
+                            LastUpdate = DateTime.Now
+                        };
+
+                        dm_UserBUS.Instance.Add(usrLogin);
+                    }
+
+                    goto ResultLogin;
                 }
 
-                if (_userLogin != null)
+                // Không có tài khoản OA hoặc PC dùng tài khoản Local => Check trong CSDL
+                usrLogin = dm_UserBUS.Instance.CheckLogin(_userID, _password);
+
+
+            ResultLogin:
+                if (usrLogin != null)
                 {
                     // Lưu thông tin đăng nhập và đóng form
                     RegistryHelper.SaveSetting(RegistryHelper.LoginId, _userID);
                     TPConfigs.LoginSuccessful = true;
-                    TPConfigs.LoginUser = _userLogin;
+                    TPConfigs.LoginUser = usrLogin;
 
                     // Test
-                    _userLogin.SecondaryPassword = encryptPass;
-                    _userLogin.PCName = PCInfoHelper.Instance.GetPCName();
-                    _userLogin.IPAddress = PCInfoHelper.Instance.GetIPAddress();
-                    dm_UserBUS.Instance.AddOrUpdate(_userLogin);
+                    usrLogin.SecondaryPassword = encryptPass;
+                    usrLogin.PCName = PCInfoHelper.Instance.GetPCName();
+                    usrLogin.IPAddress = PCInfoHelper.Instance.GetIPAddress();
+                    usrLogin.LastUpdate = DateTime.Now;
+                    dm_UserBUS.Instance.AddOrUpdate(usrLogin);
 
                     Close();
                 }
@@ -123,6 +124,7 @@ namespace KnowledgeSystem.Views._00_Generals
                     txbPassword.Text = "";
                 }
             }
+
             txbPassword.Focus();
         }
 

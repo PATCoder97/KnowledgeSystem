@@ -51,6 +51,7 @@
             this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColLastUpdate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
@@ -132,7 +133,8 @@
             this.gColIP,
             this.gridColumn15,
             this.gridColumn4,
-            this.gridColumn11});
+            this.gridColumn11,
+            this.gColLastUpdate});
             this.gvData.DetailHeight = 377;
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
@@ -305,6 +307,16 @@
             this.gridColumn11.Name = "gridColumn11";
             this.gridColumn11.Visible = true;
             this.gridColumn11.VisibleIndex = 10;
+            // 
+            // gColLastUpdate
+            // 
+            this.gColLastUpdate.Caption = "最後登入";
+            this.gColLastUpdate.DisplayFormat.FormatString = "yyyy/MM/dd HH:mm";
+            this.gColLastUpdate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.gColLastUpdate.FieldName = "LastUpdate";
+            this.gColLastUpdate.Name = "gColLastUpdate";
+            this.gColLastUpdate.Visible = true;
+            this.gColLastUpdate.VisibleIndex = 16;
             // 
             // Root
             // 
@@ -496,5 +508,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn16;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn15;
+        private DevExpress.XtraGrid.Columns.GridColumn gColLastUpdate;
     }
 }

@@ -130,6 +130,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
         {
             gColPCName.Visible = IsSysAdmin;
             gColIP.Visible = IsSysAdmin;
+            gColLastUpdate.Visible = IsSysAdmin;
         }
 
         private void LoadUser()
@@ -186,6 +187,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                                     SexName = sexName,
                                     Status = data.Status,
                                     StatusName = statusName,
+                                    LastUpdate = data.LastUpdate,
                                 }).ToList();
 
             sourceUsers.DataSource = lsUserManage;

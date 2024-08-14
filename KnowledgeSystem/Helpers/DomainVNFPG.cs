@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.DirectoryServices.AccountManagement;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -31,8 +32,7 @@ namespace KnowledgeSystem.Helpers
                 using (PrincipalContext pc = new PrincipalContext(ContextType.Domain, domainVNFPG))
                 {
                     isLoginSuccess = pc.ValidateCredentials(userID_, password_,
-                        ContextOptions.Negotiate | ContextOptions.SecureSocketLayer |
-                        ContextOptions.SimpleBind | ContextOptions.ServerBind);
+                        ContextOptions.Negotiate);
                 }
             }
             catch
@@ -44,13 +44,28 @@ namespace KnowledgeSystem.Helpers
 
         public string GetAccountName(string userID_)
         {
-            string userDisplayName = string.Empty;
+            string userDisplayName = null;
 
-            using (PrincipalContext pc = new PrincipalContext(ContextType.Domain, domainVNFPG))
+            try
             {
-                var usr = UserPrincipal.FindByIdentity(pc, userID_);
-                if (usr != null)
-                    userDisplayName = usr.DisplayName;
+                using (PrincipalContext pc = new PrincipalContext(ContextType.Domain, domainVNFPG))
+                {
+                    var usr = UserPrincipal.FindByIdentity(pc, userID_);
+                    if (usr != null)
+                    {
+                        userDisplayName = usr.DisplayName;
+                    }
+                }
+            }
+            catch (COMException ex) when (ex.HResult == unchecked((int)0x8007052E))
+            {
+                // The user name or password is incorrect
+                Console.WriteLine("The user name or password is incorrect.");
+            }
+            catch (Exception ex)
+            {
+                // Handle other exceptions
+                Console.WriteLine($"An unexpected error occurred: {ex.Message}");
             }
 
             return userDisplayName;

@@ -60,11 +60,11 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt307_Questions" Width="1.5" PointX="2.125" PointY="28" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt306_Base" Width="1.5" PointX="0.5" PointY="24.75" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_Sign" Width="1.5" PointX="20" PointY="0.5" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_User" Width="1.5" PointX="16.75" PointY="0.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_ReqUpdateDocs" Width="1.5" PointX="8.625" PointY="21.375" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_UpdateUsrReq" Width="1.5" PointX="11.875" PointY="21.375" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_UpdateUsrReq_Detail" Width="1.5" PointX="10.25" PointY="21.375" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt402_KPIWeb" Width="1.5" PointX="10.25" PointY="2.75" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_User" Width="1.5" PointX="16.75" PointY="0.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
