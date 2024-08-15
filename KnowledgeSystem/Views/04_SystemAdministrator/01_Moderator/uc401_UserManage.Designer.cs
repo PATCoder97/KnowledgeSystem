@@ -151,7 +151,7 @@
             this.gColIdUser.AppearanceCell.Options.UseTextOptions = true;
             this.gColIdUser.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gColIdUser.Caption = "人員代號";
-            this.gColIdUser.FieldName = "Id";
+            this.gColIdUser.FieldName = "Data.Id";
             this.gColIdUser.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
             this.gColIdUser.MinWidth = 23;
             this.gColIdUser.Name = "gColIdUser";
@@ -182,7 +182,7 @@
             // gridColumn3
             // 
             this.gridColumn3.Caption = "部門代號";
-            this.gridColumn3.FieldName = "IdDepartment";
+            this.gridColumn3.FieldName = "Data.IdDepartment";
             this.gridColumn3.MinWidth = 23;
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Width = 87;
@@ -190,7 +190,7 @@
             // gridColumn6
             // 
             this.gridColumn6.Caption = "IdRole";
-            this.gridColumn6.FieldName = "IdRole";
+            this.gridColumn6.FieldName = "Data.IdRole";
             this.gridColumn6.Name = "gridColumn6";
             // 
             // gridColumn5
@@ -198,7 +198,7 @@
             this.gridColumn5.AppearanceCell.Options.UseTextOptions = true;
             this.gridColumn5.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn5.Caption = "報到日期";
-            this.gridColumn5.FieldName = "DateCreate";
+            this.gridColumn5.FieldName = "Data.DateCreate";
             this.gridColumn5.MinWidth = 23;
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
@@ -210,7 +210,7 @@
             this.gridColumn8.AppearanceCell.Options.UseTextOptions = true;
             this.gridColumn8.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn8.Caption = "出生日期";
-            this.gridColumn8.FieldName = "DOB";
+            this.gridColumn8.FieldName = "Data.DOB";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
             this.gridColumn8.VisibleIndex = 6;
@@ -218,7 +218,7 @@
             // gridColumn9
             // 
             this.gridColumn9.Caption = "身份證號";
-            this.gridColumn9.FieldName = "CitizenID";
+            this.gridColumn9.FieldName = "Data.CitizenID";
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
             this.gridColumn9.VisibleIndex = 7;
@@ -228,7 +228,7 @@
             this.gridColumn10.AppearanceCell.Options.UseTextOptions = true;
             this.gridColumn10.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn10.Caption = "國籍";
-            this.gridColumn10.FieldName = "Nationality";
+            this.gridColumn10.FieldName = "Data.Nationality";
             this.gridColumn10.Name = "gridColumn10";
             this.gridColumn10.Visible = true;
             this.gridColumn10.VisibleIndex = 8;
@@ -246,7 +246,7 @@
             // gColPCName
             // 
             this.gColPCName.Caption = "電腦名稱";
-            this.gColPCName.FieldName = "PCName";
+            this.gColPCName.FieldName = "Data.PCName";
             this.gColPCName.Name = "gColPCName";
             this.gColPCName.Visible = true;
             this.gColPCName.VisibleIndex = 14;
@@ -255,7 +255,7 @@
             // gridColumn14
             // 
             this.gridColumn14.Caption = "電話號碼";
-            this.gridColumn14.FieldName = "PhoneNum1";
+            this.gridColumn14.FieldName = "Data.PhoneNum1";
             this.gridColumn14.Name = "gridColumn14";
             this.gridColumn14.Visible = true;
             this.gridColumn14.VisibleIndex = 11;
@@ -263,7 +263,7 @@
             // gridColumn13
             // 
             this.gridColumn13.Caption = "居住地點";
-            this.gridColumn13.FieldName = "Addr";
+            this.gridColumn13.FieldName = "Data.Addr";
             this.gridColumn13.Name = "gridColumn13";
             this.gridColumn13.Visible = true;
             this.gridColumn13.VisibleIndex = 13;
@@ -271,7 +271,7 @@
             // gridColumn12
             // 
             this.gridColumn12.Caption = "家人電話";
-            this.gridColumn12.FieldName = "PhoneNum2";
+            this.gridColumn12.FieldName = "Data.PhoneNum2";
             this.gridColumn12.Name = "gridColumn12";
             this.gridColumn12.Visible = true;
             this.gridColumn12.VisibleIndex = 12;
@@ -279,7 +279,7 @@
             // gColIP
             // 
             this.gColIP.Caption = "IP位址";
-            this.gColIP.FieldName = "IPAddress";
+            this.gColIP.FieldName = "Data.IPAddress";
             this.gColIP.Name = "gColIP";
             this.gColIP.Visible = true;
             this.gColIP.VisibleIndex = 15;
@@ -313,7 +313,7 @@
             this.gColLastUpdate.Caption = "最後登入";
             this.gColLastUpdate.DisplayFormat.FormatString = "yyyy/MM/dd HH:mm";
             this.gColLastUpdate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.gColLastUpdate.FieldName = "LastUpdate";
+            this.gColLastUpdate.FieldName = "Data.LastUpdate";
             this.gColLastUpdate.Name = "gColLastUpdate";
             this.gColLastUpdate.Visible = true;
             this.gColLastUpdate.VisibleIndex = 16;
