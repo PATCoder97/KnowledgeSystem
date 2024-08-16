@@ -39,6 +39,25 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
         BindingSource sourceKPIs = new BindingSource();
         List<string> yearMonths = new List<string>();
 
+        private class CookieAwareWebClient : WebClient
+        {
+            public CookieContainer CookieContainer { get; set; }
+
+            public CookieAwareWebClient()
+            {
+                CookieContainer = new CookieContainer();
+            }
+
+            protected override WebRequest GetWebRequest(Uri address)
+            {
+                WebRequest request = base.GetWebRequest(address);
+                if (request is HttpWebRequest webRequest)
+                {
+                    webRequest.CookieContainer = CookieContainer;
+                }
+                return request;
+            }
+        }
 
         private void InitializeIcon()
         {
@@ -98,34 +117,54 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
         private void btnUpload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            string dataPath = "";
-            DataSet ds;
-
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            XtraInputBoxArgs args = new XtraInputBoxArgs
             {
-                openFileDialog.Filter = "Excel files (*.xls, *.xlsx)|*.xls;*.xlsx|All files (*.*)|*.*";
-                openFileDialog.RestoreDirectory = true;
+                Caption = TPConfigs.SoftNameTW,
+                Prompt = "YearMonth: 2024/01 or 2024END",
+                DefaultButtonIndex = 0,
+                Editor = new TextEdit(),
+                DefaultResponse = ""
+            };
 
-                if (openFileDialog.ShowDialog() != DialogResult.OK) return;
-
-                dataPath = openFileDialog.FileName;
-            }
+            var result = XtraInputBox.Show(args);
+            if (result == null) return;
+            string yearMonth = result?.ToString().Trim() ?? "";
+            if (yearMonth.Length < 4) return;
 
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
             {
+                int year = Convert.ToInt16(yearMonth.Substring(0, 4));
+                int month = yearMonth.Contains("/") ? Convert.ToInt16(yearMonth.Split('/')[1]) : 0;
+                string filePath = "";
 
-                string extension = Path.GetExtension(dataPath);
-                using (var stream = File.Open(dataPath, FileMode.Open, FileAccess.Read))
+                using (var client = new CookieAwareWebClient())
                 {
-                    IExcelDataReader reader;
-                    if (extension == "*.xls")
+                    // Thêm các cookie từ JSON mà bạn cung cấp
+                    client.CookieContainer.Add(new Cookie("Admin", "FHSADMIN", "/", "10.198.170.92"));
+                    client.CookieContainer.Add(new Cookie("SectionID", "G102", "/", "10.198.170.92"));
+                    client.CookieContainer.Add(new Cookie("User", "VNW0000011", "/", "10.198.170.92"));
+                    client.CookieContainer.Add(new Cookie("UserName", "%E6%97%A5%E6%9C%88%E6%98%8E", "/", "10.198.170.92"));
+
+                    // Tải file Excel từ API
+                    string url = $"http://10.198.170.92:7003/api/GenExcel/GetExcelFile?excelYM={year.ToString().Substring(2, 2)}{month.ToString("X")}&isYear={month == 0}";
+                    filePath = Path.Combine(TPConfigs.DocumentPath(), $"KPI - {yearMonth}{DateTime.Now.ToString("yyyMMddHHmmss")}.xlsx");
+
+                    try
                     {
-                        reader = ExcelReaderFactory.CreateBinaryReader(stream);
+                        client.DownloadFile(url, filePath);
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+                        Console.WriteLine("Đã xảy ra lỗi khi tải tệp: " + ex.Message);
+                        return;
                     }
+                }
+                DataSet ds;
+
+                string extension = Path.GetExtension(filePath);
+                using (var stream = File.Open(filePath, FileMode.Open, FileAccess.Read))
+                {
+                    IExcelDataReader reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
 
                     ds = reader.AsDataSet(new ExcelDataSetConfiguration()
                     {
@@ -147,7 +186,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
                 {
                     var dateStr = ConvertToDateString(item["評核年月"].ToString());
 
-                    dataKPIs.Add(new dt402_KPIWeb()
+                    var data = new dt402_KPIWeb()
                     {
                         YearMonth = dateStr,
                         IdUsr = item["工號"].ToString(),
@@ -155,8 +194,32 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
                         DeptComments = item["核定評語"].ToString(),
                         MgrScore = item["經理室核定成績"].ToString(),
                         MgrComments = item["經理室核定評語"].ToString()
-                    });
+                    };
+
+                    if (month != 0)
+                    {
+                        string url = $"https://www.fhs.com.tw/ads/api/Furnace/rest/json/hr/s16/{data.IdUsr}vkokv{year}-{month.ToString("00")}";
+                        using (WebClient client = new WebClient())
+                        {
+                            try
+                            {
+                                string response = client.DownloadString(url);
+                                if (!string.IsNullOrEmpty(response))
+                                {
+                                    var res = response.Replace("o|o", "").Split('|');
+
+                                    data.TotalSalary = res[32];
+                                    data.ActualSalary = res[43];
+                                }
+                            }
+                            catch { }
+                        }
+                    }
+
+                    dataKPIs.Add(data);
                 }
+
+                if (dataKPIs.Count == 0) return;
 
                 if (dt402_KPIWebBUS.Instance.GetList().Any(r => r.YearMonth == dataKPIs.First().YearMonth))
                 {

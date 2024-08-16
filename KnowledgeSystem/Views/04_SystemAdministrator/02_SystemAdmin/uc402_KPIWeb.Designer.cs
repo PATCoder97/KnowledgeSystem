@@ -116,7 +116,7 @@
             // 
             // btnUpload
             // 
-            this.btnUpload.Caption = "上傳資料";
+            this.btnUpload.Caption = "載入數據";
             this.btnUpload.Id = 0;
             this.btnUpload.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnUpload.ImageOptions.SvgImage")));
             this.btnUpload.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);

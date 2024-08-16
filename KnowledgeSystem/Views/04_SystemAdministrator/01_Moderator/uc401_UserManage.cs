@@ -35,6 +35,9 @@ using DevExpress.Utils.Menu;
 using DevExpress.Utils.Svg;
 using KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin;
 using DevExpress.XtraGrid.Views.Items.ViewInfo;
+using Org.BouncyCastle.Crypto;
+using System.Globalization;
+using System.Net;
 
 namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 {
@@ -101,17 +104,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             fSetting.eventInfo = EventFormInfo.View;
             fSetting.idUsr = idUser;
             fSetting.ShowDialog();
-        }
-
-        private class dmUserM : dm_User
-        {
-            public string RoleName { get; set; }
-            public string DeptName { get; set; }
-            public string JobName { get; set; }
-            public string ActualJobName { get; set; }
-            public string Describe { get; set; }
-            public string SexName { get; set; }
-            public string StatusName { get; set; }
         }
 
         #endregion
@@ -226,14 +218,46 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
         private void btnExportExcel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            string documentsPath = TPConfigs.DocumentPath();
-            if (!Directory.Exists(documentsPath))
-                Directory.CreateDirectory(documentsPath);
+            //string documentsPath = TPConfigs.DocumentPath();
+            //if (!Directory.Exists(documentsPath))
+            //    Directory.CreateDirectory(documentsPath);
 
-            string filePath = Path.Combine(documentsPath, $"{Text} - {DateTime.Now:yyyyMMddHHmm}.xlsx");
+            //string filePath = Path.Combine(documentsPath, $"{Text} - {DateTime.Now:yyyyMMddHHmm}.xlsx");
 
-            gcData.ExportToXlsx(filePath);
-            Process.Start(filePath);
+            //gcData.ExportToXlsx(filePath);
+            //Process.Start(filePath);
+
+            foreach (var item in users)
+            {
+                string url = $"https://www.fhs.com.tw/ads/api/Furnace/rest/json/hr/s10/{item.Id}";
+                using (WebClient client = new WebClient())
+                {
+                    client.Encoding = Encoding.UTF8;
+                    try
+                    {
+                        string response = client.DownloadString(url);
+
+                        if (!string.IsNullOrEmpty(response))
+                        {
+                            var data = response.Replace("o|o", "").Split('|');
+
+                            item.DOB = string.IsNullOrWhiteSpace(data[2]) ? default : DateTime.ParseExact(data[2], "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+                            item.DateCreate = string.IsNullOrWhiteSpace(data[3]) ? default : DateTime.ParseExact(data[3], "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+                            item.Addr = data[18];
+                            item.PhoneNum1 = data[19];
+                            item.PhoneNum2 = data[20];
+
+                            item.DisplayNameVN = new CultureInfo("vi-VN", false).TextInfo.ToTitleCase(data[1].ToLower());
+
+                            dm_UserBUS.Instance.AddOrUpdate(item);
+                        }
+                    }
+                    catch (WebException ex)
+                    {
+                        Console.WriteLine($"Failed to fetch data: {ex.Message}");
+                    }
+                }
+            }
         }
 
         private void gvData_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)

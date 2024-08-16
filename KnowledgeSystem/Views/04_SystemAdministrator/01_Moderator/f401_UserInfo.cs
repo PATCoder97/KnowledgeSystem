@@ -13,9 +13,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Runtime.ConstrainedExecution;
+using System.Text;
 using System.Windows.Forms;
 using System.Xml.XPath;
 
@@ -580,14 +583,45 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
         private void txbUserId_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            if (TPConfigs.DomainComputer != DomainVNFPG.domainVNFPG || txbUserId.Enabled == false) return;
+            using (var handle = SplashScreenManager.ShowOverlayForm(this))
+            {
+                string idUsr = txbUserId.Text.ToUpper();
+                string url = $"https://www.fhs.com.tw/ads/api/Furnace/rest/json/hr/s10/{idUsr}";
+                using (WebClient client = new WebClient())
+                {
+                    client.Encoding = Encoding.UTF8;
+                    try
+                    {
+                        string response = client.DownloadString(url);
 
-            string userNameByDomain = DomainVNFPG.Instance.GetAccountName(txbUserId.Text.ToUpper());
-            if (string.IsNullOrEmpty(userNameByDomain)) return;
+                        if (!string.IsNullOrEmpty(response))
+                        {
+                            var data = response.Replace("o|o", "").Split('|');
 
-            string[] displayNameFHS = userNameByDomain.Split('/');
-            cbbDept.EditValue = displayNameFHS[0].Replace("LG", string.Empty);
-            txbUserNameTW.EditValue = displayNameFHS[1];
+                            txbDOB.EditValue = DateTime.ParseExact(data[2], "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+                            txbDateStart.EditValue = DateTime.ParseExact(data[3], "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+                            txbAddr.EditValue = data[18];
+                            txbPhone1.Text = data[19];
+                            txbPhone2.Text = data[20];
+
+                            txbUserNameVN.EditValue = new CultureInfo("vi-VN", false).TextInfo.ToTitleCase(data[1].ToLower());
+                        }
+                    }
+                    catch (WebException ex)
+                    {
+                        Console.WriteLine($"Failed to fetch data: {ex.Message}");
+                    }
+                }
+
+                if (TPConfigs.DomainComputer != DomainVNFPG.domainVNFPG || txbUserId.Enabled == false) return;
+
+                string userNameByDomain = DomainVNFPG.Instance.GetAccountName(txbUserId.Text.ToUpper());
+                if (string.IsNullOrEmpty(userNameByDomain)) return;
+
+                string[] displayNameFHS = userNameByDomain.Split('/');
+                cbbDept.EditValue = displayNameFHS[0].Replace("LG", string.Empty);
+                txbUserNameTW.EditValue = displayNameFHS[1];
+            }
         }
 
         private void cbbDept_AutoSearch(object sender, DevExpress.XtraEditors.Controls.LookUpEditAutoSearchEventArgs e)
