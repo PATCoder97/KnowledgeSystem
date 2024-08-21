@@ -128,7 +128,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
             var result = XtraInputBox.Show(args);
             if (result == null) return;
-            string yearMonth = result?.ToString().Trim() ?? "";
+            string yearMonth = result?.ToString().Trim().ToUpper() ?? "";
             if (yearMonth.Length < 4) return;
 
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
@@ -147,7 +147,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
                     // Tải file Excel từ API
                     string url = $"http://10.198.170.92:7003/api/GenExcel/GetExcelFile?excelYM={year.ToString().Substring(2, 2)}{month.ToString("X")}&isYear={month == 0}";
-                    filePath = Path.Combine(TPConfigs.DocumentPath(), $"KPI - {yearMonth}{DateTime.Now.ToString("yyyMMddHHmmss")}.xlsx");
+                    filePath = Path.Combine(TPConfigs.DocumentPath(), $"KPI - {year}{month}{DateTime.Now.ToString("yyyMMddHHmmss")}.xlsx");
 
                     try
                     {
