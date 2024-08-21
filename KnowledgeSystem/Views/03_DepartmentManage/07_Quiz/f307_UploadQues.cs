@@ -1,5 +1,8 @@
-﻿using DataAccessLayer;
+﻿using BusinessLayer;
+using DataAccessLayer;
 using DevExpress.XtraEditors;
+using DocumentFormat.OpenXml.Spreadsheet;
+using KnowledgeSystem.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,6 +27,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
 
         public DataTable dtBase;
         public string pathImages = "";
+        public string idJob = "";
 
         List<dt307_Questions> ques;
         List<dt307_Answers> answers;
@@ -62,9 +66,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
         private void f307_UploadQues_Load(object sender, EventArgs e)
         {
             CleanDataTable(dtBase);
-
             gcData.DataSource = dtBase;
-
         }
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -86,7 +88,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
                     ques.Add(new dt307_Questions()
                     {
                         DisplayText = dtBase.Rows[row][1].ToString(),
-                        ImageName = dtBase.Rows[row][2].ToString()
+                        ImageName = string.IsNullOrEmpty(dtBase.Rows[row][2].ToString()) ? "" : Path.Combine(pathImages, dtBase.Rows[row][2].ToString()),
                     });
                     currentQuesId = quesId;
                     answerId = 1; // Đặt lại biến đếm answerId khi câu hỏi đổi
@@ -102,17 +104,63 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
                     Id = answerId++, // Tăng ID mỗi khi thêm câu trả lời mới
                     QuesId = currentQuesId,
                     DisplayText = dtBase.Rows[row][4].ToString(),
-                    ImageName = Path.Combine(pathImages, dtBase.Rows[row][5].ToString()),
+                    ImageName = string.IsNullOrEmpty(dtBase.Rows[row][5].ToString()) ? "" : Path.Combine(pathImages, dtBase.Rows[row][5].ToString()),
                     TrueAns = IsTrueAns
                 });
             }
 
-
             f307_ConfirmQues fConfirm = new f307_ConfirmQues();
             fConfirm.ques = ques;
             fConfirm.answers = answers;
-
             fConfirm.ShowDialog();
+
+            // Nếu xác nhận thành công thì cập nhật vào CSDL
+            bool IsConfirmed = fConfirm.IsConfirmed;
+            if (!IsConfirmed) return;
+
+            if (!Directory.Exists(TPConfigs.Folder307))
+                Directory.CreateDirectory(TPConfigs.Folder307);
+
+            int index = 1;
+            foreach (var item in ques)
+            {
+                var data = new dt307_Questions()
+                {
+                    IdJob = idJob,
+                    DisplayText = item.DisplayText,
+                    ImageName = string.IsNullOrEmpty(item.ImageName) ? ""
+                    : $"{EncryptionHelper.EncryptionFileName(Path.GetFileName(item.ImageName))}{Path.GetExtension(item.ImageName)}"
+                };
+
+                int idQues = dt307_QuestionsBUS.Instance.Add(data);
+                answers.Where(r => r.QuesId == index).ToList().ForEach(r => r.QuesId = idQues);
+                index++;
+
+                if (string.IsNullOrEmpty(item.ImageName)) continue;
+                File.Copy(item.ImageName, Path.Combine(TPConfigs.Folder307, data.ImageName), true);
+            }
+
+            List<dt307_Answers> anwsAdd = new List<dt307_Answers>();
+            foreach (var item in answers)
+            {
+                var data = new dt307_Answers()
+                {
+                    QuesId = item.QuesId,
+                    DisplayText = item.DisplayText,
+                    TrueAns = item.TrueAns,
+                    ImageName = string.IsNullOrEmpty(item.ImageName) ? ""
+                    : $"{EncryptionHelper.EncryptionFileName(Path.GetFileName(item.ImageName))}{Path.GetExtension(item.ImageName)}"
+                };
+
+                anwsAdd.Add(data);
+
+                if (string.IsNullOrEmpty(item.ImageName)) continue;
+                File.Copy(item.ImageName, Path.Combine(TPConfigs.Folder307, data.ImageName), true);
+            }
+
+            var b = dt307_AnswersBUS.Instance.AddRange(anwsAdd);
+
+            Close();
         }
     }
 }

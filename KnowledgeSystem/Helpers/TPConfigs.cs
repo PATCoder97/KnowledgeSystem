@@ -36,6 +36,7 @@ namespace KnowledgeSystem.Helpers
         public static string Folder201 { get; set; }
         public static string Folder201EmpChange { get; set; }
         public static string Folder306 { get; set; }
+        public static string Folder307 { get; set; }
         public static string FolderSign { get; set; }
 
         public static void SetSystemStaticValue()
@@ -55,6 +56,7 @@ namespace KnowledgeSystem.Helpers
             Folder201 = Path.Combine(FolderData, "201");
             Folder201EmpChange = Path.Combine(FolderData, "201", "EmpChange");
             Folder306 = Path.Combine(FolderData, "306");
+            Folder307 = Path.Combine(FolderData, "307");
             FolderSign = Path.Combine(Folder00, "ImageSign");
 
             AppPermission.SysAdmin = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleSysAdmin")?.ValueT ?? "-1");

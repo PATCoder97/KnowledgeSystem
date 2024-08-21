@@ -396,6 +396,12 @@
     <Compile Include="Views\03_DepartmentManage\07_Quiz\f307_ConfirmQues.Designer.cs">
       <DependentUpon>f307_ConfirmQues.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\03_DepartmentManage\07_Quiz\f307_Exam_Info.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\07_Quiz\f307_Exam_Info.Designer.cs">
+      <DependentUpon>f307_Exam_Info.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\03_DepartmentManage\07_Quiz\f307_JobSet_Info.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -407,6 +413,18 @@
     </Compile>
     <Compile Include="Views\03_DepartmentManage\07_Quiz\f307_UploadQues.Designer.cs">
       <DependentUpon>f307_UploadQues.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\07_Quiz\f307_UsersData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\07_Quiz\f307_UsersData.Designer.cs">
+      <DependentUpon>f307_UsersData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\07_Quiz\uc307_ExamMgmt.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\07_Quiz\uc307_ExamMgmt.Designer.cs">
+      <DependentUpon>uc307_ExamMgmt.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\03_DepartmentManage\07_Quiz\uc307_JobTitleSetting.cs">
       <SubType>UserControl</SubType>
@@ -860,11 +878,20 @@
     <EmbeddedResource Include="Views\03_DepartmentManage\07_Quiz\f307_ConfirmQues.resx">
       <DependentUpon>f307_ConfirmQues.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\07_Quiz\f307_Exam_Info.resx">
+      <DependentUpon>f307_Exam_Info.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\07_Quiz\f307_JobSet_Info.resx">
       <DependentUpon>f307_JobSet_Info.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\07_Quiz\f307_UploadQues.resx">
       <DependentUpon>f307_UploadQues.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\07_Quiz\f307_UsersData.resx">
+      <DependentUpon>f307_UsersData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\07_Quiz\uc307_ExamMgmt.resx">
+      <DependentUpon>uc307_ExamMgmt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\07_Quiz\uc307_JobTitleSetting.resx">
       <DependentUpon>uc307_JobTitleSetting.cs</DependentUpon>

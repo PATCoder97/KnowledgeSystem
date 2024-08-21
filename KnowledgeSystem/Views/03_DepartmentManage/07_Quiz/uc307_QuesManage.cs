@@ -285,49 +285,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             DataTable dt = ds.Tables["EXCEL"];
 
             f307_UploadQues fUpload = new f307_UploadQues();
+            fUpload.idJob = idJobSelect;
             fUpload.dtBase = dt;
             fUpload.pathImages = $@"{Path.GetDirectoryName(dataPath)}\Images";
             fUpload.ShowDialog();
 
-            // DataTable questionsTable = new DataTable();
-            //questionsTable.Columns.Add("Id", typeof(int));
-            //questionsTable.Columns.Add("IdJob", typeof(string));
-            //questionsTable.Columns.Add("DisplayText", typeof(string));
-            //questionsTable.Columns.Add("ImageName", typeof(string));
-            //questionsTable.Columns.Add("IsMultiAns", typeof(bool));
-
-            //DataTable answersTable = new DataTable();
-            //answersTable.Columns.Add("Id", typeof(int));
-            //answersTable.Columns.Add("QuesId", typeof(int));
-            //answersTable.Columns.Add("DisplayText", typeof(string));
-            //answersTable.Columns.Add("ImageName", typeof(string));
-            //answersTable.Columns.Add("TrueAns", typeof(bool));
-
-            //int currentQuesId = -1;
-
-            //for (int row = 2; row <= worksheet.Dimension.End.Row; row++)
-            //{
-            //    int quesId = worksheet.Cells[row, 1].GetValue<int>();
-            //    if (quesId != currentQuesId)
-            //    {
-            //        questionsTable.Rows.Add(
-            //            quesId,
-            //            worksheet.Cells[row, 2].GetValue<string>(),
-            //            worksheet.Cells[row, 3].GetValue<string>(),
-            //            worksheet.Cells[row, 4].GetValue<string>(),
-            //            worksheet.Cells[row, 5].GetValue<bool>()
-            //        );
-            //        currentQuesId = quesId;
-            //    }
-
-            //    answersTable.Rows.Add(
-            //        worksheet.Cells[row, 6].GetValue<int>(),
-            //        quesId,
-            //        worksheet.Cells[row, 7].GetValue<string>(),
-            //        worksheet.Cells[row, 8].GetValue<string>(),
-            //        worksheet.Cells[row, 9].GetValue<bool>()
-            //    );
-            //}
+            LoadQues(idJobSelect);
         }
 
         private void gvQues_DoubleClick(object sender, EventArgs e)

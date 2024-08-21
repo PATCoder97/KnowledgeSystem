@@ -90,6 +90,24 @@ namespace BusinessLayer
             }
         }
 
+        public bool AddRange(List<dt307_Answers> items)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    _context.dt307_Answers.AddRange(items);
+                    int affectedRecords = _context.SaveChanges();
+                    return affectedRecords > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                return false;
+            }
+        }
+
         public bool AddOrUpdate(dt307_Answers item)
         {
             try

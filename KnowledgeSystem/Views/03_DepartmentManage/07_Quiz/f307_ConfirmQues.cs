@@ -31,6 +31,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
         string templateContentSigner;
         int indexQues = 0;
 
+        public bool IsConfirmed { get; set; }
 
         private async void InitializeWebView2(int index)
         {
@@ -40,13 +41,14 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             {
                 id = r.Id,
                 disp = r.DisplayText,
-                img = ConvertImageToBase64DataUri(r.ImageName),
+                img = string.IsNullOrEmpty(r.ImageName) ? "" : ConvertImageToBase64DataUri(r.ImageName),
                 istrue = r.TrueAns
             }).ToList();
 
             var templateData = new
             {
                 ques = ques[index].DisplayText,
+                quesimg = string.IsNullOrEmpty(ques[index].ImageName) ? "" : ConvertImageToBase64DataUri(ques[index].ImageName),
                 answers = anses
             };
 
@@ -131,6 +133,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
 
         private void f307_ConfirmQues_Load(object sender, EventArgs e)
         {
+            btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+
             templateContentSigner = System.IO.File.ReadAllText(Path.Combine(TPConfigs.HtmlPath, @"C:\Users\ANHTUAN\Desktop\DataShift\307Question.html"));
             InitializeWebView2(indexQues);
         }
@@ -142,6 +146,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
                 return;
             }
 
+            btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             indexQues--;
             InitializeWebView2(indexQues);
         }
@@ -150,11 +155,19 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
         {
             if (indexQues >= ques.Count - 1)
             {
+                btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                 return;
             }
 
+            btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             indexQues++;
             InitializeWebView2(indexQues);
+        }
+
+        private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            IsConfirmed = true;
+            Close();
         }
     }
 }

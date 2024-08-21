@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
+using System.Net.Mail;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -72,13 +73,36 @@ namespace BusinessLayer
             }
         }
 
-        public bool Add(dt307_Questions item)
+        public int Add(dt307_Questions item)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
                     _context.dt307_Questions.Add(item);
+                    int affectedRecords = _context.SaveChanges();
+                    if (affectedRecords > 0)
+                    {
+                        return item.Id;
+                    }
+
+                    return -1;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                return -1;
+            }
+        }
+
+        public bool AddRange(List<dt307_Questions> items)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    _context.dt307_Questions.AddRange(items);
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;
                 }
