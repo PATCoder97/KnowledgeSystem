@@ -2,6 +2,7 @@
 using DataAccessLayer;
 using DevExpress.Xpo.DB;
 using DevExpress.XtraEditors;
+using KnowledgeSystem.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,10 +20,16 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
         public f307_UsersData()
         {
             InitializeComponent();
+            InitializeIcon();
         }
 
         public List<dm_User> UsersInput { get; set; }
         public List<dm_User> UsersOutput { get; set; }
+
+        private void InitializeIcon()
+        {
+            btnConfirm.ImageOptions.SvgImage = TPSvgimages.Confirm;
+        }
 
         private void LoadData()
         {
@@ -81,6 +88,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             }
 
             UsersOutput = usrsOutput;
+            Close();
         }
     }
 }
