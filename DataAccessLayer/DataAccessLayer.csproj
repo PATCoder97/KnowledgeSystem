@@ -212,6 +212,12 @@
     <Compile Include="dt307_Answers.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
+    <Compile Include="dt307_ExamMgmt.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dt307_ExamUser.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
     <Compile Include="dt307_JobQuesManage.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>

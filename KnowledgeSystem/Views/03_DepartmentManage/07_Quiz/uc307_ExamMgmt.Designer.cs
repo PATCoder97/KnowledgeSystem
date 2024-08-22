@@ -45,11 +45,10 @@
             this.gColId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColExamCode = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gColQuesCount = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -132,6 +131,7 @@
             this.btnReload.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReload.ItemAppearance.Normal.Options.UseFont = true;
             this.btnReload.Name = "btnReload";
+            this.btnReload.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnReload_ItemClick);
             // 
             // btnExportExcel
             // 
@@ -143,6 +143,7 @@
             this.btnExportExcel.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExportExcel.ItemAppearance.Normal.Options.UseFont = true;
             this.btnExportExcel.Name = "btnExportExcel";
+            this.btnExportExcel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExportExcel_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -224,11 +225,10 @@
             this.gColId,
             this.gridColumn5,
             this.gridColumn6,
-            this.gridColumn3,
-            this.gridColumn1,
+            this.gColExamCode,
+            this.gColStatus,
             this.gridColumn2,
             this.gridColumn4,
-            this.gColQuesCount,
             this.gridColumn7});
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
@@ -240,83 +240,89 @@
             this.gvData.OptionsView.ShowGroupPanel = false;
             this.gvData.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
             new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gridColumn5, DevExpress.Data.ColumnSortOrder.Ascending)});
+            this.gvData.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gvData_PopupMenuShowing);
             // 
             // gColId
             // 
             this.gColId.AppearanceCell.Options.UseTextOptions = true;
             this.gColId.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gColId.Caption = "ID";
-            this.gColId.FieldName = "JobTitle.Id";
+            this.gColId.FieldName = "Id";
             this.gColId.Name = "gColId";
             // 
             // gridColumn5
             // 
-            this.gridColumn5.Caption = "單位";
-            this.gridColumn5.FieldName = "Dept";
+            this.gridColumn5.Caption = "创建日期";
+            this.gridColumn5.DisplayFormat.FormatString = "yyyy/MM/dd HH:mm";
+            this.gridColumn5.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.gridColumn5.FieldName = "CreateTime";
+            this.gridColumn5.MinWidth = 150;
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
             this.gridColumn5.VisibleIndex = 0;
+            this.gridColumn5.Width = 150;
             // 
             // gridColumn6
             // 
-            this.gridColumn6.Caption = "職務編號";
-            this.gridColumn6.FieldName = "JobTitle.Id";
+            this.gridColumn6.Caption = "考試名稱";
+            this.gridColumn6.FieldName = "DisplayName";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 1;
+            this.gridColumn6.VisibleIndex = 2;
             this.gridColumn6.Width = 93;
             // 
-            // gridColumn3
+            // gColExamCode
             // 
-            this.gridColumn3.Caption = "職務名稱";
-            this.gridColumn3.FieldName = "JobTitle.DisplayName";
-            this.gridColumn3.Name = "gridColumn3";
-            this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 2;
-            this.gridColumn3.Width = 104;
+            this.gColExamCode.Caption = "考試標號";
+            this.gColExamCode.FieldName = "Code";
+            this.gColExamCode.MinWidth = 150;
+            this.gColExamCode.Name = "gColExamCode";
+            this.gColExamCode.Visible = true;
+            this.gColExamCode.VisibleIndex = 1;
+            this.gColExamCode.Width = 150;
             // 
-            // gridColumn1
+            // gColStatus
             // 
-            this.gridColumn1.Caption = "考試限時";
-            this.gridColumn1.FieldName = "QuizData.TestDuration";
-            this.gridColumn1.Name = "gridColumn1";
-            this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 3;
-            this.gridColumn1.Width = 107;
+            this.gColStatus.Caption = "狀態";
+            this.gColStatus.FieldName = "Status";
+            this.gColStatus.MinWidth = 150;
+            this.gColStatus.Name = "gColStatus";
+            this.gColStatus.UnboundDataType = typeof(string);
+            this.gColStatus.Visible = true;
+            this.gColStatus.VisibleIndex = 5;
+            this.gColStatus.Width = 150;
             // 
             // gridColumn2
             // 
-            this.gridColumn2.Caption = "及格分數";
-            this.gridColumn2.FieldName = "QuizData.PassingScore";
+            this.gridColumn2.Caption = "開始時期";
+            this.gridColumn2.DisplayFormat.FormatString = "yyyy/MM/dd HH:mm";
+            this.gridColumn2.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.gridColumn2.FieldName = "StartTime";
+            this.gridColumn2.MinWidth = 150;
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 4;
-            this.gridColumn2.Width = 97;
+            this.gridColumn2.VisibleIndex = 3;
+            this.gridColumn2.Width = 150;
             // 
             // gridColumn4
             // 
-            this.gridColumn4.Caption = "題目庫";
-            this.gridColumn4.FieldName = "Count";
+            this.gridColumn4.Caption = "結束時期";
+            this.gridColumn4.DisplayFormat.FormatString = "yyyy/MM/dd HH:mm";
+            this.gridColumn4.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.gridColumn4.FieldName = "FinishTime";
+            this.gridColumn4.MinWidth = 150;
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 6;
-            // 
-            // gColQuesCount
-            // 
-            this.gColQuesCount.Caption = "題目數量";
-            this.gColQuesCount.FieldName = "QuizData.QuesCount";
-            this.gColQuesCount.Name = "gColQuesCount";
-            this.gColQuesCount.Visible = true;
-            this.gColQuesCount.VisibleIndex = 5;
-            this.gColQuesCount.Width = 113;
+            this.gridColumn4.VisibleIndex = 4;
+            this.gridColumn4.Width = 150;
             // 
             // gridColumn7
             // 
-            this.gridColumn7.Caption = "複選擇題";
-            this.gridColumn7.FieldName = "MultiQuesCount";
+            this.gridColumn7.Caption = "備註";
+            this.gridColumn7.FieldName = "Remark";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 7;
+            this.gridColumn7.VisibleIndex = 6;
             this.gridColumn7.Width = 89;
             // 
             // Root
@@ -351,6 +357,7 @@
             this.Controls.Add(this.barDockControlTop);
             this.Name = "uc307_ExamMgmt";
             this.Size = new System.Drawing.Size(943, 531);
+            this.Load += new System.EventHandler(this.uc307_ExamMgmt_Load);
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
@@ -380,11 +387,10 @@
         private DevExpress.XtraGrid.Columns.GridColumn gColId;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
+        private DevExpress.XtraGrid.Columns.GridColumn gColExamCode;
+        private DevExpress.XtraGrid.Columns.GridColumn gColStatus;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
-        private DevExpress.XtraGrid.Columns.GridColumn gColQuesCount;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;

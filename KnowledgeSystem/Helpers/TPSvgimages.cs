@@ -55,5 +55,8 @@ namespace KnowledgeSystem.Helpers
         public static SvgImage Attach = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_attach.svg"));
         public static SvgImage Copy = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_transfer.svg"));
         public static SvgImage Money = SvgImage.FromFile(Path.Combine(ImagesPath, "icons8_stack_of_money.svg"));
+        public static SvgImage Start = SvgImage.FromFile(Path.Combine(ImagesPath, "icons8_time.svg"));
+        public static SvgImage Finish = SvgImage.FromFile(Path.Combine(ImagesPath, "icons8_finish_flag.svg"));
+        public static SvgImage Print = SvgImage.FromFile(Path.Combine(ImagesPath, "icons8_print.svg"));
     }
 }

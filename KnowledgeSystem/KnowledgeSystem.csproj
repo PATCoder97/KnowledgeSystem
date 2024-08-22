@@ -396,6 +396,12 @@
     <Compile Include="Views\03_DepartmentManage\07_Quiz\f307_ConfirmQues.Designer.cs">
       <DependentUpon>f307_ConfirmQues.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\03_DepartmentManage\07_Quiz\f307_ExamDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\07_Quiz\f307_ExamDetail.Designer.cs">
+      <DependentUpon>f307_ExamDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\03_DepartmentManage\07_Quiz\f307_Exam_Info.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -878,6 +884,9 @@
     <EmbeddedResource Include="Views\03_DepartmentManage\07_Quiz\f307_ConfirmQues.resx">
       <DependentUpon>f307_ConfirmQues.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\07_Quiz\f307_ExamDetail.resx">
+      <DependentUpon>f307_ExamDetail.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\07_Quiz\f307_Exam_Info.resx">
       <DependentUpon>f307_Exam_Info.cs</DependentUpon>
     </EmbeddedResource>
@@ -1105,7 +1114,16 @@
     <Content Include="Images\checked_radio_button.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\icons8_finish_flag.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\icons8_print.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\icons8_stack_of_money.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\icons8_time.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\icons_add.svg">

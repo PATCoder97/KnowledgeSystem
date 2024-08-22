@@ -138,5 +138,30 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
 
             LoadData();
         }
+
+        private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var data = new dt307_ExamMgmt()
+            {
+                Code = "",
+                DisplayName = txbExamName.Text.Trim(),
+                CreateTime = DateTime.Now,
+            };
+
+            int idExam = dt307_ExamMgmtBUS.Instance.Add(data);
+
+            string codeExam = dt307_ExamMgmtBUS.Instance.GetItemById(idExam).Code;
+
+            List<dt307_ExamUser> examUsrs = usrs.Select(r => new dt307_ExamUser()
+            {
+                ExamCode = codeExam,
+                IdJob = r.ActualJobCode,
+                IdUser = r.Id,
+                IsPass = false
+            }).ToList();
+
+            var result = dt307_ExamUserBUS.Instance.AddRange(examUsrs);
+            Close();
+        }
     }
 }

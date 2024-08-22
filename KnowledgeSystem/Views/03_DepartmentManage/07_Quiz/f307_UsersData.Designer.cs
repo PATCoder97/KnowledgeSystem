@@ -236,9 +236,11 @@
             // 
             this.gridColumn5.Caption = "單位";
             this.gridColumn5.FieldName = "DeptName";
+            this.gridColumn5.MinWidth = 180;
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
             this.gridColumn5.VisibleIndex = 1;
+            this.gridColumn5.Width = 180;
             // 
             // gridColumn6
             // 
@@ -253,10 +255,11 @@
             // 
             this.gridColumn3.Caption = "人員名稱";
             this.gridColumn3.FieldName = "DisplayName";
+            this.gridColumn3.MinWidth = 180;
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 3;
-            this.gridColumn3.Width = 104;
+            this.gridColumn3.Width = 180;
             // 
             // gridColumn1
             // 

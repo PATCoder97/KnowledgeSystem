@@ -584,6 +584,31 @@
           <Property Name="ImageName" Type="nvarchar" MaxLength="255" />
           <Property Name="TrueAns" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="dt307_ExamMgmt">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="StartTime" Type="datetime" />
+          <Property Name="FinishTime" Type="datetime" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="dt307_ExamUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ExamCode" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="IdUser" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="IdJob" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="SubmitTime" Type="datetime" />
+          <Property Name="Score" Type="int" />
+          <Property Name="IsPass" Type="bit" />
+          <Property Name="ExamData" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="dt307_JobQuesManage">
           <Key>
             <PropertyRef Name="JobId" />
@@ -706,6 +731,8 @@
           <EntitySet Name="dt306_SignRole" EntityType="Self.dt306_SignRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt306_Type" EntityType="Self.dt306_Type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt307_Answers" EntityType="Self.dt307_Answers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt307_ExamMgmt" EntityType="Self.dt307_ExamMgmt" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt307_ExamUser" EntityType="Self.dt307_ExamUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt307_JobQuesManage" EntityType="Self.dt307_JobQuesManage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt307_Questions" EntityType="Self.dt307_Questions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt402_KPIWeb" EntityType="Self.dt402_KPIWeb" Schema="dbo" store:Type="Tables" />
@@ -778,6 +805,8 @@
           <EntitySet Name="dt201_UpdateUsrReq_Detail" EntityType="DBDocumentManagementSystemModel.dt201_UpdateUsrReq_Detail" />
           <EntitySet Name="dt402_KPIWeb" EntityType="DBDocumentManagementSystemModel.dt402_KPIWeb" />
           <EntitySet Name="dm_User" EntityType="DBDocumentManagementSystemModel.dm_User" />
+          <EntitySet Name="dt307_ExamMgmt" EntityType="DBDocumentManagementSystemModel.dt307_ExamMgmt" />
+          <EntitySet Name="dt307_ExamUser" EntityType="DBDocumentManagementSystemModel.dt307_ExamUser" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -1424,6 +1453,31 @@
           <Property Name="Sex" Type="Boolean" />
           <Property Name="ActualJobCode" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
           <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="dt307_ExamMgmt">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="StartTime" Type="DateTime" Precision="3" />
+          <Property Name="FinishTime" Type="DateTime" Precision="3" />
+          <Property Name="Remark" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dt307_ExamUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExamCode" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="IdUser" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdJob" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="SubmitTime" Type="DateTime" Precision="3" />
+          <Property Name="Score" Type="Int32" />
+          <Property Name="IsPass" Type="Boolean" />
+          <Property Name="ExamData" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2133,6 +2187,33 @@
                 <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
                 <ScalarProperty Name="SecondaryPassword" ColumnName="SecondaryPassword" />
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt307_ExamMgmt">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt307_ExamMgmt">
+              <MappingFragment StoreEntitySet="dt307_ExamMgmt">
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="FinishTime" ColumnName="FinishTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt307_ExamUser">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt307_ExamUser">
+              <MappingFragment StoreEntitySet="dt307_ExamUser">
+                <ScalarProperty Name="ExamData" ColumnName="ExamData" />
+                <ScalarProperty Name="IsPass" ColumnName="IsPass" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="SubmitTime" ColumnName="SubmitTime" />
+                <ScalarProperty Name="IdJob" ColumnName="IdJob" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="ExamCode" ColumnName="ExamCode" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
