@@ -135,7 +135,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
         {
             btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
 
-            templateContentSigner = System.IO.File.ReadAllText(Path.Combine(TPConfigs.HtmlPath, @"C:\Users\ANHTUAN\Desktop\DataShift\307Question.html"));
+            templateContentSigner = System.IO.File.ReadAllText(Path.Combine(TPConfigs.HtmlPath, "dt307_ConfirmQuestion.html"));
             InitializeWebView2(indexQues);
         }
 

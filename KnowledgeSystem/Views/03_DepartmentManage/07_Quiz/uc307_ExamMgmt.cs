@@ -128,7 +128,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
         private void CreateRuleGV()
         {
             gvData.FormatRules.AddExpressionRule(gColStatus, new DevExpress.Utils.AppearanceDefault() { BackColor = Color.Red, BackColor2 = Color.White }, $"IsNullOrEmpty([FinishTime])");
-            gvData.FormatRules.AddExpressionRule(gColStatus, new DevExpress.Utils.AppearanceDefault() { BackColor = Color.Green, BackColor2 = Color.White }, $"IsNullOrEmpty([StartTime])");
+            gvData.FormatRules.AddExpressionRule(gColStatus, new DevExpress.Utils.AppearanceDefault() { BackColor = Color.LightGreen, BackColor2 = Color.White }, $"IsNullOrEmpty([StartTime])");
         }
 
         private void LoadData()

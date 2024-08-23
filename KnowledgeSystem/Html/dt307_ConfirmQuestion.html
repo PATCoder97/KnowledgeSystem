@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Câu hỏi và câu trả lời</title>
+    <style>
+        body {
+            font-family: 'Microsoft JhengHei UI', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+            position: relative;
+        }
+
+        .question {
+            font-weight: bold;
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .answer-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .answer-number {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-right: 10px;
+            text-align: center;
+            width: 30px;
+        }
+
+        .answer {
+            background-color: #b7fdbc;
+            border-radius: 5px;
+            padding: 10px;
+            width: calc(100% - 50px);
+            box-sizing: border-box;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .answer img {
+            max-width: 100px;
+            max-height: 100px;
+            margin-right: 10px;
+            transition: transform 0.3s ease, z-index 0.3s ease;
+            cursor: pointer;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.2s ease-in-out;
+        }
+
+        .overlay img {
+            max-width: 90%;
+            max-height: 90%;
+            animation: zoomIn 0.2s ease-in-out;
+        }
+
+        .overlay.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.5);
+            }
+
+            to {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body oncontextmenu="return false;">
+
+    <div class="question">
+        {{ques}}
+    </div>
+    
+    {{ if quesimg != "" }}
+        <div style="text-align: center;">
+            <img src="{{quesimg}}" alt="Màu đỏ" height="200px">
+        </div>    
+    {{ end }}
+
+    {{- for ans in answers }}
+    <div class="answer-container">
+        <div class="answer-number">{{ans.id}}</div>
+
+        <div class="answer" 
+            {{ if ans.istrue }} 
+                style="background-color:#66CDAA;">
+            {{ else }}
+                style="background-color: #f0f0f0;">
+            {{ end }}
+
+            {{ if ans.img != "" }}
+                <img src="{{ans.img}}" alt="Màu đỏ" onclick="enlargeImage(this)">
+            {{ end }}
+
+            {{ans.disp}}
+        </div>
+
+
+    </div>
+    {{- end }}
+
+    <div class="overlay" id="overlay" onclick="shrinkImage()">
+        <img id="overlay-img" src="" alt="Phóng to hình ảnh">
+    </div>
+
+    <script>
+        function enlargeImage(img) {
+            var overlay = document.getElementById('overlay');
+            var overlayImg = document.getElementById('overlay-img');
+            overlayImg.src = img.src;
+            overlay.classList.add('active');
+        }
+
+        function shrinkImage() {
+            var overlay = document.getElementById('overlay');
+            overlay.classList.remove('active');
+        }
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape') {
+                shrinkImage();
+            }
+        });
+    </script>
+</body>
+
+</html>

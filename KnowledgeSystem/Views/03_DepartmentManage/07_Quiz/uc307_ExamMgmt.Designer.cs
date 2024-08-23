@@ -273,7 +273,7 @@
             // 
             // gColExamCode
             // 
-            this.gColExamCode.Caption = "考試標號";
+            this.gColExamCode.Caption = "考試編號";
             this.gColExamCode.FieldName = "Code";
             this.gColExamCode.MinWidth = 150;
             this.gColExamCode.Name = "gColExamCode";

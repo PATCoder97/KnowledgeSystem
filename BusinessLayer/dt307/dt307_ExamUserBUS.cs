@@ -56,6 +56,22 @@ namespace BusinessLayer
             }
         }
 
+        public List<dt307_ExamUser> GetListNeedDoByUserId(string userId)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt307_ExamUser.Where(r => r.IdUser == userId).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public dt307_ExamUser GetItemById(int id)
         {
             try

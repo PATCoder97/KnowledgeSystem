@@ -40,6 +40,22 @@ namespace BusinessLayer
             }
         }
 
+        public List<dt307_ExamMgmt> GetListProcessing()
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt307_ExamMgmt.Where(r => !string.IsNullOrEmpty(r.StartTime.ToString()) && string.IsNullOrEmpty(r.FinishTime.ToString())).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public dt307_ExamMgmt GetItemById(int id)
         {
             try
