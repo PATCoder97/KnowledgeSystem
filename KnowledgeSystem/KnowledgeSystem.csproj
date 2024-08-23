@@ -312,6 +312,12 @@
     <Compile Include="Views\03_DepartmentManage\05_PrintLabel\rp5SAreaDivision.Designer.cs">
       <DependentUpon>rp5SAreaDivision.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\03_DepartmentManage\05_PrintLabel\rpCabinetLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\05_PrintLabel\rpCabinetLabel.Designer.cs">
+      <DependentUpon>rpCabinetLabel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\03_DepartmentManage\05_PrintLabel\rpCabinetManage.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -395,6 +401,12 @@
     </Compile>
     <Compile Include="Views\03_DepartmentManage\07_Quiz\f307_ConfirmQues.Designer.cs">
       <DependentUpon>f307_ConfirmQues.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\07_Quiz\f307_DoExam.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\07_Quiz\f307_DoExam.Designer.cs">
+      <DependentUpon>f307_DoExam.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\03_DepartmentManage\07_Quiz\f307_ExamDetail.cs">
       <SubType>Form</SubType>
@@ -842,6 +854,9 @@
     <EmbeddedResource Include="Views\03_DepartmentManage\05_PrintLabel\rp5SAreaDivision.resx">
       <DependentUpon>rp5SAreaDivision.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\05_PrintLabel\rpCabinetLabel.resx">
+      <DependentUpon>rpCabinetLabel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\05_PrintLabel\rpCabinetManage.resx">
       <DependentUpon>rpCabinetManage.cs</DependentUpon>
     </EmbeddedResource>
@@ -883,6 +898,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\07_Quiz\f307_ConfirmQues.resx">
       <DependentUpon>f307_ConfirmQues.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\07_Quiz\f307_DoExam.resx">
+      <DependentUpon>f307_DoExam.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\07_Quiz\f307_ExamDetail.resx">
       <DependentUpon>f307_ExamDetail.cs</DependentUpon>

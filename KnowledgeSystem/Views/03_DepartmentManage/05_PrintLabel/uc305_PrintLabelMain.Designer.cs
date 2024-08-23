@@ -43,6 +43,7 @@
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.docViewerLabel = new DevExpress.XtraPrinting.Preview.DocumentViewer();
             this.svgImageCollection1 = new DevExpress.Utils.SvgImageCollection(this.components);
+            this.btnCabinetLabel = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.svgImageCollection1)).BeginInit();
             this.SuspendLayout();
@@ -63,9 +64,10 @@
             this.btnPrint,
             this.btnLabelType,
             this.btnDeviceManagement,
-            this.btn5SAreaDivision});
+            this.btn5SAreaDivision,
+            this.btnCabinetLabel});
             this.barManagerTP.MainMenu = this.bar2;
-            this.barManagerTP.MaxItemId = 9;
+            this.barManagerTP.MaxItemId = 10;
             // 
             // bar2
             // 
@@ -110,7 +112,8 @@
             this.btnLabelType.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.btnFixedAssets),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnDeviceManagement),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btn5SAreaDivision)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.btn5SAreaDivision),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnCabinetLabel)});
             this.btnLabelType.Name = "btnLabelType";
             this.btnLabelType.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
             // 
@@ -225,6 +228,21 @@
             // 
             this.svgImageCollection1.Add("nopicture", "image://svgimages/diagramicons/nopicture.svg");
             // 
+            // btnCabinetLabel
+            // 
+            this.btnCabinetLabel.Caption = "資料櫃標示";
+            this.btnCabinetLabel.Id = 9;
+            this.btnCabinetLabel.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnCabinetLabel.ImageOptions.SvgImage")));
+            this.btnCabinetLabel.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnCabinetLabel.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnCabinetLabel.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnCabinetLabel.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.btnCabinetLabel.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
+            this.btnCabinetLabel.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnCabinetLabel.ItemAppearance.Normal.Options.UseForeColor = true;
+            this.btnCabinetLabel.Name = "btnCabinetLabel";
+            this.btnCabinetLabel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnCabinetLabel_ItemClick);
+            // 
             // uc305_PrintLabelMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -259,5 +277,6 @@
         private DevExpress.XtraBars.BarButtonItem btnDeviceManagement;
         private DevExpress.XtraBars.BarButtonItem btn5SAreaDivision;
         private DevExpress.Utils.SvgImageCollection svgImageCollection1;
+        private DevExpress.XtraBars.BarButtonItem btnCabinetLabel;
     }
 }

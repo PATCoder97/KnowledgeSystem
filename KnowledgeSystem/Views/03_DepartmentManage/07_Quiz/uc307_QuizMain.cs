@@ -169,7 +169,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
 
         private void btnPractise_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-
+            f307_DoExam fDoExam = new f307_DoExam();
+            fDoExam.ShowDialog();
         }
     }
 }

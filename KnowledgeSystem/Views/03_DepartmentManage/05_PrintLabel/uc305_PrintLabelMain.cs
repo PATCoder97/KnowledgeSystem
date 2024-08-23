@@ -399,5 +399,49 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._05_PrintLabel
             report.PrintingSystem.ShowMarginsWarning = false;
             docViewerLabel.DocumentSource = report;
         }
+
+        private void btnCabinetLabel_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var dataDefault = new
+            {
+                Dept = "{Dept}",
+                Manager = "{Manager}",
+                Agent = "{Agent}",
+                Boss = "{Boss}",
+            };
+
+            var devices = new List<object>();
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Excel Files|*.xlsx";
+            dialog.Title = "Select data";
+            dialog.Multiselect = false;
+
+            if (dialog.ShowDialog() != DialogResult.OK)
+            {
+                devices.Add(dataDefault);
+            }
+            else
+            {
+                DataTable data = ExcelToDataSet(dialog.FileName).Tables[0];
+
+                foreach (DataRow row in data.Rows)
+                {
+                    var dataLine = new
+                    {
+                        Dept = row["Dept"] != DBNull.Value ? row["Dept"].ToString() : null,
+                        Manager = row["Manager"] != DBNull.Value ? row["Manager"].ToString() : null,
+                        Agent = row["Agent"] != DBNull.Value ? row["Agent"].ToString() : null,
+                        Boss = row["Boss"] != DBNull.Value ? row["Boss"].ToString() : null,
+                    };
+                    devices.Add(dataLine);
+                }
+            }
+
+            var report = new rpCabinetLabel();
+            report.DataSource = devices;
+            report.CreateDocument();
+            report.PrintingSystem.ShowMarginsWarning = false;
+            docViewerLabel.DocumentSource = report;
+        }
     }
 }
