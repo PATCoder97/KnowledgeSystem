@@ -145,8 +145,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             LayoutViewHitInfo hi = view.CalcHitInfo(args.Location);
             if (hi.InCard)
             {
-                object id = view.GetRowCellValue(hi.RowHandle, "exam.Id");
-                MessageBox.Show(id.ToString());
+                string idJob = view.GetRowCellValue(hi.RowHandle, "exam.IdJob").ToString();
+
+                f307_DoExam fDoExam = new f307_DoExam();
+                fDoExam.idJob = idJob;
+                fDoExam.ShowDialog();
             }
         }
 

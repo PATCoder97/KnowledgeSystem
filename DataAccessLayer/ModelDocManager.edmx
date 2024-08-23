@@ -579,7 +579,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="QuesId" Type="int" />
+          <Property Name="QuesId" Type="int" Nullable="false" />
           <Property Name="DisplayText" Type="nvarchar(max)" Nullable="false" />
           <Property Name="ImageName" Type="nvarchar" MaxLength="255" />
           <Property Name="TrueAns" Type="bit" Nullable="false" />
@@ -795,7 +795,6 @@
           <EntitySet Name="dm_FixedProgress" EntityType="DBDocumentManagementSystemModel.dm_FixedProgress" />
           <EntitySet Name="dt306_Type" EntityType="DBDocumentManagementSystemModel.dt306_Type" />
           <EntitySet Name="dt306_SignRole" EntityType="DBDocumentManagementSystemModel.dt306_SignRole" />
-          <EntitySet Name="dt307_Answers" EntityType="DBDocumentManagementSystemModel.dt307_Answers" />
           <EntitySet Name="dt307_JobQuesManage" EntityType="DBDocumentManagementSystemModel.dt307_JobQuesManage" />
           <EntitySet Name="dt307_Questions" EntityType="DBDocumentManagementSystemModel.dt307_Questions" />
           <EntitySet Name="dt306_Base" EntityType="DBDocumentManagementSystemModel.dt306_Base" />
@@ -807,6 +806,7 @@
           <EntitySet Name="dm_User" EntityType="DBDocumentManagementSystemModel.dm_User" />
           <EntitySet Name="dt307_ExamMgmt" EntityType="DBDocumentManagementSystemModel.dt307_ExamMgmt" />
           <EntitySet Name="dt307_ExamUser" EntityType="DBDocumentManagementSystemModel.dt307_ExamUser" />
+          <EntitySet Name="dt307_Answers" EntityType="DBDocumentManagementSystemModel.dt307_Answers" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -1315,16 +1315,6 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="dt307_Answers">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="QuesId" Type="Int32" />
-          <Property Name="DisplayText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ImageName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="TrueAns" Type="Boolean" Nullable="false" />
-        </EntityType>
         <EntityType Name="dt307_JobQuesManage">
           <Key>
             <PropertyRef Name="JobId" />
@@ -1478,6 +1468,16 @@
           <Property Name="Score" Type="Int32" />
           <Property Name="IsPass" Type="Boolean" />
           <Property Name="ExamData" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dt307_Answers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuesId" Type="Int32" Nullable="false" />
+          <Property Name="DisplayText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TrueAns" Type="Boolean" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2042,17 +2042,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dt307_Answers">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt307_Answers">
-              <MappingFragment StoreEntitySet="dt307_Answers">
-                <ScalarProperty Name="TrueAns" ColumnName="TrueAns" />
-                <ScalarProperty Name="ImageName" ColumnName="ImageName" />
-                <ScalarProperty Name="DisplayText" ColumnName="DisplayText" />
-                <ScalarProperty Name="QuesId" ColumnName="QuesId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="dt307_JobQuesManage">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt307_JobQuesManage">
               <MappingFragment StoreEntitySet="dt307_JobQuesManage">
@@ -2214,6 +2203,17 @@
                 <ScalarProperty Name="IdJob" ColumnName="IdJob" />
                 <ScalarProperty Name="IdUser" ColumnName="IdUser" />
                 <ScalarProperty Name="ExamCode" ColumnName="ExamCode" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt307_Answers">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt307_Answers">
+              <MappingFragment StoreEntitySet="dt307_Answers">
+                <ScalarProperty Name="TrueAns" ColumnName="TrueAns" />
+                <ScalarProperty Name="ImageName" ColumnName="ImageName" />
+                <ScalarProperty Name="DisplayText" ColumnName="DisplayText" />
+                <ScalarProperty Name="QuesId" ColumnName="QuesId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

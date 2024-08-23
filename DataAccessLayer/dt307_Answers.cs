@@ -15,7 +15,7 @@ namespace DataAccessLayer
     public partial class dt307_Answers
     {
         public int Id { get; set; }
-        public Nullable<int> QuesId { get; set; }
+        public int QuesId { get; set; }
         public string DisplayText { get; set; }
         public string ImageName { get; set; }
         public bool TrueAns { get; set; }
