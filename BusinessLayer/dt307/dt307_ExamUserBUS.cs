@@ -62,7 +62,7 @@ namespace BusinessLayer
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dt307_ExamUser.Where(r => r.IdUser == userId).ToList();
+                    return _context.dt307_ExamUser.Where(r => r.IdUser == userId && string.IsNullOrEmpty(r.SubmitTime.ToString())).ToList();
                 }
             }
             catch (Exception ex)

@@ -241,7 +241,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             // Cập nhật Label với thời gian còn lại
             lbTime.Text = $"剩餘時間 {timeRemaining:mm\\:ss}";
 
-            if (timeRemaining <= TimeSpan.FromMinutes(1))
+            if (timeRemaining <= TimeSpan.FromMinutes(5))
             {
                 lbTime.ForeColor = System.Drawing.Color.Red;
             }
