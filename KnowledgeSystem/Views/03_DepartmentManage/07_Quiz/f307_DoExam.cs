@@ -41,6 +41,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             public string Answer { get; set; }
         }
 
+        private Timer countdownTimer;
+        private TimeSpan timeRemaining;
+
         public string idJob = "";
         int testDuration = 0, passingScore = 0, quesCount = 0, indexQues = 0;
         string templateContentSigner;
@@ -210,11 +213,46 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
                 return;
             }
 
+            string msg= $"<font='Microsoft JhengHei UI' size=14>點擊「<color=red>確定</color>」開始！</font>";
+            MsgTP.MsgShowInfomation(msg);
+
+            countdownTimer = new Timer();
+            countdownTimer.Interval = 1000; // 1 giây
+            countdownTimer.Tick += CountdownTimer_Tick;
+
+            timeRemaining = TimeSpan.FromMinutes(testDuration);
+            lbTime.Text = $"剩餘時間 {timeRemaining:mm\\:ss}";
+            countdownTimer.Start();
+
+            txbUserAns.Focus();
+
             sourceResult.DataSource = resultsExam;
             gcData.DataSource = sourceResult;
 
             templateContentSigner = File.ReadAllText(Path.Combine(TPConfigs.HtmlPath, "dt307_ConfirmQuestion.html"));
             InitializeWebView2(indexQues);
+        }
+
+        private void CountdownTimer_Tick(object sender, EventArgs e)
+        {
+            // Giảm thời gian còn lại đi 1 giây
+            timeRemaining = timeRemaining.Subtract(TimeSpan.FromSeconds(1));
+
+            // Cập nhật Label với thời gian còn lại
+            lbTime.Text = $"剩餘時間 {timeRemaining:mm\\:ss}";
+
+            if (timeRemaining <= TimeSpan.FromMinutes(1))
+            {
+                lbTime.ForeColor = System.Drawing.Color.Red;
+            }
+
+            // Nếu hết thời gian thì dừng Timer
+            if (timeRemaining <= TimeSpan.Zero)
+            {
+                countdownTimer.Stop();
+                lbTime.Text = "時間到了！";
+                MessageBox.Show("Thời gian đã hết!");
+            }
         }
     }
 }

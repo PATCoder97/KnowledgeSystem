@@ -34,6 +34,8 @@
             this.gColId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.lbTime = new System.Windows.Forms.Label();
+            this.lbQuesNo = new System.Windows.Forms.Label();
             this.txbUserAns = new DevExpress.XtraEditors.TokenEdit();
             this.btnPreviousQues = new DevExpress.XtraEditors.SimpleButton();
             this.btnNextQues = new DevExpress.XtraEditors.SimpleButton();
@@ -49,8 +51,8 @@
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.lbQuesNo = new System.Windows.Forms.Label();
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txbUserAns.Properties)).BeginInit();
@@ -66,6 +68,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
             this.SuspendLayout();
             // 
             // gColId
@@ -93,6 +96,7 @@
             // layoutControl1
             // 
             this.layoutControl1.AllowCustomization = false;
+            this.layoutControl1.Controls.Add(this.lbTime);
             this.layoutControl1.Controls.Add(this.lbQuesNo);
             this.layoutControl1.Controls.Add(this.txbUserAns);
             this.layoutControl1.Controls.Add(this.btnPreviousQues);
@@ -108,6 +112,28 @@
             this.layoutControl1.Size = new System.Drawing.Size(1201, 666);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // lbTime
+            // 
+            this.lbTime.Font = new System.Drawing.Font("Microsoft JhengHei UI", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbTime.ForeColor = System.Drawing.Color.White;
+            this.lbTime.Location = new System.Drawing.Point(880, 12);
+            this.lbTime.Name = "lbTime";
+            this.lbTime.Size = new System.Drawing.Size(309, 49);
+            this.lbTime.TabIndex = 12;
+            this.lbTime.Text = "剩餘時間 00:00";
+            this.lbTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbQuesNo
+            // 
+            this.lbQuesNo.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbQuesNo.ForeColor = System.Drawing.Color.White;
+            this.lbQuesNo.Location = new System.Drawing.Point(320, 618);
+            this.lbQuesNo.Name = "lbQuesNo";
+            this.lbQuesNo.Size = new System.Drawing.Size(133, 36);
+            this.lbQuesNo.TabIndex = 11;
+            this.lbQuesNo.Text = "題目：1/20";
+            this.lbQuesNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txbUserAns
             // 
@@ -173,10 +199,10 @@
             this.gcData.EmbeddedNavigator.Buttons.Edit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.EndEdit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.Remove.Visible = false;
-            this.gcData.Location = new System.Drawing.Point(880, 12);
+            this.gcData.Location = new System.Drawing.Point(880, 65);
             this.gcData.MainView = this.gvData;
             this.gcData.Name = "gcData";
-            this.gcData.Size = new System.Drawing.Size(309, 642);
+            this.gcData.Size = new System.Drawing.Size(309, 589);
             this.gcData.TabIndex = 6;
             this.gcData.UseEmbeddedNavigator = true;
             this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -247,7 +273,8 @@
             this.layoutControlItem5,
             this.emptySpaceItem1,
             this.layoutControlItem6,
-            this.layoutControlItem7});
+            this.layoutControlItem7,
+            this.layoutControlItem8});
             this.Root.Name = "Root";
             this.Root.Size = new System.Drawing.Size(1201, 666);
             this.Root.TextVisible = false;
@@ -266,11 +293,11 @@
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.gcData;
-            this.layoutControlItem2.Location = new System.Drawing.Point(868, 0);
+            this.layoutControlItem2.Location = new System.Drawing.Point(868, 53);
             this.layoutControlItem2.MaxSize = new System.Drawing.Size(313, 0);
             this.layoutControlItem2.MinSize = new System.Drawing.Size(313, 24);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(313, 646);
+            this.layoutControlItem2.Size = new System.Drawing.Size(313, 593);
             this.layoutControlItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
@@ -331,17 +358,6 @@
             this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem6.TextVisible = false;
             // 
-            // lbQuesNo
-            // 
-            this.lbQuesNo.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbQuesNo.ForeColor = System.Drawing.Color.White;
-            this.lbQuesNo.Location = new System.Drawing.Point(320, 618);
-            this.lbQuesNo.Name = "lbQuesNo";
-            this.lbQuesNo.Size = new System.Drawing.Size(133, 36);
-            this.lbQuesNo.TabIndex = 11;
-            this.lbQuesNo.Text = "題目：1/20";
-            this.lbQuesNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // layoutControlItem7
             // 
             this.layoutControlItem7.Control = this.lbQuesNo;
@@ -353,6 +369,18 @@
             this.layoutControlItem7.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem7.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem7.TextVisible = false;
+            // 
+            // layoutControlItem8
+            // 
+            this.layoutControlItem8.Control = this.lbTime;
+            this.layoutControlItem8.Location = new System.Drawing.Point(868, 0);
+            this.layoutControlItem8.MaxSize = new System.Drawing.Size(0, 53);
+            this.layoutControlItem8.MinSize = new System.Drawing.Size(24, 53);
+            this.layoutControlItem8.Name = "layoutControlItem8";
+            this.layoutControlItem8.Size = new System.Drawing.Size(313, 53);
+            this.layoutControlItem8.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem8.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem8.TextVisible = false;
             // 
             // f307_DoExam
             // 
@@ -383,6 +411,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -409,5 +438,7 @@
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
         private System.Windows.Forms.Label lbQuesNo;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
+        private System.Windows.Forms.Label lbTime;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
     }
 }
