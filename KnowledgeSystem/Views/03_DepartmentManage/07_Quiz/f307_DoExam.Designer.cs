@@ -149,8 +149,10 @@
             // 
             this.layoutControlItem1.Control = this.webViewQues;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem1.MinSize = new System.Drawing.Size(104, 24);
             this.layoutControlItem1.Name = "layoutControlItem1";
             this.layoutControlItem1.Size = new System.Drawing.Size(868, 646);
+            this.layoutControlItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
@@ -158,8 +160,11 @@
             // 
             this.layoutControlItem2.Control = this.gcData;
             this.layoutControlItem2.Location = new System.Drawing.Point(868, 0);
+            this.layoutControlItem2.MaxSize = new System.Drawing.Size(313, 0);
+            this.layoutControlItem2.MinSize = new System.Drawing.Size(313, 24);
             this.layoutControlItem2.Name = "layoutControlItem2";
             this.layoutControlItem2.Size = new System.Drawing.Size(313, 646);
+            this.layoutControlItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 

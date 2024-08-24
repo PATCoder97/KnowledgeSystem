@@ -190,6 +190,7 @@
     <Compile Include="Helpers\EncryptionHelper.cs" />
     <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Helpers\GridControlHelper.cs" />
+    <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="Helpers\PCInfoHelper.cs" />
     <Compile Include="Helpers\RefreshHelper.cs" />
     <Compile Include="Helpers\RegistryHelper.cs" />
@@ -1136,6 +1137,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\icons8_finish_flag.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\icons8_learn.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\icons8_print.svg">

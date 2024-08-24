@@ -366,6 +366,7 @@
             // 
             this.btnPractise.Caption = "練習考試";
             this.btnPractise.Id = 11;
+            this.btnPractise.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnPractise.Name = "btnPractise";
             this.btnPractise.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnPractise_ItemClick);
             // 

@@ -75,68 +75,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             return numbers;
         }
 
-        public static string ConvertImageToBase64DataUri(string imagePath)
-        {
-            // Load the image
-            using (Image image = Image.FromFile(imagePath))
-            {
-                using (MemoryStream memoryStream = new MemoryStream())
-                {
-                    // Determine the image format and MIME type
-                    ImageFormat imageFormat = GetImageFormat(image, out string mimeType);
-
-                    // Save the image to the memory stream
-                    image.Save(memoryStream, imageFormat);
-
-                    // Convert byte array to Base64 string
-                    string base64String = Convert.ToBase64String(memoryStream.ToArray());
-
-                    // Construct the full data URI
-                    string dataUri = $"data:{mimeType};base64,{base64String}";
-
-                    return dataUri;
-                }
-            }
-        }
-
-        private static ImageFormat GetImageFormat(Image image, out string mimeType)
-        {
-            if (ImageFormat.Jpeg.Equals(image.RawFormat))
-            {
-                mimeType = "image/jpeg";
-                return ImageFormat.Jpeg;
-            }
-            if (ImageFormat.Png.Equals(image.RawFormat))
-            {
-                mimeType = "image/png";
-                return ImageFormat.Png;
-            }
-            if (ImageFormat.Gif.Equals(image.RawFormat))
-            {
-                mimeType = "image/gif";
-                return ImageFormat.Gif;
-            }
-            if (ImageFormat.Bmp.Equals(image.RawFormat))
-            {
-                mimeType = "image/bmp";
-                return ImageFormat.Bmp;
-            }
-            if (ImageFormat.Tiff.Equals(image.RawFormat))
-            {
-                mimeType = "image/tiff";
-                return ImageFormat.Tiff;
-            }
-            if (ImageFormat.Icon.Equals(image.RawFormat))
-            {
-                mimeType = "image/x-icon";
-                return ImageFormat.Icon;
-            }
-
-            // Default to PNG if format is unknown
-            mimeType = "image/png";
-            return ImageFormat.Png;
-        }
-
         private void gcData_DoubleClick(object sender, EventArgs e)
         {
             GridView view = gvData;
@@ -156,7 +94,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
                     id = counter++, // Đánh số thứ tự từ 1
                     disp = r.DisplayText,
                     img = string.IsNullOrEmpty(r.ImageName) ? "" :
-                    ConvertImageToBase64DataUri(Path.Combine(TPConfigs.Folder307, r.ImageName)),
+                    ImageHelper.ConvertImageToBase64DataUri(Path.Combine(TPConfigs.Folder307, r.ImageName)),
                     istrue = false
                 }).ToList();
 
@@ -164,7 +102,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             {
                 ques = ques[index].DisplayText,
                 quesimg = string.IsNullOrEmpty(ques[index].ImageName) ? "" :
-                ConvertImageToBase64DataUri(Path.Combine(TPConfigs.Folder307, ques[index].ImageName)),
+                ImageHelper.ConvertImageToBase64DataUri(Path.Combine(TPConfigs.Folder307, ques[index].ImageName)),
                 answers = anses
             };
 
@@ -189,9 +127,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
         {
             var setting = dt307_JobQuesManageBUS.Instance.GetItemByIdJob(idJob);
 
-            testDuration = setting.TestDuration ?? 0;
-            passingScore = setting.PassingScore ?? 0;
-            quesCount = setting.QuesCount ?? 0;
+            testDuration = setting?.TestDuration ?? 0;
+            passingScore = setting?.PassingScore ?? 0;
+            quesCount = setting?.QuesCount ?? 0;
 
             var dataQues = dt307_QuestionsBUS.Instance.GetListByJob(idJob);
 
@@ -201,9 +139,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             answers = dt307_AnswersBUS.Instance.GetListByListQues(ques.Select(r => r.Id).ToList());
 
             resultsExam = Enumerable.Range(1, 20).Select(i => new ResultExam { Index = i }).ToList();
-
-
-
         }
 
         private void f307_DoExam_Load(object sender, EventArgs e)

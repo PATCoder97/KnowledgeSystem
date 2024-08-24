@@ -24,6 +24,10 @@ using DevExpress.XtraGrid.Views.Card;
 using System.Drawing.Drawing2D;
 using OfficeOpenXml.FormulaParsing;
 using System.Diagnostics;
+using DocumentFormat.OpenXml.Spreadsheet;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Columns;
+using DocumentFormat.OpenXml.Bibliography;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
 {
@@ -32,85 +36,29 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
         public uc307_QuizMain()
         {
             InitializeComponent();
-            InitializeMenuItems();
             InitializeIcon();
 
-            Font fontUI14 = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             DevExpress.Utils.AppearanceObject.DefaultMenuFont = fontUI14;
         }
 
-        RefreshHelper helper;
+        Font fontUI14 = new Font("Microsoft JhengHei UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+        Font fontUI12 = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+
         BindingSource sourceBases = new BindingSource();
 
-        DXMenuItem itemViewInfo;
-        DXMenuItem itemViewFile;
-
-        List<dm_User> lsUser = new List<dm_User>();
-        List<dt202_Type> types;
-
-        List<dt202_Attach> attachments;
-        List<dm_Attachment> attachmentsInfo;
-
-        private bool IsCanEdit = false;
 
         private void InitializeIcon()
         {
             btnAdd.ImageOptions.SvgImage = TPSvgimages.Add;
             btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
             btnExportExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
-        }
-
-        private void InitializeMenuItems()
-        {
-            itemViewInfo = new DXMenuItem("編輯", ItemViewInfo_Click, TPSvgimages.Info, DXMenuItemPriority.Normal);
-            itemViewFile = new DXMenuItem("讀取", ItemViewFile_Click, TPSvgimages.View, DXMenuItemPriority.Normal);
-
-            itemViewInfo.ImageOptions.SvgImageSize = new Size(24, 24);
-            itemViewInfo.AppearanceHovered.ForeColor = Color.Blue;
-
-            itemViewFile.ImageOptions.SvgImageSize = new Size(24, 24);
-            itemViewFile.AppearanceHovered.ForeColor = Color.Blue;
-        }
-
-        private void ItemViewFile_Click(object sender, EventArgs e)
-        {
-            //int idFile = Convert.ToInt32(gvData.GetRowCellValue(gvData.FocusedRowHandle, gColIdFile));
-
-            //var fileInfo = attachmentsInfo.FirstOrDefault(r => r.Id == idFile);
-
-            //if (fileInfo == null) return;
-
-            //string source = Path.Combine(TPConfigs.Folder202, fileInfo.EncryptionName);
-            //string dest = Path.Combine(TPConfigs.TempFolderData, $"{DateTime.Now:yyMMddhhmmss} {fileInfo.ActualName}");
-            //if (!Directory.Exists(TPConfigs.TempFolderData))
-            //    Directory.CreateDirectory(TPConfigs.TempFolderData);
-
-            //File.Copy(source, dest, true);
-
-            //f00_VIewFile viewFile = new f00_VIewFile(dest);
-            //viewFile.ShowDialog();
-        }
-
-        private void ItemViewInfo_Click(object sender, EventArgs e)
-        {
-            //string idBase = gvData.GetRowCellValue(gvData.FocusedRowHandle, gColId).ToString();
-
-            //f202_DocInfo fInfo = new f202_DocInfo();
-            //fInfo.eventInfo = EventFormInfo.View;
-            //fInfo.formName = "文件";
-            //fInfo.idBase202 = idBase;
-            //fInfo.ShowDialog();
-
-            //LoadData();
+            btnPractise.ImageOptions.SvgImage = TPSvgimages.Learn;
         }
 
         private void LoadData()
         {
             using (var handle = SplashScreenManager.ShowOverlayForm(gcData))
             {
-                // Check quyền hạn có thể sửa văn kiện
-                IsCanEdit = AppPermission.Instance.CheckAppPermission(AppPermission.EditDoc202);
-
                 var myExams = dt307_ExamUserBUS.Instance.GetListNeedDoByUserId(TPConfigs.LoginUser.Id);
                 var bases = dt307_ExamMgmtBUS.Instance.GetListProcessing();
                 var users = dm_UserBUS.Instance.GetList();
@@ -172,7 +120,52 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
 
         private void btnPractise_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            // Khởi tạo SearchLookUpEdit và GridView
+            SearchLookUpEdit editor = new SearchLookUpEdit();
+            GridView editView = new GridView();
+
+            // Cấu hình các cột của GridView
+            GridColumn gcol1 = new GridColumn() { Caption = "職務代號", FieldName = "Id", Visible = true, VisibleIndex = 0 };
+            GridColumn gcol2 = new GridColumn() { Caption = "職務名稱", FieldName = "DisplayName", Visible = true, VisibleIndex = 1 };
+            editView.Columns.AddRange(new GridColumn[] { gcol1, gcol2 });
+
+            // Thiết lập giao diện cho GridView
+            editView.Appearance.HeaderPanel.Font = fontUI14;
+            editView.Appearance.HeaderPanel.ForeColor = Color.Black;
+            editView.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            editView.Appearance.Row.Font = fontUI12;
+            editView.Appearance.Row.ForeColor = Color.Black;
+
+            // Lấy danh sách dữ liệu và thiết lập DataSource
+            var lsJobTitles = dm_JobTitleBUS.Instance.GetList().Where(r => r.Id.EndsWith("J"));
+            editor.Properties.DataSource = lsJobTitles;
+            editor.Properties.DisplayMember = "DisplayName";
+            editor.Properties.ValueMember = "Id";
+
+            // Gán GridView cho PopupView của SearchLookUpEdit
+            editor.Properties.PopupView = editView;
+
+            // Thiết lập giao diện cho SearchLookUpEdit
+            editor.Properties.Appearance.Font = fontUI14;
+            editor.Properties.Appearance.ForeColor = Color.Black;
+            editor.Properties.NullText = "";
+
+            // Hiển thị hộp thoại với SearchLookUpEdit
+            XtraInputBoxArgs args = new XtraInputBoxArgs();
+            args.Editor = editor;
+            args.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
+            args.Caption = "請選職務";
+            args.Prompt = $"<font='Microsoft JhengHei UI' size=14>請選擇要練習的職務</font>";
+            args.DefaultButtonIndex = 0;
+
+            var result = XtraInputBox.Show(args);
+            if (result == null) return;
+
+            string idJobSelect = result?.ToString() ?? "";
+
+
             f307_DoExam fDoExam = new f307_DoExam();
+            fDoExam.idJob = idJobSelect;
             fDoExam.ShowDialog();
         }
     }
