@@ -50,10 +50,11 @@
             this.layoutViewCard1 = new DevExpress.XtraGrid.Views.Layout.LayoutViewCard();
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
-            this.btnAdd = new DevExpress.XtraBars.BarButtonItem();
             this.btnReload = new DevExpress.XtraBars.BarButtonItem();
             this.btnExportExcel = new DevExpress.XtraBars.BarButtonItem();
-            this.btnPractise = new DevExpress.XtraBars.BarButtonItem();
+            this.grPractise = new DevExpress.XtraBars.BarSubItem();
+            this.btnPractiseMyJob = new DevExpress.XtraBars.BarButtonItem();
+            this.btnPractiseOtherJob = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -287,12 +288,13 @@
             this.barManagerTP.DockControls.Add(this.barDockControlRight);
             this.barManagerTP.Form = this;
             this.barManagerTP.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
-            this.btnAdd,
             this.btnReload,
             this.btnExportExcel,
-            this.btnPractise});
+            this.btnPractiseMyJob,
+            this.grPractise,
+            this.btnPractiseOtherJob});
             this.barManagerTP.MainMenu = this.bar2;
-            this.barManagerTP.MaxItemId = 12;
+            this.barManagerTP.MaxItemId = 14;
             // 
             // bar2
             // 
@@ -316,37 +318,27 @@
             this.bar2.DockRow = 0;
             this.bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnAdd, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnReload, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnExportExcel, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnPractise, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.grPractise, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawDragBorder = false;
             this.bar2.OptionsBar.MultiLine = true;
             this.bar2.OptionsBar.UseWholeRow = true;
             this.bar2.Text = "Main menu";
             // 
-            // btnAdd
-            // 
-            this.btnAdd.Caption = "新增";
-            this.btnAdd.Id = 0;
-            this.btnAdd.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnAdd.ImageOptions.SvgImage")));
-            this.btnAdd.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnAdd.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
-            this.btnAdd.ItemAppearance.Hovered.Options.UseForeColor = true;
-            this.btnAdd.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.ItemAppearance.Normal.Options.UseFont = true;
-            this.btnAdd.Name = "btnAdd";
-            // 
             // btnReload
             // 
             this.btnReload.Caption = "重新整理";
             this.btnReload.Id = 1;
+            this.btnReload.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnReload.ImageOptions.SvgImage")));
             this.btnReload.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnReload.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
             this.btnReload.ItemAppearance.Hovered.Options.UseForeColor = true;
             this.btnReload.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReload.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
             this.btnReload.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnReload.ItemAppearance.Normal.Options.UseForeColor = true;
             this.btnReload.Name = "btnReload";
             this.btnReload.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnReload_ItemClick);
             // 
@@ -358,17 +350,55 @@
             this.btnExportExcel.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
             this.btnExportExcel.ItemAppearance.Hovered.Options.UseForeColor = true;
             this.btnExportExcel.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExportExcel.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
             this.btnExportExcel.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnExportExcel.ItemAppearance.Normal.Options.UseForeColor = true;
             this.btnExportExcel.Name = "btnExportExcel";
             this.btnExportExcel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExportExcel_ItemClick);
             // 
-            // btnPractise
+            // grPractise
             // 
-            this.btnPractise.Caption = "練習考試";
-            this.btnPractise.Id = 11;
-            this.btnPractise.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnPractise.Name = "btnPractise";
-            this.btnPractise.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnPractise_ItemClick);
+            this.grPractise.Caption = "練習考試";
+            this.grPractise.Id = 12;
+            this.grPractise.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.grPractise.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.grPractise.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.grPractise.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grPractise.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
+            this.grPractise.ItemAppearance.Normal.Options.UseFont = true;
+            this.grPractise.ItemAppearance.Normal.Options.UseForeColor = true;
+            this.grPractise.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnPractiseMyJob),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnPractiseOtherJob)});
+            this.grPractise.Name = "grPractise";
+            // 
+            // btnPractiseMyJob
+            // 
+            this.btnPractiseMyJob.Caption = "當前職務";
+            this.btnPractiseMyJob.Id = 11;
+            this.btnPractiseMyJob.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnPractiseMyJob.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnPractiseMyJob.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnPractiseMyJob.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPractiseMyJob.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
+            this.btnPractiseMyJob.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnPractiseMyJob.ItemAppearance.Normal.Options.UseForeColor = true;
+            this.btnPractiseMyJob.Name = "btnPractiseMyJob";
+            this.btnPractiseMyJob.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnPractiseMyJob_ItemClick);
+            // 
+            // btnPractiseOtherJob
+            // 
+            this.btnPractiseOtherJob.Caption = "其他職務";
+            this.btnPractiseOtherJob.Id = 13;
+            this.btnPractiseOtherJob.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnPractiseOtherJob.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnPractiseOtherJob.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnPractiseOtherJob.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPractiseOtherJob.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
+            this.btnPractiseOtherJob.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnPractiseOtherJob.ItemAppearance.Normal.Options.UseForeColor = true;
+            this.btnPractiseOtherJob.Name = "btnPractiseOtherJob";
+            this.btnPractiseOtherJob.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnPractiseOtherJob_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -471,7 +501,6 @@
 
         private DevExpress.XtraBars.BarManager barManagerTP;
         private DevExpress.XtraBars.Bar bar2;
-        private DevExpress.XtraBars.BarButtonItem btnAdd;
         private DevExpress.XtraBars.BarButtonItem btnReload;
         private DevExpress.XtraBars.BarButtonItem btnExportExcel;
         private DevExpress.XtraBars.BarDockControl barDockControlTop;
@@ -482,7 +511,7 @@
         private DevExpress.XtraGrid.GridControl gcData;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
-        private DevExpress.XtraBars.BarButtonItem btnPractise;
+        private DevExpress.XtraBars.BarButtonItem btnPractiseMyJob;
         private DevExpress.XtraGrid.Views.Layout.LayoutView lvData;
         private DevExpress.XtraGrid.Columns.LayoutViewColumn gColId;
         private DevExpress.XtraGrid.Columns.LayoutViewColumn gridColumn3;
@@ -500,5 +529,7 @@
         private DevExpress.XtraGrid.Views.Layout.LayoutViewCard layoutViewCard1;
         private DevExpress.XtraGrid.Columns.LayoutViewColumn gColCode;
         private DevExpress.XtraGrid.Views.Layout.LayoutViewField layoutViewField_layoutViewColumn1;
+        private DevExpress.XtraBars.BarSubItem grPractise;
+        private DevExpress.XtraBars.BarButtonItem btnPractiseOtherJob;
     }
 }

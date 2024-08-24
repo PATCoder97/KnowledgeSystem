@@ -49,10 +49,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
 
         private void InitializeIcon()
         {
-            btnAdd.ImageOptions.SvgImage = TPSvgimages.Add;
             btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
             btnExportExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
-            btnPractise.ImageOptions.SvgImage = TPSvgimages.Learn;
+            grPractise.ImageOptions.SvgImage = TPSvgimages.Learn;
+            btnPractiseMyJob.ImageOptions.SvgImage = TPSvgimages.Num1;
+            btnPractiseOtherJob.ImageOptions.SvgImage = TPSvgimages.Num2;
         }
 
         private void LoadData()
@@ -118,7 +119,14 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             Process.Start(filePath);
         }
 
-        private void btnPractise_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private void btnPractiseMyJob_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            f307_DoExam fDoExam = new f307_DoExam();
+            fDoExam.idJob = TPConfigs.LoginUser.ActualJobCode;
+            fDoExam.ShowDialog();
+        }
+
+        private void btnPractiseOtherJob_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             // Khởi tạo SearchLookUpEdit và GridView
             SearchLookUpEdit editor = new SearchLookUpEdit();
@@ -162,7 +170,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             if (result == null) return;
 
             string idJobSelect = result?.ToString() ?? "";
-
 
             f307_DoExam fDoExam = new f307_DoExam();
             fDoExam.idJob = idJobSelect;

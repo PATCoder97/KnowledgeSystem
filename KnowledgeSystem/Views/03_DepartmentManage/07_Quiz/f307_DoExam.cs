@@ -1,5 +1,7 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
+using DevExpress.DataAccess.Native.Sql.SqlParser;
+using DevExpress.XtraCharts;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using DocumentFormat.OpenXml.Spreadsheet;
@@ -18,6 +20,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static DevExpress.XtraEditors.Mask.MaskSettings;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
 {
@@ -27,6 +30,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
         {
             InitializeComponent();
             //TopMost = true;
+
+            this.KeyDown += F307_DoExam_KeyDown;
+            this.KeyPreview = true;  // Đảm bảo Form nhận được sự kiện KeyDown
         }
 
         private class ResultExam
@@ -49,11 +55,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
         public List<int> Shuffle(int maxIndex)
         {
             // Tạo danh sách số từ 1 đến 100
-            List<int> numbers = new List<int>();
-            for (int i = 0; i < maxIndex; i++)
-            {
-                numbers.Add(i);
-            }
+            List<int> numbers = Enumerable.Range(0, maxIndex - 1).ToList();
 
             // Tạo giá trị salt từ Guid
             string salt = Guid.NewGuid().ToString();
@@ -75,6 +77,31 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             return numbers;
         }
 
+        private void NextQues()
+        {
+            resultsExam[indexQues].Answer = string.Join(",", txbUserAns.GetTokenList().Select(r => r.Description as string).ToList());
+            gcData.RefreshDataSource();
+
+            if (indexQues >= ques.Count - 1) return;
+
+            indexQues++;
+            InitializeWebView2(indexQues);
+
+            txbUserAns.Focus();
+        }
+
+        private void PreviousQues()
+        {
+            resultsExam[indexQues].Answer = string.Join(",", txbUserAns.GetTokenList().Select(r => r.Description as string).ToList());
+            gcData.RefreshDataSource();
+
+            if (indexQues <= 0) return;
+
+            indexQues--;
+            InitializeWebView2(indexQues);
+            txbUserAns.Focus();
+        }
+
         private void gcData_DoubleClick(object sender, EventArgs e)
         {
             GridView view = gvData;
@@ -83,10 +110,31 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             InitializeWebView2(indexQues);
         }
 
+        private void btnPreviousQues_Click(object sender, EventArgs e)
+        {
+            PreviousQues();
+        }
+
+        private void btnNextQues_Click(object sender, EventArgs e)
+        {
+            NextQues();
+        }
+
+        private void F307_DoExam_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Right)
+            {
+                NextQues();
+            }
+            else if (e.KeyCode == Keys.Left)
+            {
+                PreviousQues();
+            }
+        }
+
         private async void InitializeWebView2(int index)
         {
-            //lbPageNumber.Caption = $"{index + 1}/{ques.Count}";
-
+            lbQuesNo.Text = $"題目：{index + 1}/{ques.Count}";
             var counter = 1;
             var anses = answers.Where(r => r.QuesId == ques[index].Id)
                 .Select(r => new
@@ -100,11 +148,16 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
 
             var templateData = new
             {
+                quesno = index + 1,
                 ques = ques[index].DisplayText,
                 quesimg = string.IsNullOrEmpty(ques[index].ImageName) ? "" :
                 ImageHelper.ConvertImageToBase64DataUri(Path.Combine(TPConfigs.Folder307, ques[index].ImageName)),
                 answers = anses
             };
+
+            // Thêm danh sách câu trả lời, và hiện các câu trả lời đã lưu
+            txbUserAns.Properties.DataSource = Enumerable.Range(1, anses.Count).Select(num => num.ToString()).ToList();
+            txbUserAns.EditValue = resultsExam[indexQues].Answer;
 
             var templateSigner = Template.Parse(templateContentSigner);
 
@@ -123,7 +176,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             };
         }
 
-        private void LoadData()
+        private string LoadData()
         {
             var setting = dt307_JobQuesManageBUS.Instance.GetItemByIdJob(idJob);
 
@@ -133,17 +186,29 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
 
             var dataQues = dt307_QuestionsBUS.Instance.GetListByJob(idJob);
 
+            if (dataQues.Count <= quesCount)
+                return "題目數量不夠！";
+
             var numbers = Shuffle(dataQues.Count).Take(quesCount).ToList();
 
             ques = numbers.Select(index => dataQues[index]).ToList();
             answers = dt307_AnswersBUS.Instance.GetListByListQues(ques.Select(r => r.Id).ToList());
 
             resultsExam = Enumerable.Range(1, 20).Select(i => new ResultExam { Index = i }).ToList();
+
+            return "";
         }
 
         private void f307_DoExam_Load(object sender, EventArgs e)
         {
-            LoadData();
+            string result = LoadData();
+
+            if (!string.IsNullOrEmpty(result))
+            {
+                MsgTP.MsgError(result);
+                Close();
+                return;
+            }
 
             sourceResult.DataSource = resultsExam;
             gcData.DataSource = sourceResult;

@@ -104,28 +104,32 @@
 <body oncontextmenu="return false;">
 
     <div class="question">
+        題目：{{quesno}}
+    </div>
+
+    <div class="question">
         {{ques}}
     </div>
-    
+
     {{ if quesimg != "" }}
-        <div style="text-align: center;">
-            <img src="{{quesimg}}" alt="Màu đỏ" height="200px">
-        </div>    
+    <div style="text-align: center;">
+        <img src="{{quesimg}}" alt="Màu đỏ" height="200px">
+    </div>
     {{ end }}
 
     {{- for ans in answers }}
     <div class="answer-container">
         <div class="answer-number">{{ans.id}}</div>
 
-        <div class="answer" 
-            {{ if ans.istrue }} 
-                style="background-color:#66CDAA;">
+        <div class="answer"
+             {{ if ans.istrue }}
+             style="background-color:#66CDAA;">
             {{ else }}
-                style="background-color: #f0f0f0;">
+            style="background-color: #f0f0f0;">
             {{ end }}
 
             {{ if ans.img != "" }}
-                <img src="{{ans.img}}" alt="Màu đỏ" onclick="enlargeImage(this)">
+            <img src="{{ans.img}}" alt="Màu đỏ" onclick="enlargeImage(this)">
             {{ end }}
 
             {{ans.disp}}
