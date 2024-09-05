@@ -37,8 +37,13 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension
                 if (folderDialog.ShowDialog() != DialogResult.OK) return;
 
                 FOLDER_PATH = folderDialog.SelectedPath;
+
+                cbbFunction.Properties.Items.AddRange(funcs);
+                cbbFunction.SelectedIndex = 0;
             }
         }
+
+        List<string> funcs = new List<string>() { "FHS.Watermark" };
 
         string FOLDER_PATH;
         bool ISSTOP = true;
@@ -119,7 +124,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension
             }
         }
 
-
         private void ProcessWaterMark()
         {
             string resultFolder = Path.Combine(Path.GetDirectoryName(files.First()), $"Result-{DateTime.Now:yyMMddHHmmss}");
@@ -136,12 +140,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension
 
                 if (IsHandleCreated)
                 {
-                    progressBar.Invoke(new Action(() =>
-                    {
-                        progressBar.PerformStep();
-                        progressBar.Update();
-                    }));
-
                     progressBar.Invoke(new Action(() => { layoutStatus.Text = $"{index + 1}/{files.Count}: {fileName}"; }));
                 }
 
@@ -155,6 +153,12 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension
 
                 if (IsHandleCreated)
                 {
+                    progressBar.Invoke(new Action(() =>
+                    {
+                        progressBar.PerformStep();
+                        progressBar.Update();
+                    }));
+
                     lsFileComplete.Invoke(new Action(() => { lsFileComplete.Items.Add($"{index}: {fileName}"); }));
                 }
             }
@@ -170,7 +174,14 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension
                 return;
             }
 
-            files = Directory.GetFiles(FOLDER_PATH, "*.pdf", SearchOption.TopDirectoryOnly).ToList();
+            string searchPattern = "*.*";
+            switch (cbbFunction.SelectedIndex)
+            {
+                case 0:
+                    searchPattern = "*.pdf";
+                    break;
+            }
+            files = Directory.GetFiles(FOLDER_PATH, searchPattern, SearchOption.TopDirectoryOnly).ToList();
 
             btnStart.Text = $"執行<color=red>「{files.Count()}」</color>檔案";
         }
@@ -204,7 +215,12 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension
 
             System.Threading.Thread thrd = new System.Threading.Thread(() =>
             {
-                ProcessWaterMark();
+                switch (cbbFunction.SelectedIndex)
+                {
+                    case 0:
+                        ProcessWaterMark();
+                        break;
+                }
             });
             thrd.Name = "Process";
             thrd.Priority = ThreadPriority.Highest;

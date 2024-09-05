@@ -96,8 +96,11 @@
             this.cbbFunction.Name = "cbbFunction";
             this.cbbFunction.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbbFunction.Properties.Appearance.Options.UseFont = true;
+            this.cbbFunction.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.cbbFunction.Properties.AppearanceDropDown.Options.UseFont = true;
             this.cbbFunction.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbbFunction.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cbbFunction.Size = new System.Drawing.Size(256, 32);
             this.cbbFunction.StyleController = this.layoutControl1;
             this.cbbFunction.TabIndex = 5;

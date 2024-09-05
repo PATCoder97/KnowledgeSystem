@@ -147,6 +147,10 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
                     // Tải file Excel từ API
                     string url = $"http://10.198.170.92:7003/api/GenExcel/GetExcelFile?excelYM={year.ToString().Substring(2, 2)}{month.ToString("X")}&isYear={month == 0}";
+
+                    if (!Directory.Exists(TPConfigs.DocumentPath()))
+                        Directory.CreateDirectory(TPConfigs.DocumentPath());
+
                     filePath = Path.Combine(TPConfigs.DocumentPath(), $"KPI - {year}{month}{DateTime.Now.ToString("yyyMMddHHmmss")}.xlsx");
 
                     try

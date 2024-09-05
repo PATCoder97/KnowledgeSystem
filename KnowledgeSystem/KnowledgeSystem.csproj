@@ -793,12 +793,6 @@
     <Compile Include="Views\04_SystemAdministrator\03_Extension\f403_ProcessFilesTool.Designer.cs">
       <DependentUpon>f403_ProcessFilesTool.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\04_SystemAdministrator\03_Extension\uc403_PdfTool.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Views\04_SystemAdministrator\03_Extension\uc403_PdfTool.Designer.cs">
-      <DependentUpon>uc403_PdfTool.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -1106,9 +1100,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\03_Extension\f403_ProcessFilesTool.resx">
       <DependentUpon>f403_ProcessFilesTool.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\04_SystemAdministrator\03_Extension\uc403_PdfTool.resx">
-      <DependentUpon>uc403_PdfTool.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
     <None Include="packages.config" />
