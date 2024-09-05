@@ -77,7 +77,6 @@ namespace DataAccessLayer
         public virtual DbSet<dt306_SignRole> dt306_SignRole { get; set; }
         public virtual DbSet<dt307_JobQuesManage> dt307_JobQuesManage { get; set; }
         public virtual DbSet<dt307_Questions> dt307_Questions { get; set; }
-        public virtual DbSet<dt306_Base> dt306_Base { get; set; }
         public virtual DbSet<dm_Sign> dm_Sign { get; set; }
         public virtual DbSet<dt201_ReqUpdateDocs> dt201_ReqUpdateDocs { get; set; }
         public virtual DbSet<dt201_UpdateUsrReq> dt201_UpdateUsrReq { get; set; }
@@ -87,5 +86,9 @@ namespace DataAccessLayer
         public virtual DbSet<dt307_ExamMgmt> dt307_ExamMgmt { get; set; }
         public virtual DbSet<dt307_ExamUser> dt307_ExamUser { get; set; }
         public virtual DbSet<dt307_Answers> dt307_Answers { get; set; }
+        public virtual DbSet<dt306_Base> dt306_Base { get; set; }
+        public virtual DbSet<dt306_DocType> dt306_DocType { get; set; }
+        public virtual DbSet<dt306_FieldType> dt306_FieldType { get; set; }
+        public virtual DbSet<dt306_FieldTypeDocType> dt306_FieldTypeDocType { get; set; }
     }
 }

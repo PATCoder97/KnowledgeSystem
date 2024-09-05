@@ -298,17 +298,20 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
 
                 users = dm_UserBUS.Instance.GetList();
                 jobs = dm_JobTitleBUS.Instance.GetList();
-                var dmTypes = dt306_TypeBUS.Instance.GetList();
+                var dmFieldTypes = dt306_FieldTypeBUS.Instance.GetList();
+                var dmDocsTypes = dt306_DocTypeBUS.Instance.GetList();
 
                 var basesDisplay = (from data in bases
-                                    join types in dmTypes on data.IdType equals types.Id
+                                    join fieldTypes in dmFieldTypes on data.IdFieldType equals fieldTypes.Id
+                                    join docTypes in dmDocsTypes on data.IdDocType equals docTypes.Id
                                     join upUsr in users on data.UploadUsr equals upUsr.Id
                                     join urs in users on data.NextStepProg equals urs.Id into userGroup
                                     from urs in userGroup.DefaultIfEmpty()
                                     select new
                                     {
                                         data,
-                                        types,
+                                        fieldTypes,
+                                        docTypes,
                                         urs,
                                         Dept = upUsr.IdDepartment,
                                         DisplayName = urs != null ? $"{urs.Id.Substring(urs.Id.Length - 5)} {urs.IdDepartment}/{urs.DisplayName}" : "",

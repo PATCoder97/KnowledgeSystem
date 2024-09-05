@@ -267,5 +267,10 @@ namespace KnowledgeSystem.Views._00_Generals
         {
             ShowFromByFrame(AppPermission.QuizMain, e);
         }
+
+        private void btnExtensions_ItemClick(object sender, TileItemEventArgs e)
+        {
+            ShowFromByFrame(AppPermission.Extensions, e);
+        }
     }
 }

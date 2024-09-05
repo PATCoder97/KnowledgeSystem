@@ -103,6 +103,9 @@
     <Compile Include="dt306\dt306_ProgressBUS.cs" />
     <Compile Include="dt306\dt306_TypeBUS.cs" />
     <Compile Include="dt306\dt306_SignRoleBUS.cs" />
+    <Compile Include="dt306\dt306_DocTypeBUS.cs" />
+    <Compile Include="dt306\dt306_FieldTypeBUS.cs" />
+    <Compile Include="dt306_FieldTypeDocTypeBUS.cs" />
     <Compile Include="dt307\dt307_AnswersBUS.cs" />
     <Compile Include="dt307\dt307_JobQuesManageBUS.cs" />
     <Compile Include="dt307\dt307_QuestionsBUS.cs" />

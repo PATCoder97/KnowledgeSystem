@@ -75,7 +75,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
                 IsOK = false;
             }
 
-            if (string.IsNullOrEmpty(txbType.EditValue?.ToString()))
+            if (string.IsNullOrEmpty(txbDocType.EditValue?.ToString()))
             {
                 msg += "</br> •類別";
                 IsOK = false;
@@ -196,7 +196,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             jobTitles = dm_JobTitleBUS.Instance.GetList();
             roles = dt306_SignRoleBUS.Instance.GetList().Where(r => r.Id != 0).ToList();
 
-            var dmType = dt306_TypeBUS.Instance.GetList();
+            var dmFieldType = dt306_FieldTypeBUS.Instance.GetList();
 
             // Gắn các thông số cho các combobox
             lookupUser.ValueMember = "Id";
@@ -213,9 +213,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             lookupRole.DisplayMember = "DisplayName";
             lookupRole.ValueMember = "Id";
 
-            txbType.Properties.DataSource = dmType;
-            txbType.Properties.DisplayMember = "DisplayName";
-            txbType.Properties.ValueMember = "Id";
+            txbFieldType.Properties.DataSource = dmFieldType;
+            txbFieldType.Properties.DisplayMember = "DisplayName";
+            txbFieldType.Properties.ValueMember = "Id";
 
             sourceProgresses.DataSource = progresses;
             gcProgress.DataSource = sourceProgresses;
@@ -283,14 +283,14 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
                 }
 
                 baseData.DisplayName = txbTitle.Text.Trim();
-                baseData.IdType = (int)txbType.EditValue;
+                baseData.IdFieldType = txbFieldType.EditValue.ToString();
+                baseData.IdDocType = txbDocType.EditValue.ToString();
                 baseData.UploadUsr = TPConfigs.LoginUser.Id;
                 baseData.UploadDate = DateTime.Today;
                 baseData.IsProcess = true;
                 baseData.IsCancel = false;
                 baseData.NextStepProg = progresses.FirstOrDefault().IdUsr;
                 baseData.Confidential = ckConfidential.Checked;
-                baseData.Code = string.IsNullOrWhiteSpace(txbCode.Text) ? null : txbCode.Text.Trim();
 
                 int idBase = dt306_BaseBUS.Instance.Add(baseData);
 
@@ -372,6 +372,19 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             int rowIndex = view.FocusedRowHandle;
             view.RefreshData();
             view.FocusedRowHandle = rowIndex;
+        }
+
+        private void txbFieldType_EditValueChanged(object sender, EventArgs e)
+        {
+            txbDocType.EditValue = "";
+
+            var fieldType = txbFieldType.EditValue.ToString();
+            var idDocTypes = dt306_FieldTypeDocTypeBUS.Instance.GetListByIdField(fieldType);
+            var dmDocTypes = dt306_DocTypeBUS.Instance.GetListByIds(idDocTypes.Select(r => r.IdDocType).ToList()).ToList();
+
+            txbDocType.Properties.DataSource = dmDocTypes;
+            txbDocType.Properties.DisplayMember = "DisplayName";
+            txbDocType.Properties.ValueMember = "Id";
         }
     }
 }

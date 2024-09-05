@@ -527,6 +527,8 @@
           <Property Name="IdType" Type="int" Nullable="false" />
           <Property Name="Confidential" Type="bit" Nullable="false" />
           <Property Name="Code" Type="varchar" MaxLength="32" />
+          <Property Name="IdFieldType" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="IdDocType" Type="nvarchar" MaxLength="2" Nullable="false" />
         </EntityType>
         <EntityType Name="dt306_BaseAtts">
           <Key>
@@ -539,6 +541,28 @@
           <Property Name="IsCancel" Type="bit" Nullable="false" />
           <Property Name="UsrCancel" Type="nvarchar" MaxLength="10" />
           <Property Name="Desc" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="dt306_DocType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="dt306_FieldType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="dt306_FieldTypeDocType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdFieldType" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="IdDocType" Type="varchar" MaxLength="2" Nullable="false" />
         </EntityType>
         <EntityType Name="dt306_ProgInfo">
           <Key>
@@ -726,6 +750,9 @@
           <EntitySet Name="dt302_ReportInfo" EntityType="Self.dt302_ReportInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt306_Base" EntityType="Self.dt306_Base" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt306_BaseAtts" EntityType="Self.dt306_BaseAtts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt306_DocType" EntityType="Self.dt306_DocType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt306_FieldType" EntityType="Self.dt306_FieldType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt306_FieldTypeDocType" EntityType="Self.dt306_FieldTypeDocType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt306_ProgInfo" EntityType="Self.dt306_ProgInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt306_Progress" EntityType="Self.dt306_Progress" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt306_SignRole" EntityType="Self.dt306_SignRole" Schema="dbo" store:Type="Tables" />
@@ -797,7 +824,6 @@
           <EntitySet Name="dt306_SignRole" EntityType="DBDocumentManagementSystemModel.dt306_SignRole" />
           <EntitySet Name="dt307_JobQuesManage" EntityType="DBDocumentManagementSystemModel.dt307_JobQuesManage" />
           <EntitySet Name="dt307_Questions" EntityType="DBDocumentManagementSystemModel.dt307_Questions" />
-          <EntitySet Name="dt306_Base" EntityType="DBDocumentManagementSystemModel.dt306_Base" />
           <EntitySet Name="dm_Sign" EntityType="DBDocumentManagementSystemModel.dm_Sign" />
           <EntitySet Name="dt201_ReqUpdateDocs" EntityType="DBDocumentManagementSystemModel.dt201_ReqUpdateDocs" />
           <EntitySet Name="dt201_UpdateUsrReq" EntityType="DBDocumentManagementSystemModel.dt201_UpdateUsrReq" />
@@ -807,6 +833,10 @@
           <EntitySet Name="dt307_ExamMgmt" EntityType="DBDocumentManagementSystemModel.dt307_ExamMgmt" />
           <EntitySet Name="dt307_ExamUser" EntityType="DBDocumentManagementSystemModel.dt307_ExamUser" />
           <EntitySet Name="dt307_Answers" EntityType="DBDocumentManagementSystemModel.dt307_Answers" />
+          <EntitySet Name="dt306_Base" EntityType="DBDocumentManagementSystemModel.dt306_Base" />
+          <EntitySet Name="dt306_DocType" EntityType="DBDocumentManagementSystemModel.dt306_DocType" />
+          <EntitySet Name="dt306_FieldType" EntityType="DBDocumentManagementSystemModel.dt306_FieldType" />
+          <EntitySet Name="dt306_FieldTypeDocType" EntityType="DBDocumentManagementSystemModel.dt306_FieldTypeDocType" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -1335,22 +1365,6 @@
           <Property Name="ImageName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="IsMultiAns" Type="Boolean" />
         </EntityType>
-        <EntityType Name="dt306_Base">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="UploadUsr" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="UploadDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="IsProcess" Type="Boolean" Nullable="false" />
-          <Property Name="IsCancel" Type="Boolean" Nullable="false" />
-          <Property Name="NextStepProg" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Desc" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="IdType" Type="Int32" Nullable="false" />
-          <Property Name="Confidential" Type="Boolean" Nullable="false" />
-          <Property Name="Code" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="dm_Sign">
           <Key>
             <PropertyRef Name="Id" />
@@ -1478,6 +1492,46 @@
           <Property Name="DisplayText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ImageName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="TrueAns" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt306_Base">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="UploadUsr" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="UploadDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IsProcess" Type="Boolean" Nullable="false" />
+          <Property Name="IsCancel" Type="Boolean" Nullable="false" />
+          <Property Name="NextStepProg" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Desc" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IdType" Type="Int32" Nullable="false" />
+          <Property Name="Confidential" Type="Boolean" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="IdFieldType" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="IdDocType" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dt306_DocType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayName" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dt306_FieldType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayName" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dt306_FieldTypeDocType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdFieldType" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="IdDocType" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2064,23 +2118,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dt306_Base">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt306_Base">
-              <MappingFragment StoreEntitySet="dt306_Base">
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="Confidential" ColumnName="Confidential" />
-                <ScalarProperty Name="IdType" ColumnName="IdType" />
-                <ScalarProperty Name="Desc" ColumnName="Desc" />
-                <ScalarProperty Name="NextStepProg" ColumnName="NextStepProg" />
-                <ScalarProperty Name="IsCancel" ColumnName="IsCancel" />
-                <ScalarProperty Name="IsProcess" ColumnName="IsProcess" />
-                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
-                <ScalarProperty Name="UploadUsr" ColumnName="UploadUsr" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="dm_Sign">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_Sign">
               <MappingFragment StoreEntitySet="dm_Sign">
@@ -2214,6 +2251,50 @@
                 <ScalarProperty Name="ImageName" ColumnName="ImageName" />
                 <ScalarProperty Name="DisplayText" ColumnName="DisplayText" />
                 <ScalarProperty Name="QuesId" ColumnName="QuesId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt306_Base">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt306_Base">
+              <MappingFragment StoreEntitySet="dt306_Base">
+                <ScalarProperty Name="IdDocType" ColumnName="IdDocType" />
+                <ScalarProperty Name="IdFieldType" ColumnName="IdFieldType" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Confidential" ColumnName="Confidential" />
+                <ScalarProperty Name="IdType" ColumnName="IdType" />
+                <ScalarProperty Name="Desc" ColumnName="Desc" />
+                <ScalarProperty Name="NextStepProg" ColumnName="NextStepProg" />
+                <ScalarProperty Name="IsCancel" ColumnName="IsCancel" />
+                <ScalarProperty Name="IsProcess" ColumnName="IsProcess" />
+                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
+                <ScalarProperty Name="UploadUsr" ColumnName="UploadUsr" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt306_DocType">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt306_DocType">
+              <MappingFragment StoreEntitySet="dt306_DocType">
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt306_FieldType">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt306_FieldType">
+              <MappingFragment StoreEntitySet="dt306_FieldType">
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt306_FieldTypeDocType">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt306_FieldTypeDocType">
+              <MappingFragment StoreEntitySet="dt306_FieldTypeDocType">
+                <ScalarProperty Name="IdDocType" ColumnName="IdDocType" />
+                <ScalarProperty Name="IdFieldType" ColumnName="IdFieldType" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

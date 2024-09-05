@@ -12,20 +12,9 @@ namespace DataAccessLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class dt306_Base
+    public partial class dt306_DocType
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string DisplayName { get; set; }
-        public string UploadUsr { get; set; }
-        public System.DateTime UploadDate { get; set; }
-        public bool IsProcess { get; set; }
-        public bool IsCancel { get; set; }
-        public string NextStepProg { get; set; }
-        public string Desc { get; set; }
-        public int IdType { get; set; }
-        public bool Confidential { get; set; }
-        public string Code { get; set; }
-        public string IdFieldType { get; set; }
-        public string IdDocType { get; set; }
     }
 }

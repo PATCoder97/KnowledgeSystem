@@ -37,6 +37,7 @@ namespace KnowledgeSystem.Helpers
         public static string Folder201EmpChange { get; set; }
         public static string Folder306 { get; set; }
         public static string Folder307 { get; set; }
+        public static string Folder403 { get; set; }
         public static string FolderSign { get; set; }
 
         public static void SetSystemStaticValue()
@@ -57,6 +58,7 @@ namespace KnowledgeSystem.Helpers
             Folder201EmpChange = Path.Combine(FolderData, "201", "EmpChange");
             Folder306 = Path.Combine(FolderData, "306");
             Folder307 = Path.Combine(FolderData, "307");
+            Folder403 = Path.Combine(FolderData, "403");
             FolderSign = Path.Combine(Folder00, "ImageSign");
 
             AppPermission.SysAdmin = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleSysAdmin")?.ValueT ?? "-1");
@@ -69,6 +71,7 @@ namespace KnowledgeSystem.Helpers
             AppPermission.TechnicalPrjMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleTechnicalPrjMain")?.ValueT ?? "-1");
             AppPermission.SignatureDigital = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleSignatureDigitalMain")?.ValueT ?? "-1");
             AppPermission.QuizMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "QuizMain")?.ValueT ?? "-1");
+            AppPermission.Extensions = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "Extensions")?.ValueT ?? "-1");
 
             AppPermission.ChangeUser304 = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "Role304ChangeUser")?.ValueT ?? "-1");
             AppPermission.EditInfo306 = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "Role306EditInfo")?.ValueT ?? "-1");

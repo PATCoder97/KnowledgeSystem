@@ -44,6 +44,7 @@
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -188,6 +189,7 @@
             this.gridColumn9,
             this.gridColumn10,
             this.gridColumn2,
+            this.gridColumn14,
             this.gridColumn12,
             this.gridColumn3,
             this.gridColumn11,
@@ -242,11 +244,21 @@
             // 
             // gridColumn2
             // 
-            this.gridColumn2.Caption = "類別";
-            this.gridColumn2.FieldName = "types.DisplayName";
+            this.gridColumn2.Caption = "文件種類";
+            this.gridColumn2.FieldName = "docTypes.DisplayName";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 2;
+            this.gridColumn2.VisibleIndex = 3;
+            this.gridColumn2.Width = 126;
+            // 
+            // gridColumn14
+            // 
+            this.gridColumn14.Caption = "領域代號";
+            this.gridColumn14.FieldName = "fieldTypes.DisplayName";
+            this.gridColumn14.Name = "gridColumn14";
+            this.gridColumn14.Visible = true;
+            this.gridColumn14.VisibleIndex = 2;
+            this.gridColumn14.Width = 108;
             // 
             // gridColumn12
             // 
@@ -254,7 +266,7 @@
             this.gridColumn12.FieldName = "Code";
             this.gridColumn12.Name = "gridColumn12";
             this.gridColumn12.Visible = true;
-            this.gridColumn12.VisibleIndex = 3;
+            this.gridColumn12.VisibleIndex = 4;
             this.gridColumn12.Width = 131;
             // 
             // gridColumn3
@@ -264,7 +276,7 @@
             this.gridColumn3.MinWidth = 250;
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 4;
+            this.gridColumn3.VisibleIndex = 5;
             this.gridColumn3.Width = 250;
             // 
             // gridColumn11
@@ -273,7 +285,7 @@
             this.gridColumn11.FieldName = "data.Confidential";
             this.gridColumn11.Name = "gridColumn11";
             this.gridColumn11.Visible = true;
-            this.gridColumn11.VisibleIndex = 5;
+            this.gridColumn11.VisibleIndex = 6;
             // 
             // gColEnterDate
             // 
@@ -283,7 +295,7 @@
             this.gColEnterDate.FieldName = "data.UploadDate";
             this.gColEnterDate.Name = "gColEnterDate";
             this.gColEnterDate.Visible = true;
-            this.gColEnterDate.VisibleIndex = 6;
+            this.gColEnterDate.VisibleIndex = 7;
             // 
             // gridColumn8
             // 
@@ -291,7 +303,7 @@
             this.gridColumn8.FieldName = "DisplayName";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 8;
+            this.gridColumn8.VisibleIndex = 9;
             // 
             // gColIsProgess
             // 
@@ -313,7 +325,7 @@
             this.gColRemark.ShowUnboundExpressionMenu = true;
             this.gColRemark.UnboundDataType = typeof(string);
             this.gColRemark.Visible = true;
-            this.gColRemark.VisibleIndex = 7;
+            this.gColRemark.VisibleIndex = 8;
             // 
             // gridColumn4
             // 
@@ -321,7 +333,7 @@
             this.gridColumn4.FieldName = "data.Desc";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 9;
+            this.gridColumn4.VisibleIndex = 10;
             // 
             // gridColumn13
             // 
@@ -525,5 +537,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;
     }
 }

@@ -197,6 +197,15 @@
     <Compile Include="dt306_BaseAtts.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
+    <Compile Include="dt306_DocType.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dt306_FieldType.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dt306_FieldTypeDocType.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
     <Compile Include="dt306_ProgInfo.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
