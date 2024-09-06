@@ -50,7 +50,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._03_ShiftSchedule
 
         private void InitializeIcon()
         {
-            btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
             btnExportExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
         }
 
@@ -58,9 +57,14 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._03_ShiftSchedule
         {
             if (string.IsNullOrEmpty(FOLDER_PATH))
             {
-                XtraMessageBox.Show("請選檔案！");
+                MsgTP.MsgError("請選檔案！");
                 return;
             }
+
+            gvData.ReadOnlyGridView();
+            gvData.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
+            gvData.OptionsDetail.AllowOnlyOneMasterRowExpanded = true;
+            gvDocs.ReadOnlyGridView();
 
             string line = "";
             using (PdfReader reader = new PdfReader(FOLDER_PATH))
