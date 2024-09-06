@@ -215,9 +215,6 @@
     <Compile Include="dt306_SignRole.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
-    <Compile Include="dt306_Type.cs">
-      <DependentUpon>ModelDocManager.tt</DependentUpon>
-    </Compile>
     <Compile Include="dt307_Answers.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>

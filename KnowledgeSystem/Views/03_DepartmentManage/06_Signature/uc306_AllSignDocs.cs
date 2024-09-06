@@ -152,12 +152,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             }
 
             string displayName = ucEdit.DisplayName;
-            string code = ucEdit.Code;
-            int idType = ucEdit.IdType;
+            string fieldType = ucEdit.IdFieldType;
+            string docType = ucEdit.IdDocType;
 
             baseEdit.DisplayName = displayName;
-            baseEdit.Code = string.IsNullOrWhiteSpace(code) ? baseEdit.Code : code;
-            baseEdit.IdType = idType;
+            baseEdit.IdDocType = docType;
+            baseEdit.IdFieldType = fieldType;
 
             dt306_BaseBUS.Instance.AddOrUpdate(baseEdit);
             LoadData();

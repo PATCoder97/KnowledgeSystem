@@ -102,16 +102,18 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
                 bases = dt306_BaseBUS.Instance.GetListByNextStep(TPConfigs.LoginUser.Id);
                 users = dm_UserBUS.Instance.GetList();
                 jobs = dm_JobTitleBUS.Instance.GetList();
-                var dmTypes = dt306_TypeBUS.Instance.GetList();
+                var dmFieldTypes = dt306_FieldTypeBUS.Instance.GetList();
+                var dmDocsTypes = dt306_DocTypeBUS.Instance.GetList();
 
                 var basesDisplay = (from data in bases
-                                    join types in dmTypes on data.IdType equals types.Id
+                                    join fieldTypes in dmFieldTypes on data.IdFieldType equals fieldTypes.Id
+                                    join docTypes in dmDocsTypes on data.IdDocType equals docTypes.Id
                                     join urs in users on data.UploadUsr equals urs.Id
-                                    //join job in jobs on urs.JobCode equals job.Id
                                     where data.IsProcess == true
                                     select new
                                     {
-                                        types,
+                                        fieldTypes,
+                                        docTypes,
                                         data,
                                         urs,
                                         DisplayName = $"{urs.Id} {urs.IdDepartment}/{urs.DisplayName}"

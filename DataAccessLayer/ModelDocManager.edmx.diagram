@@ -53,7 +53,6 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt306_ProgInfo" Width="1.5" PointX="3.75" PointY="24.75" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt306_Progress" Width="1.5" PointX="2.125" PointY="24.75" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_FixedProgress" Width="1.5" PointX="8.625" PointY="2.75" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt306_Type" Width="1.5" PointX="8.625" PointY="24.75" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt306_SignRole" Width="1.5" PointX="5.375" PointY="24.75" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt307_JobQuesManage" Width="1.5" PointX="0.5" PointY="28.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt307_Questions" Width="1.5" PointX="2.125" PointY="28.5" />
@@ -66,10 +65,10 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt307_ExamMgmt" Width="1.5" PointX="5.375" PointY="28.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt307_ExamUser" Width="1.5" PointX="7" PointY="28.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt307_Answers" Width="1.5" PointX="3.75" PointY="28.5" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt306_DocType" Width="1.5" PointX="8.625" PointY="24.75" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt306_FieldType" Width="1.5" PointX="10.25" PointY="24.75" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt306_FieldTypeDocType" Width="1.5" PointX="11.875" PointY="24.75" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt306_Base" Width="1.5" PointX="0.5" PointY="24.75" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt306_DocType" Width="1.5" PointX="10.25" PointY="24.75" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt306_FieldType" Width="1.5" PointX="11.875" PointY="24.75" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt306_FieldTypeDocType" Width="1.5" PointX="13.5" PointY="24.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

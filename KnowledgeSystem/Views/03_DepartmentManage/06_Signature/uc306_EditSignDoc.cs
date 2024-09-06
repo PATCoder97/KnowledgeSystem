@@ -19,26 +19,39 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
         {
             InitializeComponent();
             txbTitle.DataBindings.Add("Text", this, "DisplayName"); 
-            txbType.DataBindings.Add("EditValue", this, "IdType");
-            txbCode.DataBindings.Add("Text", this, "Code");
+            txbDocType.DataBindings.Add("EditValue", this, "IdDocType");
+            txbFieldType.DataBindings.Add("EditValue", this, "IdFieldType");
         }
 
         public dt306_Base baseData { get; set; }
 
         public string DisplayName { get; set; }
-        public int IdType { get; set; }
-        public string Code { get; set; }
+        public string IdFieldType { get; set; }
+        public string IdDocType { get; set; }
 
         private void uc306_EditSignDoc_Load(object sender, EventArgs e)
         {
-            var dmType = dt306_TypeBUS.Instance.GetList();
-            txbType.Properties.DataSource = dmType;
-            txbType.Properties.DisplayMember = "DisplayName";
-            txbType.Properties.ValueMember = "Id";
+            var dmFieldType = dt306_FieldTypeBUS.Instance.GetList();
+            txbFieldType.Properties.DataSource = dmFieldType;
+            txbFieldType.Properties.DisplayMember = "DisplayName";
+            txbFieldType.Properties.ValueMember = "Id";
 
             DisplayName = baseData.DisplayName;
-            IdType = baseData.IdType;
-            Code = baseData.Code;
+            IdFieldType = baseData.IdFieldType;
+            IdDocType = baseData.IdDocType;
+        }
+
+        private void txbFieldType_EditValueChanged(object sender, EventArgs e)
+        {
+            txbDocType.EditValue = "";
+
+            var fieldType = txbFieldType.EditValue.ToString();
+            var idDocTypes = dt306_FieldTypeDocTypeBUS.Instance.GetListByIdField(fieldType);
+            var dmDocTypes = dt306_DocTypeBUS.Instance.GetListByIds(idDocTypes.Select(r => r.IdDocType).ToList()).ToList();
+
+            txbDocType.Properties.DataSource = dmDocTypes;
+            txbDocType.Properties.DisplayMember = "DisplayName";
+            txbDocType.Properties.ValueMember = "Id";
         }
     }
 }

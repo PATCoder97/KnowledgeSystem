@@ -22,7 +22,6 @@ namespace DataAccessLayer
         public bool IsCancel { get; set; }
         public string NextStepProg { get; set; }
         public string Desc { get; set; }
-        public int IdType { get; set; }
         public bool Confidential { get; set; }
         public string Code { get; set; }
         public string IdFieldType { get; set; }

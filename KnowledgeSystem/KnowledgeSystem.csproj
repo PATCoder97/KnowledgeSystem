@@ -289,6 +289,12 @@
     <Compile Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\uc201_DigitalSignature.Designer.cs">
       <DependentUpon>uc201_DigitalSignature.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\03_DepartmentManage\03_ShiftSchedule\uc303_SickLeaveData.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\03_ShiftSchedule\uc303_SickLeaveData.Designer.cs">
+      <DependentUpon>uc303_SickLeaveData.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\03_DepartmentManage\04_BorrVehicle\f304_BorrVehicleInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -848,6 +854,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\04_ISODocs\uc204_ISODocsMain.resx">
       <DependentUpon>uc204_ISODocsMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\03_ShiftSchedule\uc303_SickLeaveData.resx">
+      <DependentUpon>uc303_SickLeaveData.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\04_BorrVehicle\f304_BorrVehicleInfo.resx">
       <DependentUpon>f304_BorrVehicleInfo.cs</DependentUpon>

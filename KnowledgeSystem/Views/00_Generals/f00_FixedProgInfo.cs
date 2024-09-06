@@ -151,8 +151,6 @@ namespace KnowledgeSystem.Views._00_Generals
             users = dm_UserBUS.Instance.GetListByDept(idDept2word).Where(r => r.Status == 0).ToList();
             jobTitles = dm_JobTitleBUS.Instance.GetList();
 
-            var dmType = dt306_TypeBUS.Instance.GetList();
-
             // Gắn các thông số cho các combobox
             lookupUser.ValueMember = "Id";
             lookupUser.DisplayMember = "Id";
