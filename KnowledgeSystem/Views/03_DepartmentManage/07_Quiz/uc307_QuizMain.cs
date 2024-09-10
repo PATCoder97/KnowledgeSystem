@@ -95,9 +95,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             if (hi.InCard)
             {
                 string idJob = view.GetRowCellValue(hi.RowHandle, "exam.IdJob").ToString();
+                int idExam = Convert.ToInt16(view.GetRowCellValue(hi.RowHandle, "exam.Id").ToString());
 
                 f307_DoExam fDoExam = new f307_DoExam();
                 fDoExam.idJob = idJob;
+                fDoExam.idExamUser = idExam;
                 fDoExam.ShowDialog();
             }
         }

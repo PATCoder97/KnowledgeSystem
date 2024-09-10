@@ -48,11 +48,11 @@
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txbUserAns.Properties)).BeginInit();
@@ -64,11 +64,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             this.SuspendLayout();
             // 
             // gColId
@@ -76,7 +76,7 @@
             this.gColId.AppearanceCell.Options.UseTextOptions = true;
             this.gColId.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gColId.Caption = "題目";
-            this.gColId.FieldName = "Index";
+            this.gColId.FieldName = "QuestionIndex";
             this.gColId.MaxWidth = 75;
             this.gColId.MinWidth = 75;
             this.gColId.Name = "gColId";
@@ -87,7 +87,7 @@
             // gridColumn2
             // 
             this.gridColumn2.Caption = "答案";
-            this.gridColumn2.FieldName = "Answer";
+            this.gridColumn2.FieldName = "UserAnswer";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.OptionsColumn.AllowEdit = false;
             this.gridColumn2.Visible = true;
@@ -137,7 +137,7 @@
             // 
             // txbUserAns
             // 
-            this.txbUserAns.Location = new System.Drawing.Point(557, 618);
+            this.txbUserAns.Location = new System.Drawing.Point(512, 618);
             this.txbUserAns.MaximumSize = new System.Drawing.Size(0, 36);
             this.txbUserAns.MinimumSize = new System.Drawing.Size(0, 36);
             this.txbUserAns.Name = "txbUserAns";
@@ -149,7 +149,7 @@
             this.txbUserAns.Properties.AppearanceDropDown.Options.UseForeColor = true;
             this.txbUserAns.Properties.Separators.AddRange(new string[] {
             ","});
-            this.txbUserAns.Size = new System.Drawing.Size(219, 36);
+            this.txbUserAns.Size = new System.Drawing.Size(164, 36);
             this.txbUserAns.StyleController = this.layoutControl1;
             this.txbUserAns.TabIndex = 10;
             // 
@@ -158,7 +158,7 @@
             this.btnPreviousQues.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPreviousQues.Appearance.Options.UseFont = true;
             this.btnPreviousQues.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnPreviousQues.ImageOptions.SvgImage")));
-            this.btnPreviousQues.Location = new System.Drawing.Point(457, 618);
+            this.btnPreviousQues.Location = new System.Drawing.Point(680, 618);
             this.btnPreviousQues.Name = "btnPreviousQues";
             this.btnPreviousQues.Size = new System.Drawing.Size(96, 36);
             this.btnPreviousQues.StyleController = this.layoutControl1;
@@ -190,6 +190,7 @@
             this.btnSubmit.StyleController = this.layoutControl1;
             this.btnSubmit.TabIndex = 7;
             this.btnSubmit.Text = "提交";
+            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
             // gcData
             // 
@@ -234,7 +235,7 @@
             formatConditionRuleExpression2.Appearance.BackColor = System.Drawing.Color.Red;
             formatConditionRuleExpression2.Appearance.BackColor2 = System.Drawing.Color.White;
             formatConditionRuleExpression2.Appearance.Options.UseBackColor = true;
-            formatConditionRuleExpression2.Expression = "IsNullOrEmpty([Answer])";
+            formatConditionRuleExpression2.Expression = "IsNullOrEmpty([UserAnswer])";
             gridFormatRule2.Rule = formatConditionRuleExpression2;
             this.gvData.FormatRules.Add(gridFormatRule2);
             this.gvData.GridControl = this.gcData;
@@ -270,11 +271,11 @@
             this.layoutControlItem2,
             this.layoutControlItem3,
             this.layoutControlItem4,
-            this.layoutControlItem5,
             this.emptySpaceItem1,
             this.layoutControlItem6,
             this.layoutControlItem7,
-            this.layoutControlItem8});
+            this.layoutControlItem8,
+            this.layoutControlItem5});
             this.Root.Name = "Root";
             this.Root.Size = new System.Drawing.Size(1201, 666);
             this.Root.TextVisible = false;
@@ -326,18 +327,6 @@
             this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem4.TextVisible = false;
             // 
-            // layoutControlItem5
-            // 
-            this.layoutControlItem5.Control = this.btnPreviousQues;
-            this.layoutControlItem5.Location = new System.Drawing.Point(445, 606);
-            this.layoutControlItem5.MaxSize = new System.Drawing.Size(100, 40);
-            this.layoutControlItem5.MinSize = new System.Drawing.Size(100, 40);
-            this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(100, 40);
-            this.layoutControlItem5.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem5.TextVisible = false;
-            // 
             // emptySpaceItem1
             // 
             this.emptySpaceItem1.AllowHotTrack = false;
@@ -348,15 +337,19 @@
             // 
             // layoutControlItem6
             // 
+            this.layoutControlItem6.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.layoutControlItem6.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
+            this.layoutControlItem6.AppearanceItemCaption.Options.UseFont = true;
+            this.layoutControlItem6.AppearanceItemCaption.Options.UseForeColor = true;
             this.layoutControlItem6.Control = this.txbUserAns;
-            this.layoutControlItem6.Location = new System.Drawing.Point(545, 606);
+            this.layoutControlItem6.Location = new System.Drawing.Point(445, 606);
             this.layoutControlItem6.MaxSize = new System.Drawing.Size(223, 0);
             this.layoutControlItem6.MinSize = new System.Drawing.Size(223, 36);
             this.layoutControlItem6.Name = "layoutControlItem6";
             this.layoutControlItem6.Size = new System.Drawing.Size(223, 40);
             this.layoutControlItem6.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem6.TextVisible = false;
+            this.layoutControlItem6.Text = " 答案";
+            this.layoutControlItem6.TextSize = new System.Drawing.Size(43, 24);
             // 
             // layoutControlItem7
             // 
@@ -382,6 +375,18 @@
             this.layoutControlItem8.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem8.TextVisible = false;
             // 
+            // layoutControlItem5
+            // 
+            this.layoutControlItem5.Control = this.btnPreviousQues;
+            this.layoutControlItem5.Location = new System.Drawing.Point(668, 606);
+            this.layoutControlItem5.MaxSize = new System.Drawing.Size(100, 40);
+            this.layoutControlItem5.MinSize = new System.Drawing.Size(100, 40);
+            this.layoutControlItem5.Name = "layoutControlItem5";
+            this.layoutControlItem5.Size = new System.Drawing.Size(100, 40);
+            this.layoutControlItem5.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem5.TextVisible = false;
+            // 
             // f307_DoExam
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
@@ -395,6 +400,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "f307_DoExam";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.f307_DoExam_FormClosing);
             this.Load += new System.EventHandler(this.f307_DoExam_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
@@ -407,11 +413,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -374,7 +374,7 @@
             // 
             // btnPractiseMyJob
             // 
-            this.btnPractiseMyJob.Caption = "當前職務";
+            this.btnPractiseMyJob.Caption = "現任職務";
             this.btnPractiseMyJob.Id = 11;
             this.btnPractiseMyJob.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnPractiseMyJob.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;

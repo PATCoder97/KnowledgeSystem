@@ -8,6 +8,7 @@ using DocumentFormat.OpenXml.Spreadsheet;
 using DocumentFormat.OpenXml.Wordprocessing;
 using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._00_Generals;
+using Newtonsoft.Json;
 using Scriban;
 using System;
 using System.Collections.Generic;
@@ -35,22 +36,27 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             this.KeyPreview = true;  // Đảm bảo Form nhận được sự kiện KeyDown
         }
 
-        private class ResultExam
+        private class ExamResult
         {
-            public int Index { get; set; }
-            public string Answer { get; set; }
+            public dt307_Questions Questions { get; set; }
+            public List<dt307_Answers> Answers { get; set; }
+            public int QuestionIndex { get; set; }
+            public string CorrectAnswer { get; set; }
+            public string UserAnswer { get; set; }
+            public bool IsCorrect { get; set; }
         }
 
         private Timer countdownTimer;
         private TimeSpan timeRemaining;
 
         public string idJob = "";
+        public int idExamUser = -1;
         int testDuration = 0, passingScore = 0, quesCount = 0, indexQues = 0;
         string templateContentSigner;
 
         List<dt307_Questions> ques = new List<dt307_Questions>();
         List<dt307_Answers> answers = new List<dt307_Answers>();
-        List<ResultExam> resultsExam = new List<ResultExam>();
+        List<ExamResult> examResults = new List<ExamResult>();
 
         BindingSource sourceResult = new BindingSource();
 
@@ -82,7 +88,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
 
         private void NextQues()
         {
-            resultsExam[indexQues].Answer = string.Join(",", txbUserAns.GetTokenList().Select(r => r.Description as string).ToList());
+            examResults[indexQues].UserAnswer = string.Join(",", txbUserAns.GetTokenList().Select(r => r.Description as string).ToList());
             gcData.RefreshDataSource();
 
             if (indexQues >= ques.Count - 1) return;
@@ -95,7 +101,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
 
         private void PreviousQues()
         {
-            resultsExam[indexQues].Answer = string.Join(",", txbUserAns.GetTokenList().Select(r => r.Description as string).ToList());
+            examResults[indexQues].UserAnswer = string.Join(",", txbUserAns.GetTokenList().Select(r => r.Description as string).ToList());
             gcData.RefreshDataSource();
 
             if (indexQues <= 0) return;
@@ -125,13 +131,23 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
 
         private void F307_DoExam_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Right)
+            if (e.KeyCode == Keys.Right || e.KeyCode == Keys.Down)
             {
                 NextQues();
             }
-            else if (e.KeyCode == Keys.Left)
+            else if (e.KeyCode == Keys.Left || e.KeyCode == Keys.Up)
             {
                 PreviousQues();
+            }
+
+            if (e.Control && e.Alt && e.Shift && e.KeyCode == Keys.T)
+            {
+                foreach (var answer in examResults)
+                {
+                    answer.UserAnswer = answer.CorrectAnswer;
+                }
+
+                gcData.RefreshDataSource();
             }
         }
 
@@ -160,7 +176,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
 
             // Thêm danh sách câu trả lời, và hiện các câu trả lời đã lưu
             txbUserAns.Properties.DataSource = Enumerable.Range(1, anses.Count).Select(num => num.ToString()).ToList();
-            txbUserAns.EditValue = resultsExam[indexQues].Answer;
+            txbUserAns.EditValue = examResults[indexQues].UserAnswer;
 
             var templateSigner = Template.Parse(templateContentSigner);
 
@@ -177,6 +193,50 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
                     e.preventDefault();
                 });");
             };
+
+            gvData.FocusedRowHandle = index;
+        }
+
+        private void f307_DoExam_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            countdownTimer.Stop();
+        }
+
+        private void btnSubmit_Click(object sender, EventArgs e)
+        {
+            foreach (var answer in examResults)
+            {
+                if (answer.UserAnswer == null) { answer.IsCorrect = false; continue; }
+
+                // Chuyển TrueAns và UserAns thành HashSet để so sánh không thứ tự
+                var trueAnsSet = answer.CorrectAnswer.Split(',').Select(x => x.Trim()).ToHashSet();
+                var userAnsSet = answer.UserAnswer.Split(',').Select(x => x.Trim()).ToHashSet();
+
+                // So sánh hai tập hợp và gán giá trị cho IsTrue
+                answer.IsCorrect = trueAnsSet.SetEquals(userAnsSet);
+            }
+
+            int correctAnswers = examResults.Count(r => r.IsCorrect);
+            int score = (int)Math.Round(correctAnswers * 100.0 / quesCount);
+            int totalScore = 100;
+            bool IsPass = score >= passingScore;
+            string message = IsPass ? "恭喜您通過考試!!!" : "很遺憾你考試沒通過!";
+            string json = JsonConvert.SerializeObject(examResults);
+
+            dt307_ExamUser result = dt307_ExamUserBUS.Instance.GetItemById(idExamUser);
+            result.IsPass = IsPass;
+            result.Score = score;
+            result.SubmitTime = DateTime.Now;
+            result.ExamData = json;
+
+            dt307_ExamUserBUS.Instance.AddOrUpdate(result);
+
+            string htmlString = $"<font='Microsoft JhengHei UI' size=24><color=red>{message}</color></font>\r\n" +
+                $"<font='Microsoft JhengHei UI' size=14>結果：\r\n" +
+                $"-正確：<color=blue>{correctAnswers}/{quesCount}</color>\r\n" +
+                $"-成績：<color=blue>{score}/{totalScore}</color></font>";
+
+            MsgTP.MsgShowInfomation(htmlString);
         }
 
         private string LoadData()
@@ -197,7 +257,24 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             ques = numbers.Select(index => dataQues[index]).ToList();
             answers = dt307_AnswersBUS.Instance.GetListByListQues(ques.Select(r => r.Id).ToList());
 
-            resultsExam = Enumerable.Range(1, 20).Select(i => new ResultExam { Index = i }).ToList();
+            examResults = answers
+                .GroupBy(a => a.QuesId)  // Nhóm theo QuesId
+                .SelectMany(group => group.Select((answer, index) => new
+                {
+                    Answer = answer,
+                    QuesId = group.Key,
+                    LocalIndex = index + 1  // Đánh số lại từ 1 cho mỗi QuesId
+                }))
+                .Where(a => a.Answer.TrueAns)  // Lọc các câu trả lời đúng
+                .GroupBy(a => a.QuesId)  // Nhóm lại theo QuesId
+                .Select((group, index) => new ExamResult
+                {
+                    QuestionIndex = index + 1,  // Chỉ số câu hỏi tổng quát (bắt đầu từ 1)
+                    CorrectAnswer = string.Join(",", group.Select(g => g.LocalIndex.ToString())),  // Lấy chỉ số theo từng QuesId
+                    Questions = ques.First(r => r.Id == group.Key),  // Lấy câu hỏi gốc
+                    Answers = answers.Where(r => r.QuesId == group.Key).ToList()  // Lấy câu trả lời gốc
+                })
+                .ToList();
 
             return "";
         }
@@ -213,7 +290,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
                 return;
             }
 
-            string msg= $"<font='Microsoft JhengHei UI' size=14>點擊「<color=red>確定</color>」開始！</font>";
+            string msg = $"<font='Microsoft JhengHei UI' size=14>點擊「<color=red>確定</color>」開始！</font>";
             MsgTP.MsgShowInfomation(msg);
 
             countdownTimer = new Timer();
@@ -226,7 +303,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
 
             txbUserAns.Focus();
 
-            sourceResult.DataSource = resultsExam;
+            sourceResult.DataSource = examResults;
             gcData.DataSource = sourceResult;
 
             templateContentSigner = File.ReadAllText(Path.Combine(TPConfigs.HtmlPath, "dt307_ConfirmQuestion.html"));
