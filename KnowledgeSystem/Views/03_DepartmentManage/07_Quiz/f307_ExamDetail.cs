@@ -1,15 +1,21 @@
 ﻿using BusinessLayer;
+using DevExpress.Utils.Extensions;
 using DevExpress.Utils.Menu;
 using DevExpress.Utils.Svg;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraRichEdit.Model;
+using DocumentFormat.OpenXml.Drawing.Charts;
 using KnowledgeSystem.Helpers;
+using Microsoft.Web.WebView2.WinForms;
+using Newtonsoft.Json;
+using Scriban;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -69,7 +75,50 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
 
         private void ItemViewInfo_Click(object sender, EventArgs e)
         {
+            GridView view = gvData;
+            string json = view.GetRowCellValue(view.FocusedRowHandle, "data.ExamData")?.ToString() ?? "";
 
+            if (string.IsNullOrEmpty(json)) return;
+
+            List<f307_DoExam.ExamResult> examDatas = JsonConvert.DeserializeObject<List<f307_DoExam.ExamResult>>(json);
+
+            string templateContentSigner = File.ReadAllText(Path.Combine(TPConfigs.HtmlPath, "dt307_ResultExam.html"));
+
+            var datas = (from data in examDatas
+                         select new
+                         {
+                             questionindex = data.QuestionIndex,
+                             question = data.Questions.DisplayText,
+                             questionimage = string.IsNullOrEmpty(data.Questions.ImageName) ? "" : ImageHelper.ConvertImageToBase64DataUri(Path.Combine(TPConfigs.Folder307, data.Questions.ImageName)),
+                             answers = data.Answers.Select(r => new { id = r.Id, answertext = r.DisplayText, answerimage = string.IsNullOrEmpty(r.ImageName) ? "" : ImageHelper.ConvertImageToBase64DataUri(Path.Combine(TPConfigs.Folder307, r.ImageName)) }).ToList(),
+                             correctanswer = data.CorrectAnswer,
+                             useranswer = data.UserAnswer
+                         }).ToList();
+
+            var templateSigner = Template.Parse(templateContentSigner);
+
+            var pageContent = templateSigner.Render(new { datas = datas });
+
+            WebView2 webView = new WebView2
+            {
+                Dock = DockStyle.Fill
+            };
+
+            XtraForm formView = new XtraForm
+            {
+                Text = "考試結果",
+                WindowState = FormWindowState.Maximized
+            };
+
+            formView.Controls.Add(webView);
+
+            formView.Load += async (o, args) =>
+            {
+                await webView.EnsureCoreWebView2Async(null);
+                webView.CoreWebView2.NavigateToString(pageContent);
+            };
+
+            formView.ShowDialog();
         }
 
         DXMenuItem CreateMenuItem(string caption, EventHandler clickEvent, SvgImage svgImage)

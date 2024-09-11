@@ -47,13 +47,13 @@
             position: relative;
         }
 
-            .answer img {
-                max-width: 100px;
-                max-height: 100px;
-                margin-right: 10px;
-                transition: transform 0.3s ease, z-index 0.3s ease;
-                cursor: pointer;
-            }
+        .answer img {
+            max-width: 100px;
+            max-height: 100px;
+            margin-right: 10px;
+            transition: transform 0.3s ease, z-index 0.3s ease;
+            cursor: pointer;
+        }
 
         .overlay {
             display: none;
@@ -69,15 +69,15 @@
             animation: fadeIn 0.2s ease-in-out;
         }
 
-            .overlay img {
-                max-width: 90%;
-                max-height: 90%;
-                animation: zoomIn 0.2s ease-in-out;
-            }
+        .overlay img {
+            max-width: 90%;
+            max-height: 90%;
+            animation: zoomIn 0.2s ease-in-out;
+        }
 
-            .overlay.active {
-                display: flex;
-            }
+        .overlay.active {
+            display: flex;
+        }
 
         @keyframes fadeIn {
             from {
@@ -102,43 +102,41 @@
 </head>
 
 <body oncontextmenu="return false;">
-
+    {{- for data in datas }}
     <div class="question">
-        題目：{{quesno}}
+        題目：{{data.questionindex}}
     </div>
 
     <div class="question">
-        {{ques}}
+        {{data.question}}
     </div>
 
-    {{ if quesimg != "" }}
+    {{ if data.questionimage != "" }}
     <div style="text-align: center;">
-        <img src="{{quesimg}}" alt="Màu đỏ" height="200px">
+        <img src="{{data.questionimage}}" alt="data.questionimage" height="200px">
     </div>
     {{ end }}
 
-    {{- for ans in answers }}
+    {{- for ans in data.answers }}
     <div class="answer-container">
         <div class="answer-number">{{ans.id}}</div>
 
-        <div class="answer"
-             {{ if ans.istrue }}
-             style="background-color:#66CDAA;">
+        <div class="answer" {{ if ans.istrue }} style="background-color:#66CDAA;">
             {{ else }}
             style="background-color: #f0f0f0;">
             {{ end }}
 
-            {{ if ans.img != "" }}
-            <img src="{{ans.img}}" alt="Màu đỏ" onclick="enlargeImage(this)">
+            {{ if ans.answerimage != "" }}
+            <img src="{{ans.answerimage}}" alt="ans.answerimage" onclick="enlargeImage(this)">
             {{ end }}
 
-            {{ans.disp}}
+            {{ans.answertext}}
         </div>
 
 
     </div>
     {{- end }}
-
+    {{- end }}
     <div class="overlay" id="overlay" onclick="shrinkImage()">
         <img id="overlay-img" src="" alt="Phóng to hình ảnh">
     </div>

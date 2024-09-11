@@ -1,9 +1,11 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
+using DevExpress.Data.Helpers;
 using DevExpress.DataAccess.Native.Sql.SqlParser;
 using DevExpress.XtraCharts;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
+using DocumentFormat.OpenXml.Office2010.Excel;
 using DocumentFormat.OpenXml.Spreadsheet;
 using DocumentFormat.OpenXml.Wordprocessing;
 using KnowledgeSystem.Helpers;
@@ -36,7 +38,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             this.KeyPreview = true;  // Đảm bảo Form nhận được sự kiện KeyDown
         }
 
-        private class ExamResult
+        public class ExamResult
         {
             public dt307_Questions Questions { get; set; }
             public List<dt307_Answers> Answers { get; set; }
@@ -223,13 +225,17 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             string message = IsPass ? "恭喜您通過考試!!!" : "很遺憾你考試沒通過!";
             string json = JsonConvert.SerializeObject(examResults);
 
-            dt307_ExamUser result = dt307_ExamUserBUS.Instance.GetItemById(idExamUser);
-            result.IsPass = IsPass;
-            result.Score = score;
-            result.SubmitTime = DateTime.Now;
-            result.ExamData = json;
+            // Nếu có thông tin của kỳ thi thì lưu kết quả lại
+            if (idExamUser != -1)
+            {
+                dt307_ExamUser result = dt307_ExamUserBUS.Instance.GetItemById(idExamUser);
+                result.IsPass = IsPass;
+                result.Score = score;
+                result.SubmitTime = DateTime.Now;
+                result.ExamData = json;
 
-            dt307_ExamUserBUS.Instance.AddOrUpdate(result);
+                dt307_ExamUserBUS.Instance.AddOrUpdate(result);
+            }
 
             string htmlString = $"<font='Microsoft JhengHei UI' size=24><color=red>{message}</color></font>\r\n" +
                 $"<font='Microsoft JhengHei UI' size=14>結果：\r\n" +
@@ -237,6 +243,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
                 $"-成績：<color=blue>{score}/{totalScore}</color></font>";
 
             MsgTP.MsgShowInfomation(htmlString);
+
+            Close();
         }
 
         private string LoadData()
@@ -255,26 +263,36 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             var numbers = Shuffle(dataQues.Count).Take(quesCount).ToList();
 
             ques = numbers.Select(index => dataQues[index]).ToList();
-            answers = dt307_AnswersBUS.Instance.GetListByListQues(ques.Select(r => r.Id).ToList());
+            answers = dt307_AnswersBUS.Instance.GetListByListQues(ques.Select(r => r.Id).ToList())
+                .GroupBy(r => r.QuesId)  // Group by QuesId
+                .SelectMany(group => group.Select((answer, index) => new dt307_Answers
+                {
+                    Id = index + 1,
+                    QuesId = answer.QuesId,
+                    ImageName = answer.ImageName,
+                    DisplayText = answer.DisplayText,
+                    TrueAns = answer.TrueAns
+                })).ToList();
 
-            examResults = answers
-                .GroupBy(a => a.QuesId)  // Nhóm theo QuesId
-                .SelectMany(group => group.Select((answer, index) => new
-                {
-                    Answer = answer,
-                    QuesId = group.Key,
-                    LocalIndex = index + 1  // Đánh số lại từ 1 cho mỗi QuesId
-                }))
-                .Where(a => a.Answer.TrueAns)  // Lọc các câu trả lời đúng
-                .GroupBy(a => a.QuesId)  // Nhóm lại theo QuesId
-                .Select((group, index) => new ExamResult
-                {
-                    QuestionIndex = index + 1,  // Chỉ số câu hỏi tổng quát (bắt đầu từ 1)
-                    CorrectAnswer = string.Join(",", group.Select(g => g.LocalIndex.ToString())),  // Lấy chỉ số theo từng QuesId
-                    Questions = ques.First(r => r.Id == group.Key),  // Lấy câu hỏi gốc
-                    Answers = answers.Where(r => r.QuesId == group.Key).ToList()  // Lấy câu trả lời gốc
-                })
-                .ToList();
+            // Lấy danh sách câu trả lời đúng dưới dạng 1,2,3
+            var correctAnsByIdQues = answers.Where(r => r.TrueAns).GroupBy(r => r.QuesId).Select(r => new
+            {
+                QuesId = r.Key,
+                CorrectAnswer = string.Join(",", r.Select(g => g.Id.ToString()))
+            }).ToList();
+
+            // Lấy ra danh sách để lưu ra kết quả
+            int indexQues = 1;
+            examResults = (from question in ques
+                           join correct in correctAnsByIdQues on question.Id equals correct.QuesId
+                           select new ExamResult
+                           {
+                               QuestionIndex = indexQues++,
+                               CorrectAnswer = correct.CorrectAnswer,
+                               UserAnswer = "",
+                               Questions = question,
+                               Answers = answers.Where(r => r.QuesId == question.Id).ToList()
+                           }).ToList();
 
             return "";
         }

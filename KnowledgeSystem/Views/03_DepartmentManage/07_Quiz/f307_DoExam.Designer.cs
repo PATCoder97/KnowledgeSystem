@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f307_DoExam));
-            DevExpress.XtraGrid.GridFormatRule gridFormatRule2 = new DevExpress.XtraGrid.GridFormatRule();
-            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression2 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule1 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression1 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
             this.gColId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
@@ -229,15 +229,15 @@
             this.gvData.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gColId,
             this.gridColumn2});
-            gridFormatRule2.Column = this.gColId;
-            gridFormatRule2.ColumnApplyTo = this.gColId;
-            gridFormatRule2.Name = "Format0";
-            formatConditionRuleExpression2.Appearance.BackColor = System.Drawing.Color.Red;
-            formatConditionRuleExpression2.Appearance.BackColor2 = System.Drawing.Color.White;
-            formatConditionRuleExpression2.Appearance.Options.UseBackColor = true;
-            formatConditionRuleExpression2.Expression = "IsNullOrEmpty([UserAnswer])";
-            gridFormatRule2.Rule = formatConditionRuleExpression2;
-            this.gvData.FormatRules.Add(gridFormatRule2);
+            gridFormatRule1.Column = this.gColId;
+            gridFormatRule1.ColumnApplyTo = this.gColId;
+            gridFormatRule1.Name = "Format0";
+            formatConditionRuleExpression1.Appearance.BackColor = System.Drawing.Color.Red;
+            formatConditionRuleExpression1.Appearance.BackColor2 = System.Drawing.Color.White;
+            formatConditionRuleExpression1.Appearance.Options.UseBackColor = true;
+            formatConditionRuleExpression1.Expression = "IsNullOrEmpty([UserAnswer])";
+            gridFormatRule1.Rule = formatConditionRuleExpression1;
+            this.gvData.FormatRules.Add(gridFormatRule1);
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
             this.gvData.OptionsCustomization.AllowColumnMoving = false;
@@ -245,6 +245,7 @@
             this.gvData.OptionsCustomization.AllowGroup = false;
             this.gvData.OptionsCustomization.AllowQuickHideColumns = false;
             this.gvData.OptionsCustomization.AllowSort = false;
+            this.gvData.OptionsDetail.EnableMasterViewMode = false;
             this.gvData.OptionsDetail.ShowDetailTabs = false;
             this.gvData.OptionsScrollAnnotations.ShowFocusedRow = DevExpress.Utils.DefaultBoolean.False;
             this.gvData.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;

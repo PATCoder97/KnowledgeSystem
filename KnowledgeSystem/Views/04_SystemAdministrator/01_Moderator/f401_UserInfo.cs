@@ -304,9 +304,11 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             string msg = "";
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
             {
+                TextInfo textInfo = new CultureInfo("vi-VN", false).TextInfo;
+
                 // Lấy các thông tin người dùng từ giao diện
                 userInfo.DisplayName = txbUserNameTW.EditValue?.ToString().Trim();
-                userInfo.DisplayNameVN = txbUserNameVN.EditValue?.ToString().Trim();
+                userInfo.DisplayNameVN = textInfo.ToTitleCase(txbUserNameVN.EditValue?.ToString().Trim().ToLower());
                 userInfo.IdDepartment = cbbDept.EditValue?.ToString();
                 userInfo.JobCode = cbbJobTitle.EditValue?.ToString();
                 userInfo.DOB = txbDOB.DateTime;
