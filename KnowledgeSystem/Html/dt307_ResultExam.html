@@ -55,54 +55,64 @@
             cursor: pointer;
         }
 
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
+        table {
             width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            animation: fadeIn 0.2s ease-in-out;
+            margin-bottom: 50px;
         }
 
-        .overlay img {
-            max-width: 90%;
-            max-height: 90%;
-            animation: zoomIn 0.2s ease-in-out;
+        table,
+        th {
+            font-size: 24px;
+            /* font-family: DFKai-SB; */
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 5px;
+
         }
 
-        .overlay.active {
-            display: flex;
+        th {
+            background-color: #D6EEEE;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
+        td {
+            border-bottom: 1px dashed black;
+            border-left: 1px solid black;
+            padding: 5px;
         }
 
-        @keyframes zoomIn {
-            from {
-                transform: scale(0.5);
-            }
-
-            to {
-                transform: scale(1);
-            }
+        .label {
+            width: 150px;
         }
+
     </style>
 </head>
 
-<body oncontextmenu="return false;">
-    {{- for data in datas }}
+<body>
+
+    <table>
+        <tr>
+            <td class="label">單位</td>
+            <td class="value">{{dept}}</td>
+        </tr>
+        <tr>
+            <td class="label">姓名</td>
+            <td class="value">{{username}}</td>
+        </tr>
+        <tr>
+            <td class="label">人員代號</td>
+            <td class="value">{{userid}}</td>
+        </tr>
+        <tr></tr>
+            <td class="label">職務</td>
+            <td class="value">{{jobname}}</td>
+        </tr>
+        <tr>
+            <td class="label">成績</td>
+            <td class="value">{{score}}</td>
+        </tr>
+    </table>
+
+    {{- for data in dataexam }}
     <div class="question">
         題目：{{data.questionindex}}
     </div>
@@ -137,29 +147,7 @@
     </div>
     {{- end }}
     {{- end }}
-    <div class="overlay" id="overlay" onclick="shrinkImage()">
-        <img id="overlay-img" src="" alt="Phóng to hình ảnh">
-    </div>
 
-    <script>
-        function enlargeImage(img) {
-            var overlay = document.getElementById('overlay');
-            var overlayImg = document.getElementById('overlay-img');
-            overlayImg.src = img.src;
-            overlay.classList.add('active');
-        }
-
-        function shrinkImage() {
-            var overlay = document.getElementById('overlay');
-            overlay.classList.remove('active');
-        }
-
-        document.addEventListener('keydown', function (event) {
-            if (event.key === 'Escape') {
-                shrinkImage();
-            }
-        });
-    </script>
 </body>
 
 </html>

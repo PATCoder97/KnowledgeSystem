@@ -76,28 +76,47 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
         private void ItemViewInfo_Click(object sender, EventArgs e)
         {
             GridView view = gvData;
+            string deptName = view.GetRowCellValue(view.FocusedRowHandle, "DeptName")?.ToString() ?? "";
+            string usrName = view.GetRowCellValue(view.FocusedRowHandle, "DisplayName")?.ToString() ?? "";
+            string usrId = view.GetRowCellValue(view.FocusedRowHandle, "usr.Id")?.ToString() ?? "";
+            string jobName = view.GetRowCellValue(view.FocusedRowHandle, "job.DisplayName")?.ToString() ?? "";
+            string score = view.GetRowCellValue(view.FocusedRowHandle, "data.Score")?.ToString() ?? "";
             string json = view.GetRowCellValue(view.FocusedRowHandle, "data.ExamData")?.ToString() ?? "";
 
             if (string.IsNullOrEmpty(json)) return;
 
-            List<f307_DoExam.ExamResult> examDatas = JsonConvert.DeserializeObject<List<f307_DoExam.ExamResult>>(json);
+            List<f307_DoExam.ExamResult> examResults = JsonConvert.DeserializeObject<List<f307_DoExam.ExamResult>>(json);
 
             string templateContentSigner = File.ReadAllText(Path.Combine(TPConfigs.HtmlPath, "dt307_ResultExam.html"));
 
-            var datas = (from data in examDatas
-                         select new
-                         {
-                             questionindex = data.QuestionIndex,
-                             question = data.Questions.DisplayText,
-                             questionimage = string.IsNullOrEmpty(data.Questions.ImageName) ? "" : ImageHelper.ConvertImageToBase64DataUri(Path.Combine(TPConfigs.Folder307, data.Questions.ImageName)),
-                             answers = data.Answers.Select(r => new { id = r.Id, answertext = r.DisplayText, answerimage = string.IsNullOrEmpty(r.ImageName) ? "" : ImageHelper.ConvertImageToBase64DataUri(Path.Combine(TPConfigs.Folder307, r.ImageName)) }).ToList(),
-                             correctanswer = data.CorrectAnswer,
-                             useranswer = data.UserAnswer
-                         }).ToList();
+            var dataexam = examResults
+                .Select(data => new
+                {
+                    questionindex = data.QuestionIndex,
+                    question = data.Questions.DisplayText,
+                    questionimage = string.IsNullOrEmpty(data.Questions.ImageName) ? "" : ImageHelper.ConvertImageToBase64DataUri(Path.Combine(TPConfigs.Folder307, data.Questions.ImageName)),
+                    answers = data.Answers.Select(r => new
+                    {
+                        id = r.Id,
+                        answertext = r.DisplayText,
+                        answerimage = string.IsNullOrEmpty(r.ImageName) ? "" : ImageHelper.ConvertImageToBase64DataUri(Path.Combine(TPConfigs.Folder307, r.ImageName))
+                    }).ToList(),
+                    correctanswer = data.CorrectAnswer,
+                    useranswer = data.UserAnswer
+                }).ToList();
+
+            var datahtml = new
+            {
+                username = usrName,
+                userid = usrId,
+                dept = deptName,
+                score = score,
+                jobname = jobName,
+                dataexam = dataexam
+            };
 
             var templateSigner = Template.Parse(templateContentSigner);
-
-            var pageContent = templateSigner.Render(new { datas = datas });
+            var pageContent = templateSigner.Render(datahtml);
 
             WebView2 webView = new WebView2
             {

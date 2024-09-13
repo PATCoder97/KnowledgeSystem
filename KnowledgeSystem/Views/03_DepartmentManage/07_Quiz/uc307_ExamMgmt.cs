@@ -69,34 +69,55 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
 
             GridView view = gvData;
             string examCode = view.GetRowCellValue(view.FocusedRowHandle, gColExamCode).ToString();
-            Directory.CreateDirectory(rootFolder + $"//{examCode}");
+            string saveFolder = rootFolder + $"//{examCode} {DateTime.Now:yyyyMMddHHmmss}";
+            Directory.CreateDirectory(saveFolder);
 
             var bases = dt307_ExamUserBUS.Instance.GetListByExamCode(examCode);
             string dataTpl = File.ReadAllText(Path.Combine(TPConfigs.HtmlPath, "dt307_ResultExam.html"));
+
+            var usrs = dm_UserBUS.Instance.GetList();
+            var jobs = dm_JobTitleBUS.Instance.GetList();
+            var depts = dm_DeptBUS.Instance.GetList();
 
             foreach (var item in bases)
             {
                 if (string.IsNullOrEmpty(item.ExamData)) return;
                 List<f307_DoExam.ExamResult> examDatas = JsonConvert.DeserializeObject<List<f307_DoExam.ExamResult>>(item.ExamData);
 
-                var datas = (from data in examDatas
-                             select new
-                             {
-                                 questionindex = data.QuestionIndex,
-                                 question = data.Questions.DisplayText,
-                                 questionimage = string.IsNullOrEmpty(data.Questions.ImageName) ? "" : ImageHelper.ConvertImageToBase64DataUri(Path.Combine(TPConfigs.Folder307, data.Questions.ImageName)),
-                                 answers = data.Answers.Select(r => new { id = r.Id, answertext = r.DisplayText, answerimage = string.IsNullOrEmpty(r.ImageName) ? "" : ImageHelper.ConvertImageToBase64DataUri(Path.Combine(TPConfigs.Folder307, r.ImageName)) }).ToList(),
-                                 correctanswer = data.CorrectAnswer,
-                                 useranswer = data.UserAnswer
-                             }).ToList();
+                var dataexam = (from data in examDatas
+                                select new
+                                {
+                                    questionindex = data.QuestionIndex,
+                                    question = data.Questions.DisplayText,
+                                    questionimage = string.IsNullOrEmpty(data.Questions.ImageName) ? "" : ImageHelper.ConvertImageToBase64DataUri(Path.Combine(TPConfigs.Folder307, data.Questions.ImageName)),
+                                    answers = data.Answers.Select(r => new { id = r.Id, answertext = r.DisplayText, answerimage = string.IsNullOrEmpty(r.ImageName) ? "" : ImageHelper.ConvertImageToBase64DataUri(Path.Combine(TPConfigs.Folder307, r.ImageName)) }).ToList(),
+                                    correctanswer = data.CorrectAnswer,
+                                    useranswer = data.UserAnswer
+                                }).ToList();
+
+                var usr = usrs.FirstOrDefault(r => r.Id == item.IdUser);
+                var dept = depts.FirstOrDefault(r => r.Id == usr.IdDepartment);
+                var job = jobs.FirstOrDefault(r => r.Id == item.IdJob);
+
+                var datahtml = new
+                {
+                    username = $"{usr.DisplayName}\r\n{usr.DisplayNameVN}",
+                    userid = item.IdUser,
+                    dept = $"{dept.Id}\r\n{dept.DisplayName}",
+                    score = item.Score,
+                    jobname = job.DisplayName,
+                    dataexam = dataexam
+                };
 
                 var tpl = Template.Parse(dataTpl);
 
-                var res = tpl.Render(new { datas = datas });
-                string fileName = Path.Combine(rootFolder, examCode, $"{item.IdUser} {item.IdJob}.html");
+                var res = tpl.Render(datahtml);
+                string fileName = Path.Combine(saveFolder, $"{item.IdUser} {item.IdJob}.html");
 
                 File.WriteAllText(fileName, res);
             }
+
+            MsgTP.MsgShowInfomation($"<font='Microsoft JhengHei UI' size=14>已導出完成！！！</font>");
         }
 
         private void ItemFinishExam_Click(object sender, EventArgs e)

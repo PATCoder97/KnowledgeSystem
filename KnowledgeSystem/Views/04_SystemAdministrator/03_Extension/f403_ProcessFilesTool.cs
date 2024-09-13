@@ -13,6 +13,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -62,7 +63,15 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension
                         DrawImageToPage(page, documentProcessor);
                     }
                 }
-                documentProcessor.SaveDocument(resultFileName);
+
+                PdfEncryptionOptions encryptionOptions = new PdfEncryptionOptions();
+                encryptionOptions.ModificationPermissions = PdfDocumentModificationPermissions.NotAllowed;
+                encryptionOptions.InteractivityPermissions = PdfDocumentInteractivityPermissions.NotAllowed;
+
+                encryptionOptions.OwnerPasswordString = "fhspdf";
+                encryptionOptions.Algorithm = PdfEncryptionAlgorithm.AES256;
+
+                documentProcessor.SaveDocument(resultFileName, new PdfSaveOptions() { EncryptionOptions = encryptionOptions });
             }
         }
 
