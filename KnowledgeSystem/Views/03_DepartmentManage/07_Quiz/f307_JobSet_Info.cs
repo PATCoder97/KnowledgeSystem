@@ -47,6 +47,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
                 txbTime.EditValue = dataInfo.TestDuration;
                 txbPassScore.EditValue = dataInfo.PassingScore;
                 txbTotalQues.EditValue = dataInfo.QuesCount;
+                txbMultiChoice.EditValue = dataInfo.MultiQues;
             }
         }
 
@@ -64,6 +65,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
                 PassingScore = Convert.ToInt16(txbPassScore.EditValue),
                 TestDuration = Convert.ToInt16(txbTime.EditValue),
                 QuesCount = Convert.ToInt16(txbTotalQues.EditValue),
+                MultiQues = Convert.ToInt16(txbMultiChoice.EditValue),
             };
 
             dt307_JobQuesManageBUS.Instance.AddOrUpdate(data);

@@ -634,6 +634,7 @@
           <Property Name="TestDuration" Type="int" />
           <Property Name="QuesCount" Type="int" />
           <Property Name="PassingScore" Type="int" />
+          <Property Name="MultiQues" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="dt307_Questions">
           <Key>
@@ -812,7 +813,6 @@
           <EntitySet Name="dt306_Progress" EntityType="DBDocumentManagementSystemModel.dt306_Progress" />
           <EntitySet Name="dm_FixedProgress" EntityType="DBDocumentManagementSystemModel.dm_FixedProgress" />
           <EntitySet Name="dt306_SignRole" EntityType="DBDocumentManagementSystemModel.dt306_SignRole" />
-          <EntitySet Name="dt307_JobQuesManage" EntityType="DBDocumentManagementSystemModel.dt307_JobQuesManage" />
           <EntitySet Name="dt307_Questions" EntityType="DBDocumentManagementSystemModel.dt307_Questions" />
           <EntitySet Name="dm_Sign" EntityType="DBDocumentManagementSystemModel.dm_Sign" />
           <EntitySet Name="dt201_ReqUpdateDocs" EntityType="DBDocumentManagementSystemModel.dt201_ReqUpdateDocs" />
@@ -827,6 +827,7 @@
           <EntitySet Name="dt306_FieldType" EntityType="DBDocumentManagementSystemModel.dt306_FieldType" />
           <EntitySet Name="dt306_FieldTypeDocType" EntityType="DBDocumentManagementSystemModel.dt306_FieldTypeDocType" />
           <EntitySet Name="dt306_Base" EntityType="DBDocumentManagementSystemModel.dt306_Base" />
+          <EntitySet Name="dt307_JobQuesManage" EntityType="DBDocumentManagementSystemModel.dt307_JobQuesManage" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -1328,16 +1329,6 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="dt307_JobQuesManage">
-          <Key>
-            <PropertyRef Name="JobId" />
-          </Key>
-          <Property Name="JobId" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
-          <Property Name="IdDept" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
-          <Property Name="TestDuration" Type="Int32" />
-          <Property Name="QuesCount" Type="Int32" />
-          <Property Name="PassingScore" Type="Int32" />
-        </EntityType>
         <EntityType Name="dt307_Questions">
           <Key>
             <PropertyRef Name="Id" />
@@ -1514,6 +1505,17 @@
           <Property Name="Code" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
           <Property Name="IdFieldType" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
           <Property Name="IdDocType" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dt307_JobQuesManage">
+          <Key>
+            <PropertyRef Name="JobId" />
+          </Key>
+          <Property Name="JobId" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="IdDept" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="TestDuration" Type="Int32" />
+          <Property Name="QuesCount" Type="Int32" />
+          <Property Name="PassingScore" Type="Int32" />
+          <Property Name="MultiQues" Type="Int32" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2070,17 +2072,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dt307_JobQuesManage">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt307_JobQuesManage">
-              <MappingFragment StoreEntitySet="dt307_JobQuesManage">
-                <ScalarProperty Name="PassingScore" ColumnName="PassingScore" />
-                <ScalarProperty Name="QuesCount" ColumnName="QuesCount" />
-                <ScalarProperty Name="TestDuration" ColumnName="TestDuration" />
-                <ScalarProperty Name="IdDept" ColumnName="IdDept" />
-                <ScalarProperty Name="JobId" ColumnName="JobId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="dt307_Questions">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt307_Questions">
               <MappingFragment StoreEntitySet="dt307_Questions">
@@ -2269,6 +2260,18 @@
                 <ScalarProperty Name="UploadUsr" ColumnName="UploadUsr" />
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt307_JobQuesManage">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt307_JobQuesManage">
+              <MappingFragment StoreEntitySet="dt307_JobQuesManage">
+                <ScalarProperty Name="MultiQues" ColumnName="MultiQues" />
+                <ScalarProperty Name="PassingScore" ColumnName="PassingScore" />
+                <ScalarProperty Name="QuesCount" ColumnName="QuesCount" />
+                <ScalarProperty Name="TestDuration" ColumnName="TestDuration" />
+                <ScalarProperty Name="IdDept" ColumnName="IdDept" />
+                <ScalarProperty Name="JobId" ColumnName="JobId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

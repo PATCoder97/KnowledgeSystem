@@ -54,7 +54,6 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt306_Progress" Width="1.5" PointX="2.125" PointY="24.75" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_FixedProgress" Width="1.5" PointX="8.625" PointY="2.75" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt306_SignRole" Width="1.5" PointX="5.375" PointY="24.75" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt307_JobQuesManage" Width="1.5" PointX="0.5" PointY="28.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt307_Questions" Width="1.5" PointX="2.125" PointY="28.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_Sign" Width="1.5" PointX="20" PointY="0.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_ReqUpdateDocs" Width="1.5" PointX="8.625" PointY="21.375" />
@@ -69,6 +68,7 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt306_FieldType" Width="1.5" PointX="10.25" PointY="24.75" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt306_FieldTypeDocType" Width="1.5" PointX="11.875" PointY="24.75" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt306_Base" Width="1.5" PointX="0.5" PointY="24.75" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt307_JobQuesManage" Width="1.5" PointX="0.5" PointY="28.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

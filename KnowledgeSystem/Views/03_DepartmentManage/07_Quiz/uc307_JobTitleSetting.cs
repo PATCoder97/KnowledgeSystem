@@ -57,6 +57,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
         private void CreateRuleGV()
         {
             gvData.FormatRules.AddExpressionRule(gColQuesCount, new DevExpress.Utils.AppearanceDefault() { ForeColor = Color.Red }, "[Count] < [QuizData.QuesCount]");
+
+            gvData.FormatRules.AddExpressionRule(gColMultiQues, new DevExpress.Utils.AppearanceDefault() { ForeColor = Color.Red }, "[MultiQuesCount] < [QuizData.MultiQues]");
         }
 
         private void InitializeMenuItems()

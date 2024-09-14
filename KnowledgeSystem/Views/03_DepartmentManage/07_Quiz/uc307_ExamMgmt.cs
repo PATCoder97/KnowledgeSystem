@@ -90,7 +90,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
                                     questionindex = data.QuestionIndex,
                                     question = data.Questions.DisplayText,
                                     questionimage = string.IsNullOrEmpty(data.Questions.ImageName) ? "" : ImageHelper.ConvertImageToBase64DataUri(Path.Combine(TPConfigs.Folder307, data.Questions.ImageName)),
-                                    answers = data.Answers.Select(r => new { id = r.Id, answertext = r.DisplayText, answerimage = string.IsNullOrEmpty(r.ImageName) ? "" : ImageHelper.ConvertImageToBase64DataUri(Path.Combine(TPConfigs.Folder307, r.ImageName)) }).ToList(),
+                                    answers = data.Answers.Select(r => new
+                                    {
+                                        id = r.Id,
+                                        answertext = r.DisplayText,
+                                        answerimage = string.IsNullOrEmpty(r.ImageName) ? "" : ImageHelper.ConvertImageToBase64DataUri(Path.Combine(TPConfigs.Folder307, r.ImageName))
+                                    }).ToList(),
                                     correctanswer = data.CorrectAnswer,
                                     useranswer = data.UserAnswer
                                 }).ToList();

@@ -41,6 +41,7 @@
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColQuesCount = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColMultiQues = new DevExpress.XtraGrid.Columns.GridColumn();
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnAdd = new DevExpress.XtraBars.BarButtonItem();
@@ -73,7 +74,7 @@
             this.gcData.Location = new System.Drawing.Point(12, 12);
             this.gcData.MainView = this.gvData;
             this.gcData.Name = "gcData";
-            this.gcData.Size = new System.Drawing.Size(849, 492);
+            this.gcData.Size = new System.Drawing.Size(928, 492);
             this.gcData.TabIndex = 5;
             this.gcData.UseEmbeddedNavigator = true;
             this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -104,7 +105,8 @@
             this.gridColumn2,
             this.gridColumn4,
             this.gColQuesCount,
-            this.gridColumn7});
+            this.gridColumn7,
+            this.gColMultiQues});
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
             this.gvData.OptionsDetail.ShowDetailTabs = false;
@@ -188,12 +190,20 @@
             // 
             // gridColumn7
             // 
-            this.gridColumn7.Caption = "複選擇題";
+            this.gridColumn7.Caption = "複選題庫";
             this.gridColumn7.FieldName = "MultiQuesCount";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 7;
+            this.gridColumn7.VisibleIndex = 8;
             this.gridColumn7.Width = 89;
+            // 
+            // gColMultiQues
+            // 
+            this.gColMultiQues.Caption = "複選題";
+            this.gColMultiQues.FieldName = "QuizData.MultiQues";
+            this.gColMultiQues.Name = "gColMultiQues";
+            this.gColMultiQues.Visible = true;
+            this.gColMultiQues.VisibleIndex = 7;
             // 
             // barManagerTP
             // 
@@ -284,7 +294,7 @@
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManagerTP;
-            this.barDockControlTop.Size = new System.Drawing.Size(873, 49);
+            this.barDockControlTop.Size = new System.Drawing.Size(952, 49);
             // 
             // barDockControlBottom
             // 
@@ -292,7 +302,7 @@
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.barDockControlBottom.Location = new System.Drawing.Point(0, 565);
             this.barDockControlBottom.Manager = this.barManagerTP;
-            this.barDockControlBottom.Size = new System.Drawing.Size(873, 0);
+            this.barDockControlBottom.Size = new System.Drawing.Size(952, 0);
             // 
             // barDockControlLeft
             // 
@@ -306,7 +316,7 @@
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(873, 49);
+            this.barDockControlRight.Location = new System.Drawing.Point(952, 49);
             this.barDockControlRight.Manager = this.barManagerTP;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 516);
             // 
@@ -317,7 +327,7 @@
             this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(873, 516);
+            this.layoutControl1.Size = new System.Drawing.Size(952, 516);
             this.layoutControl1.TabIndex = 5;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -328,7 +338,7 @@
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem1});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(873, 516);
+            this.Root.Size = new System.Drawing.Size(952, 516);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem1
@@ -336,7 +346,7 @@
             this.layoutControlItem1.Control = this.gcData;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(853, 496);
+            this.layoutControlItem1.Size = new System.Drawing.Size(932, 496);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
@@ -352,7 +362,7 @@
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
             this.Name = "uc307_JobTitleSetting";
-            this.Size = new System.Drawing.Size(873, 565);
+            this.Size = new System.Drawing.Size(952, 565);
             this.Load += new System.EventHandler(this.uc307_JobTitleSetting_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).EndInit();
@@ -391,5 +401,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
+        private DevExpress.XtraGrid.Columns.GridColumn gColMultiQues;
     }
 }

@@ -19,5 +19,6 @@ namespace DataAccessLayer
         public Nullable<int> TestDuration { get; set; }
         public Nullable<int> QuesCount { get; set; }
         public Nullable<int> PassingScore { get; set; }
+        public int MultiQues { get; set; }
     }
 }
