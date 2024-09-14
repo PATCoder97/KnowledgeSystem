@@ -49,7 +49,7 @@
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColRemark = new DevExpress.XtraGrid.Columns.GridColumn();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -253,7 +253,7 @@
             this.gridColumn6,
             this.gridColumn3,
             this.gridColumn1,
-            this.gridColumn2});
+            this.gColRemark});
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
             this.gvData.OptionsDetail.ShowDetailTabs = false;
@@ -311,14 +311,14 @@
             this.gridColumn1.VisibleIndex = 4;
             this.gridColumn1.Width = 107;
             // 
-            // gridColumn2
+            // gColRemark
             // 
-            this.gridColumn2.Caption = "備註";
-            this.gridColumn2.FieldName = "Remark";
-            this.gridColumn2.Name = "gridColumn2";
-            this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 5;
-            this.gridColumn2.Width = 97;
+            this.gColRemark.Caption = "備註";
+            this.gColRemark.FieldName = "Remark";
+            this.gColRemark.Name = "gColRemark";
+            this.gColRemark.Visible = true;
+            this.gColRemark.VisibleIndex = 5;
+            this.gColRemark.Width = 97;
             // 
             // layoutControlGroup1
             // 
@@ -432,7 +432,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
+        private DevExpress.XtraGrid.Columns.GridColumn gColRemark;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;

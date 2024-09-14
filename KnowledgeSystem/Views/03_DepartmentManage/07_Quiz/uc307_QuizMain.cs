@@ -123,8 +123,21 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
 
         private void btnPractiseMyJob_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            string idJob = TPConfigs.LoginUser.ActualJobCode;
+
+            var ques = dt307_QuestionsBUS.Instance.GetListByJob(idJob);
+            var jobsSetting = dt307_JobQuesManageBUS.Instance.GetItemByIdJob(idJob);
+
+            var countMultiQues = ques.Count(r => r.IsMultiAns == true);
+
+            if (jobsSetting.QuesCount > ques.Count || jobsSetting.MultiQues > countMultiQues)
+            {
+                MsgTP.MsgError("題目庫不過！");
+                return;
+            }
+
             f307_DoExam fDoExam = new f307_DoExam();
-            fDoExam.idJob = TPConfigs.LoginUser.ActualJobCode;
+            fDoExam.idJob = idJob;
             fDoExam.ShowDialog();
         }
 
@@ -171,10 +184,21 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             var result = XtraInputBox.Show(args);
             if (result == null) return;
 
-            string idJobSelect = result?.ToString() ?? "";
+            string idJob = result?.ToString() ?? "";
+
+            var ques = dt307_QuestionsBUS.Instance.GetListByJob(idJob);
+            var jobsSetting = dt307_JobQuesManageBUS.Instance.GetItemByIdJob(idJob);
+
+            var countMultiQues = ques.Count(r => r.IsMultiAns == true);
+
+            if (jobsSetting == null || jobsSetting.QuesCount > ques.Count || jobsSetting.MultiQues > countMultiQues)
+            {
+                MsgTP.MsgError("題目庫不過！");
+                return;
+            }
 
             f307_DoExam fDoExam = new f307_DoExam();
-            fDoExam.idJob = idJobSelect;
+            fDoExam.idJob = idJob;
             fDoExam.ShowDialog();
         }
     }

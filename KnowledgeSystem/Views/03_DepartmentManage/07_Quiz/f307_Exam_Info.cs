@@ -26,7 +26,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
 
         List<dm_User> usrs = new List<dm_User>();
         BindingSource sourceUser = new BindingSource();
-        int MultiQuesLimit = 4;
 
         private void InitializeIcon()
         {
@@ -40,7 +39,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             var depts = dm_DeptBUS.Instance.GetList();
             var jobs = dm_JobTitleBUS.Instance.GetList();
             var ques = dt307_QuestionsBUS.Instance.GetList();
-            var JobsSettings = dt307_JobQuesManageBUS.Instance.GetList();
+            var jobsSettings = dt307_JobQuesManageBUS.Instance.GetList();
 
             // Lấy ra danh sách nhân viên tham gia kỳ thì
             var datas = (from usr in usrs
@@ -68,13 +67,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
                             };
 
             // Check xem cài đặt của các chức vụ đã đạt chưa
-            var JobsRemark = (from data in JobsSettings
+            var JobsRemark = (from data in jobsSettings
                               join question in quesCount on data.JobId equals question.IdJob into dtg
                               from g in dtg.DefaultIfEmpty()
                               let Remark = String.Join("、", (new string[]
                               {
                                   data.QuesCount > (g != null ? g.QuestionCount : 0) ? "題目數量不夠" : "",
-                                  MultiQuesLimit > (g != null ? g.MultiQuesCount : 0) ? "複選擇題數量不夠" : ""
+                                  data.MultiQues > (g != null ? g.MultiQuesCount : 0) ? "複選擇題數量不夠" : ""
                               }).Where(s => !string.IsNullOrEmpty(s)))
                               select new
                               {
@@ -141,6 +140,25 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(txbExamName.Text))
+            {
+                MsgTP.MsgError($"請填寫考試名稱！");
+                return;
+            }
+
+            var a = Enumerable.Range(0, gvData.RowCount)
+                .Select(i => gvData.GetRowCellValue(i, gColRemark)).ToList();
+
+            bool hasNonEmptyCell = Enumerable.Range(0, gvData.RowCount)
+                .Select(i => gvData.GetRowCellValue(i, gColRemark))
+                .Any(value => value != null && !string.IsNullOrWhiteSpace(value.ToString()));
+
+            if (hasNonEmptyCell)
+            {
+                MsgTP.MsgError($"資料不過、請參考備註！");
+                return;
+            }
+
             var data = new dt307_ExamMgmt()
             {
                 Code = "",
