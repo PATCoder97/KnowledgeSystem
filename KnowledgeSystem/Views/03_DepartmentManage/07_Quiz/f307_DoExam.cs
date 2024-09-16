@@ -53,7 +53,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
 
         public string idJob = "";
         public int idExamUser = -1;
-        int testDuration = 0, passingScore = 0, quesCount = 0, indexQues = 0;
+        int testDuration = 0, passingScore = 0, quesCount = 0, multiQuesCount = 0, indexQues = 0;
         string templateContentSigner;
 
         List<dt307_Questions> ques = new List<dt307_Questions>();
@@ -66,7 +66,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
         public List<int> Shuffle(int maxIndex)
         {
             // Tạo danh sách số từ 1 đến 100
-            List<int> numbers = Enumerable.Range(0, maxIndex - 1).ToList();
+            List<int> numbers = Enumerable.Range(0, maxIndex).ToList();
 
             // Tạo giá trị salt từ Guid
             string salt = Guid.NewGuid().ToString();
@@ -254,15 +254,28 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             testDuration = setting?.TestDuration ?? 0;
             passingScore = setting?.PassingScore ?? 0;
             quesCount = setting?.QuesCount ?? 0;
+            multiQuesCount = setting?.MultiQues ?? 0;
 
             var dataQues = dt307_QuestionsBUS.Instance.GetListByJob(idJob);
+
+            var normalQues = dataQues.Where(r => r.IsMultiAns == false).ToList();
+            var multiChoiceQues = dataQues.Where(r => r.IsMultiAns == true).ToList();
 
             if (dataQues.Count <= quesCount)
                 return "題目數量不夠！";
 
-            var numbers = Shuffle(dataQues.Count).Take(quesCount).ToList();
+            if (dataQues.Count <= quesCount)
+                return "題目數量不夠！";
 
-            ques = numbers.Select(index => dataQues[index]).ToList();
+            var numbersNormalQues = Shuffle(normalQues.Count).Take(quesCount - multiQuesCount).ToList();
+            var numbersMultiChoiceQues = Shuffle(multiChoiceQues.Count).Take(multiQuesCount).ToList();
+
+            ques = numbersNormalQues.Select(index => normalQues[index]).ToList();
+            ques.AddRange(numbersMultiChoiceQues.Select(index => multiChoiceQues[index]).ToList());
+
+            var numbers = Shuffle(quesCount);
+            ques = numbers.Select(index => ques[index]).ToList();
+
             answers = dt307_AnswersBUS.Instance.GetListByListQues(ques.Select(r => r.Id).ToList())
                 .GroupBy(r => r.QuesId)  // Group by QuesId
                 .SelectMany(group => group.Select((answer, index) => new dt307_Answers
