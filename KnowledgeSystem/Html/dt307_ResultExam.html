@@ -115,6 +115,9 @@
     {{- for data in dataexam }}
     <div class="question">
         題目：{{data.questionindex}}
+        {{ if  data.ismultichoice }}
+        「復選題」
+        {{ end }}
     </div>
 
     <div class="question">

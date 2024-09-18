@@ -30,6 +30,17 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc402_KPIWeb));
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule1 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression1 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule2 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression2 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule3 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression3 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule4 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression4 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
+            this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnUpload = new DevExpress.XtraBars.BarButtonItem();
@@ -48,9 +59,6 @@
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColPCName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -64,6 +72,30 @@
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             this.SuspendLayout();
+            // 
+            // gridColumn16
+            // 
+            this.gridColumn16.Caption = "經理室核定成績";
+            this.gridColumn16.FieldName = "data.MgrScore";
+            this.gridColumn16.Name = "gridColumn16";
+            this.gridColumn16.Visible = true;
+            this.gridColumn16.VisibleIndex = 5;
+            // 
+            // gridColumn10
+            // 
+            this.gridColumn10.Caption = "核定評語";
+            this.gridColumn10.FieldName = "data.DeptComments";
+            this.gridColumn10.Name = "gridColumn10";
+            this.gridColumn10.Visible = true;
+            this.gridColumn10.VisibleIndex = 8;
+            // 
+            // gridColumn9
+            // 
+            this.gridColumn9.Caption = "核定成績";
+            this.gridColumn9.FieldName = "data.DeptScore";
+            this.gridColumn9.Name = "gridColumn9";
+            this.gridColumn9.Visible = true;
+            this.gridColumn9.VisibleIndex = 7;
             // 
             // barManagerTP
             // 
@@ -245,6 +277,41 @@
             this.gridColumn3,
             this.gridColumn4});
             this.gvData.DetailHeight = 377;
+            gridFormatRule1.Column = this.gridColumn16;
+            gridFormatRule1.ColumnApplyTo = this.gridColumn16;
+            gridFormatRule1.Name = "90";
+            formatConditionRuleExpression1.Appearance.BackColor = System.Drawing.Color.White;
+            formatConditionRuleExpression1.Appearance.BackColor2 = System.Drawing.Color.Green;
+            formatConditionRuleExpression1.Appearance.Options.UseBackColor = true;
+            formatConditionRuleExpression1.Expression = "[data.MgrScore] == \'優\'";
+            gridFormatRule1.Rule = formatConditionRuleExpression1;
+            gridFormatRule2.Column = this.gridColumn16;
+            gridFormatRule2.ColumnApplyTo = this.gridColumn16;
+            gridFormatRule2.Name = "86";
+            formatConditionRuleExpression2.Appearance.BackColor = System.Drawing.Color.White;
+            formatConditionRuleExpression2.Appearance.BackColor2 = System.Drawing.Color.Yellow;
+            formatConditionRuleExpression2.Appearance.Options.UseBackColor = true;
+            formatConditionRuleExpression2.Expression = "[data.MgrScore] == \'良\'";
+            gridFormatRule2.Rule = formatConditionRuleExpression2;
+            gridFormatRule3.Column = this.gridColumn16;
+            gridFormatRule3.ColumnApplyTo = this.gridColumn16;
+            gridFormatRule3.Name = "70";
+            formatConditionRuleExpression3.Appearance.BackColor = System.Drawing.Color.White;
+            formatConditionRuleExpression3.Appearance.BackColor2 = System.Drawing.Color.Red;
+            formatConditionRuleExpression3.Appearance.Options.UseBackColor = true;
+            formatConditionRuleExpression3.Expression = "[data.MgrScore] == \'乙\'";
+            gridFormatRule3.Rule = formatConditionRuleExpression3;
+            gridFormatRule4.Column = this.gridColumn10;
+            gridFormatRule4.ColumnApplyTo = this.gridColumn10;
+            gridFormatRule4.Name = "edit";
+            formatConditionRuleExpression4.Appearance.ForeColor = System.Drawing.Color.Red;
+            formatConditionRuleExpression4.Appearance.Options.UseForeColor = true;
+            formatConditionRuleExpression4.Expression = "StartsWith([data.DeptComments], \'⚠️\')";
+            gridFormatRule4.Rule = formatConditionRuleExpression4;
+            this.gvData.FormatRules.Add(gridFormatRule1);
+            this.gvData.FormatRules.Add(gridFormatRule2);
+            this.gvData.FormatRules.Add(gridFormatRule3);
+            this.gvData.FormatRules.Add(gridFormatRule4);
             this.gvData.GridControl = this.gcData;
             this.gvData.GroupCount = 1;
             this.gvData.Name = "gvData";
@@ -300,30 +367,6 @@
             this.gridColumn5.Visible = true;
             this.gridColumn5.VisibleIndex = 0;
             this.gridColumn5.Width = 87;
-            // 
-            // gridColumn9
-            // 
-            this.gridColumn9.Caption = "核定成績";
-            this.gridColumn9.FieldName = "data.DeptScore";
-            this.gridColumn9.Name = "gridColumn9";
-            this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 7;
-            // 
-            // gridColumn10
-            // 
-            this.gridColumn10.Caption = "核定評語";
-            this.gridColumn10.FieldName = "data.DeptComments";
-            this.gridColumn10.Name = "gridColumn10";
-            this.gridColumn10.Visible = true;
-            this.gridColumn10.VisibleIndex = 8;
-            // 
-            // gridColumn16
-            // 
-            this.gridColumn16.Caption = "經理室核定成績";
-            this.gridColumn16.FieldName = "data.MgrScore";
-            this.gridColumn16.Name = "gridColumn16";
-            this.gridColumn16.Visible = true;
-            this.gridColumn16.VisibleIndex = 5;
             // 
             // gColPCName
             // 

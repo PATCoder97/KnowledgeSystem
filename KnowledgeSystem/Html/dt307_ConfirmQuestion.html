@@ -104,7 +104,10 @@
 <body oncontextmenu="return false;">
 
     <div class="question">
-        題目：{{quesno}}
+        題目：{{quesno}} 
+        {{ if  ismultichoice }}
+        「復選題」
+        {{ end }}
     </div>
 
     <div class="question">

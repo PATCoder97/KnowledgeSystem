@@ -32,7 +32,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
         public f307_DoExam()
         {
             InitializeComponent();
-            //TopMost = true;
+            this.FormBorderStyle = FormBorderStyle.None; // Bỏ khung viền
+            this.WindowState = FormWindowState.Maximized; // Phóng to toàn màn hình
+            this.TopMost = true; // Đảm bảo form luôn ở trên cùng
 
             this.KeyDown += F307_DoExam_KeyDown;
             this.KeyPreview = true;  // Đảm bảo Form nhận được sự kiện KeyDown
@@ -46,10 +48,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             public string CorrectAnswer { get; set; }
             public string UserAnswer { get; set; }
             public bool IsCorrect { get; set; }
+            public bool IsMultiChoice { get; set; }
         }
 
         private Timer countdownTimer;
         private TimeSpan timeRemaining;
+
+        private bool IsClose = false;
 
         public string idJob = "";
         public int idExamUser = -1;
@@ -133,11 +138,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
 
         private void F307_DoExam_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Right || e.KeyCode == Keys.Down)
+            if (e.KeyCode == Keys.Right)
             {
                 NextQues();
             }
-            else if (e.KeyCode == Keys.Left || e.KeyCode == Keys.Up)
+            else if (e.KeyCode == Keys.Left)
             {
                 PreviousQues();
             }
@@ -173,7 +178,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
                 ques = ques[index].DisplayText,
                 quesimg = string.IsNullOrEmpty(ques[index].ImageName) ? "" :
                 ImageHelper.ConvertImageToBase64DataUri(Path.Combine(TPConfigs.Folder307, ques[index].ImageName)),
-                answers = anses
+                answers = anses,
+                ismultichoice = ques[index].IsMultiAns == true
             };
 
             // Thêm danh sách câu trả lời, và hiện các câu trả lời đã lưu
@@ -200,6 +206,15 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
         }
 
         private void f307_DoExam_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!IsClose)
+            {
+                MsgTP.MsgShowInfomation($"<font='Microsoft JhengHei UI' size=14>請按<color=red>「提交」</color>結束考試</font>");
+                e.Cancel = true;
+            }
+        }
+
+        private void f307_DoExam_FormClosed(object sender, FormClosedEventArgs e)
         {
             countdownTimer.Stop();
         }
@@ -244,6 +259,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
 
             MsgTP.MsgShowInfomation(htmlString);
 
+            IsClose = true;
             Close();
         }
 
@@ -304,7 +320,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
                                CorrectAnswer = correct.CorrectAnswer,
                                UserAnswer = "",
                                Questions = question,
-                               Answers = answers.Where(r => r.QuesId == question.Id).ToList()
+                               Answers = answers.Where(r => r.QuesId == question.Id).ToList(),
+                               IsMultiChoice = question.IsMultiAns == true
                            }).ToList();
 
             return "";

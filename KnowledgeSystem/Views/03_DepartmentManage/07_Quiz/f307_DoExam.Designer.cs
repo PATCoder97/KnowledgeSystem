@@ -402,6 +402,7 @@
             this.Text = "f307_DoExam";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.f307_DoExam_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.f307_DoExam_FormClosed);
             this.Load += new System.EventHandler(this.f307_DoExam_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);

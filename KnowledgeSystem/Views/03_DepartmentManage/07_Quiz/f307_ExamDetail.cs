@@ -36,8 +36,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
 
 
         DXMenuItem itemViewInfo;
-        DXMenuItem itemResetExam;
-        DXMenuItem itemExportExam;
 
         private void InitializeIcon()
         {
@@ -47,30 +45,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
         private void InitializeMenuItems()
         {
             itemViewInfo = CreateMenuItem("查看詳情", ItemViewInfo_Click, TPSvgimages.View);
-            itemResetExam = CreateMenuItem("刪除結果", ItemResetExam_Click, TPSvgimages.Remove);
-            itemExportExam = CreateMenuItem("導出結果", ItemExportExam_Click, TPSvgimages.Print);
-        }
-
-        private void ItemExportExam_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ItemResetExam_Click(object sender, EventArgs e)
-        {
-            GridView view = gvData;
-
-            int idBase = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColId));
-
-            var itemUpdate = dt307_ExamUserBUS.Instance.GetItemById(idBase);
-            itemUpdate.SubmitTime = null;
-            itemUpdate.Score = null;
-            itemUpdate.IsPass = false;
-            itemUpdate.ExamData = null;
-
-            dt307_ExamUserBUS.Instance.AddOrUpdate(itemUpdate);
-
-            LoadData();
         }
 
         private void ItemViewInfo_Click(object sender, EventArgs e)
@@ -102,7 +76,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
                         answerimage = string.IsNullOrEmpty(r.ImageName) ? "" : ImageHelper.ConvertImageToBase64DataUri(Path.Combine(TPConfigs.Folder307, r.ImageName))
                     }).ToList(),
                     correctanswer = data.CorrectAnswer,
-                    useranswer = data.UserAnswer
+                    useranswer = data.UserAnswer,
+                    ismultichoice = data.IsMultiChoice,
                 }).ToList();
 
             var datahtml = new
@@ -195,11 +170,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
                 view.FocusedRowHandle = e.HitInfo.RowHandle;
                 bool isComplete = !string.IsNullOrEmpty(view.GetRowCellValue(view.FocusedRowHandle, "data.SubmitTime")?.ToString());
 
-                e.Menu.Items.Add(itemViewInfo);
                 if (isComplete)
                 {
-                    e.Menu.Items.Add(itemExportExam);
-                    e.Menu.Items.Add(itemResetExam);
+                    e.Menu.Items.Add(itemViewInfo);
                 }
             }
         }

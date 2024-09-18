@@ -3,6 +3,7 @@ using DataAccessLayer;
 using DevExpress.Utils.Menu;
 using DevExpress.Utils.Svg;
 using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraPrinting.Native;
 using DevExpress.XtraSplashScreen;
 using DocumentFormat.OpenXml;
@@ -190,12 +191,17 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
                 {
                     var dateStr = ConvertToDateString(item["評核年月"].ToString());
 
+                    string lv2Cmt = item["複核評語"].ToString();
+                    string lv1Cmt = item["核定評語"].ToString();
+
+                    string cmt = lv2Cmt != lv1Cmt ? $"⚠️「{item["初核主管"]}」{lv2Cmt}→「{item["核定主管"]}」{lv1Cmt}" : lv1Cmt;
+
                     var data = new dt402_KPIWeb()
                     {
                         YearMonth = dateStr,
                         IdUsr = item["工號"].ToString(),
                         DeptScore = item["核定成績"].ToString(),
-                        DeptComments = item["核定評語"].ToString(),
+                        DeptComments = cmt,
                         MgrScore = item["經理室核定成績"].ToString(),
                         MgrComments = item["經理室核定評語"].ToString()
                     };
@@ -311,6 +317,28 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
                 LoadData();
             }
+        }
+
+        private void gvData_CustomDrawCell(object sender, DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventArgs e)
+        {
+            //GridView view = sender as GridView;
+            //if (e.RowHandle == view.FocusedRowHandle) return;
+            //if (e.Column.FieldName != "data.DeptComments") return;
+            //// Fill a cell's background if its value is greater than 30.
+            ////if (Convert.ToInt32(e.CellValue) > 30)
+            ////    e.Appearance.BackColor = Color.FromArgb(60, Color.Salmon);
+            ////// Specify the cell's display text. 
+            //string cmt = view.GetRowCellValue(e.RowHandle, view.Columns["data.DeptComments"])?.ToString() ?? "";
+            //if (cmt.StartsWith("⚠️"))
+            //{
+            //    e.Appearance.BackColor = System.Drawing.Color.FromArgb(60, System.Drawing.Color.Salmon);
+            //}
+
+            //e.DefaultDraw();
+            //// Paint images in cells if discounts > 0.
+            //Image image = Image.FromFile(@"C:\Users\ANHTUAN\Desktop\icons8_high_importance_24px.png");
+            //if (cmt.StartsWith("⚠️"))
+            //    e.Cache.DrawImage(image, e.Bounds.Location);
         }
     }
 }

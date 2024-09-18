@@ -97,7 +97,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
                                         answerimage = string.IsNullOrEmpty(r.ImageName) ? "" : ImageHelper.ConvertImageToBase64DataUri(Path.Combine(TPConfigs.Folder307, r.ImageName))
                                     }).ToList(),
                                     correctanswer = data.CorrectAnswer,
-                                    useranswer = data.UserAnswer
+                                    useranswer = data.UserAnswer,
+                                    ismultichoice = data.IsMultiChoice
                                 }).ToList();
 
                 var usr = usrs.FirstOrDefault(r => r.Id == item.IdUser);
