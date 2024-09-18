@@ -112,6 +112,7 @@
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_background.jpg" Value="..\KnowledgeSystem\bin\Release\Images"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_checked_radio_button.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_dt307_ConfirmQuestion.html" Value="..\KnowledgeSystem\bin\Release\Html"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_dt307_ResultExam.html" Value="..\KnowledgeSystem\bin\Release\Html"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_f301_NotifyPersonnelTransfer.html" Value="..\KnowledgeSystem\bin\Release\Html"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons8_finish_flag.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons8_learn.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
@@ -267,6 +268,7 @@
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_background.jpg" Value="background.jpg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_checked_radio_button.svg" Value="checked_radio_button.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_dt307_ConfirmQuestion.html" Value="dt307_ConfirmQuestion.html"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_dt307_ResultExam.html" Value="dt307_ResultExam.html"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_f301_NotifyPersonnelTransfer.html" Value="f301_NotifyPersonnelTransfer.html"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_icons8_finish_flag.svg" Value="icons8_finish_flag.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_icons8_learn.svg" Value="icons8_learn.svg"/>
@@ -317,16 +319,19 @@
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_noimage.png" Value="no-image.png"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_none.svg" Value="none.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_unchecked_radio_button.svg" Value="unchecked_radio_button.svg"/>
+    <ROW Property="AI_RUN_AS_ADMIN" Value="1"/>
     <ROW Property="ALLUSERS" Value="1"/>
     <ROW Property="ARPCOMMENTS" Value="This installer database contains the logic and data required to install [|ProductName]." ValueLocId="*"/>
     <ROW Property="ARPCONTACT" Value="VNW0014732 潘英俊"/>
     <ROW Property="ARPHELPTELEPHONE" Value="6779"/>
     <ROW Property="ARPPRODUCTICON" Value="AppIcon.exe" Type="8"/>
+    <ROW Property="CTRLS" Value="2"/>
     <ROW Property="Manufacturer" Value="FHS"/>
     <ROW Property="ProductCode" Value="1028:{AE81805B-98B7-4516-9AC0-20DD287A6CF0} 1033:{AE81805B-98B7-4516-9AC0-20DD287A6CF0} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="Document Management System"/>
     <ROW Property="ProductVersion" Value="24.09.06"/>
+    <ROW Property="RUNAPPLICATION" Value="1" Type="4"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{3D296ADD-7B3B-4B1B-8A4D-8DA669CCAF51}"/>
     <ROW Property="WindowsType9X" MultiBuildValue="DefaultBuild:Windows 9x/ME" ValueLocId="-"/>
@@ -536,6 +541,7 @@
     <ROW File="icons8_learn.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS8~4.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons8_learn.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons8_learn.svg&gt;" SelfReg="false"/>
     <ROW File="icons8_print.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS8~5.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons8_print.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons8_print.svg&gt;" SelfReg="false"/>
     <ROW File="icons8_time.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS8~6.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons8_time.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons8_time.svg&gt;" SelfReg="false"/>
+    <ROW File="dt307_ResultExam.html" Component_="KnowledgeSystem_ContentOutput_Html" FileName="DT307_~3.HTM|[|AI_PROPPATH_FILENAME_PERBUILD_dt307_ResultExam.html]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_dt307_ResultExam.html&gt;" SelfReg="false"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.AppPathsComponent">
     <ROW Name="AI_APPPATH_PERBUILD_Actions_Bell.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_Actions_Bell.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_Actions_Bell.svg]" Type="2" Content="0"/>
@@ -643,6 +649,7 @@
     <ROW Name="AI_APPPATH_PERBUILD_background.jpg" Path="[|AI_PROPPATH_DIR_PERBUILD_background.jpg]\[|AI_PROPPATH_FILENAME_PERBUILD_background.jpg]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_checked_radio_button.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_checked_radio_button.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_checked_radio_button.svg]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_dt307_ConfirmQuestion.html" Path="[|AI_PROPPATH_DIR_PERBUILD_dt307_ConfirmQuestion.html]\[|AI_PROPPATH_FILENAME_PERBUILD_dt307_ConfirmQuestion.html]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_dt307_ResultExam.html" Path="[|AI_PROPPATH_DIR_PERBUILD_dt307_ResultExam.html]\[|AI_PROPPATH_FILENAME_PERBUILD_dt307_ResultExam.html]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_f301_NotifyPersonnelTransfer.html" Path="[|AI_PROPPATH_DIR_PERBUILD_f301_NotifyPersonnelTransfer.html]\[|AI_PROPPATH_FILENAME_PERBUILD_f301_NotifyPersonnelTransfer.html]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_icons8_finish_flag.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_icons8_finish_flag.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_icons8_finish_flag.svg]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_icons8_learn.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_icons8_learn.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_icons8_learn.svg]" Type="2" Content="0"/>
@@ -758,6 +765,7 @@
     <ROW Action="AI_DpiContentScale" Type="1" Source="aicustact.dll" Target="DpiContentScale"/>
     <ROW Action="AI_EnableDebugLog" Type="321" Source="aicustact.dll" Target="EnableDebugLog"/>
     <ROW Action="AI_InstallModeCheck" Type="1" Source="aicustact.dll" Target="UpdateInstallMode" WithoutSeq="true"/>
+    <ROW Action="AI_LaunchApp" Type="1" Source="aicustact.dll" Target="[#KnowledgeSystem.exe]"/>
     <ROW Action="AI_PREPARE_UPGRADE" Type="65" Source="aicustact.dll" Target="PrepareUpgrade"/>
     <ROW Action="AI_PinShortcuts" Type="1" Source="ShortcutFlags.dll" Target="PinShortcuts"/>
     <ROW Action="AI_PinToStartScreen" Type="1025" Source="ShortcutFlags.dll" Target="PinToStartScreen" WithoutSeq="true"/>
@@ -1005,5 +1013,6 @@
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons8_learn.svg"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons8_print.svg"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons8_time.svg"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="dt307_ResultExam.html"/>
   </COMPONENT>
 </DOCUMENT>
