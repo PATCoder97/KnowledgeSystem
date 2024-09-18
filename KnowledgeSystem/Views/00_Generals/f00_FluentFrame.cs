@@ -42,7 +42,7 @@ namespace KnowledgeSystem.Views._00_Generals
 
         #region methods
 
-        public void OpenForm(string nameForm)
+        public void OpenForm(string nameForm, string formName = "")
         {
             // Lấy kiểu của form cần mở từ assembly đang thực thi
             var typeform = Assembly.GetExecutingAssembly().GetTypes().FirstOrDefault(a => a.Name == nameForm);
@@ -64,6 +64,7 @@ namespace KnowledgeSystem.Views._00_Generals
             else if (typeform.BaseType == typeof(XtraForm))
             {
                 var f = (Form)Activator.CreateInstance(typeform);
+                f.Text = formName;
                 f.ShowDialog();
             }
         }
@@ -137,7 +138,7 @@ namespace KnowledgeSystem.Views._00_Generals
         private void accordionElement_Click(object sender, EventArgs e)
         {
             AccordionControlElement buttonAuto = sender as AccordionControlElement;
-            OpenForm(buttonAuto.Name.Replace("name_", ""));
+            OpenForm(buttonAuto.Name.Replace("name_", ""),buttonAuto.Text);
         }
 
         private void f00_FluentFrame_Shown(object sender, EventArgs e)
