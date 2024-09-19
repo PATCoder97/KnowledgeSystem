@@ -35,6 +35,7 @@
             this.btnPrevius = new DevExpress.XtraBars.BarButtonItem();
             this.lbPageNumber = new DevExpress.XtraBars.BarStaticItem();
             this.btnNext = new DevExpress.XtraBars.BarButtonItem();
+            this.btnConfirm = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -43,7 +44,6 @@
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.btnConfirm = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.webViewQues)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
@@ -136,6 +136,15 @@
             this.btnNext.Name = "btnNext";
             this.btnNext.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnNext_ItemClick);
             // 
+            // btnConfirm
+            // 
+            this.btnConfirm.Caption = "確認完成";
+            this.btnConfirm.Id = 15;
+            this.btnConfirm.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnConfirm.ImageOptions.SvgImage")));
+            this.btnConfirm.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnConfirm.Name = "btnConfirm";
+            this.btnConfirm.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnConfirm_ItemClick);
+            // 
             // barDockControlTop
             // 
             this.barDockControlTop.CausesValidation = false;
@@ -210,15 +219,6 @@
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
-            // btnConfirm
-            // 
-            this.btnConfirm.Caption = "確認完成";
-            this.btnConfirm.Id = 15;
-            this.btnConfirm.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem1.ImageOptions.SvgImage")));
-            this.btnConfirm.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnConfirm.Name = "btnConfirm";
-            this.btnConfirm.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnConfirm_ItemClick);
-            // 
             // f307_ConfirmQues
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -230,9 +230,10 @@
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.IconOptions.Image = global::KnowledgeSystem.Properties.Resources.AppIcon;
             this.Name = "f307_ConfirmQues";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "f307_ConfirmQues";
+            this.Text = "確認題目";
             this.Load += new System.EventHandler(this.f307_ConfirmQues_Load);
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.webViewQues)).EndInit();

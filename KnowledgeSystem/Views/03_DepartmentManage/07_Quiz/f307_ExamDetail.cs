@@ -14,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -40,6 +41,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
         private void InitializeIcon()
         {
             btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
+            btnExportExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
         }
 
         private void InitializeMenuItems()
@@ -78,6 +80,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
                     correctanswer = data.CorrectAnswer,
                     useranswer = data.UserAnswer,
                     ismultichoice = data.IsMultiChoice,
+                    iscorrect = data.IsCorrect
                 }).ToList();
 
             var datahtml = new
@@ -180,6 +183,18 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
         private void btnReload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             LoadData();
+        }
+
+        private void btnExportExcel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            string documentsPath = TPConfigs.DocumentPath();
+            if (!Directory.Exists(documentsPath))
+                Directory.CreateDirectory(documentsPath);
+
+            string filePath = Path.Combine(documentsPath, $"考試結果 - {DateTime.Now:yyyyMMddHHmm}.xlsx");
+
+            gcData.ExportToXlsx(filePath);
+            Process.Start(filePath);
         }
     }
 }

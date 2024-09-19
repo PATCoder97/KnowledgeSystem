@@ -397,9 +397,10 @@
             this.ClientSize = new System.Drawing.Size(1201, 666);
             this.Controls.Add(this.layoutControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.IconOptions.Image = global::KnowledgeSystem.Properties.Resources.AppIcon;
             this.Name = "f307_DoExam";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "f307_DoExam";
+            this.Text = "執行考試";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.f307_DoExam_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.f307_DoExam_FormClosed);

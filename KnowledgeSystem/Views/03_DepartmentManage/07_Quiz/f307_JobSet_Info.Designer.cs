@@ -38,6 +38,7 @@
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.txbMultiChoice = new DevExpress.XtraEditors.TextEdit();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txbTotalQues = new DevExpress.XtraEditors.TextEdit();
@@ -54,12 +55,12 @@
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.txbMultiChoice = new DevExpress.XtraEditors.TextEdit();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txbMultiChoice.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbTotalQues.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbPassScore.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbTime.Properties)).BeginInit();
@@ -74,7 +75,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbMultiChoice.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
             this.SuspendLayout();
@@ -182,6 +182,21 @@
             this.layoutControl1.Size = new System.Drawing.Size(410, 237);
             this.layoutControl1.TabIndex = 7;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // txbMultiChoice
+            // 
+            this.txbMultiChoice.Location = new System.Drawing.Point(109, 192);
+            this.txbMultiChoice.Name = "txbMultiChoice";
+            this.txbMultiChoice.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.txbMultiChoice.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.txbMultiChoice.Properties.Appearance.Options.UseFont = true;
+            this.txbMultiChoice.Properties.Appearance.Options.UseForeColor = true;
+            this.txbMultiChoice.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
+            this.txbMultiChoice.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False");
+            this.txbMultiChoice.Properties.MaskSettings.Set("mask", "D");
+            this.txbMultiChoice.Size = new System.Drawing.Size(94, 32);
+            this.txbMultiChoice.StyleController = this.layoutControl1;
+            this.txbMultiChoice.TabIndex = 21;
             // 
             // label2
             // 
@@ -426,21 +441,6 @@
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
-            // txbMultiChoice
-            // 
-            this.txbMultiChoice.Location = new System.Drawing.Point(109, 192);
-            this.txbMultiChoice.Name = "txbMultiChoice";
-            this.txbMultiChoice.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.txbMultiChoice.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.txbMultiChoice.Properties.Appearance.Options.UseFont = true;
-            this.txbMultiChoice.Properties.Appearance.Options.UseForeColor = true;
-            this.txbMultiChoice.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
-            this.txbMultiChoice.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False");
-            this.txbMultiChoice.Properties.MaskSettings.Set("mask", "D");
-            this.txbMultiChoice.Size = new System.Drawing.Size(94, 32);
-            this.txbMultiChoice.StyleController = this.layoutControl1;
-            this.txbMultiChoice.TabIndex = 21;
-            // 
             // layoutControlItem3
             // 
             this.layoutControlItem3.AllowHtmlStringInCaption = true;
@@ -481,11 +481,12 @@
             this.IconOptions.Image = global::KnowledgeSystem.Properties.Resources.AppIcon;
             this.Name = "f307_JobSet_Info";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "f307_JobSet_Info";
+            this.Text = "設定課程";
             this.Load += new System.EventHandler(this.f307_JobSet_Info_Load);
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txbMultiChoice.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbTotalQues.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbPassScore.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbTime.Properties)).EndInit();
@@ -500,7 +501,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbMultiChoice.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
             this.ResumeLayout(false);

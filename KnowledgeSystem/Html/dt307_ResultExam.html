@@ -18,7 +18,8 @@
             font-weight: bold;
             font-size: 1.5em;
             color: #333;
-            margin-bottom: 20px;
+            margin-bottom: 5px;
+            margin-top: 5px;
         }
 
         .answer-container {
@@ -84,6 +85,25 @@
             width: 150px;
         }
 
+        .container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 600px; /* Đặt độ rộng tối đa */
+            margin: 0 auto; /* Canh giữa */
+        }
+        .column {
+            width: 45%; /* Độ rộng cố định cho mỗi cột */
+            padding: 10px;
+            border: 1px solid #ccc;
+            box-sizing: border-box; /* Đảm bảo padding không ảnh hưởng đến độ rộng tổng */
+        }
+        .user-answer {
+            background-color: #f9f9f9;
+        }
+        .correct-answer {
+            background-color: #e0f7fa;
+        }
     </style>
 </head>
 
@@ -103,8 +123,8 @@
             <td class="value">{{userid}}</td>
         </tr>
         <tr></tr>
-            <td class="label">職務</td>
-            <td class="value">{{jobname}}</td>
+        <td class="label">職務</td>
+        <td class="value">{{jobname}}</td>
         </tr>
         <tr>
             <td class="label">成績</td>
@@ -113,11 +133,8 @@
     </table>
 
     {{- for data in dataexam }}
-    <div class="question">
-        題目：{{data.questionindex}}
-        {{ if  data.ismultichoice }}
-        「復選題」
-        {{ end }}
+    <div class="question" {{ if data.iscorrect }} style="color: green "{{ else }} style="color: red "{{ end }};>
+        題目：{{data.questionindex}} {{ if data.iscorrect }} 正確 {{ else }} 錯誤 {{ end }} {{ if data.ismultichoice }} 「復選題」 {{ end }}
     </div>
 
     <div class="question">
@@ -128,27 +145,27 @@
     <div style="text-align: center;">
         <img src="{{data.questionimage}}" alt="data.questionimage" height="200px">
     </div>
-    {{ end }}
-
-    {{- for ans in data.answers }}
+    {{ end }} {{- for ans in data.answers }}
     <div class="answer-container">
         <div class="answer-number">{{ans.id}}</div>
 
         <div class="answer" {{ if ans.istrue }} style="background-color:#66CDAA;">
-            {{ else }}
-            style="background-color: #f0f0f0;">
-            {{ end }}
-
-            {{ if ans.answerimage != "" }}
-            <img src="{{ans.answerimage}}" alt="ans.answerimage" onclick="enlargeImage(this)">
-            {{ end }}
-
-            {{ans.answertext}}
+            {{ else }} style="background-color: #f0f0f0;"> {{ end }} {{ if ans.answerimage != "" }}
+            <img src="{{ans.answerimage}}" alt="ans.answerimage" onclick="enlargeImage(this)"> {{ end }} {{ans.answertext}}
         </div>
-
 
     </div>
     {{- end }}
+
+    <div class="container">
+        <div class="column user-answer">
+            用戶答案：{{data.useranswer}}
+        </div>
+        <div class="column correct-answer">
+            正確答案：{{data.correctanswer}}
+        </div>
+    </div>
+
     {{- end }}
 
 </body>

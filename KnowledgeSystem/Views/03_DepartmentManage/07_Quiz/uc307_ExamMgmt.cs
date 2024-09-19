@@ -98,7 +98,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
                                     }).ToList(),
                                     correctanswer = data.CorrectAnswer,
                                     useranswer = data.UserAnswer,
-                                    ismultichoice = data.IsMultiChoice
+                                    ismultichoice = data.IsMultiChoice,
+                                    iscorrect = data.IsCorrect
                                 }).ToList();
 
                 var usr = usrs.FirstOrDefault(r => r.Id == item.IdUser);
