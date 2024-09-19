@@ -104,7 +104,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             XtraForm formView = new XtraForm
             {
                 Text = "考試結果",
-                WindowState = FormWindowState.Maximized
+                WindowState = FormWindowState.Maximized,
+                FormBorderStyle = FormBorderStyle.FixedDialog
             };
 
             formView.Controls.Add(webView);

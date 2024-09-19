@@ -50,7 +50,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
         private void InitializeIcon()
         {
             btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
-            btnExportExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
             grPractise.ImageOptions.SvgImage = TPSvgimages.Learn;
             btnPractiseMyJob.ImageOptions.SvgImage = TPSvgimages.Num1;
             btnPractiseOtherJob.ImageOptions.SvgImage = TPSvgimages.Num2;
@@ -101,24 +100,14 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
                 fDoExam.idJob = idJob;
                 fDoExam.idExamUser = idExam;
                 fDoExam.ShowDialog();
+
+                LoadData();
             }
         }
 
         private void btnReload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             LoadData();
-        }
-
-        private void btnExportExcel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            string documentsPath = TPConfigs.DocumentPath();
-            if (!Directory.Exists(documentsPath))
-                Directory.CreateDirectory(documentsPath);
-
-            string filePath = Path.Combine(documentsPath, $"考試系統 - {DateTime.Now:yyyyMMddHHmm}.xlsx");
-
-            gcData.ExportToXlsx(filePath);
-            Process.Start(filePath);
         }
 
         private void btnPractiseMyJob_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -128,11 +117,22 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             var ques = dt307_QuestionsBUS.Instance.GetListByJob(idJob);
             var jobsSetting = dt307_JobQuesManageBUS.Instance.GetItemByIdJob(idJob);
 
-            var countMultiQues = ques.Count(r => r.IsMultiAns == true);
+            if (jobsSetting == null)
+            {
+                MsgTP.MsgError("職務還沒設定！");
+                return;
+            }
 
-            if (jobsSetting.QuesCount > ques.Count || jobsSetting.MultiQues > countMultiQues)
+            if (ques.Count <= 0 || jobsSetting.QuesCount > ques.Count)
             {
                 MsgTP.MsgError("題目庫不過！");
+                return;
+            }
+
+            var countMultiQues = ques.Count(r => r.IsMultiAns == true);
+            if (jobsSetting.MultiQues > countMultiQues)
+            {
+                MsgTP.MsgError("復選題不過！");
                 return;
             }
 

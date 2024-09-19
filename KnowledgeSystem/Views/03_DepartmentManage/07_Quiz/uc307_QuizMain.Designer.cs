@@ -51,7 +51,6 @@
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnReload = new DevExpress.XtraBars.BarButtonItem();
-            this.btnExportExcel = new DevExpress.XtraBars.BarButtonItem();
             this.grPractise = new DevExpress.XtraBars.BarSubItem();
             this.btnPractiseMyJob = new DevExpress.XtraBars.BarButtonItem();
             this.btnPractiseOtherJob = new DevExpress.XtraBars.BarButtonItem();
@@ -289,7 +288,6 @@
             this.barManagerTP.Form = this;
             this.barManagerTP.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.btnReload,
-            this.btnExportExcel,
             this.btnPractiseMyJob,
             this.grPractise,
             this.btnPractiseOtherJob});
@@ -319,7 +317,6 @@
             this.bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnReload, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnExportExcel, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.grPractise, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawDragBorder = false;
@@ -341,20 +338,6 @@
             this.btnReload.ItemAppearance.Normal.Options.UseForeColor = true;
             this.btnReload.Name = "btnReload";
             this.btnReload.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnReload_ItemClick);
-            // 
-            // btnExportExcel
-            // 
-            this.btnExportExcel.Caption = "出表";
-            this.btnExportExcel.Id = 2;
-            this.btnExportExcel.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnExportExcel.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
-            this.btnExportExcel.ItemAppearance.Hovered.Options.UseForeColor = true;
-            this.btnExportExcel.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExportExcel.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
-            this.btnExportExcel.ItemAppearance.Normal.Options.UseFont = true;
-            this.btnExportExcel.ItemAppearance.Normal.Options.UseForeColor = true;
-            this.btnExportExcel.Name = "btnExportExcel";
-            this.btnExportExcel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExportExcel_ItemClick);
             // 
             // grPractise
             // 
@@ -502,7 +485,6 @@
         private DevExpress.XtraBars.BarManager barManagerTP;
         private DevExpress.XtraBars.Bar bar2;
         private DevExpress.XtraBars.BarButtonItem btnReload;
-        private DevExpress.XtraBars.BarButtonItem btnExportExcel;
         private DevExpress.XtraBars.BarDockControl barDockControlTop;
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;

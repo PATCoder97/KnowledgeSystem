@@ -70,7 +70,7 @@ namespace KnowledgeSystem.Helpers
             AppPermission.ISOAuditDocsMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleISOAuditDocsMain")?.ValueT ?? "-1");
             AppPermission.TechnicalPrjMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleTechnicalPrjMain")?.ValueT ?? "-1");
             AppPermission.SignatureDigital = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleSignatureDigitalMain")?.ValueT ?? "-1");
-            AppPermission.QuizMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "QuizMain")?.ValueT ?? "-1");
+            AppPermission.QuizMain = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleQuizMain")?.ValueT ?? "-1");
             AppPermission.Extensions = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "Extensions")?.ValueT ?? "-1");
 
             AppPermission.ChangeUser304 = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "Role304ChangeUser")?.ValueT ?? "-1");
