@@ -99,7 +99,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             {
                 baseData.DocCode = txbDocCode.Text;
                 baseData.DisplayName = txbDisplayName.Text;
-                baseData.Articles = txbArticles.EditValue.ToString();
+                baseData.Articles = txbArticles.EditValue?.ToString() ?? "";
 
                 msg = $"{baseData.DocCode} {baseData.DisplayName}";
                 switch (eventInfo)

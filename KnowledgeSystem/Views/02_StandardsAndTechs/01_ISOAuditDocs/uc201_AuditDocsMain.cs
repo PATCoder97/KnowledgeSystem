@@ -196,17 +196,17 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void treeFolder_PopupMenuShowing(object sender, DevExpress.XtraTreeList.PopupMenuShowingEventArgs e)
         {
-            // Sửa tên các Item về tiếng trung
-            TranslateMenuItemCaption("Full Expand", "完全展開", e.Menu.Items);
-            TranslateMenuItemCaption("Expand", "展開", e.Menu.Items);
-            TranslateMenuItemCaption("Full Collapse", "完全折疊", e.Menu.Items);
-            TranslateMenuItemCaption("Collapse", "折疊", e.Menu.Items);
+            //// Sửa tên các Item về tiếng trung
+            //TranslateMenuItemCaption("Full Expand", "完全展開", e.Menu.Items);
+            //TranslateMenuItemCaption("Expand", "展開", e.Menu.Items);
+            //TranslateMenuItemCaption("Full Collapse", "完全折疊", e.Menu.Items);
+            //TranslateMenuItemCaption("Collapse", "折疊", e.Menu.Items);
 
-            void TranslateMenuItemCaption(string originalCaption, string translatedCaption, DXMenuItemCollection menuItems)
-            {
-                var menuItem = menuItems.FirstOrDefault(item => item.Caption == originalCaption);
-                if (menuItem != null) menuItem.Caption = translatedCaption;
-            }
+            //void TranslateMenuItemCaption(string originalCaption, string translatedCaption, DXMenuItemCollection menuItems)
+            //{
+            //    var menuItem = menuItems.FirstOrDefault(item => item.Caption == originalCaption);
+            //    if (menuItem != null) menuItem.Caption = translatedCaption;
+            //}
 
             TreeList treeList = sender as TreeList;
             if (e.HitInfo.InRowCell && e.HitInfo.Node.Id >= 0)
@@ -266,6 +266,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
                 if (rowData.IsFinalNode != true)
                 {
+                    treeList.FocusedNode.Expanded = !treeList.FocusedNode.Expanded;
+
                     gcData.DataSource = null;
                     return;
                 }

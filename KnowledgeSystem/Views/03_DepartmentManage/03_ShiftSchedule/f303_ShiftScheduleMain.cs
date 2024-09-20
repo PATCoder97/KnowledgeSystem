@@ -4,6 +4,7 @@ using DevExpress.XtraEditors;
 using DocumentFormat.OpenXml.Spreadsheet;
 using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.parser;
+using KnowledgeSystem.Helpers;
 using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
@@ -214,6 +215,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._03_ShiftSchedule
                     if (matchCollection.Count == 0) continue;
 
                     string userID = matchCollection[0].ToString();
+
+                    if (shiftDatas.Any(r => r.Key == userID))
+                    {
+                        MsgTP.MsgError("人員重複!");
+                        Close();
+                        return;
+                    }
 
                     regex = new Regex(@"[休中早夜日班GOFB]{40,}", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Multiline | RegexOptions.Singleline);
                     matchCollection = regex.Matches(line);
