@@ -327,10 +327,10 @@
     <ROW Property="ARPPRODUCTICON" Value="AppIcon.exe" Type="8"/>
     <ROW Property="CTRLS" Value="2"/>
     <ROW Property="Manufacturer" Value="FHS"/>
-    <ROW Property="ProductCode" Value="1028:{AE81805B-98B7-4516-9AC0-20DD287A6CF0} 1033:{AE81805B-98B7-4516-9AC0-20DD287A6CF0} " Type="16"/>
+    <ROW Property="ProductCode" Value="1028:{8FABAE0D-66BA-4004-B450-72E7A832B32A} 1033:{8FABAE0D-66BA-4004-B450-72E7A832B32A} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="Document Management System"/>
-    <ROW Property="ProductVersion" Value="24.09.06"/>
+    <ROW Property="ProductVersion" Value="24.09.20"/>
     <ROW Property="RUNAPPLICATION" Value="1" Type="4"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{3D296ADD-7B3B-4B1B-8A4D-8DA669CCAF51}"/>

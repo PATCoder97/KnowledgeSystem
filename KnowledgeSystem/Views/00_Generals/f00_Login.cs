@@ -62,7 +62,7 @@ namespace KnowledgeSystem.Views._00_Generals
                 dm_User usrLogin = null;
 
                 // Không dùng chung domain => Dùng tài khoản đã có trong CSDL
-                if (TPConfigs.DomainComputer == DomainVNFPG.domainVNFPG)
+                if (TPConfigs.DomainComputer != DomainVNFPG.domainVNFPG)
                 {
                     usrLogin = dm_UserBUS.Instance.CheckLogin(_userID, _password);
                     goto ResultLogin;

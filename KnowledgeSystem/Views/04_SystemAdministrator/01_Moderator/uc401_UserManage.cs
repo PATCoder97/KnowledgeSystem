@@ -38,6 +38,7 @@ using DevExpress.XtraGrid.Views.Items.ViewInfo;
 using Org.BouncyCastle.Crypto;
 using System.Globalization;
 using System.Net;
+using System.Web.UI.WebControls;
 
 namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 {
@@ -185,6 +186,9 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             gcData.DataSource = sourceUsers;
 
             LoadUser();
+
+            string filterString = "[StatusName] In ('在職','留職停薪')";
+            gvData.Columns["StatusName"].FilterInfo = new ColumnFilterInfo(filterString);
         }
 
         private void btnCreate_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
