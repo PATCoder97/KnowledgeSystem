@@ -221,6 +221,9 @@
             this.treeFolder.Name = "treeFolder";
             this.treeFolder.OptionsCustomization.AllowFilter = false;
             this.treeFolder.OptionsCustomization.AllowSort = false;
+            this.treeFolder.OptionsFind.AllowIncrementalSearch = true;
+            this.treeFolder.OptionsFind.AlwaysVisible = true;
+            this.treeFolder.OptionsFind.Behavior = DevExpress.XtraEditors.FindPanelBehavior.Filter;
             this.treeFolder.OptionsView.AutoWidth = false;
             this.treeFolder.OptionsView.EnableAppearanceOddRow = true;
             this.treeFolder.OptionsView.ShowAutoFilterRow = true;

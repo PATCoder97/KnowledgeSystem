@@ -253,6 +253,12 @@
     <Compile Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\uc201_AuditDocsMain.Designer.cs">
       <DependentUpon>uc201_AuditDocsMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\uc201_AuditISOMain.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\uc201_AuditISOMain.Designer.cs">
+      <DependentUpon>uc201_AuditISOMain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\uc201_UpdateUsrReq.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -842,6 +848,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\uc201_AuditDocsMain.resx">
       <DependentUpon>uc201_AuditDocsMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\uc201_AuditISOMain.resx">
+      <DependentUpon>uc201_AuditISOMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\uc201_DigitalSignature.resx">
       <DependentUpon>uc201_DigitalSignature.cs</DependentUpon>

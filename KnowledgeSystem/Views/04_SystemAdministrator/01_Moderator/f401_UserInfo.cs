@@ -720,7 +720,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             editor.Properties.Appearance.ForeColor = Color.Black;
             editor.Properties.NullText = "";
             editor.Properties.PopupView = editView;
-
+            
             var result = XtraInputBox.Show(args);
             if (result == null) return;
 
@@ -728,7 +728,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
             cbbJobTitle.EditValue = idJobChange;
 
-            eventInfo = EventFormInfo.Update;
+            eventInfo = EventFormInfo.Update;            
             _eventUpdate = UpdateEvent.JobChange;
             LockControl();
 
