@@ -134,6 +134,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             dt306_ProgInfoBUS.Instance.RemoveByIdBase(idBase);
             dt306_ProgressBUS.Instance.RemoveByIdBase(idBase);
 
+            var atts = dt306_BaseAttsBUS.Instance.GetListByIdBase(idBase);
+            foreach (var att in atts)
+            {
+                dm_AttachmentBUS.Instance.RemoveById(att.Id);
+            }
+
             LoadData();
         }
 

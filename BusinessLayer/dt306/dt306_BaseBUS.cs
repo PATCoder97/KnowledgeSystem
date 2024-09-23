@@ -73,6 +73,22 @@ namespace BusinessLayer
             }
         }
 
+        public List<dt306_Base> GetListProcessing()
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt306_Base.Where(r => r.IsProcess == true).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public List<dt306_Base> GetListByNextStep(string idUser)
         {
             try
@@ -154,7 +170,7 @@ namespace BusinessLayer
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
                     var itemRemove = _context.dt306_Base.FirstOrDefault(r => r.Id == id);
-                     _context.dt306_Base.Remove(itemRemove);
+                    _context.dt306_Base.Remove(itemRemove);
 
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;
