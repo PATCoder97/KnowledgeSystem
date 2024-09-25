@@ -48,6 +48,30 @@ namespace BusinessLayer
             }
         }
 
+        public bool AddRange(List<dt201_Forms> item)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    _context.dt201_Forms.AddRange(item);
+                    int affectedRecords = _context.SaveChanges();
+
+                    if (affectedRecords > 0)
+                    {
+                        return true;
+                    }
+
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                return false;
+            }
+        }
+
         public List<dt201_Forms> GetList()
         {
             try
@@ -70,7 +94,7 @@ namespace BusinessLayer
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dt201_Forms.Where(r =>  r.IdBase == idBase).ToList();
+                    return _context.dt201_Forms.Where(r => r.IdBase == idBase).ToList();
                 }
             }
             catch (Exception ex)

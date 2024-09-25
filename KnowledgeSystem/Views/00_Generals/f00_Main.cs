@@ -112,8 +112,6 @@ namespace KnowledgeSystem.Views._00_Generals
         {
             BackgroundImage = TPSvgimages.Background;
 
-            GetUserLogin();
-
 #if DEBUG
             // Không cần check update khi debug
 #else
@@ -140,6 +138,8 @@ namespace KnowledgeSystem.Views._00_Generals
                 }
             }
 #endif
+
+            GetUserLogin();
 
             try
             {

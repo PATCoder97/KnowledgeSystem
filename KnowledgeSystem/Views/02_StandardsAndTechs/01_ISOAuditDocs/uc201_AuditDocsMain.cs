@@ -40,6 +40,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         DXMenuItem itemDelNode;
         DXMenuItem itemEditNode;
         DXMenuItem itemAddVer;
+        DXMenuItem itemDisable;
 
         List<dt201_Base> baseDatas = new List<dt201_Base>();
         BindingSource sourceFunc = new BindingSource();
@@ -55,6 +56,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             itemDelNode = CreateMenuItem("刪除", ItemDeleteNote_Click, TPSvgimages.Close);
             itemEditNode = CreateMenuItem("更新", ItemEditNode_Click, TPSvgimages.Edit);
             itemAddVer = CreateMenuItem("新增年版", ItemAddVer_Click, TPSvgimages.Add2);
+            itemDisable = CreateMenuItem("停用", ItemDisable_Click, TPSvgimages.Suspension);
         }
 
         DXMenuItem CreateMenuItem(string caption, EventHandler clickEvent, SvgImage svgImage)
@@ -68,6 +70,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         {
             menuItem.ImageOptions.SvgImageSize = new Size(24, 24);
             menuItem.AppearanceHovered.ForeColor = Color.Blue;
+        }
+
+        private void ItemDisable_Click(object sender, EventArgs e)
+        {
+            
         }
 
         private void ItemEditNode_Click(object sender, EventArgs e)

@@ -230,22 +230,26 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
 
         private void ItemViewFile_Click(object sender, EventArgs e)
         {
-            GridView view = gvData.GetDetailView(gvData.FocusedRowHandle, 0) as GridView;
-            int idAtt = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColIdAtt));
+            f00_VIewFile fView;
+            using (var handle = SplashScreenManager.ShowOverlayForm(this))
+            {
+                GridView view = gvData.GetDetailView(gvData.FocusedRowHandle, 0) as GridView;
+                int idAtt = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColIdAtt));
 
-            var att = dm_AttachmentBUS.Instance.GetItemById(idAtt);
-            string filePath = att.EncryptionName;
-            string actualName = att.ActualName;
+                var att = dm_AttachmentBUS.Instance.GetItemById(idAtt);
+                string filePath = att.EncryptionName;
+                string actualName = att.ActualName;
 
-            string sourcePath = Path.Combine(TPConfigs.Folder306, filePath);
-            string destPath = Path.Combine(TPConfigs.TempFolderData, $"{actualName}_{DateTime.Now:yyyyMMddHHmmss}.pdf");
+                string sourcePath = Path.Combine(TPConfigs.Folder306, filePath);
+                string destPath = Path.Combine(TPConfigs.TempFolderData, $"{actualName}_{DateTime.Now:yyyyMMddHHmmss}.pdf");
 
-            if (!Directory.Exists(TPConfigs.TempFolderData))
-                Directory.CreateDirectory(TPConfigs.TempFolderData);
+                if (!Directory.Exists(TPConfigs.TempFolderData))
+                    Directory.CreateDirectory(TPConfigs.TempFolderData);
 
-            File.Copy(sourcePath, destPath, true);
+                File.Copy(sourcePath, destPath, true);
+                fView = new f00_VIewFile(destPath, isCanSave: false);
+            }
 
-            f00_VIewFile fView = new f00_VIewFile(destPath, isCanSave: false);
             fView.ShowDialog();
         }
 

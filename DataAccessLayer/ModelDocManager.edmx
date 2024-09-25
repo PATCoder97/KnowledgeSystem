@@ -195,6 +195,7 @@
           <Property Name="DelTime" Type="datetime" />
           <Property Name="IsPaperType" Type="bit" />
           <Property Name="NotifyCycle" Type="int" />
+          <Property Name="IsDisable" Type="bit" />
         </EntityType>
         <EntityType Name="dt201_Forms">
           <Key>
@@ -1520,6 +1521,7 @@
           <Property Name="DelTime" Type="DateTime" Precision="3" />
           <Property Name="IsPaperType" Type="Boolean" />
           <Property Name="NotifyCycle" Type="Int32" />
+          <Property Name="IsDisable" Type="Boolean" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2266,6 +2268,7 @@
           <EntitySetMapping Name="dt201_Base">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt201_Base">
               <MappingFragment StoreEntitySet="dt201_Base">
+                <ScalarProperty Name="IsDisable" ColumnName="IsDisable" />
                 <ScalarProperty Name="NotifyCycle" ColumnName="NotifyCycle" />
                 <ScalarProperty Name="IsPaperType" ColumnName="IsPaperType" />
                 <ScalarProperty Name="DelTime" ColumnName="DelTime" />

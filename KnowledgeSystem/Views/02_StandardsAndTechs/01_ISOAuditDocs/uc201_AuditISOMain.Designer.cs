@@ -30,8 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc201_AuditISOMain));
-            DevExpress.XtraTreeList.StyleFormatConditions.TreeListFormatRule treeListFormatRule1 = new DevExpress.XtraTreeList.StyleFormatConditions.TreeListFormatRule();
-            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression1 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
             this.treeListColumn2 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
@@ -250,14 +248,6 @@
             this.treeListColumn9,
             this.treeListColumn3});
             this.tlsData.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeListFormatRule1.Column = this.treeListColumn2;
-            treeListFormatRule1.ColumnApplyTo = this.treeListColumn2;
-            treeListFormatRule1.Name = "Format0";
-            formatConditionRuleExpression1.Appearance.ForeColor = System.Drawing.Color.Blue;
-            formatConditionRuleExpression1.Appearance.Options.UseForeColor = true;
-            formatConditionRuleExpression1.Expression = "[data.IsFinalNode] = True";
-            treeListFormatRule1.Rule = formatConditionRuleExpression1;
-            this.tlsData.FormatRules.Add(treeListFormatRule1);
             this.tlsData.KeyFieldName = "";
             this.tlsData.Location = new System.Drawing.Point(12, 12);
             this.tlsData.MenuManager = this.barManagerTP;
