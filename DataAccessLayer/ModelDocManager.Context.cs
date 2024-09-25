@@ -63,7 +63,6 @@ namespace DataAccessLayer
         public virtual DbSet<dt202_Base> dt202_Base { get; set; }
         public virtual DbSet<dm_DeptGroups> dm_DeptGroups { get; set; }
         public virtual DbSet<dm_DrivingLic> dm_DrivingLic { get; set; }
-        public virtual DbSet<dt201_Base> dt201_Base { get; set; }
         public virtual DbSet<dt201_Role> dt201_Role { get; set; }
         public virtual DbSet<dt201_Forms> dt201_Forms { get; set; }
         public virtual DbSet<dt201_Progress> dt201_Progress { get; set; }
@@ -89,5 +88,6 @@ namespace DataAccessLayer
         public virtual DbSet<dt306_FieldTypeDocType> dt306_FieldTypeDocType { get; set; }
         public virtual DbSet<dt306_Base> dt306_Base { get; set; }
         public virtual DbSet<dt307_JobQuesManage> dt307_JobQuesManage { get; set; }
+        public virtual DbSet<dt201_Base> dt201_Base { get; set; }
     }
 }

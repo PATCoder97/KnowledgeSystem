@@ -56,9 +56,10 @@ namespace KnowledgeSystem.Views._00_Generals
                     div_container.Controls.Clear();
 
                     XtraUserControl userControl = (XtraUserControl)Activator.CreateInstance(typeform);
-                    div_container.Controls.Add(userControl);
                     userControl.Dock = DockStyle.Fill;
                     userControl.BringToFront();
+                    userControl.Text = formName;
+                    div_container.Controls.Add(userControl);
                 }
             }
             else if (typeform.BaseType == typeof(XtraForm))

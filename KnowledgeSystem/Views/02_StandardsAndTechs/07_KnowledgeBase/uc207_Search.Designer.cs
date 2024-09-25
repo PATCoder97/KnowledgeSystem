@@ -41,6 +41,8 @@
             this.btnReload = new DevExpress.XtraEditors.SimpleButton();
             this.gcData = new DevExpress.XtraGrid.GridControl();
             this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -59,8 +61,6 @@
             this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcSumApproval = new DevExpress.XtraLayout.LayoutControlItem();
-            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.checkUseKeyword.Properties)).BeginInit();
@@ -208,6 +208,7 @@
             this.gvData.OptionsBehavior.ReadOnly = true;
             this.gvData.OptionsFind.HighlightFindResults = false;
             this.gvData.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
+            this.gvData.OptionsView.ColumnAutoWidth = false;
             this.gvData.OptionsView.EnableAppearanceOddRow = true;
             this.gvData.OptionsView.ShowAutoFilterRow = true;
             this.gvData.OptionsView.ShowGroupPanel = false;
@@ -215,16 +216,34 @@
             this.gvData.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
             new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gridColumn7, DevExpress.Data.ColumnSortOrder.Descending)});
             // 
+            // gridColumn9
+            // 
+            this.gridColumn9.Caption = "單位";
+            this.gridColumn9.FieldName = "Dept";
+            this.gridColumn9.Name = "gridColumn9";
+            this.gridColumn9.Visible = true;
+            this.gridColumn9.VisibleIndex = 0;
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "文件編號";
+            this.gridColumn1.FieldName = "Id";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 2;
+            this.gridColumn1.Width = 164;
+            // 
             // gridColumn2
             // 
             this.gridColumn2.Caption = "文件名稱";
             this.gridColumn2.FieldName = "DisplayName";
             this.gridColumn2.FieldNameSortGroup = "nonUnicodeDisplayName";
+            this.gridColumn2.MaxWidth = 400;
             this.gridColumn2.MinWidth = 10;
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.OptionsFilter.FilterBySortField = DevExpress.Utils.DefaultBoolean.True;
             this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 1;
+            this.gridColumn2.VisibleIndex = 3;
             this.gridColumn2.Width = 268;
             // 
             // gridColumn3
@@ -236,7 +255,7 @@
             this.gridColumn3.MinWidth = 10;
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 3;
+            this.gridColumn3.VisibleIndex = 5;
             this.gridColumn3.Width = 130;
             // 
             // gridColumn4
@@ -246,7 +265,7 @@
             this.gridColumn4.MinWidth = 10;
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 0;
+            this.gridColumn4.VisibleIndex = 1;
             this.gridColumn4.Width = 133;
             // 
             // gvColKeyword
@@ -254,12 +273,13 @@
             this.gvColKeyword.Caption = "關鍵字";
             this.gvColKeyword.FieldName = "Keyword";
             this.gvColKeyword.FieldNameSortGroup = "nonUnicodeKeyword";
-            this.gvColKeyword.MinWidth = 10;
+            this.gvColKeyword.MaxWidth = 300;
+            this.gvColKeyword.MinWidth = 300;
             this.gvColKeyword.Name = "gvColKeyword";
             this.gvColKeyword.OptionsFilter.FilterBySortField = DevExpress.Utils.DefaultBoolean.True;
             this.gvColKeyword.Visible = true;
-            this.gvColKeyword.VisibleIndex = 2;
-            this.gvColKeyword.Width = 200;
+            this.gvColKeyword.VisibleIndex = 4;
+            this.gvColKeyword.Width = 300;
             // 
             // gridColumn6
             // 
@@ -270,7 +290,7 @@
             this.gridColumn6.MinWidth = 10;
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 4;
+            this.gridColumn6.VisibleIndex = 6;
             this.gridColumn6.Width = 130;
             // 
             // gridColumn7
@@ -282,7 +302,7 @@
             this.gridColumn7.MinWidth = 10;
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 5;
+            this.gridColumn7.VisibleIndex = 7;
             this.gridColumn7.Width = 130;
             // 
             // gridColumn5
@@ -421,23 +441,6 @@
             this.lcSumApproval.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.lcSumApproval.TextSize = new System.Drawing.Size(0, 0);
             this.lcSumApproval.TextVisible = false;
-            // 
-            // gridColumn1
-            // 
-            this.gridColumn1.Caption = "文件編號";
-            this.gridColumn1.FieldName = "Id";
-            this.gridColumn1.Name = "gridColumn1";
-            this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 1;
-            this.gridColumn1.Width = 164;
-            // 
-            // gridColumn9
-            // 
-            this.gridColumn9.Caption = "單位";
-            this.gridColumn9.FieldName = "Dept";
-            this.gridColumn9.Name = "gridColumn9";
-            this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 0;
             // 
             // uc207_Search
             // 

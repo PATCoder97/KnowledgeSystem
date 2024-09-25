@@ -41,6 +41,27 @@ namespace BusinessLayer
         }
 
         /// <summary>
+        /// Lấy danh sách nhóm bằng tên nhóm. VD: ISO組
+        /// </summary>
+        /// <param name="nameGroup"></param>
+        /// <returns></returns>
+        public List<dm_Group> GetListByName(string nameGroup)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dm_Group.Where(r => r.DisplayName == nameGroup).OrderBy(r => r.Prioritize).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
+        /// <summary>
         /// Lấy nhóm người dùng bằng tên
         /// </summary>
         /// <param name="nameGroup"></param>

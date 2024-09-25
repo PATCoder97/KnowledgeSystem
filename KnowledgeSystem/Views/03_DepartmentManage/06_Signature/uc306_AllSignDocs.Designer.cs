@@ -59,6 +59,8 @@
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnReload = new DevExpress.XtraBars.BarButtonItem();
             this.btnExportExcel = new DevExpress.XtraBars.BarButtonItem();
+            this.barCbbNumRecord = new DevExpress.XtraBars.BarEditItem();
+            this.cbbNumRecord = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -70,6 +72,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbNumRecord)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
@@ -353,9 +356,12 @@
             this.barManagerTP.Form = this;
             this.barManagerTP.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.btnReload,
-            this.btnExportExcel});
+            this.btnExportExcel,
+            this.barCbbNumRecord});
             this.barManagerTP.MainMenu = this.bar2;
-            this.barManagerTP.MaxItemId = 11;
+            this.barManagerTP.MaxItemId = 12;
+            this.barManagerTP.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.cbbNumRecord});
             // 
             // bar2
             // 
@@ -380,6 +386,7 @@
             this.bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnReload, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barCbbNumRecord, true),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnExportExcel, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawDragBorder = false;
@@ -389,7 +396,7 @@
             // 
             // btnReload
             // 
-            this.btnReload.Caption = "重新整理";
+            this.btnReload.Caption = "刷新";
             this.btnReload.Id = 1;
             this.btnReload.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnReload.ImageOptions.SvgImage")));
             this.btnReload.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
@@ -411,6 +418,36 @@
             this.btnExportExcel.ItemAppearance.Normal.Options.UseFont = true;
             this.btnExportExcel.Name = "btnExportExcel";
             this.btnExportExcel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExportExcel_ItemClick);
+            // 
+            // barCbbNumRecord
+            // 
+            this.barCbbNumRecord.Caption = "記錄數";
+            this.barCbbNumRecord.Edit = this.cbbNumRecord;
+            this.barCbbNumRecord.Id = 11;
+            this.barCbbNumRecord.Name = "barCbbNumRecord";
+            this.barCbbNumRecord.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            // 
+            // cbbNumRecord
+            // 
+            this.cbbNumRecord.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbNumRecord.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.cbbNumRecord.Appearance.Options.UseFont = true;
+            this.cbbNumRecord.Appearance.Options.UseForeColor = true;
+            this.cbbNumRecord.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbNumRecord.AppearanceDropDown.Options.UseFont = true;
+            this.cbbNumRecord.AutoHeight = false;
+            this.cbbNumRecord.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbbNumRecord.DropDownRows = 5;
+            this.cbbNumRecord.Items.AddRange(new object[] {
+            "50",
+            "100",
+            "200",
+            "500",
+            "全部"});
+            this.cbbNumRecord.Name = "cbbNumRecord";
+            this.cbbNumRecord.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.cbbNumRecord.SelectedIndexChanged += new System.EventHandler(this.cbbNumRecord_SelectedIndexChanged);
             // 
             // barDockControlTop
             // 
@@ -492,6 +529,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbNumRecord)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
@@ -538,5 +576,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;
+        private DevExpress.XtraBars.BarEditItem barCbbNumRecord;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox cbbNumRecord;
     }
 }

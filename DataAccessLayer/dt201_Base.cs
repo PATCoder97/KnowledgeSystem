@@ -16,7 +16,7 @@ namespace DataAccessLayer
     {
         public int Id { get; set; }
         public int IdParent { get; set; }
-        public Nullable<int> IdGroup { get; set; }
+        public Nullable<int> IdDocType { get; set; }
         public string DocCode { get; set; }
         public string DisplayName { get; set; }
         public string Articles { get; set; }
@@ -24,5 +24,7 @@ namespace DataAccessLayer
         public Nullable<bool> IsFinalNode { get; set; }
         public Nullable<bool> IsDel { get; set; }
         public Nullable<System.DateTime> DelTime { get; set; }
+        public Nullable<bool> IsPaperType { get; set; }
+        public Nullable<int> NotifyCycle { get; set; }
     }
 }

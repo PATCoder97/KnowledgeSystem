@@ -3,6 +3,7 @@ using DataAccessLayer;
 using DevExpress.Utils.Menu;
 using DevExpress.Utils.Svg;
 using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraTreeList;
 using DevExpress.XtraTreeList.Nodes;
 using KnowledgeSystem.Helpers;
@@ -24,6 +25,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         {
             InitializeComponent();
             InitializeMenuItems();
+            InitializeIcon();
+            CreateRuleGV();
 
             DevExpress.Utils.AppearanceObject.DefaultMenuFont = new System.Drawing.Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
         }
@@ -31,6 +34,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         List<dt201_Base> baseDatas;
         BindingSource sourceData = new BindingSource();
         dt201_Base nodeFocus;
+        List<dm_Group> groups;
+        List<dm_Departments> depts;
 
         DXMenuItem itemAddNode;
         DXMenuItem itemAddAtt;
@@ -39,14 +44,27 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         DXMenuItem itemEditNode;
         DXMenuItem itemAddVer;
 
+        private void InitializeIcon()
+        {
+            btnAdd.ImageOptions.SvgImage = TPSvgimages.Add;
+            btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
+            btnExportExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
+        }
+
+        private void CreateRuleGV()
+        {
+            tlsData.FormatRules.AddExpressionRule(treeListColumn2, new DevExpress.Utils.AppearanceDefault() { ForeColor = Color.Blue }, "[data.IsFinalNode] = True");
+            tlsData.FormatRules.AddExpressionRule(treeListColumn3, new DevExpress.Utils.AppearanceDefault() { ForeColor = Color.Red }, "[IsPaperType] = '紙本'");
+        }
+
         private void InitializeMenuItems()
         {
-            itemAddNode = CreateMenuItem("新增表單", ItemAddNote_Click, TPSvgimages.Add);
+            itemAddNode = CreateMenuItem("新增下級", ItemAddNote_Click, TPSvgimages.Add);
+            itemAddVer = CreateMenuItem("新增年版", ItemAddVer_Click, TPSvgimages.Add2);
             itemAddAtt = CreateMenuItem("新增檔案", ItemAddAtt_Click, TPSvgimages.Attach);
             itemCopyNode = CreateMenuItem("複製年版", ItemCopyNote_Click, TPSvgimages.Copy);
             itemDelNode = CreateMenuItem("刪除", ItemDeleteNote_Click, TPSvgimages.Close);
             itemEditNode = CreateMenuItem("更新", ItemEditNode_Click, TPSvgimages.Edit);
-            itemAddVer = CreateMenuItem("新增年版", ItemAddVer_Click, TPSvgimages.Add2);
         }
 
         DXMenuItem CreateMenuItem(string caption, EventHandler clickEvent, SvgImage svgImage)
@@ -101,7 +119,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 IdParent = nodeFocus.Id,
                 DocCode = "",
                 DisplayName = version,
-                IsFinalNode = true
+                IsFinalNode = true,
+                IdDept = nodeFocus.IdDept,
             };
 
             dt201_BaseBUS.Instance.Add(baseVer);
@@ -144,32 +163,56 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         private void LoadData()
         {
             baseDatas = dt201_BaseBUS.Instance.GetList().ToList();
-            sourceData.DataSource = baseDatas;
+            var deptsChecked = cbbDepts.Items.Where(r => r.CheckState == CheckState.Checked).Select(r => r.Value).ToList();
+
+            var result = (from data in baseDatas
+                          join dept in depts on data.IdDept equals dept.Id
+                          where deptsChecked.Contains(data.IdDept)
+                          select new { data, dept }).ToList();
+
+            sourceData.DataSource = result;
 
             tlsData.BestFitColumns();
-
             tlsData.RefreshDataSource();
+
+            tlsColDept.Visible = deptsChecked.Count > 1;
         }
 
         private void uc201_AuditISOMain_Load(object sender, EventArgs e)
         {
-            LoadData();
-
             tlsData.DataSource = sourceData;
-            tlsData.KeyFieldName = "Id";
-            tlsData.ParentFieldName = "IdParent";
+            tlsData.KeyFieldName = "data.Id";
+            tlsData.ParentFieldName = "data.IdParent";
             tlsData.BestFitColumns();
 
             tlsData.ReadOnlyTreelist();
             tlsData.KeyDown += GridControlHelper.TreeViewCopyCellData_KeyDown;
+
+            depts = dm_DeptBUS.Instance.GetList();
+            groups = dm_GroupBUS.Instance.GetListByName("ISO組");
+
+            var deptsCbb = (from data in depts
+                            join grp in groups on data.Id equals grp.IdDept
+                            select new CheckedListBoxItem() { Description = data.DisplayName, Value = data.Id, CheckState = CheckState.Checked }).ToArray();
+
+            cbbDepts.Items.AddRange(deptsCbb);
+
+            LoadData();
+
+            var aa = this.Text;
         }
 
         private void tlsData_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
         {
             TreeList treeList = sender as TreeList;
-            if (e.HitInfo.InRowCell && e.HitInfo.Node.Id >= 0)
+            if (e.HitInfo != null && e.HitInfo.InRowCell && e.HitInfo.Node.Id >= 0)
             {
-                dt201_Base rowData = treeList.GetRow(e.HitInfo.Node.Id) as dt201_Base;
+                var nodeSelect = treeList.GetRow(e.HitInfo.Node.Id);
+                if (nodeSelect == null) return;
+
+                dt201_Base rowData = ((dynamic)nodeSelect).data as dt201_Base;
+                if (rowData == null) return;
+
                 nodeFocus = rowData;
                 //idNodeParent = e.HitInfo.Node.ParentNode != null ? e.HitInfo.Node.ParentNode.Id : -1;
                 bool HaveFinalNode = dt201_BaseBUS.Instance.GetListByParentId(rowData.Id).Any(r => r.IsFinalNode == true);
@@ -215,7 +258,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             if (focusedNode != null && focusedNode.Nodes != null && hitInfo.HitInfoType == HitInfoType.Cell)
             {
-                dt201_Base rowData = treeList.GetRow(focusedNode.Id) as dt201_Base;
+                dt201_Base rowData = (treeList.GetRow(focusedNode.Id) as dynamic).data as dt201_Base;
 
                 if (rowData.IsFinalNode != true)
                 {
@@ -228,6 +271,46 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 var atts = dt201_FormsBUS.Instance.GetListByIdBase(rowData.Id);
                 //gcData.DataSource = atts;
                 //gvData.BestFitColumns();
+            }
+        }
+
+        private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            f201_AddNode fAdd = new f201_AddNode();
+            fAdd.eventInfo = EventFormInfo.Create;
+            fAdd.formName = "文件";
+            fAdd.ShowDialog();
+
+            LoadData();
+        }
+
+        private void cbbDepts_EditValueChanged(object sender, EventArgs e)
+        {
+            LoadData();
+        }
+
+        private void btnReload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            LoadData();
+        }
+
+        private void btnExportExcel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
+        }
+
+        private void tlsData_CustomUnboundColumnData(object sender, TreeListCustomColumnDataEventArgs e)
+        {
+            if (e.IsGetData && e.Column.FieldName == "IsPaperType")
+            {
+                dt201_Base currentRow = ((dynamic)e.Row).data as dt201_Base;
+                if (currentRow == null) return;
+
+                if (currentRow.IsPaperType == true)
+                {
+
+                }
+                e.Value = currentRow.IsPaperType == true ? "紙本" : "";
             }
         }
     }

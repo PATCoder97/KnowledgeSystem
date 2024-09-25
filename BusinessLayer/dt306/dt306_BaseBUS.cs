@@ -41,6 +41,22 @@ namespace BusinessLayer
             }
         }
 
+        public List<dt306_Base> TakeList(int numRecord)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt306_Base.OrderByDescending(r => r.UploadDate).Take(numRecord).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public List<dt306_Base> GetListByUploadUsr(string idUser)
         {
             try

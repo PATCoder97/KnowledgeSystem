@@ -38,8 +38,8 @@
             this.btnAdd = new DevExpress.XtraBars.BarButtonItem();
             this.btnReload = new DevExpress.XtraBars.BarButtonItem();
             this.btnExportExcel = new DevExpress.XtraBars.BarButtonItem();
-            this.barEditItem1 = new DevExpress.XtraBars.BarEditItem();
-            this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.barCbbDepts = new DevExpress.XtraBars.BarEditItem();
+            this.cbbDepts = new DevExpress.XtraEditors.Repository.RepositoryItemCheckedComboBoxEdit();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -49,15 +49,15 @@
             this.treeListColumn7 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.treeListColumn8 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.treeListColumn1 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.treeListColumn3 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.tlsColDept = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.treeListColumn4 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.treeListColumn5 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.treeListColumn6 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.treeListColumn9 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.treeListColumn3 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbDepts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tlsData)).BeginInit();
@@ -68,7 +68,7 @@
             // treeListColumn2
             // 
             this.treeListColumn2.Caption = "文件名稱";
-            this.treeListColumn2.FieldName = "DisplayName";
+            this.treeListColumn2.FieldName = "data.DisplayName";
             this.treeListColumn2.Name = "treeListColumn2";
             this.treeListColumn2.Visible = true;
             this.treeListColumn2.VisibleIndex = 1;
@@ -86,11 +86,11 @@
             this.btnAdd,
             this.btnReload,
             this.btnExportExcel,
-            this.barEditItem1});
+            this.barCbbDepts});
             this.barManagerTP.MainMenu = this.bar2;
             this.barManagerTP.MaxItemId = 12;
             this.barManagerTP.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.repositoryItemComboBox1});
+            this.cbbDepts});
             // 
             // bar2
             // 
@@ -117,7 +117,7 @@
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnAdd, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnReload, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnExportExcel, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barEditItem1, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.Caption)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barCbbDepts, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.Caption)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawDragBorder = false;
             this.bar2.OptionsBar.MultiLine = true;
@@ -135,10 +135,11 @@
             this.btnAdd.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdd.ItemAppearance.Normal.Options.UseFont = true;
             this.btnAdd.Name = "btnAdd";
+            this.btnAdd.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAdd_ItemClick);
             // 
             // btnReload
             // 
-            this.btnReload.Caption = "重新整理";
+            this.btnReload.Caption = "刷新";
             this.btnReload.Id = 1;
             this.btnReload.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnReload.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
@@ -146,6 +147,7 @@
             this.btnReload.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReload.ItemAppearance.Normal.Options.UseFont = true;
             this.btnReload.Name = "btnReload";
+            this.btnReload.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnReload_ItemClick);
             // 
             // btnExportExcel
             // 
@@ -157,31 +159,31 @@
             this.btnExportExcel.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExportExcel.ItemAppearance.Normal.Options.UseFont = true;
             this.btnExportExcel.Name = "btnExportExcel";
+            this.btnExportExcel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExportExcel_ItemClick);
             // 
-            // barEditItem1
+            // barCbbDepts
             // 
-            this.barEditItem1.Caption = "實驗室";
-            this.barEditItem1.Edit = this.repositoryItemComboBox1;
-            this.barEditItem1.EditWidth = 150;
-            this.barEditItem1.Id = 11;
-            this.barEditItem1.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.barEditItem1.ItemAppearance.Normal.Options.UseFont = true;
-            this.barEditItem1.Name = "barEditItem1";
+            this.barCbbDepts.Caption = "實驗室";
+            this.barCbbDepts.Edit = this.cbbDepts;
+            this.barCbbDepts.EditWidth = 150;
+            this.barCbbDepts.Id = 11;
+            this.barCbbDepts.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.barCbbDepts.ItemAppearance.Normal.Options.UseFont = true;
+            this.barCbbDepts.Name = "barCbbDepts";
             // 
-            // repositoryItemComboBox1
+            // cbbDepts
             // 
-            this.repositoryItemComboBox1.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.repositoryItemComboBox1.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.repositoryItemComboBox1.Appearance.Options.UseFont = true;
-            this.repositoryItemComboBox1.Appearance.Options.UseForeColor = true;
-            this.repositoryItemComboBox1.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.repositoryItemComboBox1.AppearanceDropDown.ForeColor = System.Drawing.Color.Black;
-            this.repositoryItemComboBox1.AppearanceDropDown.Options.UseFont = true;
-            this.repositoryItemComboBox1.AppearanceDropDown.Options.UseForeColor = true;
-            this.repositoryItemComboBox1.AutoHeight = false;
-            this.repositoryItemComboBox1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.cbbDepts.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbDepts.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.cbbDepts.Appearance.Options.UseFont = true;
+            this.cbbDepts.Appearance.Options.UseForeColor = true;
+            this.cbbDepts.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbDepts.AppearanceDropDown.Options.UseFont = true;
+            this.cbbDepts.AutoHeight = false;
+            this.cbbDepts.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemComboBox1.Name = "repositoryItemComboBox1";
+            this.cbbDepts.Name = "cbbDepts";
+            this.cbbDepts.EditValueChanged += new System.EventHandler(this.cbbDepts_EditValueChanged);
             // 
             // barDockControlTop
             // 
@@ -242,24 +244,25 @@
             this.treeListColumn8,
             this.treeListColumn1,
             this.treeListColumn2,
-            this.treeListColumn3,
+            this.tlsColDept,
             this.treeListColumn4,
             this.treeListColumn5,
-            this.treeListColumn6,
-            this.treeListColumn9});
+            this.treeListColumn9,
+            this.treeListColumn3});
             this.tlsData.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             treeListFormatRule1.Column = this.treeListColumn2;
             treeListFormatRule1.ColumnApplyTo = this.treeListColumn2;
             treeListFormatRule1.Name = "Format0";
             formatConditionRuleExpression1.Appearance.ForeColor = System.Drawing.Color.Blue;
             formatConditionRuleExpression1.Appearance.Options.UseForeColor = true;
-            formatConditionRuleExpression1.Expression = "[IsFinalNode] = True";
+            formatConditionRuleExpression1.Expression = "[data.IsFinalNode] = True";
             treeListFormatRule1.Rule = formatConditionRuleExpression1;
             this.tlsData.FormatRules.Add(treeListFormatRule1);
             this.tlsData.KeyFieldName = "";
             this.tlsData.Location = new System.Drawing.Point(12, 12);
             this.tlsData.MenuManager = this.barManagerTP;
             this.tlsData.Name = "tlsData";
+            this.tlsData.OptionsBehavior.PopulateServiceColumns = true;
             this.tlsData.OptionsFilter.ExpandNodesOnFiltering = true;
             this.tlsData.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
             this.tlsData.OptionsView.AutoWidth = false;
@@ -268,66 +271,70 @@
             this.tlsData.ParentFieldName = "";
             this.tlsData.Size = new System.Drawing.Size(1013, 512);
             this.tlsData.TabIndex = 4;
+            this.tlsData.CustomUnboundColumnData += new DevExpress.XtraTreeList.CustomColumnDataEventHandler(this.tlsData_CustomUnboundColumnData);
             this.tlsData.PopupMenuShowing += new DevExpress.XtraTreeList.PopupMenuShowingEventHandler(this.tlsData_PopupMenuShowing);
             this.tlsData.DoubleClick += new System.EventHandler(this.tlsData_DoubleClick);
             // 
             // treeListColumn7
             // 
             this.treeListColumn7.Caption = "Id";
-            this.treeListColumn7.FieldName = "Id";
+            this.treeListColumn7.FieldName = "data.Id";
             this.treeListColumn7.Name = "treeListColumn7";
             // 
             // treeListColumn8
             // 
             this.treeListColumn8.Caption = "IdParent";
-            this.treeListColumn8.FieldName = "IdParent";
+            this.treeListColumn8.FieldName = "data.IdParent";
             this.treeListColumn8.Name = "treeListColumn8";
             // 
             // treeListColumn1
             // 
             this.treeListColumn1.Caption = "文件編號";
-            this.treeListColumn1.FieldName = "DocCode";
+            this.treeListColumn1.FieldName = "data.DocCode";
             this.treeListColumn1.Name = "treeListColumn1";
             this.treeListColumn1.Visible = true;
             this.treeListColumn1.VisibleIndex = 0;
             // 
-            // treeListColumn3
+            // tlsColDept
             // 
-            this.treeListColumn3.Caption = "實驗室";
-            this.treeListColumn3.FieldName = "IdDept";
-            this.treeListColumn3.Name = "treeListColumn3";
-            this.treeListColumn3.Visible = true;
-            this.treeListColumn3.VisibleIndex = 2;
+            this.tlsColDept.Caption = "實驗室";
+            this.tlsColDept.FieldName = "dept.DisplayName";
+            this.tlsColDept.Name = "tlsColDept";
+            this.tlsColDept.Visible = true;
+            this.tlsColDept.VisibleIndex = 5;
             // 
             // treeListColumn4
             // 
             this.treeListColumn4.Caption = "條文";
-            this.treeListColumn4.FieldName = "Articles";
+            this.treeListColumn4.FieldName = "data.Articles";
             this.treeListColumn4.Name = "treeListColumn4";
             this.treeListColumn4.Visible = true;
-            this.treeListColumn4.VisibleIndex = 3;
+            this.treeListColumn4.VisibleIndex = 2;
             // 
             // treeListColumn5
             // 
             this.treeListColumn5.Caption = "文件類";
-            this.treeListColumn5.FieldName = "文件類";
+            this.treeListColumn5.FieldName = "data.IdDocType";
             this.treeListColumn5.Name = "treeListColumn5";
             this.treeListColumn5.Visible = true;
-            this.treeListColumn5.VisibleIndex = 4;
-            // 
-            // treeListColumn6
-            // 
-            this.treeListColumn6.Caption = "紙本";
-            this.treeListColumn6.FieldName = "紙本";
-            this.treeListColumn6.Name = "treeListColumn6";
-            this.treeListColumn6.Visible = true;
-            this.treeListColumn6.VisibleIndex = 5;
+            this.treeListColumn5.VisibleIndex = 3;
             // 
             // treeListColumn9
             // 
             this.treeListColumn9.Caption = "IsFinalNode";
-            this.treeListColumn9.FieldName = "IsFinalNode";
+            this.treeListColumn9.FieldName = "data.IsFinalNode";
             this.treeListColumn9.Name = "treeListColumn9";
+            // 
+            // treeListColumn3
+            // 
+            this.treeListColumn3.AppearanceCell.Options.UseTextOptions = true;
+            this.treeListColumn3.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.treeListColumn3.Caption = "紙本";
+            this.treeListColumn3.FieldName = "IsPaperType";
+            this.treeListColumn3.Name = "treeListColumn3";
+            this.treeListColumn3.UnboundDataType = typeof(string);
+            this.treeListColumn3.Visible = true;
+            this.treeListColumn3.VisibleIndex = 4;
             // 
             // Root
             // 
@@ -363,7 +370,7 @@
             this.Size = new System.Drawing.Size(1037, 585);
             this.Load += new System.EventHandler(this.uc201_AuditISOMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbDepts)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tlsData)).EndInit();
@@ -381,8 +388,7 @@
         private DevExpress.XtraBars.BarButtonItem btnAdd;
         private DevExpress.XtraBars.BarButtonItem btnReload;
         private DevExpress.XtraBars.BarButtonItem btnExportExcel;
-        private DevExpress.XtraBars.BarEditItem barEditItem1;
-        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox1;
+        private DevExpress.XtraBars.BarEditItem barCbbDepts;
         private DevExpress.XtraBars.BarDockControl barDockControlTop;
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
@@ -393,12 +399,13 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn1;
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn2;
-        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn3;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn tlsColDept;
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn4;
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn5;
-        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn6;
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn7;
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn8;
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn9;
+        private DevExpress.XtraEditors.Repository.RepositoryItemCheckedComboBoxEdit cbbDepts;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn3;
     }
 }

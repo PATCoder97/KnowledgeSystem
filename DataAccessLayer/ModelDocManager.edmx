@@ -185,7 +185,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdParent" Type="int" Nullable="false" />
-          <Property Name="IdGroup" Type="int" />
+          <Property Name="IdDocType" Type="int" />
           <Property Name="DocCode" Type="nvarchar" MaxLength="32" Nullable="false" />
           <Property Name="DisplayName" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Articles" Type="varchar" MaxLength="64" />
@@ -193,6 +193,8 @@
           <Property Name="IsFinalNode" Type="bit" />
           <Property Name="IsDel" Type="bit" />
           <Property Name="DelTime" Type="datetime" />
+          <Property Name="IsPaperType" Type="bit" />
+          <Property Name="NotifyCycle" Type="int" />
         </EntityType>
         <EntityType Name="dt201_Forms">
           <Key>
@@ -802,7 +804,6 @@
           <EntitySet Name="dt202_Base" EntityType="DBDocumentManagementSystemModel.dt202_Base" />
           <EntitySet Name="dm_DeptGroups" EntityType="DBDocumentManagementSystemModel.dm_DeptGroups" />
           <EntitySet Name="dm_DrivingLic" EntityType="DBDocumentManagementSystemModel.dm_DrivingLic" />
-          <EntitySet Name="dt201_Base" EntityType="DBDocumentManagementSystemModel.dt201_Base" />
           <EntitySet Name="dt201_Role" EntityType="DBDocumentManagementSystemModel.dt201_Role" />
           <EntitySet Name="dt201_Forms" EntityType="DBDocumentManagementSystemModel.dt201_Forms" />
           <EntitySet Name="dt201_Progress" EntityType="DBDocumentManagementSystemModel.dt201_Progress" />
@@ -828,6 +829,7 @@
           <EntitySet Name="dt306_FieldTypeDocType" EntityType="DBDocumentManagementSystemModel.dt306_FieldTypeDocType" />
           <EntitySet Name="dt306_Base" EntityType="DBDocumentManagementSystemModel.dt306_Base" />
           <EntitySet Name="dt307_JobQuesManage" EntityType="DBDocumentManagementSystemModel.dt307_JobQuesManage" />
+          <EntitySet Name="dt201_Base" EntityType="DBDocumentManagementSystemModel.dt201_Base" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -1216,21 +1218,6 @@
           <Property Name="No" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
           <Property Name="Exprires" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
-        <EntityType Name="dt201_Base">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdParent" Type="Int32" Nullable="false" />
-          <Property Name="IdGroup" Type="Int32" />
-          <Property Name="DocCode" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
-          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="Articles" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="IdDept" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
-          <Property Name="IsFinalNode" Type="Boolean" />
-          <Property Name="IsDel" Type="Boolean" />
-          <Property Name="DelTime" Type="DateTime" Precision="3" />
-        </EntityType>
         <EntityType Name="dt201_Role">
           <Key>
             <PropertyRef Name="Id" />
@@ -1516,6 +1503,23 @@
           <Property Name="QuesCount" Type="Int32" />
           <Property Name="PassingScore" Type="Int32" />
           <Property Name="MultiQues" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt201_Base">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdParent" Type="Int32" Nullable="false" />
+          <Property Name="IdDocType" Type="Int32" />
+          <Property Name="DocCode" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Articles" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="IdDept" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="IsFinalNode" Type="Boolean" />
+          <Property Name="IsDel" Type="Boolean" />
+          <Property Name="DelTime" Type="DateTime" Precision="3" />
+          <Property Name="IsPaperType" Type="Boolean" />
+          <Property Name="NotifyCycle" Type="Int32" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1948,22 +1952,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dt201_Base">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt201_Base">
-              <MappingFragment StoreEntitySet="dt201_Base">
-                <ScalarProperty Name="DelTime" ColumnName="DelTime" />
-                <ScalarProperty Name="IsDel" ColumnName="IsDel" />
-                <ScalarProperty Name="IsFinalNode" ColumnName="IsFinalNode" />
-                <ScalarProperty Name="IdDept" ColumnName="IdDept" />
-                <ScalarProperty Name="Articles" ColumnName="Articles" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="DocCode" ColumnName="DocCode" />
-                <ScalarProperty Name="IdGroup" ColumnName="IdGroup" />
-                <ScalarProperty Name="IdParent" ColumnName="IdParent" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="dt201_Role">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt201_Role">
               <MappingFragment StoreEntitySet="dt201_Role">
@@ -2272,6 +2260,24 @@
                 <ScalarProperty Name="TestDuration" ColumnName="TestDuration" />
                 <ScalarProperty Name="IdDept" ColumnName="IdDept" />
                 <ScalarProperty Name="JobId" ColumnName="JobId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt201_Base">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt201_Base">
+              <MappingFragment StoreEntitySet="dt201_Base">
+                <ScalarProperty Name="NotifyCycle" ColumnName="NotifyCycle" />
+                <ScalarProperty Name="IsPaperType" ColumnName="IsPaperType" />
+                <ScalarProperty Name="DelTime" ColumnName="DelTime" />
+                <ScalarProperty Name="IsDel" ColumnName="IsDel" />
+                <ScalarProperty Name="IsFinalNode" ColumnName="IsFinalNode" />
+                <ScalarProperty Name="IdDept" ColumnName="IdDept" />
+                <ScalarProperty Name="Articles" ColumnName="Articles" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="DocCode" ColumnName="DocCode" />
+                <ScalarProperty Name="IdDocType" ColumnName="IdDocType" />
+                <ScalarProperty Name="IdParent" ColumnName="IdParent" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

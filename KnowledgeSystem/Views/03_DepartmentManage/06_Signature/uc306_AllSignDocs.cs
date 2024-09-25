@@ -296,7 +296,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
 
                 var progs = dt306_ProgressBUS.Instance.GetListByIdUser(TPConfigs.LoginUser.Id);
 
-                bases = dt306_BaseBUS.Instance.GetList();
+                bases = dt306_BaseBUS.Instance.TakeList(Convert.ToInt16(barCbbNumRecord.EditValue));
 
                 bases = (from data in bases
                          where data.Confidential == false || progs.Select(r => r.IdBase).Contains(data.Id) || data.UploadUsr == TPConfigs.LoginUser.Id
@@ -339,6 +339,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             gvData.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
             gvData.OptionsDetail.AllowOnlyOneMasterRowExpanded = true;
             gvDocs.ReadOnlyGridView();
+
+            barCbbNumRecord.EditValue = "50";
 
             LoadData();
             CreateRuleGV();
@@ -497,6 +499,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
         private void gvData_DoubleClick(object sender, EventArgs e)
         {
             gvData.ExpandMasterRow(gvData.FocusedRowHandle, 0);
+        }
+
+        private void cbbNumRecord_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadData();
         }
     }
 }
