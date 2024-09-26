@@ -124,7 +124,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Caption = "新增";
+            this.btnAdd.Caption = "新增第一級";
             this.btnAdd.Id = 0;
             this.btnAdd.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnAdd.ImageOptions.SvgImage")));
             this.btnAdd.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
@@ -304,7 +304,7 @@
             // treeListColumn5
             // 
             this.treeListColumn5.Caption = "文件類";
-            this.treeListColumn5.FieldName = "data.IdDocType";
+            this.treeListColumn5.FieldName = "doctype.DisplayName";
             this.treeListColumn5.Name = "treeListColumn5";
             this.treeListColumn5.Visible = true;
             this.treeListColumn5.VisibleIndex = 3;
@@ -317,9 +317,7 @@
             // 
             // treeListColumn3
             // 
-            this.treeListColumn3.AppearanceCell.Options.UseTextOptions = true;
-            this.treeListColumn3.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.treeListColumn3.Caption = "紙本";
+            this.treeListColumn3.Caption = "備註";
             this.treeListColumn3.FieldName = "IsPaperType";
             this.treeListColumn3.Name = "treeListColumn3";
             this.treeListColumn3.UnboundDataType = typeof(string);

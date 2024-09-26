@@ -59,5 +59,6 @@ namespace KnowledgeSystem.Helpers
         public static SvgImage Finish = SvgImage.FromFile(Path.Combine(ImagesPath, "icons8_finish_flag.svg"));
         public static SvgImage Print = SvgImage.FromFile(Path.Combine(ImagesPath, "icons8_print.svg"));
         public static SvgImage Learn = SvgImage.FromFile(Path.Combine(ImagesPath, "icons8_learn.svg"));
+        public static SvgImage Disable = SvgImage.FromFile(Path.Combine(ImagesPath, "icons8_disable.svg"));
     }
 }

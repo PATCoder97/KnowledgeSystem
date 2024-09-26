@@ -69,6 +69,7 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt306_Base" Width="1.5" PointX="0.5" PointY="24.75" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt307_JobQuesManage" Width="1.5" PointX="0.5" PointY="28.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_Base" Width="1.5" PointX="0.5" PointY="21.125" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_DocType" Width="1.5" PointX="13.5" PointY="21.125" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

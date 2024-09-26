@@ -3,6 +3,7 @@ using DevExpress.XtraEditors;
 using DocumentFormat.OpenXml.Spreadsheet;
 using iTextSharp.text;
 using KnowledgeSystem.Helpers;
+using Microsoft.Web.WebView2.Core;
 using Scriban;
 using System;
 using System.Collections.Generic;
@@ -56,7 +57,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
 
             var pageContent = templateSigner.Render(templateData);
 
-            await webViewQues.EnsureCoreWebView2Async(null);
+            string pathDataWebView = Path.Combine(TPConfigs.DocumentPath(), "WebView2UserData");
+            var options = new CoreWebView2EnvironmentOptions();
+            var env = await CoreWebView2Environment.CreateAsync(null, pathDataWebView, options);
+            await webViewQues.EnsureCoreWebView2Async(env);
             webViewQues.CoreWebView2.NavigateToString(pageContent);
 
             // Thêm JavaScript để ngăn chặn chuột phải

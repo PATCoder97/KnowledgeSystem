@@ -10,6 +10,7 @@ using DocumentFormat.OpenXml.Spreadsheet;
 using DocumentFormat.OpenXml.Wordprocessing;
 using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._00_Generals;
+using Microsoft.Web.WebView2.Core;
 using Newtonsoft.Json;
 using Scriban;
 using System;
@@ -24,6 +25,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static DevExpress.XtraEditors.Mask.MaskSettings;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
 {
@@ -34,7 +36,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.None; // Bỏ khung viền
             this.WindowState = FormWindowState.Maximized; // Phóng to toàn màn hình
-            this.TopMost = true; // Đảm bảo form luôn ở trên cùng
+            //this.TopMost = true; // Đảm bảo form luôn ở trên cùng
 
             this.KeyDown += F307_DoExam_KeyDown;
             this.KeyPreview = true;  // Đảm bảo Form nhận được sự kiện KeyDown
@@ -189,8 +191,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             var templateSigner = Template.Parse(templateContentSigner);
 
             var pageContent = templateSigner.Render(templateData);
-
-            await webViewQues.EnsureCoreWebView2Async(null);
+            
             webViewQues.CoreWebView2.NavigateToString(pageContent);
 
             // Thêm JavaScript để ngăn chặn chuột phải
@@ -216,7 +217,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
 
         private void f307_DoExam_FormClosed(object sender, FormClosedEventArgs e)
         {
-            countdownTimer.Stop();
+            try
+            {
+                countdownTimer.Stop();
+            }
+            catch { }
         }
 
         private void btnSubmit_Click(object sender, EventArgs e)
@@ -327,16 +332,22 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             return "";
         }
 
-        private void f307_DoExam_Load(object sender, EventArgs e)
+        private async void f307_DoExam_Load(object sender, EventArgs e)
         {
             string result = LoadData();
 
             if (!string.IsNullOrEmpty(result))
             {
+                IsClose = true;
                 MsgTP.MsgError(result);
                 Close();
                 return;
             }
+
+            string pathDataWebView = Path.Combine(TPConfigs.DocumentPath(), "WebView2UserData");
+            var options = new CoreWebView2EnvironmentOptions();
+            var env = await CoreWebView2Environment.CreateAsync(null, pathDataWebView, options);
+            await webViewQues.EnsureCoreWebView2Async(env);
 
             string msg = $"<font='Microsoft JhengHei UI' size=14>點擊「<color=red>確定</color>」開始！</font>";
             MsgTP.MsgShowInfomation(msg);

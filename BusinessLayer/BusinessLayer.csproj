@@ -75,6 +75,7 @@
     <Compile Include="dt201\dt201_ReqUpdateDocsBUS.cs" />
     <Compile Include="dt201\dt201_UpdateUsrReqBUS.cs" />
     <Compile Include="dt201\dt201_UpdateUsrReq_DetailBUS.cs" />
+    <Compile Include="dt201\dt201_DocTypeBUS.cs" />
     <Compile Include="dt202\dt202_BaseBUS.cs" />
     <Compile Include="dt202\dt202_AttachBUS.cs" />
     <Compile Include="dt202\dt202_TypeBUS.cs" />
@@ -104,7 +105,7 @@
     <Compile Include="dt306\dt306_SignRoleBUS.cs" />
     <Compile Include="dt306\dt306_DocTypeBUS.cs" />
     <Compile Include="dt306\dt306_FieldTypeBUS.cs" />
-    <Compile Include="dt306_FieldTypeDocTypeBUS.cs" />
+    <Compile Include="dt306\dt306_FieldTypeDocTypeBUS.cs" />
     <Compile Include="dt307\dt307_AnswersBUS.cs" />
     <Compile Include="dt307\dt307_JobQuesManageBUS.cs" />
     <Compile Include="dt307\dt307_QuestionsBUS.cs" />

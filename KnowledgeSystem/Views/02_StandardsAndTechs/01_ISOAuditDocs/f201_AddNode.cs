@@ -38,6 +38,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void EnabledController(bool _enable = true)
         {
+            cbbDept.Enabled = baseParent == null;
+            ckPaperType.Enabled = baseParent == null || baseParent.IsPaperType != true;
+
             //cbbDept.Enabled = false;
             //cbbJobTitle.Enabled = false;
             //cbbUser.Enabled = _enable;
@@ -50,6 +53,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void LockControl()
         {
+            if (baseParent != null)
+            {
+                ckPaperType.Checked = baseParent.IsPaperType == true;
+            }
+
             switch (eventInfo)
             {
                 case EventFormInfo.Create:
@@ -86,6 +94,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             var articles = new List<string>() { "5.1", "6.2", "6.3", "7.4" };
             txbArticles.Properties.DataSource = articles;
 
+            var docType = dt201_DocTypeBUS.Instance.GetList();
+            cbbDocType.Properties.DataSource = docType;
+            cbbDocType.Properties.ValueMember = "Id";
+            cbbDocType.Properties.DisplayMember = "DisplayName";
+
             switch (eventInfo)
             {
                 case EventFormInfo.Create:
@@ -99,6 +112,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                     cbbDept.EditValue = baseData.IdDept;
                     ckPaperType.Checked = baseData.IsPaperType == true;
                     txbNotifyCycle.EditValue = baseData.NotifyCycle;
+                    cbbDocType.EditValue = baseData.IdDocType;
+
                     break;
                 default:
                     break;
@@ -116,8 +131,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 baseData.Articles = txbArticles.EditValue?.ToString() ?? "";
                 baseData.IdDept = cbbDept.EditValue.ToString();
                 baseData.IsPaperType = ckPaperType.Checked;
-                baseData.NotifyCycle = Convert.ToInt16(txbNotifyCycle.Text);
-                baseData.IdDocType = 1;
+                baseData.NotifyCycle = Convert.ToInt16(txbNotifyCycle.EditValue?.ToString() ?? "0");
+                baseData.IdDocType = Convert.ToInt16(cbbDocType.EditValue?.ToString());
 
                 msg = $"{baseData.DocCode} {baseData.DisplayName}";
                 switch (eventInfo)

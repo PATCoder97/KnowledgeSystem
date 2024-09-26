@@ -299,16 +299,18 @@ namespace KnowledgeSystem.Helpers
             }
         }
 
-        public async Task<bool> BorrCar(dm_User borrUsr, string nameVehicle, string borrTime, string fromPlace, string toPlace, string purposes, string licExpDate)
+        public async Task<bool> BorrCar(dm_User borrUsr, string nameVehicle, string borrTime, string fromPlace, string toPlace, string purposes, string licExpDate, int startKm = 0)
         {
             string managerVehicle = await GetManagerVehicle(nameVehicle);
             var purposesUrl = HttpUtility.UrlEncode(purposes).Replace("+", "%20").ToUpper();
             var formPlaceUrl = HttpUtility.UrlEncode(fromPlace).Replace("+", "%20").ToUpper();
             var toPlaceUrl = HttpUtility.UrlEncode(toPlace).Replace("+", "%20").ToUpper();
 
-            int startKm = 0;
-            var lastKm = await GetLastKmCar(nameVehicle);
-            int.TryParse(lastKm.Split('|')[0].Trim(), out startKm);
+            if (startKm == 0)
+            {
+                var lastKm = await GetLastKmCar(nameVehicle);
+                int.TryParse(lastKm.Split('|')[0].Trim(), out startKm);
+            }
 
             using (var httpClient = new HttpClient(new HttpClientHandler { Proxy = proxy }))
             {

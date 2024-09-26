@@ -187,6 +187,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
             string toPlace = txbToPlace.Text;
             string place = $"{fromPlace}-{toPlace}";
             string numUser = txbNumUser.EditValue?.ToString() ?? "1";
+            int startKm = Convert.ToInt32(txbStartKm.EditValue);
 
             bool result = false;
 
@@ -196,7 +197,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
                     result = await BorrVehicleHelper.Instance.BorrMotor(borrUsr, nameVehicle, borrTime, place, purposes, numUser);
                     break;
                 case 1:
-                    result = await BorrVehicleHelper.Instance.BorrCar(borrUsr, nameVehicle, borrTime, fromPlace, toPlace, purposes, licExpDate);
+                    result = await BorrVehicleHelper.Instance.BorrCar(borrUsr, nameVehicle, borrTime, fromPlace, toPlace, purposes, licExpDate, startKm);
                     break;
             }
 

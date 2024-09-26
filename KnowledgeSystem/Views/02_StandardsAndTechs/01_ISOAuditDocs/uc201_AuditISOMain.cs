@@ -107,12 +107,23 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             itemCopyNode = CreateMenuItem("複製年版", ItemCopyNote_Click, TPSvgimages.Copy);
             itemDelNode = CreateMenuItem("刪除", ItemDeleteNote_Click, TPSvgimages.Close);
             itemEditNode = CreateMenuItem("更新", ItemEditNode_Click, TPSvgimages.Edit);
-            itemDisable = CreateMenuItem("停用", ItemDisable_Click, TPSvgimages.Suspension);
-            itemEnable = CreateMenuItem("啟用", ItemEnable_Click, TPSvgimages.Suspension);
+            itemDisable = CreateMenuItem("停用", ItemDisable_Click, TPSvgimages.Disable);
+            itemEnable = CreateMenuItem("啟用", ItemEnable_Click, TPSvgimages.Confirm);
         }
 
         private void ItemEnable_Click(object sender, EventArgs e)
         {
+            var result = XtraInputBox.Show(new XtraInputBoxArgs
+            {
+                Caption = TPConfigs.SoftNameTW,
+                Prompt = "輸入員工代碼進行確認啟用",
+                DefaultButtonIndex = 0,
+                Editor = new TextEdit { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) },
+                DefaultResponse = ""
+            })?.ToString().ToUpper();
+
+            if (string.IsNullOrEmpty(result) || result != TPConfigs.LoginUser.Id.ToUpper()) return;
+
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
             {
                 TreeListNode focusedNode = tlsData.FocusedNode;
@@ -126,11 +137,23 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
                 dt201_BaseBUS.Instance.UpdateRange(allChildren);
             }
+
             LoadData();
         }
 
         private void ItemDisable_Click(object sender, EventArgs e)
         {
+            var result = XtraInputBox.Show(new XtraInputBoxArgs
+            {
+                Caption = TPConfigs.SoftNameTW,
+                Prompt = "輸入員工代碼進行確認停用",
+                DefaultButtonIndex = 0,
+                Editor = new TextEdit { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) },
+                DefaultResponse = ""
+            })?.ToString().ToUpper();
+
+            if (string.IsNullOrEmpty(result) || result != TPConfigs.LoginUser.Id.ToUpper()) return;
+
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
             {
                 TreeListNode focusedNode = tlsData.FocusedNode;
@@ -144,11 +167,42 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
                 dt201_BaseBUS.Instance.UpdateRange(allChildren);
             }
+
             LoadData();
         }
 
         private void ItemEditNode_Click(object sender, EventArgs e)
         {
+            if (nodeFocus.IsFinalNode == true)
+            {
+                var result = XtraInputBox.Show(new XtraInputBoxArgs
+                {
+                    Caption = TPConfigs.SoftNameTW,
+                    Prompt = "輸入新年版名稱",
+                    DefaultButtonIndex = 0,
+                    Editor = new TextEdit() { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) },
+                    DefaultResponse = ""
+                });
+
+                if (string.IsNullOrEmpty(result?.ToString())) return;
+                string version = result.ToString();
+
+                TreeListNode parentNode = tlsData.FocusedNode.ParentNode;
+                dt201_Base parentData = (tlsData.GetRow(parentNode.Id) as dynamic).data as dt201_Base;
+
+                bool IsExist = baseDatas.Any(r => r.IdParent == parentData.Id && r.DisplayName == version);
+                if (IsExist)
+                {
+                    MsgTP.MsgError("年版已存在！");
+                    return;
+                }
+
+                nodeFocus.DisplayName = version;
+                dt201_BaseBUS.Instance.AddOrUpdate(nodeFocus);
+                LoadData();
+                return;
+            }
+
             f201_AddNode fAdd = new f201_AddNode();
             fAdd.eventInfo = EventFormInfo.Update;
             fAdd.formName = "文件";
@@ -160,24 +214,22 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void ItemAddVer_Click(object sender, EventArgs e)
         {
-            XtraInputBoxArgs args = new XtraInputBoxArgs
+            var result = XtraInputBox.Show(new XtraInputBoxArgs
             {
                 Caption = TPConfigs.SoftNameTW,
                 Prompt = "輸入年版名稱",
                 DefaultButtonIndex = 0,
-                Editor = new TextEdit() { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F, FontStyle.Regular, GraphicsUnit.Point, 0) },
+                Editor = new TextEdit() { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) },
                 DefaultResponse = ""
-            };
+            });
 
-            var result = XtraInputBox.Show(args);
-            if (result == null) return;
-
-            string version = result?.ToString() ?? "";
+            if (string.IsNullOrEmpty(result?.ToString())) return;
+            string version = result.ToString();
 
             bool IsExist = baseDatas.Any(r => r.IdParent == nodeFocus.Id && r.DisplayName == version);
             if (IsExist)
             {
-                XtraMessageBox.Show("年版已存在！");
+                MsgTP.MsgError("年版已存在！");
                 return;
             }
 
@@ -197,44 +249,69 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void ItemDeleteNote_Click(object sender, EventArgs e)
         {
+            var result = XtraInputBox.Show(new XtraInputBoxArgs
+            {
+                Caption = TPConfigs.SoftNameTW,
+                Prompt = "輸入員工代碼進行確認停用",
+                DefaultButtonIndex = 0,
+                Editor = new TextEdit { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) },
+                DefaultResponse = ""
+            })?.ToString().ToUpper();
 
+            if (string.IsNullOrEmpty(result) || result != TPConfigs.LoginUser.Id.ToUpper()) return;
+
+            TreeListNode focusedNode = tlsData.FocusedNode;
+            dt201_Base rowData = (tlsData.GetRow(focusedNode.Id) as dynamic).data as dt201_Base;
+
+            // Lấy tất cả các node con
+            List<dt201_Base> allChildren = dt201_BaseBUS.Instance.GetAllChildByParentId(rowData.Id);
+
+            // Cập nhật thuộc tính IsDisable của tất cả các phần tử trong danh sách
+            allChildren.ForEach(item =>
+            {
+                item.IsDel = true;
+                item.DelTime = DateTime.Now;
+            });
+
+            dt201_BaseBUS.Instance.UpdateRange(allChildren);
+
+            tlsData.ClearNodes();
+
+            LoadData();
         }
 
         private void ItemCopyNote_Click(object sender, EventArgs e)
         {
-            XtraInputBoxArgs args = new XtraInputBoxArgs
+            var result = XtraInputBox.Show(new XtraInputBoxArgs
             {
                 Caption = TPConfigs.SoftNameTW,
                 Prompt = "輸入年版名稱",
                 DefaultButtonIndex = 0,
-                Editor = new TextEdit() { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F, FontStyle.Regular, GraphicsUnit.Point, 0) },
+                Editor = new TextEdit() { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) },
                 DefaultResponse = ""
-            };
+            });
 
-            var result = XtraInputBox.Show(args);
-            if (result == null) return;
+            if (string.IsNullOrEmpty(result?.ToString())) return;
+            string version = result.ToString();
 
-            string version = result?.ToString() ?? "";
+            TreeListNode parentNode = tlsData.FocusedNode.ParentNode;
+            dt201_Base parentData = (tlsData.GetRow(parentNode.Id) as dynamic).data as dt201_Base;
 
-            bool IsExist = baseDatas.Any(r => r.IdParent == nodeFocus.Id && r.DisplayName == version);
+            bool IsExist = baseDatas.Any(r => r.IdParent == parentData.Id && r.DisplayName == version);
             if (IsExist)
             {
                 MsgTP.MsgError("年版已存在！");
                 return;
             }
 
-            TreeListNode focusedNode = tlsData.FocusedNode.ParentNode;
-            dt201_Base rowData = (tlsData.GetRow(focusedNode.Id) as dynamic).data as dt201_Base;
-
             dt201_Base baseVer = new dt201_Base()
             {
-                IdParent = rowData.Id,
+                IdParent = parentData.Id,
                 DocCode = "",
                 DisplayName = version,
                 IsFinalNode = true,
-                IdDept = rowData.IdDept,
+                IdDept = parentData.IdDept,
             };
-
             int idBaseNew = dt201_BaseBUS.Instance.Add(baseVer);
 
             var formsByBase = dt201_FormsBUS.Instance.GetListByIdBase(nodeFocus.Id).Select(r => new dt201_Forms()
@@ -278,16 +355,20 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         {
             baseDatas = dt201_BaseBUS.Instance.GetList().ToList();
             var deptsChecked = cbbDepts.Items.Where(r => r.CheckState == CheckState.Checked).Select(r => r.Value).ToList();
+            var docTypes = dt201_DocTypeBUS.Instance.GetList();
 
             var result = (from data in baseDatas
                           join dept in depts on data.IdDept equals dept.Id
+                          join docType in docTypes on data.IdDocType equals docType.Id into dtg
+                          from g in dtg.DefaultIfEmpty()
                           where deptsChecked.Contains(data.IdDept)
-                          select new { data, dept }).ToList();
+                          select new { data, dept, doctype = dtg != null ? g : null }).ToList();
 
             sourceData.DataSource = result;
 
             tlsData.BestFitColumns();
             tlsData.RefreshDataSource();
+            tlsData.Refresh();
 
             tlsColDept.Visible = deptsChecked.Count > 1;
         }
@@ -319,77 +400,122 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         private void tlsData_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
         {
             TreeList treeList = sender as TreeList;
-            if (e.HitInfo != null && e.HitInfo.InRowCell && e.HitInfo.Node.Id >= 0)
+            if (e.HitInfo?.InRowCell != true || e.HitInfo.Node.Id < 0) return;
+
+            // Get current node and data
+            TreeListNode currentNode = treeList.FocusedNode;
+            dt201_Base currentData = (treeList.GetRow(currentNode.Id) as dynamic)?.data as dt201_Base;
+            if (currentData == null) return;
+            nodeFocus = currentData;
+
+            // Gather parent node and parent data
+            List<dt201_Base> parentDatas = new List<dt201_Base>();
+            TreeListNode parentNode = currentNode.ParentNode;
+
+            while (parentNode != null)
             {
-                var nodeSelect = treeList.GetRow(e.HitInfo.Node.Id);
-                if (nodeSelect == null) return;
+                var parentNodeRow = treeList.GetRow(parentNode.Id);
+                dt201_Base parentNodeData = (parentNodeRow as dynamic)?.data as dt201_Base;
+                if (parentNodeData != null) parentDatas.Add(parentNodeData);
+                parentNode = parentNode.ParentNode;
+            }
 
-                dt201_Base rowData = ((dynamic)nodeSelect).data as dt201_Base;
-                if (rowData == null) return;
+            dt201_Base parentData = parentDatas.FirstOrDefault();
 
-                nodeFocus = rowData;
-                //idNodeParent = e.HitInfo.Node.ParentNode != null ? e.HitInfo.Node.ParentNode.Id : -1;
-                bool HaveFinalNode = dt201_BaseBUS.Instance.GetListByParentId(rowData.Id).Any(r => r.IsFinalNode == true);
+            //// Get first child data
+            //dt201_Base firstChildData = (currentNode.HasChildren ? (treeList.GetRow(currentNode.FirstNode.Id) as dynamic)?.data as dt201_Base : null);
+            //bool haveFinalNode = firstChildData?.IsFinalNode == true;
 
-                // Tạo danh sách chứa các node cha
-                List<dt201_Base> parentNodes = new List<dt201_Base>();
-                TreeListNode currentNode = tlsData.FocusedNode;
-                while (currentNode != null)
+            // Get all children data, including children of children (Có thể bỏ đoạn này, Thay bằng đoan firstChild để check có phải là FinalNode)
+            List<dt201_Base> allChildrenDatas = new List<dt201_Base>();
+            if (currentNode.HasChildren)
+            {
+                // Use a queue to process nodes in a breadth-first manner
+                Queue<TreeListNode> nodeQueue = new Queue<TreeListNode>();
+                nodeQueue.Enqueue(currentNode);  // Start with the current node
+
+                while (nodeQueue.Count > 0)
                 {
-                    dt201_Base node = (tlsData.GetRow(currentNode.Id) as dynamic).data as dt201_Base;
+                    // Dequeue a node from the queue
+                    TreeListNode currentNodeCheck = nodeQueue.Dequeue();
 
-                    parentNodes.Add(node);
-                    currentNode = currentNode.ParentNode;
-                }
-                var IsDisable = parentNodes.Any(p => p.IsDisable == true);
-
-                if (IsDisable)
-                {
-                    dt201_Base nodeParent = null;
-                    var nodeParentId = tlsData.GetRow(tlsData.FocusedNode.ParentNode?.Id ?? -1);
-                    if (nodeParentId != null)
+                    // Process all the immediate children of the current node
+                    foreach (TreeListNode childNode in currentNodeCheck.Nodes)
                     {
-                        nodeParent = (tlsData.GetRow(tlsData.FocusedNode.ParentNode?.Id ?? -1) as dynamic).data as dt201_Base;
-                    }
+                        var childNodeRow = treeList.GetRow(childNode.Id);
+                        dt201_Base childNodeData = (childNodeRow as dynamic)?.data as dt201_Base;
 
-                    if (nodeParent == null || nodeParent.IsDisable != true)
-                    {
-                        e.Menu.Items.Add(itemEnable);
+                        if (childNodeData != null)
+                        {
+                            allChildrenDatas.Add(childNodeData);
+                        }
+
+                        // Enqueue the child node to process its children later
+                        if (childNode.HasChildren)
+                        {
+                            nodeQueue.Enqueue(childNode);
+                        }
                     }
-                    return;
                 }
+            }
 
-                if (rowData.IsFinalNode == true)
+            // Get first child data
+            dt201_Base firstChildData = allChildrenDatas.FirstOrDefault();
+            bool isRootFinalNode = firstChildData?.IsFinalNode == true;
+            bool haveChildren = currentNode.HasChildren;
+
+            // Check if the current or any parent node is disabled
+            bool isDisable = parentDatas.Any(p => p.IsDisable == true) || currentData.IsDisable == true;
+
+            if (isDisable)
+            {
+                if (parentData?.IsDisable != true) e.Menu.Items.Add(itemEnable);
+                return;
+            }
+
+            // Handle final node scenario
+            if (currentData.IsFinalNode == true)
+            {
+                if (parentData != null)
                 {
-                    dt201_Base parentData = ((dynamic)treeList.GetRow(e.HitInfo.Node.ParentNode.Id)).data as dt201_Base;
                     var nodes = dt201_BaseBUS.Instance.GetListByParentId(parentData.Id);
-                    int newestVersion = nodes.Max(r => r.Id);
-
-                    if (newestVersion == rowData.Id)
+                    if (nodes.Max(r => r.Id) == currentData.Id)
                     {
                         itemAddAtt.BeginGroup = true;
                         e.Menu.Items.Add(itemAddAtt);
                         e.Menu.Items.Add(itemCopyNode);
                         e.Menu.Items.Add(itemEditNode);
+                        itemDelNode.BeginGroup = true;
                         e.Menu.Items.Add(itemDelNode);
                     }
                 }
-                else if (HaveFinalNode)
-                {
-                    itemAddVer.BeginGroup = true;
-                    e.Menu.Items.Add(itemAddVer);
-                    e.Menu.Items.Add(itemEditNode);
-                    e.Menu.Items.Add(itemDelNode);
-                }
-                else
-                {
-                    itemAddVer.BeginGroup = true;
-                    e.Menu.Items.Add(itemAddVer);
-                    e.Menu.Items.Add(itemAddNode);
-                    e.Menu.Items.Add(itemEditNode);
-                    e.Menu.Items.Add(itemDelNode);
-                }
-
+            }
+            else if (isRootFinalNode)
+            {
+                itemAddVer.BeginGroup = true;
+                e.Menu.Items.Add(itemAddVer);
+                e.Menu.Items.Add(itemEditNode);
+                itemDelNode.BeginGroup = true;
+                e.Menu.Items.Add(itemDelNode);
+                e.Menu.Items.Add(itemDisable);
+            }
+            else if (haveChildren)
+            {
+                itemAddNode.BeginGroup = true;
+                e.Menu.Items.Add(itemAddNode);
+                e.Menu.Items.Add(itemEditNode);
+                itemDelNode.BeginGroup = true;
+                e.Menu.Items.Add(itemDelNode);
+                e.Menu.Items.Add(itemDisable);
+            }
+            else
+            {
+                itemAddVer.BeginGroup = true;
+                e.Menu.Items.Add(itemAddVer);
+                e.Menu.Items.Add(itemAddNode);
+                e.Menu.Items.Add(itemEditNode);
+                itemDelNode.BeginGroup = true;
+                e.Menu.Items.Add(itemDelNode);
                 e.Menu.Items.Add(itemDisable);
             }
         }
@@ -430,6 +556,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void cbbDepts_EditValueChanged(object sender, EventArgs e)
         {
+            tlsData.ClearNodes();
             LoadData();
         }
 

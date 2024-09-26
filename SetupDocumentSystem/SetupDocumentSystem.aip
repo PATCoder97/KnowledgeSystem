@@ -114,6 +114,7 @@
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_dt307_ConfirmQuestion.html" Value="..\KnowledgeSystem\bin\Release\Html"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_dt307_ResultExam.html" Value="..\KnowledgeSystem\bin\Release\Html"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_f301_NotifyPersonnelTransfer.html" Value="..\KnowledgeSystem\bin\Release\Html"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons8_disable.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons8_finish_flag.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons8_learn.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_icons8_print.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
@@ -270,6 +271,7 @@
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_dt307_ConfirmQuestion.html" Value="dt307_ConfirmQuestion.html"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_dt307_ResultExam.html" Value="dt307_ResultExam.html"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_f301_NotifyPersonnelTransfer.html" Value="f301_NotifyPersonnelTransfer.html"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_icons8_disable.svg" Value="icons8_disable.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_icons8_finish_flag.svg" Value="icons8_finish_flag.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_icons8_learn.svg" Value="icons8_learn.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_icons8_print.svg" Value="icons8_print.svg"/>
@@ -542,6 +544,7 @@
     <ROW File="icons8_print.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS8~5.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons8_print.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons8_print.svg&gt;" SelfReg="false"/>
     <ROW File="icons8_time.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS8~6.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons8_time.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons8_time.svg&gt;" SelfReg="false"/>
     <ROW File="dt307_ResultExam.html" Component_="KnowledgeSystem_ContentOutput_Html" FileName="DT307_~3.HTM|[|AI_PROPPATH_FILENAME_PERBUILD_dt307_ResultExam.html]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_dt307_ResultExam.html&gt;" SelfReg="false"/>
+    <ROW File="icons8_disable.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS8~7.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons8_disable.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons8_disable.svg&gt;" SelfReg="false"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.AppPathsComponent">
     <ROW Name="AI_APPPATH_PERBUILD_Actions_Bell.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_Actions_Bell.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_Actions_Bell.svg]" Type="2" Content="0"/>
@@ -651,6 +654,7 @@
     <ROW Name="AI_APPPATH_PERBUILD_dt307_ConfirmQuestion.html" Path="[|AI_PROPPATH_DIR_PERBUILD_dt307_ConfirmQuestion.html]\[|AI_PROPPATH_FILENAME_PERBUILD_dt307_ConfirmQuestion.html]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_dt307_ResultExam.html" Path="[|AI_PROPPATH_DIR_PERBUILD_dt307_ResultExam.html]\[|AI_PROPPATH_FILENAME_PERBUILD_dt307_ResultExam.html]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_f301_NotifyPersonnelTransfer.html" Path="[|AI_PROPPATH_DIR_PERBUILD_f301_NotifyPersonnelTransfer.html]\[|AI_PROPPATH_FILENAME_PERBUILD_f301_NotifyPersonnelTransfer.html]" Type="2" Content="0"/>
+    <ROW Name="AI_APPPATH_PERBUILD_icons8_disable.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_icons8_disable.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_icons8_disable.svg]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_icons8_finish_flag.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_icons8_finish_flag.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_icons8_finish_flag.svg]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_icons8_learn.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_icons8_learn.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_icons8_learn.svg]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_icons8_print.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_icons8_print.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_icons8_print.svg]" Type="2" Content="0"/>
@@ -1014,5 +1018,6 @@
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons8_print.svg"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons8_time.svg"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="dt307_ResultExam.html"/>
+    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons8_disable.svg"/>
   </COMPONENT>
 </DOCUMENT>

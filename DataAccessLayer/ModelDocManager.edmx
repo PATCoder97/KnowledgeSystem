@@ -197,6 +197,13 @@
           <Property Name="NotifyCycle" Type="int" />
           <Property Name="IsDisable" Type="bit" />
         </EntityType>
+        <EntityType Name="dt201_DocType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="16" Nullable="false" />
+        </EntityType>
         <EntityType Name="dt201_Forms">
           <Key>
             <PropertyRef Name="Id" />
@@ -715,6 +722,7 @@
           <EntitySet Name="dm_User" EntityType="Self.dm_User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dm_UserRole" EntityType="Self.dm_UserRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt201_Base" EntityType="Self.dt201_Base" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt201_DocType" EntityType="Self.dt201_DocType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt201_Forms" EntityType="Self.dt201_Forms" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt201_ProgInfo" EntityType="Self.dt201_ProgInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt201_Progress" EntityType="Self.dt201_Progress" Schema="dbo" store:Type="Tables" />
@@ -831,6 +839,7 @@
           <EntitySet Name="dt306_Base" EntityType="DBDocumentManagementSystemModel.dt306_Base" />
           <EntitySet Name="dt307_JobQuesManage" EntityType="DBDocumentManagementSystemModel.dt307_JobQuesManage" />
           <EntitySet Name="dt201_Base" EntityType="DBDocumentManagementSystemModel.dt201_Base" />
+          <EntitySet Name="dt201_DocType" EntityType="DBDocumentManagementSystemModel.dt201_DocType" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -1522,6 +1531,13 @@
           <Property Name="IsPaperType" Type="Boolean" />
           <Property Name="NotifyCycle" Type="Int32" />
           <Property Name="IsDisable" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="dt201_DocType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2280,6 +2296,14 @@
                 <ScalarProperty Name="DocCode" ColumnName="DocCode" />
                 <ScalarProperty Name="IdDocType" ColumnName="IdDocType" />
                 <ScalarProperty Name="IdParent" ColumnName="IdParent" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt201_DocType">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt201_DocType">
+              <MappingFragment StoreEntitySet="dt201_DocType">
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

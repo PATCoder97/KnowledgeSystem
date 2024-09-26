@@ -92,6 +92,9 @@
     <Compile Include="dt201_Base.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
+    <Compile Include="dt201_DocType.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
     <Compile Include="dt201_Forms.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>

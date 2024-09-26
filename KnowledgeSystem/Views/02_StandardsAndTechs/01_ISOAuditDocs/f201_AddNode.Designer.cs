@@ -40,7 +40,6 @@
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.cbbDept = new DevExpress.XtraEditors.ComboBoxEdit();
             this.ckPaperType = new DevExpress.XtraEditors.CheckEdit();
-            this.comboBoxEdit1 = new DevExpress.XtraEditors.ComboBoxEdit();
             this.txbArticles = new DevExpress.XtraEditors.TokenEdit();
             this.txbDisplayName = new DevExpress.XtraEditors.TextEdit();
             this.txbDocCode = new DevExpress.XtraEditors.TextEdit();
@@ -53,12 +52,12 @@
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.cbbDocType = new DevExpress.XtraEditors.LookUpEdit();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cbbDept.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckPaperType.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbArticles.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDisplayName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDocCode.Properties)).BeginInit();
@@ -71,6 +70,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbDocType.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // barManagerTP
@@ -161,11 +161,11 @@
             // 
             this.layoutControl1.Controls.Add(this.cbbDept);
             this.layoutControl1.Controls.Add(this.ckPaperType);
-            this.layoutControl1.Controls.Add(this.comboBoxEdit1);
             this.layoutControl1.Controls.Add(this.txbArticles);
             this.layoutControl1.Controls.Add(this.txbDisplayName);
             this.layoutControl1.Controls.Add(this.txbDocCode);
             this.layoutControl1.Controls.Add(this.txbNotifyCycle);
+            this.layoutControl1.Controls.Add(this.cbbDocType);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
@@ -207,23 +207,6 @@
             this.ckPaperType.Size = new System.Drawing.Size(80, 28);
             this.ckPaperType.StyleController = this.layoutControl1;
             this.ckPaperType.TabIndex = 14;
-            // 
-            // comboBoxEdit1
-            // 
-            this.comboBoxEdit1.Location = new System.Drawing.Point(100, 120);
-            this.comboBoxEdit1.MenuManager = this.barManagerTP;
-            this.comboBoxEdit1.Name = "comboBoxEdit1";
-            this.comboBoxEdit1.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.comboBoxEdit1.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.comboBoxEdit1.Properties.Appearance.Options.UseFont = true;
-            this.comboBoxEdit1.Properties.Appearance.Options.UseForeColor = true;
-            this.comboBoxEdit1.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBoxEdit1.Properties.AppearanceDropDown.Options.UseFont = true;
-            this.comboBoxEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.comboBoxEdit1.Size = new System.Drawing.Size(163, 32);
-            this.comboBoxEdit1.StyleController = this.layoutControl1;
-            this.comboBoxEdit1.TabIndex = 13;
             // 
             // txbArticles
             // 
@@ -388,7 +371,7 @@
             this.layoutControlItem2.AppearanceItemCaption.Options.UseForeColor = true;
             this.layoutControlItem2.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
             this.layoutControlItem2.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
-            this.layoutControlItem2.Control = this.comboBoxEdit1;
+            this.layoutControlItem2.Control = this.cbbDocType;
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 108);
             this.layoutControlItem2.Name = "layoutControlItem2";
             this.layoutControlItem2.Size = new System.Drawing.Size(255, 37);
@@ -404,6 +387,29 @@
             this.layoutControlItem3.Size = new System.Drawing.Size(87, 37);
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextVisible = false;
+            // 
+            // cbbDocType
+            // 
+            this.cbbDocType.Location = new System.Drawing.Point(100, 120);
+            this.cbbDocType.MenuManager = this.barManagerTP;
+            this.cbbDocType.Name = "cbbDocType";
+            this.cbbDocType.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.cbbDocType.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.cbbDocType.Properties.Appearance.Options.UseFont = true;
+            this.cbbDocType.Properties.Appearance.Options.UseForeColor = true;
+            this.cbbDocType.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbDocType.Properties.AppearanceDropDown.Options.UseFont = true;
+            this.cbbDocType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbbDocType.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("DisplayName", "Name1")});
+            this.cbbDocType.Properties.NullText = "";
+            this.cbbDocType.Properties.PopupSizeable = false;
+            this.cbbDocType.Properties.ShowFooter = false;
+            this.cbbDocType.Properties.ShowHeader = false;
+            this.cbbDocType.Size = new System.Drawing.Size(163, 32);
+            this.cbbDocType.StyleController = this.layoutControl1;
+            this.cbbDocType.TabIndex = 13;
             // 
             // f201_AddNode
             // 
@@ -428,7 +434,6 @@
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.cbbDept.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckPaperType.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbArticles.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDisplayName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDocCode.Properties)).EndInit();
@@ -441,6 +446,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbDocType.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -466,10 +472,10 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraEditors.TextEdit txbNotifyCycle;
         private DevExpress.XtraEditors.CheckEdit ckPaperType;
-        private DevExpress.XtraEditors.ComboBoxEdit comboBoxEdit1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
         private DevExpress.XtraEditors.ComboBoxEdit cbbDept;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
+        private DevExpress.XtraEditors.LookUpEdit cbbDocType;
     }
 }
