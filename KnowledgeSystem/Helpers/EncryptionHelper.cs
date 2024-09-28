@@ -96,7 +96,11 @@ namespace KnowledgeSystem.Helpers
 
         static string GenerateRandomString(int length, bool includeLetters = true, bool includeSpecialChars = false)
         {
-            Random random = new Random();
+            Guid guid = Guid.NewGuid();
+            byte[] guidBytes = guid.ToByteArray();
+            int seed = BitConverter.ToInt32(guidBytes, 0);
+            Random random = new Random(seed);
+
             string letterChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             string numberChars = "!@#$%^&*()_+-=[]{};:'\",.<>?";
             string chars = "";
