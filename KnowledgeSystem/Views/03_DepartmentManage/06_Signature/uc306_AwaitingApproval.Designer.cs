@@ -122,7 +122,7 @@
             // 
             // gridColumn5
             // 
-            this.gridColumn5.Caption = "領域代號";
+            this.gridColumn5.Caption = "作業機能類";
             this.gridColumn5.FieldName = "fieldTypes.DisplayName";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;

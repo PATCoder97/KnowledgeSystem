@@ -58,9 +58,9 @@
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnReload = new DevExpress.XtraBars.BarButtonItem();
-            this.btnExportExcel = new DevExpress.XtraBars.BarButtonItem();
             this.barCbbNumRecord = new DevExpress.XtraBars.BarEditItem();
             this.cbbNumRecord = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.btnExportExcel = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -256,7 +256,7 @@
             // 
             // gridColumn14
             // 
-            this.gridColumn14.Caption = "領域代號";
+            this.gridColumn14.Caption = "作業機能類";
             this.gridColumn14.FieldName = "fieldTypes.DisplayName";
             this.gridColumn14.Name = "gridColumn14";
             this.gridColumn14.Visible = true;
@@ -407,18 +407,6 @@
             this.btnReload.Name = "btnReload";
             this.btnReload.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnReload_ItemClick);
             // 
-            // btnExportExcel
-            // 
-            this.btnExportExcel.Caption = "出表";
-            this.btnExportExcel.Id = 2;
-            this.btnExportExcel.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnExportExcel.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
-            this.btnExportExcel.ItemAppearance.Hovered.Options.UseForeColor = true;
-            this.btnExportExcel.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExportExcel.ItemAppearance.Normal.Options.UseFont = true;
-            this.btnExportExcel.Name = "btnExportExcel";
-            this.btnExportExcel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExportExcel_ItemClick);
-            // 
             // barCbbNumRecord
             // 
             this.barCbbNumRecord.Caption = "記錄數";
@@ -448,6 +436,18 @@
             this.cbbNumRecord.Name = "cbbNumRecord";
             this.cbbNumRecord.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cbbNumRecord.SelectedIndexChanged += new System.EventHandler(this.cbbNumRecord_SelectedIndexChanged);
+            // 
+            // btnExportExcel
+            // 
+            this.btnExportExcel.Caption = "出表";
+            this.btnExportExcel.Id = 2;
+            this.btnExportExcel.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnExportExcel.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnExportExcel.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnExportExcel.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExportExcel.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnExportExcel.Name = "btnExportExcel";
+            this.btnExportExcel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExportExcel_ItemClick);
             // 
             // barDockControlTop
             // 

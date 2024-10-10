@@ -246,7 +246,7 @@
             // 
             // txbFieldType
             // 
-            this.txbFieldType.Location = new System.Drawing.Point(109, 12);
+            this.txbFieldType.Location = new System.Drawing.Point(128, 12);
             this.txbFieldType.Name = "txbFieldType";
             this.txbFieldType.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbFieldType.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -258,7 +258,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txbFieldType.Properties.NullText = "";
             this.txbFieldType.Properties.PopupView = this.gridView1;
-            this.txbFieldType.Size = new System.Drawing.Size(174, 32);
+            this.txbFieldType.Size = new System.Drawing.Size(155, 32);
             this.txbFieldType.StyleController = this.layoutControl1;
             this.txbFieldType.TabIndex = 25;
             this.txbFieldType.EditValueChanged += new System.EventHandler(this.txbFieldType_EditValueChanged);
@@ -477,13 +477,13 @@
             // 
             // txbTitle
             // 
-            this.txbTitle.Location = new System.Drawing.Point(109, 48);
+            this.txbTitle.Location = new System.Drawing.Point(128, 48);
             this.txbTitle.Name = "txbTitle";
             this.txbTitle.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbTitle.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbTitle.Properties.Appearance.Options.UseFont = true;
             this.txbTitle.Properties.Appearance.Options.UseForeColor = true;
-            this.txbTitle.Size = new System.Drawing.Size(547, 32);
+            this.txbTitle.Size = new System.Drawing.Size(528, 32);
             this.txbTitle.StyleController = this.layoutControl1;
             this.txbTitle.TabIndex = 11;
             // 
@@ -590,7 +590,7 @@
             // 
             // txbDocType
             // 
-            this.txbDocType.Location = new System.Drawing.Point(384, 12);
+            this.txbDocType.Location = new System.Drawing.Point(377, 12);
             this.txbDocType.Name = "txbDocType";
             this.txbDocType.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbDocType.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -602,7 +602,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txbDocType.Properties.NullText = "";
             this.txbDocType.Properties.PopupView = this.gridLookUpEdit1View;
-            this.txbDocType.Size = new System.Drawing.Size(174, 32);
+            this.txbDocType.Size = new System.Drawing.Size(181, 32);
             this.txbDocType.StyleController = this.layoutControl1;
             this.txbDocType.TabIndex = 23;
             // 
@@ -659,7 +659,7 @@
             this.lcTitle.OptionsToolTip.AllowHtmlString = DevExpress.Utils.DefaultBoolean.True;
             this.lcTitle.Size = new System.Drawing.Size(648, 36);
             this.lcTitle.Text = "名稱<color=red>*</color>";
-            this.lcTitle.TextSize = new System.Drawing.Size(85, 24);
+            this.lcTitle.TextSize = new System.Drawing.Size(104, 24);
             // 
             // tabbedControlGroup1
             // 
@@ -792,8 +792,8 @@
             this.layoutControlItem6.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem6.Name = "layoutControlItem6";
             this.layoutControlItem6.Size = new System.Drawing.Size(275, 36);
-            this.layoutControlItem6.Text = "領域代號<color=red>*</color>";
-            this.layoutControlItem6.TextSize = new System.Drawing.Size(85, 24);
+            this.layoutControlItem6.Text = "作業機能類<color=red>*</color>";
+            this.layoutControlItem6.TextSize = new System.Drawing.Size(104, 24);
             // 
             // lcType
             // 
@@ -810,7 +810,9 @@
             this.lcType.Name = "lcType";
             this.lcType.Size = new System.Drawing.Size(275, 36);
             this.lcType.Text = "文件種類<color=red>*</color>";
+            this.lcType.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
             this.lcType.TextSize = new System.Drawing.Size(85, 24);
+            this.lcType.TextToControlDistance = 5;
             // 
             // f306_NewSignDoc
             // 

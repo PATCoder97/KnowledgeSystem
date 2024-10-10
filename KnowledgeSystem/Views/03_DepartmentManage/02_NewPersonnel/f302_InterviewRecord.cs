@@ -88,19 +88,22 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
 
             using (WebClient client = new WebClient())
             {
-                //try
-                //{
-                //    string response = client.DownloadString(url);
-                //    if (response == "ok")
-                //    {
-                //        XtraMessageBox.Show("上傳成功，請二級主管上FPGFlow執行核准！", TPConfigs.SoftNameTW);
-                //        return;
-                //    }
-                //}
-                //catch { }
+                try
+                {
+                    string response = client.DownloadString(url);
+
+                    if (response == "ok")
+                    {
+                        XtraMessageBox.Show("上傳成功，請二級主管上FPGFlow執行核准！", TPConfigs.SoftNameTW);
+                        Close();
+                        return;
+                    }
+                }
+                catch { }
             }
 
             XtraMessageBox.Show("系統發生問題！", TPConfigs.SoftNameTW);
+            Close();
         }
     }
 }

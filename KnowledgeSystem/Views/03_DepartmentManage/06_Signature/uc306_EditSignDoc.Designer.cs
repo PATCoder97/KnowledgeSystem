@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.txbFieldType = new DevExpress.XtraEditors.GridLookUpEdit();
+            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.txbTitle = new DevExpress.XtraEditors.TextEdit();
             this.txbDocType = new DevExpress.XtraEditors.GridLookUpEdit();
             this.gridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -36,20 +39,17 @@
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.lcTitle = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcType = new DevExpress.XtraLayout.LayoutControlItem();
-            this.txbFieldType = new DevExpress.XtraEditors.GridLookUpEdit();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txbFieldType.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbTitle.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDocType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcTitle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcType)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbFieldType.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -66,21 +66,62 @@
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
+            // txbFieldType
+            // 
+            this.txbFieldType.Location = new System.Drawing.Point(128, 12);
+            this.txbFieldType.Name = "txbFieldType";
+            this.txbFieldType.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.txbFieldType.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.txbFieldType.Properties.Appearance.Options.UseFont = true;
+            this.txbFieldType.Properties.Appearance.Options.UseForeColor = true;
+            this.txbFieldType.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbFieldType.Properties.AppearanceDropDown.Options.UseFont = true;
+            this.txbFieldType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txbFieldType.Properties.NullText = "";
+            this.txbFieldType.Properties.PopupView = this.gridView1;
+            this.txbFieldType.Size = new System.Drawing.Size(128, 32);
+            this.txbFieldType.StyleController = this.layoutControl1;
+            this.txbFieldType.TabIndex = 24;
+            this.txbFieldType.EditValueChanged += new System.EventHandler(this.txbFieldType_EditValueChanged);
+            // 
+            // gridView1
+            // 
+            this.gridView1.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridView1.Appearance.Row.Options.UseFont = true;
+            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn1});
+            this.gridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridView1.OptionsView.EnableAppearanceOddRow = true;
+            this.gridView1.OptionsView.ShowAutoFilterRow = true;
+            this.gridView1.OptionsView.ShowColumnHeaders = false;
+            this.gridView1.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "gridColumn5";
+            this.gridColumn1.FieldName = "DisplayName";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 0;
+            // 
             // txbTitle
             // 
-            this.txbTitle.Location = new System.Drawing.Point(109, 48);
+            this.txbTitle.Location = new System.Drawing.Point(128, 48);
             this.txbTitle.Name = "txbTitle";
             this.txbTitle.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbTitle.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbTitle.Properties.Appearance.Options.UseFont = true;
             this.txbTitle.Properties.Appearance.Options.UseForeColor = true;
-            this.txbTitle.Size = new System.Drawing.Size(397, 32);
+            this.txbTitle.Size = new System.Drawing.Size(378, 32);
             this.txbTitle.StyleController = this.layoutControl1;
             this.txbTitle.TabIndex = 11;
             // 
             // txbDocType
             // 
-            this.txbDocType.Location = new System.Drawing.Point(357, 12);
+            this.txbDocType.Location = new System.Drawing.Point(350, 12);
             this.txbDocType.Name = "txbDocType";
             this.txbDocType.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbDocType.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -92,7 +133,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txbDocType.Properties.NullText = "";
             this.txbDocType.Properties.PopupView = this.gridLookUpEdit1View;
-            this.txbDocType.Size = new System.Drawing.Size(149, 32);
+            this.txbDocType.Size = new System.Drawing.Size(156, 32);
             this.txbDocType.StyleController = this.layoutControl1;
             this.txbDocType.TabIndex = 23;
             // 
@@ -147,7 +188,7 @@
             this.lcTitle.OptionsToolTip.AllowHtmlString = DevExpress.Utils.DefaultBoolean.True;
             this.lcTitle.Size = new System.Drawing.Size(498, 36);
             this.lcTitle.Text = "名稱<color=red>*</color>";
-            this.lcTitle.TextSize = new System.Drawing.Size(85, 24);
+            this.lcTitle.TextSize = new System.Drawing.Size(104, 24);
             // 
             // lcType
             // 
@@ -165,48 +206,9 @@
             this.lcType.Name = "lcType";
             this.lcType.Size = new System.Drawing.Size(250, 36);
             this.lcType.Text = "文件種類<color=red>*</color>";
+            this.lcType.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
             this.lcType.TextSize = new System.Drawing.Size(85, 24);
-            // 
-            // txbFieldType
-            // 
-            this.txbFieldType.Location = new System.Drawing.Point(109, 12);
-            this.txbFieldType.Name = "txbFieldType";
-            this.txbFieldType.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.txbFieldType.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.txbFieldType.Properties.Appearance.Options.UseFont = true;
-            this.txbFieldType.Properties.Appearance.Options.UseForeColor = true;
-            this.txbFieldType.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txbFieldType.Properties.AppearanceDropDown.Options.UseFont = true;
-            this.txbFieldType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txbFieldType.Properties.NullText = "";
-            this.txbFieldType.Properties.PopupView = this.gridView1;
-            this.txbFieldType.Size = new System.Drawing.Size(147, 32);
-            this.txbFieldType.StyleController = this.layoutControl1;
-            this.txbFieldType.TabIndex = 24;
-            this.txbFieldType.EditValueChanged += new System.EventHandler(this.txbFieldType_EditValueChanged);
-            // 
-            // gridView1
-            // 
-            this.gridView1.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridView1.Appearance.Row.Options.UseFont = true;
-            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn1});
-            this.gridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.gridView1.Name = "gridView1";
-            this.gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.gridView1.OptionsView.EnableAppearanceOddRow = true;
-            this.gridView1.OptionsView.ShowAutoFilterRow = true;
-            this.gridView1.OptionsView.ShowColumnHeaders = false;
-            this.gridView1.OptionsView.ShowGroupPanel = false;
-            // 
-            // gridColumn1
-            // 
-            this.gridColumn1.Caption = "gridColumn5";
-            this.gridColumn1.FieldName = "DisplayName";
-            this.gridColumn1.Name = "gridColumn1";
-            this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 0;
+            this.lcType.TextToControlDistance = 5;
             // 
             // layoutControlItem1
             // 
@@ -221,8 +223,8 @@
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
             this.layoutControlItem1.Size = new System.Drawing.Size(248, 36);
-            this.layoutControlItem1.Text = "領域代號<color=red>*</color>";
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(85, 24);
+            this.layoutControlItem1.Text = "作業機能類<color=red>*</color>";
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(104, 24);
             // 
             // uc306_EditSignDoc
             // 
@@ -236,14 +238,14 @@
             this.Load += new System.EventHandler(this.uc306_EditSignDoc_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txbFieldType.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbTitle.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDocType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcTitle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcType)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbFieldType.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             this.ResumeLayout(false);
 
