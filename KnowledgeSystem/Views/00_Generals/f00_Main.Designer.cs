@@ -52,6 +52,7 @@ namespace KnowledgeSystem.Views._00_Generals
             DevExpress.XtraEditors.TileItemElement tileItemElement18 = new DevExpress.XtraEditors.TileItemElement();
             DevExpress.XtraEditors.TileItemElement tileItemElement19 = new DevExpress.XtraEditors.TileItemElement();
             DevExpress.XtraEditors.TileItemElement tileItemElement20 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement21 = new DevExpress.XtraEditors.TileItemElement();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.tileMain = new DevExpress.XtraEditors.TileControl();
             this.tileGroup2 = new DevExpress.XtraEditors.TileGroup();
@@ -79,6 +80,7 @@ namespace KnowledgeSystem.Views._00_Generals
             this.btnExtensions = new DevExpress.XtraEditors.TileItem();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.lbSoftName = new DevExpress.XtraLayout.LayoutControlItem();
+            this.btnSoftwareManual = new DevExpress.XtraEditors.TileItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
@@ -124,10 +126,10 @@ namespace KnowledgeSystem.Views._00_Generals
             this.tileMain.Groups.Add(this.tileGroup5);
             this.tileMain.Location = new System.Drawing.Point(12, 12);
             this.tileMain.Margin = new System.Windows.Forms.Padding(4);
-            this.tileMain.MaxId = 26;
+            this.tileMain.MaxId = 27;
             this.tileMain.Name = "tileMain";
             this.tileMain.Padding = new System.Windows.Forms.Padding(24, 22, 24, 22);
-            this.tileMain.Position = 709;
+            this.tileMain.Position = 1052;
             this.tileMain.ShowGroupText = true;
             this.tileMain.Size = new System.Drawing.Size(1180, 599);
             this.tileMain.TabIndex = 4;
@@ -360,6 +362,7 @@ namespace KnowledgeSystem.Views._00_Generals
             this.tileGroup5.Items.Add(this.btnMod);
             this.tileGroup5.Items.Add(this.btnSysAdmin);
             this.tileGroup5.Items.Add(this.btnExtensions);
+            this.tileGroup5.Items.Add(this.btnSoftwareManual);
             this.tileGroup5.Name = "tileGroup5";
             this.tileGroup5.Text = "系統管理";
             // 
@@ -412,7 +415,7 @@ namespace KnowledgeSystem.Views._00_Generals
             // 
             // btnExtensions
             // 
-            this.btnExtensions.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(57)))), ((int)(((byte)(123)))));
+            this.btnExtensions.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
             this.btnExtensions.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
             this.btnExtensions.AppearanceItem.Normal.Options.UseBackColor = true;
             this.btnExtensions.AppearanceItem.Normal.Options.UseFont = true;
@@ -449,6 +452,18 @@ namespace KnowledgeSystem.Views._00_Generals
             this.lbSoftName.TextLocation = DevExpress.Utils.Locations.Top;
             this.lbSoftName.TextSize = new System.Drawing.Size(0, 0);
             this.lbSoftName.TextVisible = false;
+            // 
+            // btnSoftwareManual
+            // 
+            this.btnSoftwareManual.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
+            this.btnSoftwareManual.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
+            this.btnSoftwareManual.AppearanceItem.Normal.Options.UseBackColor = true;
+            this.btnSoftwareManual.AppearanceItem.Normal.Options.UseFont = true;
+            tileItemElement21.Text = "軟體操作手冊";
+            this.btnSoftwareManual.Elements.Add(tileItemElement21);
+            this.btnSoftwareManual.Id = 26;
+            this.btnSoftwareManual.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
+            this.btnSoftwareManual.Name = "btnSoftwareManual";
             // 
             // f00_Main
             // 
@@ -504,5 +519,6 @@ namespace KnowledgeSystem.Views._00_Generals
         private TileItem btnSignature;
         private TileItem btnQuiz;
         private TileItem btnExtensions;
+        private TileItem btnSoftwareManual;
     }
 }
