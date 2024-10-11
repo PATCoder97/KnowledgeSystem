@@ -3,7 +3,6 @@ using DevExpress.XtraEditors;
 using DocumentFormat.OpenXml.Spreadsheet;
 using iTextSharp.text;
 using KnowledgeSystem.Helpers;
-using Microsoft.Web.WebView2.Core;
 using Scriban;
 using System;
 using System.Collections.Generic;
@@ -34,7 +33,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
 
         public bool IsConfirmed { get; set; }
 
-        private async void InitializeWebView2(int index)
+        private void InitializeWebView2(int index)
         {
             lbPageNumber.Caption = $"{index + 1}/{ques.Count}";
 
@@ -55,22 +54,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
 
             var templateSigner = Template.Parse(templateContentSigner);
 
-            var pageContent = templateSigner.Render(templateData);
-
-            string pathDataWebView = Path.Combine(TPConfigs.DocumentPath(), "WebView2UserData");
-            var options = new CoreWebView2EnvironmentOptions();
-            var env = await CoreWebView2Environment.CreateAsync(null, pathDataWebView, options);
-            await webViewQues.EnsureCoreWebView2Async(env);
-            webViewQues.CoreWebView2.NavigateToString(pageContent);
-
-            // Thêm JavaScript để ngăn chặn chuột phải
-            webViewQues.CoreWebView2.DOMContentLoaded += (sender, args) =>
-            {
-                webViewQues.CoreWebView2.ExecuteScriptAsync(@"
-                document.addEventListener('contextmenu', function(e) {
-                    e.preventDefault();
-                });");
-            };
+            webViewQues.DocumentText = templateSigner.Render(templateData);
         }
 
         private void f307_ConfirmQues_Load(object sender, EventArgs e)

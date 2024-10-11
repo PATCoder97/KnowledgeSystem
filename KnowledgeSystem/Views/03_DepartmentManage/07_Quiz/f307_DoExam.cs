@@ -10,7 +10,6 @@ using DocumentFormat.OpenXml.Spreadsheet;
 using DocumentFormat.OpenXml.Wordprocessing;
 using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._00_Generals;
-using Microsoft.Web.WebView2.Core;
 using Newtonsoft.Json;
 using Scriban;
 using System;
@@ -191,17 +190,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             var templateSigner = Template.Parse(templateContentSigner);
 
             var pageContent = templateSigner.Render(templateData);
-            
-            webViewQues.CoreWebView2.NavigateToString(pageContent);
 
-            // Thêm JavaScript để ngăn chặn chuột phải
-            webViewQues.CoreWebView2.DOMContentLoaded += (sender, args) =>
-            {
-                webViewQues.CoreWebView2.ExecuteScriptAsync(@"
-                document.addEventListener('contextmenu', function(e) {
-                    e.preventDefault();
-                });");
-            };
+            webViewQues.DocumentText = pageContent;
 
             gvData.FocusedRowHandle = index;
         }
@@ -242,7 +232,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             int score = (int)Math.Round(correctAnswers * 100.0 / quesCount);
             int totalScore = 100;
             bool IsPass = score >= passingScore;
-            string message = IsPass ? "恭喜您通過考試!!!" : "很遺憾你考試沒通過!";
+            string message = IsPass ? "恭喜您通過考試!" : "很遺憾你考試沒通過!";
             string json = JsonConvert.SerializeObject(examResults);
 
             // Nếu có thông tin của kỳ thi thì lưu kết quả lại
@@ -257,7 +247,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
                 dt307_ExamUserBUS.Instance.AddOrUpdate(result);
             }
 
-            string htmlString = $"<font='Microsoft JhengHei UI' size=24><color=red>{message}</color></font>\r\n" +
+            string htmlString = $"<font='Microsoft JhengHei UI' size=24><color={(IsPass ? "blue" : "red")}>{message}</color></font>\r\n" +
                 $"<font='Microsoft JhengHei UI' size=14>結果：\r\n" +
                 $"-正確：<color=blue>{correctAnswers}/{quesCount}</color>\r\n" +
                 $"-成績：<color=blue>{score}/{totalScore}</color></font>";
@@ -344,10 +334,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
                 return;
             }
 
-            string pathDataWebView = Path.Combine(TPConfigs.DocumentPath(), "WebView2UserData");
-            var options = new CoreWebView2EnvironmentOptions();
-            var env = await CoreWebView2Environment.CreateAsync(null, pathDataWebView, options);
-            await webViewQues.EnsureCoreWebView2Async(env);
+            //string pathDataWebView = Path.Combine(TPConfigs.DocumentPath(), "WebView2UserData");
+            //var options = new CoreWebView2EnvironmentOptions();
+            //var env = await CoreWebView2Environment.CreateAsync(null, pathDataWebView, options);
+            //await webViewQues.EnsureCoreWebView2Async(env);
 
             string msg = $"<font='Microsoft JhengHei UI' size=14>點擊「<color=red>確定</color>」開始！</font>";
             MsgTP.MsgShowInfomation(msg);
