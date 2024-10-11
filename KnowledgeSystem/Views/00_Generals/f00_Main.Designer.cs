@@ -78,9 +78,9 @@ namespace KnowledgeSystem.Views._00_Generals
             this.btnMod = new DevExpress.XtraEditors.TileItem();
             this.btnSysAdmin = new DevExpress.XtraEditors.TileItem();
             this.btnExtensions = new DevExpress.XtraEditors.TileItem();
+            this.btnSoftwareManual = new DevExpress.XtraEditors.TileItem();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.lbSoftName = new DevExpress.XtraLayout.LayoutControlItem();
-            this.btnSoftwareManual = new DevExpress.XtraEditors.TileItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
@@ -426,6 +426,19 @@ namespace KnowledgeSystem.Views._00_Generals
             this.btnExtensions.Name = "btnExtensions";
             this.btnExtensions.ItemClick += new DevExpress.XtraEditors.TileItemClickEventHandler(this.btnExtensions_ItemClick);
             // 
+            // btnSoftwareManual
+            // 
+            this.btnSoftwareManual.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
+            this.btnSoftwareManual.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
+            this.btnSoftwareManual.AppearanceItem.Normal.Options.UseBackColor = true;
+            this.btnSoftwareManual.AppearanceItem.Normal.Options.UseFont = true;
+            tileItemElement21.Text = "軟體操作手冊";
+            this.btnSoftwareManual.Elements.Add(tileItemElement21);
+            this.btnSoftwareManual.Id = 26;
+            this.btnSoftwareManual.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
+            this.btnSoftwareManual.Name = "btnSoftwareManual";
+            this.btnSoftwareManual.ItemClick += new DevExpress.XtraEditors.TileItemClickEventHandler(this.btnSoftwareManual_ItemClick);
+            // 
             // Root
             // 
             this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
@@ -452,18 +465,6 @@ namespace KnowledgeSystem.Views._00_Generals
             this.lbSoftName.TextLocation = DevExpress.Utils.Locations.Top;
             this.lbSoftName.TextSize = new System.Drawing.Size(0, 0);
             this.lbSoftName.TextVisible = false;
-            // 
-            // btnSoftwareManual
-            // 
-            this.btnSoftwareManual.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
-            this.btnSoftwareManual.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
-            this.btnSoftwareManual.AppearanceItem.Normal.Options.UseBackColor = true;
-            this.btnSoftwareManual.AppearanceItem.Normal.Options.UseFont = true;
-            tileItemElement21.Text = "軟體操作手冊";
-            this.btnSoftwareManual.Elements.Add(tileItemElement21);
-            this.btnSoftwareManual.Id = 26;
-            this.btnSoftwareManual.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
-            this.btnSoftwareManual.Name = "btnSoftwareManual";
             // 
             // f00_Main
             // 

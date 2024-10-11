@@ -236,6 +236,9 @@
     <Compile Include="dt402_KPIWeb.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
+    <Compile Include="dt403_SoftwareManual.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModelDocManager.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

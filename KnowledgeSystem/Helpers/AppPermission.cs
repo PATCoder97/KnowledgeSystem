@@ -60,6 +60,7 @@ namespace KnowledgeSystem.Helpers
         public static int SignatureDigital { get; set; }
         public static int QuizMain { get; set; }
         public static int Extensions { get; set; }
+        public static int SoftManual { get; set; }
 
         public static List<int> GetListAutoOpenForm()
         {
