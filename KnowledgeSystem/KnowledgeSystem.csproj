@@ -214,6 +214,12 @@
     <Compile Include="Views\00_Generals\f00_FixedProgMain.Designer.cs">
       <DependentUpon>f00_FixedProgMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\01_ProductionAndSales\01_ContractManagement\uc101_ContractMgmtBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\01_ProductionAndSales\01_ContractManagement\uc101_ContractMgmtBase.Designer.cs">
+      <DependentUpon>uc101_ContractMgmtBase.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\f201_AddAttachment.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -825,6 +831,9 @@
     <EmbeddedResource Include="Views\00_Generals\f00_FixedProgMain.resx">
       <DependentUpon>f00_FixedProgMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\01_ProductionAndSales\01_ContractManagement\uc101_ContractMgmtBase.resx">
+      <DependentUpon>uc101_ContractMgmtBase.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\f201_AddAttachment.resx">
       <DependentUpon>f201_AddAttachment.cs</DependentUpon>
     </EmbeddedResource>
@@ -1131,9 +1140,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\01_ProductionAndSales\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="AppIcon.ico" />
     <Content Include="dll\Spire.License.dll">
