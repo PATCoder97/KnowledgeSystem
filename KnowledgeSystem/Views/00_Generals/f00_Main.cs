@@ -272,5 +272,10 @@ namespace KnowledgeSystem.Views._00_Generals
         {
             ShowFromByFrame(AppPermission.Extensions, e);
         }
+
+        private void btnSoftwareManual_ItemClick(object sender, TileItemEventArgs e)
+        {
+            ShowFromByFrame(AppPermission.SoftManual, e);
+        }
     }
 }

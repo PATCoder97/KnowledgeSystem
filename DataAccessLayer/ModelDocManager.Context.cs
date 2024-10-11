@@ -12,19 +12,19 @@ namespace DataAccessLayer
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-
+    
     public partial class DBDocumentManagementSystemEntities : DbContext
     {
         public DBDocumentManagementSystemEntities()
             : base(SingleConnection.ConString)
         {
         }
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-
+    
         public virtual DbSet<dm_Departments> dm_Departments { get; set; }
         public virtual DbSet<dm_Function> dm_Function { get; set; }
         public virtual DbSet<dm_FunctionRole> dm_FunctionRole { get; set; }
@@ -90,5 +90,6 @@ namespace DataAccessLayer
         public virtual DbSet<dt307_JobQuesManage> dt307_JobQuesManage { get; set; }
         public virtual DbSet<dt201_Base> dt201_Base { get; set; }
         public virtual DbSet<dt201_DocType> dt201_DocType { get; set; }
+        public virtual DbSet<dt403_SoftwareManual> dt403_SoftwareManual { get; set; }
     }
 }
