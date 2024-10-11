@@ -124,7 +124,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
                 File.WriteAllText(fileName, res);
             }
 
-            MsgTP.MsgShowInfomation($"<font='Microsoft JhengHei UI' size=14>已導出完成！！！</font>");
+            MsgTP.MsgShowInfomation($"<font='Microsoft JhengHei UI' size=14>已導出完成！</font>");
         }
 
         private void ItemFinishExam_Click(object sender, EventArgs e)

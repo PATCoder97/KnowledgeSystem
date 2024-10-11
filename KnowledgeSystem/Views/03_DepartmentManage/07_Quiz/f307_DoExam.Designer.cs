@@ -42,9 +42,7 @@
             this.btnSubmit = new DevExpress.XtraEditors.SimpleButton();
             this.gcData = new DevExpress.XtraGrid.GridControl();
             this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.webViewQues = new Microsoft.Web.WebView2.WinForms.WebView2();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -53,14 +51,14 @@
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.webViewQues = new System.Windows.Forms.WebBrowser();
+            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txbUserAns.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.webViewQues)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
@@ -69,6 +67,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             this.SuspendLayout();
             // 
             // gColId
@@ -96,6 +95,7 @@
             // layoutControl1
             // 
             this.layoutControl1.AllowCustomization = false;
+            this.layoutControl1.Controls.Add(this.webViewQues);
             this.layoutControl1.Controls.Add(this.lbTime);
             this.layoutControl1.Controls.Add(this.lbQuesNo);
             this.layoutControl1.Controls.Add(this.txbUserAns);
@@ -103,7 +103,6 @@
             this.layoutControl1.Controls.Add(this.btnNextQues);
             this.layoutControl1.Controls.Add(this.btnSubmit);
             this.layoutControl1.Controls.Add(this.gcData);
-            this.layoutControl1.Controls.Add(this.webViewQues);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Name = "layoutControl1";
@@ -252,23 +251,11 @@
             this.gvData.OptionsView.EnableAppearanceOddRow = true;
             this.gvData.OptionsView.ShowGroupPanel = false;
             // 
-            // webViewQues
-            // 
-            this.webViewQues.AllowExternalDrop = true;
-            this.webViewQues.CreationProperties = null;
-            this.webViewQues.DefaultBackgroundColor = System.Drawing.Color.White;
-            this.webViewQues.Location = new System.Drawing.Point(12, 12);
-            this.webViewQues.Name = "webViewQues";
-            this.webViewQues.Size = new System.Drawing.Size(864, 602);
-            this.webViewQues.TabIndex = 4;
-            this.webViewQues.ZoomFactor = 1D;
-            // 
             // Root
             // 
             this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             this.Root.GroupBordersVisible = false;
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem1,
             this.layoutControlItem2,
             this.layoutControlItem3,
             this.layoutControlItem4,
@@ -276,21 +263,11 @@
             this.layoutControlItem6,
             this.layoutControlItem7,
             this.layoutControlItem8,
-            this.layoutControlItem5});
+            this.layoutControlItem5,
+            this.layoutControlItem1});
             this.Root.Name = "Root";
             this.Root.Size = new System.Drawing.Size(1201, 666);
             this.Root.TextVisible = false;
-            // 
-            // layoutControlItem1
-            // 
-            this.layoutControlItem1.Control = this.webViewQues;
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem1.MinSize = new System.Drawing.Size(104, 24);
-            this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(868, 606);
-            this.layoutControlItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem1.TextVisible = false;
             // 
             // layoutControlItem2
             // 
@@ -388,6 +365,23 @@
             this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem5.TextVisible = false;
             // 
+            // webViewQues
+            // 
+            this.webViewQues.Location = new System.Drawing.Point(12, 12);
+            this.webViewQues.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webViewQues.Name = "webViewQues";
+            this.webViewQues.Size = new System.Drawing.Size(864, 602);
+            this.webViewQues.TabIndex = 13;
+            // 
+            // layoutControlItem1
+            // 
+            this.layoutControlItem1.Control = this.webViewQues;
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem1.Name = "layoutControlItem1";
+            this.layoutControlItem1.Size = new System.Drawing.Size(868, 606);
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem1.TextVisible = false;
+            // 
             // f307_DoExam
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
@@ -410,9 +404,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txbUserAns.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.webViewQues)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
@@ -421,6 +413,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -429,8 +422,6 @@
 
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
-        private Microsoft.Web.WebView2.WinForms.WebView2 webViewQues;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraGrid.GridControl gcData;
         private DevExpress.XtraGrid.Views.Grid.GridView gvData;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
@@ -449,5 +440,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
         private System.Windows.Forms.Label lbTime;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
+        private System.Windows.Forms.WebBrowser webViewQues;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
     }
 }

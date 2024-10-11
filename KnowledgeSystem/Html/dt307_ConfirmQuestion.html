@@ -28,11 +28,11 @@
         }
 
         .answer-number {
-            font-weight: bold;
+            color: blue;
             font-size: 1.2em;
             margin-right: 10px;
             text-align: center;
-            width: 30px;
+            width: 60px;
         }
 
         .answer {
@@ -54,59 +54,15 @@
                 transition: transform 0.3s ease, z-index 0.3s ease;
                 cursor: pointer;
             }
-
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            animation: fadeIn 0.2s ease-in-out;
-        }
-
-            .overlay img {
-                max-width: 90%;
-                max-height: 90%;
-                animation: zoomIn 0.2s ease-in-out;
-            }
-
-            .overlay.active {
-                display: flex;
-            }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes zoomIn {
-            from {
-                transform: scale(0.5);
-            }
-
-            to {
-                transform: scale(1);
-            }
-        }
     </style>
 </head>
 
 <body oncontextmenu="return false;">
 
     <div class="question">
-        題目：{{quesno}} 
-        {{ if  ismultichoice }}
-        「復選題」
+        題目：{{quesno}}
+        {{ if ismultichoice }}
+        <span style="color: red;">「復選題」</span>
         {{ end }}
     </div>
 
@@ -116,13 +72,13 @@
 
     {{ if quesimg != "" }}
     <div style="text-align: center;">
-        <img src="{{quesimg}}" alt="Màu đỏ" height="200px">
+        <img src="{{quesimg}}" alt="quesimg" height="200px">
     </div>
     {{ end }}
 
     {{- for ans in answers }}
     <div class="answer-container">
-        <div class="answer-number">{{ans.id}}</div>
+        <div class="answer-number">答案{{ans.id}}</div>
 
         <div class="answer"
              {{ if ans.istrue }}
@@ -132,7 +88,7 @@
             {{ end }}
 
             {{ if ans.img != "" }}
-            <img src="{{ans.img}}" alt="Màu đỏ" onclick="enlargeImage(this)">
+            <img src="{{ans.img}}" alt="ans.img">
             {{ end }}
 
             {{ans.disp}}
@@ -142,11 +98,10 @@
     </div>
     {{- end }}
 
-    <div class="overlay" id="overlay" onclick="shrinkImage()">
+    <!--<div class="overlay" id="overlay" onclick="shrinkImage()">
         <img id="overlay-img" src="" alt="Phóng to hình ảnh">
-    </div>
-
-    <script>
+    </div>-->
+    <!--<script>
         function enlargeImage(img) {
             var overlay = document.getElementById('overlay');
             var overlayImg = document.getElementById('overlay-img');
@@ -164,7 +119,7 @@
                 shrinkImage();
             }
         });
-    </script>
+    </script>-->
 </body>
 
 </html>

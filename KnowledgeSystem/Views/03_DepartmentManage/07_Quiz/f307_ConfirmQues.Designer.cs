@@ -40,16 +40,15 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-            this.webViewQues = new Microsoft.Web.WebView2.WinForms.WebView2();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.webViewQues = new System.Windows.Forms.WebBrowser();
+            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.webViewQues)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             this.SuspendLayout();
             // 
             // barManagerTP
@@ -177,17 +176,6 @@
             this.barDockControlRight.Manager = this.barManagerTP;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 478);
             // 
-            // webViewQues
-            // 
-            this.webViewQues.AllowExternalDrop = true;
-            this.webViewQues.CreationProperties = null;
-            this.webViewQues.DefaultBackgroundColor = System.Drawing.Color.White;
-            this.webViewQues.Location = new System.Drawing.Point(12, 12);
-            this.webViewQues.Name = "webViewQues";
-            this.webViewQues.Size = new System.Drawing.Size(823, 454);
-            this.webViewQues.TabIndex = 4;
-            this.webViewQues.ZoomFactor = 1D;
-            // 
             // layoutControl1
             // 
             this.layoutControl1.AllowCustomization = false;
@@ -205,19 +193,27 @@
             this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             this.Root.GroupBordersVisible = false;
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem1});
+            this.layoutControlItem2});
             this.Root.Name = "Root";
             this.Root.Size = new System.Drawing.Size(847, 478);
             this.Root.TextVisible = false;
             // 
-            // layoutControlItem1
+            // webViewQues
             // 
-            this.layoutControlItem1.Control = this.webViewQues;
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(827, 458);
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem1.TextVisible = false;
+            this.webViewQues.Location = new System.Drawing.Point(12, 12);
+            this.webViewQues.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webViewQues.Name = "webViewQues";
+            this.webViewQues.Size = new System.Drawing.Size(823, 454);
+            this.webViewQues.TabIndex = 5;
+            // 
+            // layoutControlItem2
+            // 
+            this.layoutControlItem2.Control = this.webViewQues;
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem2.Name = "layoutControlItem2";
+            this.layoutControlItem2.Size = new System.Drawing.Size(827, 458);
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem2.TextVisible = false;
             // 
             // f307_ConfirmQues
             // 
@@ -236,11 +232,10 @@
             this.Text = "確認題目";
             this.Load += new System.EventHandler(this.f307_ConfirmQues_Load);
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.webViewQues)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -258,9 +253,9 @@
         private DevExpress.XtraBars.BarButtonItem btnNext;
         private DevExpress.XtraBars.BarStaticItem lbPageNumber;
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
-        private Microsoft.Web.WebView2.WinForms.WebView2 webViewQues;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraBars.BarButtonItem btnConfirm;
+        private System.Windows.Forms.WebBrowser webViewQues;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
     }
 }

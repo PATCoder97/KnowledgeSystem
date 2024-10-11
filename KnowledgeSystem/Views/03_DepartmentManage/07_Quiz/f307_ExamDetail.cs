@@ -7,7 +7,6 @@ using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraRichEdit.Model;
 using DocumentFormat.OpenXml.Drawing.Charts;
 using KnowledgeSystem.Helpers;
-using Microsoft.Web.WebView2.WinForms;
 using Newtonsoft.Json;
 using Scriban;
 using System;
@@ -96,7 +95,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             var templateSigner = Template.Parse(templateContentSigner);
             var pageContent = templateSigner.Render(datahtml);
 
-            WebView2 webView = new WebView2
+            WebBrowser webView = new WebBrowser
             {
                 Dock = DockStyle.Fill
             };
@@ -112,8 +111,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
 
             formView.Load += async (o, args) =>
             {
-                await webView.EnsureCoreWebView2Async(null);
-                webView.CoreWebView2.NavigateToString(pageContent);
+                webView.DocumentText = pageContent;
             };
 
             formView.ShowDialog();
