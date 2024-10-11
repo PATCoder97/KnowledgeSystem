@@ -77,8 +77,8 @@
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_EPPlus.Interfaces.dll" Value="..\packages\EPPlus.Interfaces.6.1.1\lib\net462"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_EPPlus.System.Drawing.dll" Value="..\packages\EPPlus.System.Drawing.6.1.1\lib\net462"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_EPPlus.dll" Value="..\packages\EPPlus.7.0.4\lib\net462"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_EntityFramework.SqlServer.dll" Value="..\packages\EntityFramework.6.4.4\lib\net45"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_EntityFramework.dll" Value="..\packages\EntityFramework.6.4.4\lib\net45"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_EntityFramework.SqlServer.dll" Value="..\packages\EntityFramework.6.5.1\lib\net45"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_EntityFramework.dll" Value="..\packages\EntityFramework.6.5.1\lib\net45"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_ExcelDataReader.DataSet.dll" Value="..\packages\ExcelDataReader.DataSet.3.6.0\lib\net35"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_ExcelDataReader.dll" Value="..\packages\ExcelDataReader.3.6.0\lib\net45"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_KnowledgeSystem.exe" Value="..\KnowledgeSystem\bin\Release"/>
@@ -86,9 +86,6 @@
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_KnowledgeSystem.pdb" Value="..\KnowledgeSystem\bin\Release"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Logger.dll" Value="..\Logger\bin\Release"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.IO.RecyclableMemoryStream.dll" Value="..\packages\Microsoft.IO.RecyclableMemoryStream.1.4.1\lib\net46"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Web.WebView2.Core.dll" Value="..\packages\Microsoft.Web.WebView2.1.0.2592.51\lib\net462"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Web.WebView2.WinForms.dll" Value="..\packages\Microsoft.Web.WebView2.1.0.2592.51\lib\net462"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.Web.WebView2.Wpf.dll" Value="..\packages\Microsoft.Web.WebView2.1.0.2592.51\lib\net462"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Microsoft.mshtml.dll" Value="C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\PublicAssemblies"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_MiniWord.dll" Value="..\packages\MiniWord.0.8.0\lib\net45"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_Newtonsoft.Json.dll" Value="..\packages\Newtonsoft.Json.13.0.3\lib\net45"/>
@@ -106,9 +103,6 @@
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.ComponentModel.Annotations.dll" Value="..\packages\System.ComponentModel.Annotations.5.0.0\lib\net461"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.Runtime.CompilerServices.Unsafe.dll" Value="..\packages\System.Runtime.CompilerServices.Unsafe.4.5.0\lib\netstandard2.0"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_System.Threading.Tasks.Extensions.dll" Value="..\packages\System.Threading.Tasks.Extensions.4.5.0\lib\netstandard2.0"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_WebView2Loader.dll" Value="..\KnowledgeSystem\bin\Release\runtimes\win-x86\native"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_WebView2Loader.dll_1" Value="..\KnowledgeSystem\bin\Release\runtimes\win-x64\native"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_WebView2Loader.dll_2" Value="..\KnowledgeSystem\bin\Release\runtimes\win-arm64\native"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_background.jpg" Value="..\KnowledgeSystem\bin\Release\Images"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_checked_radio_button.svg" Value="..\KnowledgeSystem\bin\Release\Images"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_dt307_ConfirmQuestion.html" Value="..\KnowledgeSystem\bin\Release\Html"/>
@@ -243,9 +237,6 @@
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_KnowledgeSystem.pdb" Value="KnowledgeSystem.pdb"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Logger.dll" Value="Logger.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.IO.RecyclableMemoryStream.dll" Value="Microsoft.IO.RecyclableMemoryStream.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Web.WebView2.Core.dll" Value="Microsoft.Web.WebView2.Core.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Web.WebView2.WinForms.dll" Value="Microsoft.Web.WebView2.WinForms.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Web.WebView2.Wpf.dll" Value="Microsoft.Web.WebView2.Wpf.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Microsoft.mshtml.dll" Value="Microsoft.mshtml.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_MiniWord.dll" Value="MiniWord.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_Newtonsoft.Json.dll" Value="Newtonsoft.Json.dll"/>
@@ -263,9 +254,6 @@
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_System.ComponentModel.Annotations.dll" Value="System.ComponentModel.Annotations.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_System.Runtime.CompilerServices.Unsafe.dll" Value="System.Runtime.CompilerServices.Unsafe.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_System.Threading.Tasks.Extensions.dll" Value="System.Threading.Tasks.Extensions.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_WebView2Loader.dll" Value="WebView2Loader.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_WebView2Loader.dll_1" Value="WebView2Loader.dll"/>
-    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_WebView2Loader.dll_2" Value="WebView2Loader.dll"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_background.jpg" Value="background.jpg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_checked_radio_button.svg" Value="checked_radio_button.svg"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_dt307_ConfirmQuestion.html" Value="dt307_ConfirmQuestion.html"/>
@@ -354,9 +342,6 @@
     <ROW Directory="SHORTCUTDIR" Directory_Parent="TARGETDIR" DefaultDir="SHORTC~1|SHORTCUTDIR" IsPseudoRoot="1"/>
     <ROW Directory="TARGETDIR" DefaultDir="SourceDir"/>
     <ROW Directory="dll_Dir" Directory_Parent="KnowledgeSystem_Dir" DefaultDir="dll"/>
-    <ROW Directory="native_1_Dir" Directory_Parent="winx64_Dir" DefaultDir="native"/>
-    <ROW Directory="native_2_Dir" Directory_Parent="winarm64_Dir" DefaultDir="native"/>
-    <ROW Directory="native_Dir" Directory_Parent="winx86_Dir" DefaultDir="native"/>
     <ROW Directory="runtimes_Dir" Directory_Parent="KnowledgeSystem_Dir" DefaultDir="runtimes"/>
     <ROW Directory="winarm64_Dir" Directory_Parent="runtimes_Dir" DefaultDir="WIN-AR~1|win-arm64"/>
     <ROW Directory="winx64_Dir" Directory_Parent="runtimes_Dir" DefaultDir="win-x64"/>
@@ -370,11 +355,8 @@
     <ROW Component="KnowledgeSystem_ContentOutput_Html" ComponentId="{ADC5CAED-DA1B-4951-A642-9D39907BE732}" Directory_="Html_Dir" Attributes="0" KeyPath="f301_NotifyPersonnelTransfer.html" Type="0"/>
     <ROW Component="KnowledgeSystem_ContentOutput_Images" ComponentId="{13439127-A2D1-4776-95E4-8FCA0A7FCAEB}" Directory_="Images_Dir" Attributes="0" KeyPath="Actions_Forbid.svg" Type="0"/>
     <ROW Component="KnowledgeSystem_ContentOutput_dll" ComponentId="{076516C4-FFD8-4565-8B81-39340EED69CF}" Directory_="dll_Dir" Attributes="0" KeyPath="Spire.Presentation.dll_1"/>
-    <ROW Component="KnowledgeSystem_ContentOutput_runtimes_winarm64_native" ComponentId="{3F24B431-AB77-462D-BA2F-5DDD46FE4A25}" Directory_="native_2_Dir" Attributes="0" KeyPath="WebView2Loader.dll_2"/>
-    <ROW Component="KnowledgeSystem_ContentOutput_runtimes_winx64_native" ComponentId="{3A05129C-FA5D-47E6-8C83-17BFF5597BF3}" Directory_="native_1_Dir" Attributes="0" KeyPath="WebView2Loader.dll_1"/>
-    <ROW Component="KnowledgeSystem_ContentOutput_runtimes_winx86_native" ComponentId="{EAE93681-EBCF-4A3F-8497-6614495F538A}" Directory_="native_Dir" Attributes="0" KeyPath="WebView2Loader.dll"/>
     <ROW Component="KnowledgeSystem_PrimaryOutput" ComponentId="{35FA9FCF-A747-4239-9087-28BBDBEF6E4C}" Directory_="KnowledgeSystem_Dir" Attributes="0" KeyPath="KnowledgeSystem.exe"/>
-    <ROW Component="KnowledgeSystem_References" ComponentId="{42C1BBF3-CAAE-4EB6-A828-3ED25ADDBB2B}" Directory_="KnowledgeSystem_Dir" Attributes="0" KeyPath="Microsoft.Web.WebView2.Wpf.dll"/>
+    <ROW Component="KnowledgeSystem_References" ComponentId="{42C1BBF3-CAAE-4EB6-A828-3ED25ADDBB2B}" Directory_="KnowledgeSystem_Dir" Attributes="0" KeyPath="DataAccessLayer.dll"/>
     <ROW Component="KnowledgeSystem_SymbolsOutput" ComponentId="{3E6C3527-36C0-4B29-9E2A-DAAB5E8A10C6}" Directory_="KnowledgeSystem_Dir" Attributes="0" KeyPath="KnowledgeSystem.pdb"/>
     <ROW Component="Microsoft" ComponentId="{91082C37-341B-43D8-8E2B-A8D822531607}" Directory_="APPDIR" Attributes="4" KeyPath="Microsoft"/>
     <ROW Component="New_Key" ComponentId="{6D02C518-FFD6-449A-96AC-C03E060A2AFE}" Directory_="APPDIR" Attributes="4" KeyPath="New_Key"/>
@@ -382,6 +364,9 @@
     <ROW Component="SHORTCUTDIR" ComponentId="{AD9FB00C-C8C0-4023-B937-060872B5811E}" Directory_="SHORTCUTDIR" Attributes="0"/>
     <ROW Component="Windows" ComponentId="{027A4151-5552-42EE-A114-E6A98568A112}" Directory_="APPDIR" Attributes="4" KeyPath="Windows"/>
     <ROW Component="_" ComponentId="{A61927BA-E2FA-4C59-B064-731DA086C2DE}" Directory_="APPDIR" Attributes="4" KeyPath="_"/>
+    <ROW Component="winarm64" ComponentId="{AEBC64DB-14B5-4953-A2DD-4D2CC9164DDE}" Directory_="winarm64_Dir" Attributes="0"/>
+    <ROW Component="winx64" ComponentId="{8C8790EF-EE0C-4E00-B2BC-58F7820CF1D4}" Directory_="winx64_Dir" Attributes="0"/>
+    <ROW Component="winx86" ComponentId="{E567AEFE-B748-40A4-95CF-929AA89ABA51}" Directory_="winx86_Dir" Attributes="0"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFeatsComponent">
     <ROW Feature="MainFeature" Title="MainFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="0"/>
@@ -531,12 +516,6 @@
     <ROW File="StepProcess.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="STEPPR~2.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_StepProcess.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_StepProcess.svg&gt;" SelfReg="false"/>
     <ROW File="KnowledgeSystem.pdb" Component_="KnowledgeSystem_SymbolsOutput" FileName="KNOWLE~2.PDB|[|AI_PROPPATH_FILENAME_PERBUILD_KnowledgeSystem.pdb]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_KnowledgeSystem.pdb&gt;" SelfReg="false"/>
     <ROW File="BouncyCastle.Cryptography.dll" Component_="KnowledgeSystem_References" FileName="BOUNCY~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_BouncyCastle.Cryptography.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_BouncyCastle.Cryptography.dll&gt;" SelfReg="false"/>
-    <ROW File="Microsoft.Web.WebView2.Core.dll" Component_="KnowledgeSystem_References" FileName="MICROS~4.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Web.WebView2.Core.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Web.WebView2.Core.dll&gt;" SelfReg="false"/>
-    <ROW File="Microsoft.Web.WebView2.WinForms.dll" Component_="KnowledgeSystem_References" FileName="MICROS~5.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Web.WebView2.WinForms.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Web.WebView2.WinForms.dll&gt;" SelfReg="false"/>
-    <ROW File="Microsoft.Web.WebView2.Wpf.dll" Component_="KnowledgeSystem_References" FileName="MICROS~6.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Web.WebView2.Wpf.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_Microsoft.Web.WebView2.Wpf.dll&gt;" SelfReg="false"/>
-    <ROW File="WebView2Loader.dll" Component_="KnowledgeSystem_ContentOutput_runtimes_winx86_native" FileName="WEBVIE~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_WebView2Loader.dll]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_WebView2Loader.dll&gt;" SelfReg="false"/>
-    <ROW File="WebView2Loader.dll_1" Component_="KnowledgeSystem_ContentOutput_runtimes_winx64_native" FileName="WEBVIE~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_WebView2Loader.dll_1]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_WebView2Loader.dll_1&gt;" SelfReg="false"/>
-    <ROW File="WebView2Loader.dll_2" Component_="KnowledgeSystem_ContentOutput_runtimes_winarm64_native" FileName="WEBVIE~2.DLL|[|AI_PROPPATH_FILENAME_PERBUILD_WebView2Loader.dll_2]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_WebView2Loader.dll_2&gt;" SelfReg="false"/>
     <ROW File="icons8_stack_of_money.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS8~2.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons8_stack_of_money.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons8_stack_of_money.svg&gt;" SelfReg="false"/>
     <ROW File="dt307_ConfirmQuestion.html" Component_="KnowledgeSystem_ContentOutput_Html" FileName="DT307_~2.HTM|[|AI_PROPPATH_FILENAME_PERBUILD_dt307_ConfirmQuestion.html]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_dt307_ConfirmQuestion.html&gt;" SelfReg="false"/>
     <ROW File="icons8_finish_flag.svg" Component_="KnowledgeSystem_ContentOutput_Images" FileName="ICONS8~3.SVG|[|AI_PROPPATH_FILENAME_PERBUILD_icons8_finish_flag.svg]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_icons8_finish_flag.svg&gt;" SelfReg="false"/>
@@ -626,9 +605,6 @@
     <ROW Name="AI_APPPATH_PERBUILD_KnowledgeSystem.pdb" Path="[|AI_PROPPATH_DIR_PERBUILD_KnowledgeSystem.pdb]\[|AI_PROPPATH_FILENAME_PERBUILD_KnowledgeSystem.pdb]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Logger.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Logger.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Logger.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Microsoft.IO.RecyclableMemoryStream.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.IO.RecyclableMemoryStream.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.IO.RecyclableMemoryStream.dll]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Web.WebView2.Core.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Web.WebView2.Core.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Web.WebView2.Core.dll]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Web.WebView2.WinForms.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Web.WebView2.WinForms.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Web.WebView2.WinForms.dll]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_Microsoft.Web.WebView2.Wpf.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.Web.WebView2.Wpf.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.Web.WebView2.Wpf.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Microsoft.mshtml.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Microsoft.mshtml.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Microsoft.mshtml.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_MiniWord.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_MiniWord.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_MiniWord.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_Newtonsoft.Json.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_Newtonsoft.Json.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_Newtonsoft.Json.dll]" Type="2" Content="0"/>
@@ -646,9 +622,6 @@
     <ROW Name="AI_APPPATH_PERBUILD_System.ComponentModel.Annotations.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_System.ComponentModel.Annotations.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_System.ComponentModel.Annotations.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_System.Runtime.CompilerServices.Unsafe.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_System.Runtime.CompilerServices.Unsafe.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_System.Runtime.CompilerServices.Unsafe.dll]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_System.Threading.Tasks.Extensions.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_System.Threading.Tasks.Extensions.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_System.Threading.Tasks.Extensions.dll]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_WebView2Loader.dll" Path="[|AI_PROPPATH_DIR_PERBUILD_WebView2Loader.dll]\[|AI_PROPPATH_FILENAME_PERBUILD_WebView2Loader.dll]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_WebView2Loader.dll_1" Path="[|AI_PROPPATH_DIR_PERBUILD_WebView2Loader.dll_1]\[|AI_PROPPATH_FILENAME_PERBUILD_WebView2Loader.dll_1]" Type="2" Content="0"/>
-    <ROW Name="AI_APPPATH_PERBUILD_WebView2Loader.dll_2" Path="[|AI_PROPPATH_DIR_PERBUILD_WebView2Loader.dll_2]\[|AI_PROPPATH_FILENAME_PERBUILD_WebView2Loader.dll_2]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_background.jpg" Path="[|AI_PROPPATH_DIR_PERBUILD_background.jpg]\[|AI_PROPPATH_FILENAME_PERBUILD_background.jpg]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_checked_radio_button.svg" Path="[|AI_PROPPATH_DIR_PERBUILD_checked_radio_button.svg]\[|AI_PROPPATH_FILENAME_PERBUILD_checked_radio_button.svg]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_dt307_ConfirmQuestion.html" Path="[|AI_PROPPATH_DIR_PERBUILD_dt307_ConfirmQuestion.html]\[|AI_PROPPATH_FILENAME_PERBUILD_dt307_ConfirmQuestion.html]" Type="2" Content="0"/>
@@ -762,6 +735,9 @@
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCreateFolderComponent">
     <ROW Directory_="APPDIR" Component_="APPDIR" ManualDelete="true"/>
     <ROW Directory_="SHORTCUTDIR" Component_="SHORTCUTDIR" ManualDelete="false"/>
+    <ROW Directory_="winx86_Dir" Component_="winx86" ManualDelete="false"/>
+    <ROW Directory_="winx64_Dir" Component_="winx64" ManualDelete="false"/>
+    <ROW Directory_="winarm64_Dir" Component_="winarm64" ManualDelete="false"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCustActComponent">
     <ROW Action="AI_ApplyShortcutFlags" Type="3073" Source="ShortcutFlags.dll" Target="UpdateShortcutFlags" WithoutSeq="true"/>
@@ -798,14 +774,14 @@
     <ROW Feature_="MainFeature" Component_="KnowledgeSystem_ContentOutput_Images"/>
     <ROW Feature_="MainFeature" Component_="KnowledgeSystem_SymbolsOutput"/>
     <ROW Feature_="MainFeature" Component_="_"/>
-    <ROW Feature_="MainFeature" Component_="KnowledgeSystem_ContentOutput_runtimes_winx86_native"/>
-    <ROW Feature_="MainFeature" Component_="KnowledgeSystem_ContentOutput_runtimes_winx64_native"/>
-    <ROW Feature_="MainFeature" Component_="KnowledgeSystem_ContentOutput_runtimes_winarm64_native"/>
     <ROW Feature_="MainFeature" Component_="Microsoft"/>
     <ROW Feature_="MainFeature" Component_="Windows"/>
     <ROW Feature_="MainFeature" Component_="CurrentVersion"/>
     <ROW Feature_="MainFeature" Component_="New_Key"/>
     <ROW Feature_="MainFeature" Component_="EnableLinkedConnections"/>
+    <ROW Feature_="MainFeature" Component_="winx86"/>
+    <ROW Feature_="MainFeature" Component_="winx64"/>
+    <ROW Feature_="MainFeature" Component_="winarm64"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiIconsComponent">
     <ROW Name="AppIcon.exe" SourcePath="..\KnowledgeSystem\AppIcon.ico" Index="0"/>
@@ -1005,12 +981,6 @@
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="StepProcess.svg"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="SymbolsOutput" OutputFile="KnowledgeSystem.pdb"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="BouncyCastle.Cryptography.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="Microsoft.Web.WebView2.Core.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="Microsoft.Web.WebView2.WinForms.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="References" OutputFile="Microsoft.Web.WebView2.Wpf.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="WebView2Loader.dll"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="WebView2Loader.dll_1"/>
-    <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="WebView2Loader.dll_2"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons8_stack_of_money.svg"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="dt307_ConfirmQuestion.html"/>
     <ROW ProjectId="{a3b2ea5d-8312-4db7-bf78-326c76458305}" ProjectName="KnowledgeSystem" OutputGroup="ContentOutput" OutputFile="icons8_finish_flag.svg"/>

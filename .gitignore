@@ -13,6 +13,7 @@
 # Advanced Install
 */SetupDocumentSystem-cache
 *.cab
+SetupDocumentSystem/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
