@@ -276,6 +276,9 @@ namespace KnowledgeSystem.Views._00_Generals
         private void btnSoftwareManual_ItemClick(object sender, TileItemEventArgs e)
         {
             ShowFromByFrame(AppPermission.SoftManual, e);
+        private void btnContractMgmt_ItemClick(object sender, TileItemEventArgs e)
+        {
+            ShowFromByFrame(AppPermission.ContractMgmt, e);
         }
     }
 }
