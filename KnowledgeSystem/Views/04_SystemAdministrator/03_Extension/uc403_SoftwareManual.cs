@@ -42,7 +42,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension
         {
             btnAdd.ImageOptions.SvgImage = TPSvgimages.Add;
             btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
-            btnExportExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
         }
 
         private void LoadData()
@@ -66,6 +65,12 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension
 
         private void uc403_SoftwareManual_Load(object sender, EventArgs e)
         {
+            bool roleAddSOP = AppPermission.Instance.CheckAppPermission(AppPermission.AddSOP403);
+            if (!roleAddSOP)
+            {
+                btnAdd.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            }
+
             gvData.ReadOnlyGridView();
             gvData.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
             gvData.OptionsDetail.AllowOnlyOneMasterRowExpanded = true;
