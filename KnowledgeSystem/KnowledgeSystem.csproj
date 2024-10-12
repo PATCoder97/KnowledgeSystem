@@ -808,6 +808,12 @@
     <Compile Include="Views\04_SystemAdministrator\03_Extension\f403_ProcessFilesTool.Designer.cs">
       <DependentUpon>f403_ProcessFilesTool.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\04_SystemAdministrator\03_Extension\uc403_SoftManual_Info.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\04_SystemAdministrator\03_Extension\uc403_SoftManual_Info.Designer.cs">
+      <DependentUpon>uc403_SoftManual_Info.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\04_SystemAdministrator\03_Extension\uc403_SoftwareManual.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1133,6 +1139,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\03_Extension\f403_ProcessFilesTool.resx">
       <DependentUpon>f403_ProcessFilesTool.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\04_SystemAdministrator\03_Extension\uc403_SoftManual_Info.resx">
+      <DependentUpon>uc403_SoftManual_Info.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\03_Extension\uc403_SoftwareManual.resx">
       <DependentUpon>uc403_SoftwareManual.cs</DependentUpon>
