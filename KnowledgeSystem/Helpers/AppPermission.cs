@@ -65,7 +65,7 @@ namespace KnowledgeSystem.Helpers
 
         public static List<int> GetListAutoOpenForm()
         {
-            return new List<int>() { SysAdmin, Mod, KnowledgeMain, SafetyCertMain, JFEnCSCMain, TechnicalPrjMain, ContractMgmt };
+            return new List<int>() { SysAdmin, Mod, KnowledgeMain, SafetyCertMain, JFEnCSCMain, TechnicalPrjMain, ContractMgmt, SoftManual };
         }
 
         // 207
@@ -83,5 +83,8 @@ namespace KnowledgeSystem.Helpers
 
         // 306
         public static int EditInfo306 { get; set; }
+
+        // 403
+        public static int AddSOP403 { get; set; }
     }
 }

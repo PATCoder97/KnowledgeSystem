@@ -77,6 +77,7 @@ namespace KnowledgeSystem.Helpers
 
             AppPermission.ChangeUser304 = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "Role304ChangeUser")?.ValueT ?? "-1");
             AppPermission.EditInfo306 = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "Role306EditInfo")?.ValueT ?? "-1");
+            AppPermission.AddSOP403 = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "Role403AddSOP")?.ValueT ?? "-1");
         }
 
         // CONST Value
