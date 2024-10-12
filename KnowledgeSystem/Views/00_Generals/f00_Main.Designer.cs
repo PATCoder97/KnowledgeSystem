@@ -58,7 +58,7 @@ namespace KnowledgeSystem.Views._00_Generals
             this.tileGroup2 = new DevExpress.XtraEditors.TileGroup();
             this.tileItem1 = new DevExpress.XtraEditors.TileItem();
             this.tileItem2 = new DevExpress.XtraEditors.TileItem();
-            this.tileItem3 = new DevExpress.XtraEditors.TileItem();
+            this.btnContractMgmt = new DevExpress.XtraEditors.TileItem();
             this.tileGroup3 = new DevExpress.XtraEditors.TileGroup();
             this.btnISOAuditDocs = new DevExpress.XtraEditors.TileItem();
             this.btnTechnicalProjects = new DevExpress.XtraEditors.TileItem();
@@ -129,7 +129,6 @@ namespace KnowledgeSystem.Views._00_Generals
             this.tileMain.MaxId = 27;
             this.tileMain.Name = "tileMain";
             this.tileMain.Padding = new System.Windows.Forms.Padding(24, 22, 24, 22);
-            this.tileMain.Position = 1052;
             this.tileMain.ShowGroupText = true;
             this.tileMain.Size = new System.Drawing.Size(1180, 599);
             this.tileMain.TabIndex = 4;
@@ -139,7 +138,7 @@ namespace KnowledgeSystem.Views._00_Generals
             // 
             this.tileGroup2.Items.Add(this.tileItem1);
             this.tileGroup2.Items.Add(this.tileItem2);
-            this.tileGroup2.Items.Add(this.tileItem3);
+            this.tileGroup2.Items.Add(this.btnContractMgmt);
             this.tileGroup2.Name = "tileGroup2";
             this.tileGroup2.Text = "生產與銷售";
             // 
@@ -163,15 +162,18 @@ namespace KnowledgeSystem.Views._00_Generals
             this.tileItem2.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
             this.tileItem2.Name = "tileItem2";
             // 
-            // tileItem3
+            // btnContractMgmt
             // 
-            this.tileItem3.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
-            this.tileItem3.AppearanceItem.Normal.Options.UseFont = true;
+            this.btnContractMgmt.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
+            this.btnContractMgmt.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
+            this.btnContractMgmt.AppearanceItem.Normal.Options.UseBackColor = true;
+            this.btnContractMgmt.AppearanceItem.Normal.Options.UseFont = true;
             tileItemElement3.Text = "合同管理";
-            this.tileItem3.Elements.Add(tileItemElement3);
-            this.tileItem3.Id = 2;
-            this.tileItem3.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
-            this.tileItem3.Name = "tileItem3";
+            this.btnContractMgmt.Elements.Add(tileItemElement3);
+            this.btnContractMgmt.Id = 2;
+            this.btnContractMgmt.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
+            this.btnContractMgmt.Name = "btnContractMgmt";
+            this.btnContractMgmt.ItemClick += new DevExpress.XtraEditors.TileItemClickEventHandler(this.btnContractMgmt_ItemClick);
             // 
             // tileGroup3
             // 
@@ -500,7 +502,7 @@ namespace KnowledgeSystem.Views._00_Generals
         private DevExpress.XtraEditors.TileGroup tileGroup2;
         private DevExpress.XtraEditors.TileItem tileItem1;
         private DevExpress.XtraEditors.TileItem tileItem2;
-        private DevExpress.XtraEditors.TileItem tileItem3;
+        private DevExpress.XtraEditors.TileItem btnContractMgmt;
         private DevExpress.XtraEditors.TileGroup tileGroup3;
         private DevExpress.XtraEditors.TileGroup tileGroup4;
         private DevExpress.XtraEditors.TileItem btnTechnicalProjects;
