@@ -8,11 +8,13 @@ using DevExpress.XtraReports;
 using DevExpress.XtraReports.Wizards;
 using DevExpress.XtraSplashScreen;
 using KnowledgeSystem.Helpers;
+using KnowledgeSystem.Views._00_Generals;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
@@ -85,7 +87,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension
         private void gvData_MasterRowEmpty(object sender, DevExpress.XtraGrid.Views.Grid.MasterRowEmptyEventArgs e)
         {
             GridView view = sender as GridView;
-            string softName = view.GetRowCellValue(e.RowHandle, gColSoftName).ToString();
+            string softName = view.GetRowCellValue(e.RowHandle, gColSoftName)?.ToString();
             var haveAtt = bases.Any(r => r.SoftName == softName);
 
             e.IsEmpty = !haveAtt;
@@ -106,6 +108,67 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension
         private void gvData_MasterRowGetRelationName(object sender, DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationNameEventArgs e)
         {
             e.RelationName = "表單";
+        }
+
+        private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            uc403_SoftManual_Info ucInfo = new uc403_SoftManual_Info();
+            if (XtraDialog.Show(ucInfo, "新增操作手冊", MessageBoxButtons.OKCancel) != DialogResult.OK)
+                return;
+
+            string softName = ucInfo.SoftName;
+            string sopName = ucInfo.SOPName;
+            string filePath = ucInfo.FilePath;
+
+            string encrytName = EncryptionHelper.EncryptionFileName(filePath);
+
+            if (Directory.Exists(TPConfigs.Folder403))
+                Directory.CreateDirectory(TPConfigs.Folder403);
+
+            File.Copy(filePath, Path.Combine(TPConfigs.Folder403, encrytName));
+
+            dt403_SoftwareManual sopManual = new dt403_SoftwareManual()
+            {
+                SoftName = softName,
+                DisplayName = sopName,
+                EncryptName = encrytName,
+                DateUpload = DateTime.Now,
+            };
+
+            dt403_SoftwareManualBUS.Instance.Add(sopManual);
+
+            LoadData();
+        }
+
+        private void btnReload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            LoadData();
+        }
+
+        private void gvData_MasterRowExpanded(object sender, CustomMasterRowEventArgs e)
+        {
+            GridView masterView = sender as GridView;
+            int visibleDetailRelationIndex = masterView.GetVisibleDetailRelationIndex(e.RowHandle);
+            GridView detailView = masterView.GetDetailView(e.RowHandle, visibleDetailRelationIndex) as GridView;
+
+            detailView.BestFitColumns();
+        }
+
+        private void gvAttachment_DoubleClick(object sender, EventArgs e)
+        {
+            GridView view = sender as GridView;
+            string actualName = view.GetRowCellValue(view.FocusedRowHandle, gColActualName).ToString();
+            string encryptName = view.GetRowCellValue(view.FocusedRowHandle, gColEncryptName).ToString();
+
+            string source = Path.Combine(TPConfigs.Folder403, encryptName);
+            string dest = Path.Combine(TPConfigs.TempFolderData, $"{DateTime.Now:yyMMddhhmmss} {actualName}");
+            if (!Directory.Exists(TPConfigs.TempFolderData))
+                Directory.CreateDirectory(TPConfigs.TempFolderData);
+
+            File.Copy(source, dest, true);
+
+            f00_VIewFile viewFile = new f00_VIewFile(dest);
+            viewFile.ShowDialog();
         }
     }
 }
