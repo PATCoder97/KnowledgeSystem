@@ -17,5 +17,10 @@ namespace KnowledgeSystem.Views._01_ProductionAndSales._01_ContractManagement
         {
             InitializeComponent();
         }
+
+        private void LoadData()
+        {
+
+        }
     }
 }
