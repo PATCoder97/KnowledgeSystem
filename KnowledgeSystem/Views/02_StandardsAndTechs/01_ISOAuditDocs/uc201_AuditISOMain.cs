@@ -535,14 +535,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 if (rowData.IsFinalNode != true)
                 {
                     treeList.FocusedNode.Expanded = !treeList.FocusedNode.Expanded;
-
-                    //gcData.DataSource = null;
                     return;
                 }
 
-                var atts = dt201_FormsBUS.Instance.GetListByIdBase(rowData.Id);
-                //gcData.DataSource = atts;
-                //gvData.BestFitColumns();
+                f201_AuditDoc_Info fInfo = new f201_AuditDoc_Info() { idBase = rowData.Id };
+                fInfo.ShowDialog();
             }
         }
 
