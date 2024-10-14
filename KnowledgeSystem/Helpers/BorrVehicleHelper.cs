@@ -23,12 +23,9 @@ namespace KnowledgeSystem.Helpers
     public class BorrVehicleHelper
     {
         TPLogger logger;
-        WebProxy proxy;
 
         private static BorrVehicleHelper instance;
 
-        static string proxyHost = "10.198.4.150";
-        static string proxyPort = "8080";
         static Uri baseUrl = new Uri("https://www.fhs.com.tw/ads/api/Furnace/rest/json/ve/");
         string idDept2word = TPConfigs.LoginUser.IdDepartment.Substring(0, 2);
 
@@ -41,25 +38,14 @@ namespace KnowledgeSystem.Helpers
         private BorrVehicleHelper()
         {
             logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName);
-
-            proxy = new WebProxy
-            {
-                Address = new Uri($"http://{proxyHost}:{proxyPort}"),
-                BypassProxyOnLocal = false,
-                UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(TPConfigs.LoginUser.Id, EncryptionHelper.DecryptPass(TPConfigs.LoginUser.SecondaryPassword))
-            };
         }
 
         public async Task<List<VehicleStatus>> GetListVehicle(string parameter)
         {
-            using (var httpClient = new HttpClient(new HttpClientHandler { Proxy = proxy }))
+            using (var webClient = new WebClient { BaseAddress = baseUrl.ToString() })
             {
-                httpClient.BaseAddress = baseUrl;
-                var response = await httpClient.GetAsync(parameter);
-                response.EnsureSuccessStatusCode();
-
-                string content = await response.Content.ReadAsStringAsync();
+                webClient.Encoding = Encoding.UTF8;
+                string content = await webClient.DownloadStringTaskAsync(parameter);
 
                 var statues = new List<VehicleStatus>();
                 foreach (var subItem in content.Split(new[] { "o|o" }, StringSplitOptions.RemoveEmptyEntries))
@@ -67,16 +53,14 @@ namespace KnowledgeSystem.Helpers
                     var parts = subItem.Split('|');
                     if (parts.Length >= 4)
                     {
-                        var status = new VehicleStatus
+                        statues.Add(new VehicleStatus
                         {
                             Name = parts[0],
                             StatusRaw = parts[1],
-                            Dept = $"{parts[2]}{parts[3]}",
-                        };
-                        statues.Add(status);
+                            Dept = $"{parts[2]}{parts[3]}"
+                        });
                     }
                 }
-
                 return statues;
             }
         }
@@ -93,165 +77,104 @@ namespace KnowledgeSystem.Helpers
 
         public async Task<List<VehicleBorrInfo>> GetBorrMotorUser(VehicleStatus status)
         {
-            using (var httpClient = new HttpClient(new HttpClientHandler { Proxy = proxy }))
+            using (var webClient = new WebClient { BaseAddress = baseUrl.ToString() })
             {
-                httpClient.BaseAddress = baseUrl;
-                var response = await httpClient.GetAsync($"s34/{status.Dept}vkv{status.Name}");
-                response.EnsureSuccessStatusCode();
-
-                string content = await response.Content.ReadAsStringAsync();
+                webClient.Encoding = Encoding.UTF8;
+                string content = await webClient.DownloadStringTaskAsync($"s34/{status.Dept}vkv{status.Name}");
 
                 var infos = new List<VehicleBorrInfo>();
                 foreach (var subItem in content.Split(new[] { "o|o" }, StringSplitOptions.RemoveEmptyEntries))
                 {
                     var parts = subItem.Split('|');
-
-                    string userBorr = parts[9];
-                    string idUserBorr = userBorr.Substring(0, 10);
-                    string nameUserBorr = userBorr.Substring(10, userBorr.Length - 10);
-
-                    DateTime borrTime;
-                    DateTime.TryParseExact(parts[3], "yyyyMMddHHmm", null, System.Globalization.DateTimeStyles.None, out borrTime);
-                    DateTime backTime;
-                    DateTime.TryParseExact(parts[2], "yyyyMMddHHmm", null, System.Globalization.DateTimeStyles.None, out backTime);
-
-                    int startKm;
-                    int.TryParse(parts[0], out startKm);
-                    int endKm;
-                    int.TryParse(parts[1], out endKm);
-                    int totalKm;
-                    int.TryParse(parts[7], out totalKm);
-
                     if (parts.Length >= 9)
                     {
-                        var info = new VehicleBorrInfo
+                        infos.Add(new VehicleBorrInfo
                         {
-                            IdUserBorr = idUserBorr,
-                            NameUserBorr = nameUserBorr,
-                            BorrTime = borrTime,
-                            BackTime = backTime,
+                            IdUserBorr = parts[9].Substring(0, 10),
+                            NameUserBorr = parts[9].Substring(10),
+                            BorrTime = DateTime.TryParseExact(parts[3], "yyyyMMddHHmm", null, System.Globalization.DateTimeStyles.None, out var borrTime) ? borrTime : default,
+                            BackTime = DateTime.TryParseExact(parts[2], "yyyyMMddHHmm", null, System.Globalization.DateTimeStyles.None, out var backTime) ? backTime : default,
+                            StartKm = int.TryParse(parts[0], out var startKm) ? startKm : 0,
+                            EndKm = int.TryParse(parts[1], out var endKm) ? endKm : 0,
+                            TotalKm = int.TryParse(parts[7], out var totalKm) ? totalKm : 0,
                             Place = parts[4],
-                            Uses = parts[5],
-                            StartKm = startKm,
-                            EndKm = endKm,
-                            TotalKm = totalKm
-                        };
-                        infos.Add(info);
+                            Uses = parts[5]
+                        });
                     }
                 }
-
                 return infos;
             }
         }
 
         public async Task<List<VehicleBorrInfo>> GetBorrCarUser(VehicleStatus status)
         {
-            using (var httpClient = new HttpClient(new HttpClientHandler { Proxy = proxy }))
+            using (var webClient = new WebClient { BaseAddress = baseUrl.ToString() })
             {
-                httpClient.BaseAddress = baseUrl;
-                var response = await httpClient.GetAsync($"s45/{status.Dept}vkv{status.Name}");
-                response.EnsureSuccessStatusCode();
-
-                string content = await response.Content.ReadAsStringAsync();
+                webClient.Encoding = Encoding.UTF8;
+                string content = await webClient.DownloadStringTaskAsync($"s45/{status.Dept}vkv{status.Name}");
 
                 var infos = new List<VehicleBorrInfo>();
                 foreach (var subItem in content.Split(new[] { "o|o" }, StringSplitOptions.RemoveEmptyEntries))
                 {
                     var parts = subItem.Split('|');
-
-                    string userBorr = parts[3];
-                    string idUserBorr = userBorr.Substring(0, 10);
-                    string nameUserBorr = userBorr.Substring(10, userBorr.Length - 10);
-
-                    DateTime borrTime;
-                    DateTime.TryParseExact(parts[1], "yyyyMMddHHmm", null, System.Globalization.DateTimeStyles.None, out borrTime);
-                    DateTime backTime;
-                    DateTime.TryParseExact(parts[4], "yyyyMMddHHmm", null, System.Globalization.DateTimeStyles.None, out backTime);
-
-                    int startKm;
-                    int.TryParse(parts[8], out startKm);
-                    int endKm;
-                    int.TryParse(parts[9], out endKm);
-                    int totalKm;
-                    int.TryParse(parts[10], out totalKm);
-
-                    string place = $"{parts[5]}-{parts[6]}";
-                    string uses = parts[7];
-
                     if (parts.Length >= 23)
                     {
-                        var info = new VehicleBorrInfo
+                        infos.Add(new VehicleBorrInfo
                         {
-                            IdUserBorr = idUserBorr,
-                            NameUserBorr = nameUserBorr,
-                            BorrTime = borrTime,
-                            BackTime = backTime,
-                            Place = place,
-                            Uses = uses,
-                            StartKm = startKm,
-                            EndKm = endKm,
-                            TotalKm = totalKm
-                        };
-                        infos.Add(info);
+                            IdUserBorr = parts[3].Substring(0, 10),
+                            NameUserBorr = parts[3].Substring(10),
+                            BorrTime = DateTime.TryParseExact(parts[1], "yyyyMMddHHmm", null, System.Globalization.DateTimeStyles.None, out var borrTime) ? borrTime : default,
+                            BackTime = DateTime.TryParseExact(parts[4], "yyyyMMddHHmm", null, System.Globalization.DateTimeStyles.None, out var backTime) ? backTime : default,
+                            StartKm = int.TryParse(parts[8], out var startKm) ? startKm : 0,
+                            EndKm = int.TryParse(parts[9], out var endKm) ? endKm : 0,
+                            TotalKm = int.TryParse(parts[10], out var totalKm) ? totalKm : 0,
+                            Place = $"{parts[5]}-{parts[6]}",
+                            Uses = parts[7]
+                        });
                     }
                 }
-
                 return infos;
             }
         }
 
         public async Task<List<string>> GetListPurposess()
         {
-            using (var httpClient = new HttpClient(new HttpClientHandler { Proxy = proxy }))
+            using (var webClient = new WebClient { BaseAddress = baseUrl.ToString() })
             {
-                httpClient.BaseAddress = baseUrl;
-                var response = await httpClient.GetAsync($"s66/o");
-                response.EnsureSuccessStatusCode();
+                webClient.Encoding = Encoding.UTF8;
+                string content = await webClient.DownloadStringTaskAsync($"s66/o");
 
-                string content = await response.Content.ReadAsStringAsync();
-                var purposess = new List<string>();
-                foreach (var subItem in content.Split(new[] { "o|o" }, StringSplitOptions.RemoveEmptyEntries))
-                {
-                    purposess.Add(subItem.Trim());
-                }
-
-                return purposess.OrderBy(r => r).ToList();
+                return content.Split(new[] { "o|o" }, StringSplitOptions.RemoveEmptyEntries)
+                              .Select(p => p.Trim())
+                              .OrderBy(r => r)
+                              .ToList();
             }
         }
 
         public async Task<string> GetManagerVehicle(string nameVehicle)
         {
-            using (var httpClient = new HttpClient(new HttpClientHandler { Proxy = proxy }))
+            using (var webClient = new WebClient { BaseAddress = baseUrl.ToString() })
             {
-                httpClient.BaseAddress = baseUrl;
-                var response = await httpClient.GetAsync($"s62/{nameVehicle}");
-                response.EnsureSuccessStatusCode();
-
-                return await response.Content.ReadAsStringAsync();
+                webClient.Encoding = Encoding.UTF8;
+                return await webClient.DownloadStringTaskAsync($"s62/{nameVehicle}");
             }
         }
 
         public async Task<string> GetLastKmMotor(string nameVehicle)
         {
-            using (var httpClient = new HttpClient(new HttpClientHandler { Proxy = proxy }))
+            using (var webClient = new WebClient { BaseAddress = baseUrl.ToString() })
             {
-                httpClient.BaseAddress = baseUrl;
-                var response = await httpClient.GetAsync($"s52/{nameVehicle}");
-                response.EnsureSuccessStatusCode();
-
-                return await response.Content.ReadAsStringAsync();
+                webClient.Encoding = Encoding.UTF8;
+                return await webClient.DownloadStringTaskAsync($"s52/{nameVehicle}");
             }
         }
 
         public async Task<string> GetLastKmCar(string nameVehicle)
         {
-            using (var httpClient = new HttpClient(new HttpClientHandler { Proxy = proxy }))
+            using (var webClient = new WebClient { BaseAddress = baseUrl.ToString() })
             {
-                httpClient.BaseAddress = baseUrl;
-                var response = await httpClient.GetAsync($"s51/{nameVehicle}");
-                response.EnsureSuccessStatusCode();
-
-                return await response.Content.ReadAsStringAsync();
+                webClient.Encoding = Encoding.UTF8;
+                return await webClient.DownloadStringTaskAsync($"s51/{nameVehicle}");
             }
         }
 
@@ -261,22 +184,13 @@ namespace KnowledgeSystem.Helpers
             var purposesUrl = HttpUtility.UrlEncode(purposes).Replace("+", "%20").ToUpper();
             var placeUrl = HttpUtility.UrlEncode(place).Replace("+", "%20").ToUpper();
 
-            int startKm = 0;
-            var lastKm = await GetLastKmMotor(nameVehicle);
-            int.TryParse(lastKm.Split('|')[0].Trim(), out startKm);
+            int startKm = int.TryParse((await GetLastKmMotor(nameVehicle)).Split('|')[0].Trim(), out var lastKm) ? lastKm : 0;
 
-            using (var httpClient = new HttpClient(new HttpClientHandler { Proxy = proxy }))
+            using (var webClient = new WebClient { BaseAddress = baseUrl.ToString() })
             {
-                httpClient.BaseAddress = baseUrl;
-
-                string parameter = $"s35/{idDept2word}vkv{startKm}vkvvkvvkv{borrTime}vkv{placeUrl}vkv{purposesUrl}vkv{numUser}vkvvkv{nameVehicle}vkv{borrUsr.Id}vkvYvkvYvkvYvkv{managerVehicle}vkv{DateTime.Now.ToString("yyyyMMddHHmm")}";
-
-                var response = await httpClient.GetAsync(parameter);
-                response.EnsureSuccessStatusCode();
-
-                string content = await response.Content.ReadAsStringAsync();
-
-                return content == "ok";
+                webClient.Encoding = Encoding.UTF8;
+                string parameter = $"s35/{idDept2word}vkv{startKm}vkvvkvvkv{borrTime}vkv{placeUrl}vkv{purposesUrl}vkv{numUser}vkvvkv{nameVehicle}vkv{borrUsr.Id}vkvYvkvYvkvYvkv{managerVehicle}vkv{DateTime.Now:yyyyMMddHHmm}";
+                return (await webClient.DownloadStringTaskAsync(parameter)) == "ok";
             }
         }
 
@@ -284,18 +198,11 @@ namespace KnowledgeSystem.Helpers
         {
             var userBackUrl = HttpUtility.UrlEncode($"{borrUsr.Id}{borrUsr.DisplayName}").Replace("+", "%20").ToUpper();
 
-            using (var httpClient = new HttpClient(new HttpClientHandler { Proxy = proxy }))
+            using (var webClient = new WebClient { BaseAddress = baseUrl.ToString() })
             {
-                httpClient.BaseAddress = baseUrl;
-                //s36/38LD-40006vkv202404260112vkv36497vkv202404261113vkv9vkvVNW0017146%E9%BB%8E%E6%B0%8F%E5%9E%82%E7%8E%B2
+                webClient.Encoding = Encoding.UTF8;
                 string parameter = $"s36/{nameVehicle}vkv{borrTime}vkv{endKm}vkv{backTime}vkv{totalKm}vkv{userBackUrl}";
-
-                var response = await httpClient.GetAsync(parameter);
-                response.EnsureSuccessStatusCode();
-
-                string content = await response.Content.ReadAsStringAsync();
-
-                return content == "ok";
+                return (await webClient.DownloadStringTaskAsync(parameter)) == "ok";
             }
         }
 
@@ -308,24 +215,14 @@ namespace KnowledgeSystem.Helpers
 
             if (startKm == 0)
             {
-                var lastKm = await GetLastKmCar(nameVehicle);
-                int.TryParse(lastKm.Split('|')[0].Trim(), out startKm);
+                int.TryParse((await GetLastKmCar(nameVehicle)).Split('|')[0].Trim(), out startKm);
             }
 
-            using (var httpClient = new HttpClient(new HttpClientHandler { Proxy = proxy }))
+            using (var webClient = new WebClient { BaseAddress = baseUrl.ToString() })
             {
-                httpClient.BaseAddress = baseUrl;
-
-                string parameter = $"s46/{nameVehicle}vkv{borrUsr.Id}vkv{idDept2word}vkv{startKm}vkvvkv{borrTime}vkvvkv{formPlaceUrl}vkv{toPlaceUrl}vkv{purposesUrl}vkvYvkvvkvvkv{licExpDate}vkvYvkvYvkvYvkvvkvvkvvkvvkv{DateTime.Now.ToString("yyyyMMddHHmm")}vkv{managerVehicle}";
-
-                //return true;
-
-                var response = await httpClient.GetAsync(parameter);
-                response.EnsureSuccessStatusCode();
-
-                string content = await response.Content.ReadAsStringAsync();
-
-                return content == "ok";
+                webClient.Encoding = Encoding.UTF8;
+                string parameter = $"s46/{nameVehicle}vkv{borrUsr.Id}vkv{idDept2word}vkv{startKm}vkvvkv{borrTime}vkvvkv{formPlaceUrl}vkv{toPlaceUrl}vkv{purposesUrl}vkvYvkvvkvvkv{licExpDate}vkvYvkvYvkvYvkvvkvvkvvkvvkv{DateTime.Now:yyyyMMddHHmm}vkv{managerVehicle}";
+                return (await webClient.DownloadStringTaskAsync(parameter)) == "ok";
             }
         }
 
@@ -333,18 +230,11 @@ namespace KnowledgeSystem.Helpers
         {
             var userBackUrl = HttpUtility.UrlEncode($"{borrUsr.Id}{borrUsr.DisplayName}").Replace("+", "%20").ToUpper();
 
-            using (var httpClient = new HttpClient(new HttpClientHandler { Proxy = proxy }))
+            using (var webClient = new WebClient { BaseAddress = baseUrl.ToString() })
             {
-                httpClient.BaseAddress = baseUrl;
-
+                webClient.Encoding = Encoding.UTF8;
                 string parameter = $"s47/{nameVehicle}vkv{borrTime}vkv{userBackUrl}vkv{backTime}vkv{endKm}vkv{totalKm}vkvYvkv0vkvvkvvkvNvkv0";
-
-                var response = await httpClient.GetAsync(parameter);
-                response.EnsureSuccessStatusCode();
-
-                string content = await response.Content.ReadAsStringAsync();
-
-                return content == "ok";
+                return (await webClient.DownloadStringTaskAsync(parameter)) == "ok";
             }
         }
     }
