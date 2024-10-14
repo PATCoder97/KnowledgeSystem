@@ -20,13 +20,20 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         public f201_AuditDoc_Info()
         {
             InitializeComponent();
+            InitializeIcon();
             InitializeMenuItems();
         }
 
         DXMenuItem itemDelDoc;
         DXMenuItem itemEditDoc;
+        DXMenuItem itemApprovalHis;
 
         public int idBase = -1;
+
+        private void InitializeIcon()
+        {
+            btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
+        }
 
         DXMenuItem CreateMenuItem(string caption, EventHandler clickEvent, SvgImage svgImage)
         {
@@ -45,16 +52,22 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         {
             itemEditDoc = CreateMenuItem("更新表單", ItemEditDoc_Click, TPSvgimages.Edit);
             itemDelDoc = CreateMenuItem("刪除表單", ItemDelDoc_Click, TPSvgimages.Close);
+            itemApprovalHis = CreateMenuItem("核簽歷史", ItemApprovalHis_Click, TPSvgimages.Approval);
+        }
+
+        private void ItemApprovalHis_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void ItemDelDoc_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void ItemEditDoc_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void LoadData()
@@ -74,8 +87,12 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void gvData_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
         {
-            e.Menu.Items.Add(itemEditDoc);
-            e.Menu.Items.Add(itemDelDoc);
+            if (e.HitInfo.InRowCell && e.HitInfo.InDataRow)
+            {
+                e.Menu.Items.Add(itemEditDoc);
+                e.Menu.Items.Add(itemDelDoc);
+                e.Menu.Items.Add(itemApprovalHis);
+            }
         }
     }
 }

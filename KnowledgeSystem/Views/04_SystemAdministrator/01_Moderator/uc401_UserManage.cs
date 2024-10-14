@@ -266,7 +266,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
         private void gvData_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
         {
-            if (e.HitInfo.InRowCell && IsSysAdmin)
+            if (e.HitInfo.InRowCell && e.HitInfo.InDataRow && IsSysAdmin)
             {
                 e.Menu.Items.Add(itemEditRole);
                 e.Menu.Items.Add(itemEditSign);
