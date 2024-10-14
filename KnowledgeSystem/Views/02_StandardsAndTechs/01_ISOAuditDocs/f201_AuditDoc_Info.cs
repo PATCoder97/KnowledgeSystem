@@ -1,4 +1,6 @@
 ﻿using BusinessLayer;
+using DevExpress.Utils.Menu;
+using DevExpress.Utils.Svg;
 using DevExpress.XtraEditors;
 using KnowledgeSystem.Helpers;
 using System;
@@ -18,9 +20,42 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         public f201_AuditDoc_Info()
         {
             InitializeComponent();
+            InitializeMenuItems();
         }
 
+        DXMenuItem itemDelDoc;
+        DXMenuItem itemEditDoc;
+
         public int idBase = -1;
+
+        DXMenuItem CreateMenuItem(string caption, EventHandler clickEvent, SvgImage svgImage)
+        {
+            var menuItem = new DXMenuItem(caption, clickEvent, svgImage, DXMenuItemPriority.Normal);
+            SetMenuItemProperties(menuItem);
+            return menuItem;
+        }
+
+        void SetMenuItemProperties(DXMenuItem menuItem)
+        {
+            menuItem.ImageOptions.SvgImageSize = new Size(24, 24);
+            menuItem.AppearanceHovered.ForeColor = Color.Blue;
+        }
+
+        private void InitializeMenuItems()
+        {
+            itemEditDoc = CreateMenuItem("更新表單", ItemEditDoc_Click, TPSvgimages.Edit);
+            itemDelDoc = CreateMenuItem("刪除表單", ItemDelDoc_Click, TPSvgimages.Close);
+        }
+
+        private void ItemDelDoc_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void ItemEditDoc_Click(object sender, EventArgs e)
+        {
+           
+        }
 
         private void LoadData()
         {
@@ -35,6 +70,12 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             gvData.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
 
             LoadData();
+        }
+
+        private void gvData_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+        {
+            e.Menu.Items.Add(itemEditDoc);
+            e.Menu.Items.Add(itemDelDoc);
         }
     }
 }

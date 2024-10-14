@@ -160,7 +160,7 @@
             this.btnReload.Size = new System.Drawing.Size(136, 38);
             this.btnReload.StyleController = this.layoutControl1;
             this.btnReload.TabIndex = 6;
-            this.btnReload.Text = "重新整理";
+            this.btnReload.Text = "刷新";
             this.btnReload.Click += new System.EventHandler(this.btnReload_Click);
             // 
             // gcData

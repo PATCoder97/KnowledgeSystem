@@ -399,7 +399,7 @@
             // 
             // btnReload
             // 
-            this.btnReload.Caption = "重新整理";
+            this.btnReload.Caption = "刷新";
             this.btnReload.Id = 1;
             this.btnReload.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnReload.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;

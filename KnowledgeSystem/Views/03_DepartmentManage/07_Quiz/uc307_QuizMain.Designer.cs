@@ -326,7 +326,7 @@
             // 
             // btnReload
             // 
-            this.btnReload.Caption = "重新整理";
+            this.btnReload.Caption = "刷新";
             this.btnReload.Id = 1;
             this.btnReload.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnReload.ImageOptions.SvgImage")));
             this.btnReload.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
