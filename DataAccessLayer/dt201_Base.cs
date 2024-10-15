@@ -27,5 +27,6 @@ namespace DataAccessLayer
         public Nullable<bool> IsPaperType { get; set; }
         public Nullable<int> NotifyCycle { get; set; }
         public Nullable<bool> IsDisable { get; set; }
+        public string DisplayNameVN { get; set; }
     }
 }

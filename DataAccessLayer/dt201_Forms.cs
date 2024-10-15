@@ -23,5 +23,6 @@ namespace DataAccessLayer
         public Nullable<int> AttId { get; set; }
         public Nullable<bool> IsProcessing { get; set; }
         public Nullable<bool> DigitalSign { get; set; }
+        public string DisplayNameVN { get; set; }
     }
 }

@@ -368,9 +368,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             sourceData.DataSource = result;
 
-            tlsData.BestFitColumns();
             tlsData.RefreshDataSource();
             tlsData.Refresh();
+            tlsData.BestFitColumns();
 
             tlsColDept.Visible = deptsChecked.Count > 1;
         }
@@ -557,6 +557,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         {
             tlsData.ClearNodes();
             LoadData();
+
+            tlsData.BestFitColumns();
         }
 
         private void btnReload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

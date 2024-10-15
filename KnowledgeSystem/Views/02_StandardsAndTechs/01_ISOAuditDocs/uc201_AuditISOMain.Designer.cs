@@ -54,6 +54,7 @@
             this.treeListColumn3 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.treeListColumn6 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbDepts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
@@ -65,11 +66,12 @@
             // 
             // treeListColumn2
             // 
-            this.treeListColumn2.Caption = "文件名稱";
+            this.treeListColumn2.Caption = "中文名稱";
             this.treeListColumn2.FieldName = "data.DisplayName";
             this.treeListColumn2.Name = "treeListColumn2";
             this.treeListColumn2.Visible = true;
             this.treeListColumn2.VisibleIndex = 1;
+            this.treeListColumn2.Width = 99;
             // 
             // barManagerTP
             // 
@@ -242,6 +244,7 @@
             this.treeListColumn8,
             this.treeListColumn1,
             this.treeListColumn2,
+            this.treeListColumn6,
             this.tlsColDept,
             this.treeListColumn4,
             this.treeListColumn5,
@@ -284,6 +287,7 @@
             this.treeListColumn1.Name = "treeListColumn1";
             this.treeListColumn1.Visible = true;
             this.treeListColumn1.VisibleIndex = 0;
+            this.treeListColumn1.Width = 102;
             // 
             // tlsColDept
             // 
@@ -291,7 +295,7 @@
             this.tlsColDept.FieldName = "dept.DisplayName";
             this.tlsColDept.Name = "tlsColDept";
             this.tlsColDept.Visible = true;
-            this.tlsColDept.VisibleIndex = 5;
+            this.tlsColDept.VisibleIndex = 6;
             // 
             // treeListColumn4
             // 
@@ -299,7 +303,7 @@
             this.treeListColumn4.FieldName = "data.Articles";
             this.treeListColumn4.Name = "treeListColumn4";
             this.treeListColumn4.Visible = true;
-            this.treeListColumn4.VisibleIndex = 2;
+            this.treeListColumn4.VisibleIndex = 3;
             // 
             // treeListColumn5
             // 
@@ -307,7 +311,7 @@
             this.treeListColumn5.FieldName = "doctype.DisplayName";
             this.treeListColumn5.Name = "treeListColumn5";
             this.treeListColumn5.Visible = true;
-            this.treeListColumn5.VisibleIndex = 3;
+            this.treeListColumn5.VisibleIndex = 4;
             // 
             // treeListColumn9
             // 
@@ -322,7 +326,7 @@
             this.treeListColumn3.Name = "treeListColumn3";
             this.treeListColumn3.UnboundDataType = typeof(string);
             this.treeListColumn3.Visible = true;
-            this.treeListColumn3.VisibleIndex = 4;
+            this.treeListColumn3.VisibleIndex = 5;
             // 
             // Root
             // 
@@ -342,6 +346,15 @@
             this.layoutControlItem1.Size = new System.Drawing.Size(1017, 516);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
+            // 
+            // treeListColumn6
+            // 
+            this.treeListColumn6.Caption = "越文名稱";
+            this.treeListColumn6.FieldName = "data.DisplayNameVN";
+            this.treeListColumn6.Name = "treeListColumn6";
+            this.treeListColumn6.Visible = true;
+            this.treeListColumn6.VisibleIndex = 2;
+            this.treeListColumn6.Width = 110;
             // 
             // uc201_AuditISOMain
             // 
@@ -395,5 +408,6 @@
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn9;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckedComboBoxEdit cbbDepts;
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn3;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn6;
     }
 }

@@ -108,6 +108,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
                     txbDocCode.EditValue = baseData.DocCode;
                     txbDisplayName.EditValue = baseData.DisplayName;
+                    txbDisplayNameVN.EditValue = baseData.DisplayNameVN;
                     txbArticles.EditValue = baseData.Articles;
                     cbbDept.EditValue = baseData.IdDept;
                     ckPaperType.Checked = baseData.IsPaperType == true;
@@ -127,7 +128,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
             {
                 baseData.DocCode = txbDocCode.Text;
-                baseData.DisplayName = txbDisplayName.Text;
+                baseData.DisplayName = txbDisplayName.Text.Trim();
+                baseData.DisplayNameVN = txbDisplayNameVN.Text.Trim();
                 baseData.Articles = txbArticles.EditValue?.ToString() ?? "";
                 baseData.IdDept = cbbDept.EditValue.ToString();
                 baseData.IsPaperType = ckPaperType.Checked;
