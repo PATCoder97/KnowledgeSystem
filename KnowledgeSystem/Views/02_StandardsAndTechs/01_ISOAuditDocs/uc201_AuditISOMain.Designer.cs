@@ -47,6 +47,7 @@
             this.treeListColumn7 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.treeListColumn8 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.treeListColumn1 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.treeListColumn6 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.tlsColDept = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.treeListColumn4 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.treeListColumn5 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
@@ -54,7 +55,6 @@
             this.treeListColumn3 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.treeListColumn6 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbDepts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
@@ -289,6 +289,15 @@
             this.treeListColumn1.VisibleIndex = 0;
             this.treeListColumn1.Width = 102;
             // 
+            // treeListColumn6
+            // 
+            this.treeListColumn6.Caption = "越文名稱";
+            this.treeListColumn6.FieldName = "data.DisplayNameVN";
+            this.treeListColumn6.Name = "treeListColumn6";
+            this.treeListColumn6.Visible = true;
+            this.treeListColumn6.VisibleIndex = 2;
+            this.treeListColumn6.Width = 110;
+            // 
             // tlsColDept
             // 
             this.tlsColDept.Caption = "實驗室";
@@ -347,18 +356,9 @@
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
-            // treeListColumn6
-            // 
-            this.treeListColumn6.Caption = "越文名稱";
-            this.treeListColumn6.FieldName = "data.DisplayNameVN";
-            this.treeListColumn6.Name = "treeListColumn6";
-            this.treeListColumn6.Visible = true;
-            this.treeListColumn6.VisibleIndex = 2;
-            this.treeListColumn6.Width = 110;
-            // 
             // uc201_AuditISOMain
             // 
-            this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
+            this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.Appearance.Options.UseBackColor = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

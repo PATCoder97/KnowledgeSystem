@@ -120,6 +120,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void f201_AddAttachment_Load(object sender, EventArgs e)
         {
+            lcProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            Size = new System.Drawing.Size(Size.Width, Size.Height - 207);
+
             LockControl();
 
             users = dm_UserBUS.Instance.GetListByDept(idDept2word).Where(r => r.Status == 0).ToList();
@@ -148,6 +151,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             {
                 case EventFormInfo.Create:
                     baseForm = new dt201_Forms();
+
+                    ckSignOrPaper.SelectedIndex = 0;
 
                     break;
                 case EventFormInfo.View:
@@ -184,7 +189,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             string code = txbDocCode.Text.Trim();
             string displayName = txbDisplayName.Text.Trim();
 
-            bool isProcess = ckSign.CheckState == CheckState.Checked;
+            //bool isProcess = ckSign.CheckState == CheckState.Checked;
 
             bool isProgressError = (progresses.Any(r => r.IdUser == TPConfigs.LoginUser.Id) || progresses.GroupBy(x => x.IdUser).Any(g => g.Count() > 1));
             if (isProgressError)
@@ -208,8 +213,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 baseForm.IdBase = idBase;
                 baseForm.UploadTime = DateTime.Now;
                 baseForm.UploadUser = TPConfigs.LoginUser.Id;
-                baseForm.IsProcessing = isProcess;
-                baseForm.DigitalSign = isProcess;
+                //baseForm.IsProcessing = isProcess;
+                //baseForm.DigitalSign = isProcess;
 
                 msg = $"{baseForm.Code} {baseForm.DisplayName}";
                 switch (eventInfo)
@@ -227,7 +232,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
                         string folderDest = Path.Combine(TPConfigs.Folder201, idAtt.ToString());
                         if (!Directory.Exists(folderDest)) Directory.CreateDirectory(folderDest);
-                        
+
                         File.Copy(attachment.FullPath, Path.Combine(folderDest, attachment.EncryptionName), true);
 
                         int idForm = dt201_FormsBUS.Instance.Add(baseForm);
@@ -307,6 +312,22 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 ActualName = actualName,
                 FullPath = fileName
             };
+        }
+
+        private void ckSignOrPaper_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ckSignOrPaper.SelectedIndex == 0)
+            {
+                lcProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                lcDefaultProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                Size = new Size(Size.Width, Size.Height - 207);
+            }
+            else
+            {
+                Size = new Size(Size.Width, Size.Height + 207);
+                lcProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                lcDefaultProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+            }
         }
     }
 }
