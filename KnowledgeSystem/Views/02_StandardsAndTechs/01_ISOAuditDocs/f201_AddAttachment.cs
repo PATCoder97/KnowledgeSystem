@@ -120,6 +120,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void f201_AddAttachment_Load(object sender, EventArgs e)
         {
+            lcDefaultProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             lcProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             Size = new System.Drawing.Size(Size.Width, Size.Height - 207);
 
@@ -188,8 +189,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             string code = txbDocCode.Text.Trim();
             string displayName = txbDisplayName.Text.Trim();
+            string displayNameVN = txbDisplayNameVN.Text.Trim();
 
-            //bool isProcess = ckSign.CheckState == CheckState.Checked;
+            bool isProcess = ckSignOrPaper.SelectedIndex == 1;
 
             bool isProgressError = (progresses.Any(r => r.IdUser == TPConfigs.LoginUser.Id) || progresses.GroupBy(x => x.IdUser).Any(g => g.Count() > 1));
             if (isProgressError)
@@ -210,11 +212,12 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             {
                 baseForm.Code = code;
                 baseForm.DisplayName = displayName;
+                baseForm.DisplayNameVN = displayNameVN;
                 baseForm.IdBase = idBase;
                 baseForm.UploadTime = DateTime.Now;
                 baseForm.UploadUser = TPConfigs.LoginUser.Id;
-                //baseForm.IsProcessing = isProcess;
-                //baseForm.DigitalSign = isProcess;
+                baseForm.IsProcessing = isProcess;
+                baseForm.DigitalSign = isProcess;
 
                 msg = $"{baseForm.Code} {baseForm.DisplayName}";
                 switch (eventInfo)

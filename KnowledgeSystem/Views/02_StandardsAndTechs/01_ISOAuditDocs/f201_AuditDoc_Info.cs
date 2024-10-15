@@ -33,6 +33,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         private void InitializeIcon()
         {
             btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
+            btnAdd.ImageOptions.SvgImage = TPSvgimages.Add;
         }
 
         DXMenuItem CreateMenuItem(string caption, EventHandler clickEvent, SvgImage svgImage)
@@ -73,7 +74,13 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         private void LoadData()
         {
             var formByBaseDatas = dt201_FormsBUS.Instance.GetListByIdBase(idBase);
-            gcData.DataSource = formByBaseDatas;
+
+            var displayDatas = (from data in formByBaseDatas
+                                join usr in dm_UserBUS.Instance.GetList() on data.UploadUser equals usr.Id
+                                let UsrUploadName = $"{usr.Id.Substring(5)} {usr.DisplayName}"
+                                select new { data, usr, UsrUploadName }).ToList();
+
+            gcData.DataSource = displayDatas;
             gvData.BestFitColumns();
         }
 
@@ -93,6 +100,22 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 e.Menu.Items.Add(itemDelDoc);
                 e.Menu.Items.Add(itemApprovalHis);
             }
+        }
+
+        private void btnReload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            LoadData();
+        }
+
+        private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            f201_AddAttachment fAtt = new f201_AddAttachment();
+            fAtt.eventInfo = EventFormInfo.Create;
+            fAtt.formName = "表單";
+            fAtt.idBase = idBase;
+            fAtt.ShowDialog();
+
+            LoadData();
         }
     }
 }
