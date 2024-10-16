@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f201_AddAttachment));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.btnDefaultProgress = new DevExpress.XtraEditors.SimpleButton();
             this.ckSignOrPaper = new DevExpress.XtraEditors.RadioGroup();
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
@@ -61,7 +62,6 @@
             this.lcProgress = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.btnDefaultProgress = new DevExpress.XtraEditors.SimpleButton();
             this.lcDefaultProgress = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -102,6 +102,22 @@
             this.layoutControl1.Size = new System.Drawing.Size(652, 413);
             this.layoutControl1.TabIndex = 6;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // btnDefaultProgress
+            // 
+            this.btnDefaultProgress.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDefaultProgress.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.btnDefaultProgress.Appearance.Options.UseFont = true;
+            this.btnDefaultProgress.Appearance.Options.UseForeColor = true;
+            this.btnDefaultProgress.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnDefaultProgress.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnDefaultProgress.ImageOptions.SvgImage")));
+            this.btnDefaultProgress.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnDefaultProgress.Location = new System.Drawing.Point(504, 156);
+            this.btnDefaultProgress.Name = "btnDefaultProgress";
+            this.btnDefaultProgress.Size = new System.Drawing.Size(136, 36);
+            this.btnDefaultProgress.StyleController = this.layoutControl1;
+            this.btnDefaultProgress.TabIndex = 23;
+            this.btnDefaultProgress.Text = "固定流程";
             // 
             // ckSignOrPaper
             // 
@@ -289,7 +305,7 @@
             // 
             this.gridColumn3.Caption = "工號";
             this.gridColumn3.ColumnEdit = this.lookupUser;
-            this.gridColumn3.FieldName = "IdUser";
+            this.gridColumn3.FieldName = "IdUsr";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 1;
@@ -514,22 +530,6 @@
             this.layoutControlItem5.Size = new System.Drawing.Size(492, 40);
             this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem5.TextVisible = false;
-            // 
-            // btnDefaultProgress
-            // 
-            this.btnDefaultProgress.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDefaultProgress.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.btnDefaultProgress.Appearance.Options.UseFont = true;
-            this.btnDefaultProgress.Appearance.Options.UseForeColor = true;
-            this.btnDefaultProgress.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnDefaultProgress.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnDefaulProgress.ImageOptions.SvgImage")));
-            this.btnDefaultProgress.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnDefaultProgress.Location = new System.Drawing.Point(504, 156);
-            this.btnDefaultProgress.Name = "btnDefaultProgress";
-            this.btnDefaultProgress.Size = new System.Drawing.Size(136, 36);
-            this.btnDefaultProgress.StyleController = this.layoutControl1;
-            this.btnDefaultProgress.TabIndex = 23;
-            this.btnDefaultProgress.Text = "固定流程";
             // 
             // lcDefaultProgress
             // 

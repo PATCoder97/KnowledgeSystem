@@ -15,9 +15,8 @@ namespace DataAccessLayer
     public partial class dt201_Progress
     {
         public int Id { get; set; }
-        public int IdAtt { get; set; }
-        public string IdUser { get; set; }
-        public Nullable<int> IdRole { get; set; }
-        public Nullable<int> IdForm { get; set; }
+        public int IdForm { get; set; }
+        public string IdUsr { get; set; }
+        public int IdRole { get; set; }
     }
 }
