@@ -52,7 +52,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             progress = dt201_ProgressBUS.Instance.GetListByIdForm(idBaseForm);
 
             var progressInfo = (from data in progress
-                                join usr in users on data.IdUser equals usr.Id
+                                join usr in users on data.IdUsr equals usr.Id
                                 select new { data, usr }).ToList();
 
             // Thêm danh sách các bước vào StepProgressBar
@@ -69,16 +69,16 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             progInfos = dt201_ProgInfoBUS.Instance.GetListByIdForm(idBaseForm);
             var progNow = progInfos.OrderByDescending(r => r.RespTime).FirstOrDefault();
 
-            int stepNow = progNow != null ? progress.IndexOf(progress.First(r => r.IdUser == progNow.IdUser)) : -1;
+            int stepNow = progNow != null ? progress.IndexOf(progress.First(r => r.IdUsr == progNow.IdUsr)) : -1;
             stepProgressDoc.SelectedItemIndex = stepNow; // Focus đến bước hiện tại
 
-            var nextStepUsr = progress[stepNow + 1].IdUser;
+            var nextStepUsr = progress[stepNow + 1].IdUsr;
 
             IsLastStep = stepNow == progress.Count() - 2;
 
             // Thêm lịch sử trình ký vào gridProcess
             var lsHistoryProcess = (from data in progInfos
-                                    join usr in users on data.IdUser equals usr.Id
+                                    join usr in users on data.IdUsr equals usr.Id
                                     join job in jobTitles on usr.JobCode equals job.Id
                                     select new
                                     {
@@ -92,7 +92,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             gvHistoryProcess.ReadOnlyGridView();
 
-            idRoleConfirm = progress.FirstOrDefault(r => r.IdUser == TPConfigs.LoginUser.Id)?.IdRole ?? -1;
+            idRoleConfirm = progress.FirstOrDefault(r => r.IdUsr == TPConfigs.LoginUser.Id)?.IdRole ?? -1;
 
             btnSign.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
@@ -139,11 +139,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             dt201_ProgInfo info = new dt201_ProgInfo()
             {
-                IdAtt = idAtt,
                 IdForm = idBaseForm,
-                IdUser = TPConfigs.LoginUser.Id,
+                IdUsr = TPConfigs.LoginUser.Id,
                 RespTime = DateTime.Now,
-                Note = "簽名"
+                Desc = "簽名"
             };
 
             dt201_ProgInfoBUS.Instance.Add(info);
@@ -173,11 +172,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             int idAtt = baseForm.AttId ?? -1;
             dt201_ProgInfo info = new dt201_ProgInfo()
             {
-                IdAtt = idAtt,
                 IdForm = idBaseForm,
-                IdUser = TPConfigs.LoginUser.Id,
+                IdUsr = TPConfigs.LoginUser.Id,
                 RespTime = DateTime.Now,
-                Note = "核准"
+                Desc = "核准"
             };
 
             dt201_ProgInfoBUS.Instance.Add(info);

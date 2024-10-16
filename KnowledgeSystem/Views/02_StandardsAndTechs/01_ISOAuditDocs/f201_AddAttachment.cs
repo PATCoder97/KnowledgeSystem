@@ -175,7 +175,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         {
             GridView view = sender as GridView;
             if (view == null) return;
-            if (e.Column.FieldName != "IdUser") return;
+            if (e.Column.FieldName != "IdUsr") return;
 
             var usrInfo = users.FirstOrDefault(r => r.Id == e.Value?.ToString());
             string nameUser = usrInfo?.DisplayName ?? "";
@@ -196,12 +196,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             bool isDigitalSign = ckSignOrPaper.SelectedIndex == 1;
 
             // Validate progress
-            bool isProgressError = progresses.Any(r => r.IdUser == TPConfigs.LoginUser.Id) ||
-                                   progresses.GroupBy(x => x.IdUser).Any(g => g.Count() > 1);
+            bool isProgressError = progresses.GroupBy(x => x.IdUsr).Any(g => g.Count() > 1);
 
             if (isDigitalSign && isProgressError)
             {
-                XtraMessageBox.Show("流程重複或包含您", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show("流程重複！", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -271,6 +270,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             else
             {
                 File.Copy(attachment.FullPath, Path.Combine(TPConfigs.Folder201, attachment.EncryptionName), true);
+                result = true;
             }
         }
 
@@ -278,13 +278,12 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         {
             File.Copy(attachment.FullPath, Path.Combine(TPConfigs.Folder201, attachment.EncryptionName), true);
 
-            progresses.Insert(0, new ProgressDetail { IdUser = TPConfigs.LoginUser.Id, IdRole = 0 });
+            progresses.Insert(0, new ProgressDetail { IdUsr = TPConfigs.LoginUser.Id, IdRole = 0 });
 
             var baseProgresses = progresses.Select(data => new dt201_Progress
             {
-                IdAtt = idAtt,
                 IdForm = idForm,
-                IdUser = data.IdUser,
+                IdUsr = data.IdUsr,
                 IdRole = data.IdRole
             }).ToList();
 
@@ -292,11 +291,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             var info = new dt201_ProgInfo
             {
-                IdAtt = idAtt,
                 IdForm = idForm,
-                IdUser = TPConfigs.LoginUser.Id,
+                IdUsr = TPConfigs.LoginUser.Id,
                 RespTime = DateTime.Now,
-                Note = "呈核"
+                Desc = "呈核",
+                SendNoteTime = DateTime.Now
             };
 
             dt201_ProgInfoBUS.Instance.Add(info);
