@@ -73,6 +73,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         {
             txbDocCode.Enabled = _enable;
             txbDisplayName.Enabled = _enable;
+            txbDisplayNameVN.Enabled = _enable;
             txbAtt.Enabled = _enable;
         }
 
@@ -120,6 +121,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void f201_AddAttachment_Load(object sender, EventArgs e)
         {
+            // Ẩn lưu trình trình ký
             lcDefaultProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             lcProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             Size = new System.Drawing.Size(Size.Width, Size.Height - 207);
@@ -184,30 +186,28 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            // Đưa focused ra khỏi bảng để cập nhật lên source
+            // Move focus away from the grid to update source
             gvProgress.FocusedRowHandle = GridControl.AutoFilterRowHandle;
 
+            // Get form inputs
             string code = txbDocCode.Text.Trim();
             string displayName = txbDisplayName.Text.Trim();
             string displayNameVN = txbDisplayNameVN.Text.Trim();
+            bool isDigitalSign = ckSignOrPaper.SelectedIndex == 1;
 
-            bool isProcess = ckSignOrPaper.SelectedIndex == 1;
+            // Validate progress
+            bool isProgressError = progresses.Any(r => r.IdUser == TPConfigs.LoginUser.Id) ||
+                                   progresses.GroupBy(x => x.IdUser).Any(g => g.Count() > 1);
 
-            bool isProgressError = (progresses.Any(r => r.IdUser == TPConfigs.LoginUser.Id) || progresses.GroupBy(x => x.IdUser).Any(g => g.Count() > 1));
-            if (isProgressError)
+            if (isDigitalSign && isProgressError)
             {
                 XtraMessageBox.Show("流程重複或包含您", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            //if (string.IsNullOrEmpty(ursId) || string.IsNullOrEmpty(course))
-            //{
-            //    XtraMessageBox.Show("請填寫所有信息", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    return;
-            //}
+            bool result = false;
+            string message = $"{code} {displayName}";
 
-            var result = false;
-            string msg = "";
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
             {
                 baseForm.Code = code;
@@ -216,62 +216,19 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 baseForm.IdBase = idBase;
                 baseForm.UploadTime = DateTime.Now;
                 baseForm.UploadUser = TPConfigs.LoginUser.Id;
-                baseForm.IsProcessing = isProcess;
-                baseForm.DigitalSign = isProcess;
+                baseForm.IsProcessing = isDigitalSign;
+                baseForm.DigitalSign = isDigitalSign;
 
-                msg = $"{baseForm.Code} {baseForm.DisplayName}";
                 switch (eventInfo)
                 {
                     case EventFormInfo.Create:
-
-                        dm_Attachment att = new dm_Attachment()
-                        {
-                            Thread = attachment.Thread,
-                            ActualName = attachment.ActualName,
-                            EncryptionName = attachment.EncryptionName
-                        };
-                        int idAtt = dm_AttachmentBUS.Instance.Add(att);
-                        baseForm.AttId = idAtt;
-
-                        string folderDest = Path.Combine(TPConfigs.Folder201, idAtt.ToString());
-                        if (!Directory.Exists(folderDest)) Directory.CreateDirectory(folderDest);
-
-                        File.Copy(attachment.FullPath, Path.Combine(folderDest, attachment.EncryptionName), true);
-
-                        int idForm = dt201_FormsBUS.Instance.Add(baseForm);
-                        result = idForm > 0;
-
-                        progresses.Insert(0, new ProgressDetail() { IdUser = TPConfigs.LoginUser.Id, IdRole = 0 });
-                        baseProgresses = (from data in progresses
-                                          select new dt201_Progress
-                                          {
-                                              IdAtt = idAtt,
-                                              IdForm = idForm,
-                                              IdUser = data.IdUser,
-                                              IdRole = data.IdRole
-                                          }).ToList();
-                        dt201_ProgressBUS.Instance.AddRange(baseProgresses);
-
-                        dt201_ProgInfo info = new dt201_ProgInfo()
-                        {
-                            IdAtt = idAtt,
-                            IdForm = idForm,
-                            IdUser = TPConfigs.LoginUser.Id,
-                            RespTime = DateTime.Now,
-                            Note = "呈核"
-                        };
-
-                        dt201_ProgInfoBUS.Instance.Add(info);
-
+                        HandleCreateEvent(ref result);
                         break;
+
                     case EventFormInfo.Update:
                         result = dt201_FormsBUS.Instance.AddOrUpdate(baseForm);
                         break;
-                    //case EventFormInfo.Delete:
-                    //    var dialogResult = XtraMessageBox.Show($"您確認要刪除{_formName}: {_base.IdJobTitle} {_base.IdCourse} {_base.DateReceipt}", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    //    if (dialogResult != DialogResult.Yes) return;
-                    //    result = dt301_BaseBUS.Instance.Remove(_base.Id);
-                    //    break;
+
                     default:
                         break;
                 }
@@ -279,21 +236,70 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             if (result)
             {
-                //switch (_eventInfo)
-                //{
-                //    case EventFormInfo.Update:
-                //        logger.Info(_eventInfo.ToString(), msg);
-                //        break;
-                //    case EventFormInfo.Delete:
-                //        logger.Warning(_eventInfo.ToString(), msg);
-                //        break;
-                //}
                 Close();
             }
             else
             {
                 MsgTP.MsgErrorDB();
             }
+        }
+
+
+        private void HandleCreateEvent(ref bool result)
+        {
+            // Create attachment
+            var att = new dm_Attachment
+            {
+                Thread = attachment.Thread,
+                ActualName = attachment.ActualName,
+                EncryptionName = attachment.EncryptionName
+            };
+
+            int idAtt = dm_AttachmentBUS.Instance.Add(att);
+            baseForm.AttId = idAtt;
+
+            string folderDest = Path.Combine(TPConfigs.Folder201, idAtt.ToString());
+            if (!Directory.Exists(folderDest)) Directory.CreateDirectory(folderDest);
+
+            int idForm = dt201_FormsBUS.Instance.Add(baseForm);
+
+            if (baseForm.DigitalSign == true)
+            {
+                HandleDigitalSign(idAtt, idForm);
+                result = idForm > 0;
+            }
+            else
+            {
+                File.Copy(attachment.FullPath, Path.Combine(TPConfigs.Folder201, attachment.EncryptionName), true);
+            }
+        }
+
+        private void HandleDigitalSign(int idAtt, int idForm)
+        {
+            File.Copy(attachment.FullPath, Path.Combine(TPConfigs.Folder201, attachment.EncryptionName), true);
+
+            progresses.Insert(0, new ProgressDetail { IdUser = TPConfigs.LoginUser.Id, IdRole = 0 });
+
+            var baseProgresses = progresses.Select(data => new dt201_Progress
+            {
+                IdAtt = idAtt,
+                IdForm = idForm,
+                IdUser = data.IdUser,
+                IdRole = data.IdRole
+            }).ToList();
+
+            dt201_ProgressBUS.Instance.AddRange(baseProgresses);
+
+            var info = new dt201_ProgInfo
+            {
+                IdAtt = idAtt,
+                IdForm = idForm,
+                IdUser = TPConfigs.LoginUser.Id,
+                RespTime = DateTime.Now,
+                Note = "呈核"
+            };
+
+            dt201_ProgInfoBUS.Instance.Add(info);
         }
 
         private void txbAtt_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
@@ -319,18 +325,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void ckSignOrPaper_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ckSignOrPaper.SelectedIndex == 0)
-            {
-                lcProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-                lcDefaultProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-                Size = new Size(Size.Width, Size.Height - 207);
-            }
-            else
-            {
-                Size = new Size(Size.Width, Size.Height + 207);
-                lcProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
-                lcDefaultProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
-            }
+            bool isSignSelected = ckSignOrPaper.SelectedIndex == 0;
+            lcProgress.Visibility = isSignSelected ? DevExpress.XtraLayout.Utils.LayoutVisibility.Never : DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+            lcDefaultProgress.Visibility = isSignSelected ? DevExpress.XtraLayout.Utils.LayoutVisibility.Never : DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+            Size = new Size(Size.Width, Size.Height + (isSignSelected ? -207 : 207));
         }
     }
 }

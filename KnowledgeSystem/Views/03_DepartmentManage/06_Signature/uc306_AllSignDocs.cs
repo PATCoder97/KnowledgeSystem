@@ -300,7 +300,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
 
                 var progs = dt306_ProgressBUS.Instance.GetListByIdUser(TPConfigs.LoginUser.Id);
 
-                bases = dt306_BaseBUS.Instance.TakeList(Convert.ToInt16(barCbbNumRecord.EditValue));
+                bases = barCbbNumRecord.EditValue.ToString() == "全部" ? dt306_BaseBUS.Instance.GetList() : dt306_BaseBUS.Instance.TakeList(Convert.ToInt16(barCbbNumRecord.EditValue));
 
                 bases = (from data in bases
                          where data.Confidential == false || progs.Select(r => r.IdBase).Contains(data.Id) || data.UploadUsr == TPConfigs.LoginUser.Id
