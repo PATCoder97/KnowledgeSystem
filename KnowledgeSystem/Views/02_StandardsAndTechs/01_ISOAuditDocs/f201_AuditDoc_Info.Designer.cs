@@ -46,12 +46,12 @@
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
+            this.btnAdd = new DevExpress.XtraBars.BarButtonItem();
             this.btnReload = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-            this.btnAdd = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
@@ -124,6 +124,7 @@
             this.gvData.OptionsView.ShowAutoFilterRow = true;
             this.gvData.OptionsView.ShowGroupPanel = false;
             this.gvData.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gvData_PopupMenuShowing);
+            this.gvData.DoubleClick += new System.EventHandler(this.gvData_DoubleClick);
             // 
             // gColId
             // 
@@ -266,6 +267,14 @@
             this.bar2.OptionsBar.UseWholeRow = true;
             this.bar2.Text = "Main menu";
             // 
+            // btnAdd
+            // 
+            this.btnAdd.Caption = "新增";
+            this.btnAdd.Id = 4;
+            this.btnAdd.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAdd_ItemClick);
+            // 
             // btnReload
             // 
             this.btnReload.Caption = "刷新";
@@ -306,14 +315,6 @@
             this.barDockControlRight.Location = new System.Drawing.Point(955, 49);
             this.barDockControlRight.Manager = this.barManagerTP;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 422);
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.Caption = "新增";
-            this.btnAdd.Id = 4;
-            this.btnAdd.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAdd_ItemClick);
             // 
             // f201_AuditDoc_Info
             // 

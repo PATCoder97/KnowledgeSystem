@@ -5,6 +5,7 @@ using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._00_Generals;
+using KnowledgeSystem.Views._03_DepartmentManage._06_Signature;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -116,8 +117,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             GridView view = sender as GridView;
             int idForm = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColId));
 
-            f201_DocSignInfo fInfo = new f201_DocSignInfo();
-            fInfo.idBaseForm = idForm;
+            f201_SignDoc_Info fInfo = new f201_SignDoc_Info();
+            fInfo.idBase = idForm;
             fInfo.ShowDialog();
 
             LoadData();

@@ -24,6 +24,22 @@ namespace BusinessLayer
 
         private dt201_ProgressBUS() { logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName); }
 
+        public List<dt201_Progress> GetListByIdBase(int idForm)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt201_Progress.Where(r => r.IdForm == idForm).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public int Add(dt201_Progress item)
         {
             try

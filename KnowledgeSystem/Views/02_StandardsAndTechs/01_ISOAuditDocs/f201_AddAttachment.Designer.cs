@@ -118,6 +118,7 @@
             this.btnDefaultProgress.StyleController = this.layoutControl1;
             this.btnDefaultProgress.TabIndex = 23;
             this.btnDefaultProgress.Text = "固定流程";
+            this.btnDefaultProgress.Click += new System.EventHandler(this.btnDefaultProgress_Click);
             // 
             // ckSignOrPaper
             // 
