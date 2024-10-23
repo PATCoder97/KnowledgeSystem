@@ -247,7 +247,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             dt201_ProgInfoBUS.Instance.Add(info);
 
             var baseData = dt201_FormsBUS.Instance.GetItemById(idBase);
-            //baseData.NextStepProg = nextStepProg;
+            baseData.NextStepProg = nextStepProg;
 
             dm_AttachmentBUS.Instance.AddOrUpdate(attachment.BaseAtt);
 
@@ -278,32 +278,32 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void btnCancel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            //XtraInputBoxArgs args = new XtraInputBoxArgs
-            //{
-            //    Caption = TPConfigs.SoftNameTW,
-            //    Prompt = "退回文件原因",
-            //    DefaultButtonIndex = 0,
-            //    Editor = new MemoEdit(),
-            //    DefaultResponse = ""
-            //};
+            XtraInputBoxArgs args = new XtraInputBoxArgs
+            {
+                Caption = TPConfigs.SoftNameTW,
+                Prompt = "退回文件原因",
+                DefaultButtonIndex = 0,
+                Editor = new MemoEdit(),
+                DefaultResponse = ""
+            };
 
-            //var result = XtraInputBox.Show(args);
-            //if (result == null) return;
-            //string describe = result?.ToString() ?? "";
+            var result = XtraInputBox.Show(args);
+            if (result == null) return;
+            string describe = result?.ToString() ?? "";
 
-            //var baseData = dt306_BaseBUS.Instance.GetItemById(idBase);
-            //baseData.NextStepProg = "";
-            //baseData.IsProcess = false;
-            //baseData.IsCancel = true;
-            //baseData.Desc = $"被{TPConfigs.LoginUser.DisplayName}退回，說明：{describe}";
+            var baseData = dt201_FormsBUS.Instance.GetItemById(idBase);
+            baseData.IsProcessing = false;
+            baseData.NextStepProg = "";
+            baseData.IsCancel = true;
+            baseData.Descript = $"被{TPConfigs.LoginUser.DisplayName}退回，說明：{describe}";
 
-            //dt306_BaseBUS.Instance.AddOrUpdate(baseData);
+            dt201_FormsBUS.Instance.AddOrUpdate(baseData);
 
             //// Đưa tất cả các file ra ngoài folder để sau này xem lại vì sao bị trả về
             //foreach (var item in baseAtts)
             //{
             //    item.UsrCancel = TPConfigs.LoginUser.Id;
-            //    dt306_BaseAttsBUS.Instance.AddOrUpdate(item.BaseAtt);
+            //    dt306_BaseAttsBUS.Instance.AddOrUpdate(attachment.BaseAtt);
             //}
 
             //var allAtts = dt306_BaseAttsBUS.Instance.GetListByIdBase(idBase);
@@ -316,93 +316,87 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             //    File.Copy(sourceFile, destFile, true);
             //}
 
-            //// Các bước trước nếu chưa gửi note thì khỏi gửi luôn
-            //var progInfoSendNote = dt306_ProgInfoBUS.Instance.GetListByIdBase(idBase)
-            //    .Where(r => string.IsNullOrEmpty(r.SendNoteTime.ToString())).ToList();
-            //foreach (var item in progInfoSendNote)
-            //{
-            //    item.SendNoteTime = DateTime.Now;
-            //    dt306_ProgInfoBUS.Instance.AddOrUpdate(item);
-            //}
+            // Các bước trước nếu chưa gửi note thì khỏi gửi luôn
+            var progInfoSendNote = dt201_ProgInfoBUS.Instance.GetListByIdForm(idBase)
+                .Where(r => string.IsNullOrEmpty(r.SendNoteTime.ToString())).ToList();
+            foreach (var item in progInfoSendNote)
+            {
+                item.SendNoteTime = DateTime.Now;
+                dt201_ProgInfoBUS.Instance.AddOrUpdate(item);
+            }
 
-            //// Gửi bước cuối cùng
-            //dt306_ProgInfo info = new dt306_ProgInfo()
-            //{
-            //    IdBase = idBase,
-            //    IdUsr = TPConfigs.LoginUser.Id,
-            //    RespTime = DateTime.Now,
-            //    Desc = "退回"
-            //};
+            // Gửi bước cuối cùng
+            dt201_ProgInfo info = new dt201_ProgInfo()
+            {
+                IdForm = idBase,
+                IdUsr = TPConfigs.LoginUser.Id,
+                RespTime = DateTime.Now,
+                Desc = "退回"
+            };
 
-            //dt306_ProgInfoBUS.Instance.Add(info);
+            dt201_ProgInfoBUS.Instance.Add(info);
 
-            //Close();
+            Close();
         }
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            //// kiểm tra xem đã xử lý hết các file chưa
-            //bool validate = baseAtts.Any(r => string.IsNullOrEmpty(r.BaseAtt.Desc));
-            //if (validate)
-            //{
-            //    string msg = "請處理所有文件！";
-            //    MsgTP.MsgShowInfomation($"<font='Microsoft JhengHei UI' size=14>{msg}</font>");
-            //    return;
-            //}
+            // kiểm tra xem đã xử lý hết các file chưa
+            bool validate = string.IsNullOrEmpty(attachment.Desc);
+            if (validate)
+            {
+                string msg = "請處理所有文件！";
+                MsgTP.MsgShowInfomation($"<font='Microsoft JhengHei UI' size=14>{msg}</font>");
+                return;
+            }
 
-            //// Các bước trước nếu chưa gửi note thì khỏi gửi luôn
-            //if (IsLastStep)
-            //{
-            //    var progInfoSendNote = dt306_ProgInfoBUS.Instance.GetListByIdBase(idBase)
-            //        .Where(r => string.IsNullOrEmpty(r.SendNoteTime.ToString())).ToList();
-            //    foreach (var item in progInfoSendNote)
-            //    {
-            //        item.SendNoteTime = DateTime.Now;
-            //        dt306_ProgInfoBUS.Instance.AddOrUpdate(item);
-            //    }
-            //}
+            // Các bước trước nếu chưa gửi note thì khỏi gửi luôn
+            if (IsLastStep)
+            {
+                var progInfoSendNote = dt201_ProgInfoBUS.Instance.GetListByIdForm(idBase)
+                    .Where(r => string.IsNullOrEmpty(r.SendNoteTime.ToString())).ToList();
+                foreach (var item in progInfoSendNote)
+                {
+                    item.SendNoteTime = DateTime.Now;
+                    dt201_ProgInfoBUS.Instance.AddOrUpdate(item);
+                }
+            }
 
-            //dt306_ProgInfo info = new dt306_ProgInfo()
-            //{
-            //    IdBase = idBase,
-            //    IdUsr = TPConfigs.LoginUser.Id,
-            //    RespTime = DateTime.Now,
-            //    Desc = "確認"
-            //};
+            dt201_ProgInfo info = new dt201_ProgInfo()
+            {
+                IdForm = idBase,
+                IdUsr = TPConfigs.LoginUser.Id,
+                RespTime = DateTime.Now,
+                Desc = "確認"
+            };
 
-            //dt306_ProgInfoBUS.Instance.Add(info);
+            dt201_ProgInfoBUS.Instance.Add(info);
 
-            //var baseData = dt306_BaseBUS.Instance.GetItemById(idBase);
-            //baseData.NextStepProg = nextStepProg;
+            var baseData = dt201_FormsBUS.Instance.GetItemById(idBase);
+            baseData.NextStepProg = nextStepProg;
 
             //foreach (var item in baseAtts)
             //{
             //    if (item.BaseAtt.IsCancel == true)
             //    {
-            //        dt306_BaseAttsBUS.Instance.AddOrUpdate(item.BaseAtt);
+            //        dt201_BaseAttsBUS.Instance.AddOrUpdate(item.BaseAtt);
             //    }
             //}
 
-            //if (IsLastStep)
-            //{
-            //    baseData.IsProcess = false;
+            if (IsLastStep)
+            {
+                baseData.IsProcessing = false;
 
-            //    foreach (var item in baseAtts)
-            //    {
-            //        if (item.BaseAtt.IsCancel != true)
-            //        {
-            //            var att = dm_AttachmentBUS.Instance.GetItemById(item.BaseAtt.IdAtt);
-            //            string sourceFile = Path.Combine(TPConfigs.Folder306, idBase.ToString(), att.EncryptionName);
-            //            string destFile = Path.Combine(TPConfigs.Folder306, att.EncryptionName);
+                var att = attachment.BaseAtt;
+                string sourceFile = Path.Combine(TPConfigs.Folder201, att.Id.ToString(), att.EncryptionName);
+                string destFile = Path.Combine(TPConfigs.Folder201, att.EncryptionName);
 
-            //            File.Copy(sourceFile, destFile, true);
-            //        }
-            //    }
-            //}
+                File.Copy(sourceFile, destFile, true);
+            }
 
-            //dt306_BaseBUS.Instance.AddOrUpdate(baseData);
+            dt201_FormsBUS.Instance.AddOrUpdate(baseData);
 
-            //Close();
+            Close();
         }
     }
 }
