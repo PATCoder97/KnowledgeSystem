@@ -1,28 +1,24 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
 using DevExpress.XtraEditors;
-using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using KnowledgeSystem.Helpers;
-using KnowledgeSystem.Views._00_Generals;
-using KnowledgeSystem.Views._03_DepartmentManage._06_Signature;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Net.Mail;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 {
-    public partial class uc201_DigitalSignature : DevExpress.XtraEditors.XtraUserControl
+    public partial class uc201_ApprovalProgress : DevExpress.XtraEditors.XtraUserControl
     {
-        public uc201_DigitalSignature()
+        public uc201_ApprovalProgress()
         {
             InitializeComponent();
             InitializeIcon();
@@ -51,17 +47,18 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         {
             List<dt201_Base> baseData = dt201_BaseBUS.Instance.GetList();
 
-            baseForm = dt201_FormsBUS.Instance.GetListProcessing().Where(r => r.NextStepProg == TPConfigs.LoginUser.Id).ToList();
+            baseForm = dt201_FormsBUS.Instance.GetListProcessing().Where(r => r.UploadUser == TPConfigs.LoginUser.Id).ToList();
             users = dm_UserBUS.Instance.GetList();
 
             var dataInfo = (from data in baseForm
-                            join usr in users on data.UploadUser equals usr.Id
                             join category in baseData on data.IdBase equals category.Id
+                            join nextStep in users on data.NextStepProg equals nextStep.Id into dtg
+                            from nextStep in dtg.DefaultIfEmpty() 
                             select new
                             {
                                 category,
                                 data,
-                                usr
+                                nextStep
                             } into dt
                             group dt by dt.category.IdParent into dtg
                             select new
@@ -70,9 +67,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                                 category = baseData.FirstOrDefault(r => r.Id == dtg.Key),
                                 detailData = dtg.Select(r => new
                                 {
-                                    UsrUploadName = $"{r.usr.Id.Substring(5)} {r.usr.DisplayName}",
+                                    NextStepProg = r.nextStep != null ? $"{r.nextStep.Id.Substring(5)} {r.nextStep.IdDepartment}/{r.nextStep.DisplayName}" : null,
                                     data = r.data,
-                                    usr = r.usr
                                 }).ToList()
                             }).ToList();
 
@@ -85,7 +81,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 gvData.ExpandMasterRow(0, 0);
         }
 
-        private void uc201_DigitalSignature_Load(object sender, EventArgs e)
+        private void uc201_ApprovalProgress_Load(object sender, EventArgs e)
         {
             gvData.ReadOnlyGridView();
             gvData.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;

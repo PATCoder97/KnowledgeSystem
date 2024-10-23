@@ -256,6 +256,12 @@
     <Compile Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\f201_UpdateUsrReq_Detail.Designer.cs">
       <DependentUpon>f201_UpdateUsrReq_Detail.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\uc201_ApprovalProgress.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\uc201_ApprovalProgress.Designer.cs">
+      <DependentUpon>uc201_ApprovalProgress.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\uc201_AuditDocsMain.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -875,6 +881,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\f201_UpdateUsrReq_Detail.resx">
       <DependentUpon>f201_UpdateUsrReq_Detail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\uc201_ApprovalProgress.resx">
+      <DependentUpon>uc201_ApprovalProgress.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\uc201_AuditDocsMain.resx">
       <DependentUpon>uc201_AuditDocsMain.cs</DependentUpon>
