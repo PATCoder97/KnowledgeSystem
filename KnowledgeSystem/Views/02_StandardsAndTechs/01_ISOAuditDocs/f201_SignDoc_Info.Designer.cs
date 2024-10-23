@@ -43,7 +43,7 @@
             this.gcDocs = new DevExpress.XtraGrid.GridControl();
             this.gvDocs = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gColId = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gColIdAtt = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColEncryptName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcHistoryProcess = new DevExpress.XtraGrid.GridControl();
@@ -55,11 +55,11 @@
             this.stepProgressDoc = new DevExpress.XtraEditors.StepProgressBar();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.tabbedControlGroup1 = new DevExpress.XtraLayout.TabbedControlGroup();
+            this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -70,11 +70,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.stepProgressDoc)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroup1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             this.SuspendLayout();
             // 
             // barManagerTP
@@ -221,7 +221,7 @@
             this.gvDocs.Appearance.Row.Options.UseForeColor = true;
             this.gvDocs.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gColId,
-            this.gColIdAtt,
+            this.gColEncryptName,
             this.gridColumn3,
             this.gridColumn5});
             this.gvDocs.GridControl = this.gcDocs;
@@ -243,16 +243,16 @@
             this.gColId.FieldName = "BaseAtt.Id";
             this.gColId.Name = "gColId";
             // 
-            // gColIdAtt
+            // gColEncryptName
             // 
-            this.gColIdAtt.Caption = "gridColumn2";
-            this.gColIdAtt.FieldName = "BaseAtt.IdAtt";
-            this.gColIdAtt.Name = "gColIdAtt";
+            this.gColEncryptName.Caption = "gridColumn2";
+            this.gColEncryptName.FieldName = "BaseAtt.EncryptionName";
+            this.gColEncryptName.Name = "gColEncryptName";
             // 
             // gridColumn3
             // 
             this.gridColumn3.Caption = "文件名稱";
-            this.gridColumn3.FieldName = "BaseAtt.DisplayName";
+            this.gridColumn3.FieldName = "BaseAtt.ActualName";
             this.gridColumn3.MaxWidth = 600;
             this.gridColumn3.MinWidth = 400;
             this.gridColumn3.Name = "gridColumn3";
@@ -263,7 +263,7 @@
             // gridColumn5
             // 
             this.gridColumn5.Caption = "說明";
-            this.gridColumn5.FieldName = "BaseAtt.Desc";
+            this.gridColumn5.FieldName = "Desc";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
             this.gridColumn5.VisibleIndex = 1;
@@ -401,6 +401,24 @@
             this.layoutControlGroup2});
             this.tabbedControlGroup1.Text = "流程";
             // 
+            // layoutControlGroup2
+            // 
+            this.layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem3});
+            this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlGroup2.Name = "layoutControlGroup2";
+            this.layoutControlGroup2.Size = new System.Drawing.Size(841, 376);
+            this.layoutControlGroup2.Text = "核簽文件";
+            // 
+            // layoutControlItem3
+            // 
+            this.layoutControlItem3.Control = this.gcDocs;
+            this.layoutControlItem3.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem3.Name = "layoutControlItem3";
+            this.layoutControlItem3.Size = new System.Drawing.Size(841, 376);
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem3.TextVisible = false;
+            // 
             // layoutControlGroup1
             // 
             this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
@@ -433,24 +451,6 @@
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
-            // layoutControlGroup2
-            // 
-            this.layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem3});
-            this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlGroup2.Name = "layoutControlGroup2";
-            this.layoutControlGroup2.Size = new System.Drawing.Size(841, 376);
-            this.layoutControlGroup2.Text = "核簽文件";
-            // 
-            // layoutControlItem3
-            // 
-            this.layoutControlItem3.Control = this.gcDocs;
-            this.layoutControlItem3.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(841, 376);
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem3.TextVisible = false;
-            // 
             // f201_SignDoc_Info
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -461,7 +461,10 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.IconOptions.Image = global::KnowledgeSystem.Properties.Resources.AppIcon;
             this.Name = "f201_SignDoc_Info";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "f201_SignDoc_Info";
             this.Load += new System.EventHandler(this.f201_SignDoc_Info_Load);
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
@@ -474,11 +477,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.stepProgressDoc)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroup1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -499,7 +502,7 @@
         private DevExpress.XtraGrid.GridControl gcDocs;
         private DevExpress.XtraGrid.Views.Grid.GridView gvDocs;
         private DevExpress.XtraGrid.Columns.GridColumn gColId;
-        private DevExpress.XtraGrid.Columns.GridColumn gColIdAtt;
+        private DevExpress.XtraGrid.Columns.GridColumn gColEncryptName;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
         private DevExpress.XtraGrid.GridControl gcHistoryProcess;

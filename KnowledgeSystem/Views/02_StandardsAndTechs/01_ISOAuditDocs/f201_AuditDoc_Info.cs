@@ -1,13 +1,17 @@
 ﻿using BusinessLayer;
+using DataAccessLayer;
 using DevExpress.Utils.Menu;
 using DevExpress.Utils.Svg;
 using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Views.Grid;
 using KnowledgeSystem.Helpers;
+using KnowledgeSystem.Views._00_Generals;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -116,6 +120,32 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             fAtt.ShowDialog();
 
             LoadData();
+        }
+
+        private void gvData_DoubleClick(object sender, EventArgs e)
+        {
+            GridView view = sender as GridView;
+
+            int idForm = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColId));
+
+            dt201_Forms baseForm = dt201_FormsBUS.Instance.GetItemById(idForm);
+
+            if (baseForm.IsProcessing == true) return;
+
+            int idAtt = (int)baseForm.AttId;
+
+            string filePath = dm_AttachmentBUS.Instance.GetItemById(idAtt).EncryptionName;
+
+            string sourcePath = Path.Combine(TPConfigs.Folder201, filePath);
+            string destPath = Path.Combine(TPConfigs.TempFolderData, $"sign_{DateTime.Now:yyyyMMddHHmmss}.pdf");
+
+            if (!Directory.Exists(TPConfigs.TempFolderData))
+                Directory.CreateDirectory(TPConfigs.TempFolderData);
+
+            File.Copy(sourcePath, destPath, true);
+
+            f00_VIewFile fView = new f00_VIewFile(destPath);
+            fView.ShowDialog();
         }
     }
 }

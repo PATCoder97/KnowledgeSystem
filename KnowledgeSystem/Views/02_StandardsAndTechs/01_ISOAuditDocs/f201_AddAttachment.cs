@@ -25,6 +25,7 @@ using System.IO;
 using DocumentFormat.OpenXml.Spreadsheet;
 using DevExpress.XtraPivotGrid.Data;
 using DevExpress.XtraGrid;
+using KnowledgeSystem.Views._00_Generals;
 
 namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 {
@@ -264,7 +265,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             if (baseForm.DigitalSign == true)
             {
-                HandleDigitalSign(idAtt, idForm);
+                HandleDigitalSign(folderDest, idForm);
                 result = idForm > 0;
             }
             else
@@ -274,11 +275,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             }
         }
 
-        private void HandleDigitalSign(int idAtt, int idForm)
+        private void HandleDigitalSign(string folderDest, int idForm)
         {
-            File.Copy(attachment.FullPath, Path.Combine(TPConfigs.Folder201, attachment.EncryptionName), true);
+            File.Copy(attachment.FullPath, Path.Combine(folderDest, attachment.EncryptionName), true);
 
-            progresses.Insert(0, new ProgressDetail { IdUsr = TPConfigs.LoginUser.Id, IdRole = 0 });
+            //progresses.Insert(0, new ProgressDetail { IdUsr = TPConfigs.LoginUser.Id, IdRole = 0 });
 
             var baseProgresses = progresses.Select(data => new dt201_Progress
             {
@@ -289,16 +290,16 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             dt201_ProgressBUS.Instance.AddRange(baseProgresses);
 
-            var info = new dt201_ProgInfo
-            {
-                IdForm = idForm,
-                IdUsr = TPConfigs.LoginUser.Id,
-                RespTime = DateTime.Now,
-                Desc = "呈核",
-                SendNoteTime = DateTime.Now
-            };
+            //var info = new dt201_ProgInfo
+            //{
+            //    IdForm = idForm,
+            //    IdUsr = TPConfigs.LoginUser.Id,
+            //    RespTime = DateTime.Now,
+            //    Desc = "呈核",
+            //    SendNoteTime = DateTime.Now
+            //};
 
-            dt201_ProgInfoBUS.Instance.Add(info);
+            //dt201_ProgInfoBUS.Instance.Add(info);
         }
 
         private void txbAtt_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
@@ -328,6 +329,30 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             lcProgress.Visibility = isSignSelected ? DevExpress.XtraLayout.Utils.LayoutVisibility.Never : DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
             lcDefaultProgress.Visibility = isSignSelected ? DevExpress.XtraLayout.Utils.LayoutVisibility.Never : DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
             Size = new Size(Size.Width, Size.Height + (isSignSelected ? -207 : 207));
+        }
+
+        private void btnDefaultProgress_Click(object sender, EventArgs e)
+        {
+            f00_SelectFixedProg fProg = new f00_SelectFixedProg();
+            fProg.ShowDialog();
+
+            int idFixedProg = fProg.Id;
+
+            progresses.Clear();
+            string defaulProg = dm_FixedProgressBUS.Instance.GetItemById(idFixedProg)?.Progress;
+            if (string.IsNullOrEmpty(defaulProg)) return;
+
+            string[] defaulProgs = defaulProg.Split(';');
+
+            foreach (var item in defaulProgs)
+            {
+                var usrInfo = users.FirstOrDefault(r => r.Id == item?.ToString());
+                string nameUser = usrInfo?.DisplayName ?? "";
+                string jobName = jobTitles.FirstOrDefault(r => r.Id == usrInfo.JobCode)?.DisplayName ?? "";
+                progresses.Add(new ProgressDetail() { IdUsr = item, JobName = jobName, UserName = nameUser });
+            }
+
+            gcProgress.RefreshDataSource();
         }
     }
 }
