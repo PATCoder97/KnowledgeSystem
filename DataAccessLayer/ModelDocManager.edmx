@@ -219,6 +219,9 @@
           <Property Name="IsProcessing" Type="bit" />
           <Property Name="DigitalSign" Type="bit" />
           <Property Name="DisplayNameVN" Type="nvarchar" MaxLength="512" />
+          <Property Name="IsCancel" Type="bit" />
+          <Property Name="NextStepProg" Type="varchar" MaxLength="10" />
+          <Property Name="Descript" Type="nvarchar" MaxLength="256" />
         </EntityType>
         <EntityType Name="dt201_ProgInfo">
           <Key>
@@ -850,9 +853,9 @@
           <EntitySet Name="dt201_DocType" EntityType="DBDocumentManagementSystemModel.dt201_DocType" />
           <EntitySet Name="dt403_SoftwareManual" EntityType="DBDocumentManagementSystemModel.dt403_SoftwareManual" />
           <EntitySet Name="dt201_Base" EntityType="DBDocumentManagementSystemModel.dt201_Base" />
-          <EntitySet Name="dt201_Forms" EntityType="DBDocumentManagementSystemModel.dt201_Forms" />
           <EntitySet Name="dt201_ProgInfo" EntityType="DBDocumentManagementSystemModel.dt201_ProgInfo" />
           <EntitySet Name="dt201_Progress" EntityType="DBDocumentManagementSystemModel.dt201_Progress" />
+          <EntitySet Name="dt201_Forms" EntityType="DBDocumentManagementSystemModel.dt201_Forms" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -1528,21 +1531,6 @@
           <Property Name="IsDisable" Type="Boolean" />
           <Property Name="DisplayNameVN" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="dt201_Forms">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdBase" Type="Int32" Nullable="false" />
-          <Property Name="Code" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
-          <Property Name="UploadTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="UploadUser" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="AttId" Type="Int32" />
-          <Property Name="IsProcessing" Type="Boolean" />
-          <Property Name="DigitalSign" Type="Boolean" />
-          <Property Name="DisplayNameVN" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="dt201_ProgInfo">
           <Key>
             <PropertyRef Name="Id" />
@@ -1562,6 +1550,24 @@
           <Property Name="IdForm" Type="Int32" Nullable="false" />
           <Property Name="IdUsr" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="IdRole" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt201_Forms">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdBase" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="UploadTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UploadUser" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="AttId" Type="Int32" />
+          <Property Name="IsProcessing" Type="Boolean" />
+          <Property Name="DigitalSign" Type="Boolean" />
+          <Property Name="DisplayNameVN" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="IsCancel" Type="Boolean" />
+          <Property Name="NextStepProg" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Descript" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2306,22 +2312,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dt201_Forms">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt201_Forms">
-              <MappingFragment StoreEntitySet="dt201_Forms">
-                <ScalarProperty Name="DisplayNameVN" ColumnName="DisplayNameVN" />
-                <ScalarProperty Name="DigitalSign" ColumnName="DigitalSign" />
-                <ScalarProperty Name="IsProcessing" ColumnName="IsProcessing" />
-                <ScalarProperty Name="AttId" ColumnName="AttId" />
-                <ScalarProperty Name="UploadUser" ColumnName="UploadUser" />
-                <ScalarProperty Name="UploadTime" ColumnName="UploadTime" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="IdBase" ColumnName="IdBase" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="dt201_ProgInfo">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt201_ProgInfo">
               <MappingFragment StoreEntitySet="dt201_ProgInfo">
@@ -2340,6 +2330,25 @@
                 <ScalarProperty Name="IdRole" ColumnName="IdRole" />
                 <ScalarProperty Name="IdUsr" ColumnName="IdUsr" />
                 <ScalarProperty Name="IdForm" ColumnName="IdForm" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt201_Forms">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt201_Forms">
+              <MappingFragment StoreEntitySet="dt201_Forms">
+                <ScalarProperty Name="Descript" ColumnName="Descript" />
+                <ScalarProperty Name="NextStepProg" ColumnName="NextStepProg" />
+                <ScalarProperty Name="IsCancel" ColumnName="IsCancel" />
+                <ScalarProperty Name="DisplayNameVN" ColumnName="DisplayNameVN" />
+                <ScalarProperty Name="DigitalSign" ColumnName="DigitalSign" />
+                <ScalarProperty Name="IsProcessing" ColumnName="IsProcessing" />
+                <ScalarProperty Name="AttId" ColumnName="AttId" />
+                <ScalarProperty Name="UploadUser" ColumnName="UploadUser" />
+                <ScalarProperty Name="UploadTime" ColumnName="UploadTime" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="IdBase" ColumnName="IdBase" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -68,9 +68,9 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_DocType" Width="1.5" PointX="13.5" PointY="21.125" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt403_SoftwareManual" Width="1.5" PointX="0.5" PointY="33.25" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_Base" Width="1.5" PointX="0.5" PointY="21.125" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_Forms" Width="1.5" PointX="2.125" PointY="21.125" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_ProgInfo" Width="1.5" PointX="3.75" PointY="21.125" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_Progress" Width="1.5" PointX="5.375" PointY="21.125" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_Forms" Width="1.5" PointX="2.125" PointY="21.125" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

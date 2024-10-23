@@ -24,5 +24,8 @@ namespace DataAccessLayer
         public Nullable<bool> IsProcessing { get; set; }
         public Nullable<bool> DigitalSign { get; set; }
         public string DisplayNameVN { get; set; }
+        public Nullable<bool> IsCancel { get; set; }
+        public string NextStepProg { get; set; }
+        public string Descript { get; set; }
     }
 }

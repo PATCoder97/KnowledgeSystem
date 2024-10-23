@@ -244,7 +244,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             }
         }
 
-
         private void HandleCreateEvent(ref bool result)
         {
             // Create attachment
@@ -257,6 +256,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             int idAtt = dm_AttachmentBUS.Instance.Add(att);
             baseForm.AttId = idAtt;
+            baseForm.NextStepProg = progresses.FirstOrDefault().IdUsr;
 
             string folderDest = Path.Combine(TPConfigs.Folder201, idAtt.ToString());
             if (!Directory.Exists(folderDest)) Directory.CreateDirectory(folderDest);
@@ -279,8 +279,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         {
             File.Copy(attachment.FullPath, Path.Combine(folderDest, attachment.EncryptionName), true);
 
-            //progresses.Insert(0, new ProgressDetail { IdUsr = TPConfigs.LoginUser.Id, IdRole = 0 });
-
             var baseProgresses = progresses.Select(data => new dt201_Progress
             {
                 IdForm = idForm,
@@ -289,17 +287,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             }).ToList();
 
             dt201_ProgressBUS.Instance.AddRange(baseProgresses);
-
-            //var info = new dt201_ProgInfo
-            //{
-            //    IdForm = idForm,
-            //    IdUsr = TPConfigs.LoginUser.Id,
-            //    RespTime = DateTime.Now,
-            //    Desc = "呈核",
-            //    SendNoteTime = DateTime.Now
-            //};
-
-            //dt201_ProgInfoBUS.Instance.Add(info);
         }
 
         private void txbAtt_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
