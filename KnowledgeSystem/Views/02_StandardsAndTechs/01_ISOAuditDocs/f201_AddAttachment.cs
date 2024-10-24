@@ -256,7 +256,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             int idAtt = dm_AttachmentBUS.Instance.Add(att);
             baseForm.AttId = idAtt;
-            baseForm.NextStepProg = progresses.FirstOrDefault().IdUsr;
+            baseForm.NextStepProg = progresses.FirstOrDefault()?.IdUsr ?? "";
 
             string folderDest = Path.Combine(TPConfigs.Folder201, idAtt.ToString());
             if (!Directory.Exists(folderDest)) Directory.CreateDirectory(folderDest);
