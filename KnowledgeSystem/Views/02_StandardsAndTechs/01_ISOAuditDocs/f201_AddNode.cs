@@ -38,17 +38,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void EnabledController(bool _enable = true)
         {
-            cbbDept.Enabled = baseParent == null;
+            cbbDept.Enabled = baseParent == null && _enable;
             ckPaperType.Enabled = baseParent == null || baseParent.IsPaperType != true;
-
-            //cbbDept.Enabled = false;
-            //cbbJobTitle.Enabled = false;
-            //cbbUser.Enabled = _enable;
-            //cbbCertStatus.Enabled = _enable;
-            //cbbCourse.Enabled = _enable;
-            //txbDateReceipt.Enabled = _enable;
-            //txbDuration.Enabled = _enable;
-            //txbDescribe.Enabled = _enable;
         }
 
         private void LockControl()
@@ -56,6 +47,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             if (baseParent != null)
             {
                 ckPaperType.Checked = baseParent.IsPaperType == true;
+                cbbDept.EditValue = baseParent.IdDept;
             }
 
             switch (eventInfo)
@@ -70,7 +62,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                     Text = $"更新{formName}";
 
                     btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
-                    EnabledController();
+                    EnabledController(false);
                     break;
                 default:
                     break;
@@ -79,8 +71,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void f201_AddNode_Load(object sender, EventArgs e)
         {
-            LockControl();
-
             var depts = dm_DeptBUS.Instance.GetList();
             var groups = dm_GroupBUS.Instance.GetListByName("ISO組");
 
@@ -98,6 +88,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             cbbDocType.Properties.DataSource = docType;
             cbbDocType.Properties.ValueMember = "Id";
             cbbDocType.Properties.DisplayMember = "DisplayName";
+
+            LockControl();
 
             switch (eventInfo)
             {

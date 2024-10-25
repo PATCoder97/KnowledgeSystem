@@ -55,7 +55,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void InitializeMenuItems()
         {
-            itemEditDoc = CreateMenuItem("更新表單", ItemEditDoc_Click, TPSvgimages.Edit);
+            itemEditDoc = CreateMenuItem("編輯表單", ItemEditDoc_Click, TPSvgimages.Edit);
             itemDelDoc = CreateMenuItem("刪除表單", ItemDelDoc_Click, TPSvgimages.Close);
             itemApprovalHis = CreateMenuItem("核簽歷史", ItemApprovalHis_Click, TPSvgimages.Approval);
         }
@@ -133,11 +133,13 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             if (baseForm.IsProcessing == true) return;
 
             int idAtt = (int)baseForm.AttId;
+            var att = dm_AttachmentBUS.Instance.GetItemById(idAtt);
 
-            string filePath = dm_AttachmentBUS.Instance.GetItemById(idAtt).EncryptionName;
+            string filePath = att.EncryptionName;
+            string fileName = att.ActualName;
 
             string sourcePath = Path.Combine(TPConfigs.Folder201, filePath);
-            string destPath = Path.Combine(TPConfigs.TempFolderData, $"sign_{DateTime.Now:yyyyMMddHHmmss}.pdf");
+            string destPath = Path.Combine(TPConfigs.TempFolderData, $"sign_{DateTime.Now:yyyyMMddHHmmss}{Path.GetExtension(fileName)}");
 
             if (!Directory.Exists(TPConfigs.TempFolderData))
                 Directory.CreateDirectory(TPConfigs.TempFolderData);

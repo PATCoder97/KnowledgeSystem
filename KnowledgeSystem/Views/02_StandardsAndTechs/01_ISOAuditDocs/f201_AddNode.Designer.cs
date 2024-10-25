@@ -345,7 +345,7 @@
             this.layoutControlItem10.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem10.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem10.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem10.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
+            this.layoutControlItem10.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem10.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem10.Control = this.txbArticles;
             this.layoutControlItem10.Location = new System.Drawing.Point(0, 108);
@@ -360,7 +360,7 @@
             this.layoutControlItem1.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem1.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem1.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem1.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
+            this.layoutControlItem1.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem1.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem1.Control = this.txbNotifyCycle;
             this.layoutControlItem1.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
@@ -377,7 +377,7 @@
             this.layoutControlItem4.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem4.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem4.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem4.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
+            this.layoutControlItem4.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem4.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem4.Control = this.cbbDept;
             this.layoutControlItem4.Location = new System.Drawing.Point(0, 0);
@@ -392,7 +392,7 @@
             this.layoutControlItem9.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem9.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem9.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem9.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
+            this.layoutControlItem9.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem9.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem9.Control = this.txbDocCode;
             this.layoutControlItem9.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
@@ -409,7 +409,7 @@
             this.layoutControlItem2.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem2.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem2.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem2.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
+            this.layoutControlItem2.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem2.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem2.Control = this.cbbDocType;
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 144);
@@ -434,7 +434,7 @@
             this.layoutControlItem5.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem5.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem5.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem5.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
+            this.layoutControlItem5.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem5.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem5.Control = this.txbDisplayNameVN;
             this.layoutControlItem5.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
@@ -466,7 +466,7 @@
             this.layoutControlItem8.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem8.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem8.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem8.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
+            this.layoutControlItem8.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem8.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem8.Control = this.txbDisplayName;
             this.layoutControlItem8.Location = new System.Drawing.Point(0, 36);

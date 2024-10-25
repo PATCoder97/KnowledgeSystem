@@ -215,7 +215,7 @@ namespace KnowledgeSystem.Views._00_Generals
                 default:
                     string msg = "<font='Microsoft JhengHei UI' size=14>不支援文件打印\r\nKhông hỗ trợ in định dạng tệp tin</font>";
                     MsgTP.MsgShowInfomation(msg);
-                    Close();
+                    //Close();
                     break;
             }
         }
