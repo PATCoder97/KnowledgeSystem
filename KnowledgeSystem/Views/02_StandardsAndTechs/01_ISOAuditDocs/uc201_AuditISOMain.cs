@@ -539,6 +539,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 }
 
                 f201_AuditDoc_Info fInfo = new f201_AuditDoc_Info() { idBase = rowData.Id };
+                fInfo.Text = rowData.DisplayName;
                 fInfo.ShowDialog();
             }
         }
