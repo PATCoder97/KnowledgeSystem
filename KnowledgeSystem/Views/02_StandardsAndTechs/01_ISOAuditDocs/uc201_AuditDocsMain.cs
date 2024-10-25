@@ -138,7 +138,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         {
             f201_AddAttachment fAtt = new f201_AddAttachment();
             fAtt.eventInfo = EventFormInfo.Create;
-            fAtt.formName = "表單";
+            fAtt.formName = "新增表單";
             fAtt.idBase = nodeFocus.Id;
             fAtt.ShowDialog();
 

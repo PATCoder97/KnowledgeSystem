@@ -163,6 +163,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 case EventFormInfo.View:
                     break;
                 case EventFormInfo.Update:
+                    txbDocCode.EditValue = baseForm.Code;
+                    txbDisplayName.EditValue = baseForm.DisplayName;
+                    txbDisplayNameVN.EditValue = baseForm.DisplayNameVN;
+
+
                     break;
                 case EventFormInfo.Delete:
                     break;

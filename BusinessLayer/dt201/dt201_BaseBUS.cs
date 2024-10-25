@@ -113,6 +113,21 @@ namespace BusinessLayer
             return allChildren; // Trả về toàn bộ danh sách các con
         }
 
+        public dt201_Base GetItemById(int id)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt201_Base.FirstOrDefault(r => r.Id == id);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
 
         public bool AddOrUpdate(dt201_Base item)
         {
