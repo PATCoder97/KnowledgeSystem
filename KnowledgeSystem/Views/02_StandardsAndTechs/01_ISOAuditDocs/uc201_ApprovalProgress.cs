@@ -111,9 +111,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             GridView view = sender as GridView;
             int idForm = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColId));
 
-            f201_SignDoc_Info fInfo = new f201_SignDoc_Info();
-            fInfo.idBase = idForm;
-            fInfo.ShowDialog();
+            f201_SignProg_Detail fDetail = new f201_SignProg_Detail();
+            fDetail.idBase = idForm;
+            fDetail.ShowDialog();
 
             LoadData();
         }
