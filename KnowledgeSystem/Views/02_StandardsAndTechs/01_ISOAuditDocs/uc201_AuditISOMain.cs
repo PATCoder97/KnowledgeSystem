@@ -105,10 +105,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         {
             itemAddNode = CreateMenuItem("新增下級", ItemAddNote_Click, TPSvgimages.Add);
             itemAddVer = CreateMenuItem("新增年版", ItemAddVer_Click, TPSvgimages.Add2);
-            itemAddAtt = CreateMenuItem("新增檔案", ItemAddAtt_Click, TPSvgimages.Attach);
+            itemAddAtt = CreateMenuItem("新增表單", ItemAddAtt_Click, TPSvgimages.Attach);
             itemCopyNode = CreateMenuItem("複製年版", ItemCopyNote_Click, TPSvgimages.Copy);
             itemDelNode = CreateMenuItem("刪除", ItemDeleteNote_Click, TPSvgimages.Close);
-            itemEditNode = CreateMenuItem("更新", ItemEditNode_Click, TPSvgimages.Edit);
+            itemEditNode = CreateMenuItem("編輯", ItemEditNode_Click, TPSvgimages.Edit);
             itemDisable = CreateMenuItem("停用", ItemDisable_Click, TPSvgimages.Disable);
             itemEnable = CreateMenuItem("啟用", ItemEnable_Click, TPSvgimages.Confirm);
         }
@@ -485,7 +485,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                     {
                         itemAddAtt.BeginGroup = true;
                         e.Menu.Items.Add(itemAddAtt);
-                        e.Menu.Items.Add(itemCopyNode);
+                        //e.Menu.Items.Add(itemCopyNode);
                         e.Menu.Items.Add(itemEditNode);
                         itemDelNode.BeginGroup = true;
                         e.Menu.Items.Add(itemDelNode);

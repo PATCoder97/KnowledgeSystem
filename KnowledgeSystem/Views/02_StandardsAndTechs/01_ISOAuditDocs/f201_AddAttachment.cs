@@ -43,6 +43,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         public dt201_Forms baseForm = null;
         public List<dt201_Progress> baseProgresses;
         string idDept2word = TPConfigs.LoginUser.IdDepartment.Substring(0, 2);
+        string filterAtt = TPConfigs.FilterFile;
 
         List<dm_User> users;
         List<dm_JobTitle> jobTitles;
@@ -291,7 +292,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void txbAtt_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog { Filter = "PDF | *.pdf" };
+            OpenFileDialog openFileDialog = new OpenFileDialog { Filter = filterAtt };
 
             if (openFileDialog.ShowDialog() != DialogResult.OK)
                 return;
@@ -316,6 +317,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             lcProgress.Visibility = isSignSelected ? DevExpress.XtraLayout.Utils.LayoutVisibility.Never : DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
             lcDefaultProgress.Visibility = isSignSelected ? DevExpress.XtraLayout.Utils.LayoutVisibility.Never : DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
             Size = new Size(Size.Width, Size.Height + (isSignSelected ? -207 : 207));
+
+            filterAtt = ckSignOrPaper.SelectedIndex == 0 ? TPConfigs.FilterFile : "PDF | *.pdf";
+            attachment = null;
+            txbAtt.EditValue = "";
         }
 
         private void btnDefaultProgress_Click(object sender, EventArgs e)
