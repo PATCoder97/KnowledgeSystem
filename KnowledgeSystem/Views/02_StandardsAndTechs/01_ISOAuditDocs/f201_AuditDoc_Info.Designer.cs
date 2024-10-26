@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule1 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression1 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f201_AuditDoc_Info));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.gcData = new DevExpress.XtraGrid.GridControl();
@@ -52,6 +54,8 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColIsCancel = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
@@ -107,6 +111,8 @@
             this.gvData.Appearance.Row.Options.UseForeColor = true;
             this.gvData.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gColId,
+            this.gColIdFile,
+            this.gColIsCancel,
             this.gridColumn3,
             this.gridColumn4,
             this.gridColumn1,
@@ -114,7 +120,15 @@
             this.gridColumn6,
             this.gridColumn5,
             this.gridColumn2,
-            this.gColIdFile});
+            this.gridColumn7});
+            gridFormatRule1.ApplyToRow = true;
+            gridFormatRule1.Name = "Format0";
+            formatConditionRuleExpression1.Appearance.BackColor = System.Drawing.Color.White;
+            formatConditionRuleExpression1.Appearance.BackColor2 = System.Drawing.Color.Red;
+            formatConditionRuleExpression1.Appearance.Options.UseBackColor = true;
+            formatConditionRuleExpression1.Expression = "[data.IsCancel] = True";
+            gridFormatRule1.Rule = formatConditionRuleExpression1;
+            this.gvData.FormatRules.Add(gridFormatRule1);
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
             this.gvData.OptionsDetail.ShowDetailTabs = false;
@@ -316,6 +330,20 @@
             this.barDockControlRight.Manager = this.barManagerTP;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 422);
             // 
+            // gridColumn7
+            // 
+            this.gridColumn7.Caption = "備註";
+            this.gridColumn7.FieldName = "data.Descript";
+            this.gridColumn7.Name = "gridColumn7";
+            this.gridColumn7.Visible = true;
+            this.gridColumn7.VisibleIndex = 7;
+            // 
+            // gColIsCancel
+            // 
+            this.gColIsCancel.Caption = "IsCancel";
+            this.gColIsCancel.FieldName = "data.IsCancel";
+            this.gColIsCancel.Name = "gColIsCancel";
+            // 
             // f201_AuditDoc_Info
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
@@ -370,5 +398,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraBars.BarButtonItem btnAdd;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
+        private DevExpress.XtraGrid.Columns.GridColumn gColIsCancel;
     }
 }
