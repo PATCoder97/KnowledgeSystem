@@ -98,14 +98,35 @@ namespace BusinessLayer
             }
         }
 
-        public bool Remove(int Id)
+        public bool Remove(int IdForm)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    var entity = _context.dt201_ProgInfo.FirstOrDefault(r => r.Id == Id);
+                    var entity = _context.dt201_ProgInfo.FirstOrDefault(r => r.Id == IdForm);
                     _context.dt201_ProgInfo.Remove(entity);
+                    _context.SaveChanges();
+
+                    int affectedRecords = _context.SaveChanges();
+                    return affectedRecords > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                return false;
+            }
+        }
+
+        public bool RemoveByIdForm(int IdForm)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    var entity = _context.dt201_ProgInfo.Where(r => r.IdForm == IdForm);
+                    _context.dt201_ProgInfo.RemoveRange(entity);
                     _context.SaveChanges();
 
                     int affectedRecords = _context.SaveChanges();

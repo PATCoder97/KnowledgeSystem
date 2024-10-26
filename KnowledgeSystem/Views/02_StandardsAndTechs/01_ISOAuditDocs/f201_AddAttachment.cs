@@ -219,20 +219,24 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 baseForm.Code = code;
                 baseForm.DisplayName = displayName;
                 baseForm.DisplayNameVN = displayNameVN;
-                baseForm.IdBase = idBase;
-                baseForm.UploadTime = DateTime.Now;
                 baseForm.UploadUser = TPConfigs.LoginUser.Id;
-                baseForm.IsProcessing = isDigitalSign;
-                baseForm.DigitalSign = isDigitalSign;
+                baseForm.UploadTime = DateTime.Now;
 
                 switch (eventInfo)
                 {
                     case EventFormInfo.Create:
+
+                        baseForm.IdBase = idBase;
+                        baseForm.IsProcessing = isDigitalSign;
+                        baseForm.DigitalSign = isDigitalSign;
                         HandleCreateEvent(ref result);
+
                         break;
 
                     case EventFormInfo.Update:
-                        result = dt201_FormsBUS.Instance.AddOrUpdate(baseForm);
+
+                        HandleUpdateEvent(ref result);
+
                         break;
 
                     default:
@@ -278,6 +282,53 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             {
                 File.Copy(attachment.FullPath, Path.Combine(TPConfigs.Folder201, attachment.EncryptionName), true);
                 result = true;
+            }
+        }
+
+        private void HandleUpdateEvent(ref bool result)
+        {
+            if (string.IsNullOrEmpty(txbAtt.EditValue?.ToString()))
+            {
+                result = dt201_FormsBUS.Instance.AddOrUpdate(baseForm);
+            }
+            else
+            {
+                bool isDigitalSign = ckSignOrPaper.SelectedIndex == 1;
+                baseForm.IsProcessing = isDigitalSign;
+                baseForm.DigitalSign = isDigitalSign;
+
+                // Create attachment
+                var att = new dm_Attachment
+                {
+                    Thread = attachment.Thread,
+                    ActualName = attachment.ActualName,
+                    EncryptionName = attachment.EncryptionName
+                };
+
+                int idAtt = dm_AttachmentBUS.Instance.Add(att);
+                baseForm.AttId = idAtt;
+                baseForm.NextStepProg = progresses.FirstOrDefault()?.IdUsr ?? "";
+
+                string folderDest = Path.Combine(TPConfigs.Folder201, idAtt.ToString());
+                if (!Directory.Exists(folderDest)) Directory.CreateDirectory(folderDest);
+
+                result = dt201_FormsBUS.Instance.AddOrUpdate(baseForm);
+
+                int idForm = baseForm.Id;
+
+                if (baseForm.DigitalSign == true)
+                {
+                    dt201_ProgressBUS.Instance.RemoveByIdForm(idForm);
+                    dt201_ProgInfoBUS.Instance.RemoveByIdForm(idForm);
+
+                    HandleDigitalSign(folderDest, idForm);
+                    result = idForm > 0;
+                }
+                else
+                {
+                    File.Copy(attachment.FullPath, Path.Combine(TPConfigs.Folder201, attachment.EncryptionName), true);
+                    result = true;
+                }
             }
         }
 

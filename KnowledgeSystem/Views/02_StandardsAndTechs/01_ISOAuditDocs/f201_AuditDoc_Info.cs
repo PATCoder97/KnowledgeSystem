@@ -88,6 +88,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             fAtt.formName = "編輯表單";
             fAtt.baseForm = dt201_FormsBUS.Instance.GetItemById(idForm);
             fAtt.ShowDialog();
+
+            LoadData();
         }
 
         private void LoadData()
@@ -160,10 +162,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         {
             GridView view = sender as GridView;
 
+            bool IsCancel = Convert.ToBoolean(view.GetRowCellValue(view.FocusedRowHandle, gColIsCancel));
+            if (IsCancel) return;
+
             int idForm = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColId));
-
             dt201_Forms baseForm = dt201_FormsBUS.Instance.GetItemById(idForm);
-
             if (baseForm.IsProcessing == true) return;
 
             int idAtt = (int)baseForm.AttId;
