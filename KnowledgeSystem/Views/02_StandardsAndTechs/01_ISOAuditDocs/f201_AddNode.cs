@@ -2,6 +2,7 @@
 using DataAccessLayer;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraLayout;
 using DevExpress.XtraSplashScreen;
 using DocumentFormat.OpenXml.Spreadsheet;
 using KnowledgeSystem.Helpers;
@@ -31,6 +32,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         public dt201_Base baseParent = null;
         string idDept2word = TPConfigs.LoginUser.IdDepartment.Substring(0, 2);
 
+        List<LayoutControlItem> lcControls;
+        List<LayoutControlItem> lcImpControls;
+
         private void InitializeIcon()
         {
             btnConfirm.ImageOptions.SvgImage = TPSvgimages.Confirm;
@@ -42,7 +46,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             ckPaperType.Enabled = baseParent == null || baseParent.IsPaperType != true;
         }
 
-        private void LockControl()
+        private void IniControl()
         {
             if (baseParent != null)
             {
@@ -67,10 +71,37 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 default:
                     break;
             }
+
+            foreach (var item in lcControls)
+            {
+                string colorHex = item.Control.Enabled ? "000000" : "000000";
+                item.Text = item.Text.Replace("000000", colorHex);
+            }
+
+            // Các thông tin phải điền có thêm dấu * màu đỏ
+            foreach (var item in lcImpControls)
+            {
+                if (item.Control.Enabled)
+                {
+                    item.Text += "<color=red>*</color>";
+                }
+                else
+                {
+                    item.Text = item.Text.Replace("<color=red>*</color>", "");
+                }
+            }
         }
 
         private void f201_AddNode_Load(object sender, EventArgs e)
         {
+            lcControls = new List<LayoutControlItem>() { lcDept, lcDocCode, lcDisplayName, lcDisplayNameVN, lcArticles, lcDocType, lcNotifyCycle };
+            lcImpControls = new List<LayoutControlItem>() { lcDocCode, lcDisplayName, lcDisplayNameVN, lcNotifyCycle };
+            foreach (var item in lcControls)
+            {
+                item.AllowHtmlStringInCaption = true;
+                item.Text = $"<color=#000000>{item.Text}</color>";
+            }
+
             var depts = dm_DeptBUS.Instance.GetList();
             var groups = dm_GroupBUS.Instance.GetListByName("ISO組");
 
@@ -86,7 +117,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             cbbDocType.Properties.Items.AddRange(TPConfigs.DocTypes201.Split(';').ToList());
 
-            LockControl();
+            IniControl();
 
             switch (eventInfo)
             {
@@ -112,6 +143,19 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            // Kiểm tra xem đã điền đầy đủ thông tin yêu cầu hay chưa
+            bool IsValidate = true;
+            foreach (var item in lcImpControls)
+            {
+                if (string.IsNullOrEmpty(item.Control.Text)) IsValidate = false;
+            }
+
+            if (!IsValidate)
+            {
+                XtraMessageBox.Show("請填寫所有重要資訊！", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             var result = false;
             string msg = "";
             using (var handle = SplashScreenManager.ShowOverlayForm(this))

@@ -61,7 +61,7 @@
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcProgress = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcSignOrPaper = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcDefaultProgress = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -82,7 +82,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcProgress)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcSignOrPaper)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDefaultProgress)).BeginInit();
             this.SuspendLayout();
             // 
@@ -440,7 +440,7 @@
             this.layoutControlItem1,
             this.lcProgress,
             this.layoutControlItem4,
-            this.layoutControlItem5,
+            this.lcSignOrPaper,
             this.lcDefaultProgress});
             this.Root.Name = "Root";
             this.Root.Size = new System.Drawing.Size(652, 413);
@@ -521,16 +521,16 @@
             this.layoutControlItem4.Text = "越文名稱";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(76, 24);
             // 
-            // layoutControlItem5
+            // lcSignOrPaper
             // 
-            this.layoutControlItem5.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.layoutControlItem5.AppearanceItemCaption.Options.UseFont = true;
-            this.layoutControlItem5.Control = this.ckSignOrPaper;
-            this.layoutControlItem5.Location = new System.Drawing.Point(0, 144);
-            this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(492, 40);
-            this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem5.TextVisible = false;
+            this.lcSignOrPaper.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lcSignOrPaper.AppearanceItemCaption.Options.UseFont = true;
+            this.lcSignOrPaper.Control = this.ckSignOrPaper;
+            this.lcSignOrPaper.Location = new System.Drawing.Point(0, 144);
+            this.lcSignOrPaper.Name = "lcSignOrPaper";
+            this.lcSignOrPaper.Size = new System.Drawing.Size(492, 40);
+            this.lcSignOrPaper.TextSize = new System.Drawing.Size(0, 0);
+            this.lcSignOrPaper.TextVisible = false;
             // 
             // lcDefaultProgress
             // 
@@ -581,7 +581,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcProgress)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcSignOrPaper)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDefaultProgress)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -620,7 +620,7 @@
         private DevExpress.XtraEditors.TextEdit txbDisplayNameVN;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
         private DevExpress.XtraEditors.RadioGroup ckSignOrPaper;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
+        private DevExpress.XtraLayout.LayoutControlItem lcSignOrPaper;
         private DevExpress.XtraEditors.SimpleButton btnDefaultProgress;
         private DevExpress.XtraLayout.LayoutControlItem lcDefaultProgress;
     }

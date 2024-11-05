@@ -169,6 +169,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             fAtt.eventInfo = EventFormInfo.Create;
             fAtt.formName = "新增表單";
             fAtt.idBase = idBase;
+            //fAtt.isPaper = true;
             fAtt.ShowDialog();
 
             LoadData();

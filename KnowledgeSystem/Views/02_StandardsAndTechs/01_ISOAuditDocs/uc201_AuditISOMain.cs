@@ -107,10 +107,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             itemAddVer = CreateMenuItem("新增年版", ItemAddVer_Click, TPSvgimages.Add2);
             itemAddAtt = CreateMenuItem("新增表單", ItemAddAtt_Click, TPSvgimages.Attach);
             itemCopyNode = CreateMenuItem("複製年版", ItemCopyNote_Click, TPSvgimages.Copy);
-            itemDelNode = CreateMenuItem("刪除", ItemDeleteNote_Click, TPSvgimages.Close);
-            itemEditNode = CreateMenuItem("編輯", ItemEditNode_Click, TPSvgimages.Edit);
-            itemDisable = CreateMenuItem("停用", ItemDisable_Click, TPSvgimages.Disable);
-            itemEnable = CreateMenuItem("啟用", ItemEnable_Click, TPSvgimages.Confirm);
+            itemDelNode = CreateMenuItem("刪除節點", ItemDeleteNote_Click, TPSvgimages.Close);
+            itemEditNode = CreateMenuItem("編輯節點", ItemEditNode_Click, TPSvgimages.Edit);
+            itemDisable = CreateMenuItem("停用節點", ItemDisable_Click, TPSvgimages.Disable);
+            itemEnable = CreateMenuItem("啟用節點", ItemEnable_Click, TPSvgimages.Confirm);
         }
 
         private void ItemEnable_Click(object sender, EventArgs e)
@@ -485,40 +485,39 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                     var nodes = dt201_BaseBUS.Instance.GetListByParentId(parentData.Id);
                     if (nodes.Max(r => r.Id) == currentData.Id)
                     {
-                        itemAddAtt.BeginGroup = true;
+                        //itemAddAtt.BeginGroup = true;
                         e.Menu.Items.Add(itemAddAtt);
-                        //e.Menu.Items.Add(itemCopyNode);
                         e.Menu.Items.Add(itemEditNode);
-                        itemDelNode.BeginGroup = true;
+                        //itemDelNode.BeginGroup = true;
                         e.Menu.Items.Add(itemDelNode);
                     }
                 }
             }
             else if (isRootFinalNode)
             {
-                itemAddVer.BeginGroup = true;
+                //itemAddVer.BeginGroup = true;
                 e.Menu.Items.Add(itemAddVer);
                 e.Menu.Items.Add(itemEditNode);
-                itemDelNode.BeginGroup = true;
+                //itemDelNode.BeginGroup = true;
                 e.Menu.Items.Add(itemDelNode);
                 e.Menu.Items.Add(itemDisable);
             }
             else if (haveChildren)
             {
-                itemAddNode.BeginGroup = true;
+                //itemAddNode.BeginGroup = true;
                 e.Menu.Items.Add(itemAddNode);
                 e.Menu.Items.Add(itemEditNode);
-                itemDelNode.BeginGroup = true;
+                //itemDelNode.BeginGroup = true;
                 e.Menu.Items.Add(itemDelNode);
                 e.Menu.Items.Add(itemDisable);
             }
             else
             {
-                itemAddVer.BeginGroup = true;
+                //itemAddVer.BeginGroup = true;
                 e.Menu.Items.Add(itemAddVer);
                 e.Menu.Items.Add(itemAddNode);
                 e.Menu.Items.Add(itemEditNode);
-                itemDelNode.BeginGroup = true;
+                //itemDelNode.BeginGroup = true;
                 e.Menu.Items.Add(itemDelNode);
                 e.Menu.Items.Add(itemDisable);
             }
