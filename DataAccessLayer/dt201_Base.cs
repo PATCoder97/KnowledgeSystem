@@ -16,7 +16,6 @@ namespace DataAccessLayer
     {
         public int Id { get; set; }
         public int IdParent { get; set; }
-        public Nullable<int> IdDocType { get; set; }
         public string DocCode { get; set; }
         public string DisplayName { get; set; }
         public string Articles { get; set; }
@@ -28,5 +27,6 @@ namespace DataAccessLayer
         public Nullable<int> NotifyCycle { get; set; }
         public Nullable<bool> IsDisable { get; set; }
         public string DisplayNameVN { get; set; }
+        public string DocType { get; set; }
     }
 }

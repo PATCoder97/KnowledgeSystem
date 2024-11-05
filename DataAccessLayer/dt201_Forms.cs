@@ -27,5 +27,7 @@ namespace DataAccessLayer
         public Nullable<bool> IsCancel { get; set; }
         public string NextStepProg { get; set; }
         public string Descript { get; set; }
+        public Nullable<bool> IsDel { get; set; }
+        public Nullable<System.DateTime> DelTime { get; set; }
     }
 }

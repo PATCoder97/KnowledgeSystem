@@ -74,7 +74,7 @@
             // 
             // gridColumn12
             // 
-            this.gridColumn12.Caption = "實際完日";
+            this.gridColumn12.Caption = "實完日";
             this.gridColumn12.FieldName = "data.CompleteDate";
             this.gridColumn12.Name = "gridColumn12";
             this.gridColumn12.OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.False;
@@ -259,7 +259,7 @@
             // 
             // gridColumn2
             // 
-            this.gridColumn2.Caption = "通知時期";
+            this.gridColumn2.Caption = "通知時間";
             this.gridColumn2.FieldName = "data.TimeSendNote";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.False;

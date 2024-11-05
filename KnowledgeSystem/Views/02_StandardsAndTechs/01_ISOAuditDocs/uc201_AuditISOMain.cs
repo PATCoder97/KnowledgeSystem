@@ -357,14 +357,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         {
             baseDatas = dt201_BaseBUS.Instance.GetList().ToList();
             var deptsChecked = cbbDepts.Items.Where(r => r.CheckState == CheckState.Checked).Select(r => r.Value).ToList();
-            var docTypes = dt201_DocTypeBUS.Instance.GetList();
 
             var result = (from data in baseDatas
                           join dept in depts on data.IdDept equals dept.Id
-                          join docType in docTypes on data.IdDocType equals docType.Id into dtg
-                          from g in dtg.DefaultIfEmpty()
                           where deptsChecked.Contains(data.IdDept)
-                          select new { data, dept, doctype = dtg != null ? g : null }).ToList();
+                          select new { data, dept }).ToList();
 
             sourceData.DataSource = result;
 

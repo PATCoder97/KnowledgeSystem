@@ -81,13 +81,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             cbbDept.Properties.Items.AddRange(deptsCbb);
             cbbDept.SelectedIndex = 0;
 
-            var articles = new List<string>() { "5.1", "6.2", "6.3", "7.4" };
+            var articles = TPConfigs.Articles201.Split(';').ToList();
             txbArticles.Properties.DataSource = articles;
 
-            var docType = dt201_DocTypeBUS.Instance.GetList();
-            cbbDocType.Properties.DataSource = docType;
-            cbbDocType.Properties.ValueMember = "Id";
-            cbbDocType.Properties.DisplayMember = "DisplayName";
+            cbbDocType.Properties.Items.AddRange(TPConfigs.DocTypes201.Split(';').ToList());
 
             LockControl();
 
@@ -105,7 +102,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                     cbbDept.EditValue = baseData.IdDept;
                     ckPaperType.Checked = baseData.IsPaperType == true;
                     txbNotifyCycle.EditValue = baseData.NotifyCycle;
-                    cbbDocType.EditValue = baseData.IdDocType;
+                    cbbDocType.EditValue = baseData.DocType;
 
                     break;
                 default:
@@ -126,7 +123,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 baseData.IdDept = cbbDept.EditValue.ToString();
                 baseData.IsPaperType = ckPaperType.Checked;
                 baseData.NotifyCycle = Convert.ToInt16(txbNotifyCycle.EditValue?.ToString() ?? "0");
-                baseData.IdDocType = Convert.ToInt16(cbbDocType.EditValue?.ToString());
+                baseData.DocType = cbbDocType.Text;
 
                 msg = $"{baseData.DocCode} {baseData.DisplayName}";
                 switch (eventInfo)
