@@ -39,6 +39,8 @@ namespace KnowledgeSystem.Helpers
         public static string Folder307 { get; set; }
         public static string Folder403 { get; set; }
         public static string FolderSign { get; set; }
+        public static string Articles201 { get; set; }
+        public static string DocTypes201 { get; set; }
 
         public static void SetSystemStaticValue()
         {
@@ -48,6 +50,8 @@ namespace KnowledgeSystem.Helpers
             SoftNameTW = lsStaticValue.FirstOrDefault(r => r.KeyT == "SoftNameTW").ValueT;
             UrlUpdate = lsStaticValue.FirstOrDefault(r => r.KeyT == "UrlUpdate").ValueT;
             FolderData = lsStaticValue.FirstOrDefault(r => r.KeyT == "FolderData").ValueT;
+            Articles201 = lsStaticValue.FirstOrDefault(r => r.KeyT == "201Articles")?.ValueT ?? "";
+            DocTypes201 = lsStaticValue.FirstOrDefault(r => r.KeyT == "201DocTypes")?.ValueT ?? "";
 
             Folder00 = Path.Combine(FolderData, "00");
             Folder207 = Path.Combine(FolderData, "207");

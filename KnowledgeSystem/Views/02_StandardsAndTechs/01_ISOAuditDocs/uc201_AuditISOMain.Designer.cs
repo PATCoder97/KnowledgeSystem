@@ -317,7 +317,7 @@
             // treeListColumn5
             // 
             this.treeListColumn5.Caption = "文件類";
-            this.treeListColumn5.FieldName = "doctype.DisplayName";
+            this.treeListColumn5.FieldName = "data.DocType";
             this.treeListColumn5.Name = "treeListColumn5";
             this.treeListColumn5.Visible = true;
             this.treeListColumn5.VisibleIndex = 4;
