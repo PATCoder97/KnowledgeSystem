@@ -78,7 +78,7 @@ namespace BusinessLayer
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dt201_Forms.ToList();
+                    return _context.dt201_Forms.Where(r => r.IsDel != true).ToList();
                 }
             }
             catch (Exception ex)
@@ -94,7 +94,7 @@ namespace BusinessLayer
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dt201_Forms.Where(r => r.IdBase == idBase).ToList();
+                    return _context.dt201_Forms.Where(r => r.IdBase == idBase && r.IsDel != true).ToList();
                 }
             }
             catch (Exception ex)
@@ -110,7 +110,7 @@ namespace BusinessLayer
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dt201_Forms.Where(r => r.IsProcessing == true).ToList();
+                    return _context.dt201_Forms.Where(r => r.IsProcessing == true && r.IsDel != true).ToList();
                 }
             }
             catch (Exception ex)
@@ -161,7 +161,9 @@ namespace BusinessLayer
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
                     var entity = _context.dt201_Forms.FirstOrDefault(r => r.Id == Id);
-                    _context.dt201_Forms.Remove(entity);
+                    entity.DelTime = DateTime.Now;
+                    entity.IsDel = true;
+                    _context.dt201_Forms.AddOrUpdate(entity);
                     _context.SaveChanges();
 
                     int affectedRecords = _context.SaveChanges();

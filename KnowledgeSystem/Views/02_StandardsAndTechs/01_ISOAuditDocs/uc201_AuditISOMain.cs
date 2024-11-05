@@ -118,7 +118,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             var result = XtraInputBox.Show(new XtraInputBoxArgs
             {
                 Caption = TPConfigs.SoftNameTW,
-                Prompt = "輸入員工代碼進行確認啟用",
+                Prompt = "<font='Microsoft JhengHei UI' size=14>輸入你的員工代碼進行確認啟用</font>",
+                AllowHtmlText = DevExpress.Utils.DefaultBoolean.True,
                 DefaultButtonIndex = 0,
                 Editor = new TextEdit { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) },
                 DefaultResponse = ""
@@ -148,7 +149,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             var result = XtraInputBox.Show(new XtraInputBoxArgs
             {
                 Caption = TPConfigs.SoftNameTW,
-                Prompt = "輸入員工代碼進行確認停用",
+                Prompt = "<font='Microsoft JhengHei UI' size=14>輸入你的員工代碼進行確認停用</font>",
+                AllowHtmlText = DevExpress.Utils.DefaultBoolean.True,
                 DefaultButtonIndex = 0,
                 Editor = new TextEdit { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) },
                 DefaultResponse = ""
@@ -180,7 +182,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 var result = XtraInputBox.Show(new XtraInputBoxArgs
                 {
                     Caption = TPConfigs.SoftNameTW,
-                    Prompt = "輸入新年版名稱",
+                    Prompt = "<font='Microsoft JhengHei UI' size=14>輸入新年版名稱</font>",
+                    AllowHtmlText = DevExpress.Utils.DefaultBoolean.True,
                     DefaultButtonIndex = 0,
                     Editor = new TextEdit() { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) },
                     DefaultResponse = ""
@@ -219,7 +222,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             var result = XtraInputBox.Show(new XtraInputBoxArgs
             {
                 Caption = TPConfigs.SoftNameTW,
-                Prompt = "輸入年版名稱",
+                Prompt = "<font='Microsoft JhengHei UI' size=14>輸入年版名稱</font>",
+                AllowHtmlText = DevExpress.Utils.DefaultBoolean.True,
                 DefaultButtonIndex = 0,
                 Editor = new TextEdit() { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) },
                 DefaultResponse = ""
@@ -254,7 +258,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             var result = XtraInputBox.Show(new XtraInputBoxArgs
             {
                 Caption = TPConfigs.SoftNameTW,
-                Prompt = "輸入員工代碼進行確認停用",
+                Prompt = "<font='Microsoft JhengHei UI' size=14>輸入你的員工代碼進行確認刪除</font>",
+                AllowHtmlText = DevExpress.Utils.DefaultBoolean.True,
                 DefaultButtonIndex = 0,
                 Editor = new TextEdit { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) },
                 DefaultResponse = ""

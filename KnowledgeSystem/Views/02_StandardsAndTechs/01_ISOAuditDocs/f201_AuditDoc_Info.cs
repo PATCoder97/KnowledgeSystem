@@ -75,7 +75,23 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void ItemDelDoc_Click(object sender, EventArgs e)
         {
+            var result = XtraInputBox.Show(new XtraInputBoxArgs
+            {
+                Caption = TPConfigs.SoftNameTW,
+                Prompt = "<font='Microsoft JhengHei UI' size=14>輸入你的員工代碼進行確認刪除表單</font>",
+                AllowHtmlText = DevExpress.Utils.DefaultBoolean.True,
+                DefaultButtonIndex = 0,
+                Editor = new TextEdit { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) },
+                DefaultResponse = ""
+            })?.ToString().ToUpper();
 
+            if (string.IsNullOrEmpty(result) || result != TPConfigs.LoginUser.Id.ToUpper()) return;
+
+            GridView view = gvData;
+            int idForm = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColId));
+
+            dt201_FormsBUS.Instance.Remove(idForm);
+            LoadData();
         }
 
         private void ItemEditDoc_Click(object sender, EventArgs e)
