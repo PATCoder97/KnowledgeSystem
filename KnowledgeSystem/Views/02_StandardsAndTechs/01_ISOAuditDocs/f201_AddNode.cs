@@ -28,8 +28,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         public EventFormInfo eventInfo = EventFormInfo.Create;
         public string formName = "";
-        public dt201_Base baseData = null;
-        public dt201_Base baseParent = null;
+        public dt201_Base currentData = null;
+        public dt201_Base parentData = null;
         string idDept2word = TPConfigs.LoginUser.IdDepartment.Substring(0, 2);
 
         List<LayoutControlItem> lcControls;
@@ -42,16 +42,16 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void EnabledController(bool _enable = true)
         {
-            cbbDept.Enabled = baseParent == null && _enable;
-            ckPaperType.Enabled = baseParent == null || baseParent.IsPaperType != true;
+            cbbDept.Enabled = parentData == null && _enable;
+            ckPaperType.Enabled = parentData?.IsPaperType != true;
         }
 
         private void IniControl()
         {
-            if (baseParent != null)
+            if (parentData != null)
             {
-                ckPaperType.Checked = baseParent.IsPaperType == true;
-                cbbDept.EditValue = baseParent.IdDept;
+                ckPaperType.Checked = parentData.IsPaperType == true;
+                cbbDept.EditValue = parentData.IdDept;
             }
 
             switch (eventInfo)
@@ -122,18 +122,18 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             switch (eventInfo)
             {
                 case EventFormInfo.Create:
-                    baseData = new dt201_Base();
+                    currentData = new dt201_Base();
                     break;
                 case EventFormInfo.Update:
 
-                    txbDocCode.EditValue = baseData.DocCode;
-                    txbDisplayName.EditValue = baseData.DisplayName;
-                    txbDisplayNameVN.EditValue = baseData.DisplayNameVN;
-                    txbArticles.EditValue = baseData.Articles;
-                    cbbDept.EditValue = baseData.IdDept;
-                    ckPaperType.Checked = baseData.IsPaperType == true;
-                    txbNotifyCycle.EditValue = baseData.NotifyCycle;
-                    cbbDocType.EditValue = baseData.DocType;
+                    txbDocCode.EditValue = currentData.DocCode;
+                    txbDisplayName.EditValue = currentData.DisplayName;
+                    txbDisplayNameVN.EditValue = currentData.DisplayNameVN;
+                    txbArticles.EditValue = currentData.Articles;
+                    cbbDept.EditValue = currentData.IdDept;
+                    ckPaperType.Checked = currentData.IsPaperType == true;
+                    txbNotifyCycle.EditValue = currentData.NotifyCycle;
+                    cbbDocType.EditValue = currentData.DocType;
 
                     break;
                 default:
@@ -160,25 +160,25 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             string msg = "";
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
             {
-                baseData.DocCode = txbDocCode.Text;
-                baseData.DisplayName = txbDisplayName.Text.Trim();
-                baseData.DisplayNameVN = txbDisplayNameVN.Text.Trim();
-                baseData.Articles = txbArticles.EditValue?.ToString() ?? "";
-                baseData.IdDept = cbbDept.EditValue.ToString();
-                baseData.IsPaperType = ckPaperType.Checked;
-                baseData.NotifyCycle = Convert.ToInt16(txbNotifyCycle.EditValue?.ToString() ?? "0");
-                baseData.DocType = cbbDocType.Text;
+                currentData.DocCode = txbDocCode.Text;
+                currentData.DisplayName = txbDisplayName.Text.Trim();
+                currentData.DisplayNameVN = txbDisplayNameVN.Text.Trim();
+                currentData.Articles = txbArticles.EditValue?.ToString() ?? "";
+                currentData.IdDept = cbbDept.EditValue.ToString();
+                currentData.IsPaperType = ckPaperType.Checked;
+                currentData.NotifyCycle = Convert.ToInt16(txbNotifyCycle.EditValue?.ToString() ?? "0");
+                currentData.DocType = cbbDocType.Text;
 
-                msg = $"{baseData.DocCode} {baseData.DisplayName}";
+                msg = $"{currentData.DocCode} {currentData.DisplayName}";
                 switch (eventInfo)
                 {
                     case EventFormInfo.Create:
-                        baseData.IdParent = baseParent?.Id ?? -1;
+                        currentData.IdParent = parentData?.Id ?? -1;
 
-                        result = dt201_BaseBUS.Instance.Add(baseData) > 0;
+                        result = dt201_BaseBUS.Instance.Add(currentData) > 0;
                         break;
                     case EventFormInfo.Update:
-                        result = dt201_BaseBUS.Instance.AddOrUpdate(baseData);
+                        result = dt201_BaseBUS.Instance.AddOrUpdate(currentData);
                         break;
                     default:
                         break;

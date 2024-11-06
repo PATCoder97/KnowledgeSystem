@@ -33,7 +33,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         DXMenuItem itemEditDoc;
         DXMenuItem itemApprovalHis;
 
-        public int idBase = -1;
+        public dt201_Base currentData = new dt201_Base();
+        public dt201_Base parentData = new dt201_Base();
+
+        int idBase = -1;
         dt201_Base baseData;
         bool IsDisable = false;
 
@@ -132,6 +135,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void f201_AuditDoc_Info_Load(object sender, EventArgs e)
         {
+            idBase = currentData.Id;
+
             gvData.ReadOnlyGridView();
             gvData.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
 
@@ -140,11 +145,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void gvData_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
         {
-            GridView view = sender as GridView;
-            var baseForm = (view.GetRow(view.FocusedRowHandle) as dynamic).data as dt201_Forms;
-
             if (e.HitInfo.InRowCell && e.HitInfo.InDataRow && !IsDisable)
             {
+                GridView view = sender as GridView;
+                var baseForm = (view.GetRow(view.FocusedRowHandle) as dynamic).data as dt201_Forms;
                 if (baseForm.IsProcessing != true)
                 {
                     e.Menu.Items.Add(itemEditDoc);
@@ -165,11 +169,13 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            f201_AddAttachment fAtt = new f201_AddAttachment();
-            fAtt.eventInfo = EventFormInfo.Create;
-            fAtt.formName = "新增表單";
-            fAtt.idBase = idBase;
-            //fAtt.isPaper = true;
+            f201_AddAttachment fAtt = new f201_AddAttachment()
+            {
+                eventInfo = EventFormInfo.Create,
+                formName = "表單",
+                currentData = currentData,
+                parentData = parentData
+            };
             fAtt.ShowDialog();
 
             LoadData();

@@ -39,18 +39,24 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         List<dt201_Base> baseDatas;
         BindingSource sourceData = new BindingSource();
-        dt201_Base nodeFocus;
+        //dt201_Base currentData;
         List<dm_Group> groups;
         List<dm_Departments> depts;
 
         DXMenuItem itemAddNode;
         DXMenuItem itemAddAtt;
-        DXMenuItem itemCopyNode;
         DXMenuItem itemDelNode;
         DXMenuItem itemEditNode;
         DXMenuItem itemAddVer;
         DXMenuItem itemDisable;
         DXMenuItem itemEnable;
+
+        TreeListNode currentNode;
+        TreeListNode parentNode;
+
+        dt201_Base currentData;
+        dt201_Base parentData;
+        List<dt201_Base> childrenDatas;
 
         DXMenuItem CreateMenuItem(string caption, EventHandler clickEvent, SvgImage svgImage)
         {
@@ -106,11 +112,20 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             itemAddNode = CreateMenuItem("新增下級", ItemAddNote_Click, TPSvgimages.Add);
             itemAddVer = CreateMenuItem("新增年版", ItemAddVer_Click, TPSvgimages.Add2);
             itemAddAtt = CreateMenuItem("新增表單", ItemAddAtt_Click, TPSvgimages.Attach);
-            itemCopyNode = CreateMenuItem("複製年版", ItemCopyNote_Click, TPSvgimages.Copy);
             itemDelNode = CreateMenuItem("刪除節點", ItemDeleteNote_Click, TPSvgimages.Close);
             itemEditNode = CreateMenuItem("編輯節點", ItemEditNode_Click, TPSvgimages.Edit);
             itemDisable = CreateMenuItem("停用節點", ItemDisable_Click, TPSvgimages.Disable);
             itemEnable = CreateMenuItem("啟用節點", ItemEnable_Click, TPSvgimages.Confirm);
+        }
+
+        private void GetFocusData()
+        {
+            TreeList treeList = tlsData;
+            currentNode = treeList.FocusedNode;
+            parentNode = currentNode.ParentNode;
+
+            currentData = (treeList.GetRow(currentNode.Id) as dynamic).data as dt201_Base;
+            parentData = parentNode != null ? (treeList.GetRow(parentNode.Id) as dynamic).data as dt201_Base : null;
         }
 
         private void ItemEnable_Click(object sender, EventArgs e)
@@ -175,9 +190,12 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             LoadData();
         }
 
+        // Sửa Node cho treelist
         private void ItemEditNode_Click(object sender, EventArgs e)
         {
-            if (nodeFocus.IsFinalNode == true)
+            GetFocusData();
+
+            if (currentData.IsFinalNode == true)
             {
                 var result = XtraInputBox.Show(new XtraInputBoxArgs
                 {
@@ -202,23 +220,30 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                     return;
                 }
 
-                nodeFocus.DisplayName = version;
-                dt201_BaseBUS.Instance.AddOrUpdate(nodeFocus);
+                currentData.DisplayName = version;
+                dt201_BaseBUS.Instance.AddOrUpdate(currentData);
                 LoadData();
                 return;
             }
 
-            f201_AddNode fAdd = new f201_AddNode();
-            fAdd.eventInfo = EventFormInfo.Update;
-            fAdd.formName = "文件";
-            fAdd.baseData = nodeFocus;
+            f201_AddNode fAdd = new f201_AddNode()
+            {
+                eventInfo = EventFormInfo.Update,
+                formName = "文件",
+                currentData = currentData,
+                parentData = parentData
+            };
+
             fAdd.ShowDialog();
 
             LoadData();
         }
 
+        // Thêm phiên bản theo năm
         private void ItemAddVer_Click(object sender, EventArgs e)
         {
+            GetFocusData();
+
             var result = XtraInputBox.Show(new XtraInputBoxArgs
             {
                 Caption = TPConfigs.SoftNameTW,
@@ -232,7 +257,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             if (string.IsNullOrEmpty(result?.ToString())) return;
             string version = result.ToString();
 
-            bool IsExist = baseDatas.Any(r => r.IdParent == nodeFocus.Id && r.DisplayName == version);
+            bool IsExist = baseDatas.Any(r => r.IdParent == currentData.Id && r.DisplayName == version);
             if (IsExist)
             {
                 MsgTP.MsgError("年版已存在！");
@@ -241,11 +266,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             dt201_Base baseVer = new dt201_Base()
             {
-                IdParent = nodeFocus.Id,
+                IdParent = currentData.Id,
                 DocCode = "",
                 DisplayName = version,
                 IsFinalNode = true,
-                IdDept = nodeFocus.IdDept,
+                IdDept = currentData.IdDept,
             };
 
             dt201_BaseBUS.Instance.Add(baseVer);
@@ -253,6 +278,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             LoadData();
         }
 
+        // Xóa node
         private void ItemDeleteNote_Click(object sender, EventArgs e)
         {
             var result = XtraInputBox.Show(new XtraInputBoxArgs
@@ -267,92 +293,47 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             if (string.IsNullOrEmpty(result) || result != TPConfigs.LoginUser.Id.ToUpper()) return;
 
-            TreeListNode focusedNode = tlsData.FocusedNode;
-            dt201_Base rowData = (tlsData.GetRow(focusedNode.Id) as dynamic).data as dt201_Base;
-
-            // Lấy tất cả các node con
-            List<dt201_Base> allChildren = dt201_BaseBUS.Instance.GetAllChildByParentId(rowData.Id);
+            GetFocusData();
+            childrenDatas = dt201_BaseBUS.Instance.GetAllChildByParentId(currentData.Id);
 
             // Cập nhật thuộc tính IsDisable của tất cả các phần tử trong danh sách
-            allChildren.ForEach(item =>
+            childrenDatas.ForEach(item =>
             {
                 item.IsDel = true;
                 item.DelTime = DateTime.Now;
             });
 
-            dt201_BaseBUS.Instance.UpdateRange(allChildren);
+            dt201_BaseBUS.Instance.UpdateRange(childrenDatas);
 
             tlsData.ClearNodes();
 
             LoadData();
         }
 
-        private void ItemCopyNote_Click(object sender, EventArgs e)
-        {
-            var result = XtraInputBox.Show(new XtraInputBoxArgs
-            {
-                Caption = TPConfigs.SoftNameTW,
-                Prompt = "輸入年版名稱",
-                DefaultButtonIndex = 0,
-                Editor = new TextEdit() { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) },
-                DefaultResponse = ""
-            });
-
-            if (string.IsNullOrEmpty(result?.ToString())) return;
-            string version = result.ToString();
-
-            TreeListNode parentNode = tlsData.FocusedNode.ParentNode;
-            dt201_Base parentData = (tlsData.GetRow(parentNode.Id) as dynamic).data as dt201_Base;
-
-            bool IsExist = baseDatas.Any(r => r.IdParent == parentData.Id && r.DisplayName == version);
-            if (IsExist)
-            {
-                MsgTP.MsgError("年版已存在！");
-                return;
-            }
-
-            dt201_Base baseVer = new dt201_Base()
-            {
-                IdParent = parentData.Id,
-                DocCode = "",
-                DisplayName = version,
-                IsFinalNode = true,
-                IdDept = parentData.IdDept,
-            };
-            int idBaseNew = dt201_BaseBUS.Instance.Add(baseVer);
-
-            var formsByBase = dt201_FormsBUS.Instance.GetListByIdBase(nodeFocus.Id).Select(r => new dt201_Forms()
-            {
-                IdBase = idBaseNew,
-                Code = r.Code,
-                DisplayName = r.DisplayName,
-                UploadTime = DateTime.Now,
-                UploadUser = TPConfigs.LoginUser.Id,
-
-            }).ToList();
-
-            dt201_FormsBUS.Instance.AddRange(formsByBase);
-
-            LoadData();
-        }
-
+        // Thêm biểu đơn
         private void ItemAddAtt_Click(object sender, EventArgs e)
         {
-            f201_AddAttachment fAtt = new f201_AddAttachment();
-            fAtt.eventInfo = EventFormInfo.Create;
-            fAtt.formName = "表單";
-            fAtt.idBase = nodeFocus.Id;
+            GetFocusData();
+
+            f201_AddAttachment fAtt = new f201_AddAttachment()
+            {
+                eventInfo = EventFormInfo.Create,
+                formName = "表單",
+                currentData = currentData,
+                parentData = parentData
+            };
             fAtt.ShowDialog();
 
             LoadData();
         }
 
+        // Thêm Node
         private void ItemAddNote_Click(object sender, EventArgs e)
         {
             f201_AddNode fAdd = new f201_AddNode();
             fAdd.eventInfo = EventFormInfo.Create;
             fAdd.formName = "文件";
-            fAdd.baseParent = nodeFocus;
+            fAdd.parentData = currentData;
             fAdd.ShowDialog();
 
             LoadData();
@@ -403,14 +384,31 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void tlsData_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
         {
+            // Dịch và xóa các mục menu
+            var translations = new Dictionary<string, string> { { "Full Expand", "完全展開" }, { "Full Collapse", "完全折疊" } };
+            List<DXMenuItem> itemDefault = new List<DXMenuItem>();
+            foreach (var item in e.Menu.Items.ToList())
+            {
+                // Dịch các mục "Full Expand" và "Full Collapse"
+                if (translations.ContainsKey(item.Caption))
+                {
+                    item.Caption = translations[item.Caption];
+                    itemDefault.Add(item);
+                }
+                // Xóa các mục "Expand" và "Collapse"
+                else if (item.Caption == "Expand" || item.Caption == "Collapse")
+                {
+                    e.Menu.Items.Remove(item);
+                }
+            }
+
             TreeList treeList = sender as TreeList;
             if (e.HitInfo?.InRowCell != true || e.HitInfo.Node.Id < 0) return;
 
+            GetFocusData();
+
             // Get current node and data
-            TreeListNode currentNode = treeList.FocusedNode;
-            dt201_Base currentData = (treeList.GetRow(currentNode.Id) as dynamic)?.data as dt201_Base;
             if (currentData == null) return;
-            nodeFocus = currentData;
 
             // Gather parent node and parent data
             List<dt201_Base> parentDatas = new List<dt201_Base>();
@@ -477,6 +475,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 return;
             }
 
+
+
             // Handle final node scenario
             if (currentData.IsFinalNode == true)
             {
@@ -485,39 +485,31 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                     var nodes = dt201_BaseBUS.Instance.GetListByParentId(parentData.Id);
                     if (nodes.Max(r => r.Id) == currentData.Id)
                     {
-                        //itemAddAtt.BeginGroup = true;
                         e.Menu.Items.Add(itemAddAtt);
                         e.Menu.Items.Add(itemEditNode);
-                        //itemDelNode.BeginGroup = true;
                         e.Menu.Items.Add(itemDelNode);
                     }
                 }
             }
             else if (isRootFinalNode)
             {
-                //itemAddVer.BeginGroup = true;
                 e.Menu.Items.Add(itemAddVer);
                 e.Menu.Items.Add(itemEditNode);
-                //itemDelNode.BeginGroup = true;
                 e.Menu.Items.Add(itemDelNode);
                 e.Menu.Items.Add(itemDisable);
             }
             else if (haveChildren)
             {
-                //itemAddNode.BeginGroup = true;
                 e.Menu.Items.Add(itemAddNode);
                 e.Menu.Items.Add(itemEditNode);
-                //itemDelNode.BeginGroup = true;
                 e.Menu.Items.Add(itemDelNode);
                 e.Menu.Items.Add(itemDisable);
             }
             else
             {
-                //itemAddVer.BeginGroup = true;
                 e.Menu.Items.Add(itemAddVer);
                 e.Menu.Items.Add(itemAddNode);
                 e.Menu.Items.Add(itemEditNode);
-                //itemDelNode.BeginGroup = true;
                 e.Menu.Items.Add(itemDelNode);
                 e.Menu.Items.Add(itemDisable);
             }
@@ -526,25 +518,28 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         private void tlsData_DoubleClick(object sender, EventArgs e)
         {
             TreeList treeList = sender as TreeList;
-            TreeListNode focusedNode = treeList.FocusedNode;
             TreeListHitInfo hitInfo = treeList.CalcHitInfo(treeList.PointToClient(MousePosition));
+            GetFocusData();
 
-            if (focusedNode != null && focusedNode.Nodes != null && hitInfo.HitInfoType == HitInfoType.Cell)
+            if (currentNode != null && currentNode.Nodes != null && hitInfo.HitInfoType == HitInfoType.Cell)
             {
-                dt201_Base rowData = (treeList.GetRow(focusedNode.Id) as dynamic).data as dt201_Base;
-
-                if (rowData.IsFinalNode != true)
+                if (currentData.IsFinalNode != true)
                 {
                     treeList.FocusedNode.Expanded = !treeList.FocusedNode.Expanded;
                     return;
                 }
 
-                f201_AuditDoc_Info fInfo = new f201_AuditDoc_Info() { idBase = rowData.Id };
-                fInfo.Text = rowData.DisplayName;
+                f201_AuditDoc_Info fInfo = new f201_AuditDoc_Info()
+                {
+                    Text = currentData.DisplayName,
+                    currentData = currentData,
+                    parentData = parentData
+                };
                 fInfo.ShowDialog();
             }
         }
 
+        // Thêm Node
         private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             f201_AddNode fAdd = new f201_AddNode();

@@ -39,12 +39,15 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         public EventFormInfo eventInfo = EventFormInfo.Create;
         public string formName = "";
-        public int idBase = -1;
-        public bool isPaper = false;
         public dt201_Forms baseForm = null;
         public List<dt201_Progress> baseProgresses;
+        public dt201_Base currentData = new dt201_Base();
+        public dt201_Base parentData = new dt201_Base();
+        public int idBase = -1;
+
         string idDept2word = TPConfigs.LoginUser.IdDepartment.Substring(0, 2);
         string filterAtt = TPConfigs.FilterFile;
+        bool? IsPaper = false;
 
         List<dm_User> users;
         List<dm_JobTitle> jobTitles;
@@ -80,7 +83,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             txbAtt.Enabled = _enable;
         }
 
-        private void LockControl()
+        private void IniControl()
         {
             switch (eventInfo)
             {
@@ -129,9 +132,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             lcProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             Size = new System.Drawing.Size(Size.Width, Size.Height - 207);
 
-            lcSignOrPaper.Enabled = !isPaper;
+            IsPaper = parentData.IsPaperType;
+            idBase = currentData.Id;
+            lcSignOrPaper.Enabled = IsPaper != true;
 
-            LockControl();
+            IniControl();
 
             users = dm_UserBUS.Instance.GetListByDept(idDept2word).Where(r => r.Status == 0).ToList();
             jobTitles = dm_JobTitleBUS.Instance.GetList();
