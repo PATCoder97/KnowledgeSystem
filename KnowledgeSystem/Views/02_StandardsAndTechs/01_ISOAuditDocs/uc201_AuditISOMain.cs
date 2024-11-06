@@ -144,16 +144,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
             {
-                TreeListNode focusedNode = tlsData.FocusedNode;
-                dt201_Base rowData = (tlsData.GetRow(focusedNode.Id) as dynamic).data as dt201_Base;
-
-                // Lấy tất cả các node con
-                List<dt201_Base> allChildren = dt201_BaseBUS.Instance.GetAllChildByParentId(rowData.Id);
-
-                // Cập nhật thuộc tính IsDisable của tất cả các phần tử trong danh sách
-                allChildren.ForEach(item => item.IsDisable = false);
-
-                dt201_BaseBUS.Instance.UpdateRange(allChildren);
+                currentData.IsDisable = false;
+                dt201_BaseBUS.Instance.AddOrUpdate(currentData);
             }
 
             LoadData();
@@ -175,16 +167,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
             {
-                TreeListNode focusedNode = tlsData.FocusedNode;
-                dt201_Base rowData = (tlsData.GetRow(focusedNode.Id) as dynamic).data as dt201_Base;
-
-                // Lấy tất cả các node con
-                List<dt201_Base> allChildren = dt201_BaseBUS.Instance.GetAllChildByParentId(rowData.Id);
-
-                // Cập nhật thuộc tính IsDisable của tất cả các phần tử trong danh sách
-                allChildren.ForEach(item => item.IsDisable = true);
-
-                dt201_BaseBUS.Instance.UpdateRange(allChildren);
+                currentData.IsDisable = true;
+                dt201_BaseBUS.Instance.AddOrUpdate(currentData);
             }
 
             LoadData();
@@ -412,7 +396,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             // Gather parent node and parent data
             List<dt201_Base> parentDatas = new List<dt201_Base>();
-            TreeListNode parentNode = currentNode.ParentNode;
 
             while (parentNode != null)
             {
