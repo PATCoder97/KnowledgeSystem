@@ -357,13 +357,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             var deptsCbb = (from data in depts
                             join grp in groups on data.Id equals grp.IdDept
-                            select new CheckedListBoxItem() { Description = data.DisplayName, Value = data.Id, CheckState = CheckState.Checked }).ToArray();
+                            select new CheckedListBoxItem() { Description = data.Id, Value = data.Id, CheckState = CheckState.Checked }).ToArray();
 
             cbbDepts.Items.AddRange(deptsCbb);
 
             LoadData();
-
-            var aa = this.Text;
         }
 
         private void tlsData_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)

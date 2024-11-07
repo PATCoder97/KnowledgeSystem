@@ -56,11 +56,11 @@
             this.txbAtt = new DevExpress.XtraEditors.ButtonEdit();
             this.txbDisplayNameVN = new DevExpress.XtraEditors.TextEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcDocCode = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcDisplayName = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcAtt = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcProgress = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcDisplayNameVN = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcSignOrPaper = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcDefaultProgress = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
@@ -77,11 +77,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.txbAtt.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDisplayNameVN.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcDocCode)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcDisplayName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcAtt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcProgress)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcDisplayNameVN)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcSignOrPaper)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDefaultProgress)).BeginInit();
             this.SuspendLayout();
@@ -435,65 +435,65 @@
             this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             this.Root.GroupBordersVisible = false;
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem9,
-            this.layoutControlItem8,
-            this.layoutControlItem1,
+            this.lcDocCode,
+            this.lcDisplayName,
+            this.lcAtt,
             this.lcProgress,
-            this.layoutControlItem4,
+            this.lcDisplayNameVN,
             this.lcSignOrPaper,
             this.lcDefaultProgress});
             this.Root.Name = "Root";
             this.Root.Size = new System.Drawing.Size(652, 413);
             this.Root.TextVisible = false;
             // 
-            // layoutControlItem9
+            // lcDocCode
             // 
-            this.layoutControlItem9.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.layoutControlItem9.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
-            this.layoutControlItem9.AppearanceItemCaption.Options.UseFont = true;
-            this.layoutControlItem9.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem9.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
-            this.layoutControlItem9.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
-            this.layoutControlItem9.Control = this.txbDocCode;
-            this.layoutControlItem9.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
-            this.layoutControlItem9.CustomizationFormText = "編碼";
-            this.layoutControlItem9.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem9.Name = "layoutControlItem9";
-            this.layoutControlItem9.Size = new System.Drawing.Size(632, 36);
-            this.layoutControlItem9.Text = "表單編碼";
-            this.layoutControlItem9.TextSize = new System.Drawing.Size(76, 24);
+            this.lcDocCode.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lcDocCode.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.lcDocCode.AppearanceItemCaption.Options.UseFont = true;
+            this.lcDocCode.AppearanceItemCaption.Options.UseForeColor = true;
+            this.lcDocCode.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
+            this.lcDocCode.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.lcDocCode.Control = this.txbDocCode;
+            this.lcDocCode.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.lcDocCode.CustomizationFormText = "編碼";
+            this.lcDocCode.Location = new System.Drawing.Point(0, 0);
+            this.lcDocCode.Name = "lcDocCode";
+            this.lcDocCode.Size = new System.Drawing.Size(632, 36);
+            this.lcDocCode.Text = "表單編碼";
+            this.lcDocCode.TextSize = new System.Drawing.Size(76, 24);
             // 
-            // layoutControlItem8
+            // lcDisplayName
             // 
-            this.layoutControlItem8.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.layoutControlItem8.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
-            this.layoutControlItem8.AppearanceItemCaption.Options.UseFont = true;
-            this.layoutControlItem8.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem8.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
-            this.layoutControlItem8.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
-            this.layoutControlItem8.Control = this.txbDisplayName;
-            this.layoutControlItem8.Location = new System.Drawing.Point(0, 36);
-            this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(632, 36);
-            this.layoutControlItem8.Text = "中文名稱";
-            this.layoutControlItem8.TextSize = new System.Drawing.Size(76, 24);
+            this.lcDisplayName.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lcDisplayName.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.lcDisplayName.AppearanceItemCaption.Options.UseFont = true;
+            this.lcDisplayName.AppearanceItemCaption.Options.UseForeColor = true;
+            this.lcDisplayName.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
+            this.lcDisplayName.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.lcDisplayName.Control = this.txbDisplayName;
+            this.lcDisplayName.Location = new System.Drawing.Point(0, 36);
+            this.lcDisplayName.Name = "lcDisplayName";
+            this.lcDisplayName.Size = new System.Drawing.Size(632, 36);
+            this.lcDisplayName.Text = "中文名稱";
+            this.lcDisplayName.TextSize = new System.Drawing.Size(76, 24);
             // 
-            // layoutControlItem1
+            // lcAtt
             // 
-            this.layoutControlItem1.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.layoutControlItem1.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
-            this.layoutControlItem1.AppearanceItemCaption.Options.UseFont = true;
-            this.layoutControlItem1.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem1.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
-            this.layoutControlItem1.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
-            this.layoutControlItem1.Control = this.txbAtt;
-            this.layoutControlItem1.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
-            this.layoutControlItem1.CustomizationFormText = "條文";
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 108);
-            this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(632, 36);
-            this.layoutControlItem1.Text = "檔案";
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(76, 24);
+            this.lcAtt.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lcAtt.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.lcAtt.AppearanceItemCaption.Options.UseFont = true;
+            this.lcAtt.AppearanceItemCaption.Options.UseForeColor = true;
+            this.lcAtt.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
+            this.lcAtt.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.lcAtt.Control = this.txbAtt;
+            this.lcAtt.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.lcAtt.CustomizationFormText = "條文";
+            this.lcAtt.Location = new System.Drawing.Point(0, 108);
+            this.lcAtt.Name = "lcAtt";
+            this.lcAtt.Size = new System.Drawing.Size(632, 36);
+            this.lcAtt.Text = "檔案";
+            this.lcAtt.TextSize = new System.Drawing.Size(76, 24);
             // 
             // lcProgress
             // 
@@ -504,22 +504,22 @@
             this.lcProgress.TextSize = new System.Drawing.Size(0, 0);
             this.lcProgress.TextVisible = false;
             // 
-            // layoutControlItem4
+            // lcDisplayNameVN
             // 
-            this.layoutControlItem4.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.layoutControlItem4.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
-            this.layoutControlItem4.AppearanceItemCaption.Options.UseFont = true;
-            this.layoutControlItem4.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem4.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
-            this.layoutControlItem4.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
-            this.layoutControlItem4.Control = this.txbDisplayNameVN;
-            this.layoutControlItem4.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
-            this.layoutControlItem4.CustomizationFormText = "中文名稱";
-            this.layoutControlItem4.Location = new System.Drawing.Point(0, 72);
-            this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(632, 36);
-            this.layoutControlItem4.Text = "越文名稱";
-            this.layoutControlItem4.TextSize = new System.Drawing.Size(76, 24);
+            this.lcDisplayNameVN.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lcDisplayNameVN.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.lcDisplayNameVN.AppearanceItemCaption.Options.UseFont = true;
+            this.lcDisplayNameVN.AppearanceItemCaption.Options.UseForeColor = true;
+            this.lcDisplayNameVN.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
+            this.lcDisplayNameVN.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.lcDisplayNameVN.Control = this.txbDisplayNameVN;
+            this.lcDisplayNameVN.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.lcDisplayNameVN.CustomizationFormText = "中文名稱";
+            this.lcDisplayNameVN.Location = new System.Drawing.Point(0, 72);
+            this.lcDisplayNameVN.Name = "lcDisplayNameVN";
+            this.lcDisplayNameVN.Size = new System.Drawing.Size(632, 36);
+            this.lcDisplayNameVN.Text = "越文名稱";
+            this.lcDisplayNameVN.TextSize = new System.Drawing.Size(76, 24);
             // 
             // lcSignOrPaper
             // 
@@ -576,11 +576,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.txbAtt.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDisplayNameVN.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcDocCode)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcDisplayName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcAtt)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcProgress)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcDisplayNameVN)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcSignOrPaper)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDefaultProgress)).EndInit();
             this.ResumeLayout(false);
@@ -594,9 +594,9 @@
         private DevExpress.XtraEditors.TextEdit txbDisplayName;
         private DevExpress.XtraEditors.TextEdit txbDocCode;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem9;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraLayout.LayoutControlItem lcDocCode;
+        private DevExpress.XtraLayout.LayoutControlItem lcDisplayName;
+        private DevExpress.XtraLayout.LayoutControlItem lcAtt;
         private DevExpress.XtraBars.BarManager barManagerTP;
         private DevExpress.XtraBars.Bar bar2;
         private DevExpress.XtraBars.BarButtonItem btnEdit;
@@ -618,7 +618,7 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit lookupRole;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
         private DevExpress.XtraEditors.TextEdit txbDisplayNameVN;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
+        private DevExpress.XtraLayout.LayoutControlItem lcDisplayNameVN;
         private DevExpress.XtraEditors.RadioGroup ckSignOrPaper;
         private DevExpress.XtraLayout.LayoutControlItem lcSignOrPaper;
         private DevExpress.XtraEditors.SimpleButton btnDefaultProgress;

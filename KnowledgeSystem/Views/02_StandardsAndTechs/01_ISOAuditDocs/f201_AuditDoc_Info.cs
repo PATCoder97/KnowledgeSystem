@@ -119,7 +119,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             // Kiểm tra xem danh sách file có quyền CRUD không
             IsDisable = baseData?.IsDisable == true || baseData.Id != allchildren.Last().Id;
 
-            var displayDatas = (from data in dt201_FormsBUS.Instance.GetListByIdBase(idBase)
+            var displayDatas = (from data in dt201_FormsBUS.Instance.GetListByBaseId(idBase)
                                 join usr in dm_UserBUS.Instance.GetList() on data.UploadUser equals usr.Id
                                 let UsrUploadName = $"{usr.Id.Substring(5)} {usr.DisplayName}"
                                 select new { data, usr, UsrUploadName }).ToList();

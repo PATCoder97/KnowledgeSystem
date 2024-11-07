@@ -301,7 +301,7 @@
             // tlsColDept
             // 
             this.tlsColDept.Caption = "實驗室";
-            this.tlsColDept.FieldName = "dept.DisplayName";
+            this.tlsColDept.FieldName = "data.IdDept";
             this.tlsColDept.Name = "tlsColDept";
             this.tlsColDept.Visible = true;
             this.tlsColDept.VisibleIndex = 6;
