@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc201_ExpiredDocs));
             this.gvDetail = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gColId = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -38,7 +38,7 @@
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColYear = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColBaseId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcData = new DevExpress.XtraGrid.GridControl();
             this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -87,7 +87,7 @@
             this.gridColumn7,
             this.gridColumn8,
             this.gridColumn9,
-            this.gridColumn6,
+            this.gColYear,
             this.gColBaseId});
             this.gvDetail.GridControl = this.gcData;
             this.gvDetail.Name = "gvDetail";
@@ -145,15 +145,15 @@
             this.gridColumn9.Visible = true;
             this.gridColumn9.VisibleIndex = 5;
             // 
-            // gridColumn6
+            // gColYear
             // 
-            this.gridColumn6.AppearanceCell.Options.UseTextOptions = true;
-            this.gridColumn6.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn6.Caption = "年版";
-            this.gridColumn6.FieldName = "Year";
-            this.gridColumn6.Name = "gridColumn6";
-            this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 0;
+            this.gColYear.AppearanceCell.Options.UseTextOptions = true;
+            this.gColYear.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gColYear.Caption = "年版";
+            this.gColYear.FieldName = "Year";
+            this.gColYear.Name = "gColYear";
+            this.gColYear.Visible = true;
+            this.gColYear.VisibleIndex = 0;
             // 
             // gColBaseId
             // 
@@ -171,10 +171,10 @@
             this.gcData.EmbeddedNavigator.Buttons.Edit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.EndEdit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.Remove.Visible = false;
-            gridLevelNode1.LevelTemplate = this.gvDetail;
-            gridLevelNode1.RelationName = "detailData";
+            gridLevelNode2.LevelTemplate = this.gvDetail;
+            gridLevelNode2.RelationName = "detailData";
             this.gcData.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode1});
+            gridLevelNode2});
             this.gcData.Location = new System.Drawing.Point(12, 12);
             this.gcData.MainView = this.gvData;
             this.gcData.Name = "gcData";
@@ -443,7 +443,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
+        private DevExpress.XtraGrid.Columns.GridColumn gColYear;
         private DevExpress.XtraGrid.Columns.GridColumn gColBaseId;
     }
 }

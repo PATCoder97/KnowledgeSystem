@@ -141,9 +141,29 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         private void gvDetail_DoubleClick(object sender, EventArgs e)
         {
             GridView view = sender as GridView;
-            int idForm = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColBaseId));
+            int idBase = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColBaseId));
+            var currentData = dt201_BaseBUS.Instance.GetItemById(idBase);
 
-            var currentData = dt201_BaseBUS.Instance.GetItemById(idForm);
+            int year = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColYear));
+            if (year < DateTime.Today.Year)
+            {
+                if (XtraMessageBox.Show("您正在更新文件至舊年版，系統將自動創建今年的版本。點擊「是」以繼續。如果您想更新至舊年版，請進入「稽核文件」手動更新。", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                    return;
+
+                var nextYear = new dt201_Base()
+                {
+                    DisplayName = DateTime.Today.Year.ToString(),
+                    IdParent = currentData.IdParent,
+                    DocCode = currentData.DocCode,
+                    IdDept = currentData.IdDept,
+                    IsFinalNode = currentData.IsFinalNode,
+                    IsPaperType = currentData.IsPaperType,
+                };
+
+                idBase = dt201_BaseBUS.Instance.Add(nextYear);
+            }
+
+            currentData = dt201_BaseBUS.Instance.GetItemById(idBase);
             var parentData = dt201_BaseBUS.Instance.GetItemById(currentData.IdParent);
 
             f201_AddAttachment fAtt = new f201_AddAttachment()
