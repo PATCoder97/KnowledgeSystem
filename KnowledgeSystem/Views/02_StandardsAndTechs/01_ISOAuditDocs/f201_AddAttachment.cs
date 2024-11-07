@@ -26,6 +26,8 @@ using DocumentFormat.OpenXml.Spreadsheet;
 using DevExpress.XtraPivotGrid.Data;
 using DevExpress.XtraGrid;
 using KnowledgeSystem.Views._00_Generals;
+using Org.BouncyCastle.Asn1.Crmf;
+using DevExpress.XtraLayout;
 
 namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 {
@@ -48,6 +50,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         string idDept2word = TPConfigs.LoginUser.IdDepartment.Substring(0, 2);
         string filterAtt = TPConfigs.FilterFile;
         bool? IsPaper = false;
+
+        List<LayoutControlItem> lcControls;
+        List<LayoutControlItem> lcImpControls;
 
         List<dm_User> users;
         List<dm_JobTitle> jobTitles;
@@ -98,6 +103,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 case EventFormInfo.Update:
                     Text = $"更新{formName}";
 
+                    lcImpControls.Remove(lcAtt);
+
                     btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                     btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
@@ -123,10 +130,37 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 default:
                     break;
             }
+
+            foreach (var item in lcControls)
+            {
+                string colorHex = item.Control.Enabled ? "000000" : "000000";
+                item.Text = item.Text.Replace("000000", colorHex);
+            }
+
+            // Các thông tin phải điền có thêm dấu * màu đỏ
+            foreach (var item in lcImpControls)
+            {
+                if (item.Control.Enabled)
+                {
+                    item.Text += "<color=red>*</color>";
+                }
+                else
+                {
+                    item.Text = item.Text.Replace("<color=red>*</color>", "");
+                }
+            }
         }
 
         private void f201_AddAttachment_Load(object sender, EventArgs e)
         {
+            lcControls = new List<LayoutControlItem>() { lcDocCode, lcDisplayName, lcDisplayNameVN, lcAtt };
+            lcImpControls = new List<LayoutControlItem>() { lcDisplayName, lcDisplayNameVN, lcAtt };
+            foreach (var item in lcControls)
+            {
+                item.AllowHtmlStringInCaption = true;
+                item.Text = $"<color=#000000>{item.Text}</color>";
+            }
+
             // Ẩn lưu trình trình ký
             lcDefaultProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             lcProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
@@ -203,6 +237,19 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         {
             // Move focus away from the grid to update source
             gvProgress.FocusedRowHandle = GridControl.AutoFilterRowHandle;
+
+            // Kiểm tra xem đã điền đầy đủ thông tin yêu cầu hay chưa
+            bool IsValidate = true;
+            foreach (var item in lcImpControls)
+            {
+                if (string.IsNullOrEmpty(item.Control.Text)) IsValidate = false;
+            }
+
+            if (!IsValidate)
+            {
+                XtraMessageBox.Show("請填寫所有重要資訊！", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             // Get form inputs
             string code = txbDocCode.Text.Trim();

@@ -88,13 +88,29 @@ namespace BusinessLayer
             }
         }
 
-        public List<dt201_Forms> GetListByIdBase(int idBase)
+        public List<dt201_Forms> GetListByBaseId(int baseId)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dt201_Forms.Where(r => r.IdBase == idBase && r.IsDel != true).ToList();
+                    return _context.dt201_Forms.Where(r => r.IdBase == baseId && r.IsDel != true).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
+        public List<dt201_Forms> GetListByBaseIds(List<int> baseIds)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt201_Forms.Where(r => baseIds.Contains(r.IdBase) && r.IsDel != true).ToList();
                 }
             }
             catch (Exception ex)

@@ -93,8 +93,8 @@ namespace KnowledgeSystem.Views._00_Generals
                 accordion.Appearance.Default.Font = fontTW14;
 
                 accordion.Appearance.Normal.ForeColor = Color.Black;
-                accordion.Appearance.Hovered.ForeColor = Color.OrangeRed;
-                accordion.Appearance.Pressed.ForeColor = Color.OrangeRed;
+                accordion.Appearance.Hovered.ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical;
+                accordion.Appearance.Pressed.ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical;
 
                 accordion.Hint = item.DisplayName;
 
@@ -116,9 +116,9 @@ namespace KnowledgeSystem.Views._00_Generals
                         accordionChild.Style = ElementStyle.Item;
                         accordionChild.Appearance.Default.Font = fontTW14;
 
-                        accordionChild.Appearance.Normal.ForeColor = Color.Blue;
-                        accordionChild.Appearance.Hovered.ForeColor = Color.OrangeRed;
-                        accordionChild.Appearance.Pressed.ForeColor = Color.Red;
+                        accordionChild.Appearance.Normal.ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Hyperlink;
+                        accordionChild.Appearance.Hovered.ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical;
+                        accordionChild.Appearance.Pressed.ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical;
 
                         accordionChild.Hint = child.DisplayName;
                         accordionChild.Click += new EventHandler(accordionElement_Click);
@@ -139,7 +139,7 @@ namespace KnowledgeSystem.Views._00_Generals
         private void accordionElement_Click(object sender, EventArgs e)
         {
             AccordionControlElement buttonAuto = sender as AccordionControlElement;
-            OpenForm(buttonAuto.Name.Replace("name_", ""),buttonAuto.Text);
+            OpenForm(buttonAuto.Name.Replace("name_", ""), buttonAuto.Text);
         }
 
         private void f00_FluentFrame_Shown(object sender, EventArgs e)
