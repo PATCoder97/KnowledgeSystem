@@ -2,6 +2,7 @@
 using DataAccessLayer;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
+using DocumentFormat.OpenXml.Bibliography;
 using iTextSharp.text.pdf;
 using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._00_Generals;
@@ -15,6 +16,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static DevExpress.Xpo.Helpers.AssociatedCollectionCriteriaHelper;
 
 namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 {
@@ -215,7 +217,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void btnApproval_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            // kiểm tra xem đã xử lý hết các file chưa
+            // Kiểm tra xem đã xử lý hết các file chưa
             bool validate = string.IsNullOrEmpty(attachment.Desc);
             if (validate)
             {
@@ -223,6 +225,21 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 MsgTP.MsgShowInfomation($"<font='Microsoft JhengHei UI' size=14>{msg}</font>");
                 return;
             }
+
+            var editor = new DateTimeOffsetEdit { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) };
+            editor.Properties.MaskSettings.Set("mask", "yyyy/MM/dd HH:mm");
+            var result = XtraInputBox.Show(new XtraInputBoxArgs
+            {
+                Caption = TPConfigs.SoftNameTW,
+                AllowHtmlText = DevExpress.Utils.DefaultBoolean.True,
+                Prompt = "<font='Microsoft JhengHei UI' size=14>輸入核准時間</font>",
+                Editor = editor,
+                DefaultButtonIndex = 0,
+                DefaultResponse = DateTime.Now
+            });
+
+            if (string.IsNullOrEmpty(result?.ToString())) return;
+            DateTime respTime = Convert.ToDateTime(result.ToString());
 
             // Các bước trước nếu chưa gửi note thì khỏi gửi luôn
             if (IsLastStep)
@@ -240,26 +257,15 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             {
                 IdForm = idBase,
                 IdUsr = TPConfigs.LoginUser.Id,
-                RespTime = DateTime.Now,
+                RespTime = respTime,
                 Desc = "簽名"
             };
-
             dt201_ProgInfoBUS.Instance.Add(info);
 
             var baseData = dt201_FormsBUS.Instance.GetItemById(idBase);
             baseData.NextStepProg = nextStepProg;
 
             dm_AttachmentBUS.Instance.AddOrUpdate(attachment.BaseAtt);
-
-            //if (!string.IsNullOrEmpty(attachment.EncryptionName))
-            //{
-            //    var att = dm_AttachmentBUS.Instance.GetItemById(item.BaseAtt.IdAtt);
-            //    att.EncryptionName = item.EncryptName;
-            //}
-            //else
-            //{
-            //    dt306_BaseAttsBUS.Instance.AddOrUpdate(attachment.BaseAtt);
-            //}
 
             if (IsLastStep)
             {
@@ -299,23 +305,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             dt201_FormsBUS.Instance.AddOrUpdate(baseData);
 
-            //// Đưa tất cả các file ra ngoài folder để sau này xem lại vì sao bị trả về
-            //foreach (var item in baseAtts)
-            //{
-            //    item.UsrCancel = TPConfigs.LoginUser.Id;
-            //    dt306_BaseAttsBUS.Instance.AddOrUpdate(attachment.BaseAtt);
-            //}
-
-            //var allAtts = dt306_BaseAttsBUS.Instance.GetListByIdBase(idBase);
-            //foreach (var item in allAtts)
-            //{
-            //    var att = dm_AttachmentBUS.Instance.GetItemById(item.IdAtt);
-            //    string sourceFile = Path.Combine(TPConfigs.Folder306, idBase.ToString(), att.EncryptionName);
-            //    string destFile = Path.Combine(TPConfigs.Folder306, att.EncryptionName);
-
-            //    File.Copy(sourceFile, destFile, true);
-            //}
-
             // Các bước trước nếu chưa gửi note thì khỏi gửi luôn
             var progInfoSendNote = dt201_ProgInfoBUS.Instance.GetListByIdForm(idBase)
                 .Where(r => string.IsNullOrEmpty(r.SendNoteTime.ToString())).ToList();
@@ -350,6 +339,21 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 return;
             }
 
+            var editor = new DateTimeOffsetEdit { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) };
+            editor.Properties.MaskSettings.Set("mask", "yyyy/MM/dd HH:mm");
+            var result = XtraInputBox.Show(new XtraInputBoxArgs
+            {
+                Caption = TPConfigs.SoftNameTW,
+                AllowHtmlText = DevExpress.Utils.DefaultBoolean.True,
+                Prompt = "<font='Microsoft JhengHei UI' size=14>輸入核准時間</font>",
+                Editor = editor,
+                DefaultButtonIndex = 0,
+                DefaultResponse = DateTime.Now
+            });
+
+            if (string.IsNullOrEmpty(result?.ToString())) return;
+            DateTime respTime = Convert.ToDateTime(result.ToString());
+
             // Các bước trước nếu chưa gửi note thì khỏi gửi luôn
             if (IsLastStep)
             {
@@ -374,14 +378,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             var baseData = dt201_FormsBUS.Instance.GetItemById(idBase);
             baseData.NextStepProg = nextStepProg;
-
-            //foreach (var item in baseAtts)
-            //{
-            //    if (item.BaseAtt.IsCancel == true)
-            //    {
-            //        dt201_BaseAttsBUS.Instance.AddOrUpdate(item.BaseAtt);
-            //    }
-            //}
 
             if (IsLastStep)
             {

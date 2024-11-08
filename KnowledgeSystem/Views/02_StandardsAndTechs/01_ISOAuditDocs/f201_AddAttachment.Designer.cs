@@ -63,6 +63,8 @@
             this.lcDisplayNameVN = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcSignOrPaper = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcDefaultProgress = new DevExpress.XtraLayout.LayoutControlItem();
+            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.btnDelProgress = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ckSignOrPaper.Properties)).BeginInit();
@@ -84,6 +86,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcDisplayNameVN)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcSignOrPaper)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDefaultProgress)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnDelProgress)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -254,7 +257,8 @@
             this.gcProgress.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
             this.gcProgress.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.lookupUser,
-            this.lookupRole});
+            this.lookupRole,
+            this.btnDelProgress});
             this.gcProgress.Size = new System.Drawing.Size(628, 205);
             this.gcProgress.TabIndex = 14;
             this.gcProgress.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -280,7 +284,8 @@
             this.gridColumn4,
             this.gridColumn3,
             this.gridColumn1,
-            this.gridColumn2});
+            this.gridColumn2,
+            this.gridColumn5});
             this.gvProgress.GridControl = this.gcProgress;
             this.gvProgress.Name = "gvProgress";
             this.gvProgress.NewItemRowText = "按一下此處新增流程";
@@ -290,7 +295,7 @@
             this.gvProgress.OptionsView.EnableAppearanceOddRow = true;
             this.gvProgress.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
             this.gvProgress.OptionsView.ShowGroupPanel = false;
-            this.gvProgress.OptionsView.ShowIndicator = false;
+            this.gvProgress.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gvProgress_CustomDrawRowIndicator);
             this.gvProgress.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gvProgress_CellValueChanged);
             // 
             // gridColumn4
@@ -544,6 +549,26 @@
             this.lcDefaultProgress.TextSize = new System.Drawing.Size(0, 0);
             this.lcDefaultProgress.TextVisible = false;
             // 
+            // gridColumn5
+            // 
+            this.gridColumn5.Caption = " ";
+            this.gridColumn5.ColumnEdit = this.btnDelProgress;
+            this.gridColumn5.MaxWidth = 30;
+            this.gridColumn5.MinWidth = 30;
+            this.gridColumn5.Name = "gridColumn5";
+            this.gridColumn5.Visible = true;
+            this.gridColumn5.VisibleIndex = 4;
+            this.gridColumn5.Width = 30;
+            // 
+            // btnDelProgress
+            // 
+            this.btnDelProgress.AutoHeight = false;
+            this.btnDelProgress.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Delete)});
+            this.btnDelProgress.Name = "btnDelProgress";
+            this.btnDelProgress.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            this.btnDelProgress.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnDelProgress_ButtonClick);
+            // 
             // f201_AddAttachment
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
@@ -583,6 +608,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcDisplayNameVN)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcSignOrPaper)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDefaultProgress)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnDelProgress)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -623,5 +649,7 @@
         private DevExpress.XtraLayout.LayoutControlItem lcSignOrPaper;
         private DevExpress.XtraEditors.SimpleButton btnDefaultProgress;
         private DevExpress.XtraLayout.LayoutControlItem lcDefaultProgress;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnDelProgress;
     }
 }

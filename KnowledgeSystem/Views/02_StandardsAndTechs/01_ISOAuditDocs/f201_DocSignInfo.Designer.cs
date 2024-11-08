@@ -117,7 +117,7 @@
             // 
             this.gridColumn7.AppearanceCell.Options.UseTextOptions = true;
             this.gridColumn7.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn7.Caption = "時期";
+            this.gridColumn7.Caption = "時間";
             this.gridColumn7.DisplayFormat.FormatString = "yyyy/MM/dd HH:mm";
             this.gridColumn7.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.gridColumn7.FieldName = "data.RespTime";

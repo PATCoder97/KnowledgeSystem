@@ -244,12 +244,6 @@
     <Compile Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\f201_DocSignInfo.Designer.cs">
       <DependentUpon>f201_DocSignInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\f201_ExpiredDocs.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\f201_ExpiredDocs.Designer.cs">
-      <DependentUpon>f201_ExpiredDocs.cs</DependentUpon>
-    </Compile>
     <Compile Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\f201_SignDoc_Info.cs">
       <SubType>Form</SubType>
     </Compile>
