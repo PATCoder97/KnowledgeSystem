@@ -153,6 +153,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 var nextYear = new dt201_Base()
                 {
                     DisplayName = DateTime.Today.Year.ToString(),
+                    DisplayNameVN = DateTime.Today.Year.ToString(),
                     IdParent = currentData.IdParent,
                     DocCode = currentData.DocCode,
                     IdDept = currentData.IdDept,

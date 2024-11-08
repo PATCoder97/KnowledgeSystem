@@ -80,10 +80,16 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void CreateRuleGV()
         {
-            tlsData.FormatRules.AddExpressionRule(treeListColumn2, new DevExpress.Utils.AppearanceDefault()
+            tlsData.FormatRules.Add(new TreeListFormatRule
             {
-                ForeColor = Color.Blue
-            }, "[data.IsFinalNode] = True");
+                Column = treeListColumn2,
+                ApplyToRow = true,
+                Rule = new FormatConditionRuleExpression
+                {
+                    Expression = "[data.IsFinalNode] = True",
+                    Appearance = { ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Hyperlink }
+                }
+            });
 
             tlsData.FormatRules.Add(new TreeListFormatRule
             {
@@ -94,7 +100,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                     Expression = "[data.IsDisable] = True",
                     Appearance =
                     {
-                        ForeColor = Color.DarkGray,
+                        ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.DisabledText,
                         Font = new Font(tlsData.Appearance.Row.Font, FontStyle.Italic)
                     }
                 }
@@ -102,7 +108,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             tlsData.FormatRules.AddExpressionRule(treeListColumn3, new DevExpress.Utils.AppearanceDefault()
             {
-                ForeColor = Color.Red,
+                ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical,
                 Font = new Font(tlsData.Appearance.Row.Font, FontStyle.Regular)
             }, "[IsPaperType] != ''");
         }
@@ -133,8 +139,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             var result = XtraInputBox.Show(new XtraInputBoxArgs
             {
                 Caption = TPConfigs.SoftNameTW,
-                Prompt = "<font='Microsoft JhengHei UI' size=14>輸入你的員工代碼進行確認啟用</font>",
                 AllowHtmlText = DevExpress.Utils.DefaultBoolean.True,
+                Prompt = "<font='Microsoft JhengHei UI' size=14>輸入你的員工代碼進行確認啟用</font>",
                 DefaultButtonIndex = 0,
                 Editor = new TextEdit { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) },
                 DefaultResponse = ""
@@ -156,8 +162,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             var result = XtraInputBox.Show(new XtraInputBoxArgs
             {
                 Caption = TPConfigs.SoftNameTW,
-                Prompt = "<font='Microsoft JhengHei UI' size=14>輸入你的員工代碼進行確認停用</font>",
                 AllowHtmlText = DevExpress.Utils.DefaultBoolean.True,
+                Prompt = "<font='Microsoft JhengHei UI' size=14>輸入你的員工代碼進行確認停用</font>",
                 DefaultButtonIndex = 0,
                 Editor = new TextEdit { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) },
                 DefaultResponse = ""
@@ -184,8 +190,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 var result = XtraInputBox.Show(new XtraInputBoxArgs
                 {
                     Caption = TPConfigs.SoftNameTW,
-                    Prompt = "<font='Microsoft JhengHei UI' size=14>輸入新年版名稱</font>",
                     AllowHtmlText = DevExpress.Utils.DefaultBoolean.True,
+                    Prompt = "<font='Microsoft JhengHei UI' size=14>輸入新年版名稱</font>",
                     DefaultButtonIndex = 0,
                     Editor = new TextEdit() { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) },
                     DefaultResponse = ""
@@ -205,6 +211,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 }
 
                 currentData.DisplayName = version;
+                currentData.DisplayNameVN = version;
                 dt201_BaseBUS.Instance.AddOrUpdate(currentData);
                 LoadData();
                 return;
@@ -231,8 +238,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             var result = XtraInputBox.Show(new XtraInputBoxArgs
             {
                 Caption = TPConfigs.SoftNameTW,
-                Prompt = "<font='Microsoft JhengHei UI' size=14>輸入年版名稱</font>",
                 AllowHtmlText = DevExpress.Utils.DefaultBoolean.True,
+                Prompt = "<font='Microsoft JhengHei UI' size=14>輸入年版名稱</font>",
                 DefaultButtonIndex = 0,
                 Editor = new TextEdit() { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) },
                 DefaultResponse = ""
@@ -251,8 +258,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             dt201_Base baseVer = new dt201_Base()
             {
                 IdParent = currentData.Id,
-                DocCode = "",
+                DocCode = currentData.DocCode,
                 DisplayName = version,
+                DisplayNameVN = version,
                 IsFinalNode = true,
                 IdDept = currentData.IdDept,
             };
@@ -268,8 +276,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             var result = XtraInputBox.Show(new XtraInputBoxArgs
             {
                 Caption = TPConfigs.SoftNameTW,
-                Prompt = "<font='Microsoft JhengHei UI' size=14>輸入你的員工代碼進行確認刪除</font>",
                 AllowHtmlText = DevExpress.Utils.DefaultBoolean.True,
+                Prompt = "<font='Microsoft JhengHei UI' size=14>輸入你的員工代碼進行確認刪除</font>",
                 DefaultButtonIndex = 0,
                 Editor = new TextEdit { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) },
                 DefaultResponse = ""
@@ -352,8 +360,14 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             tlsData.ReadOnlyTreelist();
             tlsData.KeyDown += GridControlHelper.TreeViewCopyCellData_KeyDown;
 
+            var grpUsrs = dm_GroupUserBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id);
+
             depts = dm_DeptBUS.Instance.GetList();
             groups = dm_GroupBUS.Instance.GetListByName("ISO組");
+
+            groups = (from data in groups
+                      join grp in grpUsrs on data.Id equals grp.IdGroup
+                      select data).ToList();
 
             var deptsCbb = (from data in depts
                             join grp in groups on data.Id equals grp.IdDept

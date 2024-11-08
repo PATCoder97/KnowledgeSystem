@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DevExpress.XtraBars.Docking2010.Views.Widget;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,27 +10,26 @@ namespace KnowledgeSystem.Helpers
 {
     public class EncryptionHelper
     {
-        public static string EncryptionFileName(string fileName)
+        public static string EncryptionFileName(string filePath, int length = 64)
         {
-            string extension = Path.GetExtension(fileName).TrimStart('.');
+            // Lấy phần mở rộng của file
+            string extension = Path.GetExtension(filePath).TrimStart('.');
 
-            char[] charArray = TPConfigs.LoginUser.Id.Substring(3, 7).ToCharArray();
-            Array.Reverse(charArray);
+            // Tạo chuỗi ngẫu nhiên
+            string randomStringPart = GenerateRandomString(16);
 
-            string string1 = GenerateRandomString(16);
-            string string3 = $"{new string(charArray)}{extension}tp";
-            //string string4 = DateTime.Now.ToString("ssmmHHddMMyy");
-            string string4 = Guid.NewGuid().ToString("N");
+            // Tạo GUID cho phần mã hóa
+            string guidPart = Guid.NewGuid().ToString("N");
 
-            string[] strings = new[] { string1, string3, string4 };
+            // Kết hợp chuỗi ngẫu nhiên, phần mở rộng file và GUID
+            string combinedString = $"{randomStringPart}{extension}tp{guidPart}";
 
-            string result = Enumerable.Range(0, strings.Max(chuoi => chuoi.Length))
-                .Select(i => strings.Where(chuoi => i < chuoi.Length)
-                .Select(chuoi => chuoi[i]))
-                .SelectMany(chars => chars)
-                .Aggregate(new StringBuilder(), (sb, c) => sb.Append(c)).ToString();
+            // Nếu kết quả vượt quá chiều dài yêu cầu, cắt bớt
+            if (combinedString.Length > length) combinedString = combinedString.Substring(0, length);
 
-            return $"{GenerateRandomString(63 - result.Length)}-{result}";
+            // Nếu chuỗi ngắn hơn chiều dài yêu cầu, thêm ký tự ngẫu nhiên để đủ độ dài
+            if (combinedString.Length < length) combinedString = combinedString + GenerateRandomString(length - combinedString.Length);
+            return combinedString;
         }
 
         public static string EncryptPass(string password)
@@ -94,27 +94,24 @@ namespace KnowledgeSystem.Helpers
             return result;
         }
 
-        static string GenerateRandomString(int length, bool includeLetters = true, bool includeSpecialChars = false)
+        private static string GenerateRandomString(int length, bool includeLetters = true, bool includeSpecialChars = false)
         {
-            Guid guid = Guid.NewGuid();
-            byte[] guidBytes = guid.ToByteArray();
-            int seed = BitConverter.ToInt32(guidBytes, 0);
-            Random random = new Random(seed);
-
+            // Các ký tự có thể sử dụng trong chuỗi ngẫu nhiên
             string letterChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            string numberChars = "!@#$%^&*()_+-=[]{};:'\",.<>?";
+            string specialChars = "!@#$%^&*()_+-=[]{};:'\",.<>?";
+
+            // Kết hợp các ký tự dựa trên tham số
             string chars = "";
+            if (includeLetters) chars += letterChars;
+            if (includeSpecialChars) chars += specialChars;
 
-            if (includeLetters && includeSpecialChars)
-                chars = letterChars + numberChars;
-            else if (includeLetters)
-                chars = letterChars;
-            else if (includeSpecialChars)
-                chars = numberChars;
-            else
-                chars = string.Empty; // No valid characters selected
+            if (string.IsNullOrEmpty(chars))
+                throw new ArgumentException("Phải bao gồm ít nhất một loại ký tự (chữ cái hoặc ký tự đặc biệt).");
 
-            // Create a random string by selecting characters from the character set until the desired length is reached
+            // Tạo đối tượng Random với seed từ GUID
+            Random random = new Random(Guid.NewGuid().GetHashCode());
+
+            // Tạo chuỗi ngẫu nhiên
             string randomString = new string(Enumerable.Repeat(chars, length)
                 .Select(s => s[random.Next(s.Length)]).ToArray());
 

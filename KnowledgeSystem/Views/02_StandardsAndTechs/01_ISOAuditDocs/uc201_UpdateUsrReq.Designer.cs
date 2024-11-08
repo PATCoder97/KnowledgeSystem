@@ -282,7 +282,7 @@
             // 
             // gridColumn6
             // 
-            this.gridColumn6.Caption = "日期創建";
+            this.gridColumn6.Caption = "創建日期";
             this.gridColumn6.FieldName = "data.DateCreate";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
