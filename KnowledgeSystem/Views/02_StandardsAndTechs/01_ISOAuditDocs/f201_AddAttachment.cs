@@ -73,6 +73,18 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             public string FullPath { get; set; }
         }
 
+        bool cal(Int32 _Width, GridView _View)
+        {
+            _View.IndicatorWidth = _View.IndicatorWidth < _Width ? _Width : _View.IndicatorWidth;
+            return true;
+        }
+
+        void IndicatorDraw(RowIndicatorCustomDrawEventArgs e, System.Drawing.Color color)
+        {
+            e.Info.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            e.Info.Appearance.ForeColor = color;
+        }
+
         private void InitializeIcon()
         {
             btnEdit.ImageOptions.SvgImage = TPSvgimages.Edit;
@@ -258,11 +270,12 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             bool isDigitalSign = ckSignOrPaper.SelectedIndex == 1;
 
             // Validate progress
+            bool HasProgress = progresses.Count <= 0;
             bool isProgressError = progresses.GroupBy(x => x.IdUsr).Any(g => g.Count() > 1);
 
-            if (isDigitalSign && isProgressError)
+            if (isDigitalSign && (HasProgress || isProgressError))
             {
-                XtraMessageBox.Show("流程重複！", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show("沒有核簽流程或重複！", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -456,6 +469,54 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             }
 
             gcProgress.RefreshDataSource();
+        }
+
+        private void btnDelProgress_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            GridView view = gvProgress;
+            ProgressDetail prog = view.GetRow(view.FocusedRowHandle) as ProgressDetail;
+            progresses.Remove(prog);
+
+            int rowIndex = view.FocusedRowHandle;
+            view.RefreshData();
+            view.FocusedRowHandle = rowIndex;
+        }
+
+        private void gvProgress_CustomDrawRowIndicator(object sender, RowIndicatorCustomDrawEventArgs e)
+        {
+            GridView view = sender as GridView;
+
+            System.Drawing.Color color = view.Appearance.HeaderPanel.ForeColor;
+
+            if (!view.IsGroupRow(e.RowHandle))
+            {
+                if (e.Info.IsRowIndicator)
+                {
+                    if (e.RowHandle < 0)
+                    {
+                        e.Info.ImageIndex = 0;
+                        e.Info.DisplayText = string.Empty;
+                    }
+                    else
+                    {
+                        e.Info.ImageIndex = -1;
+                        e.Info.DisplayText = (e.RowHandle + 1).ToString();
+                    }
+                    IndicatorDraw(e, color);
+                    SizeF _Size = e.Graphics.MeasureString(e.Info.DisplayText, new System.Drawing.Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0));
+                    Int32 _Width = Convert.ToInt32(_Size.Width) + 20;
+                    BeginInvoke(new MethodInvoker(delegate { cal(_Width, view); }));
+                }
+            }
+            else
+            {
+                e.Info.ImageIndex = -1;
+                e.Info.DisplayText = string.Format("[{0}]", (e.RowHandle * -1));
+                IndicatorDraw(e, color);
+                SizeF _Size = e.Graphics.MeasureString(e.Info.DisplayText, new System.Drawing.Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0));
+                Int32 _Width = Convert.ToInt32(_Size.Width) + 20;
+                BeginInvoke(new MethodInvoker(delegate { cal(_Width, view); }));
+            }
         }
     }
 }
