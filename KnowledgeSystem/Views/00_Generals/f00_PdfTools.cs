@@ -260,6 +260,7 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void f00_PdfTools_Load(object sender, EventArgs e)
         {
+            Text = "PDF工具";
             pdfViewer.LoadDocument(filePath);
 
             // Load các chữ ký, con dấu

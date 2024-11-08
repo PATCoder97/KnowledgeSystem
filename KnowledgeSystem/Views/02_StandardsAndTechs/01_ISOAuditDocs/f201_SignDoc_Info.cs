@@ -2,6 +2,7 @@
 using DataAccessLayer;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using DocumentFormat.OpenXml.Bibliography;
 using iTextSharp.text.pdf;
 using KnowledgeSystem.Helpers;
@@ -145,6 +146,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         private void gvDocs_DoubleClick(object sender, EventArgs e)
         {
             GridView view = sender as GridView;
+
+            var pt = view.GridControl.PointToClient(Control.MousePosition);
+            GridHitInfo hitInfo = view.CalcHitInfo(pt);
+            if (!hitInfo.InRowCell) return;
 
             string fileName = view.GetRowCellValue(view.FocusedRowHandle, gColEncryptName).ToString();
 

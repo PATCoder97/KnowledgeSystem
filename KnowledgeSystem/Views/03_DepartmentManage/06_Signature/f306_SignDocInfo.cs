@@ -3,6 +3,7 @@ using DataAccessLayer;
 using DevExpress.Office.Utils;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using DocumentFormat.OpenXml.Spreadsheet;
 using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._00_Generals;
@@ -143,6 +144,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
         private void gvDocs_DoubleClick(object sender, EventArgs e)
         {
             GridView view = sender as GridView;
+            var pt = view.GridControl.PointToClient(System.Windows.Forms.Control.MousePosition);
+            GridHitInfo hitInfo = view.CalcHitInfo(pt);
+            if (!hitInfo.InRowCell) return;
 
             int idAtt = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColIdAtt));
             var attProgress = dm_AttachmentBUS.Instance.GetItemById(idAtt);
