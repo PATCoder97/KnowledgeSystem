@@ -286,6 +286,12 @@
     <Compile Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\uc201_UpdateUsrReq.Designer.cs">
       <DependentUpon>uc201_UpdateUsrReq.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\uc201_UpdateUsrReq_Manual.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\uc201_UpdateUsrReq_Manual.Designer.cs">
+      <DependentUpon>uc201_UpdateUsrReq_Manual.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\02_StandardsAndTechs\03_TechnicalPrj\f203_PrjInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -905,6 +911,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\uc201_UpdateUsrReq.resx">
       <DependentUpon>uc201_UpdateUsrReq.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\uc201_UpdateUsrReq_Manual.resx">
+      <DependentUpon>uc201_UpdateUsrReq_Manual.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\03_TechnicalPrj\f203_PrjInfo.resx">
       <DependentUpon>f203_PrjInfo.cs</DependentUpon>
