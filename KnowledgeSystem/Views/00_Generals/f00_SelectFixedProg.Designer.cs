@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DevExpress.XtraLayout.LayoutControl layoutControl1;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f00_SelectFixedProg));
-            this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.txbProgManager = new System.Windows.Forms.LinkLabel();
             this.btnConfirm = new DevExpress.XtraEditors.SimpleButton();
             this.txbProgress = new DevExpress.XtraEditors.GridLookUpEdit();
             this.gridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -38,10 +39,10 @@
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.txbProgManager = new System.Windows.Forms.LinkLabel();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
-            this.layoutControl1.SuspendLayout();
+            layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            ((System.ComponentModel.ISupportInitialize)(layoutControl1)).BeginInit();
+            layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txbProgress.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
@@ -52,17 +53,32 @@
             // 
             // layoutControl1
             // 
-            this.layoutControl1.AllowCustomization = false;
-            this.layoutControl1.Controls.Add(this.txbProgManager);
-            this.layoutControl1.Controls.Add(this.btnConfirm);
-            this.layoutControl1.Controls.Add(this.txbProgress);
-            this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.layoutControl1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControl1.Name = "layoutControl1";
-            this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(309, 94);
-            this.layoutControl1.TabIndex = 0;
-            this.layoutControl1.Text = "layoutControl1";
+            layoutControl1.AllowCustomization = false;
+            layoutControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            layoutControl1.Controls.Add(this.txbProgManager);
+            layoutControl1.Controls.Add(this.btnConfirm);
+            layoutControl1.Controls.Add(this.txbProgress);
+            layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            layoutControl1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(36)))));
+            layoutControl1.Location = new System.Drawing.Point(0, 0);
+            layoutControl1.Name = "layoutControl1";
+            layoutControl1.Root = this.Root;
+            layoutControl1.Size = new System.Drawing.Size(309, 94);
+            layoutControl1.TabIndex = 0;
+            layoutControl1.Text = "layoutControl1";
+            // 
+            // txbProgManager
+            // 
+            this.txbProgManager.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbProgManager.LinkColor = System.Drawing.Color.Red;
+            this.txbProgManager.Location = new System.Drawing.Point(7, 51);
+            this.txbProgManager.Name = "txbProgManager";
+            this.txbProgManager.Size = new System.Drawing.Size(165, 36);
+            this.txbProgManager.TabIndex = 7;
+            this.txbProgManager.TabStop = true;
+            this.txbProgManager.Text = "流程管理";
+            this.txbProgManager.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txbProgManager.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.txbProgManager_LinkClicked);
             // 
             // btnConfirm
             // 
@@ -73,7 +89,7 @@
             this.btnConfirm.Location = new System.Drawing.Point(199, 51);
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.Size = new System.Drawing.Size(103, 36);
-            this.btnConfirm.StyleController = this.layoutControl1;
+            this.btnConfirm.StyleController = layoutControl1;
             this.btnConfirm.TabIndex = 6;
             this.btnConfirm.Text = "確認";
             this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
@@ -89,7 +105,7 @@
             this.txbProgress.Properties.NullText = "";
             this.txbProgress.Properties.PopupView = this.gridLookUpEdit1View;
             this.txbProgress.Size = new System.Drawing.Size(207, 32);
-            this.txbProgress.StyleController = this.layoutControl1;
+            this.txbProgress.StyleController = layoutControl1;
             this.txbProgress.TabIndex = 4;
             // 
             // gridLookUpEdit1View
@@ -142,10 +158,10 @@
             // layoutControlItem1
             // 
             this.layoutControlItem1.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.layoutControlItem1.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
+            this.layoutControlItem1.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem1.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem1.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem1.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
+            this.layoutControlItem1.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem1.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem1.Control = this.txbProgress;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
@@ -165,19 +181,6 @@
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextVisible = false;
             // 
-            // txbProgManager
-            // 
-            this.txbProgManager.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txbProgManager.LinkColor = System.Drawing.Color.Red;
-            this.txbProgManager.Location = new System.Drawing.Point(7, 51);
-            this.txbProgManager.Name = "txbProgManager";
-            this.txbProgManager.Size = new System.Drawing.Size(165, 36);
-            this.txbProgManager.TabIndex = 7;
-            this.txbProgManager.TabStop = true;
-            this.txbProgManager.Text = "流程管理";
-            this.txbProgManager.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txbProgManager.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.txbProgManager_LinkClicked);
-            // 
             // layoutControlItem4
             // 
             this.layoutControlItem4.Control = this.txbProgManager;
@@ -192,22 +195,22 @@
             // 
             // f00_SelectFixedProg
             // 
-            this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
+            this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.Appearance.Options.UseBackColor = true;
             this.Appearance.Options.UseForeColor = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(309, 94);
-            this.Controls.Add(this.layoutControl1);
+            this.Controls.Add(layoutControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.IconOptions.Image = global::KnowledgeSystem.Properties.Resources.AppIcon;
             this.Name = "f00_SelectFixedProg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "f00_SelectFixedProg";
+            this.Text = "選固定流程";
             this.Load += new System.EventHandler(this.f00_SelectFixedProg_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
-            this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(layoutControl1)).EndInit();
+            layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.txbProgress.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
@@ -219,8 +222,6 @@
         }
 
         #endregion
-
-        private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraEditors.SimpleButton btnConfirm;
         private DevExpress.XtraEditors.GridLookUpEdit txbProgress;
