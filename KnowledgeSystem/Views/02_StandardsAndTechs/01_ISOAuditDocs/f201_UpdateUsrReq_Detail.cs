@@ -16,6 +16,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -49,10 +50,30 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         List<dm_User> users;
 
         DXMenuItem itemCompleteDoc;
+        DXMenuItem itemConfirmDoc;
+
+        bool IsHasPermission = false;
 
         private void InitializeMenuItems()
         {
-            itemCompleteDoc = CreateMenuItem("項目已完成", ItemCompleteDoc_Click, TPSvgimages.Confirm);
+            itemCompleteDoc = CreateMenuItem("項目已完成", ItemCompleteDoc_Click, TPSvgimages.EmailSend);
+            itemConfirmDoc = CreateMenuItem("確認已完成", ItemConfirmDoc_Click, TPSvgimages.Confirm);
+        }
+
+        private void ItemConfirmDoc_Click(object sender, EventArgs e)
+        {
+            if (XtraMessageBox.Show("您確定結案這項目嗎?", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                return;
+
+            GridView view = gvData;
+            int idDetail = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColId));
+
+            var detail = dt201_UpdateUsrReq_DetailBUS.Instance.GetItemById(idDetail);
+            detail.UsrConfirm = TPConfigs.LoginUser.Id;
+
+            dt201_UpdateUsrReq_DetailBUS.Instance.AddOrUpdate(detail);
+
+            LoadData();
         }
 
         DXMenuItem CreateMenuItem(string caption, EventHandler clickEvent, SvgImage svgImage)
@@ -70,13 +91,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void ItemCompleteDoc_Click(object sender, EventArgs e)
         {
-            XtraMessageBox.Show("請上傳文件確認完成！", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            OpenFileDialog openFile = new OpenFileDialog();
-            if (openFile.ShowDialog() != DialogResult.OK) return;
-
-            string filePath = openFile.FileName;
-            string fileName = Path.GetFileName(filePath);
+            if (XtraMessageBox.Show("您確定已完成文件上傳嗎?", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                return;
 
             GridView view = gvData;
             int idDetail = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColId));
@@ -84,15 +100,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             var detail = dt201_UpdateUsrReq_DetailBUS.Instance.GetItemById(idDetail);
             detail.CompleteDate = DateTime.Now;
             detail.UsrComplete = TPConfigs.LoginUser.Id;
-            detail.AttActualName = fileName;
-            detail.AttEncryptName = EncryptionHelper.EncryptionFileName(fileName);
 
             dt201_UpdateUsrReq_DetailBUS.Instance.AddOrUpdate(detail);
-
-            string folderDest = TPConfigs.Folder201EmpChange;
-            if (!Directory.Exists(folderDest)) Directory.CreateDirectory(folderDest);
-
-            File.Copy(filePath, Path.Combine(folderDest, detail.AttEncryptName), true);
 
             LoadData();
         }
@@ -105,14 +114,18 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             var dataInfo = (from data in baseReqDetail
                             join doc in reqUpdateDocs on data.IdReq equals doc.Id
-                            join usr in users on data.UsrComplete equals usr.Id into dtg
-                            from g in dtg.DefaultIfEmpty()
+                            let UserComplete = users.FirstOrDefault(r => r.Id == data.UsrComplete)
+                            let UserConfirm = users.FirstOrDefault(r => r.Id == data.UsrConfirm)
                             select new
                             {
                                 data,
                                 doc,
-                                UserComplete = g != null ? g.DisplayName : ""
+                                UsrComplete = UserComplete != null && UserComplete.Id.Length > 5
+                                    ? $"{UserComplete.Id.Substring(5)} LG{UserComplete.IdDepartment}/{UserComplete.DisplayName}" : "",
+                                UsrConfirm = UserConfirm != null && UserConfirm.Id.Length > 5
+                                    ? $"{UserConfirm.Id.Substring(5)} LG{UserConfirm.IdDepartment}/{UserConfirm.DisplayName}" : ""
                             }).ToList();
+
 
             sourceForm.DataSource = dataInfo;
 
@@ -125,19 +138,29 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         {
             gcData.DataSource = sourceForm;
             LoadData();
+
+            var grpUsrs = dm_GroupUserBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id).Select(r => r.IdGroup).ToList();
+            var groups = dm_GroupBUS.Instance.GetListByName($"二級{TPConfigs.LoginUser.IdDepartment}").Select(r => r.Id).ToList();
+
+            IsHasPermission = groups.Any(r => grpUsrs.Contains(r));
         }
 
         private void gvData_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
         {
-            if (e.HitInfo.InRowCell)
+            if (e.HitInfo.InRowCell && e.HitInfo.Column.OptionsColumn.AllowMerge == DevExpress.Utils.DefaultBoolean.False)
             {
                 GridView view = sender as GridView;
                 view.FocusedRowHandle = e.HitInfo.RowHandle;
                 bool isComplete = string.IsNullOrEmpty(view.GetRowCellValue(view.FocusedRowHandle, "data.CompleteDate")?.ToString());
+                bool isConfirm = string.IsNullOrEmpty(view.GetRowCellValue(view.FocusedRowHandle, "UsrConfirm")?.ToString());
 
                 if (isComplete)
                 {
                     e.Menu.Items.Add(itemCompleteDoc);
+                }
+                else if (isConfirm && IsHasPermission)
+                {
+                    e.Menu.Items.Add(itemConfirmDoc);
                 }
             }
         }

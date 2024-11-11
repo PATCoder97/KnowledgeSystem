@@ -198,13 +198,6 @@
           <Property Name="DisplayNameVN" Type="nvarchar" MaxLength="512" />
           <Property Name="DocType" Type="nvarchar" MaxLength="8" />
         </EntityType>
-        <EntityType Name="dt201_DocType">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="DisplayName" Type="nvarchar" MaxLength="16" Nullable="false" />
-        </EntityType>
         <EntityType Name="dt201_Forms">
           <Key>
             <PropertyRef Name="Id" />
@@ -285,9 +278,8 @@
           <Property Name="DeadLine" Type="date" Nullable="false" />
           <Property Name="CompleteDate" Type="date" />
           <Property Name="UsrComplete" Type="varchar" MaxLength="10" />
-          <Property Name="AttActualName" Type="nvarchar" MaxLength="256" />
-          <Property Name="AttEncryptName" Type="nvarchar" MaxLength="256" />
           <Property Name="TimeSendNote" Type="datetime" />
+          <Property Name="UsrConfirm" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="dt202_Attach">
           <Key>
@@ -738,7 +730,6 @@
           <EntitySet Name="dm_User" EntityType="Self.dm_User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dm_UserRole" EntityType="Self.dm_UserRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt201_Base" EntityType="Self.dt201_Base" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="dt201_DocType" EntityType="Self.dt201_DocType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt201_Forms" EntityType="Self.dt201_Forms" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt201_ProgInfo" EntityType="Self.dt201_ProgInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt201_Progress" EntityType="Self.dt201_Progress" Schema="dbo" store:Type="Tables" />
@@ -841,7 +832,6 @@
           <EntitySet Name="dm_Sign" EntityType="DBDocumentManagementSystemModel.dm_Sign" />
           <EntitySet Name="dt201_ReqUpdateDocs" EntityType="DBDocumentManagementSystemModel.dt201_ReqUpdateDocs" />
           <EntitySet Name="dt201_UpdateUsrReq" EntityType="DBDocumentManagementSystemModel.dt201_UpdateUsrReq" />
-          <EntitySet Name="dt201_UpdateUsrReq_Detail" EntityType="DBDocumentManagementSystemModel.dt201_UpdateUsrReq_Detail" />
           <EntitySet Name="dt402_KPIWeb" EntityType="DBDocumentManagementSystemModel.dt402_KPIWeb" />
           <EntitySet Name="dm_User" EntityType="DBDocumentManagementSystemModel.dm_User" />
           <EntitySet Name="dt307_ExamMgmt" EntityType="DBDocumentManagementSystemModel.dt307_ExamMgmt" />
@@ -852,12 +842,12 @@
           <EntitySet Name="dt306_FieldTypeDocType" EntityType="DBDocumentManagementSystemModel.dt306_FieldTypeDocType" />
           <EntitySet Name="dt306_Base" EntityType="DBDocumentManagementSystemModel.dt306_Base" />
           <EntitySet Name="dt307_JobQuesManage" EntityType="DBDocumentManagementSystemModel.dt307_JobQuesManage" />
-          <EntitySet Name="dt201_DocType" EntityType="DBDocumentManagementSystemModel.dt201_DocType" />
           <EntitySet Name="dt403_SoftwareManual" EntityType="DBDocumentManagementSystemModel.dt403_SoftwareManual" />
           <EntitySet Name="dt201_ProgInfo" EntityType="DBDocumentManagementSystemModel.dt201_ProgInfo" />
           <EntitySet Name="dt201_Progress" EntityType="DBDocumentManagementSystemModel.dt201_Progress" />
           <EntitySet Name="dt201_Forms" EntityType="DBDocumentManagementSystemModel.dt201_Forms" />
           <EntitySet Name="dt201_Base" EntityType="DBDocumentManagementSystemModel.dt201_Base" />
+          <EntitySet Name="dt201_UpdateUsrReq_Detail" EntityType="DBDocumentManagementSystemModel.dt201_UpdateUsrReq_Detail" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -1360,20 +1350,6 @@
           <Property Name="DateCreate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Describe" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="dt201_UpdateUsrReq_Detail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdUpdateReq" Type="Int32" Nullable="false" />
-          <Property Name="IdReq" Type="Int32" Nullable="false" />
-          <Property Name="DeadLine" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="CompleteDate" Type="DateTime" Precision="0" />
-          <Property Name="UsrComplete" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="AttActualName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="AttEncryptName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="TimeSendNote" Type="DateTime" Precision="3" />
-        </EntityType>
         <EntityType Name="dt402_KPIWeb">
           <Key>
             <PropertyRef Name="Id" />
@@ -1497,13 +1473,6 @@
           <Property Name="PassingScore" Type="Int32" />
           <Property Name="MultiQues" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="dt201_DocType">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="dt403_SoftwareManual">
           <Key>
             <PropertyRef Name="Id" />
@@ -1572,6 +1541,19 @@
           <Property Name="IsDisable" Type="Boolean" />
           <Property Name="DisplayNameVN" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="DocType" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dt201_UpdateUsrReq_Detail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdUpdateReq" Type="Int32" Nullable="false" />
+          <Property Name="IdReq" Type="Int32" Nullable="false" />
+          <Property Name="DeadLine" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CompleteDate" Type="DateTime" Precision="0" />
+          <Property Name="UsrComplete" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TimeSendNote" Type="DateTime" Precision="3" />
+          <Property Name="UsrConfirm" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2129,21 +2111,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dt201_UpdateUsrReq_Detail">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt201_UpdateUsrReq_Detail">
-              <MappingFragment StoreEntitySet="dt201_UpdateUsrReq_Detail">
-                <ScalarProperty Name="TimeSendNote" ColumnName="TimeSendNote" />
-                <ScalarProperty Name="AttEncryptName" ColumnName="AttEncryptName" />
-                <ScalarProperty Name="AttActualName" ColumnName="AttActualName" />
-                <ScalarProperty Name="UsrComplete" ColumnName="UsrComplete" />
-                <ScalarProperty Name="CompleteDate" ColumnName="CompleteDate" />
-                <ScalarProperty Name="DeadLine" ColumnName="DeadLine" />
-                <ScalarProperty Name="IdReq" ColumnName="IdReq" />
-                <ScalarProperty Name="IdUpdateReq" ColumnName="IdUpdateReq" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="dt402_KPIWeb">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt402_KPIWeb">
               <MappingFragment StoreEntitySet="dt402_KPIWeb">
@@ -2277,14 +2244,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dt201_DocType">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt201_DocType">
-              <MappingFragment StoreEntitySet="dt201_DocType">
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="dt403_SoftwareManual">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt403_SoftwareManual">
               <MappingFragment StoreEntitySet="dt403_SoftwareManual">
@@ -2355,6 +2314,20 @@
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="DocCode" ColumnName="DocCode" />
                 <ScalarProperty Name="IdParent" ColumnName="IdParent" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt201_UpdateUsrReq_Detail">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt201_UpdateUsrReq_Detail">
+              <MappingFragment StoreEntitySet="dt201_UpdateUsrReq_Detail">
+                <ScalarProperty Name="UsrConfirm" ColumnName="UsrConfirm" />
+                <ScalarProperty Name="TimeSendNote" ColumnName="TimeSendNote" />
+                <ScalarProperty Name="UsrComplete" ColumnName="UsrComplete" />
+                <ScalarProperty Name="CompleteDate" ColumnName="CompleteDate" />
+                <ScalarProperty Name="DeadLine" ColumnName="DeadLine" />
+                <ScalarProperty Name="IdReq" ColumnName="IdReq" />
+                <ScalarProperty Name="IdUpdateReq" ColumnName="IdUpdateReq" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

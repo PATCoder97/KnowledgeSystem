@@ -132,6 +132,7 @@
             this.gvData.Appearance.Row.Options.UseFont = true;
             this.gvData.Appearance.Row.Options.UseForeColor = true;
             this.gvData.Appearance.Row.Options.UseTextOptions = true;
+            this.gvData.Appearance.Row.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             this.gvData.Appearance.Row.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
             this.gvData.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gColId,
@@ -241,8 +242,8 @@
             // 
             // gridColumn13
             // 
-            this.gridColumn13.Caption = "人員確認";
-            this.gridColumn13.FieldName = "UserComplete";
+            this.gridColumn13.Caption = "上傳人";
+            this.gridColumn13.FieldName = "UsrComplete";
             this.gridColumn13.Name = "gridColumn13";
             this.gridColumn13.OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.False;
             this.gridColumn13.Visible = true;
@@ -250,8 +251,8 @@
             // 
             // gridColumn1
             // 
-            this.gridColumn1.Caption = "檔案名稱";
-            this.gridColumn1.FieldName = "data.AttActualName";
+            this.gridColumn1.Caption = "確認人";
+            this.gridColumn1.FieldName = "UsrConfirm";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.False;
             this.gridColumn1.Visible = true;

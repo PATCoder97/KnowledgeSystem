@@ -116,13 +116,13 @@ namespace KnowledgeSystem
             else
             {
 #if DEBUG
-                //Application.Run(new f00_Main());
+                Application.Run(new f00_Main());
 
-                TPConfigs.LoginUser = dm_UserBUS.Instance.GetItemById("VNW0014732");
-                AppPermission.Instance.CheckAppPermission(7);
-                TPConfigs.IdParentControl = AppPermission.SafetyCertMain;
+                //TPConfigs.LoginUser = dm_UserBUS.Instance.GetItemById("VNW0014732");
+                //AppPermission.Instance.CheckAppPermission(7);
+                //TPConfigs.IdParentControl = AppPermission.SafetyCertMain;
 
-                Application.Run(new f00_FluentFrame(42));
+                //Application.Run(new f00_FluentFrame(42));
 #else
                 Application.Run(new f00_Main());
 #endif
