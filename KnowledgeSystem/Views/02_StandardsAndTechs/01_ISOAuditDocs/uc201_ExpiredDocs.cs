@@ -147,7 +147,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             int year = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColYear));
             if (year < DateTime.Today.Year)
             {
-                if (XtraMessageBox.Show("您正在更新文件至舊年版，系統將自動創建今年的版本。點擊「是」以繼續。如果您想更新至舊年版，請進入「稽核文件」手動更新。", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                if (MsgTP.MsgYesNoQuestion("您目前正在使用舊版檔案更新文件，系統將會自動創建與提供今年最新版本。\r\n點擊「是」則系統將繼續提供最新版本。\r\n如果您仍然需要使用舊版檔案，請進入「稽核文件」以手動方式更新文件。") != DialogResult.Yes)
                     return;
 
                 var nextYear = new dt201_Base()
