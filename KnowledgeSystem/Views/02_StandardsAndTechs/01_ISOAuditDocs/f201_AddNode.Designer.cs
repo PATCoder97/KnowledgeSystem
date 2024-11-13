@@ -311,6 +311,7 @@
             this.cbbDocType.Properties.AppearanceDropDown.Options.UseFont = true;
             this.cbbDocType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbbDocType.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cbbDocType.Size = new System.Drawing.Size(120, 32);
             this.cbbDocType.StyleController = this.layoutControl1;
             this.cbbDocType.TabIndex = 13;

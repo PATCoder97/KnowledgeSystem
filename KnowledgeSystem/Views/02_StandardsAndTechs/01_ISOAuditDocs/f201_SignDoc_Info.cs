@@ -1,6 +1,7 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
 using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using DocumentFormat.OpenXml.Bibliography;
@@ -46,6 +47,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         BindingSource sourceAtts = new BindingSource();
         Attachment attachment;
 
+        DateTime minTimeRespValue = DateTime.Now.AddSeconds(-1);
+
         private class Attachment : dm_Attachment
         {
             public bool IsCancel { get; set; }
@@ -66,7 +69,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         {
             var baseData = dt201_FormsBUS.Instance.GetItemById(idBase);
 
-            Text = $"核簽文件 | {baseData.Code} | {baseData.DisplayName}";
+            Text = $"待簽文件 | {baseData.Code} | {baseData.DisplayName}";
             tabbedControlGroup1.SelectedTabPageIndex = 0;
 
             jobTitles = dm_JobTitleBUS.Instance.GetList();
@@ -92,6 +95,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             progInfos = dt201_ProgInfoBUS.Instance.GetListByIdForm(idBase).Where(r => r.IdUsr != "VNW0000000").ToList();
             var progNow = progInfos.OrderByDescending(r => r.RespTime).FirstOrDefault();
+            minTimeRespValue = progNow?.RespTime ?? minTimeRespValue;
 
             int stepNow = progNow != null ? progress.IndexOf(progress.First(r => r.IdUsr == progNow.IdUsr)) : -1;
             stepProgressDoc.SelectedItemIndex = stepNow; // Focus đến bước hiện tại
@@ -246,6 +250,13 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             if (string.IsNullOrEmpty(result?.ToString())) return;
             DateTime respTime = Convert.ToDateTime(result.ToString());
 
+            if (respTime < minTimeRespValue)
+            {
+                string msg = "簽署時間無效！";
+                MsgTP.MsgShowInfomation($"<font='Microsoft JhengHei UI' size=14>{msg}</font>");
+                return;
+            }
+
             // Các bước trước nếu chưa gửi note thì khỏi gửi luôn
             if (IsLastStep)
             {
@@ -358,6 +369,13 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             if (string.IsNullOrEmpty(result?.ToString())) return;
             DateTime respTime = Convert.ToDateTime(result.ToString());
+
+            if (respTime < minTimeRespValue)
+            {
+                string msg = "簽署時間無效！";
+                MsgTP.MsgShowInfomation($"<font='Microsoft JhengHei UI' size=14>{msg}</font>");
+                return;
+            }
 
             // Các bước trước nếu chưa gửi note thì khỏi gửi luôn
             if (IsLastStep)

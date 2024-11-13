@@ -17,12 +17,8 @@ namespace KnowledgeSystem.Views._00_Generals
         public f00_CustomSplashScreen()
         {
             InitializeComponent();
-            labelCopyright.Text = "Copyright ©  2023 - " + DateTime.Now.Year.ToString();
 
-            lbVersion.Text = $":{AppCopyRight.version}";
-            lbOwner.Text = $":{AppCopyRight.ownerSoft}";
-            lbSupporter.Text = $":{AppCopyRight.supporter}";
-            lbStartDate.Text = $":{startDate}";
+            SplashImageOptions.Image = TPSvgimages.SplashScreen;
         }
 
         #region Overrides

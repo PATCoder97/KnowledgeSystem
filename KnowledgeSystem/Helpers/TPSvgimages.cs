@@ -17,6 +17,7 @@ namespace KnowledgeSystem.Helpers
 
         public static Image Background = Image.FromFile(Path.Combine(ImagesPath, "background.jpg"));
         public static Image NoImage = Image.FromFile(Path.Combine(ImagesPath, "no-image.png"));
+        public static Image SplashScreen = Image.FromFile(Path.Combine(ImagesPath, "SplashScreen.png"));
 
         public static SvgImage CheckedRadio = SvgImage.FromFile(Path.Combine(ImagesPath, "checked_radio_button.svg"));
         public static SvgImage UncheckedRadio = SvgImage.FromFile(Path.Combine(ImagesPath, "unchecked_radio_button.svg"));

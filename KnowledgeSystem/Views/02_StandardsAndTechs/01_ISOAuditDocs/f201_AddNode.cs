@@ -12,6 +12,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -102,14 +103,15 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 item.Text = $"<color=#000000>{item.Text}</color>";
             }
 
+            var grpUsrs = dm_GroupUserBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id);
             var depts = dm_DeptBUS.Instance.GetList();
             var groups = dm_GroupBUS.Instance.GetListByName("ISO組");
 
-            var deptsCbb = (from data in depts
-                            join grp in groups on data.Id equals grp.IdDept
-                            select data.Id).ToList();
+            var cbbDepts = (from data in groups
+                            join grp in grpUsrs on data.Id equals grp.IdGroup
+                            select data.IdDept).ToList();
 
-            cbbDept.Properties.Items.AddRange(deptsCbb);
+            cbbDept.Properties.Items.AddRange(cbbDepts);
             cbbDept.SelectedIndex = 0;
 
             var articles = TPConfigs.Articles201.Split(';').ToList();
