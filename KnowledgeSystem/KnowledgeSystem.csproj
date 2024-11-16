@@ -304,17 +304,17 @@
     <Compile Include="Views\02_StandardsAndTechs\03_TechnicalPrj\uc203_TechnicalPrjBase.Designer.cs">
       <DependentUpon>uc203_TechnicalPrjBase.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\02_StandardsAndTechs\04_ISODocs\f204_DocInfo.cs">
+    <Compile Include="Views\02_StandardsAndTechs\04_InternalDocMgmt\f204_DocMgmt_Info.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\02_StandardsAndTechs\04_ISODocs\f204_DocInfo.Designer.cs">
-      <DependentUpon>f204_DocInfo.cs</DependentUpon>
+    <Compile Include="Views\02_StandardsAndTechs\04_InternalDocMgmt\f204_DocMgmt_Info.Designer.cs">
+      <DependentUpon>f204_DocMgmt_Info.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\02_StandardsAndTechs\04_ISODocs\uc204_ISODocsMain.cs">
+    <Compile Include="Views\02_StandardsAndTechs\04_InternalDocMgmt\uc204_InternalDocMgmtMain.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\02_StandardsAndTechs\04_ISODocs\uc204_ISODocsMain.Designer.cs">
-      <DependentUpon>uc204_ISODocsMain.cs</DependentUpon>
+    <Compile Include="Views\02_StandardsAndTechs\04_InternalDocMgmt\uc204_InternalDocMgmtMain.Designer.cs">
+      <DependentUpon>uc204_InternalDocMgmtMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\uc201_DigitalSignature.cs">
       <SubType>UserControl</SubType>
@@ -921,11 +921,11 @@
     <EmbeddedResource Include="Views\02_StandardsAndTechs\03_TechnicalPrj\uc203_TechnicalPrjBase.resx">
       <DependentUpon>uc203_TechnicalPrjBase.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\02_StandardsAndTechs\04_ISODocs\f204_DocInfo.resx">
-      <DependentUpon>f204_DocInfo.cs</DependentUpon>
+    <EmbeddedResource Include="Views\02_StandardsAndTechs\04_InternalDocMgmt\f204_DocMgmt_Info.resx">
+      <DependentUpon>f204_DocMgmt_Info.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\02_StandardsAndTechs\04_ISODocs\uc204_ISODocsMain.resx">
-      <DependentUpon>uc204_ISODocsMain.cs</DependentUpon>
+    <EmbeddedResource Include="Views\02_StandardsAndTechs\04_InternalDocMgmt\uc204_InternalDocMgmtMain.resx">
+      <DependentUpon>uc204_InternalDocMgmtMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\02_NewPersonnel\f302_InterviewRecord.resx">
       <DependentUpon>f302_InterviewRecord.cs</DependentUpon>

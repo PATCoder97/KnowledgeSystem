@@ -1,6 +1,6 @@
-﻿namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_ISODocs
+﻿namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
 {
-    partial class f204_DocInfo
+    partial class f204_DocMgmt_Info
     {
         /// <summary>
         /// Required designer variable.
@@ -29,17 +29,17 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f204_DocInfo));
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions3 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f204_DocMgmt_Info));
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject9 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject10 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject11 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject12 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions4 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject13 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject14 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject15 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject16 = new DevExpress.Utils.SerializableAppearanceObject();
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnEdit = new DevExpress.XtraBars.BarButtonItem();
@@ -51,14 +51,14 @@
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.label1 = new System.Windows.Forms.Label();
-            this.gridControl1 = new DevExpress.XtraGrid.GridControl();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gcRelatedDoc = new DevExpress.XtraGrid.GridControl();
+            this.gvRelatedDoc = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemButtonEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
-            this.gcFiles = new DevExpress.XtraGrid.GridControl();
-            this.gvFiles = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gcForm = new DevExpress.XtraGrid.GridControl();
+            this.gvForm = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColDelFile = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -79,6 +79,10 @@
             this.txbSubject2 = new DevExpress.XtraEditors.TextEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.tabbedControlGroup1 = new DevExpress.XtraLayout.TabbedControlGroup();
+            this.layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.lcHalfYear = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcTypeOf1 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -96,18 +100,14 @@
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gcRelatedDoc)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvRelatedDoc)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gcFiles)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvFiles)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gcForm)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvForm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDelFile)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbMonthlyBenefit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbSubject.Properties)).BeginInit();
@@ -123,6 +123,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.txbSubject2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroup1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcHalfYear)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcTypeOf1)).BeginInit();
@@ -140,10 +144,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
             this.SuspendLayout();
             // 
             // barManagerTP
@@ -263,8 +263,8 @@
             // 
             this.layoutControl1.AllowCustomization = false;
             this.layoutControl1.Controls.Add(this.label1);
-            this.layoutControl1.Controls.Add(this.gridControl1);
-            this.layoutControl1.Controls.Add(this.gcFiles);
+            this.layoutControl1.Controls.Add(this.gcRelatedDoc);
+            this.layoutControl1.Controls.Add(this.gcForm);
             this.layoutControl1.Controls.Add(this.lbCountFile);
             this.layoutControl1.Controls.Add(this.btnAddFile);
             this.layoutControl1.Controls.Add(this.txbMonthlyBenefit);
@@ -285,7 +285,7 @@
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(810, 269, 650, 400);
             this.layoutControl1.Root = this.Root;
             this.layoutControl1.Size = new System.Drawing.Size(801, 293);
-            this.layoutControl1.TabIndex = 9;
+            this.layoutControl1.TabIndex = 10;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // label1
@@ -297,42 +297,42 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(628, 36);
             this.label1.TabIndex = 24;
-            this.label1.Text = "沒有關聯性文件";
+            this.label1.Text = "沒有關聯文件";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // gridControl1
+            // gcRelatedDoc
             // 
-            this.gridControl1.Location = new System.Drawing.Point(24, 96);
-            this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Name = "gridControl1";
-            this.gridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.gcRelatedDoc.Location = new System.Drawing.Point(24, 96);
+            this.gcRelatedDoc.MainView = this.gvRelatedDoc;
+            this.gcRelatedDoc.Name = "gcRelatedDoc";
+            this.gcRelatedDoc.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemButtonEdit1});
-            this.gridControl1.Size = new System.Drawing.Size(753, 173);
-            this.gridControl1.TabIndex = 23;
-            this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView1});
+            this.gcRelatedDoc.Size = new System.Drawing.Size(753, 173);
+            this.gcRelatedDoc.TabIndex = 23;
+            this.gcRelatedDoc.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvRelatedDoc});
             // 
-            // gridView1
+            // gvRelatedDoc
             // 
-            this.gridView1.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.gridView1.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
-            this.gridView1.Appearance.HeaderPanel.Options.UseFont = true;
-            this.gridView1.Appearance.HeaderPanel.Options.UseForeColor = true;
-            this.gridView1.Appearance.HeaderPanel.Options.UseTextOptions = true;
-            this.gridView1.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridView1.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridView1.Appearance.Row.ForeColor = System.Drawing.Color.Black;
-            this.gridView1.Appearance.Row.Options.UseFont = true;
-            this.gridView1.Appearance.Row.Options.UseForeColor = true;
-            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gvRelatedDoc.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.gvRelatedDoc.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
+            this.gvRelatedDoc.Appearance.HeaderPanel.Options.UseFont = true;
+            this.gvRelatedDoc.Appearance.HeaderPanel.Options.UseForeColor = true;
+            this.gvRelatedDoc.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            this.gvRelatedDoc.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gvRelatedDoc.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvRelatedDoc.Appearance.Row.ForeColor = System.Drawing.Color.Black;
+            this.gvRelatedDoc.Appearance.Row.Options.UseFont = true;
+            this.gvRelatedDoc.Appearance.Row.Options.UseForeColor = true;
+            this.gvRelatedDoc.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumn3,
             this.gridColumn4,
             this.gridColumn5});
-            this.gridView1.GridControl = this.gridControl1;
-            this.gridView1.Name = "gridView1";
-            this.gridView1.OptionsCustomization.AllowSort = false;
-            this.gridView1.OptionsView.EnableAppearanceOddRow = true;
-            this.gridView1.OptionsView.ShowGroupPanel = false;
+            this.gvRelatedDoc.GridControl = this.gcRelatedDoc;
+            this.gvRelatedDoc.Name = "gvRelatedDoc";
+            this.gvRelatedDoc.OptionsCustomization.AllowSort = false;
+            this.gvRelatedDoc.OptionsView.EnableAppearanceOddRow = true;
+            this.gvRelatedDoc.OptionsView.ShowGroupPanel = false;
             // 
             // gridColumn3
             // 
@@ -362,47 +362,47 @@
             // repositoryItemButtonEdit1
             // 
             this.repositoryItemButtonEdit1.AutoHeight = false;
-            editorButtonImageOptions1.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("editorButtonImageOptions1.SvgImage")));
-            editorButtonImageOptions1.SvgImageSize = new System.Drawing.Size(16, 16);
+            editorButtonImageOptions3.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("editorButtonImageOptions3.SvgImage")));
+            editorButtonImageOptions3.SvgImageSize = new System.Drawing.Size(16, 16);
             this.repositoryItemButtonEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions3, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject9, serializableAppearanceObject10, serializableAppearanceObject11, serializableAppearanceObject12, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.repositoryItemButtonEdit1.Name = "repositoryItemButtonEdit1";
             this.repositoryItemButtonEdit1.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             // 
-            // gcFiles
+            // gcForm
             // 
-            this.gcFiles.Location = new System.Drawing.Point(24, 96);
-            this.gcFiles.MainView = this.gvFiles;
-            this.gcFiles.Name = "gcFiles";
-            this.gcFiles.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.gcForm.Location = new System.Drawing.Point(24, 96);
+            this.gcForm.MainView = this.gvForm;
+            this.gcForm.Name = "gcForm";
+            this.gcForm.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.btnDelFile});
-            this.gcFiles.Size = new System.Drawing.Size(753, 173);
-            this.gcFiles.TabIndex = 21;
-            this.gcFiles.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gvFiles});
+            this.gcForm.Size = new System.Drawing.Size(753, 173);
+            this.gcForm.TabIndex = 21;
+            this.gcForm.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvForm});
             // 
-            // gvFiles
+            // gvForm
             // 
-            this.gvFiles.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.gvFiles.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
-            this.gvFiles.Appearance.HeaderPanel.Options.UseFont = true;
-            this.gvFiles.Appearance.HeaderPanel.Options.UseForeColor = true;
-            this.gvFiles.Appearance.HeaderPanel.Options.UseTextOptions = true;
-            this.gvFiles.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gvFiles.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gvFiles.Appearance.Row.ForeColor = System.Drawing.Color.Black;
-            this.gvFiles.Appearance.Row.Options.UseFont = true;
-            this.gvFiles.Appearance.Row.Options.UseForeColor = true;
-            this.gvFiles.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gvForm.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.gvForm.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
+            this.gvForm.Appearance.HeaderPanel.Options.UseFont = true;
+            this.gvForm.Appearance.HeaderPanel.Options.UseForeColor = true;
+            this.gvForm.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            this.gvForm.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gvForm.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvForm.Appearance.Row.ForeColor = System.Drawing.Color.Black;
+            this.gvForm.Appearance.Row.Options.UseFont = true;
+            this.gvForm.Appearance.Row.Options.UseForeColor = true;
+            this.gvForm.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumn1,
             this.gridColumn2,
             this.gColDelFile});
-            this.gvFiles.GridControl = this.gcFiles;
-            this.gvFiles.Name = "gvFiles";
-            this.gvFiles.OptionsCustomization.AllowSort = false;
-            this.gvFiles.OptionsView.EnableAppearanceOddRow = true;
-            this.gvFiles.OptionsView.ShowColumnHeaders = false;
-            this.gvFiles.OptionsView.ShowGroupPanel = false;
+            this.gvForm.GridControl = this.gcForm;
+            this.gvForm.Name = "gvForm";
+            this.gvForm.OptionsCustomization.AllowSort = false;
+            this.gvForm.OptionsView.EnableAppearanceOddRow = true;
+            this.gvForm.OptionsView.ShowColumnHeaders = false;
+            this.gvForm.OptionsView.ShowGroupPanel = false;
             // 
             // gridColumn1
             // 
@@ -432,13 +432,12 @@
             // btnDelFile
             // 
             this.btnDelFile.AutoHeight = false;
-            editorButtonImageOptions2.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("editorButtonImageOptions2.SvgImage")));
-            editorButtonImageOptions2.SvgImageSize = new System.Drawing.Size(16, 16);
+            editorButtonImageOptions4.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("editorButtonImageOptions4.SvgImage")));
+            editorButtonImageOptions4.SvgImageSize = new System.Drawing.Size(16, 16);
             this.btnDelFile.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions4, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject13, serializableAppearanceObject14, serializableAppearanceObject15, serializableAppearanceObject16, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.btnDelFile.Name = "btnDelFile";
             this.btnDelFile.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
-            this.btnDelFile.Click += new System.EventHandler(this.btnDelFile_Click);
             // 
             // lbCountFile
             // 
@@ -467,7 +466,6 @@
             this.btnAddFile.StyleController = this.layoutControl1;
             this.btnAddFile.TabIndex = 19;
             this.btnAddFile.Text = "新增";
-            this.btnAddFile.Click += new System.EventHandler(this.btnAddFile_Click);
             // 
             // txbMonthlyBenefit
             // 
@@ -679,6 +677,47 @@
             this.layoutControlGroup1,
             this.tabAttachments,
             this.layoutControlGroup3});
+            // 
+            // layoutControlGroup3
+            // 
+            this.layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem4,
+            this.layoutControlItem5,
+            this.layoutControlItem6});
+            this.layoutControlGroup3.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlGroup3.Name = "layoutControlGroup3";
+            this.layoutControlGroup3.Size = new System.Drawing.Size(757, 217);
+            this.layoutControlGroup3.Text = "關聯文件";
+            // 
+            // layoutControlItem4
+            // 
+            this.layoutControlItem4.Control = this.gcRelatedDoc;
+            this.layoutControlItem4.Location = new System.Drawing.Point(0, 40);
+            this.layoutControlItem4.Name = "layoutControlItem4";
+            this.layoutControlItem4.Size = new System.Drawing.Size(757, 177);
+            this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem4.TextVisible = false;
+            // 
+            // layoutControlItem5
+            // 
+            this.layoutControlItem5.Control = this.btnAddFile1;
+            this.layoutControlItem5.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.layoutControlItem5.CustomizationFormText = "layoutControlItem1";
+            this.layoutControlItem5.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem5.Name = "layoutControlItem5";
+            this.layoutControlItem5.Size = new System.Drawing.Size(125, 40);
+            this.layoutControlItem5.Text = "layoutControlItem1";
+            this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem5.TextVisible = false;
+            // 
+            // layoutControlItem6
+            // 
+            this.layoutControlItem6.Control = this.label1;
+            this.layoutControlItem6.Location = new System.Drawing.Point(125, 0);
+            this.layoutControlItem6.Name = "layoutControlItem6";
+            this.layoutControlItem6.Size = new System.Drawing.Size(632, 40);
+            this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem6.TextVisible = false;
             // 
             // layoutControlGroup1
             // 
@@ -942,58 +981,15 @@
             // 
             // layoutControlItem3
             // 
-            this.layoutControlItem3.Control = this.gcFiles;
+            this.layoutControlItem3.Control = this.gcForm;
             this.layoutControlItem3.Location = new System.Drawing.Point(0, 40);
             this.layoutControlItem3.Name = "layoutControlItem3";
             this.layoutControlItem3.Size = new System.Drawing.Size(757, 177);
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextVisible = false;
             // 
-            // layoutControlGroup3
+            // f204_DocMgmt_Info
             // 
-            this.layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem4,
-            this.layoutControlItem5,
-            this.layoutControlItem6});
-            this.layoutControlGroup3.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlGroup3.Name = "layoutControlGroup3";
-            this.layoutControlGroup3.Size = new System.Drawing.Size(757, 217);
-            this.layoutControlGroup3.Text = "關聯性文件";
-            // 
-            // layoutControlItem4
-            // 
-            this.layoutControlItem4.Control = this.gridControl1;
-            this.layoutControlItem4.Location = new System.Drawing.Point(0, 40);
-            this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(757, 177);
-            this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem4.TextVisible = false;
-            // 
-            // layoutControlItem5
-            // 
-            this.layoutControlItem5.Control = this.btnAddFile1;
-            this.layoutControlItem5.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
-            this.layoutControlItem5.CustomizationFormText = "layoutControlItem1";
-            this.layoutControlItem5.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(125, 40);
-            this.layoutControlItem5.Text = "layoutControlItem1";
-            this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem5.TextVisible = false;
-            // 
-            // layoutControlItem6
-            // 
-            this.layoutControlItem6.Control = this.label1;
-            this.layoutControlItem6.Location = new System.Drawing.Point(125, 0);
-            this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(632, 40);
-            this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem6.TextVisible = false;
-            // 
-            // f204_DocInfo
-            // 
-            this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
-            this.Appearance.Options.UseBackColor = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(801, 342);
@@ -1002,19 +998,19 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "f204_DocInfo";
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.IconOptions.Image = global::KnowledgeSystem.Properties.Resources.AppIcon;
+            this.Name = "f204_DocMgmt_Info";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "f204_DocInfo";
-            this.Load += new System.EventHandler(this.f204_DocInfo_Load);
+            this.Text = "f204_DocMgmt_Info";
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gcRelatedDoc)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvRelatedDoc)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gcFiles)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvFiles)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gcForm)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvForm)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDelFile)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbMonthlyBenefit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbSubject.Properties)).EndInit();
@@ -1030,6 +1026,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.txbSubject2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroup1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcHalfYear)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcTypeOf1)).EndInit();
@@ -1047,10 +1047,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1068,8 +1064,15 @@
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
-        private DevExpress.XtraGrid.GridControl gcFiles;
-        private DevExpress.XtraGrid.Views.Grid.GridView gvFiles;
+        private System.Windows.Forms.Label label1;
+        private DevExpress.XtraGrid.GridControl gcRelatedDoc;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvRelatedDoc;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEdit1;
+        private DevExpress.XtraGrid.GridControl gcForm;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvForm;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraGrid.Columns.GridColumn gColDelFile;
@@ -1081,42 +1084,35 @@
         private DevExpress.XtraEditors.ComboBoxEdit cbbTypeOf;
         private DevExpress.XtraEditors.TextEdit txbInvestmentAmount;
         private DevExpress.XtraEditors.DateEdit txbCompleteDate;
+        private DevExpress.XtraEditors.ComboBoxEdit cbbTypeOf1;
+        private DevExpress.XtraEditors.TextEdit txbSubject1;
+        private DevExpress.XtraEditors.TextEdit txbSubject11;
+        private DevExpress.XtraEditors.SimpleButton btnAddFile1;
+        private DevExpress.XtraEditors.ComboBoxEdit cbbTypeOf2;
+        private DevExpress.XtraEditors.ButtonEdit txbFilePath;
+        private DevExpress.XtraEditors.TextEdit txbSubject2;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.TabbedControlGroup tabbedControlGroup1;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
-        private DevExpress.XtraLayout.LayoutControlItem lcTWName;
-        private DevExpress.XtraLayout.LayoutControlItem lcENVNName;
-        private DevExpress.XtraLayout.LayoutControlItem lcTypeOf;
         private DevExpress.XtraLayout.LayoutControlItem lcHalfYear;
-        private DevExpress.XtraLayout.LayoutControlItem lcRequestUsr;
-        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup3;
-        private DevExpress.XtraEditors.ComboBoxEdit cbbTypeOf1;
         private DevExpress.XtraLayout.LayoutControlItem lcTypeOf1;
-        private DevExpress.XtraEditors.TextEdit txbSubject1;
         private DevExpress.XtraLayout.LayoutControlItem lcTWName1;
-        private DevExpress.XtraEditors.TextEdit txbSubject11;
         private DevExpress.XtraLayout.LayoutControlItem lcTWName2;
+        private DevExpress.XtraLayout.LayoutControlItem lcENVNName;
+        private DevExpress.XtraLayout.LayoutControlItem lcTypeOf2;
+        private DevExpress.XtraLayout.LayoutControlItem lcFilePath;
+        private DevExpress.XtraLayout.LayoutControlItem lcRequestUsr;
+        private DevExpress.XtraLayout.LayoutControlItem lcTWName;
+        private DevExpress.XtraLayout.LayoutControlItem lcTypeOf;
+        private DevExpress.XtraLayout.LayoutControlItem lcTWName3;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
         private DevExpress.XtraLayout.LayoutControlGroup tabAttachments;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
-        private DevExpress.XtraGrid.GridControl gridControl1;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
-        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEdit1;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup3;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
-        private System.Windows.Forms.Label label1;
-        private DevExpress.XtraEditors.SimpleButton btnAddFile1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
-        private DevExpress.XtraEditors.ComboBoxEdit cbbTypeOf2;
-        private DevExpress.XtraLayout.LayoutControlItem lcTypeOf2;
-        private DevExpress.XtraEditors.ButtonEdit txbFilePath;
-        private DevExpress.XtraLayout.LayoutControlItem lcFilePath;
-        private DevExpress.XtraEditors.TextEdit txbSubject2;
-        private DevExpress.XtraLayout.LayoutControlItem lcTWName3;
-        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
     }
 }
