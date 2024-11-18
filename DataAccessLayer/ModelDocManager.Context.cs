@@ -93,7 +93,7 @@ namespace DataAccessLayer
         public virtual DbSet<dt204_DocCatorary> dt204_DocCatorary { get; set; }
         public virtual DbSet<dt204_Form> dt204_Form { get; set; }
         public virtual DbSet<dt204_FuncCatorary> dt204_FuncCatorary { get; set; }
-        public virtual DbSet<dt204_InternalDocMgmt> dt204_InternalDocMgmt { get; set; }
         public virtual DbSet<dt204_RelatedDoc> dt204_RelatedDoc { get; set; }
+        public virtual DbSet<dt204_InternalDocMgmt> dt204_InternalDocMgmt { get; set; }
     }
 }

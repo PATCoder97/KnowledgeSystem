@@ -30,7 +30,7 @@ namespace BusinessLayer
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dt204_InternalDocMgmt.ToList();
+                    return _context.dt204_InternalDocMgmt.Where(r => !r.IsDel).ToList();
                 }
             }
             catch (Exception ex)

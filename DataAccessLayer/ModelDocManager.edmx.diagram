@@ -73,8 +73,8 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt204_DocCatorary" Width="1.5" PointX="0.5" PointY="35.875" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt204_Form" Width="1.5" PointX="5.375" PointY="35.875" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt204_FuncCatorary" Width="1.5" PointX="2.125" PointY="35.875" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt204_InternalDocMgmt" Width="1.5" PointX="3.75" PointY="35.875" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt204_RelatedDoc" Width="1.5" PointX="7" PointY="35.875" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt204_InternalDocMgmt" Width="1.5" PointX="3.75" PointY="35.875" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
