@@ -78,6 +78,11 @@
     <Compile Include="dt202\dt202_BaseBUS.cs" />
     <Compile Include="dt202\dt202_AttachBUS.cs" />
     <Compile Include="dt202\dt202_TypeBUS.cs" />
+    <Compile Include="dt204\dt204_DocCatoraryBUS.cs" />
+    <Compile Include="dt204\dt204_FormBUS.cs" />
+    <Compile Include="dt204\dt204_FuncCatoraryBUS.cs" />
+    <Compile Include="dt204\dt204_InternalDocMgmtBUS.cs" />
+    <Compile Include="dt204\dt204_RelatedDocBUS.cs" />
     <Compile Include="dt207\dt207_AttachmentBUS.cs" />
     <Compile Include="dt207\dt207_Attachment_BAKBUS.cs" />
     <Compile Include="dt207\dt207_BaseBUS.cs" />

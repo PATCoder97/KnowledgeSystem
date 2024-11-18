@@ -311,6 +311,59 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="DisplayName" Type="nvarchar" MaxLength="32" Nullable="false" />
         </EntityType>
+        <EntityType Name="dt204_DocCatorary">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt204_Form">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdBase" Type="int" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="IdAtt" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt204_FuncCatorary">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt204_InternalDocMgmt">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdDept" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="IdDocCatorary" Type="int" Nullable="false" />
+          <Property Name="IdFuncCatorary" Type="int" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="DisplayNameVN" Type="nvarchar" MaxLength="512" />
+          <Property Name="DocVersion" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="DeployDate" Type="date" Nullable="false" />
+          <Property Name="PeriodNotify" Type="int" Nullable="false" />
+          <Property Name="PauseNotify" Type="int" />
+          <Property Name="IdFounder" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="IdUsrUpload" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="UploadDate" Type="date" Nullable="false" />
+          <Property Name="IdAtt" Type="int" Nullable="false" />
+          <Property Name="IsDel" Type="bit" Nullable="false" />
+          <Property Name="DelTime" Type="datetime" />
+          <Property Name="IdUsrDel" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="dt204_RelatedDoc">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdBase" Type="int" Nullable="false" />
+          <Property Name="IdRelatedDoc" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="dt207_Attachment">
           <Key>
             <PropertyRef Name="Id" />
@@ -740,6 +793,11 @@
           <EntitySet Name="dt202_Attach" EntityType="Self.dt202_Attach" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt202_Base" EntityType="Self.dt202_Base" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt202_Type" EntityType="Self.dt202_Type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt204_DocCatorary" EntityType="Self.dt204_DocCatorary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt204_Form" EntityType="Self.dt204_Form" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt204_FuncCatorary" EntityType="Self.dt204_FuncCatorary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt204_InternalDocMgmt" EntityType="Self.dt204_InternalDocMgmt" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt204_RelatedDoc" EntityType="Self.dt204_RelatedDoc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt207_Attachment" EntityType="Self.dt207_Attachment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt207_Attachment_BAK" EntityType="Self.dt207_Attachment_BAK" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt207_Base" EntityType="Self.dt207_Base" Schema="dbo" store:Type="Tables" />
@@ -848,6 +906,11 @@
           <EntitySet Name="dt201_Forms" EntityType="DBDocumentManagementSystemModel.dt201_Forms" />
           <EntitySet Name="dt201_Base" EntityType="DBDocumentManagementSystemModel.dt201_Base" />
           <EntitySet Name="dt201_UpdateUsrReq_Detail" EntityType="DBDocumentManagementSystemModel.dt201_UpdateUsrReq_Detail" />
+          <EntitySet Name="dt204_DocCatorary" EntityType="DBDocumentManagementSystemModel.dt204_DocCatorary" />
+          <EntitySet Name="dt204_Form" EntityType="DBDocumentManagementSystemModel.dt204_Form" />
+          <EntitySet Name="dt204_FuncCatorary" EntityType="DBDocumentManagementSystemModel.dt204_FuncCatorary" />
+          <EntitySet Name="dt204_InternalDocMgmt" EntityType="DBDocumentManagementSystemModel.dt204_InternalDocMgmt" />
+          <EntitySet Name="dt204_RelatedDoc" EntityType="DBDocumentManagementSystemModel.dt204_RelatedDoc" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -1554,6 +1617,59 @@
           <Property Name="UsrComplete" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="TimeSendNote" Type="DateTime" Precision="3" />
           <Property Name="UsrConfirm" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="dt204_DocCatorary">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dt204_Form">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdBase" Type="Int32" Nullable="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="IdAtt" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt204_FuncCatorary">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dt204_InternalDocMgmt">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdDept" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="IdDocCatorary" Type="Int32" Nullable="false" />
+          <Property Name="IdFuncCatorary" Type="Int32" Nullable="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayNameVN" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="DocVersion" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="DeployDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PeriodNotify" Type="Int32" Nullable="false" />
+          <Property Name="PauseNotify" Type="Int32" />
+          <Property Name="IdFounder" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsrUpload" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UploadDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IdAtt" Type="Int32" Nullable="false" />
+          <Property Name="IsDel" Type="Boolean" Nullable="false" />
+          <Property Name="DelTime" Type="DateTime" Precision="3" />
+          <Property Name="IdUsrDel" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="dt204_RelatedDoc">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdBase" Type="Int32" Nullable="false" />
+          <Property Name="IdRelatedDoc" Type="Int32" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2328,6 +2444,64 @@
                 <ScalarProperty Name="DeadLine" ColumnName="DeadLine" />
                 <ScalarProperty Name="IdReq" ColumnName="IdReq" />
                 <ScalarProperty Name="IdUpdateReq" ColumnName="IdUpdateReq" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt204_DocCatorary">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt204_DocCatorary">
+              <MappingFragment StoreEntitySet="dt204_DocCatorary">
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt204_Form">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt204_Form">
+              <MappingFragment StoreEntitySet="dt204_Form">
+                <ScalarProperty Name="IdAtt" ColumnName="IdAtt" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="IdBase" ColumnName="IdBase" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt204_FuncCatorary">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt204_FuncCatorary">
+              <MappingFragment StoreEntitySet="dt204_FuncCatorary">
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt204_InternalDocMgmt">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt204_InternalDocMgmt">
+              <MappingFragment StoreEntitySet="dt204_InternalDocMgmt">
+                <ScalarProperty Name="IdUsrDel" ColumnName="IdUsrDel" />
+                <ScalarProperty Name="DelTime" ColumnName="DelTime" />
+                <ScalarProperty Name="IsDel" ColumnName="IsDel" />
+                <ScalarProperty Name="IdAtt" ColumnName="IdAtt" />
+                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
+                <ScalarProperty Name="IdUsrUpload" ColumnName="IdUsrUpload" />
+                <ScalarProperty Name="IdFounder" ColumnName="IdFounder" />
+                <ScalarProperty Name="PauseNotify" ColumnName="PauseNotify" />
+                <ScalarProperty Name="PeriodNotify" ColumnName="PeriodNotify" />
+                <ScalarProperty Name="DeployDate" ColumnName="DeployDate" />
+                <ScalarProperty Name="DocVersion" ColumnName="DocVersion" />
+                <ScalarProperty Name="DisplayNameVN" ColumnName="DisplayNameVN" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="IdFuncCatorary" ColumnName="IdFuncCatorary" />
+                <ScalarProperty Name="IdDocCatorary" ColumnName="IdDocCatorary" />
+                <ScalarProperty Name="IdDept" ColumnName="IdDept" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt204_RelatedDoc">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt204_RelatedDoc">
+              <MappingFragment StoreEntitySet="dt204_RelatedDoc">
+                <ScalarProperty Name="IdRelatedDoc" ColumnName="IdRelatedDoc" />
+                <ScalarProperty Name="IdBase" ColumnName="IdBase" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
