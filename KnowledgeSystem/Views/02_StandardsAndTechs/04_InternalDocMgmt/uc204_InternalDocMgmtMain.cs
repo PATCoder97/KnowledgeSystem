@@ -51,6 +51,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
 
         List<dt204_InternalDocMgmt> dt204Bases;
         List<dm_Attachment> attachments;
+        List<dt204_Form> forms = new List<dt204_Form>();
 
         DXMenuItem itemViewInfo;
 
@@ -144,6 +145,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
                 jobs = dm_JobTitleBUS.Instance.GetList();
                 var docCatoraries = dt204_DocCatoraryBUS.Instance.GetList();
                 var funcCatoraries = dt204_FuncCatoraryBUS.Instance.GetList();
+                forms = dt204_FormBUS.Instance.GetList();
 
                 var basesDisplay = (from data in dt204Bases
                                     join docCato in docCatoraries on data.IdDocCatorary equals docCato.Id
@@ -216,28 +218,18 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
         // Master-Detail : gvData
         private void gvData_MasterRowEmpty(object sender, DevExpress.XtraGrid.Views.Grid.MasterRowEmptyEventArgs e)
         {
-            e.IsEmpty = false;
+            GridView view = sender as GridView;
+            int idBase = (int)view.GetRowCellValue(e.RowHandle, gColId);
+
+            e.IsEmpty = !forms.Any(r => r.IdBase == idBase);
         }
 
         private void gvData_MasterRowGetChildList(object sender, DevExpress.XtraGrid.Views.Grid.MasterRowGetChildListEventArgs e)
         {
-            //GridView view = sender as GridView;
-            //int idBase = (int)view.GetRowCellValue(e.RowHandle, gColId);
-            //bool isProgess = (bool)view.GetRowCellValue(e.RowHandle, gColIsProgess);
-            //bool isCancel = (bool)view.GetRowCellValue(e.RowHandle, gColIsCancel);
+            GridView view = sender as GridView;
+            int idBase = (int)view.GetRowCellValue(e.RowHandle, gColId);
 
-            //var baseAtts = dt306_BaseAttsBUS.Instance.GetListByIdBase(idBase);
-            //var childList = (from data in baseAtts
-            //                 join urs in users on data.UsrCancel equals urs.Id into userGroup
-            //                 from urs in userGroup.DefaultIfEmpty()
-            //                 select new
-            //                 {
-            //                     data,
-            //                     DisplayName = urs != null ? $"{urs.Id} {urs.IdDepartment}/{urs.DisplayName}" : null,
-            //                     Status = data.IsCancel || isCancel ? "被退回" : isProgess ? "核簽中" : "核簽完畢"
-            //                 }).ToList();
-
-            //e.ChildList = childList;
+            e.ChildList = forms.Where(r => r.IdBase == idBase).ToList();
         }
 
         private void gvData_MasterRowGetRelationCount(object sender, DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationCountEventArgs e)
@@ -247,7 +239,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
 
         private void gvData_MasterRowGetRelationName(object sender, DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationNameEventArgs e)
         {
-            e.RelationName = "核簽文件";
+            e.RelationName = "表單";
         }
 
         private void gvData_MasterRowExpanded(object sender, CustomMasterRowEventArgs e)
