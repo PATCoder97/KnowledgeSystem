@@ -5,8 +5,10 @@ using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using DevExpress.XtraLayout;
 using DevExpress.XtraRichEdit.Import.Html;
 using DevExpress.XtraSplashScreen;
+using DocumentFormat.OpenXml.Spreadsheet;
 using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._00_Generals;
+using KnowledgeSystem.Views._03_DepartmentManage._07_Quiz;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -41,7 +43,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
         dt204_InternalDocMgmt dt204Base = new dt204_InternalDocMgmt();
 
         BindingSource sourceFormAtts = new BindingSource();
+        BindingSource sourceRelatedDoc = new BindingSource();
         List<Attachment> baseFormAtts = new List<Attachment>();
+        List<dt204_InternalDocMgmt> relatedDocs = new List<dt204_InternalDocMgmt>();
 
         List<LayoutControlItem> lcControls;
         List<LayoutControlItem> lcImpControls;
@@ -73,6 +77,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
             txbPeriodNotify.Enabled = _enable;
             txbIdFounder.Enabled = _enable;
             txbFilePath.Enabled = _enable;
+
+            btnAddFile.Enabled = _enable;
+            gColDelFile.Visible = _enable;
         }
 
         private void LockControl()
@@ -138,6 +145,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
 
         private void f204_DocMgmt_Info_Load(object sender, EventArgs e)
         {
+            tabbedControlGroup1.SelectedTabPageIndex = 0;
+
             lcControls = new List<LayoutControlItem>() { lcDocCatorary, lcFuncCatorary, lcDocLevel, lcCode, lcDocVersion, lcDisplayName, lcDisplayNameVN, lcDeployDate, lcPeriodNotify, lcIdFounder, lcFilePath };
             lcImpControls = new List<LayoutControlItem>() { lcDocCatorary, lcFuncCatorary, lcDocLevel, lcCode, lcDocVersion, lcDisplayName, lcDeployDate, lcPeriodNotify, lcIdFounder, lcFilePath };
             foreach (var item in lcControls)
@@ -171,6 +180,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
             txbIdFounder.Properties.BestFitWidth = 110;
 
             gcForm.DataSource = sourceFormAtts;
+            gcRelatedDoc.DataSource = sourceRelatedDoc;
 
             switch (eventInfo)
             {
@@ -194,6 +204,23 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
                     txbPeriodNotify.EditValue = dt204Base.PeriodNotify;
                     txbIdFounder.EditValue = dt204Base.IdFounder;
                     txbFilePath.EditValue = "...";
+
+                    var attForms = dt204_FormBUS.Instance.GetListByIdBase(dt204Base.Id);
+                    foreach (var item in attForms)
+                    {
+                        var att = dm_AttachmentBUS.Instance.GetItemById(item.IdAtt);
+                        baseFormAtts.Add(new Attachment()
+                        {
+                            ActualName = att.ActualName,
+                            EncryptionName = att.EncryptionName,
+                            Thread = att.Thread,
+                            Id = att.Id
+                        });
+                    }
+
+                    sourceFormAtts.DataSource = baseFormAtts;
+                    lbCountFile.Text = $"共{baseFormAtts.Count}個表單";
+                    gvForm.RefreshData();
 
                     break;
                 case EventFormInfo.Update:
@@ -275,6 +302,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
 
                         result = dt204_InternalDocMgmtBUS.Instance.AddOrUpdate(dt204Base);
 
+                        Handle204Form(dt204Base.Id);
+
                         break;
                     case EventFormInfo.Delete:
                         var dialogResult = XtraMessageBox.Show($"您確認要刪除{formName}: {dt204Base.Code} {dt204Base.DisplayName}", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -305,14 +334,19 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
                 if (Directory.Exists(TPConfigs.Folder204))
                     Directory.CreateDirectory(TPConfigs.Folder204);
 
-                var idAtt = dm_AttachmentBUS.Instance.Add(new dm_Attachment()
-                {
-                    ActualName = item.ActualName,
-                    EncryptionName = item.EncryptionName,
-                    Thread = item.Thread
-                });
+                var idAtt = item.Id;
 
-                File.Copy(item.FilePath, Path.Combine(TPConfigs.Folder204, item.EncryptionName));
+                if (!string.IsNullOrEmpty(item.FilePath))
+                {
+                    File.Copy(item.FilePath, Path.Combine(TPConfigs.Folder204, item.EncryptionName));
+
+                    idAtt = dm_AttachmentBUS.Instance.Add(new dm_Attachment()
+                    {
+                        ActualName = item.ActualName,
+                        EncryptionName = item.EncryptionName,
+                        Thread = item.Thread
+                    });
+                }
 
                 dt204_FormBUS.Instance.Add(new dt204_Form()
                 {
@@ -412,6 +446,21 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
             int rowIndex = gvForm.FocusedRowHandle;
             gvForm.RefreshData();
             gvForm.FocusedRowHandle = rowIndex;
+        }
+
+        private void btnAddRelated_Click(object sender, EventArgs e)
+        {
+            f204_ChooseDocRelated fData = new f204_ChooseDocRelated();
+            fData.DocsInput = relatedDocs;
+            fData.ShowDialog();
+
+            if (fData.DocsOutput == null) return;
+
+            relatedDocs.AddRange(fData.DocsOutput);
+
+            sourceRelatedDoc.DataSource = relatedDocs;
+            lbRelated.Text = $"共{relatedDocs.Count}個關聯文件";
+            gvRelatedDoc.RefreshData();
         }
     }
 }

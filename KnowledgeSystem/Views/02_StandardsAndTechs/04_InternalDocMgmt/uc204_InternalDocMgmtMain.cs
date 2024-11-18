@@ -179,7 +179,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
             gvData.ReadOnlyGridView();
             gvData.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
             gvData.OptionsDetail.AllowOnlyOneMasterRowExpanded = true;
-            //gvDocs.ReadOnlyGridView();
+            gvForm.ReadOnlyGridView();
+            gvForm.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
 
             LoadData();
             CreateRuleGV();
@@ -219,7 +220,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
         private void gvData_MasterRowEmpty(object sender, DevExpress.XtraGrid.Views.Grid.MasterRowEmptyEventArgs e)
         {
             GridView view = sender as GridView;
-            int idBase = (int)view.GetRowCellValue(e.RowHandle, gColId);
+            int idBase = view.GetRowCellValue(e.RowHandle, gColId) != null ? (int)view.GetRowCellValue(e.RowHandle, gColId) : -1;
 
             e.IsEmpty = !forms.Any(r => r.IdBase == idBase);
         }
@@ -268,6 +269,37 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
             if (!hitInfo.InRowCell) return;
 
             int idAtt = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColIdAtt));
+            var att = dm_AttachmentBUS.Instance.GetItemById(idAtt);
+
+            string filePath = att.EncryptionName;
+            string fileName = att.ActualName;
+
+            string sourcePath = Path.Combine(TPConfigs.Folder204, filePath);
+            string destPath = Path.Combine(TPConfigs.TempFolderData, $"{Regex.Replace(fileName, @"[\\/:*?""<>|]", "")}_{DateTime.Now:yyyyMMddHHmmss}{Path.GetExtension(fileName)}");
+
+            if (!Directory.Exists(TPConfigs.TempFolderData))
+                Directory.CreateDirectory(TPConfigs.TempFolderData);
+
+            File.Copy(sourcePath, destPath, true);
+
+            f00_VIewFile fView = new f00_VIewFile(destPath);
+            fView.ShowDialog();
+        }
+
+        private void gvData_Click(object sender, EventArgs e)
+        {
+            gvData.ExpandMasterRow(gvData.FocusedRowHandle, 0);
+        }
+
+        private void gvForm_DoubleClick(object sender, EventArgs e)
+        {
+            GridView view = sender as GridView;
+
+            var pt = view.GridControl.PointToClient(Control.MousePosition);
+            GridHitInfo hitInfo = view.CalcHitInfo(pt);
+            if (!hitInfo.InRowCell) return;
+
+            int idAtt = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColIdAttForm));
             var att = dm_AttachmentBUS.Instance.GetItemById(idAtt);
 
             string filePath = att.EncryptionName;
