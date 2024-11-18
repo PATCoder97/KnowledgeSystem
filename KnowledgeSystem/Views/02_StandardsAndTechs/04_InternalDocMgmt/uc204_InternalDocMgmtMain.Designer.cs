@@ -30,13 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc204_InternalDocMgmtMain));
-            this.gvVersion = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gvForm = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcData = new DevExpress.XtraGrid.GridControl();
             this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gColId = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -53,8 +49,7 @@
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gvForm = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColIdAtt = new DevExpress.XtraGrid.Columns.GridColumn();
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnAdd = new DevExpress.XtraBars.BarButtonItem();
@@ -68,11 +63,9 @@
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.gColIdAtt = new DevExpress.XtraGrid.Columns.GridColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.gvVersion)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvForm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvForm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
@@ -81,61 +74,37 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             this.SuspendLayout();
             // 
-            // gvVersion
+            // gvForm
             // 
-            this.gvVersion.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.gvVersion.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Blue;
-            this.gvVersion.Appearance.HeaderPanel.Options.UseFont = true;
-            this.gvVersion.Appearance.HeaderPanel.Options.UseForeColor = true;
-            this.gvVersion.Appearance.HeaderPanel.Options.UseTextOptions = true;
-            this.gvVersion.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gvVersion.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gvVersion.Appearance.Row.ForeColor = System.Drawing.Color.Black;
-            this.gvVersion.Appearance.Row.Options.UseFont = true;
-            this.gvVersion.Appearance.Row.Options.UseForeColor = true;
-            this.gvVersion.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn8,
-            this.gridColumn9,
-            this.gridColumn10,
-            this.gridColumn12});
-            this.gvVersion.GridControl = this.gcData;
-            this.gvVersion.Name = "gvVersion";
-            this.gvVersion.OptionsCustomization.AllowFilter = false;
-            this.gvVersion.OptionsCustomization.AllowSort = false;
-            this.gvVersion.OptionsDetail.ShowDetailTabs = false;
-            this.gvVersion.OptionsView.ColumnAutoWidth = false;
-            this.gvVersion.OptionsView.ShowGroupPanel = false;
-            this.gvVersion.OptionsView.ShowIndicator = false;
+            this.gvForm.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.gvForm.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Green;
+            this.gvForm.Appearance.HeaderPanel.Options.UseFont = true;
+            this.gvForm.Appearance.HeaderPanel.Options.UseForeColor = true;
+            this.gvForm.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            this.gvForm.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gvForm.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F);
+            this.gvForm.Appearance.Row.ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Hyperlink;
+            this.gvForm.Appearance.Row.Options.UseFont = true;
+            this.gvForm.Appearance.Row.Options.UseForeColor = true;
+            this.gvForm.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn13});
+            this.gvForm.GridControl = this.gcData;
+            this.gvForm.Name = "gvForm";
+            this.gvForm.OptionsCustomization.AllowFilter = false;
+            this.gvForm.OptionsCustomization.AllowGroup = false;
+            this.gvForm.OptionsCustomization.AllowSort = false;
+            this.gvForm.OptionsView.ColumnAutoWidth = false;
+            this.gvForm.OptionsView.ShowColumnHeaders = false;
+            this.gvForm.OptionsView.ShowGroupPanel = false;
+            this.gvForm.OptionsView.ShowIndicator = false;
             // 
-            // gridColumn8
+            // gridColumn13
             // 
-            this.gridColumn8.Caption = "版本";
-            this.gridColumn8.FieldName = "Version";
-            this.gridColumn8.Name = "gridColumn8";
-            this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 0;
-            // 
-            // gridColumn9
-            // 
-            this.gridColumn9.Caption = "檔案名稱";
-            this.gridColumn9.FieldName = "FileName";
-            this.gridColumn9.Name = "gridColumn9";
-            this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 1;
-            // 
-            // gridColumn10
-            // 
-            this.gridColumn10.Caption = "上傳人員";
-            this.gridColumn10.Name = "gridColumn10";
-            this.gridColumn10.Visible = true;
-            this.gridColumn10.VisibleIndex = 2;
-            // 
-            // gridColumn12
-            // 
-            this.gridColumn12.Caption = "上傳日期";
-            this.gridColumn12.Name = "gridColumn12";
-            this.gridColumn12.Visible = true;
-            this.gridColumn12.VisibleIndex = 3;
+            this.gridColumn13.Caption = "gridColumn13";
+            this.gridColumn13.FieldName = "DisplayName";
+            this.gridColumn13.Name = "gridColumn13";
+            this.gridColumn13.Visible = true;
+            this.gridColumn13.VisibleIndex = 0;
             // 
             // gcData
             // 
@@ -145,12 +114,8 @@
             this.gcData.EmbeddedNavigator.Buttons.Edit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.EndEdit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.Remove.Visible = false;
-            gridLevelNode1.LevelTemplate = this.gvVersion;
-            gridLevelNode2.LevelTemplate = this.gvForm;
-            gridLevelNode2.RelationName = "表單";
-            gridLevelNode1.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode2});
-            gridLevelNode1.RelationName = "發佈历史";
+            gridLevelNode1.LevelTemplate = this.gvForm;
+            gridLevelNode1.RelationName = "表單";
             this.gcData.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
             gridLevelNode1});
             this.gcData.Location = new System.Drawing.Point(12, 12);
@@ -161,8 +126,7 @@
             this.gcData.UseEmbeddedNavigator = true;
             this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvData,
-            this.gvForm,
-            this.gvVersion});
+            this.gvForm});
             // 
             // gvData
             // 
@@ -204,6 +168,11 @@
             this.gvData.OptionsView.EnableAppearanceOddRow = true;
             this.gvData.OptionsView.ShowAutoFilterRow = true;
             this.gvData.OptionsView.ShowGroupPanel = false;
+            this.gvData.MasterRowEmpty += new DevExpress.XtraGrid.Views.Grid.MasterRowEmptyEventHandler(this.gvData_MasterRowEmpty);
+            this.gvData.MasterRowExpanded += new DevExpress.XtraGrid.Views.Grid.CustomMasterRowEventHandler(this.gvData_MasterRowExpanded);
+            this.gvData.MasterRowGetChildList += new DevExpress.XtraGrid.Views.Grid.MasterRowGetChildListEventHandler(this.gvData_MasterRowGetChildList);
+            this.gvData.MasterRowGetRelationName += new DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationNameEventHandler(this.gvData_MasterRowGetRelationName);
+            this.gvData.MasterRowGetRelationCount += new DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationCountEventHandler(this.gvData_MasterRowGetRelationCount);
             this.gvData.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gvData_PopupMenuShowing);
             this.gvData.DoubleClick += new System.EventHandler(this.gvData_DoubleClick);
             // 
@@ -333,36 +302,13 @@
             this.gridColumn17.Visible = true;
             this.gridColumn17.VisibleIndex = 10;
             // 
-            // gvForm
+            // gColIdAtt
             // 
-            this.gvForm.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.gvForm.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Green;
-            this.gvForm.Appearance.HeaderPanel.Options.UseFont = true;
-            this.gvForm.Appearance.HeaderPanel.Options.UseForeColor = true;
-            this.gvForm.Appearance.HeaderPanel.Options.UseTextOptions = true;
-            this.gvForm.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gvForm.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F);
-            this.gvForm.Appearance.Row.ForeColor = System.Drawing.Color.Black;
-            this.gvForm.Appearance.Row.Options.UseFont = true;
-            this.gvForm.Appearance.Row.Options.UseForeColor = true;
-            this.gvForm.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn13});
-            this.gvForm.GridControl = this.gcData;
-            this.gvForm.Name = "gvForm";
-            this.gvForm.OptionsCustomization.AllowFilter = false;
-            this.gvForm.OptionsCustomization.AllowGroup = false;
-            this.gvForm.OptionsCustomization.AllowSort = false;
-            this.gvForm.OptionsView.ColumnAutoWidth = false;
-            this.gvForm.OptionsView.ShowGroupPanel = false;
-            this.gvForm.OptionsView.ShowIndicator = false;
-            // 
-            // gridColumn13
-            // 
-            this.gridColumn13.Caption = "gridColumn13";
-            this.gridColumn13.FieldName = "DisplayName";
-            this.gridColumn13.Name = "gridColumn13";
-            this.gridColumn13.Visible = true;
-            this.gridColumn13.VisibleIndex = 0;
+            this.gColIdAtt.Caption = "IdAtt";
+            this.gColIdAtt.FieldName = "data.IdAtt";
+            this.gColIdAtt.Name = "gColIdAtt";
+            this.gColIdAtt.Visible = true;
+            this.gColIdAtt.VisibleIndex = 13;
             // 
             // barManagerTP
             // 
@@ -527,14 +473,6 @@
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
-            // gColIdAtt
-            // 
-            this.gColIdAtt.Caption = "IdAtt";
-            this.gColIdAtt.FieldName = "data.IdAtt";
-            this.gColIdAtt.Name = "gColIdAtt";
-            this.gColIdAtt.Visible = true;
-            this.gColIdAtt.VisibleIndex = 13;
-            // 
             // uc204_InternalDocMgmtMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -547,10 +485,9 @@
             this.Name = "uc204_InternalDocMgmtMain";
             this.Size = new System.Drawing.Size(1241, 566);
             this.Load += new System.EventHandler(this.uc204_InternalDocMgmtMain_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.gvVersion)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvForm)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvForm)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
@@ -576,13 +513,7 @@
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraGrid.GridControl gcData;
-        private DevExpress.XtraGrid.Views.Grid.GridView gvVersion;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
         private DevExpress.XtraGrid.Views.Grid.GridView gvForm;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
         private DevExpress.XtraGrid.Views.Grid.GridView gvData;
         private DevExpress.XtraGrid.Columns.GridColumn gColId;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
@@ -601,5 +532,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn16;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn17;
         private DevExpress.XtraGrid.Columns.GridColumn gColIdAtt;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
     }
 }

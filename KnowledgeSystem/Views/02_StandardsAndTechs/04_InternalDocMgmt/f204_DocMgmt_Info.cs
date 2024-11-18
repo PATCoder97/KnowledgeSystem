@@ -14,10 +14,12 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net.Mail;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -38,18 +40,17 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
 
         dt204_InternalDocMgmt dt204Base = new dt204_InternalDocMgmt();
 
-        BindingSource sourceAtts = new BindingSource();
-        List<Attachment> baseAtts;
+        BindingSource sourceFormAtts = new BindingSource();
+        List<Attachment> baseFormAtts = new List<Attachment>();
 
         List<LayoutControlItem> lcControls;
         List<LayoutControlItem> lcImpControls;
 
         string baseFilePath = "";
 
-        private class Attachment : dt306_BaseAtts
+        private class Attachment : dm_Attachment
         {
-            public string EncryptName { get; set; }
-            public dt306_BaseAtts BaseAtt { get; set; }
+            public string FilePath { get; set; }
         }
 
         private void InitializeIcon()
@@ -169,6 +170,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
             txbIdFounder.Properties.ValueMember = "Id";
             txbIdFounder.Properties.BestFitWidth = 110;
 
+            gcForm.DataSource = sourceFormAtts;
+
             switch (eventInfo)
             {
                 case EventFormInfo.Create:
@@ -204,151 +207,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
             }
 
             LockControl();
-        }
-
-        private void gvDocs_DoubleClick(object sender, EventArgs e)
-        {
-            //GridView view = sender as GridView;
-            //var pt = view.GridControl.PointToClient(System.Windows.Forms.Control.MousePosition);
-            //GridHitInfo hitInfo = view.CalcHitInfo(pt);
-            //if (!hitInfo.InRowCell) return;
-
-            //int idAtt = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColIdAtt));
-            //var attProgress = dm_AttachmentBUS.Instance.GetItemById(idAtt);
-            //string fileName = attProgress?.EncryptionName ?? "";
-
-            //string sourceFolder = Path.Combine(TPConfigs.Folder306, idBase.ToString());
-            //string sourcePath = Path.Combine(sourceFolder, fileName);
-            //string destPath = Path.Combine(TPConfigs.TempFolderData, $"sign_{DateTime.Now:yyyyMMddHHmmss}.pdf");
-
-            //if (!Directory.Exists(TPConfigs.TempFolderData))
-            //    Directory.CreateDirectory(TPConfigs.TempFolderData);
-
-            //File.Copy(sourcePath, destPath, true);
-
-            //switch (idRoleConfirm)
-            //{
-            //    case 1:
-            //        f00_PdfTools pdfTools = new f00_PdfTools(destPath, sourceFolder);
-            //        pdfTools.ShowDialog();
-
-            //        // Truy cập giá trị chuỗi trả về sau khi Form đã đóng
-            //        string encrytFileName = pdfTools.OutFileName;
-            //        string describe = pdfTools.Describe;
-
-            //        Attachment itemToUpdate = baseAtts.SingleOrDefault(item => item.BaseAtt.IdAtt == idAtt);
-            //        if (string.IsNullOrEmpty(encrytFileName))
-            //        {
-            //            itemToUpdate.BaseAtt.Desc = describe;
-            //            itemToUpdate.BaseAtt.UsrCancel = TPConfigs.LoginUser.Id;
-            //            itemToUpdate.BaseAtt.IsCancel = true;
-            //            itemToUpdate.EncryptName = null;
-            //        }
-            //        else
-            //        {
-            //            itemToUpdate.BaseAtt.Desc = "已簽名";
-            //            itemToUpdate.EncryptName = encrytFileName;
-            //        }
-
-            //        gvDocs.RefreshData();
-
-            //        // Kiểm tra xem có văn kiện nào được đi tiếp không, Nếu có mới hiện nút Approval
-            //        bool CanConfirm = baseAtts.Any(r => r.EncryptName != null);
-            //        btnApproval.Visibility = CanConfirm ? DevExpress.XtraBars.BarItemVisibility.Always : DevExpress.XtraBars.BarItemVisibility.Never;
-            //        break;
-            //    case 2:
-            //        f00_VIewFile fView = new f00_VIewFile(destPath, false, true);
-            //        fView.ShowDialog();
-
-            //        // Truy cập giá trị chuỗi trả về sau khi Form đã đóng
-            //        bool IsConfirm = fView.IsConfirm;
-            //        describe = fView.Describe;
-
-            //        if (IsConfirm != true) return;// Kiểm tra xem đã xác nhận hay chưa
-
-            //        itemToUpdate = baseAtts.SingleOrDefault(item => item.BaseAtt.IdAtt == idAtt);
-            //        if (string.IsNullOrEmpty(describe))
-            //        {
-            //            itemToUpdate.BaseAtt.Desc = "已確認";
-            //        }
-            //        else
-            //        {
-            //            itemToUpdate.BaseAtt.Desc = describe;
-            //            itemToUpdate.BaseAtt.UsrCancel = TPConfigs.LoginUser.Id;
-            //            itemToUpdate.BaseAtt.IsCancel = true;
-            //            itemToUpdate.EncryptName = null;
-            //        }
-
-            //        gvDocs.RefreshData();
-
-            //        // Kiểm tra xem có văn kiện nào được đi tiếp không, Nếu có mới hiện nút Approval
-            //        CanConfirm = baseAtts.Any(r => r.BaseAtt.IsCancel != true);
-            //        btnConfirm.Visibility = CanConfirm ? DevExpress.XtraBars.BarItemVisibility.Always : DevExpress.XtraBars.BarItemVisibility.Never;
-            //        break;
-            //}
-        }
-
-        private void btnCancel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            XtraInputBoxArgs args = new XtraInputBoxArgs
-            {
-                Caption = TPConfigs.SoftNameTW,
-                Prompt = "退回文件原因",
-                DefaultButtonIndex = 0,
-                Editor = new MemoEdit(),
-                DefaultResponse = ""
-            };
-
-            var result = XtraInputBox.Show(args);
-            if (result == null) return;
-            string describe = result?.ToString() ?? "";
-
-            var baseData = dt306_BaseBUS.Instance.GetItemById(idBase);
-            baseData.NextStepProg = "";
-            baseData.IsProcess = false;
-            baseData.IsCancel = true;
-            baseData.Desc = $"被{TPConfigs.LoginUser.DisplayName}退回，說明：{describe}";
-
-            dt306_BaseBUS.Instance.AddOrUpdate(baseData);
-
-            // Đưa tất cả các file ra ngoài folder để sau này xem lại vì sao bị trả về
-            foreach (var item in baseAtts)
-            {
-                item.UsrCancel = TPConfigs.LoginUser.Id;
-                dt306_BaseAttsBUS.Instance.AddOrUpdate(item.BaseAtt);
-            }
-
-            var allAtts = dt306_BaseAttsBUS.Instance.GetListByIdBase(idBase);
-            foreach (var item in allAtts)
-            {
-                var att = dm_AttachmentBUS.Instance.GetItemById(item.IdAtt);
-                string sourceFile = Path.Combine(TPConfigs.Folder306, idBase.ToString(), att.EncryptionName);
-                string destFile = Path.Combine(TPConfigs.Folder306, att.EncryptionName);
-
-                File.Copy(sourceFile, destFile, true);
-            }
-
-            // Các bước trước nếu chưa gửi note thì khỏi gửi luôn
-            var progInfoSendNote = dt306_ProgInfoBUS.Instance.GetListByIdBase(idBase)
-                .Where(r => string.IsNullOrEmpty(r.SendNoteTime.ToString())).ToList();
-            foreach (var item in progInfoSendNote)
-            {
-                item.SendNoteTime = DateTime.Now;
-                dt306_ProgInfoBUS.Instance.AddOrUpdate(item);
-            }
-
-            // Gửi bước cuối cùng
-            dt306_ProgInfo info = new dt306_ProgInfo()
-            {
-                IdBase = idBase,
-                IdUsr = TPConfigs.LoginUser.Id,
-                RespTime = DateTime.Now,
-                Desc = "退回"
-            };
-
-            dt306_ProgInfoBUS.Instance.Add(info);
-
-            Close();
         }
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -402,7 +260,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
 
                         HandleBaseAttachment();
 
-                        result = dt204_InternalDocMgmtBUS.Instance.Add(dt204Base);
+                        int idDt204Base = dt204_InternalDocMgmtBUS.Instance.Add(dt204Base);
+                        result = idDt204Base != -1;
+
+                        Handle204Form(idDt204Base);
 
                         break;
                     case EventFormInfo.Update:
@@ -432,6 +293,33 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
             else
             {
                 MsgTP.MsgErrorDB();
+            }
+        }
+
+        private void Handle204Form(int idDt204Base)
+        {
+            dt204_FormBUS.Instance.RemoveByIdBase(idDt204Base);
+
+            foreach (var item in baseFormAtts)
+            {
+                if (Directory.Exists(TPConfigs.Folder204))
+                    Directory.CreateDirectory(TPConfigs.Folder204);
+
+                var idAtt = dm_AttachmentBUS.Instance.Add(new dm_Attachment()
+                {
+                    ActualName = item.ActualName,
+                    EncryptionName = item.EncryptionName,
+                    Thread = item.Thread
+                });
+
+                File.Copy(item.FilePath, Path.Combine(TPConfigs.Folder204, item.EncryptionName));
+
+                dt204_FormBUS.Instance.Add(new dt204_Form()
+                {
+                    IdBase = idDt204Base,
+                    IdAtt = idAtt,
+                    DisplayName = item.ActualName
+                });
             }
         }
 
@@ -476,6 +364,54 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
         {
             eventInfo = EventFormInfo.Delete;
             LockControl();
+        }
+
+        private void btnAddFile_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = TPConfigs.FilterFile,
+                Multiselect = true
+            };
+
+            if (openFileDialog.ShowDialog() != DialogResult.OK)
+                return;
+
+            foreach (string fileName in openFileDialog.FileNames)
+            {
+                string encryptionName = EncryptionHelper.EncryptionFileName(fileName);
+                Attachment attachment = new Attachment
+                {
+                    FilePath = fileName,
+                    ActualName = Path.GetFileName(fileName),
+                    EncryptionName = encryptionName,
+                    Thread = "204"
+                };
+                baseFormAtts.Add(attachment);
+                Thread.Sleep(5);
+            }
+
+            sourceFormAtts.DataSource = baseFormAtts;
+            lbCountFile.Text = $"共{baseFormAtts.Count}個表單";
+            gvForm.RefreshData();
+        }
+
+        private void btnDelFile_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            Attachment attachment = gvForm.GetRow(gvForm.FocusedRowHandle) as Attachment;
+
+            string msg = $"您想要刪除表單：\r\n{attachment.ActualName}?";
+            if (MsgTP.MsgYesNoQuestion(msg) == DialogResult.No)
+            {
+                return;
+            }
+
+            baseFormAtts.Remove(attachment);
+            lbCountFile.Text = $"共{baseFormAtts.Count}個表單";
+
+            int rowIndex = gvForm.FocusedRowHandle;
+            gvForm.RefreshData();
+            gvForm.FocusedRowHandle = rowIndex;
         }
     }
 }
