@@ -18,6 +18,8 @@ namespace DataAccessLayer
         public string IdDept { get; set; }
         public int IdDocCatorary { get; set; }
         public int IdFuncCatorary { get; set; }
+        public string DocLevel { get; set; }
+        public string Code { get; set; }
         public string DisplayName { get; set; }
         public string DisplayNameVN { get; set; }
         public string DocVersion { get; set; }

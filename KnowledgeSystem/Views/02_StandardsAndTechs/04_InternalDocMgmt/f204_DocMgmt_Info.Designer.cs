@@ -29,17 +29,17 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions9 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f204_DocMgmt_Info));
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject33 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject34 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject35 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject36 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions10 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject37 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject38 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject39 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject40 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnEdit = new DevExpress.XtraBars.BarButtonItem();
@@ -50,7 +50,7 @@
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lbRelated = new System.Windows.Forms.Label();
             this.gcRelatedDoc = new DevExpress.XtraGrid.GridControl();
             this.gvRelatedDoc = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -65,40 +65,44 @@
             this.btnDelFile = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.lbCountFile = new System.Windows.Forms.Label();
             this.btnAddFile = new DevExpress.XtraEditors.SimpleButton();
-            this.txbMonthlyBenefit = new DevExpress.XtraEditors.TextEdit();
-            this.txbSubject = new DevExpress.XtraEditors.TextEdit();
-            this.cbbTypeOf = new DevExpress.XtraEditors.ComboBoxEdit();
-            this.txbInvestmentAmount = new DevExpress.XtraEditors.TextEdit();
-            this.txbCompleteDate = new DevExpress.XtraEditors.DateEdit();
-            this.cbbTypeOf1 = new DevExpress.XtraEditors.ComboBoxEdit();
-            this.txbSubject1 = new DevExpress.XtraEditors.TextEdit();
-            this.txbSubject11 = new DevExpress.XtraEditors.TextEdit();
-            this.btnAddFile1 = new DevExpress.XtraEditors.SimpleButton();
-            this.cbbTypeOf2 = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.txbPeriodNotify = new DevExpress.XtraEditors.TextEdit();
+            this.txbCode = new DevExpress.XtraEditors.TextEdit();
+            this.txbDeployDate = new DevExpress.XtraEditors.DateEdit();
+            this.cbbDocLevel = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.txbDisplayName = new DevExpress.XtraEditors.TextEdit();
+            this.txbDisplayNameVN = new DevExpress.XtraEditors.TextEdit();
+            this.btnAddRelated = new DevExpress.XtraEditors.SimpleButton();
             this.txbFilePath = new DevExpress.XtraEditors.ButtonEdit();
-            this.txbSubject2 = new DevExpress.XtraEditors.TextEdit();
+            this.txbDocVersion = new DevExpress.XtraEditors.TextEdit();
+            this.cbbDocCatorary = new DevExpress.XtraEditors.LookUpEdit();
+            this.cbbFuncCatorary = new DevExpress.XtraEditors.LookUpEdit();
+            this.txbIdFounder = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn31 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn21 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.tabbedControlGroup1 = new DevExpress.XtraLayout.TabbedControlGroup();
-            this.layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.lcHalfYear = new DevExpress.XtraLayout.LayoutControlItem();
-            this.lcTypeOf1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.lcTWName1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.lcTWName2 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.lcENVNName = new DevExpress.XtraLayout.LayoutControlItem();
-            this.lcTypeOf2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcDeployDate = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcDocLevel = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcDisplayName = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcDisplayNameVN = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcPeriodNotify = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcDocCatorary = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcFilePath = new DevExpress.XtraLayout.LayoutControlItem();
-            this.lcRequestUsr = new DevExpress.XtraLayout.LayoutControlItem();
-            this.lcTWName = new DevExpress.XtraLayout.LayoutControlItem();
-            this.lcTypeOf = new DevExpress.XtraLayout.LayoutControlItem();
-            this.lcTWName3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcCode = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcDocVersion = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcFuncCatorary = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcIdFounder = new DevExpress.XtraLayout.LayoutControlItem();
             this.tabAttachments = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -108,40 +112,41 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcForm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvForm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDelFile)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbMonthlyBenefit.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbSubject.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbbTypeOf.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbInvestmentAmount.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbCompleteDate.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbCompleteDate.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbbTypeOf1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbSubject1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbSubject11.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbbTypeOf2.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbPeriodNotify.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbCode.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbDeployDate.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbDeployDate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbDocLevel.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbDisplayName.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbDisplayNameVN.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbFilePath.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbSubject2.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbDocVersion.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbDocCatorary.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbFuncCatorary.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbIdFounder.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroup1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcHalfYear)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcTypeOf1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcTWName1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcTWName2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcENVNName)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcTypeOf2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcDeployDate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcDocLevel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcDisplayName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcDisplayNameVN)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcPeriodNotify)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcDocCatorary)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcFilePath)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcRequestUsr)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcTWName)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcTypeOf)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcTWName3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcCode)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcDocVersion)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcFuncCatorary)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcIdFounder)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabAttachments)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
             this.SuspendLayout();
             // 
             // barManagerTP
@@ -202,6 +207,7 @@
             this.btnEdit.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.btnEdit.ItemAppearance.Normal.Options.UseFont = true;
             this.btnEdit.Name = "btnEdit";
+            this.btnEdit.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnEdit_ItemClick);
             // 
             // btnDelete
             // 
@@ -213,6 +219,7 @@
             this.btnDelete.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.btnDelete.ItemAppearance.Normal.Options.UseFont = true;
             this.btnDelete.Name = "btnDelete";
+            this.btnDelete.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDelete_ItemClick);
             // 
             // btnConfirm
             // 
@@ -224,6 +231,7 @@
             this.btnConfirm.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.btnConfirm.ItemAppearance.Normal.Options.UseFont = true;
             this.btnConfirm.Name = "btnConfirm";
+            this.btnConfirm.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnConfirm_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -260,23 +268,23 @@
             // layoutControl1
             // 
             this.layoutControl1.AllowCustomization = false;
-            this.layoutControl1.Controls.Add(this.label1);
+            this.layoutControl1.Controls.Add(this.lbRelated);
             this.layoutControl1.Controls.Add(this.gcRelatedDoc);
             this.layoutControl1.Controls.Add(this.gcForm);
             this.layoutControl1.Controls.Add(this.lbCountFile);
             this.layoutControl1.Controls.Add(this.btnAddFile);
-            this.layoutControl1.Controls.Add(this.txbMonthlyBenefit);
-            this.layoutControl1.Controls.Add(this.txbSubject);
-            this.layoutControl1.Controls.Add(this.cbbTypeOf);
-            this.layoutControl1.Controls.Add(this.txbInvestmentAmount);
-            this.layoutControl1.Controls.Add(this.txbCompleteDate);
-            this.layoutControl1.Controls.Add(this.cbbTypeOf1);
-            this.layoutControl1.Controls.Add(this.txbSubject1);
-            this.layoutControl1.Controls.Add(this.txbSubject11);
-            this.layoutControl1.Controls.Add(this.btnAddFile1);
-            this.layoutControl1.Controls.Add(this.cbbTypeOf2);
+            this.layoutControl1.Controls.Add(this.txbPeriodNotify);
+            this.layoutControl1.Controls.Add(this.txbCode);
+            this.layoutControl1.Controls.Add(this.txbDeployDate);
+            this.layoutControl1.Controls.Add(this.cbbDocLevel);
+            this.layoutControl1.Controls.Add(this.txbDisplayName);
+            this.layoutControl1.Controls.Add(this.txbDisplayNameVN);
+            this.layoutControl1.Controls.Add(this.btnAddRelated);
             this.layoutControl1.Controls.Add(this.txbFilePath);
-            this.layoutControl1.Controls.Add(this.txbSubject2);
+            this.layoutControl1.Controls.Add(this.txbDocVersion);
+            this.layoutControl1.Controls.Add(this.cbbDocCatorary);
+            this.layoutControl1.Controls.Add(this.cbbFuncCatorary);
+            this.layoutControl1.Controls.Add(this.txbIdFounder);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
@@ -286,17 +294,17 @@
             this.layoutControl1.TabIndex = 10;
             this.layoutControl1.Text = "layoutControl1";
             // 
-            // label1
+            // lbRelated
             // 
-            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.label1.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(149, 56);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(628, 36);
-            this.label1.TabIndex = 24;
-            this.label1.Text = "沒有關聯文件";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lbRelated.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.lbRelated.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lbRelated.ForeColor = System.Drawing.Color.Black;
+            this.lbRelated.Location = new System.Drawing.Point(149, 56);
+            this.lbRelated.Name = "lbRelated";
+            this.lbRelated.Size = new System.Drawing.Size(628, 36);
+            this.lbRelated.TabIndex = 24;
+            this.lbRelated.Text = "沒有關聯文件";
+            this.lbRelated.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // gcRelatedDoc
             // 
@@ -360,10 +368,10 @@
             // repositoryItemButtonEdit1
             // 
             this.repositoryItemButtonEdit1.AutoHeight = false;
-            editorButtonImageOptions9.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("editorButtonImageOptions9.SvgImage")));
-            editorButtonImageOptions9.SvgImageSize = new System.Drawing.Size(16, 16);
+            editorButtonImageOptions1.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("editorButtonImageOptions1.SvgImage")));
+            editorButtonImageOptions1.SvgImageSize = new System.Drawing.Size(16, 16);
             this.repositoryItemButtonEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions9, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject33, serializableAppearanceObject34, serializableAppearanceObject35, serializableAppearanceObject36, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.repositoryItemButtonEdit1.Name = "repositoryItemButtonEdit1";
             this.repositoryItemButtonEdit1.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             // 
@@ -430,10 +438,10 @@
             // btnDelFile
             // 
             this.btnDelFile.AutoHeight = false;
-            editorButtonImageOptions10.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("editorButtonImageOptions10.SvgImage")));
-            editorButtonImageOptions10.SvgImageSize = new System.Drawing.Size(16, 16);
+            editorButtonImageOptions2.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("editorButtonImageOptions2.SvgImage")));
+            editorButtonImageOptions2.SvgImageSize = new System.Drawing.Size(16, 16);
             this.btnDelFile.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions10, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject37, serializableAppearanceObject38, serializableAppearanceObject39, serializableAppearanceObject40, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.btnDelFile.Name = "btnDelFile";
             this.btnDelFile.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             // 
@@ -465,164 +473,114 @@
             this.btnAddFile.TabIndex = 19;
             this.btnAddFile.Text = "新增";
             // 
-            // txbMonthlyBenefit
+            // txbPeriodNotify
             // 
-            this.txbMonthlyBenefit.Location = new System.Drawing.Point(382, 200);
-            this.txbMonthlyBenefit.Name = "txbMonthlyBenefit";
-            this.txbMonthlyBenefit.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.txbMonthlyBenefit.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.txbMonthlyBenefit.Properties.Appearance.Options.UseFont = true;
-            this.txbMonthlyBenefit.Properties.Appearance.Options.UseForeColor = true;
-            this.txbMonthlyBenefit.Properties.DisplayFormat.FormatString = "n0";
-            this.txbMonthlyBenefit.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.txbMonthlyBenefit.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
-            this.txbMonthlyBenefit.Properties.MaskSettings.Set("mask", "n0");
-            this.txbMonthlyBenefit.Size = new System.Drawing.Size(58, 32);
-            this.txbMonthlyBenefit.StyleController = this.layoutControl1;
-            this.txbMonthlyBenefit.TabIndex = 17;
+            this.txbPeriodNotify.Location = new System.Drawing.Point(382, 200);
+            this.txbPeriodNotify.Name = "txbPeriodNotify";
+            this.txbPeriodNotify.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.txbPeriodNotify.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.txbPeriodNotify.Properties.Appearance.Options.UseFont = true;
+            this.txbPeriodNotify.Properties.Appearance.Options.UseForeColor = true;
+            this.txbPeriodNotify.Properties.DisplayFormat.FormatString = "n0";
+            this.txbPeriodNotify.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.txbPeriodNotify.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
+            this.txbPeriodNotify.Properties.MaskSettings.Set("mask", "n0");
+            this.txbPeriodNotify.Size = new System.Drawing.Size(81, 32);
+            this.txbPeriodNotify.StyleController = this.layoutControl1;
+            this.txbPeriodNotify.TabIndex = 17;
             // 
-            // txbSubject
+            // txbCode
             // 
-            this.txbSubject.Location = new System.Drawing.Point(112, 92);
-            this.txbSubject.Name = "txbSubject";
-            this.txbSubject.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.txbSubject.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.txbSubject.Properties.Appearance.Options.UseFont = true;
-            this.txbSubject.Properties.Appearance.Options.UseForeColor = true;
-            this.txbSubject.Size = new System.Drawing.Size(507, 32);
-            this.txbSubject.StyleController = this.layoutControl1;
-            this.txbSubject.TabIndex = 7;
+            this.txbCode.Location = new System.Drawing.Point(112, 92);
+            this.txbCode.Name = "txbCode";
+            this.txbCode.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.txbCode.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.txbCode.Properties.Appearance.Options.UseFont = true;
+            this.txbCode.Properties.Appearance.Options.UseForeColor = true;
+            this.txbCode.Size = new System.Drawing.Size(507, 32);
+            this.txbCode.StyleController = this.layoutControl1;
+            this.txbCode.TabIndex = 7;
             // 
-            // cbbTypeOf
+            // txbDeployDate
             // 
-            this.cbbTypeOf.Location = new System.Drawing.Point(400, 56);
-            this.cbbTypeOf.Name = "cbbTypeOf";
-            this.cbbTypeOf.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.cbbTypeOf.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.cbbTypeOf.Properties.Appearance.Options.UseFont = true;
-            this.cbbTypeOf.Properties.Appearance.Options.UseForeColor = true;
-            this.cbbTypeOf.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbbTypeOf.Properties.AppearanceDropDown.Options.UseFont = true;
-            this.cbbTypeOf.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.txbDeployDate.EditValue = null;
+            this.txbDeployDate.Location = new System.Drawing.Point(112, 200);
+            this.txbDeployDate.Name = "txbDeployDate";
+            this.txbDeployDate.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.txbDeployDate.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.txbDeployDate.Properties.Appearance.Options.UseFont = true;
+            this.txbDeployDate.Properties.Appearance.Options.UseForeColor = true;
+            this.txbDeployDate.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbDeployDate.Properties.AppearanceDropDown.Options.UseFont = true;
+            this.txbDeployDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbbTypeOf.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cbbTypeOf.Size = new System.Drawing.Size(219, 32);
-            this.cbbTypeOf.StyleController = this.layoutControl1;
-            this.cbbTypeOf.TabIndex = 18;
-            // 
-            // txbInvestmentAmount
-            // 
-            this.txbInvestmentAmount.Location = new System.Drawing.Point(540, 200);
-            this.txbInvestmentAmount.Name = "txbInvestmentAmount";
-            this.txbInvestmentAmount.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.txbInvestmentAmount.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.txbInvestmentAmount.Properties.Appearance.Options.UseFont = true;
-            this.txbInvestmentAmount.Properties.Appearance.Options.UseForeColor = true;
-            this.txbInvestmentAmount.Properties.DisplayFormat.FormatString = "n0";
-            this.txbInvestmentAmount.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.txbInvestmentAmount.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
-            this.txbInvestmentAmount.Properties.MaskSettings.Set("mask", "n0");
-            this.txbInvestmentAmount.Size = new System.Drawing.Size(237, 32);
-            this.txbInvestmentAmount.StyleController = this.layoutControl1;
-            this.txbInvestmentAmount.TabIndex = 16;
-            // 
-            // txbCompleteDate
-            // 
-            this.txbCompleteDate.EditValue = null;
-            this.txbCompleteDate.Location = new System.Drawing.Point(112, 200);
-            this.txbCompleteDate.Name = "txbCompleteDate";
-            this.txbCompleteDate.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.txbCompleteDate.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.txbCompleteDate.Properties.Appearance.Options.UseFont = true;
-            this.txbCompleteDate.Properties.Appearance.Options.UseForeColor = true;
-            this.txbCompleteDate.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txbCompleteDate.Properties.AppearanceDropDown.Options.UseFont = true;
-            this.txbCompleteDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.txbDeployDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txbCompleteDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.txbDeployDate.Properties.DisplayFormat.FormatString = "yyyy/MM/dd";
+            this.txbDeployDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.txbDeployDate.Properties.EditFormat.FormatString = "yyyy/MM/dd";
+            this.txbDeployDate.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.txbDeployDate.Properties.MaskSettings.Set("mask", "d");
+            this.txbDeployDate.Size = new System.Drawing.Size(177, 32);
+            this.txbDeployDate.StyleController = this.layoutControl1;
+            this.txbDeployDate.TabIndex = 22;
+            // 
+            // cbbDocLevel
+            // 
+            this.cbbDocLevel.Location = new System.Drawing.Point(681, 56);
+            this.cbbDocLevel.Name = "cbbDocLevel";
+            this.cbbDocLevel.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.cbbDocLevel.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.cbbDocLevel.Properties.Appearance.Options.UseFont = true;
+            this.cbbDocLevel.Properties.Appearance.Options.UseForeColor = true;
+            this.cbbDocLevel.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbDocLevel.Properties.AppearanceDropDown.Options.UseFont = true;
+            this.cbbDocLevel.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txbCompleteDate.Properties.DisplayFormat.FormatString = "yyyy/MM/dd";
-            this.txbCompleteDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.txbCompleteDate.Properties.EditFormat.FormatString = "yyyy/MM/dd";
-            this.txbCompleteDate.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.txbCompleteDate.Properties.MaskSettings.Set("mask", "d");
-            this.txbCompleteDate.Size = new System.Drawing.Size(177, 32);
-            this.txbCompleteDate.StyleController = this.layoutControl1;
-            this.txbCompleteDate.TabIndex = 22;
+            this.cbbDocLevel.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.cbbDocLevel.Size = new System.Drawing.Size(96, 32);
+            this.cbbDocLevel.StyleController = this.layoutControl1;
+            this.cbbDocLevel.TabIndex = 18;
             // 
-            // cbbTypeOf1
+            // txbDisplayName
             // 
-            this.cbbTypeOf1.Location = new System.Drawing.Point(681, 56);
-            this.cbbTypeOf1.Name = "cbbTypeOf1";
-            this.cbbTypeOf1.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.cbbTypeOf1.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.cbbTypeOf1.Properties.Appearance.Options.UseFont = true;
-            this.cbbTypeOf1.Properties.Appearance.Options.UseForeColor = true;
-            this.cbbTypeOf1.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbbTypeOf1.Properties.AppearanceDropDown.Options.UseFont = true;
-            this.cbbTypeOf1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbbTypeOf1.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cbbTypeOf1.Size = new System.Drawing.Size(96, 32);
-            this.cbbTypeOf1.StyleController = this.layoutControl1;
-            this.cbbTypeOf1.TabIndex = 18;
+            this.txbDisplayName.Location = new System.Drawing.Point(112, 128);
+            this.txbDisplayName.Name = "txbDisplayName";
+            this.txbDisplayName.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.txbDisplayName.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.txbDisplayName.Properties.Appearance.Options.UseFont = true;
+            this.txbDisplayName.Properties.Appearance.Options.UseForeColor = true;
+            this.txbDisplayName.Size = new System.Drawing.Size(665, 32);
+            this.txbDisplayName.StyleController = this.layoutControl1;
+            this.txbDisplayName.TabIndex = 7;
             // 
-            // txbSubject1
+            // txbDisplayNameVN
             // 
-            this.txbSubject1.Location = new System.Drawing.Point(112, 128);
-            this.txbSubject1.Name = "txbSubject1";
-            this.txbSubject1.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.txbSubject1.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.txbSubject1.Properties.Appearance.Options.UseFont = true;
-            this.txbSubject1.Properties.Appearance.Options.UseForeColor = true;
-            this.txbSubject1.Size = new System.Drawing.Size(665, 32);
-            this.txbSubject1.StyleController = this.layoutControl1;
-            this.txbSubject1.TabIndex = 7;
+            this.txbDisplayNameVN.Location = new System.Drawing.Point(112, 164);
+            this.txbDisplayNameVN.Name = "txbDisplayNameVN";
+            this.txbDisplayNameVN.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.txbDisplayNameVN.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.txbDisplayNameVN.Properties.Appearance.Options.UseFont = true;
+            this.txbDisplayNameVN.Properties.Appearance.Options.UseForeColor = true;
+            this.txbDisplayNameVN.Size = new System.Drawing.Size(665, 32);
+            this.txbDisplayNameVN.StyleController = this.layoutControl1;
+            this.txbDisplayNameVN.TabIndex = 7;
             // 
-            // txbSubject11
+            // btnAddRelated
             // 
-            this.txbSubject11.Location = new System.Drawing.Point(112, 164);
-            this.txbSubject11.Name = "txbSubject11";
-            this.txbSubject11.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.txbSubject11.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.txbSubject11.Properties.Appearance.Options.UseFont = true;
-            this.txbSubject11.Properties.Appearance.Options.UseForeColor = true;
-            this.txbSubject11.Size = new System.Drawing.Size(665, 32);
-            this.txbSubject11.StyleController = this.layoutControl1;
-            this.txbSubject11.TabIndex = 7;
-            // 
-            // btnAddFile1
-            // 
-            this.btnAddFile1.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.btnAddFile1.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.btnAddFile1.Appearance.Options.UseFont = true;
-            this.btnAddFile1.Appearance.Options.UseForeColor = true;
-            this.btnAddFile1.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnAddFile1.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnAddFile1.ImageOptions.SvgImage")));
-            this.btnAddFile1.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnAddFile1.Location = new System.Drawing.Point(24, 56);
-            this.btnAddFile1.Name = "btnAddFile1";
-            this.btnAddFile1.Size = new System.Drawing.Size(121, 36);
-            this.btnAddFile1.StyleController = this.layoutControl1;
-            this.btnAddFile1.TabIndex = 19;
-            this.btnAddFile1.Text = "新增";
-            // 
-            // cbbTypeOf2
-            // 
-            this.cbbTypeOf2.Location = new System.Drawing.Point(112, 56);
-            this.cbbTypeOf2.Name = "cbbTypeOf2";
-            this.cbbTypeOf2.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.cbbTypeOf2.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.cbbTypeOf2.Properties.Appearance.Options.UseFont = true;
-            this.cbbTypeOf2.Properties.Appearance.Options.UseForeColor = true;
-            this.cbbTypeOf2.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbbTypeOf2.Properties.AppearanceDropDown.Options.UseFont = true;
-            this.cbbTypeOf2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbbTypeOf2.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cbbTypeOf2.Size = new System.Drawing.Size(207, 32);
-            this.cbbTypeOf2.StyleController = this.layoutControl1;
-            this.cbbTypeOf2.TabIndex = 18;
+            this.btnAddRelated.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.btnAddRelated.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.btnAddRelated.Appearance.Options.UseFont = true;
+            this.btnAddRelated.Appearance.Options.UseForeColor = true;
+            this.btnAddRelated.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnAddRelated.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnAddRelated.ImageOptions.SvgImage")));
+            this.btnAddRelated.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnAddRelated.Location = new System.Drawing.Point(24, 56);
+            this.btnAddRelated.Name = "btnAddRelated";
+            this.btnAddRelated.Size = new System.Drawing.Size(121, 36);
+            this.btnAddRelated.StyleController = this.layoutControl1;
+            this.btnAddRelated.TabIndex = 19;
+            this.btnAddRelated.Text = "新增";
             // 
             // txbFilePath
             // 
@@ -638,18 +596,137 @@
             this.txbFilePath.Size = new System.Drawing.Size(665, 32);
             this.txbFilePath.StyleController = this.layoutControl1;
             this.txbFilePath.TabIndex = 17;
+            this.txbFilePath.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txbFilePath_ButtonClick);
             // 
-            // txbSubject2
+            // txbDocVersion
             // 
-            this.txbSubject2.Location = new System.Drawing.Point(681, 92);
-            this.txbSubject2.Name = "txbSubject2";
-            this.txbSubject2.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.txbSubject2.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.txbSubject2.Properties.Appearance.Options.UseFont = true;
-            this.txbSubject2.Properties.Appearance.Options.UseForeColor = true;
-            this.txbSubject2.Size = new System.Drawing.Size(96, 32);
-            this.txbSubject2.StyleController = this.layoutControl1;
-            this.txbSubject2.TabIndex = 7;
+            this.txbDocVersion.Location = new System.Drawing.Point(681, 92);
+            this.txbDocVersion.Name = "txbDocVersion";
+            this.txbDocVersion.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.txbDocVersion.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.txbDocVersion.Properties.Appearance.Options.UseFont = true;
+            this.txbDocVersion.Properties.Appearance.Options.UseForeColor = true;
+            this.txbDocVersion.Size = new System.Drawing.Size(96, 32);
+            this.txbDocVersion.StyleController = this.layoutControl1;
+            this.txbDocVersion.TabIndex = 7;
+            // 
+            // cbbDocCatorary
+            // 
+            this.cbbDocCatorary.Location = new System.Drawing.Point(112, 56);
+            this.cbbDocCatorary.Name = "cbbDocCatorary";
+            this.cbbDocCatorary.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.cbbDocCatorary.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.cbbDocCatorary.Properties.Appearance.Options.UseFont = true;
+            this.cbbDocCatorary.Properties.Appearance.Options.UseForeColor = true;
+            this.cbbDocCatorary.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbDocCatorary.Properties.AppearanceDropDown.Options.UseFont = true;
+            this.cbbDocCatorary.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbbDocCatorary.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("DisplayName", "Name1")});
+            this.cbbDocCatorary.Properties.NullText = "";
+            this.cbbDocCatorary.Properties.PopupSizeable = false;
+            this.cbbDocCatorary.Properties.ShowHeader = false;
+            this.cbbDocCatorary.Size = new System.Drawing.Size(207, 32);
+            this.cbbDocCatorary.StyleController = this.layoutControl1;
+            this.cbbDocCatorary.TabIndex = 18;
+            // 
+            // cbbFuncCatorary
+            // 
+            this.cbbFuncCatorary.Location = new System.Drawing.Point(400, 56);
+            this.cbbFuncCatorary.Name = "cbbFuncCatorary";
+            this.cbbFuncCatorary.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.cbbFuncCatorary.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.cbbFuncCatorary.Properties.Appearance.Options.UseFont = true;
+            this.cbbFuncCatorary.Properties.Appearance.Options.UseForeColor = true;
+            this.cbbFuncCatorary.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbFuncCatorary.Properties.AppearanceDropDown.Options.UseFont = true;
+            this.cbbFuncCatorary.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbbFuncCatorary.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("DisplayName", "Name2")});
+            this.cbbFuncCatorary.Properties.NullText = "";
+            this.cbbFuncCatorary.Properties.PopupSizeable = false;
+            this.cbbFuncCatorary.Properties.ShowHeader = false;
+            this.cbbFuncCatorary.Size = new System.Drawing.Size(219, 32);
+            this.cbbFuncCatorary.StyleController = this.layoutControl1;
+            this.cbbFuncCatorary.TabIndex = 18;
+            // 
+            // txbIdFounder
+            // 
+            this.txbIdFounder.EditValue = "";
+            this.txbIdFounder.Location = new System.Drawing.Point(555, 200);
+            this.txbIdFounder.Name = "txbIdFounder";
+            this.txbIdFounder.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.txbIdFounder.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.txbIdFounder.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.txbIdFounder.Properties.Appearance.Options.UseFont = true;
+            this.txbIdFounder.Properties.Appearance.Options.UseForeColor = true;
+            this.txbIdFounder.Properties.AppearanceDropDown.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.txbIdFounder.Properties.AppearanceDropDown.Options.UseFont = true;
+            this.txbIdFounder.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txbIdFounder.Properties.NullText = "";
+            this.txbIdFounder.Properties.PopupView = this.searchLookUpEdit1View;
+            this.txbIdFounder.Size = new System.Drawing.Size(222, 32);
+            this.txbIdFounder.StyleController = this.layoutControl1;
+            this.txbIdFounder.TabIndex = 4;
+            // 
+            // searchLookUpEdit1View
+            // 
+            this.searchLookUpEdit1View.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchLookUpEdit1View.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
+            this.searchLookUpEdit1View.Appearance.HeaderPanel.Options.UseFont = true;
+            this.searchLookUpEdit1View.Appearance.HeaderPanel.Options.UseForeColor = true;
+            this.searchLookUpEdit1View.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            this.searchLookUpEdit1View.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.searchLookUpEdit1View.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchLookUpEdit1View.Appearance.Row.Options.UseFont = true;
+            this.searchLookUpEdit1View.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn31,
+            this.gridColumn11,
+            this.gridColumn21});
+            this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
+            this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn31
+            // 
+            this.gridColumn31.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.gridColumn31.AppearanceCell.Options.UseFont = true;
+            this.gridColumn31.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn31.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn31.Caption = "單位";
+            this.gridColumn31.FieldName = "IdDepartment";
+            this.gridColumn31.MaxWidth = 80;
+            this.gridColumn31.MinWidth = 80;
+            this.gridColumn31.Name = "gridColumn31";
+            this.gridColumn31.Visible = true;
+            this.gridColumn31.VisibleIndex = 0;
+            this.gridColumn31.Width = 80;
+            // 
+            // gridColumn11
+            // 
+            this.gridColumn11.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.gridColumn11.AppearanceCell.Options.UseFont = true;
+            this.gridColumn11.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn11.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn11.Caption = "標號";
+            this.gridColumn11.FieldName = "Id";
+            this.gridColumn11.MinWidth = 100;
+            this.gridColumn11.Name = "gridColumn11";
+            this.gridColumn11.Visible = true;
+            this.gridColumn11.VisibleIndex = 1;
+            this.gridColumn11.Width = 100;
+            // 
+            // gridColumn21
+            // 
+            this.gridColumn21.Caption = "名稱";
+            this.gridColumn21.FieldName = "DisplayName";
+            this.gridColumn21.Name = "gridColumn21";
+            this.gridColumn21.Visible = true;
+            this.gridColumn21.VisibleIndex = 2;
             // 
             // Root
             // 
@@ -676,176 +753,127 @@
             this.tabAttachments,
             this.layoutControlGroup3});
             // 
-            // layoutControlGroup3
-            // 
-            this.layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem4,
-            this.layoutControlItem5,
-            this.layoutControlItem6});
-            this.layoutControlGroup3.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlGroup3.Name = "layoutControlGroup3";
-            this.layoutControlGroup3.Size = new System.Drawing.Size(757, 217);
-            this.layoutControlGroup3.Text = "關聯文件";
-            // 
-            // layoutControlItem4
-            // 
-            this.layoutControlItem4.Control = this.gcRelatedDoc;
-            this.layoutControlItem4.Location = new System.Drawing.Point(0, 40);
-            this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(757, 177);
-            this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem4.TextVisible = false;
-            // 
-            // layoutControlItem5
-            // 
-            this.layoutControlItem5.Control = this.btnAddFile1;
-            this.layoutControlItem5.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
-            this.layoutControlItem5.CustomizationFormText = "layoutControlItem1";
-            this.layoutControlItem5.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(125, 40);
-            this.layoutControlItem5.Text = "layoutControlItem1";
-            this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem5.TextVisible = false;
-            // 
-            // layoutControlItem6
-            // 
-            this.layoutControlItem6.Control = this.label1;
-            this.layoutControlItem6.Location = new System.Drawing.Point(125, 0);
-            this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(632, 40);
-            this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem6.TextVisible = false;
-            // 
             // layoutControlGroup1
             // 
             this.layoutControlGroup1.CustomizationFormText = "文件信息";
             this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.lcHalfYear,
-            this.lcTypeOf1,
-            this.lcTWName1,
-            this.lcTWName2,
-            this.lcENVNName,
-            this.lcTypeOf2,
+            this.lcDeployDate,
+            this.lcDocLevel,
+            this.lcDisplayName,
+            this.lcDisplayNameVN,
+            this.lcPeriodNotify,
+            this.lcDocCatorary,
             this.lcFilePath,
-            this.lcRequestUsr,
-            this.lcTWName,
-            this.lcTWName3,
-            this.lcTypeOf});
+            this.lcCode,
+            this.lcDocVersion,
+            this.lcFuncCatorary,
+            this.lcIdFounder});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
             this.layoutControlGroup1.Size = new System.Drawing.Size(757, 217);
             this.layoutControlGroup1.Text = "基礎訊息";
             // 
-            // lcHalfYear
+            // lcDeployDate
             // 
-            this.lcHalfYear.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.lcHalfYear.AppearanceItemCaption.Options.UseFont = true;
-            this.lcHalfYear.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
-            this.lcHalfYear.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
-            this.lcHalfYear.Control = this.txbCompleteDate;
-            this.lcHalfYear.Location = new System.Drawing.Point(0, 144);
-            this.lcHalfYear.Name = "lcHalfYear";
-            this.lcHalfYear.Size = new System.Drawing.Size(269, 36);
-            this.lcHalfYear.Text = "發佈日期";
-            this.lcHalfYear.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
-            this.lcHalfYear.TextSize = new System.Drawing.Size(76, 24);
-            this.lcHalfYear.TextToControlDistance = 12;
+            this.lcDeployDate.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lcDeployDate.AppearanceItemCaption.Options.UseFont = true;
+            this.lcDeployDate.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.lcDeployDate.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.lcDeployDate.Control = this.txbDeployDate;
+            this.lcDeployDate.Location = new System.Drawing.Point(0, 144);
+            this.lcDeployDate.Name = "lcDeployDate";
+            this.lcDeployDate.Size = new System.Drawing.Size(269, 36);
+            this.lcDeployDate.Text = "發佈日期";
+            this.lcDeployDate.TextSize = new System.Drawing.Size(76, 24);
             // 
-            // lcTypeOf1
+            // lcDocLevel
             // 
-            this.lcTypeOf1.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.lcTypeOf1.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
-            this.lcTypeOf1.AppearanceItemCaption.Options.UseFont = true;
-            this.lcTypeOf1.AppearanceItemCaption.Options.UseForeColor = true;
-            this.lcTypeOf1.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
-            this.lcTypeOf1.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
-            this.lcTypeOf1.Control = this.cbbTypeOf1;
-            this.lcTypeOf1.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
-            this.lcTypeOf1.CustomizationFormText = "類別";
-            this.lcTypeOf1.Location = new System.Drawing.Point(599, 0);
-            this.lcTypeOf1.Name = "lcTypeOf1";
-            this.lcTypeOf1.Padding = new DevExpress.XtraLayout.Utils.Padding(10, 2, 2, 2);
-            this.lcTypeOf1.Size = new System.Drawing.Size(158, 36);
-            this.lcTypeOf1.Text = "級階";
-            this.lcTypeOf1.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
-            this.lcTypeOf1.TextSize = new System.Drawing.Size(38, 24);
-            this.lcTypeOf1.TextToControlDistance = 12;
+            this.lcDocLevel.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lcDocLevel.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.lcDocLevel.AppearanceItemCaption.Options.UseFont = true;
+            this.lcDocLevel.AppearanceItemCaption.Options.UseForeColor = true;
+            this.lcDocLevel.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.lcDocLevel.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.lcDocLevel.Control = this.cbbDocLevel;
+            this.lcDocLevel.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.lcDocLevel.CustomizationFormText = "類別";
+            this.lcDocLevel.Location = new System.Drawing.Point(599, 0);
+            this.lcDocLevel.Name = "lcDocLevel";
+            this.lcDocLevel.Padding = new DevExpress.XtraLayout.Utils.Padding(10, 2, 2, 2);
+            this.lcDocLevel.Size = new System.Drawing.Size(158, 36);
+            this.lcDocLevel.Text = "級階";
+            this.lcDocLevel.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
+            this.lcDocLevel.TextSize = new System.Drawing.Size(38, 24);
+            this.lcDocLevel.TextToControlDistance = 12;
             // 
-            // lcTWName1
+            // lcDisplayName
             // 
-            this.lcTWName1.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.lcTWName1.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
-            this.lcTWName1.AppearanceItemCaption.Options.UseFont = true;
-            this.lcTWName1.AppearanceItemCaption.Options.UseForeColor = true;
-            this.lcTWName1.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
-            this.lcTWName1.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
-            this.lcTWName1.Control = this.txbSubject1;
-            this.lcTWName1.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
-            this.lcTWName1.CustomizationFormText = "文件編號";
-            this.lcTWName1.Location = new System.Drawing.Point(0, 72);
-            this.lcTWName1.Name = "lcTWName1";
-            this.lcTWName1.Size = new System.Drawing.Size(757, 36);
-            this.lcTWName1.Text = "中文名稱";
-            this.lcTWName1.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
-            this.lcTWName1.TextSize = new System.Drawing.Size(76, 24);
-            this.lcTWName1.TextToControlDistance = 12;
+            this.lcDisplayName.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lcDisplayName.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.lcDisplayName.AppearanceItemCaption.Options.UseFont = true;
+            this.lcDisplayName.AppearanceItemCaption.Options.UseForeColor = true;
+            this.lcDisplayName.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.lcDisplayName.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.lcDisplayName.Control = this.txbDisplayName;
+            this.lcDisplayName.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.lcDisplayName.CustomizationFormText = "文件編號";
+            this.lcDisplayName.Location = new System.Drawing.Point(0, 72);
+            this.lcDisplayName.Name = "lcDisplayName";
+            this.lcDisplayName.Size = new System.Drawing.Size(757, 36);
+            this.lcDisplayName.Text = "中文名稱";
+            this.lcDisplayName.TextSize = new System.Drawing.Size(76, 24);
             // 
-            // lcTWName2
+            // lcDisplayNameVN
             // 
-            this.lcTWName2.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.lcTWName2.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
-            this.lcTWName2.AppearanceItemCaption.Options.UseFont = true;
-            this.lcTWName2.AppearanceItemCaption.Options.UseForeColor = true;
-            this.lcTWName2.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
-            this.lcTWName2.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
-            this.lcTWName2.Control = this.txbSubject11;
-            this.lcTWName2.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
-            this.lcTWName2.CustomizationFormText = "文件編號";
-            this.lcTWName2.Location = new System.Drawing.Point(0, 108);
-            this.lcTWName2.Name = "lcTWName2";
-            this.lcTWName2.Size = new System.Drawing.Size(757, 36);
-            this.lcTWName2.Text = "越文名稱";
-            this.lcTWName2.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
-            this.lcTWName2.TextSize = new System.Drawing.Size(76, 24);
-            this.lcTWName2.TextToControlDistance = 12;
+            this.lcDisplayNameVN.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lcDisplayNameVN.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.lcDisplayNameVN.AppearanceItemCaption.Options.UseFont = true;
+            this.lcDisplayNameVN.AppearanceItemCaption.Options.UseForeColor = true;
+            this.lcDisplayNameVN.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.lcDisplayNameVN.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.lcDisplayNameVN.Control = this.txbDisplayNameVN;
+            this.lcDisplayNameVN.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.lcDisplayNameVN.CustomizationFormText = "文件編號";
+            this.lcDisplayNameVN.Location = new System.Drawing.Point(0, 108);
+            this.lcDisplayNameVN.Name = "lcDisplayNameVN";
+            this.lcDisplayNameVN.Size = new System.Drawing.Size(757, 36);
+            this.lcDisplayNameVN.Text = "越文名稱";
+            this.lcDisplayNameVN.TextSize = new System.Drawing.Size(76, 24);
             // 
-            // lcENVNName
+            // lcPeriodNotify
             // 
-            this.lcENVNName.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.lcENVNName.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
-            this.lcENVNName.AppearanceItemCaption.Options.UseFont = true;
-            this.lcENVNName.AppearanceItemCaption.Options.UseForeColor = true;
-            this.lcENVNName.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
-            this.lcENVNName.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
-            this.lcENVNName.Control = this.txbMonthlyBenefit;
-            this.lcENVNName.Location = new System.Drawing.Point(269, 144);
-            this.lcENVNName.Name = "lcENVNName";
-            this.lcENVNName.Padding = new DevExpress.XtraLayout.Utils.Padding(10, 2, 2, 2);
-            this.lcENVNName.Size = new System.Drawing.Size(151, 36);
-            this.lcENVNName.Text = "週期(月)";
-            this.lcENVNName.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
-            this.lcENVNName.TextSize = new System.Drawing.Size(69, 24);
-            this.lcENVNName.TextToControlDistance = 12;
+            this.lcPeriodNotify.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lcPeriodNotify.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.lcPeriodNotify.AppearanceItemCaption.Options.UseFont = true;
+            this.lcPeriodNotify.AppearanceItemCaption.Options.UseForeColor = true;
+            this.lcPeriodNotify.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.lcPeriodNotify.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.lcPeriodNotify.Control = this.txbPeriodNotify;
+            this.lcPeriodNotify.Location = new System.Drawing.Point(269, 144);
+            this.lcPeriodNotify.Name = "lcPeriodNotify";
+            this.lcPeriodNotify.Padding = new DevExpress.XtraLayout.Utils.Padding(10, 2, 2, 2);
+            this.lcPeriodNotify.Size = new System.Drawing.Size(174, 36);
+            this.lcPeriodNotify.Text = "週期(月)";
+            this.lcPeriodNotify.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
+            this.lcPeriodNotify.TextSize = new System.Drawing.Size(69, 24);
+            this.lcPeriodNotify.TextToControlDistance = 12;
             // 
-            // lcTypeOf2
+            // lcDocCatorary
             // 
-            this.lcTypeOf2.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.lcTypeOf2.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
-            this.lcTypeOf2.AppearanceItemCaption.Options.UseFont = true;
-            this.lcTypeOf2.AppearanceItemCaption.Options.UseForeColor = true;
-            this.lcTypeOf2.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
-            this.lcTypeOf2.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
-            this.lcTypeOf2.Control = this.cbbTypeOf2;
-            this.lcTypeOf2.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
-            this.lcTypeOf2.CustomizationFormText = "類別";
-            this.lcTypeOf2.Location = new System.Drawing.Point(0, 0);
-            this.lcTypeOf2.Name = "lcTypeOf2";
-            this.lcTypeOf2.Size = new System.Drawing.Size(299, 36);
-            this.lcTypeOf2.Text = "文件類別";
-            this.lcTypeOf2.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
-            this.lcTypeOf2.TextSize = new System.Drawing.Size(76, 24);
-            this.lcTypeOf2.TextToControlDistance = 12;
+            this.lcDocCatorary.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lcDocCatorary.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.lcDocCatorary.AppearanceItemCaption.Options.UseFont = true;
+            this.lcDocCatorary.AppearanceItemCaption.Options.UseForeColor = true;
+            this.lcDocCatorary.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.lcDocCatorary.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.lcDocCatorary.Control = this.cbbDocCatorary;
+            this.lcDocCatorary.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.lcDocCatorary.CustomizationFormText = "類別";
+            this.lcDocCatorary.Location = new System.Drawing.Point(0, 0);
+            this.lcDocCatorary.Name = "lcDocCatorary";
+            this.lcDocCatorary.Size = new System.Drawing.Size(299, 36);
+            this.lcDocCatorary.Text = "文件類別";
+            this.lcDocCatorary.TextSize = new System.Drawing.Size(76, 24);
             // 
             // lcFilePath
             // 
@@ -862,82 +890,77 @@
             this.lcFilePath.Name = "lcFilePath";
             this.lcFilePath.Size = new System.Drawing.Size(757, 37);
             this.lcFilePath.Text = "主文檔案";
-            this.lcFilePath.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
             this.lcFilePath.TextSize = new System.Drawing.Size(76, 24);
-            this.lcFilePath.TextToControlDistance = 12;
             // 
-            // lcRequestUsr
+            // lcCode
             // 
-            this.lcRequestUsr.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.lcRequestUsr.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
-            this.lcRequestUsr.AppearanceItemCaption.Options.UseFont = true;
-            this.lcRequestUsr.AppearanceItemCaption.Options.UseForeColor = true;
-            this.lcRequestUsr.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
-            this.lcRequestUsr.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
-            this.lcRequestUsr.Control = this.txbInvestmentAmount;
-            this.lcRequestUsr.Location = new System.Drawing.Point(420, 144);
-            this.lcRequestUsr.Name = "lcRequestUsr";
-            this.lcRequestUsr.Padding = new DevExpress.XtraLayout.Utils.Padding(10, 2, 2, 2);
-            this.lcRequestUsr.Size = new System.Drawing.Size(337, 36);
-            this.lcRequestUsr.Text = "制定人員";
-            this.lcRequestUsr.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
-            this.lcRequestUsr.TextSize = new System.Drawing.Size(76, 24);
-            this.lcRequestUsr.TextToControlDistance = 12;
+            this.lcCode.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lcCode.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.lcCode.AppearanceItemCaption.Options.UseFont = true;
+            this.lcCode.AppearanceItemCaption.Options.UseForeColor = true;
+            this.lcCode.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.lcCode.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.lcCode.Control = this.txbCode;
+            this.lcCode.Location = new System.Drawing.Point(0, 36);
+            this.lcCode.Name = "lcCode";
+            this.lcCode.Size = new System.Drawing.Size(599, 36);
+            this.lcCode.Text = "文件編號";
+            this.lcCode.TextSize = new System.Drawing.Size(76, 24);
             // 
-            // lcTWName
+            // lcDocVersion
             // 
-            this.lcTWName.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.lcTWName.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
-            this.lcTWName.AppearanceItemCaption.Options.UseFont = true;
-            this.lcTWName.AppearanceItemCaption.Options.UseForeColor = true;
-            this.lcTWName.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
-            this.lcTWName.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
-            this.lcTWName.Control = this.txbSubject;
-            this.lcTWName.Location = new System.Drawing.Point(0, 36);
-            this.lcTWName.Name = "lcTWName";
-            this.lcTWName.Size = new System.Drawing.Size(599, 36);
-            this.lcTWName.Text = "文件編號";
-            this.lcTWName.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
-            this.lcTWName.TextSize = new System.Drawing.Size(76, 24);
-            this.lcTWName.TextToControlDistance = 12;
+            this.lcDocVersion.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lcDocVersion.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.lcDocVersion.AppearanceItemCaption.Options.UseFont = true;
+            this.lcDocVersion.AppearanceItemCaption.Options.UseForeColor = true;
+            this.lcDocVersion.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.lcDocVersion.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.lcDocVersion.Control = this.txbDocVersion;
+            this.lcDocVersion.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.lcDocVersion.CustomizationFormText = "文件編號";
+            this.lcDocVersion.Location = new System.Drawing.Point(599, 36);
+            this.lcDocVersion.Name = "lcDocVersion";
+            this.lcDocVersion.Padding = new DevExpress.XtraLayout.Utils.Padding(10, 2, 2, 2);
+            this.lcDocVersion.Size = new System.Drawing.Size(158, 36);
+            this.lcDocVersion.Text = "版本";
+            this.lcDocVersion.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
+            this.lcDocVersion.TextSize = new System.Drawing.Size(38, 24);
+            this.lcDocVersion.TextToControlDistance = 12;
             // 
-            // lcTypeOf
+            // lcFuncCatorary
             // 
-            this.lcTypeOf.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.lcTypeOf.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
-            this.lcTypeOf.AppearanceItemCaption.Options.UseFont = true;
-            this.lcTypeOf.AppearanceItemCaption.Options.UseForeColor = true;
-            this.lcTypeOf.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
-            this.lcTypeOf.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
-            this.lcTypeOf.Control = this.cbbTypeOf;
-            this.lcTypeOf.Location = new System.Drawing.Point(299, 0);
-            this.lcTypeOf.Name = "lcTypeOf";
-            this.lcTypeOf.Padding = new DevExpress.XtraLayout.Utils.Padding(10, 2, 2, 2);
-            this.lcTypeOf.Size = new System.Drawing.Size(300, 36);
-            this.lcTypeOf.Text = "機能類";
-            this.lcTypeOf.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
-            this.lcTypeOf.TextSize = new System.Drawing.Size(57, 24);
-            this.lcTypeOf.TextToControlDistance = 12;
+            this.lcFuncCatorary.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lcFuncCatorary.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.lcFuncCatorary.AppearanceItemCaption.Options.UseFont = true;
+            this.lcFuncCatorary.AppearanceItemCaption.Options.UseForeColor = true;
+            this.lcFuncCatorary.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.lcFuncCatorary.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.lcFuncCatorary.Control = this.cbbFuncCatorary;
+            this.lcFuncCatorary.Location = new System.Drawing.Point(299, 0);
+            this.lcFuncCatorary.Name = "lcFuncCatorary";
+            this.lcFuncCatorary.Padding = new DevExpress.XtraLayout.Utils.Padding(10, 2, 2, 2);
+            this.lcFuncCatorary.Size = new System.Drawing.Size(300, 36);
+            this.lcFuncCatorary.Text = "機能類";
+            this.lcFuncCatorary.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
+            this.lcFuncCatorary.TextSize = new System.Drawing.Size(57, 24);
+            this.lcFuncCatorary.TextToControlDistance = 12;
             // 
-            // lcTWName3
+            // lcIdFounder
             // 
-            this.lcTWName3.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.lcTWName3.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
-            this.lcTWName3.AppearanceItemCaption.Options.UseFont = true;
-            this.lcTWName3.AppearanceItemCaption.Options.UseForeColor = true;
-            this.lcTWName3.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
-            this.lcTWName3.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
-            this.lcTWName3.Control = this.txbSubject2;
-            this.lcTWName3.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
-            this.lcTWName3.CustomizationFormText = "文件編號";
-            this.lcTWName3.Location = new System.Drawing.Point(599, 36);
-            this.lcTWName3.Name = "lcTWName3";
-            this.lcTWName3.Padding = new DevExpress.XtraLayout.Utils.Padding(10, 2, 2, 2);
-            this.lcTWName3.Size = new System.Drawing.Size(158, 36);
-            this.lcTWName3.Text = "版本";
-            this.lcTWName3.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
-            this.lcTWName3.TextSize = new System.Drawing.Size(38, 24);
-            this.lcTWName3.TextToControlDistance = 12;
+            this.lcIdFounder.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lcIdFounder.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.lcIdFounder.AppearanceItemCaption.Options.UseFont = true;
+            this.lcIdFounder.AppearanceItemCaption.Options.UseForeColor = true;
+            this.lcIdFounder.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.lcIdFounder.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.lcIdFounder.Control = this.txbIdFounder;
+            this.lcIdFounder.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.lcIdFounder.CustomizationFormText = "人員名稱";
+            this.lcIdFounder.Location = new System.Drawing.Point(443, 144);
+            this.lcIdFounder.Name = "lcIdFounder";
+            this.lcIdFounder.Size = new System.Drawing.Size(314, 36);
+            this.lcIdFounder.Text = "制定人員";
+            this.lcIdFounder.TextSize = new System.Drawing.Size(76, 24);
             // 
             // tabAttachments
             // 
@@ -977,6 +1000,47 @@
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextVisible = false;
             // 
+            // layoutControlGroup3
+            // 
+            this.layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem4,
+            this.layoutControlItem5,
+            this.layoutControlItem6});
+            this.layoutControlGroup3.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlGroup3.Name = "layoutControlGroup3";
+            this.layoutControlGroup3.Size = new System.Drawing.Size(757, 217);
+            this.layoutControlGroup3.Text = "關聯文件";
+            // 
+            // layoutControlItem4
+            // 
+            this.layoutControlItem4.Control = this.gcRelatedDoc;
+            this.layoutControlItem4.Location = new System.Drawing.Point(0, 40);
+            this.layoutControlItem4.Name = "layoutControlItem4";
+            this.layoutControlItem4.Size = new System.Drawing.Size(757, 177);
+            this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem4.TextVisible = false;
+            // 
+            // layoutControlItem5
+            // 
+            this.layoutControlItem5.Control = this.btnAddRelated;
+            this.layoutControlItem5.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.layoutControlItem5.CustomizationFormText = "layoutControlItem1";
+            this.layoutControlItem5.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem5.Name = "layoutControlItem5";
+            this.layoutControlItem5.Size = new System.Drawing.Size(125, 40);
+            this.layoutControlItem5.Text = "layoutControlItem1";
+            this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem5.TextVisible = false;
+            // 
+            // layoutControlItem6
+            // 
+            this.layoutControlItem6.Control = this.lbRelated;
+            this.layoutControlItem6.Location = new System.Drawing.Point(125, 0);
+            this.layoutControlItem6.Name = "layoutControlItem6";
+            this.layoutControlItem6.Size = new System.Drawing.Size(632, 40);
+            this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem6.TextVisible = false;
+            // 
             // f204_DocMgmt_Info
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -992,6 +1056,7 @@
             this.Name = "f204_DocMgmt_Info";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "f204_DocMgmt_Info";
+            this.Load += new System.EventHandler(this.f204_DocMgmt_Info_Load);
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
@@ -1001,40 +1066,41 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcForm)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvForm)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDelFile)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbMonthlyBenefit.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbSubject.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbbTypeOf.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbInvestmentAmount.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbCompleteDate.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbCompleteDate.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbbTypeOf1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbSubject1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbSubject11.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbbTypeOf2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbPeriodNotify.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbCode.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbDeployDate.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbDeployDate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbDocLevel.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbDisplayName.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbDisplayNameVN.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbFilePath.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbSubject2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbDocVersion.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbDocCatorary.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbFuncCatorary.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbIdFounder.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroup1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcHalfYear)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcTypeOf1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcTWName1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcTWName2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcENVNName)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcTypeOf2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcDeployDate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcDocLevel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcDisplayName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcDisplayNameVN)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcPeriodNotify)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcDocCatorary)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcFilePath)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcRequestUsr)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcTWName)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcTypeOf)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcTWName3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcCode)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcDocVersion)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcFuncCatorary)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcIdFounder)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabAttachments)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1052,7 +1118,7 @@
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbRelated;
         private DevExpress.XtraGrid.GridControl gcRelatedDoc;
         private DevExpress.XtraGrid.Views.Grid.GridView gvRelatedDoc;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
@@ -1067,32 +1133,28 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnDelFile;
         private System.Windows.Forms.Label lbCountFile;
         private DevExpress.XtraEditors.SimpleButton btnAddFile;
-        private DevExpress.XtraEditors.TextEdit txbMonthlyBenefit;
-        private DevExpress.XtraEditors.TextEdit txbSubject;
-        private DevExpress.XtraEditors.ComboBoxEdit cbbTypeOf;
-        private DevExpress.XtraEditors.TextEdit txbInvestmentAmount;
-        private DevExpress.XtraEditors.DateEdit txbCompleteDate;
-        private DevExpress.XtraEditors.ComboBoxEdit cbbTypeOf1;
-        private DevExpress.XtraEditors.TextEdit txbSubject1;
-        private DevExpress.XtraEditors.TextEdit txbSubject11;
-        private DevExpress.XtraEditors.SimpleButton btnAddFile1;
-        private DevExpress.XtraEditors.ComboBoxEdit cbbTypeOf2;
+        private DevExpress.XtraEditors.TextEdit txbPeriodNotify;
+        private DevExpress.XtraEditors.TextEdit txbCode;
+        private DevExpress.XtraEditors.DateEdit txbDeployDate;
+        private DevExpress.XtraEditors.ComboBoxEdit cbbDocLevel;
+        private DevExpress.XtraEditors.TextEdit txbDisplayName;
+        private DevExpress.XtraEditors.TextEdit txbDisplayNameVN;
+        private DevExpress.XtraEditors.SimpleButton btnAddRelated;
         private DevExpress.XtraEditors.ButtonEdit txbFilePath;
-        private DevExpress.XtraEditors.TextEdit txbSubject2;
+        private DevExpress.XtraEditors.TextEdit txbDocVersion;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.TabbedControlGroup tabbedControlGroup1;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
-        private DevExpress.XtraLayout.LayoutControlItem lcHalfYear;
-        private DevExpress.XtraLayout.LayoutControlItem lcTypeOf1;
-        private DevExpress.XtraLayout.LayoutControlItem lcTWName1;
-        private DevExpress.XtraLayout.LayoutControlItem lcTWName2;
-        private DevExpress.XtraLayout.LayoutControlItem lcENVNName;
-        private DevExpress.XtraLayout.LayoutControlItem lcTypeOf2;
+        private DevExpress.XtraLayout.LayoutControlItem lcDeployDate;
+        private DevExpress.XtraLayout.LayoutControlItem lcDocLevel;
+        private DevExpress.XtraLayout.LayoutControlItem lcDisplayName;
+        private DevExpress.XtraLayout.LayoutControlItem lcDisplayNameVN;
+        private DevExpress.XtraLayout.LayoutControlItem lcPeriodNotify;
+        private DevExpress.XtraLayout.LayoutControlItem lcDocCatorary;
         private DevExpress.XtraLayout.LayoutControlItem lcFilePath;
-        private DevExpress.XtraLayout.LayoutControlItem lcRequestUsr;
-        private DevExpress.XtraLayout.LayoutControlItem lcTWName;
-        private DevExpress.XtraLayout.LayoutControlItem lcTypeOf;
-        private DevExpress.XtraLayout.LayoutControlItem lcTWName3;
+        private DevExpress.XtraLayout.LayoutControlItem lcCode;
+        private DevExpress.XtraLayout.LayoutControlItem lcFuncCatorary;
+        private DevExpress.XtraLayout.LayoutControlItem lcDocVersion;
         private DevExpress.XtraLayout.LayoutControlGroup tabAttachments;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
@@ -1101,5 +1163,13 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
+        private DevExpress.XtraEditors.LookUpEdit cbbDocCatorary;
+        private DevExpress.XtraEditors.LookUpEdit cbbFuncCatorary;
+        private DevExpress.XtraEditors.SearchLookUpEdit txbIdFounder;
+        private DevExpress.XtraGrid.Views.Grid.GridView searchLookUpEdit1View;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn31;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn21;
+        private DevExpress.XtraLayout.LayoutControlItem lcIdFounder;
     }
 }

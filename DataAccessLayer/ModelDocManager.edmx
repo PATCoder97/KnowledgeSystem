@@ -342,6 +342,8 @@
           <Property Name="IdDept" Type="varchar" MaxLength="8" Nullable="false" />
           <Property Name="IdDocCatorary" Type="int" Nullable="false" />
           <Property Name="IdFuncCatorary" Type="int" Nullable="false" />
+          <Property Name="DocLevel" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="32" Nullable="false" />
           <Property Name="DisplayName" Type="nvarchar" MaxLength="512" Nullable="false" />
           <Property Name="DisplayNameVN" Type="nvarchar" MaxLength="512" />
           <Property Name="DocVersion" Type="nvarchar" MaxLength="16" Nullable="false" />
@@ -909,8 +911,8 @@
           <EntitySet Name="dt204_DocCatorary" EntityType="DBDocumentManagementSystemModel.dt204_DocCatorary" />
           <EntitySet Name="dt204_Form" EntityType="DBDocumentManagementSystemModel.dt204_Form" />
           <EntitySet Name="dt204_FuncCatorary" EntityType="DBDocumentManagementSystemModel.dt204_FuncCatorary" />
-          <EntitySet Name="dt204_InternalDocMgmt" EntityType="DBDocumentManagementSystemModel.dt204_InternalDocMgmt" />
           <EntitySet Name="dt204_RelatedDoc" EntityType="DBDocumentManagementSystemModel.dt204_RelatedDoc" />
+          <EntitySet Name="dt204_InternalDocMgmt" EntityType="DBDocumentManagementSystemModel.dt204_InternalDocMgmt" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -1641,6 +1643,14 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="dt204_RelatedDoc">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdBase" Type="Int32" Nullable="false" />
+          <Property Name="IdRelatedDoc" Type="Int32" Nullable="false" />
+        </EntityType>
         <EntityType Name="dt204_InternalDocMgmt">
           <Key>
             <PropertyRef Name="Id" />
@@ -1649,6 +1659,8 @@
           <Property Name="IdDept" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
           <Property Name="IdDocCatorary" Type="Int32" Nullable="false" />
           <Property Name="IdFuncCatorary" Type="Int32" Nullable="false" />
+          <Property Name="DocLevel" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
           <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="DisplayNameVN" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="DocVersion" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
@@ -1662,14 +1674,6 @@
           <Property Name="IsDel" Type="Boolean" Nullable="false" />
           <Property Name="DelTime" Type="DateTime" Precision="3" />
           <Property Name="IdUsrDel" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="dt204_RelatedDoc">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdBase" Type="Int32" Nullable="false" />
-          <Property Name="IdRelatedDoc" Type="Int32" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2474,6 +2478,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="dt204_RelatedDoc">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt204_RelatedDoc">
+              <MappingFragment StoreEntitySet="dt204_RelatedDoc">
+                <ScalarProperty Name="IdRelatedDoc" ColumnName="IdRelatedDoc" />
+                <ScalarProperty Name="IdBase" ColumnName="IdBase" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="dt204_InternalDocMgmt">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt204_InternalDocMgmt">
               <MappingFragment StoreEntitySet="dt204_InternalDocMgmt">
@@ -2490,18 +2503,11 @@
                 <ScalarProperty Name="DocVersion" ColumnName="DocVersion" />
                 <ScalarProperty Name="DisplayNameVN" ColumnName="DisplayNameVN" />
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="DocLevel" ColumnName="DocLevel" />
                 <ScalarProperty Name="IdFuncCatorary" ColumnName="IdFuncCatorary" />
                 <ScalarProperty Name="IdDocCatorary" ColumnName="IdDocCatorary" />
                 <ScalarProperty Name="IdDept" ColumnName="IdDept" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="dt204_RelatedDoc">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt204_RelatedDoc">
-              <MappingFragment StoreEntitySet="dt204_RelatedDoc">
-                <ScalarProperty Name="IdRelatedDoc" ColumnName="IdRelatedDoc" />
-                <ScalarProperty Name="IdBase" ColumnName="IdBase" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
