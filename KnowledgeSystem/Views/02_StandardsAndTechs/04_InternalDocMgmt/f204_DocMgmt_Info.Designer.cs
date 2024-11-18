@@ -55,8 +55,9 @@
             this.gvRelatedDoc = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColDelDocRelated = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.ibtnDelDocRelated = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.repositoryItemButtonEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.gcForm = new DevExpress.XtraGrid.GridControl();
             this.gvForm = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -83,10 +84,10 @@
             this.gridColumn21 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.tabbedControlGroup1 = new DevExpress.XtraLayout.TabbedControlGroup();
-            this.tabAttachments = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.lcDeployDate = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcDocLevel = new DevExpress.XtraLayout.LayoutControlItem();
@@ -99,16 +100,16 @@
             this.lcDocVersion = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcFuncCatorary = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcIdFounder = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.tabAttachments = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcRelatedDoc)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvRelatedDoc)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ibtnDelDocRelated)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcForm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvForm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDelFile)).BeginInit();
@@ -127,10 +128,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroup1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tabAttachments)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDeployDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDocLevel)).BeginInit();
@@ -143,10 +144,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcDocVersion)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcFuncCatorary)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcIdFounder)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tabAttachments)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             this.SuspendLayout();
             // 
             // barManagerTP
@@ -312,7 +313,7 @@
             this.gcRelatedDoc.MainView = this.gvRelatedDoc;
             this.gcRelatedDoc.Name = "gcRelatedDoc";
             this.gcRelatedDoc.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.repositoryItemButtonEdit1});
+            this.ibtnDelDocRelated});
             this.gcRelatedDoc.Size = new System.Drawing.Size(753, 173);
             this.gcRelatedDoc.TabIndex = 23;
             this.gcRelatedDoc.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -333,6 +334,7 @@
             this.gvRelatedDoc.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumn3,
             this.gridColumn4,
+            this.gColDelDocRelated,
             this.gridColumn5});
             this.gvRelatedDoc.GridControl = this.gcRelatedDoc;
             this.gvRelatedDoc.Name = "gvRelatedDoc";
@@ -342,38 +344,48 @@
             // 
             // gridColumn3
             // 
-            this.gridColumn3.Caption = "關聯性文件名稱";
-            this.gridColumn3.FieldName = "ActualName";
+            this.gridColumn3.Caption = "文件編號";
+            this.gridColumn3.FieldName = "Code";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 0;
+            this.gridColumn3.Width = 149;
             // 
             // gridColumn4
             // 
-            this.gridColumn4.Caption = "附件編號";
-            this.gridColumn4.FieldName = "EncryptionName";
+            this.gridColumn4.Caption = "文件名稱";
+            this.gridColumn4.FieldName = "DisplayName";
             this.gridColumn4.Name = "gridColumn4";
+            this.gridColumn4.Visible = true;
+            this.gridColumn4.VisibleIndex = 1;
+            this.gridColumn4.Width = 548;
+            // 
+            // gColDelDocRelated
+            // 
+            this.gColDelDocRelated.Caption = " ";
+            this.gColDelDocRelated.ColumnEdit = this.ibtnDelDocRelated;
+            this.gColDelDocRelated.MaxWidth = 30;
+            this.gColDelDocRelated.MinWidth = 30;
+            this.gColDelDocRelated.Name = "gColDelDocRelated";
+            this.gColDelDocRelated.Visible = true;
+            this.gColDelDocRelated.VisibleIndex = 2;
+            this.gColDelDocRelated.Width = 30;
+            // 
+            // ibtnDelDocRelated
+            // 
+            this.ibtnDelDocRelated.AutoHeight = false;
+            editorButtonImageOptions1.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("editorButtonImageOptions1.SvgImage")));
+            editorButtonImageOptions1.SvgImageSize = new System.Drawing.Size(16, 16);
+            this.ibtnDelDocRelated.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            this.ibtnDelDocRelated.Name = "ibtnDelDocRelated";
+            this.ibtnDelDocRelated.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             // 
             // gridColumn5
             // 
-            this.gridColumn5.Caption = " ";
-            this.gridColumn5.ColumnEdit = this.repositoryItemButtonEdit1;
-            this.gridColumn5.MaxWidth = 30;
-            this.gridColumn5.MinWidth = 30;
+            this.gridColumn5.Caption = "gridColumn5";
+            this.gridColumn5.FieldName = "Id";
             this.gridColumn5.Name = "gridColumn5";
-            this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 1;
-            this.gridColumn5.Width = 30;
-            // 
-            // repositoryItemButtonEdit1
-            // 
-            this.repositoryItemButtonEdit1.AutoHeight = false;
-            editorButtonImageOptions1.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("editorButtonImageOptions1.SvgImage")));
-            editorButtonImageOptions1.SvgImageSize = new System.Drawing.Size(16, 16);
-            this.repositoryItemButtonEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
-            this.repositoryItemButtonEdit1.Name = "repositoryItemButtonEdit1";
-            this.repositoryItemButtonEdit1.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             // 
             // gcForm
             // 
@@ -455,7 +467,7 @@
             this.lbCountFile.Name = "lbCountFile";
             this.lbCountFile.Size = new System.Drawing.Size(628, 36);
             this.lbCountFile.TabIndex = 20;
-            this.lbCountFile.Text = "沒有附件";
+            this.lbCountFile.Text = "沒有表單";
             this.lbCountFile.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnAddFile
@@ -583,6 +595,7 @@
             this.btnAddRelated.StyleController = this.layoutControl1;
             this.btnAddRelated.TabIndex = 19;
             this.btnAddRelated.Text = "新增";
+            this.btnAddRelated.Click += new System.EventHandler(this.btnAddRelated_Click);
             // 
             // txbFilePath
             // 
@@ -748,50 +761,53 @@
             this.tabbedControlGroup1.AppearanceTabPage.HeaderActive.Options.UseForeColor = true;
             this.tabbedControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.tabbedControlGroup1.Name = "tabbedControlGroup1";
-            this.tabbedControlGroup1.SelectedTabPage = this.tabAttachments;
+            this.tabbedControlGroup1.SelectedTabPage = this.layoutControlGroup3;
             this.tabbedControlGroup1.Size = new System.Drawing.Size(781, 273);
             this.tabbedControlGroup1.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlGroup1,
             this.tabAttachments,
             this.layoutControlGroup3});
             // 
-            // tabAttachments
+            // layoutControlGroup3
             // 
-            this.tabAttachments.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem1,
-            this.layoutControlItem2,
-            this.layoutControlItem3});
-            this.tabAttachments.Location = new System.Drawing.Point(0, 0);
-            this.tabAttachments.Name = "tabAttachments";
-            this.tabAttachments.Size = new System.Drawing.Size(757, 217);
-            this.tabAttachments.Text = "表單";
+            this.layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem4,
+            this.layoutControlItem5,
+            this.layoutControlItem6});
+            this.layoutControlGroup3.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlGroup3.Name = "layoutControlGroup3";
+            this.layoutControlGroup3.Size = new System.Drawing.Size(757, 217);
+            this.layoutControlGroup3.Text = "關聯文件";
             // 
-            // layoutControlItem1
+            // layoutControlItem4
             // 
-            this.layoutControlItem1.Control = this.btnAddFile;
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(125, 40);
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem1.TextVisible = false;
+            this.layoutControlItem4.Control = this.gcRelatedDoc;
+            this.layoutControlItem4.Location = new System.Drawing.Point(0, 40);
+            this.layoutControlItem4.Name = "layoutControlItem4";
+            this.layoutControlItem4.Size = new System.Drawing.Size(757, 177);
+            this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem4.TextVisible = false;
             // 
-            // layoutControlItem2
+            // layoutControlItem5
             // 
-            this.layoutControlItem2.Control = this.lbCountFile;
-            this.layoutControlItem2.Location = new System.Drawing.Point(125, 0);
-            this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(632, 40);
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem2.TextVisible = false;
+            this.layoutControlItem5.Control = this.btnAddRelated;
+            this.layoutControlItem5.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.layoutControlItem5.CustomizationFormText = "layoutControlItem1";
+            this.layoutControlItem5.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem5.Name = "layoutControlItem5";
+            this.layoutControlItem5.Size = new System.Drawing.Size(125, 40);
+            this.layoutControlItem5.Text = "layoutControlItem1";
+            this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem5.TextVisible = false;
             // 
-            // layoutControlItem3
+            // layoutControlItem6
             // 
-            this.layoutControlItem3.Control = this.gcForm;
-            this.layoutControlItem3.Location = new System.Drawing.Point(0, 40);
-            this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(757, 177);
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem3.TextVisible = false;
+            this.layoutControlItem6.Control = this.lbRelated;
+            this.layoutControlItem6.Location = new System.Drawing.Point(125, 0);
+            this.layoutControlItem6.Name = "layoutControlItem6";
+            this.layoutControlItem6.Size = new System.Drawing.Size(632, 40);
+            this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem6.TextVisible = false;
             // 
             // layoutControlGroup1
             // 
@@ -1002,46 +1018,43 @@
             this.lcIdFounder.Text = "制定人員";
             this.lcIdFounder.TextSize = new System.Drawing.Size(76, 24);
             // 
-            // layoutControlGroup3
+            // tabAttachments
             // 
-            this.layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem4,
-            this.layoutControlItem5,
-            this.layoutControlItem6});
-            this.layoutControlGroup3.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlGroup3.Name = "layoutControlGroup3";
-            this.layoutControlGroup3.Size = new System.Drawing.Size(757, 217);
-            this.layoutControlGroup3.Text = "關聯文件";
+            this.tabAttachments.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem1,
+            this.layoutControlItem2,
+            this.layoutControlItem3});
+            this.tabAttachments.Location = new System.Drawing.Point(0, 0);
+            this.tabAttachments.Name = "tabAttachments";
+            this.tabAttachments.Size = new System.Drawing.Size(757, 217);
+            this.tabAttachments.Text = "表單";
             // 
-            // layoutControlItem4
+            // layoutControlItem1
             // 
-            this.layoutControlItem4.Control = this.gcRelatedDoc;
-            this.layoutControlItem4.Location = new System.Drawing.Point(0, 40);
-            this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(757, 177);
-            this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem4.TextVisible = false;
+            this.layoutControlItem1.Control = this.btnAddFile;
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem1.Name = "layoutControlItem1";
+            this.layoutControlItem1.Size = new System.Drawing.Size(125, 40);
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem1.TextVisible = false;
             // 
-            // layoutControlItem5
+            // layoutControlItem2
             // 
-            this.layoutControlItem5.Control = this.btnAddRelated;
-            this.layoutControlItem5.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
-            this.layoutControlItem5.CustomizationFormText = "layoutControlItem1";
-            this.layoutControlItem5.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(125, 40);
-            this.layoutControlItem5.Text = "layoutControlItem1";
-            this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem5.TextVisible = false;
+            this.layoutControlItem2.Control = this.lbCountFile;
+            this.layoutControlItem2.Location = new System.Drawing.Point(125, 0);
+            this.layoutControlItem2.Name = "layoutControlItem2";
+            this.layoutControlItem2.Size = new System.Drawing.Size(632, 40);
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem2.TextVisible = false;
             // 
-            // layoutControlItem6
+            // layoutControlItem3
             // 
-            this.layoutControlItem6.Control = this.lbRelated;
-            this.layoutControlItem6.Location = new System.Drawing.Point(125, 0);
-            this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(632, 40);
-            this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem6.TextVisible = false;
+            this.layoutControlItem3.Control = this.gcForm;
+            this.layoutControlItem3.Location = new System.Drawing.Point(0, 40);
+            this.layoutControlItem3.Name = "layoutControlItem3";
+            this.layoutControlItem3.Size = new System.Drawing.Size(757, 177);
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem3.TextVisible = false;
             // 
             // f204_DocMgmt_Info
             // 
@@ -1064,7 +1077,7 @@
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gcRelatedDoc)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvRelatedDoc)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ibtnDelDocRelated)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcForm)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvForm)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDelFile)).EndInit();
@@ -1083,10 +1096,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroup1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tabAttachments)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDeployDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDocLevel)).EndInit();
@@ -1099,10 +1112,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcDocVersion)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcFuncCatorary)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcIdFounder)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tabAttachments)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1123,10 +1136,6 @@
         private System.Windows.Forms.Label lbRelated;
         private DevExpress.XtraGrid.GridControl gcRelatedDoc;
         private DevExpress.XtraGrid.Views.Grid.GridView gvRelatedDoc;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
-        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEdit1;
         private DevExpress.XtraGrid.GridControl gcForm;
         private DevExpress.XtraGrid.Views.Grid.GridView gvForm;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
@@ -1173,5 +1182,10 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn21;
         private DevExpress.XtraLayout.LayoutControlItem lcIdFounder;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
+        private DevExpress.XtraGrid.Columns.GridColumn gColDelDocRelated;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit ibtnDelDocRelated;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
     }
 }

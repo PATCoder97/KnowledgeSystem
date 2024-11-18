@@ -32,6 +32,7 @@
             DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc204_InternalDocMgmtMain));
             this.gvForm = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gColIdAttForm = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcData = new DevExpress.XtraGrid.GridControl();
             this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -87,6 +88,7 @@
             this.gvForm.Appearance.Row.Options.UseFont = true;
             this.gvForm.Appearance.Row.Options.UseForeColor = true;
             this.gvForm.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gColIdAttForm,
             this.gridColumn13});
             this.gvForm.GridControl = this.gcData;
             this.gvForm.Name = "gvForm";
@@ -97,6 +99,13 @@
             this.gvForm.OptionsView.ShowColumnHeaders = false;
             this.gvForm.OptionsView.ShowGroupPanel = false;
             this.gvForm.OptionsView.ShowIndicator = false;
+            this.gvForm.DoubleClick += new System.EventHandler(this.gvForm_DoubleClick);
+            // 
+            // gColIdAttForm
+            // 
+            this.gColIdAttForm.Caption = "IdAtt";
+            this.gColIdAttForm.FieldName = "IdAtt";
+            this.gColIdAttForm.Name = "gColIdAttForm";
             // 
             // gridColumn13
             // 
@@ -146,6 +155,7 @@
             this.gvData.Appearance.Row.Options.UseForeColor = true;
             this.gvData.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gColId,
+            this.gColIdAtt,
             this.gridColumn14,
             this.gridColumn3,
             this.gridColumn15,
@@ -158,8 +168,7 @@
             this.gridColumn7,
             this.gridColumn2,
             this.gridColumn11,
-            this.gridColumn17,
-            this.gColIdAtt});
+            this.gridColumn17});
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
             this.gvData.OptionsDetail.ShowDetailTabs = false;
@@ -174,6 +183,7 @@
             this.gvData.MasterRowGetRelationName += new DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationNameEventHandler(this.gvData_MasterRowGetRelationName);
             this.gvData.MasterRowGetRelationCount += new DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationCountEventHandler(this.gvData_MasterRowGetRelationCount);
             this.gvData.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gvData_PopupMenuShowing);
+            this.gvData.Click += new System.EventHandler(this.gvData_Click);
             this.gvData.DoubleClick += new System.EventHandler(this.gvData_DoubleClick);
             // 
             // gColId
@@ -307,8 +317,6 @@
             this.gColIdAtt.Caption = "IdAtt";
             this.gColIdAtt.FieldName = "data.IdAtt";
             this.gColIdAtt.Name = "gColIdAtt";
-            this.gColIdAtt.Visible = true;
-            this.gColIdAtt.VisibleIndex = 13;
             // 
             // barManagerTP
             // 
@@ -533,5 +541,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn17;
         private DevExpress.XtraGrid.Columns.GridColumn gColIdAtt;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
+        private DevExpress.XtraGrid.Columns.GridColumn gColIdAttForm;
     }
 }
