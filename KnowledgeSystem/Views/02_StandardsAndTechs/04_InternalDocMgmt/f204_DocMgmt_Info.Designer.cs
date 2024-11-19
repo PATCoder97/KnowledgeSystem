@@ -380,6 +380,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.ibtnDelDocRelated.Name = "ibtnDelDocRelated";
             this.ibtnDelDocRelated.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            this.ibtnDelDocRelated.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.ibtnDelDocRelated_ButtonClick);
             // 
             // gridColumn5
             // 
