@@ -57,12 +57,42 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
         DXMenuItem itemViewInfo;
         DXMenuItem itemUpdateVer;
         DXMenuItem itemGetFile;
+        DXMenuItem itemPauseNotify;
 
         private void InitializeMenuItems()
         {
             itemViewInfo = CreateMenuItem("查看資訊", ItemViewInfo_Click, TPSvgimages.View);
             itemUpdateVer = CreateMenuItem("更新版本", ItemUpdateVer_Click, TPSvgimages.UpLevel);
             itemGetFile = CreateMenuItem("下載檔案", ItemGetFile_Click, TPSvgimages.Attach);
+            itemPauseNotify = CreateMenuItem("暫停通知", ItemPauseNotify_Click, TPSvgimages.Suspension);
+        }
+
+        private void ItemPauseNotify_Click(object sender, EventArgs e)
+        {
+            var result = XtraInputBox.Show(new XtraInputBoxArgs
+            {
+                Caption = TPConfigs.SoftNameTW,
+                Prompt = "請輸入需要停止通知的月數",
+                DefaultButtonIndex = 0,
+                Editor = new TextEdit
+                {
+                    Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F),
+                    Properties = { Mask = { MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric, EditMask = "d", UseMaskAsDisplayFormat = true } }
+                },
+                DefaultResponse = ""
+            })?.ToString().ToUpper();
+
+            if (string.IsNullOrEmpty(result)) return;
+
+            int pauseMonth = Convert.ToInt16(result);
+            GridView view = gvData;
+            int idBase = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColId));
+
+            var dataPause = dt204_InternalDocMgmtBUS.Instance.GetItemById(idBase);
+            dataPause.PauseNotify = pauseMonth;
+            dt204_InternalDocMgmtBUS.Instance.AddOrUpdate(dataPause);
+
+            LoadData();
         }
 
         private void ItemGetFile_Click(object sender, EventArgs e)
@@ -100,7 +130,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
                 string destPath = dialog.FileName;
 
                 File.Copy(sourcePath, destPath, true);
-                MsgTP.MsgShowInfomation($"<font='Microsoft JhengHei UI' size=14>已儲存!</font>");
+                MsgTP.MsgShowInfomation($"<font='Microsoft JhengHei UI' size=14>下載完成!</font>");
             }
         }
 
@@ -112,42 +142,12 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
             f204_UpdateVerDoc fUpdate = new f204_UpdateVerDoc()
             {
                 eventInfo = EventFormInfo.View,
-                idBase = idBase
+                idBase = idBase,
+                Text = "更新版本"
             };
             fUpdate.ShowDialog();
 
             LoadData();
-        }
-
-        private bool SaveFileWithProtect(string source, string dest)
-        {
-            using (PdfDocumentProcessor pdfDocumentProcessor = new PdfDocumentProcessor())
-            {
-                // Load a PDF document.
-                pdfDocumentProcessor.LoadDocument(source);
-
-                PdfEncryptionOptions encryptionOptions = new PdfEncryptionOptions();
-                encryptionOptions.ModificationPermissions = PdfDocumentModificationPermissions.NotAllowed;
-                encryptionOptions.InteractivityPermissions = PdfDocumentInteractivityPermissions.NotAllowed;
-
-                // Specify the owner and user passwords for the document.  
-                encryptionOptions.OwnerPasswordString = "fhspdf";
-                //encryptionOptions.UserPasswordString = "UserPassword";
-
-                // Specify the 256-bit AES encryption algorithm.
-                encryptionOptions.Algorithm = PdfEncryptionAlgorithm.AES256;
-
-                // Save the protected document with encryption settings.  
-                try
-                {
-                    pdfDocumentProcessor.SaveDocument(dest, new PdfSaveOptions() { EncryptionOptions = encryptionOptions });
-                    return true;
-                }
-                catch
-                {
-                    return false;
-                }
-            }
         }
 
         private void ItemViewInfo_Click(object sender, EventArgs e)
@@ -158,7 +158,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
             f204_DocMgmt_Info fInfo = new f204_DocMgmt_Info()
             {
                 eventInfo = EventFormInfo.View,
-                idBase = idBase
+                idBase = idBase,
+                formName = "文件"
             };
             fInfo.ShowDialog();
 
@@ -187,9 +188,24 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
 
         private void CreateRuleGV()
         {
-            //gvData.FormatRules.AddExpressionRule(gColRemark, new DevExpress.Utils.AppearanceDefault() { ForeColor = Color.Blue }, $"[Remark] = \'{NAME_ISPROGRESS}\'");
-            //gvData.FormatRules.AddExpressionRule(gColRemark, new DevExpress.Utils.AppearanceDefault() { ForeColor = Color.Red }, $"[Remark] = \'{NAME_ISCANCEL}\'");
-            //gvDocs.FormatRules.AddExpressionRule(gColRemark2, new DevExpress.Utils.AppearanceDefault() { ForeColor = Color.Red }, $"[Status] = \'{NAME_ISCANCEL}\'");
+            var rule = new GridFormatRule
+            {
+                ApplyToRow = true,
+                Name = "RuleNotify",
+                Rule = new FormatConditionRuleExpression
+                {
+                    Expression = "AddMonths(Today(),3) >= AddMonths([data.DeployDate], [data.PeriodNotify] + Iif(IsNullOrEmpty([data.PauseNotify]), 0, [data.PauseNotify]))",
+                    Appearance =
+                    {
+                        BackColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical,
+                        BackColor2 = Color.White,
+                        Options = { UseBackColor = true }
+                    }
+                }
+            };
+
+            // Thêm quy tắc vào GridView
+            gvData.FormatRules.Add(rule);
         }
 
         private void LoadData()
@@ -249,9 +265,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
 
         private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            f204_DocMgmt_Info fAdd = new f204_DocMgmt_Info();
-            fAdd.eventInfo = EventFormInfo.Create;
-            fAdd.formName = "文件";
+            f204_DocMgmt_Info fAdd = new f204_DocMgmt_Info()
+            {
+                eventInfo = EventFormInfo.Create,
+                formName = "文件"
+            };
             fAdd.ShowDialog();
 
             LoadData();
@@ -319,6 +337,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
                 e.Menu.Items.Add(itemViewInfo);
                 e.Menu.Items.Add(itemUpdateVer);
                 e.Menu.Items.Add(itemGetFile);
+                e.Menu.Items.Add(itemPauseNotify);
             }
         }
 
@@ -346,11 +365,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
 
             f00_VIewFile fView = new f00_VIewFile(destPath);
             fView.ShowDialog();
-        }
-
-        private void gvData_Click(object sender, EventArgs e)
-        {
-            gvData.ExpandMasterRow(gvData.FocusedRowHandle, 0);
         }
 
         private void gvForm_DoubleClick(object sender, EventArgs e)

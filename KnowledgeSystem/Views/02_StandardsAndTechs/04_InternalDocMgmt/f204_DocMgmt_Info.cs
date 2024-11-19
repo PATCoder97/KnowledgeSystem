@@ -410,7 +410,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
         {
             OpenFileDialog dialog = new OpenFileDialog
             {
-                Filter = TPConfigs.FilterFile,
+                Filter = "PDF Files (*.pdf)|*.pdf",
                 FilterIndex = 1
             };
 
