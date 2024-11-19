@@ -153,6 +153,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
             dt204Base.DocVersion = txbDocVersion.Text.Trim();
             dt204Base.IdUsrUpload = TPConfigs.LoginUser.Id;
             dt204Base.UploadDate = DateTime.Now;
+            dt204Base.PauseNotify = null;
             dt204Base.IsDel = false;
 
             var baseAtt = new dm_Attachment()
@@ -220,7 +221,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
         {
             OpenFileDialog dialog = new OpenFileDialog
             {
-                Filter = TPConfigs.FilterFile,
+                Filter = "PDF Files (*.pdf)|*.pdf",
                 FilterIndex = 1
             };
 
