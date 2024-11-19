@@ -4,6 +4,7 @@ using DevExpress.Pdf;
 using DevExpress.Utils.Menu;
 using DevExpress.Utils.Svg;
 using DevExpress.XtraEditors;
+using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
@@ -55,11 +56,52 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
 
         DXMenuItem itemViewInfo;
         DXMenuItem itemUpdateVer;
+        DXMenuItem itemGetFile;
 
         private void InitializeMenuItems()
         {
             itemViewInfo = CreateMenuItem("查看資訊", ItemViewInfo_Click, TPSvgimages.View);
             itemUpdateVer = CreateMenuItem("更新版本", ItemUpdateVer_Click, TPSvgimages.UpLevel);
+            itemGetFile = CreateMenuItem("下載檔案", ItemGetFile_Click, TPSvgimages.Attach);
+        }
+
+        private void ItemGetFile_Click(object sender, EventArgs e)
+        {
+            int idAttGet = -1;
+            if (sender is DXMenuItem menuItem && menuItem.Tag is string nameGridView)
+            {
+                switch (nameGridView)
+                {
+                    case "gvData":
+
+                        int focusedRowHandle = gvData.FocusedRowHandle;
+                        var rowData = gvData.GetRow(focusedRowHandle);
+                        dt204_InternalDocMgmt data = ((dynamic)gvData.GetRow(focusedRowHandle)).data as dt204_InternalDocMgmt;
+                        idAttGet = data.IdAtt;
+
+                        break;
+                    case "gvForm":
+
+                        GridView view = gvData.GetDetailView(gvData.FocusedRowHandle, 0) as GridView;
+                        idAttGet = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColIdAttForm));
+
+                        break;
+                }
+
+                var att = dm_AttachmentBUS.Instance.GetItemById(idAttGet);
+                string filePath = att.EncryptionName;
+                string actualName = $"{Path.GetFileNameWithoutExtension(att.ActualName)}-{DateTime.Now:HHmmss}{Path.GetExtension(att.ActualName)}";
+
+                SaveFileDialog dialog = new SaveFileDialog();
+                dialog.FileName = actualName;
+                if (dialog.ShowDialog() != DialogResult.OK) return;
+
+                string sourcePath = Path.Combine(TPConfigs.Folder204, filePath);
+                string destPath = dialog.FileName;
+
+                File.Copy(sourcePath, destPath, true);
+                MsgTP.MsgShowInfomation($"<font='Microsoft JhengHei UI' size=14>已儲存!</font>");
+            }
         }
 
         private void ItemUpdateVer_Click(object sender, EventArgs e)
@@ -272,8 +314,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
         {
             if (e.HitInfo.InRowCell && e.HitInfo.InDataRow)
             {
+                itemGetFile.Tag = "gvData";
+
                 e.Menu.Items.Add(itemViewInfo);
                 e.Menu.Items.Add(itemUpdateVer);
+                e.Menu.Items.Add(itemGetFile);
             }
         }
 
@@ -332,6 +377,15 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
 
             f00_VIewFile fView = new f00_VIewFile(destPath);
             fView.ShowDialog();
+        }
+
+        private void gvForm_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
+        {
+            if (e.HitInfo.InRowCell && e.HitInfo.InDataRow)
+            {
+                itemGetFile.Tag = "gvForm";
+                e.Menu.Items.Add(itemGetFile);
+            }
         }
     }
 }
