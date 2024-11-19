@@ -37,6 +37,7 @@
             this.gcData = new DevExpress.XtraGrid.GridControl();
             this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gColId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColIdAtt = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -50,7 +51,6 @@
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gColIdAtt = new DevExpress.XtraGrid.Columns.GridColumn();
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnAdd = new DevExpress.XtraBars.BarButtonItem();
@@ -99,6 +99,7 @@
             this.gvForm.OptionsView.ShowColumnHeaders = false;
             this.gvForm.OptionsView.ShowGroupPanel = false;
             this.gvForm.OptionsView.ShowIndicator = false;
+            this.gvForm.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gvForm_PopupMenuShowing);
             this.gvForm.DoubleClick += new System.EventHandler(this.gvForm_DoubleClick);
             // 
             // gColIdAttForm
@@ -194,6 +195,12 @@
             this.gColId.FieldName = "data.Id";
             this.gColId.Name = "gColId";
             this.gColId.Width = 91;
+            // 
+            // gColIdAtt
+            // 
+            this.gColIdAtt.Caption = "IdAtt";
+            this.gColIdAtt.FieldName = "data.IdAtt";
+            this.gColIdAtt.Name = "gColIdAtt";
             // 
             // gridColumn14
             // 
@@ -311,12 +318,6 @@
             this.gridColumn17.Name = "gridColumn17";
             this.gridColumn17.Visible = true;
             this.gridColumn17.VisibleIndex = 10;
-            // 
-            // gColIdAtt
-            // 
-            this.gColIdAtt.Caption = "IdAtt";
-            this.gColIdAtt.FieldName = "data.IdAtt";
-            this.gColIdAtt.Name = "gColIdAtt";
             // 
             // barManagerTP
             // 
