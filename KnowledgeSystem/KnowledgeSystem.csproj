@@ -316,6 +316,12 @@
     <Compile Include="Views\02_StandardsAndTechs\04_InternalDocMgmt\f204_DocMgmt_Info.Designer.cs">
       <DependentUpon>f204_DocMgmt_Info.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\04_InternalDocMgmt\f204_UpdateVerDoc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\04_InternalDocMgmt\f204_UpdateVerDoc.Designer.cs">
+      <DependentUpon>f204_UpdateVerDoc.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\02_StandardsAndTechs\04_InternalDocMgmt\uc204_InternalDocMgmtMain.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -932,6 +938,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\04_InternalDocMgmt\f204_DocMgmt_Info.resx">
       <DependentUpon>f204_DocMgmt_Info.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\02_StandardsAndTechs\04_InternalDocMgmt\f204_UpdateVerDoc.resx">
+      <DependentUpon>f204_UpdateVerDoc.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\04_InternalDocMgmt\uc204_InternalDocMgmtMain.resx">
       <DependentUpon>uc204_InternalDocMgmtMain.cs</DependentUpon>
