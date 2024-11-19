@@ -54,10 +54,27 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
         List<dt204_Form> forms = new List<dt204_Form>();
 
         DXMenuItem itemViewInfo;
+        DXMenuItem itemUpdateVer;
 
         private void InitializeMenuItems()
         {
             itemViewInfo = CreateMenuItem("查看資訊", ItemViewInfo_Click, TPSvgimages.View);
+            itemUpdateVer = CreateMenuItem("更新版本", ItemUpdateVer_Click, TPSvgimages.UpLevel);
+        }
+
+        private void ItemUpdateVer_Click(object sender, EventArgs e)
+        {
+            GridView view = gvData;
+            int idBase = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColId));
+
+            f204_UpdateVerDoc fUpdate = new f204_UpdateVerDoc()
+            {
+                eventInfo = EventFormInfo.View,
+                idBase = idBase
+            };
+            fUpdate.ShowDialog();
+
+            LoadData();
         }
 
         private bool SaveFileWithProtect(string source, string dest)
@@ -256,6 +273,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
             if (e.HitInfo.InRowCell && e.HitInfo.InDataRow)
             {
                 e.Menu.Items.Add(itemViewInfo);
+                e.Menu.Items.Add(itemUpdateVer);
             }
         }
 
