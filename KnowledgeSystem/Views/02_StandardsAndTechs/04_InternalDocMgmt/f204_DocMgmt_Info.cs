@@ -1,6 +1,7 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
 using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using DevExpress.XtraLayout;
 using DevExpress.XtraRichEdit.Import.Html;
@@ -80,6 +81,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
 
             btnAddFile.Enabled = _enable;
             gColDelFile.Visible = _enable;
+            btnAddRelated.Enabled = _enable;
+            gColDelDocRelated.Visible = _enable;
         }
 
         private void LockControl()
@@ -146,6 +149,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
         private void f204_DocMgmt_Info_Load(object sender, EventArgs e)
         {
             tabbedControlGroup1.SelectedTabPageIndex = 0;
+
+            gvForm.ReadOnlyGridView();
+            gvForm.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
+            gvRelatedDoc.ReadOnlyGridView();
+            gvRelatedDoc.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
 
             lcControls = new List<LayoutControlItem>() { lcDocCatorary, lcFuncCatorary, lcDocLevel, lcCode, lcDocVersion, lcDisplayName, lcDisplayNameVN, lcDeployDate, lcPeriodNotify, lcIdFounder, lcFilePath };
             lcImpControls = new List<LayoutControlItem>() { lcDocCatorary, lcFuncCatorary, lcDocLevel, lcCode, lcDocVersion, lcDisplayName, lcDeployDate, lcPeriodNotify, lcIdFounder, lcFilePath };
@@ -217,10 +225,18 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
                             Id = att.Id
                         });
                     }
-
                     sourceFormAtts.DataSource = baseFormAtts;
                     lbCountFile.Text = $"共{baseFormAtts.Count}個表單";
                     gvForm.RefreshData();
+
+                    var idsRelatedDoc = dt204_RelatedDocBUS.Instance.GetListByIdBase(dt204Base.Id);
+                    foreach (var item in idsRelatedDoc)
+                    {
+                        relatedDocs.Add(dt204_InternalDocMgmtBUS.Instance.GetItemById(item.IdRelatedDoc));
+                    }
+                    sourceRelatedDoc.DataSource = relatedDocs;
+                    lbRelated.Text = $"共{relatedDocs.Count}個關聯文件";
+                    gvRelatedDoc.RefreshData();
 
                     break;
                 case EventFormInfo.Update:
@@ -291,6 +307,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
                         result = idDt204Base != -1;
 
                         Handle204Form(idDt204Base);
+                        HandleDocsRelated(idDt204Base);
 
                         break;
                     case EventFormInfo.Update:
@@ -303,6 +320,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
                         result = dt204_InternalDocMgmtBUS.Instance.AddOrUpdate(dt204Base);
 
                         Handle204Form(dt204Base.Id);
+                        HandleDocsRelated(dt204Base.Id);
 
                         break;
                     case EventFormInfo.Delete:
@@ -323,6 +341,13 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
             {
                 MsgTP.MsgErrorDB();
             }
+        }
+
+        private void HandleDocsRelated(int idDt204Base)
+        {
+            dt204_RelatedDocBUS.Instance.RemoveByIdBase(idDt204Base);
+
+            dt204_RelatedDocBUS.Instance.AddRange(relatedDocs.Select(r => new dt204_RelatedDoc() { IdBase = idDt204Base, IdRelatedDoc = r.Id }).ToList());
         }
 
         private void Handle204Form(int idDt204Base)
@@ -432,7 +457,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
 
         private void btnDelFile_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            Attachment attachment = gvForm.GetRow(gvForm.FocusedRowHandle) as Attachment;
+            GridView view = gvForm;
+            Attachment attachment = view.GetRow(view.FocusedRowHandle) as Attachment;
 
             string msg = $"您想要刪除表單：\r\n{attachment.ActualName}?";
             if (MsgTP.MsgYesNoQuestion(msg) == DialogResult.No)
@@ -443,15 +469,16 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
             baseFormAtts.Remove(attachment);
             lbCountFile.Text = $"共{baseFormAtts.Count}個表單";
 
-            int rowIndex = gvForm.FocusedRowHandle;
-            gvForm.RefreshData();
-            gvForm.FocusedRowHandle = rowIndex;
+            int rowIndex = view.FocusedRowHandle;
+            view.RefreshData();
+            view.FocusedRowHandle = rowIndex;
         }
 
         private void btnAddRelated_Click(object sender, EventArgs e)
         {
             f204_ChooseDocRelated fData = new f204_ChooseDocRelated();
             fData.DocsInput = relatedDocs;
+            fData.idBaseDoc = dt204Base.Id;
             fData.ShowDialog();
 
             if (fData.DocsOutput == null) return;
@@ -461,6 +488,25 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
             sourceRelatedDoc.DataSource = relatedDocs;
             lbRelated.Text = $"共{relatedDocs.Count}個關聯文件";
             gvRelatedDoc.RefreshData();
+        }
+
+        private void ibtnDelDocRelated_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            GridView view = gvRelatedDoc;
+            dt204_InternalDocMgmt relatedDoc = view.GetRow(view.FocusedRowHandle) as dt204_InternalDocMgmt;
+
+            string msg = $"您想要刪除關聯文件：\r\n{relatedDoc.DisplayName}?";
+            if (MsgTP.MsgYesNoQuestion(msg) == DialogResult.No)
+            {
+                return;
+            }
+
+            relatedDocs.Remove(relatedDoc);
+            lbRelated.Text = $"共{relatedDocs.Count}個關聯文件";
+
+            int rowIndex = view.FocusedRowHandle;
+            view.RefreshData();
+            view.FocusedRowHandle = rowIndex;
         }
     }
 }

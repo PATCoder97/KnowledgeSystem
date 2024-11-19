@@ -22,6 +22,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
             InitializeIcon();
         }
 
+        public int idBaseDoc = -1;
         public List<dt204_InternalDocMgmt> DocsInput { get; set; }
         public List<dt204_InternalDocMgmt> DocsOutput { get; set; }
 
@@ -36,7 +37,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
 
             // Lọc danh sách người dùng theo điều kiện
             var docs = dt204_InternalDocMgmtBUS.Instance.GetList()
-                .Where(r => !idsDoc.Contains(r.Id))
+                .Where(r => !idsDoc.Contains(r.Id) && r.Id != idBaseDoc)
                 .ToList();
 
             gcData.DataSource = docs;
@@ -61,7 +62,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
                 {
                     //// Extract the original dm_User object from the anonymous type
                     //var usr = ((dynamic)data).usr as dm_User;
-                    docsOutput.Add(data );
+                    docsOutput.Add(data);
                 }
             }
 

@@ -40,6 +40,22 @@ namespace BusinessLayer
             }
         }
 
+        public List<dt204_RelatedDoc> GetListByIdBase(int idBase)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt204_RelatedDoc.Where(r => r.IdBase == idBase).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public dt204_RelatedDoc GetItemById(int id)
         {
             try
@@ -118,6 +134,26 @@ namespace BusinessLayer
                 {
                     var itemRemove = _context.dt204_RelatedDoc.FirstOrDefault(r => r.Id == id);
                     _context.dt204_RelatedDoc.Remove(itemRemove);
+
+                    int affectedRecords = _context.SaveChanges();
+                    return affectedRecords > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
+        public bool RemoveByIdBase(int idBase)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    var itemRemove = _context.dt204_RelatedDoc.Where(r => r.IdBase == idBase);
+                    _context.dt204_RelatedDoc.RemoveRange(itemRemove);
 
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;

@@ -94,7 +94,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
         private void ItemViewInfo_Click(object sender, EventArgs e)
         {
             GridView view = gvData;
-
             int idBase = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColId));
 
             f204_DocMgmt_Info fInfo = new f204_DocMgmt_Info()
