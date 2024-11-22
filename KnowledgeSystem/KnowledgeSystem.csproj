@@ -352,6 +352,12 @@
     <Compile Include="Views\03_DepartmentManage\04_BorrVehicle\f304_BorrVehicleInfo.Designer.cs">
       <DependentUpon>f304_BorrVehicleInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\03_DepartmentManage\04_BorrVehicle\uc304_BackVehicle.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\04_BorrVehicle\uc304_BackVehicle.Designer.cs">
+      <DependentUpon>uc304_BackVehicle.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\03_DepartmentManage\04_BorrVehicle\uc304_BorrVehicleMain.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -363,6 +369,12 @@
     </Compile>
     <Compile Include="Views\03_DepartmentManage\04_BorrVehicle\uc304_ChangeUsr.Designer.cs">
       <DependentUpon>uc304_ChangeUsr.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\04_BorrVehicle\uc304_EditInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\04_BorrVehicle\uc304_EditInfo.Designer.cs">
+      <DependentUpon>uc304_EditInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\03_DepartmentManage\05_PrintLabel\rp5SAreaDivision.cs">
       <SubType>Component</SubType>
@@ -954,11 +966,17 @@
     <EmbeddedResource Include="Views\03_DepartmentManage\04_BorrVehicle\f304_BorrVehicleInfo.resx">
       <DependentUpon>f304_BorrVehicleInfo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\04_BorrVehicle\uc304_BackVehicle.resx">
+      <DependentUpon>uc304_BackVehicle.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\04_BorrVehicle\uc304_BorrVehicleMain.resx">
       <DependentUpon>uc304_BorrVehicleMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\04_BorrVehicle\uc304_ChangeUsr.resx">
       <DependentUpon>uc304_ChangeUsr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\04_BorrVehicle\uc304_EditInfo.resx">
+      <DependentUpon>uc304_EditInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\05_PrintLabel\rp5SAreaDivision.resx">
       <DependentUpon>rp5SAreaDivision.cs</DependentUpon>

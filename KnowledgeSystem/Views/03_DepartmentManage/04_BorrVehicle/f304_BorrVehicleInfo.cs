@@ -61,6 +61,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
                 IsOK = false;
             }
 
+            if (timeBorrTime.DateTimeOffset > DateTimeOffset.Now)
+            {
+                msg += "</br> - Thời gian mượn nhỏ hơn thời gian hiện tại";
+                IsOK = false;
+            }
+
             if (!IsOK)
             {
                 msg = $"<font='Microsoft JhengHei UI' size=14>{msg}</font>";
