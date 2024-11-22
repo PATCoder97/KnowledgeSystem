@@ -15,6 +15,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
+using static DevExpress.Xpo.Helpers.AssociatedCollectionCriteriaHelper;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
 {
@@ -29,17 +31,23 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
         DXMenuItem itemViewInfo;
         DXMenuItem itemBorrVehicle;
         DXMenuItem itemBackVehicle;
+        DXMenuItem itemAdBackVehicle;
+        DXMenuItem itemEditInfo;
 
         List<dm_DrivingLic> drivingLics;
         List<dm_DrivingLic> carDrivingLics;
 
         public dm_User borrUsr = TPConfigs.LoginUser;
 
+        bool roleAdminBorrVehicle = false;
+
         private void InitializeMenuItems()
         {
             itemViewInfo = new DXMenuItem("Lịch sử mượn", ItemViewInfo_Click, TPSvgimages.Info, DXMenuItemPriority.Normal);
             itemBorrVehicle = new DXMenuItem("Mượn xe", ItemBorrVehicle_Click, TPSvgimages.Add, DXMenuItemPriority.Normal);
             itemBackVehicle = new DXMenuItem("Trả xe", ItemBackVehicle_Click, TPSvgimages.Confirm, DXMenuItemPriority.Normal);
+            itemAdBackVehicle = new DXMenuItem("Trả xe", ItemAdackVehicle_Click, TPSvgimages.Confirm, DXMenuItemPriority.Normal);
+            itemEditInfo = new DXMenuItem("Cập nhật thông tin", ItemEditInfo_Click, TPSvgimages.Edit, DXMenuItemPriority.High);
 
             itemViewInfo.ImageOptions.SvgImageSize = new Size(24, 24);
             itemViewInfo.AppearanceHovered.ForeColor = Color.Blue;
@@ -49,6 +57,85 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
 
             itemBackVehicle.ImageOptions.SvgImageSize = new Size(24, 24);
             itemBackVehicle.AppearanceHovered.ForeColor = Color.Blue;
+
+            itemAdBackVehicle.ImageOptions.SvgImageSize = new Size(24, 24);
+            itemAdBackVehicle.AppearanceHovered.ForeColor = Color.Blue;
+
+            itemEditInfo.ImageOptions.SvgImageSize = new Size(24, 24);
+            itemEditInfo.AppearanceHovered.ForeColor = Color.Blue;
+        }
+
+        private async void ItemEditInfo_Click(object sender, EventArgs e)
+        {
+            VehicleBorrInfo info = gvInfo.GetRow(gvInfo.FocusedRowHandle) as VehicleBorrInfo;
+
+            uc304_EditInfo ucEditInfo = new uc304_EditInfo() { StartKm = info.StartKm.ToString(), EndKm = info.EndKm.ToString() };
+            if (XtraDialog.Show(ucEditInfo, "Cập nhật thông tin", MessageBoxButtons.OKCancel) != DialogResult.OK)
+                return;
+
+            int startKm = Convert.ToInt32(ucEditInfo.StartKm);
+            int endKm = Convert.ToInt32(ucEditInfo.EndKm);
+            int totalKm = endKm - startKm;
+
+            info.StartKm = startKm;
+            info.EndKm = endKm;
+            info.TotalKm = totalKm;
+
+            if (totalKm < 0 || totalKm > 15)
+            {
+                XtraMessageBox.Show($"Xe máy mỗi chuyến chỉ được đi 0-15km", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            switch (cbbTypeVehicle.SelectedIndex)
+            {
+                case 0:
+                    await BorrVehicleHelper.Instance.EditInfoMoto(info);
+                    break;
+                case 1:
+                    var result = await BorrVehicleHelper.Instance.EditInfoCar(info);
+                    break;
+            }
+
+            LoadDataVehicle();
+        }
+
+        private async void ItemAdackVehicle_Click(object sender, EventArgs e)
+        {
+            VehicleBorrInfo info = gvInfo.GetRow(gvInfo.FocusedRowHandle) as VehicleBorrInfo;
+
+            uc304_BackVehicle ucAdBackVehicle = new uc304_BackVehicle();
+            if (XtraDialog.Show(ucAdBackVehicle, "Thông tin trả xe", MessageBoxButtons.OKCancel) != DialogResult.OK)
+                return;
+
+            string nameVehicle = info.VehicleName;
+            string backTime = ucAdBackVehicle.BackTime.ToString("yyyyMMddHHmm");
+            int startKm = info.StartKm;
+            int endKm = Convert.ToInt32(ucAdBackVehicle.EndKm);
+            int totalKm = endKm - startKm;
+
+            bool result = false;
+
+            if (totalKm < 0) return;
+
+            if (XtraMessageBox.Show($"Bạn chắc chắn muốn trả xe: {nameVehicle}, với {totalKm} Km ?", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo) != DialogResult.Yes)
+            {
+                return;
+            }
+
+            if (totalKm > 15)
+            {
+                XtraMessageBox.Show($"Xe máy mỗi chuyến chỉ được đi dưới 15km", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            string formattedBorrTime = info.BorrTime.ToString("yyyyMMddHHmm");
+
+            var usrAdBack = dm_UserBUS.Instance.GetItemById(info.IdUserBorr);
+
+            result = await BorrVehicleHelper.Instance.BackMotor(usrAdBack, nameVehicle, endKm, formattedBorrTime, backTime, totalKm);
+
+            LoadDataVehicle();
         }
 
         private void ItemBackVehicle_Click(object sender, EventArgs e)
@@ -95,9 +182,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
                         {
                             var data = await BorrVehicleHelper.Instance.GetBorrMotorUser(vehicleStatuses[i]);
 
-                            vehicleStatuses[i].IdUserBorr = data.FirstOrDefault().IdUserBorr;
-                            vehicleStatuses[i].NameUserBorr = data.FirstOrDefault().NameUserBorr;
-                            vehicleStatuses[i].BorrTime = data.FirstOrDefault().BorrTime.ToString("yyyy/MM/dd HH:mm");
+                            var dataBorrNow = data.FirstOrDefault(r => r.BackTime == default);
+
+                            vehicleStatuses[i].IdUserBorr = dataBorrNow.IdUserBorr;
+                            vehicleStatuses[i].NameUserBorr = dataBorrNow.NameUserBorr;
+                            vehicleStatuses[i].BorrTime = dataBorrNow.BorrTime.ToString("yyyy/MM/dd HH:mm");
                         }
                     }
                     break;
@@ -158,8 +247,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
             drivingLics = dm_DrivingLicBUS.Instance.GetList().Where(r => r.UserID == borrUsr.Id).ToList();
             carDrivingLics = drivingLics.Where(r => !r.Class.StartsWith("A")).ToList();
 
-            bool roleChangeUsr = AppPermission.Instance.CheckAppPermission(AppPermission.ChangeUser304);
-            if (roleChangeUsr)
+            roleAdminBorrVehicle = AppPermission.Instance.CheckAppPermission(AppPermission.ChangeUser304);
+            if (roleAdminBorrVehicle)
             {
                 lcChangeUser.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
                 btnChangeUsr.Text = borrUsr.DisplayName;
@@ -220,6 +309,23 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
 
             drivingLics = dm_DrivingLicBUS.Instance.GetList().Where(r => r.UserID == borrUsr.Id).ToList();
             carDrivingLics = drivingLics.Where(r => !r.Class.StartsWith("A")).ToList();
+        }
+
+        private void gvInfo_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
+        {
+            if (roleAdminBorrVehicle && e.HitInfo.InRowCell && e.HitInfo.RowHandle >= 0)
+            {
+                VehicleBorrInfo info = gvInfo.GetRow(gvInfo.FocusedRowHandle) as VehicleBorrInfo;
+
+                if (info.BackTime == default)
+                {
+                    e.Menu.Items.Add(itemAdBackVehicle);
+                }
+                else
+                {
+                    e.Menu.Items.Add(itemEditInfo);
+                }
+            }
         }
     }
 }

@@ -39,6 +39,7 @@
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.lbUsr = new System.Windows.Forms.Label();
             this.timeBorrTime = new DevExpress.XtraEditors.DateTimeOffsetEdit();
             this.txbFromPlace = new DevExpress.XtraEditors.TextEdit();
             this.txbName = new DevExpress.XtraEditors.TextEdit();
@@ -64,14 +65,13 @@
             this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcMajor5 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.gridView11 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn71 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn81 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn72 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn82 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.lbUsr = new System.Windows.Forms.Label();
-            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -100,9 +100,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcMajor5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView11)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView11)).BeginInit();
             this.SuspendLayout();
             // 
             // barManagerTP
@@ -229,6 +229,17 @@
             this.layoutControl1.Size = new System.Drawing.Size(415, 582);
             this.layoutControl1.TabIndex = 7;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // lbUsr
+            // 
+            this.lbUsr.BackColor = System.Drawing.Color.Transparent;
+            this.lbUsr.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lbUsr.ForeColor = System.Drawing.Color.Blue;
+            this.lbUsr.Location = new System.Drawing.Point(24, 47);
+            this.lbUsr.Name = "lbUsr";
+            this.lbUsr.Size = new System.Drawing.Size(367, 21);
+            this.lbUsr.TabIndex = 20;
+            this.lbUsr.Text = "VNW0014732 7820/潘英俊";
             // 
             // timeBorrTime
             // 
@@ -614,6 +625,29 @@
             this.lcMajor5.Text = "Km kết thúc";
             this.lcMajor5.TextSize = new System.Drawing.Size(108, 24);
             // 
+            // layoutControlGroup3
+            // 
+            this.layoutControlGroup3.AppearanceGroup.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.layoutControlGroup3.AppearanceGroup.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlGroup3.AppearanceGroup.Options.UseFont = true;
+            this.layoutControlGroup3.AppearanceGroup.Options.UseForeColor = true;
+            this.layoutControlGroup3.GroupStyle = DevExpress.Utils.GroupStyle.Light;
+            this.layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem3});
+            this.layoutControlGroup3.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlGroup3.Name = "layoutControlGroup3";
+            this.layoutControlGroup3.Size = new System.Drawing.Size(395, 72);
+            this.layoutControlGroup3.Text = "Nhân viên";
+            // 
+            // layoutControlItem3
+            // 
+            this.layoutControlItem3.Control = this.lbUsr;
+            this.layoutControlItem3.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem3.Name = "layoutControlItem3";
+            this.layoutControlItem3.Size = new System.Drawing.Size(371, 25);
+            this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem3.TextVisible = false;
+            // 
             // gridView11
             // 
             this.gridView11.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -663,40 +697,6 @@
             this.gridColumn82.Visible = true;
             this.gridColumn82.VisibleIndex = 1;
             // 
-            // lbUsr
-            // 
-            this.lbUsr.BackColor = System.Drawing.Color.Transparent;
-            this.lbUsr.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.lbUsr.ForeColor = System.Drawing.Color.Blue;
-            this.lbUsr.Location = new System.Drawing.Point(24, 47);
-            this.lbUsr.Name = "lbUsr";
-            this.lbUsr.Size = new System.Drawing.Size(367, 21);
-            this.lbUsr.TabIndex = 20;
-            this.lbUsr.Text = "VNW0014732 7820/潘英俊";
-            // 
-            // layoutControlItem3
-            // 
-            this.layoutControlItem3.Control = this.lbUsr;
-            this.layoutControlItem3.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(371, 25);
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem3.TextVisible = false;
-            // 
-            // layoutControlGroup3
-            // 
-            this.layoutControlGroup3.AppearanceGroup.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.layoutControlGroup3.AppearanceGroup.ForeColor = System.Drawing.Color.Black;
-            this.layoutControlGroup3.AppearanceGroup.Options.UseFont = true;
-            this.layoutControlGroup3.AppearanceGroup.Options.UseForeColor = true;
-            this.layoutControlGroup3.GroupStyle = DevExpress.Utils.GroupStyle.Light;
-            this.layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem3});
-            this.layoutControlGroup3.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlGroup3.Name = "layoutControlGroup3";
-            this.layoutControlGroup3.Size = new System.Drawing.Size(395, 72);
-            this.layoutControlGroup3.Text = "Nhân viên";
-            // 
             // f304_BorrVehicleInfo
             // 
             this.Appearance.BackColor = System.Drawing.SystemColors.Control;
@@ -742,9 +742,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcMajor5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView11)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView11)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

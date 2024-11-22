@@ -16,6 +16,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Windows.Forms;
+using static DevExpress.XtraEditors.Mask.MaskSettings;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace KnowledgeSystem.Helpers
@@ -98,7 +99,8 @@ namespace KnowledgeSystem.Helpers
                             EndKm = int.TryParse(parts[1], out var endKm) ? endKm : 0,
                             TotalKm = int.TryParse(parts[7], out var totalKm) ? totalKm : 0,
                             Place = parts[4],
-                            Uses = parts[5]
+                            Uses = parts[5],
+                            VehicleName = status.Name
                         });
                     }
                 }
@@ -129,7 +131,8 @@ namespace KnowledgeSystem.Helpers
                             EndKm = int.TryParse(parts[9], out var endKm) ? endKm : 0,
                             TotalKm = int.TryParse(parts[10], out var totalKm) ? totalKm : 0,
                             Place = $"{parts[5]}-{parts[6]}",
-                            Uses = parts[7]
+                            Uses = parts[7],
+                            VehicleName = status.Name
                         });
                     }
                 }
@@ -237,6 +240,33 @@ namespace KnowledgeSystem.Helpers
                 return (await webClient.DownloadStringTaskAsync(parameter)) == "ok";
             }
         }
+
+        public async Task<bool> EditInfoMoto(VehicleBorrInfo info)
+        {
+            var place = HttpUtility.UrlEncode(info.Place).Replace("+", "%20").ToUpper();
+            var purposes = HttpUtility.UrlEncode(info.Uses).Replace("+", "%20").ToUpper();
+
+            using (var webClient = new WebClient { BaseAddress = baseUrl.ToString() })
+            {
+                webClient.Encoding = Encoding.UTF8;
+                string parameter = $"s53/{place}vkv{purposes}vkv{info.IdUserBorr}vkv{info.StartKm}vkv{info.EndKm}vkv{info.VehicleName}vkv{info.BorrTime:yyyyMMddHHmm}vkv{info.BackTime:yyyyMMddHHmm}vkv{info.EndKm - info.StartKm}";
+                return (await webClient.DownloadStringTaskAsync(parameter)) == "ok";
+            }
+        }
+
+        public async Task<bool> EditInfoCar(VehicleBorrInfo info)
+        {
+            var fromPlace = HttpUtility.UrlEncode(info.Place.Split('-')[0]).Replace("+", "%20").ToUpper();
+            var toPlace = HttpUtility.UrlEncode(info.Place.Split('-')[1]).Replace("+", "%20").ToUpper();
+            var purposes = HttpUtility.UrlEncode(info.Uses).Replace("+", "%20").ToUpper();
+
+            using (var webClient = new WebClient { BaseAddress = baseUrl.ToString() })
+            {
+                webClient.Encoding = Encoding.UTF8;
+                string parameter = $"s54/{fromPlace}vkv{toPlace}vkv{purposes}vkv{info.StartKm}vkv{info.EndKm}vkv0vkvvkvvkvNvkv{info.VehicleName}vkv{info.IdUserBorr}vkv{info.BorrTime:yyyyMMddHHmm}vkv{info.EndKm - info.StartKm}vkv{info.BackTime:yyyyMMddHHmm}vkvY";
+                return (await webClient.DownloadStringTaskAsync(parameter)) == "ok";
+            }
+        }
     }
 
     public class VehicleStatus
@@ -273,5 +303,6 @@ namespace KnowledgeSystem.Helpers
         public int StartKm { get; set; }
         public int? EndKm { get; set; }
         public int? TotalKm { get; set; }
+        public string VehicleName { get; set; }
     }
 }

@@ -162,6 +162,7 @@
             this.gvInfo.OptionsView.EnableAppearanceOddRow = true;
             this.gvInfo.OptionsView.ShowAutoFilterRow = true;
             this.gvInfo.OptionsView.ShowGroupPanel = false;
+            this.gvInfo.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gvInfo_PopupMenuShowing);
             // 
             // gridColumn3
             // 
