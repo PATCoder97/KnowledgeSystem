@@ -51,6 +51,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         DXMenuItem itemCompleteDoc;
         DXMenuItem itemConfirmDoc;
+        DXMenuItem itemRejectDoc;
 
         bool IsHasPermission = false;
 
@@ -58,6 +59,24 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         {
             itemCompleteDoc = CreateMenuItem("項目已完成", ItemCompleteDoc_Click, TPSvgimages.EmailSend);
             itemConfirmDoc = CreateMenuItem("確認已完成", ItemConfirmDoc_Click, TPSvgimages.Confirm);
+            itemRejectDoc = CreateMenuItem("退回", ItemRejectDoc_Click, TPSvgimages.Cancel);
+        }
+
+        private void ItemRejectDoc_Click(object sender, EventArgs e)
+        {
+            if (XtraMessageBox.Show("您確定退回這項目嗎?", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                return;
+
+            GridView view = gvData;
+            int idDetail = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColId));
+
+            var detail = dt201_UpdateUsrReq_DetailBUS.Instance.GetItemById(idDetail);
+            detail.CompleteDate = null;
+            detail.UsrComplete = null;
+
+            dt201_UpdateUsrReq_DetailBUS.Instance.AddOrUpdate(detail);
+
+            LoadData();
         }
 
         private void ItemConfirmDoc_Click(object sender, EventArgs e)
@@ -161,6 +180,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 else if (isConfirm && IsHasPermission)
                 {
                     e.Menu.Items.Add(itemConfirmDoc);
+                    e.Menu.Items.Add(itemRejectDoc);
                 }
             }
         }
