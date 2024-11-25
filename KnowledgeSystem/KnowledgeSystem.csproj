@@ -185,6 +185,7 @@
     <Compile Include="Helpers\PCInfoHelper.cs" />
     <Compile Include="Helpers\RefreshHelper.cs" />
     <Compile Include="Helpers\RegistryHelper.cs" />
+    <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Helpers\TPConfigs.cs" />
     <Compile Include="Helpers\TPSvgimages.cs" />
     <Compile Include="Helpers\WordHelper.cs" />

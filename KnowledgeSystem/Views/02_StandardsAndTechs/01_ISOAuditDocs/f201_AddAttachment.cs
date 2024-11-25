@@ -269,6 +269,12 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             string displayNameVN = txbDisplayNameVN.Text.Trim();
             bool isDigitalSign = ckSignOrPaper.SelectedIndex == 1;
 
+            if (StringHelper.CheckUpcase(displayNameVN, 33))
+            {
+                XtraMessageBox.Show("Tắt CAPSLOCK đi！", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             // Validate progress
             bool HasProgress = progresses.Count <= 0;
             bool isProgressError = progresses.GroupBy(x => x.IdUsr).Any(g => g.Count() > 1);

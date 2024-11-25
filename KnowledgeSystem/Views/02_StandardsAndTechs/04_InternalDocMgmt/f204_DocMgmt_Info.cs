@@ -267,21 +267,27 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
                 return;
             }
 
+            var idDocCatorary = Convert.ToInt16(cbbDocCatorary.EditValue);
+            var idFuncCatorary = Convert.ToInt16(cbbFuncCatorary.EditValue);
+            string docLevel = cbbDocLevel.Text;
+            string code = txbCode.Text.Trim();
+            string docVersion = txbDocVersion.Text.Trim();
+            string displayName = txbDisplayName.Text.Trim();
+            string displayNameVN = txbDisplayNameVN.Text.Trim();
+            DateTime deployDate = txbDeployDate.DateTime;
+            int periodNotify = Convert.ToInt16(txbPeriodNotify.EditValue);
+            string idFounder = txbIdFounder.EditValue.ToString();
+            string fileName = txbFilePath.Text.Trim();
+
+            if (StringHelper.CheckUpcase(displayNameVN, 33))
+            {
+                XtraMessageBox.Show("Tắt CAPSLOCK đi！", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             var result = false;
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
             {
-                var idDocCatorary = Convert.ToInt16(cbbDocCatorary.EditValue);
-                var idFuncCatorary = Convert.ToInt16(cbbFuncCatorary.EditValue);
-                string docLevel = cbbDocLevel.Text;
-                string code = txbCode.Text.Trim();
-                string docVersion = txbDocVersion.Text.Trim();
-                string displayName = txbDisplayName.Text.Trim();
-                string displayNameVN = txbDisplayNameVN.Text.Trim();
-                DateTime deployDate = txbDeployDate.DateTime;
-                int periodNotify = Convert.ToInt16(txbPeriodNotify.EditValue);
-                string idFounder = txbIdFounder.EditValue.ToString();
-                string fileName = txbFilePath.Text.Trim();
-
                 dt204Base.IdDept = TPConfigs.LoginUser.IdDepartment;
                 dt204Base.IdDocCatorary = idDocCatorary;
                 dt204Base.IdFuncCatorary = idFuncCatorary;

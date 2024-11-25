@@ -158,13 +158,21 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 return;
             }
 
+            string displayNameVN = txbDisplayNameVN.Text.Trim();
+
+            if (StringHelper.CheckUpcase(displayNameVN, 33))
+            {
+                XtraMessageBox.Show("Tắt CAPSLOCK đi！", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             var result = false;
             string msg = "";
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
             {
                 currentData.DocCode = txbDocCode.Text;
                 currentData.DisplayName = txbDisplayName.Text.Trim();
-                currentData.DisplayNameVN = txbDisplayNameVN.Text.Trim();
+                currentData.DisplayNameVN = displayNameVN;
                 currentData.Articles = txbArticles.EditValue?.ToString() ?? "";
                 currentData.IdDept = cbbDept.EditValue.ToString();
                 currentData.IsPaperType = ckPaperType.Checked;
