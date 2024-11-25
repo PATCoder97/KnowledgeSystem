@@ -253,7 +253,7 @@
             this.treeListColumn3,
             this.treeListColumn4});
             this.tlsFunction.CustomizationFormBounds = new System.Drawing.Rectangle(351, 201, 264, 370);
-            this.tlsFunction.Font = new System.Drawing.Font("DFKai-SB", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tlsFunction.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             treeListFormatRule1.Column = this.treeListColumn4;
             treeListFormatRule1.ColumnApplyTo = this.treeListColumn1;
             treeListFormatRule1.Name = "Format0";

@@ -359,7 +359,7 @@
             this.cbbUser.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.cbbUser.Properties.Appearance.Options.UseFont = true;
             this.cbbUser.Properties.Appearance.Options.UseForeColor = true;
-            this.cbbUser.Properties.AppearanceDropDown.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.cbbUser.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.cbbUser.Properties.AppearanceDropDown.Options.UseFont = true;
             this.cbbUser.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});

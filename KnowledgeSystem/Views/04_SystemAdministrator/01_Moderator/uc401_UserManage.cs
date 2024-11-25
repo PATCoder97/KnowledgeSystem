@@ -60,7 +60,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
         bool IsSysAdmin = false;
 
-        Font fontDFKaiSB12 = new Font("DFKai-SB", 12.0f, FontStyle.Regular);
         BindingSource sourceUsers = new BindingSource();
         string sheetName = "DataUser";
         List<dm_User> users = new List<dm_User>();

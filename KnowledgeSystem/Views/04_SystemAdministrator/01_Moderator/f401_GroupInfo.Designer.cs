@@ -428,11 +428,11 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             this.cbbDept.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.cbbDept.Properties.Appearance.Options.UseFont = true;
             this.cbbDept.Properties.Appearance.Options.UseForeColor = true;
-            this.cbbDept.Properties.AppearanceDropDown.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.cbbDept.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.cbbDept.Properties.AppearanceDropDown.ForeColor = System.Drawing.Color.Black;
             this.cbbDept.Properties.AppearanceDropDown.Options.UseFont = true;
             this.cbbDept.Properties.AppearanceDropDown.Options.UseForeColor = true;
-            this.cbbDept.Properties.AppearanceDropDownHeader.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.cbbDept.Properties.AppearanceDropDownHeader.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.cbbDept.Properties.AppearanceDropDownHeader.ForeColor = System.Drawing.Color.Black;
             this.cbbDept.Properties.AppearanceDropDownHeader.Options.UseFont = true;
             this.cbbDept.Properties.AppearanceDropDownHeader.Options.UseForeColor = true;

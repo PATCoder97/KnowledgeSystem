@@ -378,7 +378,7 @@
             this.cbbJobTitle.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.cbbJobTitle.Properties.Appearance.Options.UseFont = true;
             this.cbbJobTitle.Properties.Appearance.Options.UseForeColor = true;
-            this.cbbJobTitle.Properties.AppearanceDropDown.Font = new System.Drawing.Font("DFKai-SB", 14.25F);
+            this.cbbJobTitle.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.cbbJobTitle.Properties.AppearanceDropDown.Options.UseFont = true;
             this.cbbJobTitle.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});

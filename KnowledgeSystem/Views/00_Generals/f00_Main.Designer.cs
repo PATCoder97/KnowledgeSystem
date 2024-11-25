@@ -129,6 +129,7 @@ namespace KnowledgeSystem.Views._00_Generals
             this.tileMain.MaxId = 27;
             this.tileMain.Name = "tileMain";
             this.tileMain.Padding = new System.Windows.Forms.Padding(24, 22, 24, 22);
+            this.tileMain.Position = 359;
             this.tileMain.ShowGroupText = true;
             this.tileMain.Size = new System.Drawing.Size(1180, 599);
             this.tileMain.TabIndex = 4;
@@ -273,7 +274,7 @@ namespace KnowledgeSystem.Views._00_Generals
             // 
             // btnKnowHow
             // 
-            this.btnKnowHow.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(183)))), ((int)(((byte)(71)))), ((int)(((byte)(42)))));
+            this.btnKnowHow.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
             this.btnKnowHow.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
             this.btnKnowHow.AppearanceItem.Normal.Options.UseBackColor = true;
             this.btnKnowHow.AppearanceItem.Normal.Options.UseFont = true;
@@ -311,7 +312,9 @@ namespace KnowledgeSystem.Views._00_Generals
             // 
             // tileItem12
             // 
+            this.tileItem12.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(183)))), ((int)(((byte)(71)))), ((int)(((byte)(42)))));
             this.tileItem12.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
+            this.tileItem12.AppearanceItem.Normal.Options.UseBackColor = true;
             this.tileItem12.AppearanceItem.Normal.Options.UseFont = true;
             tileItemElement14.Text = "機邊庫";
             this.tileItem12.Elements.Add(tileItemElement14);

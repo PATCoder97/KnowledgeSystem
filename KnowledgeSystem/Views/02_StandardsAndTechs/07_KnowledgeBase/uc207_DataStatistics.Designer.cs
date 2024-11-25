@@ -342,7 +342,7 @@
             this.cbbGrade.Properties.AppearanceDropDown.ForeColor = System.Drawing.Color.Black;
             this.cbbGrade.Properties.AppearanceDropDown.Options.UseFont = true;
             this.cbbGrade.Properties.AppearanceDropDown.Options.UseForeColor = true;
-            this.cbbGrade.Properties.AppearanceDropDownHeader.Font = new System.Drawing.Font("DFKai-SB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbGrade.Properties.AppearanceDropDownHeader.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbbGrade.Properties.AppearanceDropDownHeader.ForeColor = System.Drawing.Color.Black;
             this.cbbGrade.Properties.AppearanceDropDownHeader.Options.UseFont = true;
             this.cbbGrade.Properties.AppearanceDropDownHeader.Options.UseForeColor = true;
