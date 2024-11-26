@@ -81,15 +81,15 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
             info.EndKm = endKm;
             info.TotalKm = totalKm;
 
-            if (totalKm < 0 || totalKm > 15)
-            {
-                XtraMessageBox.Show($"Xe máy mỗi chuyến chỉ được đi 0-15km", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
             switch (cbbTypeVehicle.SelectedIndex)
             {
                 case 0:
+                    if (totalKm < 0 || totalKm > 15)
+                    {
+                        XtraMessageBox.Show($"Xe máy mỗi chuyến chỉ được đi 0-15km", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
                     await BorrVehicleHelper.Instance.EditInfoMoto(info);
                     break;
                 case 1:
@@ -108,8 +108,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
             if (XtraDialog.Show(ucAdBackVehicle, "Thông tin trả xe", MessageBoxButtons.OKCancel) != DialogResult.OK)
                 return;
 
+            DateTimeOffset borrTime = info.BorrTime;
+            DateTimeOffset backTime = ucAdBackVehicle.BackTime;
+
             string nameVehicle = info.VehicleName;
-            string backTime = ucAdBackVehicle.BackTime.ToString("yyyyMMddHHmm");
+            string backTimeStr = backTime.ToString("yyyyMMddHHmm");
             int startKm = info.StartKm;
             int endKm = Convert.ToInt32(ucAdBackVehicle.EndKm);
             int totalKm = endKm - startKm;
@@ -118,8 +121,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
 
             if (totalKm < 0) return;
 
-            if (XtraMessageBox.Show($"Bạn chắc chắn muốn trả xe: {nameVehicle}, với {totalKm} Km ?", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo) != DialogResult.Yes)
+            // Kiểm tra nếu chênh lệch lớn hơn 2 giờ
+            TimeSpan difference = backTime - borrTime;
+            if (difference.TotalHours > 2)
             {
+                XtraMessageBox.Show("Trả xe trong vòng 2 tiếng nhé con lợn nhựa!", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
             }
 
@@ -129,11 +135,16 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
                 return;
             }
 
+            if (XtraMessageBox.Show($"Bạn chắc chắn muốn trả xe: {nameVehicle}, với {totalKm} Km ?", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo) != DialogResult.Yes)
+            {
+                return;
+            }
+
             string formattedBorrTime = info.BorrTime.ToString("yyyyMMddHHmm");
 
             var usrAdBack = dm_UserBUS.Instance.GetItemById(info.IdUserBorr);
 
-            result = await BorrVehicleHelper.Instance.BackMotor(usrAdBack, nameVehicle, endKm, formattedBorrTime, backTime, totalKm);
+            result = await BorrVehicleHelper.Instance.BackMotor(usrAdBack, nameVehicle, endKm, formattedBorrTime, backTimeStr, totalKm);
 
             LoadDataVehicle();
         }
@@ -321,7 +332,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
                 {
                     e.Menu.Items.Add(itemAdBackVehicle);
                 }
-                else
+                else if (cbbTypeVehicle.SelectedIndex == 0)
                 {
                     e.Menu.Items.Add(itemEditInfo);
                 }

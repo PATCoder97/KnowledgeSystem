@@ -218,7 +218,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
         private async void btnBackVehicle_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             string nameVehicle = txbName.EditValue?.ToString();
-            string backTime = timeBackTime.DateTimeOffset.ToString("yyyyMMddHHmm");
+
+            DateTimeOffset borrTime = timeBorrTime.DateTimeOffset;
+            DateTimeOffset backTime = timeBackTime.DateTimeOffset;
+
+            string borrTimeStr = borrTime.ToString("yyyyMMddHHmm");
+            string backTimeStr = backTime.ToString("yyyyMMddHHmm");
             int startKm = Convert.ToInt32(txbStartKm.EditValue);
             int endKm = Convert.ToInt32(txbEndKm.EditValue);
             int totalKm = endKm - startKm;
@@ -227,30 +232,46 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
 
             if (totalKm <= 0) return;
 
-            if (XtraMessageBox.Show($"Bạn chắc chắn muốn trả xe: {nameVehicle}, với {totalKm} Km ?", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo) != DialogResult.Yes)
-            {
-                return;
-            }
-
             switch (cbbTypeVehicle.SelectedIndex)
             {
                 case 0:
+
+                    // Kiểm tra nếu chênh lệch lớn hơn 2 giờ
+                    TimeSpan difference = backTime - borrTime;
+                    if (difference.TotalHours > 2)
+                    {
+                        XtraMessageBox.Show("Trả xe trong vòng 2 tiếng nhé con lợn nhựa!", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        return;
+                    }
+
                     if (totalKm > 15)
                     {
                         XtraMessageBox.Show($"Xe máy mỗi chuyến chỉ được đi dưới 15km", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
 
-                    DateTime dateTime = DateTime.ParseExact(borrTime, "yyyy/MM/dd HH:mm", System.Globalization.CultureInfo.InvariantCulture);
+                    if (XtraMessageBox.Show($"Bạn chắc chắn muốn trả xe: {nameVehicle}, với {totalKm} Km ?", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo) != DialogResult.Yes)
+                    {
+                        return;
+                    }
+
+                    DateTime dateTime = DateTime.ParseExact(borrTimeStr, "yyyy/MM/dd HH:mm", System.Globalization.CultureInfo.InvariantCulture);
                     string formattedBorrTime = dateTime.ToString("yyyyMMddHHmm");
 
-                    result = await BorrVehicleHelper.Instance.BackMotor(borrUsr, nameVehicle, endKm, formattedBorrTime, backTime, totalKm);
+                    result = await BorrVehicleHelper.Instance.BackMotor(borrUsr, nameVehicle, endKm, formattedBorrTime, backTimeStr, totalKm);
                     break;
+
                 case 1:
-                    dateTime = DateTime.ParseExact(borrTime, "yyyy/MM/dd HH:mm", System.Globalization.CultureInfo.InvariantCulture);
+
+                    if (XtraMessageBox.Show($"Bạn chắc chắn muốn trả xe: {nameVehicle}, với {totalKm} Km ?", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo) != DialogResult.Yes)
+                    {
+                        return;
+                    }
+
+                    dateTime = DateTime.ParseExact(borrTimeStr, "yyyy/MM/dd HH:mm", System.Globalization.CultureInfo.InvariantCulture);
                     formattedBorrTime = dateTime.ToString("yyyyMMddHHmm");
 
-                    result = await BorrVehicleHelper.Instance.BackCar(borrUsr, nameVehicle, endKm, formattedBorrTime, backTime, totalKm);
+                    result = await BorrVehicleHelper.Instance.BackCar(borrUsr, nameVehicle, endKm, formattedBorrTime, backTimeStr, totalKm);
                     break;
             }
 
