@@ -10,6 +10,7 @@ using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._00_Generals;
 using KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase;
 using KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate;
+using KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel;
 using KnowledgeSystem.Views._03_DepartmentManage._03_ShiftSchedule;
 using KnowledgeSystem.Views._03_DepartmentManage._06_Signature;
 using KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin;

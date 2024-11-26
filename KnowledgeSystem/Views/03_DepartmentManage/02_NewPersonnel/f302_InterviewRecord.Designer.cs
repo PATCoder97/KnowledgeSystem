@@ -60,9 +60,9 @@
             this.lcUserName = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcJob = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcSchool = new DevExpress.XtraLayout.LayoutControlItem();
-            this.lcEnterDate = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcEnterDate = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -83,9 +83,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcUserName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcJob)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcSchool)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcEnterDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcEnterDate)).BeginInit();
             this.SuspendLayout();
             // 
             // barManagerTP
@@ -260,7 +260,7 @@
             // 
             // gridColumn7
             // 
-            this.gridColumn7.Caption = "導師代號";
+            this.gridColumn7.Caption = "二級主管代號";
             this.gridColumn7.FieldName = "Id";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
@@ -268,7 +268,7 @@
             // 
             // gridColumn8
             // 
-            this.gridColumn8.Caption = "導師名稱";
+            this.gridColumn8.Caption = "二級主管名稱";
             this.gridColumn8.FieldName = "DisplayName";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
@@ -276,7 +276,7 @@
             // 
             // cbbRecordNo
             // 
-            this.cbbRecordNo.Location = new System.Drawing.Point(100, 192);
+            this.cbbRecordNo.Location = new System.Drawing.Point(100, 156);
             this.cbbRecordNo.MenuManager = this.barManagerTP;
             this.cbbRecordNo.Name = "cbbRecordNo";
             this.cbbRecordNo.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
@@ -291,6 +291,7 @@
             this.cbbRecordNo.Size = new System.Drawing.Size(229, 32);
             this.cbbRecordNo.StyleController = this.layoutControl1;
             this.cbbRecordNo.TabIndex = 20;
+            this.cbbRecordNo.SelectedIndexChanged += new System.EventHandler(this.cbbRecordNo_SelectedIndexChanged);
             // 
             // txbRemark
             // 
@@ -307,7 +308,7 @@
             // txbDateRecord
             // 
             this.txbDateRecord.EditValue = null;
-            this.txbDateRecord.Location = new System.Drawing.Point(100, 156);
+            this.txbDateRecord.Location = new System.Drawing.Point(100, 192);
             this.txbDateRecord.Name = "txbDateRecord";
             this.txbDateRecord.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbDateRecord.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -438,9 +439,9 @@
             this.lcUserName,
             this.lcJob,
             this.lcSchool,
-            this.lcEnterDate,
             this.layoutControlItem2,
-            this.layoutControlItem3});
+            this.layoutControlItem3,
+            this.lcEnterDate});
             this.Root.Name = "Root";
             this.Root.Size = new System.Drawing.Size(341, 308);
             this.Root.TextVisible = false;
@@ -524,21 +525,6 @@
             this.lcSchool.Text = "補充說明";
             this.lcSchool.TextSize = new System.Drawing.Size(76, 24);
             // 
-            // lcEnterDate
-            // 
-            this.lcEnterDate.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lcEnterDate.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
-            this.lcEnterDate.AppearanceItemCaption.Options.UseFont = true;
-            this.lcEnterDate.AppearanceItemCaption.Options.UseForeColor = true;
-            this.lcEnterDate.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
-            this.lcEnterDate.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
-            this.lcEnterDate.Control = this.txbDateRecord;
-            this.lcEnterDate.Location = new System.Drawing.Point(0, 144);
-            this.lcEnterDate.Name = "lcEnterDate";
-            this.lcEnterDate.Size = new System.Drawing.Size(321, 36);
-            this.lcEnterDate.Text = "訪談日期";
-            this.lcEnterDate.TextSize = new System.Drawing.Size(76, 24);
-            // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
@@ -548,7 +534,7 @@
             this.layoutControlItem2.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
             this.layoutControlItem2.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem2.Control = this.cbbRecordNo;
-            this.layoutControlItem2.Location = new System.Drawing.Point(0, 180);
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 144);
             this.layoutControlItem2.Name = "layoutControlItem2";
             this.layoutControlItem2.Size = new System.Drawing.Size(321, 36);
             this.layoutControlItem2.Text = "訪談次數";
@@ -568,6 +554,21 @@
             this.layoutControlItem3.Size = new System.Drawing.Size(321, 36);
             this.layoutControlItem3.Text = "二級主管";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(76, 24);
+            // 
+            // lcEnterDate
+            // 
+            this.lcEnterDate.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lcEnterDate.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
+            this.lcEnterDate.AppearanceItemCaption.Options.UseFont = true;
+            this.lcEnterDate.AppearanceItemCaption.Options.UseForeColor = true;
+            this.lcEnterDate.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
+            this.lcEnterDate.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.lcEnterDate.Control = this.txbDateRecord;
+            this.lcEnterDate.Location = new System.Drawing.Point(0, 180);
+            this.lcEnterDate.Name = "lcEnterDate";
+            this.lcEnterDate.Size = new System.Drawing.Size(321, 36);
+            this.lcEnterDate.Text = "訪談日期";
+            this.lcEnterDate.TextSize = new System.Drawing.Size(76, 24);
             // 
             // f302_InterviewRecord
             // 
@@ -606,9 +607,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcUserName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcJob)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcSchool)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcEnterDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcEnterDate)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

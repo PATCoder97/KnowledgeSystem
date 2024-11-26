@@ -64,7 +64,7 @@ namespace KnowledgeSystem.Views._00_Generals
             }
             else if (typeform.BaseType == typeof(XtraForm))
             {
-                var f = (Form)Activator.CreateInstance(typeform);
+                var f = (XtraForm)Activator.CreateInstance(typeform);
                 f.Text = formName;
                 f.ShowDialog();
             }
