@@ -57,7 +57,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         dt201_Base currentData;
         dt201_Base parentData;
         List<dt201_Base> childrenDatas;
-
         DXMenuItem CreateMenuItem(string caption, EventHandler clickEvent, SvgImage svgImage)
         {
             var menuItem = new DXMenuItem(caption, clickEvent, svgImage, DXMenuItemPriority.Normal);
@@ -335,11 +334,13 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         {
             baseDatas = dt201_BaseBUS.Instance.GetList().ToList();
             var deptsChecked = cbbDepts.Items.Where(r => r.CheckState == CheckState.Checked).Select(r => r.Value).ToList();
+            var records = dt201_RecordCodeBUS.Instance.GetList();
 
             var result = (from data in baseDatas
                           join dept in depts on data.IdDept equals dept.Id
+                          join record in records on data.IdRecordCode equals record.Id
                           where deptsChecked.Contains(data.IdDept)
-                          select new { data, dept }).ToList();
+                          select new { data, dept, record }).ToList();
 
             sourceData.DataSource = result;
 

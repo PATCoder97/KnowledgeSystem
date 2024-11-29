@@ -18,7 +18,6 @@ namespace DataAccessLayer
         public int IdParent { get; set; }
         public string DocCode { get; set; }
         public string DisplayName { get; set; }
-        public string Articles { get; set; }
         public string IdDept { get; set; }
         public Nullable<bool> IsFinalNode { get; set; }
         public Nullable<bool> IsDel { get; set; }
@@ -28,5 +27,6 @@ namespace DataAccessLayer
         public Nullable<bool> IsDisable { get; set; }
         public string DisplayNameVN { get; set; }
         public string DocType { get; set; }
+        public int IdRecordCode { get; set; }
     }
 }

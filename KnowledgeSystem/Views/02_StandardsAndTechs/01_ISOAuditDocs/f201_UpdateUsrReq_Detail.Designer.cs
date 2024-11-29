@@ -44,10 +44,8 @@
             this.gColEnterDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemMemoEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit();
-            this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemMemoExEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemMemoExEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -59,6 +57,9 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
@@ -79,7 +80,7 @@
             this.gridColumn12.Name = "gridColumn12";
             this.gridColumn12.OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.False;
             this.gridColumn12.Visible = true;
-            this.gridColumn12.VisibleIndex = 5;
+            this.gridColumn12.VisibleIndex = 7;
             // 
             // layoutControl1
             // 
@@ -140,11 +141,12 @@
             this.gridColumn8,
             this.gColEnterDate,
             this.gridColumn9,
-            this.gridColumn10,
             this.gridColumn12,
             this.gridColumn13,
             this.gridColumn1,
-            this.gridColumn2});
+            this.gridColumn3,
+            this.gridColumn4,
+            this.gridColumn5});
             gridFormatRule1.Column = this.gridColumn12;
             gridFormatRule1.ColumnApplyTo = this.gridColumn12;
             gridFormatRule1.Name = "NotComplete";
@@ -186,7 +188,7 @@
             this.gridColumn7.FieldName = "doc.Category";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 0;
+            this.gridColumn7.VisibleIndex = 2;
             // 
             // repositoryItemMemoEdit3
             // 
@@ -200,7 +202,7 @@
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.False;
             this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 1;
+            this.gridColumn8.VisibleIndex = 3;
             this.gridColumn8.Width = 91;
             // 
             // repositoryItemMemoEdit2
@@ -214,7 +216,7 @@
             this.gColEnterDate.Name = "gColEnterDate";
             this.gColEnterDate.OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.False;
             this.gColEnterDate.Visible = true;
-            this.gColEnterDate.VisibleIndex = 2;
+            this.gColEnterDate.VisibleIndex = 4;
             // 
             // gridColumn9
             // 
@@ -224,21 +226,12 @@
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.False;
             this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 3;
+            this.gridColumn9.VisibleIndex = 6;
             this.gridColumn9.Width = 91;
             // 
             // repositoryItemMemoEdit1
             // 
             this.repositoryItemMemoEdit1.Name = "repositoryItemMemoEdit1";
-            // 
-            // gridColumn10
-            // 
-            this.gridColumn10.Caption = "預完日";
-            this.gridColumn10.FieldName = "data.DeadLine";
-            this.gridColumn10.Name = "gridColumn10";
-            this.gridColumn10.OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.False;
-            this.gridColumn10.Visible = true;
-            this.gridColumn10.VisibleIndex = 4;
             // 
             // gridColumn13
             // 
@@ -247,7 +240,7 @@
             this.gridColumn13.Name = "gridColumn13";
             this.gridColumn13.OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.False;
             this.gridColumn13.Visible = true;
-            this.gridColumn13.VisibleIndex = 6;
+            this.gridColumn13.VisibleIndex = 8;
             // 
             // gridColumn1
             // 
@@ -256,16 +249,7 @@
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.False;
             this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 7;
-            // 
-            // gridColumn2
-            // 
-            this.gridColumn2.Caption = "通知時間";
-            this.gridColumn2.FieldName = "data.TimeSendNote";
-            this.gridColumn2.Name = "gridColumn2";
-            this.gridColumn2.OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.False;
-            this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 8;
+            this.gridColumn1.VisibleIndex = 9;
             // 
             // repositoryItemMemoExEdit1
             // 
@@ -395,6 +379,33 @@
             this.barDockControlRight.Manager = this.barManagerTP;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 584);
             // 
+            // gridColumn3
+            // 
+            this.gridColumn3.Caption = "記錄編碼";
+            this.gridColumn3.FieldName = "record.Code";
+            this.gridColumn3.Name = "gridColumn3";
+            this.gridColumn3.Visible = true;
+            this.gridColumn3.VisibleIndex = 0;
+            this.gridColumn3.Width = 107;
+            // 
+            // gridColumn4
+            // 
+            this.gridColumn4.Caption = "記錄本";
+            this.gridColumn4.FieldName = "record.DisplayName";
+            this.gridColumn4.Name = "gridColumn4";
+            this.gridColumn4.Visible = true;
+            this.gridColumn4.VisibleIndex = 1;
+            this.gridColumn4.Width = 76;
+            // 
+            // gridColumn5
+            // 
+            this.gridColumn5.Caption = "條文";
+            this.gridColumn5.FieldName = "record.Articles";
+            this.gridColumn5.Name = "gridColumn5";
+            this.gridColumn5.OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.False;
+            this.gridColumn5.Visible = true;
+            this.gridColumn5.VisibleIndex = 5;
+            // 
             // f201_UpdateUsrReq_Detail
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
@@ -443,7 +454,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gColEnterDate;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
         private DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit repositoryItemMemoEdit1;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
         private DevExpress.XtraEditors.Repository.RepositoryItemMemoExEdit repositoryItemMemoExEdit1;
@@ -457,6 +467,8 @@
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
         private DevExpress.XtraBars.BarButtonItem btnExportExcel;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
     }
 }

@@ -72,7 +72,6 @@ namespace DataAccessLayer
         public virtual DbSet<dt306_SignRole> dt306_SignRole { get; set; }
         public virtual DbSet<dt307_Questions> dt307_Questions { get; set; }
         public virtual DbSet<dm_Sign> dm_Sign { get; set; }
-        public virtual DbSet<dt201_ReqUpdateDocs> dt201_ReqUpdateDocs { get; set; }
         public virtual DbSet<dt201_UpdateUsrReq> dt201_UpdateUsrReq { get; set; }
         public virtual DbSet<dt402_KPIWeb> dt402_KPIWeb { get; set; }
         public virtual DbSet<dm_User> dm_User { get; set; }
@@ -88,12 +87,14 @@ namespace DataAccessLayer
         public virtual DbSet<dt201_ProgInfo> dt201_ProgInfo { get; set; }
         public virtual DbSet<dt201_Progress> dt201_Progress { get; set; }
         public virtual DbSet<dt201_Forms> dt201_Forms { get; set; }
-        public virtual DbSet<dt201_Base> dt201_Base { get; set; }
         public virtual DbSet<dt201_UpdateUsrReq_Detail> dt201_UpdateUsrReq_Detail { get; set; }
         public virtual DbSet<dt204_DocCatorary> dt204_DocCatorary { get; set; }
         public virtual DbSet<dt204_Form> dt204_Form { get; set; }
         public virtual DbSet<dt204_FuncCatorary> dt204_FuncCatorary { get; set; }
         public virtual DbSet<dt204_RelatedDoc> dt204_RelatedDoc { get; set; }
         public virtual DbSet<dt204_InternalDocMgmt> dt204_InternalDocMgmt { get; set; }
+        public virtual DbSet<dt201_Base> dt201_Base { get; set; }
+        public virtual DbSet<dt201_RecordCode> dt201_RecordCode { get; set; }
+        public virtual DbSet<dt201_ReqUpdateDocs> dt201_ReqUpdateDocs { get; set; }
     }
 }

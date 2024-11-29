@@ -47,7 +47,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         BindingSource sourceAtts = new BindingSource();
         Attachment attachment;
 
-        DateTime minTimeRespValue = DateTime.Now.AddSeconds(-1);
+        DateTime minTimeRespValue = default;
 
         private class Attachment : dm_Attachment
         {
@@ -393,7 +393,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             {
                 IdForm = idBase,
                 IdUsr = TPConfigs.LoginUser.Id,
-                RespTime = DateTime.Now,
+                RespTime = respTime,
                 Desc = "確認"
             };
 

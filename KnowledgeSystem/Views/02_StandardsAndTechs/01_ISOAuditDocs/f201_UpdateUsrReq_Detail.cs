@@ -130,15 +130,18 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             reqUpdateDocs = dt201_ReqUpdateDocsBUS.Instance.GetList();
             baseReqDetail = dt201_UpdateUsrReq_DetailBUS.Instance.GetListByIdUpdateReq(IDUpdateReq);
             users = dm_UserBUS.Instance.GetList();
+            var records = dt201_RecordCodeBUS.Instance.GetList();
 
             var dataInfo = (from data in baseReqDetail
                             join doc in reqUpdateDocs on data.IdReq equals doc.Id
                             let UserComplete = users.FirstOrDefault(r => r.Id == data.UsrComplete)
                             let UserConfirm = users.FirstOrDefault(r => r.Id == data.UsrConfirm)
+                            let record = records.FirstOrDefault(r => r.Id == doc.IdRecordCode)
                             select new
                             {
                                 data,
                                 doc,
+                                record,
                                 UsrComplete = UserComplete != null && UserComplete.Id.Length > 5
                                     ? $"{UserComplete.Id.Substring(5)} LG{UserComplete.IdDepartment}/{UserComplete.DisplayName}" : "",
                                 UsrConfirm = UserConfirm != null && UserConfirm.Id.Length > 5

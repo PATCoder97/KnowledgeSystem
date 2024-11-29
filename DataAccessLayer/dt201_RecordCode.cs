@@ -12,14 +12,11 @@ namespace DataAccessLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class dt201_ReqUpdateDocs
+    public partial class dt201_RecordCode
     {
         public int Id { get; set; }
-        public string TypeChange { get; set; }
-        public string Category { get; set; }
-        public string Content { get; set; }
-        public string DocCode { get; set; }
-        public string Descript { get; set; }
-        public int IdRecordCode { get; set; }
+        public string Code { get; set; }
+        public string DisplayName { get; set; }
+        public string Articles { get; set; }
     }
 }

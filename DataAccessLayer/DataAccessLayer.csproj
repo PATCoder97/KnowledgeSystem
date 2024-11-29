@@ -101,6 +101,9 @@
     <Compile Include="dt201_Progress.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
+    <Compile Include="dt201_RecordCode.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
     <Compile Include="dt201_ReqUpdateDocs.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>

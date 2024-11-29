@@ -53,6 +53,7 @@
             this.treeListColumn5 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.treeListColumn9 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.treeListColumn3 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.treeListColumn10 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
@@ -249,7 +250,8 @@
             this.treeListColumn4,
             this.treeListColumn5,
             this.treeListColumn9,
-            this.treeListColumn3});
+            this.treeListColumn3,
+            this.treeListColumn10});
             this.tlsData.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tlsData.KeyFieldName = "";
             this.tlsData.Location = new System.Drawing.Point(12, 12);
@@ -304,15 +306,15 @@
             this.tlsColDept.FieldName = "data.IdDept";
             this.tlsColDept.Name = "tlsColDept";
             this.tlsColDept.Visible = true;
-            this.tlsColDept.VisibleIndex = 6;
+            this.tlsColDept.VisibleIndex = 7;
             // 
             // treeListColumn4
             // 
             this.treeListColumn4.Caption = "條文";
-            this.treeListColumn4.FieldName = "data.Articles";
+            this.treeListColumn4.FieldName = "record.Articles";
             this.treeListColumn4.Name = "treeListColumn4";
             this.treeListColumn4.Visible = true;
-            this.treeListColumn4.VisibleIndex = 3;
+            this.treeListColumn4.VisibleIndex = 5;
             // 
             // treeListColumn5
             // 
@@ -320,7 +322,7 @@
             this.treeListColumn5.FieldName = "data.DocType";
             this.treeListColumn5.Name = "treeListColumn5";
             this.treeListColumn5.Visible = true;
-            this.treeListColumn5.VisibleIndex = 4;
+            this.treeListColumn5.VisibleIndex = 6;
             // 
             // treeListColumn9
             // 
@@ -330,12 +332,21 @@
             // 
             // treeListColumn3
             // 
-            this.treeListColumn3.Caption = "備註";
-            this.treeListColumn3.FieldName = "IsPaperType";
+            this.treeListColumn3.Caption = "記錄本";
+            this.treeListColumn3.FieldName = "record.DisplayName";
             this.treeListColumn3.Name = "treeListColumn3";
             this.treeListColumn3.UnboundDataType = typeof(string);
             this.treeListColumn3.Visible = true;
-            this.treeListColumn3.VisibleIndex = 5;
+            this.treeListColumn3.VisibleIndex = 4;
+            // 
+            // treeListColumn10
+            // 
+            this.treeListColumn10.Caption = "記錄編碼";
+            this.treeListColumn10.FieldName = "record.Code";
+            this.treeListColumn10.Name = "treeListColumn10";
+            this.treeListColumn10.Visible = true;
+            this.treeListColumn10.VisibleIndex = 3;
+            this.treeListColumn10.Width = 97;
             // 
             // Root
             // 
@@ -409,5 +420,6 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckedComboBoxEdit cbbDepts;
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn3;
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn6;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn10;
     }
 }

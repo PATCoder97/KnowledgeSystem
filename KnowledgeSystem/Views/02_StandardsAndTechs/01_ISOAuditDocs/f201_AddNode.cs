@@ -33,6 +33,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         public dt201_Base parentData = null;
         string idDept2word = TPConfigs.LoginUser.IdDepartment.Substring(0, 2);
 
+        List<dt201_RecordCode> records;
+
         List<LayoutControlItem> lcControls;
         List<LayoutControlItem> lcImpControls;
 
@@ -95,8 +97,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void f201_AddNode_Load(object sender, EventArgs e)
         {
-            lcControls = new List<LayoutControlItem>() { lcDept, lcDocCode, lcDisplayName, lcDisplayNameVN, lcArticles, lcDocType, lcNotifyCycle };
-            lcImpControls = new List<LayoutControlItem>() { lcDocCode, lcDisplayName, lcDisplayNameVN, lcNotifyCycle };
+            lcControls = new List<LayoutControlItem>() { lcDept, lcDocCode, lcDisplayName, lcDisplayNameVN, lcArticles, lcDocType, lcNotifyCycle, lcIdRecord };
+            lcImpControls = new List<LayoutControlItem>() { lcDocCode, lcDisplayName, lcDisplayNameVN, lcNotifyCycle, lcIdRecord };
             foreach (var item in lcControls)
             {
                 item.AllowHtmlStringInCaption = true;
@@ -114,8 +116,17 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             cbbDept.Properties.Items.AddRange(cbbDepts);
             cbbDept.SelectedIndex = 0;
 
-            var articles = TPConfigs.Articles201.Split(';').ToList();
-            txbArticles.Properties.DataSource = articles;
+            records = dt201_RecordCodeBUS.Instance.GetList().Select(r => new dt201_RecordCode
+            {
+                Id = r.Id,
+                Code = r.Code,
+                Articles = r.Articles,
+                DisplayName = $"{r.Code} {r.DisplayName}"
+            }).ToList();
+
+            txbIdRecord.Properties.DataSource = records;
+            txbIdRecord.Properties.DisplayMember = "DisplayName";
+            txbIdRecord.Properties.ValueMember = "Id";
 
             cbbDocType.Properties.Items.AddRange(TPConfigs.DocTypes201.Split(';').ToList());
 
@@ -131,7 +142,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                     txbDocCode.EditValue = currentData.DocCode;
                     txbDisplayName.EditValue = currentData.DisplayName;
                     txbDisplayNameVN.EditValue = currentData.DisplayNameVN;
-                    txbArticles.EditValue = currentData.Articles;
+                    txbIdRecord.EditValue = currentData.IdRecordCode;
                     cbbDept.EditValue = currentData.IdDept;
                     ckPaperType.Checked = currentData.IsPaperType == true;
                     txbNotifyCycle.EditValue = currentData.NotifyCycle;
@@ -173,7 +184,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 currentData.DocCode = txbDocCode.Text;
                 currentData.DisplayName = txbDisplayName.Text.Trim();
                 currentData.DisplayNameVN = displayNameVN;
-                currentData.Articles = txbArticles.EditValue?.ToString() ?? "";
+                currentData.IdRecordCode = Convert.ToInt16(txbIdRecord.EditValue);
                 currentData.IdDept = cbbDept.EditValue.ToString();
                 currentData.IsPaperType = ckPaperType.Checked;
                 currentData.NotifyCycle = Convert.ToInt16(txbNotifyCycle.EditValue?.ToString() ?? "0");
@@ -203,6 +214,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             {
                 MsgTP.MsgErrorDB();
             }
+        }
+
+        private void txbIdRecord_EditValueChanged(object sender, EventArgs e)
+        {
+            txbArticles.Text = records.FirstOrDefault(r => r.Id == (int)txbIdRecord.EditValue).Articles;
         }
     }
 }
