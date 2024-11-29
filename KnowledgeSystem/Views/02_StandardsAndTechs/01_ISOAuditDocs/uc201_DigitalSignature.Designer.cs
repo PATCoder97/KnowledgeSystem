@@ -70,13 +70,13 @@
             // gvDetail
             // 
             this.gvDetail.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gvDetail.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Blue;
+            this.gvDetail.Appearance.HeaderPanel.ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Hyperlink;
             this.gvDetail.Appearance.HeaderPanel.Options.UseFont = true;
             this.gvDetail.Appearance.HeaderPanel.Options.UseForeColor = true;
             this.gvDetail.Appearance.HeaderPanel.Options.UseTextOptions = true;
             this.gvDetail.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gvDetail.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gvDetail.Appearance.Row.ForeColor = System.Drawing.Color.Blue;
+            this.gvDetail.Appearance.Row.ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Hyperlink;
             this.gvDetail.Appearance.Row.Options.UseFont = true;
             this.gvDetail.Appearance.Row.Options.UseForeColor = true;
             this.gvDetail.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {

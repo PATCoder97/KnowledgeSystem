@@ -284,10 +284,8 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdUpdateReq" Type="int" Nullable="false" />
           <Property Name="IdReq" Type="int" Nullable="false" />
-          <Property Name="DeadLine" Type="date" Nullable="false" />
           <Property Name="CompleteDate" Type="date" />
           <Property Name="UsrComplete" Type="varchar" MaxLength="10" />
-          <Property Name="TimeSendNote" Type="datetime" />
           <Property Name="UsrConfirm" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="dt202_Attach">
@@ -915,7 +913,6 @@
           <EntitySet Name="dt201_ProgInfo" EntityType="DBDocumentManagementSystemModel.dt201_ProgInfo" />
           <EntitySet Name="dt201_Progress" EntityType="DBDocumentManagementSystemModel.dt201_Progress" />
           <EntitySet Name="dt201_Forms" EntityType="DBDocumentManagementSystemModel.dt201_Forms" />
-          <EntitySet Name="dt201_UpdateUsrReq_Detail" EntityType="DBDocumentManagementSystemModel.dt201_UpdateUsrReq_Detail" />
           <EntitySet Name="dt204_DocCatorary" EntityType="DBDocumentManagementSystemModel.dt204_DocCatorary" />
           <EntitySet Name="dt204_Form" EntityType="DBDocumentManagementSystemModel.dt204_Form" />
           <EntitySet Name="dt204_FuncCatorary" EntityType="DBDocumentManagementSystemModel.dt204_FuncCatorary" />
@@ -924,6 +921,7 @@
           <EntitySet Name="dt201_Base" EntityType="DBDocumentManagementSystemModel.dt201_Base" />
           <EntitySet Name="dt201_RecordCode" EntityType="DBDocumentManagementSystemModel.dt201_RecordCode" />
           <EntitySet Name="dt201_ReqUpdateDocs" EntityType="DBDocumentManagementSystemModel.dt201_ReqUpdateDocs" />
+          <EntitySet Name="dt201_UpdateUsrReq_Detail" EntityType="DBDocumentManagementSystemModel.dt201_UpdateUsrReq_Detail" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -1587,19 +1585,6 @@
           <Property Name="IsDel" Type="Boolean" />
           <Property Name="DelTime" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="dt201_UpdateUsrReq_Detail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdUpdateReq" Type="Int32" Nullable="false" />
-          <Property Name="IdReq" Type="Int32" Nullable="false" />
-          <Property Name="DeadLine" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="CompleteDate" Type="DateTime" Precision="0" />
-          <Property Name="UsrComplete" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="TimeSendNote" Type="DateTime" Precision="3" />
-          <Property Name="UsrConfirm" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="dt204_DocCatorary">
           <Key>
             <PropertyRef Name="Id" />
@@ -1694,6 +1679,17 @@
           <Property Name="DocCode" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
           <Property Name="Descript" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="IdRecordCode" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt201_UpdateUsrReq_Detail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdUpdateReq" Type="Int32" Nullable="false" />
+          <Property Name="IdReq" Type="Int32" Nullable="false" />
+          <Property Name="CompleteDate" Type="DateTime" Precision="0" />
+          <Property Name="UsrComplete" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UsrConfirm" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2425,20 +2421,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dt201_UpdateUsrReq_Detail">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt201_UpdateUsrReq_Detail">
-              <MappingFragment StoreEntitySet="dt201_UpdateUsrReq_Detail">
-                <ScalarProperty Name="UsrConfirm" ColumnName="UsrConfirm" />
-                <ScalarProperty Name="TimeSendNote" ColumnName="TimeSendNote" />
-                <ScalarProperty Name="UsrComplete" ColumnName="UsrComplete" />
-                <ScalarProperty Name="CompleteDate" ColumnName="CompleteDate" />
-                <ScalarProperty Name="DeadLine" ColumnName="DeadLine" />
-                <ScalarProperty Name="IdReq" ColumnName="IdReq" />
-                <ScalarProperty Name="IdUpdateReq" ColumnName="IdUpdateReq" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="dt204_DocCatorary">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt204_DocCatorary">
               <MappingFragment StoreEntitySet="dt204_DocCatorary">
@@ -2538,6 +2520,18 @@
                 <ScalarProperty Name="Content" ColumnName="Content" />
                 <ScalarProperty Name="Category" ColumnName="Category" />
                 <ScalarProperty Name="TypeChange" ColumnName="TypeChange" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt201_UpdateUsrReq_Detail">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt201_UpdateUsrReq_Detail">
+              <MappingFragment StoreEntitySet="dt201_UpdateUsrReq_Detail">
+                <ScalarProperty Name="UsrConfirm" ColumnName="UsrConfirm" />
+                <ScalarProperty Name="UsrComplete" ColumnName="UsrComplete" />
+                <ScalarProperty Name="CompleteDate" ColumnName="CompleteDate" />
+                <ScalarProperty Name="IdReq" ColumnName="IdReq" />
+                <ScalarProperty Name="IdUpdateReq" ColumnName="IdUpdateReq" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

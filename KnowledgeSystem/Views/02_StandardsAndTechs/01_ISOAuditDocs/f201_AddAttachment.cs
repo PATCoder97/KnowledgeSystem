@@ -176,7 +176,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             // Ẩn lưu trình trình ký
             lcDefaultProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             lcProgress.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-            Size = new System.Drawing.Size(Size.Width, Size.Height - 207);
+            Size = new System.Drawing.Size(Size.Width, Size.Height - 171);
 
             IsPaper = parentData.IsPaperType;
             idBase = currentData.Id;
@@ -220,7 +220,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                     txbDocCode.EditValue = baseForm.Code;
                     txbDisplayName.EditValue = baseForm.DisplayName;
                     txbDisplayNameVN.EditValue = baseForm.DisplayNameVN;
-
+                    txbDesc.EditValue = baseForm.Descript;
 
                     break;
                 case EventFormInfo.Delete:
@@ -267,6 +267,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             string code = txbDocCode.Text.Trim();
             string displayName = txbDisplayName.Text.Trim();
             string displayNameVN = txbDisplayNameVN.Text.Trim();
+            string desc = txbDesc.Text.Trim();
             bool isDigitalSign = ckSignOrPaper.SelectedIndex == 1;
 
             if (StringHelper.CheckUpcase(displayNameVN, 33))
@@ -293,6 +294,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 baseForm.Code = code;
                 baseForm.DisplayName = displayName;
                 baseForm.DisplayNameVN = displayNameVN;
+                baseForm.Descript = desc;
                 baseForm.UploadUser = TPConfigs.LoginUser.Id;
                 baseForm.UploadTime = DateTime.Now;
 
@@ -446,7 +448,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             bool isSignSelected = ckSignOrPaper.SelectedIndex == 0;
             lcProgress.Visibility = isSignSelected ? DevExpress.XtraLayout.Utils.LayoutVisibility.Never : DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
             lcDefaultProgress.Visibility = isSignSelected ? DevExpress.XtraLayout.Utils.LayoutVisibility.Never : DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
-            Size = new Size(Size.Width, Size.Height + (isSignSelected ? -207 : 207));
+            Size = new Size(Size.Width, Size.Height + (isSignSelected ? -171 : 171));
 
             filterAtt = ckSignOrPaper.SelectedIndex == 0 ? TPConfigs.FilterFile : "PDF | *.pdf";
             attachment = null;

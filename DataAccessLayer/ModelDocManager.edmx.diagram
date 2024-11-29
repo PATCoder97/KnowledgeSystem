@@ -67,7 +67,6 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_ProgInfo" Width="1.5" PointX="3.75" PointY="21.125" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_Progress" Width="1.5" PointX="5.375" PointY="21.125" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_Forms" Width="1.5" PointX="2.125" PointY="21.125" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_UpdateUsrReq_Detail" Width="1.5" PointX="10.25" PointY="21.125" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt204_DocCatorary" Width="1.5" PointX="0.5" PointY="35.875" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt204_Form" Width="1.5" PointX="5.375" PointY="35.875" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt204_FuncCatorary" Width="1.5" PointX="2.125" PointY="35.875" />
@@ -76,6 +75,7 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_Base" Width="1.5" PointX="0.5" PointY="21.125" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_RecordCode" Width="1.5" PointX="13.5" PointY="21.125" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_ReqUpdateDocs" Width="1.5" PointX="8.625" PointY="21.125" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_UpdateUsrReq_Detail" Width="1.5" PointX="10.25" PointY="21.125" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

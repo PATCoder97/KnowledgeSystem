@@ -123,7 +123,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 Articles = r.Articles,
                 DisplayName = $"{r.Code} {r.DisplayName}"
             }).ToList();
-
             txbIdRecord.Properties.DataSource = records;
             txbIdRecord.Properties.DisplayMember = "DisplayName";
             txbIdRecord.Properties.ValueMember = "Id";

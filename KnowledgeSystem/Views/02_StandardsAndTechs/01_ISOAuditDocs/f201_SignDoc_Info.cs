@@ -257,6 +257,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 return;
             }
 
+            if (MsgTP.MsgYesNoQuestion($"文件將於<color=red>{respTime:yyyy/MM/dd HH:mm}</color>簽署") != DialogResult.Yes)
+                return;
+
             // Các bước trước nếu chưa gửi note thì khỏi gửi luôn
             if (IsLastStep)
             {
@@ -376,6 +379,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 MsgTP.MsgShowInfomation($"<font='Microsoft JhengHei UI' size=14>{msg}</font>");
                 return;
             }
+
+            if (MsgTP.MsgYesNoQuestion($"文件將於<color=red>{respTime:yyyy/MM/dd HH:mm}</color>簽署") != DialogResult.Yes)
+                return;
 
             // Các bước trước nếu chưa gửi note thì khỏi gửi luôn
             if (IsLastStep)

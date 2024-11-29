@@ -17,10 +17,8 @@ namespace DataAccessLayer
         public int Id { get; set; }
         public int IdUpdateReq { get; set; }
         public int IdReq { get; set; }
-        public System.DateTime DeadLine { get; set; }
         public Nullable<System.DateTime> CompleteDate { get; set; }
         public string UsrComplete { get; set; }
-        public Nullable<System.DateTime> TimeSendNote { get; set; }
         public string UsrConfirm { get; set; }
     }
 }
