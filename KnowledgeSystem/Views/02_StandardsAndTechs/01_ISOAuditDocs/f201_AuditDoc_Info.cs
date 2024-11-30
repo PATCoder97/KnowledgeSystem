@@ -149,15 +149,17 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             {
                 GridView view = sender as GridView;
                 var baseForm = (view.GetRow(view.FocusedRowHandle) as dynamic).data as dt201_Forms;
-                if (baseForm.IsProcessing != true)
-                {
-                    e.Menu.Items.Add(itemEditDoc);
-                    e.Menu.Items.Add(itemDelDoc);
-                }
 
                 if (baseForm.DigitalSign == true)
                 {
                     e.Menu.Items.Add(itemApprovalHis);
+                }
+
+                if (baseForm.IsProcessing != true)
+                {
+                    itemEditDoc.BeginGroup = true;
+                    e.Menu.Items.Add(itemEditDoc);
+                    e.Menu.Items.Add(itemDelDoc);
                 }
             }
         }

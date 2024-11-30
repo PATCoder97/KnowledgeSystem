@@ -39,7 +39,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         List<dt201_Base> baseDatas;
         BindingSource sourceData = new BindingSource();
-        //dt201_Base currentData;
         List<dm_Group> groups;
         List<dm_Departments> depts;
 
