@@ -145,13 +145,13 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                     break;
                 case EventFormInfo.Update:
 
-                    var recordView = records.First(r => r.Id == currentData.IdRecordCode);
+                    var recordView = records.FirstOrDefault(r => r.Id == currentData.IdRecordCode);
 
                     txbDocCode.EditValue = currentData.DocCode;
                     txbDisplayName.EditValue = currentData.DisplayName;
                     txbDisplayNameVN.EditValue = currentData.DisplayNameVN;
-                    txbIdRecord.EditValue = recordView.Code;
-                    txbArticles.EditValue = recordView.Articles;
+                    txbIdRecord.EditValue = recordView?.Code ?? "";
+                    txbArticles.EditValue = recordView?.Articles ?? "";
                     cbbDept.EditValue = currentData.IdDept;
                     ckPaperType.Checked = currentData.IsPaperType == true;
                     txbNotifyCycle.EditValue = currentData.NotifyCycle;
