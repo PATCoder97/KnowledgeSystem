@@ -98,7 +98,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         private void f201_AddNode_Load(object sender, EventArgs e)
         {
             lcControls = new List<LayoutControlItem>() { lcDept, lcDocCode, lcDisplayName, lcDisplayNameVN, lcArticles, lcDocType, lcNotifyCycle, lcIdRecord };
-            lcImpControls = new List<LayoutControlItem>() { lcDocCode, lcDisplayName, lcDisplayNameVN, lcNotifyCycle, lcIdRecord };
+            lcImpControls = new List<LayoutControlItem>() { lcDocCode, lcDisplayName, lcDisplayNameVN, lcNotifyCycle, lcIdRecord, lcArticles, lcDocType };
             foreach (var item in lcControls)
             {
                 item.AllowHtmlStringInCaption = true;
@@ -116,16 +116,23 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             cbbDept.Properties.Items.AddRange(cbbDepts);
             cbbDept.SelectedIndex = 0;
 
-            records = dt201_RecordCodeBUS.Instance.GetList().Select(r => new dt201_RecordCode
+            records = dt201_RecordCodeBUS.Instance.GetList();
+
+            var districsRecords = records.Select(r =>
             {
-                Id = r.Id,
-                Code = r.Code,
-                Articles = r.Articles,
-                DisplayName = $"{r.Code} {r.DisplayName}"
-            }).ToList();
-            txbIdRecord.Properties.DataSource = records;
+                var displayNameParts = r.DisplayName.Split(new[] { "\r\n" }, StringSplitOptions.None);
+                return new
+                {
+                    Code = r.Code,
+                    DisplayName = $"{r.Code} {displayNameParts[1]}",
+                    DisplayNameVN = displayNameParts[0],
+                    DisplayNameTW = displayNameParts[1]
+                };
+            }).Distinct().ToList();
+
+            txbIdRecord.Properties.DataSource = districsRecords;
             txbIdRecord.Properties.DisplayMember = "DisplayName";
-            txbIdRecord.Properties.ValueMember = "Id";
+            txbIdRecord.Properties.ValueMember = "Code";
 
             cbbDocType.Properties.Items.AddRange(TPConfigs.DocTypes201.Split(';').ToList());
 
@@ -138,10 +145,13 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                     break;
                 case EventFormInfo.Update:
 
+                    var recordView = records.First(r => r.Id == currentData.IdRecordCode);
+
                     txbDocCode.EditValue = currentData.DocCode;
                     txbDisplayName.EditValue = currentData.DisplayName;
                     txbDisplayNameVN.EditValue = currentData.DisplayNameVN;
-                    txbIdRecord.EditValue = currentData.IdRecordCode;
+                    txbIdRecord.EditValue = recordView.Code;
+                    txbArticles.EditValue = recordView.Articles;
                     cbbDept.EditValue = currentData.IdDept;
                     ckPaperType.Checked = currentData.IsPaperType == true;
                     txbNotifyCycle.EditValue = currentData.NotifyCycle;
@@ -180,10 +190,12 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             string msg = "";
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
             {
+                int idRecord = records.First(r => r.Code == txbIdRecord.EditValue.ToString() && r.Articles == txbArticles.Text).Id;
+
                 currentData.DocCode = txbDocCode.Text;
                 currentData.DisplayName = txbDisplayName.Text.Trim();
                 currentData.DisplayNameVN = displayNameVN;
-                currentData.IdRecordCode = Convert.ToInt16(txbIdRecord.EditValue);
+                currentData.IdRecordCode = idRecord;
                 currentData.IdDept = cbbDept.EditValue.ToString();
                 currentData.IsPaperType = ckPaperType.Checked;
                 currentData.NotifyCycle = Convert.ToInt16(txbNotifyCycle.EditValue?.ToString() ?? "0");
@@ -217,7 +229,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void txbIdRecord_EditValueChanged(object sender, EventArgs e)
         {
-            txbArticles.Text = records.FirstOrDefault(r => r.Id == (int)txbIdRecord.EditValue).Articles;
+            txbArticles.Text = "";
+            txbArticles.Properties.Items.Clear();
+            txbArticles.Properties.Items.AddRange(records.Where(r => r.Code == txbIdRecord.EditValue.ToString()).Select(r => r.Articles).ToList());
         }
     }
 }

@@ -314,7 +314,7 @@
             this.treeListColumn4.FieldName = "record.Articles";
             this.treeListColumn4.Name = "treeListColumn4";
             this.treeListColumn4.Visible = true;
-            this.treeListColumn4.VisibleIndex = 5;
+            this.treeListColumn4.VisibleIndex = 6;
             // 
             // treeListColumn5
             // 
@@ -322,7 +322,7 @@
             this.treeListColumn5.FieldName = "data.DocType";
             this.treeListColumn5.Name = "treeListColumn5";
             this.treeListColumn5.Visible = true;
-            this.treeListColumn5.VisibleIndex = 6;
+            this.treeListColumn5.VisibleIndex = 3;
             // 
             // treeListColumn9
             // 
@@ -337,16 +337,18 @@
             this.treeListColumn3.Name = "treeListColumn3";
             this.treeListColumn3.UnboundDataType = typeof(string);
             this.treeListColumn3.Visible = true;
-            this.treeListColumn3.VisibleIndex = 4;
+            this.treeListColumn3.VisibleIndex = 5;
             // 
             // treeListColumn10
             // 
-            this.treeListColumn10.Caption = "記錄編碼";
+            this.treeListColumn10.AppearanceCell.Options.UseTextOptions = true;
+            this.treeListColumn10.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.treeListColumn10.Caption = "記錄本編碼";
             this.treeListColumn10.FieldName = "record.Code";
             this.treeListColumn10.Name = "treeListColumn10";
             this.treeListColumn10.Visible = true;
-            this.treeListColumn10.VisibleIndex = 3;
-            this.treeListColumn10.Width = 97;
+            this.treeListColumn10.VisibleIndex = 4;
+            this.treeListColumn10.Width = 113;
             // 
             // Root
             // 

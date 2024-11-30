@@ -338,7 +338,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             var result = (from data in baseDatas
                           join dept in depts on data.IdDept equals dept.Id
-                          join record in records on data.IdRecordCode equals record.Id
+                          join record in records on data.IdRecordCode equals record.Id into recordGroup
+                          from record in recordGroup.DefaultIfEmpty()
                           where deptsChecked.Contains(data.IdDept)
                           select new { data, dept, record }).ToList();
 
