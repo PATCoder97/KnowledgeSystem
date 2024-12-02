@@ -328,7 +328,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
             {
                 VehicleBorrInfo info = gvInfo.GetRow(gvInfo.FocusedRowHandle) as VehicleBorrInfo;
 
-                if (info.BackTime == default)
+                if (info.BackTime == default && cbbTypeVehicle.SelectedIndex == 0)
                 {
                     e.Menu.Items.Add(itemAdBackVehicle);
                 }

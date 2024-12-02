@@ -255,10 +255,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
                         return;
                     }
 
-                    DateTime dateTime = DateTime.ParseExact(borrTimeStr, "yyyy/MM/dd HH:mm", System.Globalization.CultureInfo.InvariantCulture);
-                    string formattedBorrTime = dateTime.ToString("yyyyMMddHHmm");
-
-                    result = await BorrVehicleHelper.Instance.BackMotor(borrUsr, nameVehicle, endKm, formattedBorrTime, backTimeStr, totalKm);
+                    result = await BorrVehicleHelper.Instance.BackMotor(borrUsr, nameVehicle, endKm, borrTimeStr, backTimeStr, totalKm);
                     break;
 
                 case 1:
@@ -268,10 +265,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
                         return;
                     }
 
-                    dateTime = DateTime.ParseExact(borrTimeStr, "yyyy/MM/dd HH:mm", System.Globalization.CultureInfo.InvariantCulture);
-                    formattedBorrTime = dateTime.ToString("yyyyMMddHHmm");
-
-                    result = await BorrVehicleHelper.Instance.BackCar(borrUsr, nameVehicle, endKm, formattedBorrTime, backTimeStr, totalKm);
+                    result = await BorrVehicleHelper.Instance.BackCar(borrUsr, nameVehicle, endKm, borrTimeStr, backTimeStr, totalKm);
                     break;
             }
 
