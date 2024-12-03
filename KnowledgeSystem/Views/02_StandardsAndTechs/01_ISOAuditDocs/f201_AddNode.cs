@@ -120,7 +120,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             var districsRecords = records.Select(r =>
             {
-                var displayNameParts = r.DisplayName.Split(new[] { "\r\n" }, StringSplitOptions.None);
+                var displayNameParts = r.DisplayName.Split(new[] { "\r\n", "\n" }, StringSplitOptions.None);
                 return new
                 {
                     Code = r.Code,
@@ -231,6 +231,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         {
             txbArticles.Text = "";
             txbArticles.Properties.Items.Clear();
+            if (txbIdRecord.EditValue == null)
+                return;
+
             txbArticles.Properties.Items.AddRange(records.Where(r => r.Code == txbIdRecord.EditValue.ToString()).Select(r => r.Articles).ToList());
         }
     }

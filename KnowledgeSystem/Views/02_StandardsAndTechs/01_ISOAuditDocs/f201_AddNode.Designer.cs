@@ -204,6 +204,7 @@
             this.txbIdRecord.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txbIdRecord.Properties.NullText = "";
+            this.txbIdRecord.Properties.PopupFormMinSize = new System.Drawing.Size(700, 0);
             this.txbIdRecord.Properties.PopupView = this.searchLookUpEdit1View;
             this.txbIdRecord.Size = new System.Drawing.Size(239, 32);
             this.txbIdRecord.StyleController = this.layoutControl1;
@@ -259,7 +260,7 @@
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
             this.gridColumn1.VisibleIndex = 2;
-            this.gridColumn1.Width = 188;
+            this.gridColumn1.Width = 150;
             // 
             // cbbDept
             // 
