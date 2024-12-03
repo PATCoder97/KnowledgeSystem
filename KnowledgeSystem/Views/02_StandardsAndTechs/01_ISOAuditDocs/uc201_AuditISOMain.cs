@@ -515,9 +515,12 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         {
             TreeList treeList = sender as TreeList;
             TreeListHitInfo hitInfo = treeList.CalcHitInfo(treeList.PointToClient(MousePosition));
+            if (hitInfo.HitInfoType != HitInfoType.Cell)
+                return;
+
             GetFocusData();
 
-            if (currentNode != null && currentNode.Nodes != null && hitInfo.HitInfoType == HitInfoType.Cell)
+            if (currentNode != null && currentNode.Nodes != null)
             {
                 if (currentData.IsFinalNode != true)
                 {

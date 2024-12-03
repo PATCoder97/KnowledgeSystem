@@ -38,11 +38,6 @@
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.txbIdRecord = new DevExpress.XtraEditors.SearchLookUpEdit();
-            this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn21 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.cbbDept = new DevExpress.XtraEditors.ComboBoxEdit();
             this.ckPaperType = new DevExpress.XtraEditors.CheckEdit();
             this.txbDisplayName = new DevExpress.XtraEditors.TextEdit();
@@ -61,11 +56,14 @@
             this.lcDisplayName = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcIdRecord = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcArticles = new DevExpress.XtraLayout.LayoutControlItem();
+            this.txbIdRecord = new DevExpress.XtraEditors.GridLookUpEdit();
+            this.gridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txbIdRecord.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbDept.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckPaperType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDisplayName.Properties)).BeginInit();
@@ -84,6 +82,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcDisplayName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcIdRecord)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcArticles)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbIdRecord.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).BeginInit();
             this.SuspendLayout();
             // 
             // barManagerTP
@@ -172,7 +172,6 @@
             // 
             // layoutControl1
             // 
-            this.layoutControl1.Controls.Add(this.txbIdRecord);
             this.layoutControl1.Controls.Add(this.cbbDept);
             this.layoutControl1.Controls.Add(this.ckPaperType);
             this.layoutControl1.Controls.Add(this.txbDisplayName);
@@ -181,6 +180,7 @@
             this.layoutControl1.Controls.Add(this.txbDisplayNameVN);
             this.layoutControl1.Controls.Add(this.cbbDocType);
             this.layoutControl1.Controls.Add(this.txbArticles);
+            this.layoutControl1.Controls.Add(this.txbIdRecord);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
@@ -188,79 +188,6 @@
             this.layoutControl1.Size = new System.Drawing.Size(530, 200);
             this.layoutControl1.TabIndex = 5;
             this.layoutControl1.Text = "layoutControl1";
-            // 
-            // txbIdRecord
-            // 
-            this.txbIdRecord.EditValue = "";
-            this.txbIdRecord.Location = new System.Drawing.Point(100, 120);
-            this.txbIdRecord.Name = "txbIdRecord";
-            this.txbIdRecord.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
-            this.txbIdRecord.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.txbIdRecord.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.txbIdRecord.Properties.Appearance.Options.UseFont = true;
-            this.txbIdRecord.Properties.Appearance.Options.UseForeColor = true;
-            this.txbIdRecord.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.txbIdRecord.Properties.AppearanceDropDown.Options.UseFont = true;
-            this.txbIdRecord.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txbIdRecord.Properties.NullText = "";
-            this.txbIdRecord.Properties.PopupFormMinSize = new System.Drawing.Size(700, 0);
-            this.txbIdRecord.Properties.PopupView = this.searchLookUpEdit1View;
-            this.txbIdRecord.Size = new System.Drawing.Size(239, 32);
-            this.txbIdRecord.StyleController = this.layoutControl1;
-            this.txbIdRecord.TabIndex = 17;
-            this.txbIdRecord.EditValueChanged += new System.EventHandler(this.txbIdRecord_EditValueChanged);
-            // 
-            // searchLookUpEdit1View
-            // 
-            this.searchLookUpEdit1View.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchLookUpEdit1View.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
-            this.searchLookUpEdit1View.Appearance.HeaderPanel.Options.UseFont = true;
-            this.searchLookUpEdit1View.Appearance.HeaderPanel.Options.UseForeColor = true;
-            this.searchLookUpEdit1View.Appearance.HeaderPanel.Options.UseTextOptions = true;
-            this.searchLookUpEdit1View.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.searchLookUpEdit1View.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchLookUpEdit1View.Appearance.Row.Options.UseFont = true;
-            this.searchLookUpEdit1View.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn11,
-            this.gridColumn21,
-            this.gridColumn1});
-            this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
-            this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
-            // 
-            // gridColumn11
-            // 
-            this.gridColumn11.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.gridColumn11.AppearanceCell.Options.UseFont = true;
-            this.gridColumn11.Caption = "編號";
-            this.gridColumn11.FieldName = "Code";
-            this.gridColumn11.MaxWidth = 80;
-            this.gridColumn11.MinWidth = 80;
-            this.gridColumn11.Name = "gridColumn11";
-            this.gridColumn11.Visible = true;
-            this.gridColumn11.VisibleIndex = 0;
-            this.gridColumn11.Width = 80;
-            // 
-            // gridColumn21
-            // 
-            this.gridColumn21.Caption = "越文名稱";
-            this.gridColumn21.FieldName = "DisplayNameVN";
-            this.gridColumn21.MinWidth = 200;
-            this.gridColumn21.Name = "gridColumn21";
-            this.gridColumn21.Visible = true;
-            this.gridColumn21.VisibleIndex = 1;
-            this.gridColumn21.Width = 200;
-            // 
-            // gridColumn1
-            // 
-            this.gridColumn1.Caption = "中文名稱";
-            this.gridColumn1.FieldName = "DisplayNameTW";
-            this.gridColumn1.Name = "gridColumn1";
-            this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 2;
-            this.gridColumn1.Width = 150;
             // 
             // cbbDept
             // 
@@ -547,6 +474,80 @@
             this.lcArticles.TextSize = new System.Drawing.Size(38, 24);
             this.lcArticles.TextToControlDistance = 5;
             // 
+            // txbIdRecord
+            // 
+            this.txbIdRecord.EditValue = "";
+            this.txbIdRecord.Location = new System.Drawing.Point(100, 120);
+            this.txbIdRecord.Name = "txbIdRecord";
+            this.txbIdRecord.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.txbIdRecord.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.txbIdRecord.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.txbIdRecord.Properties.Appearance.Options.UseFont = true;
+            this.txbIdRecord.Properties.Appearance.Options.UseForeColor = true;
+            this.txbIdRecord.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.txbIdRecord.Properties.AppearanceDropDown.Options.UseFont = true;
+            this.txbIdRecord.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txbIdRecord.Properties.NullText = "";
+            this.txbIdRecord.Properties.PopupFormMinSize = new System.Drawing.Size(700, 0);
+            this.txbIdRecord.Properties.PopupView = this.gridLookUpEdit1View;
+            this.txbIdRecord.Size = new System.Drawing.Size(239, 32);
+            this.txbIdRecord.StyleController = this.layoutControl1;
+            this.txbIdRecord.TabIndex = 17;
+            this.txbIdRecord.EditValueChanged += new System.EventHandler(this.txbIdRecord_EditValueChanged);
+            // 
+            // gridLookUpEdit1View
+            // 
+            this.gridLookUpEdit1View.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridLookUpEdit1View.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
+            this.gridLookUpEdit1View.Appearance.HeaderPanel.Options.UseFont = true;
+            this.gridLookUpEdit1View.Appearance.HeaderPanel.Options.UseForeColor = true;
+            this.gridLookUpEdit1View.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            this.gridLookUpEdit1View.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridLookUpEdit1View.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridLookUpEdit1View.Appearance.Row.Options.UseFont = true;
+            this.gridLookUpEdit1View.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn2,
+            this.gridColumn3,
+            this.gridColumn4});
+            this.gridLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridLookUpEdit1View.Name = "gridLookUpEdit1View";
+            this.gridLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridLookUpEdit1View.OptionsView.ShowAutoFilterRow = true;
+            this.gridLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn2
+            // 
+            this.gridColumn2.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.gridColumn2.AppearanceCell.Options.UseFont = true;
+            this.gridColumn2.Caption = "編號";
+            this.gridColumn2.FieldName = "Code";
+            this.gridColumn2.MaxWidth = 80;
+            this.gridColumn2.MinWidth = 80;
+            this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.Visible = true;
+            this.gridColumn2.VisibleIndex = 0;
+            this.gridColumn2.Width = 80;
+            // 
+            // gridColumn3
+            // 
+            this.gridColumn3.Caption = "越文名稱";
+            this.gridColumn3.FieldName = "DisplayNameVN";
+            this.gridColumn3.MinWidth = 200;
+            this.gridColumn3.Name = "gridColumn3";
+            this.gridColumn3.Visible = true;
+            this.gridColumn3.VisibleIndex = 1;
+            this.gridColumn3.Width = 200;
+            // 
+            // gridColumn4
+            // 
+            this.gridColumn4.Caption = "中文名稱";
+            this.gridColumn4.FieldName = "DisplayNameTW";
+            this.gridColumn4.Name = "gridColumn4";
+            this.gridColumn4.Visible = true;
+            this.gridColumn4.VisibleIndex = 2;
+            this.gridColumn4.Width = 150;
+            // 
             // f201_AddNode
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
@@ -568,8 +569,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.txbIdRecord.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbDept.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckPaperType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDisplayName.Properties)).EndInit();
@@ -588,6 +587,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcDisplayName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcIdRecord)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcArticles)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbIdRecord.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -619,12 +620,12 @@
         private DevExpress.XtraEditors.TextEdit txbDisplayNameVN;
         private DevExpress.XtraLayout.LayoutControlItem lcDisplayNameVN;
         private DevExpress.XtraEditors.ComboBoxEdit cbbDocType;
-        private DevExpress.XtraEditors.SearchLookUpEdit txbIdRecord;
-        private DevExpress.XtraGrid.Views.Grid.GridView searchLookUpEdit1View;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn21;
         private DevExpress.XtraLayout.LayoutControlItem lcIdRecord;
         private DevExpress.XtraEditors.ComboBoxEdit txbArticles;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
+        private DevExpress.XtraEditors.GridLookUpEdit txbIdRecord;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridLookUpEdit1View;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
     }
 }

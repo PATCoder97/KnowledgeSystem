@@ -21,7 +21,7 @@ namespace ConsoleTestService
         {
             //System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
 
-            string filePath = @"C:\Users\Dell Alpha\Desktop\aaa.xlsx";
+            string filePath = @"C:\Users\Dell Alpha\Desktop\Rác\校正實驗室 - 複製.xlsx";
 
             // Mở tệp Excel
             using (var stream = File.Open(filePath, FileMode.Open, FileAccess.Read))
@@ -35,24 +35,19 @@ namespace ConsoleTestService
                     // Lấy DataTable đầu tiên
                     var dataTable = result.Tables[0];
 
-                    List<dt201_RecordCode> lists = new List<dt201_RecordCode>();
+                    List<dt201_ReqUpdateDocs> lists = new List<dt201_ReqUpdateDocs>();
                     int index = 0;
                     // Duyệt qua các hàng trong DataTable và in ra giá trị
                     foreach (DataRow row in dataTable.Rows)
                     {
-                        dt201_RecordCode dt201_RecordCode = new dt201_RecordCode()
-                        {
-                            Id = index,
-                            DisplayName = row[1].ToString(),
-                            Code = row[0].ToString(),
-                            Articles = row[2].ToString()
-                        };
+                        dt201_ReqUpdateDocs dt201_RecordCode = dt201_ReqUpdateDocsBUS.Instance.GetItemById(Convert.ToInt16(row[0]));
+                        dt201_RecordCode.IdRecordCode = Convert.ToInt16(row[9]);
 
-                        lists.Add(dt201_RecordCode);
+                        dt201_ReqUpdateDocsBUS.Instance.AddOrUpdate(dt201_RecordCode);
                         index++;
                     }
 
-                    dt201_RecordCodeBUS.Instance.AddRange(lists);
+                    //dt201_RecordCodeBUS.Instance.AddRange(lists);
                 }
             }
         }
