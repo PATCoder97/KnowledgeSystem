@@ -287,9 +287,10 @@
             this.treeListColumn1.Caption = "文件編號";
             this.treeListColumn1.FieldName = "data.DocCode";
             this.treeListColumn1.Name = "treeListColumn1";
+            this.treeListColumn1.SortOrder = System.Windows.Forms.SortOrder.Ascending;
             this.treeListColumn1.Visible = true;
             this.treeListColumn1.VisibleIndex = 0;
-            this.treeListColumn1.Width = 102;
+            this.treeListColumn1.Width = 119;
             // 
             // treeListColumn6
             // 
@@ -302,6 +303,8 @@
             // 
             // tlsColDept
             // 
+            this.tlsColDept.AppearanceCell.Options.UseTextOptions = true;
+            this.tlsColDept.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.tlsColDept.Caption = "實驗室";
             this.tlsColDept.FieldName = "data.IdDept";
             this.tlsColDept.Name = "tlsColDept";
@@ -318,6 +321,8 @@
             // 
             // treeListColumn5
             // 
+            this.treeListColumn5.AppearanceCell.Options.UseTextOptions = true;
+            this.treeListColumn5.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.treeListColumn5.Caption = "文件類";
             this.treeListColumn5.FieldName = "data.DocType";
             this.treeListColumn5.Name = "treeListColumn5";
@@ -332,12 +337,13 @@
             // 
             // treeListColumn3
             // 
-            this.treeListColumn3.Caption = "記錄本";
+            this.treeListColumn3.Caption = "記錄本名稱";
             this.treeListColumn3.FieldName = "record.DisplayName";
             this.treeListColumn3.Name = "treeListColumn3";
             this.treeListColumn3.UnboundDataType = typeof(string);
             this.treeListColumn3.Visible = true;
             this.treeListColumn3.VisibleIndex = 5;
+            this.treeListColumn3.Width = 120;
             // 
             // treeListColumn10
             // 
