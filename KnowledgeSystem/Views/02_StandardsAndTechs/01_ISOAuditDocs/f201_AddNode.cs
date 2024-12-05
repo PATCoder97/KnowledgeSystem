@@ -180,7 +180,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             string displayNameVN = txbDisplayNameVN.Text.Trim();
 
-            if (StringHelper.CheckUpcase(displayNameVN, 33))
+            if (StringHelper.CheckUpcase(displayNameVN, 33) && displayNameVN.Length > 20)
             {
                 XtraMessageBox.Show("Tắt CAPSLOCK đi！", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;

@@ -232,6 +232,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
 
             if (totalKm <= 0) return;
 
+            if (borrTime > backTime)
+            {
+                XtraMessageBox.Show("Sao? Con lợn nhựa này, mày đi lùi thời gian à!", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return;
+            }
+
             switch (cbbTypeVehicle.SelectedIndex)
             {
                 case 0:

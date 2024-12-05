@@ -38,7 +38,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         int idBase = -1;
         dt201_Base baseData;
-        bool IsDisable = false;
 
         private void InitializeIcon()
         {
@@ -81,7 +80,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             var result = XtraInputBox.Show(new XtraInputBoxArgs
             {
                 Caption = TPConfigs.SoftNameTW,
-                Prompt = "<font='Microsoft JhengHei UI' size=14>輸入你的員工代碼進行確認刪除表單</font>",
+                Prompt = "<font='Microsoft JhengHei UI' size=14>請輸入您的工號以確認刪除表單</font>",
                 AllowHtmlText = DevExpress.Utils.DefaultBoolean.True,
                 DefaultButtonIndex = 0,
                 Editor = new TextEdit { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) },
@@ -114,10 +113,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         private void LoadData()
         {
             baseData = dt201_BaseBUS.Instance.GetItemById(idBase);
-            var allchildren = dt201_BaseBUS.Instance.GetListByParentId(baseData.IdParent);
-
-            // Kiểm tra xem danh sách file có quyền CRUD không
-            IsDisable = baseData?.IsDisable == true || baseData.Id != allchildren.Last().Id;
 
             var displayDatas = (from data in dt201_FormsBUS.Instance.GetListByBaseId(idBase)
                                 join usr in dm_UserBUS.Instance.GetList() on data.UploadUser equals usr.Id
@@ -126,11 +121,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             gcData.DataSource = displayDatas;
             gvData.BestFitColumns();
-
-            if (IsDisable)
-            {
-                btnAdd.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-            }
         }
 
         private void f201_AuditDoc_Info_Load(object sender, EventArgs e)
@@ -145,7 +135,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void gvData_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
         {
-            if (e.HitInfo.InRowCell && e.HitInfo.InDataRow && !IsDisable)
+            if (e.HitInfo.InRowCell && e.HitInfo.InDataRow )
             {
                 GridView view = sender as GridView;
                 var baseForm = (view.GetRow(view.FocusedRowHandle) as dynamic).data as dt201_Forms;

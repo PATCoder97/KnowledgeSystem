@@ -121,6 +121,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
 
             if (totalKm < 0) return;
 
+            if (borrTime > backTime)
+            {
+                XtraMessageBox.Show("Sao? Con lợn nhựa này, mày đi lùi thời gian à!", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return;
+            }
+
             // Kiểm tra nếu chênh lệch lớn hơn 2 giờ
             TimeSpan difference = backTime - borrTime;
             if (difference.TotalHours > 2)

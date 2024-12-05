@@ -129,6 +129,26 @@ namespace BusinessLayer
             }
         }
 
+        public dt201_Base GetParentById(int id)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    var child = _context.dt201_Base.FirstOrDefault(r => r.Id == id);
+                    if (child == null)
+                        return null;
+
+                    return _context.dt201_Base.FirstOrDefault(r => r.Id == child.IdParent);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public bool AddOrUpdate(dt201_Base item)
         {
             try

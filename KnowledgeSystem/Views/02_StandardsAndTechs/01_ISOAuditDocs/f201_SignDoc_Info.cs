@@ -320,7 +320,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             baseData.IsProcessing = false;
             baseData.NextStepProg = "";
             baseData.IsCancel = true;
-            baseData.Descript = $"被{TPConfigs.LoginUser.DisplayName}退回，說明：{describe}";
+            baseData.Descript = $"已由{TPConfigs.LoginUser.DisplayName}退回，退回說明：{describe}";
 
             dt201_FormsBUS.Instance.AddOrUpdate(baseData);
 

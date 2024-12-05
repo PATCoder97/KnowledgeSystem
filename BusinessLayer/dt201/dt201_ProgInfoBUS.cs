@@ -80,6 +80,22 @@ namespace BusinessLayer
             }
         }
 
+        public List<dt201_ProgInfo> GetListSendNote()
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt201_ProgInfo.Where(r => string.IsNullOrEmpty(r.SendNoteTime.ToString())).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public bool AddOrUpdate(dt201_ProgInfo item)
         {
             try

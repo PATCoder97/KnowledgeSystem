@@ -270,7 +270,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             string desc = txbDesc.Text.Trim();
             bool isDigitalSign = ckSignOrPaper.SelectedIndex == 1;
 
-            if (StringHelper.CheckUpcase(displayNameVN, 33))
+            if (StringHelper.CheckUpcase(displayNameVN, 33) && displayNameVN.Length > 20)
             {
                 XtraMessageBox.Show("Tắt CAPSLOCK đi！", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -372,6 +372,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 bool isDigitalSign = ckSignOrPaper.SelectedIndex == 1;
                 baseForm.IsProcessing = isDigitalSign;
                 baseForm.DigitalSign = isDigitalSign;
+                baseForm.IsCancel = false;
 
                 // Create attachment
                 var att = new dm_Attachment
@@ -420,6 +421,17 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             }).ToList();
 
             dt201_ProgressBUS.Instance.AddRange(baseProgresses);
+
+            // Tạo 1 progStep là văn kiện đã đưa lên
+            dt201_ProgInfo info = new dt201_ProgInfo()
+            {
+                IdForm = idForm,
+                IdUsr = "VNW0000000",
+                RespTime = DateTime.Now,
+                Desc = "呈核"
+            };
+
+            dt201_ProgInfoBUS.Instance.Add(info);
         }
 
         private void txbAtt_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)

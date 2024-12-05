@@ -138,7 +138,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             {
                 Caption = TPConfigs.SoftNameTW,
                 AllowHtmlText = DevExpress.Utils.DefaultBoolean.True,
-                Prompt = "<font='Microsoft JhengHei UI' size=14>輸入你的員工代碼進行確認啟用</font>",
+                Prompt = "<font='Microsoft JhengHei UI' size=14>請輸入您的工號以確認啟用</font>",
                 DefaultButtonIndex = 0,
                 Editor = new TextEdit { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) },
                 DefaultResponse = ""
@@ -161,7 +161,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             {
                 Caption = TPConfigs.SoftNameTW,
                 AllowHtmlText = DevExpress.Utils.DefaultBoolean.True,
-                Prompt = "<font='Microsoft JhengHei UI' size=14>輸入你的員工代碼進行確認停用</font>",
+                Prompt = "<font='Microsoft JhengHei UI' size=14>請輸入您的工號以確認停用</font>",
                 DefaultButtonIndex = 0,
                 Editor = new TextEdit { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) },
                 DefaultResponse = ""
@@ -275,7 +275,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             {
                 Caption = TPConfigs.SoftNameTW,
                 AllowHtmlText = DevExpress.Utils.DefaultBoolean.True,
-                Prompt = "<font='Microsoft JhengHei UI' size=14>輸入你的員工代碼進行確認刪除</font>",
+                Prompt = "<font='Microsoft JhengHei UI' size=14>請輸入您的工號以確認刪除</font>",
                 DefaultButtonIndex = 0,
                 Editor = new TextEdit { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) },
                 DefaultResponse = ""
@@ -471,20 +471,23 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 return;
             }
 
-
-
             // Handle final node scenario
             if (currentData.IsFinalNode == true)
             {
                 if (parentData != null)
                 {
-                    var nodes = dt201_BaseBUS.Instance.GetListByParentId(parentData.Id);
-                    if (nodes.Max(r => r.Id) == currentData.Id)
-                    {
-                        e.Menu.Items.Add(itemAddAtt);
-                        e.Menu.Items.Add(itemEditNode);
-                        e.Menu.Items.Add(itemDelNode);
-                    }
+                    // Dùng cái này nếu mà cho sửa toàn bộ năm, sửa luôn disable AuditDoc_Info
+                    e.Menu.Items.Add(itemAddAtt);
+                    e.Menu.Items.Add(itemEditNode);
+                    e.Menu.Items.Add(itemDelNode);
+
+                    //var nodes = dt201_BaseBUS.Instance.GetListByParentId(parentData.Id);
+                    //if (nodes.Max(r => r.Id) == currentData.Id)
+                    //{
+                    //    e.Menu.Items.Add(itemAddAtt);
+                    //    e.Menu.Items.Add(itemEditNode);
+                    //    e.Menu.Items.Add(itemDelNode);
+                    //}
                 }
             }
             else if (isRootFinalNode)
