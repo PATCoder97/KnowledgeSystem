@@ -74,6 +74,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             // Step 6: Lấy ra chu kỳ của từng văn kiện để xác định có thông báo không
             var cycles = (from id in Yearlys
                           join basedata in resultBase on id.IdParent equals basedata.Id
+                          where basedata.NotifyCycle != 0
                           select new
                           {
                               Id = id.Id,
