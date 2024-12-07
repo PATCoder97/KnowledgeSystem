@@ -108,6 +108,9 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
         private void uc402_KPIWeb_Load(object sender, EventArgs e)
         {
+            bar2.Visible = false;
+            layoutControl1.Visible = false;
+
             gvData.ReadOnlyGridView();
             gvData.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
 
@@ -147,7 +150,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
                     client.CookieContainer.Add(new Cookie("UserName", "%E6%97%A5%E6%9C%88%E6%98%8E", "/", "10.198.170.92"));
 
                     // Tải file Excel từ API
-                    string url = $"http://10.198.170.92:7003/api/GenExcel/GetExcelFile?excelYM={year.ToString().Substring(2, 2)}{month.ToString("X")}&isYear={month == 0}";
+                    string url = $"http://10.198.170.92:7003/api/GenExcel/GetExcelFile?excelYM={year.ToString().Substring(2, 2)}{(month != 0 ? month.ToString("X") : "")}&isYear={month == 0}";
 
                     if (!Directory.Exists(TPConfigs.DocumentPath()))
                         Directory.CreateDirectory(TPConfigs.DocumentPath());
@@ -339,6 +342,15 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
             //Image image = Image.FromFile(@"C:\Users\ANHTUAN\Desktop\icons8_high_importance_24px.png");
             //if (cmt.StartsWith("⚠️"))
             //    e.Cache.DrawImage(image, e.Bounds.Location);
+        }
+
+        private void uc402_KPIWeb_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.Alt && e.Shift && e.KeyCode == Keys.A)
+            {
+                bar2.Visible = true;
+                layoutControl1.Visible = true;
+            }
         }
     }
 }

@@ -249,7 +249,7 @@
             // gridColumn10
             // 
             this.gridColumn10.Caption = "條文";
-            this.gridColumn10.FieldName = "category.Articles";
+            this.gridColumn10.FieldName = "recordCode.Articles";
             this.gridColumn10.Name = "gridColumn10";
             this.gridColumn10.Visible = true;
             this.gridColumn10.VisibleIndex = 4;
@@ -264,11 +264,12 @@
             // 
             // gridColumn12
             // 
-            this.gridColumn12.Caption = "文件類";
-            this.gridColumn12.FieldName = "category.IdDocType";
+            this.gridColumn12.Caption = "記錄編號";
+            this.gridColumn12.FieldName = "recordCode.Code";
             this.gridColumn12.Name = "gridColumn12";
             this.gridColumn12.Visible = true;
             this.gridColumn12.VisibleIndex = 3;
+            this.gridColumn12.Width = 89;
             // 
             // barManagerTP
             // 

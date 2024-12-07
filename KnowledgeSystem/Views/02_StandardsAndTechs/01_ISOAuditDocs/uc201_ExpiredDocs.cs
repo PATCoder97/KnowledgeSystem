@@ -10,6 +10,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Caching;
@@ -46,9 +47,19 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void LoadData()
         {
-            users = dm_UserBUS.Instance.GetList();
+            var grpUsrs = dm_GroupUserBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id);
 
-            var baseRecords = dt201_BaseBUS.Instance.GetList();
+            var depts = dm_DeptBUS.Instance.GetList();
+            var groups = dm_GroupBUS.Instance.GetListByName("ISO組");
+
+            var deptAccess = (from data in groups
+                              join grp in grpUsrs on data.Id equals grp.IdGroup
+                              select data.IdDept).ToList();
+
+            users = dm_UserBUS.Instance.GetList();
+            var records = dt201_RecordCodeBUS.Instance.GetList();
+
+            var baseRecords = dt201_BaseBUS.Instance.GetList().Where(r => deptAccess.Contains(r.IdDept)).ToList();
 
             // Step 1: Identify records with IsFinalNode = true and get the max Id for each IdParent
             var maxIdForFinalNodes = baseRecords
@@ -68,8 +79,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             // Step 4: Lấy tất cả các form theo baseIds là Bản năm mới nhất
             var formRecords = dt201_FormsBUS.Instance.GetListByBaseIds(Yearlys.Select(x => x.Id).ToList());
 
-            // Step 5: Lấy danh sách biểu đơn mới nhất
-            var resultForm = formRecords.Where(r => r.IsCancel != true).GroupBy(r => r.IdBase).Select(g => g.OrderByDescending(r => r.Id).First()).ToList();
+            //// Step 5: Lấy danh sách biểu đơn mới nhất
+            //var resultForm = formRecords.Where(r => r.IsCancel != true).GroupBy(r => r.IdBase).Select(g => g.OrderByDescending(r => r.Id).First()).ToList();
 
             // Step 6: Lấy ra chu kỳ của từng văn kiện để xác định có thông báo không
             var cycles = (from id in Yearlys
@@ -81,7 +92,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                               NotifyCycle = basedata.NotifyCycle
                           }).ToList();
 
-            var resultNotifys = (from data in resultForm
+            var resultNotifys = (from data in formRecords
                                  join cycle in cycles on data.IdBase equals cycle.Id
                                  where cycle.NotifyCycle.HasValue &&
                                        data.UploadTime.AddMonths(cycle.NotifyCycle.Value - 1) <= DateTime.Today &&
@@ -99,10 +110,13 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                                 usr
                             } into dt
                             group dt by dt.category.IdParent into dtg
+                            let parentCategory = baseRecords.FirstOrDefault(r => r.Id == dtg.Key)
+                            let parentRecordCode = records.FirstOrDefault(r => r.Id == parentCategory.IdRecordCode)
                             select new
                             {
                                 Key = dtg.Key,
-                                category = baseRecords.FirstOrDefault(r => r.Id == dtg.Key),
+                                category = parentCategory,
+                                recordCode = parentRecordCode,
                                 detailData = dtg.Select(r => new
                                 {
                                     Year = dtg.First().category.DisplayName,
@@ -111,6 +125,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                                     usr = r.usr
                                 }).ToList()
                             }).ToList();
+
 
             sourceForm.DataSource = dataInfo;
             gcData.LevelTree.Nodes.Add("detailData", gvDetail);

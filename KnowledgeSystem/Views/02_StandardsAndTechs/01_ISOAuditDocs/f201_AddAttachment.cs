@@ -296,12 +296,12 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 baseForm.DisplayNameVN = displayNameVN;
                 baseForm.Descript = desc;
                 baseForm.UploadUser = TPConfigs.LoginUser.Id;
-                baseForm.UploadTime = DateTime.Now;
 
                 switch (eventInfo)
                 {
                     case EventFormInfo.Create:
 
+                        baseForm.UploadTime = DateTime.Now;
                         baseForm.IdBase = idBase;
                         baseForm.IsProcessing = isDigitalSign;
                         baseForm.DigitalSign = isDigitalSign;
