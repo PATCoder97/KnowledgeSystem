@@ -842,7 +842,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             GridColumn gcol1 = new GridColumn() { Caption = "職務代號", FieldName = "Id", Visible = true, VisibleIndex = 0 };
             GridColumn gcol2 = new GridColumn() { Caption = "職務名稱", FieldName = "DisplayName", Visible = true, VisibleIndex = 1 };
 
-            var lsJobTitles = dm_JobTitleBUS.Instance.GetList().Where(r => r.Id != userInfo.JobCode).ToList();
+            var lsJobTitles = dm_JobTitleBUS.Instance.GetList().Where(r => r.Id != userInfo.ActualJobCode).ToList();
             editor.Properties.DataSource = lsJobTitles;
             editor.Properties.DisplayMember = "DisplayName";
             editor.Properties.ValueMember = "Id";
