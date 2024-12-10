@@ -98,6 +98,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
         private void f402_RoleInfo_Load(object sender, EventArgs e)
         {
             LockControl();
+            tlsFunction.ReadOnlyTreelist();
+            tlsFunction.KeyDown += GridControlHelper.TreeViewCopyCellData_KeyDown;
 
             var lsFunctions = dm_FunctionBUS.Instance.GetList();
             _sourceFunc.DataSource = lsFunctions;

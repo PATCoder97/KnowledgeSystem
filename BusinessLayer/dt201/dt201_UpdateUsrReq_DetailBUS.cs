@@ -56,6 +56,22 @@ namespace BusinessLayer
             }
         }
 
+        public List<dt201_UpdateUsrReq_Detail> GetListNotifyConfirm()
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt201_UpdateUsrReq_Detail.Where(r => !string.IsNullOrEmpty(r.CompleteDate.ToString()) && string.IsNullOrEmpty(r.UsrConfirm.ToString())).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public dt201_UpdateUsrReq_Detail GetItemById(int id)
         {
             try

@@ -1417,6 +1417,9 @@
     <Content Include="Images\unchecked_radio_button.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\workshift.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\logo.png" />
     <None Include="Resources\AppIcon.ico" />
     <None Include="Images\Approval.svg">

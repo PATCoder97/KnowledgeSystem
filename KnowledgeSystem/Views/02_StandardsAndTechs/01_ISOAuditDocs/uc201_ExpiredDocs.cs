@@ -79,8 +79,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             // Step 4: Lấy tất cả các form theo baseIds là Bản năm mới nhất
             var formRecords = dt201_FormsBUS.Instance.GetListByBaseIds(Yearlys.Select(x => x.Id).ToList());
 
-            //// Step 5: Lấy danh sách biểu đơn mới nhất
-            //var resultForm = formRecords.Where(r => r.IsCancel != true).GroupBy(r => r.IdBase).Select(g => g.OrderByDescending(r => r.Id).First()).ToList();
+            // Step 5: Lấy danh sách biểu đơn mới nhất
+            var resultForm = formRecords.Where(r => r.IsCancel != true).GroupBy(r => r.IdBase).Select(g => g.OrderByDescending(r => r.Id).First()).ToList();
 
             // Step 6: Lấy ra chu kỳ của từng văn kiện để xác định có thông báo không
             var cycles = (from id in Yearlys
@@ -92,7 +92,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                               NotifyCycle = basedata.NotifyCycle
                           }).ToList();
 
-            var resultNotifys = (from data in formRecords
+            var resultNotifys = (from data in resultForm
                                  join cycle in cycles on data.IdBase equals cycle.Id
                                  where cycle.NotifyCycle.HasValue &&
                                        data.UploadTime.AddMonths(cycle.NotifyCycle.Value - 1) <= DateTime.Today &&
