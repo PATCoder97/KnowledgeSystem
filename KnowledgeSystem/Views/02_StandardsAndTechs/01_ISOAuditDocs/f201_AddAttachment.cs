@@ -344,14 +344,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             baseForm.AttId = idAtt;
             baseForm.NextStepProg = progresses.FirstOrDefault()?.IdUsr ?? "";
 
-            string folderDest = Path.Combine(TPConfigs.Folder201, idAtt.ToString());
-            if (!Directory.Exists(folderDest)) Directory.CreateDirectory(folderDest);
-
             int idForm = dt201_FormsBUS.Instance.Add(baseForm);
 
             if (baseForm.DigitalSign == true)
             {
-                HandleDigitalSign(folderDest, idForm);
+                HandleDigitalSign(idAtt, idForm);
                 result = idForm > 0;
             }
             else
@@ -386,11 +383,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 baseForm.AttId = idAtt;
                 baseForm.NextStepProg = progresses.FirstOrDefault()?.IdUsr ?? "";
 
-                string folderDest = Path.Combine(TPConfigs.Folder201, idAtt.ToString());
-                if (!Directory.Exists(folderDest)) Directory.CreateDirectory(folderDest);
-
                 result = dt201_FormsBUS.Instance.AddOrUpdate(baseForm);
-
                 int idForm = baseForm.Id;
 
                 if (baseForm.DigitalSign == true)
@@ -398,7 +391,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                     dt201_ProgressBUS.Instance.RemoveByIdForm(idForm);
                     dt201_ProgInfoBUS.Instance.RemoveByIdForm(idForm);
 
-                    HandleDigitalSign(folderDest, idForm);
+                    HandleDigitalSign(idAtt, idForm);
                     result = idForm > 0;
                 }
                 else
@@ -409,8 +402,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             }
         }
 
-        private void HandleDigitalSign(string folderDest, int idForm)
+        private void HandleDigitalSign(int idAtt, int idForm)
         {
+            string folderDest = Path.Combine(TPConfigs.Folder201, idAtt.ToString());
+            if (!Directory.Exists(folderDest)) Directory.CreateDirectory(folderDest);
             File.Copy(attachment.FullPath, Path.Combine(folderDest, attachment.EncryptionName), true);
 
             var baseProgresses = progresses.Select(data => new dt201_Progress
