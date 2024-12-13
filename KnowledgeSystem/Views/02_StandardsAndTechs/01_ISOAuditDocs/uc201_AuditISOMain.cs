@@ -108,7 +108,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             {
                 ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical,
                 Font = new Font(tlsData.Appearance.Row.Font, FontStyle.Regular)
-            }, "[IsPaperType] != ''");
+            }, "[Desc] != ''");
         }
 
         private void InitializeMenuItems()
@@ -579,7 +579,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void tlsData_CustomUnboundColumnData(object sender, TreeListCustomColumnDataEventArgs e)
         {
-            if (e.IsGetData && e.Column.FieldName == "IsPaperType")
+            if (e.IsGetData && e.Column.FieldName == "Desc")
             {
                 dt201_Base currentRow = ((dynamic)e.Row).data as dt201_Base;
                 if (currentRow == null) return;

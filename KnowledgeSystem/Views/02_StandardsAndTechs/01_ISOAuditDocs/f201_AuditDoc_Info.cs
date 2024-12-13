@@ -38,6 +38,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         int idBase = -1;
         dt201_Base baseData;
+        bool IsDisable = false;
 
         private void InitializeIcon()
         {
@@ -113,6 +114,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         private void LoadData()
         {
             baseData = dt201_BaseBUS.Instance.GetItemById(idBase);
+            var parentData = dt201_BaseBUS.Instance.GetParentById(idBase);
+            IsDisable = parentData?.IsDisable == true;
+            if (IsDisable) btnAdd.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
 
             var displayDatas = (from data in dt201_FormsBUS.Instance.GetListByBaseId(idBase)
                                 join usr in dm_UserBUS.Instance.GetList() on data.UploadUser equals usr.Id
@@ -135,7 +139,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void gvData_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
         {
-            if (e.HitInfo.InRowCell && e.HitInfo.InDataRow )
+            if (e.HitInfo.InRowCell && e.HitInfo.InDataRow && !IsDisable)
             {
                 GridView view = sender as GridView;
                 var baseForm = (view.GetRow(view.FocusedRowHandle) as dynamic).data as dt201_Forms;
