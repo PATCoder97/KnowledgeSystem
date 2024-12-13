@@ -84,6 +84,7 @@
     <Compile Include="dt204\dt204_FuncCatoraryBUS.cs" />
     <Compile Include="dt204\dt204_InternalDocMgmtBUS.cs" />
     <Compile Include="dt204\dt204_RelatedDocBUS.cs" />
+    <Compile Include="dt204\dt204_OldVersionBUS.cs" />
     <Compile Include="dt207\dt207_AttachmentBUS.cs" />
     <Compile Include="dt207\dt207_Attachment_BAKBUS.cs" />
     <Compile Include="dt207\dt207_BaseBUS.cs" />

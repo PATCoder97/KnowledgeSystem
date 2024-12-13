@@ -58,6 +58,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
         DXMenuItem itemUpdateVer;
         DXMenuItem itemGetFile;
         DXMenuItem itemPauseNotify;
+        DXMenuItem itemViewHistory;
 
         private void InitializeMenuItems()
         {
@@ -65,6 +66,16 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
             itemUpdateVer = CreateMenuItem("更新版本", ItemUpdateVer_Click, TPSvgimages.UpLevel);
             itemGetFile = CreateMenuItem("下載檔案", ItemGetFile_Click, TPSvgimages.Attach);
             itemPauseNotify = CreateMenuItem("暫停通知", ItemPauseNotify_Click, TPSvgimages.Suspension);
+            itemViewHistory = CreateMenuItem("版本歷史", ItemViewHistory_Click, TPSvgimages.Progress);
+        }
+
+        private void ItemViewHistory_Click(object sender, EventArgs e)
+        {
+            GridView view = gvData;
+            int idBase = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColId));
+
+            f204_OldVersions oldVersions = new f204_OldVersions() { idBase = idBase };
+            oldVersions.ShowDialog();
         }
 
         private void ItemPauseNotify_Click(object sender, EventArgs e)
@@ -337,7 +348,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
                 e.Menu.Items.Add(itemViewInfo);
                 e.Menu.Items.Add(itemUpdateVer);
                 e.Menu.Items.Add(itemGetFile);
+                itemPauseNotify.BeginGroup = true;
                 e.Menu.Items.Add(itemPauseNotify);
+                e.Menu.Items.Add(itemViewHistory);
             }
         }
 

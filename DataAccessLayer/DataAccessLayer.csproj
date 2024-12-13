@@ -137,6 +137,9 @@
     <Compile Include="dt204_InternalDocMgmt.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
+    <Compile Include="dt204_OldVersion.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
     <Compile Include="dt204_RelatedDoc.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
