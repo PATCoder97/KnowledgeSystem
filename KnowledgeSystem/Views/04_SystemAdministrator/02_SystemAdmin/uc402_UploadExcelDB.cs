@@ -26,13 +26,13 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
             InitializeComponent();
         }
 
-        List<dm_User> lsUser = new List<dm_User>();
+        private void uc402_UploadExcelDB_Load(object sender, EventArgs e)
+        {
+            gvData.ReadOnlyGridView();
+            gvData.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
+        }
 
-        List<dt301_Base> dt301_Bases = new List<dt301_Base>();
-
-        List<dt301_CertReqSetting> dt301_CertReqs = new List<dt301_CertReqSetting>();
-
-        private void simpleButton1_Click(object sender, EventArgs e)
+        private DataSet OpenFile()
         {
             string dataPath = "";
             DataSet ds;
@@ -72,204 +72,59 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
                 reader.Close();
             }
 
-
-            System.Data.DataTable dt = ds.Tables[0];
-
-            string rootPath = "\\\\10.198.138.103\\jfe文管系統\\Data file";
-
-            List<dt202_Base> bases = new List<dt202_Base>();
-            foreach (DataRow row in dt.Rows)
-            {
-                dt202_Base rowData = new dt202_Base();
-
-                string _keyword = Regex.Replace(row["Keyword"].ToString().Trim(), @"[\t\n\r\s]+", match =>
-                {
-                    if (match.Value.Contains("\n"))
-                    {
-                        return "\r\n";
-                    }
-                    else
-                    {
-                        return " ";
-                    }
-                }).Trim();
-
-                string filePath = Path.Combine(rootPath, row["Name File"].ToString().Trim());
-
-                rowData.DisplayName = row["Category"].ToString().Trim();
-                rowData.TypeOf = Convert.ToInt16(row["TypeOf"].ToString().Trim());
-                rowData.Keyword = _keyword;
-                rowData.UploadTime = DateTime.Now;
-                rowData.UsrUpload = row["UploadUser"].ToString().Trim().Replace(" ", "");
-                rowData.RequestUsr = row["ResquestUser"].ToString().Trim().Replace(" ", "");
-                rowData.HalfYear = row["Date"].ToString().Trim();
-
-                rowData.Id = dt202_BaseBUS.Instance.GetNewBaseId(TPConfigs.LoginUser.IdDepartment);
-
-                bases.Add(rowData);
-
-                string encryptionName = EncryptionHelper.EncryptionFileName(filePath);
-                dm_Attachment attachment = new dm_Attachment
-                {
-                    Thread = "202",
-                    ActualName = Path.GetFileName(filePath),
-                    EncryptionName = $"{encryptionName}"
-                };
-                File.Copy(filePath, Path.Combine(TPConfigs.Folder202, attachment.EncryptionName), true);
-
-                int idAttach = dm_AttachmentBUS.Instance.Add(attachment);
-                rowData.IdFile = idAttach;
-                var result = dt202_BaseBUS.Instance.Add(rowData);
-            }
-
-
-            int aaaa = 1;
-            //     dt301_CertReqs = new List<dt301_CertReqSetting>();
-
-            //     foreach (DataRow row in dt.Rows)
-            //     {
-            //         dt301_CertReqSetting req = new dt301_CertReqSetting();
-
-            //         req.IdDept = "77";
-            //         req.IdJobTitle = row["machuvu"].ToString().Trim();
-            //         req.IdCourse = row["mabaihoc"].ToString().Trim(); //new actual  req
-
-            //         req.NewHeadcount = Convert.ToInt16(row["new"].ToString().Trim());
-            //         req.ActualHeadcount = Convert.ToInt16(row["actual"].ToString().Trim());
-            //         req.ReqQuantity = Convert.ToInt16(row["req"].ToString().Trim());
-
-            //         dt301_CertReqs.Add(req);
-            //     }
-
-            //dt301_Bases = dt301_BaseBUS.Instance.GetListByDept("77");
-            //var dtCourse = dt301_CourseBUS.Instance.GetList();
-
-            //foreach (var item in dt301_Bases)
-            //{
-            //    int yearAdd = dtCourse.First(r => r.Id == item.IdCourse).Duration ?? 1000;
-            //    item.ExpDate = yearAdd != 0 ? item.DateReceipt.AddYears(yearAdd) : (DateTime?)null;
-
-            //    dt301_BaseBUS.Instance.AddOrUpdate(item);
-            //}
-
-            //MessageBox.Show("OK");
-
-            //dt301_Bases = new List<dt301_Base>();
-            //var dtCourse = dt301_CourseBUS.Instance.GetList();
-
-            //foreach (DataRow row in dt.Rows)
-            //{
-            //    dt301_Base dt301 = new dt301_Base();
-            //    dt301.IdDept = "77";
-            //    dt301.IdUser = row["人員代號"].ToString().Trim();
-            //    dt301.IdJobTitle = row["新職務代號"].ToString().Trim();
-            //    dt301.IdCourse = row["課程代號"].ToString().Trim();
-
-            //    var dateReceipt = row["NgayLayBang"].ToString().Trim();
-            //    dt301.DateReceipt = string.IsNullOrEmpty(dateReceipt) ? default : Convert.ToDateTime(dateReceipt);
-
-            //    int yearAdd = dtCourse.First(r => r.Id == dt301.IdCourse).Duration ?? 1000;
-            //    dt301.ExpDate = yearAdd != 0 ? dt301.DateReceipt.AddYears(yearAdd) : (DateTime?)null;
-
-            //    var aaa = dt.Columns[24].ColumnName;
-
-            //    var value1 = row["應取證\n人員"].ToString().Trim();
-            //    dt301.ValidLicense = value1 == "Y";
-
-            //    var value2 = row["備援\n證照"].ToString().Trim();
-            //    dt301.BackupLicense = value2 == "Y";
-
-            //    var value3 = row["無效\n證照"].ToString().Trim();
-            //    dt301.InvalidLicense = value3 == "Y";
-
-            //    dt301.Describe = row["備註"].ToString().Trim();
-
-            //    dt301_Bases.Add(dt301);
-            //}
-
-
-
-            // Data
-            //lsUser = new List<dm_User>();
-
-            //foreach (DataRow row in dt.Rows)
-            //{
-            //    dm_User usr = new dm_User();
-            //    usr.Id = row["人員代號"].ToString().Trim();
-            //    usr.DisplayName = row["中文姓名"].ToString().Trim();
-            //    usr.DisplayNameVN = row["越文姓名"].ToString().Trim();
-
-            //    var dateCrate = row["到職日"].ToString().Trim();
-
-            //    usr.DateCreate = string.IsNullOrEmpty(dateCrate) ? default : Convert.ToDateTime(dateCrate);
-            //    usr.Status = string.IsNullOrEmpty(dateCrate) ? 1 : 0;
-
-
-            //    usr.IdDepartment = row["部門代號"].ToString().Trim();
-            //    usr.JobCode = row["職務代號"].ToString().Trim();
-            //    usr.CitizenID = row["身份證/護照號碼"].ToString().Trim();
-
-            //    var dateOB = row["出生日期"].ToString().Trim();
-            //    usr.DOB = string.IsNullOrEmpty(dateOB) ? default : Convert.ToDateTime(dateOB);
-
-            //    usr.Nationality = row["國籍"].ToString().Trim();
-
-            //    lsUser.Add(usr);
-            //}
-
-            gridControl1.DataSource = dt301_CertReqs;
+            return ds;
         }
 
-        private void btnUploadDB_Click(object sender, EventArgs e)
+        List<dt201_Base> bases = new List<dt201_Base>();
+
+        private void btnOpen_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            // 11111111111111111
-            //List<dm_User> dm_Users = dm_UserBUS.Instance.GetList();
+            //bases = new List<dt201_Base>();
+            //DataSet ds = OpenFile();
 
-            //foreach (var item in lsUser)
+            //System.Data.DataTable dt03 = ds.Tables[0];
+
+            //foreach (DataRow item in dt03.Rows)
             //{
-            //    if (item.Id == "VNW00004589")
-            //    {
+            //    dt201_Base data = new dt201_Base();
 
+            //    data.IdDept = "7730";
+            //    data.NotifyCycle = 1;
+            //    data.DocType = "";
+            //    data.DocCode = item[5].ToString();
+
+            //    data.IdParent = Convert.ToInt16(item[10].ToString().Trim());
+            //    var Name = item[6].ToString().Trim().Split(new[] { "\r\n", "\n" }, StringSplitOptions.None);
+
+            //    if (Name.Count() > 2)
+            //    {
+            //        data.IsDel = true;
             //    }
 
-            //    if (dm_Users.Any(r => r.Id == item.Id))
+            //    if (data.DocCode.Length != 14)
             //    {
-
-
-            //        dm_User dm_UserUpdate = dm_Users.First(r => r.Id == item.Id);
-
-            //        dm_UserUpdate.DisplayName = item.DisplayName;
-            //        dm_UserUpdate.DisplayNameVN = item.DisplayNameVN;
-            //        dm_UserUpdate.DateCreate = item.DateCreate;
-            //        dm_UserUpdate.Status = item.Status;
-            //        dm_UserUpdate.IdDepartment = item.IdDepartment;
-            //        dm_UserUpdate.JobCode = item.JobCode;
-            //        dm_UserUpdate.CitizenID = item.CitizenID;
-            //        dm_UserUpdate.DOB = item.DOB;
-            //        dm_UserUpdate.Nationality = item.Nationality;
-
-            //        dm_UserBUS.Instance.AddOrUpdate(dm_UserUpdate);
+            //        data.IsDel = true;
             //    }
-            //    else
-            //    {
-            //        dm_UserBUS.Instance.AddOrUpdate(item);
-            //    }
+
+            //    data.DisplayName = Name[1];
+            //    data.DisplayNameVN = Name[0];
+            //    data.IdRecordCode = Convert.ToInt16(item[9].ToString().Trim());
+
+            //    bases.Add(data);
             //}
 
-
-            // 2222222222
-
-            //foreach (var item in dt301_Bases)
-            //{
-            //    dt301_BaseBUS.Instance.Add(item);
-            //}
-
-            //foreach (var item in dt301_CertReqs)
-            //{
-            //    dt301_CertReqSetBUS.Instance.Add(item);
-            //}
-
-            MessageBox.Show("ok");
+            //gcData.DataSource = bases;
         }
+
+        private void btnUpload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            //foreach (var item in bases)
+            //{
+            //    dt201_BaseBUS.Instance.Add(item);
+            //}
+
+            //XtraMessageBox.Show("OK");
+        }
+
     }
 }

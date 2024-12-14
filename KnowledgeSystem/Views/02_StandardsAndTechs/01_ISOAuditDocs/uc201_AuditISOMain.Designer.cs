@@ -70,6 +70,7 @@
             // 
             this.treeListColumn2.Caption = "中文名稱";
             this.treeListColumn2.FieldName = "data.DisplayName";
+            this.treeListColumn2.MaxWidth = 300;
             this.treeListColumn2.Name = "treeListColumn2";
             this.treeListColumn2.Visible = true;
             this.treeListColumn2.VisibleIndex = 1;
