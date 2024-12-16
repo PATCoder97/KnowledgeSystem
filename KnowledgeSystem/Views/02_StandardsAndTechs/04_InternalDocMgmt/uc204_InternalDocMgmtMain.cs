@@ -225,7 +225,22 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
             {
                 helper.SaveViewInfo();
 
+                var grpUsrs = dm_GroupUserBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id);
+
+                var depts = dm_DeptBUS.Instance.GetList();
+                var groups = dm_GroupBUS.Instance.GetListByName("ISO組");
+
+                var deptAccess = (from data in groups
+                                  join grp in grpUsrs on data.Id equals grp.IdGroup
+                                  select data.IdDept).ToList();
+
                 dt204Bases = dt204_InternalDocMgmtBUS.Instance.GetList();
+
+                // Lấy các văn kiện khác 三階, hoặc của tổ mình đưa lên theo quyền trong nhóm ISO
+                dt204Bases = (from data in dt204Bases
+                              where data.DocLevel != "三階" || deptAccess.Contains(data.IdDept)
+                              select data).ToList();
+
                 users = dm_UserBUS.Instance.GetList();
                 jobs = dm_JobTitleBUS.Instance.GetList();
                 var docCatoraries = dt204_DocCatoraryBUS.Instance.GetList();

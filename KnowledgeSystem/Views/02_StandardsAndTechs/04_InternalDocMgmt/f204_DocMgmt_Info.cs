@@ -175,13 +175,15 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
 
             cbbDocLevel.Properties.Items.AddRange(TPConfigs.DocTypes201.Split(';').ToList());
 
-            var lsUsers = dm_UserBUS.Instance.GetListByDept(idDept2word).Select(r => new dm_User
-            {
-                Id = r.Id,
-                IdDepartment = r.IdDepartment,
-                DisplayName = r.DisplayName,
-                JobCode = r.JobCode
-            }).ToList();
+            var lsUsers = dm_UserBUS.Instance.GetListByDept(idDept2word)
+                .Where(r => r.Status == 0)
+                .Select(r => new dm_User
+                {
+                    Id = r.Id,
+                    IdDepartment = r.IdDepartment,
+                    DisplayName = r.DisplayName,
+                    JobCode = r.JobCode
+                }).ToList();
             txbIdFounder.Properties.DataSource = lsUsers;
             txbIdFounder.Properties.DisplayMember = "DisplayName";
             txbIdFounder.Properties.ValueMember = "Id";
