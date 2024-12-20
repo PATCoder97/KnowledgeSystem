@@ -329,26 +329,45 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             LoadData();
         }
 
+        public static void SetIdRecordCodeForFinalNodes(List<dt201_Base> documents)
+        {
+            // Create a dictionary to map Id to IdRecordCode for quick lookup
+            Dictionary<int, int> idToRecordCodeMap = documents.ToDictionary(d => d.Id, d => d.IdRecordCode);
+
+            foreach (var doc in documents)
+            {
+                if (doc.IsFinalNode == true && idToRecordCodeMap.ContainsKey(doc.IdParent))
+                {
+                    doc.IdRecordCode = idToRecordCodeMap[doc.IdParent];
+                }
+            }
+        }
+
         private void LoadData()
         {
-            baseDatas = dt201_BaseBUS.Instance.GetList().ToList();
-            var deptsChecked = cbbDepts.Items.Where(r => r.CheckState == CheckState.Checked).Select(r => r.Value).ToList();
-            var records = dt201_RecordCodeBUS.Instance.GetList();
+            using (var handle = SplashScreenManager.ShowOverlayForm(tlsData))
+            {
+                baseDatas = dt201_BaseBUS.Instance.GetList().ToList();
+                SetIdRecordCodeForFinalNodes(baseDatas);
 
-            var result = (from data in baseDatas
-                          join dept in depts on data.IdDept equals dept.Id
-                          join record in records on data.IdRecordCode equals record.Id into recordGroup
-                          from record in recordGroup.DefaultIfEmpty()
-                          where deptsChecked.Contains(data.IdDept)
-                          select new { data, dept, record }).ToList();
+                var deptsChecked = cbbDepts.Items.Where(r => r.CheckState == CheckState.Checked).Select(r => r.Value).ToList();
+                var records = dt201_RecordCodeBUS.Instance.GetList();
 
-            sourceData.DataSource = result;
+                var result = (from data in baseDatas
+                              join dept in depts on data.IdDept equals dept.Id
+                              join record in records on data.IdRecordCode equals record.Id into recordGroup
+                              from record in recordGroup.DefaultIfEmpty()
+                              where deptsChecked.Contains(data.IdDept)
+                              select new { data, dept, record }).ToList();
 
-            tlsData.RefreshDataSource();
-            tlsData.Refresh();
-            tlsData.BestFitColumns();
+                sourceData.DataSource = result;
 
-            tlsColDept.Visible = deptsChecked.Count > 1;
+                tlsData.RefreshDataSource();
+                tlsData.Refresh();
+                tlsData.BestFitColumns();
+
+                tlsColDept.Visible = deptsChecked.Count > 1;
+            }
         }
 
         private void uc201_AuditISOMain_Load(object sender, EventArgs e)
