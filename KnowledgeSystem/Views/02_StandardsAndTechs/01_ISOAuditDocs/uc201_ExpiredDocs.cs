@@ -59,7 +59,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             users = dm_UserBUS.Instance.GetList();
             var records = dt201_RecordCodeBUS.Instance.GetList();
 
-            var baseRecords = dt201_BaseBUS.Instance.GetList().Where(r => deptAccess.Contains(r.IdDept)).ToList();
+            var baseRecords = dt201_BaseBUS.Instance.GetList()
+                .Where(r => deptAccess.Contains(r.IdDept) && r.NotifyCycle != 0 && r.IsDisable != true).ToList();
 
             // Step 1: Identify records with IsFinalNode = true and get the max Id for each IdParent
             var maxIdForFinalNodes = baseRecords
@@ -85,7 +86,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             // Step 6: Lấy ra chu kỳ của từng văn kiện để xác định có thông báo không
             var cycles = (from id in Yearlys
                           join basedata in resultBase on id.IdParent equals basedata.Id
-                          where basedata.NotifyCycle != 0
                           select new
                           {
                               Id = id.Id,
