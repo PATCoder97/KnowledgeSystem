@@ -235,20 +235,27 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 return;
             }
 
-            var editor = new DateTimeOffsetEdit { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) };
-            editor.Properties.MaskSettings.Set("mask", "yyyy/MM/dd HH:mm");
+            var editor = new TextEdit { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) };
+
+            // Thiết lập mask để buộc nhập đúng định dạng
+            editor.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.DateTimeMaskManager));
+            editor.Properties.MaskSettings.Set("mask", "yyyy/MM/dd HH:mm:ss");
+            editor.Properties.MaskSettings.Set("useAdvancingCaret", true);
+
             var result = XtraInputBox.Show(new XtraInputBoxArgs
             {
-                Caption = TPConfigs.SoftNameTW,
+                Caption = "TPConfigs.SoftNameTW",
                 AllowHtmlText = DevExpress.Utils.DefaultBoolean.True,
                 Prompt = "<font='Microsoft JhengHei UI' size=14>輸入核准時間</font>",
                 Editor = editor,
                 DefaultButtonIndex = 0,
-                DefaultResponse = DateTime.Now
+                DefaultResponse = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") // Định dạng mặc định
             });
 
             if (string.IsNullOrEmpty(result?.ToString())) return;
-            DateTime respTime = Convert.ToDateTime(result.ToString());
+
+            DateTime respTime;
+            DateTime.TryParse(result.ToString(), out respTime);
 
             if (respTime < minTimeRespValue)
             {
@@ -358,20 +365,27 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 return;
             }
 
-            var editor = new DateTimeOffsetEdit { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) };
-            editor.Properties.MaskSettings.Set("mask", "yyyy/MM/dd HH:mm");
+            var editor = new TextEdit { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) };
+
+            // Thiết lập mask để buộc nhập đúng định dạng
+            editor.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.DateTimeMaskManager));
+            editor.Properties.MaskSettings.Set("mask", "yyyy/MM/dd HH:mm:ss");
+            editor.Properties.MaskSettings.Set("useAdvancingCaret", true);
+
             var result = XtraInputBox.Show(new XtraInputBoxArgs
             {
-                Caption = TPConfigs.SoftNameTW,
+                Caption = "TPConfigs.SoftNameTW",
                 AllowHtmlText = DevExpress.Utils.DefaultBoolean.True,
                 Prompt = "<font='Microsoft JhengHei UI' size=14>輸入核准時間</font>",
                 Editor = editor,
                 DefaultButtonIndex = 0,
-                DefaultResponse = DateTime.Now
+                DefaultResponse = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") // Định dạng mặc định
             });
 
             if (string.IsNullOrEmpty(result?.ToString())) return;
-            DateTime respTime = Convert.ToDateTime(result.ToString());
+
+            DateTime respTime;
+            DateTime.TryParse(result.ToString(), out respTime);
 
             if (respTime < minTimeRespValue)
             {

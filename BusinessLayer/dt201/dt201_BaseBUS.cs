@@ -83,25 +83,38 @@ namespace BusinessLayer
         public List<dt201_Base> GetAllChildByParentId(int parentId)
         {
             var allChildren = new List<dt201_Base>();
+            var visited = new HashSet<int>(); // To track visited nodes and avoid circular references
 
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    var parent = _context.dt201_Base.FirstOrDefault(r => r.Id == parentId);
-                    // Lấy các con trực tiếp của ParentId
-                    var children = _context.dt201_Base.Where(i => i.IdParent == parentId && i.IsDel != true).ToList();
+                    // Fetch all records in one query to reduce database calls
+                    var allRecords = _context.dt201_Base.Where(r => r.IsDel != true).ToList();
+                    var parent = allRecords.FirstOrDefault(r => r.Id == parentId);
 
-                    // Thêm con trực tiếp vào danh sách
-                    allChildren.Add(parent);
-                    allChildren.AddRange(children);
-
-                    // Với mỗi con trực tiếp, tiếp tục đệ quy lấy các con của chúng
-                    foreach (var child in children)
+                    if (parent == null)
                     {
-                        // Đệ quy tìm các con của item này và thêm vào danh sách
-                        allChildren.AddRange(GetAllChildByParentId(child.Id));
+                        return allChildren;
                     }
+
+                    // Recursive local function
+                    void FetchChildren(dt201_Base current)
+                    {
+                        if (current == null || visited.Contains(current.Id))
+                            return;
+
+                        visited.Add(current.Id);
+                        allChildren.Add(current);
+
+                        var children = allRecords.Where(r => r.IdParent == current.Id).ToList();
+                        foreach (var child in children)
+                        {
+                            FetchChildren(child);
+                        }
+                    }
+
+                    FetchChildren(parent);
                 }
             }
             catch (Exception ex)
@@ -110,8 +123,9 @@ namespace BusinessLayer
                 throw;
             }
 
-            return allChildren; // Trả về toàn bộ danh sách các con
+            return allChildren; // Return the entire list of children
         }
+
 
         public dt201_Base GetItemById(int id)
         {

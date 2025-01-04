@@ -49,6 +49,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         DXMenuItem itemAddVer;
         DXMenuItem itemDisable;
         DXMenuItem itemEnable;
+        DXMenuItem itemClone;
 
         TreeListNode currentNode;
         TreeListNode parentNode;
@@ -56,6 +57,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         dt201_Base currentData;
         dt201_Base parentData;
         List<dt201_Base> childrenDatas;
+
         DXMenuItem CreateMenuItem(string caption, EventHandler clickEvent, SvgImage svgImage)
         {
             var menuItem = new DXMenuItem(caption, clickEvent, svgImage, DXMenuItemPriority.Normal);
@@ -120,6 +122,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             itemEditNode = CreateMenuItem("編輯節點", ItemEditNode_Click, TPSvgimages.Edit);
             itemDisable = CreateMenuItem("停用節點", ItemDisable_Click, TPSvgimages.Disable);
             itemEnable = CreateMenuItem("啟用節點", ItemEnable_Click, TPSvgimages.Confirm);
+            itemClone = CreateMenuItem("複製節點", ItemClone_Click, TPSvgimages.Copy);
         }
 
         private void GetFocusData()
@@ -130,6 +133,56 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             currentData = (treeList.GetRow(currentNode.Id) as dynamic).data as dt201_Base;
             parentData = parentNode != null ? (treeList.GetRow(parentNode.Id) as dynamic).data as dt201_Base : null;
+        }
+
+        private void ItemClone_Click(object sender, EventArgs e)
+        {
+            GetFocusData();
+
+            var result = XtraInputBox.Show(new XtraInputBoxArgs
+            {
+                Caption = TPConfigs.SoftNameTW,
+                AllowHtmlText = DevExpress.Utils.DefaultBoolean.True,
+                Prompt = "<font='Microsoft JhengHei UI' size=14>請輸入文件編號</font>",
+                DefaultButtonIndex = 0,
+                Editor = new TextEdit() { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) },
+                DefaultResponse = ""
+            });
+
+            if (string.IsNullOrEmpty(result?.ToString())) return;
+            string cloneCode = result.ToString();
+
+            var children = dt201_BaseBUS.Instance.GetAllChildByParentId(currentData.Id);
+
+            var cloneDatas = children.Select(child => new dt201_Base
+            {
+                IdParent = child.IdParent,
+                DocCode = cloneCode,
+                DisplayName = child.DisplayName,
+                IdDept = child.IdDept,
+                IsFinalNode = child.IsFinalNode,
+                IsDel = child.IsDel,
+                DelTime = child.DelTime,
+                IsPaperType = child.IsPaperType,
+                NotifyCycle = child.NotifyCycle,
+                IsDisable = child.IsDisable,
+                DisplayNameVN = child.DisplayNameVN,
+                DocType = child.DocType,
+                IdRecordCode = child.IdRecordCode,
+            }).ToList();
+
+            var cloneParent = cloneDatas.First(r => r.IsFinalNode != true);
+            int idCloneParent = dt201_BaseBUS.Instance.Add(cloneParent);
+
+            foreach (var item in cloneDatas)
+            {
+                if (item.IsFinalNode != true) continue;
+
+                item.IdParent = idCloneParent;
+                dt201_BaseBUS.Instance.Add(item);
+            }
+
+            LoadData();
         }
 
         private void ItemEnable_Click(object sender, EventArgs e)
@@ -189,27 +242,30 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 {
                     Caption = TPConfigs.SoftNameTW,
                     AllowHtmlText = DevExpress.Utils.DefaultBoolean.True,
-                    Prompt = "<font='Microsoft JhengHei UI' size=14>輸入新年版名稱</font>",
+                    Prompt = "<font='Microsoft JhengHei UI' size=14>中文與越南文之間用「/」分隔</font>",
                     DefaultButtonIndex = 0,
                     Editor = new TextEdit() { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) },
                     DefaultResponse = ""
                 });
 
                 if (string.IsNullOrEmpty(result?.ToString())) return;
-                string version = result.ToString();
+                string[] version = result.ToString().Split('/');
+
+                string verVN = version[0];
+                string verTW = version.Count() > 1 ? version[1] : verVN;
 
                 TreeListNode parentNode = tlsData.FocusedNode.ParentNode;
                 dt201_Base parentData = (tlsData.GetRow(parentNode.Id) as dynamic).data as dt201_Base;
 
-                bool IsExist = baseDatas.Any(r => r.IdParent == parentData.Id && r.DisplayName == version);
+                bool IsExist = baseDatas.Any(r => r.IdParent == currentData.Id && r.DisplayName == verVN);
                 if (IsExist)
                 {
                     MsgTP.MsgError("年版已存在！");
                     return;
                 }
 
-                currentData.DisplayName = version;
-                currentData.DisplayNameVN = version;
+                currentData.DisplayName = verVN;
+                currentData.DisplayNameVN = verTW;
                 dt201_BaseBUS.Instance.AddOrUpdate(currentData);
                 LoadData();
                 return;
@@ -237,16 +293,19 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             {
                 Caption = TPConfigs.SoftNameTW,
                 AllowHtmlText = DevExpress.Utils.DefaultBoolean.True,
-                Prompt = "<font='Microsoft JhengHei UI' size=14>輸入年版名稱</font>",
+                Prompt = "<font='Microsoft JhengHei UI' size=14>中文與越南文之間用「/」分隔</font>",
                 DefaultButtonIndex = 0,
                 Editor = new TextEdit() { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) },
                 DefaultResponse = ""
             });
 
             if (string.IsNullOrEmpty(result?.ToString())) return;
-            string version = result.ToString();
+            string[] version = result.ToString().Split('/');
 
-            bool IsExist = baseDatas.Any(r => r.IdParent == currentData.Id && r.DisplayName == version);
+            string verVN = version[0];
+            string verTW = version.Count() > 1 ? "" : "";
+
+            bool IsExist = baseDatas.Any(r => r.IdParent == currentData.Id && r.DisplayName == verVN);
             if (IsExist)
             {
                 MsgTP.MsgError("年版已存在！");
@@ -257,8 +316,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             {
                 IdParent = currentData.Id,
                 DocCode = currentData.DocCode,
-                DisplayName = version,
-                DisplayNameVN = version,
+                DisplayName = verVN,
+                DisplayNameVN = verTW,
                 IsFinalNode = true,
                 IdDept = currentData.IdDept,
             };
@@ -513,6 +572,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             {
                 e.Menu.Items.Add(itemAddVer);
                 e.Menu.Items.Add(itemEditNode);
+                e.Menu.Items.Add(itemClone);
                 e.Menu.Items.Add(itemDelNode);
                 e.Menu.Items.Add(itemDisable);
             }

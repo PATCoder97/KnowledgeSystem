@@ -286,6 +286,12 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 return;
             }
 
+            if (progresses.Any(r => r.IdRole == 0 || string.IsNullOrEmpty(r.IdUsr)))
+            {
+                XtraMessageBox.Show("請完成簽核流程！", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             bool result = false;
             string message = $"{code} {displayName}";
 
