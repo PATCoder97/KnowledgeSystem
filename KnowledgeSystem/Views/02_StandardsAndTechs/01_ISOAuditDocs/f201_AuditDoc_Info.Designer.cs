@@ -29,13 +29,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraGrid.GridFormatRule gridFormatRule1 = new DevExpress.XtraGrid.GridFormatRule();
-            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression1 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule2 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression2 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f201_AuditDoc_Info));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.gcData = new DevExpress.XtraGrid.GridControl();
             this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gColId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColIdFile = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColIsCancel = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -43,7 +45,7 @@
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gColIdFile = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
@@ -54,8 +56,7 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-            this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gColIsCancel = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.btnAddMultiFile = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
@@ -121,14 +122,14 @@
             this.gridColumn5,
             this.gridColumn2,
             this.gridColumn7});
-            gridFormatRule1.ApplyToRow = true;
-            gridFormatRule1.Name = "Format0";
-            formatConditionRuleExpression1.Appearance.BackColor = System.Drawing.Color.White;
-            formatConditionRuleExpression1.Appearance.BackColor2 = System.Drawing.Color.Red;
-            formatConditionRuleExpression1.Appearance.Options.UseBackColor = true;
-            formatConditionRuleExpression1.Expression = "[data.IsCancel] = True";
-            gridFormatRule1.Rule = formatConditionRuleExpression1;
-            this.gvData.FormatRules.Add(gridFormatRule1);
+            gridFormatRule2.ApplyToRow = true;
+            gridFormatRule2.Name = "Format0";
+            formatConditionRuleExpression2.Appearance.BackColor = System.Drawing.Color.White;
+            formatConditionRuleExpression2.Appearance.BackColor2 = System.Drawing.Color.Red;
+            formatConditionRuleExpression2.Appearance.Options.UseBackColor = true;
+            formatConditionRuleExpression2.Expression = "[data.IsCancel] = True";
+            gridFormatRule2.Rule = formatConditionRuleExpression2;
+            this.gvData.FormatRules.Add(gridFormatRule2);
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
             this.gvData.OptionsDetail.ShowDetailTabs = false;
@@ -148,6 +149,18 @@
             this.gColId.FieldName = "data.Id";
             this.gColId.Name = "gColId";
             this.gColId.Width = 91;
+            // 
+            // gColIdFile
+            // 
+            this.gColIdFile.Caption = "gColIdFile";
+            this.gColIdFile.FieldName = "data.AttId";
+            this.gColIdFile.Name = "gColIdFile";
+            // 
+            // gColIsCancel
+            // 
+            this.gColIsCancel.Caption = "IsCancel";
+            this.gColIsCancel.FieldName = "data.IsCancel";
+            this.gColIsCancel.Name = "gColIsCancel";
             // 
             // gridColumn3
             // 
@@ -211,11 +224,13 @@
             this.gridColumn2.VisibleIndex = 6;
             this.gridColumn2.Width = 129;
             // 
-            // gColIdFile
+            // gridColumn7
             // 
-            this.gColIdFile.Caption = "gColIdFile";
-            this.gColIdFile.FieldName = "data.AttId";
-            this.gColIdFile.Name = "gColIdFile";
+            this.gridColumn7.Caption = "備註";
+            this.gridColumn7.FieldName = "data.Descript";
+            this.gridColumn7.Name = "gridColumn7";
+            this.gridColumn7.Visible = true;
+            this.gridColumn7.VisibleIndex = 7;
             // 
             // Root
             // 
@@ -247,9 +262,10 @@
             this.barManagerTP.Form = this;
             this.barManagerTP.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.btnReload,
-            this.btnAdd});
+            this.btnAdd,
+            this.btnAddMultiFile});
             this.barManagerTP.MainMenu = this.bar2;
-            this.barManagerTP.MaxItemId = 5;
+            this.barManagerTP.MaxItemId = 6;
             // 
             // bar2
             // 
@@ -274,6 +290,7 @@
             this.bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnAdd, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnAddMultiFile, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnReload, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawDragBorder = false;
@@ -330,19 +347,13 @@
             this.barDockControlRight.Manager = this.barManagerTP;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 422);
             // 
-            // gridColumn7
+            // btnAddMultiFile
             // 
-            this.gridColumn7.Caption = "備註";
-            this.gridColumn7.FieldName = "data.Descript";
-            this.gridColumn7.Name = "gridColumn7";
-            this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 7;
-            // 
-            // gColIsCancel
-            // 
-            this.gColIsCancel.Caption = "IsCancel";
-            this.gColIsCancel.FieldName = "data.IsCancel";
-            this.gColIsCancel.Name = "gColIsCancel";
+            this.btnAddMultiFile.Caption = "新增多文件";
+            this.btnAddMultiFile.Id = 5;
+            this.btnAddMultiFile.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnAddMultiFile.Name = "btnAddMultiFile";
+            this.btnAddMultiFile.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAddMultiFile_ItemClick);
             // 
             // f201_AuditDoc_Info
             // 
@@ -400,5 +411,6 @@
         private DevExpress.XtraBars.BarButtonItem btnAdd;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
         private DevExpress.XtraGrid.Columns.GridColumn gColIsCancel;
+        private DevExpress.XtraBars.BarButtonItem btnAddMultiFile;
     }
 }

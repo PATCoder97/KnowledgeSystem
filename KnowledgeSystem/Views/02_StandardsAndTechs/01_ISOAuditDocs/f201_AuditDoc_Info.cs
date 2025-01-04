@@ -44,6 +44,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         {
             btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
             btnAdd.ImageOptions.SvgImage = TPSvgimages.Add;
+            btnAddMultiFile.ImageOptions.SvgImage = TPSvgimages.Add2;
         }
 
         DXMenuItem CreateMenuItem(string caption, EventHandler clickEvent, SvgImage svgImage)
@@ -204,6 +205,12 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             f00_VIewFile fView = new f00_VIewFile(destPath);
             fView.ShowDialog();
+        }
+
+        private void btnAddMultiFile_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            f201_AddRangeAtts fAdd = new f201_AddRangeAtts();
+            fAdd.ShowDialog();
         }
     }
 }

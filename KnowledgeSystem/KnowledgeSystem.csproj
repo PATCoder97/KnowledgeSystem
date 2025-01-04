@@ -253,6 +253,12 @@
     <Compile Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\f201_AddNode.Designer.cs">
       <DependentUpon>f201_AddNode.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\f201_AddRangeAtts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\f201_AddRangeAtts.Designer.cs">
+      <DependentUpon>f201_AddRangeAtts.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\f201_AuditDoc_Info.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -932,6 +938,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\f201_AddNode.resx">
       <DependentUpon>f201_AddNode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\f201_AddRangeAtts.resx">
+      <DependentUpon>f201_AddRangeAtts.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\f201_AuditDoc_Info.resx">
       <DependentUpon>f201_AuditDoc_Info.cs</DependentUpon>
