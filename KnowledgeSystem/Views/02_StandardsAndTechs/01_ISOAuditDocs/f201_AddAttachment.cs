@@ -437,23 +437,72 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void txbAtt_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog { Filter = filterAtt };
+            string fileName = "";
+            string encryptionName = "";
+            string actualName = "";
 
-            if (openFileDialog.ShowDialog() != DialogResult.OK)
-                return;
-
-            string fileName = openFileDialog.FileName;
-            string encryptionName = EncryptionHelper.EncryptionFileName(fileName);
-            string actualName = Path.GetFileName(fileName);
-
-            txbAtt.Text = actualName;
-            attachment = new Attachment()
+            switch (e.Button.Caption)
             {
-                Thread = "201",
-                EncryptionName = encryptionName,
-                ActualName = actualName,
-                FullPath = fileName
-            };
+                case "Paste":
+
+                    if (Clipboard.ContainsFileDropList())
+                    {
+                        var files = Clipboard.GetFileDropList();
+                        var pdfFiles = new List<string>();
+
+                        foreach (var file in files)
+                        {
+                            if (file.EndsWith(".pdf", StringComparison.OrdinalIgnoreCase) && File.Exists(file))
+                            {
+                                pdfFiles.Add(file);
+                            }
+                        }
+
+                        if (pdfFiles.Count != 1)
+                        {
+                            XtraMessageBox.Show("請選擇一個PDF檔案", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+
+                        fileName = pdfFiles.First();
+                        encryptionName = EncryptionHelper.EncryptionFileName(fileName);
+                        actualName = Path.GetFileName(fileName);
+
+                        txbAtt.Text = actualName;
+                        attachment = new Attachment()
+                        {
+                            Thread = "201",
+                            EncryptionName = encryptionName,
+                            ActualName = actualName,
+                            FullPath = fileName
+                        };
+                    }
+                    else
+                    {
+                        XtraMessageBox.Show("請選擇一個PDF檔案", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+
+                    break;
+                default:
+                    OpenFileDialog openFileDialog = new OpenFileDialog { Filter = filterAtt };
+
+                    if (openFileDialog.ShowDialog() != DialogResult.OK)
+                        return;
+
+                    fileName = openFileDialog.FileName;
+                    encryptionName = EncryptionHelper.EncryptionFileName(fileName);
+                    actualName = Path.GetFileName(fileName);
+
+                    txbAtt.Text = actualName;
+                    attachment = new Attachment()
+                    {
+                        Thread = "201",
+                        EncryptionName = encryptionName,
+                        ActualName = actualName,
+                        FullPath = fileName
+                    };
+                    break;
+            }
         }
 
         private void ckSignOrPaper_SelectedIndexChanged(object sender, EventArgs e)

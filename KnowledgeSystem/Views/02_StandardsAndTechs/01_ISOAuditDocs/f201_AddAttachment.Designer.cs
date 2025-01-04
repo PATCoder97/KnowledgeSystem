@@ -30,6 +30,16 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f201_AddAttachment));
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.btnDefaultProgress = new DevExpress.XtraEditors.SimpleButton();
             this.ckSignOrPaper = new DevExpress.XtraEditors.RadioGroup();
@@ -57,6 +67,7 @@
             this.txbDocCode = new DevExpress.XtraEditors.TextEdit();
             this.txbAtt = new DevExpress.XtraEditors.ButtonEdit();
             this.txbDisplayNameVN = new DevExpress.XtraEditors.TextEdit();
+            this.txbDesc = new DevExpress.XtraEditors.TextEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.lcDocCode = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcDisplayName = new DevExpress.XtraLayout.LayoutControlItem();
@@ -65,7 +76,6 @@
             this.lcDisplayNameVN = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcSignOrPaper = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcDefaultProgress = new DevExpress.XtraLayout.LayoutControlItem();
-            this.txbDesc = new DevExpress.XtraEditors.TextEdit();
             this.lcDesc = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -81,6 +91,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txbDocCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbAtt.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDisplayNameVN.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbDesc.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDocCode)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDisplayName)).BeginInit();
@@ -89,7 +100,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcDisplayNameVN)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcSignOrPaper)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDefaultProgress)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbDesc.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDesc)).BeginInit();
             this.SuspendLayout();
             // 
@@ -440,8 +450,11 @@
             this.txbAtt.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbAtt.Properties.Appearance.Options.UseFont = true;
             this.txbAtt.Properties.Appearance.Options.UseForeColor = true;
+            editorButtonImageOptions2.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("editorButtonImageOptions2.SvgImage")));
+            editorButtonImageOptions2.SvgImageSize = new System.Drawing.Size(16, 16);
             this.txbAtt.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Search)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Search, "Browse", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default),
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "Paste", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.txbAtt.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.txbAtt.Size = new System.Drawing.Size(540, 32);
             this.txbAtt.StyleController = this.layoutControl1;
@@ -459,6 +472,18 @@
             this.txbDisplayNameVN.Size = new System.Drawing.Size(540, 32);
             this.txbDisplayNameVN.StyleController = this.layoutControl1;
             this.txbDisplayNameVN.TabIndex = 11;
+            // 
+            // txbDesc
+            // 
+            this.txbDesc.Location = new System.Drawing.Point(100, 120);
+            this.txbDesc.Name = "txbDesc";
+            this.txbDesc.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.txbDesc.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.txbDesc.Properties.Appearance.Options.UseFont = true;
+            this.txbDesc.Properties.Appearance.Options.UseForeColor = true;
+            this.txbDesc.Size = new System.Drawing.Size(540, 32);
+            this.txbDesc.StyleController = this.layoutControl1;
+            this.txbDesc.TabIndex = 11;
             // 
             // Root
             // 
@@ -575,18 +600,6 @@
             this.lcDefaultProgress.TextSize = new System.Drawing.Size(0, 0);
             this.lcDefaultProgress.TextVisible = false;
             // 
-            // txbDesc
-            // 
-            this.txbDesc.Location = new System.Drawing.Point(100, 120);
-            this.txbDesc.Name = "txbDesc";
-            this.txbDesc.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.txbDesc.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.txbDesc.Properties.Appearance.Options.UseFont = true;
-            this.txbDesc.Properties.Appearance.Options.UseForeColor = true;
-            this.txbDesc.Size = new System.Drawing.Size(540, 32);
-            this.txbDesc.StyleController = this.layoutControl1;
-            this.txbDesc.TabIndex = 11;
-            // 
             // lcDesc
             // 
             this.lcDesc.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
@@ -636,6 +649,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txbDocCode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbAtt.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDisplayNameVN.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbDesc.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDocCode)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDisplayName)).EndInit();
@@ -644,7 +658,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcDisplayNameVN)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcSignOrPaper)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDefaultProgress)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbDesc.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDesc)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
