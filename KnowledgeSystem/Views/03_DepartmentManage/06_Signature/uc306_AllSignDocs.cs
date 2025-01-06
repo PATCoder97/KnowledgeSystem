@@ -160,10 +160,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             string displayName = ucEdit.DisplayName;
             string fieldType = ucEdit.IdFieldType;
             string docType = ucEdit.IdDocType;
+            bool confidential = ucEdit.Confidential;
 
             baseEdit.DisplayName = displayName;
             baseEdit.IdDocType = docType;
             baseEdit.IdFieldType = fieldType;
+            baseEdit.Confidential = confidential;
 
             dt306_BaseBUS.Instance.AddOrUpdate(baseEdit);
             LoadData();
@@ -468,7 +470,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
                         e.Menu.Items.Add(itemEditInfo);
                     }
 
-                    if (isOwner && isCancel)
+                    if (isOwner)
                     {
                         e.Menu.Items.Add(itemDelInfo);
                     }

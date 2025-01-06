@@ -18,7 +18,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
         public uc306_EditSignDoc()
         {
             InitializeComponent();
-            txbTitle.DataBindings.Add("Text", this, "DisplayName"); 
+            txbTitle.DataBindings.Add("Text", this, "DisplayName");
             txbDocType.DataBindings.Add("EditValue", this, "IdDocType");
             txbFieldType.DataBindings.Add("EditValue", this, "IdFieldType");
         }
@@ -28,6 +28,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
         public string DisplayName { get; set; }
         public string IdFieldType { get; set; }
         public string IdDocType { get; set; }
+        public bool Confidential { get; set; }
 
         private void uc306_EditSignDoc_Load(object sender, EventArgs e)
         {
@@ -39,6 +40,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             DisplayName = baseData.DisplayName;
             IdFieldType = baseData.IdFieldType;
             IdDocType = baseData.IdDocType;
+            Confidential = baseData.Confidential;
         }
 
         private void txbFieldType_EditValueChanged(object sender, EventArgs e)
