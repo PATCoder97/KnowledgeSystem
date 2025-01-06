@@ -209,8 +209,15 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void btnAddMultiFile_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            GridView view = gvData;
+            int idForm = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColId));
+
             f201_AddRangeAtts fAdd = new f201_AddRangeAtts();
+            fAdd.Text = "上傳多文件";
+            fAdd.idBase = currentData.Id;
             fAdd.ShowDialog();
+
+            LoadData();
         }
     }
 }
