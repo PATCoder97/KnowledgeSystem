@@ -36,6 +36,8 @@
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.txbMoreInfo = new DevExpress.XtraEditors.MemoEdit();
+            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picSign)).BeginInit();
@@ -46,10 +48,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbMoreInfo.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.txbMoreInfo);
             this.layoutControl1.Controls.Add(this.picSign);
             this.layoutControl1.Controls.Add(this.txbDate);
             this.layoutControl1.Controls.Add(this.cbbSign);
@@ -57,7 +62,7 @@
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(348, 262);
+            this.layoutControl1.Size = new System.Drawing.Size(348, 360);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -66,7 +71,7 @@
             this.picSign.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picSign.Location = new System.Drawing.Point(62, 84);
             this.picSign.Name = "picSign";
-            this.picSign.Size = new System.Drawing.Size(274, 166);
+            this.picSign.Size = new System.Drawing.Size(274, 164);
             this.picSign.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picSign.TabIndex = 6;
             this.picSign.TabStop = false;
@@ -119,9 +124,10 @@
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem1,
             this.layoutControlItem2,
-            this.layoutControlItem3});
+            this.layoutControlItem3,
+            this.layoutControlItem4});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(348, 262);
+            this.Root.Size = new System.Drawing.Size(348, 360);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem1
@@ -159,9 +165,29 @@
             this.layoutControlItem3.Control = this.picSign;
             this.layoutControlItem3.Location = new System.Drawing.Point(0, 72);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(328, 170);
+            this.layoutControlItem3.Size = new System.Drawing.Size(328, 168);
             this.layoutControlItem3.Text = "照片";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(38, 24);
+            // 
+            // txbMoreInfo
+            // 
+            this.txbMoreInfo.Location = new System.Drawing.Point(62, 252);
+            this.txbMoreInfo.Name = "txbMoreInfo";
+            this.txbMoreInfo.Size = new System.Drawing.Size(274, 96);
+            this.txbMoreInfo.StyleController = this.layoutControl1;
+            this.txbMoreInfo.TabIndex = 7;
+            this.txbMoreInfo.EditValueChanged += new System.EventHandler(this.txbMoreInfo_EditValueChanged);
+            // 
+            // layoutControlItem4
+            // 
+            this.layoutControlItem4.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.layoutControlItem4.AppearanceItemCaption.Options.UseFont = true;
+            this.layoutControlItem4.Control = this.txbMoreInfo;
+            this.layoutControlItem4.Location = new System.Drawing.Point(0, 240);
+            this.layoutControlItem4.Name = "layoutControlItem4";
+            this.layoutControlItem4.Size = new System.Drawing.Size(328, 100);
+            this.layoutControlItem4.Text = "資訊";
+            this.layoutControlItem4.TextSize = new System.Drawing.Size(38, 24);
             // 
             // uc00_AdvancedSign
             // 
@@ -169,7 +195,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.layoutControl1);
             this.Name = "uc00_AdvancedSign";
-            this.Size = new System.Drawing.Size(348, 262);
+            this.Size = new System.Drawing.Size(348, 360);
             this.Load += new System.EventHandler(this.uc00_AdvancedSign_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
@@ -181,6 +207,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbMoreInfo.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -195,5 +223,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
         private DevExpress.XtraEditors.LookUpEdit cbbSign;
+        private DevExpress.XtraEditors.MemoEdit txbMoreInfo;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
     }
 }

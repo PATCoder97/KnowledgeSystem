@@ -129,6 +129,7 @@
           <Property Name="FontType" Type="varchar" MaxLength="32" />
           <Property Name="FontColor" Type="varchar" MaxLength="7" />
           <Property Name="Prioritize" Type="int" Nullable="false" />
+          <Property Name="MoreInfo" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="dm_SignUsers">
           <Key>
@@ -909,7 +910,6 @@
           <EntitySet Name="dm_FixedProgress" EntityType="DBDocumentManagementSystemModel.dm_FixedProgress" />
           <EntitySet Name="dt306_SignRole" EntityType="DBDocumentManagementSystemModel.dt306_SignRole" />
           <EntitySet Name="dt307_Questions" EntityType="DBDocumentManagementSystemModel.dt307_Questions" />
-          <EntitySet Name="dm_Sign" EntityType="DBDocumentManagementSystemModel.dm_Sign" />
           <EntitySet Name="dt201_UpdateUsrReq" EntityType="DBDocumentManagementSystemModel.dt201_UpdateUsrReq" />
           <EntitySet Name="dt402_KPIWeb" EntityType="DBDocumentManagementSystemModel.dt402_KPIWeb" />
           <EntitySet Name="dm_User" EntityType="DBDocumentManagementSystemModel.dm_User" />
@@ -935,6 +935,7 @@
           <EntitySet Name="dt201_ReqUpdateDocs" EntityType="DBDocumentManagementSystemModel.dt201_ReqUpdateDocs" />
           <EntitySet Name="dt201_UpdateUsrReq_Detail" EntityType="DBDocumentManagementSystemModel.dt201_UpdateUsrReq_Detail" />
           <EntitySet Name="dt204_OldVersion" EntityType="DBDocumentManagementSystemModel.dt204_OldVersion" />
+          <EntitySet Name="dm_Sign" EntityType="DBDocumentManagementSystemModel.dm_Sign" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -1396,24 +1397,6 @@
           <Property Name="ImageName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="IsMultiAns" Type="Boolean" />
         </EntityType>
-        <EntityType Name="dm_Sign">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="ImgName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="ImgType" Type="Byte" Nullable="false" />
-          <Property Name="WidImg" Type="Int32" />
-          <Property Name="HgtImg" Type="Int32" />
-          <Property Name="X" Type="Int32" />
-          <Property Name="Y" Type="Int32" />
-          <Property Name="FontName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-          <Property Name="FontSize" Type="Double" />
-          <Property Name="FontType" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-          <Property Name="FontColor" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
-          <Property Name="Prioritize" Type="Int32" Nullable="false" />
-        </EntityType>
         <EntityType Name="dt201_UpdateUsrReq">
           <Key>
             <PropertyRef Name="Id" />
@@ -1714,6 +1697,25 @@
           <Property Name="OldVer" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
           <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="IdAtt" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dm_Sign">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ImgName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="ImgType" Type="Byte" Nullable="false" />
+          <Property Name="WidImg" Type="Int32" />
+          <Property Name="HgtImg" Type="Int32" />
+          <Property Name="X" Type="Int32" />
+          <Property Name="Y" Type="Int32" />
+          <Property Name="FontName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="FontSize" Type="Double" />
+          <Property Name="FontType" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="FontColor" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="Prioritize" Type="Int32" Nullable="false" />
+          <Property Name="MoreInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2227,25 +2229,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dm_Sign">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_Sign">
-              <MappingFragment StoreEntitySet="dm_Sign">
-                <ScalarProperty Name="Prioritize" ColumnName="Prioritize" />
-                <ScalarProperty Name="FontColor" ColumnName="FontColor" />
-                <ScalarProperty Name="FontType" ColumnName="FontType" />
-                <ScalarProperty Name="FontSize" ColumnName="FontSize" />
-                <ScalarProperty Name="FontName" ColumnName="FontName" />
-                <ScalarProperty Name="Y" ColumnName="Y" />
-                <ScalarProperty Name="X" ColumnName="X" />
-                <ScalarProperty Name="HgtImg" ColumnName="HgtImg" />
-                <ScalarProperty Name="WidImg" ColumnName="WidImg" />
-                <ScalarProperty Name="ImgType" ColumnName="ImgType" />
-                <ScalarProperty Name="ImgName" ColumnName="ImgName" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="dt201_UpdateUsrReq">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt201_UpdateUsrReq">
               <MappingFragment StoreEntitySet="dt201_UpdateUsrReq">
@@ -2568,6 +2551,26 @@
                 <ScalarProperty Name="OldVer" ColumnName="OldVer" />
                 <ScalarProperty Name="TypeDoc" ColumnName="TypeDoc" />
                 <ScalarProperty Name="IdBase" ColumnName="IdBase" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dm_Sign">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_Sign">
+              <MappingFragment StoreEntitySet="dm_Sign">
+                <ScalarProperty Name="MoreInfo" ColumnName="MoreInfo" />
+                <ScalarProperty Name="Prioritize" ColumnName="Prioritize" />
+                <ScalarProperty Name="FontColor" ColumnName="FontColor" />
+                <ScalarProperty Name="FontType" ColumnName="FontType" />
+                <ScalarProperty Name="FontSize" ColumnName="FontSize" />
+                <ScalarProperty Name="FontName" ColumnName="FontName" />
+                <ScalarProperty Name="Y" ColumnName="Y" />
+                <ScalarProperty Name="X" ColumnName="X" />
+                <ScalarProperty Name="HgtImg" ColumnName="HgtImg" />
+                <ScalarProperty Name="WidImg" ColumnName="WidImg" />
+                <ScalarProperty Name="ImgType" ColumnName="ImgType" />
+                <ScalarProperty Name="ImgName" ColumnName="ImgName" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

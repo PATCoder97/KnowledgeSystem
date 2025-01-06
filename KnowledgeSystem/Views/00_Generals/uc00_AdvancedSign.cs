@@ -28,6 +28,7 @@ namespace KnowledgeSystem.Views._00_Generals
 
         public SignInfo signInfo = SignInfo.Sign;
         List<dm_Sign> signs;
+        List<dm_Sign> moreInfos = new List<dm_Sign>();
 
         public dm_Sign SignSelect { get; set; }
         public Image ImageSign { get; set; }
@@ -46,12 +47,20 @@ namespace KnowledgeSystem.Views._00_Generals
             Image imageSign = File.Exists(source) ? new Bitmap(source) : new Bitmap(TPSvgimages.NoImage);
 
             string letter = txbDate.EditValue == null ? string.Empty : txbDate.DateTime.ToString("yyyy.MM.dd");
+            if (!string.IsNullOrEmpty(SignSelect.MoreInfo))
+            {
+                moreInfos = Newtonsoft.Json.JsonConvert.DeserializeObject<List<dm_Sign>>(SignSelect.MoreInfo);
+            }
+
+            if (moreInfos.Count > 0)
+            {
+                txbMoreInfo.Text = $"請再輸入{moreInfos.Count}行訊息";
+            }
 
             switch (signInfo)
             {
                 case SignInfo.Stamp:
-                    letter = string.IsNullOrEmpty(letter) ? DateTime.Today.ToString("yyyy.MM.dd") : letter;
-
+                    letter = string.IsNullOrEmpty(letter) ? " " : letter;
                     DrawStamp(letter, imageSign);
                     break;
                 default:
@@ -132,6 +141,53 @@ namespace KnowledgeSystem.Views._00_Generals
             g.DrawString(letter, font, new SolidBrush(desColor), rect, sf);
 
             var imageOut = MergeTwoImages(img, bit);
+
+            string[] texts = txbMoreInfo.Text.Trim()
+                .Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
+                .Where(text => !string.IsNullOrWhiteSpace(text))
+                .ToArray();
+
+            int index = 0;
+            foreach (var item in moreInfos)
+            {
+                string textTest = texts.Count() > index ? texts[index] : item.DisplayName; index++;
+                var fontInfoName = item.FontName;
+                var fontInfoSize = (byte)item.FontSize;
+                var fontInfoStyle = FontStyle.Regular;
+                switch (item.FontType)
+                {
+                    case "Bold":
+                        fontInfoStyle = FontStyle.Bold;
+                        break;
+                    case "Italic":
+                        fontInfoStyle = FontStyle.Italic;
+                        break;
+                    default:
+                        fontInfoStyle = FontStyle.Regular;
+                        break;
+                }
+                var fontInfo = new Font(fontInfoName, fontInfoSize, fontInfoStyle);
+
+                size = g.MeasureString(textTest.ToString(), fontInfo);
+                bit = new Bitmap(img.Width, (int)Math.Ceiling(size.Height));
+
+                g.SmoothingMode = SmoothingMode.AntiAlias;
+                g.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+                g.InterpolationMode = InterpolationMode.High;
+
+                sf = new StringFormat();
+                sf.LineAlignment = StringAlignment.Center;
+
+                // Top/Left
+                sf.Alignment = StringAlignment.Center;
+                sf.Alignment = StringAlignment.Near;
+
+                rect = new Rectangle(item.X ?? 0, item.Y ?? 0, bit.Width, bit.Height);
+                g.DrawString(textTest, fontInfo, new SolidBrush(ColorTranslator.FromHtml(item.FontColor)), rect, sf);
+
+                imageOut = MergeTwoImages(img, bit);
+            }
+
             ImageSign = imageOut;
             picSign.Image = imageOut;
         }
@@ -206,6 +262,7 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void uc00_AdvancedSign_Load(object sender, EventArgs e)
         {
+            txbMoreInfo.Enabled = false;
             var signUsrs = dm_SignUsersBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id).ToList();
             var idSigns = signUsrs.Select(r => r.IdSign).ToList();
 
@@ -216,6 +273,8 @@ namespace KnowledgeSystem.Views._00_Generals
                     signs = signs.Where(r => r.ImgType == 0).ToList();
                     break;
                 case SignInfo.Stamp:
+
+                    txbMoreInfo.Enabled = true;
                     signs = signs.Where(r => r.ImgType == 1).ToList();
                     break;
                 default:
@@ -228,6 +287,11 @@ namespace KnowledgeSystem.Views._00_Generals
 
             if (signs.Count != 0)
                 cbbSign.EditValue = signs.FirstOrDefault().Id;
+        }
+
+        private void txbMoreInfo_EditValueChanged(object sender, EventArgs e)
+        {
+            ShowSign();
         }
     }
 }

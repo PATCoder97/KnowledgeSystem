@@ -1,9 +1,12 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
+using DevExpress.Charts.Native;
 using DevExpress.DataAccess.Wizard.Presenters;
 using DevExpress.Internal.WinApi.Windows.UI.Notifications;
 using DevExpress.Utils.Design;
 using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraPrinting.Native;
 using DevExpress.XtraSplashScreen;
 using KnowledgeSystem.Helpers;
 using Newtonsoft.Json;
@@ -40,9 +43,14 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
         string letter = DateTime.Today.ToString("yyyy.MM.dd");
         Font font = new Font("Times New Roman", 12, FontStyle.Regular);
+        Font fontInfo = new Font("Times New Roman", 12, FontStyle.Regular);
         Color dateTimeColor = Color.FromArgb(210, 14, 18);
 
         int imgWid, imgHgt, px, py = 0;
+
+        List<dm_Sign> infosMore = new List<dm_Sign>();
+        BindingSource moreInfosSource = new BindingSource();
+        string displayNameMoreInfo = "";
 
         private void InitializeIcon()
         {
@@ -60,6 +68,14 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
             txbX.Enabled = false;
             txbY.Enabled = false;
 
+            txbFont1.Enabled = false;
+            colorFont1.Enabled = false;
+            txbX1.Enabled = false;
+            txbY1.Enabled = false;
+
+            btnAddInfo.Enabled = false;
+            btnEditInfo.Enabled = false;
+
             switch (cbbType.SelectedIndex)
             {
                 case 1:
@@ -73,6 +89,14 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
                     txbX.Enabled = true;
                     txbY.Enabled = true;
 
+                    txbFont1.Enabled = true;
+                    colorFont1.Enabled = true;
+                    txbX1.Enabled = true;
+                    txbY1.Enabled = true;
+
+                    btnAddInfo.Enabled = true;
+                    btnEditInfo.Enabled = true;
+
                     DrawStamp();
                     break;
                 default:
@@ -80,6 +104,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
                     txbHgt.EditValue = 0;
                     txbX.EditValue = 0;
                     txbY.EditValue = 0;
+                    txbX1.EditValue = 0;
+                    txbY1.EditValue = 0;
 
                     picSign.Image = ImageSign;
                     break;
@@ -168,9 +194,49 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
             Rectangle rect = new Rectangle(px, py, bit.Width, bit.Height);
             g.DrawString(letter, font, new SolidBrush(dateTimeColor), rect, sf);
-            //g.DrawRectangle(new Pen(Color.Black), rect);
 
             var imageOut = MergeTwoImages(img, bit);
+
+            foreach (var item in infosMore)
+            {
+                string textTest = item.DisplayName;
+                var fontInfoName = item.FontName;
+                var fontInfoSize = (byte)item.FontSize;
+                var fontInfoStyle = FontStyle.Regular;
+                switch (item.FontType)
+                {
+                    case "Bold":
+                        fontInfoStyle = FontStyle.Bold;
+                        break;
+                    case "Italic":
+                        fontInfoStyle = FontStyle.Italic;
+                        break;
+                    default:
+                        fontInfoStyle = FontStyle.Regular;
+                        break;
+                }
+                var fontInfo = new Font(fontInfoName, fontInfoSize, fontInfoStyle);
+
+                size = g.MeasureString(textTest.ToString(), fontInfo);
+                bit = new Bitmap(img.Width, (int)Math.Ceiling(size.Height));
+
+                g.SmoothingMode = SmoothingMode.AntiAlias;
+                g.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+                g.InterpolationMode = InterpolationMode.High;
+
+                sf = new StringFormat();
+                sf.LineAlignment = StringAlignment.Center;
+
+                // Top/Left
+                sf.Alignment = StringAlignment.Center;
+                sf.Alignment = StringAlignment.Near;
+
+                rect = new Rectangle(item.X ?? 0, item.Y ?? 0, bit.Width, bit.Height);
+                g.DrawString(textTest, fontInfo, new SolidBrush(ColorTranslator.FromHtml(item.FontColor)), rect, sf);
+
+                imageOut = MergeTwoImages(img, bit);
+            }
+
             picSign.Image = imageOut;
         }
 
@@ -266,11 +332,33 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
                     // Cho xuống cuối cùng để xác định kiểu chữ ký
                     int indexType = signInfo.ImgType;
                     cbbType.SelectedIndex = indexType;
+
+                    if (!string.IsNullOrEmpty(signInfo.MoreInfo))
+                    {
+                        infosMore = Newtonsoft.Json.JsonConvert.DeserializeObject<List<dm_Sign>>(signInfo.MoreInfo);
+                    }
                     break;
             }
 
+            gvInfoMore.ReadOnlyGridView();
+            gvInfoMore.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
+
+            moreInfosSource.DataSource = infosMore;
+            gcInfoMore.DataSource = moreInfosSource;
+
             txbFont.EditValue = $"{font.Name}, {font.Size}, {font.Style}";
             lbInfo.Text = $"寬度×高度：{imgWid}×{imgHgt}";
+
+            switch (cbbType.SelectedIndex)
+            {
+                case 0:
+                    infosMore.Clear();
+                    gvInfoMore.RefreshData();
+                    break;
+                case 1:
+                    DrawStamp();
+                    break;
+            }
         }
 
         private void txbX_EditValueChanged(object sender, EventArgs e)
@@ -301,6 +389,17 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
         private void cbbType_SelectedIndexChanged(object sender, EventArgs e)
         {
+            switch (cbbType.SelectedIndex)
+            {
+                case 0:
+                    infosMore.Clear();
+                    gvInfoMore.RefreshData();
+                    break;
+                case 1:
+                    DrawStamp();
+                    break;
+            }
+
             LockLetterInfo();
         }
 
@@ -308,6 +407,93 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
         {
             eventInfo = EventFormInfo.Update;
             LockControl();
+        }
+
+        private void btnAddInfo_Click(object sender, EventArgs e)
+        {
+            dm_Sign signMoreInfo = new dm_Sign()
+            {
+                FontName = fontInfo.Name,
+                FontSize = fontInfo.Size,
+                FontType = fontInfo.Style.ToString(),
+                FontColor = $"#{colorFont1.Color.R.ToString("X2")}{colorFont1.Color.G.ToString("X2")}{colorFont1.Color.B.ToString("X2")}",
+                X = Convert.ToInt16(txbX1.Text.Trim()),
+                Y = Convert.ToInt16(txbY1.Text.Trim()),
+                DisplayName = Guid.NewGuid().ToString("N").Substring(10)
+            };
+
+            infosMore.Add(signMoreInfo);
+            gvInfoMore.RefreshData();
+
+            DrawStamp();
+        }
+
+        private void txbFont1_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            FontDialog fontDialog = new FontDialog();
+            fontDialog.Font = fontInfo;
+            fontDialog.ShowDialog();
+
+            fontInfo = fontDialog.Font;
+            txbFont1.EditValue = $"{fontInfo.Name}, {fontInfo.Size}, {fontInfo.Style}";
+        }
+
+        private void gvInfoMore_DoubleClick(object sender, EventArgs e)
+        {
+            var signMoreInfo = gvInfoMore.GetRow(gvInfoMore.FocusedRowHandle) as dm_Sign;
+
+            txbFont1.EditValue = $"{signMoreInfo.FontName}, {signMoreInfo.FontSize}, {signMoreInfo.FontType}";
+            colorFont1.Color = ColorTranslator.FromHtml(signMoreInfo.FontColor);
+            txbX1.EditValue = signMoreInfo.X;
+            txbY1.EditValue = signMoreInfo.Y;
+            displayNameMoreInfo = signMoreInfo.DisplayName;
+
+            string[] fontData = txbFont1.Text.Split(',');
+            var fontInfoName = fontData[0].Trim();
+            var fontInfoSize = Convert.ToByte(Convert.ToDouble(fontData[1].Trim()));
+            var fontInfoStyle = FontStyle.Regular;
+            switch (fontData[2].Trim())
+            {
+                case "Bold":
+                    fontInfoStyle = FontStyle.Bold;
+                    break;
+                case "Italic":
+                    fontInfoStyle = FontStyle.Italic;
+                    break;
+                default:
+                    fontInfoStyle = FontStyle.Regular;
+                    break;
+            }
+            fontInfo = new Font(fontInfoName, fontInfoSize, fontInfoStyle);
+        }
+
+        private void btnEditInfo_Click(object sender, EventArgs e)
+        {
+            var signEdit = infosMore.First(r => r.DisplayName == displayNameMoreInfo);
+            signEdit.FontName = fontInfo.Name;
+            signEdit.FontSize = fontInfo.Size;
+            signEdit.FontType = fontInfo.Style.ToString();
+            signEdit.FontColor = $"#{colorFont1.Color.R.ToString("X2")}{colorFont1.Color.G.ToString("X2")}{colorFont1.Color.B.ToString("X2")}";
+            signEdit.X = Convert.ToInt16(txbX1.Text.Trim());
+            signEdit.Y = Convert.ToInt16(txbY1.Text.Trim());
+
+            gvInfoMore.RefreshData();
+
+            DrawStamp();
+        }
+
+        private void ibtnDel_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            GridView view = gvInfoMore;
+            dm_Sign steps = view.GetRow(view.FocusedRowHandle) as dm_Sign;
+
+            infosMore.Remove(steps);
+
+            int rowIndex = view.FocusedRowHandle;
+            view.RefreshData();
+            view.FocusedRowHandle = rowIndex;
+
+            DrawStamp();
         }
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -328,6 +514,9 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
                 signInfo.FontType = font.Style.ToString();
                 signInfo.FontColor = $"#{dateTimeColor.R.ToString("X2")}{dateTimeColor.G.ToString("X2")}{dateTimeColor.B.ToString("X2")}";
                 signInfo.Prioritize = Convert.ToInt16(txbPrioritize.EditValue?.ToString().Trim());
+
+                string moreInfoJson = Newtonsoft.Json.JsonConvert.SerializeObject(infosMore);
+                signInfo.MoreInfo = moreInfoJson;
 
                 if (!string.IsNullOrEmpty(imgSignPath))
                 {

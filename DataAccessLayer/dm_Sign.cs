@@ -27,5 +27,6 @@ namespace DataAccessLayer
         public string FontType { get; set; }
         public string FontColor { get; set; }
         public int Prioritize { get; set; }
+        public string MoreInfo { get; set; }
     }
 }
