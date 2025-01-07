@@ -235,6 +235,12 @@
     <Compile Include="Views\00_Generals\f00_FixedProgMain.Designer.cs">
       <DependentUpon>f00_FixedProgMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\00_Generals\f00_SendNoteSystem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\00_Generals\f00_SendNoteSystem.Designer.cs">
+      <DependentUpon>f00_SendNoteSystem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\01_ProductionAndSales\01_ContractManagement\uc101_ContractMgmtBase.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -930,6 +936,9 @@
     <EmbeddedResource Include="Views\00_Generals\f00_FixedProgMain.resx">
       <DependentUpon>f00_FixedProgMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\00_Generals\f00_SendNoteSystem.resx">
+      <DependentUpon>f00_SendNoteSystem.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\01_ProductionAndSales\01_ContractManagement\uc101_ContractMgmtBase.resx">
       <DependentUpon>uc101_ContractMgmtBase.cs</DependentUpon>
     </EmbeddedResource>
@@ -1294,6 +1303,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Html\dt307_ResultExam.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Html\f201_NotifyCalibCert.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Html\f301_NotifyPersonnelTransfer.html">

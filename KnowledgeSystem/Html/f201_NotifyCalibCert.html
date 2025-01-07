@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>DocUpdated</title>
+</head>
+
+<body>
+    <h1>{{dept}}:</h1>
+
+    <p>您好！您的設備已完成校正，請您盡快前來領取設備。</p>
+    <p>設備信息：</p>
+    <ul>
+        <li><strong>設備名稱：</strong> <span style="font-family: 'Times New Roman', Times, serif;">{{devicevn}}/</span>{{devicetw}}</li>
+        <li><strong>證書路徑：</strong> <span style="font-family: 'Times New Roman', Times, serif;">{{folder}}</span></li>
+    </ul>
+    <p>如有疑問，請聯繫：</p>
+    <ul>
+        <li><strong>聯繫人：</strong> <span style="font-family: 'Times New Roman', Times, serif;">{{namevn}}/</span>{{nametw}}</li>
+        <li><strong>工號：</strong> <span style="font-family: 'Times New Roman', Times, serif;">{{empid}}</span></li>
+    </ul>
+    <p>謝謝！</p>
+</body>
+
+</html>
+
+
+<style>
+    h1 {
+        font-family: DFKai-SB;
+        color: #000000;
+    }
+
+    p ,li{
+        color: #000000;
+        font-size: 24px;
+        font-family: DFKai-SB;
+    }
+
+    table,
+    th {
+        font-size: 24px;
+        font-family: DFKai-SB;
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+
+    th {
+        background-color: #D6EEEE;
+    }
+
+    td {
+        border-bottom: 1px dashed black;
+        border-left: 1px solid black;
+        padding: 5px;
+    }
+
+    .column {
+        text-align: center;
+    }
+</style>

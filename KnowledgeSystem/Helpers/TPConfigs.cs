@@ -41,6 +41,7 @@ namespace KnowledgeSystem.Helpers
         public static string Folder403 { get; set; }
         public static string FolderSign { get; set; }
         public static string DocTypes201 { get; set; }
+        public static string FolderCalibCert { get; set; }
 
         public static void SetSystemStaticValue()
         {
@@ -51,6 +52,7 @@ namespace KnowledgeSystem.Helpers
             UrlUpdate = lsStaticValue.FirstOrDefault(r => r.KeyT == "UrlUpdate").ValueT;
             FolderData = lsStaticValue.FirstOrDefault(r => r.KeyT == "FolderData").ValueT;
             DocTypes201 = lsStaticValue.FirstOrDefault(r => r.KeyT == "201DocTypes")?.ValueT ?? "";
+            FolderCalibCert = lsStaticValue.FirstOrDefault(r => r.KeyT == "CalibCertFolder")?.ValueT ?? "";
 
             Folder00 = Path.Combine(FolderData, "00");
             Folder207 = Path.Combine(FolderData, "207");

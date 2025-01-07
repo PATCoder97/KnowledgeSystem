@@ -4,12 +4,16 @@ using DevExpress.Utils.Menu;
 using DevExpress.Utils.Svg;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraRichEdit.Import.Doc;
 using DevExpress.XtraSplashScreen;
 using DevExpress.XtraTreeList;
 using DevExpress.XtraTreeList.Nodes;
 using DevExpress.XtraTreeList.StyleFormatConditions;
+using DocumentFormat.OpenXml.Spreadsheet;
 using iTextSharp.text;
 using KnowledgeSystem.Helpers;
+using KnowledgeSystem.Views._00_Generals;
+using Scriban;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -50,6 +54,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         DXMenuItem itemDisable;
         DXMenuItem itemEnable;
         DXMenuItem itemClone;
+        DXMenuItem itemSendNote;
 
         TreeListNode currentNode;
         TreeListNode parentNode;
@@ -68,7 +73,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         void SetMenuItemProperties(DXMenuItem menuItem)
         {
             menuItem.ImageOptions.SvgImageSize = new Size(24, 24);
-            menuItem.AppearanceHovered.ForeColor = Color.Blue;
+            menuItem.AppearanceHovered.ForeColor = System.Drawing.Color.Blue;
         }
 
         private void InitializeIcon()
@@ -123,6 +128,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             itemDisable = CreateMenuItem("停用節點", ItemDisable_Click, TPSvgimages.Disable);
             itemEnable = CreateMenuItem("啟用節點", ItemEnable_Click, TPSvgimages.Confirm);
             itemClone = CreateMenuItem("複製節點", ItemClone_Click, TPSvgimages.Copy);
+            itemSendNote = CreateMenuItem("通知Note", ItemSendNote_Click, TPSvgimages.EmailSend);
         }
 
         private void GetFocusData()
@@ -133,6 +139,53 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             currentData = (treeList.GetRow(currentNode.Id) as dynamic).data as dt201_Base;
             parentData = parentNode != null ? (treeList.GetRow(parentNode.Id) as dynamic).data as dt201_Base : null;
+        }
+
+        private void ItemSendNote_Click(object sender, EventArgs e)
+        {
+            string dept = "";
+            string[] deptSend = currentData.DocCode.Split('.');
+            if (deptSend.Count() > 1)
+            {
+                dept = deptSend[1].Length >= 4 ? deptSend[1].Substring(0, 4) : "";
+            }
+
+            string cc = TPConfigs.LoginUser.Id;
+            string title = $"設備校正完成通知|{currentData.Id}";
+            string threadId = "201";
+
+            string folderCalibCert = Path.Combine(TPConfigs.FolderCalibCert, dept, currentData.DocCode);
+
+            var templateData = new
+            {
+                dept = dept,
+                devicevn = parentData.DisplayNameVN,
+                devicetw = parentData.DisplayName,
+                folder = folderCalibCert,
+                namevn = TPConfigs.LoginUser.DisplayNameVN,
+                nametw = TPConfigs.LoginUser.DisplayName,
+                empid = TPConfigs.LoginUser.Id
+            };
+
+            var templateContentSigner = System.IO.File.ReadAllText(Path.Combine(TPConfigs.HtmlPath, $"f201_NotifyCalibCert.html"));
+            var templateSigner = Template.Parse(templateContentSigner);
+
+            var pageContent = templateSigner.Render(templateData);
+
+            var attsId = dt201_FormsBUS.Instance.GetListByBaseId(currentData.Id)
+                .Where(r => r.IsCancel != true && r.IsDel != true && r.IsProcessing != true)
+                .Select(r => r.AttId).ToList();
+
+            f00_SendNoteSystem sendNote = new f00_SendNoteSystem()
+            {
+                Cc = cc,
+                Title = title,
+                Subject = pageContent,
+                ThreadId = threadId,
+                Atts = string.Join(",", attsId),
+            };
+
+            sendNote.ShowDialog();
         }
 
         private void ItemClone_Click(object sender, EventArgs e)
@@ -559,6 +612,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                     e.Menu.Items.Add(itemEditNode);
                     e.Menu.Items.Add(itemDelNode);
 
+                    if (groups.Select(r => r.IdDept).Contains("7820") && currentData.DisplayName == "校正證書")
+                    {
+                        itemSendNote.BeginGroup = true;
+                        e.Menu.Items.Add(itemSendNote);
+                    }
                     //var nodes = dt201_BaseBUS.Instance.GetListByParentId(parentData.Id);
                     //if (nodes.Max(r => r.Id) == currentData.Id)
                     //{
