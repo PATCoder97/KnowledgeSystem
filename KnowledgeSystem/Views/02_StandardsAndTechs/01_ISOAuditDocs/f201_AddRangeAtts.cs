@@ -84,7 +84,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             sourceForms.DataSource = forms;
             gcInfo.DataSource = sourceForms;
 
-            users = dm_UserBUS.Instance.GetListByDept(idDept2word).Where(r => r.Status == 0).ToList();
+            users = dm_UserBUS.Instance.GetList().Where(r => r.Status == 0).ToList();
             jobTitles = dm_JobTitleBUS.Instance.GetList();
             roles = dt201_RoleBUS.Instance.GetList().Where(r => r.Id != 0).ToList();
 

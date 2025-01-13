@@ -143,6 +143,13 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void ItemSendNote_Click(object sender, EventArgs e)
         {
+            if (TPConfigs.DomainComputer != DomainVNFPG.domainVNFPG)
+            {
+                string msg = "請使用公司電腦！";
+                MsgTP.MsgShowInfomation($"<font='Microsoft JhengHei UI' size=14>{msg}</font>");
+                return;
+            }
+
             string dept = "";
             string[] deptSend = currentData.DocCode.Split('.');
             if (deptSend.Count() > 1)

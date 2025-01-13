@@ -99,6 +99,7 @@ namespace KnowledgeSystem.Views._00_Generals
             {
                 string msg = "請使用公司電腦！";
                 MsgTP.MsgShowInfomation($"<font='Microsoft JhengHei UI' size=14>{msg}</font>");
+                Close();
                 return;
             }
 #endif
