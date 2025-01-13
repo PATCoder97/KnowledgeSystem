@@ -29,7 +29,7 @@ namespace KnowledgeSystem.Views._00_Generals
                 Directory.CreateDirectory(pathFolderSoft);
             }
 
-            string setupFileName = $"{DateTime.Now:MMddhhMMss}-setup.msi";
+            string setupFileName = $"{DateTime.Now:MMddhhMMss}-setup.exe";
             pathSetup = Path.Combine(pathFolderSoft, setupFileName);
 
             DownloadFile(urlSetupFile, pathSetup);
