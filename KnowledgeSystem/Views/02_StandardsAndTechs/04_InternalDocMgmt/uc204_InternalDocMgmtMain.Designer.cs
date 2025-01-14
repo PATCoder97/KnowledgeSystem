@@ -51,6 +51,7 @@
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnAdd = new DevExpress.XtraBars.BarButtonItem();
@@ -131,7 +132,7 @@
             this.gcData.Location = new System.Drawing.Point(12, 12);
             this.gcData.MainView = this.gvData;
             this.gcData.Name = "gcData";
-            this.gcData.Size = new System.Drawing.Size(1217, 493);
+            this.gcData.Size = new System.Drawing.Size(1300, 493);
             this.gcData.TabIndex = 5;
             this.gcData.UseEmbeddedNavigator = true;
             this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -169,7 +170,8 @@
             this.gridColumn7,
             this.gridColumn2,
             this.gridColumn11,
-            this.gridColumn17});
+            this.gridColumn17,
+            this.gridColumn8});
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
             this.gvData.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
@@ -229,6 +231,8 @@
             // 
             // gridColumn1
             // 
+            this.gridColumn1.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn1.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn1.Caption = "級階";
             this.gridColumn1.FieldName = "data.DocLevel";
             this.gridColumn1.Name = "gridColumn1";
@@ -255,6 +259,8 @@
             // 
             // gColEnterDate
             // 
+            this.gColEnterDate.AppearanceCell.Options.UseTextOptions = true;
+            this.gColEnterDate.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gColEnterDate.Caption = "版本";
             this.gColEnterDate.FieldName = "data.DocVersion";
             this.gColEnterDate.Name = "gColEnterDate";
@@ -274,6 +280,8 @@
             // 
             // gridColumn5
             // 
+            this.gridColumn5.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn5.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn5.Caption = "週期";
             this.gridColumn5.FieldName = "data.PeriodNotify";
             this.gridColumn5.Name = "gridColumn5";
@@ -316,6 +324,14 @@
             this.gridColumn17.Name = "gridColumn17";
             this.gridColumn17.Visible = true;
             this.gridColumn17.VisibleIndex = 10;
+            // 
+            // gridColumn8
+            // 
+            this.gridColumn8.Caption = "實驗室";
+            this.gridColumn8.FieldName = "data.IdDept";
+            this.gridColumn8.Name = "gridColumn8";
+            this.gridColumn8.Visible = true;
+            this.gridColumn8.VisibleIndex = 13;
             // 
             // barManagerTP
             // 
@@ -409,7 +425,7 @@
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManagerTP;
-            this.barDockControlTop.Size = new System.Drawing.Size(1241, 49);
+            this.barDockControlTop.Size = new System.Drawing.Size(1324, 49);
             // 
             // barDockControlBottom
             // 
@@ -417,7 +433,7 @@
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.barDockControlBottom.Location = new System.Drawing.Point(0, 566);
             this.barDockControlBottom.Manager = this.barManagerTP;
-            this.barDockControlBottom.Size = new System.Drawing.Size(1241, 0);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1324, 0);
             // 
             // barDockControlLeft
             // 
@@ -431,7 +447,7 @@
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1241, 49);
+            this.barDockControlRight.Location = new System.Drawing.Point(1324, 49);
             this.barDockControlRight.Manager = this.barManagerTP;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 517);
             // 
@@ -457,7 +473,7 @@
             this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(1241, 517);
+            this.layoutControl1.Size = new System.Drawing.Size(1324, 517);
             this.layoutControl1.TabIndex = 6;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -468,7 +484,7 @@
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem1});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(1241, 517);
+            this.Root.Size = new System.Drawing.Size(1324, 517);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem1
@@ -476,7 +492,7 @@
             this.layoutControlItem1.Control = this.gcData;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(1221, 497);
+            this.layoutControlItem1.Size = new System.Drawing.Size(1304, 497);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
@@ -490,7 +506,7 @@
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
             this.Name = "uc204_InternalDocMgmtMain";
-            this.Size = new System.Drawing.Size(1241, 566);
+            this.Size = new System.Drawing.Size(1324, 566);
             this.Load += new System.EventHandler(this.uc204_InternalDocMgmtMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gvForm)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).EndInit();
@@ -541,5 +557,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gColIdAtt;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
         private DevExpress.XtraGrid.Columns.GridColumn gColIdAttForm;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
     }
 }

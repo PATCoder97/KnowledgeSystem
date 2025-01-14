@@ -271,6 +271,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
 
                 gvData.BestFitColumns();
                 gvData.CollapseAllDetails();
+
+                gvData.FocusedRowHandle = GridControl.AutoFilterRowHandle;
             }
         }
 

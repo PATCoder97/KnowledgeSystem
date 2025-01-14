@@ -175,7 +175,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
 
             cbbDocLevel.Properties.Items.AddRange(TPConfigs.DocTypes201.Split(';').ToList());
 
-            var lsUsers = dm_UserBUS.Instance.GetListByDept(idDept2word)
+            var lsUsers = dm_UserBUS.Instance.GetList()
                 .Where(r => r.Status == 0)
                 .Select(r => new dm_User
                 {
