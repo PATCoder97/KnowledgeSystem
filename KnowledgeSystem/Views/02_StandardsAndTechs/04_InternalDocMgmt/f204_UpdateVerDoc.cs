@@ -55,8 +55,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
         {
             gcForm.DataSource = sourceFormAtts;
 
-            lcControls = new List<LayoutControlItem>() { lcDocVersion, lcFilePath };
-            lcImpControls = new List<LayoutControlItem>() { lcDocVersion, lcFilePath };
+            lcControls = new List<LayoutControlItem>() { lcDocVersion, lcFilePath, lcDeployDate, lcIdFounder };
+            lcImpControls = new List<LayoutControlItem>() { lcDocVersion, lcFilePath, lcDeployDate, lcIdFounder };
 
             foreach (var item in lcControls)
             {
@@ -76,6 +76,20 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
                     item.Text = item.Text.Replace("<color=red>*</color>", "");
                 }
             }
+
+            var lsUsers = dm_UserBUS.Instance.GetList()
+                .Where(r => r.Status == 0)
+                .Select(r => new dm_User
+                {
+                    Id = r.Id,
+                    IdDepartment = r.IdDepartment,
+                    DisplayName = r.DisplayName,
+                    JobCode = r.JobCode
+                }).ToList();
+            txbIdFounder.Properties.DataSource = lsUsers;
+            txbIdFounder.Properties.DisplayMember = "DisplayName";
+            txbIdFounder.Properties.ValueMember = "Id";
+            txbIdFounder.Properties.BestFitWidth = 110;
         }
 
         private void btnAddFile_Click(object sender, EventArgs e)
@@ -155,6 +169,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
             dt204Base.UploadDate = DateTime.Now;
             dt204Base.PauseNotify = null;
             dt204Base.IsDel = false;
+            dt204Base.DeployDate = txbDeployDate.DateTime;
+            dt204Base.IdFounder = txbIdFounder.EditValue.ToString();
 
             var baseAtt = new dm_Attachment()
             {
@@ -219,15 +235,90 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
 
         private void txbFilePath_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            OpenFileDialog dialog = new OpenFileDialog
+            switch (e.Button.Caption)
             {
-                Filter = "PDF Files (*.pdf)|*.pdf",
-                FilterIndex = 1
-            };
+                case "Paste":
 
-            if (dialog.ShowDialog() != DialogResult.OK) return;
-            baseFilePath = dialog.FileName;
-            txbFilePath.Text = Path.GetFileName(baseFilePath);
+                    if (Clipboard.ContainsFileDropList())
+                    {
+                        var files = Clipboard.GetFileDropList();
+                        var pdfFiles = new List<string>();
+
+                        foreach (var file in files)
+                        {
+                            if (file.EndsWith(".pdf", StringComparison.OrdinalIgnoreCase) && File.Exists(file))
+                            {
+                                pdfFiles.Add(file);
+                            }
+                        }
+
+                        if (pdfFiles.Count != 1)
+                        {
+                            XtraMessageBox.Show("請選擇一個PDF檔案", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+
+                        baseFilePath = pdfFiles.First();
+                        txbFilePath.Text = Path.GetFileName(baseFilePath);
+                    }
+                    else
+                    {
+                        XtraMessageBox.Show("請選擇一個PDF檔案", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+
+                    break;
+                default:
+                    OpenFileDialog dialog = new OpenFileDialog
+                    {
+                        Filter = "PDF Files (*.pdf)|*.pdf",
+                        FilterIndex = 1
+                    };
+
+                    if (dialog.ShowDialog() != DialogResult.OK) return;
+                    baseFilePath = dialog.FileName;
+                    txbFilePath.Text = Path.GetFileName(baseFilePath);
+
+                    break;
+            }
+        }
+
+        private void btnPasteFile_Click(object sender, EventArgs e)
+        {
+            if (Clipboard.ContainsFileDropList())
+            {
+                var files = Clipboard.GetFileDropList();
+
+                // Lấy danh sách các phần mở rộng từ bộ lọc
+                var extensions = TPConfigs.FilterFile.Split('|')[1].Split(';')
+                                       .Select(ext => ext.TrimStart('*').ToLower()).ToList();
+
+                // Lọc file dựa trên phần mở rộng
+                var filteredFiles = files.Cast<string>()
+                                         .Where(file => extensions.Any(ext => file.EndsWith(ext, StringComparison.OrdinalIgnoreCase)))
+                                         .ToList();
+
+                foreach (string fileName in filteredFiles)
+                {
+                    string encryptionName = EncryptionHelper.EncryptionFileName(fileName);
+                    Attachment attachment = new Attachment
+                    {
+                        FilePath = fileName,
+                        ActualName = Path.GetFileName(fileName),
+                        EncryptionName = encryptionName,
+                        Thread = "204"
+                    };
+                    baseFormAtts.Add(attachment);
+                    Thread.Sleep(5);
+                }
+
+                sourceFormAtts.DataSource = baseFormAtts;
+                lbCountFile.Text = $"共{baseFormAtts.Count}個表單";
+                gvForm.RefreshData();
+            }
+            else
+            {
+                XtraMessageBox.Show("請選表單", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
     }
 }

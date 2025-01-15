@@ -934,8 +934,8 @@
           <EntitySet Name="dt201_RecordCode" EntityType="DBDocumentManagementSystemModel.dt201_RecordCode" />
           <EntitySet Name="dt201_ReqUpdateDocs" EntityType="DBDocumentManagementSystemModel.dt201_ReqUpdateDocs" />
           <EntitySet Name="dt201_UpdateUsrReq_Detail" EntityType="DBDocumentManagementSystemModel.dt201_UpdateUsrReq_Detail" />
-          <EntitySet Name="dt204_OldVersion" EntityType="DBDocumentManagementSystemModel.dt204_OldVersion" />
           <EntitySet Name="dm_Sign" EntityType="DBDocumentManagementSystemModel.dm_Sign" />
+          <EntitySet Name="dt204_OldVersion" EntityType="DBDocumentManagementSystemModel.dt204_OldVersion" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -1687,17 +1687,6 @@
           <Property Name="UsrComplete" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="UsrConfirm" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="dt204_OldVersion">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdBase" Type="Int32" Nullable="false" />
-          <Property Name="TypeDoc" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
-          <Property Name="OldVer" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
-          <Property Name="IdAtt" Type="Int32" Nullable="false" />
-        </EntityType>
         <EntityType Name="dm_Sign">
           <Key>
             <PropertyRef Name="Id" />
@@ -1716,6 +1705,17 @@
           <Property Name="FontColor" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
           <Property Name="Prioritize" Type="Int32" Nullable="false" />
           <Property Name="MoreInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dt204_OldVersion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdBase" Type="Int32" Nullable="false" />
+          <Property Name="TypeDoc" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="OldVer" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="IdAtt" Type="Int32" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2543,18 +2543,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dt204_OldVersion">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt204_OldVersion">
-              <MappingFragment StoreEntitySet="dt204_OldVersion">
-                <ScalarProperty Name="IdAtt" ColumnName="IdAtt" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="OldVer" ColumnName="OldVer" />
-                <ScalarProperty Name="TypeDoc" ColumnName="TypeDoc" />
-                <ScalarProperty Name="IdBase" ColumnName="IdBase" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="dm_Sign">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_Sign">
               <MappingFragment StoreEntitySet="dm_Sign">
@@ -2571,6 +2559,18 @@
                 <ScalarProperty Name="ImgType" ColumnName="ImgType" />
                 <ScalarProperty Name="ImgName" ColumnName="ImgName" />
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt204_OldVersion">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt204_OldVersion">
+              <MappingFragment StoreEntitySet="dt204_OldVersion">
+                <ScalarProperty Name="IdAtt" ColumnName="IdAtt" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="OldVer" ColumnName="OldVer" />
+                <ScalarProperty Name="TypeDoc" ColumnName="TypeDoc" />
+                <ScalarProperty Name="IdBase" ColumnName="IdBase" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

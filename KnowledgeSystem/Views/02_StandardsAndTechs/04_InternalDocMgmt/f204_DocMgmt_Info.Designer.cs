@@ -40,6 +40,11 @@
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions3 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject9 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject10 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject11 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject12 = new DevExpress.Utils.SerializableAppearanceObject();
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnEdit = new DevExpress.XtraBars.BarButtonItem();
@@ -50,6 +55,7 @@
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.btnPasteFile = new DevExpress.XtraEditors.SimpleButton();
             this.lbRelated = new System.Windows.Forms.Label();
             this.gcRelatedDoc = new DevExpress.XtraGrid.GridControl();
             this.gvRelatedDoc = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -100,6 +106,7 @@
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -144,6 +151,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
@@ -269,6 +277,7 @@
             // layoutControl1
             // 
             this.layoutControl1.AllowCustomization = false;
+            this.layoutControl1.Controls.Add(this.btnPasteFile);
             this.layoutControl1.Controls.Add(this.lbRelated);
             this.layoutControl1.Controls.Add(this.gcRelatedDoc);
             this.layoutControl1.Controls.Add(this.gcForm);
@@ -294,6 +303,23 @@
             this.layoutControl1.Size = new System.Drawing.Size(801, 293);
             this.layoutControl1.TabIndex = 10;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // btnPasteFile
+            // 
+            this.btnPasteFile.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.btnPasteFile.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.btnPasteFile.Appearance.Options.UseFont = true;
+            this.btnPasteFile.Appearance.Options.UseForeColor = true;
+            this.btnPasteFile.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnPasteFile.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnPasteFile.ImageOptions.SvgImage")));
+            this.btnPasteFile.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnPasteFile.Location = new System.Drawing.Point(149, 56);
+            this.btnPasteFile.Name = "btnPasteFile";
+            this.btnPasteFile.Size = new System.Drawing.Size(121, 36);
+            this.btnPasteFile.StyleController = this.layoutControl1;
+            this.btnPasteFile.TabIndex = 25;
+            this.btnPasteFile.Text = "貼上表單";
+            this.btnPasteFile.Click += new System.EventHandler(this.btnPasteFile_Click);
             // 
             // lbRelated
             // 
@@ -464,9 +490,9 @@
             this.lbCountFile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.lbCountFile.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.lbCountFile.ForeColor = System.Drawing.Color.Black;
-            this.lbCountFile.Location = new System.Drawing.Point(149, 56);
+            this.lbCountFile.Location = new System.Drawing.Point(274, 56);
             this.lbCountFile.Name = "lbCountFile";
-            this.lbCountFile.Size = new System.Drawing.Size(628, 36);
+            this.lbCountFile.Size = new System.Drawing.Size(503, 36);
             this.lbCountFile.TabIndex = 20;
             this.lbCountFile.Text = "沒有表單";
             this.lbCountFile.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -485,7 +511,7 @@
             this.btnAddFile.Size = new System.Drawing.Size(121, 36);
             this.btnAddFile.StyleController = this.layoutControl1;
             this.btnAddFile.TabIndex = 19;
-            this.btnAddFile.Text = "新增";
+            this.btnAddFile.Text = "選表單";
             this.btnAddFile.Click += new System.EventHandler(this.btnAddFile_Click);
             // 
             // txbPeriodNotify
@@ -606,7 +632,10 @@
             this.txbFilePath.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbFilePath.Properties.Appearance.Options.UseFont = true;
             this.txbFilePath.Properties.Appearance.Options.UseForeColor = true;
+            editorButtonImageOptions3.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("editorButtonImageOptions3.SvgImage")));
+            editorButtonImageOptions3.SvgImageSize = new System.Drawing.Size(16, 16);
             this.txbFilePath.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "Paste", -1, true, true, false, editorButtonImageOptions3, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject9, serializableAppearanceObject10, serializableAppearanceObject11, serializableAppearanceObject12, "", null, null, DevExpress.Utils.ToolTipAnchor.Default),
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Search)});
             this.txbFilePath.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.txbFilePath.Size = new System.Drawing.Size(665, 32);
@@ -763,7 +792,7 @@
             this.tabbedControlGroup1.AppearanceTabPage.HeaderActive.Options.UseForeColor = true;
             this.tabbedControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.tabbedControlGroup1.Name = "tabbedControlGroup1";
-            this.tabbedControlGroup1.SelectedTabPage = this.layoutControlGroup1;
+            this.tabbedControlGroup1.SelectedTabPage = this.tabAttachments;
             this.tabbedControlGroup1.Size = new System.Drawing.Size(781, 273);
             this.tabbedControlGroup1.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlGroup1,
@@ -984,7 +1013,8 @@
             this.tabAttachments.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem1,
             this.layoutControlItem2,
-            this.layoutControlItem3});
+            this.layoutControlItem3,
+            this.layoutControlItem7});
             this.tabAttachments.Location = new System.Drawing.Point(0, 0);
             this.tabAttachments.Name = "tabAttachments";
             this.tabAttachments.Size = new System.Drawing.Size(757, 217);
@@ -994,17 +1024,20 @@
             // 
             this.layoutControlItem1.Control = this.btnAddFile;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem1.MaxSize = new System.Drawing.Size(125, 40);
+            this.layoutControlItem1.MinSize = new System.Drawing.Size(125, 40);
             this.layoutControlItem1.Name = "layoutControlItem1";
             this.layoutControlItem1.Size = new System.Drawing.Size(125, 40);
+            this.layoutControlItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.lbCountFile;
-            this.layoutControlItem2.Location = new System.Drawing.Point(125, 0);
+            this.layoutControlItem2.Location = new System.Drawing.Point(250, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(632, 40);
+            this.layoutControlItem2.Size = new System.Drawing.Size(507, 40);
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
@@ -1016,6 +1049,18 @@
             this.layoutControlItem3.Size = new System.Drawing.Size(757, 177);
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextVisible = false;
+            // 
+            // layoutControlItem7
+            // 
+            this.layoutControlItem7.Control = this.btnPasteFile;
+            this.layoutControlItem7.Location = new System.Drawing.Point(125, 0);
+            this.layoutControlItem7.MaxSize = new System.Drawing.Size(125, 40);
+            this.layoutControlItem7.MinSize = new System.Drawing.Size(125, 40);
+            this.layoutControlItem7.Name = "layoutControlItem7";
+            this.layoutControlItem7.Size = new System.Drawing.Size(125, 40);
+            this.layoutControlItem7.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem7.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem7.TextVisible = false;
             // 
             // layoutControlGroup3
             // 
@@ -1114,6 +1159,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
@@ -1189,5 +1235,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
+        private DevExpress.XtraEditors.SimpleButton btnPasteFile;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
     }
 }

@@ -9,14 +9,17 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Web.UI.WebControls;
 using System.Windows.Forms;
 using BusinessLayer;
+using DataAccessLayer;
 using DevExpress.Xpo;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._00_Generals;
+using GridView = DevExpress.XtraGrid.Views.Grid.GridView;
 
 namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
 {
@@ -50,8 +53,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
 
         private void LoadData()
         {
-            var dataOldVers = dt204_OldVersionBUS.Instance.GetListIdBase(idBase);
+            List<dt204_OldVersion> dataOldVers = dt204_OldVersionBUS.Instance.GetListIdBase(idBase);
             sourceBases.DataSource = dataOldVers;
+
+            gvData.OptionsBehavior.AutoExpandAllGroups = false;
         }
 
         private void btnReload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
