@@ -71,7 +71,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
             cbbFuncCatorary.Enabled = _enable;
             cbbDocLevel.Enabled = _enable;
             txbCode.Enabled = _enable;
-            txbDocVersion.Enabled = _enable;
             txbDisplayName.Enabled = _enable;
             txbDisplayNameVN.Enabled = _enable;
             txbDeployDate.Enabled = _enable;
@@ -193,9 +192,13 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
             gcForm.DataSource = sourceFormAtts;
             gcRelatedDoc.DataSource = sourceRelatedDoc;
 
+            txbDocVersion.Enabled = false;
+
             switch (eventInfo)
             {
                 case EventFormInfo.Create:
+
+                    txbDocVersion.Enabled = true;
 
                     dt204Base = new dt204_InternalDocMgmt();
 
