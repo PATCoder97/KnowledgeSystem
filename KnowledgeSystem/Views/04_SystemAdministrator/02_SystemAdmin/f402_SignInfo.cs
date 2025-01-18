@@ -16,9 +16,12 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.Drawing.Text;
 using System.IO;
 using System.Linq;
+using System.Net.Mail;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -440,6 +443,11 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
         private void gvInfoMore_DoubleClick(object sender, EventArgs e)
         {
+            if (infosMore.Count <= 0)
+            {
+                return;
+            }
+
             var signMoreInfo = gvInfoMore.GetRow(gvInfoMore.FocusedRowHandle) as dm_Sign;
 
             txbFont1.EditValue = $"{signMoreInfo.FontName}, {signMoreInfo.FontSize}, {signMoreInfo.FontType}";
@@ -494,6 +502,80 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
             view.FocusedRowHandle = rowIndex;
 
             DrawStamp();
+        }
+
+        private void btnBrowse_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "PNG|*.png";
+            if (ofd.ShowDialog() != DialogResult.OK) return;
+
+            imgSignPath = ofd.FileName;
+            ImageSign = Image.FromFile(imgSignPath);
+            picSign.Image = ImageSign;
+
+            imgWid = ImageSign.Width;
+            imgHgt = ImageSign.Height;
+
+            lbInfo.Text = $"WxH: {imgWid} x {imgHgt}";
+        }
+
+        private void btnSaveImage_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (picSign.Image == null)
+            {
+                XtraMessageBox.Show("Không có hình ảnh để lưu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.Filter = "PNG Image|*.png";
+                saveFileDialog.Title = "Lưu hình ảnh";
+                saveFileDialog.FileName = "Image.png";
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    picSign.Image.Save(saveFileDialog.FileName, ImageFormat.Png);
+                    XtraMessageBox.Show("Lưu ảnh thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void btnPasteImage_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (Clipboard.ContainsFileDropList())
+            {
+                var files = Clipboard.GetFileDropList();
+                var pdfFiles = new List<string>();
+
+                foreach (var file in files)
+                {
+                    if (file.EndsWith(".png", StringComparison.OrdinalIgnoreCase) && File.Exists(file))
+                    {
+                        pdfFiles.Add(file);
+                    }
+                }
+
+                if (pdfFiles.Count != 1)
+                {
+                    XtraMessageBox.Show("請選擇一個PNG檔案", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                imgSignPath = pdfFiles.First();
+                ImageSign = Image.FromFile(imgSignPath);
+                picSign.Image = ImageSign;
+
+                imgWid = ImageSign.Width;
+                imgHgt = ImageSign.Height;
+
+                lbInfo.Text = $"WxH: {imgWid} x {imgHgt}";
+            }
+            else
+            {
+                XtraMessageBox.Show("請選擇一個PNG檔案", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -567,22 +649,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
             eventInfo = EventFormInfo.Delete;
             LockControl();
-        }
-
-        private void picSign_DoubleClick(object sender, EventArgs e)
-        {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "PNG|*.png";
-            if (ofd.ShowDialog() != DialogResult.OK) return;
-
-            imgSignPath = ofd.FileName;
-            ImageSign = Image.FromFile(imgSignPath);
-            picSign.Image = ImageSign;
-
-            imgWid = ImageSign.Width;
-            imgHgt = ImageSign.Height;
-
-            lbInfo.Text = $"WxH: {imgWid} x {imgHgt}";
         }
     }
 }

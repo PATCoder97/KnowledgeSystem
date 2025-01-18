@@ -39,6 +39,11 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.btnPasteImage = new DevExpress.XtraBars.BarButtonItem();
+            this.btnSaveImage = new DevExpress.XtraBars.BarButtonItem();
+            this.btnBrowse = new DevExpress.XtraBars.BarButtonItem();
+            this.picSign = new System.Windows.Forms.PictureBox();
+            this.popupMenu1 = new DevExpress.XtraBars.PopupMenu(this.components);
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.btnEditInfo = new DevExpress.XtraEditors.SimpleButton();
             this.btnAddInfo = new DevExpress.XtraEditors.SimpleButton();
@@ -50,13 +55,14 @@
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.ibtnDel = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.txbDisplayName = new DevExpress.XtraEditors.TextEdit();
             this.colorFont = new DevExpress.XtraEditors.ColorPickEdit();
             this.txbHgt = new DevExpress.XtraEditors.TextEdit();
             this.txbFont = new DevExpress.XtraEditors.ButtonEdit();
             this.lbInfo = new System.Windows.Forms.Label();
             this.cbbType = new DevExpress.XtraEditors.ComboBoxEdit();
-            this.picSign = new System.Windows.Forms.PictureBox();
             this.txbX = new DevExpress.XtraEditors.TextEdit();
             this.txbY = new DevExpress.XtraEditors.TextEdit();
             this.txbWid = new DevExpress.XtraEditors.TextEdit();
@@ -87,19 +93,19 @@
             this.layoutControlItem16 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem17 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem18 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.ibtnDel = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSign)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcInfoMore)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvInfoMore)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ibtnDel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDisplayName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.colorFont.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbHgt.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbFont.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbType.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picSign)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbX.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbY.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbWid.Properties)).BeginInit();
@@ -130,7 +136,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem16)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem17)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem18)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ibtnDel)).BeginInit();
             this.SuspendLayout();
             // 
             // barManagerTP
@@ -145,9 +150,12 @@
             this.barManagerTP.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.btnEdit,
             this.btnDelete,
-            this.btnConfirm});
+            this.btnConfirm,
+            this.btnPasteImage,
+            this.btnSaveImage,
+            this.btnBrowse});
             this.barManagerTP.MainMenu = this.bar2;
-            this.barManagerTP.MaxItemId = 13;
+            this.barManagerTP.MaxItemId = 16;
             // 
             // bar2
             // 
@@ -248,6 +256,77 @@
             this.barDockControlRight.Location = new System.Drawing.Point(955, 49);
             this.barDockControlRight.Manager = this.barManagerTP;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 539);
+            // 
+            // btnPasteImage
+            // 
+            this.btnPasteImage.Caption = "貼上";
+            this.btnPasteImage.Id = 13;
+            this.btnPasteImage.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnPasteImage.ImageOptions.SvgImage")));
+            this.btnPasteImage.ImageOptions.SvgImageSize = new System.Drawing.Size(24, 24);
+            this.btnPasteImage.ItemAppearance.Hovered.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.btnPasteImage.ItemAppearance.Hovered.ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Question;
+            this.btnPasteImage.ItemAppearance.Hovered.Options.UseFont = true;
+            this.btnPasteImage.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnPasteImage.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.btnPasteImage.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
+            this.btnPasteImage.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnPasteImage.ItemAppearance.Normal.Options.UseForeColor = true;
+            this.btnPasteImage.Name = "btnPasteImage";
+            this.btnPasteImage.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnPasteImage_ItemClick);
+            // 
+            // btnSaveImage
+            // 
+            this.btnSaveImage.Caption = "備存";
+            this.btnSaveImage.Id = 14;
+            this.btnSaveImage.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnSaveImage.ImageOptions.SvgImage")));
+            this.btnSaveImage.ImageOptions.SvgImageSize = new System.Drawing.Size(24, 24);
+            this.btnSaveImage.ItemAppearance.Hovered.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.btnSaveImage.ItemAppearance.Hovered.ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Question;
+            this.btnSaveImage.ItemAppearance.Hovered.Options.UseFont = true;
+            this.btnSaveImage.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnSaveImage.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.btnSaveImage.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
+            this.btnSaveImage.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnSaveImage.ItemAppearance.Normal.Options.UseForeColor = true;
+            this.btnSaveImage.Name = "btnSaveImage";
+            this.btnSaveImage.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSaveImage_ItemClick);
+            // 
+            // btnBrowse
+            // 
+            this.btnBrowse.Caption = "瀏覽";
+            this.btnBrowse.Id = 15;
+            this.btnBrowse.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnBrowse.ImageOptions.SvgImage")));
+            this.btnBrowse.ImageOptions.SvgImageSize = new System.Drawing.Size(24, 24);
+            this.btnBrowse.ItemAppearance.Hovered.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBrowse.ItemAppearance.Hovered.ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Question;
+            this.btnBrowse.ItemAppearance.Hovered.Options.UseFont = true;
+            this.btnBrowse.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnBrowse.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.btnBrowse.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
+            this.btnBrowse.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnBrowse.ItemAppearance.Normal.Options.UseForeColor = true;
+            this.btnBrowse.Name = "btnBrowse";
+            this.btnBrowse.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnBrowse_ItemClick);
+            // 
+            // picSign
+            // 
+            this.picSign.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picSign.Location = new System.Drawing.Point(283, 48);
+            this.picSign.Name = "picSign";
+            this.barManagerTP.SetPopupContextMenu(this.picSign, this.popupMenu1);
+            this.picSign.Size = new System.Drawing.Size(660, 298);
+            this.picSign.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picSign.TabIndex = 4;
+            this.picSign.TabStop = false;
+            // 
+            // popupMenu1
+            // 
+            this.popupMenu1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnBrowse),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnPasteImage),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnSaveImage)});
+            this.popupMenu1.Manager = this.barManagerTP;
+            this.popupMenu1.Name = "popupMenu1";
             // 
             // layoutControl1
             // 
@@ -404,6 +483,26 @@
             this.gridColumn6.VisibleIndex = 5;
             this.gridColumn6.Width = 117;
             // 
+            // gridColumn7
+            // 
+            this.gridColumn7.Caption = " ";
+            this.gridColumn7.ColumnEdit = this.ibtnDel;
+            this.gridColumn7.MaxWidth = 30;
+            this.gridColumn7.MinWidth = 30;
+            this.gridColumn7.Name = "gridColumn7";
+            this.gridColumn7.Visible = true;
+            this.gridColumn7.VisibleIndex = 6;
+            this.gridColumn7.Width = 30;
+            // 
+            // ibtnDel
+            // 
+            this.ibtnDel.AutoHeight = false;
+            this.ibtnDel.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Delete)});
+            this.ibtnDel.Name = "ibtnDel";
+            this.ibtnDel.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            this.ibtnDel.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.ibtnDel_ButtonClick);
+            // 
             // txbDisplayName
             // 
             this.txbDisplayName.Location = new System.Drawing.Point(86, 12);
@@ -488,17 +587,6 @@
             this.cbbType.StyleController = this.layoutControl1;
             this.cbbType.TabIndex = 5;
             this.cbbType.SelectedIndexChanged += new System.EventHandler(this.cbbType_SelectedIndexChanged);
-            // 
-            // picSign
-            // 
-            this.picSign.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picSign.Location = new System.Drawing.Point(283, 48);
-            this.picSign.Name = "picSign";
-            this.picSign.Size = new System.Drawing.Size(660, 298);
-            this.picSign.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picSign.TabIndex = 4;
-            this.picSign.TabStop = false;
-            this.picSign.DoubleClick += new System.EventHandler(this.picSign_DoubleClick);
             // 
             // txbX
             // 
@@ -902,26 +990,6 @@
             this.layoutControlItem18.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem18.TextVisible = false;
             // 
-            // gridColumn7
-            // 
-            this.gridColumn7.Caption = " ";
-            this.gridColumn7.ColumnEdit = this.ibtnDel;
-            this.gridColumn7.MaxWidth = 30;
-            this.gridColumn7.MinWidth = 30;
-            this.gridColumn7.Name = "gridColumn7";
-            this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 6;
-            this.gridColumn7.Width = 30;
-            // 
-            // ibtnDel
-            // 
-            this.ibtnDel.AutoHeight = false;
-            this.ibtnDel.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Delete)});
-            this.ibtnDel.Name = "ibtnDel";
-            this.ibtnDel.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
-            this.ibtnDel.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.ibtnDel_ButtonClick);
-            // 
             // f402_SignInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -939,16 +1007,18 @@
             this.Text = "f00_CreateSign";
             this.Load += new System.EventHandler(this.f402_SignInfo_Load);
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSign)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gcInfoMore)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvInfoMore)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ibtnDel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDisplayName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.colorFont.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbHgt.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbFont.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbType.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picSign)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbX.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbY.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbWid.Properties)).EndInit();
@@ -979,7 +1049,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem16)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem17)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem18)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ibtnDel)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1046,5 +1115,9 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem18;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit ibtnDel;
+        private DevExpress.XtraBars.PopupMenu popupMenu1;
+        private DevExpress.XtraBars.BarButtonItem btnPasteImage;
+        private DevExpress.XtraBars.BarButtonItem btnSaveImage;
+        private DevExpress.XtraBars.BarButtonItem btnBrowse;
     }
 }

@@ -66,6 +66,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
         DXMenuItem itemEditRole;
         DXMenuItem itemEditSign;
+        DXMenuItem itemEditGroup;
 
         DXMenuItem CreateMenuItem(string caption, EventHandler clickEvent, SvgImage svgImage)
         {
@@ -84,6 +85,13 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
         {
             itemEditRole = CreateMenuItem("設定用色", ItemEditRole_Click, TPSvgimages.Num1);
             itemEditSign = CreateMenuItem("設定簽名", ItemEditSign_Click, TPSvgimages.Num2);
+            itemEditGroup = CreateMenuItem("設定ABC", ItemEditGroup_Click, TPSvgimages.Num3);
+        }
+
+        private void ItemEditGroup_Click(object sender, EventArgs e)
+        {
+            var form = new f402_UserMapping() { mapData = "sign" };
+            form.ShowDialog();
         }
 
         private void ItemEditSign_Click(object sender, EventArgs e)
@@ -269,6 +277,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             {
                 e.Menu.Items.Add(itemEditRole);
                 e.Menu.Items.Add(itemEditSign);
+                e.Menu.Items.Add(itemEditGroup);
             }
         }
     }
