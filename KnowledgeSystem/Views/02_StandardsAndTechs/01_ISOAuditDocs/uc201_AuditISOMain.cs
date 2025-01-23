@@ -150,47 +150,89 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 return;
             }
 
-            string dept = "";
-            string[] deptSend = currentData.DocCode.Split('.');
-            if (deptSend.Count() > 1)
+            f00_SendNoteSystem sendNote = new f00_SendNoteSystem();
+
+            using (var handle = SplashScreenManager.ShowOverlayForm(tlsData))
             {
-                dept = deptSend[1].Length >= 4 ? deptSend[1].Substring(0, 4) : "";
+                string dept = "";
+                string[] deptSend = currentData.DocCode.Split('.');
+                if (deptSend.Count() > 1)
+                {
+                    dept = deptSend[1].Length >= 4 ? deptSend[1].Substring(0, 4) : "";
+                }
+
+                var attsId = dt201_FormsBUS.Instance.GetListByBaseId(currentData.Id)
+                    .Where(r => r.IsCancel != true && r.IsDel != true && r.IsProcessing != true)
+                    .Select(r => r.AttId).ToList();
+
+                if (attsId.Count <= 0)
+                {
+                    MsgTP.MsgError("沒有證書！");
+                    return;
+                }
+
+                // Copy các file báo cáo vào ổ chung 153 để người ta lấy
+                string folderCalibCert = Path.Combine(TPConfigs.FolderCalibCert, dept, currentData.DocCode);
+                if (!Directory.Exists(folderCalibCert))
+                {
+                    Directory.CreateDirectory(folderCalibCert);
+                }
+                else
+                {
+                    string[] files = Directory.GetFiles(folderCalibCert);
+                    foreach (string file in files)
+                    {
+                        try
+                        {
+                            File.Delete(file);
+                        }
+                        catch { }
+                    }
+                }
+
+                foreach (var id in attsId)
+                {
+                    var attDt = dm_AttachmentBUS.Instance.GetItemById(Convert.ToInt32(id));
+
+                    var sourceFile = Path.Combine(TPConfigs.Folder201, attDt.EncryptionName);
+                    var destFile = Path.Combine(folderCalibCert, attDt.ActualName);
+
+                    if (File.Exists(sourceFile))
+                    {
+                        File.Copy(sourceFile, destFile, true);
+                    }
+                }
+
+                // Thông tin để gửi note
+                string cc = TPConfigs.LoginUser.Id;
+                string title = $"設備校正完成通知|{currentData.Id}";
+                string threadId = "201";
+
+                var templateData = new
+                {
+                    dept = dept,
+                    devicevn = parentData.DisplayNameVN,
+                    devicetw = parentData.DisplayName,
+                    folder = folderCalibCert,
+                    namevn = TPConfigs.LoginUser.DisplayNameVN,
+                    nametw = TPConfigs.LoginUser.DisplayName,
+                    empid = TPConfigs.LoginUser.Id
+                };
+
+                var templateContentSigner = System.IO.File.ReadAllText(Path.Combine(TPConfigs.HtmlPath, $"f201_NotifyCalibCert.html"));
+                var templateSigner = Template.Parse(templateContentSigner);
+
+                var pageContent = templateSigner.Render(templateData);
+
+                sendNote = new f00_SendNoteSystem()
+                {
+                    Cc = cc,
+                    Title = title,
+                    Subject = pageContent,
+                    ThreadId = threadId,
+                    Atts = string.Join(",", attsId),
+                };
             }
-
-            string cc = TPConfigs.LoginUser.Id;
-            string title = $"設備校正完成通知|{currentData.Id}";
-            string threadId = "201";
-
-            string folderCalibCert = Path.Combine(TPConfigs.FolderCalibCert, dept, currentData.DocCode);
-
-            var templateData = new
-            {
-                dept = dept,
-                devicevn = parentData.DisplayNameVN,
-                devicetw = parentData.DisplayName,
-                folder = folderCalibCert,
-                namevn = TPConfigs.LoginUser.DisplayNameVN,
-                nametw = TPConfigs.LoginUser.DisplayName,
-                empid = TPConfigs.LoginUser.Id
-            };
-
-            var templateContentSigner = System.IO.File.ReadAllText(Path.Combine(TPConfigs.HtmlPath, $"f201_NotifyCalibCert.html"));
-            var templateSigner = Template.Parse(templateContentSigner);
-
-            var pageContent = templateSigner.Render(templateData);
-
-            var attsId = dt201_FormsBUS.Instance.GetListByBaseId(currentData.Id)
-                .Where(r => r.IsCancel != true && r.IsDel != true && r.IsProcessing != true)
-                .Select(r => r.AttId).ToList();
-
-            f00_SendNoteSystem sendNote = new f00_SendNoteSystem()
-            {
-                Cc = cc,
-                Title = title,
-                Subject = pageContent,
-                ThreadId = threadId,
-                Atts = string.Join(",", attsId),
-            };
 
             sendNote.ShowDialog();
         }

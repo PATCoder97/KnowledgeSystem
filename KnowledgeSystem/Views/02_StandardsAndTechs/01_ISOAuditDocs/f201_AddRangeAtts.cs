@@ -337,6 +337,37 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 return;
             }
 
+            // Thiết lập mask để buộc nhập đúng định dạng
+            var editor = new TextEdit { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) };
+            editor.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.DateTimeMaskManager));
+            editor.Properties.MaskSettings.Set("mask", "yyyy/MM/dd HH:mm:ss");
+            editor.Properties.MaskSettings.Set("useAdvancingCaret", true);
+
+            var resultDateUpload = XtraInputBox.Show(new XtraInputBoxArgs
+            {
+                Caption = "TPConfigs.SoftNameTW",
+                AllowHtmlText = DevExpress.Utils.DefaultBoolean.True,
+                Prompt = "<font='Microsoft JhengHei UI' size=14>輸入核准時間</font>",
+                Editor = editor,
+                DefaultButtonIndex = 0,
+                DefaultResponse = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") // Định dạng mặc định
+            });
+
+            if (string.IsNullOrEmpty(resultDateUpload?.ToString())) return;
+
+            DateTime uploadTime;
+            DateTime.TryParse(resultDateUpload.ToString(), out uploadTime);
+
+            if (uploadTime < DateTime.Now.AddMinutes(-5))
+            {
+                string msg = "呈核時間無效！";
+                MsgTP.MsgShowInfomation($"<font='Microsoft JhengHei UI' size=14>{msg}</font>");
+                return;
+            }
+
+            if (MsgTP.MsgYesNoQuestion($"文件將於<color=red>{uploadTime:yyyy/MM/dd HH:mm}</color>呈核") != DialogResult.Yes)
+                return;
+
             bool result = false;
 
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
@@ -349,7 +380,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                     baseForm.DisplayName = item.DisplayName;
                     baseForm.DisplayNameVN = item.DisplayNameVN;
                     baseForm.UploadUser = TPConfigs.LoginUser.Id;
-                    baseForm.UploadTime = DateTime.Now;
+                    baseForm.UploadTime = uploadTime;
                     baseForm.IdBase = idBase;
                     baseForm.IsProcessing = true;
                     baseForm.DigitalSign = true;

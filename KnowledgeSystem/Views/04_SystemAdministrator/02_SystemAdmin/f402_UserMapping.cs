@@ -78,7 +78,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
                     items = dm_GroupBUS.Instance.GetList().Select(r => new DataItem()
                     {
-                        Id = r.Id.ToString(),
+                        Id = r.Id,
                         Name = r.DisplayName,
                         Desc = r.Describe
                     }).ToList();
@@ -88,7 +88,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
                     items = dm_RoleBUS.Instance.GetList().Select(r => new DataItem()
                     {
-                        Id = r.Id.ToString(),
+                        Id = r.Id,
                         Name = r.DisplayName,
                         Desc = r.Describe
                     }).ToList();
@@ -99,7 +99,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
                     items = dm_SignBUS.Instance.GetList().Select(r => new DataItem()
                     {
-                        Id = r.Id.ToString(),
+                        Id = r.Id,
                         Name = r.DisplayName,
                     }).ToList();
 

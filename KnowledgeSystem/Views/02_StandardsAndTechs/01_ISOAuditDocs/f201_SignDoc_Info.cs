@@ -68,6 +68,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         private void f201_SignDoc_Info_Load(object sender, EventArgs e)
         {
             var baseData = dt201_FormsBUS.Instance.GetItemById(idBase);
+            minTimeRespValue = baseData.UploadTime; // Lấy thời gian đưa lên làm mốc để ký
 
             Text = $"待簽文件 | {baseData.Code} | {baseData.DisplayName}";
             tabbedControlGroup1.SelectedTabPageIndex = 0;
