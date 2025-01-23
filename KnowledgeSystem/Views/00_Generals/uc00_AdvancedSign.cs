@@ -21,11 +21,13 @@ namespace KnowledgeSystem.Views._00_Generals
 {
     public partial class uc00_AdvancedSign : DevExpress.XtraEditors.XtraUserControl
     {
-        public uc00_AdvancedSign()
+        public uc00_AdvancedSign(bool FullSign = false)
         {
             InitializeComponent();
+            fullSign = FullSign;
         }
 
+        bool fullSign = false;
         public SignInfo signInfo = SignInfo.Sign;
         List<dm_Sign> signs;
         List<dm_Sign> moreInfos = new List<dm_Sign>();
@@ -266,7 +268,15 @@ namespace KnowledgeSystem.Views._00_Generals
             var signUsrs = dm_SignUsersBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id).ToList();
             var idSigns = signUsrs.Select(r => r.IdSign).ToList();
 
-            signs = dm_SignBUS.Instance.GetListByIdSigns(idSigns).OrderBy(r => r.Prioritize).ToList();
+            if (fullSign) // Để test chữ ký
+            {
+                signs = dm_SignBUS.Instance.GetList().OrderBy(r => r.Prioritize).ToList();
+            }
+            else
+            {
+                signs = dm_SignBUS.Instance.GetListByIdSigns(idSigns).OrderBy(r => r.Prioritize).ToList();
+            }
+
             switch (signInfo)
             {
                 case SignInfo.Sign:

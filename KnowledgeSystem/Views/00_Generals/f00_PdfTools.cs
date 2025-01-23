@@ -30,12 +30,13 @@ namespace KnowledgeSystem.Views._00_Generals
         public string OutFileName { get; private set; }
         public string Describe { get; private set; }
 
-        public f00_PdfTools(string FilePath, string OutDic)
+        public f00_PdfTools(string FilePath, string OutDic, bool FullSign = false)
         {
             InitializeComponent();
             InitializeIcon();
             filePath = FilePath;
             outDic = OutDic;
+            fullSign = FullSign;
 
             pdfViewer.MouseDown += PdfViewer_MouseDown;
             pdfViewer.MouseUp += PdfViewer_MouseUp;
@@ -84,7 +85,7 @@ namespace KnowledgeSystem.Views._00_Generals
         List<GraphicsCoordinates> signs = new List<GraphicsCoordinates>();
         GraphicsCoordinates currentSign;
 
-
+        bool fullSign = false;
         string filePath = "";
         string outDic = "";
 
@@ -366,7 +367,7 @@ namespace KnowledgeSystem.Views._00_Generals
             ActivateDrawing = true;
             pdfViewer.Invalidate();
 
-            uc00_AdvancedSign ucAdvanced = new uc00_AdvancedSign();
+            uc00_AdvancedSign ucAdvanced = new uc00_AdvancedSign(FullSign: fullSign);
             ucAdvanced.signInfo = SignInfo.Sign;
             if (XtraDialog.Show(ucAdvanced, "修改簽名", MessageBoxButtons.OKCancel) != DialogResult.OK)
             {
@@ -391,7 +392,7 @@ namespace KnowledgeSystem.Views._00_Generals
             ActivateDrawing = true;
             pdfViewer.Invalidate();
 
-            uc00_AdvancedSign ucAdvanced = new uc00_AdvancedSign();
+            uc00_AdvancedSign ucAdvanced = new uc00_AdvancedSign(FullSign: fullSign);
             ucAdvanced.signInfo = SignInfo.Stamp;
             if (XtraDialog.Show(ucAdvanced, "修改簽名", MessageBoxButtons.OKCancel) != DialogResult.OK)
             {

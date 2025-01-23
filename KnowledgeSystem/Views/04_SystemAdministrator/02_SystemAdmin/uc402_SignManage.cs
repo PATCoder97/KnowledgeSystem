@@ -183,7 +183,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
             File.Copy(sourcePath, destPath, true);
 
-            f00_PdfTools pdfTools = new f00_PdfTools(destPath, sourceFolder);
+            f00_PdfTools pdfTools = new f00_PdfTools(destPath, sourceFolder, FullSign: true);
             pdfTools.ShowDialog();
         }
     }

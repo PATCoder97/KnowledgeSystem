@@ -81,8 +81,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             gvData.BestFitColumns();
 
-            if (gvData.RowCount > 0)
-                gvData.ExpandMasterRow(0, 0);
+            gcData.BeginInvoke(new Action(() =>
+            {
+                if (gvData.RowCount > 0)
+                    gvData.ExpandMasterRow(0, 0); // Expand lại sau khi dữ liệu đã nạp xong
+            }));
         }
 
         private void uc201_DigitalSignature_Load(object sender, EventArgs e)
