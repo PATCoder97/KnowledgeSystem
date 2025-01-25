@@ -17,6 +17,7 @@ using DevExpress.XtraLayout;
 using DevExpress.XtraPdfViewer;
 using DevExpress.XtraSplashScreen;
 using DevExpress.XtraSpreadsheet.Model;
+using KnowledgeSystem.Helpers;
 using Spire.Presentation;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
@@ -136,7 +137,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
             }
         }
 
-        void DisplayPdfWithWatermark(string inputPath, string imagePath)
+        void DisplayPdfWithWatermark(string inputPath)
         {
             using (var handle = SplashScreenManager.ShowOverlayForm(pdfPreview))
             {
@@ -145,11 +146,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
                 {
                     processor.LoadDocument(inputPath);
                     var page = processor.Document.Pages[0];
-                    Image mark = Image.FromFile(imagePath);
-
-                    Bitmap image1 = new Bitmap(mark, mark.Width / 2, mark.Height / 2);
-
-                    mark = SetImageOpacity(image1, (float)opacity, (float)rotation);
+                    Image mark = picVM.Image;
+                    mark = SetImageOpacity(new Bitmap(mark, mark.Width / 2, mark.Height / 2), (float)opacity, (float)rotation);
 
                     using (PdfGraphics graphics = processor.CreateGraphics())
                     {
@@ -157,20 +155,9 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
                         using (Bitmap image = new Bitmap(mark, mark.Width / 2, mark.Height / 2))
                         {
                             PdfRectangle pdfRectangle = page.CropBox;
-                            //float cropBoxWidth = (float)pdfRectangle.Width;
                             float cropBoxHeight = (float)pdfRectangle.Height;
-
                             float imageAspectRatio = (float)image.Width / image.Height;
                             float cropBoxWidth = cropBoxHeight * imageAspectRatio;
-
-                            switch (page.Rotate)
-                            {
-                                case 90:
-                                case 270:
-                                    cropBoxWidth = (float)pdfRectangle.Height;
-                                    cropBoxHeight = (float)pdfRectangle.Width;
-                                    break;
-                            }
 
                             // Áp dụng scale cho kích thước rectangle
                             float scaledWidth = cropBoxWidth * (scale / 100f);
@@ -180,16 +167,14 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
                             float x = ((float)pdfRectangle.Width - scaledWidth) / 2 + offsetHori;
                             float y = ((float)pdfRectangle.Height - scaledHeight) / 2 + offsetVert;
 
-                            layoutControlGroup1.Text = $"Image: {mark.Width}, Rec: {cropBoxWidth}";
-
+                            lcPreview.Text = $"預覽 - Rectangle: {pdfRectangle.Width:N1} - Image: {scaledWidth:N1}";
                             Rectangle rec = new Rectangle((int)x, (int)y, (int)scaledWidth, (int)scaledHeight);
-
                             graphics.DrawRectangle(new Pen(Color.Red), rec);
-
                             graphics.DrawImage(mark, rec);
                         }
                         graphics.AddToPageForeground(page, 72, 72);
                     }
+
                     // Save the modified document to a MemoryStream
                     using (MemoryStream memoryStream = new MemoryStream())
                     {
@@ -231,13 +216,15 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
         private void btnPreview_Click(object sender, EventArgs e)
         {
-            DisplayPdfWithWatermark(sourcePdf, vmPath);
+            DisplayPdfWithWatermark(sourcePdf);
         }
 
         private void cbbRotarion_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int.TryParse(cbbRotarion.Text, out int value);
-            rotation = value / 1f;
+            if (int.TryParse(cbbRotarion.Text, out int value))
+            {
+                rotation = value / 1f;
+            }
         }
 
         private void txbOffsetVert_EditValueChanging(object sender, DevExpress.XtraEditors.Controls.ChangingEventArgs e)
@@ -261,6 +248,45 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
             if (float.TryParse(txbScale.Text, out float value))
             {
                 scale = value;
+            }
+        }
+
+        private void btnBrowse_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
+            if (ofd.ShowDialog() != DialogResult.OK) return;
+
+            picVM.Image = Image.FromFile(ofd.FileName);
+        }
+
+        private void btnPasteImage_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (Clipboard.ContainsFileDropList())
+            {
+                var files = Clipboard.GetFileDropList();
+                var imageFiles = new List<string>();
+                string[] supportedExtensions = { ".jpg", ".jpeg", ".png", ".bmp" };
+
+                foreach (var file in files)
+                {
+                    if (supportedExtensions.Any(ext => file.EndsWith(ext, StringComparison.OrdinalIgnoreCase)) && File.Exists(file))
+                    {
+                        imageFiles.Add(file);
+                    }
+                }
+
+                if (imageFiles.Count != 1)
+                {
+                    XtraMessageBox.Show("請選擇一個照片檔案", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                picVM.Image = Image.FromFile(imageFiles.First());
+            }
+            else
+            {
+                XtraMessageBox.Show("請選擇一個照片檔案", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
     }
