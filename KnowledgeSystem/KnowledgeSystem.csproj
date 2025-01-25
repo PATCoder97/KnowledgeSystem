@@ -853,6 +853,12 @@
     <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_UserSigns.Designer.cs">
       <DependentUpon>f402_UserSigns.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_Watermark_Info.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_Watermark_Info.Designer.cs">
+      <DependentUpon>f402_Watermark_Info.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\uc402_KPIWeb.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1250,6 +1256,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_UserSigns.resx">
       <DependentUpon>f402_UserSigns.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_Watermark_Info.resx">
+      <DependentUpon>f402_Watermark_Info.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\02_SystemAdmin\uc402_KPIWeb.resx">
       <DependentUpon>uc402_KPIWeb.cs</DependentUpon>

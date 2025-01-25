@@ -37,7 +37,7 @@ namespace KnowledgeSystem
         [STAThread]
         static void Main(string[] args)
         {
-            new AppCopyRight() { Version = "25.01.15" };
+            new AppCopyRight() { Version = "25.01.24" };
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             TPConfigs.SetSystemStaticValue();
@@ -117,7 +117,7 @@ namespace KnowledgeSystem
             else
             {
 #if DEBUG
-                Application.Run(new f00_Main());
+                Application.Run(new f402_Watermark_Info());
 
                 TPConfigs.LoginUser = dm_UserBUS.Instance.GetItemById("VNW0014732");
                 AppPermission.Instance.CheckAppPermission(7);
