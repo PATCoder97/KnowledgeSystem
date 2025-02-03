@@ -237,38 +237,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
             gcData.ExportToXlsx(filePath);
             Process.Start(filePath);
-
-            //foreach (var item in users)
-            //{
-            //    string url = $"https://www.fhs.com.tw/ads/api/Furnace/rest/json/hr/s10/{item.Id}";
-            //    using (WebClient client = new WebClient())
-            //    {
-            //        client.Encoding = Encoding.UTF8;
-            //        try
-            //        {
-            //            string response = client.DownloadString(url);
-
-            //            if (!string.IsNullOrEmpty(response))
-            //            {
-            //                var data = response.Replace("o|o", "").Split('|');
-
-            //                item.DOB = string.IsNullOrWhiteSpace(data[2]) ? default : DateTime.ParseExact(data[2], "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
-            //                item.DateCreate = string.IsNullOrWhiteSpace(data[3]) ? default : DateTime.ParseExact(data[3], "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
-            //                item.Addr = data[18];
-            //                item.PhoneNum1 = data[19];
-            //                item.PhoneNum2 = data[20];
-
-            //                item.DisplayNameVN = new CultureInfo("vi-VN", false).TextInfo.ToTitleCase(data[1].ToLower());
-
-            //                dm_UserBUS.Instance.AddOrUpdate(item);
-            //            }
-            //        }
-            //        catch (WebException ex)
-            //        {
-            //            Console.WriteLine($"Failed to fetch data: {ex.Message}");
-            //        }
-            //    }
-            //}
         }
 
         private void gvData_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)

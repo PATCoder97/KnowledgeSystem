@@ -7,6 +7,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,7 @@ using DevExpress.XtraPdfViewer;
 using DevExpress.XtraPrinting.Drawing;
 using DevExpress.XtraSplashScreen;
 using DevExpress.XtraSpreadsheet.Model;
+using DocumentFormat.OpenXml.Wordprocessing;
 using KnowledgeSystem.Helpers;
 using Spire.Presentation;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
@@ -32,8 +34,16 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
         public f402_Watermark_Info()
         {
             InitializeComponent();
+            InitializeIcon();
 
             pdfPreview.NavigationPanePageVisibility = PdfNavigationPanePageVisibility.None;
+        }
+
+        private void InitializeIcon()
+        {
+            btnEdit.ImageOptions.SvgImage = TPSvgimages.Edit;
+            btnDelete.ImageOptions.SvgImage = TPSvgimages.Remove;
+            btnConfirm.ImageOptions.SvgImage = TPSvgimages.Confirm;
         }
 
         protected override void WndProc(ref Message m)
@@ -57,8 +67,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
             base.WndProc(ref m); // Xử lý các thông điệp khác bình thường
         }
 
-        public EventFormInfo _eventInfo = EventFormInfo.Create;
-        public string _formName;
+        public EventFormInfo eventInfo = EventFormInfo.Create;
+        public string formName;
         public dm_Watermark watermark = null;
 
         string sourcePdf = Path.Combine(TPConfigs.HtmlPath, "blank.pdf");
@@ -79,7 +89,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
                 Bitmap bmp = new Bitmap(image.Width, image.Height);
                 using (Graphics gfx = Graphics.FromImage(bmp))
                 {
-                    gfx.Clear(Color.Transparent);
+                    gfx.Clear(System.Drawing.Color.Transparent);
                     gfx.InterpolationMode = InterpolationMode.HighQualityBicubic;
                     gfx.PixelOffsetMode = PixelOffsetMode.HighQuality;
                     gfx.SmoothingMode = SmoothingMode.AntiAlias;
@@ -115,7 +125,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
                     Bitmap bmp1 = new Bitmap(newWidth, newHeight);
                     using (Graphics gfx = Graphics.FromImage(bmp1))
                     {
-                        gfx.Clear(Color.Transparent);
+                        gfx.Clear(System.Drawing.Color.Transparent);
                         gfx.InterpolationMode = InterpolationMode.HighQualityBicubic;
                         gfx.PixelOffsetMode = PixelOffsetMode.HighQuality;
                         gfx.SmoothingMode = SmoothingMode.AntiAlias;
@@ -175,7 +185,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
                             lcPreview.Text = $"預覽 - Rectangle: {pdfRectangle.Width:N1} - Image: {scaledWidth:N1}";
                             Rectangle rec = new Rectangle((int)x, (int)y, (int)scaledWidth, (int)scaledHeight);
-                            graphics.DrawRectangle(new Pen(Color.Red), rec);
+                            graphics.DrawRectangle(new Pen(System.Drawing.Color.Red), rec);
                             graphics.DrawImage(mark, rec);
                         }
                         graphics.AddToPageForeground(page, 72, 72);
@@ -202,9 +212,92 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
             }
         }
 
+        private void EnabledController(bool _enable = true)
+        {
+            txbName.Enabled = _enable;
+            txbDesc.Enabled = _enable;
+            cbbRotarion.Enabled = _enable;
+            txbScale.Enabled = _enable;
+            txbOpacity.Enabled = _enable;
+            txbOffsetHoriz.Enabled = _enable;
+            txbOffsetVert.Enabled = _enable;
+        }
+
+        private void LockControl()
+        {
+            switch (eventInfo)
+            {
+                case EventFormInfo.Create:
+                    Text = $"新增{formName}";
+
+                    btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                    btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                    btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                    EnabledController();
+                    break;
+                case EventFormInfo.Update:
+                    Text = $"更新{formName}";
+
+                    btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                    btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                    btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                    EnabledController();
+                    break;
+                case EventFormInfo.Delete:
+                    Text = $"刪除{formName}";
+
+                    btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                    btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                    btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                    EnabledController(false);
+                    break;
+                case EventFormInfo.View:
+                    Text = $"{formName}信息";
+
+                    btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                    btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                    btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+
+                    EnabledController(false);
+                    break;
+                default:
+                    break;
+            }
+        }
+
         private void f402_Watermark_Info_Load(object sender, EventArgs e)
         {
-            //picVM.Image = Image.FromFile(@"\\10.198.138.103\hotroll\DocumentSystem\00\Watermark\ilVHu0eibn5SRgqBpngtpbcfdaa7a4d81412cb0afaf529aec062dbkjqCZcI4pr");
+            LockControl();
+
+            switch (eventInfo)
+            {
+                case EventFormInfo.Create:
+                    watermark = new dm_Watermark();
+                    break;
+                case EventFormInfo.View:
+                    txbName.EditValue = watermark.DisplayName;
+                    txbDesc.EditValue = watermark.Describe;
+                    cbbRotarion.EditValue = watermark.Rotation;
+                    txbScale.EditValue = watermark.Scale;
+                    txbOpacity.EditValue = watermark.Opacity;
+                    txbOffsetHoriz.EditValue = watermark.HoriDistance;
+                    txbOffsetVert.EditValue = watermark.VertDistance;
+                    picVM.Image = Image.FromFile(Path.Combine(TPConfigs.FolderWatermark, watermark.PicImage));
+
+                    opacity = (float)watermark.Opacity / 100f;
+                    rotation = (float)watermark.Rotation;
+                    offsetVert = (float)watermark.VertDistance;
+                    offsetHori = (float)watermark.HoriDistance;
+                    scale = (float)watermark.Scale;
+
+                    break;
+                case EventFormInfo.Update:
+                    break;
+                case EventFormInfo.Delete:
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void txbOpacity_EditValueChanging(object sender, DevExpress.XtraEditors.Controls.ChangingEventArgs e)
@@ -290,20 +383,17 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
         private void btnPreview_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(picImage)) return;
+            if (picVM.Image == null) return;
 
             DisplayPdfWithWatermark(sourcePdf);
         }
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (string.IsNullOrEmpty(picImage)) return;
-
             var result = false;
             string msg = "";
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
             {
-                watermark = new dm_Watermark();
                 watermark.DisplayName = txbName.EditValue?.ToString();
                 watermark.Describe = txbDesc.EditValue?.ToString();
                 watermark.Rotation = (int)rotation;
@@ -313,9 +403,11 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
                 watermark.HoriDistance = (int)offsetHori;
 
                 msg = $"{watermark.DisplayName} {watermark.Describe}";
-                switch (_eventInfo)
+                switch (eventInfo)
                 {
                     case EventFormInfo.Create:
+
+                        if (string.IsNullOrEmpty(picImage)) return;
 
                         watermark.PicImage = EncryptionHelper.EncryptionFileName(Path.GetFileName(picImage));
                         if (!Directory.Exists(TPConfigs.FolderSign)) Directory.CreateDirectory(TPConfigs.FolderWatermark);
@@ -327,36 +419,23 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
                     case EventFormInfo.View:
                         break;
                     case EventFormInfo.Update:
-                        //result = true;
-                        //var resultUpdate = false;
-                        //if (_oldDisplayName != _role.DisplayName || _oldDescribe != _role.Describe)
-                        //{
-                        //    resultUpdate = dm_RoleBUS.Instance.AddOrUpdate(_role);
-                        //    result = !resultUpdate ? false : result;
-                        //}
 
-                        //// Xoá các funcRole trước đó
-                        //resultUpdate = _sysFunctionRoleBUS.RemoveByIdRole(_role.Id);
-                        //result = !resultUpdate ? false : result;
+                        result = true;
+                        if (!string.IsNullOrEmpty(picImage))
+                        {
+                            watermark.PicImage = EncryptionHelper.EncryptionFileName(Path.GetFileName(picImage));
+                            if (!Directory.Exists(TPConfigs.FolderSign)) Directory.CreateDirectory(TPConfigs.FolderWatermark);
+                            File.Copy(picImage, Path.Combine(TPConfigs.FolderWatermark, watermark.PicImage));
+                        }
 
-                        //foreach (var m in lsFunctionUpdates)
-                        //{
-                        //    dm_FunctionRole functionRole = new dm_FunctionRole()
-                        //    {
-                        //        IdFunction = m.Id,
-                        //        IdRole = _role.Id
-                        //    };
-
-                        //    resultUpdate = _sysFunctionRoleBUS.Add(functionRole);
-                        //    result = !resultUpdate ? false : result;
-                        //}
+                        result = dm_WatermarkBUS.Instance.AddOrUpdate(watermark);
 
                         break;
                     case EventFormInfo.Delete:
-                        var dialogResult = XtraMessageBox.Show($"Bạn xác nhận muốn xoá quyền hạn: {watermark.DisplayName}", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        var dialogResult = XtraMessageBox.Show($"Bạn xác nhận muốn xoá Watermark: {watermark.DisplayName}", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                         if (dialogResult != DialogResult.Yes) return;
 
-                        result = dm_RoleBUS.Instance.Remove(watermark.ID);
+                        result = dm_WatermarkBUS.Instance.RemoveById(watermark.ID);
                         break;
                     default:
                         break;
@@ -371,6 +450,20 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
             {
                 MsgTP.MsgErrorDB();
             }
+        }
+
+        private void btnEdit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            eventInfo = EventFormInfo.Update;
+            LockControl();
+        }
+
+        private void btnDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            MsgTP.MsgConfirmDel();
+
+            eventInfo = EventFormInfo.Delete;
+            LockControl();
         }
     }
 }

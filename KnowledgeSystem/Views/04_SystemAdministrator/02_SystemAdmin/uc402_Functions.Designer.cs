@@ -68,7 +68,7 @@
             // layoutControl1
             // 
             this.layoutControl1.AllowCustomization = false;
-            this.layoutControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
+            this.layoutControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.layoutControl1.Controls.Add(this.gcRoles);
             this.layoutControl1.Controls.Add(this.treeFunctions);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;

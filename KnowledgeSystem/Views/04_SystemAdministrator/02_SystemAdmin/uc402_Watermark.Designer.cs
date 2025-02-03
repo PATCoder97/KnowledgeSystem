@@ -1,6 +1,6 @@
 ﻿namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 {
-    partial class uc402_SignManage
+    partial class uc402_Watermark
     {
         /// <summary> 
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc402_SignManage));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc402_Watermark));
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnCreate = new DevExpress.XtraBars.BarButtonItem();
@@ -148,7 +148,6 @@
             this.btnTestSign.Id = 4;
             this.btnTestSign.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnTestSign.Name = "btnTestSign";
-            this.btnTestSign.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnTestSign_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -157,16 +156,16 @@
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManagerTP;
             this.barDockControlTop.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.barDockControlTop.Size = new System.Drawing.Size(1021, 49);
+            this.barDockControlTop.Size = new System.Drawing.Size(895, 49);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 473);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 557);
             this.barDockControlBottom.Manager = this.barManagerTP;
             this.barDockControlBottom.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.barDockControlBottom.Size = new System.Drawing.Size(1021, 0);
+            this.barDockControlBottom.Size = new System.Drawing.Size(895, 0);
             // 
             // barDockControlLeft
             // 
@@ -175,29 +174,28 @@
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 49);
             this.barDockControlLeft.Manager = this.barManagerTP;
             this.barDockControlLeft.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 424);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 508);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1021, 49);
+            this.barDockControlRight.Location = new System.Drawing.Point(895, 49);
             this.barDockControlRight.Manager = this.barManagerTP;
             this.barDockControlRight.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 424);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 508);
             // 
             // layoutControl1
             // 
             this.layoutControl1.AllowCustomization = false;
-            this.layoutControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.layoutControl1.Controls.Add(this.gcData);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(1021, 424);
-            this.layoutControl1.TabIndex = 4;
+            this.layoutControl1.Size = new System.Drawing.Size(895, 508);
+            this.layoutControl1.TabIndex = 5;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // gcData
@@ -212,7 +210,7 @@
             this.gcData.MainView = this.gvData;
             this.gcData.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.gcData.Name = "gcData";
-            this.gcData.Size = new System.Drawing.Size(997, 400);
+            this.gcData.Size = new System.Drawing.Size(871, 484);
             this.gcData.TabIndex = 4;
             this.gcData.UseEmbeddedNavigator = true;
             this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -260,7 +258,7 @@
             this.gColId.AppearanceCell.Options.UseTextOptions = true;
             this.gColId.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gColId.Caption = "代號";
-            this.gColId.FieldName = "Id";
+            this.gColId.FieldName = "ID";
             this.gColId.MinWidth = 23;
             this.gColId.Name = "gColId";
             this.gColId.Width = 87;
@@ -373,7 +371,7 @@
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem1});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(1021, 424);
+            this.Root.Size = new System.Drawing.Size(895, 508);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem1
@@ -381,14 +379,12 @@
             this.layoutControlItem1.Control = this.gcData;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(1001, 404);
+            this.layoutControlItem1.Size = new System.Drawing.Size(875, 488);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
-            // uc402_SignManage
+            // uc402_Watermark
             // 
-            this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
-            this.Appearance.Options.UseBackColor = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.layoutControl1);
@@ -396,9 +392,9 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.Name = "uc402_SignManage";
-            this.Size = new System.Drawing.Size(1021, 473);
-            this.Load += new System.EventHandler(this.uc402_SignManage_Load);
+            this.Name = "uc402_Watermark";
+            this.Size = new System.Drawing.Size(895, 557);
+            this.Load += new System.EventHandler(this.uc402_Watermark_Load);
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
@@ -418,6 +414,7 @@
         private DevExpress.XtraBars.BarButtonItem btnCreate;
         private DevExpress.XtraBars.BarButtonItem btnRefresh;
         private DevExpress.XtraBars.BarButtonItem btnExportExcel;
+        private DevExpress.XtraBars.BarButtonItem btnTestSign;
         private DevExpress.XtraBars.BarDockControl barDockControlTop;
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
@@ -425,7 +422,9 @@
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraGrid.GridControl gcData;
         private DevExpress.XtraGrid.Views.Grid.GridView gvData;
+        private DevExpress.XtraGrid.Columns.GridColumn gColId;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
@@ -437,8 +436,5 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
-        private DevExpress.XtraGrid.Columns.GridColumn gColId;
-        private DevExpress.XtraBars.BarButtonItem btnTestSign;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
     }
 }

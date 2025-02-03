@@ -186,5 +186,10 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
             f00_PdfTools pdfTools = new f00_PdfTools(destPath, sourceFolder, FullSign: true);
             pdfTools.ShowDialog();
         }
+
+        private void btnRefresh_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            LoadSign();
+        }
     }
 }
