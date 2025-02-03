@@ -180,6 +180,20 @@
           <Property Name="IdUser" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="IdRole" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="dm_Watermark">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Describe" Type="nvarchar(max)" />
+          <Property Name="PicImage" Type="nvarchar" MaxLength="500" />
+          <Property Name="Rotation" Type="int" />
+          <Property Name="Scale" Type="int" />
+          <Property Name="Opacity" Type="int" />
+          <Property Name="VertDistance" Type="int" />
+          <Property Name="HoriDistance" Type="int" />
+        </EntityType>
         <EntityType Name="dt201_Base">
           <Key>
             <PropertyRef Name="Id" />
@@ -803,6 +817,7 @@
           <EntitySet Name="dm_StepProgress" EntityType="Self.dm_StepProgress" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dm_User" EntityType="Self.dm_User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dm_UserRole" EntityType="Self.dm_UserRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dm_Watermark" EntityType="Self.dm_Watermark" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt201_Base" EntityType="Self.dt201_Base" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt201_Forms" EntityType="Self.dt201_Forms" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt201_ProgInfo" EntityType="Self.dt201_ProgInfo" Schema="dbo" store:Type="Tables" />
@@ -936,6 +951,7 @@
           <EntitySet Name="dt201_UpdateUsrReq_Detail" EntityType="DBDocumentManagementSystemModel.dt201_UpdateUsrReq_Detail" />
           <EntitySet Name="dm_Sign" EntityType="DBDocumentManagementSystemModel.dm_Sign" />
           <EntitySet Name="dt204_OldVersion" EntityType="DBDocumentManagementSystemModel.dt204_OldVersion" />
+          <EntitySet Name="dm_Watermark" EntityType="DBDocumentManagementSystemModel.dm_Watermark" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -1716,6 +1732,20 @@
           <Property Name="OldVer" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
           <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="IdAtt" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dm_Watermark">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Describe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PicImage" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Rotation" Type="Int32" />
+          <Property Name="Scale" Type="Int32" />
+          <Property Name="Opacity" Type="Int32" />
+          <Property Name="VertDistance" Type="Int32" />
+          <Property Name="HoriDistance" Type="Int32" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2572,6 +2602,21 @@
                 <ScalarProperty Name="TypeDoc" ColumnName="TypeDoc" />
                 <ScalarProperty Name="IdBase" ColumnName="IdBase" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dm_Watermark">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_Watermark">
+              <MappingFragment StoreEntitySet="dm_Watermark">
+                <ScalarProperty Name="HoriDistance" ColumnName="HoriDistance" />
+                <ScalarProperty Name="VertDistance" ColumnName="VertDistance" />
+                <ScalarProperty Name="Opacity" ColumnName="Opacity" />
+                <ScalarProperty Name="Scale" ColumnName="Scale" />
+                <ScalarProperty Name="Rotation" ColumnName="Rotation" />
+                <ScalarProperty Name="PicImage" ColumnName="PicImage" />
+                <ScalarProperty Name="Describe" ColumnName="Describe" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -40,6 +40,7 @@ namespace KnowledgeSystem.Helpers
         public static string Folder307 { get; set; }
         public static string Folder403 { get; set; }
         public static string FolderSign { get; set; }
+        public static string FolderWatermark { get; set; }
         public static string DocTypes201 { get; set; }
         public static string FolderCalibCert { get; set; }
 
@@ -66,6 +67,7 @@ namespace KnowledgeSystem.Helpers
             Folder307 = Path.Combine(FolderData, "307");
             Folder403 = Path.Combine(FolderData, "403");
             FolderSign = Path.Combine(Folder00, "ImageSign");
+            FolderWatermark = Path.Combine(Folder00, "Watermark");
 
             AppPermission.SysAdmin = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleSysAdmin")?.ValueT ?? "-1");
             AppPermission.Mod = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleMod")?.ValueT ?? "-1");

@@ -1294,6 +1294,9 @@
       <DependentUpon>uc403_SoftwareManual.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
+    <None Include="Html\blank.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

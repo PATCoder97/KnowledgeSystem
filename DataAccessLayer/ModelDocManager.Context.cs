@@ -97,5 +97,6 @@ namespace DataAccessLayer
         public virtual DbSet<dt201_UpdateUsrReq_Detail> dt201_UpdateUsrReq_Detail { get; set; }
         public virtual DbSet<dm_Sign> dm_Sign { get; set; }
         public virtual DbSet<dt204_OldVersion> dt204_OldVersion { get; set; }
+        public virtual DbSet<dm_Watermark> dm_Watermark { get; set; }
     }
 }

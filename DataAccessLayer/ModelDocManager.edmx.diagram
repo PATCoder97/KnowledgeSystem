@@ -77,6 +77,7 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_UpdateUsrReq_Detail" Width="1.5" PointX="10.25" PointY="21.125" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_Sign" Width="1.5" PointX="20" PointY="0.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt204_OldVersion" Width="1.5" PointX="8.625" PointY="35.875" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_Watermark" Width="1.5" PointX="11.875" PointY="2.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

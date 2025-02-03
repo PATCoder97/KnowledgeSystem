@@ -107,6 +107,9 @@
     <Compile Include="dm_UserRole.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
+    <Compile Include="dm_Watermark.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
     <Compile Include="dt201_Base.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>

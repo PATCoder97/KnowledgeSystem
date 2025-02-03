@@ -7,14 +7,18 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BusinessLayer;
+using DataAccessLayer;
 using DevExpress.Pdf;
 using DevExpress.Utils.Extensions;
 using DevExpress.XtraEditors;
 using DevExpress.XtraLayout;
 using DevExpress.XtraPdfViewer;
+using DevExpress.XtraPrinting.Drawing;
 using DevExpress.XtraSplashScreen;
 using DevExpress.XtraSpreadsheet.Model;
 using KnowledgeSystem.Helpers;
@@ -53,12 +57,14 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
             base.WndProc(ref m); // Xử lý các thông điệp khác bình thường
         }
 
+        public EventFormInfo _eventInfo = EventFormInfo.Create;
+        public string _formName;
+        public dm_Watermark watermark = null;
 
-        string sourcePdf = @"C:\Users\Dell Alpha\Desktop\blank-pdf.pdf";
-        string destPdf = @"C:\Users\Dell Alpha\Desktop\mofi-pdf.pdf";
-        string vmPath = @"C:\Users\Dell Alpha\Desktop\RÁC 1\Test.jpg";
+        string sourcePdf = Path.Combine(TPConfigs.HtmlPath, "blank.pdf");
 
         // Các thông tin để vẽ VM
+        string picImage = "";
         float opacity = 0.1f;
         float rotation = 0;
         float offsetVert = 0;
@@ -198,12 +204,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
         private void f402_Watermark_Info_Load(object sender, EventArgs e)
         {
-            picVM.Image = Image.FromFile(vmPath);
-        }
-
-        private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            pdfPreview.CloseDocument();
+            //picVM.Image = Image.FromFile(@"\\10.198.138.103\hotroll\DocumentSystem\00\Watermark\ilVHu0eibn5SRgqBpngtpbcfdaa7a4d81412cb0afaf529aec062dbkjqCZcI4pr");
         }
 
         private void txbOpacity_EditValueChanging(object sender, DevExpress.XtraEditors.Controls.ChangingEventArgs e)
@@ -212,11 +213,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
             {
                 opacity = value / 100f;
             }
-        }
-
-        private void btnPreview_Click(object sender, EventArgs e)
-        {
-            DisplayPdfWithWatermark(sourcePdf);
         }
 
         private void cbbRotarion_SelectedIndexChanged(object sender, EventArgs e)
@@ -257,7 +253,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
             ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
             if (ofd.ShowDialog() != DialogResult.OK) return;
 
-            picVM.Image = Image.FromFile(ofd.FileName);
+            picImage = ofd.FileName;
+            picVM.Image = Image.FromFile(picImage);
         }
 
         private void btnPasteImage_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -282,11 +279,97 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
                     return;
                 }
 
-                picVM.Image = Image.FromFile(imageFiles.First());
+                picImage = imageFiles.First();
+                picVM.Image = Image.FromFile(picImage);
             }
             else
             {
                 XtraMessageBox.Show("請選擇一個照片檔案", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void btnPreview_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(picImage)) return;
+
+            DisplayPdfWithWatermark(sourcePdf);
+        }
+
+        private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (string.IsNullOrEmpty(picImage)) return;
+
+            var result = false;
+            string msg = "";
+            using (var handle = SplashScreenManager.ShowOverlayForm(this))
+            {
+                watermark = new dm_Watermark();
+                watermark.DisplayName = txbName.EditValue?.ToString();
+                watermark.Describe = txbDesc.EditValue?.ToString();
+                watermark.Rotation = (int)rotation;
+                watermark.Scale = (int)scale;
+                watermark.Opacity = (int)(opacity * 100);
+                watermark.VertDistance = (int)offsetVert;
+                watermark.HoriDistance = (int)offsetHori;
+
+                msg = $"{watermark.DisplayName} {watermark.Describe}";
+                switch (_eventInfo)
+                {
+                    case EventFormInfo.Create:
+
+                        watermark.PicImage = EncryptionHelper.EncryptionFileName(Path.GetFileName(picImage));
+                        if (!Directory.Exists(TPConfigs.FolderSign)) Directory.CreateDirectory(TPConfigs.FolderWatermark);
+                        File.Copy(picImage, Path.Combine(TPConfigs.FolderWatermark, watermark.PicImage));
+
+                        result = dm_WatermarkBUS.Instance.Add(watermark);
+
+                        break;
+                    case EventFormInfo.View:
+                        break;
+                    case EventFormInfo.Update:
+                        //result = true;
+                        //var resultUpdate = false;
+                        //if (_oldDisplayName != _role.DisplayName || _oldDescribe != _role.Describe)
+                        //{
+                        //    resultUpdate = dm_RoleBUS.Instance.AddOrUpdate(_role);
+                        //    result = !resultUpdate ? false : result;
+                        //}
+
+                        //// Xoá các funcRole trước đó
+                        //resultUpdate = _sysFunctionRoleBUS.RemoveByIdRole(_role.Id);
+                        //result = !resultUpdate ? false : result;
+
+                        //foreach (var m in lsFunctionUpdates)
+                        //{
+                        //    dm_FunctionRole functionRole = new dm_FunctionRole()
+                        //    {
+                        //        IdFunction = m.Id,
+                        //        IdRole = _role.Id
+                        //    };
+
+                        //    resultUpdate = _sysFunctionRoleBUS.Add(functionRole);
+                        //    result = !resultUpdate ? false : result;
+                        //}
+
+                        break;
+                    case EventFormInfo.Delete:
+                        var dialogResult = XtraMessageBox.Show($"Bạn xác nhận muốn xoá quyền hạn: {watermark.DisplayName}", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (dialogResult != DialogResult.Yes) return;
+
+                        result = dm_RoleBUS.Instance.Remove(watermark.ID);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            if (result)
+            {
+                Close();
+            }
+            else
+            {
+                MsgTP.MsgErrorDB();
             }
         }
     }
