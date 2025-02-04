@@ -203,6 +203,7 @@
     <Compile Include="Helpers\GridControlHelper.cs" />
     <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="Helpers\PCInfoHelper.cs" />
+    <Compile Include="Helpers\PdfHelper.cs" />
     <Compile Include="Helpers\RefreshHelper.cs" />
     <Compile Include="Helpers\RegistryHelper.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
@@ -294,6 +295,12 @@
     </Compile>
     <Compile Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\f201_UpdateUsrReq_Detail.Designer.cs">
       <DependentUpon>f201_UpdateUsrReq_Detail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\uc201_Adv_CalibAtts.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\uc201_Adv_CalibAtts.Designer.cs">
+      <DependentUpon>uc201_Adv_CalibAtts.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\uc201_ApprovalProgress.cs">
       <SubType>UserControl</SubType>
@@ -983,6 +990,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\f201_UpdateUsrReq_Detail.resx">
       <DependentUpon>f201_UpdateUsrReq_Detail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\uc201_Adv_CalibAtts.resx">
+      <DependentUpon>uc201_Adv_CalibAtts.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\uc201_ApprovalProgress.resx">
       <DependentUpon>uc201_ApprovalProgress.cs</DependentUpon>

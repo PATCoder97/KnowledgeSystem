@@ -25,6 +25,7 @@ using DocumentFormat.OpenXml.Spreadsheet;
 using iTextSharp.text.pdf;
 using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._00_Generals;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 {
@@ -47,6 +48,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         List<ProgressDetail> progresses = new List<ProgressDetail>();
         List<dt201_Role> roles;
 
+        dm_Watermark watermark = new dm_Watermark();
         string idDept2word = TPConfigs.LoginUser.IdDepartment.Substring(0, 2);
 
         class ProgressDetail : dt201_Progress
@@ -81,6 +83,14 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void f201_AddRangeAtts_Load(object sender, EventArgs e)
         {
+            var grpUsrs = dm_GroupUserBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id);
+            var groups = (from data in dm_GroupBUS.Instance.GetListByName("ISO組")
+                          join grp in grpUsrs on data.Id equals grp.IdGroup
+                          select data).ToList();
+
+            bool is782 = groups.Any(r => r.IdDept == "7820");
+            lcAdvCalibAtts.Visibility = is782 ? DevExpress.XtraLayout.Utils.LayoutVisibility.Always : DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+
             sourceForms.DataSource = forms;
             gcInfo.DataSource = sourceForms;
 
@@ -271,7 +281,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         {
             string folderDest = Path.Combine(TPConfigs.Folder201, idAtt.ToString());
             if (!Directory.Exists(folderDest)) Directory.CreateDirectory(folderDest);
-            File.Copy(detail.FilePath, Path.Combine(folderDest, detail.FileNameEncypt), true);
+            bool useWM = watermark != null;
+            HandleCopyFile(detail.FilePath, Path.Combine(folderDest, detail.FileNameEncypt), useWM);
 
             var baseProgresses = progresses.Select(data => new dt201_Progress
             {
@@ -292,6 +303,22 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             };
 
             dt201_ProgInfoBUS.Instance.Add(info);
+        }
+
+        private void HandleCopyFile(string sourcePath, string destPath, bool useWatermark = false)
+        {
+            if (!useWatermark)
+            {
+                if (!Directory.Exists(destPath)) Directory.CreateDirectory(destPath);
+                File.Copy(sourcePath, Path.Combine(destPath, Path.GetFileName(sourcePath)), true);
+            }
+            else
+            {
+                Image img = Image.FromFile(Path.Combine(TPConfigs.FolderWatermark, watermark.PicImage));
+                Image mark = PdfHelper.EditImage(img, (float)(watermark.Opacity) / 100, (float)watermark.Rotation);
+
+                PdfHelper.Instance.AddWatermarkImage(sourcePath, destPath, mark, (int)watermark.Scale, (int)watermark.HoriDistance, (int)watermark.VertDistance);
+            }
         }
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -412,6 +439,38 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             {
                 MsgTP.MsgErrorDB();
             }
+        }
+
+        private void btnAdvClibAtts_Click(object sender, EventArgs e)
+        {
+            uc201_Adv_CalibAtts ucInfo = new uc201_Adv_CalibAtts();
+            if (XtraDialog.Show(ucInfo, "高級功能-校正", MessageBoxButtons.OKCancel) != DialogResult.OK)
+                return;
+
+            string displayName = ucInfo.DisplayName;
+            int idWatermark = ucInfo.IdWatermark;
+
+            if (string.IsNullOrEmpty(displayName))
+            {
+                XtraMessageBox.Show("請填寫所以訊息！", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            string displayNameVN = displayName.Split('/')[1];
+            string displayNameTW = displayName.Split('/')[0];
+
+            if (idWatermark != 0)
+            {
+                watermark = dm_WatermarkBUS.Instance.GetItemById(idWatermark);
+            }
+
+            foreach (var item in forms)
+            {
+                item.DisplayName = displayNameTW;
+                item.DisplayNameVN = displayNameVN;
+            }
+
+            gvInfo.RefreshData();
         }
     }
 }

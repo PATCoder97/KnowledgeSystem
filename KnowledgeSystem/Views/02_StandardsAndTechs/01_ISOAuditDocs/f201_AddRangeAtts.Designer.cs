@@ -60,6 +60,7 @@
             this.lookupRole = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnDelProgress = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            this.btnAdvClibAtts = new DevExpress.XtraEditors.SimpleButton();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.lcProgress = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcDefaultProgress = new DevExpress.XtraLayout.LayoutControlItem();
@@ -68,6 +69,7 @@
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
+            this.lcAdvCalibAtts = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -88,6 +90,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcAdvCalibAtts)).BeginInit();
             this.SuspendLayout();
             // 
             // barManagerTP
@@ -181,6 +184,7 @@
             this.layoutControl1.Controls.Add(this.gcInfo);
             this.layoutControl1.Controls.Add(this.btnDefaultProgress);
             this.layoutControl1.Controls.Add(this.gcProgress);
+            this.layoutControl1.Controls.Add(this.btnAdvClibAtts);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
@@ -233,7 +237,7 @@
             this.gcInfo.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
             this.gcInfo.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.btnDel});
-            this.gcInfo.Size = new System.Drawing.Size(779, 224);
+            this.gcInfo.Size = new System.Drawing.Size(779, 198);
             this.gcInfo.TabIndex = 24;
             this.gcInfo.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvInfo});
@@ -331,7 +335,7 @@
             this.btnDefaultProgress.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
             this.btnDefaultProgress.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnDefaultProgress.ImageOptions.SvgImage")));
             this.btnDefaultProgress.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnDefaultProgress.Location = new System.Drawing.Point(655, 280);
+            this.btnDefaultProgress.Location = new System.Drawing.Point(655, 254);
             this.btnDefaultProgress.Name = "btnDefaultProgress";
             this.btnDefaultProgress.Size = new System.Drawing.Size(136, 36);
             this.btnDefaultProgress.StyleController = this.layoutControl1;
@@ -341,7 +345,7 @@
             // 
             // gcProgress
             // 
-            this.gcProgress.Location = new System.Drawing.Point(12, 320);
+            this.gcProgress.Location = new System.Drawing.Point(12, 294);
             this.gcProgress.MainView = this.gvProgress;
             this.gcProgress.MenuManager = this.barManagerTP;
             this.gcProgress.Name = "gcProgress";
@@ -350,7 +354,7 @@
             this.lookupUser,
             this.lookupRole,
             this.btnDelProgress});
-            this.gcProgress.Size = new System.Drawing.Size(779, 168);
+            this.gcProgress.Size = new System.Drawing.Size(779, 194);
             this.gcProgress.TabIndex = 14;
             this.gcProgress.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvProgress});
@@ -494,6 +498,23 @@
             this.btnDelProgress.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             this.btnDelProgress.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.btnDelProgress_ButtonClick);
             // 
+            // btnAdvClibAtts
+            // 
+            this.btnAdvClibAtts.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdvClibAtts.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.btnAdvClibAtts.Appearance.Options.UseFont = true;
+            this.btnAdvClibAtts.Appearance.Options.UseForeColor = true;
+            this.btnAdvClibAtts.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnAdvClibAtts.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnAdvClibAtts.ImageOptions.SvgImage")));
+            this.btnAdvClibAtts.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnAdvClibAtts.Location = new System.Drawing.Point(12, 12);
+            this.btnAdvClibAtts.Name = "btnAdvClibAtts";
+            this.btnAdvClibAtts.Size = new System.Drawing.Size(136, 36);
+            this.btnAdvClibAtts.StyleController = this.layoutControl1;
+            this.btnAdvClibAtts.TabIndex = 25;
+            this.btnAdvClibAtts.Text = "校正功能";
+            this.btnAdvClibAtts.Click += new System.EventHandler(this.btnAdvClibAtts_Click);
+            // 
             // Root
             // 
             this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
@@ -505,7 +526,8 @@
             this.emptySpaceItem1,
             this.layoutControlItem2,
             this.layoutControlItem3,
-            this.emptySpaceItem2});
+            this.emptySpaceItem2,
+            this.lcAdvCalibAtts});
             this.Root.Name = "Root";
             this.Root.Size = new System.Drawing.Size(803, 500);
             this.Root.TextVisible = false;
@@ -513,16 +535,16 @@
             // lcProgress
             // 
             this.lcProgress.Control = this.gcProgress;
-            this.lcProgress.Location = new System.Drawing.Point(0, 308);
+            this.lcProgress.Location = new System.Drawing.Point(0, 282);
             this.lcProgress.Name = "lcProgress";
-            this.lcProgress.Size = new System.Drawing.Size(783, 172);
+            this.lcProgress.Size = new System.Drawing.Size(783, 198);
             this.lcProgress.TextSize = new System.Drawing.Size(0, 0);
             this.lcProgress.TextVisible = false;
             // 
             // lcDefaultProgress
             // 
             this.lcDefaultProgress.Control = this.btnDefaultProgress;
-            this.lcDefaultProgress.Location = new System.Drawing.Point(643, 268);
+            this.lcDefaultProgress.Location = new System.Drawing.Point(643, 242);
             this.lcDefaultProgress.MaxSize = new System.Drawing.Size(140, 40);
             this.lcDefaultProgress.MinSize = new System.Drawing.Size(140, 40);
             this.lcDefaultProgress.Name = "lcDefaultProgress";
@@ -536,16 +558,16 @@
             this.layoutControlItem1.Control = this.gcInfo;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 40);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(783, 228);
+            this.layoutControlItem1.Size = new System.Drawing.Size(783, 202);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
             // emptySpaceItem1
             // 
             this.emptySpaceItem1.AllowHotTrack = false;
-            this.emptySpaceItem1.Location = new System.Drawing.Point(0, 0);
+            this.emptySpaceItem1.Location = new System.Drawing.Point(150, 0);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(493, 40);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(343, 40);
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
             // layoutControlItem2
@@ -576,10 +598,26 @@
             // emptySpaceItem2
             // 
             this.emptySpaceItem2.AllowHotTrack = false;
-            this.emptySpaceItem2.Location = new System.Drawing.Point(0, 268);
+            this.emptySpaceItem2.Location = new System.Drawing.Point(0, 242);
             this.emptySpaceItem2.Name = "emptySpaceItem2";
             this.emptySpaceItem2.Size = new System.Drawing.Size(643, 40);
             this.emptySpaceItem2.TextSize = new System.Drawing.Size(0, 0);
+            // 
+            // lcAdvCalibAtts
+            // 
+            this.lcAdvCalibAtts.Control = this.btnAdvClibAtts;
+            this.lcAdvCalibAtts.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.lcAdvCalibAtts.CustomizationFormText = "layoutControlItem2";
+            this.lcAdvCalibAtts.Location = new System.Drawing.Point(0, 0);
+            this.lcAdvCalibAtts.MaxSize = new System.Drawing.Size(150, 40);
+            this.lcAdvCalibAtts.MinSize = new System.Drawing.Size(150, 40);
+            this.lcAdvCalibAtts.Name = "lcAdvCalibAtts";
+            this.lcAdvCalibAtts.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 12, 2, 2);
+            this.lcAdvCalibAtts.Size = new System.Drawing.Size(150, 40);
+            this.lcAdvCalibAtts.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.lcAdvCalibAtts.Text = "layoutControlItem2";
+            this.lcAdvCalibAtts.TextSize = new System.Drawing.Size(0, 0);
+            this.lcAdvCalibAtts.TextVisible = false;
             // 
             // f201_AddRangeAtts
             // 
@@ -616,6 +654,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcAdvCalibAtts)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -661,5 +700,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
+        private DevExpress.XtraEditors.SimpleButton btnAdvClibAtts;
+        private DevExpress.XtraLayout.LayoutControlItem lcAdvCalibAtts;
     }
 }

@@ -29,6 +29,7 @@ using KnowledgeSystem.Views._00_Generals;
 using Org.BouncyCastle.Asn1.Crmf;
 using DevExpress.XtraLayout;
 using DocumentFormat.OpenXml.Bibliography;
+using DevExpress.XtraPrinting.Drawing;
 
 namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 {
@@ -60,6 +61,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         List<ProgressDetail> progresses = new List<ProgressDetail>();
         List<dt201_Role> roles;
         Attachment attachment = new Attachment();
+        dm_Watermark watermark = new dm_Watermark();
 
         BindingSource sourceProgresses = new BindingSource();
 
@@ -166,7 +168,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void f201_AddAttachment_Load(object sender, EventArgs e)
         {
-            lcControls = new List<LayoutControlItem>() { lcDocCode, lcDisplayName, lcDisplayNameVN, lcAtt };
+            lcControls = new List<LayoutControlItem>() { lcDocCode, lcDisplayName, lcDisplayNameVN, lcAtt, lcWatermark };
             lcImpControls = new List<LayoutControlItem>() { lcDisplayName, lcDisplayNameVN, lcAtt };
             foreach (var item in lcControls)
             {
@@ -207,6 +209,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             sourceProgresses.DataSource = progresses;
             gcProgress.DataSource = sourceProgresses;
 
+            var watermarks = dm_WatermarkBUS.Instance.GetList();
+            cbbWatermark.Properties.DataSource = watermarks;
+            cbbWatermark.Properties.DisplayMember = "DisplayName";
+            cbbWatermark.Properties.ValueMember = "ID";
+
             switch (eventInfo)
             {
                 case EventFormInfo.Create:
@@ -221,7 +228,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                     txbDocCode.EditValue = baseForm.Code;
                     txbDisplayName.EditValue = baseForm.DisplayName;
                     txbDisplayNameVN.EditValue = baseForm.DisplayNameVN;
-                    txbDesc.EditValue = baseForm.Descript;
+                    txbDesc.EditValue = baseForm.Descript.Contains("退回說明") ? "" : baseForm.Descript;
 
                     break;
                 case EventFormInfo.Delete:
@@ -391,7 +398,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             }
             else
             {
-                File.Copy(attachment.FullPath, Path.Combine(TPConfigs.Folder201, attachment.EncryptionName), true);
+                HandleCopyFile(attachment.FullPath, Path.Combine(TPConfigs.Folder201, attachment.EncryptionName));
                 result = true;
             }
         }
@@ -434,7 +441,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 }
                 else
                 {
-                    File.Copy(attachment.FullPath, Path.Combine(TPConfigs.Folder201, attachment.EncryptionName), true);
+                    HandleCopyFile(attachment.FullPath, Path.Combine(TPConfigs.Folder201, attachment.EncryptionName));
                     result = true;
                 }
             }
@@ -444,7 +451,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         {
             string folderDest = Path.Combine(TPConfigs.Folder201, idAtt.ToString());
             if (!Directory.Exists(folderDest)) Directory.CreateDirectory(folderDest);
-            File.Copy(attachment.FullPath, Path.Combine(folderDest, attachment.EncryptionName), true);
+            HandleCopyFile(attachment.FullPath, Path.Combine(folderDest, attachment.EncryptionName));
 
             var baseProgresses = progresses.Select(data => new dt201_Progress
             {
@@ -465,6 +472,23 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             };
 
             dt201_ProgInfoBUS.Instance.Add(info);
+        }
+
+        private void HandleCopyFile(string sourcePath, string destPath)
+        {
+            bool useWatermark = watermark != null;
+
+            if (!useWatermark)
+            {
+                if (!Directory.Exists(destPath)) Directory.CreateDirectory(destPath);
+                File.Copy(sourcePath, Path.Combine(destPath, Path.GetFileName(sourcePath)), true);
+            }
+            else
+            {
+                System.Drawing.Image img = System.Drawing.Image.FromFile(Path.Combine(TPConfigs.FolderWatermark, watermark.PicImage));
+                System.Drawing.Image mark = PdfHelper.EditImage(img, (float)(watermark.Opacity) / 100, (float)watermark.Rotation);
+                PdfHelper.Instance.AddWatermarkImage(sourcePath, destPath, mark, (int)watermark.Scale, (int)watermark.HoriDistance, (int)watermark.VertDistance);
+            }
         }
 
         private void txbAtt_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
@@ -619,6 +643,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 Int32 _Width = Convert.ToInt32(_Size.Width) + 20;
                 BeginInvoke(new MethodInvoker(delegate { cal(_Width, view); }));
             }
+        }
+
+        private void cbbWatermark_EditValueChanged(object sender, EventArgs e)
+        {
+            watermark = dm_WatermarkBUS.Instance.GetItemById(Convert.ToInt32(cbbWatermark.EditValue));
         }
     }
 }

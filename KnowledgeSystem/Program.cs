@@ -121,8 +121,8 @@ namespace KnowledgeSystem
                 AppPermission.Instance.CheckAppPermission(7);
                 TPConfigs.IdParentControl = AppPermission.SafetyCertMain;
 
-                Application.Run(new f00_FluentFrame(17));
-                //Application.Run(new f00_SendNoteSystem());
+                //Application.Run(new f00_FluentFrame(73));
+                Application.Run(new f00_Main());
 #else
                 Application.Run(new f00_Main());
 #endif

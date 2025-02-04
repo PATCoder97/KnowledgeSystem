@@ -77,6 +77,11 @@
             this.lcSignOrPaper = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcDefaultProgress = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcDesc = new DevExpress.XtraLayout.LayoutControlItem();
+            this.cbbWatermark = new DevExpress.XtraEditors.GridLookUpEdit();
+            this.gridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.lcWatermark = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ckSignOrPaper.Properties)).BeginInit();
@@ -101,10 +106,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcSignOrPaper)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDefaultProgress)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDesc)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbWatermark.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcWatermark)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.cbbWatermark);
             this.layoutControl1.Controls.Add(this.btnDefaultProgress);
             this.layoutControl1.Controls.Add(this.ckSignOrPaper);
             this.layoutControl1.Controls.Add(this.gcProgress);
@@ -456,7 +465,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Search, "Browse", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default),
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "Paste", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.txbAtt.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.txbAtt.Size = new System.Drawing.Size(540, 32);
+            this.txbAtt.Size = new System.Drawing.Size(328, 32);
             this.txbAtt.StyleController = this.layoutControl1;
             this.txbAtt.TabIndex = 12;
             this.txbAtt.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txbAtt_ButtonClick);
@@ -497,7 +506,8 @@
             this.lcDisplayNameVN,
             this.lcSignOrPaper,
             this.lcDefaultProgress,
-            this.lcDesc});
+            this.lcDesc,
+            this.lcWatermark});
             this.Root.Name = "Root";
             this.Root.Size = new System.Drawing.Size(652, 413);
             this.Root.TextVisible = false;
@@ -547,7 +557,7 @@
             this.lcAtt.CustomizationFormText = "條文";
             this.lcAtt.Location = new System.Drawing.Point(0, 144);
             this.lcAtt.Name = "lcAtt";
-            this.lcAtt.Size = new System.Drawing.Size(632, 36);
+            this.lcAtt.Size = new System.Drawing.Size(420, 36);
             this.lcAtt.Text = "檔案";
             this.lcAtt.TextSize = new System.Drawing.Size(76, 24);
             // 
@@ -617,6 +627,75 @@
             this.lcDesc.Text = "備註";
             this.lcDesc.TextSize = new System.Drawing.Size(76, 24);
             // 
+            // cbbWatermark
+            // 
+            this.cbbWatermark.Location = new System.Drawing.Point(504, 156);
+            this.cbbWatermark.Name = "cbbWatermark";
+            this.cbbWatermark.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbWatermark.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.cbbWatermark.Properties.Appearance.Options.UseFont = true;
+            this.cbbWatermark.Properties.Appearance.Options.UseForeColor = true;
+            this.cbbWatermark.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.cbbWatermark.Properties.AppearanceDropDown.Options.UseFont = true;
+            this.cbbWatermark.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbbWatermark.Properties.NullText = "";
+            this.cbbWatermark.Properties.PopupSizeable = false;
+            this.cbbWatermark.Properties.PopupView = this.gridLookUpEdit1View;
+            this.cbbWatermark.Size = new System.Drawing.Size(136, 32);
+            this.cbbWatermark.StyleController = this.layoutControl1;
+            this.cbbWatermark.TabIndex = 11;
+            this.cbbWatermark.EditValueChanged += new System.EventHandler(this.cbbWatermark_EditValueChanged);
+            // 
+            // gridLookUpEdit1View
+            // 
+            this.gridLookUpEdit1View.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridLookUpEdit1View.Appearance.HeaderPanel.Options.UseFont = true;
+            this.gridLookUpEdit1View.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridLookUpEdit1View.Appearance.Row.Options.UseFont = true;
+            this.gridLookUpEdit1View.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn6,
+            this.gridColumn7});
+            this.gridLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridLookUpEdit1View.Name = "gridLookUpEdit1View";
+            this.gridLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn6
+            // 
+            this.gridColumn6.Caption = "名稱";
+            this.gridColumn6.FieldName = "DisplayName";
+            this.gridColumn6.Name = "gridColumn6";
+            this.gridColumn6.Visible = true;
+            this.gridColumn6.VisibleIndex = 0;
+            // 
+            // gridColumn7
+            // 
+            this.gridColumn7.Caption = "備註";
+            this.gridColumn7.FieldName = "Describe";
+            this.gridColumn7.Name = "gridColumn7";
+            this.gridColumn7.Visible = true;
+            this.gridColumn7.VisibleIndex = 1;
+            // 
+            // lcWatermark
+            // 
+            this.lcWatermark.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lcWatermark.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.lcWatermark.AppearanceItemCaption.Options.UseFont = true;
+            this.lcWatermark.AppearanceItemCaption.Options.UseForeColor = true;
+            this.lcWatermark.Control = this.cbbWatermark;
+            this.lcWatermark.Location = new System.Drawing.Point(420, 144);
+            this.lcWatermark.MaxSize = new System.Drawing.Size(212, 36);
+            this.lcWatermark.MinSize = new System.Drawing.Size(212, 36);
+            this.lcWatermark.Name = "lcWatermark";
+            this.lcWatermark.Padding = new DevExpress.XtraLayout.Utils.Padding(12, 2, 2, 2);
+            this.lcWatermark.Size = new System.Drawing.Size(212, 36);
+            this.lcWatermark.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.lcWatermark.Text = "浮水印";
+            this.lcWatermark.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
+            this.lcWatermark.TextSize = new System.Drawing.Size(57, 24);
+            this.lcWatermark.TextToControlDistance = 5;
+            // 
             // f201_AddAttachment
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
@@ -659,6 +738,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcSignOrPaper)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDefaultProgress)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDesc)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbWatermark.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcWatermark)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -703,5 +785,10 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnDelProgress;
         private DevExpress.XtraEditors.TextEdit txbDesc;
         private DevExpress.XtraLayout.LayoutControlItem lcDesc;
+        private DevExpress.XtraEditors.GridLookUpEdit cbbWatermark;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridLookUpEdit1View;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
+        private DevExpress.XtraLayout.LayoutControlItem lcWatermark;
     }
 }

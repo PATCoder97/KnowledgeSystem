@@ -43,7 +43,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
             btnCreate.ImageOptions.SvgImage = TPSvgimages.Add;
             btnRefresh.ImageOptions.SvgImage = TPSvgimages.Reload;
             btnExportExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
-            btnTestSign.ImageOptions.SvgImage = TPSvgimages.Approval;
         }
 
         private void InitializeMenuItems()
