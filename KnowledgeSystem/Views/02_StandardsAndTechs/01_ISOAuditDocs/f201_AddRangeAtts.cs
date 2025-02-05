@@ -48,7 +48,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         List<ProgressDetail> progresses = new List<ProgressDetail>();
         List<dt201_Role> roles;
 
-        dm_Watermark watermark = new dm_Watermark();
+        dm_Watermark watermark;
         string idDept2word = TPConfigs.LoginUser.IdDepartment.Substring(0, 2);
 
         class ProgressDetail : dt201_Progress
@@ -309,8 +309,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         {
             if (!useWatermark)
             {
-                if (!Directory.Exists(destPath)) Directory.CreateDirectory(destPath);
-                File.Copy(sourcePath, Path.Combine(destPath, Path.GetFileName(sourcePath)), true);
+                DirectoryInfo parentDir = Directory.GetParent(destPath);
+                if (parentDir != null && !Directory.Exists(parentDir.FullName))
+                    Directory.CreateDirectory(parentDir.FullName);
+
+                File.Copy(sourcePath, destPath, true);
             }
             else
             {

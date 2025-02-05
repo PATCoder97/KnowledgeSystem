@@ -13,6 +13,7 @@ using KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate;
 using KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel;
 using KnowledgeSystem.Views._03_DepartmentManage._03_ShiftSchedule;
 using KnowledgeSystem.Views._03_DepartmentManage._06_Signature;
+using KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck;
 using KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin;
 using Newtonsoft.Json;
 using System;
@@ -121,8 +122,8 @@ namespace KnowledgeSystem
                 AppPermission.Instance.CheckAppPermission(7);
                 TPConfigs.IdParentControl = AppPermission.SafetyCertMain;
 
-                //Application.Run(new f00_FluentFrame(73));
-                Application.Run(new f00_Main());
+                //Application.Run(new f00_FluentFrame(21));
+                Application.Run(new f308_CheckData());
 #else
                 Application.Run(new f00_Main());
 #endif

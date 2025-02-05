@@ -61,7 +61,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         List<ProgressDetail> progresses = new List<ProgressDetail>();
         List<dt201_Role> roles;
         Attachment attachment = new Attachment();
-        dm_Watermark watermark = new dm_Watermark();
+        dm_Watermark watermark;
 
         BindingSource sourceProgresses = new BindingSource();
 
@@ -480,8 +480,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             if (!useWatermark)
             {
-                if (!Directory.Exists(destPath)) Directory.CreateDirectory(destPath);
-                File.Copy(sourcePath, Path.Combine(destPath, Path.GetFileName(sourcePath)), true);
+                DirectoryInfo parentDir = Directory.GetParent(destPath);
+                if (parentDir != null && !Directory.Exists(parentDir.FullName))
+                    Directory.CreateDirectory(parentDir.FullName);
+
+                File.Copy(sourcePath, destPath, true);
             }
             else
             {
