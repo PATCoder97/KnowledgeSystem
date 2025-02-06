@@ -168,6 +168,14 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void f201_AddAttachment_Load(object sender, EventArgs e)
         {
+            var grpUsrs = dm_GroupUserBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id);
+            var groups = (from data in dm_GroupBUS.Instance.GetListByName("ISO組")
+                          join grp in grpUsrs on data.Id equals grp.IdGroup
+                          select data).ToList();
+
+            bool is782 = groups.Any(r => r.IdDept == "7820");
+            lcWatermark.Visibility = is782 ? DevExpress.XtraLayout.Utils.LayoutVisibility.Always : DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+
             lcControls = new List<LayoutControlItem>() { lcDocCode, lcDisplayName, lcDisplayNameVN, lcAtt, lcWatermark };
             lcImpControls = new List<LayoutControlItem>() { lcDisplayName, lcDisplayNameVN, lcAtt };
             foreach (var item in lcControls)

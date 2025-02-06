@@ -40,28 +40,28 @@
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.txbDisease = new DevExpress.XtraEditors.TokenEdit();
-            this.radioType = new DevExpress.XtraEditors.RadioGroup();
-            this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.lcItem14 = new DevExpress.XtraLayout.LayoutControlItem();
             this.txbUser = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.txbDisease = new DevExpress.XtraEditors.TokenEdit();
+            this.radioType = new DevExpress.XtraEditors.RadioGroup();
+            this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcItem14 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txbUser.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDisease.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radioType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcItem14)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbUser.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -182,100 +182,10 @@
             this.layoutControl1.TabIndex = 4;
             this.layoutControl1.Text = "layoutControl1";
             // 
-            // txbDisease
-            // 
-            this.txbDisease.Location = new System.Drawing.Point(12, 177);
-            this.txbDisease.MenuManager = this.barManagerTP;
-            this.txbDisease.Name = "txbDisease";
-            this.txbDisease.Properties.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
-            this.txbDisease.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txbDisease.Properties.Appearance.Options.UseFont = true;
-            this.txbDisease.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F);
-            this.txbDisease.Properties.AppearanceDropDown.ForeColor = System.Drawing.Color.Black;
-            this.txbDisease.Properties.AppearanceDropDown.Options.UseFont = true;
-            this.txbDisease.Properties.AppearanceDropDown.Options.UseForeColor = true;
-            this.txbDisease.Properties.AutoHeightMode = DevExpress.XtraEditors.TokenEditAutoHeightMode.RestrictedExpand;
-            this.txbDisease.Properties.DropDownRowCount = 12;
-            this.txbDisease.Properties.EditMode = DevExpress.XtraEditors.TokenEditMode.TokenList;
-            this.txbDisease.Properties.Separators.AddRange(new string[] {
-            ","});
-            this.txbDisease.Properties.TokenGlyphLocation = DevExpress.XtraEditors.TokenEditGlyphLocation.Right;
-            this.txbDisease.Size = new System.Drawing.Size(471, 28);
-            this.txbDisease.StyleController = this.layoutControl1;
-            this.txbDisease.TabIndex = 5;
-            // 
-            // radioType
-            // 
-            this.radioType.Location = new System.Drawing.Point(12, 106);
-            this.radioType.Name = "radioType";
-            this.radioType.Properties.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
-            this.radioType.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.radioType.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioType.Properties.Appearance.Options.UseBackColor = true;
-            this.radioType.Properties.Appearance.Options.UseFont = true;
-            this.radioType.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.radioType.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(((short)(1)), "<font=\"Segoe UI\">Loại I<font>/一級"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(((short)(2)), "<font=\"Segoe UI\">Loại II<font>/二級"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(((short)(3)), "<font=\"Segoe UI\">Loại III<font>/三級")});
-            this.radioType.Size = new System.Drawing.Size(471, 36);
-            this.radioType.StyleController = this.layoutControl1;
-            this.radioType.TabIndex = 4;
-            // 
-            // Root
-            // 
-            this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
-            this.Root.GroupBordersVisible = false;
-            this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem1,
-            this.lcItem14,
-            this.layoutControlItem2});
-            this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(495, 303);
-            this.Root.TextVisible = false;
-            // 
-            // layoutControlItem1
-            // 
-            this.layoutControlItem1.AllowHtmlStringInCaption = true;
-            this.layoutControlItem1.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.layoutControlItem1.AppearanceItemCaption.Options.UseFont = true;
-            this.layoutControlItem1.Control = this.txbDisease;
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 135);
-            this.layoutControlItem1.MinSize = new System.Drawing.Size(100, 66);
-            this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(475, 148);
-            this.layoutControlItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.layoutControlItem1.Text = "<font=\"Segoe UI\">Bệnh<font>/疾病<color=red>*</color>";
-            this.layoutControlItem1.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
-            this.layoutControlItem1.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(96, 25);
-            this.layoutControlItem1.TextToControlDistance = 5;
-            // 
-            // lcItem14
-            // 
-            this.lcItem14.AllowHtmlStringInCaption = true;
-            this.lcItem14.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.lcItem14.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
-            this.lcItem14.AppearanceItemCaption.Options.UseFont = true;
-            this.lcItem14.AppearanceItemCaption.Options.UseForeColor = true;
-            this.lcItem14.Control = this.radioType;
-            this.lcItem14.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
-            this.lcItem14.CustomizationFormText = "Bệnh về tuần hoàn<color=red>*</color><br>循環系統相關疾病";
-            this.lcItem14.Location = new System.Drawing.Point(0, 64);
-            this.lcItem14.MaxSize = new System.Drawing.Size(0, 71);
-            this.lcItem14.MinSize = new System.Drawing.Size(202, 71);
-            this.lcItem14.Name = "lcItem14";
-            this.lcItem14.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 3, 3);
-            this.lcItem14.Size = new System.Drawing.Size(475, 71);
-            this.lcItem14.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.lcItem14.Text = "<font=\"Segoe UI\">Sức khỏe loại<font>/健康類型<color=red>*</color>";
-            this.lcItem14.TextLocation = DevExpress.Utils.Locations.Top;
-            this.lcItem14.TextSize = new System.Drawing.Size(203, 25);
-            // 
             // txbUser
             // 
             this.txbUser.EditValue = "";
-            this.txbUser.Location = new System.Drawing.Point(12, 40);
+            this.txbUser.Location = new System.Drawing.Point(12, 41);
             this.txbUser.Name = "txbUser";
             this.txbUser.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txbUser.Properties.Appearance.Options.UseFont = true;
@@ -350,17 +260,108 @@
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 3;
             // 
+            // txbDisease
+            // 
+            this.txbDisease.Location = new System.Drawing.Point(12, 178);
+            this.txbDisease.MenuManager = this.barManagerTP;
+            this.txbDisease.Name = "txbDisease";
+            this.txbDisease.Properties.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
+            this.txbDisease.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbDisease.Properties.Appearance.Options.UseFont = true;
+            this.txbDisease.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F);
+            this.txbDisease.Properties.AppearanceDropDown.ForeColor = System.Drawing.Color.Black;
+            this.txbDisease.Properties.AppearanceDropDown.Options.UseFont = true;
+            this.txbDisease.Properties.AppearanceDropDown.Options.UseForeColor = true;
+            this.txbDisease.Properties.AutoHeightMode = DevExpress.XtraEditors.TokenEditAutoHeightMode.RestrictedExpand;
+            this.txbDisease.Properties.DropDownRowCount = 12;
+            this.txbDisease.Properties.EditMode = DevExpress.XtraEditors.TokenEditMode.TokenList;
+            this.txbDisease.Properties.Separators.AddRange(new string[] {
+            ","});
+            this.txbDisease.Properties.TokenGlyphLocation = DevExpress.XtraEditors.TokenEditGlyphLocation.Right;
+            this.txbDisease.Size = new System.Drawing.Size(471, 28);
+            this.txbDisease.StyleController = this.layoutControl1;
+            this.txbDisease.TabIndex = 5;
+            // 
+            // radioType
+            // 
+            this.radioType.Location = new System.Drawing.Point(12, 107);
+            this.radioType.Name = "radioType";
+            this.radioType.Properties.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
+            this.radioType.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.radioType.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioType.Properties.Appearance.Options.UseBackColor = true;
+            this.radioType.Properties.Appearance.Options.UseFont = true;
+            this.radioType.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.radioType.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(((short)(1)), "<font=\"Segoe UI\">Loại I<font>/一級"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(((short)(2)), "<font=\"Segoe UI\">Loại II<font>/二級"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(((short)(3)), "<font=\"Segoe UI\">Loại III<font>/三級")});
+            this.radioType.Size = new System.Drawing.Size(471, 36);
+            this.radioType.StyleController = this.layoutControl1;
+            this.radioType.TabIndex = 4;
+            // 
+            // Root
+            // 
+            this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            this.Root.GroupBordersVisible = false;
+            this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem1,
+            this.lcItem14,
+            this.layoutControlItem2});
+            this.Root.Name = "Root";
+            this.Root.Size = new System.Drawing.Size(495, 303);
+            this.Root.TextVisible = false;
+            // 
+            // layoutControlItem1
+            // 
+            this.layoutControlItem1.AllowHtmlStringInCaption = true;
+            this.layoutControlItem1.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.layoutControlItem1.AppearanceItemCaption.Options.UseFont = true;
+            this.layoutControlItem1.Control = this.txbDisease;
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 136);
+            this.layoutControlItem1.MinSize = new System.Drawing.Size(100, 66);
+            this.layoutControlItem1.Name = "layoutControlItem1";
+            this.layoutControlItem1.Size = new System.Drawing.Size(475, 147);
+            this.layoutControlItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem1.Text = "<font=\"Segoe UI\">Bệnh<font>/疾病";
+            this.layoutControlItem1.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
+            this.layoutControlItem1.TextLocation = DevExpress.Utils.Locations.Top;
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(88, 25);
+            this.layoutControlItem1.TextToControlDistance = 5;
+            // 
+            // lcItem14
+            // 
+            this.lcItem14.AllowHtmlStringInCaption = true;
+            this.lcItem14.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lcItem14.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.lcItem14.AppearanceItemCaption.Options.UseFont = true;
+            this.lcItem14.AppearanceItemCaption.Options.UseForeColor = true;
+            this.lcItem14.Control = this.radioType;
+            this.lcItem14.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.lcItem14.CustomizationFormText = "Bệnh về tuần hoàn<color=red>*</color><br>循環系統相關疾病";
+            this.lcItem14.Location = new System.Drawing.Point(0, 65);
+            this.lcItem14.MaxSize = new System.Drawing.Size(0, 71);
+            this.lcItem14.MinSize = new System.Drawing.Size(202, 71);
+            this.lcItem14.Name = "lcItem14";
+            this.lcItem14.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 3, 3);
+            this.lcItem14.Size = new System.Drawing.Size(475, 71);
+            this.lcItem14.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.lcItem14.Text = "<font=\"Segoe UI\">Sức khỏe loại<font>/健康類型<color=red>*</color>";
+            this.lcItem14.TextLocation = DevExpress.Utils.Locations.Top;
+            this.lcItem14.TextSize = new System.Drawing.Size(203, 25);
+            // 
             // layoutControlItem2
             // 
+            this.layoutControlItem2.AllowHtmlStringInCaption = true;
             this.layoutControlItem2.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.layoutControlItem2.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem2.Control = this.txbUser;
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(475, 64);
-            this.layoutControlItem2.Text = "人員";
+            this.layoutControlItem2.Size = new System.Drawing.Size(475, 65);
+            this.layoutControlItem2.Text = "<font=\"Segoe UI\">Nhân viên<font>/人員姓名<color=red>*</color>";
             this.layoutControlItem2.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(203, 24);
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(203, 25);
             // 
             // f308_CheckData
             // 
@@ -381,13 +382,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txbUser.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDisease.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radioType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcItem14)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbUser.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
