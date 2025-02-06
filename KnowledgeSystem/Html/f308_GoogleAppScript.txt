@@ -1,0 +1,34 @@
+﻿function createDynamicHealthForm() {
+  // 📍 Tạo Google Form mới và thêm mô tả
+  var form = FormApp.create('{{formname}}');
+  form.setDescription('Khảo sát này nhằm thu thập thông tin về sức khỏe của bạn. Vui lòng trả lời các câu hỏi sau để giúp chúng tôi hiểu rõ hơn về tình trạng sức khỏe của bạn.');
+
+  // 📍 Tắt tính năng "Gửi cho tôi bản sao câu trả lời của tôi"
+  form.setConfirmationMessage("Cảm ơn bạn đã hoàn thành khảo sát\n感謝您完成問卷調查");
+
+  // 📍 Thiết lập xác thực cho mã nhân viên: yêu cầu 10 chữ số
+  const textItem = form.addTextItem().setTitle('Nhập mã nhân viên của bạn\n輸入您的員工代碼').setRequired(true)
+  const textValidation = FormApp.createTextValidation().setHelpText('Nhập mã nhân viên gồm 10 ký tự bắt đầu bằng VNW/輸入以VNW開頭的10位員工代碼').requireTextContainsPattern('^[vV][nN][wW][0-9]{7}$').build();
+  textItem.setValidation(textValidation);
+
+  form.addTextItem().setTitle('Nhập mã họ tên của bạn\n輸入您的姓名').setRequired(true)
+
+  // 📍 Thiết lập lựa chọn bệnh thông thường
+  var checkboxDiseases1 = form.addCheckboxItem();
+  {{diseases1}}
+
+  // 📍 Thiết lập lựa chọn bệnh mãn tính
+  var checkboxDiseases2 = form.addCheckboxItem();
+  {{diseases2}}
+
+  // 📍 Thiết lập lựa chọn bệnh nghề nghiệp
+  var checkboxDiseases3 = form.addCheckboxItem();
+  {{diseases3}}
+
+  form.addMultipleChoiceItem().setTitle('Bạn đạt sức khỏe loại nào?\n您的健康屬於哪一類？').setChoiceValues(['I', 'II', 'III', 'IV', 'V']).setRequired(true);
+
+  // 👉 In URL để dễ copy
+  var formUrl = form.getPublishedUrl();
+  console.log('Copy link dưới đây để làm khảo sát cho: {{formname}}');
+  console.log(formUrl); // Để in URL form cho bạn chia sẻ
+}

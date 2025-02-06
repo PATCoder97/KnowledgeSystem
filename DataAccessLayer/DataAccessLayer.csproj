@@ -272,6 +272,15 @@
     <Compile Include="dt307_Questions.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
+    <Compile Include="dt308_CheckDetail.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dt308_CheckSession.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dt308_Disease.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
     <Compile Include="dt402_KPIWeb.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>

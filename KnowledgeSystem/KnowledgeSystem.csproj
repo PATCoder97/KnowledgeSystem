@@ -1369,6 +1369,9 @@
     <Content Include="Html\f301_NotifyPersonnelTransfer.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Html\f308_GoogleAppScript.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Actions_Forbid.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
