@@ -98,8 +98,8 @@ namespace DataAccessLayer
         public virtual DbSet<dm_Sign> dm_Sign { get; set; }
         public virtual DbSet<dt204_OldVersion> dt204_OldVersion { get; set; }
         public virtual DbSet<dm_Watermark> dm_Watermark { get; set; }
-        public virtual DbSet<dt308_CheckDetail> dt308_CheckDetail { get; set; }
         public virtual DbSet<dt308_CheckSession> dt308_CheckSession { get; set; }
         public virtual DbSet<dt308_Disease> dt308_Disease { get; set; }
+        public virtual DbSet<dt308_CheckDetail> dt308_CheckDetail { get; set; }
     }
 }

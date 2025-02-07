@@ -748,7 +748,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SessionId" Type="int" Nullable="false" />
-          <Property Name="EmpId" Type="int" Nullable="false" />
+          <Property Name="EmpId" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="HealthRating" Type="int" Nullable="false" />
           <Property Name="Disease1" Type="nvarchar" MaxLength="64" />
           <Property Name="Disease2" Type="nvarchar" MaxLength="64" />
@@ -986,9 +986,9 @@
           <EntitySet Name="dm_Sign" EntityType="DBDocumentManagementSystemModel.dm_Sign" />
           <EntitySet Name="dt204_OldVersion" EntityType="DBDocumentManagementSystemModel.dt204_OldVersion" />
           <EntitySet Name="dm_Watermark" EntityType="DBDocumentManagementSystemModel.dm_Watermark" />
-          <EntitySet Name="dt308_CheckDetail" EntityType="DBDocumentManagementSystemModel.dt308_CheckDetail" />
           <EntitySet Name="dt308_CheckSession" EntityType="DBDocumentManagementSystemModel.dt308_CheckSession" />
           <EntitySet Name="dt308_Disease" EntityType="DBDocumentManagementSystemModel.dt308_Disease" />
+          <EntitySet Name="dt308_CheckDetail" EntityType="DBDocumentManagementSystemModel.dt308_CheckDetail" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -1784,18 +1784,6 @@
           <Property Name="VertDistance" Type="Int32" />
           <Property Name="HoriDistance" Type="Int32" />
         </EntityType>
-        <EntityType Name="dt308_CheckDetail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SessionId" Type="Int32" Nullable="false" />
-          <Property Name="EmpId" Type="Int32" Nullable="false" />
-          <Property Name="HealthRating" Type="Int32" Nullable="false" />
-          <Property Name="Disease1" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="Disease2" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="Disease3" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="dt308_CheckSession">
           <Key>
             <PropertyRef Name="Id" />
@@ -1814,6 +1802,18 @@
           <Property Name="DisplayNameVN" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="DisplayNameTW" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="DiseaseType" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt308_CheckDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SessionId" Type="Int32" Nullable="false" />
+          <Property Name="EmpId" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="HealthRating" Type="Int32" Nullable="false" />
+          <Property Name="Disease1" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Disease2" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Disease3" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2688,19 +2688,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dt308_CheckDetail">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt308_CheckDetail">
-              <MappingFragment StoreEntitySet="dt308_CheckDetail">
-                <ScalarProperty Name="Disease3" ColumnName="Disease3" />
-                <ScalarProperty Name="Disease2" ColumnName="Disease2" />
-                <ScalarProperty Name="Disease1" ColumnName="Disease1" />
-                <ScalarProperty Name="HealthRating" ColumnName="HealthRating" />
-                <ScalarProperty Name="EmpId" ColumnName="EmpId" />
-                <ScalarProperty Name="SessionId" ColumnName="SessionId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="dt308_CheckSession">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt308_CheckSession">
               <MappingFragment StoreEntitySet="dt308_CheckSession">
@@ -2718,6 +2705,19 @@
                 <ScalarProperty Name="DiseaseType" ColumnName="DiseaseType" />
                 <ScalarProperty Name="DisplayNameTW" ColumnName="DisplayNameTW" />
                 <ScalarProperty Name="DisplayNameVN" ColumnName="DisplayNameVN" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt308_CheckDetail">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt308_CheckDetail">
+              <MappingFragment StoreEntitySet="dt308_CheckDetail">
+                <ScalarProperty Name="Disease3" ColumnName="Disease3" />
+                <ScalarProperty Name="Disease2" ColumnName="Disease2" />
+                <ScalarProperty Name="Disease1" ColumnName="Disease1" />
+                <ScalarProperty Name="HealthRating" ColumnName="HealthRating" />
+                <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+                <ScalarProperty Name="SessionId" ColumnName="SessionId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

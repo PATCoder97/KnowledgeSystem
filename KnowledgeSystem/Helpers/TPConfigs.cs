@@ -22,6 +22,7 @@ namespace KnowledgeSystem.Helpers
         public static string ImagesPath = Path.Combine(StartupPath, "Images");
         public static string HtmlPath = Path.Combine(StartupPath, "Html");
         public static string TempFolderData = Path.Combine(Path.GetTempPath(), "TPTempData");
+        public static string idDept2word = "";
 
         // Static Value SQL
         public static string SoftNameEN { get; set; }

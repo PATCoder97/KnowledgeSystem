@@ -56,7 +56,7 @@ namespace BusinessLayer
             }
         }
 
-        public bool Add(dt308_CheckSession item)
+        public int Add(dt308_CheckSession item)
         {
             try
             {
@@ -64,13 +64,18 @@ namespace BusinessLayer
                 {
                     _context.dt308_CheckSession.Add(item);
                     int affectedRecords = _context.SaveChanges();
-                    return affectedRecords > 0;
+                    if (affectedRecords > 0)
+                    {
+                        return item.Id;
+                    }
+
+                    return -1;
                 }
             }
             catch (Exception ex)
             {
                 logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
-                return false;
+                return -1;
             }
         }
 

@@ -16,7 +16,7 @@ namespace DataAccessLayer
     {
         public int Id { get; set; }
         public int SessionId { get; set; }
-        public int EmpId { get; set; }
+        public string EmpId { get; set; }
         public int HealthRating { get; set; }
         public string Disease1 { get; set; }
         public string Disease2 { get; set; }

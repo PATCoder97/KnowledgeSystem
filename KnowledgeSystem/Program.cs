@@ -101,6 +101,7 @@ namespace KnowledgeSystem
 #endif
 
                 TPConfigs.LoginUser = dm_UserBUS.Instance.GetItemById(idUsr);
+                TPConfigs.idDept2word = TPConfigs.LoginUser.IdDepartment.Substring(0, 2);
 
                 bool isDeny = !AppPermission.Instance.CheckAppPermission(permCtrl);
 
@@ -119,11 +120,12 @@ namespace KnowledgeSystem
             {
 #if DEBUG
                 TPConfigs.LoginUser = dm_UserBUS.Instance.GetItemById("VNW0014732");
+                TPConfigs.idDept2word = TPConfigs.LoginUser.IdDepartment.Substring(0, 2);
                 AppPermission.Instance.CheckAppPermission(7);
                 TPConfigs.IdParentControl = AppPermission.SafetyCertMain;
 
-                //Application.Run(new f00_FluentFrame(21));
-                Application.Run(new f308_CheckData());
+                Application.Run(new f00_FluentFrame(21));
+                //Application.Run(new f308_CheckData());
 #else
                 Application.Run(new f00_Main());
 #endif

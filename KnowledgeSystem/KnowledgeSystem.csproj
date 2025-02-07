@@ -584,6 +584,18 @@
     <Compile Include="Views\03_DepartmentManage\08_HealthCheck\f308_CheckData.Designer.cs">
       <DependentUpon>f308_CheckData.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\03_DepartmentManage\08_HealthCheck\f308_CheckSession_Info.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\08_HealthCheck\f308_CheckSession_Info.Designer.cs">
+      <DependentUpon>f308_CheckSession_Info.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\08_HealthCheck\f308_UserData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\08_HealthCheck\f308_UserData.Designer.cs">
+      <DependentUpon>f308_UserData.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\03_DepartmentManage\08_HealthCheck\uc308_HealthCheckMain.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1146,6 +1158,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\08_HealthCheck\f308_CheckData.resx">
       <DependentUpon>f308_CheckData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\08_HealthCheck\f308_CheckSession_Info.resx">
+      <DependentUpon>f308_CheckSession_Info.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\08_HealthCheck\f308_UserData.resx">
+      <DependentUpon>f308_UserData.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\08_HealthCheck\uc308_HealthCheckMain.resx">
       <DependentUpon>uc308_HealthCheckMain.cs</DependentUpon>
