@@ -2,13 +2,18 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Media.Animation;
 using BusinessLayer;
 using DataAccessLayer;
+using DevExpress.Utils.Menu;
+using DevExpress.Utils.Svg;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
@@ -26,6 +31,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
         {
             InitializeComponent();
             InitializeIcon();
+            InitializeMenuItems();
 
             helper = new RefreshHelper(gvData, "Id");
 
@@ -46,11 +52,16 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
 
         Dictionary<string, string> DiseaseType = new Dictionary<string, string>()
         {
-            { "1", "Thong thuowng" },
-            { "2", "man tinh" },
-            { "3", "nghe nghiep" }
+            { "1", "Bệnh thông thường\r\n一般疾病" },
+            { "2", "Bệnh mãn tính\r\n慢性病" },
+            { "3", "Bệnh nghề nghiệp\r\n得職業病" }
         };
 
+        DXMenuItem itemViewInfo;
+        DXMenuItem itemCreateScript;
+        DXMenuItem itemGetFile;
+        DXMenuItem itemPauseNotify;
+        DXMenuItem itemViewHistory;
 
         private void InitializeIcon()
         {
@@ -61,24 +72,93 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
 
         private void CreateRuleGV()
         {
-            //var rule = new GridFormatRule
-            //{
-            //    ApplyToRow = true,
-            //    Name = "RuleNotify",
-            //    Rule = new FormatConditionRuleExpression
-            //    {
-            //        Expression = "AddMonths(Today(),3) >= AddMonths([data.DeployDate], [data.PeriodNotify] + Iif(IsNullOrEmpty([data.PauseNotify]), 0, [data.PauseNotify]))",
-            //        Appearance =
-            //        {
-            //            BackColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical,
-            //            BackColor2 = Color.White,
-            //            Options = { UseBackColor = true }
-            //        }
-            //    }
-            //};
+            var rule = new GridFormatRule
+            {
+                ApplyToRow = true,
+                Name = "RuleNotify",
+                Rule = new FormatConditionRuleExpression
+                {
+                    Expression = "[HealthRating] = -1",
+                    Appearance =
+                    {
+                        BackColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical,
+                        BackColor2 = Color.White,
+                        Options = { UseBackColor = true }
+                    }
+                }
+            };
 
-            //// Thêm quy tắc vào GridView
-            //gvData.FormatRules.Add(rule);
+            // Thêm quy tắc vào GridView
+            gvSession.FormatRules.Add(rule);
+        }
+
+        DXMenuItem CreateMenuItem(string caption, EventHandler clickEvent, SvgImage svgImage)
+        {
+            var menuItem = new DXMenuItem(caption, clickEvent, svgImage, DXMenuItemPriority.Normal);
+            SetMenuItemProperties(menuItem);
+            return menuItem;
+        }
+
+        void SetMenuItemProperties(DXMenuItem menuItem)
+        {
+            menuItem.ImageOptions.SvgImageSize = new System.Drawing.Size(24, 24);
+            menuItem.AppearanceHovered.ForeColor = Color.Blue;
+        }
+
+        private void InitializeMenuItems()
+        {
+            itemViewInfo = CreateMenuItem("查看資訊", ItemViewInfo_Click, TPSvgimages.View);
+            itemCreateScript = CreateMenuItem("導出GoogleForm", ItemCreateScript_Click, TPSvgimages.EmailSend);
+            //itemGetFile = CreateMenuItem("下載檔案", ItemGetFile_Click, TPSvgimages.Attach);
+            //itemPauseNotify = CreateMenuItem("暫停通知", ItemPauseNotify_Click, TPSvgimages.Suspension);
+            //itemViewHistory = CreateMenuItem("版本歷史", ItemViewHistory_Click, TPSvgimages.Progress);
+        }
+
+        private void ItemCreateScript_Click(object sender, EventArgs e)
+        {
+            GridView view = gvData;
+            dt308_CheckSession session = view.GetRow(view.FocusedRowHandle) as dt308_CheckSession;
+
+            var diseaseTitles = new List<Tuple<string, string>>
+            {
+                Tuple.Create("Bạn mắc các bệnh thông thường nào sau đây nào sau đây?", "您患有以下哪些一般疾病？"),
+                Tuple.Create("Bạn mắc các bệnh mãn tính nào sau đây nào sau đây?", "您患有以下哪些慢性疾病？"),
+                Tuple.Create("Bạn mắc các bệnh nghề nghiệp nào sau đây nào sau đây?", "您患有以下哪些得職業病？")
+            };
+
+            string sourceScript = File.ReadAllText(Path.Combine(TPConfigs.HtmlPath, "f308_GoogleAppScript.txt"));
+            var scriptGoogleForm = sourceScript.Replace("{{formname}}", $"{session.DisplayNameVN}/{session.DisplayNameTW}");
+
+            for (int i = 0; i < diseaseTitles.Count; i++)
+            {
+                string checkboxName = $"checkboxDiseases{i + 1}";
+                string diseasesCode = string.Join(",", dt308Diseases
+                    .Where(r => r.DiseaseType == i + 1)
+                    .Select(r => $"{checkboxName}.createChoice('({r.Id:D2}) {r.DisplayNameVN}/{r.DisplayNameTW}')")
+                    .ToList());
+
+                scriptGoogleForm = scriptGoogleForm.Replace($"{{{{diseases{i + 1}}}}}", $"{checkboxName}.setTitle('{diseaseTitles[i].Item1}\\n{diseaseTitles[i].Item2}').setChoices([{diseasesCode}]);");
+            }
+
+            Clipboard.SetText(scriptGoogleForm);
+            MessageBox.Show("ok");
+
+            Process.Start("https://script.google.com/");
+        }
+
+        private void ItemViewInfo_Click(object sender, EventArgs e)
+        {
+            GridView view = gvData;
+            int idSession = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColIdSession));
+            f308_CheckSession_Info fAdd = new f308_CheckSession_Info()
+            {
+                eventInfo = EventFormInfo.View,
+                formName = "健康檢查",
+                idSession = idSession
+            };
+            fAdd.ShowDialog();
+
+            LoadData();
         }
 
         private void LoadData()
@@ -97,6 +177,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                 gvData.CollapseAllDetails();
 
                 gvData.FocusedRowHandle = GridControl.AutoFilterRowHandle;
+
+                users = dm_UserBUS.Instance.GetList();
             }
         }
 
@@ -117,9 +199,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
 
             gvData.ReadOnlyGridView();
             gvData.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
-            //gvData.OptionsDetail.AllowOnlyOneMasterRowExpanded = true;
+            gvData.OptionsDetail.AllowOnlyOneMasterRowExpanded = true;
             gvSession.ReadOnlyGridView();
             gvSession.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
+            gvSession.OptionsDetail.AllowOnlyOneMasterRowExpanded = true;
             gvDetail.ReadOnlyGridView();
             gvDetail.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
 
@@ -154,10 +237,28 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
         {
             GridView view = sender as GridView;
             int idSession = Convert.ToInt32(view.GetRowCellValue(e.RowHandle, gColIdSession));
-            e.ChildList = dt308CheckDetail.Where(r => r.SessionId == idSession).ToList();
+            e.ChildList = dt308CheckDetail
+                .Where(r => r.SessionId == idSession)
+                .Select(r =>
+                {
+                    var user = users.FirstOrDefault(u => u.Id == r.EmpId);
+                    return new
+                    {
+                        r.SessionId,
+                        r.Id,
+                        r.EmpId,
+                        r.HealthRating,
+                        r.Disease1,
+                        r.Disease2,
+                        r.Disease3,
+                        EmpName = user != null ? $"LG{user.IdDepartment} {user.Id} {user.DisplayName} {user.DisplayNameVN}" : "Unknown"
+                    };
+                })
+                .ToList();
+
         }
 
-        private void gvData_MasterRowExpanded(object sender, CustomMasterRowEventArgs e)
+        private void gv_MasterRowExpanded(object sender, CustomMasterRowEventArgs e)
         {
             GridView masterView = sender as GridView;
             int visibleDetailRelationIndex = masterView.GetVisibleDetailRelationIndex(e.RowHandle);
@@ -197,7 +298,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
             var disease = disease1.Concat(disease2).Concat(disease3).ToList();
 
 
-            e.ChildList = dt308Diseases.Where(r => disease.Contains(r.Id.ToString())).Select(r=>new
+            e.ChildList = dt308Diseases.Where(r => disease.Contains(r.Id.ToString())).Select(r => new
             {
                 r.Id,
                 r.DisplayNameVN,
@@ -207,6 +308,24 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
             }).ToList();
         }
 
+        private void btnReload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            LoadData();
+        }
 
+        private void gvData_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+        {
+            if (e.HitInfo.InRowCell && e.HitInfo.InDataRow)
+            {
+                //itemGetFile.Tag = "gvData";
+
+                e.Menu.Items.Add(itemViewInfo);
+                e.Menu.Items.Add(itemCreateScript);
+                //    e.Menu.Items.Add(itemGetFile);
+                //    itemPauseNotify.BeginGroup = true;
+                //    e.Menu.Items.Add(itemPauseNotify);
+                //    e.Menu.Items.Add(itemViewHistory);
+            }
+        }
     }
 }

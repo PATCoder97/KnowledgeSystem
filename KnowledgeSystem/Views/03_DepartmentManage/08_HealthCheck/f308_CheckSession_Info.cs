@@ -141,16 +141,23 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
             {
                 case EventFormInfo.Create:
 
-                    sourceUser.DataSource = usrs;
-                    gvData.BestFitColumns();
-                    gvData.RefreshData();
-
                     dt308CheckSession = new dt308_CheckSession();
 
                     break;
                 case EventFormInfo.View:
 
-                    //dt204Base = dt204_InternalDocMgmtBUS.Instance.GetItemById(idBase);
+                    dt308CheckSession = dt308_CheckSessionBUS.Instance.GetItemById(idSession);
+
+                    txbNameTW.EditValue = dt308CheckSession.DisplayNameTW;
+                    txbNameVN.EditValue = dt308CheckSession.DisplayNameVN;
+                    cbbCheckType.EditValue = dt308CheckSession.CheckType;
+
+                    usrs = dm_UserBUS.Instance.GetList();
+                    var details = dt308_CheckDetailBUS.Instance.GetListByIdSession(idSession);
+
+                    usrs = usrs.Where(u => details.Select(d => d.EmpId).Contains(u.Id)).ToList();
+
+
 
                     //cbbDocCatorary.EditValue = dt204Base.IdDocCatorary;
                     //cbbFuncCatorary.EditValue = dt204Base.IdFuncCatorary;
@@ -200,6 +207,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                     break;
             }
 
+            sourceUser.DataSource = usrs;
+            gvData.BestFitColumns();
+            gvData.RefreshData();
+
             LockControl();
         }
 
@@ -230,7 +241,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
 
         private void btnEdit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-
+            eventInfo = EventFormInfo.Update;
+            LockControl();
         }
 
         private void btnDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -276,8 +288,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                 {
                     case EventFormInfo.Create:
 
-                        //HandleBaseAttachment();
-
                         int idDt204Base = dt308_CheckSessionBUS.Instance.Add(dt308CheckSession);
                         result = idDt204Base != -1;
 
@@ -298,7 +308,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                         //    HandleBaseAttachment();
                         //}
 
-                        //result = dt204_InternalDocMgmtBUS.Instance.AddOrUpdate(dt204Base);
+                        result = dt308_CheckSessionBUS.Instance.AddOrUpdate(dt308CheckSession);
 
                         //Handle204Form(dt204Base.Id);
                         //HandleDocsRelated(dt204Base.Id);

@@ -40,6 +40,22 @@ namespace BusinessLayer
             }
         }
 
+        public List<dt308_CheckDetail> GetListByIdSession(int isSession)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt308_CheckDetail.Where(r => r.SessionId == isSession).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public dt308_CheckDetail GetItemById(int id)
         {
             try

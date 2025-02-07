@@ -46,7 +46,11 @@
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemMemoEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit();
             this.gvDetail = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnAdd = new DevExpress.XtraBars.BarButtonItem();
@@ -71,6 +75,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvSession)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemMemoEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
@@ -81,6 +86,16 @@
             // 
             // gvSession
             // 
+            this.gvSession.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvSession.Appearance.HeaderPanel.ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Question;
+            this.gvSession.Appearance.HeaderPanel.Options.UseFont = true;
+            this.gvSession.Appearance.HeaderPanel.Options.UseForeColor = true;
+            this.gvSession.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            this.gvSession.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gvSession.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvSession.Appearance.Row.ForeColor = System.Drawing.Color.Black;
+            this.gvSession.Appearance.Row.Options.UseFont = true;
+            this.gvSession.Appearance.Row.Options.UseForeColor = true;
             this.gvSession.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gColIdDetail,
             this.gridColumn5,
@@ -90,7 +105,13 @@
             this.gridColumn9});
             this.gvSession.GridControl = this.gcData;
             this.gvSession.Name = "gvSession";
+            this.gvSession.OptionsDetail.ShowDetailTabs = false;
+            this.gvSession.OptionsView.ColumnAutoWidth = false;
+            this.gvSession.OptionsView.EnableAppearanceOddRow = true;
+            this.gvSession.OptionsView.ShowAutoFilterRow = true;
+            this.gvSession.OptionsView.ShowGroupPanel = false;
             this.gvSession.MasterRowEmpty += new DevExpress.XtraGrid.Views.Grid.MasterRowEmptyEventHandler(this.gvSession_MasterRowEmpty);
+            this.gvSession.MasterRowExpanded += new DevExpress.XtraGrid.Views.Grid.CustomMasterRowEventHandler(this.gv_MasterRowExpanded);
             this.gvSession.MasterRowGetChildList += new DevExpress.XtraGrid.Views.Grid.MasterRowGetChildListEventHandler(this.gvSession_MasterRowGetChildList);
             this.gvSession.MasterRowGetRelationName += new DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationNameEventHandler(this.gvSession_MasterRowGetRelationName);
             this.gvSession.MasterRowGetRelationCount += new DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationCountEventHandler(this.gvSession_MasterRowGetRelationCount);
@@ -100,48 +121,42 @@
             this.gColIdDetail.Caption = "Id";
             this.gColIdDetail.FieldName = "Id";
             this.gColIdDetail.Name = "gColIdDetail";
-            this.gColIdDetail.Visible = true;
-            this.gColIdDetail.VisibleIndex = 0;
             // 
             // gridColumn5
             // 
             this.gridColumn5.Caption = "人員姓名";
-            this.gridColumn5.FieldName = "EmpId";
+            this.gridColumn5.FieldName = "EmpName";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 1;
+            this.gridColumn5.VisibleIndex = 0;
             // 
             // gridColumn6
             // 
-            this.gridColumn6.Caption = "gridColumn6";
+            this.gridColumn6.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn6.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn6.Caption = "健康評級";
             this.gridColumn6.FieldName = "HealthRating";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 2;
+            this.gridColumn6.VisibleIndex = 1;
             // 
             // gridColumn7
             // 
-            this.gridColumn7.Caption = "gridColumn7";
+            this.gridColumn7.Caption = "一般疾病";
             this.gridColumn7.FieldName = "Disease1";
             this.gridColumn7.Name = "gridColumn7";
-            this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 3;
             // 
             // gridColumn8
             // 
-            this.gridColumn8.Caption = "gridColumn8";
+            this.gridColumn8.Caption = "慢性病";
             this.gridColumn8.FieldName = "Disease2";
             this.gridColumn8.Name = "gridColumn8";
-            this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 4;
             // 
             // gridColumn9
             // 
-            this.gridColumn9.Caption = "gridColumn9";
+            this.gridColumn9.Caption = "得職業病";
             this.gridColumn9.FieldName = "Disease3";
             this.gridColumn9.Name = "gridColumn9";
-            this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 5;
             // 
             // gcData
             // 
@@ -161,8 +176,11 @@
             this.gcData.Location = new System.Drawing.Point(12, 12);
             this.gcData.MainView = this.gvData;
             this.gcData.Name = "gcData";
+            this.gcData.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemMemoEdit1});
             this.gcData.Size = new System.Drawing.Size(815, 500);
             this.gcData.TabIndex = 4;
+            this.gcData.UseEmbeddedNavigator = true;
             this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvData,
             this.gvDetail,
@@ -197,13 +215,13 @@
             this.gvData.OptionsView.ColumnAutoWidth = false;
             this.gvData.OptionsView.EnableAppearanceOddRow = true;
             this.gvData.OptionsView.ShowAutoFilterRow = true;
-            this.gvData.OptionsView.ShowFooter = true;
             this.gvData.OptionsView.ShowGroupPanel = false;
             this.gvData.MasterRowEmpty += new DevExpress.XtraGrid.Views.Grid.MasterRowEmptyEventHandler(this.gvData_MasterRowEmpty);
-            this.gvData.MasterRowExpanded += new DevExpress.XtraGrid.Views.Grid.CustomMasterRowEventHandler(this.gvData_MasterRowExpanded);
+            this.gvData.MasterRowExpanded += new DevExpress.XtraGrid.Views.Grid.CustomMasterRowEventHandler(this.gv_MasterRowExpanded);
             this.gvData.MasterRowGetChildList += new DevExpress.XtraGrid.Views.Grid.MasterRowGetChildListEventHandler(this.gvData_MasterRowGetChildList);
             this.gvData.MasterRowGetRelationName += new DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationNameEventHandler(this.gvData_MasterRowGetRelationName);
             this.gvData.MasterRowGetRelationCount += new DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationCountEventHandler(this.gvData_MasterRowGetRelationCount);
+            this.gvData.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gvData_PopupMenuShowing);
             // 
             // gColIdSession
             // 
@@ -245,10 +263,65 @@
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 3;
             // 
+            // repositoryItemMemoEdit1
+            // 
+            this.repositoryItemMemoEdit1.Name = "repositoryItemMemoEdit1";
+            // 
             // gvDetail
             // 
+            this.gvDetail.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvDetail.Appearance.HeaderPanel.ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Information;
+            this.gvDetail.Appearance.HeaderPanel.Options.UseFont = true;
+            this.gvDetail.Appearance.HeaderPanel.Options.UseForeColor = true;
+            this.gvDetail.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            this.gvDetail.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gvDetail.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvDetail.Appearance.Row.ForeColor = System.Drawing.Color.Black;
+            this.gvDetail.Appearance.Row.Options.UseFont = true;
+            this.gvDetail.Appearance.Row.Options.UseForeColor = true;
+            this.gvDetail.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn10,
+            this.gridColumn11,
+            this.gridColumn12});
             this.gvDetail.GridControl = this.gcData;
             this.gvDetail.Name = "gvDetail";
+            this.gvDetail.OptionsCustomization.AllowGroup = false;
+            this.gvDetail.OptionsCustomization.AllowQuickHideColumns = false;
+            this.gvDetail.OptionsCustomization.AllowSort = false;
+            this.gvDetail.OptionsView.AllowCellMerge = true;
+            this.gvDetail.OptionsView.ColumnAutoWidth = false;
+            this.gvDetail.OptionsView.EnableAppearanceOddRow = true;
+            this.gvDetail.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn10
+            // 
+            this.gridColumn10.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn10.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.gridColumn10.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
+            this.gridColumn10.Caption = "疾病";
+            this.gridColumn10.ColumnEdit = this.repositoryItemMemoEdit1;
+            this.gridColumn10.FieldName = "DiseaseTypeName";
+            this.gridColumn10.Name = "gridColumn10";
+            this.gridColumn10.Visible = true;
+            this.gridColumn10.VisibleIndex = 0;
+            // 
+            // gridColumn11
+            // 
+            this.gridColumn11.Caption = "越文名稱";
+            this.gridColumn11.FieldName = "DisplayNameVN";
+            this.gridColumn11.Name = "gridColumn11";
+            this.gridColumn11.OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.False;
+            this.gridColumn11.Visible = true;
+            this.gridColumn11.VisibleIndex = 1;
+            // 
+            // gridColumn12
+            // 
+            this.gridColumn12.Caption = "中文名稱";
+            this.gridColumn12.FieldName = "DisplayNameTW";
+            this.gridColumn12.Name = "gridColumn12";
+            this.gridColumn12.OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.False;
+            this.gridColumn12.Visible = true;
+            this.gridColumn12.VisibleIndex = 2;
             // 
             // barManagerTP
             // 
@@ -335,6 +408,7 @@
             this.btnReload.ItemAppearance.Normal.Options.UseFont = true;
             this.btnReload.ItemAppearance.Normal.Options.UseForeColor = true;
             this.btnReload.Name = "btnReload";
+            this.btnReload.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnReload_ItemClick);
             // 
             // btnFilter
             // 
@@ -552,6 +626,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvSession)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemMemoEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvDetail)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
@@ -601,5 +676,9 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;
+        private DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit repositoryItemMemoEdit1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
     }
 }
