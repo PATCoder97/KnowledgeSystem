@@ -1438,6 +1438,9 @@
     <Content Include="Images\icons8_time.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\icons8_word.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\icons_add.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

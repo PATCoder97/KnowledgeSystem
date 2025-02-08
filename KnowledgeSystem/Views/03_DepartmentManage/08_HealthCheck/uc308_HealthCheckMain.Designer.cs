@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode3 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode4 = new DevExpress.XtraGrid.GridLevelNode();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc308_HealthCheckMain));
             this.gvSession = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gColIdDetail = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -55,16 +55,7 @@
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnAdd = new DevExpress.XtraBars.BarButtonItem();
             this.btnReload = new DevExpress.XtraBars.BarButtonItem();
-            this.btnFilter = new DevExpress.XtraBars.BarSubItem();
-            this.btnValidCert = new DevExpress.XtraBars.BarButtonItem();
-            this.btnBackCert = new DevExpress.XtraBars.BarButtonItem();
-            this.btnInvalidCert = new DevExpress.XtraBars.BarButtonItem();
-            this.btnWaitCert = new DevExpress.XtraBars.BarButtonItem();
-            this.btnExpCert = new DevExpress.XtraBars.BarButtonItem();
-            this.btnClearFilter = new DevExpress.XtraBars.BarButtonItem();
             this.btnExportExcel = new DevExpress.XtraBars.BarButtonItem();
-            this.btnSpecialFunctions = new DevExpress.XtraBars.BarSubItem();
-            this.btnInvalidateExpCert = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -72,6 +63,7 @@
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.btnSummaryTable = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.gvSession)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
@@ -172,14 +164,14 @@
             this.gcData.EmbeddedNavigator.Buttons.Edit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.EndEdit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.Remove.Visible = false;
-            gridLevelNode1.LevelTemplate = this.gvSession;
-            gridLevelNode2.LevelTemplate = this.gvDetail;
-            gridLevelNode2.RelationName = "CheckDetail";
-            gridLevelNode1.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode2});
-            gridLevelNode1.RelationName = "CheckSession";
+            gridLevelNode3.LevelTemplate = this.gvSession;
+            gridLevelNode4.LevelTemplate = this.gvDetail;
+            gridLevelNode4.RelationName = "CheckDetail";
+            gridLevelNode3.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
+            gridLevelNode4});
+            gridLevelNode3.RelationName = "CheckSession";
             this.gcData.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode1});
+            gridLevelNode3});
             this.gcData.Location = new System.Drawing.Point(12, 12);
             this.gcData.MainView = this.gvData;
             this.gcData.Name = "gcData";
@@ -344,17 +336,9 @@
             this.btnAdd,
             this.btnReload,
             this.btnExportExcel,
-            this.btnFilter,
-            this.btnValidCert,
-            this.btnBackCert,
-            this.btnInvalidCert,
-            this.btnWaitCert,
-            this.btnExpCert,
-            this.btnClearFilter,
-            this.btnSpecialFunctions,
-            this.btnInvalidateExpCert});
+            this.btnSummaryTable});
             this.barManagerTP.MainMenu = this.bar2;
-            this.barManagerTP.MaxItemId = 14;
+            this.barManagerTP.MaxItemId = 15;
             // 
             // bar2
             // 
@@ -380,9 +364,8 @@
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnAdd, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnReload, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnFilter, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnExportExcel, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnSpecialFunctions, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnSummaryTable, true)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawDragBorder = false;
             this.bar2.OptionsBar.MultiLine = true;
@@ -418,104 +401,6 @@
             this.btnReload.Name = "btnReload";
             this.btnReload.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnReload_ItemClick);
             // 
-            // btnFilter
-            // 
-            this.btnFilter.Caption = "篩選";
-            this.btnFilter.Id = 4;
-            this.btnFilter.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnFilter.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
-            this.btnFilter.ItemAppearance.Hovered.Options.UseForeColor = true;
-            this.btnFilter.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.btnFilter.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
-            this.btnFilter.ItemAppearance.Normal.Options.UseFont = true;
-            this.btnFilter.ItemAppearance.Normal.Options.UseForeColor = true;
-            this.btnFilter.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnValidCert),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnBackCert),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnInvalidCert),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnWaitCert),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnExpCert),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnClearFilter)});
-            this.btnFilter.Name = "btnFilter";
-            // 
-            // btnValidCert
-            // 
-            this.btnValidCert.Caption = "應取證照";
-            this.btnValidCert.Id = 5;
-            this.btnValidCert.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnValidCert.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
-            this.btnValidCert.ItemAppearance.Hovered.Options.UseForeColor = true;
-            this.btnValidCert.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.btnValidCert.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
-            this.btnValidCert.ItemAppearance.Normal.Options.UseFont = true;
-            this.btnValidCert.ItemAppearance.Normal.Options.UseForeColor = true;
-            this.btnValidCert.Name = "btnValidCert";
-            // 
-            // btnBackCert
-            // 
-            this.btnBackCert.Caption = "備援證照";
-            this.btnBackCert.Id = 6;
-            this.btnBackCert.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnBackCert.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
-            this.btnBackCert.ItemAppearance.Hovered.Options.UseForeColor = true;
-            this.btnBackCert.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.btnBackCert.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
-            this.btnBackCert.ItemAppearance.Normal.Options.UseFont = true;
-            this.btnBackCert.ItemAppearance.Normal.Options.UseForeColor = true;
-            this.btnBackCert.Name = "btnBackCert";
-            // 
-            // btnInvalidCert
-            // 
-            this.btnInvalidCert.Caption = "無效證照";
-            this.btnInvalidCert.Id = 7;
-            this.btnInvalidCert.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnInvalidCert.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
-            this.btnInvalidCert.ItemAppearance.Hovered.Options.UseForeColor = true;
-            this.btnInvalidCert.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.btnInvalidCert.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
-            this.btnInvalidCert.ItemAppearance.Normal.Options.UseFont = true;
-            this.btnInvalidCert.ItemAppearance.Normal.Options.UseForeColor = true;
-            this.btnInvalidCert.Name = "btnInvalidCert";
-            // 
-            // btnWaitCert
-            // 
-            this.btnWaitCert.Caption = "在等證照";
-            this.btnWaitCert.Id = 8;
-            this.btnWaitCert.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnWaitCert.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
-            this.btnWaitCert.ItemAppearance.Hovered.Options.UseForeColor = true;
-            this.btnWaitCert.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.btnWaitCert.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
-            this.btnWaitCert.ItemAppearance.Normal.Options.UseFont = true;
-            this.btnWaitCert.ItemAppearance.Normal.Options.UseForeColor = true;
-            this.btnWaitCert.Name = "btnWaitCert";
-            // 
-            // btnExpCert
-            // 
-            this.btnExpCert.Caption = "過期證照";
-            this.btnExpCert.Id = 9;
-            this.btnExpCert.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnExpCert.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
-            this.btnExpCert.ItemAppearance.Hovered.Options.UseForeColor = true;
-            this.btnExpCert.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.btnExpCert.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
-            this.btnExpCert.ItemAppearance.Normal.Options.UseFont = true;
-            this.btnExpCert.ItemAppearance.Normal.Options.UseForeColor = true;
-            this.btnExpCert.Name = "btnExpCert";
-            // 
-            // btnClearFilter
-            // 
-            this.btnClearFilter.Caption = "清除篩選";
-            this.btnClearFilter.Id = 10;
-            this.btnClearFilter.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnClearFilter.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
-            this.btnClearFilter.ItemAppearance.Hovered.Options.UseForeColor = true;
-            this.btnClearFilter.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.btnClearFilter.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
-            this.btnClearFilter.ItemAppearance.Normal.Options.UseFont = true;
-            this.btnClearFilter.ItemAppearance.Normal.Options.UseForeColor = true;
-            this.btnClearFilter.Name = "btnClearFilter";
-            // 
             // btnExportExcel
             // 
             this.btnExportExcel.Caption = "出表";
@@ -528,34 +413,7 @@
             this.btnExportExcel.ItemAppearance.Normal.Options.UseFont = true;
             this.btnExportExcel.ItemAppearance.Normal.Options.UseForeColor = true;
             this.btnExportExcel.Name = "btnExportExcel";
-            // 
-            // btnSpecialFunctions
-            // 
-            this.btnSpecialFunctions.Caption = "特殊功能";
-            this.btnSpecialFunctions.Id = 12;
-            this.btnSpecialFunctions.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnSpecialFunctions.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
-            this.btnSpecialFunctions.ItemAppearance.Hovered.Options.UseForeColor = true;
-            this.btnSpecialFunctions.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.btnSpecialFunctions.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
-            this.btnSpecialFunctions.ItemAppearance.Normal.Options.UseFont = true;
-            this.btnSpecialFunctions.ItemAppearance.Normal.Options.UseForeColor = true;
-            this.btnSpecialFunctions.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnInvalidateExpCert)});
-            this.btnSpecialFunctions.Name = "btnSpecialFunctions";
-            // 
-            // btnInvalidateExpCert
-            // 
-            this.btnInvalidateExpCert.Caption = "作廢過期證照";
-            this.btnInvalidateExpCert.Id = 13;
-            this.btnInvalidateExpCert.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnInvalidateExpCert.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
-            this.btnInvalidateExpCert.ItemAppearance.Hovered.Options.UseForeColor = true;
-            this.btnInvalidateExpCert.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.btnInvalidateExpCert.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
-            this.btnInvalidateExpCert.ItemAppearance.Normal.Options.UseFont = true;
-            this.btnInvalidateExpCert.ItemAppearance.Normal.Options.UseForeColor = true;
-            this.btnInvalidateExpCert.Name = "btnInvalidateExpCert";
+            this.btnExportExcel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExportExcel_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -619,6 +477,14 @@
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
+            // btnSummaryTable
+            // 
+            this.btnSummaryTable.Caption = "導出彙總表";
+            this.btnSummaryTable.Id = 14;
+            this.btnSummaryTable.ImageOptions.SvgImageSize = new System.Drawing.Size(24, 24);
+            this.btnSummaryTable.Name = "btnSummaryTable";
+            this.btnSummaryTable.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSummaryTable_ItemClick);
+            // 
             // uc308_HealthCheckMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -652,16 +518,7 @@
         private DevExpress.XtraBars.Bar bar2;
         private DevExpress.XtraBars.BarButtonItem btnAdd;
         private DevExpress.XtraBars.BarButtonItem btnReload;
-        private DevExpress.XtraBars.BarSubItem btnFilter;
-        private DevExpress.XtraBars.BarButtonItem btnValidCert;
-        private DevExpress.XtraBars.BarButtonItem btnBackCert;
-        private DevExpress.XtraBars.BarButtonItem btnInvalidCert;
-        private DevExpress.XtraBars.BarButtonItem btnWaitCert;
-        private DevExpress.XtraBars.BarButtonItem btnExpCert;
-        private DevExpress.XtraBars.BarButtonItem btnClearFilter;
         private DevExpress.XtraBars.BarButtonItem btnExportExcel;
-        private DevExpress.XtraBars.BarSubItem btnSpecialFunctions;
-        private DevExpress.XtraBars.BarButtonItem btnInvalidateExpCert;
         private DevExpress.XtraBars.BarDockControl barDockControlTop;
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
@@ -688,5 +545,6 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit repositoryItemMemoEdit1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
+        private DevExpress.XtraBars.BarButtonItem btnSummaryTable;
     }
 }

@@ -76,6 +76,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
             btnAdd.ImageOptions.SvgImage = TPSvgimages.Add;
             btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
             btnExportExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
+            btnSummaryTable.ImageOptions.SvgImage = TPSvgimages.Word;
         }
 
         private void CreateRuleGV()
@@ -217,7 +218,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
             itemEditDetail = CreateMenuItem("更新檢查表", ItemEditDetail_Click, TPSvgimages.Edit);
             itemExcelUploadDetail = CreateMenuItem("上傳Excel檔案", ItemExcelUploadDetail_Click, TPSvgimages.Excel);
             itemGoogleSheetUploadDetail = CreateMenuItem("上傳GoogleSheet路徑", ItemGoogleSheetUploadDetail_Click, TPSvgimages.GgSheet);
-
         }
 
         private void ShowDataDetailRaw(int idSession)
@@ -584,6 +584,25 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
             if (!hitInfo.InRowCell) return;
 
             gvData.ExpandMasterRow(hitInfo.RowHandle);
+        }
+
+        private void btnExportExcel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            string documentsPath = TPConfigs.DocumentPath();
+            if (!Directory.Exists(documentsPath))
+                Directory.CreateDirectory(documentsPath);
+
+            string filePath = Path.Combine(documentsPath, $"健康檢查 - {DateTime.Now:yyyyMMddHHmm}.xlsx");
+
+            gcData.ExportToXlsx(filePath);
+            Process.Start(filePath);
+        }
+
+        private void btnSummaryTable_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
+
+
         }
     }
 }
