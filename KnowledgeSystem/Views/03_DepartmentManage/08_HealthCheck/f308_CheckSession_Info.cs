@@ -38,6 +38,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
         List<LayoutControlItem> lcImpControls;
 
         List<dm_User> usrs = new List<dm_User>();
+        List<dm_User> oldUsrs = new List<dm_User>();
         BindingSource sourceUser = new BindingSource();
 
         private void InitializeIcon()
@@ -155,46 +156,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                     usrs = dm_UserBUS.Instance.GetList();
                     var details = dt308_CheckDetailBUS.Instance.GetListByIdSession(idSession);
 
-                    usrs = usrs.Where(u => details.Select(d => d.EmpId).Contains(u.Id)).ToList();
-
-
-
-                    //cbbDocCatorary.EditValue = dt204Base.IdDocCatorary;
-                    //cbbFuncCatorary.EditValue = dt204Base.IdFuncCatorary;
-                    //cbbDocLevel.EditValue = dt204Base.DocLevel;
-                    //txbCode.EditValue = dt204Base.Code;
-                    //txbDocVersion.EditValue = dt204Base.DocVersion;
-                    //txbDisplayName.EditValue = dt204Base.DisplayName;
-                    //txbDisplayNameVN.EditValue = dt204Base.DisplayNameVN;
-                    //txbDeployDate.EditValue = dt204Base.DeployDate;
-                    //txbPeriodNotify.EditValue = dt204Base.PeriodNotify;
-                    //txbIdFounder.EditValue = dt204Base.IdFounder;
-                    //txbFilePath.EditValue = "...";
-
-                    //var attForms = dt204_FormBUS.Instance.GetListByIdBase(dt204Base.Id);
-                    //foreach (var item in attForms)
-                    //{
-                    //    var att = dm_AttachmentBUS.Instance.GetItemById(item.IdAtt);
-                    //    baseFormAtts.Add(new Attachment()
-                    //    {
-                    //        ActualName = att.ActualName,
-                    //        EncryptionName = att.EncryptionName,
-                    //        Thread = att.Thread,
-                    //        Id = att.Id
-                    //    });
-                    //}
-                    //sourceFormAtts.DataSource = baseFormAtts;
-                    //lbCountFile.Text = $"共{baseFormAtts.Count}個表單";
-                    //gvForm.RefreshData();
-
-                    //var idsRelatedDoc = dt204_RelatedDocBUS.Instance.GetListByIdBase(dt204Base.Id);
-                    //foreach (var item in idsRelatedDoc)
-                    //{
-                    //    relatedDocs.Add(dt204_InternalDocMgmtBUS.Instance.GetItemById(item.IdRelatedDoc));
-                    //}
-                    //sourceRelatedDoc.DataSource = relatedDocs;
-                    //lbRelated.Text = $"共{relatedDocs.Count}個關聯文件";
-                    //gvRelatedDoc.RefreshData();
+                    // Lấy danh sách nhân viên là dùng tạm IP để làm mốc là nhân viên cũ (từ cơ sở dữ liệu lên)
+                    usrs = usrs.Where(u => details.Select(d => d.EmpId).Contains(u.Id)).Select(u => { u.IPAddress = "1"; return u; }).ToList();
+                    oldUsrs = usrs.Where(u => details.Select(d => d.EmpId).Contains(u.Id)).Select(u => { u.IPAddress = "1"; return u; }).ToList();
 
                     break;
                 case EventFormInfo.Update:
@@ -303,21 +267,36 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                         break;
                     case EventFormInfo.Update:
 
-                        //if (fileName != "...")
-                        //{
-                        //    HandleBaseAttachment();
-                        //}
+                         result = dt308_CheckSessionBUS.Instance.AddOrUpdate(dt308CheckSession);
 
-                        result = dt308_CheckSessionBUS.Instance.AddOrUpdate(dt308CheckSession);
+                        // So sánh sự khác biệt dựa trên Id và điều kiện IPAddress
+                        var addedUsers = usrs.Where(u => !oldUsrs.Any(o => o.Id == u.Id) && u.IPAddress != "1").ToList();
+                        var removedUsers = oldUsrs.Where(o => !usrs.Any(u => u.Id == o.Id)).ToList();
 
-                        //Handle204Form(dt204Base.Id);
-                        //HandleDocsRelated(dt204Base.Id);
+                        // Thêm mới
+                        foreach (var item in addedUsers)
+                        {
+                            dt308_CheckDetailBUS.Instance.Add(new dt308_CheckDetail()
+                            {
+                                SessionId = idSession,
+                                EmpId = item.Id,
+                                HealthRating = -1
+                            });
+                        }
+
+                        // Xóa
+                        foreach (var item in removedUsers)
+                        {
+                            dt308_CheckDetailBUS.Instance.RemoveBySessionAndEmp(idSession, item.Id);
+                        }
 
                         break;
                     case EventFormInfo.Delete:
+
                         //var dialogResult = XtraMessageBox.Show($"您確認要刪除{formName}: {dt204Base.Code} {dt204Base.DisplayName}", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                         //if (dialogResult != DialogResult.Yes) return;
                         //result = dt204_InternalDocMgmtBUS.Instance.RemoveById(dt204Base.Id, TPConfigs.LoginUser.Id);
+
                         break;
                     default:
                         break;

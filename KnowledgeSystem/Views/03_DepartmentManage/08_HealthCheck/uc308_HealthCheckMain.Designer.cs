@@ -115,6 +115,7 @@
             this.gvSession.MasterRowGetChildList += new DevExpress.XtraGrid.Views.Grid.MasterRowGetChildListEventHandler(this.gvSession_MasterRowGetChildList);
             this.gvSession.MasterRowGetRelationName += new DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationNameEventHandler(this.gvSession_MasterRowGetRelationName);
             this.gvSession.MasterRowGetRelationCount += new DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationCountEventHandler(this.gvSession_MasterRowGetRelationCount);
+            this.gvSession.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gvSession_PopupMenuShowing);
             // 
             // gColIdDetail
             // 
@@ -145,18 +146,24 @@
             this.gridColumn7.Caption = "一般疾病";
             this.gridColumn7.FieldName = "Disease1";
             this.gridColumn7.Name = "gridColumn7";
+            this.gridColumn7.Visible = true;
+            this.gridColumn7.VisibleIndex = 2;
             // 
             // gridColumn8
             // 
             this.gridColumn8.Caption = "慢性病";
             this.gridColumn8.FieldName = "Disease2";
             this.gridColumn8.Name = "gridColumn8";
+            this.gridColumn8.Visible = true;
+            this.gridColumn8.VisibleIndex = 3;
             // 
             // gridColumn9
             // 
             this.gridColumn9.Caption = "得職業病";
             this.gridColumn9.FieldName = "Disease3";
             this.gridColumn9.Name = "gridColumn9";
+            this.gridColumn9.Visible = true;
+            this.gridColumn9.VisibleIndex = 4;
             // 
             // gcData
             // 
@@ -185,6 +192,7 @@
             this.gvData,
             this.gvDetail,
             this.gvSession});
+            this.gcData.DoubleClick += new System.EventHandler(this.gcData_DoubleClick);
             // 
             // gvData
             // 

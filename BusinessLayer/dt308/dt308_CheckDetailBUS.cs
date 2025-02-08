@@ -126,6 +126,32 @@ namespace BusinessLayer
             }
         }
 
+        public bool UpdateByIdSessionAndEmp(dt308_CheckDetail item)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    var itemUpdate = _context.dt308_CheckDetail.FirstOrDefault(r => r.SessionId == item.SessionId && r.EmpId == item.EmpId);
+
+                    if (itemUpdate == default) return false;
+
+                    itemUpdate.Disease1 = item.Disease1;
+                    itemUpdate.Disease2 = item.Disease2;
+                    itemUpdate.Disease3 = item.Disease3;
+                    itemUpdate.HealthRating = item.HealthRating;
+
+                    int affectedRecords = _context.SaveChanges();
+                    return affectedRecords > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                return false;
+            }
+        }
+
         public bool RemoveById(int id)
         {
             try
@@ -133,6 +159,26 @@ namespace BusinessLayer
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
                     var itemRemove = _context.dt308_CheckDetail.FirstOrDefault(r => r.Id == id);
+                    _context.dt308_CheckDetail.Remove(itemRemove);
+
+                    int affectedRecords = _context.SaveChanges();
+                    return affectedRecords > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
+        public bool RemoveBySessionAndEmp(int idSession, string empId)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    var itemRemove = _context.dt308_CheckDetail.FirstOrDefault(r => r.SessionId == idSession && r.EmpId == empId);
                     _context.dt308_CheckDetail.Remove(itemRemove);
 
                     int affectedRecords = _context.SaveChanges();
