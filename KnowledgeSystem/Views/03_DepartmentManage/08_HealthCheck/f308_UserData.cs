@@ -44,6 +44,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
 
         private void f308_UserData_Load(object sender, EventArgs e)
         {
+            gvData.ReadOnlyGridView();
+            gvData.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
+
             LoadData();
         }
 

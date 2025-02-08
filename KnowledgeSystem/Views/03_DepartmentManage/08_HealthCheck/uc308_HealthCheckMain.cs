@@ -140,10 +140,18 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
 #endif
 
             // Gửi request và đọc dữ liệu phản hồi
-            using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
-            using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+            try
             {
-                return reader.ReadToEnd();
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+                {
+                    return reader.ReadToEnd();
+                }
+            }
+            catch (WebException ex)
+            {
+                XtraMessageBox.Show("Đường link sai hoặc không có quyền truy cập!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return "";
             }
         }
 
@@ -213,6 +221,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
 
         private void ShowDataDetailRaw(int idSession)
         {
+            if (dtDetailExcel.Rows.Count <= 0) return;
+
             List<dt308_CheckDetail> detailsView = new List<dt308_CheckDetail>();
             var columnName = dtDetailExcel.Columns.Cast<DataColumn>().ToList();
             int RomanToInt(string s) => Array.IndexOf(new[] { "I", "II", "III", "IV", "V" }, s) + 1;
@@ -236,7 +246,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
             int index = 1;
             foreach (DataRow row in dtDetailExcel.Rows)
             {
-                int minute = (int)(Convert.ToDateTime(row[0]).Ticks);
+                int minute = (int)(Convert.ToDateTime(row[0]).Ticks / TimeSpan.TicksPerMinute);
 
                 string empId = row[empIdIndex]?.ToString().ToUpper();
                 int healthRating = RomanToInt(row[healthRatingIndex]?.ToString());

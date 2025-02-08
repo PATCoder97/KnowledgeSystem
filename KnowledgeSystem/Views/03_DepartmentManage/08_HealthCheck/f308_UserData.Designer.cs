@@ -326,6 +326,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.IconOptions.Image = global::KnowledgeSystem.Properties.Resources.AppIcon;
             this.Name = "f308_UserData";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "選人員";
             this.Load += new System.EventHandler(this.f308_UserData_Load);
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();

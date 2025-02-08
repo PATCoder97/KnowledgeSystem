@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessLayer;
 using DataAccessLayer;
+using DevExpress.Xpo;
 using DevExpress.XtraEditors;
 using DevExpress.XtraLayout;
 using DevExpress.XtraSplashScreen;
 using DocumentFormat.OpenXml.Spreadsheet;
 using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._03_DepartmentManage._07_Quiz;
+using Newtonsoft.Json;
 using static System.Runtime.CompilerServices.RuntimeHelpers;
 using static DevExpress.Xpo.Helpers.CannotLoadObjectsHelper;
 
@@ -33,6 +35,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
         public int idSession = -1;
         string idDept2word = TPConfigs.idDept2word;
         dt308_CheckSession dt308CheckSession;
+        string oldDt308CheckSession;
 
         List<LayoutControlItem> lcControls;
         List<LayoutControlItem> lcImpControls;
@@ -148,6 +151,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                 case EventFormInfo.View:
 
                     dt308CheckSession = dt308_CheckSessionBUS.Instance.GetItemById(idSession);
+                    oldDt308CheckSession = JsonConvert.SerializeObject(dt308CheckSession);
 
                     txbNameTW.EditValue = dt308CheckSession.DisplayNameTW;
                     txbNameVN.EditValue = dt308CheckSession.DisplayNameVN;
@@ -267,7 +271,20 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                         break;
                     case EventFormInfo.Update:
 
-                         result = dt308_CheckSessionBUS.Instance.AddOrUpdate(dt308CheckSession);
+                        var dataOld = JsonConvert.DeserializeObject<dt308_CheckSession>(oldDt308CheckSession);
+
+                        bool hasChanged = dataOld.DisplayNameVN != dt308CheckSession.DisplayNameVN ||
+                        dataOld.DisplayNameTW != dt308CheckSession.DisplayNameTW ||
+                        dataOld.CheckType != dt308CheckSession.CheckType;
+
+                        if (hasChanged)
+                        {
+                            result = dt308_CheckSessionBUS.Instance.AddOrUpdate(dt308CheckSession);
+                        }
+                        else
+                        {
+                            result = true;
+                        }
 
                         // So sánh sự khác biệt dựa trên Id và điều kiện IPAddress
                         var addedUsers = usrs.Where(u => !oldUsrs.Any(o => o.Id == u.Id) && u.IPAddress != "1").ToList();

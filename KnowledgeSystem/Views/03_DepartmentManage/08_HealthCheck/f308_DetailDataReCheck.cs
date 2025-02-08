@@ -23,12 +23,20 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
         public f308_DetailDataReCheck()
         {
             InitializeComponent();
+            InitializeIcon();
+
         }
 
         public List<dt308_CheckDetail> details { get; set; }
         public int idSession = -1;
 
         List<dt308_Disease> dt308Diseases;
+
+        private void InitializeIcon()
+        {
+            btnCancel.ImageOptions.SvgImage = TPSvgimages.Cancel;
+            btnConfirm.ImageOptions.SvgImage = TPSvgimages.Confirm;
+        }
 
         private void f308_DetailDataReCheck_Load(object sender, EventArgs e)
         {
@@ -118,6 +126,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                 dt308_CheckDetailBUS.Instance.UpdateByIdSessionAndEmp(item);
             }
 
+            Close();
+        }
+
+        private void btnCancel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
             Close();
         }
     }
