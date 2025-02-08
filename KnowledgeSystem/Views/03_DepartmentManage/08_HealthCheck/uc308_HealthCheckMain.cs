@@ -213,10 +213,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
         private void InitializeMenuItems()
         {
             itemViewInfo = CreateMenuItem("查看資訊", ItemViewInfo_Click, TPSvgimages.View);
-            itemCreateScript = CreateMenuItem("導出GoogleForm", ItemCreateScript_Click, TPSvgimages.EmailSend);
+            itemCreateScript = CreateMenuItem("導出GoogleForm程式碼", ItemCreateScript_Click, TPSvgimages.GgForm);
             itemEditDetail = CreateMenuItem("更新檢查表", ItemEditDetail_Click, TPSvgimages.Edit);
-            itemExcelUploadDetail = CreateMenuItem("Excel上傳資料", ItemExcelUploadDetail_Click, TPSvgimages.Excel);
-            itemGoogleSheetUploadDetail = CreateMenuItem("GGSheet上傳資料", ItemGoogleSheetUploadDetail_Click, TPSvgimages.Suspension);
+            itemExcelUploadDetail = CreateMenuItem("上傳Excel檔案", ItemExcelUploadDetail_Click, TPSvgimages.Excel);
+            itemGoogleSheetUploadDetail = CreateMenuItem("上傳GoogleSheet路徑", ItemGoogleSheetUploadDetail_Click, TPSvgimages.GgSheet);
+
         }
 
         private void ShowDataDetailRaw(int idSession)
@@ -384,7 +385,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
             }
 
             Clipboard.SetText(scriptGoogleForm);
-            MessageBox.Show("ok");
+            XtraMessageBox.Show("Đã lưu Code vào bộ nhớ tạm, Làm theo SOP để tạo được khảo sát google form !", "Thông báo!");
 
             Process.Start("https://script.google.com/");
         }
@@ -561,8 +562,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
 
                 itemCreateScript.BeginGroup = true;
                 e.Menu.Items.Add(itemCreateScript);
-                e.Menu.Items.Add(itemExcelUploadDetail);
                 e.Menu.Items.Add(itemGoogleSheetUploadDetail);
+                e.Menu.Items.Add(itemExcelUploadDetail);
             }
         }
 

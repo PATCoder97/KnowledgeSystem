@@ -1420,6 +1420,12 @@
     <Content Include="Images\icons8_finish_flag.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\icons8_google_forms_new_logo.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\icons8_google_sheets.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\icons8_learn.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
