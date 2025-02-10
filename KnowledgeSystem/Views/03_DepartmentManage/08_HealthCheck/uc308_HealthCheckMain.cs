@@ -370,7 +370,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                 Tuple.Create("Bạn mắc các bệnh nghề nghiệp nào sau đây nào sau đây?", "您患有以下哪些得職業病？")
             };
 
-            string sourceScript = File.ReadAllText(Path.Combine(TPConfigs.HtmlPath, "f308_GoogleAppScript.txt"));
+            string sourceScript = File.ReadAllText(Path.Combine(TPConfigs.ResourcesPath, "f308_GoogleAppScript.txt"));
             var scriptGoogleForm = sourceScript.Replace("{{formname}}", $"{session.DisplayNameVN}/{session.DisplayNameTW} - {DateTime.Now:yyyyMMddHHmmss}");
 
             for (int i = 0; i < diseaseTitles.Count; i++)

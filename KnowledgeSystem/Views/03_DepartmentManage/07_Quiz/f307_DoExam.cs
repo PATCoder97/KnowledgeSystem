@@ -355,7 +355,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             sourceResult.DataSource = examResults;
             gcData.DataSource = sourceResult;
 
-            templateContentSigner = File.ReadAllText(Path.Combine(TPConfigs.HtmlPath, "dt307_ConfirmQuestion.html"));
+            templateContentSigner = File.ReadAllText(Path.Combine(TPConfigs.ResourcesPath, "dt307_ConfirmQuestion.html"));
             InitializeWebView2(indexQues);
         }
 

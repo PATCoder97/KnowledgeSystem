@@ -432,7 +432,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                                     certs = certsTable
                                 };
 
-                                var templateContentSigner = System.IO.File.ReadAllText(Path.Combine(TPConfigs.HtmlPath, $"f301_NotifyPersonnelTransfer.html"));
+                                var templateContentSigner = System.IO.File.ReadAllText(Path.Combine(TPConfigs.ResourcesPath, $"f301_NotifyPersonnelTransfer.html"));
                                 var templateSigner = Template.Parse(templateContentSigner);
 
                                 var pageContent = templateSigner.Render(templateData);

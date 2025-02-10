@@ -219,7 +219,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                     empid = TPConfigs.LoginUser.Id
                 };
 
-                var templateContentSigner = System.IO.File.ReadAllText(Path.Combine(TPConfigs.HtmlPath, $"f201_NotifyCalibCert.html"));
+                var templateContentSigner = System.IO.File.ReadAllText(Path.Combine(TPConfigs.ResourcesPath, $"f201_NotifyCalibCert.html"));
                 var templateSigner = Template.Parse(templateContentSigner);
 
                 var pageContent = templateSigner.Render(templateData);

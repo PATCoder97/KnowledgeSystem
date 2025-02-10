@@ -73,7 +73,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             Directory.CreateDirectory(saveFolder);
 
             var bases = dt307_ExamUserBUS.Instance.GetListByExamCode(examCode);
-            string dataTpl = File.ReadAllText(Path.Combine(TPConfigs.HtmlPath, "dt307_ResultExam.html"));
+            string dataTpl = File.ReadAllText(Path.Combine(TPConfigs.ResourcesPath, "dt307_ResultExam.html"));
 
             var usrs = dm_UserBUS.Instance.GetList();
             var jobs = dm_JobTitleBUS.Instance.GetList();

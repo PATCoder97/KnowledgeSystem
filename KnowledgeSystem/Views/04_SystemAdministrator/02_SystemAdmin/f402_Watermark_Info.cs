@@ -71,7 +71,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
         public string formName;
         public dm_Watermark watermark = null;
 
-        string sourcePdf = Path.Combine(TPConfigs.HtmlPath, "blank.pdf");
+        string sourcePdf = Path.Combine(TPConfigs.ResourcesPath, "blank.pdf");
 
         // Các thông tin để vẽ VM
         string picImage = "";

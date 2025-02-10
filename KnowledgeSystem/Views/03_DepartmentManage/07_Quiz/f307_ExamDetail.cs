@@ -62,7 +62,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
 
             List<f307_DoExam.ExamResult> examResults = JsonConvert.DeserializeObject<List<f307_DoExam.ExamResult>>(json);
 
-            string templateContentSigner = File.ReadAllText(Path.Combine(TPConfigs.HtmlPath, "dt307_ResultExam.html"));
+            string templateContentSigner = File.ReadAllText(Path.Combine(TPConfigs.ResourcesPath, "dt307_ResultExam.html"));
 
             var dataexam = examResults
                 .Select(data => new

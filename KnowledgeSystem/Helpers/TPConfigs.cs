@@ -20,7 +20,7 @@ namespace KnowledgeSystem.Helpers
     {
         public static string StartupPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         public static string ImagesPath = Path.Combine(StartupPath, "Images");
-        public static string HtmlPath = Path.Combine(StartupPath, "Html");
+        public static string ResourcesPath = Path.Combine(StartupPath, "AppResources");
         public static string TempFolderData = Path.Combine(Path.GetTempPath(), "TPTempData");
         public static string idDept2word = "";
 
