@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode3 = new DevExpress.XtraGrid.GridLevelNode();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode4 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc308_HealthCheckMain));
             this.gvSession = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gColIdDetail = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -56,6 +56,7 @@
             this.btnAdd = new DevExpress.XtraBars.BarButtonItem();
             this.btnReload = new DevExpress.XtraBars.BarButtonItem();
             this.btnExportExcel = new DevExpress.XtraBars.BarButtonItem();
+            this.btnSummaryTable = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -63,7 +64,6 @@
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.btnSummaryTable = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.gvSession)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
@@ -164,14 +164,14 @@
             this.gcData.EmbeddedNavigator.Buttons.Edit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.EndEdit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.Remove.Visible = false;
-            gridLevelNode3.LevelTemplate = this.gvSession;
-            gridLevelNode4.LevelTemplate = this.gvDetail;
-            gridLevelNode4.RelationName = "CheckDetail";
-            gridLevelNode3.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode4});
-            gridLevelNode3.RelationName = "CheckSession";
+            gridLevelNode1.LevelTemplate = this.gvSession;
+            gridLevelNode2.LevelTemplate = this.gvDetail;
+            gridLevelNode2.RelationName = "CheckDetail";
+            gridLevelNode1.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
+            gridLevelNode2});
+            gridLevelNode1.RelationName = "CheckSession";
             this.gcData.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode3});
+            gridLevelNode1});
             this.gcData.Location = new System.Drawing.Point(12, 12);
             this.gcData.MainView = this.gvData;
             this.gcData.Name = "gcData";
@@ -231,8 +231,6 @@
             // 
             // gridColumn1
             // 
-            this.gridColumn1.AppearanceCell.Options.UseTextOptions = true;
-            this.gridColumn1.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn1.Caption = "越文名稱";
             this.gridColumn1.FieldName = "DisplayNameVN";
             this.gridColumn1.Name = "gridColumn1";
@@ -365,7 +363,7 @@
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnAdd, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnReload, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnExportExcel, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnSummaryTable, true)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnSummaryTable, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawDragBorder = false;
             this.bar2.OptionsBar.MultiLine = true;
@@ -414,6 +412,14 @@
             this.btnExportExcel.ItemAppearance.Normal.Options.UseForeColor = true;
             this.btnExportExcel.Name = "btnExportExcel";
             this.btnExportExcel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExportExcel_ItemClick);
+            // 
+            // btnSummaryTable
+            // 
+            this.btnSummaryTable.Caption = "導出彙總表";
+            this.btnSummaryTable.Id = 14;
+            this.btnSummaryTable.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnSummaryTable.Name = "btnSummaryTable";
+            this.btnSummaryTable.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSummaryTable_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -476,14 +482,6 @@
             this.layoutControlItem1.Size = new System.Drawing.Size(819, 504);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
-            // 
-            // btnSummaryTable
-            // 
-            this.btnSummaryTable.Caption = "導出彙總表";
-            this.btnSummaryTable.Id = 14;
-            this.btnSummaryTable.ImageOptions.SvgImageSize = new System.Drawing.Size(24, 24);
-            this.btnSummaryTable.Name = "btnSummaryTable";
-            this.btnSummaryTable.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSummaryTable_ItemClick);
             // 
             // uc308_HealthCheckMain
             // 

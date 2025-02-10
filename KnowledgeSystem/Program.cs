@@ -42,6 +42,7 @@ namespace KnowledgeSystem
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             TPConfigs.SetSystemStaticValue();
+            WindowsFormsSettings.ScrollUIMode = ScrollUIMode.Fluent;
 
             // Kiểm tra tham số dòng lệnh
             if (args.Length > 0)

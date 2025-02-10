@@ -1361,6 +1361,9 @@
       <DependentUpon>uc403_SoftwareManual.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
+    <None Include="AppResources\308_StatisticVN.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="AppResources\blank.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

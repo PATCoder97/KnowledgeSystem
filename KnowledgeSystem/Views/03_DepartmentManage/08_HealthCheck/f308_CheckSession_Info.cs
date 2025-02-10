@@ -44,6 +44,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
         List<dm_User> oldUsrs = new List<dm_User>();
         BindingSource sourceUser = new BindingSource();
 
+
+        public static string KSK_ThongThuong = "Thông thường/一般健康檢查";
+        public static string KSK_DacBiet = "Đặc biệt/特殊健檢";
+        public static string KSK_NhanVienMoi = "Nhân viên mới/新進人員檢查";
+        public static string KSK_TruocViecLam = "Trước bố trí việc làm/工作安排前健康檢查";
+        public string[] checkTypes = new string[] { KSK_ThongThuong, KSK_DacBiet, KSK_NhanVienMoi, KSK_TruocViecLam };
+
         private void InitializeIcon()
         {
             btnEdit.ImageOptions.SvgImage = TPSvgimages.Edit;
@@ -136,7 +143,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                 item.Text = $"<color=#000000>{item.Text}</color>";
             }
 
-            var checkTypes = new string[] { "Thông thường/一般健康檢查", "Đặc biệt/特殊健檢", "Nhân viên mới/新進人員檢查", "Trước bố trí việc làm/工作安排前健康檢查" };
             cbbCheckType.Properties.Items.AddRange(checkTypes);
 
             gcData.DataSource = sourceUser;

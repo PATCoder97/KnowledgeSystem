@@ -18,6 +18,7 @@ using DevExpress.Utils.Menu;
 using DevExpress.Utils.Svg;
 using DevExpress.Xpo;
 using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Mask;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
@@ -26,8 +27,9 @@ using DevExpress.XtraSplashScreen;
 using ExcelDataReader;
 using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt;
+using MiniSoftware;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
-//using static DevExpress.Data.Mask.Internal.MaskSettings<T>;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
 {
@@ -247,7 +249,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
             int index = 1;
             foreach (DataRow row in dtDetailExcel.Rows)
             {
-                int minute = (int)(Convert.ToDateTime(row[0]).Ticks / TimeSpan.TicksPerMinute);
+                int minute = (int)(Convert.ToDateTime(row[0]).Ticks / System.TimeSpan.TicksPerMinute);
 
                 string empId = row[empIdIndex]?.ToString().ToUpper();
                 int healthRating = RomanToInt(row[healthRatingIndex]?.ToString());
@@ -371,7 +373,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
             };
 
             string sourceScript = File.ReadAllText(Path.Combine(TPConfigs.ResourcesPath, "f308_GoogleAppScript.txt"));
-            var scriptGoogleForm = sourceScript.Replace("{{formname}}", $"{session.DisplayNameVN}/{session.DisplayNameTW} - {DateTime.Now:yyyyMMddHHmmss}");
+            var scriptGoogleForm = sourceScript.Replace("{{formname}}", $"{session.DisplayNameVN}/{session.DisplayNameTW} - {System.DateTime.Now:yyyyMMddHHmmss}");
 
             for (int i = 0; i < diseaseTitles.Count; i++)
             {
@@ -600,8 +602,256 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
 
         private void btnSummaryTable_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            int yearStatistic = 2025;
+
+            // Lấy dữ liệu để xuất báo cáo , phải lọc theo thời gian
+            var sessionFilter = dt308CheckSession.Where(r => r.DateSession.Year == yearStatistic).ToList();
+
+            // Làm dữ liệu gốc để tính toán cho các "Biểu mẫu" cần xuất ra
+            var dataBases = (from data in sessionFilter
+                             select new
+                             {
+                                 data,
+                                 detail = (from detail in dt308CheckDetail
+                                           join user in users on detail.EmpId equals user.Id
+                                           where detail.SessionId == data.Id
+                                           select new
+                                           {
+                                               detail,
+                                               user
+                                           }).ToList()
+                             }).ToList();
+
+            // Biểu mẫu 1: QUẢN LÝ SỨC KHỎE TRƯỚC KHI BỐ TRÍ VIỆC LÀM
+            // Biểu mẫu 2: QUẢN LÝ SỨC KHỎE NGƯỜI LAO ĐỘNG THÔNG QUA KHÁM SỨC KHỎE ĐỊNH KỲ
+            var dataForm12 = dataBases.Where(r => r.data.CheckType == f308_CheckSession_Info.KSK_TruocViecLam).ToList();
+            var statistics12 = dataBases.Select(db => new
+            {
+                db.data,
+                db.detail,
+
+                // Thống kê Nam và Nữ
+                maleCount = db.detail.Count(x => x.user.Sex == true),
+                femaleCount = db.detail.Count(x => x.user.Sex == false),
+
+                // Tổng số người
+                totalCount = db.detail.Count(),
+
+                // Thống kê sức khỏe
+                healthRatingStats = db.detail
+                .GroupBy(x => x.detail.HealthRating)
+                .Select(g => new
+                {
+                    HealthRating = g.Key,
+                    Count = g.Count()
+                }).ToList()
+            }).ToList();
+
+            var dt1 = statistics12.Where(r => r.data.CheckType == f308_CheckSession_Info.KSK_TruocViecLam)
+                 .Select(stat => new Dictionary<string, object>
+                 {
+                    { "datetime", stat.data?.DateSession.ToString("dd/MM/yyyy") ?? string.Empty },
+                    { "checkname", $"KSK {(stat.data?.CheckType.Split('/')[0] ?? "N/A")}"  },
+                    { "male", stat.maleCount },
+                    { "female", stat.femaleCount },
+                    { "total", stat.totalCount },
+                    { "h1", stat.healthRatingStats?.FirstOrDefault(r => r.HealthRating == 1)?.Count.ToString() ?? "" },
+                    { "h2", stat.healthRatingStats?.FirstOrDefault(r => r.HealthRating == 2)?.Count.ToString() ?? "" },
+                    { "h3", stat.healthRatingStats?.FirstOrDefault(r => r.HealthRating == 3)?.Count.ToString() ?? "" },
+                    { "h4", stat.healthRatingStats?.FirstOrDefault(r => r.HealthRating == 4)?.Count.ToString() ?? "" },
+                    { "h5", stat.healthRatingStats?.FirstOrDefault(r => r.HealthRating == 5)?.Count.ToString() ?? "" }
+                 }).ToList() ?? new List<Dictionary<string, object>>();
+
+            var dt2 = statistics12.Where(r => r.data.CheckType != f308_CheckSession_Info.KSK_TruocViecLam)
+                .Select(stat => new Dictionary<string, object>
+                {
+                    { "datetime", stat.data?.DateSession.ToString("dd/MM/yyyy") ?? string.Empty },
+                    { "checkname",  $"KSK {(stat.data?.CheckType.Split('/')[0] ?? "N/A")}"  },
+                    { "male", stat.maleCount },
+                    { "female", stat.femaleCount },
+                    { "total", stat.totalCount },
+                    { "h1", stat.healthRatingStats?.FirstOrDefault(r => r.HealthRating == 1)?.Count.ToString() ?? "" },
+                    { "h2", stat.healthRatingStats?.FirstOrDefault(r => r.HealthRating == 2)?.Count.ToString() ?? "" },
+                    { "h3", stat.healthRatingStats?.FirstOrDefault(r => r.HealthRating == 3)?.Count.ToString() ?? "" },
+                    { "h4", stat.healthRatingStats?.FirstOrDefault(r => r.HealthRating == 4)?.Count.ToString() ?? "" },
+                    { "h5", stat.healthRatingStats?.FirstOrDefault(r => r.HealthRating == 5)?.Count.ToString() ?? "" }
+                }).ToList() ?? new List<Dictionary<string, object>>();
+
+            // Biểu mẫu 3: TÌNH HÌNH BỆNH TẬT TRONG THỜI GIAN BÁO CÁO
+            // Hàm xử lý thống kê bệnh (chuyển sang int)
+            Func<IEnumerable<dynamic>, string, List<dynamic>> GetDiseaseStats = (details, diseaseField) => details
+            .SelectMany(d =>
+            {
+                var detail = d.detail; // Lấy detail từ d
+                var propertyInfo = detail?.GetType().GetProperty(diseaseField);
+                var valueInt = propertyInfo?.GetValue(detail) as string;
+
+                return (valueInt ?? "")
+                    .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                    .Select(v => int.TryParse(v.Trim(), out int diseaseId) ? (int?)diseaseId : null);
+            })
+            .Where(diseaseId => diseaseId.HasValue)
+            .GroupBy(diseaseId => diseaseId.Value)
+            .Select(g => new { Id = g.Key, Count = g.Count() })
+            .Cast<dynamic>()
+            .ToList();
+
+            // ✅ Thống kê theo quý và tính tổng số ca bệnh cho từng loại
+            var statisticsByQuarter = dataBases.GroupBy(data => new
+            {
+                Quarter = (data.data.DateSession.Month - 1) / 3 + 1
+            })
+            .Select(group =>
+            {
+                var disease1Stats = GetDiseaseStats(group.SelectMany(g => g.detail), "Disease1");
+                var disease2Stats = GetDiseaseStats(group.SelectMany(g => g.detail), "Disease2");
+                var disease3Stats = GetDiseaseStats(group.SelectMany(g => g.detail), "Disease3");
+
+                // ✅ Tính tổng số ca bệnh cho từng loại
+                var totalDisease1 = disease1Stats.Sum(d => (int)d.Count);
+                var totalDisease2 = disease2Stats.Sum(d => (int)d.Count);
+                var totalDisease3 = disease3Stats.Sum(d => (int)d.Count);
+
+                return new
+                {
+                    Quarter = $"Q{group.Key.Quarter}",
+                    Disease1Stats = disease1Stats,
+                    Disease2Stats = disease2Stats,
+                    Disease3Stats = disease3Stats,
+                    TotalDisease1 = totalDisease1, // ✅ Tổng của Disease1
+                    TotalDisease2 = totalDisease2, // ✅ Tổng của Disease2
+                    TotalDisease3 = totalDisease3  // ✅ Tổng của Disease3
+                };
+            }).ToList();
+
+            var dt31 = dt308Diseases
+            .Where(r => r.DiseaseType == 1)
+            .Select((r, index) => new Dictionary<string, object>
+            {
+                { "no", index + 1 }, // Tăng từ 1
+                { "name", r.DisplayNameVN },
+                { "q1", statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q1")?.Disease1Stats.FirstOrDefault(u => u.Id == r.Id)?.Count ?? "-" },
+                { "q2", statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q2")?.Disease1Stats.FirstOrDefault(u => u.Id == r.Id)?.Count ?? "-" },
+                { "q3", statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q3")?.Disease1Stats.FirstOrDefault(u => u.Id == r.Id)?.Count ?? "-" },
+                { "q4", statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q4")?.Disease1Stats.FirstOrDefault(u => u.Id == r.Id)?.Count ?? "-" }
+            })
+            .ToList();
+
+            var dt32 = dt308Diseases
+            .Where(r => r.DiseaseType == 2)
+            .Select((r, index) => new Dictionary<string, object>
+            {
+            { "no", index + 1 }, // Tăng từ 1
+            { "name", r.DisplayNameVN },
+            { "q1", statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q1")?.Disease3Stats.FirstOrDefault(u => u.Id == r.Id)?.Count ?? "-" },
+            { "q2", statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q2")?.Disease3Stats.FirstOrDefault(u => u.Id == r.Id)?.Count ?? "-" },
+            { "q3", statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q3")?.Disease3Stats.FirstOrDefault(u => u.Id == r.Id)?.Count ?? "-" },
+            { "q4", statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q4")?.Disease3Stats.FirstOrDefault(u => u.Id == r.Id)?.Count ?? "-" }
+            })
+            .ToList();
+
+            // Biểu mẫu 5: QUẢN LÝ BỆNH MÃN TÍNH
+            var result = (from data in sessionFilter.Where(r => r.CheckType != f308_CheckSession_Info.KSK_TruocViecLam)
+                          from detail in dt308CheckDetail
+                          join user in users on detail.EmpId equals user.Id
+                          where detail.SessionId == data.Id && !string.IsNullOrEmpty(detail.Disease2)
+                          from diseaseId in detail.Disease2.Split(',') // Tách chuỗi Disease2
+                          join disease in dt308Diseases on diseaseId.Trim() equals disease.Id.ToString() // Join với dt308Diseases
+                          select new
+                          {
+                              UserIdDept = user.IdDepartment,
+                              UserDisplayName = user.DisplayNameVN,
+                              DiseaseDisplayNameVN = disease.DisplayNameVN,
+                              UserSex = user.Sex,
+                              JobAge = DateTime.Now.Year - user.DateCreate.Year - (DateTime.Now < user.DateCreate.AddYears(DateTime.Now.Year - user.DateCreate.Year) ? 1 : 0)
+                          }).OrderBy(r => r.UserDisplayName).ToList();
+
+            var dt5 = result.Select(stat => new Dictionary<string, object>
+            {
+                { "dept",   $"LG{stat.UserIdDept}" },
+                { "name",    stat.UserDisplayName },
+                { "disease", stat.DiseaseDisplayNameVN },
+                { "male",    stat.UserSex == true  ? "✓" : "" },
+                { "female",  stat.UserSex != true  ? "✓" : "" },
+                { "jobage",  stat.JobAge }
+            }).ToList();
+
+            // Biểu mẫu 7:THEO DÕI BỆNH NGHỀ NGHIỆP
+            var statistics7 = (from data in sessionFilter.Where(r => r.CheckType != f308_CheckSession_Info.KSK_TruocViecLam)
+                               from detail in dt308CheckDetail
+                               join user in users on detail.EmpId equals user.Id
+                               where detail.SessionId == data.Id && !string.IsNullOrEmpty(detail.Disease3)
+                               from diseaseId in detail.Disease3.Split(',') // Tách chuỗi Disease2
+                               join disease in dt308Diseases on diseaseId.Trim() equals disease.Id.ToString() // Join với dt308Diseases
+                               select new
+                               {
+                                   ExamDate = data.DateSession,                      // Ngày khám
+                                   DiseaseId = disease.Id,
+                                   DiseaseDisplayNameVN = disease.DisplayNameVN, // Tên bệnh
+                                   UserSex = user.Sex                            // Giới tính
+                               })
+              .GroupBy(r => new { r.DiseaseId, r.DiseaseDisplayNameVN, r.ExamDate }) // Nhóm theo bệnh và ngày khám
+              .Select(g => new
+              {
+                  ExamDate = g.Key.ExamDate,
+                  DiseaseDisplayNameVN = g.Key.DiseaseDisplayNameVN,
+                  TotalCount = g.Count(),                        // Tổng số bệnh nhân
+                  CountMale = g.Count(x => x.UserSex == true),  // Đếm bệnh nhân nam
+                  CountFemale = g.Count(x => x.UserSex != true) // Đếm bệnh nhân nữ (nếu cần)
+              })
+              .OrderBy(r => r.ExamDate)
+              .ThenBy(r => r.DiseaseDisplayNameVN)
+              .ToList();
+
+            var dt7 = statistics7.Select(stat => new Dictionary<string, object>
+            {
+                { "date",    stat.ExamDate.ToString("dd/MM/yyyy") },
+                { "disease", stat.DiseaseDisplayNameVN },
+                { "total",   stat.TotalCount },
+                { "female",  stat.CountFemale },
+            }).ToList();
 
 
+            string PATH_TEMPLATE = Path.Combine(TPConfigs.ResourcesPath, "308_StatisticVN.docx");
+            string PATH_EXPORT = $@"C:\Users\Dell Alpha\Desktop\RÁC 1\Test308\Jishu_{System.DateTime.Now.ToString("yyyyMMddHHmmss")}.docx";
+
+            var value = new Dictionary<string, object>
+            {
+                ["year"] = yearStatistic,
+
+                // Biểu mẫu 1: QUẢN LÝ SỨC KHỎE TRƯỚC KHI BỐ TRÍ VIỆC LÀM
+                ["dt1"] = dt1,
+
+                // Biểu mẫu 2: QUẢN LÝ SỨC KHỎE NGƯỜI LAO ĐỘNG THÔNG QUA KHÁM SỨC KHỎE ĐỊNH KỲ
+                ["dt2"] = dt2,
+
+                // Biểu mẫu 3: TÌNH HÌNH BỆNH TẬT TRONG THỜI GIAN BÁO CÁO
+                ["dt31"] = dt31,
+                ["dt32"] = dt32,
+
+                ["t1q1"] = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q1")?.TotalDisease1.ToString() ?? "-",
+                ["t1q2"] = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q2")?.TotalDisease1.ToString() ?? "-",
+                ["t1q3"] = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q3")?.TotalDisease1.ToString() ?? "-",
+                ["t1q4"] = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q4")?.TotalDisease1.ToString() ?? "-",
+
+                ["t2q1"] = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q1")?.TotalDisease3.ToString() ?? "-",
+                ["t2q2"] = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q2")?.TotalDisease3.ToString() ?? "-",
+                ["t2q3"] = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q3")?.TotalDisease3.ToString() ?? "-",
+                ["t2q4"] = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q4")?.TotalDisease3.ToString() ?? "-",
+
+                // Biểu mẫu 5: QUẢN LÝ BỆNH MÃN TÍNH 
+                ["dt5"] = dt5,
+
+                // Biểu mẫu 7:THEO DÕI BỆNH NGHỀ NGHIỆP
+                ["dt7"] = dt7,
+                ["dt7ttotal"] = statistics7.Sum(r => r.TotalCount),
+                ["dt7tfemale"] = statistics7.Sum(r => r.CountFemale)
+            };
+
+
+            MiniWord.SaveAsByTemplate(PATH_EXPORT, PATH_TEMPLATE, value);
+
+            Process.Start(PATH_EXPORT);
 
         }
     }
