@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ using System.Windows.Forms;
 using System.Windows.Media.Animation;
 using BusinessLayer;
 using DataAccessLayer;
+using DevExpress.Data.Platform.Compatibility;
 using DevExpress.Utils.Menu;
 using DevExpress.Utils.Svg;
 using DevExpress.Xpo;
@@ -602,7 +604,38 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
 
         private void btnSummaryTable_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            int yearStatistic = 2025;
+            var editor = new TextEdit { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) };
+
+            // Thiết lập mask để buộc nhập đúng định dạng
+            editor.Properties.Mask.EditMask = "####"; // 4 dấu # cho 4 chữ số
+            editor.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            editor.Properties.Mask.UseMaskAsDisplayFormat = true; // Hiển thị mask khi không focus
+
+            var resultYear = XtraInputBox.Show(new XtraInputBoxArgs
+            {
+                Caption = TPConfigs.SoftNameTW,
+                Prompt = "輸入要計算的年份",
+                Editor = editor,
+                DefaultButtonIndex = 0,
+                DefaultResponse = DateTime.Now.ToString("yyyy") // Định dạng mặc định
+            });
+
+            if (string.IsNullOrEmpty(resultYear?.ToString())) return;
+
+            SaveFileDialog saveFile = new SaveFileDialog()
+            {
+                RestoreDirectory = true,
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
+                FileName = $"健康檢查報告-{DateTime.Now:yyyyMMddHHmmss}.docx"
+            };
+
+            if (saveFile.ShowDialog() != DialogResult.OK) return;
+
+            int yearStatistic = Convert.ToInt16(resultYear);
+
+            // Đường dẫn đến temp và file kết quả
+            string PATH_TEMPLATE = Path.Combine(TPConfigs.ResourcesPath, "308_StatisticVN.docx");
+            string PATH_EXPORT = saveFile.FileName;
 
             // Lấy dữ liệu để xuất báo cáo , phải lọc theo thời gian
             var sessionFilter = dt308CheckSession.Where(r => r.DateSession.Year == yearStatistic).ToList();
@@ -812,8 +845,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
             }).ToList();
 
 
-            string PATH_TEMPLATE = Path.Combine(TPConfigs.ResourcesPath, "308_StatisticVN.docx");
-            string PATH_EXPORT = $@"C:\Users\Dell Alpha\Desktop\RÁC 1\Test308\Jishu_{System.DateTime.Now.ToString("yyyyMMddHHmmss")}.docx";
+
 
             var value = new Dictionary<string, object>
             {
