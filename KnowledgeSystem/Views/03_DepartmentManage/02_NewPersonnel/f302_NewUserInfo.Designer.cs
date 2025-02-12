@@ -150,7 +150,7 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Caption = "刪除";
+            this.btnDelete.Caption = "停止";
             this.btnDelete.Id = 1;
             this.btnDelete.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnDelete.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;

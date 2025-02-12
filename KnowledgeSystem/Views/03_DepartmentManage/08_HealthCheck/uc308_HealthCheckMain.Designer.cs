@@ -127,7 +127,7 @@
             // 
             this.gridColumn6.AppearanceCell.Options.UseTextOptions = true;
             this.gridColumn6.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn6.Caption = "健康評級";
+            this.gridColumn6.Caption = "健康分類";
             this.gridColumn6.FieldName = "HealthRating";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
@@ -236,6 +236,7 @@
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
             this.gridColumn1.VisibleIndex = 0;
+            this.gridColumn1.Width = 123;
             // 
             // gridColumn2
             // 
@@ -244,6 +245,7 @@
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 1;
+            this.gridColumn2.Width = 113;
             // 
             // gridColumn3
             // 
@@ -252,6 +254,7 @@
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 2;
+            this.gridColumn3.Width = 87;
             // 
             // gridColumn4
             // 
@@ -260,6 +263,7 @@
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 3;
+            this.gridColumn4.Width = 112;
             // 
             // repositoryItemMemoEdit1
             // 
@@ -296,30 +300,33 @@
             this.gridColumn10.AppearanceCell.Options.UseTextOptions = true;
             this.gridColumn10.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             this.gridColumn10.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
-            this.gridColumn10.Caption = "疾病";
+            this.gridColumn10.Caption = "疾病類型";
             this.gridColumn10.ColumnEdit = this.repositoryItemMemoEdit1;
             this.gridColumn10.FieldName = "DiseaseTypeName";
             this.gridColumn10.Name = "gridColumn10";
             this.gridColumn10.Visible = true;
             this.gridColumn10.VisibleIndex = 0;
+            this.gridColumn10.Width = 108;
             // 
             // gridColumn11
             // 
-            this.gridColumn11.Caption = "越文名稱";
+            this.gridColumn11.Caption = "疾病名稱(越文)";
             this.gridColumn11.FieldName = "DisplayNameVN";
             this.gridColumn11.Name = "gridColumn11";
             this.gridColumn11.OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.False;
             this.gridColumn11.Visible = true;
             this.gridColumn11.VisibleIndex = 1;
+            this.gridColumn11.Width = 120;
             // 
             // gridColumn12
             // 
-            this.gridColumn12.Caption = "中文名稱";
+            this.gridColumn12.Caption = "疾病名稱(中文)";
             this.gridColumn12.FieldName = "DisplayNameTW";
             this.gridColumn12.Name = "gridColumn12";
             this.gridColumn12.OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.False;
             this.gridColumn12.Visible = true;
             this.gridColumn12.VisibleIndex = 2;
+            this.gridColumn12.Width = 138;
             // 
             // barManagerTP
             // 

@@ -17,6 +17,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static DevExpress.Xpo.Helpers.AssociatedCollectionCriteriaHelper;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
 {
@@ -41,7 +42,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
         private void InitializeIcon()
         {
             btnEdit.ImageOptions.SvgImage = TPSvgimages.Edit;
-            btnDelete.ImageOptions.SvgImage = TPSvgimages.Remove;
+            btnDelete.ImageOptions.SvgImage = TPSvgimages.Disable;
             btnConfirm.ImageOptions.SvgImage = TPSvgimages.Confirm;
         }
 
@@ -50,7 +51,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
             cbbSupervisor.Enabled = _enable;
             txbSchool.Enabled = _enable;
             txbMajor.Enabled = _enable;
-           // txbDateStart.Enabled = _enable;
+            // txbDateStart.Enabled = _enable;
         }
 
         private void LockControl()
@@ -225,24 +226,23 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
                 switch (eventInfo)
                 {
                     case EventFormInfo.Create:
+
                         userInfo.Id = txbUserId.EditValue?.ToString();
                         personBase.IdUser = userInfo.Id;
 
                         //result = dm_UserBUS.Instance.Add(userInfo);
                         result = dt302_BaseBUS.Instance.Add(personBase);
+
                         break;
                     case EventFormInfo.View:
                         break;
                     case EventFormInfo.Update:
 
                         result = dt302_BaseBUS.Instance.AddOrUpdate(personBase);
+
                         break;
                     case EventFormInfo.Delete:
-                        var dialogResult = XtraMessageBox.Show($"您確認刪除人員: {userInfo.DisplayName}", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                        if (dialogResult != DialogResult.Yes) return;
 
-                        //result = dm_UserBUS.Instance.Remove(userInfo.Id);
-                        //dm_UserRoleBUS.Instance.RemoveRangeByUID(userInfo.Id);
                         break;
                     default:
                         break;
@@ -287,7 +287,28 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
 
         private void btnDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            var describe = XtraInputBox.Show(new XtraInputBoxArgs
+            {
+                Caption = TPConfigs.SoftNameTW,
+                Prompt = "請輸入停止培訓課程的原因",
+                DefaultButtonIndex = 0,
+                Editor = new MemoEdit(),
+                DefaultResponse = ""
+            })?.ToString() ?? "";
 
+            if (string.IsNullOrEmpty(describe)) return;
+
+            personBase.Describe = describe;
+            var result = dt302_BaseBUS.Instance.AddOrUpdate(personBase);
+
+            if (result)
+            {
+                Close();
+            }
+            else
+            {
+                MsgTP.MsgErrorDB();
+            }
         }
     }
 }

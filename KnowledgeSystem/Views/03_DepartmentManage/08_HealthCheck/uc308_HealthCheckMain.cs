@@ -604,6 +604,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
 
         private void btnSummaryTable_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            return;
+
             var editor = new TextEdit { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) };
 
             // Thiết lập mask để buộc nhập đúng định dạng

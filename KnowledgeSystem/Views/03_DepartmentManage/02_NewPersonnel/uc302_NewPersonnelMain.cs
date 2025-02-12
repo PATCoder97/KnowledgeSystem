@@ -1,10 +1,15 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
 using DevExpress.Utils.Menu;
+using DevExpress.XtraEditors;
+using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraSplashScreen;
+using DevExpress.XtraTreeList.Columns;
+using DevExpress.XtraTreeList.StyleFormatConditions;
 using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._00_Generals;
+using Spire.Presentation;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -23,6 +28,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
         {
             InitializeComponent();
             InitializeIcon();
+            CreateRuleGV();
             InitializeMenuItems();
 
             helper = new RefreshHelper(gvData, "Id");
@@ -51,6 +57,30 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
             btnAdd.ImageOptions.SvgImage = TPSvgimages.Add;
             btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
             btnExportExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
+        }
+
+        private void CreateRuleGV()
+        {
+            gvData.FormatRules.Add(new GridFormatRule
+            {
+                Column = gColDesc,
+                ApplyToRow = true,
+                Rule = new FormatConditionRuleExpression
+                {
+                    Expression = "!IsNullOrEmpty([Describe])",
+                    Appearance =
+                    {
+                        ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.DisabledText,
+                        Font = new Font(gvData.Appearance.Row.Font, FontStyle.Italic)
+                    }
+                }
+            });
+
+            gvData.FormatRules.AddExpressionRule(gColDesc, new DevExpress.Utils.AppearanceDefault()
+            {
+                ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical,
+                Font = new Font(gvData.Appearance.Row.Font, FontStyle.Regular)
+            }, "!IsNullOrEmpty([Describe])");
         }
 
         private void InitializeMenuItems()

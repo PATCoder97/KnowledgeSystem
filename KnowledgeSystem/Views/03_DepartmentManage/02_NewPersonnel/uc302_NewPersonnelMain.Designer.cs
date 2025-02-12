@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
             DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule1 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression1 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc302_NewPersonnelMain));
             this.gvReport = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -49,6 +51,7 @@
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColDesc = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gvAttachment = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gColActualName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColEncryptName = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -206,7 +209,12 @@
             this.gColEnterDate,
             this.gridColumn6,
             this.gridColumn5,
-            this.gridColumn11});
+            this.gridColumn11,
+            this.gColDesc});
+            gridFormatRule1.Name = "Format0";
+            formatConditionRuleExpression1.Expression = "IsNullOrEmpty([Describe])";
+            gridFormatRule1.Rule = formatConditionRuleExpression1;
+            this.gvData.FormatRules.Add(gridFormatRule1);
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
             this.gvData.OptionsDetail.ShowDetailTabs = false;
@@ -300,6 +308,16 @@
             this.gridColumn11.Name = "gridColumn11";
             this.gridColumn11.Visible = true;
             this.gridColumn11.VisibleIndex = 6;
+            // 
+            // gColDesc
+            // 
+            this.gColDesc.AppearanceCell.ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical;
+            this.gColDesc.AppearanceCell.Options.UseForeColor = true;
+            this.gColDesc.Caption = "備註";
+            this.gColDesc.FieldName = "Describe";
+            this.gColDesc.Name = "gColDesc";
+            this.gColDesc.Visible = true;
+            this.gColDesc.VisibleIndex = 8;
             // 
             // gvAttachment
             // 
@@ -549,5 +567,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
         private DevExpress.XtraGrid.Columns.GridColumn gColIdAttach;
+        private DevExpress.XtraGrid.Columns.GridColumn gColDesc;
     }
 }
