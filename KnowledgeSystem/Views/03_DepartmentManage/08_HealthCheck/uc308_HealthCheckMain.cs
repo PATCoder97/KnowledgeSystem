@@ -15,6 +15,7 @@ using System.Windows.Forms;
 using System.Windows.Media.Animation;
 using BusinessLayer;
 using DataAccessLayer;
+using DevExpress.Charts.Heatmap.Native;
 using DevExpress.Data.Platform.Compatibility;
 using DevExpress.Utils.Menu;
 using DevExpress.Utils.Svg;
@@ -25,11 +26,13 @@ using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using DevExpress.XtraLayout;
+using DevExpress.XtraPrinting.Native;
 using DevExpress.XtraSplashScreen;
 using ExcelDataReader;
 using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt;
 using MiniSoftware;
+using OfficeOpenXml;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
@@ -604,8 +607,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
 
         private void btnSummaryTable_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            return;
-
             var editor = new TextEdit { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) };
 
             // Thiết lập mask để buộc nhập đúng định dạng
@@ -627,8 +628,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
             SaveFileDialog saveFile = new SaveFileDialog()
             {
                 RestoreDirectory = true,
-                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
-                FileName = $"健康檢查報告-{DateTime.Now:yyyyMMddHHmmss}.docx"
+                //InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
+                FileName = $"健康檢查報告-{DateTime.Now:yyyyMMddHHmmss}.xlsx"
             };
 
             if (saveFile.ShowDialog() != DialogResult.OK) return;
@@ -636,7 +637,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
             int yearStatistic = Convert.ToInt16(resultYear);
 
             // Đường dẫn đến temp và file kết quả
-            string PATH_TEMPLATE = Path.Combine(TPConfigs.ResourcesPath, "308_StatisticVN.docx");
+            string PATH_TEMPLATE = Path.Combine(TPConfigs.ResourcesPath, "308_Statistic.xlsx");
             string PATH_EXPORT = saveFile.FileName;
 
             // Lấy dữ liệu để xuất báo cáo , phải lọc theo thời gian
@@ -682,35 +683,29 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                 }).ToList()
             }).ToList();
 
-            var dt1 = statistics12.Where(r => r.data.CheckType == f308_CheckSession_Info.KSK_TruocViecLam)
-                 .Select(stat => new Dictionary<string, object>
-                 {
-                    { "datetime", stat.data?.DateSession.ToString("dd/MM/yyyy") ?? string.Empty },
-                    { "checkname", $"KSK {(stat.data?.CheckType.Split('/')[0] ?? "N/A")}"  },
-                    { "male", stat.maleCount },
-                    { "female", stat.femaleCount },
-                    { "total", stat.totalCount },
-                    { "h1", stat.healthRatingStats?.FirstOrDefault(r => r.HealthRating == 1)?.Count.ToString() ?? "" },
-                    { "h2", stat.healthRatingStats?.FirstOrDefault(r => r.HealthRating == 2)?.Count.ToString() ?? "" },
-                    { "h3", stat.healthRatingStats?.FirstOrDefault(r => r.HealthRating == 3)?.Count.ToString() ?? "" },
-                    { "h4", stat.healthRatingStats?.FirstOrDefault(r => r.HealthRating == 4)?.Count.ToString() ?? "" },
-                    { "h5", stat.healthRatingStats?.FirstOrDefault(r => r.HealthRating == 5)?.Count.ToString() ?? "" }
-                 }).ToList() ?? new List<Dictionary<string, object>>();
+            // Biểu mẫu 1: QUẢN LÝ SỨC KHỎE TRƯỚC KHI BỐ TRÍ VIỆC LÀM
+            // Biểu mẫu 2: QUẢN LÝ SỨC KHỎE NGƯỜI LAO ĐỘNG THÔNG QUA KHÁM SỨC KHỎE ĐỊNH KỲ
+            var dt12 = statistics12.Select(stat =>
+            {
+                var healthDict = stat.healthRatingStats?
+                    .ToDictionary(r => r.HealthRating, r => r.Count.ToString()) ?? new Dictionary<int, string>();
 
-            var dt2 = statistics12.Where(r => r.data.CheckType != f308_CheckSession_Info.KSK_TruocViecLam)
-                .Select(stat => new Dictionary<string, object>
+                return new
                 {
-                    { "datetime", stat.data?.DateSession.ToString("dd/MM/yyyy") ?? string.Empty },
-                    { "checkname",  $"KSK {(stat.data?.CheckType.Split('/')[0] ?? "N/A")}"  },
-                    { "male", stat.maleCount },
-                    { "female", stat.femaleCount },
-                    { "total", stat.totalCount },
-                    { "h1", stat.healthRatingStats?.FirstOrDefault(r => r.HealthRating == 1)?.Count.ToString() ?? "" },
-                    { "h2", stat.healthRatingStats?.FirstOrDefault(r => r.HealthRating == 2)?.Count.ToString() ?? "" },
-                    { "h3", stat.healthRatingStats?.FirstOrDefault(r => r.HealthRating == 3)?.Count.ToString() ?? "" },
-                    { "h4", stat.healthRatingStats?.FirstOrDefault(r => r.HealthRating == 4)?.Count.ToString() ?? "" },
-                    { "h5", stat.healthRatingStats?.FirstOrDefault(r => r.HealthRating == 5)?.Count.ToString() ?? "" }
-                }).ToList() ?? new List<Dictionary<string, object>>();
+                    checktype = stat.data.CheckType,
+                    datetime = stat.data?.DateSession,
+                    male_female_vn = $"Nam: {stat.maleCount}\r\nNữ: {stat.femaleCount}",
+                    male_female_tw = $"男：{stat.maleCount}\r\n女：{stat.femaleCount}",
+                    total = stat.totalCount,
+                    h1 = healthDict.GetValueOrDefault(1, ""),
+                    h2 = healthDict.GetValueOrDefault(2, ""),
+                    h3 = healthDict.GetValueOrDefault(3, ""),
+                    h4 = healthDict.GetValueOrDefault(4, ""),
+                    h5 = healthDict.GetValueOrDefault(5, ""),
+                    checkName_vn = $"KSK {(stat.data?.CheckType.Split('/')[0] ?? "N/A")}",
+                    checkName_tw = $"{(stat.data?.CheckType.Split('/')[1] ?? "N/A")}"
+                };
+            }).ToList();
 
             // Biểu mẫu 3: TÌNH HÌNH BỆNH TẬT TRONG THỜI GIAN BÁO CÁO
             // Hàm xử lý thống kê bệnh (chuyển sang int)
@@ -846,46 +841,160 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                 { "female",  stat.CountFemale },
             }).ToList();
 
+            File.Copy(PATH_TEMPLATE, PATH_EXPORT, true);
 
-
-
-            var value = new Dictionary<string, object>
+            FileInfo newFile = new FileInfo(PATH_EXPORT);
+            using (ExcelPackage pck = new ExcelPackage(newFile))
             {
-                ["year"] = yearStatistic,
+                SplashScreenManager.ShowDefaultWaitForm();
+                var wsPhuLuc2 = pck.Workbook.Worksheets["Phụ lục 2"];
+                var wsBieuMau1 = pck.Workbook.Worksheets["Biểu mẫu 1"];
+                var wsBieuMau2 = pck.Workbook.Worksheets["Biểu mẫu 2"];
+
+                wsPhuLuc2.Cells["A2"].Value = $"(Năm {yearStatistic})";
+                wsPhuLuc2.Cells["A10"].Value = $"Năm : {yearStatistic}";
+
+                wsPhuLuc2.Cells["A16"].Value = $"({yearStatistic}年)";
+                wsPhuLuc2.Cells["A24"].Value = $"年：{yearStatistic}";
+
+                var dt1 = dt12.Where(r => r.checktype == f308_CheckSession_Info.KSK_TruocViecLam);
+                int dt1RowIns = dt1.Count() - 1;
+                if (dt1RowIns != 0)
+                {
+                    wsBieuMau1.InsertRow(6, dt1RowIns);
+                    wsBieuMau1.InsertRow(12 + dt1RowIns, dt1RowIns);
+
+                    for (int i = 0; i < dt1RowIns; i++)
+                    {
+                        var destinationRange = wsBieuMau1.Cells[$"A{6 + i}:Z{6 + i}"];
+                        wsBieuMau1.Cells["A5:Z5"].Copy(destinationRange);
+                        wsBieuMau1.Rows[6 + i].Height = wsBieuMau1.Rows[5 + i].Height;
+
+                        destinationRange = wsBieuMau1.Cells[$"A{12 + dt1RowIns + i}:Z{12 + dt1RowIns + i}"];
+                        wsBieuMau1.Cells["A5:Z5"].Copy(destinationRange);
+                        wsBieuMau1.Rows[12 + dt1RowIns + i].Height = wsBieuMau1.Rows[11 + dt1RowIns + i].Height;
+                    }
+                }
 
                 // Biểu mẫu 1: QUẢN LÝ SỨC KHỎE TRƯỚC KHI BỐ TRÍ VIỆC LÀM
-                ["dt1"] = dt1,
+                int index = 0;
+                foreach (var item in dt1)
+                {
+                    wsBieuMau1.Cells[$"A{5 + index}"].Value = item.datetime?.ToString("dd/MM/yyyy");
+                    wsBieuMau1.Cells[$"G{5 + index}"].Value = item.male_female_vn;
+                    wsBieuMau1.Cells[$"L{5 + index}"].Value = item.total;
+                    wsBieuMau1.Cells[$"Q{5 + index}"].Value = item.h1;
+                    wsBieuMau1.Cells[$"S{5 + index}"].Value = item.h2;
+                    wsBieuMau1.Cells[$"U{5 + index}"].Value = item.h3;
+                    wsBieuMau1.Cells[$"W{5 + index}"].Value = item.h4;
+                    wsBieuMau1.Cells[$"Y{5 + index}"].Value = item.h5;
+
+                    wsBieuMau1.Cells[$"A{11 + dt1RowIns + index}"].Value = item.datetime?.ToString("yyyy/MM/dd");
+                    wsBieuMau1.Cells[$"G{11 + dt1RowIns + index}"].Value = item.male_female_tw;
+                    wsBieuMau1.Cells[$"L{11 + dt1RowIns + index}"].Value = item.total;
+                    wsBieuMau1.Cells[$"Q{11 + dt1RowIns + index}"].Value = item.h1;
+                    wsBieuMau1.Cells[$"S{11 + dt1RowIns + index}"].Value = item.h2;
+                    wsBieuMau1.Cells[$"U{11 + dt1RowIns + index}"].Value = item.h3;
+                    wsBieuMau1.Cells[$"W{11 + dt1RowIns + index}"].Value = item.h4;
+                    wsBieuMau1.Cells[$"Y{11 + dt1RowIns + index}"].Value = item.h5;
+
+                    index++;
+                }
+
+                var dt2 = dt12.Where(r => r.checktype != f308_CheckSession_Info.KSK_TruocViecLam);
+                int dt2RowIns = dt2.Count() - 1;
+                if (dt2RowIns != 0)
+                {
+                    wsBieuMau2.InsertRow(6, dt2RowIns);
+                    wsBieuMau2.InsertRow(12 + dt2RowIns, dt2RowIns);
+
+                    for (int i = 0; i < dt2RowIns; i++)
+                    {
+                        var destinationRange = wsBieuMau2.Cells[$"A{6 + i}:Z{6 + i}"];
+                        wsBieuMau2.Cells["A5:Z5"].Copy(destinationRange);
+                        wsBieuMau2.Rows[6 + i].Height = wsBieuMau2.Rows[5 + i].Height;
+
+                        destinationRange = wsBieuMau2.Cells[$"A{12 + dt2RowIns + i}:Z{12 + dt2RowIns + i}"];
+                        wsBieuMau2.Cells["A5:Z5"].Copy(destinationRange);
+                        wsBieuMau2.Rows[12 + dt2RowIns + i].Height = wsBieuMau2.Rows[11 + dt2RowIns + i].Height;
+                    }
+                }
 
                 // Biểu mẫu 2: QUẢN LÝ SỨC KHỎE NGƯỜI LAO ĐỘNG THÔNG QUA KHÁM SỨC KHỎE ĐỊNH KỲ
-                ["dt2"] = dt2,
+                index = 0;
+                foreach (var item in dt2)
+                {
+                    wsBieuMau2.Cells[$"A{5 + index}"].Value = $"{item.datetime:dd/MM/yyyy}\r\n{item.checkName_vn}";
+                    wsBieuMau2.Cells[$"G{5 + index}"].Value = item.male_female_vn;
+                    wsBieuMau2.Cells[$"L{5 + index}"].Value = item.total;
+                    wsBieuMau2.Cells[$"Q{5 + index}"].Value = item.h1;
+                    wsBieuMau2.Cells[$"S{5 + index}"].Value = item.h2;
+                    wsBieuMau2.Cells[$"U{5 + index}"].Value = item.h3;
+                    wsBieuMau2.Cells[$"W{5 + index}"].Value = item.h4;
+                    wsBieuMau2.Cells[$"Y{5 + index}"].Value = item.h5;
+
+                    wsBieuMau2.Cells[$"A{11 + dt2RowIns + index}"].Value = $"{item.datetime:yyyy/MM/dd}\r\n{item.checkName_tw}";
+                    wsBieuMau2.Cells[$"G{11 + dt2RowIns + index}"].Value = item.male_female_tw;
+                    wsBieuMau2.Cells[$"L{11 + dt2RowIns + index}"].Value = item.total;
+                    wsBieuMau2.Cells[$"Q{11 + dt2RowIns + index}"].Value = item.h1;
+                    wsBieuMau2.Cells[$"S{11 + dt2RowIns + index}"].Value = item.h2;
+                    wsBieuMau2.Cells[$"U{11 + dt2RowIns + index}"].Value = item.h3;
+                    wsBieuMau2.Cells[$"W{11 + dt2RowIns + index}"].Value = item.h4;
+                    wsBieuMau2.Cells[$"Y{11 + dt2RowIns + index}"].Value = item.h5;
+
+                    index++;
+                }
 
                 // Biểu mẫu 3: TÌNH HÌNH BỆNH TẬT TRONG THỜI GIAN BÁO CÁO
-                ["dt31"] = dt31,
-                ["dt32"] = dt32,
 
-                ["t1q1"] = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q1")?.TotalDisease1.ToString() ?? "-",
-                ["t1q2"] = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q2")?.TotalDisease1.ToString() ?? "-",
-                ["t1q3"] = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q3")?.TotalDisease1.ToString() ?? "-",
-                ["t1q4"] = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q4")?.TotalDisease1.ToString() ?? "-",
+                // Lưu và chỉ hiện Sheet BB
+                //pck.Workbook.View.ActiveTab = 1;
+                pck.Save();
 
-                ["t2q1"] = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q1")?.TotalDisease3.ToString() ?? "-",
-                ["t2q2"] = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q2")?.TotalDisease3.ToString() ?? "-",
-                ["t2q3"] = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q3")?.TotalDisease3.ToString() ?? "-",
-                ["t2q4"] = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q4")?.TotalDisease3.ToString() ?? "-",
+                SplashScreenManager.CloseDefaultWaitForm();
 
-                // Biểu mẫu 5: QUẢN LÝ BỆNH MÃN TÍNH 
-                ["dt5"] = dt5,
-
-                // Biểu mẫu 7:THEO DÕI BỆNH NGHỀ NGHIỆP
-                ["dt7"] = dt7,
-                ["dt7ttotal"] = statistics7.Sum(r => r.TotalCount),
-                ["dt7tfemale"] = statistics7.Sum(r => r.CountFemale)
-            };
+                Process.Start(PATH_EXPORT);
+            }
 
 
-            MiniWord.SaveAsByTemplate(PATH_EXPORT, PATH_TEMPLATE, value);
 
-            Process.Start(PATH_EXPORT);
+            //var value = new Dictionary<string, object>
+            //{
+            //    ["year"] = yearStatistic,
+
+            //    // Biểu mẫu 1: QUẢN LÝ SỨC KHỎE TRƯỚC KHI BỐ TRÍ VIỆC LÀM
+            //    ["dt1"] = dt1,
+
+            //    // Biểu mẫu 2: QUẢN LÝ SỨC KHỎE NGƯỜI LAO ĐỘNG THÔNG QUA KHÁM SỨC KHỎE ĐỊNH KỲ
+            //    ["dt2"] = dt2,
+
+            //    // Biểu mẫu 3: TÌNH HÌNH BỆNH TẬT TRONG THỜI GIAN BÁO CÁO
+            //    ["dt31"] = dt31,
+            //    ["dt32"] = dt32,
+
+            //    ["t1q1"] = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q1")?.TotalDisease1.ToString() ?? "-",
+            //    ["t1q2"] = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q2")?.TotalDisease1.ToString() ?? "-",
+            //    ["t1q3"] = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q3")?.TotalDisease1.ToString() ?? "-",
+            //    ["t1q4"] = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q4")?.TotalDisease1.ToString() ?? "-",
+
+            //    ["t2q1"] = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q1")?.TotalDisease3.ToString() ?? "-",
+            //    ["t2q2"] = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q2")?.TotalDisease3.ToString() ?? "-",
+            //    ["t2q3"] = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q3")?.TotalDisease3.ToString() ?? "-",
+            //    ["t2q4"] = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q4")?.TotalDisease3.ToString() ?? "-",
+
+            //    // Biểu mẫu 5: QUẢN LÝ BỆNH MÃN TÍNH 
+            //    ["dt5"] = dt5,
+
+            //    // Biểu mẫu 7:THEO DÕI BỆNH NGHỀ NGHIỆP
+            //    ["dt7"] = dt7,
+            //    ["dt7ttotal"] = statistics7.Sum(r => r.TotalCount),
+            //    ["dt7tfemale"] = statistics7.Sum(r => r.CountFemale)
+            //};
+
+
+            //MiniWord.SaveAsByTemplate(PATH_EXPORT, PATH_TEMPLATE, value);
+
+            //Process.Start(PATH_EXPORT);
 
         }
     }
