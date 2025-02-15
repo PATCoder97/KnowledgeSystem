@@ -27,6 +27,7 @@ using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using DevExpress.XtraLayout;
 using DevExpress.XtraPrinting.Native;
+using DevExpress.XtraReports.Design;
 using DevExpress.XtraSplashScreen;
 using ExcelDataReader;
 using KnowledgeSystem.Helpers;
@@ -35,6 +36,7 @@ using MiniSoftware;
 using OfficeOpenXml;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using static DevExpress.XtraEditors.Filtering.DataItemsExtension;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
 {
@@ -607,6 +609,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
 
         private void btnSummaryTable_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+#if DEBUG
+            int yearStatistic = 2025;
+            string PATH_EXPORT = Path.Combine("C:\\Users\\Dell Alpha\\Desktop\\RÁC 1\\Test308", $"健康檢查報告-{DateTime.Now:yyyyMMddHHmmss}.xlsx");
+#else
+
             var editor = new TextEdit { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) };
 
             // Thiết lập mask để buộc nhập đúng định dạng
@@ -637,8 +644,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
             int yearStatistic = Convert.ToInt16(resultYear);
 
             // Đường dẫn đến temp và file kết quả
-            string PATH_TEMPLATE = Path.Combine(TPConfigs.ResourcesPath, "308_Statistic.xlsx");
             string PATH_EXPORT = saveFile.FileName;
+
+#endif
+            string PATH_TEMPLATE = Path.Combine(TPConfigs.ResourcesPath, "308_Statistic.xlsx");
 
             // Lấy dữ liệu để xuất báo cáo , phải lọc theo thời gian
             var sessionFilter = dt308CheckSession.Where(r => r.DateSession.Year == yearStatistic).ToList();
@@ -754,31 +763,27 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                 };
             }).ToList();
 
-            var dt31 = dt308Diseases
-            .Where(r => r.DiseaseType == 1)
-            .Select((r, index) => new Dictionary<string, object>
+            var dt31 = dt308Diseases.Where(r => r.DiseaseType == 1).Select((r, index) => new
             {
-                { "no", index + 1 }, // Tăng từ 1
-                { "name", r.DisplayNameVN },
-                { "q1", statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q1")?.Disease1Stats.FirstOrDefault(u => u.Id == r.Id)?.Count ?? "-" },
-                { "q2", statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q2")?.Disease1Stats.FirstOrDefault(u => u.Id == r.Id)?.Count ?? "-" },
-                { "q3", statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q3")?.Disease1Stats.FirstOrDefault(u => u.Id == r.Id)?.Count ?? "-" },
-                { "q4", statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q4")?.Disease1Stats.FirstOrDefault(u => u.Id == r.Id)?.Count ?? "-" }
-            })
-            .ToList();
+                No = index + 1,
+                NameVN = r.DisplayNameVN,
+                NameTW = r.DisplayNameTW,
+                Q1 = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q1")?.Disease1Stats.FirstOrDefault(u => u.Id == r.Id)?.Count ?? "-",
+                Q2 = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q2")?.Disease1Stats.FirstOrDefault(u => u.Id == r.Id)?.Count ?? "-",
+                Q3 = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q3")?.Disease1Stats.FirstOrDefault(u => u.Id == r.Id)?.Count ?? "-",
+                Q4 = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q4")?.Disease1Stats.FirstOrDefault(u => u.Id == r.Id)?.Count ?? "-"
+            }).ToList();
 
-            var dt32 = dt308Diseases
-            .Where(r => r.DiseaseType == 2)
-            .Select((r, index) => new Dictionary<string, object>
+            var dt32 = dt308Diseases.Where(r => r.DiseaseType == 2).Select((r, index) => new
             {
-            { "no", index + 1 }, // Tăng từ 1
-            { "name", r.DisplayNameVN },
-            { "q1", statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q1")?.Disease3Stats.FirstOrDefault(u => u.Id == r.Id)?.Count ?? "-" },
-            { "q2", statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q2")?.Disease3Stats.FirstOrDefault(u => u.Id == r.Id)?.Count ?? "-" },
-            { "q3", statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q3")?.Disease3Stats.FirstOrDefault(u => u.Id == r.Id)?.Count ?? "-" },
-            { "q4", statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q4")?.Disease3Stats.FirstOrDefault(u => u.Id == r.Id)?.Count ?? "-" }
-            })
-            .ToList();
+                No = index + 1,
+                NameVN = r.DisplayNameVN,
+                NameTW = r.DisplayNameTW,
+                Q1 = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q1")?.Disease2Stats.FirstOrDefault(u => u.Id == r.Id)?.Count ?? "-",
+                Q2 = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q2")?.Disease2Stats.FirstOrDefault(u => u.Id == r.Id)?.Count ?? "-",
+                Q3 = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q3")?.Disease2Stats.FirstOrDefault(u => u.Id == r.Id)?.Count ?? "-",
+                Q4 = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q4")?.Disease2Stats.FirstOrDefault(u => u.Id == r.Id)?.Count ?? "-"
+            }).ToList();
 
             // Biểu mẫu 5: QUẢN LÝ BỆNH MÃN TÍNH
             var result = (from data in sessionFilter.Where(r => r.CheckType != f308_CheckSession_Info.KSK_TruocViecLam)
@@ -850,6 +855,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                 var wsPhuLuc2 = pck.Workbook.Worksheets["Phụ lục 2"];
                 var wsBieuMau1 = pck.Workbook.Worksheets["Biểu mẫu 1"];
                 var wsBieuMau2 = pck.Workbook.Worksheets["Biểu mẫu 2"];
+                var wsBieuMau3 = pck.Workbook.Worksheets["Biểu mẫu 3"];
 
                 wsPhuLuc2.Cells["A2"].Value = $"(Năm {yearStatistic})";
                 wsPhuLuc2.Cells["A10"].Value = $"Năm : {yearStatistic}";
@@ -857,95 +863,114 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                 wsPhuLuc2.Cells["A16"].Value = $"({yearStatistic}年)";
                 wsPhuLuc2.Cells["A24"].Value = $"年：{yearStatistic}";
 
+                // Biểu mẫu 1: QUẢN LÝ SỨC KHỎE TRƯỚC KHI BỐ TRÍ VIỆC LÀM
                 var dt1 = dt12.Where(r => r.checktype == f308_CheckSession_Info.KSK_TruocViecLam);
                 int dt1RowIns = dt1.Count() - 1;
-                if (dt1RowIns != 0)
+
+                void InsertDataWS1(int startRow, bool IsVietnamese = true)
                 {
-                    wsBieuMau1.InsertRow(6, dt1RowIns);
-                    wsBieuMau1.InsertRow(12 + dt1RowIns, dt1RowIns);
+                    int index1 = 0;
+                    wsBieuMau1.InsertRow(startRow, dt1RowIns);
+                    string formatDate = IsVietnamese ? "dd/MM/yyyy" : "yyyy/MM/dd";
 
-                    for (int i = 0; i < dt1RowIns; i++)
+                    foreach (var item in dt1)
                     {
-                        var destinationRange = wsBieuMau1.Cells[$"A{6 + i}:Z{6 + i}"];
-                        wsBieuMau1.Cells["A5:Z5"].Copy(destinationRange);
-                        wsBieuMau1.Rows[6 + i].Height = wsBieuMau1.Rows[5 + i].Height;
+                        if (item != dt1.Last())
+                        {
+                            var destinationRange = wsBieuMau1.Cells[$"A{startRow + index1}:Z{startRow + index1}"];
+                            wsBieuMau1.Cells[$"A{startRow - 1}:Z{startRow - 1}"].Copy(destinationRange);
+                            wsBieuMau1.Rows[startRow + index1].Height = wsBieuMau1.Rows[startRow - 1].Height;
+                        }
 
-                        destinationRange = wsBieuMau1.Cells[$"A{12 + dt1RowIns + i}:Z{12 + dt1RowIns + i}"];
-                        wsBieuMau1.Cells["A5:Z5"].Copy(destinationRange);
-                        wsBieuMau1.Rows[12 + dt1RowIns + i].Height = wsBieuMau1.Rows[11 + dt1RowIns + i].Height;
+                        wsBieuMau1.Cells[$"A{startRow - 1 + index1}"].Value = $"{item.datetime?.ToString(formatDate)}";
+                        wsBieuMau1.Cells[$"G{startRow - 1 + index1}"].Value = IsVietnamese ? item.male_female_vn : item.male_female_tw;
+                        wsBieuMau1.Cells[$"L{startRow - 1 + index1}"].Value = item.total;
+                        wsBieuMau1.Cells[$"Q{startRow - 1 + index1}"].Value = item.h1;
+                        wsBieuMau1.Cells[$"S{startRow - 1 + index1}"].Value = item.h2;
+                        wsBieuMau1.Cells[$"U{startRow - 1 + index1}"].Value = item.h3;
+                        wsBieuMau1.Cells[$"W{startRow - 1 + index1}"].Value = item.h4;
+                        wsBieuMau1.Cells[$"Y{startRow - 1 + index1}"].Value = item.h5;
+
+                        index1++;
                     }
                 }
 
-                // Biểu mẫu 1: QUẢN LÝ SỨC KHỎE TRƯỚC KHI BỐ TRÍ VIỆC LÀM
-                int index = 0;
-                foreach (var item in dt1)
-                {
-                    wsBieuMau1.Cells[$"A{5 + index}"].Value = item.datetime?.ToString("dd/MM/yyyy");
-                    wsBieuMau1.Cells[$"G{5 + index}"].Value = item.male_female_vn;
-                    wsBieuMau1.Cells[$"L{5 + index}"].Value = item.total;
-                    wsBieuMau1.Cells[$"Q{5 + index}"].Value = item.h1;
-                    wsBieuMau1.Cells[$"S{5 + index}"].Value = item.h2;
-                    wsBieuMau1.Cells[$"U{5 + index}"].Value = item.h3;
-                    wsBieuMau1.Cells[$"W{5 + index}"].Value = item.h4;
-                    wsBieuMau1.Cells[$"Y{5 + index}"].Value = item.h5;
-
-                    wsBieuMau1.Cells[$"A{11 + dt1RowIns + index}"].Value = item.datetime?.ToString("yyyy/MM/dd");
-                    wsBieuMau1.Cells[$"G{11 + dt1RowIns + index}"].Value = item.male_female_tw;
-                    wsBieuMau1.Cells[$"L{11 + dt1RowIns + index}"].Value = item.total;
-                    wsBieuMau1.Cells[$"Q{11 + dt1RowIns + index}"].Value = item.h1;
-                    wsBieuMau1.Cells[$"S{11 + dt1RowIns + index}"].Value = item.h2;
-                    wsBieuMau1.Cells[$"U{11 + dt1RowIns + index}"].Value = item.h3;
-                    wsBieuMau1.Cells[$"W{11 + dt1RowIns + index}"].Value = item.h4;
-                    wsBieuMau1.Cells[$"Y{11 + dt1RowIns + index}"].Value = item.h5;
-
-                    index++;
-                }
-
-                var dt2 = dt12.Where(r => r.checktype != f308_CheckSession_Info.KSK_TruocViecLam);
-                int dt2RowIns = dt2.Count() - 1;
-                if (dt2RowIns != 0)
-                {
-                    wsBieuMau2.InsertRow(6, dt2RowIns);
-                    wsBieuMau2.InsertRow(12 + dt2RowIns, dt2RowIns);
-
-                    for (int i = 0; i < dt2RowIns; i++)
-                    {
-                        var destinationRange = wsBieuMau2.Cells[$"A{6 + i}:Z{6 + i}"];
-                        wsBieuMau2.Cells["A5:Z5"].Copy(destinationRange);
-                        wsBieuMau2.Rows[6 + i].Height = wsBieuMau2.Rows[5 + i].Height;
-
-                        destinationRange = wsBieuMau2.Cells[$"A{12 + dt2RowIns + i}:Z{12 + dt2RowIns + i}"];
-                        wsBieuMau2.Cells["A5:Z5"].Copy(destinationRange);
-                        wsBieuMau2.Rows[12 + dt2RowIns + i].Height = wsBieuMau2.Rows[11 + dt2RowIns + i].Height;
-                    }
-                }
+                InsertDataWS1(12, false);
+                InsertDataWS1(6, true);
 
                 // Biểu mẫu 2: QUẢN LÝ SỨC KHỎE NGƯỜI LAO ĐỘNG THÔNG QUA KHÁM SỨC KHỎE ĐỊNH KỲ
-                index = 0;
-                foreach (var item in dt2)
+                var dt2 = dt12.Where(r => r.checktype != f308_CheckSession_Info.KSK_TruocViecLam).ToList();
+                int dt2RowIns = dt2.Count() - 1;
+
+                void InsertDataWS2(int startRow, bool IsVietnamese = true)
                 {
-                    wsBieuMau2.Cells[$"A{5 + index}"].Value = $"{item.datetime:dd/MM/yyyy}\r\n{item.checkName_vn}";
-                    wsBieuMau2.Cells[$"G{5 + index}"].Value = item.male_female_vn;
-                    wsBieuMau2.Cells[$"L{5 + index}"].Value = item.total;
-                    wsBieuMau2.Cells[$"Q{5 + index}"].Value = item.h1;
-                    wsBieuMau2.Cells[$"S{5 + index}"].Value = item.h2;
-                    wsBieuMau2.Cells[$"U{5 + index}"].Value = item.h3;
-                    wsBieuMau2.Cells[$"W{5 + index}"].Value = item.h4;
-                    wsBieuMau2.Cells[$"Y{5 + index}"].Value = item.h5;
+                    int index2 = 0;
+                    wsBieuMau2.InsertRow(startRow, dt2RowIns);
+                    string checkNameProp = IsVietnamese ? "checkName_vn" : "checkName_tw";
+                    string formatDate = IsVietnamese ? "dd/MM/yyyy" : "yyyy/MM/dd";
 
-                    wsBieuMau2.Cells[$"A{11 + dt2RowIns + index}"].Value = $"{item.datetime:yyyy/MM/dd}\r\n{item.checkName_tw}";
-                    wsBieuMau2.Cells[$"G{11 + dt2RowIns + index}"].Value = item.male_female_tw;
-                    wsBieuMau2.Cells[$"L{11 + dt2RowIns + index}"].Value = item.total;
-                    wsBieuMau2.Cells[$"Q{11 + dt2RowIns + index}"].Value = item.h1;
-                    wsBieuMau2.Cells[$"S{11 + dt2RowIns + index}"].Value = item.h2;
-                    wsBieuMau2.Cells[$"U{11 + dt2RowIns + index}"].Value = item.h3;
-                    wsBieuMau2.Cells[$"W{11 + dt2RowIns + index}"].Value = item.h4;
-                    wsBieuMau2.Cells[$"Y{11 + dt2RowIns + index}"].Value = item.h5;
+                    foreach (var item in dt2)
+                    {
+                        if (item != dt2.Last())
+                        {
+                            var destinationRange = wsBieuMau2.Cells[$"A{startRow + index2}:Z{startRow + index2}"];
+                            wsBieuMau2.Cells[$"A{startRow - 1}:Z{startRow - 1}"].Copy(destinationRange);
+                            wsBieuMau2.Rows[startRow + index2].Height = wsBieuMau2.Rows[startRow - 1].Height;
+                        }
 
-                    index++;
+                        wsBieuMau2.Cells[$"A{startRow - 1 + index2}"].Value = $"{item.datetime?.ToString(formatDate)}\r\n{item.GetType().GetProperty(checkNameProp).GetValue(item)}";
+                        wsBieuMau2.Cells[$"G{startRow - 1 + index2}"].Value = IsVietnamese ? item.male_female_vn : item.male_female_tw;
+                        wsBieuMau2.Cells[$"L{startRow - 1 + index2}"].Value = item.total;
+                        wsBieuMau2.Cells[$"Q{startRow - 1 + index2}"].Value = item.h1;
+                        wsBieuMau2.Cells[$"S{startRow - 1 + index2}"].Value = item.h2;
+                        wsBieuMau2.Cells[$"U{startRow - 1 + index2}"].Value = item.h3;
+                        wsBieuMau2.Cells[$"W{startRow - 1 + index2}"].Value = item.h4;
+                        wsBieuMau2.Cells[$"Y{startRow - 1 + index2}"].Value = item.h5;
+
+                        index2++;
+                    }
                 }
 
+                InsertDataWS2(12, false);
+                InsertDataWS2(6, true);
+
                 // Biểu mẫu 3: TÌNH HÌNH BỆNH TẬT TRONG THỜI GIAN BÁO CÁO
+                void InsertDataWS3(int startRow, IEnumerable<dynamic> data, bool IsVietnamese = true)
+                {
+                    int rowCount = data.Count() - 1;
+                    wsBieuMau3.InsertRow(startRow, rowCount);
+
+                    int i = 0;
+                    foreach (var item in data)
+                    {
+                        if (i != rowCount)
+                        {
+                            var destinationRange = wsBieuMau3.Cells[$"A{startRow + i}:AD{startRow + i}"];
+                            wsBieuMau3.Cells[$"A{startRow + rowCount}:AD{startRow + rowCount}"].Copy(destinationRange);
+                        }
+
+                        wsBieuMau3.Cells[$"A{startRow + i}"].Value = item.No;
+                        wsBieuMau3.Cells[$"D{startRow + i}"].Value = IsVietnamese ? item.NameVN : item.NameTW;
+                        wsBieuMau3.Cells[$"O{startRow + i}"].Value = item.Q1;
+                        wsBieuMau3.Cells[$"S{startRow + i}"].Value = item.Q2;
+                        wsBieuMau3.Cells[$"W{startRow + i}"].Value = item.Q3;
+                        wsBieuMau3.Cells[$"AA{startRow + i}"].Value = item.Q4;
+                        i++;
+                    }
+                }
+
+                // Gọi hàm cho từng trường hợp
+                InsertDataWS3(21, dt32, false);
+                InsertDataWS3(18, dt31, false);
+                InsertDataWS3(8, dt32);
+                InsertDataWS3(5, dt31);
+
+
+
+
+                //index = 0;
+
+
 
                 // Lưu và chỉ hiện Sheet BB
                 //pck.Workbook.View.ActiveTab = 1;
