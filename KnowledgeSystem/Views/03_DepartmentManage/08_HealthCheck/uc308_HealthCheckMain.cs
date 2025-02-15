@@ -786,65 +786,59 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
             }).ToList();
 
             // Biểu mẫu 5: QUẢN LÝ BỆNH MÃN TÍNH
-            var result = (from data in sessionFilter.Where(r => r.CheckType != f308_CheckSession_Info.KSK_TruocViecLam)
-                          from detail in dt308CheckDetail
-                          join user in users on detail.EmpId equals user.Id
-                          where detail.SessionId == data.Id && !string.IsNullOrEmpty(detail.Disease2)
-                          from diseaseId in detail.Disease2.Split(',') // Tách chuỗi Disease2
-                          join disease in dt308Diseases on diseaseId.Trim() equals disease.Id.ToString() // Join với dt308Diseases
-                          select new
-                          {
-                              UserIdDept = user.IdDepartment,
-                              UserDisplayName = user.DisplayNameVN,
-                              DiseaseDisplayNameVN = disease.DisplayNameVN,
-                              UserSex = user.Sex,
-                              JobAge = DateTime.Now.Year - user.DateCreate.Year - (DateTime.Now < user.DateCreate.AddYears(DateTime.Now.Year - user.DateCreate.Year) ? 1 : 0)
-                          }).OrderBy(r => r.UserDisplayName).ToList();
+            int CalculateAge(DateTime? dob) => dob.HasValue ? DateTime.Now.Year - dob.Value.Year - (DateTime.Now < dob.Value.AddYears(DateTime.Now.Year - dob.Value.Year) ? 1 : 0) : 0;
 
-            var dt5 = result.Select(stat => new Dictionary<string, object>
-            {
-                { "dept",   $"LG{stat.UserIdDept}" },
-                { "name",    stat.UserDisplayName },
-                { "disease", stat.DiseaseDisplayNameVN },
-                { "male",    stat.UserSex == true  ? "✓" : "" },
-                { "female",  stat.UserSex != true  ? "✓" : "" },
-                { "jobage",  stat.JobAge }
-            }).ToList();
+            var dt5 = sessionFilter
+                .Where(r => r.CheckType != f308_CheckSession_Info.KSK_TruocViecLam)
+                .SelectMany(data => dt308CheckDetail
+                    .Where(detail => detail.SessionId == data.Id && !string.IsNullOrEmpty(detail.Disease2))
+                    .SelectMany(detail => detail.Disease2.Split(',')
+                        .Select(diseaseId => new { detail, diseaseId })))
+                .Join(users, x => x.detail.EmpId, user => user.Id, (x, user) => new { x.detail, x.diseaseId, user })
+                .Join(dt308Diseases, x => x.diseaseId.Trim(), disease => disease.Id.ToString(), (x, disease) => new
+                {
+                    UserIdDept = x.user.IdDepartment,
+                    UserNameVN = x.user.DisplayNameVN,
+                    DiseaseNameVN = disease.DisplayNameVN,
+                    UserNameTW = x.user.DisplayName,
+                    DiseaseNameTW = disease.DisplayNameTW,
+                    Sex = x.user.Sex,
+                    Age = CalculateAge(x.user.DOB),
+                    JobAge = CalculateAge(x.user.DateCreate)
+                })
+                .OrderBy(r => r.UserNameVN)
+                .ToList();
+
 
             // Biểu mẫu 7:THEO DÕI BỆNH NGHỀ NGHIỆP
-            var statistics7 = (from data in sessionFilter.Where(r => r.CheckType != f308_CheckSession_Info.KSK_TruocViecLam)
-                               from detail in dt308CheckDetail
-                               join user in users on detail.EmpId equals user.Id
-                               where detail.SessionId == data.Id && !string.IsNullOrEmpty(detail.Disease3)
-                               from diseaseId in detail.Disease3.Split(',') // Tách chuỗi Disease2
-                               join disease in dt308Diseases on diseaseId.Trim() equals disease.Id.ToString() // Join với dt308Diseases
-                               select new
-                               {
-                                   ExamDate = data.DateSession,                      // Ngày khám
-                                   DiseaseId = disease.Id,
-                                   DiseaseDisplayNameVN = disease.DisplayNameVN, // Tên bệnh
-                                   UserSex = user.Sex                            // Giới tính
-                               })
-              .GroupBy(r => new { r.DiseaseId, r.DiseaseDisplayNameVN, r.ExamDate }) // Nhóm theo bệnh và ngày khám
-              .Select(g => new
-              {
-                  ExamDate = g.Key.ExamDate,
-                  DiseaseDisplayNameVN = g.Key.DiseaseDisplayNameVN,
-                  TotalCount = g.Count(),                        // Tổng số bệnh nhân
-                  CountMale = g.Count(x => x.UserSex == true),  // Đếm bệnh nhân nam
-                  CountFemale = g.Count(x => x.UserSex != true) // Đếm bệnh nhân nữ (nếu cần)
-              })
-              .OrderBy(r => r.ExamDate)
-              .ThenBy(r => r.DiseaseDisplayNameVN)
-              .ToList();
-
-            var dt7 = statistics7.Select(stat => new Dictionary<string, object>
-            {
-                { "date",    stat.ExamDate.ToString("dd/MM/yyyy") },
-                { "disease", stat.DiseaseDisplayNameVN },
-                { "total",   stat.TotalCount },
-                { "female",  stat.CountFemale },
-            }).ToList();
+            var dt7 = (from data in sessionFilter
+                       where data.CheckType != f308_CheckSession_Info.KSK_TruocViecLam
+                       from detail in dt308CheckDetail
+                       join user in users on detail.EmpId equals user.Id
+                       where detail.SessionId == data.Id && !string.IsNullOrEmpty(detail.Disease3)
+                       from diseaseId in detail.Disease3.Split(',').Select(d => d.Trim()) // Tách và loại bỏ khoảng trắng
+                       join disease in dt308Diseases on diseaseId equals disease.Id.ToString()
+                       select new
+                       {
+                           ExamDate = data.DateSession,
+                           DiseaseId = disease.Id,
+                           DiseaseDisplayNameVN = disease.DisplayNameVN,
+                           DiseaseDisplayNameTW = disease.DisplayNameTW,
+                           UserSex = user.Sex
+                       })
+                        .GroupBy(r => new { r.DiseaseId, r.DiseaseDisplayNameVN, r.DiseaseDisplayNameTW, r.ExamDate })
+                        .Select(g => new
+                        {
+                            ExamDate = g.Key.ExamDate,
+                            DiseaseDisplayNameVN = g.Key.DiseaseDisplayNameVN,
+                            DiseaseDisplayNameTW = g.Key.DiseaseDisplayNameTW,
+                            TotalCount = g.Count(),
+                            CountMale = g.Count(x => x.UserSex == true),
+                            CountFemale = g.Count(x => x.UserSex != true)
+                        })
+                        .OrderBy(r => r.ExamDate)
+                        .ThenBy(r => r.DiseaseDisplayNameVN)
+                        .ToList();
 
             File.Copy(PATH_TEMPLATE, PATH_EXPORT, true);
 
@@ -856,6 +850,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                 var wsBieuMau1 = pck.Workbook.Worksheets["Biểu mẫu 1"];
                 var wsBieuMau2 = pck.Workbook.Worksheets["Biểu mẫu 2"];
                 var wsBieuMau3 = pck.Workbook.Worksheets["Biểu mẫu 3"];
+                var wsBieuMau4 = pck.Workbook.Worksheets["Biểu mẫu 4"];
+                var wsBieuMau5 = pck.Workbook.Worksheets["Biểu mẫu 5"];
+                var wsBieuMau6 = pck.Workbook.Worksheets["Biểu mẫu 6"];
+                var wsBieuMau7 = pck.Workbook.Worksheets["Biểu mẫu 7"];
 
                 wsPhuLuc2.Cells["A2"].Value = $"(Năm {yearStatistic})";
                 wsPhuLuc2.Cells["A10"].Value = $"Năm : {yearStatistic}";
@@ -965,10 +963,96 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                 InsertDataWS3(8, dt32);
                 InsertDataWS3(5, dt31);
 
+                // Biểu mẫu 5: QUẢN LÝ BỆNH MÃN TÍNH
+                int dt5RowIns = dt5.Count() - 1;
 
+                void InsertDataWS5(int startRow, bool IsVietnamese = true)
+                {
+                    int index5 = 0;
+                    wsBieuMau5.InsertRow(startRow, dt5RowIns);
+                    int indexMergeStart = startRow - 1;
+                    int indexMergeStop = startRow - 1;
+                    string valueCell5 = IsVietnamese ? dt5.FirstOrDefault()?.UserNameVN : dt5.FirstOrDefault()?.UserNameTW;
 
+                    foreach (var item in dt5)
+                    {
+                        if (item != dt5.Last())
+                        {
+                            var destinationRange = wsBieuMau5.Cells[$"A{startRow + index5}:AD{startRow + index5}"];
+                            wsBieuMau5.Cells[$"A{startRow - 1}:AD{startRow - 1}"].Copy(destinationRange);
+                            wsBieuMau5.Rows[startRow + index5].Height = wsBieuMau5.Rows[startRow - 1].Height;
+                        }
 
-                //index = 0;
+                        wsBieuMau5.Cells[$"A{startRow - 1 + index5}"].Value = item.UserIdDept;
+                        wsBieuMau5.Cells[$"E{startRow - 1 + index5}"].Value = IsVietnamese ? item.UserNameVN : item.UserNameTW;
+                        wsBieuMau5.Cells[$"J{startRow - 1 + index5}"].Value = IsVietnamese ? item.DiseaseNameVN : item.DiseaseNameTW;
+                        wsBieuMau5.Cells[$"O{startRow - 1 + index5}"].Value = item.Sex == true ? item.Age.ToString() : "";
+                        wsBieuMau5.Cells[$"Q{startRow - 1 + index5}"].Value = item.Sex != true ? item.Age.ToString() : "";
+                        wsBieuMau5.Cells[$"S{startRow - 1 + index5}"].Value = item.JobAge;
+
+                        // Kiểm tra nếu giá trị UserName thay đổi -> merge ô trước đó
+                        string currentUserName = IsVietnamese ? item.UserNameVN : item.UserNameTW;
+                        if (currentUserName != valueCell5)
+                        {
+                            // Merge các ô từ indexMergeStart đến indexMergeStop
+                            if (indexMergeStop > indexMergeStart)
+                            {
+                                wsBieuMau5.Cells[$"A{indexMergeStart}:D{indexMergeStop}"].Merge = true;
+                                wsBieuMau5.Cells[$"E{indexMergeStart}:I{indexMergeStop}"].Merge = true;
+                                wsBieuMau5.Cells[$"O{indexMergeStart}:P{indexMergeStop}"].Merge = true;
+                                wsBieuMau5.Cells[$"Q{indexMergeStart}:R{indexMergeStop}"].Merge = true;
+                                wsBieuMau5.Cells[$"S{indexMergeStart}:T{indexMergeStop}"].Merge = true;
+                            }
+
+                            // Cập nhật giá trị mới cho UserName
+                            valueCell5 = currentUserName;
+                            indexMergeStart = startRow - 1 + index5;
+                        }
+
+                        indexMergeStop = startRow - 1 + index5;
+                        index5++;
+                    }
+
+                    // Merge lần cuối cùng nếu cần
+                    if (indexMergeStop > indexMergeStart)
+                    {
+                        wsBieuMau5.Cells[$"A{indexMergeStart}:D{indexMergeStop}"].Merge = true;
+                        wsBieuMau5.Cells[$"E{indexMergeStart}:I{indexMergeStop}"].Merge = true;
+                        wsBieuMau5.Cells[$"O{indexMergeStart}:P{indexMergeStop}"].Merge = true;
+                        wsBieuMau5.Cells[$"Q{indexMergeStart}:R{indexMergeStop}"].Merge = true;
+                        wsBieuMau5.Cells[$"S{indexMergeStart}:T{indexMergeStop}"].Merge = true;
+                    }
+                }
+
+                InsertDataWS5(13, false);
+                InsertDataWS5(6, true);
+
+                // Biểu mẫu 7:THEO DÕI BỆNH NGHỀ NGHIỆP
+                int dt7RowIns = dt7.Count() - 1;
+                void InsertDataWS7(int startRow, bool IsVietnamese = true)
+                {
+                    int index7 = 0;
+                    wsBieuMau7.InsertRow(startRow, dt7RowIns);
+
+                    foreach (var item in dt7)
+                    {
+                        if (item != dt7.Last())
+                        {
+                            var destinationRange = wsBieuMau7.Cells[$"A{startRow + index7}:AD{startRow + index7}"];
+                            wsBieuMau7.Cells[$"A{startRow + dt7RowIns}:AD{startRow + dt7RowIns}"].Copy(destinationRange);
+                            wsBieuMau7.Rows[startRow + dt7RowIns].Height = wsBieuMau7.Rows[startRow].Height;
+                        }
+
+                        wsBieuMau7.Cells[$"A{startRow + index7}"].Value = item.ExamDate.ToString(IsVietnamese ? "dd/MM/yyyy" : "yyyy/MM/dd");
+                        wsBieuMau7.Cells[$"C{startRow + index7}"].Value = IsVietnamese ? item.DiseaseDisplayNameVN : item.DiseaseDisplayNameTW;
+                        wsBieuMau7.Cells[$"G{startRow + index7}"].Value = item.TotalCount;
+                        wsBieuMau7.Cells[$"J{startRow + index7}"].Value = item.CountMale;
+
+                        index7++;
+                    }
+                }
+                InsertDataWS7(12, false);
+                InsertDataWS7(5, true);
 
 
 
