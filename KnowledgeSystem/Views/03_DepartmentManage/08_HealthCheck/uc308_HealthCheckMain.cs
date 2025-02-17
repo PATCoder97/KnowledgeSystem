@@ -29,6 +29,7 @@ using DevExpress.XtraLayout;
 using DevExpress.XtraPrinting.Native;
 using DevExpress.XtraReports.Design;
 using DevExpress.XtraSplashScreen;
+using DocumentFormat.OpenXml.Drawing.Charts;
 using ExcelDataReader;
 using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt;
@@ -37,6 +38,7 @@ using OfficeOpenXml;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using static DevExpress.XtraEditors.Filtering.DataItemsExtension;
+using DataTable = System.Data.DataTable;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
 {
@@ -84,8 +86,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
         {
             btnAdd.ImageOptions.SvgImage = TPSvgimages.Add;
             btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
-            btnExportExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
-            btnSummaryTable.ImageOptions.SvgImage = TPSvgimages.Word;
+            btnSummaryTable.ImageOptions.SvgImage = TPSvgimages.Excel;
         }
 
         private void CreateRuleGV()
@@ -809,6 +810,14 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                 .OrderBy(r => r.UserNameVN)
                 .ToList();
 
+            // Biểu mẫu 6: QUẢN LÝ BỆNH MÃN TÍNH THEO TỪNG BỆNH
+            var dt6 = dt5.GroupBy(r => new { r.DiseaseNameVN, r.DiseaseNameTW }).Select(g => new
+            {
+                DiseaseNameVN = g.Key.DiseaseNameVN,
+                DiseaseNameTW = g.Key.DiseaseNameTW,
+                Users = g.ToList()
+            }).ToList();
+
 
             // Biểu mẫu 7:THEO DÕI BỆNH NGHỀ NGHIỆP
             var dt7 = (from data in sessionFilter
@@ -854,6 +863,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                 var wsBieuMau5 = pck.Workbook.Worksheets["Biểu mẫu 5"];
                 var wsBieuMau6 = pck.Workbook.Worksheets["Biểu mẫu 6"];
                 var wsBieuMau7 = pck.Workbook.Worksheets["Biểu mẫu 7"];
+
+                wsBieuMau6.DefaultRowHeight = 20;
 
                 wsPhuLuc2.Cells["A2"].Value = $"(Năm {yearStatistic})";
                 wsPhuLuc2.Cells["A10"].Value = $"Năm : {yearStatistic}";
@@ -1027,6 +1038,55 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                 InsertDataWS5(13, false);
                 InsertDataWS5(6, true);
 
+                // Biểu mẫu 6: QUẢN LÝ BỆNH MÃN TÍNH THEO TỪNG BỆNH
+                int dt6RowIns = dt6.Count();
+
+                void InsertDataWS6(int startRow, bool IsVietnamese = true)
+                {
+                    int step = 5;
+
+                    for (int i = 0; i < dt6RowIns; i++)
+                    {
+                        int index6 = 0;
+
+                        if (i > 0)
+                        {
+                            wsBieuMau6.InsertRow(startRow, step);
+                            var destinationRange = wsBieuMau6.Cells[$"A{startRow}:Z{startRow + step - 1}"];
+                            wsBieuMau6.Cells[$"A{startRow + step}:Z{startRow - 1 + step * 2}"].Copy(destinationRange);
+                        }
+
+                        if (dt6[i].Users.Count > 1)
+                        {
+                            wsBieuMau6.InsertRow(startRow + step, dt6[i].Users.Count - 1);
+                        }
+
+                        foreach (var item in dt6[i].Users)
+                        {
+                            var destinationRange = wsBieuMau6.Cells[$"A{startRow + step - 1 + index6}:Z{startRow + step - 1 + index6}"];
+                            wsBieuMau6.Cells[$"A{startRow + 4}:Z{startRow + 4}"].Copy(destinationRange);
+
+                            wsBieuMau6.Cells[$"A{startRow + 1}"].Value = IsVietnamese
+                                ? $"Tên bệnh*: {item.DiseaseNameVN}"
+                                : $"慢性病名稱*：{item.DiseaseNameTW}";
+
+                            wsBieuMau6.Cells[$"A{startRow + 4 + index6}"].Value = index6 + 1;
+                            wsBieuMau6.Cells[$"B{startRow + 4 + index6}"].Value = item.UserIdDept;
+                            wsBieuMau6.Cells[$"F{startRow + 4 + index6}"].Value = IsVietnamese ? item.UserNameVN : item.UserNameTW;
+                            wsBieuMau6.Cells[$"K{startRow + 4 + index6}"].Value = item.Sex == true ? item.Age.ToString() : "";
+                            wsBieuMau6.Cells[$"M{startRow + 4 + index6}"].Value = item.Sex != true ? item.Age.ToString() : "";
+                            wsBieuMau6.Cells[$"O{startRow + 4 + index6}"].Value = item.JobAge;
+
+                            index6++;
+                        }
+                    }
+                }
+
+                // Gọi hàm
+                InsertDataWS6(9, false);
+                InsertDataWS6(2, true);
+
+
                 // Biểu mẫu 7:THEO DÕI BỆNH NGHỀ NGHIỆP
                 int dt7RowIns = dt7.Count() - 1;
                 void InsertDataWS7(int startRow, bool IsVietnamese = true)
@@ -1054,57 +1114,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                 InsertDataWS7(12, false);
                 InsertDataWS7(5, true);
 
-
-
                 // Lưu và chỉ hiện Sheet BB
-                //pck.Workbook.View.ActiveTab = 1;
                 pck.Save();
 
                 SplashScreenManager.CloseDefaultWaitForm();
 
                 Process.Start(PATH_EXPORT);
             }
-
-
-
-            //var value = new Dictionary<string, object>
-            //{
-            //    ["year"] = yearStatistic,
-
-            //    // Biểu mẫu 1: QUẢN LÝ SỨC KHỎE TRƯỚC KHI BỐ TRÍ VIỆC LÀM
-            //    ["dt1"] = dt1,
-
-            //    // Biểu mẫu 2: QUẢN LÝ SỨC KHỎE NGƯỜI LAO ĐỘNG THÔNG QUA KHÁM SỨC KHỎE ĐỊNH KỲ
-            //    ["dt2"] = dt2,
-
-            //    // Biểu mẫu 3: TÌNH HÌNH BỆNH TẬT TRONG THỜI GIAN BÁO CÁO
-            //    ["dt31"] = dt31,
-            //    ["dt32"] = dt32,
-
-            //    ["t1q1"] = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q1")?.TotalDisease1.ToString() ?? "-",
-            //    ["t1q2"] = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q2")?.TotalDisease1.ToString() ?? "-",
-            //    ["t1q3"] = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q3")?.TotalDisease1.ToString() ?? "-",
-            //    ["t1q4"] = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q4")?.TotalDisease1.ToString() ?? "-",
-
-            //    ["t2q1"] = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q1")?.TotalDisease3.ToString() ?? "-",
-            //    ["t2q2"] = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q2")?.TotalDisease3.ToString() ?? "-",
-            //    ["t2q3"] = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q3")?.TotalDisease3.ToString() ?? "-",
-            //    ["t2q4"] = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q4")?.TotalDisease3.ToString() ?? "-",
-
-            //    // Biểu mẫu 5: QUẢN LÝ BỆNH MÃN TÍNH 
-            //    ["dt5"] = dt5,
-
-            //    // Biểu mẫu 7:THEO DÕI BỆNH NGHỀ NGHIỆP
-            //    ["dt7"] = dt7,
-            //    ["dt7ttotal"] = statistics7.Sum(r => r.TotalCount),
-            //    ["dt7tfemale"] = statistics7.Sum(r => r.CountFemale)
-            //};
-
-
-            //MiniWord.SaveAsByTemplate(PATH_EXPORT, PATH_TEMPLATE, value);
-
-            //Process.Start(PATH_EXPORT);
-
         }
     }
 }
