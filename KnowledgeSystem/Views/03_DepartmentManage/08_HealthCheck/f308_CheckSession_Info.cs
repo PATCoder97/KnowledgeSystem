@@ -243,6 +243,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
             var nameVN = txbNameVN.Text.Trim();
             var nameTW = txbNameTW.Text.Trim();
             var checkType = cbbCheckType.Text;
+            var dept2word = TPConfigs.idDept2word;
 
             if (StringHelper.CheckUpcase(nameVN, 33) && nameVN.Length > 20)
             {
@@ -257,6 +258,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                 dt308CheckSession.DisplayNameVN = nameVN;
                 dt308CheckSession.DisplayNameTW = nameTW;
                 dt308CheckSession.CheckType = checkType;
+                dt308CheckSession.IdDept = dept2word;
 
                 switch (eventInfo)
                 {

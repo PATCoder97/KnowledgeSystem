@@ -12,13 +12,8 @@ namespace DataAccessLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class dt308_CheckSession
+    public partial class dt308_SpecialUsrCheck
     {
-        public int Id { get; set; }
-        public System.DateTime DateSession { get; set; }
-        public string DisplayNameVN { get; set; }
-        public string DisplayNameTW { get; set; }
-        public string CheckType { get; set; }
-        public string IdDept { get; set; }
+        public string Id { get; set; }
     }
 }

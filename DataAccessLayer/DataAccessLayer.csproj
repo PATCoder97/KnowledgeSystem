@@ -281,6 +281,9 @@
     <Compile Include="dt308_Disease.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
+    <Compile Include="dt308_SpecialUsrCheck.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
     <Compile Include="dt402_KPIWeb.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>

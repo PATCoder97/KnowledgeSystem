@@ -10,27 +10,27 @@ using Logger;
 
 namespace BusinessLayer
 {
-    public class dt308_CheckSessionBUS
+    public class dt308_SpecialUsrCheckBUS
     {
         TPLogger logger;
 
-        private static dt308_CheckSessionBUS instance;
+        private static dt308_SpecialUsrCheckBUS instance;
 
-        public static dt308_CheckSessionBUS Instance
+        public static dt308_SpecialUsrCheckBUS Instance
         {
-            get { if (instance == null) instance = new dt308_CheckSessionBUS(); return instance; }
+            get { if (instance == null) instance = new dt308_SpecialUsrCheckBUS(); return instance; }
             private set { instance = value; }
         }
 
-        private dt308_CheckSessionBUS() { logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName); }
+        private dt308_SpecialUsrCheckBUS() { logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName); }
 
-        public List<dt308_CheckSession> GetList()
+        public List<dt308_SpecialUsrCheck> GetList()
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dt308_CheckSession.ToList();
+                    return _context.dt308_SpecialUsrCheck.ToList();
                 }
             }
             catch (Exception ex)
@@ -40,13 +40,13 @@ namespace BusinessLayer
             }
         }
 
-        public List<dt308_CheckSession> GetListByIdDept(string idDept)
+        public dt308_SpecialUsrCheck GetItemById(string id)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dt308_CheckSession.Where(r => r.IdDept == idDept).ToList();
+                    return _context.dt308_SpecialUsrCheck.FirstOrDefault(r => r.Id == id);
                 }
             }
             catch (Exception ex)
@@ -56,52 +56,13 @@ namespace BusinessLayer
             }
         }
 
-        public dt308_CheckSession GetItemById(int id)
+        public bool Add(dt308_SpecialUsrCheck item)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dt308_CheckSession.FirstOrDefault(r => r.Id == id);
-                }
-            }
-            catch (Exception ex)
-            {
-                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
-                throw;
-            }
-        }
-
-        public int Add(dt308_CheckSession item)
-        {
-            try
-            {
-                using (var _context = new DBDocumentManagementSystemEntities())
-                {
-                    _context.dt308_CheckSession.Add(item);
-                    int affectedRecords = _context.SaveChanges();
-                    if (affectedRecords > 0)
-                    {
-                        return item.Id;
-                    }
-
-                    return -1;
-                }
-            }
-            catch (Exception ex)
-            {
-                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
-                return -1;
-            }
-        }
-
-        public bool AddRange(List<dt308_CheckSession> items)
-        {
-            try
-            {
-                using (var _context = new DBDocumentManagementSystemEntities())
-                {
-                    _context.dt308_CheckSession.AddRange(items);
+                    _context.dt308_SpecialUsrCheck.Add(item);
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;
                 }
@@ -113,13 +74,13 @@ namespace BusinessLayer
             }
         }
 
-        public bool AddOrUpdate(dt308_CheckSession item)
+        public bool AddRange(List<dt308_SpecialUsrCheck> items)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    _context.dt308_CheckSession.AddOrUpdate(item);
+                    _context.dt308_SpecialUsrCheck.AddRange(items);
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;
                 }
@@ -131,14 +92,32 @@ namespace BusinessLayer
             }
         }
 
-        public bool RemoveById(int id)
+        public bool AddOrUpdate(dt308_SpecialUsrCheck item)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    var itemRemove = _context.dt308_CheckSession.FirstOrDefault(r => r.Id == id);
-                    _context.dt308_CheckSession.Remove(itemRemove);
+                    _context.dt308_SpecialUsrCheck.AddOrUpdate(item);
+                    int affectedRecords = _context.SaveChanges();
+                    return affectedRecords > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                return false;
+            }
+        }
+
+        public bool RemoveById(string id)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    var itemRemove = _context.dt308_SpecialUsrCheck.FirstOrDefault(r => r.Id == id);
+                    _context.dt308_SpecialUsrCheck.Remove(itemRemove);
 
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;

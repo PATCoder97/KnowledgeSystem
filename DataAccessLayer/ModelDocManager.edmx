@@ -763,6 +763,7 @@
           <Property Name="DisplayNameVN" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="DisplayNameTW" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="CheckType" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="IdDept" Type="varchar" MaxLength="4" Nullable="false" />
         </EntityType>
         <EntityType Name="dt308_Disease">
           <Key>
@@ -772,6 +773,12 @@
           <Property Name="DisplayNameVN" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="DisplayNameTW" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="DiseaseType" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt308_SpecialUsrCheck">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="dt402_KPIWeb">
           <Key>
@@ -902,6 +909,7 @@
           <EntitySet Name="dt308_CheckDetail" EntityType="Self.dt308_CheckDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt308_CheckSession" EntityType="Self.dt308_CheckSession" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt308_Disease" EntityType="Self.dt308_Disease" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt308_SpecialUsrCheck" EntityType="Self.dt308_SpecialUsrCheck" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt402_KPIWeb" EntityType="Self.dt402_KPIWeb" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt403_SoftwareManual" EntityType="Self.dt403_SoftwareManual" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sys_Log" EntityType="Self.sys_Log" Schema="dbo" store:Type="Tables" />
@@ -986,9 +994,10 @@
           <EntitySet Name="dm_Sign" EntityType="DBDocumentManagementSystemModel.dm_Sign" />
           <EntitySet Name="dt204_OldVersion" EntityType="DBDocumentManagementSystemModel.dt204_OldVersion" />
           <EntitySet Name="dm_Watermark" EntityType="DBDocumentManagementSystemModel.dm_Watermark" />
-          <EntitySet Name="dt308_CheckSession" EntityType="DBDocumentManagementSystemModel.dt308_CheckSession" />
           <EntitySet Name="dt308_Disease" EntityType="DBDocumentManagementSystemModel.dt308_Disease" />
           <EntitySet Name="dt308_CheckDetail" EntityType="DBDocumentManagementSystemModel.dt308_CheckDetail" />
+          <EntitySet Name="dt308_CheckSession" EntityType="DBDocumentManagementSystemModel.dt308_CheckSession" />
+          <EntitySet Name="dt308_SpecialUsrCheck" EntityType="DBDocumentManagementSystemModel.dt308_SpecialUsrCheck" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -1784,16 +1793,6 @@
           <Property Name="VertDistance" Type="Int32" />
           <Property Name="HoriDistance" Type="Int32" />
         </EntityType>
-        <EntityType Name="dt308_CheckSession">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DateSession" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="DisplayNameVN" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="DisplayNameTW" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="CheckType" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="dt308_Disease">
           <Key>
             <PropertyRef Name="Id" />
@@ -1814,6 +1813,23 @@
           <Property Name="Disease1" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="Disease2" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="Disease3" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dt308_CheckSession">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateSession" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DisplayNameVN" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayNameTW" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CheckType" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IdDept" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="dt308_SpecialUsrCheck">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2688,17 +2704,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dt308_CheckSession">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt308_CheckSession">
-              <MappingFragment StoreEntitySet="dt308_CheckSession">
-                <ScalarProperty Name="CheckType" ColumnName="CheckType" />
-                <ScalarProperty Name="DisplayNameTW" ColumnName="DisplayNameTW" />
-                <ScalarProperty Name="DisplayNameVN" ColumnName="DisplayNameVN" />
-                <ScalarProperty Name="DateSession" ColumnName="DateSession" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="dt308_Disease">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt308_Disease">
               <MappingFragment StoreEntitySet="dt308_Disease">
@@ -2718,6 +2723,25 @@
                 <ScalarProperty Name="HealthRating" ColumnName="HealthRating" />
                 <ScalarProperty Name="EmpId" ColumnName="EmpId" />
                 <ScalarProperty Name="SessionId" ColumnName="SessionId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt308_CheckSession">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt308_CheckSession">
+              <MappingFragment StoreEntitySet="dt308_CheckSession">
+                <ScalarProperty Name="IdDept" ColumnName="IdDept" />
+                <ScalarProperty Name="CheckType" ColumnName="CheckType" />
+                <ScalarProperty Name="DisplayNameTW" ColumnName="DisplayNameTW" />
+                <ScalarProperty Name="DisplayNameVN" ColumnName="DisplayNameVN" />
+                <ScalarProperty Name="DateSession" ColumnName="DateSession" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt308_SpecialUsrCheck">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt308_SpecialUsrCheck">
+              <MappingFragment StoreEntitySet="dt308_SpecialUsrCheck">
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

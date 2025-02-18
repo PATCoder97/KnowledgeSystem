@@ -139,6 +139,7 @@
     <Compile Include="dt308\dt308_CheckDetailBUS.cs" />
     <Compile Include="dt308\dt308_CheckSessionBUS.cs" />
     <Compile Include="dt308\dt308_DiseaseBUS.cs" />
+    <Compile Include="dt308\dt308_SpecialUsrCheckBUS.cs" />
     <Compile Include="dt402\dt402_KPIWebBUS.cs" />
     <Compile Include="dt403\dt403_SoftwareManualBUS.cs" />
     <Compile Include="EncryptionHelper.cs" />

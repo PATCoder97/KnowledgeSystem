@@ -420,7 +420,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
             using (var handle = SplashScreenManager.ShowOverlayForm(gcData))
             {
                 helper.SaveViewInfo();
-                dt308CheckSession = dt308_CheckSessionBUS.Instance.GetList();
+                dt308CheckSession = dt308_CheckSessionBUS.Instance.GetListByIdDept(TPConfigs.idDept2word);
                 dt308CheckDetail = dt308_CheckDetailBUS.Instance.GetList();
                 dt308Diseases = dt308_DiseaseBUS.Instance.GetList();
 
