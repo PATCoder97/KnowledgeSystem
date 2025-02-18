@@ -45,10 +45,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
         BindingSource sourceUser = new BindingSource();
 
 
-        public static string KSK_ThongThuong = "Thông thường/一般健康檢查";
-        public static string KSK_DacBiet = "Đặc biệt/特殊健檢";
-        public static string KSK_NhanVienMoi = "Nhân viên mới/新進人員檢查";
-        public static string KSK_TruocViecLam = "Trước bố trí việc làm/工作安排前健康檢查";
+        public const string KSK_ThongThuong = "Thông thường/一般健康檢查";
+        public const string KSK_DacBiet = "Đặc biệt/特殊健檢";
+        public const string KSK_NhanVienMoi = "Nhân viên mới/新進人員檢查";
+        public const string KSK_TruocViecLam = "Trước bố trí việc làm/工作安排前健康檢查";
         public string[] checkTypes = new string[] { KSK_ThongThuong, KSK_DacBiet, KSK_NhanVienMoi, KSK_TruocViecLam };
 
         private void InitializeIcon()
@@ -335,6 +335,45 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
             else
             {
                 MsgTP.MsgErrorDB();
+            }
+        }
+
+        private void cbbCheckType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (cbbCheckType.Text)
+            {
+                case KSK_DacBiet:
+
+                    var usrIds = dt308_SpecialUsrCheckBUS.Instance.GetList().Select(r => r.Id).ToList();
+                    var usrDBs = dm_UserBUS.Instance.GetList().Where(r => usrIds.Contains(r.Id) && r.IdDepartment.StartsWith(TPConfigs.idDept2word)).ToList();
+
+                    usrs.Clear();
+                    usrs.AddRange(usrDBs);
+                    gvData.RefreshData();
+
+                    break;
+
+                case KSK_ThongThuong:
+
+                    var allUsrs = dm_UserBUS.Instance.GetList().Where(r => r.IdDepartment.StartsWith(TPConfigs.idDept2word) && r.Status == 0).ToList();
+                    usrIds = dt308_SpecialUsrCheckBUS.Instance.GetList().Select(r => r.Id).ToList();
+                    usrDBs = allUsrs.Where(r => usrIds.Contains(r.Id)).ToList();
+
+                    // Sửa lại RemoveAll để xóa các phần tử có Id trùng trong usrDBs
+                    allUsrs.RemoveAll(usr => usrDBs.Any(db => db.Id == usr.Id));
+
+                    usrs.Clear();
+                    usrs.AddRange(allUsrs);
+                    gvData.RefreshData();
+
+                    break;
+
+                default:
+
+                    usrs.Clear();
+                    gvData.RefreshData();
+
+                    break;
             }
         }
     }

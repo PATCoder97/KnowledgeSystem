@@ -242,6 +242,7 @@
             this.cbbCheckType.Size = new System.Drawing.Size(456, 32);
             this.cbbCheckType.StyleController = this.layoutControl1;
             this.cbbCheckType.TabIndex = 10;
+            this.cbbCheckType.SelectedIndexChanged += new System.EventHandler(this.cbbCheckType_SelectedIndexChanged);
             // 
             // txbNameTW
             // 
