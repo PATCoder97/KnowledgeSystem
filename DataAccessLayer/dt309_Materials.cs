@@ -28,5 +28,6 @@ namespace DataAccessLayer
         public string IdManager { get; set; }
         public Nullable<System.DateTime> DelTime { get; set; }
         public string UserDel { get; set; }
+        public int Price { get; set; }
     }
 }

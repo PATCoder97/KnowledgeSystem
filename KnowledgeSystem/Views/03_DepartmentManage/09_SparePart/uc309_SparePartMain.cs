@@ -22,5 +22,21 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         {
 
         }
+
+        private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            f309_Material_Info finfo = new f309_Material_Info();
+            finfo.ShowDialog();
+        }
+
+        private void btnReload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            f309_Material_Info finfo = new f309_Material_Info()
+            {
+                idBase = 1,
+                eventInfo = Helpers.EventFormInfo.View
+            };
+            finfo.ShowDialog();
+        }
     }
 }

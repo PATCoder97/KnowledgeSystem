@@ -62,10 +62,11 @@ namespace KnowledgeSystem.Helpers
         public static int Extensions { get; set; }
         public static int SoftManual { get; set; }
         public static int ContractMgmt { get; set; }
+        public static int SparePart { get; set; }
 
         public static List<int> GetListAutoOpenForm()
         {
-            return new List<int>() { SysAdmin, Mod, KnowledgeMain, SafetyCertMain, JFEnCSCMain, TechnicalPrjMain, ContractMgmt, SoftManual };
+            return new List<int>() { SysAdmin, Mod, KnowledgeMain, SafetyCertMain, JFEnCSCMain, TechnicalPrjMain, ContractMgmt, SoftManual, SparePart };
         }
 
         // 207

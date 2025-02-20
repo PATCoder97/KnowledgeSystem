@@ -40,6 +40,22 @@ namespace BusinessLayer
             }
         }
 
+        public List<dt309_MachineMaterials> GetListByIdMaterial(int idMaterial)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt309_MachineMaterials.Where(r => r.MaterialId == idMaterial).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public dt309_MachineMaterials GetItemById(int id)
         {
             try
@@ -118,6 +134,26 @@ namespace BusinessLayer
                 {
                     var itemRemove = _context.dt309_MachineMaterials.FirstOrDefault(r => r.Id == id);
                     _context.dt309_MachineMaterials.Remove(itemRemove);
+
+                    int affectedRecords = _context.SaveChanges();
+                    return affectedRecords > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
+        public bool RemoveByIdMaterial(int idMaterial)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    var itemRemove = _context.dt309_MachineMaterials.Where(r => r.MaterialId == idMaterial);
+                    _context.dt309_MachineMaterials.RemoveRange(itemRemove);
 
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;

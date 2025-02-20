@@ -69,7 +69,7 @@ namespace KnowledgeSystem.Views._00_Generals
             this.btnKnowHow = new DevExpress.XtraEditors.TileItem();
             this.tileGroup4 = new DevExpress.XtraEditors.TileGroup();
             this.btnWorkManagement = new DevExpress.XtraEditors.TileItem();
-            this.tileItem12 = new DevExpress.XtraEditors.TileItem();
+            this.btnSparePart = new DevExpress.XtraEditors.TileItem();
             this.btnSafetyCert = new DevExpress.XtraEditors.TileItem();
             this.btnSignature = new DevExpress.XtraEditors.TileItem();
             this.btnQuiz = new DevExpress.XtraEditors.TileItem();
@@ -129,7 +129,7 @@ namespace KnowledgeSystem.Views._00_Generals
             this.tileMain.MaxId = 27;
             this.tileMain.Name = "tileMain";
             this.tileMain.Padding = new System.Windows.Forms.Padding(24, 22, 24, 22);
-            this.tileMain.Position = 359;
+            this.tileMain.Position = 238;
             this.tileMain.ShowGroupText = true;
             this.tileMain.Size = new System.Drawing.Size(1180, 599);
             this.tileMain.TabIndex = 4;
@@ -290,7 +290,7 @@ namespace KnowledgeSystem.Views._00_Generals
             // tileGroup4
             // 
             this.tileGroup4.Items.Add(this.btnWorkManagement);
-            this.tileGroup4.Items.Add(this.tileItem12);
+            this.tileGroup4.Items.Add(this.btnSparePart);
             this.tileGroup4.Items.Add(this.btnSafetyCert);
             this.tileGroup4.Items.Add(this.btnSignature);
             this.tileGroup4.Items.Add(this.btnQuiz);
@@ -310,17 +310,18 @@ namespace KnowledgeSystem.Views._00_Generals
             this.btnWorkManagement.Name = "btnWorkManagement";
             this.btnWorkManagement.ItemClick += new DevExpress.XtraEditors.TileItemClickEventHandler(this.btnWorkManagement_ItemClick);
             // 
-            // tileItem12
+            // btnSparePart
             // 
-            this.tileItem12.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(183)))), ((int)(((byte)(71)))), ((int)(((byte)(42)))));
-            this.tileItem12.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
-            this.tileItem12.AppearanceItem.Normal.Options.UseBackColor = true;
-            this.tileItem12.AppearanceItem.Normal.Options.UseFont = true;
+            this.btnSparePart.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(183)))), ((int)(((byte)(71)))), ((int)(((byte)(42)))));
+            this.btnSparePart.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
+            this.btnSparePart.AppearanceItem.Normal.Options.UseBackColor = true;
+            this.btnSparePart.AppearanceItem.Normal.Options.UseFont = true;
             tileItemElement14.Text = "機邊庫";
-            this.tileItem12.Elements.Add(tileItemElement14);
-            this.tileItem12.Id = 16;
-            this.tileItem12.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
-            this.tileItem12.Name = "tileItem12";
+            this.btnSparePart.Elements.Add(tileItemElement14);
+            this.btnSparePart.Id = 16;
+            this.btnSparePart.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
+            this.btnSparePart.Name = "btnSparePart";
+            this.btnSparePart.ItemClick += new DevExpress.XtraEditors.TileItemClickEventHandler(this.btnSparePart_ItemClick);
             // 
             // btnSafetyCert
             // 
@@ -515,7 +516,7 @@ namespace KnowledgeSystem.Views._00_Generals
         private DevExpress.XtraEditors.TileItem tileItem9;
         private DevExpress.XtraEditors.TileItem tileItem10;
         private DevExpress.XtraEditors.TileItem btnKnowHow;
-        private DevExpress.XtraEditors.TileItem tileItem12;
+        private DevExpress.XtraEditors.TileItem btnSparePart;
         private TileGroup tileGroup5;
         private TileItem btnSysAdmin;
         private TileItem btnMod;

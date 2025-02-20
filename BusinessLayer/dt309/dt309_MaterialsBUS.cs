@@ -56,7 +56,7 @@ namespace BusinessLayer
             }
         }
 
-        public bool Add(dt309_Materials item)
+        public int Add(dt309_Materials item)
         {
             try
             {
@@ -64,13 +64,20 @@ namespace BusinessLayer
                 {
                     _context.dt309_Materials.Add(item);
                     int affectedRecords = _context.SaveChanges();
-                    return affectedRecords > 0;
+                    if (affectedRecords > 0)
+                    {
+                        return item.Id;
+                    }
+                    else
+                    {
+                        return -1;
+                    }
                 }
             }
             catch (Exception ex)
             {
                 logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
-                return false;
+                return -1;
             }
         }
 
@@ -110,14 +117,17 @@ namespace BusinessLayer
             }
         }
 
-        public bool RemoveById(int id)
+        public bool RemoveById(int id, string userDel)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
                     var itemRemove = _context.dt309_Materials.FirstOrDefault(r => r.Id == id);
-                    _context.dt309_Materials.Remove(itemRemove);
+                    if (itemRemove == null) return false;
+
+                    itemRemove.DelTime = DateTime.Now;
+                    itemRemove.UserDel = userDel;
 
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;

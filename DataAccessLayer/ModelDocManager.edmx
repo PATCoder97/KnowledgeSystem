@@ -812,6 +812,7 @@
           <Property Name="MinQuantity" Type="float" Nullable="false" />
           <Property Name="QuantityInStorage" Type="float" Nullable="false" />
           <Property Name="QuantityInMachine" Type="float" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
           <Property Name="ExpDate" Type="date" />
           <Property Name="IdManager" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="DelTime" Type="datetime" />
@@ -1953,6 +1954,7 @@
           <Property Name="IdManager" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="DelTime" Type="DateTime" Precision="3" />
           <Property Name="UserDel" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="dt309_Prices">
           <Key>
@@ -2927,6 +2929,7 @@
           <EntitySetMapping Name="dt309_Materials">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt309_Materials">
               <MappingFragment StoreEntitySet="dt309_Materials">
+                <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="UserDel" ColumnName="UserDel" />
                 <ScalarProperty Name="DelTime" ColumnName="DelTime" />
                 <ScalarProperty Name="IdManager" ColumnName="IdManager" />
