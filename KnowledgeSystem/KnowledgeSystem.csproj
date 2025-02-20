@@ -617,6 +617,12 @@
     <Compile Include="Views\03_DepartmentManage\08_HealthCheck\uc308_HealthCheckMain.Designer.cs">
       <DependentUpon>uc308_HealthCheckMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\03_DepartmentManage\09_SparePart\uc309_SparePartMain.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\09_SparePart\uc309_SparePartMain.Designer.cs">
+      <DependentUpon>uc309_SparePartMain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_SignInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1188,6 +1194,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\08_HealthCheck\uc308_HealthCheckMain.resx">
       <DependentUpon>uc308_HealthCheckMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\09_SparePart\uc309_SparePartMain.resx">
+      <DependentUpon>uc309_SparePartMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_SignInfo.resx">
       <DependentUpon>f402_SignInfo.cs</DependentUpon>

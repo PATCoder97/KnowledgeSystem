@@ -284,6 +284,27 @@
     <Compile Include="dt308_SpecialUsrCheck.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
+    <Compile Include="dt309_MachineMaterials.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dt309_Machines.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dt309_Materials.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dt309_Prices.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dt309_Storages.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dt309_Transactions.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dt309_Units.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
     <Compile Include="dt402_KPIWeb.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>

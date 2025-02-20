@@ -780,6 +780,78 @@
           </Key>
           <Property Name="Id" Type="varchar" MaxLength="10" Nullable="false" />
         </EntityType>
+        <EntityType Name="dt309_MachineMaterials">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MachineId" Type="int" Nullable="false" />
+          <Property Name="MaterialId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt309_Machines">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdDept" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="Location" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt309_Materials">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdDept" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="64" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="2048" Nullable="false" />
+          <Property Name="TypeUse" Type="nvarchar" MaxLength="32" />
+          <Property Name="Location" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="IdUnit" Type="int" Nullable="false" />
+          <Property Name="MinQuantity" Type="float" Nullable="false" />
+          <Property Name="QuantityInStorage" Type="float" Nullable="false" />
+          <Property Name="QuantityInMachine" Type="float" Nullable="false" />
+          <Property Name="ExpDate" Type="date" />
+          <Property Name="IdManager" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="DelTime" Type="datetime" />
+          <Property Name="UserDel" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="dt309_Prices">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaterialId" Type="int" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
+          <Property Name="ChangedBy" Type="int" Nullable="false" />
+          <Property Name="ChangedAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="dt309_Storages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt309_Transactions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StorageId" Type="int" Nullable="false" />
+          <Property Name="MaterialId" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="TransactionType" Type="nvarchar" MaxLength="10" />
+          <Property Name="CreatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="dt309_Units">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
         <EntityType Name="dt402_KPIWeb">
           <Key>
             <PropertyRef Name="Id" />
@@ -910,6 +982,13 @@
           <EntitySet Name="dt308_CheckSession" EntityType="Self.dt308_CheckSession" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt308_Disease" EntityType="Self.dt308_Disease" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt308_SpecialUsrCheck" EntityType="Self.dt308_SpecialUsrCheck" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt309_MachineMaterials" EntityType="Self.dt309_MachineMaterials" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt309_Machines" EntityType="Self.dt309_Machines" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt309_Materials" EntityType="Self.dt309_Materials" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt309_Prices" EntityType="Self.dt309_Prices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt309_Storages" EntityType="Self.dt309_Storages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt309_Transactions" EntityType="Self.dt309_Transactions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt309_Units" EntityType="Self.dt309_Units" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt402_KPIWeb" EntityType="Self.dt402_KPIWeb" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt403_SoftwareManual" EntityType="Self.dt403_SoftwareManual" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sys_Log" EntityType="Self.sys_Log" Schema="dbo" store:Type="Tables" />
@@ -998,6 +1077,13 @@
           <EntitySet Name="dt308_CheckDetail" EntityType="DBDocumentManagementSystemModel.dt308_CheckDetail" />
           <EntitySet Name="dt308_CheckSession" EntityType="DBDocumentManagementSystemModel.dt308_CheckSession" />
           <EntitySet Name="dt308_SpecialUsrCheck" EntityType="DBDocumentManagementSystemModel.dt308_SpecialUsrCheck" />
+          <EntitySet Name="dt309_MachineMaterials" EntityType="DBDocumentManagementSystemModel.dt309_MachineMaterials" />
+          <EntitySet Name="dt309_Machines" EntityType="DBDocumentManagementSystemModel.dt309_Machines" />
+          <EntitySet Name="dt309_Materials" EntityType="DBDocumentManagementSystemModel.dt309_Materials" />
+          <EntitySet Name="dt309_Prices" EntityType="DBDocumentManagementSystemModel.dt309_Prices" />
+          <EntitySet Name="dt309_Storages" EntityType="DBDocumentManagementSystemModel.dt309_Storages" />
+          <EntitySet Name="dt309_Transactions" EntityType="DBDocumentManagementSystemModel.dt309_Transactions" />
+          <EntitySet Name="dt309_Units" EntityType="DBDocumentManagementSystemModel.dt309_Units" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -1830,6 +1916,78 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="dt309_MachineMaterials">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MachineId" Type="Int32" Nullable="false" />
+          <Property Name="MaterialId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt309_Machines">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdDept" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt309_Materials">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdDept" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="Code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="2048" FixedLength="false" Unicode="true" />
+          <Property Name="TypeUse" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="IdUnit" Type="Int32" Nullable="false" />
+          <Property Name="MinQuantity" Type="Double" Nullable="false" />
+          <Property Name="QuantityInStorage" Type="Double" Nullable="false" />
+          <Property Name="QuantityInMachine" Type="Double" Nullable="false" />
+          <Property Name="ExpDate" Type="DateTime" Precision="0" />
+          <Property Name="IdManager" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DelTime" Type="DateTime" Precision="3" />
+          <Property Name="UserDel" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="dt309_Prices">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaterialId" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="ChangedBy" Type="Int32" Nullable="false" />
+          <Property Name="ChangedAt" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="dt309_Storages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dt309_Transactions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StorageId" Type="Int32" Nullable="false" />
+          <Property Name="MaterialId" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="TransactionType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="dt309_Units">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2742,6 +2900,85 @@
           <EntitySetMapping Name="dt308_SpecialUsrCheck">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt308_SpecialUsrCheck">
               <MappingFragment StoreEntitySet="dt308_SpecialUsrCheck">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt309_MachineMaterials">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt309_MachineMaterials">
+              <MappingFragment StoreEntitySet="dt309_MachineMaterials">
+                <ScalarProperty Name="MaterialId" ColumnName="MaterialId" />
+                <ScalarProperty Name="MachineId" ColumnName="MachineId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt309_Machines">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt309_Machines">
+              <MappingFragment StoreEntitySet="dt309_Machines">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="IdDept" ColumnName="IdDept" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt309_Materials">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt309_Materials">
+              <MappingFragment StoreEntitySet="dt309_Materials">
+                <ScalarProperty Name="UserDel" ColumnName="UserDel" />
+                <ScalarProperty Name="DelTime" ColumnName="DelTime" />
+                <ScalarProperty Name="IdManager" ColumnName="IdManager" />
+                <ScalarProperty Name="ExpDate" ColumnName="ExpDate" />
+                <ScalarProperty Name="QuantityInMachine" ColumnName="QuantityInMachine" />
+                <ScalarProperty Name="QuantityInStorage" ColumnName="QuantityInStorage" />
+                <ScalarProperty Name="MinQuantity" ColumnName="MinQuantity" />
+                <ScalarProperty Name="IdUnit" ColumnName="IdUnit" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="TypeUse" ColumnName="TypeUse" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="IdDept" ColumnName="IdDept" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt309_Prices">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt309_Prices">
+              <MappingFragment StoreEntitySet="dt309_Prices">
+                <ScalarProperty Name="ChangedAt" ColumnName="ChangedAt" />
+                <ScalarProperty Name="ChangedBy" ColumnName="ChangedBy" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="MaterialId" ColumnName="MaterialId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt309_Storages">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt309_Storages">
+              <MappingFragment StoreEntitySet="dt309_Storages">
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt309_Transactions">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt309_Transactions">
+              <MappingFragment StoreEntitySet="dt309_Transactions">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="TransactionType" ColumnName="TransactionType" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="MaterialId" ColumnName="MaterialId" />
+                <ScalarProperty Name="StorageId" ColumnName="StorageId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt309_Units">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt309_Units">
+              <MappingFragment StoreEntitySet="dt309_Units">
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

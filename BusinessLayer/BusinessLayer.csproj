@@ -140,6 +140,13 @@
     <Compile Include="dt308\dt308_CheckSessionBUS.cs" />
     <Compile Include="dt308\dt308_DiseaseBUS.cs" />
     <Compile Include="dt308\dt308_SpecialUsrCheckBUS.cs" />
+    <Compile Include="dt309\dt309_MachineMaterialsBUS.cs" />
+    <Compile Include="dt309\dt309_MachinesBUS.cs" />
+    <Compile Include="dt309\dt309_MaterialsBUS.cs" />
+    <Compile Include="dt309\dt309_PricesBUS.cs" />
+    <Compile Include="dt309\dt309_StoragesBUS.cs" />
+    <Compile Include="dt309\dt309_TransactionsBUS.cs" />
+    <Compile Include="dt309\dt309_UnitsBUS.cs" />
     <Compile Include="dt402\dt402_KPIWebBUS.cs" />
     <Compile Include="dt403\dt403_SoftwareManualBUS.cs" />
     <Compile Include="EncryptionHelper.cs" />
