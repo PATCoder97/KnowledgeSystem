@@ -41,11 +41,18 @@
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcData = new DevExpress.XtraGrid.GridControl();
             this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gColIdSession = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColIdMaterial = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn18 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn19 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemMemoEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit();
             this.gvDetail = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -195,11 +202,18 @@
             this.gvData.Appearance.Row.Options.UseFont = true;
             this.gvData.Appearance.Row.Options.UseForeColor = true;
             this.gvData.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gColIdSession,
+            this.gColIdMaterial,
             this.gridColumn1,
             this.gridColumn2,
             this.gridColumn3,
-            this.gridColumn4});
+            this.gridColumn4,
+            this.gridColumn13,
+            this.gridColumn14,
+            this.gridColumn15,
+            this.gridColumn16,
+            this.gridColumn17,
+            this.gridColumn18,
+            this.gridColumn19});
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
             this.gvData.OptionsDetail.ShowDetailTabs = false;
@@ -208,17 +222,18 @@
             this.gvData.OptionsView.EnableAppearanceOddRow = true;
             this.gvData.OptionsView.ShowAutoFilterRow = true;
             this.gvData.OptionsView.ShowGroupPanel = false;
+            this.gvData.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gvData_PopupMenuShowing);
             // 
-            // gColIdSession
+            // gColIdMaterial
             // 
-            this.gColIdSession.Caption = "ID";
-            this.gColIdSession.FieldName = "Id";
-            this.gColIdSession.Name = "gColIdSession";
+            this.gColIdMaterial.Caption = "Id";
+            this.gColIdMaterial.FieldName = "Id";
+            this.gColIdMaterial.Name = "gColIdMaterial";
             // 
             // gridColumn1
             // 
-            this.gridColumn1.Caption = "越文名稱";
-            this.gridColumn1.FieldName = "DisplayNameVN";
+            this.gridColumn1.Caption = "材料編號";
+            this.gridColumn1.FieldName = "Code";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
             this.gridColumn1.VisibleIndex = 0;
@@ -226,8 +241,8 @@
             // 
             // gridColumn2
             // 
-            this.gridColumn2.Caption = "中文名稱";
-            this.gridColumn2.FieldName = "DisplayNameTW";
+            this.gridColumn2.Caption = "品名規格";
+            this.gridColumn2.FieldName = "DisplayName";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 1;
@@ -235,8 +250,8 @@
             // 
             // gridColumn3
             // 
-            this.gridColumn3.Caption = "創建日";
-            this.gridColumn3.FieldName = "DateSession";
+            this.gridColumn3.Caption = "備品用途";
+            this.gridColumn3.FieldName = "TypeUse";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 2;
@@ -244,12 +259,71 @@
             // 
             // gridColumn4
             // 
-            this.gridColumn4.Caption = "檢查類別";
-            this.gridColumn4.FieldName = "CheckType";
+            this.gridColumn4.Caption = "單位";
+            this.gridColumn4.FieldName = "Location";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 3;
             this.gridColumn4.Width = 112;
+            // 
+            // gridColumn13
+            // 
+            this.gridColumn13.Caption = "安全數量";
+            this.gridColumn13.FieldName = "MinQuantity";
+            this.gridColumn13.Name = "gridColumn13";
+            this.gridColumn13.Visible = true;
+            this.gridColumn13.VisibleIndex = 4;
+            // 
+            // gridColumn14
+            // 
+            this.gridColumn14.Caption = "課庫數量";
+            this.gridColumn14.FieldName = "QuantityInStorage";
+            this.gridColumn14.Name = "gridColumn14";
+            this.gridColumn14.Visible = true;
+            this.gridColumn14.VisibleIndex = 5;
+            // 
+            // gridColumn15
+            // 
+            this.gridColumn15.Caption = "機邊庫";
+            this.gridColumn15.FieldName = "QuantityInMachine";
+            this.gridColumn15.Name = "gridColumn15";
+            this.gridColumn15.Visible = true;
+            this.gridColumn15.VisibleIndex = 6;
+            // 
+            // gridColumn16
+            // 
+            this.gridColumn16.Caption = "料位";
+            this.gridColumn16.FieldName = "Location";
+            this.gridColumn16.Name = "gridColumn16";
+            this.gridColumn16.Visible = true;
+            this.gridColumn16.VisibleIndex = 7;
+            // 
+            // gridColumn17
+            // 
+            this.gridColumn17.Caption = "單價";
+            this.gridColumn17.DisplayFormat.FormatString = "N0";
+            this.gridColumn17.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.gridColumn17.FieldName = "Price";
+            this.gridColumn17.Name = "gridColumn17";
+            this.gridColumn17.Visible = true;
+            this.gridColumn17.VisibleIndex = 8;
+            // 
+            // gridColumn18
+            // 
+            this.gridColumn18.Caption = "總金額";
+            this.gridColumn18.DisplayFormat.FormatString = "N0";
+            this.gridColumn18.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.gridColumn18.Name = "gridColumn18";
+            this.gridColumn18.Visible = true;
+            this.gridColumn18.VisibleIndex = 9;
+            // 
+            // gridColumn19
+            // 
+            this.gridColumn19.Caption = "管理人";
+            this.gridColumn19.FieldName = "IdManager";
+            this.gridColumn19.Name = "gridColumn19";
+            this.gridColumn19.Visible = true;
+            this.gridColumn19.VisibleIndex = 10;
             // 
             // repositoryItemMemoEdit1
             // 
@@ -512,12 +586,19 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
         private DevExpress.XtraGrid.Views.Grid.GridView gvData;
-        private DevExpress.XtraGrid.Columns.GridColumn gColIdSession;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn15;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn16;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn17;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn18;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn19;
+        private DevExpress.XtraGrid.Columns.GridColumn gColIdMaterial;
     }
 }
