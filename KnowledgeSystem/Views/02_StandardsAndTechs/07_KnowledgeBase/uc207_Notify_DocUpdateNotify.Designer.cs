@@ -68,12 +68,13 @@
             // 
             // label1
             // 
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.label1.Font = new System.Drawing.Font("Microsoft JhengHei UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(14, 13);
+            this.label1.ForeColor = System.Drawing.Color.Black;
+            this.label1.Location = new System.Drawing.Point(12, 12);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(884, 34);
+            this.label1.Size = new System.Drawing.Size(888, 34);
             this.label1.TabIndex = 5;
             this.label1.Text = "文件更新提示";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -81,11 +82,11 @@
             // gcData
             // 
             this.gcData.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
-            this.gcData.Location = new System.Drawing.Point(14, 51);
+            this.gcData.Location = new System.Drawing.Point(12, 50);
             this.gcData.MainView = this.gvData;
             this.gcData.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.gcData.Name = "gcData";
-            this.gcData.Size = new System.Drawing.Size(884, 473);
+            this.gcData.Size = new System.Drawing.Size(888, 475);
             this.gcData.TabIndex = 4;
             this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvData});
@@ -198,7 +199,7 @@
             this.layoutControlItem1.Control = this.gcData;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 38);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(888, 477);
+            this.layoutControlItem1.Size = new System.Drawing.Size(892, 479);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
@@ -209,14 +210,14 @@
             this.layoutControlItem2.MaxSize = new System.Drawing.Size(0, 38);
             this.layoutControlItem2.MinSize = new System.Drawing.Size(24, 38);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(888, 38);
+            this.layoutControlItem2.Size = new System.Drawing.Size(892, 38);
             this.layoutControlItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
             // uc207_Notify_DocUpdateNotify
             // 
-            this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
+            this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.Appearance.Options.UseBackColor = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

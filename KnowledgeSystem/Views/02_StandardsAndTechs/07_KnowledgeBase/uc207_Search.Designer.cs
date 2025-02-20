@@ -118,7 +118,7 @@
             this.checkUseKeyword.MinimumSize = new System.Drawing.Size(0, 36);
             this.checkUseKeyword.Name = "checkUseKeyword";
             this.checkUseKeyword.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkUseKeyword.Properties.Appearance.ForeColor = System.Drawing.Color.White;
+            this.checkUseKeyword.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.checkUseKeyword.Properties.Appearance.Options.UseFont = true;
             this.checkUseKeyword.Properties.Appearance.Options.UseForeColor = true;
             this.checkUseKeyword.Properties.Caption = "關鍵字";
@@ -444,7 +444,7 @@
             // 
             // uc207_Search
             // 
-            this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
+            this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.Appearance.Options.UseBackColor = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

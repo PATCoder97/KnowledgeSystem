@@ -291,7 +291,7 @@
             this.ckConfidential.MenuManager = this.barManagerTP;
             this.ckConfidential.Name = "ckConfidential";
             this.ckConfidential.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ckConfidential.Properties.Appearance.ForeColor = System.Drawing.Color.White;
+            this.ckConfidential.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.ckConfidential.Properties.Appearance.Options.UseFont = true;
             this.ckConfidential.Properties.Appearance.Options.UseForeColor = true;
             this.ckConfidential.Properties.Caption = "機密";
@@ -646,10 +646,10 @@
             // 
             this.lcTitle.AllowHtmlStringInCaption = true;
             this.lcTitle.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.lcTitle.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
+            this.lcTitle.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.lcTitle.AppearanceItemCaption.Options.UseFont = true;
             this.lcTitle.AppearanceItemCaption.Options.UseForeColor = true;
-            this.lcTitle.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
+            this.lcTitle.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             this.lcTitle.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.lcTitle.Control = this.txbTitle;
             this.lcTitle.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
@@ -785,9 +785,11 @@
             // 
             this.layoutControlItem6.AllowHtmlStringInCaption = true;
             this.layoutControlItem6.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.layoutControlItem6.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
+            this.layoutControlItem6.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem6.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem6.AppearanceItemCaption.Options.UseForeColor = true;
+            this.layoutControlItem6.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem6.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem6.Control = this.txbFieldType;
             this.layoutControlItem6.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem6.Name = "layoutControlItem6";
@@ -799,10 +801,10 @@
             // 
             this.lcType.AllowHtmlStringInCaption = true;
             this.lcType.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.lcType.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
+            this.lcType.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.lcType.AppearanceItemCaption.Options.UseFont = true;
             this.lcType.AppearanceItemCaption.Options.UseForeColor = true;
-            this.lcType.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
+            this.lcType.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             this.lcType.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.lcType.Control = this.txbDocType;
             this.lcType.CustomizationFormText = "文件種類<color=red>*</color>";
@@ -816,7 +818,7 @@
             // 
             // f306_NewSignDoc
             // 
-            this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
+            this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.Appearance.Options.UseBackColor = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

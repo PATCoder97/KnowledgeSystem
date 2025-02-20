@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.ckConfidential = new DevExpress.XtraEditors.CheckEdit();
             this.txbFieldType = new DevExpress.XtraEditors.GridLookUpEdit();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -40,10 +41,10 @@
             this.lcTitle = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcType = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.ckConfidential = new DevExpress.XtraEditors.CheckEdit();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ckConfidential.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbFieldType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbTitle.Properties)).BeginInit();
@@ -53,7 +54,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcTitle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcType)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ckConfidential.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,6 +70,22 @@
             this.layoutControl1.Size = new System.Drawing.Size(518, 92);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // ckConfidential
+            // 
+            this.ckConfidential.Location = new System.Drawing.Point(434, 12);
+            this.ckConfidential.Name = "ckConfidential";
+            this.ckConfidential.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ckConfidential.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.ckConfidential.Properties.Appearance.Options.UseFont = true;
+            this.ckConfidential.Properties.Appearance.Options.UseForeColor = true;
+            this.ckConfidential.Properties.Caption = "機密";
+            this.ckConfidential.Properties.CheckBoxOptions.Style = DevExpress.XtraEditors.Controls.CheckBoxStyle.SvgFlag1;
+            this.ckConfidential.Properties.CheckBoxOptions.SvgImageSize = new System.Drawing.Size(24, 24);
+            this.ckConfidential.Properties.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.ckConfidential.Size = new System.Drawing.Size(72, 28);
+            this.ckConfidential.StyleController = this.layoutControl1;
+            this.ckConfidential.TabIndex = 25;
             // 
             // txbFieldType
             // 
@@ -181,10 +197,10 @@
             // 
             this.lcTitle.AllowHtmlStringInCaption = true;
             this.lcTitle.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.lcTitle.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
+            this.lcTitle.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.lcTitle.AppearanceItemCaption.Options.UseFont = true;
             this.lcTitle.AppearanceItemCaption.Options.UseForeColor = true;
-            this.lcTitle.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
+            this.lcTitle.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             this.lcTitle.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.lcTitle.Control = this.txbTitle;
             this.lcTitle.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
@@ -200,10 +216,10 @@
             // 
             this.lcType.AllowHtmlStringInCaption = true;
             this.lcType.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.lcType.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
+            this.lcType.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.lcType.AppearanceItemCaption.Options.UseFont = true;
             this.lcType.AppearanceItemCaption.Options.UseForeColor = true;
-            this.lcType.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
+            this.lcType.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             this.lcType.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.lcType.Control = this.txbDocType;
             this.lcType.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
@@ -220,10 +236,10 @@
             // 
             this.layoutControlItem1.AllowHtmlStringInCaption = true;
             this.layoutControlItem1.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.layoutControlItem1.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
+            this.layoutControlItem1.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem1.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem1.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem1.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
+            this.layoutControlItem1.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem1.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem1.Control = this.txbFieldType;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
@@ -231,22 +247,6 @@
             this.layoutControlItem1.Size = new System.Drawing.Size(225, 36);
             this.layoutControlItem1.Text = "作業機能類<color=red>*</color>";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(104, 24);
-            // 
-            // ckConfidential
-            // 
-            this.ckConfidential.Location = new System.Drawing.Point(434, 12);
-            this.ckConfidential.Name = "ckConfidential";
-            this.ckConfidential.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ckConfidential.Properties.Appearance.ForeColor = System.Drawing.Color.White;
-            this.ckConfidential.Properties.Appearance.Options.UseFont = true;
-            this.ckConfidential.Properties.Appearance.Options.UseForeColor = true;
-            this.ckConfidential.Properties.Caption = "機密";
-            this.ckConfidential.Properties.CheckBoxOptions.Style = DevExpress.XtraEditors.Controls.CheckBoxStyle.SvgFlag1;
-            this.ckConfidential.Properties.CheckBoxOptions.SvgImageSize = new System.Drawing.Size(24, 24);
-            this.ckConfidential.Properties.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.ckConfidential.Size = new System.Drawing.Size(72, 28);
-            this.ckConfidential.StyleController = this.layoutControl1;
-            this.ckConfidential.TabIndex = 25;
             // 
             // layoutControlItem2
             // 
@@ -259,7 +259,7 @@
             // 
             // uc306_EditSignDoc
             // 
-            this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
+            this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.Appearance.Options.UseBackColor = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -269,6 +269,7 @@
             this.Load += new System.EventHandler(this.uc306_EditSignDoc_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ckConfidential.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbFieldType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbTitle.Properties)).EndInit();
@@ -278,7 +279,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcTitle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcType)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ckConfidential.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             this.ResumeLayout(false);
 

@@ -459,10 +459,10 @@
             // lcUserID
             // 
             this.lcUserID.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.lcUserID.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
+            this.lcUserID.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.lcUserID.AppearanceItemCaption.Options.UseFont = true;
             this.lcUserID.AppearanceItemCaption.Options.UseForeColor = true;
-            this.lcUserID.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
+            this.lcUserID.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             this.lcUserID.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.lcUserID.Control = this.txbUserId;
             this.lcUserID.Location = new System.Drawing.Point(0, 0);
@@ -474,10 +474,10 @@
             // lcDept
             // 
             this.lcDept.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.lcDept.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
+            this.lcDept.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.lcDept.AppearanceItemCaption.Options.UseFont = true;
             this.lcDept.AppearanceItemCaption.Options.UseForeColor = true;
-            this.lcDept.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
+            this.lcDept.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             this.lcDept.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.lcDept.Control = this.cbbDept;
             this.lcDept.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
@@ -506,10 +506,10 @@
             // lcUserName
             // 
             this.lcUserName.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.lcUserName.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
+            this.lcUserName.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.lcUserName.AppearanceItemCaption.Options.UseFont = true;
             this.lcUserName.AppearanceItemCaption.Options.UseForeColor = true;
-            this.lcUserName.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
+            this.lcUserName.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             this.lcUserName.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.lcUserName.Control = this.txbUserNameVN;
             this.lcUserName.Location = new System.Drawing.Point(0, 36);
@@ -521,10 +521,10 @@
             // lcJob
             // 
             this.lcJob.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.lcJob.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
+            this.lcJob.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.lcJob.AppearanceItemCaption.Options.UseFont = true;
             this.lcJob.AppearanceItemCaption.Options.UseForeColor = true;
-            this.lcJob.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
+            this.lcJob.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             this.lcJob.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.lcJob.Control = this.cbbJobTitle;
             this.lcJob.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
@@ -538,10 +538,10 @@
             // lcSchool
             // 
             this.lcSchool.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.lcSchool.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
+            this.lcSchool.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.lcSchool.AppearanceItemCaption.Options.UseFont = true;
             this.lcSchool.AppearanceItemCaption.Options.UseForeColor = true;
-            this.lcSchool.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
+            this.lcSchool.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             this.lcSchool.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.lcSchool.Control = this.txbSchool;
             this.lcSchool.Location = new System.Drawing.Point(344, 36);
@@ -553,10 +553,10 @@
             // lcMajor
             // 
             this.lcMajor.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.lcMajor.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
+            this.lcMajor.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.lcMajor.AppearanceItemCaption.Options.UseFont = true;
             this.lcMajor.AppearanceItemCaption.Options.UseForeColor = true;
-            this.lcMajor.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
+            this.lcMajor.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             this.lcMajor.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.lcMajor.Control = this.txbMajor;
             this.lcMajor.Location = new System.Drawing.Point(345, 72);
@@ -568,10 +568,10 @@
             // lcEnterDate
             // 
             this.lcEnterDate.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lcEnterDate.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
+            this.lcEnterDate.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.lcEnterDate.AppearanceItemCaption.Options.UseFont = true;
             this.lcEnterDate.AppearanceItemCaption.Options.UseForeColor = true;
-            this.lcEnterDate.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
+            this.lcEnterDate.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             this.lcEnterDate.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.lcEnterDate.Control = this.txbDateStart;
             this.lcEnterDate.Location = new System.Drawing.Point(345, 108);
@@ -582,7 +582,7 @@
             // 
             // f302_NewUserInfo
             // 
-            this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
+            this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.Appearance.Options.UseBackColor = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

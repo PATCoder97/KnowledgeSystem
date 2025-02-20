@@ -34,6 +34,7 @@
             this.gColId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.webViewQues = new System.Windows.Forms.WebBrowser();
             this.lbTime = new System.Windows.Forms.Label();
             this.lbQuesNo = new System.Windows.Forms.Label();
             this.txbUserAns = new DevExpress.XtraEditors.TokenEdit();
@@ -51,7 +52,6 @@
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.webViewQues = new System.Windows.Forms.WebBrowser();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -112,10 +112,19 @@
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
+            // webViewQues
+            // 
+            this.webViewQues.Location = new System.Drawing.Point(12, 12);
+            this.webViewQues.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webViewQues.Name = "webViewQues";
+            this.webViewQues.Size = new System.Drawing.Size(864, 602);
+            this.webViewQues.TabIndex = 13;
+            // 
             // lbTime
             // 
+            this.lbTime.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.lbTime.Font = new System.Drawing.Font("Microsoft JhengHei UI", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbTime.ForeColor = System.Drawing.Color.White;
+            this.lbTime.ForeColor = System.Drawing.Color.Black;
             this.lbTime.Location = new System.Drawing.Point(880, 12);
             this.lbTime.Name = "lbTime";
             this.lbTime.Size = new System.Drawing.Size(309, 49);
@@ -125,8 +134,9 @@
             // 
             // lbQuesNo
             // 
+            this.lbQuesNo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.lbQuesNo.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbQuesNo.ForeColor = System.Drawing.Color.White;
+            this.lbQuesNo.ForeColor = System.Drawing.Color.Black;
             this.lbQuesNo.Location = new System.Drawing.Point(320, 618);
             this.lbQuesNo.Name = "lbQuesNo";
             this.lbQuesNo.Size = new System.Drawing.Size(133, 36);
@@ -181,7 +191,9 @@
             // btnSubmit
             // 
             this.btnSubmit.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSubmit.Appearance.ForeColor = System.Drawing.Color.Black;
             this.btnSubmit.Appearance.Options.UseFont = true;
+            this.btnSubmit.Appearance.Options.UseForeColor = true;
             this.btnSubmit.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnSubmit.ImageOptions.SvgImage")));
             this.btnSubmit.Location = new System.Drawing.Point(12, 618);
             this.btnSubmit.Name = "btnSubmit";
@@ -316,9 +328,11 @@
             // layoutControlItem6
             // 
             this.layoutControlItem6.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.layoutControlItem6.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
+            this.layoutControlItem6.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem6.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem6.AppearanceItemCaption.Options.UseForeColor = true;
+            this.layoutControlItem6.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem6.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem6.Control = this.txbUserAns;
             this.layoutControlItem6.Location = new System.Drawing.Point(445, 606);
             this.layoutControlItem6.MaxSize = new System.Drawing.Size(223, 0);
@@ -365,14 +379,6 @@
             this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem5.TextVisible = false;
             // 
-            // webViewQues
-            // 
-            this.webViewQues.Location = new System.Drawing.Point(12, 12);
-            this.webViewQues.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webViewQues.Name = "webViewQues";
-            this.webViewQues.Size = new System.Drawing.Size(864, 602);
-            this.webViewQues.TabIndex = 13;
-            // 
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.webViewQues;
@@ -384,7 +390,7 @@
             // 
             // f307_DoExam
             // 
-            this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
+            this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.Appearance.Options.UseBackColor = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc301_SelectOutputFile));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.btnDownTemp51 = new DevExpress.XtraEditors.SimpleButton();
             this.cbbYear = new DevExpress.XtraEditors.ComboBoxEdit();
             this.btnUploadFile51 = new DevExpress.XtraEditors.SimpleButton();
             this.gcData51 = new DevExpress.XtraGrid.GridControl();
@@ -41,7 +42,6 @@
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.btnDownTemp51 = new DevExpress.XtraEditors.SimpleButton();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -75,6 +75,18 @@
             this.layoutControl1.Size = new System.Drawing.Size(796, 446);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // btnDownTemp51
+            // 
+            this.btnDownTemp51.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDownTemp51.Appearance.Options.UseFont = true;
+            this.btnDownTemp51.Location = new System.Drawing.Point(536, 12);
+            this.btnDownTemp51.Name = "btnDownTemp51";
+            this.btnDownTemp51.Size = new System.Drawing.Size(122, 32);
+            this.btnDownTemp51.StyleController = this.layoutControl1;
+            this.btnDownTemp51.TabIndex = 15;
+            this.btnDownTemp51.Text = "模板5.1";
+            this.btnDownTemp51.Click += new System.EventHandler(this.btnDownTemp51_Click);
             // 
             // cbbYear
             // 
@@ -177,9 +189,11 @@
             // layoutControlItem8
             // 
             this.layoutControlItem8.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.layoutControlItem8.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
+            this.layoutControlItem8.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem8.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem8.AppearanceItemCaption.Options.UseForeColor = true;
+            this.layoutControlItem8.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem8.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem8.Control = this.cbbQuarter;
             this.layoutControlItem8.Location = new System.Drawing.Point(128, 0);
             this.layoutControlItem8.MaxSize = new System.Drawing.Size(128, 0);
@@ -205,9 +219,11 @@
             // layoutControlItem2
             // 
             this.layoutControlItem2.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.layoutControlItem2.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
+            this.layoutControlItem2.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem2.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem2.AppearanceItemCaption.Options.UseForeColor = true;
+            this.layoutControlItem2.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem2.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem2.Control = this.gcData51;
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 36);
             this.layoutControlItem2.Name = "layoutControlItem2";
@@ -231,10 +247,10 @@
             // layoutControlItem3
             // 
             this.layoutControlItem3.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.layoutControlItem3.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
+            this.layoutControlItem3.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem3.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem3.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem3.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
+            this.layoutControlItem3.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem3.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.layoutControlItem3.Control = this.cbbYear;
             this.layoutControlItem3.Location = new System.Drawing.Point(0, 0);
@@ -247,18 +263,6 @@
             this.layoutControlItem3.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
             this.layoutControlItem3.TextSize = new System.Drawing.Size(19, 24);
             this.layoutControlItem3.TextToControlDistance = 5;
-            // 
-            // btnDownTemp51
-            // 
-            this.btnDownTemp51.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDownTemp51.Appearance.Options.UseFont = true;
-            this.btnDownTemp51.Location = new System.Drawing.Point(536, 12);
-            this.btnDownTemp51.Name = "btnDownTemp51";
-            this.btnDownTemp51.Size = new System.Drawing.Size(122, 32);
-            this.btnDownTemp51.StyleController = this.layoutControl1;
-            this.btnDownTemp51.TabIndex = 15;
-            this.btnDownTemp51.Text = "模板5.1";
-            this.btnDownTemp51.Click += new System.EventHandler(this.btnDownTemp51_Click);
             // 
             // layoutControlItem4
             // 
@@ -276,7 +280,7 @@
             // 
             // uc301_SelectOutputFile
             // 
-            this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
+            this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.Appearance.Options.UseBackColor = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
