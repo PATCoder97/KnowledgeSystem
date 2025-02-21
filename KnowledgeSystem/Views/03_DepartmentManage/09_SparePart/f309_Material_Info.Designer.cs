@@ -49,7 +49,6 @@
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.txbDisplayName = new DevExpress.XtraEditors.MemoEdit();
             this.cbbTypeUse = new DevExpress.XtraEditors.ComboBoxEdit();
-            this.txbPrice = new DevExpress.XtraEditors.TextEdit();
             this.txbCode = new DevExpress.XtraEditors.TextEdit();
             this.txbLocation = new DevExpress.XtraEditors.TextEdit();
             this.cbbUnit = new DevExpress.XtraEditors.LookUpEdit();
@@ -61,7 +60,6 @@
             this.lcMachine = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcUnit = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcUser = new DevExpress.XtraLayout.LayoutControlItem();
-            this.lcPrice = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcExpDate = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcLocation = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcMinQuantity = new DevExpress.XtraLayout.LayoutControlItem();
@@ -75,7 +73,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDisplayName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbTypeUse.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbPrice.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbLocation.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbUnit.Properties)).BeginInit();
@@ -87,7 +84,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcMachine)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcUnit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcUser)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcExpDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcLocation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcMinQuantity)).BeginInit();
@@ -177,7 +173,7 @@
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 565);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 521);
             this.barDockControlBottom.Manager = this.barManagerTP;
             this.barDockControlBottom.Size = new System.Drawing.Size(431, 0);
             // 
@@ -187,7 +183,7 @@
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 49);
             this.barDockControlLeft.Manager = this.barManagerTP;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 516);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 472);
             // 
             // barDockControlRight
             // 
@@ -195,7 +191,7 @@
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
             this.barDockControlRight.Location = new System.Drawing.Point(431, 49);
             this.barDockControlRight.Manager = this.barManagerTP;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 516);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 472);
             // 
             // layoutControl1
             // 
@@ -205,7 +201,6 @@
             this.layoutControl1.Controls.Add(this.cbbUsr);
             this.layoutControl1.Controls.Add(this.txbDisplayName);
             this.layoutControl1.Controls.Add(this.cbbTypeUse);
-            this.layoutControl1.Controls.Add(this.txbPrice);
             this.layoutControl1.Controls.Add(this.txbCode);
             this.layoutControl1.Controls.Add(this.txbLocation);
             this.layoutControl1.Controls.Add(this.cbbUnit);
@@ -215,14 +210,14 @@
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(433, 0, 650, 400);
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(431, 516);
+            this.layoutControl1.Size = new System.Drawing.Size(431, 472);
             this.layoutControl1.TabIndex = 10;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // txbExpDate
             // 
             this.txbExpDate.EditValue = null;
-            this.txbExpDate.Location = new System.Drawing.Point(112, 472);
+            this.txbExpDate.Location = new System.Drawing.Point(100, 428);
             this.txbExpDate.MenuManager = this.barManagerTP;
             this.txbExpDate.Name = "txbExpDate";
             this.txbExpDate.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
@@ -233,13 +228,13 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txbExpDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txbExpDate.Size = new System.Drawing.Size(307, 32);
+            this.txbExpDate.Size = new System.Drawing.Size(319, 32);
             this.txbExpDate.StyleController = this.layoutControl1;
             this.txbExpDate.TabIndex = 14;
             // 
             // tokenMachine
             // 
-            this.tokenMachine.Location = new System.Drawing.Point(112, 353);
+            this.tokenMachine.Location = new System.Drawing.Point(100, 309);
             this.tokenMachine.MaximumSize = new System.Drawing.Size(443, 115);
             this.tokenMachine.MenuManager = this.barManagerTP;
             this.tokenMachine.MinimumSize = new System.Drawing.Size(0, 115);
@@ -259,14 +254,14 @@
             this.tokenMachine.Properties.Separators.AddRange(new string[] {
             ","});
             this.tokenMachine.Properties.TokenGlyphLocation = DevExpress.XtraEditors.TokenEditGlyphLocation.Right;
-            this.tokenMachine.Size = new System.Drawing.Size(307, 115);
+            this.tokenMachine.Size = new System.Drawing.Size(319, 115);
             this.tokenMachine.StyleController = this.layoutControl1;
             this.tokenMachine.TabIndex = 13;
             // 
             // cbbUsr
             // 
             this.cbbUsr.EditValue = "";
-            this.cbbUsr.Location = new System.Drawing.Point(112, 245);
+            this.cbbUsr.Location = new System.Drawing.Point(100, 237);
             this.cbbUsr.Name = "cbbUsr";
             this.cbbUsr.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbbUsr.Properties.Appearance.Options.UseFont = true;
@@ -277,7 +272,7 @@
             this.cbbUsr.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbbUsr.Properties.PopupView = this.searchLookUpEdit1View;
-            this.cbbUsr.Size = new System.Drawing.Size(307, 32);
+            this.cbbUsr.Size = new System.Drawing.Size(319, 32);
             this.cbbUsr.StyleController = this.layoutControl1;
             this.cbbUsr.TabIndex = 12;
             // 
@@ -336,20 +331,20 @@
             // 
             // txbDisplayName
             // 
-            this.txbDisplayName.Location = new System.Drawing.Point(112, 48);
+            this.txbDisplayName.Location = new System.Drawing.Point(100, 48);
             this.txbDisplayName.MenuManager = this.barManagerTP;
             this.txbDisplayName.Name = "txbDisplayName";
             this.txbDisplayName.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txbDisplayName.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbDisplayName.Properties.Appearance.Options.UseFont = true;
             this.txbDisplayName.Properties.Appearance.Options.UseForeColor = true;
-            this.txbDisplayName.Size = new System.Drawing.Size(307, 121);
+            this.txbDisplayName.Size = new System.Drawing.Size(319, 113);
             this.txbDisplayName.StyleController = this.layoutControl1;
             this.txbDisplayName.TabIndex = 11;
             // 
             // cbbTypeUse
             // 
-            this.cbbTypeUse.Location = new System.Drawing.Point(112, 317);
+            this.cbbTypeUse.Location = new System.Drawing.Point(100, 273);
             this.cbbTypeUse.MenuManager = this.barManagerTP;
             this.cbbTypeUse.Name = "cbbTypeUse";
             this.cbbTypeUse.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
@@ -364,54 +359,37 @@
             "消耗品",
             "修護費用"});
             this.cbbTypeUse.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cbbTypeUse.Size = new System.Drawing.Size(307, 32);
+            this.cbbTypeUse.Size = new System.Drawing.Size(319, 32);
             this.cbbTypeUse.StyleController = this.layoutControl1;
             this.cbbTypeUse.TabIndex = 10;
             // 
-            // txbPrice
-            // 
-            this.txbPrice.EditValue = "0";
-            this.txbPrice.Location = new System.Drawing.Point(112, 281);
-            this.txbPrice.Name = "txbPrice";
-            this.txbPrice.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.txbPrice.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.txbPrice.Properties.Appearance.Options.UseFont = true;
-            this.txbPrice.Properties.Appearance.Options.UseForeColor = true;
-            this.txbPrice.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
-            this.txbPrice.Properties.MaskSettings.Set("mask", "N0");
-            this.txbPrice.Properties.MaskSettings.Set("autoHideDecimalSeparator", null);
-            this.txbPrice.Properties.UseMaskAsDisplayFormat = true;
-            this.txbPrice.Size = new System.Drawing.Size(307, 32);
-            this.txbPrice.StyleController = this.layoutControl1;
-            this.txbPrice.TabIndex = 9;
-            // 
             // txbCode
             // 
-            this.txbCode.Location = new System.Drawing.Point(112, 12);
+            this.txbCode.Location = new System.Drawing.Point(100, 12);
             this.txbCode.Name = "txbCode";
             this.txbCode.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbCode.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbCode.Properties.Appearance.Options.UseFont = true;
             this.txbCode.Properties.Appearance.Options.UseForeColor = true;
-            this.txbCode.Size = new System.Drawing.Size(307, 32);
+            this.txbCode.Size = new System.Drawing.Size(319, 32);
             this.txbCode.StyleController = this.layoutControl1;
             this.txbCode.TabIndex = 9;
             // 
             // txbLocation
             // 
-            this.txbLocation.Location = new System.Drawing.Point(112, 173);
+            this.txbLocation.Location = new System.Drawing.Point(100, 165);
             this.txbLocation.Name = "txbLocation";
             this.txbLocation.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbLocation.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbLocation.Properties.Appearance.Options.UseFont = true;
             this.txbLocation.Properties.Appearance.Options.UseForeColor = true;
-            this.txbLocation.Size = new System.Drawing.Size(307, 32);
+            this.txbLocation.Size = new System.Drawing.Size(319, 32);
             this.txbLocation.StyleController = this.layoutControl1;
             this.txbLocation.TabIndex = 9;
             // 
             // cbbUnit
             // 
-            this.cbbUnit.Location = new System.Drawing.Point(112, 209);
+            this.cbbUnit.Location = new System.Drawing.Point(100, 201);
             this.cbbUnit.Name = "cbbUnit";
             this.cbbUnit.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.cbbUnit.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -426,14 +404,14 @@
             this.cbbUnit.Properties.NullText = "";
             this.cbbUnit.Properties.PopupSizeable = false;
             this.cbbUnit.Properties.ShowHeader = false;
-            this.cbbUnit.Size = new System.Drawing.Size(101, 32);
+            this.cbbUnit.Size = new System.Drawing.Size(113, 32);
             this.cbbUnit.StyleController = this.layoutControl1;
             this.cbbUnit.TabIndex = 10;
             // 
             // txbMinQuantity
             // 
             this.txbMinQuantity.EditValue = "0";
-            this.txbMinQuantity.Location = new System.Drawing.Point(317, 209);
+            this.txbMinQuantity.Location = new System.Drawing.Point(305, 201);
             this.txbMinQuantity.Name = "txbMinQuantity";
             this.txbMinQuantity.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbMinQuantity.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -443,7 +421,7 @@
             this.txbMinQuantity.Properties.MaskSettings.Set("mask", "N0");
             this.txbMinQuantity.Properties.MaskSettings.Set("autoHideDecimalSeparator", null);
             this.txbMinQuantity.Properties.UseMaskAsDisplayFormat = true;
-            this.txbMinQuantity.Size = new System.Drawing.Size(102, 32);
+            this.txbMinQuantity.Size = new System.Drawing.Size(114, 32);
             this.txbMinQuantity.StyleController = this.layoutControl1;
             this.txbMinQuantity.TabIndex = 9;
             // 
@@ -458,12 +436,11 @@
             this.lcMachine,
             this.lcUnit,
             this.lcUser,
-            this.lcPrice,
             this.lcExpDate,
             this.lcLocation,
             this.lcMinQuantity});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(431, 516);
+            this.Root.Size = new System.Drawing.Size(431, 472);
             this.Root.TextVisible = false;
             // 
             // lcCode
@@ -482,7 +459,7 @@
             this.lcCode.Name = "lcCode";
             this.lcCode.Size = new System.Drawing.Size(411, 36);
             this.lcCode.Text = "材料編號";
-            this.lcCode.TextSize = new System.Drawing.Size(88, 24);
+            this.lcCode.TextSize = new System.Drawing.Size(76, 24);
             // 
             // lcTypeUse
             // 
@@ -495,11 +472,11 @@
             this.lcTypeUse.AppearanceItemCaptionDisabled.Options.UseFont = true;
             this.lcTypeUse.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.lcTypeUse.Control = this.cbbTypeUse;
-            this.lcTypeUse.Location = new System.Drawing.Point(0, 305);
+            this.lcTypeUse.Location = new System.Drawing.Point(0, 261);
             this.lcTypeUse.Name = "lcTypeUse";
             this.lcTypeUse.Size = new System.Drawing.Size(411, 36);
             this.lcTypeUse.Text = "備品用途";
-            this.lcTypeUse.TextSize = new System.Drawing.Size(88, 24);
+            this.lcTypeUse.TextSize = new System.Drawing.Size(76, 24);
             // 
             // lcDisplayName
             // 
@@ -512,9 +489,9 @@
             this.lcDisplayName.Control = this.txbDisplayName;
             this.lcDisplayName.Location = new System.Drawing.Point(0, 36);
             this.lcDisplayName.Name = "lcDisplayName";
-            this.lcDisplayName.Size = new System.Drawing.Size(411, 125);
+            this.lcDisplayName.Size = new System.Drawing.Size(411, 117);
             this.lcDisplayName.Text = "品名規格";
-            this.lcDisplayName.TextSize = new System.Drawing.Size(88, 24);
+            this.lcDisplayName.TextSize = new System.Drawing.Size(76, 24);
             // 
             // lcMachine
             // 
@@ -527,11 +504,11 @@
             this.lcMachine.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             this.lcMachine.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.lcMachine.Control = this.tokenMachine;
-            this.lcMachine.Location = new System.Drawing.Point(0, 341);
+            this.lcMachine.Location = new System.Drawing.Point(0, 297);
             this.lcMachine.Name = "lcMachine";
             this.lcMachine.Size = new System.Drawing.Size(411, 119);
             this.lcMachine.Text = "用於設備";
-            this.lcMachine.TextSize = new System.Drawing.Size(88, 24);
+            this.lcMachine.TextSize = new System.Drawing.Size(76, 24);
             // 
             // lcUnit
             // 
@@ -546,11 +523,11 @@
             this.lcUnit.Control = this.cbbUnit;
             this.lcUnit.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
             this.lcUnit.CustomizationFormText = "備品用途";
-            this.lcUnit.Location = new System.Drawing.Point(0, 197);
+            this.lcUnit.Location = new System.Drawing.Point(0, 189);
             this.lcUnit.Name = "lcUnit";
             this.lcUnit.Size = new System.Drawing.Size(205, 36);
             this.lcUnit.Text = "單位";
-            this.lcUnit.TextSize = new System.Drawing.Size(88, 24);
+            this.lcUnit.TextSize = new System.Drawing.Size(76, 24);
             // 
             // lcUser
             // 
@@ -561,28 +538,11 @@
             this.lcUser.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             this.lcUser.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.lcUser.Control = this.cbbUsr;
-            this.lcUser.Location = new System.Drawing.Point(0, 233);
+            this.lcUser.Location = new System.Drawing.Point(0, 225);
             this.lcUser.Name = "lcUser";
             this.lcUser.Size = new System.Drawing.Size(411, 36);
             this.lcUser.Text = "管理人員";
-            this.lcUser.TextSize = new System.Drawing.Size(88, 24);
-            // 
-            // lcPrice
-            // 
-            this.lcPrice.AllowHtmlStringInCaption = true;
-            this.lcPrice.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.lcPrice.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
-            this.lcPrice.AppearanceItemCaption.Options.UseFont = true;
-            this.lcPrice.AppearanceItemCaption.Options.UseForeColor = true;
-            this.lcPrice.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
-            this.lcPrice.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
-            this.lcPrice.Control = this.txbPrice;
-            this.lcPrice.CustomizationFormText = "中文名稱";
-            this.lcPrice.Location = new System.Drawing.Point(0, 269);
-            this.lcPrice.Name = "lcPrice";
-            this.lcPrice.Size = new System.Drawing.Size(411, 36);
-            this.lcPrice.Text = "單價(越盾)";
-            this.lcPrice.TextSize = new System.Drawing.Size(88, 24);
+            this.lcUser.TextSize = new System.Drawing.Size(76, 24);
             // 
             // lcExpDate
             // 
@@ -593,11 +553,11 @@
             this.lcExpDate.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             this.lcExpDate.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.lcExpDate.Control = this.txbExpDate;
-            this.lcExpDate.Location = new System.Drawing.Point(0, 460);
+            this.lcExpDate.Location = new System.Drawing.Point(0, 416);
             this.lcExpDate.Name = "lcExpDate";
             this.lcExpDate.Size = new System.Drawing.Size(411, 36);
             this.lcExpDate.Text = "有效期至";
-            this.lcExpDate.TextSize = new System.Drawing.Size(88, 24);
+            this.lcExpDate.TextSize = new System.Drawing.Size(76, 24);
             // 
             // lcLocation
             // 
@@ -611,11 +571,11 @@
             this.lcLocation.Control = this.txbLocation;
             this.lcLocation.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
             this.lcLocation.CustomizationFormText = "中文名稱";
-            this.lcLocation.Location = new System.Drawing.Point(0, 161);
+            this.lcLocation.Location = new System.Drawing.Point(0, 153);
             this.lcLocation.Name = "lcLocation";
             this.lcLocation.Size = new System.Drawing.Size(411, 36);
             this.lcLocation.Text = "料位";
-            this.lcLocation.TextSize = new System.Drawing.Size(88, 24);
+            this.lcLocation.TextSize = new System.Drawing.Size(76, 24);
             // 
             // lcMinQuantity
             // 
@@ -629,17 +589,17 @@
             this.lcMinQuantity.Control = this.txbMinQuantity;
             this.lcMinQuantity.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
             this.lcMinQuantity.CustomizationFormText = "中文名稱";
-            this.lcMinQuantity.Location = new System.Drawing.Point(205, 197);
+            this.lcMinQuantity.Location = new System.Drawing.Point(205, 189);
             this.lcMinQuantity.Name = "lcMinQuantity";
             this.lcMinQuantity.Size = new System.Drawing.Size(206, 36);
             this.lcMinQuantity.Text = "安全數量";
-            this.lcMinQuantity.TextSize = new System.Drawing.Size(88, 24);
+            this.lcMinQuantity.TextSize = new System.Drawing.Size(76, 24);
             // 
             // f309_Material_Info
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(431, 565);
+            this.ClientSize = new System.Drawing.Size(431, 521);
             this.Controls.Add(this.layoutControl1);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
@@ -661,7 +621,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDisplayName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbTypeUse.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbPrice.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbCode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbLocation.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbUnit.Properties)).EndInit();
@@ -673,7 +632,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcMachine)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcUnit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcUser)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcPrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcExpDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcLocation)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcMinQuantity)).EndInit();
@@ -695,12 +653,10 @@
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraEditors.ComboBoxEdit cbbTypeUse;
-        private DevExpress.XtraEditors.TextEdit txbPrice;
         private DevExpress.XtraEditors.TextEdit txbCode;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.LayoutControlItem lcCode;
         private DevExpress.XtraLayout.LayoutControlItem lcTypeUse;
-        private DevExpress.XtraLayout.LayoutControlItem lcPrice;
         private DevExpress.XtraEditors.MemoEdit txbDisplayName;
         private DevExpress.XtraLayout.LayoutControlItem lcDisplayName;
         private DevExpress.XtraLayout.LayoutControlItem lcUnit;

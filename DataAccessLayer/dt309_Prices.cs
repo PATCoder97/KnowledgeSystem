@@ -17,7 +17,7 @@ namespace DataAccessLayer
         public int Id { get; set; }
         public int MaterialId { get; set; }
         public int Price { get; set; }
-        public int ChangedBy { get; set; }
-        public Nullable<System.DateTime> ChangedAt { get; set; }
+        public string ChangedBy { get; set; }
+        public System.DateTime ChangedAt { get; set; }
     }
 }

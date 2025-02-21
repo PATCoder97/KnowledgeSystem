@@ -105,9 +105,9 @@ namespace DataAccessLayer
         public virtual DbSet<dt309_MachineMaterials> dt309_MachineMaterials { get; set; }
         public virtual DbSet<dt309_Machines> dt309_Machines { get; set; }
         public virtual DbSet<dt309_Materials> dt309_Materials { get; set; }
-        public virtual DbSet<dt309_Prices> dt309_Prices { get; set; }
         public virtual DbSet<dt309_Storages> dt309_Storages { get; set; }
         public virtual DbSet<dt309_Transactions> dt309_Transactions { get; set; }
         public virtual DbSet<dt309_Units> dt309_Units { get; set; }
+        public virtual DbSet<dt309_Prices> dt309_Prices { get; set; }
     }
 }

@@ -56,6 +56,22 @@ namespace BusinessLayer
             }
         }
 
+        public List<dt309_Machines> GetListByIds(List<int> ids)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt309_Machines.Where(r => ids.Contains(r.Id)).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public dt309_Machines GetItemById(int id)
         {
             try

@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -20,9 +21,13 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraSplashScreen;
+using DocumentFormat.OpenXml.Spreadsheet;
 using ExcelDataReader;
 using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck;
+using Org.BouncyCastle.Math;
+using Color = System.Drawing.Color;
+using Font = System.Drawing.Font;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 {
@@ -47,14 +52,22 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         List<dm_User> users = new List<dm_User>();
 
         List<dt309_Materials> materials;
-        List<dt308_CheckDetail> dt308CheckDetail;
+        List<dt309_Storages> storages;
         List<dt308_Disease> dt308Diseases;
 
+        Dictionary<string, string> events = new Dictionary<string, string>()
+        {
+            {"IN","入庫" },
+            {"OUT","出庫" },
+            {"CHECK","盤點" },
+        };
+
         DXMenuItem itemViewInfo;
-        DXMenuItem itemCreateScript;
-        DXMenuItem itemEditDetail;
-        DXMenuItem itemExcelUploadDetail;
-        DXMenuItem itemGoogleSheetUploadDetail;
+        DXMenuItem itemUpdatePrice;
+        DXMenuItem itemMaterialIn;
+        DXMenuItem itemMaterialOut;
+        DXMenuItem itemMaterialTransfer;
+        DXMenuItem itemMaterialCheck;
 
         private void InitializeIcon()
         {
@@ -65,13 +78,45 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         private void CreateRuleGV()
         {
-            var rule = new GridFormatRule
+            // Quy tắc cảnh báo khi số lượng trong kho + máy < min
+            var ruleCHECK = new GridFormatRule
+            {
+                Column = gColEvent,
+                Name = "RuleCheck",
+                Rule = new FormatConditionRuleExpression
+                {
+                    Expression = "StartsWith([data.TransactionType], \'C\')",
+                    Appearance =
+                    {
+                        ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical,
+                    }
+                }
+            };
+            gvTransactions.FormatRules.Add(ruleCHECK);
+
+            var ruleIN = new GridFormatRule
+            {
+                Column = gColEvent,
+                Name = "RuleIn",
+                Rule = new FormatConditionRuleExpression
+                {
+                    Expression = "StartsWith([data.TransactionType], \'I\')",
+                    Appearance =
+                    {
+                        ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Question,
+                    }
+                }
+            };
+            gvTransactions.FormatRules.Add(ruleIN);
+
+            // Quy tắc cảnh báo khi số lượng trong kho + máy < min
+            var ruleNotify = new GridFormatRule
             {
                 ApplyToRow = true,
                 Name = "RuleNotify",
                 Rule = new FormatConditionRuleExpression
                 {
-                    Expression = "[HealthRating] = -1",
+                    Expression = "[data.QuantityInStorage] + [data.QuantityInMachine] < [data.MinQuantity]",
                     Appearance =
                     {
                         BackColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical,
@@ -80,9 +125,28 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                     }
                 }
             };
+            gvData.FormatRules.Add(ruleNotify);
 
-            // Thêm quy tắc vào GridView
-            gvSession.FormatRules.Add(rule);
+            // Quy tắc hiển thị biểu tượng tăng/giảm trong lịch sử giao dịch
+            var ruleIconSet = new GridFormatRule
+            {
+                Name = "RuleTransactionTrend",
+                Column = gColQuantity,
+                Rule = new FormatConditionRuleIconSet
+                {
+                    IconSet = new FormatConditionIconSet
+                    {
+                        ValueType = FormatConditionValueType.Automatic,
+                        Icons =
+                        {
+                            new FormatConditionIconSetIcon { PredefinedName = "Arrows3_1.png", Value = 0, ValueComparison = FormatConditionComparisonType.Greater },
+                            new FormatConditionIconSetIcon { PredefinedName = "Triangles3_2.png", Value = 0, ValueComparison = FormatConditionComparisonType.GreaterOrEqual },
+                            new FormatConditionIconSetIcon { PredefinedName = "Arrows3_3.png", Value = decimal.MinValue, ValueComparison = FormatConditionComparisonType.GreaterOrEqual }
+                        }
+                    }
+                }
+            };
+            gvTransactions.FormatRules.Add(ruleIconSet);
         }
 
         DXMenuItem CreateMenuItem(string caption, EventHandler clickEvent, SvgImage svgImage)
@@ -101,121 +165,69 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         private void InitializeMenuItems()
         {
             itemViewInfo = CreateMenuItem("查看資訊", ItemViewInfo_Click, TPSvgimages.View);
-            itemCreateScript = CreateMenuItem("導出GoogleForm程式碼", ItemCreateScript_Click, TPSvgimages.GgForm);
-            itemEditDetail = CreateMenuItem("更新檢查表", ItemEditDetail_Click, TPSvgimages.Edit);
-            itemExcelUploadDetail = CreateMenuItem("上傳Excel檔案", ItemExcelUploadDetail_Click, TPSvgimages.Excel);
-            itemGoogleSheetUploadDetail = CreateMenuItem("上傳GoogleSheet路徑", ItemGoogleSheetUploadDetail_Click, TPSvgimages.GgSheet);
+            itemUpdatePrice = CreateMenuItem("更新單價", ItemUpdatePrice_Click, TPSvgimages.Money);
+
+            itemMaterialIn = CreateMenuItem("收料", ItemMaterialIn_Click, TPSvgimages.Num2);
+            itemMaterialOut = CreateMenuItem("領用", ItemMaterialOut_Click, TPSvgimages.Num3);
+            itemMaterialTransfer = CreateMenuItem("轉庫", ItemMaterialTransfer_Click, TPSvgimages.Num1);
+            itemMaterialCheck = CreateMenuItem("盤點", ItemMaterialCheck_Click, TPSvgimages.Num4);
         }
 
-        private void ShowDataDetailRaw(int idSession)
+        private void HandleMaterialTransaction(string formName, string eventInfo)
         {
-        }
+            var idMaterial = Convert.ToInt16(gvData.GetRowCellValue(gvData.FocusedRowHandle, gColIdMaterial));
 
-        private void ItemGoogleSheetUploadDetail_Click(object sender, EventArgs e)
-        {
-            GridView view = gvData;
-            dt308_CheckSession session = view.GetRow(view.FocusedRowHandle) as dt308_CheckSession;
-
-            //string result = XtraInputBox.Show("Nhập đường đãn Google Sheet của bài khảo sát:", "Điền liên kết google sheet", "");
-            //if (string.IsNullOrEmpty(result?.ToString())) return;
-
-            //var rawlink = result.ToString();
-
-            //var match = Regex.Match(rawlink, @"/d/([a-zA-Z0-9-_]+)");
-            //if (!match.Success) return;
-
-            //string sheetId = match.Groups[1].Value;
-            //var google_sheet_url = $@"https://docs.google.com/spreadsheets/d/{sheetId}/gviz/tq?tqx=out:html&tq&gid=1";
-
-            //dtDetailExcel = GetGoogleSheetAsDataTable(google_sheet_url);
-
-            //ShowDataDetailRaw(session.Id);
-        }
-
-        private void ItemExcelUploadDetail_Click(object sender, EventArgs e)
-        {
-            //OpenFileDialog openFile = new OpenFileDialog()
-            //{
-            //    Filter = "Excel |*.xlsx"
-            //};
-
-            //if (openFile.ShowDialog() != DialogResult.OK) return;
-
-            //GridView view = gvData;
-            //dt308_CheckSession session = view.GetRow(view.FocusedRowHandle) as dt308_CheckSession;
-
-            //using (var stream = File.Open(openFile.FileName, FileMode.Open, FileAccess.Read))
-            //{
-            //    IExcelDataReader reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
-
-            //    DataSet ds = reader.AsDataSet(new ExcelDataSetConfiguration()
-            //    {
-            //        ConfigureDataTable = (_) => new ExcelDataTableConfiguration()
-            //        {
-            //            UseHeaderRow = true
-            //        }
-            //    });
-
-            //    reader.Close();
-
-            //    dtDetailExcel = ds.Tables[0];
-            //}
-
-            //ShowDataDetailRaw(session.Id);
-        }
-
-        private void ItemEditDetail_Click(object sender, EventArgs e)
-        {
-            //GridView detailGridView = gvData.GetDetailView(gvData.FocusedRowHandle, 0) as GridView;
-            //if (detailGridView != null)
-            //{
-            //    int detailFocusedRowHandle = detailGridView.FocusedRowHandle;
-            //    if (detailFocusedRowHandle < 0) return;
-
-            //    var idReport = Convert.ToInt16(detailGridView.GetRowCellValue(detailFocusedRowHandle, gColIdDetail));
-
-            //    f308_CheckData fData = new f308_CheckData()
-            //    {
-            //        eventInfo = EventFormInfo.Update,
-            //        formName = "健康檢查",
-            //        idDetail = idReport
-            //    };
-            //    fData.ShowDialog();
-
-            //    LoadData();
-            //}
-        }
-
-        private void ItemCreateScript_Click(object sender, EventArgs e)
-        {
-            GridView view = gvData;
-            dt308_CheckSession session = view.GetRow(view.FocusedRowHandle) as dt308_CheckSession;
-
-            var diseaseTitles = new List<Tuple<string, string>>
+            var transactionForm = new f309_Transaction_Info
             {
-                Tuple.Create("Bạn mắc các bệnh thông thường nào sau đây nào sau đây?", "您患有以下哪些一般疾病？"),
-                Tuple.Create("Bạn mắc các bệnh mãn tính nào sau đây nào sau đây?", "您患有以下哪些慢性疾病？"),
-                Tuple.Create("Bạn mắc các bệnh nghề nghiệp nào sau đây nào sau đây?", "您患有以下哪些得職業病？")
+                formName = formName,
+                eventInfo = eventInfo,
+                idMaterial = idMaterial
             };
 
-            string sourceScript = File.ReadAllText(Path.Combine(TPConfigs.ResourcesPath, "f308_GoogleAppScript.txt"));
-            var scriptGoogleForm = sourceScript.Replace("{{formname}}", $"{session.DisplayNameVN}/{session.DisplayNameTW} - {System.DateTime.Now:yyyyMMddHHmmss}");
+            transactionForm.ShowDialog();
+            LoadData();
+        }
 
-            for (int i = 0; i < diseaseTitles.Count; i++)
+        private void ItemMaterialCheck_Click(object sender, EventArgs e) => HandleMaterialTransaction("盤點", "盤點");
+
+        private void ItemMaterialTransfer_Click(object sender, EventArgs e) => HandleMaterialTransaction("轉庫", "轉庫");
+
+        private void ItemMaterialOut_Click(object sender, EventArgs e) => HandleMaterialTransaction("領用", "領用");
+
+        private void ItemMaterialIn_Click(object sender, EventArgs e) => HandleMaterialTransaction("收貨", "收貨");
+
+        private void ItemUpdatePrice_Click(object sender, EventArgs e)
+        {
+            GridView view = gvData;
+            int idMaterial = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColIdMaterial));
+
+            var result = XtraInputBox.Show(new XtraInputBoxArgs
             {
-                string checkboxName = $"checkboxDiseases{i + 1}";
-                string diseasesCode = string.Join(",", dt308Diseases
-                    .Where(r => r.DiseaseType == i + 1)
-                    .Select(r => $"{checkboxName}.createChoice('({r.Id:D2}) {r.DisplayNameVN}/{r.DisplayNameTW}')")
-                    .ToList());
+                Caption = TPConfigs.SoftNameTW,
+                Prompt = "請輸入新單價",
+                DefaultButtonIndex = 0,
+                Editor = new TextEdit
+                {
+                    Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F),
+                    Properties = { Mask = { MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric, EditMask = "N0", UseMaskAsDisplayFormat = true } }
+                },
+                DefaultResponse = ""
+            })?.ToString().ToUpper();
 
-                scriptGoogleForm = scriptGoogleForm.Replace($"{{{{diseases{i + 1}}}}}", $"{checkboxName}.setTitle('{diseaseTitles[i].Item1}\\n{diseaseTitles[i].Item2}').setChoices([{diseasesCode}]);");
-            }
+            if (string.IsNullOrEmpty(result)) return;
 
-            Clipboard.SetText(scriptGoogleForm);
-            XtraMessageBox.Show("Đã lưu Code vào bộ nhớ tạm, Làm theo SOP để tạo được khảo sát google form !", "Thông báo!");
+            var newPrice = Convert.ToInt32(result);
+            if (newPrice < 0) return;
 
-            Process.Start("https://script.google.com/");
+            var resultUpdate = dt309_PricesBUS.Instance.Add(new dt309_Prices()
+            {
+                MaterialId = idMaterial,
+                Price = newPrice,
+                ChangedAt = DateTime.Now,
+                ChangedBy = TPConfigs.LoginUser.Id
+            });
+
+            LoadData();
         }
 
         private void ItemViewInfo_Click(object sender, EventArgs e)
@@ -239,16 +251,25 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             {
                 helper.SaveViewInfo();
 
+                storages = dt309_StoragesBUS.Instance.GetList();
+                users = dm_UserBUS.Instance.GetList();
+                var units = dt309_UnitsBUS.Instance.GetList();
+
                 materials = dt309_MaterialsBUS.Instance.GetListByIdDept(TPConfigs.LoginUser.IdDepartment);
 
+                var displayData = materials.Select(x => new
+                {
+                    data = x,
+                    Unit = units.FirstOrDefault(u => u.Id == x.IdUnit).DisplayName,
+                    UserMngr = users.FirstOrDefault(u => u.Id == x.IdManager).DisplayName,
+                }).ToList();
 
-                sourceBases.DataSource = materials;
+                sourceBases.DataSource = displayData;
 
                 gvData.BestFitColumns();
                 gvData.CollapseAllDetails();
 
                 helper.LoadViewInfo();
-                //gvData.FocusedRowHandle = GridControl.AutoFilterRowHandle;
 
                 users = dm_UserBUS.Instance.GetList();
             }
@@ -259,11 +280,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             gvData.ReadOnlyGridView();
             gvData.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
             gvData.OptionsDetail.AllowOnlyOneMasterRowExpanded = true;
-            gvSession.ReadOnlyGridView();
-            gvSession.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
-            gvSession.OptionsDetail.AllowOnlyOneMasterRowExpanded = true;
-            gvDetail.ReadOnlyGridView();
-            gvDetail.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
+            gvTransactions.ReadOnlyGridView();
+            gvTransactions.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
+            gvPrices.ReadOnlyGridView();
+            gvPrices.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
+            gvMachine.ReadOnlyGridView();
+            gvMachine.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
 
             LoadData();
             CreateRuleGV();
@@ -279,6 +301,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         {
             f309_Material_Info finfo = new f309_Material_Info();
             finfo.ShowDialog();
+            LoadData();
         }
 
         private void btnReload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -291,12 +314,116 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             if (e.HitInfo.InRowCell && e.HitInfo.InDataRow)
             {
                 e.Menu.Items.Add(itemViewInfo);
+                e.Menu.Items.Add(itemUpdatePrice);
 
-                //itemCreateScript.BeginGroup = true;
-                //e.Menu.Items.Add(itemCreateScript);
-                //e.Menu.Items.Add(itemGoogleSheetUploadDetail);
-                //e.Menu.Items.Add(itemExcelUploadDetail);
+                itemMaterialIn.BeginGroup = true;
+                e.Menu.Items.Add(itemMaterialIn);
+                e.Menu.Items.Add(itemMaterialOut);
+                e.Menu.Items.Add(itemMaterialTransfer);
+                e.Menu.Items.Add(itemMaterialCheck);
             }
+        }
+
+        private void gvData_CustomUnboundColumnData(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDataEventArgs e)
+        {
+            if (e.IsGetData && e.Column.FieldName == "TotalPrice")
+            {
+                dt309_Materials currentRow = ((dynamic)e.Row).data as dt309_Materials;
+                if (currentRow == null) return;
+
+                int sumQuantity = Convert.ToInt32(currentRow.QuantityInStorage + currentRow.QuantityInMachine);
+
+                // Tạo một mảng các chuỗi và chỉ lấy các chuỗi không rỗng
+                e.Value = (long)sumQuantity * currentRow.Price;
+            }
+        }
+
+        private void gvData_MasterRowEmpty(object sender, MasterRowEmptyEventArgs e)
+        {
+            e.IsEmpty = false;
+        }
+
+        private void gvData_MasterRowGetRelationCount(object sender, MasterRowGetRelationCountEventArgs e)
+        {
+            e.RelationCount = 3;
+        }
+
+        private void gvData_MasterRowGetRelationName(object sender, MasterRowGetRelationNameEventArgs e)
+        {
+            switch (e.RelationIndex)
+            {
+                case 0:
+                    e.RelationName = "出入庫記錄";
+                    break;
+                case 1:
+                    e.RelationName = "單價管理";
+                    break;
+                case 2:
+                    e.RelationName = "用於設備";
+                    break;
+                    //case 3:
+                    //    e.RelationName = "單價管理";
+                    //    break;
+            }
+        }
+
+        private void gvData_MasterRowGetChildList(object sender, MasterRowGetChildListEventArgs e)
+        {
+            GridView view = sender as GridView;
+            dt309_Materials material = (view.GetRow(e.RowHandle) as dynamic).data as dt309_Materials;
+            int idMaterial = material.Id;
+
+            if (material != null)
+            {
+                switch (e.RelationIndex)
+                {
+                    case 0:
+
+                        var transactions = dt309_TransactionsBUS.Instance.GetListByidMaterial(idMaterial).Select(r => new
+                        {
+                            data = r,
+                            Event = events[r.TransactionType],
+                            UserDo = users.FirstOrDefault(u => u.Id == r.UserDo)?.DisplayName,
+                            Starage = storages.FirstOrDefault(u => u.Id == r.StorageId).DisplayName,
+                        }).OrderByDescending(r => r.data.Id).ToList();
+                        e.ChildList = transactions;
+
+                        break;
+                    case 1:
+
+                        var prices = dt309_PricesBUS.Instance.GetListByIdMaterial(idMaterial).Select(r => new
+                        {
+                            r.Price,
+                            r.ChangedAt,
+                            ChangedBy = users.FirstOrDefault(x => x.Id == r.ChangedBy).DisplayName
+                        }).ToList();
+
+                        e.ChildList = prices;
+
+                        break;
+                    case 2:
+
+                        var ids = dt309_MachineMaterialsBUS.Instance.GetListByIdMaterial(idMaterial).Select(r => r.MachineId).ToList();
+                        var machines = dt309_MachinesBUS.Instance.GetListByIds(ids);
+
+                        e.ChildList = machines;
+
+                        break;
+                        //case 3:
+                        //    List<Prices> lsPrices = PricesDAO.Instance.GetListByIdSpare(material.IdSparePart);
+                        //    e.ChildList = lsPrices.OrderByDescending(r => r.PriceTime).ToList();
+                        //    break;
+                }
+            }
+        }
+
+        private void gvData_MasterRowExpanded(object sender, CustomMasterRowEventArgs e)
+        {
+            GridView masterView = sender as GridView;
+            int visibleDetailRelationIndex = masterView.GetVisibleDetailRelationIndex(e.RowHandle);
+            GridView detailView = masterView.GetDetailView(e.RowHandle, visibleDetailRelationIndex) as GridView;
+
+            detailView.BestFitColumns();
         }
     }
 }

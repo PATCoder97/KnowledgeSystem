@@ -20,5 +20,9 @@ namespace DataAccessLayer
         public int Quantity { get; set; }
         public string TransactionType { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<double> AftQuantity { get; set; }
+        public Nullable<double> TotalQuantity { get; set; }
+        public string UserDo { get; set; }
+        public string Desc { get; set; }
     }
 }

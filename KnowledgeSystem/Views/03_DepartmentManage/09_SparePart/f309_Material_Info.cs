@@ -13,6 +13,7 @@ using DataAccessLayer;
 using DevExpress.XtraEditors;
 using DevExpress.XtraLayout;
 using DevExpress.XtraSplashScreen;
+using DocumentFormat.OpenXml.Wordprocessing;
 using KnowledgeSystem.Helpers;
 using Newtonsoft.Json;
 
@@ -50,7 +51,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             cbbUnit.Enabled = _enable;
             txbLocation.Enabled = _enable;
             cbbUsr.Enabled = _enable;
-            txbPrice.Enabled = _enable;
             cbbTypeUse.Enabled = _enable;
             tokenMachine.Enabled = _enable;
             txbExpDate.Enabled = _enable;
@@ -76,6 +76,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                     btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                     btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                     EnabledController();
+
                     break;
                 case EventFormInfo.Delete:
                     Text = $"刪除{formName}";
@@ -120,8 +121,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         private void f309_Material_Info_Load(object sender, EventArgs e)
         {
-            lcControls = new List<LayoutControlItem>() { lcCode, lcDisplayName, lcUnit, lcLocation, lcUser, lcPrice, lcTypeUse, lcMachine, lcExpDate, lcMinQuantity };
-            lcImpControls = new List<LayoutControlItem>() { lcCode, lcDisplayName, lcUnit, lcLocation, lcUser, lcPrice, lcMachine, lcMinQuantity };
+            lcControls = new List<LayoutControlItem>() { lcCode, lcDisplayName, lcUnit, lcLocation, lcUser, lcTypeUse, lcMachine, lcExpDate, lcMinQuantity };
+            lcImpControls = new List<LayoutControlItem>() { lcCode, lcDisplayName, lcUnit, lcLocation, lcUser, lcMachine, lcMinQuantity };
             foreach (var item in lcControls)
             {
                 item.AllowHtmlStringInCaption = true;
@@ -160,7 +161,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                     cbbUnit.EditValue = material.IdUnit;
                     txbLocation.EditValue = material.Location;
                     cbbUsr.EditValue = material.IdManager;
-                    txbPrice.EditValue = material.Price;
                     cbbTypeUse.EditValue = material.TypeUse;
                     tokenMachine.EditValue = string.Join(",", dt309_MachineMaterialsBUS.Instance.GetListByIdMaterial(material.Id).Select(r => r.MachineId));
                     txbExpDate.EditValue = material.ExpDate;
@@ -209,7 +209,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             var location = txbLocation.EditValue?.ToString();
             var idUser = cbbUsr.EditValue?.ToString();
             var minQuantity = Convert.ToDouble(txbMinQuantity.EditValue);
-            var price = Convert.ToInt32(txbPrice.EditValue);
             var typeUse = cbbTypeUse.EditValue?.ToString();
             var idMachines = tokenMachine.EditValue?.ToString();
             var expDate = txbExpDate.DateTime;
@@ -223,17 +222,18 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 material.IdUnit = idUnit;
                 material.Location = location;
                 material.IdManager = idUser;
-                material.Price = price;
                 material.TypeUse = typeUse;
                 material.ExpDate = expDate;
                 material.MinQuantity = minQuantity;
-                material.QuantityInMachine = 0;
-                material.QuantityInStorage = 0;
+                
                 List<int> machineIds = idMachines.Split(',').Select(int.Parse).ToList();
 
                 switch (eventInfo)
                 {
                     case EventFormInfo.Create:
+
+                        material.QuantityInMachine = 0;
+                        material.QuantityInStorage = 0;
 
                         int idMaterial = dt309_MaterialsBUS.Instance.Add(material);
                         result = idMaterial != -1;
