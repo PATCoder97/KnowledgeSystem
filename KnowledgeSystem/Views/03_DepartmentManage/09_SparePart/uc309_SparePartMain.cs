@@ -173,13 +173,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             itemMaterialCheck = CreateMenuItem("盤點", ItemMaterialCheck_Click, TPSvgimages.Num4);
         }
 
-        private void HandleMaterialTransaction(string formName, string eventInfo)
+        private void HandleMaterialTransaction(string eventInfo)
         {
             var idMaterial = Convert.ToInt16(gvData.GetRowCellValue(gvData.FocusedRowHandle, gColIdMaterial));
 
             var transactionForm = new f309_Transaction_Info
             {
-                formName = formName,
                 eventInfo = eventInfo,
                 idMaterial = idMaterial
             };
@@ -188,13 +187,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             LoadData();
         }
 
-        private void ItemMaterialCheck_Click(object sender, EventArgs e) => HandleMaterialTransaction("盤點", "盤點");
+        private void ItemMaterialCheck_Click(object sender, EventArgs e) => HandleMaterialTransaction("盤點");
 
-        private void ItemMaterialTransfer_Click(object sender, EventArgs e) => HandleMaterialTransaction("轉庫", "轉庫");
+        private void ItemMaterialTransfer_Click(object sender, EventArgs e) => HandleMaterialTransaction("轉庫");
 
-        private void ItemMaterialOut_Click(object sender, EventArgs e) => HandleMaterialTransaction("領用", "領用");
+        private void ItemMaterialOut_Click(object sender, EventArgs e) => HandleMaterialTransaction("領用");
 
-        private void ItemMaterialIn_Click(object sender, EventArgs e) => HandleMaterialTransaction("收貨", "收貨");
+        private void ItemMaterialIn_Click(object sender, EventArgs e) => HandleMaterialTransaction("收貨");
 
         private void ItemUpdatePrice_Click(object sender, EventArgs e)
         {

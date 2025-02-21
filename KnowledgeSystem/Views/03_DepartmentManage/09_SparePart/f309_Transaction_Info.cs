@@ -26,7 +26,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         }
 
         public string eventInfo = "";
-        public string formName = "";
         public int idMaterial = -1;
 
         dt309_Transactions transaction = new dt309_Transactions();
@@ -45,7 +44,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         private void LockControl()
         {
-            Text = $"新增{formName}事件";
+            Text = $"新增{eventInfo}事件";
 
             btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
             btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
