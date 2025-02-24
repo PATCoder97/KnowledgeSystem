@@ -258,6 +258,12 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             DateTime respTime;
             DateTime.TryParse(result.ToString(), out respTime);
 
+            if (!DateTimeHelper.IsWithinWorkingHours(respTime))
+            {
+                string msg = "請選擇工作時間內的時間！";
+                MsgTP.MsgShowInfomation($"<font='Microsoft JhengHei UI' size=14>{msg}</font>");
+            }
+
             if (respTime < minTimeRespValue)
             {
                 string msg = "簽署時間無效！";
@@ -387,6 +393,12 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             DateTime respTime;
             DateTime.TryParse(result.ToString(), out respTime);
+
+            if (!DateTimeHelper.IsWithinWorkingHours(respTime))
+            {
+                string msg = "請選擇工作時間內的時間！";
+                MsgTP.MsgShowInfomation($"<font='Microsoft JhengHei UI' size=14>{msg}</font>");
+            }
 
             if (respTime < minTimeRespValue)
             {

@@ -200,6 +200,7 @@
     <Compile Include="Helpers\AppCopyRight.cs" />
     <Compile Include="Helpers\AppPermission.cs" />
     <Compile Include="Helpers\BorrVehicleHelper.cs" />
+    <Compile Include="Helpers\DateTimeHelper.cs" />
     <Compile Include="Helpers\DomainVNFPG.cs" />
     <Compile Include="Helpers\EncryptionHelper.cs" />
     <Compile Include="Helpers\EnumHelper.cs" />
