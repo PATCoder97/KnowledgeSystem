@@ -388,6 +388,12 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             DateTime uploadTime;
             DateTime.TryParse(resultDateUpload.ToString(), out uploadTime);
 
+            if (!DateTimeHelper.IsWithinWorkingHours(uploadTime))
+            {
+                string msg = "請選擇工作時間內的時間！";
+                MsgTP.MsgShowInfomation($"<font='Microsoft JhengHei UI' size=14>{msg}</font>");
+            }
+
             if (uploadTime > DateTime.Now.AddMinutes(5))
             {
                 string msg = "呈核時間無效！";

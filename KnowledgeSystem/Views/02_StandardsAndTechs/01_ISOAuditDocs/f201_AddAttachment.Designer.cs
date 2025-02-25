@@ -41,6 +41,10 @@
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.cbbWatermark = new DevExpress.XtraEditors.GridLookUpEdit();
+            this.gridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnDefaultProgress = new DevExpress.XtraEditors.SimpleButton();
             this.ckSignOrPaper = new DevExpress.XtraEditors.RadioGroup();
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
@@ -77,13 +81,11 @@
             this.lcSignOrPaper = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcDefaultProgress = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcDesc = new DevExpress.XtraLayout.LayoutControlItem();
-            this.cbbWatermark = new DevExpress.XtraEditors.GridLookUpEdit();
-            this.gridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.lcWatermark = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbWatermark.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckSignOrPaper.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcProgress)).BeginInit();
@@ -106,8 +108,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcSignOrPaper)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDefaultProgress)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDesc)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbbWatermark.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcWatermark)).BeginInit();
             this.SuspendLayout();
             // 
@@ -129,6 +129,56 @@
             this.layoutControl1.Size = new System.Drawing.Size(652, 413);
             this.layoutControl1.TabIndex = 6;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // cbbWatermark
+            // 
+            this.cbbWatermark.Location = new System.Drawing.Point(504, 156);
+            this.cbbWatermark.Name = "cbbWatermark";
+            this.cbbWatermark.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbWatermark.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.cbbWatermark.Properties.Appearance.Options.UseFont = true;
+            this.cbbWatermark.Properties.Appearance.Options.UseForeColor = true;
+            this.cbbWatermark.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.cbbWatermark.Properties.AppearanceDropDown.Options.UseFont = true;
+            this.cbbWatermark.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbbWatermark.Properties.NullText = "";
+            this.cbbWatermark.Properties.PopupSizeable = false;
+            this.cbbWatermark.Properties.PopupView = this.gridLookUpEdit1View;
+            this.cbbWatermark.Size = new System.Drawing.Size(136, 32);
+            this.cbbWatermark.StyleController = this.layoutControl1;
+            this.cbbWatermark.TabIndex = 11;
+            this.cbbWatermark.EditValueChanged += new System.EventHandler(this.cbbWatermark_EditValueChanged);
+            // 
+            // gridLookUpEdit1View
+            // 
+            this.gridLookUpEdit1View.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridLookUpEdit1View.Appearance.HeaderPanel.Options.UseFont = true;
+            this.gridLookUpEdit1View.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridLookUpEdit1View.Appearance.Row.Options.UseFont = true;
+            this.gridLookUpEdit1View.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn6,
+            this.gridColumn7});
+            this.gridLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridLookUpEdit1View.Name = "gridLookUpEdit1View";
+            this.gridLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn6
+            // 
+            this.gridColumn6.Caption = "名稱";
+            this.gridColumn6.FieldName = "DisplayName";
+            this.gridColumn6.Name = "gridColumn6";
+            this.gridColumn6.Visible = true;
+            this.gridColumn6.VisibleIndex = 0;
+            // 
+            // gridColumn7
+            // 
+            this.gridColumn7.Caption = "備註";
+            this.gridColumn7.FieldName = "Describe";
+            this.gridColumn7.Name = "gridColumn7";
+            this.gridColumn7.Visible = true;
+            this.gridColumn7.VisibleIndex = 1;
             // 
             // btnDefaultProgress
             // 
@@ -627,56 +677,6 @@
             this.lcDesc.Text = "備註";
             this.lcDesc.TextSize = new System.Drawing.Size(76, 24);
             // 
-            // cbbWatermark
-            // 
-            this.cbbWatermark.Location = new System.Drawing.Point(504, 156);
-            this.cbbWatermark.Name = "cbbWatermark";
-            this.cbbWatermark.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbbWatermark.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.cbbWatermark.Properties.Appearance.Options.UseFont = true;
-            this.cbbWatermark.Properties.Appearance.Options.UseForeColor = true;
-            this.cbbWatermark.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.cbbWatermark.Properties.AppearanceDropDown.Options.UseFont = true;
-            this.cbbWatermark.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbbWatermark.Properties.NullText = "";
-            this.cbbWatermark.Properties.PopupSizeable = false;
-            this.cbbWatermark.Properties.PopupView = this.gridLookUpEdit1View;
-            this.cbbWatermark.Size = new System.Drawing.Size(136, 32);
-            this.cbbWatermark.StyleController = this.layoutControl1;
-            this.cbbWatermark.TabIndex = 11;
-            this.cbbWatermark.EditValueChanged += new System.EventHandler(this.cbbWatermark_EditValueChanged);
-            // 
-            // gridLookUpEdit1View
-            // 
-            this.gridLookUpEdit1View.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridLookUpEdit1View.Appearance.HeaderPanel.Options.UseFont = true;
-            this.gridLookUpEdit1View.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridLookUpEdit1View.Appearance.Row.Options.UseFont = true;
-            this.gridLookUpEdit1View.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn6,
-            this.gridColumn7});
-            this.gridLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.gridLookUpEdit1View.Name = "gridLookUpEdit1View";
-            this.gridLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.gridLookUpEdit1View.OptionsView.ShowGroupPanel = false;
-            // 
-            // gridColumn6
-            // 
-            this.gridColumn6.Caption = "名稱";
-            this.gridColumn6.FieldName = "DisplayName";
-            this.gridColumn6.Name = "gridColumn6";
-            this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 0;
-            // 
-            // gridColumn7
-            // 
-            this.gridColumn7.Caption = "備註";
-            this.gridColumn7.FieldName = "Describe";
-            this.gridColumn7.Name = "gridColumn7";
-            this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 1;
-            // 
             // lcWatermark
             // 
             this.lcWatermark.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -716,6 +716,8 @@
             this.Load += new System.EventHandler(this.f201_AddAttachment_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.cbbWatermark.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckSignOrPaper.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcProgress)).EndInit();
@@ -738,8 +740,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcSignOrPaper)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDefaultProgress)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDesc)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbbWatermark.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcWatermark)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
