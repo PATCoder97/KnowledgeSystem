@@ -1,6 +1,8 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
+using DevExpress.Data.Filtering.Helpers;
 using DevExpress.Utils.Menu;
+using DevExpress.Utils.Svg;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
@@ -9,6 +11,7 @@ using DevExpress.XtraTreeList.Columns;
 using DevExpress.XtraTreeList.StyleFormatConditions;
 using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._00_Generals;
+using MiniSoftware;
 using Spire.Presentation;
 using System;
 using System.Collections.Generic;
@@ -51,6 +54,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
         DXMenuItem itemCloseReport;
         DXMenuItem itemAddAttach;
         DXMenuItem itemDelAttach;
+        DXMenuItem itemExportPlan;
 
         private void InitializeIcon()
         {
@@ -83,32 +87,71 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
             }, "!IsNullOrEmpty([Describe])");
         }
 
+        DXMenuItem CreateMenuItem(string caption, EventHandler clickEvent, SvgImage svgImage)
+        {
+            var menuItem = new DXMenuItem(caption, clickEvent, svgImage, DXMenuItemPriority.Normal);
+            SetMenuItemProperties(menuItem);
+            return menuItem;
+        }
+
+        void SetMenuItemProperties(DXMenuItem menuItem)
+        {
+            menuItem.ImageOptions.SvgImageSize = new System.Drawing.Size(24, 24);
+            menuItem.AppearanceHovered.ForeColor = Color.Blue;
+        }
+
         private void InitializeMenuItems()
         {
-            itemViewInfo = new DXMenuItem("顯示信息", ItemViewInfo_Click, TPSvgimages.Info, DXMenuItemPriority.Normal);
-            itemViewFile = new DXMenuItem("讀取檔案", ItemViewFile_Click, TPSvgimages.View, DXMenuItemPriority.Normal);
-            itemAddPlanFile = new DXMenuItem("上傳計劃表", ItemAddPlanFile_Click, TPSvgimages.UpLevel, DXMenuItemPriority.Normal);
-            itemAddAttach = new DXMenuItem("上傳報告", ItemAddAttach_Click, TPSvgimages.UploadFile, DXMenuItemPriority.Normal);
-            itemCloseReport = new DXMenuItem("結案", ItemCloseReport_Click, TPSvgimages.Confirm, DXMenuItemPriority.Normal);
-            itemDelAttach = new DXMenuItem("刪除附件", ItemDelAttach_Click, TPSvgimages.Remove, DXMenuItemPriority.Normal);
+            itemExportPlan = CreateMenuItem("導出計劃表", ItemExportPlan_Click, TPSvgimages.Word);
+            itemViewInfo = CreateMenuItem("顯示信息", ItemViewInfo_Click, TPSvgimages.Info);
+            itemViewFile = CreateMenuItem("讀取檔案", ItemViewFile_Click, TPSvgimages.View);
+            itemAddPlanFile = CreateMenuItem("上傳計劃表", ItemAddPlanFile_Click, TPSvgimages.UpLevel);
+            itemAddAttach = CreateMenuItem("上傳報告", ItemAddAttach_Click, TPSvgimages.UploadFile);
+            itemCloseReport = CreateMenuItem("結案", ItemCloseReport_Click, TPSvgimages.Confirm);
+            itemDelAttach = CreateMenuItem("刪除附件", ItemDelAttach_Click, TPSvgimages.Remove);
+        }
 
-            itemViewInfo.ImageOptions.SvgImageSize = new Size(24, 24);
-            itemViewInfo.AppearanceHovered.ForeColor = Color.Blue;
+        private void ItemExportPlan_Click(object sender, EventArgs e)
+        {
+            int idBase = Convert.ToInt16(gvData.GetRowCellValue(gvData.FocusedRowHandle, gColId));
+            var base302 = dt302_BaseBUS.Instance.GetItemById(idBase);
+            var userPlan = lsUser.First(r => r.Id == base302.IdUser);
 
-            itemViewFile.ImageOptions.SvgImageSize = new Size(24, 24);
-            itemViewFile.AppearanceHovered.ForeColor = Color.Blue;
+            string templatePath = Path.Combine(TPConfigs.ResourcesPath, "302_NewEmployeePlan.docx");
 
-            itemAddPlanFile.ImageOptions.SvgImageSize = new Size(24, 24);
-            itemAddPlanFile.AppearanceHovered.ForeColor = Color.Blue;
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = $"Word|*docx";
+            saveFileDialog.FileName = $"{userPlan.DisplayName}_{DateTime.Now:yyyyMMddHHmmss}.docx";
+            if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
+            string destFile = saveFileDialog.FileName;
 
-            itemCloseReport.ImageOptions.SvgImageSize = new Size(24, 24);
-            itemCloseReport.AppearanceHovered.ForeColor = Color.Blue;
+            DateTime datejoin = userPlan.DateCreate;
+            var value = new Dictionary<string, object>()
+            {
+                ["namevn"] = userPlan.DisplayNameVN,
+                ["nametw"] = userPlan.DisplayName,
+                ["school"] = base302.School,
+                ["major"] = base302.Major,
+                ["joindate"] = $"Năm {datejoin:yyyy} tháng {datejoin:MM} ngày {datejoin:dd}\r\n{datejoin:yyyy}年{datejoin:MM}月{datejoin:dd}日",
+                ["dept"] = userPlan.IdDepartment,
+                ["date11"] = $"{datejoin:yyyy/MM/dd}\r\n~\r\n{datejoin.AddMonths(1).AddDays(-1):yyyy/MM/dd}",
+                ["date12"] = $"{datejoin.AddMonths(1).AddDays(-1):yyyy/MM/dd}",
+                ["date21"] = $"{datejoin.AddMonths(1):yyyy/MM/dd}\r\n~\r\n{datejoin.AddMonths(2).AddDays(-1):yyyy/MM/dd}",
+                ["date22"] = $"{datejoin.AddMonths(2).AddDays(-1):yyyy/MM/dd}",
+                ["date31"] = $"{datejoin.AddMonths(2):yyyy/MM/dd}\r\n~\r\n{datejoin.AddMonths(3).AddDays(-1):yyyy/MM/dd}",
+                ["date32"] = $"{datejoin.AddMonths(3).AddDays(-1):yyyy/MM/dd}",
+                ["date41"] = $"{datejoin.AddMonths(3):yyyy/MM/dd}\r\n~\r\n{datejoin.AddMonths(6).AddDays(-1):yyyy/MM/dd}",
+                ["date42"] = $"{datejoin.AddMonths(6).AddDays(-1):yyyy/MM/dd}",
+                ["date51"] = $"{datejoin.AddMonths(6):yyyy/MM/dd}\r\n~\r\n{datejoin.AddMonths(9).AddDays(-1):yyyy/MM/dd}",
+                ["date52"] = $"{datejoin.AddMonths(9).AddDays(-1):yyyy/MM/dd}",
+                ["date61"] = $"{datejoin.AddMonths(9):yyyy/MM/dd}\r\n~\r\n{datejoin.AddMonths(12).AddDays(-1):yyyy/MM/dd}",
+                ["date62"] = $"{datejoin.AddMonths(12).AddDays(-1):yyyy/MM/dd}",
+                ["date71"] = $"{datejoin.AddMonths(12):yyyy/MM/dd}\r\n~\r\n{datejoin.AddMonths(15).AddDays(-1):yyyy/MM/dd}",
+                ["date72"] = $"{datejoin.AddMonths(15).AddDays(-1):yyyy/MM/dd}",
+            };
+            MiniWord.SaveAsByTemplate(destFile, templatePath, value);
 
-            itemAddAttach.ImageOptions.SvgImageSize = new Size(24, 24);
-            itemAddAttach.AppearanceHovered.ForeColor = Color.Blue;
-
-            itemDelAttach.ImageOptions.SvgImageSize = new Size(24, 24);
-            itemDelAttach.AppearanceHovered.ForeColor = Color.Blue;
+            Process.Start(destFile);
         }
 
         private void ItemDelAttach_Click(object sender, EventArgs e)
@@ -516,6 +559,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
                 }
                 else
                 {
+                    e.Menu.Items.Add(itemExportPlan);
                     e.Menu.Items.Add(itemAddPlanFile);
                 }
             }
