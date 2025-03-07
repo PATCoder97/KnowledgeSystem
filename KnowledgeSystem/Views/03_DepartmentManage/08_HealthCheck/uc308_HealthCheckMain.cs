@@ -904,8 +904,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                     }
                 }
 
-                InsertDataWS1(12, false);
-                InsertDataWS1(6, true);
+                if (dt1RowIns > 0)
+                {
+                    InsertDataWS1(12, false);
+                    InsertDataWS1(6, true);
+                }
 
                 // Biểu mẫu 2: QUẢN LÝ SỨC KHỎE NGƯỜI LAO ĐỘNG THÔNG QUA KHÁM SỨC KHỎE ĐỊNH KỲ
                 var dt2 = dt12.Where(r => r.checktype != f308_CheckSession_Info.KSK_TruocViecLam).ToList();
@@ -940,8 +943,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                     }
                 }
 
-                InsertDataWS2(12, false);
-                InsertDataWS2(6, true);
+                if (dt2RowIns > 0)
+                {
+                    InsertDataWS2(12, false);
+                    InsertDataWS2(6, true);
+                }
 
                 // Biểu mẫu 3: TÌNH HÌNH BỆNH TẬT TRONG THỜI GIAN BÁO CÁO
                 void InsertDataWS3(int startRow, IEnumerable<dynamic> data, bool IsVietnamese = true)
@@ -1111,8 +1117,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                         index7++;
                     }
                 }
-                InsertDataWS7(12, false);
-                InsertDataWS7(5, true);
+
+                if (dt7RowIns > 0)
+                {
+                    InsertDataWS7(12, false);
+                    InsertDataWS7(5, true);
+                }
 
                 // Lưu và chỉ hiện Sheet BB
                 pck.Save();
