@@ -90,7 +90,6 @@ namespace DataAccessLayer
         public virtual DbSet<dt204_Form> dt204_Form { get; set; }
         public virtual DbSet<dt204_FuncCatorary> dt204_FuncCatorary { get; set; }
         public virtual DbSet<dt204_RelatedDoc> dt204_RelatedDoc { get; set; }
-        public virtual DbSet<dt204_InternalDocMgmt> dt204_InternalDocMgmt { get; set; }
         public virtual DbSet<dt201_Base> dt201_Base { get; set; }
         public virtual DbSet<dt201_RecordCode> dt201_RecordCode { get; set; }
         public virtual DbSet<dt201_ReqUpdateDocs> dt201_ReqUpdateDocs { get; set; }
@@ -109,5 +108,6 @@ namespace DataAccessLayer
         public virtual DbSet<dt309_Transactions> dt309_Transactions { get; set; }
         public virtual DbSet<dt309_Units> dt309_Units { get; set; }
         public virtual DbSet<dt309_Prices> dt309_Prices { get; set; }
+        public virtual DbSet<dt204_InternalDocMgmt> dt204_InternalDocMgmt { get; set; }
     }
 }

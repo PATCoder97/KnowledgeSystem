@@ -70,7 +70,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             cbbDept.ReadOnly = false;
             txbDescribe.ReadOnly = false;
             lcUserGroup.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-            Size = new Size(855, 165);
+            Size = new Size(855, 170);
 
             switch (_eventInfo)
             {

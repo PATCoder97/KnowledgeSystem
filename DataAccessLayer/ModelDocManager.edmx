@@ -379,6 +379,8 @@
           <Property Name="IsDel" Type="bit" Nullable="false" />
           <Property Name="DelTime" Type="datetime" />
           <Property Name="IdUsrDel" Type="varchar" MaxLength="10" />
+          <Property Name="MainCatorary" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="SubDept" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="dt204_OldVersion">
           <Key>
@@ -1070,7 +1072,6 @@
           <EntitySet Name="dt204_Form" EntityType="DBDocumentManagementSystemModel.dt204_Form" />
           <EntitySet Name="dt204_FuncCatorary" EntityType="DBDocumentManagementSystemModel.dt204_FuncCatorary" />
           <EntitySet Name="dt204_RelatedDoc" EntityType="DBDocumentManagementSystemModel.dt204_RelatedDoc" />
-          <EntitySet Name="dt204_InternalDocMgmt" EntityType="DBDocumentManagementSystemModel.dt204_InternalDocMgmt" />
           <EntitySet Name="dt201_Base" EntityType="DBDocumentManagementSystemModel.dt201_Base" />
           <EntitySet Name="dt201_RecordCode" EntityType="DBDocumentManagementSystemModel.dt201_RecordCode" />
           <EntitySet Name="dt201_ReqUpdateDocs" EntityType="DBDocumentManagementSystemModel.dt201_ReqUpdateDocs" />
@@ -1089,6 +1090,7 @@
           <EntitySet Name="dt309_Transactions" EntityType="DBDocumentManagementSystemModel.dt309_Transactions" />
           <EntitySet Name="dt309_Units" EntityType="DBDocumentManagementSystemModel.dt309_Units" />
           <EntitySet Name="dt309_Prices" EntityType="DBDocumentManagementSystemModel.dt309_Prices" />
+          <EntitySet Name="dt204_InternalDocMgmt" EntityType="DBDocumentManagementSystemModel.dt204_InternalDocMgmt" />
         </EntityContainer>
         <EntityType Name="dm_Departments">
           <Key>
@@ -1765,30 +1767,6 @@
           <Property Name="IdBase" Type="Int32" Nullable="false" />
           <Property Name="IdRelatedDoc" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="dt204_InternalDocMgmt">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdDept" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
-          <Property Name="IdDocCatorary" Type="Int32" Nullable="false" />
-          <Property Name="IdFuncCatorary" Type="Int32" Nullable="false" />
-          <Property Name="DocLevel" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Name="Code" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
-          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
-          <Property Name="DisplayNameVN" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-          <Property Name="DocVersion" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Name="DeployDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="PeriodNotify" Type="Int32" Nullable="false" />
-          <Property Name="PauseNotify" Type="Int32" />
-          <Property Name="IdFounder" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="IdUsrUpload" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="UploadDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="IdAtt" Type="Int32" Nullable="false" />
-          <Property Name="IsDel" Type="Boolean" Nullable="false" />
-          <Property Name="DelTime" Type="DateTime" Precision="3" />
-          <Property Name="IdUsrDel" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="dt201_Base">
           <Key>
             <PropertyRef Name="Id" />
@@ -1998,6 +1976,32 @@
           <Property Name="Price" Type="Int32" Nullable="false" />
           <Property Name="ChangedBy" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="ChangedAt" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="dt204_InternalDocMgmt">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdDept" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="IdDocCatorary" Type="Int32" Nullable="false" />
+          <Property Name="IdFuncCatorary" Type="Int32" Nullable="false" />
+          <Property Name="DocLevel" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayNameVN" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="DocVersion" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="DeployDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PeriodNotify" Type="Int32" Nullable="false" />
+          <Property Name="PauseNotify" Type="Int32" />
+          <Property Name="IdFounder" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsrUpload" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UploadDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IdAtt" Type="Int32" Nullable="false" />
+          <Property Name="IsDel" Type="Boolean" Nullable="false" />
+          <Property Name="DelTime" Type="DateTime" Precision="3" />
+          <Property Name="IdUsrDel" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MainCatorary" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="SubDept" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2745,31 +2749,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dt204_InternalDocMgmt">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt204_InternalDocMgmt">
-              <MappingFragment StoreEntitySet="dt204_InternalDocMgmt">
-                <ScalarProperty Name="IdUsrDel" ColumnName="IdUsrDel" />
-                <ScalarProperty Name="DelTime" ColumnName="DelTime" />
-                <ScalarProperty Name="IsDel" ColumnName="IsDel" />
-                <ScalarProperty Name="IdAtt" ColumnName="IdAtt" />
-                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
-                <ScalarProperty Name="IdUsrUpload" ColumnName="IdUsrUpload" />
-                <ScalarProperty Name="IdFounder" ColumnName="IdFounder" />
-                <ScalarProperty Name="PauseNotify" ColumnName="PauseNotify" />
-                <ScalarProperty Name="PeriodNotify" ColumnName="PeriodNotify" />
-                <ScalarProperty Name="DeployDate" ColumnName="DeployDate" />
-                <ScalarProperty Name="DocVersion" ColumnName="DocVersion" />
-                <ScalarProperty Name="DisplayNameVN" ColumnName="DisplayNameVN" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="DocLevel" ColumnName="DocLevel" />
-                <ScalarProperty Name="IdFuncCatorary" ColumnName="IdFuncCatorary" />
-                <ScalarProperty Name="IdDocCatorary" ColumnName="IdDocCatorary" />
-                <ScalarProperty Name="IdDept" ColumnName="IdDept" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="dt201_Base">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt201_Base">
               <MappingFragment StoreEntitySet="dt201_Base">
@@ -2994,6 +2973,33 @@
                 <ScalarProperty Name="ChangedBy" ColumnName="ChangedBy" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="MaterialId" ColumnName="MaterialId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt204_InternalDocMgmt">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt204_InternalDocMgmt">
+              <MappingFragment StoreEntitySet="dt204_InternalDocMgmt">
+                <ScalarProperty Name="SubDept" ColumnName="SubDept" />
+                <ScalarProperty Name="MainCatorary" ColumnName="MainCatorary" />
+                <ScalarProperty Name="IdUsrDel" ColumnName="IdUsrDel" />
+                <ScalarProperty Name="DelTime" ColumnName="DelTime" />
+                <ScalarProperty Name="IsDel" ColumnName="IsDel" />
+                <ScalarProperty Name="IdAtt" ColumnName="IdAtt" />
+                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
+                <ScalarProperty Name="IdUsrUpload" ColumnName="IdUsrUpload" />
+                <ScalarProperty Name="IdFounder" ColumnName="IdFounder" />
+                <ScalarProperty Name="PauseNotify" ColumnName="PauseNotify" />
+                <ScalarProperty Name="PeriodNotify" ColumnName="PeriodNotify" />
+                <ScalarProperty Name="DeployDate" ColumnName="DeployDate" />
+                <ScalarProperty Name="DocVersion" ColumnName="DocVersion" />
+                <ScalarProperty Name="DisplayNameVN" ColumnName="DisplayNameVN" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="DocLevel" ColumnName="DocLevel" />
+                <ScalarProperty Name="IdFuncCatorary" ColumnName="IdFuncCatorary" />
+                <ScalarProperty Name="IdDocCatorary" ColumnName="IdDocCatorary" />
+                <ScalarProperty Name="IdDept" ColumnName="IdDept" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

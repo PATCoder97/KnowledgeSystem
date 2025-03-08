@@ -40,6 +40,25 @@ namespace BusinessLayer
             }
         }
 
+        public List<dm_Departments> GetListByParent(string idDept)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dm_Departments.Where(d => d.IdParent == _context.dm_Departments
+                                      .Where(p => p.Id == idDept)
+                                      .Select(p => p.IdChild)
+                                      .FirstOrDefault()).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public dm_Departments GetItemById(string _idDept)
         {
             try

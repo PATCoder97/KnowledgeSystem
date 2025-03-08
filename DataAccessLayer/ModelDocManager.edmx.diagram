@@ -66,17 +66,16 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_ProgInfo" Width="1.5" PointX="3.75" PointY="21.125" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_Progress" Width="1.5" PointX="5.375" PointY="21.125" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_Forms" Width="1.5" PointX="2.125" PointY="21.125" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt204_DocCatorary" Width="1.5" PointX="0.5" PointY="35.875" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt204_Form" Width="1.5" PointX="5.375" PointY="35.875" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt204_FuncCatorary" Width="1.5" PointX="2.125" PointY="35.875" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt204_RelatedDoc" Width="1.5" PointX="7" PointY="35.875" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt204_InternalDocMgmt" Width="1.5" PointX="3.75" PointY="35.875" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt204_DocCatorary" Width="1.5" PointX="0.5" PointY="35.5" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt204_Form" Width="1.5" PointX="5.375" PointY="35.5" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt204_FuncCatorary" Width="1.5" PointX="2.125" PointY="35.5" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt204_RelatedDoc" Width="1.5" PointX="7" PointY="35.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_Base" Width="1.5" PointX="0.5" PointY="21.125" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_RecordCode" Width="1.5" PointX="13.5" PointY="21.125" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_ReqUpdateDocs" Width="1.5" PointX="8.625" PointY="21.125" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_UpdateUsrReq_Detail" Width="1.5" PointX="10.25" PointY="21.125" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_Sign" Width="1.5" PointX="20" PointY="0.5" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt204_OldVersion" Width="1.5" PointX="8.625" PointY="35.875" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt204_OldVersion" Width="1.5" PointX="8.625" PointY="35.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_Watermark" Width="1.5" PointX="11.875" PointY="2.75" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt308_Disease" Width="1.5" PointX="0.5" PointY="41" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt308_CheckDetail" Width="1.5" PointX="3.75" PointY="41" />
@@ -89,6 +88,7 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt309_Transactions" Width="1.5" PointX="10.25" PointY="44.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt309_Units" Width="1.5" PointX="5.375" PointY="44.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt309_Prices" Width="1.5" PointX="8.625" PointY="44.5" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt204_InternalDocMgmt" Width="1.5" PointX="3.75" PointY="35.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -254,6 +254,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
                                     join ursUp in users on data.IdUsrUpload equals ursUp.Id
                                     let DocCatorary = docCato.DisplayName
                                     let FuncCatorary = funcCato.DisplayName
+                                    let subdept = depts.FirstOrDefault(r => r.Id == data.IdDept)?.DisplayName
                                     select new
                                     {
                                         data,

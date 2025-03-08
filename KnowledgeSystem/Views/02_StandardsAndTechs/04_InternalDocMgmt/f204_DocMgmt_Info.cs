@@ -77,6 +77,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
             txbPeriodNotify.Enabled = _enable;
             txbIdFounder.Enabled = _enable;
             txbFilePath.Enabled = _enable;
+            cbbMainCatorary.Enabled = _enable;
+            cbbSubDept.Enabled = _enable;
+            txbDept.Enabled = _enable;
 
             btnAddFile.Enabled = _enable;
             btnPasteFile.Enabled = _enable;
@@ -155,8 +158,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
             gvRelatedDoc.ReadOnlyGridView();
             gvRelatedDoc.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
 
-            lcControls = new List<LayoutControlItem>() { lcDocCatorary, lcFuncCatorary, lcDocLevel, lcCode, lcDocVersion, lcDisplayName, lcDisplayNameVN, lcDeployDate, lcPeriodNotify, lcIdFounder, lcFilePath };
-            lcImpControls = new List<LayoutControlItem>() { lcDocCatorary, lcFuncCatorary, lcDocLevel, lcCode, lcDocVersion, lcDisplayName, lcDeployDate, lcPeriodNotify, lcIdFounder, lcFilePath };
+            lcControls = new List<LayoutControlItem>() { lcDocCatorary, lcFuncCatorary, lcDocLevel, lcCode, lcDocVersion, lcDisplayName, lcDisplayNameVN, lcDeployDate, lcPeriodNotify, lcIdFounder, lcFilePath, lcMainCatorary, lcDept, lcSubDept };
+            lcImpControls = new List<LayoutControlItem>() { lcDocCatorary, lcFuncCatorary, lcDocLevel, lcCode, lcDocVersion, lcDisplayName, lcDeployDate, lcPeriodNotify, lcIdFounder, lcFilePath, lcMainCatorary };
             foreach (var item in lcControls)
             {
                 item.AllowHtmlStringInCaption = true;
@@ -189,6 +192,14 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
             txbIdFounder.Properties.ValueMember = "Id";
             txbIdFounder.Properties.BestFitWidth = 110;
 
+            var groupInDept = dm_DeptBUS.Instance.GetListByParent(TPConfigs.LoginUser.IdDepartment);
+            cbbSubDept.Properties.DataSource = groupInDept;
+            cbbSubDept.Properties.DisplayMember = "DisplayName";
+            cbbSubDept.Properties.ValueMember = "Id";
+
+            txbDept.EditValue = TPConfigs.LoginUser.IdDepartment;
+            txbDept.ReadOnly = true;
+
             gcForm.DataSource = sourceFormAtts;
             gcRelatedDoc.DataSource = sourceRelatedDoc;
 
@@ -217,6 +228,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
                     txbDeployDate.EditValue = dt204Base.DeployDate;
                     txbPeriodNotify.EditValue = dt204Base.PeriodNotify;
                     txbIdFounder.EditValue = dt204Base.IdFounder;
+                    txbDept.EditValue = TPConfigs.LoginUser.IdDepartment;
+                    cbbMainCatorary.EditValue = dt204Base.MainCatorary;
+                    cbbSubDept.EditValue = dt204Base.SubDept;
                     txbFilePath.EditValue = "...";
 
                     var attForms = dt204_FormBUS.Instance.GetListByIdBase(dt204Base.Id);

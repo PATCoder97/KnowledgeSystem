@@ -33,5 +33,7 @@ namespace DataAccessLayer
         public bool IsDel { get; set; }
         public Nullable<System.DateTime> DelTime { get; set; }
         public string IdUsrDel { get; set; }
+        public string MainCatorary { get; set; }
+        public string SubDept { get; set; }
     }
 }
