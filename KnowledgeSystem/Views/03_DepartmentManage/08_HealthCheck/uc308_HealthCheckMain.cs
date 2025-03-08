@@ -31,7 +31,10 @@ using DevExpress.XtraReports.Design;
 using DevExpress.XtraSplashScreen;
 using DocumentFormat.OpenXml.Drawing.Charts;
 using ExcelDataReader;
+using iTextSharp.text.pdf.parser;
+using iTextSharp.text.pdf;
 using KnowledgeSystem.Helpers;
+using KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs;
 using KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt;
 using MiniSoftware;
 using OfficeOpenXml;
@@ -39,6 +42,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using static DevExpress.XtraEditors.Filtering.DataItemsExtension;
 using DataTable = System.Data.DataTable;
+using Path = System.IO.Path;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
 {
@@ -81,6 +85,15 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
         DXMenuItem itemEditDetail;
         DXMenuItem itemExcelUploadDetail;
         DXMenuItem itemGoogleSheetUploadDetail;
+
+        private class SickData
+        {
+            public string Id { get; set; }
+            public string Time { get; set; }
+            public List<string> Data { get; set; }
+            public double TotalTime { get; set; }
+            public double Count { get; set; }
+        }
 
         private void InitializeIcon()
         {
@@ -611,7 +624,14 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
         private void btnSummaryTable_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
 #if DEBUG
+            //uc308_ExportReport ucInfo = new uc308_ExportReport();
+            //if (XtraDialog.Show(ucInfo, "輸入年份、請假明細表", MessageBoxButtons.OKCancel) != DialogResult.OK)
+            //    return;
+
+            //int yearStatistic = ucInfo.Year;
+            //string sickFile = ucInfo.SickFile;
             int yearStatistic = 2025;
+            string sickFile = @"E:\01. Softwares Programming\24. Knowledge System\03. Documents\308\7820刷卡資料.pdf";
             string PATH_EXPORT = Path.Combine("C:\\Users\\Dell Alpha\\Desktop\\RÁC 1\\Test308", $"健康檢查報告-{DateTime.Now:yyyyMMddHHmmss}.xlsx");
 #else
 
@@ -775,7 +795,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                 Q4 = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q4")?.Disease1Stats.FirstOrDefault(u => u.Id == r.Id)?.Count ?? "-"
             }).ToList();
 
-            var dt32 = dt308Diseases.Where(r => r.DiseaseType == 2).Select((r, index) => new
+            var dt32 = dt308Diseases.Where(r => r.DiseaseType == 3).Select((r, index) => new
             {
                 No = index + 1,
                 NameVN = r.DisplayNameVN,
@@ -785,6 +805,44 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                 Q3 = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q3")?.Disease2Stats.FirstOrDefault(u => u.Id == r.Id)?.Count ?? "-",
                 Q4 = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q4")?.Disease2Stats.FirstOrDefault(u => u.Id == r.Id)?.Count ?? "-"
             }).ToList();
+
+            // Biểu mẫu 4: TÌNH HÌNH NGHỈ DO ỐM, TAI NẠN LAO ĐỘNG VÀ BỆNH NGHỀ NGHIỆP
+            List<SickData> sickDatas = new List<SickData>();
+            using (PdfReader reader = new PdfReader(sickFile))
+            {
+                for (int i = 1; i <= reader.NumberOfPages; i++)
+                {
+                    string text = PdfTextExtractor.GetTextFromPage(reader, i);
+
+                    var matches = new
+                    {
+                        DataList = Regex.Matches(text, @"\d{8}\s+0[1|2]\s+\d{4}\s+\d{4}\s+[\d.]+").Cast<Match>().Select(m => m.Value).ToList(),
+                        Id = Regex.Match(text, @"VNW\d{7}").Value,
+                        Month = Regex.Match(text, @"\d{7}-\d{7}").Value
+                    };
+
+                    if (!string.IsNullOrEmpty(matches.Month) && !string.IsNullOrEmpty(matches.Id) && matches.DataList.Count > 0)
+                    {
+                        sickDatas.Add(new SickData
+                        {
+                            Id = matches.Id,
+                            Data = matches.DataList,
+                            TotalTime = matches.DataList.Sum(s => double.TryParse(s.Split().Last(), out double val) ? val : 0),
+                            Count = matches.DataList.Count,
+                            Time = matches.Month.Split('-')[1].Substring(3, 2)
+                        });
+                    }
+                }
+            }
+
+            var dt4 = sickDatas
+                .GroupBy(a => a.Time)
+                .Select(dtg => new SickData
+                {
+                    Time = dtg.Key,
+                    TotalTime = dtg.Sum(r => r.TotalTime),
+                    Count = dtg.Sum(r => r.Count),
+                }).OrderBy(r => r.Time).ToList();
 
             // Biểu mẫu 5: QUẢN LÝ BỆNH MÃN TÍNH
             int CalculateAge(DateTime? dob) => dob.HasValue ? DateTime.Now.Year - dob.Value.Year - (DateTime.Now < dob.Value.AddYears(DateTime.Now.Year - dob.Value.Year) ? 1 : 0) : 0;
@@ -979,6 +1037,14 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                 InsertDataWS3(18, dt31, false);
                 InsertDataWS3(8, dt32);
                 InsertDataWS3(5, dt31);
+
+                // Biểu mẫu 4: TÌNH HÌNH NGHỈ DO ỐM, TAI NẠN LAO ĐỘNG VÀ BỆNH NGHỀ NGHIỆP
+                int flag = 8;
+                for (int i = 0; i < dt5.Count; i++)
+                {
+                    wsBieuMau4.Cells[$"E{flag + i}"].Value = dt4[i].Count;
+                    wsBieuMau4.Cells[$"I{flag + i}"].Value = dt4[i].TotalTime / 8;
+                }
 
                 // Biểu mẫu 5: QUẢN LÝ BỆNH MÃN TÍNH
                 int dt5RowIns = dt5.Count() - 1;

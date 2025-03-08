@@ -49,7 +49,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
         public const string KSK_DacBiet = "Đặc biệt/特殊健檢";
         public const string KSK_NhanVienMoi = "Nhân viên mới/新進人員檢查";
         public const string KSK_TruocViecLam = "Trước bố trí việc làm/工作安排前健康檢查";
-        public string[] checkTypes = new string[] { KSK_ThongThuong, KSK_DacBiet, KSK_NhanVienMoi, KSK_TruocViecLam };
+        public const string KSK_XinGiayPhepLD = "Xin giấy phép lao động /工作證健檢";
+        public string[] checkTypes = new string[] { KSK_ThongThuong, KSK_DacBiet, KSK_NhanVienMoi, KSK_TruocViecLam, KSK_XinGiayPhepLD };
 
         private void InitializeIcon()
         {

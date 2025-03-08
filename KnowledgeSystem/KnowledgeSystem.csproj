@@ -612,6 +612,12 @@
     <Compile Include="Views\03_DepartmentManage\08_HealthCheck\f308_UserData.Designer.cs">
       <DependentUpon>f308_UserData.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\03_DepartmentManage\08_HealthCheck\uc308_ExportReport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\08_HealthCheck\uc308_ExportReport.Designer.cs">
+      <DependentUpon>uc308_ExportReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\03_DepartmentManage\08_HealthCheck\uc308_HealthCheckMain.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1204,6 +1210,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\08_HealthCheck\f308_UserData.resx">
       <DependentUpon>f308_UserData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\08_HealthCheck\uc308_ExportReport.resx">
+      <DependentUpon>uc308_ExportReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\08_HealthCheck\uc308_HealthCheckMain.resx">
       <DependentUpon>uc308_HealthCheckMain.cs</DependentUpon>
