@@ -43,6 +43,9 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using static DevExpress.XtraEditors.Filtering.DataItemsExtension;
 using DataTable = System.Data.DataTable;
 using Path = System.IO.Path;
+using DevExpress.Spreadsheet;
+using CellRange = ExcelDataReader.CellRange;
+using System.IO.Packaging;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
 {
@@ -921,7 +924,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
             int chuakhammanghiviec = dataBases.SelectMany(r => r.detail).Where(r => r.detail.HealthRating == -1)
                 .Join(users, data => data.detail.EmpId, usr => usr.Id, (data, usr) => new { data, usr })
                 .Count(x => x.usr.Status == 1);
-
+            var depts = dm_DeptBUS.Instance.GetList();
             var dtTongHop = new
             {
                 tongnhanviec = users.Count(r => r.IdDepartment.StartsWith(idDept2word) && r.Status != 1),
@@ -934,6 +937,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                 ksktruocvietlam = kskTruocViecLam.Count(r => r.detail.HealthRating != -1),
                 kskroinghiviec = countKskRoiNghiViec,
                 chuakhamdanghiviec = chuakhammanghiviec,
+                bophanvn = depts.FirstOrDefault(r => r.Id == idDept2word)?.DisplayNameVN,
+                bophantw = depts.FirstOrDefault(r => r.Id == idDept2word)?.DisplayName,
             };
 
             File.Copy(PATH_TEMPLATE, PATH_EXPORT, true);
@@ -1230,6 +1235,37 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                 wsTongHop.Cells["M10"].Value = dtTongHop.luuchuc;
                 wsTongHop.Cells["M11"].Value = dtTongHop.kskroinghiviec;
                 wsTongHop.Cells["AC4"].Value = dtTongHop.chuakhamdanghiviec;
+                wsTongHop.Cells["A3"].Value = $"Bộ phận: {dtTongHop.bophanvn}";
+                wsTongHop.Cells["A17"].Value = $"單位：{dtTongHop.bophantw}";
+
+                // Chỉ lấy giá trị
+                foreach (var ws in pck.Workbook.Worksheets)
+                {
+                    ws.Calculate();
+
+                    int rowCount = ws.Dimension?.Rows ?? 0;  // Lấy số hàng có dữ liệu
+                    int colCount = ws.Dimension?.Columns ?? 0; // Lấy số cột có dữ liệu
+
+                    if (rowCount > 0 && colCount > 0)
+                    {
+                        object[,] values = new object[rowCount, colCount];
+
+                        // Lấy toàn bộ dữ liệu và loại bỏ công thức
+                        for (int row = 1; row <= rowCount; row++)
+                        {
+                            for (int col = 1; col <= colCount; col++)
+                            {
+                                values[row - 1, col - 1] = ws.Cells[row, col].Value; // Chỉ lấy giá trị
+                            }
+                        }
+
+                        // Ghi đè dữ liệu lên vùng cũ (bỏ công thức)
+                        ws.Cells[1, 1, rowCount, colCount].Value = values;
+
+                        // Xóa tất cả ràng buộc kiểm tra dữ liệu (Data Validation)
+                        ws.DataValidations.Clear();
+                    }
+                }
 
                 // Lưu và chỉ hiện Sheet BB
                 pck.Save();

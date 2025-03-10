@@ -25,7 +25,6 @@ namespace DataAccessLayer
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<dm_Departments> dm_Departments { get; set; }
         public virtual DbSet<dm_Function> dm_Function { get; set; }
         public virtual DbSet<dm_FunctionRole> dm_FunctionRole { get; set; }
         public virtual DbSet<dm_GroupUser> dm_GroupUser { get; set; }
@@ -109,5 +108,6 @@ namespace DataAccessLayer
         public virtual DbSet<dt309_Units> dt309_Units { get; set; }
         public virtual DbSet<dt309_Prices> dt309_Prices { get; set; }
         public virtual DbSet<dt204_InternalDocMgmt> dt204_InternalDocMgmt { get; set; }
+        public virtual DbSet<dm_Departments> dm_Departments { get; set; }
     }
 }

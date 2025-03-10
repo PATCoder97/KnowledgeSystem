@@ -18,5 +18,6 @@ namespace DataAccessLayer
         public Nullable<int> IdChild { get; set; }
         public Nullable<int> IdParent { get; set; }
         public string DisplayName { get; set; }
+        public string DisplayNameVN { get; set; }
     }
 }

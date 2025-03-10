@@ -22,6 +22,7 @@
           <Property Name="IdChild" Type="int" />
           <Property Name="IdParent" Type="int" />
           <Property Name="DisplayName" Type="nvarchar" MaxLength="64" />
+          <Property Name="DisplayNameVN" Type="nvarchar" MaxLength="256" />
         </EntityType>
         <EntityType Name="dm_DeptGroups">
           <Key>
@@ -379,7 +380,7 @@
           <Property Name="IsDel" Type="bit" Nullable="false" />
           <Property Name="DelTime" Type="datetime" />
           <Property Name="IdUsrDel" Type="varchar" MaxLength="10" />
-          <Property Name="MainCatorary" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="MainCatorary" Type="nvarchar" MaxLength="64" />
           <Property Name="SubDept" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="dt204_OldVersion">
@@ -1007,7 +1008,6 @@
     <edmx:ConceptualModels>
       <Schema Namespace="DBDocumentManagementSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="DBDocumentManagementSystemEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="dm_Departments" EntityType="DBDocumentManagementSystemModel.dm_Departments" />
           <EntitySet Name="dm_Function" EntityType="DBDocumentManagementSystemModel.dm_Function" />
           <EntitySet Name="dm_FunctionRole" EntityType="DBDocumentManagementSystemModel.dm_FunctionRole" />
           <EntitySet Name="dm_GroupUser" EntityType="DBDocumentManagementSystemModel.dm_GroupUser" />
@@ -1091,16 +1091,8 @@
           <EntitySet Name="dt309_Units" EntityType="DBDocumentManagementSystemModel.dt309_Units" />
           <EntitySet Name="dt309_Prices" EntityType="DBDocumentManagementSystemModel.dt309_Prices" />
           <EntitySet Name="dt204_InternalDocMgmt" EntityType="DBDocumentManagementSystemModel.dt204_InternalDocMgmt" />
+          <EntitySet Name="dm_Departments" EntityType="DBDocumentManagementSystemModel.dm_Departments" />
         </EntityContainer>
-        <EntityType Name="dm_Departments">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
-          <Property Name="IdChild" Type="Int32" />
-          <Property Name="IdParent" Type="Int32" />
-          <Property Name="DisplayName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="dm_Function">
           <Key>
             <PropertyRef Name="Id" />
@@ -2000,8 +1992,18 @@
           <Property Name="IsDel" Type="Boolean" Nullable="false" />
           <Property Name="DelTime" Type="DateTime" Precision="3" />
           <Property Name="IdUsrDel" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="MainCatorary" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="MainCatorary" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="SubDept" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="dm_Departments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="IdChild" Type="Int32" />
+          <Property Name="IdParent" Type="Int32" />
+          <Property Name="DisplayName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayNameVN" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2009,16 +2011,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="DBDocumentManagementSystemModelStoreContainer" CdmEntityContainer="DBDocumentManagementSystemEntities">
-          <EntitySetMapping Name="dm_Departments">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_Departments">
-              <MappingFragment StoreEntitySet="dm_Departments">
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="IdParent" ColumnName="IdParent" />
-                <ScalarProperty Name="IdChild" ColumnName="IdChild" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="dm_Function">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_Function">
               <MappingFragment StoreEntitySet="dm_Function">
@@ -3000,6 +2992,17 @@
                 <ScalarProperty Name="IdFuncCatorary" ColumnName="IdFuncCatorary" />
                 <ScalarProperty Name="IdDocCatorary" ColumnName="IdDocCatorary" />
                 <ScalarProperty Name="IdDept" ColumnName="IdDept" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dm_Departments">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_Departments">
+              <MappingFragment StoreEntitySet="dm_Departments">
+                <ScalarProperty Name="DisplayNameVN" ColumnName="DisplayNameVN" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="IdParent" ColumnName="IdParent" />
+                <ScalarProperty Name="IdChild" ColumnName="IdChild" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
