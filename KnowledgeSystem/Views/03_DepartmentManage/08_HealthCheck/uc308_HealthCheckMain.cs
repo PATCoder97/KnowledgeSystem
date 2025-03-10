@@ -517,7 +517,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                         r.Disease1,
                         r.Disease2,
                         r.Disease3,
-                        EmpName = user != null ? $"LG{user.IdDepartment} {user.Id} {user.DisplayName} {user.DisplayNameVN}" : "Unknown"
+                        EmpName = user != null ? $"LG{user.IdDepartment} {user.Id} {user.DisplayName} {user.DisplayNameVN}" : $"Unknown-{r.EmpId}"
                     };
                 }).ToList();
         }
@@ -907,6 +907,35 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                         .ThenBy(r => r.DiseaseDisplayNameVN)
                         .ToList();
 
+            // BIỂU TỔNG HỢP KIỂM TRA SỨC KHỎE
+
+            var kskThongThuong = dataBases.Where(r => r.data.CheckType == f308_CheckSession_Info.KSK_ThongThuong).SelectMany(r => r.detail).ToList();
+            var kskDacBiet = dataBases.Where(r => r.data.CheckType == f308_CheckSession_Info.KSK_DacBiet).SelectMany(r => r.detail).ToList();
+            var kskXinGiayPhepLD = dataBases.Where(r => r.data.CheckType == f308_CheckSession_Info.KSK_XinGiayPhepLD).SelectMany(r => r.detail).ToList();
+            var kskNhanVienMoi = dataBases.Where(r => r.data.CheckType == f308_CheckSession_Info.KSK_NhanVienMoi).SelectMany(r => r.detail).ToList();
+            var kskTruocViecLam = dataBases.Where(r => r.data.CheckType == f308_CheckSession_Info.KSK_TruocViecLam).SelectMany(r => r.detail).ToList();
+            int countKskRoiNghiViec = dataBases.SelectMany(r => r.detail).Where(r => r.detail.HealthRating != -1)
+                .Join(users, data => data.detail.EmpId, usr => usr.Id, (data, usr) => new { data, usr })
+                .Count(x => x.usr.Status == 1);
+
+            int chuakhammanghiviec = dataBases.SelectMany(r => r.detail).Where(r => r.detail.HealthRating == -1)
+                .Join(users, data => data.detail.EmpId, usr => usr.Id, (data, usr) => new { data, usr })
+                .Count(x => x.usr.Status == 1);
+
+            var dtTongHop = new
+            {
+                tongnhanviec = users.Count(r => r.IdDepartment.StartsWith(idDept2word) && r.Status != 1),
+                luuchuc = users.Count(r => r.IdDepartment.StartsWith(idDept2word) && r.Status == 2),
+                nghiviec = users.Count(r => r.IdDepartment.StartsWith(idDept2word) && r.Status == 1),
+                kskthuongnien = kskThongThuong.Count(r => r.detail.HealthRating != -1),
+                kskdacbiet = kskDacBiet.Count(r => r.detail.HealthRating != -1),
+                kskxingiayphepld = kskXinGiayPhepLD.Count(r => r.detail.HealthRating != -1),
+                ksknhanvienmoi = kskNhanVienMoi.Count(r => r.detail.HealthRating != -1),
+                ksktruocvietlam = kskTruocViecLam.Count(r => r.detail.HealthRating != -1),
+                kskroinghiviec = countKskRoiNghiViec,
+                chuakhamdanghiviec = chuakhammanghiviec,
+            };
+
             File.Copy(PATH_TEMPLATE, PATH_EXPORT, true);
 
             FileInfo newFile = new FileInfo(PATH_EXPORT);
@@ -921,6 +950,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                 var wsBieuMau5 = pck.Workbook.Worksheets["Biểu mẫu 5"];
                 var wsBieuMau6 = pck.Workbook.Worksheets["Biểu mẫu 6"];
                 var wsBieuMau7 = pck.Workbook.Worksheets["Biểu mẫu 7"];
+                var wsTongHop = pck.Workbook.Worksheets["Tổng hợp"];
 
                 wsBieuMau6.DefaultRowHeight = 20;
 
@@ -1189,6 +1219,17 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                     InsertDataWS7(12, false);
                     InsertDataWS7(5, true);
                 }
+
+                // BIỂU TỔNG HỢP KIỂM TRA SỨC KHỎE
+                wsTongHop.Cells["M4"].Value = dtTongHop.tongnhanviec;
+                wsTongHop.Cells["M5"].Value = dtTongHop.kskthuongnien;
+                wsTongHop.Cells["M6"].Value = dtTongHop.kskdacbiet;
+                wsTongHop.Cells["M7"].Value = dtTongHop.kskxingiayphepld;
+                wsTongHop.Cells["M9"].Value = dtTongHop.ksknhanvienmoi;
+                wsTongHop.Cells["M12"].Value = dtTongHop.ksktruocvietlam;
+                wsTongHop.Cells["M10"].Value = dtTongHop.luuchuc;
+                wsTongHop.Cells["M11"].Value = dtTongHop.kskroinghiviec;
+                wsTongHop.Cells["AC4"].Value = dtTongHop.chuakhamdanghiviec;
 
                 // Lưu và chỉ hiện Sheet BB
                 pck.Save();
