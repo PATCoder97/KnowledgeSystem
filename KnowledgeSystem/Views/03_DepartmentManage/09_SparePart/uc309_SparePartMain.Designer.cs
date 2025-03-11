@@ -64,6 +64,7 @@
             this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn18 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn19 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnAdd = new DevExpress.XtraBars.BarButtonItem();
@@ -76,7 +77,6 @@
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gvTransactions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvPrices)).BeginInit();
@@ -134,6 +134,8 @@
             this.gridColumn5.AppearanceCell.Options.UseTextOptions = true;
             this.gridColumn5.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn5.Caption = "日期";
+            this.gridColumn5.DisplayFormat.FormatString = "yyyy/MM/dd";
+            this.gridColumn5.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.gridColumn5.FieldName = "data.CreatedDate";
             this.gridColumn5.MinWidth = 120;
             this.gridColumn5.Name = "gridColumn5";
@@ -260,6 +262,8 @@
             this.gridColumn10.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             this.gridColumn10.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
             this.gridColumn10.Caption = "日期";
+            this.gridColumn10.DisplayFormat.FormatString = "yyyy/MM/dd";
+            this.gridColumn10.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.gridColumn10.FieldName = "ChangedAt";
             this.gridColumn10.MinWidth = 120;
             this.gridColumn10.Name = "gridColumn10";
@@ -477,6 +481,19 @@
             this.gridColumn19.Visible = true;
             this.gridColumn19.VisibleIndex = 10;
             // 
+            // gridColumn6
+            // 
+            this.gridColumn6.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn6.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn6.Caption = "有效日到";
+            this.gridColumn6.DisplayFormat.FormatString = "yyyy/MM/dd";
+            this.gridColumn6.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.gridColumn6.FieldName = "data.ExpDate";
+            this.gridColumn6.Name = "gridColumn6";
+            this.gridColumn6.Visible = true;
+            this.gridColumn6.VisibleIndex = 11;
+            this.gridColumn6.Width = 94;
+            // 
             // barManagerTP
             // 
             this.barManagerTP.Bars.AddRange(new DevExpress.XtraBars.Bar[] {
@@ -621,15 +638,6 @@
             this.layoutControlItem1.Size = new System.Drawing.Size(1272, 462);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
-            // 
-            // gridColumn6
-            // 
-            this.gridColumn6.Caption = "有效日到";
-            this.gridColumn6.FieldName = "data.ExpDate";
-            this.gridColumn6.Name = "gridColumn6";
-            this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 11;
-            this.gridColumn6.Width = 94;
             // 
             // uc309_SparePartMain
             // 
