@@ -109,13 +109,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             btnResumeWork.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             btnJobChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             btnPersonnelChanges.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-
-            if (!IsSysAdmin)
-            {
-                lcRole.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-                lcSign.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-            }
-
+                        
             switch (eventInfo)
             {
                 case EventFormInfo.Create:
@@ -182,6 +176,13 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                     break;
                 default:
                     break;
+            }
+
+            // Kiểm tra quyền admin
+            if (!IsSysAdmin)
+            {
+                lcRole.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                lcSign.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             }
 
             bool role301Main = AppPermission.Instance.CheckAppPermission(AppPermission.SafetyCertMain);
@@ -292,6 +293,12 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
         private void btnDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if (!IsSysAdmin)
+            {
+                XtraMessageBox.Show("Vui lòng liên hệ nhân viên quản lý hệ thống!", TPConfigs.SoftNameTW);
+                return;
+            }
+
             MsgTP.MsgConfirmDel();
 
             eventInfo = EventFormInfo.Delete;

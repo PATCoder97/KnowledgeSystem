@@ -162,6 +162,7 @@ namespace KnowledgeSystem.Views._00_Generals
 
                 TPConfigs.LoginSuccessful = true;
                 TPConfigs.LoginUser = _userLogin;
+                TPConfigs.idDept2word = TPConfigs.LoginUser.IdDepartment.Substring(0, 2);
                 Close();
             }
         }
