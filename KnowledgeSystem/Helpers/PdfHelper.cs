@@ -159,5 +159,21 @@ namespace KnowledgeSystem.Helpers
                 return null;
             }
         }
+
+        public void ProtechPdf(string fileName, string resultFileName)
+        {
+            using (PdfDocumentProcessor documentProcessor = new PdfDocumentProcessor())
+            {
+                documentProcessor.LoadDocument(fileName);
+                PdfEncryptionOptions encryptionOptions = new PdfEncryptionOptions();
+                encryptionOptions.ModificationPermissions = PdfDocumentModificationPermissions.NotAllowed;
+                encryptionOptions.InteractivityPermissions = PdfDocumentInteractivityPermissions.NotAllowed;
+
+                encryptionOptions.OwnerPasswordString = "fhspdf";
+                encryptionOptions.Algorithm = PdfEncryptionAlgorithm.AES256;
+
+                documentProcessor.SaveDocument(resultFileName, new PdfSaveOptions() { EncryptionOptions = encryptionOptions });
+            }
+        }
     }
 }

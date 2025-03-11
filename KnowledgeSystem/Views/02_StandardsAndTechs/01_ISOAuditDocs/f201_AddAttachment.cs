@@ -557,7 +557,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
                     break;
                 default:
-                    OpenFileDialog openFileDialog = new OpenFileDialog { Filter = filterAtt };
+                    OpenFileDialog openFileDialog = new OpenFileDialog { Filter = "Pdf|*.pdf" };
 
                     if (openFileDialog.ShowDialog() != DialogResult.OK)
                         return;

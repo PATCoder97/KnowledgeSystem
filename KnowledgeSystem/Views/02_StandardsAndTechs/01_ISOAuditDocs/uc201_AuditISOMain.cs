@@ -199,7 +199,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
                     if (File.Exists(sourceFile))
                     {
-                        File.Copy(sourceFile, destFile, true);
+                        PdfHelper.Instance.ProtechPdf(sourceFile, destFile);
+                        //File.Copy(sourceFile, destFile, true);
                     }
                 }
 

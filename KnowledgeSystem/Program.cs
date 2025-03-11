@@ -102,7 +102,6 @@ namespace KnowledgeSystem
 #endif
 
                 TPConfigs.LoginUser = dm_UserBUS.Instance.GetItemById(idUsr);
-                TPConfigs.idDept2word = TPConfigs.LoginUser.IdDepartment.Substring(0, 2);
 
                 bool isDeny = !AppPermission.Instance.CheckAppPermission(permCtrl);
 

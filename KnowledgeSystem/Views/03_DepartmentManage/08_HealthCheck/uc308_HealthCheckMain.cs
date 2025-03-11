@@ -626,651 +626,625 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
 
         private void btnSummaryTable_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-#if DEBUG
-            //uc308_ExportReport ucInfo = new uc308_ExportReport();
-            //if (XtraDialog.Show(ucInfo, "輸入年份、請假明細表", MessageBoxButtons.OKCancel) != DialogResult.OK)
-            //    return;
+            uc308_ExportReport ucInfo = new uc308_ExportReport();
+            if (XtraDialog.Show(ucInfo, "輸入年份、請假明細表", MessageBoxButtons.OKCancel) != DialogResult.OK)
+                return;
 
-            //int yearStatistic = ucInfo.Year;
-            //string sickFile = ucInfo.SickFile;
-            int yearStatistic = 2025;
-            string sickFile = @"E:\01. Softwares Programming\24. Knowledge System\03. Documents\308\7820刷卡資料.pdf";
-            string PATH_EXPORT = Path.Combine("C:\\Users\\Dell Alpha\\Desktop\\RÁC 1\\Test308", $"健康檢查報告-{DateTime.Now:yyyyMMddHHmmss}.xlsx");
-#else
-
-            var editor = new TextEdit { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) };
-
-            // Thiết lập mask để buộc nhập đúng định dạng
-            editor.Properties.Mask.EditMask = "####"; // 4 dấu # cho 4 chữ số
-            editor.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            editor.Properties.Mask.UseMaskAsDisplayFormat = true; // Hiển thị mask khi không focus
-
-            var resultYear = XtraInputBox.Show(new XtraInputBoxArgs
-            {
-                Caption = TPConfigs.SoftNameTW,
-                Prompt = "輸入要計算的年份",
-                Editor = editor,
-                DefaultButtonIndex = 0,
-                DefaultResponse = DateTime.Now.ToString("yyyy") // Định dạng mặc định
-            });
-
-            if (string.IsNullOrEmpty(resultYear?.ToString())) return;
+            int yearStatistic = ucInfo.Year;
+            string sickFile = ucInfo.SickFile;
 
             SaveFileDialog saveFile = new SaveFileDialog()
             {
                 RestoreDirectory = true,
-                //InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
-                FileName = $"健康檢查報告-{DateTime.Now:yyyyMMddHHmmss}.xlsx"
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
+                FileName = $"健康檢查報告-{DateTime.Now:yyyyMMddHHmmss}.xlsx",
+                Filter = "Excel| *.xlsx"
             };
-
             if (saveFile.ShowDialog() != DialogResult.OK) return;
 
-            int yearStatistic = Convert.ToInt16(resultYear);
-
-            // Đường dẫn đến temp và file kết quả
-            string PATH_EXPORT = saveFile.FileName;
-
-#endif
-            string PATH_TEMPLATE = Path.Combine(TPConfigs.ResourcesPath, "308_Statistic.xlsx");
-
-            // Lấy dữ liệu để xuất báo cáo , phải lọc theo thời gian
-            var sessionFilter = dt308CheckSession.Where(r => r.DateSession.Year == yearStatistic).ToList();
-
-            // Làm dữ liệu gốc để tính toán cho các "Biểu mẫu" cần xuất ra
-            var dataBases = (from data in sessionFilter
-                             select new
-                             {
-                                 data,
-                                 detail = (from detail in dt308CheckDetail
-                                           join user in users on detail.EmpId equals user.Id
-                                           where detail.SessionId == data.Id
-                                           select new
-                                           {
-                                               detail,
-                                               user
-                                           }).ToList()
-                             }).ToList();
-
-            // Biểu mẫu 1: QUẢN LÝ SỨC KHỎE TRƯỚC KHI BỐ TRÍ VIỆC LÀM
-            // Biểu mẫu 2: QUẢN LÝ SỨC KHỎE NGƯỜI LAO ĐỘNG THÔNG QUA KHÁM SỨC KHỎE ĐỊNH KỲ
-            var dataForm12 = dataBases.Where(r => r.data.CheckType == f308_CheckSession_Info.KSK_TruocViecLam).ToList();
-            var statistics12 = dataBases.Select(db => new
+            using (var handle = SplashScreenManager.ShowOverlayForm(gcData))
             {
-                db.data,
-                db.detail,
+                // Đường dẫn đến temp và file kết quả
+                string PATH_EXPORT = saveFile.FileName;
 
-                // Thống kê Nam và Nữ
-                maleCount = db.detail.Count(x => x.user.Sex == true),
-                femaleCount = db.detail.Count(x => x.user.Sex == false),
+                string PATH_TEMPLATE = Path.Combine(TPConfigs.ResourcesPath, "308_Statistic.xlsx");
 
-                // Tổng số người
-                totalCount = db.detail.Count(),
+                // Lấy dữ liệu để xuất báo cáo , phải lọc theo thời gian
+                var sessionFilter = dt308CheckSession.Where(r => r.DateSession.Year == yearStatistic).ToList();
 
-                // Thống kê sức khỏe
-                healthRatingStats = db.detail
-                .GroupBy(x => x.detail.HealthRating)
-                .Select(g => new
-                {
-                    HealthRating = g.Key,
-                    Count = g.Count()
-                }).ToList()
-            }).ToList();
-
-            // Biểu mẫu 1: QUẢN LÝ SỨC KHỎE TRƯỚC KHI BỐ TRÍ VIỆC LÀM
-            // Biểu mẫu 2: QUẢN LÝ SỨC KHỎE NGƯỜI LAO ĐỘNG THÔNG QUA KHÁM SỨC KHỎE ĐỊNH KỲ
-            var dt12 = statistics12.Select(stat =>
-            {
-                var healthDict = stat.healthRatingStats?
-                    .ToDictionary(r => r.HealthRating, r => r.Count.ToString()) ?? new Dictionary<int, string>();
-
-                return new
-                {
-                    checktype = stat.data.CheckType,
-                    datetime = stat.data?.DateSession,
-                    male_female_vn = $"Nam: {stat.maleCount}\r\nNữ: {stat.femaleCount}",
-                    male_female_tw = $"男：{stat.maleCount}\r\n女：{stat.femaleCount}",
-                    total = stat.totalCount,
-                    h1 = healthDict.GetValueOrDefault(1, ""),
-                    h2 = healthDict.GetValueOrDefault(2, ""),
-                    h3 = healthDict.GetValueOrDefault(3, ""),
-                    h4 = healthDict.GetValueOrDefault(4, ""),
-                    h5 = healthDict.GetValueOrDefault(5, ""),
-                    checkName_vn = $"KSK {(stat.data?.CheckType.Split('/')[0] ?? "N/A")}",
-                    checkName_tw = $"{(stat.data?.CheckType.Split('/')[1] ?? "N/A")}"
-                };
-            }).ToList();
-
-            // Biểu mẫu 3: TÌNH HÌNH BỆNH TẬT TRONG THỜI GIAN BÁO CÁO
-            // Hàm xử lý thống kê bệnh (chuyển sang int)
-            Func<IEnumerable<dynamic>, string, List<dynamic>> GetDiseaseStats = (details, diseaseField) => details
-            .SelectMany(d =>
-            {
-                var detail = d.detail; // Lấy detail từ d
-                var propertyInfo = detail?.GetType().GetProperty(diseaseField);
-                var valueInt = propertyInfo?.GetValue(detail) as string;
-
-                return (valueInt ?? "")
-                    .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                    .Select(v => int.TryParse(v.Trim(), out int diseaseId) ? (int?)diseaseId : null);
-            })
-            .Where(diseaseId => diseaseId.HasValue)
-            .GroupBy(diseaseId => diseaseId.Value)
-            .Select(g => new { Id = g.Key, Count = g.Count() })
-            .Cast<dynamic>()
-            .ToList();
-
-            // ✅ Thống kê theo quý và tính tổng số ca bệnh cho từng loại
-            var statisticsByQuarter = dataBases.GroupBy(data => new
-            {
-                Quarter = (data.data.DateSession.Month - 1) / 3 + 1
-            })
-            .Select(group =>
-            {
-                var disease1Stats = GetDiseaseStats(group.SelectMany(g => g.detail), "Disease1");
-                var disease2Stats = GetDiseaseStats(group.SelectMany(g => g.detail), "Disease2");
-                var disease3Stats = GetDiseaseStats(group.SelectMany(g => g.detail), "Disease3");
-
-                // ✅ Tính tổng số ca bệnh cho từng loại
-                var totalDisease1 = disease1Stats.Sum(d => (int)d.Count);
-                var totalDisease2 = disease2Stats.Sum(d => (int)d.Count);
-                var totalDisease3 = disease3Stats.Sum(d => (int)d.Count);
-
-                return new
-                {
-                    Quarter = $"Q{group.Key.Quarter}",
-                    Disease1Stats = disease1Stats,
-                    Disease2Stats = disease2Stats,
-                    Disease3Stats = disease3Stats,
-                    TotalDisease1 = totalDisease1, // ✅ Tổng của Disease1
-                    TotalDisease2 = totalDisease2, // ✅ Tổng của Disease2
-                    TotalDisease3 = totalDisease3  // ✅ Tổng của Disease3
-                };
-            }).ToList();
-
-            var dt31 = dt308Diseases.Where(r => r.DiseaseType == 1).Select((r, index) => new
-            {
-                No = index + 1,
-                NameVN = r.DisplayNameVN,
-                NameTW = r.DisplayNameTW,
-                Q1 = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q1")?.Disease1Stats.FirstOrDefault(u => u.Id == r.Id)?.Count ?? "-",
-                Q2 = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q2")?.Disease1Stats.FirstOrDefault(u => u.Id == r.Id)?.Count ?? "-",
-                Q3 = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q3")?.Disease1Stats.FirstOrDefault(u => u.Id == r.Id)?.Count ?? "-",
-                Q4 = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q4")?.Disease1Stats.FirstOrDefault(u => u.Id == r.Id)?.Count ?? "-"
-            }).ToList();
-
-            var dt32 = dt308Diseases.Where(r => r.DiseaseType == 3).Select((r, index) => new
-            {
-                No = index + 1,
-                NameVN = r.DisplayNameVN,
-                NameTW = r.DisplayNameTW,
-                Q1 = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q1")?.Disease2Stats.FirstOrDefault(u => u.Id == r.Id)?.Count ?? "-",
-                Q2 = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q2")?.Disease2Stats.FirstOrDefault(u => u.Id == r.Id)?.Count ?? "-",
-                Q3 = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q3")?.Disease2Stats.FirstOrDefault(u => u.Id == r.Id)?.Count ?? "-",
-                Q4 = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q4")?.Disease2Stats.FirstOrDefault(u => u.Id == r.Id)?.Count ?? "-"
-            }).ToList();
-
-            // Biểu mẫu 4: TÌNH HÌNH NGHỈ DO ỐM, TAI NẠN LAO ĐỘNG VÀ BỆNH NGHỀ NGHIỆP
-            List<SickData> sickDatas = new List<SickData>();
-            using (PdfReader reader = new PdfReader(sickFile))
-            {
-                for (int i = 1; i <= reader.NumberOfPages; i++)
-                {
-                    string text = PdfTextExtractor.GetTextFromPage(reader, i);
-
-                    var matches = new
-                    {
-                        DataList = Regex.Matches(text, @"\d{8}\s+0[1|2]\s+\d{4}\s+\d{4}\s+[\d.]+").Cast<Match>().Select(m => m.Value).ToList(),
-                        Id = Regex.Match(text, @"VNW\d{7}").Value,
-                        Month = Regex.Match(text, @"\d{7}-\d{7}").Value
-                    };
-
-                    if (!string.IsNullOrEmpty(matches.Month) && !string.IsNullOrEmpty(matches.Id) && matches.DataList.Count > 0)
-                    {
-                        sickDatas.Add(new SickData
-                        {
-                            Id = matches.Id,
-                            Data = matches.DataList,
-                            TotalTime = matches.DataList.Sum(s => double.TryParse(s.Split().Last(), out double val) ? val : 0),
-                            Count = matches.DataList.Count,
-                            Time = matches.Month.Split('-')[1].Substring(3, 2)
-                        });
-                    }
-                }
-            }
-
-            var dt4 = sickDatas
-                .GroupBy(a => a.Time)
-                .Select(dtg => new SickData
-                {
-                    Time = dtg.Key,
-                    TotalTime = dtg.Sum(r => r.TotalTime),
-                    Count = dtg.Sum(r => r.Count),
-                }).OrderBy(r => r.Time).ToList();
-
-            // Biểu mẫu 5: QUẢN LÝ BỆNH MÃN TÍNH
-            int CalculateAge(DateTime? dob) => dob.HasValue ? DateTime.Now.Year - dob.Value.Year - (DateTime.Now < dob.Value.AddYears(DateTime.Now.Year - dob.Value.Year) ? 1 : 0) : 0;
-
-            var dt5 = sessionFilter
-                .Where(r => r.CheckType != f308_CheckSession_Info.KSK_TruocViecLam)
-                .SelectMany(data => dt308CheckDetail
-                    .Where(detail => detail.SessionId == data.Id && !string.IsNullOrEmpty(detail.Disease2))
-                    .SelectMany(detail => detail.Disease2.Split(',')
-                        .Select(diseaseId => new { detail, diseaseId })))
-                .Join(users, x => x.detail.EmpId, user => user.Id, (x, user) => new { x.detail, x.diseaseId, user })
-                .Join(dt308Diseases, x => x.diseaseId.Trim(), disease => disease.Id.ToString(), (x, disease) => new
-                {
-                    UserIdDept = x.user.IdDepartment,
-                    UserNameVN = x.user.DisplayNameVN,
-                    DiseaseNameVN = disease.DisplayNameVN,
-                    UserNameTW = x.user.DisplayName,
-                    DiseaseNameTW = disease.DisplayNameTW,
-                    Sex = x.user.Sex,
-                    Age = CalculateAge(x.user.DOB),
-                    JobAge = CalculateAge(x.user.DateCreate)
-                })
-                .OrderBy(r => r.UserNameVN)
-                .ToList();
-
-            // Biểu mẫu 6: QUẢN LÝ BỆNH MÃN TÍNH THEO TỪNG BỆNH
-            var dt6 = dt5.GroupBy(r => new { r.DiseaseNameVN, r.DiseaseNameTW }).Select(g => new
-            {
-                DiseaseNameVN = g.Key.DiseaseNameVN,
-                DiseaseNameTW = g.Key.DiseaseNameTW,
-                Users = g.ToList()
-            }).ToList();
-
-
-            // Biểu mẫu 7:THEO DÕI BỆNH NGHỀ NGHIỆP
-            var dt7 = (from data in sessionFilter
-                       where data.CheckType != f308_CheckSession_Info.KSK_TruocViecLam
-                       from detail in dt308CheckDetail
-                       join user in users on detail.EmpId equals user.Id
-                       where detail.SessionId == data.Id && !string.IsNullOrEmpty(detail.Disease3)
-                       from diseaseId in detail.Disease3.Split(',').Select(d => d.Trim()) // Tách và loại bỏ khoảng trắng
-                       join disease in dt308Diseases on diseaseId equals disease.Id.ToString()
-                       select new
-                       {
-                           ExamDate = data.DateSession,
-                           DiseaseId = disease.Id,
-                           DiseaseDisplayNameVN = disease.DisplayNameVN,
-                           DiseaseDisplayNameTW = disease.DisplayNameTW,
-                           UserSex = user.Sex
-                       })
-                        .GroupBy(r => new { r.DiseaseId, r.DiseaseDisplayNameVN, r.DiseaseDisplayNameTW, r.ExamDate })
-                        .Select(g => new
-                        {
-                            ExamDate = g.Key.ExamDate,
-                            DiseaseDisplayNameVN = g.Key.DiseaseDisplayNameVN,
-                            DiseaseDisplayNameTW = g.Key.DiseaseDisplayNameTW,
-                            TotalCount = g.Count(),
-                            CountMale = g.Count(x => x.UserSex == true),
-                            CountFemale = g.Count(x => x.UserSex != true)
-                        })
-                        .OrderBy(r => r.ExamDate)
-                        .ThenBy(r => r.DiseaseDisplayNameVN)
-                        .ToList();
-
-            // BIỂU TỔNG HỢP KIỂM TRA SỨC KHỎE
-
-            var kskThongThuong = dataBases.Where(r => r.data.CheckType == f308_CheckSession_Info.KSK_ThongThuong).SelectMany(r => r.detail).ToList();
-            var kskDacBiet = dataBases.Where(r => r.data.CheckType == f308_CheckSession_Info.KSK_DacBiet).SelectMany(r => r.detail).ToList();
-            var kskXinGiayPhepLD = dataBases.Where(r => r.data.CheckType == f308_CheckSession_Info.KSK_XinGiayPhepLD).SelectMany(r => r.detail).ToList();
-            var kskNhanVienMoi = dataBases.Where(r => r.data.CheckType == f308_CheckSession_Info.KSK_NhanVienMoi).SelectMany(r => r.detail).ToList();
-            var kskTruocViecLam = dataBases.Where(r => r.data.CheckType == f308_CheckSession_Info.KSK_TruocViecLam).SelectMany(r => r.detail).ToList();
-            int countKskRoiNghiViec = dataBases.SelectMany(r => r.detail).Where(r => r.detail.HealthRating != -1)
-                .Join(users, data => data.detail.EmpId, usr => usr.Id, (data, usr) => new { data, usr })
-                .Count(x => x.usr.Status == 1);
-
-            int chuakhammanghiviec = dataBases.SelectMany(r => r.detail).Where(r => r.detail.HealthRating == -1)
-                .Join(users, data => data.detail.EmpId, usr => usr.Id, (data, usr) => new { data, usr })
-                .Count(x => x.usr.Status == 1);
-            var depts = dm_DeptBUS.Instance.GetList();
-            var dtTongHop = new
-            {
-                tongnhanviec = users.Count(r => r.IdDepartment.StartsWith(idDept2word) && r.Status != 1),
-                luuchuc = users.Count(r => r.IdDepartment.StartsWith(idDept2word) && r.Status == 2),
-                nghiviec = users.Count(r => r.IdDepartment.StartsWith(idDept2word) && r.Status == 1),
-                kskthuongnien = kskThongThuong.Count(r => r.detail.HealthRating != -1),
-                kskdacbiet = kskDacBiet.Count(r => r.detail.HealthRating != -1),
-                kskxingiayphepld = kskXinGiayPhepLD.Count(r => r.detail.HealthRating != -1),
-                ksknhanvienmoi = kskNhanVienMoi.Count(r => r.detail.HealthRating != -1),
-                ksktruocvietlam = kskTruocViecLam.Count(r => r.detail.HealthRating != -1),
-                kskroinghiviec = countKskRoiNghiViec,
-                chuakhamdanghiviec = chuakhammanghiviec,
-                bophanvn = depts.FirstOrDefault(r => r.Id == idDept2word)?.DisplayNameVN,
-                bophantw = depts.FirstOrDefault(r => r.Id == idDept2word)?.DisplayName,
-            };
-
-            File.Copy(PATH_TEMPLATE, PATH_EXPORT, true);
-
-            FileInfo newFile = new FileInfo(PATH_EXPORT);
-            using (ExcelPackage pck = new ExcelPackage(newFile))
-            {
-                SplashScreenManager.ShowDefaultWaitForm();
-                var wsPhuLuc2 = pck.Workbook.Worksheets["Phụ lục 2"];
-                var wsBieuMau1 = pck.Workbook.Worksheets["Biểu mẫu 1"];
-                var wsBieuMau2 = pck.Workbook.Worksheets["Biểu mẫu 2"];
-                var wsBieuMau3 = pck.Workbook.Worksheets["Biểu mẫu 3"];
-                var wsBieuMau4 = pck.Workbook.Worksheets["Biểu mẫu 4"];
-                var wsBieuMau5 = pck.Workbook.Worksheets["Biểu mẫu 5"];
-                var wsBieuMau6 = pck.Workbook.Worksheets["Biểu mẫu 6"];
-                var wsBieuMau7 = pck.Workbook.Worksheets["Biểu mẫu 7"];
-                var wsTongHop = pck.Workbook.Worksheets["Tổng hợp"];
-
-                wsBieuMau6.DefaultRowHeight = 20;
-
-                wsPhuLuc2.Cells["A2"].Value = $"(Năm {yearStatistic})";
-                wsPhuLuc2.Cells["A10"].Value = $"Năm : {yearStatistic}";
-
-                wsPhuLuc2.Cells["A16"].Value = $"({yearStatistic}年)";
-                wsPhuLuc2.Cells["A24"].Value = $"年：{yearStatistic}";
+                // Làm dữ liệu gốc để tính toán cho các "Biểu mẫu" cần xuất ra
+                var dataBases = (from data in sessionFilter
+                                 select new
+                                 {
+                                     data,
+                                     detail = (from detail in dt308CheckDetail
+                                               join user in users on detail.EmpId equals user.Id
+                                               where detail.SessionId == data.Id
+                                               select new
+                                               {
+                                                   detail,
+                                                   user
+                                               }).ToList()
+                                 }).ToList();
 
                 // Biểu mẫu 1: QUẢN LÝ SỨC KHỎE TRƯỚC KHI BỐ TRÍ VIỆC LÀM
-                var dt1 = dt12.Where(r => r.checktype == f308_CheckSession_Info.KSK_TruocViecLam);
-                int dt1RowIns = dt1.Count() - 1;
-
-                void InsertDataWS1(int startRow, bool IsVietnamese = true)
-                {
-                    int index1 = 0;
-                    wsBieuMau1.InsertRow(startRow, dt1RowIns);
-                    string formatDate = IsVietnamese ? "dd/MM/yyyy" : "yyyy/MM/dd";
-
-                    foreach (var item in dt1)
-                    {
-                        if (item != dt1.Last())
-                        {
-                            var destinationRange = wsBieuMau1.Cells[$"A{startRow + index1}:Z{startRow + index1}"];
-                            wsBieuMau1.Cells[$"A{startRow - 1}:Z{startRow - 1}"].Copy(destinationRange);
-                            wsBieuMau1.Rows[startRow + index1].Height = wsBieuMau1.Rows[startRow - 1].Height;
-                        }
-
-                        wsBieuMau1.Cells[$"A{startRow - 1 + index1}"].Value = $"{item.datetime?.ToString(formatDate)}";
-                        wsBieuMau1.Cells[$"G{startRow - 1 + index1}"].Value = IsVietnamese ? item.male_female_vn : item.male_female_tw;
-                        wsBieuMau1.Cells[$"L{startRow - 1 + index1}"].Value = item.total;
-                        wsBieuMau1.Cells[$"Q{startRow - 1 + index1}"].Value = item.h1;
-                        wsBieuMau1.Cells[$"S{startRow - 1 + index1}"].Value = item.h2;
-                        wsBieuMau1.Cells[$"U{startRow - 1 + index1}"].Value = item.h3;
-                        wsBieuMau1.Cells[$"W{startRow - 1 + index1}"].Value = item.h4;
-                        wsBieuMau1.Cells[$"Y{startRow - 1 + index1}"].Value = item.h5;
-
-                        index1++;
-                    }
-                }
-
-                if (dt1RowIns > 0)
-                {
-                    InsertDataWS1(12, false);
-                    InsertDataWS1(6, true);
-                }
-
                 // Biểu mẫu 2: QUẢN LÝ SỨC KHỎE NGƯỜI LAO ĐỘNG THÔNG QUA KHÁM SỨC KHỎE ĐỊNH KỲ
-                var dt2 = dt12.Where(r => r.checktype != f308_CheckSession_Info.KSK_TruocViecLam).ToList();
-                int dt2RowIns = dt2.Count() - 1;
-
-                void InsertDataWS2(int startRow, bool IsVietnamese = true)
+                var dataForm12 = dataBases.Where(r => r.data.CheckType == f308_CheckSession_Info.KSK_TruocViecLam).ToList();
+                var statistics12 = dataBases.Select(db => new
                 {
-                    int index2 = 0;
-                    wsBieuMau2.InsertRow(startRow, dt2RowIns);
-                    string checkNameProp = IsVietnamese ? "checkName_vn" : "checkName_tw";
-                    string formatDate = IsVietnamese ? "dd/MM/yyyy" : "yyyy/MM/dd";
+                    db.data,
+                    db.detail,
 
-                    foreach (var item in dt2)
+                    // Thống kê Nam và Nữ
+                    maleCount = db.detail.Count(x => x.user.Sex == true),
+                    femaleCount = db.detail.Count(x => x.user.Sex == false),
+
+                    // Tổng số người
+                    totalCount = db.detail.Count(),
+
+                    // Thống kê sức khỏe
+                    healthRatingStats = db.detail
+                    .GroupBy(x => x.detail.HealthRating)
+                    .Select(g => new
                     {
-                        if (item != dt2.Last())
-                        {
-                            var destinationRange = wsBieuMau2.Cells[$"A{startRow + index2}:Z{startRow + index2}"];
-                            wsBieuMau2.Cells[$"A{startRow - 1}:Z{startRow - 1}"].Copy(destinationRange);
-                            wsBieuMau2.Rows[startRow + index2].Height = wsBieuMau2.Rows[startRow - 1].Height;
-                        }
+                        HealthRating = g.Key,
+                        Count = g.Count()
+                    }).ToList()
+                }).ToList();
 
-                        wsBieuMau2.Cells[$"A{startRow - 1 + index2}"].Value = $"{item.datetime?.ToString(formatDate)}\r\n{item.GetType().GetProperty(checkNameProp).GetValue(item)}";
-                        wsBieuMau2.Cells[$"G{startRow - 1 + index2}"].Value = IsVietnamese ? item.male_female_vn : item.male_female_tw;
-                        wsBieuMau2.Cells[$"L{startRow - 1 + index2}"].Value = item.total;
-                        wsBieuMau2.Cells[$"Q{startRow - 1 + index2}"].Value = item.h1;
-                        wsBieuMau2.Cells[$"S{startRow - 1 + index2}"].Value = item.h2;
-                        wsBieuMau2.Cells[$"U{startRow - 1 + index2}"].Value = item.h3;
-                        wsBieuMau2.Cells[$"W{startRow - 1 + index2}"].Value = item.h4;
-                        wsBieuMau2.Cells[$"Y{startRow - 1 + index2}"].Value = item.h5;
-
-                        index2++;
-                    }
-                }
-
-                if (dt2RowIns > 0)
+                // Biểu mẫu 1: QUẢN LÝ SỨC KHỎE TRƯỚC KHI BỐ TRÍ VIỆC LÀM
+                // Biểu mẫu 2: QUẢN LÝ SỨC KHỎE NGƯỜI LAO ĐỘNG THÔNG QUA KHÁM SỨC KHỎE ĐỊNH KỲ
+                var dt12 = statistics12.Select(stat =>
                 {
-                    InsertDataWS2(12, false);
-                    InsertDataWS2(6, true);
-                }
+                    var healthDict = stat.healthRatingStats?
+                        .ToDictionary(r => r.HealthRating, r => r.Count.ToString()) ?? new Dictionary<int, string>();
+
+                    return new
+                    {
+                        checktype = stat.data.CheckType,
+                        datetime = stat.data?.DateSession,
+                        male_female_vn = $"Nam: {stat.maleCount}\r\nNữ: {stat.femaleCount}",
+                        male_female_tw = $"男：{stat.maleCount}\r\n女：{stat.femaleCount}",
+                        total = stat.totalCount,
+                        h1 = healthDict.GetValueOrDefault(1, ""),
+                        h2 = healthDict.GetValueOrDefault(2, ""),
+                        h3 = healthDict.GetValueOrDefault(3, ""),
+                        h4 = healthDict.GetValueOrDefault(4, ""),
+                        h5 = healthDict.GetValueOrDefault(5, ""),
+                        checkName_vn = $"KSK {(stat.data?.CheckType.Split('/')[0] ?? "N/A")}",
+                        checkName_tw = $"{(stat.data?.CheckType.Split('/')[1] ?? "N/A")}"
+                    };
+                }).ToList();
 
                 // Biểu mẫu 3: TÌNH HÌNH BỆNH TẬT TRONG THỜI GIAN BÁO CÁO
-                void InsertDataWS3(int startRow, IEnumerable<dynamic> data, bool IsVietnamese = true)
+                // Hàm xử lý thống kê bệnh (chuyển sang int)
+                Func<IEnumerable<dynamic>, string, List<dynamic>> GetDiseaseStats = (details, diseaseField) => details
+                .SelectMany(d =>
                 {
-                    int rowCount = data.Count() - 1;
-                    wsBieuMau3.InsertRow(startRow, rowCount);
+                    var detail = d.detail; // Lấy detail từ d
+                    var propertyInfo = detail?.GetType().GetProperty(diseaseField);
+                    var valueInt = propertyInfo?.GetValue(detail) as string;
 
-                    int i = 0;
-                    foreach (var item in data)
+                    return (valueInt ?? "")
+                        .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                        .Select(v => int.TryParse(v.Trim(), out int diseaseId) ? (int?)diseaseId : null);
+                })
+                .Where(diseaseId => diseaseId.HasValue)
+                .GroupBy(diseaseId => diseaseId.Value)
+                .Select(g => new { Id = g.Key, Count = g.Count() })
+                .Cast<dynamic>()
+                .ToList();
+
+                // ✅ Thống kê theo quý và tính tổng số ca bệnh cho từng loại
+                var statisticsByQuarter = dataBases.GroupBy(data => new
+                {
+                    Quarter = (data.data.DateSession.Month - 1) / 3 + 1
+                })
+                .Select(group =>
+                {
+                    var disease1Stats = GetDiseaseStats(group.SelectMany(g => g.detail), "Disease1");
+                    var disease2Stats = GetDiseaseStats(group.SelectMany(g => g.detail), "Disease2");
+                    var disease3Stats = GetDiseaseStats(group.SelectMany(g => g.detail), "Disease3");
+
+                    // ✅ Tính tổng số ca bệnh cho từng loại
+                    var totalDisease1 = disease1Stats.Sum(d => (int)d.Count);
+                    var totalDisease2 = disease2Stats.Sum(d => (int)d.Count);
+                    var totalDisease3 = disease3Stats.Sum(d => (int)d.Count);
+
+                    return new
                     {
-                        if (i != rowCount)
-                        {
-                            var destinationRange = wsBieuMau3.Cells[$"A{startRow + i}:AD{startRow + i}"];
-                            wsBieuMau3.Cells[$"A{startRow + rowCount}:AD{startRow + rowCount}"].Copy(destinationRange);
-                        }
+                        Quarter = $"Q{group.Key.Quarter}",
+                        Disease1Stats = disease1Stats,
+                        Disease2Stats = disease2Stats,
+                        Disease3Stats = disease3Stats,
+                        TotalDisease1 = totalDisease1, // ✅ Tổng của Disease1
+                        TotalDisease2 = totalDisease2, // ✅ Tổng của Disease2
+                        TotalDisease3 = totalDisease3  // ✅ Tổng của Disease3
+                    };
+                }).ToList();
 
-                        wsBieuMau3.Cells[$"A{startRow + i}"].Value = item.No;
-                        wsBieuMau3.Cells[$"D{startRow + i}"].Value = IsVietnamese ? item.NameVN : item.NameTW;
-                        wsBieuMau3.Cells[$"O{startRow + i}"].Value = item.Q1;
-                        wsBieuMau3.Cells[$"S{startRow + i}"].Value = item.Q2;
-                        wsBieuMau3.Cells[$"W{startRow + i}"].Value = item.Q3;
-                        wsBieuMau3.Cells[$"AA{startRow + i}"].Value = item.Q4;
-                        i++;
-                    }
-                }
+                var dt31 = dt308Diseases.Where(r => r.DiseaseType == 1).Select((r, index) => new
+                {
+                    No = index + 1,
+                    NameVN = r.DisplayNameVN,
+                    NameTW = r.DisplayNameTW,
+                    Q1 = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q1")?.Disease1Stats.FirstOrDefault(u => u.Id == r.Id)?.Count ?? "-",
+                    Q2 = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q2")?.Disease1Stats.FirstOrDefault(u => u.Id == r.Id)?.Count ?? "-",
+                    Q3 = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q3")?.Disease1Stats.FirstOrDefault(u => u.Id == r.Id)?.Count ?? "-",
+                    Q4 = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q4")?.Disease1Stats.FirstOrDefault(u => u.Id == r.Id)?.Count ?? "-"
+                }).ToList();
 
-                // Gọi hàm cho từng trường hợp
-                InsertDataWS3(21, dt32, false);
-                InsertDataWS3(18, dt31, false);
-                InsertDataWS3(8, dt32);
-                InsertDataWS3(5, dt31);
+                var dt32 = dt308Diseases.Where(r => r.DiseaseType == 3).Select((r, index) => new
+                {
+                    No = index + 1,
+                    NameVN = r.DisplayNameVN,
+                    NameTW = r.DisplayNameTW,
+                    Q1 = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q1")?.Disease2Stats.FirstOrDefault(u => u.Id == r.Id)?.Count ?? "-",
+                    Q2 = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q2")?.Disease2Stats.FirstOrDefault(u => u.Id == r.Id)?.Count ?? "-",
+                    Q3 = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q3")?.Disease2Stats.FirstOrDefault(u => u.Id == r.Id)?.Count ?? "-",
+                    Q4 = statisticsByQuarter.FirstOrDefault(u => u.Quarter == "Q4")?.Disease2Stats.FirstOrDefault(u => u.Id == r.Id)?.Count ?? "-"
+                }).ToList();
 
                 // Biểu mẫu 4: TÌNH HÌNH NGHỈ DO ỐM, TAI NẠN LAO ĐỘNG VÀ BỆNH NGHỀ NGHIỆP
-                int flag = 8;
-                for (int i = 0; i < dt5.Count; i++)
+                List<SickData> sickDatas = new List<SickData>();
+                using (PdfReader reader = new PdfReader(sickFile))
                 {
-                    wsBieuMau4.Cells[$"E{flag + i}"].Value = dt4[i].Count;
-                    wsBieuMau4.Cells[$"I{flag + i}"].Value = dt4[i].TotalTime / 8;
+                    for (int i = 1; i <= reader.NumberOfPages; i++)
+                    {
+                        string text = PdfTextExtractor.GetTextFromPage(reader, i);
+
+                        var matches = new
+                        {
+                            DataList = Regex.Matches(text, @"\d{8}\s+0[1|2]\s+\d{4}\s+\d{4}\s+[\d.]+").Cast<Match>().Select(m => m.Value).ToList(),
+                            Id = Regex.Match(text, @"VNW\d{7}").Value,
+                            Month = Regex.Match(text, @"\d{7}-\d{7}").Value
+                        };
+
+                        if (!string.IsNullOrEmpty(matches.Month) && !string.IsNullOrEmpty(matches.Id) && matches.DataList.Count > 0)
+                        {
+                            sickDatas.Add(new SickData
+                            {
+                                Id = matches.Id,
+                                Data = matches.DataList,
+                                TotalTime = matches.DataList.Sum(s => double.TryParse(s.Split().Last(), out double val) ? val : 0),
+                                Count = matches.DataList.Count,
+                                Time = matches.Month.Split('-')[1].Substring(3, 2)
+                            });
+                        }
+                    }
                 }
+
+                var dt4 = sickDatas
+                    .GroupBy(a => a.Time)
+                    .Select(dtg => new SickData
+                    {
+                        Time = dtg.Key,
+                        TotalTime = dtg.Sum(r => r.TotalTime),
+                        Count = dtg.Sum(r => r.Count),
+                    }).OrderBy(r => r.Time).ToList();
 
                 // Biểu mẫu 5: QUẢN LÝ BỆNH MÃN TÍNH
-                int dt5RowIns = dt5.Count() - 1;
+                int CalculateAge(DateTime? dob) => dob.HasValue ? DateTime.Now.Year - dob.Value.Year - (DateTime.Now < dob.Value.AddYears(DateTime.Now.Year - dob.Value.Year) ? 1 : 0) : 0;
 
-                void InsertDataWS5(int startRow, bool IsVietnamese = true)
-                {
-                    int index5 = 0;
-                    wsBieuMau5.InsertRow(startRow, dt5RowIns);
-                    int indexMergeStart = startRow - 1;
-                    int indexMergeStop = startRow - 1;
-                    string valueCell5 = IsVietnamese ? dt5.FirstOrDefault()?.UserNameVN : dt5.FirstOrDefault()?.UserNameTW;
-
-                    foreach (var item in dt5)
+                var dt5 = sessionFilter
+                    .Where(r => r.CheckType != f308_CheckSession_Info.KSK_TruocViecLam)
+                    .SelectMany(data => dt308CheckDetail
+                        .Where(detail => detail.SessionId == data.Id && !string.IsNullOrEmpty(detail.Disease2))
+                        .SelectMany(detail => detail.Disease2.Split(',')
+                            .Select(diseaseId => new { detail, diseaseId })))
+                    .Join(users, x => x.detail.EmpId, user => user.Id, (x, user) => new { x.detail, x.diseaseId, user })
+                    .Join(dt308Diseases, x => x.diseaseId.Trim(), disease => disease.Id.ToString(), (x, disease) => new
                     {
-                        if (item != dt5.Last())
-                        {
-                            var destinationRange = wsBieuMau5.Cells[$"A{startRow + index5}:AD{startRow + index5}"];
-                            wsBieuMau5.Cells[$"A{startRow - 1}:AD{startRow - 1}"].Copy(destinationRange);
-                            wsBieuMau5.Rows[startRow + index5].Height = wsBieuMau5.Rows[startRow - 1].Height;
-                        }
-
-                        wsBieuMau5.Cells[$"A{startRow - 1 + index5}"].Value = item.UserIdDept;
-                        wsBieuMau5.Cells[$"E{startRow - 1 + index5}"].Value = IsVietnamese ? item.UserNameVN : item.UserNameTW;
-                        wsBieuMau5.Cells[$"J{startRow - 1 + index5}"].Value = IsVietnamese ? item.DiseaseNameVN : item.DiseaseNameTW;
-                        wsBieuMau5.Cells[$"O{startRow - 1 + index5}"].Value = item.Sex == true ? item.Age.ToString() : "";
-                        wsBieuMau5.Cells[$"Q{startRow - 1 + index5}"].Value = item.Sex != true ? item.Age.ToString() : "";
-                        wsBieuMau5.Cells[$"S{startRow - 1 + index5}"].Value = item.JobAge;
-
-                        // Kiểm tra nếu giá trị UserName thay đổi -> merge ô trước đó
-                        string currentUserName = IsVietnamese ? item.UserNameVN : item.UserNameTW;
-                        if (currentUserName != valueCell5)
-                        {
-                            // Merge các ô từ indexMergeStart đến indexMergeStop
-                            if (indexMergeStop > indexMergeStart)
-                            {
-                                wsBieuMau5.Cells[$"A{indexMergeStart}:D{indexMergeStop}"].Merge = true;
-                                wsBieuMau5.Cells[$"E{indexMergeStart}:I{indexMergeStop}"].Merge = true;
-                                wsBieuMau5.Cells[$"O{indexMergeStart}:P{indexMergeStop}"].Merge = true;
-                                wsBieuMau5.Cells[$"Q{indexMergeStart}:R{indexMergeStop}"].Merge = true;
-                                wsBieuMau5.Cells[$"S{indexMergeStart}:T{indexMergeStop}"].Merge = true;
-                            }
-
-                            // Cập nhật giá trị mới cho UserName
-                            valueCell5 = currentUserName;
-                            indexMergeStart = startRow - 1 + index5;
-                        }
-
-                        indexMergeStop = startRow - 1 + index5;
-                        index5++;
-                    }
-
-                    // Merge lần cuối cùng nếu cần
-                    if (indexMergeStop > indexMergeStart)
-                    {
-                        wsBieuMau5.Cells[$"A{indexMergeStart}:D{indexMergeStop}"].Merge = true;
-                        wsBieuMau5.Cells[$"E{indexMergeStart}:I{indexMergeStop}"].Merge = true;
-                        wsBieuMau5.Cells[$"O{indexMergeStart}:P{indexMergeStop}"].Merge = true;
-                        wsBieuMau5.Cells[$"Q{indexMergeStart}:R{indexMergeStop}"].Merge = true;
-                        wsBieuMau5.Cells[$"S{indexMergeStart}:T{indexMergeStop}"].Merge = true;
-                    }
-                }
-
-                InsertDataWS5(13, false);
-                InsertDataWS5(6, true);
+                        UserIdDept = x.user.IdDepartment,
+                        UserNameVN = x.user.DisplayNameVN,
+                        DiseaseNameVN = disease.DisplayNameVN,
+                        UserNameTW = x.user.DisplayName,
+                        DiseaseNameTW = disease.DisplayNameTW,
+                        Sex = x.user.Sex,
+                        Age = CalculateAge(x.user.DOB),
+                        JobAge = CalculateAge(x.user.DateCreate)
+                    })
+                    .OrderBy(r => r.UserNameVN)
+                    .ToList();
 
                 // Biểu mẫu 6: QUẢN LÝ BỆNH MÃN TÍNH THEO TỪNG BỆNH
-                int dt6RowIns = dt6.Count();
-
-                void InsertDataWS6(int startRow, bool IsVietnamese = true)
+                var dt6 = dt5.GroupBy(r => new { r.DiseaseNameVN, r.DiseaseNameTW }).Select(g => new
                 {
-                    int step = 5;
-
-                    for (int i = 0; i < dt6RowIns; i++)
-                    {
-                        int index6 = 0;
-
-                        if (i > 0)
-                        {
-                            wsBieuMau6.InsertRow(startRow, step);
-                            var destinationRange = wsBieuMau6.Cells[$"A{startRow}:Z{startRow + step - 1}"];
-                            wsBieuMau6.Cells[$"A{startRow + step}:Z{startRow - 1 + step * 2}"].Copy(destinationRange);
-                        }
-
-                        if (dt6[i].Users.Count > 1)
-                        {
-                            wsBieuMau6.InsertRow(startRow + step, dt6[i].Users.Count - 1);
-                        }
-
-                        foreach (var item in dt6[i].Users)
-                        {
-                            var destinationRange = wsBieuMau6.Cells[$"A{startRow + step - 1 + index6}:Z{startRow + step - 1 + index6}"];
-                            wsBieuMau6.Cells[$"A{startRow + 4}:Z{startRow + 4}"].Copy(destinationRange);
-
-                            wsBieuMau6.Cells[$"A{startRow + 1}"].Value = IsVietnamese
-                                ? $"Tên bệnh*: {item.DiseaseNameVN}"
-                                : $"慢性病名稱*：{item.DiseaseNameTW}";
-
-                            wsBieuMau6.Cells[$"A{startRow + 4 + index6}"].Value = index6 + 1;
-                            wsBieuMau6.Cells[$"B{startRow + 4 + index6}"].Value = item.UserIdDept;
-                            wsBieuMau6.Cells[$"F{startRow + 4 + index6}"].Value = IsVietnamese ? item.UserNameVN : item.UserNameTW;
-                            wsBieuMau6.Cells[$"K{startRow + 4 + index6}"].Value = item.Sex == true ? item.Age.ToString() : "";
-                            wsBieuMau6.Cells[$"M{startRow + 4 + index6}"].Value = item.Sex != true ? item.Age.ToString() : "";
-                            wsBieuMau6.Cells[$"O{startRow + 4 + index6}"].Value = item.JobAge;
-
-                            index6++;
-                        }
-                    }
-                }
-
-                // Gọi hàm
-                InsertDataWS6(9, false);
-                InsertDataWS6(2, true);
+                    DiseaseNameVN = g.Key.DiseaseNameVN,
+                    DiseaseNameTW = g.Key.DiseaseNameTW,
+                    Users = g.ToList()
+                }).ToList();
 
 
                 // Biểu mẫu 7:THEO DÕI BỆNH NGHỀ NGHIỆP
-                int dt7RowIns = dt7.Count() - 1;
-                void InsertDataWS7(int startRow, bool IsVietnamese = true)
-                {
-                    int index7 = 0;
-                    wsBieuMau7.InsertRow(startRow, dt7RowIns);
-
-                    foreach (var item in dt7)
-                    {
-                        if (item != dt7.Last())
-                        {
-                            var destinationRange = wsBieuMau7.Cells[$"A{startRow + index7}:AD{startRow + index7}"];
-                            wsBieuMau7.Cells[$"A{startRow + dt7RowIns}:AD{startRow + dt7RowIns}"].Copy(destinationRange);
-                            wsBieuMau7.Rows[startRow + dt7RowIns].Height = wsBieuMau7.Rows[startRow].Height;
-                        }
-
-                        wsBieuMau7.Cells[$"A{startRow + index7}"].Value = item.ExamDate.ToString(IsVietnamese ? "dd/MM/yyyy" : "yyyy/MM/dd");
-                        wsBieuMau7.Cells[$"C{startRow + index7}"].Value = IsVietnamese ? item.DiseaseDisplayNameVN : item.DiseaseDisplayNameTW;
-                        wsBieuMau7.Cells[$"G{startRow + index7}"].Value = item.TotalCount;
-                        wsBieuMau7.Cells[$"J{startRow + index7}"].Value = item.CountMale;
-
-                        index7++;
-                    }
-                }
-
-                if (dt7RowIns > 0)
-                {
-                    InsertDataWS7(12, false);
-                    InsertDataWS7(5, true);
-                }
+                var dt7 = (from data in sessionFilter
+                           where data.CheckType != f308_CheckSession_Info.KSK_TruocViecLam
+                           from detail in dt308CheckDetail
+                           join user in users on detail.EmpId equals user.Id
+                           where detail.SessionId == data.Id && !string.IsNullOrEmpty(detail.Disease3)
+                           from diseaseId in detail.Disease3.Split(',').Select(d => d.Trim()) // Tách và loại bỏ khoảng trắng
+                           join disease in dt308Diseases on diseaseId equals disease.Id.ToString()
+                           select new
+                           {
+                               ExamDate = data.DateSession,
+                               DiseaseId = disease.Id,
+                               DiseaseDisplayNameVN = disease.DisplayNameVN,
+                               DiseaseDisplayNameTW = disease.DisplayNameTW,
+                               UserSex = user.Sex
+                           })
+                            .GroupBy(r => new { r.DiseaseId, r.DiseaseDisplayNameVN, r.DiseaseDisplayNameTW, r.ExamDate })
+                            .Select(g => new
+                            {
+                                ExamDate = g.Key.ExamDate,
+                                DiseaseDisplayNameVN = g.Key.DiseaseDisplayNameVN,
+                                DiseaseDisplayNameTW = g.Key.DiseaseDisplayNameTW,
+                                TotalCount = g.Count(),
+                                CountMale = g.Count(x => x.UserSex == true),
+                                CountFemale = g.Count(x => x.UserSex != true)
+                            })
+                            .OrderBy(r => r.ExamDate)
+                            .ThenBy(r => r.DiseaseDisplayNameVN)
+                            .ToList();
 
                 // BIỂU TỔNG HỢP KIỂM TRA SỨC KHỎE
-                wsTongHop.Cells["M4"].Value = dtTongHop.tongnhanviec;
-                wsTongHop.Cells["M5"].Value = dtTongHop.kskthuongnien;
-                wsTongHop.Cells["M6"].Value = dtTongHop.kskdacbiet;
-                wsTongHop.Cells["M7"].Value = dtTongHop.kskxingiayphepld;
-                wsTongHop.Cells["M9"].Value = dtTongHop.ksknhanvienmoi;
-                wsTongHop.Cells["M12"].Value = dtTongHop.ksktruocvietlam;
-                wsTongHop.Cells["M10"].Value = dtTongHop.luuchuc;
-                wsTongHop.Cells["M11"].Value = dtTongHop.kskroinghiviec;
-                wsTongHop.Cells["AC4"].Value = dtTongHop.chuakhamdanghiviec;
-                wsTongHop.Cells["A3"].Value = $"Bộ phận: {dtTongHop.bophanvn}";
-                wsTongHop.Cells["A17"].Value = $"單位：{dtTongHop.bophantw}";
 
-                // Chỉ lấy giá trị
-                foreach (var ws in pck.Workbook.Worksheets)
+                var kskThongThuong = dataBases.Where(r => r.data.CheckType == f308_CheckSession_Info.KSK_ThongThuong).SelectMany(r => r.detail).ToList();
+                var kskDacBiet = dataBases.Where(r => r.data.CheckType == f308_CheckSession_Info.KSK_DacBiet).SelectMany(r => r.detail).ToList();
+                var kskXinGiayPhepLD = dataBases.Where(r => r.data.CheckType == f308_CheckSession_Info.KSK_XinGiayPhepLD).SelectMany(r => r.detail).ToList();
+                var kskNhanVienMoi = dataBases.Where(r => r.data.CheckType == f308_CheckSession_Info.KSK_NhanVienMoi).SelectMany(r => r.detail).ToList();
+                var kskTruocViecLam = dataBases.Where(r => r.data.CheckType == f308_CheckSession_Info.KSK_TruocViecLam).SelectMany(r => r.detail).ToList();
+                int countKskRoiNghiViec = dataBases.SelectMany(r => r.detail).Where(r => r.detail.HealthRating != -1)
+                    .Join(users, data => data.detail.EmpId, usr => usr.Id, (data, usr) => new { data, usr })
+                    .Count(x => x.usr.Status == 1);
+
+                int chuakhammanghiviec = dataBases.SelectMany(r => r.detail).Where(r => r.detail.HealthRating == -1)
+                    .Join(users, data => data.detail.EmpId, usr => usr.Id, (data, usr) => new { data, usr })
+                    .Count(x => x.usr.Status == 1);
+                var depts = dm_DeptBUS.Instance.GetList();
+                var dtTongHop = new
                 {
-                    ws.Calculate();
+                    tongnhanviec = users.Count(r => r.IdDepartment.StartsWith(idDept2word) && r.Status != 1),
+                    luuchuc = users.Count(r => r.IdDepartment.StartsWith(idDept2word) && r.Status == 2),
+                    nghiviec = users.Count(r => r.IdDepartment.StartsWith(idDept2word) && r.Status == 1),
+                    kskthuongnien = kskThongThuong.Count(r => r.detail.HealthRating != -1),
+                    kskdacbiet = kskDacBiet.Count(r => r.detail.HealthRating != -1),
+                    kskxingiayphepld = kskXinGiayPhepLD.Count(r => r.detail.HealthRating != -1),
+                    ksknhanvienmoi = kskNhanVienMoi.Count(r => r.detail.HealthRating != -1),
+                    ksktruocvietlam = kskTruocViecLam.Count(r => r.detail.HealthRating != -1),
+                    kskroinghiviec = countKskRoiNghiViec,
+                    chuakhamdanghiviec = chuakhammanghiviec,
+                    bophanvn = depts.FirstOrDefault(r => r.Id == idDept2word)?.DisplayNameVN,
+                    bophantw = depts.FirstOrDefault(r => r.Id == idDept2word)?.DisplayName,
+                };
 
-                    int rowCount = ws.Dimension?.Rows ?? 0;  // Lấy số hàng có dữ liệu
-                    int colCount = ws.Dimension?.Columns ?? 0; // Lấy số cột có dữ liệu
+                File.Copy(PATH_TEMPLATE, PATH_EXPORT, true);
 
-                    if (rowCount > 0 && colCount > 0)
+                FileInfo newFile = new FileInfo(PATH_EXPORT);
+                using (ExcelPackage pck = new ExcelPackage(newFile))
+                {
+                    var wsPhuLuc2 = pck.Workbook.Worksheets["Phụ lục 2"];
+                    var wsBieuMau1 = pck.Workbook.Worksheets["Biểu mẫu 1"];
+                    var wsBieuMau2 = pck.Workbook.Worksheets["Biểu mẫu 2"];
+                    var wsBieuMau3 = pck.Workbook.Worksheets["Biểu mẫu 3"];
+                    var wsBieuMau4 = pck.Workbook.Worksheets["Biểu mẫu 4"];
+                    var wsBieuMau5 = pck.Workbook.Worksheets["Biểu mẫu 5"];
+                    var wsBieuMau6 = pck.Workbook.Worksheets["Biểu mẫu 6"];
+                    var wsBieuMau7 = pck.Workbook.Worksheets["Biểu mẫu 7"];
+                    var wsTongHop = pck.Workbook.Worksheets["Tổng hợp"];
+
+                    wsBieuMau6.DefaultRowHeight = 20;
+
+                    wsPhuLuc2.Cells["A2"].Value = $"(Năm {yearStatistic})";
+                    wsPhuLuc2.Cells["A10"].Value = $"Năm : {yearStatistic}";
+
+                    wsPhuLuc2.Cells["A16"].Value = $"({yearStatistic}年)";
+                    wsPhuLuc2.Cells["A24"].Value = $"年：{yearStatistic}";
+
+                    // Biểu mẫu 1: QUẢN LÝ SỨC KHỎE TRƯỚC KHI BỐ TRÍ VIỆC LÀM
+                    var dt1 = dt12.Where(r => r.checktype == f308_CheckSession_Info.KSK_TruocViecLam);
+                    int dt1RowIns = dt1.Count() - 1;
+
+                    void InsertDataWS1(int startRow, bool IsVietnamese = true)
                     {
-                        object[,] values = new object[rowCount, colCount];
+                        int index1 = 0;
+                        wsBieuMau1.InsertRow(startRow, dt1RowIns);
+                        string formatDate = IsVietnamese ? "dd/MM/yyyy" : "yyyy/MM/dd";
 
-                        // Lấy toàn bộ dữ liệu và loại bỏ công thức
-                        for (int row = 1; row <= rowCount; row++)
+                        foreach (var item in dt1)
                         {
-                            for (int col = 1; col <= colCount; col++)
+                            if (item != dt1.Last())
                             {
-                                values[row - 1, col - 1] = ws.Cells[row, col].Value; // Chỉ lấy giá trị
+                                var destinationRange = wsBieuMau1.Cells[$"A{startRow + index1}:Z{startRow + index1}"];
+                                wsBieuMau1.Cells[$"A{startRow - 1}:Z{startRow - 1}"].Copy(destinationRange);
+                                wsBieuMau1.Rows[startRow + index1].Height = wsBieuMau1.Rows[startRow - 1].Height;
                             }
+
+                            wsBieuMau1.Cells[$"A{startRow - 1 + index1}"].Value = $"{item.datetime?.ToString(formatDate)}";
+                            wsBieuMau1.Cells[$"G{startRow - 1 + index1}"].Value = IsVietnamese ? item.male_female_vn : item.male_female_tw;
+                            wsBieuMau1.Cells[$"L{startRow - 1 + index1}"].Value = item.total;
+                            wsBieuMau1.Cells[$"Q{startRow - 1 + index1}"].Value = item.h1;
+                            wsBieuMau1.Cells[$"S{startRow - 1 + index1}"].Value = item.h2;
+                            wsBieuMau1.Cells[$"U{startRow - 1 + index1}"].Value = item.h3;
+                            wsBieuMau1.Cells[$"W{startRow - 1 + index1}"].Value = item.h4;
+                            wsBieuMau1.Cells[$"Y{startRow - 1 + index1}"].Value = item.h5;
+
+                            index1++;
+                        }
+                    }
+
+                    if (dt1RowIns > 0)
+                    {
+                        InsertDataWS1(12, false);
+                        InsertDataWS1(6, true);
+                    }
+
+                    // Biểu mẫu 2: QUẢN LÝ SỨC KHỎE NGƯỜI LAO ĐỘNG THÔNG QUA KHÁM SỨC KHỎE ĐỊNH KỲ
+                    var dt2 = dt12.Where(r => r.checktype != f308_CheckSession_Info.KSK_TruocViecLam).ToList();
+                    int dt2RowIns = dt2.Count() - 1;
+
+                    void InsertDataWS2(int startRow, bool IsVietnamese = true)
+                    {
+                        int index2 = 0;
+                        wsBieuMau2.InsertRow(startRow, dt2RowIns);
+                        string checkNameProp = IsVietnamese ? "checkName_vn" : "checkName_tw";
+                        string formatDate = IsVietnamese ? "dd/MM/yyyy" : "yyyy/MM/dd";
+
+                        foreach (var item in dt2)
+                        {
+                            if (item != dt2.Last())
+                            {
+                                var destinationRange = wsBieuMau2.Cells[$"A{startRow + index2}:Z{startRow + index2}"];
+                                wsBieuMau2.Cells[$"A{startRow - 1}:Z{startRow - 1}"].Copy(destinationRange);
+                                wsBieuMau2.Rows[startRow + index2].Height = wsBieuMau2.Rows[startRow - 1].Height;
+                            }
+
+                            wsBieuMau2.Cells[$"A{startRow - 1 + index2}"].Value = $"{item.datetime?.ToString(formatDate)}\r\n{item.GetType().GetProperty(checkNameProp).GetValue(item)}";
+                            wsBieuMau2.Cells[$"G{startRow - 1 + index2}"].Value = IsVietnamese ? item.male_female_vn : item.male_female_tw;
+                            wsBieuMau2.Cells[$"L{startRow - 1 + index2}"].Value = item.total;
+                            wsBieuMau2.Cells[$"Q{startRow - 1 + index2}"].Value = item.h1;
+                            wsBieuMau2.Cells[$"S{startRow - 1 + index2}"].Value = item.h2;
+                            wsBieuMau2.Cells[$"U{startRow - 1 + index2}"].Value = item.h3;
+                            wsBieuMau2.Cells[$"W{startRow - 1 + index2}"].Value = item.h4;
+                            wsBieuMau2.Cells[$"Y{startRow - 1 + index2}"].Value = item.h5;
+
+                            index2++;
+                        }
+                    }
+
+                    if (dt2RowIns > 0)
+                    {
+                        InsertDataWS2(12, false);
+                        InsertDataWS2(6, true);
+                    }
+
+                    // Biểu mẫu 3: TÌNH HÌNH BỆNH TẬT TRONG THỜI GIAN BÁO CÁO
+                    void InsertDataWS3(int startRow, IEnumerable<dynamic> data, bool IsVietnamese = true)
+                    {
+                        int rowCount = data.Count() - 1;
+                        wsBieuMau3.InsertRow(startRow, rowCount);
+
+                        int i = 0;
+                        foreach (var item in data)
+                        {
+                            if (i != rowCount)
+                            {
+                                var destinationRange = wsBieuMau3.Cells[$"A{startRow + i}:AD{startRow + i}"];
+                                wsBieuMau3.Cells[$"A{startRow + rowCount}:AD{startRow + rowCount}"].Copy(destinationRange);
+                            }
+
+                            wsBieuMau3.Cells[$"A{startRow + i}"].Value = item.No;
+                            wsBieuMau3.Cells[$"D{startRow + i}"].Value = IsVietnamese ? item.NameVN : item.NameTW;
+                            wsBieuMau3.Cells[$"O{startRow + i}"].Value = item.Q1;
+                            wsBieuMau3.Cells[$"S{startRow + i}"].Value = item.Q2;
+                            wsBieuMau3.Cells[$"W{startRow + i}"].Value = item.Q3;
+                            wsBieuMau3.Cells[$"AA{startRow + i}"].Value = item.Q4;
+                            i++;
+                        }
+                    }
+
+                    // Gọi hàm cho từng trường hợp
+                    InsertDataWS3(21, dt32, false);
+                    InsertDataWS3(18, dt31, false);
+                    InsertDataWS3(8, dt32);
+                    InsertDataWS3(5, dt31);
+
+                    // Biểu mẫu 4: TÌNH HÌNH NGHỈ DO ỐM, TAI NẠN LAO ĐỘNG VÀ BỆNH NGHỀ NGHIỆP
+                    int flag = 8;
+                    for (int i = 0; i < dt5.Count; i++)
+                    {
+                        wsBieuMau4.Cells[$"E{flag + i}"].Value = dt4[i].Count;
+                        wsBieuMau4.Cells[$"I{flag + i}"].Value = dt4[i].TotalTime / 8;
+                    }
+
+                    // Biểu mẫu 5: QUẢN LÝ BỆNH MÃN TÍNH
+                    int dt5RowIns = dt5.Count() - 1;
+
+                    void InsertDataWS5(int startRow, bool IsVietnamese = true)
+                    {
+                        int index5 = 0;
+                        wsBieuMau5.InsertRow(startRow, dt5RowIns);
+                        int indexMergeStart = startRow - 1;
+                        int indexMergeStop = startRow - 1;
+                        string valueCell5 = IsVietnamese ? dt5.FirstOrDefault()?.UserNameVN : dt5.FirstOrDefault()?.UserNameTW;
+
+                        foreach (var item in dt5)
+                        {
+                            if (item != dt5.Last())
+                            {
+                                var destinationRange = wsBieuMau5.Cells[$"A{startRow + index5}:AD{startRow + index5}"];
+                                wsBieuMau5.Cells[$"A{startRow - 1}:AD{startRow - 1}"].Copy(destinationRange);
+                                wsBieuMau5.Rows[startRow + index5].Height = wsBieuMau5.Rows[startRow - 1].Height;
+                            }
+
+                            wsBieuMau5.Cells[$"A{startRow - 1 + index5}"].Value = item.UserIdDept;
+                            wsBieuMau5.Cells[$"E{startRow - 1 + index5}"].Value = IsVietnamese ? item.UserNameVN : item.UserNameTW;
+                            wsBieuMau5.Cells[$"J{startRow - 1 + index5}"].Value = IsVietnamese ? item.DiseaseNameVN : item.DiseaseNameTW;
+                            wsBieuMau5.Cells[$"O{startRow - 1 + index5}"].Value = item.Sex == true ? item.Age.ToString() : "";
+                            wsBieuMau5.Cells[$"Q{startRow - 1 + index5}"].Value = item.Sex != true ? item.Age.ToString() : "";
+                            wsBieuMau5.Cells[$"S{startRow - 1 + index5}"].Value = item.JobAge;
+
+                            // Kiểm tra nếu giá trị UserName thay đổi -> merge ô trước đó
+                            string currentUserName = IsVietnamese ? item.UserNameVN : item.UserNameTW;
+                            if (currentUserName != valueCell5)
+                            {
+                                // Merge các ô từ indexMergeStart đến indexMergeStop
+                                if (indexMergeStop > indexMergeStart)
+                                {
+                                    wsBieuMau5.Cells[$"A{indexMergeStart}:D{indexMergeStop}"].Merge = true;
+                                    wsBieuMau5.Cells[$"E{indexMergeStart}:I{indexMergeStop}"].Merge = true;
+                                    wsBieuMau5.Cells[$"O{indexMergeStart}:P{indexMergeStop}"].Merge = true;
+                                    wsBieuMau5.Cells[$"Q{indexMergeStart}:R{indexMergeStop}"].Merge = true;
+                                    wsBieuMau5.Cells[$"S{indexMergeStart}:T{indexMergeStop}"].Merge = true;
+                                }
+
+                                // Cập nhật giá trị mới cho UserName
+                                valueCell5 = currentUserName;
+                                indexMergeStart = startRow - 1 + index5;
+                            }
+
+                            indexMergeStop = startRow - 1 + index5;
+                            index5++;
                         }
 
-                        // Ghi đè dữ liệu lên vùng cũ (bỏ công thức)
-                        ws.Cells[1, 1, rowCount, colCount].Value = values;
-
-                        // Xóa tất cả ràng buộc kiểm tra dữ liệu (Data Validation)
-                        ws.DataValidations.Clear();
+                        // Merge lần cuối cùng nếu cần
+                        if (indexMergeStop > indexMergeStart)
+                        {
+                            wsBieuMau5.Cells[$"A{indexMergeStart}:D{indexMergeStop}"].Merge = true;
+                            wsBieuMau5.Cells[$"E{indexMergeStart}:I{indexMergeStop}"].Merge = true;
+                            wsBieuMau5.Cells[$"O{indexMergeStart}:P{indexMergeStop}"].Merge = true;
+                            wsBieuMau5.Cells[$"Q{indexMergeStart}:R{indexMergeStop}"].Merge = true;
+                            wsBieuMau5.Cells[$"S{indexMergeStart}:T{indexMergeStop}"].Merge = true;
+                        }
                     }
+
+                    InsertDataWS5(13, false);
+                    InsertDataWS5(6, true);
+
+                    // Biểu mẫu 6: QUẢN LÝ BỆNH MÃN TÍNH THEO TỪNG BỆNH
+                    int dt6RowIns = dt6.Count();
+
+                    void InsertDataWS6(int startRow, bool IsVietnamese = true)
+                    {
+                        int step = 5;
+
+                        for (int i = 0; i < dt6RowIns; i++)
+                        {
+                            int index6 = 0;
+
+                            if (i > 0)
+                            {
+                                wsBieuMau6.InsertRow(startRow, step);
+                                var destinationRange = wsBieuMau6.Cells[$"A{startRow}:Z{startRow + step - 1}"];
+                                wsBieuMau6.Cells[$"A{startRow + step}:Z{startRow - 1 + step * 2}"].Copy(destinationRange);
+                            }
+
+                            if (dt6[i].Users.Count > 1)
+                            {
+                                wsBieuMau6.InsertRow(startRow + step, dt6[i].Users.Count - 1);
+                            }
+
+                            foreach (var item in dt6[i].Users)
+                            {
+                                var destinationRange = wsBieuMau6.Cells[$"A{startRow + step - 1 + index6}:Z{startRow + step - 1 + index6}"];
+                                wsBieuMau6.Cells[$"A{startRow + 4}:Z{startRow + 4}"].Copy(destinationRange);
+
+                                wsBieuMau6.Cells[$"A{startRow + 1}"].Value = IsVietnamese
+                                    ? $"Tên bệnh*: {item.DiseaseNameVN}"
+                                    : $"慢性病名稱*：{item.DiseaseNameTW}";
+
+                                wsBieuMau6.Cells[$"A{startRow + 4 + index6}"].Value = index6 + 1;
+                                wsBieuMau6.Cells[$"B{startRow + 4 + index6}"].Value = item.UserIdDept;
+                                wsBieuMau6.Cells[$"F{startRow + 4 + index6}"].Value = IsVietnamese ? item.UserNameVN : item.UserNameTW;
+                                wsBieuMau6.Cells[$"K{startRow + 4 + index6}"].Value = item.Sex == true ? item.Age.ToString() : "";
+                                wsBieuMau6.Cells[$"M{startRow + 4 + index6}"].Value = item.Sex != true ? item.Age.ToString() : "";
+                                wsBieuMau6.Cells[$"O{startRow + 4 + index6}"].Value = item.JobAge;
+
+                                index6++;
+                            }
+                        }
+                    }
+
+                    // Gọi hàm
+                    InsertDataWS6(9, false);
+                    InsertDataWS6(2, true);
+
+
+                    // Biểu mẫu 7:THEO DÕI BỆNH NGHỀ NGHIỆP
+                    int dt7RowIns = dt7.Count() - 1;
+                    void InsertDataWS7(int startRow, bool IsVietnamese = true)
+                    {
+                        int index7 = 0;
+                        wsBieuMau7.InsertRow(startRow, dt7RowIns);
+
+                        foreach (var item in dt7)
+                        {
+                            if (item != dt7.Last())
+                            {
+                                var destinationRange = wsBieuMau7.Cells[$"A{startRow + index7}:AD{startRow + index7}"];
+                                wsBieuMau7.Cells[$"A{startRow + dt7RowIns}:AD{startRow + dt7RowIns}"].Copy(destinationRange);
+                                wsBieuMau7.Rows[startRow + dt7RowIns].Height = wsBieuMau7.Rows[startRow].Height;
+                            }
+
+                            wsBieuMau7.Cells[$"A{startRow + index7}"].Value = item.ExamDate.ToString(IsVietnamese ? "dd/MM/yyyy" : "yyyy/MM/dd");
+                            wsBieuMau7.Cells[$"C{startRow + index7}"].Value = IsVietnamese ? item.DiseaseDisplayNameVN : item.DiseaseDisplayNameTW;
+                            wsBieuMau7.Cells[$"G{startRow + index7}"].Value = item.TotalCount;
+                            wsBieuMau7.Cells[$"J{startRow + index7}"].Value = item.CountMale;
+
+                            index7++;
+                        }
+                    }
+
+                    if (dt7RowIns > 0)
+                    {
+                        InsertDataWS7(12, false);
+                        InsertDataWS7(5, true);
+                    }
+
+                    // BIỂU TỔNG HỢP KIỂM TRA SỨC KHỎE
+                    wsTongHop.Cells["M4"].Value = dtTongHop.tongnhanviec;
+                    wsTongHop.Cells["M5"].Value = dtTongHop.kskthuongnien;
+                    wsTongHop.Cells["M6"].Value = dtTongHop.kskdacbiet;
+                    wsTongHop.Cells["M7"].Value = dtTongHop.kskxingiayphepld;
+                    wsTongHop.Cells["M9"].Value = dtTongHop.ksknhanvienmoi;
+                    wsTongHop.Cells["M12"].Value = dtTongHop.ksktruocvietlam;
+                    wsTongHop.Cells["M10"].Value = dtTongHop.luuchuc;
+                    wsTongHop.Cells["M11"].Value = dtTongHop.kskroinghiviec;
+                    wsTongHop.Cells["AC4"].Value = dtTongHop.chuakhamdanghiviec;
+                    wsTongHop.Cells["A3"].Value = $"Bộ phận: {dtTongHop.bophanvn}";
+                    wsTongHop.Cells["A17"].Value = $"單位：{dtTongHop.bophantw}";
+
+                    // Chỉ lấy giá trị
+                    foreach (var ws in pck.Workbook.Worksheets.Where(r => r.Name != "Tổng hợp"))
+                    {
+                        ws.Calculate();
+
+                        int rowCount = ws.Dimension?.Rows ?? 0;  // Lấy số hàng có dữ liệu
+                        int colCount = ws.Dimension?.Columns ?? 0; // Lấy số cột có dữ liệu
+
+                        if (rowCount > 0 && colCount > 0)
+                        {
+                            object[,] values = new object[rowCount, colCount];
+
+                            // Lấy toàn bộ dữ liệu và loại bỏ công thức
+                            for (int row = 1; row <= rowCount; row++)
+                            {
+                                for (int col = 1; col <= colCount; col++)
+                                {
+                                    values[row - 1, col - 1] = ws.Cells[row, col].Value; // Chỉ lấy giá trị
+                                }
+                            }
+
+                            // Ghi đè dữ liệu lên vùng cũ (bỏ công thức)
+                            ws.Cells[1, 1, rowCount, colCount].Value = values;
+
+                            // Xóa tất cả ràng buộc kiểm tra dữ liệu (Data Validation)
+                            ws.DataValidations.Clear();
+                        }
+                    }
+
+                    // Lưu và chỉ hiện Sheet BB
+                    pck.Save();
                 }
-
-                // Lưu và chỉ hiện Sheet BB
-                pck.Save();
-
-                SplashScreenManager.CloseDefaultWaitForm();
 
                 Process.Start(PATH_EXPORT);
             }

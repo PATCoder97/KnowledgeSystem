@@ -107,6 +107,7 @@ namespace KnowledgeSystem.Views._00_Generals
                     RegistryHelper.SaveSetting(RegistryHelper.LoginId, _userID);
                     TPConfigs.LoginSuccessful = true;
                     TPConfigs.LoginUser = usrLogin;
+                    TPConfigs.idDept2word = TPConfigs.LoginUser.IdDepartment.Substring(0, 2);
 
                     // Test
                     usrLogin.SecondaryPassword = encryptPass;

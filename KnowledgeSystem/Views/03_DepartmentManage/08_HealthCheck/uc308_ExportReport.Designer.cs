@@ -35,17 +35,17 @@
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.txbFilePath = new DevExpress.XtraEditors.ButtonEdit();
-            this.lcFilePath = new DevExpress.XtraLayout.LayoutControlItem();
             this.cbbYear = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.lcFilePath = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcDocLevel = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbFilePath.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcFilePath)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbYear.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcFilePath)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDocLevel)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,18 +60,6 @@
             this.layoutControl1.Size = new System.Drawing.Size(622, 40);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
-            // 
-            // Root
-            // 
-            this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
-            this.Root.GroupBordersVisible = false;
-            this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.lcFilePath,
-            this.lcDocLevel});
-            this.Root.Name = "Root";
-            this.Root.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 2);
-            this.Root.Size = new System.Drawing.Size(622, 40);
-            this.Root.TextVisible = false;
             // 
             // txbFilePath
             // 
@@ -90,23 +78,7 @@
             this.txbFilePath.Size = new System.Drawing.Size(354, 32);
             this.txbFilePath.StyleController = this.layoutControl1;
             this.txbFilePath.TabIndex = 17;
-            // 
-            // lcFilePath
-            // 
-            this.lcFilePath.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.lcFilePath.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
-            this.lcFilePath.AppearanceItemCaption.Options.UseFont = true;
-            this.lcFilePath.AppearanceItemCaption.Options.UseForeColor = true;
-            this.lcFilePath.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
-            this.lcFilePath.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
-            this.lcFilePath.Control = this.txbFilePath;
-            this.lcFilePath.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
-            this.lcFilePath.CustomizationFormText = "英越文名稱";
-            this.lcFilePath.Location = new System.Drawing.Point(172, 0);
-            this.lcFilePath.Name = "lcFilePath";
-            this.lcFilePath.Size = new System.Drawing.Size(446, 36);
-            this.lcFilePath.Text = "請假檔案";
-            this.lcFilePath.TextSize = new System.Drawing.Size(76, 24);
+            this.txbFilePath.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txbFilePath_ButtonClick);
             // 
             // cbbYear
             // 
@@ -125,6 +97,35 @@
             this.cbbYear.Size = new System.Drawing.Size(118, 32);
             this.cbbYear.StyleController = this.layoutControl1;
             this.cbbYear.TabIndex = 18;
+            // 
+            // Root
+            // 
+            this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            this.Root.GroupBordersVisible = false;
+            this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.lcFilePath,
+            this.lcDocLevel});
+            this.Root.Name = "Root";
+            this.Root.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 2);
+            this.Root.Size = new System.Drawing.Size(622, 40);
+            this.Root.TextVisible = false;
+            // 
+            // lcFilePath
+            // 
+            this.lcFilePath.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lcFilePath.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.lcFilePath.AppearanceItemCaption.Options.UseFont = true;
+            this.lcFilePath.AppearanceItemCaption.Options.UseForeColor = true;
+            this.lcFilePath.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.lcFilePath.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.lcFilePath.Control = this.txbFilePath;
+            this.lcFilePath.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.lcFilePath.CustomizationFormText = "英越文名稱";
+            this.lcFilePath.Location = new System.Drawing.Point(172, 0);
+            this.lcFilePath.Name = "lcFilePath";
+            this.lcFilePath.Size = new System.Drawing.Size(446, 36);
+            this.lcFilePath.Text = "請假檔案";
+            this.lcFilePath.TextSize = new System.Drawing.Size(76, 24);
             // 
             // lcDocLevel
             // 
@@ -155,10 +156,10 @@
             this.Load += new System.EventHandler(this.uc308_ExportReport_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbFilePath.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcFilePath)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbYear.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcFilePath)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDocLevel)).EndInit();
             this.ResumeLayout(false);
 
