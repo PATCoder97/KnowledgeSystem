@@ -167,9 +167,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             itemViewInfo = CreateMenuItem("查看資訊", ItemViewInfo_Click, TPSvgimages.View);
             itemUpdatePrice = CreateMenuItem("更新單價", ItemUpdatePrice_Click, TPSvgimages.Money);
 
-            itemMaterialIn = CreateMenuItem("收料", ItemMaterialIn_Click, TPSvgimages.Num2);
-            itemMaterialOut = CreateMenuItem("領用", ItemMaterialOut_Click, TPSvgimages.Num3);
-            itemMaterialTransfer = CreateMenuItem("轉庫", ItemMaterialTransfer_Click, TPSvgimages.Num1);
+            itemMaterialIn = CreateMenuItem("收料", ItemMaterialIn_Click, TPSvgimages.Num1);
+            itemMaterialOut = CreateMenuItem("領用", ItemMaterialOut_Click, TPSvgimages.Num2);
+            itemMaterialTransfer = CreateMenuItem("轉庫", ItemMaterialTransfer_Click, TPSvgimages.Num3);
             itemMaterialCheck = CreateMenuItem("盤點", ItemMaterialCheck_Click, TPSvgimages.Num4);
         }
 
@@ -315,11 +315,22 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 e.Menu.Items.Add(itemViewInfo);
                 e.Menu.Items.Add(itemUpdatePrice);
 
-                itemMaterialIn.BeginGroup = true;
-                e.Menu.Items.Add(itemMaterialIn);
-                e.Menu.Items.Add(itemMaterialOut);
-                e.Menu.Items.Add(itemMaterialTransfer);
-                e.Menu.Items.Add(itemMaterialCheck);
+
+                DXSubMenuItem dXSubMenuReports = new DXSubMenuItem("庫存作業") { SvgImage = TPSvgimages.PersonnelChanges };
+                dXSubMenuReports.ImageOptions.SvgImageSize = new Size(24, 24);
+
+                dXSubMenuReports.Items.Add(itemMaterialIn);
+                dXSubMenuReports.Items.Add(itemMaterialOut);
+                dXSubMenuReports.Items.Add(itemMaterialTransfer);
+                dXSubMenuReports.Items.Add(itemMaterialCheck);
+                dXSubMenuReports.BeginGroup = true;
+
+                e.Menu.Items.Add(dXSubMenuReports);
+
+                //e.Menu.Items.Add(itemMaterialIn);
+                //e.Menu.Items.Add(itemMaterialOut);
+                //e.Menu.Items.Add(itemMaterialTransfer);
+                //e.Menu.Items.Add(itemMaterialCheck);
             }
         }
 
