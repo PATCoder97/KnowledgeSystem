@@ -52,6 +52,8 @@
             this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnAdd = new DevExpress.XtraBars.BarButtonItem();
@@ -65,8 +67,6 @@
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gvForm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
@@ -247,6 +247,7 @@
             // 
             this.gridColumn4.Caption = "中文名稱";
             this.gridColumn4.FieldName = "data.DisplayName";
+            this.gridColumn4.MaxWidth = 300;
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 3;
@@ -256,6 +257,7 @@
             // 
             this.gridColumn16.Caption = "越文名稱";
             this.gridColumn16.FieldName = "data.DisplayNameVN";
+            this.gridColumn16.MaxWidth = 300;
             this.gridColumn16.Name = "gridColumn16";
             this.gridColumn16.Visible = true;
             this.gridColumn16.VisibleIndex = 4;
@@ -336,6 +338,22 @@
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
             this.gridColumn8.VisibleIndex = 13;
+            // 
+            // gridColumn9
+            // 
+            this.gridColumn9.Caption = "主文分類";
+            this.gridColumn9.FieldName = "data.MainCatorary";
+            this.gridColumn9.Name = "gridColumn9";
+            this.gridColumn9.Visible = true;
+            this.gridColumn9.VisibleIndex = 14;
+            // 
+            // gridColumn10
+            // 
+            this.gridColumn10.Caption = "小組";
+            this.gridColumn10.FieldName = "Subdept";
+            this.gridColumn10.Name = "gridColumn10";
+            this.gridColumn10.Visible = true;
+            this.gridColumn10.VisibleIndex = 15;
             // 
             // barManagerTP
             // 
@@ -499,22 +517,6 @@
             this.layoutControlItem1.Size = new System.Drawing.Size(1304, 497);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
-            // 
-            // gridColumn9
-            // 
-            this.gridColumn9.Caption = "主文分類";
-            this.gridColumn9.FieldName = "data.MainCatorary";
-            this.gridColumn9.Name = "gridColumn9";
-            this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 14;
-            // 
-            // gridColumn10
-            // 
-            this.gridColumn10.Caption = "小組";
-            this.gridColumn10.FieldName = "subdept";
-            this.gridColumn10.Name = "gridColumn10";
-            this.gridColumn10.Visible = true;
-            this.gridColumn10.VisibleIndex = 15;
             // 
             // uc204_InternalDocMgmtMain
             // 

@@ -254,12 +254,13 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
                                     join ursUp in users on data.IdUsrUpload equals ursUp.Id
                                     let DocCatorary = docCato.DisplayName
                                     let FuncCatorary = funcCato.DisplayName
-                                    let subdept = depts.FirstOrDefault(r => r.Id == data.IdDept)?.DisplayName
+                                    let Subdept = depts.FirstOrDefault(r => r.Id == data.SubDept)?.DisplayName
                                     select new
                                     {
                                         data,
                                         DocCatorary,
                                         FuncCatorary,
+                                        Subdept,
                                         urs,
                                         Founder = urs != null
                                             ? $"{urs.Id.Substring(5)} LG{urs.IdDepartment}/{urs.DisplayName}" : "",

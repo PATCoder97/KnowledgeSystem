@@ -98,7 +98,6 @@ namespace DataAccessLayer
         public virtual DbSet<dm_Watermark> dm_Watermark { get; set; }
         public virtual DbSet<dt308_Disease> dt308_Disease { get; set; }
         public virtual DbSet<dt308_CheckDetail> dt308_CheckDetail { get; set; }
-        public virtual DbSet<dt308_CheckSession> dt308_CheckSession { get; set; }
         public virtual DbSet<dt308_SpecialUsrCheck> dt308_SpecialUsrCheck { get; set; }
         public virtual DbSet<dt309_MachineMaterials> dt309_MachineMaterials { get; set; }
         public virtual DbSet<dt309_Machines> dt309_Machines { get; set; }
@@ -109,5 +108,6 @@ namespace DataAccessLayer
         public virtual DbSet<dt309_Prices> dt309_Prices { get; set; }
         public virtual DbSet<dt204_InternalDocMgmt> dt204_InternalDocMgmt { get; set; }
         public virtual DbSet<dm_Departments> dm_Departments { get; set; }
+        public virtual DbSet<dt308_CheckSession> dt308_CheckSession { get; set; }
     }
 }

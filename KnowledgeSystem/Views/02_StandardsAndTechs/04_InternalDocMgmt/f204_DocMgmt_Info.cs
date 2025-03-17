@@ -7,6 +7,7 @@ using DevExpress.XtraLayout;
 using DevExpress.XtraRichEdit.Import.Html;
 using DevExpress.XtraSplashScreen;
 using DocumentFormat.OpenXml.Spreadsheet;
+using DocumentFormat.OpenXml.Wordprocessing;
 using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._00_Generals;
 using KnowledgeSystem.Views._03_DepartmentManage._07_Quiz;
@@ -138,7 +139,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
             // Các thông tin phải điền có thêm dấu * màu đỏ
             foreach (var item in lcImpControls)
             {
-                if (item.Control.Enabled)
+                if (item.Control.Enabled || (item.Control as BaseEdit).Properties.ReadOnly)
                 {
                     item.Text += "<color=red>*</color>";
                 }
@@ -191,11 +192,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
             txbIdFounder.Properties.DisplayMember = "DisplayName";
             txbIdFounder.Properties.ValueMember = "Id";
             txbIdFounder.Properties.BestFitWidth = 110;
-
-            var groupInDept = dm_DeptBUS.Instance.GetListByParent(TPConfigs.LoginUser.IdDepartment);
-            cbbSubDept.Properties.DataSource = groupInDept;
-            cbbSubDept.Properties.DisplayMember = "DisplayName";
-            cbbSubDept.Properties.ValueMember = "Id";
 
             txbDept.EditValue = TPConfigs.LoginUser.IdDepartment;
             txbDept.ReadOnly = true;
@@ -297,6 +293,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
             DateTime deployDate = txbDeployDate.DateTime;
             int periodNotify = Convert.ToInt16(txbPeriodNotify.EditValue);
             string idFounder = txbIdFounder.EditValue.ToString();
+            string mainCarorary = cbbMainCatorary.EditValue.ToString();
+            string subdept = cbbSubDept.EditValue?.ToString();
             string fileName = txbFilePath.Text.Trim();
 
             if (StringHelper.CheckUpcase(displayNameVN, 33) && displayNameVN.Length > 20)
@@ -320,6 +318,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
                 dt204Base.PeriodNotify = periodNotify;
                 dt204Base.IdFounder = idFounder;
                 dt204Base.IdUsrUpload = TPConfigs.LoginUser.Id;
+                dt204Base.MainCatorary = mainCarorary;
+                dt204Base.SubDept = subdept;
                 dt204Base.UploadDate = DateTime.Now;
                 dt204Base.IsDel = false;
 
@@ -607,6 +607,28 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
             else
             {
                 XtraMessageBox.Show("請選表單", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void cbbMainCatorary_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (cbbMainCatorary.Text)
+            {
+                case "其他":
+                    cbbSubDept.Enabled = true;
+
+                    var subDepts = dm_DeptBUS.Instance.GetListByParent(TPConfigs.LoginUser.IdDepartment);
+                    cbbSubDept.Properties.DataSource = subDepts;
+                    cbbSubDept.Properties.DisplayMember = "DisplayName";
+                    cbbSubDept.Properties.ValueMember = "Id";
+
+                    break;
+                default:
+
+                    cbbSubDept.Enabled = false;
+                    cbbSubDept.EditValue = null;
+
+                    break;
             }
         }
     }

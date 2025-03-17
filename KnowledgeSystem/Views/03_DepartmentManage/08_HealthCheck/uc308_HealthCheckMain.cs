@@ -46,6 +46,7 @@ using Path = System.IO.Path;
 using DevExpress.Spreadsheet;
 using CellRange = ExcelDataReader.CellRange;
 using System.IO.Packaging;
+using System.Globalization;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
 {
@@ -88,6 +89,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
         DXMenuItem itemEditDetail;
         DXMenuItem itemExcelUploadDetail;
         DXMenuItem itemGoogleSheetUploadDetail;
+        DXMenuItem itemDetailNull;
 
         private class SickData
         {
@@ -244,6 +246,27 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
             itemEditDetail = CreateMenuItem("更新檢查表", ItemEditDetail_Click, TPSvgimages.Edit);
             itemExcelUploadDetail = CreateMenuItem("上傳Excel檔案", ItemExcelUploadDetail_Click, TPSvgimages.Excel);
             itemGoogleSheetUploadDetail = CreateMenuItem("上傳GoogleSheet路徑", ItemGoogleSheetUploadDetail_Click, TPSvgimages.GgSheet);
+            itemDetailNull = CreateMenuItem("人員未更新資料", ItemDetailNull_Click, TPSvgimages.Filter);
+        }
+
+        private void ItemDetailNull_Click(object sender, EventArgs e)
+        {
+            GridView view = gvData;
+            dt308_CheckSession session = view.GetRow(view.FocusedRowHandle) as dt308_CheckSession;
+
+            string dataNullString = string.Join("\n", dt308CheckDetail.Where(r => r.SessionId == session.Id)
+                .Where(r => r.HealthRating == -1)
+                .Select(r =>
+                {
+                    var user = users.FirstOrDefault(u => u.Id == r.EmpId);
+                    return user != null
+                        ? $"LG{user.IdDepartment} {user.Id} {user.DisplayName} {user.DisplayNameVN}"
+                        : $"Unknown-{r.EmpId}";
+                })
+            );
+
+            Clipboard.SetText(dataNullString);
+            XtraMessageBox.Show("Đã lưu danh sách vào bộ nhớ tạm, Ctrl + V để dán dữ liệu!", "Thông báo!");
         }
 
         private void ShowDataDetailRaw(int idSession)
@@ -273,7 +296,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
             int index = 1;
             foreach (DataRow row in dtDetailExcel.Rows)
             {
-                int minute = (int)(Convert.ToDateTime(row[0]).Ticks / System.TimeSpan.TicksPerMinute);
+                string dateString = row[0].ToString(); // Giả sử giá trị từ row[0]
+                DateTime dateTimeValue = DateTime.ParseExact(dateString, "d/M/yyyy H:mm:ss", CultureInfo.InvariantCulture);
+                int minute = (int)(dateTimeValue.Ticks / TimeSpan.TicksPerMinute);
 
                 string empId = row[empIdIndex]?.ToString().ToUpper();
                 int healthRating = RomanToInt(row[healthRatingIndex]?.ToString());
@@ -389,6 +414,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
             GridView view = gvData;
             dt308_CheckSession session = view.GetRow(view.FocusedRowHandle) as dt308_CheckSession;
 
+            if (!string.IsNullOrEmpty(session.DataCollectionDate.ToString()))
+            {
+                if (XtraMessageBox.Show("Hiện tại đã có một khảo sát google form, Bạn muốn tạo lại không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                    return;
+            }
+
             var diseaseTitles = new List<Tuple<string, string>>
             {
                 Tuple.Create("Bạn mắc các bệnh thông thường nào sau đây nào sau đây?", "您患有以下哪些一般疾病？"),
@@ -410,10 +441,20 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                 scriptGoogleForm = scriptGoogleForm.Replace($"{{{{diseases{i + 1}}}}}", $"{checkboxName}.setTitle('{diseaseTitles[i].Item1}\\n{diseaseTitles[i].Item2}').setChoices([{diseasesCode}]);");
             }
 
-            Clipboard.SetText(scriptGoogleForm);
-            XtraMessageBox.Show("Đã lưu Code vào bộ nhớ tạm, Làm theo SOP để tạo được khảo sát google form !", "Thông báo!");
+            session.DataCollectionDate = DateTime.Now;
+            var result = dt308_CheckSessionBUS.Instance.AddOrUpdate(session);
 
-            Process.Start("https://script.google.com/");
+            if (result)
+            {
+                Clipboard.SetText(scriptGoogleForm);
+                XtraMessageBox.Show("Đã lưu Code vào bộ nhớ tạm, Làm theo SOP để tạo được khảo sát google form !", "Thông báo!");
+
+                Process.Start("https://script.google.com/");
+            }
+            else
+            {
+                MsgTP.MsgErrorDB();
+            }
         }
 
         private void ItemViewInfo_Click(object sender, EventArgs e)
@@ -588,8 +629,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
 
                 itemCreateScript.BeginGroup = true;
                 e.Menu.Items.Add(itemCreateScript);
+
                 e.Menu.Items.Add(itemGoogleSheetUploadDetail);
                 e.Menu.Items.Add(itemExcelUploadDetail);
+
+                itemDetailNull.BeginGroup = true;
+                e.Menu.Items.Add(itemDetailNull);
             }
         }
 

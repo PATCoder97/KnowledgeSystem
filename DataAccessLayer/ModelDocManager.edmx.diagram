@@ -78,7 +78,6 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_Watermark" Width="1.5" PointX="11.875" PointY="2.75" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt308_Disease" Width="1.5" PointX="0.5" PointY="41" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt308_CheckDetail" Width="1.5" PointX="3.75" PointY="41" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt308_CheckSession" Width="1.5" PointX="2.125" PointY="41" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt308_SpecialUsrCheck" Width="1.5" PointX="5.375" PointY="41" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt309_MachineMaterials" Width="1.5" PointX="3.75" PointY="44.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt309_Machines" Width="1.5" PointX="2.125" PointY="44.5" />
@@ -89,6 +88,7 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt309_Prices" Width="1.5" PointX="8.625" PointY="44.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt204_InternalDocMgmt" Width="1.5" PointX="3.75" PointY="35.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_Departments" Width="1.5" PointX="5.375" PointY="0.5" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt308_CheckSession" Width="1.5" PointX="2.125" PointY="41" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

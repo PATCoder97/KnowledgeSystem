@@ -20,5 +20,6 @@ namespace DataAccessLayer
         public string DisplayNameTW { get; set; }
         public string CheckType { get; set; }
         public string IdDept { get; set; }
+        public Nullable<System.DateTime> DataCollectionDate { get; set; }
     }
 }

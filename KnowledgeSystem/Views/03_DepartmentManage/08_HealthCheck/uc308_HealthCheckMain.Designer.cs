@@ -101,6 +101,8 @@
             this.gvSession.OptionsView.EnableAppearanceOddRow = true;
             this.gvSession.OptionsView.ShowAutoFilterRow = true;
             this.gvSession.OptionsView.ShowGroupPanel = false;
+            this.gvSession.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gridColumn5, DevExpress.Data.ColumnSortOrder.Ascending)});
             this.gvSession.MasterRowEmpty += new DevExpress.XtraGrid.Views.Grid.MasterRowEmptyEventHandler(this.gvSession_MasterRowEmpty);
             this.gvSession.MasterRowExpanded += new DevExpress.XtraGrid.Views.Grid.CustomMasterRowEventHandler(this.gv_MasterRowExpanded);
             this.gvSession.MasterRowGetChildList += new DevExpress.XtraGrid.Views.Grid.MasterRowGetChildListEventHandler(this.gvSession_MasterRowGetChildList);
@@ -121,6 +123,7 @@
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
             this.gridColumn5.VisibleIndex = 0;
+            this.gridColumn5.Width = 181;
             // 
             // gridColumn6
             // 

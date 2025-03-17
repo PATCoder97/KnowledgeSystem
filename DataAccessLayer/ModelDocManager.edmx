@@ -767,6 +767,7 @@
           <Property Name="DisplayNameTW" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="CheckType" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="IdDept" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="DataCollectionDate" Type="date" />
         </EntityType>
         <EntityType Name="dt308_Disease">
           <Key>
@@ -1081,7 +1082,6 @@
           <EntitySet Name="dm_Watermark" EntityType="DBDocumentManagementSystemModel.dm_Watermark" />
           <EntitySet Name="dt308_Disease" EntityType="DBDocumentManagementSystemModel.dt308_Disease" />
           <EntitySet Name="dt308_CheckDetail" EntityType="DBDocumentManagementSystemModel.dt308_CheckDetail" />
-          <EntitySet Name="dt308_CheckSession" EntityType="DBDocumentManagementSystemModel.dt308_CheckSession" />
           <EntitySet Name="dt308_SpecialUsrCheck" EntityType="DBDocumentManagementSystemModel.dt308_SpecialUsrCheck" />
           <EntitySet Name="dt309_MachineMaterials" EntityType="DBDocumentManagementSystemModel.dt309_MachineMaterials" />
           <EntitySet Name="dt309_Machines" EntityType="DBDocumentManagementSystemModel.dt309_Machines" />
@@ -1092,6 +1092,7 @@
           <EntitySet Name="dt309_Prices" EntityType="DBDocumentManagementSystemModel.dt309_Prices" />
           <EntitySet Name="dt204_InternalDocMgmt" EntityType="DBDocumentManagementSystemModel.dt204_InternalDocMgmt" />
           <EntitySet Name="dm_Departments" EntityType="DBDocumentManagementSystemModel.dm_Departments" />
+          <EntitySet Name="dt308_CheckSession" EntityType="DBDocumentManagementSystemModel.dt308_CheckSession" />
         </EntityContainer>
         <EntityType Name="dm_Function">
           <Key>
@@ -1875,17 +1876,6 @@
           <Property Name="Disease2" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="Disease3" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="dt308_CheckSession">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DateSession" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="DisplayNameVN" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="DisplayNameTW" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="CheckType" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="IdDept" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="dt308_SpecialUsrCheck">
           <Key>
             <PropertyRef Name="Id" />
@@ -2004,6 +1994,18 @@
           <Property Name="IdParent" Type="Int32" />
           <Property Name="DisplayName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="DisplayNameVN" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dt308_CheckSession">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateSession" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DisplayNameVN" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayNameTW" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CheckType" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IdDept" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="DataCollectionDate" Type="DateTime" Precision="0" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2866,18 +2868,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dt308_CheckSession">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt308_CheckSession">
-              <MappingFragment StoreEntitySet="dt308_CheckSession">
-                <ScalarProperty Name="IdDept" ColumnName="IdDept" />
-                <ScalarProperty Name="CheckType" ColumnName="CheckType" />
-                <ScalarProperty Name="DisplayNameTW" ColumnName="DisplayNameTW" />
-                <ScalarProperty Name="DisplayNameVN" ColumnName="DisplayNameVN" />
-                <ScalarProperty Name="DateSession" ColumnName="DateSession" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="dt308_SpecialUsrCheck">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt308_SpecialUsrCheck">
               <MappingFragment StoreEntitySet="dt308_SpecialUsrCheck">
@@ -3003,6 +2993,19 @@
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="IdParent" ColumnName="IdParent" />
                 <ScalarProperty Name="IdChild" ColumnName="IdChild" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt308_CheckSession">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt308_CheckSession">
+              <MappingFragment StoreEntitySet="dt308_CheckSession">
+                <ScalarProperty Name="DataCollectionDate" ColumnName="DataCollectionDate" />
+                <ScalarProperty Name="IdDept" ColumnName="IdDept" />
+                <ScalarProperty Name="CheckType" ColumnName="CheckType" />
+                <ScalarProperty Name="DisplayNameTW" ColumnName="DisplayNameTW" />
+                <ScalarProperty Name="DisplayNameVN" ColumnName="DisplayNameVN" />
+                <ScalarProperty Name="DateSession" ColumnName="DateSession" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
