@@ -38,7 +38,7 @@ namespace KnowledgeSystem
         [STAThread]
         static void Main(string[] args)
         {
-            new AppCopyRight() { Version = "25.02.06" };
+            new AppCopyRight() { Version = "25.03.17" };
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             TPConfigs.SetSystemStaticValue();

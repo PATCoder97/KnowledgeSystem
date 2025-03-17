@@ -47,6 +47,7 @@ using DevExpress.Spreadsheet;
 using CellRange = ExcelDataReader.CellRange;
 using System.IO.Packaging;
 using System.Globalization;
+using static DevExpress.Xpo.Helpers.AssociatedCollectionCriteriaHelper;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
 {
@@ -162,7 +163,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
             WebProxy proxy = new WebProxy(proxyUri)
             {
                 // Cấu hình thông tin xác thực proxy (gồm tên, mật khẩu, domain)
-                Credentials = new NetworkCredential("VNW0014732", "Anhtuan02", "VNFPG")
+                Credentials = new NetworkCredential("VNW0014732", "Anhtuan03", "VNFPG")
             };
 
             request.Proxy = proxy; // Gán proxy vào request
@@ -832,29 +833,32 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
 
                 // Biểu mẫu 4: TÌNH HÌNH NGHỈ DO ỐM, TAI NẠN LAO ĐỘNG VÀ BỆNH NGHỀ NGHIỆP
                 List<SickData> sickDatas = new List<SickData>();
-                using (PdfReader reader = new PdfReader(sickFile))
+                if (!string.IsNullOrEmpty(sickFile))
                 {
-                    for (int i = 1; i <= reader.NumberOfPages; i++)
+                    using (PdfReader reader = new PdfReader(sickFile))
                     {
-                        string text = PdfTextExtractor.GetTextFromPage(reader, i);
-
-                        var matches = new
+                        for (int i = 1; i <= reader.NumberOfPages; i++)
                         {
-                            DataList = Regex.Matches(text, @"\d{8}\s+0[1|2]\s+\d{4}\s+\d{4}\s+[\d.]+").Cast<Match>().Select(m => m.Value).ToList(),
-                            Id = Regex.Match(text, @"VNW\d{7}").Value,
-                            Month = Regex.Match(text, @"\d{7}-\d{7}").Value
-                        };
+                            string text = PdfTextExtractor.GetTextFromPage(reader, i);
 
-                        if (!string.IsNullOrEmpty(matches.Month) && !string.IsNullOrEmpty(matches.Id) && matches.DataList.Count > 0)
-                        {
-                            sickDatas.Add(new SickData
+                            var matches = new
                             {
-                                Id = matches.Id,
-                                Data = matches.DataList,
-                                TotalTime = matches.DataList.Sum(s => double.TryParse(s.Split().Last(), out double val) ? val : 0),
-                                Count = matches.DataList.Count,
-                                Time = matches.Month.Split('-')[1].Substring(3, 2)
-                            });
+                                DataList = Regex.Matches(text, @"\d{8}\s+0[1|2]\s+\d{4}\s+\d{4}\s+[\d.]+").Cast<Match>().Select(m => m.Value).ToList(),
+                                Id = Regex.Match(text, @"VNW\d{7}").Value,
+                                Month = Regex.Match(text, @"\d{7}-\d{7}").Value
+                            };
+
+                            if (!string.IsNullOrEmpty(matches.Month) && !string.IsNullOrEmpty(matches.Id) && matches.DataList.Count > 0)
+                            {
+                                sickDatas.Add(new SickData
+                                {
+                                    Id = matches.Id,
+                                    Data = matches.DataList,
+                                    TotalTime = matches.DataList.Sum(s => double.TryParse(s.Split().Last(), out double val) ? val : 0),
+                                    Count = matches.DataList.Count,
+                                    Time = matches.Month.Split('-')[1].Substring(3, 2)
+                                });
+                            }
                         }
                     }
                 }
@@ -1162,8 +1166,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                         }
                     }
 
-                    InsertDataWS5(13, false);
-                    InsertDataWS5(6, true);
+                    if (dt5RowIns > 0)
+                    {
+                        InsertDataWS5(13, false);
+                        InsertDataWS5(6, true);
+                    }
 
                     // Biểu mẫu 6: QUẢN LÝ BỆNH MÃN TÍNH THEO TỪNG BỆNH
                     int dt6RowIns = dt6.Count();
@@ -1210,9 +1217,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                     }
 
                     // Gọi hàm
-                    InsertDataWS6(9, false);
-                    InsertDataWS6(2, true);
-
+                    if (dt6RowIns > 0)
+                    {
+                        InsertDataWS6(9, false);
+                        InsertDataWS6(2, true);
+                    }
 
                     // Biểu mẫu 7:THEO DÕI BỆNH NGHỀ NGHIỆP
                     int dt7RowIns = dt7.Count() - 1;

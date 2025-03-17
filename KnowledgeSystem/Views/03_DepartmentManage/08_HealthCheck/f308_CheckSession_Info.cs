@@ -18,6 +18,7 @@ using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._03_DepartmentManage._07_Quiz;
 using Newtonsoft.Json;
 using static System.Runtime.CompilerServices.RuntimeHelpers;
+using static DevExpress.Xpo.Helpers.AssociatedCollectionCriteriaHelper;
 using static DevExpress.Xpo.Helpers.CannotLoadObjectsHelper;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
@@ -222,7 +223,17 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
 
         private void btnDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            bool IsSysAdmin = AppPermission.Instance.CheckAppPermission(AppPermission.SysAdmin);
+            if (!IsSysAdmin)
+            {
+                XtraMessageBox.Show("Vui lòng liên hệ nhân viên quản lý hệ thống!", TPConfigs.SoftNameTW);
+                return;
+            }
 
+            MsgTP.MsgConfirmDel();
+
+            eventInfo = EventFormInfo.Delete;
+            LockControl();
         }
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -319,9 +330,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                         break;
                     case EventFormInfo.Delete:
 
-                        //var dialogResult = XtraMessageBox.Show($"您確認要刪除{formName}: {dt204Base.Code} {dt204Base.DisplayName}", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                        //if (dialogResult != DialogResult.Yes) return;
-                        //result = dt204_InternalDocMgmtBUS.Instance.RemoveById(dt204Base.Id, TPConfigs.LoginUser.Id);
+                        var dialogResult = XtraMessageBox.Show($"您確認刪除: {dt308CheckSession.DisplayNameTW}", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (dialogResult != DialogResult.Yes) return;
+
+                        result = dt308_CheckSessionBUS.Instance.RemoveById(idSession);
+                        dt308_CheckDetailBUS.Instance.RemoveBySession(idSession);
 
                         break;
                     default:

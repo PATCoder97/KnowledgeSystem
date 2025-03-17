@@ -172,6 +172,26 @@ namespace BusinessLayer
             }
         }
 
+        public bool RemoveBySession(int idSession)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    var itemRemove = _context.dt308_CheckDetail.FirstOrDefault(r => r.SessionId == idSession);
+                    _context.dt308_CheckDetail.Remove(itemRemove);
+
+                    int affectedRecords = _context.SaveChanges();
+                    return affectedRecords > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public bool RemoveBySessionAndEmp(int idSession, string empId)
         {
             try
