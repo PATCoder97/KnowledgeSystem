@@ -1099,7 +1099,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
 
                     // Biểu mẫu 4: TÌNH HÌNH NGHỈ DO ỐM, TAI NẠN LAO ĐỘNG VÀ BỆNH NGHỀ NGHIỆP
                     int flag = 8;
-                    for (int i = 0; i < dt5.Count; i++)
+                    for (int i = 0; i < dt4.Count; i++)
                     {
                         wsBieuMau4.Cells[$"E{flag + i}"].Value = dt4[i].Count;
                         wsBieuMau4.Cells[$"I{flag + i}"].Value = dt4[i].TotalTime / 8;
