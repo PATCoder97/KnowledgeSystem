@@ -266,7 +266,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
             var result = false;
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
             {
-                dt308CheckSession.DateSession = dateUpload;
                 dt308CheckSession.DisplayNameVN = nameVN;
                 dt308CheckSession.DisplayNameTW = nameTW;
                 dt308CheckSession.CheckType = checkType;
@@ -276,6 +275,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                 {
                     case EventFormInfo.Create:
 
+                        dt308CheckSession.DateSession = dateUpload;
                         int idDt204Base = dt308_CheckSessionBUS.Instance.Add(dt308CheckSession);
                         result = idDt204Base != -1;
 
