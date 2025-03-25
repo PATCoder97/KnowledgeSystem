@@ -5,6 +5,7 @@ using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraSplashScreen;
+using DevExpress.XtraSpreadsheet.Model;
 using KnowledgeSystem.Helpers;
 using OfficeOpenXml;
 using OfficeOpenXml.Drawing.Chart;
@@ -18,6 +19,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using ChartDataSource = KnowledgeSystem.Helpers.ChartDataSource;
 
 namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 {
@@ -74,9 +76,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
         private void LoadData()
         {
             lsDepts = dm_DeptBUS.Instance.GetList();
-            var lsGrade = lsDepts.Where(r => r.IdParent == -1).ToList();
+            var lsGrade = lsDepts;
 
-            cbbGrade.Properties.DataSource = lsGrade;
+            cbbGrade.Properties.DataSource = lsDepts;
             cbbGrade.Properties.DisplayMember = "DisplayName"; ;
             cbbGrade.Properties.ValueMember = "Id";
 
@@ -95,7 +97,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             gvData.FocusedRowHandle = GridControl.AutoFilterRowHandle;
 
             string nameType = gColType.Caption;
-            string IdGrade = cbbGrade.EditValue.ToString();
+            string idDept = cbbGrade.EditValue.ToString();
 
             DateTime fromDate = txbFromDate.DateTime.Date;
             DateTime toDate = txbToDate.DateTime.Date.AddDays(1).AddSeconds(-1);
@@ -136,57 +138,43 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
 
             lsDataStatistic.Clear();
 
-            if (nameType == NAME_GRADE)
+            switch (idDept.Length)
             {
-                var lsGrade = lsDepts.Where(r => r.IdParent == -1 && r.Id != "7").ToList();
+                case 4:
 
-                foreach (var item in lsGrade)
-                {
-                    DataStatisticsChart data = new DataStatisticsChart()
+                    var lsDocClass = lsDoc.Where(r => r.Class == idDept).GroupBy(r => r.UserUploadName).Select(r => new { r.Key, Count = r.Count() }).ToList();
+
+                    foreach (var item in lsDocClass)
                     {
-                        DisplayName = item.DisplayName,
-                        Achieve = lsDoc.Count(r => r.Grade == item.Id),
-                        Target = lsTargets.FirstOrDefault(r => r.IdDept == item.Id).Targets
-                    };
+                        DataStatisticsChart data = new DataStatisticsChart()
+                        {
+                            DisplayName = item.Key,
+                            Achieve = item.Count
+                        };
 
-                    lsDataStatistic.Add(data);
-                }
-            }
+                        lsDataStatistic.Add(data);
+                    }
 
-            if (nameType == NAME_CLASS)
-            {
-                var idChildGrade = lsDepts.First(r => r.Id == IdGrade).IdChild;
+                    break;
+                default:
 
-                var lsGrade = lsDepts.Where(r => r.IdParent == idChildGrade).ToList();
+                    var idChildGrade = lsDepts.First(r => r.Id == idDept).IdChild;
 
-                foreach (var item in lsGrade)
-                {
-                    DataStatisticsChart data = new DataStatisticsChart()
+                    var lsGrade = lsDepts.Where(r => r.IdParent == idChildGrade).ToList();
+
+                    foreach (var item in lsGrade)
                     {
-                        DisplayName = item.DisplayName,
-                        Achieve = lsDoc.Count(r => r.Class == item.Id),
-                        Target = lsTargets.FirstOrDefault(r => r.IdDept == item.Id).Targets
-                    };
+                        DataStatisticsChart data = new DataStatisticsChart()
+                        {
+                            DisplayName = item.DisplayName,
+                            Achieve = idDept.Length == 1 ? lsDoc.Count(r => r.Grade == item.Id) : lsDoc.Count(r => r.Class == item.Id),
+                            Target = lsTargets.FirstOrDefault(r => r.IdDept == item.Id).Targets
+                        };
 
-                    lsDataStatistic.Add(data);
-                }
-            }
+                        lsDataStatistic.Add(data);
+                    }
 
-            if (nameType == NAME_USER)
-            {
-                string idClass = cbbClass.EditValue.ToString();
-                var lsDocClass = lsDoc.Where(r => r.Class == idClass).GroupBy(r => r.UserUploadName).Select(r => new { r.Key, Count = r.Count() }).ToList();
-
-                foreach (var item in lsDocClass)
-                {
-                    DataStatisticsChart data = new DataStatisticsChart()
-                    {
-                        DisplayName = item.Key,
-                        Achieve = item.Count
-                    };
-
-                    lsDataStatistic.Add(data);
-                }
+                    break;
             }
 
             gcData.RefreshDataSource();
@@ -245,20 +233,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._07_KnowledgeBase
             var idParent = lsDepts.First(r => r.Id == idGrade).IdChild;
             var lsGrade = lsDepts.Where(r => r.IdParent == idParent).ToList();
 
-            cbbClass.Properties.DataSource = lsGrade;
-            cbbClass.Properties.DisplayMember = "DisplayName"; ;
-            cbbClass.Properties.ValueMember = "Id";
-
             gColType.Caption = idGrade == "7" ? NAME_GRADE : NAME_CLASS;
-            cbbClass.EditValue = null;
-        }
-
-        private void cbbClass_EditValueChanged(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(cbbClass.Text))
-            {
-                gColType.Caption = NAME_USER;
-            }
         }
 
         private void gvData_CustomDrawRowIndicator(object sender, DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventArgs e)

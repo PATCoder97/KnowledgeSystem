@@ -43,8 +43,10 @@
             this.gColTarget = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColRemark = new DevExpress.XtraGrid.Columns.GridColumn();
             this.txbFromDate = new DevExpress.XtraEditors.DateEdit();
-            this.cbbGrade = new DevExpress.XtraEditors.LookUpEdit();
-            this.cbbClass = new DevExpress.XtraEditors.LookUpEdit();
+            this.cbbGrade = new DevExpress.XtraEditors.GridLookUpEdit();
+            this.gridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -52,7 +54,6 @@
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -66,7 +67,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txbFromDate.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbFromDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbGrade.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbbClass.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
@@ -74,7 +75,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
@@ -94,7 +94,6 @@
             this.layoutControl1.Controls.Add(this.gcData);
             this.layoutControl1.Controls.Add(this.txbFromDate);
             this.layoutControl1.Controls.Add(this.cbbGrade);
-            this.layoutControl1.Controls.Add(this.cbbClass);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Name = "layoutControl1";
@@ -130,7 +129,7 @@
             this.btnChart.Appearance.Options.UseForeColor = true;
             this.btnChart.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
             this.btnChart.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnChart.ImageOptions.SvgImage")));
-            this.btnChart.Location = new System.Drawing.Point(772, 50);
+            this.btnChart.Location = new System.Drawing.Point(680, 50);
             this.btnChart.Name = "btnChart";
             this.btnChart.Size = new System.Drawing.Size(116, 58);
             this.btnChart.StyleController = this.layoutControl1;
@@ -147,7 +146,7 @@
             this.btnStatistics.Appearance.Options.UseForeColor = true;
             this.btnStatistics.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
             this.btnStatistics.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnStatistics.ImageOptions.SvgImage")));
-            this.btnStatistics.Location = new System.Drawing.Point(652, 50);
+            this.btnStatistics.Location = new System.Drawing.Point(560, 50);
             this.btnStatistics.Name = "btnStatistics";
             this.btnStatistics.Size = new System.Drawing.Size(116, 58);
             this.btnStatistics.StyleController = this.layoutControl1;
@@ -330,7 +329,7 @@
             // 
             this.cbbGrade.Location = new System.Drawing.Point(332, 50);
             this.cbbGrade.Name = "cbbGrade";
-            this.cbbGrade.Properties.AdvancedModeOptions.Label = "組/處別";
+            this.cbbGrade.Properties.AdvancedModeOptions.Label = "組/處/課別";
             this.cbbGrade.Properties.AdvancedModeOptions.LabelAppearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.cbbGrade.Properties.AdvancedModeOptions.LabelAppearance.ForeColor = System.Drawing.Color.Black;
             this.cbbGrade.Properties.AdvancedModeOptions.LabelAppearance.Options.UseFont = true;
@@ -343,58 +342,53 @@
             this.cbbGrade.Properties.AppearanceDropDown.ForeColor = System.Drawing.Color.Black;
             this.cbbGrade.Properties.AppearanceDropDown.Options.UseFont = true;
             this.cbbGrade.Properties.AppearanceDropDown.Options.UseForeColor = true;
-            this.cbbGrade.Properties.AppearanceDropDownHeader.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbbGrade.Properties.AppearanceDropDownHeader.ForeColor = System.Drawing.Color.Black;
-            this.cbbGrade.Properties.AppearanceDropDownHeader.Options.UseFont = true;
-            this.cbbGrade.Properties.AppearanceDropDownHeader.Options.UseForeColor = true;
             this.cbbGrade.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbbGrade.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Id", "編號", 30, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Default, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("DisplayName", "名稱", 70, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Default, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default)});
             this.cbbGrade.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.cbbGrade.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.cbbGrade.Properties.NullText = "";
             this.cbbGrade.Properties.PopupSizeable = false;
-            this.cbbGrade.Size = new System.Drawing.Size(156, 58);
+            this.cbbGrade.Properties.PopupView = this.gridLookUpEdit1View;
+            this.cbbGrade.Size = new System.Drawing.Size(224, 58);
             this.cbbGrade.StyleController = this.layoutControl1;
             this.cbbGrade.TabIndex = 8;
             this.cbbGrade.EditValueChanged += new System.EventHandler(this.cbbGrade_EditValueChanged);
             // 
-            // cbbClass
+            // gridLookUpEdit1View
             // 
-            this.cbbClass.Location = new System.Drawing.Point(492, 50);
-            this.cbbClass.Name = "cbbClass";
-            this.cbbClass.Properties.AdvancedModeOptions.Label = "課別";
-            this.cbbClass.Properties.AdvancedModeOptions.LabelAppearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.cbbClass.Properties.AdvancedModeOptions.LabelAppearance.ForeColor = System.Drawing.Color.Black;
-            this.cbbClass.Properties.AdvancedModeOptions.LabelAppearance.Options.UseFont = true;
-            this.cbbClass.Properties.AdvancedModeOptions.LabelAppearance.Options.UseForeColor = true;
-            this.cbbClass.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbbClass.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.cbbClass.Properties.Appearance.Options.UseFont = true;
-            this.cbbClass.Properties.Appearance.Options.UseForeColor = true;
-            this.cbbClass.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.cbbClass.Properties.AppearanceDropDown.ForeColor = System.Drawing.Color.Black;
-            this.cbbClass.Properties.AppearanceDropDown.Options.UseFont = true;
-            this.cbbClass.Properties.AppearanceDropDown.Options.UseForeColor = true;
-            this.cbbClass.Properties.AppearanceDropDownHeader.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.cbbClass.Properties.AppearanceDropDownHeader.ForeColor = System.Drawing.Color.Black;
-            this.cbbClass.Properties.AppearanceDropDownHeader.Options.UseFont = true;
-            this.cbbClass.Properties.AppearanceDropDownHeader.Options.UseForeColor = true;
-            this.cbbClass.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbbClass.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Id", "編號", 30, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Default, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default),
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("DisplayName", "名稱", 70, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Default, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default)});
-            this.cbbClass.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.cbbClass.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            this.cbbClass.Properties.NullText = "";
-            this.cbbClass.Properties.PopupSizeable = false;
-            this.cbbClass.Size = new System.Drawing.Size(156, 58);
-            this.cbbClass.StyleController = this.layoutControl1;
-            this.cbbClass.TabIndex = 9;
-            this.cbbClass.EditValueChanged += new System.EventHandler(this.cbbClass_EditValueChanged);
+            this.gridLookUpEdit1View.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridLookUpEdit1View.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
+            this.gridLookUpEdit1View.Appearance.HeaderPanel.Options.UseFont = true;
+            this.gridLookUpEdit1View.Appearance.HeaderPanel.Options.UseForeColor = true;
+            this.gridLookUpEdit1View.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridLookUpEdit1View.Appearance.Row.ForeColor = System.Drawing.Color.Black;
+            this.gridLookUpEdit1View.Appearance.Row.Options.UseFont = true;
+            this.gridLookUpEdit1View.Appearance.Row.Options.UseForeColor = true;
+            this.gridLookUpEdit1View.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn1,
+            this.gridColumn2});
+            this.gridLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridLookUpEdit1View.Name = "gridLookUpEdit1View";
+            this.gridLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridLookUpEdit1View.OptionsView.EnableAppearanceOddRow = true;
+            this.gridLookUpEdit1View.OptionsView.ShowAutoFilterRow = true;
+            this.gridLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "代號";
+            this.gridColumn1.FieldName = "Id";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 0;
+            // 
+            // gridColumn2
+            // 
+            this.gridColumn2.Caption = "名稱";
+            this.gridColumn2.FieldName = "DisplayName";
+            this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.Visible = true;
+            this.gridColumn2.VisibleIndex = 1;
             // 
             // Root
             // 
@@ -407,7 +401,6 @@
             this.layoutControlItem4,
             this.emptySpaceItem1,
             this.layoutControlItem5,
-            this.layoutControlItem6,
             this.layoutControlItem7,
             this.layoutControlItem8,
             this.layoutControlItem9,
@@ -464,34 +457,22 @@
             // emptySpaceItem1
             // 
             this.emptySpaceItem1.AllowHotTrack = false;
-            this.emptySpaceItem1.Location = new System.Drawing.Point(880, 38);
+            this.emptySpaceItem1.Location = new System.Drawing.Point(788, 38);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(116, 62);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(208, 62);
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
             // layoutControlItem5
             // 
             this.layoutControlItem5.Control = this.cbbGrade;
             this.layoutControlItem5.Location = new System.Drawing.Point(320, 38);
-            this.layoutControlItem5.MaxSize = new System.Drawing.Size(160, 56);
-            this.layoutControlItem5.MinSize = new System.Drawing.Size(160, 56);
+            this.layoutControlItem5.MaxSize = new System.Drawing.Size(228, 62);
+            this.layoutControlItem5.MinSize = new System.Drawing.Size(228, 62);
             this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(160, 62);
+            this.layoutControlItem5.Size = new System.Drawing.Size(228, 62);
             this.layoutControlItem5.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem5.TextVisible = false;
-            // 
-            // layoutControlItem6
-            // 
-            this.layoutControlItem6.Control = this.cbbClass;
-            this.layoutControlItem6.Location = new System.Drawing.Point(480, 38);
-            this.layoutControlItem6.MaxSize = new System.Drawing.Size(160, 56);
-            this.layoutControlItem6.MinSize = new System.Drawing.Size(160, 56);
-            this.layoutControlItem6.Name = "layoutControlItem6";
-            this.layoutControlItem6.Size = new System.Drawing.Size(160, 62);
-            this.layoutControlItem6.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem6.TextVisible = false;
             // 
             // layoutControlItem7
             // 
@@ -508,7 +489,7 @@
             // layoutControlItem8
             // 
             this.layoutControlItem8.Control = this.btnStatistics;
-            this.layoutControlItem8.Location = new System.Drawing.Point(640, 38);
+            this.layoutControlItem8.Location = new System.Drawing.Point(548, 38);
             this.layoutControlItem8.MaxSize = new System.Drawing.Size(120, 0);
             this.layoutControlItem8.MinSize = new System.Drawing.Size(120, 40);
             this.layoutControlItem8.Name = "layoutControlItem8";
@@ -520,7 +501,7 @@
             // layoutControlItem9
             // 
             this.layoutControlItem9.Control = this.btnChart;
-            this.layoutControlItem9.Location = new System.Drawing.Point(760, 38);
+            this.layoutControlItem9.Location = new System.Drawing.Point(668, 38);
             this.layoutControlItem9.MaxSize = new System.Drawing.Size(120, 0);
             this.layoutControlItem9.MinSize = new System.Drawing.Size(120, 40);
             this.layoutControlItem9.Name = "layoutControlItem9";
@@ -558,7 +539,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txbFromDate.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbFromDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbGrade.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbbClass.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
@@ -566,7 +547,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
@@ -594,9 +574,6 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
-        private DevExpress.XtraEditors.LookUpEdit cbbGrade;
-        private DevExpress.XtraEditors.LookUpEdit cbbClass;
         private DevExpress.XtraEditors.SimpleButton btnExcel;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
         private DevExpress.XtraEditors.SimpleButton btnStatistics;
@@ -605,5 +582,9 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem9;
         private DevExpress.XtraEditors.SimpleButton btnTarget;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
+        private DevExpress.XtraEditors.GridLookUpEdit cbbGrade;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridLookUpEdit1View;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
     }
 }
