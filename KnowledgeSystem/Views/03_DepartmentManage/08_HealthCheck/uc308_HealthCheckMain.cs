@@ -677,7 +677,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                 return;
 
             int yearStatistic = ucInfo.Year;
-            string sickFile = ucInfo.SickFile;
+            List<string> sickFiles = ucInfo.SickFiles;
 
             SaveFileDialog saveFile = new SaveFileDialog()
             {
@@ -833,34 +833,35 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
 
                 // Biểu mẫu 4: TÌNH HÌNH NGHỈ DO ỐM, TAI NẠN LAO ĐỘNG VÀ BỆNH NGHỀ NGHIỆP
                 List<SickData> sickDatas = new List<SickData>();
-                if (!string.IsNullOrEmpty(sickFile))
+                if (sickFiles.Count != 0)
                 {
-                    using (PdfReader reader = new PdfReader(sickFile))
-                    {
-                        for (int i = 1; i <= reader.NumberOfPages; i++)
+                    foreach (var sickFile in sickFiles)
+                        using (PdfReader reader = new PdfReader(sickFile))
                         {
-                            string text = PdfTextExtractor.GetTextFromPage(reader, i);
-
-                            var matches = new
+                            for (int i = 1; i <= reader.NumberOfPages; i++)
                             {
-                                DataList = Regex.Matches(text, @"\d{8}\s+0[1|2]\s+\d{4}\s+\d{4}\s+[\d.]+").Cast<Match>().Select(m => m.Value).ToList(),
-                                Id = Regex.Match(text, @"VNW\d{7}").Value,
-                                Month = Regex.Match(text, @"\d{7}-\d{7}").Value
-                            };
+                                string text = PdfTextExtractor.GetTextFromPage(reader, i);
 
-                            if (!string.IsNullOrEmpty(matches.Month) && !string.IsNullOrEmpty(matches.Id) && matches.DataList.Count > 0)
-                            {
-                                sickDatas.Add(new SickData
+                                var matches = new
                                 {
-                                    Id = matches.Id,
-                                    Data = matches.DataList,
-                                    TotalTime = matches.DataList.Sum(s => double.TryParse(s.Split().Last(), out double val) ? val : 0),
-                                    Count = matches.DataList.Count,
-                                    Time = matches.Month.Split('-')[1].Substring(3, 2)
-                                });
+                                    DataList = Regex.Matches(text, @"\d{8}\s+0[1|2]\s+\d{4}\s+\d{4}\s+[\d.]+").Cast<Match>().Select(m => m.Value).ToList(),
+                                    Id = Regex.Match(text, @"VNW\d{7}").Value,
+                                    Month = Regex.Match(text, @"\d{7}-\d{7}").Value
+                                };
+
+                                if (!string.IsNullOrEmpty(matches.Month) && !string.IsNullOrEmpty(matches.Id) && matches.DataList.Count > 0)
+                                {
+                                    sickDatas.Add(new SickData
+                                    {
+                                        Id = matches.Id,
+                                        Data = matches.DataList,
+                                        TotalTime = matches.DataList.Sum(s => double.TryParse(s.Split().Last(), out double val) ? val : 0),
+                                        Count = matches.DataList.Count,
+                                        Time = matches.Month.Split('-')[1].Substring(3, 2)
+                                    });
+                                }
                             }
                         }
-                    }
                 }
 
                 var dt4 = sickDatas

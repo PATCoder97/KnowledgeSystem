@@ -21,11 +21,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
             InitializeComponent();
 
             cbbYear.DataBindings.Add("Text", this, "Year", false, DataSourceUpdateMode.OnPropertyChanged);
-            txbFilePath.DataBindings.Add("EditValue", this, "SickFile", false, DataSourceUpdateMode.OnPropertyChanged);
+            SickFiles = new List<string>();
         }
 
         public int Year { get; set; }
-        public string SickFile { get; set; }
+        public List<string> SickFiles { get; set; }
 
         private void uc308_ExportReport_Load(object sender, EventArgs e)
         {
@@ -44,41 +44,39 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
             switch (e.Button.Caption)
             {
                 case "Paste":
-
                     if (Clipboard.ContainsFileDropList())
                     {
-                        var files = Clipboard.GetFileDropList();
-                        var pdfFiles = new List<string>();
+                        SickFiles = Clipboard.GetFileDropList()
+                                                .Cast<string>()
+                                                .Where(file => file.EndsWith(".pdf", StringComparison.OrdinalIgnoreCase) && File.Exists(file))
+                                                .ToList();
 
-                        foreach (var file in files)
+                        if (!SickFiles.Any())
                         {
-                            if (file.EndsWith(".pdf", StringComparison.OrdinalIgnoreCase) && File.Exists(file))
-                            {
-                                pdfFiles.Add(file);
-                            }
-                        }
-
-                        if (pdfFiles.Count != 1)
-                        {
-                            XtraMessageBox.Show("請選擇一個PDF檔案", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            XtraMessageBox.Show("請選擇PDF檔案", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
 
-                        txbFilePath.EditValue = pdfFiles.First();
+                        // Hiển thị danh sách tên file (không có phần mở rộng)
+                        txbFilePath.EditValue = string.Join("; ", SickFiles.Select(Path.GetFileNameWithoutExtension));
                     }
                     else
                     {
-                        XtraMessageBox.Show("請選擇一個PDF檔案", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        XtraMessageBox.Show("請選擇PDF檔案", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
-
                     break;
+
                 default:
-                    OpenFileDialog openFileDialog = new OpenFileDialog { Filter = "Pdf|*.pdf" };
+                    using (OpenFileDialog openFileDialog = new OpenFileDialog { Filter = "PDF Files|*.pdf", Multiselect = true })
+                    {
+                        if (openFileDialog.ShowDialog() != DialogResult.OK)
+                            return;
 
-                    if (openFileDialog.ShowDialog() != DialogResult.OK)
-                        return;
+                        SickFiles = openFileDialog.FileNames.ToList();
 
-                    txbFilePath.EditValue = openFileDialog.FileName;
+                        // Lấy danh sách tên file mà không có phần mở rộng
+                        txbFilePath.EditValue = string.Join("; ", SickFiles.Select(Path.GetFileNameWithoutExtension));
+                    }
                     break;
             }
         }

@@ -57,13 +57,13 @@
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(622, 40);
+            this.layoutControl1.Size = new System.Drawing.Size(752, 40);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // txbFilePath
             // 
-            this.txbFilePath.Location = new System.Drawing.Point(264, 4);
+            this.txbFilePath.Location = new System.Drawing.Point(247, 4);
             this.txbFilePath.Name = "txbFilePath";
             this.txbFilePath.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbFilePath.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -75,7 +75,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "Paste", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default),
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Search)});
             this.txbFilePath.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.txbFilePath.Size = new System.Drawing.Size(354, 32);
+            this.txbFilePath.Size = new System.Drawing.Size(501, 32);
             this.txbFilePath.StyleController = this.layoutControl1;
             this.txbFilePath.TabIndex = 17;
             this.txbFilePath.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txbFilePath_ButtonClick);
@@ -94,7 +94,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbbYear.Properties.DropDownRows = 5;
             this.cbbYear.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cbbYear.Size = new System.Drawing.Size(118, 32);
+            this.cbbYear.Size = new System.Drawing.Size(101, 32);
             this.cbbYear.StyleController = this.layoutControl1;
             this.cbbYear.TabIndex = 18;
             // 
@@ -107,7 +107,7 @@
             this.lcDocLevel});
             this.Root.Name = "Root";
             this.Root.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 2);
-            this.Root.Size = new System.Drawing.Size(622, 40);
+            this.Root.Size = new System.Drawing.Size(752, 40);
             this.Root.TextVisible = false;
             // 
             // lcFilePath
@@ -121,9 +121,9 @@
             this.lcFilePath.Control = this.txbFilePath;
             this.lcFilePath.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
             this.lcFilePath.CustomizationFormText = "英越文名稱";
-            this.lcFilePath.Location = new System.Drawing.Point(172, 0);
+            this.lcFilePath.Location = new System.Drawing.Point(155, 0);
             this.lcFilePath.Name = "lcFilePath";
-            this.lcFilePath.Size = new System.Drawing.Size(446, 36);
+            this.lcFilePath.Size = new System.Drawing.Size(593, 36);
             this.lcFilePath.Text = "請假檔案";
             this.lcFilePath.TextSize = new System.Drawing.Size(76, 24);
             // 
@@ -140,7 +140,7 @@
             this.lcDocLevel.CustomizationFormText = "類別";
             this.lcDocLevel.Location = new System.Drawing.Point(0, 0);
             this.lcDocLevel.Name = "lcDocLevel";
-            this.lcDocLevel.Size = new System.Drawing.Size(172, 36);
+            this.lcDocLevel.Size = new System.Drawing.Size(155, 36);
             this.lcDocLevel.Text = "年份";
             this.lcDocLevel.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
             this.lcDocLevel.TextSize = new System.Drawing.Size(38, 24);
@@ -152,7 +152,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.layoutControl1);
             this.Name = "uc308_ExportReport";
-            this.Size = new System.Drawing.Size(622, 40);
+            this.Size = new System.Drawing.Size(752, 40);
             this.Load += new System.EventHandler(this.uc308_ExportReport_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
