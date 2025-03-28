@@ -354,21 +354,21 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 if (string.IsNullOrEmpty(result?.ToString())) return;
                 string[] version = result.ToString().Split('/');
 
-                string verVN = version[0];
-                string verTW = version.Count() > 1 ? version[1] : verVN;
+                string verTW = version[0];
+                string verVN = version.Count() > 1 ? version[1] : verTW;
 
                 TreeListNode parentNode = tlsData.FocusedNode.ParentNode;
                 dt201_Base parentData = (tlsData.GetRow(parentNode.Id) as dynamic).data as dt201_Base;
 
-                bool IsExist = baseDatas.Any(r => r.IdParent == currentData.Id && r.DisplayName == verVN);
+                bool IsExist = baseDatas.Any(r => r.IdParent == currentData.Id && r.DisplayName == verTW);
                 if (IsExist)
                 {
                     MsgTP.MsgError("年版已存在！");
                     return;
                 }
 
-                currentData.DisplayName = verVN;
-                currentData.DisplayNameVN = verTW;
+                currentData.DisplayName = verTW;
+                currentData.DisplayNameVN = verVN;
                 dt201_BaseBUS.Instance.AddOrUpdate(currentData);
                 LoadData();
                 return;
@@ -405,10 +405,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             if (string.IsNullOrEmpty(result?.ToString())) return;
             string[] version = result.ToString().Split('/');
 
-            string verVN = version[0];
-            string verTW = version.Count() > 1 ? "" : "";
+            string verTW = version[0];
+            string verVN = version.Count() > 1 ? version[1] : verTW;
 
-            bool IsExist = baseDatas.Any(r => r.IdParent == currentData.Id && r.DisplayName == verVN);
+            bool IsExist = baseDatas.Any(r => r.IdParent == currentData.Id && r.DisplayName == verTW);
             if (IsExist)
             {
                 MsgTP.MsgError("年版已存在！");
@@ -419,8 +419,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             {
                 IdParent = currentData.Id,
                 DocCode = currentData.DocCode,
-                DisplayName = verVN,
-                DisplayNameVN = verTW,
+                DisplayName = verTW,
+                DisplayNameVN = verVN,
                 IsFinalNode = true,
                 IdDept = currentData.IdDept,
             };
