@@ -1,9 +1,11 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
+using DevExpress.Utils;
 using DevExpress.Utils.Menu;
 using DevExpress.Utils.Svg;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._00_Generals;
 using System;
@@ -180,7 +182,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void gvData_DoubleClick(object sender, EventArgs e)
         {
+            DXMouseEventArgs ea = e as DXMouseEventArgs;
             GridView view = sender as GridView;
+            GridHitInfo info = view.CalcHitInfo(ea.Location);
+            if (!(info.InRow || info.InRowCell)) return;
 
             bool IsCancel = Convert.ToBoolean(view.GetRowCellValue(view.FocusedRowHandle, gColIsCancel));
             if (IsCancel) return;

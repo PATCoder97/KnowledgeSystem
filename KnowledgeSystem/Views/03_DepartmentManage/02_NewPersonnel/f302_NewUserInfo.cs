@@ -111,8 +111,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
 
             foreach (var item in lcControls)
             {
-                string colorHex = item.Control.Enabled ? "FFD700" : "FFFFFF";
-                item.Text = item.Text.Replace("FFFFFF", colorHex);
+                string colorHex = item.Control.Enabled ? "0028ff" : "000000";
+                item.Text = item.Text.Replace("000000", colorHex);
             }
 
             // Các thông tin phải điền có thêm dấu * màu đỏ
@@ -158,7 +158,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._02_NewPersonnel
             foreach (var item in lcControls)
             {
                 item.AllowHtmlStringInCaption = true;
-                item.Text = $"<color=#FFFFFF>{item.Text}</color>";
+                item.Text = $"<color=#000000>{item.Text}</color>";
             }
 
             LockControl();

@@ -458,7 +458,7 @@
             // 
             // lcUserID
             // 
-            this.lcUserID.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lcUserID.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lcUserID.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.lcUserID.AppearanceItemCaption.Options.UseFont = true;
             this.lcUserID.AppearanceItemCaption.Options.UseForeColor = true;
@@ -473,7 +473,7 @@
             // 
             // lcDept
             // 
-            this.lcDept.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lcDept.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lcDept.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.lcDept.AppearanceItemCaption.Options.UseFont = true;
             this.lcDept.AppearanceItemCaption.Options.UseForeColor = true;
@@ -490,11 +490,11 @@
             // 
             // lcSupervisor
             // 
-            this.lcSupervisor.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.lcSupervisor.AppearanceItemCaption.ForeColor = System.Drawing.Color.White;
+            this.lcSupervisor.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lcSupervisor.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.lcSupervisor.AppearanceItemCaption.Options.UseFont = true;
             this.lcSupervisor.AppearanceItemCaption.Options.UseForeColor = true;
-            this.lcSupervisor.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
+            this.lcSupervisor.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             this.lcSupervisor.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.lcSupervisor.Control = this.cbbSupervisor;
             this.lcSupervisor.Location = new System.Drawing.Point(344, 0);
@@ -505,7 +505,7 @@
             // 
             // lcUserName
             // 
-            this.lcUserName.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lcUserName.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lcUserName.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.lcUserName.AppearanceItemCaption.Options.UseFont = true;
             this.lcUserName.AppearanceItemCaption.Options.UseForeColor = true;
@@ -520,7 +520,7 @@
             // 
             // lcJob
             // 
-            this.lcJob.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lcJob.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lcJob.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.lcJob.AppearanceItemCaption.Options.UseFont = true;
             this.lcJob.AppearanceItemCaption.Options.UseForeColor = true;
@@ -537,7 +537,7 @@
             // 
             // lcSchool
             // 
-            this.lcSchool.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lcSchool.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lcSchool.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.lcSchool.AppearanceItemCaption.Options.UseFont = true;
             this.lcSchool.AppearanceItemCaption.Options.UseForeColor = true;
@@ -552,7 +552,7 @@
             // 
             // lcMajor
             // 
-            this.lcMajor.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lcMajor.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lcMajor.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.lcMajor.AppearanceItemCaption.Options.UseFont = true;
             this.lcMajor.AppearanceItemCaption.Options.UseForeColor = true;
