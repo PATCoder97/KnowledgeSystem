@@ -17,7 +17,7 @@ namespace DataAccessLayer
         public int Id { get; set; }
         public int StorageId { get; set; }
         public int MaterialId { get; set; }
-        public int Quantity { get; set; }
+        public double Quantity { get; set; }
         public string TransactionType { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<double> AftQuantity { get; set; }

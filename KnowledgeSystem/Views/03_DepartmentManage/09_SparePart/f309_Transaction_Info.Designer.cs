@@ -201,7 +201,7 @@
             this.txbQuantity.Properties.Appearance.Options.UseFont = true;
             this.txbQuantity.Properties.Appearance.Options.UseForeColor = true;
             this.txbQuantity.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
-            this.txbQuantity.Properties.MaskSettings.Set("mask", "N0");
+            this.txbQuantity.Properties.MaskSettings.Set("mask", "F");
             this.txbQuantity.Properties.MaskSettings.Set("autoHideDecimalSeparator", null);
             this.txbQuantity.Properties.UseMaskAsDisplayFormat = true;
             this.txbQuantity.Size = new System.Drawing.Size(286, 32);
@@ -238,7 +238,7 @@
             this.cbbStorageFrom.Properties.NullText = "";
             this.cbbStorageFrom.Properties.PopupSizeable = false;
             this.cbbStorageFrom.Properties.ShowHeader = false;
-            this.cbbStorageFrom.Size = new System.Drawing.Size(178, 32);
+            this.cbbStorageFrom.Size = new System.Drawing.Size(142, 32);
             this.cbbStorageFrom.StyleController = this.layoutControl1;
             this.cbbStorageFrom.TabIndex = 10;
             this.cbbStorageFrom.EditValueChanged += new System.EventHandler(this.cbbStorageFrom_EditValueChanged);
@@ -246,17 +246,17 @@
             // txbStorageFromQuantity
             // 
             this.txbStorageFromQuantity.EditValue = "0";
-            this.txbStorageFromQuantity.Location = new System.Drawing.Point(325, 12);
+            this.txbStorageFromQuantity.Location = new System.Drawing.Point(289, 12);
             this.txbStorageFromQuantity.Name = "txbStorageFromQuantity";
             this.txbStorageFromQuantity.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbStorageFromQuantity.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbStorageFromQuantity.Properties.Appearance.Options.UseFont = true;
             this.txbStorageFromQuantity.Properties.Appearance.Options.UseForeColor = true;
             this.txbStorageFromQuantity.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
-            this.txbStorageFromQuantity.Properties.MaskSettings.Set("mask", "N0");
+            this.txbStorageFromQuantity.Properties.MaskSettings.Set("mask", "F");
             this.txbStorageFromQuantity.Properties.MaskSettings.Set("autoHideDecimalSeparator", null);
             this.txbStorageFromQuantity.Properties.UseMaskAsDisplayFormat = true;
-            this.txbStorageFromQuantity.Size = new System.Drawing.Size(61, 32);
+            this.txbStorageFromQuantity.Size = new System.Drawing.Size(97, 32);
             this.txbStorageFromQuantity.StyleController = this.layoutControl1;
             this.txbStorageFromQuantity.TabIndex = 9;
             // 
@@ -278,7 +278,7 @@
             this.cbbStorageTo.Properties.NullText = "";
             this.cbbStorageTo.Properties.PopupSizeable = false;
             this.cbbStorageTo.Properties.ShowHeader = false;
-            this.cbbStorageTo.Size = new System.Drawing.Size(178, 32);
+            this.cbbStorageTo.Size = new System.Drawing.Size(142, 32);
             this.cbbStorageTo.StyleController = this.layoutControl1;
             this.cbbStorageTo.TabIndex = 10;
             this.cbbStorageTo.EditValueChanged += new System.EventHandler(this.cbbStorageTo_EditValueChanged);
@@ -286,17 +286,17 @@
             // txbStorageToQuantity
             // 
             this.txbStorageToQuantity.EditValue = "0";
-            this.txbStorageToQuantity.Location = new System.Drawing.Point(325, 48);
+            this.txbStorageToQuantity.Location = new System.Drawing.Point(289, 48);
             this.txbStorageToQuantity.Name = "txbStorageToQuantity";
             this.txbStorageToQuantity.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbStorageToQuantity.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbStorageToQuantity.Properties.Appearance.Options.UseFont = true;
             this.txbStorageToQuantity.Properties.Appearance.Options.UseForeColor = true;
             this.txbStorageToQuantity.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
-            this.txbStorageToQuantity.Properties.MaskSettings.Set("mask", "N0");
+            this.txbStorageToQuantity.Properties.MaskSettings.Set("mask", "F");
             this.txbStorageToQuantity.Properties.MaskSettings.Set("autoHideDecimalSeparator", null);
             this.txbStorageToQuantity.Properties.UseMaskAsDisplayFormat = true;
-            this.txbStorageToQuantity.Size = new System.Drawing.Size(61, 32);
+            this.txbStorageToQuantity.Size = new System.Drawing.Size(97, 32);
             this.txbStorageToQuantity.StyleController = this.layoutControl1;
             this.txbStorageToQuantity.TabIndex = 9;
             // 
@@ -348,7 +348,7 @@
             this.lcStorageFrom.CustomizationFormText = "備品用途";
             this.lcStorageFrom.Location = new System.Drawing.Point(0, 0);
             this.lcStorageFrom.Name = "lcStorageFrom";
-            this.lcStorageFrom.Size = new System.Drawing.Size(270, 36);
+            this.lcStorageFrom.Size = new System.Drawing.Size(234, 36);
             this.lcStorageFrom.Text = "出貨倉庫";
             this.lcStorageFrom.TextSize = new System.Drawing.Size(76, 24);
             // 
@@ -367,7 +367,7 @@
             this.lcStorageTo.CustomizationFormText = "備品用途";
             this.lcStorageTo.Location = new System.Drawing.Point(0, 36);
             this.lcStorageTo.Name = "lcStorageTo";
-            this.lcStorageTo.Size = new System.Drawing.Size(270, 36);
+            this.lcStorageTo.Size = new System.Drawing.Size(234, 36);
             this.lcStorageTo.Text = "收貨倉庫";
             this.lcStorageTo.TextSize = new System.Drawing.Size(76, 24);
             // 
@@ -383,9 +383,9 @@
             this.lcStorageFromQuantity.Control = this.txbStorageFromQuantity;
             this.lcStorageFromQuantity.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
             this.lcStorageFromQuantity.CustomizationFormText = "中文名稱";
-            this.lcStorageFromQuantity.Location = new System.Drawing.Point(270, 0);
+            this.lcStorageFromQuantity.Location = new System.Drawing.Point(234, 0);
             this.lcStorageFromQuantity.Name = "lcStorageFromQuantity";
-            this.lcStorageFromQuantity.Size = new System.Drawing.Size(108, 36);
+            this.lcStorageFromQuantity.Size = new System.Drawing.Size(144, 36);
             this.lcStorageFromQuantity.Text = "數量";
             this.lcStorageFromQuantity.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
             this.lcStorageFromQuantity.TextSize = new System.Drawing.Size(38, 24);
@@ -403,9 +403,9 @@
             this.lcStorageToQuantity.Control = this.txbStorageToQuantity;
             this.lcStorageToQuantity.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
             this.lcStorageToQuantity.CustomizationFormText = "中文名稱";
-            this.lcStorageToQuantity.Location = new System.Drawing.Point(270, 36);
+            this.lcStorageToQuantity.Location = new System.Drawing.Point(234, 36);
             this.lcStorageToQuantity.Name = "lcStorageToQuantity";
-            this.lcStorageToQuantity.Size = new System.Drawing.Size(108, 36);
+            this.lcStorageToQuantity.Size = new System.Drawing.Size(144, 36);
             this.lcStorageToQuantity.Text = "數量";
             this.lcStorageToQuantity.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
             this.lcStorageToQuantity.TextSize = new System.Drawing.Size(38, 24);

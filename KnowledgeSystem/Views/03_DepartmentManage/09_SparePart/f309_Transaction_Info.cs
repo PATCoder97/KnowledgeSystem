@@ -68,6 +68,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
                 case "轉庫":
 
+                    cbbStorageFrom.EditValue = 2;
                     cbbStorageTo.Enabled = true;
                     cbbStorageFrom.Enabled = true;
                     break;
@@ -192,12 +193,26 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             transaction.Desc = txbDesc.EditValue?.ToString();
             transaction.UserDo = TPConfigs.LoginUser.Id;
 
+            double storageQuantityFrom = 0;
+            double storageQuantityTo = 0;
+            double quantity = 0;
+
+            double.TryParse(txbStorageFromQuantity.EditValue?.ToString(), out storageQuantityFrom);
+            double.TryParse(txbStorageToQuantity.EditValue?.ToString(), out storageQuantityTo);
+            double.TryParse(txbQuantity.EditValue?.ToString(), out quantity);
+
+            if (quantity <= 0)
+            {
+                XtraMessageBox.Show($"{eventInfo}數量不得小於零", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             switch (eventInfo)
             {
                 case "收貨":
 
                     transaction.TransactionType = "IN";
-                    transaction.Quantity = Convert.ToInt32(txbQuantity.EditValue);
+                    transaction.Quantity = quantity;
                     transaction.StorageId = (int)cbbStorageTo.EditValue;
 
                     result = dt309_TransactionsBUS.Instance.Add(transaction);
@@ -206,8 +221,14 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
                 case "領用":
 
+                    if (quantity > storageQuantityFrom)
+                    {
+                        XtraMessageBox.Show($"{eventInfo}數量大於庫存數量", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
                     transaction.TransactionType = "OUT";
-                    transaction.Quantity = Convert.ToInt32(txbQuantity.EditValue);
+                    transaction.Quantity = quantity;
                     transaction.StorageId = (int)cbbStorageFrom.EditValue;
 
                     result = dt309_TransactionsBUS.Instance.Add(transaction);
@@ -216,8 +237,14 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
                 case "轉庫":
 
+                    if (quantity > storageQuantityFrom)
+                    {
+                        XtraMessageBox.Show($"{eventInfo}數量大於庫存數量", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
                     transaction.TransactionType = "OUT";
-                    transaction.Quantity = Convert.ToInt32(txbQuantity.EditValue);
+                    transaction.Quantity = quantity;
                     transaction.StorageId = (int)cbbStorageFrom.EditValue;
 
                     result = dt309_TransactionsBUS.Instance.Add(transaction);
@@ -225,7 +252,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                     Thread.Sleep(200);
 
                     transaction.TransactionType = "IN";
-                    transaction.Quantity = Convert.ToInt32(txbQuantity.EditValue);
+                    transaction.Quantity = quantity;
                     transaction.StorageId = (int)cbbStorageTo.EditValue;
 
                     result = dt309_TransactionsBUS.Instance.Add(transaction);
@@ -235,7 +262,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 case "盤點":
 
                     transaction.TransactionType = "CHECK";
-                    transaction.Quantity = Convert.ToInt32(txbQuantity.EditValue);
+                    transaction.Quantity = quantity;
                     transaction.StorageId = (int)cbbStorageFrom.EditValue;
 
                     result = dt309_TransactionsBUS.Instance.Add(transaction);

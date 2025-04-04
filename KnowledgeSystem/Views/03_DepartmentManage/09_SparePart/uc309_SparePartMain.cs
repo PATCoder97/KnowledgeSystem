@@ -341,10 +341,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 dt309_Materials currentRow = ((dynamic)e.Row).data as dt309_Materials;
                 if (currentRow == null) return;
 
-                int sumQuantity = Convert.ToInt32(currentRow.QuantityInStorage + currentRow.QuantityInMachine);
+                double sumQuantity = Convert.ToDouble(currentRow.QuantityInStorage + currentRow.QuantityInMachine);
 
                 // Tạo một mảng các chuỗi và chỉ lấy các chuỗi không rỗng
-                e.Value = (long)sumQuantity * currentRow.Price;
+                e.Value = sumQuantity * currentRow.Price;
             }
         }
 
