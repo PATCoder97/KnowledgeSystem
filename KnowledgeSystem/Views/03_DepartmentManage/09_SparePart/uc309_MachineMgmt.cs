@@ -57,79 +57,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             btnExportExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
         }
 
-        private void CreateRuleGV()
-        {
-            //// Quy tắc cảnh báo khi số lượng trong kho + máy < min
-            //var ruleCHECK = new GridFormatRule
-            //{
-            //    Column = gColEvent,
-            //    Name = "RuleCheck",
-            //    Rule = new FormatConditionRuleExpression
-            //    {
-            //        Expression = "StartsWith([data.TransactionType], \'C\')",
-            //        Appearance =
-            //        {
-            //            ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical,
-            //        }
-            //    }
-            //};
-            //gvTransactions.FormatRules.Add(ruleCHECK);
-
-            //var ruleIN = new GridFormatRule
-            //{
-            //    Column = gColEvent,
-            //    Name = "RuleIn",
-            //    Rule = new FormatConditionRuleExpression
-            //    {
-            //        Expression = "StartsWith([data.TransactionType], \'I\')",
-            //        Appearance =
-            //        {
-            //            ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Question,
-            //        }
-            //    }
-            //};
-            //gvTransactions.FormatRules.Add(ruleIN);
-
-            //// Quy tắc cảnh báo khi số lượng trong kho + máy < min
-            //var ruleNotify = new GridFormatRule
-            //{
-            //    ApplyToRow = true,
-            //    Name = "RuleNotify",
-            //    Rule = new FormatConditionRuleExpression
-            //    {
-            //        Expression = "[data.QuantityInStorage] + [data.QuantityInMachine] < [data.MinQuantity]",
-            //        Appearance =
-            //        {
-            //            BackColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical,
-            //            BackColor2 = Color.White,
-            //            Options = { UseBackColor = true }
-            //        }
-            //    }
-            //};
-            //gvData.FormatRules.Add(ruleNotify);
-
-            //// Quy tắc hiển thị biểu tượng tăng/giảm trong lịch sử giao dịch
-            //var ruleIconSet = new GridFormatRule
-            //{
-            //    Name = "RuleTransactionTrend",
-            //    Column = gColQuantity,
-            //    Rule = new FormatConditionRuleIconSet
-            //    {
-            //        IconSet = new FormatConditionIconSet
-            //        {
-            //            ValueType = FormatConditionValueType.Automatic,
-            //            Icons =
-            //            {
-            //                new FormatConditionIconSetIcon { PredefinedName = "Arrows3_1.png", Value = 0, ValueComparison = FormatConditionComparisonType.Greater },
-            //                new FormatConditionIconSetIcon { PredefinedName = "Triangles3_2.png", Value = 0, ValueComparison = FormatConditionComparisonType.GreaterOrEqual },
-            //                new FormatConditionIconSetIcon { PredefinedName = "Arrows3_3.png", Value = decimal.MinValue, ValueComparison = FormatConditionComparisonType.GreaterOrEqual }
-            //            }
-            //        }
-            //    }
-            //};
-            //gvTransactions.FormatRules.Add(ruleIconSet);
-        }
-
         DXMenuItem CreateMenuItem(string caption, EventHandler clickEvent, SvgImage svgImage)
         {
             var menuItem = new DXMenuItem(caption, clickEvent, svgImage, DXMenuItemPriority.Normal);
@@ -186,7 +113,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             gvSparePart.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
 
             LoadData();
-            CreateRuleGV();
             gcData.DataSource = sourceBases;
 
             gvData.BestFitColumns();
