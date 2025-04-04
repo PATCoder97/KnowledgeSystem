@@ -53,7 +53,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         List<dt309_Materials> materials;
         List<dt309_Storages> storages;
-        List<dt308_Disease> dt308Diseases;
 
         Dictionary<string, string> events = new Dictionary<string, string>()
         {

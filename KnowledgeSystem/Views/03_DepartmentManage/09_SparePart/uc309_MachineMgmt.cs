@@ -41,14 +41,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         List<dt309_Machines> machines;
         List<dt309_Storages> storages;
-        List<dt308_Disease> dt308Diseases;
-
-        Dictionary<string, string> events = new Dictionary<string, string>()
-        {
-            {"IN","入庫" },
-            {"OUT","出庫" },
-            {"CHECK","盤點" },
-        };
+        List<dt309_Units> units;
 
         DXMenuItem itemViewInfo;
         DXMenuItem itemUpdatePrice;
@@ -169,18 +162,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
                 machines = dt309_MachinesBUS.Instance.GetListByIdDept(TPConfigs.LoginUser.IdDepartment);
 
-                //storages = dt309_StoragesBUS.Instance.GetList();
-                //users = dm_UserBUS.Instance.GetList();
-                //var units = dt309_UnitsBUS.Instance.GetList();
-
-                //materials = dt309_MaterialsBUS.Instance.GetListByIdDept(TPConfigs.LoginUser.IdDepartment);
-
-                //var displayData = materials.Select(x => new
-                //{
-                //    data = x,
-                //    Unit = units.FirstOrDefault(u => u.Id == x.IdUnit).DisplayName,
-                //    UserMngr = users.FirstOrDefault(u => u.Id == x.IdManager).DisplayName,
-                //}).ToList();
+                storages = dt309_StoragesBUS.Instance.GetList();
+                users = dm_UserBUS.Instance.GetList();
+                units = dt309_UnitsBUS.Instance.GetList();
 
                 sourceBases.DataSource = machines;
 
@@ -241,7 +225,14 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 var materialsId = dt309_MachineMaterialsBUS.Instance.GetListByIdMachine(idMachine).Select(r => r.MaterialId).ToList();
                 var materials = dt309_MaterialsBUS.Instance.GetListByIds(materialsId);
 
-                e.ChildList = materials;
+                var displayData = materials.Select(x => new
+                {
+                    data = x,
+                    Unit = units.FirstOrDefault(u => u.Id == x.IdUnit).DisplayName,
+                    UserMngr = users.FirstOrDefault(u => u.Id == x.IdManager).DisplayName,
+                }).ToList();
+
+                e.ChildList = displayData;
             }
         }
 
