@@ -40,6 +40,22 @@ namespace BusinessLayer
             }
         }
 
+        public List<dt309_Materials> GetListByIds(List<int> ids)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt309_Materials.Where(r => ids.Contains(r.Id)).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public List<dt309_Materials> GetListByIdDept(string idDept)
         {
             try

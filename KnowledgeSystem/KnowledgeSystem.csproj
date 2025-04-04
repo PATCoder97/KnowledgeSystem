@@ -636,6 +636,12 @@
     <Compile Include="Views\03_DepartmentManage\09_SparePart\f309_Transaction_Info.Designer.cs">
       <DependentUpon>f309_Transaction_Info.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\03_DepartmentManage\09_SparePart\uc309_MachineMgmt.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\09_SparePart\uc309_MachineMgmt.Designer.cs">
+      <DependentUpon>uc309_MachineMgmt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\03_DepartmentManage\09_SparePart\uc309_SparePartMain.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1222,6 +1228,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\09_SparePart\f309_Transaction_Info.resx">
       <DependentUpon>f309_Transaction_Info.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\09_SparePart\uc309_MachineMgmt.resx">
+      <DependentUpon>uc309_MachineMgmt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\09_SparePart\uc309_SparePartMain.resx">
       <DependentUpon>uc309_SparePartMain.cs</DependentUpon>
