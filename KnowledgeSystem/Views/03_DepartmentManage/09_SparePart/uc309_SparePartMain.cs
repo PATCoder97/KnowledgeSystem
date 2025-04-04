@@ -77,33 +77,28 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         private void CreateRuleGV()
         {
-            // Quy tắc cảnh báo khi số lượng trong kho + máy < min
+            // Quy tắc định dạng khi TransactionType = 'C'
             var ruleCHECK = new GridFormatRule
             {
                 Column = gColEvent,
                 Name = "RuleCheck",
                 Rule = new FormatConditionRuleExpression
                 {
-                    Expression = "StartsWith([data.TransactionType], \'C\')",
-                    Appearance =
-                    {
-                        ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical,
-                    }
+                    Expression = "[data.TransactionType] = 'CHECK'",
+                    Appearance = { ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical, }
                 }
             };
             gvTransactions.FormatRules.Add(ruleCHECK);
 
+            // Quy tắc định dạng khi TransactionType = 'I'
             var ruleIN = new GridFormatRule
             {
                 Column = gColEvent,
                 Name = "RuleIn",
                 Rule = new FormatConditionRuleExpression
                 {
-                    Expression = "StartsWith([data.TransactionType], \'I\')",
-                    Appearance =
-                    {
-                        ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Question,
-                    }
+                    Expression = "[data.TransactionType] = 'IN'",
+                    Appearance = { ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Question, }
                 }
             };
             gvTransactions.FormatRules.Add(ruleIN);
@@ -378,50 +373,53 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         private void gvData_MasterRowGetChildList(object sender, MasterRowGetChildListEventArgs e)
         {
-            GridView view = sender as GridView;
-            dt309_Materials material = (view.GetRow(e.RowHandle) as dynamic).data as dt309_Materials;
-            int idMaterial = material.Id;
-
-            if (material != null)
+            using (var handle = SplashScreenManager.ShowOverlayForm(gcData))
             {
-                switch (e.RelationIndex)
+                GridView view = sender as GridView;
+                dt309_Materials material = (view.GetRow(e.RowHandle) as dynamic).data as dt309_Materials;
+                int idMaterial = material.Id;
+
+                if (material != null)
                 {
-                    case 0:
+                    switch (e.RelationIndex)
+                    {
+                        case 0:
 
-                        var transactions = dt309_TransactionsBUS.Instance.GetListByidMaterial(idMaterial).Select(r => new
-                        {
-                            data = r,
-                            Event = events[r.TransactionType],
-                            UserDo = users.FirstOrDefault(u => u.Id == r.UserDo)?.DisplayName,
-                            Starage = storages.FirstOrDefault(u => u.Id == r.StorageId).DisplayName,
-                        }).OrderByDescending(r => r.data.Id).ToList();
-                        e.ChildList = transactions;
+                            var transactions = dt309_TransactionsBUS.Instance.GetListByidMaterial(idMaterial).Select(r => new
+                            {
+                                data = r,
+                                Event = events[r.TransactionType],
+                                UserDo = users.FirstOrDefault(u => u.Id == r.UserDo)?.DisplayName,
+                                Starage = storages.FirstOrDefault(u => u.Id == r.StorageId).DisplayName,
+                            }).OrderByDescending(r => r.data.Id).ToList();
+                            e.ChildList = transactions;
 
-                        break;
-                    case 1:
+                            break;
+                        case 1:
 
-                        var prices = dt309_PricesBUS.Instance.GetListByIdMaterial(idMaterial).Select(r => new
-                        {
-                            r.Price,
-                            r.ChangedAt,
-                            ChangedBy = users.FirstOrDefault(x => x.Id == r.ChangedBy).DisplayName
-                        }).ToList();
+                            var prices = dt309_PricesBUS.Instance.GetListByIdMaterial(idMaterial).Select(r => new
+                            {
+                                r.Price,
+                                r.ChangedAt,
+                                ChangedBy = users.FirstOrDefault(x => x.Id == r.ChangedBy).DisplayName
+                            }).ToList();
 
-                        e.ChildList = prices;
+                            e.ChildList = prices;
 
-                        break;
-                    case 2:
+                            break;
+                        case 2:
 
-                        var ids = dt309_MachineMaterialsBUS.Instance.GetListByIdMaterial(idMaterial).Select(r => r.MachineId).ToList();
-                        var machines = dt309_MachinesBUS.Instance.GetListByIds(ids);
+                            var ids = dt309_MachineMaterialsBUS.Instance.GetListByIdMaterial(idMaterial).Select(r => r.MachineId).ToList();
+                            var machines = dt309_MachinesBUS.Instance.GetListByIds(ids);
 
-                        e.ChildList = machines;
+                            e.ChildList = machines;
 
-                        break;
-                        //case 3:
-                        //    List<Prices> lsPrices = PricesDAO.Instance.GetListByIdSpare(material.IdSparePart);
-                        //    e.ChildList = lsPrices.OrderByDescending(r => r.PriceTime).ToList();
-                        //    break;
+                            break;
+                            //case 3:
+                            //    List<Prices> lsPrices = PricesDAO.Instance.GetListByIdSpare(material.IdSparePart);
+                            //    e.ChildList = lsPrices.OrderByDescending(r => r.PriceTime).ToList();
+                            //    break;
+                    }
                 }
             }
         }

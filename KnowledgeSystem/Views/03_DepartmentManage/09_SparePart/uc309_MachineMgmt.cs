@@ -142,23 +142,26 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         private void gvData_MasterRowGetChildList(object sender, MasterRowGetChildListEventArgs e)
         {
-            GridView view = sender as GridView;
-            dt309_Machines machine = view.GetRow(e.RowHandle) as dt309_Machines;
-            int idMachine = machine.Id;
-
-            if (machine != null)
+            using (var handle = SplashScreenManager.ShowOverlayForm(gcData))
             {
-                var materialsId = dt309_MachineMaterialsBUS.Instance.GetListByIdMachine(idMachine).Select(r => r.MaterialId).ToList();
-                var materials = dt309_MaterialsBUS.Instance.GetListByIds(materialsId);
+                GridView view = sender as GridView;
+                dt309_Machines machine = view.GetRow(e.RowHandle) as dt309_Machines;
+                int idMachine = machine.Id;
 
-                var displayData = materials.Select(x => new
+                if (machine != null)
                 {
-                    data = x,
-                    Unit = units.FirstOrDefault(u => u.Id == x.IdUnit).DisplayName,
-                    UserMngr = users.FirstOrDefault(u => u.Id == x.IdManager).DisplayName,
-                }).ToList();
+                    var materialsId = dt309_MachineMaterialsBUS.Instance.GetListByIdMachine(idMachine).Select(r => r.MaterialId).ToList();
+                    var materials = dt309_MaterialsBUS.Instance.GetListByIds(materialsId);
 
-                e.ChildList = displayData;
+                    var displayData = materials.Select(x => new
+                    {
+                        data = x,
+                        Unit = units.FirstOrDefault(u => u.Id == x.IdUnit).DisplayName,
+                        UserMngr = users.FirstOrDefault(u => u.Id == x.IdManager).DisplayName,
+                    }).ToList();
+
+                    e.ChildList = displayData;
+                }
             }
         }
 

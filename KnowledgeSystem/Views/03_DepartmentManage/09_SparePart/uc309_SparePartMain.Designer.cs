@@ -398,7 +398,7 @@
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 1;
-            this.gridColumn2.Width = 250;
+            this.gridColumn2.Width = 122;
             // 
             // gridColumn3
             // 
@@ -465,6 +465,7 @@
             // gridColumn18
             // 
             this.gridColumn18.Caption = "總金額";
+            this.gridColumn18.DisplayFormat.FormatString = "#,##0.##";
             this.gridColumn18.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.gridColumn18.FieldName = "TotalPrice";
             this.gridColumn18.Name = "gridColumn18";

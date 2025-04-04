@@ -14,6 +14,7 @@ using DataAccessLayer;
 using DevExpress.Utils.Menu;
 using DevExpress.Utils.Svg;
 using DevExpress.XtraEditors;
+using DevExpress.XtraGrid;
 using DevExpress.XtraSplashScreen;
 using KnowledgeSystem.Helpers;
 
@@ -26,6 +27,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             InitializeComponent();
             InitializeIcon();
             InitializeMenuItems();
+            CreateRuleGV();
 
             helper = new RefreshHelper(gvData, "Id");
 
@@ -87,6 +89,35 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             //itemMaterialOut = CreateMenuItem("領用", ItemMaterialOut_Click, TPSvgimages.Num2);
             //itemMaterialTransfer = CreateMenuItem("轉庫", ItemMaterialTransfer_Click, TPSvgimages.Num3);
             //itemMaterialCheck = CreateMenuItem("盤點", ItemMaterialCheck_Click, TPSvgimages.Num4);
+        }
+
+        private void CreateRuleGV()
+        {
+            // Quy tắc cảnh báo khi số lượng trong kho + máy < min
+            var ruleCHECK = new GridFormatRule
+            {
+                Column = gColEvent,
+                Name = "RuleCheck",
+                Rule = new FormatConditionRuleExpression
+                {
+                    Expression = "[Transaction.TransactionType] = 'CHECK'",
+                    Appearance = { ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical, }
+                }
+            };
+            gvData.FormatRules.Add(ruleCHECK);
+
+            var ruleIN = new GridFormatRule
+            {
+                Column = gColEvent,
+                Name = "RuleIn",
+                Rule = new FormatConditionRuleExpression
+                {
+                    Expression = "[Transaction.TransactionType] = 'IN'",
+                    Appearance = { ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Question, }
+                }
+            };
+            gvData.FormatRules.Add(ruleIN);
+
         }
 
         private void LoadData()
