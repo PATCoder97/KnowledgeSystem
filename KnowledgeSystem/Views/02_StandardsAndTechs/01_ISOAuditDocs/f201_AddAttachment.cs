@@ -227,7 +227,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 case EventFormInfo.Create:
                     baseForm = new dt201_Forms();
 
-                    ckSignOrPaper.SelectedIndex = 0;
+                    ckSignOrPaper.SelectedIndex = 1;
 
                     break;
                 case EventFormInfo.View:
