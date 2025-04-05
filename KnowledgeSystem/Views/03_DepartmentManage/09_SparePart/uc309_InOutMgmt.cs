@@ -140,6 +140,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                                    let user = users.FirstOrDefault(u => u.Id == t.UserDo)
                                    select new
                                    {
+                                       Id = t.Id,
                                        Transaction = t,
                                        Material = m,
                                        Storage = s,
@@ -153,8 +154,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 gvData.CollapseAllDetails();
 
                 helper.LoadViewInfo();
-
-                users = dm_UserBUS.Instance.GetList();
             }
         }
 

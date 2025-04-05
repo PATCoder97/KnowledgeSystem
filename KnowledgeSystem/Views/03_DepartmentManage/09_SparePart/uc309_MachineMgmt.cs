@@ -108,8 +108,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 gvData.CollapseAllDetails();
 
                 helper.LoadViewInfo();
-
-                users = dm_UserBUS.Instance.GetList();
             }
         }
 
