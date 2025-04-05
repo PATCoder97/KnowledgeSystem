@@ -624,6 +624,12 @@
     <Compile Include="Views\03_DepartmentManage\08_HealthCheck\uc308_HealthCheckMain.Designer.cs">
       <DependentUpon>uc308_HealthCheckMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\03_DepartmentManage\09_SparePart\f309_Machine_Info.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\09_SparePart\f309_Machine_Info.Designer.cs">
+      <DependentUpon>f309_Machine_Info.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\03_DepartmentManage\09_SparePart\f309_Material_Info.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1229,6 +1235,9 @@
     <EmbeddedResource Include="Views\03_DepartmentManage\08_HealthCheck\uc308_HealthCheckMain.resx">
       <DependentUpon>uc308_HealthCheckMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\09_SparePart\f309_Machine_Info.resx">
+      <DependentUpon>f309_Machine_Info.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\09_SparePart\f309_Material_Info.resx">
       <DependentUpon>f309_Material_Info.cs</DependentUpon>
     </EmbeddedResource>
@@ -1490,6 +1499,9 @@
     <Content Include="Images\icons8_finish_flag.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\icons8_gears.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\icons8_google_forms_new_logo.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -1500,6 +1512,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\icons8_print.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\icons8_robot.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\icons8_stack_of_money.svg">

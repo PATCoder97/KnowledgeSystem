@@ -64,5 +64,7 @@ namespace KnowledgeSystem.Helpers
         public static SvgImage GgSheet = SvgImage.FromFile(Path.Combine(ImagesPath, "icons8_google_sheets.svg"));
         public static SvgImage GgForm = SvgImage.FromFile(Path.Combine(ImagesPath, "icons8_google_forms_new_logo.svg"));
         public static SvgImage Word = SvgImage.FromFile(Path.Combine(ImagesPath, "icons8_word.svg"));
+        public static SvgImage Gears = SvgImage.FromFile(Path.Combine(ImagesPath, "icons8_gears.svg"));
+        public static SvgImage Robot = SvgImage.FromFile(Path.Combine(ImagesPath, "icons8_robot.svg"));
     }
 }

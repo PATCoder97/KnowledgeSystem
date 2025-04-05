@@ -174,5 +174,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             gvData.OptionsDetail.EnableMasterViewMode = true;
             gvData.OptionsView.ShowGroupPanel = false;
         }
+
+        private void btnReload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            LoadData();
+        }
     }
 }

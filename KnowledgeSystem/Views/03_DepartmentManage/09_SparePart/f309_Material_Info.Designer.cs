@@ -418,7 +418,7 @@
             this.txbMinQuantity.Properties.Appearance.Options.UseFont = true;
             this.txbMinQuantity.Properties.Appearance.Options.UseForeColor = true;
             this.txbMinQuantity.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
-            this.txbMinQuantity.Properties.MaskSettings.Set("mask", "N0");
+            this.txbMinQuantity.Properties.MaskSettings.Set("mask", "F");
             this.txbMinQuantity.Properties.MaskSettings.Set("autoHideDecimalSeparator", null);
             this.txbMinQuantity.Properties.UseMaskAsDisplayFormat = true;
             this.txbMinQuantity.Size = new System.Drawing.Size(114, 32);

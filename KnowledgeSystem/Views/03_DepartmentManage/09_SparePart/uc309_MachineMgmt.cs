@@ -72,13 +72,22 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         private void InitializeMenuItems()
         {
-            //itemViewInfo = CreateMenuItem("查看資訊", ItemViewInfo_Click, TPSvgimages.View);
-            //itemUpdatePrice = CreateMenuItem("更新單價", ItemUpdatePrice_Click, TPSvgimages.Money);
+            itemViewInfo = CreateMenuItem("查看資訊", ItemViewInfo_Click, TPSvgimages.View);
+        }
 
-            //itemMaterialIn = CreateMenuItem("收料", ItemMaterialIn_Click, TPSvgimages.Num1);
-            //itemMaterialOut = CreateMenuItem("領用", ItemMaterialOut_Click, TPSvgimages.Num2);
-            //itemMaterialTransfer = CreateMenuItem("轉庫", ItemMaterialTransfer_Click, TPSvgimages.Num3);
-            //itemMaterialCheck = CreateMenuItem("盤點", ItemMaterialCheck_Click, TPSvgimages.Num4);
+        private void ItemViewInfo_Click(object sender, EventArgs e)
+        {
+            GridView view = gvData;
+            int idMachine = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColIdMachine));
+            f309_Machine_Info fInfo = new f309_Machine_Info()
+            {
+                eventInfo = EventFormInfo.View,
+                formName = "用料設備",
+                idBase = idMachine
+            };
+            fInfo.ShowDialog();
+
+            LoadData();
         }
 
         private void LoadData()
@@ -172,6 +181,26 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             GridView detailView = masterView.GetDetailView(e.RowHandle, visibleDetailRelationIndex) as GridView;
 
             detailView.BestFitColumns();
+        }
+
+        private void gvData_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
+        {
+            if (e.HitInfo.InRowCell && e.HitInfo.InDataRow)
+            {
+                e.Menu.Items.Add(itemViewInfo);
+            }
+        }
+
+        private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            f309_Machine_Info finfo = new f309_Machine_Info();
+            finfo.ShowDialog();
+            LoadData();
+        }
+
+        private void btnReload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            LoadData();
         }
     }
 }
