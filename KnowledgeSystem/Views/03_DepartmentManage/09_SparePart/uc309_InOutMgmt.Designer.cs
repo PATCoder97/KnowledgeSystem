@@ -237,55 +237,70 @@
             this.gridColumn2.Caption = "材料編號";
             this.gridColumn2.FieldName = "Material.Code";
             this.gridColumn2.MaxWidth = 250;
+            this.gridColumn2.MinWidth = 150;
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 1;
-            this.gridColumn2.Width = 157;
+            this.gridColumn2.Width = 150;
             // 
             // gridColumn3
             // 
             this.gridColumn3.Caption = "品名規格";
             this.gridColumn3.FieldName = "Material.DisplayName";
+            this.gridColumn3.MaxWidth = 250;
+            this.gridColumn3.MinWidth = 150;
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 2;
-            this.gridColumn3.Width = 123;
+            this.gridColumn3.Width = 150;
             // 
             // gridColumn4
             // 
             this.gridColumn4.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn4.Caption = "倉庫";
             this.gridColumn4.FieldName = "Storage.DisplayName";
+            this.gridColumn4.MaxWidth = 100;
+            this.gridColumn4.MinWidth = 70;
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 3;
-            this.gridColumn4.Width = 112;
+            this.gridColumn4.VisibleIndex = 4;
+            this.gridColumn4.Width = 70;
             // 
             // gridColumn12
             // 
             this.gridColumn12.Caption = "數量";
             this.gridColumn12.FieldName = "Transaction.Quantity";
+            this.gridColumn12.MaxWidth = 100;
+            this.gridColumn12.MinWidth = 70;
             this.gridColumn12.Name = "gridColumn12";
             this.gridColumn12.Visible = true;
-            this.gridColumn12.VisibleIndex = 4;
+            this.gridColumn12.VisibleIndex = 5;
+            this.gridColumn12.Width = 70;
             // 
             // gColEvent
             // 
             this.gColEvent.Caption = "事件";
             this.gColEvent.FieldName = "Event.Value";
+            this.gColEvent.MaxWidth = 100;
+            this.gColEvent.MinWidth = 70;
             this.gColEvent.Name = "gColEvent";
             this.gColEvent.Visible = true;
-            this.gColEvent.VisibleIndex = 5;
+            this.gColEvent.VisibleIndex = 3;
+            this.gColEvent.Width = 70;
             // 
             // gridColumn14
             // 
+            this.gridColumn14.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn14.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn14.Caption = "時期";
             this.gridColumn14.DisplayFormat.FormatString = "yyyy/MM/dd HH:mm";
             this.gridColumn14.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.gridColumn14.FieldName = "Transaction.CreatedDate";
+            this.gridColumn14.MinWidth = 150;
             this.gridColumn14.Name = "gridColumn14";
             this.gridColumn14.Visible = true;
             this.gridColumn14.VisibleIndex = 0;
+            this.gridColumn14.Width = 162;
             // 
             // gridColumn15
             // 
@@ -293,23 +308,29 @@
             this.gridColumn15.FieldName = "Transaction.Desc";
             this.gridColumn15.Name = "gridColumn15";
             this.gridColumn15.Visible = true;
-            this.gridColumn15.VisibleIndex = 6;
+            this.gridColumn15.VisibleIndex = 8;
             // 
             // gridColumn16
             // 
             this.gridColumn16.Caption = "數量後";
             this.gridColumn16.FieldName = "Transaction.AftQuantity";
+            this.gridColumn16.MaxWidth = 100;
+            this.gridColumn16.MinWidth = 70;
             this.gridColumn16.Name = "gridColumn16";
             this.gridColumn16.Visible = true;
-            this.gridColumn16.VisibleIndex = 7;
+            this.gridColumn16.VisibleIndex = 6;
+            this.gridColumn16.Width = 70;
             // 
             // gridColumn17
             // 
             this.gridColumn17.Caption = "總數量";
             this.gridColumn17.FieldName = "Transaction.TotalQuantity";
+            this.gridColumn17.MaxWidth = 100;
+            this.gridColumn17.MinWidth = 70;
             this.gridColumn17.Name = "gridColumn17";
             this.gridColumn17.Visible = true;
-            this.gridColumn17.VisibleIndex = 8;
+            this.gridColumn17.VisibleIndex = 7;
+            this.gridColumn17.Width = 70;
             // 
             // gridColumn18
             // 

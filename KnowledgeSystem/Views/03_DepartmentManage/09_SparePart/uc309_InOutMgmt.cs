@@ -144,7 +144,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                                        Material = m,
                                        Storage = s,
                                        Event = e,
-                                       User = user?.DisplayName
+                                       User = user == null ? null : $"LG{user.IdDepartment}/{user.DisplayName}"
                                    }).ToList();
 
                 sourceBases.DataSource = displayData;
