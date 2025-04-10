@@ -56,8 +56,8 @@ namespace KnowledgeSystem.Views._00_Generals
             var lsFuncs = dm_FunctionBUS.Instance.GetList();
             btnSysAdmin.Text = lsFuncs.First(r => r.Id == AppPermission.SysAdmin).DisplayName;
             btnMod.Text = lsFuncs.First(r => r.Id == AppPermission.Mod).DisplayName;
-            btnKnowHow.Text = lsFuncs.First(r => r.Id == AppPermission.KnowledgeMain).DisplayName;
-            btnSafetyCert.Text = lsFuncs.First(r => r.Id == AppPermission.SafetyCertMain).DisplayName;
+            //btnKnowHow.Text = lsFuncs.First(r => r.Id == AppPermission.KnowledgeMain).DisplayName;
+            //btnSafetyCert.Text = lsFuncs.First(r => r.Id == AppPermission.SafetyCertMain).DisplayName;
         }
 
         private void GetUserLogin()
