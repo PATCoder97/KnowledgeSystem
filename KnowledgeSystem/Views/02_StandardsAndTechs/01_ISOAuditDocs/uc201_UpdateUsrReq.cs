@@ -1,6 +1,7 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
 using DevExpress.XtraEditors;
+using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using DocumentFormat.OpenXml.Spreadsheet;
 using KnowledgeSystem.Helpers;
@@ -15,6 +16,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Util;
 using System.Windows.Forms;
 
 namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
@@ -25,6 +27,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         {
             InitializeComponent();
             InitializeIcon();
+            CreateRuleGV();
         }
 
         List<dt201_UpdateUsrReq> baseReq;
@@ -32,6 +35,33 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         List<dm_Departments> depts;
 
         BindingSource sourceForm = new BindingSource();
+
+        private void CreateRuleGV()
+        {
+            var rule1 = new GridFormatRule
+            {
+                Column = gColUserId,
+                Name = "RuleNotComplete",
+                Rule = new FormatConditionRuleExpression
+                {
+                    Expression = "[notComplete] = 'True'",
+                    Appearance = { ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical, }
+                }
+            };
+            gvData.FormatRules.Add(rule1);
+
+            var rule2 = new GridFormatRule
+            {
+                Column = gColUserId,
+                Name = "RuleNotConfirm",
+                Rule = new FormatConditionRuleExpression
+                {
+                    Expression = "[notconfirm] = 'True'",
+                    Appearance = { ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Question, }
+                }
+            };
+            gvData.FormatRules.Add(rule2);
+        }
 
         private void InitializeIcon()
         {
@@ -45,6 +75,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             baseReq = dt201_UpdateUsrReqBUS.Instance.GetList();
             users = dm_UserBUS.Instance.GetList();
             depts = dm_DeptBUS.Instance.GetList();
+            var reqDetailNotComplete = dt201_UpdateUsrReq_DetailBUS.Instance.GetListNotComplete().Select(r => r.IdUpdateReq).Distinct();
+            var reqDetailConfirm = dt201_UpdateUsrReq_DetailBUS.Instance.GetListNotifyConfirm().Select(r => r.IdUpdateReq).Distinct();
 
             // Check quyền truy cập của tổ nào theo quyền của nhóm ISO đó
             var grpUsrs = dm_GroupUserBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id);
@@ -56,11 +88,15 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             var dataInfo = (from data in baseReq.Where(r => idDeptGroups.Contains(r.IdDept))
                             join usr in users on data.IdUsr equals usr.Id
                             join dept in depts on data.IdDept equals dept.Id
+                            let notComplete = reqDetailNotComplete.Any(r => r == data.Id)
+                            let notconfirm = reqDetailConfirm.Any(r => r == data.Id)
                             select new
                             {
                                 data,
                                 usr,
-                                dept
+                                dept,
+                                notComplete,
+                                notconfirm
                             }).ToList();
 
             sourceForm.DataSource = dataInfo;

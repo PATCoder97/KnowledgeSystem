@@ -67,6 +67,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         DXMenuItem itemMaterialOut;
         DXMenuItem itemMaterialTransfer;
         DXMenuItem itemMaterialCheck;
+        DXMenuItem itemMaterialGetFromOther;
 
         private void InitializeIcon()
         {
@@ -165,6 +166,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             itemMaterialOut = CreateMenuItem("領用", ItemMaterialOut_Click, TPSvgimages.Num2);
             itemMaterialTransfer = CreateMenuItem("轉庫", ItemMaterialTransfer_Click, TPSvgimages.Num3);
             itemMaterialCheck = CreateMenuItem("盤點", ItemMaterialCheck_Click, TPSvgimages.Num4);
+            itemMaterialGetFromOther = CreateMenuItem("調貨", ItemMaterialGetFromOther_Click, TPSvgimages.Num5);
         }
 
         private void HandleMaterialTransaction(string eventInfo)
@@ -180,6 +182,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             transactionForm.ShowDialog();
             LoadData();
         }
+
+        private void ItemMaterialGetFromOther_Click(object sender, EventArgs e) => HandleMaterialTransaction("調貨");
 
         private void ItemMaterialCheck_Click(object sender, EventArgs e) => HandleMaterialTransaction("盤點");
 
@@ -315,6 +319,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 dXSubMenuReports.Items.Add(itemMaterialOut);
                 dXSubMenuReports.Items.Add(itemMaterialTransfer);
                 dXSubMenuReports.Items.Add(itemMaterialCheck);
+                dXSubMenuReports.Items.Add(itemMaterialGetFromOther);
                 dXSubMenuReports.BeginGroup = true;
 
                 e.Menu.Items.Add(dXSubMenuReports);

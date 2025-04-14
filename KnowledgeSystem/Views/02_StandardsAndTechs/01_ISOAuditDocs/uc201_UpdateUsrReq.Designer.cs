@@ -32,9 +32,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc201_UpdateUsrReq));
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
+            this.btnManualChange = new DevExpress.XtraBars.BarButtonItem();
             this.btnReload = new DevExpress.XtraBars.BarButtonItem();
             this.btnExportExcel = new DevExpress.XtraBars.BarButtonItem();
-            this.btnManualChange = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -45,7 +45,7 @@
             this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gColId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColUserId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColEnterDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColIdForm = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -114,6 +114,14 @@
             this.bar2.OptionsBar.UseWholeRow = true;
             this.bar2.Text = "Main menu";
             // 
+            // btnManualChange
+            // 
+            this.btnManualChange.Caption = "手動創建";
+            this.btnManualChange.Id = 12;
+            this.btnManualChange.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnManualChange.Name = "btnManualChange";
+            this.btnManualChange.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnManualChange_ItemClick);
+            // 
             // btnReload
             // 
             this.btnReload.Caption = "刷新";
@@ -138,14 +146,6 @@
             this.btnExportExcel.ItemAppearance.Normal.Options.UseFont = true;
             this.btnExportExcel.Name = "btnExportExcel";
             this.btnExportExcel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExportExcel_ItemClick);
-            // 
-            // btnManualChange
-            // 
-            this.btnManualChange.Caption = "手動創建";
-            this.btnManualChange.Id = 12;
-            this.btnManualChange.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnManualChange.Name = "btnManualChange";
-            this.btnManualChange.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnManualChange_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -242,7 +242,7 @@
             this.gvData.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gColId,
             this.gridColumn3,
-            this.gridColumn4,
+            this.gColUserId,
             this.gColEnterDate,
             this.gridColumn6,
             this.gColIdForm,
@@ -255,6 +255,8 @@
             this.gvData.OptionsView.EnableAppearanceOddRow = true;
             this.gvData.OptionsView.ShowAutoFilterRow = true;
             this.gvData.OptionsView.ShowGroupPanel = false;
+            this.gvData.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gColId, DevExpress.Data.ColumnSortOrder.Descending)});
             this.gvData.DoubleClick += new System.EventHandler(this.gvData_DoubleClick);
             // 
             // gColId
@@ -274,14 +276,14 @@
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 0;
             // 
-            // gridColumn4
+            // gColUserId
             // 
-            this.gridColumn4.Caption = "人員工號";
-            this.gridColumn4.FieldName = "data.IdUsr";
-            this.gridColumn4.Name = "gridColumn4";
-            this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 1;
-            this.gridColumn4.Width = 91;
+            this.gColUserId.Caption = "人員工號";
+            this.gColUserId.FieldName = "data.IdUsr";
+            this.gColUserId.Name = "gColUserId";
+            this.gColUserId.Visible = true;
+            this.gColUserId.VisibleIndex = 1;
+            this.gColUserId.Width = 91;
             // 
             // gColEnterDate
             // 
@@ -302,7 +304,7 @@
             // 
             // gColIdForm
             // 
-            this.gColIdForm.Caption = "人員變動類別";
+            this.gColIdForm.Caption = "類別";
             this.gColIdForm.FieldName = "data.TypeChange";
             this.gColIdForm.Name = "gColIdForm";
             this.gColIdForm.Visible = true;
@@ -378,7 +380,7 @@
         private DevExpress.XtraGrid.Views.Grid.GridView gvData;
         private DevExpress.XtraGrid.Columns.GridColumn gColId;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
+        private DevExpress.XtraGrid.Columns.GridColumn gColUserId;
         private DevExpress.XtraGrid.Columns.GridColumn gColEnterDate;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private DevExpress.XtraGrid.Columns.GridColumn gColIdForm;

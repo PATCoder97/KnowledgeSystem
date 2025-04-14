@@ -24,6 +24,22 @@ namespace BusinessLayer
 
         private dt201_UpdateUsrReq_DetailBUS() { logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName); }
 
+        public List<dt201_UpdateUsrReq_Detail> GetList()
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt201_UpdateUsrReq_Detail.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public List<dt201_UpdateUsrReq_Detail> GetListByIdUpdateReq(int IdUpdateReq)
         {
             try

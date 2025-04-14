@@ -61,6 +61,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                     cbbStorageFrom.Enabled = false;
                     break;
 
+                case "調貨":
+                    cbbStorageTo.EditValue = 1;
+                    cbbStorageTo.Enabled = true;
+                    cbbStorageFrom.Enabled = false;
+                    break;
+
                 case "領用":
                     cbbStorageFrom.Enabled = true;
                     cbbStorageTo.Enabled = false;
@@ -210,6 +216,16 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             switch (eventInfo)
             {
                 case "收貨":
+
+                    transaction.TransactionType = "IN";
+                    transaction.Quantity = quantity;
+                    transaction.StorageId = (int)cbbStorageTo.EditValue;
+
+                    result = dt309_TransactionsBUS.Instance.Add(transaction);
+
+                    break;
+
+                case "調貨":
 
                     transaction.TransactionType = "IN";
                     transaction.Quantity = quantity;

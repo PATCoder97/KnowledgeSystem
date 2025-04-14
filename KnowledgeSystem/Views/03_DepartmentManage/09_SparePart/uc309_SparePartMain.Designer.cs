@@ -438,7 +438,7 @@
             // 
             // gridColumn15
             // 
-            this.gridColumn15.Caption = "機邊庫";
+            this.gridColumn15.Caption = "機邊庫數量";
             this.gridColumn15.FieldName = "data.QuantityInMachine";
             this.gridColumn15.Name = "gridColumn15";
             this.gridColumn15.Visible = true;
@@ -454,7 +454,7 @@
             // 
             // gridColumn17
             // 
-            this.gridColumn17.Caption = "單價";
+            this.gridColumn17.Caption = "單價(VNĐ)";
             this.gridColumn17.DisplayFormat.FormatString = "N0";
             this.gridColumn17.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.gridColumn17.FieldName = "data.Price";
@@ -464,7 +464,7 @@
             // 
             // gridColumn18
             // 
-            this.gridColumn18.Caption = "總金額";
+            this.gridColumn18.Caption = "總金額(VNĐ)";
             this.gridColumn18.DisplayFormat.FormatString = "#,##0.##";
             this.gridColumn18.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.gridColumn18.FieldName = "TotalPrice";
