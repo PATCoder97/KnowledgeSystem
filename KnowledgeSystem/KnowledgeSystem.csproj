@@ -1002,6 +1002,12 @@
     <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\uc402_Watermark.Designer.cs">
       <DependentUpon>uc402_Watermark.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\04_SystemAdministrator\03_Extension\02_MaterialTrends\uc403_02_MaterialTrends.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\04_SystemAdministrator\03_Extension\02_MaterialTrends\uc403_02_MaterialTrends.Designer.cs">
+      <DependentUpon>uc403_02_MaterialTrends.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\04_SystemAdministrator\03_Extension\f403_ProcessFilesTool.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1423,6 +1429,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\02_SystemAdmin\uc402_Watermark.resx">
       <DependentUpon>uc402_Watermark.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\04_SystemAdministrator\03_Extension\02_MaterialTrends\uc403_02_MaterialTrends.resx">
+      <DependentUpon>uc403_02_MaterialTrends.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\03_Extension\f403_ProcessFilesTool.resx">
       <DependentUpon>f403_ProcessFilesTool.cs</DependentUpon>
