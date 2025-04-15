@@ -37,7 +37,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._02_Materi
         }
 
 
-        private void SelectAndGetExcelFiles()
+        private bool SelectAndGetExcelFiles()
         {
             using (FolderBrowserDialog folderDialog = new FolderBrowserDialog())
             {
@@ -48,22 +48,52 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._02_Materi
                     //string selectedPath = folderDialog.SelectedPath;
                     string selectedPath = "E:\\01. Softwares Programming\\24. Knowledge System\\03. Documents\\5.檢驗量統計";
 
-                    // Get all Excel files (both .xls and .xlsx) with names containing "yyyyMM" using regex
+                    // Lấy tất cả các file Excel có chứa yyyyMM trong tên
                     excelFiles = Directory.GetFiles(selectedPath, "*.*")
                        .Where(file => (file.EndsWith(".xlsx", StringComparison.OrdinalIgnoreCase) ||
                                        file.EndsWith(".xls", StringComparison.OrdinalIgnoreCase)) &&
                                       Regex.IsMatch(Path.GetFileName(file), @"\d{4}(0[1-9]|1[0-2])"))
                        .ToList();
 
-                    if (excelFiles.Count() == 0)
+                    if (excelFiles.Count == 0)
                     {
-
-                        XtraMessageBox.Show("No Excel files found in the selected directory.",
+                        XtraMessageBox.Show("Không tìm thấy file Excel nào trong thư mục đã chọn.",
                             "Excel Files", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return false;
                     }
+
+                    // ✅ Kiểm tra toàn bộ file xem có file nào đang bị mở hay không
+                    var fileInUse = excelFiles.FirstOrDefault(file =>
+                    {
+                        try
+                        {
+                            using (FileStream stream = File.Open(file, FileMode.Open, FileAccess.ReadWrite, FileShare.None))
+                            {
+                                return false; // File không bị khóa
+                            }
+                        }
+                        catch (IOException)
+                        {
+                            return true; // File đang bị mở
+                        }
+                    });
+
+                    if (fileInUse != null)
+                    {
+                        XtraMessageBox.Show($"File đang được sử dụng: {Path.GetFileName(fileInUse)}\nVui lòng đóng file và thử lại.",
+                            "File Đang Mở", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return false;
+                    }
+
+                    // ✅ Mọi thứ OK
+                    return true;
                 }
             }
+
+            // Người dùng nhấn Cancel khi chọn thư mục
+            return false;
         }
+
 
         private DataTable ReadExcelFile(string filePath)
         {
@@ -163,7 +193,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._02_Materi
             gvData.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
             gvData.OptionsDetail.AllowOnlyOneMasterRowExpanded = true;
 
-            SelectAndGetExcelFiles();
+            var resultFile = SelectAndGetExcelFiles();
+            if (!resultFile) return;
 
             string[] keywords = { "鐵礦石", "固雜料", "鋼渣", "助熔劑", "耐火材", "合金鐵", "煤焦炭", "增碳劑", "化學品", "環境水質", "金屬工程材料", "煤化學", "校正科研", "快速化學分析", "產品檢驗", "非破壞檢驗" };
 
