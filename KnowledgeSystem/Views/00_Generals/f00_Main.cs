@@ -161,6 +161,17 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void ShowFromByFrame(int IdForm_, TileItemEventArgs e)
         {
+            // Check xem thời gian đăng nhập có quá lâu không, nếu quá lâu thì yêu cầu login lại
+            TimeSpan loginTimeout = TimeSpan.FromDays(1);
+            DateTime now = DateTime.Now;
+
+            if (TPConfigs.LoginUser.LastUpdate <= now - loginTimeout)
+            {
+                XtraMessageBox.Show("登入已逾時，請重新登入！", "系統提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                GetUserLogin();
+                return;
+            }
+
             bool IsGranted = AppPermission.Instance.CheckAppPermission(IdForm_);
             if (!IsGranted)
             {

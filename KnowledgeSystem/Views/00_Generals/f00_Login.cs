@@ -103,18 +103,18 @@ namespace KnowledgeSystem.Views._00_Generals
             ResultLogin:
                 if (usrLogin != null)
                 {
-                    // Lưu thông tin đăng nhập và đóng form
-                    RegistryHelper.SaveSetting(RegistryHelper.LoginId, _userID);
-                    TPConfigs.LoginSuccessful = true;
-                    TPConfigs.LoginUser = usrLogin;
-                    TPConfigs.idDept2word = TPConfigs.LoginUser.IdDepartment.Substring(0, 2);
-
                     // Test
                     usrLogin.SecondaryPassword = encryptPass;
                     usrLogin.PCName = PCInfoHelper.Instance.GetPCName();
                     usrLogin.IPAddress = PCInfoHelper.Instance.GetIPAddress();
                     usrLogin.LastUpdate = DateTime.Now;
                     dm_UserBUS.Instance.AddOrUpdate(usrLogin);
+
+                    // Lưu thông tin đăng nhập và đóng form
+                    RegistryHelper.SaveSetting(RegistryHelper.LoginId, _userID);
+                    TPConfigs.LoginSuccessful = true;
+                    TPConfigs.LoginUser = usrLogin;
+                    TPConfigs.idDept2word = TPConfigs.LoginUser.IdDepartment.Substring(0, 2);
 
                     Close();
                 }
