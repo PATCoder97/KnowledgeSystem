@@ -29,7 +29,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
         public int indexTypeVehicle = 0;
         public VehicleStatus vehicleStatus;
         public string licExpDate = "";
-        public string borrTime = "";
+        public DateTime lastBorrTime;
+        public string borrTime;
 
         int startKm = 0;
 
@@ -64,6 +65,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
             if (timeBorrTime.DateTimeOffset > DateTimeOffset.Now)
             {
                 msg += "</br> - Thời gian mượn nhỏ hơn thời gian hiện tại";
+                IsOK = false;
+            }
+
+            if (timeBorrTime.DateTimeOffset < lastBorrTime)
+            {
+                msg += "</br> - Thời gian mượn nhỏ hơn thời gian trả cuối cùng";
                 IsOK = false;
             }
 

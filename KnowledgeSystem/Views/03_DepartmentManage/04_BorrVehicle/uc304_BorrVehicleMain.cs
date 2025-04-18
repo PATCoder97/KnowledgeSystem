@@ -170,15 +170,27 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
             LoadDataVehicle();
         }
 
-        private void ItemBorrVehicle_Click(object sender, EventArgs e)
+        private async void ItemBorrVehicle_Click(object sender, EventArgs e)
         {
             VehicleStatus status = gvVehicleStatus.GetRow(gvVehicleStatus.FocusedRowHandle) as VehicleStatus;
+            List<VehicleBorrInfo> dataInfos = new List<VehicleBorrInfo>();
+
+            switch (cbbTypeVehicle.SelectedIndex)
+            {
+                case 0:
+                    dataInfos = await BorrVehicleHelper.Instance.GetBorrMotorUser(status);
+                    break;
+                case 1:
+                    dataInfos = await BorrVehicleHelper.Instance.GetBorrCarUser(status);
+                    break;
+            }
 
             f304_BorrVehicleInfo frm = new f304_BorrVehicleInfo();
             frm.indexTypeVehicle = cbbTypeVehicle.SelectedIndex;
             frm.vehicleStatus = status;
             frm.licExpDate = carDrivingLics.FirstOrDefault()?.Exprires.ToString("yyyyMMdd") ?? "";
             frm.borrUsr = borrUsr;
+            frm.lastBorrTime = dataInfos.FirstOrDefault()?.BorrTime ?? (DateTime)default;
 
             frm.ShowDialog();
 
