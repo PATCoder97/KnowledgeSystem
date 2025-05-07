@@ -15,6 +15,7 @@ using KnowledgeSystem.Views._03_DepartmentManage._03_ShiftSchedule;
 using KnowledgeSystem.Views._03_DepartmentManage._06_Signature;
 using KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck;
 using KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin;
+using KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._03_ImageAutoArrangement;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -124,6 +125,7 @@ namespace KnowledgeSystem
                 AppPermission.Instance.CheckAppPermission(7);
                 TPConfigs.IdParentControl = AppPermission.SafetyCertMain;
 
+                //Application.Run(new f403_03_ImageAutoArray());
                 //Application.Run(new f00_FluentFrame(56));
                 Application.Run(new f00_Main());
 #else

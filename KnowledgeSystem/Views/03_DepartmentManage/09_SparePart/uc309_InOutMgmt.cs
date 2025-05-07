@@ -53,12 +53,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         DXMenuItem itemMaterialTransfer;
         DXMenuItem itemMaterialCheck;
 
-        Dictionary<string, string> events = new Dictionary<string, string>()
-        {
-            {"IN","入庫" },
-            {"OUT","出庫" },
-            {"CHECK","盤點" },
-        };
+        Dictionary<string, string> events = uc309_SparePartMain.events;
 
         private void InitializeIcon()
         {
@@ -100,7 +95,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 Name = "RuleCheck",
                 Rule = new FormatConditionRuleExpression
                 {
-                    Expression = "[Transaction.TransactionType] = 'CHECK'",
+                    Expression = "[Transaction.TransactionType] = 'check'",
                     Appearance = { ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical, }
                 }
             };
@@ -112,11 +107,23 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 Name = "RuleIn",
                 Rule = new FormatConditionRuleExpression
                 {
-                    Expression = "[Transaction.TransactionType] = 'IN'",
+                    Expression = "[Transaction.TransactionType] = 'in'",
                     Appearance = { ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Question, }
                 }
             };
             gvData.FormatRules.Add(ruleIN);
+
+            var ruleTransfer = new GridFormatRule
+            {
+                Column = gColEvent,
+                Name = "RuleTransfer",
+                Rule = new FormatConditionRuleExpression
+                {
+                    Expression = "[Transaction.TransactionType] = 'transfer'",
+                    Appearance = { ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Information, }
+                }
+            };
+            gvData.FormatRules.Add(ruleTransfer);
 
         }
 

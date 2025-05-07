@@ -54,11 +54,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         List<dt309_Materials> materials;
         List<dt309_Storages> storages;
 
-        Dictionary<string, string> events = new Dictionary<string, string>()
+        public static Dictionary<string, string> events = new Dictionary<string, string>()
         {
-            {"IN","入庫" },
-            {"OUT","出庫" },
-            {"CHECK","盤點" },
+            {"in","入庫" },
+            {"out","出庫" },
+            {"check","盤點" },
+            {"transfer","轉庫" },
         };
 
         DXMenuItem itemViewInfo;
@@ -85,7 +86,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 Name = "RuleCheck",
                 Rule = new FormatConditionRuleExpression
                 {
-                    Expression = "[data.TransactionType] = 'CHECK'",
+                    Expression = "[data.TransactionType] = 'check'",
                     Appearance = { ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical, }
                 }
             };
@@ -98,11 +99,24 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 Name = "RuleIn",
                 Rule = new FormatConditionRuleExpression
                 {
-                    Expression = "[data.TransactionType] = 'IN'",
+                    Expression = "[data.TransactionType] = 'in'",
                     Appearance = { ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Question, }
                 }
             };
             gvTransactions.FormatRules.Add(ruleIN);
+
+            // Quy tắc định dạng khi TransactionType = 'I'
+            var ruleTransfer = new GridFormatRule
+            {
+                Column = gColEvent,
+                Name = "RuleTransfer",
+                Rule = new FormatConditionRuleExpression
+                {
+                    Expression = "[data.TransactionType] = 'transfer'",
+                    Appearance = { ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Information, }
+                }
+            };
+            gvTransactions.FormatRules.Add(ruleTransfer);
 
             // Quy tắc cảnh báo khi số lượng trong kho + máy < min
             var ruleNotify = new GridFormatRule

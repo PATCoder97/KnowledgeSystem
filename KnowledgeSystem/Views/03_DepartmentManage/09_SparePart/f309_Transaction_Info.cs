@@ -217,7 +217,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             {
                 case "收貨":
 
-                    transaction.TransactionType = "IN";
+                    transaction.TransactionType = "in";
                     transaction.Quantity = quantity;
                     transaction.StorageId = (int)cbbStorageTo.EditValue;
 
@@ -227,7 +227,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
                 case "調貨":
 
-                    transaction.TransactionType = "IN";
+                    transaction.TransactionType = "in";
                     transaction.Quantity = quantity;
                     transaction.StorageId = (int)cbbStorageTo.EditValue;
 
@@ -243,7 +243,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                         return;
                     }
 
-                    transaction.TransactionType = "OUT";
+                    transaction.TransactionType = "out";
                     transaction.Quantity = quantity;
                     transaction.StorageId = (int)cbbStorageFrom.EditValue;
 
@@ -259,7 +259,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                         return;
                     }
 
-                    transaction.TransactionType = "OUT";
+                    transaction.TransactionType = "transfer";
                     transaction.Quantity = quantity;
                     transaction.StorageId = (int)cbbStorageFrom.EditValue;
 
@@ -267,7 +267,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
                     Thread.Sleep(200);
 
-                    transaction.TransactionType = "IN";
+                    transaction.TransactionType = "transfer";
                     transaction.Quantity = quantity;
                     transaction.StorageId = (int)cbbStorageTo.EditValue;
 
@@ -277,7 +277,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
                 case "盤點":
 
-                    transaction.TransactionType = "CHECK";
+                    transaction.TransactionType = "check";
                     transaction.Quantity = quantity;
                     transaction.StorageId = (int)cbbStorageFrom.EditValue;
 

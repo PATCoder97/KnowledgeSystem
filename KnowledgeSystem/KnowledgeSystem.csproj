@@ -1008,6 +1008,12 @@
     <Compile Include="Views\04_SystemAdministrator\03_Extension\02_MaterialTrends\uc403_02_MaterialTrends.Designer.cs">
       <DependentUpon>uc403_02_MaterialTrends.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\04_SystemAdministrator\03_Extension\03_ImageAutoArrangement\f403_03_ImageAutoArray.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\04_SystemAdministrator\03_Extension\03_ImageAutoArrangement\f403_03_ImageAutoArray.Designer.cs">
+      <DependentUpon>f403_03_ImageAutoArray.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\04_SystemAdministrator\03_Extension\f403_ProcessFilesTool.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1432,6 +1438,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\03_Extension\02_MaterialTrends\uc403_02_MaterialTrends.resx">
       <DependentUpon>uc403_02_MaterialTrends.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\04_SystemAdministrator\03_Extension\03_ImageAutoArrangement\f403_03_ImageAutoArray.resx">
+      <DependentUpon>f403_03_ImageAutoArray.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\03_Extension\f403_ProcessFilesTool.resx">
       <DependentUpon>f403_ProcessFilesTool.cs</DependentUpon>
