@@ -127,7 +127,6 @@ namespace KnowledgeSystem.Views._00_Generals
             this.tileMain.MaxId = 27;
             this.tileMain.Name = "tileMain";
             this.tileMain.Padding = new System.Windows.Forms.Padding(24, 22, 24, 22);
-            this.tileMain.Position = 153;
             this.tileMain.ShowGroupText = true;
             this.tileMain.Size = new System.Drawing.Size(1180, 599);
             this.tileMain.TabIndex = 4;
@@ -232,7 +231,7 @@ namespace KnowledgeSystem.Views._00_Generals
             // 
             this.tileItem8.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
             this.tileItem8.AppearanceItem.Normal.Options.UseFont = true;
-            tileItemElement7.Text = "國際標準、規範";
+            tileItemElement7.Text = "國際規範";
             this.tileItem8.Elements.Add(tileItemElement7);
             this.tileItem8.Id = 12;
             this.tileItem8.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
