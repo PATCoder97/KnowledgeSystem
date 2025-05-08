@@ -260,7 +260,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                     }
 
                     transaction.TransactionType = "transfer";
-                    transaction.Quantity = quantity;
+                    transaction.Quantity = -quantity;
                     transaction.StorageId = (int)cbbStorageFrom.EditValue;
 
                     result = dt309_TransactionsBUS.Instance.Add(transaction);

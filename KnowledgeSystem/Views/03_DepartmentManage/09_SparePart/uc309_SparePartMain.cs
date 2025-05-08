@@ -52,6 +52,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         RefreshHelper helper;
         BindingSource sourceBases = new BindingSource();
         string idDept2word = TPConfigs.idDept2word;
+        string deptGetData = "";
 
         List<dm_User> users = new List<dm_User>();
         List<dm_Group> groups;
@@ -256,7 +257,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             {
                 eventInfo = EventFormInfo.View,
                 formName = "備品",
-                idBase = idMaterial
+                idBase = idMaterial,
+                idDeptGetData = deptGetData
             };
             fInfo.ShowDialog();
 
@@ -269,7 +271,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             {
                 helper.SaveViewInfo();
 
-                string deptGetData = (barCbbDept.EditValue?.ToString().Split(' ')[0]) ?? string.Empty;
+                deptGetData = (barCbbDept.EditValue?.ToString().Split(' ')[0]) ?? string.Empty;
                 storages = dt309_StoragesBUS.Instance.GetList();
                 users = dm_UserBUS.Instance.GetList();
                 var units = dt309_UnitsBUS.Instance.GetList();
@@ -338,7 +340,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            f309_Material_Info finfo = new f309_Material_Info();
+            f309_Material_Info finfo = new f309_Material_Info()
+            {
+                eventInfo = EventFormInfo.Create,
+                formName = "備品",
+                idDeptGetData = deptGetData
+            };
+
             finfo.ShowDialog();
             LoadData();
         }
@@ -437,7 +445,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                                 data = r,
                                 Event = events[r.TransactionType],
                                 UserDo = users.FirstOrDefault(u => u.Id == r.UserDo)?.DisplayName,
-                                Starage = storages.FirstOrDefault(u => u.Id == r.StorageId).DisplayName,
+                                Starage = storages.FirstOrDefault(u => u.Id == r.StorageId)?.DisplayName,
                             }).OrderByDescending(r => r.data.Id).ToList();
                             e.ChildList = transactions;
 

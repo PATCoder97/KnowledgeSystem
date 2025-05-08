@@ -30,6 +30,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         public EventFormInfo eventInfo = EventFormInfo.Create;
         public string formName = "";
         public int idBase = -1;
+        public string idDeptGetData = TPConfigs.LoginUser.IdDepartment;
 
         dt309_Materials material;
         dt309_Materials oldMaterial;
@@ -134,12 +135,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             cbbUnit.Properties.DisplayMember = "DisplayName";
             cbbUnit.Properties.ValueMember = "Id";
 
-            var usrs = dm_UserBUS.Instance.GetList().Where(r => r.Status == 0 && r.IdDepartment == TPConfigs.LoginUser.IdDepartment).ToList();
+            var usrs = dm_UserBUS.Instance.GetList().Where(r => r.Status == 0 && r.IdDepartment == idDeptGetData).ToList();
             cbbUsr.Properties.DataSource = usrs;
             cbbUsr.Properties.DisplayMember = "DisplayName";
             cbbUsr.Properties.ValueMember = "Id";
 
-            var machines = dt309_MachinesBUS.Instance.GetListByIdDept(TPConfigs.LoginUser.IdDepartment);
+            var machines = dt309_MachinesBUS.Instance.GetListByIdDept(idDeptGetData);
             tokenMachine.Properties.DataSource = machines;
             tokenMachine.Properties.DisplayMember = "DisplayName";
             tokenMachine.Properties.ValueMember = "Id";
@@ -216,7 +217,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             var result = false;
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
             {
-                material.IdDept = TPConfigs.LoginUser.IdDepartment;
+                material.IdDept = idDeptGetData;
                 material.Code = code;
                 material.DisplayName = displayName;
                 material.IdUnit = idUnit;
@@ -225,7 +226,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 material.TypeUse = typeUse;
                 material.ExpDate = expDate;
                 material.MinQuantity = minQuantity;
-                
+
                 List<int> machineIds = idMachines.Split(',').Select(int.Parse).ToList();
 
                 switch (eventInfo)
