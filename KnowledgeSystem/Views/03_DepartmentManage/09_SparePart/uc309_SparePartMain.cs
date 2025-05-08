@@ -18,6 +18,7 @@ using DataAccessLayer;
 using DevExpress.Utils.Menu;
 using DevExpress.Utils.Svg;
 using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraSplashScreen;
@@ -43,6 +44,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
             Font fontUI12 = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             DevExpress.Utils.AppearanceObject.DefaultMenuFont = fontUI12;
+
+            //cbbDept.EditValueChanged += CbbDept_EditValueChanged;
+            barCbbDept.EditValueChanged += CbbDept_EditValueChanged;
         }
 
         RefreshHelper helper;
@@ -50,6 +54,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         string idDept2word = TPConfigs.idDept2word;
 
         List<dm_User> users = new List<dm_User>();
+        List<dm_Group> groups;
+        List<dm_Departments> depts;
 
         List<dt309_Materials> materials;
         List<dt309_Storages> storages;
@@ -75,6 +81,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             btnAdd.ImageOptions.SvgImage = TPSvgimages.Add;
             btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
             btnExportExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
+            barCbbDept.ImageOptions.SvgImage = TPSvgimages.Dept;
         }
 
         private void CreateRuleGV()
@@ -262,11 +269,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             {
                 helper.SaveViewInfo();
 
+                string deptGetData = (barCbbDept.EditValue?.ToString().Split(' ')[0]) ?? string.Empty;
                 storages = dt309_StoragesBUS.Instance.GetList();
                 users = dm_UserBUS.Instance.GetList();
                 var units = dt309_UnitsBUS.Instance.GetList();
 
-                materials = dt309_MaterialsBUS.Instance.GetListByIdDept(TPConfigs.LoginUser.IdDepartment);
+                materials = dt309_MaterialsBUS.Instance.GetListByIdDept(deptGetData);
 
                 var displayData = materials.Select(x => new
                 {
@@ -296,6 +304,23 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             gvMachine.ReadOnlyGridView();
             gvMachine.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
 
+            // Kiểm tra quyền từng ke để có quyền truy cập theo nhóm
+            var userGroups = dm_GroupUserBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id);
+            var departments = dm_DeptBUS.Instance.GetList();
+            var groups = dm_GroupBUS.Instance.GetListByName("機邊庫");
+
+            var accessibleGroups = groups
+                .Where(group => userGroups.Any(userGroup => userGroup.IdGroup == group.Id))
+                .ToList();
+
+            var departmentItems = departments
+                .Where(dept => accessibleGroups.Any(group => group.IdDept == dept.Id))
+                .Select(dept => new ComboBoxItem { Value = $"{dept.Id} {dept.DisplayName}" })
+                .ToArray();
+
+            cbbDept.Items.AddRange(departmentItems);
+            barCbbDept.EditValue = departmentItems.FirstOrDefault()?.Value ?? string.Empty;
+
             LoadData();
             CreateRuleGV();
             gcData.DataSource = sourceBases;
@@ -304,6 +329,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
             gvData.OptionsDetail.EnableMasterViewMode = true;
             gvData.OptionsView.ShowGroupPanel = false;
+        }
+
+        private void CbbDept_EditValueChanged(object sender, EventArgs e)
+        {
+            LoadData();
         }
 
         private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

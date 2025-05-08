@@ -1511,6 +1511,9 @@
     <Content Include="Images\checked_radio_button.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\icons8_department.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\icons8_disable.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
