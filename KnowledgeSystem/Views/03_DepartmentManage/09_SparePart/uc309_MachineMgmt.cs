@@ -41,6 +41,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         List<dm_User> users = new List<dm_User>();
 
         List<dt309_Machines> machines;
+        List<dt309_Materials> materials;
+        List<dt309_MachineMaterials> machineMaterials;
         List<dt309_Storages> storages;
         List<dt309_Units> units;
 
@@ -100,12 +102,37 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
                 string deptGetData = (barCbbDept.EditValue?.ToString().Split(' ')[0]) ?? string.Empty;
                 machines = dt309_MachinesBUS.Instance.GetListByIdDept(deptGetData);
+                materials = dt309_MaterialsBUS.Instance.GetList();
+                machineMaterials = dt309_MachineMaterialsBUS.Instance.GetList();
 
                 storages = dt309_StoragesBUS.Instance.GetList();
                 users = dm_UserBUS.Instance.GetList();
                 units = dt309_UnitsBUS.Instance.GetList();
 
-                sourceBases.DataSource = machines;
+                var displayData = machines.Select(machine =>
+                {
+                    var machineMaterialList = machineMaterials
+                        .Where(mm => mm.MachineId == machine.Id)
+                        .Join(materials,
+                              mm => mm.MaterialId,
+                              m => m.Id,
+                              (mm, m) => m)
+                        .ToList();
+
+                    // Ép kiểu từng thành phần sang double để đảm bảo kết quả đúng
+                    double totalPrice = machineMaterialList.Sum(m =>
+                        Convert.ToDouble(m.Price) * (Convert.ToDouble(m.QuantityInStorage) + Convert.ToDouble(m.QuantityInMachine)));
+
+                    return new
+                    {
+                        Machine = machine,
+                        物料 = machineMaterialList,
+                        TotalPrice = totalPrice
+                    };
+                }).ToList();
+
+                sourceBases.DataSource = displayData;
+
 
                 gvData.BestFitColumns();
                 gvData.CollapseAllDetails();
@@ -150,11 +177,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         private void gvData_MasterRowEmpty(object sender, MasterRowEmptyEventArgs e)
         {
-            GridView view = sender as GridView;
-            dt309_Machines machine = view.GetRow(e.RowHandle) as dt309_Machines;
-            int idMachine = machine.Id;
+            //GridView view = sender as GridView;
+            //dt309_Machines machine = view.GetRow(e.RowHandle) as dt309_Machines;
+            //int idMachine = machine.Id;
 
-            e.IsEmpty = dt309_MachineMaterialsBUS.Instance.GetListByIdMachine(idMachine).Count() == 0;
+            //e.IsEmpty = dt309_MachineMaterialsBUS.Instance.GetListByIdMachine(idMachine).Count() == 0;
         }
 
         private void gvData_MasterRowGetRelationCount(object sender, MasterRowGetRelationCountEventArgs e)
@@ -169,25 +196,27 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         private void gvData_MasterRowGetChildList(object sender, MasterRowGetChildListEventArgs e)
         {
-            using (var handle = SplashScreenManager.ShowOverlayForm(gcData))
+            GridView view = sender as GridView;
+            if (view != null)
             {
-                GridView view = sender as GridView;
-                dt309_Machines machine = view.GetRow(e.RowHandle) as dt309_Machines;
-                int idMachine = machine.Id;
-
-                if (machine != null)
+                var parentRow = view.GetRow(e.RowHandle) as dynamic;
+                if (parentRow != null)
                 {
-                    var materialsId = dt309_MachineMaterialsBUS.Instance.GetListByIdMachine(idMachine).Select(r => r.MaterialId).ToList();
-                    var materials = dt309_MaterialsBUS.Instance.GetListByIds(materialsId);
+                    // Kiểm tra xem parentRow có chứa thuộc tính Materials và thuộc tính đó có phải là danh sách hay không
+                    var materialsChild = parentRow.物料 as IEnumerable<dynamic>;
 
-                    var displayData = materials.Select(x => new
+                    if (materialsChild != null)
                     {
-                        data = x,
-                        Unit = units.FirstOrDefault(u => u.Id == x.IdUnit).DisplayName,
-                        UserMngr = users.FirstOrDefault(u => u.Id == x.IdManager).DisplayName,
-                    }).ToList();
+                        var displayData = materialsChild.Select(x => new
+                        {
+                            data = x,
+                            Unit = units.FirstOrDefault(u => u.Id == x.IdUnit)?.DisplayName,
+                            UserMngr = users.FirstOrDefault(u => u.Id == x.IdManager)?.DisplayName,
+                            TotalPrice = Convert.ToDouble(x.Price * (x.QuantityInStorage + x.QuantityInMachine)),
+                        }).ToList();
 
-                    e.ChildList = displayData;
+                        e.ChildList = displayData;
+                    }
                 }
             }
         }

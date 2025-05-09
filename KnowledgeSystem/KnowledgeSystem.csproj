@@ -642,6 +642,18 @@
     <Compile Include="Views\03_DepartmentManage\09_SparePart\f309_Transaction_Info.Designer.cs">
       <DependentUpon>f309_Transaction_Info.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\03_DepartmentManage\09_SparePart\uc309_ChooseDate.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\09_SparePart\uc309_ChooseDate.Designer.cs">
+      <DependentUpon>uc309_ChooseDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\09_SparePart\uc309_CostCalculation.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\09_SparePart\uc309_CostCalculation.Designer.cs">
+      <DependentUpon>uc309_CostCalculation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\03_DepartmentManage\09_SparePart\uc309_InOutMgmt.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -653,6 +665,12 @@
     </Compile>
     <Compile Include="Views\03_DepartmentManage\09_SparePart\uc309_MachineMgmt.Designer.cs">
       <DependentUpon>uc309_MachineMgmt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\09_SparePart\uc309_ReCheckInventory.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\09_SparePart\uc309_ReCheckInventory.Designer.cs">
+      <DependentUpon>uc309_ReCheckInventory.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\03_DepartmentManage\09_SparePart\uc309_SparePartMain.cs">
       <SubType>UserControl</SubType>
@@ -1256,11 +1274,20 @@
     <EmbeddedResource Include="Views\03_DepartmentManage\09_SparePart\f309_Transaction_Info.resx">
       <DependentUpon>f309_Transaction_Info.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\09_SparePart\uc309_ChooseDate.resx">
+      <DependentUpon>uc309_ChooseDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\09_SparePart\uc309_CostCalculation.resx">
+      <DependentUpon>uc309_CostCalculation.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\09_SparePart\uc309_InOutMgmt.resx">
       <DependentUpon>uc309_InOutMgmt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\09_SparePart\uc309_MachineMgmt.resx">
       <DependentUpon>uc309_MachineMgmt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\09_SparePart\uc309_ReCheckInventory.resx">
+      <DependentUpon>uc309_ReCheckInventory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\09_SparePart\uc309_SparePartMain.resx">
       <DependentUpon>uc309_SparePartMain.cs</DependentUpon>

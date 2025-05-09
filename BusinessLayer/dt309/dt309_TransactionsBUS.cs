@@ -40,6 +40,22 @@ namespace BusinessLayer
             }
         }
 
+        public List<dt309_Transactions> GetListByDate(DateTime dateFrom, DateTime dateTo)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt309_Transactions.Where(r => r.CreatedDate >= dateFrom && r.CreatedDate <= dateTo).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public List<dt309_Transactions> GetListByidMaterial(int idMaterial)
         {
             try

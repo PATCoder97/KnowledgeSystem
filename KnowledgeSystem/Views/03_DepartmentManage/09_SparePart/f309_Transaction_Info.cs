@@ -61,7 +61,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                     cbbStorageFrom.Enabled = false;
                     break;
 
-                case "調貨":
+                case "調撥":
                     cbbStorageTo.EditValue = 1;
                     cbbStorageTo.Enabled = true;
                     cbbStorageFrom.Enabled = false;
@@ -225,7 +225,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
                     break;
 
-                case "調貨":
+                case "調撥":
 
                     transaction.TransactionType = "in";
                     transaction.Quantity = quantity;
