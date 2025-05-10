@@ -33,23 +33,23 @@
             this.btnSubmit = new DevExpress.XtraEditors.SimpleButton();
             this.cbbZoom = new DevExpress.XtraEditors.ComboBoxEdit();
             this.txbPath = new DevExpress.XtraEditors.TextEdit();
+            this.cbbTypeFile = new DevExpress.XtraEditors.ComboBoxEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.cbbTypeFile = new DevExpress.XtraEditors.ComboBoxEdit();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cbbZoom.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbPath.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbTypeFile.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbbTypeFile.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             this.SuspendLayout();
             // 
@@ -121,6 +121,31 @@
             this.txbPath.StyleController = this.layoutControl1;
             this.txbPath.TabIndex = 4;
             // 
+            // cbbTypeFile
+            // 
+            this.cbbTypeFile.EditValue = "PowerPoint";
+            this.cbbTypeFile.Location = new System.Drawing.Point(100, 48);
+            this.cbbTypeFile.Name = "cbbTypeFile";
+            this.cbbTypeFile.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbTypeFile.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.cbbTypeFile.Properties.Appearance.Options.UseFont = true;
+            this.cbbTypeFile.Properties.Appearance.Options.UseForeColor = true;
+            this.cbbTypeFile.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbTypeFile.Properties.AppearanceDropDown.ForeColor = System.Drawing.Color.Black;
+            this.cbbTypeFile.Properties.AppearanceDropDown.Options.UseFont = true;
+            this.cbbTypeFile.Properties.AppearanceDropDown.Options.UseForeColor = true;
+            this.cbbTypeFile.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbbTypeFile.Properties.DropDownRows = 3;
+            this.cbbTypeFile.Properties.Items.AddRange(new object[] {
+            "Excel",
+            "PowerPoint"});
+            this.cbbTypeFile.Properties.Sorted = true;
+            this.cbbTypeFile.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.cbbTypeFile.Size = new System.Drawing.Size(131, 32);
+            this.cbbTypeFile.StyleController = this.layoutControl1;
+            this.cbbTypeFile.TabIndex = 5;
+            // 
             // Root
             // 
             this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
@@ -178,31 +203,6 @@
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextVisible = false;
             // 
-            // cbbTypeFile
-            // 
-            this.cbbTypeFile.EditValue = "Excel";
-            this.cbbTypeFile.Location = new System.Drawing.Point(100, 48);
-            this.cbbTypeFile.Name = "cbbTypeFile";
-            this.cbbTypeFile.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbbTypeFile.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.cbbTypeFile.Properties.Appearance.Options.UseFont = true;
-            this.cbbTypeFile.Properties.Appearance.Options.UseForeColor = true;
-            this.cbbTypeFile.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbbTypeFile.Properties.AppearanceDropDown.ForeColor = System.Drawing.Color.Black;
-            this.cbbTypeFile.Properties.AppearanceDropDown.Options.UseFont = true;
-            this.cbbTypeFile.Properties.AppearanceDropDown.Options.UseForeColor = true;
-            this.cbbTypeFile.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbbTypeFile.Properties.DropDownRows = 3;
-            this.cbbTypeFile.Properties.Items.AddRange(new object[] {
-            "Excel",
-            "PowerPoint"});
-            this.cbbTypeFile.Properties.Sorted = true;
-            this.cbbTypeFile.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cbbTypeFile.Size = new System.Drawing.Size(131, 32);
-            this.cbbTypeFile.StyleController = this.layoutControl1;
-            this.cbbTypeFile.TabIndex = 5;
-            // 
             // layoutControlItem4
             // 
             this.layoutControlItem4.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
@@ -233,12 +233,12 @@
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.cbbZoom.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbPath.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbTypeFile.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbbTypeFile.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             this.ResumeLayout(false);
 

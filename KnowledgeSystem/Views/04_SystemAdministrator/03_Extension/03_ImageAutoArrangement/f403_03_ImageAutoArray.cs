@@ -16,6 +16,7 @@ using Spire.Presentation.Drawing;
 using Spire.Presentation;
 using KnowledgeSystem.Helpers;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._03_ImageAutoArrangement
 {
@@ -173,14 +174,22 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._03_ImageA
             string filePath = Path.Combine(TPConfigs.ResourcesPath, "403_03_Template.pptx");
             string savePath = Path.Combine(folderPath, $"Result-{DateTime.Now:yyyyMMddHHmmss}.pptx");
 
-            // Lấy danh sách file ảnh .jpg kết thúc bằng "100X/200X" nhưng không bắt đầu bằng "35"
+            // Lấy danh sách file ảnh .jpg bằng điều kiện regex
+            var pattern = @"^(00|15|25)-[BTM]-(100X|200X)( DO)?$";
+
             var allImages = Directory.GetFiles(folderPath, "*.jpg", SearchOption.AllDirectories)
-                .Where(file =>
-                    !Path.GetFileNameWithoutExtension(file).StartsWith("35", StringComparison.OrdinalIgnoreCase) &&
-                    Path.GetFileNameWithoutExtension(file).EndsWith(cbbZoom.Text, StringComparison.OrdinalIgnoreCase))
+                .Where(file => Regex.IsMatch(Path.GetFileNameWithoutExtension(file), pattern, RegexOptions.IgnoreCase))
+                .GroupBy(file => new
+                {
+                    Directory = Path.GetDirectoryName(file),  // Nhóm theo thư mục
+                    FileName = Path.GetFileNameWithoutExtension(file).Replace(" DO", "").ToLower()  // Nhóm theo tên file (loại bỏ " DO") và chuyển về chữ thường
+                })
+                .Select(group => group.OrderByDescending(file => Path.GetFileNameWithoutExtension(file).EndsWith(" DO")).First())
                 .ToList();
 
-            string sampleId = allImages.FirstOrDefault()?.Split('-').ElementAtOrDefault(1);
+            string sampleId = allImages.FirstOrDefault() != null
+                ? Path.GetFileName(Path.GetDirectoryName(allImages.FirstOrDefault()))?.Split('-').ElementAtOrDefault(1)
+                : null;
 
             // Hàm lấy tên thư mục cha
             string GetParentFolderName(string path)
