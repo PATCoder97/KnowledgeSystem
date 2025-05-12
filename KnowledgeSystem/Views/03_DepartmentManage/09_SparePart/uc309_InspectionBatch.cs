@@ -23,6 +23,9 @@ using DevExpress.Utils.Svg;
 using DevExpress.XtraGrid.Views.Items.ViewInfo;
 using Color = System.Drawing.Color;
 using DataAccessLayer;
+using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Localization;
+using DevExpress.XtraGrid.Menu;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 {
@@ -57,6 +60,26 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             barCbbDept.ImageOptions.SvgImage = TPSvgimages.Dept;
         }
 
+        private void CreateRuleGV()
+        {
+            var ruleNotify = new GridFormatRule
+            {
+                ApplyToRow = true,
+                Name = "RuleNotify",
+                Rule = new FormatConditionRuleExpression
+                {
+                    Expression = "[BatchMaterial.ActualQuantity] != [BatchMaterial.InitialQuantity]",
+                    Appearance =
+                    {
+                        BackColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical,
+                        BackColor2 = Color.White,
+                        Options = { UseBackColor = true }
+                    }
+                }
+            };
+            gvSparePart.FormatRules.Add(ruleNotify);
+        }
+
         DXMenuItem CreateMenuItem(string caption, EventHandler clickEvent, SvgImage svgImage)
         {
             var menuItem = new DXMenuItem(caption, clickEvent, svgImage, DXMenuItemPriority.Normal);
@@ -72,7 +95,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         private void InitializeMenuItems()
         {
-            itemUpdateRemainDate = CreateMenuItem("延時提醒", ItemUpdateRemainDate_Click, TPSvgimages.Edit);
+            itemUpdateRemainDate = CreateMenuItem("延時提醒", ItemUpdateRemainDate_Click, TPSvgimages.DateAdd);
             //itemUpdatePrice = CreateMenuItem("更新單價", ItemUpdatePrice_Click, TPSvgimages.Money);
 
             //itemMaterialIn = CreateMenuItem("收料", ItemMaterialIn_Click, TPSvgimages.Num1);
@@ -108,9 +131,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             GridView view = gvData;
             var batch = (view.GetRow(view.FocusedRowHandle) as dynamic).Batch as dt309_InspectionBatch;
 
-            if (respTime <= batch.ExpiryDate)
+            if (respTime <= batch.CreatedDate || respTime < DateTime.Today)
             {
-                XtraMessageBox.Show("日期不能早于建立日期", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                XtraMessageBox.Show("日期不能早于创建日期或当前日期", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -155,7 +178,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                                   BatchMaterial = bm,
                                   Unit = units.FirstOrDefault(r => r.Id == m.IdUnit)?.DisplayName ?? "N/A",
                                   UserMngr = users.FirstOrDefault(r => r.Id == m.IdManager)?.DisplayName ?? "N/A",
-                                  Dept = (depts.Where(r => r.Id == m.IdDept).Select(r => $"{r.Id} {r.DisplayName}").FirstOrDefault() ?? "N/A") + (string.IsNullOrEmpty(bm.ActualQuantity.ToString()) ? " - 處理中" : " - 已完成")
+                                  Dept = (depts.Where(r => r.Id == m.IdDept).Select(r => $"{r.Id} {r.DisplayName}").FirstOrDefault() ?? "N/A") + (string.IsNullOrEmpty(bm.ActualQuantity.ToString()) ? " - 處理中" : " - 已完成"),
+                                  UserReCheck = string.IsNullOrEmpty(bm.ConfirmedBy) ? "" : users.FirstOrDefault(r => r.Id == bm.ConfirmedBy)?.DisplayName ?? "N/A"
                               })
                         .ToList();
 
@@ -177,15 +201,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         private void uc309_InspectionBatch_Load(object sender, EventArgs e)
         {
+            gvSparePart.OptionsCustomization.AllowGroup = false;
+
             gvData.ReadOnlyGridView();
             gvData.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
             gvData.OptionsDetail.AllowOnlyOneMasterRowExpanded = true;
             gvSparePart.ReadOnlyGridView();
             gvSparePart.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
-            //gvPrices.ReadOnlyGridView();
-            //gvPrices.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
-            //gvMachine.ReadOnlyGridView();
-            //gvMachine.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
 
             //// Kiểm tra quyền từng ke để có quyền truy cập theo nhóm
             //var userGroups = dm_GroupUserBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id);
@@ -205,7 +227,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             //barCbbDept.EditValue = departmentItems.FirstOrDefault()?.Value ?? string.Empty;
 
             LoadData();
-            //CreateRuleGV();
+            CreateRuleGV();
             gcData.DataSource = sourceBases;
 
             gvData.BestFitColumns();
@@ -247,6 +269,46 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
                 //itemDetailNull.BeginGroup = true;
                 //e.Menu.Items.Add(itemDetailNull);
+            }
+        }
+
+        private void btnReload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            gvSparePart.ExpandAllGroups();
+        }
+
+        private void gvSparePart_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
+        {
+            if (e.MenuType == GridMenuType.Group)
+            {
+                GridViewGroupPanelMenu gridViewMenu = e.Menu as GridViewGroupPanelMenu;
+
+                foreach (DXMenuItem menuItem in gridViewMenu.Items)
+                {
+                    if (menuItem.Caption.Equals(GridLocalizer.Active.GetLocalizedString(GridStringId.MenuGroupPanelClearGrouping))
+                        || menuItem.Caption.Equals(GridLocalizer.Active.GetLocalizedString(GridStringId.MenuGroupPanelHide)))
+                    {
+                        menuItem.Visible = false;
+                    }
+                }
+            }
+        }
+
+        private void gvSparePart_CustomDrawGroupRow(object sender, DevExpress.XtraGrid.Views.Base.RowObjectCustomDrawEventArgs e)
+        {
+            var groupRowInfo = e.Info as DevExpress.XtraGrid.Views.Grid.ViewInfo.GridGroupRowInfo;
+            if (!string.IsNullOrEmpty(groupRowInfo.EditValue.ToString()))
+            {
+                if (groupRowInfo.EditValue.ToString().Contains("處理中")) // Nếu có chữ "處理中"
+                {
+                    groupRowInfo.Appearance.ForeColor = Color.Red;  // Màu đỏ
+                    groupRowInfo.GroupText = $"🔴 {groupRowInfo.EditValue}";      // Thêm biểu tượng màu đỏ
+                }
+                else if (groupRowInfo.EditValue.ToString().Contains("已完成")) // Nếu có chữ "已完成"
+                {
+                    groupRowInfo.Appearance.ForeColor = Color.Green; // Màu xanh
+                    groupRowInfo.GroupText = $"✅ {groupRowInfo.EditValue}";      // Thêm biểu tượng màu xanh
+                }
             }
         }
     }

@@ -32,7 +32,7 @@
             DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc309_InspectionBatch));
             this.gvSparePart = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColDept = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -92,7 +92,7 @@
             this.gvSparePart.Appearance.Row.Options.UseFont = true;
             this.gvSparePart.Appearance.Row.Options.UseForeColor = true;
             this.gvSparePart.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn15,
+            this.gColDept,
             this.gridColumn1,
             this.gridColumn5,
             this.gridColumn6,
@@ -110,17 +110,18 @@
             this.gvSparePart.OptionsView.ColumnAutoWidth = false;
             this.gvSparePart.OptionsView.EnableAppearanceOddRow = true;
             this.gvSparePart.OptionsView.ShowAutoFilterRow = true;
-            this.gvSparePart.OptionsView.ShowGroupPanel = false;
             this.gvSparePart.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
-            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gridColumn15, DevExpress.Data.ColumnSortOrder.Ascending)});
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gColDept, DevExpress.Data.ColumnSortOrder.Ascending)});
+            this.gvSparePart.CustomDrawGroupRow += new DevExpress.XtraGrid.Views.Base.RowObjectCustomDrawEventHandler(this.gvSparePart_CustomDrawGroupRow);
+            this.gvSparePart.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gvSparePart_PopupMenuShowing);
             // 
-            // gridColumn15
+            // gColDept
             // 
-            this.gridColumn15.Caption = "單位";
-            this.gridColumn15.FieldName = "Dept";
-            this.gridColumn15.Name = "gridColumn15";
-            this.gridColumn15.Visible = true;
-            this.gridColumn15.VisibleIndex = 0;
+            this.gColDept.Caption = "單位";
+            this.gColDept.FieldName = "Dept";
+            this.gColDept.Name = "gColDept";
+            this.gColDept.Visible = true;
+            this.gColDept.VisibleIndex = 0;
             // 
             // gridColumn1
             // 
@@ -197,7 +198,7 @@
             // gridColumn14
             // 
             this.gridColumn14.Caption = "盤點人";
-            this.gridColumn14.FieldName = "BatchMaterial.ConfirmedBy";
+            this.gridColumn14.FieldName = "UserReCheck";
             this.gridColumn14.Name = "gridColumn14";
             this.gridColumn14.Visible = true;
             this.gridColumn14.VisibleIndex = 9;
@@ -371,6 +372,7 @@
             this.btnReload.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReload.ItemAppearance.Normal.Options.UseFont = true;
             this.btnReload.Name = "btnReload";
+            this.btnReload.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnReload_ItemClick);
             // 
             // btnExportExcel
             // 
@@ -528,6 +530,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn15;
+        private DevExpress.XtraGrid.Columns.GridColumn gColDept;
     }
 }
