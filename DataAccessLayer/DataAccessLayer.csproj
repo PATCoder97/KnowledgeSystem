@@ -284,6 +284,12 @@
     <Compile Include="dt308_SpecialUsrCheck.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
+    <Compile Include="dt309_InspectionBatch.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dt309_InspectionBatchMaterial.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
     <Compile Include="dt309_MachineMaterials.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>

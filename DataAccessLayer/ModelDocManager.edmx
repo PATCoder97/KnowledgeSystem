@@ -784,6 +784,28 @@
           </Key>
           <Property Name="Id" Type="varchar" MaxLength="10" Nullable="false" />
         </EntityType>
+        <EntityType Name="dt309_InspectionBatch">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BatchName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ExpiryDate" Type="datetime" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt309_InspectionBatchMaterial">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BatchId" Type="int" Nullable="false" />
+          <Property Name="MaterialId" Type="int" Nullable="false" />
+          <Property Name="InitialQuantity" Type="float" Nullable="false" />
+          <Property Name="ActualQuantity" Type="float" />
+          <Property Name="ConfirmationDate" Type="datetime" />
+          <Property Name="ConfirmedBy" Type="nvarchar" MaxLength="20" />
+        </EntityType>
         <EntityType Name="dt309_MachineMaterials">
           <Key>
             <PropertyRef Name="Id" />
@@ -991,6 +1013,8 @@
           <EntitySet Name="dt308_CheckSession" EntityType="Self.dt308_CheckSession" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt308_Disease" EntityType="Self.dt308_Disease" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt308_SpecialUsrCheck" EntityType="Self.dt308_SpecialUsrCheck" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt309_InspectionBatch" EntityType="Self.dt309_InspectionBatch" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt309_InspectionBatchMaterial" EntityType="Self.dt309_InspectionBatchMaterial" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt309_MachineMaterials" EntityType="Self.dt309_MachineMaterials" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt309_Machines" EntityType="Self.dt309_Machines" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt309_Materials" EntityType="Self.dt309_Materials" Schema="dbo" store:Type="Tables" />
@@ -1093,6 +1117,8 @@
           <EntitySet Name="dm_Departments" EntityType="DBDocumentManagementSystemModel.dm_Departments" />
           <EntitySet Name="dt308_CheckSession" EntityType="DBDocumentManagementSystemModel.dt308_CheckSession" />
           <EntitySet Name="dt309_Transactions" EntityType="DBDocumentManagementSystemModel.dt309_Transactions" />
+          <EntitySet Name="dt309_InspectionBatch" EntityType="DBDocumentManagementSystemModel.dt309_InspectionBatch" />
+          <EntitySet Name="dt309_InspectionBatchMaterial" EntityType="DBDocumentManagementSystemModel.dt309_InspectionBatchMaterial" />
         </EntityContainer>
         <EntityType Name="dm_Function">
           <Key>
@@ -2006,6 +2032,28 @@
           <Property Name="TotalQuantity" Type="Double" />
           <Property Name="UserDo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Desc" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dt309_InspectionBatch">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BatchName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ExpiryDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dt309_InspectionBatchMaterial">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BatchId" Type="Int32" Nullable="false" />
+          <Property Name="MaterialId" Type="Int32" Nullable="false" />
+          <Property Name="InitialQuantity" Type="Double" Nullable="false" />
+          <Property Name="ActualQuantity" Type="Double" />
+          <Property Name="ConfirmationDate" Type="DateTime" Precision="3" />
+          <Property Name="ConfirmedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -3006,6 +3054,30 @@
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="MaterialId" ColumnName="MaterialId" />
                 <ScalarProperty Name="StorageId" ColumnName="StorageId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt309_InspectionBatch">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt309_InspectionBatch">
+              <MappingFragment StoreEntitySet="dt309_InspectionBatch">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="BatchName" ColumnName="BatchName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt309_InspectionBatchMaterial">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt309_InspectionBatchMaterial">
+              <MappingFragment StoreEntitySet="dt309_InspectionBatchMaterial">
+                <ScalarProperty Name="ConfirmedBy" ColumnName="ConfirmedBy" />
+                <ScalarProperty Name="ConfirmationDate" ColumnName="ConfirmationDate" />
+                <ScalarProperty Name="ActualQuantity" ColumnName="ActualQuantity" />
+                <ScalarProperty Name="InitialQuantity" ColumnName="InitialQuantity" />
+                <ScalarProperty Name="MaterialId" ColumnName="MaterialId" />
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

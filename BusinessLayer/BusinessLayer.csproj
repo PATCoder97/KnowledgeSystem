@@ -147,6 +147,8 @@
     <Compile Include="dt309\dt309_StoragesBUS.cs" />
     <Compile Include="dt309\dt309_TransactionsBUS.cs" />
     <Compile Include="dt309\dt309_UnitsBUS.cs" />
+    <Compile Include="dt309\dt309_InspectionBatchBUS.cs" />
+    <Compile Include="dt309\dt309_InspectionBatchMaterialBUS.cs" />
     <Compile Include="dt402\dt402_KPIWebBUS.cs" />
     <Compile Include="dt403\dt403_SoftwareManualBUS.cs" />
     <Compile Include="EncryptionHelper.cs" />

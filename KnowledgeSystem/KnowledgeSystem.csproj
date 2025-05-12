@@ -666,11 +666,11 @@
     <Compile Include="Views\03_DepartmentManage\09_SparePart\uc309_MachineMgmt.Designer.cs">
       <DependentUpon>uc309_MachineMgmt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\03_DepartmentManage\09_SparePart\uc309_ReCheckInventory.cs">
+    <Compile Include="Views\03_DepartmentManage\09_SparePart\uc309_InspectionBatch.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\03_DepartmentManage\09_SparePart\uc309_ReCheckInventory.Designer.cs">
-      <DependentUpon>uc309_ReCheckInventory.cs</DependentUpon>
+    <Compile Include="Views\03_DepartmentManage\09_SparePart\uc309_InspectionBatch.Designer.cs">
+      <DependentUpon>uc309_InspectionBatch.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\03_DepartmentManage\09_SparePart\uc309_SparePartMain.cs">
       <SubType>UserControl</SubType>
@@ -1286,8 +1286,8 @@
     <EmbeddedResource Include="Views\03_DepartmentManage\09_SparePart\uc309_MachineMgmt.resx">
       <DependentUpon>uc309_MachineMgmt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\03_DepartmentManage\09_SparePart\uc309_ReCheckInventory.resx">
-      <DependentUpon>uc309_ReCheckInventory.cs</DependentUpon>
+    <EmbeddedResource Include="Views\03_DepartmentManage\09_SparePart\uc309_InspectionBatch.resx">
+      <DependentUpon>uc309_InspectionBatch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\09_SparePart\uc309_SparePartMain.resx">
       <DependentUpon>uc309_SparePartMain.cs</DependentUpon>
