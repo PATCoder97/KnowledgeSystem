@@ -79,6 +79,7 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gvTransactions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvPrices)).BeginInit();
@@ -362,7 +363,8 @@
             this.gridColumn17,
             this.gridColumn18,
             this.gridColumn19,
-            this.gridColumn6});
+            this.gridColumn6,
+            this.gridColumn8});
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
             this.gvData.OptionsDetail.DetailMode = DevExpress.XtraGrid.Views.Grid.DetailMode.Embedded;
@@ -391,7 +393,7 @@
             this.gridColumn1.FieldName = "data.Code";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 0;
+            this.gridColumn1.VisibleIndex = 1;
             this.gridColumn1.Width = 123;
             // 
             // gridColumn2
@@ -401,7 +403,7 @@
             this.gridColumn2.MaxWidth = 250;
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 1;
+            this.gridColumn2.VisibleIndex = 2;
             this.gridColumn2.Width = 122;
             // 
             // gridColumn3
@@ -410,7 +412,7 @@
             this.gridColumn3.FieldName = "data.TypeUse";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 2;
+            this.gridColumn3.VisibleIndex = 3;
             this.gridColumn3.Width = 87;
             // 
             // gridColumn4
@@ -421,7 +423,7 @@
             this.gridColumn4.FieldName = "Unit";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 4;
+            this.gridColumn4.VisibleIndex = 5;
             this.gridColumn4.Width = 112;
             // 
             // gridColumn13
@@ -430,7 +432,7 @@
             this.gridColumn13.FieldName = "data.MinQuantity";
             this.gridColumn13.Name = "gridColumn13";
             this.gridColumn13.Visible = true;
-            this.gridColumn13.VisibleIndex = 5;
+            this.gridColumn13.VisibleIndex = 6;
             // 
             // gridColumn14
             // 
@@ -438,7 +440,7 @@
             this.gridColumn14.FieldName = "data.QuantityInStorage";
             this.gridColumn14.Name = "gridColumn14";
             this.gridColumn14.Visible = true;
-            this.gridColumn14.VisibleIndex = 6;
+            this.gridColumn14.VisibleIndex = 7;
             // 
             // gridColumn15
             // 
@@ -446,7 +448,7 @@
             this.gridColumn15.FieldName = "data.QuantityInMachine";
             this.gridColumn15.Name = "gridColumn15";
             this.gridColumn15.Visible = true;
-            this.gridColumn15.VisibleIndex = 7;
+            this.gridColumn15.VisibleIndex = 8;
             // 
             // gridColumn16
             // 
@@ -454,7 +456,7 @@
             this.gridColumn16.FieldName = "data.Location";
             this.gridColumn16.Name = "gridColumn16";
             this.gridColumn16.Visible = true;
-            this.gridColumn16.VisibleIndex = 3;
+            this.gridColumn16.VisibleIndex = 4;
             // 
             // gridColumn17
             // 
@@ -464,7 +466,7 @@
             this.gridColumn17.FieldName = "data.Price";
             this.gridColumn17.Name = "gridColumn17";
             this.gridColumn17.Visible = true;
-            this.gridColumn17.VisibleIndex = 8;
+            this.gridColumn17.VisibleIndex = 9;
             // 
             // gridColumn18
             // 
@@ -475,7 +477,7 @@
             this.gridColumn18.Name = "gridColumn18";
             this.gridColumn18.UnboundDataType = typeof(double);
             this.gridColumn18.Visible = true;
-            this.gridColumn18.VisibleIndex = 9;
+            this.gridColumn18.VisibleIndex = 10;
             // 
             // gridColumn19
             // 
@@ -483,7 +485,7 @@
             this.gridColumn19.FieldName = "UserMngr";
             this.gridColumn19.Name = "gridColumn19";
             this.gridColumn19.Visible = true;
-            this.gridColumn19.VisibleIndex = 10;
+            this.gridColumn19.VisibleIndex = 11;
             // 
             // gridColumn6
             // 
@@ -495,7 +497,7 @@
             this.gridColumn6.FieldName = "data.ExpDate";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 11;
+            this.gridColumn6.VisibleIndex = 12;
             this.gridColumn6.Width = 94;
             // 
             // layoutControl1
@@ -670,6 +672,14 @@
             this.barDockControlRight.Manager = this.barManagerTP;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 482);
             // 
+            // gridColumn8
+            // 
+            this.gridColumn8.Caption = "單位";
+            this.gridColumn8.FieldName = "data.IdDept";
+            this.gridColumn8.Name = "gridColumn8";
+            this.gridColumn8.Visible = true;
+            this.gridColumn8.VisibleIndex = 0;
+            // 
             // uc309_SparePartMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -745,5 +755,6 @@
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
     }
 }

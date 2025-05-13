@@ -672,6 +672,12 @@
     <Compile Include="Views\03_DepartmentManage\09_SparePart\uc309_InspectionBatch.Designer.cs">
       <DependentUpon>uc309_InspectionBatch.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\03_DepartmentManage\09_SparePart\uc309_RecheckBatch.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\09_SparePart\uc309_RecheckBatch.Designer.cs">
+      <DependentUpon>uc309_RecheckBatch.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\03_DepartmentManage\09_SparePart\uc309_SparePartMain.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1288,6 +1294,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\09_SparePart\uc309_InspectionBatch.resx">
       <DependentUpon>uc309_InspectionBatch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\09_SparePart\uc309_RecheckBatch.resx">
+      <DependentUpon>uc309_RecheckBatch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\09_SparePart\uc309_SparePartMain.resx">
       <DependentUpon>uc309_SparePartMain.cs</DependentUpon>
