@@ -178,7 +178,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                                   BatchMaterial = bm,
                                   Unit = units.FirstOrDefault(r => r.Id == m.IdUnit)?.DisplayName ?? "N/A",
                                   UserMngr = users.FirstOrDefault(r => r.Id == m.IdManager)?.DisplayName ?? "N/A",
-                                  Dept = (depts.Where(r => r.Id == m.IdDept).Select(r => $"{r.Id} {r.DisplayName}").FirstOrDefault() ?? "N/A") + (string.IsNullOrEmpty(bm.ActualQuantity.ToString()) ? " - 處理中" : " - 已完成"),
+                                  Dept = (depts.Where(r => r.Id == m.IdDept).Select(r => $"{r.Id} {r.DisplayName}").FirstOrDefault() ?? "N/A") + (bm.IsComplete != true ? " - 處理中" : " - 已完成"),
                                   UserReCheck = string.IsNullOrEmpty(bm.ConfirmedBy) ? "" : users.FirstOrDefault(r => r.Id == bm.ConfirmedBy)?.DisplayName ?? "N/A"
                               })
                         .ToList();
@@ -208,23 +208,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             gvData.OptionsDetail.AllowOnlyOneMasterRowExpanded = true;
             gvSparePart.ReadOnlyGridView();
             gvSparePart.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
-
-            //// Kiểm tra quyền từng ke để có quyền truy cập theo nhóm
-            //var userGroups = dm_GroupUserBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id);
-            //var departments = dm_DeptBUS.Instance.GetList();
-            //var groups = dm_GroupBUS.Instance.GetListByName("機邊庫");
-
-            //var accessibleGroups = groups
-            //    .Where(group => userGroups.Any(userGroup => userGroup.IdGroup == group.Id))
-            //    .ToList();
-
-            //var departmentItems = departments
-            //    .Where(dept => accessibleGroups.Any(group => group.IdDept == dept.Id))
-            //    .Select(dept => new ComboBoxItem { Value = $"{dept.Id} {dept.DisplayName}" })
-            //    .ToArray();
-
-            //cbbDept.Items.AddRange(departmentItems);
-            //barCbbDept.EditValue = departmentItems.FirstOrDefault()?.Value ?? string.Empty;
 
             LoadData();
             CreateRuleGV();

@@ -805,6 +805,8 @@
           <Property Name="ActualQuantity" Type="float" />
           <Property Name="ConfirmationDate" Type="datetime" />
           <Property Name="ConfirmedBy" Type="nvarchar" MaxLength="20" />
+          <Property Name="IsComplete" Type="bit" />
+          <Property Name="Description" Type="nvarchar" MaxLength="512" />
         </EntityType>
         <EntityType Name="dt309_MachineMaterials">
           <Key>
@@ -2054,6 +2056,8 @@
           <Property Name="ActualQuantity" Type="Double" />
           <Property Name="ConfirmationDate" Type="DateTime" Precision="3" />
           <Property Name="ConfirmedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IsComplete" Type="Boolean" />
+          <Property Name="Description" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -3072,6 +3076,8 @@
           <EntitySetMapping Name="dt309_InspectionBatchMaterial">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt309_InspectionBatchMaterial">
               <MappingFragment StoreEntitySet="dt309_InspectionBatchMaterial">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsComplete" ColumnName="IsComplete" />
                 <ScalarProperty Name="ConfirmedBy" ColumnName="ConfirmedBy" />
                 <ScalarProperty Name="ConfirmationDate" ColumnName="ConfirmationDate" />
                 <ScalarProperty Name="ActualQuantity" ColumnName="ActualQuantity" />

@@ -220,5 +220,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
             detailView.BestFitColumns();
         }
+
+        private void btnReload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            LoadData();
+        }
     }
 }

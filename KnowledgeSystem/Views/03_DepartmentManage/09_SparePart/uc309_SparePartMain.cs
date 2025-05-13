@@ -276,13 +276,15 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 var units = dt309_UnitsBUS.Instance.GetList();
 
                 materials = dt309_MaterialsBUS.Instance.GetListByStartIdDept(deptGetData);
+                var materialsNotRecheck = dt309_InspectionBatchMaterialBUS.Instance.GetListNotRecheck().Select(r => r.MaterialId).ToList();
 
-                var displayData = materials.Select(x => new
-                {
-                    data = x,
-                    Unit = units.FirstOrDefault(u => u.Id == x.IdUnit).DisplayName,
-                    UserMngr = users.FirstOrDefault(u => u.Id == x.IdManager).DisplayName,
-                }).ToList();
+                var displayData = materials.Where(r => !materialsNotRecheck.Contains(r.Id))
+                    .Select(x => new
+                    {
+                        data = x,
+                        Unit = units.FirstOrDefault(u => u.Id == x.IdUnit).DisplayName,
+                        UserMngr = users.FirstOrDefault(u => u.Id == x.IdManager).DisplayName,
+                    }).ToList();
 
                 sourceBases.DataSource = displayData;
 

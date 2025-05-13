@@ -40,6 +40,22 @@ namespace BusinessLayer
             }
         }
 
+        public List<dt309_InspectionBatchMaterial> GetListNotRecheck()
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt309_InspectionBatchMaterial.Where(r => r.IsComplete != true).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public dt309_InspectionBatchMaterial GetItemById(int id)
         {
             try

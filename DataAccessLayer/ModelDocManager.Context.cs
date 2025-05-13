@@ -12,19 +12,19 @@ namespace DataAccessLayer
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-
+    
     public partial class DBDocumentManagementSystemEntities : DbContext
     {
         public DBDocumentManagementSystemEntities()
             : base(SingleConnection.ConString)
         {
         }
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-
+    
         public virtual DbSet<dm_Function> dm_Function { get; set; }
         public virtual DbSet<dm_FunctionRole> dm_FunctionRole { get; set; }
         public virtual DbSet<dm_GroupUser> dm_GroupUser { get; set; }

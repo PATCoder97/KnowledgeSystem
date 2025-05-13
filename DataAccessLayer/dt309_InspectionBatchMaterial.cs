@@ -21,5 +21,7 @@ namespace DataAccessLayer
         public Nullable<double> ActualQuantity { get; set; }
         public Nullable<System.DateTime> ConfirmationDate { get; set; }
         public string ConfirmedBy { get; set; }
+        public Nullable<bool> IsComplete { get; set; }
+        public string Description { get; set; }
     }
 }
