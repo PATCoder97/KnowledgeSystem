@@ -174,7 +174,7 @@
             // gridColumn8
             // 
             this.gridColumn8.Caption = "原本數量";
-            this.gridColumn8.FieldName = "BatchMaterial.InitialQuantity";
+            this.gridColumn8.FieldName = "IniQuantity";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
             this.gridColumn8.VisibleIndex = 7;

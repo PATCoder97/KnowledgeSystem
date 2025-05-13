@@ -139,17 +139,17 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                                   BatchMaterial = bm,
                                   Unit = units.FirstOrDefault(r => r.Id == m.IdUnit)?.DisplayName ?? "N/A",
                                   UserMngr = users.FirstOrDefault(r => r.Id == m.IdManager)?.DisplayName ?? "N/A",
-                                  Dept = (depts.Where(r => r.Id == m.IdDept).Select(r => $"{r.Id} {r.DisplayName}").FirstOrDefault() ?? "N/A") + (string.IsNullOrEmpty(bm.ActualQuantity.ToString()) ? " - 處理中" : " - 已完成"),
-                                  UserReCheck = string.IsNullOrEmpty(bm.ConfirmedBy) ? "" : users.FirstOrDefault(r => r.Id == bm.ConfirmedBy)?.DisplayName ?? "N/A"
+                                  UserReCheck = string.IsNullOrEmpty(bm.ConfirmedBy) ? "" : users.FirstOrDefault(r => r.Id == bm.ConfirmedBy)?.DisplayName ?? "N/A",
+                                  IniQuantity = bm.ActualQuantity.HasValue ? bm.InitialQuantity : (double?)null
                               })
                         .ToList();
 
-                    return new
+                    return batchMaterialList.Any() ? new
                     {
                         Batch = batch,
                         Spare = batchMaterialList
-                    };
-                }).ToList();
+                    } : null;
+                }).Where(x => x != null).ToList();
 
                 sourceBases.DataSource = displayData;
 
