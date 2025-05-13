@@ -138,7 +138,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 string deptGetData = (barCbbDept.EditValue?.ToString().Split(' ')[0]) ?? string.Empty;
                 transactions = dt309_TransactionsBUS.Instance.GetList();
 
-                var materials = dt309_MaterialsBUS.Instance.GetListByIdDept(deptGetData);
+                var materials = dt309_MaterialsBUS.Instance.GetListByStartIdDept(deptGetData);
                 storages = dt309_StoragesBUS.Instance.GetList();
                 users = dm_UserBUS.Instance.GetList();
                 units = dt309_UnitsBUS.Instance.GetList();

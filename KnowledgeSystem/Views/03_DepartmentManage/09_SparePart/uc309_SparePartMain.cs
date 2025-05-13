@@ -45,7 +45,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             Font fontUI12 = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             DevExpress.Utils.AppearanceObject.DefaultMenuFont = fontUI12;
 
-            //cbbDept.EditValueChanged += CbbDept_EditValueChanged;
             barCbbDept.EditValueChanged += CbbDept_EditValueChanged;
         }
 
@@ -276,7 +275,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 users = dm_UserBUS.Instance.GetList();
                 var units = dt309_UnitsBUS.Instance.GetList();
 
-                materials = dt309_MaterialsBUS.Instance.GetListByIdDept(deptGetData);
+                materials = dt309_MaterialsBUS.Instance.GetListByStartIdDept(deptGetData);
 
                 var displayData = materials.Select(x => new
                 {

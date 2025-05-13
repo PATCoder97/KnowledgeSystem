@@ -56,7 +56,7 @@ namespace BusinessLayer
             }
         }
 
-        public List<dt309_Materials> GetListByIdDept(string idDept)
+        public List<dt309_Materials> GetListByStartIdDept(string idDept)
         {
             try
             {
