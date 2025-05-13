@@ -274,7 +274,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         private void btnReload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            gvSparePart.ExpandAllGroups();
+            LoadData();
         }
 
         private void gvSparePart_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)

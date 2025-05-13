@@ -106,6 +106,8 @@
             this.gvSparePart.GridControl = this.gcData;
             this.gvSparePart.GroupCount = 1;
             this.gvSparePart.Name = "gvSparePart";
+            this.gvSparePart.OptionsCustomization.AllowColumnMoving = false;
+            this.gvSparePart.OptionsCustomization.AllowGroup = false;
             this.gvSparePart.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
             this.gvSparePart.OptionsView.ColumnAutoWidth = false;
             this.gvSparePart.OptionsView.EnableAppearanceOddRow = true;
@@ -248,6 +250,7 @@
             this.gridColumn12});
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
+            this.gvData.OptionsDetail.DetailMode = DevExpress.XtraGrid.Views.Grid.DetailMode.Embedded;
             this.gvData.OptionsDetail.ShowDetailTabs = false;
             this.gvData.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
             this.gvData.OptionsView.ColumnAutoWidth = false;

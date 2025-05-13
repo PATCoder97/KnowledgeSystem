@@ -88,6 +88,7 @@
             this.gridColumn16});
             this.gvStorage.GridControl = this.gcData;
             this.gvStorage.Name = "gvStorage";
+            this.gvStorage.OptionsDetail.DetailMode = DevExpress.XtraGrid.Views.Grid.DetailMode.Embedded;
             this.gvStorage.OptionsDetail.ShowDetailTabs = false;
             this.gvStorage.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
             this.gvStorage.OptionsView.ColumnAutoWidth = false;
@@ -162,6 +163,7 @@
             this.gridColumn12});
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
+            this.gvData.OptionsDetail.DetailMode = DevExpress.XtraGrid.Views.Grid.DetailMode.Embedded;
             this.gvData.OptionsDetail.ShowDetailTabs = false;
             this.gvData.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
             this.gvData.OptionsView.ColumnAutoWidth = false;
@@ -217,6 +219,7 @@
             this.gridColumn13});
             this.gvMaterial.GridControl = this.gcData;
             this.gvMaterial.Name = "gvMaterial";
+            this.gvMaterial.OptionsDetail.DetailMode = DevExpress.XtraGrid.Views.Grid.DetailMode.Embedded;
             this.gvMaterial.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
             this.gvMaterial.OptionsView.ColumnAutoWidth = false;
             this.gvMaterial.OptionsView.EnableAppearanceOddRow = true;
