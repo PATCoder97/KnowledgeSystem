@@ -294,5 +294,48 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 }
             }
         }
+
+        private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var editor = new TextEdit { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) };
+
+            //// Thiết lập mask để buộc nhập đúng định dạng
+            //editor.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.DateTimeMaskManager));
+            //editor.Properties.MaskSettings.Set("mask", "yyyy/MM/dd");
+            //editor.Properties.MaskSettings.Set("useAdvancingCaret", true);
+
+            var result = XtraInputBox.Show(new XtraInputBoxArgs
+            {
+                Caption = TPConfigs.SoftNameTW,
+                Prompt = "輸入名稱",
+                Editor = editor,
+                //DefaultButtonIndex = 0,
+                //DefaultResponse = DateTime.Now.ToString("yyyy/MM/dd")
+            });
+
+            if (string.IsNullOrEmpty(result?.ToString())) return;
+
+            string batchName = $"【經理室】{result}";
+
+            if (XtraMessageBox.Show($"你確定新增批次名稱為 {batchName} 嗎?", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.Yes)
+                return;
+
+            var newBatchId = dt309_InspectionBatchBUS.Instance.Add(new dt309_InspectionBatch
+            {
+                CreatedDate = DateTime.Now,
+                BatchName = batchName,
+                ExpiryDate = DateTime.Now.AddDays(7),
+                Status = "Pending"
+            });
+
+            if (newBatchId != -1)
+            {
+                LoadData();
+            }
+            else
+            {
+                MsgTP.MsgErrorDB();
+            }
+        }
     }
 }
