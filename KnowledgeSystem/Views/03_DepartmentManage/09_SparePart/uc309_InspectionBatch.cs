@@ -243,15 +243,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             if (e.HitInfo.InRowCell && e.HitInfo.InDataRow)
             {
                 e.Menu.Items.Add(itemUpdateRemainDate);
-
-                //itemCreateScript.BeginGroup = true;
-                //e.Menu.Items.Add(itemCreateScript);
-
-                //e.Menu.Items.Add(itemGoogleSheetUploadDetail);
-                //e.Menu.Items.Add(itemExcelUploadDetail);
-
-                //itemDetailNull.BeginGroup = true;
-                //e.Menu.Items.Add(itemDetailNull);
             }
         }
 
@@ -299,18 +290,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         {
             var editor = new TextEdit { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) };
 
-            //// Thiết lập mask để buộc nhập đúng định dạng
-            //editor.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.DateTimeMaskManager));
-            //editor.Properties.MaskSettings.Set("mask", "yyyy/MM/dd");
-            //editor.Properties.MaskSettings.Set("useAdvancingCaret", true);
-
             var result = XtraInputBox.Show(new XtraInputBoxArgs
             {
                 Caption = TPConfigs.SoftNameTW,
                 Prompt = "輸入名稱",
                 Editor = editor,
-                //DefaultButtonIndex = 0,
-                //DefaultResponse = DateTime.Now.ToString("yyyy/MM/dd")
             });
 
             if (string.IsNullOrEmpty(result?.ToString())) return;

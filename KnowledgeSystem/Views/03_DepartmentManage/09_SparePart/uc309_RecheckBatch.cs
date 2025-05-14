@@ -25,6 +25,7 @@ using OfficeOpenXml.Drawing.Chart;
 using OfficeOpenXml;
 using System.IO;
 using OfficeOpenXml.Table;
+using ExcelDataReader;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 {
@@ -110,17 +111,93 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         {
             itemDownCheckFile = CreateMenuItem("下載盤點表", ItemDownCheckFile_Click, TPSvgimages.Excel);
             itemUpdateCheckFile = CreateMenuItem("上傳盤點表", ItemUpdateCheckFile_Click, TPSvgimages.UploadFile);
-
-            //itemMaterialIn = CreateMenuItem("收料", ItemMaterialIn_Click, TPSvgimages.Num1);
-            //itemMaterialOut = CreateMenuItem("領用", ItemMaterialOut_Click, TPSvgimages.Num2);
-            //itemMaterialTransfer = CreateMenuItem("轉庫", ItemMaterialTransfer_Click, TPSvgimages.Num3);
-            //itemMaterialCheck = CreateMenuItem("盤點", ItemMaterialCheck_Click, TPSvgimages.Num4);
-            //itemMaterialGetFromOther = CreateMenuItem("調撥", ItemMaterialGetFromOther_Click, TPSvgimages.Num5);
         }
 
         private void ItemUpdateCheckFile_Click(object sender, EventArgs e)
         {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "Excel Files|*.xls;*.xlsx";
+                openFileDialog.Title = "Chọn tệp Excel";
 
+                if (openFileDialog.ShowDialog() != DialogResult.OK) return;
+
+                string filePath = openFileDialog.FileName;
+                try
+                {
+                    using (var stream = File.Open(filePath, FileMode.Open, FileAccess.Read))
+                    {
+                        using (var reader = ExcelReaderFactory.CreateReader(stream))
+                        {
+                            DataSet result = reader.AsDataSet(new ExcelDataSetConfiguration()
+                            {
+                                ConfigureDataTable = (_) => new ExcelDataTableConfiguration()
+                                {
+                                    UseHeaderRow = true  // Lấy tiêu đề từ hàng đầu tiên
+                                }
+                            });
+
+                            // Đọc và hiển thị dữ liệu từ Sheet đầu tiên
+                            DataTable table = result.Tables[0];
+
+                            var batch = (gvData.GetRow(gvData.FocusedRowHandle) as dynamic).Batch as dt309_InspectionBatch;
+                            int batchId = batch.Id;
+
+                            var excelDatas = inspectionBatchMaterials.Where(r => r.BatchId == batchId);
+
+                            foreach (var data in excelDatas)
+                            {
+                                // Tìm dòng có cột "編碼" khớp với MaterialId
+                                DataRow row = table.AsEnumerable().FirstOrDefault(r =>
+                                {
+                                    try
+                                    {
+                                        // Lấy giá trị từ cột "編碼" và chuyển thành chuỗi để so sánh
+                                        var codeValue = r["編碼"];
+                                        return codeValue != null && codeValue.ToString() == data.MaterialId.ToString();
+                                    }
+                                    catch
+                                    {
+                                        return false;
+                                    }
+                                });
+
+                                if (row != null)
+                                {
+                                    // Gán ActualQuantity từ cột "盤點數量"
+                                    double actualQty;
+                                    if (double.TryParse(row["盤點數量"]?.ToString(), out actualQty))
+                                    {
+                                        data.ActualQuantity = actualQty;
+                                    }
+                                }
+                            }
+
+                           // Xử lý hiện form để người dùng xác nhận lại thông tin pandian
+                           f309_ReCheckInfo reCheckInfo = new f309_ReCheckInfo
+                           {
+                               InspectionBatchMaterials = excelDatas.ToList()
+                           };
+                            reCheckInfo.ShowDialog();
+
+                            //// Cập nhật lại dữ liệu vào database
+                            //foreach (var data in excelDatas)
+                            //{
+                            //    dt309_InspectionBatchMaterialBUS.Instance.Update(data);
+                            //}
+
+                            //// Load lại dữ liệu
+                            //LoadData();
+                            //MessageBox.Show("Cập nhật thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
         }
 
         private void ItemDownCheckFile_Click(object sender, EventArgs e)
@@ -158,12 +235,14 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             string filePath = Path.Combine(documentsPath, $"盤點表 - {DateTime.Now:yyyyMMddHHmm}.xlsx");
 
             ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+
             using (ExcelPackage pck = new ExcelPackage(filePath))
             {
                 ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Sheet1");
                 ws.Cells.Style.Font.Name = "Microsoft JhengHei";
                 ws.Cells.Style.Font.Size = 14;
 
+                // Thiết lập độ rộng các cột
                 ws.Column(1).Hidden = true;
                 ws.Column(2).Width = 30;
                 ws.Column(3).Width = 50;
@@ -171,9 +250,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 ws.Column(5).Width = 15;
                 ws.Column(6).Width = 15;
 
-                // Xuất dữ liệu từ list data sang Table
-                ws.Cells["A1"].LoadFromCollection(excelDatas, true, TableStyles.Medium2);
+                // Xuất dữ liệu từ list excelDatas sang Table
+                ws.Cells["A1"].LoadFromCollection(excelDatas, true, OfficeOpenXml.Table.TableStyles.Medium2);
 
+                // Đặt tiêu đề cột
                 ws.Cells["A1"].Value = "編碼";
                 ws.Cells["B1"].Value = "料號";
                 ws.Cells["C1"].Value = "材料名稱";
@@ -181,10 +261,32 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 ws.Cells["E1"].Value = "單位";
                 ws.Cells["F1"].Value = "盤點數量";
 
+                // Bật WrapText cho tất cả các ô
+                ws.Cells.Style.WrapText = true;
+
+                //// Tự động điều chỉnh chiều cao từng dòng theo nội dung
+                //int dataCount = excelDatas.Count;
+                //for (int rowIndex = 1; rowIndex <= dataCount + 1; rowIndex++) // +1 để tính cả tiêu đề
+                //{
+                //    ws.Row(rowIndex).CustomHeight = true;
+                //    ws.Row(rowIndex).Height = ws.Row(rowIndex).Height; // Đặt lại chiều cao tự động
+                //}
+
+                //// Khóa toàn bộ sheet với mật khẩu
+                //ws.Protection.IsProtected = true;
+                //ws.Protection.AllowSelectLockedCells = false;
+                //ws.Protection.SetPassword("123456");  // Mật khẩu bảo vệ sheet
+
+                //// Mở khóa vùng từ A2 đến A cuối của bảng
+                //string range = $"A2:A{dataCount + 1}";
+                //ws.Cells[range].Style.Locked = false;
+
+                // Lưu file
                 pck.Save();
             }
 
             Process.Start(filePath);
+
         }
 
         private void LoadData()
