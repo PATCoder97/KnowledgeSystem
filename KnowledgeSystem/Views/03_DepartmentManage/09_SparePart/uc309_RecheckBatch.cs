@@ -143,7 +143,15 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                             var batch = (gvData.GetRow(gvData.FocusedRowHandle) as dynamic).Batch as dt309_InspectionBatch;
                             int batchId = batch.Id;
 
-                            var excelDatas = inspectionBatchMaterials.Where(r => r.BatchId == batchId);
+                            var excelDatas = inspectionBatchMaterials
+                                .Where(r => r.BatchId == batchId)
+                                .Join(
+                                    materials.Where(x => x.IdDept.StartsWith(deptGetData)),
+                                    bm => bm.MaterialId,
+                                    m => m.Id,
+                                    (bm, m) => bm
+                                )
+                                .ToList();
 
                             foreach (var data in excelDatas)
                             {
@@ -173,21 +181,25 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                                 }
                             }
 
-                           // Xử lý hiện form để người dùng xác nhận lại thông tin pandian
-                           f309_ReCheckInfo reCheckInfo = new f309_ReCheckInfo
-                           {
-                               InspectionBatchMaterials = excelDatas.ToList()
-                           };
+                            // Xử lý hiện form để người dùng xác nhận lại thông tin pandian
+                            f309_ReCheckInfo reCheckInfo = new f309_ReCheckInfo
+                            {
+                                InspectionBatchMaterials = excelDatas.ToList(),
+                                Text = $"物料盤點明細表"
+                            };
                             reCheckInfo.ShowDialog();
 
-                            //// Cập nhật lại dữ liệu vào database
-                            //foreach (var data in excelDatas)
-                            //{
-                            //    dt309_InspectionBatchMaterialBUS.Instance.Update(data);
-                            //}
+                            // Cập nhật lại dữ liệu vào database
+                            foreach (var data in excelDatas)
+                            {
+                                data.ConfirmationDate = DateTime.Today;
+                                data.ConfirmedBy = TPConfigs.LoginUser.Id;
+                                data.IsComplete = true;
+                                dt309_InspectionBatchMaterialBUS.Instance.AddOrUpdate(data);
+                            }
 
-                            //// Load lại dữ liệu
-                            //LoadData();
+                            // Load lại dữ liệu
+                            LoadData();
                             //MessageBox.Show("Cập nhật thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
@@ -208,7 +220,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             var excelDatas = inspectionBatchMaterials
                 .Where(r => r.BatchId == batchId)
                 .Join(
-                    materials,
+                    materials.Where(x => deptGetData.Contains(x.IdDept)),
                     bm => bm.MaterialId,
                     m => m.Id,
                     (bm, m) => new
@@ -232,7 +244,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             if (!Directory.Exists(documentsPath))
                 Directory.CreateDirectory(documentsPath);
 
-            string filePath = Path.Combine(documentsPath, $"盤點表 - {DateTime.Now:yyyyMMddHHmm}.xlsx");
+            string filePath = Path.Combine(documentsPath, $"盤點表 - {DateTime.Now:yyyyMMddHHmmss}.xlsx");
 
             ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
 
