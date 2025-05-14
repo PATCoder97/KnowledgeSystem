@@ -250,12 +250,18 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         private void ItemViewInfo_Click(object sender, EventArgs e)
         {
+            if (deptGetData.Length != 4)
+            {
+                XtraMessageBox.Show("請您選擇「課」來查看物料", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             GridView view = gvData;
             int idMaterial = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColIdMaterial));
             f309_Material_Info fInfo = new f309_Material_Info()
             {
                 eventInfo = EventFormInfo.View,
-                formName = "備品",
+                formName = "物料",
                 idBase = idMaterial,
                 idDeptGetData = deptGetData
             };
@@ -341,10 +347,16 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if (deptGetData.Length != 4)
+            {
+                XtraMessageBox.Show("請您選擇「課」來新增物料", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             f309_Material_Info finfo = new f309_Material_Info()
             {
                 eventInfo = EventFormInfo.Create,
-                formName = "備品",
+                formName = "物料",
                 idDeptGetData = deptGetData
             };
 

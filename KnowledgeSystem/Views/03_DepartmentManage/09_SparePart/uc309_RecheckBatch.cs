@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ using System.Web.Util;
 using System.Windows.Forms;
 using BusinessLayer;
 using DataAccessLayer;
+using DevExpress.Security;
 using DevExpress.Utils.Menu;
 using DevExpress.Utils.Svg;
 using DevExpress.XtraEditors;
@@ -18,6 +20,11 @@ using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraSplashScreen;
 using KnowledgeSystem.Helpers;
+using OfficeOpenXml.Drawing.Chart.Style;
+using OfficeOpenXml.Drawing.Chart;
+using OfficeOpenXml;
+using System.IO;
+using OfficeOpenXml.Table;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 {
@@ -47,10 +54,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         List<dm_Departments> depts;
 
         List<dt309_Materials> materials;
-        List<dt309_Storages> storages;
+        List<dt309_InspectionBatchMaterial> inspectionBatchMaterials;
+        List<dt309_Units> units;
 
-        DXMenuItem itemViewInfo;
-        DXMenuItem itemUpdatePrice;
+        DXMenuItem itemDownCheckFile;
+        DXMenuItem itemUpdateCheckFile;
         DXMenuItem itemMaterialIn;
         DXMenuItem itemMaterialOut;
         DXMenuItem itemMaterialTransfer;
@@ -100,14 +108,83 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         private void InitializeMenuItems()
         {
-            //itemViewInfo = CreateMenuItem("查看資訊", ItemViewInfo_Click, TPSvgimages.View);
-            //itemUpdatePrice = CreateMenuItem("更新單價", ItemUpdatePrice_Click, TPSvgimages.Money);
+            itemDownCheckFile = CreateMenuItem("下載盤點表", ItemDownCheckFile_Click, TPSvgimages.Excel);
+            itemUpdateCheckFile = CreateMenuItem("上傳盤點表", ItemUpdateCheckFile_Click, TPSvgimages.UploadFile);
 
             //itemMaterialIn = CreateMenuItem("收料", ItemMaterialIn_Click, TPSvgimages.Num1);
             //itemMaterialOut = CreateMenuItem("領用", ItemMaterialOut_Click, TPSvgimages.Num2);
             //itemMaterialTransfer = CreateMenuItem("轉庫", ItemMaterialTransfer_Click, TPSvgimages.Num3);
             //itemMaterialCheck = CreateMenuItem("盤點", ItemMaterialCheck_Click, TPSvgimages.Num4);
             //itemMaterialGetFromOther = CreateMenuItem("調撥", ItemMaterialGetFromOther_Click, TPSvgimages.Num5);
+        }
+
+        private void ItemUpdateCheckFile_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ItemDownCheckFile_Click(object sender, EventArgs e)
+        {
+            var batch = (gvData.GetRow(gvData.FocusedRowHandle) as dynamic).Batch as dt309_InspectionBatch;
+            int batchId = batch.Id;
+
+            var excelDatas = inspectionBatchMaterials
+                .Where(r => r.BatchId == batchId)
+                .Join(
+                    materials,
+                    bm => bm.MaterialId,
+                    m => m.Id,
+                    (bm, m) => new
+                    {
+                        Material = m,
+                        BatchMaterial = bm
+                    }
+                )
+                .Select(r => new
+                {
+                    r.Material.Id,
+                    r.Material.Code,
+                    r.Material.DisplayName,
+                    r.Material.Location,
+                    Unit = units.FirstOrDefault(x => x.Id == r.Material.IdUnit)?.DisplayName ?? "",
+                    r.BatchMaterial.ActualQuantity,
+                })
+                .ToList();
+
+            string documentsPath = TPConfigs.DocumentPath();
+            if (!Directory.Exists(documentsPath))
+                Directory.CreateDirectory(documentsPath);
+
+            string filePath = Path.Combine(documentsPath, $"盤點表 - {DateTime.Now:yyyyMMddHHmm}.xlsx");
+
+            ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+            using (ExcelPackage pck = new ExcelPackage(filePath))
+            {
+                ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Sheet1");
+                ws.Cells.Style.Font.Name = "Microsoft JhengHei";
+                ws.Cells.Style.Font.Size = 14;
+
+                ws.Column(1).Hidden = true;
+                ws.Column(2).Width = 30;
+                ws.Column(3).Width = 50;
+                ws.Column(4).Width = 15;
+                ws.Column(5).Width = 15;
+                ws.Column(6).Width = 15;
+
+                // Xuất dữ liệu từ list data sang Table
+                ws.Cells["A1"].LoadFromCollection(excelDatas, true, TableStyles.Medium2);
+
+                ws.Cells["A1"].Value = "編碼";
+                ws.Cells["B1"].Value = "料號";
+                ws.Cells["C1"].Value = "材料名稱";
+                ws.Cells["D1"].Value = "地位";
+                ws.Cells["E1"].Value = "單位";
+                ws.Cells["F1"].Value = "盤點數量";
+
+                pck.Save();
+            }
+
+            Process.Start(filePath);
         }
 
         private void LoadData()
@@ -119,12 +196,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 deptGetData = (barCbbDept.EditValue?.ToString().Split(' ')[0]) ?? string.Empty;
 
                 var inspectionBatch = dt309_InspectionBatchBUS.Instance.GetList();
-                var inspectionBatchMaterials = dt309_InspectionBatchMaterialBUS.Instance.GetList();
-                var materials = dt309_MaterialsBUS.Instance.GetListByStartIdDept(deptGetData);
+                inspectionBatchMaterials = dt309_InspectionBatchMaterialBUS.Instance.GetList();
+                materials = dt309_MaterialsBUS.Instance.GetListByStartIdDept(deptGetData);
 
                 var depts = dm_DeptBUS.Instance.GetList();
                 var users = dm_UserBUS.Instance.GetList();
-                var units = dt309_UnitsBUS.Instance.GetList();
+                units = dt309_UnitsBUS.Instance.GetList();
 
                 var displayData = inspectionBatch.Select(batch =>
                 {
@@ -224,6 +301,15 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         private void btnReload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             LoadData();
+        }
+
+        private void gvData_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
+        {
+            if (e.HitInfo.InRowCell && e.HitInfo.InDataRow)
+            {
+                e.Menu.Items.Add(itemDownCheckFile);
+                e.Menu.Items.Add(itemUpdateCheckFile);
+            }
         }
     }
 }
