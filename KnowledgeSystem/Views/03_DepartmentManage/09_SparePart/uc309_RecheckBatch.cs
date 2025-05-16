@@ -26,6 +26,7 @@ using OfficeOpenXml;
 using System.IO;
 using OfficeOpenXml.Table;
 using ExcelDataReader;
+using System.Transactions;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 {
@@ -190,17 +191,27 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                             reCheckInfo.ShowDialog();
 
                             // Cập nhật lại dữ liệu vào database
-                            foreach (var data in excelDatas)
+                            foreach (var data in excelDatas.Where(r => r.ActualQuantity != null))
                             {
                                 data.ConfirmationDate = DateTime.Today;
                                 data.ConfirmedBy = TPConfigs.LoginUser.Id;
-                                data.IsComplete = true;
+                                data.IsComplete = data.InitialQuantity == data.ActualQuantity;
                                 dt309_InspectionBatchMaterialBUS.Instance.AddOrUpdate(data);
+
+                                dt309_TransactionsBUS.Instance.Add(new dt309_Transactions()
+                                {
+                                    CreatedDate = DateTime.Now,
+                                    MaterialId = data.MaterialId,
+                                    TransactionType = "check",
+                                    Quantity = (double)data.ActualQuantity,
+                                    UserDo = TPConfigs.LoginUser.Id,
+                                    Desc = "pandian",
+                                    StorageId = 1
+                                });
                             }
 
                             // Load lại dữ liệu
                             LoadData();
-                            //MessageBox.Show("Cập nhật thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                 }

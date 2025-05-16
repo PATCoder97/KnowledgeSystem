@@ -26,6 +26,8 @@ using DataAccessLayer;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Localization;
 using DevExpress.XtraGrid.Menu;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using DevExpress.Data;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 {
@@ -178,7 +180,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                                   BatchMaterial = bm,
                                   Unit = units.FirstOrDefault(r => r.Id == m.IdUnit)?.DisplayName ?? "N/A",
                                   UserMngr = users.FirstOrDefault(r => r.Id == m.IdManager)?.DisplayName ?? "N/A",
-                                  Dept = (depts.Where(r => r.Id == m.IdDept).Select(r => $"{r.Id} {r.DisplayName}").FirstOrDefault() ?? "N/A") + (bm.IsComplete != true ? " - 處理中" : " - 已完成"),
+                                  Dept = (depts.Where(r => r.Id == m.IdDept).Select(r => $"{r.Id} {r.DisplayName}").FirstOrDefault() ?? "N/A"),
                                   UserReCheck = string.IsNullOrEmpty(bm.ConfirmedBy) ? "" : users.FirstOrDefault(r => r.Id == bm.ConfirmedBy)?.DisplayName ?? "N/A"
                               })
                         .ToList();
@@ -268,22 +270,71 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             }
         }
 
-        private void gvSparePart_CustomDrawGroupRow(object sender, DevExpress.XtraGrid.Views.Base.RowObjectCustomDrawEventArgs e)
+        //private int GetRowCountRecursive(GridView view, int rowHandle)
+        //{
+        //    int totalCount = 0;
+        //    int childrenCount = view.GetChildRowCount(rowHandle);
+        //    for (int i = 0; i < childrenCount; i++)
+        //    {
+        //        var childRowHandle = view.GetChildRowHandle(rowHandle, i);
+        //        if (view.IsGroupRow(childRowHandle))
+        //        {
+        //            totalCount += GetRowCountRecursive(view, childRowHandle);
+        //        }
+        //        else
+        //        {
+        //            totalCount++;
+        //        }
+        //    }
+        //    return totalCount;
+        //}
+
+        private int GetRowCountComplete(GridView view, int rowHandle)
         {
-            var groupRowInfo = e.Info as DevExpress.XtraGrid.Views.Grid.ViewInfo.GridGroupRowInfo;
-            if (!string.IsNullOrEmpty(groupRowInfo.EditValue.ToString()))
+            int totalCount = 0;
+            int childrenCount = view.GetChildRowCount(rowHandle);
+
+            for (int i = 0; i < childrenCount; i++)
             {
-                if (groupRowInfo.EditValue.ToString().Contains("處理中")) // Nếu có chữ "處理中"
+                int childRowHandle = view.GetChildRowHandle(rowHandle, i);
+
+                // Nếu là Group Row, đệ quy để lấy số lượng từ các nhóm con
+                if (view.IsGroupRow(childRowHandle))
                 {
-                    groupRowInfo.Appearance.ForeColor = Color.Red;  // Màu đỏ
-                    groupRowInfo.GroupText = $"🔴 {groupRowInfo.EditValue}";      // Thêm biểu tượng màu đỏ
+                    totalCount += GetRowCountComplete(view, childRowHandle);
                 }
-                else if (groupRowInfo.EditValue.ToString().Contains("已完成")) // Nếu có chữ "已完成"
+                else
                 {
-                    groupRowInfo.Appearance.ForeColor = Color.Green; // Màu xanh
-                    groupRowInfo.GroupText = $"✅ {groupRowInfo.EditValue}";      // Thêm biểu tượng màu xanh
+                    // Nếu là Data Row, kiểm tra giá trị cột gColIsComplete
+                    object cellValue = view.GetRowCellValue(childRowHandle, gColIsComplete);
+                    if (cellValue != null && bool.TryParse(cellValue.ToString(), out bool isComplete) && isComplete)
+                    {
+                        totalCount++;
+                    }
                 }
             }
+
+            return totalCount;
+        }
+
+        private void gvSparePart_CustomDrawGroupRow(object sender, DevExpress.XtraGrid.Views.Base.RowObjectCustomDrawEventArgs e)
+        {
+
+            var view = (GridView)sender;
+            var info = (GridGroupRowInfo)e.Info;
+            var caption = info.Column.Caption;
+            if (info.Column.Caption == string.Empty)
+            {
+                caption = info.Column.ToString();
+            }
+
+            var groupInfo = info.RowKey as GroupRowInfo;
+
+            bool groupComplete = groupInfo?.ChildControllerRowCount == GetRowCountComplete(view, e.RowHandle);
+            string colorName = groupComplete ? "Green" : "Red";
+            string groupValue = groupComplete ? "已完成" : "處理中";
+
+            info.GroupText = $"{info.GroupValueText}: <color={colorName}>{groupValue}</color>";
         }
 
         private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
