@@ -1044,6 +1044,12 @@
     <Compile Include="Views\04_SystemAdministrator\03_Extension\03_ImageAutoArrangement\f403_03_ImageAutoArray.Designer.cs">
       <DependentUpon>f403_03_ImageAutoArray.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\04_SystemAdministrator\03_Extension\03_ImageAutoArrangement\f403_03_SurfaceRustHealth.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\04_SystemAdministrator\03_Extension\03_ImageAutoArrangement\f403_03_SurfaceRustHealth.Designer.cs">
+      <DependentUpon>f403_03_SurfaceRustHealth.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\04_SystemAdministrator\03_Extension\f403_ProcessFilesTool.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1487,6 +1493,9 @@
     <EmbeddedResource Include="Views\04_SystemAdministrator\03_Extension\03_ImageAutoArrangement\f403_03_ImageAutoArray.resx">
       <DependentUpon>f403_03_ImageAutoArray.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\04_SystemAdministrator\03_Extension\03_ImageAutoArrangement\f403_03_SurfaceRustHealth.resx">
+      <DependentUpon>f403_03_SurfaceRustHealth.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\03_Extension\f403_ProcessFilesTool.resx">
       <DependentUpon>f403_ProcessFilesTool.cs</DependentUpon>
     </EmbeddedResource>
@@ -1507,6 +1516,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="AppResources\blank.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="AppResources\403_03_SurfaceRustHealth.pptx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
