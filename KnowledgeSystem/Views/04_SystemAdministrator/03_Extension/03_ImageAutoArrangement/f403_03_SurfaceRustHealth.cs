@@ -187,7 +187,29 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._03_ImageA
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            InsertImagesToPttx();
+            switch (cbbType.SelectedIndex)
+            {
+                case 0:
+                    
+                    break;
+                default:
+                    InsertImagesToPttx();
+                    break;
+            }
+        }
+
+        private void cbbType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txbId.Text = "";
+            switch (cbbType.SelectedIndex)
+            {
+                case 0:
+                    txbId.Enabled = true;
+                    break;
+                default:
+                    txbId.Enabled = false;
+                    break;
+            }
         }
     }
 }
