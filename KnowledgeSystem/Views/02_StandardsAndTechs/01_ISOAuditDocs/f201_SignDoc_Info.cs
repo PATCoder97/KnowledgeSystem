@@ -245,7 +245,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             var result = XtraInputBox.Show(new XtraInputBoxArgs
             {
-                Caption = "TPConfigs.SoftNameTW",
+                Caption = TPConfigs.SoftNameTW,
                 AllowHtmlText = DevExpress.Utils.DefaultBoolean.True,
                 Prompt = "<font='Microsoft JhengHei UI' size=14>輸入核准時間</font>",
                 Editor = editor,
