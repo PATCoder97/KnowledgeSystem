@@ -19,6 +19,8 @@ using DevExpress.Data.Extensions;
 using DocumentFormat.OpenXml.Presentation;
 using Presentation = Spire.Presentation.Presentation;
 using DevExpress.Utils.Extensions;
+using KnowledgeSystem.Views._00_Generals;
+using DevExpress.XtraSplashScreen;
 
 namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._03_ImageAutoArrangement
 {
@@ -35,21 +37,20 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._03_ImageA
             public int SlideIndex { get; set; }
             public string[] ImageTOP = new string[3];
             public string[] ImageBOT = new string[3];
+            public string[] ImageMID = new string[3];
         }
 
-        string idRoll = "12345";
+        string folderPath = "", idRoll = "";
 
         public void InsertImagesToPttx()
         {
-            var measurements = InitializeMeasurements();
-            string folderPath = @"C:\Users\Dell Alpha\Desktop\RÁC 1\RAC\TOAN";
-            idRoll = "12345";
-
-            if (!Directory.Exists(folderPath))
+            if (string.IsNullOrEmpty(idRoll))
             {
-                XtraMessageBox.Show("路徑不存在!");
+                XtraMessageBox.Show("請輸入鋼捲ID!", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
+            var measurements = InitializeMeasurements();
 
             string filePath = Path.Combine(TPConfigs.ResourcesPath, "403_03_SurfaceRustHealth.pptx");
             string savePath = Path.Combine(folderPath, $"Result-{DateTime.Now:yyyyMMddHHmmss}.pptx");
@@ -61,7 +62,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._03_ImageA
             presentation.SaveToFile(savePath, FileFormat.Pptx2010);
             presentation.Dispose();
 
-            XtraMessageBox.Show("已將圖片新增至PPT檔案!");
+            XtraMessageBox.Show("已將圖片新增至PPT檔案!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Process.Start(savePath);
         }
 
@@ -162,8 +163,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._03_ImageA
                 // Kiểm tra nếu shape là bảng
                 if (shape is ITable table)
                 {
-                    Console.WriteLine("Bảng:");
-
                     // Duyệt qua từng ô trong bảng
                     for (int row = 0; row < table.TableRows.Count; row++)
                     {
@@ -180,21 +179,139 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._03_ImageA
                             }
                         }
                     }
-                    Console.WriteLine();
                 }
             }
         }
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            switch (cbbType.SelectedIndex)
+            folderPath = txbPath.Text.Trim();
+            idRoll = txbId.Text.Trim();
+
+            if (!Directory.Exists(folderPath))
             {
-                case 0:
-                    
-                    break;
-                default:
-                    InsertImagesToPttx();
-                    break;
+                XtraMessageBox.Show("路徑不存在!", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            using (var handle = SplashScreenManager.ShowOverlayForm(this))
+            {
+                switch (cbbType.SelectedIndex)
+                {
+                    case 1:
+                        InsertBlendingTestImage();
+                        break;
+                    default:
+                        InsertImagesToPttx();
+                        break;
+                }
+            }
+        }
+
+        private void InsertBlendingTestImage()
+        {
+            var measurements = new Dictionary<string, DataImage>
+            {
+                { "UON_H", new DataImage(){ SlideIndex = 0 } },
+                { "UON_T", new DataImage(){ SlideIndex = 1 } },
+            };
+
+            string filePath = Path.Combine(TPConfigs.ResourcesPath, "403_03_BendingTest.pptx");
+            string savePath = Path.Combine(folderPath, $"Result-{DateTime.Now:yyyyMMddHHmmss}.pptx");
+
+            idRoll = Path.GetFileName(folderPath);
+            var pattern = @"^\d+-(H|T)[LPC]-\d+$";
+            var allImages = Directory.GetFiles(folderPath, "*.jpg", SearchOption.AllDirectories)
+                .Where(file => Regex.IsMatch(Path.GetFileNameWithoutExtension(file), pattern, RegexOptions.IgnoreCase))
+                .ToList();
+
+            var presentation = new Presentation();
+            presentation.LoadFromFile(filePath);
+
+            InsertImagesBledingTestIntoSlides(presentation, measurements, allImages);
+            presentation.SaveToFile(savePath, FileFormat.Pptx2010);
+            presentation.Dispose();
+
+            XtraMessageBox.Show("已將圖片新增至PPT檔案!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Process.Start(savePath);
+        }
+
+        private void InsertImagesBledingTestIntoSlides(Presentation presentation, Dictionary<string, DataImage> measurements, List<string> allImages)
+        {
+            int x = 142, y = 125, dpi = 96, newWidth = (int)(1.80 * dpi);
+            string[] positions = { "C", "P", "L" };
+
+            foreach (var imagepath in allImages)
+            {
+                string fileName = Path.GetFileNameWithoutExtension(imagepath);
+                var parts = fileName.Split('-');
+                var topmidbot = parts[0];
+                char pos = parts[1].Last();
+                char sampleKey = parts[1].First();
+
+                var itemType = measurements[$"UON_{sampleKey}"];
+                int index = Array.IndexOf(positions, pos.ToString());
+                switch (topmidbot)
+                {
+                    case "0":
+                        itemType.ImageTOP[index] = imagepath;
+                        break;
+                    case "45":
+                        itemType.ImageMID[index] = imagepath;
+                        break;
+                    case "90":
+                        itemType.ImageBOT[index] = imagepath;
+                        break;
+                }
+            }
+
+            foreach (var item in measurements)
+            {
+                ISlide slide = presentation.Slides[item.Value.SlideIndex];
+                for (int i = 0; i < 3; i++)
+                {
+                    InsertImage(slide, item.Value.ImageTOP[i], x + 191 * i, y, newWidth);
+                    InsertImage(slide, item.Value.ImageMID[i], x + 191 * i, y + 137, newWidth);
+                    InsertImage(slide, item.Value.ImageBOT[i], x + 191 * i, y + 137 * 2, newWidth);
+
+                    InsertTextBlendingTest(slide, item.Value.ImageTOP[i], $"T{i}");
+                    InsertTextBlendingTest(slide, item.Value.ImageMID[i], $"M{i}");
+                    InsertTextBlendingTest(slide, item.Value.ImageBOT[i], $"B{i}");
+                }
+            }
+        }
+
+        private void InsertTextBlendingTest(ISlide slide, string imagePath, string keyReplace)
+        {
+            string fileName = Path.GetFileNameWithoutExtension(imagePath);
+            if (string.IsNullOrEmpty(fileName)) return;
+
+            var parts = fileName.Split('-');
+            string value1 = parts.Last();
+            // Duyệt qua từng shape trên slide
+            foreach (IShape shape in slide.Shapes)
+            {
+                // Kiểm tra nếu shape là bảng
+                if (shape is ITable table)
+                {
+                    // Duyệt qua từng ô trong bảng
+                    for (int row = 0; row < table.TableRows.Count; row++)
+                    {
+                        for (int col = 0; col < table.TableRows[row].Count; col++)
+                        {
+                            var cell = table.TableRows[row][col];
+                            if (cell.TextFrame != null && cell.TextFrame.Text.StartsWith($"{keyReplace}"))
+                            {
+                                cell.TextFrame.Text = cell.TextFrame.Text.Replace($"{keyReplace}", value1);
+                            }
+
+                            if (cell.TextFrame != null && cell.TextFrame.Text.StartsWith($"idroll"))
+                            {
+                                cell.TextFrame.Text = cell.TextFrame.Text.Replace($"idroll", idRoll);
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -210,6 +327,29 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._03_ImageA
                     txbId.Enabled = false;
                     break;
             }
+        }
+
+        private void btnCrop_Click(object sender, EventArgs e)
+        {
+            var editor = new TextEdit { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) };
+
+            var result = XtraInputBox.Show(new XtraInputBoxArgs
+            {
+                Caption = TPConfigs.SoftNameTW,
+                Prompt = "輸入路徑",
+                Editor = editor,
+            });
+
+            if (string.IsNullOrEmpty(result?.ToString())) return;
+            var folderPath = Directory.GetFiles(result.ToString().Trim(), "*.jpg", SearchOption.TopDirectoryOnly).ToList();
+
+            f00_CropImage cropImage = new f00_CropImage(folderPath);
+            cropImage.ShowDialog();
+        }
+
+        private void f403_03_SurfaceRustHealth_Load(object sender, EventArgs e)
+        {
+            cbbType.SelectedIndex = 0;
         }
     }
 }

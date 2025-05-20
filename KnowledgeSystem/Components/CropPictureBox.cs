@@ -197,8 +197,8 @@ namespace System.Windows.Forms
             }
         }
 
-        private Color _selectionBorderColor = Color.Gray;
-        [Bindable(true), DefaultValue(typeof(Color), "Gray"), Category("Appearance"), Localizable(false), Description("Gets or sets the color of the selection rectangle border")]
+        private Color _selectionBorderColor = Color.Red;
+        [Bindable(true), DefaultValue(typeof(Color), "Red"), Category("Appearance"), Localizable(false), Description("Gets or sets the color of the selection rectangle border")]
         public Color SelectionBorderColor
         {
             get
@@ -867,10 +867,14 @@ namespace System.Windows.Forms
                         break;
 
                     case CropBoxSelectionInitialMode.Size3x4:
-                        fullImageSelection = new Rectangle(0, 0, 113, 151);
+                        int height = Image.Height/2;
+                        int width = height * 3 / 4;
+                        fullImageSelection = new Rectangle(0, 0, width, height);
                         break;
                     case CropBoxSelectionInitialMode.Size2x1:
-                        fullImageSelection = new Rectangle(0, 0, 400, 200);
+                        int newWidth = Image.Width / 2;
+                        int newHeight = newWidth / 2;
+                        fullImageSelection = new Rectangle(0, 0, newWidth, newHeight);
                         break;
                     case CropBoxSelectionInitialMode.Rectangle:
                         minSize = Math.Min(Image.Width, Image.Height);

@@ -125,7 +125,7 @@ namespace KnowledgeSystem
                 AppPermission.Instance.CheckAppPermission(7);
                 TPConfigs.IdParentControl = AppPermission.SafetyCertMain;
 
-                Application.Run(new f00_CropImage());
+                Application.Run(new f403_03_SurfaceRustHealth());
                 //Application.Run(new f00_FluentFrame(87));
                 //Application.Run(new f00_Main());
 #else

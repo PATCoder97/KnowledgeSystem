@@ -1527,6 +1527,9 @@
     <None Include="AppResources\308_Statistic.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="AppResources\403_03_BendingTest.pptx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="AppResources\403_03_Template.pptx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
