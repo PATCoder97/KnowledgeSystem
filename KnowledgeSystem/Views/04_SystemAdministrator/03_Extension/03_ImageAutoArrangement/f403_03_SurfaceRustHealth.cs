@@ -70,12 +70,12 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._03_ImageA
         {
             return new Dictionary<string, DataImage>
             {
-                { "DC_NH", new DataImage(){ SlideIndex = 0 } },
-                { "DC_NT", new DataImage(){ SlideIndex = 1 } },
+                { "XRD_NH", new DataImage(){ SlideIndex = 0 } },
+                { "DC_NH", new DataImage(){ SlideIndex = 1 } },
                 { "SEM_NH", new DataImage(){ SlideIndex = 2 } },
-                { "SEM_NT", new DataImage(){ SlideIndex = 3 } },
-                { "XRD_NH", new DataImage(){ SlideIndex = 4 } },
-                { "XRD_NT", new DataImage(){ SlideIndex = 5 } },
+                { "XRD_NT", new DataImage(){ SlideIndex = 3 } },
+                { "DC_NT", new DataImage(){ SlideIndex = 4 } },
+                { "SEM_NT", new DataImage(){ SlideIndex = 5 } },
             };
         }
 
@@ -94,7 +94,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._03_ImageA
 
         private void InsertImagesIntoSlides(Presentation presentation, Dictionary<string, DataImage> measurements, List<string> allImages)
         {
-            int x = 165, y = 111, dpi = 96, newWidth = (int)(2.07 * dpi);
+            int x = 207, y = 111, dpi = 96, newWidth = (int)(2.07 * dpi);
             string[] positions = { "L", "P", "C" };
 
             foreach (var imagepath in allImages)
@@ -121,8 +121,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._03_ImageA
                 ISlide slide = presentation.Slides[item.Value.SlideIndex];
                 for (int i = 0; i < 3; i++)
                 {
-                    InsertImage(slide, item.Value.ImageTOP[i], x + 270 * i, y, newWidth);
-                    InsertImage(slide, item.Value.ImageBOT[i], x + 270 * i, y + 211, newWidth);
+                    InsertImage(slide, item.Value.ImageTOP[i], x + 256 * i, y, newWidth);
+                    InsertImage(slide, item.Value.ImageBOT[i], x + 256 * i, y + 211, newWidth);
 
                     InsertText(slide, item.Value.ImageTOP[i], $"T{i}");
                     InsertText(slide, item.Value.ImageBOT[i], $"B{i}");
@@ -350,6 +350,11 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._03_ImageA
         private void f403_03_SurfaceRustHealth_Load(object sender, EventArgs e)
         {
             cbbType.SelectedIndex = 0;
+
+#if DEBUG
+            txbPath.Text = @"C:\Users\Dell Alpha\Desktop\RÁC 1\RAC\TOAN";
+            txbId.Text = "12345";
+#endif
         }
     }
 }
