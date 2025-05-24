@@ -347,7 +347,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._03_ImageA
             }
         }
 
-
         private void cbbType_SelectedIndexChanged(object sender, EventArgs e)
         {
             txbId.Text = "";

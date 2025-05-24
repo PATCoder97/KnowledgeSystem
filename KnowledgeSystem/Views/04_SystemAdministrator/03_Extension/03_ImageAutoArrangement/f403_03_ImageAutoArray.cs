@@ -27,6 +27,137 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._03_ImageA
             InitializeComponent();
         }
 
+        string folderPath = "", idRoll = "";
+        int numImage = 7;
+
+        private class DataImage
+        {
+            public int SlideIndex { get; set; }
+            public string[] ImageTOP = new string[7];
+            public string[] ImageBOT = new string[7];
+            public string[] ImageMID = new string[7];
+        }
+
+        private List<string> GetValidImages(string folderPath)
+        {
+            // Lấy danh sách file ảnh .jpg bằng điều kiện regex
+            var pattern = @"^(00|15|25)-[BTM]-(100X|200X)( DO)?$";
+
+            var allImages = Directory.GetFiles(folderPath, "*.jpg", SearchOption.AllDirectories)
+                .Where(file => Regex.IsMatch(Path.GetFileNameWithoutExtension(file), pattern, RegexOptions.IgnoreCase))
+                .GroupBy(file => new
+                {
+                    Directory = Path.GetDirectoryName(file),  // Nhóm theo thư mục
+                    FileName = Path.GetFileNameWithoutExtension(file).Replace(" DO", "").ToLower()  // Nhóm theo tên file (loại bỏ " DO") và chuyển về chữ thường
+                })
+                .Select(group => group.OrderByDescending(file => Path.GetFileNameWithoutExtension(file).EndsWith(" DO")).First())
+                .ToList();
+
+            return allImages;
+        }
+
+        private void InsertImagesIntoSlides(Presentation presentation, DataImage measurements, List<string> allImages)
+        {
+            string[] positions;
+            if (numImage == 4)
+            {
+                positions = new string[] { "1-15", "1-25", "5-25", "5-15" };
+            }
+            else
+            {
+                positions = new string[] { "1-15", "1-25", "2-00", "3-00", "4-00", "5-25", "5-15" };
+            }
+
+
+            foreach (var imagepath in allImages)
+            {
+                var parts = imagepath.Split('\\');
+                string folderName = parts[parts.Length - 2].Trim();
+                char indexFolder = folderName[0];
+                string fileName = Path.GetFileNameWithoutExtension(imagepath);
+                string topmidbot = fileName.Split('-')[1];
+                string indexFile = fileName.Split('-')[0];
+                string pos = $"{indexFolder}-{indexFile}";
+
+                int index = Array.IndexOf(positions, pos.ToString());
+
+                switch (topmidbot)
+                {
+                    case "T":
+                        measurements.ImageTOP[index] = imagepath;
+                        break;
+                    case "M":
+                        measurements.ImageMID[index] = imagepath;
+                        break;
+                    case "B":
+                        measurements.ImageBOT[index] = imagepath;
+                        break;
+                }
+            }
+
+            ISlide slide = presentation.Slides[measurements.SlideIndex];
+            for (int i = 0; i < numImage; i++)
+            {
+                if (numImage == 4)
+                {
+                    int x = 59, y = 242, dpi = 96, newWidth = (int)(1.03 * dpi);
+                    InsertImage(slide, measurements.ImageTOP[i], x + 101 * i, y, newWidth);
+                    InsertImage(slide, measurements.ImageMID[i], x + 101 * i, y + 77, newWidth);
+                    InsertImage(slide, measurements.ImageBOT[i], x + 101 * i, y + 77 * 2, newWidth);
+                }
+                else
+                {
+                    int x = 59, y = 242, dpi = 96, newWidth = (int)(1.03 * dpi);
+                    InsertImage(slide, measurements.ImageTOP[i], x + 101 * i, y, newWidth);
+                    InsertImage(slide, measurements.ImageMID[i], x + 101 * i, y + 78, newWidth);
+                    InsertImage(slide, measurements.ImageBOT[i], x + 101 * i, y + 78 * 2, newWidth);
+                }
+            }
+
+            foreach (IShape shape in slide.Shapes)
+            {
+                if (shape is IAutoShape autoShape)
+                {
+                    autoShape.TextFrame.Text = autoShape.TextFrame.Text.Replace("SampleID", idRoll);
+                }
+            }
+        }
+
+        private void InsertImage(ISlide slide, string imagePath, int x, int y, int newWidth)
+        {
+            if (string.IsNullOrEmpty(imagePath)) return;
+            Image img = Image.FromFile(imagePath);
+            float aspectRatio = (float)img.Height / img.Width;
+            int newHeight = (int)(newWidth * aspectRatio);
+            IImageData image = slide.Presentation.Images.Append(img);
+            RectangleF rect = new RectangleF(x, y, newWidth, newHeight);
+            IEmbedImage imageShape = slide.Shapes.AppendEmbedImage(ShapeType.Rectangle, image, rect);
+            imageShape.Line.FillType = FillFormatType.None;
+        }
+
+        public void InsertImagesToPttx()
+        {
+            var measurements = new DataImage() { SlideIndex = 0 };
+            string filePath = Path.Combine(TPConfigs.ResourcesPath, "403_03_Template.pptx");
+
+            if (numImage == 4)
+            {
+                filePath = Path.Combine(TPConfigs.ResourcesPath, "403_03_MixedAnalysis.pptx");
+            }
+
+            string savePath = Path.Combine(folderPath, $"Result-{DateTime.Now:yyyyMMddHHmmss}.pptx");
+            var allImages = GetValidImages(folderPath);
+            var presentation = new Presentation();
+            presentation.LoadFromFile(filePath);
+
+            InsertImagesIntoSlides(presentation, measurements, allImages);
+            presentation.SaveToFile(savePath, FileFormat.Pptx2010);
+            presentation.Dispose();
+
+            XtraMessageBox.Show("已將圖片新增至PPT檔案!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Process.Start(savePath);
+        }
+
         public void InsertImagesToExcel()
         {
             string folderPath = txbPath.Text.Trim();
@@ -159,144 +290,27 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._03_ImageA
             }
         }
 
-        public void InsertImagesToPttx()
-        {
-            Spire.License.LicenseProvider.SetLicenseKey(TPConfigs.KeySpirePPT);
-
-            string folderPath = txbPath.Text.Trim();
-            if (!Directory.Exists(folderPath))
-            {
-                XtraMessageBox.Show("路徑不存在!");
-                return;
-            }
-
-            // Đường dẫn đến file PPTX có sẵn
-            string filePath = Path.Combine(TPConfigs.ResourcesPath, "403_03_Template.pptx");
-            string savePath = Path.Combine(folderPath, $"Result-{DateTime.Now:yyyyMMddHHmmss}.pptx");
-
-            // Lấy danh sách file ảnh .jpg bằng điều kiện regex
-            var pattern = @"^(00|15|25)-[BTM]-(100X|200X)( DO)?$";
-
-            var allImages = Directory.GetFiles(folderPath, "*.jpg", SearchOption.AllDirectories)
-                .Where(file => Regex.IsMatch(Path.GetFileNameWithoutExtension(file), pattern, RegexOptions.IgnoreCase))
-                .GroupBy(file => new
-                {
-                    Directory = Path.GetDirectoryName(file),  // Nhóm theo thư mục
-                    FileName = Path.GetFileNameWithoutExtension(file).Replace(" DO", "").ToLower()  // Nhóm theo tên file (loại bỏ " DO") và chuyển về chữ thường
-                })
-                .Select(group => group.OrderByDescending(file => Path.GetFileNameWithoutExtension(file).EndsWith(" DO")).First())
-                .ToList();
-
-            string sampleId = allImages.FirstOrDefault() != null
-                ? Path.GetFileName(Path.GetDirectoryName(allImages.FirstOrDefault()))?.Split('-').ElementAtOrDefault(1)
-                : null;
-
-            // Hàm lấy tên thư mục cha
-            string GetParentFolderName(string path)
-            {
-                var parts = path.Split(Path.DirectorySeparatorChar);
-                return parts.Length > 1 ? parts[parts.Length - 2].Split('-')[0] : string.Empty;
-            }
-
-            // Hàm sắp xếp ảnh theo yêu cầu (1-4 A-Z, 5 Z-A)
-            List<string> SortImages(List<string> images)
-            {
-                var group1to4 = images
-                    .Where(img => int.TryParse(GetParentFolderName(img), out int num) && num >= 1 && num <= 4)
-                    .OrderBy(img => img, StringComparer.OrdinalIgnoreCase)
-                    .ToList();
-
-                var group5 = images
-                    .Where(img => int.TryParse(GetParentFolderName(img), out int num) && num == 5)
-                    .OrderByDescending(img => img, StringComparer.OrdinalIgnoreCase)
-                    .ToList();
-
-                return group1to4.Concat(group5).ToList();
-            }
-
-            // Phân loại ảnh theo tên và sắp xếp
-            var topImages = SortImages(allImages.Where(r => r.Contains("-T-")).ToList());
-            var midImages = SortImages(allImages.Where(r => r.Contains("-M-")).ToList());
-            var botImages = SortImages(allImages.Where(r => r.Contains("-B-")).ToList());
-
-            // Tạo đối tượng Presentation và mở file PPTX
-            Presentation presentation = new Presentation();
-            presentation.LoadFromFile(filePath);
-
-            // Lấy danh sách bộ ảnh theo thứ tự
-            var imageCollections = new List<List<string>> { topImages, midImages, botImages };
-
-            // Đặt vị trí ban đầu của ảnh
-            int x = 59;
-            int y = 242;
-            int dpi = 96;
-            int newWidth = (int)(1.03 * dpi);
-
-            // Lấy slide đầu tiên
-            ISlide slide = presentation.Slides[0];
-
-            // Duyệt qua tất cả các shapes trong slide
-            foreach (IShape shape in slide.Shapes)
-            {
-                // Kiểm tra nếu shape là bảng (ITable)
-                if (shape is ITable table)
-                {
-                    var cell = table[0, 0];
-
-                    // Kiểm tra nếu cell chứa text "SampleID"
-                    if (cell.TextFrame.Text.Contains("SampleID"))
-                    {
-                        // Sửa text trong cell này (ví dụ thay thế "SampleID" thành "NewSampleID")
-                        cell.TextFrame.Text = cell.TextFrame.Text.Replace("SampleID", sampleId);
-                    }
-                }
-            }
-
-            // Duyệt qua từng bộ ảnh (top, mid, bot)
-            for (int j = 0; j < imageCollections.Count; j++)
-            {
-                var images = imageCollections[j];
-
-                for (int i = 0; i < images.Count; i++)
-                {
-                    // Đường dẫn ảnh từ bộ sưu tập tương ứng
-                    string imagePath = images[i];
-
-                    // Add the image to the image collection of the document
-                    Image img = Image.FromFile(imagePath);
-                    IImageData image = presentation.Images.Append(img);
-
-                    // Lấy tỷ lệ khung hình từ ảnh gốc
-                    float aspectRatio = (float)image.Height / image.Width;
-
-                    // Tính chiều cao mới theo tỷ lệ
-                    int newHeight = (int)(newWidth * aspectRatio);
-
-                    // Tính vị trí ảnh dựa trên chỉ số i và j
-                    RectangleF rect = new RectangleF(x + 101 * i, y + j * 78, newWidth, newHeight);
-                    IEmbedImage imageShape = slide.Shapes.AppendEmbedImage(ShapeType.Rectangle, image, rect);
-
-                    // Set the line fill type of the image shape to none
-                    imageShape.Line.FillType = FillFormatType.None;
-                }
-            }
-
-            // Lưu file PPTX
-            presentation.SaveToFile(savePath, FileFormat.Pptx2010);
-            presentation.Dispose();
-
-            XtraMessageBox.Show("已將圖片新增至PPT檔案!");
-            Process.Start(savePath);
-        }
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
+            folderPath = txbPath.Text.Trim();
+
+            if (!Directory.Exists(folderPath))
+            {
+                XtraMessageBox.Show("路徑不存在!", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            Spire.License.LicenseProvider.SetLicenseKey(TPConfigs.KeySpirePPT);
+
+            InsertImagesToPttx();
+
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
             {
-                switch (cbbTypeFile.Text)
+                switch (cbbTypeFile.SelectedIndex)
                 {
-                    case "Excel":
-                        InsertImagesToExcel();
+                    case 1:
+                        InsertImagesToPttx();
                         break;
                     default:
                         InsertImagesToPttx();
