@@ -21,6 +21,7 @@ using Presentation = Spire.Presentation.Presentation;
 using DevExpress.Utils.Extensions;
 using KnowledgeSystem.Views._00_Generals;
 using DevExpress.XtraSplashScreen;
+using System.IO.Compression;
 
 namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._03_ImageAutoArrangement
 {
@@ -86,15 +87,25 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._03_ImageA
                 .Where(dir => Regex.IsMatch(Path.GetFileName(dir), $"^{idRoll}(NH|NT)[LPC]$", RegexOptions.IgnoreCase))
                 .ToList();
 
-            return validSubfolders
+            // Thêm DC/SEM
+            var dcsemImages = validSubfolders
                 .SelectMany(subfolder => Directory.GetFiles(subfolder, "*.jpg", SearchOption.AllDirectories))
                 .Where(file => Regex.IsMatch(Path.GetFileNameWithoutExtension(file), pattern, RegexOptions.IgnoreCase))
                 .ToList();
+
+            var xrdImages = validSubfolders
+                .SelectMany(subfolder => Directory.GetFiles(subfolder, "*.wmf", SearchOption.AllDirectories))
+                .Where(file => Regex.IsMatch(Path.GetFileNameWithoutExtension(file), @"^XRD-\d+(\.\d+)?-\d+(\.\d+)?_1$", RegexOptions.IgnoreCase))
+                .ToList();
+
+            var allImages = new List<string>(dcsemImages);
+            allImages.AddRange(xrdImages);
+
+            return allImages;
         }
 
         private void InsertImagesIntoSlides(Presentation presentation, Dictionary<string, DataImage> measurements, List<string> allImages)
         {
-            int x = 207, y = 111, dpi = 96, newWidth = (int)(2.07 * dpi);
             string[] positions = { "L", "P", "C" };
 
             foreach (var imagepath in allImages)
@@ -121,11 +132,21 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._03_ImageA
                 ISlide slide = presentation.Slides[item.Value.SlideIndex];
                 for (int i = 0; i < 3; i++)
                 {
-                    InsertImage(slide, item.Value.ImageTOP[i], x + 256 * i, y, newWidth);
-                    InsertImage(slide, item.Value.ImageBOT[i], x + 256 * i, y + 211, newWidth);
+                    if (item.Value.SlideIndex == 0 || item.Value.SlideIndex == 3)
+                    {
+                        int x = 143, y = 111, dpi = 96, newWidth = (int)(2.7 * dpi);
+                        InsertImage(slide, item.Value.ImageTOP[i], x + 270 * i, y, newWidth);
+                        InsertImage(slide, item.Value.ImageBOT[i], x + 270 * i, y + 211, newWidth);
+                    }
+                    else
+                    {
+                        int x = 207, y = 111, dpi = 96, newWidth = (int)(2.07 * dpi);
+                        InsertImage(slide, item.Value.ImageTOP[i], x + 256 * i, y, newWidth);
+                        InsertImage(slide, item.Value.ImageBOT[i], x + 256 * i, y + 211, newWidth);
 
-                    InsertText(slide, item.Value.ImageTOP[i], $"T{i}");
-                    InsertText(slide, item.Value.ImageBOT[i], $"B{i}");
+                        InsertText(slide, item.Value.ImageTOP[i], $"T{i}");
+                        InsertText(slide, item.Value.ImageBOT[i], $"B{i}");
+                    }
                 }
 
                 foreach (IShape shape in slide.Shapes)
@@ -179,31 +200,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._03_ImageA
                             }
                         }
                     }
-                }
-            }
-        }
-
-        private void btnSubmit_Click(object sender, EventArgs e)
-        {
-            folderPath = txbPath.Text.Trim();
-            idRoll = txbId.Text.Trim();
-
-            if (!Directory.Exists(folderPath))
-            {
-                XtraMessageBox.Show("路徑不存在!", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            using (var handle = SplashScreenManager.ShowOverlayForm(this))
-            {
-                switch (cbbType.SelectedIndex)
-                {
-                    case 1:
-                        InsertBlendingTestImage();
-                        break;
-                    default:
-                        InsertImagesToPttx();
-                        break;
                 }
             }
         }
@@ -315,6 +311,43 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._03_ImageA
             }
         }
 
+        private void ExtractXRDImage()
+        {
+            var xrdDocFiles = Directory.GetFiles(folderPath, "*.docx", SearchOption.AllDirectories);
+
+            foreach (var docFile in xrdDocFiles)
+            {
+                string docFileNameWithoutExt = Path.GetFileNameWithoutExtension(docFile);
+                string docDirectory = Path.GetDirectoryName(docFile);
+
+                using (ZipArchive archive = ZipFile.OpenRead(docFile))
+                {
+                    int imageIndex = 0;
+
+                    foreach (ZipArchiveEntry entry in archive.Entries)
+                    {
+                        if (entry.FullName.StartsWith("word/media/") &&
+                            (entry.Name.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase) ||
+                             entry.Name.EndsWith(".jpeg", StringComparison.OrdinalIgnoreCase) ||
+                             entry.Name.EndsWith(".png", StringComparison.OrdinalIgnoreCase) ||
+                             entry.Name.EndsWith(".gif", StringComparison.OrdinalIgnoreCase) ||
+                             entry.Name.EndsWith(".wmf", StringComparison.OrdinalIgnoreCase)))
+                        {
+                            string extension = Path.GetExtension(entry.Name);
+                            string outputFileName = $"{docFileNameWithoutExt}_{imageIndex}{extension}";
+                            string outputPath = Path.Combine(docDirectory, outputFileName);
+
+                            entry.ExtractToFile(outputPath, overwrite: true);
+                            Console.WriteLine($"→ Đã trích: {outputFileName}");
+
+                            imageIndex++;
+                        }
+                    }
+                }
+            }
+        }
+
+
         private void cbbType_SelectedIndexChanged(object sender, EventArgs e)
         {
             txbId.Text = "";
@@ -326,6 +359,32 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._03_ImageA
                 default:
                     txbId.Enabled = false;
                     break;
+            }
+        }
+
+        private void btnSubmit_Click(object sender, EventArgs e)
+        {
+            folderPath = txbPath.Text.Trim();
+            idRoll = txbId.Text.Trim();
+
+            if (!Directory.Exists(folderPath))
+            {
+                XtraMessageBox.Show("路徑不存在!", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            using (var handle = SplashScreenManager.ShowOverlayForm(this))
+            {
+                switch (cbbType.SelectedIndex)
+                {
+                    case 1:
+                        InsertBlendingTestImage();
+                        break;
+                    default:
+                        ExtractXRDImage();
+                        InsertImagesToPttx();
+                        break;
+                }
             }
         }
 
