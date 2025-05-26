@@ -21,12 +21,15 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraReports.UI;
 using DevExpress.XtraSplashScreen;
 using DocumentFormat.OpenXml.Spreadsheet;
 using ExcelDataReader;
 using KnowledgeSystem.Helpers;
+using KnowledgeSystem.Views._00_Generals;
 using KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck;
 using Org.BouncyCastle.Math;
+using static KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._02_MaterialTrends.uc403_02_MaterialTrends;
 using Color = System.Drawing.Color;
 using Font = System.Drawing.Font;
 
@@ -75,6 +78,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         DXMenuItem itemMaterialTransfer;
         DXMenuItem itemMaterialCheck;
         DXMenuItem itemMaterialGetFromOther;
+        DXMenuItem itemMultiselect;
+        DXMenuItem itemPrintStamp;
 
         private void InitializeIcon()
         {
@@ -125,10 +130,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             };
             gvTransactions.FormatRules.Add(ruleTransfer);
 
-            // Quy tắc cảnh báo khi số lượng trong kho + máy < min
             var ruleNotify = new GridFormatRule
             {
-                ApplyToRow = true,
+                ApplyToRow = false, // Áp dụng cho ô, không phải cả hàng
+                Column = gColDisplayName, // Chỉ áp dụng cho cột gColDisplayName
                 Name = "RuleNotify",
                 Rule = new FormatConditionRuleExpression
                 {
@@ -142,6 +147,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 }
             };
             gvData.FormatRules.Add(ruleNotify);
+
 
             // Quy tắc hiển thị biểu tượng tăng/giảm trong lịch sử giao dịch
             var ruleIconSet = new GridFormatRule
@@ -188,6 +194,39 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             itemMaterialTransfer = CreateMenuItem("轉庫", ItemMaterialTransfer_Click, TPSvgimages.Num3);
             itemMaterialCheck = CreateMenuItem("盤點", ItemMaterialCheck_Click, TPSvgimages.Num4);
             itemMaterialGetFromOther = CreateMenuItem("調撥", ItemMaterialGetFromOther_Click, TPSvgimages.Num5);
+
+            itemMultiselect = CreateMenuItem("啟用多選", ItemMultiselect_Click, TPSvgimages.CheckedRadio);
+            itemPrintStamp = CreateMenuItem("執行列印", ItemPrintStamp_Click, TPSvgimages.Print);
+        }
+
+        private void ItemPrintStamp_Click(object sender, EventArgs e)
+        {
+            var selectedItems = gvData.GetSelectedRows()
+                .Select(rowHandle => (gvData.GetRow(rowHandle) as dynamic).data as dt309_Materials)
+                .Where(item => item != null)
+                .ToList();
+
+            var labels = selectedItems.Select(r => new { Lb1 = r.DisplayName, Lb2 = r.Code });
+            var report = new XtraReport();
+            report.LoadLayout(@"E:\01. Softwares Programming\00. Tool\0.Visual Studio Repos\TestBinddingReport\TestBinddingReport\bin\Debug\Report1.repx");
+
+            // Gán danh sách làm nguồn dữ liệu
+            report.DataSource = labels;
+
+            // Không cần set Parameter nữa
+            report.CreateDocument();
+
+            f00_PrintReport printReport = new f00_PrintReport();
+            printReport.ViewerReport.DocumentSource = report;
+
+            printReport.ShowDialog();
+        }
+
+        private void ItemMultiselect_Click(object sender, EventArgs e)
+        {
+            bool multiSelect = gvData.OptionsSelection.MultiSelect;
+            gvData.OptionsSelection.MultiSelect = !multiSelect;
+            gvData.OptionsSelection.MultiSelectMode = GridMultiSelectMode.CheckBoxRowSelect;
         }
 
         private void HandleMaterialTransaction(string eventInfo)
@@ -313,6 +352,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             gvMachine.ReadOnlyGridView();
             gvMachine.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
 
+            gColDisplayName.AppearanceCell.Options.HighPriority = true;
+
             // Kiểm tra quyền từng ke để có quyền truy cập theo nhóm
             var userGroups = dm_GroupUserBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id);
             var departments = dm_DeptBUS.Instance.GetList();
@@ -373,9 +414,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         {
             if (e.HitInfo.InRowCell && e.HitInfo.InDataRow)
             {
+                bool multiSelect = gvData.OptionsSelection.MultiSelect;
+                itemMultiselect.Caption = multiSelect ? "啟用單選" : "啟用多選";
+
                 e.Menu.Items.Add(itemViewInfo);
                 e.Menu.Items.Add(itemUpdatePrice);
-
 
                 DXSubMenuItem dXSubMenuReports = new DXSubMenuItem("庫存作業") { SvgImage = TPSvgimages.PersonnelChanges };
                 dXSubMenuReports.ImageOptions.SvgImageSize = new Size(24, 24);
@@ -389,10 +432,17 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
                 e.Menu.Items.Add(dXSubMenuReports);
 
-                //e.Menu.Items.Add(itemMaterialIn);
-                //e.Menu.Items.Add(itemMaterialOut);
-                //e.Menu.Items.Add(itemMaterialTransfer);
-                //e.Menu.Items.Add(itemMaterialCheck);
+                //DXSubMenuItem dXSubMenuPrint = new DXSubMenuItem("列印標籤") { SvgImage = TPSvgimages.Print };
+                //dXSubMenuPrint.ImageOptions.SvgImageSize = new Size(24, 24);
+
+                itemMultiselect.BeginGroup = true;
+
+                e.Menu.Items.Add(itemMultiselect);
+                e.Menu.Items.Add(itemPrintStamp);
+                //dXSubMenuPrint.Items.Add(itemPrintStamp);
+                //dXSubMenuPrint.Items.Add(itemMultiselect);
+
+                //e.Menu.Items.Add(dXSubMenuPrint);
             }
         }
 
@@ -499,6 +549,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             GridView detailView = masterView.GetDetailView(e.RowHandle, visibleDetailRelationIndex) as GridView;
 
             detailView.BestFitColumns();
+        }
+
+        private void btnPrintStamp_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
         }
     }
 }

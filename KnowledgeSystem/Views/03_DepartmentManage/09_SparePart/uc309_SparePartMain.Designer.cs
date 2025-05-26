@@ -54,7 +54,7 @@
             this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gColIdMaterial = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColDisplayName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -65,6 +65,7 @@
             this.gridColumn18 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn19 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -79,7 +80,7 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-            this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.btnPrintStamp = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.gvTransactions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvPrices)).BeginInit();
@@ -353,7 +354,7 @@
             this.gvData.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gColIdMaterial,
             this.gridColumn1,
-            this.gridColumn2,
+            this.gColDisplayName,
             this.gridColumn3,
             this.gridColumn4,
             this.gridColumn13,
@@ -368,7 +369,10 @@
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
             this.gvData.OptionsDetail.DetailMode = DevExpress.XtraGrid.Views.Grid.DetailMode.Embedded;
+            this.gvData.OptionsScrollAnnotations.ShowSelectedRows = DevExpress.Utils.DefaultBoolean.True;
+            this.gvData.OptionsSelection.CheckBoxSelectorColumnWidth = 30;
             this.gvData.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
+            this.gvData.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
             this.gvData.OptionsView.ColumnAutoWidth = false;
             this.gvData.OptionsView.EnableAppearanceOddRow = true;
             this.gvData.OptionsView.ShowAutoFilterRow = true;
@@ -396,15 +400,15 @@
             this.gridColumn1.VisibleIndex = 1;
             this.gridColumn1.Width = 123;
             // 
-            // gridColumn2
+            // gColDisplayName
             // 
-            this.gridColumn2.Caption = "品名規格";
-            this.gridColumn2.FieldName = "data.DisplayName";
-            this.gridColumn2.MaxWidth = 250;
-            this.gridColumn2.Name = "gridColumn2";
-            this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 2;
-            this.gridColumn2.Width = 122;
+            this.gColDisplayName.Caption = "品名規格";
+            this.gColDisplayName.FieldName = "data.DisplayName";
+            this.gColDisplayName.MaxWidth = 250;
+            this.gColDisplayName.Name = "gColDisplayName";
+            this.gColDisplayName.Visible = true;
+            this.gColDisplayName.VisibleIndex = 2;
+            this.gColDisplayName.Width = 122;
             // 
             // gridColumn3
             // 
@@ -500,6 +504,14 @@
             this.gridColumn6.VisibleIndex = 12;
             this.gridColumn6.Width = 94;
             // 
+            // gridColumn8
+            // 
+            this.gridColumn8.Caption = "單位";
+            this.gridColumn8.FieldName = "data.IdDept";
+            this.gridColumn8.Name = "gridColumn8";
+            this.gridColumn8.Visible = true;
+            this.gridColumn8.VisibleIndex = 0;
+            // 
             // layoutControl1
             // 
             this.layoutControl1.Controls.Add(this.gcData);
@@ -543,9 +555,10 @@
             this.btnAdd,
             this.btnReload,
             this.btnExportExcel,
-            this.barCbbDept});
+            this.barCbbDept,
+            this.btnPrintStamp});
             this.barManagerTP.MainMenu = this.bar2;
-            this.barManagerTP.MaxItemId = 12;
+            this.barManagerTP.MaxItemId = 13;
             this.barManagerTP.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.cbbDept});
             // 
@@ -571,10 +584,11 @@
             this.bar2.DockRow = 0;
             this.bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnAdd, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.Width, this.barCbbDept, "", false, true, true, 217),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnAdd, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnReload, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnExportExcel, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.Width, this.barCbbDept, "", true, true, true, 217)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnPrintStamp, true)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawDragBorder = false;
             this.bar2.OptionsBar.MultiLine = true;
@@ -672,13 +686,13 @@
             this.barDockControlRight.Manager = this.barManagerTP;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 482);
             // 
-            // gridColumn8
+            // btnPrintStamp
             // 
-            this.gridColumn8.Caption = "單位";
-            this.gridColumn8.FieldName = "data.IdDept";
-            this.gridColumn8.Name = "gridColumn8";
-            this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 0;
+            this.btnPrintStamp.Caption = "印標簽";
+            this.btnPrintStamp.Id = 12;
+            this.btnPrintStamp.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnPrintStamp.Name = "btnPrintStamp";
+            this.btnPrintStamp.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnPrintStamp_ItemClick);
             // 
             // uc309_SparePartMain
             // 
@@ -724,7 +738,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
         private DevExpress.XtraGrid.Views.Grid.GridView gvData;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
+        private DevExpress.XtraGrid.Columns.GridColumn gColDisplayName;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
@@ -756,5 +770,6 @@
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
+        private DevExpress.XtraBars.BarButtonItem btnPrintStamp;
     }
 }
