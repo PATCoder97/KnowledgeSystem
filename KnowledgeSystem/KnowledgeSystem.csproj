@@ -1536,10 +1536,10 @@
     <None Include="AppResources\403_03_BendingTest.pptx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="AppResources\403_03_MixedAnalysis.pptx">
+    <None Include="AppResources\403_03_MixedAnalysis4Img.pptx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="AppResources\403_03_Template.pptx">
+    <None Include="AppResources\403_03_MixedAnalysis7Img.pptx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="AppResources\blank.pdf">

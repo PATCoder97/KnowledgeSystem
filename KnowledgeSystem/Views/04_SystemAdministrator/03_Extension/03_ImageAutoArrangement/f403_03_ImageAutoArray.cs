@@ -41,7 +41,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._03_ImageA
         private List<string> GetValidImages(string folderPath)
         {
             // Lấy danh sách file ảnh .jpg bằng điều kiện regex
-            var pattern = @"^(00|15|25)-[BTM]-(100X|200X)( DO)?$";
+            var pattern = $@"^(00|15|25)-[BTM]-({cbbZoom.Text})( DO)?$";
 
             var allImages = Directory.GetFiles(folderPath, "*.jpg", SearchOption.AllDirectories)
                 .Where(file => Regex.IsMatch(Path.GetFileNameWithoutExtension(file), pattern, RegexOptions.IgnoreCase))
@@ -74,12 +74,14 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._03_ImageA
                 var parts = imagepath.Split('\\');
                 string folderName = parts[parts.Length - 2].Trim();
                 char indexFolder = folderName[0];
+                idRoll = Regex.Match(folderName, @"^\d+[-\.](.+)$").Groups[1].Value;
                 string fileName = Path.GetFileNameWithoutExtension(imagepath);
                 string topmidbot = fileName.Split('-')[1];
                 string indexFile = fileName.Split('-')[0];
                 string pos = $"{indexFolder}-{indexFile}";
 
                 int index = Array.IndexOf(positions, pos.ToString());
+                if (index < 0) continue;
 
                 switch (topmidbot)
                 {
@@ -100,25 +102,37 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._03_ImageA
             {
                 if (numImage == 4)
                 {
-                    int x = 59, y = 242, dpi = 96, newWidth = (int)(1.03 * dpi);
-                    InsertImage(slide, measurements.ImageTOP[i], x + 101 * i, y, newWidth);
-                    InsertImage(slide, measurements.ImageMID[i], x + 101 * i, y + 77, newWidth);
-                    InsertImage(slide, measurements.ImageBOT[i], x + 101 * i, y + 77 * 2, newWidth);
+                    int x = 77, y = 175, dpi = 96, newWidth = (int)(1.6 * dpi);
+                    InsertImage(slide, measurements.ImageTOP[i], x + 161 * i, y, newWidth);
+                    InsertImage(slide, measurements.ImageMID[i], x + 161 * i, y + 121, newWidth);
+                    InsertImage(slide, measurements.ImageBOT[i], x + 161 * i, y + 121 * 2, newWidth);
                 }
                 else
                 {
                     int x = 59, y = 242, dpi = 96, newWidth = (int)(1.03 * dpi);
                     InsertImage(slide, measurements.ImageTOP[i], x + 101 * i, y, newWidth);
-                    InsertImage(slide, measurements.ImageMID[i], x + 101 * i, y + 78, newWidth);
-                    InsertImage(slide, measurements.ImageBOT[i], x + 101 * i, y + 78 * 2, newWidth);
+                    InsertImage(slide, measurements.ImageMID[i], x + 101 * i, y + 77, newWidth);
+                    InsertImage(slide, measurements.ImageBOT[i], x + 101 * i, y + 77 * 2, newWidth);
                 }
             }
 
             foreach (IShape shape in slide.Shapes)
             {
-                if (shape is IAutoShape autoShape)
+                // Kiểm tra nếu shape là bảng
+                if (shape is ITable table)
                 {
-                    autoShape.TextFrame.Text = autoShape.TextFrame.Text.Replace("SampleID", idRoll);
+                    // Duyệt qua từng ô trong bảng
+                    for (int row = 0; row < table.TableRows.Count; row++)
+                    {
+                        for (int col = 0; col < table.TableRows[row].Count; col++)
+                        {
+                            var cell = table.TableRows[row][col];
+                            if (cell.TextFrame != null && cell.TextFrame.Text.Contains($"SampleID"))
+                            {
+                                cell.TextFrame.Text = cell.TextFrame.Text.Replace($"SampleID", idRoll);
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -138,11 +152,11 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._03_ImageA
         public void InsertImagesToPttx()
         {
             var measurements = new DataImage() { SlideIndex = 0 };
-            string filePath = Path.Combine(TPConfigs.ResourcesPath, "403_03_Template.pptx");
+            string filePath = Path.Combine(TPConfigs.ResourcesPath, "403_03_MixedAnalysis7Img.pptx");
 
             if (numImage == 4)
             {
-                filePath = Path.Combine(TPConfigs.ResourcesPath, "403_03_MixedAnalysis.pptx");
+                filePath = Path.Combine(TPConfigs.ResourcesPath, "403_03_MixedAnalysis4Img.pptx");
             }
 
             string savePath = Path.Combine(folderPath, $"Result-{DateTime.Now:yyyyMMddHHmmss}.pptx");
@@ -290,6 +304,13 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._03_ImageA
             }
         }
 
+        private void f403_03_ImageAutoArray_Load(object sender, EventArgs e)
+        {
+            string[] typesImage = new string[] { "7照片", "4照片" };
+            cbbTypeFile.Properties.Items.Clear();
+            cbbTypeFile.Properties.Items.AddRange(typesImage);
+            cbbTypeFile.SelectedItem = typesImage.First();
+        }
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
@@ -303,19 +324,19 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._03_ImageA
 
             Spire.License.LicenseProvider.SetLicenseKey(TPConfigs.KeySpirePPT);
 
-            InsertImagesToPttx();
-
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
             {
                 switch (cbbTypeFile.SelectedIndex)
                 {
                     case 1:
-                        InsertImagesToPttx();
+                        numImage = 4;
                         break;
                     default:
-                        InsertImagesToPttx();
+                        numImage = 7;
                         break;
                 }
+
+                InsertImagesToPttx();
             }
         }
     }
