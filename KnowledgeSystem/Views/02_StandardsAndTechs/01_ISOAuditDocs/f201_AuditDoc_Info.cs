@@ -209,7 +209,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             File.Copy(sourcePath, destPath, true);
 
             f00_VIewFile fView = new f00_VIewFile(destPath);
-            fView.ShowDialog();
+            fView.Show();
         }
 
         private void btnAddMultiFile_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

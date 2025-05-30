@@ -134,9 +134,9 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._03_ImageA
                 {
                     if (item.Value.SlideIndex == 0 || item.Value.SlideIndex == 3)
                     {
-                        int x = 143, y = 111, dpi = 96, newWidth = (int)(2.7 * dpi);
-                        InsertImage(slide, item.Value.ImageTOP[i], x + 270 * i, y, newWidth);
-                        InsertImage(slide, item.Value.ImageBOT[i], x + 270 * i, y + 211, newWidth);
+                        int x = 181, y = 111, dpi = 96, newWidth = (int)(2.6 * dpi);
+                        InsertImage(slide, item.Value.ImageTOP[i], x + 256 * i, y, newWidth);
+                        InsertImage(slide, item.Value.ImageBOT[i], x + 256 * i, y + 211, newWidth);
                     }
                     else
                     {
