@@ -168,6 +168,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void f201_AddAttachment_Load(object sender, EventArgs e)
         {
+            txbDocCode.EditValue = parentData.DocCode;
+            txbDisplayName.EditValue = parentData.DisplayName;
+            txbDisplayNameVN.EditValue = parentData.DisplayNameVN;
+
             var grpUsrs = dm_GroupUserBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id);
             var groups = (from data in dm_GroupBUS.Instance.GetListByName("ISO組")
                           join grp in grpUsrs on data.Id equals grp.IdGroup
