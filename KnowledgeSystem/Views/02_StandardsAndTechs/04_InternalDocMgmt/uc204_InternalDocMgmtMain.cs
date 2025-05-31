@@ -395,8 +395,14 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
 
             File.Copy(sourcePath, destPath, true);
 
-            f00_VIewFile fView = new f00_VIewFile(destPath);
-            fView.ShowDialog();
+            //f00_VIewFile fView = new f00_VIewFile(destPath);
+            //fView.ShowDialog();
+
+            var mainForm = f00_ViewMultiFile.Instance;
+            if (!mainForm.Visible)
+                mainForm.Show();
+
+            mainForm.OpenFormInDocumentManager(destPath);
         }
 
         private void gvForm_DoubleClick(object sender, EventArgs e)
@@ -421,8 +427,14 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
 
             File.Copy(sourcePath, destPath, true);
 
-            f00_VIewFile fView = new f00_VIewFile(destPath);
-            fView.ShowDialog();
+            //f00_VIewFile fView = new f00_VIewFile(destPath);
+            //fView.ShowDialog();
+
+            var mainForm = f00_ViewMultiFile.Instance;
+            if (!mainForm.Visible)
+                mainForm.Show();
+
+            mainForm.OpenFormInDocumentManager(destPath);
         }
 
         private void gvForm_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
