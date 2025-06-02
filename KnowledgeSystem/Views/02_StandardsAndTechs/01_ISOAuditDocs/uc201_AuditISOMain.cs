@@ -724,7 +724,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                     currentData = currentData,
                     parentData = parentData
                 };
-                fInfo.ShowDialog();
+                fInfo.Show(this);
             }
         }
 

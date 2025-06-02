@@ -168,19 +168,19 @@ namespace KnowledgeSystem.Views._00_Generals
                         break;
                 }
 
-                // Kiểm tra nếu đã có form cùng loại
-                foreach (Form f in this.MdiChildren)
-                {
-                    if (f.GetType() == formPdf.GetType() && f.Text == formPdf.Text)
-                    {
-                        f.Activate();
-                        return;
-                    }
-                }
-
-                formPdf.MdiParent = this;
-                formPdf.Show();
             }
+            // Kiểm tra nếu đã có form cùng loại
+            foreach (Form f in this.MdiChildren)
+            {
+                if (f.GetType() == formPdf.GetType() && f.Text == formPdf.Text)
+                {
+                    f.Activate();
+                    return;
+                }
+            }
+
+            formPdf.MdiParent = this;
+            formPdf.Show();
         }
 
         private void ViewExcel_PopupMenuShowing(object sender, DevExpress.XtraSpreadsheet.PopupMenuShowingEventArgs e)

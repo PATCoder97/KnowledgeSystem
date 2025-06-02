@@ -214,9 +214,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 mainForm.Show();
 
             mainForm.OpenFormInDocumentManager(destPath);
-
-            //f00_VIewFile fView = new f00_VIewFile(destPath);
-            //fView.Show();
         }
 
         private void btnAddMultiFile_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

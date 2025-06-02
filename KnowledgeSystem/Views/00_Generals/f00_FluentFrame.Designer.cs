@@ -84,6 +84,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "f00_FluentFrame";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.f00_FluentFrame_FormClosing);
             this.Load += new System.EventHandler(this.f00_FluentFrame_Load);
             this.Shown += new System.EventHandler(this.f00_FluentFrame_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.fluentControl)).EndInit();

@@ -154,5 +154,12 @@ namespace KnowledgeSystem.Views._00_Generals
                 OpenForm(formShow.ControlName);
             }
         }
+
+        private void f00_FluentFrame_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Giải phóng tài nguyên của f00_ViewMultiFile
+            var viewFilesForm = f00_ViewMultiFile.Instance;
+            viewFilesForm.Dispose();
+        }
     }
 }
