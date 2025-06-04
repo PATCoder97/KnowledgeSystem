@@ -239,24 +239,29 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
 
             if (totalKm <= 0) return;
 
+            if (totalKm >= 30)
+            {
+                XtraMessageBox.Show($"Con lợn nhựa này đi ngắm xưởng Formosa à mà đi {totalKm}km lắm á ?!", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return;
+            }
+
             if (borrTime > backTime)
             {
                 XtraMessageBox.Show("Sao? Con lợn nhựa này, mày đi lùi thời gian à!", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
             }
 
+            // Kiểm tra nếu chênh lệch lớn hơn 2 giờ
+            TimeSpan difference = backTime - borrTime;
+            if (difference.TotalHours > 2)
+            {
+                XtraMessageBox.Show("Trả xe trong vòng 2 tiếng nhé con lợn nhựa!", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return;
+            }
+
             switch (cbbTypeVehicle.SelectedIndex)
             {
                 case 0:
-
-                    // Kiểm tra nếu chênh lệch lớn hơn 2 giờ
-                    TimeSpan difference = backTime - borrTime;
-                    if (difference.TotalHours > 2)
-                    {
-                        XtraMessageBox.Show("Trả xe trong vòng 2 tiếng nhé con lợn nhựa!", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                        return;
-                    }
-
                     if (totalKm > 15)
                     {
                         XtraMessageBox.Show($"Xe máy mỗi chuyến chỉ được đi dưới 15km", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
