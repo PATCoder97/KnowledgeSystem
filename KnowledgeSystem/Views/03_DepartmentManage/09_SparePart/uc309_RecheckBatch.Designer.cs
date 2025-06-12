@@ -64,6 +64,7 @@
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gvSparePart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
@@ -102,7 +103,8 @@
             this.gridColumn8,
             this.gridColumn9,
             this.gridColumn13,
-            this.gridColumn14});
+            this.gridColumn14,
+            this.gridColumn15});
             this.gvSparePart.GridControl = this.gcData;
             this.gvSparePart.Name = "gvSparePart";
             this.gvSparePart.OptionsCustomization.AllowColumnMoving = false;
@@ -471,6 +473,14 @@
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
+            // gridColumn15
+            // 
+            this.gridColumn15.Caption = "異常說明";
+            this.gridColumn15.FieldName = "Description";
+            this.gridColumn15.Name = "gridColumn15";
+            this.gridColumn15.Visible = true;
+            this.gridColumn15.VisibleIndex = 11;
+            // 
             // uc309_RecheckBatch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -532,5 +542,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn15;
     }
 }

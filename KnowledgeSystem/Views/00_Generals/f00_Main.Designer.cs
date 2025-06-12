@@ -127,6 +127,7 @@ namespace KnowledgeSystem.Views._00_Generals
             this.tileMain.MaxId = 27;
             this.tileMain.Name = "tileMain";
             this.tileMain.Padding = new System.Windows.Forms.Padding(24, 22, 24, 22);
+            this.tileMain.Position = 360;
             this.tileMain.ShowGroupText = true;
             this.tileMain.Size = new System.Drawing.Size(1180, 599);
             this.tileMain.TabIndex = 4;
@@ -162,9 +163,7 @@ namespace KnowledgeSystem.Views._00_Generals
             // 
             // btnContractMgmt
             // 
-            this.btnContractMgmt.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(183)))), ((int)(((byte)(71)))), ((int)(((byte)(42)))));
             this.btnContractMgmt.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
-            this.btnContractMgmt.AppearanceItem.Normal.Options.UseBackColor = true;
             this.btnContractMgmt.AppearanceItem.Normal.Options.UseFont = true;
             tileItemElement3.Text = "合同管理";
             this.btnContractMgmt.Elements.Add(tileItemElement3);

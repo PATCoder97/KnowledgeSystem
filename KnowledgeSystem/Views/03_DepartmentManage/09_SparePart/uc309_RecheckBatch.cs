@@ -61,7 +61,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         DXMenuItem itemDownCheckFile;
         DXMenuItem itemUpdateCheckFile;
-        DXMenuItem itemMaterialIn;
+        DXMenuItem itemDownUnusualFile;
         DXMenuItem itemMaterialOut;
         DXMenuItem itemMaterialTransfer;
         DXMenuItem itemMaterialCheck;
@@ -83,7 +83,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 Name = "RuleNotify",
                 Rule = new FormatConditionRuleExpression
                 {
-                    Expression = "[BatchMaterial.ActualQuantity] != [BatchMaterial.InitialQuantity]",
+                    Expression = "[BatchMaterial.IsComplete] != true",
                     Appearance =
                     {
                         BackColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical,
@@ -116,6 +116,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         private void ItemUpdateCheckFile_Click(object sender, EventArgs e)
         {
+            bool uploadDesc = (sender as DXMenuItem).Caption.Contains("異常");
+
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
                 openFileDialog.Filter = "Excel Files|*.xls;*.xlsx";
@@ -145,7 +147,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                             int batchId = batch.Id;
 
                             var excelDatas = inspectionBatchMaterials
-                                .Where(r => r.BatchId == batchId)
+                                .Where(r => r.BatchId == batchId && r.IsComplete != true)
                                 .Join(
                                     materials.Where(x => x.IdDept.StartsWith(deptGetData)),
                                     bm => bm.MaterialId,
@@ -171,7 +173,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                                     }
                                 });
 
-                                if (row != null)
+                                if (row == null) continue;
+
+                                if (uploadDesc)
+                                {
+                                    data.Description = row["異常說明"]?.ToString().Trim();
+                                }
+                                else
                                 {
                                     // Gán ActualQuantity từ cột "盤點數量"
                                     double actualQty;
@@ -190,26 +198,38 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                             };
                             reCheckInfo.ShowDialog();
 
-                            // Cập nhật lại dữ liệu vào database
-                            foreach (var data in excelDatas.Where(r => r.ActualQuantity != null))
+                            if (uploadDesc)
                             {
-                                data.ConfirmationDate = DateTime.Today;
-                                data.ConfirmedBy = TPConfigs.LoginUser.Id;
-                                data.IsComplete = data.InitialQuantity == data.ActualQuantity;
-                                dt309_InspectionBatchMaterialBUS.Instance.AddOrUpdate(data);
-
-                                dt309_TransactionsBUS.Instance.Add(new dt309_Transactions()
+                                foreach (var data in excelDatas.Where(r => r.ActualQuantity != null))
                                 {
-                                    CreatedDate = DateTime.Now,
-                                    MaterialId = data.MaterialId,
-                                    TransactionType = "check",
-                                    Quantity = (double)data.ActualQuantity,
-                                    UserDo = TPConfigs.LoginUser.Id,
-                                    Desc = "pandian",
-                                    StorageId = 1
-                                });
+                                    data.ConfirmationDate = DateTime.Today;
+                                    data.ConfirmedBy = TPConfigs.LoginUser.Id;
+                                    data.IsComplete = !string.IsNullOrEmpty(data.Description);
+                                    dt309_InspectionBatchMaterialBUS.Instance.AddOrUpdate(data);
+                                }
                             }
+                            else
+                            {
+                                // Cập nhật lại dữ liệu vào database
+                                foreach (var data in excelDatas.Where(r => r.ActualQuantity != null))
+                                {
+                                    data.ConfirmationDate = DateTime.Today;
+                                    data.ConfirmedBy = TPConfigs.LoginUser.Id;
+                                    data.IsComplete = data.InitialQuantity == data.ActualQuantity;
+                                    dt309_InspectionBatchMaterialBUS.Instance.AddOrUpdate(data);
 
+                                    dt309_TransactionsBUS.Instance.Add(new dt309_Transactions()
+                                    {
+                                        CreatedDate = DateTime.Now,
+                                        MaterialId = data.MaterialId,
+                                        TransactionType = "check",
+                                        Quantity = (double)data.ActualQuantity,
+                                        UserDo = TPConfigs.LoginUser.Id,
+                                        Desc = "pandian",
+                                        StorageId = 1
+                                    });
+                                }
+                            }
                             // Load lại dữ liệu
                             LoadData();
                         }
@@ -225,11 +245,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         private void ItemDownCheckFile_Click(object sender, EventArgs e)
         {
+            bool uploadDesc = (sender as DXMenuItem).Caption.Contains("異常");
+
             var batch = (gvData.GetRow(gvData.FocusedRowHandle) as dynamic).Batch as dt309_InspectionBatch;
             int batchId = batch.Id;
 
             var excelDatas = inspectionBatchMaterials
-                .Where(r => r.BatchId == batchId)
+                .Where(r => r.BatchId == batchId && r.IsComplete != true)
                 .Join(
                     materials.Where(x => deptGetData.Contains(x.IdDept)),
                     bm => bm.MaterialId,
@@ -247,7 +269,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                     r.Material.DisplayName,
                     r.Material.Location,
                     Unit = units.FirstOrDefault(x => x.Id == r.Material.IdUnit)?.DisplayName ?? "",
+                    Quantity = uploadDesc ? r.BatchMaterial.InitialQuantity : -1,
                     r.BatchMaterial.ActualQuantity,
+                    Desc = ""
                 })
                 .ToList();
 
@@ -272,6 +296,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 ws.Column(4).Width = 15;
                 ws.Column(5).Width = 15;
                 ws.Column(6).Width = 15;
+                ws.Column(7).Width = 15;
+                ws.Column(8).Width = 30;
 
                 // Xuất dữ liệu từ list excelDatas sang Table
                 ws.Cells["A1"].LoadFromCollection(excelDatas, true, OfficeOpenXml.Table.TableStyles.Medium2);
@@ -282,27 +308,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 ws.Cells["C1"].Value = "材料名稱";
                 ws.Cells["D1"].Value = "地位";
                 ws.Cells["E1"].Value = "單位";
-                ws.Cells["F1"].Value = "盤點數量";
+                ws.Cells["F1"].Value = "系統上數量";
+                ws.Cells["G1"].Value = "盤點數量";
+                ws.Cells["H1"].Value = "異常說明";
 
                 // Bật WrapText cho tất cả các ô
                 ws.Cells.Style.WrapText = true;
-
-                //// Tự động điều chỉnh chiều cao từng dòng theo nội dung
-                //int dataCount = excelDatas.Count;
-                //for (int rowIndex = 1; rowIndex <= dataCount + 1; rowIndex++) // +1 để tính cả tiêu đề
-                //{
-                //    ws.Row(rowIndex).CustomHeight = true;
-                //    ws.Row(rowIndex).Height = ws.Row(rowIndex).Height; // Đặt lại chiều cao tự động
-                //}
-
-                //// Khóa toàn bộ sheet với mật khẩu
-                //ws.Protection.IsProtected = true;
-                //ws.Protection.AllowSelectLockedCells = false;
-                //ws.Protection.SetPassword("123456");  // Mật khẩu bảo vệ sheet
-
-                //// Mở khóa vùng từ A2 đến A cuối của bảng
-                //string range = $"A2:A{dataCount + 1}";
-                //ws.Cells[range].Style.Locked = false;
 
                 // Lưu file
                 pck.Save();
@@ -342,7 +353,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                                   Unit = units.FirstOrDefault(r => r.Id == m.IdUnit)?.DisplayName ?? "N/A",
                                   UserMngr = users.FirstOrDefault(r => r.Id == m.IdManager)?.DisplayName ?? "N/A",
                                   UserReCheck = string.IsNullOrEmpty(bm.ConfirmedBy) ? "" : users.FirstOrDefault(r => r.Id == bm.ConfirmedBy)?.DisplayName ?? "N/A",
-                                  IniQuantity = bm.ActualQuantity.HasValue ? bm.InitialQuantity : (double?)null
+                                  IniQuantity = bm.ActualQuantity.HasValue ? bm.InitialQuantity : (double?)null,
+                                  Description = bm.Description,
+                                  IsComplete = bm.IsComplete
                               })
                         .ToList();
 
@@ -430,11 +443,62 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         private void gvData_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
         {
-            if (e.HitInfo.InRowCell && e.HitInfo.InDataRow)
+            if (deptGetData.Length != 4)
             {
-                e.Menu.Items.Add(itemDownCheckFile);
-                e.Menu.Items.Add(itemUpdateCheckFile);
+                XtraMessageBox.Show("請您選擇「課」來查看物料", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
+
+            if (!e.HitInfo.InRowCell || !e.HitInfo.InDataRow || e.Menu == null)
+                return;
+
+            GridView masterView = sender as GridView;
+            int masterRowHandle = e.HitInfo.RowHandle;
+
+            // Lấy detail view từ dòng cha
+            GridView detailView = masterView.GetDetailView(masterRowHandle, 0) as GridView;
+            if (detailView == null)
+                return;
+
+            // Lấy dòng dữ liệu cha
+            dynamic masterRow = masterView.GetRow(masterRowHandle);
+            if (masterRow == null)
+                return;
+
+            // Lấy danh sách Spare từ dòng cha
+            var spareList = (masterRow.Spare as IEnumerable<dynamic>)?.ToList();
+            if (spareList == null || spareList.Count == 0)
+                return;
+
+            // Lấy danh sách BatchMaterial
+            var batchMaterials = spareList
+                .Select(item => item.BatchMaterial as dt309_InspectionBatchMaterial)
+                .Where(b => b != null)
+                .ToList();
+
+            // Kiểm tra trạng thái hoàn thành
+            bool hasCompletedItem = batchMaterials.Any(x => x.IsComplete == true);
+            bool hasIncompleteItem = batchMaterials.Any(x => x.IsComplete != true);
+
+            // Cập nhật caption theo trạng thái
+            if (hasCompletedItem)
+            {
+                itemDownCheckFile.Caption = "下載異常表";
+                itemUpdateCheckFile.Caption = "上傳異常表";
+            }
+            else
+            {
+                itemDownCheckFile.Caption = "下載盤點表";
+                itemUpdateCheckFile.Caption = "上傳盤點表";
+            }
+
+            // Nếu đã hoàn thành hết thì trờ về
+            if (!hasIncompleteItem)
+                return;
+
+            // Thêm item vào menu
+            e.Menu.Items.Add(itemDownCheckFile);
+            e.Menu.Items.Add(itemUpdateCheckFile);
         }
     }
 }
