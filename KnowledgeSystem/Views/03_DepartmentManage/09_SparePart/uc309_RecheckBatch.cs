@@ -27,6 +27,7 @@ using System.IO;
 using OfficeOpenXml.Table;
 using ExcelDataReader;
 using System.Transactions;
+using Org.BouncyCastle.Asn1.Cmp;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 {
@@ -77,6 +78,38 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         private void CreateRuleGV()
         {
+            var ruleNotifyMain = new GridFormatRule
+            {
+                ApplyToRow = false,
+                Column = gColStatus,
+                Name = "RuleNotifyMain",
+                Rule = new FormatConditionRuleExpression
+                {
+                    Expression = "[Status] == '待處理'",
+                    Appearance =
+                    {
+                        ForeColor  = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical
+                    }
+                }
+            };
+            gvData.FormatRules.Add(ruleNotifyMain);
+
+            //var ruleNotifyMainOK = new GridFormatRule
+            //{
+            //    ApplyToRow = false,
+            //    Column = gColStatus,
+            //    Name = "RuleNotifyMainOK",
+            //    Rule = new FormatConditionRuleExpression
+            //    {
+            //        Expression = "[Status] == '已完成'",
+            //        Appearance =
+            //        {
+            //            ForeColor  = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Information
+            //        }
+            //    }
+            //};
+            //gvData.FormatRules.Add(ruleNotifyMainOK);
+
             var ruleNotify = new GridFormatRule
             {
                 ApplyToRow = true,
@@ -84,12 +117,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 Rule = new FormatConditionRuleExpression
                 {
                     Expression = "[BatchMaterial.IsComplete] != true",
-                    Appearance =
-                    {
-                        BackColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical,
-                        BackColor2 = Color.White,
-                        Options = { UseBackColor = true }
-                    }
+                    Appearance = { ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical }
                 }
             };
             gvSparePart.FormatRules.Add(ruleNotify);
@@ -362,7 +390,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                     return batchMaterialList.Any() ? new
                     {
                         Batch = batch,
-                        Spare = batchMaterialList
+                        Spare = batchMaterialList,
+                        Status = batchMaterialList.Any(r => r.IsComplete != true) ? "待處理" : "已完成"
                     } : null;
                 }).Where(x => x != null).ToList();
 
@@ -372,6 +401,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 gvData.CollapseAllDetails();
 
                 helper.LoadViewInfo();
+
+                int rowHandle = gvData.FocusedRowHandle;
+                if (gvData.IsMasterRow(rowHandle))
+                {
+                    gvData.ExpandMasterRow(rowHandle);
+                }
             }
         }
 

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc309_InspectionBatch));
             this.gvSparePart = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gColDept = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -40,17 +40,18 @@
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColActualQuantity = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColIsComplete = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColDesc = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcData = new DevExpress.XtraGrid.GridControl();
             this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gColIdMachine = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnAdd = new DevExpress.XtraBars.BarButtonItem();
@@ -65,7 +66,6 @@
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gvSparePart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
@@ -102,11 +102,11 @@
             this.gridColumn10,
             this.gridColumn11,
             this.gridColumn8,
-            this.gridColumn9,
+            this.gColActualQuantity,
             this.gridColumn13,
             this.gridColumn14,
             this.gColIsComplete,
-            this.gridColumn15});
+            this.gColDesc});
             this.gvSparePart.GridControl = this.gcData;
             this.gvSparePart.GroupCount = 1;
             this.gvSparePart.Name = "gvSparePart";
@@ -116,6 +116,7 @@
             this.gvSparePart.OptionsView.ColumnAutoWidth = false;
             this.gvSparePart.OptionsView.EnableAppearanceOddRow = true;
             this.gvSparePart.OptionsView.ShowAutoFilterRow = true;
+            this.gvSparePart.OptionsView.ShowGroupPanel = false;
             this.gvSparePart.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
             new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gColDept, DevExpress.Data.ColumnSortOrder.Ascending)});
             this.gvSparePart.CustomDrawGroupRow += new DevExpress.XtraGrid.Views.Base.RowObjectCustomDrawEventHandler(this.gvSparePart_CustomDrawGroupRow);
@@ -185,13 +186,14 @@
             this.gridColumn8.Visible = true;
             this.gridColumn8.VisibleIndex = 6;
             // 
-            // gridColumn9
+            // gColActualQuantity
             // 
-            this.gridColumn9.Caption = "盤點數量";
-            this.gridColumn9.FieldName = "BatchMaterial.ActualQuantity";
-            this.gridColumn9.Name = "gridColumn9";
-            this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 7;
+            this.gColActualQuantity.Caption = "盤點數量";
+            this.gColActualQuantity.FieldName = "BatchMaterial.ActualQuantity";
+            this.gColActualQuantity.Name = "gColActualQuantity";
+            this.gColActualQuantity.Visible = true;
+            this.gColActualQuantity.VisibleIndex = 7;
+            this.gColActualQuantity.Width = 93;
             // 
             // gridColumn13
             // 
@@ -200,6 +202,7 @@
             this.gridColumn13.Name = "gridColumn13";
             this.gridColumn13.Visible = true;
             this.gridColumn13.VisibleIndex = 8;
+            this.gridColumn13.Width = 93;
             // 
             // gridColumn14
             // 
@@ -215,6 +218,14 @@
             this.gColIsComplete.FieldName = "BatchMaterial.IsComplete";
             this.gColIsComplete.Name = "gColIsComplete";
             // 
+            // gColDesc
+            // 
+            this.gColDesc.Caption = "說明";
+            this.gColDesc.FieldName = "BatchMaterial.Description";
+            this.gColDesc.Name = "gColDesc";
+            this.gColDesc.Visible = true;
+            this.gColDesc.VisibleIndex = 10;
+            // 
             // gcData
             // 
             this.gcData.EmbeddedNavigator.Buttons.Append.Visible = false;
@@ -222,10 +233,10 @@
             this.gcData.EmbeddedNavigator.Buttons.Edit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.EndEdit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.Remove.Visible = false;
-            gridLevelNode2.LevelTemplate = this.gvSparePart;
-            gridLevelNode2.RelationName = "備品";
+            gridLevelNode1.LevelTemplate = this.gvSparePart;
+            gridLevelNode1.RelationName = "備品";
             this.gcData.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode2});
+            gridLevelNode1});
             this.gcData.Location = new System.Drawing.Point(12, 12);
             this.gcData.MainView = this.gvData;
             this.gcData.Name = "gcData";
@@ -257,7 +268,7 @@
             this.gridColumn2,
             this.gridColumn3,
             this.gridColumn4,
-            this.gridColumn12});
+            this.gColStatus});
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
             this.gvData.OptionsDetail.DetailMode = DevExpress.XtraGrid.Views.Grid.DetailMode.Embedded;
@@ -304,13 +315,13 @@
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 2;
             // 
-            // gridColumn12
+            // gColStatus
             // 
-            this.gridColumn12.Caption = "狀態";
-            this.gridColumn12.FieldName = "Batch.Status";
-            this.gridColumn12.Name = "gridColumn12";
-            this.gridColumn12.Visible = true;
-            this.gridColumn12.VisibleIndex = 3;
+            this.gColStatus.Caption = "狀態";
+            this.gColStatus.FieldName = "Status";
+            this.gColStatus.Name = "gColStatus";
+            this.gColStatus.Visible = true;
+            this.gColStatus.VisibleIndex = 3;
             // 
             // barManagerTP
             // 
@@ -484,14 +495,6 @@
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
-            // gridColumn15
-            // 
-            this.gridColumn15.Caption = "說明";
-            this.gridColumn15.FieldName = "BatchMaterial.Description";
-            this.gridColumn15.Name = "gridColumn15";
-            this.gridColumn15.Visible = true;
-            this.gridColumn15.VisibleIndex = 10;
-            // 
             // uc309_InspectionBatch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -548,12 +551,12 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
+        private DevExpress.XtraGrid.Columns.GridColumn gColStatus;
+        private DevExpress.XtraGrid.Columns.GridColumn gColActualQuantity;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;
         private DevExpress.XtraGrid.Columns.GridColumn gColDept;
         private DevExpress.XtraGrid.Columns.GridColumn gColIsComplete;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn15;
+        private DevExpress.XtraGrid.Columns.GridColumn gColDesc;
     }
 }

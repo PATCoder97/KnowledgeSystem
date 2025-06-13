@@ -43,13 +43,14 @@
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcData = new DevExpress.XtraGrid.GridControl();
             this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gColIdMachine = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnAdd = new DevExpress.XtraBars.BarButtonItem();
@@ -64,7 +65,6 @@
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gvSparePart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
@@ -205,6 +205,14 @@
             this.gridColumn14.Visible = true;
             this.gridColumn14.VisibleIndex = 10;
             // 
+            // gridColumn15
+            // 
+            this.gridColumn15.Caption = "異常說明";
+            this.gridColumn15.FieldName = "Description";
+            this.gridColumn15.Name = "gridColumn15";
+            this.gridColumn15.Visible = true;
+            this.gridColumn15.VisibleIndex = 11;
+            // 
             // gcData
             // 
             this.gcData.EmbeddedNavigator.Buttons.Append.Visible = false;
@@ -247,7 +255,7 @@
             this.gridColumn2,
             this.gridColumn3,
             this.gridColumn4,
-            this.gridColumn12});
+            this.gColStatus});
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
             this.gvData.OptionsDetail.DetailMode = DevExpress.XtraGrid.Views.Grid.DetailMode.Embedded;
@@ -294,13 +302,13 @@
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 2;
             // 
-            // gridColumn12
+            // gColStatus
             // 
-            this.gridColumn12.Caption = "狀態";
-            this.gridColumn12.FieldName = "Batch.Status";
-            this.gridColumn12.Name = "gridColumn12";
-            this.gridColumn12.Visible = true;
-            this.gridColumn12.VisibleIndex = 3;
+            this.gColStatus.Caption = "狀態";
+            this.gColStatus.FieldName = "Status";
+            this.gColStatus.Name = "gColStatus";
+            this.gColStatus.Visible = true;
+            this.gColStatus.VisibleIndex = 3;
             // 
             // barManagerTP
             // 
@@ -473,14 +481,6 @@
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
-            // gridColumn15
-            // 
-            this.gridColumn15.Caption = "異常說明";
-            this.gridColumn15.FieldName = "Description";
-            this.gridColumn15.Name = "gridColumn15";
-            this.gridColumn15.Visible = true;
-            this.gridColumn15.VisibleIndex = 11;
-            // 
             // uc309_RecheckBatch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -540,7 +540,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
+        private DevExpress.XtraGrid.Columns.GridColumn gColStatus;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn15;
     }

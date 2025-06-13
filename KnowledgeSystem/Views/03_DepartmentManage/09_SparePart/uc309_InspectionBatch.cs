@@ -64,22 +64,33 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         private void CreateRuleGV()
         {
-            var ruleNotify = new GridFormatRule
+            var ruleNotifyMain = new GridFormatRule
             {
-                ApplyToRow = true,
-                Name = "RuleNotify",
+                ApplyToRow = false,
+                Column = gColStatus,
+                Name = "RuleNotifyMain",
                 Rule = new FormatConditionRuleExpression
                 {
-                    Expression = "[BatchMaterial.ActualQuantity] != [BatchMaterial.InitialQuantity]",
+                    Expression = "[Status] == '待處理'",
                     Appearance =
                     {
-                        BackColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical,
-                        BackColor2 = Color.White,
-                        Options = { UseBackColor = true }
+                        ForeColor  = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical
                     }
                 }
             };
-            gvSparePart.FormatRules.Add(ruleNotify);
+            gvData.FormatRules.Add(ruleNotifyMain);
+
+            var rule = new GridFormatRule
+            {
+                ApplyToRow = true,
+                Name = $"RuleNotify",
+                Rule = new FormatConditionRuleExpression
+                {
+                    Expression = "[BatchMaterial.ActualQuantity] != [BatchMaterial.InitialQuantity]",
+                    Appearance = { ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical }
+                }
+            };
+            gvSparePart.FormatRules.Add(rule);
         }
 
         DXMenuItem CreateMenuItem(string caption, EventHandler clickEvent, SvgImage svgImage)
@@ -181,14 +192,16 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                                   Unit = units.FirstOrDefault(r => r.Id == m.IdUnit)?.DisplayName ?? "N/A",
                                   UserMngr = users.FirstOrDefault(r => r.Id == m.IdManager)?.DisplayName ?? "N/A",
                                   Dept = (depts.Where(r => r.Id == m.IdDept).Select(r => $"{r.Id} {r.DisplayName}").FirstOrDefault() ?? "N/A"),
-                                  UserReCheck = string.IsNullOrEmpty(bm.ConfirmedBy) ? "" : users.FirstOrDefault(r => r.Id == bm.ConfirmedBy)?.DisplayName ?? "N/A"
+                                  UserReCheck = string.IsNullOrEmpty(bm.ConfirmedBy) ? "" : users.FirstOrDefault(r => r.Id == bm.ConfirmedBy)?.DisplayName ?? "N/A",
+                                  IsComplete = bm.IsComplete
                               })
                         .ToList();
 
                     return new
                     {
                         Batch = batch,
-                        Spare = batchMaterialList
+                        Spare = batchMaterialList,
+                        Status = batchMaterialList.Any(r => r.IsComplete != true) ? "待處理" : "已完成"
                     };
                 }).ToList();
 
@@ -198,6 +211,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 gvData.CollapseAllDetails();
 
                 helper.LoadViewInfo();
+
+                int rowHandle = gvData.FocusedRowHandle;
+                if (gvData.IsMasterRow(rowHandle))
+                {
+                    gvData.ExpandMasterRow(rowHandle);
+                }
             }
         }
 
@@ -334,7 +353,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             string colorName = groupComplete ? "Green" : "Red";
             string groupValue = groupComplete ? "已完成" : "處理中";
 
-            info.GroupText = $"{info.GroupValueText}: <color={colorName}>{groupValue}</color>";
+            info.GroupText = $" <color={colorName}>{groupValue}</color>：{info.GroupValueText}";
         }
 
         private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -360,7 +379,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 CreatedDate = DateTime.Now,
                 BatchName = batchName,
                 ExpiryDate = DateTime.Now.AddDays(7),
-                Status = "Pending"
+                Status = "待處理"
             });
 
             if (newBatchId != -1)

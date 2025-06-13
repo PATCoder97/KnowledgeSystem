@@ -54,6 +54,7 @@
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gColIdMachine = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -126,6 +127,7 @@
             this.btnEdit.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnEdit.ImageOptions.SvgImage")));
             this.btnEdit.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnEdit.Name = "btnEdit";
+            this.btnEdit.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnEdit_ItemClick);
             // 
             // btnDelete
             // 
@@ -147,7 +149,7 @@
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManagerTP;
-            this.barDockControlTop.Size = new System.Drawing.Size(931, 49);
+            this.barDockControlTop.Size = new System.Drawing.Size(1043, 49);
             // 
             // barDockControlBottom
             // 
@@ -155,7 +157,7 @@
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.barDockControlBottom.Location = new System.Drawing.Point(0, 544);
             this.barDockControlBottom.Manager = this.barManagerTP;
-            this.barDockControlBottom.Size = new System.Drawing.Size(931, 0);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1043, 0);
             // 
             // barDockControlLeft
             // 
@@ -169,7 +171,7 @@
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(931, 49);
+            this.barDockControlRight.Location = new System.Drawing.Point(1043, 49);
             this.barDockControlRight.Manager = this.barManagerTP;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 495);
             // 
@@ -180,7 +182,7 @@
             this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(931, 495);
+            this.layoutControl1.Size = new System.Drawing.Size(1043, 495);
             this.layoutControl1.TabIndex = 8;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -197,7 +199,7 @@
             this.gcData.Location = new System.Drawing.Point(12, 12);
             this.gcData.MainView = this.gvSparePart;
             this.gcData.Name = "gcData";
-            this.gcData.Size = new System.Drawing.Size(907, 471);
+            this.gcData.Size = new System.Drawing.Size(1019, 471);
             this.gcData.TabIndex = 5;
             this.gcData.UseEmbeddedNavigator = true;
             this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -231,7 +233,8 @@
             this.gridColumn8,
             this.gridColumn9,
             this.gridColumn13,
-            this.gridColumn14});
+            this.gridColumn14,
+            this.gridColumn15});
             this.gvSparePart.GridControl = this.gcData;
             this.gvSparePart.Name = "gvSparePart";
             this.gvSparePart.OptionsCustomization.AllowColumnMoving = false;
@@ -332,6 +335,14 @@
             this.gridColumn14.Visible = true;
             this.gridColumn14.VisibleIndex = 10;
             // 
+            // gridColumn15
+            // 
+            this.gridColumn15.Caption = "異常說明";
+            this.gridColumn15.FieldName = "Desc";
+            this.gridColumn15.Name = "gridColumn15";
+            this.gridColumn15.Visible = true;
+            this.gridColumn15.VisibleIndex = 11;
+            // 
             // gvData
             // 
             this.gvData.Appearance.FooterPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -411,7 +422,7 @@
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem1});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(931, 495);
+            this.Root.Size = new System.Drawing.Size(1043, 495);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem1
@@ -419,7 +430,7 @@
             this.layoutControlItem1.Control = this.gcData;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(911, 475);
+            this.layoutControlItem1.Size = new System.Drawing.Size(1023, 475);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
@@ -427,7 +438,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(931, 544);
+            this.ClientSize = new System.Drawing.Size(1043, 544);
             this.Controls.Add(this.layoutControl1);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
@@ -484,5 +495,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn15;
     }
 }
