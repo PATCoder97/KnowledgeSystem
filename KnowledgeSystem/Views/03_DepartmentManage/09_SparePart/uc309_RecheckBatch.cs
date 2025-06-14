@@ -213,7 +213,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
                             bool _isChecked = reCheckInfo._isChecked;
                             if (!_isChecked)
+                            {
+                                LoadData();
                                 return;
+                            }
 
                             if (uploadDesc)
                             {

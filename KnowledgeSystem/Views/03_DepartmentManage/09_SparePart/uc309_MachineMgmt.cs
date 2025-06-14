@@ -37,6 +37,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         RefreshHelper helper;
         BindingSource sourceBases = new BindingSource();
         string idDept2word = TPConfigs.idDept2word;
+        string deptGetData = "";
 
         List<dm_User> users = new List<dm_User>();
 
@@ -100,8 +101,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             {
                 helper.SaveViewInfo();
 
-                string deptGetData = (barCbbDept.EditValue?.ToString().Split(' ')[0]) ?? string.Empty;
-                machines = dt309_MachinesBUS.Instance.GetListByIdDept(deptGetData);
+                deptGetData = (barCbbDept.EditValue?.ToString().Split(' ')[0]) ?? string.Empty;
+                machines = dt309_MachinesBUS.Instance.GetListByStartIdDept(deptGetData);
                 materials = dt309_MaterialsBUS.Instance.GetList();
                 machineMaterials = dt309_MachineMaterialsBUS.Instance.GetList();
 

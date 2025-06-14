@@ -71,16 +71,16 @@
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
+            this.barCbbDept = new DevExpress.XtraBars.BarEditItem();
+            this.cbbDept = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.btnAdd = new DevExpress.XtraBars.BarButtonItem();
             this.btnReload = new DevExpress.XtraBars.BarButtonItem();
             this.btnExportExcel = new DevExpress.XtraBars.BarButtonItem();
-            this.barCbbDept = new DevExpress.XtraBars.BarEditItem();
-            this.cbbDept = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.btnPrintStamp = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-            this.btnPrintStamp = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.gvTransactions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvPrices)).BeginInit();
@@ -368,7 +368,6 @@
             this.gridColumn8});
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
-            this.gvData.OptionsDetail.DetailMode = DevExpress.XtraGrid.Views.Grid.DetailMode.Embedded;
             this.gvData.OptionsScrollAnnotations.ShowSelectedRows = DevExpress.Utils.DefaultBoolean.True;
             this.gvData.OptionsSelection.CheckBoxSelectorColumnWidth = 30;
             this.gvData.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
@@ -595,6 +594,29 @@
             this.bar2.OptionsBar.UseWholeRow = true;
             this.bar2.Text = "Main menu";
             // 
+            // barCbbDept
+            // 
+            this.barCbbDept.Caption = "單位";
+            this.barCbbDept.Edit = this.cbbDept;
+            this.barCbbDept.Id = 11;
+            this.barCbbDept.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.barCbbDept.Name = "barCbbDept";
+            this.barCbbDept.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            // 
+            // cbbDept
+            // 
+            this.cbbDept.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbDept.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.cbbDept.Appearance.Options.UseFont = true;
+            this.cbbDept.Appearance.Options.UseForeColor = true;
+            this.cbbDept.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbDept.AppearanceDropDown.Options.UseFont = true;
+            this.cbbDept.AutoHeight = false;
+            this.cbbDept.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbbDept.Name = "cbbDept";
+            this.cbbDept.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            // 
             // btnAdd
             // 
             this.btnAdd.Caption = "新增";
@@ -631,28 +653,13 @@
             this.btnExportExcel.ItemAppearance.Normal.Options.UseFont = true;
             this.btnExportExcel.Name = "btnExportExcel";
             // 
-            // barCbbDept
+            // btnPrintStamp
             // 
-            this.barCbbDept.Caption = "單位";
-            this.barCbbDept.Edit = this.cbbDept;
-            this.barCbbDept.Id = 11;
-            this.barCbbDept.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.barCbbDept.Name = "barCbbDept";
-            this.barCbbDept.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
-            // 
-            // cbbDept
-            // 
-            this.cbbDept.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbbDept.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.cbbDept.Appearance.Options.UseFont = true;
-            this.cbbDept.Appearance.Options.UseForeColor = true;
-            this.cbbDept.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbbDept.AppearanceDropDown.Options.UseFont = true;
-            this.cbbDept.AutoHeight = false;
-            this.cbbDept.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbbDept.Name = "cbbDept";
-            this.cbbDept.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.btnPrintStamp.Caption = "印標簽";
+            this.btnPrintStamp.Id = 12;
+            this.btnPrintStamp.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnPrintStamp.Name = "btnPrintStamp";
+            this.btnPrintStamp.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnPrintStamp_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -685,14 +692,6 @@
             this.barDockControlRight.Location = new System.Drawing.Point(1292, 49);
             this.barDockControlRight.Manager = this.barManagerTP;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 482);
-            // 
-            // btnPrintStamp
-            // 
-            this.btnPrintStamp.Caption = "印標簽";
-            this.btnPrintStamp.Id = 12;
-            this.btnPrintStamp.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnPrintStamp.Name = "btnPrintStamp";
-            this.btnPrintStamp.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnPrintStamp_ItemClick);
             // 
             // uc309_SparePartMain
             // 
