@@ -59,7 +59,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             btnAdd.ImageOptions.SvgImage = TPSvgimages.Add;
             btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
             btnExportExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
-            barCbbDept.ImageOptions.SvgImage = TPSvgimages.Dept;
         }
 
         private void CreateRuleGV()

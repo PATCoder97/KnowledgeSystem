@@ -19,9 +19,16 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         public f309_ReCheckInfo()
         {
             InitializeComponent();
+            InitializeIcon();
         }
 
-        bool _isUpdateDesc = false;
+        private void InitializeIcon()
+        {
+            btnConfirm.ImageOptions.SvgImage = TPSvgimages.Confirm;
+            btnCancel.ImageOptions.SvgImage = TPSvgimages.Cancel;
+        }
+
+        public bool _isUpdateDesc = false;
         public List<dt309_InspectionBatchMaterial> InspectionBatchMaterials { get; set; } = new List<dt309_InspectionBatchMaterial>();
         public bool _isChecked { get; set; } = false;
 
@@ -45,6 +52,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                           UserMngr = users.FirstOrDefault(r => r.Id == m.IdManager)?.DisplayName ?? "N/A",
                           Dept = (depts.Where(r => r.Id == m.IdDept).Select(r => $"{r.Id} {r.DisplayName}").FirstOrDefault() ?? "N/A") + (bm.IsComplete != true ? " - 處理中" : " - 已完成"),
                           UserReCheck = string.IsNullOrEmpty(bm.ConfirmedBy) ? "" : users.FirstOrDefault(r => r.Id == bm.ConfirmedBy)?.DisplayName ?? "N/A",
+                          IniQuantity = _isUpdateDesc ? bm.InitialQuantity : -1,
                           Desc = bm.Description
                       })
                 .ToList();
@@ -55,7 +63,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             gvSparePart.BestFitColumns();
         }
 
-        private void btnEdit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             if (_isUpdateDesc)
             {
@@ -75,6 +83,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             }
 
             _isChecked = true;
+            Close();
+        }
+
+        private void btnCancel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            _isChecked = false;
             Close();
         }
     }

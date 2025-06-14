@@ -94,22 +94,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             };
             gvData.FormatRules.Add(ruleNotifyMain);
 
-            //var ruleNotifyMainOK = new GridFormatRule
-            //{
-            //    ApplyToRow = false,
-            //    Column = gColStatus,
-            //    Name = "RuleNotifyMainOK",
-            //    Rule = new FormatConditionRuleExpression
-            //    {
-            //        Expression = "[Status] == '已完成'",
-            //        Appearance =
-            //        {
-            //            ForeColor  = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Information
-            //        }
-            //    }
-            //};
-            //gvData.FormatRules.Add(ruleNotifyMainOK);
-
             var ruleNotify = new GridFormatRule
             {
                 ApplyToRow = true,
@@ -222,18 +206,34 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                             f309_ReCheckInfo reCheckInfo = new f309_ReCheckInfo
                             {
                                 InspectionBatchMaterials = excelDatas.ToList(),
-                                Text = $"物料盤點明細表"
+                                Text = $"物料盤點明細表",
+                                _isUpdateDesc = uploadDesc
                             };
                             reCheckInfo.ShowDialog();
 
+                            bool _isChecked = reCheckInfo._isChecked;
+                            if (!_isChecked)
+                                return;
+
                             if (uploadDesc)
                             {
-                                foreach (var data in excelDatas.Where(r => r.ActualQuantity != null))
+                                foreach (var data in excelDatas.Where(r => r.ActualQuantity != null && !string.IsNullOrEmpty(r.Description)))
                                 {
                                     data.ConfirmationDate = DateTime.Today;
                                     data.ConfirmedBy = TPConfigs.LoginUser.Id;
                                     data.IsComplete = !string.IsNullOrEmpty(data.Description);
                                     dt309_InspectionBatchMaterialBUS.Instance.AddOrUpdate(data);
+
+                                    dt309_TransactionsBUS.Instance.Add(new dt309_Transactions()
+                                    {
+                                        CreatedDate = DateTime.Now,
+                                        MaterialId = data.MaterialId,
+                                        TransactionType = "check",
+                                        Quantity = (double)data.ActualQuantity,
+                                        UserDo = TPConfigs.LoginUser.Id,
+                                        Desc = $"{batch.BatchName}，異常說明：{data.Description}",
+                                        StorageId = 1
+                                    });
                                 }
                             }
                             else
@@ -245,17 +245,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                                     data.ConfirmedBy = TPConfigs.LoginUser.Id;
                                     data.IsComplete = data.InitialQuantity == data.ActualQuantity;
                                     dt309_InspectionBatchMaterialBUS.Instance.AddOrUpdate(data);
-
-                                    dt309_TransactionsBUS.Instance.Add(new dt309_Transactions()
-                                    {
-                                        CreatedDate = DateTime.Now,
-                                        MaterialId = data.MaterialId,
-                                        TransactionType = "check",
-                                        Quantity = (double)data.ActualQuantity,
-                                        UserDo = TPConfigs.LoginUser.Id,
-                                        Desc = "pandian",
-                                        StorageId = 1
-                                    });
                                 }
                             }
                             // Load lại dữ liệu
@@ -512,7 +501,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 .ToList();
 
             // Kiểm tra trạng thái hoàn thành
-            bool hasCompletedItem = batchMaterials.Any(x => x.IsComplete == true);
+            bool hasCompletedItem = batchMaterials.Any(x => x.ActualQuantity != null);
             bool hasIncompleteItem = batchMaterials.Any(x => x.IsComplete != true);
 
             // Cập nhật caption theo trạng thái

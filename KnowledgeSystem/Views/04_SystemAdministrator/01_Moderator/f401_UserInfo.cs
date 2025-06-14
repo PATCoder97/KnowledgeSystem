@@ -348,14 +348,17 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                         result = dm_UserBUS.Instance.Add(userInfo);
 
                         // [201]
-                        updateReq = new dt201_UpdateUsrReq()
+                        if (result)
                         {
-                            DateCreate = DateTime.Now,
-                            IdDept = userInfo.IdDepartment,
-                            IdUsr = userInfo.Id,
-                            TypeChange = "新進"
-                        };
-                        dt201_UpdateUsrReqBUS.Instance.Add(updateReq);
+                            updateReq = new dt201_UpdateUsrReq()
+                            {
+                                DateCreate = DateTime.Now,
+                                IdDept = userInfo.IdDepartment,
+                                IdUsr = userInfo.Id,
+                                TypeChange = "新進"
+                            };
+                            dt201_UpdateUsrReqBUS.Instance.Add(updateReq);
+                        }
 
                         break;
                     case EventFormInfo.View:

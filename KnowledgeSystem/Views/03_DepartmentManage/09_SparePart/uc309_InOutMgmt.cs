@@ -58,7 +58,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         private void InitializeIcon()
         {
-            btnAdd.ImageOptions.SvgImage = TPSvgimages.Add;
             btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
             btnExportExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
             barCbbDept.ImageOptions.SvgImage = TPSvgimages.Dept;
@@ -201,14 +200,19 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             gvData.OptionsView.ShowGroupPanel = false;
         }
 
-        private void btnReload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private void barCbbDept_EditValueChanged(object sender, EventArgs e)
         {
             LoadData();
         }
 
-        private void barCbbDept_EditValueChanged(object sender, EventArgs e)
+        private void btnReload_ItemClick_1(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             LoadData();
+        }
+
+        private void btnExportExcel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
         }
     }
 }
