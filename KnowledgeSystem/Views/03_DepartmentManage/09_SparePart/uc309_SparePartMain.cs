@@ -209,6 +209,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             var labels = selectedItems.Select(r => new { Lb1 = r.DisplayName, Lb2 = r.Code });
             var report = new XtraReport();
             report.LoadLayout(@"E:\01. Softwares Programming\00. Tool\0.Visual Studio Repos\TestBinddingReport\TestBinddingReport\bin\Debug\Report1.repx");
+            report.ShowPrintMarginsWarning = false;
 
             // Gán danh sách làm nguồn dữ liệu
             report.DataSource = labels;

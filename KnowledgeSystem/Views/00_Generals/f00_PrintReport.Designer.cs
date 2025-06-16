@@ -32,19 +32,16 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f00_PrintReport));
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
-            this.barCbbDept = new DevExpress.XtraBars.BarEditItem();
-            this.cbbDept = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
-            this.btnAdd = new DevExpress.XtraBars.BarButtonItem();
-            this.btnReload = new DevExpress.XtraBars.BarButtonItem();
-            this.btnExportExcel = new DevExpress.XtraBars.BarButtonItem();
-            this.btnPrintStamp = new DevExpress.XtraBars.BarButtonItem();
+            this.barCbbPrinter = new DevExpress.XtraBars.BarEditItem();
+            this.cbbPrinter = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.btnPrint = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.viewerReport = new DevExpress.XtraPrinting.Preview.DocumentViewer();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbbDept)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbPrinter)).BeginInit();
             this.SuspendLayout();
             // 
             // barManagerTP
@@ -57,15 +54,12 @@
             this.barManagerTP.DockControls.Add(this.barDockControlRight);
             this.barManagerTP.Form = this;
             this.barManagerTP.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
-            this.btnAdd,
-            this.btnReload,
-            this.btnExportExcel,
-            this.barCbbDept,
-            this.btnPrintStamp});
+            this.barCbbPrinter,
+            this.btnPrint});
             this.barManagerTP.MainMenu = this.bar2;
             this.barManagerTP.MaxItemId = 13;
             this.barManagerTP.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.cbbDept});
+            this.cbbPrinter});
             // 
             // bar2
             // 
@@ -89,80 +83,46 @@
             this.bar2.DockRow = 0;
             this.bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.Width, this.barCbbDept, "", false, true, true, 217),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnAdd, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnReload, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnExportExcel, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnPrintStamp, true)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.Width, this.barCbbPrinter, "", false, true, true, 324),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnPrint, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawDragBorder = false;
             this.bar2.OptionsBar.MultiLine = true;
             this.bar2.OptionsBar.UseWholeRow = true;
             this.bar2.Text = "Main menu";
             // 
-            // barCbbDept
+            // barCbbPrinter
             // 
-            this.barCbbDept.Caption = "單位";
-            this.barCbbDept.Edit = this.cbbDept;
-            this.barCbbDept.Id = 11;
-            this.barCbbDept.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.barCbbDept.Name = "barCbbDept";
-            this.barCbbDept.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            this.barCbbPrinter.Caption = "印表機";
+            this.barCbbPrinter.Edit = this.cbbPrinter;
+            this.barCbbPrinter.Id = 11;
+            this.barCbbPrinter.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barCbbPrinter.ImageOptions.SvgImage")));
+            this.barCbbPrinter.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.barCbbPrinter.Name = "barCbbPrinter";
+            this.barCbbPrinter.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
             // 
-            // cbbDept
+            // cbbPrinter
             // 
-            this.cbbDept.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbbDept.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.cbbDept.Appearance.Options.UseFont = true;
-            this.cbbDept.Appearance.Options.UseForeColor = true;
-            this.cbbDept.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbbDept.AppearanceDropDown.Options.UseFont = true;
-            this.cbbDept.AutoHeight = false;
-            this.cbbDept.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.cbbPrinter.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbPrinter.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.cbbPrinter.Appearance.Options.UseFont = true;
+            this.cbbPrinter.Appearance.Options.UseForeColor = true;
+            this.cbbPrinter.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbPrinter.AppearanceDropDown.Options.UseFont = true;
+            this.cbbPrinter.AutoHeight = false;
+            this.cbbPrinter.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbbDept.Name = "cbbDept";
-            this.cbbDept.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.cbbPrinter.Name = "cbbPrinter";
+            this.cbbPrinter.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             // 
-            // btnAdd
+            // btnPrint
             // 
-            this.btnAdd.Caption = "新增";
-            this.btnAdd.Id = 0;
-            this.btnAdd.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnAdd.ImageOptions.SvgImage")));
-            this.btnAdd.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnAdd.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
-            this.btnAdd.ItemAppearance.Hovered.Options.UseForeColor = true;
-            this.btnAdd.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.ItemAppearance.Normal.Options.UseFont = true;
-            this.btnAdd.Name = "btnAdd";
-            // 
-            // btnReload
-            // 
-            this.btnReload.Caption = "刷新";
-            this.btnReload.Id = 1;
-            this.btnReload.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnReload.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
-            this.btnReload.ItemAppearance.Hovered.Options.UseForeColor = true;
-            this.btnReload.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReload.ItemAppearance.Normal.Options.UseFont = true;
-            this.btnReload.Name = "btnReload";
-            // 
-            // btnExportExcel
-            // 
-            this.btnExportExcel.Caption = "出表";
-            this.btnExportExcel.Id = 2;
-            this.btnExportExcel.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnExportExcel.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
-            this.btnExportExcel.ItemAppearance.Hovered.Options.UseForeColor = true;
-            this.btnExportExcel.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExportExcel.ItemAppearance.Normal.Options.UseFont = true;
-            this.btnExportExcel.Name = "btnExportExcel";
-            // 
-            // btnPrintStamp
-            // 
-            this.btnPrintStamp.Caption = "印標簽";
-            this.btnPrintStamp.Id = 12;
-            this.btnPrintStamp.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnPrintStamp.Name = "btnPrintStamp";
+            this.btnPrint.Caption = "列印";
+            this.btnPrint.Id = 12;
+            this.btnPrint.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnPrint.ImageOptions.SvgImage")));
+            this.btnPrint.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnPrint_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -215,10 +175,14 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
+            this.IconOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("f00_PrintReport.IconOptions.SvgImage")));
             this.Name = "f00_PrintReport";
-            this.Text = "f00_PrintReport";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "列印標籤";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.f00_PrintReport_Load);
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbbDept)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbPrinter)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -228,12 +192,9 @@
 
         private DevExpress.XtraBars.BarManager barManagerTP;
         private DevExpress.XtraBars.Bar bar2;
-        private DevExpress.XtraBars.BarEditItem barCbbDept;
-        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox cbbDept;
-        private DevExpress.XtraBars.BarButtonItem btnAdd;
-        private DevExpress.XtraBars.BarButtonItem btnReload;
-        private DevExpress.XtraBars.BarButtonItem btnExportExcel;
-        private DevExpress.XtraBars.BarButtonItem btnPrintStamp;
+        private DevExpress.XtraBars.BarEditItem barCbbPrinter;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox cbbPrinter;
+        private DevExpress.XtraBars.BarButtonItem btnPrint;
         private DevExpress.XtraBars.BarDockControl barDockControlTop;
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;

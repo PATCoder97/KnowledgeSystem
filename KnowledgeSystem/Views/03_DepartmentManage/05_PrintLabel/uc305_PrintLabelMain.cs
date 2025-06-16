@@ -265,8 +265,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._05_PrintLabel
             XtraInputBoxArgs args = new XtraInputBoxArgs();
 
             args.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
-            args.Caption = "列印記";
-            args.Prompt = $"<font='Microsoft JhengHei UI' size=14>請選擇列印記</font>";
+            args.Caption = "印表機";
+            args.Prompt = $"<font='Microsoft JhengHei UI' size=14>請選擇印表機</font>";
             args.DefaultButtonIndex = 0;
             ComboBoxEdit editor = new ComboBoxEdit();
 
