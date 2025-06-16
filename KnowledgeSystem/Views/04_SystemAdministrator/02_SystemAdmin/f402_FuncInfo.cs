@@ -17,6 +17,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraSplashScreen;
+using DevExpress.XtraBars.Ribbon;
 
 namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 {
@@ -94,7 +95,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
         {
             LockControl();
 
-            var lsControls = Assembly.GetExecutingAssembly().GetTypes().Where(a => a.BaseType == typeof(XtraForm) || a.BaseType == typeof(XtraUserControl)).Select(r => r.Name).ToList();
+            var lsControls = Assembly.GetExecutingAssembly().GetTypes()
+                .Where(a => a.BaseType == typeof(XtraForm) || a.BaseType == typeof(XtraUserControl) || a.BaseType == typeof(RibbonForm)).Select(r => r.Name).ToList();
             cbbControl.Properties.Items.AddRange(lsControls);
 
             //var lsFuncEvents = Enum.GetValues(typeof(FuncEvent)).Cast<FuncEvent>().Select(r => r.ToString()).ToList();

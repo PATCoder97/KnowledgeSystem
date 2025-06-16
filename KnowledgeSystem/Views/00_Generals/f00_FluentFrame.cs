@@ -1,6 +1,7 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
 using DevExpress.XtraBars.Navigation;
+using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraEditors;
 using DevExpress.XtraSplashScreen;
 using KnowledgeSystem.Helpers;
@@ -65,6 +66,12 @@ namespace KnowledgeSystem.Views._00_Generals
             else if (typeform.BaseType == typeof(XtraForm))
             {
                 var f = (XtraForm)Activator.CreateInstance(typeform);
+                f.Text = formName;
+                f.ShowDialog();
+            }
+            else if (typeform.BaseType == typeof(RibbonForm))
+            {
+                var f = (RibbonForm)Activator.CreateInstance(typeform);
                 f.Text = formName;
                 f.ShowDialog();
             }
