@@ -11,6 +11,7 @@ using System.Net.Mail;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Web.UI.WebControls;
 using System.Windows.Forms;
 using System.Windows.Media.Media3D;
 using BusinessLayer;
@@ -23,6 +24,7 @@ using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraReports.UI;
 using DevExpress.XtraSplashScreen;
+using DocumentFormat.OpenXml.Bibliography;
 using DocumentFormat.OpenXml.Spreadsheet;
 using ExcelDataReader;
 using KnowledgeSystem.Helpers;
@@ -32,6 +34,8 @@ using Org.BouncyCastle.Math;
 using static KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._02_MaterialTrends.uc403_02_MaterialTrends;
 using Color = System.Drawing.Color;
 using Font = System.Drawing.Font;
+using GridView = DevExpress.XtraGrid.Views.Grid.GridView;
+using Tuple = System.Tuple;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 {
@@ -59,6 +63,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         List<dm_User> users = new List<dm_User>();
         List<dm_Group> groups;
         List<dm_Departments> depts;
+        List<dt309_Units> units;
 
         List<dt309_Materials> materials;
         List<dt309_Storages> storages;
@@ -206,9 +211,15 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 .Where(item => item != null)
                 .ToList();
 
-            var labels = selectedItems.Select(r => new { Lb1 = r.DisplayName, Lb2 = r.Code });
+            var labels = selectedItems.Select(r => new
+            {
+                code = r.Code,
+                unit = units.FirstOrDefault(x => x.Id == r.IdUnit).DisplayName,
+                productname = r.DisplayName,
+                place = r.Location
+            });
             var report = new XtraReport();
-            report.LoadLayout(@"E:\01. Softwares Programming\00. Tool\0.Visual Studio Repos\TestBinddingReport\TestBinddingReport\bin\Debug\Report1.repx");
+            report.LoadLayout(@"C:\Users\Dell Alpha\Desktop\rp309.repx");
             report.ShowPrintMarginsWarning = false;
 
             // Gán danh sách làm nguồn dữ liệu
@@ -319,7 +330,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 deptGetData = (barCbbDept.EditValue?.ToString().Split(' ')[0]) ?? string.Empty;
                 storages = dt309_StoragesBUS.Instance.GetList();
                 users = dm_UserBUS.Instance.GetList();
-                var units = dt309_UnitsBUS.Instance.GetList();
+                units = dt309_UnitsBUS.Instance.GetList();
 
                 materials = dt309_MaterialsBUS.Instance.GetListByStartIdDept(deptGetData);
                 var materialsNotRecheck = dt309_InspectionBatchMaterialBUS.Instance.GetListNotRecheck().Select(r => r.MaterialId).ToList();
