@@ -206,6 +206,34 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         private void ItemPrintStamp_Click(object sender, EventArgs e)
         {
+            Dictionary<string, string> stampFormats = new Dictionary<string, string>()
+            {
+                { "10×5.21 cm", "rp309-10x5,21.repx" },
+                { "10×8 cm", "rp309-10x8.repx" },
+            };
+
+            XtraInputBoxArgs args = new XtraInputBoxArgs();
+
+            args.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
+            args.Caption = "標籤格式";
+            args.Prompt = $"<font='Microsoft JhengHei UI' size=14>請選擇標籤格式</font>";
+            args.DefaultButtonIndex = 0;
+            ComboBoxEdit editor = new ComboBoxEdit();
+
+            editor.Properties.Items.AddRange(stampFormats.Select(r => r.Key).ToList());
+            args.Editor = editor;
+
+            editor.Properties.TextEditStyle = TextEditStyles.DisableTextEditor;
+            editor.Properties.Appearance.Font = TPConfigs.fontUI14;
+            editor.Properties.AppearanceDropDown.Font = TPConfigs.fontUI14;
+            editor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            editor.Properties.NullText = "";
+
+            var result = XtraInputBox.Show(args);
+            if (result == null) return;
+
+            string stampName = stampFormats.First(r => r.Key == result.ToString()).Value;
+
             var selectedItems = gvData.GetSelectedRows()
                 .Select(rowHandle => (gvData.GetRow(rowHandle) as dynamic).data as dt309_Materials)
                 .Where(item => item != null)
@@ -219,7 +247,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 place = r.Location
             });
             var report = new XtraReport();
-            report.LoadLayout(@"C:\Users\Dell Alpha\Desktop\rp309.repx");
+            string reportFormatpath = Path.Combine(TPConfigs.FolderReportFormat, stampName);
+            report.LoadLayout(reportFormatpath);
             report.ShowPrintMarginsWarning = false;
 
             // Gán danh sách làm nguồn dữ liệu

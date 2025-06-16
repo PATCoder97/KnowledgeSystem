@@ -23,6 +23,7 @@ namespace KnowledgeSystem.Helpers
         public static string ResourcesPath = Path.Combine(StartupPath, "AppResources");
         public static string TempFolderData = Path.Combine(Path.GetTempPath(), "TPTempData");
         public static string idDept2word = "";
+        public static Font fontUI14 = new Font("Microsoft JhengHei UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
 
         // Static Value SQL
         public static string SoftNameEN { get; set; }
@@ -44,6 +45,7 @@ namespace KnowledgeSystem.Helpers
         public static string FolderWatermark { get; set; }
         public static string DocTypes201 { get; set; }
         public static string FolderCalibCert { get; set; }
+        public static string FolderReportFormat { get; set; }
 
         public static void SetSystemStaticValue()
         {
@@ -69,6 +71,7 @@ namespace KnowledgeSystem.Helpers
             Folder403 = Path.Combine(FolderData, "403");
             FolderSign = Path.Combine(Folder00, "ImageSign");
             FolderWatermark = Path.Combine(Folder00, "Watermark");
+            FolderReportFormat = Path.Combine(Folder00, "ReportFormat");
 
             AppPermission.SysAdmin = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleSysAdmin")?.ValueT ?? "-1");
             AppPermission.Mod = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleMod")?.ValueT ?? "-1");
