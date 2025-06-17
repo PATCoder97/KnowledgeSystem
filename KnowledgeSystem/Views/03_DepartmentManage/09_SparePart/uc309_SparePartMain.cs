@@ -31,6 +31,7 @@ using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._00_Generals;
 using KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck;
 using OfficeOpenXml;
+using OfficeOpenXml.Style;
 using Org.BouncyCastle.Math;
 using static KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._02_MaterialTrends.uc403_02_MaterialTrends;
 using Color = System.Drawing.Color;
@@ -646,6 +647,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 ws.Cells["A1"].LoadFromCollection(excelDatas, true, OfficeOpenXml.Table.TableStyles.Medium2);
                 // Bật WrapText cho tất cả các ô
                 ws.Column(3).Style.WrapText = true;
+                ws.Cells[ws.Dimension.Address].AutoFitColumns();
+                ws.Column(3).Width = 35;
 
                 // Lưu file
                 pck.Save();
@@ -662,6 +665,94 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         private void btnExcelByNotify_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             ExportExcelBySpare(true);
+        }
+
+        private void btnExcelByMachine_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var machines = dt309_MachinesBUS.Instance.GetListByStartIdDept(deptGetData);
+            var machineMaterials = dt309_MachineMaterialsBUS.Instance.GetList();
+
+            // Tạo danh sách dạng phẳng: mỗi dòng là 1 vật liệu gắn với máy
+            var excelDatas = machines.SelectMany(machine =>
+            {
+                return machineMaterials
+                    .Where(mm => mm.MachineId == machine.Id)
+                    .Join(materials,
+                          mm => mm.MaterialId,
+                          m => m.Id,
+                          (mm, m) => new
+                          {
+                              部門 = machine.IdDept,
+                              設備名稱 = machine.DisplayName,
+                              設備位置 = machine.Location,
+                              材料編號 = m.Code,
+                              品名規格 = m.DisplayName,
+                              備品用途 = m.TypeUse,
+                              料位 = m.Location,
+                              單位 = units.FirstOrDefault(u => u.Id == m.IdUnit).DisplayName,
+                              安全數量 = m.MinQuantity,
+                              課庫數量 = m.QuantityInStorage,
+                              機邊庫數量 = m.QuantityInMachine,
+                              單價 = m.Price,
+                              總金額 = m.Price * (m.QuantityInMachine + m.QuantityInStorage),
+                              管理員 = users.FirstOrDefault(u => u.Id == m.IdManager).DisplayName,
+                          });
+            }).ToList();
+
+            string documentsPath = TPConfigs.DocumentPath();
+            if (!Directory.Exists(documentsPath))
+                Directory.CreateDirectory(documentsPath);
+
+            string filePath = Path.Combine(documentsPath, $"備品管理-按照設備 - {DateTime.Now:yyyyMMddHHmmss}.xlsx");
+
+            ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+            using (ExcelPackage pck = new ExcelPackage(filePath))
+            {
+                ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Sheet1");
+                ws.Cells.Style.Font.Name = "Microsoft JhengHei";
+                ws.Cells.Style.Font.Size = 14;
+
+                // Xuất dữ liệu từ list excelDatas sang Table
+                ws.Cells["A1"].LoadFromCollection(excelDatas, true);
+
+                int startRow = 2, endRow = excelDatas.Count + 1;
+
+                // Merge các cột A-D nếu giá trị giống nhau
+                for (int col = 1; col <= 3; col++)
+                {
+                    int mergeStart = startRow;
+                    for (int row = startRow + 1; row <= endRow + 1; row++)
+                    {
+                        var curr = ws.Cells[row, col].Text;
+                        var prev = ws.Cells[mergeStart, col].Text;
+
+                        if (curr != prev || row == endRow + 1)
+                        {
+                            if (row - 1 > mergeStart)
+                                ws.Cells[mergeStart, col, row - 1, col].Merge = true;
+                            mergeStart = row;
+                        }
+                    }
+                }
+
+                // Bật WrapText cho tất cả các ô
+                ws.Column(5).Style.WrapText = true;
+                ws.Cells[ws.Dimension.Address].AutoFitColumns();
+                ws.Column(5).Width = 35;
+
+                // Căn giữa và kẻ ô toàn bảng
+                var fullRange = ws.Cells[ws.Dimension.Address];
+                fullRange.Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
+                fullRange.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                fullRange.Style.Border.Top.Style = fullRange.Style.Border.Bottom.Style =
+                    fullRange.Style.Border.Left.Style = fullRange.Style.Border.Right.Style =
+                    ExcelBorderStyle.Thin;
+
+                // Lưu file
+                pck.Save();
+            }
+
+            Process.Start(filePath);
         }
     }
 }

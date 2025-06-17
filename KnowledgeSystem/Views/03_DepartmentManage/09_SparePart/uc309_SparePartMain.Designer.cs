@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode3 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode4 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode5 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode6 = new DevExpress.XtraGrid.GridLevelNode();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc309_SparePartMain));
             this.gvTransactions = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gColIdDetail = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -215,16 +215,16 @@
             this.gcData.EmbeddedNavigator.Buttons.Edit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.EndEdit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.Remove.Visible = false;
-            gridLevelNode1.LevelTemplate = this.gvTransactions;
-            gridLevelNode1.RelationName = "出入庫記錄";
-            gridLevelNode2.LevelTemplate = this.gvPrices;
-            gridLevelNode2.RelationName = "單價管理";
-            gridLevelNode3.LevelTemplate = this.gvMachine;
-            gridLevelNode3.RelationName = "用於設備";
+            gridLevelNode4.LevelTemplate = this.gvTransactions;
+            gridLevelNode4.RelationName = "出入庫記錄";
+            gridLevelNode5.LevelTemplate = this.gvPrices;
+            gridLevelNode5.RelationName = "單價管理";
+            gridLevelNode6.LevelTemplate = this.gvMachine;
+            gridLevelNode6.RelationName = "用於設備";
             this.gcData.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode1,
-            gridLevelNode2,
-            gridLevelNode3});
+            gridLevelNode4,
+            gridLevelNode5,
+            gridLevelNode6});
             this.gcData.Location = new System.Drawing.Point(12, 12);
             this.gcData.MainView = this.gvData;
             this.gcData.Name = "gcData";
@@ -682,6 +682,7 @@
             this.btnExcelByMachine.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExcelByMachine.ItemAppearance.Normal.Options.UseFont = true;
             this.btnExcelByMachine.Name = "btnExcelByMachine";
+            this.btnExcelByMachine.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExcelByMachine_ItemClick);
             // 
             // btnExcelByNotify
             // 

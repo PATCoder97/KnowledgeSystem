@@ -223,12 +223,17 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
 
         private void btnDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            bool IsSysAdmin = AppPermission.Instance.CheckAppPermission(AppPermission.SysAdmin);
-            if (!IsSysAdmin)
+            var result = XtraInputBox.Show(new XtraInputBoxArgs
             {
-                XtraMessageBox.Show("Vui lòng liên hệ nhân viên quản lý hệ thống!", TPConfigs.SoftNameTW);
-                return;
-            }
+                Caption = TPConfigs.SoftNameTW,
+                AllowHtmlText = DevExpress.Utils.DefaultBoolean.True,
+                Prompt = "<font='Microsoft JhengHei UI' size=14>請輸入您的工號以確認刪除資料</font>",
+                DefaultButtonIndex = 0,
+                Editor = new TextEdit { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) },
+                DefaultResponse = ""
+            })?.ToString().ToUpper();
+
+            if (string.IsNullOrEmpty(result) || result != TPConfigs.LoginUser.Id.ToUpper()) return;
 
             MsgTP.MsgConfirmDel();
 
