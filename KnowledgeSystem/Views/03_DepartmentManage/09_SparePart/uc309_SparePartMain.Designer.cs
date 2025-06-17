@@ -75,8 +75,10 @@
             this.cbbDept = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.btnAdd = new DevExpress.XtraBars.BarButtonItem();
             this.btnReload = new DevExpress.XtraBars.BarButtonItem();
-            this.btnExportExcel = new DevExpress.XtraBars.BarButtonItem();
-            this.btnPrintStamp = new DevExpress.XtraBars.BarButtonItem();
+            this.btnExportExcel = new DevExpress.XtraBars.BarSubItem();
+            this.btnExcelBySpare = new DevExpress.XtraBars.BarButtonItem();
+            this.btnExcelByMachine = new DevExpress.XtraBars.BarButtonItem();
+            this.btnExcelByNotify = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -553,11 +555,13 @@
             this.barManagerTP.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.btnAdd,
             this.btnReload,
-            this.btnExportExcel,
             this.barCbbDept,
-            this.btnPrintStamp});
+            this.btnExportExcel,
+            this.btnExcelBySpare,
+            this.btnExcelByMachine,
+            this.btnExcelByNotify});
             this.barManagerTP.MainMenu = this.bar2;
-            this.barManagerTP.MaxItemId = 13;
+            this.barManagerTP.MaxItemId = 17;
             this.barManagerTP.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.cbbDept});
             // 
@@ -586,8 +590,7 @@
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.Width, this.barCbbDept, "", false, true, true, 217),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnAdd, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnReload, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnExportExcel, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnPrintStamp, true)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnExportExcel, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawDragBorder = false;
             this.bar2.OptionsBar.MultiLine = true;
@@ -644,22 +647,53 @@
             // 
             // btnExportExcel
             // 
-            this.btnExportExcel.Caption = "出表";
-            this.btnExportExcel.Id = 2;
+            this.btnExportExcel.Caption = "導出表單";
+            this.btnExportExcel.Id = 13;
             this.btnExportExcel.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnExportExcel.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
             this.btnExportExcel.ItemAppearance.Hovered.Options.UseForeColor = true;
             this.btnExportExcel.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExportExcel.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnExportExcel.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnExcelBySpare, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnExcelByMachine, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnExcelByNotify, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.btnExportExcel.Name = "btnExportExcel";
             // 
-            // btnPrintStamp
+            // btnExcelBySpare
             // 
-            this.btnPrintStamp.Caption = "印標簽";
-            this.btnPrintStamp.Id = 12;
-            this.btnPrintStamp.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnPrintStamp.Name = "btnPrintStamp";
-            this.btnPrintStamp.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnPrintStamp_ItemClick);
+            this.btnExcelBySpare.Caption = "按照備品";
+            this.btnExcelBySpare.Id = 14;
+            this.btnExcelBySpare.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnExcelBySpare.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnExcelBySpare.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnExcelBySpare.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExcelBySpare.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnExcelBySpare.Name = "btnExcelBySpare";
+            this.btnExcelBySpare.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExcelBySpare_ItemClick);
+            // 
+            // btnExcelByMachine
+            // 
+            this.btnExcelByMachine.Caption = "安裝設備";
+            this.btnExcelByMachine.Id = 15;
+            this.btnExcelByMachine.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnExcelByMachine.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnExcelByMachine.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnExcelByMachine.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExcelByMachine.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnExcelByMachine.Name = "btnExcelByMachine";
+            // 
+            // btnExcelByNotify
+            // 
+            this.btnExcelByNotify.Caption = "提醒備品";
+            this.btnExcelByNotify.Id = 16;
+            this.btnExcelByNotify.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnExcelByNotify.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnExcelByNotify.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnExcelByNotify.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExcelByNotify.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnExcelByNotify.Name = "btnExcelByNotify";
+            this.btnExcelByNotify.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExcelByNotify_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -761,7 +795,6 @@
         private DevExpress.XtraBars.Bar bar2;
         private DevExpress.XtraBars.BarButtonItem btnAdd;
         private DevExpress.XtraBars.BarButtonItem btnReload;
-        private DevExpress.XtraBars.BarButtonItem btnExportExcel;
         private DevExpress.XtraBars.BarEditItem barCbbDept;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox cbbDept;
         private DevExpress.XtraBars.BarDockControl barDockControlTop;
@@ -769,6 +802,9 @@
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
-        private DevExpress.XtraBars.BarButtonItem btnPrintStamp;
+        private DevExpress.XtraBars.BarSubItem btnExportExcel;
+        private DevExpress.XtraBars.BarButtonItem btnExcelBySpare;
+        private DevExpress.XtraBars.BarButtonItem btnExcelByMachine;
+        private DevExpress.XtraBars.BarButtonItem btnExcelByNotify;
     }
 }

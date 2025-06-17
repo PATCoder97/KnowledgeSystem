@@ -30,6 +30,7 @@ using ExcelDataReader;
 using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._00_Generals;
 using KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck;
+using OfficeOpenXml;
 using Org.BouncyCastle.Math;
 using static KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._02_MaterialTrends.uc403_02_MaterialTrends;
 using Color = System.Drawing.Color;
@@ -92,6 +93,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
             btnExportExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
             barCbbDept.ImageOptions.SvgImage = TPSvgimages.Dept;
+
+            btnExcelBySpare.ImageOptions.SvgImage = TPSvgimages.Num1;
+            btnExcelByMachine.ImageOptions.SvgImage = TPSvgimages.Num2;
+            btnExcelByNotify.ImageOptions.SvgImage = TPSvgimages.Num3;
         }
 
         private void CreateRuleGV()
@@ -362,9 +367,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 units = dt309_UnitsBUS.Instance.GetList();
 
                 materials = dt309_MaterialsBUS.Instance.GetListByStartIdDept(deptGetData);
-                var materialsNotRecheck = dt309_InspectionBatchMaterialBUS.Instance.GetListNotRecheck().Select(r => r.MaterialId).ToList();
+                var materialsRechecking = dt309_InspectionBatchMaterialBUS.Instance.GetListRechecking().Select(r => r.MaterialId).ToList();
 
-                var displayData = materials.Where(r => !materialsNotRecheck.Contains(r.Id))
+                var displayData = materials.Where(r => !materialsRechecking.Contains(r.Id))
                     .Select(x => new
                     {
                         data = x,
@@ -592,9 +597,71 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             detailView.BestFitColumns();
         }
 
-        private void btnPrintStamp_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private void ExportExcelBySpare(bool _isNotify = false)
         {
+            var materialsRechecking = dt309_InspectionBatchMaterialBUS.Instance.GetListRechecking().Select(r => r.MaterialId).ToList();
 
+            var excelDatas = materials.Where(r => !materialsRechecking.Contains(r.Id) && (_isNotify ? (r.QuantityInStorage + r.QuantityInMachine) < r.MinQuantity : true))
+                .OrderBy(x => x.IdDept)
+                .Select(x => new
+                {
+                    部門 = x.IdDept,
+                    材料編號 = x.Code,
+                    品名規格 = x.DisplayName,
+                    備品用途 = x.TypeUse,
+                    料位 = x.Location,
+                    單位 = units.FirstOrDefault(u => u.Id == x.IdUnit).DisplayName,
+                    安全數量 = x.MinQuantity,
+                    課庫數量 = x.QuantityInStorage,
+                    機邊庫數量 = x.QuantityInMachine,
+                    單價 = x.Price,
+                    總金額 = x.Price * (x.QuantityInMachine + x.QuantityInStorage),
+                    管理員 = users.FirstOrDefault(u => u.Id == x.IdManager).DisplayName,
+                }).ToList();
+
+            string documentsPath = TPConfigs.DocumentPath();
+            if (!Directory.Exists(documentsPath))
+                Directory.CreateDirectory(documentsPath);
+
+            string filePath = Path.Combine(documentsPath, $"備品管理-{(_isNotify ? "提醒備品" : "按照備品")} - {DateTime.Now:yyyyMMddHHmmss}.xlsx");
+
+            ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+            using (ExcelPackage pck = new ExcelPackage(filePath))
+            {
+                ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Sheet1");
+                ws.Cells.Style.Font.Name = "Microsoft JhengHei";
+                ws.Cells.Style.Font.Size = 14;
+
+                // Thiết lập độ rộng các cột
+                ws.Column(1).Width = 30;
+                ws.Column(2).Width = 30;
+                ws.Column(3).Width = 50;
+                ws.Column(4).Width = 35;
+                ws.Column(5).Width = 35;
+                ws.Column(6).Width = 35;
+                ws.Column(7).Width = 35;
+                ws.Column(8).Width = 30;
+
+                // Xuất dữ liệu từ list excelDatas sang Table
+                ws.Cells["A1"].LoadFromCollection(excelDatas, true, OfficeOpenXml.Table.TableStyles.Medium2);
+                // Bật WrapText cho tất cả các ô
+                ws.Column(3).Style.WrapText = true;
+
+                // Lưu file
+                pck.Save();
+            }
+
+            Process.Start(filePath);
+        }
+
+        private void btnExcelBySpare_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            ExportExcelBySpare();
+        }
+
+        private void btnExcelByNotify_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            ExportExcelBySpare(true);
         }
     }
 }

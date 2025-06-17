@@ -40,7 +40,7 @@ namespace BusinessLayer
             }
         }
 
-        public List<dt309_InspectionBatchMaterial> GetListNotRecheck()
+        public List<dt309_InspectionBatchMaterial> GetListRechecking()
         {
             try
             {
