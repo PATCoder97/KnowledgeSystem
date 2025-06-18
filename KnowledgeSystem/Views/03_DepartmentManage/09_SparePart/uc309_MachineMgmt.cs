@@ -134,7 +134,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
                 sourceBases.DataSource = displayData;
 
-
                 gvData.BestFitColumns();
                 gvData.CollapseAllDetails();
 

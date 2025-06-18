@@ -220,9 +220,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
             XtraInputBoxArgs args = new XtraInputBoxArgs();
 
-            args.AllowHtmlText = DevExpress.Utils.DefaultBoolean.True;
             args.Caption = "標籤格式";
-            args.Prompt = $"<font='Microsoft JhengHei UI' size=14>請選擇標籤格式</font>";
+            args.Prompt = $"請選擇標籤格式";
             args.DefaultButtonIndex = 0;
             ComboBoxEdit editor = new ComboBoxEdit();
 
@@ -675,28 +674,36 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             // Tạo danh sách dạng phẳng: mỗi dòng là 1 vật liệu gắn với máy
             var excelDatas = machines.SelectMany(machine =>
             {
-                return machineMaterials
+                var machineMaterialList = machineMaterials
                     .Where(mm => mm.MachineId == machine.Id)
                     .Join(materials,
                           mm => mm.MaterialId,
                           m => m.Id,
-                          (mm, m) => new
-                          {
-                              部門 = machine.IdDept,
-                              設備名稱 = machine.DisplayName,
-                              設備位置 = machine.Location,
-                              材料編號 = m.Code,
-                              品名規格 = m.DisplayName,
-                              備品用途 = m.TypeUse,
-                              料位 = m.Location,
-                              單位 = units.FirstOrDefault(u => u.Id == m.IdUnit).DisplayName,
-                              安全數量 = m.MinQuantity,
-                              課庫數量 = m.QuantityInStorage,
-                              機邊庫數量 = m.QuantityInMachine,
-                              單價 = m.Price,
-                              總金額 = m.Price * (m.QuantityInMachine + m.QuantityInStorage),
-                              管理員 = users.FirstOrDefault(u => u.Id == m.IdManager).DisplayName,
-                          });
+                          (mm, m) => m)
+                    .ToList();
+
+                double totalPrice = machineMaterialList.Sum(m =>
+                    Convert.ToDouble(m.Price) *
+                    (Convert.ToDouble(m.QuantityInStorage) + Convert.ToDouble(m.QuantityInMachine)));
+
+                return machineMaterialList.Select(m => new
+                {
+                    部門 = machine.IdDept,
+                    設備名稱 = machine.DisplayName,
+                    設備位置 = machine.Location,
+                    所屬機台總價值 = totalPrice,
+                    材料編號 = m.Code,
+                    品名規格 = m.DisplayName,
+                    備品用途 = m.TypeUse,
+                    料位 = m.Location,
+                    單位 = units.FirstOrDefault(u => u.Id == m.IdUnit)?.DisplayName ?? "",
+                    安全數量 = m.MinQuantity,
+                    課庫數量 = m.QuantityInStorage,
+                    機邊庫數量 = m.QuantityInMachine,
+                    單價 = m.Price,
+                    總金額 = m.Price * (m.QuantityInMachine + m.QuantityInStorage),
+                    管理員 = users.FirstOrDefault(u => u.Id == m.IdManager)?.DisplayName ?? "",
+                });
             }).ToList();
 
             string documentsPath = TPConfigs.DocumentPath();
@@ -718,7 +725,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 int startRow = 2, endRow = excelDatas.Count + 1;
 
                 // Merge các cột A-D nếu giá trị giống nhau
-                for (int col = 1; col <= 3; col++)
+                for (int col = 1; col <= 4; col++)
                 {
                     int mergeStart = startRow;
                     for (int row = startRow + 1; row <= endRow + 1; row++)
@@ -736,9 +743,14 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 }
 
                 // Bật WrapText cho tất cả các ô
-                ws.Column(5).Style.WrapText = true;
+                ws.Column(6).Style.WrapText = true;
                 ws.Cells[ws.Dimension.Address].AutoFitColumns();
-                ws.Column(5).Width = 35;
+                ws.Column(6).Width = 35;
+
+                // Định dạng cột D (giả sử D là cột số lượng chẳng hạn)
+                ws.Column(4).Style.Numberformat.Format = "#,##0"; // D = 4
+                ws.Column(13).Style.Numberformat.Format = "#,##0"; // M = 13
+                ws.Column(14).Style.Numberformat.Format = "#,##0"; // N = 14
 
                 // Căn giữa và kẻ ô toàn bảng
                 var fullRange = ws.Cells[ws.Dimension.Address];
