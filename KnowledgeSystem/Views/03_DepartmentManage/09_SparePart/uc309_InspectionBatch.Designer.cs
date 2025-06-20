@@ -196,7 +196,7 @@
             // 
             // gridColumn13
             // 
-            this.gridColumn13.Caption = "盤點時期";
+            this.gridColumn13.Caption = "盤點日期";
             this.gridColumn13.FieldName = "BatchMaterial.ConfirmationDate";
             this.gridColumn13.Name = "gridColumn13";
             this.gridColumn13.Visible = true;

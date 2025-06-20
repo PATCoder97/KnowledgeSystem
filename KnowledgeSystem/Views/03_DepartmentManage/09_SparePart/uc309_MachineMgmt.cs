@@ -124,11 +124,19 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                     double totalPrice = machineMaterialList.Sum(m =>
                         Convert.ToDouble(m.Price) * (Convert.ToDouble(m.QuantityInStorage) + Convert.ToDouble(m.QuantityInMachine)));
 
+                    // Đếm số lượng vật tư dùng làm tiêu hao phẩm (消耗品)
+                    int consumableCount = machineMaterialList.Count(r => r.TypeUse == "消耗品");
+
+                    // Đếm số lượng vật tư dùng làm thiết bị phụ tùng (備品)
+                    int equipmentCount = machineMaterialList.Count(r => r.TypeUse == "備品");
+
                     return new
                     {
                         Machine = machine,
                         物料 = machineMaterialList,
-                        TotalPrice = totalPrice
+                        TotalPrice = totalPrice,
+                        consumableCount,
+                        equipmentCount
                     };
                 }).ToList();
 

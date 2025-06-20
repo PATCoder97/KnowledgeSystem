@@ -357,7 +357,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbbTypeUse.Properties.Items.AddRange(new object[] {
             "消耗品",
-            "修護費用"});
+            "備品"});
             this.cbbTypeUse.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.cbbTypeUse.Size = new System.Drawing.Size(319, 32);
             this.cbbTypeUse.StyleController = this.layoutControl1;
@@ -475,7 +475,7 @@
             this.lcTypeUse.Location = new System.Drawing.Point(0, 261);
             this.lcTypeUse.Name = "lcTypeUse";
             this.lcTypeUse.Size = new System.Drawing.Size(411, 36);
-            this.lcTypeUse.Text = "備品用途";
+            this.lcTypeUse.Text = "用途";
             this.lcTypeUse.TextSize = new System.Drawing.Size(76, 24);
             // 
             // lcDisplayName

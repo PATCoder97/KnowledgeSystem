@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode4 = new DevExpress.XtraGrid.GridLevelNode();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode5 = new DevExpress.XtraGrid.GridLevelNode();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode6 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode3 = new DevExpress.XtraGrid.GridLevelNode();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc309_SparePartMain));
             this.gvTransactions = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gColIdDetail = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -215,16 +215,16 @@
             this.gcData.EmbeddedNavigator.Buttons.Edit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.EndEdit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.Remove.Visible = false;
-            gridLevelNode4.LevelTemplate = this.gvTransactions;
-            gridLevelNode4.RelationName = "出入庫記錄";
-            gridLevelNode5.LevelTemplate = this.gvPrices;
-            gridLevelNode5.RelationName = "單價管理";
-            gridLevelNode6.LevelTemplate = this.gvMachine;
-            gridLevelNode6.RelationName = "用於設備";
+            gridLevelNode1.LevelTemplate = this.gvTransactions;
+            gridLevelNode1.RelationName = "出入庫記錄";
+            gridLevelNode2.LevelTemplate = this.gvPrices;
+            gridLevelNode2.RelationName = "單價管理";
+            gridLevelNode3.LevelTemplate = this.gvMachine;
+            gridLevelNode3.RelationName = "用於設備";
             this.gcData.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode4,
-            gridLevelNode5,
-            gridLevelNode6});
+            gridLevelNode1,
+            gridLevelNode2,
+            gridLevelNode3});
             this.gcData.Location = new System.Drawing.Point(12, 12);
             this.gcData.MainView = this.gvData;
             this.gcData.Name = "gcData";
@@ -476,7 +476,7 @@
             // gridColumn18
             // 
             this.gridColumn18.Caption = "總金額(VNĐ)";
-            this.gridColumn18.DisplayFormat.FormatString = "#,##0.##";
+            this.gridColumn18.DisplayFormat.FormatString = "#,##0";
             this.gridColumn18.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.gridColumn18.FieldName = "TotalPrice";
             this.gridColumn18.Name = "gridColumn18";
@@ -674,7 +674,7 @@
             // 
             // btnExcelByMachine
             // 
-            this.btnExcelByMachine.Caption = "安裝設備";
+            this.btnExcelByMachine.Caption = "按照設備";
             this.btnExcelByMachine.Id = 15;
             this.btnExcelByMachine.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnExcelByMachine.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;

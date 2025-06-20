@@ -123,7 +123,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         private void f309_Material_Info_Load(object sender, EventArgs e)
         {
             lcControls = new List<LayoutControlItem>() { lcCode, lcDisplayName, lcUnit, lcLocation, lcUser, lcTypeUse, lcMachine, lcExpDate, lcMinQuantity };
-            lcImpControls = new List<LayoutControlItem>() { lcCode, lcDisplayName, lcUnit, lcLocation, lcUser, lcMachine, lcMinQuantity };
+            lcImpControls = new List<LayoutControlItem>() { lcCode, lcDisplayName, lcUnit, lcLocation, lcUser, lcMachine, lcMinQuantity, lcTypeUse };
             foreach (var item in lcControls)
             {
                 item.AllowHtmlStringInCaption = true;
