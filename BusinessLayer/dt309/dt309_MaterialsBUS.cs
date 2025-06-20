@@ -30,7 +30,7 @@ namespace BusinessLayer
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dt309_Materials.ToList();
+                    return _context.dt309_Materials.Where(r => r.DelTime == null).ToList();
                 }
             }
             catch (Exception ex)
@@ -62,7 +62,7 @@ namespace BusinessLayer
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dt309_Materials.Where(r => r.IdDept.StartsWith(idDept)).ToList();
+                    return _context.dt309_Materials.Where(r => r.IdDept.StartsWith(idDept) && r.DelTime == null).ToList();
                 }
             }
             catch (Exception ex)
