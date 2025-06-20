@@ -53,12 +53,20 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             txbStorageFromQuantity.Enabled = false;
             txbStorageToQuantity.Enabled = false;
 
+            lcPrice.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            lcExpDate.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            Size = new Size(400, 245);
+
             switch (eventInfo)
             {
                 case "收貨":
                     cbbStorageTo.EditValue = 2;
                     cbbStorageTo.Enabled = false;
                     cbbStorageFrom.Enabled = false;
+
+                    lcPrice.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                    lcExpDate.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                    Size = new Size(400, 315);
                     break;
 
                 case "調撥":
@@ -106,8 +114,14 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         private void f309_Transaction_Info_Load(object sender, EventArgs e)
         {
-            lcControls = new List<LayoutControlItem>() { lcStorageFrom, lcStorageTo, lcStorageFromQuantity, lcStorageToQuantity, lcQuantity, lcDesc };
+            lcControls = new List<LayoutControlItem>() { lcStorageFrom, lcStorageTo, lcStorageFromQuantity, lcStorageToQuantity, lcQuantity, lcDesc, lcPrice, lcExpDate };
             lcImpControls = new List<LayoutControlItem>() { lcStorageFrom, lcStorageTo, lcQuantity };
+
+            if (eventInfo == "收貨")
+            {
+                lcImpControls.Add(lcPrice);
+            }
+
             foreach (var item in lcControls)
             {
                 item.AllowHtmlStringInCaption = true;
@@ -217,11 +231,34 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             {
                 case "收貨":
 
+                    var newPrice = Convert.ToInt32(txbPrice.EditValue);
+                    if (newPrice <= 0)
+                    {
+                        XtraMessageBox.Show($"單價不得小於零", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
                     transaction.TransactionType = "in";
                     transaction.Quantity = quantity;
                     transaction.StorageId = (int)cbbStorageTo.EditValue;
 
                     result = dt309_TransactionsBUS.Instance.Add(transaction);
+
+                    var resultUpdate = dt309_PricesBUS.Instance.Add(new dt309_Prices()
+                    {
+                        MaterialId = idMaterial,
+                        Price = newPrice,
+                        ChangedAt = DateTime.Now,
+                        ChangedBy = TPConfigs.LoginUser.Id
+                    });
+
+                    if (!string.IsNullOrEmpty(txbExpDate.Text))
+                    {
+                        material = dt309_MaterialsBUS.Instance.GetItemById(idMaterial);
+
+                        material.ExpDate = txbExpDate.DateTime;
+                        dt309_MaterialsBUS.Instance.AddOrUpdate(material);
+                    }
 
                     break;
 

@@ -53,6 +53,10 @@
             this.lcStorageFromQuantity = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcStorageToQuantity = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcQuantity = new DevExpress.XtraLayout.LayoutControlItem();
+            this.txbPrice = new DevExpress.XtraEditors.TextEdit();
+            this.lcPrice = new DevExpress.XtraLayout.LayoutControlItem();
+            this.txbExpDate = new DevExpress.XtraEditors.DateEdit();
+            this.lcExpDate = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -69,6 +73,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcStorageFromQuantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcStorageToQuantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcQuantity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbPrice.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcPrice)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbExpDate.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbExpDate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcExpDate)).BeginInit();
             this.SuspendLayout();
             // 
             // barManagerTP
@@ -153,7 +162,7 @@
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 213);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 285);
             this.barDockControlBottom.Manager = this.barManagerTP;
             this.barDockControlBottom.Size = new System.Drawing.Size(398, 0);
             // 
@@ -163,7 +172,7 @@
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 49);
             this.barDockControlLeft.Manager = this.barManagerTP;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 164);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 236);
             // 
             // barDockControlRight
             // 
@@ -171,7 +180,7 @@
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
             this.barDockControlRight.Location = new System.Drawing.Point(398, 49);
             this.barDockControlRight.Manager = this.barManagerTP;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 164);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 236);
             // 
             // layoutControl1
             // 
@@ -182,12 +191,14 @@
             this.layoutControl1.Controls.Add(this.txbStorageFromQuantity);
             this.layoutControl1.Controls.Add(this.cbbStorageTo);
             this.layoutControl1.Controls.Add(this.txbStorageToQuantity);
+            this.layoutControl1.Controls.Add(this.txbPrice);
+            this.layoutControl1.Controls.Add(this.txbExpDate);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(433, 0, 650, 400);
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(398, 164);
+            this.layoutControl1.Size = new System.Drawing.Size(398, 236);
             this.layoutControl1.TabIndex = 11;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -238,7 +249,7 @@
             this.cbbStorageFrom.Properties.NullText = "";
             this.cbbStorageFrom.Properties.PopupSizeable = false;
             this.cbbStorageFrom.Properties.ShowHeader = false;
-            this.cbbStorageFrom.Size = new System.Drawing.Size(142, 32);
+            this.cbbStorageFrom.Size = new System.Drawing.Size(141, 32);
             this.cbbStorageFrom.StyleController = this.layoutControl1;
             this.cbbStorageFrom.TabIndex = 10;
             this.cbbStorageFrom.EditValueChanged += new System.EventHandler(this.cbbStorageFrom_EditValueChanged);
@@ -246,7 +257,7 @@
             // txbStorageFromQuantity
             // 
             this.txbStorageFromQuantity.EditValue = "0";
-            this.txbStorageFromQuantity.Location = new System.Drawing.Point(289, 12);
+            this.txbStorageFromQuantity.Location = new System.Drawing.Point(288, 12);
             this.txbStorageFromQuantity.Name = "txbStorageFromQuantity";
             this.txbStorageFromQuantity.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbStorageFromQuantity.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -256,7 +267,7 @@
             this.txbStorageFromQuantity.Properties.MaskSettings.Set("mask", "F");
             this.txbStorageFromQuantity.Properties.MaskSettings.Set("autoHideDecimalSeparator", null);
             this.txbStorageFromQuantity.Properties.UseMaskAsDisplayFormat = true;
-            this.txbStorageFromQuantity.Size = new System.Drawing.Size(97, 32);
+            this.txbStorageFromQuantity.Size = new System.Drawing.Size(98, 32);
             this.txbStorageFromQuantity.StyleController = this.layoutControl1;
             this.txbStorageFromQuantity.TabIndex = 9;
             // 
@@ -278,7 +289,7 @@
             this.cbbStorageTo.Properties.NullText = "";
             this.cbbStorageTo.Properties.PopupSizeable = false;
             this.cbbStorageTo.Properties.ShowHeader = false;
-            this.cbbStorageTo.Size = new System.Drawing.Size(142, 32);
+            this.cbbStorageTo.Size = new System.Drawing.Size(141, 32);
             this.cbbStorageTo.StyleController = this.layoutControl1;
             this.cbbStorageTo.TabIndex = 10;
             this.cbbStorageTo.EditValueChanged += new System.EventHandler(this.cbbStorageTo_EditValueChanged);
@@ -286,7 +297,7 @@
             // txbStorageToQuantity
             // 
             this.txbStorageToQuantity.EditValue = "0";
-            this.txbStorageToQuantity.Location = new System.Drawing.Point(289, 48);
+            this.txbStorageToQuantity.Location = new System.Drawing.Point(288, 48);
             this.txbStorageToQuantity.Name = "txbStorageToQuantity";
             this.txbStorageToQuantity.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbStorageToQuantity.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -296,7 +307,7 @@
             this.txbStorageToQuantity.Properties.MaskSettings.Set("mask", "F");
             this.txbStorageToQuantity.Properties.MaskSettings.Set("autoHideDecimalSeparator", null);
             this.txbStorageToQuantity.Properties.UseMaskAsDisplayFormat = true;
-            this.txbStorageToQuantity.Size = new System.Drawing.Size(97, 32);
+            this.txbStorageToQuantity.Size = new System.Drawing.Size(98, 32);
             this.txbStorageToQuantity.StyleController = this.layoutControl1;
             this.txbStorageToQuantity.TabIndex = 9;
             // 
@@ -310,9 +321,11 @@
             this.lcStorageTo,
             this.lcStorageFromQuantity,
             this.lcStorageToQuantity,
-            this.lcQuantity});
+            this.lcQuantity,
+            this.lcPrice,
+            this.lcExpDate});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(398, 164);
+            this.Root.Size = new System.Drawing.Size(398, 236);
             this.Root.TextVisible = false;
             // 
             // lcDesc
@@ -348,7 +361,7 @@
             this.lcStorageFrom.CustomizationFormText = "備品用途";
             this.lcStorageFrom.Location = new System.Drawing.Point(0, 0);
             this.lcStorageFrom.Name = "lcStorageFrom";
-            this.lcStorageFrom.Size = new System.Drawing.Size(234, 36);
+            this.lcStorageFrom.Size = new System.Drawing.Size(233, 36);
             this.lcStorageFrom.Text = "出貨倉庫";
             this.lcStorageFrom.TextSize = new System.Drawing.Size(76, 24);
             // 
@@ -367,7 +380,7 @@
             this.lcStorageTo.CustomizationFormText = "備品用途";
             this.lcStorageTo.Location = new System.Drawing.Point(0, 36);
             this.lcStorageTo.Name = "lcStorageTo";
-            this.lcStorageTo.Size = new System.Drawing.Size(234, 36);
+            this.lcStorageTo.Size = new System.Drawing.Size(233, 36);
             this.lcStorageTo.Text = "收貨倉庫";
             this.lcStorageTo.TextSize = new System.Drawing.Size(76, 24);
             // 
@@ -383,9 +396,9 @@
             this.lcStorageFromQuantity.Control = this.txbStorageFromQuantity;
             this.lcStorageFromQuantity.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
             this.lcStorageFromQuantity.CustomizationFormText = "中文名稱";
-            this.lcStorageFromQuantity.Location = new System.Drawing.Point(234, 0);
+            this.lcStorageFromQuantity.Location = new System.Drawing.Point(233, 0);
             this.lcStorageFromQuantity.Name = "lcStorageFromQuantity";
-            this.lcStorageFromQuantity.Size = new System.Drawing.Size(144, 36);
+            this.lcStorageFromQuantity.Size = new System.Drawing.Size(145, 36);
             this.lcStorageFromQuantity.Text = "數量";
             this.lcStorageFromQuantity.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
             this.lcStorageFromQuantity.TextSize = new System.Drawing.Size(38, 24);
@@ -403,9 +416,9 @@
             this.lcStorageToQuantity.Control = this.txbStorageToQuantity;
             this.lcStorageToQuantity.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
             this.lcStorageToQuantity.CustomizationFormText = "中文名稱";
-            this.lcStorageToQuantity.Location = new System.Drawing.Point(234, 36);
+            this.lcStorageToQuantity.Location = new System.Drawing.Point(233, 36);
             this.lcStorageToQuantity.Name = "lcStorageToQuantity";
-            this.lcStorageToQuantity.Size = new System.Drawing.Size(144, 36);
+            this.lcStorageToQuantity.Size = new System.Drawing.Size(145, 36);
             this.lcStorageToQuantity.Text = "數量";
             this.lcStorageToQuantity.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
             this.lcStorageToQuantity.TextSize = new System.Drawing.Size(38, 24);
@@ -428,11 +441,80 @@
             this.lcQuantity.Text = "事件數量";
             this.lcQuantity.TextSize = new System.Drawing.Size(76, 24);
             // 
+            // txbPrice
+            // 
+            this.txbPrice.EditValue = "0";
+            this.txbPrice.Location = new System.Drawing.Point(100, 156);
+            this.txbPrice.Name = "txbPrice";
+            this.txbPrice.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.txbPrice.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.txbPrice.Properties.Appearance.Options.UseFont = true;
+            this.txbPrice.Properties.Appearance.Options.UseForeColor = true;
+            this.txbPrice.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
+            this.txbPrice.Properties.MaskSettings.Set("mask", "N0");
+            this.txbPrice.Properties.MaskSettings.Set("autoHideDecimalSeparator", null);
+            this.txbPrice.Properties.UseMaskAsDisplayFormat = true;
+            this.txbPrice.Size = new System.Drawing.Size(286, 32);
+            this.txbPrice.StyleController = this.layoutControl1;
+            this.txbPrice.TabIndex = 9;
+            // 
+            // lcPrice
+            // 
+            this.lcPrice.AllowHtmlStringInCaption = true;
+            this.lcPrice.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lcPrice.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.lcPrice.AppearanceItemCaption.Options.UseFont = true;
+            this.lcPrice.AppearanceItemCaption.Options.UseForeColor = true;
+            this.lcPrice.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.lcPrice.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.lcPrice.Control = this.txbPrice;
+            this.lcPrice.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.lcPrice.CustomizationFormText = "中文名稱";
+            this.lcPrice.Location = new System.Drawing.Point(0, 144);
+            this.lcPrice.Name = "lcPrice";
+            this.lcPrice.Size = new System.Drawing.Size(378, 36);
+            this.lcPrice.Text = "事件數量";
+            this.lcPrice.TextSize = new System.Drawing.Size(76, 24);
+            // 
+            // txbExpDate
+            // 
+            this.txbExpDate.EditValue = null;
+            this.txbExpDate.Location = new System.Drawing.Point(100, 192);
+            this.txbExpDate.Name = "txbExpDate";
+            this.txbExpDate.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.txbExpDate.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.txbExpDate.Properties.Appearance.Options.UseFont = true;
+            this.txbExpDate.Properties.Appearance.Options.UseForeColor = true;
+            this.txbExpDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txbExpDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txbExpDate.Size = new System.Drawing.Size(286, 32);
+            this.txbExpDate.StyleController = this.layoutControl1;
+            this.txbExpDate.TabIndex = 14;
+            // 
+            // lcExpDate
+            // 
+            this.lcExpDate.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lcExpDate.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.lcExpDate.AppearanceItemCaption.Options.UseFont = true;
+            this.lcExpDate.AppearanceItemCaption.Options.UseForeColor = true;
+            this.lcExpDate.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.lcExpDate.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.lcExpDate.Control = this.txbExpDate;
+            this.lcExpDate.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.lcExpDate.CustomizationFormText = "有效期至";
+            this.lcExpDate.Location = new System.Drawing.Point(0, 180);
+            this.lcExpDate.Name = "lcExpDate";
+            this.lcExpDate.Size = new System.Drawing.Size(378, 36);
+            this.lcExpDate.Text = "有效期至";
+            this.lcExpDate.TextSize = new System.Drawing.Size(76, 24);
+            // 
             // f309_Transaction_Info
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(398, 213);
+            this.ClientSize = new System.Drawing.Size(398, 285);
             this.Controls.Add(this.layoutControl1);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
@@ -460,6 +542,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcStorageFromQuantity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcStorageToQuantity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcQuantity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbPrice.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcPrice)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbExpDate.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbExpDate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcExpDate)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -490,5 +577,9 @@
         private DevExpress.XtraLayout.LayoutControlItem lcStorageTo;
         private DevExpress.XtraEditors.TextEdit txbStorageToQuantity;
         private DevExpress.XtraLayout.LayoutControlItem lcStorageToQuantity;
+        private DevExpress.XtraEditors.TextEdit txbPrice;
+        private DevExpress.XtraLayout.LayoutControlItem lcPrice;
+        private DevExpress.XtraEditors.DateEdit txbExpDate;
+        private DevExpress.XtraLayout.LayoutControlItem lcExpDate;
     }
 }
