@@ -56,6 +56,22 @@ namespace BusinessLayer
             }
         }
 
+        public List<dt309_Transactions> GetUnnotifiedTransactions()
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt309_Transactions.Where(r => r.NotifyDate == null).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public List<dt309_Transactions> GetListByidMaterial(int idMaterial)
         {
             try

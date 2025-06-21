@@ -24,5 +24,6 @@ namespace DataAccessLayer
         public Nullable<double> TotalQuantity { get; set; }
         public string UserDo { get; set; }
         public string Desc { get; set; }
+        public Nullable<System.DateTime> NotifyDate { get; set; }
     }
 }

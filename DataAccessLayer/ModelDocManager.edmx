@@ -877,6 +877,7 @@
           <Property Name="TotalQuantity" Type="float" />
           <Property Name="UserDo" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="Desc" Type="nvarchar" MaxLength="512" />
+          <Property Name="NotifyDate" Type="datetime" />
         </EntityType>
         <EntityType Name="dt309_Units">
           <Key>
@@ -1118,9 +1119,9 @@
           <EntitySet Name="dt204_InternalDocMgmt" EntityType="DBDocumentManagementSystemModel.dt204_InternalDocMgmt" />
           <EntitySet Name="dm_Departments" EntityType="DBDocumentManagementSystemModel.dm_Departments" />
           <EntitySet Name="dt308_CheckSession" EntityType="DBDocumentManagementSystemModel.dt308_CheckSession" />
-          <EntitySet Name="dt309_Transactions" EntityType="DBDocumentManagementSystemModel.dt309_Transactions" />
           <EntitySet Name="dt309_InspectionBatch" EntityType="DBDocumentManagementSystemModel.dt309_InspectionBatch" />
           <EntitySet Name="dt309_InspectionBatchMaterial" EntityType="DBDocumentManagementSystemModel.dt309_InspectionBatchMaterial" />
+          <EntitySet Name="dt309_Transactions" EntityType="DBDocumentManagementSystemModel.dt309_Transactions" />
         </EntityContainer>
         <EntityType Name="dm_Function">
           <Key>
@@ -2020,21 +2021,6 @@
           <Property Name="IdDept" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
           <Property Name="DataCollectionDate" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="dt309_Transactions">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="StorageId" Type="Int32" Nullable="false" />
-          <Property Name="MaterialId" Type="Int32" Nullable="false" />
-          <Property Name="Quantity" Type="Double" Nullable="false" />
-          <Property Name="TransactionType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="AftQuantity" Type="Double" />
-          <Property Name="TotalQuantity" Type="Double" />
-          <Property Name="UserDo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Desc" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="dt309_InspectionBatch">
           <Key>
             <PropertyRef Name="Id" />
@@ -2058,6 +2044,22 @@
           <Property Name="ConfirmedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="IsComplete" Type="Boolean" />
           <Property Name="Description" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dt309_Transactions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StorageId" Type="Int32" Nullable="false" />
+          <Property Name="MaterialId" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Double" Nullable="false" />
+          <Property Name="TransactionType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="AftQuantity" Type="Double" />
+          <Property Name="TotalQuantity" Type="Double" />
+          <Property Name="UserDo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Desc" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="NotifyDate" Type="DateTime" Precision="3" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -3046,22 +3048,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dt309_Transactions">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt309_Transactions">
-              <MappingFragment StoreEntitySet="dt309_Transactions">
-                <ScalarProperty Name="Desc" ColumnName="Desc" />
-                <ScalarProperty Name="UserDo" ColumnName="UserDo" />
-                <ScalarProperty Name="TotalQuantity" ColumnName="TotalQuantity" />
-                <ScalarProperty Name="AftQuantity" ColumnName="AftQuantity" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="TransactionType" ColumnName="TransactionType" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="MaterialId" ColumnName="MaterialId" />
-                <ScalarProperty Name="StorageId" ColumnName="StorageId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="dt309_InspectionBatch">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt309_InspectionBatch">
               <MappingFragment StoreEntitySet="dt309_InspectionBatch">
@@ -3084,6 +3070,23 @@
                 <ScalarProperty Name="InitialQuantity" ColumnName="InitialQuantity" />
                 <ScalarProperty Name="MaterialId" ColumnName="MaterialId" />
                 <ScalarProperty Name="BatchId" ColumnName="BatchId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt309_Transactions">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt309_Transactions">
+              <MappingFragment StoreEntitySet="dt309_Transactions">
+                <ScalarProperty Name="NotifyDate" ColumnName="NotifyDate" />
+                <ScalarProperty Name="Desc" ColumnName="Desc" />
+                <ScalarProperty Name="UserDo" ColumnName="UserDo" />
+                <ScalarProperty Name="TotalQuantity" ColumnName="TotalQuantity" />
+                <ScalarProperty Name="AftQuantity" ColumnName="AftQuantity" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="TransactionType" ColumnName="TransactionType" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="MaterialId" ColumnName="MaterialId" />
+                <ScalarProperty Name="StorageId" ColumnName="StorageId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
