@@ -70,7 +70,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         private void InitializeIcon()
         {
-            btnAdd.ImageOptions.SvgImage = TPSvgimages.Add;
             btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
             btnExportExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
             barCbbDept.ImageOptions.SvgImage = TPSvgimages.Dept;
@@ -234,7 +233,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                                         TransactionType = "check",
                                         Quantity = (double)data.ActualQuantity,
                                         UserDo = TPConfigs.LoginUser.Id,
-                                        Desc = $"{batch.BatchName}，異常說明：{data.Description}",
+                                        Desc = $"定期盤點，異常說明：{data.Description}",
                                         StorageId = 1
                                     });
                                 }
@@ -299,7 +298,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             if (!Directory.Exists(documentsPath))
                 Directory.CreateDirectory(documentsPath);
 
-            string filePath = Path.Combine(documentsPath, $"盤點表 - {DateTime.Now:yyyyMMddHHmmss}.xlsx");
+            string filePath = Path.Combine(documentsPath, $"{(uploadDesc ? "異常表" : "盤點表")} - {DateTime.Now:yyyyMMddHHmmss}.xlsx");
 
             ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
 
