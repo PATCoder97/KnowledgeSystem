@@ -88,9 +88,9 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt204_InternalDocMgmt" Width="1.5" PointX="3.75" PointY="35.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_Departments" Width="1.5" PointX="5.375" PointY="0.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt308_CheckSession" Width="1.5" PointX="2.125" PointY="41" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt309_InspectionBatch" Width="1.5" PointX="11.875" PointY="44.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt309_InspectionBatchMaterial" Width="1.5" PointX="10.25" PointY="35.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt309_Transactions" Width="1.5" PointX="10.25" PointY="44.5" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt309_InspectionBatch" Width="1.5" PointX="11.875" PointY="35.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -792,7 +792,8 @@
           <Property Name="BatchName" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="ExpiryDate" Type="datetime" />
-          <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NotifyNo" Type="int" />
+          <Property Name="ReportDate" Type="date" />
         </EntityType>
         <EntityType Name="dt309_InspectionBatchMaterial">
           <Key>
@@ -1119,9 +1120,9 @@
           <EntitySet Name="dt204_InternalDocMgmt" EntityType="DBDocumentManagementSystemModel.dt204_InternalDocMgmt" />
           <EntitySet Name="dm_Departments" EntityType="DBDocumentManagementSystemModel.dm_Departments" />
           <EntitySet Name="dt308_CheckSession" EntityType="DBDocumentManagementSystemModel.dt308_CheckSession" />
-          <EntitySet Name="dt309_InspectionBatch" EntityType="DBDocumentManagementSystemModel.dt309_InspectionBatch" />
           <EntitySet Name="dt309_InspectionBatchMaterial" EntityType="DBDocumentManagementSystemModel.dt309_InspectionBatchMaterial" />
           <EntitySet Name="dt309_Transactions" EntityType="DBDocumentManagementSystemModel.dt309_Transactions" />
+          <EntitySet Name="dt309_InspectionBatch" EntityType="DBDocumentManagementSystemModel.dt309_InspectionBatch" />
         </EntityContainer>
         <EntityType Name="dm_Function">
           <Key>
@@ -2021,16 +2022,6 @@
           <Property Name="IdDept" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
           <Property Name="DataCollectionDate" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="dt309_InspectionBatch">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BatchName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ExpiryDate" Type="DateTime" Precision="3" />
-          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="dt309_InspectionBatchMaterial">
           <Key>
             <PropertyRef Name="Id" />
@@ -2060,6 +2051,17 @@
           <Property Name="UserDo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Desc" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="NotifyDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="dt309_InspectionBatch">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BatchName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ExpiryDate" Type="DateTime" Precision="3" />
+          <Property Name="NotifyNo" Type="Int32" />
+          <Property Name="ReportDate" Type="DateTime" Precision="0" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -3048,17 +3050,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dt309_InspectionBatch">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt309_InspectionBatch">
-              <MappingFragment StoreEntitySet="dt309_InspectionBatch">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="BatchName" ColumnName="BatchName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="dt309_InspectionBatchMaterial">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt309_InspectionBatchMaterial">
               <MappingFragment StoreEntitySet="dt309_InspectionBatchMaterial">
@@ -3087,6 +3078,18 @@
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="MaterialId" ColumnName="MaterialId" />
                 <ScalarProperty Name="StorageId" ColumnName="StorageId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt309_InspectionBatch">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt309_InspectionBatch">
+              <MappingFragment StoreEntitySet="dt309_InspectionBatch">
+                <ScalarProperty Name="ReportDate" ColumnName="ReportDate" />
+                <ScalarProperty Name="NotifyNo" ColumnName="NotifyNo" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="BatchName" ColumnName="BatchName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

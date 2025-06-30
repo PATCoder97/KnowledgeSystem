@@ -378,7 +378,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 CreatedDate = DateTime.Now,
                 BatchName = batchName,
                 ExpiryDate = DateTime.Now.AddDays(7),
-                Status = "待處理"
+                NotifyNo = 0
             });
 
             if (newBatchId != -1)

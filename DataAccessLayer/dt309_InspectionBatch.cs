@@ -18,6 +18,7 @@ namespace DataAccessLayer
         public string BatchName { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public Nullable<System.DateTime> ExpiryDate { get; set; }
-        public string Status { get; set; }
+        public Nullable<int> NotifyNo { get; set; }
+        public Nullable<System.DateTime> ReportDate { get; set; }
     }
 }
