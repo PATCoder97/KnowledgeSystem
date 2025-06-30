@@ -167,8 +167,8 @@ namespace KnowledgeSystem.Views._00_Generals
 
             if (TPConfigs.LoginUser.LastUpdate <= now - loginTimeout)
             {
-                XtraMessageBox.Show("登入已逾時，請重新登入！", "系統提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                GetUserLogin();
+                XtraMessageBox.Show("登入已逾時，請重新開啟應用程式以繼續！", "系統提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Close();
                 return;
             }
 
