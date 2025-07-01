@@ -192,7 +192,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             gcFiles.DataSource = sourceAtts;
             attachments = new List<Attachment>();
 
-            users = dm_UserBUS.Instance.GetListByDept(idDept2word).Where(r => r.Status == 0).ToList();
+            users = dm_UserBUS.Instance.GetListByDept("7").Where(r => r.Status == 0).ToList();
             jobTitles = dm_JobTitleBUS.Instance.GetList();
             roles = dt306_SignRoleBUS.Instance.GetList().Where(r => r.Id != 0).ToList();
 
