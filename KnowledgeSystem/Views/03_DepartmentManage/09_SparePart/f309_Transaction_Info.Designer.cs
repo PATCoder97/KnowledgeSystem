@@ -46,6 +46,8 @@
             this.txbStorageFromQuantity = new DevExpress.XtraEditors.TextEdit();
             this.cbbStorageTo = new DevExpress.XtraEditors.LookUpEdit();
             this.txbStorageToQuantity = new DevExpress.XtraEditors.TextEdit();
+            this.txbPrice = new DevExpress.XtraEditors.TextEdit();
+            this.txbExpDate = new DevExpress.XtraEditors.DateEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.lcDesc = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcStorageFrom = new DevExpress.XtraLayout.LayoutControlItem();
@@ -53,9 +55,7 @@
             this.lcStorageFromQuantity = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcStorageToQuantity = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcQuantity = new DevExpress.XtraLayout.LayoutControlItem();
-            this.txbPrice = new DevExpress.XtraEditors.TextEdit();
             this.lcPrice = new DevExpress.XtraLayout.LayoutControlItem();
-            this.txbExpDate = new DevExpress.XtraEditors.DateEdit();
             this.lcExpDate = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
@@ -66,6 +66,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.txbStorageFromQuantity.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbStorageTo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbStorageToQuantity.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbPrice.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbExpDate.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbExpDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDesc)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcStorageFrom)).BeginInit();
@@ -73,10 +76,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcStorageFromQuantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcStorageToQuantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcQuantity)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbPrice.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcPrice)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbExpDate.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbExpDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcExpDate)).BeginInit();
             this.SuspendLayout();
             // 
@@ -311,6 +311,40 @@
             this.txbStorageToQuantity.StyleController = this.layoutControl1;
             this.txbStorageToQuantity.TabIndex = 9;
             // 
+            // txbPrice
+            // 
+            this.txbPrice.EditValue = "0";
+            this.txbPrice.Location = new System.Drawing.Point(100, 156);
+            this.txbPrice.Name = "txbPrice";
+            this.txbPrice.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.txbPrice.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.txbPrice.Properties.Appearance.Options.UseFont = true;
+            this.txbPrice.Properties.Appearance.Options.UseForeColor = true;
+            this.txbPrice.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
+            this.txbPrice.Properties.MaskSettings.Set("mask", "N0");
+            this.txbPrice.Properties.MaskSettings.Set("autoHideDecimalSeparator", null);
+            this.txbPrice.Properties.UseMaskAsDisplayFormat = true;
+            this.txbPrice.Size = new System.Drawing.Size(286, 32);
+            this.txbPrice.StyleController = this.layoutControl1;
+            this.txbPrice.TabIndex = 9;
+            // 
+            // txbExpDate
+            // 
+            this.txbExpDate.EditValue = null;
+            this.txbExpDate.Location = new System.Drawing.Point(100, 192);
+            this.txbExpDate.Name = "txbExpDate";
+            this.txbExpDate.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.txbExpDate.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.txbExpDate.Properties.Appearance.Options.UseFont = true;
+            this.txbExpDate.Properties.Appearance.Options.UseForeColor = true;
+            this.txbExpDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txbExpDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txbExpDate.Size = new System.Drawing.Size(286, 32);
+            this.txbExpDate.StyleController = this.layoutControl1;
+            this.txbExpDate.TabIndex = 14;
+            // 
             // Root
             // 
             this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
@@ -441,23 +475,6 @@
             this.lcQuantity.Text = "事件數量";
             this.lcQuantity.TextSize = new System.Drawing.Size(76, 24);
             // 
-            // txbPrice
-            // 
-            this.txbPrice.EditValue = "0";
-            this.txbPrice.Location = new System.Drawing.Point(100, 156);
-            this.txbPrice.Name = "txbPrice";
-            this.txbPrice.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.txbPrice.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.txbPrice.Properties.Appearance.Options.UseFont = true;
-            this.txbPrice.Properties.Appearance.Options.UseForeColor = true;
-            this.txbPrice.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
-            this.txbPrice.Properties.MaskSettings.Set("mask", "N0");
-            this.txbPrice.Properties.MaskSettings.Set("autoHideDecimalSeparator", null);
-            this.txbPrice.Properties.UseMaskAsDisplayFormat = true;
-            this.txbPrice.Size = new System.Drawing.Size(286, 32);
-            this.txbPrice.StyleController = this.layoutControl1;
-            this.txbPrice.TabIndex = 9;
-            // 
             // lcPrice
             // 
             this.lcPrice.AllowHtmlStringInCaption = true;
@@ -473,25 +490,8 @@
             this.lcPrice.Location = new System.Drawing.Point(0, 144);
             this.lcPrice.Name = "lcPrice";
             this.lcPrice.Size = new System.Drawing.Size(378, 36);
-            this.lcPrice.Text = "事件數量";
+            this.lcPrice.Text = "新單價";
             this.lcPrice.TextSize = new System.Drawing.Size(76, 24);
-            // 
-            // txbExpDate
-            // 
-            this.txbExpDate.EditValue = null;
-            this.txbExpDate.Location = new System.Drawing.Point(100, 192);
-            this.txbExpDate.Name = "txbExpDate";
-            this.txbExpDate.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.txbExpDate.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.txbExpDate.Properties.Appearance.Options.UseFont = true;
-            this.txbExpDate.Properties.Appearance.Options.UseForeColor = true;
-            this.txbExpDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txbExpDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txbExpDate.Size = new System.Drawing.Size(286, 32);
-            this.txbExpDate.StyleController = this.layoutControl1;
-            this.txbExpDate.TabIndex = 14;
             // 
             // lcExpDate
             // 
@@ -535,6 +535,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.txbStorageFromQuantity.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbStorageTo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbStorageToQuantity.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbPrice.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbExpDate.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbExpDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDesc)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcStorageFrom)).EndInit();
@@ -542,10 +545,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcStorageFromQuantity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcStorageToQuantity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcQuantity)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbPrice.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcPrice)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbExpDate.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbExpDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcExpDate)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

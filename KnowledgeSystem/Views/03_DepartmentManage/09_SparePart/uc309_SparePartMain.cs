@@ -180,6 +180,23 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 }
             };
             gvTransactions.FormatRules.Add(ruleIconSet);
+
+            var ruleUserError = new GridFormatRule
+            {
+                Column = gColUserMngr,
+                Name = "RuleUserError",
+                Rule = new FormatConditionRuleExpression
+                {
+                    Expression = "[UserError] == true",
+                    Appearance =
+                    {
+                        BackColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical,
+                        BackColor2 = Color.White,
+                        Options = { UseBackColor = true }
+                    }
+                }
+            };
+            gvData.FormatRules.Add(ruleUserError);
         }
 
         DXMenuItem CreateMenuItem(string caption, EventHandler clickEvent, SvgImage svgImage)
@@ -369,13 +386,20 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 materials = dt309_MaterialsBUS.Instance.GetListByStartIdDept(deptGetData);
                 var materialsRechecking = dt309_InspectionBatchMaterialBUS.Instance.GetListRechecking().Select(r => r.MaterialId).ToList();
 
-                var displayData = materials.Where(r => !materialsRechecking.Contains(r.Id))
-                    .Select(x => new
+                var displayData = materials
+                    .Where(r => !materialsRechecking.Contains(r.Id))
+                    .Select(x =>
                     {
-                        data = x,
-                        Unit = units.FirstOrDefault(u => u.Id == x.IdUnit).DisplayName,
-                        UserMngr = users.FirstOrDefault(u => u.Id == x.IdManager).DisplayName,
-                    }).ToList();
+                        var userMngr = users.FirstOrDefault(u => u.Id == x.IdManager);
+                        return new
+                        {
+                            data = x,
+                            Unit = units.FirstOrDefault(u => u.Id == x.IdUnit)?.DisplayName,
+                            UserMngr = userMngr != null ? $"{userMngr.IdDepartment}/{userMngr.DisplayName}" : "",
+                            UserError = userMngr != null ? userMngr.Status != 0 || userMngr.IdDepartment != x.IdDept : false
+                        };
+                    })
+                    .ToList();
 
                 sourceBases.DataSource = displayData;
 

@@ -63,7 +63,7 @@
             this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn18 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn19 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColUserMngr = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
@@ -365,7 +365,7 @@
             this.gridColumn16,
             this.gridColumn17,
             this.gridColumn18,
-            this.gridColumn19,
+            this.gColUserMngr,
             this.gridColumn6,
             this.gridColumn8});
             this.gvData.GridControl = this.gcData;
@@ -413,7 +413,7 @@
             // 
             // gridColumn3
             // 
-            this.gridColumn3.Caption = "備品用途";
+            this.gridColumn3.Caption = "用途";
             this.gridColumn3.FieldName = "data.TypeUse";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
@@ -484,13 +484,13 @@
             this.gridColumn18.Visible = true;
             this.gridColumn18.VisibleIndex = 10;
             // 
-            // gridColumn19
+            // gColUserMngr
             // 
-            this.gridColumn19.Caption = "管理人";
-            this.gridColumn19.FieldName = "UserMngr";
-            this.gridColumn19.Name = "gridColumn19";
-            this.gridColumn19.Visible = true;
-            this.gridColumn19.VisibleIndex = 11;
+            this.gColUserMngr.Caption = "管理人";
+            this.gColUserMngr.FieldName = "UserMngr";
+            this.gColUserMngr.Name = "gColUserMngr";
+            this.gColUserMngr.Visible = true;
+            this.gColUserMngr.VisibleIndex = 11;
             // 
             // gridColumn6
             // 
@@ -783,7 +783,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn16;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn17;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn18;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn19;
+        private DevExpress.XtraGrid.Columns.GridColumn gColUserMngr;
         private DevExpress.XtraGrid.Columns.GridColumn gColIdMaterial;
         private DevExpress.XtraGrid.Views.Grid.GridView gvMachine;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn20;

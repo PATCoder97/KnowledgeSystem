@@ -109,7 +109,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             btnResumeWork.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             btnJobChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             btnPersonnelChanges.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                        
+
             switch (eventInfo)
             {
                 case EventFormInfo.Create:
@@ -315,7 +315,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
                 // Lấy các thông tin người dùng từ giao diện
                 userInfo.DisplayName = txbUserNameTW.EditValue?.ToString().Trim();
-                userInfo.DisplayNameVN = textInfo.ToTitleCase(txbUserNameVN.EditValue?.ToString().Trim().ToLower());
+                userInfo.DisplayNameVN = textInfo.ToTitleCase(txbUserNameVN.EditValue?.ToString().Trim().ToLower() ?? "");
                 userInfo.IdDepartment = cbbDept.EditValue?.ToString();
                 userInfo.JobCode = cbbJobTitle.EditValue?.ToString();
                 userInfo.DOB = txbDOB.DateTime;
@@ -450,28 +450,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                                 int idGroup = dm_GroupBUS.Instance.GetItemByName($"處務室{userInfo.IdDepartment.Substring(0, 2)}")?.Id ?? -1;
                                 var usersInGroup = dm_GroupUserBUS.Instance.GetListByIdGroup(idGroup);
                                 string toUsers = string.Join(",", usersInGroup.Select(r => $"{r.IdUser}@VNFPG"));
-
-                                //using (ExcelPackage pck = new ExcelPackage())
-                                //{
-                                //    pck.Workbook.Properties.Author = "VNW0014732";
-                                //    pck.Workbook.Properties.Company = "FHS";
-                                //    pck.Workbook.Properties.Title = "Exported by Phan Anh Tuan";
-                                //    ExcelWorksheet ws = pck.Workbook.Worksheets.Add("DATA");
-
-                                //    var exportData = from data in certificatesToInvalidate
-                                //                     join course in courses on data.IdCourse equals course.Id
-                                //                     select  new
-                                //                     {
-                                //                         課程代號= data.IdCourse,
-                                //                         課程名稱 = course.DisplayName,
-                                //                         證照期限 = data.ExpDate
-                                //                     }
-
-                                //    ws.Cells["A1"].LoadFromCollection(lsQueryFile52, false);
-                                //    string savePath = Path.Combine(pathDocument, $"附件05.2：.複訓之提報需求人員名單.xlsx");
-                                //    FileInfo excelFile = new FileInfo(savePath);
-                                //    pck.SaveAs(excelFile);
-                                //}
 
                                 // Lưu vào bảng Mail để service gửi Notes
                                 var mail = new sys_NotesMail()
@@ -730,7 +708,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             editor.Properties.Appearance.ForeColor = Color.Black;
             editor.Properties.NullText = "";
             editor.Properties.PopupView = editView;
-            
+
             var result = XtraInputBox.Show(args);
             if (result == null) return;
 
@@ -738,7 +716,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
             cbbJobTitle.EditValue = idJobChange;
 
-            eventInfo = EventFormInfo.Update;            
+            eventInfo = EventFormInfo.Update;
             _eventUpdate = UpdateEvent.JobChange;
             LockControl();
 
