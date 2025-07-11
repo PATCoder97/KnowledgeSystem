@@ -580,6 +580,7 @@
           <Property Name="DisplayName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Duration" Type="int" />
           <Property Name="Category" Type="nvarchar" MaxLength="16" />
+          <Property Name="TypeOf" Type="nvarchar" MaxLength="64" />
         </EntityType>
         <EntityType Name="dt302_Base">
           <Key>
@@ -1061,7 +1062,6 @@
           <EntitySet Name="dm_Progress" EntityType="DBDocumentManagementSystemModel.dm_Progress" />
           <EntitySet Name="dm_JobTitle" EntityType="DBDocumentManagementSystemModel.dm_JobTitle" />
           <EntitySet Name="dt301_CertReqSetting" EntityType="DBDocumentManagementSystemModel.dt301_CertReqSetting" />
-          <EntitySet Name="dt301_Course" EntityType="DBDocumentManagementSystemModel.dt301_Course" />
           <EntitySet Name="dt301_Base" EntityType="DBDocumentManagementSystemModel.dt301_Base" />
           <EntitySet Name="sys_NotesMail" EntityType="DBDocumentManagementSystemModel.sys_NotesMail" />
           <EntitySet Name="dm_Attachment" EntityType="DBDocumentManagementSystemModel.dm_Attachment" />
@@ -1123,6 +1123,7 @@
           <EntitySet Name="dt309_InspectionBatchMaterial" EntityType="DBDocumentManagementSystemModel.dt309_InspectionBatchMaterial" />
           <EntitySet Name="dt309_Transactions" EntityType="DBDocumentManagementSystemModel.dt309_Transactions" />
           <EntitySet Name="dt309_InspectionBatch" EntityType="DBDocumentManagementSystemModel.dt309_InspectionBatch" />
+          <EntitySet Name="dt301_Course" EntityType="DBDocumentManagementSystemModel.dt301_Course" />
         </EntityContainer>
         <EntityType Name="dm_Function">
           <Key>
@@ -1366,15 +1367,6 @@
           <Property Name="NewHeadcount" Type="Int32" />
           <Property Name="ActualHeadcount" Type="Int32" />
           <Property Name="ReqQuantity" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="dt301_Course">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
-          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Duration" Type="Int32" />
-          <Property Name="Category" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="dt301_Base">
           <Key>
@@ -2063,6 +2055,16 @@
           <Property Name="NotifyNo" Type="Int32" />
           <Property Name="ReportDate" Type="DateTime" Precision="0" />
         </EntityType>
+        <EntityType Name="dt301_Course">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Duration" Type="Int32" />
+          <Property Name="Category" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="TypeOf" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2332,16 +2334,6 @@
                 <ScalarProperty Name="IdCourse" ColumnName="IdCourse" />
                 <ScalarProperty Name="IdJobTitle" ColumnName="IdJobTitle" />
                 <ScalarProperty Name="IdDept" ColumnName="IdDept" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="dt301_Course">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt301_Course">
-              <MappingFragment StoreEntitySet="dt301_Course">
-                <ScalarProperty Name="Category" ColumnName="Category" />
-                <ScalarProperty Name="Duration" ColumnName="Duration" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -3090,6 +3082,17 @@
                 <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="BatchName" ColumnName="BatchName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt301_Course">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt301_Course">
+              <MappingFragment StoreEntitySet="dt301_Course">
+                <ScalarProperty Name="TypeOf" ColumnName="TypeOf" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -38,6 +38,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
             txbDisplayName.Enabled = _enable;
             txbDuration.Enabled = _enable;
             cbbCategory.Enabled = _enable;
+            cbbTypeOf.Enabled = _enable;
         }
 
         private void LockControl()
@@ -91,6 +92,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
             List<string> lsCategories = new List<string>() { "第一類", "第二類", "第三類", "第四類", "第五類", "第六類", "其他" };
             cbbCategory.Properties.Items.AddRange(lsCategories);
 
+            List<string> typeOfs = new List<string>() { "勞動安全衛生證照及職業執照訓練", "輻射操作人員安全訓練", "化學藥劑安全教育訓練", "消防及救難救護業務" };
+            cbbTypeOf.Properties.Items.AddRange(typeOfs);
+
             switch (_eventInfo)
             {
                 case EventFormInfo.Create:
@@ -102,6 +106,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                     txbDisplayName.EditValue = _course.DisplayName;
                     txbDuration.EditValue = _course.Duration;
                     cbbCategory.EditValue = _course.Category;
+                    cbbTypeOf.EditValue = _course.TypeOf;
                     break;
                 default:
                     break;
@@ -120,6 +125,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
             string newDisplayName = txbDisplayName.EditValue?.ToString();
             int duration = Convert.ToInt16(txbDuration.EditValue?.ToString());
             string category = cbbCategory.EditValue?.ToString();
+            string typeOf = cbbTypeOf.EditValue?.ToString();
 
             if (string.IsNullOrEmpty(newId) || string.IsNullOrEmpty(newDisplayName))
             {
@@ -135,6 +141,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                 _course.DisplayName = newDisplayName;
                 _course.Duration = duration;
                 _course.Category = category;
+                _course.TypeOf = typeOf;
 
                 msg = $"{_course.Id} {_course.DisplayName}";
                 switch (_eventInfo)

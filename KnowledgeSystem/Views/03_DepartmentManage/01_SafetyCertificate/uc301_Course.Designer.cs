@@ -47,6 +47,7 @@
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -195,6 +196,7 @@
             this.gridColumn3,
             this.gridColumn4,
             this.gridColumn2,
+            this.gridColumn5,
             this.gridColumn1});
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
@@ -212,6 +214,7 @@
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 0;
+            this.gridColumn3.Width = 120;
             // 
             // gridColumn4
             // 
@@ -220,6 +223,7 @@
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 1;
+            this.gridColumn4.Width = 111;
             // 
             // gridColumn2
             // 
@@ -228,6 +232,7 @@
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 2;
+            this.gridColumn2.Width = 106;
             // 
             // gridColumn1
             // 
@@ -235,7 +240,8 @@
             this.gridColumn1.FieldName = "Duration";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 3;
+            this.gridColumn1.VisibleIndex = 4;
+            this.gridColumn1.Width = 106;
             // 
             // Root
             // 
@@ -255,6 +261,15 @@
             this.layoutControlItem1.Size = new System.Drawing.Size(854, 507);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
+            // 
+            // gridColumn5
+            // 
+            this.gridColumn5.Caption = "課程類型";
+            this.gridColumn5.FieldName = "TypeOf";
+            this.gridColumn5.Name = "gridColumn5";
+            this.gridColumn5.Visible = true;
+            this.gridColumn5.VisibleIndex = 3;
+            this.gridColumn5.Width = 115;
             // 
             // uc301_Course
             // 
@@ -301,5 +316,6 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
     }
 }

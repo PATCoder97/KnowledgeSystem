@@ -48,6 +48,8 @@
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.cbbTypeOf = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -60,6 +62,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbTypeOf.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             this.SuspendLayout();
             // 
             // barManagerTP
@@ -139,7 +143,7 @@
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 214);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 250);
             this.barDockControlBottom.Manager = this.barManagerTP;
             this.barDockControlBottom.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.barDockControlBottom.Size = new System.Drawing.Size(495, 0);
@@ -151,7 +155,7 @@
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 49);
             this.barDockControlLeft.Manager = this.barManagerTP;
             this.barDockControlLeft.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 165);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 201);
             // 
             // barDockControlRight
             // 
@@ -160,7 +164,7 @@
             this.barDockControlRight.Location = new System.Drawing.Point(495, 49);
             this.barDockControlRight.Manager = this.barManagerTP;
             this.barDockControlRight.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 165);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 201);
             // 
             // layoutControl1
             // 
@@ -168,11 +172,12 @@
             this.layoutControl1.Controls.Add(this.txbId);
             this.layoutControl1.Controls.Add(this.txbDuration);
             this.layoutControl1.Controls.Add(this.cbbCategory);
+            this.layoutControl1.Controls.Add(this.cbbTypeOf);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(495, 165);
+            this.layoutControl1.Size = new System.Drawing.Size(495, 201);
             this.layoutControl1.TabIndex = 5;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -258,9 +263,10 @@
             this.layoutControlItem3,
             this.layoutControlItem4,
             this.layoutControlItem1,
-            this.layoutControlItem2});
+            this.layoutControlItem2,
+            this.layoutControlItem5});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(495, 165);
+            this.Root.Size = new System.Drawing.Size(495, 201);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem3
@@ -320,9 +326,43 @@
             this.layoutControlItem2.Control = this.cbbCategory;
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 108);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(475, 37);
+            this.layoutControlItem2.Size = new System.Drawing.Size(475, 36);
             this.layoutControlItem2.Text = "課程類別";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(76, 24);
+            // 
+            // cbbTypeOf
+            // 
+            this.cbbTypeOf.Location = new System.Drawing.Point(100, 156);
+            this.cbbTypeOf.Name = "cbbTypeOf";
+            this.cbbTypeOf.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.cbbTypeOf.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.cbbTypeOf.Properties.Appearance.Options.UseFont = true;
+            this.cbbTypeOf.Properties.Appearance.Options.UseForeColor = true;
+            this.cbbTypeOf.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbTypeOf.Properties.AppearanceDropDown.Options.UseFont = true;
+            this.cbbTypeOf.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbbTypeOf.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.cbbTypeOf.Size = new System.Drawing.Size(383, 32);
+            this.cbbTypeOf.StyleController = this.layoutControl1;
+            this.cbbTypeOf.TabIndex = 9;
+            // 
+            // layoutControlItem5
+            // 
+            this.layoutControlItem5.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.layoutControlItem5.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem5.AppearanceItemCaption.Options.UseFont = true;
+            this.layoutControlItem5.AppearanceItemCaption.Options.UseForeColor = true;
+            this.layoutControlItem5.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.layoutControlItem5.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.layoutControlItem5.Control = this.cbbTypeOf;
+            this.layoutControlItem5.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.layoutControlItem5.CustomizationFormText = "課程類別";
+            this.layoutControlItem5.Location = new System.Drawing.Point(0, 144);
+            this.layoutControlItem5.Name = "layoutControlItem5";
+            this.layoutControlItem5.Size = new System.Drawing.Size(475, 37);
+            this.layoutControlItem5.Text = "課程類型";
+            this.layoutControlItem5.TextSize = new System.Drawing.Size(76, 24);
             // 
             // f301_CourseInfo
             // 
@@ -330,7 +370,7 @@
             this.Appearance.Options.UseBackColor = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(495, 214);
+            this.ClientSize = new System.Drawing.Size(495, 250);
             this.Controls.Add(this.layoutControl1);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
@@ -354,6 +394,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbTypeOf.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -379,5 +421,7 @@
         private DevExpress.XtraEditors.SpinEdit txbDuration;
         private DevExpress.XtraEditors.ComboBoxEdit cbbCategory;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
+        private DevExpress.XtraEditors.ComboBoxEdit cbbTypeOf;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
     }
 }

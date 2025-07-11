@@ -49,7 +49,6 @@ namespace DataAccessLayer
         public virtual DbSet<dm_Progress> dm_Progress { get; set; }
         public virtual DbSet<dm_JobTitle> dm_JobTitle { get; set; }
         public virtual DbSet<dt301_CertReqSetting> dt301_CertReqSetting { get; set; }
-        public virtual DbSet<dt301_Course> dt301_Course { get; set; }
         public virtual DbSet<dt301_Base> dt301_Base { get; set; }
         public virtual DbSet<sys_NotesMail> sys_NotesMail { get; set; }
         public virtual DbSet<dm_Attachment> dm_Attachment { get; set; }
@@ -111,5 +110,6 @@ namespace DataAccessLayer
         public virtual DbSet<dt309_InspectionBatchMaterial> dt309_InspectionBatchMaterial { get; set; }
         public virtual DbSet<dt309_Transactions> dt309_Transactions { get; set; }
         public virtual DbSet<dt309_InspectionBatch> dt309_InspectionBatch { get; set; }
+        public virtual DbSet<dt301_Course> dt301_Course { get; set; }
     }
 }

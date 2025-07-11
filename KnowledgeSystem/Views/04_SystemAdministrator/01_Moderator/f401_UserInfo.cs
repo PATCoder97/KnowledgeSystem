@@ -4,6 +4,7 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraSplashScreen;
+using DocumentFormat.OpenXml.Spreadsheet;
 using KnowledgeSystem.Helpers;
 using Newtonsoft.Json;
 using OfficeOpenXml;
@@ -16,11 +17,14 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Management.Instrumentation;
 using System.Net;
 using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml.XPath;
+using Color = System.Drawing.Color;
+using Font = System.Drawing.Font;
 
 namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 {
@@ -461,7 +465,20 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                                 };
                                 sys_NotesMailBUS.Instance.Add(mail);
 
-                                // [201]
+                                // [309] Thông báo người quản lý kho  chuyển bộ phận
+                                idGroup = dm_GroupBUS.Instance.GetListByName("機邊庫").Where(r => r.IdDept == oldUserData.IdDepartment).FirstOrDefault()?.Id ?? -1;
+                                usersInGroup = dm_GroupUserBUS.Instance.GetListByIdGroup(idGroup);
+                                toUsers = string.Join(",", usersInGroup.Select(r => $"{r.IdUser}@VNFPG"));
+                                mail = new sys_NotesMail()
+                                {
+                                    Thread = "309",
+                                    Subjects = $"機邊庫系統通知：偵測到「{oldUserData.IdDepartment}/{oldUserData.DisplayName}」已離開原部門，請確認物料管理權限",
+                                    Content = $"{oldUserData.IdDepartment}/{oldUserData.DisplayName}",
+                                    ToUsers = toUsers,
+                                };
+                                sys_NotesMailBUS.Instance.Add(mail);
+
+                                // [201] Thông báo về sự biến động nhân sự của ISO
                                 updateReq.TypeChange = "新進";
                                 updateReq.Describe = $"調任從「{templateData.deptfrom}」到「{templateData.deptto}」";
                                 dt201_UpdateUsrReqBUS.Instance.Add(updateReq);
@@ -481,6 +498,19 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
                                     dt301_BaseBUS.Instance.AddOrUpdate(cert);
                                 }
+
+                                // [309] Thông báo người quản lý kho nghỉ việc
+                                idGroup = dm_GroupBUS.Instance.GetListByName("機邊庫").Where(r => r.IdDept == userInfo.IdDepartment).FirstOrDefault()?.Id ?? -1;
+                                usersInGroup = dm_GroupUserBUS.Instance.GetListByIdGroup(idGroup);
+                                toUsers = string.Join(",", usersInGroup.Select(r => $"{r.IdUser}@VNFPG"));
+                                mail = new sys_NotesMail()
+                                {
+                                    Thread = "309",
+                                    Subjects = $"機邊庫系統通知：偵測到「{userInfo.IdDepartment}/{userInfo.DisplayName}」已離開原部門，請確認物料管理權限",
+                                    Content = $"{userInfo.IdDepartment}/{userInfo.DisplayName}",
+                                    ToUsers = toUsers,
+                                };
+                                sys_NotesMailBUS.Instance.Add(mail);
 
                                 // [201]
                                 updateReq.TypeChange = "離職";
