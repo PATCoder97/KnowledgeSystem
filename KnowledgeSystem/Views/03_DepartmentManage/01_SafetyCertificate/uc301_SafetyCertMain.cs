@@ -63,6 +63,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
             public string UserName { get; set; }
             public string JobName { get; set; }
             public string CourseName { get; set; }
+            public string TypeOf { get; set; }
         }
 
         private void InitializeIcon()
@@ -112,7 +113,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                                   UserName = urs.DisplayName,
                                   JobName = data.IdJobTitle + job.DisplayName,
                                   CourseName = data.IdCourse + course.DisplayName,
-                                  CertSuspended = data.CertSuspended
+                                  CertSuspended = data.CertSuspended,
+                                  TypeOf = course.TypeOf
                               }).ToList();
 
             sourceBases.DataSource = lsBasesDisplay;
@@ -133,13 +135,16 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                 if (!Directory.Exists(pathExcel))
                     Directory.CreateDirectory(pathExcel);
 
+                var dataRawStatics = lsBasesDisplay.Where(r => r.TypeOf == typeOf).ToList();
+                var courseByType = lsCourses.Where(r => r.TypeOf == typeOf).ToList();
+
                 // xử lý theo từng loại bằng an toàn
                 int idCounter = 1;
                 // 附件04：各處提報訓練明細
-                var lsDataFile4 = (from data in lsBasesDisplay
+                var lsDataFile4 = (from data in dataRawStatics
                                    join usr in lsAllUser on data.IdUser equals usr.Id
                                    //join dept in lsDept on usr.IdDepartment equals dept.Id
-                                   join course in lsCourses on data.IdCourse equals course.Id
+                                   join course in courseByType on data.IdCourse equals course.Id
                                    select new
                                    {
                                        部門代號 = usr.IdDepartment,
@@ -164,7 +169,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
 
                 var lsCertReqs = dt301_CertReqSetBUS.Instance.GetListByDept(idDept2word);
 
-                var lsCountDataBase = (from data in lsBasesDisplay
+                var lsCountDataBase = (from data in dataRawStatics
                                        group data by new { data.IdJobTitle, data.IdCourse } into g
                                        select new
                                        {
@@ -197,7 +202,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                 var lsDataFile3 = (from dt in lsCountByCertReqs
                                    join dept in lsDept on dt.IdDept equals dept.Id
                                    join job in lsJobs on dt.IdJobTitle equals job.Id
-                                   join course in lsCourses on dt.IdCourse equals course.Id
+                                   join course in courseByType on dt.IdCourse equals course.Id
                                    select new
                                    {
                                        Id = idCounter++,
@@ -218,7 +223,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                 // 附件05.2：複訓之提報需求人員名單
                 idCounter = 1;
 
-                var lsQueryFile52 = (from data in lsBasesDisplay
+                var lsQueryFile52 = (from data in dataRawStatics
                                      where data.ValidLicense && (data.ExpDate.HasValue ? (data.ExpDate <= endOfQuarter) : false)
                                      join usr in lsUser on data.IdUser equals usr.Id
                                      join dept in lsDept on usr.IdDepartment equals dept.Id
@@ -246,7 +251,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                 var lsQueryFile51 = (from data in lsData51
                                      join usr in lsUser on data.IdUser equals usr.Id
                                      join dept in lsDept on usr.IdDepartment equals dept.Id
-                                     join course in lsCourses on data.IdCourse equals course.Id
+                                     join course in courseByType on data.IdCourse equals course.Id
                                      join job in lsJobs on usr.JobCode equals job.Id
                                      select new
                                      {
@@ -302,18 +307,18 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
 
                 // 附件01：工安類證照取得情形一覽表
                 List<string> lsDataFile1 = new List<string>()
-            {
-                "1",
-                "冶金部",
-                lsDept.FirstOrDefault(r => r.Id == idDept2word).DisplayName,
-                lsDataFile2.Sum(r => r.TotalReqQuantity).ToString(),
-                $"{lsDataFile2.Sum(r => r.ValidLicense)}",
-                $"{lsDataFile2.Sum(r => r.FirstTrain) + lsDataFile2.Sum(r => r.ReTrain)}",
-                $"{lsBasesDisplay.Count(r=>r.CertSuspended)}",
-            };
+                {
+                    "1",
+                    "冶金部",
+                    lsDept.FirstOrDefault(r => r.Id == idDept2word).DisplayName,
+                    lsDataFile2.Sum(r => r.TotalReqQuantity).ToString(),
+                    $"{lsDataFile2.Sum(r => r.ValidLicense)}",
+                    $"{lsDataFile2.Sum(r => r.FirstTrain) + lsDataFile2.Sum(r => r.ReTrain)}",
+                    $"{dataRawStatics.Count(r=>r.CertSuspended)}",
+                };
 
                 // 附件06：派訓數量統計.xlsx
-                var lsCountBAKCertExp = (from data in lsBasesDisplay
+                var lsCountBAKCertExp = (from data in dataRawStatics
                                          where data.BackupLicense && (data.ExpDate.HasValue ? (data.ExpDate <= endOfQuarter) : false)
                                          group data by data.IdCourse into g
                                          select new
@@ -323,7 +328,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                                          }).ToList();
 
                 var lsDataFile6 = (from data in lsDataFile2
-                                   join course in lsCourses on data.IdCourse equals course.Id
+                                   join course in courseByType on data.IdCourse equals course.Id
                                    select new // Lấy các thông tin học lần đầu, học lại, số người thiếu
                                    {
                                        data.IdCourse,
@@ -435,7 +440,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                     ws.Cells["A1:I5"].Style.Border.Right.Style = ExcelBorderStyle.Thin;
                     ws.Cells["A1:I5"].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
 
-                    string savePath = Path.Combine(pathDocument, $"附件01：工安類證照取得情形一覽表.xlsx");
+                    string savePath = Path.Combine(pathExcel, $"附件01：工安類證照取得情形一覽表.xlsx");
                     FileInfo excelFile = new FileInfo(savePath);
                     pck.SaveAs(excelFile);
                 }
@@ -510,7 +515,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                     }
                     ws.Calculate();
 
-                    string savePath = Path.Combine(pathDocument, $"附件02：工安類證照統計表.xlsx");
+                    string savePath = Path.Combine(pathExcel, $"附件02：工安類證照統計表.xlsx");
                     FileInfo excelFile = new FileInfo(savePath);
                     pck.SaveAs(excelFile);
                 }
@@ -592,7 +597,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                     ws.Cells["B3:M3"].Merge = true;
                     ws.Cells["B4:M4"].Merge = true;
 
-                    string savePath = Path.Combine(pathDocument, $"附件03：各廠提報資料.xlsx");
+                    string savePath = Path.Combine(pathExcel, $"附件03：各廠提報資料.xlsx");
                     FileInfo excelFile = new FileInfo(savePath);
                     pck.SaveAs(excelFile);
                 }
@@ -647,7 +652,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                     ws.Calculate();
                     ws.Cells[ws.Dimension.Address].AutoFitColumns();
 
-                    string savePath = Path.Combine(pathDocument, $"附件04：各處提報訓練明細.xlsx");
+                    string savePath = Path.Combine(pathExcel, $"附件04：各處提報訓練明細.xlsx");
                     FileInfo excelFile = new FileInfo(savePath);
                     pck.SaveAs(excelFile);
                 }
@@ -722,7 +727,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                     // Xoá 2 cột dư
                     ws.DeleteColumn(13, 2);
 
-                    string savePath = Path.Combine(pathDocument, $"附件05.2：.複訓之提報需求人員名單.xlsx");
+                    string savePath = Path.Combine(pathExcel, $"附件05.2：.複訓之提報需求人員名單.xlsx");
                     FileInfo excelFile = new FileInfo(savePath);
                     pck.SaveAs(excelFile);
 
@@ -741,7 +746,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                         // Xoá 2 cột dư
                         ws.DeleteColumn(13, 2);
 
-                        savePath = Path.Combine(pathDocument, $"附件05.1：初訓之提報需求人員名單.xlsx");
+                        savePath = Path.Combine(pathExcel, $"附件05.1：初訓之提報需求人員名單.xlsx");
                         excelFile = new FileInfo(savePath);
                         pck.SaveAs(excelFile);
                     }
@@ -818,7 +823,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
                     foreach (var indexRow in lsRowBolds)
                         ws.Row(indexRow).Style.Font.Bold = true;
 
-                    string savePath = Path.Combine(pathDocument, $"附件06：派訓數量統計.xlsx");
+                    string savePath = Path.Combine(pathExcel, $"附件06：派訓數量統計.xlsx");
                     FileInfo excelFile = new FileInfo(savePath);
                     pck.SaveAs(excelFile);
                 }
