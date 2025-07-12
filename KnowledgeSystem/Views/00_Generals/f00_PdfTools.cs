@@ -263,6 +263,7 @@ namespace KnowledgeSystem.Views._00_Generals
         {
             Text = "PDF工具";
             pdfViewer.LoadDocument(filePath);
+            //pdfViewer.CursorMode = PdfCursorMode.HandTool;
 
             // Load các chữ ký, con dấu
             var signUsrs = dm_SignUsersBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id).ToList();

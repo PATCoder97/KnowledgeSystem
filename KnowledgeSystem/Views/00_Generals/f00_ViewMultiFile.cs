@@ -108,7 +108,8 @@ namespace KnowledgeSystem.Views._00_Generals
                         viewPDF.Name = "viewPDF";
                         viewPDF.NavigationPanePageVisibility = PdfNavigationPanePageVisibility.None;
                         viewPDF.PopupMenuShowing += new PdfPopupMenuShowingEventHandler(viewPDF_PopupMenuShowing);
-                        viewPDF.KeyDown += new KeyEventHandler(Viewer_KeyDown);
+                        //viewPDF.KeyDown += new KeyEventHandler(Viewer_KeyDown);
+                        viewPDF.CursorMode = PdfCursorMode.HandTool;
                         viewPDF.Dock = DockStyle.Fill;
                         viewPDF.DocumentFilePath = filePath;
 
@@ -204,7 +205,7 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void viewPDF_PopupMenuShowing(object sender, PdfPopupMenuShowingEventArgs e)
         {
-            e.ItemLinks.Clear();
+           // e.ItemLinks.Clear();
         }
 
         private void f00_ViewMultiFile_Load(object sender, EventArgs e)
