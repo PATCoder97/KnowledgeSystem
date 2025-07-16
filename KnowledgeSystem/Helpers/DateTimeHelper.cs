@@ -22,18 +22,14 @@ namespace KnowledgeSystem.Helpers
 
         public static bool IsWithinWorkingHours(DateTime time)
         {
-            // Kiểm tra thứ (Monday = 1, Sunday = 7)
-            DayOfWeek day = time.DayOfWeek;
-            if (day == DayOfWeek.Sunday) return false; // Chủ nhật nghỉ
-            if (day == DayOfWeek.Saturday || day >= DayOfWeek.Monday) // T2 -> T7
-            {
-                TimeSpan startWork = new TimeSpan(7, 30, 0); // 07:30
-                TimeSpan endWork = new TimeSpan(17, 0, 0);   // 17:00
-                TimeSpan currentTime = time.TimeOfDay;
+            if (time.DayOfWeek == DayOfWeek.Sunday)
+                return false; // Chỉ nghỉ CN
 
-                return currentTime >= startWork && currentTime <= endWork;
-            }
-            return false;
+            TimeSpan startWork = new TimeSpan(7, 30, 0); // 07:30
+            TimeSpan endWork = new TimeSpan(17, 0, 0);   // 17:00
+            TimeSpan currentTime = time.TimeOfDay;
+
+            return currentTime >= startWork && currentTime <= endWork;
         }
     }
 }
