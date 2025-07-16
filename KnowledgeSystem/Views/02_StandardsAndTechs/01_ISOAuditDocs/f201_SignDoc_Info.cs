@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -227,22 +228,24 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
         private void btnApproval_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            // Kiểm tra xem đã xử lý hết các file chưa
-            bool validate = string.IsNullOrEmpty(attachment.Desc);
-            if (validate)
+            // 1. Kiểm tra mô tả đính kèm
+            if (string.IsNullOrEmpty(attachment.Desc))
             {
-                string msg = "請處理所有文件！";
-                MsgTP.MsgShowInfomation($"<font='Microsoft JhengHei UI' size=14>{msg}</font>");
+                ShowMessage("請處理所有文件！");
                 return;
             }
 
-            var editor = new TextEdit { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) };
-
-            // Thiết lập mask để buộc nhập đúng định dạng
+            // 2. Tạo TextEdit với định dạng giờ
+            var editor = new TextEdit
+            {
+                Font = new Font("Microsoft JhengHei UI", 14F)
+            };
             editor.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.DateTimeMaskManager));
             editor.Properties.MaskSettings.Set("mask", "yyyy/MM/dd HH:mm:ss");
             editor.Properties.MaskSettings.Set("useAdvancingCaret", true);
 
+            // 3. Hiển thị hộp nhập giờ phản hồi
+            string defaultTime = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
             var result = XtraInputBox.Show(new XtraInputBoxArgs
             {
                 Caption = TPConfigs.SoftNameTW,
@@ -250,36 +253,40 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 Prompt = "<font='Microsoft JhengHei UI' size=14>輸入核准時間</font>",
                 Editor = editor,
                 DefaultButtonIndex = 0,
-                DefaultResponse = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") // Định dạng mặc định
+                DefaultResponse = defaultTime
             });
 
-            if (string.IsNullOrEmpty(result?.ToString())) return;
+            if (string.IsNullOrWhiteSpace(result?.ToString())) return;
 
-            DateTime respTime;
-            DateTime.TryParse(result.ToString(), out respTime);
-
-            if (!DateTimeHelper.IsWithinWorkingHours(respTime))
+            // 4. Xử lý kết quả nhập
+            if (!DateTime.TryParseExact(result.ToString(), "yyyy/MM/dd HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime respTime))
             {
-                string msg = "請選擇工作時間內的時間！";
-                MsgTP.MsgShowInfomation($"<font='Microsoft JhengHei UI' size=14>{msg}</font>");
+                ShowMessage("時間格式不正確，請重新輸入！");
                 return;
             }
 
-            if (respTime < minTimeRespValue)
+            if (!DateTimeHelper.IsWithinWorkingHours(respTime))
             {
-                string msg = "簽署時間無效！";
-                MsgTP.MsgShowInfomation($"<font='Microsoft JhengHei UI' size=14>{msg}</font>");
+                ShowMessage("請選擇工作時間內的時間！");
+                return;
+            }
+
+            if (minTimeRespValue == DateTime.MinValue || respTime < minTimeRespValue)
+            {
+                ShowMessage("簽署時間無效！");
                 return;
             }
 
             if (MsgTP.MsgYesNoQuestion($"文件將於<color=red>{respTime:yyyy/MM/dd HH:mm}</color>簽署") != DialogResult.Yes)
                 return;
 
-            // Các bước trước nếu chưa gửi note thì khỏi gửi luôn
+            // 5. Nếu là bước cuối → cập nhật SendNoteTime
             if (IsLastStep)
             {
                 var progInfoSendNote = dt201_ProgInfoBUS.Instance.GetListByIdForm(idBase)
-                    .Where(r => string.IsNullOrEmpty(r.SendNoteTime.ToString())).ToList();
+                    .Where(r => string.IsNullOrEmpty(r.SendNoteTime.ToString()))
+                    .ToList();
+
                 foreach (var item in progInfoSendNote)
                 {
                     item.SendNoteTime = DateTime.Now;
@@ -287,34 +294,46 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 }
             }
 
-            dt201_ProgInfo info = new dt201_ProgInfo()
+            // 6. Tạo dòng phản hồi
+            var progInfo = new dt201_ProgInfo
             {
                 IdForm = idBase,
                 IdUsr = TPConfigs.LoginUser.Id,
                 RespTime = respTime,
                 Desc = "簽名"
             };
-            dt201_ProgInfoBUS.Instance.Add(info);
+            dt201_ProgInfoBUS.Instance.Add(progInfo);
 
-            var baseData = dt201_FormsBUS.Instance.GetItemById(idBase);
-            baseData.NextStepProg = nextStepProg;
+            // 7. Cập nhật form chính
+            var form = dt201_FormsBUS.Instance.GetItemById(idBase);
+            form.NextStepProg = nextStepProg;
 
-            dm_AttachmentBUS.Instance.AddOrUpdate(attachment.BaseAtt);
+            // 8. Cập nhật file đính kèm
+            var baseAtt = attachment.BaseAtt;
+            dm_AttachmentBUS.Instance.AddOrUpdate(baseAtt);
 
+            // 9. Nếu là bước cuối → ngưng xử lý và copy file
             if (IsLastStep)
             {
-                baseData.IsProcessing = false;
+                form.IsProcessing = false;
 
-                string sourceFile = Path.Combine(TPConfigs.Folder201, attachment.BaseAtt.Id.ToString(), attachment.BaseAtt.EncryptionName);
-                string destFile = Path.Combine(TPConfigs.Folder201, attachment.BaseAtt.EncryptionName);
-
+                string sourceFile = Path.Combine(TPConfigs.Folder201, baseAtt.Id.ToString(), baseAtt.EncryptionName);
+                string destFile = Path.Combine(TPConfigs.Folder201, baseAtt.EncryptionName);
                 File.Copy(sourceFile, destFile, true);
             }
 
-            dt201_FormsBUS.Instance.AddOrUpdate(baseData);
+            // 10. Lưu form
+            dt201_FormsBUS.Instance.AddOrUpdate(form);
 
+            // 11. Đóng form
             Close();
         }
+
+        void ShowMessage(string message)
+        {
+            MsgTP.MsgShowInfomation($"<font='Microsoft JhengHei UI' size=14>{message}</font>");
+        }
+
 
         private void btnCancel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
