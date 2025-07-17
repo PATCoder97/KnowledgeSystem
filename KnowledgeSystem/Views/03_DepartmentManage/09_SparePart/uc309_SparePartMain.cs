@@ -378,7 +378,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             {
                 helper.SaveViewInfo();
 
-                deptGetData = (barCbbDept.EditValue?.ToString().Split(' ')[0]) ?? string.Empty;
+                deptGetData = (barCbbDept.EditValue?.ToString().Split(' ')[0]) ?? "NoDept";
                 storages = dt309_StoragesBUS.Instance.GetList();
                 users = dm_UserBUS.Instance.GetList();
                 units = dt309_UnitsBUS.Instance.GetList();
@@ -405,6 +405,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
                 gvData.BestFitColumns();
                 gvData.CollapseAllDetails();
+                gColDisplayName.Width = 250;
 
                 helper.LoadViewInfo();
             }
@@ -446,6 +447,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             gcData.DataSource = sourceBases;
 
             gvData.BestFitColumns();
+            gColDisplayName.Width = 250;
 
             gvData.OptionsDetail.EnableMasterViewMode = true;
             gvData.OptionsView.ShowGroupPanel = false;

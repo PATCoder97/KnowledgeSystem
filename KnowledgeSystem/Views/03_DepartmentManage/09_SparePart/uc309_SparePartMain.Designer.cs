@@ -405,7 +405,7 @@
             // 
             this.gColDisplayName.Caption = "品名規格";
             this.gColDisplayName.FieldName = "data.DisplayName";
-            this.gColDisplayName.MaxWidth = 250;
+            this.gColDisplayName.MaxWidth = 600;
             this.gColDisplayName.Name = "gColDisplayName";
             this.gColDisplayName.Visible = true;
             this.gColDisplayName.VisibleIndex = 2;
