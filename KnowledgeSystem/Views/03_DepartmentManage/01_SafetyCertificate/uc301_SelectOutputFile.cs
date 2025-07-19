@@ -27,7 +27,19 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
         public uc301_SelectOutputFile()
         {
             InitializeComponent();
+
+            // Gán nguồn dữ liệu cho control
+            cbbYear.DataBindings.Add("EditValue", this, "Year", true, DataSourceUpdateMode.OnPropertyChanged);
+            cbbQuarter.DataBindings.Add("EditValue", this, "Quarter", true, DataSourceUpdateMode.OnPropertyChanged);
+            cbbHalfYear.DataBindings.Add("EditValue", this, "HalfYear", true, DataSourceUpdateMode.OnPropertyChanged);
+            cbbTypeOf.DataBindings.Add("EditValue", this, "TypeOf", true, DataSourceUpdateMode.OnPropertyChanged);
         }
+
+        public int year { get; set; }
+        public int quarter { get; set; }
+        public string HalfYear { get; set; }
+        public string TypeOf { get; set; }
+        public bool IsWrongData { get; set; } = false;
 
         string sheetName = "DataFile51";
 
@@ -90,26 +102,20 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
             List<int> lsQuarters = new List<int>() { 1, 2, 3, 4 };
             cbbQuarter.Properties.Items.AddRange(lsQuarters);
 
+            List<string> lsHalfYear = new List<string>() { "上半年", "下半年" };
+            cbbHalfYear.Properties.Items.AddRange(lsHalfYear);
+
+            cbbTypeOf.Properties.Items.AddRange(TPConfigs.typeOf301.Select(r => r.Value).ToArray());
+            cbbTypeOf.SelectedIndex = 0;
+
             DateTime today = DateTime.Today;
             int currentQuarter = (today.Month - 1) / 3 + 1;
             cbbQuarter.SelectedItem = currentQuarter;
-        }
 
-        public int year { get; set; }
-        public int quarter { get; set; }
-        public bool IsWrongData = false;
+            cbbHalfYear.SelectedIndex = today.Month < 7 ? 0 : 1;
+        }
 
         internal List<dt301_Base> lsData51 = new List<dt301_Base>();
-
-        private void cbbQuarter_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            quarter = Convert.ToInt16(cbbQuarter.EditValue);
-        }
-
-        private void cbbYear_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            year = Convert.ToInt16(cbbYear.EditValue);
-        }
 
         private void btnDownTemp51_Click(object sender, EventArgs e)
         {
@@ -202,6 +208,25 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
             SplashScreenManager.CloseDefaultWaitForm();
             gcData51.DataSource = lsDisplays;
             gvData51.BestFitColumns();
+        }
+
+        private void cbbTypeOf_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (cbbTypeOf.SelectedIndex)
+            {
+                case 1:
+                    cbbHalfYear.Enabled = false;
+                    cbbQuarter.Enabled = false;
+                    break;
+                case 2:
+                    cbbHalfYear.Enabled = true;
+                    cbbQuarter.Enabled = false;
+                    break;
+                default:
+                    cbbHalfYear.Enabled = false;
+                    cbbQuarter.Enabled = true;
+                    break;
+            }
         }
     }
 }

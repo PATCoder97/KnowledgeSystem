@@ -92,8 +92,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._01_SafetyCertificate
             List<string> lsCategories = new List<string>() { "第一類", "第二類", "第三類", "第四類", "第五類", "第六類", "其他" };
             cbbCategory.Properties.Items.AddRange(lsCategories);
 
-            List<string> typeOfs = new List<string>() { "勞動安全衛生證照及職業執照訓練", "輻射操作人員安全訓練", "化學藥劑安全教育訓練", "消防及救難救護業務" };
-            cbbTypeOf.Properties.Items.AddRange(typeOfs);
+            cbbTypeOf.Properties.Items.AddRange(TPConfigs.typeOf301.Select(r => r.Value).ToArray());
 
             switch (_eventInfo)
             {

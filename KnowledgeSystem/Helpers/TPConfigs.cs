@@ -105,6 +105,14 @@ namespace KnowledgeSystem.Helpers
         public static Dictionary<int, string> signTypes = new Dictionary<int, string>() { { 0, "簽名" }, { 1, "蓋章" } };
 
         public static List<string> typeVehicles = new List<string>() { "Xe máy", "Ô tô" };
+        public static Dictionary<int, string> typeOf301 = new Dictionary<int, string>()
+        {
+            { 0, "勞動安全衛生證照及職業執照訓練" },
+            { 1, "輻射操作人員安全訓練" },
+            { 2, "化學藥劑安全教育訓練" },
+            { 3, "消防及救難救護業務" },
+            { 4, "第四類人員勞動安全衛生訓練" }
+        };
 
         public static dm_User LoginUser { get; set; }
         public static string DomainComputer { get; set; }

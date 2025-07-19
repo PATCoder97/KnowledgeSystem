@@ -55,7 +55,10 @@
             this.btnBackCert = new DevExpress.XtraBars.BarButtonItem();
             this.btnInvalidCert = new DevExpress.XtraBars.BarButtonItem();
             this.btnWaitCert = new DevExpress.XtraBars.BarButtonItem();
-            this.btnExpCert = new DevExpress.XtraBars.BarButtonItem();
+            this.subBtnExp = new DevExpress.XtraBars.BarSubItem();
+            this.btnExpQuater = new DevExpress.XtraBars.BarButtonItem();
+            this.btnExpHaflYear = new DevExpress.XtraBars.BarButtonItem();
+            this.btnExpYear = new DevExpress.XtraBars.BarButtonItem();
             this.btnClearFilter = new DevExpress.XtraBars.BarButtonItem();
             this.btnExportExcel = new DevExpress.XtraBars.BarButtonItem();
             this.btnSpecialFunctions = new DevExpress.XtraBars.BarSubItem();
@@ -276,12 +279,15 @@
             this.btnBackCert,
             this.btnInvalidCert,
             this.btnWaitCert,
-            this.btnExpCert,
+            this.btnExpYear,
             this.btnClearFilter,
             this.btnSpecialFunctions,
-            this.btnInvalidateExpCert});
+            this.btnInvalidateExpCert,
+            this.btnExpQuater,
+            this.btnExpHaflYear,
+            this.subBtnExp});
             this.barManagerTP.MainMenu = this.bar2;
-            this.barManagerTP.MaxItemId = 14;
+            this.barManagerTP.MaxItemId = 19;
             // 
             // bar2
             // 
@@ -361,7 +367,7 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.btnBackCert),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnInvalidCert),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnWaitCert),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnExpCert),
+            new DevExpress.XtraBars.LinkPersistInfo(this.subBtnExp),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnClearFilter)});
             this.btnFilter.Name = "btnFilter";
             // 
@@ -421,19 +427,58 @@
             this.btnWaitCert.Name = "btnWaitCert";
             this.btnWaitCert.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.SetFilter);
             // 
-            // btnExpCert
+            // subBtnExp
             // 
-            this.btnExpCert.Caption = "過期證照";
-            this.btnExpCert.Id = 9;
-            this.btnExpCert.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnExpCert.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
-            this.btnExpCert.ItemAppearance.Hovered.Options.UseForeColor = true;
-            this.btnExpCert.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.btnExpCert.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
-            this.btnExpCert.ItemAppearance.Normal.Options.UseFont = true;
-            this.btnExpCert.ItemAppearance.Normal.Options.UseForeColor = true;
-            this.btnExpCert.Name = "btnExpCert";
-            this.btnExpCert.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.SetFilter);
+            this.subBtnExp.Caption = "過期證照";
+            this.subBtnExp.Id = 18;
+            this.subBtnExp.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.subBtnExp.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.subBtnExp.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.subBtnExp.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.subBtnExp.ItemAppearance.Normal.Options.UseFont = true;
+            this.subBtnExp.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnExpQuater),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnExpHaflYear),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnExpYear)});
+            this.subBtnExp.Name = "subBtnExp";
+            // 
+            // btnExpQuater
+            // 
+            this.btnExpQuater.Caption = "季";
+            this.btnExpQuater.Id = 15;
+            this.btnExpQuater.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnExpQuater.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnExpQuater.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnExpQuater.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.btnExpQuater.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnExpQuater.Name = "btnExpQuater";
+            this.btnExpQuater.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.SetFilter);
+            // 
+            // btnExpHaflYear
+            // 
+            this.btnExpHaflYear.Caption = "半年";
+            this.btnExpHaflYear.Id = 16;
+            this.btnExpHaflYear.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnExpHaflYear.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnExpHaflYear.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnExpHaflYear.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.btnExpHaflYear.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnExpHaflYear.Name = "btnExpHaflYear";
+            this.btnExpHaflYear.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.SetFilter);
+            // 
+            // btnExpYear
+            // 
+            this.btnExpYear.Caption = "年";
+            this.btnExpYear.Id = 9;
+            this.btnExpYear.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnExpYear.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnExpYear.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnExpYear.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.btnExpYear.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
+            this.btnExpYear.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnExpYear.ItemAppearance.Normal.Options.UseForeColor = true;
+            this.btnExpYear.Name = "btnExpYear";
+            this.btnExpYear.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.SetFilter);
             // 
             // btnClearFilter
             // 
@@ -581,9 +626,12 @@
         private DevExpress.XtraBars.BarButtonItem btnBackCert;
         private DevExpress.XtraBars.BarButtonItem btnInvalidCert;
         private DevExpress.XtraBars.BarButtonItem btnWaitCert;
-        private DevExpress.XtraBars.BarButtonItem btnExpCert;
+        private DevExpress.XtraBars.BarButtonItem btnExpYear;
         private DevExpress.XtraBars.BarButtonItem btnClearFilter;
         private DevExpress.XtraBars.BarSubItem btnSpecialFunctions;
         private DevExpress.XtraBars.BarButtonItem btnInvalidateExpCert;
+        private DevExpress.XtraBars.BarSubItem subBtnExp;
+        private DevExpress.XtraBars.BarButtonItem btnExpQuater;
+        private DevExpress.XtraBars.BarButtonItem btnExpHaflYear;
     }
 }
