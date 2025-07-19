@@ -1665,6 +1665,9 @@
     <Content Include="Images\icons8_print.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\icons8_rescue_workers_helmet.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\icons8_robot.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

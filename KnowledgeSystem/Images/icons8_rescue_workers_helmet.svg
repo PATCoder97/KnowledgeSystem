@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="32" height="32">
+  <radialGradient id="Ml44QFruShDIWPos_Ley2a" cx="24.354" cy="31.523" r="13.238" gradientTransform="matrix(1 0 0 .6013 0 12.568)" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#262626" />
+    <stop offset=".322" stop-color="#222" />
+    <stop offset=".651" stop-color="#161616" />
+    <stop offset=".982" stop-color="#010101" />
+    <stop offset="1" />
+  </radialGradient>
+  <path fill="url(#Ml44QFruShDIWPos_Ley2a)" d="M36.073,25.439c-1.102,1.072-2.166,3.252-2.663,5.179c-1.178,4.569-2.291,9.701-9.409,9.701 c-7.118,0-8.231-5.132-9.409-9.701c-0.497-1.927-1.561-4.107-2.663-5.179l-0.334,1.031c0.772,1.172,1.203,2.846,1.66,4.616 C14.436,35.672,15.428,41.379,24,41.379s9.564-5.707,10.746-10.293c0.457-1.77,0.888-3.444,1.66-4.616L36.073,25.439z" />
+  <radialGradient id="Ml44QFruShDIWPos_Ley2b" cx="23.983" cy="42.255" r="7.398" gradientTransform="matrix(1 0 0 .4687 0 22.45)" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#383838" />
+    <stop offset=".244" stop-color="#313131" />
+    <stop offset=".589" stop-color="#1f1f1f" />
+    <stop offset=".994" />
+    <stop offset="1" />
+  </radialGradient>
+  <path fill="url(#Ml44QFruShDIWPos_Ley2b)" d="M29.303,40.116c0,1.578-2.362,2.857-5.276,2.857s-5.276-1.279-5.276-2.857s2.362,0,5.276,0 S29.303,38.538,29.303,40.116z" />
+  <radialGradient id="Ml44QFruShDIWPos_Ley2c" cx="24.011" cy="12.848" r="16.173" gradientTransform="matrix(1 0 0 .7672 0 2.991)" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#ff5630" />
+    <stop offset=".167" stop-color="#f7522c" />
+    <stop offset=".425" stop-color="#e14722" />
+    <stop offset=".74" stop-color="#be3611" />
+    <stop offset="1" stop-color="#9c2500" />
+  </radialGradient>
+  <path fill="url(#Ml44QFruShDIWPos_Ley2c)" d="M39.198,21.125c-0.433-3.255-2.448-12.693-10.47-15.406c-0.105-0.95-0.901-1.692-1.879-1.692 H21.15c-0.948,0-1.727,0.696-1.87,1.603C10.499,8.243,9.033,18.016,8.802,21.125c-0.045,0.603,0,0.956,0,0.956l15.214,1.894 l15.182-1.894C39.198,22.081,39.293,21.836,39.198,21.125z" />
+  <radialGradient id="Ml44QFruShDIWPos_Ley2d" cx="24" cy="21.467" r="16.277" gradientTransform="matrix(1 0 0 .6151 0 8.264)" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#ff5630" />
+    <stop offset=".167" stop-color="#f7522c" />
+    <stop offset=".425" stop-color="#e14722" />
+    <stop offset=".74" stop-color="#be3611" />
+    <stop offset="1" stop-color="#9c2500" />
+  </radialGradient>
+  <path fill="url(#Ml44QFruShDIWPos_Ley2d)" d="M40.276,22.202c0.656,0.656,0.766,1.702,0.209,2.444c-1.416,1.887-5.663,4.078-16.485,4.078 S8.932,26.533,7.515,24.646c-0.557-0.741-0.446-1.788,0.209-2.444l1.077-1.077c0,0,3.8,1.9,15.198,1.9s15.198-1.9,15.198-1.9 L40.276,22.202z" />
+  <path fill="#a83920" d="M19.25,15.426V5.641c-0.539,0.162-1.052,0.349-1.537,0.562L19.25,15.426z" />
+  <path fill="#a83920" d="M28.75,5.728v9.698l1.511-9.068C29.781,6.122,29.28,5.908,28.75,5.728z" />
+  <rect width="2.013" height="7.929" x="22.993" y="11.44" fill="#fff" />
+  <rect width="2.013" height="7.929" x="22.993" y="11.44" fill="#fff" transform="rotate(90 24 15.404)" />
+</svg>

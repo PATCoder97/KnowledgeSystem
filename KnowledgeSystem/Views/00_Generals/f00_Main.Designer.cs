@@ -127,7 +127,7 @@ namespace KnowledgeSystem.Views._00_Generals
             this.tileMain.MaxId = 27;
             this.tileMain.Name = "tileMain";
             this.tileMain.Padding = new System.Windows.Forms.Padding(24, 22, 24, 22);
-            this.tileMain.Position = 120;
+            this.tileMain.Position = 592;
             this.tileMain.ShowGroupText = true;
             this.tileMain.Size = new System.Drawing.Size(1180, 599);
             this.tileMain.TabIndex = 4;
@@ -312,7 +312,7 @@ namespace KnowledgeSystem.Views._00_Generals
             this.btnSafetyCert.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
             this.btnSafetyCert.AppearanceItem.Normal.Options.UseBackColor = true;
             this.btnSafetyCert.AppearanceItem.Normal.Options.UseFont = true;
-            tileItemElement13.Text = "證照管理";
+            tileItemElement13.Text = "安衛環管理";
             this.btnSafetyCert.Elements.Add(tileItemElement13);
             this.btnSafetyCert.Id = 20;
             this.btnSafetyCert.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
