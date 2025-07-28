@@ -902,6 +902,22 @@
           <Property Name="TotalSalary" Type="varchar" MaxLength="32" />
           <Property Name="ActualSalary" Type="varchar" MaxLength="32" />
         </EntityType>
+        <EntityType Name="dt403_04_HardnessStandardLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdDept" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="MachineName" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="SampleId" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="Method" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="Value1" Type="float" Nullable="false" />
+          <Property Name="Value2" Type="float" />
+          <Property Name="Value3" Type="float" />
+          <Property Name="Value4" Type="float" />
+          <Property Name="Value5" Type="float" />
+          <Property Name="TimeCreate" Type="datetime" />
+        </EntityType>
         <EntityType Name="dt403_SoftwareManual">
           <Key>
             <PropertyRef Name="Id" />
@@ -1028,6 +1044,7 @@
           <EntitySet Name="dt309_Transactions" EntityType="Self.dt309_Transactions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt309_Units" EntityType="Self.dt309_Units" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt402_KPIWeb" EntityType="Self.dt402_KPIWeb" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt403_04_HardnessStandardLog" EntityType="Self.dt403_04_HardnessStandardLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt403_SoftwareManual" EntityType="Self.dt403_SoftwareManual" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sys_Log" EntityType="Self.sys_Log" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sys_NotesMail" EntityType="Self.sys_NotesMail" Schema="dbo" store:Type="Tables" />
@@ -1124,6 +1141,7 @@
           <EntitySet Name="dt309_Transactions" EntityType="DBDocumentManagementSystemModel.dt309_Transactions" />
           <EntitySet Name="dt309_InspectionBatch" EntityType="DBDocumentManagementSystemModel.dt309_InspectionBatch" />
           <EntitySet Name="dt301_Course" EntityType="DBDocumentManagementSystemModel.dt301_Course" />
+          <EntitySet Name="dt403_04_HardnessStandardLog" EntityType="DBDocumentManagementSystemModel.dt403_04_HardnessStandardLog" />
         </EntityContainer>
         <EntityType Name="dm_Function">
           <Key>
@@ -2064,6 +2082,22 @@
           <Property Name="Duration" Type="Int32" />
           <Property Name="Category" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
           <Property Name="TypeOf" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dt403_04_HardnessStandardLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdDept" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="MachineName" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="SampleId" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Method" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="Value1" Type="Double" Nullable="false" />
+          <Property Name="Value2" Type="Double" />
+          <Property Name="Value3" Type="Double" />
+          <Property Name="Value4" Type="Double" />
+          <Property Name="Value5" Type="Double" />
+          <Property Name="TimeCreate" Type="DateTime" Precision="3" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -3093,6 +3127,23 @@
                 <ScalarProperty Name="Category" ColumnName="Category" />
                 <ScalarProperty Name="Duration" ColumnName="Duration" />
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt403_04_HardnessStandardLog">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt403_04_HardnessStandardLog">
+              <MappingFragment StoreEntitySet="dt403_04_HardnessStandardLog">
+                <ScalarProperty Name="TimeCreate" ColumnName="TimeCreate" />
+                <ScalarProperty Name="Value5" ColumnName="Value5" />
+                <ScalarProperty Name="Value4" ColumnName="Value4" />
+                <ScalarProperty Name="Value3" ColumnName="Value3" />
+                <ScalarProperty Name="Value2" ColumnName="Value2" />
+                <ScalarProperty Name="Value1" ColumnName="Value1" />
+                <ScalarProperty Name="Method" ColumnName="Method" />
+                <ScalarProperty Name="SampleId" ColumnName="SampleId" />
+                <ScalarProperty Name="MachineName" ColumnName="MachineName" />
+                <ScalarProperty Name="IdDept" ColumnName="IdDept" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

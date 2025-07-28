@@ -60,7 +60,7 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt306_FieldTypeDocType" Width="1.5" PointX="11.875" PointY="25.625" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt306_Base" Width="1.5" PointX="0.5" PointY="25.625" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt307_JobQuesManage" Width="1.5" PointX="0.5" PointY="29.375" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt403_SoftwareManual" Width="1.5" PointX="0.5" PointY="33.25" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt403_SoftwareManual" Width="1.5" PointX="0.5" PointY="32" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_ProgInfo" Width="1.5" PointX="3.75" PointY="21.125" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_Progress" Width="1.5" PointX="5.375" PointY="21.125" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_Forms" Width="1.5" PointX="2.125" PointY="21.125" />
@@ -91,6 +91,7 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt309_Transactions" Width="1.5" PointX="10.25" PointY="44.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt309_InspectionBatch" Width="1.5" PointX="11.875" PointY="35.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt301_Course" Width="1.5" PointX="0.5" PointY="11.5" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt403_04_HardnessStandardLog" Width="1.5" PointX="2.125" PointY="32" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

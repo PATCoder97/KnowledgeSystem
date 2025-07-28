@@ -1090,6 +1090,12 @@
     <Compile Include="Views\04_SystemAdministrator\03_Extension\03_ImageAutoArrangement\f403_03_SurfaceRustHealth.Designer.cs">
       <DependentUpon>f403_03_SurfaceRustHealth.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\04_SystemAdministrator\03_Extension\04_HardnessStandardLog\uc403_04_HardnessStandardLog.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\04_SystemAdministrator\03_Extension\04_HardnessStandardLog\uc403_04_HardnessStandardLog.Designer.cs">
+      <DependentUpon>uc403_04_HardnessStandardLog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\04_SystemAdministrator\03_Extension\f403_ProcessFilesTool.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1551,6 +1557,9 @@
     <EmbeddedResource Include="Views\04_SystemAdministrator\03_Extension\03_ImageAutoArrangement\f403_03_SurfaceRustHealth.resx">
       <DependentUpon>f403_03_SurfaceRustHealth.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\04_SystemAdministrator\03_Extension\04_HardnessStandardLog\uc403_04_HardnessStandardLog.resx">
+      <DependentUpon>uc403_04_HardnessStandardLog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\03_Extension\f403_ProcessFilesTool.resx">
       <DependentUpon>f403_ProcessFilesTool.cs</DependentUpon>
     </EmbeddedResource>
@@ -1633,6 +1642,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\icons8_calendar_plus_1.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\icons8_data_protection.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\icons8_department.svg">

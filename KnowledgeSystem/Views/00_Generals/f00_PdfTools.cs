@@ -148,7 +148,6 @@ namespace KnowledgeSystem.Views._00_Generals
                 var documentPosition = pdfViewer.GetDocumentPosition(location, true);
 
                 var desHeight = string.IsNullOrWhiteSpace(descrip) ? 0 : sizeFont.Height;
-
                 var widthImage = imageSign.Width;
                 var heightImage = imageSign.Height + desHeight;
 
