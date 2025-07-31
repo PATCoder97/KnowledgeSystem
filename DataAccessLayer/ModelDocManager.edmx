@@ -907,16 +907,14 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TimeCreate" Type="datetime" Nullable="false" />
           <Property Name="IdDept" Type="varchar" MaxLength="8" Nullable="false" />
           <Property Name="MachineName" Type="varchar" MaxLength="32" Nullable="false" />
-          <Property Name="SampleId" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="Sample" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="Method" Type="varchar" MaxLength="16" Nullable="false" />
-          <Property Name="Value1" Type="float" Nullable="false" />
-          <Property Name="Value2" Type="float" />
-          <Property Name="Value3" Type="float" />
-          <Property Name="Value4" Type="float" />
-          <Property Name="Value5" Type="float" />
-          <Property Name="TimeCreate" Type="datetime" />
+          <Property Name="StandardValue" Type="float" Nullable="false" />
+          <Property Name="TestValue" Type="float" Nullable="false" />
+          <Property Name="Tester" Type="varchar" MaxLength="16" />
         </EntityType>
         <EntityType Name="dt403_SoftwareManual">
           <Key>
@@ -2088,16 +2086,14 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TimeCreate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IdDept" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
           <Property Name="MachineName" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
-          <Property Name="SampleId" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Sample" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="Method" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
-          <Property Name="Value1" Type="Double" Nullable="false" />
-          <Property Name="Value2" Type="Double" />
-          <Property Name="Value3" Type="Double" />
-          <Property Name="Value4" Type="Double" />
-          <Property Name="Value5" Type="Double" />
-          <Property Name="TimeCreate" Type="DateTime" Precision="3" />
+          <Property Name="StandardValue" Type="Double" Nullable="false" />
+          <Property Name="TestValue" Type="Double" Nullable="false" />
+          <Property Name="Tester" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -3134,16 +3130,14 @@
           <EntitySetMapping Name="dt403_04_HardnessStandardLog">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt403_04_HardnessStandardLog">
               <MappingFragment StoreEntitySet="dt403_04_HardnessStandardLog">
-                <ScalarProperty Name="TimeCreate" ColumnName="TimeCreate" />
-                <ScalarProperty Name="Value5" ColumnName="Value5" />
-                <ScalarProperty Name="Value4" ColumnName="Value4" />
-                <ScalarProperty Name="Value3" ColumnName="Value3" />
-                <ScalarProperty Name="Value2" ColumnName="Value2" />
-                <ScalarProperty Name="Value1" ColumnName="Value1" />
+                <ScalarProperty Name="Tester" ColumnName="Tester" />
+                <ScalarProperty Name="TestValue" ColumnName="TestValue" />
+                <ScalarProperty Name="StandardValue" ColumnName="StandardValue" />
                 <ScalarProperty Name="Method" ColumnName="Method" />
-                <ScalarProperty Name="SampleId" ColumnName="SampleId" />
+                <ScalarProperty Name="Sample" ColumnName="Sample" />
                 <ScalarProperty Name="MachineName" ColumnName="MachineName" />
                 <ScalarProperty Name="IdDept" ColumnName="IdDept" />
+                <ScalarProperty Name="TimeCreate" ColumnName="TimeCreate" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

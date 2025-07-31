@@ -53,10 +53,18 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._04_Hardne
             {
                 helper.SaveViewInfo();
 
+                var usrs = dm_UserBUS.Instance.GetList();
                 deptGetData = (barCbbDept.EditValue?.ToString().Split(' ')[0]) ?? "NoDept";
                 var dataLogs = dt403_04_HardnessStandardLogBUS.Instance.GetListByDept(deptGetData);
 
-                sourceBases.DataSource = dataLogs;
+                var displayData = (from data in dataLogs
+                                   select new
+                                   {
+                                       data,
+                                       TesterName = usrs.FirstOrDefault(r => r.Id == data.Tester)?.DisplayName ?? "無效"
+                                   }).ToList();
+
+                sourceBases.DataSource = displayData;
 
                 gvData.BestFitColumns();
                 gvData.CollapseAllDetails();

@@ -15,15 +15,13 @@ namespace DataAccessLayer
     public partial class dt403_04_HardnessStandardLog
     {
         public int Id { get; set; }
+        public System.DateTime TimeCreate { get; set; }
         public string IdDept { get; set; }
         public string MachineName { get; set; }
-        public string SampleId { get; set; }
+        public string Sample { get; set; }
         public string Method { get; set; }
-        public double Value1 { get; set; }
-        public Nullable<double> Value2 { get; set; }
-        public Nullable<double> Value3 { get; set; }
-        public Nullable<double> Value4 { get; set; }
-        public Nullable<double> Value5 { get; set; }
-        public Nullable<System.DateTime> TimeCreate { get; set; }
+        public double StandardValue { get; set; }
+        public double TestValue { get; set; }
+        public string Tester { get; set; }
     }
 }
