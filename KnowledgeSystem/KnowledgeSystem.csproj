@@ -1090,6 +1090,18 @@
     <Compile Include="Views\04_SystemAdministrator\03_Extension\03_ImageAutoArrangement\f403_03_SurfaceRustHealth.Designer.cs">
       <DependentUpon>f403_03_SurfaceRustHealth.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\04_SystemAdministrator\03_Extension\04_HardnessStandardLog\f403_04_StandardInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\04_SystemAdministrator\03_Extension\04_HardnessStandardLog\f403_04_StandardInfo.Designer.cs">
+      <DependentUpon>f403_04_StandardInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\04_SystemAdministrator\03_Extension\04_HardnessStandardLog\f403_04_Standard_Info.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\04_SystemAdministrator\03_Extension\04_HardnessStandardLog\f403_04_Standard_Info.Designer.cs">
+      <DependentUpon>f403_04_Standard_Info.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\04_SystemAdministrator\03_Extension\04_HardnessStandardLog\uc403_04_HardnessStandardLog.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1556,6 +1568,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\03_Extension\03_ImageAutoArrangement\f403_03_SurfaceRustHealth.resx">
       <DependentUpon>f403_03_SurfaceRustHealth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\04_SystemAdministrator\03_Extension\04_HardnessStandardLog\f403_04_StandardInfo.resx">
+      <DependentUpon>f403_04_StandardInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\04_SystemAdministrator\03_Extension\04_HardnessStandardLog\f403_04_Standard_Info.resx">
+      <DependentUpon>f403_04_Standard_Info.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\03_Extension\04_HardnessStandardLog\uc403_04_HardnessStandardLog.resx">
       <DependentUpon>uc403_04_HardnessStandardLog.cs</DependentUpon>

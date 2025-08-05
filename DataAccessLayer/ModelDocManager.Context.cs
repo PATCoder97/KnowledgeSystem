@@ -112,5 +112,6 @@ namespace DataAccessLayer
         public virtual DbSet<dt309_InspectionBatch> dt309_InspectionBatch { get; set; }
         public virtual DbSet<dt301_Course> dt301_Course { get; set; }
         public virtual DbSet<dt403_04_HardnessStandardLog> dt403_04_HardnessStandardLog { get; set; }
+        public virtual DbSet<dt403_04_StandardInfo> dt403_04_StandardInfo { get; set; }
     }
 }

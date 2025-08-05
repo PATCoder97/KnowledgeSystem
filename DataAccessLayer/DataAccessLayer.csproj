@@ -317,6 +317,9 @@
     <Compile Include="dt403_04_HardnessStandardLog.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
+    <Compile Include="dt403_04_StandardInfo.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
     <Compile Include="dt403_SoftwareManual.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>

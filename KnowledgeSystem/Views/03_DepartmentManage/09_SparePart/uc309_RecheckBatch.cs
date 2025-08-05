@@ -348,7 +348,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             {
                 helper.SaveViewInfo();
 
-                deptGetData = (barCbbDept.EditValue?.ToString().Split(' ')[0]) ?? string.Empty;
+                deptGetData = string.IsNullOrWhiteSpace(barCbbDept.EditValue?.ToString()) ? "NoDept" : barCbbDept.EditValue.ToString().Split(' ')[0]    ;
 
                 var inspectionBatch = dt309_InspectionBatchBUS.Instance.GetList();
                 inspectionBatchMaterials = dt309_InspectionBatchMaterialBUS.Instance.GetList();

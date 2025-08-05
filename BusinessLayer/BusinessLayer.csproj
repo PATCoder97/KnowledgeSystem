@@ -152,6 +152,7 @@
     <Compile Include="dt402\dt402_KPIWebBUS.cs" />
     <Compile Include="dt403\dt403_SoftwareManualBUS.cs" />
     <Compile Include="dt403\dt403_04_HardnessStandardLogBUS.cs" />
+    <Compile Include="dt403\dt403_04_StandardInfoBUS.cs" />
     <Compile Include="EncryptionHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="sys\sys_StaticValueBUS.cs" />

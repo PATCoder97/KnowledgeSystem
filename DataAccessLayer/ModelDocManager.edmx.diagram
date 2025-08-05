@@ -92,6 +92,7 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt309_InspectionBatch" Width="1.5" PointX="11.875" PointY="35.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt301_Course" Width="1.5" PointX="0.5" PointY="11.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt403_04_HardnessStandardLog" Width="1.5" PointX="2.125" PointY="32" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt403_04_StandardInfo" Width="1.5" PointX="3.75" PointY="32" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -101,7 +101,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             {
                 helper.SaveViewInfo();
 
-                deptGetData = (barCbbDept.EditValue?.ToString().Split(' ')[0]) ?? string.Empty;
+                deptGetData = string.IsNullOrWhiteSpace(barCbbDept.EditValue?.ToString()) ? "NoDept" : barCbbDept.EditValue.ToString().Split(' ')[0];
                 machines = dt309_MachinesBUS.Instance.GetListByStartIdDept(deptGetData);
                 materials = dt309_MaterialsBUS.Instance.GetList();
                 machineMaterials = dt309_MachineMaterialsBUS.Instance.GetList();

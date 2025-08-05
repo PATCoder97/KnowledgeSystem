@@ -134,7 +134,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             {
                 helper.SaveViewInfo();
 
-                string deptGetData = (barCbbDept.EditValue?.ToString().Split(' ')[0]) ?? string.Empty;
+                string deptGetData = string.IsNullOrWhiteSpace(barCbbDept.EditValue?.ToString()) ? "NoDept" : barCbbDept.EditValue.ToString().Split(' ')[0];
                 transactions = dt309_TransactionsBUS.Instance.GetList();
 
                 var materials = dt309_MaterialsBUS.Instance.GetListByStartIdDept(deptGetData);

@@ -378,7 +378,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             {
                 helper.SaveViewInfo();
 
-                deptGetData = (barCbbDept.EditValue?.ToString().Split(' ')[0]) ?? "NoDept";
+                deptGetData = string.IsNullOrWhiteSpace(barCbbDept.EditValue?.ToString())
+                   ? "NoDept" : barCbbDept.EditValue.ToString().Split(' ')[0];
                 storages = dt309_StoragesBUS.Instance.GetList();
                 users = dm_UserBUS.Instance.GetList();
                 units = dt309_UnitsBUS.Instance.GetList();

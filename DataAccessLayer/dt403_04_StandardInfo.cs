@@ -12,17 +12,12 @@ namespace DataAccessLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class dt403_04_HardnessStandardLog
+    public partial class dt403_04_StandardInfo
     {
-        public int Id { get; set; }
-        public System.DateTime TimeCreate { get; set; }
         public string IdDept { get; set; }
-        public string MachineName { get; set; }
-        public string SampleSN { get; set; }
+        public string SN { get; set; }
+        public double Value { get; set; }
+        public double Error { get; set; }
         public string Method { get; set; }
-        public double StandardValue { get; set; }
-        public double TestValue { get; set; }
-        public double AllowableError { get; set; }
-        public string Tester { get; set; }
     }
 }

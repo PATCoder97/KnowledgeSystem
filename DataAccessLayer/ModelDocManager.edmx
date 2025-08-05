@@ -910,11 +910,22 @@
           <Property Name="TimeCreate" Type="datetime" Nullable="false" />
           <Property Name="IdDept" Type="varchar" MaxLength="8" Nullable="false" />
           <Property Name="MachineName" Type="varchar" MaxLength="32" Nullable="false" />
-          <Property Name="Sample" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="SampleSN" Type="varchar" MaxLength="32" Nullable="false" />
           <Property Name="Method" Type="varchar" MaxLength="16" Nullable="false" />
           <Property Name="StandardValue" Type="float" Nullable="false" />
           <Property Name="TestValue" Type="float" Nullable="false" />
+          <Property Name="AllowableError" Type="float" Nullable="false" />
           <Property Name="Tester" Type="varchar" MaxLength="16" />
+        </EntityType>
+        <EntityType Name="dt403_04_StandardInfo">
+          <Key>
+            <PropertyRef Name="SN" />
+          </Key>
+          <Property Name="IdDept" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="SN" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="Value" Type="float" Nullable="false" />
+          <Property Name="Error" Type="float" Nullable="false" />
+          <Property Name="Method" Type="varchar" MaxLength="16" Nullable="false" />
         </EntityType>
         <EntityType Name="dt403_SoftwareManual">
           <Key>
@@ -1043,6 +1054,7 @@
           <EntitySet Name="dt309_Units" EntityType="Self.dt309_Units" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt402_KPIWeb" EntityType="Self.dt402_KPIWeb" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt403_04_HardnessStandardLog" EntityType="Self.dt403_04_HardnessStandardLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt403_04_StandardInfo" EntityType="Self.dt403_04_StandardInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt403_SoftwareManual" EntityType="Self.dt403_SoftwareManual" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sys_Log" EntityType="Self.sys_Log" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sys_NotesMail" EntityType="Self.sys_NotesMail" Schema="dbo" store:Type="Tables" />
@@ -1140,6 +1152,7 @@
           <EntitySet Name="dt309_InspectionBatch" EntityType="DBDocumentManagementSystemModel.dt309_InspectionBatch" />
           <EntitySet Name="dt301_Course" EntityType="DBDocumentManagementSystemModel.dt301_Course" />
           <EntitySet Name="dt403_04_HardnessStandardLog" EntityType="DBDocumentManagementSystemModel.dt403_04_HardnessStandardLog" />
+          <EntitySet Name="dt403_04_StandardInfo" EntityType="DBDocumentManagementSystemModel.dt403_04_StandardInfo" />
         </EntityContainer>
         <EntityType Name="dm_Function">
           <Key>
@@ -2089,11 +2102,22 @@
           <Property Name="TimeCreate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IdDept" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
           <Property Name="MachineName" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
-          <Property Name="Sample" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="SampleSN" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
           <Property Name="Method" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
           <Property Name="StandardValue" Type="Double" Nullable="false" />
           <Property Name="TestValue" Type="Double" Nullable="false" />
+          <Property Name="AllowableError" Type="Double" Nullable="false" />
           <Property Name="Tester" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="dt403_04_StandardInfo">
+          <Key>
+            <PropertyRef Name="SN" />
+          </Key>
+          <Property Name="IdDept" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="SN" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="Value" Type="Double" Nullable="false" />
+          <Property Name="Error" Type="Double" Nullable="false" />
+          <Property Name="Method" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -3131,14 +3155,26 @@
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt403_04_HardnessStandardLog">
               <MappingFragment StoreEntitySet="dt403_04_HardnessStandardLog">
                 <ScalarProperty Name="Tester" ColumnName="Tester" />
+                <ScalarProperty Name="AllowableError" ColumnName="AllowableError" />
                 <ScalarProperty Name="TestValue" ColumnName="TestValue" />
                 <ScalarProperty Name="StandardValue" ColumnName="StandardValue" />
                 <ScalarProperty Name="Method" ColumnName="Method" />
-                <ScalarProperty Name="Sample" ColumnName="Sample" />
+                <ScalarProperty Name="SampleSN" ColumnName="SampleSN" />
                 <ScalarProperty Name="MachineName" ColumnName="MachineName" />
                 <ScalarProperty Name="IdDept" ColumnName="IdDept" />
                 <ScalarProperty Name="TimeCreate" ColumnName="TimeCreate" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt403_04_StandardInfo">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt403_04_StandardInfo">
+              <MappingFragment StoreEntitySet="dt403_04_StandardInfo">
+                <ScalarProperty Name="Method" ColumnName="Method" />
+                <ScalarProperty Name="Error" ColumnName="Error" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="IdDept" ColumnName="IdDept" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
