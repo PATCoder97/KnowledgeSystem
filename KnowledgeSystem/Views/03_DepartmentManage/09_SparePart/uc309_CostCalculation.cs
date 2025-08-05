@@ -46,7 +46,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         private void InitializeIcon()
         {
-            btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
+            btnReload.ImageOptions.SvgImage = TPSvgimages.Search;
             btnExportExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
         }
 
@@ -103,14 +103,16 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                                            StorageName = storages.Where(s => s.Id == storageGroup.Key).Select(s => s.DisplayName).FirstOrDefault() ?? "N/A",
                                            StorageId = storageGroup.Key,  // Kho lưu trữ
                                            TotalAmount = storageGroup.Sum(d => d.data.Quantity * d.material.Price),  // Tổng tiền của Storage
-                                           Items = storageGroup.Select(item => new
+                                           Items = storageGroup
+                                           .GroupBy(item => item.data.MaterialId)
+                                           .Select(materialGroup => new
                                            {
-                                               Material = item.material,         // Tên vật liệu
-                                               Count = storageGroup.Count(),     // Số lần xuất hiện
-                                               UserMngr = users.FirstOrDefault(u => u.Id == item.material.IdManager).DisplayName,
-                                               TotalQuantity = storageGroup.Sum(d => d.data.Quantity),  // Tổng số lượng
-                                               OutputTime = storageGroup.Count(),  // Đếm số lần
-                                               TotalAmount = storageGroup.Sum(d => d.data.Quantity * item.material.Price) // Tổng tiền vật liệu
+                                               Material = materialGroup.First().material, // vật liệu đại diện
+                                               Count = materialGroup.Count(), // số dòng xuất hiện
+                                               UserMngr = users.FirstOrDefault(u => u.Id == materialGroup.First().material.IdManager)?.DisplayName ?? "N/A",
+                                               TotalQuantity = materialGroup.Sum(d => d.data.Quantity),
+                                               OutputTime = materialGroup.Count(),  // số lần xuất hiện (hoặc riêng biệt theo thời gian nếu có thể)
+                                               TotalAmount = materialGroup.Sum(d => d.data.Quantity * d.material.Price)
                                            }).ToList()
                                        }).ToList()
                                    }).ToList();
@@ -198,7 +200,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             //cbbDept.Items.AddRange(departmentItems);
             //barCbbDept.EditValue = departmentItems.FirstOrDefault()?.Value ?? string.Empty;
 
-            LoadData();
+            //LoadData();
             //CreateRuleGV();
             gcData.DataSource = sourceBases;
 

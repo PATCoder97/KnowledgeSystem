@@ -127,7 +127,7 @@ namespace KnowledgeSystem.Views._00_Generals
             this.tileMain.MaxId = 27;
             this.tileMain.Name = "tileMain";
             this.tileMain.Padding = new System.Windows.Forms.Padding(24, 22, 24, 22);
-            this.tileMain.Position = 592;
+            this.tileMain.Position = 1052;
             this.tileMain.ShowGroupText = true;
             this.tileMain.Size = new System.Drawing.Size(1180, 599);
             this.tileMain.TabIndex = 4;
@@ -421,7 +421,7 @@ namespace KnowledgeSystem.Views._00_Generals
             this.btnSoftwareManual.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
             this.btnSoftwareManual.AppearanceItem.Normal.Options.UseBackColor = true;
             this.btnSoftwareManual.AppearanceItem.Normal.Options.UseFont = true;
-            tileItemElement19.Text = "軟體操作的手冊";
+            tileItemElement19.Text = "操作手冊";
             this.btnSoftwareManual.Elements.Add(tileItemElement19);
             this.btnSoftwareManual.Id = 26;
             this.btnSoftwareManual.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
