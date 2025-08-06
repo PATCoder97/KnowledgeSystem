@@ -149,8 +149,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._04_Hardne
             var departments = dm_DeptBUS.Instance.GetList();
             var groups = dm_GroupBUS.Instance.GetListByName("硬度標準資料");
 
-
-
             var accessibleGroups = groups
                 .Where(group => userGroups.Any(userGroup => userGroup.IdGroup == group.Id))
                 .ToList();

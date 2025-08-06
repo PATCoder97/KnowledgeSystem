@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.txbMoreInfo = new DevExpress.XtraEditors.MemoEdit();
             this.picSign = new System.Windows.Forms.PictureBox();
             this.txbDate = new DevExpress.XtraEditors.DateEdit();
             this.cbbSign = new DevExpress.XtraEditors.LookUpEdit();
@@ -36,10 +37,12 @@
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.txbMoreInfo = new DevExpress.XtraEditors.MemoEdit();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.cbbDateFormat = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txbMoreInfo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSign)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDate.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDate.Properties)).BeginInit();
@@ -48,12 +51,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbMoreInfo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbDateFormat.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.cbbDateFormat);
             this.layoutControl1.Controls.Add(this.txbMoreInfo);
             this.layoutControl1.Controls.Add(this.picSign);
             this.layoutControl1.Controls.Add(this.txbDate);
@@ -62,16 +67,25 @@
             this.layoutControl1.Location = new System.Drawing.Point(0, 0);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(348, 360);
+            this.layoutControl1.Size = new System.Drawing.Size(427, 360);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // txbMoreInfo
+            // 
+            this.txbMoreInfo.Location = new System.Drawing.Point(62, 265);
+            this.txbMoreInfo.Name = "txbMoreInfo";
+            this.txbMoreInfo.Size = new System.Drawing.Size(353, 83);
+            this.txbMoreInfo.StyleController = this.layoutControl1;
+            this.txbMoreInfo.TabIndex = 7;
+            this.txbMoreInfo.EditValueChanged += new System.EventHandler(this.txbMoreInfo_EditValueChanged);
             // 
             // picSign
             // 
             this.picSign.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picSign.Location = new System.Drawing.Point(62, 84);
             this.picSign.Name = "picSign";
-            this.picSign.Size = new System.Drawing.Size(274, 164);
+            this.picSign.Size = new System.Drawing.Size(353, 177);
             this.picSign.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picSign.TabIndex = 6;
             this.picSign.TabStop = false;
@@ -89,8 +103,12 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txbDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txbDate.Properties.DisplayFormat.FormatString = "yyyyMMdd";
+            this.txbDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.txbDate.Properties.EditFormat.FormatString = "yyyyMMdd";
+            this.txbDate.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.txbDate.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.txbDate.Size = new System.Drawing.Size(274, 32);
+            this.txbDate.Size = new System.Drawing.Size(149, 32);
             this.txbDate.StyleController = this.layoutControl1;
             this.txbDate.TabIndex = 5;
             this.txbDate.EditValueChanged += new System.EventHandler(this.txbDate_EditValueChanged);
@@ -112,7 +130,7 @@
             this.cbbSign.Properties.NullText = "";
             this.cbbSign.Properties.PopupSizeable = false;
             this.cbbSign.Properties.ShowHeader = false;
-            this.cbbSign.Size = new System.Drawing.Size(274, 32);
+            this.cbbSign.Size = new System.Drawing.Size(353, 32);
             this.cbbSign.StyleController = this.layoutControl1;
             this.cbbSign.TabIndex = 4;
             this.cbbSign.EditValueChanged += new System.EventHandler(this.cbbSign_EditValueChanged);
@@ -125,9 +143,10 @@
             this.layoutControlItem1,
             this.layoutControlItem2,
             this.layoutControlItem3,
-            this.layoutControlItem4});
+            this.layoutControlItem4,
+            this.layoutControlItem5});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(348, 360);
+            this.Root.Size = new System.Drawing.Size(427, 360);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem1
@@ -139,7 +158,7 @@
             this.layoutControlItem1.Control = this.cbbSign;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(328, 36);
+            this.layoutControlItem1.Size = new System.Drawing.Size(407, 36);
             this.layoutControlItem1.Text = "簽名";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(38, 24);
             // 
@@ -152,7 +171,7 @@
             this.layoutControlItem2.Control = this.txbDate;
             this.layoutControlItem2.Location = new System.Drawing.Point(0, 36);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(328, 36);
+            this.layoutControlItem2.Size = new System.Drawing.Size(203, 36);
             this.layoutControlItem2.Text = "日期";
             this.layoutControlItem2.TextSize = new System.Drawing.Size(38, 24);
             // 
@@ -165,29 +184,56 @@
             this.layoutControlItem3.Control = this.picSign;
             this.layoutControlItem3.Location = new System.Drawing.Point(0, 72);
             this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Size = new System.Drawing.Size(328, 168);
+            this.layoutControlItem3.Size = new System.Drawing.Size(407, 181);
             this.layoutControlItem3.Text = "照片";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(38, 24);
-            // 
-            // txbMoreInfo
-            // 
-            this.txbMoreInfo.Location = new System.Drawing.Point(62, 252);
-            this.txbMoreInfo.Name = "txbMoreInfo";
-            this.txbMoreInfo.Size = new System.Drawing.Size(274, 96);
-            this.txbMoreInfo.StyleController = this.layoutControl1;
-            this.txbMoreInfo.TabIndex = 7;
-            this.txbMoreInfo.EditValueChanged += new System.EventHandler(this.txbMoreInfo_EditValueChanged);
             // 
             // layoutControlItem4
             // 
             this.layoutControlItem4.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.layoutControlItem4.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem4.Control = this.txbMoreInfo;
-            this.layoutControlItem4.Location = new System.Drawing.Point(0, 240);
+            this.layoutControlItem4.Location = new System.Drawing.Point(0, 253);
             this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(328, 100);
+            this.layoutControlItem4.Size = new System.Drawing.Size(407, 87);
             this.layoutControlItem4.Text = "資訊";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(38, 24);
+            // 
+            // cbbDateFormat
+            // 
+            this.cbbDateFormat.Location = new System.Drawing.Point(265, 48);
+            this.cbbDateFormat.Name = "cbbDateFormat";
+            this.cbbDateFormat.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.cbbDateFormat.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.cbbDateFormat.Properties.Appearance.Options.UseFont = true;
+            this.cbbDateFormat.Properties.Appearance.Options.UseForeColor = true;
+            this.cbbDateFormat.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.cbbDateFormat.Properties.AppearanceDropDown.ForeColor = System.Drawing.Color.Black;
+            this.cbbDateFormat.Properties.AppearanceDropDown.Options.UseFont = true;
+            this.cbbDateFormat.Properties.AppearanceDropDown.Options.UseForeColor = true;
+            this.cbbDateFormat.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbbDateFormat.Properties.Items.AddRange(new object[] {
+            "yyyyMMdd",
+            "yyyy.MM.dd",
+            "yyyy/MM/dd",
+            "MM/dd"});
+            this.cbbDateFormat.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.cbbDateFormat.Size = new System.Drawing.Size(150, 32);
+            this.cbbDateFormat.StyleController = this.layoutControl1;
+            this.cbbDateFormat.TabIndex = 8;
+            this.cbbDateFormat.SelectedIndexChanged += new System.EventHandler(this.cbbDateFormat_SelectedIndexChanged);
+            // 
+            // layoutControlItem5
+            // 
+            this.layoutControlItem5.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.layoutControlItem5.AppearanceItemCaption.Options.UseFont = true;
+            this.layoutControlItem5.Control = this.cbbDateFormat;
+            this.layoutControlItem5.Location = new System.Drawing.Point(203, 36);
+            this.layoutControlItem5.Name = "layoutControlItem5";
+            this.layoutControlItem5.Size = new System.Drawing.Size(204, 36);
+            this.layoutControlItem5.Text = "格式";
+            this.layoutControlItem5.TextSize = new System.Drawing.Size(38, 24);
             // 
             // uc00_AdvancedSign
             // 
@@ -195,10 +241,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.layoutControl1);
             this.Name = "uc00_AdvancedSign";
-            this.Size = new System.Drawing.Size(348, 360);
+            this.Size = new System.Drawing.Size(427, 360);
             this.Load += new System.EventHandler(this.uc00_AdvancedSign_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txbMoreInfo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSign)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDate.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDate.Properties)).EndInit();
@@ -207,8 +254,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbMoreInfo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbDateFormat.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -225,5 +273,7 @@
         private DevExpress.XtraEditors.LookUpEdit cbbSign;
         private DevExpress.XtraEditors.MemoEdit txbMoreInfo;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
+        private DevExpress.XtraEditors.ComboBoxEdit cbbDateFormat;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
     }
 }

@@ -1,6 +1,8 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
+using DevExpress.Utils;
 using DevExpress.Utils.Design;
+using DevExpress.XtraCharts.Design;
 using DevExpress.XtraEditors;
 using DevExpress.XtraSpreadsheet.Commands;
 using KnowledgeSystem.Helpers;
@@ -40,7 +42,9 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void ShowSign()
         {
-            int indexSign = Convert.ToInt16(cbbSign.EditValue?.ToString() ?? "0");
+            int indexSign = Convert.ToInt16(cbbSign.EditValue?.ToString() ?? "-1");
+            if (indexSign == -1) return;
+
             SignSelect = signs.FirstOrDefault(r => r.Id == indexSign);
 
             if (SignSelect == null) return;
@@ -48,7 +52,7 @@ namespace KnowledgeSystem.Views._00_Generals
             string source = Path.Combine(TPConfigs.FolderSign, SignSelect.ImgName);
             Image imageSign = File.Exists(source) ? new Bitmap(source) : new Bitmap(TPSvgimages.NoImage);
 
-            string letter = txbDate.EditValue == null ? string.Empty : txbDate.DateTime.ToString("yyyy.MM.dd");
+            string letter = txbDate.EditValue == null ? string.Empty : txbDate.Text;
             if (!string.IsNullOrEmpty(SignSelect.MoreInfo))
             {
                 moreInfos = Newtonsoft.Json.JsonConvert.DeserializeObject<List<dm_Sign>>(SignSelect.MoreInfo);
@@ -94,7 +98,7 @@ namespace KnowledgeSystem.Views._00_Generals
             sf.Alignment = StringAlignment.Far;  // Top/Left.
 
             Rectangle rect = new Rectangle(5, 5, bit.Width - 10, bit.Height);
-            Font font = new Font("Times New Roman", 12, FontStyle.Bold);
+            Font font = new Font("Microsoft JhengHei UI", 12, FontStyle.Bold);
 
             g.DrawString(letter, font, new SolidBrush(Color.Black), rect, sf);
 
@@ -264,6 +268,8 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void uc00_AdvancedSign_Load(object sender, EventArgs e)
         {
+            cbbDateFormat.SelectedIndex = 0;
+
             txbMoreInfo.Enabled = false;
             var signUsrs = dm_SignUsersBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id).ToList();
             var idSigns = signUsrs.Select(r => r.IdSign).ToList();
@@ -301,6 +307,14 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void txbMoreInfo_EditValueChanged(object sender, EventArgs e)
         {
+            ShowSign();
+        }
+
+        private void cbbDateFormat_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txbDate.Properties.DisplayFormat.FormatType = FormatType.DateTime;
+            txbDate.Properties.DisplayFormat.FormatString = cbbDateFormat.SelectedItem.ToString();
+
             ShowSign();
         }
     }
