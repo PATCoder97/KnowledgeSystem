@@ -1,5 +1,6 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
+using DevExpress.Utils;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Views.Grid;
@@ -8,6 +9,7 @@ using DocumentFormat.OpenXml.Bibliography;
 using iTextSharp.text.pdf;
 using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._00_Generals;
+using Spire.Presentation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -244,6 +246,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             editor.Properties.MaskSettings.Set("mask", "yyyy/MM/dd HH:mm:ss");
             editor.Properties.MaskSettings.Set("useAdvancingCaret", true);
 
+            editor.Properties.DisplayFormat.FormatType = FormatType.DateTime;
+            editor.Properties.DisplayFormat.FormatString = "yyyy/MM/dd HH:mm:ss";
+
             // 3. Hiển thị hộp nhập giờ phản hồi
             string defaultTime = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
             var result = XtraInputBox.Show(new XtraInputBoxArgs
@@ -259,7 +264,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             if (string.IsNullOrWhiteSpace(result?.ToString())) return;
 
             // 4. Xử lý kết quả nhập
-            if (!DateTime.TryParseExact(result.ToString(), "yyyy/MM/dd HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime respTime))
+            if (!DateTime.TryParse(result.ToString(), CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime respTime))
             {
                 ShowMessage("時間格式不正確，請重新輸入！");
                 return;
@@ -411,8 +416,12 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
 
             if (string.IsNullOrEmpty(result?.ToString())) return;
 
-            DateTime respTime;
-            DateTime.TryParse(result.ToString(), out respTime);
+            // Xử lý kết quả nhập
+            if (!DateTime.TryParse(result.ToString(), CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime respTime))
+            {
+                ShowMessage("時間格式不正確，請重新輸入！");
+                return;
+            }
 
             if (!DateTimeHelper.IsWithinWorkingHours(respTime))
             {
