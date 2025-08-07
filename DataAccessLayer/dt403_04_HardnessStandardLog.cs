@@ -24,5 +24,6 @@ namespace DataAccessLayer
         public double TestValue { get; set; }
         public double AllowableError { get; set; }
         public string Tester { get; set; }
+        public Nullable<System.DateTime> TimeNotify { get; set; }
     }
 }

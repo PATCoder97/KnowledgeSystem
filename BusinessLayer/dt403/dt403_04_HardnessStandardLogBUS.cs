@@ -40,13 +40,29 @@ namespace BusinessLayer
             }
         }
 
+        public List<dt403_04_HardnessStandardLog> GetListNotify()
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt403_04_HardnessStandardLog.Where(r => r.TimeNotify == null).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public List<dt403_04_HardnessStandardLog> GetListByDept(string idDept)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dt403_04_HardnessStandardLog.Where(r=>r.IdDept.StartsWith(idDept)).ToList();
+                    return _context.dt403_04_HardnessStandardLog.Where(r => r.IdDept.StartsWith(idDept)).ToList();
                 }
             }
             catch (Exception ex)

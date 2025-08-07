@@ -245,9 +245,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             editor.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.DateTimeMaskManager));
             editor.Properties.MaskSettings.Set("mask", "yyyy/MM/dd HH:mm:ss");
             editor.Properties.MaskSettings.Set("useAdvancingCaret", true);
-
-            editor.Properties.DisplayFormat.FormatType = FormatType.DateTime;
-            editor.Properties.DisplayFormat.FormatString = "yyyy/MM/dd HH:mm:ss";
+            editor.Properties.UseMaskAsDisplayFormat = true;
 
             // 3. Hiển thị hộp nhập giờ phản hồi
             string defaultTime = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
@@ -264,9 +262,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             if (string.IsNullOrWhiteSpace(result?.ToString())) return;
 
             // 4. Xử lý kết quả nhập
-            if (!DateTime.TryParse(result.ToString(), CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime respTime))
+            if (!DateTime.TryParse(result.ToString(), out DateTime respTime))
             {
-                ShowMessage("時間格式不正確，請重新輸入！");
+                ShowMessage($"{result}\r\n時間格式不正確，請重新輸入！");
                 return;
             }
 
@@ -403,6 +401,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             editor.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.DateTimeMaskManager));
             editor.Properties.MaskSettings.Set("mask", "yyyy/MM/dd HH:mm:ss");
             editor.Properties.MaskSettings.Set("useAdvancingCaret", true);
+            editor.Properties.UseMaskAsDisplayFormat = true;
 
             var result = XtraInputBox.Show(new XtraInputBoxArgs
             {
@@ -417,9 +416,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             if (string.IsNullOrEmpty(result?.ToString())) return;
 
             // Xử lý kết quả nhập
-            if (!DateTime.TryParse(result.ToString(), CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime respTime))
+            if (!DateTime.TryParse(result.ToString(), out DateTime respTime))
             {
-                ShowMessage("時間格式不正確，請重新輸入！");
+                ShowMessage($"{result}\r\n時間格式不正確，請重新輸入！");
                 return;
             }
 
