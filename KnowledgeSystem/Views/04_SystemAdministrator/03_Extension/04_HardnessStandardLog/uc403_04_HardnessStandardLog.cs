@@ -147,7 +147,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._04_Hardne
             // Kiểm tra quyền từng ke để có quyền truy cập theo nhóm
             var userGroups = dm_GroupUserBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id);
             var departments = dm_DeptBUS.Instance.GetList();
-            var groups = dm_GroupBUS.Instance.GetListByName("硬度標準資料");
+            var groups = dm_GroupBUS.Instance.GetListByName("硬度數據管理");
 
             var accessibleGroups = groups
                 .Where(group => userGroups.Any(userGroup => userGroup.IdGroup == group.Id))
