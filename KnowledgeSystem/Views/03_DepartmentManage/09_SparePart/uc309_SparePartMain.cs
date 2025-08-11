@@ -1,4 +1,26 @@
-﻿using System;
+﻿using BusinessLayer;
+using DataAccessLayer;
+using DevExpress.CodeParser;
+using DevExpress.Utils.Menu;
+using DevExpress.Utils.Svg;
+using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraExport.Helpers;
+using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraReports.UI;
+using DevExpress.XtraSplashScreen;
+using DevExpress.XtraVerticalGrid;
+using DocumentFormat.OpenXml.Bibliography;
+using DocumentFormat.OpenXml.Spreadsheet;
+using ExcelDataReader;
+using KnowledgeSystem.Helpers;
+using KnowledgeSystem.Views._00_Generals;
+using KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck;
+using OfficeOpenXml;
+using OfficeOpenXml.Style;
+using Org.BouncyCastle.Math;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,25 +36,6 @@ using System.Threading.Tasks;
 using System.Web.UI.WebControls;
 using System.Windows.Forms;
 using System.Windows.Media.Media3D;
-using BusinessLayer;
-using DataAccessLayer;
-using DevExpress.Utils.Menu;
-using DevExpress.Utils.Svg;
-using DevExpress.XtraEditors;
-using DevExpress.XtraEditors.Controls;
-using DevExpress.XtraGrid;
-using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraReports.UI;
-using DevExpress.XtraSplashScreen;
-using DocumentFormat.OpenXml.Bibliography;
-using DocumentFormat.OpenXml.Spreadsheet;
-using ExcelDataReader;
-using KnowledgeSystem.Helpers;
-using KnowledgeSystem.Views._00_Generals;
-using KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck;
-using OfficeOpenXml;
-using OfficeOpenXml.Style;
-using Org.BouncyCastle.Math;
 using static KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._02_MaterialTrends.uc403_02_MaterialTrends;
 using Color = System.Drawing.Color;
 using Font = System.Drawing.Font;
@@ -624,11 +627,54 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             detailView.BestFitColumns();
         }
 
+        public static List<int> GetVisibleDataIds(GridView view)
+        {
+            var ids = new List<int>();
+
+            for (int i = 0; i < view.DataRowCount; i++)
+            {
+                int rowHandle = view.GetVisibleRowHandle(i);
+
+                // Cách nhanh: nếu có cột/field "data.Id" trong Grid (cột ẩn cũng được)
+                var cell = view.GetRowCellValue(rowHandle, "data.Id");
+                if (cell != null && int.TryParse(cell.ToString(), out int idFromCell))
+                {
+                    ids.Add(idFromCell);
+                    continue;
+                }
+
+                // Fallback: lấy từ object ẩn danh bằng reflection
+                var row = view.GetRow(rowHandle);
+                if (row == null) continue;
+
+                var dataProp = row.GetType().GetProperty("data");
+                var dataVal = dataProp?.GetValue(row, null);
+                var idProp = dataVal?.GetType().GetProperty("Id");
+                var idVal = idProp?.GetValue(dataVal, null)?.ToString();
+
+                if (int.TryParse(idVal, out int idFromProp))
+                    ids.Add(idFromProp);
+            }
+
+            return ids;
+        }
+
+
         private void ExportExcelBySpare(bool _isNotify = false)
         {
+            var ids = GetVisibleDataIds(gvData);
             var materialsRechecking = dt309_InspectionBatchMaterialBUS.Instance.GetListRechecking().Select(r => r.MaterialId).ToList();
 
-            var excelDatas = materials.Where(r => !materialsRechecking.Contains(r.Id) && (_isNotify ? (r.QuantityInStorage + r.QuantityInMachine) < r.MinQuantity : true))
+            var idsSet = new HashSet<int>(ids);
+            var recheckingSet = new HashSet<int>(materialsRechecking);
+
+            var filteredMaterials = materials
+                .Where(r => idsSet.Contains(r.Id)) // chỉ lấy các item có Id nằm trong ids
+                .Where(r => !recheckingSet.Contains(r.Id)) // loại bỏ item đang rechecking
+                .Where(r => !_isNotify || (r.QuantityInStorage + r.QuantityInMachine) < r.MinQuantity) // điều kiện notify
+                .ToList();
+
+            var excelDatas = filteredMaterials
                 .OrderBy(x => x.IdDept)
                 .Select(x => new
                 {
@@ -637,14 +683,15 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                     品名規格 = x.DisplayName,
                     備品用途 = x.TypeUse,
                     料位 = x.Location,
-                    單位 = units.FirstOrDefault(u => u.Id == x.IdUnit).DisplayName,
+                    單位 = units.FirstOrDefault(u => u.Id == x.IdUnit)?.DisplayName,
                     安全數量 = x.MinQuantity,
                     課庫數量 = x.QuantityInStorage,
                     機邊庫數量 = x.QuantityInMachine,
                     單價 = x.Price,
                     總金額 = x.Price * (x.QuantityInMachine + x.QuantityInStorage),
-                    管理員 = users.FirstOrDefault(u => u.Id == x.IdManager).DisplayName,
-                }).ToList();
+                    管理員 = users.FirstOrDefault(u => u.Id == x.IdManager)?.DisplayName,
+                })
+                .ToList();
 
             string documentsPath = TPConfigs.DocumentPath();
             if (!Directory.Exists(documentsPath))
@@ -695,8 +742,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         private void btnExcelByMachine_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            var ids = GetVisibleDataIds(gvData);
+
             var machines = dt309_MachinesBUS.Instance.GetListByStartIdDept(deptGetData);
-            var machineMaterials = dt309_MachineMaterialsBUS.Instance.GetList();
+            var machineMaterials = dt309_MachineMaterialsBUS.Instance.GetList().Where(r => ids.Contains(r.MaterialId)).ToList();
 
             // Tạo danh sách dạng phẳng: mỗi dòng là 1 vật liệu gắn với máy
             var excelDatas = machines.SelectMany(machine =>
