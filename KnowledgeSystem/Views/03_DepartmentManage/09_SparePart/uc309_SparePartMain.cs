@@ -659,7 +659,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             return ids;
         }
 
-
         private void ExportExcelBySpare(bool _isNotify = false)
         {
             var ids = GetVisibleDataIds(gvData);
