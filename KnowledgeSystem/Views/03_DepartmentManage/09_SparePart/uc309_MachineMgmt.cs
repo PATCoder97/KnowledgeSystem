@@ -88,7 +88,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             {
                 eventInfo = EventFormInfo.View,
                 formName = "用料設備",
-                idBase = idMachine
+                idBase = idMachine,
+                idDeptGetData = deptGetData
             };
             fInfo.ShowDialog();
 
@@ -248,7 +249,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            f309_Machine_Info finfo = new f309_Machine_Info();
+            f309_Machine_Info finfo = new f309_Machine_Info()
+            {
+                eventInfo = EventFormInfo.Create,
+                formName = "用料設備",
+                idDeptGetData = deptGetData
+            };
             finfo.ShowDialog();
             LoadData();
         }

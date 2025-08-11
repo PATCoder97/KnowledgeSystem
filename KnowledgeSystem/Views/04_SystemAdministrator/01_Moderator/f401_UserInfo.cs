@@ -835,18 +835,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             MsgTP.MsgShowInfomation(msgValidCert);
         }
 
-        private void f401_UserInfo_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Control && e.Alt && e.Shift && e.KeyCode == Keys.T)
-            {
-                string password = EncryptionHelper.DecryptPass(userInfo.SecondaryPassword);
-                XtraMessageBox.Show(password);
-                if (string.IsNullOrWhiteSpace(password)) return;
-
-                Clipboard.SetText(password);
-            }
-        }
-
         private void btnActualJobChange_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             XtraInputBoxArgs args = new XtraInputBoxArgs();

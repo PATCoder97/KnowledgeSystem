@@ -162,13 +162,33 @@ namespace BusinessLayer
             }
         }
 
-        public bool RemoveByIdMaterial(int idMaterial)
+        public bool RemoveByIdMaterial(int idMachine)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    var itemRemove = _context.dt309_MachineMaterials.Where(r => r.MaterialId == idMaterial);
+                    var itemRemove = _context.dt309_MachineMaterials.Where(r => r.MaterialId == idMachine);
+                    _context.dt309_MachineMaterials.RemoveRange(itemRemove);
+
+                    int affectedRecords = _context.SaveChanges();
+                    return affectedRecords > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
+        public bool RemoveByIdMachine(int idMachine)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    var itemRemove = _context.dt309_MachineMaterials.Where(r => r.MachineId == idMachine);
                     _context.dt309_MachineMaterials.RemoveRange(itemRemove);
 
                     int affectedRecords = _context.SaveChanges();

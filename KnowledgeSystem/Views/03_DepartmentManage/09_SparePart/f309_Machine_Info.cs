@@ -28,6 +28,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         public EventFormInfo eventInfo = EventFormInfo.Create;
         public string formName = "";
         public int idBase = -1;
+        public string idDeptGetData = TPConfigs.LoginUser.IdDepartment;
 
         dt309_Machines machine;
 
@@ -193,7 +194,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             var result = false;
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
             {
-                machine.IdDept = TPConfigs.LoginUser.IdDepartment;
+                machine.IdDept = idDeptGetData;
                 machine.DisplayName = displayName;
                 machine.Location = location;
                 machine.Quantity = quantity;
@@ -212,9 +213,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                         break;
                     case EventFormInfo.Delete:
 
-                        //var dialogResult = XtraMessageBox.Show($"您確認要刪除{formName}:\r\n{machine.DisplayName}", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                        //if (dialogResult != DialogResult.Yes) return;
-                        //result = dt309_MaterialsBUS.Instance.RemoveById(machine.Id, TPConfigs.LoginUser.Id);
+                        var dialogResult = XtraMessageBox.Show($"您確認要刪除{formName}:\r\n{machine.DisplayName}", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (dialogResult != DialogResult.Yes) return;
+                        result = dt309_MachinesBUS.Instance.RemoveById(machine.Id);
+
+                        dt309_MachineMaterialsBUS.Instance.RemoveByIdMachine(machine.Id);
 
                         break;
                     default:

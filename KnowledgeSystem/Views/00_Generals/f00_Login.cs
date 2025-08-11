@@ -134,7 +134,7 @@ namespace KnowledgeSystem.Views._00_Generals
             txbPassword.Focus();
 #if DEBUG
             txbUserID.Text = "VNW0014732";
-            txbPassword.Text = "Anhtuan04";
+            txbPassword.Text = "Anhtuan05";
             btnLogin_Click(sender, e);
 #endif
         }
