@@ -110,7 +110,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._04_Hardne
             }
         }
 
-
         private void LoadData()
         {
             using (var handle = SplashScreenManager.ShowOverlayForm(gcData))

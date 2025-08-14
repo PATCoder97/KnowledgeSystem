@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,11 +32,17 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._04_Hardne
         public string formName = "";
         public string snBase = "";
         public string idDeptGetData = "";
+        string baseFilePath = "";
 
         dt403_04_StandardInfo standardInfo;
 
         List<LayoutControlItem> lcControls;
         List<LayoutControlItem> lcImpControls;
+
+        private class Attachment : dm_Attachment
+        {
+            public string FilePath { get; set; }
+        }
 
         private void InitializeIcon()
         {
@@ -50,6 +57,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._04_Hardne
             txbMethod.Enabled = _enable;
             txbError.Enabled = _enable;
             txbValue.Enabled = _enable;
+            txbExpDate.Enabled = _enable;
+            txbFilePath.Enabled = _enable;
         }
 
         private void LockControl()
@@ -140,6 +149,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._04_Hardne
                     txbMethod.EditValue = standardInfo.Method;
                     txbValue.EditValue = standardInfo.Value;
                     txbError.EditValue = standardInfo.Error;
+                    txbExpDate.EditValue = standardInfo.ExpDate;
+                    txbFilePath.EditValue = "...";
 
                     break;
                 case EventFormInfo.Update:
@@ -153,6 +164,24 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._04_Hardne
             }
 
             LockControl();
+        }
+
+        private void HandleAttachment()
+        {
+            var baseAtt = new dm_Attachment()
+            {
+                ActualName = Path.GetFileName(baseFilePath),
+                EncryptionName = EncryptionHelper.EncryptionFileName(baseFilePath),
+                Thread = "40304"
+            };
+
+            var idAtt = dm_AttachmentBUS.Instance.Add(baseAtt);
+            standardInfo.IdAtt = idAtt;
+
+            if (!Directory.Exists(TPConfigs.Folder40304))
+                Directory.CreateDirectory(TPConfigs.Folder40304);
+
+            File.Copy(baseFilePath, Path.Combine(TPConfigs.Folder40304, baseAtt.EncryptionName));
         }
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -182,6 +211,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._04_Hardne
             var method = txbMethod.EditValue?.ToString();
             var value = Convert.ToDouble(txbValue.EditValue);
             var error = Convert.ToDouble(txbError.EditValue);
+            var expDate = txbExpDate.DateTime;
+            string fileName = txbFilePath.Text.Trim();
 
             var result = false;
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
@@ -189,17 +220,25 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._04_Hardne
                 standardInfo.Method = method;
                 standardInfo.Value = value;
                 standardInfo.Error = error;
+                standardInfo.ExpDate = expDate;
                 standardInfo.IdDept = idDeptGetData;
 
                 switch (eventInfo)
                 {
                     case EventFormInfo.Create:
 
+                        HandleAttachment();
                         standardInfo.SN = sn;
 
                         result = dt403_04_StandardInfoBUS.Instance.Add(standardInfo);
                         break;
                     case EventFormInfo.Update:
+
+                        if (fileName != "...")
+                        {
+                            HandleAttachment();
+                        }
+
                         result = dt403_04_StandardInfoBUS.Instance.AddOrUpdate(standardInfo);
                         break;
                     case EventFormInfo.Delete:
@@ -236,6 +275,55 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._04_Hardne
 
             eventInfo = EventFormInfo.Delete;
             LockControl();
+        }
+
+        private void txbFilePath_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            switch (e.Button.Caption)
+            {
+                case "Paste":
+
+                    if (Clipboard.ContainsFileDropList())
+                    {
+                        var files = Clipboard.GetFileDropList();
+                        var pdfFiles = new List<string>();
+
+                        foreach (var file in files)
+                        {
+                            if (file.EndsWith(".pdf", StringComparison.OrdinalIgnoreCase) && File.Exists(file))
+                            {
+                                pdfFiles.Add(file);
+                            }
+                        }
+
+                        if (pdfFiles.Count != 1)
+                        {
+                            XtraMessageBox.Show("請選擇一個PDF檔案", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+
+                        baseFilePath = pdfFiles.First();
+                        txbFilePath.Text = Path.GetFileName(baseFilePath);
+                    }
+                    else
+                    {
+                        XtraMessageBox.Show("請選擇一個PDF檔案", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+
+                    break;
+                default:
+                    OpenFileDialog dialog = new OpenFileDialog
+                    {
+                        Filter = "PDF Files (*.pdf)|*.pdf",
+                        FilterIndex = 1
+                    };
+
+                    if (dialog.ShowDialog() != DialogResult.OK) return;
+                    baseFilePath = dialog.FileName;
+                    txbFilePath.Text = Path.GetFileName(baseFilePath);
+
+                    break;
+            }
         }
     }
 }

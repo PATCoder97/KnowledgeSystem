@@ -19,5 +19,7 @@ namespace DataAccessLayer
         public double Value { get; set; }
         public double Error { get; set; }
         public string Method { get; set; }
+        public Nullable<System.DateTime> ExpDate { get; set; }
+        public Nullable<int> IdAtt { get; set; }
     }
 }

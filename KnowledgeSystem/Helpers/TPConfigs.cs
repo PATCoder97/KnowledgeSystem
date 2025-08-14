@@ -41,6 +41,7 @@ namespace KnowledgeSystem.Helpers
         public static string Folder306 { get; set; }
         public static string Folder307 { get; set; }
         public static string Folder403 { get; set; }
+        public static string Folder40304 { get; set; }
         public static string FolderSign { get; set; }
         public static string FolderWatermark { get; set; }
         public static string DocTypes201 { get; set; }
@@ -69,6 +70,7 @@ namespace KnowledgeSystem.Helpers
             Folder306 = Path.Combine(FolderData, "306");
             Folder307 = Path.Combine(FolderData, "307");
             Folder403 = Path.Combine(FolderData, "403");
+            Folder40304 = Path.Combine(FolderData, "40304");
             FolderSign = Path.Combine(Folder00, "ImageSign");
             FolderWatermark = Path.Combine(Folder00, "Watermark");
             FolderReportFormat = Path.Combine(Folder00, "ReportFormat");

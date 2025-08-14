@@ -420,7 +420,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt
             var idAtt = dm_AttachmentBUS.Instance.Add(baseAtt);
             dt204Base.IdAtt = idAtt;
 
-            if (Directory.Exists(TPConfigs.Folder204))
+            if (!Directory.Exists(TPConfigs.Folder204))
                 Directory.CreateDirectory(TPConfigs.Folder204);
 
             File.Copy(baseFilePath, Path.Combine(TPConfigs.Folder204, baseAtt.EncryptionName));

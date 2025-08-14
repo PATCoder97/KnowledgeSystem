@@ -1,26 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Util;
-using System.Windows.Forms;
-using BusinessLayer;
+﻿using BusinessLayer;
 using DataAccessLayer;
 using DevExpress.Utils.Menu;
 using DevExpress.Utils.Svg;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
-using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraReports.UI;
 using DevExpress.XtraSplashScreen;
 using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._00_Generals;
 using KnowledgeSystem.Views._03_DepartmentManage._09_SparePart;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Web.Util;
+using System.Windows.Forms;
 
 namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._04_HardnessStandardLog
 {
@@ -46,6 +48,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._04_Hardne
         List<dt403_04_StandardInfo> standardInfos;
 
         DXMenuItem itemViewInfo;
+        DXMenuItem itemViewAtt;
 
         private void InitializeIcon()
         {
@@ -69,16 +72,36 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._04_Hardne
         private void InitializeMenuItems()
         {
             itemViewInfo = CreateMenuItem("查看資訊", ItemViewInfo_Click, TPSvgimages.View);
-            //itemUpdatePrice = CreateMenuItem("更新單價", ItemUpdatePrice_Click, TPSvgimages.Money);
+            itemViewAtt = CreateMenuItem("讀取檔案", ItemViewAtt_Click, TPSvgimages.Attach);
+        }
 
-            //itemMaterialIn = CreateMenuItem("收料", ItemMaterialIn_Click, TPSvgimages.Num1);
-            //itemMaterialOut = CreateMenuItem("領用", ItemMaterialOut_Click, TPSvgimages.Num2);
-            //itemMaterialTransfer = CreateMenuItem("轉庫", ItemMaterialTransfer_Click, TPSvgimages.Num3);
-            //itemMaterialCheck = CreateMenuItem("盤點", ItemMaterialCheck_Click, TPSvgimages.Num4);
-            //itemMaterialGetFromOther = CreateMenuItem("調撥", ItemMaterialGetFromOther_Click, TPSvgimages.Num5);
+        private void ItemViewAtt_Click(object sender, EventArgs e)
+        {
+            int idAtt = -1;
 
-            //itemMultiselect = CreateMenuItem("啟用多選", ItemMultiselect_Click, TPSvgimages.CheckedRadio);
-            //itemPrintStamp = CreateMenuItem("執行列印", ItemPrintStamp_Click, TPSvgimages.Print);
+            int focusedRowHandle = gvData.FocusedRowHandle;
+            var rowData = gvData.GetRow(focusedRowHandle);
+            dt403_04_StandardInfo data = gvData.GetRow(focusedRowHandle) as dt403_04_StandardInfo;
+            idAtt = data.IdAtt ?? -1;
+
+            var att = dm_AttachmentBUS.Instance.GetItemById(idAtt);
+
+            string filePath = att.EncryptionName;
+            string fileName = att.ActualName;
+
+            string sourcePath = Path.Combine(TPConfigs.Folder40304, filePath);
+            string destPath = Path.Combine(TPConfigs.TempFolderData, $"{Regex.Replace(fileName, @"[\\/:*?""<>|]", "")}_{DateTime.Now:yyyyMMddHHmmss}{Path.GetExtension(fileName)}");
+
+            if (!Directory.Exists(TPConfigs.TempFolderData))
+                Directory.CreateDirectory(TPConfigs.TempFolderData);
+
+            File.Copy(sourcePath, destPath, true);
+
+            var mainForm = f00_ViewMultiFile.Instance;
+            if (!mainForm.Visible)
+                mainForm.Show();
+
+            mainForm.OpenFormInDocumentManager(destPath);
         }
 
         private void ItemViewInfo_Click(object sender, EventArgs e)
@@ -148,7 +171,28 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._04_Hardne
         {
             if (e.HitInfo.InRowCell && e.HitInfo.InDataRow)
             {
+                int focusedRowHandle = gvData.FocusedRowHandle;
+                var rowData = gvData.GetRow(focusedRowHandle);
+                dt403_04_StandardInfo data = gvData.GetRow(focusedRowHandle) as dt403_04_StandardInfo;
+                var idAtt = data.IdAtt ?? -1;
+
                 e.Menu.Items.Add(itemViewInfo);
+
+                if (idAtt != -1)
+                {
+                    e.Menu.Items.Add(itemViewAtt);
+                }
+            }
+        }
+
+        private void gvData_CustomUnboundColumnData(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDataEventArgs e)
+        {
+            GridView view = sender as GridView;
+
+            if (e.IsGetData && e.Column.FieldName == "Att")
+            {
+                var idAtt = view.GetListSourceRowCellValue(e.ListSourceRowIndex, "IdAtt")?.ToString();
+                e.Value = string.IsNullOrEmpty(idAtt) ? "" : "有證書";
             }
         }
     }
