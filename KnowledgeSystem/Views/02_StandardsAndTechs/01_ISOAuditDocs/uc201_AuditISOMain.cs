@@ -563,7 +563,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
         private void tlsData_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
         {
             // Dịch và xóa các mục menu
-            var translations = new Dictionary<string, string> { { "Full Expand", "完全展開" }, { "Full Collapse", "完全折疊" } };
+            var translations = new Dictionary<string, string> { { "Full Expand", "全部展開" }, { "Full Collapse", "全部收合" } };
             List<DXMenuItem> itemDefault = new List<DXMenuItem>();
             foreach (var item in e.Menu.Items.ToList())
             {

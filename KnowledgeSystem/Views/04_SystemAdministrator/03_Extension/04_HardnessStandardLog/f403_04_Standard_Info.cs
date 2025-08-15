@@ -236,6 +236,9 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._04_Hardne
 
                         if (fileName != "...")
                         {
+                            if (standardInfo.IdAtt.HasValue)
+                                dm_AttachmentBUS.Instance.RemoveById(standardInfo.IdAtt.Value);
+
                             HandleAttachment();
                         }
 
@@ -246,6 +249,9 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._04_Hardne
                         var dialogResult = XtraMessageBox.Show($"您確認要刪除{formName}:\r\n{standardInfo.SN}", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                         if (dialogResult != DialogResult.Yes) return;
                         result = dt403_04_StandardInfoBUS.Instance.RemoveById(standardInfo.SN);
+
+                        if (standardInfo.IdAtt.HasValue)
+                            dm_AttachmentBUS.Instance.RemoveById(standardInfo.IdAtt.Value);
 
                         break;
                     default:

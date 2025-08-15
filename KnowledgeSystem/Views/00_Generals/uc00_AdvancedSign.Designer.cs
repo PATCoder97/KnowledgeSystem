@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.cbbDateFormat = new DevExpress.XtraEditors.ComboBoxEdit();
             this.txbMoreInfo = new DevExpress.XtraEditors.MemoEdit();
             this.picSign = new System.Windows.Forms.PictureBox();
             this.txbDate = new DevExpress.XtraEditors.DateEdit();
@@ -38,10 +39,10 @@
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.cbbDateFormat = new DevExpress.XtraEditors.ComboBoxEdit();
             this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbDateFormat.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbMoreInfo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSign)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDate.Properties.CalendarTimeProperties)).BeginInit();
@@ -52,7 +53,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbbDateFormat.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,6 +70,31 @@
             this.layoutControl1.Size = new System.Drawing.Size(427, 360);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // cbbDateFormat
+            // 
+            this.cbbDateFormat.Location = new System.Drawing.Point(265, 48);
+            this.cbbDateFormat.Name = "cbbDateFormat";
+            this.cbbDateFormat.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.cbbDateFormat.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.cbbDateFormat.Properties.Appearance.Options.UseFont = true;
+            this.cbbDateFormat.Properties.Appearance.Options.UseForeColor = true;
+            this.cbbDateFormat.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.cbbDateFormat.Properties.AppearanceDropDown.ForeColor = System.Drawing.Color.Black;
+            this.cbbDateFormat.Properties.AppearanceDropDown.Options.UseFont = true;
+            this.cbbDateFormat.Properties.AppearanceDropDown.Options.UseForeColor = true;
+            this.cbbDateFormat.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbbDateFormat.Properties.Items.AddRange(new object[] {
+            "yyyy.MM.dd",
+            "yyyyMMdd",
+            "yyyy/MM/dd",
+            "MM/dd"});
+            this.cbbDateFormat.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.cbbDateFormat.Size = new System.Drawing.Size(150, 32);
+            this.cbbDateFormat.StyleController = this.layoutControl1;
+            this.cbbDateFormat.TabIndex = 8;
+            this.cbbDateFormat.SelectedIndexChanged += new System.EventHandler(this.cbbDateFormat_SelectedIndexChanged);
             // 
             // txbMoreInfo
             // 
@@ -199,31 +224,6 @@
             this.layoutControlItem4.Text = "資訊";
             this.layoutControlItem4.TextSize = new System.Drawing.Size(38, 24);
             // 
-            // cbbDateFormat
-            // 
-            this.cbbDateFormat.Location = new System.Drawing.Point(265, 48);
-            this.cbbDateFormat.Name = "cbbDateFormat";
-            this.cbbDateFormat.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.cbbDateFormat.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.cbbDateFormat.Properties.Appearance.Options.UseFont = true;
-            this.cbbDateFormat.Properties.Appearance.Options.UseForeColor = true;
-            this.cbbDateFormat.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.cbbDateFormat.Properties.AppearanceDropDown.ForeColor = System.Drawing.Color.Black;
-            this.cbbDateFormat.Properties.AppearanceDropDown.Options.UseFont = true;
-            this.cbbDateFormat.Properties.AppearanceDropDown.Options.UseForeColor = true;
-            this.cbbDateFormat.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbbDateFormat.Properties.Items.AddRange(new object[] {
-            "yyyyMMdd",
-            "yyyy.MM.dd",
-            "yyyy/MM/dd",
-            "MM/dd"});
-            this.cbbDateFormat.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cbbDateFormat.Size = new System.Drawing.Size(150, 32);
-            this.cbbDateFormat.StyleController = this.layoutControl1;
-            this.cbbDateFormat.TabIndex = 8;
-            this.cbbDateFormat.SelectedIndexChanged += new System.EventHandler(this.cbbDateFormat_SelectedIndexChanged);
-            // 
             // layoutControlItem5
             // 
             this.layoutControlItem5.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
@@ -245,6 +245,7 @@
             this.Load += new System.EventHandler(this.uc00_AdvancedSign_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.cbbDateFormat.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbMoreInfo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSign)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDate.Properties.CalendarTimeProperties)).EndInit();
@@ -255,7 +256,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbbDateFormat.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             this.ResumeLayout(false);
 

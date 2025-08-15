@@ -109,7 +109,7 @@ namespace KnowledgeSystem.Views._00_Generals
             string signPath = Path.Combine(TPConfigs.FolderSign, signSelect.ImgName);
             imageSign = File.Exists(signPath) ? new Bitmap(signPath) : TPSvgimages.NoImage;
 
-            descrip = DateTime.Now.ToString("yyyyMMdd");
+            descrip = DateTime.Now.ToString("yyyy.MM.dd");
         }
 
         void DrawImageRectangle(Graphics graphics, GraphicsCoordinates rect)
