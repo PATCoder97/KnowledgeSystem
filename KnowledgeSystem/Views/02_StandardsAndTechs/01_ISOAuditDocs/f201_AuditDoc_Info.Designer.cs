@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraGrid.GridFormatRule gridFormatRule2 = new DevExpress.XtraGrid.GridFormatRule();
-            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression2 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule1 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression1 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f201_AuditDoc_Info));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.gcData = new DevExpress.XtraGrid.GridControl();
@@ -51,12 +51,12 @@
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnAdd = new DevExpress.XtraBars.BarButtonItem();
+            this.btnAddMultiFile = new DevExpress.XtraBars.BarButtonItem();
             this.btnReload = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-            this.btnAddMultiFile = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
@@ -122,14 +122,14 @@
             this.gridColumn5,
             this.gridColumn2,
             this.gridColumn7});
-            gridFormatRule2.ApplyToRow = true;
-            gridFormatRule2.Name = "Format0";
-            formatConditionRuleExpression2.Appearance.BackColor = System.Drawing.Color.White;
-            formatConditionRuleExpression2.Appearance.BackColor2 = System.Drawing.Color.Red;
-            formatConditionRuleExpression2.Appearance.Options.UseBackColor = true;
-            formatConditionRuleExpression2.Expression = "[data.IsCancel] = True";
-            gridFormatRule2.Rule = formatConditionRuleExpression2;
-            this.gvData.FormatRules.Add(gridFormatRule2);
+            gridFormatRule1.ApplyToRow = true;
+            gridFormatRule1.Name = "Format0";
+            formatConditionRuleExpression1.Appearance.BackColor = System.Drawing.Color.White;
+            formatConditionRuleExpression1.Appearance.BackColor2 = System.Drawing.Color.Red;
+            formatConditionRuleExpression1.Appearance.Options.UseBackColor = true;
+            formatConditionRuleExpression1.Expression = "[data.IsCancel] = True";
+            gridFormatRule1.Rule = formatConditionRuleExpression1;
+            this.gvData.FormatRules.Add(gridFormatRule1);
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
             this.gvData.OptionsDetail.ShowDetailTabs = false;
@@ -138,6 +138,8 @@
             this.gvData.OptionsView.EnableAppearanceOddRow = true;
             this.gvData.OptionsView.ShowAutoFilterRow = true;
             this.gvData.OptionsView.ShowGroupPanel = false;
+            this.gvData.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gColEnterDate, DevExpress.Data.ColumnSortOrder.Descending)});
             this.gvData.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gvData_PopupMenuShowing);
             this.gvData.DoubleClick += new System.EventHandler(this.gvData_DoubleClick);
             // 
@@ -306,6 +308,14 @@
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAdd_ItemClick);
             // 
+            // btnAddMultiFile
+            // 
+            this.btnAddMultiFile.Caption = "新增多文件";
+            this.btnAddMultiFile.Id = 5;
+            this.btnAddMultiFile.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnAddMultiFile.Name = "btnAddMultiFile";
+            this.btnAddMultiFile.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAddMultiFile_ItemClick);
+            // 
             // btnReload
             // 
             this.btnReload.Caption = "刷新";
@@ -346,14 +356,6 @@
             this.barDockControlRight.Location = new System.Drawing.Point(955, 49);
             this.barDockControlRight.Manager = this.barManagerTP;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 422);
-            // 
-            // btnAddMultiFile
-            // 
-            this.btnAddMultiFile.Caption = "新增多文件";
-            this.btnAddMultiFile.Id = 5;
-            this.btnAddMultiFile.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnAddMultiFile.Name = "btnAddMultiFile";
-            this.btnAddMultiFile.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAddMultiFile_ItemClick);
             // 
             // f201_AuditDoc_Info
             // 
