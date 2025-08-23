@@ -227,7 +227,13 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._04_Hardne
                 {
                     case EventFormInfo.Create:
 
-                        HandleAttachment();
+                        if (fileName != "..." && !string.IsNullOrEmpty(fileName))
+                        {
+                            if (standardInfo.IdAtt.HasValue)
+                                dm_AttachmentBUS.Instance.RemoveById(standardInfo.IdAtt.Value);
+
+                            HandleAttachment();
+                        }
                         standardInfo.SN = sn;
 
                         result = dt403_04_StandardInfoBUS.Instance.Add(standardInfo);

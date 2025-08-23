@@ -183,6 +183,8 @@ namespace KnowledgeSystem.Helpers
 
         public async Task<bool> BorrMotor(dm_User borrUsr, string nameVehicle, string borrTime, string place, string purposes, string numUser)
         {
+            //https://www.fhs.com.tw/ads/api/Furnace/rest/json/ve/s35/78vkv27513vkvvkvvkv202508221538vkvTtkt-vlvkvB.%E9%96%8B%E6%9C%83_%E4%B8%8A%E8%AA%B2%E8%A8%93%E7%B7%B4%20vkv1vkvvkv38LD-40103vkvVNW0014732vkvYvkvYvkvYvkvVNW0018983vkv202508221539
+
             string managerVehicle = await GetManagerVehicle(nameVehicle);
             var purposesUrl = HttpUtility.UrlEncode(purposes).Replace("+", "%20").ToUpper();
             var placeUrl = HttpUtility.UrlEncode(place).Replace("+", "%20").ToUpper();
