@@ -117,9 +117,15 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             lcControls = new List<LayoutControlItem>() { lcStorageFrom, lcStorageTo, lcStorageFromQuantity, lcStorageToQuantity, lcQuantity, lcDesc, lcPrice, lcExpDate };
             lcImpControls = new List<LayoutControlItem>() { lcStorageFrom, lcStorageTo, lcQuantity };
 
-            if (eventInfo == "收貨")
+            switch (eventInfo)
             {
-                lcImpControls.Add(lcPrice);
+                case "領用":
+                    lcImpControls.Add(lcDesc);
+                    break;
+                case "收貨":
+                    lcImpControls.Add(lcPrice);
+                    break;
+                case "盤點": goto case "領用";
             }
 
             foreach (var item in lcControls)
