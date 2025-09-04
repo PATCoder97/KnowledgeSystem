@@ -63,6 +63,7 @@
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.gColIsComplete = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gvSparePart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
@@ -102,18 +103,21 @@
             this.gridColumn9,
             this.gridColumn13,
             this.gridColumn14,
-            this.gridColumn15});
+            this.gridColumn15,
+            this.gColIsComplete});
             this.gvSparePart.GridControl = this.gcData;
+            this.gvSparePart.GroupCount = 1;
             this.gvSparePart.Name = "gvSparePart";
             this.gvSparePart.OptionsCustomization.AllowColumnMoving = false;
-            this.gvSparePart.OptionsCustomization.AllowGroup = false;
             this.gvSparePart.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
             this.gvSparePart.OptionsView.ColumnAutoWidth = false;
             this.gvSparePart.OptionsView.EnableAppearanceOddRow = true;
             this.gvSparePart.OptionsView.ShowAutoFilterRow = true;
             this.gvSparePart.OptionsView.ShowGroupPanel = false;
             this.gvSparePart.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gridColumn11, DevExpress.Data.ColumnSortOrder.Ascending),
             new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gColDept, DevExpress.Data.ColumnSortOrder.Ascending)});
+            this.gvSparePart.CustomDrawGroupRow += new DevExpress.XtraGrid.Views.Base.RowObjectCustomDrawEventHandler(this.gvSparePart_CustomDrawGroupRow);
             // 
             // gColDept
             // 
@@ -177,7 +181,7 @@
             this.gridColumn8.FieldName = "IniQuantity";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 7;
+            this.gridColumn8.VisibleIndex = 6;
             // 
             // gridColumn9
             // 
@@ -185,7 +189,7 @@
             this.gridColumn9.FieldName = "BatchMaterial.ActualQuantity";
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 8;
+            this.gridColumn9.VisibleIndex = 7;
             // 
             // gridColumn13
             // 
@@ -193,7 +197,7 @@
             this.gridColumn13.FieldName = "BatchMaterial.ConfirmationDate";
             this.gridColumn13.Name = "gridColumn13";
             this.gridColumn13.Visible = true;
-            this.gridColumn13.VisibleIndex = 9;
+            this.gridColumn13.VisibleIndex = 8;
             // 
             // gridColumn14
             // 
@@ -201,7 +205,7 @@
             this.gridColumn14.FieldName = "UserReCheck";
             this.gridColumn14.Name = "gridColumn14";
             this.gridColumn14.Visible = true;
-            this.gridColumn14.VisibleIndex = 10;
+            this.gridColumn14.VisibleIndex = 9;
             // 
             // gridColumn15
             // 
@@ -209,7 +213,7 @@
             this.gridColumn15.FieldName = "Description";
             this.gridColumn15.Name = "gridColumn15";
             this.gridColumn15.Visible = true;
-            this.gridColumn15.VisibleIndex = 11;
+            this.gridColumn15.VisibleIndex = 10;
             // 
             // gcData
             // 
@@ -464,6 +468,14 @@
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
+            // gColIsComplete
+            // 
+            this.gColIsComplete.Caption = "IsComplete";
+            this.gColIsComplete.FieldName = "IsComplete";
+            this.gColIsComplete.Name = "gColIsComplete";
+            this.gColIsComplete.Visible = true;
+            this.gColIsComplete.VisibleIndex = 11;
+            // 
             // uc309_RecheckBatch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -525,5 +537,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gColStatus;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn15;
+        private DevExpress.XtraGrid.Columns.GridColumn gColIsComplete;
     }
 }

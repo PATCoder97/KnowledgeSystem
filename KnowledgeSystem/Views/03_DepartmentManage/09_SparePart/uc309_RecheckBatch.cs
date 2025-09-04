@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Util;
-using System.Windows.Forms;
-using BusinessLayer;
+﻿using BusinessLayer;
 using DataAccessLayer;
+using DevExpress.Data;
 using DevExpress.Security;
 using DevExpress.Utils.Menu;
 using DevExpress.Utils.Svg;
@@ -18,16 +8,28 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using DevExpress.XtraSplashScreen;
-using KnowledgeSystem.Helpers;
-using OfficeOpenXml.Drawing.Chart.Style;
-using OfficeOpenXml.Drawing.Chart;
-using OfficeOpenXml;
-using System.IO;
-using OfficeOpenXml.Table;
 using ExcelDataReader;
-using System.Transactions;
+using KnowledgeSystem.Helpers;
+using OfficeOpenXml;
+using OfficeOpenXml.Drawing.Chart;
+using OfficeOpenXml.Drawing.Chart.Style;
+using OfficeOpenXml.Table;
 using Org.BouncyCastle.Asn1.Cmp;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Diagnostics;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Transactions;
+using System.Web.Util;
+using System.Windows.Forms;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 {
@@ -525,6 +527,53 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             // Thêm item vào menu
             e.Menu.Items.Add(itemDownCheckFile);
             e.Menu.Items.Add(itemUpdateCheckFile);
+        }
+
+        private int GetRowCountComplete(GridView view, int rowHandle)
+        {
+            int totalCount = 0;
+            int childrenCount = view.GetChildRowCount(rowHandle);
+
+            for (int i = 0; i < childrenCount; i++)
+            {
+                int childRowHandle = view.GetChildRowHandle(rowHandle, i);
+
+                // Nếu là Group Row, đệ quy để lấy số lượng từ các nhóm con
+                if (view.IsGroupRow(childRowHandle))
+                {
+                    totalCount += GetRowCountComplete(view, childRowHandle);
+                }
+                else
+                {
+                    // Nếu là Data Row, kiểm tra giá trị cột gColIsComplete
+                    object cellValue = view.GetRowCellValue(childRowHandle, gColIsComplete);
+                    if (cellValue != null && bool.TryParse(cellValue.ToString(), out bool isComplete) && isComplete)
+                    {
+                        totalCount++;
+                    }
+                }
+            }
+
+            return totalCount;
+        }
+
+        private void gvSparePart_CustomDrawGroupRow(object sender, DevExpress.XtraGrid.Views.Base.RowObjectCustomDrawEventArgs e)
+        {
+            var view = (GridView)sender;
+            var info = (GridGroupRowInfo)e.Info;
+            var caption = info.Column.Caption;
+            if (info.Column.Caption == string.Empty)
+            {
+                caption = info.Column.ToString();
+            }
+
+            var groupInfo = info.RowKey as GroupRowInfo;
+
+            bool groupComplete = groupInfo?.ChildControllerRowCount == GetRowCountComplete(view, e.RowHandle);
+            string colorName = groupComplete ? "Green" : "Red";
+            string groupValue = groupComplete ? "已完成" : "處理中";
+
+            info.GroupText = $" <color={colorName}>{groupValue}</color>：{info.GroupValueText}";
         }
     }
 }

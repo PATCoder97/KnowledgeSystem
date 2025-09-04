@@ -337,7 +337,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         private void gvSparePart_CustomDrawGroupRow(object sender, DevExpress.XtraGrid.Views.Base.RowObjectCustomDrawEventArgs e)
         {
-
             var view = (GridView)sender;
             var info = (GridGroupRowInfo)e.Info;
             var caption = info.Column.Caption;
