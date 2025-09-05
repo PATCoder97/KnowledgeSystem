@@ -137,7 +137,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                         物料 = machineMaterialList,
                         TotalPrice = totalPrice,
                         consumableCount,
-                        equipmentCount
+                        equipmentCount,
+                        IdDept = machine.IdDept
                     };
                 }).ToList();
 

@@ -307,32 +307,34 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         //    return totalCount;
         //}
 
-        private int GetRowCountComplete(GridView view, int rowHandle)
+        private (int completeCount, int totalCount) GetRowCounts(GridView view, int rowHandle)
         {
+            int completeCount = 0;
             int totalCount = 0;
-            int childrenCount = view.GetChildRowCount(rowHandle);
 
+            int childrenCount = view.GetChildRowCount(rowHandle);
             for (int i = 0; i < childrenCount; i++)
             {
                 int childRowHandle = view.GetChildRowHandle(rowHandle, i);
 
-                // Nếu là Group Row, đệ quy để lấy số lượng từ các nhóm con
                 if (view.IsGroupRow(childRowHandle))
                 {
-                    totalCount += GetRowCountComplete(view, childRowHandle);
+                    var (cCount, tCount) = GetRowCounts(view, childRowHandle);
+                    completeCount += cCount;
+                    totalCount += tCount;
                 }
                 else
                 {
-                    // Nếu là Data Row, kiểm tra giá trị cột gColIsComplete
+                    totalCount++;
                     object cellValue = view.GetRowCellValue(childRowHandle, gColIsComplete);
                     if (cellValue != null && bool.TryParse(cellValue.ToString(), out bool isComplete) && isComplete)
                     {
-                        totalCount++;
+                        completeCount++;
                     }
                 }
             }
 
-            return totalCount;
+            return (completeCount, totalCount);
         }
 
         private void gvSparePart_CustomDrawGroupRow(object sender, DevExpress.XtraGrid.Views.Base.RowObjectCustomDrawEventArgs e)
@@ -347,11 +349,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
             var groupInfo = info.RowKey as GroupRowInfo;
 
-            bool groupComplete = groupInfo?.ChildControllerRowCount == GetRowCountComplete(view, e.RowHandle);
+            var (complete, total) = GetRowCounts(view, e.RowHandle);
+
+            bool groupComplete = total == complete;
             string colorName = groupComplete ? "Green" : "Red";
             string groupValue = groupComplete ? "已完成" : "處理中";
 
-            info.GroupText = $" <color={colorName}>{groupValue}</color>：{info.GroupValueText}";
+            info.GroupText = $" <color={colorName}>{groupValue}</color>：{info.GroupValueText}《<color=Blue>{total}物品</color>》";
         }
 
         private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

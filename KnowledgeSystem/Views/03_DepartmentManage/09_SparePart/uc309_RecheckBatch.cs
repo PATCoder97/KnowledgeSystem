@@ -10,6 +10,7 @@ using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using DevExpress.XtraSplashScreen;
+using DocumentFormat.OpenXml.ExtendedProperties;
 using ExcelDataReader;
 using KnowledgeSystem.Helpers;
 using OfficeOpenXml;
@@ -63,7 +64,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         List<dt309_Units> units;
 
         DXMenuItem itemDownCheckFile;
+        DXMenuItem itemDownCheckFileProxy;
         DXMenuItem itemUpdateCheckFile;
+        DXMenuItem itemUpdateCheckFileProxy;
         DXMenuItem itemDownUnusualFile;
         DXMenuItem itemMaterialOut;
         DXMenuItem itemMaterialTransfer;
@@ -125,11 +128,87 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         {
             itemDownCheckFile = CreateMenuItem("下載盤點表", ItemDownCheckFile_Click, TPSvgimages.Excel);
             itemUpdateCheckFile = CreateMenuItem("上傳盤點表", ItemUpdateCheckFile_Click, TPSvgimages.UploadFile);
+
+            itemDownCheckFileProxy = CreateMenuItem("下載盤點表(代理)", ItemDownCheckFileProxy_Click, TPSvgimages.Excel);
+            itemUpdateCheckFileProxy = CreateMenuItem("上傳盤點表(代理)", ItemUpdateCheckFileProxy_Click, TPSvgimages.UploadFile);
+        }
+
+        private void ItemUpdateCheckFileProxy_Click(object sender, EventArgs e)
+        {
+            bool isUploadAbnormal = (sender as DXMenuItem).Caption.Contains("異常");
+            UpdateCheckFile(isUploadAbnormal, true);
+        }
+
+        private void ItemDownCheckFileProxy_Click(object sender, EventArgs e)
+        {
+            bool isUploadAbnormal = (sender as DXMenuItem).Caption.Contains("異常");
+            DownloadCheckFile(isUploadAbnormal, true);
+        }
+
+        private string GetProxyUser(List<string> proxyusers)
+        {
+            var editor = new ComboBoxEdit()
+            {
+                Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F)
+            };
+            editor.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F);
+            editor.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            editor.Properties.Items.AddRange(proxyusers);
+
+            var args = new XtraInputBoxArgs
+            {
+                Caption = TPConfigs.SoftNameTW,
+                Prompt = "點選《管理員》", // dùng ngoặc đẹp hơn
+                Editor = editor,
+                DefaultButtonIndex = 0,
+                DefaultResponse = proxyusers.FirstOrDefault() ?? ""
+            };
+
+            var result = XtraInputBox.Show(args);
+
+            return result?.ToString() ?? "";
         }
 
         private void ItemUpdateCheckFile_Click(object sender, EventArgs e)
         {
-            bool uploadDesc = (sender as DXMenuItem).Caption.Contains("異常");
+            bool isUploadAbnormal = (sender as DXMenuItem).Caption.Contains("異常");
+            UpdateCheckFile(isUploadAbnormal);
+        }
+
+        private void ItemDownCheckFile_Click(object sender, EventArgs e)
+        {
+            bool isUploadAbnormal = (sender as DXMenuItem).Caption.Contains("異常");
+            DownloadCheckFile(isUploadAbnormal);
+        }
+
+        private void UpdateCheckFile(bool IsUploadAbnormal = false, bool IsProxyUser = false)
+        {
+            var batch = (gvData.GetRow(gvData.FocusedRowHandle) as dynamic).Batch as dt309_InspectionBatch;
+            int batchId = batch.Id;
+
+            var userManagers = inspectionBatchMaterials
+                .Where(r => r.BatchId == batchId && r.IsComplete != true)
+                .Join(materials.Where(x => deptGetData.Contains(x.IdDept)),
+                      bm => bm.MaterialId,
+                      m => m.Id,
+                      (bm, m) => users.FirstOrDefault(u => u.Id == m.IdManager))
+                .Where(u => u != null)
+                .Select(u => $"{u.Id} {u.DisplayName}")
+                .Distinct()
+                .ToList();
+
+
+            string userManagerSpare = IsProxyUser
+                ? GetProxyUser(userManagers)
+                : $"{TPConfigs.LoginUser.Id} {TPConfigs.LoginUser.DisplayName}";
+
+            if (string.IsNullOrWhiteSpace(userManagerSpare)) return;
+
+            if (!userManagers.Any(r => r == userManagerSpare))
+            {
+                XtraMessageBox.Show("未找到適用於您的盤點清單", "提示");
+                return;
+            }
 
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
@@ -156,13 +235,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                             // Đọc và hiển thị dữ liệu từ Sheet đầu tiên
                             DataTable table = result.Tables[0];
 
-                            var batch = (gvData.GetRow(gvData.FocusedRowHandle) as dynamic).Batch as dt309_InspectionBatch;
-                            int batchId = batch.Id;
-
                             var excelDatas = inspectionBatchMaterials
                                 .Where(r => r.BatchId == batchId && r.IsComplete != true)
                                 .Join(
-                                    materials.Where(x => x.IdDept.StartsWith(deptGetData)),
+                                    materials.Where(x => x.IdDept.StartsWith(deptGetData) && x.IdManager == userManagerSpare.Split(' ')[0]),
                                     bm => bm.MaterialId,
                                     m => m.Id,
                                     (bm, m) => bm
@@ -188,7 +264,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
                                 if (row == null) continue;
 
-                                if (uploadDesc)
+                                if (IsUploadAbnormal)
                                 {
                                     data.Description = row["異常說明"]?.ToString().Trim();
                                 }
@@ -208,7 +284,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                             {
                                 InspectionBatchMaterials = excelDatas.ToList(),
                                 Text = $"物料盤點明細表",
-                                _isUpdateDesc = uploadDesc
+                                _isUpdateDesc = IsUploadAbnormal
                             };
                             reCheckInfo.ShowDialog();
 
@@ -219,7 +295,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                                 return;
                             }
 
-                            if (uploadDesc)
+                            if (IsUploadAbnormal)
                             {
                                 foreach (var data in excelDatas.Where(r => r.ActualQuantity != null && !string.IsNullOrEmpty(r.Description)))
                                 {
@@ -260,14 +336,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 {
                     MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
             }
         }
 
-        private void ItemDownCheckFile_Click(object sender, EventArgs e)
+        private void DownloadCheckFile(bool IsUploadAbnormal = false, bool IsProxyUser = false)
         {
-            bool uploadDesc = (sender as DXMenuItem).Caption.Contains("異常");
-
             var batch = (gvData.GetRow(gvData.FocusedRowHandle) as dynamic).Batch as dt309_InspectionBatch;
             int batchId = batch.Id;
 
@@ -283,24 +356,42 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                         BatchMaterial = bm
                     }
                 )
-                .Select(r => new
+                .Select(r =>
                 {
-                    r.Material.Id,
-                    r.Material.Code,
-                    r.Material.DisplayName,
-                    r.Material.Location,
-                    Unit = units.FirstOrDefault(x => x.Id == r.Material.IdUnit)?.DisplayName ?? "",
-                    Quantity = uploadDesc ? r.BatchMaterial.InitialQuantity : -1,
-                    r.BatchMaterial.ActualQuantity,
-                    Desc = ""
+                    var manager = users.FirstOrDefault(x => x.Id == r.Material.IdManager);
+                    return new
+                    {
+                        r.Material.Id,
+                        r.Material.Code,
+                        r.Material.DisplayName,
+                        r.Material.Location,
+                        Usermanager = manager != null ? $"{manager.Id} {manager.DisplayName}" : "",
+                        Unit = units.FirstOrDefault(x => x.Id == r.Material.IdUnit)?.DisplayName ?? "",
+                        Quantity = IsUploadAbnormal ? r.BatchMaterial.InitialQuantity : -1,
+                        r.BatchMaterial.ActualQuantity,
+                        Desc = ""
+                    };
                 })
                 .ToList();
+
+            string userManagerSpare = IsProxyUser
+                ? GetProxyUser(excelDatas.Select(r => r.Usermanager).Distinct().ToList())
+                : $"{TPConfigs.LoginUser.Id} {TPConfigs.LoginUser.DisplayName}";
+
+            if (string.IsNullOrWhiteSpace(userManagerSpare)) return;
+            excelDatas = excelDatas.Where(r => r.Usermanager == userManagerSpare).ToList();
+
+            if (excelDatas.Count == 0)
+            {
+                XtraMessageBox.Show("未找到適用於您的盤點清單", "提示");
+                return;
+            }
 
             string documentsPath = TPConfigs.DocumentPath();
             if (!Directory.Exists(documentsPath))
                 Directory.CreateDirectory(documentsPath);
 
-            string filePath = Path.Combine(documentsPath, $"{(uploadDesc ? "異常表" : "盤點表")} - {DateTime.Now:yyyyMMddHHmmss}.xlsx");
+            string filePath = Path.Combine(documentsPath, $"{(IsUploadAbnormal ? "異常表" : "盤點表")}-{userManagerSpare}-{DateTime.Now:yyyyMMddHHmmss}.xlsx");
 
             ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
 
@@ -315,10 +406,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 ws.Column(2).Width = 30;
                 ws.Column(3).Width = 50;
                 ws.Column(4).Width = 15;
-                ws.Column(5).Width = 15;
+                ws.Column(5).Width = 25;
                 ws.Column(6).Width = 15;
                 ws.Column(7).Width = 15;
-                ws.Column(8).Width = 30;
+                ws.Column(8).Width = 15;
+                ws.Column(9).Width = 30;
 
                 // Xuất dữ liệu từ list excelDatas sang Table
                 ws.Cells["A1"].LoadFromCollection(excelDatas, true, OfficeOpenXml.Table.TableStyles.Medium2);
@@ -328,10 +420,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 ws.Cells["B1"].Value = "料號";
                 ws.Cells["C1"].Value = "材料名稱";
                 ws.Cells["D1"].Value = "地位";
-                ws.Cells["E1"].Value = "單位";
-                ws.Cells["F1"].Value = "系統上數量";
-                ws.Cells["G1"].Value = "盤點數量";
-                ws.Cells["H1"].Value = "異常說明";
+                ws.Cells["E1"].Value = "管理員";
+                ws.Cells["F1"].Value = "單位";
+                ws.Cells["G1"].Value = "系統上數量";
+                ws.Cells["H1"].Value = "盤點數量";
+                ws.Cells["I1"].Value = "異常說明";
 
                 // Bật WrapText cho tất cả các ô
                 ws.Cells.Style.WrapText = true;
@@ -341,7 +434,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             }
 
             Process.Start(filePath);
-
         }
 
         private void LoadData()
@@ -350,14 +442,14 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             {
                 helper.SaveViewInfo();
 
-                deptGetData = string.IsNullOrWhiteSpace(barCbbDept.EditValue?.ToString()) ? "NoDept" : barCbbDept.EditValue.ToString().Split(' ')[0]    ;
+                deptGetData = string.IsNullOrWhiteSpace(barCbbDept.EditValue?.ToString()) ? "NoDept" : barCbbDept.EditValue.ToString().Split(' ')[0];
 
                 var inspectionBatch = dt309_InspectionBatchBUS.Instance.GetList();
                 inspectionBatchMaterials = dt309_InspectionBatchMaterialBUS.Instance.GetList();
                 materials = dt309_MaterialsBUS.Instance.GetListByStartIdDept(deptGetData);
 
                 var depts = dm_DeptBUS.Instance.GetList();
-                var users = dm_UserBUS.Instance.GetList();
+                users = dm_UserBUS.Instance.GetList();
                 units = dt309_UnitsBUS.Instance.GetList();
 
                 var displayData = inspectionBatch.Select(batch =>
@@ -513,11 +605,17 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             {
                 itemDownCheckFile.Caption = "下載異常表";
                 itemUpdateCheckFile.Caption = "上傳異常表";
+
+                itemDownCheckFileProxy.Caption = "下載異常表(代理)";
+                itemUpdateCheckFileProxy.Caption = "上傳異常表(代理)";
             }
             else
             {
                 itemDownCheckFile.Caption = "下載盤點表";
                 itemUpdateCheckFile.Caption = "上傳盤點表";
+
+                itemDownCheckFileProxy.Caption = "下載盤點表(代理)";
+                itemUpdateCheckFileProxy.Caption = "上傳盤點表(代理)";
             }
 
             // Nếu đã hoàn thành hết thì trờ về
@@ -527,34 +625,41 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             // Thêm item vào menu
             e.Menu.Items.Add(itemDownCheckFile);
             e.Menu.Items.Add(itemUpdateCheckFile);
+
+            itemDownCheckFileProxy.BeginGroup = true;
+
+            e.Menu.Items.Add(itemDownCheckFileProxy);
+            e.Menu.Items.Add(itemUpdateCheckFileProxy);
         }
 
-        private int GetRowCountComplete(GridView view, int rowHandle)
+        private (int completeCount, int totalCount) GetRowCounts(GridView view, int rowHandle)
         {
+            int completeCount = 0;
             int totalCount = 0;
-            int childrenCount = view.GetChildRowCount(rowHandle);
 
+            int childrenCount = view.GetChildRowCount(rowHandle);
             for (int i = 0; i < childrenCount; i++)
             {
                 int childRowHandle = view.GetChildRowHandle(rowHandle, i);
 
-                // Nếu là Group Row, đệ quy để lấy số lượng từ các nhóm con
                 if (view.IsGroupRow(childRowHandle))
                 {
-                    totalCount += GetRowCountComplete(view, childRowHandle);
+                    var (cCount, tCount) = GetRowCounts(view, childRowHandle);
+                    completeCount += cCount;
+                    totalCount += tCount;
                 }
                 else
                 {
-                    // Nếu là Data Row, kiểm tra giá trị cột gColIsComplete
+                    totalCount++;
                     object cellValue = view.GetRowCellValue(childRowHandle, gColIsComplete);
                     if (cellValue != null && bool.TryParse(cellValue.ToString(), out bool isComplete) && isComplete)
                     {
-                        totalCount++;
+                        completeCount++;
                     }
                 }
             }
 
-            return totalCount;
+            return (completeCount, totalCount);
         }
 
         private void gvSparePart_CustomDrawGroupRow(object sender, DevExpress.XtraGrid.Views.Base.RowObjectCustomDrawEventArgs e)
@@ -569,11 +674,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
             var groupInfo = info.RowKey as GroupRowInfo;
 
-            bool groupComplete = groupInfo?.ChildControllerRowCount == GetRowCountComplete(view, e.RowHandle);
+            var (complete, total) = GetRowCounts(view, e.RowHandle);
+            bool groupComplete = total == complete;
             string colorName = groupComplete ? "Green" : "Red";
             string groupValue = groupComplete ? "已完成" : "處理中";
 
-            info.GroupText = $" <color={colorName}>{groupValue}</color>：{info.GroupValueText}";
+            info.GroupText = $" <color={colorName}>{groupValue}</color>：{info.GroupValueText}《<color=Blue>{total}物品</color>》";
         }
     }
 }

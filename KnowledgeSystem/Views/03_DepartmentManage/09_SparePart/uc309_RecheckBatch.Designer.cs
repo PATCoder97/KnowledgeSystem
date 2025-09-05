@@ -43,6 +43,7 @@
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColIsComplete = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcData = new DevExpress.XtraGrid.GridControl();
             this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gColIdMachine = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -63,7 +64,6 @@
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.gColIsComplete = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gvSparePart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
@@ -214,6 +214,12 @@
             this.gridColumn15.Name = "gridColumn15";
             this.gridColumn15.Visible = true;
             this.gridColumn15.VisibleIndex = 10;
+            // 
+            // gColIsComplete
+            // 
+            this.gColIsComplete.Caption = "IsComplete";
+            this.gColIsComplete.FieldName = "IsComplete";
+            this.gColIsComplete.Name = "gColIsComplete";
             // 
             // gcData
             // 
@@ -467,14 +473,6 @@
             this.layoutControlItem1.Size = new System.Drawing.Size(959, 468);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
-            // 
-            // gColIsComplete
-            // 
-            this.gColIsComplete.Caption = "IsComplete";
-            this.gColIsComplete.FieldName = "IsComplete";
-            this.gColIsComplete.Name = "gColIsComplete";
-            this.gColIsComplete.Visible = true;
-            this.gColIsComplete.VisibleIndex = 11;
             // 
             // uc309_RecheckBatch
             // 

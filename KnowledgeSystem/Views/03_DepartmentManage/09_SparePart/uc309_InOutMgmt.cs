@@ -150,6 +150,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                                    select new
                                    {
                                        Id = t.Id,
+                                       IdDept = m.IdDept,
                                        Transaction = t,
                                        Material = m,
                                        Storage = s,

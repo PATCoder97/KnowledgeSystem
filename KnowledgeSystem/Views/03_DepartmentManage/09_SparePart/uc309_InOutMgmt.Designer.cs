@@ -52,15 +52,16 @@
             this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn18 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
-            this.btnReload = new DevExpress.XtraBars.BarButtonItem();
-            this.btnExportExcel = new DevExpress.XtraBars.BarButtonItem();
             this.barCbbDept = new DevExpress.XtraBars.BarEditItem();
             this.cbbDept = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.btnReload = new DevExpress.XtraBars.BarButtonItem();
+            this.btnExportExcel = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -209,7 +210,8 @@
             this.gridColumn15,
             this.gridColumn16,
             this.gridColumn17,
-            this.gridColumn18});
+            this.gridColumn18,
+            this.gridColumn13});
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
             this.gvData.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
@@ -234,7 +236,7 @@
             this.gridColumn2.MinWidth = 150;
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 1;
+            this.gridColumn2.VisibleIndex = 2;
             this.gridColumn2.Width = 150;
             // 
             // gridColumn3
@@ -245,7 +247,7 @@
             this.gridColumn3.MinWidth = 150;
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 2;
+            this.gridColumn3.VisibleIndex = 3;
             this.gridColumn3.Width = 150;
             // 
             // gridColumn4
@@ -257,7 +259,7 @@
             this.gridColumn4.MinWidth = 70;
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 4;
+            this.gridColumn4.VisibleIndex = 5;
             this.gridColumn4.Width = 70;
             // 
             // gridColumn12
@@ -268,7 +270,7 @@
             this.gridColumn12.MinWidth = 70;
             this.gridColumn12.Name = "gridColumn12";
             this.gridColumn12.Visible = true;
-            this.gridColumn12.VisibleIndex = 5;
+            this.gridColumn12.VisibleIndex = 6;
             this.gridColumn12.Width = 70;
             // 
             // gColEvent
@@ -279,7 +281,7 @@
             this.gColEvent.MinWidth = 70;
             this.gColEvent.Name = "gColEvent";
             this.gColEvent.Visible = true;
-            this.gColEvent.VisibleIndex = 3;
+            this.gColEvent.VisibleIndex = 4;
             this.gColEvent.Width = 70;
             // 
             // gridColumn14
@@ -293,7 +295,7 @@
             this.gridColumn14.MinWidth = 150;
             this.gridColumn14.Name = "gridColumn14";
             this.gridColumn14.Visible = true;
-            this.gridColumn14.VisibleIndex = 0;
+            this.gridColumn14.VisibleIndex = 1;
             this.gridColumn14.Width = 162;
             // 
             // gridColumn15
@@ -302,7 +304,7 @@
             this.gridColumn15.FieldName = "Transaction.Desc";
             this.gridColumn15.Name = "gridColumn15";
             this.gridColumn15.Visible = true;
-            this.gridColumn15.VisibleIndex = 9;
+            this.gridColumn15.VisibleIndex = 10;
             // 
             // gridColumn16
             // 
@@ -312,7 +314,7 @@
             this.gridColumn16.MinWidth = 70;
             this.gridColumn16.Name = "gridColumn16";
             this.gridColumn16.Visible = true;
-            this.gridColumn16.VisibleIndex = 6;
+            this.gridColumn16.VisibleIndex = 7;
             this.gridColumn16.Width = 70;
             // 
             // gridColumn17
@@ -323,7 +325,7 @@
             this.gridColumn17.MinWidth = 70;
             this.gridColumn17.Name = "gridColumn17";
             this.gridColumn17.Visible = true;
-            this.gridColumn17.VisibleIndex = 7;
+            this.gridColumn17.VisibleIndex = 8;
             this.gridColumn17.Width = 70;
             // 
             // gridColumn18
@@ -332,7 +334,17 @@
             this.gridColumn18.FieldName = "User";
             this.gridColumn18.Name = "gridColumn18";
             this.gridColumn18.Visible = true;
-            this.gridColumn18.VisibleIndex = 8;
+            this.gridColumn18.VisibleIndex = 9;
+            // 
+            // gridColumn13
+            // 
+            this.gridColumn13.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn13.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn13.Caption = "單位";
+            this.gridColumn13.FieldName = "IdDept";
+            this.gridColumn13.Name = "gridColumn13";
+            this.gridColumn13.Visible = true;
+            this.gridColumn13.VisibleIndex = 0;
             // 
             // layoutControl1
             // 
@@ -413,6 +425,30 @@
             this.bar2.OptionsBar.UseWholeRow = true;
             this.bar2.Text = "Main menu";
             // 
+            // barCbbDept
+            // 
+            this.barCbbDept.Caption = "單位";
+            this.barCbbDept.Edit = this.cbbDept;
+            this.barCbbDept.Id = 11;
+            this.barCbbDept.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.barCbbDept.Name = "barCbbDept";
+            this.barCbbDept.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            this.barCbbDept.EditValueChanged += new System.EventHandler(this.barCbbDept_EditValueChanged);
+            // 
+            // cbbDept
+            // 
+            this.cbbDept.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbDept.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.cbbDept.Appearance.Options.UseFont = true;
+            this.cbbDept.Appearance.Options.UseForeColor = true;
+            this.cbbDept.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbDept.AppearanceDropDown.Options.UseFont = true;
+            this.cbbDept.AutoHeight = false;
+            this.cbbDept.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbbDept.Name = "cbbDept";
+            this.cbbDept.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            // 
             // btnReload
             // 
             this.btnReload.Caption = "刷新";
@@ -437,30 +473,6 @@
             this.btnExportExcel.ItemAppearance.Normal.Options.UseFont = true;
             this.btnExportExcel.Name = "btnExportExcel";
             this.btnExportExcel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExportExcel_ItemClick);
-            // 
-            // barCbbDept
-            // 
-            this.barCbbDept.Caption = "單位";
-            this.barCbbDept.Edit = this.cbbDept;
-            this.barCbbDept.Id = 11;
-            this.barCbbDept.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.barCbbDept.Name = "barCbbDept";
-            this.barCbbDept.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
-            this.barCbbDept.EditValueChanged += new System.EventHandler(this.barCbbDept_EditValueChanged);
-            // 
-            // cbbDept
-            // 
-            this.cbbDept.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbbDept.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.cbbDept.Appearance.Options.UseFont = true;
-            this.cbbDept.Appearance.Options.UseForeColor = true;
-            this.cbbDept.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbbDept.AppearanceDropDown.Options.UseFont = true;
-            this.cbbDept.AutoHeight = false;
-            this.cbbDept.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbbDept.Name = "cbbDept";
-            this.cbbDept.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             // 
             // barDockControlTop
             // 
@@ -556,5 +568,6 @@
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
     }
 }
