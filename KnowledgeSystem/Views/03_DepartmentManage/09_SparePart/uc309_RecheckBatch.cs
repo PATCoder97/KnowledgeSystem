@@ -284,7 +284,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                             {
                                 InspectionBatchMaterials = excelDatas.ToList(),
                                 Text = $"物料盤點明細表",
-                                _isUpdateDesc = IsUploadAbnormal
+                                _IsUploadAbnormal = IsUploadAbnormal
                             };
                             reCheckInfo.ShowDialog();
 
