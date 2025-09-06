@@ -172,6 +172,7 @@
           <Property Name="Sex" Type="bit" />
           <Property Name="ActualJobCode" Type="varchar" MaxLength="16" />
           <Property Name="LastUpdate" Type="datetime" />
+          <Property Name="ResignPlan" Type="date" />
         </EntityType>
         <EntityType Name="dm_UserRole">
           <Key>
@@ -1114,7 +1115,6 @@
           <EntitySet Name="dt307_Questions" EntityType="DBDocumentManagementSystemModel.dt307_Questions" />
           <EntitySet Name="dt201_UpdateUsrReq" EntityType="DBDocumentManagementSystemModel.dt201_UpdateUsrReq" />
           <EntitySet Name="dt402_KPIWeb" EntityType="DBDocumentManagementSystemModel.dt402_KPIWeb" />
-          <EntitySet Name="dm_User" EntityType="DBDocumentManagementSystemModel.dm_User" />
           <EntitySet Name="dt307_ExamMgmt" EntityType="DBDocumentManagementSystemModel.dt307_ExamMgmt" />
           <EntitySet Name="dt307_ExamUser" EntityType="DBDocumentManagementSystemModel.dt307_ExamUser" />
           <EntitySet Name="dt307_Answers" EntityType="DBDocumentManagementSystemModel.dt307_Answers" />
@@ -1156,6 +1156,7 @@
           <EntitySet Name="dt301_Course" EntityType="DBDocumentManagementSystemModel.dt301_Course" />
           <EntitySet Name="dt403_04_HardnessStandardLog" EntityType="DBDocumentManagementSystemModel.dt403_04_HardnessStandardLog" />
           <EntitySet Name="dt403_04_StandardInfo" EntityType="DBDocumentManagementSystemModel.dt403_04_StandardInfo" />
+          <EntitySet Name="dm_User" EntityType="DBDocumentManagementSystemModel.dm_User" />
         </EntityContainer>
         <EntityType Name="dm_Function">
           <Key>
@@ -1623,30 +1624,6 @@
           <Property Name="MgrComments" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="TotalSalary" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
           <Property Name="ActualSalary" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="dm_User">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="DisplayName" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
-          <Property Name="SecondaryPassword" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
-          <Property Name="DateCreate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="IdDepartment" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
-          <Property Name="DisplayNameVN" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="DOB" Type="DateTime" Precision="0" />
-          <Property Name="CitizenID" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-          <Property Name="Nationality" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Name="JobCode" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-          <Property Name="PCName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-          <Property Name="IPAddress" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="Addr" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNum1" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-          <Property Name="PhoneNum2" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-          <Property Name="Status" Type="Int32" />
-          <Property Name="Sex" Type="Boolean" />
-          <Property Name="ActualJobCode" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="dt307_ExamMgmt">
           <Key>
@@ -2124,6 +2101,31 @@
           <Property Name="Method" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
           <Property Name="ExpDate" Type="DateTime" Precision="0" />
           <Property Name="IdAtt" Type="Int32" />
+        </EntityType>
+        <EntityType Name="dm_User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayName" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="SecondaryPassword" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="DateCreate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IdDepartment" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayNameVN" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="DOB" Type="DateTime" Precision="0" />
+          <Property Name="CitizenID" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="Nationality" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="JobCode" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="PCName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="IPAddress" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Addr" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNum1" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNum2" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="Sex" Type="Boolean" />
+          <Property Name="ActualJobCode" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+          <Property Name="ResignPlan" Type="DateTime" Precision="0" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2644,31 +2646,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dm_User">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_User">
-              <MappingFragment StoreEntitySet="dm_User">
-                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
-                <ScalarProperty Name="ActualJobCode" ColumnName="ActualJobCode" />
-                <ScalarProperty Name="Sex" ColumnName="Sex" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="PhoneNum2" ColumnName="PhoneNum2" />
-                <ScalarProperty Name="PhoneNum1" ColumnName="PhoneNum1" />
-                <ScalarProperty Name="Addr" ColumnName="Addr" />
-                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
-                <ScalarProperty Name="PCName" ColumnName="PCName" />
-                <ScalarProperty Name="JobCode" ColumnName="JobCode" />
-                <ScalarProperty Name="Nationality" ColumnName="Nationality" />
-                <ScalarProperty Name="CitizenID" ColumnName="CitizenID" />
-                <ScalarProperty Name="DOB" ColumnName="DOB" />
-                <ScalarProperty Name="DisplayNameVN" ColumnName="DisplayNameVN" />
-                <ScalarProperty Name="IdDepartment" ColumnName="IdDepartment" />
-                <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
-                <ScalarProperty Name="SecondaryPassword" ColumnName="SecondaryPassword" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="dt307_ExamMgmt">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt307_ExamMgmt">
               <MappingFragment StoreEntitySet="dt307_ExamMgmt">
@@ -3184,6 +3161,32 @@
                 <ScalarProperty Name="Value" ColumnName="Value" />
                 <ScalarProperty Name="SN" ColumnName="SN" />
                 <ScalarProperty Name="IdDept" ColumnName="IdDept" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dm_User">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_User">
+              <MappingFragment StoreEntitySet="dm_User">
+                <ScalarProperty Name="ResignPlan" ColumnName="ResignPlan" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+                <ScalarProperty Name="ActualJobCode" ColumnName="ActualJobCode" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="PhoneNum2" ColumnName="PhoneNum2" />
+                <ScalarProperty Name="PhoneNum1" ColumnName="PhoneNum1" />
+                <ScalarProperty Name="Addr" ColumnName="Addr" />
+                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+                <ScalarProperty Name="PCName" ColumnName="PCName" />
+                <ScalarProperty Name="JobCode" ColumnName="JobCode" />
+                <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+                <ScalarProperty Name="CitizenID" ColumnName="CitizenID" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="DisplayNameVN" ColumnName="DisplayNameVN" />
+                <ScalarProperty Name="IdDepartment" ColumnName="IdDepartment" />
+                <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
+                <ScalarProperty Name="SecondaryPassword" ColumnName="SecondaryPassword" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

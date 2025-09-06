@@ -50,8 +50,9 @@
             this.gColIP = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColLastUpdate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
@@ -133,8 +134,9 @@
             this.gColIP,
             this.gridColumn15,
             this.gridColumn4,
-            this.gridColumn11,
-            this.gColLastUpdate});
+            this.gColStatus,
+            this.gColLastUpdate,
+            this.gridColumn1});
             this.gvData.DetailHeight = 377;
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
@@ -282,7 +284,7 @@
             this.gColIP.FieldName = "Data.IPAddress";
             this.gColIP.Name = "gColIP";
             this.gColIP.Visible = true;
-            this.gColIP.VisibleIndex = 15;
+            this.gColIP.VisibleIndex = 16;
             // 
             // gridColumn15
             // 
@@ -300,13 +302,13 @@
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 4;
             // 
-            // gridColumn11
+            // gColStatus
             // 
-            this.gridColumn11.Caption = "狀態";
-            this.gridColumn11.FieldName = "StatusName";
-            this.gridColumn11.Name = "gridColumn11";
-            this.gridColumn11.Visible = true;
-            this.gridColumn11.VisibleIndex = 10;
+            this.gColStatus.Caption = "狀態";
+            this.gColStatus.FieldName = "StatusName";
+            this.gColStatus.Name = "gColStatus";
+            this.gColStatus.Visible = true;
+            this.gColStatus.VisibleIndex = 10;
             // 
             // gColLastUpdate
             // 
@@ -316,7 +318,15 @@
             this.gColLastUpdate.FieldName = "Data.LastUpdate";
             this.gColLastUpdate.Name = "gColLastUpdate";
             this.gColLastUpdate.Visible = true;
-            this.gColLastUpdate.VisibleIndex = 16;
+            this.gColLastUpdate.VisibleIndex = 17;
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "離職日";
+            this.gridColumn1.FieldName = "Data.ResignPlan";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 15;
             // 
             // Root
             // 
@@ -502,12 +512,13 @@
         private DevExpress.XtraGrid.Columns.GridColumn gColIP;
         private DevExpress.XtraBars.BarButtonItem btnExportExcel;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
+        private DevExpress.XtraGrid.Columns.GridColumn gColStatus;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn16;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn15;
         private DevExpress.XtraGrid.Columns.GridColumn gColLastUpdate;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
     }
 }

@@ -1,44 +1,46 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
+using DevExpress.Data.Browsing;
 using DevExpress.LookAndFeel;
+using DevExpress.Utils.Menu;
+using DevExpress.Utils.Svg;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
+using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Views.Items.ViewInfo;
 using DevExpress.XtraSplashScreen;
 using DevExpress.XtraSpreadsheet.Model;
+using ExcelDataReader;
 using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator;
-using OfficeOpenXml.Style;
-using OfficeOpenXml.Table.PivotTable;
-using OfficeOpenXml.Table;
+using KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin;
 using OfficeOpenXml;
+using OfficeOpenXml.Style;
+using OfficeOpenXml.Table;
+using OfficeOpenXml.Table.PivotTable;
+using Org.BouncyCastle.Crypto;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.Entity.Migrations;
 using System.Data.Entity.Validation;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.IO;
 using System.Diagnostics;
-using DevExpress.Data.Browsing;
-using ExcelDataReader;
-using System.Threading;
-using DevExpress.Utils.Menu;
-using DevExpress.Utils.Svg;
-using KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin;
-using DevExpress.XtraGrid.Views.Items.ViewInfo;
-using Org.BouncyCastle.Crypto;
+using System.Drawing;
 using System.Globalization;
+using System.IO;
+using System.Linq;
 using System.Net;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Web.UI.WebControls;
+using System.Web.Util;
+using System.Windows.Forms;
 
 namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 {
@@ -132,6 +134,23 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             gColLastUpdate.Visible = IsSysAdmin;
         }
 
+        private void CreateRuleGV()
+        {
+            // Quy tắc định dạng khi TransactionType = 'C'
+            var ruleResignPlan = new GridFormatRule
+            {
+                ApplyToRow = true,
+                Column = gColStatus,
+                Name = "RuleResignPlan",
+                Rule = new FormatConditionRuleExpression
+                {
+                    Expression = "[StatusName] = '預報離職'",
+                    Appearance = { ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical, }
+                }
+            };
+            gvData.FormatRules.Add(ruleResignPlan);
+        }
+
         private void LoadUser()
         {
             helper.SaveViewInfo();
@@ -160,7 +179,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                                 let displayName = $"{data.DisplayName}{(!string.IsNullOrEmpty(data.DisplayNameVN) ? $"\r\n{data.DisplayNameVN}" : "")}"
                                 let deptName = $"{data.IdDepartment}\r\n{depts.DisplayName}"
                                 let sexName = data.Sex == null ? "" : data.Sex.Value ? "男" : "女"
-                                let statusName = data.Status == null ? "" : TPConfigs.lsUserStatus[data.Status.Value]
+                                let statusName = (data.ResignPlan != null && data.Status == 0) ? "預報離職" : (data.Status == null ? "" : TPConfigs.lsUserStatus[data.Status.Value])
                                 select new
                                 {
                                     Data = data,
@@ -193,8 +212,9 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             gcData.DataSource = sourceUsers;
 
             LoadUser();
+            CreateRuleGV();
 
-            string filterString = "[StatusName] In ('在職','留職停薪')";
+            string filterString = "[StatusName] In ('在職','留職停薪','預報離職')";
             gvData.Columns["StatusName"].FilterInfo = new ColumnFilterInfo(filterString);
         }
 

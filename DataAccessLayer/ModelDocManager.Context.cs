@@ -71,7 +71,6 @@ namespace DataAccessLayer
         public virtual DbSet<dt307_Questions> dt307_Questions { get; set; }
         public virtual DbSet<dt201_UpdateUsrReq> dt201_UpdateUsrReq { get; set; }
         public virtual DbSet<dt402_KPIWeb> dt402_KPIWeb { get; set; }
-        public virtual DbSet<dm_User> dm_User { get; set; }
         public virtual DbSet<dt307_ExamMgmt> dt307_ExamMgmt { get; set; }
         public virtual DbSet<dt307_ExamUser> dt307_ExamUser { get; set; }
         public virtual DbSet<dt307_Answers> dt307_Answers { get; set; }
@@ -113,5 +112,6 @@ namespace DataAccessLayer
         public virtual DbSet<dt301_Course> dt301_Course { get; set; }
         public virtual DbSet<dt403_04_HardnessStandardLog> dt403_04_HardnessStandardLog { get; set; }
         public virtual DbSet<dt403_04_StandardInfo> dt403_04_StandardInfo { get; set; }
+        public virtual DbSet<dm_User> dm_User { get; set; }
     }
 }

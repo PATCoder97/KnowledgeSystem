@@ -68,5 +68,6 @@ namespace KnowledgeSystem.Helpers
         public static SvgImage Robot = SvgImage.FromFile(Path.Combine(ImagesPath, "icons8_robot.svg"));
         public static SvgImage Dept = SvgImage.FromFile(Path.Combine(ImagesPath, "icons8_department.svg"));
         public static SvgImage DateAdd = SvgImage.FromFile(Path.Combine(ImagesPath, "icons8_calendar_plus_1.svg"));
+        public static SvgImage Schedule = SvgImage.FromFile(Path.Combine(ImagesPath, "icons8_schedule.svg"));
     }
 }

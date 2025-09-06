@@ -1703,6 +1703,9 @@
     <Content Include="Images\icons8_robot.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\icons8_schedule.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\icons8_stack_of_money.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

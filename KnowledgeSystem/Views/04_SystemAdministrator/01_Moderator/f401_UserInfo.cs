@@ -42,6 +42,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
         private string oldUserInfoJson = "";
         string idDept2word;
         bool IsSysAdmin = false;
+        DateTime? resignDate;
 
         private UpdateEvent _eventUpdate = UpdateEvent.Normal;
 
@@ -65,7 +66,9 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             [Description("更新實編制職務")]
             JobChange,
             [Description("更新實際職務")]
-            ActualJobChange
+            ActualJobChange,
+            [Description("預報離職")]
+            ResignPlan,
         }
 
         private void InitializeIcon()
@@ -81,6 +84,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             btnJobChange.ImageOptions.SvgImage = TPSvgimages.Info;
             btnActualJobChange.ImageOptions.SvgImage = TPSvgimages.UpLevel;
             btnPersonnelChanges.ImageOptions.SvgImage = TPSvgimages.PersonnelChanges;
+            btnResignPlan.ImageOptions.SvgImage = TPSvgimages.Schedule;
         }
 
         private void EnabledController(bool _enable = true)
@@ -113,6 +117,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             btnResumeWork.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             btnJobChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             btnPersonnelChanges.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            btnResignPlan.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            btnActualJobChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
 
             switch (eventInfo)
             {
@@ -162,10 +168,19 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                     btnPersonnelChanges.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     if (userInfo.Status == 0)
                     {
-                        btnSuspension.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
-                        btnDeptChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
-                        btnResign.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
-                        btnJobChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                        btnResignPlan.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+
+                        if (userInfo.ResignPlan != null)
+                        {
+                            btnResignPlan.Caption = "取消預報離職";
+                        }
+                        else
+                        {
+                            btnSuspension.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                            btnDeptChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                            btnResign.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                            btnJobChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                        }
                     }
                     else if (userInfo.Status == 2)
                     {
@@ -203,6 +218,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                 btnResumeWork.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                 btnJobChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                 btnActualJobChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                btnResignPlan.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             }
         }
 
@@ -263,6 +279,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                     cbbStatus.EditValue = userInfo.Status == null ? "" : TPConfigs.lsUserStatus[userInfo.Status.Value];
                     txbDateStart.EditValue = userInfo.DateCreate;
 
+                    resignDate = userInfo.ResignPlan;
                     oldUserInfoJson = JsonConvert.SerializeObject(userInfo);
                     idDept2word = userInfo.IdDepartment.Count() > 2 ? userInfo.IdDepartment.Substring(0, 2) : "00";
 
@@ -333,6 +350,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                 userInfo.Addr = txbAddr.EditValue?.ToString();
                 userInfo.Sex = cbbSex.EditValue?.ToString() == "男";
                 userInfo.Status = TPConfigs.lsUserStatus.FirstOrDefault(r => r.Value == cbbStatus.EditValue?.ToString()).Key;
+                userInfo.ResignPlan = resignDate;
 
                 string newUserInfoJson = JsonConvert.SerializeObject(userInfo);
 
@@ -557,6 +575,10 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                                 updateReq.TypeChange = "異動";
                                 updateReq.Describe = $"調任從「{oldUserData.ActualJobCode}」到「{userInfo.ActualJobCode}」";
                                 dt201_UpdateUsrReqBUS.Instance.Add(updateReq);
+
+                                break;
+
+                            case UpdateEvent.ResignPlan:
 
                                 break;
                         }
@@ -875,6 +897,67 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
             eventInfo = EventFormInfo.Update;
             _eventUpdate = UpdateEvent.ActualJobChange;
+            LockControl();
+        }
+
+        private void btnResignPlan_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (resignDate != null)
+            {
+                var result = XtraInputBox.Show(new XtraInputBoxArgs
+                {
+                    Caption = TPConfigs.SoftNameTW,
+                    AllowHtmlText = DevExpress.Utils.DefaultBoolean.False,
+                    Prompt = "請輸入您的工號以確認取消預報離職",
+                    DefaultButtonIndex = 0,
+                    Editor = new TextEdit { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) },
+                    DefaultResponse = ""
+                })?.ToString().ToUpper();
+
+                if (string.IsNullOrEmpty(result) || result != TPConfigs.LoginUser.Id.ToUpper()) return;
+
+                resignDate = null;
+            }
+            else
+            {
+                var editor = new TextEdit { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) };
+
+                // Thiết lập mask để buộc nhập đúng định dạng
+                editor.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.DateTimeMaskManager));
+                editor.Properties.MaskSettings.Set("mask", "yyyy/MM/dd");
+                editor.Properties.MaskSettings.Set("useAdvancingCaret", true);
+                editor.Properties.UseMaskAsDisplayFormat = true;
+
+                var result = XtraInputBox.Show(new XtraInputBoxArgs
+                {
+                    Caption = TPConfigs.SoftNameTW,
+                    AllowHtmlText = DevExpress.Utils.DefaultBoolean.False,
+                    Prompt = "輸入核准預報離職時間",
+                    Editor = editor,
+                    DefaultButtonIndex = 0,
+                    DefaultResponse = DateTime.Now.ToString("yyyy/MM/dd") // Định dạng mặc định
+                });
+
+                if (string.IsNullOrEmpty(result?.ToString())) return;
+
+                // Xử lý kết quả nhập
+                if (!DateTime.TryParse(result.ToString(), out DateTime respTime))
+                {
+                    XtraMessageBox.Show($"{result}\r\n時間格式不正確，請重新輸入！");
+                    return;
+                }
+
+                if (respTime < DateTime.Now)
+                {
+                    XtraMessageBox.Show("預報離職時間無效！");
+                    return;
+                }
+
+                resignDate = respTime;
+            }
+
+            eventInfo = EventFormInfo.Update;
+            _eventUpdate = UpdateEvent.ResignPlan;
             LockControl();
         }
     }

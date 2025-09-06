@@ -51,7 +51,6 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt307_Questions" Width="1.5" PointX="2.125" PointY="29.375" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt201_UpdateUsrReq" Width="1.5" PointX="11.875" PointY="21.125" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt402_KPIWeb" Width="1.5" PointX="10.25" PointY="2.75" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_User" Width="1.5" PointX="16.75" PointY="0.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt307_ExamMgmt" Width="1.5" PointX="5.375" PointY="29.375" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt307_ExamUser" Width="1.5" PointX="7" PointY="29.375" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt307_Answers" Width="1.5" PointX="3.75" PointY="29.375" />
@@ -93,6 +92,7 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt301_Course" Width="1.5" PointX="0.5" PointY="11.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt403_04_HardnessStandardLog" Width="1.5" PointX="2.125" PointY="32" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt403_04_StandardInfo" Width="1.5" PointX="3.75" PointY="32" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_User" Width="1.5" PointX="16.75" PointY="0.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

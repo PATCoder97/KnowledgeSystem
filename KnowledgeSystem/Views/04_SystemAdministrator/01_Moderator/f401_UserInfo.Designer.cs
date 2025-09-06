@@ -100,6 +100,7 @@
             this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcSign = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.btnResignPlan = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -171,9 +172,10 @@
             this.btnResumeWork,
             this.btnJobChange,
             this.btnPersonnelChanges,
-            this.btnActualJobChange});
+            this.btnActualJobChange,
+            this.btnResignPlan});
             this.barManagerTP.MainMenu = this.bar2;
-            this.barManagerTP.MaxItemId = 13;
+            this.barManagerTP.MaxItemId = 14;
             // 
             // bar2
             // 
@@ -243,7 +245,8 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.btnJobChange),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnActualJobChange),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnDeptChange),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnResign, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnResign, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnResignPlan)});
             this.btnPersonnelChanges.Name = "btnPersonnelChanges";
             // 
             // btnSuspension
@@ -1197,6 +1200,18 @@
             this.layoutControlItem9.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem9.TextVisible = false;
             // 
+            // btnResignPlan
+            // 
+            this.btnResignPlan.Caption = "預報離職";
+            this.btnResignPlan.Id = 13;
+            this.btnResignPlan.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnResignPlan.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnResignPlan.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnResignPlan.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.btnResignPlan.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnResignPlan.Name = "btnResignPlan";
+            this.btnResignPlan.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnResignPlan_ItemClick);
+            // 
             // f401_UserInfo
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
@@ -1343,5 +1358,6 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem17;
         private DevExpress.XtraEditors.TextEdit txbPCName;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem18;
+        private DevExpress.XtraBars.BarButtonItem btnResignPlan;
     }
 }

@@ -33,5 +33,6 @@ namespace DataAccessLayer
         public Nullable<bool> Sex { get; set; }
         public string ActualJobCode { get; set; }
         public Nullable<System.DateTime> LastUpdate { get; set; }
+        public Nullable<System.DateTime> ResignPlan { get; set; }
     }
 }
