@@ -84,7 +84,6 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt309_Units" Width="1.5" PointX="5.375" PointY="44.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt309_Prices" Width="1.5" PointX="8.625" PointY="44.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt204_InternalDocMgmt" Width="1.5" PointX="3.75" PointY="35.5" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_Departments" Width="1.5" PointX="5.375" PointY="0.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt308_CheckSession" Width="1.5" PointX="2.125" PointY="41" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt309_InspectionBatchMaterial" Width="1.5" PointX="10.25" PointY="35.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt309_Transactions" Width="1.5" PointX="10.25" PointY="44.5" />
@@ -93,6 +92,13 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt403_04_HardnessStandardLog" Width="1.5" PointX="2.125" PointY="32" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt403_04_StandardInfo" Width="1.5" PointX="3.75" PointY="32" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_User" Width="1.5" PointX="16.75" PointY="0.5" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt310_Area5S" Width="1.5" PointX="3.75" PointY="49.375" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt310_Area5SResponsible" Width="1.5" PointX="8.625" PointY="49.375" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt310_EHSFunction" Width="1.5" PointX="7" PointY="49.375" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt310_Function" Width="1.5" PointX="2.125" PointY="49.375" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt310_Role" Width="1.5" PointX="0.5" PointY="49.375" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt310_UnitEHSOrg" Width="1.5" PointX="5.375" PointY="49.375" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_Departments" Width="1.5" PointX="5.375" PointY="0.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

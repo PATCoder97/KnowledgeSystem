@@ -311,6 +311,24 @@
     <Compile Include="dt309_Units.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
+    <Compile Include="dt310_Area5S.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dt310_Area5SResponsible.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dt310_EHSFunction.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dt310_Function.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dt310_Role.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dt310_UnitEHSOrg.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
     <Compile Include="dt402_KPIWeb.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>

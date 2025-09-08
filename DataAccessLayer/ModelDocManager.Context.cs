@@ -104,7 +104,6 @@ namespace DataAccessLayer
         public virtual DbSet<dt309_Units> dt309_Units { get; set; }
         public virtual DbSet<dt309_Prices> dt309_Prices { get; set; }
         public virtual DbSet<dt204_InternalDocMgmt> dt204_InternalDocMgmt { get; set; }
-        public virtual DbSet<dm_Departments> dm_Departments { get; set; }
         public virtual DbSet<dt308_CheckSession> dt308_CheckSession { get; set; }
         public virtual DbSet<dt309_InspectionBatchMaterial> dt309_InspectionBatchMaterial { get; set; }
         public virtual DbSet<dt309_Transactions> dt309_Transactions { get; set; }
@@ -113,5 +112,12 @@ namespace DataAccessLayer
         public virtual DbSet<dt403_04_HardnessStandardLog> dt403_04_HardnessStandardLog { get; set; }
         public virtual DbSet<dt403_04_StandardInfo> dt403_04_StandardInfo { get; set; }
         public virtual DbSet<dm_User> dm_User { get; set; }
+        public virtual DbSet<dt310_Area5S> dt310_Area5S { get; set; }
+        public virtual DbSet<dt310_Area5SResponsible> dt310_Area5SResponsible { get; set; }
+        public virtual DbSet<dt310_EHSFunction> dt310_EHSFunction { get; set; }
+        public virtual DbSet<dt310_Function> dt310_Function { get; set; }
+        public virtual DbSet<dt310_Role> dt310_Role { get; set; }
+        public virtual DbSet<dt310_UnitEHSOrg> dt310_UnitEHSOrg { get; set; }
+        public virtual DbSet<dm_Departments> dm_Departments { get; set; }
     }
 }

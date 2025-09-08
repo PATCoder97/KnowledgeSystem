@@ -12,13 +12,14 @@ namespace DataAccessLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class dm_Departments
+    public partial class dt310_Area5S
     {
-        public string Id { get; set; }
-        public Nullable<int> IdChild { get; set; }
-        public Nullable<int> IdParent { get; set; }
+        public int Id { get; set; }
         public string DisplayName { get; set; }
-        public string DisplayNameVN { get; set; }
-        public Nullable<bool> IsGroup { get; set; }
+        public string FileName { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public string CreatedBy { get; set; }
+        public Nullable<System.DateTime> DeletedAt { get; set; }
+        public string DeletedBy { get; set; }
     }
 }

@@ -730,6 +730,12 @@
     <Compile Include="Views\03_DepartmentManage\09_SparePart\uc309_SparePartMain.Designer.cs">
       <DependentUpon>uc309_SparePartMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\03_DepartmentManage\10_EHSWorkforce\uc310_UnitEHSOrg.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\10_EHSWorkforce\uc310_UnitEHSOrg.Designer.cs">
+      <DependentUpon>uc310_UnitEHSOrg.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_SignInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1389,6 +1395,9 @@
     <EmbeddedResource Include="Views\03_DepartmentManage\09_SparePart\uc309_SparePartMain.resx">
       <DependentUpon>uc309_SparePartMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\10_EHSWorkforce\uc310_UnitEHSOrg.resx">
+      <DependentUpon>uc310_UnitEHSOrg.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_SignInfo.resx">
       <DependentUpon>f402_SignInfo.cs</DependentUpon>
     </EmbeddedResource>
@@ -1620,9 +1629,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\03_DepartmentManage\10_EHSWorkforce\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="AppIcon.ico" />
     <Content Include="dll\Spire.License.dll">

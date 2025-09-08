@@ -59,6 +59,50 @@ namespace BusinessLayer
             }
         }
 
+        public List<dm_Departments> GetAllChildren(int idChildDept)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    var result = new List<dm_Departments>();
+
+                    // Hàm đệ quy nội bộ
+                    void CollectChildren(int parentId)
+                    {
+                        var children = _context.dm_Departments
+                                               .Where(d => d.IdParent == parentId)
+                                               .ToList();
+
+                        foreach (var child in children)
+                        {
+                            result.Add(child);
+                            // Gọi tiếp cho cấp con của child
+                            if (child.IdChild != null)
+                                CollectChildren((int)child.IdChild);
+                        }
+                    }
+
+                    // Thêm chính nó vào trước
+                    var root = _context.dm_Departments
+                                       .FirstOrDefault(d => d.IdChild == idChildDept);
+                    if (root != null)
+                    {
+                        result.Add(root);
+                        CollectChildren(idChildDept);
+                    }
+
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
+
         public dm_Departments GetItemById(string _idDept)
         {
             try

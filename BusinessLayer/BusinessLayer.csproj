@@ -149,6 +149,12 @@
     <Compile Include="dt309\dt309_UnitsBUS.cs" />
     <Compile Include="dt309\dt309_InspectionBatchBUS.cs" />
     <Compile Include="dt309\dt309_InspectionBatchMaterialBUS.cs" />
+    <Compile Include="dt310\dt310_Area5SBUS.cs" />
+    <Compile Include="dt310\dt310_Area5SResponsibleBUS.cs" />
+    <Compile Include="dt310\dt310_EHSFunctionBUS.cs" />
+    <Compile Include="dt310\dt310_FunctionBUS.cs" />
+    <Compile Include="dt310\dt310_RoleBUS.cs" />
+    <Compile Include="dt310\dt310_UnitEHSOrgBUS.cs" />
     <Compile Include="dt402\dt402_KPIWebBUS.cs" />
     <Compile Include="dt403\dt403_SoftwareManualBUS.cs" />
     <Compile Include="dt403\dt403_04_HardnessStandardLogBUS.cs" />
