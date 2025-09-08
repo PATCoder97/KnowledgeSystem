@@ -28,6 +28,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
         }
 
         BindingSource sourceFunc = new BindingSource();
+        BindingSource sourceOrg = new BindingSource();
 
         List<dm_Departments> depts;
         List<dt310_UnitEHSOrg> unitEHSOrgs;
@@ -120,6 +121,27 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             }
 
             sourceFunc.DataSource = unitEHSOrgCustoms;
+
+            var now = DateTime.Now;
+            var result = unitEHSOrgs.Select(u =>
+            {
+                var roleObj = roles.FirstOrDefault(r => r.Id == Convert.ToInt32(u.Role));
+                var userObj = users.FirstOrDefault(r => r.Id == u.EmployeeId);
+
+                return new
+                {
+                    u.Id,
+                    Emp = $"{userObj?.IdDepartment} {userObj?.DisplayName} {userObj?.DisplayNameVN}",
+                    Role = roleObj?.DisplayName,
+                    u.StartDate,
+                    ThamNien = (now.Year - u.StartDate.Year) -
+                               (now.Month < u.StartDate.Month ||
+                               (now.Month == u.StartDate.Month && now.Day < u.StartDate.Day) ? 1 : 0)
+                };
+            }).ToList();
+
+
+            sourceOrg.DataSource = result;
         }
 
         private void uc310_UnitEHSOrg_Load(object sender, EventArgs e)
@@ -131,11 +153,18 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             treeFunctions.ParentFieldName = "IdParent";
             treeFunctions.CheckBoxFieldName = "Status";
             treeFunctions.BestFitColumns();
-
             treeFunctions.ReadOnlyTreelist();
 
             TreeListNode node = treeFunctions.GetNodeByVisibleIndex(0);
             node.Expanded = !node.Expanded;
+
+            gvData.ReadOnlyGridView();
+            gvData.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
+            gvData.OptionsDetail.AllowOnlyOneMasterRowExpanded = true;
+            gcData.DataSource = sourceOrg;
+            gvData.BestFitColumns();
+            gvData.OptionsDetail.EnableMasterViewMode = true;
+            gvData.OptionsView.ShowGroupPanel = false;
         }
 
         private void treeFunctions_NodeCellStyle(object sender, DevExpress.XtraTreeList.GetCustomNodeCellStyleEventArgs e)
