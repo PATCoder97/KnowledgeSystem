@@ -17,7 +17,7 @@ namespace DataAccessLayer
         public int Id { get; set; }
         public string DeptId { get; set; }
         public string EmployeeId { get; set; }
-        public string Role { get; set; }
+        public int RoleId { get; set; }
         public System.DateTime StartDate { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public string CreatedBy { get; set; }

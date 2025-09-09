@@ -80,7 +80,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             var orgs = unitEHSOrgs.Where(r => r.DeptId == dept.Id).ToList();
             foreach (var org in orgs)
             {
-                var roleObj = roles.FirstOrDefault(r => r.Id == Convert.ToInt32(org.Role));
+                var roleObj = roles.FirstOrDefault(r => r.Id == org.RoleId);
                 var userObj = users.FirstOrDefault(r => r.Id == org.EmployeeId);
 
                 unitEHSOrgCustoms.Add(new UnitEHSOrgCustom
@@ -125,7 +125,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             var now = DateTime.Now;
             var result = unitEHSOrgs.Select(u =>
             {
-                var roleObj = roles.FirstOrDefault(r => r.Id == Convert.ToInt32(u.Role));
+                var roleObj = roles.FirstOrDefault(r => r.Id == u.RoleId);
                 var userObj = users.FirstOrDefault(r => r.Id == u.EmployeeId);
 
                 return new

@@ -955,7 +955,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DeptId" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="EmployeeId" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="Role" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
           <Property Name="StartDate" Type="date" Nullable="false" />
           <Property Name="CreatedAt" Type="datetime2" Precision="7" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="10" Nullable="false" />
@@ -1240,8 +1240,8 @@
           <EntitySet Name="dt310_EHSFunction" EntityType="DBDocumentManagementSystemModel.dt310_EHSFunction" />
           <EntitySet Name="dt310_Function" EntityType="DBDocumentManagementSystemModel.dt310_Function" />
           <EntitySet Name="dt310_Role" EntityType="DBDocumentManagementSystemModel.dt310_Role" />
-          <EntitySet Name="dt310_UnitEHSOrg" EntityType="DBDocumentManagementSystemModel.dt310_UnitEHSOrg" />
           <EntitySet Name="dm_Departments" EntityType="DBDocumentManagementSystemModel.dm_Departments" />
+          <EntitySet Name="dt310_UnitEHSOrg" EntityType="DBDocumentManagementSystemModel.dt310_UnitEHSOrg" />
         </EntityContainer>
         <EntityType Name="dm_Function">
           <Key>
@@ -2260,20 +2260,6 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="dt310_UnitEHSOrg">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DeptId" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="EmployeeId" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Role" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="CreatedAt" Type="DateTime" Precision="7" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="DeletedAt" Type="DateTime" Precision="7" />
-          <Property Name="DeletedBy" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="dm_Departments">
           <Key>
             <PropertyRef Name="Id" />
@@ -2284,6 +2270,20 @@
           <Property Name="DisplayName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="DisplayNameVN" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="IsGroup" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="dt310_UnitEHSOrg">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeptId" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="EmployeeId" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="7" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="DeletedAt" Type="DateTime" Precision="7" />
+          <Property Name="DeletedBy" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -3400,21 +3400,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dt310_UnitEHSOrg">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt310_UnitEHSOrg">
-              <MappingFragment StoreEntitySet="dt310_UnitEHSOrg">
-                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
-                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="Role" ColumnName="Role" />
-                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
-                <ScalarProperty Name="DeptId" ColumnName="DeptId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="dm_Departments">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_Departments">
               <MappingFragment StoreEntitySet="dm_Departments">
@@ -3423,6 +3408,21 @@
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="IdParent" ColumnName="IdParent" />
                 <ScalarProperty Name="IdChild" ColumnName="IdChild" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt310_UnitEHSOrg">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt310_UnitEHSOrg">
+              <MappingFragment StoreEntitySet="dt310_UnitEHSOrg">
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="DeptId" ColumnName="DeptId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
