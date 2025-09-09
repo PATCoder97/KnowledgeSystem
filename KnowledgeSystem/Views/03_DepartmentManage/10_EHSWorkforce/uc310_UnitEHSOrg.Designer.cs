@@ -479,6 +479,7 @@
             this.treeFunctions.Size = new System.Drawing.Size(399, 440);
             this.treeFunctions.TabIndex = 5;
             this.treeFunctions.NodeCellStyle += new DevExpress.XtraTreeList.GetCustomNodeCellStyleEventHandler(this.treeFunctions_NodeCellStyle);
+            this.treeFunctions.DoubleClick += new System.EventHandler(this.treeFunctions_DoubleClick);
             // 
             // treeListColumn1
             // 

@@ -2,9 +2,12 @@
 using DataAccessLayer;
 using DevExpress.LookAndFeel;
 using DevExpress.XtraEditors;
+using DevExpress.XtraRichEdit.Import.Html;
 using DevExpress.XtraTreeList;
 using DevExpress.XtraTreeList.Nodes;
 using KnowledgeSystem.Helpers;
+using KnowledgeSystem.Views._03_DepartmentManage._09_SparePart;
+using KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +18,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Security;
 using System.Windows.Forms;
+using System.Windows.Media.Media3D;
 using static DevExpress.XtraEditors.Mask.MaskSettings;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
@@ -39,6 +43,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
         private class UnitEHSOrgCustom
         {
             public int Id { get; set; }
+            public int? IdData { get; set; }
             public int IdParent { get; set; }
             public string DeptName { get; set; }
             public string Role { get; set; }
@@ -86,6 +91,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                 unitEHSOrgCustoms.Add(new UnitEHSOrgCustom
                 {
                     Id = index,
+                    IdData = org.Id,
                     IdParent = deptNode.Id,
                     Emp = $"{userObj?.IdDepartment} {userObj?.DisplayName} {userObj?.DisplayNameVN}",
                     Role = roleObj?.DisplayName,
@@ -142,6 +148,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
 
             sourceOrg.DataSource = result;
+            treeFunctions.BestFitColumns();
+            gvData.BestFitColumns();
         }
 
         private void uc310_UnitEHSOrg_Load(object sender, EventArgs e)
@@ -182,11 +190,49 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
         private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            f310_UnitEHSOrg_Info finfo = new f310_UnitEHSOrg_Info()
+            {
+                eventInfo = EventFormInfo.Create,
+                formName = "組織",
+            };
 
+            finfo.ShowDialog();
+            LoadData();
         }
 
         private void btnReload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            LoadData();
+        }
+
+        private void treeFunctions_DoubleClick(object sender, EventArgs e)
+        {
+            var treeList = treeFunctions;
+            var hit = treeList.CalcHitInfo(treeList.PointToClient(System.Windows.Forms.Control.MousePosition));
+
+            // Must click on a cell
+            if (hit.HitInfoType != HitInfoType.Cell)
+                return;
+
+            var node = treeList.FocusedNode;
+            if (node == null)
+                return;
+
+            // Get bound data from the node
+            var row = treeList.GetDataRecordByNode(node) as UnitEHSOrgCustom;
+            if (row == null || !row.IdData.HasValue)
+                return;
+
+            using (var finfo = new f310_UnitEHSOrg_Info
+            {
+                eventInfo = EventFormInfo.View,
+                formName = "組織",
+                idBase = row.IdData.Value
+            })
+            {
+                finfo.ShowDialog(this);
+            }
+
             LoadData();
         }
     }
