@@ -585,37 +585,29 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             if (masterRow == null)
                 return;
 
-            // Lấy danh sách Spare từ dòng cha
-            var spareList = (masterRow.Spare as IEnumerable<dynamic>)?.ToList();
-            if (spareList == null || spareList.Count == 0)
-                return;
+            var spareItems = masterRow.Spare as IEnumerable<dynamic>;
+            if (spareItems == null) return;
 
-            // Lấy danh sách BatchMaterial
-            var batchMaterials = spareList
-                .Select(item => item.BatchMaterial as dt309_InspectionBatchMaterial)
+            var ownerBatchMaterials = spareItems
+                .Where(it => it?.Material is dt309_Materials m && m.IdManager == TPConfigs.LoginUser.Id)
+                .Select(it => it?.BatchMaterial as dt309_InspectionBatchMaterial)
                 .Where(b => b != null)
                 .ToList();
+            if (ownerBatchMaterials.Count == 0) return;
 
-            // Kiểm tra trạng thái hoàn thành
-            bool hasCompletedItem = batchMaterials.Any(x => x.ActualQuantity != null);
-            bool hasIncompleteItem = batchMaterials.Any(x => x.IsComplete != true);
+            bool hasCompletedItem = ownerBatchMaterials.Any(x => x.ActualQuantity != null);
+            bool hasIncompleteItem = ownerBatchMaterials.Any(x => x.IsComplete != true);
 
             // Cập nhật caption theo trạng thái
             if (hasCompletedItem)
             {
                 itemDownCheckFile.Caption = "下載異常表";
                 itemUpdateCheckFile.Caption = "上傳異常表";
-
-                itemDownCheckFileProxy.Caption = "下載異常表(代理)";
-                itemUpdateCheckFileProxy.Caption = "上傳異常表(代理)";
             }
             else
             {
                 itemDownCheckFile.Caption = "下載盤點表";
                 itemUpdateCheckFile.Caption = "上傳盤點表";
-
-                itemDownCheckFileProxy.Caption = "下載盤點表(代理)";
-                itemUpdateCheckFileProxy.Caption = "上傳盤點表(代理)";
             }
 
             // Nếu đã hoàn thành hết thì trờ về
@@ -625,11 +617,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             // Thêm item vào menu
             e.Menu.Items.Add(itemDownCheckFile);
             e.Menu.Items.Add(itemUpdateCheckFile);
-
-            itemDownCheckFileProxy.BeginGroup = true;
-
-            e.Menu.Items.Add(itemDownCheckFileProxy);
-            e.Menu.Items.Add(itemUpdateCheckFileProxy);
         }
 
         private (int completeCount, int totalCount) GetRowCounts(GridView view, int rowHandle)
