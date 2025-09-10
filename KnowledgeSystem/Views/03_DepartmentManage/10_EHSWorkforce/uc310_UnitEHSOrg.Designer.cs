@@ -483,7 +483,7 @@
             // 
             // treeListColumn1
             // 
-            this.treeListColumn1.Caption = "功能";
+            this.treeListColumn1.Caption = "職務";
             this.treeListColumn1.FieldName = "DeptName";
             this.treeListColumn1.MaxWidth = 250;
             this.treeListColumn1.MinWidth = 150;
