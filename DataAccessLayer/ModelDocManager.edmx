@@ -907,7 +907,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="DeptId" Type="int" Nullable="false" />
+          <Property Name="DeptId" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="EmployeeId" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="AgentId" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="AreaName" Type="nvarchar" MaxLength="100" Nullable="false" />
@@ -924,9 +924,9 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="DeptId" Type="int" Nullable="false" />
+          <Property Name="DeptId" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="EmployeeId" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="FunctionName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="FunctionId" Type="int" Nullable="false" />
           <Property Name="StartDate" Type="date" Nullable="false" />
           <Property Name="EndDate" Type="date" />
           <Property Name="CreatedAt" Type="datetime2" Precision="7" />
@@ -939,6 +939,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="64" />
           <Property Name="DisplayName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
         <EntityType Name="dt310_Role">
@@ -1236,12 +1237,12 @@
           <EntitySet Name="dt403_04_StandardInfo" EntityType="DBDocumentManagementSystemModel.dt403_04_StandardInfo" />
           <EntitySet Name="dm_User" EntityType="DBDocumentManagementSystemModel.dm_User" />
           <EntitySet Name="dt310_Area5S" EntityType="DBDocumentManagementSystemModel.dt310_Area5S" />
-          <EntitySet Name="dt310_Area5SResponsible" EntityType="DBDocumentManagementSystemModel.dt310_Area5SResponsible" />
-          <EntitySet Name="dt310_EHSFunction" EntityType="DBDocumentManagementSystemModel.dt310_EHSFunction" />
-          <EntitySet Name="dt310_Function" EntityType="DBDocumentManagementSystemModel.dt310_Function" />
           <EntitySet Name="dt310_Role" EntityType="DBDocumentManagementSystemModel.dt310_Role" />
           <EntitySet Name="dm_Departments" EntityType="DBDocumentManagementSystemModel.dm_Departments" />
           <EntitySet Name="dt310_UnitEHSOrg" EntityType="DBDocumentManagementSystemModel.dt310_UnitEHSOrg" />
+          <EntitySet Name="dt310_Function" EntityType="DBDocumentManagementSystemModel.dt310_Function" />
+          <EntitySet Name="dt310_Area5SResponsible" EntityType="DBDocumentManagementSystemModel.dt310_Area5SResponsible" />
+          <EntitySet Name="dt310_EHSFunction" EntityType="DBDocumentManagementSystemModel.dt310_EHSFunction" />
         </EntityContainer>
         <EntityType Name="dm_Function">
           <Key>
@@ -2214,45 +2215,6 @@
           <Property Name="DeletedAt" Type="DateTime" Precision="7" />
           <Property Name="DeletedBy" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="dt310_Area5SResponsible">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DeptId" Type="Int32" Nullable="false" />
-          <Property Name="EmployeeId" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="AgentId" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="AreaName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="AreaFileId" Type="Int32" Nullable="false" />
-          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="EndDate" Type="DateTime" Precision="0" />
-          <Property Name="CreatedAt" Type="DateTime" Precision="7" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="DeletedAt" Type="DateTime" Precision="7" />
-          <Property Name="DeletedBy" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="dt310_EHSFunction">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DeptId" Type="Int32" Nullable="false" />
-          <Property Name="EmployeeId" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="FunctionName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="EndDate" Type="DateTime" Precision="0" />
-          <Property Name="CreatedAt" Type="DateTime" Precision="7" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="DeletedAt" Type="DateTime" Precision="7" />
-          <Property Name="DeletedBy" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="dt310_Function">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="dt310_Role">
           <Key>
             <PropertyRef Name="Id" />
@@ -2280,6 +2242,46 @@
           <Property Name="EmployeeId" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="RoleId" Type="Int32" Nullable="false" />
           <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="7" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="DeletedAt" Type="DateTime" Precision="7" />
+          <Property Name="DeletedBy" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dt310_Function">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dt310_Area5SResponsible">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeptId" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="EmployeeId" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="AgentId" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="AreaName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AreaFileId" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="7" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="DeletedAt" Type="DateTime" Precision="7" />
+          <Property Name="DeletedBy" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dt310_EHSFunction">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeptId" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="EmployeeId" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="FunctionId" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
           <Property Name="CreatedAt" Type="DateTime" Precision="7" />
           <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="DeletedAt" Type="DateTime" Precision="7" />
@@ -3350,48 +3352,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dt310_Area5SResponsible">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt310_Area5SResponsible">
-              <MappingFragment StoreEntitySet="dt310_Area5SResponsible">
-                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
-                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="AreaFileId" ColumnName="AreaFileId" />
-                <ScalarProperty Name="AreaName" ColumnName="AreaName" />
-                <ScalarProperty Name="AgentId" ColumnName="AgentId" />
-                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
-                <ScalarProperty Name="DeptId" ColumnName="DeptId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="dt310_EHSFunction">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt310_EHSFunction">
-              <MappingFragment StoreEntitySet="dt310_EHSFunction">
-                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
-                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="FunctionName" ColumnName="FunctionName" />
-                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
-                <ScalarProperty Name="DeptId" ColumnName="DeptId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="dt310_Function">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt310_Function">
-              <MappingFragment StoreEntitySet="dt310_Function">
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="dt310_Role">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt310_Role">
               <MappingFragment StoreEntitySet="dt310_Role">
@@ -3421,6 +3381,49 @@
                 <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="DeptId" ColumnName="DeptId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt310_Function">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt310_Function">
+              <MappingFragment StoreEntitySet="dt310_Function">
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt310_Area5SResponsible">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt310_Area5SResponsible">
+              <MappingFragment StoreEntitySet="dt310_Area5SResponsible">
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="AreaFileId" ColumnName="AreaFileId" />
+                <ScalarProperty Name="AreaName" ColumnName="AreaName" />
+                <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="DeptId" ColumnName="DeptId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt310_EHSFunction">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt310_EHSFunction">
+              <MappingFragment StoreEntitySet="dt310_EHSFunction">
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="FunctionId" ColumnName="FunctionId" />
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
                 <ScalarProperty Name="DeptId" ColumnName="DeptId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />

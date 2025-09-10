@@ -93,12 +93,12 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt403_04_StandardInfo" Width="1.5" PointX="3.75" PointY="32" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_User" Width="1.5" PointX="16.75" PointY="0.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt310_Area5S" Width="1.5" PointX="3.75" PointY="49.375" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt310_Area5SResponsible" Width="1.5" PointX="8.625" PointY="49.375" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt310_EHSFunction" Width="1.5" PointX="7" PointY="49.375" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt310_Function" Width="1.5" PointX="2.125" PointY="49.375" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt310_Role" Width="1.5" PointX="0.5" PointY="49.375" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_Departments" Width="1.5" PointX="5.375" PointY="0.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt310_UnitEHSOrg" Width="1.5" PointX="5.375" PointY="49.375" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt310_Function" Width="1.5" PointX="2.125" PointY="49.375" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt310_Area5SResponsible" Width="1.5" PointX="7" PointY="49.375" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt310_EHSFunction" Width="1.5" PointX="8.625" PointY="49.375" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

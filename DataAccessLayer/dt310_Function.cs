@@ -15,6 +15,7 @@ namespace DataAccessLayer
     public partial class dt310_Function
     {
         public int Id { get; set; }
+        public string Code { get; set; }
         public string DisplayName { get; set; }
     }
 }

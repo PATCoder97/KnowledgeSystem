@@ -15,9 +15,9 @@ namespace DataAccessLayer
     public partial class dt310_EHSFunction
     {
         public int Id { get; set; }
-        public int DeptId { get; set; }
+        public string DeptId { get; set; }
         public string EmployeeId { get; set; }
-        public string FunctionName { get; set; }
+        public int FunctionId { get; set; }
         public System.DateTime StartDate { get; set; }
         public Nullable<System.DateTime> EndDate { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }

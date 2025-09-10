@@ -730,11 +730,29 @@
     <Compile Include="Views\03_DepartmentManage\09_SparePart\uc309_SparePartMain.Designer.cs">
       <DependentUpon>uc309_SparePartMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\03_DepartmentManage\10_EHSWorkforce\f310_EHSFunc_Info.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\10_EHSWorkforce\f310_EHSFunc_Info.Designer.cs">
+      <DependentUpon>f310_EHSFunc_Info.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\03_DepartmentManage\10_EHSWorkforce\f310_UnitEHSOrg_Info.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\03_DepartmentManage\10_EHSWorkforce\f310_UnitEHSOrg_Info.Designer.cs">
       <DependentUpon>f310_UnitEHSOrg_Info.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\10_EHSWorkforce\uc310_Area5SResponsible.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\10_EHSWorkforce\uc310_Area5SResponsible.Designer.cs">
+      <DependentUpon>uc310_Area5SResponsible.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\10_EHSWorkforce\uc310_EHSFunction.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\10_EHSWorkforce\uc310_EHSFunction.Designer.cs">
+      <DependentUpon>uc310_EHSFunction.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\03_DepartmentManage\10_EHSWorkforce\uc310_UnitEHSOrg.cs">
       <SubType>UserControl</SubType>
@@ -1401,8 +1419,14 @@
     <EmbeddedResource Include="Views\03_DepartmentManage\09_SparePart\uc309_SparePartMain.resx">
       <DependentUpon>uc309_SparePartMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\10_EHSWorkforce\f310_EHSFunc_Info.resx">
+      <DependentUpon>f310_EHSFunc_Info.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\10_EHSWorkforce\f310_UnitEHSOrg_Info.resx">
       <DependentUpon>f310_UnitEHSOrg_Info.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\10_EHSWorkforce\uc310_EHSFunction.resx">
+      <DependentUpon>uc310_EHSFunction.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\10_EHSWorkforce\uc310_UnitEHSOrg.resx">
       <DependentUpon>uc310_UnitEHSOrg.cs</DependentUpon>

@@ -15,7 +15,7 @@ namespace DataAccessLayer
     public partial class dt310_Area5SResponsible
     {
         public int Id { get; set; }
-        public int DeptId { get; set; }
+        public string DeptId { get; set; }
         public string EmployeeId { get; set; }
         public string AgentId { get; set; }
         public string AreaName { get; set; }

@@ -113,11 +113,11 @@ namespace DataAccessLayer
         public virtual DbSet<dt403_04_StandardInfo> dt403_04_StandardInfo { get; set; }
         public virtual DbSet<dm_User> dm_User { get; set; }
         public virtual DbSet<dt310_Area5S> dt310_Area5S { get; set; }
-        public virtual DbSet<dt310_Area5SResponsible> dt310_Area5SResponsible { get; set; }
-        public virtual DbSet<dt310_EHSFunction> dt310_EHSFunction { get; set; }
-        public virtual DbSet<dt310_Function> dt310_Function { get; set; }
         public virtual DbSet<dt310_Role> dt310_Role { get; set; }
         public virtual DbSet<dm_Departments> dm_Departments { get; set; }
         public virtual DbSet<dt310_UnitEHSOrg> dt310_UnitEHSOrg { get; set; }
+        public virtual DbSet<dt310_Function> dt310_Function { get; set; }
+        public virtual DbSet<dt310_Area5SResponsible> dt310_Area5SResponsible { get; set; }
+        public virtual DbSet<dt310_EHSFunction> dt310_EHSFunction { get; set; }
     }
 }
