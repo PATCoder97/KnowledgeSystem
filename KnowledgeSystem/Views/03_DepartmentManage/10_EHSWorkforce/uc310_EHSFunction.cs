@@ -106,7 +106,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             funcs = dt310_FunctionBUS.Instance.GetList();
             EHSFuncs = dt310_EHSFunctionBUS.Instance.GetList();
             //depts = dm_DeptBUS.Instance.GetList();
-            depts = dm_DeptBUS.Instance.GetAllChildren(0).Where(r => r.IsGroup != true).ToList();
+            depts = dm_DeptBUS.Instance.GetAllChildren(0).Where(r => r.IsGroup != true && !TPConfigs.ExclusionDept310.Split(';').Contains(r.Id)).ToList();
             users = dm_UserBUS.Instance.GetList();
 
             EHSFuncsCustom = new List<EHSFuncCustom>();

@@ -485,7 +485,7 @@
             // 
             this.treeListColumn1.Caption = "職務";
             this.treeListColumn1.FieldName = "DeptName";
-            this.treeListColumn1.MaxWidth = 250;
+            this.treeListColumn1.MaxWidth = 400;
             this.treeListColumn1.MinWidth = 150;
             this.treeListColumn1.Name = "treeListColumn1";
             this.treeListColumn1.OptionsColumn.AllowEdit = false;

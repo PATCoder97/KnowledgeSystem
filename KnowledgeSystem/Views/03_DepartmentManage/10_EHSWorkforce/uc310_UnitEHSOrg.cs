@@ -113,7 +113,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             roles = dt310_RoleBUS.Instance.GetList();
             unitEHSOrgs = dt310_UnitEHSOrgBUS.Instance.GetList();
             //depts = dm_DeptBUS.Instance.GetList();
-            depts = dm_DeptBUS.Instance.GetAllChildren(0).Where(r => r.IsGroup != true).ToList();
+            depts = dm_DeptBUS.Instance.GetAllChildren(0).Where(r => r.IsGroup != true && !TPConfigs.ExclusionDept310.Split(';').Contains(r.Id)).ToList();
             users = dm_UserBUS.Instance.GetList();
 
             unitEHSOrgCustoms = new List<UnitEHSOrgCustom>();
@@ -164,6 +164,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             treeFunctions.ReadOnlyTreelist();
 
             TreeListNode node = treeFunctions.GetNodeByVisibleIndex(0);
+            if (node != null)
             node.Expanded = !node.Expanded;
 
             gvData.ReadOnlyGridView();
