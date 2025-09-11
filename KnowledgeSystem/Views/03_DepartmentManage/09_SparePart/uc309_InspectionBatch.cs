@@ -307,10 +307,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         //    return totalCount;
         //}
 
-        private (int completeCount, int totalCount) GetRowCounts(GridView view, int rowHandle)
+        private (int completeCount, int totalCount, int abnormalCount) GetRowCounts(GridView view, int rowHandle)
         {
             int completeCount = 0;
             int totalCount = 0;
+            int abnormalCount = 0;
 
             int childrenCount = view.GetChildRowCount(rowHandle);
             for (int i = 0; i < childrenCount; i++)
@@ -319,9 +320,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
                 if (view.IsGroupRow(childRowHandle))
                 {
-                    var (cCount, tCount) = GetRowCounts(view, childRowHandle);
+                    var (cCount, tCount, aCount) = GetRowCounts(view, childRowHandle);
                     completeCount += cCount;
                     totalCount += tCount;
+                    abnormalCount += aCount;
                 }
                 else
                 {
@@ -331,10 +333,16 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                     {
                         completeCount++;
                     }
+
+                    object cellValueDesc = view.GetRowCellValue(childRowHandle, gColDesc);
+                    if (cellValueDesc != null && !string.IsNullOrEmpty(cellValueDesc.ToString()))
+                    {
+                        abnormalCount++;
+                    }
                 }
             }
 
-            return (completeCount, totalCount);
+            return (completeCount, totalCount, abnormalCount);
         }
 
         private void gvSparePart_CustomDrawGroupRow(object sender, DevExpress.XtraGrid.Views.Base.RowObjectCustomDrawEventArgs e)
@@ -349,13 +357,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
             var groupInfo = info.RowKey as GroupRowInfo;
 
-            var (complete, total) = GetRowCounts(view, e.RowHandle);
+            var (complete, total, abnormal) = GetRowCounts(view, e.RowHandle);
 
             bool groupComplete = total == complete;
             string colorName = groupComplete ? "Green" : "Red";
             string groupValue = groupComplete ? "已完成" : "處理中";
 
-            info.GroupText = $" <color={colorName}>{groupValue}</color>：{info.GroupValueText}《<color=Blue>{total}物品</color>》";
+            info.GroupText = $" <color={colorName}>{groupValue}</color>：{info.GroupValueText}《<color=Blue>{total}物品</color></color>{(abnormal == 0 ? "" : $" <color=Red>{abnormal}異常</color>")}》";
         }
 
         private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
