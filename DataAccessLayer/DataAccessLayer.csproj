@@ -266,6 +266,12 @@
     <Compile Include="dt307_ExamUser.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
+    <Compile Include="dt307_InterviewReport.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dt307_InterviewScore.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
     <Compile Include="dt307_JobQuesManage.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>

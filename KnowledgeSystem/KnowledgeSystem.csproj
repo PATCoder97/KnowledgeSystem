@@ -580,6 +580,12 @@
     <Compile Include="Views\03_DepartmentManage\07_Quiz\f307_Exam_Info.Designer.cs">
       <DependentUpon>f307_Exam_Info.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\03_DepartmentManage\07_Quiz\f307_Interview_Info.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\07_Quiz\f307_Interview_Info.Designer.cs">
+      <DependentUpon>f307_Interview_Info.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\03_DepartmentManage\07_Quiz\f307_JobSet_Info.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -603,6 +609,12 @@
     </Compile>
     <Compile Include="Views\03_DepartmentManage\07_Quiz\uc307_ExamMgmt.Designer.cs">
       <DependentUpon>uc307_ExamMgmt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\07_Quiz\uc307_Interview.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\07_Quiz\uc307_Interview.Designer.cs">
+      <DependentUpon>uc307_Interview.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\03_DepartmentManage\07_Quiz\uc307_JobTitleSetting.cs">
       <SubType>UserControl</SubType>
@@ -1350,6 +1362,9 @@
     <EmbeddedResource Include="Views\03_DepartmentManage\07_Quiz\f307_Exam_Info.resx">
       <DependentUpon>f307_Exam_Info.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\07_Quiz\f307_Interview_Info.resx">
+      <DependentUpon>f307_Interview_Info.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\07_Quiz\f307_JobSet_Info.resx">
       <DependentUpon>f307_JobSet_Info.cs</DependentUpon>
     </EmbeddedResource>
@@ -1361,6 +1376,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\07_Quiz\uc307_ExamMgmt.resx">
       <DependentUpon>uc307_ExamMgmt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\07_Quiz\uc307_Interview.resx">
+      <DependentUpon>uc307_Interview.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\07_Quiz\uc307_JobTitleSetting.resx">
       <DependentUpon>uc307_JobTitleSetting.cs</DependentUpon>

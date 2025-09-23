@@ -119,5 +119,7 @@ namespace DataAccessLayer
         public virtual DbSet<dt310_Function> dt310_Function { get; set; }
         public virtual DbSet<dt310_Area5SResponsible> dt310_Area5SResponsible { get; set; }
         public virtual DbSet<dt310_EHSFunction> dt310_EHSFunction { get; set; }
+        public virtual DbSet<dt307_InterviewReport> dt307_InterviewReport { get; set; }
+        public virtual DbSet<dt307_InterviewScore> dt307_InterviewScore { get; set; }
     }
 }

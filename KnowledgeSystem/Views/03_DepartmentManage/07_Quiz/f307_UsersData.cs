@@ -25,6 +25,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
 
         public List<dm_User> UsersInput { get; set; }
         public List<dm_User> UsersOutput { get; set; }
+        public bool IsFullUser = false;
 
         private void InitializeIcon()
         {
@@ -44,7 +45,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
                 .Where(r => r.Status == 0 &&
                             !idUsrs.Contains(r.Id) &&
                             r.ActualJobCode != null &&
-                            r.ActualJobCode.EndsWith("J"))
+                            (IsFullUser ? true : r.ActualJobCode.EndsWith("J")))
                 .ToList();
 
             var datas = (from usr in usrs

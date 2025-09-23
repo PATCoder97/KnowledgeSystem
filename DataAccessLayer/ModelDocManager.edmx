@@ -727,6 +727,35 @@
           <Property Name="IsPass" Type="bit" />
           <Property Name="ExamData" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="dt307_InterviewReport">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Interviewer" Type="nvarchar(max)" />
+          <Property Name="Interviewees" Type="nvarchar(max)" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="dt307_InterviewScore">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReportId" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="InterviewerId" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="IntervieweeId" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ProfessionalSkill" Type="int" Nullable="false" />
+          <Property Name="ProfessionalSkillNote" Type="nvarchar" MaxLength="500" />
+          <Property Name="Responsiveness" Type="int" Nullable="false" />
+          <Property Name="ResponsivenessNote" Type="nvarchar" MaxLength="500" />
+          <Property Name="Communication" Type="int" Nullable="false" />
+          <Property Name="CommunicationNote" Type="nvarchar" MaxLength="500" />
+          <Property Name="ReportQuality" Type="int" Nullable="false" />
+          <Property Name="ReportQualityNote" Type="nvarchar" MaxLength="500" />
+          <Property Name="Total" Type="numeric" Precision="15" Scale="1" StoreGeneratedPattern="Computed" />
+        </EntityType>
         <EntityType Name="dt307_JobQuesManage">
           <Key>
             <PropertyRef Name="JobId" />
@@ -1115,6 +1144,8 @@
           <EntitySet Name="dt307_Answers" EntityType="Self.dt307_Answers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt307_ExamMgmt" EntityType="Self.dt307_ExamMgmt" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt307_ExamUser" EntityType="Self.dt307_ExamUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt307_InterviewReport" EntityType="Self.dt307_InterviewReport" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt307_InterviewScore" EntityType="Self.dt307_InterviewScore" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt307_JobQuesManage" EntityType="Self.dt307_JobQuesManage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt307_Questions" EntityType="Self.dt307_Questions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt308_CheckDetail" EntityType="Self.dt308_CheckDetail" Schema="dbo" store:Type="Tables" />
@@ -1243,6 +1274,8 @@
           <EntitySet Name="dt310_Function" EntityType="DBDocumentManagementSystemModel.dt310_Function" />
           <EntitySet Name="dt310_Area5SResponsible" EntityType="DBDocumentManagementSystemModel.dt310_Area5SResponsible" />
           <EntitySet Name="dt310_EHSFunction" EntityType="DBDocumentManagementSystemModel.dt310_EHSFunction" />
+          <EntitySet Name="dt307_InterviewReport" EntityType="DBDocumentManagementSystemModel.dt307_InterviewReport" />
+          <EntitySet Name="dt307_InterviewScore" EntityType="DBDocumentManagementSystemModel.dt307_InterviewScore" />
         </EntityContainer>
         <EntityType Name="dm_Function">
           <Key>
@@ -2286,6 +2319,35 @@
           <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="DeletedAt" Type="DateTime" Precision="7" />
           <Property Name="DeletedBy" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dt307_InterviewReport">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Interviewer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Interviewees" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dt307_InterviewScore">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReportId" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="InterviewerId" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IntervieweeId" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ProfessionalSkill" Type="Int32" Nullable="false" />
+          <Property Name="ProfessionalSkillNote" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Responsiveness" Type="Int32" Nullable="false" />
+          <Property Name="ResponsivenessNote" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Communication" Type="Int32" Nullable="false" />
+          <Property Name="CommunicationNote" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ReportQuality" Type="Int32" Nullable="false" />
+          <Property Name="ReportQualityNote" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Total" Type="Decimal" Precision="15" Scale="1" annotation:StoreGeneratedPattern="Computed" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -3426,6 +3488,37 @@
                 <ScalarProperty Name="FunctionId" ColumnName="FunctionId" />
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
                 <ScalarProperty Name="DeptId" ColumnName="DeptId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt307_InterviewReport">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt307_InterviewReport">
+              <MappingFragment StoreEntitySet="dt307_InterviewReport">
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Interviewees" ColumnName="Interviewees" />
+                <ScalarProperty Name="Interviewer" ColumnName="Interviewer" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt307_InterviewScore">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt307_InterviewScore">
+              <MappingFragment StoreEntitySet="dt307_InterviewScore">
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="ReportQualityNote" ColumnName="ReportQualityNote" />
+                <ScalarProperty Name="ReportQuality" ColumnName="ReportQuality" />
+                <ScalarProperty Name="CommunicationNote" ColumnName="CommunicationNote" />
+                <ScalarProperty Name="Communication" ColumnName="Communication" />
+                <ScalarProperty Name="ResponsivenessNote" ColumnName="ResponsivenessNote" />
+                <ScalarProperty Name="Responsiveness" ColumnName="Responsiveness" />
+                <ScalarProperty Name="ProfessionalSkillNote" ColumnName="ProfessionalSkillNote" />
+                <ScalarProperty Name="ProfessionalSkill" ColumnName="ProfessionalSkill" />
+                <ScalarProperty Name="IntervieweeId" ColumnName="IntervieweeId" />
+                <ScalarProperty Name="InterviewerId" ColumnName="InterviewerId" />
+                <ScalarProperty Name="ReportId" ColumnName="ReportId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
