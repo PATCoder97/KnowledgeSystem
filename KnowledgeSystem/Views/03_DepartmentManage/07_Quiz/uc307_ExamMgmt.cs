@@ -6,10 +6,14 @@ using DevExpress.Utils.Svg;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraReports;
+using DevExpress.XtraReports.Design.ParameterEditor;
 using DevExpress.XtraSplashScreen;
 using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._03_DepartmentManage._06_Signature;
 using Newtonsoft.Json;
+using OfficeOpenXml;
+using OfficeOpenXml.Style;
 using Scriban;
 using System;
 using System.Collections.Generic;
@@ -52,6 +56,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
         DXMenuItem itemStartExam;
         DXMenuItem itemFinishExam;
         DXMenuItem itemExportExam;
+        DXMenuItem itemExportStatistical;
 
         private void InitializeMenuItems()
         {
@@ -59,6 +64,98 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             itemStartExam = CreateMenuItem("開始考試", ItemStartExam_Click, TPSvgimages.Start);
             itemFinishExam = CreateMenuItem("完成考試", ItemFinishExam_Click, TPSvgimages.Finish);
             itemExportExam = CreateMenuItem("導出結果", ItemExportExam_Click, TPSvgimages.Print);
+            itemExportStatistical = CreateMenuItem("導出匯總表", ItemExportStatistical_Click, TPSvgimages.Excel);
+        }
+
+        private void ItemExportStatistical_Click(object sender, EventArgs e)
+        {
+            GridView view = gvData;
+            string examCode = view.GetRowCellValue(view.FocusedRowHandle, gColExamCode).ToString();
+
+            var bases = dt307_ExamUserBUS.Instance.GetListByExamCode(examCode);
+
+            var excelDatas = (from data in bases
+                              join user in users on data.IdUser equals user.Id
+                              join job in jobs on data.IdJob equals job.Id
+                              let user_name = user != null ? $"{user.Id} {user.DisplayName}" : data.IdUser
+                              let job_name = job != null ? $"{job.Id} {job.DisplayName}" : data.IdJob
+                              let dept = user != null ? user.IdDepartment : ""
+                              orderby user?.IdDepartment, data.IdUser
+                              select new
+                              {
+                                  dept,
+                                  user_name,
+                                  job_name,
+                                  data.Score,
+                                  SubmitTime = data.SubmitTime?.ToString("yyyy/MM/dd HH:mm"),
+                                  pass = data.IsPass == true ? "合格" : "不合格"
+                              }).ToList();
+
+            string documentsPath = TPConfigs.DocumentPath();
+            if (!Directory.Exists(documentsPath))
+                Directory.CreateDirectory(documentsPath);
+
+            string filePath = Path.Combine(documentsPath, $"abc-{examCode} - {DateTime.Now:yyyyMMddHHmmss}.xlsx");
+
+            ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+            using (ExcelPackage pck = new ExcelPackage(filePath))
+            {
+                ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Sheet1");
+                ws.Cells.Style.Font.Name = "Microsoft JhengHei";
+                ws.Cells.Style.Font.Size = 14;
+
+                ws.Cells["A1"].Value = "部門";
+                ws.Cells["B1"].Value = "人員名稱";
+                ws.Cells["C1"].Value = "職務";
+                ws.Cells["D1"].Value = "得分";
+                ws.Cells["E1"].Value = "提交時間";
+                ws.Cells["F1"].Value = "結果";
+
+                // Xuất dữ liệu từ list excelDatas sang Table
+                ws.Cells["A2"].LoadFromCollection(excelDatas, false);
+
+                int startRow = 2, endRow = excelDatas.Count + 1;
+                List<int> cols = new List<int>() { 1 };
+
+                for (int colIndex = 0; colIndex < cols.Count; colIndex++)
+                {
+                    int col = cols[colIndex];
+                    int mergeStart = startRow;
+
+                    for (int row = startRow + 1; row <= endRow + 1; row++)
+                    {
+                        var curr = ws.Cells[row, col].Value?.ToString();
+                        var prev = ws.Cells[mergeStart, col].Value?.ToString();
+
+                        if (curr != prev || row == endRow + 1)
+                        {
+                            if (row - 1 > mergeStart)
+                            {
+                                ws.Cells[mergeStart, col, row - 1, col].Merge = true;
+                            }
+
+                            mergeStart = row;
+                        }
+                    }
+                }
+
+
+                //ws.Column(1).Style.WrapText = true;
+                ws.Cells[ws.Dimension.Address].AutoFitColumns();
+
+                // Căn giữa và kẻ ô toàn bảng
+                var fullRange = ws.Cells[ws.Dimension.Address];
+                fullRange.Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
+                fullRange.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                fullRange.Style.Border.Top.Style = fullRange.Style.Border.Bottom.Style =
+                    fullRange.Style.Border.Left.Style = fullRange.Style.Border.Right.Style =
+                    ExcelBorderStyle.Thin;
+
+                // Lưu file
+                pck.Save();
+            }
+
+            Process.Start(filePath);
         }
 
         private void ItemExportExam_Click(object sender, EventArgs e)
@@ -291,6 +388,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
                 else if (!isNotStart)
                 {
                     e.Menu.Items.Add(itemExportExam);
+                    e.Menu.Items.Add(itemExportStatistical);
                 }
             }
         }

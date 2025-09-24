@@ -436,12 +436,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
                 }
             }
 
-            decimal avg = count > 0 ? totalScore / count : 0;
+            decimal avg = count > 0 ? Math.Round(totalScore / count, 1) : 0;
             bool pass = avg >= 80;
 
             return (avg, pass, count);
         }
-
 
         private void gvInfo_CustomDrawGroupRow(object sender, DevExpress.XtraGrid.Views.Base.RowObjectCustomDrawEventArgs e)
         {
