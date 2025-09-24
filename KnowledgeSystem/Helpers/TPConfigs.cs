@@ -48,6 +48,7 @@ namespace KnowledgeSystem.Helpers
         public static string FolderCalibCert { get; set; }
         public static string FolderReportFormat { get; set; }
         public static string ExclusionDept310 { get; set; }
+        public static string WebLink307 { get; set; }
 
         public static void SetSystemStaticValue()
         {
@@ -61,6 +62,7 @@ namespace KnowledgeSystem.Helpers
             FolderCalibCert = lsStaticValue.FirstOrDefault(r => r.KeyT == "CalibCertFolder")?.ValueT ?? "";
 
             ExclusionDept310 = lsStaticValue.FirstOrDefault(r => r.KeyT == "310ExclusionDept")?.ValueT ?? "";
+            WebLink307 = lsStaticValue.FirstOrDefault(r => r.KeyT == "307WebLink")?.ValueT ?? "";
 
             Folder00 = Path.Combine(FolderData, "00");
             Folder207 = Path.Combine(FolderData, "207");

@@ -61,6 +61,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
 
         DXMenuItem itemViewInfo;
         DXMenuItem itemExportExcel;
+        DXMenuItem itemCopyLink;
 
         private void InitializeIcon()
         {
@@ -85,6 +86,17 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
         {
             itemViewInfo = CreateMenuItem("查看資訊", ItemViewInfo_Click, TPSvgimages.View);
             itemExportExcel = CreateMenuItem("導出評核表", ItemExportExcel_Click, TPSvgimages.Excel);
+            itemCopyLink = CreateMenuItem("複製評核路徑", ItemCopyLinkl_Click, TPSvgimages.Copy);
+        }
+
+        private void ItemCopyLinkl_Click(object sender, EventArgs e)
+        {
+            GridView view = gvData;
+            string idReport = view.GetRowCellValue(view.FocusedRowHandle, gColId).ToString();
+            string link = $"{TPConfigs.WebLink307.TrimEnd('/')}/{idReport}";
+
+            Clipboard.SetText(link);
+            XtraMessageBox.Show($"評核路徑已復製\r\n{link}");
         }
 
         private void ItemExportExcel_Click(object sender, EventArgs e)
@@ -325,6 +337,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
         {
             if (e.HitInfo.InRowCell && e.HitInfo.InDataRow)
             {
+                e.Menu.Items.Add(itemCopyLink);
                 e.Menu.Items.Add(itemViewInfo);
                 e.Menu.Items.Add(itemExportExcel);
             }
