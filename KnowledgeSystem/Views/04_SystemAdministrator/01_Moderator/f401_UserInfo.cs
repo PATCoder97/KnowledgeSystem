@@ -180,6 +180,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                             btnDeptChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                             btnResign.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                             btnJobChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                            btnActualJobChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                         }
                     }
                     else if (userInfo.Status == 2)

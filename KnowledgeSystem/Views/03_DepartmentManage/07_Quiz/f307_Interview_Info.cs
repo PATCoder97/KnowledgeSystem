@@ -255,6 +255,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             target.RemoveAll(u => selectedUsers.Exists(r => r.Id == u.Id));
             LoadData();
         }
+
         private void btnAddInterviewer_Click(object sender, EventArgs e)
         {
             AddUsers(interviewers, true);
