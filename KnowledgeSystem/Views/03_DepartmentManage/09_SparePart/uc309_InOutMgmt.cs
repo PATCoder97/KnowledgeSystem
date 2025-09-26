@@ -1,23 +1,29 @@
-﻿using System;
+﻿using BusinessLayer;
+using DataAccessLayer;
+using DevExpress.Utils.Behaviors.Common;
+using DevExpress.Utils.Menu;
+using DevExpress.Utils.Svg;
+using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraSplashScreen;
+using KnowledgeSystem.Helpers;
+using OfficeOpenXml;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Util;
 using System.Windows.Forms;
 using System.Windows.Media.Media3D;
-using BusinessLayer;
-using DataAccessLayer;
-using DevExpress.Utils.Menu;
-using DevExpress.Utils.Svg;
-using DevExpress.XtraEditors;
-using DevExpress.XtraEditors.Controls;
-using DevExpress.XtraGrid;
-using DevExpress.XtraSplashScreen;
-using KnowledgeSystem.Helpers;
+using static DevExpress.XtraEditors.Mask.MaskSettings;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 {
@@ -55,6 +61,18 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         DXMenuItem itemMaterialCheck;
 
         Dictionary<string, string> events = uc309_SparePartMain.events;
+
+        public class TransactionDisplay
+        {
+            public int Id { get; set; }
+            public string IdDept { get; set; }
+            public dt309_Transactions Transaction { get; set; }
+            public dt309_Materials Material { get; set; }
+            public dt309_Storages Storage { get; set; }
+            public KeyValuePair<string, string> Event { get; set; }
+            public string User { get; set; }
+        }
+
 
         private void InitializeIcon()
         {
@@ -147,7 +165,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                                    join s in storages on t.StorageId equals s.Id
                                    join e in events on t.TransactionType equals e.Key
                                    let user = users.FirstOrDefault(u => u.Id == t.UserDo)
-                                   select new
+                                   select new TransactionDisplay
                                    {
                                        Id = t.Id,
                                        IdDept = m.IdDept,
@@ -211,9 +229,87 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             LoadData();
         }
 
+        public static List<int> GetVisibleDataIds(GridView view)
+        {
+            var ids = new List<int>();
+
+            for (int i = 0; i < view.DataRowCount; i++)
+            {
+                int rowHandle = view.GetVisibleRowHandle(i);
+
+                // Cách nhanh: nếu có cột/field "data.Id" trong Grid (cột ẩn cũng được)
+                var cell = view.GetRowCellValue(rowHandle, "Id");
+                if (cell != null && int.TryParse(cell.ToString(), out int idFromCell))
+                {
+                    ids.Add(idFromCell);
+                    continue;
+                }
+
+                // Fallback: lấy từ object ẩn danh bằng reflection
+                var row = view.GetRow(rowHandle);
+                if (row == null) continue;
+
+                var dataProp = row.GetType().GetProperty("data");
+                var dataVal = dataProp?.GetValue(row, null);
+                var idProp = dataVal?.GetType().GetProperty("Id");
+                var idVal = idProp?.GetValue(dataVal, null)?.ToString();
+
+                if (int.TryParse(idVal, out int idFromProp))
+                    ids.Add(idFromProp);
+            }
+
+            return ids;
+        }
+
         private void btnExportExcel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            List<int> ids = GetVisibleDataIds(gvData);
 
+            var allData = sourceBases.DataSource as IEnumerable<TransactionDisplay>;
+
+            var exportData = allData
+                .Where(d => ids.Contains(d.Id))
+                .Select(d => new
+                {
+                    單位 = d.IdDept,
+                    時期 = d.Transaction.CreatedDate,
+                    材料編號 = d.Material.Code,
+                    品名規格 = d.Material.DisplayName,
+                    事件 = d.Event.Value,
+                    倉庫 = d.Storage.DisplayName,
+                    數量 = d.Transaction.Quantity,
+                    數量後 = d.Transaction.AftQuantity,
+                    總數量 = d.Transaction.TotalQuantity,
+                    經辦人 = d.User,
+                    備註 = d.Transaction.Desc
+                })
+                .ToList();
+
+            string documentsPath = TPConfigs.DocumentPath();
+            if (!Directory.Exists(documentsPath))
+                Directory.CreateDirectory(documentsPath);
+
+            string filePath = Path.Combine(documentsPath, $"InOut-{DateTime.Now:yyyyMMddHHmmss}.xlsx");
+
+            ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+            using (ExcelPackage pck = new ExcelPackage(filePath))
+            {
+                ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Sheet1");
+                ws.Cells.Style.Font.Name = "Microsoft JhengHei";
+                ws.Cells.Style.Font.Size = 14;
+
+                // Xuất dữ liệu từ list excelDatas sang Table
+                ws.Cells["A1"].LoadFromCollection(exportData, true, OfficeOpenXml.Table.TableStyles.Medium2);
+                // Bật WrapText cho tất cả các ô
+                //ws.Column(3).Style.WrapText = true;
+                ws.Cells[ws.Dimension.Address].AutoFitColumns();
+                ws.Column(2).Style.Numberformat.Format = "yyyy/mm/dd hh:mm";
+
+                // Lưu file
+                pck.Save();
+            }
+
+            Process.Start(filePath);
         }
     }
 }

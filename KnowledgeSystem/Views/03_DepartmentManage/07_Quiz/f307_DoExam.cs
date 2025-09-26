@@ -1,5 +1,6 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
+using DevExpress.Charts.Native;
 using DevExpress.Data.Helpers;
 using DevExpress.DataAccess.Native.Sql.SqlParser;
 using DevExpress.XtraCharts;
@@ -35,7 +36,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.None; // Bỏ khung viền
             this.WindowState = FormWindowState.Maximized; // Phóng to toàn màn hình
-            //this.TopMost = true; // Đảm bảo form luôn ở trên cùng
+            this.TopMost = true; // Đảm bảo form luôn ở trên cùng
 
             this.KeyDown += F307_DoExam_KeyDown;
             this.KeyPreview = true;  // Đảm bảo Form nhận được sự kiện KeyDown
@@ -214,7 +215,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             catch { }
         }
 
-        private void btnSubmit_Click(object sender, EventArgs e)
+        private void Submit_Exam()
         {
             foreach (var answer in examResults)
             {
@@ -256,6 +257,14 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
 
             IsClose = true;
             Close();
+        }
+
+        private void btnSubmit_Click(object sender, EventArgs e)
+        {
+            var dialog = XtraMessageBox.Show("你確定要提交考試答案嗎", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialog != DialogResult.Yes) return;
+
+            Submit_Exam();
         }
 
         private string LoadData()
@@ -377,7 +386,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             {
                 countdownTimer.Stop();
                 lbTime.Text = "時間到了！";
-                MessageBox.Show("Thời gian đã hết!");
+
+                Submit_Exam();
             }
         }
     }
