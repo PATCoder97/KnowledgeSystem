@@ -149,14 +149,24 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
                 PreviousQues();
             }
 
-            if (e.Control && e.Alt && e.Shift && e.KeyCode == Keys.T)
+            if (e.Control && e.Alt && e.Shift && e.KeyCode == Keys.Z)
             {
+                var groups = dm_GroupBUS.Instance.GetItemByName("評鑒係統");
+                if (groups == null) return;
+
+                var grpUsers = dm_GroupUserBUS.Instance.GetListByIdGroup(groups.Id);
+                if (!grpUsers.Any(r => r.IdUser == TPConfigs.LoginUser.Id))
+                    return;
+
                 foreach (var answer in examResults)
-                {
                     answer.UserAnswer = answer.CorrectAnswer;
-                }
 
                 gcData.RefreshDataSource();
+
+                GridView view = gvData;
+                indexQues = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColId).ToString()) - 1;
+
+                InitializeWebView2(indexQues);
             }
         }
 

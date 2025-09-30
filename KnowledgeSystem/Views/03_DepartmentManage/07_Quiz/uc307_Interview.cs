@@ -289,6 +289,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             gvData.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
             gvData.OptionsDetail.AllowOnlyOneMasterRowExpanded = true;
 
+            gvInfo.ReadOnlyGridView();
+            gvInfo.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
+            gvInfo.OptionsDetail.AllowOnlyOneMasterRowExpanded = true;
+
             //// Kiểm tra quyền từng ke để có quyền truy cập theo nhóm
             //var userGroups = dm_GroupUserBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id);
             //var departments = dm_DeptBUS.Instance.GetList();

@@ -3,6 +3,7 @@ using DataAccessLayer;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraLayout;
 using DevExpress.XtraSplashScreen;
 using DocumentFormat.OpenXml.Spreadsheet;
 using KnowledgeSystem.Helpers;
@@ -50,6 +51,9 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
         Font fontUI14 = new Font("Microsoft JhengHei UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
         Font fontUI12 = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+
+        List<LayoutControlItem> lcControls;
+        List<LayoutControlItem> lcImpControls;
 
         private enum UpdateEvent
         {
@@ -203,6 +207,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             {
                 lcRole.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 lcSign.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             }
 
             bool role301Main = AppPermission.Instance.CheckAppPermission(AppPermission.SafetyCertMain);
@@ -221,10 +226,37 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                 btnActualJobChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                 btnResignPlan.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             }
+
+            foreach (var item in lcControls)
+            {
+                string colorHex = item.Control.Enabled ? "000000" : "000000";
+                item.Text = item.Text.Replace("000000", colorHex);
+            }
+
+            // Các thông tin phải điền có thêm dấu * màu đỏ
+            foreach (var item in lcImpControls)
+            {
+                if (item.Control.Enabled)
+                {
+                    item.Text += "<color=red>*</color>";
+                }
+                else
+                {
+                    item.Text = item.Text.Replace("<color=red>*</color>", "");
+                }
+            }
         }
 
         private void f401_UserInfo_Load(object sender, EventArgs e)
         {
+            lcControls = new List<LayoutControlItem>() { lcUserId, lcUserNameVN, lcUserNameTW, lcDept, lcActualJob, lcJobTitle, lcNationality, lcStatus, lcSex, lcDateStart, lcDOB, lcCCCD, lcPhone1, lcPhone2, lcAddr, lcPCName };
+            lcImpControls = new List<LayoutControlItem>() { lcUserId, lcUserNameVN, lcUserNameTW, lcDept, lcActualJob, lcJobTitle, lcNationality, lcStatus, lcSex, lcDateStart, lcDOB, lcCCCD, lcPhone1, lcAddr };
+            foreach (var item in lcControls)
+            {
+                item.AllowHtmlStringInCaption = true;
+                item.Text = $"<color=#000000>{item.Text}</color>";
+            }
+
             tabbedControlGroup1.SelectedTabPageIndex = 0;
 
             IsSysAdmin = AppPermission.Instance.CheckAppPermission(AppPermission.SysAdmin);
@@ -329,6 +361,27 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            // Kiểm tra xem đã điền đầy đủ thông tin yêu cầu hay chưa
+            bool IsValidate = true;
+
+            foreach (var item in lcImpControls)
+            {
+                if (item.Control is BaseEdit baseEdit)
+                {
+                    if (string.IsNullOrEmpty(baseEdit.EditValue?.ToString()))
+                    {
+                        IsValidate = false;
+                        break; // Dừng vòng lặp ngay khi phát hiện lỗi
+                    }
+                }
+            }
+
+            if (!IsValidate)
+            {
+                MsgTP.MsgError("請填寫所有信息<color=red>(*)</color>");
+                return;
+            }
+
             var result = false;
             string msg = "";
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
