@@ -178,7 +178,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
 
             foreach (var item in bases)
             {
-                if (string.IsNullOrEmpty(item.ExamData)) return;
+                if (string.IsNullOrEmpty(item.ExamData)) continue;
                 List<f307_DoExam.ExamResult> examDatas = JsonConvert.DeserializeObject<List<f307_DoExam.ExamResult>>(item.ExamData);
 
                 var dataexam = (from data in examDatas

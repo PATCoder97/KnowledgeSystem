@@ -187,7 +187,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                             btnActualJobChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                         }
                     }
-                    else if (userInfo.Status == 2)
+                    else if (userInfo.Status == 2 || userInfo.Status == 1)
                     {
                         btnResumeWork.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     }
@@ -341,6 +341,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
         private void btnEdit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if (userInfo.Status != 0) return;
+
             eventInfo = EventFormInfo.Update;
             LockControl();
         }
