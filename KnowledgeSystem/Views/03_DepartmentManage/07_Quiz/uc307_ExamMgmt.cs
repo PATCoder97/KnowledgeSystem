@@ -70,9 +70,15 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
         private void ItemExportStatistical_Click(object sender, EventArgs e)
         {
             GridView view = gvData;
-            string examCode = view.GetRowCellValue(view.FocusedRowHandle, gColExamCode).ToString();
 
-            var bases = dt307_ExamUserBUS.Instance.GetListByExamCode(examCode);
+            var selectedItems = view.GetSelectedRows()
+               .Select(rowHandle => view.GetRow(rowHandle) as dt307_ExamMgmt)
+               .Where(item => item.FinishTime != null)
+               .ToList();
+
+            var examCodes = selectedItems.Select(r => r.Code).ToList();
+
+            var bases = dt307_ExamUserBUS.Instance.GetListByExamCodes(examCodes);
 
             var excelDatas = (from data in bases
                               join user in users on data.IdUser equals user.Id
@@ -95,7 +101,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             if (!Directory.Exists(documentsPath))
                 Directory.CreateDirectory(documentsPath);
 
-            string filePath = Path.Combine(documentsPath, $"abc-{examCode} - {DateTime.Now:yyyyMMddHHmmss}.xlsx");
+            string filePath = Path.Combine(documentsPath, $"工程師學科考試-{DateTime.Now:yyyyMMddHHmmss}.xlsx");
 
             ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
             using (ExcelPackage pck = new ExcelPackage(filePath))
@@ -138,7 +144,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
                         }
                     }
                 }
-
 
                 //ws.Column(1).Style.WrapText = true;
                 ws.Cells[ws.Dimension.Address].AutoFitColumns();
@@ -307,6 +312,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
 
         private void uc307_ExamMgmt_Load(object sender, EventArgs e)
         {
+            gvData.OptionsSelection.MultiSelect = true;
+            gvData.OptionsSelection.MultiSelectMode = GridMultiSelectMode.CheckBoxRowSelect;
+
             gvData.ReadOnlyGridView();
             gvData.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
             gvData.OptionsDetail.AllowOnlyOneMasterRowExpanded = true;
@@ -374,18 +382,25 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
         {
             if (e.HitInfo.InRowCell && e.HitInfo.InDataRow)
             {
-                GridView view = sender as GridView;
-                view.FocusedRowHandle = e.HitInfo.RowHandle;
-                bool isNotStart = string.IsNullOrEmpty(view.GetRowCellValue(view.FocusedRowHandle, "StartTime")?.ToString());
-                bool isStart = string.IsNullOrEmpty(view.GetRowCellValue(view.FocusedRowHandle, "FinishTime")?.ToString());
+                var gridView = sender as GridView;
+                gridView.FocusedRowHandle = e.HitInfo.RowHandle;
 
+                // Lấy giá trị StartTime và FinishTime
+                var startTime = gridView.GetRowCellValue(gridView.FocusedRowHandle, "StartTime")?.ToString();
+                var finishTime = gridView.GetRowCellValue(gridView.FocusedRowHandle, "FinishTime")?.ToString();
+
+                bool hasStartTime = !string.IsNullOrEmpty(startTime);
+                bool hasFinishTime = !string.IsNullOrEmpty(finishTime);
+
+                // Luôn thêm menu "Xem thông tin"
                 e.Menu.Items.Add(itemViewInfo);
 
-                if (isStart)
+                if (!hasFinishTime) // Chưa kết thúc
                 {
-                    e.Menu.Items.Add(isNotStart ? itemStartExam : itemFinishExam);
+                    // Nếu chưa có StartTime thì hiển thị "Bắt đầu", ngược lại hiển thị "Kết thúc"
+                    e.Menu.Items.Add(!hasStartTime ? itemStartExam : itemFinishExam);
                 }
-                else if (!isNotStart)
+                else if (hasStartTime && hasFinishTime) // Đã có cả Start và Finish
                 {
                     e.Menu.Items.Add(itemExportExam);
                     e.Menu.Items.Add(itemExportStatistical);

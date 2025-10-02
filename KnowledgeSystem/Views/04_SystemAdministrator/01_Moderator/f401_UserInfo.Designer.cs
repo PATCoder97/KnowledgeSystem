@@ -48,6 +48,11 @@
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.gcGroup = new DevExpress.XtraGrid.GridControl();
+            this.gvGroup = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.cbbStatus = new DevExpress.XtraEditors.ComboBoxEdit();
             this.txbAddr = new DevExpress.XtraEditors.TextEdit();
             this.txbPhone2 = new DevExpress.XtraEditors.TextEdit();
@@ -79,7 +84,9 @@
             this.gridColumn41 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.txbPCName = new DevExpress.XtraEditors.TextEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.tabbedControlGroup1 = new DevExpress.XtraLayout.TabbedControlGroup();
+            this.lcUserInfo = new DevExpress.XtraLayout.TabbedControlGroup();
+            this.lcGroup = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.lcUserId = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcSex = new DevExpress.XtraLayout.LayoutControlItem();
@@ -104,6 +111,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gcGroup)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvGroup)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbStatus.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbAddr.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbPhone2.Properties)).BeginInit();
@@ -129,7 +138,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbPCName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroup1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcUserInfo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcGroup)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcUserId)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcSex)).BeginInit();
@@ -367,6 +378,7 @@
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.gcGroup);
             this.layoutControl1.Controls.Add(this.cbbStatus);
             this.layoutControl1.Controls.Add(this.txbAddr);
             this.layoutControl1.Controls.Add(this.txbPhone2);
@@ -392,6 +404,70 @@
             this.layoutControl1.Size = new System.Drawing.Size(677, 364);
             this.layoutControl1.TabIndex = 5;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // gcGroup
+            // 
+            this.gcGroup.Location = new System.Drawing.Point(24, 56);
+            this.gcGroup.MainView = this.gvGroup;
+            this.gcGroup.MenuManager = this.barManagerTP;
+            this.gcGroup.Name = "gcGroup";
+            this.gcGroup.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
+            this.gcGroup.Size = new System.Drawing.Size(629, 284);
+            this.gcGroup.TabIndex = 15;
+            this.gcGroup.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvGroup});
+            // 
+            // gvGroup
+            // 
+            this.gvGroup.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.gvGroup.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
+            this.gvGroup.Appearance.HeaderPanel.Options.UseFont = true;
+            this.gvGroup.Appearance.HeaderPanel.Options.UseForeColor = true;
+            this.gvGroup.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            this.gvGroup.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gvGroup.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvGroup.Appearance.Row.ForeColor = System.Drawing.Color.Black;
+            this.gvGroup.Appearance.Row.Options.UseFont = true;
+            this.gvGroup.Appearance.Row.Options.UseForeColor = true;
+            this.gvGroup.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn5,
+            this.gridColumn6,
+            this.gridColumn7});
+            this.gvGroup.GridControl = this.gcGroup;
+            this.gvGroup.Name = "gvGroup";
+            this.gvGroup.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
+            this.gvGroup.OptionsView.EnableAppearanceOddRow = true;
+            this.gvGroup.OptionsView.ShowAutoFilterRow = true;
+            this.gvGroup.OptionsView.ShowGroupPanel = false;
+            this.gvGroup.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gridColumn7, DevExpress.Data.ColumnSortOrder.Ascending)});
+            // 
+            // gridColumn5
+            // 
+            this.gridColumn5.Caption = "名稱";
+            this.gridColumn5.FieldName = "DisplayName";
+            this.gridColumn5.Name = "gridColumn5";
+            this.gridColumn5.Visible = true;
+            this.gridColumn5.VisibleIndex = 1;
+            this.gridColumn5.Width = 244;
+            // 
+            // gridColumn6
+            // 
+            this.gridColumn6.Caption = "備註";
+            this.gridColumn6.FieldName = "Desc";
+            this.gridColumn6.Name = "gridColumn6";
+            this.gridColumn6.Visible = true;
+            this.gridColumn6.VisibleIndex = 2;
+            this.gridColumn6.Width = 246;
+            // 
+            // gridColumn7
+            // 
+            this.gridColumn7.Caption = "單位";
+            this.gridColumn7.FieldName = "Dept";
+            this.gridColumn7.Name = "gridColumn7";
+            this.gridColumn7.Visible = true;
+            this.gridColumn7.VisibleIndex = 0;
+            this.gridColumn7.Width = 113;
             // 
             // cbbStatus
             // 
@@ -495,7 +571,7 @@
             this.gcSign.MenuManager = this.barManagerTP;
             this.gcSign.Name = "gcSign";
             this.gcSign.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
-            this.gcSign.Size = new System.Drawing.Size(626, 284);
+            this.gcSign.Size = new System.Drawing.Size(629, 284);
             this.gcSign.TabIndex = 8;
             this.gcSign.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvSign});
@@ -648,10 +724,10 @@
             // 
             // gcRole
             // 
-            this.gcRole.Location = new System.Drawing.Point(27, 56);
+            this.gcRole.Location = new System.Drawing.Point(24, 56);
             this.gcRole.MainView = this.gvRole;
             this.gcRole.Name = "gcRole";
-            this.gcRole.Size = new System.Drawing.Size(626, 284);
+            this.gcRole.Size = new System.Drawing.Size(629, 284);
             this.gcRole.TabIndex = 8;
             this.gcRole.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvRole});
@@ -834,29 +910,48 @@
             this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             this.Root.GroupBordersVisible = false;
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.tabbedControlGroup1});
+            this.lcUserInfo});
             this.Root.Name = "Root";
             this.Root.Size = new System.Drawing.Size(677, 364);
             this.Root.TextVisible = false;
             // 
-            // tabbedControlGroup1
+            // lcUserInfo
             // 
-            this.tabbedControlGroup1.AppearanceGroup.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabbedControlGroup1.AppearanceGroup.Options.UseFont = true;
-            this.tabbedControlGroup1.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.tabbedControlGroup1.AppearanceItemCaption.Options.UseFont = true;
-            this.tabbedControlGroup1.AppearanceTabPage.Header.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.tabbedControlGroup1.AppearanceTabPage.Header.Options.UseFont = true;
-            this.tabbedControlGroup1.AppearanceTabPage.HeaderActive.ForeColor = System.Drawing.Color.Blue;
-            this.tabbedControlGroup1.AppearanceTabPage.HeaderActive.Options.UseForeColor = true;
-            this.tabbedControlGroup1.Location = new System.Drawing.Point(0, 0);
-            this.tabbedControlGroup1.Name = "tabbedControlGroup1";
-            this.tabbedControlGroup1.SelectedTabPage = this.layoutControlGroup1;
-            this.tabbedControlGroup1.Size = new System.Drawing.Size(657, 344);
-            this.tabbedControlGroup1.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.lcUserInfo.AppearanceGroup.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lcUserInfo.AppearanceGroup.Options.UseFont = true;
+            this.lcUserInfo.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lcUserInfo.AppearanceItemCaption.Options.UseFont = true;
+            this.lcUserInfo.AppearanceTabPage.Header.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lcUserInfo.AppearanceTabPage.Header.Options.UseFont = true;
+            this.lcUserInfo.AppearanceTabPage.HeaderActive.ForeColor = System.Drawing.Color.Blue;
+            this.lcUserInfo.AppearanceTabPage.HeaderActive.Options.UseForeColor = true;
+            this.lcUserInfo.Location = new System.Drawing.Point(0, 0);
+            this.lcUserInfo.Name = "lcUserInfo";
+            this.lcUserInfo.SelectedTabPage = this.lcGroup;
+            this.lcUserInfo.Size = new System.Drawing.Size(657, 344);
+            this.lcUserInfo.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlGroup1,
             this.lcRole,
-            this.lcSign});
+            this.lcSign,
+            this.lcGroup});
+            // 
+            // lcGroup
+            // 
+            this.lcGroup.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem1});
+            this.lcGroup.Location = new System.Drawing.Point(0, 0);
+            this.lcGroup.Name = "lcGroup";
+            this.lcGroup.Size = new System.Drawing.Size(633, 288);
+            this.lcGroup.Text = "群組";
+            // 
+            // layoutControlItem1
+            // 
+            this.layoutControlItem1.Control = this.gcGroup;
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem1.Name = "layoutControlItem1";
+            this.layoutControlItem1.Size = new System.Drawing.Size(633, 288);
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem1.TextVisible = false;
             // 
             // layoutControlGroup1
             // 
@@ -1187,7 +1282,6 @@
             this.layoutControlItem10.CustomizationFormText = "layoutControlItem9";
             this.layoutControlItem10.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem10.Name = "layoutControlItem10";
-            this.layoutControlItem10.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 2, 2, 2);
             this.layoutControlItem10.Size = new System.Drawing.Size(633, 288);
             this.layoutControlItem10.Text = "layoutControlItem9";
             this.layoutControlItem10.TextSize = new System.Drawing.Size(0, 0);
@@ -1207,7 +1301,6 @@
             this.layoutControlItem9.Control = this.gcSign;
             this.layoutControlItem9.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem9.Name = "layoutControlItem9";
-            this.layoutControlItem9.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 5, 2, 2);
             this.layoutControlItem9.Size = new System.Drawing.Size(633, 288);
             this.layoutControlItem9.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem9.TextVisible = false;
@@ -1234,6 +1327,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gcGroup)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvGroup)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbStatus.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbAddr.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbPhone2.Properties)).EndInit();
@@ -1259,7 +1354,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbPCName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroup1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcUserInfo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcGroup)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcUserId)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcSex)).EndInit();
@@ -1332,7 +1429,7 @@
         private DevExpress.XtraBars.BarButtonItem btnResumeWork;
         private DevExpress.XtraBars.BarButtonItem btnJobChange;
         private DevExpress.XtraBars.BarSubItem btnPersonnelChanges;
-        private DevExpress.XtraLayout.TabbedControlGroup tabbedControlGroup1;
+        private DevExpress.XtraLayout.TabbedControlGroup lcUserInfo;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
         private DevExpress.XtraLayout.LayoutControlItem lcUserId;
         private DevExpress.XtraLayout.LayoutControlItem lcSex;
@@ -1359,5 +1456,12 @@
         private DevExpress.XtraEditors.TextEdit txbPCName;
         private DevExpress.XtraLayout.LayoutControlItem lcPCName;
         private DevExpress.XtraBars.BarButtonItem btnResignPlan;
+        private DevExpress.XtraLayout.LayoutControlGroup lcGroup;
+        private DevExpress.XtraGrid.GridControl gcGroup;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvGroup;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
     }
 }

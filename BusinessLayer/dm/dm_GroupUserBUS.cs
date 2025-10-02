@@ -126,6 +126,26 @@ namespace BusinessLayer
             }
         }
 
+        public bool RemoveRangeByUID(string idUsr)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    var _lsItemDel = _context.dm_GroupUser.Where(r => r.IdUser == idUsr).ToList();
+                    _context.dm_GroupUser.RemoveRange(_lsItemDel);
+
+                    int affectedRecords = _context.SaveChanges();
+                    return affectedRecords >= 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                return false;
+            }
+        }
+
         public bool Remove(int groupUserId)
         {
             try

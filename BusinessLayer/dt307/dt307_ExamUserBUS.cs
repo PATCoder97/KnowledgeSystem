@@ -56,6 +56,22 @@ namespace BusinessLayer
             }
         }
 
+        public List<dt307_ExamUser> GetListByExamCodes(List<string> examCodes)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt307_ExamUser.Where(r => examCodes.Contains(r.ExamCode)).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public List<dt307_ExamUser> GetListNeedDoByUserId(string userId)
         {
             try

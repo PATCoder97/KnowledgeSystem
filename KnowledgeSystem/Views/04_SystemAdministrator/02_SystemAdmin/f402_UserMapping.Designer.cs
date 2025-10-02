@@ -47,8 +47,8 @@
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcAllItems = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcSelectedItems = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -57,8 +57,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcAllData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvAllData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcAllItems)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcSelectedItems)).BeginInit();
             this.SuspendLayout();
             // 
             // barManager1
@@ -114,6 +114,7 @@
             this.btnConfirm.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            this.btnConfirm.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnConfirm_ItemClick);
             // 
             // btnEdit
             // 
@@ -121,6 +122,7 @@
             this.btnEdit.Id = 3;
             this.btnEdit.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnEdit.Name = "btnEdit";
+            this.btnEdit.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnEdit_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -278,46 +280,46 @@
             this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             this.Root.GroupBordersVisible = false;
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem1,
-            this.layoutControlItem2});
+            this.lcAllItems,
+            this.lcSelectedItems});
             this.Root.Name = "Root";
             this.Root.Size = new System.Drawing.Size(735, 416);
             this.Root.TextVisible = false;
             // 
-            // layoutControlItem1
+            // lcAllItems
             // 
-            this.layoutControlItem1.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.layoutControlItem1.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
-            this.layoutControlItem1.AppearanceItemCaption.Options.UseFont = true;
-            this.layoutControlItem1.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem1.AppearanceItemCaption.Options.UseTextOptions = true;
-            this.layoutControlItem1.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.layoutControlItem1.Control = this.gcAllData;
-            this.layoutControlItem1.CustomizationFormText = "可選簽名";
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 5, 2, 2);
-            this.layoutControlItem1.Size = new System.Drawing.Size(357, 396);
-            this.layoutControlItem1.Text = "可選簽名";
-            this.layoutControlItem1.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(76, 24);
+            this.lcAllItems.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lcAllItems.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.lcAllItems.AppearanceItemCaption.Options.UseFont = true;
+            this.lcAllItems.AppearanceItemCaption.Options.UseForeColor = true;
+            this.lcAllItems.AppearanceItemCaption.Options.UseTextOptions = true;
+            this.lcAllItems.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.lcAllItems.Control = this.gcAllData;
+            this.lcAllItems.CustomizationFormText = "可選簽名";
+            this.lcAllItems.Location = new System.Drawing.Point(0, 0);
+            this.lcAllItems.Name = "lcAllItems";
+            this.lcAllItems.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 5, 2, 2);
+            this.lcAllItems.Size = new System.Drawing.Size(357, 396);
+            this.lcAllItems.Text = "所有項目";
+            this.lcAllItems.TextLocation = DevExpress.Utils.Locations.Top;
+            this.lcAllItems.TextSize = new System.Drawing.Size(76, 24);
             // 
-            // layoutControlItem2
+            // lcSelectedItems
             // 
-            this.layoutControlItem2.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.layoutControlItem2.AppearanceItemCaption.ForeColor = System.Drawing.Color.Blue;
-            this.layoutControlItem2.AppearanceItemCaption.Options.UseFont = true;
-            this.layoutControlItem2.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem2.AppearanceItemCaption.Options.UseTextOptions = true;
-            this.layoutControlItem2.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.layoutControlItem2.Control = this.gcSelectData;
-            this.layoutControlItem2.Location = new System.Drawing.Point(357, 0);
-            this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 2, 2, 2);
-            this.layoutControlItem2.Size = new System.Drawing.Size(358, 396);
-            this.layoutControlItem2.Text = "已選簽名";
-            this.layoutControlItem2.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(76, 24);
+            this.lcSelectedItems.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lcSelectedItems.AppearanceItemCaption.ForeColor = System.Drawing.Color.Blue;
+            this.lcSelectedItems.AppearanceItemCaption.Options.UseFont = true;
+            this.lcSelectedItems.AppearanceItemCaption.Options.UseForeColor = true;
+            this.lcSelectedItems.AppearanceItemCaption.Options.UseTextOptions = true;
+            this.lcSelectedItems.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.lcSelectedItems.Control = this.gcSelectData;
+            this.lcSelectedItems.Location = new System.Drawing.Point(357, 0);
+            this.lcSelectedItems.Name = "lcSelectedItems";
+            this.lcSelectedItems.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 2, 2, 2);
+            this.lcSelectedItems.Size = new System.Drawing.Size(358, 396);
+            this.lcSelectedItems.Text = "已選項目";
+            this.lcSelectedItems.TextLocation = DevExpress.Utils.Locations.Top;
+            this.lcSelectedItems.TextSize = new System.Drawing.Size(76, 24);
             // 
             // f402_UserMapping
             // 
@@ -343,8 +345,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcAllData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvAllData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcAllItems)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcSelectedItems)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -370,7 +372,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
+        private DevExpress.XtraLayout.LayoutControlItem lcAllItems;
+        private DevExpress.XtraLayout.LayoutControlItem lcSelectedItems;
     }
 }

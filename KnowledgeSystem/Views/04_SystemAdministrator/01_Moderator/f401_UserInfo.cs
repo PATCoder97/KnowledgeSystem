@@ -207,6 +207,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             {
                 lcRole.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 lcSign.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                lcGroup.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+
                 btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             }
 
@@ -257,7 +259,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                 item.Text = $"<color=#000000>{item.Text}</color>";
             }
 
-            tabbedControlGroup1.SelectedTabPageIndex = 0;
+            lcUserInfo.SelectedTabPageIndex = 0;
 
             IsSysAdmin = AppPermission.Instance.CheckAppPermission(AppPermission.SysAdmin);
             lsCourses = dt301_CourseBUS.Instance.GetList();
@@ -284,6 +286,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
             gvSign.ReadOnlyGridView();
             gvRole.ReadOnlyGridView();
+            gvGroup.ReadOnlyGridView();
 
             switch (eventInfo)
             {
@@ -335,6 +338,19 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                                      }).ToList();
 
                     gcSign.DataSource = signInfos;
+
+                    // Xem đang nằm ở các nhóm nào
+                    var groupUsers = dm_GroupUserBUS.Instance.GetListByUID(userInfo.Id);
+                    var groups = (from data in dm_GroupBUS.Instance.GetList()
+                                  join userGroup in groupUsers on data.Id equals userGroup.IdGroup
+                                  select new
+                                  {
+                                      DisplayName = data.DisplayName,
+                                      Desc = data.Describe,
+                                      Dept = data.IdDept
+                                  }).ToList();
+                    gcGroup.DataSource = groups;
+
                     break;
             }
         }

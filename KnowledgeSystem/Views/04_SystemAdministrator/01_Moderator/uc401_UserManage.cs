@@ -87,33 +87,42 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
         {
             itemEditRole = CreateMenuItem("設定用色", ItemEditRole_Click, TPSvgimages.Num1);
             itemEditSign = CreateMenuItem("設定簽名", ItemEditSign_Click, TPSvgimages.Num2);
-            itemEditGroup = CreateMenuItem("設定ABC", ItemEditGroup_Click, TPSvgimages.Num3);
+            itemEditGroup = CreateMenuItem("設定群組", ItemEditGroup_Click, TPSvgimages.Num3);
         }
 
         private void ItemEditGroup_Click(object sender, EventArgs e)
         {
-            var form = new f402_UserMapping() { mapData = "sign" };
+            string idUser = gvData.GetRowCellValue(gvData.FocusedRowHandle, gColIdUser).ToString();
+            var form = new f402_UserMapping() { mapData = "group", idUsr = idUser };
             form.ShowDialog();
         }
 
         private void ItemEditSign_Click(object sender, EventArgs e)
         {
             string idUser = gvData.GetRowCellValue(gvData.FocusedRowHandle, gColIdUser).ToString();
+            var form = new f402_UserMapping() { mapData = "sign", idUsr = idUser };
+            form.ShowDialog();
 
-            f402_UserSigns fSetting = new f402_UserSigns();
-            fSetting.eventInfo = EventFormInfo.View;
-            fSetting.idUsr = idUser;
-            fSetting.ShowDialog();
+            //string idUser = gvData.GetRowCellValue(gvData.FocusedRowHandle, gColIdUser).ToString();
+
+            //f402_UserSigns fSetting = new f402_UserSigns();
+            //fSetting.eventInfo = EventFormInfo.View;
+            //fSetting.idUsr = idUser;
+            //fSetting.ShowDialog();
         }
 
         private void ItemEditRole_Click(object sender, EventArgs e)
         {
             string idUser = gvData.GetRowCellValue(gvData.FocusedRowHandle, gColIdUser).ToString();
+            var form = new f402_UserMapping() { mapData = "role", idUsr = idUser };
+            form.ShowDialog();
 
-            f402_UserRoles fSetting = new f402_UserRoles();
-            fSetting.eventInfo = EventFormInfo.View;
-            fSetting.idUsr = idUser;
-            fSetting.ShowDialog();
+            //string idUser = gvData.GetRowCellValue(gvData.FocusedRowHandle, gColIdUser).ToString();
+
+            //f402_UserRoles fSetting = new f402_UserRoles();
+            //fSetting.eventInfo = EventFormInfo.View;
+            //fSetting.idUsr = idUser;
+            //fSetting.ShowDialog();
         }
 
         #endregion
