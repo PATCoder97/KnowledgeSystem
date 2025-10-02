@@ -70,6 +70,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
         private void f402_UserMapping_Load(object sender, EventArgs e)
         {
+            Text += $" - {mapData}";
+
             gvAllData.ReadOnlyGridView();
             gvSelectData.ReadOnlyGridView();
 
@@ -107,8 +109,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
                         })
                         .ToList();
 
-                    var userRoleIds = dm_GroupUserBUS.Instance.GetListByUID(idUsr)
-                        .Select(x => x.IdGroup)
+                    var userRoleIds = dm_UserRoleBUS.Instance.GetListByUID(idUsr)
+                        .Select(x => x.IdRole)
                         .ToList();
 
                     selectedItems.AddRange(allItems.Where(i => userRoleIds.Contains(i.Id)));
@@ -196,6 +198,15 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
 
                         removed = dm_SignUsersBUS.Instance.RemoveRangeByUID(idUsr);
                         added = userSigns.Count == 0 || dm_SignUsersBUS.Instance.AddRange(userSigns);
+                        break;
+
+                    case "role":
+                        var userRoles = selectedItems
+                            .Select(r => new dm_UserRole { IdUser = idUsr, IdRole = r.Id })
+                            .ToList();
+
+                        removed = dm_UserRoleBUS.Instance.RemoveRangeByUID(idUsr);
+                        added = userRoles.Count == 0 || dm_UserRoleBUS.Instance.AddRange(userRoles);
                         break;
                 }
 
