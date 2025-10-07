@@ -411,8 +411,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
                                         select new
                                         {
                                             data,
-                                            ViewerName = viewer != null ? viewer.DisplayName : "---",
-                                            VieweeName = viewee != null ? viewee.DisplayName : "---"
+                                            ViewerName = viewer != null ? $"{viewer.IdDepartment} {viewer.DisplayName}" : "---",
+                                            VieweeName = viewee != null ? $"{viewee.IdDepartment} {viewee.DisplayName}" : "---"
                                         }).ToList();
 
                     e.ChildList = displayDatas;
@@ -475,7 +475,17 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             string colorName = pass ? "Green" : "Red";
             string groupValue = pass ? "合格" : "不合格";
 
-            info.GroupText = $" <color={colorName}>{groupValue}</color>：{info.GroupValueText}《<color=Blue>{total}分</color>-<color=Red>{count}位委員</color>》";
+            var hasCount = count != 0;
+
+            var groupText = hasCount
+                ? $"<color={colorName}>{groupValue}</color>："
+                : "在評鑑：";
+
+            var scoreInfo = hasCount
+                ? $"【<color=Blue>{total}</color>分-<color=Blue>{count}</color>位委員】"
+                : string.Empty;
+
+            info.GroupText = $"{groupText} {info.GroupValueText}{scoreInfo}";
         }
 
         private void gvData_MasterRowExpanded(object sender, CustomMasterRowEventArgs e)

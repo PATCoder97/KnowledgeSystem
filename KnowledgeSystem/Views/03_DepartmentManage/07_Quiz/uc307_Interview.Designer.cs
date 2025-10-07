@@ -135,8 +135,6 @@
             // 
             // gridColumn6
             // 
-            this.gridColumn6.AppearanceCell.Options.UseTextOptions = true;
-            this.gridColumn6.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn6.Caption = "委員名稱";
             this.gridColumn6.FieldName = "ViewerName";
             this.gridColumn6.Name = "gridColumn6";
@@ -149,15 +147,17 @@
             this.gridColumn7.FieldName = "data.ProfessionalSkill";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 1;
+            this.gridColumn7.VisibleIndex = 2;
             // 
             // gridColumn8
             // 
             this.gridColumn8.Caption = "異常說明";
             this.gridColumn8.FieldName = "data.ProfessionalSkillNote";
+            this.gridColumn8.MaxWidth = 200;
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 2;
+            this.gridColumn8.VisibleIndex = 3;
+            this.gridColumn8.Width = 100;
             // 
             // gridColumn9
             // 
@@ -165,15 +165,17 @@
             this.gridColumn9.FieldName = "data.Responsiveness";
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 3;
+            this.gridColumn9.VisibleIndex = 4;
             // 
             // gridColumn2
             // 
             this.gridColumn2.Caption = "異常說明";
             this.gridColumn2.FieldName = "data.ResponsivenessNote";
+            this.gridColumn2.MaxWidth = 200;
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 4;
+            this.gridColumn2.VisibleIndex = 5;
+            this.gridColumn2.Width = 100;
             // 
             // gridColumn3
             // 
@@ -181,15 +183,17 @@
             this.gridColumn3.FieldName = "data.Communication";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 5;
+            this.gridColumn3.VisibleIndex = 6;
             // 
             // gridColumn13
             // 
             this.gridColumn13.Caption = "異常說明";
             this.gridColumn13.FieldName = "data.CommunicationNote";
+            this.gridColumn13.MaxWidth = 200;
             this.gridColumn13.Name = "gridColumn13";
             this.gridColumn13.Visible = true;
-            this.gridColumn13.VisibleIndex = 6;
+            this.gridColumn13.VisibleIndex = 7;
+            this.gridColumn13.Width = 100;
             // 
             // gridColumn14
             // 
@@ -197,15 +201,17 @@
             this.gridColumn14.FieldName = "data.ReportQuality";
             this.gridColumn14.Name = "gridColumn14";
             this.gridColumn14.Visible = true;
-            this.gridColumn14.VisibleIndex = 7;
+            this.gridColumn14.VisibleIndex = 8;
             // 
             // gridColumn15
             // 
             this.gridColumn15.Caption = "異常說明";
             this.gridColumn15.FieldName = "data.ReportQualityNote";
+            this.gridColumn15.MaxWidth = 200;
             this.gridColumn15.Name = "gridColumn15";
             this.gridColumn15.Visible = true;
-            this.gridColumn15.VisibleIndex = 8;
+            this.gridColumn15.VisibleIndex = 9;
+            this.gridColumn15.Width = 100;
             // 
             // gridColumn16
             // 
@@ -213,7 +219,7 @@
             this.gridColumn16.FieldName = "data.Total";
             this.gridColumn16.Name = "gridColumn16";
             this.gridColumn16.Visible = true;
-            this.gridColumn16.VisibleIndex = 9;
+            this.gridColumn16.VisibleIndex = 1;
             // 
             // gcData
             // 
