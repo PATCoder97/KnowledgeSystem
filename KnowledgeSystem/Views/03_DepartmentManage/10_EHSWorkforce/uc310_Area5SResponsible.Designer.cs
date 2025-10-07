@@ -384,6 +384,7 @@
             this.btnAdd.ItemAppearance.Normal.Options.UseFont = true;
             this.btnAdd.ItemAppearance.Normal.Options.UseForeColor = true;
             this.btnAdd.Name = "btnAdd";
+            this.btnAdd.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAdd_ItemClick);
             // 
             // btnReload
             // 

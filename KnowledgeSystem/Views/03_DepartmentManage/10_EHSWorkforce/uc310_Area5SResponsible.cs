@@ -17,5 +17,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
         {
             InitializeComponent();
         }
+
+        private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            f310_Area5SResponsible_Info fInfo = new f310_Area5SResponsible_Info();
+            fInfo.ShowDialog(this);
+        }
     }
 }

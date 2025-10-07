@@ -122,7 +122,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._02_SystemAdmin
                         .Select(s => new DataItem
                         {
                             Id = s.Id,
-                            Name = s.DisplayName
+                            Name = s.DisplayName,
+                            Desc = TPConfigs.signTypes.FirstOrDefault(r => r.Key == s.ImgType).Value
                         })
                         .ToList();
 
