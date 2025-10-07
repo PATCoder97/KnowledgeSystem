@@ -54,6 +54,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         BindingSource sourceBases = new BindingSource();
         string idDept2word = TPConfigs.idDept2word;
         string deptGetData = "";
+        bool isManager309 = false;
 
         List<dm_User> users = new List<dm_User>();
         List<dm_Group> groups;
@@ -172,16 +173,18 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         private void ItemUpdateCheckFile_Click(object sender, EventArgs e)
         {
             bool isUploadAbnormal = (sender as DXMenuItem).Caption.Contains("異常");
-            UpdateCheckFile(isUploadAbnormal);
+            bool isManagerReCheck = (sender as DXMenuItem).Caption.StartsWith("【管理】");
+            UpdateCheckFile(isUploadAbnormal, isManagerReCheck);
         }
 
         private void ItemDownCheckFile_Click(object sender, EventArgs e)
         {
             bool isUploadAbnormal = (sender as DXMenuItem).Caption.Contains("異常");
-            DownloadCheckFile(isUploadAbnormal);
+            bool isManagerReCheck = (sender as DXMenuItem).Caption.StartsWith("【管理】");
+            DownloadCheckFile(isUploadAbnormal, isManagerReCheck);
         }
 
-        private void UpdateCheckFile(bool IsUploadAbnormal = false, bool IsProxyUser = false)
+        private void UpdateCheckFile(bool IsUploadAbnormal = false, bool managerRecheck = false)
         {
             var batch = (gvData.GetRow(gvData.FocusedRowHandle) as dynamic).Batch as dt309_InspectionBatch;
             int batchId = batch.Id;
@@ -196,19 +199,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 .Select(u => $"{u.Id} {u.DisplayName}")
                 .Distinct()
                 .ToList();
-
-
-            string userManagerSpare = IsProxyUser
-                ? GetProxyUser(userManagers)
-                : $"{TPConfigs.LoginUser.Id} {TPConfigs.LoginUser.DisplayName}";
-
-            if (string.IsNullOrWhiteSpace(userManagerSpare)) return;
-
-            if (!userManagers.Any(r => r == userManagerSpare))
-            {
-                XtraMessageBox.Show("未找到適用於您的盤點清單", "提示");
-                return;
-            }
 
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
@@ -238,7 +228,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                             var excelDatas = inspectionBatchMaterials
                                 .Where(r => r.BatchId == batchId && r.IsComplete != true)
                                 .Join(
-                                    materials.Where(x => x.IdDept.StartsWith(deptGetData) && x.IdManager == userManagerSpare.Split(' ')[0]),
+                                    materials.Where(x => x.IdDept.StartsWith(deptGetData)
+                                    && (managerRecheck ? true : x.IdManager == TPConfigs.LoginUser.Id)),
                                     bm => bm.MaterialId,
                                     m => m.Id,
                                     (bm, m) => bm
@@ -339,7 +330,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             }
         }
 
-        private void DownloadCheckFile(bool IsUploadAbnormal = false, bool IsProxyUser = false)
+        private void DownloadCheckFile(bool IsUploadAbnormal = false, bool managerRecheck = false)
         {
             var batch = (gvData.GetRow(gvData.FocusedRowHandle) as dynamic).Batch as dt309_InspectionBatch;
             int batchId = batch.Id;
@@ -374,12 +365,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 })
                 .ToList();
 
-            string userManagerSpare = IsProxyUser
-                ? GetProxyUser(excelDatas.Select(r => r.Usermanager).Distinct().ToList())
-                : $"{TPConfigs.LoginUser.Id} {TPConfigs.LoginUser.DisplayName}";
-
-            if (string.IsNullOrWhiteSpace(userManagerSpare)) return;
-            excelDatas = excelDatas.Where(r => r.Usermanager == userManagerSpare).ToList();
+            string userManagerSpare = $"{TPConfigs.LoginUser.Id} {TPConfigs.LoginUser.DisplayName}";
+            if (!managerRecheck)
+            {
+                excelDatas = excelDatas.Where(r => r.Usermanager == userManagerSpare).ToList();
+            }
 
             if (excelDatas.Count == 0)
             {
@@ -391,7 +381,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             if (!Directory.Exists(documentsPath))
                 Directory.CreateDirectory(documentsPath);
 
-            string filePath = Path.Combine(documentsPath, $"{(IsUploadAbnormal ? "異常表" : "盤點表")}-{userManagerSpare}-{DateTime.Now:yyyyMMddHHmmss}.xlsx");
+            string filePath = Path.Combine(documentsPath, $"{(IsUploadAbnormal ? "異常表" : "盤點表")}-{(managerRecheck ? "" : userManagerSpare)}-{DateTime.Now:yyyyMMddHHmmss}.xlsx");
 
             ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
 
@@ -509,6 +499,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             var userGroups = dm_GroupUserBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id);
             var departments = dm_DeptBUS.Instance.GetList();
             var groups = dm_GroupBUS.Instance.GetListByName("機邊庫");
+            var manager309grps = dm_GroupBUS.Instance.GetListByName("機邊庫【管理】");
 
             var accessibleGroups = groups
                 .Where(group => userGroups.Any(userGroup => userGroup.IdGroup == group.Id))
@@ -518,6 +509,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 .Where(dept => accessibleGroups.Any(group => group.IdDept == dept.Id))
                 .Select(dept => new ComboBoxItem { Value = $"{dept.Id} {dept.DisplayName}" })
                 .ToArray();
+
+            isManager309 = manager309grps.Any(group => userGroups.Any(userGroup => userGroup.IdGroup == group.Id));
 
             cbbDept.Items.AddRange(departmentItems);
             barCbbDept.EditValue = departmentItems.FirstOrDefault()?.Value ?? string.Empty;
@@ -565,56 +558,72 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         {
             if (deptGetData.Length != 4)
             {
-                XtraMessageBox.Show("請您選擇「課」來查看物料", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                XtraMessageBox.Show("請您選擇「課」來查看物料", "錯誤",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
+            // Kiểm tra tính hợp lệ của sự kiện
             if (!e.HitInfo.InRowCell || !e.HitInfo.InDataRow || e.Menu == null)
                 return;
 
-            GridView masterView = sender as GridView;
-            int masterRowHandle = e.HitInfo.RowHandle;
+            var masterView = sender as GridView;
+            int rowHandle = e.HitInfo.RowHandle;
 
             // Lấy detail view từ dòng cha
-            GridView detailView = masterView.GetDetailView(masterRowHandle, 0) as GridView;
+            var detailView = masterView.GetDetailView(rowHandle, 0) as GridView;
             if (detailView == null)
                 return;
 
             // Lấy dòng dữ liệu cha
-            dynamic masterRow = masterView.GetRow(masterRowHandle);
+            dynamic masterRow = masterView.GetRow(rowHandle);
             if (masterRow == null)
                 return;
 
-            var spareItems = masterRow.Spare as IEnumerable<dynamic>;
-            if (spareItems == null) return;
-
-            var ownerBatchMaterials = spareItems
-                .Where(it => it?.Material is dt309_Materials m && m.IdManager == TPConfigs.LoginUser.Id)
-                .Select(it => it?.BatchMaterial as dt309_InspectionBatchMaterial)
-                .Where(b => b != null)
-                .ToList();
-            if (ownerBatchMaterials.Count == 0) return;
-
-            bool hasCompletedItem = ownerBatchMaterials.Any(x => x.ActualQuantity != null);
-            bool hasIncompleteItem = ownerBatchMaterials.Any(x => x.IsComplete != true);
-
-            // Cập nhật caption theo trạng thái
-            if (hasCompletedItem)
-            {
-                itemDownCheckFile.Caption = "下載異常表";
-                itemUpdateCheckFile.Caption = "上傳異常表";
-            }
-            else
-            {
-                itemDownCheckFile.Caption = "下載盤點表";
-                itemUpdateCheckFile.Caption = "上傳盤點表";
-            }
-
-            // Nếu đã hoàn thành hết thì trờ về
-            if (!hasIncompleteItem)
+            var batch = masterRow.Batch as dt309_InspectionBatch;
+            if (batch == null)
                 return;
 
-            // Thêm item vào menu
+            // Nếu không phải “每月盤點” thì chỉ quản lý của PGD mới có thể làm
+            bool managerRecheck = !batch.BatchName.StartsWith("【每月盤點】");
+            if (managerRecheck && !isManager309)
+            {
+                return;
+            }
+
+            var spareList = masterRow.Spare as IEnumerable<dynamic>;
+            if (spareList == null)
+                return;
+
+            // Lọc vật liệu do người đăng nhập quản lý
+            var userMaterials = spareList
+                .Where(x => managerRecheck ? true : x?.Material is dt309_Materials m && m.IdManager == TPConfigs.LoginUser.Id)
+                .Select(x => x?.BatchMaterial as dt309_InspectionBatchMaterial)
+                .Where(x => x != null)
+                .ToList();
+
+            if (userMaterials.Count == 0)
+                return;
+
+            // Kiểm tra trạng thái
+            bool anyCompleted = userMaterials.Any(x => x.ActualQuantity != null);
+            bool anyIncomplete = userMaterials.Any(x => x.IsComplete != true);
+
+            // Cập nhật caption theo trạng thái
+            itemDownCheckFile.Caption = anyCompleted ? "下載異常表" : "下載盤點表";
+            itemUpdateCheckFile.Caption = anyCompleted ? "上傳異常表" : "上傳盤點表";
+
+            if (managerRecheck)
+            {
+                itemDownCheckFile.Caption = "【管理】" + itemDownCheckFile.Caption;
+                itemUpdateCheckFile.Caption = "【管理】" + itemUpdateCheckFile.Caption;
+            }
+
+            // Nếu tất cả đã hoàn thành thì không hiển thị menu
+            if (!anyIncomplete)
+                return;
+
+            // Thêm menu thao tác
             e.Menu.Items.Add(itemDownCheckFile);
             e.Menu.Items.Add(itemUpdateCheckFile);
         }
