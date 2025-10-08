@@ -190,7 +190,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             {
                 if (item.Control is BaseEdit baseEdit)
                 {
-                    if (string.IsNullOrEmpty(baseEdit.EditValue?.ToString()))
+                    if (string.IsNullOrEmpty(baseEdit.EditValue?.ToString()) && item.Control.Enabled)
                     {
                         IsValidate = false;
                         break; // Dừng vòng lặp ngay khi phát hiện lỗi

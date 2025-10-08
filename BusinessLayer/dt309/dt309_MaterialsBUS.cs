@@ -24,6 +24,22 @@ namespace BusinessLayer
 
         private dt309_MaterialsBUS() { logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName); }
 
+        public List<dt309_Materials> GetAll()
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt309_Materials.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public List<dt309_Materials> GetList()
         {
             try
@@ -47,6 +63,22 @@ namespace BusinessLayer
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
                     return _context.dt309_Materials.Where(r => ids.Contains(r.Id)).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
+        public List<dt309_Materials> GetAllByStartIdDept(string idDept)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt309_Materials.Where(r => r.IdDept.StartsWith(idDept)).ToList();
                 }
             }
             catch (Exception ex)

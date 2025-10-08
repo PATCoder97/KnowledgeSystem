@@ -386,7 +386,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             {
                 if (item.Control is BaseEdit baseEdit)
                 {
-                    if (string.IsNullOrEmpty(baseEdit.EditValue?.ToString()))
+                    if (string.IsNullOrEmpty(baseEdit.EditValue?.ToString()) && item.Control.Enabled)
                     {
                         IsValidate = false;
                         break; // Dừng vòng lặp ngay khi phát hiện lỗi

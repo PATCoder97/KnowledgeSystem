@@ -171,7 +171,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
                 var inspectionBatch = dt309_InspectionBatchBUS.Instance.GetList();
                 var inspectionBatchMaterials = dt309_InspectionBatchMaterialBUS.Instance.GetList();
-                var materials = dt309_MaterialsBUS.Instance.GetList();
+                var materials = dt309_MaterialsBUS.Instance.GetAll();
 
                 var depts = dm_DeptBUS.Instance.GetList();
                 var users = dm_UserBUS.Instance.GetList();
