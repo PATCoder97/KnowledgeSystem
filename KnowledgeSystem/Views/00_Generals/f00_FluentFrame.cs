@@ -81,65 +81,67 @@ namespace KnowledgeSystem.Views._00_Generals
 
         private void f00_FluentFrame_Load(object sender, EventArgs e)
         {
-            // Lấy danh sách các AppForm từ cơ sở dữ liệu và điền vào TreeView control
-            var lsAllFunctions = dm_FunctionBUS.Instance.GetListByIdParent(groupId);
+            // 1️ Lấy toàn bộ cây chức năng
+            var lsAllFunctions = dm_FunctionBUS.Instance.GetAllDescendantsByParent(groupId);
             var lsPermissions = AppPermission.lsPermissions;
 
-            lsFunctions = (from data in lsAllFunctions
-                           join granted in lsPermissions on data.Id equals granted
-                           select data).ToList();
+            // 2️ Lọc theo quyền được cấp
+            var lsFunctions = (from data in lsAllFunctions
+                               join granted in lsPermissions on data.Id equals granted
+                               select data)
+                              .OrderBy(x => x.Prioritize)
+                              .ToList();
 
-            foreach (var item in lsFunctions)
+            // 3️ Xây dựng menu Accordion tự động theo cây
+            BuildAccordionElements(lsFunctions, fluentControl.Elements, lsPermissions, fontTW14);
+        }
+
+        /// <summary>
+        /// Đệ quy thêm các phần tử vào AccordionControl.
+        /// Hỗ trợ nhiều cấp con (cha, con, cháu, chắt...).
+        /// </summary>
+        private void BuildAccordionElements(List<dm_FunctionM> functions, AccordionControlElementCollection parentCollection, List<int> lsPermissions, Font fontTW14)
+        {
+            foreach (var item in functions)
             {
                 AccordionControlElement accordion = new AccordionControlElement();
 
+                // 🖼 Hình ảnh
                 string pathImage = Path.Combine(TPConfigs.StartupPath, "Images", item.Images ?? "");
-                accordion.ImageOptions.SvgImage = item.Images != null ? DevExpress.Utils.Svg.SvgImage.FromFile(pathImage) : null;
-                accordion.Name = $"name_{item.ControlName}";
+                if (!string.IsNullOrEmpty(item.Images) && File.Exists(pathImage))
+                    accordion.ImageOptions.SvgImage = DevExpress.Utils.Svg.SvgImage.FromFile(pathImage);
+
+                // 🏷️ Thông tin hiển thị
+                accordion.Name = "name_" + item.ControlName;
                 accordion.Text = item.DisplayName;
                 accordion.Appearance.Default.Font = fontTW14;
-
                 accordion.Appearance.Normal.ForeColor = Color.Black;
                 accordion.Appearance.Hovered.ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical;
                 accordion.Appearance.Pressed.ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical;
-
                 accordion.Hint = item.DisplayName;
 
-                var lsFuncChild = dm_FunctionBUS.Instance.GetListByIdParent(item.Id).Where(r => !string.IsNullOrEmpty(r.ControlName)).ToList();
-                var lsChildren = (from data in lsFuncChild
-                                  join granted in lsPermissions on data.Id equals granted
-                                  select data).ToList();
+                // 🔁 Lấy các con có quyền
+                var children = item.Children
+                    .Where(c => lsPermissions.Contains(c.Id))
+                    .OrderBy(c => c.Prioritize)
+                    .ToList();
 
-                if (lsChildren.Count != 0)
+                if (children.Count > 0)
                 {
-                    foreach (var child in lsChildren)
-                    {
-                        AccordionControlElement accordionChild = new AccordionControlElement();
-
-                        pathImage = Path.Combine(TPConfigs.StartupPath, "Images", child.Images ?? "");
-                        accordionChild.ImageOptions.SvgImage = !string.IsNullOrEmpty(child.Images) ? DevExpress.Utils.Svg.SvgImage.FromFile(pathImage) : null;
-                        accordionChild.Name = $"name_{child.ControlName}";
-                        accordionChild.Text = child.DisplayName;
-                        accordionChild.Style = ElementStyle.Item;
-                        accordionChild.Appearance.Default.Font = fontTW14;
-
-                        accordionChild.Appearance.Normal.ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Hyperlink;
-                        accordionChild.Appearance.Hovered.ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical;
-                        accordionChild.Appearance.Pressed.ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical;
-
-                        accordionChild.Hint = child.DisplayName;
-                        accordionChild.Click += new EventHandler(accordionElement_Click);
-
-                        accordion.Elements.Add(accordionChild);
-                    }
+                    // Có con → là nhóm
+                    accordion.Style = ElementStyle.Group;
+                    BuildAccordionElements(children, accordion.Elements, lsPermissions, fontTW14);
                 }
                 else
                 {
+                    // Không có con → là item cuối cùng
                     accordion.Style = ElementStyle.Item;
                     accordion.Click += new EventHandler(accordionElement_Click);
+                    accordion.Appearance.Normal.ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Hyperlink;
                 }
 
-                fluentControl.Elements.Add(accordion);
+                // Thêm vào danh sách hiện tại
+                parentCollection.Add(accordion);
             }
         }
 

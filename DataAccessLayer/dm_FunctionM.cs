@@ -21,5 +21,7 @@ namespace DataAccessLayer
             }
             set { }
         }
+
+        public List<dm_FunctionM> Children { get; set; } = new List<dm_FunctionM>();
     }
 }

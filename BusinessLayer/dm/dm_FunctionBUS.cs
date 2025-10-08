@@ -76,6 +76,55 @@ namespace BusinessLayer
             }
         }
 
+        public List<dm_FunctionM> GetAllDescendantsByParent(int idParent)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    var all = _context.dm_Function
+                        .Select(r => new dm_FunctionM
+                        {
+                            Id = r.Id,
+                            IdParent = r.IdParent,
+                            DisplayName = r.DisplayName,
+                            ControlName = r.ControlName,
+                            Prioritize = r.Prioritize,
+                            Status = r.Status,
+                            Images = r.Images
+                        })
+                        .ToList();
+
+                    var dict = all.ToDictionary(x => x.Id, x => x);
+
+                    foreach (var item in all)
+                    {
+                        if (item.IdParent != 0)
+                        {
+                            var parentId = item.IdParent;
+                            dm_FunctionM parent;
+                            if (dict.TryGetValue(parentId, out parent) && parent != null)
+                            {
+                                parent.Children.Add(item);
+                            }
+                        }
+                    }
+
+                    var roots = all
+                        .Where(x => x.IdParent == idParent)
+                        .OrderBy(x => x.Prioritize)
+                        .ToList();
+
+                    return roots;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw new Exception(ex.ToString());
+            }
+        }
+
         public dm_Function GetItemByControl(string controlName)
         {
             try
