@@ -47,6 +47,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             txbDisplayName.Enabled = _enable;
             txbLocation.Enabled = _enable;
             txbQuantity.Enabled = _enable;
+            cbbImpLvl.Enabled = _enable;
         }
 
         private void LockControl()
@@ -113,13 +114,15 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         private void f309_Machine_Info_Load(object sender, EventArgs e)
         {
-            lcControls = new List<LayoutControlItem>() { lcDisplayName, lcLocation, lcQuantity };
-            lcImpControls = new List<LayoutControlItem>() { lcDisplayName, lcLocation, lcQuantity };
+            lcControls = new List<LayoutControlItem>() { lcDisplayName, lcLocation, lcQuantity, lcImpLvl };
+            lcImpControls = new List<LayoutControlItem>() { lcDisplayName, lcLocation, lcQuantity, lcImpLvl };
             foreach (var item in lcControls)
             {
                 item.AllowHtmlStringInCaption = true;
                 item.Text = $"<color=#000000>{item.Text}</color>";
             }
+
+            cbbImpLvl.Properties.Items.AddRange(new string[] { "L", "M", "H" });
 
             switch (eventInfo)
             {
@@ -135,6 +138,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                     txbDisplayName.EditValue = machine.DisplayName;
                     txbLocation.EditValue = machine.Location;
                     txbQuantity.EditValue = machine.Quantity;
+                    cbbImpLvl.EditValue = machine.ImpLevel;
 
                     break;
                 case EventFormInfo.Update:
@@ -190,6 +194,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             var displayName = txbDisplayName.EditValue?.ToString();
             var location = txbLocation.EditValue?.ToString();
             var quantity = Convert.ToInt16(txbQuantity.EditValue);
+            var impLevel = cbbImpLvl.EditValue?.ToString(); ;
 
             var result = false;
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
@@ -198,6 +203,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 machine.DisplayName = displayName;
                 machine.Location = location;
                 machine.Quantity = quantity;
+                machine.ImpLevel = impLevel;
 
                 switch (eventInfo)
                 {

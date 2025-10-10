@@ -51,6 +51,7 @@
             this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -60,7 +61,9 @@
             this.cbbDept = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.btnAdd = new DevExpress.XtraBars.BarButtonItem();
             this.btnReload = new DevExpress.XtraBars.BarButtonItem();
-            this.btnExportExcel = new DevExpress.XtraBars.BarButtonItem();
+            this.barExport = new DevExpress.XtraBars.BarSubItem();
+            this.btnMachineList = new DevExpress.XtraBars.BarButtonItem();
+            this.btnSummary = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -226,7 +229,8 @@
             this.gridColumn12,
             this.gridColumn14,
             this.gridColumn15,
-            this.gridColumn16});
+            this.gridColumn16,
+            this.gridColumn17});
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
             this.gvData.OptionsDetail.ShowDetailTabs = false;
@@ -235,6 +239,7 @@
             this.gvData.OptionsView.ColumnAutoWidth = false;
             this.gvData.OptionsView.EnableAppearanceOddRow = true;
             this.gvData.OptionsView.ShowAutoFilterRow = true;
+            this.gvData.OptionsView.ShowFooter = true;
             this.gvData.OptionsView.ShowGroupPanel = false;
             this.gvData.MasterRowEmpty += new DevExpress.XtraGrid.Views.Grid.MasterRowEmptyEventHandler(this.gvData_MasterRowEmpty);
             this.gvData.MasterRowExpanded += new DevExpress.XtraGrid.Views.Grid.CustomMasterRowEventHandler(this.gvData_MasterRowExpanded);
@@ -275,6 +280,8 @@
             this.gridColumn4.Caption = "數量";
             this.gridColumn4.FieldName = "Machine.Quantity";
             this.gridColumn4.Name = "gridColumn4";
+            this.gridColumn4.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Machine.Quantity", "合計={0:0.##}")});
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 3;
             this.gridColumn4.Width = 112;
@@ -318,6 +325,14 @@
             this.gridColumn16.Visible = true;
             this.gridColumn16.VisibleIndex = 0;
             // 
+            // gridColumn17
+            // 
+            this.gridColumn17.Caption = "重要等級";
+            this.gridColumn17.FieldName = "Machine.ImpLevel";
+            this.gridColumn17.Name = "gridColumn17";
+            this.gridColumn17.Visible = true;
+            this.gridColumn17.VisibleIndex = 7;
+            // 
             // layoutControl1
             // 
             this.layoutControl1.Controls.Add(this.gcData);
@@ -360,10 +375,12 @@
             this.barManagerTP.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.btnAdd,
             this.btnReload,
-            this.btnExportExcel,
-            this.barCbbDept});
+            this.barCbbDept,
+            this.barExport,
+            this.btnMachineList,
+            this.btnSummary});
             this.barManagerTP.MainMenu = this.bar2;
-            this.barManagerTP.MaxItemId = 12;
+            this.barManagerTP.MaxItemId = 15;
             this.barManagerTP.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.cbbDept});
             // 
@@ -392,7 +409,7 @@
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.Width, this.barCbbDept, "", false, true, true, 217),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnAdd, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnReload, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnExportExcel, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.barExport, true)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawDragBorder = false;
             this.bar2.OptionsBar.MultiLine = true;
@@ -405,6 +422,10 @@
             this.barCbbDept.Edit = this.cbbDept;
             this.barCbbDept.Id = 11;
             this.barCbbDept.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.barCbbDept.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.barCbbDept.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.barCbbDept.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.barCbbDept.ItemAppearance.Normal.Options.UseFont = true;
             this.barCbbDept.Name = "barCbbDept";
             this.barCbbDept.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
             this.barCbbDept.EditValueChanged += new System.EventHandler(this.barCbbDept_EditValueChanged);
@@ -431,7 +452,7 @@
             this.btnAdd.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnAdd.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
             this.btnAdd.ItemAppearance.Hovered.Options.UseForeColor = true;
-            this.btnAdd.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdd.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.btnAdd.ItemAppearance.Normal.Options.UseFont = true;
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAdd_ItemClick);
@@ -443,21 +464,49 @@
             this.btnReload.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnReload.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
             this.btnReload.ItemAppearance.Hovered.Options.UseForeColor = true;
-            this.btnReload.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReload.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.btnReload.ItemAppearance.Normal.Options.UseFont = true;
             this.btnReload.Name = "btnReload";
             this.btnReload.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnReload_ItemClick);
             // 
-            // btnExportExcel
+            // barExport
             // 
-            this.btnExportExcel.Caption = "出表";
-            this.btnExportExcel.Id = 2;
-            this.btnExportExcel.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnExportExcel.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
-            this.btnExportExcel.ItemAppearance.Hovered.Options.UseForeColor = true;
-            this.btnExportExcel.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExportExcel.ItemAppearance.Normal.Options.UseFont = true;
-            this.btnExportExcel.Name = "btnExportExcel";
+            this.barExport.Caption = "出表";
+            this.barExport.Id = 12;
+            this.barExport.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.barExport.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.barExport.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.barExport.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.barExport.ItemAppearance.Normal.Options.UseFont = true;
+            this.barExport.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnMachineList),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnSummary)});
+            this.barExport.Name = "barExport";
+            this.barExport.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            // 
+            // btnMachineList
+            // 
+            this.btnMachineList.Caption = "設備清單";
+            this.btnMachineList.Id = 13;
+            this.btnMachineList.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnMachineList.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnMachineList.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnMachineList.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.btnMachineList.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnMachineList.Name = "btnMachineList";
+            this.btnMachineList.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnMachineList_ItemClick);
+            // 
+            // btnSummary
+            // 
+            this.btnSummary.Caption = "設備匯總表";
+            this.btnSummary.Id = 14;
+            this.btnSummary.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnSummary.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnSummary.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnSummary.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.btnSummary.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnSummary.Name = "btnSummary";
+            this.btnSummary.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSummary_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -540,7 +589,6 @@
         private DevExpress.XtraBars.Bar bar2;
         private DevExpress.XtraBars.BarButtonItem btnAdd;
         private DevExpress.XtraBars.BarButtonItem btnReload;
-        private DevExpress.XtraBars.BarButtonItem btnExportExcel;
         private DevExpress.XtraBars.BarEditItem barCbbDept;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox cbbDept;
         private DevExpress.XtraBars.BarDockControl barDockControlTop;
@@ -552,5 +600,9 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn15;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn16;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn17;
+        private DevExpress.XtraBars.BarSubItem barExport;
+        private DevExpress.XtraBars.BarButtonItem btnMachineList;
+        private DevExpress.XtraBars.BarButtonItem btnSummary;
     }
 }

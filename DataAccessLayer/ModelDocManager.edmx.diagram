@@ -78,7 +78,6 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt308_CheckDetail" Width="1.5" PointX="3.75" PointY="41" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt308_SpecialUsrCheck" Width="1.5" PointX="5.375" PointY="41" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt309_MachineMaterials" Width="1.5" PointX="3.75" PointY="44.5" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt309_Machines" Width="1.5" PointX="2.125" PointY="44.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt309_Materials" Width="1.5" PointX="0.5" PointY="44.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt309_Storages" Width="1.5" PointX="7" PointY="44.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt309_Units" Width="1.5" PointX="5.375" PointY="44.5" />
@@ -101,6 +100,7 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt310_EHSFunction" Width="1.5" PointX="8.625" PointY="49.375" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt307_InterviewReport" Width="1.5" PointX="8.625" PointY="29.375" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt307_InterviewScore" Width="1.5" PointX="10.25" PointY="29.375" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt309_Machines" Width="1.5" PointX="2.125" PointY="44.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

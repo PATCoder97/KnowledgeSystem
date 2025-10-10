@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using BusinessLayer;
+﻿using BusinessLayer;
 using DataAccessLayer;
 using DevExpress.Utils.Menu;
 using DevExpress.Utils.Svg;
@@ -15,8 +6,22 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraReports;
 using DevExpress.XtraSplashScreen;
 using KnowledgeSystem.Helpers;
+using OfficeOpenXml;
+using OfficeOpenXml.Style;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Diagnostics;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 {
@@ -58,8 +63,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         {
             btnAdd.ImageOptions.SvgImage = TPSvgimages.Add;
             btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
-            btnExportExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
+            barExport.ImageOptions.SvgImage = TPSvgimages.Excel;
             barCbbDept.ImageOptions.SvgImage = TPSvgimages.Dept;
+
+            btnMachineList.ImageOptions.SvgImage = TPSvgimages.Num1;
+            btnSummary.ImageOptions.SvgImage = TPSvgimages.Num2;
         }
 
         DXMenuItem CreateMenuItem(string caption, EventHandler clickEvent, SvgImage svgImage)
@@ -134,7 +142,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                     return new
                     {
                         Machine = machine,
-                        物料 = machineMaterialList,
+                        Material = machineMaterialList,
                         TotalPrice = totalPrice,
                         consumableCount,
                         equipmentCount,
@@ -213,7 +221,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 if (parentRow != null)
                 {
                     // Kiểm tra xem parentRow có chứa thuộc tính Materials và thuộc tính đó có phải là danh sách hay không
-                    var materialsChild = parentRow.物料 as IEnumerable<dynamic>;
+                    var materialsChild = parentRow.Material as IEnumerable<dynamic>;
 
                     if (materialsChild != null)
                     {
@@ -242,6 +250,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         private void gvData_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
         {
+            if (deptGetData.Length != 4)
+            {
+                XtraMessageBox.Show("請您選擇「課」來查看物料", "錯誤",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (e.HitInfo.InRowCell && e.HitInfo.InDataRow)
             {
                 e.Menu.Items.Add(itemViewInfo);
@@ -268,6 +283,198 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         private void barCbbDept_EditValueChanged(object sender, EventArgs e)
         {
             LoadData();
+        }
+
+        public static List<int> GetVisibleDataIds(GridView view)
+        {
+            var ids = new List<int>();
+
+            for (int i = 0; i < view.DataRowCount; i++)
+            {
+                int rowHandle = view.GetVisibleRowHandle(i);
+
+                // Cách nhanh: nếu có cột/field "data.Id" trong Grid (cột ẩn cũng được)
+                var cell = view.GetRowCellValue(rowHandle, "Machine.Id");
+                if (cell != null && int.TryParse(cell.ToString(), out int idFromCell))
+                {
+                    ids.Add(idFromCell);
+                    continue;
+                }
+
+                // Fallback: lấy từ object ẩn danh bằng reflection
+                var row = view.GetRow(rowHandle);
+                if (row == null) continue;
+
+                var dataProp = row.GetType().GetProperty("data");
+                var dataVal = dataProp?.GetValue(row, null);
+                var idProp = dataVal?.GetType().GetProperty("Id");
+                var idVal = idProp?.GetValue(dataVal, null)?.ToString();
+
+                if (int.TryParse(idVal, out int idFromProp))
+                    ids.Add(idFromProp);
+            }
+
+            return ids;
+        }
+
+        private void btnMachineList_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var ids = GetVisibleDataIds(gvData);
+
+            var displayData = machines
+                .Where(machine => ids.Contains(machine.Id)) // 🔸 chỉ lấy những máy có trong ids
+                .Select(machine =>
+                {
+                    var machineMaterialList = machineMaterials
+                        .Where(mm => mm.MachineId == machine.Id)
+                        .Join(materials,
+                              mm => mm.MaterialId,
+                              m => m.Id,
+                              (mm, m) => m)
+                        .ToList();
+
+                    // 🔸 Ép kiểu để đảm bảo kết quả đúng
+                    double totalPrice = machineMaterialList.Sum(m =>
+                        Convert.ToDouble(m.Price) *
+                        (Convert.ToDouble(m.QuantityInStorage) + Convert.ToDouble(m.QuantityInMachine)));
+
+                    // 🔸 Đếm loại vật tư
+                    int consumableCount = machineMaterialList.Count(r => r.TypeUse == "消耗品");
+                    int equipmentCount = machineMaterialList.Count(r => r.TypeUse == "備品");
+
+                    return new
+                    {
+                        單位 = machine.IdDept,
+                        設備名稱 = machine.DisplayName,
+                        地點 = machine.Location,
+                        數量 = machine.Quantity,
+                        總金額 = totalPrice,
+                        消耗品種類 = consumableCount,
+                        備品種類 = equipmentCount,
+                        重要等級 = machine.ImpLevel
+                    };
+                }).ToList();
+
+            string documentsPath = TPConfigs.DocumentPath();
+            if (!Directory.Exists(documentsPath))
+                Directory.CreateDirectory(documentsPath);
+
+            string filePath = Path.Combine(documentsPath, $"設備清單 - {DateTime.Now:yyyyMMddHHmmss}.xlsx");
+
+            ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+            using (ExcelPackage pck = new ExcelPackage(filePath))
+            {
+                ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Sheet1");
+                ws.Cells.Style.Font.Name = "Microsoft JhengHei";
+                ws.Cells.Style.Font.Size = 14;
+
+                // Xuất dữ liệu từ list excelDatas sang Table
+                ws.Cells["A1"].LoadFromCollection(displayData, true, OfficeOpenXml.Table.TableStyles.Medium2);
+                // Bật WrapText cho tất cả các ô
+                ws.Column(3).Style.WrapText = true;
+                ws.Cells[ws.Dimension.Address].AutoFitColumns();
+                ws.Column(3).Width = 35;
+
+                // Lưu file
+                pck.Save();
+            }
+
+            Process.Start(filePath);
+        }
+
+        private void btnSummary_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var machines = dt309_MachinesBUS.Instance.GetListByStartIdDept(deptGetData);
+            var materials = dt309_MaterialsBUS.Instance.GetList();
+            var machineMaterials = dt309_MachineMaterialsBUS.Instance.GetList();
+            var depts = dm_DeptBUS.Instance.GetList();
+
+            // Nhóm máy theo IdDept
+            var summaryByDept = machines
+                .GroupBy(m => m.IdDept)
+                .Select(group =>
+                {
+                    var deptId = group.Key;
+
+                    // Các máy trong phòng ban này
+                    var deptMachineIds = group.Select(m => m.Id).ToList();
+
+                    // Tính tổng số lượng máy trong phòng ban
+                    double totalMachineQty = group.Sum(m => Convert.ToDouble(m.Quantity));
+
+                    // Lấy danh sách vật tư gắn với các máy này
+                    var flatMaterials = machineMaterials
+                        .Where(mm => deptMachineIds.Contains(mm.MachineId))
+                        .Join(materials,
+                              mm => mm.MaterialId,
+                              m => m.Id,
+                              (mm, m) => m)
+                        .ToList();
+
+                    // Loại trùng vật tư theo Id
+                    var distinctMaterials = flatMaterials
+                        .Where(r => r.TypeUse == "備品")
+                        .GroupBy(m => m.Id)
+                        .Select(g => g.First())
+                        .ToList();
+
+                    // Tính tổng tồn kho, trong máy
+                    double sumStorage = distinctMaterials.Sum(m => Convert.ToDouble(m.QuantityInStorage));
+                    double sumMachine = distinctMaterials.Sum(m => Convert.ToDouble(m.QuantityInMachine));
+                    double totalMaterial = sumStorage + sumMachine;
+                    var dept = depts.FirstOrDefault(r => r.Id == deptId);
+
+                    return new
+                    {
+                        Dept = $"{dept?.Id} {dept?.DisplayName}",
+                        totalMachineQty,
+                        sumStorage,
+                        sumMachine,
+                        totalMaterial
+                    };
+                })
+                .OrderBy(r => r.Dept)
+                .ToList();
+
+
+            string documentsPath = TPConfigs.DocumentPath();
+            if (!Directory.Exists(documentsPath))
+                Directory.CreateDirectory(documentsPath);
+
+            string filePath = Path.Combine(documentsPath, $"設備匯總表 - {DateTime.Now:yyyyMMddHHmmss}.xlsx");
+
+            ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+            using (ExcelPackage pck = new ExcelPackage(filePath))
+            {
+                ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Sheet1");
+                ws.Cells.Style.Font.Name = "Microsoft JhengHei";
+                ws.Cells.Style.Font.Size = 14;
+
+                ws.Cells["A1"].Value = "部門";
+                ws.Cells["B1"].Value = "設備數量";
+                ws.Cells["C1"].Value = "課庫數量";
+                ws.Cells["D1"].Value = "機邊庫數量";
+                ws.Cells["E1"].Value = "備品數量";
+
+                // Xuất dữ liệu từ list excelDatas sang Table
+                ws.Cells["A2"].LoadFromCollection(summaryByDept, false);
+
+                //ws.Column(1).Style.WrapText = true;
+                ws.Cells[ws.Dimension.Address].AutoFitColumns();
+
+                // Căn giữa và kẻ ô toàn bảng
+                var fullRange = ws.Cells[ws.Dimension.Address];
+                fullRange.Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
+                fullRange.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                fullRange.Style.Border.Top.Style = fullRange.Style.Border.Bottom.Style =
+                    fullRange.Style.Border.Left.Style = fullRange.Style.Border.Right.Style =
+                    ExcelBorderStyle.Thin;
+
+                // Lưu file
+                pck.Save();
+            }
+
+            Process.Start(filePath);
         }
     }
 }

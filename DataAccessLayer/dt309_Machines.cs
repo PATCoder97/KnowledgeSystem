@@ -19,5 +19,6 @@ namespace DataAccessLayer
         public string DisplayName { get; set; }
         public string Location { get; set; }
         public int Quantity { get; set; }
+        public string ImpLevel { get; set; }
     }
 }

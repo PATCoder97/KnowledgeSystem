@@ -43,20 +43,24 @@
             this.txbDisplayName = new DevExpress.XtraEditors.TextEdit();
             this.txbLocation = new DevExpress.XtraEditors.TextEdit();
             this.txbQuantity = new DevExpress.XtraEditors.TextEdit();
+            this.cbbImpLvl = new DevExpress.XtraEditors.ComboBoxEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.lcDisplayName = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcLocation = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcQuantity = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcImpLvl = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcDisplayName = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txbDisplayName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbLocation.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbQuantity.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbImpLvl.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcDisplayName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcLocation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcQuantity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcImpLvl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcDisplayName)).BeginInit();
             this.SuspendLayout();
             // 
             // barManagerTP
@@ -137,7 +141,7 @@
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManagerTP;
-            this.barDockControlTop.Size = new System.Drawing.Size(485, 49);
+            this.barDockControlTop.Size = new System.Drawing.Size(567, 49);
             // 
             // barDockControlBottom
             // 
@@ -145,7 +149,7 @@
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.barDockControlBottom.Location = new System.Drawing.Point(0, 141);
             this.barDockControlBottom.Manager = this.barManagerTP;
-            this.barDockControlBottom.Size = new System.Drawing.Size(485, 0);
+            this.barDockControlBottom.Size = new System.Drawing.Size(567, 0);
             // 
             // barDockControlLeft
             // 
@@ -159,7 +163,7 @@
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(485, 49);
+            this.barDockControlRight.Location = new System.Drawing.Point(567, 49);
             this.barDockControlRight.Manager = this.barManagerTP;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 92);
             // 
@@ -169,12 +173,13 @@
             this.layoutControl1.Controls.Add(this.txbDisplayName);
             this.layoutControl1.Controls.Add(this.txbLocation);
             this.layoutControl1.Controls.Add(this.txbQuantity);
+            this.layoutControl1.Controls.Add(this.cbbImpLvl);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(433, 0, 650, 400);
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(485, 92);
+            this.layoutControl1.Size = new System.Drawing.Size(567, 92);
             this.layoutControl1.TabIndex = 11;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -186,7 +191,7 @@
             this.txbDisplayName.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbDisplayName.Properties.Appearance.Options.UseFont = true;
             this.txbDisplayName.Properties.Appearance.Options.UseForeColor = true;
-            this.txbDisplayName.Size = new System.Drawing.Size(373, 32);
+            this.txbDisplayName.Size = new System.Drawing.Size(455, 32);
             this.txbDisplayName.StyleController = this.layoutControl1;
             this.txbDisplayName.TabIndex = 9;
             // 
@@ -198,14 +203,14 @@
             this.txbLocation.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbLocation.Properties.Appearance.Options.UseFont = true;
             this.txbLocation.Properties.Appearance.Options.UseForeColor = true;
-            this.txbLocation.Size = new System.Drawing.Size(140, 32);
+            this.txbLocation.Size = new System.Drawing.Size(142, 32);
             this.txbLocation.StyleController = this.layoutControl1;
             this.txbLocation.TabIndex = 9;
             // 
             // txbQuantity
             // 
             this.txbQuantity.EditValue = "0";
-            this.txbQuantity.Location = new System.Drawing.Point(332, 48);
+            this.txbQuantity.Location = new System.Drawing.Point(289, 48);
             this.txbQuantity.Name = "txbQuantity";
             this.txbQuantity.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbQuantity.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -215,39 +220,39 @@
             this.txbQuantity.Properties.MaskSettings.Set("mask", "N0");
             this.txbQuantity.Properties.MaskSettings.Set("autoHideDecimalSeparator", null);
             this.txbQuantity.Properties.UseMaskAsDisplayFormat = true;
-            this.txbQuantity.Size = new System.Drawing.Size(141, 32);
+            this.txbQuantity.Size = new System.Drawing.Size(77, 32);
             this.txbQuantity.StyleController = this.layoutControl1;
             this.txbQuantity.TabIndex = 9;
+            // 
+            // cbbImpLvl
+            // 
+            this.cbbImpLvl.Location = new System.Drawing.Point(458, 48);
+            this.cbbImpLvl.Name = "cbbImpLvl";
+            this.cbbImpLvl.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.cbbImpLvl.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.cbbImpLvl.Properties.Appearance.Options.UseFont = true;
+            this.cbbImpLvl.Properties.Appearance.Options.UseForeColor = true;
+            this.cbbImpLvl.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbImpLvl.Properties.AppearanceDropDown.Options.UseFont = true;
+            this.cbbImpLvl.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbbImpLvl.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.cbbImpLvl.Size = new System.Drawing.Size(97, 32);
+            this.cbbImpLvl.StyleController = this.layoutControl1;
+            this.cbbImpLvl.TabIndex = 9;
             // 
             // Root
             // 
             this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             this.Root.GroupBordersVisible = false;
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.lcDisplayName,
             this.lcLocation,
-            this.lcQuantity});
+            this.lcQuantity,
+            this.lcImpLvl,
+            this.lcDisplayName});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(485, 92);
+            this.Root.Size = new System.Drawing.Size(567, 92);
             this.Root.TextVisible = false;
-            // 
-            // lcDisplayName
-            // 
-            this.lcDisplayName.AllowHtmlStringInCaption = true;
-            this.lcDisplayName.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.lcDisplayName.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
-            this.lcDisplayName.AppearanceItemCaption.Options.UseFont = true;
-            this.lcDisplayName.AppearanceItemCaption.Options.UseForeColor = true;
-            this.lcDisplayName.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
-            this.lcDisplayName.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
-            this.lcDisplayName.Control = this.txbDisplayName;
-            this.lcDisplayName.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
-            this.lcDisplayName.CustomizationFormText = "考試名稱<color=red>*</color>";
-            this.lcDisplayName.Location = new System.Drawing.Point(0, 0);
-            this.lcDisplayName.Name = "lcDisplayName";
-            this.lcDisplayName.Size = new System.Drawing.Size(465, 36);
-            this.lcDisplayName.Text = "設備名稱";
-            this.lcDisplayName.TextSize = new System.Drawing.Size(76, 24);
             // 
             // lcLocation
             // 
@@ -263,7 +268,7 @@
             this.lcLocation.CustomizationFormText = "中文名稱";
             this.lcLocation.Location = new System.Drawing.Point(0, 36);
             this.lcLocation.Name = "lcLocation";
-            this.lcLocation.Size = new System.Drawing.Size(232, 36);
+            this.lcLocation.Size = new System.Drawing.Size(234, 36);
             this.lcLocation.Text = "位置";
             this.lcLocation.TextSize = new System.Drawing.Size(76, 24);
             // 
@@ -279,17 +284,57 @@
             this.lcQuantity.Control = this.txbQuantity;
             this.lcQuantity.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
             this.lcQuantity.CustomizationFormText = "中文名稱";
-            this.lcQuantity.Location = new System.Drawing.Point(232, 36);
+            this.lcQuantity.Location = new System.Drawing.Point(234, 36);
             this.lcQuantity.Name = "lcQuantity";
-            this.lcQuantity.Size = new System.Drawing.Size(233, 36);
+            this.lcQuantity.Size = new System.Drawing.Size(124, 36);
             this.lcQuantity.Text = "數量";
-            this.lcQuantity.TextSize = new System.Drawing.Size(76, 24);
+            this.lcQuantity.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
+            this.lcQuantity.TextSize = new System.Drawing.Size(38, 24);
+            this.lcQuantity.TextToControlDistance = 5;
+            // 
+            // lcImpLvl
+            // 
+            this.lcImpLvl.AllowHtmlStringInCaption = true;
+            this.lcImpLvl.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lcImpLvl.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.lcImpLvl.AppearanceItemCaption.Options.UseFont = true;
+            this.lcImpLvl.AppearanceItemCaption.Options.UseForeColor = true;
+            this.lcImpLvl.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.lcImpLvl.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.lcImpLvl.Control = this.cbbImpLvl;
+            this.lcImpLvl.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.lcImpLvl.CustomizationFormText = "中文名稱";
+            this.lcImpLvl.Location = new System.Drawing.Point(358, 36);
+            this.lcImpLvl.Name = "lcImpLvl";
+            this.lcImpLvl.Size = new System.Drawing.Size(189, 36);
+            this.lcImpLvl.Text = "重要等級";
+            this.lcImpLvl.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
+            this.lcImpLvl.TextSize = new System.Drawing.Size(76, 24);
+            this.lcImpLvl.TextToControlDistance = 12;
+            // 
+            // lcDisplayName
+            // 
+            this.lcDisplayName.AllowHtmlStringInCaption = true;
+            this.lcDisplayName.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lcDisplayName.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.lcDisplayName.AppearanceItemCaption.Options.UseFont = true;
+            this.lcDisplayName.AppearanceItemCaption.Options.UseForeColor = true;
+            this.lcDisplayName.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.lcDisplayName.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.lcDisplayName.Control = this.txbDisplayName;
+            this.lcDisplayName.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.lcDisplayName.CustomizationFormText = "考試名稱<color=red>*</color>";
+            this.lcDisplayName.Location = new System.Drawing.Point(0, 0);
+            this.lcDisplayName.Name = "lcDisplayName";
+            this.lcDisplayName.Size = new System.Drawing.Size(547, 36);
+            this.lcDisplayName.Text = "設備名稱";
+            this.lcDisplayName.TextSize = new System.Drawing.Size(76, 24);
             // 
             // f309_Machine_Info
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(485, 141);
+            this.ClientSize = new System.Drawing.Size(567, 141);
             this.Controls.Add(this.layoutControl1);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
@@ -307,10 +352,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.txbDisplayName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbLocation.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbQuantity.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbImpLvl.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcDisplayName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcLocation)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcQuantity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcImpLvl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcDisplayName)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -335,5 +382,7 @@
         private DevExpress.XtraLayout.LayoutControlItem lcDisplayName;
         private DevExpress.XtraLayout.LayoutControlItem lcLocation;
         private DevExpress.XtraLayout.LayoutControlItem lcQuantity;
+        private DevExpress.XtraEditors.ComboBoxEdit cbbImpLvl;
+        private DevExpress.XtraLayout.LayoutControlItem lcImpLvl;
     }
 }

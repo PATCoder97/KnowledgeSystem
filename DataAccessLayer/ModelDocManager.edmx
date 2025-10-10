@@ -858,6 +858,7 @@
           <Property Name="DisplayName" Type="nvarchar" MaxLength="512" Nullable="false" />
           <Property Name="Location" Type="nvarchar" MaxLength="32" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="ImpLevel" Type="varchar" MaxLength="8" />
         </EntityType>
         <EntityType Name="dt309_Materials">
           <Key>
@@ -1253,7 +1254,6 @@
           <EntitySet Name="dt308_CheckDetail" EntityType="DBDocumentManagementSystemModel.dt308_CheckDetail" />
           <EntitySet Name="dt308_SpecialUsrCheck" EntityType="DBDocumentManagementSystemModel.dt308_SpecialUsrCheck" />
           <EntitySet Name="dt309_MachineMaterials" EntityType="DBDocumentManagementSystemModel.dt309_MachineMaterials" />
-          <EntitySet Name="dt309_Machines" EntityType="DBDocumentManagementSystemModel.dt309_Machines" />
           <EntitySet Name="dt309_Materials" EntityType="DBDocumentManagementSystemModel.dt309_Materials" />
           <EntitySet Name="dt309_Storages" EntityType="DBDocumentManagementSystemModel.dt309_Storages" />
           <EntitySet Name="dt309_Units" EntityType="DBDocumentManagementSystemModel.dt309_Units" />
@@ -1276,6 +1276,7 @@
           <EntitySet Name="dt310_EHSFunction" EntityType="DBDocumentManagementSystemModel.dt310_EHSFunction" />
           <EntitySet Name="dt307_InterviewReport" EntityType="DBDocumentManagementSystemModel.dt307_InterviewReport" />
           <EntitySet Name="dt307_InterviewScore" EntityType="DBDocumentManagementSystemModel.dt307_InterviewScore" />
+          <EntitySet Name="dt309_Machines" EntityType="DBDocumentManagementSystemModel.dt309_Machines" />
         </EntityContainer>
         <EntityType Name="dm_Function">
           <Key>
@@ -2040,16 +2041,6 @@
           <Property Name="MachineId" Type="Int32" Nullable="false" />
           <Property Name="MaterialId" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="dt309_Machines">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdDept" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
-          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
-          <Property Name="Location" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
-          <Property Name="Quantity" Type="Int32" Nullable="false" />
-        </EntityType>
         <EntityType Name="dt309_Materials">
           <Key>
             <PropertyRef Name="Id" />
@@ -2348,6 +2339,17 @@
           <Property Name="ReportQuality" Type="Int32" Nullable="false" />
           <Property Name="ReportQualityNote" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Total" Type="Decimal" Precision="15" Scale="1" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="dt309_Machines">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdDept" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="ImpLevel" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -3191,17 +3193,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dt309_Machines">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt309_Machines">
-              <MappingFragment StoreEntitySet="dt309_Machines">
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="Location" ColumnName="Location" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="IdDept" ColumnName="IdDept" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="dt309_Materials">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt309_Materials">
               <MappingFragment StoreEntitySet="dt309_Materials">
@@ -3519,6 +3510,18 @@
                 <ScalarProperty Name="IntervieweeId" ColumnName="IntervieweeId" />
                 <ScalarProperty Name="InterviewerId" ColumnName="InterviewerId" />
                 <ScalarProperty Name="ReportId" ColumnName="ReportId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt309_Machines">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt309_Machines">
+              <MappingFragment StoreEntitySet="dt309_Machines">
+                <ScalarProperty Name="ImpLevel" ColumnName="ImpLevel" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="IdDept" ColumnName="IdDept" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
