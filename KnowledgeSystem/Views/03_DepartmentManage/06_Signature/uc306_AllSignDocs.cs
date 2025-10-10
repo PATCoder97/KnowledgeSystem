@@ -66,6 +66,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
         const string NAME_ISCANCEL = "被退回";
         const string NAME_ISCOMPLETE = "核簽完畢";
 
+        bool IsCanEdit = false;
         private void InitializeMenuItems()
         {
             itemViewInfo = CreateMenuItem("核簽進度", ItemViewInfo_Click, TPSvgimages.View);
@@ -356,6 +357,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
 
             gcData.ForceInitialize();
             gvData.CustomUnboundColumnData += gvData_CustomUnboundColumnData;
+
+            var userGroups = dm_GroupUserBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id);
+            var groupEditDeptAndJob = dm_GroupBUS.Instance.GetListByName("電子核簽【編輯】");
+
+            IsCanEdit = groupEditDeptAndJob.Any(group => userGroups.Any(userGroup => userGroup.IdGroup == group.Id));
         }
 
         private void gvData_CustomUnboundColumnData(object sender, CustomColumnDataEventArgs e)
@@ -463,8 +469,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
                         e.Menu.Items.Add(itemSaveAllFile);
                     }
 
-                    bool IsGrand = AppPermission.Instance.CheckAppPermission(AppPermission.EditInfo306);
-                    if (IsGrand || isOwner)
+                    if (IsCanEdit || isOwner)
                     {
                         itemEditInfo.BeginGroup = true;
                         e.Menu.Items.Add(itemEditInfo);

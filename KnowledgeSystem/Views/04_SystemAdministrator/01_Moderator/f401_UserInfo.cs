@@ -1,6 +1,7 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
 using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraLayout;
@@ -212,11 +213,16 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                 btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             }
 
-            bool role301Main = AppPermission.Instance.CheckAppPermission(AppPermission.SafetyCertMain);
-            bool roleEditUserJobAndDept = AppPermission.Instance.CheckAppPermission(AppPermission.EditUserJobAndDept);
+            // Kiêm tra xem có quyền quản lý chứng chỉ an toàn hay không, nếu có thì mới có chức năng này
+            bool roleSafetyCertMain = AppPermission.Instance.CheckAppPermission(AppPermission.SafetyCertMain);
 
-            if (!(role301Main && roleEditUserJobAndDept &&
-                (TPConfigs.IdParentControl == AppPermission.SafetyCertMain || TPConfigs.IdParentControl == AppPermission.SysAdmin)))
+            // Kiểm tra quyền từng ke để có quyền truy cập theo nhóm
+            var userGroups = dm_GroupUserBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id);
+            var groupEditDeptAndJob = dm_GroupBUS.Instance.GetListByName("人事變動【人員管理】");
+
+            bool roleEditDeptAndJob = groupEditDeptAndJob.Any(group => userGroups.Any(userGroup => userGroup.IdGroup == group.Id));
+
+            if (!(roleEditDeptAndJob && roleSafetyCertMain))
             {
                 btnPersonnelChanges.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
 

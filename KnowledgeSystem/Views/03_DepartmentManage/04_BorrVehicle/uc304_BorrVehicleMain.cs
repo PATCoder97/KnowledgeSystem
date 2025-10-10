@@ -276,7 +276,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
             drivingLics = dm_DrivingLicBUS.Instance.GetList().Where(r => r.UserID == borrUsr.Id).ToList();
             carDrivingLics = drivingLics.Where(r => !r.Class.StartsWith("A")).ToList();
 
-            roleAdminBorrVehicle = AppPermission.Instance.CheckAppPermission(AppPermission.ChangeUser304);
+            // Kiểm tra xem có quyền đổi người dùng không
+            var userGroups = dm_GroupUserBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id);
+            var groupEditDeptAndJob = dm_GroupBUS.Instance.GetListByName("借車【換人員】");
+
+            roleAdminBorrVehicle = groupEditDeptAndJob.Any(group => userGroups.Any(userGroup => userGroup.IdGroup == group.Id));
+
             if (roleAdminBorrVehicle)
             {
                 lcChangeUser.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;

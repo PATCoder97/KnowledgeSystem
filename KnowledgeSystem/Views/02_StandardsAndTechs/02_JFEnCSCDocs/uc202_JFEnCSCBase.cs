@@ -105,7 +105,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
             using (var handle = SplashScreenManager.ShowOverlayForm(gcData))
             {
                 // Check quyền hạn có thể sửa văn kiện
-                IsCanEdit = AppPermission.Instance.CheckAppPermission(AppPermission.EditDoc202);
+                var userGroups = dm_GroupUserBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id);
+                var groupEditDeptAndJob = dm_GroupBUS.Instance.GetListByName("JFE【編輯】");
+
+                IsCanEdit = groupEditDeptAndJob.Any(group => userGroups.Any(userGroup => userGroup.IdGroup == group.Id));
 
                 helper.SaveViewInfo();
 
@@ -148,7 +151,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._02_JFEnCSCDocs
                 view.FocusedRowHandle = e.HitInfo.RowHandle;
 
                 if (IsCanEdit) e.Menu.Items.Add(itemViewInfo);
-               
+
                 e.Menu.Items.Add(itemViewFile);
             }
         }

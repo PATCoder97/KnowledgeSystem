@@ -65,7 +65,11 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension
 
         private void uc403_SoftwareManual_Load(object sender, EventArgs e)
         {
-            bool roleAddSOP = AppPermission.Instance.CheckAppPermission(AppPermission.AddSOP403);
+            // Kiểm tra xem có quyền thêm SOP hay không
+            var userGroups = dm_GroupUserBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id);
+            var groupEditDeptAndJob = dm_GroupBUS.Instance.GetListByName("SOP【新增】");
+
+            bool roleAddSOP = groupEditDeptAndJob.Any(group => userGroups.Any(userGroup => userGroup.IdGroup == group.Id));
             if (!roleAddSOP)
             {
                 btnAdd.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
