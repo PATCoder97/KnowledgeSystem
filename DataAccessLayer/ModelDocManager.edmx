@@ -404,6 +404,33 @@
           <Property Name="IdBase" Type="int" Nullable="false" />
           <Property Name="IdRelatedDoc" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="dt205_Base">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdParent" Type="int" Nullable="false" />
+          <Property Name="IdDept" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="DisplayNameVN" Type="nvarchar" MaxLength="512" />
+          <Property Name="DisplayNameEN" Type="nvarchar" MaxLength="512" />
+          <Property Name="DocType" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="Confidential" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="date" />
+          <Property Name="NotifyCycle" Type="int" />
+        </EntityType>
+        <EntityType Name="dt205_Form">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BaseId" Type="int" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="CreateAt" Type="datetime" Nullable="false" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="Note" Type="nvarchar" MaxLength="512" />
+        </EntityType>
         <EntityType Name="dt207_Attachment">
           <Key>
             <PropertyRef Name="Id" />
@@ -1115,6 +1142,8 @@
           <EntitySet Name="dt204_InternalDocMgmt" EntityType="Self.dt204_InternalDocMgmt" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt204_OldVersion" EntityType="Self.dt204_OldVersion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt204_RelatedDoc" EntityType="Self.dt204_RelatedDoc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt205_Base" EntityType="Self.dt205_Base" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt205_Form" EntityType="Self.dt205_Form" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt207_Attachment" EntityType="Self.dt207_Attachment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt207_Attachment_BAK" EntityType="Self.dt207_Attachment_BAK" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt207_Base" EntityType="Self.dt207_Base" Schema="dbo" store:Type="Tables" />
@@ -1277,6 +1306,8 @@
           <EntitySet Name="dt307_InterviewReport" EntityType="DBDocumentManagementSystemModel.dt307_InterviewReport" />
           <EntitySet Name="dt307_InterviewScore" EntityType="DBDocumentManagementSystemModel.dt307_InterviewScore" />
           <EntitySet Name="dt309_Machines" EntityType="DBDocumentManagementSystemModel.dt309_Machines" />
+          <EntitySet Name="dt205_Base" EntityType="DBDocumentManagementSystemModel.dt205_Base" />
+          <EntitySet Name="dt205_Form" EntityType="DBDocumentManagementSystemModel.dt205_Form" />
         </EntityContainer>
         <EntityType Name="dm_Function">
           <Key>
@@ -2350,6 +2381,33 @@
           <Property Name="Location" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="ImpLevel" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="dt205_Base">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdParent" Type="Int32" Nullable="false" />
+          <Property Name="IdDept" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayNameVN" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayNameEN" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="DocType" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="Confidential" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="0" />
+          <Property Name="NotifyCycle" Type="Int32" />
+        </EntityType>
+        <EntityType Name="dt205_Form">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BaseId" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="CreateAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreateBy" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="Note" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -3522,6 +3580,35 @@
                 <ScalarProperty Name="Location" ColumnName="Location" />
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="IdDept" ColumnName="IdDept" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt205_Base">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt205_Base">
+              <MappingFragment StoreEntitySet="dt205_Base">
+                <ScalarProperty Name="NotifyCycle" ColumnName="NotifyCycle" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Confidential" ColumnName="Confidential" />
+                <ScalarProperty Name="DocType" ColumnName="DocType" />
+                <ScalarProperty Name="DisplayNameEN" ColumnName="DisplayNameEN" />
+                <ScalarProperty Name="DisplayNameVN" ColumnName="DisplayNameVN" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="IdDept" ColumnName="IdDept" />
+                <ScalarProperty Name="IdParent" ColumnName="IdParent" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt205_Form">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt205_Form">
+              <MappingFragment StoreEntitySet="dt205_Form">
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="BaseId" ColumnName="BaseId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

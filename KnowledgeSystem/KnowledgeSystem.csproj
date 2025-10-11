@@ -424,6 +424,18 @@
     <Compile Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\uc201_DigitalSignature.Designer.cs">
       <DependentUpon>uc201_DigitalSignature.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\05_IATF16949\f205_Node_Info.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\05_IATF16949\f205_Node_Info.Designer.cs">
+      <DependentUpon>f205_Node_Info.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\05_IATF16949\uc205_IATF16949Main.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\05_IATF16949\uc205_IATF16949Main.Designer.cs">
+      <DependentUpon>uc205_IATF16949Main.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\03_DepartmentManage\02_NewPersonnel\f302_InterviewRecord.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1283,6 +1295,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\04_InternalDocMgmt\uc204_InternalDocMgmtMain.resx">
       <DependentUpon>uc204_InternalDocMgmtMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\02_StandardsAndTechs\05_IATF16949\f205_Node_Info.resx">
+      <DependentUpon>f205_Node_Info.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\02_StandardsAndTechs\05_IATF16949\uc205_IATF16949Main.resx">
+      <DependentUpon>uc205_IATF16949Main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\02_NewPersonnel\f302_InterviewRecord.resx">
       <DependentUpon>f302_InterviewRecord.cs</DependentUpon>

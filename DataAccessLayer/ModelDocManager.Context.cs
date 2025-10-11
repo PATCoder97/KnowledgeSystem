@@ -121,5 +121,7 @@ namespace DataAccessLayer
         public virtual DbSet<dt307_InterviewReport> dt307_InterviewReport { get; set; }
         public virtual DbSet<dt307_InterviewScore> dt307_InterviewScore { get; set; }
         public virtual DbSet<dt309_Machines> dt309_Machines { get; set; }
+        public virtual DbSet<dt205_Base> dt205_Base { get; set; }
+        public virtual DbSet<dt205_Form> dt205_Form { get; set; }
     }
 }
