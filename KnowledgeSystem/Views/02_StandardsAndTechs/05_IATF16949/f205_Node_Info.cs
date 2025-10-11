@@ -143,47 +143,15 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
                     break;
                 case EventFormInfo.View:
 
-                    //dt204Base = dt204_InternalDocMgmtBUS.Instance.GetItemById(idBase);
+                    baseDoc = dt205_BaseBUS.Instance.GetItemById(idBase);
 
-                    //cbbDocCatorary.EditValue = dt204Base.IdDocCatorary;
-                    //cbbFuncCatorary.EditValue = dt204Base.IdFuncCatorary;
-                    //cbbDocLevel.EditValue = dt204Base.DocLevel;
-                    //txbCode.EditValue = dt204Base.Code;
-                    //txbDocVersion.EditValue = dt204Base.DocVersion;
-                    //txbDisplayName.EditValue = dt204Base.DisplayName;
-                    //txbDisplayNameVN.EditValue = dt204Base.DisplayNameVN;
-                    //txbDeployDate.EditValue = dt204Base.DeployDate;
-                    //txbPeriodNotify.EditValue = dt204Base.PeriodNotify;
-                    //txbIdFounder.EditValue = dt204Base.IdFounder;
-                    //txbDept.EditValue = TPConfigs.LoginUser.IdDepartment;
-                    //cbbMainCatorary.EditValue = dt204Base.MainCatorary;
-                    //cbbSubDept.EditValue = dt204Base.SubDept;
-                    //txbFilePath.EditValue = "...";
-
-                    //var attForms = dt204_FormBUS.Instance.GetListByIdBase(dt204Base.Id);
-                    //foreach (var item in attForms)
-                    //{
-                    //    var att = dm_AttachmentBUS.Instance.GetItemById(item.IdAtt);
-                    //    baseFormAtts.Add(new Attachment()
-                    //    {
-                    //        ActualName = att.ActualName,
-                    //        EncryptionName = att.EncryptionName,
-                    //        Thread = att.Thread,
-                    //        Id = att.Id
-                    //    });
-                    //}
-                    //sourceFormAtts.DataSource = baseFormAtts;
-                    //lbCountFile.Text = $"共{baseFormAtts.Count}個表單";
-                    //gvForm.RefreshData();
-
-                    //var idsRelatedDoc = dt204_RelatedDocBUS.Instance.GetListByIdBase(dt204Base.Id);
-                    //foreach (var item in idsRelatedDoc)
-                    //{
-                    //    relatedDocs.Add(dt204_InternalDocMgmtBUS.Instance.GetItemById(item.IdRelatedDoc));
-                    //}
-                    //sourceRelatedDoc.DataSource = relatedDocs;
-                    //lbRelated.Text = $"共{relatedDocs.Count}個關聯文件";
-                    //gvRelatedDoc.RefreshData();
+                    cbbClass.EditValue = baseDoc.DocType;
+                    ckConfidential.CheckState = baseDoc.Confidential? CheckState.Checked: CheckState.Unchecked;
+                    txbDisplayName.EditValue = baseDoc.DisplayName;
+                    txbDisplayNameVN.EditValue = baseDoc.DisplayNameVN;
+                    txbDisplayNameEN.EditValue = baseDoc.DisplayNameEN;
+                    txbCreateDate.EditValue = baseDoc.CreateDate;
+                    txbNotifyCycle.EditValue = baseDoc.NotifyCycle;
 
                     break;
                 case EventFormInfo.Update:
@@ -258,6 +226,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
                     case EventFormInfo.Create:
 
                         baseDoc.IdParent = idParent;
+                        baseDoc.IsFinalNode = false;
                         result = dt205_BaseBUS.Instance.Add(baseDoc);
 
                         break;

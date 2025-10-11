@@ -24,5 +24,8 @@ namespace DataAccessLayer
         public bool Confidential { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<int> NotifyCycle { get; set; }
+        public bool IsFinalNode { get; set; }
+        public Nullable<System.DateTime> RemoveAt { get; set; }
+        public string RemoveBy { get; set; }
     }
 }

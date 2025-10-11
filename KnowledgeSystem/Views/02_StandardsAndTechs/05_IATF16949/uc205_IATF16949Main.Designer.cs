@@ -54,6 +54,7 @@
             this.treeListColumn9 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.treeListColumn3 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.treeListColumn10 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.treeListColumn11 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
@@ -239,7 +240,8 @@
             this.treeListColumn5,
             this.treeListColumn9,
             this.treeListColumn3,
-            this.treeListColumn10});
+            this.treeListColumn10,
+            this.treeListColumn11});
             this.tlsData.CustomizationFormBounds = new System.Drawing.Rectangle(721, 290, 264, 400);
             this.tlsData.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tlsData.KeyFieldName = "";
@@ -255,6 +257,8 @@
             this.tlsData.ParentFieldName = "";
             this.tlsData.Size = new System.Drawing.Size(939, 509);
             this.tlsData.TabIndex = 4;
+            this.tlsData.CustomUnboundColumnData += new DevExpress.XtraTreeList.CustomColumnDataEventHandler(this.tlsData_CustomUnboundColumnData);
+            this.tlsData.PopupMenuShowing += new DevExpress.XtraTreeList.PopupMenuShowingEventHandler(this.tlsData_PopupMenuShowing);
             // 
             // treeListColumn7
             // 
@@ -294,7 +298,8 @@
             this.treeListColumn1.FieldName = "DisplayNameEN";
             this.treeListColumn1.Name = "treeListColumn1";
             this.treeListColumn1.Visible = true;
-            this.treeListColumn1.VisibleIndex = 3;
+            this.treeListColumn1.VisibleIndex = 2;
+            this.treeListColumn1.Width = 104;
             // 
             // tlsColDept
             // 
@@ -304,15 +309,15 @@
             this.tlsColDept.FieldName = "IdDept";
             this.tlsColDept.Name = "tlsColDept";
             this.tlsColDept.Visible = true;
-            this.tlsColDept.VisibleIndex = 6;
+            this.tlsColDept.VisibleIndex = 7;
             // 
             // treeListColumn4
             // 
-            this.treeListColumn4.Caption = "DocType";
+            this.treeListColumn4.Caption = "階層";
             this.treeListColumn4.FieldName = "DocType";
             this.treeListColumn4.Name = "treeListColumn4";
             this.treeListColumn4.Visible = true;
-            this.treeListColumn4.VisibleIndex = 5;
+            this.treeListColumn4.VisibleIndex = 3;
             // 
             // treeListColumn5
             // 
@@ -321,8 +326,6 @@
             this.treeListColumn5.Caption = "機密";
             this.treeListColumn5.FieldName = "Confidential";
             this.treeListColumn5.Name = "treeListColumn5";
-            this.treeListColumn5.Visible = true;
-            this.treeListColumn5.VisibleIndex = 2;
             // 
             // treeListColumn9
             // 
@@ -334,12 +337,13 @@
             // 
             this.treeListColumn3.Caption = "發佈日期";
             this.treeListColumn3.FieldName = "CreateDate";
+            this.treeListColumn3.Format.FormatString = "yyyy/MM/dd";
+            this.treeListColumn3.Format.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.treeListColumn3.MaxWidth = 300;
             this.treeListColumn3.Name = "treeListColumn3";
-            this.treeListColumn3.UnboundDataType = typeof(string);
             this.treeListColumn3.Visible = true;
-            this.treeListColumn3.VisibleIndex = 7;
-            this.treeListColumn3.Width = 70;
+            this.treeListColumn3.VisibleIndex = 5;
+            this.treeListColumn3.Width = 98;
             // 
             // treeListColumn10
             // 
@@ -349,8 +353,16 @@
             this.treeListColumn10.FieldName = "NotifyCycle";
             this.treeListColumn10.Name = "treeListColumn10";
             this.treeListColumn10.Visible = true;
-            this.treeListColumn10.VisibleIndex = 4;
-            this.treeListColumn10.Width = 113;
+            this.treeListColumn10.VisibleIndex = 6;
+            // 
+            // treeListColumn11
+            // 
+            this.treeListColumn11.Caption = "管制別";
+            this.treeListColumn11.FieldName = "ConfidentialType";
+            this.treeListColumn11.Name = "treeListColumn11";
+            this.treeListColumn11.UnboundDataType = typeof(string);
+            this.treeListColumn11.Visible = true;
+            this.treeListColumn11.VisibleIndex = 4;
             // 
             // Root
             // 
@@ -423,5 +435,6 @@
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn1;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn11;
     }
 }

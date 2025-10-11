@@ -44,7 +44,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
         DXMenuItem itemAddNode;
         DXMenuItem itemAddAtt;
         DXMenuItem itemDelNode;
-        DXMenuItem itemEditNode;
+        DXMenuItem itemViewNode;
         DXMenuItem itemAddVer;
         DXMenuItem itemDisable;
         DXMenuItem itemEnable;
@@ -115,11 +115,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
 
         private void InitializeMenuItems()
         {
-            //itemAddNode = CreateMenuItem("新增下級", ItemAddNote_Click, TPSvgimages.Add);
+            itemAddNode = CreateMenuItem("新增下級節點", ItemAddNote_Click, TPSvgimages.Add);
+            itemViewNode = CreateMenuItem("編輯節點", ItemEditNode_Click, TPSvgimages.Edit);
             //itemAddVer = CreateMenuItem("新增年版", ItemAddVer_Click, TPSvgimages.Add2);
             //itemAddAtt = CreateMenuItem("新增表單", ItemAddAtt_Click, TPSvgimages.Attach);
             //itemDelNode = CreateMenuItem("刪除節點", ItemDeleteNote_Click, TPSvgimages.Close);
-            //itemEditNode = CreateMenuItem("編輯節點", ItemEditNode_Click, TPSvgimages.Edit);
             //itemDisable = CreateMenuItem("停用節點", ItemDisable_Click, TPSvgimages.Disable);
             //itemEnable = CreateMenuItem("啟用節點", ItemEnable_Click, TPSvgimages.Confirm);
             //itemClone = CreateMenuItem("複製節點", ItemClone_Click, TPSvgimages.Copy);
@@ -132,207 +132,24 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
             currentNode = treeList.FocusedNode;
             parentNode = currentNode.ParentNode;
 
-            currentData = (treeList.GetRow(currentNode.Id) as dynamic).data as dt205_Base;
-            parentData = parentNode != null ? (treeList.GetRow(parentNode.Id) as dynamic).data as dt205_Base : null;
-        }
-
-        private void ItemSendNote_Click(object sender, EventArgs e)
-        {
-            //if (TPConfigs.DomainComputer != DomainVNFPG.domainVNFPG)
-            //{
-            //    string msg = "請使用公司電腦！";
-            //    MsgTP.MsgShowInfomation($"<font='Microsoft JhengHei UI' size=14>{msg}</font>");
-            //    return;
-            //}
-
-            //f00_SendNoteSystem sendNote = new f00_SendNoteSystem();
-
-            //using (var handle = SplashScreenManager.ShowOverlayForm(tlsData))
-            //{
-            //    string dept = "";
-            //    string[] deptSend = currentData.DocCode.Split('.');
-            //    if (deptSend.Count() > 1)
-            //    {
-            //        dept = deptSend[1].Length >= 4 ? deptSend[1].Substring(0, 4) : "";
-            //    }
-
-            //    var attsId = dt201_FormsBUS.Instance.GetListByBaseId(currentData.Id)
-            //        .Where(r => r.IsCancel != true && r.IsDel != true && r.IsProcessing != true)
-            //        .Select(r => r.AttId).ToList();
-
-            //    if (attsId.Count <= 0)
-            //    {
-            //        MsgTP.MsgError("沒有證書！");
-            //        return;
-            //    }
-
-            //    // Copy các file báo cáo vào ổ chung 153 để người ta lấy
-            //    string folderCalibCert = Path.Combine(TPConfigs.FolderCalibCert, dept, currentData.DocCode);
-            //    if (!Directory.Exists(folderCalibCert))
-            //    {
-            //        Directory.CreateDirectory(folderCalibCert);
-            //    }
-            //    else
-            //    {
-            //        string[] files = Directory.GetFiles(folderCalibCert);
-            //        foreach (string file in files)
-            //        {
-            //            try
-            //            {
-            //                File.Delete(file);
-            //            }
-            //            catch { }
-            //        }
-            //    }
-
-            //    foreach (var id in attsId)
-            //    {
-            //        var attDt = dm_AttachmentBUS.Instance.GetItemById(Convert.ToInt32(id));
-
-            //        var sourceFile = Path.Combine(TPConfigs.Folder201, attDt.EncryptionName);
-            //        var destFile = Path.Combine(folderCalibCert, attDt.ActualName);
-
-            //        if (File.Exists(sourceFile))
-            //        {
-            //            PdfHelper.Instance.ProtechPdf(sourceFile, destFile);
-            //            //File.Copy(sourceFile, destFile, true);
-            //        }
-            //    }
-
-            //    // Thông tin để gửi note
-            //    string cc = TPConfigs.LoginUser.Id;
-            //    string title = $"設備校正完成通知|{currentData.Id}";
-            //    string threadId = "201";
-
-            //    var templateData = new
-            //    {
-            //        dept = dept,
-            //        devicevn = parentData.DisplayNameVN,
-            //        devicetw = parentData.DisplayName,
-            //        folder = folderCalibCert,
-            //        namevn = TPConfigs.LoginUser.DisplayNameVN,
-            //        nametw = TPConfigs.LoginUser.DisplayName,
-            //        empid = TPConfigs.LoginUser.Id
-            //    };
-
-            //    var templateContentSigner = System.IO.File.ReadAllText(Path.Combine(TPConfigs.ResourcesPath, $"f201_NotifyCalibCert.html"));
-            //    var templateSigner = Template.Parse(templateContentSigner);
-
-            //    var pageContent = templateSigner.Render(templateData);
-
-            //    sendNote = new f00_SendNoteSystem()
-            //    {
-            //        Cc = cc,
-            //        Title = title,
-            //        Subject = pageContent,
-            //        ThreadId = threadId,
-            //        Atts = string.Join(",", attsId),
-            //    };
-            //}
-
-            //sendNote.ShowDialog();
-        }
-
-        private void ItemClone_Click(object sender, EventArgs e)
-        {
-            GetFocusData();
-
-            var result = XtraInputBox.Show(new XtraInputBoxArgs
-            {
-                Caption = TPConfigs.SoftNameTW,
-                AllowHtmlText = DevExpress.Utils.DefaultBoolean.True,
-                Prompt = "<font='Microsoft JhengHei UI' size=14>請輸入文件編號</font>",
-                DefaultButtonIndex = 0,
-                Editor = new TextEdit() { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) },
-                DefaultResponse = ""
-            });
-
-            if (string.IsNullOrEmpty(result?.ToString())) return;
-            string cloneCode = result.ToString();
-
-            var children = dt201_BaseBUS.Instance.GetAllChildByParentId(currentData.Id);
-
-            var cloneDatas = children.Select(child => new dt201_Base
-            {
-                IdParent = child.IdParent,
-                DocCode = cloneCode,
-                DisplayName = child.DisplayName,
-                IdDept = child.IdDept,
-                IsFinalNode = child.IsFinalNode,
-                IsDel = child.IsDel,
-                DelTime = child.DelTime,
-                IsPaperType = child.IsPaperType,
-                NotifyCycle = child.NotifyCycle,
-                IsDisable = child.IsDisable,
-                DisplayNameVN = child.DisplayNameVN,
-                DocType = child.DocType,
-                IdRecordCode = child.IdRecordCode,
-            }).ToList();
-
-            var cloneParent = cloneDatas.First(r => r.IsFinalNode != true);
-            int idCloneParent = dt201_BaseBUS.Instance.Add(cloneParent);
-
-            foreach (var item in cloneDatas)
-            {
-                if (item.IsFinalNode != true) continue;
-
-                item.IdParent = idCloneParent;
-                dt201_BaseBUS.Instance.Add(item);
-            }
-
-            LoadData();
-        }
-
-        private void ItemEnable_Click(object sender, EventArgs e)
-        {
-            //var result = XtraInputBox.Show(new XtraInputBoxArgs
-            //{
-            //    Caption = TPConfigs.SoftNameTW,
-            //    AllowHtmlText = DevExpress.Utils.DefaultBoolean.True,
-            //    Prompt = "<font='Microsoft JhengHei UI' size=14>請輸入您的工號以確認啟用</font>",
-            //    DefaultButtonIndex = 0,
-            //    Editor = new TextEdit { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) },
-            //    DefaultResponse = ""
-            //})?.ToString().ToUpper();
-
-            //if (string.IsNullOrEmpty(result) || result != TPConfigs.LoginUser.Id.ToUpper()) return;
-
-            //using (var handle = SplashScreenManager.ShowOverlayForm(this))
-            //{
-            //    currentData.IsDisable = false;
-            //    dt201_BaseBUS.Instance.AddOrUpdate(currentData);
-            //}
-
-            //LoadData();
-        }
-
-        private void ItemDisable_Click(object sender, EventArgs e)
-        {
-            //var result = XtraInputBox.Show(new XtraInputBoxArgs
-            //{
-            //    Caption = TPConfigs.SoftNameTW,
-            //    AllowHtmlText = DevExpress.Utils.DefaultBoolean.True,
-            //    Prompt = "<font='Microsoft JhengHei UI' size=14>請輸入您的工號以確認停用</font>",
-            //    DefaultButtonIndex = 0,
-            //    Editor = new TextEdit { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) },
-            //    DefaultResponse = ""
-            //})?.ToString().ToUpper();
-
-            //if (string.IsNullOrEmpty(result) || result != TPConfigs.LoginUser.Id.ToUpper()) return;
-
-            //using (var handle = SplashScreenManager.ShowOverlayForm(this))
-            //{
-            //    currentData.IsDisable = true;
-            //    dt201_BaseBUS.Instance.AddOrUpdate(currentData);
-            //}
-
-            //LoadData();
+            currentData = treeList.GetRow(currentNode.Id) as dt205_Base;
+            parentData = parentNode != null ? treeList.GetRow(parentNode.Id) as dt205_Base : null;
         }
 
         // Sửa Node cho treelist
         private void ItemEditNode_Click(object sender, EventArgs e)
         {
-            //GetFocusData();
+            GetFocusData();
+
+            f205_Node_Info node_Info = new f205_Node_Info()
+            {
+                formName = "Name",
+                idBase = currentData.Id,
+                eventInfo = EventFormInfo.View
+            };
+
+            node_Info.ShowDialog();
+            LoadData();
 
             //if (currentData.IsFinalNode == true)
             //{
@@ -425,65 +242,17 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
             //LoadData();
         }
 
-        // Xóa node
-        private void ItemDeleteNote_Click(object sender, EventArgs e)
-        {
-            //var result = XtraInputBox.Show(new XtraInputBoxArgs
-            //{
-            //    Caption = TPConfigs.SoftNameTW,
-            //    AllowHtmlText = DevExpress.Utils.DefaultBoolean.True,
-            //    Prompt = "<font='Microsoft JhengHei UI' size=14>請輸入您的工號以確認刪除</font>",
-            //    DefaultButtonIndex = 0,
-            //    Editor = new TextEdit { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) },
-            //    DefaultResponse = ""
-            //})?.ToString().ToUpper();
-
-            //if (string.IsNullOrEmpty(result) || result != TPConfigs.LoginUser.Id.ToUpper()) return;
-
-            //GetFocusData();
-            //childrenDatas = dt201_BaseBUS.Instance.GetAllChildByParentId(currentData.Id);
-
-            //// Cập nhật thuộc tính IsDisable của tất cả các phần tử trong danh sách
-            //childrenDatas.ForEach(item =>
-            //{
-            //    item.IsDel = true;
-            //    item.DelTime = DateTime.Now;
-            //});
-
-            //dt201_BaseBUS.Instance.UpdateRange(childrenDatas);
-
-            //tlsData.ClearNodes();
-
-            //LoadData();
-        }
-
-        // Thêm biểu đơn
-        private void ItemAddAtt_Click(object sender, EventArgs e)
-        {
-            //GetFocusData();
-
-            //f201_AddAttachment fAtt = new f201_AddAttachment()
-            //{
-            //    eventInfo = EventFormInfo.Create,
-            //    formName = "表單",
-            //    currentData = currentData,
-            //    parentData = parentData
-            //};
-            //fAtt.ShowDialog();
-
-            //LoadData();
-        }
-
         // Thêm Node
         private void ItemAddNote_Click(object sender, EventArgs e)
         {
-            //f201_AddNode fAdd = new f201_AddNode();
-            //fAdd.eventInfo = EventFormInfo.Create;
-            //fAdd.formName = "文件";
-            //fAdd.parentData = currentData;
-            //fAdd.ShowDialog();
+            f205_Node_Info node_Info = new f205_Node_Info()
+            {
+                formName = "Name",
+                idParent = currentData.Id,
+            };
 
-            //LoadData();
+            node_Info.ShowDialog();
+            LoadData();
         }
 
         public static void SetIdRecordCodeForFinalNodes(List<dt201_Base> documents)
@@ -533,10 +302,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
             f205_Node_Info node_Info = new f205_Node_Info()
             {
                 formName = "Name",
-
             };
 
             node_Info.ShowDialog(this);
+            LoadData();
         }
 
         private void uc205_IATF16949Main_Load(object sender, EventArgs e)
@@ -565,6 +334,44 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
             cbbDepts.Items.AddRange(deptsCbb);
 
             LoadData();
+        }
+
+        private void tlsData_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
+        {
+            TreeList treeList = sender as TreeList;
+            if (e.HitInfo?.InRowCell != true || e.HitInfo.Node.Id < 0) return;
+
+            GetFocusData();
+
+            // Get current node and data
+            if (currentData == null) return;
+
+            // Gather parent node and parent data
+            List<dt201_Base> parentDatas = new List<dt201_Base>();
+
+            while (parentNode != null)
+            {
+                var parentNodeRow = treeList.GetRow(parentNode.Id);
+                dt201_Base parentNodeData = (parentNodeRow as dynamic)?.data as dt201_Base;
+                if (parentNodeData != null) parentDatas.Add(parentNodeData);
+                parentNode = parentNode.ParentNode;
+            }
+
+            dt201_Base parentData = parentDatas.FirstOrDefault();
+
+            e.Menu.Items.Add(itemAddNode);
+            e.Menu.Items.Add(itemViewNode);
+        }
+
+        private void tlsData_CustomUnboundColumnData(object sender, TreeListCustomColumnDataEventArgs e)
+        {
+            if (e.IsGetData && e.Column.FieldName == "ConfidentialType")
+            {
+                dt205_Base currentRow = e.Row as dt205_Base;
+                if (currentRow == null) return;
+
+                e.Value = currentRow.Confidential? "機密" : "一般";
+            }
         }
     }
 }
