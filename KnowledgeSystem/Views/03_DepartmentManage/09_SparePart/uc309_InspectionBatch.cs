@@ -388,7 +388,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             {
                 CreatedDate = DateTime.Now,
                 BatchName = batchName,
-                ExpiryDate = DateTime.Now.AddDays(7),
+                ExpiryDate = DateTime.Now.AddDays(15),
                 NotifyNo = 0
             });
 

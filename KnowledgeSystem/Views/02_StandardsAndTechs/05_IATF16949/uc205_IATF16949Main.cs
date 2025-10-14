@@ -86,7 +86,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
                 ApplyToRow = true,
                 Rule = new FormatConditionRuleExpression
                 {
-                    Expression = "[data.IsFinalNode] = True",
+                    Expression = "[IsFinalNode] = True",
                     Appearance = { ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Hyperlink }
                 }
             });
@@ -97,20 +97,33 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
                 ApplyToRow = true,
                 Rule = new FormatConditionRuleExpression
                 {
-                    Expression = "[data.IsDisable] = True",
-                    Appearance =
-                    {
-                        ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.DisabledText,
-                        Font = new Font(tlsData.Appearance.Row.Font, FontStyle.Italic)
-                    }
+                    Expression = "[CreateDate] Is Not Null",
+                    Appearance = { ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Information }
                 }
             });
 
-            tlsData.FormatRules.AddExpressionRule(treeListColumn3, new DevExpress.Utils.AppearanceDefault()
-            {
-                ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical,
-                Font = new Font(tlsData.Appearance.Row.Font, FontStyle.Regular)
-            }, "[Desc] != ''");
+
+
+            //tlsData.FormatRules.Add(new TreeListFormatRule
+            //{
+            //    Column = treeListColumn2,
+            //    ApplyToRow = true,
+            //    Rule = new FormatConditionRuleExpression
+            //    {
+            //        Expression = "[data.IsDisable] = True",
+            //        Appearance =
+            //        {
+            //            ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.DisabledText,
+            //            Font = new Font(tlsData.Appearance.Row.Font, FontStyle.Italic)
+            //        }
+            //    }
+            //});
+
+            //tlsData.FormatRules.AddExpressionRule(treeListColumn3, new DevExpress.Utils.AppearanceDefault()
+            //{
+            //    ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical,
+            //    Font = new Font(tlsData.Appearance.Row.Font, FontStyle.Regular)
+            //}, "[Desc] != ''");
         }
 
         private void InitializeMenuItems()
@@ -347,17 +360,17 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
             if (currentData == null) return;
 
             // Gather parent node and parent data
-            List<dt201_Base> parentDatas = new List<dt201_Base>();
+            List<dt205_Base> parentDatas = new List<dt205_Base>();
 
             while (parentNode != null)
             {
                 var parentNodeRow = treeList.GetRow(parentNode.Id);
-                dt201_Base parentNodeData = (parentNodeRow as dynamic)?.data as dt201_Base;
+                dt205_Base parentNodeData = parentNodeRow  as dt205_Base;
                 if (parentNodeData != null) parentDatas.Add(parentNodeData);
                 parentNode = parentNode.ParentNode;
             }
 
-            dt201_Base parentData = parentDatas.FirstOrDefault();
+            dt205_Base parentData = parentDatas.FirstOrDefault();
 
             e.Menu.Items.Add(itemAddNode);
             e.Menu.Items.Add(itemViewNode);

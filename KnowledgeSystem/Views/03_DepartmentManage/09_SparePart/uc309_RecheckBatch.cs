@@ -505,6 +505,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 .Where(group => userGroups.Any(userGroup => userGroup.IdGroup == group.Id))
                 .ToList();
 
+            if (accessibleGroups.Any(r => r.IdDept == "7"))
+            {
+                accessibleGroups = groups;
+            }
+
             var departmentItems = departments
                 .Where(dept => accessibleGroups.Any(group => group.IdDept == dept.Id))
                 .Select(dept => new ComboBoxItem { Value = $"{dept.Id} {dept.DisplayName}" })

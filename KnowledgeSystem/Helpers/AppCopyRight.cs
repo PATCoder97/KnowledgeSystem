@@ -62,12 +62,12 @@ namespace KnowledgeSystem.Helpers
         {
             string[] versionParts = version.Split('.');
 
-            if (versionParts.Length != 3)
+            if (versionParts.Length < 3)
             {
                 throw new ArgumentException("Version format is incorrect. It should be in 'YY.MM.DD' format.");
             }
 
-            int year = int.Parse("20" + versionParts[0]);
+            int year = 2000 + int.Parse(versionParts[0]);
             int month = int.Parse(versionParts[1]);
             int day = int.Parse(versionParts[2]);
 

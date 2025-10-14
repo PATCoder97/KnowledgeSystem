@@ -313,6 +313,8 @@
             // 
             // treeListColumn4
             // 
+            this.treeListColumn4.AppearanceCell.Options.UseTextOptions = true;
+            this.treeListColumn4.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.treeListColumn4.Caption = "階層";
             this.treeListColumn4.FieldName = "DocType";
             this.treeListColumn4.Name = "treeListColumn4";
@@ -335,6 +337,8 @@
             // 
             // treeListColumn3
             // 
+            this.treeListColumn3.AppearanceCell.Options.UseTextOptions = true;
+            this.treeListColumn3.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.treeListColumn3.Caption = "發佈日期";
             this.treeListColumn3.FieldName = "CreateDate";
             this.treeListColumn3.Format.FormatString = "yyyy/MM/dd";
@@ -357,6 +361,8 @@
             // 
             // treeListColumn11
             // 
+            this.treeListColumn11.AppearanceCell.Options.UseTextOptions = true;
+            this.treeListColumn11.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.treeListColumn11.Caption = "管制別";
             this.treeListColumn11.FieldName = "ConfidentialType";
             this.treeListColumn11.Name = "treeListColumn11";

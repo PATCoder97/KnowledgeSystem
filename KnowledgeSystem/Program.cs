@@ -39,7 +39,7 @@ namespace KnowledgeSystem
         [STAThread]
         static void Main(string[] args)
         {
-            new AppCopyRight() { Version = "25.10.09" };
+            new AppCopyRight() { Version = "25.10.14" };
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             TPConfigs.SetSystemStaticValue();
@@ -54,7 +54,7 @@ namespace KnowledgeSystem
                 string idUsr = "";
                 string msg = "";
 
-#if DEBUG
+#if DEBUG              
                 idUsr = "VNW0014732";
 #else
                 // Kiểm tra xem ứng dụng đã chạy hay chưa
@@ -120,6 +120,8 @@ namespace KnowledgeSystem
             else
             {
 #if DEBUG
+                new AppCopyRight() { Version = "8.8.8.DEV" };
+
                 TPConfigs.LoginUser = dm_UserBUS.Instance.GetItemById("VNW0014732");
                 TPConfigs.idDept2word = TPConfigs.LoginUser.IdDepartment.Substring(0, 2);
                 AppPermission.Instance.CheckAppPermission(7);

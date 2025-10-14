@@ -125,7 +125,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
         private void f205_Node_Info_Load(object sender, EventArgs e)
         {
             lcControls = new List<LayoutControlItem>() { lcDept, lcClass, lcDisplayName, lcDisplayNameVN, lcDisplayNameEN, lcNotifyCycle, lcCreateDate };
-            lcImpControls = new List<LayoutControlItem>() { lcClass, lcDisplayName, lcDisplayNameVN, lcDisplayNameEN, lcNotifyCycle, lcCreateDate };
+            lcImpControls = new List<LayoutControlItem>() { lcClass, lcDisplayName, lcDisplayNameVN, lcDisplayNameEN };
             foreach (var item in lcControls)
             {
                 item.AllowHtmlStringInCaption = true;
@@ -199,8 +199,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
             string displayNameVN = txbDisplayNameVN.Text.Trim();
             string displayNameEN = txbDisplayNameEN.Text.Trim();
             string docType = cbbClass.Text.Trim();
-            DateTime createDate = txbCreateDate.DateTime;
-            int periodNotify = Convert.ToInt16(txbNotifyCycle.EditValue);
+            DateTime? createDate = txbCreateDate.EditValue as DateTime?;
+            int? periodNotify = txbNotifyCycle.EditValue as int?;
             bool confidential = ckConfidential.CheckState == CheckState.Checked;
 
             if (StringHelper.CheckUpcase(displayNameVN, 33) && displayNameVN.Length > 20)
