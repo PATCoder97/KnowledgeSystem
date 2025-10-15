@@ -42,10 +42,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
         List<dm_Departments> depts;
 
         DXMenuItem itemAddNode;
-        DXMenuItem itemAddAtt;
-        DXMenuItem itemDelNode;
-        DXMenuItem itemViewNode;
+        DXMenuItem itemEditNode;
         DXMenuItem itemAddVer;
+        DXMenuItem itemAddDocs;
+        DXMenuItem itemDelNode;
         DXMenuItem itemDisable;
         DXMenuItem itemEnable;
         DXMenuItem itemClone;
@@ -80,16 +80,16 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
 
         private void CreateRuleGV()
         {
-            tlsData.FormatRules.Add(new TreeListFormatRule
-            {
-                Column = treeListColumn2,
-                ApplyToRow = true,
-                Rule = new FormatConditionRuleExpression
-                {
-                    Expression = "[IsFinalNode] = True",
-                    Appearance = { ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Hyperlink }
-                }
-            });
+            //tlsData.FormatRules.Add(new TreeListFormatRule
+            //{
+            //    Column = treeListColumn2,
+            //    ApplyToRow = true,
+            //    Rule = new FormatConditionRuleExpression
+            //    {
+            //        Expression = "[IsFinalNode] = True",
+            //        Appearance = { ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Information }
+            //    }
+            //});
 
             tlsData.FormatRules.Add(new TreeListFormatRule
             {
@@ -98,7 +98,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
                 Rule = new FormatConditionRuleExpression
                 {
                     Expression = "[CreateDate] Is Not Null",
-                    Appearance = { ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Information }
+                    Appearance = { ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Question }
                 }
             });
 
@@ -126,19 +126,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
             //}, "[Desc] != ''");
         }
 
-        private void InitializeMenuItems()
-        {
-            itemAddNode = CreateMenuItem("新增下級節點", ItemAddNote_Click, TPSvgimages.Add);
-            itemViewNode = CreateMenuItem("編輯節點", ItemEditNode_Click, TPSvgimages.Edit);
-            //itemAddVer = CreateMenuItem("新增年版", ItemAddVer_Click, TPSvgimages.Add2);
-            //itemAddAtt = CreateMenuItem("新增表單", ItemAddAtt_Click, TPSvgimages.Attach);
-            //itemDelNode = CreateMenuItem("刪除節點", ItemDeleteNote_Click, TPSvgimages.Close);
-            //itemDisable = CreateMenuItem("停用節點", ItemDisable_Click, TPSvgimages.Disable);
-            //itemEnable = CreateMenuItem("啟用節點", ItemEnable_Click, TPSvgimages.Confirm);
-            //itemClone = CreateMenuItem("複製節點", ItemClone_Click, TPSvgimages.Copy);
-            //itemSendNote = CreateMenuItem("通知Note", ItemSendNote_Click, TPSvgimages.EmailSend);
-        }
-
         private void GetFocusData()
         {
             TreeList treeList = tlsData;
@@ -149,145 +136,181 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
             parentData = parentNode != null ? treeList.GetRow(parentNode.Id) as dt205_Base : null;
         }
 
-        // Sửa Node cho treelist
-        private void ItemEditNode_Click(object sender, EventArgs e)
+        private void InitializeMenuItems()
+        {
+            itemAddNode = CreateMenuItem("新增下級節點", ItemAddNote_Click, TPSvgimages.Add);
+            itemEditNode = CreateMenuItem("編輯節點、文件", ItemEditNode_Click, TPSvgimages.Edit);
+            itemAddVer = CreateMenuItem("新增年版", ItemAddVer_Click, TPSvgimages.Add2);
+            itemAddDocs = CreateMenuItem("新增文件", ItemAddDocs_Click, TPSvgimages.Attach);
+            itemDelNode = CreateMenuItem("刪除節點、文件", ItemDeleteNote_Click, TPSvgimages.Close);
+        }
+
+        private void ItemDeleteNote_Click(object sender, EventArgs e)
+        {
+            var result = XtraInputBox.Show(new XtraInputBoxArgs
+            {
+                Caption = TPConfigs.SoftNameTW,
+                Prompt = "請輸入您的工號以確認刪除",
+                DefaultButtonIndex = 0,
+                Editor = new TextEdit { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) },
+                DefaultResponse = ""
+            })?.ToString().ToUpper();
+
+            if (string.IsNullOrEmpty(result) || result != TPConfigs.LoginUser.Id.ToUpper()) return;
+
+            GetFocusData();
+            childrenDatas = dt205_BaseBUS.Instance.GetAllChildByParentId(currentData.Id);
+
+            // Cập nhật thuộc tính IsDisable của tất cả các phần tử trong danh sách
+            childrenDatas.ForEach(item =>
+            {
+                item.RemoveBy = TPConfigs.LoginUser.Id;
+                item.RemoveAt = DateTime.Now;
+            });
+
+            dt205_BaseBUS.Instance.UpdateRange(childrenDatas);
+
+            tlsData.ClearNodes();
+
+            LoadData();
+        }
+
+        private void ItemAddNote_Click(object sender, EventArgs e)
         {
             GetFocusData();
 
             f205_Node_Info node_Info = new f205_Node_Info()
             {
-                formName = "Name",
-                idBase = currentData.Id,
-                eventInfo = EventFormInfo.View
+                formName = "節點",
+                idParent = currentData.Id,
+                parentData = currentData
             };
 
             node_Info.ShowDialog();
             LoadData();
+        }
 
-            //if (currentData.IsFinalNode == true)
-            //{
-            //    var result = XtraInputBox.Show(new XtraInputBoxArgs
-            //    {
-            //        Caption = TPConfigs.SoftNameTW,
-            //        AllowHtmlText = DevExpress.Utils.DefaultBoolean.True,
-            //        Prompt = "<font='Microsoft JhengHei UI' size=14>中文與越南文之間用「/」分隔</font>",
-            //        DefaultButtonIndex = 0,
-            //        Editor = new TextEdit() { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) },
-            //        DefaultResponse = ""
-            //    });
+        private void ItemAddDocs_Click(object sender, EventArgs e)
+        {
+            GetFocusData();
 
-            //    if (string.IsNullOrEmpty(result?.ToString())) return;
-            //    string[] version = result.ToString().Split('/');
+            f205_Node_Info node_Info = new f205_Node_Info()
+            {
+                formName = "文件",
+                idParent = currentData.Id,
+                parentData = currentData
+            };
 
-            //    string verTW = version[0];
-            //    string verVN = version.Count() > 1 ? version[1] : verTW;
+            node_Info.ShowDialog();
+            LoadData();
+        }
 
-            //    TreeListNode parentNode = tlsData.FocusedNode.ParentNode;
-            //    dt201_Base parentData = (tlsData.GetRow(parentNode.Id) as dynamic).data as dt201_Base;
+        // Sửa Node cho treelist
+        private void ItemEditNode_Click(object sender, EventArgs e)
+        {
+            GetFocusData();
 
-            //    bool IsExist = baseDatas.Any(r => r.IdParent == currentData.Id && r.DisplayName == verTW);
-            //    if (IsExist)
-            //    {
-            //        MsgTP.MsgError("年版已存在！");
-            //        return;
-            //    }
+            if (currentData.IsFinalNode == true)
+            {
+                var result = XtraInputBox.Show(new XtraInputBoxArgs
+                {
+                    Caption = TPConfigs.SoftNameTW,
+                    Prompt = "請輸入版本【格式：中文/越文/英文】",
+                    DefaultButtonIndex = 0,
+                    Editor = new TextEdit() { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) },
+                    DefaultResponse = ""
+                });
 
-            //    currentData.DisplayName = verTW;
-            //    currentData.DisplayNameVN = verVN;
-            //    dt201_BaseBUS.Instance.AddOrUpdate(currentData);
-            //    LoadData();
-            //    return;
-            //}
+                if (string.IsNullOrEmpty(result?.ToString())) return;
+                string[] version = result.ToString().Split('/');
 
-            //f201_AddNode fAdd = new f201_AddNode()
-            //{
-            //    eventInfo = EventFormInfo.Update,
-            //    formName = "文件",
-            //    currentData = currentData,
-            //    parentData = parentData
-            //};
+                string verTW = version[0];
+                string verVN = version.Count() > 1 ? version[1] : verTW;
+                string verEN = version.Count() > 2 ? version[2] : verTW;
 
-            //fAdd.ShowDialog();
+                TreeListNode parentNode = tlsData.FocusedNode.ParentNode;
+                dt205_Base parentData = tlsData.GetRow(parentNode.Id) as dt205_Base;
 
-            //LoadData();
+                bool IsExist = baseDatas.Any(r => r.IdParent == currentData.Id && r.DisplayName == verTW);
+                if (IsExist)
+                {
+                    MsgTP.MsgError("年版已存在！");
+                    return;
+                }
+
+                currentData.DisplayName = verTW;
+                currentData.DisplayNameVN = verVN;
+                currentData.DisplayNameEN = verEN;
+                dt205_BaseBUS.Instance.AddOrUpdate(currentData);
+                LoadData();
+                return;
+            }
+
+            f205_Node_Info node_Info = new f205_Node_Info()
+            {
+                formName = currentData.CreateDate == null ? "節點" : "文件",
+                idBase = currentData.Id,
+                eventInfo = EventFormInfo.Update,
+                parentData = parentData
+            };
+
+            node_Info.ShowDialog();
+            LoadData();
         }
 
         // Thêm phiên bản theo năm
         private void ItemAddVer_Click(object sender, EventArgs e)
         {
-            //GetFocusData();
+            GetFocusData();
 
-            //var result = XtraInputBox.Show(new XtraInputBoxArgs
-            //{
-            //    Caption = TPConfigs.SoftNameTW,
-            //    AllowHtmlText = DevExpress.Utils.DefaultBoolean.True,
-            //    Prompt = "<font='Microsoft JhengHei UI' size=14>中文與越南文之間用「/」分隔</font>",
-            //    DefaultButtonIndex = 0,
-            //    Editor = new TextEdit() { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) },
-            //    DefaultResponse = ""
-            //});
-
-            //if (string.IsNullOrEmpty(result?.ToString())) return;
-            //string[] version = result.ToString().Split('/');
-
-            //string verTW = version[0];
-            //string verVN = version.Count() > 1 ? version[1] : verTW;
-
-            //bool IsExist = baseDatas.Any(r => r.IdParent == currentData.Id && r.DisplayName == verTW);
-            //if (IsExist)
-            //{
-            //    MsgTP.MsgError("年版已存在！");
-            //    return;
-            //}
-
-            //dt201_Base baseVer = new dt201_Base()
-            //{
-            //    IdParent = currentData.Id,
-            //    DocCode = currentData.DocCode,
-            //    DisplayName = verTW,
-            //    DisplayNameVN = verVN,
-            //    IsFinalNode = true,
-            //    IdDept = currentData.IdDept,
-            //};
-
-            //dt201_BaseBUS.Instance.Add(baseVer);
-
-            //LoadData();
-        }
-
-        // Thêm Node
-        private void ItemAddNote_Click(object sender, EventArgs e)
-        {
-            f205_Node_Info node_Info = new f205_Node_Info()
+            var result = XtraInputBox.Show(new XtraInputBoxArgs
             {
-                formName = "Name",
-                idParent = currentData.Id,
+                Caption = TPConfigs.SoftNameTW,
+                Prompt = "請輸入版本【格式：中文/越文/英文】",
+                DefaultButtonIndex = 0,
+                Editor = new TextEdit() { Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F) },
+                DefaultResponse = ""
+            });
+
+            if (string.IsNullOrEmpty(result?.ToString())) return;
+            string[] version = result.ToString().Split('/');
+
+            string verTW = version[0];
+            string verVN = version.Count() > 1 ? version[1] : verTW;
+            string verEN = version.Count() > 2 ? version[2] : verTW;
+
+            bool IsExist = baseDatas.Any(r => r.IdParent == currentData.Id && r.DisplayName == verTW);
+            if (IsExist)
+            {
+                MsgTP.MsgError("年版已存在！");
+                return;
+            }
+
+            dt205_Base baseVer = new dt205_Base()
+            {
+                IdParent = currentData.Id,
+                DisplayName = verTW,
+                DisplayNameVN = verVN,
+                DisplayNameEN = verEN,
+                DocType = currentData.DocType,
+                Confidential = currentData.Confidential,
+                IsFinalNode = true,
+                IdDept = currentData.IdDept,
             };
 
-            node_Info.ShowDialog();
+            bool resultAdd = dt205_BaseBUS.Instance.Add(baseVer);
+
             LoadData();
         }
 
-        public static void SetIdRecordCodeForFinalNodes(List<dt201_Base> documents)
-        {
-            // Create a dictionary to map Id to IdRecordCode for quick lookup
-            Dictionary<int, int> idToRecordCodeMap = documents.ToDictionary(d => d.Id, d => d.IdRecordCode);
+        // Thêm Node
 
-            foreach (var doc in documents)
-            {
-                if (doc.IsFinalNode == true && idToRecordCodeMap.ContainsKey(doc.IdParent))
-                {
-                    doc.IdRecordCode = idToRecordCodeMap[doc.IdParent];
-                }
-            }
-        }
 
         private void LoadData()
         {
             using (var handle = SplashScreenManager.ShowOverlayForm(tlsData))
             {
                 baseDatas = dt205_BaseBUS.Instance.GetList();
-                //SetIdRecordCodeForFinalNodes(baseDatas);
 
                 //var deptsChecked = cbbDepts.Items.Where(r => r.CheckState == CheckState.Checked).Select(r => r.Value).ToList();
                 //var records = dt201_RecordCodeBUS.Instance.GetList();
@@ -314,7 +337,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
         {
             f205_Node_Info node_Info = new f205_Node_Info()
             {
-                formName = "Name",
+                formName = "節點",
             };
 
             node_Info.ShowDialog(this);
@@ -351,29 +374,74 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
 
         private void tlsData_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
         {
-            TreeList treeList = sender as TreeList;
-            if (e.HitInfo?.InRowCell != true || e.HitInfo.Node.Id < 0) return;
-
-            GetFocusData();
-
-            // Get current node and data
-            if (currentData == null) return;
-
-            // Gather parent node and parent data
-            List<dt205_Base> parentDatas = new List<dt205_Base>();
-
-            while (parentNode != null)
+            // --- Dịch toàn bộ các mục mặc định ---
+            var translations = new Dictionary<string, string>
             {
-                var parentNodeRow = treeList.GetRow(parentNode.Id);
-                dt205_Base parentNodeData = parentNodeRow  as dt205_Base;
-                if (parentNodeData != null) parentDatas.Add(parentNodeData);
-                parentNode = parentNode.ParentNode;
+                { "Expand", "展開" },
+                { "Collapse", "收合" },
+                { "Full Expand", "全部展開" },
+                { "Full Collapse", "全部收合" }
+            };
+
+            // Duyệt và dịch caption nếu có trong từ điển
+            foreach (DXMenuItem item in e.Menu.Items)
+            {
+                if (translations.TryGetValue(item.Caption, out var translated))
+                {
+                    item.Caption = translated;
+                }
             }
 
-            dt205_Base parentData = parentDatas.FirstOrDefault();
+            // --- Kiểm tra node ---
+            TreeList treeList = sender as TreeList;
+            if (e.HitInfo?.InRowCell != true || e.HitInfo.Node?.Id < 0)
+                return;
 
+            GetFocusData();
+            if (currentData == null)
+                return;
+
+            // --- Trạng thái node hiện tại ---
+            bool isDocument = currentData.CreateDate != null;
+            bool isFinalNode = currentData.IsFinalNode == true;
+
+            // --- Kiểm tra node con ---
+            dt205_Base firstChildData = null;
+            if (currentNode.HasChildren)
+                firstChildData = treeList.GetRow(currentNode.FirstNode.Id) as dt205_Base;
+
+            bool haveFinalNode = firstChildData?.IsFinalNode == true;
+            bool haveDocument = firstChildData?.CreateDate != null;
+
+            // --- Reset BeginGroup của tất cả item sẵn có ---
+            foreach (var item in new[] { itemEditNode, itemDelNode, itemAddNode, itemAddDocs, itemAddVer })
+                item.BeginGroup = false;
+
+            // --- Thêm item menu tùy theo loại node ---
+            itemEditNode.BeginGroup = true;
+            e.Menu.Items.Add(itemEditNode);
+            e.Menu.Items.Add(itemDelNode);
+
+            if (isFinalNode)
+                return;
+
+            if (isDocument)
+            {
+                itemAddVer.BeginGroup = true;
+                e.Menu.Items.Add(itemAddVer);
+                return;
+            }
+
+            if (haveDocument)
+            {
+                itemAddDocs.BeginGroup = true;
+                e.Menu.Items.Add(itemAddDocs);
+                return;
+            }
+
+            itemAddNode.BeginGroup = true;
             e.Menu.Items.Add(itemAddNode);
-            e.Menu.Items.Add(itemViewNode);
+            e.Menu.Items.Add(itemAddDocs);
         }
 
         private void tlsData_CustomUnboundColumnData(object sender, TreeListCustomColumnDataEventArgs e)
@@ -383,7 +451,34 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
                 dt205_Base currentRow = e.Row as dt205_Base;
                 if (currentRow == null) return;
 
-                e.Value = currentRow.Confidential? "機密" : "一般";
+                e.Value = currentRow.Confidential ? "機密" : "一般";
+            }
+        }
+
+        private void tlsData_DoubleClick(object sender, EventArgs e)
+        {
+            TreeList treeList = sender as TreeList;
+            TreeListHitInfo hitInfo = treeList.CalcHitInfo(treeList.PointToClient(MousePosition));
+            if (hitInfo.HitInfoType != HitInfoType.Cell)
+                return;
+
+            GetFocusData();
+
+            if (currentNode != null && currentNode.Nodes != null)
+            {
+                if (currentData.IsFinalNode != true)
+                {
+                    treeList.FocusedNode.Expanded = !treeList.FocusedNode.Expanded;
+                    return;
+                }
+
+                f205_DocsInfo fInfo = new f205_DocsInfo()
+                {
+                    Text = currentData.DisplayName,
+                    currentData = currentData,
+                    parentData = parentData
+                };
+                fInfo.Show(this);
             }
         }
     }

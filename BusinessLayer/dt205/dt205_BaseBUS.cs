@@ -30,7 +30,7 @@ namespace BusinessLayer
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dt205_Base.ToList();
+                    return _context.dt205_Base.Where(r => string.IsNullOrEmpty(r.RemoveBy)).ToList();
                 }
             }
             catch (Exception ex)
@@ -38,6 +38,52 @@ namespace BusinessLayer
                 logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
                 throw;
             }
+        }
+
+        public List<dt205_Base> GetAllChildByParentId(int parentId)
+        {
+            var allChildren = new List<dt205_Base>();
+            var visited = new HashSet<int>(); // To track visited nodes and avoid circular references
+
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    // Fetch all records in one query to reduce database calls
+                    var allRecords = GetList();
+                    var parent = allRecords.FirstOrDefault(r => r.Id == parentId);
+
+                    if (parent == null)
+                    {
+                        return allChildren;
+                    }
+
+                    // Recursive local function
+                    void FetchChildren(dt205_Base current)
+                    {
+                        if (current == null || visited.Contains(current.Id))
+                            return;
+
+                        visited.Add(current.Id);
+                        allChildren.Add(current);
+
+                        var children = allRecords.Where(r => r.IdParent == current.Id).ToList();
+                        foreach (var child in children)
+                        {
+                            FetchChildren(child);
+                        }
+                    }
+
+                    FetchChildren(parent);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+
+            return allChildren; // Return the entire list of children
         }
 
         public dt205_Base GetItemById(int id)
@@ -105,6 +151,33 @@ namespace BusinessLayer
             }
             catch (Exception ex)
             {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                return false;
+            }
+        }
+
+        public bool UpdateRange(List<dt205_Base> items)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    // Thêm hoặc cập nhật các bản ghi trong vòng lặp
+                    foreach (var item in items)
+                    {
+                        _context.dt205_Base.AddOrUpdate(item); // Dùng AddOrUpdate để thêm hoặc cập nhật
+                    }
+
+                    // Gọi SaveChanges một lần sau khi tất cả bản ghi đã được thêm/cập nhật
+                    int affectedRecords = _context.SaveChanges();
+
+                    // Kiểm tra nếu có bản ghi nào đã bị ảnh hưởng (thêm/cập nhật)
+                    return affectedRecords > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log lỗi và trả về false nếu xảy ra lỗi
                 logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
                 return false;
             }

@@ -424,6 +424,18 @@
     <Compile Include="Views\02_StandardsAndTechs\01_ISOAuditDocs\uc201_DigitalSignature.Designer.cs">
       <DependentUpon>uc201_DigitalSignature.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\05_IATF16949\f205_AddAtts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\05_IATF16949\f205_AddAtts.Designer.cs">
+      <DependentUpon>f205_AddAtts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\05_IATF16949\f205_DocsInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\05_IATF16949\f205_DocsInfo.Designer.cs">
+      <DependentUpon>f205_DocsInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\02_StandardsAndTechs\05_IATF16949\f205_Node_Info.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1295,6 +1307,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\04_InternalDocMgmt\uc204_InternalDocMgmtMain.resx">
       <DependentUpon>uc204_InternalDocMgmtMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\02_StandardsAndTechs\05_IATF16949\f205_AddAtts.resx">
+      <DependentUpon>f205_AddAtts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\02_StandardsAndTechs\05_IATF16949\f205_DocsInfo.resx">
+      <DependentUpon>f205_DocsInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\05_IATF16949\f205_Node_Info.resx">
       <DependentUpon>f205_Node_Info.cs</DependentUpon>

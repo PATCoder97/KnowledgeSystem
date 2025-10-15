@@ -259,6 +259,7 @@
             this.tlsData.TabIndex = 4;
             this.tlsData.CustomUnboundColumnData += new DevExpress.XtraTreeList.CustomColumnDataEventHandler(this.tlsData_CustomUnboundColumnData);
             this.tlsData.PopupMenuShowing += new DevExpress.XtraTreeList.PopupMenuShowingEventHandler(this.tlsData_PopupMenuShowing);
+            this.tlsData.DoubleClick += new System.EventHandler(this.tlsData_DoubleClick);
             // 
             // treeListColumn7
             // 

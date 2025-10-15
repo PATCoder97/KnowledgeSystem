@@ -3,6 +3,7 @@ using DataAccessLayer;
 using DevExpress.XtraEditors;
 using DevExpress.XtraLayout;
 using DevExpress.XtraSplashScreen;
+using DocumentFormat.OpenXml.Wordprocessing;
 using KnowledgeSystem.Helpers;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
         string idDept2word = TPConfigs.LoginUser.IdDepartment.Substring(0, 2);
 
         dt205_Base baseDoc;
+        public dt205_Base parentData;
 
         List<LayoutControlItem> lcControls;
         List<LayoutControlItem> lcImpControls;
@@ -57,11 +59,22 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
             txbDisplayName.Enabled = _enable;
             txbDisplayNameVN.Enabled = _enable;
             txbDisplayNameEN.Enabled = _enable;
-            ckConfidential.Enabled = _enable;
+            ckConfidential.Enabled = _enable ? parentData?.Confidential != true : _enable;
+
+            if (formName == "節點")
+            {
+                txbCreateDate.Enabled = false;
+                txbNotifyCycle.Enabled = false;
+            }
         }
 
         private void LockControl()
         {
+            if (parentData != null)
+            {
+                cbbDept.EditValue = parentData.IdDept;
+            }
+
             switch (eventInfo)
             {
                 case EventFormInfo.Create:
@@ -125,7 +138,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
         private void f205_Node_Info_Load(object sender, EventArgs e)
         {
             lcControls = new List<LayoutControlItem>() { lcDept, lcClass, lcDisplayName, lcDisplayNameVN, lcDisplayNameEN, lcNotifyCycle, lcCreateDate };
-            lcImpControls = new List<LayoutControlItem>() { lcClass, lcDisplayName, lcDisplayNameVN, lcDisplayNameEN };
+            lcImpControls = new List<LayoutControlItem>() { lcClass, lcDisplayName, lcDisplayNameVN, lcDisplayNameEN, lcCreateDate, lcNotifyCycle };
+
             foreach (var item in lcControls)
             {
                 item.AllowHtmlStringInCaption = true;
@@ -140,13 +154,20 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
 
                     baseDoc = new dt205_Base();
 
+                    if (parentData != null)
+                    {
+                        ckConfidential.Checked = parentData.Confidential == true;
+                        cbbDept.EditValue = parentData.IdDept;
+                        cbbDept.Enabled = false;
+                    }
+
                     break;
                 case EventFormInfo.View:
 
                     baseDoc = dt205_BaseBUS.Instance.GetItemById(idBase);
 
                     cbbClass.EditValue = baseDoc.DocType;
-                    ckConfidential.CheckState = baseDoc.Confidential? CheckState.Checked: CheckState.Unchecked;
+                    ckConfidential.CheckState = baseDoc.Confidential ? CheckState.Checked : CheckState.Unchecked;
                     txbDisplayName.EditValue = baseDoc.DisplayName;
                     txbDisplayNameVN.EditValue = baseDoc.DisplayNameVN;
                     txbDisplayNameEN.EditValue = baseDoc.DisplayNameEN;
@@ -155,7 +176,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
 
                     break;
                 case EventFormInfo.Update:
-                    break;
+                    goto case EventFormInfo.View;
+
                 case EventFormInfo.Delete:
                     break;
                 case EventFormInfo.ViewOnly:
@@ -185,7 +207,14 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
             bool IsValidate = true;
             foreach (var item in lcImpControls)
             {
-                if (string.IsNullOrEmpty(item.Control.Text)) IsValidate = false;
+                if (item.Control is BaseEdit baseEdit)
+                {
+                    if (string.IsNullOrEmpty(baseEdit.EditValue?.ToString()) && item.Control.Enabled)
+                    {
+                        IsValidate = false;
+                        break;
+                    }
+                }
             }
 
             if (!IsValidate)
