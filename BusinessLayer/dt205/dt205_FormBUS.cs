@@ -56,6 +56,22 @@ namespace BusinessLayer
             }
         }
 
+        public List<dt205_Form> GetListByIdBase(int baseId)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt205_Form.Where(r => r.BaseId == baseId && string.IsNullOrEmpty(r.RemoveBy)).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public bool Add(dt205_Form item)
         {
             try
@@ -110,14 +126,17 @@ namespace BusinessLayer
             }
         }
 
-        public bool RemoveById(int id)
+        public bool RemoveById(int id, string userRemove)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    var itemRemove = _context.dt205_Form.FirstOrDefault(r => r.Id == id);
-                    _context.dt205_Form.Remove(itemRemove);
+                    var entity = _context.dt205_Form.FirstOrDefault(r => r.Id == id);
+                    entity.RemoveAt = DateTime.Now;
+                    entity.RemoveBy = userRemove;
+                    _context.dt205_Form.AddOrUpdate(entity);
+                    _context.SaveChanges();
 
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;

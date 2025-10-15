@@ -123,6 +123,7 @@
             this.btnEdit.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnEdit.ImageOptions.SvgImage")));
             this.btnEdit.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnEdit.Name = "btnEdit";
+            this.btnEdit.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnEdit_ItemClick);
             // 
             // btnDelete
             // 
@@ -130,6 +131,7 @@
             this.btnDelete.Id = 1;
             this.btnDelete.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnDelete.Name = "btnDelete";
+            this.btnDelete.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDelete_ItemClick);
             // 
             // btnConfirm
             // 
@@ -137,6 +139,7 @@
             this.btnConfirm.Id = 2;
             this.btnConfirm.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnConfirm.Name = "btnConfirm";
+            this.btnConfirm.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnConfirm_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -224,6 +227,7 @@
             this.txbAtt.Size = new System.Drawing.Size(463, 32);
             this.txbAtt.StyleController = this.layoutControl1;
             this.txbAtt.TabIndex = 12;
+            this.txbAtt.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txbAtt_ButtonClick);
             // 
             // Root
             // 
@@ -301,6 +305,7 @@
             this.Name = "f205_AddAtts";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "f205_AddAtts";
+            this.Load += new System.EventHandler(this.f205_AddAtts_Load);
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);

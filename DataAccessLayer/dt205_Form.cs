@@ -18,8 +18,11 @@ namespace DataAccessLayer
         public int BaseId { get; set; }
         public string Code { get; set; }
         public string DisplayName { get; set; }
+        public int AttId { get; set; }
         public System.DateTime CreateAt { get; set; }
         public string CreateBy { get; set; }
         public string Note { get; set; }
+        public Nullable<System.DateTime> RemoveAt { get; set; }
+        public string RemoveBy { get; set; }
     }
 }

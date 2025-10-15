@@ -83,7 +83,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
             GridView view = gvData;
             int idForm = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColId));
 
-            dt201_FormsBUS.Instance.Remove(idForm);
+            dt205_FormBUS.Instance.RemoveById(idForm, TPConfigs.LoginUser.Id);
             LoadData();
         }
 
@@ -92,10 +92,12 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
             GridView view = gvData;
             int idForm = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColId));
 
-            f201_AddAttachment fAtt = new f201_AddAttachment();
-            fAtt.eventInfo = EventFormInfo.Update;
-            fAtt.formName = "編輯表單";
-            fAtt.baseForm = dt201_FormsBUS.Instance.GetItemById(idForm);
+            f205_AddAtts fAtt = new f205_AddAtts()
+            {
+                eventInfo = EventFormInfo.Update,
+                formName = "編輯表單",
+                idForm = idForm
+            };
             fAtt.ShowDialog();
 
             LoadData();
@@ -103,13 +105,13 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
 
         private void LoadData()
         {
-            //var displayDatas = (from data in dt205_FormBUS.Instance.GetListByBaseId(idBase)
-            //                    join usr in dm_UserBUS.Instance.GetList() on data.UploadUser equals usr.Id
-            //                    let UsrUploadName = $"{usr.Id.Substring(5)} {usr.DisplayName}"
-            //                    select new { data, usr, UsrUploadName }).ToList();
+            var displayDatas = (from data in dt205_FormBUS.Instance.GetListByIdBase(idBase)
+                                join usr in dm_UserBUS.Instance.GetList() on data.CreateBy equals usr.Id
+                                let UsrUploadName = $"{usr.Id.Substring(5)} {usr.DisplayName}"
+                                select new { data, usr, UsrUploadName }).ToList();
 
-            //gcData.DataSource = displayDatas;
-            //gvData.BestFitColumns();
+            gcData.DataSource = displayDatas;
+            gvData.BestFitColumns();
         }
 
         private void f205_DocsInfo_Load(object sender, EventArgs e)
@@ -129,14 +131,14 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
 
         private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            //f201_AddAttachment fAtt = new f201_AddAttachment()
-            //{
-            //    eventInfo = EventFormInfo.Create,
-            //    formName = "表單",
-            //    currentData = currentData,
-            //    parentData = parentData
-            //};
-            //fAtt.ShowDialog();
+            f205_AddAtts fAtt = new f205_AddAtts()
+            {
+                eventInfo = EventFormInfo.Create,
+                formName = "表單",
+                currentData = currentData,
+                parentData = parentData
+            };
+            fAtt.ShowDialog();
 
             LoadData();
         }
@@ -160,12 +162,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
             GridHitInfo info = view.CalcHitInfo(ea.Location);
             if (!(info.InRow || info.InRowCell)) return;
 
-            bool IsCancel = Convert.ToBoolean(view.GetRowCellValue(view.FocusedRowHandle, gColIsCancel));
-            if (IsCancel) return;
-
             int idForm = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColId));
-            dt201_Forms baseForm = dt201_FormsBUS.Instance.GetItemById(idForm);
-            if (baseForm.IsProcessing == true) return;
+            dt205_Form baseForm = dt205_FormBUS.Instance.GetItemById(idForm);
 
             int idAtt = (int)baseForm.AttId;
             var att = dm_AttachmentBUS.Instance.GetItemById(idAtt);
@@ -173,7 +171,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
             string filePath = att.EncryptionName;
             string fileName = att.ActualName;
 
-            string sourcePath = Path.Combine(TPConfigs.Folder201, filePath);
+            string sourcePath = Path.Combine(TPConfigs.Folder205, filePath);
             string destPath = Path.Combine(TPConfigs.TempFolderData, $"{Regex.Replace(baseForm.DisplayName, @"[\\/:*?""<>|]", "")}_{DateTime.Now:yyyyMMddHHmmss}{Path.GetExtension(fileName)}");
 
             if (!Directory.Exists(TPConfigs.TempFolderData))
