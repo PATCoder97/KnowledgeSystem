@@ -802,6 +802,12 @@
     <Compile Include="Views\03_DepartmentManage\10_EHSWorkforce\uc310_UnitEHSOrg.Designer.cs">
       <DependentUpon>uc310_UnitEHSOrg.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\03_DepartmentManage\11_ExpenseReimbursement\uc311_ExpenseMain.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\11_ExpenseReimbursement\uc311_ExpenseMain.Designer.cs">
+      <DependentUpon>uc311_ExpenseMain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_SignInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1496,6 +1502,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\10_EHSWorkforce\uc310_UnitEHSOrg.resx">
       <DependentUpon>uc310_UnitEHSOrg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\11_ExpenseReimbursement\uc311_ExpenseMain.resx">
+      <DependentUpon>uc311_ExpenseMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_SignInfo.resx">
       <DependentUpon>f402_SignInfo.cs</DependentUpon>
