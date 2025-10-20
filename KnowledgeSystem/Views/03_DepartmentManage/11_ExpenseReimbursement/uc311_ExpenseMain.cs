@@ -5,6 +5,7 @@ using DevExpress.Utils.Svg;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Views.Items.ViewInfo;
 using DevExpress.XtraPrinting.Native;
 using DevExpress.XtraSplashScreen;
 using DevExpress.XtraTreeList;
@@ -31,7 +32,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
     public partial class uc311_ExpenseMain : XtraUserControl
     {
         private static readonly string FORMAT_FILE = @"C:\Users\Dell Alpha\Desktop\TestPython\Formats.json";
-        private static readonly string SAVE_DIR = @"C:\Users\Dell Alpha\Desktop\TestPython\invoices_json";
         private static readonly string URL = "https://www.meinvoice.vn/tra-cuu/GetInvoiceDataByTransactionID";
 
         public uc311_ExpenseMain()
@@ -50,22 +50,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
         List<dm_Group> groups;
         List<dm_Departments> depts;
 
-        DXMenuItem itemAddNode;
-        DXMenuItem itemEditNode;
-        DXMenuItem itemAddVer;
-        DXMenuItem itemAddDocs;
-        DXMenuItem itemDelNode;
-        DXMenuItem itemDisable;
-        DXMenuItem itemEnable;
-        DXMenuItem itemClone;
-        DXMenuItem itemSendNote;
-
-        TreeListNode currentNode;
-        TreeListNode parentNode;
-
-        dt205_Base currentData;
-        dt205_Base parentData;
-        List<dt205_Base> childrenDatas;
+        DXMenuItem itemERP01;
+        DXMenuItem itemERP02;
+        DXMenuItem itemERP03;
 
         DXMenuItem CreateMenuItem(string caption, EventHandler clickEvent, SvgImage svgImage)
         {
@@ -89,11 +76,43 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
 
         private void InitializeMenuItems()
         {
-            //itemAddNode = CreateMenuItem("新增下級節點", ItemAddNote_Click, TPSvgimages.Add);
-            //itemEditNode = CreateMenuItem("編輯節點、文件", ItemEditNode_Click, TPSvgimages.Edit);
-            //itemAddVer = CreateMenuItem("新增年版", ItemAddVer_Click, TPSvgimages.Add2);
-            //itemAddDocs = CreateMenuItem("新增文件", ItemAddDocs_Click, TPSvgimages.Attach);
-            //itemDelNode = CreateMenuItem("刪除節點、文件", ItemDeleteNote_Click, TPSvgimages.Close);
+            itemERP01 = CreateMenuItem("ERP：一般費用報銷", ItemERP01_Click, TPSvgimages.Num1);
+            itemERP02 = CreateMenuItem("ERP：車輛稅費報銷", ItemERP02_Click, TPSvgimages.Num2);
+            itemERP03 = CreateMenuItem("ERP：一般費用報銷(02)", ItemERP03_Click, TPSvgimages.Num3);
+        }
+
+        private void ItemERP03_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ItemERP02_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ItemERP01_Click(object sender, EventArgs e)
+        {
+            GridView view = gvData;
+            string idBase = view.GetRowCellValue(view.FocusedRowHandle, gColId).ToString();
+
+            string keyTab = "{Tab}";
+            string keyData1 = $"LG";
+
+            var selectedItems = view.GetSelectedRows()
+               .Select(rowHandle => (gvData.GetRow(rowHandle) as dynamic).data as dt311_Invoice)
+               .Where(item => item != null)
+               .ToList();
+
+            string keyData2 = "";
+            foreach (var item in selectedItems)
+            {
+                keyData2 += $"{keyTab}{item.InvoiceCode}{keyTab}'{item.InvoiceNumber}{keyTab}{item.IssueDate:yyyyMMdd}{keyTab}{item.TotalBeforeVAT:0}{keyTab}{item.VATAmount:0}{keyTab}{TPConfigs.LoginUser.Id}{keyTab}";
+            }
+
+            List<string> keyDatas = new List<string>() { keyData1, keyData2 };
+            f311_AutoERP autoERP = new f311_AutoERP(keyDatas);
+            autoERP.ShowDialog();
         }
 
         private void LoadData()
@@ -103,51 +122,17 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                 helper.SaveViewInfo();
 
                 invoiceDatas = dt311_InvoiceBUS.Instance.GetList();
+                var sellers = dt311_SellerBuyerBUS.Instance.GetList();
 
-                //var grpUsrs = dm_GroupUserBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id);
+                var displayDatas = (from data in invoiceDatas
+                                    join seller in sellers on data.SellerTax equals seller.Tax
+                                    select new
+                                    {
+                                        data,
+                                        SellerName = seller.DisplayName
+                                    }).ToList();
 
-                //var depts = dm_DeptBUS.Instance.GetList();
-                //var groups = dm_GroupBUS.Instance.GetListByName("ISO組");
-
-                //var deptAccess = (from data in groups
-                //                  join grp in grpUsrs on data.Id equals grp.IdGroup
-                //                  select data.IdDept).ToList();
-
-                //dt204Bases = dt204_InternalDocMgmtBUS.Instance.GetList();
-
-                //// Lấy các văn kiện khác 三階, hoặc của tổ mình đưa lên theo quyền trong nhóm ISO
-                //dt204Bases = (from data in dt204Bases
-                //              where data.DocLevel != "三階" || deptAccess.Contains(data.IdDept)
-                //              select data).ToList();
-
-                //users = dm_UserBUS.Instance.GetList();
-                //jobs = dm_JobTitleBUS.Instance.GetList();
-                //var docCatoraries = dt204_DocCatoraryBUS.Instance.GetList();
-                //var funcCatoraries = dt204_FuncCatoraryBUS.Instance.GetList();
-                //forms = dt204_FormBUS.Instance.GetList();
-
-                //var basesDisplay = (from data in dt204Bases
-                //                    join docCato in docCatoraries on data.IdDocCatorary equals docCato.Id
-                //                    join funcCato in funcCatoraries on data.IdFuncCatorary equals funcCato.Id
-                //                    join urs in users on data.IdFounder equals urs.Id
-                //                    join ursUp in users on data.IdUsrUpload equals ursUp.Id
-                //                    let DocCatorary = docCato.DisplayName
-                //                    let FuncCatorary = funcCato.DisplayName
-                //                    let Subdept = depts.FirstOrDefault(r => r.Id == data.SubDept)?.DisplayName
-                //                    select new
-                //                    {
-                //                        data,
-                //                        DocCatorary,
-                //                        FuncCatorary,
-                //                        Subdept,
-                //                        urs,
-                //                        Founder = urs != null
-                //                            ? $"{urs.Id.Substring(5)} LG{urs.IdDepartment}/{urs.DisplayName}" : "",
-                //                        UserUpload = ursUp != null
-                //                            ? $"{ursUp.Id.Substring(5)} LG{ursUp.IdDepartment}/{ursUp.DisplayName}" : ""
-                //                    }).ToList();
-
-                sourceData.DataSource = invoiceDatas;
+                sourceData.DataSource = displayDatas;
                 helper.LoadViewInfo();
 
                 gvData.BestFitColumns();
@@ -386,7 +371,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             return null;
         }
 
-        // ========== BUTTON ==========
         private async void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             var inputArgs = new XtraInputBoxArgs
@@ -419,6 +403,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             {
                 btnAdd.Enabled = true;
             }
+
+            LoadData();
         }
 
         private void uc311_ExpenseMain_Load(object sender, EventArgs e)
@@ -426,11 +412,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             gvData.ReadOnlyGridView();
             gvData.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
             gvData.OptionsDetail.AllowOnlyOneMasterRowExpanded = true;
-            //gvForm.ReadOnlyGridView();
-            //gvForm.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
+            gvDetail.ReadOnlyGridView();
+            gvDetail.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
 
             LoadData();
-            //CreateRuleGV();
             gcData.DataSource = sourceData;
 
             gvData.BestFitColumns();
@@ -458,7 +443,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
         private void gvData_MasterRowGetChildList(object sender, DevExpress.XtraGrid.Views.Grid.MasterRowGetChildListEventArgs e)
         {
             GridView view = sender as GridView;
-            string idBase = view.GetRowCellValue(e.RowHandle, "TransactionID").ToString();
+            string idBase = view.GetRowCellValue(e.RowHandle, "data.TransactionID").ToString();
 
             e.ChildList = dt311_InvoiceItemBUS.Instance.GetListByInvoiceId(idBase);
         }
@@ -470,6 +455,21 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             GridView detailView = masterView.GetDetailView(e.RowHandle, visibleDetailRelationIndex) as GridView;
 
             detailView.BestFitColumns();
+        }
+
+        private void btnReload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            LoadData();
+        }
+
+        private void gvData_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+        {
+            if (e.HitInfo.InRowCell && e.HitInfo.InDataRow)
+            {
+                e.Menu.Items.Add(itemERP01);
+                e.Menu.Items.Add(itemERP02);
+                e.Menu.Items.Add(itemERP03);
+            }
         }
     }
 }
