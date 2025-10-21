@@ -23,6 +23,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
@@ -49,6 +50,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
         BindingSource sourceData = new BindingSource();
         List<dm_Group> groups;
         List<dm_Departments> depts;
+        private static string idDept2Word = TPConfigs.idDept2word;
 
         DXMenuItem itemERP01;
         DXMenuItem itemERP02;
@@ -76,9 +78,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
 
         private void InitializeMenuItems()
         {
-            itemERP01 = CreateMenuItem("ERP：一般費用報銷", ItemERP01_Click, TPSvgimages.Num1);
-            itemERP02 = CreateMenuItem("ERP：車輛稅費報銷", ItemERP02_Click, TPSvgimages.Num2);
-            itemERP03 = CreateMenuItem("ERP：一般費用報銷(02)", ItemERP03_Click, TPSvgimages.Num3);
+            itemERP01 = CreateMenuItem("ERP：一般費用發票輸入", ItemERP01_Click, TPSvgimages.Num1);
+            itemERP02 = CreateMenuItem("ERP：車輛稅費繳納管理", ItemERP02_Click, TPSvgimages.Num2);
+            itemERP03 = CreateMenuItem("ERP：一般費用報銷輸入", ItemERP03_Click, TPSvgimages.Num3);
         }
 
         private void ItemERP03_Click(object sender, EventArgs e)
@@ -88,31 +90,102 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
 
         private void ItemERP02_Click(object sender, EventArgs e)
         {
+            GridView gridView = gvData;
+            if (gridView == null || gridView.FocusedRowHandle < 0)
+                return;
 
+            // Các giá trị khởi tạo
+            const string tabDelimiter = "{Tab}";
+            string prefixKey = $"LG{tabDelimiter}7730{tabDelimiter}{tabDelimiter}0{tabDelimiter}W{tabDelimiter}2{tabDelimiter}LG";
+
+            // Lấy danh sách hóa đơn được chọn
+            var selectedInvoices = gridView.GetSelectedRows()
+                .Select(rowHandle => gvData.GetRow(rowHandle) as dynamic)
+                .Select(row => row?.data as dt311_Invoice)
+                .Where(invoice => invoice != null)
+                .ToList();
+
+            if (selectedInvoices.Select(r => new { r.SellerTax, r.BuyerTax }).Distinct().Count() != 1)
+            {
+                XtraMessageBox.Show("Không cùng nhà thầu!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            prefixKey += $"{selectedInvoices.First().SellerTax}{tabDelimiter}{selectedInvoices.First().BuyerTax}{tabDelimiter}潘英俊";
+
+            // Ghép chuỗi dữ liệu hóa đơn
+            StringBuilder invoiceDataBuilder = new StringBuilder();
+
+            foreach (var invoice in selectedInvoices)
+            {
+                invoiceDataBuilder.AppendFormat(
+                    "{0}{1}{0}{2}{0}{3:yyyyMMdd}{0}{4:0}{0}{5:0}{0}{6}{0}",
+                    tabDelimiter,
+                    invoice.InvoiceCode,
+                    invoice.InvoiceNumber,
+                    invoice.IssueDate,
+                    invoice.TotalBeforeVAT,
+                    invoice.VATAmount,
+                    TPConfigs.LoginUser.Id
+                );
+            }
+
+            string invoiceDataString = invoiceDataBuilder.ToString();
+
+            // Gom dữ liệu thành danh sách
+            List<string> erpDataList = new List<string>() { prefixKey, invoiceDataString };
+
+            // Mở form AutoERP
+            using (var autoErpForm = new f311_AutoERP(erpDataList))
+            {
+                autoErpForm.ShowDialog();
+            }
         }
 
         private void ItemERP01_Click(object sender, EventArgs e)
         {
-            GridView view = gvData;
-            string idBase = view.GetRowCellValue(view.FocusedRowHandle, gColId).ToString();
+            GridView gridView = gvData;
+            if (gridView == null || gridView.FocusedRowHandle < 0)
+                return;
 
-            string keyTab = "{Tab}";
-            string keyData1 = $"LG";
+            // Các giá trị khởi tạo
+            const string tabDelimiter = "{Tab}";
+            const string prefixKey = "LG";
 
-            var selectedItems = view.GetSelectedRows()
-               .Select(rowHandle => (gvData.GetRow(rowHandle) as dynamic).data as dt311_Invoice)
-               .Where(item => item != null)
-               .ToList();
+            // Lấy danh sách hóa đơn được chọn
+            var selectedInvoices = gridView.GetSelectedRows()
+                .Select(rowHandle => gvData.GetRow(rowHandle) as dynamic)
+                .Select(row => row?.data as dt311_Invoice)
+                .Where(invoice => invoice != null)
+                .ToList();
 
-            string keyData2 = "";
-            foreach (var item in selectedItems)
+            // Ghép chuỗi dữ liệu hóa đơn
+            StringBuilder invoiceDataBuilder = new StringBuilder();
+
+            foreach (var invoice in selectedInvoices)
             {
-                keyData2 += $"{keyTab}{item.InvoiceCode}{keyTab}'{item.InvoiceNumber}{keyTab}{item.IssueDate:yyyyMMdd}{keyTab}{item.TotalBeforeVAT:0}{keyTab}{item.VATAmount:0}{keyTab}{TPConfigs.LoginUser.Id}{keyTab}";
+                invoiceDataBuilder.AppendFormat(
+                    "{0}{1}{0}{2}{0}{3:yyyyMMdd}{0}{4:0}{0}{5:0}{0}{6}{0}",
+                    tabDelimiter,
+                    invoice.InvoiceCode,
+                    invoice.InvoiceNumber,
+                    invoice.IssueDate,
+                    invoice.TotalBeforeVAT,
+                    invoice.VATAmount,
+                    TPConfigs.LoginUser.Id
+                );
             }
 
-            List<string> keyDatas = new List<string>() { keyData1, keyData2 };
-            f311_AutoERP autoERP = new f311_AutoERP(keyDatas);
-            autoERP.ShowDialog();
+            string invoiceDataString = invoiceDataBuilder.ToString();
+
+            // Gom dữ liệu thành danh sách
+            List<string> erpDataList = new List<string>() { prefixKey, invoiceDataString };
+
+            // Mở form AutoERP
+            using (var autoErpForm = new f311_AutoERP(erpDataList))
+            {
+                autoErpForm.ShowDialog();
+            }
         }
 
         private void LoadData()
@@ -189,7 +262,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                     var invoiceData = new dt311_Invoice
                     {
                         SourceType = fmtName,
-                        TransactionID = transactionId
+                        TransactionID = transactionId,
+                        IdDept = idDept2Word
                     };
 
                     var itemsList = new List<dt311_InvoiceItem>();

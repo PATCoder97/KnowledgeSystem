@@ -74,6 +74,9 @@
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn26 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn27 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gvDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
@@ -226,7 +229,7 @@
             this.gcData.Name = "gcData";
             this.gcData.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemMemoEdit1});
-            this.gcData.Size = new System.Drawing.Size(914, 534);
+            this.gcData.Size = new System.Drawing.Size(1292, 534);
             this.gcData.TabIndex = 4;
             this.gcData.UseEmbeddedNavigator = true;
             this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -259,7 +262,10 @@
             this.gridColumn25,
             this.gridColumn14,
             this.gridColumn15,
-            this.gridColumn16});
+            this.gridColumn16,
+            this.gridColumn1,
+            this.gridColumn26,
+            this.gridColumn27});
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
             this.gvData.OptionsDetail.ShowDetailTabs = false;
@@ -536,7 +542,7 @@
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManagerTP;
-            this.barDockControlTop.Size = new System.Drawing.Size(938, 49);
+            this.barDockControlTop.Size = new System.Drawing.Size(1316, 49);
             // 
             // barDockControlBottom
             // 
@@ -544,7 +550,7 @@
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.barDockControlBottom.Location = new System.Drawing.Point(0, 607);
             this.barDockControlBottom.Manager = this.barManagerTP;
-            this.barDockControlBottom.Size = new System.Drawing.Size(938, 0);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1316, 0);
             // 
             // barDockControlLeft
             // 
@@ -558,7 +564,7 @@
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(938, 49);
+            this.barDockControlRight.Location = new System.Drawing.Point(1316, 49);
             this.barDockControlRight.Manager = this.barManagerTP;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 558);
             // 
@@ -569,7 +575,7 @@
             this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(938, 558);
+            this.layoutControl1.Size = new System.Drawing.Size(1316, 558);
             this.layoutControl1.TabIndex = 6;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -580,7 +586,7 @@
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem1});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(938, 558);
+            this.Root.Size = new System.Drawing.Size(1316, 558);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem1
@@ -588,9 +594,33 @@
             this.layoutControlItem1.Control = this.gcData;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(918, 538);
+            this.layoutControlItem1.Size = new System.Drawing.Size(1296, 538);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "車牌號碼";
+            this.gridColumn1.FieldName = "data.LicensePlate";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 10;
+            // 
+            // gridColumn26
+            // 
+            this.gridColumn26.Caption = "里程數";
+            this.gridColumn26.FieldName = "data.OdometerReading";
+            this.gridColumn26.Name = "gridColumn26";
+            this.gridColumn26.Visible = true;
+            this.gridColumn26.VisibleIndex = 11;
+            // 
+            // gridColumn27
+            // 
+            this.gridColumn27.Caption = "加油人員";
+            this.gridColumn27.FieldName = "data.FuelFilledBy";
+            this.gridColumn27.Name = "gridColumn27";
+            this.gridColumn27.Visible = true;
+            this.gridColumn27.VisibleIndex = 12;
             // 
             // uc311_ExpenseMain
             // 
@@ -602,7 +632,7 @@
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
             this.Name = "uc311_ExpenseMain";
-            this.Size = new System.Drawing.Size(938, 607);
+            this.Size = new System.Drawing.Size(1316, 607);
             this.Load += new System.EventHandler(this.uc311_ExpenseMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gvDetail)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).EndInit();
@@ -664,5 +694,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn23;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn24;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn25;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn26;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn27;
     }
 }

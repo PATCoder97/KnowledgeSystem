@@ -24,5 +24,9 @@ namespace DataAccessLayer
         public Nullable<decimal> TotalBeforeVAT { get; set; }
         public Nullable<decimal> VATAmount { get; set; }
         public Nullable<decimal> TotalAfterVAT { get; set; }
+        public string IdDept { get; set; }
+        public string LicensePlate { get; set; }
+        public Nullable<int> OdometerReading { get; set; }
+        public string FuelFilledBy { get; set; }
     }
 }
