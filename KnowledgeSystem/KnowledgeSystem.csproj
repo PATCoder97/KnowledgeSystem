@@ -448,6 +448,12 @@
     <Compile Include="Views\02_StandardsAndTechs\05_IATF16949\uc205_IATF16949Main.Designer.cs">
       <DependentUpon>uc205_IATF16949Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\06_InternationalStd\uc206_InternationalStdMain.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\06_InternationalStd\uc206_InternationalStdMain.Designer.cs">
+      <DependentUpon>uc206_InternationalStdMain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\03_DepartmentManage\02_NewPersonnel\f302_InterviewRecord.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1319,6 +1325,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\05_IATF16949\uc205_IATF16949Main.resx">
       <DependentUpon>uc205_IATF16949Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\02_StandardsAndTechs\06_InternationalStd\uc206_InternationalStdMain.resx">
+      <DependentUpon>uc206_InternationalStdMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\02_NewPersonnel\f302_InterviewRecord.resx">
       <DependentUpon>f302_InterviewRecord.cs</DependentUpon>
