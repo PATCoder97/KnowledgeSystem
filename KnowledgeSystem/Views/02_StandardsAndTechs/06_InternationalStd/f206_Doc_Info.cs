@@ -54,7 +54,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._06_InternationalStd
         {
             cbbCategory.Enabled = _enable;
             txbDocCode.Enabled = _enable;
-            txbVersion.Enabled = _enable;
             txbDisplayName.Enabled = _enable;
             txbDisplayNameVN.Enabled = _enable;
             txbDisplayNameEN.Enabled = _enable;
