@@ -448,6 +448,12 @@
     <Compile Include="Views\02_StandardsAndTechs\05_IATF16949\uc205_IATF16949Main.Designer.cs">
       <DependentUpon>uc205_IATF16949Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\06_InternationalStd\f206_Doc_Info.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\02_StandardsAndTechs\06_InternationalStd\f206_Doc_Info.Designer.cs">
+      <DependentUpon>f206_Doc_Info.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\02_StandardsAndTechs\06_InternationalStd\uc206_InternationalStdMain.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1325,6 +1331,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\05_IATF16949\uc205_IATF16949Main.resx">
       <DependentUpon>uc205_IATF16949Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\02_StandardsAndTechs\06_InternationalStd\f206_Doc_Info.resx">
+      <DependentUpon>f206_Doc_Info.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\02_StandardsAndTechs\06_InternationalStd\uc206_InternationalStdMain.resx">
       <DependentUpon>uc206_InternationalStdMain.cs</DependentUpon>

@@ -17,5 +17,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._06_InternationalStd
         {
             InitializeComponent();
         }
+
+        private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            f206_Doc_Info doc_Info = new f206_Doc_Info();
+            doc_Info.ShowDialog();
+        }
     }
 }
