@@ -2,6 +2,7 @@
 using DataAccessLayer;
 using DevExpress.XtraEditors;
 using DevExpress.XtraLayout;
+using DevExpress.XtraSplashScreen;
 using KnowledgeSystem.Helpers;
 using System;
 using System.Collections.Generic;
@@ -53,10 +54,24 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._06_InternationalStd
                 item.AllowHtmlStringInCaption = true;
                 item.Text = $"<color=#000000>{item.Text}</color>";
             }
+
+            // Các thông tin phải điền có thêm dấu * màu đỏ
+            foreach (var item in lcImpControls)
+            {
+                if (item.Control.Enabled || (item.Control as BaseEdit).Properties.ReadOnly)
+                {
+                    item.Text += "<color=red>*</color>";
+                }
+                else
+                {
+                    item.Text = item.Text.Replace("<color=red>*</color>", "");
+                }
+            }
         }
 
         private void txbFilePath_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
+
             switch (e.Button.Caption)
             {
                 case "Paste":
@@ -96,9 +111,12 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._06_InternationalStd
                         FilterIndex = 1
                     };
 
-                    if (dialog.ShowDialog() != DialogResult.OK) return;
-                    baseFilePath = dialog.FileName;
-                    txbAtt.Text = Path.GetFileName(baseFilePath);
+                    using (var handle = SplashScreenManager.ShowOverlayForm(this))
+                    {
+                        if (dialog.ShowDialog() != DialogResult.OK) return;
+                        baseFilePath = dialog.FileName;
+                        txbAtt.Text = Path.GetFileName(baseFilePath);
+                    }
 
                     break;
             }

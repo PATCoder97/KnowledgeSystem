@@ -86,11 +86,11 @@ namespace KnowledgeSystem.Views._00_Generals
             var lsPermissions = AppPermission.lsPermissions;
 
             // 2️ Lọc theo quyền được cấp
-            var lsFunctions = (from data in lsAllFunctions
-                               join granted in lsPermissions on data.Id equals granted
-                               select data)
-                              .OrderBy(x => x.Prioritize)
-                              .ToList();
+            lsFunctions = (from data in lsAllFunctions
+                           join granted in lsPermissions on data.Id equals granted
+                           select data)
+                             .OrderBy(x => x.Prioritize)
+                             .ToList();
 
             // 3️ Xây dựng menu Accordion tự động theo cây
             BuildAccordionElements(lsFunctions, fluentControl.Elements, lsPermissions, fontTW14);

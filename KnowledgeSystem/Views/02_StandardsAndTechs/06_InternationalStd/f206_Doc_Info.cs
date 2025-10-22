@@ -337,10 +337,12 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._06_InternationalStd
                         Filter = "PDF Files (*.pdf)|*.pdf",
                         FilterIndex = 1
                     };
-
-                    if (dialog.ShowDialog() != DialogResult.OK) return;
-                    baseFilePath = dialog.FileName;
-                    txbAtt.Text = Path.GetFileName(baseFilePath);
+                    using (var handle = SplashScreenManager.ShowOverlayForm(this))
+                    {
+                        if (dialog.ShowDialog() != DialogResult.OK) return;
+                        baseFilePath = dialog.FileName;
+                        txbAtt.Text = Path.GetFileName(baseFilePath);
+                    }
 
                     break;
             }

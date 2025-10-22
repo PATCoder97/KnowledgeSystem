@@ -42,6 +42,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._06_InternationalStd
         RefreshHelper helper;
         BindingSource sourceBases = new BindingSource();
         string idDept2word = TPConfigs.LoginUser.IdDepartment.Substring(0, 2);
+        bool isManager206 = false;
 
         List<dm_User> users = new List<dm_User>();
 
@@ -62,82 +63,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._06_InternationalStd
             //itemPauseNotify = CreateMenuItem("暫停通知", ItemPauseNotify_Click, TPSvgimages.Suspension);
             //itemViewHistory = CreateMenuItem("版本歷史", ItemViewHistory_Click, TPSvgimages.Progress);
         }
-
-        //private void ItemViewHistory_Click(object sender, EventArgs e)
-        //{
-        //    GridView view = gvData;
-        //    int idBase = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColId));
-
-        //    f204_OldVersions oldVersions = new f204_OldVersions() { idBase = idBase };
-        //    oldVersions.ShowDialog();
-        //}
-
-        //private void ItemPauseNotify_Click(object sender, EventArgs e)
-        //{
-        //    var result = XtraInputBox.Show(new XtraInputBoxArgs
-        //    {
-        //        Caption = TPConfigs.SoftNameTW,
-        //        Prompt = "請輸入需要停止通知的月數",
-        //        DefaultButtonIndex = 0,
-        //        Editor = new TextEdit
-        //        {
-        //            Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F),
-        //            Properties = { Mask = { MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric, EditMask = "d", UseMaskAsDisplayFormat = true } }
-        //        },
-        //        DefaultResponse = ""
-        //    })?.ToString().ToUpper();
-
-        //    if (string.IsNullOrEmpty(result)) return;
-
-        //    int pauseMonth = Convert.ToInt16(result);
-        //    GridView view = gvData;
-        //    int idBase = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColId));
-
-        //    var dataPause = dt204_InternalDocMgmtBUS.Instance.GetItemById(idBase);
-        //    dataPause.PauseNotify = pauseMonth;
-        //    dt204_InternalDocMgmtBUS.Instance.AddOrUpdate(dataPause);
-
-        //    LoadData();
-        //}
-
-        //private void ItemGetFile_Click(object sender, EventArgs e)
-        //{
-        //    int idAttGet = -1;
-        //    if (sender is DXMenuItem menuItem && menuItem.Tag is string nameGridView)
-        //    {
-        //        switch (nameGridView)
-        //        {
-        //            case "gvData":
-
-        //                int focusedRowHandle = gvData.FocusedRowHandle;
-        //                var rowData = gvData.GetRow(focusedRowHandle);
-        //                dt204_InternalDocMgmt data = ((dynamic)gvData.GetRow(focusedRowHandle)).data as dt204_InternalDocMgmt;
-        //                idAttGet = data.IdAtt;
-
-        //                break;
-        //            case "gvForm":
-
-        //                GridView view = gvData.GetDetailView(gvData.FocusedRowHandle, 0) as GridView;
-        //                idAttGet = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColIdAttForm));
-
-        //                break;
-        //        }
-
-        //        var att = dm_AttachmentBUS.Instance.GetItemById(idAttGet);
-        //        string filePath = att.EncryptionName;
-        //        string actualName = $"{Path.GetFileNameWithoutExtension(att.ActualName)}-{DateTime.Now:HHmmss}{Path.GetExtension(att.ActualName)}";
-
-        //        SaveFileDialog dialog = new SaveFileDialog();
-        //        dialog.FileName = actualName;
-        //        if (dialog.ShowDialog() != DialogResult.OK) return;
-
-        //        string sourcePath = Path.Combine(TPConfigs.Folder204, filePath);
-        //        string destPath = dialog.FileName;
-
-        //        File.Copy(sourcePath, destPath, true);
-        //        MsgTP.MsgShowInfomation($"<font='Microsoft JhengHei UI' size=14>下載完成!</font>");
-        //    }
-        //}
 
         private void ItemUpdateVer_Click(object sender, EventArgs e)
         {
@@ -269,6 +194,17 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._06_InternationalStd
             gvForm.ReadOnlyGridView();
             gvForm.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
 
+            // Kiểm tra quyền từng ke để có quyền truy cập theo nhóm
+            var userGroups = dm_GroupUserBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id);
+            var departments = dm_DeptBUS.Instance.GetList();
+            var manager206grps = dm_GroupBUS.Instance.GetListByName("國際規範");
+            isManager206 = manager206grps.Any(group => userGroups.Any(userGroup => userGroup.IdGroup == group.Id));
+
+            if (!isManager206)
+            {
+                btnAdd.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            }
+
             LoadData();
             CreateRuleGV();
             gcData.DataSource = sourceBases;
@@ -278,8 +214,14 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._06_InternationalStd
 
         private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            f206_Doc_Info doc_Info = new f206_Doc_Info();
-            doc_Info.ShowDialog();
+            f206_Doc_Info fInfo = new f206_Doc_Info()
+            {
+                eventInfo = EventFormInfo.Create,
+                formName = "規範"
+            };
+            fInfo.ShowDialog();
+
+            LoadData();
         }
 
         private void gvData_DoubleClick(object sender, EventArgs e)
@@ -348,7 +290,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._06_InternationalStd
 
         private void gvData_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
         {
-            if (e.HitInfo.InRowCell && e.HitInfo.InDataRow)
+            if (e.HitInfo.InRowCell && e.HitInfo.InDataRow && isManager206)
             {
                 e.Menu.Items.Add(itemViewInfo);
                 e.Menu.Items.Add(itemUpdateVer);

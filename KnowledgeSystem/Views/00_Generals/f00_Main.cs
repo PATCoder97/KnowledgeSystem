@@ -298,5 +298,10 @@ namespace KnowledgeSystem.Views._00_Generals
         {
             ShowFromByFrame(AppPermission.SparePart, e);
         }
+
+        private void btnInternationalStd_ItemClick(object sender, TileItemEventArgs e)
+        {
+            ShowFromByFrame(AppPermission.InternationalStd, e);
+        }
     }
 }

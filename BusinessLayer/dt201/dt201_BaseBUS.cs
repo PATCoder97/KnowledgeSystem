@@ -216,7 +216,6 @@ namespace BusinessLayer
                     var entity = _context.dt201_Base.FirstOrDefault(r => r.Id == Id);
                     entity.IsDel = true;
                     _context.dt201_Base.AddOrUpdate(entity);
-                    _context.SaveChanges();
 
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;

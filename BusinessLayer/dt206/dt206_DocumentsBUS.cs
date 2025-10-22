@@ -120,7 +120,6 @@ namespace BusinessLayer
                     entity.RemoveAt = DateTime.Now;
                     entity.RemoveBy = userRemove;
                     _context.dt206_Documents.AddOrUpdate(entity);
-                    _context.SaveChanges();
 
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;

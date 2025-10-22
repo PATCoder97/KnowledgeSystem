@@ -100,6 +100,7 @@ namespace KnowledgeSystem.Helpers
             AppPermission.SoftManual = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleSoftManual")?.ValueT ?? "-1");
             AppPermission.ContractMgmt = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleContractMgmt")?.ValueT ?? "-1");
             AppPermission.SparePart = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleSparePart")?.ValueT ?? "-1");
+            AppPermission.InternationalStd = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "RoleInternationalStd")?.ValueT ?? "-1");
 
             AppPermission.ChangeUser304 = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "Role304ChangeUser")?.ValueT ?? "-1");
             AppPermission.EditInfo306 = Convert.ToInt16(lsStaticValue.FirstOrDefault(r => r.KeyT == "Role306EditInfo")?.ValueT ?? "-1");

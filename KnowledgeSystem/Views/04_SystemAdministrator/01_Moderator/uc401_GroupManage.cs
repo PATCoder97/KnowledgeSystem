@@ -45,9 +45,11 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
         private void f401_GroupManage_Load(object sender, EventArgs e)
         {
             gvData.ReadOnlyGridView();
+            gvData.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
 
             gcData.DataSource = sourceGroup;
             helper = new RefreshHelper(gvData, "Id");
+
             LoadGroup();
         }
 
