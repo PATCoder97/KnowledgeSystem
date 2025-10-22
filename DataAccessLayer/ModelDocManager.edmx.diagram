@@ -103,6 +103,10 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt309_Machines" Width="1.5" PointX="2.125" PointY="44.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt205_Base" Width="1.5" PointX="0.5" PointY="53.625" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt205_Form" Width="1.5" PointX="2.125" PointY="53.625" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt206_DocCategories" Width="1.5" PointX="10.25" PointY="53.5" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt206_Documents" Width="1.5" PointX="7" PointY="53.5" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt206_DocUseFor" Width="1.5" PointX="11.875" PointY="53.5" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt206_DocVersions" Width="1.5" PointX="8.625" PointY="53.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -437,6 +437,49 @@
           <Property Name="RemoveAt" Type="datetime" />
           <Property Name="RemoveBy" Type="varchar" MaxLength="16" />
         </EntityType>
+        <EntityType Name="dt206_DocCategories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="dt206_Documents">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdDept" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="IdCategory" Type="int" Nullable="false" />
+          <Property Name="IdUseFor" Type="int" />
+          <Property Name="DocumentCode" Type="nvarchar" MaxLength="20" />
+          <Property Name="DisplayNameVN" Type="nvarchar" MaxLength="512" />
+          <Property Name="DisplayNameZH" Type="nvarchar" MaxLength="512" />
+          <Property Name="DisplayNameEN" Type="nvarchar" MaxLength="512" />
+          <Property Name="HasCopyright" Type="bit" />
+          <Property Name="VersionNo" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="IdAttachment" Type="int" Nullable="false" />
+          <Property Name="CreateAt" Type="datetime" Nullable="false" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="RemoveAt" Type="datetime" />
+          <Property Name="RemoveBy" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="dt206_DocUseFor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="dt206_DocVersions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdDocument" Type="int" />
+          <Property Name="VersionNo" Type="varchar" MaxLength="20" />
+          <Property Name="IdAttachment" Type="int" />
+        </EntityType>
         <EntityType Name="dt207_Attachment">
           <Key>
             <PropertyRef Name="Id" />
@@ -1150,6 +1193,10 @@
           <EntitySet Name="dt204_RelatedDoc" EntityType="Self.dt204_RelatedDoc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt205_Base" EntityType="Self.dt205_Base" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt205_Form" EntityType="Self.dt205_Form" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt206_DocCategories" EntityType="Self.dt206_DocCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt206_Documents" EntityType="Self.dt206_Documents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt206_DocUseFor" EntityType="Self.dt206_DocUseFor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt206_DocVersions" EntityType="Self.dt206_DocVersions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt207_Attachment" EntityType="Self.dt207_Attachment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt207_Attachment_BAK" EntityType="Self.dt207_Attachment_BAK" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt207_Base" EntityType="Self.dt207_Base" Schema="dbo" store:Type="Tables" />
@@ -1314,6 +1361,10 @@
           <EntitySet Name="dt309_Machines" EntityType="DBDocumentManagementSystemModel.dt309_Machines" />
           <EntitySet Name="dt205_Base" EntityType="DBDocumentManagementSystemModel.dt205_Base" />
           <EntitySet Name="dt205_Form" EntityType="DBDocumentManagementSystemModel.dt205_Form" />
+          <EntitySet Name="dt206_DocCategories" EntityType="DBDocumentManagementSystemModel.dt206_DocCategories" />
+          <EntitySet Name="dt206_Documents" EntityType="DBDocumentManagementSystemModel.dt206_Documents" />
+          <EntitySet Name="dt206_DocUseFor" EntityType="DBDocumentManagementSystemModel.dt206_DocUseFor" />
+          <EntitySet Name="dt206_DocVersions" EntityType="DBDocumentManagementSystemModel.dt206_DocVersions" />
         </EntityContainer>
         <EntityType Name="dm_Function">
           <Key>
@@ -2420,6 +2471,49 @@
           <Property Name="Note" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="RemoveAt" Type="DateTime" Precision="3" />
           <Property Name="RemoveBy" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="dt206_DocCategories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="DisplayName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dt206_Documents">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdDept" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="IdCategory" Type="Int32" Nullable="false" />
+          <Property Name="IdUseFor" Type="Int32" />
+          <Property Name="DocumentCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayNameVN" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayNameZH" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayNameEN" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="HasCopyright" Type="Boolean" />
+          <Property Name="VersionNo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdAttachment" Type="Int32" Nullable="false" />
+          <Property Name="CreateAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreateBy" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="RemoveAt" Type="DateTime" Precision="3" />
+          <Property Name="RemoveBy" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="dt206_DocUseFor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="DisplayName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dt206_DocVersions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdDocument" Type="Int32" />
+          <Property Name="VersionNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdAttachment" Type="Int32" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -3627,6 +3721,53 @@
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="BaseId" ColumnName="BaseId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt206_DocCategories">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt206_DocCategories">
+              <MappingFragment StoreEntitySet="dt206_DocCategories">
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt206_Documents">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt206_Documents">
+              <MappingFragment StoreEntitySet="dt206_Documents">
+                <ScalarProperty Name="RemoveBy" ColumnName="RemoveBy" />
+                <ScalarProperty Name="RemoveAt" ColumnName="RemoveAt" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
+                <ScalarProperty Name="IdAttachment" ColumnName="IdAttachment" />
+                <ScalarProperty Name="VersionNo" ColumnName="VersionNo" />
+                <ScalarProperty Name="HasCopyright" ColumnName="HasCopyright" />
+                <ScalarProperty Name="DisplayNameEN" ColumnName="DisplayNameEN" />
+                <ScalarProperty Name="DisplayNameZH" ColumnName="DisplayNameZH" />
+                <ScalarProperty Name="DisplayNameVN" ColumnName="DisplayNameVN" />
+                <ScalarProperty Name="DocumentCode" ColumnName="DocumentCode" />
+                <ScalarProperty Name="IdUseFor" ColumnName="IdUseFor" />
+                <ScalarProperty Name="IdCategory" ColumnName="IdCategory" />
+                <ScalarProperty Name="IdDept" ColumnName="IdDept" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt206_DocUseFor">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt206_DocUseFor">
+              <MappingFragment StoreEntitySet="dt206_DocUseFor">
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt206_DocVersions">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt206_DocVersions">
+              <MappingFragment StoreEntitySet="dt206_DocVersions">
+                <ScalarProperty Name="IdAttachment" ColumnName="IdAttachment" />
+                <ScalarProperty Name="VersionNo" ColumnName="VersionNo" />
+                <ScalarProperty Name="IdDocument" ColumnName="IdDocument" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
