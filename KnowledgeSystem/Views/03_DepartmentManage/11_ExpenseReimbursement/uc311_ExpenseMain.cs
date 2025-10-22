@@ -545,5 +545,45 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                 e.Menu.Items.Add(itemERP03);
             }
         }
+
+        private void btnGetManagerVehicle_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            // Hiển thị overlay loading
+            var handle = SplashScreenManager.ShowOverlayForm(this);
+
+            // Chạy công việc nặng trong Task riêng để không khóa UI
+            Task.Run(async () =>
+            {
+                try
+                {
+                    var vehicles = dt311_VehicleManagementBUS.Instance.GetList();
+
+                    foreach (var item in vehicles)
+                    {
+                        string managerID = await BorrVehicleHelper.Instance.GetManagerVehicle(item.LicensePlate);
+                        item.ManagerId = managerID;
+
+                        dt311_VehicleManagementBUS.Instance.AddOrUpdate(item);
+                    }
+
+                    // Có thể hiển thị thông báo sau khi hoàn tất
+                    XtraMessageBox.Show("Cập nhật thông tin người quản lý xe hoàn tất!", "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show($"Lỗi khi lấy thông tin: {ex.Message}", "Lỗi",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    // Đóng overlay form an toàn (phải gọi từ UI thread)
+                    if (handle != null)
+                    {
+                        this.Invoke(new Action(() => SplashScreenManager.CloseOverlayForm(handle)));
+                    }
+                }
+            });
+        }
     }
 }

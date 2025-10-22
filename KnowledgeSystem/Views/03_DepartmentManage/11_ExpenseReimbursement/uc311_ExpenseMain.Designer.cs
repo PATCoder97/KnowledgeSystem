@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc311_ExpenseMain));
             this.gvDetail = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -54,6 +54,9 @@
             this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn26 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn27 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemMemoEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit();
             this.gvSession = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gColIdDetail = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -67,6 +70,7 @@
             this.btnAdd = new DevExpress.XtraBars.BarButtonItem();
             this.btnReload = new DevExpress.XtraBars.BarButtonItem();
             this.btnSummaryTable = new DevExpress.XtraBars.BarButtonItem();
+            this.btnGetManagerVehicle = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -74,9 +78,6 @@
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn26 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn27 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gvDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
@@ -182,6 +183,8 @@
             // gridColumn21
             // 
             this.gridColumn21.Caption = "金額";
+            this.gridColumn21.DisplayFormat.FormatString = "#,##0.##";
+            this.gridColumn21.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.gridColumn21.FieldName = "Amount";
             this.gridColumn21.Name = "gridColumn21";
             this.gridColumn21.Visible = true;
@@ -220,10 +223,10 @@
             this.gcData.EmbeddedNavigator.Buttons.Edit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.EndEdit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.Remove.Visible = false;
-            gridLevelNode1.LevelTemplate = this.gvDetail;
-            gridLevelNode1.RelationName = "Detail";
+            gridLevelNode2.LevelTemplate = this.gvDetail;
+            gridLevelNode2.RelationName = "Detail";
             this.gcData.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode1});
+            gridLevelNode2});
             this.gcData.Location = new System.Drawing.Point(12, 12);
             this.gcData.MainView = this.gvData;
             this.gcData.Name = "gcData";
@@ -371,6 +374,30 @@
             this.gridColumn16.Visible = true;
             this.gridColumn16.VisibleIndex = 9;
             // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "車牌號碼";
+            this.gridColumn1.FieldName = "data.LicensePlate";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 10;
+            // 
+            // gridColumn26
+            // 
+            this.gridColumn26.Caption = "里程數";
+            this.gridColumn26.FieldName = "data.OdometerReading";
+            this.gridColumn26.Name = "gridColumn26";
+            this.gridColumn26.Visible = true;
+            this.gridColumn26.VisibleIndex = 11;
+            // 
+            // gridColumn27
+            // 
+            this.gridColumn27.Caption = "加油人員";
+            this.gridColumn27.FieldName = "data.FuelFilledBy";
+            this.gridColumn27.Name = "gridColumn27";
+            this.gridColumn27.Visible = true;
+            this.gridColumn27.VisibleIndex = 12;
+            // 
             // repositoryItemMemoEdit1
             // 
             this.repositoryItemMemoEdit1.Name = "repositoryItemMemoEdit1";
@@ -465,9 +492,10 @@
             this.barManagerTP.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.btnAdd,
             this.btnReload,
-            this.btnSummaryTable});
+            this.btnSummaryTable,
+            this.btnGetManagerVehicle});
             this.barManagerTP.MainMenu = this.bar2;
-            this.barManagerTP.MaxItemId = 15;
+            this.barManagerTP.MaxItemId = 16;
             // 
             // bar2
             // 
@@ -493,7 +521,8 @@
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnAdd, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnReload, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnSummaryTable, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnSummaryTable, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnGetManagerVehicle, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawDragBorder = false;
             this.bar2.OptionsBar.MultiLine = true;
@@ -535,6 +564,14 @@
             this.btnSummaryTable.Id = 14;
             this.btnSummaryTable.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnSummaryTable.Name = "btnSummaryTable";
+            // 
+            // btnGetManagerVehicle
+            // 
+            this.btnGetManagerVehicle.Caption = "取得管理車輛";
+            this.btnGetManagerVehicle.Id = 15;
+            this.btnGetManagerVehicle.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnGetManagerVehicle.Name = "btnGetManagerVehicle";
+            this.btnGetManagerVehicle.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnGetManagerVehicle_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -597,30 +634,6 @@
             this.layoutControlItem1.Size = new System.Drawing.Size(1296, 538);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
-            // 
-            // gridColumn1
-            // 
-            this.gridColumn1.Caption = "車牌號碼";
-            this.gridColumn1.FieldName = "data.LicensePlate";
-            this.gridColumn1.Name = "gridColumn1";
-            this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 10;
-            // 
-            // gridColumn26
-            // 
-            this.gridColumn26.Caption = "里程數";
-            this.gridColumn26.FieldName = "data.OdometerReading";
-            this.gridColumn26.Name = "gridColumn26";
-            this.gridColumn26.Visible = true;
-            this.gridColumn26.VisibleIndex = 11;
-            // 
-            // gridColumn27
-            // 
-            this.gridColumn27.Caption = "加油人員";
-            this.gridColumn27.FieldName = "data.FuelFilledBy";
-            this.gridColumn27.Name = "gridColumn27";
-            this.gridColumn27.Visible = true;
-            this.gridColumn27.VisibleIndex = 12;
             // 
             // uc311_ExpenseMain
             // 
@@ -697,5 +710,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn26;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn27;
+        private DevExpress.XtraBars.BarButtonItem btnGetManagerVehicle;
     }
 }
