@@ -61,7 +61,7 @@ namespace KnowledgeSystem.Views._00_Generals
             this.btnISOAuditDocs = new DevExpress.XtraEditors.TileItem();
             this.btnTechnicalProjects = new DevExpress.XtraEditors.TileItem();
             this.btnJFEnCSC = new DevExpress.XtraEditors.TileItem();
-            this.tileItem8 = new DevExpress.XtraEditors.TileItem();
+            this.btnInternationalStd = new DevExpress.XtraEditors.TileItem();
             this.tileItem9 = new DevExpress.XtraEditors.TileItem();
             this.tileItem10 = new DevExpress.XtraEditors.TileItem();
             this.btnKnowHow = new DevExpress.XtraEditors.TileItem();
@@ -127,7 +127,6 @@ namespace KnowledgeSystem.Views._00_Generals
             this.tileMain.MaxId = 27;
             this.tileMain.Name = "tileMain";
             this.tileMain.Padding = new System.Windows.Forms.Padding(24, 22, 24, 22);
-            this.tileMain.Position = 1052;
             this.tileMain.ShowGroupText = true;
             this.tileMain.Size = new System.Drawing.Size(1180, 599);
             this.tileMain.TabIndex = 4;
@@ -177,7 +176,7 @@ namespace KnowledgeSystem.Views._00_Generals
             this.tileGroup3.Items.Add(this.btnISOAuditDocs);
             this.tileGroup3.Items.Add(this.btnTechnicalProjects);
             this.tileGroup3.Items.Add(this.btnJFEnCSC);
-            this.tileGroup3.Items.Add(this.tileItem8);
+            this.tileGroup3.Items.Add(this.btnInternationalStd);
             this.tileGroup3.Items.Add(this.tileItem9);
             this.tileGroup3.Items.Add(this.tileItem10);
             this.tileGroup3.Items.Add(this.btnKnowHow);
@@ -226,15 +225,18 @@ namespace KnowledgeSystem.Views._00_Generals
             this.btnJFEnCSC.Name = "btnJFEnCSC";
             this.btnJFEnCSC.ItemClick += new DevExpress.XtraEditors.TileItemClickEventHandler(this.btnJFEnCSC_ItemClick);
             // 
-            // tileItem8
+            // btnInternationalStd
             // 
-            this.tileItem8.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
-            this.tileItem8.AppearanceItem.Normal.Options.UseFont = true;
+            this.btnInternationalStd.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(110)))), ((int)(((byte)(190)))));
+            this.btnInternationalStd.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
+            this.btnInternationalStd.AppearanceItem.Normal.Options.UseBackColor = true;
+            this.btnInternationalStd.AppearanceItem.Normal.Options.UseFont = true;
             tileItemElement7.Text = "國際規範";
-            this.tileItem8.Elements.Add(tileItemElement7);
-            this.tileItem8.Id = 12;
-            this.tileItem8.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
-            this.tileItem8.Name = "tileItem8";
+            this.btnInternationalStd.Elements.Add(tileItemElement7);
+            this.btnInternationalStd.Id = 12;
+            this.btnInternationalStd.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
+            this.btnInternationalStd.Name = "btnInternationalStd";
+            this.btnInternationalStd.ItemClick += new DevExpress.XtraEditors.TileItemClickEventHandler(this.btnInternationalStd_ItemClick);
             // 
             // tileItem9
             // 
@@ -495,7 +497,7 @@ namespace KnowledgeSystem.Views._00_Generals
         private DevExpress.XtraEditors.TileItem btnTechnicalProjects;
         private DevExpress.XtraEditors.TileItem btnWorkManagement;
         private DevExpress.XtraEditors.TileItem btnJFEnCSC;
-        private DevExpress.XtraEditors.TileItem tileItem8;
+        private DevExpress.XtraEditors.TileItem btnInternationalStd;
         private DevExpress.XtraEditors.TileItem tileItem9;
         private DevExpress.XtraEditors.TileItem tileItem10;
         private DevExpress.XtraEditors.TileItem btnKnowHow;
