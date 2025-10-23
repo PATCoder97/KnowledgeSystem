@@ -418,6 +418,7 @@
           <Property Name="Confidential" Type="bit" Nullable="false" />
           <Property Name="CreateDate" Type="date" />
           <Property Name="NotifyCycle" Type="int" />
+          <Property Name="PreAlertMonths" Type="int" />
           <Property Name="IsFinalNode" Type="bit" Nullable="false" />
           <Property Name="RemoveAt" Type="datetime" />
           <Property Name="RemoveBy" Type="varchar" MaxLength="16" />
@@ -1359,12 +1360,12 @@
           <EntitySet Name="dt307_InterviewReport" EntityType="DBDocumentManagementSystemModel.dt307_InterviewReport" />
           <EntitySet Name="dt307_InterviewScore" EntityType="DBDocumentManagementSystemModel.dt307_InterviewScore" />
           <EntitySet Name="dt309_Machines" EntityType="DBDocumentManagementSystemModel.dt309_Machines" />
-          <EntitySet Name="dt205_Base" EntityType="DBDocumentManagementSystemModel.dt205_Base" />
           <EntitySet Name="dt205_Form" EntityType="DBDocumentManagementSystemModel.dt205_Form" />
           <EntitySet Name="dt206_DocCategories" EntityType="DBDocumentManagementSystemModel.dt206_DocCategories" />
           <EntitySet Name="dt206_Documents" EntityType="DBDocumentManagementSystemModel.dt206_Documents" />
           <EntitySet Name="dt206_DocUseFor" EntityType="DBDocumentManagementSystemModel.dt206_DocUseFor" />
           <EntitySet Name="dt206_DocVersions" EntityType="DBDocumentManagementSystemModel.dt206_DocVersions" />
+          <EntitySet Name="dt205_Base" EntityType="DBDocumentManagementSystemModel.dt205_Base" />
         </EntityContainer>
         <EntityType Name="dm_Function">
           <Key>
@@ -2439,24 +2440,6 @@
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="ImpLevel" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="dt205_Base">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdParent" Type="Int32" Nullable="false" />
-          <Property Name="IdDept" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
-          <Property Name="DisplayNameVN" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-          <Property Name="DisplayNameEN" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-          <Property Name="DocType" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Name="Confidential" Type="Boolean" Nullable="false" />
-          <Property Name="CreateDate" Type="DateTime" Precision="0" />
-          <Property Name="NotifyCycle" Type="Int32" />
-          <Property Name="IsFinalNode" Type="Boolean" Nullable="false" />
-          <Property Name="RemoveAt" Type="DateTime" Precision="3" />
-          <Property Name="RemoveBy" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="dt205_Form">
           <Key>
             <PropertyRef Name="Id" />
@@ -2514,6 +2497,25 @@
           <Property Name="IdDocument" Type="Int32" />
           <Property Name="VersionNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="IdAttachment" Type="Int32" />
+        </EntityType>
+        <EntityType Name="dt205_Base">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdParent" Type="Int32" Nullable="false" />
+          <Property Name="IdDept" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayNameVN" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayNameEN" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="DocType" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="Confidential" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="0" />
+          <Property Name="NotifyCycle" Type="Int32" />
+          <Property Name="PreAlertMonths" Type="Int32" />
+          <Property Name="IsFinalNode" Type="Boolean" Nullable="false" />
+          <Property Name="RemoveAt" Type="DateTime" Precision="3" />
+          <Property Name="RemoveBy" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -3690,25 +3692,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dt205_Base">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt205_Base">
-              <MappingFragment StoreEntitySet="dt205_Base">
-                <ScalarProperty Name="RemoveBy" ColumnName="RemoveBy" />
-                <ScalarProperty Name="RemoveAt" ColumnName="RemoveAt" />
-                <ScalarProperty Name="IsFinalNode" ColumnName="IsFinalNode" />
-                <ScalarProperty Name="NotifyCycle" ColumnName="NotifyCycle" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="Confidential" ColumnName="Confidential" />
-                <ScalarProperty Name="DocType" ColumnName="DocType" />
-                <ScalarProperty Name="DisplayNameEN" ColumnName="DisplayNameEN" />
-                <ScalarProperty Name="DisplayNameVN" ColumnName="DisplayNameVN" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="IdDept" ColumnName="IdDept" />
-                <ScalarProperty Name="IdParent" ColumnName="IdParent" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="dt205_Form">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt205_Form">
               <MappingFragment StoreEntitySet="dt205_Form">
@@ -3768,6 +3751,26 @@
                 <ScalarProperty Name="IdAttachment" ColumnName="IdAttachment" />
                 <ScalarProperty Name="VersionNo" ColumnName="VersionNo" />
                 <ScalarProperty Name="IdDocument" ColumnName="IdDocument" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt205_Base">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt205_Base">
+              <MappingFragment StoreEntitySet="dt205_Base">
+                <ScalarProperty Name="RemoveBy" ColumnName="RemoveBy" />
+                <ScalarProperty Name="RemoveAt" ColumnName="RemoveAt" />
+                <ScalarProperty Name="IsFinalNode" ColumnName="IsFinalNode" />
+                <ScalarProperty Name="PreAlertMonths" ColumnName="PreAlertMonths" />
+                <ScalarProperty Name="NotifyCycle" ColumnName="NotifyCycle" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Confidential" ColumnName="Confidential" />
+                <ScalarProperty Name="DocType" ColumnName="DocType" />
+                <ScalarProperty Name="DisplayNameEN" ColumnName="DisplayNameEN" />
+                <ScalarProperty Name="DisplayNameVN" ColumnName="DisplayNameVN" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="IdDept" ColumnName="IdDept" />
+                <ScalarProperty Name="IdParent" ColumnName="IdParent" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

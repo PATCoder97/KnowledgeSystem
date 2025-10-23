@@ -303,9 +303,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
             LoadData();
         }
 
-        // Thêm Node
-
-
         private void LoadData()
         {
             using (var handle = SplashScreenManager.ShowOverlayForm(tlsData))
@@ -327,11 +324,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
                 tlsData.RefreshDataSource();
                 tlsData.Refresh();
                 tlsData.BestFitColumns();
-
-                //tlsColDept.Visible = deptsChecked.Count > 1;
             }
         }
-
 
         private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {

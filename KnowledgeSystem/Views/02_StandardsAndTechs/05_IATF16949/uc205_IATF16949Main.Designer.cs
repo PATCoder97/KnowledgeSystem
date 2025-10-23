@@ -55,6 +55,7 @@
             this.treeListColumn3 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.treeListColumn10 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.treeListColumn11 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.treeListColumn12 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
@@ -241,7 +242,8 @@
             this.treeListColumn9,
             this.treeListColumn3,
             this.treeListColumn10,
-            this.treeListColumn11});
+            this.treeListColumn11,
+            this.treeListColumn12});
             this.tlsData.CustomizationFormBounds = new System.Drawing.Rectangle(721, 290, 264, 400);
             this.tlsData.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tlsData.KeyFieldName = "";
@@ -306,11 +308,9 @@
             // 
             this.tlsColDept.AppearanceCell.Options.UseTextOptions = true;
             this.tlsColDept.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.tlsColDept.Caption = "實驗室";
+            this.tlsColDept.Caption = "單位";
             this.tlsColDept.FieldName = "IdDept";
             this.tlsColDept.Name = "tlsColDept";
-            this.tlsColDept.Visible = true;
-            this.tlsColDept.VisibleIndex = 7;
             // 
             // treeListColumn4
             // 
@@ -370,6 +370,16 @@
             this.treeListColumn11.UnboundDataType = typeof(string);
             this.treeListColumn11.Visible = true;
             this.treeListColumn11.VisibleIndex = 4;
+            // 
+            // treeListColumn12
+            // 
+            this.treeListColumn12.AppearanceCell.Options.UseTextOptions = true;
+            this.treeListColumn12.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.treeListColumn12.Caption = "提醒月數";
+            this.treeListColumn12.FieldName = "PreAlertMonths";
+            this.treeListColumn12.Name = "treeListColumn12";
+            this.treeListColumn12.Visible = true;
+            this.treeListColumn12.VisibleIndex = 7;
             // 
             // Root
             // 
@@ -443,5 +453,6 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn1;
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn11;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn12;
     }
 }

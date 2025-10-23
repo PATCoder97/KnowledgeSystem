@@ -53,6 +53,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
         private void EnabledController(bool _enable = true)
         {
             txbNotifyCycle.Enabled = _enable;
+            txbPreAlertMonths.Enabled = _enable;
             cbbDept.Enabled = _enable;
             txbCreateDate.Enabled = _enable;
             cbbClass.Enabled = _enable;
@@ -65,6 +66,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
             {
                 txbCreateDate.Enabled = false;
                 txbNotifyCycle.Enabled = false;
+                txbPreAlertMonths.Enabled = false;
             }
         }
 
@@ -137,8 +139,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
 
         private void f205_Node_Info_Load(object sender, EventArgs e)
         {
-            lcControls = new List<LayoutControlItem>() { lcDept, lcClass, lcDisplayName, lcDisplayNameVN, lcDisplayNameEN, lcNotifyCycle, lcCreateDate };
-            lcImpControls = new List<LayoutControlItem>() { lcClass, lcDisplayName, lcDisplayNameVN, lcDisplayNameEN, lcCreateDate, lcNotifyCycle };
+            lcControls = new List<LayoutControlItem>() { lcDept, lcClass, lcDisplayName, lcDisplayNameVN, lcDisplayNameEN, lcNotifyCycle, lcCreateDate, lcPreAlertMonths };
+            lcImpControls = new List<LayoutControlItem>() { lcClass, lcDisplayName, lcDisplayNameVN, lcDisplayNameEN, lcCreateDate, lcNotifyCycle, lcPreAlertMonths };
 
             foreach (var item in lcControls)
             {
@@ -173,6 +175,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
                     txbDisplayNameEN.EditValue = baseDoc.DisplayNameEN;
                     txbCreateDate.EditValue = baseDoc.CreateDate;
                     txbNotifyCycle.EditValue = baseDoc.NotifyCycle;
+                    txbPreAlertMonths.EditValue = baseDoc.PreAlertMonths;
 
                     break;
                 case EventFormInfo.Update:
@@ -230,6 +233,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
             string docType = cbbClass.Text.Trim();
             DateTime? createDate = txbCreateDate.EditValue as DateTime?;
             int? periodNotify = txbNotifyCycle.EditValue as int?;
+            int? preAlertMonths = txbPreAlertMonths.EditValue as int?;
             bool confidential = ckConfidential.CheckState == CheckState.Checked;
 
             if (StringHelper.CheckUpcase(displayNameVN, 33) && displayNameVN.Length > 20)
@@ -249,6 +253,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
                 baseDoc.CreateDate = createDate;
                 baseDoc.Confidential = confidential;
                 baseDoc.NotifyCycle = periodNotify;
+                baseDoc.PreAlertMonths = preAlertMonths;
 
                 switch (eventInfo)
                 {
