@@ -40,6 +40,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
         BindingSource sourceData = new BindingSource();
         List<dm_Group> groups;
         List<dm_Departments> depts;
+        bool isManager205 = false;
 
         DXMenuItem itemAddNode;
         DXMenuItem itemEditNode;
@@ -309,6 +310,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
             {
                 baseDatas = dt205_BaseBUS.Instance.GetList();
 
+                var displayDatas = (from data in baseDatas
+                                    where isManager205 ? true : data.Confidential != true
+                                    select data).ToList();
+
                 //var deptsChecked = cbbDepts.Items.Where(r => r.CheckState == CheckState.Checked).Select(r => r.Value).ToList();
                 //var records = dt201_RecordCodeBUS.Instance.GetList();
 
@@ -319,7 +324,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
                 //              where deptsChecked.Contains(data.IdDept)
                 //              select new { data, dept, record }).ToList();
 
-                sourceData.DataSource = baseDatas;
+                sourceData.DataSource = displayDatas;
 
                 tlsData.RefreshDataSource();
                 tlsData.Refresh();
@@ -348,13 +353,14 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
             tlsData.ReadOnlyTreelist();
             tlsData.KeyDown += GridControlHelper.TreeViewCopyCellData_KeyDown;
 
-            var grpUsrs = dm_GroupUserBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id);
-
+            // Kiểm tra quyền từng ke để có quyền truy cập theo nhóm
+            var userGroups = dm_GroupUserBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id);
             depts = dm_DeptBUS.Instance.GetList();
-            groups = dm_GroupBUS.Instance.GetListByName("ISO組");
+            groups = dm_GroupBUS.Instance.GetListByName("IATF16949");
+            var manager205grps = dm_GroupBUS.Instance.GetListByName("IATF16949【管理】");
 
             groups = (from data in groups
-                      join grp in grpUsrs on data.Id equals grp.IdGroup
+                      join grp in userGroups on data.Id equals grp.IdGroup
                       select data).ToList();
 
             var deptsCbb = (from data in depts
@@ -362,6 +368,15 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
                             select new CheckedListBoxItem() { Description = data.Id, Value = data.Id, CheckState = CheckState.Checked }).ToArray();
 
             cbbDepts.Items.AddRange(deptsCbb);
+
+            isManager205 = manager205grps.Any(group => userGroups.Any(userGroup => userGroup.IdGroup == group.Id));
+
+            cbbDepts.Items.AddRange(deptsCbb);
+
+            if (!isManager205)
+            {
+                btnAdd.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            }
 
             LoadData();
         }
@@ -384,6 +399,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
                 {
                     item.Caption = translated;
                 }
+            }
+
+            if (!isManager205)
+            {
+                return;
             }
 
             // --- Kiểm tra node ---
