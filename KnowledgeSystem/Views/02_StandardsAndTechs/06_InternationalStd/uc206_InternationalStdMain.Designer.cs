@@ -48,7 +48,7 @@
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColDeptId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnAdd = new DevExpress.XtraBars.BarButtonItem();
@@ -173,7 +173,7 @@
             this.gridColumn2,
             this.gridColumn11,
             this.gridColumn10,
-            this.gridColumn8});
+            this.gColDeptId});
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
             this.gvData.OptionsDetail.DetailMode = DevExpress.XtraGrid.Views.Grid.DetailMode.Embedded;
@@ -291,13 +291,13 @@
             this.gridColumn10.Visible = true;
             this.gridColumn10.VisibleIndex = 6;
             // 
-            // gridColumn8
+            // gColDeptId
             // 
-            this.gridColumn8.Caption = "實驗室";
-            this.gridColumn8.FieldName = "data.IdDept";
-            this.gridColumn8.Name = "gridColumn8";
-            this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 9;
+            this.gColDeptId.Caption = "實驗室";
+            this.gColDeptId.FieldName = "data.IdDept";
+            this.gColDeptId.Name = "gColDeptId";
+            this.gColDeptId.Visible = true;
+            this.gColDeptId.VisibleIndex = 9;
             // 
             // barManagerTP
             // 
@@ -526,7 +526,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gColEnterDate;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
+        private DevExpress.XtraGrid.Columns.GridColumn gColDeptId;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;
         private DevExpress.XtraLayout.LayoutControlGroup Root;

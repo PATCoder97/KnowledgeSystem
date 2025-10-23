@@ -3,10 +3,12 @@ using DataAccessLayer;
 using DevExpress.Utils.Menu;
 using DevExpress.Utils.Svg;
 using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using DevExpress.XtraSplashScreen;
+using DocumentFormat.OpenXml.Spreadsheet;
 using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._00_Generals;
 using KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt;
@@ -35,7 +37,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._06_InternationalStd
 
             helper = new RefreshHelper(gvData, "Id");
 
-            Font fontUI12 = new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            System.Drawing.Font fontUI12 = new System.Drawing.Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             DevExpress.Utils.AppearanceObject.DefaultMenuFont = fontUI12;
         }
 
@@ -43,7 +45,10 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._06_InternationalStd
         BindingSource sourceBases = new BindingSource();
         string idDept2word = TPConfigs.LoginUser.IdDepartment.Substring(0, 2);
         bool isManager206 = false;
+        List<string> deptsManager206;
 
+        List<dm_Group> groups;
+        List<dm_Departments> depts;
         List<dm_User> users = new List<dm_User>();
 
         List<dt206_Documents> dt206Bases;
@@ -106,7 +111,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._06_InternationalStd
         void SetMenuItemProperties(DXMenuItem menuItem)
         {
             menuItem.ImageOptions.SvgImageSize = new System.Drawing.Size(24, 24);
-            menuItem.AppearanceHovered.ForeColor = Color.Blue;
+            menuItem.AppearanceHovered.ForeColor = System.Drawing.Color.Blue;
         }
 
         private void InitializeIcon()
@@ -128,7 +133,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._06_InternationalStd
                     Appearance =
                     {
                         BackColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical,
-                        BackColor2 = Color.White,
+                        BackColor2 = System.Drawing.Color.White,
                         Options = { UseBackColor = true }
                     }
                 }
@@ -144,10 +149,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._06_InternationalStd
             {
                 helper.SaveViewInfo();
 
+                var deptsChecked = cbbDepts.Items.Where(r => r.CheckState == CheckState.Checked).Select(r => r.Value).ToList();
                 //var grpUsrs = dm_GroupUserBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id);
 
                 //var depts = dm_DeptBUS.Instance.GetList();
-                //var groups = dm_GroupBUS.Instance.GetListByName("ISO組");
+                //var groups = dm_GroupBUS.Instance.GetListByName("國際規範");
 
                 //var deptAccess = (from data in groups
                 //                  join grp in grpUsrs on data.Id equals grp.IdGroup
@@ -196,9 +202,24 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._06_InternationalStd
 
             // Kiểm tra quyền từng ke để có quyền truy cập theo nhóm
             var userGroups = dm_GroupUserBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id);
-            var departments = dm_DeptBUS.Instance.GetList();
-            var manager206grps = dm_GroupBUS.Instance.GetListByName("國際規範");
+            depts = dm_DeptBUS.Instance.GetList();
+            groups = dm_GroupBUS.Instance.GetListByName("國際規範");
+            var manager206grps = dm_GroupBUS.Instance.GetListByName("國際規範【管理】");
+
+            groups = (from data in groups
+                      join grp in userGroups on data.Id equals grp.IdGroup
+                      select data).ToList();
+
+            var deptsCbb = (from data in depts
+                            join grp in groups on data.Id equals grp.IdDept
+                            select new CheckedListBoxItem() { Description = data.Id, Value = data.Id, CheckState = CheckState.Checked }).ToArray();
+
+            cbbDepts.Items.AddRange(deptsCbb);
+
             isManager206 = manager206grps.Any(group => userGroups.Any(userGroup => userGroup.IdGroup == group.Id));
+            deptsManager206 = (from data in depts
+                               join grp in groups on data.Id equals grp.IdDept
+                               select data.Id).ToList();
 
             if (!isManager206)
             {
@@ -228,7 +249,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._06_InternationalStd
         {
             GridView view = sender as GridView;
 
-            var pt = view.GridControl.PointToClient(Control.MousePosition);
+            var pt = view.GridControl.PointToClient(System.Windows.Forms.Control.MousePosition);
             GridHitInfo hitInfo = view.CalcHitInfo(pt);
             if (!hitInfo.InRowCell) return;
 
@@ -292,8 +313,14 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._06_InternationalStd
         {
             if (e.HitInfo.InRowCell && e.HitInfo.InDataRow && isManager206)
             {
-                e.Menu.Items.Add(itemViewInfo);
-                e.Menu.Items.Add(itemUpdateVer);
+                GridView view = sender as GridView;
+                string idDept = view.GetRowCellValue(view.FocusedRowHandle, gColDeptId).ToString();
+
+                if (deptsManager206.Any(r => r == idDept))
+                {
+                    e.Menu.Items.Add(itemViewInfo);
+                    e.Menu.Items.Add(itemUpdateVer);
+                }
             }
         }
 
@@ -301,7 +328,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._06_InternationalStd
         {
             GridView view = sender as GridView;
 
-            var pt = view.GridControl.PointToClient(Control.MousePosition);
+            var pt = view.GridControl.PointToClient(System.Windows.Forms.Control.MousePosition);
             GridHitInfo hitInfo = view.CalcHitInfo(pt);
             if (!hitInfo.InRowCell) return;
 

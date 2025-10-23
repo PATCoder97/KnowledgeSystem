@@ -47,6 +47,7 @@
             // 
             // barManagerTP
             // 
+            this.barManagerTP.AllowCustomization = false;
             this.barManagerTP.Bars.AddRange(new DevExpress.XtraBars.Bar[] {
             this.bar2});
             this.barManagerTP.DockControls.Add(this.barDockControlTop);

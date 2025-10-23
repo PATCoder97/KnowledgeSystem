@@ -165,12 +165,15 @@ namespace KnowledgeSystem.Views._00_Generals
             TimeSpan loginTimeout = TimeSpan.FromDays(1);
             DateTime now = DateTime.Now;
 
+#if DEBUG
+#else
             if (TPConfigs.LoginUser.LastUpdate <= now - loginTimeout)
             {
                 XtraMessageBox.Show("登入已逾時，請重新開啟應用程式以繼續！", "系統提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Close();
                 return;
             }
+#endif
 
             bool IsGranted = AppPermission.Instance.CheckAppPermission(IdForm_);
             if (!IsGranted)
