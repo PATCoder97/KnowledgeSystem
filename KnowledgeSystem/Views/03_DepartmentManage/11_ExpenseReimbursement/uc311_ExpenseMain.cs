@@ -27,6 +27,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
 {
@@ -50,11 +51,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
         BindingSource sourceData = new BindingSource();
         List<dm_Group> groups;
         List<dm_Departments> depts;
+        List<dt311_SellerBuyer> sellerBuyers;
         private static string idDept2Word = TPConfigs.idDept2word;
 
         DXMenuItem itemERP01;
         DXMenuItem itemERP02;
         DXMenuItem itemERP03;
+        DXMenuItem itemUpdateAddFuel;
 
         DXMenuItem CreateMenuItem(string caption, EventHandler clickEvent, SvgImage svgImage)
         {
@@ -81,6 +84,24 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             itemERP01 = CreateMenuItem("ERP：一般費用發票輸入", ItemERP01_Click, TPSvgimages.Num1);
             itemERP02 = CreateMenuItem("ERP：車輛稅費繳納管理", ItemERP02_Click, TPSvgimages.Num2);
             itemERP03 = CreateMenuItem("ERP：一般費用報銷輸入", ItemERP03_Click, TPSvgimages.Num3);
+            itemUpdateAddFuel = CreateMenuItem("車輛：加油資料", ItemUpdateAddFuel_Click, TPSvgimages.UpLevel);
+        }
+
+        private void ItemUpdateAddFuel_Click(object sender, EventArgs e)
+        {
+            GridView view = gvData;
+            //string typeOfSeller = view.GetRowCellValue(view.FocusedRowHandle, "seller.Type")?.ToString();
+            string idBase = view.GetRowCellValue(view.FocusedRowHandle, "data.TransactionID")?.ToString();
+
+            //if (typeOfSeller != "xang_dau")
+            //    return;
+
+            using (f311_AddFuel_Info fuel_Info = new f311_AddFuel_Info(idBase))
+            {
+                fuel_Info.ShowDialog();
+            }
+
+            LoadData();
         }
 
         private void ItemERP03_Click(object sender, EventArgs e)
@@ -195,14 +216,15 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                 helper.SaveViewInfo();
 
                 invoiceDatas = dt311_InvoiceBUS.Instance.GetList();
-                var sellers = dt311_SellerBuyerBUS.Instance.GetList();
+                sellerBuyers = dt311_SellerBuyerBUS.Instance.GetList();
 
                 var displayDatas = (from data in invoiceDatas
-                                    join seller in sellers on data.SellerTax equals seller.Tax
+                                    join seller in sellerBuyers on data.SellerTax equals seller.Tax
                                     select new
                                     {
                                         data,
-                                        SellerName = seller.DisplayName
+                                        seller,
+                                        SellerName = seller.DisplayName,
                                     }).ToList();
 
                 sourceData.DataSource = displayDatas;
@@ -467,10 +489,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                 using (var handle = SplashScreenManager.ShowOverlayForm(this))
                 {
                     var ok = await ParseInvoiceAsync(transactionId);
-
-                    if (ok)
-                        XtraMessageBox.Show("Hóa đơn đã được thêm thành công!", "Thông báo",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             finally
@@ -543,6 +561,16 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                 e.Menu.Items.Add(itemERP01);
                 e.Menu.Items.Add(itemERP02);
                 e.Menu.Items.Add(itemERP03);
+
+                GridView view = gvData;
+                string typeOfSeller = view.GetRowCellValue(view.FocusedRowHandle, "seller.Type")?.ToString();
+                //string idBase = view.GetRowCellValue(view.FocusedRowHandle, "data.TransactionID")?.ToString();
+
+                if (typeOfSeller == "xang_dau")
+                {
+                    itemUpdateAddFuel.BeginGroup = true;
+                    e.Menu.Items.Add(itemUpdateAddFuel);
+                }
             }
         }
 
@@ -585,5 +613,96 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                 }
             });
         }
+
+        private async void btnGetFillFuel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            // 🔹 Hiển thị overlay loading
+            var overlayHandle = SplashScreenManager.ShowOverlayForm(this);
+
+            try
+            {
+                await Task.Run(async () =>
+                {
+                    // 🔸 Lấy danh sách xe theo bộ phận
+                    var allVehicles = dt311_VehicleManagementBUS.Instance
+                        .GetList()
+                        .Where(v => v.IdDept.StartsWith(idDept2Word))
+                        .ToList();
+
+                    // 🔸 Lấy danh sách hóa đơn từ Grid, lọc theo loại "xăng dầu"
+                    var invoiceList = (
+                        from inv in (sourceData.DataSource as IEnumerable<dynamic>)?.Select(o => (dt311_Invoice)o.data)
+                        join seller in sellerBuyers on inv.SellerTax equals seller.Tax
+                        where seller.Type == "xang_dau"
+                        select inv
+                    ).ToList();
+
+                    if (invoiceList == null || invoiceList.Count == 0)
+                        return;
+
+                    // 🔸 Chuẩn bị danh sách xe cần kiểm tra
+                    var vehicleInfos = allVehicles.Select(v => new VehicleStatus
+                    {
+                        Dept = v.IdDept.Substring(0, 2),
+                        Name = v.LicensePlate
+                    }).ToList();
+
+                    // 🔸 Thu thập thông tin mượn xe (F.加油)
+                    var fuelBorrowInfos = new List<VehicleBorrInfo>();
+
+                    foreach (var vehicleInfo in vehicleInfos)
+                    {
+                        var borrowRecords = new List<VehicleBorrInfo>();
+
+                        borrowRecords.AddRange(await BorrVehicleHelper.Instance.GetBorrMotorUser(vehicleInfo));
+                        borrowRecords.AddRange(await BorrVehicleHelper.Instance.GetBorrCarUser(vehicleInfo));
+
+                        // Lọc "F.加油" và lấy bản ghi mới nhất mỗi ngày
+                        var latestFuelRecords = borrowRecords
+                            .Where(r => !string.IsNullOrEmpty(r.Uses) && r.Uses.StartsWith("F.加油"))
+                            .GroupBy(r => r.BorrTime.Date)
+                            .Select(g => g.OrderByDescending(r => r.BorrTime).First())
+                            .ToList();
+
+                        fuelBorrowInfos.AddRange(latestFuelRecords);
+                    }
+
+                    // 🔸 Ghép hóa đơn với thông tin mượn xe theo ngày
+                    var combinedData = (
+                        from invoice in invoiceList
+                        join fuel in fuelBorrowInfos
+                            on (invoice.IssueDate?.Date ?? DateTime.MinValue) equals fuel.BorrTime.Date
+                        select new { Invoice = invoice, Fuel = fuel }
+                    ).ToList();
+
+                    // 🔸 Cập nhật dữ liệu hóa đơn
+                    foreach (var item in combinedData)
+                    {
+                        var invoice = item.Invoice;
+                        var fuel = item.Fuel;
+
+                        invoice.LicensePlate = fuel.VehicleName;
+                        invoice.OdometerReading = fuel.EndKm;
+                        invoice.FuelFilledBy = fuel.IdUserBorr;
+
+                        dt311_InvoiceBUS.Instance.AddOrUpdate(invoice);
+                    }
+                });
+
+                // 🔸 Sau khi Task hoàn tất → tải lại dữ liệu
+                LoadData();
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show($"Đã xảy ra lỗi khi đồng bộ dữ liệu:\n{ex.Message}",
+                    "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                // 🔹 Đảm bảo đóng overlay dù có lỗi hay không
+                SplashScreenManager.CloseOverlayForm(overlayHandle);
+            }
+        }
+
     }
 }

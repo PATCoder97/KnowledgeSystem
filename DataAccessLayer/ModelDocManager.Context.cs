@@ -123,9 +123,9 @@ namespace DataAccessLayer
         public virtual DbSet<dt309_Machines> dt309_Machines { get; set; }
         public virtual DbSet<dt205_Base> dt205_Base { get; set; }
         public virtual DbSet<dt205_Form> dt205_Form { get; set; }
-        public virtual DbSet<dt311_SellerBuyer> dt311_SellerBuyer { get; set; }
         public virtual DbSet<dt311_VehicleManagement> dt311_VehicleManagement { get; set; }
         public virtual DbSet<dt311_InvoiceItem> dt311_InvoiceItem { get; set; }
         public virtual DbSet<dt311_Invoice> dt311_Invoice { get; set; }
+        public virtual DbSet<dt311_SellerBuyer> dt311_SellerBuyer { get; set; }
     }
 }

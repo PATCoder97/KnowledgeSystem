@@ -18,5 +18,6 @@ namespace DataAccessLayer
         public string ManagerId { get; set; }
         public string IdDept { get; set; }
         public string FuelType { get; set; }
+        public string VehicleType { get; set; }
     }
 }
