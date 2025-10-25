@@ -76,7 +76,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
         {
             btnAdd.ImageOptions.SvgImage = TPSvgimages.Add;
             btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
-            //btnExportExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
+            btnExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
+            btnGetManagerVehicle.ImageOptions.SvgImage = TPSvgimages.Gears;
+            btnGetFillFuel.ImageOptions.SvgImage = TPSvgimages.GasStation;
         }
 
         private void InitializeMenuItems()
@@ -509,6 +511,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
 
             LoadData();
             gcData.DataSource = sourceData;
+
+            bool IsSysAdmin = AppPermission.Instance.CheckAppPermission(AppPermission.SysAdmin);
+            if (!IsSysAdmin)
+            {
+                btnGetManagerVehicle.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            }
 
             gvData.BestFitColumns();
         }

@@ -1812,6 +1812,9 @@
     <Content Include="Images\icons8_finish_flag.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\icons8_gas_station.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\icons8_gears.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

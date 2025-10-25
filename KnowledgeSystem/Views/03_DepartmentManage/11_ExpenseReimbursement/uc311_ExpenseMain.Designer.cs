@@ -70,8 +70,9 @@
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnAdd = new DevExpress.XtraBars.BarButtonItem();
             this.btnReload = new DevExpress.XtraBars.BarButtonItem();
-            this.btnSummaryTable = new DevExpress.XtraBars.BarButtonItem();
+            this.btnExcel = new DevExpress.XtraBars.BarButtonItem();
             this.btnGetManagerVehicle = new DevExpress.XtraBars.BarButtonItem();
+            this.btnGetFillFuel = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -79,7 +80,6 @@
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.btnGetFillFuel = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.gvDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
@@ -144,8 +144,6 @@
             this.gridColumn12.Caption = "編碼";
             this.gridColumn12.FieldName = "Code";
             this.gridColumn12.Name = "gridColumn12";
-            this.gridColumn12.Visible = true;
-            this.gridColumn12.VisibleIndex = 1;
             // 
             // gridColumn17
             // 
@@ -501,7 +499,7 @@
             this.barManagerTP.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.btnAdd,
             this.btnReload,
-            this.btnSummaryTable,
+            this.btnExcel,
             this.btnGetManagerVehicle,
             this.btnGetFillFuel});
             this.barManagerTP.MainMenu = this.bar2;
@@ -531,9 +529,9 @@
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnAdd, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnReload, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnSummaryTable, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnExcel, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnGetManagerVehicle, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnGetFillFuel, true)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnGetFillFuel, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawDragBorder = false;
             this.bar2.OptionsBar.MultiLine = true;
@@ -569,12 +567,12 @@
             this.btnReload.Name = "btnReload";
             this.btnReload.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnReload_ItemClick);
             // 
-            // btnSummaryTable
+            // btnExcel
             // 
-            this.btnSummaryTable.Caption = "導出彙總表";
-            this.btnSummaryTable.Id = 14;
-            this.btnSummaryTable.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnSummaryTable.Name = "btnSummaryTable";
+            this.btnExcel.Caption = "出表";
+            this.btnExcel.Id = 14;
+            this.btnExcel.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnExcel.Name = "btnExcel";
             // 
             // btnGetManagerVehicle
             // 
@@ -583,6 +581,14 @@
             this.btnGetManagerVehicle.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnGetManagerVehicle.Name = "btnGetManagerVehicle";
             this.btnGetManagerVehicle.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnGetManagerVehicle_ItemClick);
+            // 
+            // btnGetFillFuel
+            // 
+            this.btnGetFillFuel.Caption = "載入加油訊息";
+            this.btnGetFillFuel.Id = 16;
+            this.btnGetFillFuel.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnGetFillFuel.Name = "btnGetFillFuel";
+            this.btnGetFillFuel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnGetFillFuel_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -646,13 +652,6 @@
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
-            // btnGetFillFuel
-            // 
-            this.btnGetFillFuel.Caption = "GetFillFuel";
-            this.btnGetFillFuel.Id = 16;
-            this.btnGetFillFuel.Name = "btnGetFillFuel";
-            this.btnGetFillFuel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnGetFillFuel_ItemClick);
-            // 
             // uc311_ExpenseMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -686,7 +685,7 @@
         private DevExpress.XtraBars.Bar bar2;
         private DevExpress.XtraBars.BarButtonItem btnAdd;
         private DevExpress.XtraBars.BarButtonItem btnReload;
-        private DevExpress.XtraBars.BarButtonItem btnSummaryTable;
+        private DevExpress.XtraBars.BarButtonItem btnExcel;
         private DevExpress.XtraBars.BarDockControl barDockControlTop;
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
