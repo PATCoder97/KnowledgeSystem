@@ -117,46 +117,86 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             if (gridView == null || gridView.FocusedRowHandle < 0)
                 return;
 
-            // Các giá trị khởi tạo
-            const string tabDelimiter = "{Tab}";
-            string prefixKey = $"LG{tabDelimiter}7730{tabDelimiter}{tabDelimiter}0{tabDelimiter}W{tabDelimiter}2{tabDelimiter}LG";
-
-            // Lấy danh sách hóa đơn được chọn
+            // 🔹 Lấy danh sách hóa đơn được chọn
             var selectedInvoices = gridView.GetSelectedRows()
                 .Select(rowHandle => gvData.GetRow(rowHandle) as dynamic)
                 .Select(row => row?.data as dt311_Invoice)
                 .Where(invoice => invoice != null)
                 .ToList();
 
-            if (selectedInvoices.Select(r => new { r.SellerTax, r.BuyerTax }).Distinct().Count() != 1)
+            if (selectedInvoices.Count == 0)
             {
-                XtraMessageBox.Show("Không cùng nhà thầu!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show(
+                    "Vui lòng tích chọn các dòng cần điền。\n請選取要輸入的資料列。",
+                    "Thông báo / 提示",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
                 return;
             }
 
-            prefixKey += $"{selectedInvoices.First().SellerTax}{tabDelimiter}{selectedInvoices.First().BuyerTax}{tabDelimiter}潘英俊";
+            MsgBoxAlert();
 
-            // Ghép chuỗi dữ liệu hóa đơn
-            StringBuilder invoiceDataBuilder = new StringBuilder();
+            // 🔹 Kiểm tra cùng nhà thầu & phương tiện
+            bool sameGroup = selectedInvoices
+                .Select(r => new { r.SellerTax, r.BuyerTax, r.LicensePlate })
+                .Distinct()
+                .Count() == 1;
 
-            foreach (var invoice in selectedInvoices)
+            if (!sameGroup)
             {
-                invoiceDataBuilder.AppendFormat(
-                    "{0}{1}{0}{2}{0}{3:yyyyMMdd}{0}{4:0}{0}{5:0}{0}{6}{0}",
-                    tabDelimiter,
-                    invoice.InvoiceCode,
-                    invoice.InvoiceNumber,
-                    invoice.IssueDate,
-                    invoice.TotalBeforeVAT,
-                    invoice.VATAmount,
-                    TPConfigs.LoginUser.Id
-                );
+                XtraMessageBox.Show("Không cùng nhà thầu hoặc phương tiện!", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
 
-            string invoiceDataString = invoiceDataBuilder.ToString();
+            // 🔹 Dữ liệu đầu tiên để lấy thông tin xe
+            var firstItem = selectedInvoices.First();
+            var vehicle = dt311_VehicleManagementBUS.Instance.GetItemById(firstItem.LicensePlate);
 
-            // Gom dữ liệu thành danh sách
-            List<string> erpDataList = new List<string>() { prefixKey, invoiceDataString };
+            // 🔹 Cấu hình và chuỗi prefix
+            const string tabDelimiter = "{Tab}";
+            string prefixKey = string.Join(tabDelimiter, new[]
+            {
+                "LG",
+                vehicle?.IdDept ?? "",
+                "",
+                "0",
+                "W",
+                "2",
+                "LG",
+                (firstItem.SellerTax ?? "") + tabDelimiter + (firstItem.BuyerTax ?? "") + tabDelimiter + "潘英俊說明"
+            });
+
+            // 🔹 Ghép chuỗi dữ liệu hóa đơn
+            var invoiceStrings = selectedInvoices.Select(invoice =>
+            {
+                // Lấy dòng đầu tiên trong InvoiceItem (nếu có)
+                var quantity = dt311_InvoiceItemBUS.Instance
+                    .GetListByInvoiceId(invoice.TransactionID)
+                    .FirstOrDefault()?.Quantity ?? 0;
+
+                return string.Join(tabDelimiter, new string[]
+                {
+                    invoice.LicensePlate ?? "",
+                    "D",
+                    "1",
+                    invoice.SellerTax ?? "",
+                    "",
+                    invoice.InvoiceCode ?? "",
+                    invoice.InvoiceNumber ?? "",
+                    quantity.ToString("0.###"),
+                    invoice.TotalBeforeVAT?.ToString("0") ?? "",
+                    invoice.VATAmount?.ToString("0") ?? ""
+                });
+            });
+
+            // 🔹 Nối tất cả hóa đơn (tab giữa các item)
+            string invoiceDataString = string.Join(tabDelimiter, invoiceStrings);
+
+            // 🔹 Gom dữ liệu thành danh sách gửi đi
+            List<string> erpDataList = new List<string> { prefixKey, tabDelimiter, invoiceDataString };
+
 
             // Mở form AutoERP
             using (var autoErpForm = new f311_AutoERP(erpDataList))
@@ -182,6 +222,19 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                 .Where(invoice => invoice != null)
                 .ToList();
 
+            if (selectedInvoices.Count == 0)
+            {
+                XtraMessageBox.Show(
+                    "Vui lòng tích chọn các dòng cần điền。\n請選取要輸入的資料列。",
+                    "Thông báo / 提示",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+                return;
+            }
+
+            MsgBoxAlert();
+
             // Ghép chuỗi dữ liệu hóa đơn
             var invoiceStrings = selectedInvoices.Select(invoice => string.Join(tabDelimiter, new string[]
             {
@@ -206,6 +259,19 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             {
                 autoErpForm.ShowDialog();
             }
+        }
+
+        private void MsgBoxAlert()
+        {
+            XtraMessageBox.Show(
+                "⚠️ Vui lòng không thao tác phím hay chuột khi chương trình đang tự động。\n" +
+                "⚠️ 請勿在程式自動輸入時操作鍵盤或滑鼠。\n\n" +
+                "⌨️ Yêu cầu chuyển kiểu gõ về tiếng Anh (ENG) để tránh phát sinh lỗi。\n" +
+                "⌨️ 請將輸入法切換為英文（ENG），以避免錯誤發生。",
+                "Cảnh báo / 警告",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning
+            );
         }
 
         private void LoadData()

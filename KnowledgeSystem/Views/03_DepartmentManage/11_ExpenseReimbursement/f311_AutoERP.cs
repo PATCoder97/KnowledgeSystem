@@ -44,6 +44,33 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
 
         List<string> keyData = new List<string>();
 
+        public void BlockUserInput(Action action)
+        {
+            Form overlay = new Form
+            {
+                FormBorderStyle = FormBorderStyle.None,
+                BackColor = Color.Black,
+                Opacity = 0.05,
+                WindowState = FormWindowState.Maximized,
+                TopMost = true,
+                ShowInTaskbar = false
+            };
+
+            overlay.Show();
+            overlay.BringToFront();
+            Application.DoEvents();
+
+            try
+            {
+                action?.Invoke(); // Gửi phím, chạy thao tác
+            }
+            finally
+            {
+                overlay.Close();
+                overlay.Dispose();
+            }
+        }
+
         private void f311_AutoERP_Load(object sender, EventArgs e)
         {
             Text = "自動輸入ERP";
@@ -57,17 +84,26 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
 
         private void btnAutoKey_Click(object sender, EventArgs e)
         {
-            if (keyData.Count == 0)
+            if (keyData == null || keyData.Count == 0)
             {
                 XtraMessageBox.Show("Dữ liệu trống!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
 
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
+            {
+                //// 🧩 Dùng overlay để chặn người dùng trong suốt quá trình gửi phím
+                //BlockUserInput(() =>
+                //{
                 foreach (string key in keyData)
                 {
                     SendKeys.SendWait(key);
                     Thread.Sleep(1000);
                 }
+                //});
+            }
+
+            Close();
         }
     }
 }
