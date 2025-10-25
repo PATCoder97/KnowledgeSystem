@@ -183,23 +183,20 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                 .ToList();
 
             // Ghép chuỗi dữ liệu hóa đơn
-            StringBuilder invoiceDataBuilder = new StringBuilder();
-
-            foreach (var invoice in selectedInvoices)
+            var invoiceStrings = selectedInvoices.Select(invoice => string.Join(tabDelimiter, new string[]
             {
-                invoiceDataBuilder.AppendFormat(
-                    "{0}{1}{0}{2}{0}{3:yyyyMMdd}{0}{4:0}{0}{5:0}{0}{6}{0}",
-                    tabDelimiter,
-                    invoice.InvoiceCode,
-                    invoice.InvoiceNumber,
-                    invoice.IssueDate,
-                    invoice.TotalBeforeVAT,
-                    invoice.VATAmount,
-                    TPConfigs.LoginUser.Id
-                );
-            }
+                invoice.InvoiceCode ?? "",
+                invoice.InvoiceNumber ?? "",
+                invoice.IssueDate?.ToString("yyyyMMdd") ?? "",
+                invoice.SellerTax?.ToString()?? "",
+                invoice.TotalBeforeVAT?.ToString("0")?? "",
+                invoice.VATAmount?.ToString("0")?? "",
+                TPConfigs.LoginUser.Id ?? "",
+                ""
+            }));
 
-            string invoiceDataString = invoiceDataBuilder.ToString();
+            // Ghép tất cả hóa đơn (tab giữa các hóa đơn)
+            string invoiceDataString = string.Join(tabDelimiter, invoiceStrings);
 
             // Gom dữ liệu thành danh sách
             List<string> erpDataList = new List<string>() { prefixKey, invoiceDataString };
@@ -711,6 +708,5 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                 SplashScreenManager.CloseOverlayForm(overlayHandle);
             }
         }
-
     }
 }

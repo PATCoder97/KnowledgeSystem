@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotesMail", "NotesMail\Note
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SVC301SafetyCert", "SVC301SafetyCert\SVC301SafetyCert.csproj", "{B76A5011-7CBA-4CDB-9FEB-F6432D62C7E3}"
 EndProject
+Project("{840C416C-B8F3-42BC-B0DD-F6BB14C9F8CB}") = "SetupDEVProject", "SetupDEVProject\SetupDEVProject.aiproj", "{E0113840-7129-4E8D-A92F-9B5B9E3C63AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -84,6 +86,12 @@ Global
 		{B76A5011-7CBA-4CDB-9FEB-F6432D62C7E3}.DefaultBuild|Any CPU.Build.0 = Debug|Any CPU
 		{B76A5011-7CBA-4CDB-9FEB-F6432D62C7E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B76A5011-7CBA-4CDB-9FEB-F6432D62C7E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0113840-7129-4E8D-A92F-9B5B9E3C63AE}.Debug|Any CPU.ActiveCfg = DefaultBuild
+		{E0113840-7129-4E8D-A92F-9B5B9E3C63AE}.Debug|Any CPU.Build.0 = DefaultBuild
+		{E0113840-7129-4E8D-A92F-9B5B9E3C63AE}.DefaultBuild|Any CPU.ActiveCfg = DefaultBuild
+		{E0113840-7129-4E8D-A92F-9B5B9E3C63AE}.DefaultBuild|Any CPU.Build.0 = DefaultBuild
+		{E0113840-7129-4E8D-A92F-9B5B9E3C63AE}.Release|Any CPU.ActiveCfg = DefaultBuild
+		{E0113840-7129-4E8D-A92F-9B5B9E3C63AE}.Release|Any CPU.Build.0 = DefaultBuild
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

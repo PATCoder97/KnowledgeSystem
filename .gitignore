@@ -15,6 +15,10 @@
 *.cab
 SetupDocumentSystem/
 
+*/SetupDEVProject-cache
+*.cab
+SetupDEVProject/
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
