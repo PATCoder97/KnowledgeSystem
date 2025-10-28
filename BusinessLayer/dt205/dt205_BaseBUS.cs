@@ -3,6 +3,7 @@ using Logger;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
+using System.Data.Entity.SqlServer;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -31,6 +32,59 @@ namespace BusinessLayer
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
                     return _context.dt205_Base.Where(r => string.IsNullOrEmpty(r.RemoveBy)).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
+        public List<dt205_Base> GetListByKeyword(string keyword)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    if (string.IsNullOrWhiteSpace(keyword))
+                    {
+                        return _context.dt205_Base
+                            .Where(r => string.IsNullOrEmpty(r.RemoveBy))
+                            .ToList();
+                    }
+
+                    // 🔍 Tìm bằng FULL-TEXT SQL trực tiếp
+                    string sql = @"
+                    SELECT *
+                    FROM dt205_Base
+                    WHERE RemoveBy IS NULL AND
+                    (
+                        FREETEXT(DisplayName, @p0)
+                        OR FREETEXT(DisplayNameVN, @p0)
+                        OR FREETEXT(DisplayNameEN, @p0)
+                        OR FREETEXT(Keyword, @p0)
+                    )";
+
+                    var result = _context.Database.SqlQuery<dt205_Base>(sql, keyword).ToList();
+
+                    // 🔁 Fallback nếu chưa index xong hoặc không ra kết quả
+                    if (result == null || result.Count == 0)
+                    {
+                        result = _context.dt205_Base
+                            .Where(r =>
+                                string.IsNullOrEmpty(r.RemoveBy) &&
+                                (
+                                    r.DisplayName.Contains(keyword) ||
+                                    r.DisplayNameVN.Contains(keyword) ||
+                                    r.DisplayNameEN.Contains(keyword) ||
+                                    r.Keyword.Contains(keyword)
+                                )
+                            )
+                            .ToList();
+                    }
+
+                    return result;
                 }
             }
             catch (Exception ex)

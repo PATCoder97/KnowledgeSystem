@@ -107,6 +107,7 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt206_DocUseFor" Width="1.5" PointX="11.875" PointY="53.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt206_DocVersions" Width="1.5" PointX="8.625" PointY="53.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt205_Base" Width="1.5" PointX="0.5" PointY="53.625" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt205_Type" Width="1.5" PointX="3.75" PointY="53.625" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

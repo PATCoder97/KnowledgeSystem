@@ -17,9 +17,11 @@ namespace DataAccessLayer
         public int Id { get; set; }
         public int IdParent { get; set; }
         public string IdDept { get; set; }
+        public int BaseTypeId { get; set; }
         public string DisplayName { get; set; }
         public string DisplayNameVN { get; set; }
         public string DisplayNameEN { get; set; }
+        public string Keyword { get; set; }
         public string DocType { get; set; }
         public bool Confidential { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }

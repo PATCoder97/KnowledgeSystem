@@ -54,19 +54,21 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
         {
             txbNotifyCycle.Enabled = _enable;
             txbPreAlertMonths.Enabled = _enable;
-            cbbDept.Enabled = _enable;
+            cbbBaseType.Enabled = _enable;
             txbCreateDate.Enabled = _enable;
             cbbClass.Enabled = _enable;
             txbDisplayName.Enabled = _enable;
             txbDisplayNameVN.Enabled = _enable;
             txbDisplayNameEN.Enabled = _enable;
             ckConfidential.Enabled = _enable ? parentData?.Confidential != true : _enable;
+            txbKeyword.Enabled = _enable;
 
             if (formName == "節點")
             {
                 txbCreateDate.Enabled = false;
                 txbNotifyCycle.Enabled = false;
                 txbPreAlertMonths.Enabled = false;
+                txbKeyword.Enabled = false;
             }
         }
 
@@ -74,7 +76,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
         {
             if (parentData != null)
             {
-                cbbDept.EditValue = parentData.IdDept;
+                cbbBaseType.EditValue = parentData.BaseTypeId;
             }
 
             switch (eventInfo)
@@ -139,8 +141,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
 
         private void f205_Node_Info_Load(object sender, EventArgs e)
         {
-            lcControls = new List<LayoutControlItem>() { lcDept, lcClass, lcDisplayName, lcDisplayNameVN, lcDisplayNameEN, lcNotifyCycle, lcCreateDate, lcPreAlertMonths };
-            lcImpControls = new List<LayoutControlItem>() { lcClass, lcDisplayName, lcDisplayNameVN, lcDisplayNameEN, lcCreateDate, lcNotifyCycle, lcPreAlertMonths };
+            lcControls = new List<LayoutControlItem>() { lcBaseType, lcClass, lcDisplayName, lcDisplayNameVN, lcDisplayNameEN, lcNotifyCycle, lcCreateDate, lcPreAlertMonths, lcKeyword };
+            lcImpControls = new List<LayoutControlItem>() { lcBaseType, lcClass, lcDisplayName, lcDisplayNameVN, lcDisplayNameEN, lcCreateDate, lcNotifyCycle, lcPreAlertMonths, lcKeyword };
 
             foreach (var item in lcControls)
             {
@@ -149,6 +151,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
             }
 
             cbbClass.Properties.Items.AddRange(new string[] { "一階", "二階", "三階" });
+
+            // them du lieu basetype
 
             switch (eventInfo)
             {
@@ -159,8 +163,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
                     if (parentData != null)
                     {
                         ckConfidential.Checked = parentData.Confidential == true;
-                        cbbDept.EditValue = parentData.IdDept;
-                        cbbDept.Enabled = false;
+                        cbbBaseType.EditValue = parentData.BaseTypeId;
+                        cbbBaseType.Enabled = false;
                     }
 
                     break;

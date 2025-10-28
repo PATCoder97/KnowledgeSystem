@@ -127,5 +127,6 @@ namespace DataAccessLayer
         public virtual DbSet<dt206_DocUseFor> dt206_DocUseFor { get; set; }
         public virtual DbSet<dt206_DocVersions> dt206_DocVersions { get; set; }
         public virtual DbSet<dt205_Base> dt205_Base { get; set; }
+        public virtual DbSet<dt205_Type> dt205_Type { get; set; }
     }
 }
