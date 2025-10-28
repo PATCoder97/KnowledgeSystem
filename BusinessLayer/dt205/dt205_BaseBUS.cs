@@ -57,15 +57,15 @@ namespace BusinessLayer
 
                     // 🔍 Tìm bằng FULL-TEXT SQL
                     string sql = @"
-                        SELECT *
-                        FROM dt205_Base
-                        WHERE RemoveBy IS NULL AND CreateDate IS NOT NULL AND
-                        (
-                            FREETEXT(DisplayName, @p0)
-                            OR FREETEXT(DisplayNameVN, @p0)
-                            OR FREETEXT(DisplayNameEN, @p0)
-                            OR FREETEXT(Keyword, @p0)
-                        )";
+                SELECT *
+                FROM dt205_Base
+                WHERE RemoveBy IS NULL AND CreateDate IS NOT NULL AND
+                (
+                    FREETEXT(DisplayName, @p0)
+                    OR FREETEXT(DisplayNameVN, @p0)
+                    OR FREETEXT(DisplayNameEN, @p0)
+                    OR FREETEXT(Keyword, @p0)
+                )";
 
                     var result = _context.Database.SqlQuery<dt205_Base>(sql, keyword).ToList();
 
@@ -85,16 +85,17 @@ namespace BusinessLayer
                             .ToList();
                     }
 
-                    // ⚙️ Cache toàn bộ bảng để xử lý đệ quy nhanh
+                    // ⚙️ Cache toàn bộ bảng để đệ quy nhanh
                     var allItems = _context.dt205_Base
                         .Where(r => string.IsNullOrEmpty(r.RemoveBy))
-                        .Select(r => new { r.Id, r.IdParent })
+                        .Select(r => new { r.Id, r.IdParent, r.IsFinalNode })
                         .ToList();
 
-                    // 🧩 Hàm đệ quy lấy tất cả cha
+                    // 🧩 Thu thập cha
                     HashSet<int> collectedParentIds = new HashSet<int>();
+                    Action<int> CollectParents = null;
 
-                    void CollectParents(int parentId)
+                    CollectParents = parentId =>
                     {
                         if (parentId <= 0 || collectedParentIds.Contains(parentId))
                             return;
@@ -104,13 +105,32 @@ namespace BusinessLayer
                         var parent = allItems.FirstOrDefault(x => x.Id == parentId);
                         if (parent != null && parent.IdParent > 0)
                             CollectParents(parent.IdParent);
-                    }
+                    };
 
-                    // 🧮 Tìm toàn bộ cha (mọi cấp)
                     foreach (var item in result.Where(r => r.IdParent > 0))
                         CollectParents(item.IdParent);
 
-                    // 🧩 Lấy danh sách thực tế các bản ghi cha
+                    // 🧩 Thu thập con (chỉ của các node có IsFinalNode = true)
+                    HashSet<int> collectedChildIds = new HashSet<int>();
+                    Action<int> CollectChildren = null;
+
+                    CollectChildren = parentId =>
+                    {
+                        var children = allItems.Where(x => x.IdParent == parentId && x.IsFinalNode == true).ToList();
+                        foreach (var child in children)
+                        {
+                            if (!collectedChildIds.Contains(child.Id))
+                            {
+                                collectedChildIds.Add(child.Id);
+                                CollectChildren(child.Id); // đệ quy con
+                            }
+                        }
+                    };
+
+                    foreach (var item in result)
+                        CollectChildren(item.Id);
+
+                    // 🧩 Lấy bản ghi cha + con từ DB
                     List<dt205_Base> allParents = new List<dt205_Base>();
                     if (collectedParentIds.Any())
                     {
@@ -119,9 +139,18 @@ namespace BusinessLayer
                             .ToList();
                     }
 
-                    // 🔗 Hợp kết quả con + cha, loại trùng
+                    List<dt205_Base> allChildren = new List<dt205_Base>();
+                    if (collectedChildIds.Any())
+                    {
+                        allChildren = _context.dt205_Base
+                            .Where(r => collectedChildIds.Contains(r.Id))
+                            .ToList();
+                    }
+
+                    // 🔗 Hợp tất cả kết quả (từ khóa + cha + con), loại trùng
                     result = result
                         .Concat(allParents)
+                        .Concat(allChildren)
                         .GroupBy(r => r.Id)
                         .Select(g => g.First())
                         .ToList();

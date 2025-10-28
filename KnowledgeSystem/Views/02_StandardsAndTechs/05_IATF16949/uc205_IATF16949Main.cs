@@ -510,7 +510,29 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
 
         private void btnKeywordSearch_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            LoadData("俊");
+            //====== Tạo hộp nhập từ khóa ======
+            XtraInputBoxArgs args = new XtraInputBoxArgs();
+            args.Caption = TPConfigs.SoftNameTW + " - 關鍵字搜尋 / Keyword Search";
+            args.Prompt = "請輸入關鍵字以搜尋文件：";
+            args.DefaultButtonIndex = 0;
+
+            TextEdit editor = new TextEdit();
+            editor.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F);
+            args.Editor = editor;
+
+            args.DefaultResponse = "";
+
+            //====== Hiển thị hộp nhập ======
+            object input = XtraInputBox.Show(args);
+            string keyword = input == null ? null : input.ToString().Trim();
+
+            // Nếu người dùng bấm Cancel hoặc không nhập gì thì thoát
+            if (string.IsNullOrEmpty(keyword))
+                return;
+
+            LoadData(keyword);
+
+            tlsData.ExpandAll();
         }
     }
 }

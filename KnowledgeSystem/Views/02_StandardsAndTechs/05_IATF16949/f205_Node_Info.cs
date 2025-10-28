@@ -53,6 +53,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
             btnEdit.ImageOptions.SvgImage = TPSvgimages.Edit;
             btnDelete.ImageOptions.SvgImage = TPSvgimages.Remove;
             btnConfirm.ImageOptions.SvgImage = TPSvgimages.Confirm;
+            btnExtractKeywords.ImageOptions.SvgImage = TPSvgimages.Bot;
         }
 
         private void EnabledController(bool _enable = true)
@@ -74,6 +75,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
                 txbNotifyCycle.Enabled = false;
                 txbPreAlertMonths.Enabled = false;
                 txbKeyword.Enabled = false;
+
+                btnExtractKeywords.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             }
         }
 
@@ -144,7 +147,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
                 }
             }
         }
-
 
         private void f205_Node_Info_Load(object sender, EventArgs e)
         {
@@ -244,7 +246,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
             bool confidential = ckConfidential.CheckState == CheckState.Checked;
             string keyword = txbKeyword.Text.Trim(); // bỏ khoảng trắng đầu cuối
             keyword = Regex.Replace(keyword, @"\s+", " "); // gộp nhiều khoảng trắng thành 1
-            keyword = Regex.Replace(keyword, @"[^\w\s\u4e00-\u9fa5]", ""); // ^ giữ lại chữ, số, khoảng trắng, và ký tự tiếng Trung (範圍 U+4E00–U+9FA5)
+            keyword = Regex.Replace(keyword, @"[^\w\s\u4e00-\u9fa5,]", ""); // ^ giữ lại chữ, số, khoảng trắng, và ký tự tiếng Trung (範圍 U+4E00–U+9FA5)
 
             if (StringHelper.CheckUpcase(displayNameVN, 33) && displayNameVN.Length > 20)
             {
@@ -303,7 +305,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
             }
         }
 
-
         private async void btnExtractKeywords_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             // 🟢 Biến handle quản lý overlay loading
@@ -316,7 +317,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
                 {
                     ofd.Title = "Chọn file PDF để trích từ khóa";
                     ofd.Filter = "PDF Files (*.pdf)|*.pdf";
-                    ofd.InitialDirectory = @"E:\"; // thư mục mặc định
 
                     if (ofd.ShowDialog() != DialogResult.OK)
                         return; // người dùng bấm Cancel
@@ -350,8 +350,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
 
                     //====== Hiển thị kết quả ======
                     txbKeyword.EditValue = keywords;
-                    XtraMessageBox.Show("✅ Đã trích xuất từ khóa thành công!", "AI Keyword Extractor",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
