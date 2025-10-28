@@ -47,6 +47,7 @@ namespace BusinessLayer
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
+                    // Nếu không nhập keyword → trả về tất cả chưa xóa
                     if (string.IsNullOrWhiteSpace(keyword))
                     {
                         return _context.dt205_Base
@@ -54,17 +55,17 @@ namespace BusinessLayer
                             .ToList();
                     }
 
-                    // 🔍 Tìm bằng FULL-TEXT SQL trực tiếp
+                    // 🔍 Tìm bằng FULL-TEXT SQL
                     string sql = @"
-                    SELECT *
-                    FROM dt205_Base
-                    WHERE RemoveBy IS NULL AND
-                    (
-                        FREETEXT(DisplayName, @p0)
-                        OR FREETEXT(DisplayNameVN, @p0)
-                        OR FREETEXT(DisplayNameEN, @p0)
-                        OR FREETEXT(Keyword, @p0)
-                    )";
+                        SELECT *
+                        FROM dt205_Base
+                        WHERE RemoveBy IS NULL AND CreateDate IS NOT NULL AND
+                        (
+                            FREETEXT(DisplayName, @p0)
+                            OR FREETEXT(DisplayNameVN, @p0)
+                            OR FREETEXT(DisplayNameEN, @p0)
+                            OR FREETEXT(Keyword, @p0)
+                        )";
 
                     var result = _context.Database.SqlQuery<dt205_Base>(sql, keyword).ToList();
 
@@ -73,7 +74,7 @@ namespace BusinessLayer
                     {
                         result = _context.dt205_Base
                             .Where(r =>
-                                string.IsNullOrEmpty(r.RemoveBy) &&
+                                string.IsNullOrEmpty(r.RemoveBy) && r.CreateDate != null &&
                                 (
                                     r.DisplayName.Contains(keyword) ||
                                     r.DisplayNameVN.Contains(keyword) ||
@@ -83,6 +84,47 @@ namespace BusinessLayer
                             )
                             .ToList();
                     }
+
+                    // ⚙️ Cache toàn bộ bảng để xử lý đệ quy nhanh
+                    var allItems = _context.dt205_Base
+                        .Where(r => string.IsNullOrEmpty(r.RemoveBy))
+                        .Select(r => new { r.Id, r.IdParent })
+                        .ToList();
+
+                    // 🧩 Hàm đệ quy lấy tất cả cha
+                    HashSet<int> collectedParentIds = new HashSet<int>();
+
+                    void CollectParents(int parentId)
+                    {
+                        if (parentId <= 0 || collectedParentIds.Contains(parentId))
+                            return;
+
+                        collectedParentIds.Add(parentId);
+
+                        var parent = allItems.FirstOrDefault(x => x.Id == parentId);
+                        if (parent != null && parent.IdParent > 0)
+                            CollectParents(parent.IdParent);
+                    }
+
+                    // 🧮 Tìm toàn bộ cha (mọi cấp)
+                    foreach (var item in result.Where(r => r.IdParent > 0))
+                        CollectParents(item.IdParent);
+
+                    // 🧩 Lấy danh sách thực tế các bản ghi cha
+                    List<dt205_Base> allParents = new List<dt205_Base>();
+                    if (collectedParentIds.Any())
+                    {
+                        allParents = _context.dt205_Base
+                            .Where(r => collectedParentIds.Contains(r.Id))
+                            .ToList();
+                    }
+
+                    // 🔗 Hợp kết quả con + cha, loại trùng
+                    result = result
+                        .Concat(allParents)
+                        .GroupBy(r => r.Id)
+                        .Select(g => g.First())
+                        .ToList();
 
                     return result;
                 }

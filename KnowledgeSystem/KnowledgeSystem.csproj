@@ -212,6 +212,7 @@
     <Compile Include="Components\CropPictureBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Helpers\AIHelper.cs" />
     <Compile Include="Helpers\AutoFilterNonUnicode.cs" />
     <Compile Include="Helpers\AppCopyRight.cs" />
     <Compile Include="Helpers\AppPermission.cs" />

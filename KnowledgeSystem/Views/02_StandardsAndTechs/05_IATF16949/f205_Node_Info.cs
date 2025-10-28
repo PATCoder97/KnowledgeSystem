@@ -4,7 +4,10 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraLayout;
 using DevExpress.XtraSplashScreen;
 using DocumentFormat.OpenXml.Wordprocessing;
+using iTextSharp.text.pdf;
+using iTextSharp.text.pdf.parser;
 using KnowledgeSystem.Helpers;
+using KnowledgeSystem.Helpers.YourNamespace;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,8 +15,10 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Input;
 using static System.Runtime.CompilerServices.RuntimeHelpers;
 
 namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
@@ -74,11 +79,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
 
         private void LockControl()
         {
-            if (parentData != null)
-            {
-                cbbBaseType.EditValue = parentData.BaseTypeId;
-            }
-
             switch (eventInfo)
             {
                 case EventFormInfo.Create:
@@ -118,6 +118,13 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
                     break;
             }
 
+            if (parentData != null)
+            {
+                ckConfidential.Checked = parentData.Confidential == true;
+                cbbBaseType.EditValue = parentData.BaseTypeId;
+                cbbBaseType.Enabled = false;
+            }
+
             foreach (var item in lcControls)
             {
                 string colorHex = item.Control.Enabled ? "000000" : "000000";
@@ -153,19 +160,13 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
             cbbClass.Properties.Items.AddRange(new string[] { "一階", "二階", "三階" });
 
             // them du lieu basetype
+            cbbBaseType.Properties.Items.AddRange(new int[] { 1, 2, 3, 4 });
 
             switch (eventInfo)
             {
                 case EventFormInfo.Create:
 
                     baseDoc = new dt205_Base();
-
-                    if (parentData != null)
-                    {
-                        ckConfidential.Checked = parentData.Confidential == true;
-                        cbbBaseType.EditValue = parentData.BaseTypeId;
-                        cbbBaseType.Enabled = false;
-                    }
 
                     break;
                 case EventFormInfo.View:
@@ -180,6 +181,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
                     txbCreateDate.EditValue = baseDoc.CreateDate;
                     txbNotifyCycle.EditValue = baseDoc.NotifyCycle;
                     txbPreAlertMonths.EditValue = baseDoc.PreAlertMonths;
+                    txbKeyword.EditValue = baseDoc.Keyword;
 
                     break;
                 case EventFormInfo.Update:
@@ -231,6 +233,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
             }
 
             string idDept = TPConfigs.LoginUser.IdDepartment;
+            int? baseTypeId = cbbBaseType.EditValue as int?;
             string displayName = txbDisplayName.Text.Trim();
             string displayNameVN = txbDisplayNameVN.Text.Trim();
             string displayNameEN = txbDisplayNameEN.Text.Trim();
@@ -239,6 +242,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
             int? periodNotify = txbNotifyCycle.EditValue as int?;
             int? preAlertMonths = txbPreAlertMonths.EditValue as int?;
             bool confidential = ckConfidential.CheckState == CheckState.Checked;
+            string keyword = txbKeyword.Text.Trim(); // bỏ khoảng trắng đầu cuối
+            keyword = Regex.Replace(keyword, @"\s+", " "); // gộp nhiều khoảng trắng thành 1
+            keyword = Regex.Replace(keyword, @"[^\w\s\u4e00-\u9fa5]", ""); // ^ giữ lại chữ, số, khoảng trắng, và ký tự tiếng Trung (範圍 U+4E00–U+9FA5)
 
             if (StringHelper.CheckUpcase(displayNameVN, 33) && displayNameVN.Length > 20)
             {
@@ -258,6 +264,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
                 baseDoc.Confidential = confidential;
                 baseDoc.NotifyCycle = periodNotify;
                 baseDoc.PreAlertMonths = preAlertMonths;
+                baseDoc.Keyword = keyword;
+                baseDoc.BaseTypeId = (int)baseTypeId;
 
                 switch (eventInfo)
                 {
@@ -292,6 +300,70 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
             else
             {
                 MsgTP.MsgErrorDB();
+            }
+        }
+
+
+        private async void btnExtractKeywords_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            // 🟢 Biến handle quản lý overlay loading
+            IOverlaySplashScreenHandle handle = null;
+
+            try
+            {
+                //====== Chọn file PDF ======
+                using (OpenFileDialog ofd = new OpenFileDialog())
+                {
+                    ofd.Title = "Chọn file PDF để trích từ khóa";
+                    ofd.Filter = "PDF Files (*.pdf)|*.pdf";
+                    ofd.InitialDirectory = @"E:\"; // thư mục mặc định
+
+                    if (ofd.ShowDialog() != DialogResult.OK)
+                        return; // người dùng bấm Cancel
+
+                    string filePath = ofd.FileName;
+
+                    // 🟡 Hiển thị overlay loading
+                    handle = SplashScreenManager.ShowOverlayForm(this);
+
+                    //====== Đọc nội dung PDF ======
+                    string inputText = "";
+                    using (PdfReader reader = new PdfReader(filePath))
+                    {
+                        for (int i = 1; i <= reader.NumberOfPages; i++)
+                        {
+                            LocationTextExtractionStrategy strategy = new LocationTextExtractionStrategy();
+                            string pageText = PdfTextExtractor.GetTextFromPage(reader, i, strategy);
+                            inputText += pageText + "\n";
+                        }
+                    }
+
+                    // Giới hạn độ dài để tránh vượt giới hạn API
+                    if (inputText.Length > 8000)
+                        inputText = inputText.Substring(0, 8000);
+
+                    //====== Gọi Gemini API ======
+                    string apiKey = "AIzaSyCUvR3ae6CvZRJpOrusrlKBPtQzb9JsdAI"; // ⚠️ thay bằng key thật
+                    var ai = new AIHelper(apiKey);
+
+                    string keywords = await ai.ExtractKeywordsAsync(inputText, 10);
+
+                    //====== Hiển thị kết quả ======
+                    txbKeyword.EditValue = keywords;
+                    XtraMessageBox.Show("✅ Đã trích xuất từ khóa thành công!", "AI Keyword Extractor",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show("❌ Lỗi: " + ex.Message, "AI Keyword Extractor",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                // 🔵 Đóng overlay loading nếu đang hiển thị
+                if (handle != null)
+                    SplashScreenManager.CloseOverlayForm(handle);
             }
         }
     }

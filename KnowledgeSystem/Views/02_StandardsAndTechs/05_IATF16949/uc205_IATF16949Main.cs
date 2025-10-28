@@ -304,11 +304,18 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
             LoadData();
         }
 
-        private void LoadData()
+        private void LoadData(string keyword = null)
         {
             using (var handle = SplashScreenManager.ShowOverlayForm(tlsData))
             {
-                baseDatas = dt205_BaseBUS.Instance.GetList();
+                if (!string.IsNullOrEmpty(keyword))
+                {
+                    baseDatas = dt205_BaseBUS.Instance.GetListByKeyword(keyword);
+                }
+                else
+                {
+                    baseDatas = dt205_BaseBUS.Instance.GetList();
+                }
 
                 var displayDatas = (from data in baseDatas
                                     where isManager205 ? true : data.Confidential != true
@@ -494,6 +501,16 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
                 };
                 fInfo.Show(this);
             }
+        }
+
+        private void btnReload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            LoadData();
+        }
+
+        private void btnKeywordSearch_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            LoadData("俊");
         }
     }
 }

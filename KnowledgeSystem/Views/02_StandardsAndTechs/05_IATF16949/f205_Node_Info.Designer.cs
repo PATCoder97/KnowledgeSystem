@@ -61,6 +61,7 @@
             this.lcPreAlertMonths = new DevExpress.XtraLayout.LayoutControlItem();
             this.txbKeyword = new DevExpress.XtraEditors.MemoEdit();
             this.lcKeyword = new DevExpress.XtraLayout.LayoutControlItem();
+            this.btnExtractKeywords = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -100,9 +101,10 @@
             this.barManagerTP.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.btnEdit,
             this.btnDelete,
-            this.btnConfirm});
+            this.btnConfirm,
+            this.btnExtractKeywords});
             this.barManagerTP.MainMenu = this.bar2;
-            this.barManagerTP.MaxItemId = 13;
+            this.barManagerTP.MaxItemId = 14;
             // 
             // bar2
             // 
@@ -128,7 +130,8 @@
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnEdit, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnDelete, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnConfirm, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnConfirm, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnExtractKeywords, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawDragBorder = false;
             this.bar2.OptionsBar.MultiLine = true;
@@ -545,6 +548,8 @@
             this.txbKeyword.Location = new System.Drawing.Point(100, 192);
             this.txbKeyword.MenuManager = this.barManagerTP;
             this.txbKeyword.Name = "txbKeyword";
+            this.txbKeyword.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbKeyword.Properties.Appearance.Options.UseFont = true;
             this.txbKeyword.Size = new System.Drawing.Size(497, 135);
             this.txbKeyword.StyleController = this.layoutControl1;
             this.txbKeyword.TabIndex = 16;
@@ -559,6 +564,18 @@
             this.lcKeyword.Size = new System.Drawing.Size(589, 139);
             this.lcKeyword.Text = "關鍵字";
             this.lcKeyword.TextSize = new System.Drawing.Size(76, 24);
+            // 
+            // btnExtractKeywords
+            // 
+            this.btnExtractKeywords.Caption = "提取關鍵字";
+            this.btnExtractKeywords.Id = 13;
+            this.btnExtractKeywords.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnExtractKeywords.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnExtractKeywords.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnExtractKeywords.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.btnExtractKeywords.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnExtractKeywords.Name = "btnExtractKeywords";
+            this.btnExtractKeywords.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExtractKeywords_ItemClick);
             // 
             // f205_Node_Info
             // 
@@ -639,5 +656,6 @@
         private DevExpress.XtraLayout.LayoutControlItem lcPreAlertMonths;
         private DevExpress.XtraEditors.MemoEdit txbKeyword;
         private DevExpress.XtraLayout.LayoutControlItem lcKeyword;
+        private DevExpress.XtraBars.BarButtonItem btnExtractKeywords;
     }
 }
