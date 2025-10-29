@@ -108,13 +108,21 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
 
         private void ItemERP03_Click(object sender, EventArgs e)
         {
+            GridView gridView = gvData;
+            if (gridView == null || gridView.FocusedRowHandle < 0)
+                return;
 
+            if (!KeyboardHelper.IsEnglishAndCapsOff())
+                return;
         }
 
         private void ItemERP02_Click(object sender, EventArgs e)
         {
             GridView gridView = gvData;
             if (gridView == null || gridView.FocusedRowHandle < 0)
+                return;
+
+            if (!KeyboardHelper.IsEnglishAndCapsOff())
                 return;
 
             // 🔹 Lấy danh sách hóa đơn được chọn
@@ -211,6 +219,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             if (gridView == null || gridView.FocusedRowHandle < 0)
                 return;
 
+            if (!KeyboardHelper.IsEnglishAndCapsOff())
+                return;
+
             // Các giá trị khởi tạo
             const string tabDelimiter = "{Tab}";
             const string prefixKey = "LG";
@@ -263,12 +274,18 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
 
         private void MsgBoxAlert()
         {
+            string msg =
+                "1️. Vui lòng không thao tác khi chương trình đang tự động。\n 請勿在程式自動輸入時操作鍵盤或滑鼠。";
+
+            if (KeyboardHelper.IsUnikeyRunning())
+            {
+                msg += "\n\n" +
+                       "2️. Phát hiện Unikey đang chạy, vui lòng tắt hoặc chuyển sang English (ENG)。\n 偵測到 UniKey 正在執行，請關閉或切換至英文輸入模式 (ENG)。";
+            }
+
             XtraMessageBox.Show(
-                "⚠️ Vui lòng không thao tác phím hay chuột khi chương trình đang tự động。\n" +
-                "⚠️ 請勿在程式自動輸入時操作鍵盤或滑鼠。\n\n" +
-                "⌨️ Yêu cầu chuyển kiểu gõ về tiếng Anh (ENG) để tránh phát sinh lỗi。\n" +
-                "⌨️ 請將輸入法切換為英文（ENG），以避免錯誤發生。",
-                "Cảnh báo / 警告",
+                msg,
+                "⚠️ Cảnh báo / 警告",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning
             );
