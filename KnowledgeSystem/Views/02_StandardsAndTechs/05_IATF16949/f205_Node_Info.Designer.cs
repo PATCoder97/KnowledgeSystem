@@ -35,12 +35,13 @@
             this.btnEdit = new DevExpress.XtraBars.BarButtonItem();
             this.btnDelete = new DevExpress.XtraBars.BarButtonItem();
             this.btnConfirm = new DevExpress.XtraBars.BarButtonItem();
+            this.btnExtractKeywords = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.cbbBaseType = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.txbKeyword = new DevExpress.XtraEditors.MemoEdit();
             this.ckConfidential = new DevExpress.XtraEditors.CheckEdit();
             this.txbDisplayName = new DevExpress.XtraEditors.TextEdit();
             this.txbNotifyCycle = new DevExpress.XtraEditors.TextEdit();
@@ -59,13 +60,12 @@
             this.lcClass = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcConfidential = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcPreAlertMonths = new DevExpress.XtraLayout.LayoutControlItem();
-            this.txbKeyword = new DevExpress.XtraEditors.MemoEdit();
             this.lcKeyword = new DevExpress.XtraLayout.LayoutControlItem();
-            this.btnExtractKeywords = new DevExpress.XtraBars.BarButtonItem();
+            this.cbbBaseType = new DevExpress.XtraEditors.LookUpEdit();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cbbBaseType.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbKeyword.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckConfidential.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDisplayName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbNotifyCycle.Properties)).BeginInit();
@@ -85,8 +85,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcClass)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcConfidential)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcPreAlertMonths)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbKeyword.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcKeyword)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbBaseType.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // barManagerTP
@@ -175,6 +175,18 @@
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnConfirm_ItemClick);
             // 
+            // btnExtractKeywords
+            // 
+            this.btnExtractKeywords.Caption = "提取關鍵字";
+            this.btnExtractKeywords.Id = 13;
+            this.btnExtractKeywords.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnExtractKeywords.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnExtractKeywords.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnExtractKeywords.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.btnExtractKeywords.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnExtractKeywords.Name = "btnExtractKeywords";
+            this.btnExtractKeywords.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExtractKeywords_ItemClick);
+            // 
             // barDockControlTop
             // 
             this.barDockControlTop.CausesValidation = false;
@@ -210,7 +222,6 @@
             // layoutControl1
             // 
             this.layoutControl1.Controls.Add(this.txbKeyword);
-            this.layoutControl1.Controls.Add(this.cbbBaseType);
             this.layoutControl1.Controls.Add(this.ckConfidential);
             this.layoutControl1.Controls.Add(this.txbDisplayName);
             this.layoutControl1.Controls.Add(this.txbNotifyCycle);
@@ -219,6 +230,7 @@
             this.layoutControl1.Controls.Add(this.txbDisplayNameEN);
             this.layoutControl1.Controls.Add(this.txbCreateDate);
             this.layoutControl1.Controls.Add(this.txbPreAlertMonths);
+            this.layoutControl1.Controls.Add(this.cbbBaseType);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
@@ -227,23 +239,16 @@
             this.layoutControl1.TabIndex = 6;
             this.layoutControl1.Text = "layoutControl1";
             // 
-            // cbbBaseType
+            // txbKeyword
             // 
-            this.cbbBaseType.Location = new System.Drawing.Point(100, 12);
-            this.cbbBaseType.MenuManager = this.barManagerTP;
-            this.cbbBaseType.Name = "cbbBaseType";
-            this.cbbBaseType.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.cbbBaseType.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.cbbBaseType.Properties.Appearance.Options.UseFont = true;
-            this.cbbBaseType.Properties.Appearance.Options.UseForeColor = true;
-            this.cbbBaseType.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.cbbBaseType.Properties.AppearanceDropDown.Options.UseFont = true;
-            this.cbbBaseType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbbBaseType.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cbbBaseType.Size = new System.Drawing.Size(170, 32);
-            this.cbbBaseType.StyleController = this.layoutControl1;
-            this.cbbBaseType.TabIndex = 15;
+            this.txbKeyword.Location = new System.Drawing.Point(100, 192);
+            this.txbKeyword.MenuManager = this.barManagerTP;
+            this.txbKeyword.Name = "txbKeyword";
+            this.txbKeyword.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbKeyword.Properties.Appearance.Options.UseFont = true;
+            this.txbKeyword.Size = new System.Drawing.Size(497, 135);
+            this.txbKeyword.StyleController = this.layoutControl1;
+            this.txbKeyword.TabIndex = 16;
             // 
             // ckConfidential
             // 
@@ -543,17 +548,6 @@
             this.lcPreAlertMonths.TextSize = new System.Drawing.Size(76, 24);
             this.lcPreAlertMonths.TextToControlDistance = 5;
             // 
-            // txbKeyword
-            // 
-            this.txbKeyword.Location = new System.Drawing.Point(100, 192);
-            this.txbKeyword.MenuManager = this.barManagerTP;
-            this.txbKeyword.Name = "txbKeyword";
-            this.txbKeyword.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txbKeyword.Properties.Appearance.Options.UseFont = true;
-            this.txbKeyword.Size = new System.Drawing.Size(497, 135);
-            this.txbKeyword.StyleController = this.layoutControl1;
-            this.txbKeyword.TabIndex = 16;
-            // 
             // lcKeyword
             // 
             this.lcKeyword.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
@@ -565,17 +559,25 @@
             this.lcKeyword.Text = "關鍵字";
             this.lcKeyword.TextSize = new System.Drawing.Size(76, 24);
             // 
-            // btnExtractKeywords
+            // cbbBaseType
             // 
-            this.btnExtractKeywords.Caption = "提取關鍵字";
-            this.btnExtractKeywords.Id = 13;
-            this.btnExtractKeywords.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnExtractKeywords.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
-            this.btnExtractKeywords.ItemAppearance.Hovered.Options.UseForeColor = true;
-            this.btnExtractKeywords.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.btnExtractKeywords.ItemAppearance.Normal.Options.UseFont = true;
-            this.btnExtractKeywords.Name = "btnExtractKeywords";
-            this.btnExtractKeywords.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExtractKeywords_ItemClick);
+            this.cbbBaseType.Location = new System.Drawing.Point(100, 12);
+            this.cbbBaseType.MenuManager = this.barManagerTP;
+            this.cbbBaseType.Name = "cbbBaseType";
+            this.cbbBaseType.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.cbbBaseType.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.cbbBaseType.Properties.Appearance.Options.UseFont = true;
+            this.cbbBaseType.Properties.Appearance.Options.UseForeColor = true;
+            this.cbbBaseType.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.cbbBaseType.Properties.AppearanceDropDown.Options.UseFont = true;
+            this.cbbBaseType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbbBaseType.Properties.NullText = "";
+            this.cbbBaseType.Properties.PopupSizeable = false;
+            this.cbbBaseType.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.cbbBaseType.Size = new System.Drawing.Size(170, 32);
+            this.cbbBaseType.StyleController = this.layoutControl1;
+            this.cbbBaseType.TabIndex = 15;
             // 
             // f205_Node_Info
             // 
@@ -596,7 +598,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.cbbBaseType.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbKeyword.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckConfidential.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDisplayName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbNotifyCycle.Properties)).EndInit();
@@ -616,8 +618,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcClass)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcConfidential)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcPreAlertMonths)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbKeyword.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcKeyword)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbBaseType.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -635,7 +637,6 @@
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
-        private DevExpress.XtraEditors.ComboBoxEdit cbbBaseType;
         private DevExpress.XtraEditors.CheckEdit ckConfidential;
         private DevExpress.XtraEditors.TextEdit txbDisplayName;
         private DevExpress.XtraEditors.TextEdit txbNotifyCycle;
@@ -657,5 +658,6 @@
         private DevExpress.XtraEditors.MemoEdit txbKeyword;
         private DevExpress.XtraLayout.LayoutControlItem lcKeyword;
         private DevExpress.XtraBars.BarButtonItem btnExtractKeywords;
+        private DevExpress.XtraEditors.LookUpEdit cbbBaseType;
     }
 }

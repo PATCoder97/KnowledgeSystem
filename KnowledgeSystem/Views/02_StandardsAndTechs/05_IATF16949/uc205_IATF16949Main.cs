@@ -2,6 +2,7 @@
 using DataAccessLayer;
 using DevExpress.Utils.Menu;
 using DevExpress.Utils.Svg;
+using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraSplashScreen;
@@ -77,6 +78,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
             btnAdd.ImageOptions.SvgImage = TPSvgimages.Add;
             btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
             btnExportExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
+            btnKeywordSearch.ImageOptions.SvgImage = TPSvgimages.Search;
         }
 
         private void CreateRuleGV()
@@ -297,6 +299,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
                 Confidential = currentData.Confidential,
                 IsFinalNode = true,
                 IdDept = currentData.IdDept,
+                BaseTypeId = currentData.BaseTypeId,
             };
 
             bool resultAdd = dt205_BaseBUS.Instance.Add(baseVer);
@@ -304,7 +307,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
             LoadData();
         }
 
-        private void LoadData(string keyword = null)
+        private void LoadData(string keyword = null, int baseTypeId = -1)
         {
             using (var handle = SplashScreenManager.ShowOverlayForm(tlsData))
             {
@@ -317,8 +320,13 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
                     baseDatas = dt205_BaseBUS.Instance.GetList();
                 }
 
+                if (baseTypeId == -1)
+                {
+                    baseTypeId = (int)barCbbBaseType.EditValue;
+                }
+
                 var displayDatas = (from data in baseDatas
-                                    where isManager205 ? true : data.Confidential != true
+                                    where (isManager205 ? true : data.Confidential != true) && data.BaseTypeId == baseTypeId
                                     select data).ToList();
 
                 //var deptsChecked = cbbDepts.Items.Where(r => r.CheckState == CheckState.Checked).Select(r => r.Value).ToList();
@@ -370,15 +378,19 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
                       join grp in userGroups on data.Id equals grp.IdGroup
                       select data).ToList();
 
-            var deptsCbb = (from data in depts
-                            join grp in groups on data.Id equals grp.IdDept
-                            select new CheckedListBoxItem() { Description = data.Id, Value = data.Id, CheckState = CheckState.Checked }).ToArray();
-
-            cbbDepts.Items.AddRange(deptsCbb);
-
             isManager205 = manager205grps.Any(group => userGroups.Any(userGroup => userGroup.IdGroup == group.Id));
 
-            cbbDepts.Items.AddRange(deptsCbb);
+            var dt205_types = dt205_TypeBUS.Instance.GetList();
+            cbbType.DataSource = dt205_types;
+            cbbType.DisplayMember = "DisplayName";
+            cbbType.ValueMember = "Id";
+
+            cbbType.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("DisplayName", "類別名稱"));
+            cbbType.ShowHeader = false;
+            cbbType.ShowFooter = false;
+            barCbbBaseType.EditValue = dt205_types.FirstOrDefault().Id;
+
+            cbbType.EditValueChanged += CbbType_EditValueChanged;
 
             if (!isManager205)
             {
@@ -386,6 +398,14 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
             }
 
             LoadData();
+        }
+
+        private void CbbType_EditValueChanged(object sender, EventArgs e)
+        {
+            LookUpEdit item = sender as LookUpEdit;
+            int newValue = (int)item.EditValue;
+
+            LoadData(baseTypeId: newValue);
         }
 
         private void tlsData_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)

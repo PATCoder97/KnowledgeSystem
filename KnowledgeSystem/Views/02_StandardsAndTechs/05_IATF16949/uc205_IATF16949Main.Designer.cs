@@ -36,7 +36,7 @@
             this.btnReload = new DevExpress.XtraBars.BarButtonItem();
             this.btnExportExcel = new DevExpress.XtraBars.BarButtonItem();
             this.barCbbBaseType = new DevExpress.XtraBars.BarEditItem();
-            this.cbbDepts = new DevExpress.XtraEditors.Repository.RepositoryItemCheckedComboBoxEdit();
+            this.CbbBaseType = new DevExpress.XtraEditors.Repository.RepositoryItemCheckedComboBoxEdit();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -59,13 +59,15 @@
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.btnKeywordSearch = new DevExpress.XtraBars.BarButtonItem();
+            this.cbbType = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbbDepts)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CbbBaseType)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tlsData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbType)).BeginInit();
             this.SuspendLayout();
             // 
             // barManagerTP
@@ -86,7 +88,8 @@
             this.barManagerTP.MainMenu = this.bar2;
             this.barManagerTP.MaxItemId = 13;
             this.barManagerTP.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.cbbDepts});
+            this.CbbBaseType,
+            this.cbbType});
             // 
             // bar2
             // 
@@ -160,25 +163,25 @@
             // barCbbBaseType
             // 
             this.barCbbBaseType.Caption = "文件類別";
-            this.barCbbBaseType.Edit = this.cbbDepts;
+            this.barCbbBaseType.Edit = this.cbbType;
             this.barCbbBaseType.EditWidth = 150;
             this.barCbbBaseType.Id = 11;
             this.barCbbBaseType.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.barCbbBaseType.ItemAppearance.Normal.Options.UseFont = true;
             this.barCbbBaseType.Name = "barCbbBaseType";
             // 
-            // cbbDepts
+            // CbbBaseType
             // 
-            this.cbbDepts.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbbDepts.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.cbbDepts.Appearance.Options.UseFont = true;
-            this.cbbDepts.Appearance.Options.UseForeColor = true;
-            this.cbbDepts.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbbDepts.AppearanceDropDown.Options.UseFont = true;
-            this.cbbDepts.AutoHeight = false;
-            this.cbbDepts.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.CbbBaseType.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CbbBaseType.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.CbbBaseType.Appearance.Options.UseFont = true;
+            this.CbbBaseType.Appearance.Options.UseForeColor = true;
+            this.CbbBaseType.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CbbBaseType.AppearanceDropDown.Options.UseFont = true;
+            this.CbbBaseType.AutoHeight = false;
+            this.CbbBaseType.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbbDepts.Name = "cbbDepts";
+            this.CbbBaseType.Name = "CbbBaseType";
             // 
             // barDockControlTop
             // 
@@ -413,6 +416,18 @@
             this.btnKeywordSearch.Name = "btnKeywordSearch";
             this.btnKeywordSearch.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnKeywordSearch_ItemClick);
             // 
+            // cbbType
+            // 
+            this.cbbType.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbType.Appearance.Options.UseFont = true;
+            this.cbbType.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbType.AppearanceDropDown.Options.UseFont = true;
+            this.cbbType.AutoHeight = false;
+            this.cbbType.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbbType.Name = "cbbType";
+            this.cbbType.NullText = "[Null]";
+            // 
             // uc205_IATF16949Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -426,12 +441,13 @@
             this.Size = new System.Drawing.Size(963, 582);
             this.Load += new System.EventHandler(this.uc205_IATF16949Main_Load);
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbbDepts)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CbbBaseType)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tlsData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbType)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -445,7 +461,7 @@
         private DevExpress.XtraBars.BarButtonItem btnReload;
         private DevExpress.XtraBars.BarButtonItem btnExportExcel;
         private DevExpress.XtraBars.BarEditItem barCbbBaseType;
-        private DevExpress.XtraEditors.Repository.RepositoryItemCheckedComboBoxEdit cbbDepts;
+        private DevExpress.XtraEditors.Repository.RepositoryItemCheckedComboBoxEdit CbbBaseType;
         private DevExpress.XtraBars.BarDockControl barDockControlTop;
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
@@ -468,5 +484,6 @@
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn11;
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn12;
         private DevExpress.XtraBars.BarButtonItem btnKeywordSearch;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit cbbType;
     }
 }

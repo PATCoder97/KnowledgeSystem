@@ -99,6 +99,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
                     btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                     btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                     EnabledController();
+                    cbbBaseType.Enabled = false;
+
                     break;
                 case EventFormInfo.Delete:
                     Text = $"刪除{formName}";
@@ -161,8 +163,14 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
 
             cbbClass.Properties.Items.AddRange(new string[] { "一階", "二階", "三階" });
 
-            // them du lieu basetype
-            cbbBaseType.Properties.Items.AddRange(new int[] { 1, 2, 3, 4 });
+            var dt205_types = dt205_TypeBUS.Instance.GetList();
+            cbbBaseType.Properties.DataSource = dt205_types;
+            cbbBaseType.Properties.DisplayMember = "DisplayName";
+            cbbBaseType.Properties.ValueMember = "Id";
+
+            cbbBaseType.Properties.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("DisplayName", "類別名稱"));
+            cbbBaseType.Properties.ShowHeader = false;
+            cbbBaseType.Properties.ShowFooter = false;
 
             switch (eventInfo)
             {
@@ -184,6 +192,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
                     txbNotifyCycle.EditValue = baseDoc.NotifyCycle;
                     txbPreAlertMonths.EditValue = baseDoc.PreAlertMonths;
                     txbKeyword.EditValue = baseDoc.Keyword;
+                    cbbBaseType.EditValue = baseDoc.BaseTypeId;
 
                     break;
                 case EventFormInfo.Update:
