@@ -2,6 +2,7 @@
 using DataAccessLayer;
 using DevExpress.Utils.Menu;
 using DevExpress.Utils.Svg;
+using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraSplashScreen;
@@ -40,6 +41,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
         BindingSource sourceData = new BindingSource();
         List<dm_Group> groups;
         List<dm_Departments> depts;
+        bool isManager205 = false;
 
         DXMenuItem itemAddNode;
         DXMenuItem itemEditNode;
@@ -76,6 +78,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
             btnAdd.ImageOptions.SvgImage = TPSvgimages.Add;
             btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
             btnExportExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
+            btnKeywordSearch.ImageOptions.SvgImage = TPSvgimages.Search;
         }
 
         private void CreateRuleGV()
@@ -296,6 +299,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
                 Confidential = currentData.Confidential,
                 IsFinalNode = true,
                 IdDept = currentData.IdDept,
+                BaseTypeId = currentData.BaseTypeId,
             };
 
             bool resultAdd = dt205_BaseBUS.Instance.Add(baseVer);
@@ -303,14 +307,27 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
             LoadData();
         }
 
-        // Thêm Node
-
-
-        private void LoadData()
+        private void LoadData(string keyword = null, int baseTypeId = -1)
         {
             using (var handle = SplashScreenManager.ShowOverlayForm(tlsData))
             {
-                baseDatas = dt205_BaseBUS.Instance.GetList();
+                if (!string.IsNullOrEmpty(keyword))
+                {
+                    baseDatas = dt205_BaseBUS.Instance.GetListByKeyword(keyword);
+                }
+                else
+                {
+                    baseDatas = dt205_BaseBUS.Instance.GetList();
+                }
+
+                if (baseTypeId == -1)
+                {
+                    baseTypeId = (int)barCbbBaseType.EditValue;
+                }
+
+                var displayDatas = (from data in baseDatas
+                                    where (isManager205 ? true : data.Confidential != true) && data.BaseTypeId == baseTypeId
+                                    select data).ToList();
 
                 //var deptsChecked = cbbDepts.Items.Where(r => r.CheckState == CheckState.Checked).Select(r => r.Value).ToList();
                 //var records = dt201_RecordCodeBUS.Instance.GetList();
@@ -322,16 +339,13 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
                 //              where deptsChecked.Contains(data.IdDept)
                 //              select new { data, dept, record }).ToList();
 
-                sourceData.DataSource = baseDatas;
+                sourceData.DataSource = displayDatas;
 
                 tlsData.RefreshDataSource();
                 tlsData.Refresh();
                 tlsData.BestFitColumns();
-
-                //tlsColDept.Visible = deptsChecked.Count > 1;
             }
         }
-
 
         private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
@@ -354,22 +368,44 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
             tlsData.ReadOnlyTreelist();
             tlsData.KeyDown += GridControlHelper.TreeViewCopyCellData_KeyDown;
 
-            var grpUsrs = dm_GroupUserBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id);
-
+            // Kiểm tra quyền từng ke để có quyền truy cập theo nhóm
+            var userGroups = dm_GroupUserBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id);
             depts = dm_DeptBUS.Instance.GetList();
-            groups = dm_GroupBUS.Instance.GetListByName("ISO組");
+            groups = dm_GroupBUS.Instance.GetListByName("IATF16949");
+            var manager205grps = dm_GroupBUS.Instance.GetListByName("IATF16949【管理】");
 
             groups = (from data in groups
-                      join grp in grpUsrs on data.Id equals grp.IdGroup
+                      join grp in userGroups on data.Id equals grp.IdGroup
                       select data).ToList();
 
-            var deptsCbb = (from data in depts
-                            join grp in groups on data.Id equals grp.IdDept
-                            select new CheckedListBoxItem() { Description = data.Id, Value = data.Id, CheckState = CheckState.Checked }).ToArray();
+            isManager205 = manager205grps.Any(group => userGroups.Any(userGroup => userGroup.IdGroup == group.Id));
 
-            cbbDepts.Items.AddRange(deptsCbb);
+            var dt205_types = dt205_TypeBUS.Instance.GetList();
+            cbbType.DataSource = dt205_types;
+            cbbType.DisplayMember = "DisplayName";
+            cbbType.ValueMember = "Id";
+
+            cbbType.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("DisplayName", "類別名稱"));
+            cbbType.ShowHeader = false;
+            cbbType.ShowFooter = false;
+            barCbbBaseType.EditValue = dt205_types.FirstOrDefault().Id;
+
+            cbbType.EditValueChanged += CbbType_EditValueChanged;
+
+            if (!isManager205)
+            {
+                btnAdd.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            }
 
             LoadData();
+        }
+
+        private void CbbType_EditValueChanged(object sender, EventArgs e)
+        {
+            LookUpEdit item = sender as LookUpEdit;
+            int newValue = (int)item.EditValue;
+
+            LoadData(baseTypeId: newValue);
         }
 
         private void tlsData_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
@@ -390,6 +426,11 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
                 {
                     item.Caption = translated;
                 }
+            }
+
+            if (!isManager205)
+            {
+                return;
             }
 
             // --- Kiểm tra node ---
@@ -480,6 +521,38 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
                 };
                 fInfo.Show(this);
             }
+        }
+
+        private void btnReload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            LoadData();
+        }
+
+        private void btnKeywordSearch_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            //====== Tạo hộp nhập từ khóa ======
+            XtraInputBoxArgs args = new XtraInputBoxArgs();
+            args.Caption = TPConfigs.SoftNameTW + " - 關鍵字搜尋 / Keyword Search";
+            args.Prompt = "請輸入關鍵字以搜尋文件：";
+            args.DefaultButtonIndex = 0;
+
+            TextEdit editor = new TextEdit();
+            editor.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F);
+            args.Editor = editor;
+
+            args.DefaultResponse = "";
+
+            //====== Hiển thị hộp nhập ======
+            object input = XtraInputBox.Show(args);
+            string keyword = input == null ? null : input.ToString().Trim();
+
+            // Nếu người dùng bấm Cancel hoặc không nhập gì thì thoát
+            if (string.IsNullOrEmpty(keyword))
+                return;
+
+            LoadData(keyword);
+
+            tlsData.ExpandAll();
         }
     }
 }

@@ -3,6 +3,7 @@ using Logger;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
+using System.Data.Entity.SqlServer;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -31,6 +32,130 @@ namespace BusinessLayer
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
                     return _context.dt205_Base.Where(r => string.IsNullOrEmpty(r.RemoveBy)).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
+        public List<dt205_Base> GetListByKeyword(string keyword)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    // Nếu không nhập keyword → trả về tất cả chưa xóa
+                    if (string.IsNullOrWhiteSpace(keyword))
+                    {
+                        return _context.dt205_Base
+                            .Where(r => string.IsNullOrEmpty(r.RemoveBy))
+                            .ToList();
+                    }
+
+                    // 🔍 Tìm bằng FULL-TEXT SQL
+                    string sql = @"
+                SELECT *
+                FROM dt205_Base
+                WHERE RemoveBy IS NULL AND CreateDate IS NOT NULL AND
+                (
+                    FREETEXT(DisplayName, @p0)
+                    OR FREETEXT(DisplayNameVN, @p0)
+                    OR FREETEXT(DisplayNameEN, @p0)
+                    OR FREETEXT(Keyword, @p0)
+                )";
+
+                    var result = _context.Database.SqlQuery<dt205_Base>(sql, keyword).ToList();
+
+                    // 🔁 Fallback nếu chưa index xong hoặc không ra kết quả
+                    if (result == null || result.Count == 0)
+                    {
+                        result = _context.dt205_Base
+                            .Where(r =>
+                                string.IsNullOrEmpty(r.RemoveBy) && r.CreateDate != null &&
+                                (
+                                    r.DisplayName.Contains(keyword) ||
+                                    r.DisplayNameVN.Contains(keyword) ||
+                                    r.DisplayNameEN.Contains(keyword) ||
+                                    r.Keyword.Contains(keyword)
+                                )
+                            )
+                            .ToList();
+                    }
+
+                    // ⚙️ Cache toàn bộ bảng để đệ quy nhanh
+                    var allItems = _context.dt205_Base
+                        .Where(r => string.IsNullOrEmpty(r.RemoveBy))
+                        .Select(r => new { r.Id, r.IdParent, r.IsFinalNode })
+                        .ToList();
+
+                    // 🧩 Thu thập cha
+                    HashSet<int> collectedParentIds = new HashSet<int>();
+                    Action<int> CollectParents = null;
+
+                    CollectParents = parentId =>
+                    {
+                        if (parentId <= 0 || collectedParentIds.Contains(parentId))
+                            return;
+
+                        collectedParentIds.Add(parentId);
+
+                        var parent = allItems.FirstOrDefault(x => x.Id == parentId);
+                        if (parent != null && parent.IdParent > 0)
+                            CollectParents(parent.IdParent);
+                    };
+
+                    foreach (var item in result.Where(r => r.IdParent > 0))
+                        CollectParents(item.IdParent);
+
+                    // 🧩 Thu thập con (chỉ của các node có IsFinalNode = true)
+                    HashSet<int> collectedChildIds = new HashSet<int>();
+                    Action<int> CollectChildren = null;
+
+                    CollectChildren = parentId =>
+                    {
+                        var children = allItems.Where(x => x.IdParent == parentId && x.IsFinalNode == true).ToList();
+                        foreach (var child in children)
+                        {
+                            if (!collectedChildIds.Contains(child.Id))
+                            {
+                                collectedChildIds.Add(child.Id);
+                                CollectChildren(child.Id); // đệ quy con
+                            }
+                        }
+                    };
+
+                    foreach (var item in result)
+                        CollectChildren(item.Id);
+
+                    // 🧩 Lấy bản ghi cha + con từ DB
+                    List<dt205_Base> allParents = new List<dt205_Base>();
+                    if (collectedParentIds.Any())
+                    {
+                        allParents = _context.dt205_Base
+                            .Where(r => collectedParentIds.Contains(r.Id))
+                            .ToList();
+                    }
+
+                    List<dt205_Base> allChildren = new List<dt205_Base>();
+                    if (collectedChildIds.Any())
+                    {
+                        allChildren = _context.dt205_Base
+                            .Where(r => collectedChildIds.Contains(r.Id))
+                            .ToList();
+                    }
+
+                    // 🔗 Hợp tất cả kết quả (từ khóa + cha + con), loại trùng
+                    result = result
+                        .Concat(allParents)
+                        .Concat(allChildren)
+                        .GroupBy(r => r.Id)
+                        .Select(g => g.First())
+                        .ToList();
+
+                    return result;
                 }
             }
             catch (Exception ex)

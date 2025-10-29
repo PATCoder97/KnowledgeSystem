@@ -35,12 +35,13 @@
             this.btnEdit = new DevExpress.XtraBars.BarButtonItem();
             this.btnDelete = new DevExpress.XtraBars.BarButtonItem();
             this.btnConfirm = new DevExpress.XtraBars.BarButtonItem();
+            this.btnExtractKeywords = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.cbbDept = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.txbKeyword = new DevExpress.XtraEditors.MemoEdit();
             this.ckConfidential = new DevExpress.XtraEditors.CheckEdit();
             this.txbDisplayName = new DevExpress.XtraEditors.TextEdit();
             this.txbNotifyCycle = new DevExpress.XtraEditors.TextEdit();
@@ -48,19 +49,23 @@
             this.cbbClass = new DevExpress.XtraEditors.ComboBoxEdit();
             this.txbDisplayNameEN = new DevExpress.XtraEditors.TextEdit();
             this.txbCreateDate = new DevExpress.XtraEditors.DateEdit();
+            this.txbPreAlertMonths = new DevExpress.XtraEditors.TextEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.lcNotifyCycle = new DevExpress.XtraLayout.LayoutControlItem();
-            this.lcDept = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcBaseType = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcCreateDate = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcDisplayNameVN = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcDisplayName = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcDisplayNameEN = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcClass = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcConfidential = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcPreAlertMonths = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcKeyword = new DevExpress.XtraLayout.LayoutControlItem();
+            this.cbbBaseType = new DevExpress.XtraEditors.LookUpEdit();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cbbDept.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbKeyword.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckConfidential.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDisplayName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbNotifyCycle.Properties)).BeginInit();
@@ -69,15 +74,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.txbDisplayNameEN.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbCreateDate.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbCreateDate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbPreAlertMonths.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcNotifyCycle)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcDept)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcBaseType)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcCreateDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDisplayNameVN)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDisplayName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDisplayNameEN)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcClass)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcConfidential)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcPreAlertMonths)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcKeyword)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbBaseType.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // barManagerTP
@@ -92,9 +101,10 @@
             this.barManagerTP.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.btnEdit,
             this.btnDelete,
-            this.btnConfirm});
+            this.btnConfirm,
+            this.btnExtractKeywords});
             this.barManagerTP.MainMenu = this.bar2;
-            this.barManagerTP.MaxItemId = 13;
+            this.barManagerTP.MaxItemId = 14;
             // 
             // bar2
             // 
@@ -120,7 +130,8 @@
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnEdit, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnDelete, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnConfirm, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnConfirm, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnExtractKeywords, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawDragBorder = false;
             this.bar2.OptionsBar.MultiLine = true;
@@ -164,21 +175,33 @@
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnConfirm_ItemClick);
             // 
+            // btnExtractKeywords
+            // 
+            this.btnExtractKeywords.Caption = "提取關鍵字";
+            this.btnExtractKeywords.Id = 13;
+            this.btnExtractKeywords.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnExtractKeywords.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnExtractKeywords.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnExtractKeywords.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.btnExtractKeywords.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnExtractKeywords.Name = "btnExtractKeywords";
+            this.btnExtractKeywords.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExtractKeywords_ItemClick);
+            // 
             // barDockControlTop
             // 
             this.barDockControlTop.CausesValidation = false;
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManagerTP;
-            this.barDockControlTop.Size = new System.Drawing.Size(562, 49);
+            this.barDockControlTop.Size = new System.Drawing.Size(609, 49);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 249);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 388);
             this.barDockControlBottom.Manager = this.barManagerTP;
-            this.barDockControlBottom.Size = new System.Drawing.Size(562, 0);
+            this.barDockControlBottom.Size = new System.Drawing.Size(609, 0);
             // 
             // barDockControlLeft
             // 
@@ -186,19 +209,19 @@
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 49);
             this.barDockControlLeft.Manager = this.barManagerTP;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 200);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 339);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(562, 49);
+            this.barDockControlRight.Location = new System.Drawing.Point(609, 49);
             this.barDockControlRight.Manager = this.barManagerTP;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 200);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 339);
             // 
             // layoutControl1
             // 
-            this.layoutControl1.Controls.Add(this.cbbDept);
+            this.layoutControl1.Controls.Add(this.txbKeyword);
             this.layoutControl1.Controls.Add(this.ckConfidential);
             this.layoutControl1.Controls.Add(this.txbDisplayName);
             this.layoutControl1.Controls.Add(this.txbNotifyCycle);
@@ -206,35 +229,30 @@
             this.layoutControl1.Controls.Add(this.cbbClass);
             this.layoutControl1.Controls.Add(this.txbDisplayNameEN);
             this.layoutControl1.Controls.Add(this.txbCreateDate);
+            this.layoutControl1.Controls.Add(this.txbPreAlertMonths);
+            this.layoutControl1.Controls.Add(this.cbbBaseType);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(562, 200);
+            this.layoutControl1.Size = new System.Drawing.Size(609, 339);
             this.layoutControl1.TabIndex = 6;
             this.layoutControl1.Text = "layoutControl1";
             // 
-            // cbbDept
+            // txbKeyword
             // 
-            this.cbbDept.Location = new System.Drawing.Point(100, 12);
-            this.cbbDept.MenuManager = this.barManagerTP;
-            this.cbbDept.Name = "cbbDept";
-            this.cbbDept.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.cbbDept.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.cbbDept.Properties.Appearance.Options.UseFont = true;
-            this.cbbDept.Properties.Appearance.Options.UseForeColor = true;
-            this.cbbDept.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.cbbDept.Properties.AppearanceDropDown.Options.UseFont = true;
-            this.cbbDept.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbbDept.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cbbDept.Size = new System.Drawing.Size(210, 32);
-            this.cbbDept.StyleController = this.layoutControl1;
-            this.cbbDept.TabIndex = 15;
+            this.txbKeyword.Location = new System.Drawing.Point(100, 192);
+            this.txbKeyword.MenuManager = this.barManagerTP;
+            this.txbKeyword.Name = "txbKeyword";
+            this.txbKeyword.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbKeyword.Properties.Appearance.Options.UseFont = true;
+            this.txbKeyword.Size = new System.Drawing.Size(497, 135);
+            this.txbKeyword.StyleController = this.layoutControl1;
+            this.txbKeyword.TabIndex = 16;
             // 
             // ckConfidential
             // 
-            this.ckConfidential.Location = new System.Drawing.Point(473, 13);
+            this.ckConfidential.Location = new System.Drawing.Point(518, 13);
             this.ckConfidential.MenuManager = this.barManagerTP;
             this.ckConfidential.Name = "ckConfidential";
             this.ckConfidential.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
@@ -245,7 +263,7 @@
             this.ckConfidential.Properties.CheckBoxOptions.Style = DevExpress.XtraEditors.Controls.CheckBoxStyle.SvgFlag1;
             this.ckConfidential.Properties.CheckBoxOptions.SvgColorChecked = System.Drawing.Color.Red;
             this.ckConfidential.Properties.CheckBoxOptions.SvgImageSize = new System.Drawing.Size(24, 24);
-            this.ckConfidential.Size = new System.Drawing.Size(77, 28);
+            this.ckConfidential.Size = new System.Drawing.Size(79, 28);
             this.ckConfidential.StyleController = this.layoutControl1;
             this.ckConfidential.TabIndex = 14;
             // 
@@ -258,13 +276,13 @@
             this.txbDisplayName.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbDisplayName.Properties.Appearance.Options.UseFont = true;
             this.txbDisplayName.Properties.Appearance.Options.UseForeColor = true;
-            this.txbDisplayName.Size = new System.Drawing.Size(450, 32);
+            this.txbDisplayName.Size = new System.Drawing.Size(497, 32);
             this.txbDisplayName.StyleController = this.layoutControl1;
             this.txbDisplayName.TabIndex = 11;
             // 
             // txbNotifyCycle
             // 
-            this.txbNotifyCycle.Location = new System.Drawing.Point(426, 156);
+            this.txbNotifyCycle.Location = new System.Drawing.Point(386, 156);
             this.txbNotifyCycle.Name = "txbNotifyCycle";
             this.txbNotifyCycle.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbNotifyCycle.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -275,7 +293,7 @@
             this.txbNotifyCycle.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
             this.txbNotifyCycle.Properties.MaskSettings.Set("mask", "N0");
             this.txbNotifyCycle.Properties.UseMaskAsDisplayFormat = true;
-            this.txbNotifyCycle.Size = new System.Drawing.Size(124, 32);
+            this.txbNotifyCycle.Size = new System.Drawing.Size(64, 32);
             this.txbNotifyCycle.StyleController = this.layoutControl1;
             this.txbNotifyCycle.TabIndex = 12;
             // 
@@ -287,13 +305,13 @@
             this.txbDisplayNameVN.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbDisplayNameVN.Properties.Appearance.Options.UseFont = true;
             this.txbDisplayNameVN.Properties.Appearance.Options.UseForeColor = true;
-            this.txbDisplayNameVN.Size = new System.Drawing.Size(450, 32);
+            this.txbDisplayNameVN.Size = new System.Drawing.Size(497, 32);
             this.txbDisplayNameVN.StyleController = this.layoutControl1;
             this.txbDisplayNameVN.TabIndex = 11;
             // 
             // cbbClass
             // 
-            this.cbbClass.Location = new System.Drawing.Point(357, 12);
+            this.cbbClass.Location = new System.Drawing.Point(317, 12);
             this.cbbClass.MenuManager = this.barManagerTP;
             this.cbbClass.Name = "cbbClass";
             this.cbbClass.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
@@ -307,7 +325,7 @@
             this.cbbClass.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbbClass.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cbbClass.Size = new System.Drawing.Size(109, 32);
+            this.cbbClass.Size = new System.Drawing.Size(194, 32);
             this.cbbClass.StyleController = this.layoutControl1;
             this.cbbClass.TabIndex = 12;
             // 
@@ -319,7 +337,7 @@
             this.txbDisplayNameEN.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbDisplayNameEN.Properties.Appearance.Options.UseFont = true;
             this.txbDisplayNameEN.Properties.Appearance.Options.UseForeColor = true;
-            this.txbDisplayNameEN.Size = new System.Drawing.Size(450, 32);
+            this.txbDisplayNameEN.Size = new System.Drawing.Size(497, 32);
             this.txbDisplayNameEN.StyleController = this.layoutControl1;
             this.txbDisplayNameEN.TabIndex = 11;
             // 
@@ -345,9 +363,26 @@
             this.txbCreateDate.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.txbCreateDate.Properties.MaskSettings.Set("mask", "");
             this.txbCreateDate.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.txbCreateDate.Size = new System.Drawing.Size(210, 32);
+            this.txbCreateDate.Size = new System.Drawing.Size(170, 32);
             this.txbCreateDate.StyleController = this.layoutControl1;
             this.txbCreateDate.TabIndex = 13;
+            // 
+            // txbPreAlertMonths
+            // 
+            this.txbPreAlertMonths.Location = new System.Drawing.Point(535, 156);
+            this.txbPreAlertMonths.Name = "txbPreAlertMonths";
+            this.txbPreAlertMonths.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.txbPreAlertMonths.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.txbPreAlertMonths.Properties.Appearance.Options.UseFont = true;
+            this.txbPreAlertMonths.Properties.Appearance.Options.UseForeColor = true;
+            this.txbPreAlertMonths.Properties.EditFormat.FormatString = "N0";
+            this.txbPreAlertMonths.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.txbPreAlertMonths.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
+            this.txbPreAlertMonths.Properties.MaskSettings.Set("mask", "N0");
+            this.txbPreAlertMonths.Properties.UseMaskAsDisplayFormat = true;
+            this.txbPreAlertMonths.Size = new System.Drawing.Size(62, 32);
+            this.txbPreAlertMonths.StyleController = this.layoutControl1;
+            this.txbPreAlertMonths.TabIndex = 12;
             // 
             // Root
             // 
@@ -355,15 +390,17 @@
             this.Root.GroupBordersVisible = false;
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.lcNotifyCycle,
-            this.lcDept,
+            this.lcBaseType,
             this.lcCreateDate,
             this.lcDisplayNameVN,
             this.lcDisplayName,
             this.lcDisplayNameEN,
             this.lcClass,
-            this.lcConfidential});
+            this.lcConfidential,
+            this.lcPreAlertMonths,
+            this.lcKeyword});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(562, 200);
+            this.Root.Size = new System.Drawing.Size(609, 339);
             this.Root.TextVisible = false;
             // 
             // lcNotifyCycle
@@ -377,28 +414,29 @@
             this.lcNotifyCycle.Control = this.txbNotifyCycle;
             this.lcNotifyCycle.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
             this.lcNotifyCycle.CustomizationFormText = "條文";
-            this.lcNotifyCycle.Location = new System.Drawing.Point(302, 144);
+            this.lcNotifyCycle.Location = new System.Drawing.Point(262, 144);
             this.lcNotifyCycle.Name = "lcNotifyCycle";
-            this.lcNotifyCycle.Size = new System.Drawing.Size(240, 36);
+            this.lcNotifyCycle.Size = new System.Drawing.Size(180, 36);
             this.lcNotifyCycle.Text = "通知週期(月)";
             this.lcNotifyCycle.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
             this.lcNotifyCycle.TextSize = new System.Drawing.Size(107, 24);
             this.lcNotifyCycle.TextToControlDistance = 5;
             // 
-            // lcDept
+            // lcBaseType
             // 
-            this.lcDept.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lcDept.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
-            this.lcDept.AppearanceItemCaption.Options.UseFont = true;
-            this.lcDept.AppearanceItemCaption.Options.UseForeColor = true;
-            this.lcDept.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
-            this.lcDept.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
-            this.lcDept.Control = this.cbbDept;
-            this.lcDept.Location = new System.Drawing.Point(0, 0);
-            this.lcDept.Name = "lcDept";
-            this.lcDept.Size = new System.Drawing.Size(302, 36);
-            this.lcDept.Text = "實驗室";
-            this.lcDept.TextSize = new System.Drawing.Size(76, 24);
+            this.lcBaseType.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lcBaseType.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.lcBaseType.AppearanceItemCaption.Options.UseFont = true;
+            this.lcBaseType.AppearanceItemCaption.Options.UseForeColor = true;
+            this.lcBaseType.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.lcBaseType.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.lcBaseType.Control = this.cbbBaseType;
+            this.lcBaseType.CustomizationFormText = "文件類別";
+            this.lcBaseType.Location = new System.Drawing.Point(0, 0);
+            this.lcBaseType.Name = "lcBaseType";
+            this.lcBaseType.Size = new System.Drawing.Size(262, 36);
+            this.lcBaseType.Text = "文件類別";
+            this.lcBaseType.TextSize = new System.Drawing.Size(76, 24);
             // 
             // lcCreateDate
             // 
@@ -411,7 +449,7 @@
             this.lcCreateDate.Control = this.txbCreateDate;
             this.lcCreateDate.Location = new System.Drawing.Point(0, 144);
             this.lcCreateDate.Name = "lcCreateDate";
-            this.lcCreateDate.Size = new System.Drawing.Size(302, 36);
+            this.lcCreateDate.Size = new System.Drawing.Size(262, 36);
             this.lcCreateDate.Text = "發佈日期";
             this.lcCreateDate.TextSize = new System.Drawing.Size(76, 24);
             // 
@@ -428,7 +466,7 @@
             this.lcDisplayNameVN.CustomizationFormText = "文件名稱";
             this.lcDisplayNameVN.Location = new System.Drawing.Point(0, 72);
             this.lcDisplayNameVN.Name = "lcDisplayNameVN";
-            this.lcDisplayNameVN.Size = new System.Drawing.Size(542, 36);
+            this.lcDisplayNameVN.Size = new System.Drawing.Size(589, 36);
             this.lcDisplayNameVN.Text = "越文名稱";
             this.lcDisplayNameVN.TextSize = new System.Drawing.Size(76, 24);
             // 
@@ -443,7 +481,7 @@
             this.lcDisplayName.Control = this.txbDisplayName;
             this.lcDisplayName.Location = new System.Drawing.Point(0, 36);
             this.lcDisplayName.Name = "lcDisplayName";
-            this.lcDisplayName.Size = new System.Drawing.Size(542, 36);
+            this.lcDisplayName.Size = new System.Drawing.Size(589, 36);
             this.lcDisplayName.Text = "中文名稱";
             this.lcDisplayName.TextSize = new System.Drawing.Size(76, 24);
             // 
@@ -460,7 +498,7 @@
             this.lcDisplayNameEN.CustomizationFormText = "中文名稱";
             this.lcDisplayNameEN.Location = new System.Drawing.Point(0, 108);
             this.lcDisplayNameEN.Name = "lcDisplayNameEN";
-            this.lcDisplayNameEN.Size = new System.Drawing.Size(542, 36);
+            this.lcDisplayNameEN.Size = new System.Drawing.Size(589, 36);
             this.lcDisplayNameEN.Text = "英文名稱";
             this.lcDisplayNameEN.TextSize = new System.Drawing.Size(76, 24);
             // 
@@ -473,9 +511,9 @@
             this.lcClass.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             this.lcClass.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.lcClass.Control = this.cbbClass;
-            this.lcClass.Location = new System.Drawing.Point(302, 0);
+            this.lcClass.Location = new System.Drawing.Point(262, 0);
             this.lcClass.Name = "lcClass";
-            this.lcClass.Size = new System.Drawing.Size(156, 36);
+            this.lcClass.Size = new System.Drawing.Size(241, 36);
             this.lcClass.Text = "階層";
             this.lcClass.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
             this.lcClass.TextSize = new System.Drawing.Size(38, 24);
@@ -484,18 +522,68 @@
             // lcConfidential
             // 
             this.lcConfidential.Control = this.ckConfidential;
-            this.lcConfidential.Location = new System.Drawing.Point(458, 0);
+            this.lcConfidential.Location = new System.Drawing.Point(503, 0);
             this.lcConfidential.Name = "lcConfidential";
             this.lcConfidential.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 2, 3, 2);
-            this.lcConfidential.Size = new System.Drawing.Size(84, 36);
+            this.lcConfidential.Size = new System.Drawing.Size(86, 36);
             this.lcConfidential.TextSize = new System.Drawing.Size(0, 0);
             this.lcConfidential.TextVisible = false;
+            // 
+            // lcPreAlertMonths
+            // 
+            this.lcPreAlertMonths.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lcPreAlertMonths.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.lcPreAlertMonths.AppearanceItemCaption.Options.UseFont = true;
+            this.lcPreAlertMonths.AppearanceItemCaption.Options.UseForeColor = true;
+            this.lcPreAlertMonths.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.lcPreAlertMonths.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.lcPreAlertMonths.Control = this.txbPreAlertMonths;
+            this.lcPreAlertMonths.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.lcPreAlertMonths.CustomizationFormText = "條文";
+            this.lcPreAlertMonths.Location = new System.Drawing.Point(442, 144);
+            this.lcPreAlertMonths.Name = "lcPreAlertMonths";
+            this.lcPreAlertMonths.Size = new System.Drawing.Size(147, 36);
+            this.lcPreAlertMonths.Text = "提醒月數";
+            this.lcPreAlertMonths.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
+            this.lcPreAlertMonths.TextSize = new System.Drawing.Size(76, 24);
+            this.lcPreAlertMonths.TextToControlDistance = 5;
+            // 
+            // lcKeyword
+            // 
+            this.lcKeyword.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lcKeyword.AppearanceItemCaption.Options.UseFont = true;
+            this.lcKeyword.Control = this.txbKeyword;
+            this.lcKeyword.Location = new System.Drawing.Point(0, 180);
+            this.lcKeyword.Name = "lcKeyword";
+            this.lcKeyword.Size = new System.Drawing.Size(589, 139);
+            this.lcKeyword.Text = "關鍵字";
+            this.lcKeyword.TextSize = new System.Drawing.Size(76, 24);
+            // 
+            // cbbBaseType
+            // 
+            this.cbbBaseType.Location = new System.Drawing.Point(100, 12);
+            this.cbbBaseType.MenuManager = this.barManagerTP;
+            this.cbbBaseType.Name = "cbbBaseType";
+            this.cbbBaseType.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.cbbBaseType.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.cbbBaseType.Properties.Appearance.Options.UseFont = true;
+            this.cbbBaseType.Properties.Appearance.Options.UseForeColor = true;
+            this.cbbBaseType.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.cbbBaseType.Properties.AppearanceDropDown.Options.UseFont = true;
+            this.cbbBaseType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbbBaseType.Properties.NullText = "";
+            this.cbbBaseType.Properties.PopupSizeable = false;
+            this.cbbBaseType.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.cbbBaseType.Size = new System.Drawing.Size(170, 32);
+            this.cbbBaseType.StyleController = this.layoutControl1;
+            this.cbbBaseType.TabIndex = 15;
             // 
             // f205_Node_Info
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(562, 249);
+            this.ClientSize = new System.Drawing.Size(609, 388);
             this.Controls.Add(this.layoutControl1);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
@@ -510,7 +598,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.cbbDept.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbKeyword.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckConfidential.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDisplayName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbNotifyCycle.Properties)).EndInit();
@@ -519,15 +607,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.txbDisplayNameEN.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbCreateDate.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbCreateDate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbPreAlertMonths.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcNotifyCycle)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcDept)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcBaseType)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcCreateDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDisplayNameVN)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDisplayName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDisplayNameEN)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcClass)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcConfidential)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcPreAlertMonths)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcKeyword)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbBaseType.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -545,7 +637,6 @@
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
-        private DevExpress.XtraEditors.ComboBoxEdit cbbDept;
         private DevExpress.XtraEditors.CheckEdit ckConfidential;
         private DevExpress.XtraEditors.TextEdit txbDisplayName;
         private DevExpress.XtraEditors.TextEdit txbNotifyCycle;
@@ -553,7 +644,7 @@
         private DevExpress.XtraEditors.ComboBoxEdit cbbClass;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.LayoutControlItem lcNotifyCycle;
-        private DevExpress.XtraLayout.LayoutControlItem lcDept;
+        private DevExpress.XtraLayout.LayoutControlItem lcBaseType;
         private DevExpress.XtraLayout.LayoutControlItem lcCreateDate;
         private DevExpress.XtraLayout.LayoutControlItem lcConfidential;
         private DevExpress.XtraLayout.LayoutControlItem lcDisplayNameVN;
@@ -562,5 +653,11 @@
         private DevExpress.XtraEditors.TextEdit txbDisplayNameEN;
         private DevExpress.XtraLayout.LayoutControlItem lcDisplayNameEN;
         private DevExpress.XtraEditors.DateEdit txbCreateDate;
+        private DevExpress.XtraEditors.TextEdit txbPreAlertMonths;
+        private DevExpress.XtraLayout.LayoutControlItem lcPreAlertMonths;
+        private DevExpress.XtraEditors.MemoEdit txbKeyword;
+        private DevExpress.XtraLayout.LayoutControlItem lcKeyword;
+        private DevExpress.XtraBars.BarButtonItem btnExtractKeywords;
+        private DevExpress.XtraEditors.LookUpEdit cbbBaseType;
     }
 }

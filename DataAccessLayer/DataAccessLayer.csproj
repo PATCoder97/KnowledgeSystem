@@ -170,6 +170,9 @@
     <Compile Include="dt205_Form.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
+    <Compile Include="dt205_Type.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
     <Compile Include="dt206_DocCategories.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
