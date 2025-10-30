@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc311_ExpenseMain));
             this.gvDetail = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -73,6 +73,7 @@
             this.btnExcel = new DevExpress.XtraBars.BarButtonItem();
             this.btnGetManagerVehicle = new DevExpress.XtraBars.BarButtonItem();
             this.btnGetFillFuel = new DevExpress.XtraBars.BarButtonItem();
+            this.btnAddXmlFile = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -151,7 +152,7 @@
             this.gridColumn17.FieldName = "DisplayName";
             this.gridColumn17.Name = "gridColumn17";
             this.gridColumn17.Visible = true;
-            this.gridColumn17.VisibleIndex = 2;
+            this.gridColumn17.VisibleIndex = 1;
             // 
             // gridColumn18
             // 
@@ -159,7 +160,7 @@
             this.gridColumn18.FieldName = "Unit";
             this.gridColumn18.Name = "gridColumn18";
             this.gridColumn18.Visible = true;
-            this.gridColumn18.VisibleIndex = 3;
+            this.gridColumn18.VisibleIndex = 2;
             // 
             // gridColumn19
             // 
@@ -168,7 +169,7 @@
             this.gridColumn19.FieldName = "Quantity";
             this.gridColumn19.Name = "gridColumn19";
             this.gridColumn19.Visible = true;
-            this.gridColumn19.VisibleIndex = 4;
+            this.gridColumn19.VisibleIndex = 3;
             // 
             // gridColumn20
             // 
@@ -178,7 +179,7 @@
             this.gridColumn20.FieldName = "UnitPrice";
             this.gridColumn20.Name = "gridColumn20";
             this.gridColumn20.Visible = true;
-            this.gridColumn20.VisibleIndex = 5;
+            this.gridColumn20.VisibleIndex = 4;
             // 
             // gridColumn21
             // 
@@ -188,7 +189,7 @@
             this.gridColumn21.FieldName = "Amount";
             this.gridColumn21.Name = "gridColumn21";
             this.gridColumn21.Visible = true;
-            this.gridColumn21.VisibleIndex = 6;
+            this.gridColumn21.VisibleIndex = 5;
             // 
             // gridColumn22
             // 
@@ -196,7 +197,7 @@
             this.gridColumn22.FieldName = "VATRate";
             this.gridColumn22.Name = "gridColumn22";
             this.gridColumn22.Visible = true;
-            this.gridColumn22.VisibleIndex = 7;
+            this.gridColumn22.VisibleIndex = 6;
             // 
             // gridColumn23
             // 
@@ -206,7 +207,7 @@
             this.gridColumn23.FieldName = "VATAmount";
             this.gridColumn23.Name = "gridColumn23";
             this.gridColumn23.Visible = true;
-            this.gridColumn23.VisibleIndex = 8;
+            this.gridColumn23.VisibleIndex = 7;
             // 
             // gridColumn24
             // 
@@ -214,7 +215,7 @@
             this.gridColumn24.FieldName = "Note";
             this.gridColumn24.Name = "gridColumn24";
             this.gridColumn24.Visible = true;
-            this.gridColumn24.VisibleIndex = 9;
+            this.gridColumn24.VisibleIndex = 8;
             // 
             // gcData
             // 
@@ -223,10 +224,10 @@
             this.gcData.EmbeddedNavigator.Buttons.Edit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.EndEdit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.Remove.Visible = false;
-            gridLevelNode1.LevelTemplate = this.gvDetail;
-            gridLevelNode1.RelationName = "Detail";
+            gridLevelNode2.LevelTemplate = this.gvDetail;
+            gridLevelNode2.RelationName = "Detail";
             this.gcData.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode1});
+            gridLevelNode2});
             this.gcData.Location = new System.Drawing.Point(12, 12);
             this.gcData.MainView = this.gvData;
             this.gcData.Name = "gcData";
@@ -501,9 +502,10 @@
             this.btnReload,
             this.btnExcel,
             this.btnGetManagerVehicle,
-            this.btnGetFillFuel});
+            this.btnGetFillFuel,
+            this.btnAddXmlFile});
             this.barManagerTP.MainMenu = this.bar2;
-            this.barManagerTP.MaxItemId = 17;
+            this.barManagerTP.MaxItemId = 18;
             // 
             // bar2
             // 
@@ -528,6 +530,7 @@
             this.bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnAdd, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnAddXmlFile, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnReload, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnExcel, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnGetManagerVehicle, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
@@ -540,7 +543,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Caption = "新增";
+            this.btnAdd.Caption = "新增【線上】";
             this.btnAdd.Id = 0;
             this.btnAdd.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnAdd.ImageOptions.SvgImage")));
             this.btnAdd.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
@@ -589,6 +592,15 @@
             this.btnGetFillFuel.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnGetFillFuel.Name = "btnGetFillFuel";
             this.btnGetFillFuel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnGetFillFuel_ItemClick);
+            // 
+            // btnAddXmlFile
+            // 
+            this.btnAddXmlFile.Caption = "新增【檔案xml】";
+            this.btnAddXmlFile.Id = 17;
+            this.btnAddXmlFile.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnAddXmlFile.ImageOptions.SvgImage")));
+            this.btnAddXmlFile.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnAddXmlFile.Name = "btnAddXmlFile";
+            this.btnAddXmlFile.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAddXmlFile_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -730,5 +742,6 @@
         private DevExpress.XtraBars.BarButtonItem btnGetManagerVehicle;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn28;
         private DevExpress.XtraBars.BarButtonItem btnGetFillFuel;
+        private DevExpress.XtraBars.BarButtonItem btnAddXmlFile;
     }
 }

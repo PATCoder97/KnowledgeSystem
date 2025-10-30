@@ -1,5 +1,6 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
+using DevExpress.CodeParser.VB;
 using DevExpress.Utils.Menu;
 using DevExpress.Utils.Svg;
 using DevExpress.XtraEditors;
@@ -13,6 +14,7 @@ using DevExpress.XtraTreeList.Columns;
 using DevExpress.XtraTreeList.Nodes;
 using DevExpress.XtraTreeList.StyleFormatConditions;
 using DocumentFormat.OpenXml.Spreadsheet;
+using KAutoHelper;
 using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949;
 using Newtonsoft.Json.Linq;
@@ -28,13 +30,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using static KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement.f311_AutoERP;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
 {
     public partial class uc311_ExpenseMain : XtraUserControl
     {
-        private static readonly string FORMAT_FILE = @"C:\Users\Dell Alpha\Desktop\TestPython\Formats.json";
         private static readonly string URL = "https://www.meinvoice.vn/tra-cuu/GetInvoiceDataByTransactionID";
 
         public uc311_ExpenseMain()
@@ -75,7 +77,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
 
         private void InitializeIcon()
         {
-            btnAdd.ImageOptions.SvgImage = TPSvgimages.Add;
+            //btnAdd.ImageOptions.SvgImage = TPSvgimages.Add;
             btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
             btnExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
             btnGetManagerVehicle.ImageOptions.SvgImage = TPSvgimages.Gears;
@@ -180,7 +182,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                 sellerTax,
                 buyerTax,
                 "A1",
-                description,  "", "", "", "", "", "", "", "", "", "", "", "",
+                description,
             });
 
             //====== 組合發票資料字串 / Build Invoice Data String ======
@@ -192,7 +194,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                 return string.Join(TAB, new string[]
                 {
                     deptSub, "",
-                    "NN", "",
+                    "NN",
                     "E",
                     invoice.SellerTax,
                     invoice.InvoiceCode,
@@ -204,9 +206,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             string invoiceDataCombined = string.Join(TAB, invoiceDataStrings);
 
             // 🔹 Gom dữ liệu gửi đi ERP / 整合發送至ERP資料
-            List<string> erpDataPayload = new List<string>();
-            erpDataPayload.Add(prefixKey);
-            erpDataPayload.Add(invoiceDataCombined);
+            List<ErpAction> erpDataPayload = new List<ErpAction>();
+            erpDataPayload.Add(new ErpAction() { Text = prefixKey });
+
+            var subBitmap = ImageScanOpenCV.GetImage(Path.Combine(TPConfigs.Folder311, "tempSubmitBtn.png"));
+            erpDataPayload.Add(new ErpAction() { IsClick = true, TempImage = subBitmap });
+            erpDataPayload.Add(new ErpAction() { Text = invoiceDataCombined });
 
             // Hiển thị cảnh báo trước khi mở form ERP / 顯示警告訊息
             MsgBoxAlert();
@@ -310,7 +315,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             string invoiceDataString = string.Join(tabDelimiter, invoiceStrings);
 
             // 🔹 Gom dữ liệu thành danh sách gửi đi
-            List<string> erpDataList = new List<string> { prefixKey, invoiceDataString };
+            List<ErpAction> erpDataList = new List<ErpAction> { new ErpAction() { Text = prefixKey }, new ErpAction() { Text = invoiceDataString } };
 
             MsgBoxAlert();
 
@@ -366,7 +371,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             string invoiceDataString = string.Join(tabDelimiter, invoiceStrings);
 
             // Gom dữ liệu thành danh sách
-            List<string> erpDataList = new List<string>() { prefixKey, invoiceDataString };
+            List<ErpAction> erpDataList = new List<ErpAction> { new ErpAction() { Text = prefixKey }, new ErpAction() { Text = invoiceDataString } };
 
             MsgBoxAlert();
 
@@ -425,141 +430,151 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
         }
 
         // ========== MAIN FUNCTION ==========
-        private static async Task<bool> ParseInvoiceAsync(string transactionId)
+        private static async Task<bool> ParseInvoiceAsync(string transactionId = null, string xmlFilePath = null)
         {
             try
             {
-                using (var client = new HttpClient())
+                string xmlString = "";
+
+                if (!string.IsNullOrEmpty(xmlFilePath))
                 {
-                    var formData = new FormUrlEncodedContent(new Dictionary<string, string> {
+                    xmlString = File.ReadAllText(xmlFilePath);
+                }
+                else
+                {
+                    using (var client = new HttpClient())
+                    {
+                        var formData = new FormUrlEncodedContent(new Dictionary<string, string> {
                         { "transactionID", transactionId }
                     });
 
-                    var response = await client.PostAsync(URL, formData);
-                    if (!response.IsSuccessStatusCode)
-                    {
-                        XtraMessageBox.Show($"Không thể truy cập MISA API. Mã lỗi: {response.StatusCode}",
-                            "Lỗi truy cập", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return false;
-                    }
-
-                    var jsonText = await response.Content.ReadAsStringAsync();
-                    var json = JObject.Parse(jsonText);
-                    var xmlString = json.Value<string>("data");
-
-                    if (string.IsNullOrEmpty(xmlString))
-                    {
-                        XtraMessageBox.Show("Không có dữ liệu XML trong phản hồi!", "Lỗi dữ liệu",
-                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return false;
-                    }
-
-                    var root = XElement.Parse(xmlString);
-                    var formats = JObject.Parse(File.ReadAllText(FORMAT_FILE));
-
-                    string fmtName = DetectFormat(root, formats);
-                    if (fmtName == null)
-                    {
-                        XtraMessageBox.Show("Không nhận dạng được loại hóa đơn!", "Cảnh báo",
-                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return false;
-                    }
-
-                    var fmt = (JObject)formats[fmtName];
-
-                    // --- Khởi tạo đối tượng ---
-                    var invoiceData = new dt311_Invoice
-                    {
-                        SourceType = fmtName,
-                        TransactionID = transactionId,
-                        IdDept = idDept2Word
-                    };
-
-                    var itemsList = new List<dt311_InvoiceItem>();
-
-                    // --- Parse fields ---
-                    var fields = (JObject)fmt["fields"];
-                    foreach (var field in fields)
-                    {
-                        string key = field.Key;
-                        var path = field.Value;
-                        string value = ExtractField(root, path);
-
-                        switch (key)
+                        var response = await client.PostAsync(URL, formData);
+                        if (!response.IsSuccessStatusCode)
                         {
-                            case "invoice_code": invoiceData.InvoiceCode = value; break;
-                            case "invoice_number": invoiceData.InvoiceNumber = value; break;
-                            case "issue_date":
-                                if (DateTime.TryParse(value, out var d)) invoiceData.IssueDate = d;
-                                break;
-                            case "seller_tax": invoiceData.SellerTax = value; break;
-                            case "buyer_tax": invoiceData.BuyerTax = value; break;
-                            case "total_before_vat":
-                                invoiceData.TotalBeforeVAT = ParseDecimal(value); break;
-                            case "vat_amount":
-                                invoiceData.VATAmount = ParseDecimal(value); break;
-                            case "total_after_vat":
-                                invoiceData.TotalAfterVAT = ParseDecimal(value); break;
-                        }
-                    }
-
-                    // --- Seller & Buyer ---
-                    var seller = new dt311_SellerBuyer
-                    {
-                        Tax = invoiceData.SellerTax,
-                        DisplayName = ExtractField(root, fmt["fields"]["seller_name"])
-                    };
-                    var buyer = new dt311_SellerBuyer
-                    {
-                        Tax = invoiceData.BuyerTax,
-                        DisplayName = ExtractField(root, fmt["fields"]["buyer_name"])
-                    };
-
-                    // --- Lưu dữ liệu ---
-                    string invoiceId = dt311_InvoiceBUS.Instance.AddOrUpdate(invoiceData);
-                    dt311_SellerBuyerBUS.Instance.AddOrUpdate(seller);
-                    dt311_SellerBuyerBUS.Instance.AddOrUpdate(buyer);
-
-                    // --- Parse danh sách hàng ---
-                    string listTag = fmt["list_items"].ToString();
-                    var itemFields = (JObject)fmt["item_fields"];
-
-                    foreach (var el in root.Descendants().Where(e => e.Name.LocalName == listTag))
-                    {
-                        var item = new dt311_InvoiceItem { IdInvoice = invoiceId };
-
-                        foreach (var kv in itemFields)
-                        {
-                            string val = ExtractField(el, kv.Value);
-                            switch (kv.Key)
-                            {
-                                case "line_number": item.LineNumber = val; break;
-                                case "code": item.Code = val; break;
-                                case "name": item.DisplayName = val; break;
-                                case "unit": item.Unit = val; break;
-                                case "quantity": item.Quantity = ParseDecimal(val); break;
-                                case "unit_price": item.UnitPrice = ParseDecimal(val); break;
-                                case "amount": item.Amount = ParseDecimal(val); break;
-                                case "vat_rate": item.VATRate = ExtractNumber(val); break;
-                                case "vat_amount": item.VATAmount = ParseDecimal(val); break;
-                                case "note": item.Note = val; break;
-                            }
+                            XtraMessageBox.Show($"Không thể truy cập MISA API. Mã lỗi: {response.StatusCode}",
+                                "Lỗi truy cập", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return false;
                         }
 
-                        itemsList.Add(item);
+                        var jsonText = await response.Content.ReadAsStringAsync();
+                        var json = JObject.Parse(jsonText);
+                        xmlString = json.Value<string>("data");
                     }
-
-                    // --- Lưu danh sách hàng ---
-                    dt311_InvoiceItemBUS.Instance.RemoveRangeByIdInvoice(invoiceId);
-                    dt311_InvoiceItemBUS.Instance.AddRange(itemsList);
-
-                    XtraMessageBox.Show(
-                        $"Đã thêm hóa đơn số {invoiceData.InvoiceNumber} ({invoiceData.InvoiceCode})\n" +
-                        $"Người bán: {seller.DisplayName}\nNgười mua: {buyer.DisplayName}",
-                        "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    return true;
                 }
+
+                if (string.IsNullOrEmpty(xmlString))
+                {
+                    XtraMessageBox.Show("Không có dữ liệu XML trong phản hồi!", "Lỗi dữ liệu",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+                }
+
+                var root = XElement.Parse(xmlString);
+                var formats = JObject.Parse(File.ReadAllText(Path.Combine(TPConfigs.Folder311, "invoice_formats.json")));
+
+                string fmtName = DetectFormat(root, formats);
+                if (fmtName == null)
+                {
+                    XtraMessageBox.Show("Không nhận dạng được loại hóa đơn!", "Cảnh báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+                }
+
+                var fmt = (JObject)formats[fmtName];
+
+                // --- Khởi tạo đối tượng ---
+                var invoiceData = new dt311_Invoice
+                {
+                    SourceType = fmtName,
+                    TransactionID = transactionId,
+                    IdDept = idDept2Word
+                };
+
+                var itemsList = new List<dt311_InvoiceItem>();
+
+                // --- Parse fields ---
+                var fields = (JObject)fmt["fields"];
+                foreach (var field in fields)
+                {
+                    string key = field.Key;
+                    var path = field.Value;
+                    string value = ExtractField(root, path);
+
+                    switch (key)
+                    {
+                        case "invoice_id": if (string.IsNullOrEmpty(invoiceData.TransactionID)) invoiceData.TransactionID = value; break;
+                        case "invoice_code": invoiceData.InvoiceCode = value; break;
+                        case "invoice_number": invoiceData.InvoiceNumber = value; break;
+                        case "issue_date":
+                            if (DateTime.TryParse(value, out var d)) invoiceData.IssueDate = d;
+                            break;
+                        case "seller_tax": invoiceData.SellerTax = value; break;
+                        case "buyer_tax": invoiceData.BuyerTax = value; break;
+                        case "total_before_vat":
+                            invoiceData.TotalBeforeVAT = ParseDecimal(value); break;
+                        case "vat_amount":
+                            invoiceData.VATAmount = ParseDecimal(value); break;
+                        case "total_after_vat":
+                            invoiceData.TotalAfterVAT = ParseDecimal(value); break;
+                    }
+                }
+
+                // --- Seller & Buyer ---
+                var seller = new dt311_SellerBuyer
+                {
+                    Tax = invoiceData.SellerTax,
+                    DisplayName = ExtractField(root, fmt["fields"]["seller_name"])
+                };
+                var buyer = new dt311_SellerBuyer
+                {
+                    Tax = invoiceData.BuyerTax,
+                    DisplayName = ExtractField(root, fmt["fields"]["buyer_name"])
+                };
+
+                // --- Lưu dữ liệu ---
+                string invoiceId = dt311_InvoiceBUS.Instance.AddOrUpdate(invoiceData);
+                dt311_SellerBuyerBUS.Instance.AddOrUpdate(seller);
+                dt311_SellerBuyerBUS.Instance.AddOrUpdate(buyer);
+
+                // --- Parse danh sách hàng ---
+                string listTag = fmt["list_items"].ToString();
+                var itemFields = (JObject)fmt["item_fields"];
+
+                foreach (var el in root.Descendants().Where(e => e.Name.LocalName == listTag))
+                {
+                    var item = new dt311_InvoiceItem { IdInvoice = invoiceId };
+
+                    foreach (var kv in itemFields)
+                    {
+                        string val = ExtractField(el, kv.Value);
+                        switch (kv.Key)
+                        {
+                            case "line_number": item.LineNumber = val; break;
+                            case "code": item.Code = val; break;
+                            case "name": item.DisplayName = val; break;
+                            case "unit": item.Unit = val; break;
+                            case "quantity": item.Quantity = ParseDecimal(val); break;
+                            case "unit_price": item.UnitPrice = ParseDecimal(val); break;
+                            case "amount": item.Amount = ParseDecimal(val); break;
+                            case "vat_rate": item.VATRate = ExtractNumber(val); break;
+                            case "vat_amount": item.VATAmount = ParseDecimal(val); break;
+                            case "note": item.Note = val; break;
+                        }
+                    }
+
+                    itemsList.Add(item);
+                }
+
+                // --- Lưu danh sách hàng ---
+                dt311_InvoiceItemBUS.Instance.RemoveRangeByIdInvoice(invoiceId);
+                dt311_InvoiceItemBUS.Instance.AddRange(itemsList);
+
+                XtraMessageBox.Show(
+                    $"Đã thêm hóa đơn số {invoiceData.InvoiceNumber} ({invoiceData.InvoiceCode})\n" +
+                    $"Người bán: {seller.DisplayName}\nNgười mua: {buyer.DisplayName}",
+                    "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                return true;
             }
             catch (Exception ex)
             {
@@ -686,6 +701,35 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             LoadData();
         }
 
+        private async void btnAddXmlFile_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Title = "Chọn file XML";
+                openFileDialog.Filter = "XML files (*.xml)|*.xml|All files (*.*)|*.*";
+
+                if (openFileDialog.ShowDialog() != DialogResult.OK)
+                    return;
+
+                string filePath = openFileDialog.FileName;
+
+                btnAdd.Enabled = false;
+                try
+                {
+                    using (var handle = SplashScreenManager.ShowOverlayForm(this))
+                    {
+                        var ok = await ParseInvoiceAsync(xmlFilePath: filePath);
+                    }
+                }
+                finally
+                {
+                    btnAdd.Enabled = true;
+                }
+
+                LoadData();
+            }
+        }
+
         private void uc311_ExpenseMain_Load(object sender, EventArgs e)
         {
             gvData.ReadOnlyGridView();
@@ -781,7 +825,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
 
                     foreach (var item in vehicles)
                     {
-                        string managerID = await BorrVehicleHelper.Instance.GetManagerVehicle(item.LicensePlate);
+                        string managerID = await BorrVehicleHelper.Instance.GetManagerVehicle(item.LicensePlate.Replace(".", ""));
                         item.ManagerId = managerID;
 
                         dt311_VehicleManagementBUS.Instance.AddOrUpdate(item);

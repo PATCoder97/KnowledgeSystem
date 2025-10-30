@@ -1,5 +1,8 @@
-﻿using DevExpress.XtraEditors;
+﻿using DevExpress.Utils.Svg;
+using DevExpress.XtraEditors;
 using DevExpress.XtraSplashScreen;
+using DocumentFormat.OpenXml.Drawing;
+using KAutoHelper;
 using KnowledgeSystem.Helpers;
 using System;
 using System.Collections.Generic;
@@ -18,10 +21,19 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
 {
     public partial class f311_AutoERP : DevExpress.XtraEditors.XtraForm
     {
-        public f311_AutoERP(List<string> datas)
+        public f311_AutoERP(List<ErpAction> datas)
         {
             InitializeComponent();
-            keyData = datas;
+            erpActions = datas;
+        }
+
+        public class ErpAction
+        {
+            public bool IsClick { get; set; }        // true = click, false = send text
+            public string Text { get; set; }         // Dữ liệu để SendKeys
+            public Bitmap TempImage { get; set; }
+            public int X { get; set; }               // Vị trí click X
+            public int Y { get; set; }               // Vị trí click Y
         }
 
         // Import the mouse_event function from user32.dll
@@ -43,7 +55,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             }
         }
 
-        List<string> keyData = new List<string>();
+        List<ErpAction> erpActions = new List<ErpAction>();
 
         public void BlockUserInput(Action action)
         {
@@ -80,12 +92,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             StartPosition = FormStartPosition.Manual;
             int x = Screen.PrimaryScreen.WorkingArea.Right - Width;
             int y = Screen.PrimaryScreen.WorkingArea.Top;
-            Location = new Point(x, y);
+            Location = new System.Drawing.Point(x, y);
         }
 
         private void btnAutoKey_Click(object sender, EventArgs e)
         {
-            if (keyData == null || keyData.Count == 0)
+            if (erpActions == null || erpActions.Count == 0)
             {
                 XtraMessageBox.Show("Dữ liệu trống!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -96,15 +108,36 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
 
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
             {
-                //// 🧩 Dùng overlay để chặn người dùng trong suốt quá trình gửi phím
-                //BlockUserInput(() =>
-                //{
-                foreach (string key in keyData)
+                foreach (ErpAction action in erpActions)
                 {
-                    SendKeys.SendWait(key);
+                    // 🖱️ Xử lý hành động click
+                    if (action.IsClick)
+                    {
+                        if (action.TempImage == null)
+                        {
+                            // 👉 Click trực tiếp theo tọa độ
+                            AutoControl.MouseClick(action.X, action.Y);
+                        }
+                        else
+                        {
+                            // 👉 Click theo hình mẫu
+                            using (Bitmap screen = (Bitmap)CaptureHelper.CaptureScreen())
+                            {
+                                var matchPoint = ImageScanOpenCV.FindOutPoint(screen, action.TempImage);
+                                if (matchPoint.HasValue)
+                                    AutoControl.MouseClick(matchPoint.Value.X, matchPoint.Value.Y);
+                            }
+                        }
+                    }
+                    // ⌨️ Xử lý hành động gửi phím
+                    else if (!string.IsNullOrEmpty(action.Text))
+                    {
+                        SendKeys.SendWait(action.Text);
+                    }
+
+                    // ⏳ Tạm dừng giữa các hành động
                     Thread.Sleep(1000);
                 }
-                //});
             }
 
             Close();
