@@ -587,15 +587,50 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
         // ========== HÀM HỖ TRỢ ==========
         private static string DetectFormat(XElement root, JObject formats)
         {
-            var tags = root.Descendants().Select(e => e.Name.LocalName).Distinct().ToList();
+            // Lấy toàn bộ tên tag, nội dung text, và thuộc tính
+            var tagNames = root.Descendants().Select(e => e.Name.LocalName).Distinct().ToList();
+            var texts = root.Descendants()
+                            .Select(e => e.Value)
+                            .Where(v => !string.IsNullOrWhiteSpace(v))
+                            .Distinct()
+                            .ToList();
+            var attrs = root.Descendants()
+                            .SelectMany(e => e.Attributes())
+                            .Select(a => a.Value)
+                            .Where(v => !string.IsNullOrWhiteSpace(v))
+                            .Distinct()
+                            .ToList();
+
+            string bestMatch = null;
+            int bestScore = 0;
+
             foreach (var prop in formats)
             {
                 var detectList = prop.Value["detect"].ToObject<List<string>>();
-                if (detectList.Any(tags.Contains))
-                    return prop.Key;
+                int score = 0;
+
+                foreach (var key in detectList)
+                {
+                    // so khớp theo tag, text, hoặc thuộc tính
+                    bool match = tagNames.Any(t => t.Equals(key, StringComparison.OrdinalIgnoreCase)) ||
+                                 texts.Any(t => t.IndexOf(key, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                                 attrs.Any(a => a.IndexOf(key, StringComparison.OrdinalIgnoreCase) >= 0);
+
+                    if (match)
+                        score++;
+                }
+
+                if (score > bestScore)
+                {
+                    bestScore = score;
+                    bestMatch = prop.Key;
+                }
             }
-            return null;
+
+            // Ngưỡng: ít nhất 2 keyword trùng mới chấp nhận
+            return bestScore >= 2 ? bestMatch : null;
         }
+
 
         private static string ExtractField(XElement root, JToken path)
         {
