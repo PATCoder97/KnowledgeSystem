@@ -1,5 +1,6 @@
 ﻿using DevExpress.XtraEditors;
 using DevExpress.XtraSplashScreen;
+using KnowledgeSystem.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -89,6 +90,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                 XtraMessageBox.Show("Dữ liệu trống!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
+            if (!KeyboardHelper.IsEnglishAndCapsOff())
+                return;
 
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
             {

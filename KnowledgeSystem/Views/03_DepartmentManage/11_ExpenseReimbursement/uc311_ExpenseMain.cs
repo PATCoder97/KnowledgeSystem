@@ -23,6 +23,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -108,21 +109,119 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
 
         private void ItemERP03_Click(object sender, EventArgs e)
         {
-            GridView gridView = gvData;
-            if (gridView == null || gridView.FocusedRowHandle < 0)
+            GridView view = gvData;
+            if (view == null || view.FocusedRowHandle < 0)
                 return;
 
-            if (!KeyboardHelper.IsEnglishAndCapsOff())
+            // 🔹 Lấy danh sách hóa đơn được chọn / 取得所選發票
+            var selectedInvoices = view.GetSelectedRows()
+                .Select(rowHandle => view.GetRow(rowHandle) as dynamic)
+                .Select(row => row != null ? row.data as dt311_Invoice : null)
+                .Where(invoice => invoice != null)
+                .ToList();
+
+            if (selectedInvoices.Count == 0)
+            {
+                XtraMessageBox.Show(
+                    "Vui lòng tích chọn các dòng cần điền。\n請選取要輸入的資料列。",
+                    "Thông báo / 提示",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
                 return;
+            }
+
+            // 🔹 Kiểm tra cùng nhà thầu & phương tiện / 檢查是否相同承包商與車輛
+            bool isSameContractorGroup = selectedInvoices
+                .Select(r => new { r.SellerTax, r.BuyerTax })
+                .Distinct()
+                .Count() == 1;
+
+            if (!isSameContractorGroup)
+            {
+                XtraMessageBox.Show(
+                    "Không cùng nhà thầu!\n非同一承包商！",
+                    "Lỗi / 錯誤",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+                return;
+            }
+
+            //====== 輸入說明 / Input Description ======
+            XtraInputBoxArgs inputArgs = new XtraInputBoxArgs();
+            inputArgs.Caption = TPConfigs.SoftNameTW + " - 輸入說明 / Input Description";
+            inputArgs.Prompt = "請輸入說明內容：";
+            inputArgs.DefaultButtonIndex = 0;
+            inputArgs.Editor = new TextEdit
+            {
+                Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F)
+            };
+            inputArgs.DefaultResponse = "";
+
+            string description = (XtraInputBox.Show(inputArgs) as string)?.Trim();
+            if (string.IsNullOrEmpty(description))
+                return;
+
+            //====== 組合前綴資料 / Build Prefix Key ======
+            const string TAB = "{Tab}";
+
+            dt311_Invoice firstInvoice = selectedInvoices.First();
+            string deptMain = TPConfigs.LoginUser.IdDepartment;
+            string sellerTax = firstInvoice.SellerTax;
+            string buyerTax = firstInvoice.BuyerTax;
+
+            string prefixKey = string.Join(TAB, new string[]
+            {
+                "LG", "",
+                deptMain, "",
+                "2",
+                "W", "", "", "", "", "", "",
+                sellerTax,
+                buyerTax,
+                "A1",
+                description,  "", "", "", "", "", "", "", "", "", "", "", "",
+            });
+
+            //====== 組合發票資料字串 / Build Invoice Data String ======
+            IEnumerable<string> invoiceDataStrings = selectedInvoices.Select(invoice =>
+            {
+                var vehicleInfo = dt311_VehicleManagementBUS.Instance.GetItemById(invoice.LicensePlate);
+                string deptSub = vehicleInfo != null ? vehicleInfo.IdDept : TPConfigs.LoginUser.IdDepartment;
+
+                return string.Join(TAB, new string[]
+                {
+                    deptSub, "",
+                    "NN", "",
+                    "E",
+                    invoice.SellerTax,
+                    invoice.InvoiceCode,
+                    invoice.InvoiceNumber, "", "", "", ""
+                });
+            });
+
+            // 🔹 Ghép toàn bộ chuỗi hóa đơn / 合併所有發票資料字串
+            string invoiceDataCombined = string.Join(TAB, invoiceDataStrings);
+
+            // 🔹 Gom dữ liệu gửi đi ERP / 整合發送至ERP資料
+            List<string> erpDataPayload = new List<string>();
+            erpDataPayload.Add(prefixKey);
+            erpDataPayload.Add(invoiceDataCombined);
+
+            // Hiển thị cảnh báo trước khi mở form ERP / 顯示警告訊息
+            MsgBoxAlert();
+
+            // 🔹 Mở form AutoERP / 開啟 AutoERP 視窗
+            using (f311_AutoERP formAutoERP = new f311_AutoERP(erpDataPayload))
+            {
+                formAutoERP.ShowDialog();
+            }
         }
 
         private void ItemERP02_Click(object sender, EventArgs e)
         {
             GridView gridView = gvData;
             if (gridView == null || gridView.FocusedRowHandle < 0)
-                return;
-
-            if (!KeyboardHelper.IsEnglishAndCapsOff())
                 return;
 
             // 🔹 Lấy danh sách hóa đơn được chọn
@@ -143,8 +242,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                 return;
             }
 
-            MsgBoxAlert();
-
             // 🔹 Kiểm tra cùng nhà thầu & phương tiện
             bool sameGroup = selectedInvoices
                 .Select(r => new { r.SellerTax, r.BuyerTax, r.LicensePlate })
@@ -162,18 +259,26 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             var firstItem = selectedInvoices.First();
             var vehicle = dt311_VehicleManagementBUS.Instance.GetItemById(firstItem.LicensePlate);
 
+            string desc = string.Format("冶金技術部{0}加{2}油費用報銷。Thanh toán phí đổ {3} {1} BP Luyện Kim",
+                vehicle.VehicleType.Split('/')[1],
+                vehicle.VehicleType.Split('/')[0],
+                vehicle.FuelType.Split('/')[1],
+                vehicle.FuelType.Split('/')[0]);
+
             // 🔹 Cấu hình và chuỗi prefix
             const string tabDelimiter = "{Tab}";
+
             string prefixKey = string.Join(tabDelimiter, new[]
             {
                 "LG",
-                vehicle?.IdDept ?? "",
-                "",
-                "0",
-                "W",
+                vehicle?.IdDept ?? "", "",
+                "0", "",
+                "W", "",
                 "2",
                 "LG",
-                (firstItem.SellerTax ?? "") + tabDelimiter + (firstItem.BuyerTax ?? "") + tabDelimiter + "潘英俊說明"
+                firstItem.SellerTax ?? "",
+                firstItem.BuyerTax ?? "", "",
+                desc ?? "", ""
             });
 
             // 🔹 Ghép chuỗi dữ liệu hóa đơn
@@ -184,18 +289,20 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                     .GetListByInvoiceId(invoice.TransactionID)
                     .FirstOrDefault()?.Quantity ?? 0;
 
-                return string.Join(tabDelimiter, new string[]
+                string vehicleTypeCode = (vehicle?.VehicleType == "xe máy/摩托車") ? "X" : "Y";
+
+                return string.Join(tabDelimiter, new[]
                 {
                     invoice.LicensePlate ?? "",
-                    "D",
-                    "1",
-                    invoice.SellerTax ?? "",
                     "",
+                    vehicleTypeCode,
+                    "E",
+                    invoice.SellerTax ?? "", "",
                     invoice.InvoiceCode ?? "",
                     invoice.InvoiceNumber ?? "",
                     quantity.ToString("0.###"),
-                    invoice.TotalBeforeVAT?.ToString("0") ?? "",
-                    invoice.VATAmount?.ToString("0") ?? ""
+                    invoice.TotalBeforeVAT?.ToString("0") ?? "0",
+                    invoice.VATAmount?.ToString("0") ?? "0"
                 });
             });
 
@@ -203,8 +310,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             string invoiceDataString = string.Join(tabDelimiter, invoiceStrings);
 
             // 🔹 Gom dữ liệu thành danh sách gửi đi
-            List<string> erpDataList = new List<string> { prefixKey, tabDelimiter, invoiceDataString };
+            List<string> erpDataList = new List<string> { prefixKey, invoiceDataString };
 
+            MsgBoxAlert();
 
             // Mở form AutoERP
             using (var autoErpForm = new f311_AutoERP(erpDataList))
@@ -217,9 +325,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
         {
             GridView gridView = gvData;
             if (gridView == null || gridView.FocusedRowHandle < 0)
-                return;
-
-            if (!KeyboardHelper.IsEnglishAndCapsOff())
                 return;
 
             // Các giá trị khởi tạo
@@ -244,8 +349,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                 return;
             }
 
-            MsgBoxAlert();
-
             // Ghép chuỗi dữ liệu hóa đơn
             var invoiceStrings = selectedInvoices.Select(invoice => string.Join(tabDelimiter, new string[]
             {
@@ -264,6 +367,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
 
             // Gom dữ liệu thành danh sách
             List<string> erpDataList = new List<string>() { prefixKey, invoiceDataString };
+
+            MsgBoxAlert();
 
             // Mở form AutoERP
             using (var autoErpForm = new f311_AutoERP(erpDataList))
