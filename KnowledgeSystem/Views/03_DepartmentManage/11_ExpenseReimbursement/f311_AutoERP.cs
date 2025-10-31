@@ -136,7 +136,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                     }
 
                     // ⏳ Tạm dừng giữa các hành động
-                    Thread.Sleep(1000);
+                    Thread.Sleep(500);
                 }
             }
 

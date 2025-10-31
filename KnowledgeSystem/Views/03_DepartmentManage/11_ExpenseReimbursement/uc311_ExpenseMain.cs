@@ -115,6 +115,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             if (view == null || view.FocusedRowHandle < 0)
                 return;
 
+            if (!KeyboardHelper.IsEnglishAndCapsOff())
+                return;
+
             // 🔹 Lấy danh sách hóa đơn được chọn / 取得所選發票
             var selectedInvoices = view.GetSelectedRows()
                 .Select(rowHandle => view.GetRow(rowHandle) as dynamic)
@@ -195,15 +198,24 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                 {
                     deptSub, "",
                     "NN",
-                    "E",
-                    invoice.SellerTax,
+                    "E" + invoice.SellerTax,
                     invoice.InvoiceCode,
                     invoice.InvoiceNumber, "", "", "", ""
                 });
             });
-
             // 🔹 Ghép toàn bộ chuỗi hóa đơn / 合併所有發票資料字串
             string invoiceDataCombined = string.Join(TAB, invoiceDataStrings);
+
+            invoiceDataStrings = selectedInvoices.Select(invoice =>
+            {
+                return string.Join(TAB, new string[]
+                {
+                    "", "",
+                    invoice.IssueDate?.ToString("yyyyMMdd"),
+                    description,
+                });
+            });
+            string invoiceSubDataCombined = string.Join(TAB, invoiceDataStrings);
 
             // 🔹 Gom dữ liệu gửi đi ERP / 整合發送至ERP資料
             List<ErpAction> erpDataPayload = new List<ErpAction>();
@@ -212,6 +224,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             var subBitmap = ImageScanOpenCV.GetImage(Path.Combine(TPConfigs.Folder311, "tempSubmitBtn.png"));
             erpDataPayload.Add(new ErpAction() { IsClick = true, TempImage = subBitmap });
             erpDataPayload.Add(new ErpAction() { Text = invoiceDataCombined });
+            erpDataPayload.Add(new ErpAction() { Text = "%a" });
+            erpDataPayload.Add(new ErpAction() { Text = "s" });
+            erpDataPayload.Add(new ErpAction() { Text = "{ENTER}" });
+            erpDataPayload.Add(new ErpAction() { Text = invoiceSubDataCombined });
 
             // Hiển thị cảnh báo trước khi mở form ERP / 顯示警告訊息
             MsgBoxAlert();
@@ -227,6 +243,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
         {
             GridView gridView = gvData;
             if (gridView == null || gridView.FocusedRowHandle < 0)
+                return;
+
+            if (!KeyboardHelper.IsEnglishAndCapsOff())
                 return;
 
             // 🔹 Lấy danh sách hóa đơn được chọn
@@ -330,6 +349,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
         {
             GridView gridView = gvData;
             if (gridView == null || gridView.FocusedRowHandle < 0)
+                return;
+
+            if (!KeyboardHelper.IsEnglishAndCapsOff())
                 return;
 
             // Các giá trị khởi tạo
@@ -630,7 +652,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             // Ngưỡng: ít nhất 2 keyword trùng mới chấp nhận
             return bestScore >= 2 ? bestMatch : null;
         }
-
 
         private static string ExtractField(XElement root, JToken path)
         {
