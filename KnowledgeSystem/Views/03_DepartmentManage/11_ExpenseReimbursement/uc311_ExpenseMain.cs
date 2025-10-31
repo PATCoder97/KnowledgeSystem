@@ -7,7 +7,9 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Items.ViewInfo;
+using DevExpress.XtraLayout.Customization;
 using DevExpress.XtraPrinting.Native;
+using DevExpress.XtraReports.Native.ExpressionEditor;
 using DevExpress.XtraSplashScreen;
 using DevExpress.XtraTreeList;
 using DevExpress.XtraTreeList.Columns;
@@ -17,11 +19,14 @@ using DocumentFormat.OpenXml.Spreadsheet;
 using KAutoHelper;
 using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949;
+using MiniSoftware;
 using Newtonsoft.Json.Linq;
 using Spire.Presentation;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -31,6 +36,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using static DevExpress.XtraEditors.Mask.MaskSettings;
 using static KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement.f311_AutoERP;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
@@ -55,6 +61,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
         BindingSource sourceData = new BindingSource();
         List<dm_Group> groups;
         List<dm_Departments> depts;
+        List<dm_User> users;
         List<dt311_SellerBuyer> sellerBuyers;
         private static string idDept2Word = TPConfigs.idDept2word;
 
@@ -80,7 +87,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
         {
             //btnAdd.ImageOptions.SvgImage = TPSvgimages.Add;
             btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
-            btnExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
+            barSubExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
             btnGetManagerVehicle.ImageOptions.SvgImage = TPSvgimages.Gears;
             btnGetFillFuel.ImageOptions.SvgImage = TPSvgimages.GasStation;
         }
@@ -799,6 +806,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             gvDetail.ReadOnlyGridView();
             gvDetail.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
 
+            users = dm_UserBUS.Instance.GetList();
+
             LoadData();
             gcData.DataSource = sourceData;
 
@@ -999,6 +1008,120 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             {
                 // 🔹 Đảm bảo đóng overlay dù có lỗi hay không
                 SplashScreenManager.CloseOverlayForm(overlayHandle);
+            }
+        }
+
+        private void btnFillFuelTable_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            // 🔹 Tạo TextEdit với mask kiểu yyyy/MM/dd - yyyy/MM/dd
+            var editor = new TextEdit
+            {
+                Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F),
+                EditValue = $"{DateTime.Today.AddDays(-7):yyyy/MM/dd} - {DateTime.Today:yyyy/MM/dd}"
+            };
+
+            // Thiết lập mask để buộc nhập đúng định dạng
+            editor.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.RegExpMaskManager));
+            editor.Properties.MaskSettings.Set("mask", @"\d{4}/\d{2}/\d{2}\s*-\s*\d{4}/\d{2}/\d{2}");
+            editor.Properties.MaskSettings.Set("isAutoComplete", true);
+            editor.Properties.Mask.UseMaskAsDisplayFormat = true;
+            editor.Properties.NullValuePrompt = "yyyy/MM/dd - yyyy/MM/dd";
+            editor.Properties.NullValuePromptShowForEmptyValue = true;
+
+            // 🔹 Tạo popup nhập liệu
+            var args = new XtraInputBoxArgs
+            {
+                Caption = "選擇日期區間",
+                Prompt = "請輸入日期區間 (格式 yyyy/MM/dd - yyyy/MM/dd)",
+                Editor = editor,
+                DefaultButtonIndex = 0,
+                DefaultResponse = editor.EditValue.ToString()
+            };
+
+            // 🔹 Hiển thị InputBox
+            object result = XtraInputBox.Show(args);
+            if (result == null) return;
+
+            string rangeText = result.ToString().Trim();
+
+            try
+            {
+                // ✅ Kiểm tra đúng định dạng bằng Regex
+                string pattern = @"^\d{4}/\d{2}/\d{2}\s*-\s*\d{4}/\d{2}/\d{2}$";
+                if (!Regex.IsMatch(rangeText, pattern))
+                    throw new FormatException("格式錯誤！請輸入正確格式：yyyy/MM/dd - yyyy/MM/dd");
+
+                // ✅ Tách hai ngày
+                var parts = rangeText.Split('-');
+                DateTime start = DateTime.ParseExact(parts[0].Trim(), "yyyy/MM/dd", CultureInfo.InvariantCulture);
+                DateTime end = DateTime.ParseExact(parts[1].Trim(), "yyyy/MM/dd", CultureInfo.InvariantCulture);
+
+                if (start > end)
+                    throw new Exception("起始日期不能大於結束日期！");
+
+                // Xử lý số liệu để xuất biểu
+                var invoiceDataExcel = dt311_InvoiceBUS.Instance.GetFuelLogWithPrevious(idDept2Word, start, end);
+                var invoiceItems = dt311_InvoiceItemBUS.Instance.GetList()
+                    .GroupBy(r => r.IdInvoice)
+                    .Select(g => g.First())
+                    .ToList();
+                var vehicles = dt311_VehicleManagementBUS.Instance.GetList();
+
+                var excelDatas = (from data in invoiceDataExcel
+                                  join item in invoiceItems on data.TransactionID equals item.IdInvoice
+                                  join vehicle in vehicles on data.LicensePlate equals vehicle.LicensePlate
+                                  select new
+                                  {
+                                      LicensePlate = data.LicensePlate,
+                                      Date = DateTime.Today.ToString("yyyy/MM/dd"),
+                                      DateFill = data.BuyerTax,
+                                      Odomerter = data.SellerTax,
+                                      UserMeter = data.OdometerReading,
+                                      QuantityFuel = item.Quantity?.ToString("0.###"),
+                                      Invoice = data.InvoiceCode + data.InvoiceNumber,
+                                      FillBy = users.FirstOrDefault(r => r.Id == data.FuelFilledBy)?.DisplayName,
+                                      Manager = users.FirstOrDefault(r => r.Id == vehicle.ManagerId)?.DisplayName,
+                                  }).ToList();
+
+                var vehicleExports = excelDatas.Select(r => r.LicensePlate).Distinct().ToList();
+
+                string documentsPath = Path.Combine(TPConfigs.DocumentPath(), $"公務車加油記錄表-{DateTime.Now:yyyyMMddHHmmss}");
+                if (!Directory.Exists(documentsPath))
+                    Directory.CreateDirectory(documentsPath);
+
+                string PATH_TEMPLATE = @"C:\Users\Dell Alpha\Desktop\temp311.docx";
+
+                foreach (var item in vehicleExports)
+                {
+                    string PATH_EXPORT = Path.Combine(documentsPath, $"{KnowledgeSystem.Helpers.StringHelper.SanitizeFileName(item)}-{DateTime.Now:yyyyMMddHHmmss}.docx");
+
+                    var datas = excelDatas.Where(r => r.LicensePlate == item).ToList();
+
+                    var valueData = new Dictionary<string, object>()
+                    {
+                        ["dept"] = "7810 - 試驗處",
+                        ["vehicle"] = item,
+                        ["entries"] = datas.Select(r => new Dictionary<string, object>
+                        {
+                            ["date"] = r.Date,
+                            ["datefill"] = r.DateFill,
+                            ["odometer"] = r.Odomerter,
+                            ["usermeter"] = r.UserMeter,
+                            ["quantity"] = r.QuantityFuel,
+                            ["invoice"] = r.Invoice,
+                            ["fillby"] = r.FillBy,
+                            ["manager"] = r.Manager
+                        })
+                    };
+
+                    MiniWord.SaveAsByTemplate(PATH_EXPORT, PATH_TEMPLATE, valueData);
+                }
+
+                Process.Start(documentsPath);
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message, "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

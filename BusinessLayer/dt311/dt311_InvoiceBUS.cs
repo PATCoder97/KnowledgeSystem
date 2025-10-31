@@ -56,6 +56,75 @@ namespace BusinessLayer
             }
         }
 
+        public List<dt311_Invoice> GetListByStartDeptId(string deptId, DateTime startDate, DateTime endDate)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt311_Invoice
+                        .Where(r => r.IdDept.StartsWith(deptId)
+                                    && r.IssueDate >= startDate
+                                    && r.IssueDate <= endDate)
+                        .ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
+        public List<dt311_Invoice> GetFuelLogWithPrevious(string deptId, DateTime startDate, DateTime endDate)
+        {
+            using (var _context = new DBDocumentManagementSystemEntities())
+            {
+                // 🔹 Lấy toàn bộ dữ liệu trước endDate để tìm lần đổ trước đó
+                var allLogs = _context.dt311_Invoice
+                    .Where(f => f.IdDept.StartsWith(deptId)
+                             && f.IssueDate <= endDate
+                             && !string.IsNullOrEmpty(f.LicensePlate))
+                    .OrderBy(f => f.LicensePlate)
+                    .ThenBy(f => f.IssueDate)
+                    .ToList();
+
+                // 🔹 Lọc ra các bản ghi nằm trong khoảng thời gian mong muốn
+                var rangeLogs = allLogs
+                    .Where(f => f.IssueDate >= startDate && f.IssueDate <= endDate)
+                    .ToList();
+
+                // 🔹 Tạo danh sách kết quả kèm theo bản ghi lần đổ trước đó (nếu có)
+                var result = rangeLogs
+                    .Select(f =>
+                    {
+                        // Lấy bản ghi trước đó theo xe, có thể nằm ngoài startDate
+                        var prev = allLogs
+                            .Where(p => p.LicensePlate == f.LicensePlate && p.IssueDate < f.IssueDate)
+                            .OrderByDescending(p => p.IssueDate)
+                            .FirstOrDefault();
+
+                        return new dt311_Invoice
+                        {
+                            LicensePlate = f.LicensePlate,
+                            // BuyerTax dùng để hiển thị ngày trước và sau (tuỳ bạn đặt tên cột)
+                            BuyerTax = $"{prev?.IssueDate:yyyy/MM/dd} - {f.IssueDate:yyyy/MM/dd}",
+                            // SellerTax hiển thị km trước và sau
+                            SellerTax = $"{prev?.OdometerReading} - {f.OdometerReading}",
+                            // OdometerReading hiển thị chênh lệch km
+                            OdometerReading = prev != null ? f.OdometerReading - prev.OdometerReading : 0,
+                            FuelFilledBy = f.FuelFilledBy,
+                            InvoiceCode = f.InvoiceCode,
+                            InvoiceNumber = f.InvoiceNumber,
+                            TransactionID = f.TransactionID
+                        };
+                    })
+                    .ToList();
+
+                return result;
+            }
+        }
+
         public dt311_Invoice GetItemById(string id)
         {
             try
