@@ -27,6 +27,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
@@ -224,10 +225,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             var subBitmap = ImageScanOpenCV.GetImage(Path.Combine(TPConfigs.Folder311, "tempSubmitBtn.png"));
             erpDataPayload.Add(new ErpAction() { IsClick = true, TempImage = subBitmap });
             erpDataPayload.Add(new ErpAction() { Text = invoiceDataCombined });
-            erpDataPayload.Add(new ErpAction() { Text = "%a" });
-            erpDataPayload.Add(new ErpAction() { Text = "s" });
-            erpDataPayload.Add(new ErpAction() { Text = "{ENTER}" });
-            erpDataPayload.Add(new ErpAction() { Text = invoiceSubDataCombined });
+            erpDataPayload.Add(new ErpAction() { Step = 2, Text = "%a" });
+            erpDataPayload.Add(new ErpAction() { Step = 2, Text = "s" });
+            erpDataPayload.Add(new ErpAction() { Step = 2, Text = "{ENTER}" });
+            erpDataPayload.Add(new ErpAction() { Step = 2, Text = invoiceSubDataCombined });
 
             // Hiển thị cảnh báo trước khi mở form ERP / 顯示警告訊息
             MsgBoxAlert();
@@ -429,7 +430,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             {
                 helper.SaveViewInfo();
 
-                invoiceDatas = dt311_InvoiceBUS.Instance.GetList();
+                invoiceDatas = dt311_InvoiceBUS.Instance.GetListByStartDeptId(idDept2Word);
                 sellerBuyers = dt311_SellerBuyerBUS.Instance.GetList();
 
                 var displayDatas = (from data in invoiceDatas
@@ -541,16 +542,20 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                     }
                 }
 
+                string sellerName = Regex.Replace(ExtractField(root, fmt["fields"]["seller_name"]), @"(?i)\s*Công\s*ty\s*TNHH(\s*MTV)?(\s*Thương\s*Mại)?\s*", "", RegexOptions.IgnoreCase).Trim();
+                string buyerName = Regex.Replace(ExtractField(root, fmt["fields"]["seller_name"]), @"(?i)\s*Công\s*ty\s*TNHH(\s*MTV)?(\s*Thương\s*Mại)?\s*", "", RegexOptions.IgnoreCase).Trim();
+
+
                 // --- Seller & Buyer ---
                 var seller = new dt311_SellerBuyer
                 {
                     Tax = invoiceData.SellerTax,
-                    DisplayName = ExtractField(root, fmt["fields"]["seller_name"])
+                    DisplayName = sellerName
                 };
                 var buyer = new dt311_SellerBuyer
                 {
                     Tax = invoiceData.BuyerTax,
-                    DisplayName = ExtractField(root, fmt["fields"]["buyer_name"])
+                    DisplayName = sellerName
                 };
 
                 // --- Lưu dữ liệu ---
@@ -856,7 +861,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                 e.Menu.Items.Add(itemERP03);
 
                 GridView view = gvData;
-                string typeOfSeller = view.GetRowCellValue(view.FocusedRowHandle, "seller.Type")?.ToString();
+                string typeOfSeller = view.GetRowCellValue(view.FocusedRowHandle, gColSellerType)?.ToString();
                 //string idBase = view.GetRowCellValue(view.FocusedRowHandle, "data.TransactionID")?.ToString();
 
                 if (typeOfSeller == "xang_dau")

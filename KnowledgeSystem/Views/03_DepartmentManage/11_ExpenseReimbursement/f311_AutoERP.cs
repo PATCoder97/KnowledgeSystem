@@ -10,6 +10,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
@@ -27,8 +28,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             erpActions = datas;
         }
 
+        int step = 1;
+
         public class ErpAction
         {
+            public int Step { get; set; } = 1;       // ✅ mặc định Step = 1
             public bool IsClick { get; set; }        // true = click, false = send text
             public string Text { get; set; }         // Dữ liệu để SendKeys
             public Bitmap TempImage { get; set; }
@@ -93,11 +97,24 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             int x = Screen.PrimaryScreen.WorkingArea.Right - Width;
             int y = Screen.PrimaryScreen.WorkingArea.Top;
             Location = new System.Drawing.Point(x, y);
+
+            SetImageAndTextBtn();
+        }
+
+        private void SetImageAndTextBtn()
+        {
+            var field = typeof(TPSvgimages).GetField($"Num{step}", BindingFlags.Public | BindingFlags.Static);
+            if (field != null)
+            {
+                btnAutoKey.ImageOptions.SvgImage = field.GetValue(null) as SvgImage;
+            }
+            btnAutoKey.Text = $"輸入ERP【第{step}步】";
         }
 
         private void btnAutoKey_Click(object sender, EventArgs e)
         {
-            if (erpActions == null || erpActions.Count == 0)
+            var erpActionsByStep = erpActions.Where(r => r.Step == step).ToList();
+            if (erpActionsByStep == null || erpActionsByStep.Count == 0)
             {
                 XtraMessageBox.Show("Dữ liệu trống!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -108,7 +125,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
 
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
             {
-                foreach (ErpAction action in erpActions)
+                foreach (ErpAction action in erpActionsByStep)
                 {
                     // 🖱️ Xử lý hành động click
                     if (action.IsClick)
@@ -140,7 +157,16 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                 }
             }
 
-            Close();
+            step++;
+            erpActionsByStep = erpActions.Where(r => r.Step == step).ToList();
+
+            if (erpActionsByStep == null || erpActionsByStep.Count == 0)
+            {
+                Close();
+                return;
+            }
+
+            SetImageAndTextBtn();
         }
     }
 }

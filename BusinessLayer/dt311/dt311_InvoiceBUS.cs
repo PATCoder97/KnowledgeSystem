@@ -40,6 +40,22 @@ namespace BusinessLayer
             }
         }
 
+        public List<dt311_Invoice> GetListByStartDeptId(string deptId)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt311_Invoice.Where(r => r.IdDept.StartsWith(deptId)).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public dt311_Invoice GetItemById(string id)
         {
             try

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc311_ExpenseMain));
             this.gvDetail = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -57,7 +57,7 @@
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn26 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn27 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn28 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColSellerType = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemMemoEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit();
             this.gvSession = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gColIdDetail = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -69,11 +69,11 @@
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnAdd = new DevExpress.XtraBars.BarButtonItem();
+            this.btnAddXmlFile = new DevExpress.XtraBars.BarButtonItem();
             this.btnReload = new DevExpress.XtraBars.BarButtonItem();
             this.btnExcel = new DevExpress.XtraBars.BarButtonItem();
             this.btnGetManagerVehicle = new DevExpress.XtraBars.BarButtonItem();
             this.btnGetFillFuel = new DevExpress.XtraBars.BarButtonItem();
-            this.btnAddXmlFile = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -224,10 +224,10 @@
             this.gcData.EmbeddedNavigator.Buttons.Edit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.EndEdit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.Remove.Visible = false;
-            gridLevelNode2.LevelTemplate = this.gvDetail;
-            gridLevelNode2.RelationName = "Detail";
+            gridLevelNode1.LevelTemplate = this.gvDetail;
+            gridLevelNode1.RelationName = "Detail";
             this.gcData.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode2});
+            gridLevelNode1});
             this.gcData.Location = new System.Drawing.Point(12, 12);
             this.gcData.MainView = this.gvData;
             this.gcData.Name = "gcData";
@@ -270,7 +270,7 @@
             this.gridColumn1,
             this.gridColumn26,
             this.gridColumn27,
-            this.gridColumn28});
+            this.gColSellerType});
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
             this.gvData.OptionsDetail.ShowDetailTabs = false;
@@ -400,11 +400,11 @@
             this.gridColumn27.Visible = true;
             this.gridColumn27.VisibleIndex = 12;
             // 
-            // gridColumn28
+            // gColSellerType
             // 
-            this.gridColumn28.Caption = "gridColumn28";
-            this.gridColumn28.FieldName = "seller.Type";
-            this.gridColumn28.Name = "gridColumn28";
+            this.gColSellerType.Caption = "gridColumn28";
+            this.gColSellerType.FieldName = "seller.Type";
+            this.gColSellerType.Name = "gColSellerType";
             // 
             // repositoryItemMemoEdit1
             // 
@@ -556,6 +556,15 @@
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAdd_ItemClick);
             // 
+            // btnAddXmlFile
+            // 
+            this.btnAddXmlFile.Caption = "新增【檔案xml】";
+            this.btnAddXmlFile.Id = 17;
+            this.btnAddXmlFile.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnAddXmlFile.ImageOptions.SvgImage")));
+            this.btnAddXmlFile.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnAddXmlFile.Name = "btnAddXmlFile";
+            this.btnAddXmlFile.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAddXmlFile_ItemClick);
+            // 
             // btnReload
             // 
             this.btnReload.Caption = "刷新";
@@ -592,15 +601,6 @@
             this.btnGetFillFuel.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnGetFillFuel.Name = "btnGetFillFuel";
             this.btnGetFillFuel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnGetFillFuel_ItemClick);
-            // 
-            // btnAddXmlFile
-            // 
-            this.btnAddXmlFile.Caption = "新增【檔案xml】";
-            this.btnAddXmlFile.Id = 17;
-            this.btnAddXmlFile.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnAddXmlFile.ImageOptions.SvgImage")));
-            this.btnAddXmlFile.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnAddXmlFile.Name = "btnAddXmlFile";
-            this.btnAddXmlFile.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAddXmlFile_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -740,7 +740,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn26;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn27;
         private DevExpress.XtraBars.BarButtonItem btnGetManagerVehicle;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn28;
+        private DevExpress.XtraGrid.Columns.GridColumn gColSellerType;
         private DevExpress.XtraBars.BarButtonItem btnGetFillFuel;
         private DevExpress.XtraBars.BarButtonItem btnAddXmlFile;
     }
