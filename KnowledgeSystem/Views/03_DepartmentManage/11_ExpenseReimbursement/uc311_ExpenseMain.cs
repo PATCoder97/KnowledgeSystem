@@ -1360,5 +1360,15 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
 
             Process.Start(PATH_EXPORT);
         }
+
+        private void gvData_CustomUnboundColumnData(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDataEventArgs e)
+        {
+            GridView view = sender as GridView;
+            if (e.Column.FieldName == "HasFile" && e.IsGetData)
+            {
+                int attId = Convert.ToInt16(view.GetRowCellValue(e.ListSourceRowIndex, gColAttId) ?? -1);
+                e.Value = attId != -1;
+            }
+        }
     }
 }
