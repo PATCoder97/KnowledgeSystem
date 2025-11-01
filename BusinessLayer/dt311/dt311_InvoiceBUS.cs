@@ -116,7 +116,9 @@ namespace BusinessLayer
                             FuelFilledBy = f.FuelFilledBy,
                             InvoiceCode = f.InvoiceCode,
                             InvoiceNumber = f.InvoiceNumber,
-                            TransactionID = f.TransactionID
+                            TransactionID = f.TransactionID,
+                            TotalAfterVAT = f.TotalAfterVAT,
+                            TotalBeforeVAT = f.TotalBeforeVAT
                         };
                     })
                     .ToList();

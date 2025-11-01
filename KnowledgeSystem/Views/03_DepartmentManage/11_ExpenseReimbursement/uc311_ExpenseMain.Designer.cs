@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc311_ExpenseMain));
             this.gvDetail = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -73,6 +73,8 @@
             this.btnReload = new DevExpress.XtraBars.BarButtonItem();
             this.btnGetManagerVehicle = new DevExpress.XtraBars.BarButtonItem();
             this.btnGetFillFuel = new DevExpress.XtraBars.BarButtonItem();
+            this.barSubExcel = new DevExpress.XtraBars.BarSubItem();
+            this.btnFillFuelTable = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -80,8 +82,7 @@
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.barSubExcel = new DevExpress.XtraBars.BarSubItem();
-            this.btnFillFuelTable = new DevExpress.XtraBars.BarButtonItem();
+            this.gColAttId = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gvDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
@@ -225,10 +226,10 @@
             this.gcData.EmbeddedNavigator.Buttons.Edit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.EndEdit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.Remove.Visible = false;
-            gridLevelNode2.LevelTemplate = this.gvDetail;
-            gridLevelNode2.RelationName = "Detail";
+            gridLevelNode1.LevelTemplate = this.gvDetail;
+            gridLevelNode1.RelationName = "Detail";
             this.gcData.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode2});
+            gridLevelNode1});
             this.gcData.Location = new System.Drawing.Point(12, 12);
             this.gcData.MainView = this.gvData;
             this.gcData.Name = "gcData";
@@ -271,7 +272,8 @@
             this.gridColumn1,
             this.gridColumn26,
             this.gridColumn27,
-            this.gColSellerType});
+            this.gColSellerType,
+            this.gColAttId});
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
             this.gvData.OptionsDetail.ShowDetailTabs = false;
@@ -615,6 +617,34 @@
             this.btnGetFillFuel.Name = "btnGetFillFuel";
             this.btnGetFillFuel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnGetFillFuel_ItemClick);
             // 
+            // barSubExcel
+            // 
+            this.barSubExcel.Caption = "出表";
+            this.barSubExcel.Id = 18;
+            this.barSubExcel.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.barSubExcel.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.barSubExcel.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.barSubExcel.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.barSubExcel.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
+            this.barSubExcel.ItemAppearance.Normal.Options.UseFont = true;
+            this.barSubExcel.ItemAppearance.Normal.Options.UseForeColor = true;
+            this.barSubExcel.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnFillFuelTable)});
+            this.barSubExcel.Name = "barSubExcel";
+            // 
+            // btnFillFuelTable
+            // 
+            this.btnFillFuelTable.Caption = "公務車加油記錄表";
+            this.btnFillFuelTable.Id = 19;
+            this.btnFillFuelTable.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnFillFuelTable.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnFillFuelTable.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFillFuelTable.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
+            this.btnFillFuelTable.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnFillFuelTable.ItemAppearance.Normal.Options.UseForeColor = true;
+            this.btnFillFuelTable.Name = "btnFillFuelTable";
+            this.btnFillFuelTable.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnFillFuelTable_ItemClick);
+            // 
             // barDockControlTop
             // 
             this.barDockControlTop.CausesValidation = false;
@@ -677,33 +707,11 @@
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
-            // barSubExcel
+            // gColAttId
             // 
-            this.barSubExcel.Caption = "出表";
-            this.barSubExcel.Id = 18;
-            this.barSubExcel.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.barSubExcel.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
-            this.barSubExcel.ItemAppearance.Hovered.Options.UseForeColor = true;
-            this.barSubExcel.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.barSubExcel.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
-            this.barSubExcel.ItemAppearance.Normal.Options.UseFont = true;
-            this.barSubExcel.ItemAppearance.Normal.Options.UseForeColor = true;
-            this.barSubExcel.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnFillFuelTable)});
-            this.barSubExcel.Name = "barSubExcel";
-            // 
-            // btnFillFuelTable
-            // 
-            this.btnFillFuelTable.Caption = "公務車加油記錄表";
-            this.btnFillFuelTable.Id = 19;
-            this.btnFillFuelTable.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
-            this.btnFillFuelTable.ItemAppearance.Hovered.Options.UseForeColor = true;
-            this.btnFillFuelTable.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFillFuelTable.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
-            this.btnFillFuelTable.ItemAppearance.Normal.Options.UseFont = true;
-            this.btnFillFuelTable.ItemAppearance.Normal.Options.UseForeColor = true;
-            this.btnFillFuelTable.Name = "btnFillFuelTable";
-            this.btnFillFuelTable.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnFillFuelTable_ItemClick);
+            this.gColAttId.Caption = "gridColumn28";
+            this.gColAttId.FieldName = "data.AttId";
+            this.gColAttId.Name = "gColAttId";
             // 
             // uc311_ExpenseMain
             // 
@@ -785,5 +793,6 @@
         private DevExpress.XtraBars.BarButtonItem btnAddXmlFile;
         private DevExpress.XtraBars.BarSubItem barSubExcel;
         private DevExpress.XtraBars.BarButtonItem btnFillFuelTable;
+        private DevExpress.XtraGrid.Columns.GridColumn gColAttId;
     }
 }

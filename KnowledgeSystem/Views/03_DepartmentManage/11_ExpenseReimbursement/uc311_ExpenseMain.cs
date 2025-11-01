@@ -1,11 +1,13 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
 using DevExpress.CodeParser.VB;
+using DevExpress.Utils;
 using DevExpress.Utils.Menu;
 using DevExpress.Utils.Svg;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using DevExpress.XtraGrid.Views.Items.ViewInfo;
 using DevExpress.XtraLayout.Customization;
 using DevExpress.XtraPrinting.Native;
@@ -16,8 +18,10 @@ using DevExpress.XtraTreeList.Columns;
 using DevExpress.XtraTreeList.Nodes;
 using DevExpress.XtraTreeList.StyleFormatConditions;
 using DocumentFormat.OpenXml.Spreadsheet;
+using DocumentFormat.OpenXml.Vml;
 using KAutoHelper;
 using KnowledgeSystem.Helpers;
+using KnowledgeSystem.Views._00_Generals;
 using KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949;
 using MiniSoftware;
 using Newtonsoft.Json.Linq;
@@ -30,6 +34,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -39,12 +44,14 @@ using System.Xml.Linq;
 using static DevExpress.XtraEditors.Mask.MaskSettings;
 using static KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement.f311_AutoERP;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using Path = System.IO.Path;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
 {
     public partial class uc311_ExpenseMain : XtraUserControl
     {
         private static readonly string URL = "https://www.meinvoice.vn/tra-cuu/GetInvoiceDataByTransactionID";
+        private static readonly string URL_INVOICE_PDF = "https://www.meinvoice.vn/tra-cuu/DownloadHandler.ashx?Type=pdf&Viewer=1&ext=XZ28Q9E6&Code=";
 
         public uc311_ExpenseMain()
         {
@@ -69,6 +76,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
         DXMenuItem itemERP02;
         DXMenuItem itemERP03;
         DXMenuItem itemUpdateAddFuel;
+        DXMenuItem itemViewFile;
+        DXMenuItem itemAddFile;
 
         DXMenuItem CreateMenuItem(string caption, EventHandler clickEvent, SvgImage svgImage)
         {
@@ -98,6 +107,99 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             itemERP02 = CreateMenuItem("ERP：車輛稅費繳納管理", ItemERP02_Click, TPSvgimages.Num2);
             itemERP03 = CreateMenuItem("ERP：一般費用報銷輸入", ItemERP03_Click, TPSvgimages.Num3);
             itemUpdateAddFuel = CreateMenuItem("車輛：加油資料", ItemUpdateAddFuel_Click, TPSvgimages.UpLevel);
+
+            itemAddFile = CreateMenuItem("上傳發表", ItemAddFile_Click, TPSvgimages.UploadFile);
+            itemViewFile = CreateMenuItem("查看發表", ItemViewFile_Click, TPSvgimages.View);
+        }
+
+        private void ItemViewFile_Click(object sender, EventArgs e)
+        {
+            GridView view = gvData;
+            int idAtt = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColAttId));
+            var att = dm_AttachmentBUS.Instance.GetItemById(idAtt);
+
+            string filePath = att.EncryptionName;
+            string fileName = att.ActualName;
+
+            string sourcePath = Path.Combine(TPConfigs.Folder311, filePath);
+            string destPath = Path.Combine(TPConfigs.TempFolderData, $"{Regex.Replace(att.ActualName, @"[\\/:*?""<>|]", "")}_{DateTime.Now:yyyyMMddHHmmss}{Path.GetExtension(fileName)}");
+
+            if (!Directory.Exists(TPConfigs.TempFolderData))
+                Directory.CreateDirectory(TPConfigs.TempFolderData);
+
+            File.Copy(sourcePath, destPath, true);
+
+            var mainForm = f00_ViewMultiFile.Instance;
+
+            if (!mainForm.Visible)
+                mainForm.Show();
+
+            mainForm.OpenFormInDocumentManager(destPath);
+        }
+
+        private void ItemAddFile_Click(object sender, EventArgs e)
+        {
+            // 🔹 Hộp thoại chọn file PDF
+            using (var openFileDialog = new OpenFileDialog { Filter = "PDF files (*.pdf)|*.pdf" })
+            {
+                if (openFileDialog.ShowDialog() != DialogResult.OK)
+                    return;
+
+                // 🔹 Thông tin file gốc
+                string filePath = openFileDialog.FileName;
+                string actualName = Path.GetFileName(filePath);
+                string encryptionName = EncryptionHelper.EncryptionFileName(actualName);
+
+                // 🔹 Tạo đối tượng đính kèm
+                dm_Attachment attachment = new dm_Attachment
+                {
+                    Thread = "311",
+                    EncryptionName = encryptionName,
+                    ActualName = actualName
+                };
+
+                // 🔹 Xác định đường dẫn lưu
+                string destPath = Path.Combine(TPConfigs.Folder311, attachment.EncryptionName);
+                DirectoryInfo parentDir = Directory.GetParent(destPath);
+
+                if (parentDir != null && !Directory.Exists(parentDir.FullName))
+                {
+                    Directory.CreateDirectory(parentDir.FullName);
+                }
+
+                // 🔹 Sao chép file vào thư mục đích (ghi đè nếu đã tồn tại)
+                File.Copy(filePath, destPath, true);
+
+                // 🔹 Thêm vào bảng Attachment
+                int attId = dm_AttachmentBUS.Instance.Add(attachment);
+
+                // 🔹 Lấy invoice hiện tại trên GridView
+                GridView view = gvData;
+                object idValue = view.GetRowCellValue(view.FocusedRowHandle, gColId);
+                if (idValue == null)
+                {
+                    XtraMessageBox.Show("Không tìm thấy hóa đơn được chọn.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                string invoiceId = idValue.ToString();
+                dt311_Invoice invoice = dt311_InvoiceBUS.Instance.GetItemById(invoiceId);
+
+                if (invoice == null)
+                {
+                    XtraMessageBox.Show("Không tìm thấy hóa đơn trong cơ sở dữ liệu.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // 🔹 Cập nhật thông tin đính kèm
+                invoice.AttId = attId;
+                dt311_InvoiceBUS.Instance.AddOrUpdate(invoice);
+
+                // 🔹 Refresh lại dữ liệu hiển thị
+                LoadData();
+
+                XtraMessageBox.Show("Đã tải lên hóa đơn thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void ItemUpdateAddFuel_Click(object sender, EventArgs e)
@@ -566,6 +668,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                 };
 
                 // --- Lưu dữ liệu ---
+                int attId = await DownloadInvoice(invoiceData.TransactionID);
+                if (attId != -1) invoiceData.AttId = attId;
+
                 string invoiceId = dt311_InvoiceBUS.Instance.AddOrUpdate(invoiceData);
                 dt311_SellerBuyerBUS.Instance.AddOrUpdate(seller);
                 dt311_SellerBuyerBUS.Instance.AddOrUpdate(buyer);
@@ -608,6 +713,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                     $"Người bán: {seller.DisplayName}\nNgười mua: {buyer.DisplayName}",
                     "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                if (attId == -1)
+                {
+                    XtraMessageBox.Show("Lỗi không thể tải hóa đơn PDF!\nVui lòng đưa lên thủ công hoặc thử lại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
                 return true;
             }
             catch (Exception ex)
@@ -615,6 +725,54 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                 XtraMessageBox.Show($"Lỗi khi xử lý hóa đơn:\n{ex.Message}",
                     "Lỗi xử lý", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
+            }
+        }
+
+        private static async Task<int> DownloadInvoice(string invoice_id)
+        {
+            string url = $"{URL_INVOICE_PDF}{invoice_id}";
+            string folderPath = TPConfigs.Folder311;
+            string actualName = $"{invoice_id}.pdf";
+
+            string encryptionName = EncryptionHelper.EncryptionFileName(actualName);
+
+            var attachment = new dm_Attachment()
+            {
+                Thread = "311",
+                EncryptionName = encryptionName,
+                ActualName = actualName,
+            };
+
+            string filePath = System.IO.Path.Combine(folderPath, encryptionName);
+
+            try
+            {
+                // Đảm bảo thư mục tồn tại
+                if (!System.IO.Directory.Exists(folderPath))
+                {
+                    System.IO.Directory.CreateDirectory(folderPath);
+                }
+
+                using (var client = new System.Net.Http.HttpClient())
+                {
+                    // Gửi yêu cầu GET tải file
+                    var response = await client.GetAsync(url);
+                    response.EnsureSuccessStatusCode();
+
+                    // Đọc stream nội dung file
+                    using (var stream = await response.Content.ReadAsStreamAsync())
+                    using (var fs = new System.IO.FileStream(filePath, System.IO.FileMode.Create, System.IO.FileAccess.Write, System.IO.FileShare.None))
+                    {
+                        await stream.CopyToAsync(fs);
+                    }
+                }
+
+                var attId = dm_AttachmentBUS.Instance.Add(attachment);
+                return attId;
+            }
+            catch (Exception ex)
+            {
+                return -1;
             }
         }
 
@@ -806,6 +964,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             gvDetail.ReadOnlyGridView();
             gvDetail.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
 
+            depts = dm_DeptBUS.Instance.GetList();
             users = dm_UserBUS.Instance.GetList();
 
             LoadData();
@@ -871,7 +1030,14 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
 
                 GridView view = gvData;
                 string typeOfSeller = view.GetRowCellValue(view.FocusedRowHandle, gColSellerType)?.ToString();
-                //string idBase = view.GetRowCellValue(view.FocusedRowHandle, "data.TransactionID")?.ToString();
+                int attId = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColAttId) ?? -1);
+
+                itemAddFile.BeginGroup = true;
+                e.Menu.Items.Add(itemAddFile);
+                if (attId != -1)
+                {
+                    e.Menu.Items.Add(itemViewFile);
+                }
 
                 if (typeOfSeller == "xang_dau")
                 {
@@ -1079,6 +1245,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                                       UserMeter = data.OdometerReading,
                                       QuantityFuel = item.Quantity?.ToString("0.###"),
                                       Invoice = data.InvoiceCode + data.InvoiceNumber,
+                                      Amount = data.TotalAfterVAT,
                                       FillBy = users.FirstOrDefault(r => r.Id == data.FuelFilledBy)?.DisplayName,
                                       Manager = users.FirstOrDefault(r => r.Id == vehicle.ManagerId)?.DisplayName,
                                   }).ToList();
@@ -1096,11 +1263,17 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                     string PATH_EXPORT = Path.Combine(documentsPath, $"{KnowledgeSystem.Helpers.StringHelper.SanitizeFileName(item)}-{DateTime.Now:yyyyMMddHHmmss}.docx");
 
                     var datas = excelDatas.Where(r => r.LicensePlate == item).ToList();
+                    string deptUser = TPConfigs.LoginUser.IdDepartment;
+                    var deptDt1 = depts.FirstOrDefault(r => r.Id == deptUser.Substring(0, 1)).DisplayName;
+                    var deptDt2 = depts.FirstOrDefault(r => r.Id == deptUser.Substring(0, 2)).DisplayName;
+                    var deptDt4 = depts.FirstOrDefault(r => r.Id == deptUser.Substring(0, 4)).DisplayName;
 
                     var valueData = new Dictionary<string, object>()
                     {
-                        ["dept"] = "7810 - 試驗處",
+                        ["dept"] = $"{deptDt1} {deptDt2} {deptDt4}",
                         ["vehicle"] = item,
+                        ["year"] = DateTime.Today.Year,
+                        ["month"] = DateTime.Today.Month,
                         ["entries"] = datas.Select(r => new Dictionary<string, object>
                         {
                             ["date"] = r.Date,
@@ -1109,6 +1282,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                             ["usermeter"] = r.UserMeter,
                             ["quantity"] = r.QuantityFuel,
                             ["invoice"] = r.Invoice,
+                            ["amount"] = r.Amount?.ToString("N0") ?? "",
                             ["fillby"] = r.FillBy,
                             ["manager"] = r.Manager
                         })

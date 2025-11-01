@@ -411,9 +411,11 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdParent" Type="int" Nullable="false" />
           <Property Name="IdDept" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="BaseTypeId" Type="int" Nullable="false" />
           <Property Name="DisplayName" Type="nvarchar" MaxLength="512" Nullable="false" />
           <Property Name="DisplayNameVN" Type="nvarchar" MaxLength="512" />
           <Property Name="DisplayNameEN" Type="nvarchar" MaxLength="512" />
+          <Property Name="Keyword" Type="nvarchar(max)" />
           <Property Name="DocType" Type="nvarchar" MaxLength="16" Nullable="false" />
           <Property Name="Confidential" Type="bit" Nullable="false" />
           <Property Name="CreateDate" Type="date" />
@@ -1045,6 +1047,7 @@
           <Property Name="LicensePlate" Type="varchar" MaxLength="16" />
           <Property Name="OdometerReading" Type="int" />
           <Property Name="FuelFilledBy" Type="varchar" MaxLength="10" />
+          <Property Name="AttId" Type="int" />
         </EntityType>
         <EntityType Name="dt311_InvoiceItem">
           <Key>
@@ -1375,8 +1378,8 @@
           <EntitySet Name="dt205_Form" EntityType="DBDocumentManagementSystemModel.dt205_Form" />
           <EntitySet Name="dt311_VehicleManagement" EntityType="DBDocumentManagementSystemModel.dt311_VehicleManagement" />
           <EntitySet Name="dt311_InvoiceItem" EntityType="DBDocumentManagementSystemModel.dt311_InvoiceItem" />
-          <EntitySet Name="dt311_Invoice" EntityType="DBDocumentManagementSystemModel.dt311_Invoice" />
           <EntitySet Name="dt311_SellerBuyer" EntityType="DBDocumentManagementSystemModel.dt311_SellerBuyer" />
+          <EntitySet Name="dt311_Invoice" EntityType="DBDocumentManagementSystemModel.dt311_Invoice" />
         </EntityContainer>
         <EntityType Name="dm_Function">
           <Key>
@@ -2469,6 +2472,8 @@
           <Property Name="RemoveAt" Type="DateTime" Precision="3" />
           <Property Name="RemoveBy" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
           <Property Name="PreAlertMonths" Type="Int32" />
+          <Property Name="BaseTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Keyword" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="dt205_Form">
           <Key>
@@ -2512,6 +2517,14 @@
           <Property Name="VATAmount" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Note" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="dt311_SellerBuyer">
+          <Key>
+            <PropertyRef Name="Tax" />
+          </Key>
+          <Property Name="Tax" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="dt311_Invoice">
           <Key>
             <PropertyRef Name="TransactionID" />
@@ -2530,14 +2543,7 @@
           <Property Name="LicensePlate" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
           <Property Name="OdometerReading" Type="Int32" />
           <Property Name="FuelFilledBy" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="dt311_SellerBuyer">
-          <Key>
-            <PropertyRef Name="Tax" />
-          </Key>
-          <Property Name="Tax" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Type" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="AttId" Type="Int32" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -3717,6 +3723,8 @@
           <EntitySetMapping Name="dt205_Base">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt205_Base">
               <MappingFragment StoreEntitySet="dt205_Base">
+                <ScalarProperty Name="Keyword" ColumnName="Keyword" />
+                <ScalarProperty Name="BaseTypeId" ColumnName="BaseTypeId" />
                 <ScalarProperty Name="PreAlertMonths" ColumnName="PreAlertMonths" />
                 <ScalarProperty Name="RemoveBy" ColumnName="RemoveBy" />
                 <ScalarProperty Name="RemoveAt" ColumnName="RemoveAt" />
@@ -3779,9 +3787,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="dt311_SellerBuyer">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt311_SellerBuyer">
+              <MappingFragment StoreEntitySet="dt311_SellerBuyer">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Tax" ColumnName="Tax" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="dt311_Invoice">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt311_Invoice">
               <MappingFragment StoreEntitySet="dt311_Invoice">
+                <ScalarProperty Name="AttId" ColumnName="AttId" />
                 <ScalarProperty Name="FuelFilledBy" ColumnName="FuelFilledBy" />
                 <ScalarProperty Name="OdometerReading" ColumnName="OdometerReading" />
                 <ScalarProperty Name="LicensePlate" ColumnName="LicensePlate" />
@@ -3796,15 +3814,6 @@
                 <ScalarProperty Name="InvoiceCode" ColumnName="InvoiceCode" />
                 <ScalarProperty Name="SourceType" ColumnName="SourceType" />
                 <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="dt311_SellerBuyer">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt311_SellerBuyer">
-              <MappingFragment StoreEntitySet="dt311_SellerBuyer">
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="Tax" ColumnName="Tax" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -28,5 +28,7 @@ namespace DataAccessLayer
         public Nullable<System.DateTime> RemoveAt { get; set; }
         public string RemoveBy { get; set; }
         public Nullable<int> PreAlertMonths { get; set; }
+        public int BaseTypeId { get; set; }
+        public string Keyword { get; set; }
     }
 }
