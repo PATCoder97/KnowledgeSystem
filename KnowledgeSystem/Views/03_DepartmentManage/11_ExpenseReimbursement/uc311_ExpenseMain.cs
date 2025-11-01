@@ -25,6 +25,7 @@ using KnowledgeSystem.Views._00_Generals;
 using KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949;
 using MiniSoftware;
 using Newtonsoft.Json.Linq;
+using OfficeOpenXml;
 using Spire.Presentation;
 using System;
 using System.Collections.Generic;
@@ -1297,6 +1298,67 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             {
                 XtraMessageBox.Show(ex.Message, "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void btnFuelUsageStatistics_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var fuelDatas = dt311_InvoiceBUS.Instance.GetListFuleByStartDeptId(idDept2Word);
+            var vehicles = dt311_VehicleManagementBUS.Instance.GetList();
+            var invoiceItems = dt311_InvoiceItemBUS.Instance.GetList()
+                    .GroupBy(r => r.IdInvoice)
+                    .Select(g => g.First())
+                    .ToList();
+
+
+            var data = (from fuel in fuelDatas
+                        join vehicle in vehicles on fuel.LicensePlate equals vehicle.LicensePlate
+                        join item in invoiceItems on fuel.TransactionID equals item.IdInvoice
+                        select new
+                        {
+                            fuel,
+                            vehicle,
+                            item
+                        }).ToList();
+
+
+            var dataExcels = (from dt in data
+                              select new
+                              {
+                                  Month = dt.fuel.IssueDate?.Month,
+                                  Date = dt.fuel.IssueDate?.ToString("yyyy/MM/dd"),
+                                  Invoice = dt.fuel.InvoiceCode + dt.fuel.InvoiceNumber,
+                                  Plate = dt.fuel.LicensePlate,
+                                  Amount = dt.item.Quantity
+                              }).ToList();
+
+            SaveFileDialog saveFile = new SaveFileDialog()
+            {
+                RestoreDirectory = true,
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
+                FileName = $"健康檢查報告-{DateTime.Now:yyyyMMddHHmmss}.xlsx",
+                Filter = "Excel| *.xlsx"
+            };
+            if (saveFile.ShowDialog() != DialogResult.OK) return;
+
+            // Đường dẫn đến temp và file kết quả
+            string PATH_EXPORT = saveFile.FileName;
+
+            string PATH_TEMPLATE = @"C:\Users\Dell Alpha\Desktop\tesst ky\tempISO.xlsx";
+
+            File.Copy(PATH_TEMPLATE, PATH_EXPORT, true);
+
+            FileInfo newFile = new FileInfo(PATH_EXPORT);
+            using (ExcelPackage pck = new ExcelPackage(newFile))
+            {
+                var ws = pck.Workbook.Worksheets["xe_may"];
+
+                ws.Cells["D3"].LoadFromCollection(dataExcels, false);
+
+                // Lưu và chỉ hiện Sheet BB
+                pck.Save();
+            }
+
+            Process.Start(PATH_EXPORT);
         }
     }
 }

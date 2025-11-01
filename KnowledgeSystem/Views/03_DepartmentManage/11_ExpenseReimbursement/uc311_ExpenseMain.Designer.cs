@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc311_ExpenseMain));
             this.gvDetail = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -58,6 +58,7 @@
             this.gridColumn26 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn27 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColSellerType = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColAttId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemMemoEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit();
             this.gvSession = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gColIdDetail = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -82,7 +83,7 @@
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.gColAttId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.btnFuelUsageStatistics = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.gvDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
@@ -226,10 +227,10 @@
             this.gcData.EmbeddedNavigator.Buttons.Edit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.EndEdit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.Remove.Visible = false;
-            gridLevelNode1.LevelTemplate = this.gvDetail;
-            gridLevelNode1.RelationName = "Detail";
+            gridLevelNode2.LevelTemplate = this.gvDetail;
+            gridLevelNode2.RelationName = "Detail";
             this.gcData.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode1});
+            gridLevelNode2});
             this.gcData.Location = new System.Drawing.Point(12, 12);
             this.gcData.MainView = this.gvData;
             this.gcData.Name = "gcData";
@@ -409,6 +410,12 @@
             this.gColSellerType.FieldName = "seller.Type";
             this.gColSellerType.Name = "gColSellerType";
             // 
+            // gColAttId
+            // 
+            this.gColAttId.Caption = "gridColumn28";
+            this.gColAttId.FieldName = "data.AttId";
+            this.gColAttId.Name = "gColAttId";
+            // 
             // repositoryItemMemoEdit1
             // 
             this.repositoryItemMemoEdit1.Name = "repositoryItemMemoEdit1";
@@ -507,9 +514,10 @@
             this.btnGetFillFuel,
             this.btnAddXmlFile,
             this.barSubExcel,
-            this.btnFillFuelTable});
+            this.btnFillFuelTable,
+            this.btnFuelUsageStatistics});
             this.barManagerTP.MainMenu = this.bar2;
-            this.barManagerTP.MaxItemId = 20;
+            this.barManagerTP.MaxItemId = 21;
             // 
             // bar2
             // 
@@ -629,7 +637,8 @@
             this.barSubExcel.ItemAppearance.Normal.Options.UseFont = true;
             this.barSubExcel.ItemAppearance.Normal.Options.UseForeColor = true;
             this.barSubExcel.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnFillFuelTable)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnFillFuelTable),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnFuelUsageStatistics)});
             this.barSubExcel.Name = "barSubExcel";
             // 
             // btnFillFuelTable
@@ -707,11 +716,18 @@
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
-            // gColAttId
+            // btnFuelUsageStatistics
             // 
-            this.gColAttId.Caption = "gridColumn28";
-            this.gColAttId.FieldName = "data.AttId";
-            this.gColAttId.Name = "gColAttId";
+            this.btnFuelUsageStatistics.Caption = "廠處使用燃料量統計表";
+            this.btnFuelUsageStatistics.Id = 20;
+            this.btnFuelUsageStatistics.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnFuelUsageStatistics.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnFuelUsageStatistics.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFuelUsageStatistics.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
+            this.btnFuelUsageStatistics.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnFuelUsageStatistics.ItemAppearance.Normal.Options.UseForeColor = true;
+            this.btnFuelUsageStatistics.Name = "btnFuelUsageStatistics";
+            this.btnFuelUsageStatistics.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnFuelUsageStatistics_ItemClick);
             // 
             // uc311_ExpenseMain
             // 
@@ -794,5 +810,6 @@
         private DevExpress.XtraBars.BarSubItem barSubExcel;
         private DevExpress.XtraBars.BarButtonItem btnFillFuelTable;
         private DevExpress.XtraGrid.Columns.GridColumn gColAttId;
+        private DevExpress.XtraBars.BarButtonItem btnFuelUsageStatistics;
     }
 }

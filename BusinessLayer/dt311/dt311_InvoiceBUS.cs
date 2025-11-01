@@ -56,6 +56,22 @@ namespace BusinessLayer
             }
         }
 
+        public List<dt311_Invoice> GetListFuleByStartDeptId(string deptId)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt311_Invoice.Where(r => r.IdDept.StartsWith(deptId) && !string.IsNullOrEmpty(r.LicensePlate)).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public List<dt311_Invoice> GetListByStartDeptId(string deptId, DateTime startDate, DateTime endDate)
         {
             try
