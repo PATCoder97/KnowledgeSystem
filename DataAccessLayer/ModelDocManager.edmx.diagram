@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="18db6e2357d142b1a130985af0b54ad3" Name="Diagram1" ZoomLevel="72">
+      <Diagram DiagramId="18db6e2357d142b1a130985af0b54ad3" Name="Diagram1" ZoomLevel="63">
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_Function" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_FunctionRole" Width="1.5" PointX="3.75" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dm_GroupUser" Width="1.5" PointX="8.625" PointY="0.5" IsExpanded="true" />
@@ -107,7 +107,11 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt206_DocUseFor" Width="1.5" PointX="11.875" PointY="53.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt206_DocVersions" Width="1.5" PointX="8.625" PointY="53.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt205_Base" Width="1.5" PointX="0.5" PointY="53.625" />
-        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt205_Type" Width="1.5" PointX="3.75" PointY="53.625" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt205_Form" Width="1.5" PointX="2.125" PointY="53.625" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt311_VehicleManagement" Width="1.5" PointX="5.375" PointY="58.375" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt311_InvoiceItem" Width="1.5" PointX="2.125" PointY="58.375" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt311_SellerBuyer" Width="1.5" PointX="3.75" PointY="58.375" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt311_Invoice" Width="1.5" PointX="0.5" PointY="58.375" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

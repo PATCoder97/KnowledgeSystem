@@ -164,6 +164,10 @@
     <Compile Include="dt310\dt310_FunctionBUS.cs" />
     <Compile Include="dt310\dt310_RoleBUS.cs" />
     <Compile Include="dt310\dt310_UnitEHSOrgBUS.cs" />
+    <Compile Include="dt311\dt311_InvoiceBUS.cs" />
+    <Compile Include="dt311\dt311_InvoiceItemBUS.cs" />
+    <Compile Include="dt311\dt311_SellerBuyerBUS.cs" />
+    <Compile Include="dt311\dt311_VehicleManagementBUS.cs" />
     <Compile Include="dt402\dt402_KPIWebBUS.cs" />
     <Compile Include="dt403\dt403_SoftwareManualBUS.cs" />
     <Compile Include="dt403\dt403_04_HardnessStandardLogBUS.cs" />
