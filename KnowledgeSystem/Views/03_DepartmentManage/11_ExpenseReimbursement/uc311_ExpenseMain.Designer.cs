@@ -237,7 +237,7 @@
             this.gcData.Name = "gcData";
             this.gcData.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemMemoEdit1});
-            this.gcData.Size = new System.Drawing.Size(1292, 534);
+            this.gcData.Size = new System.Drawing.Size(1423, 534);
             this.gcData.TabIndex = 4;
             this.gcData.UseEmbeddedNavigator = true;
             this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -297,7 +297,6 @@
             this.gvData.MasterRowGetRelationName += new DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationNameEventHandler(this.gvData_MasterRowGetRelationName);
             this.gvData.MasterRowGetRelationCount += new DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationCountEventHandler(this.gvData_MasterRowGetRelationCount);
             this.gvData.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gvData_PopupMenuShowing);
-            this.gvData.CustomUnboundColumnData += new DevExpress.XtraGrid.Views.Base.CustomColumnDataEventHandler(this.gvData_CustomUnboundColumnData);
             // 
             // gColId
             // 
@@ -409,13 +408,13 @@
             // 
             // gColSellerType
             // 
-            this.gColSellerType.Caption = "gridColumn28";
+            this.gColSellerType.Caption = "gColSellerType";
             this.gColSellerType.FieldName = "seller.Type";
             this.gColSellerType.Name = "gColSellerType";
             // 
             // gColAttId
             // 
-            this.gColAttId.Caption = "gridColumn28";
+            this.gColAttId.Caption = "gColAttId";
             this.gColAttId.FieldName = "data.AttId";
             this.gColAttId.Name = "gColAttId";
             // 
@@ -425,6 +424,7 @@
             this.gridColumn28.FieldName = "HasFile";
             this.gridColumn28.Name = "gridColumn28";
             this.gridColumn28.UnboundDataType = typeof(bool);
+            this.gridColumn28.UnboundExpression = "Not IsNullOrEmpty([data.AttId])";
             this.gridColumn28.Visible = true;
             this.gridColumn28.VisibleIndex = 13;
             // 
@@ -558,7 +558,7 @@
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnReload, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnGetManagerVehicle, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnGetFillFuel, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barSubExcel, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barSubExcel, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawDragBorder = false;
             this.bar2.OptionsBar.MultiLine = true;
@@ -657,6 +657,7 @@
             // 
             this.btnFillFuelTable.Caption = "公務車加油記錄表";
             this.btnFillFuelTable.Id = 19;
+            this.btnFillFuelTable.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnFillFuelTable.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
             this.btnFillFuelTable.ItemAppearance.Hovered.Options.UseForeColor = true;
             this.btnFillFuelTable.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -670,6 +671,7 @@
             // 
             this.btnFuelUsageStatistics.Caption = "廠處使用燃料量統計表";
             this.btnFuelUsageStatistics.Id = 20;
+            this.btnFuelUsageStatistics.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnFuelUsageStatistics.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
             this.btnFuelUsageStatistics.ItemAppearance.Hovered.Options.UseForeColor = true;
             this.btnFuelUsageStatistics.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -685,7 +687,7 @@
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManagerTP;
-            this.barDockControlTop.Size = new System.Drawing.Size(1316, 49);
+            this.barDockControlTop.Size = new System.Drawing.Size(1447, 49);
             // 
             // barDockControlBottom
             // 
@@ -693,7 +695,7 @@
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.barDockControlBottom.Location = new System.Drawing.Point(0, 607);
             this.barDockControlBottom.Manager = this.barManagerTP;
-            this.barDockControlBottom.Size = new System.Drawing.Size(1316, 0);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1447, 0);
             // 
             // barDockControlLeft
             // 
@@ -707,7 +709,7 @@
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1316, 49);
+            this.barDockControlRight.Location = new System.Drawing.Point(1447, 49);
             this.barDockControlRight.Manager = this.barManagerTP;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 558);
             // 
@@ -718,7 +720,7 @@
             this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(1316, 558);
+            this.layoutControl1.Size = new System.Drawing.Size(1447, 558);
             this.layoutControl1.TabIndex = 6;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -729,7 +731,7 @@
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem1});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(1316, 558);
+            this.Root.Size = new System.Drawing.Size(1447, 558);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem1
@@ -737,7 +739,7 @@
             this.layoutControlItem1.Control = this.gcData;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(1296, 538);
+            this.layoutControlItem1.Size = new System.Drawing.Size(1427, 538);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
@@ -751,7 +753,7 @@
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
             this.Name = "uc311_ExpenseMain";
-            this.Size = new System.Drawing.Size(1316, 607);
+            this.Size = new System.Drawing.Size(1447, 607);
             this.Load += new System.EventHandler(this.uc311_ExpenseMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gvDetail)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).EndInit();

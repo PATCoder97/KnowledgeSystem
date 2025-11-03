@@ -6,6 +6,7 @@ using DevExpress.Utils.Menu;
 using DevExpress.Utils.Svg;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using DevExpress.XtraGrid.Views.Items.ViewInfo;
@@ -15,6 +16,7 @@ using DevExpress.XtraReports.Native.ExpressionEditor;
 using DevExpress.XtraSplashScreen;
 using DevExpress.XtraTreeList;
 using DevExpress.XtraTreeList.Columns;
+using DevExpress.XtraTreeList.Data;
 using DevExpress.XtraTreeList.Nodes;
 using DevExpress.XtraTreeList.StyleFormatConditions;
 using DocumentFormat.OpenXml.Spreadsheet;
@@ -40,11 +42,13 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Web.UI.WebControls;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using static DevExpress.XtraEditors.Mask.MaskSettings;
 using static KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement.f311_AutoERP;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using GridView = DevExpress.XtraGrid.Views.Grid.GridView;
 using Path = System.IO.Path;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
@@ -95,11 +99,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
 
         private void InitializeIcon()
         {
-            //btnAdd.ImageOptions.SvgImage = TPSvgimages.Add;
             btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
             barSubExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
             btnGetManagerVehicle.ImageOptions.SvgImage = TPSvgimages.Gears;
             btnGetFillFuel.ImageOptions.SvgImage = TPSvgimages.GasStation;
+
+            btnFillFuelTable.ImageOptions.SvgImage = TPSvgimages.Num1;
+            btnFuelUsageStatistics.ImageOptions.SvgImage = TPSvgimages.Num2;
         }
 
         private void InitializeMenuItems()
@@ -332,7 +338,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             List<ErpAction> erpDataPayload = new List<ErpAction>();
             erpDataPayload.Add(new ErpAction() { Text = prefixKey });
 
-            var subBitmap = ImageScanOpenCV.GetImage(Path.Combine(TPConfigs.Folder311, "tempSubmitBtn.png"));
+            var subBitmap = ImageScanOpenCV.GetImage(Path.Combine(TPConfigs.Folder311_Template, "tempSubmitBtn.png"));
             erpDataPayload.Add(new ErpAction() { IsClick = true, TempImage = subBitmap });
             erpDataPayload.Add(new ErpAction() { Text = invoiceDataCombined });
             erpDataPayload.Add(new ErpAction() { Step = 2, Text = "%a" });
@@ -568,6 +574,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             try
             {
                 string xmlString = "";
+                int attId = -1;
 
                 if (!string.IsNullOrEmpty(xmlFilePath))
                 {
@@ -593,6 +600,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                         var json = JObject.Parse(jsonText);
                         xmlString = json.Value<string>("data");
                     }
+
+                    attId = await DownloadInvoice(transactionId);
                 }
 
                 if (string.IsNullOrEmpty(xmlString))
@@ -603,7 +612,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                 }
 
                 var root = XElement.Parse(xmlString);
-                var formats = JObject.Parse(File.ReadAllText(Path.Combine(TPConfigs.Folder311, "invoice_formats.json")));
+                var formats = JObject.Parse(File.ReadAllText(Path.Combine(TPConfigs.Folder311_Template, "invoice_formats.json")));
 
                 string fmtName = DetectFormat(root, formats);
                 if (fmtName == null)
@@ -669,9 +678,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                 };
 
                 // --- Lưu dữ liệu ---
-                int attId = await DownloadInvoice(invoiceData.TransactionID);
                 if (attId != -1) invoiceData.AttId = attId;
-
                 string invoiceId = dt311_InvoiceBUS.Instance.AddOrUpdate(invoiceData);
                 dt311_SellerBuyerBUS.Instance.AddOrUpdate(seller);
                 dt311_SellerBuyerBUS.Instance.AddOrUpdate(buyer);
@@ -714,7 +721,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                     $"Người bán: {seller.DisplayName}\nNgười mua: {buyer.DisplayName}",
                     "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                if (attId == -1)
+                if (attId == -1 && !string.IsNullOrEmpty(transactionId))
                 {
                     XtraMessageBox.Show("Lỗi không thể tải hóa đơn PDF!\nVui lòng đưa lên thủ công hoặc thử lại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -1257,7 +1264,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                 if (!Directory.Exists(documentsPath))
                     Directory.CreateDirectory(documentsPath);
 
-                string PATH_TEMPLATE = @"C:\Users\Dell Alpha\Desktop\temp311.docx";
+                string PATH_TEMPLATE = Path.Combine(TPConfigs.Folder311_Template, "temp_fuel_report.docx");
 
                 foreach (var item in vehicleExports)
                 {
@@ -1321,6 +1328,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                         }).ToList();
 
 
+
             var dataExcels = (from dt in data
                               select new
                               {
@@ -1328,14 +1336,14 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                                   Date = dt.fuel.IssueDate?.ToString("yyyy/MM/dd"),
                                   Invoice = dt.fuel.InvoiceCode + dt.fuel.InvoiceNumber,
                                   Plate = dt.fuel.LicensePlate,
-                                  Amount = dt.item.Quantity
+                                  Amount = dt.item.Quantity,
+                                  VehicleType = dt.vehicle.VehicleType.Split('/')[1]
                               }).ToList();
 
             SaveFileDialog saveFile = new SaveFileDialog()
             {
                 RestoreDirectory = true,
-                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
-                FileName = $"健康檢查報告-{DateTime.Now:yyyyMMddHHmmss}.xlsx",
+                FileName = $"abc-{DateTime.Now:yyyyMMddHHmmss}.xlsx",
                 Filter = "Excel| *.xlsx"
             };
             if (saveFile.ShowDialog() != DialogResult.OK) return;
@@ -1343,32 +1351,24 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             // Đường dẫn đến temp và file kết quả
             string PATH_EXPORT = saveFile.FileName;
 
-            string PATH_TEMPLATE = @"C:\Users\Dell Alpha\Desktop\tesst ky\tempISO.xlsx";
+            string PATH_TEMPLATE = Path.Combine(TPConfigs.Folder311_Template, "fuel_usage_statistics.xlsx");
 
             File.Copy(PATH_TEMPLATE, PATH_EXPORT, true);
 
             FileInfo newFile = new FileInfo(PATH_EXPORT);
             using (ExcelPackage pck = new ExcelPackage(newFile))
             {
-                var ws = pck.Workbook.Worksheets["xe_may"];
-
-                ws.Cells["D3"].LoadFromCollection(dataExcels, false);
+                foreach (string vehicleType in dataExcels.Select(r => r.VehicleType).Distinct())
+                {
+                    var ws = pck.Workbook.Worksheets[vehicleType];
+                    ws.Cells["D3"].LoadFromCollection(dataExcels.Where(r => r.VehicleType == vehicleType), false);
+                }
 
                 // Lưu và chỉ hiện Sheet BB
                 pck.Save();
             }
 
             Process.Start(PATH_EXPORT);
-        }
-
-        private void gvData_CustomUnboundColumnData(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDataEventArgs e)
-        {
-            GridView view = sender as GridView;
-            if (e.Column.FieldName == "HasFile" && e.IsGetData)
-            {
-                int attId = Convert.ToInt16(view.GetRowCellValue(e.ListSourceRowIndex, gColAttId) ?? -1);
-                e.Value = attId != -1;
-            }
         }
     }
 }
