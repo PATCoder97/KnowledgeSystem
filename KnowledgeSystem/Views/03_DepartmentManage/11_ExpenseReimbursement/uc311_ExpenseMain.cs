@@ -28,6 +28,7 @@ using KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949;
 using MiniSoftware;
 using Newtonsoft.Json.Linq;
 using OfficeOpenXml;
+using OfficeOpenXml.Style;
 using Spire.Presentation;
 using System;
 using System.Collections.Generic;
@@ -1338,7 +1339,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                                   Plate = dt.fuel.LicensePlate,
                                   Amount = dt.item.Quantity,
                                   VehicleType = dt.vehicle.VehicleType.Split('/')[1]
-                              }).ToList();
+                              }).OrderBy(r => r.Date).ToList();
 
             SaveFileDialog saveFile = new SaveFileDialog()
             {
@@ -1361,7 +1362,47 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                 foreach (string vehicleType in dataExcels.Select(r => r.VehicleType).Distinct())
                 {
                     var ws = pck.Workbook.Worksheets[vehicleType];
-                    ws.Cells["D3"].LoadFromCollection(dataExcels.Where(r => r.VehicleType == vehicleType), false);
+                    var excelBySheet = dataExcels.Where(r => r.VehicleType == vehicleType).ToList();
+                    ws.Cells["D3"].LoadFromCollection(excelBySheet, false);
+
+                    int startRow = 3, endRow = excelBySheet.Count + 2;
+
+                    List<int> cols = new List<int>() { 1, 4 };
+
+                    // Merge các cột A-D nếu giá trị giống nhau
+                    foreach (int col in cols)
+                    {
+                        int mergeStart = startRow;
+                        for (int row = startRow + 1; row <= endRow + 1; row++)
+                        {
+                            var curr = ws.Cells[row, col].Text;
+                            var prev = ws.Cells[mergeStart, col].Text;
+
+                            if (curr != prev || row == endRow + 1)
+                            {
+                                if (row - 1 > mergeStart)
+                                    ws.Cells[mergeStart, col, row - 1, col].Merge = true;
+                                mergeStart = row;
+                            }
+                        }
+                    }
+
+                    //// Bật WrapText cho tất cả các ô
+                    //ws.Column(6).Style.WrapText = true;
+                    //ws.Cells[ws.Dimension.Address].AutoFitColumns();
+                    //ws.Column(6).Width = 35;
+
+                    //// Định dạng cột D (giả sử D là cột số lượng chẳng hạn)
+                    //ws.Column(4).Style.Numberformat.Format = "#,##0"; // D = 4
+                    //ws.Column(13).Style.Numberformat.Format = "#,##0"; // M = 13
+                    //ws.Column(14).Style.Numberformat.Format = "#,##0"; // N = 14
+
+                    //// Căn giữa và kẻ ô toàn bảng
+                    //var fullRange = ws.Cells[ws.Dimension.Address];
+                    //fullRange.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                    //fullRange.Style.Border.Top.Style = fullRange.Style.Border.Bottom.Style =
+                    //    fullRange.Style.Border.Left.Style = fullRange.Style.Border.Right.Style =
+                    //    ExcelBorderStyle.Thin;
                 }
 
                 // Lưu và chỉ hiện Sheet BB
