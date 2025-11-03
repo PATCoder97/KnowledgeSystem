@@ -927,7 +927,7 @@
             this.lcUserInfo.AppearanceTabPage.HeaderActive.Options.UseForeColor = true;
             this.lcUserInfo.Location = new System.Drawing.Point(0, 0);
             this.lcUserInfo.Name = "lcUserInfo";
-            this.lcUserInfo.SelectedTabPage = this.lcGroup;
+            this.lcUserInfo.SelectedTabPage = this.layoutControlGroup1;
             this.lcUserInfo.Size = new System.Drawing.Size(657, 344);
             this.lcUserInfo.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlGroup1,
