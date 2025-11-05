@@ -179,12 +179,16 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
 
             File.Copy(sourcePath, destPath, true);
 
-            var mainForm = f00_ViewMultiFile.Instance;
+            f00_VIewFile viewFile = new f00_VIewFile(destPath);
+            viewFile.ShowDialog();
 
-            if (!mainForm.Visible)
-                mainForm.Show();
+            //// Xem pdf 
+            //var mainForm = f00_ViewMultiFile.Instance;
 
-            mainForm.OpenFormInDocumentManager(destPath);
+            //if (!mainForm.Visible)
+            //    mainForm.Show();
+
+            //mainForm.OpenFormInDocumentManager(destPath);
         }
     }
 }

@@ -1344,7 +1344,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             SaveFileDialog saveFile = new SaveFileDialog()
             {
                 RestoreDirectory = true,
-                FileName = $"abc-{DateTime.Now:yyyyMMddHHmmss}.xlsx",
+                FileName = $"廠處使用燃料量統計表-{DateTime.Now:yyyyMMddHHmmss}.xlsx",
                 Filter = "Excel| *.xlsx"
             };
             if (saveFile.ShowDialog() != DialogResult.OK) return;

@@ -75,7 +75,9 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
 
         private void InitializeIcon()
         {
-            btnAdd.ImageOptions.SvgImage = TPSvgimages.Add;
+            barAddItem.ImageOptions.SvgImage = TPSvgimages.Add;
+            btnAddFirstNode.ImageOptions.SvgImage = TPSvgimages.Add2;
+            btnAddDoc.ImageOptions.SvgImage = TPSvgimages.Attach;
             btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
             btnExportExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
             btnKeywordSearch.ImageOptions.SvgImage = TPSvgimages.Search;
@@ -394,7 +396,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
 
             if (!isManager205)
             {
-                btnAdd.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                btnAddFirstNode.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             }
 
             LoadData();
@@ -553,6 +555,19 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
             LoadData(keyword);
 
             tlsData.ExpandAll();
+        }
+
+        private void btnAddDoc_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            f205_Node_Info node_Info = new f205_Node_Info()
+            {
+                formName = "文件",
+                //idParent = currentData.Id,
+                //parentData = currentData
+            };
+
+            node_Info.ShowDialog();
+            LoadData();
         }
     }
 }
