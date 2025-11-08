@@ -306,6 +306,13 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
 
             bool resultAdd = dt205_BaseBUS.Instance.Add(baseVer);
 
+            bool IsEditUploadDate = baseDatas.Any(r => r.IdParent == currentData.Id);
+            if (IsEditUploadDate && currentData.CreateDate.HasValue && currentData.NotifyCycle.HasValue)
+            {
+                currentData.CreateDate = currentData.CreateDate.Value.AddMonths(currentData.NotifyCycle.Value);
+                dt205_BaseBUS.Instance.AddOrUpdate(currentData);
+            }
+
             LoadData();
         }
 
@@ -562,8 +569,6 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
             f205_Node_Info node_Info = new f205_Node_Info()
             {
                 formName = "文件",
-                //idParent = currentData.Id,
-                //parentData = currentData
             };
 
             node_Info.ShowDialog();
