@@ -403,7 +403,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
 
             if (!isManager205)
             {
-                btnAddFirstNode.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                barAddItem.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             }
 
             LoadData();
