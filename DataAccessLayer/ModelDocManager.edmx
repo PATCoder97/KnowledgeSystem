@@ -1079,6 +1079,13 @@
           <Property Name="DeletedAt" Type="datetime2" Precision="7" />
           <Property Name="DeletedBy" Type="nvarchar" MaxLength="10" />
         </EntityType>
+        <EntityType Name="dt311_AccountingSubject">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="128" />
+        </EntityType>
         <EntityType Name="dt311_Invoice">
           <Key>
             <PropertyRef Name="TransactionID" />
@@ -1317,6 +1324,7 @@
           <EntitySet Name="dt310_Function" EntityType="Self.dt310_Function" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt310_Role" EntityType="Self.dt310_Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt310_UnitEHSOrg" EntityType="Self.dt310_UnitEHSOrg" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt311_AccountingSubject" EntityType="Self.dt311_AccountingSubject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt311_Invoice" EntityType="Self.dt311_Invoice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt311_InvoiceItem" EntityType="Self.dt311_InvoiceItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt311_SellerBuyer" EntityType="Self.dt311_SellerBuyer" Schema="dbo" store:Type="Tables" />
@@ -1441,6 +1449,7 @@
           <EntitySet Name="dt205_Form" EntityType="DBDocumentManagementSystemModel.dt205_Form" />
           <EntitySet Name="dt205_Type" EntityType="DBDocumentManagementSystemModel.dt205_Type" />
           <EntitySet Name="dt311_Invoice" EntityType="DBDocumentManagementSystemModel.dt311_Invoice" />
+          <EntitySet Name="dt311_AccountingSubject" EntityType="DBDocumentManagementSystemModel.dt311_AccountingSubject" />
         </EntityContainer>
         <EntityType Name="dm_Function">
           <Key>
@@ -2656,6 +2665,13 @@
           <Property Name="FuelFilledBy" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="AttId" Type="Int32" />
           <Property Name="CreateBy" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="dt311_AccountingSubject">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -3982,6 +3998,14 @@
                 <ScalarProperty Name="InvoiceCode" ColumnName="InvoiceCode" />
                 <ScalarProperty Name="SourceType" ColumnName="SourceType" />
                 <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt311_AccountingSubject">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt311_AccountingSubject">
+              <MappingFragment StoreEntitySet="dt311_AccountingSubject">
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

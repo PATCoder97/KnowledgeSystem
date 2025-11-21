@@ -132,5 +132,6 @@ namespace DataAccessLayer
         public virtual DbSet<dt205_Form> dt205_Form { get; set; }
         public virtual DbSet<dt205_Type> dt205_Type { get; set; }
         public virtual DbSet<dt311_Invoice> dt311_Invoice { get; set; }
+        public virtual DbSet<dt311_AccountingSubject> dt311_AccountingSubject { get; set; }
     }
 }

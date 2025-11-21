@@ -272,19 +272,22 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             }
 
             //====== 輸入說明 / Input Description ======
-            XtraInputBoxArgs inputArgs = new XtraInputBoxArgs();
-            inputArgs.Caption = TPConfigs.SoftNameTW + " - 輸入說明 / Input Description";
-            inputArgs.Prompt = "請輸入說明內容：";
-            inputArgs.DefaultButtonIndex = 0;
-            inputArgs.Editor = new TextEdit
-            {
-                Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F)
-            };
-            inputArgs.DefaultResponse = "";
+            uc311_MoreInfo ucInfo = new uc311_MoreInfo();
 
-            string description = (XtraInputBox.Show(inputArgs) as string)?.Trim();
-            if (string.IsNullOrEmpty(description))
+            // Hiển thị dialog
+            if (XtraDialog.Show(ucInfo, "輸入資訊", MessageBoxButtons.OKCancel) != DialogResult.OK)
                 return;
+
+            // Lấy dữ liệu từ control uc311_MoreInfo
+            string description = ucInfo.Desc;
+            string code = ucInfo.Code ?? "";
+
+            // Kiểm tra dữ liệu hợp lệ (ví dụ)
+            if (string.IsNullOrWhiteSpace(description))
+            {
+                XtraMessageBox.Show("請輸入說明內容。", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             //====== 組合前綴資料 / Build Prefix Key ======
             const string TAB = "{Tab}";
@@ -299,7 +302,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                 "LG", "",
                 deptMain, "",
                 "2",
-                "W", "", "", "", "", "", "",
+                "W",
+                code, "", "", "", "", "",
                 sellerTax,
                 buyerTax,
                 "A1",

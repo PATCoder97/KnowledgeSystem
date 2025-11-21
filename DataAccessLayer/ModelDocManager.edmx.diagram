@@ -112,6 +112,7 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt205_Base" Width="1.5" PointX="0.5" PointY="62.875" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt205_Type" Width="1.5" PointX="2.125" PointY="62.875" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt311_Invoice" Width="1.5" PointX="0.5" PointY="58.375" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt311_AccountingSubject" Width="1.5" PointX="7" PointY="58.375" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

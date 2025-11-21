@@ -356,6 +356,9 @@
     <Compile Include="dt310_UnitEHSOrg.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
+    <Compile Include="dt311_AccountingSubject.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
     <Compile Include="dt311_Invoice.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
