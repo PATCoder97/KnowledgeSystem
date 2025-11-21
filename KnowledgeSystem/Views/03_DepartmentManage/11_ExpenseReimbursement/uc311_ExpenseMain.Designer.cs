@@ -85,6 +85,7 @@
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.gridColumn29 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gvDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
@@ -276,7 +277,8 @@
             this.gridColumn27,
             this.gColSellerType,
             this.gColAttId,
-            this.gridColumn28});
+            this.gridColumn28,
+            this.gridColumn29});
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
             this.gvData.OptionsDetail.ShowDetailTabs = false;
@@ -388,7 +390,7 @@
             this.gridColumn1.FieldName = "data.LicensePlate";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 10;
+            this.gridColumn1.VisibleIndex = 11;
             // 
             // gridColumn26
             // 
@@ -396,7 +398,7 @@
             this.gridColumn26.FieldName = "data.OdometerReading";
             this.gridColumn26.Name = "gridColumn26";
             this.gridColumn26.Visible = true;
-            this.gridColumn26.VisibleIndex = 11;
+            this.gridColumn26.VisibleIndex = 12;
             // 
             // gridColumn27
             // 
@@ -404,7 +406,7 @@
             this.gridColumn27.FieldName = "data.FuelFilledBy";
             this.gridColumn27.Name = "gridColumn27";
             this.gridColumn27.Visible = true;
-            this.gridColumn27.VisibleIndex = 12;
+            this.gridColumn27.VisibleIndex = 13;
             // 
             // gColSellerType
             // 
@@ -426,7 +428,7 @@
             this.gridColumn28.UnboundDataType = typeof(bool);
             this.gridColumn28.UnboundExpression = "Not IsNullOrEmpty([data.AttId])";
             this.gridColumn28.Visible = true;
-            this.gridColumn28.VisibleIndex = 13;
+            this.gridColumn28.VisibleIndex = 14;
             // 
             // repositoryItemMemoEdit1
             // 
@@ -743,6 +745,14 @@
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
+            // gridColumn29
+            // 
+            this.gridColumn29.Caption = "上傳人";
+            this.gridColumn29.FieldName = "data.CreateBy";
+            this.gridColumn29.Name = "gridColumn29";
+            this.gridColumn29.Visible = true;
+            this.gridColumn29.VisibleIndex = 10;
+            // 
             // uc311_ExpenseMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -826,5 +836,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gColAttId;
         private DevExpress.XtraBars.BarButtonItem btnFuelUsageStatistics;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn28;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn29;
     }
 }

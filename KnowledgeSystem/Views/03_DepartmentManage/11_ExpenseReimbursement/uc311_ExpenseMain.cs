@@ -401,6 +401,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             var firstItem = selectedInvoices.First();
             var vehicle = dt311_VehicleManagementBUS.Instance.GetItemById(firstItem.LicensePlate);
 
+            if (vehicle == null)
+            {
+                XtraMessageBox.Show("Không có thông tin phương tiện!", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             string desc = string.Format("冶金技術部{0}加{2}油費用報銷。Thanh toán phí đổ {3} {1} BP Luyện Kim",
                 vehicle.VehicleType.Split('/')[1],
                 vehicle.VehicleType.Split('/')[0],
@@ -630,7 +637,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                 {
                     SourceType = fmtName,
                     TransactionID = transactionId,
-                    IdDept = idDept2Word
+                    IdDept = idDept2Word,
+                    CreateBy = TPConfigs.LoginUser.Id
                 };
 
                 var itemsList = new List<dt311_InvoiceItem>();
@@ -663,7 +671,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                 }
 
                 string sellerName = Regex.Replace(ExtractField(root, fmt["fields"]["seller_name"]), @"(?i)\s*Công\s*ty\s*TNHH(\s*MTV)?(\s*Thương\s*Mại)?\s*", "", RegexOptions.IgnoreCase).Trim();
-                string buyerName = Regex.Replace(ExtractField(root, fmt["fields"]["seller_name"]), @"(?i)\s*Công\s*ty\s*TNHH(\s*MTV)?(\s*Thương\s*Mại)?\s*", "", RegexOptions.IgnoreCase).Trim();
+                string buyerName = Regex.Replace(ExtractField(root, fmt["fields"]["buyer_name"]), @"(?i)\s*Công\s*ty\s*TNHH(\s*MTV)?(\s*Thương\s*Mại)?\s*", "", RegexOptions.IgnoreCase).Trim();
 
 
                 // --- Seller & Buyer ---
@@ -675,7 +683,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                 var buyer = new dt311_SellerBuyer
                 {
                     Tax = invoiceData.BuyerTax,
-                    DisplayName = sellerName
+                    DisplayName = buyerName
                 };
 
                 // --- Lưu dữ liệu ---

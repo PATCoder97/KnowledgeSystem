@@ -36,6 +36,7 @@
             this.gridView11 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.txbLicensePlate = new DevExpress.XtraEditors.ComboBoxEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.lcOdometerReading = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcFuelFilledBy = new DevExpress.XtraLayout.LayoutControlItem();
@@ -47,18 +48,17 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-            this.txbLicensePlate = new DevExpress.XtraEditors.ComboBoxEdit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txbOdometerReading.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbFuelFilledBy.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbLicensePlate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcOdometerReading)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcFuelFilledBy)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcLicensePlate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbLicensePlate.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -148,6 +148,25 @@
             this.gridColumn8.Visible = true;
             this.gridColumn8.VisibleIndex = 1;
             // 
+            // txbLicensePlate
+            // 
+            this.txbLicensePlate.EditValue = "";
+            this.txbLicensePlate.Location = new System.Drawing.Point(100, 12);
+            this.txbLicensePlate.Name = "txbLicensePlate";
+            this.txbLicensePlate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.txbLicensePlate.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.txbLicensePlate.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.txbLicensePlate.Properties.Appearance.Options.UseFont = true;
+            this.txbLicensePlate.Properties.Appearance.Options.UseForeColor = true;
+            this.txbLicensePlate.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.txbLicensePlate.Properties.AppearanceDropDown.Options.UseFont = true;
+            this.txbLicensePlate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txbLicensePlate.Properties.PopupSizeable = true;
+            this.txbLicensePlate.Size = new System.Drawing.Size(247, 32);
+            this.txbLicensePlate.StyleController = this.layoutControl1;
+            this.txbLicensePlate.TabIndex = 17;
+            // 
             // Root
             // 
             this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
@@ -174,7 +193,7 @@
             this.lcOdometerReading.Location = new System.Drawing.Point(0, 36);
             this.lcOdometerReading.Name = "lcOdometerReading";
             this.lcOdometerReading.Size = new System.Drawing.Size(339, 36);
-            this.lcOdometerReading.Text = "文件編碼";
+            this.lcOdometerReading.Text = "里程數";
             this.lcOdometerReading.TextSize = new System.Drawing.Size(76, 24);
             // 
             // lcFuelFilledBy
@@ -293,25 +312,6 @@
             this.barDockControlRight.Manager = this.barManagerTP;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 128);
             // 
-            // txbLicensePlate
-            // 
-            this.txbLicensePlate.EditValue = "";
-            this.txbLicensePlate.Location = new System.Drawing.Point(100, 12);
-            this.txbLicensePlate.Name = "txbLicensePlate";
-            this.txbLicensePlate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
-            this.txbLicensePlate.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.txbLicensePlate.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.txbLicensePlate.Properties.Appearance.Options.UseFont = true;
-            this.txbLicensePlate.Properties.Appearance.Options.UseForeColor = true;
-            this.txbLicensePlate.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.txbLicensePlate.Properties.AppearanceDropDown.Options.UseFont = true;
-            this.txbLicensePlate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txbLicensePlate.Properties.PopupSizeable = true;
-            this.txbLicensePlate.Size = new System.Drawing.Size(247, 32);
-            this.txbLicensePlate.StyleController = this.layoutControl1;
-            this.txbLicensePlate.TabIndex = 17;
-            // 
             // f311_AddFuel_Info
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -333,12 +333,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.txbOdometerReading.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbFuelFilledBy.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbLicensePlate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcOdometerReading)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcFuelFilledBy)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcLicensePlate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbLicensePlate.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
