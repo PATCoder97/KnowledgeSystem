@@ -1142,6 +1142,68 @@
           <Property Name="IdDept" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="FuelType" Type="nvarchar" MaxLength="20" />
         </EntityType>
+        <EntityType Name="dt312_Answers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QuesId" Type="int" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="2048" Nullable="false" />
+          <Property Name="ImageName" Type="varchar" MaxLength="128" />
+          <Property Name="TrueAns" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt312_ExamMgmt">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="CreateAt" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt312_ExamUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ExamId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="SubmitAt" Type="datetime" />
+          <Property Name="Score" Type="int" />
+          <Property Name="IsPass" Type="bit" />
+          <Property Name="ExamData" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="dt312_Groups">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="CreateAt" Type="date" Nullable="false" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="RemoveAt" Type="date" />
+          <Property Name="RemoveBy" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="dt312_Questions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupId" Type="int" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="2048" Nullable="false" />
+          <Property Name="ImageName" Type="varchar" MaxLength="128" />
+          <Property Name="IsmultiAns" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt312_Setting">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="CountEmp" Type="int" Nullable="false" />
+          <Property Name="PassingScore" Type="int" Nullable="false" />
+          <Property Name="QuesCount" Type="int" Nullable="false" />
+          <Property Name="TestDuration" Type="int" Nullable="false" />
+          <Property Name="CycleCreate" Type="float" Nullable="false" />
+        </EntityType>
         <EntityType Name="dt402_KPIWeb">
           <Key>
             <PropertyRef Name="Id" />
@@ -1329,6 +1391,12 @@
           <EntitySet Name="dt311_InvoiceItem" EntityType="Self.dt311_InvoiceItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt311_SellerBuyer" EntityType="Self.dt311_SellerBuyer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt311_VehicleManagement" EntityType="Self.dt311_VehicleManagement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt312_Answers" EntityType="Self.dt312_Answers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt312_ExamMgmt" EntityType="Self.dt312_ExamMgmt" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt312_ExamUser" EntityType="Self.dt312_ExamUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt312_Groups" EntityType="Self.dt312_Groups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt312_Questions" EntityType="Self.dt312_Questions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt312_Setting" EntityType="Self.dt312_Setting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt402_KPIWeb" EntityType="Self.dt402_KPIWeb" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt403_04_HardnessStandardLog" EntityType="Self.dt403_04_HardnessStandardLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt403_04_StandardInfo" EntityType="Self.dt403_04_StandardInfo" Schema="dbo" store:Type="Tables" />
@@ -1450,6 +1518,12 @@
           <EntitySet Name="dt205_Type" EntityType="DBDocumentManagementSystemModel.dt205_Type" />
           <EntitySet Name="dt311_Invoice" EntityType="DBDocumentManagementSystemModel.dt311_Invoice" />
           <EntitySet Name="dt311_AccountingSubject" EntityType="DBDocumentManagementSystemModel.dt311_AccountingSubject" />
+          <EntitySet Name="dt312_Answers" EntityType="DBDocumentManagementSystemModel.dt312_Answers" />
+          <EntitySet Name="dt312_ExamMgmt" EntityType="DBDocumentManagementSystemModel.dt312_ExamMgmt" />
+          <EntitySet Name="dt312_ExamUser" EntityType="DBDocumentManagementSystemModel.dt312_ExamUser" />
+          <EntitySet Name="dt312_Groups" EntityType="DBDocumentManagementSystemModel.dt312_Groups" />
+          <EntitySet Name="dt312_Questions" EntityType="DBDocumentManagementSystemModel.dt312_Questions" />
+          <EntitySet Name="dt312_Setting" EntityType="DBDocumentManagementSystemModel.dt312_Setting" />
         </EntityContainer>
         <EntityType Name="dm_Function">
           <Key>
@@ -2672,6 +2746,68 @@
           </Key>
           <Property Name="Code" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
           <Property Name="DisplayName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dt312_Answers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuesId" Type="Int32" Nullable="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="2048" FixedLength="false" Unicode="true" />
+          <Property Name="ImageName" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="TrueAns" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt312_ExamMgmt">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CreateAt" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="dt312_ExamUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExamId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="SubmitAt" Type="DateTime" Precision="3" />
+          <Property Name="Score" Type="Int32" />
+          <Property Name="IsPass" Type="Boolean" />
+          <Property Name="ExamData" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dt312_Groups">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CreateAt" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CreateBy" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="RemoveAt" Type="DateTime" Precision="0" />
+          <Property Name="RemoveBy" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="dt312_Questions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="2048" FixedLength="false" Unicode="true" />
+          <Property Name="ImageName" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="IsmultiAns" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt312_Setting">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="CountEmp" Type="Int32" Nullable="false" />
+          <Property Name="PassingScore" Type="Int32" Nullable="false" />
+          <Property Name="QuesCount" Type="Int32" Nullable="false" />
+          <Property Name="TestDuration" Type="Int32" Nullable="false" />
+          <Property Name="CycleCreate" Type="Double" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -4006,6 +4142,74 @@
               <MappingFragment StoreEntitySet="dt311_AccountingSubject">
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt312_Answers">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt312_Answers">
+              <MappingFragment StoreEntitySet="dt312_Answers">
+                <ScalarProperty Name="TrueAns" ColumnName="TrueAns" />
+                <ScalarProperty Name="ImageName" ColumnName="ImageName" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="QuesId" ColumnName="QuesId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt312_ExamMgmt">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt312_ExamMgmt">
+              <MappingFragment StoreEntitySet="dt312_ExamMgmt">
+                <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt312_ExamUser">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt312_ExamUser">
+              <MappingFragment StoreEntitySet="dt312_ExamUser">
+                <ScalarProperty Name="ExamData" ColumnName="ExamData" />
+                <ScalarProperty Name="IsPass" ColumnName="IsPass" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="SubmitAt" ColumnName="SubmitAt" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ExamId" ColumnName="ExamId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt312_Groups">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt312_Groups">
+              <MappingFragment StoreEntitySet="dt312_Groups">
+                <ScalarProperty Name="RemoveBy" ColumnName="RemoveBy" />
+                <ScalarProperty Name="RemoveAt" ColumnName="RemoveAt" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt312_Questions">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt312_Questions">
+              <MappingFragment StoreEntitySet="dt312_Questions">
+                <ScalarProperty Name="IsmultiAns" ColumnName="IsmultiAns" />
+                <ScalarProperty Name="ImageName" ColumnName="ImageName" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt312_Setting">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt312_Setting">
+              <MappingFragment StoreEntitySet="dt312_Setting">
+                <ScalarProperty Name="CycleCreate" ColumnName="CycleCreate" />
+                <ScalarProperty Name="TestDuration" ColumnName="TestDuration" />
+                <ScalarProperty Name="QuesCount" ColumnName="QuesCount" />
+                <ScalarProperty Name="PassingScore" ColumnName="PassingScore" />
+                <ScalarProperty Name="CountEmp" ColumnName="CountEmp" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

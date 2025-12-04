@@ -113,6 +113,12 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt205_Type" Width="1.5" PointX="2.125" PointY="62.875" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt311_Invoice" Width="1.5" PointX="0.5" PointY="58.375" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt311_AccountingSubject" Width="1.5" PointX="7" PointY="58.375" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt312_Answers" Width="1.5" PointX="3.75" PointY="67.5" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt312_ExamMgmt" Width="1.5" PointX="5.375" PointY="67.5" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt312_ExamUser" Width="1.5" PointX="7" PointY="67.5" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt312_Groups" Width="1.5" PointX="0.5" PointY="67.5" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt312_Questions" Width="1.5" PointX="2.125" PointY="67.5" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt312_Setting" Width="1.5" PointX="8.625" PointY="67.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
