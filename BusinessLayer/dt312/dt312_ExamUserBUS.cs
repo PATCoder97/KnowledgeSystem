@@ -30,7 +30,16 @@ namespace BusinessLayer
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dt312_ExamUser.ToList();
+                    return _context.dt312_ExamUser.Select(x => new dt312_ExamUser
+                    {
+                        Id = x.Id,
+                        ExamId = x.ExamId,
+                        UserId = x.UserId,
+                        SubmitAt = x.SubmitAt,
+                        Score = x.Score,
+                        IsPass = x.IsPass
+                        // KHÔNG lấy ExamData
+                    }).ToList();
                 }
             }
             catch (Exception ex)
