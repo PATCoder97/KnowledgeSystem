@@ -40,6 +40,22 @@ namespace BusinessLayer
             }
         }
 
+        public List<dt312_Questions> GetListByIdGroup(int idGroup)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt312_Questions.Where(r => r.GroupId == idGroup).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public dt312_Questions GetItemById(int id)
         {
             try

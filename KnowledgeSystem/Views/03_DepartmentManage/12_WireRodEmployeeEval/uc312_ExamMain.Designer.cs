@@ -1,0 +1,346 @@
+﻿namespace KnowledgeSystem.Views._03_DepartmentManage._12_WireRodEmployeeEval
+{
+    partial class uc312_ExamMain
+    {
+        /// <summary> 
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary> 
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Component Designer generated code
+
+        /// <summary> 
+        /// Required method for Designer support - do not modify 
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.gcData = new DevExpress.XtraGrid.GridControl();
+            this.lvData = new DevExpress.XtraGrid.Views.Layout.LayoutView();
+            this.gColId = new DevExpress.XtraGrid.Columns.LayoutViewColumn();
+            this.layoutViewField_gColId = new DevExpress.XtraGrid.Views.Layout.LayoutViewField();
+            this.gColCode = new DevExpress.XtraGrid.Columns.LayoutViewColumn();
+            this.layoutViewField_layoutViewColumn1 = new DevExpress.XtraGrid.Views.Layout.LayoutViewField();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.LayoutViewColumn();
+            this.txbExamName = new DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit();
+            this.layoutViewField_gridColumn1 = new DevExpress.XtraGrid.Views.Layout.LayoutViewField();
+            this.gridColumn3 = new DevExpress.XtraGrid.Columns.LayoutViewColumn();
+            this.layoutViewField_gridColumn3 = new DevExpress.XtraGrid.Views.Layout.LayoutViewField();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.LayoutViewColumn();
+            this.layoutViewField_gridColumn2 = new DevExpress.XtraGrid.Views.Layout.LayoutViewField();
+            this.gridColumn4 = new DevExpress.XtraGrid.Columns.LayoutViewColumn();
+            this.layoutViewField_gridColumn4 = new DevExpress.XtraGrid.Views.Layout.LayoutViewField();
+            this.gColEnterDate = new DevExpress.XtraGrid.Columns.LayoutViewColumn();
+            this.layoutViewField_gColEnterDate = new DevExpress.XtraGrid.Views.Layout.LayoutViewField();
+            this.layoutViewCard1 = new DevExpress.XtraGrid.Views.Layout.LayoutViewCard();
+            this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
+            this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lvData)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutViewField_gColId)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutViewField_layoutViewColumn1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbExamName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutViewField_gridColumn1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutViewField_gridColumn3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutViewField_gridColumn2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutViewField_gridColumn4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutViewField_gColEnterDate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutViewCard1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // layoutControl1
+            // 
+            this.layoutControl1.Controls.Add(this.gcData);
+            this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.layoutControl1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControl1.Name = "layoutControl1";
+            this.layoutControl1.Root = this.Root;
+            this.layoutControl1.Size = new System.Drawing.Size(883, 598);
+            this.layoutControl1.TabIndex = 5;
+            this.layoutControl1.Text = "layoutControl1";
+            // 
+            // gcData
+            // 
+            this.gcData.Cursor = System.Windows.Forms.Cursors.Default;
+            this.gcData.EmbeddedNavigator.Buttons.Append.Visible = false;
+            this.gcData.EmbeddedNavigator.Buttons.CancelEdit.Visible = false;
+            this.gcData.EmbeddedNavigator.Buttons.Edit.Visible = false;
+            this.gcData.EmbeddedNavigator.Buttons.EndEdit.Visible = false;
+            this.gcData.EmbeddedNavigator.Buttons.Remove.Visible = false;
+            this.gcData.Location = new System.Drawing.Point(12, 12);
+            this.gcData.MainView = this.lvData;
+            this.gcData.Name = "gcData";
+            this.gcData.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.txbExamName});
+            this.gcData.Size = new System.Drawing.Size(859, 574);
+            this.gcData.TabIndex = 5;
+            this.gcData.UseEmbeddedNavigator = true;
+            this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.lvData});
+            // 
+            // lvData
+            // 
+            this.lvData.Appearance.Card.Options.UseFont = true;
+            this.lvData.Appearance.FieldCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F);
+            this.lvData.Appearance.FieldCaption.Options.UseFont = true;
+            this.lvData.Appearance.FieldValue.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F);
+            this.lvData.Appearance.FieldValue.ForeColor = System.Drawing.Color.Blue;
+            this.lvData.Appearance.FieldValue.Options.UseFont = true;
+            this.lvData.Appearance.FieldValue.Options.UseForeColor = true;
+            this.lvData.Appearance.FocusedCardCaption.ForeColor = System.Drawing.Color.Blue;
+            this.lvData.Appearance.FocusedCardCaption.Options.UseForeColor = true;
+            this.lvData.Appearance.SelectedCardCaption.ForeColor = System.Drawing.Color.Red;
+            this.lvData.Appearance.SelectedCardCaption.Options.UseForeColor = true;
+            this.lvData.CardMinSize = new System.Drawing.Size(221, 250);
+            this.lvData.Columns.AddRange(new DevExpress.XtraGrid.Columns.LayoutViewColumn[] {
+            this.gColId,
+            this.gColCode,
+            this.gridColumn1,
+            this.gridColumn3,
+            this.gridColumn2,
+            this.gridColumn4,
+            this.gColEnterDate});
+            this.lvData.GridControl = this.gcData;
+            this.lvData.HiddenItems.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutViewField_gColId,
+            this.layoutViewField_layoutViewColumn1});
+            this.lvData.Name = "lvData";
+            this.lvData.OptionsBehavior.Editable = false;
+            this.lvData.OptionsCustomization.AllowFilter = false;
+            this.lvData.OptionsCustomization.AllowSort = false;
+            this.lvData.OptionsItemText.AlignMode = DevExpress.XtraGrid.Views.Layout.FieldTextAlignMode.AutoSize;
+            this.lvData.OptionsItemText.TextToControlDistance = 0;
+            this.lvData.OptionsView.AllowHotTrackFields = false;
+            this.lvData.OptionsView.ShowCardCaption = false;
+            this.lvData.OptionsView.ShowCardExpandButton = false;
+            this.lvData.OptionsView.ShowCardFieldBorders = true;
+            this.lvData.OptionsView.ShowFieldHints = false;
+            this.lvData.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never;
+            this.lvData.OptionsView.ShowHeaderPanel = false;
+            this.lvData.OptionsView.ViewMode = DevExpress.XtraGrid.Views.Layout.LayoutViewMode.Row;
+            this.lvData.TemplateCard = this.layoutViewCard1;
+            // 
+            // gColId
+            // 
+            this.gColId.AppearanceCell.Options.UseTextOptions = true;
+            this.gColId.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gColId.Caption = "data.Id";
+            this.gColId.FieldName = "exam.Id";
+            this.gColId.LayoutViewField = this.layoutViewField_gColId;
+            this.gColId.Name = "gColId";
+            // 
+            // layoutViewField_gColId
+            // 
+            this.layoutViewField_gColId.EditorPreferredWidth = 20;
+            this.layoutViewField_gColId.Location = new System.Drawing.Point(0, 0);
+            this.layoutViewField_gColId.Name = "layoutViewField_gColId";
+            this.layoutViewField_gColId.Size = new System.Drawing.Size(217, 231);
+            this.layoutViewField_gColId.TextLocation = DevExpress.Utils.Locations.Top;
+            this.layoutViewField_gColId.TextSize = new System.Drawing.Size(14, 14);
+            // 
+            // gColCode
+            // 
+            this.gColCode.Caption = "layoutViewColumn1";
+            this.gColCode.FieldName = "exam.IdJob";
+            this.gColCode.LayoutViewField = this.layoutViewField_layoutViewColumn1;
+            this.gColCode.Name = "gColCode";
+            // 
+            // layoutViewField_layoutViewColumn1
+            // 
+            this.layoutViewField_layoutViewColumn1.EditorPreferredWidth = 10;
+            this.layoutViewField_layoutViewColumn1.Location = new System.Drawing.Point(0, 231);
+            this.layoutViewField_layoutViewColumn1.Name = "layoutViewField_layoutViewColumn1";
+            this.layoutViewField_layoutViewColumn1.Size = new System.Drawing.Size(217, 26);
+            this.layoutViewField_layoutViewColumn1.TextSize = new System.Drawing.Size(68, 20);
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "考試名稱";
+            this.gridColumn1.ColumnEdit = this.txbExamName;
+            this.gridColumn1.FieldName = "data.DisplayName";
+            this.gridColumn1.LayoutViewField = this.layoutViewField_gridColumn1;
+            this.gridColumn1.Name = "gridColumn1";
+            // 
+            // txbExamName
+            // 
+            this.txbExamName.LinesCount = 3;
+            this.txbExamName.Name = "txbExamName";
+            // 
+            // layoutViewField_gridColumn1
+            // 
+            this.layoutViewField_gridColumn1.EditorPreferredWidth = 213;
+            this.layoutViewField_gridColumn1.Location = new System.Drawing.Point(0, 0);
+            this.layoutViewField_gridColumn1.Name = "layoutViewField_gridColumn1";
+            this.layoutViewField_gridColumn1.Size = new System.Drawing.Size(217, 71);
+            this.layoutViewField_gridColumn1.TextLocation = DevExpress.Utils.Locations.Top;
+            this.layoutViewField_gridColumn1.TextSize = new System.Drawing.Size(47, 14);
+            // 
+            // gridColumn3
+            // 
+            this.gridColumn3.Caption = "考試編號";
+            this.gridColumn3.FieldName = "data.Code";
+            this.gridColumn3.LayoutViewField = this.layoutViewField_gridColumn3;
+            this.gridColumn3.Name = "gridColumn3";
+            // 
+            // layoutViewField_gridColumn3
+            // 
+            this.layoutViewField_gridColumn3.EditorPreferredWidth = 213;
+            this.layoutViewField_gridColumn3.Location = new System.Drawing.Point(0, 71);
+            this.layoutViewField_gridColumn3.Name = "layoutViewField_gridColumn3";
+            this.layoutViewField_gridColumn3.Size = new System.Drawing.Size(217, 40);
+            this.layoutViewField_gridColumn3.TextLocation = DevExpress.Utils.Locations.Top;
+            this.layoutViewField_gridColumn3.TextSize = new System.Drawing.Size(47, 14);
+            // 
+            // gridColumn2
+            // 
+            this.gridColumn2.Caption = "及格分數";
+            this.gridColumn2.FieldName = "PassingScore";
+            this.gridColumn2.LayoutViewField = this.layoutViewField_gridColumn2;
+            this.gridColumn2.Name = "gridColumn2";
+            // 
+            // layoutViewField_gridColumn2
+            // 
+            this.layoutViewField_gridColumn2.EditorPreferredWidth = 213;
+            this.layoutViewField_gridColumn2.Location = new System.Drawing.Point(0, 151);
+            this.layoutViewField_gridColumn2.Name = "layoutViewField_gridColumn2";
+            this.layoutViewField_gridColumn2.Size = new System.Drawing.Size(217, 40);
+            this.layoutViewField_gridColumn2.TextLocation = DevExpress.Utils.Locations.Top;
+            this.layoutViewField_gridColumn2.TextSize = new System.Drawing.Size(47, 14);
+            // 
+            // gridColumn4
+            // 
+            this.gridColumn4.Caption = "考試時期";
+            this.gridColumn4.FieldName = "TestDuration";
+            this.gridColumn4.LayoutViewField = this.layoutViewField_gridColumn4;
+            this.gridColumn4.Name = "gridColumn4";
+            // 
+            // layoutViewField_gridColumn4
+            // 
+            this.layoutViewField_gridColumn4.EditorPreferredWidth = 213;
+            this.layoutViewField_gridColumn4.Location = new System.Drawing.Point(0, 191);
+            this.layoutViewField_gridColumn4.Name = "layoutViewField_gridColumn4";
+            this.layoutViewField_gridColumn4.Size = new System.Drawing.Size(217, 40);
+            this.layoutViewField_gridColumn4.TextLocation = DevExpress.Utils.Locations.Top;
+            this.layoutViewField_gridColumn4.TextSize = new System.Drawing.Size(47, 14);
+            // 
+            // gColEnterDate
+            // 
+            this.gColEnterDate.Caption = "題目數量";
+            this.gColEnterDate.FieldName = "QuesCount";
+            this.gColEnterDate.LayoutViewField = this.layoutViewField_gColEnterDate;
+            this.gColEnterDate.Name = "gColEnterDate";
+            // 
+            // layoutViewField_gColEnterDate
+            // 
+            this.layoutViewField_gColEnterDate.EditorPreferredWidth = 213;
+            this.layoutViewField_gColEnterDate.Location = new System.Drawing.Point(0, 111);
+            this.layoutViewField_gColEnterDate.Name = "layoutViewField_gColEnterDate";
+            this.layoutViewField_gColEnterDate.Size = new System.Drawing.Size(217, 40);
+            this.layoutViewField_gColEnterDate.TextLocation = DevExpress.Utils.Locations.Top;
+            this.layoutViewField_gColEnterDate.TextSize = new System.Drawing.Size(47, 14);
+            // 
+            // layoutViewCard1
+            // 
+            this.layoutViewCard1.CustomizationFormText = "TemplateCard";
+            this.layoutViewCard1.GroupBordersVisible = false;
+            this.layoutViewCard1.HeaderButtonsLocation = DevExpress.Utils.GroupElementLocation.AfterText;
+            this.layoutViewCard1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutViewField_gridColumn1,
+            this.layoutViewField_gridColumn2,
+            this.layoutViewField_gridColumn4,
+            this.layoutViewField_gridColumn3,
+            this.layoutViewField_gColEnterDate});
+            this.layoutViewCard1.Name = "layoutViewCard1";
+            this.layoutViewCard1.OptionsItemText.TextToControlDistance = 0;
+            this.layoutViewCard1.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 2);
+            this.layoutViewCard1.Text = "TemplateCard";
+            this.layoutViewCard1.TextLocation = DevExpress.Utils.Locations.Default;
+            // 
+            // Root
+            // 
+            this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            this.Root.GroupBordersVisible = false;
+            this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem1});
+            this.Root.Name = "Root";
+            this.Root.Size = new System.Drawing.Size(883, 598);
+            this.Root.TextVisible = false;
+            // 
+            // layoutControlItem1
+            // 
+            this.layoutControlItem1.Control = this.gcData;
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem1.Name = "layoutControlItem1";
+            this.layoutControlItem1.Size = new System.Drawing.Size(863, 578);
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem1.TextVisible = false;
+            // 
+            // uc312_ExamMain
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.layoutControl1);
+            this.Name = "uc312_ExamMain";
+            this.Size = new System.Drawing.Size(883, 598);
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
+            this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gcData)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lvData)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutViewField_gColId)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutViewField_layoutViewColumn1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbExamName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutViewField_gridColumn1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutViewField_gridColumn3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutViewField_gridColumn2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutViewField_gridColumn4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutViewField_gColEnterDate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutViewCard1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        private DevExpress.XtraLayout.LayoutControl layoutControl1;
+        private DevExpress.XtraGrid.GridControl gcData;
+        private DevExpress.XtraGrid.Views.Layout.LayoutView lvData;
+        private DevExpress.XtraGrid.Columns.LayoutViewColumn gColId;
+        private DevExpress.XtraGrid.Views.Layout.LayoutViewField layoutViewField_gColId;
+        private DevExpress.XtraGrid.Columns.LayoutViewColumn gColCode;
+        private DevExpress.XtraGrid.Views.Layout.LayoutViewField layoutViewField_layoutViewColumn1;
+        private DevExpress.XtraGrid.Columns.LayoutViewColumn gridColumn1;
+        private DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit txbExamName;
+        private DevExpress.XtraGrid.Views.Layout.LayoutViewField layoutViewField_gridColumn1;
+        private DevExpress.XtraGrid.Columns.LayoutViewColumn gridColumn3;
+        private DevExpress.XtraGrid.Views.Layout.LayoutViewField layoutViewField_gridColumn3;
+        private DevExpress.XtraGrid.Columns.LayoutViewColumn gridColumn2;
+        private DevExpress.XtraGrid.Views.Layout.LayoutViewField layoutViewField_gridColumn2;
+        private DevExpress.XtraGrid.Columns.LayoutViewColumn gridColumn4;
+        private DevExpress.XtraGrid.Views.Layout.LayoutViewField layoutViewField_gridColumn4;
+        private DevExpress.XtraGrid.Columns.LayoutViewColumn gColEnterDate;
+        private DevExpress.XtraGrid.Views.Layout.LayoutViewField layoutViewField_gColEnterDate;
+        private DevExpress.XtraGrid.Views.Layout.LayoutViewCard layoutViewCard1;
+        private DevExpress.XtraLayout.LayoutControlGroup Root;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+    }
+}
