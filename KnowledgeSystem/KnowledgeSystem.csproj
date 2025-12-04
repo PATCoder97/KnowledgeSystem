@@ -1805,7 +1805,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\03_DepartmentManage\12_WireRodEmployeeEval\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="AppIcon.ico" />
     <Content Include="dll\Spire.License.dll">
