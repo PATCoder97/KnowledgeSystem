@@ -29,5 +29,6 @@ namespace DataAccessLayer
         public Nullable<int> OdometerReading { get; set; }
         public string FuelFilledBy { get; set; }
         public Nullable<int> AttId { get; set; }
+        public string CreateBy { get; set; }
     }
 }

@@ -168,6 +168,7 @@
     <Compile Include="dt311\dt311_InvoiceItemBUS.cs" />
     <Compile Include="dt311\dt311_SellerBuyerBUS.cs" />
     <Compile Include="dt311\dt311_VehicleManagementBUS.cs" />
+    <Compile Include="dt311\dt311_AccountingSubjectBUS.cs" />
     <Compile Include="dt402\dt402_KPIWebBUS.cs" />
     <Compile Include="dt403\dt403_SoftwareManualBUS.cs" />
     <Compile Include="dt403\dt403_04_HardnessStandardLogBUS.cs" />

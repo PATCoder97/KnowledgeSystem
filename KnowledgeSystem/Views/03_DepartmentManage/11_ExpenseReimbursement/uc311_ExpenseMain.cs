@@ -272,19 +272,22 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             }
 
             //====== 輸入說明 / Input Description ======
-            XtraInputBoxArgs inputArgs = new XtraInputBoxArgs();
-            inputArgs.Caption = TPConfigs.SoftNameTW + " - 輸入說明 / Input Description";
-            inputArgs.Prompt = "請輸入說明內容：";
-            inputArgs.DefaultButtonIndex = 0;
-            inputArgs.Editor = new TextEdit
-            {
-                Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F)
-            };
-            inputArgs.DefaultResponse = "";
+            uc311_MoreInfo ucInfo = new uc311_MoreInfo();
 
-            string description = (XtraInputBox.Show(inputArgs) as string)?.Trim();
-            if (string.IsNullOrEmpty(description))
+            // Hiển thị dialog
+            if (XtraDialog.Show(ucInfo, "輸入資訊", MessageBoxButtons.OKCancel) != DialogResult.OK)
                 return;
+
+            // Lấy dữ liệu từ control uc311_MoreInfo
+            string description = ucInfo.Desc;
+            string code = ucInfo.Code ?? "";
+
+            // Kiểm tra dữ liệu hợp lệ (ví dụ)
+            if (string.IsNullOrWhiteSpace(description))
+            {
+                XtraMessageBox.Show("請輸入說明內容。", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             //====== 組合前綴資料 / Build Prefix Key ======
             const string TAB = "{Tab}";
@@ -299,7 +302,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                 "LG", "",
                 deptMain, "",
                 "2",
-                "W", "", "", "", "", "", "",
+                "W",
+                code, "", "", "", "", "",
                 sellerTax,
                 buyerTax,
                 "A1",
@@ -400,6 +404,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             // 🔹 Dữ liệu đầu tiên để lấy thông tin xe
             var firstItem = selectedInvoices.First();
             var vehicle = dt311_VehicleManagementBUS.Instance.GetItemById(firstItem.LicensePlate);
+
+            if (vehicle == null)
+            {
+                XtraMessageBox.Show("Không có thông tin phương tiện!", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             string desc = string.Format("冶金技術部{0}加{2}油費用報銷。Thanh toán phí đổ {3} {1} BP Luyện Kim",
                 vehicle.VehicleType.Split('/')[1],
@@ -630,7 +641,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                 {
                     SourceType = fmtName,
                     TransactionID = transactionId,
-                    IdDept = idDept2Word
+                    IdDept = idDept2Word,
+                    CreateBy = TPConfigs.LoginUser.Id
                 };
 
                 var itemsList = new List<dt311_InvoiceItem>();
@@ -663,7 +675,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                 }
 
                 string sellerName = Regex.Replace(ExtractField(root, fmt["fields"]["seller_name"]), @"(?i)\s*Công\s*ty\s*TNHH(\s*MTV)?(\s*Thương\s*Mại)?\s*", "", RegexOptions.IgnoreCase).Trim();
-                string buyerName = Regex.Replace(ExtractField(root, fmt["fields"]["seller_name"]), @"(?i)\s*Công\s*ty\s*TNHH(\s*MTV)?(\s*Thương\s*Mại)?\s*", "", RegexOptions.IgnoreCase).Trim();
+                string buyerName = Regex.Replace(ExtractField(root, fmt["fields"]["buyer_name"]), @"(?i)\s*Công\s*ty\s*TNHH(\s*MTV)?(\s*Thương\s*Mại)?\s*", "", RegexOptions.IgnoreCase).Trim();
 
 
                 // --- Seller & Buyer ---
@@ -675,7 +687,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                 var buyer = new dt311_SellerBuyer
                 {
                     Tax = invoiceData.BuyerTax,
-                    DisplayName = sellerName
+                    DisplayName = buyerName
                 };
 
                 // --- Lưu dữ liệu ---
@@ -1344,7 +1356,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             SaveFileDialog saveFile = new SaveFileDialog()
             {
                 RestoreDirectory = true,
-                FileName = $"abc-{DateTime.Now:yyyyMMddHHmmss}.xlsx",
+                FileName = $"廠處使用燃料量統計表-{DateTime.Now:yyyyMMddHHmmss}.xlsx",
                 Filter = "Excel| *.xlsx"
             };
             if (saveFile.ShowDialog() != DialogResult.OK) return;

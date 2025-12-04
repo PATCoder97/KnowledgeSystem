@@ -288,23 +288,33 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
                     if (Clipboard.ContainsFileDropList())
                     {
                         var files = Clipboard.GetFileDropList();
-                        var pdfFiles = new List<string>();
+                        var correctFiles = new List<string>();
 
                         foreach (var file in files)
                         {
-                            if (file.EndsWith(".pdf", StringComparison.OrdinalIgnoreCase) && File.Exists(file))
+                            var extensions = TPConfigs.FilterFile
+                                .Split('|')[1]
+                                .Split(';')
+                                .Select(ext => ext.TrimStart('*').ToLower())
+                                .ToList();
+
+                            if (File.Exists(file))
                             {
-                                pdfFiles.Add(file);
+                                string fileExt = Path.GetExtension(file).ToLower();
+                                if (extensions.Contains(fileExt))
+                                {
+                                    correctFiles.Add(file);
+                                }
                             }
                         }
 
-                        if (pdfFiles.Count != 1)
+                        if (correctFiles.Count != 1)
                         {
-                            XtraMessageBox.Show("請選擇一個PDF檔案", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            XtraMessageBox.Show("請選擇一個檔案", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
 
-                        fileName = pdfFiles.First();
+                        fileName = correctFiles.First();
                         encryptionName = EncryptionHelper.EncryptionFileName(fileName);
                         actualName = Path.GetFileName(fileName);
 
@@ -324,7 +334,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
 
                     break;
                 default:
-                    OpenFileDialog openFileDialog = new OpenFileDialog { Filter = "Pdf|*.pdf" };
+                    OpenFileDialog openFileDialog = new OpenFileDialog { Filter = TPConfigs.FilterFile };
 
                     if (openFileDialog.ShowDialog() != DialogResult.OK)
                         return;
