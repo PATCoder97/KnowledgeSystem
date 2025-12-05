@@ -34,7 +34,7 @@
             this.gcData = new DevExpress.XtraGrid.GridControl();
             this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gColId = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColQuesCount = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -102,7 +102,7 @@
             this.gvData.Appearance.Row.Options.UseForeColor = true;
             this.gvData.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gColId,
-            this.gridColumn3,
+            this.gColName,
             this.gColQuesCount});
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
@@ -123,16 +123,16 @@
             this.gColId.FieldName = "Id";
             this.gColId.Name = "gColId";
             // 
-            // gridColumn3
+            // gColName
             // 
-            this.gridColumn3.Caption = "問題組名稱";
-            this.gridColumn3.FieldName = "DisplayName";
-            this.gridColumn3.Name = "gridColumn3";
-            this.gridColumn3.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            this.gColName.Caption = "問題組名稱";
+            this.gColName.FieldName = "DisplayName";
+            this.gColName.Name = "gColName";
+            this.gColName.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "DisplayName", "數數={0}")});
-            this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 0;
-            this.gridColumn3.Width = 104;
+            this.gColName.Visible = true;
+            this.gColName.VisibleIndex = 0;
+            this.gColName.Width = 104;
             // 
             // gColQuesCount
             // 
@@ -310,7 +310,7 @@
         private DevExpress.XtraGrid.GridControl gcData;
         private DevExpress.XtraGrid.Views.Grid.GridView gvData;
         private DevExpress.XtraGrid.Columns.GridColumn gColId;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
+        private DevExpress.XtraGrid.Columns.GridColumn gColName;
         private DevExpress.XtraGrid.Columns.GridColumn gColQuesCount;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;

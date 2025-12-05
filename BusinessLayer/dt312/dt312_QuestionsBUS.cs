@@ -72,7 +72,7 @@ namespace BusinessLayer
             }
         }
 
-        public bool Add(dt312_Questions item)
+        public int Add(dt312_Questions item)
         {
             try
             {
@@ -80,13 +80,18 @@ namespace BusinessLayer
                 {
                     _context.dt312_Questions.Add(item);
                     int affectedRecords = _context.SaveChanges();
-                    return affectedRecords > 0;
+                    if (affectedRecords > 0)
+                    {
+                        return item.Id;
+                    }
+
+                    return -1;
                 }
             }
             catch (Exception ex)
             {
                 logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
-                return false;
+                return -1;
             }
         }
 

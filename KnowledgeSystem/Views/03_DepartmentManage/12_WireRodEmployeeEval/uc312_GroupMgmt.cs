@@ -95,7 +95,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._12_WireRodEmployeeEval
 
 
                 var quesCount = from data in ques
-                                group data by data.Id into dtg
+                                group data by data.GroupId into dtg
                                 select new
                                 {
                                     IdGroup = dtg.Key,
@@ -179,11 +179,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._12_WireRodEmployeeEval
         private void gvData_DoubleClick(object sender, EventArgs e)
         {
             GridView view = sender as GridView;
-            int actualName = (int)view.GetRowCellValue(view.FocusedRowHandle, gColId);
+            int idGroup = (int)view.GetRowCellValue(view.FocusedRowHandle, gColId);
+            string groupName = view.GetRowCellValue(view.FocusedRowHandle, gColName).ToString();
 
-            if (actualName < 0) return;
+            if (idGroup < 0) return;
 
-            f312_QuesMgmt quesMgmt = new f312_QuesMgmt(actualName);
+            f312_QuesMgmt quesMgmt = new f312_QuesMgmt(idGroup) { Text = $"問題組：{groupName}" };
             quesMgmt.ShowDialog();
         }
 
