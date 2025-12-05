@@ -8,6 +8,7 @@ using DevExpress.XtraSplashScreen;
 using ExcelDataReader;
 using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._03_DepartmentManage._07_Quiz;
+using Scriban;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -86,7 +87,50 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._12_WireRodEmployeeEval
 
         private void ItemEditInfo_Click(object sender, EventArgs e)
         {
+            GridView view = gvQues;
+            int idQues = (int)view.GetRowCellValue(view.FocusedRowHandle, gColId);
+            var question = dt312_QuestionsBUS.Instance.GetItemById(idQues);
+            var answers = dt312_AnswersBUS.Instance.GetListByQues(idQues);
 
+            var anses = answers.Select((r, index) => new
+            {
+                id = index + 1,
+                disp = r.DisplayName,
+                img = string.IsNullOrEmpty(r.ImageName) ? "" : ImageHelper.ConvertImageToBase64DataUri(r.ImageName),
+                istrue = r.TrueAns
+            }).ToList();
+
+            var templateData = new
+            {
+                ques = question.DisplayName,
+                quesimg = string.IsNullOrEmpty(question.ImageName) ? "" : ImageHelper.ConvertImageToBase64DataUri(Path.Combine(TPConfigs.Folder312, question.ImageName)),
+                answers = anses,
+                ismultichoice = question.IsmultiAns
+            };
+
+            var templateContentSigner = System.IO.File.ReadAllText(Path.Combine(TPConfigs.ResourcesPath, "dt307_ConfirmQuestion.html"));
+            var templateSigner = Template.Parse(templateContentSigner);
+
+            // 1. Khởi tạo Form mới
+            XtraForm formViewQues = new XtraForm();
+            formViewQues.Text = "預覽題目 (Preview)"; // Tiêu đề form
+            formViewQues.Size = new Size(1000, 700); // Kích thước form
+            formViewQues.StartPosition = FormStartPosition.CenterScreen; // Hiện giữa màn hình
+
+            // 2. Khởi tạo WebBrowser
+            WebBrowser webViewQues = new WebBrowser();
+            webViewQues.Dock = DockStyle.Fill; // Quan trọng: Để web tràn viền form
+            webViewQues.ScriptErrorsSuppressed = true; // Ẩn lỗi script nếu có
+
+            // 3. Gán nội dung HTML (Đoạn code bạn yêu cầu)
+            // Lưu ý: Đảm bảo chuỗi HTML trả về từ templateSigner có thẻ <meta charset="UTF-8"> để không lỗi font
+            webViewQues.DocumentText = templateSigner.Render(templateData);
+
+            // 4. Thêm WebBrowser vào Form
+            formViewQues.Controls.Add(webViewQues);
+
+            // 5. Hiển thị Form
+            formViewQues.ShowDialog();
         }
 
         DXMenuItem CreateMenuItem(string caption, EventHandler clickEvent, SvgImage svgImage)
@@ -258,8 +302,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._12_WireRodEmployeeEval
             bool IsConfirmed = fConfirm.IsConfirmed;
             if (!IsConfirmed) return;
 
-            if (!Directory.Exists(TPConfigs.Folder307))
-                Directory.CreateDirectory(TPConfigs.Folder307);
+            if (!Directory.Exists(TPConfigs.Folder312))
+                Directory.CreateDirectory(TPConfigs.Folder312);
 
             int index = 1;
             foreach (var item in ques)
@@ -277,7 +321,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._12_WireRodEmployeeEval
                 index++;
 
                 if (string.IsNullOrEmpty(item.ImageName)) continue;
-                File.Copy(item.ImageName, Path.Combine(TPConfigs.Folder307, data.ImageName), true);
+                File.Copy(item.ImageName, Path.Combine(TPConfigs.Folder312, data.ImageName), true);
             }
 
             List<dt312_Answers> anwsAdd = new List<dt312_Answers>();

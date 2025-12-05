@@ -224,7 +224,7 @@
             // gridColumn1
             // 
             this.gridColumn1.Caption = "複選擇題";
-            this.gridColumn1.FieldName = "IsMultiAns";
+            this.gridColumn1.FieldName = "IsmultiAns";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
             this.gridColumn1.VisibleIndex = 2;
@@ -280,7 +280,7 @@
             this.btnExportExcel,
             this.btnUpload});
             this.barManagerTP.MainMenu = this.bar2;
-            this.barManagerTP.MaxItemId = 13;
+            this.barManagerTP.MaxItemId = 14;
             this.barManagerTP.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.txbJob});
             // 
@@ -325,6 +325,7 @@
             this.btnExportExcel.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExportExcel.ItemAppearance.Normal.Options.UseFont = true;
             this.btnExportExcel.Name = "btnExportExcel";
+            this.btnExportExcel.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             // 
             // btnReload
             // 

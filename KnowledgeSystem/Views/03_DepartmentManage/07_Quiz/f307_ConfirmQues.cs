@@ -24,6 +24,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
         public f307_ConfirmQues()
         {
             InitializeComponent();
+            Size = new Size(1000, 700);
         }
 
         public class CheckQuestion

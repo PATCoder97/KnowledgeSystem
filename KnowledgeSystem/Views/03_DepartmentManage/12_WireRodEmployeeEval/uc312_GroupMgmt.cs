@@ -45,6 +45,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._12_WireRodEmployeeEval
             btnAdd.ImageOptions.SvgImage = TPSvgimages.Add;
             btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
             btnExportExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
+            btnSetting.ImageOptions.SvgImage = TPSvgimages.Gears;
         }
 
         private void CreateRuleGV()
@@ -197,6 +198,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._12_WireRodEmployeeEval
 
                 e.Value = !string.IsNullOrWhiteSpace(imgName);
             }
+        }
+
+        private void btnSetting_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            f312_SettingExam settingExam =  new f312_SettingExam();
+            settingExam.ShowDialog();
         }
     }
 }
