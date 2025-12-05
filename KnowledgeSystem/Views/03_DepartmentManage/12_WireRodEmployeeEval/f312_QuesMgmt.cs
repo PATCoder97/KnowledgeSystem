@@ -41,6 +41,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._12_WireRodEmployeeEval
         RefreshHelper helper;
         BindingSource sourceQues = new BindingSource();
 
+        DXMenuItem itemViewQues;
+        DXMenuItem itemRemoveQues;
+
         int idGroup = -1;
 
         bool cal(Int32 _Width, GridView _View)
@@ -63,12 +66,27 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._12_WireRodEmployeeEval
 
         private void InitializeMenuItems()
         {
-            //itemAddNode = CreateMenuItem("新增表單", ItemAddNote_Click, TPSvgimages.Add);
-            //itemAddAtt = CreateMenuItem("新增檔案", ItemAddAtt_Click, TPSvgimages.Attach);
-            //itemCopyNode = CreateMenuItem("複製年版", ItemCopyNote_Click, TPSvgimages.Copy);
-            //itemDelNode = CreateMenuItem("刪除", ItemDeleteNote_Click, TPSvgimages.Close);
-            //itemEditNode = CreateMenuItem("更新", ItemEditNode_Click, TPSvgimages.Edit);
-            //itemAddVer = CreateMenuItem("新增年版", ItemAddVer_Click, TPSvgimages.Add2);
+            itemViewQues = CreateMenuItem("查看題目", ItemEditInfo_Click, TPSvgimages.View);
+            itemRemoveQues = CreateMenuItem("刪除題目", ItemRemoveQues_Click, TPSvgimages.Remove);
+        }
+
+        private void ItemRemoveQues_Click(object sender, EventArgs e)
+        {
+            DialogResult result = XtraMessageBox.Show("您確定要刪除此題目嗎？\n\n注意：所有相關的答案也將被刪除。", "確認刪除", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (result != DialogResult.Yes) return;
+
+            GridView view = gvQues;
+            int idQues = (int)view.GetRowCellValue(view.FocusedRowHandle, gColId);
+
+            dt312_QuestionsBUS.Instance.RemoveById(idQues);
+
+            LoadData();
+        }
+
+        private void ItemEditInfo_Click(object sender, EventArgs e)
+        {
+
         }
 
         DXMenuItem CreateMenuItem(string caption, EventHandler clickEvent, SvgImage svgImage)
@@ -93,22 +111,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._12_WireRodEmployeeEval
                 sourceQues.DataSource = ques;
 
                 gcData.DataSource = sourceQues;
-                gvQues.BestFitColumns();
-                gvQues.CollapseAllDetails();
-            }
-        }
-
-        private void LoadQues(string idJob)
-        {
-            using (var handle = SplashScreenManager.ShowOverlayForm(gcData))
-            {
-                helper.SaveViewInfo();
-
-                var ques = dt312_QuestionsBUS.Instance.GetListByIdGroup(idGroup);
-
-                sourceQues.DataSource = ques;
-                helper.LoadViewInfo();
-
                 gvQues.BestFitColumns();
                 gvQues.CollapseAllDetails();
             }
@@ -299,6 +301,49 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._12_WireRodEmployeeEval
             var b = dt312_AnswersBUS.Instance.AddRange(anwsAdd);
 
             Close();
+        }
+
+        private void gvQues_MasterRowEmpty(object sender, DevExpress.XtraGrid.Views.Grid.MasterRowEmptyEventArgs e)
+        {
+            e.IsEmpty = false;
+        }
+
+        private void gvQues_MasterRowGetChildList(object sender, DevExpress.XtraGrid.Views.Grid.MasterRowGetChildListEventArgs e)
+        {
+            GridView view = sender as GridView;
+            int idQues = (int)view.GetRowCellValue(e.RowHandle, gColId);
+
+            var answers = dt312_AnswersBUS.Instance.GetListByQues(idQues);
+
+            e.ChildList = answers;
+        }
+
+        private void gvQues_MasterRowGetRelationCount(object sender, DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationCountEventArgs e)
+        {
+            e.RelationCount = 1;
+        }
+
+        private void gvQues_MasterRowGetRelationName(object sender, DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationNameEventArgs e)
+        {
+            e.RelationName = "答案";
+        }
+
+        private void gvQues_MasterRowExpanded(object sender, CustomMasterRowEventArgs e)
+        {
+            GridView masterView = sender as GridView;
+            int visibleDetailRelationIndex = masterView.GetVisibleDetailRelationIndex(e.RowHandle);
+            GridView detailView = masterView.GetDetailView(e.RowHandle, visibleDetailRelationIndex) as GridView;
+
+            detailView.BestFitColumns();
+        }
+
+        private void gvQues_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
+        {
+            if (e.HitInfo.InRowCell && e.HitInfo.InDataRow)
+            {
+                e.Menu.Items.Add(itemViewQues);
+                e.Menu.Items.Add(itemRemoveQues);
+            }
         }
     }
 }

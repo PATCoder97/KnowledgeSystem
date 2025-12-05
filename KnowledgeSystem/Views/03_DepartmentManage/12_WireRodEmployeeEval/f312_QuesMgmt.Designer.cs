@@ -106,7 +106,7 @@
             // gridColumn10
             // 
             this.gridColumn10.Caption = "答案內容";
-            this.gridColumn10.FieldName = "DisplayText";
+            this.gridColumn10.FieldName = "DisplayName";
             this.gridColumn10.Name = "gridColumn10";
             this.gridColumn10.Visible = true;
             this.gridColumn10.VisibleIndex = 0;
@@ -186,6 +186,12 @@
             this.gvQues.OptionsView.EnableAppearanceOddRow = true;
             this.gvQues.OptionsView.ShowAutoFilterRow = true;
             this.gvQues.OptionsView.ShowGroupPanel = false;
+            this.gvQues.MasterRowEmpty += new DevExpress.XtraGrid.Views.Grid.MasterRowEmptyEventHandler(this.gvQues_MasterRowEmpty);
+            this.gvQues.MasterRowExpanded += new DevExpress.XtraGrid.Views.Grid.CustomMasterRowEventHandler(this.gvQues_MasterRowExpanded);
+            this.gvQues.MasterRowGetChildList += new DevExpress.XtraGrid.Views.Grid.MasterRowGetChildListEventHandler(this.gvQues_MasterRowGetChildList);
+            this.gvQues.MasterRowGetRelationName += new DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationNameEventHandler(this.gvQues_MasterRowGetRelationName);
+            this.gvQues.MasterRowGetRelationCount += new DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationCountEventHandler(this.gvQues_MasterRowGetRelationCount);
+            this.gvQues.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gvQues_PopupMenuShowing);
             this.gvQues.CustomUnboundColumnData += new DevExpress.XtraGrid.Views.Base.CustomColumnDataEventHandler(this.gridView_CustomUnboundColumnData);
             // 
             // gColId

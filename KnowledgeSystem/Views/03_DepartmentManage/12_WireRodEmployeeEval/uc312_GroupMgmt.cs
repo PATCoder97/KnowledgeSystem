@@ -35,9 +35,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._12_WireRodEmployeeEval
         }
 
         RefreshHelper helper;
-        BindingSource sourceBases = new BindingSource();
-
-        DXMenuItem itemEditInfo;
+        BindingSource sourceBases = new BindingSource();       
 
         //List<dm_User> lsUser = new List<dm_User>();
         //List<dt202_Type> types;
@@ -56,9 +54,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._12_WireRodEmployeeEval
 
         private void InitializeMenuItems()
         {
-            itemEditInfo = CreateMenuItem("更新", ItemEditInfo_Click, TPSvgimages.Edit);
+            
         }
-
 
         DXMenuItem CreateMenuItem(string caption, EventHandler clickEvent, SvgImage svgImage)
         {
@@ -186,6 +183,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._12_WireRodEmployeeEval
 
             f312_QuesMgmt quesMgmt = new f312_QuesMgmt(idGroup) { Text = $"問題組：{groupName}" };
             quesMgmt.ShowDialog();
+
+            LoadData();
         }
 
         private void gridView_CustomUnboundColumnData(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDataEventArgs e)
