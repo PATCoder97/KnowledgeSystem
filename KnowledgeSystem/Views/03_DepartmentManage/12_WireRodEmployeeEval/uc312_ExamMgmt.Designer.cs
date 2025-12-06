@@ -32,7 +32,7 @@
             DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc312_ExamMgmt));
             this.gvEmp = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gColEmp = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColEmpId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -75,7 +75,7 @@
             this.gvEmp.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gvEmp.Appearance.Row.Options.UseFont = true;
             this.gvEmp.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gColEmp,
+            this.gColEmpId,
             this.gridColumn2,
             this.gridColumn4,
             this.gridColumn5,
@@ -86,12 +86,15 @@
             this.gvEmp.OptionsView.ColumnAutoWidth = false;
             this.gvEmp.OptionsView.EnableAppearanceOddRow = true;
             this.gvEmp.OptionsView.ShowGroupPanel = false;
+            this.gvEmp.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gvEmp_PopupMenuShowing);
             // 
-            // gColEmp
+            // gColEmpId
             // 
-            this.gColEmp.Caption = "gridColumn5";
-            this.gColEmp.FieldName = "Id";
-            this.gColEmp.Name = "gColEmp";
+            this.gColEmpId.Caption = "gColEmpId";
+            this.gColEmpId.FieldName = "Id";
+            this.gColEmpId.Name = "gColEmpId";
+            this.gColEmpId.Visible = true;
+            this.gColEmpId.VisibleIndex = 4;
             // 
             // gridColumn2
             // 
@@ -390,7 +393,7 @@
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
         private DevExpress.XtraGrid.GridControl gcData;
         private DevExpress.XtraGrid.Views.Grid.GridView gvEmp;
-        private DevExpress.XtraGrid.Columns.GridColumn gColEmp;
+        private DevExpress.XtraGrid.Columns.GridColumn gColEmpId;
         private DevExpress.XtraGrid.Views.Grid.GridView gvData;
         private DevExpress.XtraGrid.Columns.GridColumn gColId;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
