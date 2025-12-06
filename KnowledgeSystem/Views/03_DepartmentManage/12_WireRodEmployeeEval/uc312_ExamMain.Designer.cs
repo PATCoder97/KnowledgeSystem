@@ -38,8 +38,6 @@
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.LayoutViewColumn();
             this.txbExamName = new DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit();
             this.layoutViewField_gridColumn1 = new DevExpress.XtraGrid.Views.Layout.LayoutViewField();
-            this.gridColumn3 = new DevExpress.XtraGrid.Columns.LayoutViewColumn();
-            this.layoutViewField_gridColumn3 = new DevExpress.XtraGrid.Views.Layout.LayoutViewField();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.LayoutViewColumn();
             this.layoutViewField_gridColumn2 = new DevExpress.XtraGrid.Views.Layout.LayoutViewField();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.LayoutViewColumn();
@@ -57,7 +55,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutViewField_layoutViewColumn1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbExamName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutViewField_gridColumn1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutViewField_gridColumn3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutViewField_gridColumn2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutViewField_gridColumn4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutViewField_gColEnterDate)).BeginInit();
@@ -114,7 +111,6 @@
             this.gColId,
             this.gColCode,
             this.gridColumn1,
-            this.gridColumn3,
             this.gridColumn2,
             this.gridColumn4,
             this.gColEnterDate});
@@ -137,6 +133,7 @@
             this.lvData.OptionsView.ShowHeaderPanel = false;
             this.lvData.OptionsView.ViewMode = DevExpress.XtraGrid.Views.Layout.LayoutViewMode.Row;
             this.lvData.TemplateCard = this.layoutViewCard1;
+            this.lvData.DoubleClick += new System.EventHandler(this.lvData_DoubleClick);
             // 
             // gColId
             // 
@@ -193,22 +190,6 @@
             this.layoutViewField_gridColumn1.TextLocation = DevExpress.Utils.Locations.Top;
             this.layoutViewField_gridColumn1.TextSize = new System.Drawing.Size(47, 14);
             // 
-            // gridColumn3
-            // 
-            this.gridColumn3.Caption = "考試編號";
-            this.gridColumn3.FieldName = "data.Code";
-            this.gridColumn3.LayoutViewField = this.layoutViewField_gridColumn3;
-            this.gridColumn3.Name = "gridColumn3";
-            // 
-            // layoutViewField_gridColumn3
-            // 
-            this.layoutViewField_gridColumn3.EditorPreferredWidth = 213;
-            this.layoutViewField_gridColumn3.Location = new System.Drawing.Point(0, 71);
-            this.layoutViewField_gridColumn3.Name = "layoutViewField_gridColumn3";
-            this.layoutViewField_gridColumn3.Size = new System.Drawing.Size(217, 40);
-            this.layoutViewField_gridColumn3.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutViewField_gridColumn3.TextSize = new System.Drawing.Size(47, 14);
-            // 
             // gridColumn2
             // 
             this.gridColumn2.Caption = "及格分數";
@@ -219,7 +200,7 @@
             // layoutViewField_gridColumn2
             // 
             this.layoutViewField_gridColumn2.EditorPreferredWidth = 213;
-            this.layoutViewField_gridColumn2.Location = new System.Drawing.Point(0, 151);
+            this.layoutViewField_gridColumn2.Location = new System.Drawing.Point(0, 111);
             this.layoutViewField_gridColumn2.Name = "layoutViewField_gridColumn2";
             this.layoutViewField_gridColumn2.Size = new System.Drawing.Size(217, 40);
             this.layoutViewField_gridColumn2.TextLocation = DevExpress.Utils.Locations.Top;
@@ -235,7 +216,7 @@
             // layoutViewField_gridColumn4
             // 
             this.layoutViewField_gridColumn4.EditorPreferredWidth = 213;
-            this.layoutViewField_gridColumn4.Location = new System.Drawing.Point(0, 191);
+            this.layoutViewField_gridColumn4.Location = new System.Drawing.Point(0, 151);
             this.layoutViewField_gridColumn4.Name = "layoutViewField_gridColumn4";
             this.layoutViewField_gridColumn4.Size = new System.Drawing.Size(217, 40);
             this.layoutViewField_gridColumn4.TextLocation = DevExpress.Utils.Locations.Top;
@@ -251,7 +232,7 @@
             // layoutViewField_gColEnterDate
             // 
             this.layoutViewField_gColEnterDate.EditorPreferredWidth = 213;
-            this.layoutViewField_gColEnterDate.Location = new System.Drawing.Point(0, 111);
+            this.layoutViewField_gColEnterDate.Location = new System.Drawing.Point(0, 71);
             this.layoutViewField_gColEnterDate.Name = "layoutViewField_gColEnterDate";
             this.layoutViewField_gColEnterDate.Size = new System.Drawing.Size(217, 40);
             this.layoutViewField_gColEnterDate.TextLocation = DevExpress.Utils.Locations.Top;
@@ -266,7 +247,6 @@
             this.layoutViewField_gridColumn1,
             this.layoutViewField_gridColumn2,
             this.layoutViewField_gridColumn4,
-            this.layoutViewField_gridColumn3,
             this.layoutViewField_gColEnterDate});
             this.layoutViewCard1.Name = "layoutViewCard1";
             this.layoutViewCard1.OptionsItemText.TextToControlDistance = 0;
@@ -300,6 +280,7 @@
             this.Controls.Add(this.layoutControl1);
             this.Name = "uc312_ExamMain";
             this.Size = new System.Drawing.Size(883, 598);
+            this.Load += new System.EventHandler(this.uc312_ExamMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).EndInit();
@@ -308,7 +289,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutViewField_layoutViewColumn1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbExamName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutViewField_gridColumn1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutViewField_gridColumn3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutViewField_gridColumn2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutViewField_gridColumn4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutViewField_gColEnterDate)).EndInit();
@@ -331,8 +311,6 @@
         private DevExpress.XtraGrid.Columns.LayoutViewColumn gridColumn1;
         private DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit txbExamName;
         private DevExpress.XtraGrid.Views.Layout.LayoutViewField layoutViewField_gridColumn1;
-        private DevExpress.XtraGrid.Columns.LayoutViewColumn gridColumn3;
-        private DevExpress.XtraGrid.Views.Layout.LayoutViewField layoutViewField_gridColumn3;
         private DevExpress.XtraGrid.Columns.LayoutViewColumn gridColumn2;
         private DevExpress.XtraGrid.Views.Layout.LayoutViewField layoutViewField_gridColumn2;
         private DevExpress.XtraGrid.Columns.LayoutViewColumn gridColumn4;

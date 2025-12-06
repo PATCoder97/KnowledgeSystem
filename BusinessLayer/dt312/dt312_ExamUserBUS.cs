@@ -30,7 +30,7 @@ namespace BusinessLayer
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dt312_ExamUser.Select(x => new dt312_ExamUser
+                    return _context.dt312_ExamUser.AsEnumerable().Select(x => new dt312_ExamUser
                     {
                         Id = x.Id,
                         ExamId = x.ExamId,
@@ -38,8 +38,23 @@ namespace BusinessLayer
                         SubmitAt = x.SubmitAt,
                         Score = x.Score,
                         IsPass = x.IsPass
-                        // KHÔNG lấy ExamData
                     }).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
+        public List<dt312_ExamUser> GetListNeedDoByUserId(string userId)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt312_ExamUser.Where(r => r.UserId == userId && string.IsNullOrEmpty(r.SubmitAt.ToString())).ToList();
                 }
             }
             catch (Exception ex)
