@@ -93,8 +93,6 @@
             this.gColEmpId.Caption = "gColEmpId";
             this.gColEmpId.FieldName = "Id";
             this.gColEmpId.Name = "gColEmpId";
-            this.gColEmpId.Visible = true;
-            this.gColEmpId.VisibleIndex = 4;
             // 
             // gridColumn2
             // 
@@ -122,7 +120,7 @@
             // 
             // gridColumn6
             // 
-            this.gridColumn6.Caption = "結果";
+            this.gridColumn6.Caption = "合格";
             this.gridColumn6.FieldName = "IsPass";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;

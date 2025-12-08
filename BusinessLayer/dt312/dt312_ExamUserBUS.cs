@@ -64,6 +64,30 @@ namespace BusinessLayer
             }
         }
 
+        public List<dt312_ExamUser> GetListByUserId(string userId)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt312_ExamUser.Where(r => r.UserId == userId).AsEnumerable().Select(x => new dt312_ExamUser
+                    {
+                        Id = x.Id,
+                        ExamId = x.ExamId,
+                        UserId = x.UserId,
+                        SubmitAt = x.SubmitAt,
+                        Score = x.Score,
+                        IsPass = x.IsPass
+                    }).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public dt312_ExamUser GetItemById(int id)
         {
             try
