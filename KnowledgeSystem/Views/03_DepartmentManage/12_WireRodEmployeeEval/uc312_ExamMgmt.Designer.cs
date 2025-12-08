@@ -105,6 +105,8 @@
             // gridColumn4
             // 
             this.gridColumn4.Caption = "提交時期";
+            this.gridColumn4.DisplayFormat.FormatString = "yyyy/MM/dd HH:mm";
+            this.gridColumn4.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.gridColumn4.FieldName = "SubmitAt";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;

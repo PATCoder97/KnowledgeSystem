@@ -211,7 +211,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._12_WireRodEmployeeEval
         private void gvData_MasterRowEmpty(object sender, MasterRowEmptyEventArgs e)
         {
             GridView view = sender as GridView;
-            int idBase = (int)view.GetRowCellValue(e.RowHandle, gColId);
+            if (view == null) return;
+            int idBase = Convert.ToInt32(view.GetRowCellValue(e.RowHandle, gColId));
             e.IsEmpty = !examUsers.Any(r => r.ExamId == idBase);
         }
 

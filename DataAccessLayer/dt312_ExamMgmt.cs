@@ -17,5 +17,7 @@ namespace DataAccessLayer
         public int Id { get; set; }
         public string DisplayName { get; set; }
         public System.DateTime CreateAt { get; set; }
+        public int RoundNumber { get; set; }
+        public Nullable<System.DateTime> FinishNotifyDate { get; set; }
     }
 }

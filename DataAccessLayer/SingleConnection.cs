@@ -57,8 +57,8 @@ namespace DataAccessLayer
 #else
             SqlConnectionStringBuilder sqlString = new SqlConnectionStringBuilder()
             {
-                //DataSource = "10.198.138.153",
-                DataSource = "10.198.138.103",
+                DataSource = "10.198.138.153",
+                //DataSource = "10.198.138.103",
                 InitialCatalog = "DBDocumentManagementSystem",
                 UserID = "PAT",
                 Password = "Anhtuan312",

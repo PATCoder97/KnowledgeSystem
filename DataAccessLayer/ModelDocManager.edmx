@@ -1159,6 +1159,8 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DisplayName" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="CreateAt" Type="date" Nullable="false" />
+          <Property Name="RoundNumber" Type="int" Nullable="false" />
+          <Property Name="FinishNotifyDate" Type="date" />
         </EntityType>
         <EntityType Name="dt312_ExamUser">
           <Key>
@@ -1519,11 +1521,11 @@
           <EntitySet Name="dt311_Invoice" EntityType="DBDocumentManagementSystemModel.dt311_Invoice" />
           <EntitySet Name="dt311_AccountingSubject" EntityType="DBDocumentManagementSystemModel.dt311_AccountingSubject" />
           <EntitySet Name="dt312_Answers" EntityType="DBDocumentManagementSystemModel.dt312_Answers" />
-          <EntitySet Name="dt312_ExamMgmt" EntityType="DBDocumentManagementSystemModel.dt312_ExamMgmt" />
           <EntitySet Name="dt312_ExamUser" EntityType="DBDocumentManagementSystemModel.dt312_ExamUser" />
           <EntitySet Name="dt312_Groups" EntityType="DBDocumentManagementSystemModel.dt312_Groups" />
           <EntitySet Name="dt312_Questions" EntityType="DBDocumentManagementSystemModel.dt312_Questions" />
           <EntitySet Name="dt312_Setting" EntityType="DBDocumentManagementSystemModel.dt312_Setting" />
+          <EntitySet Name="dt312_ExamMgmt" EntityType="DBDocumentManagementSystemModel.dt312_ExamMgmt" />
         </EntityContainer>
         <EntityType Name="dm_Function">
           <Key>
@@ -2757,14 +2759,6 @@
           <Property Name="ImageName" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
           <Property Name="TrueAns" Type="Boolean" Nullable="false" />
         </EntityType>
-        <EntityType Name="dt312_ExamMgmt">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="CreateAt" Type="DateTime" Nullable="false" Precision="0" />
-        </EntityType>
         <EntityType Name="dt312_ExamUser">
           <Key>
             <PropertyRef Name="Id" />
@@ -2808,6 +2802,16 @@
           <Property Name="QuesCount" Type="Int32" Nullable="false" />
           <Property Name="TestDuration" Type="Int32" Nullable="false" />
           <Property Name="CycleCreate" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt312_ExamMgmt">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CreateAt" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="RoundNumber" Type="Int32" Nullable="false" />
+          <Property Name="FinishNotifyDate" Type="DateTime" Precision="0" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -4156,15 +4160,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dt312_ExamMgmt">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt312_ExamMgmt">
-              <MappingFragment StoreEntitySet="dt312_ExamMgmt">
-                <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="dt312_ExamUser">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt312_ExamUser">
               <MappingFragment StoreEntitySet="dt312_ExamUser">
@@ -4210,6 +4205,17 @@
                 <ScalarProperty Name="PassingScore" ColumnName="PassingScore" />
                 <ScalarProperty Name="CountEmp" ColumnName="CountEmp" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt312_ExamMgmt">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt312_ExamMgmt">
+              <MappingFragment StoreEntitySet="dt312_ExamMgmt">
+                <ScalarProperty Name="FinishNotifyDate" ColumnName="FinishNotifyDate" />
+                <ScalarProperty Name="RoundNumber" ColumnName="RoundNumber" />
+                <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
