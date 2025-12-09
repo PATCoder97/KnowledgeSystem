@@ -24,10 +24,26 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
         public f307_ConfirmQues()
         {
             InitializeComponent();
+            Size = new Size(1000, 700);
         }
 
-        public List<dt307_Questions> ques;
-        public List<dt307_Answers> answers;
+        public class CheckQuestion
+        {
+            public string DisplayText { get; set; }
+            public string ImageName { get; set; }
+        }
+
+        public class CheckAnswer
+        {
+            public int Id { get; set; }
+            public int QuesId { get; set; }
+            public string DisplayText { get; set; }
+            public string ImageName { get; set; }
+            public bool TrueAns { get; set; }
+        }
+
+        public List<CheckQuestion> ques;
+        public List<CheckAnswer> answers;
         string templateContentSigner;
         int indexQues = 0;
 

@@ -46,7 +46,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
 
         BindingSource sourceBases = new BindingSource();
 
-
         private void InitializeIcon()
         {
             btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;

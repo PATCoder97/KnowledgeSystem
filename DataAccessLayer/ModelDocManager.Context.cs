@@ -133,5 +133,11 @@ namespace DataAccessLayer
         public virtual DbSet<dt205_Type> dt205_Type { get; set; }
         public virtual DbSet<dt311_Invoice> dt311_Invoice { get; set; }
         public virtual DbSet<dt311_AccountingSubject> dt311_AccountingSubject { get; set; }
+        public virtual DbSet<dt312_Answers> dt312_Answers { get; set; }
+        public virtual DbSet<dt312_ExamUser> dt312_ExamUser { get; set; }
+        public virtual DbSet<dt312_Groups> dt312_Groups { get; set; }
+        public virtual DbSet<dt312_Questions> dt312_Questions { get; set; }
+        public virtual DbSet<dt312_Setting> dt312_Setting { get; set; }
+        public virtual DbSet<dt312_ExamMgmt> dt312_ExamMgmt { get; set; }
     }
 }

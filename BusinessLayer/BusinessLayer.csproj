@@ -169,6 +169,12 @@
     <Compile Include="dt311\dt311_SellerBuyerBUS.cs" />
     <Compile Include="dt311\dt311_VehicleManagementBUS.cs" />
     <Compile Include="dt311\dt311_AccountingSubjectBUS.cs" />
+    <Compile Include="dt312\dt312_AnswersBUS.cs" />
+    <Compile Include="dt312\dt312_ExamMgmtBUS.cs" />
+    <Compile Include="dt312\dt312_ExamUserBUS.cs" />
+    <Compile Include="dt312\dt312_GroupsBUS.cs" />
+    <Compile Include="dt312\dt312_QuestionsBUS.cs" />
+    <Compile Include="dt312\dt312_SettingBUS.cs" />
     <Compile Include="dt402\dt402_KPIWebBUS.cs" />
     <Compile Include="dt403\dt403_SoftwareManualBUS.cs" />
     <Compile Include="dt403\dt403_04_HardnessStandardLogBUS.cs" />

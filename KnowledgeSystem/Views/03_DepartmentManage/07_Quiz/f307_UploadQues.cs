@@ -110,8 +110,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._07_Quiz
             }
 
             f307_ConfirmQues fConfirm = new f307_ConfirmQues();
-            fConfirm.ques = ques;
-            fConfirm.answers = answers;
+            fConfirm.ques = ques.Select(r => new f307_ConfirmQues.CheckQuestion() { DisplayText = r.DisplayText, ImageName = r.ImageName }).ToList();
+            fConfirm.answers = answers.Select(r => new f307_ConfirmQues.CheckAnswer() { QuesId = r.QuesId, Id = r.Id, DisplayText = r.DisplayText, ImageName = r.ImageName, TrueAns = r.TrueAns }).ToList();
             fConfirm.ShowDialog();
 
             // Nếu xác nhận thành công thì cập nhật vào CSDL

@@ -39,7 +39,7 @@ namespace KnowledgeSystem
         [STAThread]
         static void Main(string[] args)
         {
-            new AppCopyRight() { Version = "25.11.21" };
+            new AppCopyRight() { Version = "25.12.09" };
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             TPConfigs.SetSystemStaticValue();
@@ -129,7 +129,7 @@ namespace KnowledgeSystem
                 TPConfigs.IdParentControl = AppPermission.SafetyCertMain;
 
                 //Application.Run(new f00_DesignReport());
-                //Application.Run(new f00_FluentFrame(34));
+                //Application.Run(new f00_FluentFrame(62));
                 Application.Run(new f00_Main());
 #else
                 Application.Run(new f00_Main());

@@ -41,8 +41,8 @@
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.webViewQues = new System.Windows.Forms.WebBrowser();
+            this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
@@ -188,6 +188,14 @@
             this.layoutControl1.TabIndex = 5;
             this.layoutControl1.Text = "layoutControl1";
             // 
+            // webViewQues
+            // 
+            this.webViewQues.Location = new System.Drawing.Point(12, 12);
+            this.webViewQues.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webViewQues.Name = "webViewQues";
+            this.webViewQues.Size = new System.Drawing.Size(823, 454);
+            this.webViewQues.TabIndex = 5;
+            // 
             // Root
             // 
             this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
@@ -197,14 +205,6 @@
             this.Root.Name = "Root";
             this.Root.Size = new System.Drawing.Size(847, 478);
             this.Root.TextVisible = false;
-            // 
-            // webViewQues
-            // 
-            this.webViewQues.Location = new System.Drawing.Point(12, 12);
-            this.webViewQues.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webViewQues.Name = "webViewQues";
-            this.webViewQues.Size = new System.Drawing.Size(823, 454);
-            this.webViewQues.TabIndex = 5;
             // 
             // layoutControlItem2
             // 
@@ -225,7 +225,6 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.IconOptions.Image = global::KnowledgeSystem.Properties.Resources.AppIcon;
             this.Name = "f307_ConfirmQues";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
