@@ -612,6 +612,9 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                                 updateReq.TypeChange = "離職";
                                 dt201_UpdateUsrReqBUS.Instance.Add(updateReq);
 
+                                // Xóa trong các nhóm để tránh thông báo về Note người đã nghỉ việc
+                                dm_GroupUserBUS.Instance.RemoveRangeByUID(userInfo.Id);
+
                                 break;
                             case UpdateEvent.JobChange:
                                 // Thay đổi chức vụ: Giữ chứng chỉ còn hạn cho chức vụ mới, hết hạn chứng chỉ không sử dụng ở chức vụ mới
