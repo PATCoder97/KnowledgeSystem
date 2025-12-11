@@ -21,8 +21,10 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -48,12 +50,18 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
 
         List<dt403_05_Standard> dt403_05_Standards;
         List<dt403_05_StandardAtt> dt403_05_StandardAtts;
-
+        List<Attachment> attachments;
+        string picImage = "";
         DXMenuItem itemViewInfo;
         DXMenuItem itemUpdateVer;
         DXMenuItem itemGetFile;
         DXMenuItem itemPauseNotify;
         DXMenuItem itemViewHistory;
+        private class Attachment : dm_Attachment
+        {
+            public string PathFile { get; set; }
+            public dm_Attachment BaseAttachment { get; set; } = new dm_Attachment();
+        }
 
         private void InitializeMenuItems()
         {
@@ -80,18 +88,50 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
         }
         private void ItemUpdateVer_Click(object sender, EventArgs e)
         {
-            GridView view = gvData;
-            int idBase = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColId));
-
-            f403_05_UpdateStandar f403_05_UpdateStandar = new f403_05_UpdateStandar()
+            using (var openFileDialog = new OpenFileDialog { Filter = "PDF files (*.pdf)|*.pdf" })
             {
-                eventInfo = EventFormInfo.View,
-                idBase = idBase,
-                Text = "更新版本"
-            };
-            f403_05_UpdateStandar.ShowDialog();
-            LoadData();
+                if (openFileDialog.ShowDialog() != DialogResult.OK)
+                    return;
 
+                // 🔹 Thông tin file gốc
+                string filePath = openFileDialog.FileName;
+                string actualName = Path.GetFileName(filePath);
+                string encryptionName = EncryptionHelper.EncryptionFileName(actualName);
+
+                // 🔹 Tạo đối tượng đính kèm
+                dm_Attachment attachment = new dm_Attachment
+                {
+                    Thread = "40305",
+                    EncryptionName = encryptionName,
+                    ActualName = actualName
+                };
+
+                // 🔹 Xác định đường dẫn lưu
+                string destPath = Path.Combine(TPConfigs.Folder40305, attachment.EncryptionName);
+                DirectoryInfo parentDir = Directory.GetParent(destPath);
+
+                if (parentDir != null && !Directory.Exists(parentDir.FullName))
+                {
+                    Directory.CreateDirectory(parentDir.FullName);
+                }
+                // 🔹 Sao chép file vào thư mục đích (ghi đè nếu đã tồn tại)
+                File.Copy(filePath, destPath, true);
+
+                // 🔹 Thêm vào bảng Attachment
+                int attId = dm_AttachmentBUS.Instance.Add(attachment);
+
+                // 🔹 Lấy invoice hiện tại trên GridView
+                GridView view = gvData;
+                object idValue = view.GetRowCellValue(view.FocusedRowHandle, gColId);
+                if (idValue == null)
+                {
+                    XtraMessageBox.Show("Không tìm thấy chuẩn được chọn.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                LoadData();
+                XtraMessageBox.Show("Đã tải chuẩn thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
         DXMenuItem CreateMenuItem(string caption, EventHandler clickEvent, SvgImage svgImage)
         {
@@ -157,6 +197,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
                 formName = "規範"
             };
             fAdd.ShowDialog();
+            LoadData();
         }
 
         private void gvData_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
@@ -177,6 +218,9 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
             }
         }
 
-
+        private void btnReload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            LoadData();
+        }
     }
 }
