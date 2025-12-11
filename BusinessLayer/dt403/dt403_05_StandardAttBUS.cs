@@ -110,14 +110,16 @@ namespace BusinessLayer
             }
         }
 
-        public bool RemoveById(int id)
+        public bool RemoveById(int id, string userRemove)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    var itemRemove = _context.dt403_05_StandardAtt.FirstOrDefault(r => r.Id == id);
-                    _context.dt403_05_StandardAtt.Remove(itemRemove);
+                    var entity = _context.dt206_Documents.FirstOrDefault(r => r.Id == id);
+                    entity.RemoveAt = DateTime.Now;
+                    entity.RemoveBy = userRemove;
+                    _context.dt206_Documents.AddOrUpdate(entity);
 
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;
@@ -128,6 +130,6 @@ namespace BusinessLayer
                 logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
                 throw;
             }
+        } 
         }
-    }
 }
