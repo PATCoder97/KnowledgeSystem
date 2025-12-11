@@ -1248,6 +1248,27 @@
           <Property Name="ExpDate" Type="date" />
           <Property Name="IdAtt" Type="int" />
         </EntityType>
+        <EntityType Name="dt403_05_Standard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SN" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="DisplayNameTW" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DisplayNameVN" Type="nvarchar" MaxLength="50" />
+          <Property Name="ManagerId" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt403_05_StandardAtt">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StandardId" Type="int" Nullable="false" />
+          <Property Name="AttId" Type="int" Nullable="false" />
+          <Property Name="UploadDate" Type="datetime" Nullable="false" />
+          <Property Name="ConfirmDate" Type="datetime" />
+          <Property Name="FinishDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="dt403_SoftwareManual">
           <Key>
             <PropertyRef Name="Id" />
@@ -1402,6 +1423,8 @@
           <EntitySet Name="dt402_KPIWeb" EntityType="Self.dt402_KPIWeb" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt403_04_HardnessStandardLog" EntityType="Self.dt403_04_HardnessStandardLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt403_04_StandardInfo" EntityType="Self.dt403_04_StandardInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt403_05_Standard" EntityType="Self.dt403_05_Standard" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt403_05_StandardAtt" EntityType="Self.dt403_05_StandardAtt" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt403_SoftwareManual" EntityType="Self.dt403_SoftwareManual" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sys_Log" EntityType="Self.sys_Log" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sys_NotesMail" EntityType="Self.sys_NotesMail" Schema="dbo" store:Type="Tables" />
@@ -1526,6 +1549,8 @@
           <EntitySet Name="dt312_Questions" EntityType="DBDocumentManagementSystemModel.dt312_Questions" />
           <EntitySet Name="dt312_Setting" EntityType="DBDocumentManagementSystemModel.dt312_Setting" />
           <EntitySet Name="dt312_ExamMgmt" EntityType="DBDocumentManagementSystemModel.dt312_ExamMgmt" />
+          <EntitySet Name="dt403_05_Standard" EntityType="DBDocumentManagementSystemModel.dt403_05_Standard" />
+          <EntitySet Name="dt403_05_StandardAtt" EntityType="DBDocumentManagementSystemModel.dt403_05_StandardAtt" />
         </EntityContainer>
         <EntityType Name="dm_Function">
           <Key>
@@ -2812,6 +2837,27 @@
           <Property Name="CreateAt" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="RoundNumber" Type="Int32" Nullable="false" />
           <Property Name="FinishNotifyDate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="dt403_05_Standard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SN" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayNameTW" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayNameVN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ManagerId" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="dt403_05_StandardAtt">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StandardId" Type="Int32" Nullable="false" />
+          <Property Name="AttId" Type="Int32" Nullable="false" />
+          <Property Name="UploadDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ConfirmDate" Type="DateTime" Precision="3" />
+          <Property Name="FinishDate" Type="DateTime" Precision="3" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -4215,6 +4261,29 @@
                 <ScalarProperty Name="RoundNumber" ColumnName="RoundNumber" />
                 <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt403_05_Standard">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt403_05_Standard">
+              <MappingFragment StoreEntitySet="dt403_05_Standard">
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+                <ScalarProperty Name="DisplayNameVN" ColumnName="DisplayNameVN" />
+                <ScalarProperty Name="DisplayNameTW" ColumnName="DisplayNameTW" />
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt403_05_StandardAtt">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt403_05_StandardAtt">
+              <MappingFragment StoreEntitySet="dt403_05_StandardAtt">
+                <ScalarProperty Name="FinishDate" ColumnName="FinishDate" />
+                <ScalarProperty Name="ConfirmDate" ColumnName="ConfirmDate" />
+                <ScalarProperty Name="UploadDate" ColumnName="UploadDate" />
+                <ScalarProperty Name="AttId" ColumnName="AttId" />
+                <ScalarProperty Name="StandardId" ColumnName="StandardId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

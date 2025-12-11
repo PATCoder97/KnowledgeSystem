@@ -119,6 +119,8 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt312_Questions" Width="1.5" PointX="2.125" PointY="67.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt312_Setting" Width="1.5" PointX="8.625" PointY="67.5" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt312_ExamMgmt" Width="1.5" PointX="5.375" PointY="67.5" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt403_05_Standard" Width="1.5" PointX="0.5" PointY="70.25" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt403_05_StandardAtt" Width="1.5" PointX="2.125" PointY="70.25" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
