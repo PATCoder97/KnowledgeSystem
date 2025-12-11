@@ -17,5 +17,10 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
         {
             InitializeComponent();
         }
+
+        private void uc403_05_CalipStandardMain_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
