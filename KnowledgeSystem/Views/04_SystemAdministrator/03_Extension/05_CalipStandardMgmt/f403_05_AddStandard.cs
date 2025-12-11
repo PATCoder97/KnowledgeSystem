@@ -3,6 +3,7 @@ using DataAccessLayer;
 using DevExpress.XtraEditors;
 using DevExpress.XtraLayout;
 using DevExpress.XtraSplashScreen;
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using KnowledgeSystem.Helpers;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
         public f403_05_AddStandard()
         {
             InitializeComponent();
+            InitializeIcon();
         }
         public EventFormInfo eventInfo = EventFormInfo.Create;
         public string formName = "";
@@ -31,7 +33,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
 
         
         dt403_05_Standard dt403_05_Standard;
-        dt403_05_StandardAtt dt403_05_StandardAtt;
 
         List<LayoutControlItem> lcControls;
         List<LayoutControlItem> lcImpControls;
@@ -41,13 +42,19 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
         {
             public string FilePath { get; set; }
         }
+        private void InitializeIcon()
+        {
+            btnEdit.ImageOptions.SvgImage = TPSvgimages.Edit;
+            btnDelete.ImageOptions.SvgImage = TPSvgimages.Remove;
+            btnConfirm.ImageOptions.SvgImage = TPSvgimages.Confirm;
+        }
         private void EnabledController(bool _enable = true)
         {
             txbSN.Enabled = _enable;
             txbDisplayNameTW.Enabled = _enable;
             txbDisplayNameVN.Enabled = _enable;
            
-            txbAtt.Enabled = _enable;
+           
         }
         private void LockControl()
         {
@@ -111,8 +118,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
 
         private void f403_05_AddStandard_Load(object sender, EventArgs e)
         {
-            lcControls = new List<LayoutControlItem>() { lcAtt, lcDisplayNameTW, lcDisplayNameVN, lcSN };
-            lcImpControls = new List<LayoutControlItem>() { lcAtt, lcDisplayNameTW, lcSN };
+            lcControls = new List<LayoutControlItem>() { lcDisplayNameTW, lcDisplayNameVN, lcSN };
+            lcImpControls = new List<LayoutControlItem>() {  lcDisplayNameTW, lcSN };
             foreach (var item in lcControls)
             {
                 item.AllowHtmlStringInCaption = true;
@@ -126,9 +133,9 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
                     break;
                 case EventFormInfo.View:
                     dt403_05_Standard = dt403_05_StandardBUS.Instance.GetItemById(idBase);
+                    txbSN.EditValue = dt403_05_Standard.SN;
                     txbDisplayNameTW.EditValue= dt403_05_Standard.DisplayNameTW;
                     txbDisplayNameVN.EditValue= dt403_05_Standard.DisplayNameVN;
-                    txbAtt.EditValue = "...";
                     break;
                 case EventFormInfo.Update:
                     break;
@@ -152,23 +159,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
         {
             eventInfo = EventFormInfo.Delete;
             LockControl();
-        }
-        private void HandleBaseAttachment()
-        {
-            var baseAtt = new dm_Attachment()
-            {
-                ActualName = Path.GetFileName(baseFilePath),
-                EncryptionName = EncryptionHelper.EncryptionFileName(baseFilePath),
-                Thread = "206"
-            };
-
-            var idAtt = dm_AttachmentBUS.Instance.Add(baseAtt);
-            dt403_05_StandardAtt.AttId = idAtt;
-
-            if (!Directory.Exists(TPConfigs.Folder40305))
-                Directory.CreateDirectory(TPConfigs.Folder40305);
-
-            File.Copy(baseFilePath, Path.Combine(TPConfigs.Folder40305, baseAtt.EncryptionName));
         }
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -196,38 +186,31 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
             string SN = txbSN.Text;
             string displayNameTW = txbDisplayNameTW.Text.Trim();
             string displayNameVN = txbDisplayNameVN.Text.Trim();
-            string fileName = txbAtt.Text.Trim();
+            
 
             var result = false;
-            var resultAtt = false;
+          //  var resultAtt = false;
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
             { 
+                dt403_05_Standard.SN = SN;
                 dt403_05_Standard.DisplayNameVN = displayNameVN;
                 dt403_05_Standard.DisplayNameTW = displayNameTW;
 
                 switch(eventInfo)
                 {
                     case EventFormInfo.Create:
-                        HandleBaseAttachment();
-                        dt403_05_StandardAtt.UploadDate = DateTime.Now;
                         dt403_05_Standard.ManagerId = TPConfigs.LoginUser.Id;
                         result = dt403_05_StandardBUS.Instance.Add(dt403_05_Standard);
-                        resultAtt = dt403_05_StandardAttBUS.Instance.Add(dt403_05_StandardAtt);
                         break;
                     case EventFormInfo.Update:
-
-                        if (fileName != "...")
-                        {
-                            HandleBaseAttachment();
-                        }
-
-                        resultAtt = dt403_05_StandardAttBUS.Instance.AddOrUpdate(dt403_05_StandardAtt);
+                        dt403_05_Standard.Id = idBase;
+                        result = dt403_05_StandardBUS.Instance.AddOrUpdate(dt403_05_Standard);
                         break;
                     case EventFormInfo.Delete:
 
                         var dialogResult = XtraMessageBox.Show($"您確認要刪除{formName}: {dt403_05_Standard.SN}_{dt403_05_Standard.DisplayNameTW}", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                         if (dialogResult != DialogResult.Yes) return;
-                        resultAtt = dt403_05_StandardAttBUS.Instance.RemoveById(dt403_05_StandardAtt.Id, TPConfigs.LoginUser.Id);
+                        result = dt403_05_StandardBUS.Instance.RemoveById(dt403_05_Standard.Id);//, TPConfigs.LoginUser.Id);
                         break;
                     default:
                         break;
@@ -244,55 +227,5 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
 
         }
 
-        private void txbAtt_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
-        {
-            switch (e.Button.Caption)
-            {
-                case "Paste":
-
-                    if (Clipboard.ContainsFileDropList())
-                    {
-                        var files = Clipboard.GetFileDropList();
-                        var pdfFiles = new List<string>();
-
-                        foreach (var file in files)
-                        {
-                            if (file.EndsWith(".pdf", StringComparison.OrdinalIgnoreCase) && File.Exists(file))
-                            {
-                                pdfFiles.Add(file);
-                            }
-                        }
-
-                        if (pdfFiles.Count != 1)
-                        {
-                            XtraMessageBox.Show("請選擇一個PDF檔案", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-
-                        baseFilePath = pdfFiles.First();
-                        txbAtt.Text = Path.GetFileName(baseFilePath);
-                    }
-                    else
-                    {
-                        XtraMessageBox.Show("請選擇一個PDF檔案", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-
-                    break;
-                default:
-                    OpenFileDialog dialog = new OpenFileDialog
-                    {
-                        Filter = "PDF Files (*.pdf)|*.pdf",
-                        FilterIndex = 1
-                    };
-                    using (var handle = SplashScreenManager.ShowOverlayForm(this))
-                    {
-                        if (dialog.ShowDialog() != DialogResult.OK) return;
-                        baseFilePath = dialog.FileName;
-                        txbAtt.Text = Path.GetFileName(baseFilePath);
-                    }
-
-                    break;
-            }
-        }
     }
  }

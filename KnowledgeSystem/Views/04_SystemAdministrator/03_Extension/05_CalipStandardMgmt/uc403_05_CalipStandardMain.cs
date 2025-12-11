@@ -1,11 +1,28 @@
-﻿using DevExpress.XtraEditors;
+﻿using BusinessLayer;
+using DataAccessLayer;
+using DevExpress.Utils.Menu;
+using DevExpress.Utils.Svg;
+using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using DevExpress.XtraSplashScreen;
+using DocumentFormat.OpenXml.Office2010.Excel;
+using DocumentFormat.OpenXml.Spreadsheet;
+using KnowledgeSystem.Helpers;
+using KnowledgeSystem.Views._00_Generals;
+using KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -16,11 +33,150 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
         public uc403_05_CalipStandardMain()
         {
             InitializeComponent();
+            InitializeMenuItems();
+            InitializeIcon();
+
+            helper = new RefreshHelper(gvData, "Id");
+            System.Drawing.Font fontUI12 = new System.Drawing.Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            DevExpress.Utils.AppearanceObject.DefaultMenuFont = fontUI12;
+        }
+        RefreshHelper helper;
+        BindingSource sourceBases = new BindingSource();
+        bool isManager40305 = false;
+        List<string> deptsManager40305;
+        string idDept2word = TPConfigs.LoginUser.IdDepartment.Substring(0, 2);
+
+        List<dt403_05_Standard> dt403_05_Standards;
+        List<dt403_05_StandardAtt> dt403_05_StandardAtts;
+
+        DXMenuItem itemViewInfo;
+        DXMenuItem itemUpdateVer;
+        DXMenuItem itemGetFile;
+        DXMenuItem itemPauseNotify;
+        DXMenuItem itemViewHistory;
+
+        private void InitializeMenuItems()
+        {
+            itemViewInfo = CreateMenuItem("查看資訊", ItemViewInfo_Click, TPSvgimages.View);
+            itemUpdateVer = CreateMenuItem("更新版本", ItemUpdateVer_Click, TPSvgimages.UpLevel);
+            //itemGetFile = CreateMenuItem("下載檔案", ItemGetFile_Click, TPSvgimages.Attach);
+            //itemPauseNotify = CreateMenuItem("暫停通知", ItemPauseNotify_Click, TPSvgimages.Suspension);
+            //itemViewHistory = CreateMenuItem("版本歷史", ItemViewHistory_Click, TPSvgimages.Progress);
         }
 
+        private void ItemViewInfo_Click(object sender, EventArgs e)
+        {
+            GridView view = gvData;
+            int idBase = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColId));
+
+            f403_05_AddStandard fInfo = new f403_05_AddStandard()
+            {
+                eventInfo = EventFormInfo.View,
+                idBase = idBase,
+                Text = "規範"
+            };
+            fInfo.ShowDialog();
+            LoadData();
+        }
+        private void ItemUpdateVer_Click(object sender, EventArgs e)
+        {
+            GridView view = gvData;
+            int idBase = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColId));
+
+            f403_05_UpdateStandar f403_05_UpdateStandar = new f403_05_UpdateStandar()
+            {
+                eventInfo = EventFormInfo.View,
+                idBase = idBase,
+                Text = "更新版本"
+            };
+            f403_05_UpdateStandar.ShowDialog();
+            LoadData();
+
+        }
+        DXMenuItem CreateMenuItem(string caption, EventHandler clickEvent, SvgImage svgImage)
+        {
+            var menuItem = new DXMenuItem(caption, clickEvent, svgImage, DXMenuItemPriority.Normal);
+            SetMenuItemProperties(menuItem);
+            return menuItem;
+        }
+
+        void SetMenuItemProperties(DXMenuItem menuItem)
+        {
+            menuItem.ImageOptions.SvgImageSize = new System.Drawing.Size(24, 24);
+            menuItem.AppearanceHovered.ForeColor = System.Drawing.Color.Blue;
+        }
+        private void InitializeIcon()
+        {
+            btnAdd.ImageOptions.SvgImage = TPSvgimages.Add;
+            btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
+            btnExportExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
+        }
+        private void LoadData()
+        {
+            using (var handle = SplashScreenManager.ShowOverlayForm(gcData))
+            {
+                helper.SaveViewInfo();
+                dt403_05_Standards = dt403_05_StandardBUS.Instance.GetList();
+                dt403_05_StandardAtts = dt403_05_StandardAttBUS.Instance.GetList();
+                var Display = from STD in dt403_05_Standards
+                              select new
+                              {
+                                  Id = STD.Id,
+                                  SN = STD.SN,
+                                  DisplayNameTW = STD.DisplayNameTW,
+                                  DisplayNameVN = STD.DisplayNameVN,
+                              };
+                sourceBases.DataSource = Display;
+                helper.LoadViewInfo();
+
+                gvData.BestFitColumns();
+                gvData.CollapseAllDetails();
+
+                gvData.FocusedRowHandle = GridControl.AutoFilterRowHandle;
+            }
+        }
         private void uc403_05_CalipStandardMain_Load(object sender, EventArgs e)
         {
+            gvData.ReadOnlyGridView();
+            gvData.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
+            gvData.OptionsDetail.AllowOnlyOneMasterRowExpanded = true;
+            gvForm.ReadOnlyGridView();
+            gvForm.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
 
+            LoadData();
+            gcData.DataSource = sourceBases;
+
+            gvData.BestFitColumns();
         }
+
+        private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            f403_05_AddStandard fAdd = new f403_05_AddStandard()
+            {
+                eventInfo = EventFormInfo.Create,
+                formName = "規範"
+            };
+            fAdd.ShowDialog();
+        }
+
+        private void gvData_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
+        {
+            if (e.HitInfo.InRowCell && e.HitInfo.InDataRow)// && isManager40305)
+            {
+                GridView view = sender as GridView;
+                view.FocusedRowHandle = e.HitInfo.RowHandle;
+                //string idDept = view.GetRowCellValue(view.FocusedRowHandle, gColId).ToString();
+
+                //if (deptsManager40305.Any(r => r == idDept))
+                //{
+                //    e.Menu.Items.Add(itemViewInfo);
+                //    e.Menu.Items.Add(itemUpdateVer);
+                //}
+                    e.Menu.Items.Add(itemViewInfo);
+                    e.Menu.Items.Add(itemUpdateVer);
+            }
+        }
+
+
     }
 }

@@ -30,16 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f403_05_AddStandard));
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnEdit = new DevExpress.XtraBars.BarButtonItem();
@@ -51,24 +41,20 @@
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.txbDisplayNameTW = new DevExpress.XtraEditors.TextEdit();
-            this.txbAtt = new DevExpress.XtraEditors.ButtonEdit();
             this.txbDisplayNameVN = new DevExpress.XtraEditors.TextEdit();
             this.txbSN = new DevExpress.XtraEditors.TextEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.lcDisplayNameTW = new DevExpress.XtraLayout.LayoutControlItem();
-            this.lcAtt = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcDisplayNameVN = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcSN = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txbDisplayNameTW.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbAtt.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDisplayNameVN.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbSN.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDisplayNameTW)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcAtt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDisplayNameVN)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcSN)).BeginInit();
             this.SuspendLayout();
@@ -151,15 +137,15 @@
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManagerTP;
-            this.barDockControlTop.Size = new System.Drawing.Size(555, 49);
+            this.barDockControlTop.Size = new System.Drawing.Size(551, 49);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 221);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 183);
             this.barDockControlBottom.Manager = this.barManagerTP;
-            this.barDockControlBottom.Size = new System.Drawing.Size(555, 0);
+            this.barDockControlBottom.Size = new System.Drawing.Size(551, 0);
             // 
             // barDockControlLeft
             // 
@@ -167,27 +153,26 @@
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 49);
             this.barDockControlLeft.Manager = this.barManagerTP;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 172);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 134);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(555, 49);
+            this.barDockControlRight.Location = new System.Drawing.Point(551, 49);
             this.barDockControlRight.Manager = this.barManagerTP;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 172);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 134);
             // 
             // layoutControl1
             // 
             this.layoutControl1.Controls.Add(this.txbDisplayNameTW);
-            this.layoutControl1.Controls.Add(this.txbAtt);
             this.layoutControl1.Controls.Add(this.txbDisplayNameVN);
             this.layoutControl1.Controls.Add(this.txbSN);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(555, 172);
+            this.layoutControl1.Size = new System.Drawing.Size(551, 134);
             this.layoutControl1.TabIndex = 8;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -199,28 +184,9 @@
             this.txbDisplayNameTW.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbDisplayNameTW.Properties.Appearance.Options.UseFont = true;
             this.txbDisplayNameTW.Properties.Appearance.Options.UseForeColor = true;
-            this.txbDisplayNameTW.Size = new System.Drawing.Size(443, 32);
+            this.txbDisplayNameTW.Size = new System.Drawing.Size(439, 32);
             this.txbDisplayNameTW.StyleController = this.layoutControl1;
             this.txbDisplayNameTW.TabIndex = 11;
-            // 
-            // txbAtt
-            // 
-            this.txbAtt.Location = new System.Drawing.Point(100, 120);
-            this.txbAtt.Name = "txbAtt";
-            this.txbAtt.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.txbAtt.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.txbAtt.Properties.Appearance.Options.UseFont = true;
-            this.txbAtt.Properties.Appearance.Options.UseForeColor = true;
-            editorButtonImageOptions2.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("editorButtonImageOptions2.SvgImage")));
-            editorButtonImageOptions2.SvgImageSize = new System.Drawing.Size(16, 16);
-            this.txbAtt.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Search, "Browse", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default),
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "Paste", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
-            this.txbAtt.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.txbAtt.Size = new System.Drawing.Size(443, 32);
-            this.txbAtt.StyleController = this.layoutControl1;
-            this.txbAtt.TabIndex = 12;
-            this.txbAtt.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.txbAtt_ButtonClick);
             // 
             // txbDisplayNameVN
             // 
@@ -230,7 +196,7 @@
             this.txbDisplayNameVN.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbDisplayNameVN.Properties.Appearance.Options.UseFont = true;
             this.txbDisplayNameVN.Properties.Appearance.Options.UseForeColor = true;
-            this.txbDisplayNameVN.Size = new System.Drawing.Size(443, 32);
+            this.txbDisplayNameVN.Size = new System.Drawing.Size(439, 32);
             this.txbDisplayNameVN.StyleController = this.layoutControl1;
             this.txbDisplayNameVN.TabIndex = 11;
             // 
@@ -242,7 +208,7 @@
             this.txbSN.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbSN.Properties.Appearance.Options.UseFont = true;
             this.txbSN.Properties.Appearance.Options.UseForeColor = true;
-            this.txbSN.Size = new System.Drawing.Size(443, 32);
+            this.txbSN.Size = new System.Drawing.Size(439, 32);
             this.txbSN.StyleController = this.layoutControl1;
             this.txbSN.TabIndex = 11;
             // 
@@ -252,11 +218,10 @@
             this.Root.GroupBordersVisible = false;
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.lcDisplayNameTW,
-            this.lcAtt,
             this.lcDisplayNameVN,
             this.lcSN});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(555, 172);
+            this.Root.Size = new System.Drawing.Size(551, 134);
             this.Root.TextVisible = false;
             // 
             // lcDisplayNameTW
@@ -270,26 +235,9 @@
             this.lcDisplayNameTW.Control = this.txbDisplayNameTW;
             this.lcDisplayNameTW.Location = new System.Drawing.Point(0, 36);
             this.lcDisplayNameTW.Name = "lcDisplayNameTW";
-            this.lcDisplayNameTW.Size = new System.Drawing.Size(535, 36);
+            this.lcDisplayNameTW.Size = new System.Drawing.Size(531, 36);
             this.lcDisplayNameTW.Text = "中文名稱";
             this.lcDisplayNameTW.TextSize = new System.Drawing.Size(76, 24);
-            // 
-            // lcAtt
-            // 
-            this.lcAtt.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.lcAtt.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
-            this.lcAtt.AppearanceItemCaption.Options.UseFont = true;
-            this.lcAtt.AppearanceItemCaption.Options.UseForeColor = true;
-            this.lcAtt.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.White;
-            this.lcAtt.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
-            this.lcAtt.Control = this.txbAtt;
-            this.lcAtt.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
-            this.lcAtt.CustomizationFormText = "條文";
-            this.lcAtt.Location = new System.Drawing.Point(0, 108);
-            this.lcAtt.Name = "lcAtt";
-            this.lcAtt.Size = new System.Drawing.Size(535, 44);
-            this.lcAtt.Text = "檔案";
-            this.lcAtt.TextSize = new System.Drawing.Size(76, 24);
             // 
             // lcDisplayNameVN
             // 
@@ -304,7 +252,7 @@
             this.lcDisplayNameVN.CustomizationFormText = "中文名稱";
             this.lcDisplayNameVN.Location = new System.Drawing.Point(0, 72);
             this.lcDisplayNameVN.Name = "lcDisplayNameVN";
-            this.lcDisplayNameVN.Size = new System.Drawing.Size(535, 36);
+            this.lcDisplayNameVN.Size = new System.Drawing.Size(531, 42);
             this.lcDisplayNameVN.Text = "越文名稱";
             this.lcDisplayNameVN.TextSize = new System.Drawing.Size(76, 24);
             // 
@@ -321,7 +269,7 @@
             this.lcSN.CustomizationFormText = "SN";
             this.lcSN.Location = new System.Drawing.Point(0, 0);
             this.lcSN.Name = "lcSN";
-            this.lcSN.Size = new System.Drawing.Size(535, 36);
+            this.lcSN.Size = new System.Drawing.Size(531, 36);
             this.lcSN.Text = "SN";
             this.lcSN.TextSize = new System.Drawing.Size(76, 24);
             // 
@@ -329,7 +277,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(555, 221);
+            this.ClientSize = new System.Drawing.Size(551, 183);
             this.Controls.Add(this.layoutControl1);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
@@ -342,12 +290,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.txbDisplayNameTW.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txbAtt.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbDisplayNameVN.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbSN.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDisplayNameTW)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcAtt)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDisplayNameVN)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcSN)).EndInit();
             this.ResumeLayout(false);
@@ -368,11 +314,9 @@
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraEditors.TextEdit txbDisplayNameTW;
-        private DevExpress.XtraEditors.ButtonEdit txbAtt;
         private DevExpress.XtraEditors.TextEdit txbDisplayNameVN;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.LayoutControlItem lcDisplayNameTW;
-        private DevExpress.XtraLayout.LayoutControlItem lcAtt;
         private DevExpress.XtraLayout.LayoutControlItem lcDisplayNameVN;
         private DevExpress.XtraEditors.TextEdit txbSN;
         private DevExpress.XtraLayout.LayoutControlItem lcSN;

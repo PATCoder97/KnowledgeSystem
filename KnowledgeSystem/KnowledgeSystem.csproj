@@ -1278,6 +1278,12 @@
     <Compile Include="Views\04_SystemAdministrator\03_Extension\05_CalipStandardMgmt\f403_05_AddStandard.Designer.cs">
       <DependentUpon>f403_05_AddStandard.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\04_SystemAdministrator\03_Extension\05_CalipStandardMgmt\f403_05_UpdateStandar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\04_SystemAdministrator\03_Extension\05_CalipStandardMgmt\f403_05_UpdateStandar.Designer.cs">
+      <DependentUpon>f403_05_UpdateStandar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\04_SystemAdministrator\03_Extension\05_CalipStandardMgmt\uc403_05_CalipStandardMain.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -1831,6 +1837,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\03_Extension\05_CalipStandardMgmt\f403_05_AddStandard.resx">
       <DependentUpon>f403_05_AddStandard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\04_SystemAdministrator\03_Extension\05_CalipStandardMgmt\f403_05_UpdateStandar.resx">
+      <DependentUpon>f403_05_UpdateStandar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\03_Extension\05_CalipStandardMgmt\uc403_05_CalipStandardMain.resx">
       <DependentUpon>uc403_05_CalipStandardMain.cs</DependentUpon>
