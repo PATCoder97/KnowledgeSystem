@@ -1,15 +1,19 @@
 ﻿using DataAccessLayer;
+using Logger;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLayer.dt403
+namespace BusinessLayer
 {
     public class dt403_05_StandardBUS
     {
+        TPLogger logger;
+
         private static dt403_05_StandardBUS instance;
 
         public static dt403_05_StandardBUS Instance
@@ -18,7 +22,7 @@ namespace BusinessLayer.dt403
             private set { instance = value; }
         }
 
-        private dt403_05_StandardBUS() { }
+        private dt403_05_StandardBUS() { logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName); }
 
         public List<dt403_05_Standard> GetList()
         {
@@ -31,6 +35,7 @@ namespace BusinessLayer.dt403
             }
             catch (Exception ex)
             {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
                 throw;
             }
         }
@@ -46,6 +51,7 @@ namespace BusinessLayer.dt403
             }
             catch (Exception ex)
             {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
                 throw;
             }
         }
@@ -63,6 +69,7 @@ namespace BusinessLayer.dt403
             }
             catch (Exception ex)
             {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
                 return false;
             }
         }
@@ -80,6 +87,7 @@ namespace BusinessLayer.dt403
             }
             catch (Exception ex)
             {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
                 return false;
             }
         }
@@ -97,6 +105,7 @@ namespace BusinessLayer.dt403
             }
             catch (Exception ex)
             {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
                 return false;
             }
         }
@@ -116,6 +125,7 @@ namespace BusinessLayer.dt403
             }
             catch (Exception ex)
             {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
                 throw;
             }
         }
