@@ -54,12 +54,12 @@
             this.btnAdd = new DevExpress.XtraBars.BarButtonItem();
             this.btnReload = new DevExpress.XtraBars.BarButtonItem();
             this.btnExportExcel = new DevExpress.XtraBars.BarButtonItem();
-            this.barCbbDepts = new DevExpress.XtraBars.BarEditItem();
-            this.cbbDepts = new DevExpress.XtraEditors.Repository.RepositoryItemCheckedComboBoxEdit();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.barCbbDepts = new DevExpress.XtraBars.BarEditItem();
+            this.cbbDepts = new DevExpress.XtraEditors.Repository.RepositoryItemCheckedComboBoxEdit();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -101,6 +101,7 @@
             this.gvForm.OptionsView.ShowIndicator = false;
             this.gvForm.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
             new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gridColumn1, DevExpress.Data.ColumnSortOrder.Descending)});
+            this.gvForm.DoubleClick += new System.EventHandler(this.gvForm_DoubleClick);
             // 
             // gridColumn1
             // 
@@ -111,13 +112,13 @@
             // gColIdAttForm
             // 
             this.gColIdAttForm.Caption = "IdAtt";
-            this.gColIdAttForm.FieldName = "IdAttachment";
+            this.gColIdAttForm.FieldName = "AttId";
             this.gColIdAttForm.Name = "gColIdAttForm";
             // 
             // gridColumn13
             // 
             this.gridColumn13.Caption = "gridColumn13";
-            this.gridColumn13.FieldName = "VersionNo";
+            this.gridColumn13.FieldName = "UploadDate";
             this.gridColumn13.Name = "gridColumn13";
             this.gridColumn13.Visible = true;
             this.gridColumn13.VisibleIndex = 0;
@@ -182,6 +183,11 @@
             this.gvData.OptionsView.EnableAppearanceOddRow = true;
             this.gvData.OptionsView.ShowAutoFilterRow = true;
             this.gvData.OptionsView.ShowGroupPanel = false;
+            this.gvData.MasterRowEmpty += new DevExpress.XtraGrid.Views.Grid.MasterRowEmptyEventHandler(this.gvData_MasterRowEmpty);
+            this.gvData.MasterRowExpanded += new DevExpress.XtraGrid.Views.Grid.CustomMasterRowEventHandler(this.gvData_MasterRowExpanded);
+            this.gvData.MasterRowGetChildList += new DevExpress.XtraGrid.Views.Grid.MasterRowGetChildListEventHandler(this.gvData_MasterRowGetChildList);
+            this.gvData.MasterRowGetRelationName += new DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationNameEventHandler(this.gvData_MasterRowGetRelationName);
+            this.gvData.MasterRowGetRelationCount += new DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationCountEventHandler(this.gvData_MasterRowGetRelationCount);
             this.gvData.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gvData_PopupMenuShowing);
             // 
             // gColId
@@ -323,8 +329,7 @@
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnAdd, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnReload, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnExportExcel, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barCbbDepts, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.Caption)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnExportExcel, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawDragBorder = false;
             this.bar2.OptionsBar.MultiLine = true;
@@ -367,30 +372,6 @@
             this.btnExportExcel.ItemAppearance.Normal.Options.UseFont = true;
             this.btnExportExcel.Name = "btnExportExcel";
             // 
-            // barCbbDepts
-            // 
-            this.barCbbDepts.Caption = "實驗室";
-            this.barCbbDepts.Edit = this.cbbDepts;
-            this.barCbbDepts.EditWidth = 150;
-            this.barCbbDepts.Id = 11;
-            this.barCbbDepts.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.barCbbDepts.ItemAppearance.Normal.Options.UseFont = true;
-            this.barCbbDepts.Name = "barCbbDepts";
-            this.barCbbDepts.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-            // 
-            // cbbDepts
-            // 
-            this.cbbDepts.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbbDepts.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.cbbDepts.Appearance.Options.UseFont = true;
-            this.cbbDepts.Appearance.Options.UseForeColor = true;
-            this.cbbDepts.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbbDepts.AppearanceDropDown.Options.UseFont = true;
-            this.cbbDepts.AutoHeight = false;
-            this.cbbDepts.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbbDepts.Name = "cbbDepts";
-            // 
             // barDockControlTop
             // 
             this.barDockControlTop.CausesValidation = false;
@@ -422,6 +403,30 @@
             this.barDockControlRight.Location = new System.Drawing.Point(1034, 49);
             this.barDockControlRight.Manager = this.barManagerTP;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 591);
+            // 
+            // barCbbDepts
+            // 
+            this.barCbbDepts.Caption = "實驗室";
+            this.barCbbDepts.Edit = this.cbbDepts;
+            this.barCbbDepts.EditWidth = 150;
+            this.barCbbDepts.Id = 11;
+            this.barCbbDepts.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.barCbbDepts.ItemAppearance.Normal.Options.UseFont = true;
+            this.barCbbDepts.Name = "barCbbDepts";
+            this.barCbbDepts.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            // 
+            // cbbDepts
+            // 
+            this.cbbDepts.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbDepts.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.cbbDepts.Appearance.Options.UseFont = true;
+            this.cbbDepts.Appearance.Options.UseForeColor = true;
+            this.cbbDepts.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbDepts.AppearanceDropDown.Options.UseFont = true;
+            this.cbbDepts.AutoHeight = false;
+            this.cbbDepts.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbbDepts.Name = "cbbDepts";
             // 
             // layoutControl1
             // 

@@ -222,5 +222,69 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
         {
             LoadData();
         }
+
+        private void gvData_MasterRowGetRelationCount(object sender, MasterRowGetRelationCountEventArgs e)
+        {
+            e.RelationCount = 1;
+        }
+
+        private void gvData_MasterRowGetRelationName(object sender, MasterRowGetRelationNameEventArgs e)
+        {
+            e.RelationName = "表單";
+        }
+
+        private void gvData_MasterRowGetChildList(object sender, MasterRowGetChildListEventArgs e)
+        {
+            GridView view = sender as GridView;
+            int idBase = (int)view.GetRowCellValue(e.RowHandle, gColId);
+
+            e.ChildList = dt403_05_StandardAtts.Where(r => r.StandardId == idBase).ToList();
+        }
+
+        private void gvData_MasterRowEmpty(object sender, MasterRowEmptyEventArgs e)
+        {
+            GridView view = sender as GridView;
+            int idBase = view.GetRowCellValue(e.RowHandle, gColId) != null ? (int)view.GetRowCellValue(e.RowHandle, gColId) : -1;
+
+            e.IsEmpty = !dt403_05_StandardAtts.Any(r => r.Id == idBase);
+        }
+
+        private void gvData_MasterRowExpanded(object sender, CustomMasterRowEventArgs e)
+        {
+            GridView masterView = sender as GridView;
+            int visibleDetailRelationIndex = masterView.GetVisibleDetailRelationIndex(e.RowHandle);
+            GridView detailView = masterView.GetDetailView(e.RowHandle, visibleDetailRelationIndex) as GridView;
+
+            detailView.BestFitColumns();
+        }
+
+        private void gvForm_DoubleClick(object sender, EventArgs e)
+        {
+            GridView view = sender as GridView;
+
+            var pt = view.GridControl.PointToClient(System.Windows.Forms.Control.MousePosition);
+            GridHitInfo hitInfo = view.CalcHitInfo(pt);
+            if (!hitInfo.InRowCell) return;
+
+            int idAtt = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColIdAttForm));
+            var att = dm_AttachmentBUS.Instance.GetItemById(idAtt);
+
+            string filePath = att.EncryptionName;
+            string fileName = att.ActualName;
+
+            string sourcePath = Path.Combine(TPConfigs.Folder40305, filePath);
+            string destPath = Path.Combine(TPConfigs.TempFolderData, $"{Regex.Replace(fileName, @"[\\/:*?""<>|]", "")}_{DateTime.Now:yyyyMMddHHmmss}{Path.GetExtension(fileName)}");
+
+            if (!Directory.Exists(TPConfigs.TempFolderData))
+                Directory.CreateDirectory(TPConfigs.TempFolderData);
+
+            File.Copy(sourcePath, destPath, true);
+
+            var mainForm = f00_ViewMultiFile.Instance;
+            if (!mainForm.Visible)
+                mainForm.Show();
+
+            mainForm.OpenFormInDocumentManager(destPath);
+        }
     }
 }
