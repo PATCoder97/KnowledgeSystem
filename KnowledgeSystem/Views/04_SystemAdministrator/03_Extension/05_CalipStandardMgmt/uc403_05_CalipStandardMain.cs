@@ -50,12 +50,12 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
 
         List<dt403_05_Standard> dt403_05_Standards;
         List<dt403_05_StandardAtt> dt403_05_StandardAtts;
-        List<Attachment> attachments;
+        List<dm_Attachment> attachments;
         string picImage = "";
         DXMenuItem itemViewInfo;
         DXMenuItem itemUpdateVer;
-        DXMenuItem itemGetFile;
-        DXMenuItem itemPauseNotify;
+        DXMenuItem itemConfirmdate;
+        DXMenuItem itemFinishdate;
         DXMenuItem itemViewHistory;
         private class Attachment : dm_Attachment
         {
@@ -67,9 +67,19 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
         {
             itemViewInfo = CreateMenuItem("查看資訊", ItemViewInfo_Click, TPSvgimages.View);
             itemUpdateVer = CreateMenuItem("更新版本", ItemUpdateVer_Click, TPSvgimages.UpLevel);
-            //itemGetFile = CreateMenuItem("下載檔案", ItemGetFile_Click, TPSvgimages.Attach);
-            //itemPauseNotify = CreateMenuItem("暫停通知", ItemPauseNotify_Click, TPSvgimages.Suspension);
+            itemConfirmdate = CreateMenuItem("確認日期", ItemConfirmdate_Click, TPSvgimages.Attach);
+            itemFinishdate = CreateMenuItem("完成日期", ItemFinishdate_Click, TPSvgimages.Suspension);
             //itemViewHistory = CreateMenuItem("版本歷史", ItemViewHistory_Click, TPSvgimages.Progress);
+        }
+
+        private void ItemConfirmdate_Click(object sender, EventArgs e)
+        {
+            XtraMessageBoxArgs args = new XtraMessageBoxArgs()
+            { Caption = "ConfirmDate", Text = "Bạn xác nhận đã cập nhật chuẩn ", Buttons = new DialogResult[] { DialogResult.Yes, DialogResult.No } };
+        }
+
+        private void ItemFinishdate_Click(object sender, EventArgs e)
+        {
         }
 
         private void ItemViewInfo_Click(object sender, EventArgs e)
@@ -88,17 +98,21 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
         }
         private void ItemUpdateVer_Click(object sender, EventArgs e)
         {
-            using (var openFileDialog = new OpenFileDialog { Filter = "PDF files (*.pdf)|*.pdf" })
+            using (var dlg = new OpenFileDialog { Filter = "PDF files (*.pdf)|*.pdf" })
             {
-                if (openFileDialog.ShowDialog() != DialogResult.OK)
+                if (dlg.ShowDialog() != DialogResult.OK)
                     return;
 
-                // 🔹 Thông tin file gốc
-                string filePath = openFileDialog.FileName;
+                GridView view = gvData;
+                int idBase = Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, gColId));
+                // Lấy bản ghi StandardAtt nếu có
+                var stdAtt = new dt403_05_StandardAtt { StandardId = idBase,UploadDate = DateTime.Now };
+
+                // ---- Xử lý file ----
+                string filePath = dlg.FileName;
                 string actualName = Path.GetFileName(filePath);
                 string encryptionName = EncryptionHelper.EncryptionFileName(actualName);
 
-                // 🔹 Tạo đối tượng đính kèm
                 dm_Attachment attachment = new dm_Attachment
                 {
                     Thread = "40305",
@@ -106,31 +120,20 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
                     ActualName = actualName
                 };
 
-                // 🔹 Xác định đường dẫn lưu
-                string destPath = Path.Combine(TPConfigs.Folder40305, attachment.EncryptionName);
-                DirectoryInfo parentDir = Directory.GetParent(destPath);
+                // Tạo thư mục nếu chưa có
+                string destPath = Path.Combine(TPConfigs.Folder40305, encryptionName);
+                Directory.CreateDirectory(Path.GetDirectoryName(destPath));
 
-                if (parentDir != null && !Directory.Exists(parentDir.FullName))
-                {
-                    Directory.CreateDirectory(parentDir.FullName);
-                }
-                // 🔹 Sao chép file vào thư mục đích (ghi đè nếu đã tồn tại)
+                // Sao chép file
                 File.Copy(filePath, destPath, true);
 
-                // 🔹 Thêm vào bảng Attachment
-                int attId = dm_AttachmentBUS.Instance.Add(attachment);
+                // Lưu attachment → lấy Id
+                stdAtt.AttId = dm_AttachmentBUS.Instance.Add(attachment);
 
-                // 🔹 Lấy invoice hiện tại trên GridView
-                GridView view = gvData;
-                object idValue = view.GetRowCellValue(view.FocusedRowHandle, gColId);
-                if (idValue == null)
-                {
-                    XtraMessageBox.Show("Không tìm thấy chuẩn được chọn.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+                // Lưu StandardAtt
+                dt403_05_StandardAttBUS.Instance.Add(stdAtt);
 
                 LoadData();
-                XtraMessageBox.Show("Đã tải chuẩn thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
         DXMenuItem CreateMenuItem(string caption, EventHandler clickEvent, SvgImage svgImage)
@@ -158,6 +161,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
                 helper.SaveViewInfo();
                 dt403_05_Standards = dt403_05_StandardBUS.Instance.GetList();
                 dt403_05_StandardAtts = dt403_05_StandardAttBUS.Instance.GetList();
+                attachments = dm_AttachmentBUS.Instance.GetListByThread("40305");
                 var Display = from STD in dt403_05_Standards
                               select new
                               {
@@ -166,6 +170,19 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
                                   DisplayNameTW = STD.DisplayNameTW,
                                   DisplayNameVN = STD.DisplayNameVN,
                               };
+                //var Display = from STD in dt403_05_Standards
+                //              join STDAtts in dt403_05_StandardAtts on STD.Id equals STDAtts.StandardId
+                //              join ATT in attachments on STDAtts.AttId equals ATT.Id
+                //              select new
+                //              {
+                //                  Id = STD.Id,
+                //                  SN = STD.SN,
+                //                  DisplayNameTW = STD.DisplayNameTW,
+                //                  DisplayNameVN = STD.DisplayNameVN,
+                //                  AttId = STDAtts.AttId,
+                //                  ActualName = ATT.ActualName,
+                //                  //EncryptionName = ATT.EncryptionName,
+                //              };
                 sourceBases.DataSource = Display;
                 helper.LoadViewInfo();
 
@@ -232,21 +249,31 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
         {
             e.RelationName = "表單";
         }
+        private void gvData_MasterRowEmpty(object sender, MasterRowEmptyEventArgs e)
+        {
+            GridView view = sender as GridView;
+            int idBase = view.GetRowCellValue(e.RowHandle, gColId) != null ? (int)view.GetRowCellValue(e.RowHandle, gColId) : -1;
+
+            e.IsEmpty = !dt403_05_StandardAtts.Any(r => r.StandardId == idBase);
+        }
 
         private void gvData_MasterRowGetChildList(object sender, MasterRowGetChildListEventArgs e)
         {
             GridView view = sender as GridView;
             int idBase = (int)view.GetRowCellValue(e.RowHandle, gColId);
 
-            e.ChildList = dt403_05_StandardAtts.Where(r => r.StandardId == idBase).ToList();
-        }
-
-        private void gvData_MasterRowEmpty(object sender, MasterRowEmptyEventArgs e)
-        {
-            GridView view = sender as GridView;
-            int idBase = view.GetRowCellValue(e.RowHandle, gColId) != null ? (int)view.GetRowCellValue(e.RowHandle, gColId) : -1;
-
-            e.IsEmpty = !dt403_05_StandardAtts.Any(r => r.Id == idBase);
+            var DisplayGvFrom = from stdAtt in dt403_05_StandardAtts
+                                join att in attachments on stdAtt.AttId equals att.Id
+                                where stdAtt.StandardId == idBase
+                                select new
+                                {
+                                    UploadDate = stdAtt.UploadDate,//.ToString("yyyy/MM/dd HH:mm:ss"),
+                                    ConfirmDate = stdAtt.ConfirmDate,//?.ToString("yyyy/MM/dd HH:mm:ss"),
+                                    FinishDate = stdAtt.FinishDate,//?.ToString("yyyy/MM/dd HH:mm:ss"),
+                                    Name = att.ActualName,
+                                    AttId = att.Id,
+                                };
+            e.ChildList = DisplayGvFrom.ToList();
         }
 
         private void gvData_MasterRowExpanded(object sender, CustomMasterRowEventArgs e)

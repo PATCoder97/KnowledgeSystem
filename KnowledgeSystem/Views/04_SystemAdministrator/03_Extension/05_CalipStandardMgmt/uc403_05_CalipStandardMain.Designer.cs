@@ -34,7 +34,10 @@
             this.gvForm = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColIdAttForm = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcolUploadDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcolConfirmDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcolFinishDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcolActualName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcData = new DevExpress.XtraGrid.GridControl();
             this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gColId = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -89,14 +92,16 @@
             this.gvForm.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumn1,
             this.gColIdAttForm,
-            this.gridColumn13});
+            this.gcolUploadDate,
+            this.gcolConfirmDate,
+            this.gcolFinishDate,
+            this.gcolActualName});
             this.gvForm.GridControl = this.gcData;
             this.gvForm.Name = "gvForm";
             this.gvForm.OptionsCustomization.AllowFilter = false;
             this.gvForm.OptionsCustomization.AllowGroup = false;
             this.gvForm.OptionsCustomization.AllowSort = false;
             this.gvForm.OptionsView.ColumnAutoWidth = false;
-            this.gvForm.OptionsView.ShowColumnHeaders = false;
             this.gvForm.OptionsView.ShowGroupPanel = false;
             this.gvForm.OptionsView.ShowIndicator = false;
             this.gvForm.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
@@ -114,14 +119,40 @@
             this.gColIdAttForm.Caption = "IdAtt";
             this.gColIdAttForm.FieldName = "AttId";
             this.gColIdAttForm.Name = "gColIdAttForm";
+            this.gColIdAttForm.Visible = true;
+            this.gColIdAttForm.VisibleIndex = 4;
             // 
-            // gridColumn13
+            // gcolUploadDate
             // 
-            this.gridColumn13.Caption = "gridColumn13";
-            this.gridColumn13.FieldName = "UploadDate";
-            this.gridColumn13.Name = "gridColumn13";
-            this.gridColumn13.Visible = true;
-            this.gridColumn13.VisibleIndex = 0;
+            this.gcolUploadDate.Caption = "UploadDate";
+            this.gcolUploadDate.FieldName = "UploadDate";
+            this.gcolUploadDate.Name = "gcolUploadDate";
+            this.gcolUploadDate.Visible = true;
+            this.gcolUploadDate.VisibleIndex = 0;
+            // 
+            // gcolConfirmDate
+            // 
+            this.gcolConfirmDate.Caption = "ConfirmDate";
+            this.gcolConfirmDate.FieldName = "ConfirmDate";
+            this.gcolConfirmDate.Name = "gcolConfirmDate";
+            this.gcolConfirmDate.Visible = true;
+            this.gcolConfirmDate.VisibleIndex = 1;
+            // 
+            // gcolFinishDate
+            // 
+            this.gcolFinishDate.Caption = "FinishDate";
+            this.gcolFinishDate.FieldName = "FinishDate";
+            this.gcolFinishDate.Name = "gcolFinishDate";
+            this.gcolFinishDate.Visible = true;
+            this.gcolFinishDate.VisibleIndex = 2;
+            // 
+            // gcolActualName
+            // 
+            this.gcolActualName.Caption = "ActualName";
+            this.gcolActualName.FieldName = "Name";
+            this.gcolActualName.Name = "gcolActualName";
+            this.gcolActualName.Visible = true;
+            this.gcolActualName.VisibleIndex = 3;
             // 
             // gcData
             // 
@@ -502,7 +533,7 @@
         private DevExpress.XtraGrid.Views.Grid.GridView gvForm;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn gColIdAttForm;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
+        private DevExpress.XtraGrid.Columns.GridColumn gcolUploadDate;
         private DevExpress.XtraGrid.Views.Grid.GridView gvData;
         private DevExpress.XtraGrid.Columns.GridColumn gColId;
         private DevExpress.XtraGrid.Columns.GridColumn gColIdAtt;
@@ -518,5 +549,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn gColDeptId;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraGrid.Columns.GridColumn gcolConfirmDate;
+        private DevExpress.XtraGrid.Columns.GridColumn gcolFinishDate;
+        private DevExpress.XtraGrid.Columns.GridColumn gcolActualName;
     }
 }
