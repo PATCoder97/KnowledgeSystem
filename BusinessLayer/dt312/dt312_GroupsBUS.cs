@@ -30,7 +30,23 @@ namespace BusinessLayer
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dt312_Groups.ToList();
+                    return _context.dt312_Groups.Where(r => string.IsNullOrEmpty(r.RemoveAt.ToString())).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
+        public List<dt312_Groups> GetListIsRemove()
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt312_Groups.Where(r => !string.IsNullOrEmpty(r.RemoveAt.ToString())).ToList();
                 }
             }
             catch (Exception ex)
