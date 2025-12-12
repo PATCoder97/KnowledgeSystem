@@ -106,6 +106,7 @@
             this.gvForm.OptionsView.ShowIndicator = false;
             this.gvForm.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
             new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gridColumn1, DevExpress.Data.ColumnSortOrder.Descending)});
+            this.gvForm.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gvForm_PopupMenuShowing);
             this.gvForm.DoubleClick += new System.EventHandler(this.gvForm_DoubleClick);
             // 
             // gridColumn1

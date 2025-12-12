@@ -67,19 +67,70 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
         {
             itemViewInfo = CreateMenuItem("查看資訊", ItemViewInfo_Click, TPSvgimages.View);
             itemUpdateVer = CreateMenuItem("更新版本", ItemUpdateVer_Click, TPSvgimages.UpLevel);
-            itemConfirmdate = CreateMenuItem("確認日期", ItemConfirmdate_Click, TPSvgimages.Attach);
-            itemFinishdate = CreateMenuItem("完成日期", ItemFinishdate_Click, TPSvgimages.Suspension);
+            itemConfirmdate = CreateMenuItem("確認日期", ItemConfirmdate_Click, TPSvgimages.Num1);
+            itemFinishdate = CreateMenuItem("完成日期", ItemFinishdate_Click, TPSvgimages.Num2);
             //itemViewHistory = CreateMenuItem("版本歷史", ItemViewHistory_Click, TPSvgimages.Progress);
         }
 
         private void ItemConfirmdate_Click(object sender, EventArgs e)
         {
-            XtraMessageBoxArgs args = new XtraMessageBoxArgs()
-            { Caption = "ConfirmDate", Text = "Bạn xác nhận đã cập nhật chuẩn ", Buttons = new DialogResult[] { DialogResult.Yes, DialogResult.No } };
+            
+            GridView activeView = gcData.FocusedView as GridView;
+            if (activeView == null) return;
+            if (activeView.FocusedRowHandle < 0) return;
+
+            // Lấy ID của bản ghi trong bảng dt403_05_StandardAtt
+            int idBase = Convert.ToInt32(activeView.GetRowCellValue(activeView.FocusedRowHandle, gColIdAttForm));
+            // Hộp thoại xác nhận
+            DialogResult result = XtraMessageBox.Show(
+                "Bạn xác nhận đã cập nhật chuẩn?",
+                "ConfirmDate",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result != DialogResult.Yes)
+                return;
+
+            // Lấy dữ liệu từ DB
+            var stdAtt = dt403_05_StandardAttBUS.Instance.GetItemByIdatt(idBase);
+
+            // Ghi ngày xác nhận
+            stdAtt.ConfirmDate = DateTime.Now;
+
+            // Lưu vào DB
+            dt403_05_StandardAttBUS.Instance.AddOrUpdate(stdAtt);
+
+            LoadData();
         }
 
         private void ItemFinishdate_Click(object sender, EventArgs e)
         {
+            GridView activeView = gcData.FocusedView as GridView;
+            if (activeView == null) return;
+            if (activeView.FocusedRowHandle < 0) return;
+
+            // Lấy ID của bản ghi trong bảng dt403_05_StandardAtt
+            int idBase = Convert.ToInt32(activeView.GetRowCellValue(activeView.FocusedRowHandle, gColIdAttForm));
+            // Hộp thoại xác nhận
+            DialogResult result = XtraMessageBox.Show(
+                "Bạn xác nhận đã hoàn thành cập nhật chuẩn?",
+                "ConfirmDate",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result != DialogResult.Yes)
+                return;
+
+            // Lấy dữ liệu từ DB
+            var stdAtt = dt403_05_StandardAttBUS.Instance.GetItemByIdatt(idBase);
+
+            // Ghi ngày xác nhận
+            stdAtt.FinishDate = DateTime.Now;
+
+            // Lưu vào DB
+            dt403_05_StandardAttBUS.Instance.AddOrUpdate(stdAtt);
+
+            LoadData();
         }
 
         private void ItemViewInfo_Click(object sender, EventArgs e)
@@ -106,7 +157,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
                 GridView view = gvData;
                 int idBase = Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, gColId));
                 // Lấy bản ghi StandardAtt nếu có
-                var stdAtt = new dt403_05_StandardAtt { StandardId = idBase,UploadDate = DateTime.Now };
+                var stdAtt = new dt403_05_StandardAtt { StandardId = idBase,UploadDate = DateTime.Now};
 
                 // ---- Xử lý file ----
                 string filePath = dlg.FileName;
@@ -223,13 +274,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
             {
                 GridView view = sender as GridView;
                 view.FocusedRowHandle = e.HitInfo.RowHandle;
-                //string idDept = view.GetRowCellValue(view.FocusedRowHandle, gColId).ToString();
-
-                //if (deptsManager40305.Any(r => r == idDept))
-                //{
-                //    e.Menu.Items.Add(itemViewInfo);
-                //    e.Menu.Items.Add(itemUpdateVer);
-                //}
                     e.Menu.Items.Add(itemViewInfo);
                     e.Menu.Items.Add(itemUpdateVer);
             }
@@ -271,7 +315,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
                                     ConfirmDate = stdAtt.ConfirmDate,//?.ToString("yyyy/MM/dd HH:mm:ss"),
                                     FinishDate = stdAtt.FinishDate,//?.ToString("yyyy/MM/dd HH:mm:ss"),
                                     Name = att.ActualName,
-                                    AttId = att.Id,
+                                    AttId = stdAtt.AttId,
                                 };
             e.ChildList = DisplayGvFrom.ToList();
         }
@@ -312,6 +356,18 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
                 mainForm.Show();
 
             mainForm.OpenFormInDocumentManager(destPath);
+        }
+
+        private void gvForm_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
+        {
+            if (e.HitInfo.InRowCell && e.HitInfo.InDataRow)// && isManager40305)
+            {
+                GridView view = sender as GridView;
+                view.FocusedRowHandle = e.HitInfo.RowHandle;
+
+                e.Menu.Items.Add(itemConfirmdate);
+                e.Menu.Items.Add(itemFinishdate);
+            }
         }
     }
 }

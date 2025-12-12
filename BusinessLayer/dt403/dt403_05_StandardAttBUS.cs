@@ -55,6 +55,21 @@ namespace BusinessLayer
                 throw;
             }
         }
+        public dt403_05_StandardAtt GetItemByIdatt(int id)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt403_05_StandardAtt.FirstOrDefault(r => r.AttId == id);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
 
         public bool Add(dt403_05_StandardAtt item)
         {
