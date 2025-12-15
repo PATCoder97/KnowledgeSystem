@@ -120,12 +120,10 @@
             this.gColIdAttForm.Caption = "IdAtt";
             this.gColIdAttForm.FieldName = "AttId";
             this.gColIdAttForm.Name = "gColIdAttForm";
-            this.gColIdAttForm.Visible = true;
-            this.gColIdAttForm.VisibleIndex = 4;
             // 
             // gcolUploadDate
             // 
-            this.gcolUploadDate.Caption = "UploadDate";
+            this.gcolUploadDate.Caption = "上傳日期";
             this.gcolUploadDate.FieldName = "UploadDate";
             this.gcolUploadDate.Name = "gcolUploadDate";
             this.gcolUploadDate.Visible = true;
@@ -133,7 +131,7 @@
             // 
             // gcolConfirmDate
             // 
-            this.gcolConfirmDate.Caption = "ConfirmDate";
+            this.gcolConfirmDate.Caption = "確認日期";
             this.gcolConfirmDate.FieldName = "ConfirmDate";
             this.gcolConfirmDate.Name = "gcolConfirmDate";
             this.gcolConfirmDate.Visible = true;
@@ -141,7 +139,7 @@
             // 
             // gcolFinishDate
             // 
-            this.gcolFinishDate.Caption = "FinishDate";
+            this.gcolFinishDate.Caption = "完成日期";
             this.gcolFinishDate.FieldName = "FinishDate";
             this.gcolFinishDate.Name = "gcolFinishDate";
             this.gcolFinishDate.Visible = true;
@@ -149,7 +147,7 @@
             // 
             // gcolActualName
             // 
-            this.gcolActualName.Caption = "ActualName";
+            this.gcolActualName.Caption = "檔案名稱";
             this.gcolActualName.FieldName = "Name";
             this.gcolActualName.Name = "gcolActualName";
             this.gcolActualName.Visible = true;
@@ -229,8 +227,6 @@
             this.gColId.Caption = "Std.Id";
             this.gColId.FieldName = "Id";
             this.gColId.Name = "gColId";
-            this.gColId.Visible = true;
-            this.gColId.VisibleIndex = 3;
             this.gColId.Width = 91;
             // 
             // gColIdAtt
@@ -268,10 +264,11 @@
             // 
             // gridColumn16
             // 
-            this.gridColumn16.Caption = "SN";
+            this.gridColumn16.Caption = "出廠編號";
             this.gridColumn16.FieldName = "SN";
             this.gridColumn16.MaxWidth = 300;
             this.gridColumn16.Name = "gridColumn16";
+            this.gridColumn16.OptionsFilter.AllowFilter = false;
             this.gridColumn16.Visible = true;
             this.gridColumn16.VisibleIndex = 0;
             this.gridColumn16.Width = 102;
@@ -403,6 +400,7 @@
             this.btnExportExcel.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExportExcel.ItemAppearance.Normal.Options.UseFont = true;
             this.btnExportExcel.Name = "btnExportExcel";
+            this.btnExportExcel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExportExcel_ItemClick);
             // 
             // barDockControlTop
             // 

@@ -124,7 +124,24 @@ namespace BusinessLayer
                 return false;
             }
         }
-
+        public bool Remove(int id)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    var itemRemove = _context.dt403_05_StandardAtt.FirstOrDefault(r => r.AttId == id);
+                    _context.dt403_05_StandardAtt.Remove(itemRemove);
+                    int affectedRecords = _context.SaveChanges();
+                    return affectedRecords > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
         public bool RemoveById(int id, string userRemove)
         {
             try

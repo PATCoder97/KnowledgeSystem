@@ -42,6 +42,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
             System.Drawing.Font fontUI12 = new System.Drawing.Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             DevExpress.Utils.AppearanceObject.DefaultMenuFont = fontUI12;
         }
+
         RefreshHelper helper;
         BindingSource sourceBases = new BindingSource();
         bool isManager40305 = false;
@@ -52,11 +53,12 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
         List<dt403_05_StandardAtt> dt403_05_StandardAtts;
         List<dm_Attachment> attachments;
         string picImage = "";
+
         DXMenuItem itemViewInfo;
         DXMenuItem itemUpdateVer;
         DXMenuItem itemConfirmdate;
         DXMenuItem itemFinishdate;
-        DXMenuItem itemViewHistory;
+        DXMenuItem itemRemove;
         private class Attachment : dm_Attachment
         {
             public string PathFile { get; set; }
@@ -66,10 +68,23 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
         private void InitializeMenuItems()
         {
             itemViewInfo = CreateMenuItem("查看資訊", ItemViewInfo_Click, TPSvgimages.View);
-            itemUpdateVer = CreateMenuItem("更新版本", ItemUpdateVer_Click, TPSvgimages.UpLevel);
-            itemConfirmdate = CreateMenuItem("確認日期", ItemConfirmdate_Click, TPSvgimages.Num1);
-            itemFinishdate = CreateMenuItem("完成日期", ItemFinishdate_Click, TPSvgimages.Num2);
-            //itemViewHistory = CreateMenuItem("版本歷史", ItemViewHistory_Click, TPSvgimages.Progress);
+            itemUpdateVer = CreateMenuItem("上傳證書", ItemUpdateVer_Click, TPSvgimages.Attach);
+            itemConfirmdate = CreateMenuItem("確認日期", ItemConfirmdate_Click, TPSvgimages.Confirm);
+            itemFinishdate = CreateMenuItem("完成日期", ItemFinishdate_Click, TPSvgimages.Confirm);
+            itemRemove = CreateMenuItem("刪除證書", ItemRemove_Click, TPSvgimages.Remove);
+        }
+
+        private void ItemRemove_Click(object sender, EventArgs e)
+        {
+            GridView activeView = gcData.FocusedView as GridView;
+            if (activeView == null) return;
+            if (activeView.FocusedRowHandle < 0) return;
+
+            // Lấy ID của bản ghi trong bảng dt403_05_StandardAtt
+            int idBase = Convert.ToInt32(activeView.GetRowCellValue(activeView.FocusedRowHandle, gColIdAttForm));
+
+            dt403_05_StandardAttBUS.Instance.Remove(idBase);
+            LoadData();
         }
 
         private void ItemConfirmdate_Click(object sender, EventArgs e)
@@ -83,8 +98,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
             int idBase = Convert.ToInt32(activeView.GetRowCellValue(activeView.FocusedRowHandle, gColIdAttForm));
             // Hộp thoại xác nhận
             DialogResult result = XtraMessageBox.Show(
-                "Bạn xác nhận đã cập nhật chuẩn?",
-                "ConfirmDate",
+                "您確認已更新標準嗎？",
+                "確認日期",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question);
 
@@ -113,8 +128,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
             int idBase = Convert.ToInt32(activeView.GetRowCellValue(activeView.FocusedRowHandle, gColIdAttForm));
             // Hộp thoại xác nhận
             DialogResult result = XtraMessageBox.Show(
-                "Bạn xác nhận đã hoàn thành cập nhật chuẩn?",
-                "ConfirmDate",
+                    "您確認已完成標準的更新嗎？",
+                "確認日期",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question);
 
@@ -177,10 +192,16 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
 
                 // Sao chép file
                 File.Copy(filePath, destPath, true);
-
+                DialogResult result = XtraMessageBox.Show(
+                    "您確定要更新此檔案嗎？",
+                    "更新檔案",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+                if (result != DialogResult.Yes)
+                    return;
                 // Lưu attachment → lấy Id
                 stdAtt.AttId = dm_AttachmentBUS.Instance.Add(attachment);
-
+                
                 // Lưu StandardAtt
                 dt403_05_StandardAttBUS.Instance.Add(stdAtt);
 
@@ -221,26 +242,13 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
                                   DisplayNameTW = STD.DisplayNameTW,
                                   DisplayNameVN = STD.DisplayNameVN,
                               };
-                //var Display = from STD in dt403_05_Standards
-                //              join STDAtts in dt403_05_StandardAtts on STD.Id equals STDAtts.StandardId
-                //              join ATT in attachments on STDAtts.AttId equals ATT.Id
-                //              select new
-                //              {
-                //                  Id = STD.Id,
-                //                  SN = STD.SN,
-                //                  DisplayNameTW = STD.DisplayNameTW,
-                //                  DisplayNameVN = STD.DisplayNameVN,
-                //                  AttId = STDAtts.AttId,
-                //                  ActualName = ATT.ActualName,
-                //                  //EncryptionName = ATT.EncryptionName,
-                //              };
-                sourceBases.DataSource = Display;
-                helper.LoadViewInfo();
 
+                sourceBases.DataSource = Display;
                 gvData.BestFitColumns();
                 gvData.CollapseAllDetails();
 
                 gvData.FocusedRowHandle = GridControl.AutoFilterRowHandle;
+                helper.LoadViewInfo();
             }
         }
         private void uc403_05_CalipStandardMain_Load(object sender, EventArgs e)
@@ -293,6 +301,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
         {
             e.RelationName = "表單";
         }
+
         private void gvData_MasterRowEmpty(object sender, MasterRowEmptyEventArgs e)
         {
             GridView view = sender as GridView;
@@ -362,12 +371,44 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
         {
             if (e.HitInfo.InRowCell && e.HitInfo.InDataRow)// && isManager40305)
             {
-                GridView view = sender as GridView;
-                view.FocusedRowHandle = e.HitInfo.RowHandle;
+                var gridView = sender as GridView;
+                gridView.FocusedRowHandle = e.HitInfo.RowHandle;
+                //Lấy giá trị ConfirmDate và FinishDate
+                var confirmDate = gridView.GetRowCellValue(gridView.FocusedRowHandle, "ConfirmDate")?.ToString();
+                var finishDate = gridView.GetRowCellValue(gridView.FocusedRowHandle, "FinishDate")?.ToString();
 
-                e.Menu.Items.Add(itemConfirmdate);
-                e.Menu.Items.Add(itemFinishdate);
+                bool isConfirmDateSet = !string.IsNullOrEmpty(confirmDate);
+                bool isFinishDateSet = !string.IsNullOrEmpty(finishDate);
+
+                //Lấy người dùng để lọc
+                int idGroup1 = dm_GroupBUS.Instance.GetItemByName("校正小組")?.Id ?? -1; ///Nhóm hiệu chuẩn
+                var usersInGroup = dm_GroupUserBUS.Instance.GetListByIdGroup(idGroup1);
+
+                int idGroup2 = dm_GroupBUS.Instance.GetItemByName("二級7820")?.Id ?? -1; // nhóm cấp 2 
+                var usersInGroup2 = dm_GroupUserBUS.Instance.GetListByIdGroup(idGroup2);
+
+                if (usersInGroup.Any(u => u.IdUser == TPConfigs.LoginUser.Id) && !isConfirmDateSet)
+                {
+                    e.Menu.Items.Add(itemConfirmdate);
+                    e.Menu.Items.Add(itemRemove);
+                }
+                else if (isConfirmDateSet && !isFinishDateSet && usersInGroup2.Any(u => u.IdUser == TPConfigs.LoginUser.Id))
+                {
+                    e.Menu.Items.Add(itemFinishdate);
+                    e.Menu.Items.Add(itemRemove);
+                }
             }
+        }
+        private void btnExportExcel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            string documentsPath = TPConfigs.DocumentPath();
+            if (!Directory.Exists(documentsPath))
+                Directory.CreateDirectory(documentsPath);
+
+            string filePath = Path.Combine(documentsPath, $"考試系統 - {DateTime.Now:yyyyMMddHHmm}.xlsx");
+
+            gcData.ExportToXlsx(filePath);
+            Process.Start(filePath);
         }
     }
 }
