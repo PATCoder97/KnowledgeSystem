@@ -40,6 +40,22 @@ namespace BusinessLayer
             }
         }
 
+        public List<dt403_05_StandardAtt> GetListNotify()
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt403_05_StandardAtt.Where(r => string.IsNullOrEmpty(r.ConfirmDate.ToString()) || string.IsNullOrEmpty(r.FinishDate.ToString())).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public dt403_05_StandardAtt GetItemById(int id)
         {
             try
@@ -162,6 +178,6 @@ namespace BusinessLayer
                 logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
                 throw;
             }
-        } 
         }
+    }
 }

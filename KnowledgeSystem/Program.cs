@@ -122,7 +122,7 @@ namespace KnowledgeSystem
 #if DEBUG
                 new AppCopyRight() { Version = "8.8.8.DEV" };
 
-                TPConfigs.LoginUser = dm_UserBUS.Instance.GetItemById("VNW0018616");
+                TPConfigs.LoginUser = dm_UserBUS.Instance.GetItemById("VNW0014732");
                 //TPConfigs.LoginUser = dm_UserBUS.Instance.GetItemById("VNW0003688");
                 TPConfigs.idDept2word = TPConfigs.LoginUser.IdDepartment.Substring(0, 2);
                 AppPermission.Instance.CheckAppPermission(7);
