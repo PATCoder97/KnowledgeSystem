@@ -66,6 +66,9 @@
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.gcolUploadUser = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcolConfirmUser = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcolFinishUser = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gvForm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
@@ -95,7 +98,10 @@
             this.gcolUploadDate,
             this.gcolConfirmDate,
             this.gcolFinishDate,
-            this.gcolActualName});
+            this.gcolActualName,
+            this.gcolUploadUser,
+            this.gcolConfirmUser,
+            this.gcolFinishUser});
             this.gvForm.GridControl = this.gcData;
             this.gvForm.Name = "gvForm";
             this.gvForm.OptionsCustomization.AllowFilter = false;
@@ -135,7 +141,7 @@
             this.gcolConfirmDate.FieldName = "ConfirmDate";
             this.gcolConfirmDate.Name = "gcolConfirmDate";
             this.gcolConfirmDate.Visible = true;
-            this.gcolConfirmDate.VisibleIndex = 1;
+            this.gcolConfirmDate.VisibleIndex = 2;
             // 
             // gcolFinishDate
             // 
@@ -143,7 +149,7 @@
             this.gcolFinishDate.FieldName = "FinishDate";
             this.gcolFinishDate.Name = "gcolFinishDate";
             this.gcolFinishDate.Visible = true;
-            this.gcolFinishDate.VisibleIndex = 2;
+            this.gcolFinishDate.VisibleIndex = 4;
             // 
             // gcolActualName
             // 
@@ -151,7 +157,7 @@
             this.gcolActualName.FieldName = "Name";
             this.gcolActualName.Name = "gcolActualName";
             this.gcolActualName.Visible = true;
-            this.gcolActualName.VisibleIndex = 3;
+            this.gcolActualName.VisibleIndex = 6;
             // 
             // gcData
             // 
@@ -488,6 +494,30 @@
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
+            // gcolUploadUser
+            // 
+            this.gcolUploadUser.Caption = "上傳人";
+            this.gcolUploadUser.FieldName = "UploadUser";
+            this.gcolUploadUser.Name = "gcolUploadUser";
+            this.gcolUploadUser.Visible = true;
+            this.gcolUploadUser.VisibleIndex = 1;
+            // 
+            // gcolConfirmUser
+            // 
+            this.gcolConfirmUser.Caption = "確認人";
+            this.gcolConfirmUser.FieldName = "ConfirmUser";
+            this.gcolConfirmUser.Name = "gcolConfirmUser";
+            this.gcolConfirmUser.Visible = true;
+            this.gcolConfirmUser.VisibleIndex = 3;
+            // 
+            // gcolFinishUser
+            // 
+            this.gcolFinishUser.Caption = "結案人";
+            this.gcolFinishUser.FieldName = "FinishUser";
+            this.gcolFinishUser.Name = "gcolFinishUser";
+            this.gcolFinishUser.Visible = true;
+            this.gcolFinishUser.VisibleIndex = 5;
+            // 
             // uc403_05_CalipStandardMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -551,5 +581,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcolConfirmDate;
         private DevExpress.XtraGrid.Columns.GridColumn gcolFinishDate;
         private DevExpress.XtraGrid.Columns.GridColumn gcolActualName;
+        private DevExpress.XtraGrid.Columns.GridColumn gcolUploadUser;
+        private DevExpress.XtraGrid.Columns.GridColumn gcolConfirmUser;
+        private DevExpress.XtraGrid.Columns.GridColumn gcolFinishUser;
     }
 }

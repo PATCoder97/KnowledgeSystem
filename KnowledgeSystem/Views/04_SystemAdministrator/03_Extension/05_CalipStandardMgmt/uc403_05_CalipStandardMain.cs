@@ -52,6 +52,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
         List<dt403_05_Standard> dt403_05_Standards;
         List<dt403_05_StandardAtt> dt403_05_StandardAtts;
         List<dm_Attachment> attachments;
+        List<dm_User> dm_Users;
         string picImage = "";
 
         DXMenuItem itemViewInfo;
@@ -111,6 +112,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
 
             // Ghi ngày xác nhận
             stdAtt.ConfirmDate = DateTime.Now;
+            stdAtt.ConfirmUser = TPConfigs.LoginUser.Id;
 
             // Lưu vào DB
             dt403_05_StandardAttBUS.Instance.AddOrUpdate(stdAtt);
@@ -141,6 +143,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
 
             // Ghi ngày xác nhận
             stdAtt.FinishDate = DateTime.Now;
+            stdAtt.FinishUser = TPConfigs.LoginUser.Id;
 
             // Lưu vào DB
             dt403_05_StandardAttBUS.Instance.AddOrUpdate(stdAtt);
@@ -201,7 +204,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
                     return;
                 // Lưu attachment → lấy Id
                 stdAtt.AttId = dm_AttachmentBUS.Instance.Add(attachment);
-                
+                stdAtt.UploadUser = TPConfigs.LoginUser.Id;
                 // Lưu StandardAtt
                 dt403_05_StandardAttBUS.Instance.Add(stdAtt);
 
@@ -314,19 +317,35 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
         {
             GridView view = sender as GridView;
             int idBase = (int)view.GetRowCellValue(e.RowHandle, gColId);
+            dm_Users = dm_UserBUS.Instance.GetList();
+            var displayGvFrom =
+                               from stdAtt in dt403_05_StandardAtts
+                               join att in attachments on stdAtt.AttId equals att.Id
 
-            var DisplayGvFrom = from stdAtt in dt403_05_StandardAtts
-                                join att in attachments on stdAtt.AttId equals att.Id
-                                where stdAtt.StandardId == idBase
-                                select new
-                                {
-                                    UploadDate = stdAtt.UploadDate,//.ToString("yyyy/MM/dd HH:mm:ss"),
-                                    ConfirmDate = stdAtt.ConfirmDate,//?.ToString("yyyy/MM/dd HH:mm:ss"),
-                                    FinishDate = stdAtt.FinishDate,//?.ToString("yyyy/MM/dd HH:mm:ss"),
-                                    Name = att.ActualName,
-                                    AttId = stdAtt.AttId,
-                                };
-            e.ChildList = DisplayGvFrom.ToList();
+                               join u in dm_Users on stdAtt.UploadUser equals u.Id into up
+                               from uploadUser in up.DefaultIfEmpty()
+
+                               join c in dm_Users on stdAtt.ConfirmUser equals c.Id into cf
+                               from confirmUser in cf.DefaultIfEmpty()
+
+                               join f in dm_Users on stdAtt.FinishUser equals f.Id into fn
+                               from finishUser in fn.DefaultIfEmpty()
+
+                               where stdAtt.StandardId == idBase
+                               select new
+                                       {
+                                           UploadUser = uploadUser?.DisplayName,
+                                           ConfirmUser = confirmUser?.DisplayName,
+                                           FinishUser = finishUser?.DisplayName,
+
+                                           UploadDate = stdAtt.UploadDate,
+                                           ConfirmDate = stdAtt.ConfirmDate,
+                                           FinishDate = stdAtt.FinishDate,
+
+                                           Name = att.ActualName,
+                                           AttId = stdAtt.AttId
+                                       };
+            e.ChildList = displayGvFrom.ToList();
         }
 
         private void gvData_MasterRowExpanded(object sender, CustomMasterRowEventArgs e)

@@ -20,5 +20,8 @@ namespace DataAccessLayer
         public System.DateTime UploadDate { get; set; }
         public Nullable<System.DateTime> ConfirmDate { get; set; }
         public Nullable<System.DateTime> FinishDate { get; set; }
+        public string UploadUser { get; set; }
+        public string ConfirmUser { get; set; }
+        public string FinishUser { get; set; }
     }
 }
