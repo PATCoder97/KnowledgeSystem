@@ -140,6 +140,29 @@ namespace BusinessLayer
                 return false;
             }
         }
+
+        public bool Update(int id)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    var entity = _context.dt403_05_StandardAtt.FirstOrDefault(r => r.AttId == id);
+                    entity.ConfirmDate = null;
+                    entity.ConfirmUser = null;
+                    //context.dt403_05_StandardAtt.AddOrUpdate(entity);
+
+                    int affectedRecords = _context.SaveChanges();
+                    return affectedRecords > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                return false;
+            }
+        }
+
         public bool Remove(int id)
         {
             try

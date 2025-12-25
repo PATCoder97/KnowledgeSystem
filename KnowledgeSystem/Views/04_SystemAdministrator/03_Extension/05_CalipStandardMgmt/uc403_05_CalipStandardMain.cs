@@ -60,6 +60,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
         DXMenuItem itemConfirmdate;
         DXMenuItem itemFinishdate;
         DXMenuItem itemRemove;
+        DXMenuItem itemCacelProgress;
         private class Attachment : dm_Attachment
         {
             public string PathFile { get; set; }
@@ -73,6 +74,20 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
             itemConfirmdate = CreateMenuItem("確認日期", ItemConfirmdate_Click, TPSvgimages.Confirm);
             itemFinishdate = CreateMenuItem("完成日期", ItemFinishdate_Click, TPSvgimages.Confirm);
             itemRemove = CreateMenuItem("刪除證書", ItemRemove_Click, TPSvgimages.Remove);
+            itemCacelProgress = CreateMenuItem("退回", ItemCacelProgress_Click, TPSvgimages.Cancel);
+        }
+
+        private void ItemCacelProgress_Click(object sender, EventArgs e)
+        {
+            GridView activeView = gcData.FocusedView as GridView;
+            if (activeView == null) return;
+            if (activeView.FocusedRowHandle < 0) return;
+
+            // Lấy ID của bản ghi trong bảng dt403_05_StandardAtt
+            int idBase = Convert.ToInt32(activeView.GetRowCellValue(activeView.FocusedRowHandle, gColIdAttForm));
+
+            dt403_05_StandardAttBUS.Instance.Update(idBase);
+            LoadData();
         }
 
         private void ItemRemove_Click(object sender, EventArgs e)
@@ -84,7 +99,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
             // Lấy ID của bản ghi trong bảng dt403_05_StandardAtt
             int idBase = Convert.ToInt32(activeView.GetRowCellValue(activeView.FocusedRowHandle, gColIdAttForm));
 
-            dt403_05_StandardAttBUS.Instance.Remove(idBase);
+            dt403_05_StandardAttBUS.Instance.Update(idBase);
             LoadData();
         }
 
@@ -414,7 +429,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
                 else if (isConfirmDateSet && !isFinishDateSet && usersInGroup2.Any(u => u.IdUser == TPConfigs.LoginUser.Id))
                 {
                     e.Menu.Items.Add(itemFinishdate);
-                    e.Menu.Items.Add(itemRemove);
+                  //  e.Menu.Items.Add(itemRemove);
+                    e.Menu.Items.Add(itemCacelProgress);
                 }
             }
         }
