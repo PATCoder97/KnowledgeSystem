@@ -281,6 +281,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             // Lấy dữ liệu từ control uc311_MoreInfo
             string description = ucInfo.Desc;
             string code = ucInfo.Code ?? "";
+            string costDept = ucInfo.Dept ?? TPConfigs.LoginUser.IdDepartment;
 
             // Kiểm tra dữ liệu hợp lệ (ví dụ)
             if (string.IsNullOrWhiteSpace(description))
@@ -293,17 +294,15 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             const string TAB = "{Tab}";
 
             dt311_Invoice firstInvoice = selectedInvoices.First();
-            string deptMain = TPConfigs.LoginUser.IdDepartment;
             string sellerTax = firstInvoice.SellerTax;
             string buyerTax = firstInvoice.BuyerTax;
 
             string prefixKey = string.Join(TAB, new string[]
             {
                 "LG", "",
-                deptMain, "",
+                costDept, "",
                 "2",
-                "W",
-                code, "", "", "", "", "",
+                $"W{code}", "", "", "", "", "",
                 sellerTax,
                 buyerTax,
                 "A1",
@@ -313,12 +312,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             //====== 組合發票資料字串 / Build Invoice Data String ======
             IEnumerable<string> invoiceDataStrings = selectedInvoices.Select(invoice =>
             {
-                var vehicleInfo = dt311_VehicleManagementBUS.Instance.GetItemById(invoice.LicensePlate);
-                string deptSub = vehicleInfo != null ? vehicleInfo.IdDept : TPConfigs.LoginUser.IdDepartment;
+                //var vehicleInfo = dt311_VehicleManagementBUS.Instance.GetItemById(invoice.LicensePlate);
+                //string deptSub = vehicleInfo != null ? vehicleInfo.IdDept : TPConfigs.LoginUser.IdDepartment;
 
                 return string.Join(TAB, new string[]
                 {
-                    deptSub, "",
+                    costDept, "",
                     "NN",
                     "E" + invoice.SellerTax,
                     invoice.InvoiceCode,
@@ -361,8 +360,35 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             }
         }
 
+        private string GetCostDept()
+        {
+            var editor = new TextEdit
+            {
+                Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F),
+            };
+
+            var args = new XtraInputBoxArgs
+            {
+                Caption = "輸入成本部門",
+                Prompt = "請輸入成本部門 (範例：7820)",
+                Editor = editor,
+                DefaultButtonIndex = 0,
+                DefaultResponse = editor.EditValue?.ToString() ?? ""
+            };
+
+            object result = XtraInputBox.Show(args);
+
+            // Nếu người dùng nhấn Cancel
+            if (result == null)
+                return TPConfigs.LoginUser.IdDepartment;
+
+            return result.ToString().Trim();
+        }
+
         private void ItemERP02_Click(object sender, EventArgs e)
         {
+            string costDept = GetCostDept();
+
             GridView gridView = gvData;
             if (gridView == null || gridView.FocusedRowHandle < 0)
                 return;
@@ -424,7 +450,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             string prefixKey = string.Join(tabDelimiter, new[]
             {
                 "LG",
-                vehicle?.IdDept ?? "", "",
+                costDept, "",
                 "0", "",
                 "W", "",
                 "2",
@@ -1127,7 +1153,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                     var invoiceList = (
                         from inv in (sourceData.DataSource as IEnumerable<dynamic>)?.Select(o => (dt311_Invoice)o.data)
                         join seller in sellerBuyers on inv.SellerTax equals seller.Tax
-                        where seller.Type == "xang_dau"
+                        where seller.Type == "xang_dau" && inv.LicensePlate == null
                         select inv
                     ).ToList();
 

@@ -3,7 +3,9 @@ using DataAccessLayer;
 using DevExpress.Utils.Menu;
 using DevExpress.Utils.Svg;
 using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Filtering;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Views.Items.ViewInfo;
 using DevExpress.XtraPrinting.Native;
 using DevExpress.XtraSplashScreen;
 using KnowledgeSystem.Helpers;
@@ -16,6 +18,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
+using PopupMenuShowingEventArgs = DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs;
+using TextEdit = DevExpress.XtraEditors.TextEdit;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._12_WireRodEmployeeEval
 {
@@ -35,7 +40,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._12_WireRodEmployeeEval
         }
 
         RefreshHelper helper;
-        BindingSource sourceBases = new BindingSource();       
+        BindingSource sourceBases = new BindingSource();
+
+        DXMenuItem itemEditInfo;
+        DXMenuItem itemRemove;
 
         //List<dm_User> lsUser = new List<dm_User>();
         //List<dt202_Type> types;
@@ -55,7 +63,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._12_WireRodEmployeeEval
 
         private void InitializeMenuItems()
         {
-            
+            itemEditInfo = CreateMenuItem("更新問題組", ItemEditInfo_Click, TPSvgimages.Edit);
+            itemRemove = CreateMenuItem("刪除問題組", ItemRemove_Click, TPSvgimages.Remove);
         }
 
         DXMenuItem CreateMenuItem(string caption, EventHandler clickEvent, SvgImage svgImage)
@@ -71,15 +80,55 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._12_WireRodEmployeeEval
             menuItem.AppearanceHovered.ForeColor = Color.Blue;
         }
 
+        private void ItemRemove_Click(object sender, EventArgs e)
+        {
+            if (XtraMessageBox.Show("確定要刪除此問題組嗎？", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) return;
+
+            int idGroup = (int)gvData.GetRowCellValue(gvData.FocusedRowHandle, gColId);
+
+            dt312_Groups group = dt312_GroupsBUS.Instance.GetItemById(idGroup);
+            group.RemoveAt = DateTime.Now;
+            group.RemoveBy = TPConfigs.LoginUser.Id;
+
+            var result = dt312_GroupsBUS.Instance.AddOrUpdate(group);
+            if (result)
+            {
+                XtraMessageBox.Show("刪除問題組成功！", "通知", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            LoadData();
+        }
+
         private void ItemEditInfo_Click(object sender, EventArgs e)
         {
-            //string idJob = gvData.GetRowCellValue(gvData.FocusedRowHandle, gColId).ToString();
+            int idGroup = (int)gvData.GetRowCellValue(gvData.FocusedRowHandle, gColId);
 
-            //f307_JobSet_Info fInfo = new f307_JobSet_Info();
-            //fInfo.idJob = idJob;
-            //fInfo.ShowDialog();
+            TextEdit textEdit = new TextEdit
+            {
+                Font = new Font("Tahoma", 14F)
+            };
 
-            //LoadData();
+            var args = new XtraInputBoxArgs
+            {
+                Caption = "輸入問題組名稱",
+                Prompt = "問題組名稱:",
+                Editor = textEdit,
+                DefaultResponse = ""
+            };
+
+            var groupName = XtraInputBox.Show(args);
+            if (groupName == null) return;
+
+            dt312_Groups group = dt312_GroupsBUS.Instance.GetItemById(idGroup);
+            group.DisplayName = groupName.ToString().Trim();
+
+            var result = dt312_GroupsBUS.Instance.AddOrUpdate(group);
+            if (result)
+            {
+                XtraMessageBox.Show("更新問題組成功！", "通知", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            LoadData();
         }
 
         private void LoadData()
@@ -202,8 +251,17 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._12_WireRodEmployeeEval
 
         private void btnSetting_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            f312_SettingExam settingExam =  new f312_SettingExam();
+            f312_SettingExam settingExam = new f312_SettingExam();
             settingExam.ShowDialog();
+        }
+
+        private void gvData_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
+        {
+            if (e.HitInfo.InRowCell && e.HitInfo.InDataRow)
+            {
+                e.Menu.Items.Add(itemEditInfo);
+                e.Menu.Items.Add(itemRemove);
+            }
         }
     }
 }

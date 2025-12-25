@@ -145,6 +145,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                                     AutoControl.MouseClick(matchPoint.Value.X, matchPoint.Value.Y);
                             }
                         }
+
+                        Thread.Sleep(1000);
                     }
                     // ⌨️ Xử lý hành động gửi phím
                     else if (!string.IsNullOrEmpty(action.Text))
@@ -153,7 +155,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                     }
 
                     // ⏳ Tạm dừng giữa các hành động
-                    Thread.Sleep(500);
+                    Thread.Sleep(1000);
                 }
             }
 

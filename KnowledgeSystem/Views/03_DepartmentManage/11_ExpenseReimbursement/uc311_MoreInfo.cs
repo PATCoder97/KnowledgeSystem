@@ -32,10 +32,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
 
             // Thiết lập DataBindings
             txbDesc.DataBindings.Add("Text", this, nameof(Desc), false, DataSourceUpdateMode.OnPropertyChanged);
+            txbCostDept.DataBindings.Add("Text", this, nameof(Dept), false, DataSourceUpdateMode.OnPropertyChanged);
             cbbSubjectCode.DataBindings.Add("EditValue", this, nameof(Code), false, DataSourceUpdateMode.OnPropertyChanged);
         }
 
         public string Desc { get; set; }
         public string Code { get; set; }
+        public string Dept { get; set; }
     }
 }

@@ -36,7 +36,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._12_WireRodEmployeeEval
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.None; // Bỏ khung viền
             this.WindowState = FormWindowState.Maximized; // Phóng to toàn màn hình
-            //this.TopMost = true; // Đảm bảo form luôn ở trên cùng
+            this.TopMost = true; // Đảm bảo form luôn ở trên cùng
 
             this.KeyDown += F312_DoExam_KeyDown;
             this.KeyPreview = true;  // Đảm bảo Form nhận được sự kiện KeyDown
@@ -160,7 +160,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._12_WireRodEmployeeEval
                     id = counter++, // Đánh số thứ tự từ 1
                     disp = r.DisplayName,
                     img = string.IsNullOrEmpty(r.ImageName) ? "" :
-                    ImageHelper.ConvertImageToBase64DataUri(Path.Combine(TPConfigs.Folder307, r.ImageName)),
+                    ImageHelper.ConvertImageToBase64DataUri(Path.Combine(TPConfigs.Folder312, r.ImageName)),
                     istrue = false
                 }).ToList();
 
@@ -169,7 +169,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._12_WireRodEmployeeEval
                 quesno = index + 1,
                 ques = ques[index].DisplayName,
                 quesimg = string.IsNullOrEmpty(ques[index].ImageName) ? "" :
-                ImageHelper.ConvertImageToBase64DataUri(Path.Combine(TPConfigs.Folder307, ques[index].ImageName)),
+                ImageHelper.ConvertImageToBase64DataUri(Path.Combine(TPConfigs.Folder312, ques[index].ImageName)),
                 answers = anses,
                 ismultichoice = ques[index].IsmultiAns == true
             };
@@ -329,6 +329,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._12_WireRodEmployeeEval
 
             // --- PHẦN 1: LẤY DỮ LIỆU GỐC ---
             var dataQues = dt312_QuestionsBUS.Instance.GetList(); // Lấy tất cả câu hỏi
+            var groupIsRemove = dt312_GroupsBUS.Instance.GetListIsRemove();
 
             if (dataQues.Count <= numQues)
                 return "題目數量不夠！";
@@ -341,6 +342,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._12_WireRodEmployeeEval
                                       IdGroup = dtg.Key,
                                       QuestionCount = dtg.Count()
                                   };
+
+            // Loại các nhóm đã bị xóa
+
+            quesCountsQuery = quesCountsQuery.Where(r => !groupIsRemove.Select(x => x.Id).ToList().Contains(r.IdGroup)).ToList();
 
             // --- PHẦN 2: CHUẨN BỊ DỮ LIỆU TÍNH TOÁN ---
 
