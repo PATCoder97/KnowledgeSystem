@@ -253,10 +253,25 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
 
             // Kiểm tra nếu chênh lệch lớn hơn 2 giờ
             TimeSpan difference = backTime - borrTime;
-            if (difference.TotalHours > 2)
+            double hours = difference.TotalHours;
+            if (hours >= 2)
             {
                 XtraMessageBox.Show("Trả xe trong vòng 2 tiếng nhé con lợn nhựa!", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 return;
+            }
+
+            // Kiểm tra tốc độ trung bình (km/h)
+            // Tránh chia cho 0 (trường hợp mượn – trả cùng thời điểm)
+            if (hours > 0)
+            {
+                double speed = totalKm / hours;
+
+                if (speed >= 40)
+                {
+                    XtraMessageBox.Show($"Con lợn nhựa này chạy như ăn cướp rồi đó! 30 nghìn đó!\n(Tốc độ trung bình: {speed:0.0} km/h)",
+                        TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    return;
+                }
             }
 
             switch (cbbTypeVehicle.SelectedIndex)

@@ -468,7 +468,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                     .GetListByInvoiceId(invoice.TransactionID)
                     .FirstOrDefault()?.Quantity ?? 0;
 
-                string vehicleTypeCode = (vehicle?.VehicleType == "xe máy/摩托車") ? "X" : "Y";
+                string vehicleTypeCode = (vehicle?.FuelType == "xăng/汽") ? "X" : "Y";
 
                 return string.Join(tabDelimiter, new[]
                 {
