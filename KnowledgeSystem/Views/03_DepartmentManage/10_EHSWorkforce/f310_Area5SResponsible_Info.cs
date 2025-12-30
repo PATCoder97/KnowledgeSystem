@@ -1,10 +1,17 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
 using DevExpress.Export.Xl;
+using DevExpress.Utils.Menu;
+using DevExpress.Utils.Svg;
+using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using DevExpress.XtraLayout;
+using DevExpress.XtraPrinting.Native;
 using DevExpress.XtraSplashScreen;
 using DocumentFormat.OpenXml.Drawing.Charts;
+using DocumentFormat.OpenXml.Wordprocessing;
 using KnowledgeSystem.Helpers;
 using System;
 using System.Collections.Generic;
@@ -14,6 +21,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -26,6 +34,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
         {
             InitializeComponent();
             InitializeIcon();
+            InitializeMenuItems();
 
             pic5SArea.AllowDrop = true;
             pic5SArea.SizeMode = PictureBoxSizeMode.Zoom;
@@ -33,6 +42,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             // Gán sự kiện
             pic5SArea.DragEnter += pic5SArea_DragEnter;
             pic5SArea.DragDrop += pic5SArea_DragDrop;
+
+            DevExpress.Utils.AppearanceObject.DefaultMenuFont = new System.Drawing.Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
         }
 
         public EventFormInfo eventInfo = EventFormInfo.Create;
@@ -41,64 +52,149 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
         public string idDeptGetData = TPConfigs.LoginUser.IdDepartment;
         string imgAreaPath = "";
         HashSet<string> validImageExtensions = new HashSet<string> { ".jpg", ".jpeg", ".png", ".bmp" };
+        public bool isEditorInfo = true;
+        public bool isAddInfo = true;
 
         dt310_Area5S area5S;
+        List<dt310_Area5SResponsible> area5SResponsibles = new List<dt310_Area5SResponsible>();
+        BindingSource source5sResp = new BindingSource();
 
         List<LayoutControlItem> lcControls;
         List<LayoutControlItem> lcImpControls;
+
+        DXMenuItem itemRemoveItem;
+
+        DXMenuItem CreateMenuItem(string caption, EventHandler clickEvent, SvgImage svgImage)
+        {
+            var menuItem = new DXMenuItem(caption, clickEvent, svgImage, DXMenuItemPriority.Normal);
+            SetMenuItemProperties(menuItem);
+            return menuItem;
+        }
+
+        void SetMenuItemProperties(DXMenuItem menuItem)
+        {
+            menuItem.ImageOptions.SvgImageSize = new System.Drawing.Size(24, 24);
+            menuItem.AppearanceHovered.ForeColor = System.Drawing.Color.Blue;
+        }
 
         private void InitializeIcon()
         {
             btnEdit.ImageOptions.SvgImage = TPSvgimages.Edit;
             btnDelete.ImageOptions.SvgImage = TPSvgimages.Remove;
             btnConfirm.ImageOptions.SvgImage = TPSvgimages.Confirm;
+            btnEditResponsibility.ImageOptions.SvgImage = TPSvgimages.Edit;
+            btnConfirmResponsibility.ImageOptions.SvgImage = TPSvgimages.Confirm;
+        }
+
+        private void InitializeMenuItems()
+        {
+            itemRemoveItem = CreateMenuItem("刪除", ItemRemoveItem_Click, TPSvgimages.Remove);
+        }
+
+        private void ItemRemoveItem_Click(object sender, EventArgs e)
+        {
+            DXMenuItem item = sender as DXMenuItem;
+            if (item == null) return;
+
+            int rowHandle = (int)item.Tag;
+            if (rowHandle < 0) return;
+
+            dt310_Area5SResponsible areaItem = gvData.GetRow(rowHandle) as dt310_Area5SResponsible;
+            if (areaItem == null) return;
+
+            area5SResponsibles.Remove(areaItem);
+            gvData.RefreshData();
         }
 
         private void EnabledController(bool _enable = true)
         {
             txbArea.Enabled = _enable;
             txbDesc.Enabled = _enable;
-            //cbbFunc.Enabled = _enable;
-            //txbStartDate.Enabled = _enable;
+
+            gvData.ReadOnlyGridView(_enable);           
         }
 
         private void LockControl()
         {
+            if (isAddInfo)
+            {
+                lcGridUser.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            }
+
             switch (eventInfo)
             {
                 case EventFormInfo.Create:
                     Text = $"新增{formName}";
 
-                    btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
-                    btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                    btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                     EnabledController();
-                    break;
-                case EventFormInfo.Update:
-                    Text = $"更新{formName}";
 
                     btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                     btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                    EnabledController();
+                    btnEditResponsibility.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                    btnConfirmResponsibility.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+
+                   
+
+                    break;
+                case EventFormInfo.Update:
+                    Text = $"更新{formName}";
+
+                    if (isEditorInfo)
+                    {
+                        EnabledController();
+
+                        btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                        btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                        btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+
+                        btnEditResponsibility.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                        btnConfirmResponsibility.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+
+                        gvData.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
+                        gvData.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.None;
+                    }
+                    else
+                    {
+                        EnabledController(false);
+
+                        btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                        btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                        btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+
+                        btnEditResponsibility.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                        btnConfirmResponsibility.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+
+                        gvData.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
+                        gvData.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
+                    }
 
                     break;
                 case EventFormInfo.Delete:
                     Text = $"刪除{formName}";
 
+                    EnabledController(false);
+
                     btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                     btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-                    EnabledController(false);
+
                     break;
                 case EventFormInfo.View:
                     Text = $"{formName}信息";
+
+                    EnabledController(false);
 
                     btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                     btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
 
-                    EnabledController(false);
+                    btnEditResponsibility.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                    btnConfirmResponsibility.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+
+                    gvData.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
+                    gvData.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.None;
+
                     break;
                 default:
                     break;
@@ -134,15 +230,18 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                 item.Text = $"<color=#000000>{item.Text}</color>";
             }
 
-            //var usrs = dm_UserBUS.Instance.GetList().Where(r => r.Status == 0).ToList();
-            //cbbUsr.Properties.DataSource = usrs;
-            //cbbUsr.Properties.DisplayMember = "DisplayName";
-            //cbbUsr.Properties.ValueMember = "Id";
+            area5SResponsibles = dt310_Area5SResponsibleBUS.Instance.GetList();
+            source5sResp.DataSource = area5SResponsibles;
+            gcData.DataSource = source5sResp;
+            gvData.BestFitColumns();
 
-            //var depts = dm_DeptBUS.Instance.GetAllChildren(0).Where(r => r.IsGroup != true).ToList();
-            //cbbDept.Properties.DataSource = depts;
-            //cbbDept.Properties.DisplayMember = "DisplayName";
-            //cbbDept.Properties.ValueMember = "Id";
+            var usrs = dm_UserBUS.Instance.GetList().Where(r => r.Status == 0).Select(r => new { DisplayName = $"LG{r.IdDepartment}/{r.DisplayName}", Id = r.Id }).ToList();
+            itemcbbEmp.DataSource = usrs;
+            itemcbbEmp.DisplayMember = "DisplayName";
+            itemcbbEmp.ValueMember = "Id";
+
+            var depts = dm_DeptBUS.Instance.GetAllChildren(0).Where(r => r.IsGroup != true).Select(r => r.Id).ToList();
+            itemcbbDept.Items.AddRange(depts);
 
             //var funcs = dt310_FunctionBUS.Instance.GetList();
             //cbbFunc.Properties.DataSource = funcs;
@@ -211,7 +310,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             }
         }
 
-        private void pic5SArea_Click(object sender, EventArgs e)
+        private void pic5SArea_DoubleClick(object sender, EventArgs e)
         {
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
@@ -230,6 +329,14 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
         private void btnEdit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             eventInfo = EventFormInfo.Update;
+            isEditorInfo = true;
+            LockControl();
+        }
+
+        private void btnEditResponsibility_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            eventInfo = EventFormInfo.Update;
+            isEditorInfo = false;
             LockControl();
         }
 
@@ -253,7 +360,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                     if (string.IsNullOrEmpty(baseEdit.EditValue?.ToString()))
                     {
                         IsValidate = false;
-                        break; // Dừng vòng lặp ngay khi phát hiện lỗi
+                        break;
                     }
                 }
             }
@@ -271,6 +378,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             using (var handle = SplashScreenManager.ShowOverlayForm(this))
             {
                 area5S.DisplayName = area;
+                area5S.DESC = desc;
 
                 switch (eventInfo)
                 {
@@ -317,5 +425,67 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                 MsgTP.MsgErrorDB();
             }
         }
+
+        private void btnConfirmResponsibility_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
+        }
+
+        private void btnAddUser_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void gvData_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            var view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
+            view.BestFitColumns();
+
+
+            //if (e.Column.FieldName == "EmployeeId")
+            //{
+            //    // Lấy giá trị mới
+            //    var name = e.Value;
+
+            //    //// Tìm tên tương ứng (anh đổi thành nguồn dữ liệu thật của anh)
+            //    //string name = GetAreaNameFromFileId(fileId);
+
+            //    //// Cập nhật cột B
+            //    view.SetRowCellValue(e.RowHandle, "DeptId", name);
+            //}
+        }
+
+        private void gvData_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+        {
+            if (e.HitInfo.InRowCell && e.HitInfo.InDataRow)
+            {
+                int rowHandle = e.HitInfo.RowHandle;
+                itemRemoveItem.Tag = rowHandle;
+
+                e.Menu.Items.Add(itemRemoveItem);
+
+                //e.Menu.Items.Add(itemERP02);
+                //e.Menu.Items.Add(itemERP03);
+
+                //GridView view = gvData;
+                //string typeOfSeller = view.GetRowCellValue(view.FocusedRowHandle, gColSellerType)?.ToString();
+                //int attId = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColAttId) ?? -1);
+
+                //itemAddFile.BeginGroup = true;
+                //e.Menu.Items.Add(itemAddFile);
+                //if (attId != -1)
+                //{
+                //    e.Menu.Items.Add(itemViewFile);
+                //}
+
+                //if (typeOfSeller == "xang_dau")
+                //{
+                //    itemUpdateAddFuel.BeginGroup = true;
+                //    e.Menu.Items.Add(itemUpdateAddFuel);
+                //}
+            }
+        }
+
+
     }
 }

@@ -41,11 +41,9 @@
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcData = new DevExpress.XtraGrid.GridControl();
             this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gColIdSession = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemMemoEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit();
             this.gvDetail = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -173,7 +171,7 @@
             gridLevelNode2.RelationName = "CheckDetail";
             gridLevelNode1.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
             gridLevelNode2});
-            gridLevelNode1.RelationName = "CheckSession";
+            gridLevelNode1.RelationName = "Responsible";
             this.gcData.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
             gridLevelNode1});
             this.gcData.Location = new System.Drawing.Point(12, 40);
@@ -206,11 +204,9 @@
             this.gvData.Appearance.Row.Options.UseFont = true;
             this.gvData.Appearance.Row.Options.UseForeColor = true;
             this.gvData.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gColIdSession,
+            this.gColId,
             this.gridColumn2,
-            this.gridColumn3,
-            this.gridColumn4,
-            this.gridColumn1});
+            this.gridColumn3});
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
             this.gvData.OptionsDetail.ShowDetailTabs = false;
@@ -219,17 +215,18 @@
             this.gvData.OptionsView.EnableAppearanceOddRow = true;
             this.gvData.OptionsView.ShowAutoFilterRow = true;
             this.gvData.OptionsView.ShowGroupPanel = false;
+            this.gvData.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gvData_PopupMenuShowing);
             // 
-            // gColIdSession
+            // gColId
             // 
-            this.gColIdSession.Caption = "ID";
-            this.gColIdSession.FieldName = "Id";
-            this.gColIdSession.Name = "gColIdSession";
+            this.gColId.Caption = "ID";
+            this.gColId.FieldName = "Id";
+            this.gColId.Name = "gColId";
             // 
             // gridColumn2
             // 
-            this.gridColumn2.Caption = "姓名";
-            this.gridColumn2.FieldName = "Emp";
+            this.gridColumn2.Caption = "區域名稱";
+            this.gridColumn2.FieldName = "DisplayName";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 0;
@@ -237,29 +234,12 @@
             // 
             // gridColumn3
             // 
-            this.gridColumn3.Caption = "當人日";
-            this.gridColumn3.FieldName = "StartDate";
+            this.gridColumn3.Caption = "備註";
+            this.gridColumn3.FieldName = "DESC";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 1;
             this.gridColumn3.Width = 87;
-            // 
-            // gridColumn4
-            // 
-            this.gridColumn4.Caption = "職務";
-            this.gridColumn4.FieldName = "Role";
-            this.gridColumn4.Name = "gridColumn4";
-            this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 2;
-            this.gridColumn4.Width = 112;
-            // 
-            // gridColumn1
-            // 
-            this.gridColumn1.Caption = "年資";
-            this.gridColumn1.FieldName = "ThamNien";
-            this.gridColumn1.Name = "gridColumn1";
-            this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 3;
             // 
             // repositoryItemMemoEdit1
             // 
@@ -570,6 +550,7 @@
             this.Controls.Add(this.barDockControlTop);
             this.Name = "uc310_Area5SResponsible";
             this.Size = new System.Drawing.Size(1186, 585);
+            this.Load += new System.EventHandler(this.uc310_Area5SResponsible_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gvResponsibleEmp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).EndInit();
@@ -613,11 +594,9 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
         private DevExpress.XtraGrid.Views.Grid.GridView gvData;
-        private DevExpress.XtraGrid.Columns.GridColumn gColIdSession;
+        private DevExpress.XtraGrid.Columns.GridColumn gColId;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraTreeList.TreeList treeFunctions;
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn1;
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn3;

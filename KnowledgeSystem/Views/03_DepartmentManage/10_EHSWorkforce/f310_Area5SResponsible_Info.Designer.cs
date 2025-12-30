@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f310_Area5SResponsible_Info));
             this.gvSession = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gColIdDetail = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -44,7 +42,12 @@
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.itemcbbDept = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.itemcbbEmp = new DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit();
+            this.repositoryItemSearchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemMemoEdit11 = new DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit();
@@ -62,23 +65,22 @@
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnDelUser = new DevExpress.XtraEditors.SimpleButton();
-            this.btnAddUser = new DevExpress.XtraEditors.SimpleButton();
             this.pic5SArea = new System.Windows.Forms.PictureBox();
             this.txbArea = new DevExpress.XtraEditors.TextEdit();
             this.txbDesc = new DevExpress.XtraEditors.TextEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.lcArea = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcGridUser = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcDesc = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.btnEditResponsibility = new DevExpress.XtraBars.BarButtonItem();
+            this.btnConfirmResponsibility = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.gvSession)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.itemcbbDept)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.itemcbbEmp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSearchLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemMemoEdit11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
@@ -90,11 +92,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcArea)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcGridUser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDesc)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             this.SuspendLayout();
             // 
             // gvSession
@@ -182,20 +181,14 @@
             this.gcData.EmbeddedNavigator.Buttons.Edit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.EndEdit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.Remove.Visible = false;
-            gridLevelNode1.LevelTemplate = this.gvSession;
-            gridLevelNode2.LevelTemplate = this.gvDetail;
-            gridLevelNode2.RelationName = "CheckDetail";
-            gridLevelNode1.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode2});
-            gridLevelNode1.RelationName = "CheckSession";
-            this.gcData.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode1});
-            this.gcData.Location = new System.Drawing.Point(551, 48);
+            this.gcData.Location = new System.Drawing.Point(501, 40);
             this.gcData.MainView = this.gvData;
             this.gcData.Name = "gcData";
             this.gcData.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.repositoryItemMemoEdit11});
-            this.gcData.Size = new System.Drawing.Size(563, 353);
+            this.repositoryItemMemoEdit11,
+            this.itemcbbEmp,
+            this.itemcbbDept});
+            this.gcData.Size = new System.Drawing.Size(712, 361);
             this.gcData.TabIndex = 6;
             this.gcData.UseEmbeddedNavigator = true;
             this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -229,15 +222,20 @@
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
             this.gvData.OptionsDetail.ShowDetailTabs = false;
+            this.gvData.OptionsNavigation.AutoFocusNewRow = true;
             this.gvData.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
             this.gvData.OptionsView.ColumnAutoWidth = false;
             this.gvData.OptionsView.EnableAppearanceOddRow = true;
+            this.gvData.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
             this.gvData.OptionsView.ShowAutoFilterRow = true;
             this.gvData.OptionsView.ShowGroupPanel = false;
+            this.gvData.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gvData_PopupMenuShowing);
+            this.gvData.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gvData_CellValueChanged);
             // 
             // gridColumn1
             // 
             this.gridColumn1.Caption = "編號";
+            this.gridColumn1.FieldName = "AreaCode";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
             this.gridColumn1.VisibleIndex = 0;
@@ -245,6 +243,7 @@
             // gridColumn2
             // 
             this.gridColumn2.Caption = "區域";
+            this.gridColumn2.FieldName = "AreaName";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 1;
@@ -252,20 +251,95 @@
             // gridColumn3
             // 
             this.gridColumn3.Caption = "負責部門";
+            this.gridColumn3.ColumnEdit = this.itemcbbDept;
+            this.gridColumn3.FieldName = "DeptId";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 2;
             // 
+            // itemcbbDept
+            // 
+            this.itemcbbDept.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.itemcbbDept.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.itemcbbDept.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.itemcbbDept.Appearance.Options.UseFont = true;
+            this.itemcbbDept.Appearance.Options.UseForeColor = true;
+            this.itemcbbDept.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.itemcbbDept.AppearanceDropDown.ForeColor = System.Drawing.Color.Black;
+            this.itemcbbDept.AppearanceDropDown.Options.UseFont = true;
+            this.itemcbbDept.AppearanceDropDown.Options.UseForeColor = true;
+            this.itemcbbDept.AutoHeight = false;
+            this.itemcbbDept.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.itemcbbDept.Name = "itemcbbDept";
+            this.itemcbbDept.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            // 
             // gridColumn4
             // 
             this.gridColumn4.Caption = "責任人員";
+            this.gridColumn4.ColumnEdit = this.itemcbbEmp;
+            this.gridColumn4.FieldName = "EmployeeId";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 3;
             // 
+            // itemcbbEmp
+            // 
+            this.itemcbbEmp.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.itemcbbEmp.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.itemcbbEmp.Appearance.Options.UseFont = true;
+            this.itemcbbEmp.Appearance.Options.UseForeColor = true;
+            this.itemcbbEmp.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.itemcbbEmp.AppearanceDropDown.ForeColor = System.Drawing.Color.Black;
+            this.itemcbbEmp.AppearanceDropDown.Options.UseFont = true;
+            this.itemcbbEmp.AppearanceDropDown.Options.UseForeColor = true;
+            this.itemcbbEmp.AutoHeight = false;
+            this.itemcbbEmp.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.itemcbbEmp.Name = "itemcbbEmp";
+            this.itemcbbEmp.PopupView = this.repositoryItemSearchLookUpEdit1View;
+            // 
+            // repositoryItemSearchLookUpEdit1View
+            // 
+            this.repositoryItemSearchLookUpEdit1View.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.repositoryItemSearchLookUpEdit1View.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
+            this.repositoryItemSearchLookUpEdit1View.Appearance.HeaderPanel.Options.UseFont = true;
+            this.repositoryItemSearchLookUpEdit1View.Appearance.HeaderPanel.Options.UseForeColor = true;
+            this.repositoryItemSearchLookUpEdit1View.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.repositoryItemSearchLookUpEdit1View.Appearance.Row.ForeColor = System.Drawing.Color.Black;
+            this.repositoryItemSearchLookUpEdit1View.Appearance.Row.Options.UseFont = true;
+            this.repositoryItemSearchLookUpEdit1View.Appearance.Row.Options.UseForeColor = true;
+            this.repositoryItemSearchLookUpEdit1View.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn14,
+            this.gridColumn15});
+            this.repositoryItemSearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.repositoryItemSearchLookUpEdit1View.Name = "repositoryItemSearchLookUpEdit1View";
+            this.repositoryItemSearchLookUpEdit1View.OptionsPrint.EnableAppearanceOddRow = true;
+            this.repositoryItemSearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.repositoryItemSearchLookUpEdit1View.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
+            this.repositoryItemSearchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn14
+            // 
+            this.gridColumn14.Caption = "工號";
+            this.gridColumn14.FieldName = "Id";
+            this.gridColumn14.Name = "gridColumn14";
+            this.gridColumn14.Visible = true;
+            this.gridColumn14.VisibleIndex = 0;
+            // 
+            // gridColumn15
+            // 
+            this.gridColumn15.Caption = "名稱";
+            this.gridColumn15.FieldName = "DisplayName";
+            this.gridColumn15.Name = "gridColumn15";
+            this.gridColumn15.Visible = true;
+            this.gridColumn15.VisibleIndex = 1;
+            // 
             // gridColumn12
             // 
             this.gridColumn12.Caption = "代理人";
+            this.gridColumn12.ColumnEdit = this.itemcbbEmp;
+            this.gridColumn12.FieldName = "AgentId";
             this.gridColumn12.Name = "gridColumn12";
             this.gridColumn12.Visible = true;
             this.gridColumn12.VisibleIndex = 4;
@@ -273,6 +347,8 @@
             // gridColumn13
             // 
             this.gridColumn13.Caption = "督導主管";
+            this.gridColumn13.ColumnEdit = this.itemcbbEmp;
+            this.gridColumn13.FieldName = "BossId";
             this.gridColumn13.Name = "gridColumn13";
             this.gridColumn13.Visible = true;
             this.gridColumn13.VisibleIndex = 5;
@@ -353,9 +429,11 @@
             this.barManagerTP.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.btnEdit,
             this.btnDelete,
-            this.btnConfirm});
+            this.btnConfirm,
+            this.btnEditResponsibility,
+            this.btnConfirmResponsibility});
             this.barManagerTP.MainMenu = this.bar2;
-            this.barManagerTP.MaxItemId = 4;
+            this.barManagerTP.MaxItemId = 6;
             // 
             // bar2
             // 
@@ -380,8 +458,10 @@
             this.bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnEdit, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnEditResponsibility, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnDelete, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnConfirm, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnConfirm, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnConfirmResponsibility, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawDragBorder = false;
             this.bar2.OptionsBar.MultiLine = true;
@@ -419,7 +499,7 @@
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManagerTP;
-            this.barDockControlTop.Size = new System.Drawing.Size(1126, 49);
+            this.barDockControlTop.Size = new System.Drawing.Size(1225, 49);
             // 
             // barDockControlBottom
             // 
@@ -427,7 +507,7 @@
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.barDockControlBottom.Location = new System.Drawing.Point(0, 462);
             this.barDockControlBottom.Manager = this.barManagerTP;
-            this.barDockControlBottom.Size = new System.Drawing.Size(1126, 0);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1225, 0);
             // 
             // barDockControlLeft
             // 
@@ -441,16 +521,13 @@
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1126, 49);
+            this.barDockControlRight.Location = new System.Drawing.Point(1225, 49);
             this.barDockControlRight.Manager = this.barManagerTP;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 413);
             // 
             // layoutControl1
             // 
             this.layoutControl1.AllowCustomization = false;
-            this.layoutControl1.Controls.Add(this.label1);
-            this.layoutControl1.Controls.Add(this.btnDelUser);
-            this.layoutControl1.Controls.Add(this.btnAddUser);
             this.layoutControl1.Controls.Add(this.pic5SArea);
             this.layoutControl1.Controls.Add(this.txbArea);
             this.layoutControl1.Controls.Add(this.gcData);
@@ -460,78 +537,44 @@
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(1062, 274, 650, 400);
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(1126, 413);
+            this.layoutControl1.Size = new System.Drawing.Size(1225, 413);
             this.layoutControl1.TabIndex = 13;
             this.layoutControl1.Text = "layoutControl1";
-            // 
-            // label1
-            // 
-            this.label1.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(551, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(363, 32);
-            this.label1.TabIndex = 18;
-            this.label1.Text = "責任區劃分";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // btnDelUser
-            // 
-            this.btnDelUser.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelUser.Appearance.Options.UseFont = true;
-            this.btnDelUser.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnDelUser.ImageOptions.SvgImage")));
-            this.btnDelUser.Location = new System.Drawing.Point(1028, 12);
-            this.btnDelUser.Name = "btnDelUser";
-            this.btnDelUser.Size = new System.Drawing.Size(86, 32);
-            this.btnDelUser.StyleController = this.layoutControl1;
-            this.btnDelUser.TabIndex = 17;
-            this.btnDelUser.Text = "刪除";
-            // 
-            // btnAddUser
-            // 
-            this.btnAddUser.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddUser.Appearance.Options.UseFont = true;
-            this.btnAddUser.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnAddUser.ImageOptions.SvgImage")));
-            this.btnAddUser.Location = new System.Drawing.Point(928, 12);
-            this.btnAddUser.Name = "btnAddUser";
-            this.btnAddUser.Size = new System.Drawing.Size(86, 32);
-            this.btnAddUser.StyleController = this.layoutControl1;
-            this.btnAddUser.TabIndex = 16;
-            this.btnAddUser.Text = "新增";
             // 
             // pic5SArea
             // 
             this.pic5SArea.Location = new System.Drawing.Point(12, 84);
             this.pic5SArea.Name = "pic5SArea";
-            this.pic5SArea.Size = new System.Drawing.Size(535, 317);
+            this.pic5SArea.Size = new System.Drawing.Size(485, 317);
             this.pic5SArea.TabIndex = 15;
             this.pic5SArea.TabStop = false;
-            this.pic5SArea.Click += new System.EventHandler(this.pic5SArea_Click);
+            this.pic5SArea.DoubleClick += new System.EventHandler(this.pic5SArea_DoubleClick);
             // 
             // txbArea
             // 
             this.txbArea.EditValue = "";
-            this.txbArea.Location = new System.Drawing.Point(62, 12);
+            this.txbArea.Location = new System.Drawing.Point(55, 12);
             this.txbArea.Name = "txbArea";
             this.txbArea.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txbArea.Properties.Appearance.Options.UseFont = true;
             this.txbArea.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.Black;
             this.txbArea.Properties.AppearanceDisabled.Options.UseForeColor = true;
             this.txbArea.Properties.NullText = "【項目選擇】";
-            this.txbArea.Size = new System.Drawing.Size(485, 32);
+            this.txbArea.Size = new System.Drawing.Size(442, 32);
             this.txbArea.StyleController = this.layoutControl1;
             this.txbArea.TabIndex = 12;
             // 
             // txbDesc
             // 
             this.txbDesc.EditValue = "";
-            this.txbDesc.Location = new System.Drawing.Point(62, 48);
+            this.txbDesc.Location = new System.Drawing.Point(55, 48);
             this.txbDesc.Name = "txbDesc";
             this.txbDesc.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txbDesc.Properties.Appearance.Options.UseFont = true;
             this.txbDesc.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.Black;
             this.txbDesc.Properties.AppearanceDisabled.Options.UseForeColor = true;
             this.txbDesc.Properties.NullText = "【項目選擇】";
-            this.txbDesc.Size = new System.Drawing.Size(485, 32);
+            this.txbDesc.Size = new System.Drawing.Size(442, 32);
             this.txbDesc.StyleController = this.layoutControl1;
             this.txbDesc.TabIndex = 12;
             // 
@@ -542,13 +585,10 @@
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.lcArea,
             this.layoutControlItem1,
-            this.layoutControlItem2,
-            this.layoutControlItem3,
-            this.layoutControlItem4,
-            this.lcDesc,
-            this.layoutControlItem5});
+            this.lcGridUser,
+            this.lcDesc});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(1126, 413);
+            this.Root.Size = new System.Drawing.Size(1225, 413);
             this.Root.TextVisible = false;
             // 
             // lcArea
@@ -564,60 +604,36 @@
             this.lcArea.CustomizationFormText = "負責人";
             this.lcArea.Location = new System.Drawing.Point(0, 0);
             this.lcArea.Name = "lcArea";
-            this.lcArea.Size = new System.Drawing.Size(539, 36);
+            this.lcArea.Size = new System.Drawing.Size(489, 36);
             this.lcArea.Text = "區域";
+            this.lcArea.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
             this.lcArea.TextSize = new System.Drawing.Size(38, 24);
+            this.lcArea.TextToControlDistance = 5;
             // 
             // layoutControlItem1
             // 
             this.layoutControlItem1.Control = this.pic5SArea;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 72);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(539, 321);
+            this.layoutControlItem1.Size = new System.Drawing.Size(489, 321);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
-            // layoutControlItem2
+            // lcGridUser
             // 
-            this.layoutControlItem2.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.layoutControlItem2.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
-            this.layoutControlItem2.AppearanceItemCaption.Options.UseFont = true;
-            this.layoutControlItem2.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem2.Control = this.gcData;
-            this.layoutControlItem2.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
-            this.layoutControlItem2.CustomizationFormText = "安衛環年資";
-            this.layoutControlItem2.Location = new System.Drawing.Point(539, 36);
-            this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(567, 357);
-            this.layoutControlItem2.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem2.TextVisible = false;
-            // 
-            // layoutControlItem3
-            // 
-            this.layoutControlItem3.Control = this.btnAddUser;
-            this.layoutControlItem3.Location = new System.Drawing.Point(906, 0);
-            this.layoutControlItem3.MaxSize = new System.Drawing.Size(100, 36);
-            this.layoutControlItem3.MinSize = new System.Drawing.Size(100, 36);
-            this.layoutControlItem3.Name = "layoutControlItem3";
-            this.layoutControlItem3.Padding = new DevExpress.XtraLayout.Utils.Padding(12, 2, 2, 2);
-            this.layoutControlItem3.Size = new System.Drawing.Size(100, 36);
-            this.layoutControlItem3.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem3.TextVisible = false;
-            // 
-            // layoutControlItem4
-            // 
-            this.layoutControlItem4.Control = this.btnDelUser;
-            this.layoutControlItem4.Location = new System.Drawing.Point(1006, 0);
-            this.layoutControlItem4.MaxSize = new System.Drawing.Size(100, 36);
-            this.layoutControlItem4.MinSize = new System.Drawing.Size(100, 36);
-            this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Padding = new DevExpress.XtraLayout.Utils.Padding(12, 2, 2, 2);
-            this.layoutControlItem4.Size = new System.Drawing.Size(100, 36);
-            this.layoutControlItem4.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem4.TextVisible = false;
+            this.lcGridUser.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lcGridUser.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.lcGridUser.AppearanceItemCaption.Options.UseFont = true;
+            this.lcGridUser.AppearanceItemCaption.Options.UseForeColor = true;
+            this.lcGridUser.Control = this.gcData;
+            this.lcGridUser.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.lcGridUser.CustomizationFormText = "安衛環年資";
+            this.lcGridUser.Location = new System.Drawing.Point(489, 0);
+            this.lcGridUser.Name = "lcGridUser";
+            this.lcGridUser.Size = new System.Drawing.Size(716, 393);
+            this.lcGridUser.Text = "責任區劃分";
+            this.lcGridUser.TextLocation = DevExpress.Utils.Locations.Top;
+            this.lcGridUser.TextSize = new System.Drawing.Size(95, 24);
             // 
             // lcDesc
             // 
@@ -632,38 +648,50 @@
             this.lcDesc.CustomizationFormText = "負責人";
             this.lcDesc.Location = new System.Drawing.Point(0, 36);
             this.lcDesc.Name = "lcDesc";
-            this.lcDesc.Size = new System.Drawing.Size(539, 36);
+            this.lcDesc.Size = new System.Drawing.Size(489, 36);
             this.lcDesc.Text = "備註";
+            this.lcDesc.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
             this.lcDesc.TextSize = new System.Drawing.Size(38, 24);
+            this.lcDesc.TextToControlDistance = 5;
             // 
-            // layoutControlItem5
+            // btnEditResponsibility
             // 
-            this.layoutControlItem5.Control = this.label1;
-            this.layoutControlItem5.Location = new System.Drawing.Point(539, 0);
-            this.layoutControlItem5.Name = "layoutControlItem5";
-            this.layoutControlItem5.Size = new System.Drawing.Size(367, 36);
-            this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem5.TextVisible = false;
+            this.btnEditResponsibility.Caption = "編輯責任";
+            this.btnEditResponsibility.Id = 4;
+            this.btnEditResponsibility.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnEditResponsibility.Name = "btnEditResponsibility";
+            this.btnEditResponsibility.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnEditResponsibility_ItemClick);
+            // 
+            // btnConfirmResponsibility
+            // 
+            this.btnConfirmResponsibility.Caption = "確認";
+            this.btnConfirmResponsibility.Id = 5;
+            this.btnConfirmResponsibility.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnConfirmResponsibility.Name = "btnConfirmResponsibility";
+            this.btnConfirmResponsibility.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnConfirmResponsibility_ItemClick);
             // 
             // f310_Area5SResponsible_Info
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1126, 462);
+            this.ClientSize = new System.Drawing.Size(1225, 462);
             this.Controls.Add(this.layoutControl1);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.IconOptions.Image = global::KnowledgeSystem.Properties.Resources.AppIcon;
             this.Name = "f310_Area5SResponsible_Info";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "f310_Area5SResponsible_Info";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.f310_Area5SResponsible_Info_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gvSession)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.itemcbbDept)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.itemcbbEmp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSearchLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemMemoEdit11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvDetail)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
@@ -675,11 +703,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcArea)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcGridUser)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcDesc)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -716,20 +741,21 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn121;
         private DevExpress.XtraGrid.Views.Grid.GridView gvData;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
+        private DevExpress.XtraLayout.LayoutControlItem lcGridUser;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
-        private DevExpress.XtraEditors.SimpleButton btnDelUser;
-        private DevExpress.XtraEditors.SimpleButton btnAddUser;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
         private DevExpress.XtraEditors.TextEdit txbDesc;
         private DevExpress.XtraLayout.LayoutControlItem lcDesc;
-        private System.Windows.Forms.Label label1;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
+        private DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit itemcbbEmp;
+        private DevExpress.XtraGrid.Views.Grid.GridView repositoryItemSearchLookUpEdit1View;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn15;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox itemcbbDept;
+        private DevExpress.XtraBars.BarButtonItem btnEditResponsibility;
+        private DevExpress.XtraBars.BarButtonItem btnConfirmResponsibility;
     }
 }
