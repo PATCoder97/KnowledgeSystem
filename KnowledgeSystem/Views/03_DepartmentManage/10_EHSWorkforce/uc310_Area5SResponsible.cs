@@ -27,6 +27,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             InitializeComponent();
             InitializeIcon();
             InitializeMenuItems();
+
+            DevExpress.Utils.AppearanceObject.DefaultMenuFont = new System.Drawing.Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
         }
 
         BindingSource source5sArea = new BindingSource();
@@ -35,6 +37,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
         DXMenuItem itemViewInfo;
 
         List<dt310_Area5S> area5S;
+        List<dt310_Area5SResponsible> areaResps;
 
         List<dm_Departments> depts;
         List<dt310_Role> roles;
@@ -101,6 +104,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
         private void LoadData()
         {
             area5S = dt310_Area5SBUS.Instance.GetList();
+            areaResps = dt310_Area5SResponsibleBUS.Instance.GetList();
+            users = dm_UserBUS.Instance.GetList();
+
             source5sArea.DataSource = area5S;
 
 
@@ -169,6 +175,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             gvData.BestFitColumns();
             gvData.OptionsDetail.EnableMasterViewMode = true;
             gvData.OptionsView.ShowGroupPanel = false;
+
+            gvResponsibleEmp.ReadOnlyGridView();
+            gvResponsibleEmp.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
+            gvResponsibleEmp.OptionsDetail.AllowOnlyOneMasterRowExpanded = true;
         }
 
         private void gvData_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
@@ -177,6 +187,55 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             {
                 e.Menu.Items.Add(itemViewInfo);
             }
+        }
+
+        private void gvData_MasterRowEmpty(object sender, MasterRowEmptyEventArgs e)
+        {
+            GridView view = sender as GridView;
+            int idArea = Convert.ToInt32(view.GetRowCellValue(e.RowHandle, gColId));
+            e.IsEmpty = !areaResps.Any(r => r.AreaId == idArea);
+        }
+
+        private void gvData_MasterRowGetChildList(object sender, MasterRowGetChildListEventArgs e)
+        {
+            GridView view = sender as GridView;
+            int idArea = Convert.ToInt32(view.GetRowCellValue(e.RowHandle, gColId));
+            e.ChildList = areaResps
+                .Where(r => r.AreaId == idArea)
+                .Select(r =>
+                {
+                    var emp = users.FirstOrDefault(u => u.Id == r.EmployeeId);
+                    var agent = users.FirstOrDefault(u => u.Id == r.AgentId);
+                    var boss = users.FirstOrDefault(u => u.Id == r.BossId);
+                    return new
+                    {
+                        r.AreaCode,
+                        r.AreaName,
+                        r.DeptId,
+                        EmpName = emp != null ? $"LG{emp.IdDepartment}/{emp.DisplayName}" : $"Unknown-{r.EmployeeId}",
+                        AgentName = agent != null ? $"LG{agent.IdDepartment}/{agent.DisplayName}" : $"Unknown-{r.AgentId}",
+                        BossName = boss != null ? $"LG{boss.IdDepartment}/{boss.DisplayName}" : $"Unknown-{r.BossId}"
+                    };
+                }).ToList();
+        }
+
+        private void gvData_MasterRowGetRelationCount(object sender, MasterRowGetRelationCountEventArgs e)
+        {
+            e.RelationCount = 1;
+        }
+
+        private void gvData_MasterRowGetRelationName(object sender, MasterRowGetRelationNameEventArgs e)
+        {
+            e.RelationName = "Responsible";
+        }
+
+        private void gvData_MasterRowExpanded(object sender, CustomMasterRowEventArgs e)
+        {
+            GridView masterView = sender as GridView;
+            int visibleDetailRelationIndex = masterView.GetVisibleDetailRelationIndex(e.RowHandle);
+            GridView detailView = masterView.GetDetailView(e.RowHandle, visibleDetailRelationIndex) as GridView;
+
+            detailView.BestFitColumns();
         }
     }
 }

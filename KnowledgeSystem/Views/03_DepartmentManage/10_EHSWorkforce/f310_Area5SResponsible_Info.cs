@@ -17,6 +17,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -110,8 +111,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
         {
             txbArea.Enabled = _enable;
             txbDesc.Enabled = _enable;
+            pic5SArea.Enabled = _enable;
 
-            gvData.ReadOnlyGridView(_enable);           
+            gvData.ReadOnlyGridView(!_enable);
         }
 
         private void LockControl()
@@ -134,8 +136,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                     btnEditResponsibility.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                     btnConfirmResponsibility.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
 
-                   
-
                     break;
                 case EventFormInfo.Update:
                     Text = $"更新{formName}";
@@ -157,6 +157,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                     else
                     {
                         EnabledController(false);
+
+                        gvData.ReadOnlyGridView(false);
 
                         btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                         btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
@@ -230,11 +232,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                 item.Text = $"<color=#000000>{item.Text}</color>";
             }
 
-            area5SResponsibles = dt310_Area5SResponsibleBUS.Instance.GetList();
-            source5sResp.DataSource = area5SResponsibles;
-            gcData.DataSource = source5sResp;
-            gvData.BestFitColumns();
-
             var usrs = dm_UserBUS.Instance.GetList().Where(r => r.Status == 0).Select(r => new { DisplayName = $"LG{r.IdDepartment}/{r.DisplayName}", Id = r.Id }).ToList();
             itemcbbEmp.DataSource = usrs;
             itemcbbEmp.DisplayMember = "DisplayName";
@@ -260,6 +257,14 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                     area5S = dt310_Area5SBUS.Instance.GetItemById(idBase);
 
                     txbArea.EditValue = area5S.DisplayName;
+                    txbDesc.EditValue = area5S.DESC;
+
+                    pic5SArea.Image = Image.FromFile(Path.Combine(TPConfigs.Folder310, area5S.FileName));
+
+                    area5SResponsibles = dt310_Area5SResponsibleBUS.Instance.GetListByAreaId(idBase);
+                    source5sResp.DataSource = area5SResponsibles;
+                    gcData.DataSource = source5sResp;
+                    gvData.BestFitColumns();
 
                     break;
                 case EventFormInfo.Update:
@@ -428,8 +433,86 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
         private void btnConfirmResponsibility_ItemClick(object sender, ItemClickEventArgs e)
         {
+            var newList = source5sResp.DataSource as List<dt310_Area5SResponsible>;
 
+            // Lấy danh sách cũ trong DB
+            var oldList = dt310_Area5SResponsibleBUS.Instance.GetListByAreaId(idBase);
+
+            // ======================
+            // 1. INSERT – các dòng mới
+            // ======================
+            var inserts = newList.Where(x => x.Id == 0).ToList();
+            var updates = newList.Where(x => x.Id > 0).ToList();
+            var deletes = oldList.Where(o => !newList.Any(n => n.Id == o.Id)).ToList();
+
+            foreach (var item in inserts)
+            {
+                item.AreaId = idBase;
+                item.CreatedAt = DateTime.Now;
+                item.CreatedBy = TPConfigs.LoginUser.Id;
+
+                dt310_Area5SResponsibleBUS.Instance.Add(item);
+            }
+
+            // ======================
+            // 2. UPDATE – chỉ update nếu dòng có thay đổi
+            // ======================
+
+            foreach (var item in updates)
+            {
+                var old = oldList.FirstOrDefault(o => o.Id == item.Id);
+
+                if (old != null)
+                {
+                    if (!AreEqual(old, item)) // CHỈ update khi có thay đổi
+                    {
+                        dt310_Area5SResponsibleBUS.Instance.AddOrUpdate(item);
+                    }
+                }
+            }
+
+            // ======================
+            // 3. DELETE – soft delete
+            // ======================
+            foreach (var item in deletes)
+            {
+                item.DeletedAt = DateTime.Now;
+                item.DeletedBy = TPConfigs.LoginUser.Id;
+
+                dt310_Area5SResponsibleBUS.Instance.AddOrUpdate(item);
+            }
         }
+
+        private bool AreEqual(dt310_Area5SResponsible oldItem, dt310_Area5SResponsible newItem)
+        {
+            // Danh sách property cho phép chỉnh sửa
+            var compareProps = new[]
+            {
+                "DeptId",
+                "EmployeeId",
+                "AgentId",
+                "AreaName",
+                "AreaFileId",
+                "StartDate",
+                "EndDate"
+            };
+
+            foreach (var name in compareProps)
+            {
+                var prop = typeof(dt310_Area5SResponsible).GetProperty(name);
+                var oldValue = prop.GetValue(oldItem);
+                var newValue = prop.GetValue(newItem);
+
+                if (oldValue == null && newValue == null)
+                    continue;
+
+                if (!(oldValue?.Equals(newValue) ?? false))
+                    return false; // khác → cần update
+            }
+
+            return true; // không thay đổi
+        }
+
 
         private void btnAddUser_Click(object sender, EventArgs e)
         {
@@ -485,7 +568,5 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                 //}
             }
         }
-
-
     }
 }
