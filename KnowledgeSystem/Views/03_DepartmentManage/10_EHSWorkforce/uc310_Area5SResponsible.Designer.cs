@@ -60,11 +60,14 @@
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.treeFunctions = new DevExpress.XtraTreeList.TreeList();
+            this.treeResps = new DevExpress.XtraTreeList.TreeList();
             this.treeListColumn1 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.treeListColumn3 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.treeListColumn4 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.treeListColumn5 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.treeListColumn2 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.treeListColumn6 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.treeListColumn7 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -76,7 +79,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.treeFunctions)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.treeResps)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
@@ -431,7 +434,7 @@
             // layoutControl1
             // 
             this.layoutControl1.Controls.Add(this.gcData);
-            this.layoutControl1.Controls.Add(this.treeFunctions);
+            this.layoutControl1.Controls.Add(this.treeResps);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
@@ -440,38 +443,41 @@
             this.layoutControl1.TabIndex = 7;
             this.layoutControl1.Text = "layoutControl1";
             // 
-            // treeFunctions
+            // treeResps
             // 
-            this.treeFunctions.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.treeFunctions.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
-            this.treeFunctions.Appearance.HeaderPanel.Options.UseFont = true;
-            this.treeFunctions.Appearance.HeaderPanel.Options.UseForeColor = true;
-            this.treeFunctions.Appearance.HeaderPanel.Options.UseTextOptions = true;
-            this.treeFunctions.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.treeFunctions.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.treeFunctions.Appearance.Row.ForeColor = System.Drawing.Color.Black;
-            this.treeFunctions.Appearance.Row.Options.UseFont = true;
-            this.treeFunctions.Appearance.Row.Options.UseForeColor = true;
-            this.treeFunctions.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
+            this.treeResps.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.treeResps.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
+            this.treeResps.Appearance.HeaderPanel.Options.UseFont = true;
+            this.treeResps.Appearance.HeaderPanel.Options.UseForeColor = true;
+            this.treeResps.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            this.treeResps.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.treeResps.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.treeResps.Appearance.Row.ForeColor = System.Drawing.Color.Black;
+            this.treeResps.Appearance.Row.Options.UseFont = true;
+            this.treeResps.Appearance.Row.Options.UseForeColor = true;
+            this.treeResps.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
             this.treeListColumn1,
             this.treeListColumn3,
             this.treeListColumn4,
-            this.treeListColumn5});
-            this.treeFunctions.Location = new System.Drawing.Point(595, 40);
-            this.treeFunctions.Name = "treeFunctions";
-            this.treeFunctions.OptionsCustomization.AllowFilter = false;
-            this.treeFunctions.OptionsCustomization.AllowSort = false;
-            this.treeFunctions.OptionsView.AutoWidth = false;
-            this.treeFunctions.OptionsView.EnableAppearanceOddRow = true;
-            this.treeFunctions.OptionsView.ShowAutoFilterRow = true;
-            this.treeFunctions.OptionsView.ShowIndicator = false;
-            this.treeFunctions.Size = new System.Drawing.Size(579, 484);
-            this.treeFunctions.TabIndex = 5;
+            this.treeListColumn5,
+            this.treeListColumn2,
+            this.treeListColumn6,
+            this.treeListColumn7});
+            this.treeResps.Location = new System.Drawing.Point(595, 40);
+            this.treeResps.Name = "treeResps";
+            this.treeResps.OptionsCustomization.AllowFilter = false;
+            this.treeResps.OptionsCustomization.AllowSort = false;
+            this.treeResps.OptionsView.AutoWidth = false;
+            this.treeResps.OptionsView.EnableAppearanceOddRow = true;
+            this.treeResps.OptionsView.ShowAutoFilterRow = true;
+            this.treeResps.OptionsView.ShowIndicator = false;
+            this.treeResps.Size = new System.Drawing.Size(579, 484);
+            this.treeResps.TabIndex = 5;
             // 
             // treeListColumn1
             // 
-            this.treeListColumn1.Caption = "功能";
-            this.treeListColumn1.FieldName = "DeptName";
+            this.treeListColumn1.Caption = "責任人員-紅線區域";
+            this.treeListColumn1.FieldName = "Name";
             this.treeListColumn1.MaxWidth = 250;
             this.treeListColumn1.MinWidth = 150;
             this.treeListColumn1.Name = "treeListColumn1";
@@ -482,8 +488,8 @@
             // 
             // treeListColumn3
             // 
-            this.treeListColumn3.Caption = "負責人";
-            this.treeListColumn3.FieldName = "Emp";
+            this.treeListColumn3.Caption = "編號";
+            this.treeListColumn3.FieldName = "RespAreaCode";
             this.treeListColumn3.Name = "treeListColumn3";
             this.treeListColumn3.OptionsColumn.AllowEdit = false;
             this.treeListColumn3.Visible = true;
@@ -510,6 +516,30 @@
             this.treeListColumn5.UnboundDataType = typeof(short);
             this.treeListColumn5.Width = 95;
             // 
+            // treeListColumn2
+            // 
+            this.treeListColumn2.Caption = "區域";
+            this.treeListColumn2.FieldName = "RespAreaName";
+            this.treeListColumn2.Name = "treeListColumn2";
+            this.treeListColumn2.Visible = true;
+            this.treeListColumn2.VisibleIndex = 2;
+            // 
+            // treeListColumn6
+            // 
+            this.treeListColumn6.Caption = "代理人";
+            this.treeListColumn6.FieldName = "AgentName";
+            this.treeListColumn6.Name = "treeListColumn6";
+            this.treeListColumn6.Visible = true;
+            this.treeListColumn6.VisibleIndex = 3;
+            // 
+            // treeListColumn7
+            // 
+            this.treeListColumn7.Caption = "督導主管";
+            this.treeListColumn7.FieldName = "BossName";
+            this.treeListColumn7.Name = "treeListColumn7";
+            this.treeListColumn7.Visible = true;
+            this.treeListColumn7.VisibleIndex = 4;
+            // 
             // Root
             // 
             this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
@@ -527,7 +557,7 @@
             this.layoutControlItem2.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             this.layoutControlItem2.AppearanceItemCaption.Options.UseFont = true;
             this.layoutControlItem2.AppearanceItemCaption.Options.UseForeColor = true;
-            this.layoutControlItem2.Control = this.treeFunctions;
+            this.layoutControlItem2.Control = this.treeResps;
             this.layoutControlItem2.Location = new System.Drawing.Point(583, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
             this.layoutControlItem2.Size = new System.Drawing.Size(583, 516);
@@ -569,7 +599,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.treeFunctions)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.treeResps)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
@@ -602,7 +632,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gColId;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
-        private DevExpress.XtraTreeList.TreeList treeFunctions;
+        private DevExpress.XtraTreeList.TreeList treeResps;
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn1;
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn3;
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn4;
@@ -616,5 +646,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn2;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn6;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn7;
     }
 }

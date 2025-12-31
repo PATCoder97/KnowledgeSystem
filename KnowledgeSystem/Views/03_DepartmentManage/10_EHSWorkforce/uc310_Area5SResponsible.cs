@@ -32,7 +32,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
         }
 
         BindingSource source5sArea = new BindingSource();
-        BindingSource sourceOrg = new BindingSource();
+        BindingSource sourceResp = new BindingSource();
 
         DXMenuItem itemViewInfo;
 
@@ -42,17 +42,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
         List<dm_Departments> depts;
         List<dt310_Role> roles;
         List<dm_User> users;
-        //List<UnitEHSOrgCustom> unitEHSOrgCustoms;
-
-        //private class UnitEHSOrgCustom
-        //{
-        //    public int Id { get; set; }
-        //    public int? IdData { get; set; }
-        //    public int IdParent { get; set; }
-        //    public string DeptName { get; set; }
-        //    public string Role { get; set; }
-        //    public string Emp { get; set; }
-        //}
 
         DXMenuItem CreateMenuItem(string caption, EventHandler clickEvent, SvgImage svgImage)
         {
@@ -109,47 +98,63 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
             source5sArea.DataSource = area5S;
 
+            var joinData = from resp in areaResps
+                           join area in area5S on resp.AreaId equals area.Id
+                           where resp.DeletedAt == null && area.DeletedAt == null
+                           let emp = users.FirstOrDefault(r => r.Id == resp.EmployeeId)
+                           let agent = users.FirstOrDefault(r => r.Id == resp.AgentId)
+                           let boss = users.FirstOrDefault(r => r.Id == resp.BossId)
+                           select new
+                           {
+                               EmployeeId = resp.EmployeeId,
+                               EmpName = emp != null ? $"LG{emp.IdDepartment}/{emp.DisplayName}" : $"Unknown-{resp.EmployeeId}",
+                               AgentName = agent != null ? $"LG{agent.IdDepartment}/{agent.DisplayName}" : $"Unknown-{resp.AgentId}",
+                               BossName = boss != null ? $"LG{boss.IdDepartment}/{boss.DisplayName}" : $"Unknown-{resp.BossId}",
+                               AreaId = area.Id,
+                               AreaName = area.DisplayName,
+                               AreaDesc = area.DESC,
+                               RespAreaCode = resp.AreaCode,
+                               RespAreaName = resp.AreaName,
+                           };
 
+            // Root node: EmployeeId
+            var rootNodes = joinData
+                .GroupBy(x => x.EmpName)
+                .Select(x => new
+                {
+                    Id = x.Key,
+                    IdParent = (string)null,
+                    Name = x.Key,
+                    EmpName = (string)null,
+                    AgentName = (string)null,
+                    BossName = (string)null,
+                    RespAreaCode = (string)null,
+                    RespAreaName = (string)null
+                });
 
-            //roles = dt310_RoleBUS.Instance.GetList();
-            //unitEHSOrgs = dt310_UnitEHSOrgBUS.Instance.GetList();
-            ////depts = dm_DeptBUS.Instance.GetList();
-            //depts = dm_DeptBUS.Instance.GetAllChildren(0).Where(r => r.IsGroup != true && !TPConfigs.ExclusionDept310.Split(';').Contains(r.Id)).ToList();
-            //users = dm_UserBUS.Instance.GetList();
+            // Child node: Areas
+            var childNodes = joinData
+                .Select(x => new
+                {
+                    Id = $"{x.EmployeeId}_{x.AreaId}_{Guid.NewGuid().ToString("N").Substring(5)}",
+                    IdParent = x.EmpName,
+                    Name = x.AreaName,      // tên hiển thị node con
+                    EmpName = x.EmpName,
+                    AgentName = x.AgentName,
+                    BossName = x.BossName,
+                    RespAreaCode = x.RespAreaCode,
+                    RespAreaName = x.RespAreaName
+                });
 
-            //unitEHSOrgCustoms = new List<UnitEHSOrgCustom>();
+            // Merge
+            var treeListSource = rootNodes
+                .Union(childNodes)
+                .ToList();
 
-            //int index = 1;
-            //List<dm_Departments> startParents = depts.Where(r => r.IdParent == -1).ToList();
+            // Gán TreeList
+            sourceResp.DataSource = treeListSource;
 
-            //foreach (var parent in startParents)
-            //{
-            //    AddDepartmentRecursive(parent, 0, ref index, unitEHSOrgCustoms, depts, unitEHSOrgs, roles, users);
-            //}
-
-            //source5sArea.DataSource = unitEHSOrgCustoms;
-
-            //var now = DateTime.Now;
-            //var result = unitEHSOrgs.Select(u =>
-            //{
-            //    var roleObj = roles.FirstOrDefault(r => r.Id == u.RoleId);
-            //    var userObj = users.FirstOrDefault(r => r.Id == u.EmployeeId);
-
-            //    return new
-            //    {
-            //        u.Id,
-            //        Emp = $"{userObj?.IdDepartment} {userObj?.DisplayName} {userObj?.DisplayNameVN}",
-            //        Role = roleObj?.DisplayName,
-            //        u.StartDate,
-            //        ThamNien = (now.Year - u.StartDate.Year) -
-            //                   (now.Month < u.StartDate.Month ||
-            //                   (now.Month == u.StartDate.Month && now.Day < u.StartDate.Day) ? 1 : 0)
-            //    };
-            //}).ToList();
-
-
-            //sourceOrg.DataSource = result;
-            //treeFunctions.BestFitColumns();
+            treeResps.BestFitColumns();
             gvData.BestFitColumns();
         }
 
@@ -157,16 +162,16 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
         {
             LoadData();
 
-            //treeFunctions.DataSource = sourceFunc;
-            //treeFunctions.KeyFieldName = "Id";
-            //treeFunctions.ParentFieldName = "IdParent";
-            //treeFunctions.CheckBoxFieldName = "Status";
-            //treeFunctions.BestFitColumns();
-            //treeFunctions.ReadOnlyTreelist();
+            treeResps.DataSource = sourceResp;
+            treeResps.KeyFieldName = "Id";
+            treeResps.ParentFieldName = "IdParent";
+            //treeResps.CheckBoxFieldName = "Status";
+            treeResps.BestFitColumns();
+            treeResps.ReadOnlyTreelist();
 
-            //TreeListNode node = treeFunctions.GetNodeByVisibleIndex(0);
-            //if (node != null)
-            //    node.Expanded = !node.Expanded;
+            TreeListNode node = treeResps.GetNodeByVisibleIndex(0);
+            if (node != null)
+                node.Expanded = !node.Expanded;
 
             gvData.ReadOnlyGridView();
             gvData.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;

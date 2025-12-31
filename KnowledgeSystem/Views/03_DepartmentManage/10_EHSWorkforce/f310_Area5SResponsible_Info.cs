@@ -491,10 +491,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                 "DeptId",
                 "EmployeeId",
                 "AgentId",
+                "BossId",
                 "AreaName",
-                "AreaFileId",
-                "StartDate",
-                "EndDate"
+                "AreaCode",
             };
 
             foreach (var name in compareProps)
