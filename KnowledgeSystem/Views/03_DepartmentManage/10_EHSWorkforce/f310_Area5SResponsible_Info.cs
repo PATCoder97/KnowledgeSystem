@@ -26,6 +26,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static DevExpress.Xpo.Helpers.AssociatedCollectionCriteriaHelper;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 {
@@ -180,6 +181,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                     btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                     btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+
+                    btnEditResponsibility.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                    btnConfirmResponsibility.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
 
                     break;
                 case EventFormInfo.View:
@@ -370,6 +374,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                 }
             }
 
+            if (pic5SArea.Image == null)
+            {
+                IsValidate = false;
+            }
+
             if (!IsValidate)
             {
                 MsgTP.MsgError("請填寫所有信息<color=red>(*)</color>");
@@ -406,14 +415,26 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                         break;
                     case EventFormInfo.Update:
 
+                        if (!string.IsNullOrEmpty(imgAreaPath))
+                        {
+                            encryptionName = EncryptionHelper.EncryptionFileName(imgAreaPath);
+                            area5S.FileName = encryptionName;
+
+                            using (Image img = Image.FromFile(imgAreaPath))
+                            {
+                                Directory.CreateDirectory(TPConfigs.Folder310);
+                                img.Save(Path.Combine(TPConfigs.Folder310, encryptionName), ImageFormat.Png);
+                            }
+                        }
+
                         result = dt310_Area5SBUS.Instance.AddOrUpdate(area5S);
 
                         break;
                     case EventFormInfo.Delete:
 
-                        //var dialogResult = XtraMessageBox.Show($"您確認要刪除{formName}\r\n{cbbFunc.Text}：{cbbUsr.Text}", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                        //if (dialogResult != DialogResult.Yes) return;
-                        //result = dt310_EHSFunctionBUS.Instance.RemoveById(EHSFunc.Id, TPConfigs.LoginUser.Id);
+                        var dialogResult = XtraMessageBox.Show($"您確認要刪除{formName}：{area5S.DisplayName}", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (dialogResult != DialogResult.Yes) return;
+                        result = dt310_Area5SBUS.Instance.RemoveById(area5S.Id, TPConfigs.LoginUser.Id);
 
                         break;
                     default:
@@ -433,54 +454,77 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
         private void btnConfirmResponsibility_ItemClick(object sender, ItemClickEventArgs e)
         {
+            var result = true;
+
             var newList = source5sResp.DataSource as List<dt310_Area5SResponsible>;
+
+            var compareProps = new[]
+            {
+                "DeptId",
+                "EmployeeId",
+                "AgentId",
+                "BossId",
+                "AreaName",
+                "AreaCode",
+            };
+
+            // Kiểm tra null/rỗng
+            foreach (var item in newList)
+            {
+                foreach (var prop in compareProps)
+                {
+                    var value = item.GetType().GetProperty(prop)?.GetValue(item) as string;
+
+                    if (string.IsNullOrWhiteSpace(value))
+                    {
+                        MsgTP.MsgError("資料尚未填寫完成，請檢查後再試！");
+                        return;
+                    }
+                }
+            }
 
             // Lấy danh sách cũ trong DB
             var oldList = dt310_Area5SResponsibleBUS.Instance.GetListByAreaId(idBase);
 
-            // ======================
-            // 1. INSERT – các dòng mới
-            // ======================
             var inserts = newList.Where(x => x.Id == 0).ToList();
             var updates = newList.Where(x => x.Id > 0).ToList();
             var deletes = oldList.Where(o => !newList.Any(n => n.Id == o.Id)).ToList();
 
+            // INSERT
             foreach (var item in inserts)
             {
                 item.AreaId = idBase;
                 item.CreatedAt = DateTime.Now;
                 item.CreatedBy = TPConfigs.LoginUser.Id;
 
-                dt310_Area5SResponsibleBUS.Instance.Add(item);
+                result &= dt310_Area5SResponsibleBUS.Instance.Add(item);
             }
 
-            // ======================
-            // 2. UPDATE – chỉ update nếu dòng có thay đổi
-            // ======================
-
+            // UPDATE
             foreach (var item in updates)
             {
                 var old = oldList.FirstOrDefault(o => o.Id == item.Id);
 
-                if (old != null)
+                if (old != null && !AreEqual(old, item))
                 {
-                    if (!AreEqual(old, item)) // CHỈ update khi có thay đổi
-                    {
-                        dt310_Area5SResponsibleBUS.Instance.AddOrUpdate(item);
-                    }
+                    result &= dt310_Area5SResponsibleBUS.Instance.AddOrUpdate(item);
                 }
             }
 
-            // ======================
-            // 3. DELETE – soft delete
-            // ======================
+            // DELETE
             foreach (var item in deletes)
             {
                 item.DeletedAt = DateTime.Now;
                 item.DeletedBy = TPConfigs.LoginUser.Id;
 
-                dt310_Area5SResponsibleBUS.Instance.AddOrUpdate(item);
+                result &= dt310_Area5SResponsibleBUS.Instance.AddOrUpdate(item);
             }
+
+            // KẾT QUẢ
+            if (result)
+                Close();
+            else
+                MsgTP.MsgErrorDB();
         }
 
         private bool AreEqual(dt310_Area5SResponsible oldItem, dt310_Area5SResponsible newItem)
@@ -511,7 +555,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
             return true; // không thay đổi
         }
-
 
         private void btnAddUser_Click(object sender, EventArgs e)
         {

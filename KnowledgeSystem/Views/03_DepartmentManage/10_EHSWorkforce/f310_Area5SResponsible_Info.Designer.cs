@@ -58,8 +58,10 @@
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnEdit = new DevExpress.XtraBars.BarButtonItem();
+            this.btnEditResponsibility = new DevExpress.XtraBars.BarButtonItem();
             this.btnDelete = new DevExpress.XtraBars.BarButtonItem();
             this.btnConfirm = new DevExpress.XtraBars.BarButtonItem();
+            this.btnConfirmResponsibility = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -73,8 +75,6 @@
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcGridUser = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcDesc = new DevExpress.XtraLayout.LayoutControlItem();
-            this.btnEditResponsibility = new DevExpress.XtraBars.BarButtonItem();
-            this.btnConfirmResponsibility = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.gvSession)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
@@ -181,14 +181,14 @@
             this.gcData.EmbeddedNavigator.Buttons.Edit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.EndEdit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.Remove.Visible = false;
-            this.gcData.Location = new System.Drawing.Point(501, 40);
+            this.gcData.Location = new System.Drawing.Point(501, 41);
             this.gcData.MainView = this.gvData;
             this.gcData.Name = "gcData";
             this.gcData.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemMemoEdit11,
             this.itemcbbEmp,
             this.itemcbbDept});
-            this.gcData.Size = new System.Drawing.Size(712, 361);
+            this.gcData.Size = new System.Drawing.Size(712, 360);
             this.gcData.TabIndex = 6;
             this.gcData.UseEmbeddedNavigator = true;
             this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -477,6 +477,14 @@
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnEdit_ItemClick);
             // 
+            // btnEditResponsibility
+            // 
+            this.btnEditResponsibility.Caption = "編輯責任";
+            this.btnEditResponsibility.Id = 4;
+            this.btnEditResponsibility.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnEditResponsibility.Name = "btnEditResponsibility";
+            this.btnEditResponsibility.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnEditResponsibility_ItemClick);
+            // 
             // btnDelete
             // 
             this.btnDelete.Caption = "刪除";
@@ -492,6 +500,14 @@
             this.btnConfirm.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnConfirm_ItemClick);
+            // 
+            // btnConfirmResponsibility
+            // 
+            this.btnConfirmResponsibility.Caption = "確認";
+            this.btnConfirmResponsibility.Id = 5;
+            this.btnConfirmResponsibility.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnConfirmResponsibility.Name = "btnConfirmResponsibility";
+            this.btnConfirmResponsibility.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnConfirmResponsibility_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -553,28 +569,28 @@
             // txbArea
             // 
             this.txbArea.EditValue = "";
-            this.txbArea.Location = new System.Drawing.Point(55, 12);
+            this.txbArea.Location = new System.Drawing.Point(62, 12);
             this.txbArea.Name = "txbArea";
             this.txbArea.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txbArea.Properties.Appearance.Options.UseFont = true;
             this.txbArea.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.Black;
             this.txbArea.Properties.AppearanceDisabled.Options.UseForeColor = true;
             this.txbArea.Properties.NullText = "【項目選擇】";
-            this.txbArea.Size = new System.Drawing.Size(442, 32);
+            this.txbArea.Size = new System.Drawing.Size(435, 32);
             this.txbArea.StyleController = this.layoutControl1;
             this.txbArea.TabIndex = 12;
             // 
             // txbDesc
             // 
             this.txbDesc.EditValue = "";
-            this.txbDesc.Location = new System.Drawing.Point(55, 48);
+            this.txbDesc.Location = new System.Drawing.Point(62, 48);
             this.txbDesc.Name = "txbDesc";
             this.txbDesc.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txbDesc.Properties.Appearance.Options.UseFont = true;
             this.txbDesc.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.Black;
             this.txbDesc.Properties.AppearanceDisabled.Options.UseForeColor = true;
             this.txbDesc.Properties.NullText = "【項目選擇】";
-            this.txbDesc.Size = new System.Drawing.Size(442, 32);
+            this.txbDesc.Size = new System.Drawing.Size(435, 32);
             this.txbDesc.StyleController = this.layoutControl1;
             this.txbDesc.TabIndex = 12;
             // 
@@ -606,9 +622,7 @@
             this.lcArea.Name = "lcArea";
             this.lcArea.Size = new System.Drawing.Size(489, 36);
             this.lcArea.Text = "區域";
-            this.lcArea.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
             this.lcArea.TextSize = new System.Drawing.Size(38, 24);
-            this.lcArea.TextToControlDistance = 5;
             // 
             // layoutControlItem1
             // 
@@ -632,8 +646,10 @@
             this.lcGridUser.Name = "lcGridUser";
             this.lcGridUser.Size = new System.Drawing.Size(716, 393);
             this.lcGridUser.Text = "責任區劃分";
+            this.lcGridUser.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
             this.lcGridUser.TextLocation = DevExpress.Utils.Locations.Top;
             this.lcGridUser.TextSize = new System.Drawing.Size(95, 24);
+            this.lcGridUser.TextToControlDistance = 5;
             // 
             // lcDesc
             // 
@@ -650,25 +666,7 @@
             this.lcDesc.Name = "lcDesc";
             this.lcDesc.Size = new System.Drawing.Size(489, 36);
             this.lcDesc.Text = "備註";
-            this.lcDesc.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
             this.lcDesc.TextSize = new System.Drawing.Size(38, 24);
-            this.lcDesc.TextToControlDistance = 5;
-            // 
-            // btnEditResponsibility
-            // 
-            this.btnEditResponsibility.Caption = "編輯責任";
-            this.btnEditResponsibility.Id = 4;
-            this.btnEditResponsibility.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnEditResponsibility.Name = "btnEditResponsibility";
-            this.btnEditResponsibility.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnEditResponsibility_ItemClick);
-            // 
-            // btnConfirmResponsibility
-            // 
-            this.btnConfirmResponsibility.Caption = "確認";
-            this.btnConfirmResponsibility.Id = 5;
-            this.btnConfirmResponsibility.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnConfirmResponsibility.Name = "btnConfirmResponsibility";
-            this.btnConfirmResponsibility.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnConfirmResponsibility_ItemClick);
             // 
             // f310_Area5SResponsible_Info
             // 

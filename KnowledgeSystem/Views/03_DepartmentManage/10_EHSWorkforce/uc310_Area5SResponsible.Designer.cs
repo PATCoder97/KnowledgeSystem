@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode3 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode4 = new DevExpress.XtraGrid.GridLevelNode();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc310_Area5SResponsible));
             this.gvResponsibleEmp = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gColIdDetail = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -174,14 +174,14 @@
             this.gcData.EmbeddedNavigator.Buttons.Edit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.EndEdit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.Remove.Visible = false;
-            gridLevelNode1.LevelTemplate = this.gvResponsibleEmp;
-            gridLevelNode2.LevelTemplate = this.gvDetail;
-            gridLevelNode2.RelationName = "CheckDetail";
-            gridLevelNode1.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode2});
-            gridLevelNode1.RelationName = "Responsible";
+            gridLevelNode3.LevelTemplate = this.gvResponsibleEmp;
+            gridLevelNode4.LevelTemplate = this.gvDetail;
+            gridLevelNode4.RelationName = "CheckDetail";
+            gridLevelNode3.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
+            gridLevelNode4});
+            gridLevelNode3.RelationName = "Responsible";
             this.gcData.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode1});
+            gridLevelNode3});
             this.gcData.Location = new System.Drawing.Point(12, 40);
             this.gcData.MainView = this.gvData;
             this.gcData.Name = "gcData";
@@ -391,6 +391,7 @@
             this.btnReload.ItemAppearance.Normal.Options.UseFont = true;
             this.btnReload.ItemAppearance.Normal.Options.UseForeColor = true;
             this.btnReload.Name = "btnReload";
+            this.btnReload.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnReload_ItemClick);
             // 
             // btnSummaryTable
             // 
@@ -398,6 +399,7 @@
             this.btnSummaryTable.Id = 14;
             this.btnSummaryTable.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnSummaryTable.Name = "btnSummaryTable";
+            this.btnSummaryTable.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             // 
             // barDockControlTop
             // 

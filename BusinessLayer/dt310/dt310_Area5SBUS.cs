@@ -30,7 +30,7 @@ namespace BusinessLayer
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dt310_Area5S.ToList();
+                    return _context.dt310_Area5S.Where(r => r.DeletedAt == null).ToList();
                 }
             }
             catch (Exception ex)
@@ -110,14 +110,17 @@ namespace BusinessLayer
             }
         }
 
-        public bool RemoveById(int id)
+        public bool RemoveById(int id, string userDel)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
                     var itemRemove = _context.dt310_Area5S.FirstOrDefault(r => r.Id == id);
-                    _context.dt310_Area5S.Remove(itemRemove);
+                    if (itemRemove == null) return false;
+
+                    itemRemove.DeletedAt = DateTime.Now;
+                    itemRemove.DeletedBy = userDel;
 
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;

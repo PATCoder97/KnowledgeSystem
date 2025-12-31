@@ -86,8 +86,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
         private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            f310_Area5SResponsible_Info fInfo = new f310_Area5SResponsible_Info() { isAddInfo = false, isEditorInfo = false };
+            f310_Area5SResponsible_Info fInfo = new f310_Area5SResponsible_Info() { isAddInfo = true, isEditorInfo = false };
             fInfo.ShowDialog(this);
+            LoadData();
         }
 
         private void LoadData()
@@ -165,9 +166,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             treeResps.DataSource = sourceResp;
             treeResps.KeyFieldName = "Id";
             treeResps.ParentFieldName = "IdParent";
-            //treeResps.CheckBoxFieldName = "Status";
             treeResps.BestFitColumns();
             treeResps.ReadOnlyTreelist();
+            treeResps.KeyDown += GridControlHelper.TreeViewCopyCellData_KeyDown;
 
             TreeListNode node = treeResps.GetNodeByVisibleIndex(0);
             if (node != null)
@@ -241,6 +242,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             GridView detailView = masterView.GetDetailView(e.RowHandle, visibleDetailRelationIndex) as GridView;
 
             detailView.BestFitColumns();
+        }
+
+        private void btnReload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            LoadData();
         }
     }
 }
