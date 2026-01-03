@@ -95,10 +95,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
         private class SickData
         {
             public string Id { get; set; }
-            public string Time { get; set; }
+            public string Month { get; set; }
             public List<string> Data { get; set; }
             public double TotalTime { get; set; }
             public double Count { get; set; }
+            public double CountUser { get; set; }
+            public double Percent { get; set; }
         }
 
         private void InitializeIcon()
@@ -833,6 +835,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
 
                 // Biểu mẫu 4: TÌNH HÌNH NGHỈ DO ỐM, TAI NẠN LAO ĐỘNG VÀ BỆNH NGHỀ NGHIỆP
                 List<SickData> sickDatas = new List<SickData>();
+                Dictionary<string, int> userByMonth = Enumerable.Range(1, 12).ToDictionary(m => m.ToString("00"), m => 0);
+
+
                 if (sickFiles.Count != 0)
                 {
                     foreach (var sickFile in sickFiles)
@@ -849,6 +854,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                                     Month = Regex.Match(text, @"\d{7}-\d{7}").Value
                                 };
 
+                                string month = matches.Month.Split('-')[1].Substring(3, 2);
+
+                                if (userByMonth.ContainsKey(month))
+                                {
+                                    userByMonth[month] += 1;
+                                }
+
                                 if (!string.IsNullOrEmpty(matches.Month) && !string.IsNullOrEmpty(matches.Id) && matches.DataList.Count > 0)
                                 {
                                     sickDatas.Add(new SickData
@@ -857,21 +869,43 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                                         Data = matches.DataList,
                                         TotalTime = matches.DataList.Sum(s => double.TryParse(s.Split().Last(), out double val) ? val : 0),
                                         Count = matches.DataList.Count,
-                                        Time = matches.Month.Split('-')[1].Substring(3, 2)
+                                        Month = matches.Month.Split('-')[1].Substring(3, 2)
                                     });
                                 }
                             }
                         }
                 }
 
-                var dt4 = sickDatas
-                    .GroupBy(a => a.Time)
-                    .Select(dtg => new SickData
+                var months = Enumerable.Range(1, 12).Select(m => m.ToString("00"));
+
+                var grouped = sickDatas.GroupBy(a => a.Month)
+                    .Select(g => new SickData
                     {
-                        Time = dtg.Key,
-                        TotalTime = dtg.Sum(r => r.TotalTime),
-                        Count = dtg.Sum(r => r.Count),
-                    }).OrderBy(r => r.Time).ToList();
+                        Month = g.Key,
+                        TotalTime = g.Sum(r => r.TotalTime),
+                        Count = g.Sum(r => r.Count),
+                        CountUser = g.Select(r => r.Id).Distinct().Count()
+                    });
+
+                var dt4 = userByMonth.GroupJoin(
+                    grouped,
+                    m => m.Key,
+                    g => g.Month,
+                    (m, g) =>
+                    {
+                        var data = g.FirstOrDefault();
+
+                        return new SickData
+                        {
+                            Month = m.Key,
+                            TotalTime = data?.TotalTime ?? 0,
+                            Count = data?.Count ?? 0,
+                            CountUser = data?.CountUser ?? 0,
+                            Percent = m.Value == 0 ? 0 : (double)(data?.CountUser ?? 0) / m.Value * 100
+                        };
+                    })
+                    .OrderBy(x => x.Month)
+                    .ToList();
 
                 // Biểu mẫu 5: QUẢN LÝ BỆNH MÃN TÍNH
                 int CalculateAge(DateTime? dob) => dob.HasValue ? DateTime.Now.Year - dob.Value.Year - (DateTime.Now < dob.Value.AddYears(DateTime.Now.Year - dob.Value.Year) ? 1 : 0) : 0;
@@ -997,7 +1031,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                     void InsertDataWS1(int startRow, bool IsVietnamese = true)
                     {
                         int index1 = 0;
-                        wsBieuMau1.InsertRow(startRow, dt1RowIns);
+                        if (dt1RowIns > 0) wsBieuMau1.InsertRow(startRow, dt1RowIns);
                         string formatDate = IsVietnamese ? "dd/MM/yyyy" : "yyyy/MM/dd";
 
                         foreach (var item in dt1)
@@ -1022,7 +1056,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                         }
                     }
 
-                    if (dt1RowIns > 0)
+                    if (dt1RowIns >= 0)
                     {
                         InsertDataWS1(12, false);
                         InsertDataWS1(6, true);
@@ -1035,7 +1069,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                     void InsertDataWS2(int startRow, bool IsVietnamese = true)
                     {
                         int index2 = 0;
-                        wsBieuMau2.InsertRow(startRow, dt2RowIns);
+                        if (dt2RowIns > 0) wsBieuMau2.InsertRow(startRow, dt2RowIns);
                         string checkNameProp = IsVietnamese ? "checkName_vn" : "checkName_tw";
                         string formatDate = IsVietnamese ? "dd/MM/yyyy" : "yyyy/MM/dd";
 
@@ -1061,7 +1095,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                         }
                     }
 
-                    if (dt2RowIns > 0)
+                    if (dt2RowIns >= 0)
                     {
                         InsertDataWS2(12, false);
                         InsertDataWS2(6, true);
@@ -1071,7 +1105,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                     void InsertDataWS3(int startRow, IEnumerable<dynamic> data, bool IsVietnamese = true)
                     {
                         int rowCount = data.Count() - 1;
-                        wsBieuMau3.InsertRow(startRow, rowCount);
+                        if (rowCount > 0) wsBieuMau3.InsertRow(startRow, rowCount);
 
                         int i = 0;
                         foreach (var item in data)
@@ -1104,6 +1138,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                     {
                         wsBieuMau4.Cells[$"E{flag + i}"].Value = dt4[i].Count;
                         wsBieuMau4.Cells[$"I{flag + i}"].Value = dt4[i].TotalTime / 8;
+                        wsBieuMau4.Cells[$"G{flag + i}"].Value = dt4[i].Percent;
                     }
 
                     // Biểu mẫu 5: QUẢN LÝ BỆNH MÃN TÍNH
@@ -1112,7 +1147,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                     void InsertDataWS5(int startRow, bool IsVietnamese = true)
                     {
                         int index5 = 0;
-                        wsBieuMau5.InsertRow(startRow, dt5RowIns);
+                        if (dt5RowIns > 0) wsBieuMau5.InsertRow(startRow, dt5RowIns);
                         int indexMergeStart = startRow - 1;
                         int indexMergeStop = startRow - 1;
                         string valueCell5 = IsVietnamese ? dt5.FirstOrDefault()?.UserNameVN : dt5.FirstOrDefault()?.UserNameTW;
@@ -1146,6 +1181,19 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                                     wsBieuMau5.Cells[$"Q{indexMergeStart}:R{indexMergeStop}"].Merge = true;
                                     wsBieuMau5.Cells[$"S{indexMergeStart}:T{indexMergeStop}"].Merge = true;
                                 }
+                                else
+                                {
+                                    wsBieuMau5.Cells[$"A{indexMergeStart}:D{indexMergeStop}"].Merge = true;
+                                    wsBieuMau5.Cells[$"E{indexMergeStart}:I{indexMergeStop}"].Merge = true;
+                                    wsBieuMau5.Cells[$"O{indexMergeStart}:P{indexMergeStop}"].Merge = true;
+                                    wsBieuMau5.Cells[$"Q{indexMergeStart}:R{indexMergeStop}"].Merge = true;
+                                    wsBieuMau5.Cells[$"S{indexMergeStart}:T{indexMergeStop}"].Merge = true;
+                                }
+
+                                wsBieuMau5.Cells[$"J{indexMergeStart}:N{indexMergeStop}"].Merge = true;
+                                wsBieuMau5.Cells[$"U{indexMergeStart}:W{indexMergeStop}"].Merge = true;
+                                wsBieuMau5.Cells[$"X{indexMergeStart}:Z{indexMergeStop}"].Merge = true;
+                                wsBieuMau5.Cells[$"AA{indexMergeStart}:AD{indexMergeStop}"].Merge = true;
 
                                 // Cập nhật giá trị mới cho UserName
                                 valueCell5 = currentUserName;
@@ -1157,17 +1205,22 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                         }
 
                         // Merge lần cuối cùng nếu cần
-                        if (indexMergeStop > indexMergeStart)
+                        if (indexMergeStop >= indexMergeStart)
                         {
                             wsBieuMau5.Cells[$"A{indexMergeStart}:D{indexMergeStop}"].Merge = true;
                             wsBieuMau5.Cells[$"E{indexMergeStart}:I{indexMergeStop}"].Merge = true;
                             wsBieuMau5.Cells[$"O{indexMergeStart}:P{indexMergeStop}"].Merge = true;
                             wsBieuMau5.Cells[$"Q{indexMergeStart}:R{indexMergeStop}"].Merge = true;
                             wsBieuMau5.Cells[$"S{indexMergeStart}:T{indexMergeStop}"].Merge = true;
+
+                            wsBieuMau5.Cells[$"J{indexMergeStart}:N{indexMergeStop}"].Merge = true;
+                            wsBieuMau5.Cells[$"U{indexMergeStart}:W{indexMergeStop}"].Merge = true;
+                            wsBieuMau5.Cells[$"X{indexMergeStart}:Z{indexMergeStop}"].Merge = true;
+                            wsBieuMau5.Cells[$"AA{indexMergeStart}:AD{indexMergeStop}"].Merge = true;
                         }
                     }
 
-                    if (dt5RowIns > 0)
+                    if (dt5RowIns >= 0)
                     {
                         InsertDataWS5(13, false);
                         InsertDataWS5(6, true);
@@ -1218,7 +1271,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                     }
 
                     // Gọi hàm
-                    if (dt6RowIns > 0)
+                    if (dt6RowIns >= 0)
                     {
                         InsertDataWS6(9, false);
                         InsertDataWS6(2, true);
@@ -1229,7 +1282,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                     void InsertDataWS7(int startRow, bool IsVietnamese = true)
                     {
                         int index7 = 0;
-                        wsBieuMau7.InsertRow(startRow, dt7RowIns);
+                        if (dt7RowIns > 0) wsBieuMau7.InsertRow(startRow, dt7RowIns);
 
                         foreach (var item in dt7)
                         {
@@ -1249,7 +1302,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._08_HealthCheck
                         }
                     }
 
-                    if (dt7RowIns > 0)
+                    if (dt7RowIns >= 0)
                     {
                         InsertDataWS7(12, false);
                         InsertDataWS7(5, true);

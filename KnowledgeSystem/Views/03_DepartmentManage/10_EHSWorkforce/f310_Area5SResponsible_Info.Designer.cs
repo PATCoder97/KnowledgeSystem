@@ -75,6 +75,7 @@
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcGridUser = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcDesc = new DevExpress.XtraLayout.LayoutControlItem();
+            this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gvSession)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
@@ -310,6 +311,7 @@
             this.repositoryItemSearchLookUpEdit1View.Appearance.Row.Options.UseFont = true;
             this.repositoryItemSearchLookUpEdit1View.Appearance.Row.Options.UseForeColor = true;
             this.repositoryItemSearchLookUpEdit1View.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn16,
             this.gridColumn14,
             this.gridColumn15});
             this.repositoryItemSearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
@@ -325,7 +327,7 @@
             this.gridColumn14.FieldName = "Id";
             this.gridColumn14.Name = "gridColumn14";
             this.gridColumn14.Visible = true;
-            this.gridColumn14.VisibleIndex = 0;
+            this.gridColumn14.VisibleIndex = 1;
             // 
             // gridColumn15
             // 
@@ -333,7 +335,7 @@
             this.gridColumn15.FieldName = "DisplayName";
             this.gridColumn15.Name = "gridColumn15";
             this.gridColumn15.Visible = true;
-            this.gridColumn15.VisibleIndex = 1;
+            this.gridColumn15.VisibleIndex = 2;
             // 
             // gridColumn12
             // 
@@ -668,6 +670,14 @@
             this.lcDesc.Text = "備註";
             this.lcDesc.TextSize = new System.Drawing.Size(38, 24);
             // 
+            // gridColumn16
+            // 
+            this.gridColumn16.Caption = "部門";
+            this.gridColumn16.FieldName = "DeptId";
+            this.gridColumn16.Name = "gridColumn16";
+            this.gridColumn16.Visible = true;
+            this.gridColumn16.VisibleIndex = 0;
+            // 
             // f310_Area5SResponsible_Info
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -755,5 +765,6 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox itemcbbDept;
         private DevExpress.XtraBars.BarButtonItem btnEditResponsibility;
         private DevExpress.XtraBars.BarButtonItem btnConfirmResponsibility;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn16;
     }
 }

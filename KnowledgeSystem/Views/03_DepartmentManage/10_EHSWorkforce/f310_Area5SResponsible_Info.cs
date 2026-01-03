@@ -236,7 +236,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                 item.Text = $"<color=#000000>{item.Text}</color>";
             }
 
-            var usrs = dm_UserBUS.Instance.GetList().Where(r => r.Status == 0).Select(r => new { DisplayName = $"LG{r.IdDepartment}/{r.DisplayName}", Id = r.Id }).ToList();
+            var usrs = dm_UserBUS.Instance.GetList().Where(r => r.Status == 0).Select(r => new
+            {
+                DisplayName = $"LG{r.IdDepartment}/{r.DisplayName}",
+                Id = r.Id,
+                DeptId = r.IdDepartment
+            }).ToList();
+
             itemcbbEmp.DataSource = usrs;
             itemcbbEmp.DisplayMember = "DisplayName";
             itemcbbEmp.ValueMember = "Id";
