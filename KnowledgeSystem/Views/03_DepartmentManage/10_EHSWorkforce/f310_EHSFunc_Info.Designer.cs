@@ -463,7 +463,7 @@
             this.lcStartDate.Location = new System.Drawing.Point(0, 108);
             this.lcStartDate.Name = "lcStartDate";
             this.lcStartDate.Size = new System.Drawing.Size(383, 36);
-            this.lcStartDate.Text = "當人日";
+            this.lcStartDate.Text = "擔任日";
             this.lcStartDate.TextSize = new System.Drawing.Size(57, 24);
             // 
             // lcFunc
@@ -480,7 +480,7 @@
             this.lcFunc.Location = new System.Drawing.Point(0, 72);
             this.lcFunc.Name = "lcFunc";
             this.lcFunc.Size = new System.Drawing.Size(383, 36);
-            this.lcFunc.Text = "項目";
+            this.lcFunc.Text = "類別";
             this.lcFunc.TextSize = new System.Drawing.Size(57, 24);
             // 
             // f310_EHSFunc_Info

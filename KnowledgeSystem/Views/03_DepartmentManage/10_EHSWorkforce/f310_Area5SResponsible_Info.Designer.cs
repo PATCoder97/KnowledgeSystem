@@ -46,6 +46,7 @@
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.itemcbbEmp = new DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit();
             this.repositoryItemSearchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -75,7 +76,6 @@
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcGridUser = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcDesc = new DevExpress.XtraLayout.LayoutControlItem();
-            this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gvSession)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
@@ -213,6 +213,10 @@
             this.gvData.Appearance.Row.ForeColor = System.Drawing.Color.Black;
             this.gvData.Appearance.Row.Options.UseFont = true;
             this.gvData.Appearance.Row.Options.UseForeColor = true;
+            this.gvData.Appearance.TopNewRow.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvData.Appearance.TopNewRow.ForeColor = System.Drawing.Color.Blue;
+            this.gvData.Appearance.TopNewRow.Options.UseFont = true;
+            this.gvData.Appearance.TopNewRow.Options.UseForeColor = true;
             this.gvData.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumn1,
             this.gridColumn2,
@@ -222,6 +226,7 @@
             this.gridColumn13});
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
+            this.gvData.NewItemRowText = "點擊此處新增行";
             this.gvData.OptionsDetail.ShowDetailTabs = false;
             this.gvData.OptionsNavigation.AutoFocusNewRow = true;
             this.gvData.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
@@ -320,6 +325,14 @@
             this.repositoryItemSearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.repositoryItemSearchLookUpEdit1View.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
             this.repositoryItemSearchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn16
+            // 
+            this.gridColumn16.Caption = "部門";
+            this.gridColumn16.FieldName = "DeptId";
+            this.gridColumn16.Name = "gridColumn16";
+            this.gridColumn16.Visible = true;
+            this.gridColumn16.VisibleIndex = 0;
             // 
             // gridColumn14
             // 
@@ -561,11 +574,12 @@
             // 
             // pic5SArea
             // 
-            this.pic5SArea.Location = new System.Drawing.Point(12, 84);
+            this.pic5SArea.Location = new System.Drawing.Point(12, 113);
             this.pic5SArea.Name = "pic5SArea";
-            this.pic5SArea.Size = new System.Drawing.Size(485, 317);
+            this.pic5SArea.Size = new System.Drawing.Size(485, 288);
             this.pic5SArea.TabIndex = 15;
             this.pic5SArea.TabStop = false;
+            this.pic5SArea.Paint += new System.Windows.Forms.PaintEventHandler(this.pic5SArea_Paint);
             this.pic5SArea.DoubleClick += new System.EventHandler(this.pic5SArea_DoubleClick);
             // 
             // txbArea
@@ -628,12 +642,19 @@
             // 
             // layoutControlItem1
             // 
+            this.layoutControlItem1.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.layoutControlItem1.AppearanceItemCaption.ForeColor = System.Drawing.Color.Blue;
+            this.layoutControlItem1.AppearanceItemCaption.Options.UseFont = true;
+            this.layoutControlItem1.AppearanceItemCaption.Options.UseForeColor = true;
             this.layoutControlItem1.Control = this.pic5SArea;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 72);
             this.layoutControlItem1.Name = "layoutControlItem1";
             this.layoutControlItem1.Size = new System.Drawing.Size(489, 321);
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem1.TextVisible = false;
+            this.layoutControlItem1.Text = "雙擊此處新增或更新紅線區域圖片";
+            this.layoutControlItem1.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
+            this.layoutControlItem1.TextLocation = DevExpress.Utils.Locations.Top;
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(285, 24);
+            this.layoutControlItem1.TextToControlDistance = 5;
             // 
             // lcGridUser
             // 
@@ -669,14 +690,6 @@
             this.lcDesc.Size = new System.Drawing.Size(489, 36);
             this.lcDesc.Text = "備註";
             this.lcDesc.TextSize = new System.Drawing.Size(38, 24);
-            // 
-            // gridColumn16
-            // 
-            this.gridColumn16.Caption = "部門";
-            this.gridColumn16.FieldName = "DeptId";
-            this.gridColumn16.Name = "gridColumn16";
-            this.gridColumn16.Visible = true;
-            this.gridColumn16.VisibleIndex = 0;
             // 
             // f310_Area5SResponsible_Info
             // 

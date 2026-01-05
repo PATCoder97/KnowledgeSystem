@@ -34,7 +34,9 @@
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.barCbbBaseType = new DevExpress.XtraBars.BarEditItem();
             this.cbbType = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.barAddItem = new DevExpress.XtraBars.BarSubItem();
             this.btnAddFirstNode = new DevExpress.XtraBars.BarButtonItem();
+            this.btnAddDoc = new DevExpress.XtraBars.BarButtonItem();
             this.btnReload = new DevExpress.XtraBars.BarButtonItem();
             this.btnExportExcel = new DevExpress.XtraBars.BarButtonItem();
             this.btnKeywordSearch = new DevExpress.XtraBars.BarButtonItem();
@@ -60,8 +62,6 @@
             this.treeListColumn12 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.barAddItem = new DevExpress.XtraBars.BarSubItem();
-            this.btnAddDoc = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbType)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CbbBaseType)).BeginInit();
@@ -117,7 +117,7 @@
             this.bar2.DockRow = 0;
             this.bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barCbbBaseType, DevExpress.XtraBars.BarItemPaintStyle.Caption),
+            new DevExpress.XtraBars.LinkPersistInfo(((DevExpress.XtraBars.BarLinkUserDefines)((DevExpress.XtraBars.BarLinkUserDefines.PaintStyle | DevExpress.XtraBars.BarLinkUserDefines.Width))), this.barCbbBaseType, "", false, true, true, 277, null, DevExpress.XtraBars.BarItemPaintStyle.Caption),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barAddItem, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnReload, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnExportExcel, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
@@ -155,11 +155,27 @@
             this.cbbType.Name = "cbbType";
             this.cbbType.NullText = "[Null]";
             // 
+            // barAddItem
+            // 
+            this.barAddItem.Caption = "新增";
+            this.barAddItem.Id = 13;
+            this.barAddItem.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.barAddItem.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.barAddItem.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.barAddItem.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.barAddItem.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
+            this.barAddItem.ItemAppearance.Normal.Options.UseFont = true;
+            this.barAddItem.ItemAppearance.Normal.Options.UseForeColor = true;
+            this.barAddItem.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnAddFirstNode),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnAddDoc)});
+            this.barAddItem.Name = "barAddItem";
+            // 
             // btnAddFirstNode
             // 
             this.btnAddFirstNode.Caption = "第一級";
             this.btnAddFirstNode.Id = 0;
-            this.btnAddFirstNode.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnAdd.ImageOptions.SvgImage")));
+            this.btnAddFirstNode.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnAddFirstNode.ImageOptions.SvgImage")));
             this.btnAddFirstNode.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnAddFirstNode.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
             this.btnAddFirstNode.ItemAppearance.Hovered.Options.UseForeColor = true;
@@ -169,6 +185,20 @@
             this.btnAddFirstNode.ItemAppearance.Normal.Options.UseForeColor = true;
             this.btnAddFirstNode.Name = "btnAddFirstNode";
             this.btnAddFirstNode.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAdd_ItemClick);
+            // 
+            // btnAddDoc
+            // 
+            this.btnAddDoc.Caption = "僅文件";
+            this.btnAddDoc.Id = 14;
+            this.btnAddDoc.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnAddDoc.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnAddDoc.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnAddDoc.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddDoc.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
+            this.btnAddDoc.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnAddDoc.ItemAppearance.Normal.Options.UseForeColor = true;
+            this.btnAddDoc.Name = "btnAddDoc";
+            this.btnAddDoc.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAddDoc_ItemClick);
             // 
             // btnReload
             // 
@@ -448,36 +478,6 @@
             this.layoutControlItem1.Size = new System.Drawing.Size(943, 513);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
-            // 
-            // barAddItem
-            // 
-            this.barAddItem.Caption = "新增";
-            this.barAddItem.Id = 13;
-            this.barAddItem.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.barAddItem.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
-            this.barAddItem.ItemAppearance.Hovered.Options.UseForeColor = true;
-            this.barAddItem.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.barAddItem.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
-            this.barAddItem.ItemAppearance.Normal.Options.UseFont = true;
-            this.barAddItem.ItemAppearance.Normal.Options.UseForeColor = true;
-            this.barAddItem.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnAddFirstNode),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnAddDoc)});
-            this.barAddItem.Name = "barAddItem";
-            // 
-            // btnAddDoc
-            // 
-            this.btnAddDoc.Caption = "僅文件";
-            this.btnAddDoc.Id = 14;
-            this.btnAddDoc.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnAddDoc.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
-            this.btnAddDoc.ItemAppearance.Hovered.Options.UseForeColor = true;
-            this.btnAddDoc.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddDoc.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
-            this.btnAddDoc.ItemAppearance.Normal.Options.UseFont = true;
-            this.btnAddDoc.ItemAppearance.Normal.Options.UseForeColor = true;
-            this.btnAddDoc.Name = "btnAddDoc";
-            this.btnAddDoc.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAddDoc_ItemClick);
             // 
             // uc205_IATF16949Main
             // 

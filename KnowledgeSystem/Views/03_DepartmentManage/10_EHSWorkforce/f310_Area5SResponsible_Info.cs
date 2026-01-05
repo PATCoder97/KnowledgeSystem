@@ -616,5 +616,26 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                 //}
             }
         }
+
+        private void pic5SArea_Paint(object sender, PaintEventArgs e)
+        {
+            PictureBox pb = sender as PictureBox;
+
+            if (pb.Image == null)
+            {
+                string text = "雙擊此處新增或更新紅線區域圖片";
+
+                using (System.Drawing.Font font = new System.Drawing.Font("Microsoft JhengHei UI", 54, FontStyle.Regular))
+                using (Brush brush = new SolidBrush(System.Drawing.Color.DarkBlue))
+                {
+                    SizeF textSize = e.Graphics.MeasureString(text, font);
+
+                    float x = (pb.Width - textSize.Width) / 2;
+                    float y = (pb.Height - textSize.Height) / 2;
+
+                    e.Graphics.DrawString(text, font, brush, x, y);
+                }
+            }
+        }
     }
 }
