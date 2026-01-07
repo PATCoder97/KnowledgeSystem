@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode3 = new DevExpress.XtraGrid.GridLevelNode();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode4 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(uc310_Area5SResponsible));
             this.gvResponsibleEmp = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gColIdDetail = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -174,14 +174,14 @@
             this.gcData.EmbeddedNavigator.Buttons.Edit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.EndEdit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.Remove.Visible = false;
-            gridLevelNode3.LevelTemplate = this.gvResponsibleEmp;
-            gridLevelNode4.LevelTemplate = this.gvDetail;
-            gridLevelNode4.RelationName = "CheckDetail";
-            gridLevelNode3.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode4});
-            gridLevelNode3.RelationName = "Responsible";
+            gridLevelNode1.LevelTemplate = this.gvResponsibleEmp;
+            gridLevelNode2.LevelTemplate = this.gvDetail;
+            gridLevelNode2.RelationName = "CheckDetail";
+            gridLevelNode1.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
+            gridLevelNode2});
+            gridLevelNode1.RelationName = "Responsible";
             this.gcData.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode3});
+            gridLevelNode1});
             this.gcData.Location = new System.Drawing.Point(12, 40);
             this.gcData.MainView = this.gvData;
             this.gcData.Name = "gcData";

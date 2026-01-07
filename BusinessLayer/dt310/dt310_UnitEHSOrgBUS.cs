@@ -40,6 +40,22 @@ namespace BusinessLayer
             }
         }
 
+        public List<dt310_UnitEHSOrg> GetListByUserId(string userId)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt310_UnitEHSOrg.Where(r => r.EmployeeId == userId && r.DeletedAt == null).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public dt310_UnitEHSOrg GetItemById(int id)
         {
             try

@@ -257,7 +257,7 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949
             keyword = Regex.Replace(keyword, @"\s+", " "); // gộp nhiều khoảng trắng thành 1
             keyword = Regex.Replace(keyword, @"[^\w\s\u4e00-\u9fa5,]", ""); // ^ giữ lại chữ, số, khoảng trắng, và ký tự tiếng Trung (範圍 U+4E00–U+9FA5)
 
-            if (StringHelper.CheckUpcase(displayNameVN, 33) && displayNameVN.Length > 20)
+            if (StringHelper.CheckUpcase(displayNameVN, 90) && displayNameVN.Length > 20)
             {
                 XtraMessageBox.Show("Tắt CAPSLOCK đi！", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;

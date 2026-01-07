@@ -816,6 +816,12 @@
     <Compile Include="Views\03_DepartmentManage\10_EHSWorkforce\f310_UnitEHSOrg_Info.Designer.cs">
       <DependentUpon>f310_UnitEHSOrg_Info.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\03_DepartmentManage\10_EHSWorkforce\f310_UpdateLeaveUser_Info.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\10_EHSWorkforce\f310_UpdateLeaveUser_Info.Designer.cs">
+      <DependentUpon>f310_UpdateLeaveUser_Info.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\03_DepartmentManage\10_EHSWorkforce\uc310_Area5SResponsible.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -833,6 +839,12 @@
     </Compile>
     <Compile Include="Views\03_DepartmentManage\10_EHSWorkforce\uc310_UnitEHSOrg.Designer.cs">
       <DependentUpon>uc310_UnitEHSOrg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\10_EHSWorkforce\uc310_UpdateLeaveUser.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\10_EHSWorkforce\uc310_UpdateLeaveUser.Designer.cs">
+      <DependentUpon>uc310_UpdateLeaveUser.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\03_DepartmentManage\11_ExpenseReimbursement\f311_AddFuel_Info.cs">
       <SubType>Form</SubType>
@@ -1589,6 +1601,9 @@
     <EmbeddedResource Include="Views\03_DepartmentManage\10_EHSWorkforce\f310_UnitEHSOrg_Info.resx">
       <DependentUpon>f310_UnitEHSOrg_Info.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\10_EHSWorkforce\f310_UpdateLeaveUser_Info.resx">
+      <DependentUpon>f310_UpdateLeaveUser_Info.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\10_EHSWorkforce\uc310_Area5SResponsible.resx">
       <DependentUpon>uc310_Area5SResponsible.cs</DependentUpon>
     </EmbeddedResource>
@@ -1597,6 +1612,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\10_EHSWorkforce\uc310_UnitEHSOrg.resx">
       <DependentUpon>uc310_UnitEHSOrg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\10_EHSWorkforce\uc310_UpdateLeaveUser.resx">
+      <DependentUpon>uc310_UpdateLeaveUser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\11_ExpenseReimbursement\f311_AddFuel_Info.resx">
       <DependentUpon>f311_AddFuel_Info.cs</DependentUpon>
