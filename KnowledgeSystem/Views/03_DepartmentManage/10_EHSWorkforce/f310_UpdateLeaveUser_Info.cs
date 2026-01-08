@@ -30,11 +30,42 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
         class TestData
         {
             public string UserId { get; set; }
-            public string RoleName { get; set; }
+            public string Desc { get; set; }
+            public dt310_UnitEHSOrg UnitEHSOrgData { get; set; }
+            public dt310_Role RoleData { get; set; }
+            public dt310_EHSFunction EHSFunctionData { get; set; }
+            public dt310_Function FuncData { get; set; }
+            public dt310_Area5SResponsible Area5SResponsibleData { get; set; }
+            public dt310_Area5S AreaData { get; set; }
+            public string FieldName { get; set; }
+            public string ColName { get; set; }
+        }
+
+        private void ConfigureGridEdit(DevExpress.XtraGrid.Views.Grid.GridView view)
+        {
+            foreach (DevExpress.XtraGrid.Columns.GridColumn col in view.Columns)
+            {
+                // Kiểm tra FieldName (dùng OrdinalIgnoreCase để không phân biệt hoa thường cho chắc chắn)
+                if (col.FieldName.Equals("UserId", StringComparison.OrdinalIgnoreCase))
+                {
+                    col.OptionsColumn.AllowEdit = true;
+                    // Nếu muốn cho phép sửa nhưng không cho focus vào các ô khác thì mở thêm dòng dưới
+                    // col.OptionsColumn.AllowFocus = true; 
+                }
+                else
+                {
+                    col.OptionsColumn.AllowEdit = false;
+                    // col.OptionsColumn.AllowFocus = false; // Tùy chọn: chặn click chuột vào ô
+                }
+            }
         }
 
         private void f310_UpdateLeaveUser_Info_Load(object sender, EventArgs e)
         {
+            ConfigureGridEdit(gvUnitEHSOrg);
+            ConfigureGridEdit(gvEHSFunction);
+            ConfigureGridEdit(gvArea5SResponsible);
+
             var usrs = dm_UserBUS.Instance.GetList().Where(r => r.Status == 0).Select(r => new
             {
                 DisplayName = $"LG{r.IdDepartment}/{r.DisplayName}",
@@ -45,6 +76,16 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             itemCbbUser01.DataSource = usrs;
             itemCbbUser01.DisplayMember = "DisplayName";
             itemCbbUser01.ValueMember = "Id";
+
+            itemCbbUser02.DataSource = usrs;
+            itemCbbUser02.DisplayMember = "DisplayName";
+            itemCbbUser02.ValueMember = "Id";
+
+            itemCbbUser03.DataSource = usrs;
+            itemCbbUser03.DisplayMember = "DisplayName";
+            itemCbbUser03.ValueMember = "Id";
+
+            itemCbbUser01.NullText = itemCbbUser02.NullText = itemCbbUser03.NullText = "【請選擇接任人】";
 
             var UnitEHSOrgData = dt310_UnitEHSOrgBUS.Instance.GetListByUserId(userId);
             var EHSFunctionData = dt310_EHSFunctionBUS.Instance.GetListByUserId(userId);
@@ -58,39 +99,33 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                                     join role in roles on data.RoleId equals role.Id
                                     select new TestData
                                     {
-                                        //data,
-                                        //role,
-                                        UserId = data.EmployeeId,
-                                        RoleName = $"{data.DeptId}：{role.DisplayName}"
+                                        UnitEHSOrgData = data,
+                                        RoleData = role,
+                                        Desc = $"{data.DeptId}：{role.DisplayName}"
                                     }).ToList();
 
             var EHSFunctionUpdate = (from data in EHSFunctionData
                                      join func in funcs on data.FunctionId equals func.Id
-                                     select new
+                                     select new TestData
                                      {
-                                         data,
-                                         func,
-                                         UserId = data.EmployeeId,
-                                         FuncName = $"{data.DeptId}：{func.DisplayName}"
+                                         EHSFunctionData = data,
+                                         FuncData = func,
+                                         Desc = $"{data.DeptId}：{func.DisplayName}"
                                      }).ToList();
 
             var Area5SResponsibleUpdate = (from data in Area5SResponsibleData
-                                           join area in funcs on data.AreaId equals area.Id
+                                           join area in areas on data.AreaId equals area.Id
                                            let matchEmp = data.EmployeeId == userId
                                            let matchAgent = data.AgentId == userId
                                            where matchEmp || matchAgent
-                                           select new
+                                           select new TestData
                                            {
-                                               data,
-                                               area,
-                                               UserId = matchEmp ? data.EmployeeId : data.AgentId,
+                                               Area5SResponsibleData = data,
+                                               AreaData = area,
+                                               Desc = $"{data.DeptId}：{area.DisplayName}",
                                                FieldName = matchEmp ? "EmployeeId" : "AgentId",
                                                ColName = matchEmp ? "責任人員" : "代理人",
-                                               AreaFullName = $"{data.DeptId}：{area.DisplayName}",
-                                               AreaCode = data.AreaCode,
-                                               AreaName = data.AreaName,
                                            }).ToList();
-
 
             sourceUnitEHSOrg.DataSource = UnitEHSOrgUpdate;
             gcUnitEHSOrg.DataSource = sourceUnitEHSOrg;
