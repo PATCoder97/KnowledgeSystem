@@ -139,5 +139,7 @@ namespace DataAccessLayer
         public virtual DbSet<dt312_Questions> dt312_Questions { get; set; }
         public virtual DbSet<dt312_Setting> dt312_Setting { get; set; }
         public virtual DbSet<dt312_ExamMgmt> dt312_ExamMgmt { get; set; }
+        public virtual DbSet<dt403_05_Standard> dt403_05_Standard { get; set; }
+        public virtual DbSet<dt403_05_StandardAtt> dt403_05_StandardAtt { get; set; }
     }
 }
