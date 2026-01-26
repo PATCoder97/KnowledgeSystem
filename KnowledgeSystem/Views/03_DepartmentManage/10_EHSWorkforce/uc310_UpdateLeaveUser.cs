@@ -20,7 +20,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
         private void uc310_UpdateLeaveUser_Load(object sender, EventArgs e)
         {
-            f310_UpdateLeaveUser_Info fUpdate = new f310_UpdateLeaveUser_Info();
+            //f310_UpdateLeaveUser_Info fUpdate = new f310_UpdateLeaveUser_Info();
+            //fUpdate.ShowDialog();
+
+            f310_UpdateApproval fUpdate = new f310_UpdateApproval();
             fUpdate.ShowDialog();
         }
     }

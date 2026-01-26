@@ -816,6 +816,12 @@
     <Compile Include="Views\03_DepartmentManage\10_EHSWorkforce\f310_UnitEHSOrg_Info.Designer.cs">
       <DependentUpon>f310_UnitEHSOrg_Info.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\03_DepartmentManage\10_EHSWorkforce\f310_UpdateApproval.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\10_EHSWorkforce\f310_UpdateApproval.Designer.cs">
+      <DependentUpon>f310_UpdateApproval.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\03_DepartmentManage\10_EHSWorkforce\f310_UpdateLeaveUser_Info.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1600,6 +1606,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\10_EHSWorkforce\f310_UnitEHSOrg_Info.resx">
       <DependentUpon>f310_UnitEHSOrg_Info.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\10_EHSWorkforce\f310_UpdateApproval.resx">
+      <DependentUpon>f310_UpdateApproval.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\10_EHSWorkforce\f310_UpdateLeaveUser_Info.resx">
       <DependentUpon>f310_UpdateLeaveUser_Info.cs</DependentUpon>

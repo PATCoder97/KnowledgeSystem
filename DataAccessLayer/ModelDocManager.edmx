@@ -1080,6 +1080,33 @@
           <Property Name="DeletedAt" Type="datetime2" Precision="7" />
           <Property Name="DeletedBy" Type="nvarchar" MaxLength="10" />
         </EntityType>
+        <EntityType Name="dt310_UpdateLeaveUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdUserLeave" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="IsProcess" Type="bit" Nullable="false" />
+          <Property Name="IsCancel" Type="bit" Nullable="false" />
+          <Property Name="IdGroupProcess" Type="int" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="CreateAt" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt310_UpdateLeaveUser_detail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdUpdateData" Type="int" Nullable="false" />
+          <Property Name="IndexStep" Type="int" Nullable="false" />
+          <Property Name="IdGroup" Type="int" Nullable="false" />
+          <Property Name="IdUser" Type="varchar" MaxLength="10" />
+          <Property Name="DataJson" Type="nvarchar(max)" />
+          <Property Name="TimeSubmit" Type="datetime" />
+          <Property Name="TimeNotify" Type="datetime" />
+          <Property Name="Description" Type="nvarchar" MaxLength="256" />
+        </EntityType>
         <EntityType Name="dt311_AccountingSubject">
           <Key>
             <PropertyRef Name="Code" />
@@ -1389,6 +1416,8 @@
           <EntitySet Name="dt310_Function" EntityType="Self.dt310_Function" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt310_Role" EntityType="Self.dt310_Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt310_UnitEHSOrg" EntityType="Self.dt310_UnitEHSOrg" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt310_UpdateLeaveUser" EntityType="Self.dt310_UpdateLeaveUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt310_UpdateLeaveUser_detail" EntityType="Self.dt310_UpdateLeaveUser_detail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt311_AccountingSubject" EntityType="Self.dt311_AccountingSubject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt311_Invoice" EntityType="Self.dt311_Invoice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt311_InvoiceItem" EntityType="Self.dt311_InvoiceItem" Schema="dbo" store:Type="Tables" />
@@ -1527,6 +1556,8 @@
           <EntitySet Name="dt312_ExamMgmt" EntityType="DBDocumentManagementSystemModel.dt312_ExamMgmt" />
           <EntitySet Name="dt310_Area5S" EntityType="DBDocumentManagementSystemModel.dt310_Area5S" />
           <EntitySet Name="dt310_Area5SResponsible" EntityType="DBDocumentManagementSystemModel.dt310_Area5SResponsible" />
+          <EntitySet Name="dt310_UpdateLeaveUser" EntityType="DBDocumentManagementSystemModel.dt310_UpdateLeaveUser" />
+          <EntitySet Name="dt310_UpdateLeaveUser_detail" EntityType="DBDocumentManagementSystemModel.dt310_UpdateLeaveUser_detail" />
         </EntityContainer>
         <EntityType Name="dm_Function">
           <Key>
@@ -2814,6 +2845,33 @@
           <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="DeletedAt" Type="DateTime" Precision="7" />
           <Property Name="DeletedBy" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dt310_UpdateLeaveUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdUserLeave" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="IsProcess" Type="Boolean" Nullable="false" />
+          <Property Name="IsCancel" Type="Boolean" Nullable="false" />
+          <Property Name="IdGroupProcess" Type="Int32" />
+          <Property Name="CreateBy" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CreateAt" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="dt310_UpdateLeaveUser_detail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdUpdateData" Type="Int32" Nullable="false" />
+          <Property Name="IndexStep" Type="Int32" Nullable="false" />
+          <Property Name="IdGroup" Type="Int32" Nullable="false" />
+          <Property Name="IdUser" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DataJson" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TimeSubmit" Type="DateTime" Precision="3" />
+          <Property Name="TimeNotify" Type="DateTime" Precision="3" />
+          <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -4218,6 +4276,35 @@
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
                 <ScalarProperty Name="DeptId" ColumnName="DeptId" />
                 <ScalarProperty Name="AreaId" ColumnName="AreaId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt310_UpdateLeaveUser">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt310_UpdateLeaveUser">
+              <MappingFragment StoreEntitySet="dt310_UpdateLeaveUser">
+                <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="IdGroupProcess" ColumnName="IdGroupProcess" />
+                <ScalarProperty Name="IsCancel" ColumnName="IsCancel" />
+                <ScalarProperty Name="IsProcess" ColumnName="IsProcess" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="IdUserLeave" ColumnName="IdUserLeave" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt310_UpdateLeaveUser_detail">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt310_UpdateLeaveUser_detail">
+              <MappingFragment StoreEntitySet="dt310_UpdateLeaveUser_detail">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="TimeNotify" ColumnName="TimeNotify" />
+                <ScalarProperty Name="TimeSubmit" ColumnName="TimeSubmit" />
+                <ScalarProperty Name="DataJson" ColumnName="DataJson" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="IdGroup" ColumnName="IdGroup" />
+                <ScalarProperty Name="IndexStep" ColumnName="IndexStep" />
+                <ScalarProperty Name="IdUpdateData" ColumnName="IdUpdateData" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
