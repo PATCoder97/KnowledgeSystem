@@ -56,6 +56,54 @@ namespace BusinessLayer
             }
         }
 
+        public dt310_UpdateLeaveUser_detail GetItemByIdDataAndIdGroup(int idData, int idGroup)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt310_UpdateLeaveUser_detail.FirstOrDefault(r => r.IdUpdateData == idData && r.IdGroup == idGroup);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
+        public dt310_UpdateLeaveUser_detail GetItemByIdDataAndStep(int idData, int step)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt310_UpdateLeaveUser_detail.FirstOrDefault(r => r.IdUpdateData == idData && r.IndexStep == step);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
+        public List<dt310_UpdateLeaveUser_detail> GetItemByIdData(int idData)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt310_UpdateLeaveUser_detail.Where(r => r.IdUpdateData == idData).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public bool Add(dt310_UpdateLeaveUser_detail item)
         {
             try

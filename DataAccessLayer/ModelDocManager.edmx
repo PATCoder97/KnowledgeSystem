@@ -1090,6 +1090,7 @@
           <Property Name="IsProcess" Type="bit" Nullable="false" />
           <Property Name="IsCancel" Type="bit" Nullable="false" />
           <Property Name="IdGroupProcess" Type="int" />
+          <Property Name="DataJson" Type="nvarchar(max)" />
           <Property Name="CreateBy" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="CreateAt" Type="datetime" Nullable="false" />
         </EntityType>
@@ -1102,7 +1103,6 @@
           <Property Name="IndexStep" Type="int" Nullable="false" />
           <Property Name="IdGroup" Type="int" Nullable="false" />
           <Property Name="IdUser" Type="varchar" MaxLength="10" />
-          <Property Name="DataJson" Type="nvarchar(max)" />
           <Property Name="TimeSubmit" Type="datetime" />
           <Property Name="TimeNotify" Type="datetime" />
           <Property Name="Description" Type="nvarchar" MaxLength="256" />
@@ -2856,6 +2856,7 @@
           <Property Name="IsProcess" Type="Boolean" Nullable="false" />
           <Property Name="IsCancel" Type="Boolean" Nullable="false" />
           <Property Name="IdGroupProcess" Type="Int32" />
+          <Property Name="DataJson" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CreateBy" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="CreateAt" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
@@ -2868,7 +2869,6 @@
           <Property Name="IndexStep" Type="Int32" Nullable="false" />
           <Property Name="IdGroup" Type="Int32" Nullable="false" />
           <Property Name="IdUser" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="DataJson" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="TimeSubmit" Type="DateTime" Precision="3" />
           <Property Name="TimeNotify" Type="DateTime" Precision="3" />
           <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
@@ -4285,6 +4285,7 @@
               <MappingFragment StoreEntitySet="dt310_UpdateLeaveUser">
                 <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
                 <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="DataJson" ColumnName="DataJson" />
                 <ScalarProperty Name="IdGroupProcess" ColumnName="IdGroupProcess" />
                 <ScalarProperty Name="IsCancel" ColumnName="IsCancel" />
                 <ScalarProperty Name="IsProcess" ColumnName="IsProcess" />
@@ -4300,7 +4301,6 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="TimeNotify" ColumnName="TimeNotify" />
                 <ScalarProperty Name="TimeSubmit" ColumnName="TimeSubmit" />
-                <ScalarProperty Name="DataJson" ColumnName="DataJson" />
                 <ScalarProperty Name="IdUser" ColumnName="IdUser" />
                 <ScalarProperty Name="IdGroup" ColumnName="IdGroup" />
                 <ScalarProperty Name="IndexStep" ColumnName="IndexStep" />

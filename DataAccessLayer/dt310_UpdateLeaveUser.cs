@@ -20,6 +20,7 @@ namespace DataAccessLayer
         public bool IsProcess { get; set; }
         public bool IsCancel { get; set; }
         public Nullable<int> IdGroupProcess { get; set; }
+        public string DataJson { get; set; }
         public string CreateBy { get; set; }
         public System.DateTime CreateAt { get; set; }
     }

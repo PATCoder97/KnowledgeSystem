@@ -2,6 +2,7 @@
 using DataAccessLayer;
 using DevExpress.XtraEditors;
 using KnowledgeSystem.Helpers;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,13 +22,16 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             InitializeComponent();
         }
 
-        string userId = "VNW0012950";
+        public int idDataUpdate = -1;
+        string userId = "";
+
+        dt310_UpdateLeaveUser updateLeaveUser;
 
         BindingSource sourceUnitEHSOrg = new BindingSource();
         BindingSource sourceEHSFunction = new BindingSource();
         BindingSource sourceArea5SResponsible = new BindingSource();
 
-        class TestData
+        public class UpdateLeaveUserData
         {
             public string UserId { get; set; }
             public string Desc { get; set; }
@@ -39,6 +43,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             public dt310_Area5S AreaData { get; set; }
             public string FieldName { get; set; }
             public string ColName { get; set; }
+        }
+
+        public class UpdateLeaveUserJson
+        {
+            public List<UpdateLeaveUserData> UnitEHSOrg { get; set; }
+            public List<UpdateLeaveUserData> EHSFunction { get; set; }
+            public List<UpdateLeaveUserData> Area5SResponsible { get; set; }
         }
 
         private void ConfigureGridEdit(DevExpress.XtraGrid.Views.Grid.GridView view)
@@ -65,6 +76,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             ConfigureGridEdit(gvUnitEHSOrg);
             ConfigureGridEdit(gvEHSFunction);
             ConfigureGridEdit(gvArea5SResponsible);
+
+            updateLeaveUser = dt310_UpdateLeaveUserBUS.Instance.GetItemById(idDataUpdate);
+            userId = updateLeaveUser.IdUserLeave;
 
             var usrs = dm_UserBUS.Instance.GetList().Where(r => r.Status == 0).Select(r => new
             {
@@ -97,7 +111,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
             var UnitEHSOrgUpdate = (from data in UnitEHSOrgData
                                     join role in roles on data.RoleId equals role.Id
-                                    select new TestData
+                                    select new UpdateLeaveUserData
                                     {
                                         UnitEHSOrgData = data,
                                         RoleData = role,
@@ -106,7 +120,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
             var EHSFunctionUpdate = (from data in EHSFunctionData
                                      join func in funcs on data.FunctionId equals func.Id
-                                     select new TestData
+                                     select new UpdateLeaveUserData
                                      {
                                          EHSFunctionData = data,
                                          FuncData = func,
@@ -118,7 +132,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                                            let matchEmp = data.EmployeeId == userId
                                            let matchAgent = data.AgentId == userId
                                            where matchEmp || matchAgent
-                                           select new TestData
+                                           select new UpdateLeaveUserData
                                            {
                                                Area5SResponsibleData = data,
                                                AreaData = area,
@@ -144,6 +158,38 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             //gvArea5SResponsible.ReadOnlyGridView();
             gvArea5SResponsible.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
             gvArea5SResponsible.BestFitColumns();
+        }
+
+        private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var unitEHSOrgList = sourceUnitEHSOrg.DataSource as List<UpdateLeaveUserData>;
+            var ehsFunctionList = sourceEHSFunction.DataSource as List<UpdateLeaveUserData>;
+            var area5SResponsibleList = sourceArea5SResponsible.DataSource as List<UpdateLeaveUserData>;
+
+            var jsonData = new
+            {
+                UnitEHSOrg = unitEHSOrgList,
+                EHSFunction = ehsFunctionList,
+                Area5SResponsible = area5SResponsibleList
+            };
+
+            string json = JsonConvert.SerializeObject(jsonData, Formatting.Indented);
+
+            var detail = dt310_UpdateLeaveUser_detailBUS.Instance.GetItemByIdDataAndIdGroup(updateLeaveUser.Id, (int)updateLeaveUser.IdGroupProcess);
+            detail.IdUser = TPConfigs.LoginUser.Id;
+            detail.TimeSubmit = DateTime.Now;
+            dt310_UpdateLeaveUser_detailBUS.Instance.AddOrUpdate(detail);
+
+
+            var nextStep = dt310_UpdateLeaveUser_detailBUS.Instance.GetItemByIdDataAndStep(updateLeaveUser.Id, detail.IndexStep + 1);
+
+            updateLeaveUser.IdGroupProcess = nextStep.IdGroup;
+            updateLeaveUser.DataJson = json;
+            dt310_UpdateLeaveUserBUS.Instance.AddOrUpdate(updateLeaveUser);
+
+            XtraMessageBox.Show("已送交二級主管審核！", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            Close();
         }
     }
 }

@@ -19,7 +19,6 @@ namespace DataAccessLayer
         public int IndexStep { get; set; }
         public int IdGroup { get; set; }
         public string IdUser { get; set; }
-        public string DataJson { get; set; }
         public Nullable<System.DateTime> TimeSubmit { get; set; }
         public Nullable<System.DateTime> TimeNotify { get; set; }
         public string Description { get; set; }

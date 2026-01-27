@@ -98,6 +98,7 @@
             this.btnCancel.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnCancel.ImageOptions.SvgImage")));
             this.btnCancel.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnCancel.Name = "btnCancel";
+            this.btnCancel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnCancel_ItemClick);
             // 
             // btnApproval
             // 
@@ -105,6 +106,7 @@
             this.btnApproval.Id = 1;
             this.btnApproval.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnApproval.Name = "btnApproval";
+            this.btnApproval.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnApproval_ItemClick);
             // 
             // btnConfirm
             // 
