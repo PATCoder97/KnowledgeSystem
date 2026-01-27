@@ -263,33 +263,60 @@
             <div class="sig-title">移交人</div>
             <div class="sig-content">
                 {{ if sign1st }}
-                {{ sign1st }} <br>
-                <span class="sig-status">（已簽名）</span>
+                {{ sign1st.name }} <br>
+                {{ if sign1st.isreject == "true" }}
+                <span class="sig-status" style="color: red;">（{{ sign1st.status }}）</span><br>
+                {{ else }}
+                <span class="sig-status" style="color: green;">（{{ sign1st.status }}）</span><br>
+                {{ end }}
+                {{ if sign1st.time }}
+                <span class="sig-status">{{ sign1st.time }}</span>
+                {{ end }}
+                {{ if sign1st.isreject == "true" }}
+                <br><span class="sig-status" style="color: red; font-weight: bold;">退回原因：{{ sign1st.reason }}</span>
+                {{ end }}
                 {{ end }}
             </div>
-            <div class="sig-line"></div>
         </div>
 
         <div class="sig-box">
             <div class="sig-title">二級主管</div>
             <div class="sig-content">
                 {{ if sign2nd }}
-                {{ sign2nd }} <br>
-                <span class="sig-status">（已簽名）</span>
+                {{ sign2nd.name }} <br>
+                {{ if sign2nd.isreject == "true" }}
+                <span class="sig-status" style="color: red;">（{{ sign2nd.status }}）</span><br>
+                {{ else }}
+                <span class="sig-status" style="color: green;">（{{ sign2nd.status }}）</span><br>
+                {{ end }}
+                {{ if sign2nd.time }}
+                <span class="sig-status">{{ sign2nd.time }}</span>
+                {{ end }}
+                {{ if sign2nd.isreject == "true" }}
+                <br><span class="sig-status" style="color: red; font-weight: bold;">退回原因：{{ sign2nd.reason }}</span>
+                {{ end }}
                 {{ end }}
             </div>
-            <div class="sig-line"></div>
         </div>
 
         <div class="sig-box">
             <div class="sig-title">PSM專人</div>
             <div class="sig-content">
                 {{ if sign3th }}
-                {{ sign3th }} <br>
-                <span class="sig-status">（已簽名）</span>
+                {{ sign3th.name }} <br>
+                {{ if sign3th.isreject == "true" }}
+                <span class="sig-status" style="color: red;">（{{ sign3th.status }}）</span><br>
+                {{ else }}
+                <span class="sig-status" style="color: green;">（{{ sign3th.status }}）</span><br>
+                {{ end }}
+                {{ if sign3th.time }}
+                <span class="sig-status">{{ sign3th.time }}</span>
+                {{ end }}
+                {{ if sign3th.isreject == "true" }}
+                <br><span class="sig-status" style="color: red; font-weight: bold;">退回原因：{{ sign3th.reason }}</span>
+                {{ end }}
                 {{ end }}
             </div>
-            <div class="sig-line"></div>
         </div>
     </div>
 

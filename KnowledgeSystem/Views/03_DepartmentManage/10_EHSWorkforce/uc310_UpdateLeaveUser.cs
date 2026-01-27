@@ -1,9 +1,12 @@
 ﻿using BusinessLayer;
 using DataAccessLayer;
+using DevExpress.Data;
 using DevExpress.Utils.Menu;
 using DevExpress.Utils.Svg;
 using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using DevExpress.XtraGrid.Views.Items.ViewInfo;
 using DevExpress.XtraPrinting.Native;
 using KnowledgeSystem.Helpers;
@@ -93,7 +96,29 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             depts = dm_DeptBUS.Instance.GetAllChildren(0).Where(r => r.IsGroup != true && !TPConfigs.ExclusionDept310.Split(';').Contains(r.Id)).ToList();
             users = dm_UserBUS.Instance.GetList();
 
-            sourceDataUpdate.DataSource = updateLeaveUsers;
+            var currentUserGroups = dm_GroupUserBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id);
+            var groups = dm_GroupBUS.Instance.GetList();
+
+            var displayData = updateLeaveUsers.Select(r => new
+            {
+                r.Id,
+                IdUserLeave = users.FirstOrDefault(u => u.Id == r.IdUserLeave) != null
+                    ? $"{r.IdUserLeave} {users.FirstOrDefault(u => u.Id == r.IdUserLeave).DisplayName}"
+                    : r.IdUserLeave,
+                r.DisplayName,
+                r.IsProcess,
+                r.IsCancel,
+                GroupProcess = r.IdGroupProcess == -1
+                    ? ""
+                    : groups.FirstOrDefault(g => g.Id == r.IdGroupProcess)?.DisplayName ?? "",
+                CreateBy = users.FirstOrDefault(u => u.Id == r.CreateBy) != null
+                    ? $"{r.CreateBy} {users.FirstOrDefault(u => u.Id == r.CreateBy).DisplayName}"
+                    : r.CreateBy,
+                r.CreateAt,
+                HasMyPermission = r.IdGroupProcess == -1 ? false : currentUserGroups.Any(g => g.IdGroup == r.IdGroupProcess)
+            }).ToList();
+
+            sourceDataUpdate.DataSource = displayData;
             gvData.BestFitColumns();
         }
 
@@ -105,6 +130,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             gvData.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
             gvData.OptionsDetail.AllowOnlyOneMasterRowExpanded = true;
             gcData.DataSource = sourceDataUpdate;
+
+            gColHasMyPermission.SortOrder = DevExpress.Data.ColumnSortOrder.Descending;
         }
 
         private void gvData_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
@@ -119,10 +146,20 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
         private void gvData_DoubleClick(object sender, EventArgs e)
         {
             GridView view = sender as GridView;
-            int idUpdateData = (int)view.GetRowCellValue(view.FocusedRowHandle, gColIdData);
+            if (view == null || view.FocusedRowHandle < 0 || view.IsGroupRow(view.FocusedRowHandle))
+                return;
+
+            object cellValue = view.GetRowCellValue(view.FocusedRowHandle, gColIdData);
+            if (cellValue == null)
+                return;
+
+            int idUpdateData = Convert.ToInt32(cellValue);
             var updateLeaveUser = dt310_UpdateLeaveUserBUS.Instance.GetItemById(idUpdateData);
 
-            if (string.IsNullOrWhiteSpace(updateLeaveUser?.DataJson))
+            if (updateLeaveUser == null)
+                return;
+
+            if (string.IsNullOrWhiteSpace(updateLeaveUser.DataJson))
             {
                 f310_UpdateLeaveUser_Info updateLeaveUser_Info = new f310_UpdateLeaveUser_Info()
                 {
@@ -142,6 +179,25 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             }
 
             LoadData();
+        }
+
+        private void gvData_CustomDrawGroupRow(object sender, RowObjectCustomDrawEventArgs e)
+        {
+            GridView view = sender as GridView;
+            GridGroupRowInfo info = e.Info as GridGroupRowInfo;
+
+            if (info != null && info.Column == gColHasMyPermission)
+            {
+                object groupValueObj = view.GetGroupRowValue(e.RowHandle, info.Column);
+                bool hasMyPermission = groupValueObj != null && Convert.ToBoolean(groupValueObj);
+
+                string colorName = hasMyPermission ? "Red" : "Green";
+                string groupValue = hasMyPermission ? "待審查" : "已審查/非我審核";
+
+                int rowCount = view.GetChildRowCount(e.RowHandle);
+
+                info.GroupText = $" <color={colorName}>{groupValue}</color>《<color=Blue>{rowCount}筆</color>》";
+            }
         }
     }
 }

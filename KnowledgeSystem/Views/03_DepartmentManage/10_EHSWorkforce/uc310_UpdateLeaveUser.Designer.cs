@@ -59,6 +59,8 @@
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColHasMyPermission = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColCreateAt = new DevExpress.XtraGrid.Columns.GridColumn();
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.barCbbDept = new DevExpress.XtraBars.BarEditItem();
@@ -336,6 +338,8 @@
             this.gvData.Appearance.FooterPanel.Options.UseFont = true;
             this.gvData.Appearance.FooterPanel.Options.UseTextOptions = true;
             this.gvData.Appearance.FooterPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gvData.Appearance.GroupRow.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gvData.Appearance.GroupRow.Options.UseFont = true;
             this.gvData.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.gvData.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
             this.gvData.Appearance.HeaderPanel.Options.UseFont = true;
@@ -353,8 +357,11 @@
             this.gridColumn3,
             this.gridColumn4,
             this.gridColumn13,
-            this.gridColumn14});
+            this.gridColumn14,
+            this.gColHasMyPermission,
+            this.gColCreateAt});
             this.gvData.GridControl = this.gcData;
+            this.gvData.GroupCount = 1;
             this.gvData.Name = "gvData";
             this.gvData.OptionsScrollAnnotations.ShowSelectedRows = DevExpress.Utils.DefaultBoolean.True;
             this.gvData.OptionsSelection.CheckBoxSelectorColumnWidth = 30;
@@ -363,19 +370,21 @@
             this.gvData.OptionsView.ColumnAutoWidth = false;
             this.gvData.OptionsView.EnableAppearanceOddRow = true;
             this.gvData.OptionsView.ShowAutoFilterRow = true;
-            this.gvData.OptionsView.ShowGroupPanel = false;
+            this.gvData.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gColHasMyPermission, DevExpress.Data.ColumnSortOrder.Descending)});
+            this.gvData.CustomDrawGroupRow += new DevExpress.XtraGrid.Views.Base.RowObjectCustomDrawEventHandler(this.gvData_CustomDrawGroupRow);
             this.gvData.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gvData_PopupMenuShowing);
             this.gvData.DoubleClick += new System.EventHandler(this.gvData_DoubleClick);
             // 
             // gColIdData
             // 
-            this.gColIdData.Caption = "Id";
+            this.gColIdData.Caption = "編號";
             this.gColIdData.FieldName = "Id";
             this.gColIdData.Name = "gColIdData";
             // 
             // gridColumn1
             // 
-            this.gridColumn1.Caption = "IdUserLeave";
+            this.gridColumn1.Caption = "離職人員工號";
             this.gridColumn1.FieldName = "IdUserLeave";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
@@ -384,7 +393,7 @@
             // 
             // gColDisplayName
             // 
-            this.gColDisplayName.Caption = "DisplayName";
+            this.gColDisplayName.Caption = "離職人員姓名";
             this.gColDisplayName.FieldName = "DisplayName";
             this.gColDisplayName.MaxWidth = 600;
             this.gColDisplayName.Name = "gColDisplayName";
@@ -394,7 +403,7 @@
             // 
             // gridColumn3
             // 
-            this.gridColumn3.Caption = "IsProcess";
+            this.gridColumn3.Caption = "處理中";
             this.gridColumn3.FieldName = "IsProcess";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
@@ -405,7 +414,7 @@
             // 
             this.gridColumn4.AppearanceCell.Options.UseTextOptions = true;
             this.gridColumn4.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn4.Caption = "IsCancel";
+            this.gridColumn4.Caption = "已退回";
             this.gridColumn4.FieldName = "IsCancel";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
@@ -414,19 +423,37 @@
             // 
             // gridColumn13
             // 
-            this.gridColumn13.Caption = "IdGroupProcess";
-            this.gridColumn13.FieldName = "IdGroupProcess";
+            this.gridColumn13.Caption = "當前審核組";
+            this.gridColumn13.FieldName = "GroupProcess";
             this.gridColumn13.Name = "gridColumn13";
             this.gridColumn13.Visible = true;
             this.gridColumn13.VisibleIndex = 4;
             // 
             // gridColumn14
             // 
-            this.gridColumn14.Caption = "CreateBy";
+            this.gridColumn14.Caption = "建立人";
             this.gridColumn14.FieldName = "CreateBy";
             this.gridColumn14.Name = "gridColumn14";
             this.gridColumn14.Visible = true;
             this.gridColumn14.VisibleIndex = 5;
+            // 
+            // gColHasMyPermission
+            // 
+            this.gColHasMyPermission.Caption = "我的審核";
+            this.gColHasMyPermission.FieldName = "HasMyPermission";
+            this.gColHasMyPermission.Name = "gColHasMyPermission";
+            this.gColHasMyPermission.Visible = true;
+            this.gColHasMyPermission.VisibleIndex = 6;
+            // 
+            // gColCreateAt
+            // 
+            this.gColCreateAt.Caption = "建立時間";
+            this.gColCreateAt.DisplayFormat.FormatString = "yyyy/MM/dd HH:mm";
+            this.gColCreateAt.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.gColCreateAt.FieldName = "CreateAt";
+            this.gColCreateAt.Name = "gColCreateAt";
+            this.gColCreateAt.Visible = true;
+            this.gColCreateAt.VisibleIndex = 6;
             // 
             // barManagerTP
             // 
@@ -709,6 +736,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;
+        private DevExpress.XtraGrid.Columns.GridColumn gColHasMyPermission;
+        private DevExpress.XtraGrid.Columns.GridColumn gColCreateAt;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
     }

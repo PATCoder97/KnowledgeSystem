@@ -38,6 +38,29 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             btnConfirm.ImageOptions.SvgImage = TPSvgimages.Confirm;
         }
 
+        private object GetSignatureInfo(dt310_UpdateLeaveUser_detail detail, List<dm_User> users)
+        {
+            if (detail == null || string.IsNullOrWhiteSpace(detail.IdUser))
+                return null;
+
+            var user = users.FirstOrDefault(x => x.Id == detail.IdUser);
+            if (user == null)
+                return null;
+
+            bool isReject = !string.IsNullOrWhiteSpace(detail.Description);
+            string status = isReject ? "已退回" : "已簽名";
+
+            return new
+            {
+                name = user.DisplayName,
+                time = detail.TimeSubmit?.ToString("yyyy/MM/dd HH:mm") ?? "",
+                isreject = isReject ? "true" : "false",
+                status = status,
+                statusColor = isReject ? "red" : "green",
+                reason = detail.Description ?? ""
+            };
+        }
+
         private void f310_UpdateApproval_Load(object sender, EventArgs e)
         {
             var users = dm_UserBUS.Instance.GetList();
@@ -50,7 +73,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                 Text = $"審核離職人員權限轉移 - {updateLeaveUser.IdUserLeave} {userLeaveInfo.DisplayName}";
             }
 
-            if (updateLeaveUser.IdGroupProcess == -1)
+            // Nếu đã hoàn thành hoặc đã trả về, chỉ hiển thị nút Confirm
+            if (updateLeaveUser.IdGroupProcess == -1 || updateLeaveUser.IsCancel)
             {
                 btnApproval.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                 btnCancel.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
@@ -103,9 +127,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                     areacode = r.Area5SResponsibleData?.AreaCode ?? "",
                     areaname = r.Area5SResponsibleData?.AreaName ?? "",
                 }),
-                sign1st = users.FirstOrDefault(x => x.Id == (dataDetail?.FirstOrDefault(r => r.IndexStep == 0)?.IdUser ?? ""))?.DisplayName,
-                sign2nd = users.FirstOrDefault(x => x.Id == (dataDetail?.FirstOrDefault(r => r.IndexStep == 1)?.IdUser ?? ""))?.DisplayName,
-                sign3th = users.FirstOrDefault(x => x.Id == (dataDetail?.FirstOrDefault(r => r.IndexStep == 2)?.IdUser ?? ""))?.DisplayName,
+                sign1st = GetSignatureInfo(dataDetail?.FirstOrDefault(r => r.IndexStep == 0), users),
+                sign2nd = GetSignatureInfo(dataDetail?.FirstOrDefault(r => r.IndexStep == 1), users),
+                sign3th = GetSignatureInfo(dataDetail?.FirstOrDefault(r => r.IndexStep == 2), users),
             };
 
             var templateContentSigner = File.ReadAllText(Path.Combine(TPConfigs.ResourcesPath, "310_updateleaveruser.html"));

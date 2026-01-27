@@ -162,9 +162,42 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            // Focus ra khỏi ô đang edit để đảm bảo dữ liệu được lưu
+            gvUnitEHSOrg.CloseEditor();
+            gvEHSFunction.CloseEditor();
+            gvArea5SResponsible.CloseEditor();
+
+            // Focus vào control khác để kích hoạt validation
+            this.ActiveControl = null;
+
             var unitEHSOrgList = sourceUnitEHSOrg.DataSource as List<UpdateLeaveUserData>;
             var ehsFunctionList = sourceEHSFunction.DataSource as List<UpdateLeaveUserData>;
             var area5SResponsibleList = sourceArea5SResponsible.DataSource as List<UpdateLeaveUserData>;
+
+            // Kiểm tra tất cả UserId phải khác null
+            var emptyUsers = new List<string>();
+
+            if (unitEHSOrgList != null && unitEHSOrgList.Any(r => string.IsNullOrWhiteSpace(r.UserId)))
+            {
+                emptyUsers.Add("一。安衛環組織表");
+            }
+
+            if (ehsFunctionList != null && ehsFunctionList.Any(r => string.IsNullOrWhiteSpace(r.UserId)))
+            {
+                emptyUsers.Add("二。各機能設定表");
+            }
+
+            if (area5SResponsibleList != null && area5SResponsibleList.Any(r => string.IsNullOrWhiteSpace(r.UserId)))
+            {
+                emptyUsers.Add("三。紅線區域負責人");
+            }
+
+            if (emptyUsers.Count > 0)
+            {
+                string message = "以下區域尚未選擇接任人，請補充完整：\n\n" + string.Join("\n", emptyUsers);
+                XtraMessageBox.Show(message, TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             var jsonData = new
             {
@@ -185,6 +218,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
             updateLeaveUser.IdGroupProcess = nextStep.IdGroup;
             updateLeaveUser.DataJson = json;
+            updateLeaveUser.IsProcess = true;
+            updateLeaveUser.IsCancel = false;
             dt310_UpdateLeaveUserBUS.Instance.AddOrUpdate(updateLeaveUser);
 
             XtraMessageBox.Show("已送交二級主管審核！", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
