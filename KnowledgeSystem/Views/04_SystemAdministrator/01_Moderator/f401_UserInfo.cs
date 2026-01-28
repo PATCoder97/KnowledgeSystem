@@ -711,7 +711,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
                             case UpdateEvent.ResignPlan:
 
-                                Trigger310("預報離職");
+                                if (resignDate != null)
+                                    Trigger310("預報離職");
 
                                 break;
                         }

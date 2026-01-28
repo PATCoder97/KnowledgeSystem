@@ -73,22 +73,14 @@
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridControl1 = new DevExpress.XtraGrid.GridControl();
-            this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn22 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn23 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn24 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.repositoryItemMemoEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.tabbedControlGroup1 = new DevExpress.XtraLayout.TabbedControlGroup();
-            this.layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlGroup4 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -104,19 +96,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvUnitEHSOrg)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemCbbUser01)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSearchLookUpEdit1View)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemMemoEdit2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroup1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
             this.SuspendLayout();
             // 
             // barManagerTP
@@ -157,8 +144,6 @@
             this.bar2.DockRow = 0;
             this.bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnEdit, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnDelete, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnConfirm, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawDragBorder = false;
@@ -185,6 +170,7 @@
             // 
             this.btnConfirm.Caption = "確認";
             this.btnConfirm.Id = 2;
+            this.btnConfirm.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnConfirm.ImageOptions.SvgImage")));
             this.btnConfirm.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnConfirm_ItemClick);
@@ -227,7 +213,6 @@
             this.layoutControl1.Controls.Add(this.gcArea5SResponsible);
             this.layoutControl1.Controls.Add(this.gcEHSFunction);
             this.layoutControl1.Controls.Add(this.gcUnitEHSOrg);
-            this.layoutControl1.Controls.Add(this.gridControl1);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
@@ -641,81 +626,6 @@
             this.gridColumn3.VisibleIndex = 1;
             this.gridColumn3.Width = 87;
             // 
-            // gridControl1
-            // 
-            this.gridControl1.EmbeddedNavigator.Buttons.Append.Visible = false;
-            this.gridControl1.EmbeddedNavigator.Buttons.CancelEdit.Visible = false;
-            this.gridControl1.EmbeddedNavigator.Buttons.Edit.Visible = false;
-            this.gridControl1.EmbeddedNavigator.Buttons.EndEdit.Visible = false;
-            this.gridControl1.EmbeddedNavigator.Buttons.Remove.Visible = false;
-            this.gridControl1.Location = new System.Drawing.Point(24, 56);
-            this.gridControl1.MainView = this.gridView3;
-            this.gridControl1.Name = "gridControl1";
-            this.gridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.repositoryItemMemoEdit2});
-            this.gridControl1.Size = new System.Drawing.Size(680, 537);
-            this.gridControl1.TabIndex = 16;
-            this.gridControl1.UseEmbeddedNavigator = true;
-            this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView3});
-            // 
-            // gridView3
-            // 
-            this.gridView3.Appearance.FooterPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridView3.Appearance.FooterPanel.Options.UseFont = true;
-            this.gridView3.Appearance.FooterPanel.Options.UseTextOptions = true;
-            this.gridView3.Appearance.FooterPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridView3.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.gridView3.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
-            this.gridView3.Appearance.HeaderPanel.Options.UseFont = true;
-            this.gridView3.Appearance.HeaderPanel.Options.UseForeColor = true;
-            this.gridView3.Appearance.HeaderPanel.Options.UseTextOptions = true;
-            this.gridView3.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridView3.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gridView3.Appearance.Row.ForeColor = System.Drawing.Color.Black;
-            this.gridView3.Appearance.Row.Options.UseFont = true;
-            this.gridView3.Appearance.Row.Options.UseForeColor = true;
-            this.gridView3.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn22,
-            this.gridColumn23,
-            this.gridColumn24});
-            this.gridView3.GridControl = this.gridControl1;
-            this.gridView3.Name = "gridView3";
-            this.gridView3.OptionsDetail.ShowDetailTabs = false;
-            this.gridView3.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
-            this.gridView3.OptionsView.ColumnAutoWidth = false;
-            this.gridView3.OptionsView.EnableAppearanceOddRow = true;
-            this.gridView3.OptionsView.ShowAutoFilterRow = true;
-            this.gridView3.OptionsView.ShowGroupPanel = false;
-            // 
-            // gridColumn22
-            // 
-            this.gridColumn22.Caption = "ID";
-            this.gridColumn22.FieldName = "Id";
-            this.gridColumn22.Name = "gridColumn22";
-            // 
-            // gridColumn23
-            // 
-            this.gridColumn23.Caption = "區域名稱";
-            this.gridColumn23.FieldName = "DisplayName";
-            this.gridColumn23.Name = "gridColumn23";
-            this.gridColumn23.Visible = true;
-            this.gridColumn23.VisibleIndex = 0;
-            this.gridColumn23.Width = 113;
-            // 
-            // gridColumn24
-            // 
-            this.gridColumn24.Caption = "備註";
-            this.gridColumn24.FieldName = "DESC";
-            this.gridColumn24.Name = "gridColumn24";
-            this.gridColumn24.Visible = true;
-            this.gridColumn24.VisibleIndex = 1;
-            this.gridColumn24.Width = 87;
-            // 
-            // repositoryItemMemoEdit2
-            // 
-            this.repositoryItemMemoEdit2.Name = "repositoryItemMemoEdit2";
-            // 
             // Root
             // 
             this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
@@ -736,31 +646,12 @@
             this.tabbedControlGroup1.AppearanceTabPage.HeaderActive.Options.UseForeColor = true;
             this.tabbedControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.tabbedControlGroup1.Name = "tabbedControlGroup1";
-            this.tabbedControlGroup1.SelectedTabPage = this.layoutControlGroup3;
+            this.tabbedControlGroup1.SelectedTabPage = this.layoutControlGroup1;
             this.tabbedControlGroup1.Size = new System.Drawing.Size(708, 597);
             this.tabbedControlGroup1.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlGroup1,
             this.layoutControlGroup2,
-            this.layoutControlGroup3,
-            this.layoutControlGroup4});
-            // 
-            // layoutControlGroup3
-            // 
-            this.layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem4});
-            this.layoutControlGroup3.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlGroup3.Name = "layoutControlGroup3";
-            this.layoutControlGroup3.Size = new System.Drawing.Size(684, 541);
-            this.layoutControlGroup3.Text = "紅線區域負責人";
-            // 
-            // layoutControlItem4
-            // 
-            this.layoutControlItem4.Control = this.gcArea5SResponsible;
-            this.layoutControlItem4.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem4.Name = "layoutControlItem4";
-            this.layoutControlItem4.Size = new System.Drawing.Size(684, 541);
-            this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem4.TextVisible = false;
+            this.layoutControlGroup3});
             // 
             // layoutControlGroup1
             // 
@@ -798,23 +689,23 @@
             this.layoutControlItem3.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem3.TextVisible = false;
             // 
-            // layoutControlGroup4
+            // layoutControlGroup3
             // 
-            this.layoutControlGroup4.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem2});
-            this.layoutControlGroup4.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlGroup4.Name = "layoutControlGroup4";
-            this.layoutControlGroup4.Size = new System.Drawing.Size(684, 541);
-            this.layoutControlGroup4.Text = "核簽流程";
+            this.layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem4});
+            this.layoutControlGroup3.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlGroup3.Name = "layoutControlGroup3";
+            this.layoutControlGroup3.Size = new System.Drawing.Size(684, 541);
+            this.layoutControlGroup3.Text = "紅線區域負責人";
             // 
-            // layoutControlItem2
+            // layoutControlItem4
             // 
-            this.layoutControlItem2.Control = this.gridControl1;
-            this.layoutControlItem2.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(684, 541);
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem2.TextVisible = false;
+            this.layoutControlItem4.Control = this.gcArea5SResponsible;
+            this.layoutControlItem4.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem4.Name = "layoutControlItem4";
+            this.layoutControlItem4.Size = new System.Drawing.Size(684, 541);
+            this.layoutControlItem4.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem4.TextVisible = false;
             // 
             // f310_UpdateLeaveUser_Info
             // 
@@ -828,6 +719,7 @@
             this.Controls.Add(this.barDockControlTop);
             this.IconOptions.Image = global::KnowledgeSystem.Properties.Resources.AppIcon;
             this.Name = "f310_UpdateLeaveUser_Info";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "更新負責人";
             this.Load += new System.EventHandler(this.f310_UpdateLeaveUser_Info_Load);
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
@@ -845,19 +737,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvUnitEHSOrg)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.itemCbbUser01)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSearchLookUpEdit1View)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemMemoEdit2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedControlGroup1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -876,13 +763,6 @@
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
-        private DevExpress.XtraGrid.GridControl gridControl1;
-        private DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit repositoryItemMemoEdit2;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView3;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn22;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn23;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn24;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private DevExpress.XtraLayout.TabbedControlGroup tabbedControlGroup1;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup2;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
@@ -905,7 +785,6 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
-        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup4;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;

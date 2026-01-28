@@ -51,7 +51,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
         private void InitializeIcon()
         {
-            btnAdd.ImageOptions.SvgImage = TPSvgimages.Add;
             btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
         }
 
@@ -70,7 +69,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
         private void InitializeMenuItems()
         {
-            itemUpdateLeaveUser = CreateMenuItem("更新負責人", ItemUpdateLeaveUser_Click, TPSvgimages.View);
+            itemUpdateLeaveUser = CreateMenuItem("重新呈核", ItemUpdateLeaveUser_Click, TPSvgimages.Edit);
             //itemUpdatePrice = CreateMenuItem("更新單價", ItemUpdatePrice_Click, TPSvgimages.Money);
         }
 
@@ -91,6 +90,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
         private void LoadData()
         {
+            helper.SaveViewInfo();
+
             roles = dt310_RoleBUS.Instance.GetList();
             updateLeaveUsers = dt310_UpdateLeaveUserBUS.Instance.GetList();
             depts = dm_DeptBUS.Instance.GetAllChildren(0).Where(r => r.IsGroup != true && !TPConfigs.ExclusionDept310.Split(';').Contains(r.Id)).ToList();
@@ -120,6 +121,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
             sourceDataUpdate.DataSource = displayData;
             gvData.BestFitColumns();
+
+            helper.LoadViewInfo();
         }
 
         private void uc310_UpdateLeaveUser_Load(object sender, EventArgs e)
@@ -132,13 +135,21 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             gcData.DataSource = sourceDataUpdate;
 
             gColHasMyPermission.SortOrder = DevExpress.Data.ColumnSortOrder.Descending;
+            gvData.BestFitColumns();
         }
 
         private void gvData_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
         {
             if (e.HitInfo.InRowCell && e.HitInfo.InDataRow)
             {
-                e.Menu.Items.Add(itemUpdateLeaveUser);
+                GridView view = sender as GridView;
+                bool isCancel = Convert.ToBoolean(view.GetRowCellValue(view.FocusedRowHandle, gridColumn4));
+
+                // Chỉ hiện menu "重新呈核" khi IsCancel = true
+                if (isCancel)
+                {
+                    e.Menu.Items.Add(itemUpdateLeaveUser);
+                }
                 //e.Menu.Items.Add(itemUpdatePrice);
             }
         }
@@ -198,6 +209,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
                 info.GroupText = $" <color={colorName}>{groupValue}</color>《<color=Blue>{rowCount}筆</color>》";
             }
+        }
+
+        private void btnReload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            LoadData();
         }
     }
 }

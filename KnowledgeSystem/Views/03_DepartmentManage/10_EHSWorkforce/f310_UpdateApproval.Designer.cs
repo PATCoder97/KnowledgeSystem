@@ -34,7 +34,7 @@
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnCancel = new DevExpress.XtraBars.BarButtonItem();
             this.btnApproval = new DevExpress.XtraBars.BarButtonItem();
-            this.btnConfirm = new DevExpress.XtraBars.BarButtonItem();
+            this.btnClose = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -56,7 +56,7 @@
             this.barManagerTP.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.btnCancel,
             this.btnApproval,
-            this.btnConfirm});
+            this.btnClose});
             this.barManagerTP.MainMenu = this.bar2;
             this.barManagerTP.MaxItemId = 4;
             // 
@@ -84,7 +84,7 @@
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnCancel, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnApproval, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnConfirm, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnClose, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawDragBorder = false;
             this.bar2.OptionsBar.MultiLine = true;
@@ -108,12 +108,13 @@
             this.btnApproval.Name = "btnApproval";
             this.btnApproval.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnApproval_ItemClick);
             // 
-            // btnConfirm
+            // btnClose
             // 
-            this.btnConfirm.Caption = "確認";
-            this.btnConfirm.Id = 2;
-            this.btnConfirm.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnConfirm.Name = "btnConfirm";
+            this.btnClose.Caption = "關閉";
+            this.btnClose.Id = 2;
+            this.btnClose.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnClose_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -182,7 +183,7 @@
         private DevExpress.XtraBars.Bar bar2;
         private DevExpress.XtraBars.BarButtonItem btnCancel;
         private DevExpress.XtraBars.BarButtonItem btnApproval;
-        private DevExpress.XtraBars.BarButtonItem btnConfirm;
+        private DevExpress.XtraBars.BarButtonItem btnClose;
         private DevExpress.XtraBars.BarDockControl barDockControlTop;
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;

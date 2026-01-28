@@ -20,6 +20,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
         public f310_UpdateLeaveUser_Info()
         {
             InitializeComponent();
+            InitializeIcon();
         }
 
         public int idDataUpdate = -1;
@@ -69,6 +70,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                     // col.OptionsColumn.AllowFocus = false; // Tùy chọn: chặn click chuột vào ô
                 }
             }
+        }
+
+        private void InitializeIcon()
+        {
+            btnConfirm.ImageOptions.SvgImage = TPSvgimages.Confirm;
         }
 
         private void f310_UpdateLeaveUser_Info_Load(object sender, EventArgs e)
@@ -213,7 +219,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             detail.TimeSubmit = DateTime.Now;
             dt310_UpdateLeaveUser_detailBUS.Instance.AddOrUpdate(detail);
 
-
             var nextStep = dt310_UpdateLeaveUser_detailBUS.Instance.GetItemByIdDataAndStep(updateLeaveUser.Id, detail.IndexStep + 1);
 
             updateLeaveUser.IdGroupProcess = nextStep.IdGroup;
@@ -221,6 +226,20 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             updateLeaveUser.IsProcess = true;
             updateLeaveUser.IsCancel = false;
             dt310_UpdateLeaveUserBUS.Instance.AddOrUpdate(updateLeaveUser);
+
+            var details = dt310_UpdateLeaveUser_detailBUS.Instance.GetItemByIdData(updateLeaveUser.Id);
+
+            // Reset lại các trường từ nextStep trở đi vì có thể sẽ bị trả về nên cần reset về ban đầu
+            var stepsToReset = details.Where(d => d.IndexStep >= nextStep.IndexStep).ToList();
+            foreach (var step in stepsToReset)
+            {
+                step.IdUser = null;
+                step.TimeSubmit = null;
+                step.TimeNotify = null;
+                step.Description = null;
+                dt310_UpdateLeaveUser_detailBUS.Instance.AddOrUpdate(step);
+            }
+
 
             XtraMessageBox.Show("已送交二級主管審核！", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
 

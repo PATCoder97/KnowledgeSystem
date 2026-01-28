@@ -35,7 +35,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
         {
             btnApproval.ImageOptions.SvgImage = TPSvgimages.EmailSend;
             btnCancel.ImageOptions.SvgImage = TPSvgimages.Close;
-            btnConfirm.ImageOptions.SvgImage = TPSvgimages.Confirm;
+            btnClose.ImageOptions.SvgImage = TPSvgimages.Confirm;
         }
 
         private object GetSignatureInfo(dt310_UpdateLeaveUser_detail detail, List<dm_User> users)
@@ -91,7 +91,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                 }
                 else
                 {
-                    btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                    btnClose.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                 }
             }
 
@@ -262,6 +262,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             dt310_UpdateLeaveUserBUS.Instance.AddOrUpdate(updateLeaveUser);
 
             XtraMessageBox.Show("已退回！", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Close();
+        }
+
+        private void btnClose_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
             Close();
         }
     }
