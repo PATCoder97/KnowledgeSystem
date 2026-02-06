@@ -61,6 +61,22 @@ namespace BusinessLayer
             }
         }
 
+        public List<dm_Group> GetListContainName(string nameGroup)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dm_Group.Where(r => r.DisplayName.Contains(nameGroup)).OrderBy(r => r.Prioritize).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         /// <summary>
         /// Lấy nhóm người dùng bằng tên
         /// </summary>

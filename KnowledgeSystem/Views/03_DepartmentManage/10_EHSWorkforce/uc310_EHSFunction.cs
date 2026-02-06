@@ -29,9 +29,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
         List<dm_Departments> depts;
         List<dt310_EHSFunction> EHSFuncs;
-        List<dt310_Function> funcs; 
+        List<dt310_Function> funcs;
         List<dm_User> users;
         List<EHSFuncCustom> EHSFuncsCustom;
+
+        List<dm_GroupUser> userGroups;
+        bool isEHSAdmin = false;
 
         private class EHSFuncCustom
         {
@@ -39,6 +42,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             public int? IdData { get; set; }
             public int IdParent { get; set; }
             public string DeptName { get; set; }
+            public string DeptId { get; set; }
             public string Role { get; set; }
             public string Emp { get; set; }
         }
@@ -147,6 +151,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
         private void uc310_EHSFunction_Load(object sender, EventArgs e)
         {
+            userGroups = dm_GroupUserBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id);
+            int groupId = dm_GroupBUS.Instance.GetItemByName($"安衛環7")?.Id ?? -1;
+            isEHSAdmin = userGroups.Any(r => r.IdGroup == groupId);
+
             LoadData();
 
             treeFunctions.DataSource = sourceEHSFunc;
@@ -215,6 +223,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             var row = treeList.GetDataRecordByNode(node) as EHSFuncCustom;
             if (row == null || !row.IdData.HasValue)
                 return;
+
+            if (!isEHSAdmin)
+            {
+                int groupId = dm_GroupBUS.Instance.GetItemByName($"安衛環{row.DeptId}")?.Id ?? -1;
+                if (!userGroups.Any(r => r.IdGroup == groupId))
+                    return;
+            }
 
             using (var finfo = new f310_EHSFunc_Info
             {

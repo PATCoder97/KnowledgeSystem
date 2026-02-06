@@ -40,12 +40,16 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
         List<dm_User> users;
         List<UnitEHSOrgCustom> unitEHSOrgCustoms;
 
+        List<dm_GroupUser> userGroups;
+        bool isEHSAdmin = false;
+
         private class UnitEHSOrgCustom
         {
             public int Id { get; set; }
             public int? IdData { get; set; }
             public int IdParent { get; set; }
             public string DeptName { get; set; }
+            public string DeptId { get; set; }
             public string Role { get; set; }
             public string Emp { get; set; }
         }
@@ -95,7 +99,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                     IdParent = deptNode.Id,
                     Emp = $"{userObj?.IdDepartment} {userObj?.DisplayName} {userObj?.DisplayNameVN}",
                     Role = roleObj?.DisplayName,
-                    DeptName = $"↪ {dept.Id}：{roleObj?.DisplayName}"
+                    DeptName = $"↪ {dept.Id}：{roleObj?.DisplayName}",
+                    DeptId = dept.Id
                 });
                 index++;
             }
@@ -154,6 +159,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
         private void uc310_UnitEHSOrg_Load(object sender, EventArgs e)
         {
+            userGroups = dm_GroupUserBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id);
+            int groupId = dm_GroupBUS.Instance.GetItemByName($"安衛環7")?.Id ?? -1;
+            isEHSAdmin = userGroups.Any(r => r.IdGroup == groupId);
+
             LoadData();
 
             treeFunctions.DataSource = sourceFunc;
@@ -165,7 +174,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
             TreeListNode node = treeFunctions.GetNodeByVisibleIndex(0);
             if (node != null)
-            node.Expanded = !node.Expanded;
+                node.Expanded = !node.Expanded;
 
             gvData.ReadOnlyGridView();
             gvData.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
@@ -223,6 +232,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             var row = treeList.GetDataRecordByNode(node) as UnitEHSOrgCustom;
             if (row == null || !row.IdData.HasValue)
                 return;
+
+            if (!isEHSAdmin)
+            {
+                int groupId = dm_GroupBUS.Instance.GetItemByName($"安衛環{row.DeptId}")?.Id ?? -1;
+                if (!userGroups.Any(r => r.IdGroup == groupId))
+                    return;
+            }
 
             using (var finfo = new f310_UnitEHSOrg_Info
             {
