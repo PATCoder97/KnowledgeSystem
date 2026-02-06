@@ -43,6 +43,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
         List<dt310_Role> roles;
         List<dm_User> users;
 
+        List<dm_GroupUser> userGroups;
+        bool isEHSAdmin = false;
+
         DXMenuItem CreateMenuItem(string caption, EventHandler clickEvent, SvgImage svgImage)
         {
             var menuItem = new DXMenuItem(caption, clickEvent, svgImage, DXMenuItemPriority.Normal);
@@ -161,6 +164,15 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
         private void uc310_Area5SResponsible_Load(object sender, EventArgs e)
         {
+            userGroups = dm_GroupUserBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id);
+            int groupId = dm_GroupBUS.Instance.GetItemByName($"安衛環7")?.Id ?? -1;
+            isEHSAdmin = userGroups.Any(r => r.IdGroup == groupId);
+
+            if (!isEHSAdmin)
+            {
+                btnAdd.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            }
+
             LoadData();
 
             treeResps.DataSource = sourceResp;

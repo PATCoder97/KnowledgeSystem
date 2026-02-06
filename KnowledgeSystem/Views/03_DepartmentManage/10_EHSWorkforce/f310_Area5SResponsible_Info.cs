@@ -3,6 +3,7 @@ using DataAccessLayer;
 using DevExpress.Export.Xl;
 using DevExpress.Utils.Menu;
 using DevExpress.Utils.Svg;
+using DevExpress.Xpo.Helpers;
 using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
@@ -60,6 +61,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
         dt310_Area5S area5S;
         List<dt310_Area5SResponsible> area5SResponsibles = new List<dt310_Area5SResponsible>();
         BindingSource source5sResp = new BindingSource();
+
+        List<dm_GroupUser> userGroups;
+        bool isEHSAdmin = false;
 
         List<LayoutControlItem> lcControls;
         List<LayoutControlItem> lcImpControls;
@@ -206,6 +210,15 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                     break;
             }
 
+            if (!isEHSAdmin)
+            {
+                btnEdit.Visibility = BarItemVisibility.Never;
+                btnDelete.Visibility = BarItemVisibility.Never;
+
+                gvData.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
+                gvData.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.None;
+            }
+
             foreach (var item in lcControls)
             {
                 string colorHex = item.Control.Enabled ? "000000" : "000000";
@@ -228,6 +241,16 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
         private void f310_Area5SResponsible_Info_Load(object sender, EventArgs e)
         {
+            userGroups = dm_GroupUserBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id);
+            var groupEHSs = dm_GroupBUS.Instance.GetListContainName("安衛環");
+            var ehsAdminGroup = groupEHSs.FirstOrDefault(g => g.DisplayName.Trim() == "安衛環7");
+            bool isEHSAdmin = ehsAdminGroup != null && userGroups.Any(gu => gu.IdGroup == ehsAdminGroup.Id);
+
+            var deptByGroups = groupEHSs
+                .Where(g => userGroups.Any(gu => gu.IdGroup == g.Id))
+                .Select(g => g.DisplayName.Replace("安衛環", "").Trim())
+                .ToList();
+
             lcControls = new List<LayoutControlItem>() { lcArea, lcDesc };
             lcImpControls = new List<LayoutControlItem>() { lcArea };
             foreach (var item in lcControls)
@@ -236,18 +259,19 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                 item.Text = $"<color=#000000>{item.Text}</color>";
             }
 
-            var usrs = dm_UserBUS.Instance.GetList().Where(r => r.Status == 0).Select(r => new
-            {
-                DisplayName = $"LG{r.IdDepartment}/{r.DisplayName}",
-                Id = r.Id,
-                DeptId = r.IdDepartment
-            }).ToList();
+            var usrs = dm_UserBUS.Instance.GetList().Where(r => r.Status == 0 && (isEHSAdmin || deptByGroups.Contains(r.IdDepartment)))
+                .Select(r => new
+                {
+                    DisplayName = $"LG{r.IdDepartment}/{r.DisplayName}",
+                    Id = r.Id,
+                    DeptId = r.IdDepartment
+                }).ToList();
 
             itemcbbEmp.DataSource = usrs;
             itemcbbEmp.DisplayMember = "DisplayName";
             itemcbbEmp.ValueMember = "Id";
 
-            var depts = dm_DeptBUS.Instance.GetAllChildren(0).Where(r => r.IsGroup != true).Select(r => r.Id).ToList();
+            var depts = dm_DeptBUS.Instance.GetAllChildren(0).Where(r => r.IsGroup != true && (isEHSAdmin || deptByGroups.Contains(r.Id))).Select(r => r.Id).ToList();
             itemcbbDept.Items.AddRange(depts);
 
             //var funcs = dt310_FunctionBUS.Instance.GetList();
@@ -271,7 +295,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
                     pic5SArea.Image = Image.FromFile(Path.Combine(TPConfigs.Folder310, area5S.FileName));
 
-                    area5SResponsibles = dt310_Area5SResponsibleBUS.Instance.GetListByAreaId(idBase);
+                    area5SResponsibles = dt310_Area5SResponsibleBUS.Instance.GetListByAreaId(idBase).Where(r => (isEHSAdmin || deptByGroups.Contains(r.DeptId))).ToList();
                     source5sResp.DataSource = area5SResponsibles;
                     gcData.DataSource = source5sResp;
                     gvData.BestFitColumns();
