@@ -13,6 +13,7 @@ using DocumentFormat.OpenXml.Spreadsheet;
 using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._00_Generals;
 using KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt;
+using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,6 +23,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net.Mail;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -121,7 +123,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
 
             if (result != DialogResult.Yes)
                 return;
-
+             
             // Lấy dữ liệu từ DB
             var stdAtt = dt403_05_StandardAttBUS.Instance.GetItemByIdatt(idBase);
 
@@ -154,14 +156,21 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
                 return;
 
             // Lấy dữ liệu từ DB
-            var stdAtt = dt403_05_StandardAttBUS.Instance.GetItemByIdatt(idBase);
 
+            var stdAtt = dt403_05_StandardAttBUS.Instance.GetItemByIdatt(idBase);
+            var std = dt403_05_StandardBUS.Instance.GetItemById(stdAtt.StandardId);
             // Ghi ngày xác nhận
             stdAtt.FinishDate = DateTime.Now;
             stdAtt.FinishUser = TPConfigs.LoginUser.Id;
 
+            std.MaGCN = stdAtt.MaGCN;
+            std.NextCalibrationDate = stdAtt.NextCalibrationDate;
+            std.ĐKĐBĐ = stdAtt.ĐKĐBĐ;
+            std.Standardlink = stdAtt.Standardlink;
+
             // Lưu vào DB
             dt403_05_StandardAttBUS.Instance.AddOrUpdate(stdAtt);
+            dt403_05_StandardBUS.Instance.AddOrUpdate(std);
 
             LoadData();
         }
@@ -182,49 +191,17 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
         }
         private void ItemUpdateVer_Click(object sender, EventArgs e)
         {
-            using (var dlg = new OpenFileDialog { Filter = "PDF files (*.pdf)|*.pdf" })
+           
+            GridView view = gvData;
+            int idBase = Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, gColId));
+            f403_05_UpdateStandar f403_05_UpdateStandar = new f403_05_UpdateStandar()
             {
-                if (dlg.ShowDialog() != DialogResult.OK)
-                    return;
-
-                GridView view = gvData;
-                int idBase = Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, gColId));
-                // Lấy bản ghi StandardAtt nếu có
-                var stdAtt = new dt403_05_StandardAtt { StandardId = idBase,UploadDate = DateTime.Now};
-
-                // ---- Xử lý file ----
-                string filePath = dlg.FileName;
-                string actualName = Path.GetFileName(filePath);
-                string encryptionName = EncryptionHelper.EncryptionFileName(actualName);
-
-                dm_Attachment attachment = new dm_Attachment
-                {
-                    Thread = "40305",
-                    EncryptionName = encryptionName,
-                    ActualName = actualName
-                };
-
-                // Tạo thư mục nếu chưa có
-                string destPath = Path.Combine(TPConfigs.Folder40305, encryptionName);
-                Directory.CreateDirectory(Path.GetDirectoryName(destPath));
-
-                // Sao chép file
-                File.Copy(filePath, destPath, true);
-                DialogResult result = XtraMessageBox.Show(
-                    "您確定要更新此檔案嗎？",
-                    "更新檔案",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
-                if (result != DialogResult.Yes)
-                    return;
-                // Lưu attachment → lấy Id
-                stdAtt.AttId = dm_AttachmentBUS.Instance.Add(attachment);
-                stdAtt.UploadUser = TPConfigs.LoginUser.Id;
-                // Lưu StandardAtt
-                dt403_05_StandardAttBUS.Instance.Add(stdAtt);
-
-                LoadData();
-            }
+                idBase = idBase,
+                eventInfo = EventFormInfo.Create,
+                formName = "規範"
+            };
+            f403_05_UpdateStandar.ShowDialog();
+            LoadData();
         }
         DXMenuItem CreateMenuItem(string caption, EventHandler clickEvent, SvgImage svgImage)
         {
@@ -393,7 +370,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
                 Directory.CreateDirectory(TPConfigs.TempFolderData);
 
             File.Copy(sourcePath, destPath, true);
-
             var mainForm = f00_ViewMultiFile.Instance;
             if (!mainForm.Visible)
                 mainForm.Show();
@@ -432,18 +408,11 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
                   //  e.Menu.Items.Add(itemRemove);
                     e.Menu.Items.Add(itemCacelProgress);
                 }
-            }
+            } 
         }
         private void btnExportExcel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            string documentsPath = TPConfigs.DocumentPath();
-            if (!Directory.Exists(documentsPath))
-                Directory.CreateDirectory(documentsPath);
-
-            string filePath = Path.Combine(documentsPath, $"考試系統 - {DateTime.Now:yyyyMMddHHmm}.xlsx");
-
-            gcData.ExportToXlsx(filePath);
-            Process.Start(filePath);
+          
         }
     }
 }

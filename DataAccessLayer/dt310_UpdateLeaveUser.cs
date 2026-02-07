@@ -12,16 +12,16 @@ namespace DataAccessLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class dt403_05_Standard
+    public partial class dt310_UpdateLeaveUser
     {
         public int Id { get; set; }
-        public string SN { get; set; }  // 100B-17
-        public string DisplayNameTW { get; set; } //塞尺
-        public string DisplayNameVN { get; set; } // Bộ căn lá
-        public string ManagerId { get; set; }
-        public string MaGCN { get; set; } //TSG-0-438208
-        public string ĐKĐBĐ { get; set; } //(0.001~0.003) mm(0.001~0.003) mm
-        public Nullable<System.DateTime> NextCalibrationDate { get; set; } //2025/07/11
-        public string Standardlink { get; set; } // Techmaster
+        public string IdUserLeave { get; set; }
+        public string DisplayName { get; set; }
+        public bool IsProcess { get; set; }
+        public bool IsCancel { get; set; }
+        public Nullable<int> IdGroupProcess { get; set; }
+        public string DataJson { get; set; }
+        public string CreateBy { get; set; }
+        public System.DateTime CreateAt { get; set; }
     }
 }

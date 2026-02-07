@@ -45,8 +45,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
 
         private void f403_05_UpdateStandar_Load(object sender, EventArgs e)
         {
-            lcControls = new List<LayoutControlItem>() {lcFilePath };
-            lcImpControls = new List<LayoutControlItem>() {lcFilePath };
+            lcControls = new List<LayoutControlItem>() {lcFilePath, lcMaGCN, lcNextCalibrationDate, lcStandardlink, lcĐKĐBĐ };
+            lcImpControls = new List<LayoutControlItem>() {lcFilePath, lcMaGCN, lcNextCalibrationDate, lcStandardlink, lcĐKĐBĐ };
 
             foreach (var item in lcControls)
             {
@@ -65,7 +65,13 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
                     item.Text = item.Text.Replace("<color=red>*</color>", "");
                 }
             }
-        }
+            //switch (eventInfo)
+            //{
+            //    case EventFormInfo.Update:
+            //        break;
+            //}
+
+            }
 
         private void txbAtt_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
@@ -135,28 +141,35 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
             }
 
             var dt403_05_standardAtt = dt403_05_StandardAttBUS.Instance.GetItemById(idBase);
-            if (dt403_05_standardAtt == null)
-            {
+            //if (dt403_05_standardAtt == null)
+            //{
                 dt403_05_standardAtt = new dt403_05_StandardAtt();
                 dt403_05_standardAtt.StandardId = idBase;
                 dt403_05_standardAtt.UploadDate = DateTime.Now;
+                dt403_05_standardAtt.MaGCN = txbMaGCN.Text;
+                dt403_05_standardAtt.NextCalibrationDate = txbNextCalibrationDate.DateTime;
+                dt403_05_standardAtt.ĐKĐBĐ = txbĐKĐBĐ.Text;
+                dt403_05_standardAtt.Standardlink = txbStandardlink.Text;
 
                 // Không hỏi Yes/No vì đây là tạo mới
-            }
-            else
-            {
-                // Nếu có rồi → hỏi xác nhận
-                DateTime oldVer = dt403_05_standardAtt.UploadDate;
-                DateTime newVer = DateTime.Now;
+            //}
+            //else
+            //{
+            //    // Nếu có rồi → hỏi xác nhận
+            //    DateTime oldVer = dt403_05_standardAtt.UploadDate;
+            //    DateTime newVer = DateTime.Now;
+            //    dt403_05_standardAtt.MaGCN = txbMaGCN.Text;
+            //    dt403_05_standardAtt.NextCalibrationDate = txbNextCalibrationDate.DateTime;
+            //    dt403_05_standardAtt.ĐKĐBĐ = txbĐKĐBĐ.Text;
+            //    dt403_05_standardAtt.Standardlink = txbStandardlink.Text;
+            //    if (MsgTP.MsgYesNoQuestion(
+            //        $"你確定要將文件從版本 <color=red>{oldVer}</color> 更新為版本 <color=red>{newVer}</color> 嗎？") != DialogResult.Yes)
+            //        return;
 
-                if (MsgTP.MsgYesNoQuestion(
-                    $"你確定要將文件從版本 <color=red>{oldVer}</color> 更新為版本 <color=red>{newVer}</color> 嗎？") != DialogResult.Yes)
-                    return;
-
-                dt403_05_standardAtt.UploadDate = newVer;
-            }
-                if (MsgTP.MsgYesNoQuestion($"你確定要將文件「<color=red>{dt403_05_standardAtt.UploadDate}</color>」從版本<color=red></color>更新為版本<color=red></color>嗎？") != DialogResult.Yes)
-                return;
+            //    dt403_05_standardAtt.UploadDate = newVer;
+            //}
+            //    if (MsgTP.MsgYesNoQuestion($"你確定要將文件「<color=red>{dt403_05_standardAtt.UploadDate}</color>」從版本<color=red></color>更新為版本<color=red></color>嗎？") != DialogResult.Yes)
+            //    return;
 
             dt403_05_standardAtt.StandardId = idBase;
 
@@ -185,8 +198,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
             {
                 MsgTP.MsgErrorDB();
             }
-
-
         }
     }
 }

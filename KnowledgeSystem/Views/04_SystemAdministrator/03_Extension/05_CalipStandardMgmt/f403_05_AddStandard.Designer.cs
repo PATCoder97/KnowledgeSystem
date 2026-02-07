@@ -137,15 +137,15 @@
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManagerTP;
-            this.barDockControlTop.Size = new System.Drawing.Size(333, 49);
+            this.barDockControlTop.Size = new System.Drawing.Size(399, 49);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 184);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 179);
             this.barDockControlBottom.Manager = this.barManagerTP;
-            this.barDockControlBottom.Size = new System.Drawing.Size(333, 0);
+            this.barDockControlBottom.Size = new System.Drawing.Size(399, 0);
             // 
             // barDockControlLeft
             // 
@@ -153,15 +153,15 @@
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 49);
             this.barDockControlLeft.Manager = this.barManagerTP;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 135);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 130);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(333, 49);
+            this.barDockControlRight.Location = new System.Drawing.Point(399, 49);
             this.barDockControlRight.Manager = this.barManagerTP;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 135);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 130);
             // 
             // layoutControl1
             // 
@@ -172,7 +172,7 @@
             this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(333, 135);
+            this.layoutControl1.Size = new System.Drawing.Size(399, 130);
             this.layoutControl1.TabIndex = 8;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -184,7 +184,7 @@
             this.txbDisplayNameTW.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbDisplayNameTW.Properties.Appearance.Options.UseFont = true;
             this.txbDisplayNameTW.Properties.Appearance.Options.UseForeColor = true;
-            this.txbDisplayNameTW.Size = new System.Drawing.Size(221, 32);
+            this.txbDisplayNameTW.Size = new System.Drawing.Size(287, 32);
             this.txbDisplayNameTW.StyleController = this.layoutControl1;
             this.txbDisplayNameTW.TabIndex = 11;
             // 
@@ -196,7 +196,7 @@
             this.txbDisplayNameVN.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbDisplayNameVN.Properties.Appearance.Options.UseFont = true;
             this.txbDisplayNameVN.Properties.Appearance.Options.UseForeColor = true;
-            this.txbDisplayNameVN.Size = new System.Drawing.Size(221, 32);
+            this.txbDisplayNameVN.Size = new System.Drawing.Size(287, 32);
             this.txbDisplayNameVN.StyleController = this.layoutControl1;
             this.txbDisplayNameVN.TabIndex = 11;
             // 
@@ -208,7 +208,7 @@
             this.txbSN.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbSN.Properties.Appearance.Options.UseFont = true;
             this.txbSN.Properties.Appearance.Options.UseForeColor = true;
-            this.txbSN.Size = new System.Drawing.Size(221, 32);
+            this.txbSN.Size = new System.Drawing.Size(287, 32);
             this.txbSN.StyleController = this.layoutControl1;
             this.txbSN.TabIndex = 11;
             // 
@@ -221,7 +221,7 @@
             this.lcDisplayNameVN,
             this.lcSN});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(333, 135);
+            this.Root.Size = new System.Drawing.Size(399, 130);
             this.Root.TextVisible = false;
             // 
             // lcDisplayNameTW
@@ -235,7 +235,7 @@
             this.lcDisplayNameTW.Control = this.txbDisplayNameTW;
             this.lcDisplayNameTW.Location = new System.Drawing.Point(0, 36);
             this.lcDisplayNameTW.Name = "lcDisplayNameTW";
-            this.lcDisplayNameTW.Size = new System.Drawing.Size(313, 36);
+            this.lcDisplayNameTW.Size = new System.Drawing.Size(379, 36);
             this.lcDisplayNameTW.Text = "中文名稱";
             this.lcDisplayNameTW.TextSize = new System.Drawing.Size(76, 24);
             // 
@@ -252,7 +252,7 @@
             this.lcDisplayNameVN.CustomizationFormText = "中文名稱";
             this.lcDisplayNameVN.Location = new System.Drawing.Point(0, 72);
             this.lcDisplayNameVN.Name = "lcDisplayNameVN";
-            this.lcDisplayNameVN.Size = new System.Drawing.Size(313, 43);
+            this.lcDisplayNameVN.Size = new System.Drawing.Size(379, 38);
             this.lcDisplayNameVN.Text = "越文名稱";
             this.lcDisplayNameVN.TextSize = new System.Drawing.Size(76, 24);
             // 
@@ -269,7 +269,7 @@
             this.lcSN.CustomizationFormText = "SN";
             this.lcSN.Location = new System.Drawing.Point(0, 0);
             this.lcSN.Name = "lcSN";
-            this.lcSN.Size = new System.Drawing.Size(313, 36);
+            this.lcSN.Size = new System.Drawing.Size(379, 36);
             this.lcSN.Text = "出廠編號";
             this.lcSN.TextSize = new System.Drawing.Size(76, 24);
             // 
@@ -277,7 +277,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(333, 184);
+            this.ClientSize = new System.Drawing.Size(399, 179);
             this.Controls.Add(this.layoutControl1);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);

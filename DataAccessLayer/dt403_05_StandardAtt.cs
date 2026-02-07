@@ -23,5 +23,9 @@ namespace DataAccessLayer
         public string UploadUser { get; set; }
         public string ConfirmUser { get; set; }
         public string FinishUser { get; set; }
+        public string MaGCN { get; set; }
+        public string ĐKĐBĐ { get; set; }
+        public Nullable<System.DateTime> NextCalibrationDate { get; set; }
+        public string Standardlink { get; set; }
     }
 }

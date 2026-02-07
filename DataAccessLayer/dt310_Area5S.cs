@@ -21,5 +21,6 @@ namespace DataAccessLayer
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> DeletedAt { get; set; }
         public string DeletedBy { get; set; }
+        public string DESC { get; set; }
     }
 }

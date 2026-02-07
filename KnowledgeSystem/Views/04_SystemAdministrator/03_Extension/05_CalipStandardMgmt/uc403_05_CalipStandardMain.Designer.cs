@@ -38,6 +38,9 @@
             this.gcolConfirmDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcolFinishDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcolActualName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcolUploadUser = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcolConfirmUser = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcolFinishUser = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcData = new DevExpress.XtraGrid.GridControl();
             this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gColId = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -66,9 +69,6 @@
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.gcolUploadUser = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcolConfirmUser = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcolFinishUser = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gvForm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
@@ -158,6 +158,30 @@
             this.gcolActualName.Name = "gcolActualName";
             this.gcolActualName.Visible = true;
             this.gcolActualName.VisibleIndex = 6;
+            // 
+            // gcolUploadUser
+            // 
+            this.gcolUploadUser.Caption = "上傳人";
+            this.gcolUploadUser.FieldName = "UploadUser";
+            this.gcolUploadUser.Name = "gcolUploadUser";
+            this.gcolUploadUser.Visible = true;
+            this.gcolUploadUser.VisibleIndex = 1;
+            // 
+            // gcolConfirmUser
+            // 
+            this.gcolConfirmUser.Caption = "確認人";
+            this.gcolConfirmUser.FieldName = "ConfirmUser";
+            this.gcolConfirmUser.Name = "gcolConfirmUser";
+            this.gcolConfirmUser.Visible = true;
+            this.gcolConfirmUser.VisibleIndex = 3;
+            // 
+            // gcolFinishUser
+            // 
+            this.gcolFinishUser.Caption = "結案人";
+            this.gcolFinishUser.FieldName = "FinishUser";
+            this.gcolFinishUser.Name = "gcolFinishUser";
+            this.gcolFinishUser.Visible = true;
+            this.gcolFinishUser.VisibleIndex = 5;
             // 
             // gcData
             // 
@@ -262,10 +286,12 @@
             // 
             // gridColumn4
             // 
-            this.gridColumn4.Caption = "英文名稱";
-            this.gridColumn4.FieldName = "DisplayNameTA";
+            this.gridColumn4.Caption = "證書編號";
+            this.gridColumn4.FieldName = "MaGCN";
             this.gridColumn4.MaxWidth = 300;
             this.gridColumn4.Name = "gridColumn4";
+            this.gridColumn4.Visible = true;
+            this.gridColumn4.VisibleIndex = 3;
             this.gridColumn4.Width = 91;
             // 
             // gridColumn16
@@ -281,23 +307,31 @@
             // 
             // gridColumn9
             // 
-            this.gridColumn9.Caption = "英文名稱";
-            this.gridColumn9.FieldName = "data.DisplayNameEN";
+            this.gridColumn9.Caption = "不確定度";
+            this.gridColumn9.FieldName = "ĐKĐBĐ";
             this.gridColumn9.Name = "gridColumn9";
+            this.gridColumn9.Visible = true;
+            this.gridColumn9.VisibleIndex = 4;
+            this.gridColumn9.Width = 116;
             // 
             // gColEnterDate
             // 
             this.gColEnterDate.AppearanceCell.Options.UseTextOptions = true;
             this.gColEnterDate.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gColEnterDate.Caption = "版本";
-            this.gColEnterDate.FieldName = "data.VersionNo";
+            this.gColEnterDate.Caption = "下次校正日期";
+            this.gColEnterDate.FieldName = "NextCalibrationDate";
             this.gColEnterDate.Name = "gColEnterDate";
+            this.gColEnterDate.Visible = true;
+            this.gColEnterDate.VisibleIndex = 6;
+            this.gColEnterDate.Width = 148;
             // 
             // gridColumn2
             // 
-            this.gridColumn2.Caption = "上傳人員";
-            this.gridColumn2.FieldName = "UserUpload";
+            this.gridColumn2.Caption = "標準連結";
+            this.gridColumn2.FieldName = "Standardlink";
             this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.Visible = true;
+            this.gridColumn2.VisibleIndex = 5;
             this.gridColumn2.Width = 91;
             // 
             // gridColumn11
@@ -493,30 +527,6 @@
             this.layoutControlItem1.Size = new System.Drawing.Size(1014, 571);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
-            // 
-            // gcolUploadUser
-            // 
-            this.gcolUploadUser.Caption = "上傳人";
-            this.gcolUploadUser.FieldName = "UploadUser";
-            this.gcolUploadUser.Name = "gcolUploadUser";
-            this.gcolUploadUser.Visible = true;
-            this.gcolUploadUser.VisibleIndex = 1;
-            // 
-            // gcolConfirmUser
-            // 
-            this.gcolConfirmUser.Caption = "確認人";
-            this.gcolConfirmUser.FieldName = "ConfirmUser";
-            this.gcolConfirmUser.Name = "gcolConfirmUser";
-            this.gcolConfirmUser.Visible = true;
-            this.gcolConfirmUser.VisibleIndex = 3;
-            // 
-            // gcolFinishUser
-            // 
-            this.gcolFinishUser.Caption = "結案人";
-            this.gcolFinishUser.FieldName = "FinishUser";
-            this.gcolFinishUser.Name = "gcolFinishUser";
-            this.gcolFinishUser.Visible = true;
-            this.gcolFinishUser.VisibleIndex = 5;
             // 
             // uc403_05_CalipStandardMain
             // 

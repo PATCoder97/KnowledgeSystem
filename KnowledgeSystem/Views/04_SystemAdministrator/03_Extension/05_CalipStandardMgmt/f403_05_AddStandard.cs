@@ -54,7 +54,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
             txbDisplayNameTW.Enabled = _enable;
             txbDisplayNameVN.Enabled = _enable;
            
-           
         }
         private void LockControl()
         {
