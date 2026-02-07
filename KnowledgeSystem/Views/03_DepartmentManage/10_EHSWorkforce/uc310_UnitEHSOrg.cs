@@ -3,6 +3,7 @@ using DataAccessLayer;
 using DevExpress.LookAndFeel;
 using DevExpress.XtraEditors;
 using DevExpress.XtraRichEdit.Import.Html;
+using DevExpress.XtraSplashScreen;
 using DevExpress.XtraTreeList;
 using DevExpress.XtraTreeList.Nodes;
 using KnowledgeSystem.Helpers;
@@ -217,37 +218,41 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
         private void treeFunctions_DoubleClick(object sender, EventArgs e)
         {
-            var treeList = treeFunctions;
-            var hit = treeList.CalcHitInfo(treeList.PointToClient(System.Windows.Forms.Control.MousePosition));
-
-            // Must click on a cell
-            if (hit.HitInfoType != HitInfoType.Cell)
-                return;
-
-            var node = treeList.FocusedNode;
-            if (node == null)
-                return;
-
-            // Get bound data from the node
-            var row = treeList.GetDataRecordByNode(node) as UnitEHSOrgCustom;
-            if (row == null || !row.IdData.HasValue)
-                return;
-
-            if (!isEHSAdmin)
+            using (var handle = SplashScreenManager.ShowOverlayForm(treeFunctions))
             {
-                int groupId = dm_GroupBUS.Instance.GetItemByName($"安衛環{row.DeptId}")?.Id ?? -1;
-                if (!userGroups.Any(r => r.IdGroup == groupId))
+
+                var treeList = treeFunctions;
+                var hit = treeList.CalcHitInfo(treeList.PointToClient(System.Windows.Forms.Control.MousePosition));
+
+                // Must click on a cell
+                if (hit.HitInfoType != HitInfoType.Cell)
                     return;
-            }
 
-            using (var finfo = new f310_UnitEHSOrg_Info
-            {
-                eventInfo = EventFormInfo.View,
-                formName = "組織",
-                idBase = row.IdData.Value
-            })
-            {
-                finfo.ShowDialog(this);
+                var node = treeList.FocusedNode;
+                if (node == null)
+                    return;
+
+                // Get bound data from the node
+                var row = treeList.GetDataRecordByNode(node) as UnitEHSOrgCustom;
+                if (row == null || !row.IdData.HasValue)
+                    return;
+
+                if (!isEHSAdmin)
+                {
+                    int groupId = dm_GroupBUS.Instance.GetItemByName($"安衛環{row.DeptId}")?.Id ?? -1;
+                    if (!userGroups.Any(r => r.IdGroup == groupId))
+                        return;
+                }
+
+                using (var finfo = new f310_UnitEHSOrg_Info
+                {
+                    eventInfo = EventFormInfo.View,
+                    formName = "組織",
+                    idBase = row.IdData.Value
+                })
+                {
+                    finfo.ShowDialog(this);
+                }
             }
 
             LoadData();
