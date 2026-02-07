@@ -141,5 +141,7 @@ namespace DataAccessLayer
         public virtual DbSet<dt310_Area5SResponsible> dt310_Area5SResponsible { get; set; }
         public virtual DbSet<dt310_UpdateLeaveUser> dt310_UpdateLeaveUser { get; set; }
         public virtual DbSet<dt310_UpdateLeaveUser_detail> dt310_UpdateLeaveUser_detail { get; set; }
+        public virtual DbSet<dt403_05_Standard> dt403_05_Standard { get; set; }
+        public virtual DbSet<dt403_05_StandardAtt> dt403_05_StandardAtt { get; set; }
     }
 }

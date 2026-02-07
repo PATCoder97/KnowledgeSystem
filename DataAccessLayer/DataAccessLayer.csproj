@@ -404,6 +404,12 @@
     <Compile Include="dt403_04_StandardInfo.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
+    <Compile Include="dt403_05_Standard.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dt403_05_StandardAtt.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
     <Compile Include="dt403_SoftwareManual.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>

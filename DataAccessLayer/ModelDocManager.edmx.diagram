@@ -121,6 +121,8 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt310_Area5SResponsible" Width="1.5" PointX="8.625" PointY="49.375" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt310_UpdateLeaveUser" Width="1.5" PointX="10.25" PointY="49.375" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt310_UpdateLeaveUser_detail" Width="1.5" PointX="11.875" PointY="49.375" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt403_05_Standard" Width="1.5" PointX="0.5" PointY="70.25" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt403_05_StandardAtt" Width="1.5" PointX="2.125" PointY="70.25" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

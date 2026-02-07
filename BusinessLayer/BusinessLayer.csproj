@@ -178,6 +178,8 @@
     <Compile Include="dt312\dt312_QuestionsBUS.cs" />
     <Compile Include="dt312\dt312_SettingBUS.cs" />
     <Compile Include="dt402\dt402_KPIWebBUS.cs" />
+    <Compile Include="dt403\dt403_05_StandardAttBUS.cs" />
+    <Compile Include="dt403\dt403_05_StandardBUS.cs" />
     <Compile Include="dt403\dt403_SoftwareManualBUS.cs" />
     <Compile Include="dt403\dt403_04_HardnessStandardLogBUS.cs" />
     <Compile Include="dt403\dt403_04_StandardInfoBUS.cs" />
