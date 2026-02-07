@@ -12,15 +12,15 @@ namespace DataAccessLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class dt310_Area5S
+    public partial class dt310_UpdateLeaveUser_detail
     {
         public int Id { get; set; }
-        public string DisplayName { get; set; }
-        public string DESC { get; set; }
-        public string FileName { get; set; }
-        public Nullable<System.DateTime> CreatedAt { get; set; }
-        public string CreatedBy { get; set; }
-        public Nullable<System.DateTime> DeletedAt { get; set; }
-        public string DeletedBy { get; set; }
+        public int IdUpdateData { get; set; }
+        public int IndexStep { get; set; }
+        public int IdGroup { get; set; }
+        public string IdUser { get; set; }
+        public Nullable<System.DateTime> TimeSubmit { get; set; }
+        public Nullable<System.DateTime> TimeNotify { get; set; }
+        public string Description { get; set; }
     }
 }

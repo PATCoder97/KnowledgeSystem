@@ -423,7 +423,7 @@
             this.lcRole.Location = new System.Drawing.Point(0, 72);
             this.lcRole.Name = "lcRole";
             this.lcRole.Size = new System.Drawing.Size(383, 36);
-            this.lcRole.Text = "職務";
+            this.lcRole.Text = "業務";
             this.lcRole.TextSize = new System.Drawing.Size(57, 24);
             // 
             // lcStartDate
@@ -438,7 +438,7 @@
             this.lcStartDate.Location = new System.Drawing.Point(0, 108);
             this.lcStartDate.Name = "lcStartDate";
             this.lcStartDate.Size = new System.Drawing.Size(383, 36);
-            this.lcStartDate.Text = "當人日";
+            this.lcStartDate.Text = "擔任日";
             this.lcStartDate.TextSize = new System.Drawing.Size(57, 24);
             // 
             // f310_UnitEHSOrg_Info

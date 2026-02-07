@@ -356,6 +356,12 @@
     <Compile Include="dt310_UnitEHSOrg.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
+    <Compile Include="dt310_UpdateLeaveUser.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dt310_UpdateLeaveUser_detail.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
     <Compile Include="dt311_AccountingSubject.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>

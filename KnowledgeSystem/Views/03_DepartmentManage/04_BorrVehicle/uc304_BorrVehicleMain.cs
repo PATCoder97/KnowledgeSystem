@@ -213,9 +213,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
 
                             var dataBorrNow = data.FirstOrDefault(r => r.BackTime == default);
 
-                            vehicleStatuses[i].IdUserBorr = dataBorrNow.IdUserBorr;
-                            vehicleStatuses[i].NameUserBorr = dataBorrNow.NameUserBorr;
-                            vehicleStatuses[i].BorrTime = dataBorrNow.BorrTime.ToString("yyyy/MM/dd HH:mm");
+                            if (dataBorrNow != null)
+                            {
+                                vehicleStatuses[i].IdUserBorr = dataBorrNow.IdUserBorr;
+                                vehicleStatuses[i].NameUserBorr = dataBorrNow.NameUserBorr;
+                                vehicleStatuses[i].BorrTime = dataBorrNow.BorrTime.ToString("yyyy/MM/dd HH:mm");
+                            }
                         }
                     }
                     break;
@@ -227,9 +230,18 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._04_BorrVehicle
                         {
                             var data = await BorrVehicleHelper.Instance.GetBorrCarUser(vehicleStatuses[i]);
 
-                            vehicleStatuses[i].IdUserBorr = data.FirstOrDefault().IdUserBorr;
-                            vehicleStatuses[i].NameUserBorr = data.FirstOrDefault().NameUserBorr;
-                            vehicleStatuses[i].BorrTime = data.FirstOrDefault().BorrTime.ToString("yyyy/MM/dd HH:mm");
+                            var dataBorrNow = data.FirstOrDefault(r => r.BackTime == default);
+
+                            if (dataBorrNow != null)
+                            {
+                                vehicleStatuses[i].IdUserBorr = dataBorrNow.IdUserBorr;
+                                vehicleStatuses[i].NameUserBorr = dataBorrNow.NameUserBorr;
+                                vehicleStatuses[i].BorrTime = dataBorrNow.BorrTime.ToString("yyyy/MM/dd HH:mm");
+                            }
+
+                            //vehicleStatuses[i].IdUserBorr = data.FirstOrDefault().IdUserBorr;
+                            //vehicleStatuses[i].NameUserBorr = data.FirstOrDefault().NameUserBorr;
+                            //vehicleStatuses[i].BorrTime = data.FirstOrDefault().BorrTime.ToString("yyyy/MM/dd HH:mm");
                         }
                     }
                     break;

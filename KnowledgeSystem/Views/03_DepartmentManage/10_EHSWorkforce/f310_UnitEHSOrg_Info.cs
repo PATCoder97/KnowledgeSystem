@@ -123,12 +123,25 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                 item.Text = $"<color=#000000>{item.Text}</color>";
             }
 
-            var usrs = dm_UserBUS.Instance.GetList().Where(r => r.Status == 0).ToList();
+            var groupUser = dm_GroupUserBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id);
+            var groupEHSs = dm_GroupBUS.Instance.GetListContainName("安衛環");
+
+            var ehsAdminGroup = groupEHSs.FirstOrDefault(g => g.DisplayName.Trim() == "安衛環7");
+            bool isEHSAdmin = ehsAdminGroup != null && groupUser.Any(gu => gu.IdGroup == ehsAdminGroup.Id);
+
+            var deptByGroups = groupEHSs
+                .Where(g => groupUser.Any(gu => gu.IdGroup == g.Id))
+                .Select(g => g.DisplayName.Replace("安衛環", "").Trim())
+                .ToList();
+
+            var usrs = dm_UserBUS.Instance.GetList().Where(r => r.Status == 0 && (isEHSAdmin || deptByGroups.Contains(r.IdDepartment))).ToList();
+
             cbbUsr.Properties.DataSource = usrs;
             cbbUsr.Properties.DisplayMember = "DisplayName";
             cbbUsr.Properties.ValueMember = "Id";
 
-            var depts = dm_DeptBUS.Instance.GetAllChildren(0).Where(r => r.IsGroup != true).ToList();
+            var depts = dm_DeptBUS.Instance.GetAllChildren(0).Where(r => r.IsGroup != true && (isEHSAdmin || deptByGroups.Contains(r.Id))).ToList();
+
             cbbDept.Properties.DataSource = depts;
             cbbDept.Properties.DisplayMember = "DisplayName";
             cbbDept.Properties.ValueMember = "Id";

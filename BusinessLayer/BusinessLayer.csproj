@@ -164,6 +164,8 @@
     <Compile Include="dt310\dt310_FunctionBUS.cs" />
     <Compile Include="dt310\dt310_RoleBUS.cs" />
     <Compile Include="dt310\dt310_UnitEHSOrgBUS.cs" />
+    <Compile Include="dt310\dt310_UpdateLeaveUserBUS.cs" />
+    <Compile Include="dt310\dt310_UpdateLeaveUser_detailBUS.cs" />
     <Compile Include="dt311\dt311_InvoiceBUS.cs" />
     <Compile Include="dt311\dt311_InvoiceItemBUS.cs" />
     <Compile Include="dt311\dt311_SellerBuyerBUS.cs" />

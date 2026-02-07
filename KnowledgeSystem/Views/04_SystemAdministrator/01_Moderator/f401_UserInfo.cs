@@ -383,6 +383,54 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             LockControl();
         }
 
+        private void Trigger310(string displayName)
+        {
+            // 1. Chuẩn bị dữ liệu Department ID an toàn
+            var deptId = userInfo.IdDepartment ?? "";
+            var psmDeptId = deptId.Length >= 2 ? deptId.Substring(0, 2) : deptId;
+
+            // 2. Lấy ID các nhóm (Helper function hoặc Dictionary để code gọn hơn)
+            int GetGroupId(string name) => dm_GroupBUS.Instance.GetItemByName(name)?.Id ?? -1;
+
+            int ehsGroupId = GetGroupId($"安衛環{deptId}");      // Safety/EHS
+            int level2GroupId = GetGroupId($"二級{deptId}");      // Level 2 Manager
+            int psmGroupId = GetGroupId($"PSM專人{psmDeptId}");   // PSM Specialist
+
+            // 3. Tạo bản ghi chính (Master data)
+            var updateLeaveUser = new dt310_UpdateLeaveUser
+            {
+                IdUserLeave = userInfo.Id,
+                DisplayName = displayName,
+                IsProcess = true,
+                IsCancel = false,
+                IdGroupProcess = ehsGroupId,
+                CreateBy = TPConfigs.LoginUser.Id,
+                CreateAt = DateTime.Now
+            };
+
+            int idUpdateData = dt310_UpdateLeaveUserBUS.Instance.Add(updateLeaveUser);
+
+            // 4. Tạo các bước chi tiết (Detail steps) bằng danh sách
+            // Cấu trúc: (GroupId, StepIndex)
+            var steps = new[]
+            {
+                (GroupId: ehsGroupId, Index: 0),
+                (GroupId: level2GroupId, Index: 1),
+                (GroupId: psmGroupId, Index: 2)
+            };
+
+            foreach (var step in steps)
+            {
+                var detail = new dt310_UpdateLeaveUser_detail
+                {
+                    IdUpdateData = idUpdateData,
+                    IdGroup = step.GroupId,
+                    IndexStep = step.Index
+                };
+                dt310_UpdateLeaveUser_detailBUS.Instance.Add(detail);
+            }
+        }
+
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             // Kiểm tra xem đã điền đầy đủ thông tin yêu cầu hay chưa
@@ -615,6 +663,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                                 // Xóa trong các nhóm để tránh thông báo về Note người đã nghỉ việc
                                 dm_GroupUserBUS.Instance.RemoveRangeByUID(userInfo.Id);
 
+                                Trigger310("離職");
+
                                 break;
                             case UpdateEvent.JobChange:
                                 // Thay đổi chức vụ: Giữ chứng chỉ còn hạn cho chức vụ mới, hết hạn chứng chỉ không sử dụng ở chức vụ mới
@@ -660,6 +710,9 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                                 break;
 
                             case UpdateEvent.ResignPlan:
+
+                                if (resignDate != null)
+                                    Trigger310("預報離職");
 
                                 break;
                         }

@@ -111,12 +111,10 @@ namespace DataAccessLayer
         public virtual DbSet<dt403_04_HardnessStandardLog> dt403_04_HardnessStandardLog { get; set; }
         public virtual DbSet<dt403_04_StandardInfo> dt403_04_StandardInfo { get; set; }
         public virtual DbSet<dm_User> dm_User { get; set; }
-        public virtual DbSet<dt310_Area5S> dt310_Area5S { get; set; }
         public virtual DbSet<dt310_Role> dt310_Role { get; set; }
         public virtual DbSet<dm_Departments> dm_Departments { get; set; }
         public virtual DbSet<dt310_UnitEHSOrg> dt310_UnitEHSOrg { get; set; }
         public virtual DbSet<dt310_Function> dt310_Function { get; set; }
-        public virtual DbSet<dt310_Area5SResponsible> dt310_Area5SResponsible { get; set; }
         public virtual DbSet<dt310_EHSFunction> dt310_EHSFunction { get; set; }
         public virtual DbSet<dt307_InterviewReport> dt307_InterviewReport { get; set; }
         public virtual DbSet<dt307_InterviewScore> dt307_InterviewScore { get; set; }
@@ -139,6 +137,10 @@ namespace DataAccessLayer
         public virtual DbSet<dt312_Questions> dt312_Questions { get; set; }
         public virtual DbSet<dt312_Setting> dt312_Setting { get; set; }
         public virtual DbSet<dt312_ExamMgmt> dt312_ExamMgmt { get; set; }
+        public virtual DbSet<dt310_Area5S> dt310_Area5S { get; set; }
+        public virtual DbSet<dt310_Area5SResponsible> dt310_Area5SResponsible { get; set; }
+        public virtual DbSet<dt310_UpdateLeaveUser> dt310_UpdateLeaveUser { get; set; }
+        public virtual DbSet<dt310_UpdateLeaveUser_detail> dt310_UpdateLeaveUser_detail { get; set; }
         public virtual DbSet<dt403_05_Standard> dt403_05_Standard { get; set; }
         public virtual DbSet<dt403_05_StandardAtt> dt403_05_StandardAtt { get; set; }
     }

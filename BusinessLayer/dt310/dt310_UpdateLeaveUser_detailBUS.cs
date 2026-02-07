@@ -10,27 +10,27 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer
 {
-    public class dt310_EHSFunctionBUS
+    public class dt310_UpdateLeaveUser_detailBUS
     {
         TPLogger logger;
 
-        private static dt310_EHSFunctionBUS instance;
+        private static dt310_UpdateLeaveUser_detailBUS instance;
 
-        public static dt310_EHSFunctionBUS Instance
+        public static dt310_UpdateLeaveUser_detailBUS Instance
         {
-            get { if (instance == null) instance = new dt310_EHSFunctionBUS(); return instance; }
+            get { if (instance == null) instance = new dt310_UpdateLeaveUser_detailBUS(); return instance; }
             private set { instance = value; }
         }
 
-        private dt310_EHSFunctionBUS() { logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName); }
+        private dt310_UpdateLeaveUser_detailBUS() { logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName); }
 
-        public List<dt310_EHSFunction> GetList()
+        public List<dt310_UpdateLeaveUser_detail> GetList()
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dt310_EHSFunction.Where(r => r.DeletedAt == null).ToList();
+                    return _context.dt310_UpdateLeaveUser_detail.ToList();
                 }
             }
             catch (Exception ex)
@@ -40,13 +40,13 @@ namespace BusinessLayer
             }
         }
 
-        public List<dt310_EHSFunction> GetListByUserId(string userId)
+        public dt310_UpdateLeaveUser_detail GetItemById(int id)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dt310_EHSFunction.Where(r => r.EmployeeId == userId && r.DeletedAt == null).ToList();
+                    return _context.dt310_UpdateLeaveUser_detail.FirstOrDefault(r => r.Id == id);
                 }
             }
             catch (Exception ex)
@@ -56,13 +56,13 @@ namespace BusinessLayer
             }
         }
 
-        public dt310_EHSFunction GetItemById(int id)
+        public dt310_UpdateLeaveUser_detail GetItemByIdDataAndIdGroup(int idData, int idGroup)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dt310_EHSFunction.FirstOrDefault(r => r.Id == id);
+                    return _context.dt310_UpdateLeaveUser_detail.FirstOrDefault(r => r.IdUpdateData == idData && r.IdGroup == idGroup);
                 }
             }
             catch (Exception ex)
@@ -72,13 +72,45 @@ namespace BusinessLayer
             }
         }
 
-        public bool Add(dt310_EHSFunction item)
+        public dt310_UpdateLeaveUser_detail GetItemByIdDataAndStep(int idData, int step)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    _context.dt310_EHSFunction.Add(item);
+                    return _context.dt310_UpdateLeaveUser_detail.FirstOrDefault(r => r.IdUpdateData == idData && r.IndexStep == step);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
+        public List<dt310_UpdateLeaveUser_detail> GetItemByIdData(int idData)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt310_UpdateLeaveUser_detail.Where(r => r.IdUpdateData == idData).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
+        public bool Add(dt310_UpdateLeaveUser_detail item)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    _context.dt310_UpdateLeaveUser_detail.Add(item);
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;
                 }
@@ -90,13 +122,13 @@ namespace BusinessLayer
             }
         }
 
-        public bool AddRange(List<dt310_EHSFunction> items)
+        public bool AddRange(List<dt310_UpdateLeaveUser_detail> items)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    _context.dt310_EHSFunction.AddRange(items);
+                    _context.dt310_UpdateLeaveUser_detail.AddRange(items);
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;
                 }
@@ -108,13 +140,13 @@ namespace BusinessLayer
             }
         }
 
-        public bool AddOrUpdate(dt310_EHSFunction item)
+        public bool AddOrUpdate(dt310_UpdateLeaveUser_detail item)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    _context.dt310_EHSFunction.AddOrUpdate(item);
+                    _context.dt310_UpdateLeaveUser_detail.AddOrUpdate(item);
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;
                 }
@@ -126,17 +158,14 @@ namespace BusinessLayer
             }
         }
 
-        public bool RemoveById(int id, string userDel)
+        public bool RemoveById(int id)
         {
             try
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    var itemRemove = _context.dt310_EHSFunction.FirstOrDefault(r => r.Id == id);
-                    if (itemRemove == null) return false;
-
-                    itemRemove.DeletedAt = DateTime.Now;
-                    itemRemove.DeletedBy = userDel;
+                    var itemRemove = _context.dt310_UpdateLeaveUser_detail.FirstOrDefault(r => r.Id == id);
+                    _context.dt310_UpdateLeaveUser_detail.Remove(itemRemove);
 
                     int affectedRecords = _context.SaveChanges();
                     return affectedRecords > 0;

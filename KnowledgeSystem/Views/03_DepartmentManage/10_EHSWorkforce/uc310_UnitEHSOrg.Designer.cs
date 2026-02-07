@@ -237,7 +237,7 @@
             // 
             // gridColumn3
             // 
-            this.gridColumn3.Caption = "當人日";
+            this.gridColumn3.Caption = "擔任日";
             this.gridColumn3.FieldName = "StartDate";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
@@ -246,7 +246,7 @@
             // 
             // gridColumn4
             // 
-            this.gridColumn4.Caption = "職務";
+            this.gridColumn4.Caption = "業務";
             this.gridColumn4.FieldName = "Role";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
@@ -483,7 +483,7 @@
             // 
             // treeListColumn1
             // 
-            this.treeListColumn1.Caption = "職務";
+            this.treeListColumn1.Caption = "業務";
             this.treeListColumn1.FieldName = "DeptName";
             this.treeListColumn1.MaxWidth = 400;
             this.treeListColumn1.MinWidth = 150;

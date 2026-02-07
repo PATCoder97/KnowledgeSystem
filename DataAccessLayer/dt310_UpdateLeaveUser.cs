@@ -12,15 +12,16 @@ namespace DataAccessLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class dt310_Area5S
+    public partial class dt310_UpdateLeaveUser
     {
         public int Id { get; set; }
+        public string IdUserLeave { get; set; }
         public string DisplayName { get; set; }
-        public string DESC { get; set; }
-        public string FileName { get; set; }
-        public Nullable<System.DateTime> CreatedAt { get; set; }
-        public string CreatedBy { get; set; }
-        public Nullable<System.DateTime> DeletedAt { get; set; }
-        public string DeletedBy { get; set; }
+        public bool IsProcess { get; set; }
+        public bool IsCancel { get; set; }
+        public Nullable<int> IdGroupProcess { get; set; }
+        public string DataJson { get; set; }
+        public string CreateBy { get; set; }
+        public System.DateTime CreateAt { get; set; }
     }
 }

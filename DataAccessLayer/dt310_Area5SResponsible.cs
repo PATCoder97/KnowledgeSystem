@@ -15,13 +15,13 @@ namespace DataAccessLayer
     public partial class dt310_Area5SResponsible
     {
         public int Id { get; set; }
+        public int AreaId { get; set; }
         public string DeptId { get; set; }
         public string EmployeeId { get; set; }
         public string AgentId { get; set; }
+        public string BossId { get; set; }
         public string AreaName { get; set; }
-        public int AreaFileId { get; set; }
-        public System.DateTime StartDate { get; set; }
-        public Nullable<System.DateTime> EndDate { get; set; }
+        public string AreaCode { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> DeletedAt { get; set; }

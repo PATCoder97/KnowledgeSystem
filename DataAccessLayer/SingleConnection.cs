@@ -40,19 +40,19 @@ namespace DataAccessLayer
                 //MultipleActiveResultSets = true,
                 //ApplicationName = "EntityFramework",
 
-                DataSource = "10.198.138.103",
-                InitialCatalog = "DBDocumentManagementSystem",
-                UserID = "PAT",
-                Password = "Anhtuan312",
-                MultipleActiveResultSets = true,
-                ApplicationName = "EntityFramework",
-
-                //DataSource = "10.198.138.153",
+                //DataSource = "10.198.138.103",
                 //InitialCatalog = "DBDocumentManagementSystem",
                 //UserID = "PAT",
                 //Password = "Anhtuan312",
                 //MultipleActiveResultSets = true,
                 //ApplicationName = "EntityFramework",
+
+                DataSource = "10.198.138.153",
+                InitialCatalog = "DBDocumentManagementSystem",
+                UserID = "PAT",
+                Password = "Anhtuan312",
+                MultipleActiveResultSets = true,
+                ApplicationName = "EntityFramework",
             };
 #else
             SqlConnectionStringBuilder sqlString = new SqlConnectionStringBuilder()
