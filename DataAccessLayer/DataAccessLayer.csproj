@@ -87,12 +87,27 @@
     <Compile Include="dm_FixedProgress.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
+    <Compile Include="dm_Function.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
     <Compile Include="dm_FunctionM.cs" />
+    <Compile Include="dm_FunctionRole.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dm_Group.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
     <Compile Include="dm_GroupProgressM.cs" />
+    <Compile Include="dm_GroupUser.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
     <Compile Include="dm_JobTitle.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
     <Compile Include="dm_Progress.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dm_Role.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
     <Compile Include="dm_Sign.cs">
@@ -102,6 +117,9 @@
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
     <Compile Include="dm_StepProgress.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dm_User.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
     <Compile Include="dm_UserRole.cs">
@@ -222,18 +240,6 @@
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
     <Compile Include="dt207_TypeHisGetFile.cs">
-      <DependentUpon>ModelDocManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="dm_Function.cs">
-      <DependentUpon>ModelDocManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="dm_FunctionRole.cs">
-      <DependentUpon>ModelDocManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="dm_Group.cs">
-      <DependentUpon>ModelDocManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="dm_GroupUser.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
     <Compile Include="dt301_Base.cs">
@@ -429,9 +435,6 @@
       <DependentUpon>ModelDocManager.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="dm_Role.cs">
-      <DependentUpon>ModelDocManager.tt</DependentUpon>
-    </Compile>
     <Compile Include="SingleConnection.cs" />
     <Compile Include="sys_Log.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
@@ -443,9 +446,6 @@
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
     <Compile Include="TPConfigsDAL.cs" />
-    <Compile Include="dm_User.cs">
-      <DependentUpon>ModelDocManager.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="ModelDocManager.edmx">

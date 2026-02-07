@@ -19,5 +19,9 @@ namespace DataAccessLayer
         public string DisplayNameTW { get; set; }
         public string DisplayNameVN { get; set; }
         public string ManagerId { get; set; }
+        public string MaGCN { get; set; }
+        public string ĐKĐBĐ { get; set; }
+        public Nullable<System.DateTime> NextCalibrationDate { get; set; }
+        public string Standardlink { get; set; }
     }
 }
