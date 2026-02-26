@@ -1875,7 +1875,9 @@
     <None Include="AppResources\403_03_SurfaceRustHealth.pptx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="AppResources\ExcelTemp-Master.xlsx" />
+    <None Include="AppResources\ExcelTemp-Master.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

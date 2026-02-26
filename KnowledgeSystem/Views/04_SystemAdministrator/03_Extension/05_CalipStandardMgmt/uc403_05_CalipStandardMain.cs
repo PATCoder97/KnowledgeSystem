@@ -29,6 +29,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipStandardMgmt
 {
@@ -236,6 +237,10 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
                                   SN = STD.SN,
                                   DisplayNameTW = STD.DisplayNameTW,
                                   DisplayNameVN = STD.DisplayNameVN,
+                                  MaGCN = STD.MaGCN,
+                                    ĐKĐBĐ = STD.ĐKĐBĐ,
+                                    NextCalibrationDate = STD.NextCalibrationDate,
+                                    Standardlink = STD.Standardlink,
                               };
 
                 sourceBases.DataSource = Display;
@@ -412,7 +417,86 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
         }
         private void btnExportExcel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-          
+            string templatePath = Path.Combine(
+                                               TPConfigs.ResourcesPath,
+                                               "ExcelTemp-Master.xlsx"
+                                            );
+
+            if (!File.Exists(templatePath))
+            {
+                XtraMessageBox.Show("Không tìm thấy file Excel template!");
+                return;
+            }
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Excel file (*.xlsx)|*.xlsx";
+            saveFileDialog.FileName = "ExcelTemp-Master.xlsx";
+            if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
+
+            string destFile = saveFileDialog.FileName;
+
+            OfficeOpenXml.ExcelPackage.LicenseContext =OfficeOpenXml.LicenseContext.NonCommercial;
+
+            Dictionary<string, dt403_05_Standard> dbDict;
+
+            using (var db = new DBDocumentManagementSystemEntities())
+            {
+                dbDict = db.dt403_05_Standard
+                    .Where(x => !string.IsNullOrEmpty(x.SN))
+                    .GroupBy(x => x.SN.Trim())
+                    .ToDictionary(g => g.Key, g => g.First());
+            }
+
+            string[] targetSheets =
+                                    {
+                                        "LH.Standard",
+                                        "ND.Standard",
+                                        "KL.Standard",
+                                        "DD.Standard"
+                                    };
+            File.Copy(templatePath, destFile, true);
+
+            using (var package = new ExcelPackage(new FileInfo(destFile)))
+            {
+                foreach (string sheetName in targetSheets)
+                {
+                    var ws = package.Workbook.Worksheets[sheetName];
+                    if (ws == null || ws.Dimension == null) continue;
+
+                    int lastRow = ws.Dimension.End.Row;
+
+                    for (int row = 2; row <= lastRow; row++)
+                    {
+                        string sn = ws.Cells[row, 2].Text;
+                        if (string.IsNullOrWhiteSpace(sn)) continue;
+
+                        sn = sn.Trim().ToUpper();
+
+                        if (!dbDict.TryGetValue(sn, out var dbItem) || dbItem == null)
+                            continue;
+
+                        ws.Cells[row, 5].Value = dbItem.MaGCN;
+                        ws.Cells[row, 6].Value = dbItem.ĐKĐBĐ;
+
+                        if (dbItem.NextCalibrationDate.HasValue)
+                        {
+                            ws.Cells[row, 7].Value = dbItem.NextCalibrationDate.Value;
+                            ws.Cells[row, 7].Style.Numberformat.Format = "yyyy/MM/dd";
+                        }
+
+                        ws.Cells[row, 8].Value = dbItem.Standardlink;
+                    }
+                }
+                package.Save();
+            }
+            //// Copy template ra vị trí user chọn
+            //File.Copy(templatePath, destFile, true);
+
+            // Mở file sau khi export
+            Process.Start(new ProcessStartInfo
+                    {
+                        FileName = destFile,
+                        UseShellExecute = true
+                    });
         }
     }
 }
