@@ -108,7 +108,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
 
         private void ItemConfirmdate_Click(object sender, EventArgs e)
         {
-            
+
             GridView activeView = gcData.FocusedView as GridView;
             if (activeView == null) return;
             if (activeView.FocusedRowHandle < 0) return;
@@ -116,15 +116,11 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
             // Lấy ID của bản ghi trong bảng dt403_05_StandardAtt
             int idBase = Convert.ToInt32(activeView.GetRowCellValue(activeView.FocusedRowHandle, gColIdAttForm));
             // Hộp thoại xác nhận
-            DialogResult result = XtraMessageBox.Show(
-                "您確認已更新標準嗎？",
-                "確認日期",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
+            DialogResult result = XtraMessageBox.Show("您確認已更新標準嗎？", "確認日期", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result != DialogResult.Yes)
                 return;
-             
+
             // Lấy dữ liệu từ DB
             var stdAtt = dt403_05_StandardAttBUS.Instance.GetItemByIdatt(idBase);
 
@@ -147,11 +143,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
             // Lấy ID của bản ghi trong bảng dt403_05_StandardAtt
             int idBase = Convert.ToInt32(activeView.GetRowCellValue(activeView.FocusedRowHandle, gColIdAttForm));
             // Hộp thoại xác nhận
-            DialogResult result = XtraMessageBox.Show(
-                    "您確認已完成標準的更新嗎？",
-                "確認日期",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
+            DialogResult result = XtraMessageBox.Show("您確認已完成標準的更新嗎？", "確認日期", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result != DialogResult.Yes)
                 return;
@@ -192,7 +184,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
         }
         private void ItemUpdateVer_Click(object sender, EventArgs e)
         {
-           
+
             GridView view = gvData;
             int idBase = Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, gColId));
             f403_05_UpdateStandar f403_05_UpdateStandar = new f403_05_UpdateStandar()
@@ -238,9 +230,9 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
                                   DisplayNameTW = STD.DisplayNameTW,
                                   DisplayNameVN = STD.DisplayNameVN,
                                   MaGCN = STD.MaGCN,
-                                    ĐKĐBĐ = STD.ĐKĐBĐ,
-                                    NextCalibrationDate = STD.NextCalibrationDate,
-                                    Standardlink = STD.Standardlink,
+                                  ĐKĐBĐ = STD.ĐKĐBĐ,
+                                  NextCalibrationDate = STD.NextCalibrationDate,
+                                  Standardlink = STD.Standardlink,
                               };
 
                 sourceBases.DataSource = Display;
@@ -282,8 +274,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
             {
                 GridView view = sender as GridView;
                 view.FocusedRowHandle = e.HitInfo.RowHandle;
-                    e.Menu.Items.Add(itemViewInfo);
-                    e.Menu.Items.Add(itemUpdateVer);
+                e.Menu.Items.Add(itemViewInfo);
+                e.Menu.Items.Add(itemUpdateVer);
             }
         }
 
@@ -330,18 +322,18 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
 
                                where stdAtt.StandardId == idBase
                                select new
-                                       {
-                                           UploadUser = uploadUser?.DisplayName,
-                                           ConfirmUser = confirmUser?.DisplayName,
-                                           FinishUser = finishUser?.DisplayName,
+                               {
+                                   UploadUser = uploadUser?.DisplayName,
+                                   ConfirmUser = confirmUser?.DisplayName,
+                                   FinishUser = finishUser?.DisplayName,
 
-                                           UploadDate = stdAtt.UploadDate,
-                                           ConfirmDate = stdAtt.ConfirmDate,
-                                           FinishDate = stdAtt.FinishDate,
+                                   UploadDate = stdAtt.UploadDate,
+                                   ConfirmDate = stdAtt.ConfirmDate,
+                                   FinishDate = stdAtt.FinishDate,
 
-                                           Name = att.ActualName,
-                                           AttId = stdAtt.AttId
-                                       };
+                                   Name = att.ActualName,
+                                   AttId = stdAtt.AttId
+                               };
             e.ChildList = displayGvFrom.ToList();
         }
 
@@ -410,93 +402,82 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
                 else if (isConfirmDateSet && !isFinishDateSet && usersInGroup2.Any(u => u.IdUser == TPConfigs.LoginUser.Id))
                 {
                     e.Menu.Items.Add(itemFinishdate);
-                  //  e.Menu.Items.Add(itemRemove);
+                    //  e.Menu.Items.Add(itemRemove);
                     e.Menu.Items.Add(itemCacelProgress);
                 }
-            } 
+            }
         }
+
         private void btnExportExcel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            string templatePath = Path.Combine(
-                                               TPConfigs.ResourcesPath,
-                                               "ExcelTemp-Master.xlsx"
-                                            );
-
-            if (!File.Exists(templatePath))
+            // Cho user chọn file Excel cần cập nhật
+            var openDialog = new OpenFileDialog
             {
-                XtraMessageBox.Show("Không tìm thấy file Excel template!");
-                return;
-            }
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Excel file (*.xlsx)|*.xlsx";
-            saveFileDialog.FileName = "ExcelTemp-Master.xlsx";
-            if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
+                Filter = "Excel file (*.xlsx)|*.xlsx",
+                Title = "Chọn file Excel cần cập nhật"
+            };
+            if (openDialog.ShowDialog() != DialogResult.OK) return;
 
-            string destFile = saveFileDialog.FileName;
+            string selectedFile = openDialog.FileName;
 
-            OfficeOpenXml.ExcelPackage.LicenseContext =OfficeOpenXml.LicenseContext.NonCommercial;
-
-            Dictionary<string, dt403_05_Standard> dbDict;
-
-            using (var db = new DBDocumentManagementSystemEntities())
+            using (var handle = SplashScreenManager.ShowOverlayForm(gcData))
             {
-                dbDict = db.dt403_05_Standard
-                    .Where(x => !string.IsNullOrEmpty(x.SN))
-                    .GroupBy(x => x.SN.Trim())
-                    .ToDictionary(g => g.Key, g => g.First());
-            }
+                OfficeOpenXml.ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
 
-            string[] targetSheets =
-                                    {
-                                        "LH.Standard",
-                                        "ND.Standard",
-                                        "KL.Standard",
-                                        "DD.Standard"
-                                    };
-            File.Copy(templatePath, destFile, true);
-
-            using (var package = new ExcelPackage(new FileInfo(destFile)))
-            {
-                foreach (string sheetName in targetSheets)
+                // Lấy toàn bộ dữ liệu chuẩn từ DB, key theo SN (viết hoa)
+                Dictionary<string, dt403_05_Standard> standardDict;
+                using (var db = new DBDocumentManagementSystemEntities())
                 {
-                    var ws = package.Workbook.Worksheets[sheetName];
-                    if (ws == null || ws.Dimension == null) continue;
-
-                    int lastRow = ws.Dimension.End.Row;
-
-                    for (int row = 2; row <= lastRow; row++)
-                    {
-                        string sn = ws.Cells[row, 2].Text;
-                        if (string.IsNullOrWhiteSpace(sn)) continue;
-
-                        sn = sn.Trim().ToUpper();
-
-                        if (!dbDict.TryGetValue(sn, out var dbItem) || dbItem == null)
-                            continue;
-
-                        ws.Cells[row, 5].Value = dbItem.MaGCN;
-                        ws.Cells[row, 6].Value = dbItem.ĐKĐBĐ;
-
-                        if (dbItem.NextCalibrationDate.HasValue)
-                        {
-                            ws.Cells[row, 7].Value = dbItem.NextCalibrationDate.Value;
-                            ws.Cells[row, 7].Style.Numberformat.Format = "yyyy/MM/dd";
-                        }
-
-                        ws.Cells[row, 8].Value = dbItem.Standardlink;
-                    }
+                    standardDict = db.dt403_05_Standard
+                        .Where(x => !string.IsNullOrEmpty(x.SN))
+                        .GroupBy(x => x.SN.Trim())
+                        .ToDictionary(g => g.Key, g => g.First());
                 }
-                package.Save();
-            }
-            //// Copy template ra vị trí user chọn
-            //File.Copy(templatePath, destFile, true);
 
-            // Mở file sau khi export
-            Process.Start(new ProcessStartInfo
+                // Các sheet cần cập nhật
+                string[] targetSheets = { "LH.Standard", "ND.Standard", "KL.Standard", "DD.Standard" };
+
+                // Mở file Excel user chọn, cập nhật dữ liệu rồi lưu lại
+                using (var package = new ExcelPackage(new FileInfo(selectedFile)))
+                {
+                    foreach (string sheetName in targetSheets)
                     {
-                        FileName = destFile,
-                        UseShellExecute = true
-                    });
+                        var ws = package.Workbook.Worksheets[sheetName];
+                        if (ws == null || ws.Dimension == null) continue;
+
+                        int lastRow = ws.Dimension.End.Row;
+
+                        for (int row = 2; row <= lastRow; row++)
+                        {
+                            string sn = ws.Cells[row, 2].Text?.Trim().ToUpper();
+                            if (string.IsNullOrWhiteSpace(sn)) continue;
+
+                            if (!standardDict.TryGetValue(sn, out var standard) || standard == null)
+                                continue;
+
+                            // Cập nhật thông tin GCN vào các cột tương ứng
+                            ws.Cells[row, 5].Value = standard.MaGCN;
+                            ws.Cells[row, 6].Value = standard.ĐKĐBĐ;
+
+                            if (standard.NextCalibrationDate.HasValue)
+                            {
+                                ws.Cells[row, 7].Value = standard.NextCalibrationDate.Value;
+                                ws.Cells[row, 7].Style.Numberformat.Format = "yyyy/MM/dd";
+                            }
+
+                            ws.Cells[row, 8].Value = standard.Standardlink;
+                        }
+                    }
+
+                    package.Save();
+                }
+            }
+            // Mở file sau khi cập nhật xong
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = selectedFile,
+                UseShellExecute = true
+            });
         }
     }
 }
