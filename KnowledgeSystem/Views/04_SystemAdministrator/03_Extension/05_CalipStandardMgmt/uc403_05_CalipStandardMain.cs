@@ -13,6 +13,7 @@ using DocumentFormat.OpenXml.Spreadsheet;
 using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._00_Generals;
 using KnowledgeSystem.Views._02_StandardsAndTechs._04_InternalDocMgmt;
+using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,11 +23,13 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net.Mail;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipStandardMgmt
 {
@@ -121,7 +124,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
 
             if (result != DialogResult.Yes)
                 return;
-
+             
             // Lấy dữ liệu từ DB
             var stdAtt = dt403_05_StandardAttBUS.Instance.GetItemByIdatt(idBase);
 
@@ -154,14 +157,21 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
                 return;
 
             // Lấy dữ liệu từ DB
-            var stdAtt = dt403_05_StandardAttBUS.Instance.GetItemByIdatt(idBase);
 
+            var stdAtt = dt403_05_StandardAttBUS.Instance.GetItemByIdatt(idBase);
+            var std = dt403_05_StandardBUS.Instance.GetItemById(stdAtt.StandardId);
             // Ghi ngày xác nhận
             stdAtt.FinishDate = DateTime.Now;
             stdAtt.FinishUser = TPConfigs.LoginUser.Id;
 
+            std.MaGCN = stdAtt.MaGCN;
+            std.NextCalibrationDate = stdAtt.NextCalibrationDate;
+            std.ĐKĐBĐ = stdAtt.ĐKĐBĐ;
+            std.Standardlink = stdAtt.Standardlink;
+
             // Lưu vào DB
             dt403_05_StandardAttBUS.Instance.AddOrUpdate(stdAtt);
+            dt403_05_StandardBUS.Instance.AddOrUpdate(std);
 
             LoadData();
         }
@@ -182,49 +192,17 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
         }
         private void ItemUpdateVer_Click(object sender, EventArgs e)
         {
-            using (var dlg = new OpenFileDialog { Filter = "PDF files (*.pdf)|*.pdf" })
+           
+            GridView view = gvData;
+            int idBase = Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, gColId));
+            f403_05_UpdateStandar f403_05_UpdateStandar = new f403_05_UpdateStandar()
             {
-                if (dlg.ShowDialog() != DialogResult.OK)
-                    return;
-
-                GridView view = gvData;
-                int idBase = Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, gColId));
-                // Lấy bản ghi StandardAtt nếu có
-                var stdAtt = new dt403_05_StandardAtt { StandardId = idBase,UploadDate = DateTime.Now};
-
-                // ---- Xử lý file ----
-                string filePath = dlg.FileName;
-                string actualName = Path.GetFileName(filePath);
-                string encryptionName = EncryptionHelper.EncryptionFileName(actualName);
-
-                dm_Attachment attachment = new dm_Attachment
-                {
-                    Thread = "40305",
-                    EncryptionName = encryptionName,
-                    ActualName = actualName
-                };
-
-                // Tạo thư mục nếu chưa có
-                string destPath = Path.Combine(TPConfigs.Folder40305, encryptionName);
-                Directory.CreateDirectory(Path.GetDirectoryName(destPath));
-
-                // Sao chép file
-                File.Copy(filePath, destPath, true);
-                DialogResult result = XtraMessageBox.Show(
-                    "您確定要更新此檔案嗎？",
-                    "更新檔案",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
-                if (result != DialogResult.Yes)
-                    return;
-                // Lưu attachment → lấy Id
-                stdAtt.AttId = dm_AttachmentBUS.Instance.Add(attachment);
-                stdAtt.UploadUser = TPConfigs.LoginUser.Id;
-                // Lưu StandardAtt
-                dt403_05_StandardAttBUS.Instance.Add(stdAtt);
-
-                LoadData();
-            }
+                idBase = idBase,
+                eventInfo = EventFormInfo.Create,
+                formName = "規範"
+            };
+            f403_05_UpdateStandar.ShowDialog();
+            LoadData();
         }
         DXMenuItem CreateMenuItem(string caption, EventHandler clickEvent, SvgImage svgImage)
         {
@@ -259,6 +237,10 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
                                   SN = STD.SN,
                                   DisplayNameTW = STD.DisplayNameTW,
                                   DisplayNameVN = STD.DisplayNameVN,
+                                  MaGCN = STD.MaGCN,
+                                    ĐKĐBĐ = STD.ĐKĐBĐ,
+                                    NextCalibrationDate = STD.NextCalibrationDate,
+                                    Standardlink = STD.Standardlink,
                               };
 
                 sourceBases.DataSource = Display;
@@ -393,7 +375,6 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
                 Directory.CreateDirectory(TPConfigs.TempFolderData);
 
             File.Copy(sourcePath, destPath, true);
-
             var mainForm = f00_ViewMultiFile.Instance;
             if (!mainForm.Visible)
                 mainForm.Show();
@@ -432,18 +413,90 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._03_Extension._05_CalipS
                   //  e.Menu.Items.Add(itemRemove);
                     e.Menu.Items.Add(itemCacelProgress);
                 }
-            }
+            } 
         }
         private void btnExportExcel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            string documentsPath = TPConfigs.DocumentPath();
-            if (!Directory.Exists(documentsPath))
-                Directory.CreateDirectory(documentsPath);
+            string templatePath = Path.Combine(
+                                               TPConfigs.ResourcesPath,
+                                               "ExcelTemp-Master.xlsx"
+                                            );
 
-            string filePath = Path.Combine(documentsPath, $"考試系統 - {DateTime.Now:yyyyMMddHHmm}.xlsx");
+            if (!File.Exists(templatePath))
+            {
+                XtraMessageBox.Show("Không tìm thấy file Excel template!");
+                return;
+            }
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Excel file (*.xlsx)|*.xlsx";
+            saveFileDialog.FileName = "ExcelTemp-Master.xlsx";
+            if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
 
-            gcData.ExportToXlsx(filePath);
-            Process.Start(filePath);
+            string destFile = saveFileDialog.FileName;
+
+            OfficeOpenXml.ExcelPackage.LicenseContext =OfficeOpenXml.LicenseContext.NonCommercial;
+
+            Dictionary<string, dt403_05_Standard> dbDict;
+
+            using (var db = new DBDocumentManagementSystemEntities())
+            {
+                dbDict = db.dt403_05_Standard
+                    .Where(x => !string.IsNullOrEmpty(x.SN))
+                    .GroupBy(x => x.SN.Trim())
+                    .ToDictionary(g => g.Key, g => g.First());
+            }
+
+            string[] targetSheets =
+                                    {
+                                        "LH.Standard",
+                                        "ND.Standard",
+                                        "KL.Standard",
+                                        "DD.Standard"
+                                    };
+            File.Copy(templatePath, destFile, true);
+
+            using (var package = new ExcelPackage(new FileInfo(destFile)))
+            {
+                foreach (string sheetName in targetSheets)
+                {
+                    var ws = package.Workbook.Worksheets[sheetName];
+                    if (ws == null || ws.Dimension == null) continue;
+
+                    int lastRow = ws.Dimension.End.Row;
+
+                    for (int row = 2; row <= lastRow; row++)
+                    {
+                        string sn = ws.Cells[row, 2].Text;
+                        if (string.IsNullOrWhiteSpace(sn)) continue;
+
+                        sn = sn.Trim().ToUpper();
+
+                        if (!dbDict.TryGetValue(sn, out var dbItem) || dbItem == null)
+                            continue;
+
+                        ws.Cells[row, 5].Value = dbItem.MaGCN;
+                        ws.Cells[row, 6].Value = dbItem.ĐKĐBĐ;
+
+                        if (dbItem.NextCalibrationDate.HasValue)
+                        {
+                            ws.Cells[row, 7].Value = dbItem.NextCalibrationDate.Value;
+                            ws.Cells[row, 7].Style.Numberformat.Format = "yyyy/MM/dd";
+                        }
+
+                        ws.Cells[row, 8].Value = dbItem.Standardlink;
+                    }
+                }
+                package.Save();
+            }
+            //// Copy template ra vị trí user chọn
+            //File.Copy(templatePath, destFile, true);
+
+            // Mở file sau khi export
+            Process.Start(new ProcessStartInfo
+                    {
+                        FileName = destFile,
+                        UseShellExecute = true
+                    });
         }
     }
 }
