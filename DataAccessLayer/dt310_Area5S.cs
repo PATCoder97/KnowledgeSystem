@@ -16,7 +16,6 @@ namespace DataAccessLayer
     {
         public int Id { get; set; }
         public string DisplayName { get; set; }
-        public string DESC { get; set; }
         public string FileName { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public string CreatedBy { get; set; }
