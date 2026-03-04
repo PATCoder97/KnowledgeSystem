@@ -15,13 +15,13 @@ namespace DataAccessLayer
     public partial class dt403_05_Standard
     {
         public int Id { get; set; }
-        public string SN { get; set; }
-        public string DisplayNameTW { get; set; }
-        public string DisplayNameVN { get; set; }
+        public string SN { get; set; }  // 100B-17
+        public string DisplayNameTW { get; set; } //塞尺
+        public string DisplayNameVN { get; set; } // Bộ căn lá
         public string ManagerId { get; set; }
-        public string MaGCN { get; set; }
-        public string ĐKĐBĐ { get; set; }
-        public Nullable<System.DateTime> NextCalibrationDate { get; set; }
-        public string Standardlink { get; set; }
+        public string MaGCN { get; set; } //TSG-0-438208
+        public string ĐKĐBĐ { get; set; } //(0.001~0.003) mm(0.001~0.003) mm
+        public Nullable<System.DateTime> NextCalibrationDate { get; set; } //2025/07/11
+        public string Standardlink { get; set; } // Techmaster
     }
 }

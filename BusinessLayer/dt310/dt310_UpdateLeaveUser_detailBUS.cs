@@ -158,6 +158,26 @@ namespace BusinessLayer
             }
         }
 
+        public List<dt310_UpdateLeaveUser_detail> GetListNeedNotify()
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt310_UpdateLeaveUser_detail
+                        .Where(r => r.TimeNotify == null)
+                        .GroupBy(r => r.IdUpdateData)
+                        .Select(g => g.OrderBy(r => r.IndexStep).FirstOrDefault())
+                        .ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public bool RemoveById(int id)
         {
             try
