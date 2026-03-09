@@ -1093,6 +1093,7 @@
           <Property Name="DataJson" Type="nvarchar(max)" />
           <Property Name="CreateBy" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="CreateAt" Type="datetime" Nullable="false" />
+          <Property Name="DataType" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="dt310_UpdateLeaveUser_detail">
           <Key>
@@ -1591,9 +1592,9 @@
           <EntitySet Name="dt312_ExamMgmt" EntityType="DBDocumentManagementSystemModel.dt312_ExamMgmt" />
           <EntitySet Name="dt403_05_Standard" EntityType="DBDocumentManagementSystemModel.dt403_05_Standard" />
           <EntitySet Name="dt403_05_StandardAtt" EntityType="DBDocumentManagementSystemModel.dt403_05_StandardAtt" />
-          <EntitySet Name="dt310_UpdateLeaveUser" EntityType="DBDocumentManagementSystemModel.dt310_UpdateLeaveUser" />
           <EntitySet Name="dt310_UpdateLeaveUser_detail" EntityType="DBDocumentManagementSystemModel.dt310_UpdateLeaveUser_detail" />
           <EntitySet Name="dt310_Area5SResponsible" EntityType="DBDocumentManagementSystemModel.dt310_Area5SResponsible" />
+          <EntitySet Name="dt310_UpdateLeaveUser" EntityType="DBDocumentManagementSystemModel.dt310_UpdateLeaveUser" />
         </EntityContainer>
         <EntityType Name="dm_Function">
           <Key>
@@ -2897,20 +2898,6 @@
           <Property Name="NextCalibrationDate" Type="DateTime" Precision="0" />
           <Property Name="Standardlink" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="dt310_UpdateLeaveUser">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdUserLeave" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="IsProcess" Type="Boolean" Nullable="false" />
-          <Property Name="IsCancel" Type="Boolean" Nullable="false" />
-          <Property Name="IdGroupProcess" Type="Int32" />
-          <Property Name="DataJson" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CreateBy" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="CreateAt" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
         <EntityType Name="dt310_UpdateLeaveUser_detail">
           <Key>
             <PropertyRef Name="Id" />
@@ -2940,6 +2927,21 @@
           <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="DeletedAt" Type="DateTime" Precision="7" />
           <Property Name="DeletedBy" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dt310_UpdateLeaveUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdUserLeave" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="IsProcess" Type="Boolean" Nullable="false" />
+          <Property Name="IsCancel" Type="Boolean" Nullable="false" />
+          <Property Name="IdGroupProcess" Type="Int32" />
+          <Property Name="DataJson" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreateBy" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CreateAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DataType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -4364,21 +4366,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dt310_UpdateLeaveUser">
-            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt310_UpdateLeaveUser">
-              <MappingFragment StoreEntitySet="dt310_UpdateLeaveUser">
-                <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
-                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
-                <ScalarProperty Name="DataJson" ColumnName="DataJson" />
-                <ScalarProperty Name="IdGroupProcess" ColumnName="IdGroupProcess" />
-                <ScalarProperty Name="IsCancel" ColumnName="IsCancel" />
-                <ScalarProperty Name="IsProcess" ColumnName="IsProcess" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="IdUserLeave" ColumnName="IdUserLeave" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="dt310_UpdateLeaveUser_detail">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt310_UpdateLeaveUser_detail">
               <MappingFragment StoreEntitySet="dt310_UpdateLeaveUser_detail">
@@ -4407,6 +4394,22 @@
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
                 <ScalarProperty Name="DeptId" ColumnName="DeptId" />
                 <ScalarProperty Name="AreaId" ColumnName="AreaId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt310_UpdateLeaveUser">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt310_UpdateLeaveUser">
+              <MappingFragment StoreEntitySet="dt310_UpdateLeaveUser">
+                <ScalarProperty Name="DataType" ColumnName="DataType" />
+                <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="DataJson" ColumnName="DataJson" />
+                <ScalarProperty Name="IdGroupProcess" ColumnName="IdGroupProcess" />
+                <ScalarProperty Name="IsCancel" ColumnName="IsCancel" />
+                <ScalarProperty Name="IsProcess" ColumnName="IsProcess" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="IdUserLeave" ColumnName="IdUserLeave" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
