@@ -65,6 +65,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             btnAdd.ImageOptions.SvgImage = TPSvgimages.Add;
             btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
             btnSummaryTable.ImageOptions.SvgImage = TPSvgimages.Excel;
+            btnApplyChange.ImageOptions.SvgImage = TPSvgimages.Edit;
         }
 
         /// <summary>
@@ -219,6 +220,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
         private void btnReload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            LoadData();
+        }
+
+        private void btnApplyChange_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var form = new f310_EHSAssign_Info();
+            form.ShowDialog();
             LoadData();
         }
 

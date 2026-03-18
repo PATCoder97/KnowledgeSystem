@@ -109,6 +109,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                 r.DisplayName,
                 r.IsProcess,
                 r.IsCancel,
+                DataType = string.IsNullOrWhiteSpace(r.DataType) ? "離職" : r.DataType,
                 GroupProcess = r.IdGroupProcess == -1
                     ? ""
                     : groups.FirstOrDefault(g => g.Id == r.IdGroupProcess)?.DisplayName ?? "",

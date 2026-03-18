@@ -72,6 +72,22 @@ namespace BusinessLayer
             }
         }
 
+        public List<dt310_Area5SResponsible> GetListByDeptId(string deptId)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt310_Area5SResponsible.Where(r => r.DeptId == deptId).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public dt310_Area5SResponsible GetItemById(int id)
         {
             try

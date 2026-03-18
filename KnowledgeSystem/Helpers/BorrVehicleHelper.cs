@@ -91,8 +91,8 @@ namespace KnowledgeSystem.Helpers
                     {
                         infos.Add(new VehicleBorrInfo
                         {
-                            IdUserBorr = parts[9].Substring(0, 10),
-                            NameUserBorr = parts[9].Substring(10),
+                            IdUserBorr = parts[9].Length >= 10 ? parts[9].Substring(0, 10) : "VNW0018616",
+                            NameUserBorr = parts[9].Length > 10 ? parts[9].Substring(10) : "",
                             BorrTime = DateTime.TryParseExact(parts[3], "yyyyMMddHHmm", null, System.Globalization.DateTimeStyles.None, out var borrTime) ? borrTime : default,
                             BackTime = DateTime.TryParseExact(parts[2], "yyyyMMddHHmm", null, System.Globalization.DateTimeStyles.None, out var backTime) ? backTime : default,
                             StartKm = int.TryParse(parts[0], out var startKm) ? startKm : 0,
