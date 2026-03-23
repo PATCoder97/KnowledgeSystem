@@ -23,5 +23,6 @@ namespace DataAccessLayer
         public string DataJson { get; set; }
         public string CreateBy { get; set; }
         public System.DateTime CreateAt { get; set; }
+        public string DataType { get; set; }
     }
 }

@@ -60,6 +60,7 @@
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColHasMyPermission = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColDataType = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColCreateAt = new DevExpress.XtraGrid.Columns.GridColumn();
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
@@ -356,6 +357,7 @@
             this.gColDisplayName,
             this.gridColumn3,
             this.gridColumn4,
+            this.gColDataType,
             this.gridColumn13,
             this.gridColumn14,
             this.gColHasMyPermission,
@@ -421,6 +423,15 @@
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 3;
             this.gridColumn4.Width = 112;
+            // 
+            // gColDataType
+            // 
+            this.gColDataType.Caption = "類型";
+            this.gColDataType.FieldName = "DataType";
+            this.gColDataType.Name = "gColDataType";
+            this.gColDataType.Visible = true;
+            this.gColDataType.VisibleIndex = 4;
+            this.gColDataType.Width = 80;
             // 
             // gridColumn13
             // 
@@ -737,6 +748,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;
         private DevExpress.XtraGrid.Columns.GridColumn gColHasMyPermission;
+        private DevExpress.XtraGrid.Columns.GridColumn gColDataType;
         private DevExpress.XtraGrid.Columns.GridColumn gColCreateAt;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;

@@ -137,6 +137,7 @@
             this.btnSummaryTable.Id = 14;
             this.btnSummaryTable.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnSummaryTable.Name = "btnSummaryTable";
+            this.btnSummaryTable.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSummaryTable_ItemClick);
             // 
             // barDockControlTop
             // 

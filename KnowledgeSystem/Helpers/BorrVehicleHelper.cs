@@ -26,9 +26,10 @@ namespace KnowledgeSystem.Helpers
         TPLogger logger;
 
         private static BorrVehicleHelper instance;
+        private static readonly string[] ApiItemSeparator = new[] { "o|o" };
 
         static Uri baseUrl = new Uri("https://www.fhs.com.tw/ads/api/Furnace/rest/json/ve/");
-        string idDept2word = TPConfigs.LoginUser.IdDepartment.Substring(0, 2);
+        string idDept2word = SafeLeft(TPConfigs.LoginUser?.IdDepartment, 2);
 
         public static BorrVehicleHelper Instance
         {
@@ -41,6 +42,54 @@ namespace KnowledgeSystem.Helpers
             logger = new TPLogger(MethodBase.GetCurrentMethod().DeclaringType.FullName);
         }
 
+        private static string SafeLeft(string value, int length)
+        {
+            if (string.IsNullOrEmpty(value) || length <= 0)
+            {
+                return string.Empty;
+            }
+
+            return value.Length <= length ? value : value.Substring(0, length);
+        }
+
+        private static void SplitUserInfo(string value, out string idUser, out string nameUser)
+        {
+            idUser = SafeLeft(value, 10);
+            nameUser = string.IsNullOrEmpty(value) || value.Length <= idUser.Length
+                ? string.Empty
+                : value.Substring(idUser.Length);
+        }
+
+        private static string EncodeApiValue(string value)
+        {
+            return (HttpUtility.UrlEncode(value ?? string.Empty) ?? string.Empty).Replace("+", "%20").ToUpper();
+        }
+
+        private static int ParseFirstPipeNumber(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return 0;
+            }
+
+            var firstPart = value.Split('|').FirstOrDefault();
+            return int.TryParse(firstPart?.Trim(), out var number) ? number : 0;
+        }
+
+        private static void SplitPlaces(string value, out string fromPlace, out string toPlace)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                fromPlace = string.Empty;
+                toPlace = string.Empty;
+                return;
+            }
+
+            var parts = value.Split(new[] { '-' }, 2);
+            fromPlace = parts.Length > 0 ? parts[0] : string.Empty;
+            toPlace = parts.Length > 1 ? parts[1] : string.Empty;
+        }
+
         public async Task<List<VehicleStatus>> GetListVehicle(string parameter)
         {
             using (var webClient = new WebClient { BaseAddress = baseUrl.ToString() })
@@ -49,7 +98,7 @@ namespace KnowledgeSystem.Helpers
                 string content = await webClient.DownloadStringTaskAsync(parameter);
 
                 var statues = new List<VehicleStatus>();
-                foreach (var subItem in content.Split(new[] { "o|o" }, StringSplitOptions.RemoveEmptyEntries))
+                foreach (var subItem in content.Split(ApiItemSeparator, StringSplitOptions.RemoveEmptyEntries))
                 {
                     var parts = subItem.Split('|');
                     if (parts.Length >= 4)
@@ -78,21 +127,28 @@ namespace KnowledgeSystem.Helpers
 
         public async Task<List<VehicleBorrInfo>> GetBorrMotorUser(VehicleStatus status)
         {
+            if (status == null)
+            {
+                return new List<VehicleBorrInfo>();
+            }
+
             using (var webClient = new WebClient { BaseAddress = baseUrl.ToString() })
             {
                 webClient.Encoding = Encoding.UTF8;
-                string content = await webClient.DownloadStringTaskAsync($"s34/{status.Dept}vkv{status.Name.Replace(".", "")}");
+                string content = await webClient.DownloadStringTaskAsync($"s34/{status.Dept ?? string.Empty}vkv{(status.Name ?? string.Empty).Replace(".", string.Empty)}");
 
                 var infos = new List<VehicleBorrInfo>();
-                foreach (var subItem in content.Split(new[] { "o|o" }, StringSplitOptions.RemoveEmptyEntries))
+                foreach (var subItem in content.Split(ApiItemSeparator, StringSplitOptions.RemoveEmptyEntries))
                 {
                     var parts = subItem.Split('|');
-                    if (parts.Length >= 9)
+                    if (parts.Length >= 10)
                     {
+                        SplitUserInfo(parts[9], out var idUserBorr, out var nameUserBorr);
+
                         infos.Add(new VehicleBorrInfo
                         {
-                            IdUserBorr = parts[9].Substring(0, 10),
-                            NameUserBorr = parts[9].Substring(10),
+                            IdUserBorr = idUserBorr,
+                            NameUserBorr = nameUserBorr,
                             BorrTime = DateTime.TryParseExact(parts[3], "yyyyMMddHHmm", null, System.Globalization.DateTimeStyles.None, out var borrTime) ? borrTime : default,
                             BackTime = DateTime.TryParseExact(parts[2], "yyyyMMddHHmm", null, System.Globalization.DateTimeStyles.None, out var backTime) ? backTime : default,
                             StartKm = int.TryParse(parts[0], out var startKm) ? startKm : 0,
@@ -110,21 +166,28 @@ namespace KnowledgeSystem.Helpers
 
         public async Task<List<VehicleBorrInfo>> GetBorrCarUser(VehicleStatus status)
         {
+            if (status == null)
+            {
+                return new List<VehicleBorrInfo>();
+            }
+
             using (var webClient = new WebClient { BaseAddress = baseUrl.ToString() })
             {
                 webClient.Encoding = Encoding.UTF8;
-                string content = await webClient.DownloadStringTaskAsync($"s45/{status.Dept}vkv{status.Name}");
+                string content = await webClient.DownloadStringTaskAsync($"s45/{status.Dept ?? string.Empty}vkv{status.Name ?? string.Empty}");
 
                 var infos = new List<VehicleBorrInfo>();
-                foreach (var subItem in content.Split(new[] { "o|o" }, StringSplitOptions.RemoveEmptyEntries))
+                foreach (var subItem in content.Split(ApiItemSeparator, StringSplitOptions.RemoveEmptyEntries))
                 {
                     var parts = subItem.Split('|');
                     if (parts.Length >= 23)
                     {
+                        SplitUserInfo(parts[3], out var idUserBorr, out var nameUserBorr);
+
                         infos.Add(new VehicleBorrInfo
                         {
-                            IdUserBorr = parts[3].Substring(0, 10),
-                            NameUserBorr = parts[3].Substring(10),
+                            IdUserBorr = idUserBorr,
+                            NameUserBorr = nameUserBorr,
                             BorrTime = DateTime.TryParseExact(parts[1], "yyyyMMddHHmm", null, System.Globalization.DateTimeStyles.None, out var borrTime) ? borrTime : default,
                             BackTime = DateTime.TryParseExact(parts[4], "yyyyMMddHHmm", null, System.Globalization.DateTimeStyles.None, out var backTime) ? backTime : default,
                             StartKm = int.TryParse(parts[8], out var startKm) ? startKm : 0,
@@ -147,7 +210,7 @@ namespace KnowledgeSystem.Helpers
                 webClient.Encoding = Encoding.UTF8;
                 string content = await webClient.DownloadStringTaskAsync($"s66/o");
 
-                return content.Split(new[] { "o|o" }, StringSplitOptions.RemoveEmptyEntries)
+                return content.Split(ApiItemSeparator, StringSplitOptions.RemoveEmptyEntries)
                               .Select(p => p.Trim())
                               .OrderBy(r => r)
                               .ToList();
@@ -184,12 +247,15 @@ namespace KnowledgeSystem.Helpers
         public async Task<bool> BorrMotor(dm_User borrUsr, string nameVehicle, string borrTime, string place, string purposes, string numUser)
         {
             //https://www.fhs.com.tw/ads/api/Furnace/rest/json/ve/s35/78vkv27513vkvvkvvkv202508221538vkvTtkt-vlvkvB.%E9%96%8B%E6%9C%83_%E4%B8%8A%E8%AA%B2%E8%A8%93%E7%B7%B4%20vkv1vkvvkv38LD-40103vkvVNW0014732vkvYvkvYvkvYvkvVNW0018983vkv202508221539
+            if (borrUsr == null)
+            {
+                return false;
+            }
 
             string managerVehicle = await GetManagerVehicle(nameVehicle);
-            var purposesUrl = HttpUtility.UrlEncode(purposes).Replace("+", "%20").ToUpper();
-            var placeUrl = HttpUtility.UrlEncode(place).Replace("+", "%20").ToUpper();
-
-            int startKm = int.TryParse((await GetLastKmMotor(nameVehicle)).Split('|')[0].Trim(), out var lastKm) ? lastKm : 0;
+            var purposesUrl = EncodeApiValue(purposes);
+            var placeUrl = EncodeApiValue(place);
+            int startKm = ParseFirstPipeNumber(await GetLastKmMotor(nameVehicle));
 
             using (var webClient = new WebClient { BaseAddress = baseUrl.ToString() })
             {
@@ -201,7 +267,12 @@ namespace KnowledgeSystem.Helpers
 
         public async Task<bool> BackMotor(dm_User borrUsr, string nameVehicle, int endKm, string borrTime, string backTime, int totalKm)
         {
-            var userBackUrl = HttpUtility.UrlEncode($"{borrUsr.Id}{borrUsr.DisplayName}").Replace("+", "%20").ToUpper();
+            if (borrUsr == null)
+            {
+                return false;
+            }
+
+            var userBackUrl = EncodeApiValue($"{borrUsr.Id}{borrUsr.DisplayName}");
 
             using (var webClient = new WebClient { BaseAddress = baseUrl.ToString() })
             {
@@ -213,14 +284,19 @@ namespace KnowledgeSystem.Helpers
 
         public async Task<bool> BorrCar(dm_User borrUsr, string nameVehicle, string borrTime, string fromPlace, string toPlace, string purposes, string licExpDate, int startKm = 0)
         {
+            if (borrUsr == null)
+            {
+                return false;
+            }
+
             string managerVehicle = await GetManagerVehicle(nameVehicle);
-            var purposesUrl = HttpUtility.UrlEncode(purposes).Replace("+", "%20").ToUpper();
-            var formPlaceUrl = HttpUtility.UrlEncode(fromPlace).Replace("+", "%20").ToUpper();
-            var toPlaceUrl = HttpUtility.UrlEncode(toPlace).Replace("+", "%20").ToUpper();
+            var purposesUrl = EncodeApiValue(purposes);
+            var formPlaceUrl = EncodeApiValue(fromPlace);
+            var toPlaceUrl = EncodeApiValue(toPlace);
 
             if (startKm == 0)
             {
-                int.TryParse((await GetLastKmCar(nameVehicle)).Split('|')[0].Trim(), out startKm);
+                startKm = ParseFirstPipeNumber(await GetLastKmCar(nameVehicle));
             }
 
             using (var webClient = new WebClient { BaseAddress = baseUrl.ToString() })
@@ -233,7 +309,12 @@ namespace KnowledgeSystem.Helpers
 
         public async Task<bool> BackCar(dm_User borrUsr, string nameVehicle, int endKm, string borrTime, string backTime, int totalKm)
         {
-            var userBackUrl = HttpUtility.UrlEncode($"{borrUsr.Id}{borrUsr.DisplayName}").Replace("+", "%20").ToUpper();
+            if (borrUsr == null)
+            {
+                return false;
+            }
+
+            var userBackUrl = EncodeApiValue($"{borrUsr.Id}{borrUsr.DisplayName}");
 
             using (var webClient = new WebClient { BaseAddress = baseUrl.ToString() })
             {
@@ -245,8 +326,13 @@ namespace KnowledgeSystem.Helpers
 
         public async Task<bool> EditInfoMoto(VehicleBorrInfo info)
         {
-            var place = HttpUtility.UrlEncode(info.Place).Replace("+", "%20").ToUpper();
-            var purposes = HttpUtility.UrlEncode(info.Uses).Replace("+", "%20").ToUpper();
+            if (info == null)
+            {
+                return false;
+            }
+
+            var place = EncodeApiValue(info.Place);
+            var purposes = EncodeApiValue(info.Uses);
 
             using (var webClient = new WebClient { BaseAddress = baseUrl.ToString() })
             {
@@ -258,9 +344,15 @@ namespace KnowledgeSystem.Helpers
 
         public async Task<bool> EditInfoCar(VehicleBorrInfo info)
         {
-            var fromPlace = HttpUtility.UrlEncode(info.Place.Split('-')[0]).Replace("+", "%20").ToUpper();
-            var toPlace = HttpUtility.UrlEncode(info.Place.Split('-')[1]).Replace("+", "%20").ToUpper();
-            var purposes = HttpUtility.UrlEncode(info.Uses).Replace("+", "%20").ToUpper();
+            if (info == null)
+            {
+                return false;
+            }
+
+            SplitPlaces(info.Place, out var fromPlaceRaw, out var toPlaceRaw);
+            var fromPlace = EncodeApiValue(fromPlaceRaw);
+            var toPlace = EncodeApiValue(toPlaceRaw);
+            var purposes = EncodeApiValue(info.Uses);
 
             using (var webClient = new WebClient { BaseAddress = baseUrl.ToString() })
             {

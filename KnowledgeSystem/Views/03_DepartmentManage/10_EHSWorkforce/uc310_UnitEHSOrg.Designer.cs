@@ -56,6 +56,7 @@
             this.btnAdd = new DevExpress.XtraBars.BarButtonItem();
             this.btnReload = new DevExpress.XtraBars.BarButtonItem();
             this.btnSummaryTable = new DevExpress.XtraBars.BarButtonItem();
+            this.btnApplyChange = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -336,9 +337,10 @@
             this.barManagerTP.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.btnAdd,
             this.btnReload,
-            this.btnSummaryTable});
+            this.btnSummaryTable,
+            this.btnApplyChange});
             this.barManagerTP.MainMenu = this.bar2;
-            this.barManagerTP.MaxItemId = 15;
+            this.barManagerTP.MaxItemId = 16;
             // 
             // bar2
             // 
@@ -364,7 +366,8 @@
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnAdd, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnReload, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnSummaryTable, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnSummaryTable, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnApplyChange, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawDragBorder = false;
             this.bar2.OptionsBar.MultiLine = true;
@@ -406,6 +409,15 @@
             this.btnSummaryTable.Id = 14;
             this.btnSummaryTable.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnSummaryTable.Name = "btnSummaryTable";
+            this.btnSummaryTable.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSummaryTable_ItemClick);
+            // 
+            // btnApplyChange
+            // 
+            this.btnApplyChange.Caption = "申請人員異動";
+            this.btnApplyChange.Id = 15;
+            this.btnApplyChange.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnApplyChange.Name = "btnApplyChange";
+            this.btnApplyChange.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnApplyChange_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -598,6 +610,7 @@
         private DevExpress.XtraBars.BarButtonItem btnAdd;
         private DevExpress.XtraBars.BarButtonItem btnReload;
         private DevExpress.XtraBars.BarButtonItem btnSummaryTable;
+        private DevExpress.XtraBars.BarButtonItem btnApplyChange;
         private DevExpress.XtraBars.BarDockControl barDockControlTop;
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
