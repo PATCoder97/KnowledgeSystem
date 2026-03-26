@@ -42,6 +42,7 @@ namespace KnowledgeSystem
             new AppCopyRight() { Version = "26.03.23" };
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            ApplySpireLicense();
             TPConfigs.SetSystemStaticValue();
             WindowsFormsSettings.ScrollUIMode = ScrollUIMode.Fluent;
 
@@ -134,6 +135,18 @@ namespace KnowledgeSystem
 #else
                 Application.Run(new f00_Main());
 #endif
+            }
+        }
+
+        private static void ApplySpireLicense()
+        {
+            try
+            {
+                Spire.License.LicenseProvider.SetLicenseKey(TPConfigs.KeySpirePPT);
+            }
+            catch
+            {
+                // Ignore here and let feature-specific flows surface issues if the local license setup changes.
             }
         }
     }

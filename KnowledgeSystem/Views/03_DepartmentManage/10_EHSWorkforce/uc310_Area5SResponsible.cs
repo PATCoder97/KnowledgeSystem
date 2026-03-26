@@ -30,7 +30,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
     {
         private const float PdfPageMargin = 28f;
         private const float PdfImageSectionMaxHeight = 340f;
+        private const float PdfImageSectionMinHeight = 120f;
+        private const float PdfImagePadding = 8f;
         private const float PdfSectionSpacing = 14f;
+        private const float PdfSectionTitleHeight = 24f;
+        private const float PdfHeaderRowHeight = 24f;
+        private const float PdfDataRowHeight = 22f;
 
         public uc310_Area5SResponsible()
         {
@@ -277,17 +282,21 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
         private void btnSummaryTable_ItemClick(object sender, ItemClickEventArgs e)
         {
-            dt310_Area5S selectedArea = GetFocusedArea();
-            if (selectedArea == null)
+            List<dt310_Area5S> reportAreas = (area5S ?? new List<dt310_Area5S>())
+                .Where(r => r.DeletedAt == null)
+                .OrderBy(r => r.DisplayName)
+                .ToList();
+
+            if (reportAreas.Count == 0)
             {
-                XtraMessageBox.Show("請先選擇一筆區域資料後再導出 PDF。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                XtraMessageBox.Show("目前沒有可導出的 5S 區域資料。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             using (SaveFileDialog saveFileDialog = new SaveFileDialog())
             {
                 saveFileDialog.Filter = "PDF Files|*.pdf";
-                saveFileDialog.FileName = BuildAreaReportFileName(selectedArea);
+                saveFileDialog.FileName = BuildAreaReportFileName();
                 saveFileDialog.RestoreDirectory = true;
 
                 if (saveFileDialog.ShowDialog() != DialogResult.OK)
@@ -299,7 +308,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                 {
                     using (var handle = SplashScreenManager.ShowOverlayForm(this))
                     {
-                        ExportAreaReportPdf(selectedArea, saveFileDialog.FileName);
+                        ExportAreaReportPdf(reportAreas, saveFileDialog.FileName);
                     }
 
                     XtraMessageBox.Show($"已導出 PDF 報告：\n{saveFileDialog.FileName}", "完成", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -311,22 +320,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             }
         }
 
-        private dt310_Area5S GetFocusedArea()
+        private string BuildAreaReportFileName()
         {
-            int rowHandle = gvData.FocusedRowHandle;
-            if (rowHandle < 0 && gvData.RowCount > 0)
-            {
-                rowHandle = 0;
-            }
-
-            return rowHandle >= 0 ? gvData.GetRow(rowHandle) as dt310_Area5S : null;
-        }
-
-        private string BuildAreaReportFileName(dt310_Area5S area)
-        {
-            string areaName = string.IsNullOrWhiteSpace(area?.DisplayName) ? "Area5S" : area.DisplayName.Trim();
-            string safeAreaName = SanitizeFileName(areaName);
-            return $"[310] {safeAreaName} Area Responsibility Report {DateTime.Now:yyyyMMdd_HHmm}.pdf";
+            return $"[310] 5S Area Responsibility Report {DateTime.Now:yyyyMMdd_HHmm}.pdf";
         }
 
         private static string SanitizeFileName(string fileName)
@@ -339,9 +335,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             return fileName;
         }
 
-        private void ExportAreaReportPdf(dt310_Area5S area, string outputPath)
+        private void ExportAreaReportPdf(List<dt310_Area5S> areas, string outputPath)
         {
-            List<object[]> reportRows = BuildAreaReportRows(area.Id);
+            Spire.License.LicenseProvider.SetLicenseKey(TPConfigs.KeySpirePPT);
 
             using (PdfDocument document = new PdfDocument())
             using (Font titleFontGdi = new Font("Microsoft JhengHei UI", 16f, FontStyle.Bold))
@@ -354,26 +350,33 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             using (PdfTrueTypeFont smallFont = new PdfTrueTypeFont(smallFontGdi, true))
             {
                 document.PageSettings.Size = PdfPageSize.A4;
-                document.DocumentInformation.Title = $"{area.DisplayName} 區域責任報告";
+                document.DocumentInformation.Title = "5S 區域責任報告";
                 document.DocumentInformation.Creator = TPConfigs.SoftNameEN ?? "KnowledgeSystem";
                 document.DocumentInformation.Author = TPConfigs.LoginUser?.DisplayName ?? TPConfigs.LoginUser?.Id ?? "KnowledgeSystem";
 
-                PdfNewPage page = (PdfNewPage)document.Pages.Add();
-                float pageWidth = page.Canvas.ClientSize.Width;
-                float pageHeight = page.Canvas.ClientSize.Height;
-                float contentWidth = pageWidth - (PdfPageMargin * 2);
-                float y = PdfPageMargin;
+                for (int i = 0; i < areas.Count; i++)
+                {
+                    dt310_Area5S area = areas[i];
+                    List<object[]> reportRows = BuildAreaReportRows(area.Id);
+                    PdfNewPage page = (PdfNewPage)document.Pages.Add();
+                    float pageWidth = page.Canvas.ClientSize.Width;
+                    float pageHeight = page.Canvas.ClientSize.Height;
+                    float contentWidth = pageWidth - (PdfPageMargin * 2);
+                    float y = PdfPageMargin;
+                    float gridHeight = CalculateTableGridHeight(reportRows.Count);
 
-                y = DrawHeader(page, area, titleFont, contentFont, pageWidth, y);
-                y = DrawAreaImageSection(page, area, sectionFont, smallFont, contentWidth, pageHeight, y);
-                y += PdfSectionSpacing;
-                DrawTableSection(page, reportRows, sectionFont, contentFont, contentWidth, pageHeight, y);
+                    y = DrawHeader(page, area, titleFont, contentFont, pageWidth, y, i + 1, areas.Count);
+                    float imageHeight = CalculateImageHeight(pageHeight, y, gridHeight);
+                    y = DrawAreaImageSection(page, area, sectionFont, smallFont, contentWidth, y, imageHeight);
+                    y += PdfSectionSpacing;
+                    DrawTableSection(page, reportRows, sectionFont, contentFont, contentWidth, y, gridHeight);
+                }
 
                 document.SaveToFile(outputPath);
             }
         }
 
-        private float DrawHeader(PdfNewPage page, dt310_Area5S area, PdfTrueTypeFont titleFont, PdfTrueTypeFont contentFont, float pageWidth, float y)
+        private float DrawHeader(PdfNewPage page, dt310_Area5S area, PdfTrueTypeFont titleFont, PdfTrueTypeFont contentFont, float pageWidth, float y, int pageIndex, int pageCount)
         {
             float contentWidth = pageWidth - (PdfPageMargin * 2);
 
@@ -385,55 +388,54 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             page.Canvas.DrawString(meta, contentFont, PdfBrushes.DimGray, new RectangleF(PdfPageMargin, y, contentWidth, 18f), CreateStringFormat(PdfTextAlignment.Left));
             y += 24f;
 
+            page.Canvas.DrawString($"頁次：{pageIndex}/{pageCount}", contentFont, PdfBrushes.DimGray, new RectangleF(PdfPageMargin, y - 24f, contentWidth, 18f), CreateStringFormat(PdfTextAlignment.Right));
+
             page.Canvas.DrawLine(PdfPens.DarkGray, PdfPageMargin, y, pageWidth - PdfPageMargin, y);
             return y + 10f;
         }
 
-        private float DrawAreaImageSection(PdfNewPage page, dt310_Area5S area, PdfTrueTypeFont sectionFont, PdfTrueTypeFont contentFont, float contentWidth, float pageHeight, float y)
+        private float DrawAreaImageSection(PdfNewPage page, dt310_Area5S area, PdfTrueTypeFont sectionFont, PdfTrueTypeFont contentFont, float contentWidth, float y, float imageHeight)
         {
             page.Canvas.DrawString("區域圖片", sectionFont, PdfBrushes.Black, PdfPageMargin, y);
-            y += 24f;
+            y += PdfSectionTitleHeight;
 
-            float availableHeight = Math.Min(PdfImageSectionMaxHeight, Math.Max(200f, (pageHeight * 0.46f) - y));
-            RectangleF imageBounds = new RectangleF(PdfPageMargin, y, contentWidth, availableHeight);
+            RectangleF imageBounds = new RectangleF(PdfPageMargin, y, contentWidth, imageHeight);
+            RectangleF imageInnerBounds = new RectangleF(
+                imageBounds.X + PdfImagePadding,
+                imageBounds.Y + PdfImagePadding,
+                Math.Max(1f, imageBounds.Width - (PdfImagePadding * 2)),
+                Math.Max(1f, imageBounds.Height - (PdfImagePadding * 2)));
 
             using (Image areaImage = LoadAreaImage(area))
             {
                 if (areaImage == null)
                 {
                     page.Canvas.DrawRectangle(PdfPens.Gray, imageBounds);
-                    page.Canvas.DrawString("未找到區域圖片", contentFont, PdfBrushes.DarkGray, imageBounds, CreateCenteredStringFormat());
+                    page.Canvas.DrawString("未找到區域圖片", contentFont, PdfBrushes.DarkGray, imageInnerBounds, CreateCenteredStringFormat());
                     return imageBounds.Bottom;
                 }
 
                 PdfImage pdfImage = PdfImage.FromImage(areaImage);
-                float scale = Math.Min(imageBounds.Width / areaImage.Width, imageBounds.Height / areaImage.Height);
+                float scale = Math.Min(imageInnerBounds.Width / areaImage.Width, imageInnerBounds.Height / areaImage.Height);
                 float drawWidth = areaImage.Width * scale;
                 float drawHeight = areaImage.Height * scale;
-                float drawX = imageBounds.X + ((imageBounds.Width - drawWidth) / 2f);
-                float drawY = imageBounds.Y + ((imageBounds.Height - drawHeight) / 2f);
+                float drawX = imageInnerBounds.X + ((imageInnerBounds.Width - drawWidth) / 2f);
+                float drawY = imageInnerBounds.Y + ((imageInnerBounds.Height - drawHeight) / 2f);
 
                 page.Canvas.DrawRectangle(PdfPens.LightGray, imageBounds);
+                page.Canvas.DrawRectangle(PdfBrushes.White, imageInnerBounds);
                 page.Canvas.DrawImage(pdfImage, drawX, drawY, drawWidth, drawHeight);
 
                 return imageBounds.Bottom;
             }
         }
 
-        private void DrawTableSection(PdfNewPage page, List<object[]> reportRows, PdfTrueTypeFont sectionFont, PdfTrueTypeFont contentFont, float contentWidth, float pageHeight, float y)
+        private void DrawTableSection(PdfNewPage page, List<object[]> reportRows, PdfTrueTypeFont sectionFont, PdfTrueTypeFont contentFont, float contentWidth, float y, float gridHeight)
         {
             page.Canvas.DrawString("責任區劃分", sectionFont, PdfBrushes.Black, PdfPageMargin, y);
-            y += 24f;
-
+            y += PdfSectionTitleHeight;
             PdfGrid grid = BuildResponsibilityGrid(reportRows, contentFont, contentWidth);
-            PdfGridLayoutFormat layoutFormat = new PdfGridLayoutFormat
-            {
-                Break = PdfLayoutBreakType.FitPage,
-                Layout = PdfLayoutType.Paginate
-            };
-
-            float availableHeight = Math.Max(80f, pageHeight - y - PdfPageMargin);
-            grid.Draw(page, new RectangleF(PdfPageMargin, y, contentWidth, availableHeight), layoutFormat);
+            grid.Draw(page, new RectangleF(PdfPageMargin, y, contentWidth, gridHeight));
         }
 
         private PdfGrid BuildResponsibilityGrid(List<object[]> reportRows, PdfTrueTypeFont contentFont, float contentWidth)
@@ -441,10 +443,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             PdfGrid grid = new PdfGrid
             {
                 RepeatHeader = true,
-                AllowCrossPages = true
+                AllowCrossPages = false
             };
 
-            grid.Style.CellPadding = new PdfPaddings(4, 4, 4, 4);
+            grid.Style.CellPadding = new PdfPaddings(3, 3, 3, 3);
             grid.Style.CellSpacing = 0.5f;
             grid.Style.Font = contentFont;
 
@@ -457,7 +459,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
             string[] headers = { "編號", "區域", "負責部門", "責任人員", "代理人", "督導主管" };
             PdfGridRow headerRow = grid.Headers.Add(1)[0];
-            headerRow.Height = 24f;
+            headerRow.Height = PdfHeaderRowHeight;
             for (int i = 0; i < headers.Length; i++)
             {
                 headerRow.Cells[i].Value = headers[i];
@@ -467,6 +469,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             if (reportRows.Count == 0)
             {
                 PdfGridRow emptyRow = grid.Rows.Add();
+                emptyRow.Height = PdfDataRowHeight;
                 emptyRow.Cells[0].Value = "-";
                 emptyRow.Cells[1].Value = "無責任區資料";
                 emptyRow.Cells[2].Value = "";
@@ -485,6 +488,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             foreach (object[] rowData in reportRows)
             {
                 PdfGridRow row = grid.Rows.Add();
+                row.Height = PdfDataRowHeight;
                 for (int i = 0; i < rowData.Length; i++)
                 {
                     row.Cells[i].Value = rowData[i] ?? "";
@@ -493,6 +497,25 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             }
 
             return grid;
+        }
+
+        private float CalculateTableGridHeight(int rowCount)
+        {
+            int safeRowCount = Math.Max(rowCount, 1);
+            return PdfHeaderRowHeight + (safeRowCount * PdfDataRowHeight);
+        }
+
+        private float CalculateImageHeight(float pageHeight, float initialY, float gridHeight)
+        {
+            float reservedHeight =
+                PdfPageMargin +
+                PdfSectionTitleHeight +
+                gridHeight +
+                PdfSectionSpacing +
+                PdfSectionTitleHeight;
+
+            float availableHeight = pageHeight - initialY - reservedHeight;
+            return Math.Max(PdfImageSectionMinHeight, Math.Min(PdfImageSectionMaxHeight, availableHeight));
         }
 
         private PdfGridCellStyle CreateGridCellStyle(PdfTrueTypeFont font, PdfBrush backgroundBrush, PdfTextAlignment alignment, bool isHeader = false)
@@ -579,8 +602,20 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             using (FileStream fileStream = new FileStream(imagePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             using (Image image = Image.FromStream(fileStream))
             {
-                return new Bitmap(image);
+                return ConvertImageToWhiteBackground(image);
             }
+        }
+
+        private static Bitmap ConvertImageToWhiteBackground(Image sourceImage)
+        {
+            Bitmap bitmap = new Bitmap(sourceImage.Width, sourceImage.Height);
+            using (Graphics graphics = Graphics.FromImage(bitmap))
+            {
+                graphics.Clear(Color.White);
+                graphics.DrawImage(sourceImage, 0, 0, sourceImage.Width, sourceImage.Height);
+            }
+
+            return bitmap;
         }
     }
 }
