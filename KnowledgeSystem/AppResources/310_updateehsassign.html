@@ -264,26 +264,21 @@
             </div>
         </div>
 
-        {{ if sign4th }}
         <div class="sig-box">
-            <div class="sig-title">一級主管</div>
+            <div class="sig-title">&#19968;&#32026;&#20027;&#31649;</div>
             <div class="sig-content">
-                {{ sign4th.name }} <br>
-                {{ if sign4th.isreject == "true" }}
-                <span class="sig-status" style="color: red;">（{{ sign4th.status }}）</span><br>
-                {{ else }}
-                <span class="sig-status" style="color: green;">（{{ sign4th.status }}）</span><br>
+                {{ sign4th.name }}{{ if sign4th.name }} <br>{{ end }}
+                {{ if sign4th.status }}
+                <span class="sig-status" style="color: {{ sign4th.statusColor }};">&#65288;{{ sign4th.status }}&#65289;</span><br>
                 {{ end }}
                 {{ if sign4th.time }}
                 <span class="sig-status">{{ sign4th.time }}</span>
                 {{ end }}
-                {{ if sign4th.isreject == "true" }}
-                <br><span class="sig-status" style="color: red; font-weight: bold;">退回原因：{{ sign4th.reason }}</span>
+                {{ if sign4th.reason }}
+                <br><span class="sig-status" style="color: red; font-weight: bold;">&#36864;&#22238;&#21407;&#22240;&#65306;{{ sign4th.reason }}</span>
                 {{ end }}
             </div>
         </div>
-        {{ end }}
-
     </div>
 
 </div>

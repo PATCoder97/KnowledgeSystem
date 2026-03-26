@@ -61,14 +61,39 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             };
         }
 
+        private object GetCreateSignatureInfo(dt310_UpdateLeaveUser record, List<dm_User> users)
+        {
+            if (record == null || string.IsNullOrWhiteSpace(record.CreateBy))
+                return null;
+
+            var user = users.FirstOrDefault(x => x.Id == record.CreateBy);
+            if (user == null)
+                return null;
+
+            return new
+            {
+                name = user.DisplayName,
+                time = record.CreateAt.ToString("yyyy/MM/dd HH:mm"),
+                isreject = "false",
+                status = "已送出",
+                statusColor = "green",
+                reason = ""
+            };
+        }
+
         private void f310_UpdateApproval_Load(object sender, EventArgs e)
         {
             var users = dm_UserBUS.Instance.GetList();
             updateLeaveUser = dt310_UpdateLeaveUserBUS.Instance.GetItemById(idDataUpdate);
             var dataDetail = dt310_UpdateLeaveUser_detailBUS.Instance.GetItemByIdData(idDataUpdate);
+            bool isEHSAssign = updateLeaveUser.DataType == "EHSAssign";
 
             var userLeaveInfo = users.FirstOrDefault(r => r.Id == updateLeaveUser?.IdUserLeave);
-            if (userLeaveInfo != null)
+            if (isEHSAssign)
+            {
+                Text = "審核安衛環人員異動申請";
+            }
+            else if (userLeaveInfo != null)
             {
                 Text = $"審核離職人員權限轉移 - {updateLeaveUser.IdUserLeave} {userLeaveInfo.DisplayName}";
             }
@@ -105,11 +130,17 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
             userLeaveInfo = users.FirstOrDefault(r => r.Id == updateLeaveUser?.IdUserLeave);
             var userLeaveName = userLeaveInfo != null ? $"{updateLeaveUser.IdUserLeave} {userLeaveInfo.DisplayName}" : "";
+            var signApplicant = isEHSAssign
+                ? GetCreateSignatureInfo(updateLeaveUser, users)
+                : GetSignatureInfo(dataDetail?.FirstOrDefault(r => r.IndexStep == 0), users);
+            var signLevel2 = GetSignatureInfo(dataDetail?.FirstOrDefault(r => r.IndexStep == (isEHSAssign ? 0 : 1)), users);
+            var signPsm = GetSignatureInfo(dataDetail?.FirstOrDefault(r => r.IndexStep == (isEHSAssign ? 1 : 2)), users);
+            var signLevel1 = GetSignatureInfo(dataDetail?.FirstOrDefault(r => r.IndexStep == (isEHSAssign ? 2 : 3)), users);
 
             var templateData = new
             {
                 userleave = userLeaveName,
-                createby = $"{TPConfigs.LoginUser.Id} {users.FirstOrDefault(u => u.Id == updateLeaveUser.CreateBy)?.DisplayName ?? ""}",
+                createby = $"{updateLeaveUser.CreateBy} {users.FirstOrDefault(u => u.Id == updateLeaveUser.CreateBy)?.DisplayName ?? ""}",
                 unitlist = unitList.Select(r => new
                 {
                     oldemp = r.UnitEHSOrgData != null
@@ -117,7 +148,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                         : "",
                     reciver = $"{r.UserId} {users.FirstOrDefault(u => u.Id == r.UserId)?.DisplayName ?? ""}",
                     displaydata = r.Desc
-                }),
+                }).ToList(),
                 funclist = funcList.Select(r => new
                 {
                     oldemp = r.EHSFunctionData != null
@@ -125,7 +156,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                         : "",
                     reciver = $"{r.UserId} {users.FirstOrDefault(u => u.Id == r.UserId)?.DisplayName ?? ""}",
                     displaydata = r.Desc
-                }),
+                }).ToList(),
                 arealist = areaList.Select(r => new
                 {
                     oldemp = r.Area5SResponsibleData != null
@@ -138,14 +169,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                     area = r.Desc,
                     areacode = r.Area5SResponsibleData?.AreaCode ?? "",
                     areaname = r.Area5SResponsibleData?.AreaName ?? "",
-                }),
-                sign1st = GetSignatureInfo(dataDetail?.FirstOrDefault(r => r.IndexStep == 0), users),
-                sign2nd = GetSignatureInfo(dataDetail?.FirstOrDefault(r => r.IndexStep == 1), users),
-                sign3th = GetSignatureInfo(dataDetail?.FirstOrDefault(r => r.IndexStep == 2), users),
-                sign4th = GetSignatureInfo(dataDetail?.FirstOrDefault(r => r.IndexStep == 3), users),
+                }).ToList(),
+                sign1st = signApplicant,
+                sign2nd = signLevel2,
+                sign3th = signPsm,
+                sign4th = signLevel1,
             };
 
-            bool isEHSAssign = updateLeaveUser.DataType == "EHSAssign";
             string templateFile = isEHSAssign ? "310_updateehsassign.html" : "310_updateleaveruser.html";
             var templateContentSigner = File.ReadAllText(Path.Combine(TPConfigs.ResourcesPath, templateFile));
 

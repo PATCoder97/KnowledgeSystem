@@ -395,6 +395,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             int ehsGroupId = GetGroupId($"安衛環{deptId}");      // Safety/EHS
             int level2GroupId = GetGroupId($"二級{deptId}");      // Level 2 Manager
             int psmGroupId = GetGroupId($"PSM專人{psmDeptId}");   // PSM Specialist
+            int level1GroupId = GetGroupId($"一級{deptId}");      // Level 1 Manager
 
             // 3. Tạo bản ghi chính (Master data)
             var updateLeaveUser = new dt310_UpdateLeaveUser
@@ -416,7 +417,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             {
                 (GroupId: ehsGroupId, Index: 0),
                 (GroupId: level2GroupId, Index: 1),
-                (GroupId: psmGroupId, Index: 2)
+                (GroupId: psmGroupId, Index: 2),
+                (GroupId: level1GroupId, Index: 3)
             };
 
             foreach (var step in steps)

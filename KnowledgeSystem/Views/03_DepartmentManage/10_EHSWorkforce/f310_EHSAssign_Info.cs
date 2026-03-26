@@ -188,9 +188,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
             int level2GroupId = GetGroupId($"二級{deptId}");
             int psmGroupId    = GetGroupId($"PSM專人{psmDeptId}");
-            int level1GroupId = GetGroupId($"一級{deptId}");
-
-            bool hasArea5S = areaChanged.Any();
+            int level1GroupId = GetGroupId($"一級{psmDeptId}");
 
             var jsonData = new
             {
@@ -202,6 +200,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
             var updateRecord = new dt310_UpdateLeaveUser
             {
+                // Bảng yêu cầu IdUserLeave không được null, nên dùng mã người tạo đơn cho loại EHSAssign.
+                IdUserLeave    = TPConfigs.LoginUser.Id,
                 DataType       = "EHSAssign",
                 DisplayName    = "人員異動申請",
                 IsProcess      = true,
@@ -212,12 +212,14 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                 CreateAt       = DateTime.Now
             };
             int idUpdateData = dt310_UpdateLeaveUserBUS.Instance.Add(updateRecord);
+            if (idUpdateData <= 0)
+            {
+                XtraMessageBox.Show("建立人員異動申請失敗，請確認資料後再試！", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-            // 不含Area5S: 二級(0) → PSM(1)
-            // 含Area5S:   二級(0) → PSM(1) → 一級(2)
-            var steps = hasArea5S
-                ? new[] { (level2GroupId, 0), (psmGroupId, 1), (level1GroupId, 2) }
-                : new[] { (level2GroupId, 0), (psmGroupId, 1) };
+            // 所有人員異動申請都必須經過：二級主管(0) → PSM專人(1) → 一級主管(2)
+            var steps = new[] { (level2GroupId, 0), (psmGroupId, 1), (level1GroupId, 2) };
 
             foreach (var (groupId, index) in steps)
             {
