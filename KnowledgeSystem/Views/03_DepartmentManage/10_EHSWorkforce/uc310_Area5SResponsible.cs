@@ -28,6 +28,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 {
     public partial class uc310_Area5SResponsible : DevExpress.XtraEditors.XtraUserControl
     {
+        private const string PdfCoverCompanyName = "台塑河靜鋼鐵公司";
+        private const string PdfCoverTitleSuffix = "責任區域配置圖及責任人員";
         private const float PdfPageMargin = 28f;
         private const float PdfImageSectionMaxHeight = 340f;
         private const float PdfImageSectionMinHeight = 120f;
@@ -36,6 +38,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
         private const float PdfSectionTitleHeight = 24f;
         private const float PdfHeaderRowHeight = 24f;
         private const float PdfDataRowHeight = 22f;
+        private const float PdfCoverTitleBoxHeight = 150f;
+        private const float PdfCoverSignatureTopOffset = 205f;
+        private const float PdfCoverSignatureLineTopOffset = 58f;
+        private const float PdfCoverSignatureLinePadding = 16f;
 
         public uc310_Area5SResponsible()
         {
@@ -117,6 +123,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
         {
             area5S = dt310_Area5SBUS.Instance.GetList();
             areaResps = dt310_Area5SResponsibleBUS.Instance.GetList();
+            depts = dm_DeptBUS.Instance.GetList();
             users = dm_UserBUS.Instance.GetList();
 
             source5sArea.DataSource = area5S;
@@ -287,9 +294,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                 .OrderBy(r => r.DisplayName)
                 .ToList();
 
+            reportAreas = reportAreas
+                .Where(r => BuildAreaReportRows(r.Id).Count > 0)
+                .ToList();
+
             if (reportAreas.Count == 0)
             {
-                XtraMessageBox.Show("目前沒有可導出的 5S 區域資料。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                XtraMessageBox.Show("目前登入部門沒有可導出的 5S 區域資料。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -339,11 +350,33 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
         {
             Spire.License.LicenseProvider.SetLicenseKey(TPConfigs.KeySpirePPT);
 
+            var exportAreas = areas
+                .Select(area => new
+                {
+                    Area = area,
+                    ReportRows = BuildAreaReportRows(area.Id)
+                })
+                .Where(item => item.ReportRows.Count > 0)
+                .ToList();
+
+            if (exportAreas.Count == 0)
+            {
+                throw new InvalidOperationException("目前登入部門沒有可導出的 5S 區域資料。");
+            }
+
             using (PdfDocument document = new PdfDocument())
+            using (Font coverCompanyFontGdi = new Font("Microsoft JhengHei UI", 24f, FontStyle.Bold))
+            using (Font coverTitleFontGdi = new Font("Microsoft JhengHei UI", 23f, FontStyle.Regular))
+            using (Font coverSignLabelFontGdi = new Font("Microsoft JhengHei UI", 13f, FontStyle.Regular))
+            using (Font coverSignHintFontGdi = new Font("Microsoft JhengHei UI", 9.5f, FontStyle.Regular))
             using (Font titleFontGdi = new Font("Microsoft JhengHei UI", 16f, FontStyle.Bold))
             using (Font sectionFontGdi = new Font("Microsoft JhengHei UI", 11f, FontStyle.Bold))
             using (Font contentFontGdi = new Font("Microsoft JhengHei UI", 9.5f, FontStyle.Regular))
             using (Font smallFontGdi = new Font("Microsoft JhengHei UI", 8.5f, FontStyle.Regular))
+            using (PdfTrueTypeFont coverCompanyFont = new PdfTrueTypeFont(coverCompanyFontGdi, true))
+            using (PdfTrueTypeFont coverTitleFont = new PdfTrueTypeFont(coverTitleFontGdi, true))
+            using (PdfTrueTypeFont coverSignLabelFont = new PdfTrueTypeFont(coverSignLabelFontGdi, true))
+            using (PdfTrueTypeFont coverSignHintFont = new PdfTrueTypeFont(coverSignHintFontGdi, true))
             using (PdfTrueTypeFont titleFont = new PdfTrueTypeFont(titleFontGdi, true))
             using (PdfTrueTypeFont sectionFont = new PdfTrueTypeFont(sectionFontGdi, true))
             using (PdfTrueTypeFont contentFont = new PdfTrueTypeFont(contentFontGdi, true))
@@ -354,10 +387,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                 document.DocumentInformation.Creator = TPConfigs.SoftNameEN ?? "KnowledgeSystem";
                 document.DocumentInformation.Author = TPConfigs.LoginUser?.DisplayName ?? TPConfigs.LoginUser?.Id ?? "KnowledgeSystem";
 
-                for (int i = 0; i < areas.Count; i++)
+                PdfNewPage coverPage = (PdfNewPage)document.Pages.Add();
+                DrawCoverPage(coverPage, ResolveCoverDepartmentName(), coverCompanyFont, coverTitleFont, coverSignLabelFont, coverSignHintFont);
+
+                for (int i = 0; i < exportAreas.Count; i++)
                 {
-                    dt310_Area5S area = areas[i];
-                    List<object[]> reportRows = BuildAreaReportRows(area.Id);
+                    dt310_Area5S area = exportAreas[i].Area;
+                    List<object[]> reportRows = exportAreas[i].ReportRows;
                     PdfNewPage page = (PdfNewPage)document.Pages.Add();
                     float pageWidth = page.Canvas.ClientSize.Width;
                     float pageHeight = page.Canvas.ClientSize.Height;
@@ -365,7 +401,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                     float y = PdfPageMargin;
                     float gridHeight = CalculateTableGridHeight(reportRows.Count);
 
-                    y = DrawHeader(page, area, titleFont, contentFont, pageWidth, y, i + 1, areas.Count);
+                    y = DrawHeader(page, area, titleFont, contentFont, pageWidth, y);
                     float imageHeight = CalculateImageHeight(pageHeight, y, gridHeight);
                     y = DrawAreaImageSection(page, area, sectionFont, smallFont, contentWidth, y, imageHeight);
                     y += PdfSectionSpacing;
@@ -376,7 +412,43 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             }
         }
 
-        private float DrawHeader(PdfNewPage page, dt310_Area5S area, PdfTrueTypeFont titleFont, PdfTrueTypeFont contentFont, float pageWidth, float y, int pageIndex, int pageCount)
+        private void DrawCoverPage(PdfNewPage page, string departmentName, PdfTrueTypeFont companyFont, PdfTrueTypeFont titleFont, PdfTrueTypeFont signLabelFont, PdfTrueTypeFont signHintFont)
+        {
+            float pageWidth = page.Canvas.ClientSize.Width;
+            float pageHeight = page.Canvas.ClientSize.Height;
+            float contentWidth = pageWidth - (PdfPageMargin * 2);
+            float y = 54f;
+
+            page.Canvas.DrawString(PdfCoverCompanyName, companyFont, PdfBrushes.Black, new RectangleF(PdfPageMargin, y, contentWidth, 36f), CreateStringFormat(PdfTextAlignment.Center));
+            y += 42f;
+            page.Canvas.DrawLine(PdfPens.Black, PdfPageMargin + 120f, y, pageWidth - PdfPageMargin - 120f, y);
+
+            RectangleF titleBounds = new RectangleF(PdfPageMargin, y + 110f, contentWidth, PdfCoverTitleBoxHeight);
+            page.Canvas.DrawRectangle(PdfPens.Black, titleBounds);
+            page.Canvas.DrawString($"{departmentName} {PdfCoverTitleSuffix}", titleFont, PdfBrushes.Black, titleBounds, CreateCenteredStringFormat());
+
+            DrawCoverSignatureSection(page, signLabelFont, signHintFont, pageHeight);
+        }
+
+        private void DrawCoverSignatureSection(PdfNewPage page, PdfTrueTypeFont signLabelFont, PdfTrueTypeFont signHintFont, float pageHeight)
+        {
+            string[] signatureLabels = { "簽核一", "簽核二", "簽核三", "簽核四" };
+            float contentWidth = page.Canvas.ClientSize.Width - (PdfPageMargin * 2);
+            float columnWidth = contentWidth / signatureLabels.Length;
+            float top = pageHeight - PdfPageMargin - PdfCoverSignatureTopOffset;
+
+            for (int i = 0; i < signatureLabels.Length; i++)
+            {
+                float x = PdfPageMargin + (columnWidth * i);
+                float lineY = top + PdfCoverSignatureLineTopOffset;
+
+                page.Canvas.DrawString($"{signatureLabels[i]}：", signLabelFont, PdfBrushes.Black, new RectangleF(x, top, columnWidth, 26f), CreateStringFormat(PdfTextAlignment.Center));
+                page.Canvas.DrawLine(PdfPens.Black, x + PdfCoverSignatureLinePadding, lineY, x + columnWidth - PdfCoverSignatureLinePadding, lineY);
+                page.Canvas.DrawString("暫留簽名位置", signHintFont, PdfBrushes.DimGray, new RectangleF(x, lineY + 8f, columnWidth, 18f), CreateStringFormat(PdfTextAlignment.Center));
+            }
+        }
+
+        private float DrawHeader(PdfNewPage page, dt310_Area5S area, PdfTrueTypeFont titleFont, PdfTrueTypeFont contentFont, float pageWidth, float y)
         {
             float contentWidth = pageWidth - (PdfPageMargin * 2);
 
@@ -387,8 +459,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             string meta = $"區域：{area.DisplayName}    備註：{desc}";
             page.Canvas.DrawString(meta, contentFont, PdfBrushes.DimGray, new RectangleF(PdfPageMargin, y, contentWidth, 18f), CreateStringFormat(PdfTextAlignment.Left));
             y += 24f;
-
-            page.Canvas.DrawString($"頁次：{pageIndex}/{pageCount}", contentFont, PdfBrushes.DimGray, new RectangleF(PdfPageMargin, y - 24f, contentWidth, 18f), CreateStringFormat(PdfTextAlignment.Right));
 
             page.Canvas.DrawLine(PdfPens.DarkGray, PdfPageMargin, y, pageWidth - PdfPageMargin, y);
             return y + 10f;
@@ -555,10 +625,31 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             return CreateStringFormat(PdfTextAlignment.Center);
         }
 
+        private string ResolveCoverDepartmentName()
+        {
+            string loginDeptId = TPConfigs.LoginUser?.IdDepartment ?? "";
+            string deptPrefix = GetExportDeptPrefix();
+
+            dm_Departments displayDept =
+                depts?.FirstOrDefault(r => r.Id == deptPrefix)
+                ?? depts?.FirstOrDefault(r => r.Id == loginDeptId)
+                ?? depts?.FirstOrDefault(r => !string.IsNullOrWhiteSpace(r.Id) && r.Id.StartsWith(deptPrefix));
+
+            if (!string.IsNullOrWhiteSpace(displayDept?.DisplayName))
+            {
+                return displayDept.DisplayName.Trim();
+            }
+
+            return string.IsNullOrWhiteSpace(deptPrefix) ? "單位" : deptPrefix;
+        }
+
         private List<object[]> BuildAreaReportRows(int areaId)
         {
+            string exportDeptPrefix = GetExportDeptPrefix();
+
             return areaResps
                 .Where(r => r.AreaId == areaId && r.DeletedAt == null)
+                .Where(r => string.IsNullOrWhiteSpace(exportDeptPrefix) || SafeLeft(r.DeptId, 2) == exportDeptPrefix)
                 .OrderBy(r => r.AreaCode)
                 .ThenBy(r => r.AreaName)
                 .Select(r => new object[]
@@ -571,6 +662,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                     FormatUserInfo(r.BossId)
                 })
                 .ToList();
+        }
+
+        private string GetExportDeptPrefix()
+        {
+            string loginDeptId = TPConfigs.LoginUser?.IdDepartment ?? "";
+            string deptSource = !string.IsNullOrWhiteSpace(loginDeptId) ? loginDeptId : TPConfigs.idDept2word;
+            return SafeLeft(deptSource, 2);
         }
 
         private string FormatUserInfo(string userId)
@@ -616,6 +714,16 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             }
 
             return bitmap;
+        }
+
+        private static string SafeLeft(string value, int length)
+        {
+            if (string.IsNullOrWhiteSpace(value) || length <= 0)
+            {
+                return string.Empty;
+            }
+
+            return value.Length <= length ? value : value.Substring(0, length);
         }
     }
 }
