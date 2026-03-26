@@ -305,7 +305,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                 $"W{code}", "", "", "", "", "",
                 sellerTax,
                 buyerTax,
-                "A1",
+                "A1", "",
                 description,
             });
 
