@@ -29,6 +29,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
         private bool canManage = false;
 
         private DXMenuItem itemViewInfo;
+        private DXMenuItem itemBatchManager;
         private DXMenuItem itemMultiselect;
         private DXMenuItem itemPrintStamp;
 
@@ -59,6 +60,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
         private void InitializeMenuItems()
         {
             itemViewInfo = CreateMenuItem("查看信息", ItemViewInfo_Click, TPSvgimages.View);
+            itemBatchManager = CreateMenuItem("批量修改管理人", ItemBatchManager_Click, TPSvgimages.Edit);
             itemMultiselect = CreateMenuItem("啟用多選", ItemMultiselect_Click, TPSvgimages.CheckedRadio);
             itemPrintStamp = CreateMenuItem("執行列印", ItemPrintStamp_Click, TPSvgimages.Print);
         }
@@ -108,6 +110,16 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             canManage = isEHSAdmin || editableDeptIds.Count > 0;
         }
 
+        private bool CanManageDept(string deptId)
+        {
+            if (isEHSAdmin)
+            {
+                return true;
+            }
+
+            return !string.IsNullOrWhiteSpace(deptId) && editableDeptIds.Contains(deptId);
+        }
+
         private List<vw310_EquipmentInfo> GetSelectedEquipmentInfos()
         {
             List<int> selectedIds = gvData.GetSelectedRows()
@@ -130,6 +142,88 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                 .Where(r => selectedIds.Contains(r.Id))
                 .OrderBy(r => selectedIds.IndexOf(r.Id))
                 .ToList();
+        }
+
+        private List<dm_User> GetAvailableManagers(IEnumerable<vw310_EquipmentInfo> items)
+        {
+            HashSet<string> visibleDeptIds = new HashSet<string>();
+
+            if (isEHSAdmin)
+            {
+                foreach (var item in items.Where(r => !string.IsNullOrWhiteSpace(r.DeptId)))
+                {
+                    visibleDeptIds.Add(item.DeptId);
+                }
+
+                if (visibleDeptIds.Count == 0)
+                {
+                    return dm_UserBUS.Instance.GetList()
+                        .Where(r => r.Status == 0)
+                        .OrderBy(r => r.IdDepartment)
+                        .ThenBy(r => r.DisplayName)
+                        .ToList();
+                }
+            }
+            else
+            {
+                foreach (string deptId in editableDeptIds)
+                {
+                    visibleDeptIds.Add(deptId);
+                }
+            }
+
+            return dm_UserBUS.Instance.GetList()
+                .Where(r => r.Status == 0 && visibleDeptIds.Contains(r.IdDepartment))
+                .OrderBy(r => r.IdDepartment)
+                .ThenBy(r => r.DisplayName)
+                .ToList();
+        }
+
+        private string SelectManagerId(List<dm_User> managers)
+        {
+            SearchLookUpEdit editor = new SearchLookUpEdit();
+            GridView popupView = new GridView();
+
+            editor.Properties.PopupView = popupView;
+            editor.Properties.DataSource = managers.Select(r => new
+            {
+                r.Id,
+                DisplayName = $"LG{r.IdDepartment}/{r.DisplayName} {r.DisplayNameVN}",
+                r.IdDepartment
+            }).ToList();
+            editor.Properties.DisplayMember = "DisplayName";
+            editor.Properties.ValueMember = "Id";
+            editor.Properties.NullText = "";
+            editor.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
+            editor.Properties.Appearance.Font = new Font("Microsoft JhengHei UI", 14.25F);
+            editor.Properties.AppearanceDropDown.Font = new Font("Microsoft JhengHei UI", 12F);
+
+            popupView.Appearance.HeaderPanel.Font = new Font("Microsoft JhengHei UI", 14.25F);
+            popupView.Appearance.HeaderPanel.ForeColor = Color.Black;
+            popupView.Appearance.HeaderPanel.Options.UseFont = true;
+            popupView.Appearance.HeaderPanel.Options.UseForeColor = true;
+            popupView.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            popupView.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            popupView.Appearance.Row.Font = new Font("Microsoft JhengHei UI", 12F);
+            popupView.Appearance.Row.Options.UseFont = true;
+            popupView.OptionsSelection.EnableAppearanceFocusedCell = false;
+            popupView.OptionsView.EnableAppearanceOddRow = true;
+            popupView.OptionsView.ShowAutoFilterRow = true;
+            popupView.OptionsView.ShowGroupPanel = false;
+            popupView.Columns.AddVisible("IdDepartment", "部門");
+            popupView.Columns.AddVisible("Id", "工號");
+            popupView.Columns.AddVisible("DisplayName", "姓名");
+
+            XtraInputBoxArgs args = new XtraInputBoxArgs
+            {
+                Caption = TPConfigs.SoftNameTW,
+                Prompt = "請選擇新的管理人",
+                DefaultButtonIndex = 0,
+                Editor = editor
+            };
+
+            object result = XtraInputBox.Show(args);
+            return result?.ToString();
         }
 
         private void ShowPrintPreview(IEnumerable<vw310_EquipmentInfo> items)
@@ -245,6 +339,77 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             LoadData();
         }
 
+        private void ExecuteBatchManagerUpdate()
+        {
+            if (!canManage)
+            {
+                MsgTP.MsgNoPermission();
+                return;
+            }
+
+            List<vw310_EquipmentInfo> selectedItems = GetSelectedEquipmentInfos();
+            if (selectedItems.Count == 0)
+            {
+                XtraMessageBox.Show("請先勾選要修改管理人的設備。", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            List<vw310_EquipmentInfo> invalidItems = selectedItems
+                .Where(r => !CanManageDept(r.DeptId))
+                .ToList();
+
+            if (invalidItems.Count > 0)
+            {
+                XtraMessageBox.Show("所選設備中包含非您權限範圍的部門資料，請重新確認。", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            List<dm_User> managers = GetAvailableManagers(selectedItems);
+            if (managers.Count == 0)
+            {
+                XtraMessageBox.Show("目前沒有可選擇的管理人資料。", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string selectedManagerId = SelectManagerId(managers);
+            if (string.IsNullOrWhiteSpace(selectedManagerId))
+            {
+                return;
+            }
+
+            bool isSuccess = true;
+            using (var handle = SplashScreenManager.ShowOverlayForm(this))
+            {
+                foreach (vw310_EquipmentInfo item in selectedItems)
+                {
+                    dt310_EquipmentInfo entity = dt310_EquipmentInfoBUS.Instance.GetItemById(item.Id);
+                    if (entity == null)
+                    {
+                        isSuccess = false;
+                        continue;
+                    }
+
+                    entity.ManagerId = selectedManagerId;
+                    if (!dt310_EquipmentInfoBUS.Instance.AddOrUpdate(entity))
+                    {
+                        isSuccess = false;
+                    }
+                }
+            }
+
+            if (!isSuccess)
+            {
+                MsgTP.MsgErrorDB();
+            }
+
+            LoadData();
+        }
+
+        private void ItemBatchManager_Click(object sender, EventArgs e)
+        {
+            ExecuteBatchManagerUpdate();
+        }
+
         private void gvData_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
         {
             if (e.HitInfo.InRowCell && e.HitInfo.InDataRow)
@@ -256,6 +421,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                 itemMultiselect.BeginGroup = true;
 
                 e.Menu.Items.Add(itemViewInfo);
+                if (canManage)
+                {
+                    e.Menu.Items.Add(itemBatchManager);
+                }
                 e.Menu.Items.Add(itemMultiselect);
                 e.Menu.Items.Add(itemPrintStamp);
             }
