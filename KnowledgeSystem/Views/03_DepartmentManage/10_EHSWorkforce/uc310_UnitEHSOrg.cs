@@ -170,6 +170,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             int groupId = dm_GroupBUS.Instance.GetItemByName($"安衛環7")?.Id ?? -1;
             isEHSAdmin = userGroups.Any(r => r.IdGroup == groupId);
 
+            if (!isEHSAdmin)
+            {
+                btnAdd.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            }
+
             LoadData();
 
             treeFunctions.DataSource = sourceFunc;
@@ -207,6 +212,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
         private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if (!isEHSAdmin)
+            {
+                return;
+            }
+
             f310_UnitEHSOrg_Info finfo = new f310_UnitEHSOrg_Info()
             {
                 eventInfo = EventFormInfo.Create,
@@ -242,13 +252,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                 var row = treeList.GetDataRecordByNode(node) as UnitEHSOrgCustom;
                 if (row == null || !row.IdData.HasValue)
                     return;
-
-                if (!isEHSAdmin)
-                {
-                    int groupId = dm_GroupBUS.Instance.GetItemByName($"安衛環{row.DeptId}")?.Id ?? -1;
-                    if (!userGroups.Any(r => r.IdGroup == groupId))
-                        return;
-                }
 
                 using (var finfo = new f310_UnitEHSOrg_Info
                 {

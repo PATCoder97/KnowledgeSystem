@@ -126,6 +126,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
         private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if (!isEHSAdmin)
+            {
+                return;
+            }
+
             f310_Area5SResponsible_Info fInfo = new f310_Area5SResponsible_Info() { isAddInfo = true, isEditorInfo = false };
             fInfo.ShowDialog(this);
             LoadData();
