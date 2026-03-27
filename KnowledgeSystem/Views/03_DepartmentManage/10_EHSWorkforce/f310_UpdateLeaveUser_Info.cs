@@ -34,8 +34,20 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
         public class UpdateLeaveUserData
         {
+            public string ActionType { get; set; }
+            public string ActionText { get; set; }
             public string UserId { get; set; }
             public string Desc { get; set; }
+            public string DeptId { get; set; }
+            public Nullable<int> RoleId { get; set; }
+            public Nullable<int> FunctionId { get; set; }
+            public Nullable<int> AreaId { get; set; }
+            public string EmployeeId { get; set; }
+            public string AgentId { get; set; }
+            public string BossId { get; set; }
+            public string AreaCode { get; set; }
+            public string AreaName { get; set; }
+            public Nullable<DateTime> StartDate { get; set; }
             public dt310_UnitEHSOrg UnitEHSOrgData { get; set; }
             public dt310_Role RoleData { get; set; }
             public dt310_EHSFunction EHSFunctionData { get; set; }

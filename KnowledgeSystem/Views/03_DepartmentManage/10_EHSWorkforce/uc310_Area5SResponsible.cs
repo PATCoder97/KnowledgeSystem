@@ -746,7 +746,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             }
 
             return data.Area5SResponsible.Any(r =>
-                SafeLeft(r?.Area5SResponsibleData?.DeptId, 2) == deptPrefix
+                SafeLeft(r?.DeptId, 2) == deptPrefix
+                || SafeLeft(r?.Area5SResponsibleData?.DeptId, 2) == deptPrefix
                 || SafeLeft(ExtractDeptIdFromDesc(r?.Desc), 2) == deptPrefix);
         }
 

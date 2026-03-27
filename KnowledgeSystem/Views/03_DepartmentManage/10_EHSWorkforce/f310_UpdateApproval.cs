@@ -94,9 +94,213 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             };
         }
 
+        private static string NormalizeChangeAction(string actionType)
+        {
+            if (string.Equals(actionType, "Create", StringComparison.OrdinalIgnoreCase))
+            {
+                return "Create";
+            }
+
+            if (string.Equals(actionType, "Delete", StringComparison.OrdinalIgnoreCase))
+            {
+                return "Delete";
+            }
+
+            return "Update";
+        }
+
+        private static string GetChangeActionText(string actionType)
+        {
+            switch (NormalizeChangeAction(actionType))
+            {
+                case "Create":
+                    return "新增";
+                case "Delete":
+                    return "刪除";
+                default:
+                    return "修改";
+            }
+        }
+
+        private static string FormatUserDisplay(string userId, List<dm_User> users)
+        {
+            if (string.IsNullOrWhiteSpace(userId))
+            {
+                return "";
+            }
+
+            dm_User user = users.FirstOrDefault(u => u.Id == userId);
+            return user == null ? userId : $"{userId} {user.DisplayName}";
+        }
+
+        private static string BuildDeptRoleText(string deptId, int? roleId, List<dt310_Role> roles)
+        {
+            string roleName = roles.FirstOrDefault(r => r.Id == roleId)?.DisplayName ?? "";
+            return $"{deptId}：{roleName}".Trim('：');
+        }
+
+        private static string BuildDeptFunctionText(string deptId, int? functionId, List<dt310_Function> funcs)
+        {
+            string funcName = funcs.FirstOrDefault(r => r.Id == functionId)?.DisplayName ?? "";
+            return $"{deptId}：{funcName}".Trim('：');
+        }
+
+        private static string BuildAreaContextText(string deptId, int? areaId, List<dt310_Area5S> areas)
+        {
+            string areaName = areas.FirstOrDefault(r => r.Id == areaId)?.DisplayName ?? "";
+            return $"{deptId}：{areaName}".Trim('：');
+        }
+
+        private static string BuildAreaPeopleSummary(string employeeId, string agentId, string bossId, List<dm_User> users)
+        {
+            List<string> parts = new List<string>();
+
+            string employee = FormatUserDisplay(employeeId, users);
+            string agent = FormatUserDisplay(agentId, users);
+            string boss = FormatUserDisplay(bossId, users);
+
+            if (!string.IsNullOrWhiteSpace(employee))
+            {
+                parts.Add($"責任:{employee}");
+            }
+
+            if (!string.IsNullOrWhiteSpace(agent))
+            {
+                parts.Add($"代理:{agent}");
+            }
+
+            if (!string.IsNullOrWhiteSpace(boss))
+            {
+                parts.Add($"主管:{boss}");
+            }
+
+            return string.Join(" / ", parts);
+        }
+
+        private static string BuildUnitDisplayText(UpdateLeaveUserData item, List<dt310_Role> roles)
+        {
+            string action = NormalizeChangeAction(item?.ActionType);
+            string oldText = item?.UnitEHSOrgData != null
+                ? BuildDeptRoleText(item.UnitEHSOrgData.DeptId, item.UnitEHSOrgData.RoleId, roles)
+                : "";
+            string newText = BuildDeptRoleText(
+                item?.DeptId ?? item?.UnitEHSOrgData?.DeptId ?? "",
+                item?.RoleId ?? item?.UnitEHSOrgData?.RoleId,
+                roles);
+
+            switch (action)
+            {
+                case "Create":
+                    return $"[{GetChangeActionText(action)}] {newText}";
+                case "Delete":
+                    return $"[{GetChangeActionText(action)}] {oldText}";
+                default:
+                    return oldText != newText
+                        ? $"[{GetChangeActionText(action)}] {oldText} -> {newText}"
+                        : $"[{GetChangeActionText(action)}] {newText}";
+            }
+        }
+
+        private static string BuildFuncDisplayText(UpdateLeaveUserData item, List<dt310_Function> funcs)
+        {
+            string action = NormalizeChangeAction(item?.ActionType);
+            string oldText = item?.EHSFunctionData != null
+                ? BuildDeptFunctionText(item.EHSFunctionData.DeptId, item.EHSFunctionData.FunctionId, funcs)
+                : "";
+            string newText = BuildDeptFunctionText(
+                item?.DeptId ?? item?.EHSFunctionData?.DeptId ?? "",
+                item?.FunctionId ?? item?.EHSFunctionData?.FunctionId,
+                funcs);
+
+            switch (action)
+            {
+                case "Create":
+                    return $"[{GetChangeActionText(action)}] {newText}";
+                case "Delete":
+                    return $"[{GetChangeActionText(action)}] {oldText}";
+                default:
+                    return oldText != newText
+                        ? $"[{GetChangeActionText(action)}] {oldText} -> {newText}"
+                        : $"[{GetChangeActionText(action)}] {newText}";
+            }
+        }
+
+        private static List<object> BuildAreaTemplateRows(List<UpdateLeaveUserData> areaList, List<dm_User> users, List<dt310_Area5S> areas)
+        {
+            return areaList.Select(item =>
+            {
+                string action = NormalizeChangeAction(item?.ActionType);
+                bool isLegacySingleFieldChange =
+                    item?.Area5SResponsibleData != null
+                    && !string.IsNullOrWhiteSpace(item.FieldName)
+                    && !string.IsNullOrWhiteSpace(item.UserId)
+                    && string.IsNullOrWhiteSpace(item.EmployeeId)
+                    && string.IsNullOrWhiteSpace(item.AgentId)
+                    && string.IsNullOrWhiteSpace(item.BossId);
+
+                if (isLegacySingleFieldChange)
+                {
+                    string oldUserId = item.FieldName == "EmployeeId"
+                        ? item.Area5SResponsibleData.EmployeeId
+                        : item.Area5SResponsibleData.AgentId;
+
+                    return (object)new
+                    {
+                        oldemp = FormatUserDisplay(oldUserId, users),
+                        reciver = FormatUserDisplay(item.UserId, users),
+                        colname = item.ColName,
+                        area = item.Desc,
+                        areacode = item.Area5SResponsibleData?.AreaCode ?? "",
+                        areaname = item.Area5SResponsibleData?.AreaName ?? "",
+                    };
+                }
+
+                string oldContext = item?.Area5SResponsibleData != null
+                    ? BuildAreaContextText(item.Area5SResponsibleData.DeptId, item.Area5SResponsibleData.AreaId, areas)
+                    : "";
+                string newContext = BuildAreaContextText(
+                    item?.DeptId ?? item?.Area5SResponsibleData?.DeptId ?? "",
+                    item?.AreaId ?? item?.Area5SResponsibleData?.AreaId,
+                    areas);
+
+                string areaText = action == "Create"
+                    ? $"[{GetChangeActionText(action)}] {newContext}"
+                    : action == "Delete"
+                        ? $"[{GetChangeActionText(action)}] {oldContext}"
+                        : oldContext != newContext
+                            ? $"[{GetChangeActionText(action)}] {oldContext} -> {newContext}"
+                            : $"[{GetChangeActionText(action)}] {newContext}";
+
+                return (object)new
+                {
+                    oldemp = action == "Create"
+                        ? ""
+                        : BuildAreaPeopleSummary(
+                            item?.Area5SResponsibleData?.EmployeeId,
+                            item?.Area5SResponsibleData?.AgentId,
+                            item?.Area5SResponsibleData?.BossId,
+                            users),
+                    reciver = action == "Delete"
+                        ? ""
+                        : BuildAreaPeopleSummary(
+                            item?.EmployeeId ?? item?.Area5SResponsibleData?.EmployeeId,
+                            item?.AgentId ?? item?.Area5SResponsibleData?.AgentId,
+                            item?.BossId ?? item?.Area5SResponsibleData?.BossId,
+                            users),
+                    colname = GetChangeActionText(action),
+                    area = areaText,
+                    areacode = item?.AreaCode ?? item?.Area5SResponsibleData?.AreaCode ?? "",
+                    areaname = item?.AreaName ?? item?.Area5SResponsibleData?.AreaName ?? "",
+                };
+            }).ToList();
+        }
+
         private void f310_UpdateApproval_Load(object sender, EventArgs e)
         {
             var users = dm_UserBUS.Instance.GetList();
+            var roles = dt310_RoleBUS.Instance.GetList();
+            var funcs = dt310_FunctionBUS.Instance.GetList();
+            var areas = dt310_Area5SBUS.Instance.GetList();
             updateLeaveUser = dt310_UpdateLeaveUserBUS.Instance.GetItemById(idDataUpdate);
             var dataDetail = dt310_UpdateLeaveUser_detailBUS.Instance.GetItemByIdData(idDataUpdate);
             bool isEHSAssign = updateLeaveUser.DataType == "EHSAssign";
@@ -156,33 +360,25 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                 createby = $"{updateLeaveUser.CreateBy} {users.FirstOrDefault(u => u.Id == updateLeaveUser.CreateBy)?.DisplayName ?? ""}",
                 unitlist = unitList.Select(r => new
                 {
-                    oldemp = r.UnitEHSOrgData != null
-                        ? $"{r.UnitEHSOrgData.EmployeeId} {users.FirstOrDefault(u => u.Id == r.UnitEHSOrgData.EmployeeId)?.DisplayName ?? ""}"
-                        : "",
-                    reciver = $"{r.UserId} {users.FirstOrDefault(u => u.Id == r.UserId)?.DisplayName ?? ""}",
-                    displaydata = r.Desc
+                    oldemp = NormalizeChangeAction(r.ActionType) == "Create"
+                        ? ""
+                        : FormatUserDisplay(r.UnitEHSOrgData?.EmployeeId, users),
+                    reciver = NormalizeChangeAction(r.ActionType) == "Delete"
+                        ? ""
+                        : FormatUserDisplay(r.UserId, users),
+                    displaydata = BuildUnitDisplayText(r, roles)
                 }).ToList(),
                 funclist = funcList.Select(r => new
                 {
-                    oldemp = r.EHSFunctionData != null
-                        ? $"{r.EHSFunctionData.EmployeeId} {users.FirstOrDefault(u => u.Id == r.EHSFunctionData.EmployeeId)?.DisplayName ?? ""}"
-                        : "",
-                    reciver = $"{r.UserId} {users.FirstOrDefault(u => u.Id == r.UserId)?.DisplayName ?? ""}",
-                    displaydata = r.Desc
+                    oldemp = NormalizeChangeAction(r.ActionType) == "Create"
+                        ? ""
+                        : FormatUserDisplay(r.EHSFunctionData?.EmployeeId, users),
+                    reciver = NormalizeChangeAction(r.ActionType) == "Delete"
+                        ? ""
+                        : FormatUserDisplay(r.UserId, users),
+                    displaydata = BuildFuncDisplayText(r, funcs)
                 }).ToList(),
-                arealist = areaList.Select(r => new
-                {
-                    oldemp = r.Area5SResponsibleData != null
-                        ? (r.FieldName == "EmployeeId"
-                            ? $"{r.Area5SResponsibleData.EmployeeId} {users.FirstOrDefault(u => u.Id == r.Area5SResponsibleData.EmployeeId)?.DisplayName ?? ""}"
-                            : $"{r.Area5SResponsibleData.AgentId} {users.FirstOrDefault(u => u.Id == r.Area5SResponsibleData.AgentId)?.DisplayName ?? ""}")
-                        : "",
-                    reciver = $"{r.UserId} {users.FirstOrDefault(u => u.Id == r.UserId)?.DisplayName ?? ""}",
-                    colname = r.ColName,
-                    area = r.Desc,
-                    areacode = r.Area5SResponsibleData?.AreaCode ?? "",
-                    areaname = r.Area5SResponsibleData?.AreaName ?? "",
-                }).ToList(),
+                arealist = BuildAreaTemplateRows(areaList, users, areas),
                 sign1st = signApplicant ?? GetEmptySignatureInfo(),
                 sign2nd = signLevel2 ?? GetEmptySignatureInfo(),
                 sign3th = signPsm ?? GetEmptySignatureInfo(),
@@ -197,6 +393,184 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             var pageContent = templateSigner.Render(templateData);
 
             webViewUpdateData.DocumentText = pageContent;
+        }
+
+        private void ApplyUnitChange(UpdateLeaveUserData item)
+        {
+            string action = NormalizeChangeAction(item?.ActionType);
+
+            switch (action)
+            {
+                case "Create":
+                    if (string.IsNullOrWhiteSpace(item?.DeptId) || !item.RoleId.HasValue || string.IsNullOrWhiteSpace(item.UserId))
+                    {
+                        return;
+                    }
+
+                    dt310_UnitEHSOrgBUS.Instance.Add(new dt310_UnitEHSOrg
+                    {
+                        DeptId = item.DeptId,
+                        RoleId = item.RoleId.Value,
+                        EmployeeId = item.UserId,
+                        StartDate = item.StartDate ?? DateTime.Now.Date,
+                        CreatedAt = DateTime.Now,
+                        CreatedBy = updateLeaveUser.CreateBy
+                    });
+                    break;
+                case "Delete":
+                    if (item?.UnitEHSOrgData != null)
+                    {
+                        dt310_UnitEHSOrgBUS.Instance.RemoveById(item.UnitEHSOrgData.Id, TPConfigs.LoginUser.Id);
+                    }
+                    break;
+                default:
+                    if (item?.UnitEHSOrgData == null)
+                    {
+                        return;
+                    }
+
+                    var unitEHSOrg = dt310_UnitEHSOrgBUS.Instance.GetItemById(item.UnitEHSOrgData.Id);
+                    if (unitEHSOrg == null)
+                    {
+                        return;
+                    }
+
+                    unitEHSOrg.DeptId = item.DeptId ?? unitEHSOrg.DeptId;
+                    unitEHSOrg.RoleId = item.RoleId ?? unitEHSOrg.RoleId;
+                    unitEHSOrg.EmployeeId = item.UserId ?? unitEHSOrg.EmployeeId;
+                    unitEHSOrg.StartDate = item.StartDate ?? unitEHSOrg.StartDate;
+                    dt310_UnitEHSOrgBUS.Instance.AddOrUpdate(unitEHSOrg);
+                    break;
+            }
+        }
+
+        private void ApplyFuncChange(UpdateLeaveUserData item)
+        {
+            string action = NormalizeChangeAction(item?.ActionType);
+
+            switch (action)
+            {
+                case "Create":
+                    if (string.IsNullOrWhiteSpace(item?.DeptId) || !item.FunctionId.HasValue || string.IsNullOrWhiteSpace(item.UserId))
+                    {
+                        return;
+                    }
+
+                    dt310_EHSFunctionBUS.Instance.Add(new dt310_EHSFunction
+                    {
+                        DeptId = item.DeptId,
+                        FunctionId = item.FunctionId.Value,
+                        EmployeeId = item.UserId,
+                        StartDate = item.StartDate ?? DateTime.Now.Date,
+                        CreatedAt = DateTime.Now,
+                        CreatedBy = updateLeaveUser.CreateBy
+                    });
+                    break;
+                case "Delete":
+                    if (item?.EHSFunctionData != null)
+                    {
+                        dt310_EHSFunctionBUS.Instance.RemoveById(item.EHSFunctionData.Id, TPConfigs.LoginUser.Id);
+                    }
+                    break;
+                default:
+                    if (item?.EHSFunctionData == null)
+                    {
+                        return;
+                    }
+
+                    var ehsFunction = dt310_EHSFunctionBUS.Instance.GetItemById(item.EHSFunctionData.Id);
+                    if (ehsFunction == null)
+                    {
+                        return;
+                    }
+
+                    ehsFunction.DeptId = item.DeptId ?? ehsFunction.DeptId;
+                    ehsFunction.FunctionId = item.FunctionId ?? ehsFunction.FunctionId;
+                    ehsFunction.EmployeeId = item.UserId ?? ehsFunction.EmployeeId;
+                    ehsFunction.StartDate = item.StartDate ?? ehsFunction.StartDate;
+                    dt310_EHSFunctionBUS.Instance.AddOrUpdate(ehsFunction);
+                    break;
+            }
+        }
+
+        private void ApplyAreaChange(UpdateLeaveUserData item)
+        {
+            if (item?.Area5SResponsibleData != null && !string.IsNullOrWhiteSpace(item.FieldName) && !string.IsNullOrWhiteSpace(item.UserId))
+            {
+                var legacyArea = dt310_Area5SResponsibleBUS.Instance.GetItemById(item.Area5SResponsibleData.Id);
+                if (legacyArea == null)
+                {
+                    return;
+                }
+
+                if (item.FieldName == "EmployeeId")
+                {
+                    legacyArea.EmployeeId = item.UserId;
+                }
+                else if (item.FieldName == "AgentId")
+                {
+                    legacyArea.AgentId = item.UserId;
+                }
+
+                dt310_Area5SResponsibleBUS.Instance.AddOrUpdate(legacyArea);
+                return;
+            }
+
+            string action = NormalizeChangeAction(item?.ActionType);
+
+            switch (action)
+            {
+                case "Create":
+                    if (string.IsNullOrWhiteSpace(item?.DeptId)
+                        || !item.AreaId.HasValue
+                        || string.IsNullOrWhiteSpace(item.EmployeeId)
+                        || string.IsNullOrWhiteSpace(item.AgentId)
+                        || string.IsNullOrWhiteSpace(item.BossId))
+                    {
+                        return;
+                    }
+
+                    dt310_Area5SResponsibleBUS.Instance.Add(new dt310_Area5SResponsible
+                    {
+                        DeptId = item.DeptId,
+                        AreaId = item.AreaId.Value,
+                        EmployeeId = item.EmployeeId,
+                        AgentId = item.AgentId,
+                        BossId = item.BossId,
+                        AreaCode = item.AreaCode ?? "",
+                        AreaName = item.AreaName ?? "",
+                        CreatedAt = DateTime.Now,
+                        CreatedBy = updateLeaveUser.CreateBy
+                    });
+                    break;
+                case "Delete":
+                    if (item?.Area5SResponsibleData != null)
+                    {
+                        dt310_Area5SResponsibleBUS.Instance.RemoveById(item.Area5SResponsibleData.Id);
+                    }
+                    break;
+                default:
+                    if (item?.Area5SResponsibleData == null)
+                    {
+                        return;
+                    }
+
+                    var area5S = dt310_Area5SResponsibleBUS.Instance.GetItemById(item.Area5SResponsibleData.Id);
+                    if (area5S == null)
+                    {
+                        return;
+                    }
+
+                    area5S.DeptId = item.DeptId ?? area5S.DeptId;
+                    area5S.AreaId = item.AreaId ?? area5S.AreaId;
+                    area5S.EmployeeId = item.EmployeeId ?? area5S.EmployeeId;
+                    area5S.AgentId = item.AgentId ?? area5S.AgentId;
+                    area5S.BossId = item.BossId ?? area5S.BossId;
+                    area5S.AreaCode = item.AreaCode ?? area5S.AreaCode;
+                    area5S.AreaName = item.AreaName ?? area5S.AreaName;
+                    dt310_Area5SResponsibleBUS.Instance.AddOrUpdate(area5S);
+                    break;
+            }
         }
 
         private void btnApproval_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -219,15 +593,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                     {
                         foreach (var item in data.UnitEHSOrg)
                         {
-                            if (!string.IsNullOrWhiteSpace(item.UserId) && item.UnitEHSOrgData != null)
-                            {
-                                var unitEHSOrg = dt310_UnitEHSOrgBUS.Instance.GetItemById(item.UnitEHSOrgData.Id);
-                                if (unitEHSOrg != null)
-                                {
-                                    unitEHSOrg.EmployeeId = item.UserId;
-                                    dt310_UnitEHSOrgBUS.Instance.AddOrUpdate(unitEHSOrg);
-                                }
-                            }
+                            ApplyUnitChange(item);
                         }
                     }
 
@@ -235,15 +601,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                     {
                         foreach (var item in data.EHSFunction)
                         {
-                            if (!string.IsNullOrWhiteSpace(item.UserId) && item.EHSFunctionData != null)
-                            {
-                                var ehsFunction = dt310_EHSFunctionBUS.Instance.GetItemById(item.EHSFunctionData.Id);
-                                if (ehsFunction != null)
-                                {
-                                    ehsFunction.EmployeeId = item.UserId;
-                                    dt310_EHSFunctionBUS.Instance.AddOrUpdate(ehsFunction);
-                                }
-                            }
+                            ApplyFuncChange(item);
                         }
                     }
 
@@ -251,22 +609,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                     {
                         foreach (var item in data.Area5SResponsible)
                         {
-                            if (!string.IsNullOrWhiteSpace(item.UserId) && item.Area5SResponsibleData != null)
-                            {
-                                var area5S = dt310_Area5SResponsibleBUS.Instance.GetItemById(item.Area5SResponsibleData.Id);
-                                if (area5S != null)
-                                {
-                                    if (item.FieldName == "EmployeeId")
-                                    {
-                                        area5S.EmployeeId = item.UserId;
-                                    }
-                                    else if (item.FieldName == "AgentId")
-                                    {
-                                        area5S.AgentId = item.UserId;
-                                    }
-                                    dt310_Area5SResponsibleBUS.Instance.AddOrUpdate(area5S);
-                                }
-                            }
+                            ApplyAreaChange(item);
                         }
                     }
                 }
