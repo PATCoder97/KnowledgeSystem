@@ -145,12 +145,14 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             {
                 var roleObj = roles.FirstOrDefault(r => r.Id == u.RoleId);
                 var userObj = users.FirstOrDefault(r => r.Id == u.EmployeeId);
+                var deptObj = depts.FirstOrDefault(r => r.Id == u.DeptId);
 
                 return new
                 {
                     u.Id,
                     Emp = $"{userObj?.IdDepartment} {userObj?.DisplayName} {userObj?.DisplayNameVN}",
                     Role = roleObj?.DisplayName,
+                    Dept = $"{u.DeptId} {deptObj?.DisplayName}".Trim(),
                     u.StartDate,
                     ThamNien = (now.Year - u.StartDate.Year) -
                                (now.Month < u.StartDate.Month ||
@@ -162,6 +164,32 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             sourceOrg.DataSource = result;
             treeFunctions.BestFitColumns();
             gvData.BestFitColumns();
+        }
+
+        private void InitializeDataGridColumns()
+        {
+            var deptColumn = gvData.Columns["gridColumnDept"];
+            if (deptColumn == null)
+            {
+                deptColumn = new DevExpress.XtraGrid.Columns.GridColumn
+                {
+                    Name = "gridColumnDept",
+                    Caption = "部門",
+                    FieldName = "Dept",
+                    Visible = true,
+                    VisibleIndex = 4,
+                    Width = 120
+                };
+                gvData.Columns.Add(deptColumn);
+            }
+            else
+            {
+                deptColumn.Caption = "部門";
+                deptColumn.FieldName = "Dept";
+                deptColumn.Visible = true;
+                deptColumn.VisibleIndex = 4;
+                deptColumn.Width = 120;
+            }
         }
 
         private void uc310_UnitEHSOrg_Load(object sender, EventArgs e)
@@ -191,6 +219,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             gvData.ReadOnlyGridView();
             gvData.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
             gvData.OptionsDetail.AllowOnlyOneMasterRowExpanded = true;
+            InitializeDataGridColumns();
             gcData.DataSource = sourceOrg;
             gvData.BestFitColumns();
             gvData.OptionsDetail.EnableMasterViewMode = true;

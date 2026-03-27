@@ -207,17 +207,19 @@
         <div class="sig-box">
             <div class="sig-title">申請人</div>
             <div class="sig-content">
-                {{ if sign1st }}
-                {{ sign1st.name }} <br>
+                {{ if sign1st && (sign1st.name != "" || sign1st.status != "" || sign1st.time != "" || sign1st.reason != "") }}
+                {{ if sign1st.name != "" }}{{ sign1st.name }}<br>{{ end }}
+                {{ if sign1st.status != "" }}
                 {{ if sign1st.isreject == "true" }}
                 <span class="sig-status" style="color: red;">（{{ sign1st.status }}）</span><br>
                 {{ else }}
                 <span class="sig-status" style="color: green;">（{{ sign1st.status }}）</span><br>
                 {{ end }}
-                {{ if sign1st.time }}
+                {{ end }}
+                {{ if sign1st.time != "" }}
                 <span class="sig-status">{{ sign1st.time }}</span>
                 {{ end }}
-                {{ if sign1st.isreject == "true" }}
+                {{ if sign1st.isreject == "true" && sign1st.reason != "" }}
                 <br><span class="sig-status" style="color: red; font-weight: bold;">退回原因：{{ sign1st.reason }}</span>
                 {{ end }}
                 {{ end }}
@@ -227,17 +229,19 @@
         <div class="sig-box">
             <div class="sig-title">二級主管</div>
             <div class="sig-content">
-                {{ if sign2nd }}
-                {{ sign2nd.name }} <br>
+                {{ if sign2nd && (sign2nd.name != "" || sign2nd.status != "" || sign2nd.time != "" || sign2nd.reason != "") }}
+                {{ if sign2nd.name != "" }}{{ sign2nd.name }}<br>{{ end }}
+                {{ if sign2nd.status != "" }}
                 {{ if sign2nd.isreject == "true" }}
                 <span class="sig-status" style="color: red;">（{{ sign2nd.status }}）</span><br>
                 {{ else }}
                 <span class="sig-status" style="color: green;">（{{ sign2nd.status }}）</span><br>
                 {{ end }}
-                {{ if sign2nd.time }}
+                {{ end }}
+                {{ if sign2nd.time != "" }}
                 <span class="sig-status">{{ sign2nd.time }}</span>
                 {{ end }}
-                {{ if sign2nd.isreject == "true" }}
+                {{ if sign2nd.isreject == "true" && sign2nd.reason != "" }}
                 <br><span class="sig-status" style="color: red; font-weight: bold;">退回原因：{{ sign2nd.reason }}</span>
                 {{ end }}
                 {{ end }}
@@ -247,17 +251,19 @@
         <div class="sig-box">
             <div class="sig-title">PSM專人</div>
             <div class="sig-content">
-                {{ if sign3th }}
-                {{ sign3th.name }} <br>
+                {{ if sign3th && (sign3th.name != "" || sign3th.status != "" || sign3th.time != "" || sign3th.reason != "") }}
+                {{ if sign3th.name != "" }}{{ sign3th.name }}<br>{{ end }}
+                {{ if sign3th.status != "" }}
                 {{ if sign3th.isreject == "true" }}
                 <span class="sig-status" style="color: red;">（{{ sign3th.status }}）</span><br>
                 {{ else }}
                 <span class="sig-status" style="color: green;">（{{ sign3th.status }}）</span><br>
                 {{ end }}
-                {{ if sign3th.time }}
+                {{ end }}
+                {{ if sign3th.time != "" }}
                 <span class="sig-status">{{ sign3th.time }}</span>
                 {{ end }}
-                {{ if sign3th.isreject == "true" }}
+                {{ if sign3th.isreject == "true" && sign3th.reason != "" }}
                 <br><span class="sig-status" style="color: red; font-weight: bold;">退回原因：{{ sign3th.reason }}</span>
                 {{ end }}
                 {{ end }}
@@ -267,15 +273,19 @@
         <div class="sig-box">
             <div class="sig-title">&#19968;&#32026;&#20027;&#31649;</div>
             <div class="sig-content">
-                {{ if sign4th }}
-                {{ sign4th.name }}{{ if sign4th.name }} <br>{{ end }}
-                {{ if sign4th.status }}
-                <span class="sig-status" style="color: {{ sign4th.statusColor }};">&#65288;{{ sign4th.status }}&#65289;</span><br>
+                {{ if sign4th && (sign4th.name != "" || sign4th.status != "" || sign4th.time != "" || sign4th.reason != "") }}
+                {{ if sign4th.name != "" }}{{ sign4th.name }}<br>{{ end }}
+                {{ if sign4th.status != "" }}
+                {{ if sign4th.isreject == "true" }}
+                <span class="sig-status" style="color: red;">&#65288;{{ sign4th.status }}&#65289;</span><br>
+                {{ else }}
+                <span class="sig-status" style="color: green;">&#65288;{{ sign4th.status }}&#65289;</span><br>
                 {{ end }}
-                {{ if sign4th.time }}
+                {{ end }}
+                {{ if sign4th.time != "" }}
                 <span class="sig-status">{{ sign4th.time }}</span>
                 {{ end }}
-                {{ if sign4th.reason }}
+                {{ if sign4th.isreject == "true" && sign4th.reason != "" }}
                 <br><span class="sig-status" style="color: red; font-weight: bold;">&#36864;&#22238;&#21407;&#22240;&#65306;{{ sign4th.reason }}</span>
                 {{ end }}
                 {{ end }}
