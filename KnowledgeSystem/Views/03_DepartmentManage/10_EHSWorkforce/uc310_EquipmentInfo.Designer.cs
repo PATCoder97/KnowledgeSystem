@@ -137,7 +137,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManagerTP;
-            this.barDockControlTop.Size = new System.Drawing.Size(1040, 49);
+            this.barDockControlTop.Size = new System.Drawing.Size(1040, 40);
             // 
             // barDockControlBottom
             // 
@@ -151,27 +151,27 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.barDockControlLeft.Location = new System.Drawing.Point(0, 49);
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 40);
             this.barDockControlLeft.Manager = this.barManagerTP;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 501);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 510);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1040, 49);
+            this.barDockControlRight.Location = new System.Drawing.Point(1040, 40);
             this.barDockControlRight.Manager = this.barManagerTP;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 501);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 510);
             // 
             // layoutControl1
             // 
             this.layoutControl1.AllowCustomization = false;
             this.layoutControl1.Controls.Add(this.gcData);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.layoutControl1.Location = new System.Drawing.Point(0, 49);
+            this.layoutControl1.Location = new System.Drawing.Point(0, 40);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(1040, 501);
+            this.layoutControl1.Size = new System.Drawing.Size(1040, 510);
             this.layoutControl1.TabIndex = 4;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -181,7 +181,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             this.gcData.MainView = this.gvData;
             this.gcData.MenuManager = this.barManagerTP;
             this.gcData.Name = "gcData";
-            this.gcData.Size = new System.Drawing.Size(1016, 477);
+            this.gcData.Size = new System.Drawing.Size(1016, 486);
             this.gcData.TabIndex = 4;
             this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvData});
@@ -213,7 +213,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             this.gvData.OptionsView.EnableAppearanceOddRow = true;
             this.gvData.OptionsView.ShowAutoFilterRow = true;
             this.gvData.OptionsView.ShowGroupPanel = false;
-            this.gvData.DoubleClick += new System.EventHandler(this.gvData_DoubleClick);
+            this.gvData.PopupMenuShowing += new DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler(this.gvData_PopupMenuShowing);
             // 
             // gColId
             // 
@@ -233,7 +233,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             // 
             // gColNameVN
             // 
-            this.gColNameVN.Caption = "設備名稱(VN)";
+            this.gColNameVN.Caption = "越文名稱";
             this.gColNameVN.FieldName = "DisplayNameVN";
             this.gColNameVN.MinWidth = 150;
             this.gColNameVN.Name = "gColNameVN";
@@ -243,7 +243,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             // 
             // gColNameTW
             // 
-            this.gColNameTW.Caption = "設備名稱(TW)";
+            this.gColNameTW.Caption = "中文名稱";
             this.gColNameTW.FieldName = "DisplayNameTW";
             this.gColNameTW.MinWidth = 150;
             this.gColNameTW.Name = "gColNameTW";
@@ -288,7 +288,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem1});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(1040, 501);
+            this.Root.Size = new System.Drawing.Size(1040, 510);
             this.Root.TextVisible = false;
             // 
             // layoutControlItem1
@@ -296,7 +296,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             this.layoutControlItem1.Control = this.gcData;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(1020, 481);
+            this.layoutControlItem1.Size = new System.Drawing.Size(1020, 490);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 

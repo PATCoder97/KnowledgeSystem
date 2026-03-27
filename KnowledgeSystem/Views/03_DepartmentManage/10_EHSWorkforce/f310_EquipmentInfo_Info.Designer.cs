@@ -92,7 +92,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             ((System.ComponentModel.ISupportInitialize)(this.lcDept)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcManager)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcNote)).BeginInit();
-
+            this.SuspendLayout();
             // 
             // barManagerTP
             // 
@@ -171,7 +171,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManagerTP;
-            this.barDockControlTop.Size = new System.Drawing.Size(620, 49);
+            this.barDockControlTop.Size = new System.Drawing.Size(620, 40);
             // 
             // barDockControlBottom
             // 
@@ -185,17 +185,17 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.barDockControlLeft.Location = new System.Drawing.Point(0, 49);
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 40);
             this.barDockControlLeft.Manager = this.barManagerTP;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 268);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 277);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(620, 49);
+            this.barDockControlRight.Location = new System.Drawing.Point(620, 40);
             this.barDockControlRight.Manager = this.barManagerTP;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 268);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 277);
             // 
             // layoutControl1
             // 
@@ -207,29 +207,29 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             this.layoutControl1.Controls.Add(this.txbNameVN);
             this.layoutControl1.Controls.Add(this.txbCode);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.layoutControl1.Location = new System.Drawing.Point(0, 49);
+            this.layoutControl1.Location = new System.Drawing.Point(0, 40);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(620, 268);
+            this.layoutControl1.Size = new System.Drawing.Size(620, 277);
             this.layoutControl1.TabIndex = 4;
             this.layoutControl1.Text = "layoutControl1";
             // 
             // txbNote
             // 
-            this.txbNote.Location = new System.Drawing.Point(112, 192);
+            this.txbNote.Location = new System.Drawing.Point(100, 192);
             this.txbNote.MenuManager = this.barManagerTP;
             this.txbNote.Name = "txbNote";
             this.txbNote.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbNote.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbNote.Properties.Appearance.Options.UseFont = true;
             this.txbNote.Properties.Appearance.Options.UseForeColor = true;
-            this.txbNote.Size = new System.Drawing.Size(496, 64);
+            this.txbNote.Size = new System.Drawing.Size(508, 73);
             this.txbNote.StyleController = this.layoutControl1;
             this.txbNote.TabIndex = 9;
             // 
             // cbbManager
             // 
-            this.cbbManager.Location = new System.Drawing.Point(112, 156);
+            this.cbbManager.Location = new System.Drawing.Point(100, 156);
             this.cbbManager.MenuManager = this.barManagerTP;
             this.cbbManager.Name = "cbbManager";
             this.cbbManager.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
@@ -240,7 +240,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbbManager.Properties.NullText = "";
             this.cbbManager.Properties.PopupView = this.searchUserView;
-            this.cbbManager.Size = new System.Drawing.Size(496, 32);
+            this.cbbManager.Size = new System.Drawing.Size(508, 32);
             this.cbbManager.StyleController = this.layoutControl1;
             this.cbbManager.TabIndex = 8;
             // 
@@ -287,7 +287,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             // 
             // cbbDept
             // 
-            this.cbbDept.Location = new System.Drawing.Point(112, 120);
+            this.cbbDept.Location = new System.Drawing.Point(100, 120);
             this.cbbDept.MenuManager = this.barManagerTP;
             this.cbbDept.Name = "cbbDept";
             this.cbbDept.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
@@ -298,7 +298,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbbDept.Properties.NullText = "";
             this.cbbDept.Properties.PopupView = this.searchDeptView;
-            this.cbbDept.Size = new System.Drawing.Size(496, 32);
+            this.cbbDept.Size = new System.Drawing.Size(508, 32);
             this.cbbDept.StyleController = this.layoutControl1;
             this.cbbDept.TabIndex = 7;
             // 
@@ -345,40 +345,40 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             // 
             // txbNameTW
             // 
-            this.txbNameTW.Location = new System.Drawing.Point(112, 84);
+            this.txbNameTW.Location = new System.Drawing.Point(100, 84);
             this.txbNameTW.MenuManager = this.barManagerTP;
             this.txbNameTW.Name = "txbNameTW";
             this.txbNameTW.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbNameTW.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbNameTW.Properties.Appearance.Options.UseFont = true;
             this.txbNameTW.Properties.Appearance.Options.UseForeColor = true;
-            this.txbNameTW.Size = new System.Drawing.Size(496, 32);
+            this.txbNameTW.Size = new System.Drawing.Size(508, 32);
             this.txbNameTW.StyleController = this.layoutControl1;
             this.txbNameTW.TabIndex = 6;
             // 
             // txbNameVN
             // 
-            this.txbNameVN.Location = new System.Drawing.Point(112, 48);
+            this.txbNameVN.Location = new System.Drawing.Point(100, 48);
             this.txbNameVN.MenuManager = this.barManagerTP;
             this.txbNameVN.Name = "txbNameVN";
             this.txbNameVN.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbNameVN.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbNameVN.Properties.Appearance.Options.UseFont = true;
             this.txbNameVN.Properties.Appearance.Options.UseForeColor = true;
-            this.txbNameVN.Size = new System.Drawing.Size(496, 32);
+            this.txbNameVN.Size = new System.Drawing.Size(508, 32);
             this.txbNameVN.StyleController = this.layoutControl1;
             this.txbNameVN.TabIndex = 5;
             // 
             // txbCode
             // 
-            this.txbCode.Location = new System.Drawing.Point(112, 12);
+            this.txbCode.Location = new System.Drawing.Point(100, 12);
             this.txbCode.MenuManager = this.barManagerTP;
             this.txbCode.Name = "txbCode";
             this.txbCode.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbCode.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             this.txbCode.Properties.Appearance.Options.UseFont = true;
             this.txbCode.Properties.Appearance.Options.UseForeColor = true;
-            this.txbCode.Size = new System.Drawing.Size(496, 32);
+            this.txbCode.Size = new System.Drawing.Size(508, 32);
             this.txbCode.StyleController = this.layoutControl1;
             this.txbCode.TabIndex = 4;
             // 
@@ -394,7 +394,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             this.lcManager,
             this.lcNote});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(620, 268);
+            this.Root.Size = new System.Drawing.Size(620, 277);
             this.Root.TextVisible = false;
             // 
             // lcCode
@@ -410,7 +410,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             this.lcCode.Name = "lcCode";
             this.lcCode.Size = new System.Drawing.Size(600, 36);
             this.lcCode.Text = "設備編號";
-            this.lcCode.TextSize = new System.Drawing.Size(97, 24);
+            this.lcCode.TextSize = new System.Drawing.Size(76, 24);
             // 
             // lcNameVN
             // 
@@ -424,8 +424,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             this.lcNameVN.Location = new System.Drawing.Point(0, 36);
             this.lcNameVN.Name = "lcNameVN";
             this.lcNameVN.Size = new System.Drawing.Size(600, 36);
-            this.lcNameVN.Text = "設備名稱(VN)";
-            this.lcNameVN.TextSize = new System.Drawing.Size(97, 24);
+            this.lcNameVN.Text = "越文名稱";
+            this.lcNameVN.TextSize = new System.Drawing.Size(76, 24);
             // 
             // lcNameTW
             // 
@@ -439,8 +439,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             this.lcNameTW.Location = new System.Drawing.Point(0, 72);
             this.lcNameTW.Name = "lcNameTW";
             this.lcNameTW.Size = new System.Drawing.Size(600, 36);
-            this.lcNameTW.Text = "設備名稱(TW)";
-            this.lcNameTW.TextSize = new System.Drawing.Size(97, 24);
+            this.lcNameTW.Text = "中文名稱";
+            this.lcNameTW.TextSize = new System.Drawing.Size(76, 24);
             // 
             // lcDept
             // 
@@ -455,7 +455,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             this.lcDept.Name = "lcDept";
             this.lcDept.Size = new System.Drawing.Size(600, 36);
             this.lcDept.Text = "管理部門";
-            this.lcDept.TextSize = new System.Drawing.Size(97, 24);
+            this.lcDept.TextSize = new System.Drawing.Size(76, 24);
             // 
             // lcManager
             // 
@@ -470,7 +470,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             this.lcManager.Name = "lcManager";
             this.lcManager.Size = new System.Drawing.Size(600, 36);
             this.lcManager.Text = "管理人";
-            this.lcManager.TextSize = new System.Drawing.Size(97, 24);
+            this.lcManager.TextSize = new System.Drawing.Size(76, 24);
             // 
             // lcNote
             // 
@@ -483,9 +483,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             this.lcNote.Control = this.txbNote;
             this.lcNote.Location = new System.Drawing.Point(0, 180);
             this.lcNote.Name = "lcNote";
-            this.lcNote.Size = new System.Drawing.Size(600, 68);
+            this.lcNote.Size = new System.Drawing.Size(600, 77);
             this.lcNote.Text = "備註";
-            this.lcNote.TextSize = new System.Drawing.Size(97, 24);
+            this.lcNote.TextSize = new System.Drawing.Size(76, 24);
             // 
             // f310_EquipmentInfo_Info
             // 
@@ -522,6 +522,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             ((System.ComponentModel.ISupportInitialize)(this.lcNote)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
     }
 }
