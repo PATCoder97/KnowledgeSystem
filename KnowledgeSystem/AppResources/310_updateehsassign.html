@@ -267,6 +267,7 @@
         <div class="sig-box">
             <div class="sig-title">&#19968;&#32026;&#20027;&#31649;</div>
             <div class="sig-content">
+                {{ if sign4th }}
                 {{ sign4th.name }}{{ if sign4th.name }} <br>{{ end }}
                 {{ if sign4th.status }}
                 <span class="sig-status" style="color: {{ sign4th.statusColor }};">&#65288;{{ sign4th.status }}&#65289;</span><br>
@@ -276,6 +277,7 @@
                 {{ end }}
                 {{ if sign4th.reason }}
                 <br><span class="sig-status" style="color: red; font-weight: bold;">&#36864;&#22238;&#21407;&#22240;&#65306;{{ sign4th.reason }}</span>
+                {{ end }}
                 {{ end }}
             </div>
         </div>

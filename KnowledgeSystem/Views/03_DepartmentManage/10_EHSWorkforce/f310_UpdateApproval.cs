@@ -81,6 +81,19 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             };
         }
 
+        private object GetEmptySignatureInfo()
+        {
+            return new
+            {
+                name = "",
+                time = "",
+                isreject = "false",
+                status = "",
+                statusColor = "green",
+                reason = ""
+            };
+        }
+
         private void f310_UpdateApproval_Load(object sender, EventArgs e)
         {
             var users = dm_UserBUS.Instance.GetList();
@@ -170,10 +183,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                     areacode = r.Area5SResponsibleData?.AreaCode ?? "",
                     areaname = r.Area5SResponsibleData?.AreaName ?? "",
                 }).ToList(),
-                sign1st = signApplicant,
-                sign2nd = signLevel2,
-                sign3th = signPsm,
-                sign4th = signLevel1,
+                sign1st = signApplicant ?? GetEmptySignatureInfo(),
+                sign2nd = signLevel2 ?? GetEmptySignatureInfo(),
+                sign3th = signPsm ?? GetEmptySignatureInfo(),
+                sign4th = signLevel1 ?? GetEmptySignatureInfo(),
             };
 
             string templateFile = isEHSAssign ? "310_updateehsassign.html" : "310_updateleaveruser.html";

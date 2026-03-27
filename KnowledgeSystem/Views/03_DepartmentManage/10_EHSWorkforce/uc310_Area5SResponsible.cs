@@ -10,6 +10,7 @@ using DevExpress.XtraSplashScreen;
 using DevExpress.XtraTreeList.Nodes;
 using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._03_DepartmentManage._09_SparePart;
+using Newtonsoft.Json;
 using Spire.Pdf;
 using Spire.Pdf.Graphics;
 using Spire.Pdf.Grid;
@@ -23,6 +24,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UpdateLeaveUserJson = KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce.f310_UpdateLeaveUser_Info.UpdateLeaveUserJson;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 {
@@ -30,6 +32,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
     {
         private const string PdfCoverCompanyName = "台塑河靜鋼鐵公司";
         private const string PdfCoverTitleSuffix = "責任區域配置圖及責任人員";
+        private const string PdfCjkFontName = "DFKai-SB";
+        private const string PdfLatinFontName = "Times New Roman";
         private const float PdfPageMargin = 28f;
         private const float PdfImageSectionMaxHeight = 340f;
         private const float PdfImageSectionMinHeight = 120f;
@@ -42,6 +46,14 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
         private const float PdfCoverSignatureTopOffset = 205f;
         private const float PdfCoverSignatureLineTopOffset = 58f;
         private const float PdfCoverSignatureLinePadding = 16f;
+
+        private sealed class PdfCoverSignatureInfo
+        {
+            public string Label { get; set; }
+            public string UserId { get; set; }
+            public string Name { get; set; }
+            public string DateText { get; set; }
+        }
 
         public uc310_Area5SResponsible()
         {
@@ -365,18 +377,20 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             }
 
             using (PdfDocument document = new PdfDocument())
-            using (Font coverCompanyFontGdi = new Font("Microsoft JhengHei UI", 24f, FontStyle.Bold))
-            using (Font coverTitleFontGdi = new Font("Microsoft JhengHei UI", 23f, FontStyle.Regular))
-            using (Font coverSignLabelFontGdi = new Font("Microsoft JhengHei UI", 13f, FontStyle.Regular))
-            using (Font coverSignHintFontGdi = new Font("Microsoft JhengHei UI", 9.5f, FontStyle.Regular))
-            using (Font titleFontGdi = new Font("Microsoft JhengHei UI", 16f, FontStyle.Bold))
-            using (Font sectionFontGdi = new Font("Microsoft JhengHei UI", 11f, FontStyle.Bold))
-            using (Font contentFontGdi = new Font("Microsoft JhengHei UI", 9.5f, FontStyle.Regular))
-            using (Font smallFontGdi = new Font("Microsoft JhengHei UI", 8.5f, FontStyle.Regular))
+            using (Font coverCompanyFontGdi = new Font(PdfCjkFontName, 24f, FontStyle.Bold))
+            using (Font coverTitleFontGdi = new Font(PdfCjkFontName, 23f, FontStyle.Regular))
+            using (Font coverSignLabelFontGdi = new Font(PdfCjkFontName, 13f, FontStyle.Regular))
+            using (Font coverSignHintFontGdi = new Font(PdfCjkFontName, 9.5f, FontStyle.Regular))
+            using (Font coverSignDateFontGdi = new Font(PdfLatinFontName, 7.5f, FontStyle.Regular))
+            using (Font titleFontGdi = new Font(PdfCjkFontName, 16f, FontStyle.Bold))
+            using (Font sectionFontGdi = new Font(PdfCjkFontName, 11f, FontStyle.Bold))
+            using (Font contentFontGdi = new Font(PdfCjkFontName, 9.5f, FontStyle.Regular))
+            using (Font smallFontGdi = new Font(PdfCjkFontName, 8.5f, FontStyle.Regular))
             using (PdfTrueTypeFont coverCompanyFont = new PdfTrueTypeFont(coverCompanyFontGdi, true))
             using (PdfTrueTypeFont coverTitleFont = new PdfTrueTypeFont(coverTitleFontGdi, true))
             using (PdfTrueTypeFont coverSignLabelFont = new PdfTrueTypeFont(coverSignLabelFontGdi, true))
             using (PdfTrueTypeFont coverSignHintFont = new PdfTrueTypeFont(coverSignHintFontGdi, true))
+            using (PdfTrueTypeFont coverSignDateFont = new PdfTrueTypeFont(coverSignDateFontGdi, true))
             using (PdfTrueTypeFont titleFont = new PdfTrueTypeFont(titleFontGdi, true))
             using (PdfTrueTypeFont sectionFont = new PdfTrueTypeFont(sectionFontGdi, true))
             using (PdfTrueTypeFont contentFont = new PdfTrueTypeFont(contentFontGdi, true))
@@ -388,7 +402,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                 document.DocumentInformation.Author = TPConfigs.LoginUser?.DisplayName ?? TPConfigs.LoginUser?.Id ?? "KnowledgeSystem";
 
                 PdfNewPage coverPage = (PdfNewPage)document.Pages.Add();
-                DrawCoverPage(coverPage, ResolveCoverDepartmentName(), coverCompanyFont, coverTitleFont, coverSignLabelFont, coverSignHintFont);
+                DrawCoverPage(coverPage, ResolveCoverDepartmentName(), ResolveCoverSignatures(), coverCompanyFont, coverTitleFont, coverSignLabelFont, coverSignHintFont, coverSignDateFont);
 
                 for (int i = 0; i < exportAreas.Count; i++)
                 {
@@ -412,7 +426,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             }
         }
 
-        private void DrawCoverPage(PdfNewPage page, string departmentName, PdfTrueTypeFont companyFont, PdfTrueTypeFont titleFont, PdfTrueTypeFont signLabelFont, PdfTrueTypeFont signHintFont)
+        private void DrawCoverPage(PdfNewPage page, string departmentName, List<PdfCoverSignatureInfo> signatures, PdfTrueTypeFont companyFont, PdfTrueTypeFont titleFont, PdfTrueTypeFont signLabelFont, PdfTrueTypeFont signHintFont, PdfTrueTypeFont signDateFont)
         {
             float pageWidth = page.Canvas.ClientSize.Width;
             float pageHeight = page.Canvas.ClientSize.Height;
@@ -425,26 +439,50 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
             RectangleF titleBounds = new RectangleF(PdfPageMargin, y + 110f, contentWidth, PdfCoverTitleBoxHeight);
             page.Canvas.DrawRectangle(PdfPens.Black, titleBounds);
-            page.Canvas.DrawString($"{departmentName} {PdfCoverTitleSuffix}", titleFont, PdfBrushes.Black, titleBounds, CreateCenteredStringFormat());
+            page.Canvas.DrawString($"{departmentName}{PdfCoverTitleSuffix}", titleFont, PdfBrushes.Black, titleBounds, CreateCenteredStringFormat());
 
-            DrawCoverSignatureSection(page, signLabelFont, signHintFont, pageHeight);
+            DrawCoverSignatureSection(page, signatures, signLabelFont, signHintFont, signDateFont, pageHeight);
         }
 
-        private void DrawCoverSignatureSection(PdfNewPage page, PdfTrueTypeFont signLabelFont, PdfTrueTypeFont signHintFont, float pageHeight)
+        private void DrawCoverSignatureSection(PdfNewPage page, List<PdfCoverSignatureInfo> signatures, PdfTrueTypeFont signLabelFont, PdfTrueTypeFont signHintFont, PdfTrueTypeFont signDateFont, float pageHeight)
         {
-            string[] signatureLabels = { "簽核一", "簽核二", "簽核三", "簽核四" };
+            List<PdfCoverSignatureInfo> displaySignatures = signatures ?? BuildDefaultCoverSignatures();
             float contentWidth = page.Canvas.ClientSize.Width - (PdfPageMargin * 2);
-            float columnWidth = contentWidth / signatureLabels.Length;
+            float columnWidth = contentWidth / displaySignatures.Count;
             float top = pageHeight - PdfPageMargin - PdfCoverSignatureTopOffset;
 
-            for (int i = 0; i < signatureLabels.Length; i++)
+            for (int i = 0; i < displaySignatures.Count; i++)
             {
+                PdfCoverSignatureInfo signature = displaySignatures[i];
                 float x = PdfPageMargin + (columnWidth * i);
                 float lineY = top + PdfCoverSignatureLineTopOffset;
+                float imageTop = top + 24f;
+                float imageHeight = 28f;
+                RectangleF imageBounds = new RectangleF(x + 10f, imageTop, columnWidth - 20f, imageHeight);
+                bool hasImage = TryDrawCoverSignatureImage(page, signature.UserId, imageBounds);
+                bool hasSignatureData = !string.IsNullOrWhiteSpace(signature.UserId) || !string.IsNullOrWhiteSpace(signature.DateText);
 
-                page.Canvas.DrawString($"{signatureLabels[i]}：", signLabelFont, PdfBrushes.Black, new RectangleF(x, top, columnWidth, 26f), CreateStringFormat(PdfTextAlignment.Center));
-                page.Canvas.DrawLine(PdfPens.Black, x + PdfCoverSignatureLinePadding, lineY, x + columnWidth - PdfCoverSignatureLinePadding, lineY);
-                page.Canvas.DrawString("暫留簽名位置", signHintFont, PdfBrushes.DimGray, new RectangleF(x, lineY + 8f, columnWidth, 18f), CreateStringFormat(PdfTextAlignment.Center));
+                page.Canvas.DrawString($"{signature.Label}：", signLabelFont, PdfBrushes.Black, new RectangleF(x, top, columnWidth, 26f), CreateStringFormat(PdfTextAlignment.Center));
+
+                if (!hasImage)
+                {
+                    page.Canvas.DrawLine(PdfPens.Black, x + PdfCoverSignatureLinePadding, lineY, x + columnWidth - PdfCoverSignatureLinePadding, lineY);
+                }
+
+                if (!hasImage && !hasSignatureData)
+                {
+                    page.Canvas.DrawString("暫留簽名位置", signHintFont, PdfBrushes.DimGray, imageBounds, CreateStringFormat(PdfTextAlignment.Center));
+                }
+
+                if (hasSignatureData && !string.IsNullOrWhiteSpace(signature.DateText))
+                {
+                    page.Canvas.DrawString(
+                        signature.DateText,
+                        signDateFont,
+                        PdfBrushes.Black,
+                        new RectangleF(x + PdfCoverSignatureLinePadding, lineY + 2f, columnWidth - (PdfCoverSignatureLinePadding * 2), 12f),
+                        CreateStringFormat(PdfTextAlignment.Right));
+                }
             }
         }
 
@@ -452,7 +490,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
         {
             float contentWidth = pageWidth - (PdfPageMargin * 2);
 
-            page.Canvas.DrawString($"{area.DisplayName} 區域責任報告", titleFont, PdfBrushes.Black, new RectangleF(PdfPageMargin, y, contentWidth, 24f), CreateStringFormat(PdfTextAlignment.Center));
+            page.Canvas.DrawString($"{area.DisplayName}區域責任報告", titleFont, PdfBrushes.Black, new RectangleF(PdfPageMargin, y, contentWidth, 24f), CreateStringFormat(PdfTextAlignment.Center));
             y += 28f;
 
             string desc = string.IsNullOrWhiteSpace(area.DESC) ? "無" : area.DESC.Trim();
@@ -643,6 +681,183 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             return string.IsNullOrWhiteSpace(deptPrefix) ? "單位" : deptPrefix;
         }
 
+        private List<PdfCoverSignatureInfo> ResolveCoverSignatures()
+        {
+            string deptPrefix = GetExportDeptPrefix();
+            List<dm_User> localUsers = users ?? dm_UserBUS.Instance.GetList();
+            var detailLookup = dt310_UpdateLeaveUser_detailBUS.Instance.GetList()
+                .GroupBy(r => r.IdUpdateData)
+                .ToDictionary(g => g.Key, g => g.OrderBy(x => x.IndexStep).ToList());
+
+            var latestRecord = dt310_UpdateLeaveUserBUS.Instance.GetList()
+                .Where(r => r.DataType == "EHSAssign" && !r.IsProcess && !r.IsCancel)
+                .Select(r => new
+                {
+                    Record = r,
+                    Data = TryDeserializeUpdateLeaveUserJson(r.DataJson),
+                    Details = detailLookup.ContainsKey(r.Id) ? detailLookup[r.Id] : new List<dt310_UpdateLeaveUser_detail>()
+                })
+                .Where(r => HasMatchingAreaDeptPrefix(r.Data, deptPrefix))
+                .OrderByDescending(r => GetLatestCompletedTime(r.Record, r.Details))
+                .ThenByDescending(r => r.Record.Id)
+                .FirstOrDefault();
+
+            if (latestRecord == null)
+            {
+                return BuildDefaultCoverSignatures();
+            }
+
+            return new List<PdfCoverSignatureInfo>
+            {
+                CreateCoverSignatureInfo("申請人", latestRecord.Record.CreateBy, latestRecord.Record.CreateAt, localUsers),
+                CreateCoverSignatureInfo("二級主管", latestRecord.Details.FirstOrDefault(r => r.IndexStep == 0)?.IdUser, latestRecord.Details.FirstOrDefault(r => r.IndexStep == 0)?.TimeSubmit, localUsers),
+                CreateCoverSignatureInfo("PSM專人", latestRecord.Details.FirstOrDefault(r => r.IndexStep == 1)?.IdUser, latestRecord.Details.FirstOrDefault(r => r.IndexStep == 1)?.TimeSubmit, localUsers),
+                CreateCoverSignatureInfo("一級主管", latestRecord.Details.FirstOrDefault(r => r.IndexStep == 2)?.IdUser, latestRecord.Details.FirstOrDefault(r => r.IndexStep == 2)?.TimeSubmit, localUsers),
+            };
+        }
+
+        private static UpdateLeaveUserJson TryDeserializeUpdateLeaveUserJson(string json)
+        {
+            if (string.IsNullOrWhiteSpace(json))
+            {
+                return null;
+            }
+
+            try
+            {
+                return JsonConvert.DeserializeObject<UpdateLeaveUserJson>(json);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        private static bool HasMatchingAreaDeptPrefix(UpdateLeaveUserJson data, string deptPrefix)
+        {
+            if (string.IsNullOrWhiteSpace(deptPrefix) || data?.Area5SResponsible == null || data.Area5SResponsible.Count == 0)
+            {
+                return false;
+            }
+
+            return data.Area5SResponsible.Any(r =>
+                SafeLeft(r?.Area5SResponsibleData?.DeptId, 2) == deptPrefix
+                || SafeLeft(ExtractDeptIdFromDesc(r?.Desc), 2) == deptPrefix);
+        }
+
+        private static string ExtractDeptIdFromDesc(string desc)
+        {
+            if (string.IsNullOrWhiteSpace(desc))
+            {
+                return string.Empty;
+            }
+
+            int splitIndex = desc.IndexOf('：');
+            return splitIndex > 0 ? desc.Substring(0, splitIndex).Trim() : desc.Trim();
+        }
+
+        private static DateTime GetLatestCompletedTime(dt310_UpdateLeaveUser record, List<dt310_UpdateLeaveUser_detail> details)
+        {
+            DateTime? latestTime = details?
+                .Where(r => r.TimeSubmit.HasValue)
+                .Select(r => (DateTime?)r.TimeSubmit.Value)
+                .OrderByDescending(r => r)
+                .FirstOrDefault();
+
+            return latestTime ?? record.CreateAt;
+        }
+
+        private static List<PdfCoverSignatureInfo> BuildDefaultCoverSignatures()
+        {
+            return new List<PdfCoverSignatureInfo>
+            {
+                new PdfCoverSignatureInfo { Label = "申請人" },
+                new PdfCoverSignatureInfo { Label = "二級主管" },
+                new PdfCoverSignatureInfo { Label = "PSM專人" },
+                new PdfCoverSignatureInfo { Label = "一級主管" }
+            };
+        }
+
+        private static PdfCoverSignatureInfo CreateCoverSignatureInfo(string label, string userId, DateTime? signTime, List<dm_User> localUsers)
+        {
+            dm_User user = localUsers?.FirstOrDefault(r => r.Id == userId);
+
+            return new PdfCoverSignatureInfo
+            {
+                Label = label,
+                UserId = userId ?? "",
+                Name = user?.DisplayName ?? (userId ?? ""),
+                DateText = signTime?.ToString("yyyy.MM.dd") ?? ""
+            };
+        }
+
+        private bool TryDrawCoverSignatureImage(PdfNewPage page, string userId, RectangleF imageBounds)
+        {
+            using (Image signatureImage = LoadPreferredSignatureImage(userId))
+            {
+                if (signatureImage == null)
+                {
+                    return false;
+                }
+
+                PdfImage pdfImage = PdfImage.FromImage(signatureImage);
+                float scale = Math.Min(imageBounds.Width / signatureImage.Width, imageBounds.Height / signatureImage.Height);
+                float drawWidth = signatureImage.Width * scale;
+                float drawHeight = signatureImage.Height * scale;
+                float drawX = imageBounds.X + ((imageBounds.Width - drawWidth) / 2f);
+                float drawY = imageBounds.Y + ((imageBounds.Height - drawHeight) / 2f);
+
+                page.Canvas.DrawImage(pdfImage, drawX, drawY, drawWidth, drawHeight);
+                return true;
+            }
+        }
+
+        private Image LoadPreferredSignatureImage(string userId)
+        {
+            if (string.IsNullOrWhiteSpace(userId))
+            {
+                return null;
+            }
+
+            List<dm_SignUsers> signUsers = dm_SignUsersBUS.Instance.GetListByUID(userId).ToList();
+            List<int> signIds = signUsers
+                .Select(r => r.IdSign)
+                .Distinct()
+                .ToList();
+
+            if (signIds.Count == 0)
+            {
+                return null;
+            }
+
+            List<dm_Sign> userSigns = dm_SignBUS.Instance.GetListByIdSigns(signIds)
+                .OrderBy(r => r.Prioritize)
+                .ThenBy(r => r.Id)
+                .ToList();
+
+            if (!userSigns.Any(r => r.ImgType == 0))
+            {
+                return null;
+            }
+
+            dm_Sign selectedSign = userSigns.FirstOrDefault(r => r.ImgType == 0);
+
+            if (selectedSign == null || string.IsNullOrWhiteSpace(selectedSign.ImgName))
+            {
+                return null;
+            }
+            string signPath = Path.Combine(TPConfigs.FolderSign, selectedSign.ImgName);
+            if (!File.Exists(signPath))
+            {
+                return null;
+            }
+
+            using (Bitmap image = new Bitmap(signPath))
+            {
+                return ConvertImageToWhiteBackground(image);
+            }
+        }
+
         private List<object[]> BuildAreaReportRows(int areaId)
         {
             string exportDeptPrefix = GetExportDeptPrefix();
@@ -680,7 +895,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
             dm_User user = users?.FirstOrDefault(u => u.Id == userId);
             return user != null
-                ? $"LG{user.IdDepartment}/{user.DisplayName}"
+                ? user.DisplayName
                 : userId;
         }
 
