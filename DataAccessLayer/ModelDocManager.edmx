@@ -1051,6 +1051,22 @@
           <Property Name="DeletedAt" Type="datetime2" Precision="7" />
           <Property Name="DeletedBy" Type="nvarchar" MaxLength="10" />
         </EntityType>
+        <EntityType Name="dt310_EquipmentInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DisplayNameVN" Type="nvarchar" MaxLength="255" />
+          <Property Name="DisplayNameTW" Type="nvarchar" MaxLength="255" />
+          <Property Name="DeptId" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="ManagerId" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Note" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreatedAt" Type="datetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="20" />
+          <Property Name="DeletedAt" Type="datetime" />
+          <Property Name="DeletedBy" Type="nvarchar" MaxLength="20" />
+        </EntityType>
         <EntityType Name="dt310_Function">
           <Key>
             <PropertyRef Name="Id" />
@@ -1352,6 +1368,29 @@
           <Property Name="KeyT" Type="varchar" MaxLength="32" Nullable="false" />
           <Property Name="ValueT" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBDocumentManagementSystem.dbo.vw310_EquipmentInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw310_EquipmentInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Code" />
+            <PropertyRef Name="DeptId" />
+            <PropertyRef Name="ManagerId" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DisplayNameVN" Type="nvarchar" MaxLength="255" />
+          <Property Name="DisplayNameTW" Type="nvarchar" MaxLength="255" />
+          <Property Name="DeptId" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="DeptNameTW" Type="nvarchar" MaxLength="64" />
+          <Property Name="DeptNameVN" Type="nvarchar" MaxLength="256" />
+          <Property Name="ManagerId" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="ManagerNameTW" Type="nvarchar" MaxLength="8" />
+          <Property Name="ManagerNameVN" Type="nvarchar" MaxLength="128" />
+          <Property Name="Note" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreatedAt" Type="datetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="20" />
+        </EntityType>
         <EntityContainer Name="DBDocumentManagementSystemModelStoreContainer">
           <EntitySet Name="dm_Attachment" EntityType="Self.dm_Attachment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dm_Departments" EntityType="Self.dm_Departments" Schema="dbo" store:Type="Tables" />
@@ -1446,6 +1485,7 @@
           <EntitySet Name="dt310_Area5S" EntityType="Self.dt310_Area5S" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt310_Area5SResponsible" EntityType="Self.dt310_Area5SResponsible" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt310_EHSFunction" EntityType="Self.dt310_EHSFunction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt310_EquipmentInfo" EntityType="Self.dt310_EquipmentInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt310_Function" EntityType="Self.dt310_Function" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt310_Role" EntityType="Self.dt310_Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt310_UnitEHSOrg" EntityType="Self.dt310_UnitEHSOrg" Schema="dbo" store:Type="Tables" />
@@ -1471,6 +1511,23 @@
           <EntitySet Name="sys_Log" EntityType="Self.sys_Log" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sys_NotesMail" EntityType="Self.sys_NotesMail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sys_StaticValue" EntityType="Self.sys_StaticValue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vw310_EquipmentInfo" EntityType="Self.vw310_EquipmentInfo" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw310_EquipmentInfo].[Id] AS [Id], 
+    [vw310_EquipmentInfo].[Code] AS [Code], 
+    [vw310_EquipmentInfo].[DisplayNameVN] AS [DisplayNameVN], 
+    [vw310_EquipmentInfo].[DisplayNameTW] AS [DisplayNameTW], 
+    [vw310_EquipmentInfo].[DeptId] AS [DeptId], 
+    [vw310_EquipmentInfo].[DeptNameTW] AS [DeptNameTW], 
+    [vw310_EquipmentInfo].[DeptNameVN] AS [DeptNameVN], 
+    [vw310_EquipmentInfo].[ManagerId] AS [ManagerId], 
+    [vw310_EquipmentInfo].[ManagerNameTW] AS [ManagerNameTW], 
+    [vw310_EquipmentInfo].[ManagerNameVN] AS [ManagerNameVN], 
+    [vw310_EquipmentInfo].[Note] AS [Note], 
+    [vw310_EquipmentInfo].[CreatedAt] AS [CreatedAt], 
+    [vw310_EquipmentInfo].[CreatedBy] AS [CreatedBy]
+    FROM [dbo].[vw310_EquipmentInfo] AS [vw310_EquipmentInfo]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -1595,6 +1652,8 @@
           <EntitySet Name="dt310_UpdateLeaveUser_detail" EntityType="DBDocumentManagementSystemModel.dt310_UpdateLeaveUser_detail" />
           <EntitySet Name="dt310_Area5SResponsible" EntityType="DBDocumentManagementSystemModel.dt310_Area5SResponsible" />
           <EntitySet Name="dt310_UpdateLeaveUser" EntityType="DBDocumentManagementSystemModel.dt310_UpdateLeaveUser" />
+          <EntitySet Name="dt310_EquipmentInfo" EntityType="DBDocumentManagementSystemModel.dt310_EquipmentInfo" />
+          <EntitySet Name="vw310_EquipmentInfo" EntityType="DBDocumentManagementSystemModel.vw310_EquipmentInfo" />
         </EntityContainer>
         <EntityType Name="dm_Function">
           <Key>
@@ -2942,6 +3001,43 @@
           <Property Name="CreateBy" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="CreateAt" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DataType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dt310_EquipmentInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayNameVN" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayNameTW" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DeptId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ManagerId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DeletedAt" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="vw310_EquipmentInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Code" />
+            <PropertyRef Name="DeptId" />
+            <PropertyRef Name="ManagerId" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayNameVN" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayNameTW" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DeptId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DeptNameTW" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="DeptNameVN" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="ManagerId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ManagerNameTW" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="ManagerNameVN" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -4410,6 +4506,42 @@
                 <ScalarProperty Name="IsProcess" ColumnName="IsProcess" />
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="IdUserLeave" ColumnName="IdUserLeave" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt310_EquipmentInfo">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt310_EquipmentInfo">
+              <MappingFragment StoreEntitySet="dt310_EquipmentInfo">
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+                <ScalarProperty Name="DeptId" ColumnName="DeptId" />
+                <ScalarProperty Name="DisplayNameTW" ColumnName="DisplayNameTW" />
+                <ScalarProperty Name="DisplayNameVN" ColumnName="DisplayNameVN" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw310_EquipmentInfo">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.vw310_EquipmentInfo">
+              <MappingFragment StoreEntitySet="vw310_EquipmentInfo">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="ManagerNameVN" ColumnName="ManagerNameVN" />
+                <ScalarProperty Name="ManagerNameTW" ColumnName="ManagerNameTW" />
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+                <ScalarProperty Name="DeptNameVN" ColumnName="DeptNameVN" />
+                <ScalarProperty Name="DeptNameTW" ColumnName="DeptNameTW" />
+                <ScalarProperty Name="DeptId" ColumnName="DeptId" />
+                <ScalarProperty Name="DisplayNameTW" ColumnName="DisplayNameTW" />
+                <ScalarProperty Name="DisplayNameVN" ColumnName="DisplayNameVN" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

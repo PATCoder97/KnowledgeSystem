@@ -353,6 +353,9 @@
     <Compile Include="dt310_EHSFunction.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
+    <Compile Include="dt310_EquipmentInfo.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
     <Compile Include="dt310_Function.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
@@ -446,6 +449,9 @@
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
     <Compile Include="TPConfigsDAL.cs" />
+    <Compile Include="vw310_EquipmentInfo.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="ModelDocManager.edmx">
