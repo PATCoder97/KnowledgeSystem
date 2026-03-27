@@ -464,6 +464,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                     ws.Column(8).Width  = 16;  // 職務名稱
                     ws.Column(9).Width  = 14;  // 備註
 
+                    int dataEndRow = Math.Max(2, exportRows.Count + 2);
+                    ws.Cells[2, 1, dataEndRow, totalCols].AutoFilter = true;
+
                     pck.Save();
                 }
 

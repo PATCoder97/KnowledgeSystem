@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -46,6 +47,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
         private const float PdfCoverSignatureTopOffset = 205f;
         private const float PdfCoverSignatureLineTopOffset = 58f;
         private const float PdfCoverSignatureLinePadding = 16f;
+        private const float PdfFooterPageNumberHeight = 12f;
+        private const float PdfFooterPageNumberBottomOffset = 18f;
 
         private sealed class PdfCoverSignatureInfo
         {
@@ -338,8 +341,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                     {
                         ExportAreaReportPdf(reportAreas, saveFileDialog.FileName);
                     }
-
-                    XtraMessageBox.Show($"已導出 PDF 報告：\n{saveFileDialog.FileName}", "完成", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Process.Start(saveFileDialog.FileName);
                 }
                 catch (Exception ex)
                 {
@@ -427,7 +429,31 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                     DrawTableSection(page, reportRows, sectionFont, contentFont, contentWidth, y, gridHeight);
                 }
 
+                DrawContentPageNumbers(document, smallFont);
+
                 document.SaveToFile(outputPath);
+            }
+        }
+
+        private void DrawContentPageNumbers(PdfDocument document, PdfTrueTypeFont pageNumberFont)
+        {
+            if (document == null || document.Pages.Count <= 1)
+            {
+                return;
+            }
+
+            for (int i = 1; i < document.Pages.Count; i++)
+            {
+                PdfPageBase page = document.Pages[i];
+                float pageWidth = page.Canvas.ClientSize.Width;
+                float pageHeight = page.Canvas.ClientSize.Height;
+
+                page.Canvas.DrawString(
+                    i.ToString(),
+                    pageNumberFont,
+                    PdfBrushes.Black,
+                    new RectangleF(0f, pageHeight - PdfFooterPageNumberBottomOffset, pageWidth, PdfFooterPageNumberHeight),
+                    CreateStringFormat(PdfTextAlignment.Center));
             }
         }
 
@@ -560,7 +586,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             };
 
             grid.Style.CellPadding = new PdfPaddings(3, 3, 3, 3);
-            grid.Style.CellSpacing = 0.5f;
+            grid.Style.CellSpacing = 0.2f;
             grid.Style.Font = contentFont;
 
             grid.Columns.Add(6);
@@ -573,10 +599,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             string[] headers = { "編號", "區域", "負責部門", "責任人員", "代理人", "督導主管" };
             PdfGridRow headerRow = grid.Headers.Add(1)[0];
             headerRow.Height = PdfHeaderRowHeight;
+            PdfStringFormat headerFormat = CreateStringFormat(PdfTextAlignment.Center);
             for (int i = 0; i < headers.Length; i++)
             {
                 headerRow.Cells[i].Value = headers[i];
-                headerRow.Cells[i].Style = CreateGridCellStyle(contentFont, PdfBrushes.LightGray, PdfTextAlignment.Center, true);
+                headerRow.Cells[i].Style = CreateGridCellStyle(contentFont, new PdfSolidBrush(new PdfRGBColor(245, 245, 245)), PdfTextAlignment.Center, true);
+                headerRow.Cells[i].StringFormat = headerFormat;
             }
 
             if (reportRows.Count == 0)
@@ -638,7 +666,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                 Font = font,
                 BackgroundBrush = backgroundBrush,
                 TextBrush = PdfBrushes.Black,
-                Borders = new PdfBorders { All = PdfPens.Gray },
+                Borders = new PdfBorders { All = new PdfPen(new PdfRGBColor(0, 0, 0), 0.8f) },
                 StringFormat = new PdfStringFormat
                 {
                     Alignment = alignment,
