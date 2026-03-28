@@ -1051,6 +1051,22 @@
           <Property Name="DeletedAt" Type="datetime2" Precision="7" />
           <Property Name="DeletedBy" Type="nvarchar" MaxLength="10" />
         </EntityType>
+        <EntityType Name="dt310_EquipmentInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DisplayNameVN" Type="nvarchar" MaxLength="255" />
+          <Property Name="DisplayNameTW" Type="nvarchar" MaxLength="255" />
+          <Property Name="DeptId" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="ManagerId" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Note" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreatedAt" Type="datetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="20" />
+          <Property Name="DeletedAt" Type="datetime" />
+          <Property Name="DeletedBy" Type="nvarchar" MaxLength="20" />
+        </EntityType>
         <EntityType Name="dt310_Function">
           <Key>
             <PropertyRef Name="Id" />
@@ -1235,6 +1251,122 @@
           <Property Name="TestDuration" Type="int" Nullable="false" />
           <Property Name="CycleCreate" Type="float" Nullable="false" />
         </EntityType>
+        <EntityType Name="dt313_AbnormalCatalog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="512" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="10" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt313_DepartmentSetting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdDept" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="QuarterlySampleRate" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="UpdatedBy" Type="varchar" MaxLength="10" />
+          <Property Name="UpdatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="dt313_FixedAsset">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AssetCode" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="AssetNameTW" Type="nvarchar" MaxLength="512" Nullable="false" />
+          <Property Name="AssetNameVN" Type="nvarchar" MaxLength="512" />
+          <Property Name="IdDept" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="IdManager" Type="varchar" MaxLength="10" />
+          <Property Name="AssetCategory" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="TypeName" Type="nvarchar" MaxLength="64" />
+          <Property Name="Location" Type="nvarchar" MaxLength="128" />
+          <Property Name="BrandSpec" Type="nvarchar" MaxLength="256" />
+          <Property Name="Origin" Type="nvarchar" MaxLength="128" />
+          <Property Name="AcquireDate" Type="date" />
+          <Property Name="Status" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="1024" />
+          <Property Name="LastMonthlyCheckDate" Type="datetime" />
+          <Property Name="LastQuarterlyAuditDate" Type="datetime" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="DeletedBy" Type="varchar" MaxLength="10" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="10" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="varchar" MaxLength="10" />
+          <Property Name="UpdatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="dt313_FixedAssetPhoto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FixedAssetId" Type="int" Nullable="false" />
+          <Property Name="PhotoType" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="EncryptionName" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ActualName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="UploadedBy" Type="varchar" MaxLength="10" />
+          <Property Name="UploadedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt313_InspectionBatch">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BatchName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="BatchType" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="PeriodKey" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="IdDept" Type="varchar" MaxLength="4" />
+          <Property Name="AssignedUserId" Type="varchar" MaxLength="10" />
+          <Property Name="SampleRate" Type="int" />
+          <Property Name="TargetQty" Type="int" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="512" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="10" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ClosedBy" Type="varchar" MaxLength="10" />
+          <Property Name="ClosedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="dt313_InspectionBatchAsset">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BatchId" Type="int" Nullable="false" />
+          <Property Name="FixedAssetId" Type="int" Nullable="false" />
+          <Property Name="Result" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="AbnormalId" Type="int" />
+          <Property Name="AbnormalNote" Type="nvarchar" MaxLength="1024" />
+          <Property Name="CheckedBy" Type="varchar" MaxLength="10" />
+          <Property Name="CheckedDate" Type="datetime" />
+          <Property Name="CorrectionDueDate" Type="date" />
+          <Property Name="CorrectionStatus" Type="varchar" MaxLength="16" />
+          <Property Name="CorrectionNote" Type="nvarchar" MaxLength="1024" />
+          <Property Name="ClosedBy" Type="varchar" MaxLength="10" />
+          <Property Name="ClosedDate" Type="datetime" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt313_InspectionPhoto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BatchAssetId" Type="int" Nullable="false" />
+          <Property Name="PhotoPurpose" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="EncryptionName" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ActualName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="UploadedBy" Type="varchar" MaxLength="10" />
+          <Property Name="UploadedDate" Type="datetime" Nullable="false" />
+          <Property Name="DisplayOrder" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="dt402_KPIWeb">
           <Key>
             <PropertyRef Name="Id" />
@@ -1352,6 +1484,29 @@
           <Property Name="KeyT" Type="varchar" MaxLength="32" Nullable="false" />
           <Property Name="ValueT" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DBDocumentManagementSystem.dbo.vw310_EquipmentInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw310_EquipmentInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Code" />
+            <PropertyRef Name="DeptId" />
+            <PropertyRef Name="ManagerId" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DisplayNameVN" Type="nvarchar" MaxLength="255" />
+          <Property Name="DisplayNameTW" Type="nvarchar" MaxLength="255" />
+          <Property Name="DeptId" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="DeptNameTW" Type="nvarchar" MaxLength="64" />
+          <Property Name="DeptNameVN" Type="nvarchar" MaxLength="256" />
+          <Property Name="ManagerId" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="ManagerNameTW" Type="nvarchar" MaxLength="8" />
+          <Property Name="ManagerNameVN" Type="nvarchar" MaxLength="128" />
+          <Property Name="Note" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreatedAt" Type="datetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="20" />
+        </EntityType>
         <EntityContainer Name="DBDocumentManagementSystemModelStoreContainer">
           <EntitySet Name="dm_Attachment" EntityType="Self.dm_Attachment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dm_Departments" EntityType="Self.dm_Departments" Schema="dbo" store:Type="Tables" />
@@ -1446,6 +1601,7 @@
           <EntitySet Name="dt310_Area5S" EntityType="Self.dt310_Area5S" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt310_Area5SResponsible" EntityType="Self.dt310_Area5SResponsible" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt310_EHSFunction" EntityType="Self.dt310_EHSFunction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt310_EquipmentInfo" EntityType="Self.dt310_EquipmentInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt310_Function" EntityType="Self.dt310_Function" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt310_Role" EntityType="Self.dt310_Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt310_UnitEHSOrg" EntityType="Self.dt310_UnitEHSOrg" Schema="dbo" store:Type="Tables" />
@@ -1462,6 +1618,13 @@
           <EntitySet Name="dt312_Groups" EntityType="Self.dt312_Groups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt312_Questions" EntityType="Self.dt312_Questions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt312_Setting" EntityType="Self.dt312_Setting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt313_AbnormalCatalog" EntityType="Self.dt313_AbnormalCatalog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt313_DepartmentSetting" EntityType="Self.dt313_DepartmentSetting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt313_FixedAsset" EntityType="Self.dt313_FixedAsset" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt313_FixedAssetPhoto" EntityType="Self.dt313_FixedAssetPhoto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt313_InspectionBatch" EntityType="Self.dt313_InspectionBatch" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt313_InspectionBatchAsset" EntityType="Self.dt313_InspectionBatchAsset" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dt313_InspectionPhoto" EntityType="Self.dt313_InspectionPhoto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt402_KPIWeb" EntityType="Self.dt402_KPIWeb" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt403_04_HardnessStandardLog" EntityType="Self.dt403_04_HardnessStandardLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dt403_04_StandardInfo" EntityType="Self.dt403_04_StandardInfo" Schema="dbo" store:Type="Tables" />
@@ -1471,6 +1634,23 @@
           <EntitySet Name="sys_Log" EntityType="Self.sys_Log" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sys_NotesMail" EntityType="Self.sys_NotesMail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sys_StaticValue" EntityType="Self.sys_StaticValue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vw310_EquipmentInfo" EntityType="Self.vw310_EquipmentInfo" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw310_EquipmentInfo].[Id] AS [Id], 
+    [vw310_EquipmentInfo].[Code] AS [Code], 
+    [vw310_EquipmentInfo].[DisplayNameVN] AS [DisplayNameVN], 
+    [vw310_EquipmentInfo].[DisplayNameTW] AS [DisplayNameTW], 
+    [vw310_EquipmentInfo].[DeptId] AS [DeptId], 
+    [vw310_EquipmentInfo].[DeptNameTW] AS [DeptNameTW], 
+    [vw310_EquipmentInfo].[DeptNameVN] AS [DeptNameVN], 
+    [vw310_EquipmentInfo].[ManagerId] AS [ManagerId], 
+    [vw310_EquipmentInfo].[ManagerNameTW] AS [ManagerNameTW], 
+    [vw310_EquipmentInfo].[ManagerNameVN] AS [ManagerNameVN], 
+    [vw310_EquipmentInfo].[Note] AS [Note], 
+    [vw310_EquipmentInfo].[CreatedAt] AS [CreatedAt], 
+    [vw310_EquipmentInfo].[CreatedBy] AS [CreatedBy]
+    FROM [dbo].[vw310_EquipmentInfo] AS [vw310_EquipmentInfo]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -1595,6 +1775,15 @@
           <EntitySet Name="dt310_UpdateLeaveUser_detail" EntityType="DBDocumentManagementSystemModel.dt310_UpdateLeaveUser_detail" />
           <EntitySet Name="dt310_Area5SResponsible" EntityType="DBDocumentManagementSystemModel.dt310_Area5SResponsible" />
           <EntitySet Name="dt310_UpdateLeaveUser" EntityType="DBDocumentManagementSystemModel.dt310_UpdateLeaveUser" />
+          <EntitySet Name="dt310_EquipmentInfo" EntityType="DBDocumentManagementSystemModel.dt310_EquipmentInfo" />
+          <EntitySet Name="vw310_EquipmentInfo" EntityType="DBDocumentManagementSystemModel.vw310_EquipmentInfo" />
+          <EntitySet Name="dt313_AbnormalCatalog" EntityType="DBDocumentManagementSystemModel.dt313_AbnormalCatalog" />
+          <EntitySet Name="dt313_DepartmentSetting" EntityType="DBDocumentManagementSystemModel.dt313_DepartmentSetting" />
+          <EntitySet Name="dt313_FixedAsset" EntityType="DBDocumentManagementSystemModel.dt313_FixedAsset" />
+          <EntitySet Name="dt313_FixedAssetPhoto" EntityType="DBDocumentManagementSystemModel.dt313_FixedAssetPhoto" />
+          <EntitySet Name="dt313_InspectionBatch" EntityType="DBDocumentManagementSystemModel.dt313_InspectionBatch" />
+          <EntitySet Name="dt313_InspectionBatchAsset" EntityType="DBDocumentManagementSystemModel.dt313_InspectionBatchAsset" />
+          <EntitySet Name="dt313_InspectionPhoto" EntityType="DBDocumentManagementSystemModel.dt313_InspectionPhoto" />
         </EntityContainer>
         <EntityType Name="dm_Function">
           <Key>
@@ -2942,6 +3131,159 @@
           <Property Name="CreateBy" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="CreateAt" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DataType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dt310_EquipmentInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayNameVN" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayNameTW" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DeptId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ManagerId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DeletedAt" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="vw310_EquipmentInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Code" />
+            <PropertyRef Name="DeptId" />
+            <PropertyRef Name="ManagerId" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayNameVN" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayNameTW" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DeptId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DeptNameTW" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="DeptNameVN" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="ManagerId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ManagerNameTW" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="ManagerNameVN" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="dt313_AbnormalCatalog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="Remarks" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="dt313_DepartmentSetting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdDept" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="QuarterlySampleRate" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="dt313_FixedAsset">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AssetCode" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="AssetNameTW" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="AssetNameVN" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="IdDept" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="IdManager" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="AssetCategory" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="TypeName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="BrandSpec" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Origin" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="AcquireDate" Type="DateTime" Precision="0" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="Remarks" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="LastMonthlyCheckDate" Type="DateTime" Precision="3" />
+          <Property Name="LastQuarterlyAuditDate" Type="DateTime" Precision="3" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DeletedBy" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="dt313_FixedAssetPhoto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FixedAssetId" Type="Int32" Nullable="false" />
+          <Property Name="PhotoType" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="EncryptionName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="ActualName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="UploadedBy" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UploadedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="dt313_InspectionBatch">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BatchName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="BatchType" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="PeriodKey" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="IdDept" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="AssignedUserId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="SampleRate" Type="Int32" />
+          <Property Name="TargetQty" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="Remarks" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ClosedBy" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ClosedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="dt313_InspectionBatchAsset">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BatchId" Type="Int32" Nullable="false" />
+          <Property Name="FixedAssetId" Type="Int32" Nullable="false" />
+          <Property Name="Result" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="AbnormalId" Type="Int32" />
+          <Property Name="AbnormalNote" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="CheckedBy" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CheckedDate" Type="DateTime" Precision="3" />
+          <Property Name="CorrectionDueDate" Type="DateTime" Precision="0" />
+          <Property Name="CorrectionStatus" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="CorrectionNote" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="ClosedBy" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ClosedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="dt313_InspectionPhoto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BatchAssetId" Type="Int32" Nullable="false" />
+          <Property Name="PhotoPurpose" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="EncryptionName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="ActualName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="UploadedBy" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UploadedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DisplayOrder" Type="Int32" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -4410,6 +4752,165 @@
                 <ScalarProperty Name="IsProcess" ColumnName="IsProcess" />
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="IdUserLeave" ColumnName="IdUserLeave" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt310_EquipmentInfo">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt310_EquipmentInfo">
+              <MappingFragment StoreEntitySet="dt310_EquipmentInfo">
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="DeletedAt" ColumnName="DeletedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+                <ScalarProperty Name="DeptId" ColumnName="DeptId" />
+                <ScalarProperty Name="DisplayNameTW" ColumnName="DisplayNameTW" />
+                <ScalarProperty Name="DisplayNameVN" ColumnName="DisplayNameVN" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw310_EquipmentInfo">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.vw310_EquipmentInfo">
+              <MappingFragment StoreEntitySet="vw310_EquipmentInfo">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="ManagerNameVN" ColumnName="ManagerNameVN" />
+                <ScalarProperty Name="ManagerNameTW" ColumnName="ManagerNameTW" />
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+                <ScalarProperty Name="DeptNameVN" ColumnName="DeptNameVN" />
+                <ScalarProperty Name="DeptNameTW" ColumnName="DeptNameTW" />
+                <ScalarProperty Name="DeptId" ColumnName="DeptId" />
+                <ScalarProperty Name="DisplayNameTW" ColumnName="DisplayNameTW" />
+                <ScalarProperty Name="DisplayNameVN" ColumnName="DisplayNameVN" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt313_AbnormalCatalog">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt313_AbnormalCatalog">
+              <MappingFragment StoreEntitySet="dt313_AbnormalCatalog">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt313_DepartmentSetting">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt313_DepartmentSetting">
+              <MappingFragment StoreEntitySet="dt313_DepartmentSetting">
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="QuarterlySampleRate" ColumnName="QuarterlySampleRate" />
+                <ScalarProperty Name="IdDept" ColumnName="IdDept" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt313_FixedAsset">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt313_FixedAsset">
+              <MappingFragment StoreEntitySet="dt313_FixedAsset">
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="LastQuarterlyAuditDate" ColumnName="LastQuarterlyAuditDate" />
+                <ScalarProperty Name="LastMonthlyCheckDate" ColumnName="LastMonthlyCheckDate" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="AcquireDate" ColumnName="AcquireDate" />
+                <ScalarProperty Name="Origin" ColumnName="Origin" />
+                <ScalarProperty Name="BrandSpec" ColumnName="BrandSpec" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="AssetCategory" ColumnName="AssetCategory" />
+                <ScalarProperty Name="IdManager" ColumnName="IdManager" />
+                <ScalarProperty Name="IdDept" ColumnName="IdDept" />
+                <ScalarProperty Name="AssetNameVN" ColumnName="AssetNameVN" />
+                <ScalarProperty Name="AssetNameTW" ColumnName="AssetNameTW" />
+                <ScalarProperty Name="AssetCode" ColumnName="AssetCode" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt313_FixedAssetPhoto">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt313_FixedAssetPhoto">
+              <MappingFragment StoreEntitySet="dt313_FixedAssetPhoto">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UploadedDate" ColumnName="UploadedDate" />
+                <ScalarProperty Name="UploadedBy" ColumnName="UploadedBy" />
+                <ScalarProperty Name="ActualName" ColumnName="ActualName" />
+                <ScalarProperty Name="EncryptionName" ColumnName="EncryptionName" />
+                <ScalarProperty Name="PhotoType" ColumnName="PhotoType" />
+                <ScalarProperty Name="FixedAssetId" ColumnName="FixedAssetId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt313_InspectionBatch">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt313_InspectionBatch">
+              <MappingFragment StoreEntitySet="dt313_InspectionBatch">
+                <ScalarProperty Name="ClosedDate" ColumnName="ClosedDate" />
+                <ScalarProperty Name="ClosedBy" ColumnName="ClosedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="TargetQty" ColumnName="TargetQty" />
+                <ScalarProperty Name="SampleRate" ColumnName="SampleRate" />
+                <ScalarProperty Name="AssignedUserId" ColumnName="AssignedUserId" />
+                <ScalarProperty Name="IdDept" ColumnName="IdDept" />
+                <ScalarProperty Name="PeriodKey" ColumnName="PeriodKey" />
+                <ScalarProperty Name="BatchType" ColumnName="BatchType" />
+                <ScalarProperty Name="BatchName" ColumnName="BatchName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt313_InspectionBatchAsset">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt313_InspectionBatchAsset">
+              <MappingFragment StoreEntitySet="dt313_InspectionBatchAsset">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ClosedDate" ColumnName="ClosedDate" />
+                <ScalarProperty Name="ClosedBy" ColumnName="ClosedBy" />
+                <ScalarProperty Name="CorrectionNote" ColumnName="CorrectionNote" />
+                <ScalarProperty Name="CorrectionStatus" ColumnName="CorrectionStatus" />
+                <ScalarProperty Name="CorrectionDueDate" ColumnName="CorrectionDueDate" />
+                <ScalarProperty Name="CheckedDate" ColumnName="CheckedDate" />
+                <ScalarProperty Name="CheckedBy" ColumnName="CheckedBy" />
+                <ScalarProperty Name="AbnormalNote" ColumnName="AbnormalNote" />
+                <ScalarProperty Name="AbnormalId" ColumnName="AbnormalId" />
+                <ScalarProperty Name="Result" ColumnName="Result" />
+                <ScalarProperty Name="FixedAssetId" ColumnName="FixedAssetId" />
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dt313_InspectionPhoto">
+            <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt313_InspectionPhoto">
+              <MappingFragment StoreEntitySet="dt313_InspectionPhoto">
+                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+                <ScalarProperty Name="UploadedDate" ColumnName="UploadedDate" />
+                <ScalarProperty Name="UploadedBy" ColumnName="UploadedBy" />
+                <ScalarProperty Name="ActualName" ColumnName="ActualName" />
+                <ScalarProperty Name="EncryptionName" ColumnName="EncryptionName" />
+                <ScalarProperty Name="PhotoPurpose" ColumnName="PhotoPurpose" />
+                <ScalarProperty Name="BatchAssetId" ColumnName="BatchAssetId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

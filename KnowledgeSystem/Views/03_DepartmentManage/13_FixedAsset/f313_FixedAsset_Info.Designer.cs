@@ -1,0 +1,298 @@
+namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
+{
+    partial class f313_FixedAsset_Info
+    {
+        private System.ComponentModel.IContainer components = null;
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
+            this.bar2 = new DevExpress.XtraBars.Bar();
+            this.btnEdit = new DevExpress.XtraBars.BarButtonItem();
+            this.btnDelete = new DevExpress.XtraBars.BarButtonItem();
+            this.btnConfirm = new DevExpress.XtraBars.BarButtonItem();
+            this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.memoRemarks = new DevExpress.XtraEditors.MemoEdit();
+            this.cbbStatus = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.dateAcquire = new DevExpress.XtraEditors.DateEdit();
+            this.txbOrigin = new DevExpress.XtraEditors.TextEdit();
+            this.txbBrandSpec = new DevExpress.XtraEditors.TextEdit();
+            this.txbLocation = new DevExpress.XtraEditors.TextEdit();
+            this.txbTypeName = new DevExpress.XtraEditors.TextEdit();
+            this.cbbCategory = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.cbbManager = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.cbbDept = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.txbAssetNameVN = new DevExpress.XtraEditors.TextEdit();
+            this.txbAssetNameTW = new DevExpress.XtraEditors.TextEdit();
+            this.txbAssetCode = new DevExpress.XtraEditors.TextEdit();
+            this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.lcAssetCode = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcAssetNameTW = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcAssetNameVN = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcDept = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcManager = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcCategory = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcTypeName = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcLocation = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcBrandSpec = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcOrigin = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcAcquireDate = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcStatus = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcRemarks = new DevExpress.XtraLayout.LayoutControlItem();
+            ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
+            this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.memoRemarks.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbStatus.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateAcquire.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateAcquire.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbOrigin.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbBrandSpec.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbLocation.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbTypeName.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbCategory.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbManager.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbDept.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbAssetNameVN.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbAssetNameTW.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbAssetCode.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcAssetCode)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcAssetNameTW)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcAssetNameVN)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcDept)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcManager)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcCategory)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcTypeName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcLocation)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcBrandSpec)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcOrigin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcAcquireDate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcStatus)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcRemarks)).BeginInit();
+            this.SuspendLayout();
+            this.barManagerTP.Bars.AddRange(new DevExpress.XtraBars.Bar[] { this.bar2 });
+            this.barManagerTP.DockControls.Add(this.barDockControlTop);
+            this.barManagerTP.DockControls.Add(this.barDockControlBottom);
+            this.barManagerTP.DockControls.Add(this.barDockControlLeft);
+            this.barManagerTP.DockControls.Add(this.barDockControlRight);
+            this.barManagerTP.Form = this;
+            this.barManagerTP.Items.AddRange(new DevExpress.XtraBars.BarItem[] { this.btnEdit, this.btnDelete, this.btnConfirm });
+            this.barManagerTP.MainMenu = this.bar2;
+            this.bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
+            this.bar2.OptionsBar.AllowQuickCustomization = false;
+            this.bar2.OptionsBar.UseWholeRow = true;
+            this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+                new DevExpress.XtraBars.LinkPersistInfo(this.btnEdit),
+                new DevExpress.XtraBars.LinkPersistInfo(this.btnDelete),
+                new DevExpress.XtraBars.LinkPersistInfo(this.btnConfirm)});
+            this.btnEdit.Caption = "編輯";
+            this.btnDelete.Caption = "刪除";
+            this.btnConfirm.Caption = "確認";
+            this.btnEdit.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnEdit_ItemClick);
+            this.btnDelete.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDelete_ItemClick);
+            this.btnConfirm.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnConfirm_ItemClick);
+            this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.barDockControlTop.Manager = this.barManagerTP;
+            this.barDockControlTop.Size = new System.Drawing.Size(760, 49);
+            this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.barDockControlBottom.Manager = this.barManagerTP;
+            this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
+            this.barDockControlLeft.Manager = this.barManagerTP;
+            this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
+            this.barDockControlRight.Manager = this.barManagerTP;
+            this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.layoutControl1.Controls.Add(this.txbAssetCode);
+            this.layoutControl1.Controls.Add(this.txbAssetNameTW);
+            this.layoutControl1.Controls.Add(this.txbAssetNameVN);
+            this.layoutControl1.Controls.Add(this.cbbDept);
+            this.layoutControl1.Controls.Add(this.cbbManager);
+            this.layoutControl1.Controls.Add(this.cbbCategory);
+            this.layoutControl1.Controls.Add(this.txbTypeName);
+            this.layoutControl1.Controls.Add(this.txbLocation);
+            this.layoutControl1.Controls.Add(this.txbBrandSpec);
+            this.layoutControl1.Controls.Add(this.txbOrigin);
+            this.layoutControl1.Controls.Add(this.dateAcquire);
+            this.layoutControl1.Controls.Add(this.cbbStatus);
+            this.layoutControl1.Controls.Add(this.memoRemarks);
+            this.layoutControl1.Root = this.Root;
+            this.txbAssetCode.StyleController = this.layoutControl1;
+            this.txbAssetNameTW.StyleController = this.layoutControl1;
+            this.txbAssetNameVN.StyleController = this.layoutControl1;
+            this.cbbDept.StyleController = this.layoutControl1;
+            this.cbbManager.StyleController = this.layoutControl1;
+            this.cbbCategory.StyleController = this.layoutControl1;
+            this.txbTypeName.StyleController = this.layoutControl1;
+            this.txbLocation.StyleController = this.layoutControl1;
+            this.txbBrandSpec.StyleController = this.layoutControl1;
+            this.txbOrigin.StyleController = this.layoutControl1;
+            this.dateAcquire.StyleController = this.layoutControl1;
+            this.cbbStatus.StyleController = this.layoutControl1;
+            this.memoRemarks.StyleController = this.layoutControl1;
+            this.cbbDept.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            this.cbbManager.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            this.cbbCategory.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            this.cbbStatus.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            this.dateAcquire.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            this.dateAcquire.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            this.Root.GroupBordersVisible = false;
+            this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+                this.lcAssetCode, this.lcAssetNameTW, this.lcAssetNameVN, this.lcDept, this.lcManager,
+                this.lcCategory, this.lcTypeName, this.lcLocation, this.lcBrandSpec, this.lcOrigin,
+                this.lcAcquireDate, this.lcStatus, this.lcRemarks});
+            this.Root.TextVisible = false;
+            this.Root.Size = new System.Drawing.Size(760, 480);
+            this.lcAssetCode.Control = this.txbAssetCode;
+            this.lcAssetCode.Location = new System.Drawing.Point(0, 0);
+            this.lcAssetCode.Size = new System.Drawing.Size(740, 36);
+            this.lcAssetCode.Text = "資產編號";
+            this.lcAssetNameTW.Control = this.txbAssetNameTW;
+            this.lcAssetNameTW.Location = new System.Drawing.Point(0, 36);
+            this.lcAssetNameTW.Size = new System.Drawing.Size(740, 36);
+            this.lcAssetNameTW.Text = "中文名稱";
+            this.lcAssetNameVN.Control = this.txbAssetNameVN;
+            this.lcAssetNameVN.Location = new System.Drawing.Point(0, 72);
+            this.lcAssetNameVN.Size = new System.Drawing.Size(740, 36);
+            this.lcAssetNameVN.Text = "越文名稱";
+            this.lcDept.Control = this.cbbDept;
+            this.lcDept.Location = new System.Drawing.Point(0, 108);
+            this.lcDept.Size = new System.Drawing.Size(740, 36);
+            this.lcDept.Text = "部門";
+            this.lcManager.Control = this.cbbManager;
+            this.lcManager.Location = new System.Drawing.Point(0, 144);
+            this.lcManager.Size = new System.Drawing.Size(740, 36);
+            this.lcManager.Text = "經辦";
+            this.lcCategory.Control = this.cbbCategory;
+            this.lcCategory.Location = new System.Drawing.Point(0, 180);
+            this.lcCategory.Size = new System.Drawing.Size(740, 36);
+            this.lcCategory.Text = "分類";
+            this.lcTypeName.Control = this.txbTypeName;
+            this.lcTypeName.Location = new System.Drawing.Point(0, 216);
+            this.lcTypeName.Size = new System.Drawing.Size(740, 36);
+            this.lcTypeName.Text = "類別";
+            this.lcLocation.Control = this.txbLocation;
+            this.lcLocation.Location = new System.Drawing.Point(0, 252);
+            this.lcLocation.Size = new System.Drawing.Size(740, 36);
+            this.lcLocation.Text = "位置";
+            this.lcBrandSpec.Control = this.txbBrandSpec;
+            this.lcBrandSpec.Location = new System.Drawing.Point(0, 288);
+            this.lcBrandSpec.Size = new System.Drawing.Size(740, 36);
+            this.lcBrandSpec.Text = "廠牌規格";
+            this.lcOrigin.Control = this.txbOrigin;
+            this.lcOrigin.Location = new System.Drawing.Point(0, 324);
+            this.lcOrigin.Size = new System.Drawing.Size(740, 36);
+            this.lcOrigin.Text = "產地";
+            this.lcAcquireDate.Control = this.dateAcquire;
+            this.lcAcquireDate.Location = new System.Drawing.Point(0, 360);
+            this.lcAcquireDate.Size = new System.Drawing.Size(740, 36);
+            this.lcAcquireDate.Text = "取得日期";
+            this.lcStatus.Control = this.cbbStatus;
+            this.lcStatus.Location = new System.Drawing.Point(0, 396);
+            this.lcStatus.Size = new System.Drawing.Size(740, 36);
+            this.lcStatus.Text = "狀態";
+            this.lcRemarks.Control = this.memoRemarks;
+            this.lcRemarks.Location = new System.Drawing.Point(0, 432);
+            this.lcRemarks.Size = new System.Drawing.Size(740, 28);
+            this.lcRemarks.Text = "備註";
+            this.ClientSize = new System.Drawing.Size(760, 529);
+            this.Controls.Add(this.layoutControl1);
+            this.Controls.Add(this.barDockControlLeft);
+            this.Controls.Add(this.barDockControlRight);
+            this.Controls.Add(this.barDockControlBottom);
+            this.Controls.Add(this.barDockControlTop);
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Fixed Asset";
+            this.Load += new System.EventHandler(this.f313_FixedAsset_Info_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
+            this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.memoRemarks.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbStatus.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateAcquire.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateAcquire.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbOrigin.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbBrandSpec.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbLocation.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbTypeName.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbCategory.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbManager.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbDept.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbAssetNameVN.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbAssetNameTW.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbAssetCode.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcAssetCode)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcAssetNameTW)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcAssetNameVN)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcDept)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcManager)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcCategory)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcTypeName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcLocation)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcBrandSpec)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcOrigin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcAcquireDate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcStatus)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcRemarks)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+        }
+
+        #endregion
+
+        private DevExpress.XtraBars.BarManager barManagerTP;
+        private DevExpress.XtraBars.Bar bar2;
+        private DevExpress.XtraBars.BarButtonItem btnEdit;
+        private DevExpress.XtraBars.BarButtonItem btnDelete;
+        private DevExpress.XtraBars.BarButtonItem btnConfirm;
+        private DevExpress.XtraBars.BarDockControl barDockControlTop;
+        private DevExpress.XtraBars.BarDockControl barDockControlBottom;
+        private DevExpress.XtraBars.BarDockControl barDockControlLeft;
+        private DevExpress.XtraBars.BarDockControl barDockControlRight;
+        private DevExpress.XtraLayout.LayoutControl layoutControl1;
+        private DevExpress.XtraEditors.TextEdit txbAssetCode;
+        private DevExpress.XtraEditors.TextEdit txbAssetNameTW;
+        private DevExpress.XtraEditors.TextEdit txbAssetNameVN;
+        private DevExpress.XtraEditors.ComboBoxEdit cbbDept;
+        private DevExpress.XtraEditors.ComboBoxEdit cbbManager;
+        private DevExpress.XtraEditors.ComboBoxEdit cbbCategory;
+        private DevExpress.XtraEditors.TextEdit txbTypeName;
+        private DevExpress.XtraEditors.TextEdit txbLocation;
+        private DevExpress.XtraEditors.TextEdit txbBrandSpec;
+        private DevExpress.XtraEditors.TextEdit txbOrigin;
+        private DevExpress.XtraEditors.DateEdit dateAcquire;
+        private DevExpress.XtraEditors.ComboBoxEdit cbbStatus;
+        private DevExpress.XtraEditors.MemoEdit memoRemarks;
+        private DevExpress.XtraLayout.LayoutControlGroup Root;
+        private DevExpress.XtraLayout.LayoutControlItem lcAssetCode;
+        private DevExpress.XtraLayout.LayoutControlItem lcAssetNameTW;
+        private DevExpress.XtraLayout.LayoutControlItem lcAssetNameVN;
+        private DevExpress.XtraLayout.LayoutControlItem lcDept;
+        private DevExpress.XtraLayout.LayoutControlItem lcManager;
+        private DevExpress.XtraLayout.LayoutControlItem lcCategory;
+        private DevExpress.XtraLayout.LayoutControlItem lcTypeName;
+        private DevExpress.XtraLayout.LayoutControlItem lcLocation;
+        private DevExpress.XtraLayout.LayoutControlItem lcBrandSpec;
+        private DevExpress.XtraLayout.LayoutControlItem lcOrigin;
+        private DevExpress.XtraLayout.LayoutControlItem lcAcquireDate;
+        private DevExpress.XtraLayout.LayoutControlItem lcStatus;
+        private DevExpress.XtraLayout.LayoutControlItem lcRemarks;
+    }
+}
