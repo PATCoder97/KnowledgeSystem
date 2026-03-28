@@ -19,18 +19,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
         public uc313_AbnormalTrack()
         {
             InitializeComponent();
-            InitializeIcon();
             InitializeMenuItems();
-            FixedAsset313UIHelper.ApplyUserControlStyle(this, barManagerTP, bar2);
             helper = new RefreshHelper(gvData, nameof(AbnormalGridRow.AssetCode));
             Load += uc313_AbnormalTrack_Load;
-        }
-
-        private void InitializeIcon()
-        {
-            btnHandle.ImageOptions.SvgImage = TPSvgimages.Edit;
-            btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
-            btnExportExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
         }
 
         private void InitializeMenuItems()

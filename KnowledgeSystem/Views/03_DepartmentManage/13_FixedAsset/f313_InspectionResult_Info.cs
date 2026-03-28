@@ -33,13 +33,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             allowCloseCorrection = module.IsManager313;
             existingPhotos = module.GetInspectionPhotos(row.Entity.Id);
             abnormalCatalogs = module.GetActiveAbnormalCatalogs();
-            InitializeIcon();
         }
 
         private void f313_InspectionResult_Info_Load(object sender, EventArgs e)
         {
-            FixedAsset313UIHelper.ApplyFreeFormStyle(this);
-
             Text = $"檢查結果 - {row.Asset?.AssetCode}";
             lblInfo.Text = $"批次: {row.Batch?.BatchName}\r\n資產: {row.Asset?.AssetCode} {row.Asset?.AssetNameTW}\r\n部門: {row.Asset?.IdDept}    經辦: {row.Asset?.IdManager}";
 
@@ -232,18 +229,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
         private void btnCancel_Click(object sender, EventArgs e)
         {
             Close();
-        }
-
-        private void InitializeIcon()
-        {
-            btnAddAbnormal.ImageOptions.SvgImage = TPSvgimages.Add;
-            btnViewAbnormal.ImageOptions.SvgImage = TPSvgimages.View;
-            btnRemoveAbnormal.ImageOptions.SvgImage = TPSvgimages.Remove;
-            btnAddCorrection.ImageOptions.SvgImage = TPSvgimages.Add2;
-            btnViewCorrection.ImageOptions.SvgImage = TPSvgimages.View;
-            btnRemoveCorrection.ImageOptions.SvgImage = TPSvgimages.Remove;
-            btnSave.ImageOptions.SvgImage = TPSvgimages.Confirm;
-            btnCancel.ImageOptions.SvgImage = TPSvgimages.Close;
         }
     }
 }

@@ -49,14 +49,27 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             // 
             // gvAsset
             // 
+            this.gvAsset.Appearance.FooterPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F);
+            this.gvAsset.Appearance.FooterPanel.Options.UseFont = true;
+            this.gvAsset.Appearance.FooterPanel.Options.UseTextOptions = true;
+            this.gvAsset.Appearance.FooterPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gvAsset.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 13F);
+            this.gvAsset.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
             this.gvAsset.Appearance.HeaderPanel.Options.UseFont = true;
+            this.gvAsset.Appearance.HeaderPanel.Options.UseForeColor = true;
             this.gvAsset.Appearance.HeaderPanel.Options.UseTextOptions = true;
             this.gvAsset.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gvAsset.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F);
+            this.gvAsset.Appearance.Row.ForeColor = System.Drawing.Color.Black;
             this.gvAsset.Appearance.Row.Options.UseFont = true;
+            this.gvAsset.Appearance.Row.Options.UseForeColor = true;
             this.gvAsset.GridControl = this.gcData;
             this.gvAsset.Name = "gvAsset";
+            this.gvAsset.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
+            this.gvAsset.OptionsView.ColumnAutoWidth = false;
+            this.gvAsset.OptionsView.EnableAppearanceOddRow = true;
+            this.gvAsset.OptionsView.ShowAutoFilterRow = true;
+            this.gvAsset.OptionsView.ShowGroupPanel = false;
             // 
             // gcData
             // 
@@ -81,14 +94,27 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             // 
             // gvData
             // 
+            this.gvData.Appearance.FooterPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F);
+            this.gvData.Appearance.FooterPanel.Options.UseFont = true;
+            this.gvData.Appearance.FooterPanel.Options.UseTextOptions = true;
+            this.gvData.Appearance.FooterPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gvData.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.gvData.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
             this.gvData.Appearance.HeaderPanel.Options.UseFont = true;
+            this.gvData.Appearance.HeaderPanel.Options.UseForeColor = true;
             this.gvData.Appearance.HeaderPanel.Options.UseTextOptions = true;
             this.gvData.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gvData.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F);
+            this.gvData.Appearance.Row.ForeColor = System.Drawing.Color.Black;
             this.gvData.Appearance.Row.Options.UseFont = true;
+            this.gvData.Appearance.Row.Options.UseForeColor = true;
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
+            this.gvData.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
+            this.gvData.OptionsView.ColumnAutoWidth = false;
+            this.gvData.OptionsView.EnableAppearanceOddRow = true;
+            this.gvData.OptionsView.ShowAutoFilterRow = true;
+            this.gvData.OptionsView.ShowGroupPanel = false;
             this.gvData.MasterRowExpanded += new DevExpress.XtraGrid.Views.Grid.CustomMasterRowEventHandler(this.gvData_MasterRowExpanded);
             this.gvData.MasterRowGetRelationName += new DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationNameEventHandler(this.gvData_MasterRowGetRelationName);
             this.gvData.MasterRowGetRelationCount += new DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationCountEventHandler(this.gvData_MasterRowGetRelationCount);
@@ -115,8 +141,20 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             // 
             // bar2
             // 
+            this.bar2.BarAppearance.Disabled.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.bar2.BarAppearance.Disabled.Options.UseFont = true;
+            this.bar2.BarAppearance.Hovered.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.bar2.BarAppearance.Hovered.ForeColor = System.Drawing.Color.Black;
+            this.bar2.BarAppearance.Hovered.Options.UseFont = true;
+            this.bar2.BarAppearance.Hovered.Options.UseForeColor = true;
             this.bar2.BarAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.bar2.BarAppearance.Normal.ForeColor = System.Drawing.Color.Black;
             this.bar2.BarAppearance.Normal.Options.UseFont = true;
+            this.bar2.BarAppearance.Normal.Options.UseForeColor = true;
+            this.bar2.BarAppearance.Pressed.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.bar2.BarAppearance.Pressed.ForeColor = System.Drawing.Color.Black;
+            this.bar2.BarAppearance.Pressed.Options.UseFont = true;
+            this.bar2.BarAppearance.Pressed.Options.UseForeColor = true;
             this.bar2.BarName = "Main menu";
             this.bar2.CanDockStyle = DevExpress.XtraBars.BarCanDockStyle.Top;
             this.bar2.DockCol = 0;
@@ -139,6 +177,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             // 
             this.btnCreateMonthly.Caption = "建立月檢";
             this.btnCreateMonthly.Id = 0;
+            this.btnCreateMonthly.ImageOptions.SvgImage = KnowledgeSystem.Helpers.TPSvgimages.DateAdd;
             this.btnCreateMonthly.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnCreateMonthly.Name = "btnCreateMonthly";
             this.btnCreateMonthly.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnCreateMonthly_ItemClick);
@@ -147,6 +186,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             // 
             this.btnCreateQuarterly.Caption = "建立季檢";
             this.btnCreateQuarterly.Id = 1;
+            this.btnCreateQuarterly.ImageOptions.SvgImage = KnowledgeSystem.Helpers.TPSvgimages.Schedule;
             this.btnCreateQuarterly.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnCreateQuarterly.Name = "btnCreateQuarterly";
             this.btnCreateQuarterly.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnCreateQuarterly_ItemClick);
@@ -155,6 +195,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             // 
             this.btnEditResult.Caption = "更新結果";
             this.btnEditResult.Id = 2;
+            this.btnEditResult.ImageOptions.SvgImage = KnowledgeSystem.Helpers.TPSvgimages.Edit;
             this.btnEditResult.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnEditResult.Name = "btnEditResult";
             this.btnEditResult.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnEditResult_ItemClick);
@@ -163,6 +204,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             // 
             this.btnCloseBatch.Caption = "批次結案";
             this.btnCloseBatch.Id = 3;
+            this.btnCloseBatch.ImageOptions.SvgImage = KnowledgeSystem.Helpers.TPSvgimages.Confirm;
             this.btnCloseBatch.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnCloseBatch.Name = "btnCloseBatch";
             this.btnCloseBatch.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnCloseBatch_ItemClick);
@@ -171,6 +213,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             // 
             this.btnReload.Caption = "重新整理";
             this.btnReload.Id = 4;
+            this.btnReload.ImageOptions.SvgImage = KnowledgeSystem.Helpers.TPSvgimages.Reload;
             this.btnReload.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnReload.Name = "btnReload";
             this.btnReload.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnReload_ItemClick);
@@ -179,6 +222,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             // 
             this.btnExportExcel.Caption = "匯出 Excel";
             this.btnExportExcel.Id = 5;
+            this.btnExportExcel.ImageOptions.SvgImage = KnowledgeSystem.Helpers.TPSvgimages.Excel;
             this.btnExportExcel.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnExportExcel.Name = "btnExportExcel";
             this.btnExportExcel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExportExcel_ItemClick);

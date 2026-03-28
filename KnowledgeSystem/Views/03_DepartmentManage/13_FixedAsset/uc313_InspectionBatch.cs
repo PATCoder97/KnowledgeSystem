@@ -19,21 +19,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
         public uc313_InspectionBatch()
         {
             InitializeComponent();
-            InitializeIcon();
             InitializeMenuItems();
-            FixedAsset313UIHelper.ApplyUserControlStyle(this, barManagerTP, bar2);
             helper = new RefreshHelper(gvData, nameof(BatchGridRow.BatchName));
             Load += uc313_InspectionBatch_Load;
-        }
-
-        private void InitializeIcon()
-        {
-            btnCreateMonthly.ImageOptions.SvgImage = TPSvgimages.DateAdd;
-            btnCreateQuarterly.ImageOptions.SvgImage = TPSvgimages.Schedule;
-            btnEditResult.ImageOptions.SvgImage = TPSvgimages.Edit;
-            btnCloseBatch.ImageOptions.SvgImage = TPSvgimages.Confirm;
-            btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
-            btnExportExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
         }
 
         private void InitializeMenuItems()

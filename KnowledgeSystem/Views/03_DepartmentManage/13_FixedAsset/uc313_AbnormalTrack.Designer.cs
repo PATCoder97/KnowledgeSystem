@@ -59,8 +59,20 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             // 
             // bar2
             // 
+            this.bar2.BarAppearance.Disabled.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.bar2.BarAppearance.Disabled.Options.UseFont = true;
+            this.bar2.BarAppearance.Hovered.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.bar2.BarAppearance.Hovered.ForeColor = System.Drawing.Color.Black;
+            this.bar2.BarAppearance.Hovered.Options.UseFont = true;
+            this.bar2.BarAppearance.Hovered.Options.UseForeColor = true;
             this.bar2.BarAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.bar2.BarAppearance.Normal.ForeColor = System.Drawing.Color.Black;
             this.bar2.BarAppearance.Normal.Options.UseFont = true;
+            this.bar2.BarAppearance.Normal.Options.UseForeColor = true;
+            this.bar2.BarAppearance.Pressed.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.bar2.BarAppearance.Pressed.ForeColor = System.Drawing.Color.Black;
+            this.bar2.BarAppearance.Pressed.Options.UseFont = true;
+            this.bar2.BarAppearance.Pressed.Options.UseForeColor = true;
             this.bar2.BarName = "Main menu";
             this.bar2.CanDockStyle = DevExpress.XtraBars.BarCanDockStyle.Top;
             this.bar2.DockCol = 0;
@@ -80,6 +92,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             // 
             this.btnHandle.Caption = "更新改善";
             this.btnHandle.Id = 0;
+            this.btnHandle.ImageOptions.SvgImage = KnowledgeSystem.Helpers.TPSvgimages.Edit;
             this.btnHandle.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnHandle.Name = "btnHandle";
             this.btnHandle.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnHandle_ItemClick);
@@ -88,6 +101,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             // 
             this.btnReload.Caption = "重新整理";
             this.btnReload.Id = 1;
+            this.btnReload.ImageOptions.SvgImage = KnowledgeSystem.Helpers.TPSvgimages.Reload;
             this.btnReload.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnReload.Name = "btnReload";
             this.btnReload.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnReload_ItemClick);
@@ -96,6 +110,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             // 
             this.btnExportExcel.Caption = "匯出 Excel";
             this.btnExportExcel.Id = 2;
+            this.btnExportExcel.ImageOptions.SvgImage = KnowledgeSystem.Helpers.TPSvgimages.Excel;
             this.btnExportExcel.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnExportExcel.Name = "btnExportExcel";
             this.btnExportExcel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExportExcel_ItemClick);
@@ -162,14 +177,27 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             // 
             // gvData
             // 
+            this.gvData.Appearance.FooterPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F);
+            this.gvData.Appearance.FooterPanel.Options.UseFont = true;
+            this.gvData.Appearance.FooterPanel.Options.UseTextOptions = true;
+            this.gvData.Appearance.FooterPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gvData.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.gvData.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
             this.gvData.Appearance.HeaderPanel.Options.UseFont = true;
+            this.gvData.Appearance.HeaderPanel.Options.UseForeColor = true;
             this.gvData.Appearance.HeaderPanel.Options.UseTextOptions = true;
             this.gvData.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gvData.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F);
+            this.gvData.Appearance.Row.ForeColor = System.Drawing.Color.Black;
             this.gvData.Appearance.Row.Options.UseFont = true;
+            this.gvData.Appearance.Row.Options.UseForeColor = true;
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
+            this.gvData.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
+            this.gvData.OptionsView.ColumnAutoWidth = false;
+            this.gvData.OptionsView.EnableAppearanceOddRow = true;
+            this.gvData.OptionsView.ShowAutoFilterRow = true;
+            this.gvData.OptionsView.ShowGroupPanel = false;
             // 
             // Root
             // 

@@ -20,19 +20,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
         public uc313_Setting()
         {
             InitializeComponent();
-            InitializeIcon();
             InitializeMenuItems();
-            FixedAsset313UIHelper.ApplyUserControlStyle(this, barManagerTP, bar2);
             Load += uc313_Setting_Load;
-        }
-
-        private void InitializeIcon()
-        {
-            btnDeptAdd.ImageOptions.SvgImage = TPSvgimages.Add;
-            btnDeptEdit.ImageOptions.SvgImage = TPSvgimages.Edit;
-            btnCatalogAdd.ImageOptions.SvgImage = TPSvgimages.Add2;
-            btnCatalogEdit.ImageOptions.SvgImage = TPSvgimages.Edit;
-            btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
         }
 
         private void InitializeMenuItems()

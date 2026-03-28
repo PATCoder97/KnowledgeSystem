@@ -1771,6 +1771,9 @@
     <EmbeddedResource Include="Views\03_DepartmentManage\13_FixedAsset\f313_BatchCreate.resx">
       <DependentUpon>f313_BatchCreate.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\13_FixedAsset\f313_InspectionResult_Info.resx">
+      <DependentUpon>f313_InspectionResult_Info.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\13_FixedAsset\uc313_FixedAssetMain.resx">
       <DependentUpon>uc313_FixedAssetMain.cs</DependentUpon>
     </EmbeddedResource>

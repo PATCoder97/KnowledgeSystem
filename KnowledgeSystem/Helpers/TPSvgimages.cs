@@ -1,75 +1,163 @@
-﻿using DevExpress.Utils.Svg;
+using DevExpress.Utils.Svg;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KnowledgeSystem.Helpers
 {
     public class TPSvgimages
     {
-        public static string StartupPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-        public static string ImagesPath = Path.Combine(StartupPath, "Images");
+        public static readonly string StartupPath = AppDomain.CurrentDomain.BaseDirectory;
+        public static readonly string ImagesPath = ResolveImagesPath();
 
-        public static Image Background = Image.FromFile(Path.Combine(ImagesPath, "background.jpg"));
-        public static Image NoImage = Image.FromFile(Path.Combine(ImagesPath, "no-image.png"));
-        public static Image SplashScreen = Image.FromFile(Path.Combine(ImagesPath, "SplashScreen.png"));
+        public static readonly Image Background = LoadImage("background.jpg");
+        public static readonly Image NoImage = LoadImage("no-image.png");
+        public static readonly Image SplashScreen = LoadImage("SplashScreen.png");
 
-        public static SvgImage CheckedRadio = SvgImage.FromFile(Path.Combine(ImagesPath, "checked_radio_button.svg"));
-        public static SvgImage UncheckedRadio = SvgImage.FromFile(Path.Combine(ImagesPath, "unchecked_radio_button.svg"));
-        public static SvgImage Add = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_add.svg"));
-        public static SvgImage Add2 = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_plus.svg"));
-        public static SvgImage Edit = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_edit.svg"));
-        public static SvgImage Reload = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_reload.svg"));
-        public static SvgImage Remove = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_remove.svg"));
-        public static SvgImage Cancel = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_cancel.svg"));
-        public static SvgImage Confirm = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_ok.svg"));
-        public static SvgImage AddUserGroup = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_add_User_Group.svg"));
-        public static SvgImage Approval = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_signature.svg"));
-        public static SvgImage EmailSend = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_email_send.svg"));
-        public static SvgImage Progress = SvgImage.FromFile(Path.Combine(ImagesPath, "StepProcess.svg"));
-        public static SvgImage Close = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_close.svg"));
-        public static SvgImage Search = SvgImage.FromFile(Path.Combine(ImagesPath, "Search_more.svg"));
-        public static SvgImage UploadFile = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_upload_to_ftp.svg"));
-        public static SvgImage Excel = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_excel.svg"));
-        public static SvgImage Suspension = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_unfriend.svg"));
-        public static SvgImage Transfer = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_exchange.svg"));
-        public static SvgImage Resign = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_denied.svg"));
-        public static SvgImage Conferred = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_change_user.svg"));
-        public static SvgImage UpLevel = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_uplevel.svg"));
-        public static SvgImage PersonnelChanges = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_personnel_changes.svg"));
-        public static SvgImage Num1 = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_circled_1.svg"));
-        public static SvgImage Num2 = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_circled_2.svg"));
-        public static SvgImage Num3 = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_circled_3.svg"));
-        public static SvgImage Num4 = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_circled_4.svg"));
-        public static SvgImage Num5 = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_circled_5.svg"));
-        public static SvgImage Num6 = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_circled_6.svg"));
-        public static SvgImage Filter = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_filter.svg"));
-        public static SvgImage View = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_view.svg"));
-        public static SvgImage Info = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_info.svg"));
-        public static SvgImage Stamp = SvgImage.FromFile(Path.Combine(ImagesPath, "Approval.svg"));
-        public static SvgImage BorrVehicle = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_borr_vehicle.svg"));
-        public static SvgImage Attach = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_attach.svg"));
-        public static SvgImage Copy = SvgImage.FromFile(Path.Combine(ImagesPath, "icons_transfer.svg"));
-        public static SvgImage Money = SvgImage.FromFile(Path.Combine(ImagesPath, "icons8_stack_of_money.svg"));
-        public static SvgImage Start = SvgImage.FromFile(Path.Combine(ImagesPath, "icons8_time.svg"));
-        public static SvgImage Finish = SvgImage.FromFile(Path.Combine(ImagesPath, "icons8_finish_flag.svg"));
-        public static SvgImage Print = SvgImage.FromFile(Path.Combine(ImagesPath, "icons8_print.svg"));
-        public static SvgImage Learn = SvgImage.FromFile(Path.Combine(ImagesPath, "icons8_learn.svg"));
-        public static SvgImage Disable = SvgImage.FromFile(Path.Combine(ImagesPath, "icons8_disable.svg"));
-        public static SvgImage GgSheet = SvgImage.FromFile(Path.Combine(ImagesPath, "icons8_google_sheets.svg"));
-        public static SvgImage GgForm = SvgImage.FromFile(Path.Combine(ImagesPath, "icons8_google_forms_new_logo.svg"));
-        public static SvgImage Word = SvgImage.FromFile(Path.Combine(ImagesPath, "icons8_word.svg"));
-        public static SvgImage Gears = SvgImage.FromFile(Path.Combine(ImagesPath, "icons8_gears.svg"));
-        public static SvgImage Robot = SvgImage.FromFile(Path.Combine(ImagesPath, "icons8_robot.svg"));
-        public static SvgImage Dept = SvgImage.FromFile(Path.Combine(ImagesPath, "icons8_department.svg"));
-        public static SvgImage DateAdd = SvgImage.FromFile(Path.Combine(ImagesPath, "icons8_calendar_plus_1.svg"));
-        public static SvgImage Schedule = SvgImage.FromFile(Path.Combine(ImagesPath, "icons8_schedule.svg"));
-        public static SvgImage GasStation = SvgImage.FromFile(Path.Combine(ImagesPath, "icons8_gas_station.svg"));
-        public static SvgImage Bot = SvgImage.FromFile(Path.Combine(ImagesPath, "icons8_bot.svg"));
+        public static readonly SvgImage CheckedRadio = LoadSvg("checked_radio_button.svg");
+        public static readonly SvgImage UncheckedRadio = LoadSvg("unchecked_radio_button.svg");
+        public static readonly SvgImage Add = LoadSvg("icons_add.svg");
+        public static readonly SvgImage Add2 = LoadSvg("icons_plus.svg");
+        public static readonly SvgImage Edit = LoadSvg("icons_edit.svg");
+        public static readonly SvgImage Reload = LoadSvg("icons_reload.svg");
+        public static readonly SvgImage Remove = LoadSvg("icons_remove.svg");
+        public static readonly SvgImage Cancel = LoadSvg("icons_cancel.svg");
+        public static readonly SvgImage Confirm = LoadSvg("icons_ok.svg");
+        public static readonly SvgImage AddUserGroup = LoadSvg("icons_add_User_Group.svg");
+        public static readonly SvgImage Approval = LoadSvg("icons_signature.svg");
+        public static readonly SvgImage EmailSend = LoadSvg("icons_email_send.svg");
+        public static readonly SvgImage Progress = LoadSvg("StepProcess.svg");
+        public static readonly SvgImage Close = LoadSvg("icons_close.svg");
+        public static readonly SvgImage Search = LoadSvg("Search_more.svg");
+        public static readonly SvgImage UploadFile = LoadSvg("icons_upload_to_ftp.svg");
+        public static readonly SvgImage Excel = LoadSvg("icons_excel.svg");
+        public static readonly SvgImage Suspension = LoadSvg("icons_unfriend.svg");
+        public static readonly SvgImage Transfer = LoadSvg("icons_exchange.svg");
+        public static readonly SvgImage Resign = LoadSvg("icons_denied.svg");
+        public static readonly SvgImage Conferred = LoadSvg("icons_change_user.svg");
+        public static readonly SvgImage UpLevel = LoadSvg("icons_uplevel.svg");
+        public static readonly SvgImage PersonnelChanges = LoadSvg("icons_personnel_changes.svg");
+        public static readonly SvgImage Num1 = LoadSvg("icons_circled_1.svg");
+        public static readonly SvgImage Num2 = LoadSvg("icons_circled_2.svg");
+        public static readonly SvgImage Num3 = LoadSvg("icons_circled_3.svg");
+        public static readonly SvgImage Num4 = LoadSvg("icons_circled_4.svg");
+        public static readonly SvgImage Num5 = LoadSvg("icons_circled_5.svg");
+        public static readonly SvgImage Num6 = LoadSvg("icons_circled_6.svg");
+        public static readonly SvgImage Filter = LoadSvg("icons_filter.svg");
+        public static readonly SvgImage View = LoadSvg("icons_view.svg");
+        public static readonly SvgImage Info = LoadSvg("icons_info.svg");
+        public static readonly SvgImage Stamp = LoadSvg("Approval.svg");
+        public static readonly SvgImage BorrVehicle = LoadSvg("icons_borr_vehicle.svg");
+        public static readonly SvgImage Attach = LoadSvg("icons_attach.svg");
+        public static readonly SvgImage Copy = LoadSvg("icons_transfer.svg");
+        public static readonly SvgImage Money = LoadSvg("icons8_stack_of_money.svg");
+        public static readonly SvgImage Start = LoadSvg("icons8_time.svg");
+        public static readonly SvgImage Finish = LoadSvg("icons8_finish_flag.svg");
+        public static readonly SvgImage Print = LoadSvg("icons8_print.svg");
+        public static readonly SvgImage Learn = LoadSvg("icons8_learn.svg");
+        public static readonly SvgImage Disable = LoadSvg("icons8_disable.svg");
+        public static readonly SvgImage GgSheet = LoadSvg("icons8_google_sheets.svg");
+        public static readonly SvgImage GgForm = LoadSvg("icons8_google_forms_new_logo.svg");
+        public static readonly SvgImage Word = LoadSvg("icons8_word.svg");
+        public static readonly SvgImage Gears = LoadSvg("icons8_gears.svg");
+        public static readonly SvgImage Robot = LoadSvg("icons8_robot.svg");
+        public static readonly SvgImage Dept = LoadSvg("icons8_department.svg");
+        public static readonly SvgImage DateAdd = LoadSvg("icons8_calendar_plus_1.svg");
+        public static readonly SvgImage Schedule = LoadSvg("icons8_schedule.svg");
+        public static readonly SvgImage GasStation = LoadSvg("icons8_gas_station.svg");
+        public static readonly SvgImage Bot = LoadSvg("icons8_bot.svg");
+
+        private static string ResolveImagesPath()
+        {
+            foreach (string root in GetCandidateRoots())
+            {
+                foreach (string candidate in GetCandidateImageFolders(root))
+                {
+                    if (Directory.Exists(candidate) && File.Exists(Path.Combine(candidate, "icons_add.svg")))
+                    {
+                        return candidate;
+                    }
+                }
+            }
+
+            return Path.Combine(StartupPath, "Images");
+        }
+
+        private static IEnumerable<string> GetCandidateRoots()
+        {
+            var roots = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            AddRoot(roots, AppDomain.CurrentDomain.BaseDirectory);
+            AddRoot(roots, Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
+            AddRoot(roots, Environment.CurrentDirectory);
+            return roots;
+        }
+
+        private static void AddRoot(HashSet<string> roots, string root)
+        {
+            if (!string.IsNullOrWhiteSpace(root) && Directory.Exists(root))
+            {
+                roots.Add(root);
+            }
+        }
+
+        private static IEnumerable<string> GetCandidateImageFolders(string root)
+        {
+            string current = root;
+            while (!string.IsNullOrWhiteSpace(current) && Directory.Exists(current))
+            {
+                yield return Path.Combine(current, "Images");
+                yield return Path.Combine(current, "KnowledgeSystem", "Images");
+
+                DirectoryInfo parent = Directory.GetParent(current);
+                current = parent?.FullName;
+            }
+        }
+
+        private static Image LoadImage(string fileName)
+        {
+            string filePath = Path.Combine(ImagesPath, fileName);
+            try
+            {
+                if (File.Exists(filePath))
+                {
+                    using (var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                    using (var image = Image.FromStream(stream))
+                    {
+                        return (Image)image.Clone();
+                    }
+                }
+            }
+            catch
+            {
+            }
+
+            return CreatePlaceholderImage();
+        }
+
+        private static SvgImage LoadSvg(string fileName)
+        {
+            string filePath = Path.Combine(ImagesPath, fileName);
+            try
+            {
+                if (File.Exists(filePath))
+                {
+                    return SvgImage.FromFile(filePath);
+                }
+            }
+            catch
+            {
+            }
+
+            return null;
+        }
+
+        private static Image CreatePlaceholderImage()
+        {
+            var bitmap = new Bitmap(1, 1);
+            bitmap.MakeTransparent();
+            return bitmap;
+        }
     }
 }

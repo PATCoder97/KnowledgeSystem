@@ -25,17 +25,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
         public f313_FixedAsset_Info(FixedAsset313Context module, dt313_FixedAsset source)
         {
             InitializeComponent();
-            InitializeIcon();
             this.module = module;
             asset = source;
             InitializeDynamicBarItems();
-        }
-
-        private void InitializeIcon()
-        {
-            btnEdit.ImageOptions.SvgImage = TPSvgimages.Edit;
-            btnDelete.ImageOptions.SvgImage = TPSvgimages.Remove;
-            btnConfirm.ImageOptions.SvgImage = TPSvgimages.Confirm;
         }
 
         private void InitializeDynamicBarItems()
@@ -66,15 +58,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
                 lcTypeName, lcLocation, lcBrandSpec, lcOrigin, lcAcquireDate, lcStatus, lcRemarks
             };
             lcImpControls = new List<LayoutControlItem> { lcAssetCode, lcAssetNameTW, lcDept, lcCategory, lcStatus };
-
-            foreach (var item in lcControls)
-            {
-                item.AllowHtmlStringInCaption = true;
-                item.Text = $"<color=#000000>{item.Text}</color>";
-            }
-
-            FixedAsset313UIHelper.ApplyFormStyle(this, barManagerTP, bar2);
-            FixedAsset313UIHelper.ApplyLayoutItemCaptions(lcControls.ToArray());
 
             cbbDept.Properties.Items.AddRange(module.GetDepartmentLookupItems(true).ToArray());
             cbbManager.Properties.Items.AddRange(module.GetUserLookupItems(true).ToArray());
@@ -204,12 +187,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
                         : DevExpress.XtraBars.BarItemVisibility.Never;
                     EnabledController(false);
                     break;
-            }
-
-            foreach (var item in lcControls)
-            {
-                string colorHex = item.Control.Enabled ? "000000" : "000000";
-                item.Text = item.Text.Replace("000000", colorHex);
             }
 
             foreach (var item in lcImpControls)

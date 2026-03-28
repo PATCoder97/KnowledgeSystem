@@ -28,7 +28,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
                 CreatedBy = TPConfigs.LoginUser.Id,
                 CreatedDate = DateTime.Now
             };
-            InitializeIcon();
             InitializeDynamicBarItems();
         }
 
@@ -41,15 +40,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
 
             lcControls = new List<LayoutControlItem> { lcCode, lcName, lcSort, lcActive, lcRemarks };
             lcImpControls = new List<LayoutControlItem> { lcCode, lcName };
-
-            foreach (var item in lcControls)
-            {
-                item.AllowHtmlStringInCaption = true;
-                item.Text = $"<color=#000000>{item.Text}</color>";
-            }
-
-            FixedAsset313UIHelper.ApplyFormStyle(this, barManagerTP, bar2);
-            FixedAsset313UIHelper.ApplyLayoutItemCaptions(lcControls.ToArray());
 
             txbCode.EditValue = catalog.Code;
             txbName.EditValue = catalog.DisplayName;
@@ -105,11 +95,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
 
             DialogResult = System.Windows.Forms.DialogResult.OK;
             Close();
-        }
-
-        private void InitializeIcon()
-        {
-            btnConfirm.ImageOptions.SvgImage = TPSvgimages.Confirm;
         }
 
         private void InitializeDynamicBarItems()

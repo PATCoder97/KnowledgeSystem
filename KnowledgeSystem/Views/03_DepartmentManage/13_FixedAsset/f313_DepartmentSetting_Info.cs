@@ -26,7 +26,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             InitializeComponent();
             this.module = module;
             this.setting = setting ?? new dt313_DepartmentSetting();
-            InitializeIcon();
             InitializeDynamicBarItems();
         }
 
@@ -39,15 +38,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
 
             lcControls = new List<LayoutControlItem> { lcDept, lcRate, lcActive };
             lcImpControls = new List<LayoutControlItem> { lcDept, lcRate };
-
-            foreach (var item in lcControls)
-            {
-                item.AllowHtmlStringInCaption = true;
-                item.Text = $"<color=#000000>{item.Text}</color>";
-            }
-
-            FixedAsset313UIHelper.ApplyFormStyle(this, barManagerTP, bar2);
-            FixedAsset313UIHelper.ApplyLayoutItemCaptions(lcControls.ToArray());
 
             cbbDept.Properties.Items.AddRange(module.GetDepartmentLookupItems(true).ToArray());
             cbbDept.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
@@ -121,11 +111,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
 
             DialogResult = System.Windows.Forms.DialogResult.OK;
             Close();
-        }
-
-        private void InitializeIcon()
-        {
-            btnConfirm.ImageOptions.SvgImage = TPSvgimages.Confirm;
         }
 
         private void InitializeDynamicBarItems()

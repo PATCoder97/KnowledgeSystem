@@ -21,22 +21,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
         public uc313_FixedAssetMain()
         {
             InitializeComponent();
-            InitializeIcon();
             InitializeMenuItems();
-            FixedAsset313UIHelper.ApplyUserControlStyle(this, barManagerTP, bar2);
             helper = new RefreshHelper(gvData, nameof(AssetGridRow.AssetCode));
             Load += uc313_FixedAssetMain_Load;
-        }
-
-        private void InitializeIcon()
-        {
-            btnAdd.ImageOptions.SvgImage = TPSvgimages.Add;
-            btnEdit.ImageOptions.SvgImage = TPSvgimages.Edit;
-            btnDelete.ImageOptions.SvgImage = TPSvgimages.Remove;
-            btnPhotos.ImageOptions.SvgImage = TPSvgimages.View;
-            btnImportExcel.ImageOptions.SvgImage = TPSvgimages.UploadFile;
-            btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
-            btnExportExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
         }
 
         private void InitializeMenuItems()

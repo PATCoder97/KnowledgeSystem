@@ -20,12 +20,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             InitializeComponent();
             this.module = module;
             this.asset = asset;
-            InitializeIcon();
         }
 
         private void f313_AssetPhoto_Info_Load(object sender, EventArgs e)
         {
-            FixedAsset313UIHelper.ApplyFreeFormStyle(this);
             Text = $"照片管理 - {asset.AssetCode}";
             ReloadPhotos();
         }
@@ -110,20 +108,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
         {
             DialogResult = hasChanged ? DialogResult.OK : DialogResult.Cancel;
             Close();
-        }
-
-        private void InitializeIcon()
-        {
-            btnUploadCloseUp.ImageOptions.SvgImage = TPSvgimages.UploadFile;
-            btnViewCloseUp.ImageOptions.SvgImage = TPSvgimages.View;
-            btnDisableCloseUp.ImageOptions.SvgImage = TPSvgimages.Remove;
-            btnUploadOverview.ImageOptions.SvgImage = TPSvgimages.UploadFile;
-            btnViewOverview.ImageOptions.SvgImage = TPSvgimages.View;
-            btnDisableOverview.ImageOptions.SvgImage = TPSvgimages.Remove;
-            btnUploadInUse.ImageOptions.SvgImage = TPSvgimages.UploadFile;
-            btnViewInUse.ImageOptions.SvgImage = TPSvgimages.View;
-            btnDisableInUse.ImageOptions.SvgImage = TPSvgimages.Remove;
-            btnClose.ImageOptions.SvgImage = TPSvgimages.Confirm;
         }
     }
 }

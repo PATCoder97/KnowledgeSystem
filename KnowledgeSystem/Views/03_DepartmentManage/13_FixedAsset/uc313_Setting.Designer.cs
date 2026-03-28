@@ -72,8 +72,20 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             // 
             // bar2
             // 
+            this.bar2.BarAppearance.Disabled.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.bar2.BarAppearance.Disabled.Options.UseFont = true;
+            this.bar2.BarAppearance.Hovered.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.bar2.BarAppearance.Hovered.ForeColor = System.Drawing.Color.Black;
+            this.bar2.BarAppearance.Hovered.Options.UseFont = true;
+            this.bar2.BarAppearance.Hovered.Options.UseForeColor = true;
             this.bar2.BarAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.bar2.BarAppearance.Normal.ForeColor = System.Drawing.Color.Black;
             this.bar2.BarAppearance.Normal.Options.UseFont = true;
+            this.bar2.BarAppearance.Normal.Options.UseForeColor = true;
+            this.bar2.BarAppearance.Pressed.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.bar2.BarAppearance.Pressed.ForeColor = System.Drawing.Color.Black;
+            this.bar2.BarAppearance.Pressed.Options.UseFont = true;
+            this.bar2.BarAppearance.Pressed.Options.UseForeColor = true;
             this.bar2.BarName = "Main menu";
             this.bar2.CanDockStyle = DevExpress.XtraBars.BarCanDockStyle.Top;
             this.bar2.DockCol = 0;
@@ -95,6 +107,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             // 
             this.btnDeptAdd.Caption = "新增部門設定";
             this.btnDeptAdd.Id = 0;
+            this.btnDeptAdd.ImageOptions.SvgImage = KnowledgeSystem.Helpers.TPSvgimages.Add;
             this.btnDeptAdd.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnDeptAdd.Name = "btnDeptAdd";
             this.btnDeptAdd.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDeptAdd_ItemClick);
@@ -103,6 +116,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             // 
             this.btnDeptEdit.Caption = "編輯部門設定";
             this.btnDeptEdit.Id = 1;
+            this.btnDeptEdit.ImageOptions.SvgImage = KnowledgeSystem.Helpers.TPSvgimages.Edit;
             this.btnDeptEdit.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnDeptEdit.Name = "btnDeptEdit";
             this.btnDeptEdit.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDeptEdit_ItemClick);
@@ -111,6 +125,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             // 
             this.btnCatalogAdd.Caption = "新增異常項目";
             this.btnCatalogAdd.Id = 2;
+            this.btnCatalogAdd.ImageOptions.SvgImage = KnowledgeSystem.Helpers.TPSvgimages.Add2;
             this.btnCatalogAdd.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnCatalogAdd.Name = "btnCatalogAdd";
             this.btnCatalogAdd.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnCatalogAdd_ItemClick);
@@ -119,6 +134,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             // 
             this.btnCatalogEdit.Caption = "編輯異常項目";
             this.btnCatalogEdit.Id = 3;
+            this.btnCatalogEdit.ImageOptions.SvgImage = KnowledgeSystem.Helpers.TPSvgimages.Edit;
             this.btnCatalogEdit.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnCatalogEdit.Name = "btnCatalogEdit";
             this.btnCatalogEdit.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnCatalogEdit_ItemClick);
@@ -127,6 +143,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             // 
             this.btnReload.Caption = "重新整理";
             this.btnReload.Id = 4;
+            this.btnReload.ImageOptions.SvgImage = KnowledgeSystem.Helpers.TPSvgimages.Reload;
             this.btnReload.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnReload.Name = "btnReload";
             this.btnReload.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnReload_ItemClick);
@@ -205,14 +222,27 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             // 
             // gvDept
             // 
+            this.gvDept.Appearance.FooterPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F);
+            this.gvDept.Appearance.FooterPanel.Options.UseFont = true;
+            this.gvDept.Appearance.FooterPanel.Options.UseTextOptions = true;
+            this.gvDept.Appearance.FooterPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gvDept.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.gvDept.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
             this.gvDept.Appearance.HeaderPanel.Options.UseFont = true;
+            this.gvDept.Appearance.HeaderPanel.Options.UseForeColor = true;
             this.gvDept.Appearance.HeaderPanel.Options.UseTextOptions = true;
             this.gvDept.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gvDept.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F);
+            this.gvDept.Appearance.Row.ForeColor = System.Drawing.Color.Black;
             this.gvDept.Appearance.Row.Options.UseFont = true;
+            this.gvDept.Appearance.Row.Options.UseForeColor = true;
             this.gvDept.GridControl = this.gcDept;
             this.gvDept.Name = "gvDept";
+            this.gvDept.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
+            this.gvDept.OptionsView.ColumnAutoWidth = false;
+            this.gvDept.OptionsView.EnableAppearanceOddRow = true;
+            this.gvDept.OptionsView.ShowAutoFilterRow = true;
+            this.gvDept.OptionsView.ShowGroupPanel = false;
             // 
             // gcCatalog
             // 
@@ -227,14 +257,27 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             // 
             // gvCatalog
             // 
+            this.gvCatalog.Appearance.FooterPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F);
+            this.gvCatalog.Appearance.FooterPanel.Options.UseFont = true;
+            this.gvCatalog.Appearance.FooterPanel.Options.UseTextOptions = true;
+            this.gvCatalog.Appearance.FooterPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gvCatalog.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.gvCatalog.Appearance.HeaderPanel.ForeColor = System.Drawing.Color.Black;
             this.gvCatalog.Appearance.HeaderPanel.Options.UseFont = true;
+            this.gvCatalog.Appearance.HeaderPanel.Options.UseForeColor = true;
             this.gvCatalog.Appearance.HeaderPanel.Options.UseTextOptions = true;
             this.gvCatalog.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gvCatalog.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F);
+            this.gvCatalog.Appearance.Row.ForeColor = System.Drawing.Color.Black;
             this.gvCatalog.Appearance.Row.Options.UseFont = true;
+            this.gvCatalog.Appearance.Row.Options.UseForeColor = true;
             this.gvCatalog.GridControl = this.gcCatalog;
             this.gvCatalog.Name = "gvCatalog";
+            this.gvCatalog.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
+            this.gvCatalog.OptionsView.ColumnAutoWidth = false;
+            this.gvCatalog.OptionsView.EnableAppearanceOddRow = true;
+            this.gvCatalog.OptionsView.ShowAutoFilterRow = true;
+            this.gvCatalog.OptionsView.ShowGroupPanel = false;
             // 
             // Root
             // 
