@@ -163,6 +163,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             int groupId = dm_GroupBUS.Instance.GetItemByName($"安衛環7")?.Id ?? -1;
             isEHSAdmin = userGroups.Any(r => r.IdGroup == groupId);
 
+            if (!isEHSAdmin)
+            {
+                btnAdd.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            }
+
             LoadData();
 
             treeFunctions.DataSource = sourceEHSFunc;
@@ -186,6 +191,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
         private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if (!isEHSAdmin)
+            {
+                return;
+            }
+
             f310_EHSFunc_Info finfo = new f310_EHSFunc_Info()
             {
                 eventInfo = EventFormInfo.Create,
@@ -234,13 +244,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                 var row = treeList.GetDataRecordByNode(node) as EHSFuncCustom;
                 if (row == null || !row.IdData.HasValue)
                     return;
-
-                if (!isEHSAdmin)
-                {
-                    int groupId = dm_GroupBUS.Instance.GetItemByName($"安衛環{row.DeptId}")?.Id ?? -1;
-                    if (!userGroups.Any(r => r.IdGroup == groupId))
-                        return;
-                }
 
                 using (var finfo = new f310_EHSFunc_Info
                 {
@@ -409,6 +412,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                     ws.Column(7).Width  = 10;  // 人員名稱
                     ws.Column(8).Width  = 18;  // 類別
                     ws.Column(9).Width  = 14;  // 備註
+
+                    int dataEndRow = Math.Max(2, exportRows.Count + 2);
+                    ws.Cells[2, 1, dataEndRow, totalCols].AutoFilter = true;
 
                     pck.Save();
                 }

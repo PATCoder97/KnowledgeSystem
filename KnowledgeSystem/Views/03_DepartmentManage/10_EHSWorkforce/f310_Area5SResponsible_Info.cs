@@ -99,6 +99,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
         private void ItemRemoveItem_Click(object sender, EventArgs e)
         {
+            if (!isEHSAdmin)
+            {
+                return;
+            }
+
             DXMenuItem item = sender as DXMenuItem;
             if (item == null) return;
 
@@ -212,8 +217,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
             if (!isEHSAdmin)
             {
+                btnConfirm.Visibility = BarItemVisibility.Never;
                 btnEdit.Visibility = BarItemVisibility.Never;
                 btnDelete.Visibility = BarItemVisibility.Never;
+                btnEditResponsibility.Visibility = BarItemVisibility.Never;
+                btnConfirmResponsibility.Visibility = BarItemVisibility.Never;
+                EnabledController(false);
+                gvData.ReadOnlyGridView();
 
                 gvData.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
                 gvData.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.None;
@@ -244,12 +254,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             userGroups = dm_GroupUserBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id);
             var groupEHSs = dm_GroupBUS.Instance.GetListContainName("安衛環");
             var ehsAdminGroup = groupEHSs.FirstOrDefault(g => g.DisplayName.Trim() == "安衛環7");
-            bool isEHSAdmin = ehsAdminGroup != null && userGroups.Any(gu => gu.IdGroup == ehsAdminGroup.Id);
-
-            var deptByGroups = groupEHSs
-                .Where(g => userGroups.Any(gu => gu.IdGroup == g.Id))
-                .Select(g => g.DisplayName.Replace("安衛環", "").Trim())
-                .ToList();
+            isEHSAdmin = ehsAdminGroup != null && userGroups.Any(gu => gu.IdGroup == ehsAdminGroup.Id);
 
             lcControls = new List<LayoutControlItem>() { lcArea, lcDesc };
             lcImpControls = new List<LayoutControlItem>() { lcArea };
@@ -259,7 +264,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                 item.Text = $"<color=#000000>{item.Text}</color>";
             }
 
-            var usrs = dm_UserBUS.Instance.GetList().Where(r => r.Status == 0 && (isEHSAdmin || deptByGroups.Contains(r.IdDepartment)))
+            var usrs = dm_UserBUS.Instance.GetList().Where(r => r.Status == 0)
                 .Select(r => new
                 {
                     DisplayName = $"LG{r.IdDepartment}/{r.DisplayName}",
@@ -271,7 +276,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             itemcbbEmp.DisplayMember = "DisplayName";
             itemcbbEmp.ValueMember = "Id";
 
-            var depts = dm_DeptBUS.Instance.GetAllChildren(0).Where(r => r.IsGroup != true && (isEHSAdmin || deptByGroups.Contains(r.Id))).Select(r => r.Id).ToList();
+            var depts = dm_DeptBUS.Instance.GetAllChildren(0).Where(r => r.IsGroup != true).Select(r => r.Id).ToList();
             itemcbbDept.Items.AddRange(depts);
 
             //var funcs = dt310_FunctionBUS.Instance.GetList();
@@ -295,7 +300,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
                     pic5SArea.Image = Image.FromFile(Path.Combine(TPConfigs.Folder310, area5S.FileName));
 
-                    area5SResponsibles = dt310_Area5SResponsibleBUS.Instance.GetListByAreaId(idBase).Where(r => (isEHSAdmin || deptByGroups.Contains(r.DeptId))).ToList();
+                    area5SResponsibles = dt310_Area5SResponsibleBUS.Instance.GetListByAreaId(idBase).ToList();
                     source5sResp.DataSource = area5SResponsibles;
                     gcData.DataSource = source5sResp;
                     gvData.BestFitColumns();
@@ -316,6 +321,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
         private void pic5SArea_DragDrop(object sender, DragEventArgs e)
         {
+            if (!isEHSAdmin)
+            {
+                return;
+            }
+
             using (var handle = SplashScreenManager.ShowOverlayForm(pic5SArea))
             {
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
@@ -351,6 +361,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
         private void pic5SArea_DoubleClick(object sender, EventArgs e)
         {
+            if (!isEHSAdmin)
+            {
+                return;
+            }
+
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
                 ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
@@ -367,6 +382,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
         private void btnEdit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if (!isEHSAdmin)
+            {
+                return;
+            }
+
             eventInfo = EventFormInfo.Update;
             isEditorInfo = true;
             LockControl();
@@ -374,6 +394,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
         private void btnEditResponsibility_ItemClick(object sender, ItemClickEventArgs e)
         {
+            if (!isEHSAdmin)
+            {
+                return;
+            }
+
             eventInfo = EventFormInfo.Update;
             isEditorInfo = false;
             LockControl();
@@ -381,6 +406,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
         private void btnDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if (!isEHSAdmin)
+            {
+                return;
+            }
+
             MsgTP.MsgConfirmDel();
 
             eventInfo = EventFormInfo.Delete;
@@ -389,6 +419,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if (!isEHSAdmin)
+            {
+                return;
+            }
+
             // Kiểm tra xem đã điền đầy đủ thông tin yêu cầu hay chưa
             bool IsValidate = true;
 
@@ -484,6 +519,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
         private void btnConfirmResponsibility_ItemClick(object sender, ItemClickEventArgs e)
         {
+            if (!isEHSAdmin)
+            {
+                return;
+            }
+
             var result = true;
 
             var newList = source5sResp.DataSource as List<dt310_Area5SResponsible>;
@@ -612,6 +652,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
         private void gvData_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
         {
+            if (!isEHSAdmin)
+            {
+                return;
+            }
+
             if (e.HitInfo.InRowCell && e.HitInfo.InDataRow)
             {
                 int rowHandle = e.HitInfo.RowHandle;

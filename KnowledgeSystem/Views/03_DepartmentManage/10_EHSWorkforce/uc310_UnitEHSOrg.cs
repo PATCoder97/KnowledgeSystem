@@ -65,7 +65,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             btnAdd.ImageOptions.SvgImage = TPSvgimages.Add;
             btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
             btnSummaryTable.ImageOptions.SvgImage = TPSvgimages.Excel;
-            btnApplyChange.ImageOptions.SvgImage = TPSvgimages.Edit;
         }
 
         /// <summary>
@@ -146,12 +145,14 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             {
                 var roleObj = roles.FirstOrDefault(r => r.Id == u.RoleId);
                 var userObj = users.FirstOrDefault(r => r.Id == u.EmployeeId);
+                var deptObj = depts.FirstOrDefault(r => r.Id == u.DeptId);
 
                 return new
                 {
                     u.Id,
                     Emp = $"{userObj?.IdDepartment} {userObj?.DisplayName} {userObj?.DisplayNameVN}",
                     Role = roleObj?.DisplayName,
+                    Dept = $"{u.DeptId} {deptObj?.DisplayName}".Trim(),
                     u.StartDate,
                     ThamNien = (now.Year - u.StartDate.Year) -
                                (now.Month < u.StartDate.Month ||
@@ -165,11 +166,42 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             gvData.BestFitColumns();
         }
 
+        private void InitializeDataGridColumns()
+        {
+            var deptColumn = gvData.Columns["gridColumnDept"];
+            if (deptColumn == null)
+            {
+                deptColumn = new DevExpress.XtraGrid.Columns.GridColumn
+                {
+                    Name = "gridColumnDept",
+                    Caption = "部門",
+                    FieldName = "Dept",
+                    Visible = true,
+                    VisibleIndex = 4,
+                    Width = 120
+                };
+                gvData.Columns.Add(deptColumn);
+            }
+            else
+            {
+                deptColumn.Caption = "部門";
+                deptColumn.FieldName = "Dept";
+                deptColumn.Visible = true;
+                deptColumn.VisibleIndex = 4;
+                deptColumn.Width = 120;
+            }
+        }
+
         private void uc310_UnitEHSOrg_Load(object sender, EventArgs e)
         {
             userGroups = dm_GroupUserBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id);
             int groupId = dm_GroupBUS.Instance.GetItemByName($"安衛環7")?.Id ?? -1;
             isEHSAdmin = userGroups.Any(r => r.IdGroup == groupId);
+
+            if (!isEHSAdmin)
+            {
+                btnAdd.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            }
 
             LoadData();
 
@@ -187,6 +219,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             gvData.ReadOnlyGridView();
             gvData.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
             gvData.OptionsDetail.AllowOnlyOneMasterRowExpanded = true;
+            InitializeDataGridColumns();
             gcData.DataSource = sourceOrg;
             gvData.BestFitColumns();
             gvData.OptionsDetail.EnableMasterViewMode = true;
@@ -208,6 +241,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
         private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if (!isEHSAdmin)
+            {
+                return;
+            }
+
             f310_UnitEHSOrg_Info finfo = new f310_UnitEHSOrg_Info()
             {
                 eventInfo = EventFormInfo.Create,
@@ -220,13 +258,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
         private void btnReload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            LoadData();
-        }
-
-        private void btnApplyChange_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            var form = new f310_EHSAssign_Info();
-            form.ShowDialog();
             LoadData();
         }
 
@@ -250,13 +281,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                 var row = treeList.GetDataRecordByNode(node) as UnitEHSOrgCustom;
                 if (row == null || !row.IdData.HasValue)
                     return;
-
-                if (!isEHSAdmin)
-                {
-                    int groupId = dm_GroupBUS.Instance.GetItemByName($"安衛環{row.DeptId}")?.Id ?? -1;
-                    if (!userGroups.Any(r => r.IdGroup == groupId))
-                        return;
-                }
 
                 using (var finfo = new f310_UnitEHSOrg_Info
                 {
@@ -439,6 +463,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                     ws.Column(7).Width  = 10;  // 人員名稱
                     ws.Column(8).Width  = 16;  // 職務名稱
                     ws.Column(9).Width  = 14;  // 備註
+
+                    int dataEndRow = Math.Max(2, exportRows.Count + 2);
+                    ws.Cells[2, 1, dataEndRow, totalCols].AutoFilter = true;
 
                     pck.Save();
                 }

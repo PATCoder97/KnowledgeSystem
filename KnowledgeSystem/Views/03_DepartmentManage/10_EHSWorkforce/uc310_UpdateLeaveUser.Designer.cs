@@ -66,7 +66,7 @@
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.barCbbDept = new DevExpress.XtraBars.BarEditItem();
             this.cbbDept = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
-            this.btnAdd = new DevExpress.XtraBars.BarButtonItem();
+            this.btnApplyChange = new DevExpress.XtraBars.BarButtonItem();
             this.btnReload = new DevExpress.XtraBars.BarButtonItem();
             this.btnExportExcel = new DevExpress.XtraBars.BarSubItem();
             this.btnExcelBySpare = new DevExpress.XtraBars.BarButtonItem();
@@ -477,7 +477,7 @@
             this.barManagerTP.DockControls.Add(this.barDockControlRight);
             this.barManagerTP.Form = this;
             this.barManagerTP.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
-            this.btnAdd,
+            this.btnApplyChange,
             this.btnReload,
             this.barCbbDept,
             this.btnExportExcel,
@@ -511,6 +511,7 @@
             this.bar2.DockRow = 0;
             this.bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnApplyChange, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnReload, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawDragBorder = false;
@@ -541,17 +542,17 @@
             this.cbbDept.Name = "cbbDept";
             this.cbbDept.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             // 
-            // btnAdd
+            // btnApplyChange
             // 
-            this.btnAdd.Caption = "新增";
-            this.btnAdd.Id = 0;
-            this.btnAdd.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnAdd.ImageOptions.SvgImage")));
-            this.btnAdd.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnAdd.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
-            this.btnAdd.ItemAppearance.Hovered.Options.UseForeColor = true;
-            this.btnAdd.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.ItemAppearance.Normal.Options.UseFont = true;
-            this.btnAdd.Name = "btnAdd";
+            this.btnApplyChange.Caption = "申請人員異動";
+            this.btnApplyChange.Id = 0;
+            this.btnApplyChange.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnApplyChange.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnApplyChange.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnApplyChange.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnApplyChange.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnApplyChange.Name = "btnApplyChange";
+            this.btnApplyChange.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnApplyChange_ItemClick);
             // 
             // btnReload
             // 
@@ -710,7 +711,7 @@
         private DevExpress.XtraBars.Bar bar2;
         private DevExpress.XtraBars.BarEditItem barCbbDept;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox cbbDept;
-        private DevExpress.XtraBars.BarButtonItem btnAdd;
+        private DevExpress.XtraBars.BarButtonItem btnApplyChange;
         private DevExpress.XtraBars.BarButtonItem btnReload;
         private DevExpress.XtraBars.BarSubItem btnExportExcel;
         private DevExpress.XtraBars.BarButtonItem btnExcelBySpare;

@@ -51,6 +51,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
         private void InitializeIcon()
         {
+            btnApplyChange.ImageOptions.SvgImage = TPSvgimages.Edit;
             btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
         }
 
@@ -100,24 +101,33 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             var currentUserGroups = dm_GroupUserBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id);
             var groups = dm_GroupBUS.Instance.GetList();
 
-            var displayData = updateLeaveUsers.Select(r => new
+            var displayData = updateLeaveUsers.Select(r =>
             {
-                r.Id,
-                IdUserLeave = users.FirstOrDefault(u => u.Id == r.IdUserLeave) != null
-                    ? $"{r.IdUserLeave} {users.FirstOrDefault(u => u.Id == r.IdUserLeave).DisplayName}"
-                    : r.IdUserLeave,
-                r.DisplayName,
-                r.IsProcess,
-                r.IsCancel,
-                DataType = string.IsNullOrWhiteSpace(r.DataType) ? "離職" : r.DataType,
-                GroupProcess = r.IdGroupProcess == -1
-                    ? ""
-                    : groups.FirstOrDefault(g => g.Id == r.IdGroupProcess)?.DisplayName ?? "",
-                CreateBy = users.FirstOrDefault(u => u.Id == r.CreateBy) != null
-                    ? $"{r.CreateBy} {users.FirstOrDefault(u => u.Id == r.CreateBy).DisplayName}"
-                    : r.CreateBy,
-                r.CreateAt,
-                HasMyPermission = r.IdGroupProcess == -1 ? false : currentUserGroups.Any(g => g.IdGroup == r.IdGroupProcess)
+                string dataType = string.IsNullOrWhiteSpace(r.DataType) ? "離職" : r.DataType;
+                var leaveUser = users.FirstOrDefault(u => u.Id == r.IdUserLeave);
+                var createUser = users.FirstOrDefault(u => u.Id == r.CreateBy);
+
+                return new
+                {
+                    r.Id,
+                    IdUserLeave = dataType == "EHSAssign"
+                        ? ""
+                        : leaveUser != null
+                            ? $"{r.IdUserLeave} {leaveUser.DisplayName}"
+                            : r.IdUserLeave,
+                    r.DisplayName,
+                    r.IsProcess,
+                    r.IsCancel,
+                    DataType = dataType,
+                    GroupProcess = r.IdGroupProcess == -1
+                        ? ""
+                        : groups.FirstOrDefault(g => g.Id == r.IdGroupProcess)?.DisplayName ?? "",
+                    CreateBy = createUser != null
+                        ? $"{r.CreateBy} {createUser.DisplayName}"
+                        : r.CreateBy,
+                    r.CreateAt,
+                    HasMyPermission = r.IdGroupProcess == -1 ? false : currentUserGroups.Any(g => g.IdGroup == r.IdGroupProcess)
+                };
             }).ToList();
 
             sourceDataUpdate.DataSource = displayData;
@@ -210,6 +220,16 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
                 info.GroupText = $" <color={colorName}>{groupValue}</color>《<color=Blue>{rowCount}筆</color>》";
             }
+        }
+
+        private void btnApplyChange_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            using (var form = new f310_EHSAssign_Info())
+            {
+                form.ShowDialog();
+            }
+
+            LoadData();
         }
 
         private void btnReload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

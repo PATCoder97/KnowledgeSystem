@@ -32,6 +32,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
         public string idDeptGetData = TPConfigs.LoginUser.IdDepartment;
 
         dt310_EHSFunction EHSFunc;
+        bool isEHSAdmin = false;
 
         List<LayoutControlItem> lcControls;
         List<LayoutControlItem> lcImpControls;
@@ -93,6 +94,14 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
                     break;
             }
 
+            if (!isEHSAdmin)
+            {
+                btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                EnabledController(false);
+            }
+
             foreach (var item in lcControls)
             {
                 string colorHex = item.Control.Enabled ? "000000" : "000000";
@@ -127,20 +136,15 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
             var groupEHSs = dm_GroupBUS.Instance.GetListContainName("安衛環");
 
             var ehsAdminGroup = groupEHSs.FirstOrDefault(g => g.DisplayName.Trim() == "安衛環7");
-            bool isEHSAdmin = ehsAdminGroup != null && groupUser.Any(gu => gu.IdGroup == ehsAdminGroup.Id);
+            isEHSAdmin = ehsAdminGroup != null && groupUser.Any(gu => gu.IdGroup == ehsAdminGroup.Id);
 
-            var deptByGroups = groupEHSs
-                .Where(g => groupUser.Any(gu => gu.IdGroup == g.Id))
-                .Select(g => g.DisplayName.Replace("安衛環", "").Trim())
-                .ToList();
-
-            var usrs = dm_UserBUS.Instance.GetList().Where(r => r.Status == 0 && (isEHSAdmin || deptByGroups.Contains(r.IdDepartment))).ToList();
+            var usrs = dm_UserBUS.Instance.GetList().Where(r => r.Status == 0).ToList();
 
             cbbUsr.Properties.DataSource = usrs;
             cbbUsr.Properties.DisplayMember = "DisplayName";
             cbbUsr.Properties.ValueMember = "Id";
 
-            var depts = dm_DeptBUS.Instance.GetAllChildren(0).Where(r => r.IsGroup != true && (isEHSAdmin || deptByGroups.Contains(r.Id))).ToList();
+            var depts = dm_DeptBUS.Instance.GetAllChildren(0).Where(r => r.IsGroup != true).ToList();
 
             cbbDept.Properties.DataSource = depts;
             cbbDept.Properties.DisplayMember = "DisplayName";
@@ -183,6 +187,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if (!isEHSAdmin)
+            {
+                return;
+            }
+
             // Kiểm tra xem đã điền đầy đủ thông tin yêu cầu hay chưa
             bool IsValidate = true;
 
@@ -254,12 +263,22 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
         private void btnEdit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if (!isEHSAdmin)
+            {
+                return;
+            }
+
             eventInfo = EventFormInfo.Update;
             LockControl();
         }
 
         private void btnDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if (!isEHSAdmin)
+            {
+                return;
+            }
+
             MsgTP.MsgConfirmDel();
 
             eventInfo = EventFormInfo.Delete;
