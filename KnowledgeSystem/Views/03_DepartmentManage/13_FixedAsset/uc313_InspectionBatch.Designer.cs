@@ -1,6 +1,6 @@
 namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
 {
-    partial class uc313_FixedAssetMain
+    partial class uc313_InspectionBatch
     {
         private System.ComponentModel.IContainer components = null;
 
@@ -18,13 +18,16 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
+            this.gvAsset = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gcData = new DevExpress.XtraGrid.GridControl();
+            this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
-            this.btnAdd = new DevExpress.XtraBars.BarButtonItem();
-            this.btnEdit = new DevExpress.XtraBars.BarButtonItem();
-            this.btnDelete = new DevExpress.XtraBars.BarButtonItem();
-            this.btnPhotos = new DevExpress.XtraBars.BarButtonItem();
-            this.btnImportExcel = new DevExpress.XtraBars.BarButtonItem();
+            this.btnCreateMonthly = new DevExpress.XtraBars.BarButtonItem();
+            this.btnCreateQuarterly = new DevExpress.XtraBars.BarButtonItem();
+            this.btnEditResult = new DevExpress.XtraBars.BarButtonItem();
+            this.btnCloseBatch = new DevExpress.XtraBars.BarButtonItem();
             this.btnReload = new DevExpress.XtraBars.BarButtonItem();
             this.btnExportExcel = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
@@ -32,18 +35,64 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.gcData = new DevExpress.XtraGrid.GridControl();
-            this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            ((System.ComponentModel.ISupportInitialize)(this.gvAsset)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             this.SuspendLayout();
+            // 
+            // gvAsset
+            // 
+            this.gvAsset.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 13F);
+            this.gvAsset.Appearance.HeaderPanel.Options.UseFont = true;
+            this.gvAsset.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            this.gvAsset.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gvAsset.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F);
+            this.gvAsset.Appearance.Row.Options.UseFont = true;
+            this.gvAsset.GridControl = this.gcData;
+            this.gvAsset.Name = "gvAsset";
+            // 
+            // gcData
+            // 
+            this.gcData.EmbeddedNavigator.Buttons.Append.Visible = false;
+            this.gcData.EmbeddedNavigator.Buttons.CancelEdit.Visible = false;
+            this.gcData.EmbeddedNavigator.Buttons.Edit.Visible = false;
+            this.gcData.EmbeddedNavigator.Buttons.EndEdit.Visible = false;
+            this.gcData.EmbeddedNavigator.Buttons.Remove.Visible = false;
+            gridLevelNode1.LevelTemplate = this.gvAsset;
+            gridLevelNode1.RelationName = "Details";
+            this.gcData.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
+            gridLevelNode1});
+            this.gcData.Location = new System.Drawing.Point(12, 12);
+            this.gcData.MainView = this.gvData;
+            this.gcData.Name = "gcData";
+            this.gcData.Size = new System.Drawing.Size(956, 547);
+            this.gcData.TabIndex = 4;
+            this.gcData.UseEmbeddedNavigator = true;
+            this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvData,
+            this.gvAsset});
+            // 
+            // gvData
+            // 
+            this.gvData.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.gvData.Appearance.HeaderPanel.Options.UseFont = true;
+            this.gvData.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            this.gvData.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gvData.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F);
+            this.gvData.Appearance.Row.Options.UseFont = true;
+            this.gvData.GridControl = this.gcData;
+            this.gvData.Name = "gvData";
+            this.gvData.MasterRowExpanded += new DevExpress.XtraGrid.Views.Grid.CustomMasterRowEventHandler(this.gvData_MasterRowExpanded);
+            this.gvData.MasterRowGetRelationName += new DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationNameEventHandler(this.gvData_MasterRowGetRelationName);
+            this.gvData.MasterRowGetRelationCount += new DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationCountEventHandler(this.gvData_MasterRowGetRelationCount);
+            this.gvData.MasterRowGetChildList += new DevExpress.XtraGrid.Views.Grid.MasterRowGetChildListEventHandler(this.gvData_MasterRowGetChildList);
             // 
             // barManagerTP
             // 
@@ -55,37 +104,29 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             this.barManagerTP.DockControls.Add(this.barDockControlRight);
             this.barManagerTP.Form = this;
             this.barManagerTP.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
-            this.btnAdd,
-            this.btnEdit,
-            this.btnDelete,
-            this.btnPhotos,
-            this.btnImportExcel,
+            this.btnCreateMonthly,
+            this.btnCreateQuarterly,
+            this.btnEditResult,
+            this.btnCloseBatch,
             this.btnReload,
             this.btnExportExcel});
             this.barManagerTP.MainMenu = this.bar2;
-            this.barManagerTP.MaxItemId = 7;
+            this.barManagerTP.MaxItemId = 6;
             // 
             // bar2
             // 
-            this.bar2.BarAppearance.Disabled.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.bar2.BarAppearance.Disabled.Options.UseFont = true;
-            this.bar2.BarAppearance.Hovered.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.bar2.BarAppearance.Hovered.Options.UseFont = true;
             this.bar2.BarAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.bar2.BarAppearance.Normal.Options.UseFont = true;
-            this.bar2.BarAppearance.Pressed.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.bar2.BarAppearance.Pressed.Options.UseFont = true;
             this.bar2.BarName = "Main menu";
             this.bar2.CanDockStyle = DevExpress.XtraBars.BarCanDockStyle.Top;
             this.bar2.DockCol = 0;
             this.bar2.DockRow = 0;
             this.bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnAdd, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnEdit, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnDelete, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnPhotos, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnImportExcel, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnCreateMonthly, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnCreateQuarterly, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnEditResult, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnCloseBatch, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnReload, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnExportExcel, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
@@ -94,50 +135,42 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             this.bar2.OptionsBar.UseWholeRow = true;
             this.bar2.Text = "Main menu";
             // 
-            // btnAdd
+            // btnCreateMonthly
             // 
-            this.btnAdd.Caption = "新增";
-            this.btnAdd.Id = 0;
-            this.btnAdd.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAdd_ItemClick);
+            this.btnCreateMonthly.Caption = "建立月檢";
+            this.btnCreateMonthly.Id = 0;
+            this.btnCreateMonthly.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnCreateMonthly.Name = "btnCreateMonthly";
+            this.btnCreateMonthly.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnCreateMonthly_ItemClick);
             // 
-            // btnEdit
+            // btnCreateQuarterly
             // 
-            this.btnEdit.Caption = "查看資訊";
-            this.btnEdit.Id = 1;
-            this.btnEdit.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnEdit_ItemClick);
+            this.btnCreateQuarterly.Caption = "建立季檢";
+            this.btnCreateQuarterly.Id = 1;
+            this.btnCreateQuarterly.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnCreateQuarterly.Name = "btnCreateQuarterly";
+            this.btnCreateQuarterly.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnCreateQuarterly_ItemClick);
             // 
-            // btnDelete
+            // btnEditResult
             // 
-            this.btnDelete.Caption = "刪除";
-            this.btnDelete.Id = 2;
-            this.btnDelete.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDelete_ItemClick);
+            this.btnEditResult.Caption = "更新結果";
+            this.btnEditResult.Id = 2;
+            this.btnEditResult.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnEditResult.Name = "btnEditResult";
+            this.btnEditResult.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnEditResult_ItemClick);
             // 
-            // btnPhotos
+            // btnCloseBatch
             // 
-            this.btnPhotos.Caption = "照片管理";
-            this.btnPhotos.Id = 3;
-            this.btnPhotos.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnPhotos.Name = "btnPhotos";
-            this.btnPhotos.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnPhotos_ItemClick);
-            // 
-            // btnImportExcel
-            // 
-            this.btnImportExcel.Caption = "匯入 Excel";
-            this.btnImportExcel.Id = 4;
-            this.btnImportExcel.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnImportExcel.Name = "btnImportExcel";
-            this.btnImportExcel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnImportExcel_ItemClick);
+            this.btnCloseBatch.Caption = "批次結案";
+            this.btnCloseBatch.Id = 3;
+            this.btnCloseBatch.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnCloseBatch.Name = "btnCloseBatch";
+            this.btnCloseBatch.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnCloseBatch_ItemClick);
             // 
             // btnReload
             // 
             this.btnReload.Caption = "重新整理";
-            this.btnReload.Id = 5;
+            this.btnReload.Id = 4;
             this.btnReload.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnReload.Name = "btnReload";
             this.btnReload.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnReload_ItemClick);
@@ -145,7 +178,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             // btnExportExcel
             // 
             this.btnExportExcel.Caption = "匯出 Excel";
-            this.btnExportExcel.Id = 6;
+            this.btnExportExcel.Id = 5;
             this.btnExportExcel.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnExportExcel.Name = "btnExportExcel";
             this.btnExportExcel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExportExcel_ItemClick);
@@ -194,33 +227,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             this.layoutControl1.TabIndex = 4;
             this.layoutControl1.Text = "layoutControl1";
             // 
-            // gcData
-            // 
-            this.gcData.EmbeddedNavigator.Buttons.Append.Visible = false;
-            this.gcData.EmbeddedNavigator.Buttons.CancelEdit.Visible = false;
-            this.gcData.EmbeddedNavigator.Buttons.Edit.Visible = false;
-            this.gcData.EmbeddedNavigator.Buttons.EndEdit.Visible = false;
-            this.gcData.EmbeddedNavigator.Buttons.Remove.Visible = false;
-            this.gcData.Location = new System.Drawing.Point(12, 12);
-            this.gcData.MainView = this.gvData;
-            this.gcData.Name = "gcData";
-            this.gcData.Size = new System.Drawing.Size(956, 547);
-            this.gcData.TabIndex = 4;
-            this.gcData.UseEmbeddedNavigator = true;
-            this.gcData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gvData});
-            // 
-            // gvData
-            // 
-            this.gvData.Appearance.HeaderPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.gvData.Appearance.HeaderPanel.Options.UseFont = true;
-            this.gvData.Appearance.HeaderPanel.Options.UseTextOptions = true;
-            this.gvData.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gvData.Appearance.Row.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F);
-            this.gvData.Appearance.Row.Options.UseFont = true;
-            this.gvData.GridControl = this.gcData;
-            this.gvData.Name = "gvData";
-            // 
             // Root
             // 
             this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
@@ -240,7 +246,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
-            // uc313_FixedAssetMain
+            // uc313_InspectionBatch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -249,13 +255,14 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.Name = "uc313_FixedAssetMain";
+            this.Name = "uc313_InspectionBatch";
             this.Size = new System.Drawing.Size(980, 620);
+            ((System.ComponentModel.ISupportInitialize)(this.gvAsset)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gcData)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gcData)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             this.ResumeLayout(false);
@@ -265,23 +272,23 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
 
         #endregion
 
+        private DevExpress.XtraGrid.Views.Grid.GridView gvAsset;
+        private DevExpress.XtraGrid.GridControl gcData;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvData;
         private DevExpress.XtraBars.BarManager barManagerTP;
         private DevExpress.XtraBars.Bar bar2;
+        private DevExpress.XtraBars.BarButtonItem btnCreateMonthly;
+        private DevExpress.XtraBars.BarButtonItem btnCreateQuarterly;
+        private DevExpress.XtraBars.BarButtonItem btnEditResult;
+        private DevExpress.XtraBars.BarButtonItem btnCloseBatch;
+        private DevExpress.XtraBars.BarButtonItem btnReload;
+        private DevExpress.XtraBars.BarButtonItem btnExportExcel;
         private DevExpress.XtraBars.BarDockControl barDockControlTop;
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
-        private DevExpress.XtraGrid.GridControl gcData;
-        private DevExpress.XtraGrid.Views.Grid.GridView gvData;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
-        private DevExpress.XtraBars.BarButtonItem btnAdd;
-        private DevExpress.XtraBars.BarButtonItem btnEdit;
-        private DevExpress.XtraBars.BarButtonItem btnDelete;
-        private DevExpress.XtraBars.BarButtonItem btnPhotos;
-        private DevExpress.XtraBars.BarButtonItem btnImportExcel;
-        private DevExpress.XtraBars.BarButtonItem btnReload;
-        private DevExpress.XtraBars.BarButtonItem btnExportExcel;
     }
 }

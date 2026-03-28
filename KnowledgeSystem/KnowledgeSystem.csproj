@@ -934,28 +934,66 @@
     <Compile Include="Views\03_DepartmentManage\13_FixedAsset\uc313_FixedAssetMain.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\03_DepartmentManage\13_FixedAsset\uc313_FixedAssetMain.Actions.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Views\03_DepartmentManage\13_FixedAsset\uc313_FixedAssetMain.Data.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="Views\03_DepartmentManage\13_FixedAsset\uc313_FixedAssetMain.Designer.cs">
       <DependentUpon>uc313_FixedAssetMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\03_DepartmentManage\13_FixedAsset\uc313_FixedAssetMain.DialogsA.cs">
+    <Compile Include="Views\03_DepartmentManage\13_FixedAsset\FixedAsset313Context.cs" />
+    <Compile Include="Views\03_DepartmentManage\13_FixedAsset\FixedAsset313GridHelper.cs" />
+    <Compile Include="Views\03_DepartmentManage\13_FixedAsset\f313_AbnormalCatalog_Info.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\03_DepartmentManage\13_FixedAsset\uc313_FixedAssetMain.DialogsAssetPhoto.cs">
+    <Compile Include="Views\03_DepartmentManage\13_FixedAsset\f313_AbnormalCatalog_Info.Designer.cs">
+      <DependentUpon>f313_AbnormalCatalog_Info.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\13_FixedAsset\f313_AssetPhoto_Info.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\03_DepartmentManage\13_FixedAsset\uc313_FixedAssetMain.DialogsInspection.cs">
+    <Compile Include="Views\03_DepartmentManage\13_FixedAsset\f313_AssetPhoto_Info.Designer.cs">
+      <DependentUpon>f313_AssetPhoto_Info.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\13_FixedAsset\f313_BatchCreate.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\03_DepartmentManage\13_FixedAsset\uc313_FixedAssetMain.Helpers.cs">
-      <SubType>UserControl</SubType>
+    <Compile Include="Views\03_DepartmentManage\13_FixedAsset\f313_BatchCreate.Designer.cs">
+      <DependentUpon>f313_BatchCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\13_FixedAsset\f313_DepartmentSetting_Info.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\13_FixedAsset\f313_DepartmentSetting_Info.Designer.cs">
+      <DependentUpon>f313_DepartmentSetting_Info.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\13_FixedAsset\f313_FixedAsset_Info.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\13_FixedAsset\f313_FixedAsset_Info.Designer.cs">
+      <DependentUpon>f313_FixedAsset_Info.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\13_FixedAsset\f313_InspectionResult_Info.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\13_FixedAsset\f313_InspectionResult_Info.Designer.cs">
+      <DependentUpon>f313_InspectionResult_Info.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\03_DepartmentManage\13_FixedAsset\uc313_FixedAssetMain.Models.cs" />
+    <Compile Include="Views\03_DepartmentManage\13_FixedAsset\uc313_AbnormalTrack.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\13_FixedAsset\uc313_AbnormalTrack.Designer.cs">
+      <DependentUpon>uc313_AbnormalTrack.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\13_FixedAsset\uc313_InspectionBatch.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\13_FixedAsset\uc313_InspectionBatch.Designer.cs">
+      <DependentUpon>uc313_InspectionBatch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\13_FixedAsset\uc313_Setting.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\13_FixedAsset\uc313_Setting.Designer.cs">
+      <DependentUpon>uc313_Setting.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_SignInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1725,6 +1763,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\12_WireRodEmployeeEval\uc312_GroupMgmt.resx">
       <DependentUpon>uc312_GroupMgmt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\13_FixedAsset\f313_AssetPhoto_Info.resx">
+      <DependentUpon>f313_AssetPhoto_Info.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\13_FixedAsset\uc313_FixedAssetMain.resx">
       <DependentUpon>uc313_FixedAssetMain.cs</DependentUpon>

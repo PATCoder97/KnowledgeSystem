@@ -4,6 +4,30 @@ using System.Collections.Generic;
 
 namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
 {
+    internal static class FixedAsset313Const
+    {
+        public const string GroupManagerName = "固定資產【管理】";
+        public const string GroupHandlerName = "固定資產【經辦】";
+
+        public const string BatchTypeMonthly = "Monthly";
+        public const string BatchTypeQuarterly = "Quarterly";
+
+        public const string ResultPending = "Pending";
+        public const string ResultNormal = "Normal";
+        public const string ResultAbnormal = "Abnormal";
+
+        public const string CorrectionOpen = "Open";
+        public const string CorrectionClosed = "Closed";
+        public const string CorrectionOverdue = "Overdue";
+
+        public const string PhotoTypeCloseUp = "CloseUp";
+        public const string PhotoTypeOverview = "Overview";
+        public const string PhotoTypeInUse = "InUse";
+
+        public const string InspectionPhotoPurposeAbnormal = "Abnormal";
+        public const string InspectionPhotoPurposeCorrection = "Correction";
+    }
+
     internal class LookupItem
     {
         public LookupItem(string value, string display)
@@ -65,6 +89,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
         public string Status { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? ClosedDate { get; set; }
+        public List<BatchDetailGridRow> Details { get; set; } = new List<BatchDetailGridRow>();
     }
 
     internal class BatchDetailGridRow

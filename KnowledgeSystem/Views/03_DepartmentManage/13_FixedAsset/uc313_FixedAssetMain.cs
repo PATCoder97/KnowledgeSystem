@@ -1,11 +1,10 @@
-using DevExpress.Utils;
-using DevExpress.Utils.Svg;
+using DataAccessLayer;
 using DevExpress.XtraEditors;
-using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraSplashScreen;
 using KnowledgeSystem.Helpers;
 using System;
-using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -13,357 +12,198 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
 {
     public partial class uc313_FixedAssetMain : XtraUserControl
     {
-        private const string GroupManagerName = "固定資產【管理】";
-        private const string GroupHandlerName = "固定資產【經辦】";
-
-        private const string BatchTypeMonthly = "Monthly";
-        private const string BatchTypeQuarterly = "Quarterly";
-
-        private const string ResultPending = "Pending";
-        private const string ResultNormal = "Normal";
-        private const string ResultAbnormal = "Abnormal";
-
-        private const string CorrectionOpen = "Open";
-        private const string CorrectionClosed = "Closed";
-        private const string CorrectionOverdue = "Overdue";
-
-        private const string PhotoTypeCloseUp = "CloseUp";
-        private const string PhotoTypeOverview = "Overview";
-        private const string PhotoTypeInUse = "InUse";
-
-        private const string InspectionPhotoPurposeAbnormal = "Abnormal";
-        private const string InspectionPhotoPurposeCorrection = "Correction";
-
-        private readonly BindingSource assetSource = new BindingSource();
-        private readonly BindingSource batchSource = new BindingSource();
-        private readonly BindingSource batchDetailSource = new BindingSource();
-        private readonly BindingSource abnormalSource = new BindingSource();
-        private readonly BindingSource deptSettingSource = new BindingSource();
-        private readonly BindingSource abnormalCatalogSource = new BindingSource();
-
-        private LabelControl lblTitle;
-        private LabelControl lblScope;
-        private TabControl tabMain;
-
-        private GridControl gcAssets;
-        private GridView gvAssets;
-        private SimpleButton btnAssetReload;
-        private SimpleButton btnAssetAdd;
-        private SimpleButton btnAssetEdit;
-        private SimpleButton btnAssetDelete;
-        private SimpleButton btnAssetImport;
-        private SimpleButton btnAssetExport;
-        private SimpleButton btnAssetPhotos;
-
-        private GridControl gcBatches;
-        private GridView gvBatches;
-        private GridControl gcBatchDetails;
-        private GridView gvBatchDetails;
-        private SimpleButton btnBatchReload;
-        private SimpleButton btnCreateMonthlyBatch;
-        private SimpleButton btnCreateQuarterlyBatch;
-        private SimpleButton btnEditBatchResult;
-        private SimpleButton btnCloseBatch;
-        private SimpleButton btnBatchExport;
-
-        private GridControl gcAbnormals;
-        private GridView gvAbnormals;
-        private SimpleButton btnAbnormalReload;
-        private SimpleButton btnAbnormalHandle;
-        private SimpleButton btnAbnormalExport;
-
-        private GridControl gcDeptSettings;
-        private GridView gvDeptSettings;
-        private GridControl gcAbnormalCatalogs;
-        private GridView gvAbnormalCatalogs;
-        private SimpleButton btnSettingReload;
-        private SimpleButton btnDeptSettingAdd;
-        private SimpleButton btnDeptSettingEdit;
-        private SimpleButton btnCatalogAdd;
-        private SimpleButton btnCatalogEdit;
+        private readonly FixedAsset313Context module = new FixedAsset313Context();
+        private readonly BindingSource sourceBases = new BindingSource();
+        private readonly RefreshHelper helper;
 
         public uc313_FixedAssetMain()
         {
             InitializeComponent();
-            BuildLayout();
+            InitializeIcon();
+            helper = new RefreshHelper(gvData, nameof(AssetGridRow.AssetCode));
             Load += uc313_FixedAssetMain_Load;
+        }
+
+        private void InitializeIcon()
+        {
+            btnAdd.ImageOptions.SvgImage = TPSvgimages.Add;
+            btnEdit.ImageOptions.SvgImage = TPSvgimages.Edit;
+            btnDelete.ImageOptions.SvgImage = TPSvgimages.Remove;
+            btnPhotos.ImageOptions.SvgImage = TPSvgimages.View;
+            btnImportExcel.ImageOptions.SvgImage = TPSvgimages.UploadFile;
+            btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
+            btnExportExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
         }
 
         private void uc313_FixedAssetMain_Load(object sender, EventArgs e)
         {
-            InitializeModule();
+            FixedAsset313GridHelper.ConfigureReadOnlyView(gvData);
+            gvData.DoubleClick += gvData_DoubleClick;
+            LoadData();
         }
 
-        private void BuildLayout()
+        private void LoadData()
         {
-            SuspendLayout();
-
-            Dock = DockStyle.Fill;
-
-            var root = new TableLayoutPanel
+            using (var handle = SplashScreenManager.ShowOverlayForm(gcData))
             {
-                Dock = DockStyle.Fill,
-                ColumnCount = 1,
-                RowCount = 3,
-                Padding = new Padding(12)
-            };
-            root.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-            root.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-            root.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+                helper.SaveViewInfo();
+                module.Initialize();
 
-            lblTitle = new LabelControl
+                sourceBases.DataSource = module.BuildAssetRows();
+                gcData.DataSource = sourceBases;
+
+                gvData.PopulateColumns();
+                ConfigureColumns();
+                ApplyPermissions();
+                helper.LoadViewInfo();
+            }
+        }
+
+        private void ApplyPermissions()
+        {
+            btnAdd.Visibility = module.IsManager313 ? DevExpress.XtraBars.BarItemVisibility.Always : DevExpress.XtraBars.BarItemVisibility.Never;
+            btnDelete.Visibility = module.IsManager313 ? DevExpress.XtraBars.BarItemVisibility.Always : DevExpress.XtraBars.BarItemVisibility.Never;
+            btnImportExcel.Visibility = module.IsManager313 ? DevExpress.XtraBars.BarItemVisibility.Always : DevExpress.XtraBars.BarItemVisibility.Never;
+        }
+
+        private void ConfigureColumns()
+        {
+            FixedAsset313GridHelper.HideColumn(gvData, nameof(AssetGridRow.Entity));
+            FixedAsset313GridHelper.HideColumn(gvData, nameof(AssetGridRow.IdDept));
+            FixedAsset313GridHelper.HideColumn(gvData, nameof(AssetGridRow.IdManager));
+            FixedAsset313GridHelper.HideColumn(gvData, nameof(AssetGridRow.AssetCategory));
+            FixedAsset313GridHelper.HideColumn(gvData, nameof(AssetGridRow.HasCloseUp));
+            FixedAsset313GridHelper.HideColumn(gvData, nameof(AssetGridRow.HasOverview));
+            FixedAsset313GridHelper.HideColumn(gvData, nameof(AssetGridRow.HasInUse));
+
+            FixedAsset313GridHelper.SetColumn(gvData, nameof(AssetGridRow.AssetCode), "資產編號", 120);
+            FixedAsset313GridHelper.SetColumn(gvData, nameof(AssetGridRow.AssetNameTW), "資產中文名稱", 220);
+            FixedAsset313GridHelper.SetColumn(gvData, nameof(AssetGridRow.AssetNameVN), "資產越文名稱", 220);
+            FixedAsset313GridHelper.SetColumn(gvData, nameof(AssetGridRow.DeptName), "部門", 160);
+            FixedAsset313GridHelper.SetColumn(gvData, nameof(AssetGridRow.ManagerName), "經辦", 150);
+            FixedAsset313GridHelper.SetColumn(gvData, nameof(AssetGridRow.AssetCategoryDisplay), "分類", 120);
+            FixedAsset313GridHelper.SetColumn(gvData, nameof(AssetGridRow.TypeName), "類別", 120);
+            FixedAsset313GridHelper.SetColumn(gvData, nameof(AssetGridRow.Location), "位置", 140);
+            FixedAsset313GridHelper.SetColumn(gvData, nameof(AssetGridRow.BrandSpec), "廠牌規格", 150);
+            FixedAsset313GridHelper.SetColumn(gvData, nameof(AssetGridRow.Origin), "產地", 120);
+            FixedAsset313GridHelper.SetColumn(gvData, nameof(AssetGridRow.Status), "狀態", 100);
+            FixedAsset313GridHelper.SetColumn(gvData, nameof(AssetGridRow.PhotoCompletion), "照片完整度", 100);
+            FixedAsset313GridHelper.SetColumn(gvData, nameof(AssetGridRow.Remarks), "備註", 220);
+            FixedAsset313GridHelper.SetDateColumn(gvData, nameof(AssetGridRow.AcquireDate), "取得日期", 110);
+            FixedAsset313GridHelper.SetDateColumn(gvData, nameof(AssetGridRow.LastMonthlyCheckDate), "上次月檢", 110);
+            FixedAsset313GridHelper.SetDateColumn(gvData, nameof(AssetGridRow.LastQuarterlyAuditDate), "上次季檢", 110);
+
+            gvData.BestFitColumns();
+        }
+
+        private AssetGridRow GetFocusedRow()
+        {
+            return gvData.GetFocusedRow() as AssetGridRow;
+        }
+
+        private void OpenAssetInfo(EventFormInfo eventInfo)
+        {
+            dt313_FixedAsset source = null;
+            var row = GetFocusedRow();
+
+            if (eventInfo != EventFormInfo.Create)
             {
-                Text = "313 Fixed Asset",
-                Appearance =
+                if (row == null)
                 {
-                    Font = new Font("Microsoft JhengHei UI", 16F, FontStyle.Bold),
-                    ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Question
-                },
-                AutoSizeMode = LabelAutoSizeMode.None,
-                Dock = DockStyle.Fill,
-                Padding = new Padding(0, 0, 0, 6)
-            };
+                    return;
+                }
 
-            lblScope = new LabelControl
-            {
-                Text = "",
-                Appearance =
+                if (!module.CanEditAsset(row.Entity))
                 {
-                    Font = new Font("Microsoft JhengHei UI", 10.5F),
-                    ForeColor = Color.DimGray
-                },
-                AutoSizeMode = LabelAutoSizeMode.None,
-                Dock = DockStyle.Fill,
-                Padding = new Padding(0, 0, 0, 8)
-            };
+                    MsgTP.MsgNoPermission();
+                    return;
+                }
 
-            tabMain = new TabControl
-            {
-                Dock = DockStyle.Fill,
-                Font = new Font("Microsoft JhengHei UI", 10.5F)
-            };
-
-            tabMain.TabPages.Add(CreateAssetPage());
-            tabMain.TabPages.Add(CreateBatchPage());
-            tabMain.TabPages.Add(CreateAbnormalPage());
-            tabMain.TabPages.Add(CreateSettingPage());
-
-            root.Controls.Add(lblTitle, 0, 0);
-            root.Controls.Add(lblScope, 0, 1);
-            root.Controls.Add(tabMain, 0, 2);
-
-            Controls.Add(root);
-            ResumeLayout();
-        }
-
-        private TabPage CreateAssetPage()
-        {
-            var page = new TabPage("資產主檔");
-            var layout = CreatePageLayout();
-
-            btnAssetReload = CreateButton("重新整理", TPSvgimages.Reload, BtnAssetReload_Click);
-            btnAssetAdd = CreateButton("新增資產", TPSvgimages.Add, BtnAssetAdd_Click);
-            btnAssetEdit = CreateButton("編輯資料", TPSvgimages.Edit, BtnAssetEdit_Click);
-            btnAssetDelete = CreateButton("刪除資產", TPSvgimages.Remove, BtnAssetDelete_Click);
-            btnAssetImport = CreateButton("匯入 Excel", TPSvgimages.UploadFile, BtnAssetImport_Click);
-            btnAssetExport = CreateButton("匯出 Excel", TPSvgimages.Excel, BtnAssetExport_Click);
-            btnAssetPhotos = CreateButton("照片管理", TPSvgimages.View, BtnAssetPhotos_Click);
-
-            gcAssets = CreateGrid(out gvAssets);
-            gcAssets.DataSource = assetSource;
-            gvAssets.DoubleClick += GvAssets_DoubleClick;
-
-            layout.Controls.Add(CreateActionPanel(btnAssetReload, btnAssetAdd, btnAssetEdit, btnAssetDelete, btnAssetImport, btnAssetExport, btnAssetPhotos), 0, 0);
-            layout.Controls.Add(gcAssets, 0, 1);
-            page.Controls.Add(layout);
-            return page;
-        }
-
-        private TabPage CreateBatchPage()
-        {
-            var page = new TabPage("檢查批次");
-            var layout = CreatePageLayout();
-
-            btnBatchReload = CreateButton("重新整理", TPSvgimages.Reload, BtnBatchReload_Click);
-            btnCreateMonthlyBatch = CreateButton("建立月檢批次", TPSvgimages.DateAdd, BtnCreateMonthlyBatch_Click);
-            btnCreateQuarterlyBatch = CreateButton("建立季檢批次", TPSvgimages.Schedule, BtnCreateQuarterlyBatch_Click);
-            btnEditBatchResult = CreateButton("更新檢查結果", TPSvgimages.Edit, BtnEditBatchResult_Click);
-            btnCloseBatch = CreateButton("結案批次", TPSvgimages.Confirm, BtnCloseBatch_Click);
-            btnBatchExport = CreateButton("匯出明細", TPSvgimages.Excel, BtnBatchExport_Click);
-
-            var split = new SplitContainer
-            {
-                Dock = DockStyle.Fill,
-                Orientation = Orientation.Horizontal,
-                SplitterDistance = 260
-            };
-
-            gcBatches = CreateGrid(out gvBatches);
-            gcBatches.DataSource = batchSource;
-            gvBatches.FocusedRowChanged += GvBatches_FocusedRowChanged;
-            gvBatches.DoubleClick += GvBatches_DoubleClick;
-
-            gcBatchDetails = CreateGrid(out gvBatchDetails);
-            gcBatchDetails.DataSource = batchDetailSource;
-            gvBatchDetails.DoubleClick += GvBatchDetails_DoubleClick;
-
-            split.Panel1.Controls.Add(gcBatches);
-            split.Panel2.Controls.Add(gcBatchDetails);
-
-            layout.Controls.Add(CreateActionPanel(btnBatchReload, btnCreateMonthlyBatch, btnCreateQuarterlyBatch, btnEditBatchResult, btnCloseBatch, btnBatchExport), 0, 0);
-            layout.Controls.Add(split, 0, 1);
-            page.Controls.Add(layout);
-            return page;
-        }
-
-        private TabPage CreateAbnormalPage()
-        {
-            var page = new TabPage("異常改善");
-            var layout = CreatePageLayout();
-
-            btnAbnormalReload = CreateButton("重新整理", TPSvgimages.Reload, BtnAbnormalReload_Click);
-            btnAbnormalHandle = CreateButton("更新改善", TPSvgimages.Edit, BtnAbnormalHandle_Click);
-            btnAbnormalExport = CreateButton("匯出清單", TPSvgimages.Excel, BtnAbnormalExport_Click);
-
-            gcAbnormals = CreateGrid(out gvAbnormals);
-            gcAbnormals.DataSource = abnormalSource;
-            gvAbnormals.DoubleClick += GvAbnormals_DoubleClick;
-
-            layout.Controls.Add(CreateActionPanel(btnAbnormalReload, btnAbnormalHandle, btnAbnormalExport), 0, 0);
-            layout.Controls.Add(gcAbnormals, 0, 1);
-            page.Controls.Add(layout);
-            return page;
-        }
-
-        private TabPage CreateSettingPage()
-        {
-            var page = new TabPage("設定");
-            page.Name = "Settings";
-            var layout = CreatePageLayout();
-
-            btnSettingReload = CreateButton("重新整理", TPSvgimages.Reload, BtnSettingReload_Click);
-            btnDeptSettingAdd = CreateButton("新增部門設定", TPSvgimages.Add, BtnDeptSettingAdd_Click);
-            btnDeptSettingEdit = CreateButton("編輯部門設定", TPSvgimages.Edit, BtnDeptSettingEdit_Click);
-            btnCatalogAdd = CreateButton("新增異常項目", TPSvgimages.Add2, BtnCatalogAdd_Click);
-            btnCatalogEdit = CreateButton("編輯異常項目", TPSvgimages.Edit, BtnCatalogEdit_Click);
-
-            var split = new SplitContainer
-            {
-                Dock = DockStyle.Fill,
-                Orientation = Orientation.Horizontal,
-                SplitterDistance = 220
-            };
-
-            gcDeptSettings = CreateGrid(out gvDeptSettings);
-            gcDeptSettings.DataSource = deptSettingSource;
-            gvDeptSettings.DoubleClick += GvDeptSettings_DoubleClick;
-
-            gcAbnormalCatalogs = CreateGrid(out gvAbnormalCatalogs);
-            gcAbnormalCatalogs.DataSource = abnormalCatalogSource;
-            gvAbnormalCatalogs.DoubleClick += GvAbnormalCatalogs_DoubleClick;
-
-            split.Panel1.Controls.Add(gcDeptSettings);
-            split.Panel2.Controls.Add(gcAbnormalCatalogs);
-
-            layout.Controls.Add(CreateActionPanel(btnSettingReload, btnDeptSettingAdd, btnDeptSettingEdit, btnCatalogAdd, btnCatalogEdit), 0, 0);
-            layout.Controls.Add(split, 0, 1);
-            page.Controls.Add(layout);
-            return page;
-        }
-
-        private TableLayoutPanel CreatePageLayout()
-        {
-            var layout = new TableLayoutPanel
-            {
-                Dock = DockStyle.Fill,
-                ColumnCount = 1,
-                RowCount = 2,
-                Padding = new Padding(4)
-            };
-            layout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-            layout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            return layout;
-        }
-
-        private SimpleButton CreateButton(string text, SvgImage icon, EventHandler clickEvent)
-        {
-            var button = new SimpleButton
-            {
-                Text = text,
-                Height = 34,
-                MinimumSize = new Size(120, 34),
-                Appearance =
-                {
-                    Font = new Font("Microsoft JhengHei UI", 10.5F)
-                },
-                Margin = new Padding(0, 0, 8, 8)
-            };
-
-            if (icon != null)
-            {
-                button.ImageOptions.SvgImage = icon;
-                button.ImageOptions.SvgImageSize = new Size(18, 18);
+                source = module.CloneAsset(row.Entity);
             }
 
-            button.Click += clickEvent;
-            return button;
+            using (var form = new f313_FixedAsset_Info(module, source))
+            {
+                form.eventInfo = eventInfo;
+                form.formName = "固定資產";
+                if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    LoadData();
+                }
+            }
         }
 
-        private PanelControl CreateActionPanel(params Control[] controls)
+        private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            var panel = new PanelControl
-            {
-                Dock = DockStyle.Fill,
-                BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder,
-                Padding = new Padding(0, 0, 0, 6),
-                Height = 50
-            };
-
-            var flow = new FlowLayoutPanel
-            {
-                Dock = DockStyle.Fill,
-                FlowDirection = FlowDirection.LeftToRight,
-                WrapContents = true,
-                AutoSize = true
-            };
-
-            flow.Controls.AddRange(controls);
-            panel.Controls.Add(flow);
-            return panel;
+            OpenAssetInfo(EventFormInfo.Create);
         }
 
-        private GridControl CreateGrid(out GridView view)
+        private void btnEdit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            var grid = new GridControl
+            OpenAssetInfo(EventFormInfo.View);
+        }
+
+        private void btnDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            OpenAssetInfo(EventFormInfo.Delete);
+        }
+
+        private void btnPhotos_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var row = GetFocusedRow();
+            if (row == null)
             {
-                Dock = DockStyle.Fill
-            };
+                return;
+            }
 
-            view = new GridView(grid);
-            grid.MainView = view;
-            grid.ViewCollection.Add(view);
+            if (!module.CanEditAsset(row.Entity))
+            {
+                MsgTP.MsgNoPermission();
+                return;
+            }
 
-            view.Appearance.HeaderPanel.Font = new Font("Microsoft JhengHei UI", 11F, FontStyle.Regular);
-            view.Appearance.HeaderPanel.ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Question;
-            view.Appearance.HeaderPanel.Options.UseFont = true;
-            view.Appearance.HeaderPanel.Options.UseForeColor = true;
-            view.Appearance.HeaderPanel.Options.UseTextOptions = true;
-            view.Appearance.HeaderPanel.TextOptions.HAlignment = HorzAlignment.Center;
-            view.Appearance.Row.Font = new Font("Microsoft JhengHei UI", 10.5F, FontStyle.Regular);
-            view.Appearance.Row.Options.UseFont = true;
-            view.OptionsBehavior.Editable = false;
-            view.OptionsSelection.EnableAppearanceHotTrackedRow = DefaultBoolean.True;
-            view.OptionsSelection.MultiSelect = false;
-            view.OptionsView.ShowAutoFilterRow = true;
-            view.OptionsView.EnableAppearanceOddRow = true;
-            view.OptionsView.ShowGroupPanel = false;
-            view.OptionsView.ColumnAutoWidth = false;
-            view.OptionsCustomization.AllowGroup = false;
-            view.OptionsCustomization.AllowColumnMoving = false;
-            view.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
-            view.ReadOnlyGridView();
+            using (var form = new f313_AssetPhoto_Info(module, row.Entity))
+            {
+                if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    LoadData();
+                }
+            }
+        }
 
-            return grid;
+        private void btnImportExcel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (!module.IsManager313)
+            {
+                MsgTP.MsgNoPermission();
+                return;
+            }
+
+            if (module.ImportAssetsFromExcel())
+            {
+                LoadData();
+            }
+        }
+
+        private void btnReload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            LoadData();
+        }
+
+        private void btnExportExcel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            module.ExportGrid(gcData, "FixedAssetList");
+        }
+
+        private void gvData_DoubleClick(object sender, EventArgs e)
+        {
+            GridView view = sender as GridView;
+            if (view == null || view.FocusedRowHandle < 0)
+            {
+                return;
+            }
+
+            OpenAssetInfo(EventFormInfo.View);
         }
     }
 }

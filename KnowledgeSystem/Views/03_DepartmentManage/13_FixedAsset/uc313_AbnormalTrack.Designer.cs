@@ -1,6 +1,6 @@
 namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
 {
-    partial class uc313_FixedAssetMain
+    partial class uc313_AbnormalTrack
     {
         private System.ComponentModel.IContainer components = null;
 
@@ -20,11 +20,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             this.components = new System.ComponentModel.Container();
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
-            this.btnAdd = new DevExpress.XtraBars.BarButtonItem();
-            this.btnEdit = new DevExpress.XtraBars.BarButtonItem();
-            this.btnDelete = new DevExpress.XtraBars.BarButtonItem();
-            this.btnPhotos = new DevExpress.XtraBars.BarButtonItem();
-            this.btnImportExcel = new DevExpress.XtraBars.BarButtonItem();
+            this.btnHandle = new DevExpress.XtraBars.BarButtonItem();
             this.btnReload = new DevExpress.XtraBars.BarButtonItem();
             this.btnExportExcel = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
@@ -55,37 +51,23 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             this.barManagerTP.DockControls.Add(this.barDockControlRight);
             this.barManagerTP.Form = this;
             this.barManagerTP.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
-            this.btnAdd,
-            this.btnEdit,
-            this.btnDelete,
-            this.btnPhotos,
-            this.btnImportExcel,
+            this.btnHandle,
             this.btnReload,
             this.btnExportExcel});
             this.barManagerTP.MainMenu = this.bar2;
-            this.barManagerTP.MaxItemId = 7;
+            this.barManagerTP.MaxItemId = 3;
             // 
             // bar2
             // 
-            this.bar2.BarAppearance.Disabled.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.bar2.BarAppearance.Disabled.Options.UseFont = true;
-            this.bar2.BarAppearance.Hovered.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.bar2.BarAppearance.Hovered.Options.UseFont = true;
             this.bar2.BarAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.bar2.BarAppearance.Normal.Options.UseFont = true;
-            this.bar2.BarAppearance.Pressed.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.bar2.BarAppearance.Pressed.Options.UseFont = true;
             this.bar2.BarName = "Main menu";
             this.bar2.CanDockStyle = DevExpress.XtraBars.BarCanDockStyle.Top;
             this.bar2.DockCol = 0;
             this.bar2.DockRow = 0;
             this.bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnAdd, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnEdit, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnDelete, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnPhotos, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnImportExcel, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnHandle, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnReload, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnExportExcel, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
@@ -94,50 +76,18 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             this.bar2.OptionsBar.UseWholeRow = true;
             this.bar2.Text = "Main menu";
             // 
-            // btnAdd
+            // btnHandle
             // 
-            this.btnAdd.Caption = "新增";
-            this.btnAdd.Id = 0;
-            this.btnAdd.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAdd_ItemClick);
-            // 
-            // btnEdit
-            // 
-            this.btnEdit.Caption = "查看資訊";
-            this.btnEdit.Id = 1;
-            this.btnEdit.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnEdit_ItemClick);
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Caption = "刪除";
-            this.btnDelete.Id = 2;
-            this.btnDelete.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDelete_ItemClick);
-            // 
-            // btnPhotos
-            // 
-            this.btnPhotos.Caption = "照片管理";
-            this.btnPhotos.Id = 3;
-            this.btnPhotos.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnPhotos.Name = "btnPhotos";
-            this.btnPhotos.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnPhotos_ItemClick);
-            // 
-            // btnImportExcel
-            // 
-            this.btnImportExcel.Caption = "匯入 Excel";
-            this.btnImportExcel.Id = 4;
-            this.btnImportExcel.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
-            this.btnImportExcel.Name = "btnImportExcel";
-            this.btnImportExcel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnImportExcel_ItemClick);
+            this.btnHandle.Caption = "更新改善";
+            this.btnHandle.Id = 0;
+            this.btnHandle.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnHandle.Name = "btnHandle";
+            this.btnHandle.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnHandle_ItemClick);
             // 
             // btnReload
             // 
             this.btnReload.Caption = "重新整理";
-            this.btnReload.Id = 5;
+            this.btnReload.Id = 1;
             this.btnReload.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnReload.Name = "btnReload";
             this.btnReload.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnReload_ItemClick);
@@ -145,7 +95,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             // btnExportExcel
             // 
             this.btnExportExcel.Caption = "匯出 Excel";
-            this.btnExportExcel.Id = 6;
+            this.btnExportExcel.Id = 2;
             this.btnExportExcel.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnExportExcel.Name = "btnExportExcel";
             this.btnExportExcel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExportExcel_ItemClick);
@@ -240,7 +190,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
-            // uc313_FixedAssetMain
+            // uc313_AbnormalTrack
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -249,7 +199,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.Name = "uc313_FixedAssetMain";
+            this.Name = "uc313_AbnormalTrack";
             this.Size = new System.Drawing.Size(980, 620);
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
@@ -267,6 +217,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
 
         private DevExpress.XtraBars.BarManager barManagerTP;
         private DevExpress.XtraBars.Bar bar2;
+        private DevExpress.XtraBars.BarButtonItem btnHandle;
+        private DevExpress.XtraBars.BarButtonItem btnReload;
+        private DevExpress.XtraBars.BarButtonItem btnExportExcel;
         private DevExpress.XtraBars.BarDockControl barDockControlTop;
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
@@ -276,12 +229,5 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
         private DevExpress.XtraGrid.GridControl gcData;
         private DevExpress.XtraGrid.Views.Grid.GridView gvData;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
-        private DevExpress.XtraBars.BarButtonItem btnAdd;
-        private DevExpress.XtraBars.BarButtonItem btnEdit;
-        private DevExpress.XtraBars.BarButtonItem btnDelete;
-        private DevExpress.XtraBars.BarButtonItem btnPhotos;
-        private DevExpress.XtraBars.BarButtonItem btnImportExcel;
-        private DevExpress.XtraBars.BarButtonItem btnReload;
-        private DevExpress.XtraBars.BarButtonItem btnExportExcel;
     }
 }
