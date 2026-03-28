@@ -28,8 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // uc313_FixedAssetMain
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Name = "uc313_FixedAssetMain";
+            this.Size = new System.Drawing.Size(661, 515);
+            this.ResumeLayout(false);
+
         }
 
         #endregion

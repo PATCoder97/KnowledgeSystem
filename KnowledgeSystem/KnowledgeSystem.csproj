@@ -233,6 +233,7 @@
     <Compile Include="Helpers\DomainVNFPG.cs" />
     <Compile Include="Helpers\EncryptionHelper.cs" />
     <Compile Include="Helpers\EnumHelper.cs" />
+    <Compile Include="Helpers\FixedAsset313Helper.cs" />
     <Compile Include="Helpers\GridControlHelper.cs" />
     <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="Helpers\KeyboardHelper.cs" />
@@ -933,9 +934,28 @@
     <Compile Include="Views\03_DepartmentManage\13_FixedAsset\uc313_FixedAssetMain.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Views\03_DepartmentManage\13_FixedAsset\uc313_FixedAssetMain.Actions.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\13_FixedAsset\uc313_FixedAssetMain.Data.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Views\03_DepartmentManage\13_FixedAsset\uc313_FixedAssetMain.Designer.cs">
       <DependentUpon>uc313_FixedAssetMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\03_DepartmentManage\13_FixedAsset\uc313_FixedAssetMain.DialogsA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\13_FixedAsset\uc313_FixedAssetMain.DialogsAssetPhoto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\13_FixedAsset\uc313_FixedAssetMain.DialogsInspection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\13_FixedAsset\uc313_FixedAssetMain.Helpers.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\13_FixedAsset\uc313_FixedAssetMain.Models.cs" />
     <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_SignInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1705,6 +1725,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\12_WireRodEmployeeEval\uc312_GroupMgmt.resx">
       <DependentUpon>uc312_GroupMgmt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\13_FixedAsset\uc313_FixedAssetMain.resx">
+      <DependentUpon>uc313_FixedAssetMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_SignInfo.resx">
       <DependentUpon>f402_SignInfo.cs</DependentUpon>
