@@ -11,10 +11,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
         {
             view.ReadOnlyGridView();
             view.KeyDown += GridControlHelper.GridViewCopyCellData_KeyDown;
-            view.OptionsView.ColumnAutoWidth = false;
-            view.OptionsView.EnableAppearanceOddRow = true;
-            view.OptionsView.ShowAutoFilterRow = true;
-            view.OptionsView.ShowGroupPanel = false;
+            FixedAsset313UIHelper.ApplyGridStyle(view);
         }
 
         public static void HideColumn(GridView view, string fieldName)

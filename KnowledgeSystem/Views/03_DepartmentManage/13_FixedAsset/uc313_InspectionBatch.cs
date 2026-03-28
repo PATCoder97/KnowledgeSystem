@@ -1,3 +1,4 @@
+using DevExpress.Utils.Menu;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraSplashScreen;
@@ -13,11 +14,14 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
         private readonly FixedAsset313Context module = new FixedAsset313Context();
         private readonly BindingSource sourceBases = new BindingSource();
         private readonly RefreshHelper helper;
+        private DXMenuItem itemViewInfo;
 
         public uc313_InspectionBatch()
         {
             InitializeComponent();
             InitializeIcon();
+            InitializeMenuItems();
+            FixedAsset313UIHelper.ApplyUserControlStyle(this, barManagerTP, bar2);
             helper = new RefreshHelper(gvData, nameof(BatchGridRow.BatchName));
             Load += uc313_InspectionBatch_Load;
         }
@@ -32,6 +36,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             btnExportExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
         }
 
+        private void InitializeMenuItems()
+        {
+            itemViewInfo = FixedAsset313UIHelper.CreateMenuItem("查看資訊", ItemViewInfo_Click, TPSvgimages.View);
+        }
+
         private void uc313_InspectionBatch_Load(object sender, EventArgs e)
         {
             FixedAsset313GridHelper.ConfigureReadOnlyView(gvData);
@@ -40,6 +49,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             gvData.OptionsDetail.EnableMasterViewMode = true;
             gvData.DoubleClick += gvData_DoubleClick;
             gvAsset.DoubleClick += gvAsset_DoubleClick;
+            gvAsset.PopupMenuShowing += gvAsset_PopupMenuShowing;
             LoadData();
         }
 
@@ -68,6 +78,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             btnCreateMonthly.Visibility = visible;
             btnCreateQuarterly.Visibility = visible;
             btnCloseBatch.Visibility = visible;
+            btnEditResult.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
         }
 
         private void ConfigureMainColumns()
@@ -244,6 +255,19 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
         }
 
         private void gvAsset_DoubleClick(object sender, EventArgs e)
+        {
+            EditFocusedDetail();
+        }
+
+        private void gvAsset_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
+        {
+            if (e.HitInfo.InRowCell && e.HitInfo.InDataRow && e.Menu != null)
+            {
+                e.Menu.Items.Add(itemViewInfo);
+            }
+        }
+
+        private void ItemViewInfo_Click(object sender, EventArgs e)
         {
             EditFocusedDetail();
         }

@@ -109,5 +109,29 @@ namespace BusinessLayer
                 return false;
             }
         }
+
+        public bool DeactivateById(int id)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    var item = _context.dt313_AbnormalCatalog.FirstOrDefault(r => r.Id == id);
+                    if (item == null)
+                    {
+                        return false;
+                    }
+
+                    item.IsActive = false;
+                    int affectedRecords = _context.SaveChanges();
+                    return affectedRecords > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                return false;
+            }
+        }
     }
 }

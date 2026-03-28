@@ -18,6 +18,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             this.module = module;
             this.isMonthly = isMonthly;
             btnConfirm.ImageOptions.SvgImage = TPSvgimages.Confirm;
+            FixedAsset313UIHelper.ApplyFormStyle(this, barManagerTP, bar2);
         }
 
         public static f313_BatchCreate CreateMonthly(FixedAsset313Context module)
@@ -32,8 +33,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
 
         private void f313_BatchCreate_Load(object sender, EventArgs e)
         {
+            FixedAsset313UIHelper.ApplyLayoutItemCaptions(lcTarget, lcPeriod, lcSampleRate);
+
             Text = isMonthly ? "建立月檢批次" : "建立季檢批次";
-            lcSampleRate.Visibility = isMonthly ? DevExpress.XtraLayout.Utils.LayoutVisibility.Never : DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+            lcSampleRate.Visibility = isMonthly
+                ? DevExpress.XtraLayout.Utils.LayoutVisibility.Never
+                : DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
 
             cbbTarget.Properties.Items.AddRange((isMonthly ? module.GetUserLookupItems(true) : module.GetDepartmentLookupItems(true)).ToArray());
             datePeriod.EditValue = DateTime.Today;
