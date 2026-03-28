@@ -125,6 +125,13 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt310_UpdateLeaveUser" Width="1.5" PointX="10.25" PointY="49.375" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt310_EquipmentInfo" Width="1.5" PointX="13.5" PointY="49.375" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.vw310_EquipmentInfo" Width="1.5" PointX="15.125" PointY="49.375" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt313_AbnormalCatalog" Width="1.5" PointX="5.5" PointY="75.125" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt313_DepartmentSetting" Width="1.5" PointX="10.375" PointY="75.125" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt313_FixedAsset" Width="1.5" PointX="0.625" PointY="75.125" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt313_FixedAssetPhoto" Width="1.5" PointX="7.125" PointY="75.125" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt313_InspectionBatch" Width="1.5" PointX="2.25" PointY="75.125" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt313_InspectionBatchAsset" Width="1.5" PointX="3.875" PointY="75.125" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt313_InspectionPhoto" Width="1.5" PointX="8.75" PointY="75.125" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

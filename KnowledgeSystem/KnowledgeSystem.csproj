@@ -930,6 +930,12 @@
     <Compile Include="Views\03_DepartmentManage\12_WireRodEmployeeEval\uc312_GroupMgmt.Designer.cs">
       <DependentUpon>uc312_GroupMgmt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\03_DepartmentManage\13_FixedAsset\uc313_FixedAssetMain.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\13_FixedAsset\uc313_FixedAssetMain.Designer.cs">
+      <DependentUpon>uc313_FixedAssetMain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\04_SystemAdministrator\02_SystemAdmin\f402_SignInfo.cs">
       <SubType>Form</SubType>
     </Compile>

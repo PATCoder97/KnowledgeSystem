@@ -404,6 +404,27 @@
     <Compile Include="dt312_Setting.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
+    <Compile Include="dt313_AbnormalCatalog.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dt313_DepartmentSetting.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dt313_FixedAsset.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dt313_FixedAssetPhoto.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dt313_InspectionBatch.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dt313_InspectionBatchAsset.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dt313_InspectionPhoto.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
     <Compile Include="dt402_KPIWeb.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
@@ -475,7 +496,6 @@
     <Content Include="ModelDocManager.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ModelDocManager.edmx</DependentUpon>
-      <LastGenOutput>ModelDocManager.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>
