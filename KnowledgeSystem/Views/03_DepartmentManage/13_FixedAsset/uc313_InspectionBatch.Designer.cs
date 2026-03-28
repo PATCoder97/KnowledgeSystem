@@ -79,7 +79,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             this.gcData.EmbeddedNavigator.Buttons.EndEdit.Visible = false;
             this.gcData.EmbeddedNavigator.Buttons.Remove.Visible = false;
             gridLevelNode1.LevelTemplate = this.gvAsset;
-            gridLevelNode1.RelationName = "Details";
+            gridLevelNode1.RelationName = "資產";
             this.gcData.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
             gridLevelNode1});
             this.gcData.Location = new System.Drawing.Point(12, 12);

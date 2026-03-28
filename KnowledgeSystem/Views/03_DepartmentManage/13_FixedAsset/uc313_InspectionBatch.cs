@@ -32,12 +32,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
         private void uc313_InspectionBatch_Load(object sender, EventArgs e)
         {
             FixedAsset313GridHelper.ConfigureReadOnlyView(gvData);
-            FixedAsset313GridHelper.ConfigureReadOnlyView(gvAsset);
+            ConfigureDetailView(gvAsset);
             gvData.OptionsDetail.AllowOnlyOneMasterRowExpanded = true;
             gvData.OptionsDetail.EnableMasterViewMode = true;
             gvData.DoubleClick += gvData_DoubleClick;
-            gvAsset.DoubleClick += gvAsset_DoubleClick;
-            gvAsset.PopupMenuShowing += gvAsset_PopupMenuShowing;
             LoadData();
         }
 
@@ -54,7 +52,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
                 gvData.PopulateColumns();
                 gvAsset.PopulateColumns();
                 ConfigureMainColumns();
-                ConfigureDetailColumns();
+                ConfigureDetailView(gvAsset);
                 ApplyPermissions();
                 helper.LoadViewInfo();
             }
@@ -62,7 +60,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
 
         private void ApplyPermissions()
         {
-            var visible = module.IsManager313 ? DevExpress.XtraBars.BarItemVisibility.Always : DevExpress.XtraBars.BarItemVisibility.Never;
+            var visible = module.IsManager313
+                ? DevExpress.XtraBars.BarItemVisibility.Always
+                : DevExpress.XtraBars.BarItemVisibility.Never;
+
             btnCreateMonthly.Visibility = visible;
             btnCreateQuarterly.Visibility = visible;
             btnCloseBatch.Visibility = visible;
@@ -91,28 +92,43 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             gvData.BestFitColumns();
         }
 
-        private void ConfigureDetailColumns()
+        private void ConfigureDetailColumns(GridView view)
         {
-            FixedAsset313GridHelper.HideColumn(gvAsset, nameof(BatchDetailGridRow.Entity));
-            FixedAsset313GridHelper.HideColumn(gvAsset, nameof(BatchDetailGridRow.Batch));
-            FixedAsset313GridHelper.HideColumn(gvAsset, nameof(BatchDetailGridRow.Asset));
-            FixedAsset313GridHelper.HideColumn(gvAsset, nameof(BatchDetailGridRow.Result));
-            FixedAsset313GridHelper.HideColumn(gvAsset, nameof(BatchDetailGridRow.CorrectionStatus));
+            FixedAsset313GridHelper.HideColumn(view, nameof(BatchDetailGridRow.Entity));
+            FixedAsset313GridHelper.HideColumn(view, nameof(BatchDetailGridRow.Batch));
+            FixedAsset313GridHelper.HideColumn(view, nameof(BatchDetailGridRow.Asset));
+            FixedAsset313GridHelper.HideColumn(view, nameof(BatchDetailGridRow.Result));
+            FixedAsset313GridHelper.HideColumn(view, nameof(BatchDetailGridRow.CorrectionStatus));
 
-            FixedAsset313GridHelper.SetColumn(gvAsset, nameof(BatchDetailGridRow.AssetCode), "資產編號", 120);
-            FixedAsset313GridHelper.SetColumn(gvAsset, nameof(BatchDetailGridRow.AssetNameTW), "資產名稱", 180);
-            FixedAsset313GridHelper.SetColumn(gvAsset, nameof(BatchDetailGridRow.DeptName), "部門", 140);
-            FixedAsset313GridHelper.SetColumn(gvAsset, nameof(BatchDetailGridRow.ManagerName), "經辦", 140);
-            FixedAsset313GridHelper.SetColumn(gvAsset, nameof(BatchDetailGridRow.ResultDisplay), "結果", 90);
-            FixedAsset313GridHelper.SetColumn(gvAsset, nameof(BatchDetailGridRow.AbnormalName), "異常項目", 140);
-            FixedAsset313GridHelper.SetColumn(gvAsset, nameof(BatchDetailGridRow.AbnormalNote), "異常說明", 180);
-            FixedAsset313GridHelper.SetDateColumn(gvAsset, nameof(BatchDetailGridRow.CheckedDate), "檢查時間", 130, "yyyy-MM-dd HH:mm");
-            FixedAsset313GridHelper.SetDateColumn(gvAsset, nameof(BatchDetailGridRow.CorrectionDueDate), "改善期限", 100);
-            FixedAsset313GridHelper.SetColumn(gvAsset, nameof(BatchDetailGridRow.CorrectionStatusDisplay), "改善狀態", 100);
-            FixedAsset313GridHelper.SetColumn(gvAsset, nameof(BatchDetailGridRow.CorrectionNote), "改善說明", 180);
-            FixedAsset313GridHelper.SetColumn(gvAsset, nameof(BatchDetailGridRow.EvidencePhotoCount), "異常照片", 80);
-            FixedAsset313GridHelper.SetColumn(gvAsset, nameof(BatchDetailGridRow.CorrectionPhotoCount), "改善照片", 80);
-            gvAsset.BestFitColumns();
+            FixedAsset313GridHelper.SetColumn(view, nameof(BatchDetailGridRow.AssetCode), "資產編號", 120);
+            FixedAsset313GridHelper.SetColumn(view, nameof(BatchDetailGridRow.AssetNameTW), "資產名稱", 180);
+            FixedAsset313GridHelper.SetColumn(view, nameof(BatchDetailGridRow.DeptName), "部門", 140);
+            FixedAsset313GridHelper.SetColumn(view, nameof(BatchDetailGridRow.ManagerName), "經辦", 140);
+            FixedAsset313GridHelper.SetColumn(view, nameof(BatchDetailGridRow.ResultDisplay), "結果", 90);
+            FixedAsset313GridHelper.SetColumn(view, nameof(BatchDetailGridRow.AbnormalName), "異常項目", 140);
+            FixedAsset313GridHelper.SetColumn(view, nameof(BatchDetailGridRow.AbnormalNote), "異常說明", 180);
+            FixedAsset313GridHelper.SetDateColumn(view, nameof(BatchDetailGridRow.CheckedDate), "檢查時間", 130, "yyyy-MM-dd HH:mm");
+            FixedAsset313GridHelper.SetDateColumn(view, nameof(BatchDetailGridRow.CorrectionDueDate), "改善期限", 100);
+            FixedAsset313GridHelper.SetColumn(view, nameof(BatchDetailGridRow.CorrectionStatusDisplay), "改善狀態", 100);
+            FixedAsset313GridHelper.SetColumn(view, nameof(BatchDetailGridRow.CorrectionNote), "改善說明", 180);
+            FixedAsset313GridHelper.SetColumn(view, nameof(BatchDetailGridRow.EvidencePhotoCount), "異常照片", 80);
+            FixedAsset313GridHelper.SetColumn(view, nameof(BatchDetailGridRow.CorrectionPhotoCount), "改善照片", 80);
+            view.BestFitColumns();
+        }
+
+        private void ConfigureDetailView(GridView view)
+        {
+            if (view == null)
+            {
+                return;
+            }
+
+            FixedAsset313GridHelper.ConfigureReadOnlyView(view);
+            ConfigureDetailColumns(view);
+            view.DoubleClick -= gvAsset_DoubleClick;
+            view.DoubleClick += gvAsset_DoubleClick;
+            view.PopupMenuShowing -= gvAsset_PopupMenuShowing;
+            view.PopupMenuShowing += gvAsset_PopupMenuShowing;
         }
 
         private BatchGridRow GetFocusedBatch()
@@ -120,14 +136,20 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             return gvData.GetFocusedRow() as BatchGridRow;
         }
 
-        private BatchDetailGridRow GetFocusedDetail()
+        private BatchDetailGridRow GetFocusedDetail(GridView view = null)
         {
-            return gvAsset.GetFocusedRow() as BatchDetailGridRow;
+            GridView focusedView = view ?? gcData.FocusedView as GridView;
+            if (focusedView == null || focusedView == gvData)
+            {
+                focusedView = gvAsset;
+            }
+
+            return focusedView.GetFocusedRow() as BatchDetailGridRow;
         }
 
-        private void EditFocusedDetail()
+        private void EditFocusedDetail(GridView view = null)
         {
-            var row = GetFocusedDetail();
+            var row = GetFocusedDetail(view);
             if (row == null)
             {
                 return;
@@ -143,7 +165,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
 
             using (var form = new f313_InspectionResult_Info(module, row, allowResultEdit, allowCorrectionEdit))
             {
-                if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                if (form.ShowDialog() == DialogResult.OK)
                 {
                     LoadData();
                 }
@@ -154,7 +176,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
         {
             using (var form = f313_BatchCreate.CreateMonthly(module))
             {
-                if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK && module.CreateMonthlyBatch(form.ResultData))
+                if (form.ShowDialog() == DialogResult.OK && module.CreateMonthlyBatch(form.ResultData))
                 {
                     LoadData();
                 }
@@ -165,7 +187,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
         {
             using (var form = f313_BatchCreate.CreateQuarterly(module))
             {
-                if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK && module.CreateQuarterlyBatch(form.ResultData))
+                if (form.ShowDialog() == DialogResult.OK && module.CreateQuarterlyBatch(form.ResultData))
                 {
                     LoadData();
                 }
@@ -209,7 +231,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
 
         private void gvData_MasterRowGetRelationName(object sender, MasterRowGetRelationNameEventArgs e)
         {
-            e.RelationName = "Details";
+            e.RelationName = "資產";
         }
 
         private void gvData_MasterRowGetChildList(object sender, MasterRowGetChildListEventArgs e)
@@ -223,7 +245,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             GridView masterView = sender as GridView;
             int visibleDetailRelationIndex = masterView.GetVisibleDetailRelationIndex(e.RowHandle);
             GridView detailView = masterView.GetDetailView(e.RowHandle, visibleDetailRelationIndex) as GridView;
-            detailView?.BestFitColumns();
+            ConfigureDetailView(detailView);
         }
 
         private void gvData_DoubleClick(object sender, EventArgs e)
@@ -244,20 +266,21 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
 
         private void gvAsset_DoubleClick(object sender, EventArgs e)
         {
-            EditFocusedDetail();
+            EditFocusedDetail(sender as GridView);
         }
 
         private void gvAsset_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
         {
             if (e.HitInfo.InRowCell && e.HitInfo.InDataRow && e.Menu != null)
             {
+                itemViewInfo.Tag = sender as GridView;
                 e.Menu.Items.Add(itemViewInfo);
             }
         }
 
         private void ItemViewInfo_Click(object sender, EventArgs e)
         {
-            EditFocusedDetail();
+            EditFocusedDetail(itemViewInfo.Tag as GridView);
         }
     }
 }
