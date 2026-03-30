@@ -215,6 +215,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             this.groupCloseUp.AppearanceCaption.ForeColor = System.Drawing.Color.Black;
             this.groupCloseUp.AppearanceCaption.Options.UseFont = true;
             this.groupCloseUp.AppearanceCaption.Options.UseForeColor = true;
+            this.groupCloseUp.AppearanceCaption.Options.UseTextOptions = true;
+            this.groupCloseUp.AppearanceCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.groupCloseUp.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
             this.groupCloseUp.Controls.Add(this.picCloseUp);
             this.groupCloseUp.GroupStyle = DevExpress.Utils.GroupStyle.Light;
@@ -244,7 +246,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             this.groupOverview.AppearanceCaption.ForeColor = System.Drawing.Color.Black;
             this.groupOverview.AppearanceCaption.Options.UseFont = true;
             this.groupOverview.AppearanceCaption.Options.UseForeColor = true;
+            this.groupOverview.AppearanceCaption.Options.UseTextOptions = true;
+            this.groupOverview.AppearanceCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.groupOverview.Controls.Add(this.picOverview);
+            this.groupOverview.GroupStyle = DevExpress.Utils.GroupStyle.Light;
             this.groupOverview.Location = new System.Drawing.Point(433, 12);
             this.groupOverview.Name = "groupOverview";
             this.groupOverview.Size = new System.Drawing.Size(416, 447);
@@ -254,12 +259,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             // picOverview
             // 
             this.picOverview.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.picOverview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picOverview.Cursor = System.Windows.Forms.Cursors.Hand;
             this.picOverview.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picOverview.Location = new System.Drawing.Point(2, 27);
+            this.picOverview.Location = new System.Drawing.Point(2, 25);
             this.picOverview.Name = "picOverview";
-            this.picOverview.Size = new System.Drawing.Size(412, 418);
+            this.picOverview.Size = new System.Drawing.Size(412, 420);
             this.picOverview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picOverview.TabIndex = 1;
             this.picOverview.TabStop = false;
@@ -268,11 +272,16 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             // 
             // groupInUse
             // 
+            this.groupInUse.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.groupInUse.Appearance.Options.UseBackColor = true;
             this.groupInUse.AppearanceCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.groupInUse.AppearanceCaption.ForeColor = System.Drawing.Color.Black;
             this.groupInUse.AppearanceCaption.Options.UseFont = true;
             this.groupInUse.AppearanceCaption.Options.UseForeColor = true;
+            this.groupInUse.AppearanceCaption.Options.UseTextOptions = true;
+            this.groupInUse.AppearanceCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.groupInUse.Controls.Add(this.picInUse);
+            this.groupInUse.GroupStyle = DevExpress.Utils.GroupStyle.Light;
             this.groupInUse.Location = new System.Drawing.Point(853, 12);
             this.groupInUse.Name = "groupInUse";
             this.groupInUse.Size = new System.Drawing.Size(415, 447);
@@ -282,12 +291,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             // picInUse
             // 
             this.picInUse.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.picInUse.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picInUse.Cursor = System.Windows.Forms.Cursors.Hand;
             this.picInUse.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picInUse.Location = new System.Drawing.Point(2, 27);
+            this.picInUse.Location = new System.Drawing.Point(2, 25);
             this.picInUse.Name = "picInUse";
-            this.picInUse.Size = new System.Drawing.Size(411, 418);
+            this.picInUse.Size = new System.Drawing.Size(411, 420);
             this.picInUse.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picInUse.TabIndex = 1;
             this.picInUse.TabStop = false;
