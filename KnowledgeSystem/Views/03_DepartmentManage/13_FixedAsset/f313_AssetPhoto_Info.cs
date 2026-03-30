@@ -28,6 +28,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
 
         private void f313_AssetPhoto_Info_Load(object sender, EventArgs e)
         {
+            AdjustFormToWorkingArea();
             Text = $"照片管理 - {asset.AssetCode}";
             DevExpress.Utils.AppearanceObject.DefaultMenuFont =
                 new Font("Microsoft JhengHei UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -38,6 +39,23 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
         {
             ClearPreviewImages();
             base.OnFormClosed(e);
+        }
+
+        private void AdjustFormToWorkingArea()
+        {
+            Rectangle workingArea = Screen.FromControl(this).WorkingArea;
+            int targetWidth = Math.Min(Width, workingArea.Width - 24);
+            int targetHeight = Math.Min(Height, workingArea.Height - 24);
+
+            if (targetWidth <= 0 || targetHeight <= 0)
+            {
+                return;
+            }
+
+            Size = new Size(targetWidth, targetHeight);
+            Location = new Point(
+                workingArea.Left + Math.Max((workingArea.Width - Width) / 2, 0),
+                workingArea.Top + Math.Max((workingArea.Height - Height) / 2, 0));
         }
 
         private void ReloadPhotos()
@@ -139,21 +157,30 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
                     return;
                 }
 
-                var saved = FixedAsset313Helper.SaveFixedAssetPhoto(asset.Id, dialog.FileName);
-                int id = dt313_FixedAssetPhotoBUS.Instance.AddOrReplace(new dt313_FixedAssetPhoto
+                try
                 {
-                    FixedAssetId = asset.Id,
-                    PhotoType = photoType,
-                    EncryptionName = saved.encryptionName,
-                    ActualName = saved.actualName,
-                    UploadedBy = TPConfigs.LoginUser.Id,
-                    UploadedDate = DateTime.Now,
-                    IsActive = true
-                });
+                    var saved = FixedAsset313Helper.SaveFixedAssetPhoto(asset.Id, dialog.FileName);
+                    int id = dt313_FixedAssetPhotoBUS.Instance.AddOrReplace(new dt313_FixedAssetPhoto
+                    {
+                        FixedAssetId = asset.Id,
+                        PhotoType = photoType,
+                        EncryptionName = saved.encryptionName,
+                        ActualName = saved.actualName,
+                        UploadedBy = TPConfigs.LoginUser.Id,
+                        UploadedDate = DateTime.Now,
+                        IsActive = true
+                    });
 
-                if (id <= 0)
+                    if (id <= 0)
+                    {
+                        MsgTP.MsgErrorDB();
+                        return;
+                    }
+                }
+                catch (Exception ex)
                 {
-                    MsgTP.MsgErrorDB();
+                    XtraMessageBox.Show(ex.Message, TPConfigs.SoftNameTW,
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
             }

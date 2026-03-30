@@ -18,18 +18,19 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(f313_AssetPhoto_Info));
             this.barManagerTP = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.btnReload = new DevExpress.XtraBars.BarButtonItem();
             this.btnConfirm = new DevExpress.XtraBars.BarButtonItem();
-            this.btnUploadPhoto = new DevExpress.XtraBars.BarButtonItem();
-            this.btnViewPhoto = new DevExpress.XtraBars.BarButtonItem();
-            this.btnDisablePhoto = new DevExpress.XtraBars.BarButtonItem();
-            this.popupMenuPhoto = new DevExpress.XtraBars.PopupMenu(this.components);
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.btnUploadPhoto = new DevExpress.XtraBars.BarButtonItem();
+            this.btnViewPhoto = new DevExpress.XtraBars.BarButtonItem();
+            this.btnDisablePhoto = new DevExpress.XtraBars.BarButtonItem();
+            this.popupMenuPhoto = new DevExpress.XtraBars.PopupMenu(this.components);
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.groupCloseUp = new DevExpress.XtraEditors.GroupControl();
             this.picCloseUp = new System.Windows.Forms.PictureBox();
@@ -112,7 +113,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             // 
             this.btnReload.Caption = "重新整理";
             this.btnReload.Id = 0;
-            this.btnReload.ImageOptions.SvgImage = global::KnowledgeSystem.Helpers.TPSvgimages.Reload;
+            this.btnReload.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnReload.ImageOptions.SvgImage")));
             this.btnReload.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnReload.Name = "btnReload";
             this.btnReload.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnReload_ItemClick);
@@ -121,16 +122,48 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             // 
             this.btnConfirm.Caption = "確認";
             this.btnConfirm.Id = 1;
-            this.btnConfirm.ImageOptions.SvgImage = global::KnowledgeSystem.Helpers.TPSvgimages.Confirm;
+            this.btnConfirm.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnConfirm.ImageOptions.SvgImage")));
             this.btnConfirm.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnConfirm_ItemClick);
+            // 
+            // barDockControlTop
+            // 
+            this.barDockControlTop.CausesValidation = false;
+            this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
+            this.barDockControlTop.Manager = this.barManagerTP;
+            this.barDockControlTop.Size = new System.Drawing.Size(1280, 49);
+            // 
+            // barDockControlBottom
+            // 
+            this.barDockControlBottom.CausesValidation = false;
+            this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 520);
+            this.barDockControlBottom.Manager = this.barManagerTP;
+            this.barDockControlBottom.Size = new System.Drawing.Size(1280, 0);
+            // 
+            // barDockControlLeft
+            // 
+            this.barDockControlLeft.CausesValidation = false;
+            this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 49);
+            this.barDockControlLeft.Manager = this.barManagerTP;
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 471);
+            // 
+            // barDockControlRight
+            // 
+            this.barDockControlRight.CausesValidation = false;
+            this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
+            this.barDockControlRight.Location = new System.Drawing.Point(1280, 49);
+            this.barDockControlRight.Manager = this.barManagerTP;
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 471);
             // 
             // btnUploadPhoto
             // 
             this.btnUploadPhoto.Caption = "上傳照片";
             this.btnUploadPhoto.Id = 2;
-            this.btnUploadPhoto.ImageOptions.SvgImage = global::KnowledgeSystem.Helpers.TPSvgimages.UploadFile;
+            this.btnUploadPhoto.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnUploadPhoto.ImageOptions.SvgImage")));
             this.btnUploadPhoto.ImageOptions.SvgImageSize = new System.Drawing.Size(24, 24);
             this.btnUploadPhoto.Name = "btnUploadPhoto";
             this.btnUploadPhoto.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnUploadPhoto_ItemClick);
@@ -139,7 +172,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             // 
             this.btnViewPhoto.Caption = "查看照片";
             this.btnViewPhoto.Id = 3;
-            this.btnViewPhoto.ImageOptions.SvgImage = global::KnowledgeSystem.Helpers.TPSvgimages.View;
+            this.btnViewPhoto.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnViewPhoto.ImageOptions.SvgImage")));
             this.btnViewPhoto.ImageOptions.SvgImageSize = new System.Drawing.Size(24, 24);
             this.btnViewPhoto.Name = "btnViewPhoto";
             this.btnViewPhoto.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnViewPhoto_ItemClick);
@@ -148,7 +181,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             // 
             this.btnDisablePhoto.Caption = "停用照片";
             this.btnDisablePhoto.Id = 4;
-            this.btnDisablePhoto.ImageOptions.SvgImage = global::KnowledgeSystem.Helpers.TPSvgimages.Disable;
+            this.btnDisablePhoto.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnDisablePhoto.ImageOptions.SvgImage")));
             this.btnDisablePhoto.ImageOptions.SvgImageSize = new System.Drawing.Size(24, 24);
             this.btnDisablePhoto.Name = "btnDisablePhoto";
             this.btnDisablePhoto.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDisablePhoto_ItemClick);
@@ -162,38 +195,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             this.popupMenuPhoto.Manager = this.barManagerTP;
             this.popupMenuPhoto.Name = "popupMenuPhoto";
             // 
-            // barDockControlTop
-            // 
-            this.barDockControlTop.CausesValidation = false;
-            this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlTop.Manager = this.barManagerTP;
-            this.barDockControlTop.Size = new System.Drawing.Size(1520, 49);
-            // 
-            // barDockControlBottom
-            // 
-            this.barDockControlBottom.CausesValidation = false;
-            this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 490);
-            this.barDockControlBottom.Manager = this.barManagerTP;
-            this.barDockControlBottom.Size = new System.Drawing.Size(1520, 0);
-            // 
-            // barDockControlLeft
-            // 
-            this.barDockControlLeft.CausesValidation = false;
-            this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.barDockControlLeft.Location = new System.Drawing.Point(0, 49);
-            this.barDockControlLeft.Manager = this.barManagerTP;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 441);
-            // 
-            // barDockControlRight
-            // 
-            this.barDockControlRight.CausesValidation = false;
-            this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1520, 49);
-            this.barDockControlRight.Manager = this.barManagerTP;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 441);
-            // 
             // layoutControl1
             // 
             this.layoutControl1.AllowCustomization = false;
@@ -204,7 +205,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(1520, 441);
+            this.layoutControl1.Size = new System.Drawing.Size(1280, 471);
             this.layoutControl1.TabIndex = 4;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -214,22 +215,23 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             this.groupCloseUp.AppearanceCaption.ForeColor = System.Drawing.Color.Black;
             this.groupCloseUp.AppearanceCaption.Options.UseFont = true;
             this.groupCloseUp.AppearanceCaption.Options.UseForeColor = true;
+            this.groupCloseUp.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
             this.groupCloseUp.Controls.Add(this.picCloseUp);
+            this.groupCloseUp.GroupStyle = DevExpress.Utils.GroupStyle.Light;
             this.groupCloseUp.Location = new System.Drawing.Point(12, 12);
             this.groupCloseUp.Name = "groupCloseUp";
-            this.groupCloseUp.Size = new System.Drawing.Size(497, 417);
+            this.groupCloseUp.Size = new System.Drawing.Size(417, 447);
             this.groupCloseUp.TabIndex = 4;
             this.groupCloseUp.Text = "近拍照片";
             // 
             // picCloseUp
             // 
             this.picCloseUp.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.picCloseUp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picCloseUp.Cursor = System.Windows.Forms.Cursors.Hand;
             this.picCloseUp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picCloseUp.Location = new System.Drawing.Point(2, 34);
+            this.picCloseUp.Location = new System.Drawing.Point(2, 25);
             this.picCloseUp.Name = "picCloseUp";
-            this.picCloseUp.Size = new System.Drawing.Size(493, 381);
+            this.picCloseUp.Size = new System.Drawing.Size(413, 420);
             this.picCloseUp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picCloseUp.TabIndex = 0;
             this.picCloseUp.TabStop = false;
@@ -243,9 +245,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             this.groupOverview.AppearanceCaption.Options.UseFont = true;
             this.groupOverview.AppearanceCaption.Options.UseForeColor = true;
             this.groupOverview.Controls.Add(this.picOverview);
-            this.groupOverview.Location = new System.Drawing.Point(513, 12);
+            this.groupOverview.Location = new System.Drawing.Point(433, 12);
             this.groupOverview.Name = "groupOverview";
-            this.groupOverview.Size = new System.Drawing.Size(496, 417);
+            this.groupOverview.Size = new System.Drawing.Size(416, 447);
             this.groupOverview.TabIndex = 5;
             this.groupOverview.Text = "宏觀照片";
             // 
@@ -255,9 +257,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             this.picOverview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picOverview.Cursor = System.Windows.Forms.Cursors.Hand;
             this.picOverview.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picOverview.Location = new System.Drawing.Point(2, 34);
+            this.picOverview.Location = new System.Drawing.Point(2, 27);
             this.picOverview.Name = "picOverview";
-            this.picOverview.Size = new System.Drawing.Size(492, 381);
+            this.picOverview.Size = new System.Drawing.Size(412, 418);
             this.picOverview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picOverview.TabIndex = 1;
             this.picOverview.TabStop = false;
@@ -271,9 +273,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             this.groupInUse.AppearanceCaption.Options.UseFont = true;
             this.groupInUse.AppearanceCaption.Options.UseForeColor = true;
             this.groupInUse.Controls.Add(this.picInUse);
-            this.groupInUse.Location = new System.Drawing.Point(1013, 12);
+            this.groupInUse.Location = new System.Drawing.Point(853, 12);
             this.groupInUse.Name = "groupInUse";
-            this.groupInUse.Size = new System.Drawing.Size(495, 417);
+            this.groupInUse.Size = new System.Drawing.Size(415, 447);
             this.groupInUse.TabIndex = 6;
             this.groupInUse.Text = "使用中照片";
             // 
@@ -283,9 +285,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             this.picInUse.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picInUse.Cursor = System.Windows.Forms.Cursors.Hand;
             this.picInUse.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picInUse.Location = new System.Drawing.Point(2, 34);
+            this.picInUse.Location = new System.Drawing.Point(2, 27);
             this.picInUse.Name = "picInUse";
-            this.picInUse.Size = new System.Drawing.Size(491, 381);
+            this.picInUse.Size = new System.Drawing.Size(411, 418);
             this.picInUse.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picInUse.TabIndex = 1;
             this.picInUse.TabStop = false;
@@ -301,7 +303,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             this.lcOverview,
             this.lcInUse});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(1520, 441);
+            this.Root.Size = new System.Drawing.Size(1280, 471);
             this.Root.TextVisible = false;
             // 
             // lcCloseUp
@@ -309,25 +311,25 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             this.lcCloseUp.Control = this.groupCloseUp;
             this.lcCloseUp.Location = new System.Drawing.Point(0, 0);
             this.lcCloseUp.Name = "lcCloseUp";
-            this.lcCloseUp.Size = new System.Drawing.Size(501, 421);
+            this.lcCloseUp.Size = new System.Drawing.Size(421, 451);
             this.lcCloseUp.TextSize = new System.Drawing.Size(0, 0);
             this.lcCloseUp.TextVisible = false;
             // 
             // lcOverview
             // 
             this.lcOverview.Control = this.groupOverview;
-            this.lcOverview.Location = new System.Drawing.Point(501, 0);
+            this.lcOverview.Location = new System.Drawing.Point(421, 0);
             this.lcOverview.Name = "lcOverview";
-            this.lcOverview.Size = new System.Drawing.Size(500, 421);
+            this.lcOverview.Size = new System.Drawing.Size(420, 451);
             this.lcOverview.TextSize = new System.Drawing.Size(0, 0);
             this.lcOverview.TextVisible = false;
             // 
             // lcInUse
             // 
             this.lcInUse.Control = this.groupInUse;
-            this.lcInUse.Location = new System.Drawing.Point(1001, 0);
+            this.lcInUse.Location = new System.Drawing.Point(841, 0);
             this.lcInUse.Name = "lcInUse";
-            this.lcInUse.Size = new System.Drawing.Size(499, 421);
+            this.lcInUse.Size = new System.Drawing.Size(419, 451);
             this.lcInUse.TextSize = new System.Drawing.Size(0, 0);
             this.lcInUse.TextVisible = false;
             // 
@@ -335,13 +337,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1520, 490);
+            this.ClientSize = new System.Drawing.Size(1280, 520);
             this.Controls.Add(this.layoutControl1);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.IconOptions.Image = global::KnowledgeSystem.Properties.Resources.AppIcon;
             this.Name = "f313_AssetPhoto_Info";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
