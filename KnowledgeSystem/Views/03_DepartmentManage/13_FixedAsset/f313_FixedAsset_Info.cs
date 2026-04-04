@@ -42,7 +42,16 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
 
             btnPhotos.ItemClick += btnPhotos_ItemClick;
             barManagerTP.Items.Add(btnPhotos);
-            bar2.LinksPersistInfo.Insert(2, new LinkPersistInfo(BarLinkUserDefines.PaintStyle, btnPhotos, BarItemPaintStyle.CaptionGlyph));
+            bar2.LinksPersistInfo.Insert(2, new LinkPersistInfo(
+                BarLinkUserDefines.PaintStyle,
+                btnPhotos,
+                string.Empty,
+                true,
+                true,
+                true,
+                0,
+                null,
+                BarItemPaintStyle.CaptionGlyph));
         }
 
         private void f313_FixedAsset_Info_Load(object sender, EventArgs e)
@@ -91,6 +100,27 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             }
 
             LockControl();
+            AdjustFormHeight();
+        }
+
+        private void AdjustFormHeight()
+        {
+            if (lcControls == null || lcControls.Count == 0)
+            {
+                return;
+            }
+
+            int visibleItemsHeight = lcControls
+                .Where(item => item.Visibility == DevExpress.XtraLayout.Utils.LayoutVisibility.Always)
+                .Sum(item => item.Size.Height);
+            int verticalPadding = Root.Padding.Top + Root.Padding.Bottom;
+            int nonContentHeight = ClientSize.Height - layoutControl1.Height;
+            int requiredClientHeight = visibleItemsHeight + verticalPadding + nonContentHeight + 8;
+
+            if (ClientSize.Height < requiredClientHeight)
+            {
+                ClientSize = new System.Drawing.Size(ClientSize.Width, requiredClientHeight);
+            }
         }
 
         private void BindData()

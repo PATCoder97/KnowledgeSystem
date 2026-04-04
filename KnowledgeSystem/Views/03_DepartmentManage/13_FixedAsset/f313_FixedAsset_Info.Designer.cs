@@ -255,7 +255,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
                 this.lcAcquireDate, this.lcStatus, this.lcRemarks});
             this.Root.Name = "Root";
             this.Root.TextVisible = false;
-            this.Root.Size = new System.Drawing.Size(760, 480);
+            this.Root.Size = new System.Drawing.Size(760, 560);
             this.lcAssetCode.AllowHtmlStringInCaption = true;
             this.lcAssetCode.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.lcAssetCode.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
@@ -425,7 +425,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             this.lcRemarks.Size = new System.Drawing.Size(740, 28);
             this.lcRemarks.TextSize = new System.Drawing.Size(112, 24);
             this.lcRemarks.Text = "備註";
-            this.ClientSize = new System.Drawing.Size(760, 529);
+            this.ClientSize = new System.Drawing.Size(760, 609);
             this.Controls.Add(this.layoutControl1);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
