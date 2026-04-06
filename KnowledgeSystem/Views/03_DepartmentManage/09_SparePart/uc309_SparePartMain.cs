@@ -263,23 +263,30 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         private void EnsureDataColumns()
         {
-            if (gvData.Columns.ColumnByFieldName("Status") == null)
+            var colStatus = gvData.Columns.ColumnByFieldName("Status");
+            if (colStatus == null)
             {
-                var colStatus = gvData.Columns.AddVisible("Status", "狀態");
-                colStatus.Name = "gColStatus309";
-                colStatus.OptionsColumn.AllowEdit = false;
-                colStatus.Width = 70;
-                colStatus.VisibleIndex = gColDisplayName.VisibleIndex + 1;
+                colStatus = gvData.Columns.AddField("Status");
             }
+            colStatus.Caption = "狀態";
+            colStatus.Name = "gColStatus309";
+            colStatus.OptionsColumn.AllowEdit = false;
+            colStatus.OptionsColumn.ShowInCustomizationForm = false;
+            colStatus.Width = 70;
+            colStatus.Visible = true;
+            colStatus.VisibleIndex = 0;
 
-            if (gvData.Columns.ColumnByFieldName("PhotoStatus") == null)
+            var colPhoto = gvData.Columns.ColumnByFieldName("PhotoStatus");
+            if (colPhoto == null)
             {
-                var colPhoto = gvData.Columns.AddVisible("PhotoStatus", "圖片");
-                colPhoto.Name = "gColPhoto309";
-                colPhoto.OptionsColumn.AllowEdit = false;
-                colPhoto.Width = 70;
-                colPhoto.VisibleIndex = gColDisplayName.VisibleIndex + 2;
+                colPhoto = gvData.Columns.AddVisible("PhotoStatus", "圖片");
             }
+            colPhoto.Caption = "圖片";
+            colPhoto.Name = "gColPhoto309";
+            colPhoto.OptionsColumn.AllowEdit = false;
+            colPhoto.Width = 70;
+            colPhoto.Visible = true;
+            colPhoto.VisibleIndex = gColDisplayName.VisibleIndex + 1;
         }
 
         private dynamic GetFocusedDisplayRow()
@@ -592,7 +599,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                             data = x,
                             Unit = units.FirstOrDefault(u => u.Id == x.IdUnit)?.DisplayName,
                             Status = x.IsDisable == true ? "停用" : "啟用",
-                            PhotoStatus = photo != null ? "有圖" : "",
+                            PhotoStatus = photo != null,
                             Photo = photo,
                             UserMngr = userMngr != null ? $"{userMngr.IdDepartment}/{userMngr.DisplayName}" : "",
                             UserError = userMngr != null ? userMngr.Status != 0 || userMngr.IdDepartment != x.IdDept : false
@@ -607,6 +614,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 gColDisplayName.Width = 250;
 
                 helper.LoadViewInfo();
+                EnsureDataColumns();
             }
         }
 
