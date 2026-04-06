@@ -372,15 +372,22 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             if (disable == (material.IsDisable == true)) return;
 
             string actionName = disable ? "停用" : "啟用";
-            var confirm = XtraMessageBox.Show($"確定要{actionName}這筆物料嗎？", TPConfigs.SoftNameTW,
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (confirm != DialogResult.Yes) return;
+            var confirmUserId = XtraInputBox.Show(new XtraInputBoxArgs
+            {
+                Caption = TPConfigs.SoftNameTW,
+                Prompt = $"請輸入您的工號以確認{actionName}",
+                DefaultButtonIndex = 0,
+                Editor = new TextEdit(),
+                DefaultResponse = ""
+            })?.ToString().ToUpper();
 
-            bool result = disable
+            if (string.IsNullOrEmpty(confirmUserId) || confirmUserId != TPConfigs.LoginUser.Id.ToUpper()) return;
+
+            bool actionResult = disable
                 ? dt309_MaterialsBUS.Instance.DisableById(material.Id, TPConfigs.LoginUser.Id)
                 : dt309_MaterialsBUS.Instance.EnableById(material.Id, TPConfigs.LoginUser.Id);
 
-            if (!result)
+            if (!actionResult)
             {
                 XtraMessageBox.Show($"{actionName}失敗。", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -684,17 +691,22 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 itemMultiselect.Caption = multiSelect ? "啟用單選" : "啟用多選";
                 itemViewPhoto.Enabled = photo != null;
 
+                DXSubMenuItem photoMenu = new DXSubMenuItem("圖片") { SvgImage = TPSvgimages.Attach };
+                photoMenu.ImageOptions.SvgImageSize = new Size(24, 24);
+
                 e.Menu.Items.Add(itemViewInfo);
                 if (material?.IsDisable == true)
                 {
-                    e.Menu.Items.Add(itemViewPhoto);
+                    photoMenu.Items.Add(itemViewPhoto);
+                    e.Menu.Items.Add(photoMenu);
                     itemEnable.BeginGroup = true;
                     e.Menu.Items.Add(itemEnable);
                 }
                 else
                 {
-                    e.Menu.Items.Add(itemUploadPhoto);
-                    e.Menu.Items.Add(itemViewPhoto);
+                    photoMenu.Items.Add(itemUploadPhoto);
+                    photoMenu.Items.Add(itemViewPhoto);
+                    e.Menu.Items.Add(photoMenu);
                     e.Menu.Items.Add(itemUpdatePrice);
 
                     DXSubMenuItem dXSubMenuReports = new DXSubMenuItem("庫存作業") { SvgImage = TPSvgimages.PersonnelChanges };
