@@ -51,6 +51,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             InitializeComponent();
             InitializeIcon();
             InitializeMenuItems();
+            EnsureDataColumns();
 
             helper = new RefreshHelper(gvData, "Id");
 
@@ -71,6 +72,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         List<dt309_Units> units;
 
         List<dt309_Materials> materials;
+        List<dt309_MaterialPhoto> materialPhotos = new List<dt309_MaterialPhoto>();
         List<dt309_Storages> storages;
 
         public static Dictionary<string, string> events = new Dictionary<string, string>()
@@ -82,12 +84,16 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         };
 
         DXMenuItem itemViewInfo;
+        DXMenuItem itemUploadPhoto;
+        DXMenuItem itemViewPhoto;
         DXMenuItem itemUpdatePrice;
         DXMenuItem itemMaterialIn;
         DXMenuItem itemMaterialOut;
         DXMenuItem itemMaterialTransfer;
         DXMenuItem itemMaterialCheck;
         DXMenuItem itemMaterialGetFromOther;
+        DXMenuItem itemDisable;
+        DXMenuItem itemEnable;
         DXMenuItem itemMultiselect;
         DXMenuItem itemPrintStamp;
 
@@ -200,6 +206,27 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 }
             };
             gvData.FormatRules.Add(ruleUserError);
+
+            var ruleDisabledMaterial = new GridFormatRule
+            {
+                ApplyToRow = true,
+                Name = "RuleDisabledMaterial",
+                Rule = new FormatConditionRuleExpression
+                {
+                    Expression = "[data.IsDisable] = True",
+                    Appearance =
+                    {
+                        ForeColor = Color.DimGray,
+                        Font = new Font(gvData.Appearance.Row.Font, FontStyle.Italic),
+                        Options =
+                        {
+                            UseForeColor = true,
+                            UseFont = true
+                        }
+                    }
+                }
+            };
+            gvData.FormatRules.Add(ruleDisabledMaterial);
         }
 
         DXMenuItem CreateMenuItem(string caption, EventHandler clickEvent, SvgImage svgImage)
@@ -218,6 +245,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         private void InitializeMenuItems()
         {
             itemViewInfo = CreateMenuItem("查看資訊", ItemViewInfo_Click, TPSvgimages.View);
+            itemUploadPhoto = CreateMenuItem("上傳圖片", ItemUploadPhoto_Click, TPSvgimages.UploadFile);
+            itemViewPhoto = CreateMenuItem("查看圖片", ItemViewPhoto_Click, TPSvgimages.Search);
             itemUpdatePrice = CreateMenuItem("更新單價", ItemUpdatePrice_Click, TPSvgimages.Money);
 
             itemMaterialIn = CreateMenuItem("收料", ItemMaterialIn_Click, TPSvgimages.Num1);
@@ -226,8 +255,138 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             itemMaterialCheck = CreateMenuItem("盤點", ItemMaterialCheck_Click, TPSvgimages.Num4);
             itemMaterialGetFromOther = CreateMenuItem("調撥", ItemMaterialGetFromOther_Click, TPSvgimages.Num5);
 
+            itemDisable = CreateMenuItem("停用", ItemDisable_Click, TPSvgimages.Disable);
+            itemEnable = CreateMenuItem("啟用", ItemEnable_Click, TPSvgimages.Confirm);
             itemMultiselect = CreateMenuItem("啟用多選", ItemMultiselect_Click, TPSvgimages.CheckedRadio);
             itemPrintStamp = CreateMenuItem("執行列印", ItemPrintStamp_Click, TPSvgimages.Print);
+        }
+
+        private void EnsureDataColumns()
+        {
+            if (gvData.Columns.ColumnByFieldName("Status") == null)
+            {
+                var colStatus = gvData.Columns.AddVisible("Status", "狀態");
+                colStatus.Name = "gColStatus309";
+                colStatus.OptionsColumn.AllowEdit = false;
+                colStatus.Width = 70;
+                colStatus.VisibleIndex = gColDisplayName.VisibleIndex + 1;
+            }
+
+            if (gvData.Columns.ColumnByFieldName("PhotoStatus") == null)
+            {
+                var colPhoto = gvData.Columns.AddVisible("PhotoStatus", "圖片");
+                colPhoto.Name = "gColPhoto309";
+                colPhoto.OptionsColumn.AllowEdit = false;
+                colPhoto.Width = 70;
+                colPhoto.VisibleIndex = gColDisplayName.VisibleIndex + 2;
+            }
+        }
+
+        private dynamic GetFocusedDisplayRow()
+        {
+            if (gvData.FocusedRowHandle < 0) return null;
+            return gvData.GetRow(gvData.FocusedRowHandle) as dynamic;
+        }
+
+        private dt309_Materials GetFocusedMaterial()
+        {
+            var row = GetFocusedDisplayRow();
+            return row?.data as dt309_Materials;
+        }
+
+        private dt309_MaterialPhoto GetFocusedMaterialPhoto()
+        {
+            var row = GetFocusedDisplayRow();
+            return row?.Photo as dt309_MaterialPhoto;
+        }
+
+        private bool EnsureMaterialActive(dt309_Materials material, string actionText)
+        {
+            if (material == null)
+            {
+                XtraMessageBox.Show("找不到對應的物料。", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            if (material.IsDisable == true)
+            {
+                XtraMessageBox.Show($"停用中的物料不可{actionText}。", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            return true;
+        }
+
+        private void UploadPhotoForMaterial(dt309_Materials material)
+        {
+            if (!EnsureMaterialActive(material, "上傳圖片")) return;
+
+            using (OpenFileDialog dialog = new OpenFileDialog())
+            {
+                dialog.Title = "選擇圖片";
+                dialog.Filter = "Image Files|*.jpg;*.jpeg;*.png";
+
+                if (dialog.ShowDialog() != DialogResult.OK) return;
+
+                var savedFile = Material309Helper.SaveMaterialPhoto(material.Id, dialog.FileName);
+                int result = dt309_MaterialPhotoBUS.Instance.AddOrReplace(new dt309_MaterialPhoto()
+                {
+                    MaterialId = material.Id,
+                    EncryptionName = savedFile.encryptionName,
+                    ActualName = savedFile.actualName,
+                    UploadedBy = TPConfigs.LoginUser.Id,
+                    UploadedDate = DateTime.Now,
+                    IsActive = true
+                });
+
+                if (result <= 0)
+                {
+                    XtraMessageBox.Show("上傳圖片失敗。", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+
+            LoadData();
+        }
+
+        private void ViewPhoto(dt309_MaterialPhoto photo)
+        {
+            if (photo == null)
+            {
+                XtraMessageBox.Show("目前尚未上傳圖片。", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            Material309Helper.OpenPhotoFile(Material309Helper.GetMaterialPhotoPath(photo), photo.ActualName);
+        }
+
+        private void ToggleMaterialDisable(bool disable)
+        {
+            dt309_Materials material = GetFocusedMaterial();
+            if (material == null)
+            {
+                XtraMessageBox.Show("找不到對應的物料。", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (disable == (material.IsDisable == true)) return;
+
+            string actionName = disable ? "停用" : "啟用";
+            var confirm = XtraMessageBox.Show($"確定要{actionName}這筆物料嗎？", TPConfigs.SoftNameTW,
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (confirm != DialogResult.Yes) return;
+
+            bool result = disable
+                ? dt309_MaterialsBUS.Instance.DisableById(material.Id, TPConfigs.LoginUser.Id)
+                : dt309_MaterialsBUS.Instance.EnableById(material.Id, TPConfigs.LoginUser.Id);
+
+            if (!result)
+            {
+                XtraMessageBox.Show($"{actionName}失敗。", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            LoadData();
         }
 
         private void ItemPrintStamp_Click(object sender, EventArgs e)
@@ -297,12 +456,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         private void HandleMaterialTransaction(string eventInfo)
         {
-            var idMaterial = Convert.ToInt16(gvData.GetRowCellValue(gvData.FocusedRowHandle, gColIdMaterial));
+            dt309_Materials material = GetFocusedMaterial();
+            if (!EnsureMaterialActive(material, "進行庫存作業")) return;
 
             var transactionForm = new f309_Transaction_Info
             {
                 eventInfo = eventInfo,
-                idMaterial = idMaterial
+                idMaterial = material.Id
             };
 
             transactionForm.ShowDialog();
@@ -321,8 +481,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         private void ItemUpdatePrice_Click(object sender, EventArgs e)
         {
-            GridView view = gvData;
-            int idMaterial = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColIdMaterial));
+            dt309_Materials material = GetFocusedMaterial();
+            if (!EnsureMaterialActive(material, "更新單價")) return;
 
             var result = XtraInputBox.Show(new XtraInputBoxArgs
             {
@@ -344,13 +504,33 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
             var resultUpdate = dt309_PricesBUS.Instance.Add(new dt309_Prices()
             {
-                MaterialId = idMaterial,
+                MaterialId = material.Id,
                 Price = newPrice,
                 ChangedAt = DateTime.Now,
                 ChangedBy = TPConfigs.LoginUser.Id
             });
 
             LoadData();
+        }
+
+        private void ItemUploadPhoto_Click(object sender, EventArgs e)
+        {
+            UploadPhotoForMaterial(GetFocusedMaterial());
+        }
+
+        private void ItemViewPhoto_Click(object sender, EventArgs e)
+        {
+            ViewPhoto(GetFocusedMaterialPhoto());
+        }
+
+        private void ItemDisable_Click(object sender, EventArgs e)
+        {
+            ToggleMaterialDisable(true);
+        }
+
+        private void ItemEnable_Click(object sender, EventArgs e)
+        {
+            ToggleMaterialDisable(false);
         }
 
         private void ItemViewInfo_Click(object sender, EventArgs e)
@@ -386,19 +566,27 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 storages = dt309_StoragesBUS.Instance.GetList();
                 users = dm_UserBUS.Instance.GetList();
                 units = dt309_UnitsBUS.Instance.GetList();
+                materialPhotos = dt309_MaterialPhotoBUS.Instance.GetList().Where(r => r.IsActive).ToList();
 
                 materials = dt309_MaterialsBUS.Instance.GetListByStartIdDept(deptGetData);
                 var materialsRechecking = dt309_InspectionBatchMaterialBUS.Instance.GetListRechecking().Select(r => r.MaterialId).ToList();
+                var activePhotos = materialPhotos
+                    .GroupBy(r => r.MaterialId)
+                    .ToDictionary(r => r.Key, r => r.OrderByDescending(x => x.UploadedDate).FirstOrDefault());
 
                 var displayData = materials
                     .Where(r => !materialsRechecking.Contains(r.Id))
                     .Select(x =>
                     {
                         var userMngr = users.FirstOrDefault(u => u.Id == x.IdManager);
+                        activePhotos.TryGetValue(x.Id, out dt309_MaterialPhoto photo);
                         return new
                         {
                             data = x,
                             Unit = units.FirstOrDefault(u => u.Id == x.IdUnit)?.DisplayName,
+                            Status = x.IsDisable == true ? "停用" : "啟用",
+                            PhotoStatus = photo != null ? "有圖" : "",
+                            Photo = photo,
                             UserMngr = userMngr != null ? $"{userMngr.IdDepartment}/{userMngr.DisplayName}" : "",
                             UserError = userMngr != null ? userMngr.Status != 0 || userMngr.IdDepartment != x.IdDept : false
                         };
@@ -491,22 +679,39 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             if (e.HitInfo.InRowCell && e.HitInfo.InDataRow)
             {
                 bool multiSelect = gvData.OptionsSelection.MultiSelect;
+                dt309_Materials material = GetFocusedMaterial();
+                dt309_MaterialPhoto photo = GetFocusedMaterialPhoto();
                 itemMultiselect.Caption = multiSelect ? "啟用單選" : "啟用多選";
+                itemViewPhoto.Enabled = photo != null;
 
                 e.Menu.Items.Add(itemViewInfo);
-                e.Menu.Items.Add(itemUpdatePrice);
+                if (material?.IsDisable == true)
+                {
+                    e.Menu.Items.Add(itemViewPhoto);
+                    itemEnable.BeginGroup = true;
+                    e.Menu.Items.Add(itemEnable);
+                }
+                else
+                {
+                    e.Menu.Items.Add(itemUploadPhoto);
+                    e.Menu.Items.Add(itemViewPhoto);
+                    e.Menu.Items.Add(itemUpdatePrice);
 
-                DXSubMenuItem dXSubMenuReports = new DXSubMenuItem("庫存作業") { SvgImage = TPSvgimages.PersonnelChanges };
-                dXSubMenuReports.ImageOptions.SvgImageSize = new Size(24, 24);
+                    DXSubMenuItem dXSubMenuReports = new DXSubMenuItem("庫存作業") { SvgImage = TPSvgimages.PersonnelChanges };
+                    dXSubMenuReports.ImageOptions.SvgImageSize = new Size(24, 24);
 
-                dXSubMenuReports.Items.Add(itemMaterialIn);
-                dXSubMenuReports.Items.Add(itemMaterialOut);
-                dXSubMenuReports.Items.Add(itemMaterialTransfer);
-                dXSubMenuReports.Items.Add(itemMaterialCheck);
-                dXSubMenuReports.Items.Add(itemMaterialGetFromOther);
-                dXSubMenuReports.BeginGroup = true;
+                    dXSubMenuReports.Items.Add(itemMaterialIn);
+                    dXSubMenuReports.Items.Add(itemMaterialOut);
+                    dXSubMenuReports.Items.Add(itemMaterialTransfer);
+                    dXSubMenuReports.Items.Add(itemMaterialCheck);
+                    dXSubMenuReports.Items.Add(itemMaterialGetFromOther);
+                    dXSubMenuReports.BeginGroup = true;
 
-                e.Menu.Items.Add(dXSubMenuReports);
+                    e.Menu.Items.Add(dXSubMenuReports);
+
+                    itemDisable.BeginGroup = true;
+                    e.Menu.Items.Add(itemDisable);
+                }
 
                 //DXSubMenuItem dXSubMenuPrint = new DXSubMenuItem("列印標籤") { SvgImage = TPSvgimages.Print };
                 //dXSubMenuPrint.ImageOptions.SvgImageSize = new Size(24, 24);

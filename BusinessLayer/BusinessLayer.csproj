@@ -150,6 +150,7 @@
     <Compile Include="dt308\dt308_DiseaseBUS.cs" />
     <Compile Include="dt308\dt308_SpecialUsrCheckBUS.cs" />
     <Compile Include="dt309\dt309_MachineMaterialsBUS.cs" />
+    <Compile Include="dt309\dt309_MaterialPhotoBUS.cs" />
     <Compile Include="dt309\dt309_MachinesBUS.cs" />
     <Compile Include="dt309\dt309_MaterialsBUS.cs" />
     <Compile Include="dt309\dt309_PricesBUS.cs" />

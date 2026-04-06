@@ -237,6 +237,7 @@
     <Compile Include="Helpers\GridControlHelper.cs" />
     <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="Helpers\KeyboardHelper.cs" />
+    <Compile Include="Helpers\Material309Helper.cs" />
     <Compile Include="Helpers\PCInfoHelper.cs" />
     <Compile Include="Helpers\PdfHelper.cs" />
     <Compile Include="Helpers\RefreshHelper.cs" />

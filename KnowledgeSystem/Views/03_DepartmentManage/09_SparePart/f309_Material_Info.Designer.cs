@@ -40,6 +40,7 @@
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.btePhoto = new DevExpress.XtraEditors.ButtonEdit();
             this.txbExpDate = new DevExpress.XtraEditors.DateEdit();
             this.tokenMachine = new DevExpress.XtraEditors.TokenEdit();
             this.cbbUsr = new DevExpress.XtraEditors.SearchLookUpEdit();
@@ -60,12 +61,14 @@
             this.lcMachine = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcUnit = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcUser = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcPhoto = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcExpDate = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcLocation = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcMinQuantity = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btePhoto.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbExpDate.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbExpDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tokenMachine.Properties)).BeginInit();
@@ -84,6 +87,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcMachine)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcUnit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcUser)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcPhoto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcExpDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcLocation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcMinQuantity)).BeginInit();
@@ -173,7 +177,7 @@
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 521);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 557);
             this.barDockControlBottom.Manager = this.barManagerTP;
             this.barDockControlBottom.Size = new System.Drawing.Size(431, 0);
             // 
@@ -196,6 +200,7 @@
             // layoutControl1
             // 
             this.layoutControl1.AllowCustomization = false;
+            this.layoutControl1.Controls.Add(this.btePhoto);
             this.layoutControl1.Controls.Add(this.txbExpDate);
             this.layoutControl1.Controls.Add(this.tokenMachine);
             this.layoutControl1.Controls.Add(this.cbbUsr);
@@ -210,14 +215,32 @@
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(433, 0, 650, 400);
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(431, 472);
+            this.layoutControl1.Size = new System.Drawing.Size(431, 508);
             this.layoutControl1.TabIndex = 10;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // btePhoto
+            // 
+            this.btePhoto.Location = new System.Drawing.Point(100, 428);
+            this.btePhoto.MenuManager = this.barManagerTP;
+            this.btePhoto.Name = "btePhoto";
+            this.btePhoto.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.btePhoto.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.btePhoto.Properties.Appearance.Options.UseFont = true;
+            this.btePhoto.Properties.Appearance.Options.UseForeColor = true;
+            this.btePhoto.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.Black;
+            this.btePhoto.Properties.AppearanceDisabled.Options.UseForeColor = true;
+            this.btePhoto.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(),
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.btePhoto.Size = new System.Drawing.Size(319, 32);
+            this.btePhoto.StyleController = this.layoutControl1;
+            this.btePhoto.TabIndex = 15;
             // 
             // txbExpDate
             // 
             this.txbExpDate.EditValue = null;
-            this.txbExpDate.Location = new System.Drawing.Point(100, 428);
+            this.txbExpDate.Location = new System.Drawing.Point(100, 464);
             this.txbExpDate.MenuManager = this.barManagerTP;
             this.txbExpDate.Name = "txbExpDate";
             this.txbExpDate.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
@@ -436,11 +459,12 @@
             this.lcMachine,
             this.lcUnit,
             this.lcUser,
+            this.lcPhoto,
             this.lcExpDate,
             this.lcLocation,
             this.lcMinQuantity});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(431, 472);
+            this.Root.Size = new System.Drawing.Size(431, 508);
             this.Root.TextVisible = false;
             // 
             // lcCode
@@ -544,6 +568,21 @@
             this.lcUser.Text = "管理人員";
             this.lcUser.TextSize = new System.Drawing.Size(76, 24);
             // 
+            // lcPhoto
+            // 
+            this.lcPhoto.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lcPhoto.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.lcPhoto.AppearanceItemCaption.Options.UseFont = true;
+            this.lcPhoto.AppearanceItemCaption.Options.UseForeColor = true;
+            this.lcPhoto.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.lcPhoto.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.lcPhoto.Control = this.btePhoto;
+            this.lcPhoto.Location = new System.Drawing.Point(0, 416);
+            this.lcPhoto.Name = "lcPhoto";
+            this.lcPhoto.Size = new System.Drawing.Size(411, 36);
+            this.lcPhoto.Text = "代表圖片";
+            this.lcPhoto.TextSize = new System.Drawing.Size(76, 24);
+            // 
             // lcExpDate
             // 
             this.lcExpDate.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
@@ -553,7 +592,7 @@
             this.lcExpDate.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             this.lcExpDate.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             this.lcExpDate.Control = this.txbExpDate;
-            this.lcExpDate.Location = new System.Drawing.Point(0, 416);
+            this.lcExpDate.Location = new System.Drawing.Point(0, 452);
             this.lcExpDate.Name = "lcExpDate";
             this.lcExpDate.Size = new System.Drawing.Size(411, 36);
             this.lcExpDate.Text = "有效期至";
@@ -599,7 +638,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(431, 521);
+            this.ClientSize = new System.Drawing.Size(431, 557);
             this.Controls.Add(this.layoutControl1);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
@@ -614,6 +653,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.btePhoto.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbExpDate.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbExpDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tokenMachine.Properties)).EndInit();
@@ -632,6 +672,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcMachine)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcUnit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcUser)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcPhoto)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcExpDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcLocation)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcMinQuantity)).EndInit();
@@ -652,6 +693,7 @@
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
+        private DevExpress.XtraEditors.ButtonEdit btePhoto;
         private DevExpress.XtraEditors.ComboBoxEdit cbbTypeUse;
         private DevExpress.XtraEditors.TextEdit txbCode;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
@@ -668,6 +710,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraLayout.LayoutControlItem lcUser;
+        private DevExpress.XtraLayout.LayoutControlItem lcPhoto;
         private DevExpress.XtraEditors.TokenEdit tokenMachine;
         private DevExpress.XtraLayout.LayoutControlItem lcMachine;
         private DevExpress.XtraEditors.DateEdit txbExpDate;

@@ -326,6 +326,9 @@
     <Compile Include="dt309_MachineMaterials.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
+    <Compile Include="dt309_MaterialPhoto.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
     <Compile Include="dt309_Machines.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>

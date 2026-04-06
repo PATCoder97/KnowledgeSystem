@@ -98,6 +98,7 @@ namespace DataAccessLayer
         public virtual DbSet<dt308_CheckDetail> dt308_CheckDetail { get; set; }
         public virtual DbSet<dt308_SpecialUsrCheck> dt308_SpecialUsrCheck { get; set; }
         public virtual DbSet<dt309_MachineMaterials> dt309_MachineMaterials { get; set; }
+        public virtual DbSet<dt309_MaterialPhoto> dt309_MaterialPhoto { get; set; }
         public virtual DbSet<dt309_Materials> dt309_Materials { get; set; }
         public virtual DbSet<dt309_Storages> dt309_Storages { get; set; }
         public virtual DbSet<dt309_Units> dt309_Units { get; set; }

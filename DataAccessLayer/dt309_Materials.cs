@@ -29,5 +29,10 @@ namespace DataAccessLayer
         public Nullable<System.DateTime> DelTime { get; set; }
         public string UserDel { get; set; }
         public int Price { get; set; }
+        public Nullable<bool> IsDisable { get; set; }
+        public string DisabledBy { get; set; }
+        public Nullable<System.DateTime> DisabledDate { get; set; }
+        public string EnabledBy { get; set; }
+        public Nullable<System.DateTime> EnabledDate { get; set; }
     }
 }

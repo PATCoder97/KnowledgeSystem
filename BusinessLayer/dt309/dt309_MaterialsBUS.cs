@@ -56,6 +56,24 @@ namespace BusinessLayer
             }
         }
 
+        public List<dt309_Materials> GetDisabledListByStartIdDept(string idDept)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dt309_Materials
+                        .Where(r => r.IdDept.StartsWith(idDept) && r.DelTime == null && r.IsDisable == true)
+                        .ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         public List<dt309_Materials> GetListByIds(List<int> ids)
         {
             try
@@ -201,6 +219,56 @@ namespace BusinessLayer
             {
                 logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
                 throw;
+            }
+        }
+
+        public bool DisableById(int id, string userId)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    var item = _context.dt309_Materials.FirstOrDefault(r => r.Id == id && r.DelTime == null);
+                    if (item == null) return false;
+
+                    item.IsDisable = true;
+                    item.DisabledBy = userId;
+                    item.DisabledDate = DateTime.Now;
+                    item.EnabledBy = null;
+                    item.EnabledDate = null;
+
+                    int affectedRecords = _context.SaveChanges();
+                    return affectedRecords > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                return false;
+            }
+        }
+
+        public bool EnableById(int id, string userId)
+        {
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    var item = _context.dt309_Materials.FirstOrDefault(r => r.Id == id && r.DelTime == null);
+                    if (item == null) return false;
+
+                    item.IsDisable = false;
+                    item.EnabledBy = userId;
+                    item.EnabledDate = DateTime.Now;
+
+                    int affectedRecords = _context.SaveChanges();
+                    return affectedRecords > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                return false;
             }
         }
     }

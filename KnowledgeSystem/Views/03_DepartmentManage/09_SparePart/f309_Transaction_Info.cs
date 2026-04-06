@@ -42,6 +42,26 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             btnConfirm.ImageOptions.SvgImage = TPSvgimages.Confirm;
         }
 
+        private bool EnsureMaterialActive(bool closeWhenBlocked = false)
+        {
+            if (material == null)
+            {
+                MsgTP.MsgError("找不到對應物料");
+                if (closeWhenBlocked) Close();
+                return false;
+            }
+
+            if (material.IsDisable == true)
+            {
+                XtraMessageBox.Show("停用中的物料不可進行庫存作業。", TPConfigs.SoftNameTW,
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                if (closeWhenBlocked) Close();
+                return false;
+            }
+
+            return true;
+        }
+
         private void LockControl()
         {
             Text = $"新增{eventInfo}事件";
@@ -144,6 +164,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             cbbStorageTo.Properties.ValueMember = "Id";
 
             material = dt309_MaterialsBUS.Instance.GetItemById(idMaterial);
+            if (!EnsureMaterialActive(true))
+            {
+                return;
+            }
+
             lcQuantity.Text = lcQuantity.Text.Replace("事件", eventInfo);
 
             LockControl();
@@ -187,6 +212,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            material = dt309_MaterialsBUS.Instance.GetItemById(idMaterial);
+            if (!EnsureMaterialActive())
+            {
+                return;
+            }
+
             // Kiểm tra xem đã điền đầy đủ thông tin yêu cầu hay chưa
             bool IsValidate = true;
 
