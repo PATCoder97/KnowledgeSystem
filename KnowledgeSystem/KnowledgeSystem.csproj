@@ -746,6 +746,18 @@
     <Compile Include="Views\03_DepartmentManage\09_SparePart\f309_Material_Info.Designer.cs">
       <DependentUpon>f309_Material_Info.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\03_DepartmentManage\09_SparePart\f309_MaterialReplacement_Info.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\09_SparePart\f309_MaterialReplacement_Info.Designer.cs">
+      <DependentUpon>f309_MaterialReplacement_Info.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\09_SparePart\f309_MaterialReplacementChain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\09_SparePart\f309_MaterialReplacementChain.Designer.cs">
+      <DependentUpon>f309_MaterialReplacementChain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\03_DepartmentManage\09_SparePart\f309_ReCheckInfo.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -34,5 +34,7 @@ namespace DataAccessLayer
         public Nullable<System.DateTime> DisabledDate { get; set; }
         public string EnabledBy { get; set; }
         public Nullable<System.DateTime> EnabledDate { get; set; }
+        public Nullable<int> ReplacementMaterialId { get; set; }
+        public Nullable<System.DateTime> ReplacementDate { get; set; }
     }
 }

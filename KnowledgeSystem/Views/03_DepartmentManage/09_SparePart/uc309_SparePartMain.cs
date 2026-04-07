@@ -51,7 +51,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             InitializeComponent();
             InitializeIcon();
             InitializeMenuItems();
-            EnsureDataColumns();
 
             helper = new RefreshHelper(gvData, "Id");
 
@@ -84,6 +83,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         };
 
         DXMenuItem itemViewInfo;
+        DXMenuItem itemSetReplacement;
+        DXMenuItem itemClearReplacement;
+        DXMenuItem itemViewReplacementChain;
         DXMenuItem itemUploadPhoto;
         DXMenuItem itemViewPhoto;
         DXMenuItem itemUpdatePrice;
@@ -245,6 +247,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         private void InitializeMenuItems()
         {
             itemViewInfo = CreateMenuItem("查看資訊", ItemViewInfo_Click, TPSvgimages.View);
+            itemSetReplacement = CreateMenuItem("設定替代料", ItemSetReplacement_Click, TPSvgimages.Edit);
+            itemClearReplacement = CreateMenuItem("清除替代料", ItemClearReplacement_Click, TPSvgimages.Remove);
+            itemViewReplacementChain = CreateMenuItem("查看替代鏈", ItemViewReplacementChain_Click, TPSvgimages.Search);
             itemUploadPhoto = CreateMenuItem("上傳圖片", ItemUploadPhoto_Click, TPSvgimages.UploadFile);
             itemViewPhoto = CreateMenuItem("查看圖片", ItemViewPhoto_Click, TPSvgimages.Search);
             itemUpdatePrice = CreateMenuItem("更新單價", ItemUpdatePrice_Click, TPSvgimages.Money);
@@ -259,34 +264,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             itemEnable = CreateMenuItem("啟用", ItemEnable_Click, TPSvgimages.Confirm);
             itemMultiselect = CreateMenuItem("啟用多選", ItemMultiselect_Click, TPSvgimages.CheckedRadio);
             itemPrintStamp = CreateMenuItem("執行列印", ItemPrintStamp_Click, TPSvgimages.Print);
-        }
-
-        private void EnsureDataColumns()
-        {
-            var colStatus = gvData.Columns.ColumnByFieldName("Status");
-            if (colStatus == null)
-            {
-                colStatus = gvData.Columns.AddField("Status");
-            }
-            colStatus.Caption = "狀態";
-            colStatus.Name = "gColStatus309";
-            colStatus.OptionsColumn.AllowEdit = false;
-            colStatus.OptionsColumn.ShowInCustomizationForm = false;
-            colStatus.Width = 70;
-            colStatus.Visible = true;
-            colStatus.VisibleIndex = 0;
-
-            var colPhoto = gvData.Columns.ColumnByFieldName("PhotoStatus");
-            if (colPhoto == null)
-            {
-                colPhoto = gvData.Columns.AddVisible("PhotoStatus", "圖片");
-            }
-            colPhoto.Caption = "圖片";
-            colPhoto.Name = "gColPhoto309";
-            colPhoto.OptionsColumn.AllowEdit = false;
-            colPhoto.Width = 70;
-            colPhoto.Visible = true;
-            colPhoto.VisibleIndex = gColDisplayName.VisibleIndex + 1;
         }
 
         private dynamic GetFocusedDisplayRow()
@@ -305,6 +282,16 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         {
             var row = GetFocusedDisplayRow();
             return row?.Photo as dt309_MaterialPhoto;
+        }
+
+        private string GetReplacementTargetUsageMessage(dt309_Materials material)
+        {
+            if (material == null)
+            {
+                return "找不到對應的物料。";
+            }
+
+            return dt309_MaterialsBUS.Instance.GetReplacementTargetUsageMessage(material.Id);
         }
 
         private bool EnsureMaterialActive(dt309_Materials material, string actionText)
@@ -378,6 +365,16 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
             if (disable == (material.IsDisable == true)) return;
 
+            if (disable)
+            {
+                string replacementUsageMessage = GetReplacementTargetUsageMessage(material);
+                if (!string.IsNullOrEmpty(replacementUsageMessage))
+                {
+                    XtraMessageBox.Show(replacementUsageMessage, TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
             string actionName = disable ? "停用" : "啟用";
             var confirmUserId = XtraInputBox.Show(new XtraInputBoxArgs
             {
@@ -401,6 +398,88 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             }
 
             LoadData();
+        }
+
+        private void ConfigureMaterialReplacement()
+        {
+            dt309_Materials material = GetFocusedMaterial();
+            if (!EnsureMaterialActive(material, "設定替代料")) return;
+
+            var candidateMaterials = dt309_MaterialsBUS.Instance.GetReplacementCandidateList(material.Id);
+            if (candidateMaterials.Count == 0 && material.ReplacementMaterialId == null)
+            {
+                XtraMessageBox.Show("目前沒有可設定的替代料。", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            using (var form = new f309_MaterialReplacement_Info(material, candidateMaterials))
+            {
+                if (form.ShowDialog() != DialogResult.OK)
+                {
+                    return;
+                }
+
+                string resultMessage = dt309_MaterialsBUS.Instance.UpdateReplacement(
+                    material.Id,
+                    form.SelectedReplacementMaterialId,
+                    form.SelectedReplacementDate);
+
+                if (!string.IsNullOrEmpty(resultMessage))
+                {
+                    MsgTP.MsgError(resultMessage);
+                    return;
+                }
+            }
+
+            LoadData();
+        }
+
+        private void ClearMaterialReplacement()
+        {
+            dt309_Materials material = GetFocusedMaterial();
+            if (!EnsureMaterialActive(material, "清除替代料")) return;
+
+            if (material.ReplacementMaterialId == null)
+            {
+                XtraMessageBox.Show("目前尚未設定替代料。", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            var confirmResult = XtraMessageBox.Show(
+                $"您確認要清除物料「{material.Code}」的替代設定嗎？",
+                TPConfigs.SoftNameTW,
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (confirmResult != DialogResult.Yes)
+            {
+                return;
+            }
+
+            string resultMessage = dt309_MaterialsBUS.Instance.UpdateReplacement(material.Id, null, null);
+            if (!string.IsNullOrEmpty(resultMessage))
+            {
+                MsgTP.MsgError(resultMessage);
+                return;
+            }
+
+            LoadData();
+        }
+
+        private void ViewMaterialReplacementChain()
+        {
+            dt309_Materials material = GetFocusedMaterial();
+            if (material == null)
+            {
+                XtraMessageBox.Show("找不到對應的物料。", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var chainNodes = dt309_MaterialsBUS.Instance.GetReplacementChain(material.Id);
+            using (var form = new f309_MaterialReplacementChain(material, chainNodes))
+            {
+                form.ShowDialog();
+            }
         }
 
         private void ItemPrintStamp_Click(object sender, EventArgs e)
@@ -532,6 +611,21 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             UploadPhotoForMaterial(GetFocusedMaterial());
         }
 
+        private void ItemSetReplacement_Click(object sender, EventArgs e)
+        {
+            ConfigureMaterialReplacement();
+        }
+
+        private void ItemClearReplacement_Click(object sender, EventArgs e)
+        {
+            ClearMaterialReplacement();
+        }
+
+        private void ItemViewReplacementChain_Click(object sender, EventArgs e)
+        {
+            ViewMaterialReplacementChain();
+        }
+
         private void ItemViewPhoto_Click(object sender, EventArgs e)
         {
             ViewPhoto(GetFocusedMaterialPhoto());
@@ -587,6 +681,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 var activePhotos = materialPhotos
                     .GroupBy(r => r.MaterialId)
                     .ToDictionary(r => r.Key, r => r.OrderByDescending(x => x.UploadedDate).FirstOrDefault());
+                var materialsById = materials.ToDictionary(r => r.Id);
 
                 var displayData = materials
                     .Where(r => !materialsRechecking.Contains(r.Id))
@@ -594,11 +689,19 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                     {
                         var userMngr = users.FirstOrDefault(u => u.Id == x.IdManager);
                         activePhotos.TryGetValue(x.Id, out dt309_MaterialPhoto photo);
+                        dt309_Materials replacementMaterial = null;
+                        if (x.ReplacementMaterialId != null)
+                        {
+                            materialsById.TryGetValue(x.ReplacementMaterialId.Value, out replacementMaterial);
+                        }
+
                         return new
                         {
                             data = x,
                             Unit = units.FirstOrDefault(u => u.Id == x.IdUnit)?.DisplayName,
                             Status = x.IsDisable == true ? "停用" : "啟用",
+                            ReplacementMaterialCode = replacementMaterial?.Code ?? string.Empty,
+                            ReplacementDate = x.ReplacementDate,
                             PhotoStatus = photo != null,
                             Photo = photo,
                             UserMngr = userMngr != null ? $"{userMngr.IdDepartment}/{userMngr.DisplayName}" : "",
@@ -614,7 +717,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 gColDisplayName.Width = 250;
 
                 helper.LoadViewInfo();
-                EnsureDataColumns();
             }
         }
 
@@ -698,16 +800,28 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 dt309_MaterialPhoto photo = GetFocusedMaterialPhoto();
                 itemMultiselect.Caption = multiSelect ? "啟用單選" : "啟用多選";
                 itemViewPhoto.Enabled = photo != null;
+                itemClearReplacement.Enabled = material?.ReplacementMaterialId != null && material?.IsDisable != true;
+                itemSetReplacement.Enabled = material != null && material.IsDisable != true;
+                itemViewReplacementChain.Enabled = material != null;
+                itemEnable.BeginGroup = true;
+                itemDisable.BeginGroup = true;
+                itemMultiselect.BeginGroup = true;
+
+                DXSubMenuItem replacementMenu = new DXSubMenuItem("替代設定") { SvgImage = TPSvgimages.Transfer };
+                replacementMenu.ImageOptions.SvgImageSize = new Size(24, 24);
+                replacementMenu.Items.Add(itemViewReplacementChain);
+                replacementMenu.Items.Add(itemSetReplacement);
+                replacementMenu.Items.Add(itemClearReplacement);
 
                 DXSubMenuItem photoMenu = new DXSubMenuItem("圖片") { SvgImage = TPSvgimages.Attach };
                 photoMenu.ImageOptions.SvgImageSize = new Size(24, 24);
 
                 e.Menu.Items.Add(itemViewInfo);
+                e.Menu.Items.Add(replacementMenu);
                 if (material?.IsDisable == true)
                 {
                     photoMenu.Items.Add(itemViewPhoto);
                     e.Menu.Items.Add(photoMenu);
-                    itemEnable.BeginGroup = true;
                     e.Menu.Items.Add(itemEnable);
                 }
                 else
@@ -729,21 +843,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
                     e.Menu.Items.Add(dXSubMenuReports);
 
-                    itemDisable.BeginGroup = true;
                     e.Menu.Items.Add(itemDisable);
                 }
 
-                //DXSubMenuItem dXSubMenuPrint = new DXSubMenuItem("列印標籤") { SvgImage = TPSvgimages.Print };
-                //dXSubMenuPrint.ImageOptions.SvgImageSize = new Size(24, 24);
-
-                itemMultiselect.BeginGroup = true;
-
                 e.Menu.Items.Add(itemMultiselect);
                 e.Menu.Items.Add(itemPrintStamp);
-                //dXSubMenuPrint.Items.Add(itemPrintStamp);
-                //dXSubMenuPrint.Items.Add(itemMultiselect);
-
-                //e.Menu.Items.Add(dXSubMenuPrint);
             }
         }
 

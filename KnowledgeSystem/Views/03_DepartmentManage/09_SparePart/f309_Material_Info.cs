@@ -72,6 +72,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         private bool IsMaterialDisabled => material?.IsDisable == true;
 
+        private string GetReplacementTargetUsageMessage()
+        {
+            return material == null
+                ? "找不到對應的物料。"
+                : dt309_MaterialsBUS.Instance.GetReplacementTargetUsageMessage(material.Id);
+        }
+
         private void LoadPhotoInfo()
         {
             currentPhoto = material != null && material.Id > 0
@@ -410,6 +417,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
                         break;
                     case EventFormInfo.Delete:
+                        string replacementUsageMessage = GetReplacementTargetUsageMessage();
+                        if (!string.IsNullOrEmpty(replacementUsageMessage))
+                        {
+                            XtraMessageBox.Show(replacementUsageMessage, TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
 
                         var dialogResult = XtraMessageBox.Show($"您確認要刪除{formName}:\r\n{material.DisplayName}", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                         if (dialogResult != DialogResult.Yes) return;
@@ -449,6 +462,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             if (IsMaterialDisabled)
             {
                 XtraMessageBox.Show("停用中的物料不可刪除。", TPConfigs.SoftNameTW);
+                return;
+            }
+
+            string replacementUsageMessage = GetReplacementTargetUsageMessage();
+            if (!string.IsNullOrEmpty(replacementUsageMessage))
+            {
+                XtraMessageBox.Show(replacementUsageMessage, TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 

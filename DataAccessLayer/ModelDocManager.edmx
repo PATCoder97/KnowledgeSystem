@@ -970,6 +970,8 @@
           <Property Name="DisabledDate" Type="datetime" />
           <Property Name="EnabledBy" Type="varchar" MaxLength="10" />
           <Property Name="EnabledDate" Type="datetime" />
+          <Property Name="ReplacementMaterialId" Type="int" />
+          <Property Name="ReplacementDate" Type="datetime" />
         </EntityType>
         <EntityType Name="dt309_MaterialPhoto">
           <Key>
@@ -2591,6 +2593,8 @@ warning 6002: The table/view 'DBDocumentManagementSystem.dbo.vw310_EquipmentInfo
           <Property Name="DisabledDate" Type="DateTime" Precision="3" />
           <Property Name="EnabledBy" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="EnabledDate" Type="DateTime" Precision="3" />
+          <Property Name="ReplacementMaterialId" Type="Int32" />
+          <Property Name="ReplacementDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="dt309_MaterialPhoto">
           <Key>
@@ -4171,6 +4175,8 @@ warning 6002: The table/view 'DBDocumentManagementSystem.dbo.vw310_EquipmentInfo
                 <ScalarProperty Name="DisabledDate" ColumnName="DisabledDate" />
                 <ScalarProperty Name="DisabledBy" ColumnName="DisabledBy" />
                 <ScalarProperty Name="IsDisable" ColumnName="IsDisable" />
+                <ScalarProperty Name="ReplacementDate" ColumnName="ReplacementDate" />
+                <ScalarProperty Name="ReplacementMaterialId" ColumnName="ReplacementMaterialId" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="UserDel" ColumnName="UserDel" />
                 <ScalarProperty Name="DelTime" ColumnName="DelTime" />

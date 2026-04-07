@@ -53,10 +53,14 @@
             this.gridColumn21 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gColIdMaterial = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColStatus309 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColReplacementCode309 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColReplacementDate309 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColPhoto309 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColDisplayName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -65,7 +69,6 @@
             this.gridColumn18 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColUserMngr = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -355,10 +358,14 @@
             this.gvData.Appearance.Row.Options.UseForeColor = true;
             this.gvData.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gColIdMaterial,
+            this.gColStatus309,
+            this.gridColumn4,
+            this.gColReplacementCode309,
+            this.gColReplacementDate309,
+            this.gColPhoto309,
             this.gridColumn1,
             this.gColDisplayName,
             this.gridColumn3,
-            this.gridColumn4,
             this.gridColumn13,
             this.gridColumn14,
             this.gridColumn15,
@@ -366,8 +373,7 @@
             this.gridColumn17,
             this.gridColumn18,
             this.gColUserMngr,
-            this.gridColumn6,
-            this.gridColumn8});
+            this.gridColumn6});
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
             this.gvData.OptionsScrollAnnotations.ShowSelectedRows = DevExpress.Utils.DefaultBoolean.True;
@@ -392,33 +398,14 @@
             this.gColIdMaterial.FieldName = "data.Id";
             this.gColIdMaterial.Name = "gColIdMaterial";
             // 
-            // gridColumn1
+            // gColStatus309
             // 
-            this.gridColumn1.Caption = "材料編號";
-            this.gridColumn1.FieldName = "data.Code";
-            this.gridColumn1.Name = "gridColumn1";
-            this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 1;
-            this.gridColumn1.Width = 123;
-            // 
-            // gColDisplayName
-            // 
-            this.gColDisplayName.Caption = "品名規格";
-            this.gColDisplayName.FieldName = "data.DisplayName";
-            this.gColDisplayName.MaxWidth = 600;
-            this.gColDisplayName.Name = "gColDisplayName";
-            this.gColDisplayName.Visible = true;
-            this.gColDisplayName.VisibleIndex = 2;
-            this.gColDisplayName.Width = 122;
-            // 
-            // gridColumn3
-            // 
-            this.gridColumn3.Caption = "用途";
-            this.gridColumn3.FieldName = "data.TypeUse";
-            this.gridColumn3.Name = "gridColumn3";
-            this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 3;
-            this.gridColumn3.Width = 87;
+            this.gColStatus309.Caption = "狀態";
+            this.gColStatus309.FieldName = "Status";
+            this.gColStatus309.Name = "gColStatus309";
+            this.gColStatus309.Visible = true;
+            this.gColStatus309.VisibleIndex = 0;
+            this.gColStatus309.Width = 70;
             // 
             // gridColumn4
             // 
@@ -428,8 +415,65 @@
             this.gridColumn4.FieldName = "Unit";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 5;
+            this.gridColumn4.VisibleIndex = 1;
             this.gridColumn4.Width = 112;
+            // 
+            // gColReplacementCode309
+            // 
+            this.gColReplacementCode309.Caption = "替代料號";
+            this.gColReplacementCode309.FieldName = "ReplacementMaterialCode";
+            this.gColReplacementCode309.Name = "gColReplacementCode309";
+            this.gColReplacementCode309.Visible = true;
+            this.gColReplacementCode309.VisibleIndex = 4;
+            this.gColReplacementCode309.Width = 120;
+            // 
+            // gColReplacementDate309
+            // 
+            this.gColReplacementDate309.Caption = "替代日期";
+            this.gColReplacementDate309.DisplayFormat.FormatString = "yyyy/MM/dd";
+            this.gColReplacementDate309.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.gColReplacementDate309.FieldName = "ReplacementDate";
+            this.gColReplacementDate309.Name = "gColReplacementDate309";
+            this.gColReplacementDate309.Width = 120;
+            // 
+            // gColPhoto309
+            // 
+            this.gColPhoto309.AppearanceCell.Options.UseTextOptions = true;
+            this.gColPhoto309.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gColPhoto309.Caption = "圖片";
+            this.gColPhoto309.FieldName = "PhotoStatus";
+            this.gColPhoto309.Name = "gColPhoto309";
+            this.gColPhoto309.Visible = true;
+            this.gColPhoto309.VisibleIndex = 5;
+            this.gColPhoto309.Width = 70;
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "材料編號";
+            this.gridColumn1.FieldName = "data.Code";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 2;
+            this.gridColumn1.Width = 123;
+            // 
+            // gColDisplayName
+            // 
+            this.gColDisplayName.Caption = "品名規格";
+            this.gColDisplayName.FieldName = "data.DisplayName";
+            this.gColDisplayName.MaxWidth = 600;
+            this.gColDisplayName.Name = "gColDisplayName";
+            this.gColDisplayName.Visible = true;
+            this.gColDisplayName.VisibleIndex = 3;
+            this.gColDisplayName.Width = 122;
+            // 
+            // gridColumn3
+            // 
+            this.gridColumn3.Caption = "用途";
+            this.gridColumn3.FieldName = "data.TypeUse";
+            this.gridColumn3.Name = "gridColumn3";
+            this.gridColumn3.Visible = true;
+            this.gridColumn3.VisibleIndex = 6;
+            this.gridColumn3.Width = 87;
             // 
             // gridColumn13
             // 
@@ -437,7 +481,7 @@
             this.gridColumn13.FieldName = "data.MinQuantity";
             this.gridColumn13.Name = "gridColumn13";
             this.gridColumn13.Visible = true;
-            this.gridColumn13.VisibleIndex = 6;
+            this.gridColumn13.VisibleIndex = 8;
             // 
             // gridColumn14
             // 
@@ -445,7 +489,7 @@
             this.gridColumn14.FieldName = "data.QuantityInStorage";
             this.gridColumn14.Name = "gridColumn14";
             this.gridColumn14.Visible = true;
-            this.gridColumn14.VisibleIndex = 7;
+            this.gridColumn14.VisibleIndex = 9;
             // 
             // gridColumn15
             // 
@@ -453,7 +497,7 @@
             this.gridColumn15.FieldName = "data.QuantityInMachine";
             this.gridColumn15.Name = "gridColumn15";
             this.gridColumn15.Visible = true;
-            this.gridColumn15.VisibleIndex = 8;
+            this.gridColumn15.VisibleIndex = 10;
             // 
             // gridColumn16
             // 
@@ -461,7 +505,7 @@
             this.gridColumn16.FieldName = "data.Location";
             this.gridColumn16.Name = "gridColumn16";
             this.gridColumn16.Visible = true;
-            this.gridColumn16.VisibleIndex = 4;
+            this.gridColumn16.VisibleIndex = 7;
             // 
             // gridColumn17
             // 
@@ -471,7 +515,7 @@
             this.gridColumn17.FieldName = "data.Price";
             this.gridColumn17.Name = "gridColumn17";
             this.gridColumn17.Visible = true;
-            this.gridColumn17.VisibleIndex = 9;
+            this.gridColumn17.VisibleIndex = 11;
             // 
             // gridColumn18
             // 
@@ -482,7 +526,7 @@
             this.gridColumn18.Name = "gridColumn18";
             this.gridColumn18.UnboundDataType = typeof(double);
             this.gridColumn18.Visible = true;
-            this.gridColumn18.VisibleIndex = 10;
+            this.gridColumn18.VisibleIndex = 12;
             // 
             // gColUserMngr
             // 
@@ -490,7 +534,7 @@
             this.gColUserMngr.FieldName = "UserMngr";
             this.gColUserMngr.Name = "gColUserMngr";
             this.gColUserMngr.Visible = true;
-            this.gColUserMngr.VisibleIndex = 11;
+            this.gColUserMngr.VisibleIndex = 13;
             // 
             // gridColumn6
             // 
@@ -502,16 +546,8 @@
             this.gridColumn6.FieldName = "data.ExpDate";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 12;
+            this.gridColumn6.VisibleIndex = 14;
             this.gridColumn6.Width = 94;
-            // 
-            // gridColumn8
-            // 
-            this.gridColumn8.Caption = "單位";
-            this.gridColumn8.FieldName = "data.IdDept";
-            this.gridColumn8.Name = "gridColumn8";
-            this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 0;
             // 
             // layoutControl1
             // 
@@ -775,6 +811,9 @@
         private DevExpress.XtraGrid.Columns.GridColumn gColDisplayName;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
+        private DevExpress.XtraGrid.Columns.GridColumn gColReplacementCode309;
+        private DevExpress.XtraGrid.Columns.GridColumn gColReplacementDate309;
+        private DevExpress.XtraGrid.Columns.GridColumn gColPhoto309;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
@@ -802,7 +841,7 @@
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
+        private DevExpress.XtraGrid.Columns.GridColumn gColStatus309;
         private DevExpress.XtraBars.BarSubItem btnExportExcel;
         private DevExpress.XtraBars.BarButtonItem btnExcelBySpare;
         private DevExpress.XtraBars.BarButtonItem btnExcelByMachine;
