@@ -758,6 +758,27 @@
     <Compile Include="Views\03_DepartmentManage\09_SparePart\f309_MaterialReplacementChain.Designer.cs">
       <DependentUpon>f309_MaterialReplacementChain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\03_DepartmentManage\09_SparePart\f309_RecoveryEvidenceUpload.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\09_SparePart\f309_RecoveryEvidenceUpload.Designer.cs">
+      <DependentUpon>f309_RecoveryEvidenceUpload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\09_SparePart\f309_RecoveryGuideMgmt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\09_SparePart\f309_RecoveryGuideMgmt.Designer.cs">
+      <DependentUpon>f309_RecoveryGuideMgmt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\09_SparePart\f309_RecoverySchedule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\09_SparePart\f309_RecoverySchedule.Designer.cs">
+      <DependentUpon>f309_RecoverySchedule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\09_SparePart\Material309RecoveryHelper.cs" />
+    <Compile Include="Views\03_DepartmentManage\09_SparePart\dt309_RecoveryConst.cs" />
+    <Compile Include="Views\03_DepartmentManage\09_SparePart\dt309_RecoveryTicketGridRow.cs" />
     <Compile Include="Views\03_DepartmentManage\09_SparePart\f309_ReCheckInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -811,6 +832,12 @@
     </Compile>
     <Compile Include="Views\03_DepartmentManage\09_SparePart\uc309_SparePartMain.Designer.cs">
       <DependentUpon>uc309_SparePartMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\09_SparePart\uc309_RecoveryMgmt.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\03_DepartmentManage\09_SparePart\uc309_RecoveryMgmt.Designer.cs">
+      <DependentUpon>uc309_RecoveryMgmt.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\03_DepartmentManage\10_EHSWorkforce\f310_Area5SResponsible_Info.cs">
       <SubType>Form</SubType>

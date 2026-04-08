@@ -14,6 +14,12 @@ namespace DataAccessLayer
     
     public partial class dt309_Materials
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public dt309_Materials()
+        {
+            this.dt309_Materials1 = new HashSet<dt309_Materials>();
+        }
+    
         public int Id { get; set; }
         public string IdDept { get; set; }
         public string Code { get; set; }
@@ -36,5 +42,11 @@ namespace DataAccessLayer
         public Nullable<System.DateTime> EnabledDate { get; set; }
         public Nullable<int> ReplacementMaterialId { get; set; }
         public Nullable<System.DateTime> ReplacementDate { get; set; }
+        public Nullable<int> BaseMaterialId { get; set; }
+        public bool IsRecoveredOld { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<dt309_Materials> dt309_Materials1 { get; set; }
+        public virtual dt309_Materials dt309_Materials2 { get; set; }
     }
 }

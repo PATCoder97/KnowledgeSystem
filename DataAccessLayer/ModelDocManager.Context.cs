@@ -153,5 +153,8 @@ namespace DataAccessLayer
         public virtual DbSet<dt313_InspectionBatch> dt313_InspectionBatch { get; set; }
         public virtual DbSet<dt313_InspectionBatchAsset> dt313_InspectionBatchAsset { get; set; }
         public virtual DbSet<dt313_InspectionPhoto> dt313_InspectionPhoto { get; set; }
+        public virtual DbSet<dt309_RecoveryEvidence> dt309_RecoveryEvidence { get; set; }
+        public virtual DbSet<dt309_RecoveryGuides> dt309_RecoveryGuides { get; set; }
+        public virtual DbSet<dt309_RecoveryTickets> dt309_RecoveryTickets { get; set; }
     }
 }

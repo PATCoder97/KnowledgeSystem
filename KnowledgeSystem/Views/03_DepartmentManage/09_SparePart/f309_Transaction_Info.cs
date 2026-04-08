@@ -11,6 +11,7 @@ using BusinessLayer;
 using System.Windows.Media.Media3D;
 using DataAccessLayer;
 using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraLayout;
 using KnowledgeSystem.Helpers;
 using System.Threading;
@@ -19,10 +20,15 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 {
     public partial class f309_Transaction_Info : DevExpress.XtraEditors.XtraForm
     {
+        private const int RecoveryOptionNoneValue = 0;
+        private const int RecoveryOptionScrapValue = 1;
+        private const int RecoveryOptionRestockValue = 2;
+
         public f309_Transaction_Info()
         {
             InitializeComponent();
             InitializeIcon();
+            InitializeRecoverySection();
         }
 
         public string eventInfo = "";
@@ -34,12 +40,373 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         List<LayoutControlItem> lcControls;
         List<LayoutControlItem> lcImpControls;
+        Dictionary<LayoutControlItem, string> lcBaseTexts = new Dictionary<LayoutControlItem, string>();
+
+        RadioGroup rgRecoveryOption;
+        SearchLookUpEdit sleOldMaterial;
+        GridView gvOldMaterialLookup;
+        TextEdit txbOldQuantity;
+        SearchLookUpEdit sleAssignedUser;
+        GridView gvAssignedUserLookup;
+        DateEdit dePlannedDisposeDate;
+        LookUpEdit cbbRestockStorage;
+        MemoEdit memoRecoveryNote;
+        SimpleButton btnViewGuideDocs;
+
+        LayoutControlItem lcRecoveryOption;
+        LayoutControlItem lcOldMaterial;
+        LayoutControlItem lcOldQuantity;
+        LayoutControlItem lcAssignedUser;
+        LayoutControlItem lcPlannedDisposeDate;
+        LayoutControlItem lcRestockStorage;
+        LayoutControlItem lcRecoveryNote;
+        LayoutControlItem lcGuideDocs;
 
         private void InitializeIcon()
         {
             btnEdit.ImageOptions.SvgImage = TPSvgimages.Edit;
             btnDelete.ImageOptions.SvgImage = TPSvgimages.Remove;
             btnConfirm.ImageOptions.SvgImage = TPSvgimages.Confirm;
+        }
+
+        private void InitializeRecoverySection()
+        {
+            rgRecoveryOption = new RadioGroup();
+            rgRecoveryOption.Properties.Appearance.Font = TPConfigs.fontUI14;
+            rgRecoveryOption.Properties.Appearance.ForeColor = Color.Black;
+            rgRecoveryOption.Properties.Appearance.Options.UseFont = true;
+            rgRecoveryOption.Properties.Appearance.Options.UseForeColor = true;
+            rgRecoveryOption.Properties.Items.Add(new DevExpress.XtraEditors.Controls.RadioGroupItem(RecoveryOptionNoneValue, "沒有舊品拆出"));
+            rgRecoveryOption.Properties.Items.Add(new DevExpress.XtraEditors.Controls.RadioGroupItem(RecoveryOptionScrapValue, "拆出後送報廢"));
+            rgRecoveryOption.Properties.Items.Add(new DevExpress.XtraEditors.Controls.RadioGroupItem(RecoveryOptionRestockValue, "拆出後回收入庫"));
+            rgRecoveryOption.EditValue = RecoveryOptionNoneValue;
+            rgRecoveryOption.SelectedIndexChanged += rgRecoveryOption_SelectedIndexChanged;
+
+            sleOldMaterial = new SearchLookUpEdit();
+            sleOldMaterial.Properties.Appearance.Font = TPConfigs.fontUI14;
+            sleOldMaterial.Properties.Appearance.ForeColor = Color.Black;
+            sleOldMaterial.Properties.Appearance.Options.UseFont = true;
+            sleOldMaterial.Properties.Appearance.Options.UseForeColor = true;
+            sleOldMaterial.Properties.AppearanceDropDown.Font = TPConfigs.fontUI14;
+            sleOldMaterial.Properties.AppearanceDropDown.Options.UseFont = true;
+            sleOldMaterial.Properties.NullText = string.Empty;
+            sleOldMaterial.Properties.PopupView = CreateLookupView(out gvOldMaterialLookup,
+                ("Code", "料號"),
+                ("DisplayName", "品名規格"));
+            sleOldMaterial.Properties.DisplayMember = "Code";
+            sleOldMaterial.Properties.ValueMember = "Id";
+
+            txbOldQuantity = new TextEdit();
+            txbOldQuantity.Properties.Appearance.Font = TPConfigs.fontUI14;
+            txbOldQuantity.Properties.Appearance.ForeColor = Color.Black;
+            txbOldQuantity.Properties.Appearance.Options.UseFont = true;
+            txbOldQuantity.Properties.Appearance.Options.UseForeColor = true;
+            txbOldQuantity.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
+            txbOldQuantity.Properties.MaskSettings.Set("mask", "F");
+            txbOldQuantity.Properties.MaskSettings.Set("autoHideDecimalSeparator", null);
+            txbOldQuantity.Properties.UseMaskAsDisplayFormat = true;
+            txbOldQuantity.EditValue = "0";
+
+            sleAssignedUser = new SearchLookUpEdit();
+            sleAssignedUser.Properties.Appearance.Font = TPConfigs.fontUI14;
+            sleAssignedUser.Properties.Appearance.ForeColor = Color.Black;
+            sleAssignedUser.Properties.Appearance.Options.UseFont = true;
+            sleAssignedUser.Properties.Appearance.Options.UseForeColor = true;
+            sleAssignedUser.Properties.AppearanceDropDown.Font = TPConfigs.fontUI14;
+            sleAssignedUser.Properties.AppearanceDropDown.Options.UseFont = true;
+            sleAssignedUser.Properties.NullText = string.Empty;
+            sleAssignedUser.Properties.PopupView = CreateLookupView(out gvAssignedUserLookup,
+                ("Id", "工號"),
+                ("DisplayName", "姓名"),
+                ("IdDepartment", "單位"));
+            sleAssignedUser.Properties.DisplayMember = "DisplayName";
+            sleAssignedUser.Properties.ValueMember = "Id";
+
+            dePlannedDisposeDate = new DateEdit();
+            dePlannedDisposeDate.Properties.Appearance.Font = TPConfigs.fontUI14;
+            dePlannedDisposeDate.Properties.Appearance.ForeColor = Color.Black;
+            dePlannedDisposeDate.Properties.Appearance.Options.UseFont = true;
+            dePlannedDisposeDate.Properties.Appearance.Options.UseForeColor = true;
+            dePlannedDisposeDate.Properties.Buttons.Add(new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo));
+            dePlannedDisposeDate.Properties.CalendarTimeEditing = DevExpress.Utils.DefaultBoolean.True;
+            dePlannedDisposeDate.Properties.CalendarView = DevExpress.XtraEditors.Repository.CalendarView.TouchUI;
+            dePlannedDisposeDate.Properties.VistaDisplayMode = DevExpress.Utils.DefaultBoolean.False;
+            dePlannedDisposeDate.Properties.MaskSettings.Set("mask", "yyyy/MM/dd HH:mm");
+            dePlannedDisposeDate.Properties.UseMaskAsDisplayFormat = true;
+            dePlannedDisposeDate.Properties.CalendarTimeProperties.Buttons.Add(new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo));
+
+            cbbRestockStorage = new LookUpEdit();
+            cbbRestockStorage.Properties.Appearance.Font = TPConfigs.fontUI14;
+            cbbRestockStorage.Properties.Appearance.ForeColor = Color.Black;
+            cbbRestockStorage.Properties.Appearance.Options.UseFont = true;
+            cbbRestockStorage.Properties.Appearance.Options.UseForeColor = true;
+            cbbRestockStorage.Properties.AppearanceDropDown.Font = TPConfigs.fontUI14;
+            cbbRestockStorage.Properties.AppearanceDropDown.Options.UseFont = true;
+            cbbRestockStorage.Properties.Buttons.Add(new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo));
+            cbbRestockStorage.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[]
+            {
+                new DevExpress.XtraEditors.Controls.LookUpColumnInfo("DisplayName", "倉庫")
+            });
+            cbbRestockStorage.Properties.DisplayMember = "DisplayName";
+            cbbRestockStorage.Properties.ValueMember = "Id";
+            cbbRestockStorage.Properties.NullText = string.Empty;
+            cbbRestockStorage.Properties.ShowHeader = false;
+            cbbRestockStorage.Properties.DropDownRows = 5;
+
+            memoRecoveryNote = new MemoEdit();
+            memoRecoveryNote.Properties.Appearance.Font = TPConfigs.fontUI14;
+            memoRecoveryNote.Properties.Appearance.ForeColor = Color.Black;
+            memoRecoveryNote.Properties.Appearance.Options.UseFont = true;
+            memoRecoveryNote.Properties.Appearance.Options.UseForeColor = true;
+
+            btnViewGuideDocs = new SimpleButton();
+            btnViewGuideDocs.Appearance.Font = TPConfigs.fontUI14;
+            btnViewGuideDocs.Appearance.Options.UseFont = true;
+            btnViewGuideDocs.Text = "查看報廢指引";
+            btnViewGuideDocs.Click += btnViewGuideDocs_Click;
+
+            layoutControl1.Controls.Add(rgRecoveryOption);
+            layoutControl1.Controls.Add(sleOldMaterial);
+            layoutControl1.Controls.Add(txbOldQuantity);
+            layoutControl1.Controls.Add(sleAssignedUser);
+            layoutControl1.Controls.Add(dePlannedDisposeDate);
+            layoutControl1.Controls.Add(cbbRestockStorage);
+            layoutControl1.Controls.Add(memoRecoveryNote);
+            layoutControl1.Controls.Add(btnViewGuideDocs);
+
+            lcRecoveryOption = CreateRecoveryLayoutItem(rgRecoveryOption, "舊品處理", 72);
+            lcOldMaterial = CreateRecoveryLayoutItem(sleOldMaterial, "舊物料", 36);
+            lcOldQuantity = CreateRecoveryLayoutItem(txbOldQuantity, "舊品數量", 36);
+            lcAssignedUser = CreateRecoveryLayoutItem(sleAssignedUser, "報廢經辦", 36);
+            lcPlannedDisposeDate = CreateRecoveryLayoutItem(dePlannedDisposeDate, "預計時間", 36);
+            lcRestockStorage = CreateRecoveryLayoutItem(cbbRestockStorage, "回收倉庫", 36);
+            lcRecoveryNote = CreateRecoveryLayoutItem(memoRecoveryNote, "回收備註", 72);
+            lcRecoveryNote.SizeConstraintsType = SizeConstraintsType.Custom;
+            lcRecoveryNote.MinSize = new Size(200, 84);
+            lcRecoveryNote.MaxSize = new Size(0, 84);
+            lcGuideDocs = CreateRecoveryLayoutItem(btnViewGuideDocs, string.Empty, 36, false);
+        }
+
+        private GridView CreateLookupView(out GridView view, params (string fieldName, string caption)[] columns)
+        {
+            view = new GridView();
+            view.Appearance.HeaderPanel.Font = new Font("Microsoft JhengHei UI", 12F);
+            view.Appearance.HeaderPanel.ForeColor = Color.Black;
+            view.Appearance.HeaderPanel.Options.UseFont = true;
+            view.Appearance.HeaderPanel.Options.UseForeColor = true;
+            view.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            view.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            view.Appearance.Row.Font = new Font("Microsoft JhengHei UI", 12F);
+            view.Appearance.Row.ForeColor = Color.Black;
+            view.Appearance.Row.Options.UseFont = true;
+            view.Appearance.Row.Options.UseForeColor = true;
+            view.FocusRectStyle = DrawFocusRectStyle.RowFocus;
+            view.OptionsSelection.EnableAppearanceFocusedCell = false;
+            view.OptionsView.EnableAppearanceOddRow = true;
+            view.OptionsView.ShowAutoFilterRow = true;
+            view.OptionsView.ShowGroupPanel = false;
+
+            foreach (var column in columns)
+            {
+                view.Columns.AddVisible(column.fieldName, column.caption);
+            }
+
+            return view;
+        }
+
+        private LayoutControlItem CreateRecoveryLayoutItem(Control control, string text, int minHeight, bool showCaption = true)
+        {
+            var item = new LayoutControlItem();
+            item.Control = control;
+            item.Text = text;
+            item.TextVisible = showCaption;
+            item.AllowHtmlStringInCaption = true;
+            item.AppearanceItemCaption.Font = TPConfigs.fontUI14;
+            item.AppearanceItemCaption.ForeColor = Color.Black;
+            item.AppearanceItemCaption.Options.UseFont = true;
+            item.AppearanceItemCaption.Options.UseForeColor = true;
+            item.AppearanceItemCaptionDisabled.ForeColor = Color.Black;
+            item.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            item.TextSize = new Size(76, 24);
+            item.SizeConstraintsType = SizeConstraintsType.Custom;
+            item.MinSize = new Size(200, minHeight);
+            item.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            Root.Add(item);
+            return item;
+        }
+
+        private int GetSelectedRecoveryOptionValue()
+        {
+            return int.TryParse(rgRecoveryOption.EditValue?.ToString(), out int optionValue)
+                ? optionValue
+                : RecoveryOptionNoneValue;
+        }
+
+        private string GetSelectedRecoveryOption()
+        {
+            switch (GetSelectedRecoveryOptionValue())
+            {
+                case RecoveryOptionScrapValue:
+                    return dt309_RecoveryConst.RecoveryOptionScrap;
+                case RecoveryOptionRestockValue:
+                    return dt309_RecoveryConst.RecoveryOptionRestock;
+                default:
+                    return dt309_RecoveryConst.RecoveryOptionNone;
+            }
+        }
+
+        private void rgRecoveryOption_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (GetSelectedRecoveryOptionValue() != RecoveryOptionNoneValue && string.IsNullOrWhiteSpace(txbOldQuantity.Text))
+            {
+                txbOldQuantity.EditValue = txbQuantity.EditValue;
+            }
+
+            UpdateRecoverySectionVisibility();
+        }
+
+        private void btnViewGuideDocs_Click(object sender, EventArgs e)
+        {
+            var guides = dt309_RecoveryBUS.Instance.GetGuideList();
+            if (guides.Count == 0)
+            {
+                XtraMessageBox.Show("目前尚未上傳報廢指引。", TPConfigs.SoftNameTW,
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            Material309RecoveryHelper.OpenGuideFiles(guides);
+        }
+
+        private void LoadRecoveryLookups()
+        {
+            if (material == null)
+            {
+                return;
+            }
+
+            var oldMaterials = dt309_MaterialsBUS.Instance.GetListByStartIdDept(material.IdDept)
+                .Where(r => r.DelTime == null
+                    && r.IsDisable != true
+                    && string.Equals(r.IdDept, material.IdDept, StringComparison.OrdinalIgnoreCase)
+                    && !((r.Code ?? string.Empty).EndsWith("-OLD", StringComparison.OrdinalIgnoreCase)))
+                .OrderBy(r => r.Code)
+                .ThenBy(r => r.DisplayName)
+                .ToList();
+
+            sleOldMaterial.Properties.DataSource = oldMaterials;
+            sleOldMaterial.EditValue = oldMaterials.Any(r => r.Id == material.Id) ? material.Id : oldMaterials.FirstOrDefault()?.Id;
+
+            var activeUsers = dm_UserBUS.Instance.GetList()
+                .Where(r => (r.Status ?? 0) == 0
+                    && !string.IsNullOrWhiteSpace(r.IdDepartment)
+                    && r.IdDepartment.StartsWith(material.IdDept, StringComparison.OrdinalIgnoreCase))
+                .OrderBy(r => r.Id)
+                .ThenBy(r => r.DisplayName)
+                .ToList();
+
+            sleAssignedUser.Properties.DataSource = activeUsers;
+            sleAssignedUser.EditValue = TPConfigs.LoginUser.Id;
+
+            cbbRestockStorage.Properties.DataSource = storages;
+            cbbRestockStorage.EditValue = storages.FirstOrDefault(r => r.Id == 2)?.Id ?? storages.FirstOrDefault()?.Id;
+        }
+
+        private void UpdateRecoverySectionVisibility()
+        {
+            bool isIssue = eventInfo == "領用";
+            int option = GetSelectedRecoveryOptionValue();
+            bool showRecoveryFields = isIssue && option != RecoveryOptionNoneValue;
+            bool isScrap = isIssue && option == RecoveryOptionScrapValue;
+            bool isRestock = isIssue && option == RecoveryOptionRestockValue;
+
+            lcRecoveryOption.Visibility = isIssue
+                ? DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                : DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            lcOldMaterial.Visibility = showRecoveryFields
+                ? DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                : DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            lcOldQuantity.Visibility = showRecoveryFields
+                ? DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                : DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            lcRecoveryNote.Visibility = showRecoveryFields
+                ? DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                : DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            lcAssignedUser.Visibility = isScrap
+                ? DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                : DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            lcPlannedDisposeDate.Visibility = isScrap
+                ? DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                : DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            lcGuideDocs.Visibility = isScrap
+                ? DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                : DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            lcRestockStorage.Visibility = isRestock
+                ? DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                : DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+
+            RebuildRequiredItems();
+            RefreshLayoutCaptions();
+        }
+
+        private void RebuildRequiredItems()
+        {
+            lcImpControls = new List<LayoutControlItem> { lcStorageFrom, lcStorageTo, lcQuantity };
+
+            switch (eventInfo)
+            {
+                case "領用":
+                    lcImpControls.Add(lcDesc);
+                    if (GetSelectedRecoveryOptionValue() != RecoveryOptionNoneValue)
+                    {
+                        lcImpControls.Add(lcOldMaterial);
+                        lcImpControls.Add(lcOldQuantity);
+                    }
+
+                    if (GetSelectedRecoveryOptionValue() == RecoveryOptionScrapValue)
+                    {
+                        lcImpControls.Add(lcAssignedUser);
+                        lcImpControls.Add(lcPlannedDisposeDate);
+                    }
+
+                    if (GetSelectedRecoveryOptionValue() == RecoveryOptionRestockValue)
+                    {
+                        lcImpControls.Add(lcRestockStorage);
+                    }
+                    break;
+                case "收貨":
+                    lcImpControls.Add(lcPrice);
+                    break;
+                case "盤點":
+                    lcImpControls.Add(lcDesc);
+                    break;
+            }
+        }
+
+        private void RefreshLayoutCaptions()
+        {
+            foreach (var item in lcControls)
+            {
+                if (!lcBaseTexts.ContainsKey(item))
+                {
+                    lcBaseTexts[item] = item.Text.Replace("<color=#000000>", string.Empty)
+                        .Replace("</color>", string.Empty)
+                        .Replace("<color=red>*</color>", string.Empty);
+                }
+
+                string baseText = lcBaseTexts[item];
+                item.AllowHtmlStringInCaption = true;
+                item.Text = $"<color=#000000>{baseText}</color>";
+
+                bool isRequired = lcImpControls.Contains(item)
+                    && item.Visibility == DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                    && (!item.TextVisible || item.Control == null || item.Control.Enabled);
+
+                if (isRequired)
+                {
+                    item.Text += "<color=red>*</color>";
+                }
+            }
         }
 
         private bool EnsureMaterialActive(bool closeWhenBlocked = false)
@@ -98,6 +465,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 case "領用":
                     cbbStorageFrom.Enabled = true;
                     cbbStorageTo.Enabled = false;
+                    Size = new Size(430, 575);
                     break;
 
                 case "轉庫":
@@ -112,46 +480,25 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                     break;
             }
 
-            foreach (var item in lcControls)
-            {
-                string colorHex = item.Control.Enabled ? "000000" : "000000";
-                item.Text = item.Text.Replace("000000", colorHex);
-            }
-
-            // Các thông tin phải điền có thêm dấu * màu đỏ
-            foreach (var item in lcImpControls)
-            {
-                if (item.Control.Enabled)
-                {
-                    item.Text += "<color=red>*</color>";
-                }
-                else
-                {
-                    item.Text = item.Text.Replace("<color=red>*</color>", "");
-                }
-            }
+            UpdateRecoverySectionVisibility();
         }
 
         private void f309_Transaction_Info_Load(object sender, EventArgs e)
         {
-            lcControls = new List<LayoutControlItem>() { lcStorageFrom, lcStorageTo, lcStorageFromQuantity, lcStorageToQuantity, lcQuantity, lcDesc, lcPrice, lcExpDate };
-            lcImpControls = new List<LayoutControlItem>() { lcStorageFrom, lcStorageTo, lcQuantity };
-
-            switch (eventInfo)
+            lcControls = new List<LayoutControlItem>()
             {
-                case "領用":
-                    lcImpControls.Add(lcDesc);
-                    break;
-                case "收貨":
-                    lcImpControls.Add(lcPrice);
-                    break;
-                case "盤點": goto case "領用";
-            }
+                lcStorageFrom, lcStorageTo, lcStorageFromQuantity, lcStorageToQuantity,
+                lcQuantity, lcDesc, lcPrice, lcExpDate,
+                lcRecoveryOption, lcOldMaterial, lcOldQuantity, lcAssignedUser,
+                lcPlannedDisposeDate, lcRestockStorage, lcRecoveryNote, lcGuideDocs
+            };
 
-            foreach (var item in lcControls)
+            foreach (var item in lcControls.Where(r => r != null))
             {
-                item.AllowHtmlStringInCaption = true;
-                item.Text = $"<color=#000000>{item.Text}</color>";
+                if (!lcBaseTexts.ContainsKey(item))
+                {
+                    lcBaseTexts[item] = item.Text;
+                }
             }
 
             storages = dt309_StoragesBUS.Instance.GetList();
@@ -169,7 +516,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 return;
             }
 
-            lcQuantity.Text = lcQuantity.Text.Replace("事件", eventInfo);
+            lcBaseTexts[lcQuantity] = lcBaseTexts[lcQuantity].Replace("事件", eventInfo);
+            txbOldQuantity.EditValue = txbQuantity.EditValue;
+            LoadRecoveryLookups();
 
             LockControl();
         }
@@ -225,10 +574,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             {
                 if (item.Control is BaseEdit baseEdit)
                 {
-                    if (item.Enabled == false) continue;
-                    {
-
-                    }
+                    if (item.Enabled == false || item.Visibility != DevExpress.XtraLayout.Utils.LayoutVisibility.Always) continue;
                     if (string.IsNullOrEmpty(baseEdit.EditValue?.ToString()))
                     {
                         IsValidate = false;
@@ -317,11 +663,37 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                         return;
                     }
 
-                    transaction.TransactionType = "out";
-                    transaction.Quantity = quantity;
-                    transaction.StorageId = (int)cbbStorageFrom.EditValue;
+                    double.TryParse(txbOldQuantity.EditValue?.ToString(), out double oldQuantity);
+                    result = dt309_RecoveryBUS.Instance.CreateIssueTransactionWithRecovery(
+                        idMaterial,
+                        (int)cbbStorageFrom.EditValue,
+                        quantity,
+                        txbDesc.EditValue?.ToString(),
+                        TPConfigs.LoginUser.Id,
+                        GetSelectedRecoveryOption(),
+                        GetSelectedRecoveryOptionValue() == RecoveryOptionNoneValue
+                            ? (int?)null
+                            : Convert.ToInt32(sleOldMaterial.EditValue),
+                        GetSelectedRecoveryOptionValue() == RecoveryOptionNoneValue
+                            ? (double?)null
+                            : oldQuantity,
+                        sleAssignedUser.EditValue?.ToString(),
+                        dePlannedDisposeDate.EditValue == null
+                            ? (DateTime?)null
+                            : dePlannedDisposeDate.DateTime,
+                        cbbRestockStorage.EditValue == null
+                            ? (int?)null
+                            : Convert.ToInt32(cbbRestockStorage.EditValue),
+                        memoRecoveryNote.EditValue?.ToString(),
+                        out string recoveryMessage);
 
-                    result = dt309_TransactionsBUS.Instance.Add(transaction);
+                    if (!result)
+                    {
+                        MsgTP.MsgError(string.IsNullOrWhiteSpace(recoveryMessage)
+                            ? "建立領用與回收單失敗。"
+                            : recoveryMessage);
+                        return;
+                    }
 
                     break;
 
