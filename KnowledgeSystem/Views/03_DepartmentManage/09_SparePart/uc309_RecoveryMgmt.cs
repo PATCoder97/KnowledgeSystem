@@ -30,6 +30,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         private List<dm_User> users = new List<dm_User>();
         private bool isManager309;
 
+        protected virtual bool IsTaskView => false;
+
         public uc309_RecoveryMgmt()
         {
             InitializeComponent();
@@ -133,7 +135,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             }
 
             isManager309 = managerGroups.Any(group => userGroups.Any(userGroup => userGroup.IdGroup == group.Id));
-            btnManageGuide.Visibility = isManager309
+            btnManageGuide.Visibility = !IsTaskView && isManager309
                 ? BarItemVisibility.Always
                 : BarItemVisibility.Never;
             btnDownloadGuide.Visibility = BarItemVisibility.Always;
@@ -159,8 +161,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         private void LoadData()
         {
             string deptPrefix = ParseToken(barCbbDept.EditValue?.ToString());
+            string assignedUserId = IsTaskView ? TPConfigs.LoginUser.Id : string.Empty;
 
-            var tickets = dt309_RecoveryBUS.Instance.GetList(deptPrefix, string.Empty, null, null, string.Empty);
+            var tickets = dt309_RecoveryBUS.Instance.GetList(deptPrefix, string.Empty, null, null, assignedUserId);
             sourceTickets.DataSource = BuildTicketRows(tickets);
             gvData.BestFitColumns();
             UpdateActionStates();
@@ -306,11 +309,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
             btnViewIssue.Enabled = hasRow;
             btnDownloadGuide.Enabled = true;
-            btnUploadEvidence.Enabled = hasRow && isScrap && !isCompleted && !isCancelled;
+            btnUploadEvidence.Enabled = IsTaskView && hasRow && isScrap && !isCompleted && !isCancelled;
             btnViewEvidence.Enabled = hasRow && row.EvidenceCount > 0;
-            btnUpdateTime.Enabled = hasRow && isScrap && isScheduled;
-            btnConfirmComplete.Enabled = hasRow && isScrap && isAwaitManagerConfirm && (isManager309 || isCreator);
-            btnCancelTicket.Enabled = hasRow && !isCompleted && !isRestock;
+            btnUpdateTime.Enabled = IsTaskView && hasRow && isScrap && isScheduled;
+            btnConfirmComplete.Enabled = !IsTaskView && hasRow && isScrap && isAwaitManagerConfirm && (isManager309 || isCreator);
+            btnCancelTicket.Enabled = !IsTaskView && hasRow && !isCompleted && !isRestock;
         }
 
         private void gvData_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
@@ -345,7 +348,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
             e.Menu.Items.Add(itemViewIssue);
 
-            if (itemUploadEvidence.Enabled)
+            if (IsTaskView && itemUploadEvidence.Enabled)
             {
                 e.Menu.Items.Add(itemUploadEvidence);
             }
@@ -355,17 +358,17 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 e.Menu.Items.Add(itemViewEvidence);
             }
 
-            if (itemUpdateTime.Enabled)
+            if (IsTaskView && itemUpdateTime.Enabled)
             {
                 e.Menu.Items.Add(itemUpdateTime);
             }
 
-            if (itemConfirmComplete.Enabled)
+            if (!IsTaskView && itemConfirmComplete.Enabled)
             {
                 e.Menu.Items.Add(itemConfirmComplete);
             }
 
-            if (itemCancelTicket.Enabled)
+            if (!IsTaskView && itemCancelTicket.Enabled)
             {
                 e.Menu.Items.Add(itemCancelTicket);
             }

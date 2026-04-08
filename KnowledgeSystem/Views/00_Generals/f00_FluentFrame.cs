@@ -50,7 +50,7 @@ namespace KnowledgeSystem.Views._00_Generals
             if (typeform == null) return;
 
             // Hiển thị màn hình chờ sử dụng SplashScreenManager
-            if (typeform.BaseType == typeof(XtraUserControl))
+            if (typeof(XtraUserControl).IsAssignableFrom(typeform))
             {
                 using (var handle = SplashScreenManager.ShowOverlayForm(this))
                 {
@@ -63,15 +63,15 @@ namespace KnowledgeSystem.Views._00_Generals
                     div_container.Controls.Add(userControl);
                 }
             }
-            else if (typeform.BaseType == typeof(XtraForm))
+            else if (typeof(RibbonForm).IsAssignableFrom(typeform))
             {
-                var f = (XtraForm)Activator.CreateInstance(typeform);
+                var f = (RibbonForm)Activator.CreateInstance(typeform);
                 f.Text = formName;
                 f.ShowDialog();
             }
-            else if (typeform.BaseType == typeof(RibbonForm))
+            else if (typeof(XtraForm).IsAssignableFrom(typeform))
             {
-                var f = (RibbonForm)Activator.CreateInstance(typeform);
+                var f = (XtraForm)Activator.CreateInstance(typeform);
                 f.Text = formName;
                 f.ShowDialog();
             }

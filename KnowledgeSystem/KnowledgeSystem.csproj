@@ -839,6 +839,9 @@
     <Compile Include="Views\03_DepartmentManage\09_SparePart\uc309_RecoveryMgmt.Designer.cs">
       <DependentUpon>uc309_RecoveryMgmt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\03_DepartmentManage\09_SparePart\uc309_RecoveryTask.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Views\03_DepartmentManage\10_EHSWorkforce\f310_Area5SResponsible_Info.cs">
       <SubType>Form</SubType>
     </Compile>
