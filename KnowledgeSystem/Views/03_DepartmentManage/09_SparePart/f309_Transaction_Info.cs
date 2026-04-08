@@ -42,7 +42,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         List<LayoutControlItem> lcImpControls;
         Dictionary<LayoutControlItem, string> lcBaseTexts = new Dictionary<LayoutControlItem, string>();
 
-        RadioGroup rgRecoveryOption;
+        ImageComboBoxEdit cbbRecoveryOption;
         SearchLookUpEdit sleOldMaterial;
         GridView gvOldMaterialLookup;
         TextEdit txbOldQuantity;
@@ -71,16 +71,21 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         private void InitializeRecoverySection()
         {
-            rgRecoveryOption = new RadioGroup();
-            rgRecoveryOption.Properties.Appearance.Font = TPConfigs.fontUI14;
-            rgRecoveryOption.Properties.Appearance.ForeColor = Color.Black;
-            rgRecoveryOption.Properties.Appearance.Options.UseFont = true;
-            rgRecoveryOption.Properties.Appearance.Options.UseForeColor = true;
-            rgRecoveryOption.Properties.Items.Add(new DevExpress.XtraEditors.Controls.RadioGroupItem(RecoveryOptionNoneValue, "沒有舊品拆出"));
-            rgRecoveryOption.Properties.Items.Add(new DevExpress.XtraEditors.Controls.RadioGroupItem(RecoveryOptionScrapValue, "拆出後送報廢"));
-            rgRecoveryOption.Properties.Items.Add(new DevExpress.XtraEditors.Controls.RadioGroupItem(RecoveryOptionRestockValue, "拆出後回收入庫"));
-            rgRecoveryOption.EditValue = RecoveryOptionNoneValue;
-            rgRecoveryOption.SelectedIndexChanged += rgRecoveryOption_SelectedIndexChanged;
+            cbbRecoveryOption = new ImageComboBoxEdit();
+            cbbRecoveryOption.Properties.Appearance.Font = TPConfigs.fontUI14;
+            cbbRecoveryOption.Properties.Appearance.ForeColor = Color.Black;
+            cbbRecoveryOption.Properties.Appearance.Options.UseFont = true;
+            cbbRecoveryOption.Properties.Appearance.Options.UseForeColor = true;
+            cbbRecoveryOption.Properties.AppearanceDropDown.Font = TPConfigs.fontUI14;
+            cbbRecoveryOption.Properties.AppearanceDropDown.Options.UseFont = true;
+            cbbRecoveryOption.Properties.Buttons.Clear();
+            cbbRecoveryOption.Properties.Buttons.Add(new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo));
+            cbbRecoveryOption.Properties.Items.Add(new DevExpress.XtraEditors.Controls.ImageComboBoxItem("沒有舊品拆出", RecoveryOptionNoneValue, -1));
+            cbbRecoveryOption.Properties.Items.Add(new DevExpress.XtraEditors.Controls.ImageComboBoxItem("拆出後送報廢", RecoveryOptionScrapValue, -1));
+            cbbRecoveryOption.Properties.Items.Add(new DevExpress.XtraEditors.Controls.ImageComboBoxItem("拆出後回收入庫", RecoveryOptionRestockValue, -1));
+            cbbRecoveryOption.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            cbbRecoveryOption.EditValue = RecoveryOptionNoneValue;
+            cbbRecoveryOption.EditValueChanged += cbbRecoveryOption_EditValueChanged;
 
             sleOldMaterial = new SearchLookUpEdit();
             sleOldMaterial.Properties.Appearance.Font = TPConfigs.fontUI14;
@@ -165,7 +170,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             btnViewGuideDocs.Text = "查看報廢指引";
             btnViewGuideDocs.Click += btnViewGuideDocs_Click;
 
-            layoutControl1.Controls.Add(rgRecoveryOption);
+            layoutControl1.Controls.Add(cbbRecoveryOption);
             layoutControl1.Controls.Add(sleOldMaterial);
             layoutControl1.Controls.Add(txbOldQuantity);
             layoutControl1.Controls.Add(sleAssignedUser);
@@ -174,7 +179,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             layoutControl1.Controls.Add(memoRecoveryNote);
             layoutControl1.Controls.Add(btnViewGuideDocs);
 
-            lcRecoveryOption = CreateRecoveryLayoutItem(rgRecoveryOption, "舊品處理", 72);
+            lcRecoveryOption = CreateRecoveryLayoutItem(cbbRecoveryOption, "舊品處理", 36);
             lcOldMaterial = CreateRecoveryLayoutItem(sleOldMaterial, "舊物料", 36);
             lcOldQuantity = CreateRecoveryLayoutItem(txbOldQuantity, "舊品數量", 36);
             lcAssignedUser = CreateRecoveryLayoutItem(sleAssignedUser, "報廢經辦", 36);
@@ -218,6 +223,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         {
             var item = new LayoutControlItem();
             item.Control = control;
+            item.ControlAlignment = ContentAlignment.TopLeft;
             item.Text = text;
             item.TextVisible = showCaption;
             item.AllowHtmlStringInCaption = true;
@@ -235,9 +241,28 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             return item;
         }
 
+        private void AdjustIssueFormSize()
+        {
+            if (eventInfo != "領用" || lcControls == null || lcControls.Count == 0)
+            {
+                return;
+            }
+
+            layoutControl1.Root.BestFit();
+            layoutControl1.BestFit();
+            layoutControl1.PerformLayout();
+            layoutControl1.Update();
+
+            var preferredSize = layoutControl1.GetPreferredSize(new Size(layoutControl1.Width, 0));
+            int targetClientHeight = barDockControlTop.Height + preferredSize.Height;
+
+            Size = new Size(430, Height);
+            ClientSize = new Size(ClientSize.Width, targetClientHeight);
+        }
+
         private int GetSelectedRecoveryOptionValue()
         {
-            return int.TryParse(rgRecoveryOption.EditValue?.ToString(), out int optionValue)
+            return int.TryParse(cbbRecoveryOption.EditValue?.ToString(), out int optionValue)
                 ? optionValue
                 : RecoveryOptionNoneValue;
         }
@@ -255,7 +280,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             }
         }
 
-        private void rgRecoveryOption_SelectedIndexChanged(object sender, EventArgs e)
+        private void cbbRecoveryOption_EditValueChanged(object sender, EventArgs e)
         {
             if (GetSelectedRecoveryOptionValue() != RecoveryOptionNoneValue && string.IsNullOrWhiteSpace(txbOldQuantity.Text))
             {
@@ -347,6 +372,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
             RebuildRequiredItems();
             RefreshLayoutCaptions();
+            AdjustIssueFormSize();
         }
 
         private void RebuildRequiredItems()
@@ -465,7 +491,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 case "領用":
                     cbbStorageFrom.Enabled = true;
                     cbbStorageTo.Enabled = false;
-                    Size = new Size(430, 575);
+                    Size = new Size(430, Size.Height);
                     break;
 
                 case "轉庫":
