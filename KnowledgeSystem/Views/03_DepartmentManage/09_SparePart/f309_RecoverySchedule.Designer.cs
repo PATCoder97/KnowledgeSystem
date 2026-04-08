@@ -174,10 +174,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             this.dePlannedDisposeDate.Properties.Appearance.Options.UseForeColor = true;
             this.dePlannedDisposeDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dePlannedDisposeDate.Properties.CalendarTimeEditing = DevExpress.Utils.DefaultBoolean.True;
+            this.dePlannedDisposeDate.Properties.CalendarTimeEditing = DevExpress.Utils.DefaultBoolean.False;
             this.dePlannedDisposeDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dePlannedDisposeDate.Properties.MaskSettings.Set("mask", "yyyy/MM/dd HH:mm");
+            this.dePlannedDisposeDate.Properties.MaskSettings.Set("mask", "yyyy/MM/dd");
             this.dePlannedDisposeDate.Properties.UseMaskAsDisplayFormat = true;
             this.dePlannedDisposeDate.Size = new System.Drawing.Size(424, 32);
             this.dePlannedDisposeDate.StyleController = this.layoutControl1;
@@ -243,7 +243,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             this.lcPlannedDisposeDate.Location = new System.Drawing.Point(0, 36);
             this.lcPlannedDisposeDate.Name = "lcPlannedDisposeDate";
             this.lcPlannedDisposeDate.Size = new System.Drawing.Size(540, 64);
-            this.lcPlannedDisposeDate.Text = "\u9810\u8a08\u6642\u9593";
+            this.lcPlannedDisposeDate.Text = "\u9810\u8a08\u65e5\u671f";
             this.lcPlannedDisposeDate.TextSize = new System.Drawing.Size(109, 24);
             // 
             // f309_RecoverySchedule

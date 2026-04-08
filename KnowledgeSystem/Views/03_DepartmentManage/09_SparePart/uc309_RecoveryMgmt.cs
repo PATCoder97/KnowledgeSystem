@@ -71,7 +71,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             itemViewIssue = CreateMenuItem("查看領用", ItemViewIssueMenu_Click, TPSvgimages.View);
             itemUploadEvidence = CreateMenuItem("上傳證明", ItemUploadEvidenceMenu_Click, TPSvgimages.UploadFile);
             itemViewEvidence = CreateMenuItem("查看證明", ItemViewEvidenceMenu_Click, TPSvgimages.Search);
-            itemUpdateTime = CreateMenuItem("更新時間", ItemUpdateTimeMenu_Click, TPSvgimages.Schedule);
+            itemUpdateTime = CreateMenuItem("更新日期", ItemUpdateTimeMenu_Click, TPSvgimages.Schedule);
             itemConfirmComplete = CreateMenuItem("確認完成", ItemConfirmCompleteMenu_Click, TPSvgimages.Confirm);
             itemCancelTicket = CreateMenuItem("取消單", ItemCancelTicketMenu_Click, TPSvgimages.Remove);
         }
@@ -496,7 +496,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             if (!dt309_RecoveryConst.IsScrap(row.RecoveryOption) ||
                 !string.Equals(row.Status, dt309_RecoveryConst.RecoveryStatusScheduled, StringComparison.OrdinalIgnoreCase))
             {
-                MsgTP.MsgError("只有已安排的報廢案件可更新時間。");
+                MsgTP.MsgError("只有已安排的報廢案件可更新日期。");
                 return;
             }
 
@@ -516,7 +516,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
                 if (!dt309_RecoveryBUS.Instance.UpdateSchedule(row.Id, form.AssignedUserId, form.PlannedDisposeDate, TPConfigs.LoginUser.Id, out string message))
                 {
-                    MsgTP.MsgError(string.IsNullOrWhiteSpace(message) ? "更新時間失敗。" : message);
+                    MsgTP.MsgError(string.IsNullOrWhiteSpace(message) ? "更新日期失敗。" : message);
                     return;
                 }
             }

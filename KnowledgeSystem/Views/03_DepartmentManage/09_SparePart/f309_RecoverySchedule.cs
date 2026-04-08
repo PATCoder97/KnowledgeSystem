@@ -25,12 +25,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
             sleAssignedUser.Properties.DataSource = this.users;
             sleAssignedUser.EditValue = assignedUserId;
-            dePlannedDisposeDate.EditValue = plannedDisposeDate ?? DateTime.Now;
+            dePlannedDisposeDate.EditValue = (plannedDisposeDate ?? DateTime.Today).Date;
         }
 
         public string AssignedUserId => sleAssignedUser.EditValue?.ToString();
 
-        public DateTime PlannedDisposeDate => dePlannedDisposeDate.DateTime;
+        public DateTime PlannedDisposeDate => dePlannedDisposeDate.DateTime.Date;
 
         private void InitializeIcon()
         {
@@ -67,7 +67,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
             if (dePlannedDisposeDate.EditValue == null)
             {
-                MsgTP.MsgError("\u8acb\u586b\u5beb\u9810\u8a08\u6642\u9593\u3002");
+                MsgTP.MsgError("\u8acb\u586b\u5beb\u9810\u8a08\u65e5\u671f\u3002");
                 return;
             }
 

@@ -295,8 +295,6 @@ namespace BusinessLayer
             string desc,
             string userId,
             string recoveryOption,
-            int? oldBaseMaterialId,
-            double? oldQuantity,
             string assignedUserId,
             DateTime? plannedDisposeDate,
             int? restockStorageId,
@@ -342,7 +340,7 @@ namespace BusinessLayer
                         }
 
                         string normalizedOption = NormalizeRecoveryOption(recoveryOption);
-                        ValidateRecoveryRequest(context, material, normalizedOption, oldBaseMaterialId, oldQuantity, assignedUserId, plannedDisposeDate, restockStorageId);
+                        ValidateRecoveryRequest(context, material, normalizedOption, assignedUserId, plannedDisposeDate, restockStorageId);
 
                         var issueTransaction = new dt309_Transactions
                         {
@@ -364,7 +362,8 @@ namespace BusinessLayer
                             return true;
                         }
 
-                        var oldBaseMaterial = context.dt309_Materials.First(item => item.Id == oldBaseMaterialId.Value && item.DelTime == null);
+                        var oldBaseMaterial = material;
+                        double oldQuantity = issueQuantity;
                         dt309_Materials recoveryMaterial = null;
                         dt309_Transactions restockTransaction = null;
                         string ticketStatus = RecoveryStatusScheduled;
@@ -383,7 +382,7 @@ namespace BusinessLayer
                                 MaterialId = recoveryMaterial.Id,
                                 StorageId = restockStorageId.Value,
                                 TransactionType = "in",
-                                Quantity = oldQuantity.Value,
+                                Quantity = oldQuantity,
                                 CreatedDate = DateTime.Now,
                                 UserDo = userId,
                                 Desc = $"回收入庫 / 原物料:{oldBaseMaterial.Code}"
@@ -409,7 +408,7 @@ namespace BusinessLayer
                             OldBaseMaterialId = oldBaseMaterial.Id,
                             OldRecoveryMaterialId = recoveryMaterial?.Id,
                             RecoveryOption = normalizedOption,
-                            Quantity = oldQuantity.Value,
+                            Quantity = oldQuantity,
                             SourceStorageId = sourceStorageId,
                             RestockStorageId = restockStorageId,
                             AssignedUserId = NormalizeText(assignedUserId),
@@ -563,7 +562,7 @@ namespace BusinessLayer
                     if (!IsScrap(ticket.RecoveryOption) ||
                         !string.Equals(ticket.Status, RecoveryStatusScheduled, StringComparison.OrdinalIgnoreCase))
                     {
-                        message = "只有已安排的報廢案件可更新時間。";
+                        message = "只有已安排的報廢案件可更新日期。";
                         return false;
                     }
 
@@ -755,8 +754,6 @@ namespace BusinessLayer
             DBDocumentManagementSystemEntities context,
             dt309_Materials material,
             string recoveryOption,
-            int? oldBaseMaterialId,
-            double? oldQuantity,
             string assignedUserId,
             DateTime? plannedDisposeDate,
             int? restockStorageId)
@@ -766,30 +763,14 @@ namespace BusinessLayer
                 return;
             }
 
-            if (!oldBaseMaterialId.HasValue)
+            if (material == null)
             {
-                throw new Exception("請選擇舊物料。");
+                throw new Exception("找不到對應物料。");
             }
 
-            if (!oldQuantity.HasValue || oldQuantity.Value <= 0)
+            if (material.IsDisable == true)
             {
-                throw new Exception("舊物料數量需大於零。");
-            }
-
-            var oldBaseMaterial = context.dt309_Materials.FirstOrDefault(item => item.Id == oldBaseMaterialId.Value && item.DelTime == null);
-            if (oldBaseMaterial == null)
-            {
-                throw new Exception("找不到舊物料。");
-            }
-
-            if (oldBaseMaterial.IsDisable == true)
-            {
-                throw new Exception("停用中的舊物料不可建立回收單。");
-            }
-
-            if (!string.Equals(oldBaseMaterial.IdDept, material.IdDept, StringComparison.OrdinalIgnoreCase))
-            {
-                throw new Exception("舊物料需與新物料屬於同一部門。");
+                throw new Exception("停用中的物料不可建立回收單。");
             }
 
             if (IsScrap(recoveryOption))
@@ -798,7 +779,7 @@ namespace BusinessLayer
 
                 if (!plannedDisposeDate.HasValue)
                 {
-                    throw new Exception("請填寫預計報廢時間。");
+                    throw new Exception("請填寫預計報廢日期。");
                 }
             }
             else if (IsRestock(recoveryOption))

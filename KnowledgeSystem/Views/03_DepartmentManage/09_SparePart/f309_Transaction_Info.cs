@@ -43,9 +43,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         Dictionary<LayoutControlItem, string> lcBaseTexts = new Dictionary<LayoutControlItem, string>();
 
         ImageComboBoxEdit cbbRecoveryOption;
-        SearchLookUpEdit sleOldMaterial;
-        GridView gvOldMaterialLookup;
-        TextEdit txbOldQuantity;
         SearchLookUpEdit sleAssignedUser;
         GridView gvAssignedUserLookup;
         DateEdit dePlannedDisposeDate;
@@ -54,8 +51,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         SimpleButton btnViewGuideDocs;
 
         LayoutControlItem lcRecoveryOption;
-        LayoutControlItem lcOldMaterial;
-        LayoutControlItem lcOldQuantity;
         LayoutControlItem lcAssignedUser;
         LayoutControlItem lcPlannedDisposeDate;
         LayoutControlItem lcRestockStorage;
@@ -87,31 +82,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             cbbRecoveryOption.EditValue = RecoveryOptionNoneValue;
             cbbRecoveryOption.EditValueChanged += cbbRecoveryOption_EditValueChanged;
 
-            sleOldMaterial = new SearchLookUpEdit();
-            sleOldMaterial.Properties.Appearance.Font = TPConfigs.fontUI14;
-            sleOldMaterial.Properties.Appearance.ForeColor = Color.Black;
-            sleOldMaterial.Properties.Appearance.Options.UseFont = true;
-            sleOldMaterial.Properties.Appearance.Options.UseForeColor = true;
-            sleOldMaterial.Properties.AppearanceDropDown.Font = TPConfigs.fontUI14;
-            sleOldMaterial.Properties.AppearanceDropDown.Options.UseFont = true;
-            sleOldMaterial.Properties.NullText = string.Empty;
-            sleOldMaterial.Properties.PopupView = CreateLookupView(out gvOldMaterialLookup,
-                ("Code", "料號"),
-                ("DisplayName", "品名規格"));
-            sleOldMaterial.Properties.DisplayMember = "Code";
-            sleOldMaterial.Properties.ValueMember = "Id";
-
-            txbOldQuantity = new TextEdit();
-            txbOldQuantity.Properties.Appearance.Font = TPConfigs.fontUI14;
-            txbOldQuantity.Properties.Appearance.ForeColor = Color.Black;
-            txbOldQuantity.Properties.Appearance.Options.UseFont = true;
-            txbOldQuantity.Properties.Appearance.Options.UseForeColor = true;
-            txbOldQuantity.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
-            txbOldQuantity.Properties.MaskSettings.Set("mask", "F");
-            txbOldQuantity.Properties.MaskSettings.Set("autoHideDecimalSeparator", null);
-            txbOldQuantity.Properties.UseMaskAsDisplayFormat = true;
-            txbOldQuantity.EditValue = "0";
-
             sleAssignedUser = new SearchLookUpEdit();
             sleAssignedUser.Properties.Appearance.Font = TPConfigs.fontUI14;
             sleAssignedUser.Properties.Appearance.ForeColor = Color.Black;
@@ -132,12 +102,14 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             dePlannedDisposeDate.Properties.Appearance.ForeColor = Color.Black;
             dePlannedDisposeDate.Properties.Appearance.Options.UseFont = true;
             dePlannedDisposeDate.Properties.Appearance.Options.UseForeColor = true;
+            dePlannedDisposeDate.Properties.Buttons.Clear();
             dePlannedDisposeDate.Properties.Buttons.Add(new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo));
-            dePlannedDisposeDate.Properties.CalendarTimeEditing = DevExpress.Utils.DefaultBoolean.True;
+            dePlannedDisposeDate.Properties.CalendarTimeEditing = DevExpress.Utils.DefaultBoolean.False;
             dePlannedDisposeDate.Properties.CalendarView = DevExpress.XtraEditors.Repository.CalendarView.TouchUI;
             dePlannedDisposeDate.Properties.VistaDisplayMode = DevExpress.Utils.DefaultBoolean.False;
-            dePlannedDisposeDate.Properties.MaskSettings.Set("mask", "yyyy/MM/dd HH:mm");
+            dePlannedDisposeDate.Properties.MaskSettings.Set("mask", "yyyy/MM/dd");
             dePlannedDisposeDate.Properties.UseMaskAsDisplayFormat = true;
+            dePlannedDisposeDate.Properties.CalendarTimeProperties.Buttons.Clear();
             dePlannedDisposeDate.Properties.CalendarTimeProperties.Buttons.Add(new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo));
 
             cbbRestockStorage = new LookUpEdit();
@@ -147,6 +119,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             cbbRestockStorage.Properties.Appearance.Options.UseForeColor = true;
             cbbRestockStorage.Properties.AppearanceDropDown.Font = TPConfigs.fontUI14;
             cbbRestockStorage.Properties.AppearanceDropDown.Options.UseFont = true;
+            cbbRestockStorage.Properties.Buttons.Clear();
             cbbRestockStorage.Properties.Buttons.Add(new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo));
             cbbRestockStorage.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[]
             {
@@ -171,8 +144,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             btnViewGuideDocs.Click += btnViewGuideDocs_Click;
 
             layoutControl1.Controls.Add(cbbRecoveryOption);
-            layoutControl1.Controls.Add(sleOldMaterial);
-            layoutControl1.Controls.Add(txbOldQuantity);
             layoutControl1.Controls.Add(sleAssignedUser);
             layoutControl1.Controls.Add(dePlannedDisposeDate);
             layoutControl1.Controls.Add(cbbRestockStorage);
@@ -180,10 +151,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             layoutControl1.Controls.Add(btnViewGuideDocs);
 
             lcRecoveryOption = CreateRecoveryLayoutItem(cbbRecoveryOption, "舊品處理", 36);
-            lcOldMaterial = CreateRecoveryLayoutItem(sleOldMaterial, "舊物料", 36);
-            lcOldQuantity = CreateRecoveryLayoutItem(txbOldQuantity, "舊品數量", 36);
             lcAssignedUser = CreateRecoveryLayoutItem(sleAssignedUser, "報廢經辦", 36);
-            lcPlannedDisposeDate = CreateRecoveryLayoutItem(dePlannedDisposeDate, "預計時間", 36);
+            lcPlannedDisposeDate = CreateRecoveryLayoutItem(dePlannedDisposeDate, "預計日期", 36);
             lcRestockStorage = CreateRecoveryLayoutItem(cbbRestockStorage, "回收倉庫", 36);
             lcRecoveryNote = CreateRecoveryLayoutItem(memoRecoveryNote, "回收備註", 72);
             lcRecoveryNote.SizeConstraintsType = SizeConstraintsType.Custom;
@@ -236,6 +205,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             item.TextSize = new Size(76, 24);
             item.SizeConstraintsType = SizeConstraintsType.Custom;
             item.MinSize = new Size(200, minHeight);
+            item.MaxSize = new Size(0, minHeight);
             item.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             Root.Add(item);
             return item;
@@ -282,11 +252,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         private void cbbRecoveryOption_EditValueChanged(object sender, EventArgs e)
         {
-            if (GetSelectedRecoveryOptionValue() != RecoveryOptionNoneValue && string.IsNullOrWhiteSpace(txbOldQuantity.Text))
-            {
-                txbOldQuantity.EditValue = txbQuantity.EditValue;
-            }
-
             UpdateRecoverySectionVisibility();
         }
 
@@ -309,18 +274,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             {
                 return;
             }
-
-            var oldMaterials = dt309_MaterialsBUS.Instance.GetListByStartIdDept(material.IdDept)
-                .Where(r => r.DelTime == null
-                    && r.IsDisable != true
-                    && string.Equals(r.IdDept, material.IdDept, StringComparison.OrdinalIgnoreCase)
-                    && !((r.Code ?? string.Empty).EndsWith("-OLD", StringComparison.OrdinalIgnoreCase)))
-                .OrderBy(r => r.Code)
-                .ThenBy(r => r.DisplayName)
-                .ToList();
-
-            sleOldMaterial.Properties.DataSource = oldMaterials;
-            sleOldMaterial.EditValue = oldMaterials.Any(r => r.Id == material.Id) ? material.Id : oldMaterials.FirstOrDefault()?.Id;
 
             var activeUsers = dm_UserBUS.Instance.GetList()
                 .Where(r => (r.Status ?? 0) == 0
@@ -346,12 +299,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             bool isRestock = isIssue && option == RecoveryOptionRestockValue;
 
             lcRecoveryOption.Visibility = isIssue
-                ? DevExpress.XtraLayout.Utils.LayoutVisibility.Always
-                : DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-            lcOldMaterial.Visibility = showRecoveryFields
-                ? DevExpress.XtraLayout.Utils.LayoutVisibility.Always
-                : DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
-            lcOldQuantity.Visibility = showRecoveryFields
                 ? DevExpress.XtraLayout.Utils.LayoutVisibility.Always
                 : DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             lcRecoveryNote.Visibility = showRecoveryFields
@@ -383,12 +330,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             {
                 case "領用":
                     lcImpControls.Add(lcDesc);
-                    if (GetSelectedRecoveryOptionValue() != RecoveryOptionNoneValue)
-                    {
-                        lcImpControls.Add(lcOldMaterial);
-                        lcImpControls.Add(lcOldQuantity);
-                    }
-
                     if (GetSelectedRecoveryOptionValue() == RecoveryOptionScrapValue)
                     {
                         lcImpControls.Add(lcAssignedUser);
@@ -515,7 +456,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             {
                 lcStorageFrom, lcStorageTo, lcStorageFromQuantity, lcStorageToQuantity,
                 lcQuantity, lcDesc, lcPrice, lcExpDate,
-                lcRecoveryOption, lcOldMaterial, lcOldQuantity, lcAssignedUser,
+                lcRecoveryOption, lcAssignedUser,
                 lcPlannedDisposeDate, lcRestockStorage, lcRecoveryNote, lcGuideDocs
             };
 
@@ -543,7 +484,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             }
 
             lcBaseTexts[lcQuantity] = lcBaseTexts[lcQuantity].Replace("事件", eventInfo);
-            txbOldQuantity.EditValue = txbQuantity.EditValue;
             LoadRecoveryLookups();
 
             LockControl();
@@ -689,7 +629,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                         return;
                     }
 
-                    double.TryParse(txbOldQuantity.EditValue?.ToString(), out double oldQuantity);
                     result = dt309_RecoveryBUS.Instance.CreateIssueTransactionWithRecovery(
                         idMaterial,
                         (int)cbbStorageFrom.EditValue,
@@ -697,16 +636,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                         txbDesc.EditValue?.ToString(),
                         TPConfigs.LoginUser.Id,
                         GetSelectedRecoveryOption(),
-                        GetSelectedRecoveryOptionValue() == RecoveryOptionNoneValue
-                            ? (int?)null
-                            : Convert.ToInt32(sleOldMaterial.EditValue),
-                        GetSelectedRecoveryOptionValue() == RecoveryOptionNoneValue
-                            ? (double?)null
-                            : oldQuantity,
                         sleAssignedUser.EditValue?.ToString(),
                         dePlannedDisposeDate.EditValue == null
                             ? (DateTime?)null
-                            : dePlannedDisposeDate.DateTime,
+                            : dePlannedDisposeDate.DateTime.Date,
                         cbbRestockStorage.EditValue == null
                             ? (int?)null
                             : Convert.ToInt32(cbbRestockStorage.EditValue),

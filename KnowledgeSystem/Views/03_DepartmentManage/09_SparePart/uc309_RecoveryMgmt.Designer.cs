@@ -340,7 +340,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             // 
             // btnUpdateTime
             // 
-            this.btnUpdateTime.Caption = "更新時間";
+            this.btnUpdateTime.Caption = "更新日期";
             this.btnUpdateTime.Id = 11;
             this.btnUpdateTime.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
             this.btnUpdateTime.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
@@ -570,8 +570,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             // colPlannedDisposeDate
             // 
             this.colPlannedDisposeDate.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.colPlannedDisposeDate.Caption = "預計時間";
-            this.colPlannedDisposeDate.DisplayFormat.FormatString = "yyyy/MM/dd HH:mm";
+            this.colPlannedDisposeDate.Caption = "預計日期";
+            this.colPlannedDisposeDate.DisplayFormat.FormatString = "yyyy/MM/dd";
             this.colPlannedDisposeDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.colPlannedDisposeDate.FieldName = "PlannedDisposeDate";
             this.colPlannedDisposeDate.Name = "colPlannedDisposeDate";
