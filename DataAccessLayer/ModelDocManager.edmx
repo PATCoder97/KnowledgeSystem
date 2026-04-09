@@ -1150,6 +1150,7 @@
           <Property Name="OdometerReading" Type="int" />
           <Property Name="FuelFilledBy" Type="varchar" MaxLength="10" />
           <Property Name="AttId" Type="int" />
+          <Property Name="FuelPhotoAttId" Type="int" />
           <Property Name="CreateBy" Type="varchar" MaxLength="16" />
         </EntityType>
         <EntityType Name="dt311_InvoiceItem">
@@ -2982,6 +2983,7 @@ warning 6002: The table/view 'DBDocumentManagementSystem.dbo.vw310_EquipmentInfo
           <Property Name="OdometerReading" Type="Int32" />
           <Property Name="FuelFilledBy" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="AttId" Type="Int32" />
+          <Property Name="FuelPhotoAttId" Type="Int32" />
           <Property Name="CreateBy" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="dt311_AccountingSubject">
@@ -4578,6 +4580,7 @@ warning 6002: The table/view 'DBDocumentManagementSystem.dbo.vw310_EquipmentInfo
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dt311_Invoice">
               <MappingFragment StoreEntitySet="dt311_Invoice">
                 <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="FuelPhotoAttId" ColumnName="FuelPhotoAttId" />
                 <ScalarProperty Name="AttId" ColumnName="AttId" />
                 <ScalarProperty Name="FuelFilledBy" ColumnName="FuelFilledBy" />
                 <ScalarProperty Name="OdometerReading" ColumnName="OdometerReading" />

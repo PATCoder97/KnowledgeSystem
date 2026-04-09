@@ -59,6 +59,7 @@
             this.gridColumn27 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColSellerType = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColAttId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColFuelPhotoAttId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn28 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemMemoEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit();
             this.gvSession = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -86,6 +87,7 @@
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.gridColumn29 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn30 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gvDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
@@ -277,8 +279,10 @@
             this.gridColumn27,
             this.gColSellerType,
             this.gColAttId,
+            this.gColFuelPhotoAttId,
             this.gridColumn28,
-            this.gridColumn29});
+            this.gridColumn29,
+            this.gridColumn30});
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
             this.gvData.OptionsDetail.ShowDetailTabs = false;
@@ -420,13 +424,19 @@
             this.gColAttId.FieldName = "data.AttId";
             this.gColAttId.Name = "gColAttId";
             // 
+            // gColFuelPhotoAttId
+            // 
+            this.gColFuelPhotoAttId.Caption = "gColFuelPhotoAttId";
+            this.gColFuelPhotoAttId.FieldName = "data.FuelPhotoAttId";
+            this.gColFuelPhotoAttId.Name = "gColFuelPhotoAttId";
+            // 
             // gridColumn28
             // 
-            this.gridColumn28.Caption = "有檔案";
+            this.gridColumn28.Caption = "有發票PDF";
             this.gridColumn28.FieldName = "HasFile";
             this.gridColumn28.Name = "gridColumn28";
             this.gridColumn28.UnboundDataType = typeof(bool);
-            this.gridColumn28.UnboundExpression = "Not IsNullOrEmpty([data.AttId])";
+            this.gridColumn28.UnboundExpression = "Not IsNull([data.AttId])";
             this.gridColumn28.Visible = true;
             this.gridColumn28.VisibleIndex = 14;
             // 
@@ -753,6 +763,16 @@
             this.gridColumn29.Visible = true;
             this.gridColumn29.VisibleIndex = 10;
             // 
+            // gridColumn30
+            // 
+            this.gridColumn30.Caption = "有照片";
+            this.gridColumn30.FieldName = "HasFuelPhoto";
+            this.gridColumn30.Name = "gridColumn30";
+            this.gridColumn30.UnboundDataType = typeof(bool);
+            this.gridColumn30.UnboundExpression = "Not IsNull([data.FuelPhotoAttId])";
+            this.gridColumn30.Visible = true;
+            this.gridColumn30.VisibleIndex = 15;
+            // 
             // uc311_ExpenseMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -834,8 +854,10 @@
         private DevExpress.XtraBars.BarSubItem barSubExcel;
         private DevExpress.XtraBars.BarButtonItem btnFillFuelTable;
         private DevExpress.XtraGrid.Columns.GridColumn gColAttId;
+        private DevExpress.XtraGrid.Columns.GridColumn gColFuelPhotoAttId;
         private DevExpress.XtraBars.BarButtonItem btnFuelUsageStatistics;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn28;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn29;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn30;
     }
 }
