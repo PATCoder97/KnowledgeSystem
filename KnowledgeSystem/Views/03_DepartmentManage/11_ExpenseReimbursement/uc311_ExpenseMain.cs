@@ -468,14 +468,14 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                     .GetListByInvoiceId(invoice.TransactionID)
                     .FirstOrDefault()?.Quantity ?? 0;
 
-                string vehicleTypeCode = (vehicle?.FuelType == "xăng/汽") ? "X" : "Y";
+                string vehicleTypeCode = (vehicle?.FuelType == "xăng/汽") ? "O" : "B";
 
                 return string.Join(tabDelimiter, new[]
                 {
                     invoice.LicensePlate ?? "",
                     "",
                     vehicleTypeCode,
-                    "E",
+                    "8",
                     invoice.SellerTax ?? "", "",
                     invoice.InvoiceCode ?? "",
                     invoice.InvoiceNumber ?? "",
