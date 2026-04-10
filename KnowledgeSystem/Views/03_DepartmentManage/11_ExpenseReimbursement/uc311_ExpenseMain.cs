@@ -63,8 +63,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
         private const string PdfCjkFontName = "DFKai-SB";
         private const string PdfLatinFontName = "Times New Roman";
         private const float FuelPhotoPdfPageMargin = 24f;
-        private const float FuelPhotoPdfEntrySpacing = 18f;
-        private const float FuelPhotoPdfImageHeight = 220f;
+        private const float FuelPhotoPdfSlotSpacing = 14f;
+        private const int FuelPhotoPdfEntriesPerPage = 2;
 
         private sealed class FuelPhotoReportRow
         {
@@ -1735,21 +1735,37 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                 .GroupBy(r => r.Tax)
                 .ToDictionary(g => g.Key, g => g.First().Type);
 
-            var fuelInvoices = dt311_InvoiceBUS.Instance.GetListByStartDeptId(idDept2Word, startDate.Date, queryEnd)
-                .Where(r => r.IssueDate.HasValue
-                    && !string.IsNullOrWhiteSpace(r.LicensePlate)
-                    && sellerTypeByTax.TryGetValue(r.SellerTax ?? string.Empty, out string sellerType)
-                    && sellerType == "xang_dau")
+            var invoicesInRange = dt311_InvoiceBUS.Instance.GetListByStartDeptId(idDept2Word, startDate.Date, queryEnd)
+                .Where(r => r.IssueDate.HasValue)
+                .ToList();
+
+            if (invoicesInRange.Count == 0)
+                return new List<FuelPhotoReportRow>();
+
+            var invoiceIds = new HashSet<string>(invoicesInRange.Select(r => r.TransactionID));
+            var invoiceItemsByInvoice = dt311_InvoiceItemBUS.Instance.GetList()
+                .Where(r => invoiceIds.Contains(r.IdInvoice))
+                .GroupBy(r => r.IdInvoice)
+                .ToDictionary(g => g.Key, g => g.ToList());
+
+            var fuelInvoices = invoicesInRange
+                .Where(invoice => IsFuelInvoiceForPdf(invoice, sellerTypeByTax, invoiceItemsByInvoice))
                 .ToList();
 
             if (fuelInvoices.Count == 0)
                 return new List<FuelPhotoReportRow>();
 
-            var invoiceIds = new HashSet<string>(fuelInvoices.Select(r => r.TransactionID));
-            var quantityByInvoice = dt311_InvoiceItemBUS.Instance.GetList()
-                .Where(r => invoiceIds.Contains(r.IdInvoice))
-                .GroupBy(r => r.IdInvoice)
-                .ToDictionary(g => g.Key, g => g.Sum(r => r.Quantity ?? 0m));
+            var quantityByInvoice = fuelInvoices.ToDictionary(
+                r => r.TransactionID,
+                r => invoiceItemsByInvoice.TryGetValue(r.TransactionID, out List<dt311_InvoiceItem> items)
+                    ? items.Sum(item => item.Quantity ?? 0m)
+                    : 0m);
+
+            var firstItemNameByInvoice = fuelInvoices.ToDictionary(
+                r => r.TransactionID,
+                r => invoiceItemsByInvoice.TryGetValue(r.TransactionID, out List<dt311_InvoiceItem> items)
+                    ? items.Select(item => item.DisplayName).FirstOrDefault(name => !string.IsNullOrWhiteSpace(name))
+                    : null);
 
             var vehicles = dt311_VehicleManagementBUS.Instance.GetList()
                 .Where(r => !string.IsNullOrWhiteSpace(r.LicensePlate))
@@ -1761,13 +1777,14 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                 {
                     vehicles.TryGetValue(invoice.LicensePlate, out dt311_VehicleManagement vehicle);
                     quantityByInvoice.TryGetValue(invoice.TransactionID, out decimal quantity);
+                    firstItemNameByInvoice.TryGetValue(invoice.TransactionID, out string itemName);
 
                     return new FuelPhotoReportRow
                     {
                         DeptDisplay = GetFuelReportDeptDisplay(invoice.IdDept),
                         LicensePlate = invoice.LicensePlate,
                         VehicleTypeDisplay = GetFuelReportVehicleTypeDisplay(vehicle?.VehicleType),
-                        FuelTypeDisplay = GetFuelCategoryName(vehicle?.FuelType),
+                        FuelTypeDisplay = GetFuelReportFuelDisplay(vehicle?.FuelType, itemName),
                         IssueDate = invoice.IssueDate.Value,
                         Quantity = quantity,
                         FuelPhotoAttId = invoice.FuelPhotoAttId
@@ -1799,6 +1816,58 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             return vehicleType.Trim();
         }
 
+        private bool IsFuelInvoiceForPdf(
+            dt311_Invoice invoice,
+            Dictionary<string, string> sellerTypeByTax,
+            Dictionary<string, List<dt311_InvoiceItem>> invoiceItemsByInvoice)
+        {
+            if (invoice == null)
+                return false;
+
+            if (sellerTypeByTax.TryGetValue(invoice.SellerTax ?? string.Empty, out string sellerType)
+                && sellerType == "xang_dau")
+            {
+                return true;
+            }
+
+            if (invoiceItemsByInvoice.TryGetValue(invoice.TransactionID, out List<dt311_InvoiceItem> items))
+            {
+                return items.Any(item => IsFuelItemDisplayName(item?.DisplayName));
+            }
+
+            return false;
+        }
+
+        private bool IsFuelItemDisplayName(string displayName)
+        {
+            if (string.IsNullOrWhiteSpace(displayName))
+                return false;
+
+            string normalized = displayName.Trim().ToLowerInvariant();
+            return normalized.Contains("xăng")
+                || normalized.Contains("dầu")
+                || normalized.Contains("汽油")
+                || normalized.Contains("柴油");
+        }
+
+        private string GetFuelReportFuelDisplay(string vehicleFuelType, string itemDisplayName)
+        {
+            if (!string.IsNullOrWhiteSpace(vehicleFuelType))
+                return GetFuelCategoryName(vehicleFuelType);
+
+            if (string.IsNullOrWhiteSpace(itemDisplayName))
+                return "燃料";
+
+            string normalized = itemDisplayName.Trim().ToLowerInvariant();
+            if (normalized.Contains("dầu") || normalized.Contains("柴油"))
+                return "柴油";
+
+            if (normalized.Contains("xăng") || normalized.Contains("汽油"))
+                return "汽油";
+
+            return "燃料";
+        }
+
         private void ExportFuelPhotoReportPdf(List<FuelPhotoReportRow> reportRows, string outputPath)
         {
             Spire.License.LicenseProvider.SetLicenseKey(TPConfigs.KeySpirePPT);
@@ -1823,28 +1892,23 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                 document.DocumentInformation.Author = TPConfigs.LoginUser?.DisplayName ?? TPConfigs.LoginUser?.Id ?? "KnowledgeSystem";
 
                 PdfNewPage page = null;
-                float y = 0f;
                 int pageIndex = 0;
+                float slotHeight = 0f;
 
-                foreach (FuelPhotoReportRow row in reportRows)
+                for (int index = 0; index < reportRows.Count; index++)
                 {
-                    if (page == null)
+                    FuelPhotoReportRow row = reportRows[index];
+                    int slotIndex = index % FuelPhotoPdfEntriesPerPage;
+                    if (page == null || slotIndex == 0)
                     {
                         pageIndex++;
                         page = (PdfNewPage)document.Pages.Add();
-                        y = DrawFuelReportPageHeader(page, pageIndex);
+                        DrawFuelReportPageHeader(page, pageIndex);
+                        slotHeight = GetFuelReportSlotHeight(page);
                     }
 
-                    float entryHeight = GetFuelReportEntryHeight();
-                    float pageBottom = page.Canvas.ClientSize.Height - FuelPhotoPdfPageMargin;
-                    if (y + entryHeight > pageBottom)
-                    {
-                        pageIndex++;
-                        page = (PdfNewPage)document.Pages.Add();
-                        y = DrawFuelReportPageHeader(page, pageIndex);
-                    }
-
-                    y = DrawFuelReportEntry(page, row, contentFont, attachmentPathById, y);
+                    float slotY = FuelPhotoPdfPageMargin + (slotIndex * (slotHeight + FuelPhotoPdfSlotSpacing));
+                    DrawFuelReportEntry(page, row, contentFont, attachmentPathById, slotY, slotHeight);
                 }
 
                 document.SaveToFile(outputPath);
@@ -1856,14 +1920,19 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             return FuelPhotoPdfPageMargin;
         }
 
-        private float DrawFuelReportEntry(
+        private void DrawFuelReportEntry(
             PdfNewPage page,
             FuelPhotoReportRow row,
             PdfTrueTypeFont contentFont,
             Dictionary<int, string> attachmentPathById,
-            float y)
+            float slotY,
+            float slotHeight)
         {
             float contentWidth = page.Canvas.ClientSize.Width - (FuelPhotoPdfPageMargin * 2);
+            const float titleHeight = 18f;
+            const float titleBottomSpacing = 8f;
+            const float quantityHeight = 16f;
+            const float quantityBottomSpacing = 10f;
             string fuelDisplay = string.IsNullOrWhiteSpace(row.FuelTypeDisplay) ? "燃料" : row.FuelTypeDisplay;
             string reportSubject = string.IsNullOrWhiteSpace(row.DeptDisplay) ? row.LicensePlate : row.DeptDisplay;
             string vehicleTypeDisplay = string.IsNullOrWhiteSpace(row.VehicleTypeDisplay) ? "車輛" : row.VehicleTypeDisplay;
@@ -1873,23 +1942,25 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                 LineAlignment = PdfVerticalAlignment.Middle
             };
 
+            float y = slotY;
             page.Canvas.DrawString(
                 $"{reportSubject}於 {row.IssueDate:yyyy/MM/dd} {vehicleTypeDisplay}加{fuelDisplay}記錄",
                 contentFont,
                 PdfBrushes.Black,
-                new RectangleF(FuelPhotoPdfPageMargin, y, contentWidth, 18f),
+                new RectangleF(FuelPhotoPdfPageMargin, y, contentWidth, titleHeight),
                 centeredFormat);
 
-            y += 22f;
+            y += titleHeight + titleBottomSpacing;
             page.Canvas.DrawString(
                 $"加{fuelDisplay}表: {row.Quantity:0000.###} Lit",
                 contentFont,
                 PdfBrushes.Black,
-                new RectangleF(FuelPhotoPdfPageMargin, y, contentWidth, 16f),
+                new RectangleF(FuelPhotoPdfPageMargin, y, contentWidth, quantityHeight),
                 centeredFormat);
 
-            y += 24f;
-            RectangleF imageBounds = new RectangleF(FuelPhotoPdfPageMargin, y, contentWidth, FuelPhotoPdfImageHeight);
+            y += quantityHeight + quantityBottomSpacing;
+            float imageHeight = Math.Max(120f, slotHeight - (y - slotY));
+            RectangleF imageBounds = new RectangleF(FuelPhotoPdfPageMargin, y, contentWidth, imageHeight);
             if (TryLoadFuelPhoto(row.FuelPhotoAttId, attachmentPathById, out Image fuelPhoto))
             {
                 using (fuelPhoto)
@@ -1910,13 +1981,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                         LineAlignment = PdfVerticalAlignment.Middle
                     });
             }
-
-            return imageBounds.Bottom + FuelPhotoPdfEntrySpacing;
         }
 
-        private float GetFuelReportEntryHeight()
+        private float GetFuelReportSlotHeight(PdfNewPage page)
         {
-            return 22f + 24f + FuelPhotoPdfImageHeight + FuelPhotoPdfEntrySpacing;
+            float availableHeight = page.Canvas.ClientSize.Height - (FuelPhotoPdfPageMargin * 2) - FuelPhotoPdfSlotSpacing;
+            return availableHeight / FuelPhotoPdfEntriesPerPage;
         }
 
         private bool TryLoadFuelPhoto(int? attachmentId, Dictionary<int, string> attachmentPathById, out Image image)
