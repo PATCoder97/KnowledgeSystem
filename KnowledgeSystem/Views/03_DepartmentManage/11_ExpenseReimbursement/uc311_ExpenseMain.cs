@@ -82,6 +82,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             public string FuelCategory { get; set; }
             public int Year { get; set; }
             public int Month { get; set; }
+            public decimal Amount { get; set; }
             public decimal Quantity { get; set; }
         }
 
@@ -2031,41 +2032,66 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                 .ToDictionary(g => g.Key, g => g.First().Type);
 
             var invoices = dt311_InvoiceBUS.Instance.GetListByStartDeptId(idDept2Word, startDate, endDate)
-                .Where(r => r.IssueDate.HasValue
-                    && !string.IsNullOrWhiteSpace(r.LicensePlate)
-                    && sellerTypeByTax.TryGetValue(r.SellerTax ?? string.Empty, out string sellerType)
-                    && sellerType == "xang_dau")
+                .Where(r => r.IssueDate.HasValue && !string.IsNullOrWhiteSpace(r.LicensePlate))
                 .ToList();
 
             if (invoices.Count == 0)
                 throw new InvalidOperationException("所選年度區間沒有加油資料。");
 
             var invoiceIds = new HashSet<string>(invoices.Select(r => r.TransactionID));
-            var quantityByInvoice = dt311_InvoiceItemBUS.Instance.GetList()
+            var invoiceItemsByInvoice = dt311_InvoiceItemBUS.Instance.GetList()
                 .Where(r => invoiceIds.Contains(r.IdInvoice))
                 .GroupBy(r => r.IdInvoice)
-                .ToDictionary(g => g.Key, g => g.Sum(r => r.Quantity ?? 0m));
+                .ToDictionary(g => g.Key, g => g.ToList());
+
+            var fuelInvoices = invoices
+                .Where(invoice => IsFuelInvoiceForPdf(invoice, sellerTypeByTax, invoiceItemsByInvoice))
+                .ToList();
+
+            if (fuelInvoices.Count == 0)
+                throw new InvalidOperationException("所選年度區間沒有加油資料。");
+
+            var quantityByInvoice = fuelInvoices.ToDictionary(
+                r => r.TransactionID,
+                r => invoiceItemsByInvoice.TryGetValue(r.TransactionID, out List<dt311_InvoiceItem> items)
+                    ? items.Sum(item => item.Quantity ?? 0m)
+                    : 0m);
+
+            var firstItemNameByInvoice = fuelInvoices.ToDictionary(
+                r => r.TransactionID,
+                r => invoiceItemsByInvoice.TryGetValue(r.TransactionID, out List<dt311_InvoiceItem> items)
+                    ? items.Select(item => item.DisplayName).FirstOrDefault(name => !string.IsNullOrWhiteSpace(name))
+                    : null);
 
             var vehicles = dt311_VehicleManagementBUS.Instance.GetList()
                 .Where(r => !string.IsNullOrWhiteSpace(r.LicensePlate))
                 .GroupBy(r => r.LicensePlate)
                 .ToDictionary(g => g.Key, g => g.First());
 
-            var sourceRows = invoices
+            var sourceRows = fuelInvoices
                 .Select(invoice =>
                 {
                     vehicles.TryGetValue(invoice.LicensePlate, out dt311_VehicleManagement vehicle);
                     quantityByInvoice.TryGetValue(invoice.TransactionID, out decimal quantity);
+                    firstItemNameByInvoice.TryGetValue(invoice.TransactionID, out string itemName);
+                    string fuelCategory = GetFuelUsageCategoryName(vehicle?.FuelType, itemName);
+                    if (string.IsNullOrWhiteSpace(fuelCategory))
+                        return null;
 
                     return new FuelUsageStatisticRow
                     {
-                        FuelCategory = GetFuelCategoryName(vehicle?.FuelType),
+                        FuelCategory = fuelCategory,
                         Year = invoice.IssueDate.Value.Year,
                         Month = invoice.IssueDate.Value.Month,
+                        Amount = invoice.TotalAfterVAT ?? 0m,
                         Quantity = quantity
                     };
                 })
+                .Where(r => r != null)
                 .ToList();
+
+            if (sourceRows.Count == 0)
+                throw new InvalidOperationException("所選年度區間沒有可分類的汽油/柴油資料。");
 
             ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
             using (ExcelPackage package = new ExcelPackage())
@@ -2079,76 +2105,149 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
         private void BuildFuelUsageWorksheet(ExcelPackage package, string sheetName, List<FuelUsageStatisticRow> rows, int startYear, int endYear)
         {
             var worksheet = package.Workbook.Worksheets.Add(sheetName);
-            worksheet.Cells["A1:M1"].Merge = true;
-            worksheet.Cells["A1"].Value = $"{sheetName}每月加油量年度比較";
-            worksheet.Cells["A1"].Style.Font.Bold = true;
-            worksheet.Cells["A1"].Style.Font.Size = 16;
-            worksheet.Cells["A1"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            string deptDisplay = GetFuelReportDeptDisplay(idDept2Word);
+            int tableTitleRow = 23;
+            int tableHeaderRow = 24;
+            int currentRow = 25;
 
-            worksheet.Cells[3, 1].Value = "年份";
+            worksheet.View.ShowGridLines = false;
+            worksheet.Cells["B2:O2"].Merge = true;
+            worksheet.Cells["B2"].Value = $"{deptDisplay}{sheetName}年度使用集總表";
+            worksheet.Cells["B2"].Style.Font.Bold = true;
+            worksheet.Cells["B2"].Style.Font.Size = 16;
+            worksheet.Cells["B2"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            worksheet.Cells["B2"].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+
+            worksheet.Cells[tableTitleRow, 3, tableTitleRow, 15].Merge = true;
+            worksheet.Cells[tableTitleRow, 3].Value = $"{sheetName}每月費用暨用量總表";
+            using (var tableTitleRange = worksheet.Cells[tableTitleRow, 3, tableTitleRow, 15])
+            {
+                tableTitleRange.Style.Font.Bold = true;
+                tableTitleRange.Style.Font.Size = 11;
+                tableTitleRange.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                tableTitleRange.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                tableTitleRange.Style.Fill.PatternType = ExcelFillStyle.Solid;
+                tableTitleRange.Style.Fill.BackgroundColor.SetColor(Color.FromArgb(198, 224, 180));
+                tableTitleRange.Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                tableTitleRange.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                tableTitleRange.Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                tableTitleRange.Style.Border.Right.Style = ExcelBorderStyle.Thin;
+            }
+
+            worksheet.Cells[tableHeaderRow, 1].Value = string.Empty;
+            worksheet.Cells[tableHeaderRow, 2].Value = "年";
             for (int month = 1; month <= 12; month++)
             {
-                worksheet.Cells[3, month + 1].Value = $"{month}月";
+                worksheet.Cells[tableHeaderRow, month + 2].Value = $"{month}月";
             }
+            worksheet.Cells[tableHeaderRow, 15].Value = "月平均";
 
-            int currentRow = 4;
-            for (int year = startYear; year <= endYear; year++)
-            {
-                worksheet.Cells[currentRow, 1].Value = $"{year}年";
-                for (int month = 1; month <= 12; month++)
-                {
-                    decimal quantity = rows
-                        .Where(r => r.Year == year && r.Month == month)
-                        .Sum(r => (decimal)r.Quantity);
-
-                    worksheet.Cells[currentRow, month + 1].Value = quantity;
-                    worksheet.Cells[currentRow, month + 1].Style.Numberformat.Format = "0.###";
-                }
-
-                currentRow++;
-            }
-
-            using (var headerRange = worksheet.Cells[3, 1, 3, 13])
+            using (var headerRange = worksheet.Cells[tableHeaderRow, 1, tableHeaderRow, 15])
             {
                 headerRange.Style.Font.Bold = true;
                 headerRange.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                headerRange.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
                 headerRange.Style.Fill.PatternType = ExcelFillStyle.Solid;
-                headerRange.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.FromArgb(217, 225, 242));
+                headerRange.Style.Fill.BackgroundColor.SetColor(Color.FromArgb(226, 239, 218));
+                headerRange.Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                headerRange.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                headerRange.Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                headerRange.Style.Border.Right.Style = ExcelBorderStyle.Thin;
             }
 
-            using (var dataRange = worksheet.Cells[3, 1, currentRow - 1, 13])
+            List<int> usdRows = new List<int>();
+            for (int year = startYear; year <= endYear; year++)
             {
-                dataRange.Style.Border.Top.Style = ExcelBorderStyle.Thin;
-                dataRange.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
-                dataRange.Style.Border.Left.Style = ExcelBorderStyle.Thin;
-                dataRange.Style.Border.Right.Style = ExcelBorderStyle.Thin;
-                dataRange.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                int usdRow = currentRow;
+                int literRow = currentRow + 1;
+                usdRows.Add(usdRow);
+
+                worksheet.Cells[usdRow, 1].Value = "USD";
+                worksheet.Cells[literRow, 1].Value = "公升";
+                worksheet.Cells[usdRow, 2, literRow, 2].Merge = true;
+                worksheet.Cells[usdRow, 2].Value = $"{year}年";
+                worksheet.Cells[usdRow, 2].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                worksheet.Cells[usdRow, 2].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+
+                for (int month = 1; month <= 12; month++)
+                {
+                    decimal amount = rows
+                        .Where(r => r.Year == year && r.Month == month)
+                        .Sum(r => r.Amount);
+                    decimal quantity = rows
+                        .Where(r => r.Year == year && r.Month == month)
+                        .Sum(r => r.Quantity);
+
+                    worksheet.Cells[usdRow, month + 2].Value = amount;
+                    worksheet.Cells[literRow, month + 2].Value = quantity;
+                    worksheet.Cells[usdRow, month + 2].Style.Numberformat.Format = "0.##";
+                    worksheet.Cells[literRow, month + 2].Style.Numberformat.Format = "0.####";
+                }
+
+                worksheet.Cells[usdRow, 15].Formula = $"AVERAGE(C{usdRow}:N{usdRow})";
+                worksheet.Cells[literRow, 15].Formula = $"AVERAGE(C{literRow}:N{literRow})";
+                worksheet.Cells[usdRow, 15].Style.Numberformat.Format = "0.##";
+                worksheet.Cells[literRow, 15].Style.Numberformat.Format = "0.####";
+
+                using (var rowRange = worksheet.Cells[usdRow, 1, literRow, 15])
+                {
+                    rowRange.Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                    rowRange.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                    rowRange.Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                    rowRange.Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                    rowRange.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                    rowRange.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                }
+
+                currentRow += 2;
             }
 
-            worksheet.Column(1).Width = 12;
-            for (int col = 2; col <= 13; col++)
+            worksheet.Column(1).Width = 8;
+            worksheet.Column(2).Width = 10;
+            for (int col = 3; col <= 15; col++)
             {
                 worksheet.Column(col).Width = 10;
             }
 
-            var chart = worksheet.Drawings.AddChart($"chart_{sheetName}", eChartType.ColumnClustered);
-            chart.Title.Text = $"{sheetName}每月加油量年度比較";
-            chart.SetPosition(1, 0, 14, 0);
-            chart.SetSize(900, 360);
-            chart.YAxis.Title.Text = "Lit";
-            chart.XAxis.Title.Text = "月份";
-            chart.Legend.Position = eLegendPosition.Top;
+            var chart = worksheet.Drawings.AddChart($"chart_{sheetName}", eChartType.ColumnClustered) as ExcelBarChart;
+            chart.Title.Text = $"{deptDisplay}{sheetName}費用年度比較";
+            chart.SetPosition(3, 0, 2, 0);
+            chart.SetSize(980, 430);
+            chart.YAxis.Title.Text = "USD";
+            chart.XAxis.Title.Text = string.Empty;
+            chart.Legend.Position = eLegendPosition.Right;
+            chart.Legend.Border.Width = 0;
+            chart.Legend.Font.Size = 10;
 
-            var xRange = worksheet.Cells[3, 2, 3, 13];
-            for (int row = 4; row < currentRow; row++)
+            var xRange = worksheet.Cells[tableHeaderRow, 3, tableHeaderRow, 14];
+            foreach (int usdRow in usdRows)
             {
-                var series = (ExcelBarChartSerie)chart.Series.Add(worksheet.Cells[row, 2, row, 13], xRange);
-                series.Header = worksheet.Cells[row, 1].Value?.ToString();
+                var series = (ExcelBarChartSerie)chart.Series.Add(worksheet.Cells[usdRow, 3, usdRow, 14], xRange);
+                series.Header = worksheet.Cells[usdRow, 2].Value?.ToString();
                 series.DataLabel.ShowValue = true;
                 series.DataLabel.Position = eLabelPosition.OutEnd;
             }
 
-            worksheet.View.FreezePanes(4, 2);
+            worksheet.Row(2).Height = 24;
+            worksheet.Row(tableTitleRow).Height = 20;
+            worksheet.View.FreezePanes(tableHeaderRow + 1, 3);
+        }
+
+        private string GetFuelUsageCategoryName(string vehicleFuelType, string itemDisplayName)
+        {
+            if (!string.IsNullOrWhiteSpace(vehicleFuelType))
+                return GetFuelCategoryName(vehicleFuelType);
+
+            if (string.IsNullOrWhiteSpace(itemDisplayName))
+                return null;
+
+            string normalized = itemDisplayName.Trim().ToLowerInvariant();
+            if (normalized.Contains("dầu") || normalized.Contains("柴油"))
+                return "柴油";
+            if (normalized.Contains("xăng") || normalized.Contains("汽油"))
+                return "汽油";
+
+            return null;
         }
 
         private string GetFuelCategoryName(string fuelType)
