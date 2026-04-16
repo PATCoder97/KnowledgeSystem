@@ -39,7 +39,7 @@ namespace KnowledgeSystem
         [STAThread]
         static void Main(string[] args)
         {
-            new AppCopyRight() { Version = "26.03.23" };
+            new AppCopyRight() { Version = "26.04.16" };
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             ApplySpireLicense();

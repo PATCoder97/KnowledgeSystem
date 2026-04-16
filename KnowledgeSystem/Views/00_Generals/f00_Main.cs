@@ -184,10 +184,24 @@ namespace KnowledgeSystem.Views._00_Generals
 
             TPConfigs.IdParentControl = IdForm_;
             f00_FluentFrame formShow = new f00_FluentFrame(IdForm_);
-            formShow.Text = e.Item.Text;
+            formShow.Text = FormatFrameTitle(e.Item.Text);
             Hide();
             formShow.ShowDialog();
             Show();
+        }
+
+        private static string FormatFrameTitle(string title)
+        {
+            if (string.IsNullOrWhiteSpace(title))
+            {
+                return string.Empty;
+            }
+
+            return title
+                .Replace("\r\n", " - ")
+                .Replace("\n", " - ")
+                .Replace("\r", " - ")
+                .Trim();
         }
 
         private void btnKnowHow_ItemClick(object sender, TileItemEventArgs e)

@@ -127,7 +127,7 @@ namespace KnowledgeSystem.Views._00_Generals
             this.tileMain.MaxId = 27;
             this.tileMain.Name = "tileMain";
             this.tileMain.Padding = new System.Windows.Forms.Padding(24, 22, 24, 22);
-            this.tileMain.Position = 240;
+            this.tileMain.Position = 360;
             this.tileMain.ShowGroupText = true;
             this.tileMain.Size = new System.Drawing.Size(1180, 599);
             this.tileMain.TabIndex = 4;
@@ -302,7 +302,7 @@ namespace KnowledgeSystem.Views._00_Generals
             this.btnSparePart.AppearanceItem.Normal.Font = new System.Drawing.Font("DFKai-SB", 26F);
             this.btnSparePart.AppearanceItem.Normal.Options.UseBackColor = true;
             this.btnSparePart.AppearanceItem.Normal.Options.UseFont = true;
-            tileItemElement12.Text = "資產庫存系統";
+            tileItemElement12.Text = "機邊庫\r\n固定資產";
             this.btnSparePart.Elements.Add(tileItemElement12);
             this.btnSparePart.Id = 16;
             this.btnSparePart.ItemSize = DevExpress.XtraEditors.TileItemSize.Wide;
