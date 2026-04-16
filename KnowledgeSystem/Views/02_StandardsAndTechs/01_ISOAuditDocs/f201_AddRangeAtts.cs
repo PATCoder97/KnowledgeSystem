@@ -81,6 +81,29 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             btnConfirm.ImageOptions.SvgImage = TPSvgimages.Confirm;
         }
 
+        private HashSet<int> GetValidRoleIds()
+        {
+            return new HashSet<int>(roles.Select(r => r.Id));
+        }
+
+        private ProgressDetail CreateProgressDetail(string idUsr, int idRole = 0)
+        {
+            var usrInfo = users.FirstOrDefault(r => r.Id == idUsr);
+            return new ProgressDetail
+            {
+                IdUsr = idUsr,
+                IdRole = FixedProgressHelper.NormalizeRoleId(idRole, GetValidRoleIds()),
+                UserName = usrInfo?.DisplayName ?? "",
+                JobName = jobTitles.FirstOrDefault(r => r.Id == usrInfo?.JobCode)?.DisplayName ?? ""
+            };
+        }
+
+        private void ShowMissingRoleMessage()
+        {
+            string msg = "Một số bước trong lưu trình cố định không còn loại ký/xác nhận hợp lệ, vui lòng chọn lại.\r\n部分固定流程角色不存在，請重新選擇。";
+            MsgTP.MsgShowInfomation($"<font='Microsoft JhengHei UI' size=14>{msg}</font>");
+        }
+
         private void f201_AddRangeAtts_Load(object sender, EventArgs e)
         {
             var grpUsrs = dm_GroupUserBUS.Instance.GetListByUID(TPConfigs.LoginUser.Id);
@@ -209,22 +232,30 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
             fProg.ShowDialog();
 
             int idFixedProg = fProg.Id;
+            if (idFixedProg <= 0) return;
 
             progresses.Clear();
             string defaulProg = dm_FixedProgressBUS.Instance.GetItemById(idFixedProg)?.Progress;
             if (string.IsNullOrEmpty(defaulProg)) return;
 
-            string[] defaulProgs = defaulProg.Split(';');
-
-            foreach (var item in defaulProgs)
+            bool hasMissingRole = false;
+            foreach (var item in FixedProgressHelper.Deserialize(defaulProg))
             {
-                var usrInfo = users.FirstOrDefault(r => r.Id == item?.ToString());
-                string nameUser = usrInfo?.DisplayName ?? "";
-                string jobName = jobTitles.FirstOrDefault(r => r.Id == usrInfo.JobCode)?.DisplayName ?? "";
-                progresses.Add(new ProgressDetail() { IdUsr = item, JobName = jobName, UserName = nameUser });
+                int idRole = FixedProgressHelper.NormalizeRoleId(item.IdRole, GetValidRoleIds());
+                if (item.HasRoleValue && idRole == 0)
+                {
+                    hasMissingRole = true;
+                }
+
+                progresses.Add(CreateProgressDetail(item.IdUsr, idRole));
             }
 
             gcProgress.RefreshDataSource();
+
+            if (hasMissingRole)
+            {
+                ShowMissingRoleMessage();
+            }
         }
 
         private void gvProgress_CustomDrawRowIndicator(object sender, RowIndicatorCustomDrawEventArgs e)
@@ -361,7 +392,8 @@ namespace KnowledgeSystem.Views._02_StandardsAndTechs._01_ISOAuditDocs
                 return;
             }
 
-            if (progresses.Any(r => r.IdRole == 0 || string.IsNullOrEmpty(r.IdUsr)))
+            var validRoleIds = GetValidRoleIds();
+            if (progresses.Any(r => !validRoleIds.Contains(r.IdRole) || string.IsNullOrEmpty(r.IdUsr)))
             {
                 XtraMessageBox.Show("請完成簽核流程！", TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
