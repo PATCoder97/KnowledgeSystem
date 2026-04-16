@@ -59,6 +59,7 @@
             this.gridColumn27 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColSellerType = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColAttId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColFuelPhotoAttId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn28 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemMemoEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit();
             this.gvSession = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -78,6 +79,8 @@
             this.barSubExcel = new DevExpress.XtraBars.BarSubItem();
             this.btnFillFuelTable = new DevExpress.XtraBars.BarButtonItem();
             this.btnFuelUsageStatistics = new DevExpress.XtraBars.BarButtonItem();
+            this.btnFillFuelTablePdf = new DevExpress.XtraBars.BarButtonItem();
+            this.btnFuelUsageStatisticsChart = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -86,6 +89,7 @@
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.gridColumn29 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn30 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gvDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvData)).BeginInit();
@@ -277,8 +281,10 @@
             this.gridColumn27,
             this.gColSellerType,
             this.gColAttId,
+            this.gColFuelPhotoAttId,
             this.gridColumn28,
-            this.gridColumn29});
+            this.gridColumn29,
+            this.gridColumn30});
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
             this.gvData.OptionsDetail.ShowDetailTabs = false;
@@ -420,13 +426,19 @@
             this.gColAttId.FieldName = "data.AttId";
             this.gColAttId.Name = "gColAttId";
             // 
+            // gColFuelPhotoAttId
+            // 
+            this.gColFuelPhotoAttId.Caption = "gColFuelPhotoAttId";
+            this.gColFuelPhotoAttId.FieldName = "data.FuelPhotoAttId";
+            this.gColFuelPhotoAttId.Name = "gColFuelPhotoAttId";
+            // 
             // gridColumn28
             // 
-            this.gridColumn28.Caption = "有檔案";
+            this.gridColumn28.Caption = "有發票PDF";
             this.gridColumn28.FieldName = "HasFile";
             this.gridColumn28.Name = "gridColumn28";
             this.gridColumn28.UnboundDataType = typeof(bool);
-            this.gridColumn28.UnboundExpression = "Not IsNullOrEmpty([data.AttId])";
+            this.gridColumn28.UnboundExpression = "Not IsNull([data.AttId])";
             this.gridColumn28.Visible = true;
             this.gridColumn28.VisibleIndex = 14;
             // 
@@ -529,9 +541,11 @@
             this.btnAddXmlFile,
             this.barSubExcel,
             this.btnFillFuelTable,
-            this.btnFuelUsageStatistics});
+            this.btnFuelUsageStatistics,
+            this.btnFillFuelTablePdf,
+            this.btnFuelUsageStatisticsChart});
             this.barManagerTP.MainMenu = this.bar2;
-            this.barManagerTP.MaxItemId = 21;
+            this.barManagerTP.MaxItemId = 23;
             // 
             // bar2
             // 
@@ -652,7 +666,9 @@
             this.barSubExcel.ItemAppearance.Normal.Options.UseForeColor = true;
             this.barSubExcel.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.btnFillFuelTable),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnFuelUsageStatistics)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnFuelUsageStatistics),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnFillFuelTablePdf),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnFuelUsageStatisticsChart)});
             this.barSubExcel.Name = "barSubExcel";
             // 
             // btnFillFuelTable
@@ -682,6 +698,34 @@
             this.btnFuelUsageStatistics.ItemAppearance.Normal.Options.UseForeColor = true;
             this.btnFuelUsageStatistics.Name = "btnFuelUsageStatistics";
             this.btnFuelUsageStatistics.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnFuelUsageStatistics_ItemClick);
+            // 
+            // btnFillFuelTablePdf
+            // 
+            this.btnFillFuelTablePdf.Caption = "公務車加油照片PDF";
+            this.btnFillFuelTablePdf.Id = 21;
+            this.btnFillFuelTablePdf.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnFillFuelTablePdf.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnFillFuelTablePdf.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnFillFuelTablePdf.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFillFuelTablePdf.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
+            this.btnFillFuelTablePdf.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnFillFuelTablePdf.ItemAppearance.Normal.Options.UseForeColor = true;
+            this.btnFillFuelTablePdf.Name = "btnFillFuelTablePdf";
+            this.btnFillFuelTablePdf.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnFillFuelTablePdf_ItemClick);
+            // 
+            // btnFuelUsageStatisticsChart
+            // 
+            this.btnFuelUsageStatisticsChart.Caption = "廠處使用燃料量圖表";
+            this.btnFuelUsageStatisticsChart.Id = 22;
+            this.btnFuelUsageStatisticsChart.ImageOptions.SvgImageSize = new System.Drawing.Size(32, 32);
+            this.btnFuelUsageStatisticsChart.ItemAppearance.Hovered.ForeColor = System.Drawing.Color.Blue;
+            this.btnFuelUsageStatisticsChart.ItemAppearance.Hovered.Options.UseForeColor = true;
+            this.btnFuelUsageStatisticsChart.ItemAppearance.Normal.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFuelUsageStatisticsChart.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
+            this.btnFuelUsageStatisticsChart.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnFuelUsageStatisticsChart.ItemAppearance.Normal.Options.UseForeColor = true;
+            this.btnFuelUsageStatisticsChart.Name = "btnFuelUsageStatisticsChart";
+            this.btnFuelUsageStatisticsChart.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnFuelUsageStatisticsChart_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -752,6 +796,16 @@
             this.gridColumn29.Name = "gridColumn29";
             this.gridColumn29.Visible = true;
             this.gridColumn29.VisibleIndex = 10;
+            // 
+            // gridColumn30
+            // 
+            this.gridColumn30.Caption = "有照片";
+            this.gridColumn30.FieldName = "HasFuelPhoto";
+            this.gridColumn30.Name = "gridColumn30";
+            this.gridColumn30.UnboundDataType = typeof(bool);
+            this.gridColumn30.UnboundExpression = "Not IsNull([data.FuelPhotoAttId])";
+            this.gridColumn30.Visible = true;
+            this.gridColumn30.VisibleIndex = 15;
             // 
             // uc311_ExpenseMain
             // 
@@ -834,8 +888,12 @@
         private DevExpress.XtraBars.BarSubItem barSubExcel;
         private DevExpress.XtraBars.BarButtonItem btnFillFuelTable;
         private DevExpress.XtraGrid.Columns.GridColumn gColAttId;
+        private DevExpress.XtraGrid.Columns.GridColumn gColFuelPhotoAttId;
         private DevExpress.XtraBars.BarButtonItem btnFuelUsageStatistics;
+        private DevExpress.XtraBars.BarButtonItem btnFillFuelTablePdf;
+        private DevExpress.XtraBars.BarButtonItem btnFuelUsageStatisticsChart;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn28;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn29;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn30;
     }
 }

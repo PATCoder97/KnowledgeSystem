@@ -19,8 +19,6 @@ using DevExpress.XtraTreeList.Columns;
 using DevExpress.XtraTreeList.Data;
 using DevExpress.XtraTreeList.Nodes;
 using DevExpress.XtraTreeList.StyleFormatConditions;
-using DocumentFormat.OpenXml.Spreadsheet;
-using DocumentFormat.OpenXml.Vml;
 using KAutoHelper;
 using KnowledgeSystem.Helpers;
 using KnowledgeSystem.Views._00_Generals;
@@ -28,7 +26,10 @@ using KnowledgeSystem.Views._02_StandardsAndTechs._05_IATF16949;
 using MiniSoftware;
 using Newtonsoft.Json.Linq;
 using OfficeOpenXml;
+using OfficeOpenXml.Drawing.Chart;
 using OfficeOpenXml.Style;
+using Spire.Pdf;
+using Spire.Pdf.Graphics;
 using Spire.Presentation;
 using System;
 using System.Collections.Generic;
@@ -43,7 +44,6 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Web.UI.WebControls;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using static DevExpress.XtraEditors.Mask.MaskSettings;
@@ -58,6 +58,33 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
     {
         private static readonly string URL = "https://www.meinvoice.vn/tra-cuu/GetInvoiceDataByTransactionID";
         private static readonly string URL_INVOICE_PDF = "https://www.meinvoice.vn/tra-cuu/DownloadHandler.ashx?Type=pdf&Viewer=1&ext=XZ28Q9E6&Code=";
+        private const string InvoiceAttachmentThread = "311";
+        private const string FuelPhotoAttachmentThread = "311_FUEL_PHOTO";
+        private const string PdfCjkFontName = "DFKai-SB";
+        private const string PdfLatinFontName = "Times New Roman";
+        private const float FuelPhotoPdfPageMargin = 24f;
+        private const float FuelPhotoPdfSlotSpacing = 14f;
+        private const int FuelPhotoPdfEntriesPerPage = 2;
+
+        private sealed class FuelPhotoReportRow
+        {
+            public string DeptDisplay { get; set; }
+            public string LicensePlate { get; set; }
+            public string VehicleTypeDisplay { get; set; }
+            public string FuelTypeDisplay { get; set; }
+            public DateTime IssueDate { get; set; }
+            public decimal Quantity { get; set; }
+            public int? FuelPhotoAttId { get; set; }
+        }
+
+        private sealed class FuelUsageStatisticRow
+        {
+            public string FuelCategory { get; set; }
+            public int Year { get; set; }
+            public int Month { get; set; }
+            public decimal Amount { get; set; }
+            public decimal Quantity { get; set; }
+        }
 
         public uc311_ExpenseMain()
         {
@@ -84,6 +111,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
         DXMenuItem itemUpdateAddFuel;
         DXMenuItem itemViewFile;
         DXMenuItem itemAddFile;
+        DXMenuItem itemViewFuelPhoto;
+        DXMenuItem itemAddFuelPhoto;
 
         DXMenuItem CreateMenuItem(string caption, EventHandler clickEvent, SvgImage svgImage)
         {
@@ -107,6 +136,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
 
             btnFillFuelTable.ImageOptions.SvgImage = TPSvgimages.Num1;
             btnFuelUsageStatistics.ImageOptions.SvgImage = TPSvgimages.Num2;
+            btnFillFuelTablePdf.ImageOptions.SvgImage = TPSvgimages.Num3;
+            btnFuelUsageStatisticsChart.ImageOptions.SvgImage = TPSvgimages.Num4;
         }
 
         private void InitializeMenuItems()
@@ -116,98 +147,199 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             itemERP03 = CreateMenuItem("ERP：一般費用報銷輸入", ItemERP03_Click, TPSvgimages.Num3);
             itemUpdateAddFuel = CreateMenuItem("車輛：加油資料", ItemUpdateAddFuel_Click, TPSvgimages.UpLevel);
 
-            itemAddFile = CreateMenuItem("上傳發表", ItemAddFile_Click, TPSvgimages.UploadFile);
-            itemViewFile = CreateMenuItem("查看發表", ItemViewFile_Click, TPSvgimages.View);
+            itemAddFile = CreateMenuItem("上傳發票PDF", ItemAddFile_Click, TPSvgimages.UploadFile);
+            itemViewFile = CreateMenuItem("查看發票PDF", ItemViewFile_Click, TPSvgimages.View);
+            itemAddFuelPhoto = CreateMenuItem("上傳加油照片", ItemAddFuelPhoto_Click, TPSvgimages.UploadFile);
+            itemViewFuelPhoto = CreateMenuItem("查看加油照片", ItemViewFuelPhoto_Click, TPSvgimages.View);
         }
 
         private void ItemViewFile_Click(object sender, EventArgs e)
         {
-            GridView view = gvData;
-            int idAtt = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColAttId));
-            var att = dm_AttachmentBUS.Instance.GetItemById(idAtt);
+            OpenAttachmentFromGrid(gColAttId, "未上傳發票PDF。");
+        }
 
-            string filePath = att.EncryptionName;
-            string fileName = att.ActualName;
-
-            string sourcePath = Path.Combine(TPConfigs.Folder311, filePath);
-            string destPath = Path.Combine(TPConfigs.TempFolderData, $"{Regex.Replace(att.ActualName, @"[\\/:*?""<>|]", "")}_{DateTime.Now:yyyyMMddHHmmss}{Path.GetExtension(fileName)}");
-
-            if (!Directory.Exists(TPConfigs.TempFolderData))
-                Directory.CreateDirectory(TPConfigs.TempFolderData);
-
-            File.Copy(sourcePath, destPath, true);
-
-            var mainForm = f00_ViewMultiFile.Instance;
-
-            if (!mainForm.Visible)
-                mainForm.Show();
-
-            mainForm.OpenFormInDocumentManager(destPath);
+        private void ItemViewFuelPhoto_Click(object sender, EventArgs e)
+        {
+            OpenAttachmentFromGrid(gColFuelPhotoAttId, "未上傳加油照片。");
         }
 
         private void ItemAddFile_Click(object sender, EventArgs e)
         {
-            // 🔹 Hộp thoại chọn file PDF
-            using (var openFileDialog = new OpenFileDialog { Filter = "PDF files (*.pdf)|*.pdf" })
+            UploadAttachmentForFocusedInvoice(
+                "PDF files (*.pdf)|*.pdf",
+                InvoiceAttachmentThread,
+                invoice => invoice.AttId,
+                (invoice, attachmentId) => invoice.AttId = attachmentId,
+                "已上傳發票PDF。");
+        }
+
+        private void ItemAddFuelPhoto_Click(object sender, EventArgs e)
+        {
+            UploadAttachmentForFocusedInvoice(
+                "Image files (*.jpg;*.jpeg;*.png)|*.jpg;*.jpeg;*.png",
+                FuelPhotoAttachmentThread,
+                invoice => invoice.FuelPhotoAttId,
+                (invoice, attachmentId) => invoice.FuelPhotoAttId = attachmentId,
+                "已上傳加油照片。");
+        }
+
+        private void OpenAttachmentFromGrid(GridColumn attachmentColumn, string emptyMessage)
+        {
+            int attachmentId = GetFocusedIntValue(attachmentColumn);
+            if (attachmentId <= 0)
+            {
+                XtraMessageBox.Show(emptyMessage, "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            OpenAttachment(attachmentId);
+        }
+
+        private void OpenAttachment(int attachmentId)
+        {
+            var attachment = dm_AttachmentBUS.Instance.GetItemById(attachmentId);
+            if (attachment == null)
+            {
+                XtraMessageBox.Show("找不到附件資料。", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            string sourcePath = BuildAttachmentPath(attachment);
+            if (!File.Exists(sourcePath))
+            {
+                XtraMessageBox.Show("找不到附件檔案。", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (!Directory.Exists(TPConfigs.TempFolderData))
+            {
+                Directory.CreateDirectory(TPConfigs.TempFolderData);
+            }
+
+            string safeFileName = Regex.Replace(attachment.ActualName ?? "file", @"[\\/:*?""<>|]", "");
+            string destPath = Path.Combine(
+                TPConfigs.TempFolderData,
+                $"{safeFileName}_{DateTime.Now:yyyyMMddHHmmss}{Path.GetExtension(attachment.ActualName)}");
+
+            File.Copy(sourcePath, destPath, true);
+
+            var mainForm = f00_ViewMultiFile.Instance;
+            if (!mainForm.Visible)
+            {
+                mainForm.Show();
+            }
+
+            mainForm.OpenFormInDocumentManager(destPath);
+        }
+
+        private void UploadAttachmentForFocusedInvoice(
+            string dialogFilter,
+            string attachmentThread,
+            Func<dt311_Invoice, int?> getAttachmentId,
+            Action<dt311_Invoice, int?> setAttachmentId,
+            string successMessage)
+        {
+            dt311_Invoice invoice = GetFocusedInvoice();
+            if (invoice == null)
+            {
+                XtraMessageBox.Show("找不到選取的發票資料。", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            using (var openFileDialog = new OpenFileDialog { Filter = dialogFilter })
             {
                 if (openFileDialog.ShowDialog() != DialogResult.OK)
-                    return;
-
-                // 🔹 Thông tin file gốc
-                string filePath = openFileDialog.FileName;
-                string actualName = Path.GetFileName(filePath);
-                string encryptionName = EncryptionHelper.EncryptionFileName(actualName);
-
-                // 🔹 Tạo đối tượng đính kèm
-                dm_Attachment attachment = new dm_Attachment
                 {
-                    Thread = "311",
-                    EncryptionName = encryptionName,
-                    ActualName = actualName
-                };
+                    return;
+                }
 
-                // 🔹 Xác định đường dẫn lưu
-                string destPath = Path.Combine(TPConfigs.Folder311, attachment.EncryptionName);
+                string sourceFilePath = openFileDialog.FileName;
+                string actualName = Path.GetFileName(sourceFilePath);
+                string encryptionName = EncryptionHelper.EncryptionFileName(actualName);
+                string destPath = Path.Combine(TPConfigs.Folder311, encryptionName);
+
                 DirectoryInfo parentDir = Directory.GetParent(destPath);
-
                 if (parentDir != null && !Directory.Exists(parentDir.FullName))
                 {
                     Directory.CreateDirectory(parentDir.FullName);
                 }
 
-                // 🔹 Sao chép file vào thư mục đích (ghi đè nếu đã tồn tại)
-                File.Copy(filePath, destPath, true);
+                File.Copy(sourceFilePath, destPath, true);
 
-                // 🔹 Thêm vào bảng Attachment
-                int attId = dm_AttachmentBUS.Instance.Add(attachment);
-
-                // 🔹 Lấy invoice hiện tại trên GridView
-                GridView view = gvData;
-                object idValue = view.GetRowCellValue(view.FocusedRowHandle, gColId);
-                if (idValue == null)
+                var attachment = new dm_Attachment
                 {
-                    XtraMessageBox.Show("Không tìm thấy hóa đơn được chọn.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Thread = attachmentThread,
+                    EncryptionName = encryptionName,
+                    ActualName = actualName
+                };
+
+                int newAttachmentId = dm_AttachmentBUS.Instance.Add(attachment);
+                if (newAttachmentId <= 0)
+                {
+                    if (File.Exists(destPath))
+                    {
+                        File.Delete(destPath);
+                    }
+
+                    XtraMessageBox.Show("附件上傳失敗。", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                string invoiceId = idValue.ToString();
-                dt311_Invoice invoice = dt311_InvoiceBUS.Instance.GetItemById(invoiceId);
-
-                if (invoice == null)
+                int? oldAttachmentId = getAttachmentId(invoice);
+                setAttachmentId(invoice, newAttachmentId);
+                string invoiceId = dt311_InvoiceBUS.Instance.AddOrUpdate(invoice);
+                if (string.IsNullOrWhiteSpace(invoiceId))
                 {
-                    XtraMessageBox.Show("Không tìm thấy hóa đơn trong cơ sở dữ liệu.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    RemoveAttachment(newAttachmentId);
+                    XtraMessageBox.Show("發票附件關聯失敗。", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                // 🔹 Cập nhật thông tin đính kèm
-                invoice.AttId = attId;
-                dt311_InvoiceBUS.Instance.AddOrUpdate(invoice);
+                if (oldAttachmentId.HasValue && oldAttachmentId.Value > 0 && oldAttachmentId.Value != newAttachmentId)
+                {
+                    RemoveAttachment(oldAttachmentId.Value);
+                }
 
-                // 🔹 Refresh lại dữ liệu hiển thị
                 LoadData();
-
-                XtraMessageBox.Show("Đã tải lên hóa đơn thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                XtraMessageBox.Show(successMessage, "成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private void RemoveAttachment(int attachmentId)
+        {
+            var attachment = dm_AttachmentBUS.Instance.GetItemById(attachmentId);
+            if (attachment == null)
+            {
+                return;
+            }
+
+            string sourcePath = BuildAttachmentPath(attachment);
+            if (File.Exists(sourcePath))
+            {
+                File.Delete(sourcePath);
+            }
+
+            dm_AttachmentBUS.Instance.RemoveById(attachmentId);
+        }
+
+        private string BuildAttachmentPath(dm_Attachment attachment)
+        {
+            return Path.Combine(TPConfigs.Folder311, attachment.EncryptionName);
+        }
+
+        private dt311_Invoice GetFocusedInvoice()
+        {
+            GridView view = gvData;
+            string invoiceId = view.GetRowCellValue(view.FocusedRowHandle, gColId)?.ToString();
+            return string.IsNullOrWhiteSpace(invoiceId)
+                ? null
+                : dt311_InvoiceBUS.Instance.GetItemById(invoiceId);
+        }
+
+        private int GetFocusedIntValue(GridColumn column)
+        {
+            object value = gvData.GetRowCellValue(gvData.FocusedRowHandle, column);
+            return value == null || value == DBNull.Value ? -1 : Convert.ToInt32(value);
         }
 
         private void ItemUpdateAddFuel_Click(object sender, EventArgs e)
@@ -468,14 +600,14 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                     .GetListByInvoiceId(invoice.TransactionID)
                     .FirstOrDefault()?.Quantity ?? 0;
 
-                string vehicleTypeCode = (vehicle?.FuelType == "xăng/汽") ? "X" : "Y";
+                string vehicleTypeCode = (vehicle?.FuelType == "xăng/汽") ? "O" : "B";
 
                 return string.Join(tabDelimiter, new[]
                 {
                     invoice.LicensePlate ?? "",
                     "",
                     vehicleTypeCode,
-                    "E",
+                    "8",
                     invoice.SellerTax ?? "", "",
                     invoice.InvoiceCode ?? "",
                     invoice.InvoiceNumber ?? "",
@@ -785,7 +917,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
 
             var attachment = new dm_Attachment()
             {
-                Thread = "311",
+                Thread = InvoiceAttachmentThread,
                 EncryptionName = encryptionName,
                 ActualName = actualName,
             };
@@ -1013,7 +1145,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
 
             depts = dm_DeptBUS.Instance.GetList();
             users = dm_UserBUS.Instance.GetList();
-
             LoadData();
             gcData.DataSource = sourceData;
 
@@ -1077,7 +1208,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
 
                 GridView view = gvData;
                 string typeOfSeller = view.GetRowCellValue(view.FocusedRowHandle, gColSellerType)?.ToString();
-                int attId = Convert.ToInt16(view.GetRowCellValue(view.FocusedRowHandle, gColAttId) ?? -1);
+                int attId = GetFocusedIntValue(gColAttId);
+                int fuelPhotoAttId = GetFocusedIntValue(gColFuelPhotoAttId);
 
                 itemAddFile.BeginGroup = true;
                 e.Menu.Items.Add(itemAddFile);
@@ -1090,6 +1222,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                 {
                     itemUpdateAddFuel.BeginGroup = true;
                     e.Menu.Items.Add(itemUpdateAddFuel);
+                    e.Menu.Items.Add(itemAddFuelPhoto);
+                    if (fuelPhotoAttId != -1)
+                    {
+                        e.Menu.Items.Add(itemViewFuelPhoto);
+                    }
                 }
             }
         }
@@ -1226,14 +1363,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
 
         private void btnFillFuelTable_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            // 🔹 Tạo TextEdit với mask kiểu yyyy/MM/dd - yyyy/MM/dd
             var editor = new TextEdit
             {
                 Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F),
                 EditValue = $"{DateTime.Today.AddDays(-7):yyyy/MM/dd} - {DateTime.Today:yyyy/MM/dd}"
             };
 
-            // Thiết lập mask để buộc nhập đúng định dạng
             editor.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.RegExpMaskManager));
             editor.Properties.MaskSettings.Set("mask", @"\d{4}/\d{2}/\d{2}\s*-\s*\d{4}/\d{2}/\d{2}");
             editor.Properties.MaskSettings.Set("isAutoComplete", true);
@@ -1241,7 +1376,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             editor.Properties.NullValuePrompt = "yyyy/MM/dd - yyyy/MM/dd";
             editor.Properties.NullValuePromptShowForEmptyValue = true;
 
-            // 🔹 Tạo popup nhập liệu
             var args = new XtraInputBoxArgs
             {
                 Caption = "選擇日期區間",
@@ -1251,7 +1385,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                 DefaultResponse = editor.EditValue.ToString()
             };
 
-            // 🔹 Hiển thị InputBox
             object result = XtraInputBox.Show(args);
             if (result == null) return;
 
@@ -1259,12 +1392,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
 
             try
             {
-                // ✅ Kiểm tra đúng định dạng bằng Regex
                 string pattern = @"^\d{4}/\d{2}/\d{2}\s*-\s*\d{4}/\d{2}/\d{2}$";
                 if (!Regex.IsMatch(rangeText, pattern))
                     throw new FormatException("格式錯誤！請輸入正確格式：yyyy/MM/dd - yyyy/MM/dd");
 
-                // ✅ Tách hai ngày
                 var parts = rangeText.Split('-');
                 DateTime start = DateTime.ParseExact(parts[0].Trim(), "yyyy/MM/dd", CultureInfo.InvariantCulture);
                 DateTime end = DateTime.ParseExact(parts[1].Trim(), "yyyy/MM/dd", CultureInfo.InvariantCulture);
@@ -1272,7 +1403,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                 if (start > end)
                     throw new Exception("起始日期不能大於結束日期！");
 
-                // Xử lý số liệu để xuất biểu
                 var invoiceDataExcel = dt311_InvoiceBUS.Instance.GetFuelLogWithPrevious(idDept2Word, start, end);
                 var invoiceItems = dt311_InvoiceItemBUS.Instance.GetList()
                     .GroupBy(r => r.IdInvoice)
@@ -1303,21 +1433,23 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                 if (!Directory.Exists(documentsPath))
                     Directory.CreateDirectory(documentsPath);
 
-                string PATH_TEMPLATE = Path.Combine(TPConfigs.Folder311_Template, "temp_fuel_report.docx");
+                string pathTemplate = Path.Combine(TPConfigs.Folder311_Template, "temp_fuel_report.docx");
 
                 foreach (var item in vehicleExports)
                 {
-                    string PATH_EXPORT = Path.Combine(documentsPath, $"{KnowledgeSystem.Helpers.StringHelper.SanitizeFileName(item)}-{DateTime.Now:yyyyMMddHHmmss}.docx");
+                    string pathExport = Path.Combine(
+                        documentsPath,
+                        $"{KnowledgeSystem.Helpers.StringHelper.SanitizeFileName(item)}-{DateTime.Now:yyyyMMddHHmmss}.docx");
 
                     var datas = excelDatas.Where(r => r.LicensePlate == item).ToList();
                     string deptUser = TPConfigs.LoginUser.IdDepartment;
-                    var deptDt1 = depts.FirstOrDefault(r => r.Id == deptUser.Substring(0, 1)).DisplayName;
-                    var deptDt2 = depts.FirstOrDefault(r => r.Id == deptUser.Substring(0, 2)).DisplayName;
-                    var deptDt4 = depts.FirstOrDefault(r => r.Id == deptUser.Substring(0, 4)).DisplayName;
+                    var deptDt1 = depts.FirstOrDefault(r => r.Id == deptUser.Substring(0, 1))?.DisplayName ?? string.Empty;
+                    var deptDt2 = depts.FirstOrDefault(r => r.Id == deptUser.Substring(0, 2))?.DisplayName ?? string.Empty;
+                    var deptDt4 = depts.FirstOrDefault(r => r.Id == deptUser.Substring(0, 4))?.DisplayName ?? string.Empty;
 
                     var valueData = new Dictionary<string, object>()
                     {
-                        ["dept"] = $"{deptDt1} {deptDt2} {deptDt4}",
+                        ["dept"] = string.Join(" ", new[] { deptDt1, deptDt2, deptDt4 }.Where(r => !string.IsNullOrWhiteSpace(r))),
                         ["vehicle"] = item,
                         ["year"] = DateTime.Today.Year,
                         ["month"] = DateTime.Today.Month,
@@ -1329,13 +1461,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                             ["usermeter"] = r.UserMeter,
                             ["quantity"] = r.QuantityFuel,
                             ["invoice"] = r.Invoice,
-                            ["amount"] = r.Amount?.ToString("N0") ?? "",
+                            ["amount"] = r.Amount?.ToString("N0") ?? string.Empty,
                             ["fillby"] = r.FillBy,
                             ["manager"] = r.Manager
                         })
                     };
 
-                    MiniWord.SaveAsByTemplate(PATH_EXPORT, PATH_TEMPLATE, valueData);
+                    MiniWord.SaveAsByTemplate(pathExport, pathTemplate, valueData);
                 }
 
                 Process.Start(documentsPath);
@@ -1355,7 +1487,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                     .Select(g => g.First())
                     .ToList();
 
-
             var data = (from fuel in fuelDatas
                         join vehicle in vehicles on fuel.LicensePlate equals vehicle.LicensePlate
                         join item in invoiceItems on fuel.TransactionID equals item.IdInvoice
@@ -1365,8 +1496,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                             vehicle,
                             item
                         }).ToList();
-
-
 
             var dataExcels = (from dt in data
                               select new
@@ -1387,14 +1516,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
             };
             if (saveFile.ShowDialog() != DialogResult.OK) return;
 
-            // Đường dẫn đến temp và file kết quả
-            string PATH_EXPORT = saveFile.FileName;
+            string pathExport = saveFile.FileName;
+            string pathTemplate = Path.Combine(TPConfigs.Folder311_Template, "fuel_usage_statistics.xlsx");
 
-            string PATH_TEMPLATE = Path.Combine(TPConfigs.Folder311_Template, "fuel_usage_statistics.xlsx");
+            File.Copy(pathTemplate, pathExport, true);
 
-            File.Copy(PATH_TEMPLATE, PATH_EXPORT, true);
-
-            FileInfo newFile = new FileInfo(PATH_EXPORT);
+            FileInfo newFile = new FileInfo(pathExport);
             using (ExcelPackage pck = new ExcelPackage(newFile))
             {
                 foreach (string vehicleType in dataExcels.Select(r => r.VehicleType).Distinct())
@@ -1406,8 +1533,6 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                     int startRow = 3, endRow = excelBySheet.Count + 2;
 
                     List<int> cols = new List<int>() { 1, 4 };
-
-                    // Merge các cột A-D nếu giá trị giống nhau
                     foreach (int col in cols)
                     {
                         int mergeStart = startRow;
@@ -1424,30 +1549,719 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._11_ExpenseReimbursement
                             }
                         }
                     }
-
-                    //// Bật WrapText cho tất cả các ô
-                    //ws.Column(6).Style.WrapText = true;
-                    //ws.Cells[ws.Dimension.Address].AutoFitColumns();
-                    //ws.Column(6).Width = 35;
-
-                    //// Định dạng cột D (giả sử D là cột số lượng chẳng hạn)
-                    //ws.Column(4).Style.Numberformat.Format = "#,##0"; // D = 4
-                    //ws.Column(13).Style.Numberformat.Format = "#,##0"; // M = 13
-                    //ws.Column(14).Style.Numberformat.Format = "#,##0"; // N = 14
-
-                    //// Căn giữa và kẻ ô toàn bảng
-                    //var fullRange = ws.Cells[ws.Dimension.Address];
-                    //fullRange.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
-                    //fullRange.Style.Border.Top.Style = fullRange.Style.Border.Bottom.Style =
-                    //    fullRange.Style.Border.Left.Style = fullRange.Style.Border.Right.Style =
-                    //    ExcelBorderStyle.Thin;
                 }
 
-                // Lưu và chỉ hiện Sheet BB
                 pck.Save();
             }
 
-            Process.Start(PATH_EXPORT);
+            Process.Start(pathExport);
+        }
+
+        private void btnFillFuelTablePdf_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (!TryGetDateRange(out DateTime startDate, out DateTime endDate))
+                return;
+
+            try
+            {
+                var reportRows = BuildFuelPhotoReportRows(startDate, endDate);
+                if (reportRows.Count == 0)
+                {
+                    XtraMessageBox.Show("所選日期區間沒有加油資料。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                {
+                    saveFileDialog.Filter = "PDF Files|*.pdf";
+                    saveFileDialog.RestoreDirectory = true;
+                    saveFileDialog.FileName = $"公務車加油記錄表-{startDate:yyyyMMdd}-{endDate:yyyyMMdd}-{DateTime.Now:yyyyMMddHHmmss}.pdf";
+
+                    if (saveFileDialog.ShowDialog() != DialogResult.OK)
+                        return;
+
+                    using (var handle = SplashScreenManager.ShowOverlayForm(this))
+                    {
+                        ExportFuelPhotoReportPdf(reportRows, saveFileDialog.FileName);
+                    }
+
+                    Process.Start(saveFileDialog.FileName);
+                }
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show($"導出 PDF 失敗：\n{ex.Message}", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnFuelUsageStatisticsChart_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (!TryGetYearRange(out int startYear, out int endYear))
+                return;
+
+            try
+            {
+                using (SaveFileDialog saveFile = new SaveFileDialog())
+                {
+                    saveFile.RestoreDirectory = true;
+                    saveFile.FileName = $"廠處使用燃料量統計表-{DateTime.Now:yyyyMMddHHmmss}.xlsx";
+                    saveFile.Filter = "Excel| *.xlsx";
+
+                    if (saveFile.ShowDialog() != DialogResult.OK)
+                        return;
+
+                    using (var handle = SplashScreenManager.ShowOverlayForm(this))
+                    {
+                        ExportFuelUsageStatisticsExcel(saveFile.FileName, startYear, endYear);
+                    }
+
+                    Process.Start(saveFile.FileName);
+                }
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show($"導出 Excel 失敗：\n{ex.Message}", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private bool TryGetDateRange(out DateTime startDate, out DateTime endDate)
+        {
+            startDate = DateTime.MinValue;
+            endDate = DateTime.MinValue;
+
+            var editor = new TextEdit
+            {
+                Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F),
+                EditValue = $"{DateTime.Today.AddDays(-7):yyyy/MM/dd} - {DateTime.Today:yyyy/MM/dd}"
+            };
+
+            editor.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.RegExpMaskManager));
+            editor.Properties.MaskSettings.Set("mask", @"\d{4}/\d{2}/\d{2}\s*-\s*\d{4}/\d{2}/\d{2}");
+            editor.Properties.MaskSettings.Set("isAutoComplete", true);
+            editor.Properties.Mask.UseMaskAsDisplayFormat = true;
+            editor.Properties.NullValuePrompt = "yyyy/MM/dd - yyyy/MM/dd";
+            editor.Properties.NullValuePromptShowForEmptyValue = true;
+
+            var args = new XtraInputBoxArgs
+            {
+                Caption = "選擇日期區間",
+                Prompt = "請輸入日期區間 (格式 yyyy/MM/dd - yyyy/MM/dd)",
+                Editor = editor,
+                DefaultButtonIndex = 0,
+                DefaultResponse = editor.EditValue.ToString()
+            };
+
+            object result = XtraInputBox.Show(args);
+            if (result == null)
+                return false;
+
+            string rangeText = result.ToString().Trim();
+            string pattern = @"^\d{4}/\d{2}/\d{2}\s*-\s*\d{4}/\d{2}/\d{2}$";
+            if (!Regex.IsMatch(rangeText, pattern))
+            {
+                XtraMessageBox.Show("格式錯誤！請輸入正確格式：yyyy/MM/dd - yyyy/MM/dd", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            var parts = rangeText.Split('-');
+            startDate = DateTime.ParseExact(parts[0].Trim(), "yyyy/MM/dd", CultureInfo.InvariantCulture);
+            endDate = DateTime.ParseExact(parts[1].Trim(), "yyyy/MM/dd", CultureInfo.InvariantCulture);
+
+            if (startDate > endDate)
+            {
+                XtraMessageBox.Show("起始日期不能大於結束日期！", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool TryGetYearRange(out int startYear, out int endYear)
+        {
+            startYear = 0;
+            endYear = 0;
+
+            var editor = new TextEdit
+            {
+                Font = new System.Drawing.Font("Microsoft JhengHei UI", 14F),
+                EditValue = $"{DateTime.Today.Year - 1} - {DateTime.Today.Year}"
+            };
+
+            editor.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.RegExpMaskManager));
+            editor.Properties.MaskSettings.Set("mask", @"\d{4}\s*-\s*\d{4}");
+            editor.Properties.MaskSettings.Set("isAutoComplete", true);
+            editor.Properties.Mask.UseMaskAsDisplayFormat = true;
+            editor.Properties.NullValuePrompt = "yyyy - yyyy";
+            editor.Properties.NullValuePromptShowForEmptyValue = true;
+
+            var args = new XtraInputBoxArgs
+            {
+                Caption = "選擇年度區間",
+                Prompt = "請輸入年度區間 (格式 yyyy - yyyy)",
+                Editor = editor,
+                DefaultButtonIndex = 0,
+                DefaultResponse = editor.EditValue.ToString()
+            };
+
+            object result = XtraInputBox.Show(args);
+            if (result == null)
+                return false;
+
+            string rangeText = result.ToString().Trim();
+            string pattern = @"^\d{4}\s*-\s*\d{4}$";
+            if (!Regex.IsMatch(rangeText, pattern))
+            {
+                XtraMessageBox.Show("格式錯誤！請輸入正確格式：yyyy - yyyy", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            string[] parts = rangeText.Split('-');
+            startYear = Convert.ToInt32(parts[0].Trim());
+            endYear = Convert.ToInt32(parts[1].Trim());
+
+            if (startYear > endYear)
+            {
+                XtraMessageBox.Show("起始年份不能大於結束年份！", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            return true;
+        }
+
+        private List<FuelPhotoReportRow> BuildFuelPhotoReportRows(DateTime startDate, DateTime endDate)
+        {
+            DateTime queryEnd = endDate.Date.AddDays(1).AddTicks(-1);
+            var sellerTypeByTax = (sellerBuyers ?? dt311_SellerBuyerBUS.Instance.GetList())
+                .Where(r => !string.IsNullOrWhiteSpace(r.Tax))
+                .GroupBy(r => r.Tax)
+                .ToDictionary(g => g.Key, g => g.First().Type);
+
+            var invoicesInRange = dt311_InvoiceBUS.Instance.GetListByStartDeptId(idDept2Word, startDate.Date, queryEnd)
+                .Where(r => r.IssueDate.HasValue)
+                .ToList();
+
+            if (invoicesInRange.Count == 0)
+                return new List<FuelPhotoReportRow>();
+
+            var invoiceIds = new HashSet<string>(invoicesInRange.Select(r => r.TransactionID));
+            var invoiceItemsByInvoice = dt311_InvoiceItemBUS.Instance.GetList()
+                .Where(r => invoiceIds.Contains(r.IdInvoice))
+                .GroupBy(r => r.IdInvoice)
+                .ToDictionary(g => g.Key, g => g.ToList());
+
+            var fuelInvoices = invoicesInRange
+                .Where(invoice => IsFuelInvoiceForPdf(invoice, sellerTypeByTax, invoiceItemsByInvoice))
+                .ToList();
+
+            if (fuelInvoices.Count == 0)
+                return new List<FuelPhotoReportRow>();
+
+            var quantityByInvoice = fuelInvoices.ToDictionary(
+                r => r.TransactionID,
+                r => invoiceItemsByInvoice.TryGetValue(r.TransactionID, out List<dt311_InvoiceItem> items)
+                    ? items.Sum(item => item.Quantity ?? 0m)
+                    : 0m);
+
+            var firstItemNameByInvoice = fuelInvoices.ToDictionary(
+                r => r.TransactionID,
+                r => invoiceItemsByInvoice.TryGetValue(r.TransactionID, out List<dt311_InvoiceItem> items)
+                    ? items.Select(item => item.DisplayName).FirstOrDefault(name => !string.IsNullOrWhiteSpace(name))
+                    : null);
+
+            var vehicles = dt311_VehicleManagementBUS.Instance.GetList()
+                .Where(r => !string.IsNullOrWhiteSpace(r.LicensePlate))
+                .GroupBy(r => r.LicensePlate)
+                .ToDictionary(g => g.Key, g => g.First());
+
+            return fuelInvoices
+                .Select(invoice =>
+                {
+                    vehicles.TryGetValue(invoice.LicensePlate, out dt311_VehicleManagement vehicle);
+                    quantityByInvoice.TryGetValue(invoice.TransactionID, out decimal quantity);
+                    firstItemNameByInvoice.TryGetValue(invoice.TransactionID, out string itemName);
+
+                    return new FuelPhotoReportRow
+                    {
+                        DeptDisplay = GetFuelReportDeptDisplay(invoice.IdDept),
+                        LicensePlate = invoice.LicensePlate,
+                        VehicleTypeDisplay = GetFuelReportVehicleTypeDisplay(vehicle?.VehicleType),
+                        FuelTypeDisplay = GetFuelReportFuelDisplay(vehicle?.FuelType, itemName),
+                        IssueDate = invoice.IssueDate.Value,
+                        Quantity = quantity,
+                        FuelPhotoAttId = invoice.FuelPhotoAttId
+                    };
+                })
+                .OrderBy(r => r.IssueDate)
+                .ThenBy(r => r.LicensePlate)
+                .ToList();
+        }
+
+        private string GetFuelReportDeptDisplay(string invoiceDeptId)
+        {
+            string prefix = string.IsNullOrWhiteSpace(invoiceDeptId)
+                ? idDept2Word
+                : invoiceDeptId.Length >= 2 ? invoiceDeptId.Substring(0, 2) : invoiceDeptId;
+
+            return depts?.FirstOrDefault(r => r.Id == prefix)?.DisplayName ?? prefix;
+        }
+
+        private string GetFuelReportVehicleTypeDisplay(string vehicleType)
+        {
+            if (string.IsNullOrWhiteSpace(vehicleType))
+                return "車輛";
+
+            string[] parts = vehicleType.Split('/');
+            if (parts.Length > 1 && !string.IsNullOrWhiteSpace(parts[1]))
+                return parts[1].Trim();
+
+            return vehicleType.Trim();
+        }
+
+        private bool IsFuelInvoiceForPdf(
+            dt311_Invoice invoice,
+            Dictionary<string, string> sellerTypeByTax,
+            Dictionary<string, List<dt311_InvoiceItem>> invoiceItemsByInvoice)
+        {
+            if (invoice == null)
+                return false;
+
+            if (sellerTypeByTax.TryGetValue(invoice.SellerTax ?? string.Empty, out string sellerType)
+                && sellerType == "xang_dau")
+            {
+                return true;
+            }
+
+            if (invoiceItemsByInvoice.TryGetValue(invoice.TransactionID, out List<dt311_InvoiceItem> items))
+            {
+                return items.Any(item => IsFuelItemDisplayName(item?.DisplayName));
+            }
+
+            return false;
+        }
+
+        private bool IsFuelItemDisplayName(string displayName)
+        {
+            if (string.IsNullOrWhiteSpace(displayName))
+                return false;
+
+            string normalized = displayName.Trim().ToLowerInvariant();
+            return normalized.Contains("xăng")
+                || normalized.Contains("dầu")
+                || normalized.Contains("汽油")
+                || normalized.Contains("柴油");
+        }
+
+        private string GetFuelReportFuelDisplay(string vehicleFuelType, string itemDisplayName)
+        {
+            if (!string.IsNullOrWhiteSpace(vehicleFuelType))
+                return GetFuelCategoryName(vehicleFuelType);
+
+            if (string.IsNullOrWhiteSpace(itemDisplayName))
+                return "燃料";
+
+            string normalized = itemDisplayName.Trim().ToLowerInvariant();
+            if (normalized.Contains("dầu") || normalized.Contains("柴油"))
+                return "柴油";
+
+            if (normalized.Contains("xăng") || normalized.Contains("汽油"))
+                return "汽油";
+
+            return "燃料";
+        }
+
+        private void ExportFuelPhotoReportPdf(List<FuelPhotoReportRow> reportRows, string outputPath)
+        {
+            Spire.License.LicenseProvider.SetLicenseKey(TPConfigs.KeySpirePPT);
+
+            var attachmentIds = reportRows
+                .Where(r => r.FuelPhotoAttId.HasValue && r.FuelPhotoAttId.Value > 0)
+                .Select(r => r.FuelPhotoAttId.Value)
+                .Distinct()
+                .ToList();
+
+            var attachmentPathById = dm_AttachmentBUS.Instance.GetListById(attachmentIds)
+                .Where(r => !string.IsNullOrWhiteSpace(r.EncryptionName))
+                .ToDictionary(r => r.Id, BuildAttachmentPath);
+
+            using (PdfDocument document = new PdfDocument())
+            using (System.Drawing.Font contentFontGdi = new System.Drawing.Font(PdfCjkFontName, 10.5f, FontStyle.Regular))
+            using (PdfTrueTypeFont contentFont = new PdfTrueTypeFont(contentFontGdi, true))
+            {
+                document.PageSettings.Size = PdfPageSize.A4;
+                document.DocumentInformation.Title = "公務車加油記錄表";
+                document.DocumentInformation.Creator = TPConfigs.SoftNameEN ?? "KnowledgeSystem";
+                document.DocumentInformation.Author = TPConfigs.LoginUser?.DisplayName ?? TPConfigs.LoginUser?.Id ?? "KnowledgeSystem";
+
+                PdfNewPage page = null;
+                int pageIndex = 0;
+                float slotHeight = 0f;
+
+                for (int index = 0; index < reportRows.Count; index++)
+                {
+                    FuelPhotoReportRow row = reportRows[index];
+                    int slotIndex = index % FuelPhotoPdfEntriesPerPage;
+                    if (page == null || slotIndex == 0)
+                    {
+                        pageIndex++;
+                        page = (PdfNewPage)document.Pages.Add();
+                        DrawFuelReportPageHeader(page, pageIndex);
+                        slotHeight = GetFuelReportSlotHeight(page);
+                    }
+
+                    float slotY = FuelPhotoPdfPageMargin + (slotIndex * (slotHeight + FuelPhotoPdfSlotSpacing));
+                    DrawFuelReportEntry(page, row, contentFont, attachmentPathById, slotY, slotHeight);
+                }
+
+                document.SaveToFile(outputPath);
+            }
+        }
+
+        private float DrawFuelReportPageHeader(PdfNewPage page, int pageIndex)
+        {
+            return FuelPhotoPdfPageMargin;
+        }
+
+        private void DrawFuelReportEntry(
+            PdfNewPage page,
+            FuelPhotoReportRow row,
+            PdfTrueTypeFont contentFont,
+            Dictionary<int, string> attachmentPathById,
+            float slotY,
+            float slotHeight)
+        {
+            float contentWidth = page.Canvas.ClientSize.Width - (FuelPhotoPdfPageMargin * 2);
+            const float titleHeight = 18f;
+            const float titleBottomSpacing = 8f;
+            const float quantityHeight = 16f;
+            const float quantityBottomSpacing = 10f;
+            string fuelDisplay = string.IsNullOrWhiteSpace(row.FuelTypeDisplay) ? "燃料" : row.FuelTypeDisplay;
+            string reportSubject = string.IsNullOrWhiteSpace(row.DeptDisplay) ? row.LicensePlate : row.DeptDisplay;
+            string vehicleTypeDisplay = string.IsNullOrWhiteSpace(row.VehicleTypeDisplay) ? "車輛" : row.VehicleTypeDisplay;
+            var centeredFormat = new PdfStringFormat
+            {
+                Alignment = PdfTextAlignment.Center,
+                LineAlignment = PdfVerticalAlignment.Middle
+            };
+
+            float y = slotY;
+            page.Canvas.DrawString(
+                $"{reportSubject}於 {row.IssueDate:yyyy/MM/dd} {vehicleTypeDisplay}加{fuelDisplay}記錄",
+                contentFont,
+                PdfBrushes.Black,
+                new RectangleF(FuelPhotoPdfPageMargin, y, contentWidth, titleHeight),
+                centeredFormat);
+
+            y += titleHeight + titleBottomSpacing;
+            page.Canvas.DrawString(
+                $"加{fuelDisplay}表: {row.Quantity:0000.###} Lit",
+                contentFont,
+                PdfBrushes.Black,
+                new RectangleF(FuelPhotoPdfPageMargin, y, contentWidth, quantityHeight),
+                centeredFormat);
+
+            y += quantityHeight + quantityBottomSpacing;
+            float imageHeight = Math.Max(120f, slotHeight - (y - slotY));
+            RectangleF imageBounds = new RectangleF(FuelPhotoPdfPageMargin, y, contentWidth, imageHeight);
+            if (TryLoadFuelPhoto(row.FuelPhotoAttId, attachmentPathById, out Image fuelPhoto))
+            {
+                using (fuelPhoto)
+                {
+                    DrawImageInsideBounds(page, fuelPhoto, imageBounds);
+                }
+            }
+            else
+            {
+                page.Canvas.DrawString(
+                    "未上傳加油照片",
+                    contentFont,
+                    PdfBrushes.DarkGray,
+                    imageBounds,
+                    new PdfStringFormat
+                    {
+                        Alignment = PdfTextAlignment.Center,
+                        LineAlignment = PdfVerticalAlignment.Middle
+                    });
+            }
+        }
+
+        private float GetFuelReportSlotHeight(PdfNewPage page)
+        {
+            float availableHeight = page.Canvas.ClientSize.Height - (FuelPhotoPdfPageMargin * 2) - FuelPhotoPdfSlotSpacing;
+            return availableHeight / FuelPhotoPdfEntriesPerPage;
+        }
+
+        private bool TryLoadFuelPhoto(int? attachmentId, Dictionary<int, string> attachmentPathById, out Image image)
+        {
+            image = null;
+            if (!attachmentId.HasValue || attachmentId.Value <= 0)
+                return false;
+
+            if (!attachmentPathById.TryGetValue(attachmentId.Value, out string imagePath) || !File.Exists(imagePath))
+                return false;
+
+            using (Image original = Image.FromFile(imagePath))
+            {
+                image = new Bitmap(original);
+            }
+
+            return true;
+        }
+
+        private void DrawImageInsideBounds(PdfNewPage page, Image image, RectangleF bounds)
+        {
+            PdfImage pdfImage = PdfImage.FromImage(image);
+            float widthRatio = bounds.Width / image.Width;
+            float heightRatio = bounds.Height / image.Height;
+            float scale = Math.Min(widthRatio, heightRatio);
+            float drawWidth = image.Width * scale;
+            float drawHeight = image.Height * scale;
+            float drawX = bounds.X + ((bounds.Width - drawWidth) / 2f);
+            float drawY = bounds.Y + ((bounds.Height - drawHeight) / 2f);
+
+            page.Canvas.DrawImage(pdfImage, drawX, drawY, drawWidth, drawHeight);
+        }
+
+        private void ExportFuelUsageStatisticsExcel(string outputPath, int startYear, int endYear)
+        {
+            DateTime startDate = new DateTime(startYear, 1, 1);
+            DateTime endDate = new DateTime(endYear, 12, 31).AddDays(1).AddTicks(-1);
+
+            var sellerTypeByTax = (sellerBuyers ?? dt311_SellerBuyerBUS.Instance.GetList())
+                .Where(r => !string.IsNullOrWhiteSpace(r.Tax))
+                .GroupBy(r => r.Tax)
+                .ToDictionary(g => g.Key, g => g.First().Type);
+
+            var invoices = dt311_InvoiceBUS.Instance.GetListByStartDeptId(idDept2Word, startDate, endDate)
+                .Where(r => r.IssueDate.HasValue && !string.IsNullOrWhiteSpace(r.LicensePlate))
+                .ToList();
+
+            if (invoices.Count == 0)
+                throw new InvalidOperationException("所選年度區間沒有加油資料。");
+
+            var invoiceIds = new HashSet<string>(invoices.Select(r => r.TransactionID));
+            var invoiceItemsByInvoice = dt311_InvoiceItemBUS.Instance.GetList()
+                .Where(r => invoiceIds.Contains(r.IdInvoice))
+                .GroupBy(r => r.IdInvoice)
+                .ToDictionary(g => g.Key, g => g.ToList());
+
+            var fuelInvoices = invoices
+                .Where(invoice => IsFuelInvoiceForPdf(invoice, sellerTypeByTax, invoiceItemsByInvoice))
+                .ToList();
+
+            if (fuelInvoices.Count == 0)
+                throw new InvalidOperationException("所選年度區間沒有加油資料。");
+
+            var quantityByInvoice = fuelInvoices.ToDictionary(
+                r => r.TransactionID,
+                r => invoiceItemsByInvoice.TryGetValue(r.TransactionID, out List<dt311_InvoiceItem> items)
+                    ? items.Sum(item => item.Quantity ?? 0m)
+                    : 0m);
+
+            var firstItemNameByInvoice = fuelInvoices.ToDictionary(
+                r => r.TransactionID,
+                r => invoiceItemsByInvoice.TryGetValue(r.TransactionID, out List<dt311_InvoiceItem> items)
+                    ? items.Select(item => item.DisplayName).FirstOrDefault(name => !string.IsNullOrWhiteSpace(name))
+                    : null);
+
+            var vehicles = dt311_VehicleManagementBUS.Instance.GetList()
+                .Where(r => !string.IsNullOrWhiteSpace(r.LicensePlate))
+                .GroupBy(r => r.LicensePlate)
+                .ToDictionary(g => g.Key, g => g.First());
+
+            var sourceRows = fuelInvoices
+                .Select(invoice =>
+                {
+                    vehicles.TryGetValue(invoice.LicensePlate, out dt311_VehicleManagement vehicle);
+                    quantityByInvoice.TryGetValue(invoice.TransactionID, out decimal quantity);
+                    firstItemNameByInvoice.TryGetValue(invoice.TransactionID, out string itemName);
+                    string fuelCategory = GetFuelUsageCategoryName(vehicle?.FuelType, itemName);
+                    if (string.IsNullOrWhiteSpace(fuelCategory))
+                        return null;
+
+                    return new FuelUsageStatisticRow
+                    {
+                        FuelCategory = fuelCategory,
+                        Year = invoice.IssueDate.Value.Year,
+                        Month = invoice.IssueDate.Value.Month,
+                        Amount = invoice.TotalAfterVAT ?? 0m,
+                        Quantity = quantity
+                    };
+                })
+                .Where(r => r != null)
+                .ToList();
+
+            if (sourceRows.Count == 0)
+                throw new InvalidOperationException("所選年度區間沒有可分類的汽油/柴油資料。");
+
+            ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+            using (ExcelPackage package = new ExcelPackage())
+            {
+                BuildFuelUsageWorksheet(package, "汽油", sourceRows.Where(r => r.FuelCategory == "汽油").ToList(), startYear, endYear);
+                BuildFuelUsageWorksheet(package, "柴油", sourceRows.Where(r => r.FuelCategory == "柴油").ToList(), startYear, endYear);
+                package.SaveAs(new FileInfo(outputPath));
+            }
+        }
+
+        private void BuildFuelUsageWorksheet(ExcelPackage package, string sheetName, List<FuelUsageStatisticRow> rows, int startYear, int endYear)
+        {
+            var worksheet = package.Workbook.Worksheets.Add(sheetName);
+            string deptDisplay = GetFuelReportDeptDisplay(idDept2Word);
+            int tableTitleRow = 23;
+            int tableHeaderRow = 24;
+            int currentRow = 25;
+
+            worksheet.View.ShowGridLines = false;
+            worksheet.Cells["B2:O2"].Merge = true;
+            worksheet.Cells["B2"].Value = $"{deptDisplay}{sheetName}年度使用集總表";
+            worksheet.Cells["B2"].Style.Font.Bold = true;
+            worksheet.Cells["B2"].Style.Font.Size = 16;
+            worksheet.Cells["B2"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            worksheet.Cells["B2"].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+
+            worksheet.Cells[tableTitleRow, 3, tableTitleRow, 15].Merge = true;
+            worksheet.Cells[tableTitleRow, 3].Value = $"{sheetName}每月費用暨用量總表";
+            using (var tableTitleRange = worksheet.Cells[tableTitleRow, 3, tableTitleRow, 15])
+            {
+                tableTitleRange.Style.Font.Bold = true;
+                tableTitleRange.Style.Font.Size = 11;
+                tableTitleRange.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                tableTitleRange.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                tableTitleRange.Style.Fill.PatternType = ExcelFillStyle.Solid;
+                tableTitleRange.Style.Fill.BackgroundColor.SetColor(Color.FromArgb(198, 224, 180));
+                tableTitleRange.Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                tableTitleRange.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                tableTitleRange.Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                tableTitleRange.Style.Border.Right.Style = ExcelBorderStyle.Thin;
+            }
+
+            worksheet.Cells[tableHeaderRow, 1].Value = string.Empty;
+            worksheet.Cells[tableHeaderRow, 2].Value = "年";
+            for (int month = 1; month <= 12; month++)
+            {
+                worksheet.Cells[tableHeaderRow, month + 2].Value = $"{month}月";
+            }
+            worksheet.Cells[tableHeaderRow, 15].Value = "月平均";
+
+            using (var headerRange = worksheet.Cells[tableHeaderRow, 1, tableHeaderRow, 15])
+            {
+                headerRange.Style.Font.Bold = true;
+                headerRange.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                headerRange.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                headerRange.Style.Fill.PatternType = ExcelFillStyle.Solid;
+                headerRange.Style.Fill.BackgroundColor.SetColor(Color.FromArgb(226, 239, 218));
+                headerRange.Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                headerRange.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                headerRange.Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                headerRange.Style.Border.Right.Style = ExcelBorderStyle.Thin;
+            }
+
+            List<int> usdRows = new List<int>();
+            for (int year = startYear; year <= endYear; year++)
+            {
+                int usdRow = currentRow;
+                int literRow = currentRow + 1;
+                usdRows.Add(usdRow);
+
+                worksheet.Cells[usdRow, 1].Value = "USD";
+                worksheet.Cells[literRow, 1].Value = "公升";
+                worksheet.Cells[usdRow, 2, literRow, 2].Merge = true;
+                worksheet.Cells[usdRow, 2].Value = $"{year}年";
+                worksheet.Cells[usdRow, 2].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                worksheet.Cells[usdRow, 2].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+
+                for (int month = 1; month <= 12; month++)
+                {
+                    decimal amount = rows
+                        .Where(r => r.Year == year && r.Month == month)
+                        .Sum(r => r.Amount);
+                    decimal quantity = rows
+                        .Where(r => r.Year == year && r.Month == month)
+                        .Sum(r => r.Quantity);
+
+                    worksheet.Cells[usdRow, month + 2].Value = amount;
+                    worksheet.Cells[literRow, month + 2].Value = quantity;
+                    worksheet.Cells[usdRow, month + 2].Style.Numberformat.Format = "0.##";
+                    worksheet.Cells[literRow, month + 2].Style.Numberformat.Format = "0.####";
+                }
+
+                worksheet.Cells[usdRow, 15].Formula = $"AVERAGE(C{usdRow}:N{usdRow})";
+                worksheet.Cells[literRow, 15].Formula = $"AVERAGE(C{literRow}:N{literRow})";
+                worksheet.Cells[usdRow, 15].Style.Numberformat.Format = "0.##";
+                worksheet.Cells[literRow, 15].Style.Numberformat.Format = "0.####";
+
+                using (var rowRange = worksheet.Cells[usdRow, 1, literRow, 15])
+                {
+                    rowRange.Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                    rowRange.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                    rowRange.Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                    rowRange.Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                    rowRange.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                    rowRange.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                }
+
+                currentRow += 2;
+            }
+
+            worksheet.Column(1).Width = 8;
+            worksheet.Column(2).Width = 10;
+            for (int col = 3; col <= 15; col++)
+            {
+                worksheet.Column(col).Width = 10;
+            }
+
+            var chart = worksheet.Drawings.AddChart($"chart_{sheetName}", eChartType.ColumnClustered) as ExcelBarChart;
+            chart.Title.Text = $"{deptDisplay}{sheetName}費用年度比較";
+            chart.SetPosition(3, 0, 2, 0);
+            chart.SetSize(980, 430);
+            chart.YAxis.Title.Text = "USD";
+            chart.XAxis.Title.Text = string.Empty;
+            chart.Legend.Position = eLegendPosition.Right;
+            chart.Legend.Border.Width = 0;
+            chart.Legend.Font.Size = 10;
+
+            var xRange = worksheet.Cells[tableHeaderRow, 3, tableHeaderRow, 14];
+            foreach (int usdRow in usdRows)
+            {
+                var series = (ExcelBarChartSerie)chart.Series.Add(worksheet.Cells[usdRow, 3, usdRow, 14], xRange);
+                series.Header = worksheet.Cells[usdRow, 2].Value?.ToString();
+                series.DataLabel.ShowValue = true;
+                series.DataLabel.Position = eLabelPosition.OutEnd;
+            }
+
+            worksheet.Row(2).Height = 24;
+            worksheet.Row(tableTitleRow).Height = 20;
+            worksheet.View.FreezePanes(tableHeaderRow + 1, 3);
+        }
+
+        private string GetFuelUsageCategoryName(string vehicleFuelType, string itemDisplayName)
+        {
+            if (!string.IsNullOrWhiteSpace(vehicleFuelType))
+                return GetFuelCategoryName(vehicleFuelType);
+
+            if (string.IsNullOrWhiteSpace(itemDisplayName))
+                return null;
+
+            string normalized = itemDisplayName.Trim().ToLowerInvariant();
+            if (normalized.Contains("dầu") || normalized.Contains("柴油"))
+                return "柴油";
+            if (normalized.Contains("xăng") || normalized.Contains("汽油"))
+                return "汽油";
+
+            return null;
+        }
+
+        private string GetFuelCategoryName(string fuelType)
+        {
+            return IsGasolineFuelType(fuelType) ? "汽油" : "柴油";
+        }
+
+        private bool IsGasolineFuelType(string fuelType)
+        {
+            if (string.IsNullOrWhiteSpace(fuelType))
+                return false;
+
+            string normalized = fuelType.Trim().ToLowerInvariant();
+            return normalized.Contains("xăng") || normalized.Contains("汽");
         }
     }
 }

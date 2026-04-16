@@ -174,7 +174,7 @@ namespace KnowledgeSystem.Helpers
             using (var webClient = new WebClient { BaseAddress = baseUrl.ToString() })
             {
                 webClient.Encoding = Encoding.UTF8;
-                string content = await webClient.DownloadStringTaskAsync($"s45/{status.Dept ?? string.Empty}vkv{status.Name ?? string.Empty}");
+                string content = await webClient.DownloadStringTaskAsync($"s45/{status.Dept ?? string.Empty}vkv{status.Name.Replace(".", "") ?? string.Empty}");
 
                 var infos = new List<VehicleBorrInfo>();
                 foreach (var subItem in content.Split(ApiItemSeparator, StringSplitOptions.RemoveEmptyEntries))
