@@ -742,10 +742,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
 
             return new List<PdfCoverSignatureInfo>
             {
-                CreateCoverSignatureInfo("申請人", latestRecord.Record.CreateBy, latestRecord.Record.CreateAt, localUsers),
-                CreateCoverSignatureInfo("二級主管", latestRecord.Details.FirstOrDefault(r => r.IndexStep == 0)?.IdUser, latestRecord.Details.FirstOrDefault(r => r.IndexStep == 0)?.TimeSubmit, localUsers),
-                CreateCoverSignatureInfo("PSM專人", latestRecord.Details.FirstOrDefault(r => r.IndexStep == 1)?.IdUser, latestRecord.Details.FirstOrDefault(r => r.IndexStep == 1)?.TimeSubmit, localUsers),
                 CreateCoverSignatureInfo("一級主管", latestRecord.Details.FirstOrDefault(r => r.IndexStep == 2)?.IdUser, latestRecord.Details.FirstOrDefault(r => r.IndexStep == 2)?.TimeSubmit, localUsers),
+                CreateCoverSignatureInfo("PSM專人", latestRecord.Details.FirstOrDefault(r => r.IndexStep == 1)?.IdUser, latestRecord.Details.FirstOrDefault(r => r.IndexStep == 1)?.TimeSubmit, localUsers),
+                CreateCoverSignatureInfo("二級主管", latestRecord.Details.FirstOrDefault(r => r.IndexStep == 0)?.IdUser, latestRecord.Details.FirstOrDefault(r => r.IndexStep == 0)?.TimeSubmit, localUsers),
+                CreateCoverSignatureInfo("申請人", latestRecord.Record.CreateBy, latestRecord.Record.CreateAt, localUsers),
             };
         }
 
@@ -805,10 +805,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._10_EHSWorkforce
         {
             return new List<PdfCoverSignatureInfo>
             {
-                new PdfCoverSignatureInfo { Label = "申請人" },
-                new PdfCoverSignatureInfo { Label = "二級主管" },
+                new PdfCoverSignatureInfo { Label = "一級主管" },
                 new PdfCoverSignatureInfo { Label = "PSM專人" },
-                new PdfCoverSignatureInfo { Label = "一級主管" }
+                new PdfCoverSignatureInfo { Label = "二級主管" },
+                new PdfCoverSignatureInfo { Label = "申請人" }
             };
         }
 
