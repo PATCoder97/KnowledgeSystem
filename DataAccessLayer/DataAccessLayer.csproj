@@ -326,6 +326,9 @@
     <Compile Include="dt309_MachineMaterials.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
+    <Compile Include="dt309_MaterialPhoto.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
     <Compile Include="dt309_Machines.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
@@ -333,6 +336,15 @@
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
     <Compile Include="dt309_Prices.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dt309_RecoveryEvidence.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dt309_RecoveryGuides.cs">
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dt309_RecoveryTickets.cs">
       <DependentUpon>ModelDocManager.tt</DependentUpon>
     </Compile>
     <Compile Include="dt309_Storages.cs">
@@ -458,6 +470,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelDocManager.edmx</DependentUpon>
     </Compile>
+    <Compile Include="ModelDocManager1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelDocManager.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SingleConnection.cs" />
     <Compile Include="sys_Log.cs">
@@ -496,6 +513,7 @@
     <Content Include="ModelDocManager.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ModelDocManager.edmx</DependentUpon>
+      <LastGenOutput>ModelDocManager1.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

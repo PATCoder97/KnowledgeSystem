@@ -132,6 +132,10 @@
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt313_InspectionBatch" Width="1.5" PointX="2.25" PointY="75.125" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt313_InspectionBatchAsset" Width="1.5" PointX="3.875" PointY="75.125" />
         <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt313_InspectionPhoto" Width="1.5" PointX="8.75" PointY="75.125" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt309_RecoveryEvidence" Width="1.5" PointX="15.125" PointY="44.5" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt309_RecoveryGuides" Width="1.5" PointX="16.75" PointY="44.5" />
+        <EntityTypeShape EntityType="DBDocumentManagementSystemModel.dt309_RecoveryTickets" Width="1.5" PointX="18.375" PointY="44.5" />
+        <AssociationConnector Association="DBDocumentManagementSystemModel.FK_dt309_Materials_ReplacementMaterial" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

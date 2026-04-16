@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using BusinessLayer;
 using DataAccessLayer;
 using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraLayout;
 using DevExpress.XtraSplashScreen;
 using DocumentFormat.OpenXml.Wordprocessing;
@@ -34,6 +35,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         dt309_Materials material;
         dt309_Materials oldMaterial;
+        dt309_MaterialPhoto currentPhoto;
 
         List<LayoutControlItem> lcControls;
         List<LayoutControlItem> lcImpControls;
@@ -43,6 +45,16 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             btnEdit.ImageOptions.SvgImage = TPSvgimages.Edit;
             btnDelete.ImageOptions.SvgImage = TPSvgimages.Remove;
             btnConfirm.ImageOptions.SvgImage = TPSvgimages.Confirm;
+        }
+
+        private void InitializePhotoEditor()
+        {
+            btePhoto.Properties.TextEditStyle = TextEditStyles.DisableTextEditor;
+            btePhoto.Properties.ReadOnly = true;
+            btePhoto.Properties.Buttons.Clear();
+            btePhoto.Properties.Buttons.Add(new EditorButton(ButtonPredefines.Plus) { ToolTip = "上傳圖片" });
+            btePhoto.Properties.Buttons.Add(new EditorButton(ButtonPredefines.Search) { ToolTip = "查看圖片" });
+            btePhoto.ButtonClick += BtePhoto_ButtonClick;
         }
 
         private void EnabledController(bool _enable = true)
@@ -56,6 +68,107 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             tokenMachine.Enabled = _enable;
             txbExpDate.Enabled = _enable;
             txbMinQuantity.Enabled = _enable;
+        }
+
+        private bool IsMaterialDisabled => material?.IsDisable == true;
+
+        private string GetReplacementTargetUsageMessage()
+        {
+            return material == null
+                ? "找不到對應的物料。"
+                : dt309_MaterialsBUS.Instance.GetReplacementTargetUsageMessage(material.Id);
+        }
+
+        private void LoadPhotoInfo()
+        {
+            currentPhoto = material != null && material.Id > 0
+                ? dt309_MaterialPhotoBUS.Instance.GetActivePhoto(material.Id)
+                : null;
+
+            btePhoto.EditValue = currentPhoto?.ActualName ?? string.Empty;
+            UpdatePhotoButtonState();
+        }
+
+        private void UpdatePhotoButtonState()
+        {
+            if (btePhoto.Properties.Buttons.Count < 2)
+            {
+                return;
+            }
+
+            bool canUpload = material != null
+                && material.Id > 0
+                && !IsMaterialDisabled
+                && eventInfo != EventFormInfo.Delete;
+
+            btePhoto.Enabled = true;
+            btePhoto.Properties.Buttons[0].Enabled = canUpload;
+            btePhoto.Properties.Buttons[1].Enabled = currentPhoto != null;
+        }
+
+        private void UploadPhoto()
+        {
+            if (material == null || material.Id <= 0)
+            {
+                XtraMessageBox.Show("請先建立物料後再上傳圖片。", TPConfigs.SoftNameTW);
+                return;
+            }
+
+            if (IsMaterialDisabled)
+            {
+                XtraMessageBox.Show("停用中的物料不可上傳圖片。", TPConfigs.SoftNameTW);
+                return;
+            }
+
+            using (var dialog = new OpenFileDialog())
+            {
+                dialog.Filter = "Image Files|*.jpg;*.jpeg;*.png";
+                if (dialog.ShowDialog() != DialogResult.OK)
+                {
+                    return;
+                }
+
+                var saved = Material309Helper.SaveMaterialPhoto(material.Id, dialog.FileName);
+                int id = dt309_MaterialPhotoBUS.Instance.AddOrReplace(new dt309_MaterialPhoto
+                {
+                    MaterialId = material.Id,
+                    EncryptionName = saved.encryptionName,
+                    ActualName = saved.actualName,
+                    UploadedBy = TPConfigs.LoginUser.Id,
+                    UploadedDate = DateTime.Now,
+                    IsActive = true
+                });
+
+                if (id <= 0)
+                {
+                    MsgTP.MsgErrorDB();
+                    return;
+                }
+            }
+
+            LoadPhotoInfo();
+        }
+
+        private void ViewPhoto()
+        {
+            if (currentPhoto == null)
+            {
+                XtraMessageBox.Show("尚未上傳圖片。", TPConfigs.SoftNameTW);
+                return;
+            }
+
+            Material309Helper.OpenPhotoFile(Material309Helper.GetMaterialPhotoPath(currentPhoto), currentPhoto.ActualName);
+        }
+
+        private void BtePhoto_ButtonClick(object sender, ButtonPressedEventArgs e)
+        {
+            if (e.Button.Index == 0)
+            {
+                UploadPhoto();
+                return;
+            }
+
+            ViewPhoto();
         }
 
         private void LockControl()
@@ -100,6 +213,15 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                     break;
             }
 
+            if (IsMaterialDisabled)
+            {
+                Text = $"{formName}信息 - 停用";
+                btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                EnabledController(false);
+            }
+
             foreach (var item in lcControls)
             {
                 string colorHex = item.Control.Enabled ? "000000" : "000000";
@@ -118,11 +240,15 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                     item.Text = item.Text.Replace("<color=red>*</color>", "");
                 }
             }
+
+            UpdatePhotoButtonState();
         }
 
         private void f309_Material_Info_Load(object sender, EventArgs e)
         {
-            lcControls = new List<LayoutControlItem>() { lcCode, lcDisplayName, lcUnit, lcLocation, lcUser, lcTypeUse, lcMachine, lcExpDate, lcMinQuantity };
+            InitializePhotoEditor();
+
+            lcControls = new List<LayoutControlItem>() { lcCode, lcDisplayName, lcUnit, lcLocation, lcUser, lcTypeUse, lcMachine, lcPhoto, lcExpDate, lcMinQuantity };
             lcImpControls = new List<LayoutControlItem>() { lcCode, lcDisplayName, lcUnit, lcLocation, lcUser, lcMachine, lcMinQuantity, lcTypeUse };
             foreach (var item in lcControls)
             {
@@ -149,7 +275,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             {
                 case EventFormInfo.Create:
 
-                    material = new dt309_Materials();
+                    material = new dt309_Materials() { IsDisable = false };
 
                     break;
                 case EventFormInfo.View:
@@ -178,11 +304,18 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                     break;
             }
 
+            LoadPhotoInfo();
             LockControl();
         }
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if (IsMaterialDisabled)
+            {
+                XtraMessageBox.Show("停用中的物料不可修改。", TPConfigs.SoftNameTW);
+                return;
+            }
+
             // Kiểm tra xem đã điền đầy đủ thông tin yêu cầu hay chưa
             bool IsValidate = true;
 
@@ -284,6 +417,12 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
                         break;
                     case EventFormInfo.Delete:
+                        string replacementUsageMessage = GetReplacementTargetUsageMessage();
+                        if (!string.IsNullOrEmpty(replacementUsageMessage))
+                        {
+                            XtraMessageBox.Show(replacementUsageMessage, TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
 
                         var dialogResult = XtraMessageBox.Show($"您確認要刪除{formName}:\r\n{material.DisplayName}", TPConfigs.SoftNameTW, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                         if (dialogResult != DialogResult.Yes) return;
@@ -308,12 +447,31 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         private void btnEdit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if (IsMaterialDisabled)
+            {
+                XtraMessageBox.Show("停用中的物料不可編輯。", TPConfigs.SoftNameTW);
+                return;
+            }
+
             eventInfo = EventFormInfo.Update;
             LockControl();
         }
 
         private void btnDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if (IsMaterialDisabled)
+            {
+                XtraMessageBox.Show("停用中的物料不可刪除。", TPConfigs.SoftNameTW);
+                return;
+            }
+
+            string replacementUsageMessage = GetReplacementTargetUsageMessage();
+            if (!string.IsNullOrEmpty(replacementUsageMessage))
+            {
+                XtraMessageBox.Show(replacementUsageMessage, TPConfigs.SoftNameTW, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             MsgTP.MsgConfirmDel();
 
             eventInfo = EventFormInfo.Delete;
