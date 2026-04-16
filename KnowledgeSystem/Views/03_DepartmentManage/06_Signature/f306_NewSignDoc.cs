@@ -65,6 +65,29 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             btnDefaulProgress.ImageOptions.SvgImage = TPSvgimages.Progress;
         }
 
+        private HashSet<int> GetValidRoleIds()
+        {
+            return new HashSet<int>(roles.Select(r => r.Id));
+        }
+
+        private ProgressDetail CreateProgressDetail(string idUsr, int idRole = 0)
+        {
+            var usrInfo = users.FirstOrDefault(r => r.Id == idUsr);
+            return new ProgressDetail
+            {
+                IdUsr = idUsr,
+                IdRole = FixedProgressHelper.NormalizeRoleId(idRole, GetValidRoleIds()),
+                UserName = usrInfo?.DisplayName ?? "",
+                JobName = jobTitles.FirstOrDefault(r => r.Id == usrInfo?.JobCode)?.DisplayName ?? ""
+            };
+        }
+
+        private void ShowMissingRoleMessage()
+        {
+            string msg = "Một số bước trong lưu trình cố định không còn loại ký/xác nhận hợp lệ, vui lòng chọn lại.\r\n部分固定流程角色不存在，請重新選擇。";
+            MsgTP.MsgShowInfomation($"<font='Microsoft JhengHei UI' size=14>{msg}</font>");
+        }
+
         private bool ValidateData()
         {
             bool IsOK = true;
@@ -81,7 +104,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
                 IsOK = false;
             }
 
-            if (progresses.Any(r => r.IdRole == 0 || string.IsNullOrEmpty(r.IdUsr)) || progresses.Count() == 0)
+            var validRoleIds = GetValidRoleIds();
+            if (progresses.Any(r => !validRoleIds.Contains(r.IdRole) || string.IsNullOrEmpty(r.IdUsr)) || progresses.Count() == 0)
             {
                 msg += "</br> •核簽流程";
                 IsOK = false;
@@ -345,22 +369,30 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._06_Signature
             fProg.ShowDialog();
 
             int idFixedProg = fProg.Id;
+            if (idFixedProg <= 0) return;
 
             progresses.Clear();
             string defaulProg = dm_FixedProgressBUS.Instance.GetItemById(idFixedProg)?.Progress;
             if (string.IsNullOrEmpty(defaulProg)) return;
 
-            string[] defaulProgs = defaulProg.Split(';');
-
-            foreach (var item in defaulProgs)
+            bool hasMissingRole = false;
+            foreach (var item in FixedProgressHelper.Deserialize(defaulProg))
             {
-                var usrInfo = users.FirstOrDefault(r => r.Id == item?.ToString());
-                string nameUser = usrInfo?.DisplayName ?? "";
-                string jobName = jobTitles.FirstOrDefault(r => r.Id == usrInfo.JobCode)?.DisplayName ?? "";
-                progresses.Add(new ProgressDetail() { IdUsr = item, JobName = jobName, UserName = nameUser });
+                int idRole = FixedProgressHelper.NormalizeRoleId(item.IdRole, GetValidRoleIds());
+                if (item.HasRoleValue && idRole == 0)
+                {
+                    hasMissingRole = true;
+                }
+
+                progresses.Add(CreateProgressDetail(item.IdUsr, idRole));
             }
 
             gcProgress.RefreshDataSource();
+
+            if (hasMissingRole)
+            {
+                ShowMissingRoleMessage();
+            }
         }
 
         private void btnDelProg_ButtonClick(object sender, ButtonPressedEventArgs e)

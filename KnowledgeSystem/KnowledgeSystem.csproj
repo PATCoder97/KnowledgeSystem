@@ -234,6 +234,7 @@
     <Compile Include="Helpers\EncryptionHelper.cs" />
     <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Helpers\FixedAsset313Helper.cs" />
+    <Compile Include="Helpers\FixedProgressHelper.cs" />
     <Compile Include="Helpers\GridControlHelper.cs" />
     <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="Helpers\KeyboardHelper.cs" />

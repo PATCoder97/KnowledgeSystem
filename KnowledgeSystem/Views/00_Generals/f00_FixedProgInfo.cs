@@ -34,19 +34,37 @@ namespace KnowledgeSystem.Views._00_Generals
         public EventFormInfo eventInfo = EventFormInfo.Create;
         public string formName;
         public dm_FixedProgress prog = null;
-        string idDept2word = TPConfigs.LoginUser.IdDepartment.Substring(0, 2);
+        string idDeptPrefix = GetDeptPrefix(TPConfigs.LoginUser?.IdDepartment, 1);
 
         BindingSource sourceProgresses = new BindingSource();
         List<ProgressDetail> progresses = new List<ProgressDetail>();
 
         List<dm_User> users;
         List<dm_JobTitle> jobTitles;
+        List<RoleOption> roles;
 
         private class ProgressDetail
         {
             public string IdUsr { get; set; }
+            public int IdRole { get; set; }
             public string UserName { get; set; }
             public string JobName { get; set; }
+        }
+
+        private class RoleOption
+        {
+            public int Id { get; set; }
+            public string DisplayName { get; set; }
+        }
+
+        private static string GetDeptPrefix(string idDept, int length)
+        {
+            if (string.IsNullOrWhiteSpace(idDept) || length <= 0)
+            {
+                return string.Empty;
+            }
+
+            return idDept.Length <= length ? idDept : idDept.Substring(0, length);
         }
 
         private void InitializeIcon()
@@ -54,6 +72,54 @@ namespace KnowledgeSystem.Views._00_Generals
             btnEdit.ImageOptions.SvgImage = TPSvgimages.Edit;
             btnDelete.ImageOptions.SvgImage = TPSvgimages.Remove;
             btnConfirm.ImageOptions.SvgImage = TPSvgimages.Confirm;
+        }
+
+        private HashSet<int> GetValidRoleIds()
+        {
+            return new HashSet<int>(roles.Select(r => r.Id));
+        }
+
+        private static List<RoleOption> GetRoleOptions()
+        {
+            var role306 = dt306_SignRoleBUS.Instance.GetList()
+                .Where(r => r.Id != 0)
+                .Select(r => new RoleOption
+                {
+                    Id = r.Id,
+                    DisplayName = r.DisplayName
+                });
+
+            var role201 = dt201_RoleBUS.Instance.GetList()
+                .Where(r => r.Id != 0)
+                .Select(r => new RoleOption
+                {
+                    Id = r.Id,
+                    DisplayName = r.DisplayName
+                });
+
+            return role306.Concat(role201)
+                .GroupBy(r => r.Id)
+                .Select(r => r.First())
+                .OrderBy(r => r.Id)
+                .ToList();
+        }
+
+        private ProgressDetail CreateProgressDetail(string idUsr, int idRole = 0)
+        {
+            var usrInfo = users.FirstOrDefault(r => r.Id == idUsr);
+            return new ProgressDetail
+            {
+                IdUsr = idUsr,
+                IdRole = FixedProgressHelper.NormalizeRoleId(idRole, GetValidRoleIds()),
+                UserName = usrInfo?.DisplayName ?? "",
+                JobName = jobTitles.FirstOrDefault(r => r.Id == usrInfo?.JobCode)?.DisplayName ?? ""
+            };
+        }
+
+        private void ShowMissingRoleMessage()
+        {
+            string msg = "部分固定流程角色不存在，請重新選擇。\r\nSome fixed-progress roles are no longer available. Please choose them again.";
+            MsgTP.MsgShowInfomation($"<font='Microsoft JhengHei UI' size=14>{msg}</font>");
         }
 
         private void EnabledController(bool _enable = true)
@@ -130,7 +196,8 @@ namespace KnowledgeSystem.Views._00_Generals
                 IsOK = false;
             }
 
-            if (progresses.Any(r => string.IsNullOrEmpty(r.IdUsr)) || progresses.Count() == 0)
+            var validRoleIds = GetValidRoleIds();
+            if (progresses.Any(r => string.IsNullOrEmpty(r.IdUsr) || !validRoleIds.Contains(r.IdRole)) || progresses.Count() == 0)
             {
                 IsOK = false;
             }
@@ -148,8 +215,9 @@ namespace KnowledgeSystem.Views._00_Generals
             txbOwner.Properties.ValueMember = "Id";
             txbOwner.EditValue = TPConfigs.LoginUser.Id;
 
-            users = dm_UserBUS.Instance.GetListByDept(idDept2word).Where(r => r.Status == 0).ToList();
+            users = dm_UserBUS.Instance.GetListByDept(idDeptPrefix).Where(r => r.Status == 0).ToList();
             jobTitles = dm_JobTitleBUS.Instance.GetList();
+            roles = GetRoleOptions();
 
             // Gắn các thông số cho các combobox
             lookupUser.ValueMember = "Id";
@@ -161,6 +229,10 @@ namespace KnowledgeSystem.Views._00_Generals
                 new GridColumn { FieldName = "DisplayName", VisibleIndex = 2, Caption = "名稱", MinWidth = 100, Width = 150 },
             });
             lookupUser.DataSource = users;
+
+            lookupRole.DataSource = roles;
+            lookupRole.DisplayMember = "DisplayName";
+            lookupRole.ValueMember = "Id";
 
             sourceProgresses.DataSource = progresses;
             gcProgress.DataSource = sourceProgresses;
@@ -174,15 +246,21 @@ namespace KnowledgeSystem.Views._00_Generals
                     txbOwner.EditValue = prog.Owner;
                     txbDisplayName.EditValue = prog.DisplayName;
 
-                    string[] usrProg = prog.Progress.Split(';');
-                    foreach (var item in usrProg)
+                    bool hasMissingRole = false;
+                    foreach (var item in FixedProgressHelper.Deserialize(prog.Progress))
                     {
-                        var usrInfo = users.FirstOrDefault(r => r.Id == item?.ToString());
-                        if (usrInfo == null) continue;
+                        int idRole = FixedProgressHelper.NormalizeRoleId(item.IdRole, GetValidRoleIds());
+                        if (item.HasRoleValue && idRole == 0)
+                        {
+                            hasMissingRole = true;
+                        }
 
-                        string nameUser = usrInfo?.DisplayName ?? "";
-                        string jobName = jobTitles.FirstOrDefault(r => r.Id == usrInfo.JobCode)?.DisplayName ?? "";
-                        progresses.Add(new ProgressDetail() { IdUsr = item, JobName = jobName, UserName = nameUser });
+                        progresses.Add(CreateProgressDetail(item.IdUsr, idRole));
+                    }
+
+                    if (hasMissingRole)
+                    {
+                        ShowMissingRoleMessage();
                     }
 
                     break;
@@ -223,7 +301,11 @@ namespace KnowledgeSystem.Views._00_Generals
             {
                 prog.Owner = txbOwner.EditValue?.ToString();
                 prog.DisplayName = txbDisplayName.Text.Trim();
-                prog.Progress = string.Join(";", progresses.Select(r => r.IdUsr));
+                prog.Progress = FixedProgressHelper.Serialize(progresses.Select(r => new FixedProgressHelper.StepData
+                {
+                    IdUsr = r.IdUsr,
+                    IdRole = r.IdRole
+                }));
 
                 msg = $"{prog.Owner} {prog.DisplayName} {prog.Progress}";
                 switch (eventInfo)
