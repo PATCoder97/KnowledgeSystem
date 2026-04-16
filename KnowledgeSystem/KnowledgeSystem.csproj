@@ -983,6 +983,7 @@
     </Compile>
     <Compile Include="Views\03_DepartmentManage\13_FixedAsset\FixedAsset313Context.cs" />
     <Compile Include="Views\03_DepartmentManage\13_FixedAsset\FixedAsset313GridHelper.cs" />
+    <Compile Include="Views\03_DepartmentManage\13_FixedAsset\FixedAsset313UIHelper.cs" />
     <Compile Include="Views\03_DepartmentManage\13_FixedAsset\f313_AbnormalCatalog_Info.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1810,6 +1811,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\13_FixedAsset\f313_AssetPhoto_Info.resx">
       <DependentUpon>f313_AssetPhoto_Info.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\13_FixedAsset\f313_BatchCreate.resx">
+      <DependentUpon>f313_BatchCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\03_DepartmentManage\13_FixedAsset\f313_InspectionResult_Info.resx">
+      <DependentUpon>f313_InspectionResult_Info.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\03_DepartmentManage\13_FixedAsset\uc313_FixedAssetMain.resx">
       <DependentUpon>uc313_FixedAssetMain.cs</DependentUpon>

@@ -1,5 +1,6 @@
 using BusinessLayer;
 using DataAccessLayer;
+using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
 using DevExpress.XtraLayout;
 using DevExpress.XtraSplashScreen;
@@ -16,6 +17,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
         private dt313_FixedAsset asset;
         private List<LayoutControlItem> lcControls;
         private List<LayoutControlItem> lcImpControls;
+        private BarButtonItem btnPhotos;
 
         public EventFormInfo eventInfo = EventFormInfo.Create;
         public string formName = string.Empty;
@@ -23,32 +25,48 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
         public f313_FixedAsset_Info(FixedAsset313Context module, dt313_FixedAsset source)
         {
             InitializeComponent();
-            InitializeIcon();
             this.module = module;
             asset = source;
+            InitializeDynamicBarItems();
         }
 
-        private void InitializeIcon()
+        private void InitializeDynamicBarItems()
         {
-            btnEdit.ImageOptions.SvgImage = TPSvgimages.Edit;
-            btnDelete.ImageOptions.SvgImage = TPSvgimages.Remove;
-            btnConfirm.ImageOptions.SvgImage = TPSvgimages.Confirm;
+            btnPhotos = new BarButtonItem
+            {
+                Caption = "照片管理",
+                Id = barManagerTP.MaxItemId++,
+                ImageOptions = { SvgImage = TPSvgimages.View, SvgImageSize = new System.Drawing.Size(32, 32) },
+                Name = "btnPhotos"
+            };
+
+            btnPhotos.ItemClick += btnPhotos_ItemClick;
+            barManagerTP.Items.Add(btnPhotos);
+            bar2.LinksPersistInfo.Insert(2, new LinkPersistInfo(
+                BarLinkUserDefines.PaintStyle,
+                btnPhotos,
+                string.Empty,
+                true,
+                true,
+                true,
+                0,
+                null,
+                BarItemPaintStyle.CaptionGlyph));
         }
 
         private void f313_FixedAsset_Info_Load(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(formName))
+            {
+                formName = "固定資產";
+            }
+
             lcControls = new List<LayoutControlItem>
             {
                 lcAssetCode, lcAssetNameTW, lcAssetNameVN, lcDept, lcManager, lcCategory,
                 lcTypeName, lcLocation, lcBrandSpec, lcOrigin, lcAcquireDate, lcStatus, lcRemarks
             };
             lcImpControls = new List<LayoutControlItem> { lcAssetCode, lcAssetNameTW, lcDept, lcCategory, lcStatus };
-
-            foreach (var item in lcControls)
-            {
-                item.AllowHtmlStringInCaption = true;
-                item.Text = $"<color=#000000>{item.Text}</color>";
-            }
 
             cbbDept.Properties.Items.AddRange(module.GetDepartmentLookupItems(true).ToArray());
             cbbManager.Properties.Items.AddRange(module.GetUserLookupItems(true).ToArray());
@@ -82,6 +100,27 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             }
 
             LockControl();
+            AdjustFormHeight();
+        }
+
+        private void AdjustFormHeight()
+        {
+            if (lcControls == null || lcControls.Count == 0)
+            {
+                return;
+            }
+
+            int visibleItemsHeight = lcControls
+                .Where(item => item.Visibility == DevExpress.XtraLayout.Utils.LayoutVisibility.Always)
+                .Sum(item => item.Size.Height);
+            int verticalPadding = Root.Padding.Top + Root.Padding.Bottom;
+            int nonContentHeight = ClientSize.Height - layoutControl1.Height;
+            int requiredClientHeight = visibleItemsHeight + verticalPadding + nonContentHeight + 8;
+
+            if (ClientSize.Height < requiredClientHeight)
+            {
+                ClientSize = new System.Drawing.Size(ClientSize.Width, requiredClientHeight);
+            }
         }
 
         private void BindData()
@@ -146,6 +185,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
                     btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                     btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                    btnPhotos.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                     EnabledController();
                     break;
                 case EventFormInfo.Update:
@@ -153,6 +193,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
                     btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                     btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                    btnPhotos.Visibility = asset != null && asset.Id > 0 && module.CanEditAsset(asset)
+                        ? DevExpress.XtraBars.BarItemVisibility.Always
+                        : DevExpress.XtraBars.BarItemVisibility.Never;
                     EnabledController();
                     break;
                 case EventFormInfo.Delete:
@@ -160,6 +203,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
                     btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                     btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+                    btnPhotos.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                     EnabledController(false);
                     break;
                 case EventFormInfo.View:
@@ -168,14 +212,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
                     btnConfirm.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
                     btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
                     btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                    btnPhotos.Visibility = asset != null && asset.Id > 0 && module.CanEditAsset(asset)
+                        ? DevExpress.XtraBars.BarItemVisibility.Always
+                        : DevExpress.XtraBars.BarItemVisibility.Never;
                     EnabledController(false);
                     break;
-            }
-
-            foreach (var item in lcControls)
-            {
-                string colorHex = item.Control.Enabled ? "000000" : "000000";
-                item.Text = item.Text.Replace("000000", colorHex);
             }
 
             foreach (var item in lcImpControls)
@@ -234,6 +275,19 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             MsgTP.MsgConfirmDel();
             eventInfo = EventFormInfo.Delete;
             LockControl();
+        }
+
+        private void btnPhotos_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (asset == null || asset.Id <= 0)
+            {
+                return;
+            }
+
+            using (var form = new f313_AssetPhoto_Info(module, asset))
+            {
+                form.ShowDialog();
+            }
         }
 
         private void btnConfirm_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

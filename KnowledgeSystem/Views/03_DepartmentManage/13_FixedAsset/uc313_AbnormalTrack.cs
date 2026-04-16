@@ -1,4 +1,6 @@
+using DevExpress.Utils.Menu;
 using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraSplashScreen;
 using KnowledgeSystem.Helpers;
 using System;
@@ -12,27 +14,28 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
         private readonly FixedAsset313Context module = new FixedAsset313Context();
         private readonly BindingSource sourceBases = new BindingSource();
         private readonly RefreshHelper helper;
+        private DXMenuItem itemViewInfo;
 
         public uc313_AbnormalTrack()
         {
             InitializeComponent();
-            InitializeIcon();
+            InitializeMenuItems();
             helper = new RefreshHelper(gvData, nameof(AbnormalGridRow.AssetCode));
             Load += uc313_AbnormalTrack_Load;
         }
 
-        private void InitializeIcon()
+        private void InitializeMenuItems()
         {
-            btnHandle.ImageOptions.SvgImage = TPSvgimages.Edit;
-            btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
-            btnExportExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
+            itemViewInfo = FixedAsset313UIHelper.CreateMenuItem("查看資訊", ItemViewInfo_Click, TPSvgimages.View);
         }
 
         private void uc313_AbnormalTrack_Load(object sender, EventArgs e)
         {
             FixedAsset313GridHelper.ConfigureReadOnlyView(gvData);
             gvData.DoubleClick += gvData_DoubleClick;
+            gvData.PopupMenuShowing += gvData_PopupMenuShowing;
             LoadData();
+            btnHandle.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
         }
 
         private void LoadData()
@@ -125,6 +128,19 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
         }
 
         private void gvData_DoubleClick(object sender, EventArgs e)
+        {
+            HandleFocusedRow();
+        }
+
+        private void gvData_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
+        {
+            if (e.HitInfo.InRowCell && e.HitInfo.InDataRow && e.Menu != null)
+            {
+                e.Menu.Items.Add(itemViewInfo);
+            }
+        }
+
+        private void ItemViewInfo_Click(object sender, EventArgs e)
         {
             HandleFocusedRow();
         }

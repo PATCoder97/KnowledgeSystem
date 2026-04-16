@@ -1,4 +1,5 @@
 using DataAccessLayer;
+using DevExpress.Utils.Menu;
 using DevExpress.XtraEditors;
 using DevExpress.XtraSplashScreen;
 using KnowledgeSystem.Helpers;
@@ -13,21 +14,20 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
         private readonly FixedAsset313Context module = new FixedAsset313Context();
         private readonly BindingSource deptSource = new BindingSource();
         private readonly BindingSource catalogSource = new BindingSource();
+        private DXMenuItem itemViewDeptInfo;
+        private DXMenuItem itemViewCatalogInfo;
 
         public uc313_Setting()
         {
             InitializeComponent();
-            InitializeIcon();
+            InitializeMenuItems();
             Load += uc313_Setting_Load;
         }
 
-        private void InitializeIcon()
+        private void InitializeMenuItems()
         {
-            btnDeptAdd.ImageOptions.SvgImage = TPSvgimages.Add;
-            btnDeptEdit.ImageOptions.SvgImage = TPSvgimages.Edit;
-            btnCatalogAdd.ImageOptions.SvgImage = TPSvgimages.Add2;
-            btnCatalogEdit.ImageOptions.SvgImage = TPSvgimages.Edit;
-            btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
+            itemViewDeptInfo = FixedAsset313UIHelper.CreateMenuItem("查看資訊", ItemViewDeptInfo_Click, TPSvgimages.View);
+            itemViewCatalogInfo = FixedAsset313UIHelper.CreateMenuItem("查看資訊", ItemViewCatalogInfo_Click, TPSvgimages.View);
         }
 
         private void uc313_Setting_Load(object sender, EventArgs e)
@@ -36,6 +36,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             FixedAsset313GridHelper.ConfigureReadOnlyView(gvCatalog);
             gvDept.DoubleClick += gvDept_DoubleClick;
             gvCatalog.DoubleClick += gvCatalog_DoubleClick;
+            gvDept.PopupMenuShowing += gvDept_PopupMenuShowing;
+            gvCatalog.PopupMenuShowing += gvCatalog_PopupMenuShowing;
             LoadData();
         }
 
@@ -62,9 +64,9 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
         {
             bool enable = module.IsManager313;
             btnDeptAdd.Enabled = enable;
-            btnDeptEdit.Enabled = enable;
             btnCatalogAdd.Enabled = enable;
-            btnCatalogEdit.Enabled = enable;
+            btnDeptEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            btnCatalogEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
         }
 
         private void ConfigureDeptColumns()
@@ -102,8 +104,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             return gvCatalog.GetFocusedRow() as AbnormalCatalogGridRow;
         }
 
-        private void EditDeptSetting(dt313_DepartmentSetting setting)
+        private void OpenDeptSetting(EventFormInfo eventInfo, dt313_DepartmentSetting setting)
         {
+            if (eventInfo != EventFormInfo.Create && setting == null)
+            {
+                return;
+            }
+
             if (!module.IsManager313)
             {
                 MsgTP.MsgNoPermission();
@@ -112,6 +119,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
 
             using (var form = new f313_DepartmentSetting_Info(module, setting == null ? null : module.CloneDepartmentSetting(setting)))
             {
+                form.eventInfo = eventInfo;
+                form.formName = "部門設定";
                 if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     LoadData();
@@ -119,8 +128,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
             }
         }
 
-        private void EditCatalog(dt313_AbnormalCatalog catalog)
+        private void OpenCatalog(EventFormInfo eventInfo, dt313_AbnormalCatalog catalog)
         {
+            if (eventInfo != EventFormInfo.Create && catalog == null)
+            {
+                return;
+            }
+
             if (!module.IsManager313)
             {
                 MsgTP.MsgNoPermission();
@@ -129,6 +143,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
 
             using (var form = new f313_AbnormalCatalog_Info(module, catalog == null ? null : module.CloneAbnormalCatalog(catalog)))
             {
+                form.eventInfo = eventInfo;
+                form.formName = "異常項目";
                 if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     LoadData();
@@ -138,22 +154,22 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
 
         private void btnDeptAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            EditDeptSetting(null);
+            OpenDeptSetting(EventFormInfo.Create, null);
         }
 
         private void btnDeptEdit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            EditDeptSetting(GetFocusedDept()?.Entity);
+            OpenDeptSetting(EventFormInfo.View, GetFocusedDept()?.Entity);
         }
 
         private void btnCatalogAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            EditCatalog(null);
+            OpenCatalog(EventFormInfo.Create, null);
         }
 
         private void btnCatalogEdit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            EditCatalog(GetFocusedCatalog()?.Entity);
+            OpenCatalog(EventFormInfo.View, GetFocusedCatalog()?.Entity);
         }
 
         private void btnReload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -163,12 +179,38 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
 
         private void gvDept_DoubleClick(object sender, EventArgs e)
         {
-            EditDeptSetting(GetFocusedDept()?.Entity);
+            OpenDeptSetting(EventFormInfo.View, GetFocusedDept()?.Entity);
         }
 
         private void gvCatalog_DoubleClick(object sender, EventArgs e)
         {
-            EditCatalog(GetFocusedCatalog()?.Entity);
+            OpenCatalog(EventFormInfo.View, GetFocusedCatalog()?.Entity);
+        }
+
+        private void gvDept_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+        {
+            if (e.HitInfo.InRowCell && e.HitInfo.InDataRow && e.Menu != null)
+            {
+                e.Menu.Items.Add(itemViewDeptInfo);
+            }
+        }
+
+        private void gvCatalog_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+        {
+            if (e.HitInfo.InRowCell && e.HitInfo.InDataRow && e.Menu != null)
+            {
+                e.Menu.Items.Add(itemViewCatalogInfo);
+            }
+        }
+
+        private void ItemViewDeptInfo_Click(object sender, EventArgs e)
+        {
+            OpenDeptSetting(EventFormInfo.View, GetFocusedDept()?.Entity);
+        }
+
+        private void ItemViewCatalogInfo_Click(object sender, EventArgs e)
+        {
+            OpenCatalog(EventFormInfo.View, GetFocusedCatalog()?.Entity);
         }
     }
 }

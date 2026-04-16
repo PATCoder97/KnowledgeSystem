@@ -1,4 +1,5 @@
 using DataAccessLayer;
+using DevExpress.Utils.Menu;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraSplashScreen;
@@ -15,30 +16,26 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
         private readonly FixedAsset313Context module = new FixedAsset313Context();
         private readonly BindingSource sourceBases = new BindingSource();
         private readonly RefreshHelper helper;
+        private DXMenuItem itemViewInfo;
 
         public uc313_FixedAssetMain()
         {
             InitializeComponent();
-            InitializeIcon();
+            InitializeMenuItems();
             helper = new RefreshHelper(gvData, nameof(AssetGridRow.AssetCode));
             Load += uc313_FixedAssetMain_Load;
         }
 
-        private void InitializeIcon()
+        private void InitializeMenuItems()
         {
-            btnAdd.ImageOptions.SvgImage = TPSvgimages.Add;
-            btnEdit.ImageOptions.SvgImage = TPSvgimages.Edit;
-            btnDelete.ImageOptions.SvgImage = TPSvgimages.Remove;
-            btnPhotos.ImageOptions.SvgImage = TPSvgimages.View;
-            btnImportExcel.ImageOptions.SvgImage = TPSvgimages.UploadFile;
-            btnReload.ImageOptions.SvgImage = TPSvgimages.Reload;
-            btnExportExcel.ImageOptions.SvgImage = TPSvgimages.Excel;
+            itemViewInfo = FixedAsset313UIHelper.CreateMenuItem("查看資訊", ItemViewInfo_Click, TPSvgimages.View);
         }
 
         private void uc313_FixedAssetMain_Load(object sender, EventArgs e)
         {
             FixedAsset313GridHelper.ConfigureReadOnlyView(gvData);
             gvData.DoubleClick += gvData_DoubleClick;
+            gvData.PopupMenuShowing += gvData_PopupMenuShowing;
             LoadData();
         }
 
@@ -62,8 +59,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
         private void ApplyPermissions()
         {
             btnAdd.Visibility = module.IsManager313 ? DevExpress.XtraBars.BarItemVisibility.Always : DevExpress.XtraBars.BarItemVisibility.Never;
-            btnDelete.Visibility = module.IsManager313 ? DevExpress.XtraBars.BarItemVisibility.Always : DevExpress.XtraBars.BarItemVisibility.Never;
             btnImportExcel.Visibility = module.IsManager313 ? DevExpress.XtraBars.BarItemVisibility.Always : DevExpress.XtraBars.BarItemVisibility.Never;
+            btnEdit.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            btnDelete.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            btnPhotos.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
         }
 
         private void ConfigureColumns()
@@ -203,6 +202,19 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._13_FixedAsset
                 return;
             }
 
+            OpenAssetInfo(EventFormInfo.View);
+        }
+
+        private void gvData_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
+        {
+            if (e.HitInfo.InRowCell && e.HitInfo.InDataRow && e.Menu != null)
+            {
+                e.Menu.Items.Add(itemViewInfo);
+            }
+        }
+
+        private void ItemViewInfo_Click(object sender, EventArgs e)
+        {
             OpenAssetInfo(EventFormInfo.View);
         }
     }
