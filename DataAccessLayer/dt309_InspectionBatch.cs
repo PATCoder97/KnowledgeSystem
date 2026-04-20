@@ -20,5 +20,9 @@ namespace DataAccessLayer
         public Nullable<System.DateTime> ExpiryDate { get; set; }
         public Nullable<int> NotifyNo { get; set; }
         public Nullable<System.DateTime> ReportDate { get; set; }
+        public bool IsCancelled { get; set; }
+        public string CancelledBy { get; set; }
+        public Nullable<System.DateTime> CancelledDate { get; set; }
+        public string CancelReason { get; set; }
     }
 }

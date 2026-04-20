@@ -53,6 +53,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         string idDept2word = TPConfigs.idDept2word;
 
         DXMenuItem itemUpdateRemainDate;
+        DXMenuItem itemCancelBatch;
 
         private void InitializeIcon()
         {
@@ -79,13 +80,26 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             };
             gvData.FormatRules.Add(ruleNotifyMain);
 
+            var ruleCancelledMain = new GridFormatRule
+            {
+                ApplyToRow = false,
+                Column = gColStatus,
+                Name = "RuleCancelledMain",
+                Rule = new FormatConditionRuleExpression
+                {
+                    Expression = "[Status] == '已取消'",
+                    Appearance = { ForeColor = Color.Gray }
+                }
+            };
+            gvData.FormatRules.Add(ruleCancelledMain);
+
             var rule = new GridFormatRule
             {
                 ApplyToRow = true,
                 Name = $"RuleNotify",
                 Rule = new FormatConditionRuleExpression
                 {
-                    Expression = "[BatchMaterial.ActualQuantity] != [BatchMaterial.InitialQuantity]",
+                    Expression = "[BatchCancelled] != true And [BatchMaterial.ActualQuantity] != [BatchMaterial.InitialQuantity]",
                     Appearance = { ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical }
                 }
             };
@@ -108,6 +122,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         private void InitializeMenuItems()
         {
             itemUpdateRemainDate = CreateMenuItem("延時提醒", ItemUpdateRemainDate_Click, TPSvgimages.DateAdd);
+            itemCancelBatch = CreateMenuItem("取消批次", ItemCancelBatch_Click, TPSvgimages.Remove);
             //itemUpdatePrice = CreateMenuItem("更新單價", ItemUpdatePrice_Click, TPSvgimages.Money);
 
             //itemMaterialIn = CreateMenuItem("收料", ItemMaterialIn_Click, TPSvgimages.Num1);
@@ -115,6 +130,21 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             //itemMaterialTransfer = CreateMenuItem("轉庫", ItemMaterialTransfer_Click, TPSvgimages.Num3);
             //itemMaterialCheck = CreateMenuItem("盤點", ItemMaterialCheck_Click, TPSvgimages.Num4);
             //itemMaterialGetFromOther = CreateMenuItem("調撥", ItemMaterialGetFromOther_Click, TPSvgimages.Num5);
+        }
+
+        private bool IsBatchCancelled(dt309_InspectionBatch batch)
+        {
+            return batch != null && batch.IsCancelled;
+        }
+
+        private string GetBatchStatus(dt309_InspectionBatch batch, IEnumerable<dynamic> batchMaterialList)
+        {
+            if (IsBatchCancelled(batch))
+            {
+                return "已取消";
+            }
+
+            return batchMaterialList.Any(r => r.IsComplete != true) ? "待處理" : "已完成";
         }
 
         private void ItemUpdateRemainDate_Click(object sender, EventArgs e)
@@ -142,6 +172,11 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
             GridView view = gvData;
             var batch = (view.GetRow(view.FocusedRowHandle) as dynamic).Batch as dt309_InspectionBatch;
+            if (IsBatchCancelled(batch))
+            {
+                XtraMessageBox.Show("已取消批次不可延時提醒。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
 
             if (respTime <= batch.CreatedDate || respTime < DateTime.Today)
             {
@@ -161,6 +196,54 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             {
                 MsgTP.MsgErrorDB();
             }
+        }
+
+        private void ItemCancelBatch_Click(object sender, EventArgs e)
+        {
+            GridView view = gvData;
+            var batch = (view.GetRow(view.FocusedRowHandle) as dynamic).Batch as dt309_InspectionBatch;
+            if (batch == null)
+            {
+                return;
+            }
+
+            if (IsBatchCancelled(batch))
+            {
+                XtraMessageBox.Show("此批次已取消。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            string cancelReason = XtraInputBox.Show(new XtraInputBoxArgs
+            {
+                Caption = TPConfigs.SoftNameTW,
+                Prompt = "請輸入取消原因",
+                DefaultResponse = string.Empty,
+                Editor = new MemoEdit()
+            })?.ToString();
+
+            if (string.IsNullOrWhiteSpace(cancelReason))
+            {
+                XtraMessageBox.Show("請先輸入取消原因。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (XtraMessageBox.Show(
+                    $"確定取消批次「{batch.BatchName}」嗎？",
+                    "提示",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question,
+                    MessageBoxDefaultButton.Button2) != DialogResult.Yes)
+            {
+                return;
+            }
+
+            if (!dt309_InspectionBatchBUS.Instance.CancelBatch(batch.Id, TPConfigs.LoginUser.Id, cancelReason, out string message))
+            {
+                MsgTP.MsgError(string.IsNullOrWhiteSpace(message) ? "取消批次失敗。" : message);
+                return;
+            }
+
+            LoadData();
         }
 
         private void LoadData()
@@ -192,6 +275,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                                   UserMngr = users.FirstOrDefault(r => r.Id == m.IdManager)?.DisplayName ?? "N/A",
                                   Dept = (depts.Where(r => r.Id == m.IdDept).Select(r => $"{r.Id} {r.DisplayName}").FirstOrDefault() ?? "N/A"),
                                   UserReCheck = string.IsNullOrEmpty(bm.ConfirmedBy) ? "" : users.FirstOrDefault(r => r.Id == bm.ConfirmedBy)?.DisplayName ?? "N/A",
+                                  BatchCancelled = batch.IsCancelled,
                                   IsComplete = bm.IsComplete
                               })
                         .ToList();
@@ -200,7 +284,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                     {
                         Batch = batch,
                         Spare = batchMaterialList,
-                        Status = batchMaterialList.Any(r => r.IsComplete != true) ? "待處理" : "已完成"
+                        Status = GetBatchStatus(batch, batchMaterialList)
                     };
                 }).ToList();
 
@@ -260,10 +344,20 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
         private void gvData_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
         {
-            if (e.HitInfo.InRowCell && e.HitInfo.InDataRow)
+            if (!e.HitInfo.InRowCell || !e.HitInfo.InDataRow || e.Menu == null)
             {
-                e.Menu.Items.Add(itemUpdateRemainDate);
+                return;
             }
+
+            GridView view = sender as GridView;
+            var batch = (view?.GetRow(e.HitInfo.RowHandle) as dynamic)?.Batch as dt309_InspectionBatch;
+            if (batch == null || IsBatchCancelled(batch))
+            {
+                return;
+            }
+
+            e.Menu.Items.Add(itemUpdateRemainDate);
+            e.Menu.Items.Add(itemCancelBatch);
         }
 
         private void btnReload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -359,9 +453,27 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
             var (complete, total, abnormal) = GetRowCounts(view, e.RowHandle);
 
+            bool isCancelled = false;
+            int childCount = view.GetChildRowCount(e.RowHandle);
+            for (int i = 0; i < childCount; i++)
+            {
+                int childRowHandle = view.GetChildRowHandle(e.RowHandle, i);
+                if (view.IsGroupRow(childRowHandle))
+                {
+                    continue;
+                }
+
+                object cancelledValue = view.GetRowCellValue(childRowHandle, "BatchCancelled");
+                if (cancelledValue != null && bool.TryParse(cancelledValue.ToString(), out bool batchCancelled) && batchCancelled)
+                {
+                    isCancelled = true;
+                    break;
+                }
+            }
+
             bool groupComplete = total == complete;
-            string colorName = groupComplete ? "Green" : "Red";
-            string groupValue = groupComplete ? "已完成" : "處理中";
+            string colorName = isCancelled ? "Gray" : (groupComplete ? "Green" : "Red");
+            string groupValue = isCancelled ? "已取消" : (groupComplete ? "已完成" : "處理中");
 
             info.GroupText = $" <color={colorName}>{groupValue}</color>：{info.GroupValueText}《<color=Blue>{total}物品</color></color>{(abnormal == 0 ? "" : $" <color=Red>{abnormal}異常</color>")}》";
         }
@@ -389,7 +501,8 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 CreatedDate = DateTime.Now,
                 BatchName = batchName,
                 ExpiryDate = DateTime.Now.AddDays(15),
-                NotifyNo = 0
+                NotifyNo = 0,
+                IsCancelled = false
             });
 
             if (newBatchId != -1)

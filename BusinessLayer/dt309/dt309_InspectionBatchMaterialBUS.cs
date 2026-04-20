@@ -46,7 +46,13 @@ namespace BusinessLayer
             {
                 using (var _context = new DBDocumentManagementSystemEntities())
                 {
-                    return _context.dt309_InspectionBatchMaterial.Where(r => r.IsComplete != true).ToList();
+                    return _context.dt309_InspectionBatchMaterial
+                        .Join(_context.dt309_InspectionBatch.Where(batch => !batch.IsCancelled),
+                              material => material.BatchId,
+                              batch => batch.Id,
+                              (material, batch) => material)
+                        .Where(item => item.IsComplete != true)
+                        .ToList();
                 }
             }
             catch (Exception ex)

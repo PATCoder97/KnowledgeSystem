@@ -123,13 +123,26 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             };
             gvData.FormatRules.Add(ruleNotifyMain);
 
+            var ruleCancelledMain = new GridFormatRule
+            {
+                ApplyToRow = false,
+                Column = gColStatus,
+                Name = "RuleCancelledMain",
+                Rule = new FormatConditionRuleExpression
+                {
+                    Expression = "[Status] == '已取消'",
+                    Appearance = { ForeColor = Color.Gray }
+                }
+            };
+            gvData.FormatRules.Add(ruleCancelledMain);
+
             var ruleNotify = new GridFormatRule
             {
                 ApplyToRow = true,
                 Name = "RuleNotify",
                 Rule = new FormatConditionRuleExpression
                 {
-                    Expression = "[BatchMaterial.IsComplete] != true",
+                    Expression = "[BatchCancelled] != true And [BatchMaterial.IsComplete] != true",
                     Appearance = { ForeColor = DevExpress.LookAndFeel.DXSkinColors.ForeColors.Critical }
                 }
             };
@@ -156,6 +169,21 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
 
             itemDownCheckFileProxy = CreateMenuItem("下載盤點表(代理)", ItemDownCheckFileProxy_Click, TPSvgimages.Excel);
             itemUpdateCheckFileProxy = CreateMenuItem("上傳盤點表(代理)", ItemUpdateCheckFileProxy_Click, TPSvgimages.UploadFile);
+        }
+
+        private bool IsBatchCancelled(dt309_InspectionBatch batch)
+        {
+            return batch != null && batch.IsCancelled;
+        }
+
+        private string GetBatchStatus(dt309_InspectionBatch batch, IEnumerable<dynamic> batchMaterialList)
+        {
+            if (IsBatchCancelled(batch))
+            {
+                return "已取消";
+            }
+
+            return batchMaterialList.Any(r => r.IsComplete != true) ? "待處理" : "已完成";
         }
 
         private void ItemUpdateCheckFileProxy_Click(object sender, EventArgs e)
@@ -557,6 +585,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         private void UpdateCheckFile(bool IsUploadAbnormal = false, bool managerRecheck = false)
         {
             var batch = (gvData.GetRow(gvData.FocusedRowHandle) as dynamic).Batch as dt309_InspectionBatch;
+            if (IsBatchCancelled(batch))
+            {
+                XtraMessageBox.Show("已取消批次不可再上傳盤點資料。", TPConfigs.SoftNameTW,
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             int batchId = batch.Id;
 
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
@@ -693,6 +728,13 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
         private void DownloadCheckFile(bool IsUploadAbnormal = false, bool managerRecheck = false)
         {
             var batch = (gvData.GetRow(gvData.FocusedRowHandle) as dynamic).Batch as dt309_InspectionBatch;
+            if (IsBatchCancelled(batch))
+            {
+                XtraMessageBox.Show("已取消批次不可再下載盤點表。", TPConfigs.SoftNameTW,
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             int batchId = batch.Id;
 
             var excelDatas = inspectionBatchMaterials
@@ -839,6 +881,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                                       UserReCheck = string.IsNullOrEmpty(bm.ConfirmedBy) ? "" : users.FirstOrDefault(r => r.Id == bm.ConfirmedBy)?.DisplayName ?? "N/A",
                                       IniQuantity = bm.ActualQuantity.HasValue ? bm.InitialQuantity : (double?)null,
                                       Description = bm.Description,
+                                      BatchCancelled = batch.IsCancelled,
                                       PhotoActualName = photoAttachment?.ActualName ?? string.Empty,
                                       PhotoAttachment = photoAttachment,
                                       IsComplete = bm.IsComplete
@@ -850,7 +893,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                     {
                         Batch = batch,
                         Spare = batchMaterialList,
-                        Status = batchMaterialList.Any(r => r.IsComplete != true) ? "待處理" : "已完成"
+                        Status = GetBatchStatus(batch, batchMaterialList)
                     } : null;
                 }).Where(x => x != null).ToList();
 
@@ -996,7 +1039,7 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                 return;
 
             var batch = masterRow.Batch as dt309_InspectionBatch;
-            if (batch == null)
+            if (batch == null || IsBatchCancelled(batch))
                 return;
 
             // Nếu không phải “每月盤點” thì chỉ quản lý của PGD mới có thể làm
@@ -1094,9 +1137,28 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             var groupInfo = info.RowKey as GroupRowInfo;
 
             var (complete, total, abnormal) = GetRowCounts(view, e.RowHandle);
+
+            bool isCancelled = false;
+            int childCount = view.GetChildRowCount(e.RowHandle);
+            for (int i = 0; i < childCount; i++)
+            {
+                int childRowHandle = view.GetChildRowHandle(e.RowHandle, i);
+                if (view.IsGroupRow(childRowHandle))
+                {
+                    continue;
+                }
+
+                object cancelledValue = view.GetRowCellValue(childRowHandle, "BatchCancelled");
+                if (cancelledValue != null && bool.TryParse(cancelledValue.ToString(), out bool batchCancelled) && batchCancelled)
+                {
+                    isCancelled = true;
+                    break;
+                }
+            }
+
             bool groupComplete = total == complete;
-            string colorName = groupComplete ? "Green" : "Red";
-            string groupValue = groupComplete ? "已完成" : "處理中";
+            string colorName = isCancelled ? "Gray" : (groupComplete ? "Green" : "Red");
+            string groupValue = isCancelled ? "已取消" : (groupComplete ? "已完成" : "處理中");
 
             info.GroupText = $" <color={colorName}>{groupValue}</color>：{info.GroupValueText}《<color=Blue>{total}物品</color>{(abnormal == 0 ? "" : $" <color=Red>{abnormal}異常</color>")}》";
         }

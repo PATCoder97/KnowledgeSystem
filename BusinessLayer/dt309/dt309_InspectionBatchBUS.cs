@@ -116,6 +116,53 @@ namespace BusinessLayer
             }
         }
 
+        public bool CancelBatch(int batchId, string currentUserId, string cancelReason, out string message)
+        {
+            message = string.Empty;
+
+            try
+            {
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    var batch = _context.dt309_InspectionBatch.FirstOrDefault(item => item.Id == batchId);
+                    if (batch == null)
+                    {
+                        message = "找不到對應盤點批次。";
+                        return false;
+                    }
+
+                    if (batch.IsCancelled)
+                    {
+                        message = "此批次已取消。";
+                        return false;
+                    }
+
+                    bool isCompleted = !_context.dt309_InspectionBatchMaterial
+                        .Any(item => item.BatchId == batchId && item.IsComplete != true);
+                    if (isCompleted)
+                    {
+                        message = "已完成批次不可取消。";
+                        return false;
+                    }
+
+                    batch.IsCancelled = true;
+                    batch.CancelledBy = currentUserId;
+                    batch.CancelledDate = DateTime.Now;
+                    batch.CancelReason = string.IsNullOrWhiteSpace(cancelReason)
+                        ? null
+                        : cancelReason.Trim();
+
+                    return _context.SaveChanges() > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(nameof(CancelBatch), ex.ToString());
+                message = ex.Message;
+                return false;
+            }
+        }
+
         public bool RemoveById(int id)
         {
             try
