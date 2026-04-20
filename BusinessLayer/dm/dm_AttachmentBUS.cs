@@ -98,6 +98,37 @@ namespace BusinessLayer
             }
         }
 
+        public List<dm_Attachment> GetListByThreads(List<string> threads)
+        {
+            try
+            {
+                if (threads == null)
+                {
+                    return new List<dm_Attachment>();
+                }
+
+                threads = threads
+                    .Where(r => !string.IsNullOrWhiteSpace(r))
+                    .Distinct()
+                    .ToList();
+
+                if (threads.Count == 0)
+                {
+                    return new List<dm_Attachment>();
+                }
+
+                using (var _context = new DBDocumentManagementSystemEntities())
+                {
+                    return _context.dm_Attachment.Where(r => threads.Contains(r.Thread)).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(MethodBase.GetCurrentMethod().ReflectedType.Name, ex.ToString());
+                throw;
+            }
+        }
+
         /// <summary>
         /// Lấy được các phụ kiện bằng danh sách id
         /// </summary>

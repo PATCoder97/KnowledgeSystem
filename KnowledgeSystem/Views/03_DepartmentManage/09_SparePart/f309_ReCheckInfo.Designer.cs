@@ -54,6 +54,7 @@
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gvData = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gColIdMachine = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -225,7 +226,8 @@
             this.gridColumn9,
             this.gridColumn13,
             this.gridColumn14,
-            this.gridColumn15});
+            this.gridColumn15,
+            this.gridColumn16});
             this.gvSparePart.GridControl = this.gcData;
             this.gvSparePart.Name = "gvSparePart";
             this.gvSparePart.OptionsCustomization.AllowColumnMoving = false;
@@ -325,15 +327,23 @@
             this.gridColumn14.Name = "gridColumn14";
             this.gridColumn14.Visible = true;
             this.gridColumn14.VisibleIndex = 10;
-            // 
+            //
             // gridColumn15
-            // 
-            this.gridColumn15.Caption = "異常說明";
-            this.gridColumn15.FieldName = "Desc";
+            //
+            this.gridColumn15.Caption = "圖片名稱";
+            this.gridColumn15.FieldName = "PhotoName";
             this.gridColumn15.Name = "gridColumn15";
             this.gridColumn15.Visible = true;
             this.gridColumn15.VisibleIndex = 11;
-            // 
+            //
+            // gridColumn16
+            //
+            this.gridColumn16.Caption = "異常說明";
+            this.gridColumn16.FieldName = "Desc";
+            this.gridColumn16.Name = "gridColumn16";
+            this.gridColumn16.Visible = true;
+            this.gridColumn16.VisibleIndex = 12;
+            //
             // gvData
             // 
             this.gvData.Appearance.FooterPanel.Font = new System.Drawing.Font("Microsoft JhengHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -486,5 +496,6 @@
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn15;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn16;
     }
 }

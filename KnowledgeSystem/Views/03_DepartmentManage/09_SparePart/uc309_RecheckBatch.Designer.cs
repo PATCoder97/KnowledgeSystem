@@ -42,6 +42,7 @@
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColPhotoActualName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColDesc = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColIsComplete = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcData = new DevExpress.XtraGrid.GridControl();
@@ -103,6 +104,7 @@
             this.gridColumn9,
             this.gridColumn13,
             this.gridColumn14,
+            this.gColPhotoActualName,
             this.gColDesc,
             this.gColIsComplete});
             this.gvSparePart.GridControl = this.gcData;
@@ -206,6 +208,14 @@
             this.gridColumn14.Name = "gridColumn14";
             this.gridColumn14.Visible = true;
             this.gridColumn14.VisibleIndex = 9;
+            //
+            // gColPhotoActualName
+            //
+            this.gColPhotoActualName.Caption = "盤點圖片";
+            this.gColPhotoActualName.FieldName = "PhotoActualName";
+            this.gColPhotoActualName.Name = "gColPhotoActualName";
+            this.gColPhotoActualName.Visible = true;
+            this.gColPhotoActualName.VisibleIndex = 10;
             // 
             // gColDesc
             // 
@@ -213,7 +223,7 @@
             this.gColDesc.FieldName = "Description";
             this.gColDesc.Name = "gColDesc";
             this.gColDesc.Visible = true;
-            this.gColDesc.VisibleIndex = 10;
+            this.gColDesc.VisibleIndex = 11;
             // 
             // gColIsComplete
             // 
@@ -536,5 +546,6 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraGrid.Columns.GridColumn gColDesc;
         private DevExpress.XtraGrid.Columns.GridColumn gColIsComplete;
+        private DevExpress.XtraGrid.Columns.GridColumn gColPhotoActualName;
     }
 }
