@@ -312,6 +312,10 @@ namespace BusinessLayer
                             MaterialId = currentMaterial.Id,
                             Code = currentMaterial.Code,
                             DisplayName = currentMaterial.DisplayName,
+                            QuantityInStorage = currentMaterial.QuantityInStorage,
+                            QuantityInMachine = currentMaterial.QuantityInMachine,
+                            TotalQuantity = currentMaterial.QuantityInStorage + currentMaterial.QuantityInMachine,
+                            Price = currentMaterial.Price,
                             ReplacementMaterialId = currentMaterial.ReplacementMaterialId,
                             ReplacementMaterialCode = nextMaterial?.Code,
                             ReplacementDate = currentMaterial.ReplacementDate,
@@ -558,6 +562,10 @@ namespace BusinessLayer
         public int MaterialId { get; set; }
         public string Code { get; set; }
         public string DisplayName { get; set; }
+        public double QuantityInStorage { get; set; }
+        public double QuantityInMachine { get; set; }
+        public double TotalQuantity { get; set; }
+        public int Price { get; set; }
         public int? ReplacementMaterialId { get; set; }
         public string ReplacementMaterialCode { get; set; }
         public DateTime? ReplacementDate { get; set; }

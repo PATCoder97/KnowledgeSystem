@@ -1,3 +1,6 @@
+USE [DBDocumentManagementSystem];
+GO
+
 SET NOCOUNT ON;
 
 IF COL_LENGTH('dbo.dt309_InspectionBatch', 'IsCancelled') IS NULL

@@ -43,6 +43,14 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
             gvData.Columns.AddVisible(nameof(MaterialReplacementChainNode.StepNo), "\u9806\u5e8f").Width = 80;
             gvData.Columns.AddVisible(nameof(MaterialReplacementChainNode.Code), "\u7269\u6599\u7de8\u865f").Width = 140;
             gvData.Columns.AddVisible(nameof(MaterialReplacementChainNode.DisplayName), "\u54c1\u540d\u898f\u683c").Width = 320;
+            gvData.Columns.AddVisible(nameof(MaterialReplacementChainNode.QuantityInStorage), "\u8ab2\u5eab\u6578\u91cf").Width = 110;
+            gvData.Columns.AddVisible(nameof(MaterialReplacementChainNode.QuantityInMachine), "\u6a5f\u908a\u5eab\u6578\u91cf").Width = 120;
+            gvData.Columns.AddVisible(nameof(MaterialReplacementChainNode.TotalQuantity), "\u7e3d\u6578\u91cf").Width = 100;
+
+            var colPrice = gvData.Columns.AddVisible(nameof(MaterialReplacementChainNode.Price), "\u55ae\u50f9");
+            colPrice.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            colPrice.DisplayFormat.FormatString = "n0";
+            colPrice.Width = 110;
 
             var colReplacementDate = gvData.Columns.AddVisible(nameof(MaterialReplacementChainNode.ReplacementDate), "\u66ff\u4ee3\u65e5\u671f");
             colReplacementDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
@@ -64,6 +72,10 @@ namespace KnowledgeSystem.Views._03_DepartmentManage._09_SparePart
                         MaterialId = sourceMaterial.Id,
                         Code = sourceMaterial.Code,
                         DisplayName = sourceMaterial.DisplayName,
+                        QuantityInStorage = sourceMaterial.QuantityInStorage,
+                        QuantityInMachine = sourceMaterial.QuantityInMachine,
+                        TotalQuantity = sourceMaterial.QuantityInStorage + sourceMaterial.QuantityInMachine,
+                        Price = sourceMaterial.Price,
                         ReplacementDate = sourceMaterial.ReplacementDate,
                         Status = sourceMaterial.IsDisable == true ? "\u505c\u7528" : "\u555f\u7528"
                     }
