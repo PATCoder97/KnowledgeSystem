@@ -53,6 +53,9 @@
             this.gColStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gColLastUpdate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn18 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn19 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
@@ -135,8 +138,11 @@
             this.gridColumn15,
             this.gridColumn4,
             this.gColStatus,
+            this.gridColumn17,
+            this.gridColumn18,
             this.gColLastUpdate,
-            this.gridColumn1});
+            this.gridColumn1,
+            this.gridColumn19});
             this.gvData.DetailHeight = 377;
             this.gvData.GridControl = this.gcData;
             this.gvData.Name = "gvData";
@@ -204,7 +210,7 @@
             this.gridColumn5.MinWidth = 23;
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 5;
+            this.gridColumn5.VisibleIndex = 6;
             this.gridColumn5.Width = 87;
             // 
             // gridColumn8
@@ -215,7 +221,7 @@
             this.gridColumn8.FieldName = "Data.DOB";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 6;
+            this.gridColumn8.VisibleIndex = 8;
             // 
             // gridColumn9
             // 
@@ -223,7 +229,7 @@
             this.gridColumn9.FieldName = "Data.CitizenID";
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 7;
+            this.gridColumn9.VisibleIndex = 9;
             // 
             // gridColumn10
             // 
@@ -233,7 +239,7 @@
             this.gridColumn10.FieldName = "Data.Nationality";
             this.gridColumn10.Name = "gridColumn10";
             this.gridColumn10.Visible = true;
-            this.gridColumn10.VisibleIndex = 8;
+            this.gridColumn10.VisibleIndex = 10;
             // 
             // gridColumn16
             // 
@@ -243,7 +249,7 @@
             this.gridColumn16.FieldName = "SexName";
             this.gridColumn16.Name = "gridColumn16";
             this.gridColumn16.Visible = true;
-            this.gridColumn16.VisibleIndex = 9;
+            this.gridColumn16.VisibleIndex = 11;
             // 
             // gColPCName
             // 
@@ -251,7 +257,7 @@
             this.gColPCName.FieldName = "Data.PCName";
             this.gColPCName.Name = "gColPCName";
             this.gColPCName.Visible = true;
-            this.gColPCName.VisibleIndex = 14;
+            this.gColPCName.VisibleIndex = 16;
             this.gColPCName.Width = 80;
             // 
             // gridColumn14
@@ -260,7 +266,7 @@
             this.gridColumn14.FieldName = "Data.PhoneNum1";
             this.gridColumn14.Name = "gridColumn14";
             this.gridColumn14.Visible = true;
-            this.gridColumn14.VisibleIndex = 11;
+            this.gridColumn14.VisibleIndex = 13;
             // 
             // gridColumn13
             // 
@@ -268,7 +274,7 @@
             this.gridColumn13.FieldName = "Data.Addr";
             this.gridColumn13.Name = "gridColumn13";
             this.gridColumn13.Visible = true;
-            this.gridColumn13.VisibleIndex = 13;
+            this.gridColumn13.VisibleIndex = 15;
             // 
             // gridColumn12
             // 
@@ -276,7 +282,7 @@
             this.gridColumn12.FieldName = "Data.PhoneNum2";
             this.gridColumn12.Name = "gridColumn12";
             this.gridColumn12.Visible = true;
-            this.gridColumn12.VisibleIndex = 12;
+            this.gridColumn12.VisibleIndex = 14;
             // 
             // gColIP
             // 
@@ -284,7 +290,7 @@
             this.gColIP.FieldName = "Data.IPAddress";
             this.gColIP.Name = "gColIP";
             this.gColIP.Visible = true;
-            this.gColIP.VisibleIndex = 16;
+            this.gColIP.VisibleIndex = 19;
             // 
             // gridColumn15
             // 
@@ -308,25 +314,53 @@
             this.gColStatus.FieldName = "StatusName";
             this.gColStatus.Name = "gColStatus";
             this.gColStatus.Visible = true;
-            this.gColStatus.VisibleIndex = 10;
-            // 
+            this.gColStatus.VisibleIndex = 12;
+            //
+            // gridColumn17
+            //
+            this.gridColumn17.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn17.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn17.Caption = "職務生效日";
+            this.gridColumn17.FieldName = "Data.JobEffectiveDate";
+            this.gridColumn17.Name = "gridColumn17";
+            this.gridColumn17.Visible = true;
+            this.gridColumn17.VisibleIndex = 5;
+            //
+            // gridColumn18
+            //
+            this.gridColumn18.Caption = "認定學歷";
+            this.gridColumn18.FieldName = "Data.RecognizedEducation";
+            this.gridColumn18.Name = "gridColumn18";
+            this.gridColumn18.Visible = true;
+            this.gridColumn18.VisibleIndex = 7;
+            //
             // gColLastUpdate
-            // 
+            //
             this.gColLastUpdate.Caption = "最後登入";
             this.gColLastUpdate.DisplayFormat.FormatString = "yyyy/MM/dd HH:mm";
             this.gColLastUpdate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.gColLastUpdate.FieldName = "Data.LastUpdate";
             this.gColLastUpdate.Name = "gColLastUpdate";
             this.gColLastUpdate.Visible = true;
-            this.gColLastUpdate.VisibleIndex = 17;
-            // 
+            this.gColLastUpdate.VisibleIndex = 20;
+            //
             // gridColumn1
-            // 
-            this.gridColumn1.Caption = "離職日";
+            //
+            this.gridColumn1.Caption = "預報離職日";
             this.gridColumn1.FieldName = "Data.ResignPlan";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 15;
+            this.gridColumn1.VisibleIndex = 17;
+            //
+            // gridColumn19
+            //
+            this.gridColumn19.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn19.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn19.Caption = "離職日期";
+            this.gridColumn19.FieldName = "Data.ResignDate";
+            this.gridColumn19.Name = "gridColumn19";
+            this.gridColumn19.Visible = true;
+            this.gridColumn19.VisibleIndex = 18;
             // 
             // Root
             // 
@@ -520,5 +554,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn15;
         private DevExpress.XtraGrid.Columns.GridColumn gColLastUpdate;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn17;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn18;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn19;
     }
 }

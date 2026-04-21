@@ -174,6 +174,9 @@
           <Property Name="ActualJobCode" Type="varchar" MaxLength="16" />
           <Property Name="LastUpdate" Type="datetime" />
           <Property Name="ResignPlan" Type="date" />
+          <Property Name="RecognizedEducation" Type="nvarchar" MaxLength="64" />
+          <Property Name="ResignDate" Type="date" />
+          <Property Name="JobEffectiveDate" Type="date" />
         </EntityType>
         <EntityType Name="dm_UserRole">
           <Key>
@@ -2865,6 +2868,9 @@ warning 6002: The table/view 'DBDocumentManagementSystem.dbo.vw310_EquipmentInfo
           <Property Name="ActualJobCode" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
           <Property Name="LastUpdate" Type="DateTime" Precision="3" />
           <Property Name="ResignPlan" Type="DateTime" Precision="0" />
+          <Property Name="RecognizedEducation" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="ResignDate" Type="DateTime" Precision="0" />
+          <Property Name="JobEffectiveDate" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="dt310_Area5S">
           <Key>
@@ -4529,6 +4535,9 @@ warning 6002: The table/view 'DBDocumentManagementSystem.dbo.vw310_EquipmentInfo
           <EntitySetMapping Name="dm_User">
             <EntityTypeMapping TypeName="DBDocumentManagementSystemModel.dm_User">
               <MappingFragment StoreEntitySet="dm_User">
+                <ScalarProperty Name="JobEffectiveDate" ColumnName="JobEffectiveDate" />
+                <ScalarProperty Name="ResignDate" ColumnName="ResignDate" />
+                <ScalarProperty Name="RecognizedEducation" ColumnName="RecognizedEducation" />
                 <ScalarProperty Name="ResignPlan" ColumnName="ResignPlan" />
                 <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
                 <ScalarProperty Name="ActualJobCode" ColumnName="ActualJobCode" />

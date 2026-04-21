@@ -34,5 +34,8 @@ namespace DataAccessLayer
         public string ActualJobCode { get; set; }
         public Nullable<System.DateTime> LastUpdate { get; set; }
         public Nullable<System.DateTime> ResignPlan { get; set; }
+        public string RecognizedEducation { get; set; }
+        public Nullable<System.DateTime> ResignDate { get; set; }
+        public Nullable<System.DateTime> JobEffectiveDate { get; set; }
     }
 }

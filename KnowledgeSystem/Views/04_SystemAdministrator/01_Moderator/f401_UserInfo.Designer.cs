@@ -83,10 +83,11 @@
             this.gridColumn31 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn41 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.txbPCName = new DevExpress.XtraEditors.TextEdit();
+            this.txbRecognizedEducation = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.txbJobEffectiveDate = new DevExpress.XtraEditors.DateEdit();
+            this.txbResignDate = new DevExpress.XtraEditors.DateEdit();
             this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
             this.lcUserInfo = new DevExpress.XtraLayout.TabbedControlGroup();
-            this.lcGroup = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.lcUserId = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcSex = new DevExpress.XtraLayout.LayoutControlItem();
@@ -99,15 +100,21 @@
             this.lcJobTitle = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcPhone1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcNationality = new DevExpress.XtraLayout.LayoutControlItem();
-            this.lcPCName = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcStatus = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcActualJob = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcPhone2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcAddr = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcRecognizedEducation = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcJobEffectiveDate = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcPCName = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcResignDate = new DevExpress.XtraLayout.LayoutControlItem();
+            this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.lcRole = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
             this.lcSign = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.lcGroup = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.barManagerTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -137,10 +144,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.cbbActualJob.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbPCName.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbRecognizedEducation.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbJobEffectiveDate.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbJobEffectiveDate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbResignDate.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbResignDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcUserInfo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcGroup)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcUserId)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcSex)).BeginInit();
@@ -153,15 +163,21 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcJobTitle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcPhone1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcNationality)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcPCName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcActualJob)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcPhone2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcAddr)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcRecognizedEducation)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcJobEffectiveDate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcPCName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcResignDate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcRole)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcSign)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcGroup)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             this.SuspendLayout();
             // 
             // barManagerTP
@@ -356,7 +372,7 @@
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 413);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 485);
             this.barDockControlBottom.Manager = this.barManagerTP;
             this.barDockControlBottom.Size = new System.Drawing.Size(677, 0);
             // 
@@ -366,7 +382,7 @@
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 49);
             this.barDockControlLeft.Manager = this.barManagerTP;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 364);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 436);
             // 
             // barDockControlRight
             // 
@@ -374,7 +390,7 @@
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
             this.barDockControlRight.Location = new System.Drawing.Point(677, 49);
             this.barDockControlRight.Manager = this.barManagerTP;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 364);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 436);
             // 
             // layoutControl1
             // 
@@ -397,11 +413,15 @@
             this.layoutControl1.Controls.Add(this.cbbJobTitle);
             this.layoutControl1.Controls.Add(this.cbbActualJob);
             this.layoutControl1.Controls.Add(this.txbPCName);
+            this.layoutControl1.Controls.Add(this.txbRecognizedEducation);
+            this.layoutControl1.Controls.Add(this.txbJobEffectiveDate);
+            this.layoutControl1.Controls.Add(this.txbResignDate);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutControl1.Location = new System.Drawing.Point(0, 49);
             this.layoutControl1.Name = "layoutControl1";
+            this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(700, 222, 650, 400);
             this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(677, 364);
+            this.layoutControl1.Size = new System.Drawing.Size(677, 436);
             this.layoutControl1.TabIndex = 5;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -412,7 +432,7 @@
             this.gcGroup.MenuManager = this.barManagerTP;
             this.gcGroup.Name = "gcGroup";
             this.gcGroup.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
-            this.gcGroup.Size = new System.Drawing.Size(629, 284);
+            this.gcGroup.Size = new System.Drawing.Size(629, 356);
             this.gcGroup.TabIndex = 15;
             this.gcGroup.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvGroup});
@@ -571,7 +591,7 @@
             this.gcSign.MenuManager = this.barManagerTP;
             this.gcSign.Name = "gcSign";
             this.gcSign.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
-            this.gcSign.Size = new System.Drawing.Size(629, 284);
+            this.gcSign.Size = new System.Drawing.Size(629, 356);
             this.gcSign.TabIndex = 8;
             this.gcSign.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvSign});
@@ -727,7 +747,7 @@
             this.gcRole.Location = new System.Drawing.Point(24, 56);
             this.gcRole.MainView = this.gvRole;
             this.gcRole.Name = "gcRole";
-            this.gcRole.Size = new System.Drawing.Size(629, 284);
+            this.gcRole.Size = new System.Drawing.Size(629, 356);
             this.gcRole.TabIndex = 8;
             this.gcRole.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvRole});
@@ -895,7 +915,7 @@
             // 
             // txbPCName
             // 
-            this.txbPCName.Location = new System.Drawing.Point(428, 308);
+            this.txbPCName.Location = new System.Drawing.Point(428, 344);
             this.txbPCName.Name = "txbPCName";
             this.txbPCName.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
             this.txbPCName.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -905,6 +925,65 @@
             this.txbPCName.StyleController = this.layoutControl1;
             this.txbPCName.TabIndex = 13;
             // 
+            // txbRecognizedEducation
+            // 
+            this.txbRecognizedEducation.Location = new System.Drawing.Point(428, 308);
+            this.txbRecognizedEducation.Name = "txbRecognizedEducation";
+            this.txbRecognizedEducation.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.txbRecognizedEducation.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.txbRecognizedEducation.Properties.Appearance.Options.UseFont = true;
+            this.txbRecognizedEducation.Properties.Appearance.Options.UseForeColor = true;
+            this.txbRecognizedEducation.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.txbRecognizedEducation.Properties.AppearanceDropDown.Options.UseFont = true;
+            this.txbRecognizedEducation.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txbRecognizedEducation.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.txbRecognizedEducation.Size = new System.Drawing.Size(225, 32);
+            this.txbRecognizedEducation.StyleController = this.layoutControl1;
+            this.txbRecognizedEducation.TabIndex = 16;
+            // 
+            // txbJobEffectiveDate
+            // 
+            this.txbJobEffectiveDate.EditValue = null;
+            this.txbJobEffectiveDate.Location = new System.Drawing.Point(112, 344);
+            this.txbJobEffectiveDate.Name = "txbJobEffectiveDate";
+            this.txbJobEffectiveDate.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.txbJobEffectiveDate.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.txbJobEffectiveDate.Properties.Appearance.Options.UseFont = true;
+            this.txbJobEffectiveDate.Properties.Appearance.Options.UseForeColor = true;
+            this.txbJobEffectiveDate.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbJobEffectiveDate.Properties.AppearanceDropDown.Options.UseFont = true;
+            this.txbJobEffectiveDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txbJobEffectiveDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txbJobEffectiveDate.Properties.MaskSettings.Set("mask", "d");
+            this.txbJobEffectiveDate.Properties.UseMaskAsDisplayFormat = true;
+            this.txbJobEffectiveDate.Size = new System.Drawing.Size(224, 32);
+            this.txbJobEffectiveDate.StyleController = this.layoutControl1;
+            this.txbJobEffectiveDate.TabIndex = 17;
+            // 
+            // txbResignDate
+            // 
+            this.txbResignDate.EditValue = null;
+            this.txbResignDate.Location = new System.Drawing.Point(112, 380);
+            this.txbResignDate.Name = "txbResignDate";
+            this.txbResignDate.Properties.Appearance.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.txbResignDate.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.txbResignDate.Properties.Appearance.Options.UseFont = true;
+            this.txbResignDate.Properties.Appearance.Options.UseForeColor = true;
+            this.txbResignDate.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txbResignDate.Properties.AppearanceDropDown.Options.UseFont = true;
+            this.txbResignDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txbResignDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txbResignDate.Properties.MaskSettings.Set("mask", "d");
+            this.txbResignDate.Properties.UseMaskAsDisplayFormat = true;
+            this.txbResignDate.Size = new System.Drawing.Size(224, 32);
+            this.txbResignDate.StyleController = this.layoutControl1;
+            this.txbResignDate.TabIndex = 18;
+            // 
             // Root
             // 
             this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
@@ -912,7 +991,7 @@
             this.Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.lcUserInfo});
             this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(677, 364);
+            this.Root.Size = new System.Drawing.Size(677, 436);
             this.Root.TextVisible = false;
             // 
             // lcUserInfo
@@ -928,30 +1007,12 @@
             this.lcUserInfo.Location = new System.Drawing.Point(0, 0);
             this.lcUserInfo.Name = "lcUserInfo";
             this.lcUserInfo.SelectedTabPage = this.layoutControlGroup1;
-            this.lcUserInfo.Size = new System.Drawing.Size(657, 344);
+            this.lcUserInfo.Size = new System.Drawing.Size(657, 416);
             this.lcUserInfo.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlGroup1,
             this.lcRole,
             this.lcSign,
             this.lcGroup});
-            // 
-            // lcGroup
-            // 
-            this.lcGroup.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem1});
-            this.lcGroup.Location = new System.Drawing.Point(0, 0);
-            this.lcGroup.Name = "lcGroup";
-            this.lcGroup.Size = new System.Drawing.Size(633, 288);
-            this.lcGroup.Text = "群組";
-            // 
-            // layoutControlItem1
-            // 
-            this.layoutControlItem1.Control = this.gcGroup;
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(633, 288);
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem1.TextVisible = false;
             // 
             // layoutControlGroup1
             // 
@@ -967,14 +1028,18 @@
             this.lcJobTitle,
             this.lcPhone1,
             this.lcNationality,
-            this.lcPCName,
             this.lcStatus,
             this.lcActualJob,
             this.lcPhone2,
-            this.lcAddr});
+            this.lcAddr,
+            this.lcRecognizedEducation,
+            this.lcJobEffectiveDate,
+            this.lcPCName,
+            this.lcResignDate,
+            this.emptySpaceItem1});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "layoutControlGroup1";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(633, 288);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(633, 360);
             this.layoutControlGroup1.Text = "信息";
             // 
             // lcUserId
@@ -1176,25 +1241,6 @@
             this.lcNationality.Text = "國籍";
             this.lcNationality.TextSize = new System.Drawing.Size(76, 24);
             // 
-            // lcPCName
-            // 
-            this.lcPCName.AppearanceItemCaption.BackColor = System.Drawing.Color.Transparent;
-            this.lcPCName.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
-            this.lcPCName.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
-            this.lcPCName.AppearanceItemCaption.Options.UseBackColor = true;
-            this.lcPCName.AppearanceItemCaption.Options.UseFont = true;
-            this.lcPCName.AppearanceItemCaption.Options.UseForeColor = true;
-            this.lcPCName.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
-            this.lcPCName.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
-            this.lcPCName.Control = this.txbPCName;
-            this.lcPCName.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
-            this.lcPCName.CustomizationFormText = "電腦名稱";
-            this.lcPCName.Location = new System.Drawing.Point(316, 252);
-            this.lcPCName.Name = "lcPCName";
-            this.lcPCName.Size = new System.Drawing.Size(317, 36);
-            this.lcPCName.Text = "電腦名稱";
-            this.lcPCName.TextSize = new System.Drawing.Size(76, 24);
-            // 
             // lcStatus
             // 
             this.lcStatus.AppearanceItemCaption.BackColor = System.Drawing.Color.Transparent;
@@ -1266,13 +1312,91 @@
             this.lcAddr.Text = "居住地點";
             this.lcAddr.TextSize = new System.Drawing.Size(76, 24);
             // 
+            // lcRecognizedEducation
+            // 
+            this.lcRecognizedEducation.AppearanceItemCaption.BackColor = System.Drawing.Color.Transparent;
+            this.lcRecognizedEducation.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lcRecognizedEducation.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.lcRecognizedEducation.AppearanceItemCaption.Options.UseBackColor = true;
+            this.lcRecognizedEducation.AppearanceItemCaption.Options.UseFont = true;
+            this.lcRecognizedEducation.AppearanceItemCaption.Options.UseForeColor = true;
+            this.lcRecognizedEducation.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.lcRecognizedEducation.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.lcRecognizedEducation.Control = this.txbRecognizedEducation;
+            this.lcRecognizedEducation.Location = new System.Drawing.Point(316, 252);
+            this.lcRecognizedEducation.Name = "lcRecognizedEducation";
+            this.lcRecognizedEducation.Size = new System.Drawing.Size(317, 36);
+            this.lcRecognizedEducation.Text = "認定學歷";
+            this.lcRecognizedEducation.TextSize = new System.Drawing.Size(76, 24);
+            // 
+            // lcJobEffectiveDate
+            // 
+            this.lcJobEffectiveDate.AppearanceItemCaption.BackColor = System.Drawing.Color.Transparent;
+            this.lcJobEffectiveDate.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lcJobEffectiveDate.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.lcJobEffectiveDate.AppearanceItemCaption.Options.UseBackColor = true;
+            this.lcJobEffectiveDate.AppearanceItemCaption.Options.UseFont = true;
+            this.lcJobEffectiveDate.AppearanceItemCaption.Options.UseForeColor = true;
+            this.lcJobEffectiveDate.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.lcJobEffectiveDate.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.lcJobEffectiveDate.Control = this.txbJobEffectiveDate;
+            this.lcJobEffectiveDate.Location = new System.Drawing.Point(0, 288);
+            this.lcJobEffectiveDate.Name = "lcJobEffectiveDate";
+            this.lcJobEffectiveDate.Size = new System.Drawing.Size(316, 36);
+            this.lcJobEffectiveDate.Text = "生效日期";
+            this.lcJobEffectiveDate.TextSize = new System.Drawing.Size(76, 24);
+            // 
+            // lcPCName
+            // 
+            this.lcPCName.AppearanceItemCaption.BackColor = System.Drawing.Color.Transparent;
+            this.lcPCName.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lcPCName.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.lcPCName.AppearanceItemCaption.Options.UseBackColor = true;
+            this.lcPCName.AppearanceItemCaption.Options.UseFont = true;
+            this.lcPCName.AppearanceItemCaption.Options.UseForeColor = true;
+            this.lcPCName.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.lcPCName.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.lcPCName.Control = this.txbPCName;
+            this.lcPCName.ControlAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.lcPCName.CustomizationFormText = "電腦名稱";
+            this.lcPCName.Location = new System.Drawing.Point(316, 288);
+            this.lcPCName.Name = "lcPCName";
+            this.lcPCName.Size = new System.Drawing.Size(317, 36);
+            this.lcPCName.Text = "電腦名稱";
+            this.lcPCName.TextSize = new System.Drawing.Size(76, 24);
+            // 
+            // lcResignDate
+            // 
+            this.lcResignDate.AppearanceItemCaption.BackColor = System.Drawing.Color.Transparent;
+            this.lcResignDate.AppearanceItemCaption.Font = new System.Drawing.Font("Microsoft JhengHei UI", 14.25F);
+            this.lcResignDate.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+            this.lcResignDate.AppearanceItemCaption.Options.UseBackColor = true;
+            this.lcResignDate.AppearanceItemCaption.Options.UseFont = true;
+            this.lcResignDate.AppearanceItemCaption.Options.UseForeColor = true;
+            this.lcResignDate.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+            this.lcResignDate.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            this.lcResignDate.Control = this.txbResignDate;
+            this.lcResignDate.Location = new System.Drawing.Point(0, 324);
+            this.lcResignDate.Name = "lcResignDate";
+            this.lcResignDate.Size = new System.Drawing.Size(316, 36);
+            this.lcResignDate.Text = "離職日期";
+            this.lcResignDate.TextSize = new System.Drawing.Size(76, 24);
+            // 
+            // emptySpaceItem1
+            // 
+            this.emptySpaceItem1.AllowHotTrack = false;
+            this.emptySpaceItem1.Location = new System.Drawing.Point(316, 324);
+            this.emptySpaceItem1.Name = "emptySpaceItem1";
+            this.emptySpaceItem1.Size = new System.Drawing.Size(317, 36);
+            this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
+            // 
             // lcRole
             // 
             this.lcRole.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem10});
             this.lcRole.Location = new System.Drawing.Point(0, 0);
             this.lcRole.Name = "lcRole";
-            this.lcRole.Size = new System.Drawing.Size(633, 288);
+            this.lcRole.Size = new System.Drawing.Size(633, 360);
             this.lcRole.Text = "角色";
             // 
             // layoutControlItem10
@@ -1282,7 +1406,7 @@
             this.layoutControlItem10.CustomizationFormText = "layoutControlItem9";
             this.layoutControlItem10.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem10.Name = "layoutControlItem10";
-            this.layoutControlItem10.Size = new System.Drawing.Size(633, 288);
+            this.layoutControlItem10.Size = new System.Drawing.Size(633, 360);
             this.layoutControlItem10.Text = "layoutControlItem9";
             this.layoutControlItem10.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem10.TextVisible = false;
@@ -1293,7 +1417,7 @@
             this.layoutControlItem9});
             this.lcSign.Location = new System.Drawing.Point(0, 0);
             this.lcSign.Name = "lcSign";
-            this.lcSign.Size = new System.Drawing.Size(633, 288);
+            this.lcSign.Size = new System.Drawing.Size(633, 360);
             this.lcSign.Text = "簽名";
             // 
             // layoutControlItem9
@@ -1301,9 +1425,27 @@
             this.layoutControlItem9.Control = this.gcSign;
             this.layoutControlItem9.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem9.Name = "layoutControlItem9";
-            this.layoutControlItem9.Size = new System.Drawing.Size(633, 288);
+            this.layoutControlItem9.Size = new System.Drawing.Size(633, 360);
             this.layoutControlItem9.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem9.TextVisible = false;
+            // 
+            // lcGroup
+            // 
+            this.lcGroup.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem1});
+            this.lcGroup.Location = new System.Drawing.Point(0, 0);
+            this.lcGroup.Name = "lcGroup";
+            this.lcGroup.Size = new System.Drawing.Size(633, 360);
+            this.lcGroup.Text = "群組";
+            // 
+            // layoutControlItem1
+            // 
+            this.layoutControlItem1.Control = this.gcGroup;
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem1.Name = "layoutControlItem1";
+            this.layoutControlItem1.Size = new System.Drawing.Size(633, 360);
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem1.TextVisible = false;
             // 
             // f401_UserInfo
             // 
@@ -1311,7 +1453,7 @@
             this.Appearance.Options.UseBackColor = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(677, 413);
+            this.ClientSize = new System.Drawing.Size(677, 485);
             this.Controls.Add(this.layoutControl1);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
@@ -1353,10 +1495,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.cbbActualJob.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txbPCName.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbRecognizedEducation.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbJobEffectiveDate.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbJobEffectiveDate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbResignDate.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txbResignDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcUserInfo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcGroup)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcUserId)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcSex)).EndInit();
@@ -1369,15 +1514,21 @@
             ((System.ComponentModel.ISupportInitialize)(this.lcJobTitle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcPhone1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcNationality)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lcPCName)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcStatus)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcActualJob)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcPhone2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcAddr)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcRecognizedEducation)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcJobEffectiveDate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcPCName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcResignDate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcRole)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lcSign)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lcGroup)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1455,6 +1606,9 @@
         private DevExpress.XtraLayout.LayoutControlItem lcActualJob;
         private DevExpress.XtraEditors.TextEdit txbPCName;
         private DevExpress.XtraLayout.LayoutControlItem lcPCName;
+        private DevExpress.XtraEditors.ComboBoxEdit txbRecognizedEducation;
+        private DevExpress.XtraEditors.DateEdit txbJobEffectiveDate;
+        private DevExpress.XtraEditors.DateEdit txbResignDate;
         private DevExpress.XtraBars.BarButtonItem btnResignPlan;
         private DevExpress.XtraLayout.LayoutControlGroup lcGroup;
         private DevExpress.XtraGrid.GridControl gcGroup;
@@ -1463,5 +1617,9 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
+        private DevExpress.XtraLayout.LayoutControlItem lcRecognizedEducation;
+        private DevExpress.XtraLayout.LayoutControlItem lcJobEffectiveDate;
+        private DevExpress.XtraLayout.LayoutControlItem lcResignDate;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
     }
 }

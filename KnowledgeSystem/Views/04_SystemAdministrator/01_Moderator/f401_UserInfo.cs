@@ -36,6 +36,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
         {
             InitializeComponent();
             InitializeIcon();
+            cbbStatus.EditValueChanged += cbbStatus_EditValueChanged;
         }
 
         public string formName = string.Empty;
@@ -55,6 +56,21 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
         List<LayoutControlItem> lcControls;
         List<LayoutControlItem> lcImpControls;
+        readonly string[] recognizedEducationOptions =
+        {
+            "中專一般",
+            "中專工科",
+            "公大學一",
+            "公大學工",
+            "私大學一",
+            "重大學一",
+            "重大學工",
+            "高中",
+            "高専一般",
+            "高専工科",
+            "國中"
+        };
+        const string RequiredMarker = "<color=red>*</color>";
 
         private enum UpdateEvent
         {
@@ -104,6 +120,109 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             txbPhone1.Enabled = _enable;
             txbPhone2.Enabled = _enable;
             txbDateStart.Enabled = _enable;
+            txbRecognizedEducation.Enabled = _enable;
+            txbResignDate.Enabled = _enable;
+            txbJobEffectiveDate.Enabled = _enable;
+        }
+
+        private DateTime? GetNullableDate(DateEdit editor)
+        {
+            if (editor.EditValue == null || string.IsNullOrWhiteSpace(editor.EditValue.ToString()))
+            {
+                return null;
+            }
+
+            return editor.DateTime.Date;
+        }
+
+        private bool TryPromptDate(string prompt, DateTime defaultDate, out DateTime selectedDate)
+        {
+            selectedDate = defaultDate.Date;
+
+            var editor = new DateEdit();
+            editor.Properties.Appearance.Font = fontUI14;
+            editor.Properties.Appearance.ForeColor = Color.Black;
+            editor.Properties.Appearance.Options.UseFont = true;
+            editor.Properties.Appearance.Options.UseForeColor = true;
+            editor.Properties.AppearanceDropDown.Font = fontUI14;
+            editor.Properties.AppearanceDropDown.Options.UseFont = true;
+            editor.Properties.Buttons.AddRange(new[] { new EditorButton(ButtonPredefines.Combo) });
+            editor.Properties.CalendarTimeProperties.Buttons.AddRange(new[] { new EditorButton(ButtonPredefines.Combo) });
+            editor.Properties.MaskSettings.Set("mask", "yyyy/MM/dd");
+            editor.Properties.UseMaskAsDisplayFormat = true;
+            editor.EditValue = defaultDate.Date;
+
+            var result = XtraInputBox.Show(new XtraInputBoxArgs
+            {
+                Caption = TPConfigs.SoftNameTW,
+                AllowHtmlText = DevExpress.Utils.DefaultBoolean.False,
+                Prompt = prompt,
+                Editor = editor,
+                DefaultButtonIndex = 0,
+                DefaultResponse = defaultDate.ToString("yyyy/MM/dd")
+            });
+
+            if (result == null || string.IsNullOrWhiteSpace(result.ToString()))
+            {
+                return false;
+            }
+
+            if (result is DateTime dateValue)
+            {
+                selectedDate = dateValue.Date;
+                return true;
+            }
+
+            if (!DateTime.TryParse(result.ToString(), out DateTime parsedDate))
+            {
+                XtraMessageBox.Show($"{result}\r\n時間格式不正確，請重新輸入！");
+                return false;
+            }
+
+            selectedDate = parsedDate.Date;
+            return true;
+        }
+
+        private bool IsResignedStatusSelected()
+        {
+            return string.Equals(cbbStatus.EditValue?.ToString(), TPConfigs.lsUserStatus[1], StringComparison.Ordinal);
+        }
+
+        private bool IsRequiredLayoutItem(LayoutControlItem item)
+        {
+            if (item?.Control == null || !item.Control.Enabled)
+            {
+                return false;
+            }
+
+            if (item == lcResignDate)
+            {
+                return IsResignedStatusSelected();
+            }
+
+            return true;
+        }
+
+        private void RefreshRequiredMarkers()
+        {
+            if (lcImpControls == null)
+            {
+                return;
+            }
+
+            foreach (var item in lcImpControls)
+            {
+                item.Text = item.Text.Replace(RequiredMarker, "");
+                if (IsRequiredLayoutItem(item))
+                {
+                    item.Text += RequiredMarker;
+                }
+            }
+        }
+
+        private void cbbStatus_EditValueChanged(object sender, EventArgs e)
+        {
+            RefreshRequiredMarkers();
         }
 
         private void LockControl()
@@ -115,6 +234,9 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             cbbJobTitle.Enabled = false;
             cbbActualJob.Enabled = false;
             txbPCName.Enabled = false;
+            txbRecognizedEducation.Enabled = false;
+            txbResignDate.Enabled = false;
+            txbJobEffectiveDate.Enabled = false;
 
             btnDeptChange.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             btnResign.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
@@ -242,23 +364,13 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             }
 
             // Các thông tin phải điền có thêm dấu * màu đỏ
-            foreach (var item in lcImpControls)
-            {
-                if (item.Control.Enabled)
-                {
-                    item.Text += "<color=red>*</color>";
-                }
-                else
-                {
-                    item.Text = item.Text.Replace("<color=red>*</color>", "");
-                }
-            }
+            RefreshRequiredMarkers();
         }
 
         private void f401_UserInfo_Load(object sender, EventArgs e)
         {
-            lcControls = new List<LayoutControlItem>() { lcUserId, lcUserNameVN, lcUserNameTW, lcDept, lcActualJob, lcJobTitle, lcNationality, lcStatus, lcSex, lcDateStart, lcDOB, lcCCCD, lcPhone1, lcPhone2, lcAddr, lcPCName };
-            lcImpControls = new List<LayoutControlItem>() { lcUserId, lcUserNameVN, lcUserNameTW, lcDept, lcActualJob, lcJobTitle, lcNationality, lcStatus, lcSex, lcDateStart, lcDOB, lcCCCD, lcPhone1, lcAddr };
+            lcControls = new List<LayoutControlItem>() { lcUserId, lcUserNameVN, lcUserNameTW, lcDept, lcActualJob, lcJobTitle, lcNationality, lcStatus, lcSex, lcDateStart, lcDOB, lcCCCD, lcPhone1, lcPhone2, lcAddr, lcPCName, lcRecognizedEducation, lcResignDate, lcJobEffectiveDate };
+            lcImpControls = new List<LayoutControlItem>() { lcUserId, lcUserNameVN, lcUserNameTW, lcDept, lcActualJob, lcJobTitle, lcNationality, lcStatus, lcSex, lcDateStart, lcDOB, lcCCCD, lcPhone1, lcAddr, lcRecognizedEducation, lcJobEffectiveDate, lcResignDate };
             foreach (var item in lcControls)
             {
                 item.AllowHtmlStringInCaption = true;
@@ -285,6 +397,8 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             cbbActualJob.Properties.DataSource = lsJobTitles;
             cbbActualJob.Properties.DisplayMember = "DisplayName";
             cbbActualJob.Properties.ValueMember = "Id";
+            txbRecognizedEducation.Properties.Items.Clear();
+            txbRecognizedEducation.Properties.Items.AddRange(recognizedEducationOptions);
 
             cbbNationality.Properties.Items.AddRange(new string[] { "VN", "TW", "CN" });
             cbbStatus.Properties.Items.AddRange(TPConfigs.lsUserStatus.Select(r => r.Value).ToList());
@@ -313,6 +427,9 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                     txbCCCD.EditValue = userInfo.CitizenID;
                     cbbNationality.EditValue = userInfo.Nationality;
                     txbPCName.EditValue = userInfo.PCName;
+                    txbRecognizedEducation.EditValue = userInfo.RecognizedEducation;
+                    txbResignDate.EditValue = userInfo.ResignDate;
+                    txbJobEffectiveDate.EditValue = userInfo.JobEffectiveDate;
 
                     txbPhone1.EditValue = userInfo.PhoneNum1;
                     txbPhone2.EditValue = userInfo.PhoneNum2;
@@ -440,9 +557,14 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
             foreach (var item in lcImpControls)
             {
+                if (!IsRequiredLayoutItem(item))
+                {
+                    continue;
+                }
+
                 if (item.Control is BaseEdit baseEdit)
                 {
-                    if (string.IsNullOrEmpty(baseEdit.EditValue?.ToString()) && item.Control.Enabled)
+                    if (string.IsNullOrWhiteSpace(baseEdit.EditValue?.ToString()))
                     {
                         IsValidate = false;
                         break; // Dừng vòng lặp ngay khi phát hiện lỗi
@@ -471,6 +593,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                 userInfo.CitizenID = txbCCCD.EditValue?.ToString();
                 userInfo.Nationality = cbbNationality.EditValue?.ToString();
                 userInfo.ActualJobCode = cbbActualJob.EditValue?.ToString();
+                userInfo.RecognizedEducation = txbRecognizedEducation.EditValue?.ToString()?.Trim();
 
                 userInfo.DateCreate = txbDateStart.DateTime;
                 userInfo.PhoneNum1 = txbPhone1.EditValue?.ToString();
@@ -479,6 +602,29 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
                 userInfo.Sex = cbbSex.EditValue?.ToString() == "男";
                 userInfo.Status = TPConfigs.lsUserStatus.FirstOrDefault(r => r.Value == cbbStatus.EditValue?.ToString()).Key;
                 userInfo.ResignPlan = resignDate;
+                userInfo.ResignDate = GetNullableDate(txbResignDate);
+                userInfo.JobEffectiveDate = GetNullableDate(txbJobEffectiveDate);
+
+                if (eventInfo == EventFormInfo.Create && userInfo.JobEffectiveDate == null)
+                {
+                    userInfo.JobEffectiveDate = userInfo.DateCreate.Date;
+                }
+
+                if (_eventUpdate == UpdateEvent.Resign && userInfo.ResignDate == null)
+                {
+                    userInfo.ResignDate = DateTime.Today;
+                }
+
+                if (_eventUpdate == UpdateEvent.ResumeWork)
+                {
+                    userInfo.ResignDate = null;
+                }
+
+                if ((_eventUpdate == UpdateEvent.JobChange || _eventUpdate == UpdateEvent.ActualJobChange || _eventUpdate == UpdateEvent.DeptChange)
+                    && userInfo.JobEffectiveDate == null)
+                {
+                    userInfo.JobEffectiveDate = DateTime.Today;
+                }
 
                 string newUserInfoJson = JsonConvert.SerializeObject(userInfo);
 
@@ -833,6 +979,7 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             LockControl();
 
             cbbStatus.EditValue = TPConfigs.lsUserStatus[0];
+            txbResignDate.EditValue = null;
 
             // Lấy ds chứng chỉ sẽ chuyển về 應取 khi phục chức
             var suspendedCerts = dt301_BaseBUS.Instance.GetListByUIDAndCertSuspended(userInfo.Id);
@@ -847,11 +994,17 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
 
         private void btnResign_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if (!TryPromptDate("請選離職日期", GetNullableDate(txbResignDate) ?? DateTime.Today, out DateTime selectedResignDate))
+            {
+                return;
+            }
+
             eventInfo = EventFormInfo.Update;
             _eventUpdate = UpdateEvent.Resign;
             LockControl();
 
             cbbStatus.EditValue = TPConfigs.lsUserStatus[1];
+            txbResignDate.EditValue = selectedResignDate;
 
             // Lấy ds chứng chỉ sẽ chuyển về 無效 khi nghỉ việc
             var lsValidCertByUsers = dt301_BaseBUS.Instance.GetListByUIDAndValidCert(userInfo.Id);
@@ -901,8 +1054,13 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             if (result == null) return;
 
             string idJobChange = result?.ToString() ?? "";
+            if (!TryPromptDate("請選職務生效日", GetNullableDate(txbJobEffectiveDate) ?? DateTime.Today, out DateTime selectedEffectiveDate))
+            {
+                return;
+            }
 
             cbbJobTitle.EditValue = idJobChange;
+            txbJobEffectiveDate.EditValue = selectedEffectiveDate;
 
             eventInfo = EventFormInfo.Update;
             _eventUpdate = UpdateEvent.JobChange;
@@ -971,8 +1129,13 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             if (result == null) return;
 
             string idDeptChange = result?.ToString() ?? "";
+            if (!TryPromptDate("請選職務生效日", GetNullableDate(txbJobEffectiveDate) ?? DateTime.Today, out DateTime selectedEffectiveDate))
+            {
+                return;
+            }
 
             cbbDept.EditValue = idDeptChange;
+            txbJobEffectiveDate.EditValue = selectedEffectiveDate;
 
             eventInfo = EventFormInfo.Update;
             LockControl();
@@ -1028,8 +1191,13 @@ namespace KnowledgeSystem.Views._04_SystemAdministrator._01_Moderator
             if (result == null) return;
 
             string idJobChange = result?.ToString() ?? "";
+            if (!TryPromptDate("請選職務生效日", GetNullableDate(txbJobEffectiveDate) ?? DateTime.Today, out DateTime selectedEffectiveDate))
+            {
+                return;
+            }
 
             cbbActualJob.EditValue = idJobChange;
+            txbJobEffectiveDate.EditValue = selectedEffectiveDate;
 
             eventInfo = EventFormInfo.Update;
             _eventUpdate = UpdateEvent.ActualJobChange;
